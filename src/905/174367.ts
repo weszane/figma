@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -18,7 +18,7 @@ import { B2, al, b6 } from "../figma_app/681697";
 import { u as _$$u } from "../905/997541";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { h3E } from "../figma_app/43951";
+import { ProjectByIdForConnectedProjectStatus } from "../figma_app/43951";
 function E({
   open: e,
   onClose: t,
@@ -31,7 +31,7 @@ function E({
     onClose: t
   });
   let A = function (e) {
-    let t = Rs(h3E, {
+    let t = Rs(ProjectByIdForConnectedProjectStatus, {
       projectId: e
     }, {
       enabled: "" !== e

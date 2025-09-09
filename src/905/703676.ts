@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, useContext, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/95419";
 import { o as _$$o } from "../905/821217";
 import { N as _$$N } from "../905/438674";

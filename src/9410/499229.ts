@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useCallback, useRef, useState, useMemo, useLayoutEffect, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { CanvasSearchHelpers, PageViewMode, AppStateTsApi, Multiplayer, PluginModalType, SelectionState, NodeType } from "../figma_app/763686";
 import { zeroSessionLocalIDString, defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -20,7 +20,7 @@ import { r as _$$r } from "../figma_app/860474";
 import { jr, W0, VA } from "../figma_app/896988";
 import { q } from "../905/807667";
 import { Z } from "../905/104740";
-import { Uc } from "../figma_app/741237";
+import { updateHoveredNode } from "../figma_app/741237";
 import { L3 } from "../figma_app/701001";
 import { p8 } from "../figma_app/722362";
 import { lH } from "../figma_app/623300";
@@ -174,7 +174,7 @@ export function $$K7() {
     x && query && (scope !== PageViewMode.ALL_PAGES || !F && k) && U(query, !1);
   }, [filters, mode, scope, x, b, k, F]);
   let z = useCallback((t, i) => {
-    Uc("");
+    updateHoveredNode("");
     CanvasSearchHelpers.setHoveredResult(defaultSessionLocalIDString, -1);
     let r = !m.current;
     m.current = !1;

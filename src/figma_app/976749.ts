@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { FFileType } from "../figma_app/191312";
 import { mapEditorTypeToFileType, FEditorType } from "../figma_app/53721";

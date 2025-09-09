@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { OM } from "../905/124270";

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { b as _$$b, q7, bL, mc } from "../figma_app/860955";
 import { K } from "../905/443068";
 import { nK } from "../905/691059";
@@ -14,7 +14,7 @@ import { oB } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { Cu } from "../figma_app/314264";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { selectTeams } from "../905/338617";
 import { gN } from "../figma_app/273118";
 import { O as _$$O } from "../905/833838";
@@ -39,7 +39,7 @@ export function $$R1(e) {
     getTriggerProps,
     manager
   } = _$$b();
-  let B = iZ();
+  let B = selectCurrentUser();
   let S = useSelector(e => F ? e.plans : B ? e.authedUsers.byId[B.id]?.plans : null);
   let O = useSelector(selectTeams);
   let q = useSelector(e => e.orgById);

@@ -4,9 +4,9 @@ import { ServiceCategories } from '../905/165054';
 import { permissionScopeHandler } from '../905/189185';
 import { z } from '../905/223332';
 import { c2 } from '../905/382883';
-import { P5 } from '../905/531105';
+import { mapNodeToComponent } from '../905/531105';
 import { validateWithVm, PropTypes } from '../905/816730';
-import { Ed, OV } from '../905/828428';
+import { propertyMenuItemProps, validatePropertyMenuOptions } from '../905/828428';
 import { getSceneGraphInstance } from '../905/830071';
 import { Lb } from '../905/835985';
 import { AuthError, InternalError, RequestError } from '../905/845428';
@@ -418,7 +418,7 @@ export class WidgetManager {
     const definition = validateWithVm({
       vm: this.vm,
       handle: propertyMenuDefinitionHandle,
-      schema: Ed,
+      schema: propertyMenuItemProps,
       property: 'usePropertyMenu.args[0]'
     }).map(item => {
       if (item.itemType === 'dropdown') {
@@ -433,7 +433,7 @@ export class WidgetManager {
       }
       return item;
     });
-    definition.forEach((item, idx) => OV(item, idx));
+    definition.forEach((item, idx) => validatePropertyMenuOptions(item, idx));
     state.propertyMenuDefinition = definition;
     if (!this.vm.isFunction(propertyMenuCallbackHandle)) throw new InternalError('usePropertyMenu.args[1] must be a function');
     this.vm.retainHandle(propertyMenuCallbackHandle);
@@ -697,7 +697,7 @@ export class WidgetManager {
       const unwrapped = this.vm.deepUnwrap(handle, true);
       const pluginManifest = getWidgetVersionData(node);
       const widgetApiVersion = pluginManifest?.manifest?.widgetApi ?? '1.0.0';
-      const rootNode = P5(unwrapped, {
+      const rootNode = mapNodeToComponent(unwrapped, {
         isLocalWidget,
         widgetNodeID: widgetId,
         pluginID: node.widgetId,

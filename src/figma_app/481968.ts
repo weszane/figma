@@ -13,7 +13,7 @@ import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
 import { kS } from "../figma_app/864723";
 import { Z } from "../905/104740";
-import { i as _$$i } from "../figma_app/741237";
+import { renameNode } from "../figma_app/741237";
 import { QZ } from "../figma_app/62612";
 import { As, ze } from "../figma_app/516028";
 import { l0 } from "../figma_app/610446";
@@ -69,7 +69,7 @@ export function $$x1() {
       let p = permissionScopeHandler.system("create-cluster-placeholder", () => {
         if (!StickyClusteringCppBindings) return;
         let e = StickyClusteringCppBindings.createPlaceholder(s);
-        _$$i(e, u);
+        renameNode(e, u);
         return e;
       });
       p && (O(QZ({
@@ -77,7 +77,7 @@ export function $$x1() {
         alwaysPan: !1
       })), w.current = setInterval(() => {
         u.length === e.current.length + 3 ? u = e.current + "." : u += ".";
-        permissionScopeHandler.system("update-cluster-placeholder-text", () => _$$i(p, u));
+        permissionScopeHandler.system("update-cluster-placeholder-text", () => renameNode(p, u));
       }, 1e3), Ay.figjam.cluster({
         v,
         data,

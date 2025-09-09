@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { n3, IA } from "../905/859698";
+import { n3, VariableStyleId } from "../905/859698";
 import { StylesBindings, EyedropperBindings, Fullscreen, SelectionPaintHelpers } from "../figma_app/763686";
 import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString } from "../905/871411";
@@ -56,7 +56,7 @@ export function $$$$u0({
     }
     m(r);
     return () => {
-      Fullscreen.selectStyle(n3.INVALID, IA.INVALID);
+      Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID);
       permissionScopeHandler.system("style-creation-cleanup", () => {
         if (r && !f.current) {
           let t = StylesBindings.getSoftDeletedStyleNodeId(r.key, r.version);

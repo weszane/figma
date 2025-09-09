@@ -3,12 +3,12 @@ import { delay } from "../905/236856";
 import { trackEventAnalytics } from "../905/449184";
 import { dR } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { P as _$$P } from "../905/724705";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { q_ } from "../figma_app/997907";
 import { createOptimistThunk } from "../905/350402";
 import { oB, os, j7, sf } from "../905/929976";
@@ -30,7 +30,7 @@ import { y as _$$y } from "../905/235145";
 import { H } from "../905/202181";
 import { p as _$$p } from "../905/494706";
 import { V } from "../905/190576";
-import { m as _$$m } from "../905/298920";
+import { sendMessageToParent } from "../905/298920";
 import { DE, pB, pg } from "../905/34809";
 let $$F24 = createOptimistThunk((e, t) => {
   e.getState().modalShown?.type != null && e.dispatch(hideModal());
@@ -51,7 +51,7 @@ let $$j18 = createOptimistThunk(e => {
     e.dispatch($$U23(t.data.meta));
   }).catch(t => {
     let r = t.data?.message || getI18nString("file_browser.file_browser_actions.error_on_data_update");
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: r
     }));
@@ -77,7 +77,7 @@ let $$B11 = createOptimistThunk((e, t) => {
   }
   function d() {
     let e = d9(r.selectedView) && !d9(n);
-    desktopAPIInstance && e && Ay.redirect(dR(Np({
+    desktopAPIInstance && e && customHistory.redirect(dR(Np({
       ...r,
       currentUserOrgId: t.workspace.orgId,
       currentTeamId: t.workspace.teamId || null
@@ -95,7 +95,7 @@ let $$B11 = createOptimistThunk((e, t) => {
       view: r.selectedView.view,
       newPath: t.path
     });
-    Ay.redirect(dR(t.path, {
+    customHistory.redirect(dR(t.path, {
       fuid: t.workspace.userId
     }));
     d();
@@ -111,12 +111,12 @@ let $$B11 = createOptimistThunk((e, t) => {
     teamId: r.currentTeamId
   });
   (t.workspace.orgId && !i.includes(t.workspace.orgId) || t.workspace.teamId && !i.includes(t.workspace.teamId) || d9(n) && !t.workspace.orgId && r.currentUserOrgId) && Y9(t.workspace.userId, d9(n), t.workspace.orgId, void 0, t.workspace.teamId);
-  isIntegrationContext() ? _$$m({
+  isIntegrationContext() ? sendMessageToParent({
     action: "reloadPage",
     payload: {
       fuid: t.workspace.userId
     }
-  }) : (Ay.redirect(dR(i, {
+  }) : (customHistory.redirect(dR(i, {
     fuid: t.workspace.userId
   })), d());
 });
@@ -131,12 +131,12 @@ let $$G26 = createOptimistThunk(e => {
     let i = e.getState().authedUsers.orderedIds;
     i.length > 0 && (n += `?authed_ids=${i.join(",")}`);
     desktopAPIInstance?.startAppAuth(n);
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.file_browser_actions.desktop_go_to_your_browser")
     }));
   }).catch(t => {
     console.error(t);
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.error_try_again"),
       error: !0
     }));
@@ -150,7 +150,7 @@ let $$H16 = createOptimistThunk((e, t) => {
   r?.type === t.type ? e.dispatch(oB()) : e.dispatch(j7(t));
 });
 let $$z9 = createOptimistThunk((e, t) => {
-  _$$T() ? Qn(t.url) : Ay.redirect(t.url, "_blank");
+  _$$T() ? Qn(t.url) : customHistory.redirect(t.url, "_blank");
 });
 export function $$W15(e, t = {}) {
   return sf({
@@ -307,7 +307,7 @@ export function $$ei12(e, t) {
 }
 let ea = null;
 let $$es10 = createOptimistThunk((e, t) => {
-  ea && $$ei12(t.selectedView, ea.additionalViewsToReload) && Ay.reload(ea.reason, ea.metadata);
+  ea && $$ei12(t.selectedView, ea.additionalViewsToReload) && customHistory.reload(ea.reason, ea.metadata);
 });
 export function $$eo25() {
   return null != ea;
@@ -318,7 +318,7 @@ export function $$el20() {
 export var $$ed6 = (e => (e[e.DEFAULT = 2e3] = "DEFAULT", e[e.NONE = 0] = "NONE", e))($$ed6 || {});
 let $$ec2 = createOptimistThunk(async (e, t) => {
   await delay(t.delay);
-  $$ei12(e.getState().selectedView, t.additionalViewsToReload) ? Ay.reload(t.reason, t.metadata) : ea = {
+  $$ei12(e.getState().selectedView, t.additionalViewsToReload) ? customHistory.reload(t.reason, t.metadata) : ea = {
     reason: t.reason,
     metadata: t.metadata,
     additionalViewsToReload: t.additionalViewsToReload
@@ -335,7 +335,7 @@ let $$eu1 = createOptimistThunk((e, t) => {
 });
 let ep = createOptimistThunk(async (e, t) => {
   await delay(t.delay);
-  Ay.redirect("/");
+  customHistory.redirect("/");
 });
 let $$e_0 = createOptimistThunk((e, t) => {
   e.dispatch(_$$s.flash(getI18nString("org_settings.mfa_for_members.member_flash")));

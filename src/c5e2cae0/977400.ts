@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { h as _$$h } from "../905/207101";
 import { Jn } from "../905/17223";
@@ -29,7 +29,7 @@ import { bE } from "../905/98702";
 import { bE as _$$bE } from "../figma_app/240735";
 import { e5 } from "../figma_app/297957";
 import { _J } from "../figma_app/314264";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { selectTeams } from "../905/338617";
 import { G } from "../figma_app/66216";
 import { KV, $g, Eh, DI, u1, GK, b as _$$b } from "../c5e2cae0/62130";
@@ -74,7 +74,7 @@ let L = createOptimistThunk((e, {
 });
 function V(e) {
   let t = useDispatch();
-  let a = TA();
+  let a = getUserId();
   let l = useSelector(selectTeams);
   let n = useSelector(e => e.roles.byTeamId);
   let [d, m] = useState(!1);

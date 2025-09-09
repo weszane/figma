@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { FUserRoleType } from "../figma_app/191312";
 import { G } from "../figma_app/66216";
 import { sS, q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { mp } from "../905/772425";
 let c = null;
 let u = async e => {
@@ -56,7 +56,7 @@ export function $$h2({
   let p = u?.teamId;
   let m = u?.key;
   let g = u?.parentOrgId || null;
-  let f = iZ();
+  let f = selectCurrentUser();
   let _ = useSelector(e => e.orgUsersByOrgId);
   let A = useSelector(e => e.contacts.users);
   let y = !1;

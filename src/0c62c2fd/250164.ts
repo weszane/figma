@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import n from "classnames";
 import { Rs } from "../figma_app/288654";
 import { vd } from "../figma_app/637027";
@@ -8,7 +8,7 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { FDomainVerificationStatusType } from "../figma_app/191312";
-import { Wt6, xS7 } from "../figma_app/43951";
+import { OrgTaxIdView, TeamTaxIdView } from "../figma_app/43951";
 import { OJ } from "../905/519092";
 import { A as _$$A } from "../905/289352";
 import { Dy, v0, hF, pL } from "../905/289198";
@@ -22,12 +22,12 @@ export let $$b0 = memo(function (e) {
     updateVatGstId
   } = e;
   let n = !!e.org?.id;
-  let b = Rs(Wt6, {
+  let b = Rs(OrgTaxIdView, {
     orgId: e.org?.id || ""
   }, {
     enabled: n
   });
-  let v = Rs(xS7, {
+  let v = Rs(TeamTaxIdView, {
     teamId: e.team?.id || ""
   }, {
     enabled: !n

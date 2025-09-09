@@ -1,5 +1,5 @@
 import { useContext, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { At } from "../figma_app/770088";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { Eq } from "../905/380385";

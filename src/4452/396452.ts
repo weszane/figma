@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { xk } from "@stylexjs/stylex";
 import { Xf } from "../figma_app/153916";
 import { kt } from "../figma_app/858013";
@@ -15,8 +15,8 @@ import { z3 } from "../figma_app/386952";
 import { FVisibilityType } from "../figma_app/191312";
 import { IX } from "../905/712921";
 import { J7 } from "../figma_app/650409";
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
 export function $$b2() {
   let e = useDispatch();
   let t = z3();

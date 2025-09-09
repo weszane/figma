@@ -1,4 +1,4 @@
-import _require from "../vendor/514228";
+import _require from "react-redux";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { s as _$$s } from "../905/403855";
@@ -11,7 +11,7 @@ import { B as _$$B } from "../905/261906";
 import { JT } from "../figma_app/847597";
 import { Ib } from "../905/129884";
 import { hz, cG } from "../469e6e40/123707";
-if (_require, 443 == require.j) {}
+if (_require, 443 == require.j) { }
 export function $$g0(e) {
   return Ay(zN(e.user?.email ?? "") ?? "");
 }

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useEffect, useCallback, useContext } from "react";
 import { VariableDataType, VariablesBindings, AppStateTsApi, ItemType, Fullscreen, ComponentPropType, NodePropertyCategory, VariableResolvedDataType, SceneIdentifier, ApprovalStatus } from "../figma_app/763686";
 import { q as _$$q } from "../figma_app/905311";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { flatten } from "../figma_app/656233";
 import { assertNotNullish } from "../figma_app/465776";
 import { lQ } from "../905/934246";
@@ -21,13 +21,13 @@ import { yG } from "../905/859698";
 import { RR, Jr } from "../figma_app/338442";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { WI } from "../905/929949";
+import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import C from "classnames";
 import { ZC } from "../figma_app/39751";
 import { X as _$$X } from "../905/606795";
 import { Uz } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { Y as _$$Y } from "../905/506207";
 import { TQ, Zl } from "../905/211621";
@@ -39,14 +39,14 @@ import { Oe, uP } from "../figma_app/933328";
 import { KD } from "../figma_app/975811";
 import { cJ } from "../figma_app/976749";
 import { A as _$$A2 } from "../905/639174";
-import { dH } from "../figma_app/741237";
+import { setHoveredComponentPropDef } from "../figma_app/741237";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { J as _$$J } from "../905/95677";
 import { sS } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { PW } from "../figma_app/633080";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { qo } from "../905/959568";
 import { e as _$$e2 } from "../905/579635";
@@ -115,7 +115,7 @@ function eO({
       propDefId: f?.explicitDefId
     }) : jsx(_$$K, {
       onClick: () => u(v),
-      recordingKey: Pt(p, "detachButton"),
+      recordingKey: generateRecordingKey(p, "detachButton"),
       "aria-label": getI18nString("design_systems.component_properties.detach_property"),
       children: jsx(_$$U, {})
     })
@@ -127,14 +127,14 @@ function eO({
     onVariableSelected: l,
     children: [jsx(V5, {
       onPickerClose: () => {
-        dH({
+        setHoveredComponentPropDef({
           nodeIDs: [],
           defID: ""
         });
       },
       variableScope: o
     }), jsx(_$$K4, {
-      recordingKey: Pt(p, "assignAssignmentProp"),
+      recordingKey: generateRecordingKey(p, "assignAssignmentProp"),
       tooltip: getI18nString("proto.apply_assignment_property")
     })]
   }));
@@ -190,7 +190,7 @@ new class {
     e?.skipFlush !== !0 && (await this.flushBufferAsync());
     this.calls = [];
   }
-  async flushBufferAsync() {}
+  async flushBufferAsync() { }
   addCall(e) {
     this.calls.push(e);
   }
@@ -321,7 +321,7 @@ function eU(e) {
           resolvedType: e.resolvedType,
           value: t
         });
-        dH({
+        setHoveredComponentPropDef({
           nodeIDs: [],
           defID: ""
         });
@@ -399,11 +399,11 @@ function eU(e) {
   function eI() {
     return hideIcon ? jsx(_$$g, {
       appendedClassName: Mj,
-      onMouseMove: () => dH({
+      onMouseMove: () => setHoveredComponentPropDef({
         nodeIDs: guids,
         defID: typedPropDef.explicitDefID
       }),
-      onMouseLeave: () => dH({
+      onMouseLeave: () => setHoveredComponentPropDef({
         nodeIDs: [],
         defID: ""
       }),
@@ -417,11 +417,11 @@ function eU(e) {
         [FG]: X,
         [ID]: Z && getFeatureFlags().ds_image_props_sites
       }),
-      onMouseMove: () => dH({
+      onMouseMove: () => setHoveredComponentPropDef({
         nodeIDs: guids,
         defID: typedPropDef.explicitDefID
       }),
-      onMouseLeave: () => dH({
+      onMouseLeave: () => setHoveredComponentPropDef({
         nodeIDs: [],
         defID: ""
       }),
@@ -436,7 +436,7 @@ function eU(e) {
         },
         variant: "ghost",
         "aria-label": getI18nString("fullscreen.properties_panel.image_settings.remove_image"),
-        recordingKey: Pt("componentPropAssignmentRemoveImage", guids.join("-"), typedPropDef.explicitDefID),
+        recordingKey: generateRecordingKey("componentPropAssignmentRemoveImage", guids.join("-"), typedPropDef.explicitDefID),
         children: jsx(_$$K2, {})
       }) : null) ?? (typedPropDef.type !== ComponentPropType.INSTANCE_SWAP ? null : jsx(h_, {
         instanceAndSublayerGUIDs: Y,
@@ -463,7 +463,7 @@ function eU(e) {
             resolvedType: e.resolvedType,
             value: t
           });
-          dH({
+          setHoveredComponentPropDef({
             nodeIDs: [],
             defID: ""
           });
@@ -485,7 +485,7 @@ function eU(e) {
     onTargetDragEnter: onDragEnter ?? lQ,
     onTargetDragLeave: onDragLeave ?? lQ,
     onTargetDrop: onDropImage ?? lQ,
-    recordingKey: Pt(`componentPropertyRow.${index}`, "dropTarget"),
+    recordingKey: generateRecordingKey(`componentPropertyRow.${index}`, "dropTarget"),
     children: eI()
   }) : eI();
 }
@@ -526,7 +526,7 @@ function eV({
   let p = useDispatch();
   let _ = useSelector(e => e.instanceSwapPickerShown);
   let g = useCallback(e => {
-    let t = WI(VariableResolvedDataType.BOOLEAN, e);
+    let t = resolveVariableValue(VariableResolvedDataType.BOOLEAN, e);
     c ? c(s.explicitDefID, t) : permissionScopeHandler.user("toggle-bool-prop-assignment", () => {
       Fullscreen?.setComponentPropAssignmentVariableData(r, s.explicitDefID, t, d);
     });
@@ -543,7 +543,7 @@ function eV({
           children: s.name
         }),
         onChange: g,
-        recordingKey: Pt("componentPropAssignmentToggle", r.join("-"), s.explicitDefID),
+        recordingKey: generateRecordingKey("componentPropAssignmentToggle", r.join("-"), s.explicitDefID),
         disabled: t
       })
     })
@@ -619,7 +619,7 @@ function ez({
   let S = isInvalidValue(e) ? getI18nString("design_systems.component_properties.mixed") : lg(T);
   let A = () => {
     if (isNotNullish(y)) {
-      let e = WI(VariableResolvedDataType.FLOAT, I);
+      let e = resolveVariableValue(VariableResolvedDataType.FLOAT, I);
       c ? c(t.explicitDefID, e) : permissionScopeHandler.user("set-number-prop-assignment", () => {
         Fullscreen?.setComponentPropAssignmentVariableData(r, t.explicitDefID, e, s);
       });
@@ -652,7 +652,7 @@ function ez({
         onMouseLeave,
         onMouseUp,
         placeholder: isInvalidValue(e) ? S : void 0,
-        recordingKey: Pt("componentPropAssignmentNumberInput", r.join("-"), d),
+        recordingKey: generateRecordingKey("componentPropAssignmentNumberInput", r.join("-"), d),
         value: y
       })
     })
@@ -680,7 +680,7 @@ function eW({
     step: p.value
   };
   let b = e => {
-    let n = WI(VariableResolvedDataType.FLOAT, e);
+    let n = resolveVariableValue(VariableResolvedDataType.FLOAT, e);
     _ ? _(t.explicitDefID, n) : permissionScopeHandler.user("set-number-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, s));
     h?.(r, t.explicitDefID, n, s);
     E(null);
@@ -701,7 +701,7 @@ function eW({
           t.commit ? b(e) : E(e);
         },
         rangeAnchor: 0,
-        recordingKey: Pt("componentPropAssignmentNumberSlider", r.join("-"), d),
+        recordingKey: generateRecordingKey("componentPropAssignmentNumberSlider", r.join("-"), d),
         step: y.step,
         value: f ?? m
       })
@@ -752,7 +752,7 @@ function eK({
         disableInput: l,
         onBlur: () => {
           if (isNotNullish(y)) {
-            let e = WI(VariableResolvedDataType.TEXT_DATA, {
+            let e = resolveVariableValue(VariableResolvedDataType.TEXT_DATA, {
               characters: y
             });
             c ? c(t.explicitDefID, e) : permissionScopeHandler.user("set-text-prop-assignment", () => {
@@ -772,7 +772,7 @@ function eK({
         onMouseLeave,
         onMouseUp,
         placeholder: isInvalidValue(e) ? T : null,
-        recordingKey: Pt("componentPropAssignmentTextInput", r.join("-"), d),
+        recordingKey: generateRecordingKey("componentPropAssignmentTextInput", r.join("-"), d),
         value: y
       })
     })
@@ -810,7 +810,7 @@ function e$({
   let [E, y] = useState(null);
   let b = useMemo(() => new eY(p), [p]);
   let T = e => {
-    let n = WI(VariableResolvedDataType.FLOAT, e);
+    let n = resolveVariableValue(VariableResolvedDataType.FLOAT, e);
     u ? u(t.explicitDefID, n) : permissionScopeHandler.user("set-number-prop-assignment", () => Fullscreen?.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, s));
     m?.(r, t.explicitDefID, n, s);
     y(null);
@@ -826,10 +826,10 @@ function e$({
         value: E ?? g,
         onValueChange: (e, t) => {
           void 0 !== _ && e < _ ? e = _ : void 0 !== h && e > h && (e = h);
-          t === zk.YES || t === zk.YES_FORCE_TRACKING_AS_EDIT ? T(e) : y(e);
+          t === yesNoTrackingEnum.YES || t === yesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT ? T(e) : y(e);
         },
         disabled: d,
-        recordingKey: Pt("componentPropAssignmentNumberScrub", r.join("-"), c),
+        recordingKey: generateRecordingKey("componentPropAssignmentNumberScrub", r.join("-"), c),
         formatter: b,
         dispatch: f,
         "aria-label": I,
@@ -868,15 +868,15 @@ function eX({
       children: jsxs(bL, {
         value: _,
         onChange: e => {
-          let n = t.type === ComponentPropType.TEXT ? WI(VariableResolvedDataType.TEXT_DATA, {
+          let n = t.type === ComponentPropType.TEXT ? resolveVariableValue(VariableResolvedDataType.TEXT_DATA, {
             characters: e
-          }) : WI(VariableResolvedDataType.FLOAT, parseFloat(e));
+          }) : resolveVariableValue(VariableResolvedDataType.FLOAT, parseFloat(e));
           d ? d(t.explicitDefID, n) : permissionScopeHandler.user("set-select-prop-assignment", () => {
             Fullscreen && Fullscreen.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, i);
           });
           u?.(r, t.explicitDefID, n, i);
         },
-        recordingKey: Pt("componentPropAssignmentSelect", r.join("-"), c),
+        recordingKey: generateRecordingKey("componentPropAssignmentSelect", r.join("-"), c),
         children: [jsx(l9, {
           placeholder: isInvalidValue(e) ? getI18nString("design_systems.component_properties.mixed") : void 0,
           label: jsx(HiddenLabel, {
@@ -931,7 +931,7 @@ function eq({
         }) : permissionScopeHandler.user("set-instance-prop-assignment", () => Fullscreen?.setInstanceComponentPropAssignment(r, s.explicitDefID, t, e.type === PW.STATE_GROUP ? ui(e, t, b) : "", c, 0 === preferredValues.length ? ApprovalStatus.NOT_APPLICABLE : preferredValues.includes(e) ? ApprovalStatus.YES : ApprovalStatus.NO));
       }
     }));
-    dH({
+    setHoveredComponentPropDef({
       nodeIDs: [],
       defID: ""
     });
@@ -1138,7 +1138,7 @@ function e0({
             onTargetDragEnter: g,
             onTargetDragLeave: f,
             onTargetDrop: E,
-            recordingKey: Pt("ImagePropAssignmentPicker", "dropTarget"),
+            recordingKey: generateRecordingKey("ImagePropAssignmentPicker", "dropTarget"),
             children: jsxs("div", {
               className: mQ,
               children: [jsx("div", {

@@ -1,6 +1,6 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { N } from "../905/438674";
 import { bL } from "../905/38914";

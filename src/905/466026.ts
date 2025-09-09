@@ -5,7 +5,7 @@ import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { WW, yT, TP } from "../figma_app/349248";
 let $$m6 = NC("REPO_SET_SELECTED_BRANCH");
@@ -31,7 +31,7 @@ let $$g10 = createOptimistThunk((e, {
   let u = XHR.put(`/api/repo/${t.id}`, t).then(() => {
     n?.();
   }).catch(t => {
-    if (i?.(), e.dispatch(F.enqueue({
+    if (i?.(), e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file"),
       error: !0
     })), isDevEnvironment()) throw t;
@@ -55,7 +55,7 @@ let $$_12 = createOptimistAction("REPO_PUT", async (e, {
     e.dispatch(createOptimistCommitAction(r));
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(r));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file")),
       error: !0
     }));

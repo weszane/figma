@@ -3,7 +3,7 @@ import { E as _$$E } from "../905/632989";
 import { Rs } from "../figma_app/288654";
 import { vj } from "../figma_app/919079";
 import { getI18nString } from "../905/303541";
-import { _iU } from "../figma_app/43951";
+import { BranchOpenMergeRequest } from "../figma_app/43951";
 let d = "branching_status_helpers--badgeIndicatorBase--MfU-L";
 let c = "branching_status_helpers--badgeIndicatorInReview--l8PLk branching_status_helpers--badgeIndicatorBase--MfU-L";
 let u = "branching_status_helpers--badgeIndicatorApproved--4E-Aq branching_status_helpers--badgeIndicatorBase--MfU-L";
@@ -145,7 +145,7 @@ export function $$P1({
   convertsToDotWithSmallScreen: o,
   isToolbar: d
 }) {
-  let c = Rs(_iU, {
+  let c = Rs(BranchOpenMergeRequest, {
     branchFileKey: e
   });
   let u = "loaded" === c.status && c.data.file ? $$T4(c.data.file) : null;

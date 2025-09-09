@@ -8,7 +8,7 @@ import { reportError } from "../905/11";
 import { fd } from "../figma_app/255679";
 import { isInvalidValue } from "../905/216495";
 import { tS, _S } from "../figma_app/516028";
-import { J_J, yUR } from "../figma_app/43951";
+import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
 import { nD } from "../905/92359";
 import { zV } from "../figma_app/410317";
 let g = /(#[0-9]+:[0-9]+)/g;
@@ -137,7 +137,7 @@ export function $$v8(e, t) {
   let r = t.get(e);
   let n = tS();
   let i = useAtomWithSubscription(_S);
-  let [d] = IT(J_J({
+  let [d] = IT(FileCanAccessFullCodeConnect({
     key: n ?? ""
   }));
   let {
@@ -147,7 +147,7 @@ export function $$v8(e, t) {
   let g = fd(_$$l(backingLibraryKey ?? ""));
   let f = atomStoreManager.get(zV);
   let E = d.data?.file?.status === "loaded" && !d.data.file?.data?.hasPermission && !g;
-  let [y] = IT(yUR({
+  let [y] = IT(CodeConnectForNodeLk({
     libraryKey: backingLibraryKey ?? "",
     nodeId: backingNodeId ?? "",
     instances: [],
@@ -239,7 +239,7 @@ export function $$N5(e, t, r, i) {
   let h = t.get(e);
   let g = tS();
   let f = useAtomWithSubscription(_S);
-  let [E] = IT(J_J({
+  let [E] = IT(FileCanAccessFullCodeConnect({
     key: g ?? ""
   }));
   let y = atomStoreManager.get(zV);
@@ -258,7 +258,7 @@ export function $$N5(e, t, r, i) {
   }(backingLibraryKey, backingNodeId, x);
   let w = null;
   let O = E.data?.file?.status === "loaded" && !E.data.file?.data?.hasPermission && !v;
-  let [R] = IT(yUR({
+  let [R] = IT(CodeConnectForNodeLk({
     libraryKey: backingLibraryKey ?? "",
     nodeId: backingNodeId ?? "",
     instances: x,

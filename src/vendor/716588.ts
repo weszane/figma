@@ -38,7 +38,7 @@ exports.isContextConsumer = function (e) {
             default:
               switch (e = e && e.$$typeof) {
                 case l:
-                case u:
+                case ExpiringCache:
                 case d:
                 case p:
                 case h:
@@ -52,5 +52,5 @@ exports.isContextConsumer = function (e) {
           return n;
       }
     }
-  }(e) === u;
+  }(e) === ExpiringCache;
 };

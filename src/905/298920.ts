@@ -1,16 +1,37 @@
-import { updateEnvironmentInfo } from "../905/883621";
-import { getInitialOptions } from "../figma_app/169182";
-import { setSentryTag } from "../905/11";
-export function $$s0(e) {
-  window.self.origin === window.parent.origin && window.parent.postMessage(e, window.self.origin);
+import { setTagGlobal } from '../905/11'
+import { updateEnvironmentInfo } from '../905/883621'
+import { getInitialOptions } from '../figma_app/169182'
+
+/**
+ * Sends a message to the parent window if origins match.
+ * @param message - The message to post to the parent window.
+ * (Original function: $$s0)
+ */
+export function sendMessageToParent(message: unknown): void {
+  if (window.self.origin === window.parent.origin) {
+    window.parent.postMessage(message, window.self.origin)
+  }
 }
-export function $$o1() {
-  getInitialOptions().integration_host && window.self !== window.top && (updateEnvironmentInfo({
-    integration_host: getInitialOptions().integration_host,
-    integration_context: getInitialOptions().integration_context ?? null
-  }), setSentryTag("integration_host", getInitialOptions().integration_host), $$s0({
-    action: "ready"
-  }));
+
+/**
+ * Initializes integration environment if running inside an iframe and integration_host is present.
+ * (Original function: $$o1)
+ */
+export function initializeIntegrationEnvironment(): void {
+  const options = getInitialOptions()
+  if (
+    options.integration_host
+    && window.self !== window.top
+  ) {
+    updateEnvironmentInfo({
+      integration_host: options.integration_host,
+      integration_context: options.integration_context ?? null,
+    })
+    setTagGlobal('integration_host', options.integration_host)
+    sendMessageToParent({ action: 'ready' })
+  }
 }
-export const m = $$s0;
-export const z = $$o1;
+
+// Export aliases for backward compatibility (Original exports: m, z)
+export const m = sendMessageToParent
+export const z = initializeIntegrationEnvironment

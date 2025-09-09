@@ -10,12 +10,12 @@ import { H as _$$H } from "react-dom";
 import { R7 } from "../905/508367";
 import { B } from "../905/877503";
 import { Uz } from "../905/63728";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { ql } from "../905/668764";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
 import { Lh, D8 } from "../figma_app/242339";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { En } from "../figma_app/613182";
 import { _o, UV, mh, r9, kL, xn, dc, NJ } from "../figma_app/779179";
 var l = o;
@@ -547,17 +547,17 @@ export class $$F0 extends PureComponent {
       };
       if (this.isMixedScrub && this.props.mixedMathHandler) {
         let e = this.preScrubMixedMathValue;
-        null != e && this.props.mixedMathHandler.onChange(e, t, zk.NO);
+        null != e && this.props.mixedMathHandler.onChange(e, t, yesNoTrackingEnum.NO);
       } else {
         let e = t(this.preScrubValue);
-        this.props.onValueChange?.(e, zk.NO);
+        this.props.onValueChange?.(e, yesNoTrackingEnum.NO);
         this.currentValue !== e && this.throttledHaptics();
         this.currentValue = e;
       }
     };
     this.onScrubEnd = e => {
       if (this.didJustScrub || this.props.onScrubClick?.(), this.didJustScrub = !1, this.isMixedScrub = !1, fullscreenValue.commit(), this.currentValue) {
-        let e = this.currentValue !== this.preScrubValue ? zk.YES_FORCE_TRACKING_AS_EDIT : zk.YES;
+        let e = this.currentValue !== this.preScrubValue ? yesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT : yesNoTrackingEnum.YES;
         this.props.onValueChange(this.currentValue, e);
         this.currentValue = void 0;
       }
@@ -572,7 +572,7 @@ export class $$F0 extends PureComponent {
         let e = this.currentScrubScale;
         this.currentScrubScale = t;
         this.currentArrowWidth = Math.round(Math.max(10, (8 + t) / 16 * 40));
-        0 !== e && this.props.dispatch(F.enqueue({
+        0 !== e && this.props.dispatch(VisualBellActions.enqueue({
           message: `Scrubbing at ${t <= -8 ? "1/8" : t <= -4 ? "1/4" : t <= -2 ? "1/2" : t >= 8 ? "8x" : t >= 4 ? "4x" : t >= 2 ? "2x" : "1x"}`,
           type: "scrub-scale"
         }));

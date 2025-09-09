@@ -1,9 +1,9 @@
 import { useMemo, useState, useCallback, useLayoutEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { PU } from "../figma_app/343967";
 import { r as _$$r } from "../905/249071";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { wm } from "../905/19536";
+import { useMemoShallow } from "../905/19536";
 import { parsePxNumber } from "../figma_app/783094";
 import { uc } from "../905/763714";
 import { clamp } from "../figma_app/492908";
@@ -52,7 +52,7 @@ export function $$E0(e, t = 20) {
   let i = function (e, t) {
     let [i, r] = useState([]);
     let a = PU();
-    let l = wm(() => t ? a.filter(e => e !== t && !e.contains(t) && !t.contains(e)) : a, [a, t]);
+    let l = useMemoShallow(() => t ? a.filter(e => e !== t && !e.contains(t) && !t.contains(e)) : a, [a, t]);
     let c = useCallback(t => {
       r(t.map(t => {
         let {

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { V } from "../1577/311426";
@@ -9,12 +9,12 @@ import { sessionLocalIDToString, defaultSessionLocalID } from "../905/871411";
 import u from "classnames";
 import { s as _$$s } from "../figma_app/429226";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { RK } from "../figma_app/815170";
 import { el, VG, js, _r, mj, cP } from "../figma_app/451499";
 import { m0 } from "../figma_app/976749";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
@@ -136,11 +136,11 @@ let M = e => {
   let n = D();
   let s = useDispatch();
   let o = useCallback(e => {
-    e && (Fullscreen.panToNode(e, !1), wr(), Dh([e]));
+    e && (Fullscreen.panToNode(e, !1), clearSelection(), addToSelection([e]));
   }, []);
   useEffect(() => {
     let n = r.current;
-    null === n || t[n] || s(_$$F.dequeue({
+    null === n || t[n] || s(VisualBellActions.dequeue({
       matchType: e
     }));
   }, [s, t, e]);
@@ -155,15 +155,15 @@ let M = e => {
     let d = getI18nString("inspect_panel.interactions.return_to_node", {
       previous: n.format(a[0])
     });
-    s(_$$F.enqueue({
+    s(VisualBellActions.enqueue({
       type: e,
       message: "",
       button: {
         text: d,
         action: () => o(a[0])
       },
-      icon: zX.UNDO,
-      onDismiss: () => {}
+      icon: VisualBellIcon.UNDO,
+      onDismiss: () => { }
     }));
   }, [s, o, n, t, e]);
 };

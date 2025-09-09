@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { t as _$$t } from "../905/947268";

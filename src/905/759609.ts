@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, memo, useState, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { WW } from "../905/521428";
 import { K as _$$K } from "../905/443068";

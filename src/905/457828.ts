@@ -13,7 +13,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { N } from "../905/794224";
 import { q } from "../905/600041";
 import { Tf, nb, hi } from "../figma_app/543100";
-import { N6_ } from "../figma_app/43951";
+import { FilePermissionsLgShadowView } from "../figma_app/43951";
 function g({
   thumbnailUrl: e,
   thumbnailType: t,
@@ -140,7 +140,7 @@ export function $$I0({
   let c = Tf.getTouchedAt(e);
   let u = v(e);
   let p = Tf.getFileOrMainBranchKey(e);
-  if (Rs(N6_(getFeatureFlags().iam_pv2_lg_pol_smoke && p ? {
+  if (Rs(FilePermissionsLgShadowView(getFeatureFlags().iam_pv2_lg_pol_smoke && p ? {
     fileKey: p,
     linkAccessOverrideKey: null
   } : null)), Tf.getIsPasswordProtected(e)) {

@@ -1,6 +1,6 @@
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
-import { zCd } from "../figma_app/43951";
+import { FileCreationPermissionsView } from "../figma_app/43951";
 import { gq } from "../905/276025";
 let o = atom(e => {
   let t = e(gq(!0)).data?.draftsFolderId;
@@ -13,7 +13,7 @@ let o = atom(e => {
     };
     return resourceUtils.error([e]);
   }
-  return e(zCd.Query({
+  return e(FileCreationPermissionsView.Query({
     projectId: t
   })).transform(e => e.project);
 });

@@ -6,7 +6,7 @@ import { q } from "../905/600041";
 import { F } from "../905/171275";
 import { Ph, i4 } from "../905/862913";
 import { FFileType } from "../figma_app/191312";
-import { sMs } from "../figma_app/43951";
+import { FileCanView } from "../figma_app/43951";
 export function $$p2(e, t) {
   return e === FFileType.SLIDES ? F.SLIDES : e === FFileType.WHITEBOARD ? t ? F.WHITEBOARD : F.DEFAULT_WHITEBOARD : t ? F.DESIGN : F.DEFAULT_DESIGN;
 }
@@ -30,7 +30,7 @@ export function $$h1({
   file: e,
   ...t
 }) {
-  let r = Rs(sMs, {
+  let r = Rs(FileCanView, {
     key: e.key
   });
   let l = $$p2(e.editor_type, !!e.thumbnail_guid);

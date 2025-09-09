@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { J } from "../905/614223";
 import { g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6, c as _$$c, $z, lR } from "../figma_app/617427";
@@ -130,7 +130,7 @@ export function $$h0(e) {
       }
     case "primary-large-wide":
       if ("button" !== ctaButtonMeta.type) {
-        k.warn(`[FeatureEducation] CTAButton with variant 'primary-large-wide' is not implemented for type '${ctaButtonMeta.type}'`);
+        logger.warn(`[FeatureEducation] CTAButton with variant 'primary-large-wide' is not implemented for type '${ctaButtonMeta.type}'`);
         return null;
       }
       return jsx(lR, {

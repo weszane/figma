@@ -24,7 +24,7 @@ import { L as _$$L } from "../905/121508";
 import { useState, useContext, useRef, useMemo, useCallback, useEffect, useLayoutEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e2 } from "../905/165054";
-import { wm } from "../905/19536";
+import { useMemoShallow } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import G from "../vendor/575087";
 import { globalPerfTimer } from "../905/542194";
@@ -192,7 +192,7 @@ export function $$es0({
   E.current = v;
   let S = useRef(void 0);
   let w = function (e, t, i) {
-    let n = wm(() => [t, ...e], [e, t]);
+    let n = useMemoShallow(() => [t, ...e], [e, t]);
     let r = useMemo(() => function (e) {
       let t = e.map(e => "state" in e ? ei(e) : e);
       return resourceUtils.all(t);

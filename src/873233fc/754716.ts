@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, useState, useEffect, memo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { eBU } from "../figma_app/822011";
 import { LayoutSizingMode, StackBindingsCpp, HandoffBindingsCpp, AppStateTsApi, IAssertResource, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -14,7 +14,7 @@ import { uQ } from "../figma_app/311375";
 import { qM } from "../figma_app/120227";
 import { d as _$$d } from "../905/758967";
 import { UK } from "../figma_app/740163";
-import { Hr, wr, Dh, ax } from "../figma_app/741237";
+import { currentSessionLocalIDString, clearSelection, addToSelection, setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { Bf } from "../figma_app/249941";
@@ -34,7 +34,7 @@ import { FEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../9410/188255";
 import { fu } from "../figma_app/831799";
 import { e as _$$e2 } from "../905/621515";
-import { iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { QF } from "../figma_app/502247";
 import { N as _$$N } from "../figma_app/268271";
 import { Ypw } from "../figma_app/6204";
@@ -213,8 +213,8 @@ function w() {
     let t = Object.keys(e.mirror.sceneGraphSelection)[0];
     let n = e.mirror.appModel.hoveredNode;
     return {
-      hoveredNode: n === Hr ? null : n,
-      selection: t === Hr ? null : t
+      hoveredNode: n === currentSessionLocalIDString ? null : n,
+      selection: t === currentSessionLocalIDString ? null : t
     };
   });
   let n = getObservableValue(AppStateTsApi?.hoverState().isTLFHighlightHeaderHovered, !1);
@@ -243,7 +243,7 @@ function ec({
   yOffset: n
 }) {
   let o = _o();
-  let i = iZ();
+  let i = selectCurrentUser();
   let r = GQ();
   return {
     top: e.y + (n + o),
@@ -439,7 +439,7 @@ function e_(e) {
   }) || _$$eN(t, "INSTANCE");
   _$$h(() => {
     queueMicrotask(async function () {
-      u && (wr(), Dh([u.guid]), fullscreenValue.commit(), await s({
+      u && (clearSelection(), addToSelection([u.guid]), fullscreenValue.commit(), await s({
         centerX: u.absoluteBoundingBox.x + 165,
         centerY: u.absoluteBoundingBox.y + 50,
         scale: 1.2
@@ -452,7 +452,7 @@ function e_(e) {
         }, 0);
       }(xT(uI)?.offsetTop ?? 0), a(!0));
     });
-    ax(IAssertResource.PRIMARY);
+    setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
   });
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
@@ -515,7 +515,7 @@ function eC(e) {
         guidToSelect: c.guid
       }), a(!0));
     });
-    ax(IAssertResource.PRIMARY);
+    setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
   });
   return jsx(rq, {
     arrowPosition: F_.RIGHT_BODY,
@@ -761,7 +761,7 @@ function eI() {
     overlay: Ypw,
     priority: _$$N.DEFAULT_MODAL
   });
-  let n = TA();
+  let n = getUserId();
   let [r, a] = QF(n || "") || [];
   return (useEffect(() => {
     let n = getFeatureFlags().dev_mode_demo_file || getFeatureFlags().logged_out_dev_mode_demo_file;

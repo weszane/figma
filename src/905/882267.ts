@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useId, useRef, useCallback, useMemo, useState, useEffect, memo, forwardRef, useContext } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
 import { isNullish } from "../figma_app/95419";
 import { IK } from "../905/521428";
@@ -13,9 +13,9 @@ import h from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { parsePxNumber } from "../figma_app/783094";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rs } from "../figma_app/288654";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { L as _$$L } from "../905/408237";
@@ -42,14 +42,14 @@ import { SG } from "../figma_app/852050";
 import { p8 } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
-import { TNJ } from "../figma_app/43951";
+import { TeamCanAdmin } from "../figma_app/43951";
 import { Rk, gg } from "../905/981217";
 import { n0 } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { If } from "../905/714538";
 import { cn } from "../905/959568";
@@ -128,7 +128,7 @@ export function $$eD0({
   return jsx(Ao, {
     ref: b,
     alwaysEnsureModalOnScreen: !0,
-    dataTestId: Pt(s, "draggableModal"),
+    dataTestId: generateRecordingKey(s, "draggableModal"),
     disableHeaderBottomBorder: !0,
     dragHeaderOnly: !0,
     hidden: I,
@@ -143,7 +143,7 @@ export function $$eD0({
     onDragEnd: k,
     overflowHidden: !0,
     preventKeyboardFocus: I,
-    recordingKey: Pt(s, "draggableModal"),
+    recordingKey: generateRecordingKey(s, "draggableModal"),
     title: e => jsxs(Fragment, {
       children: [jsx("div", {
         className: "font_picker--pickerTitle--5gCK6 header_modal--headerModalTitle--32hFx",
@@ -226,7 +226,7 @@ function eL({
       let r = getSingletonSceneGraph().getCurrentPage();
       !((r?.directlySelectedNodes?.length ?? 0) > 50) && e && (n.current || (n.current = !0), t(void 0, {
         fontFamily: e
-      }, zk.NO));
+      }, yesNoTrackingEnum.NO));
     }, [i, t]), 50);
     let l = useCallback(() => {
       if (o.cancel(), n.current) {
@@ -236,7 +236,7 @@ function eL({
         t(void 0, {
           fontFamily: "",
           selectedFontFamily: e
-        }, zk.NO);
+        }, yesNoTrackingEnum.NO);
       }
     }, [t, a, o]);
     return {
@@ -267,7 +267,7 @@ function eL({
   let eV = sZ() ?? null;
   let eG = q5()?.team ?? null;
   let eH = q5();
-  let eW = iZ();
+  let eW = selectCurrentUser();
   let eY = Rk({
     enabled: !B && (eg === Qr.SHARED_FONTS || x?.type === eP),
     user: eW,
@@ -375,7 +375,7 @@ function eL({
     globalPerfTimer.start("update_text_node_font");
     clearPreview();
     setSelectedFontBeforePreviews(e ?? null);
-    d(e, void 0, n ? zk.YES : zk.NO);
+    d(e, void 0, n ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
     let r = e ? h[e] : void 0;
     let a = If(r)?.source;
     trackEventAnalytics("font picker font selected", {
@@ -443,7 +443,7 @@ function eL({
     dispatch: e
   }) {
     let t = q5()?.team ?? null;
-    let i = Rs(TNJ, {
+    let i = Rs(TeamCanAdmin, {
       id: t?.id
     }, {
       enabled: !!t
@@ -487,7 +487,7 @@ function eL({
             className: "font_picker--searchIcon--0a3sK"
           }), jsx(ej, {
             query: searchQueryPlaceholderFontFamily || el,
-            recordingKey: Pt(i, "search"),
+            recordingKey: generateRecordingKey(i, "search"),
             activeDescendant: e6 ? `${er}-${e6.id}` : void 0,
             controlsId: `${er}-fonts`,
             onClose: e2,
@@ -544,7 +544,7 @@ function eL({
               isMouseDisabled: e9,
               isSelected: selectedFontBeforePreviews === t.family,
               item: e,
-              recordingKey: Pt(i, t.family),
+              recordingKey: generateRecordingKey(i, t.family),
               total: eU.length
             }, Km(t)) : null;
           })]
@@ -613,7 +613,7 @@ function eF({
         onCancel: i,
         onChange: t,
         property: e,
-        recordingKey: Pt(r, "select"),
+        recordingKey: generateRecordingKey(r, "select"),
         children: u
       })
     })
@@ -838,7 +838,7 @@ function eG({
     variant: "secondary",
     innerText: "Learn more",
     onClick: () => {
-      Ay.unsafeRedirect(gg, "_blank");
+      customHistory.unsafeRedirect(gg, "_blank");
     },
     children: getI18nString("fullscreen.properties_panel.font_picker.no_shared_fonts.cta")
   });
@@ -906,7 +906,7 @@ function eH({
       currentFieldValue: isNullish(t) || isInvalidValue(t) ? "" : t,
       initialPosition: e ? cn(e, d9) : new Point(0, 0),
       onHidePicker: a,
-      recordingKey: Pt(i, "variablePicker")
+      recordingKey: generateRecordingKey(i, "variablePicker")
     })
   });
 }

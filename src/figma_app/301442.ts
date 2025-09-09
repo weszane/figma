@@ -2,17 +2,17 @@ import { useMemo, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { oA } from "../905/663269";
-import { k as _$$k } from "../905/651849";
+import { logger } from "../905/651849";
 import { isProdCluster } from "../figma_app/169182";
 import { subscribeAndAwaitData } from "../905/553831";
 import { Rs } from "../figma_app/288654";
 import { Z } from "../905/939602";
 import { yV, q5 } from "../figma_app/516028";
-import { nkF } from "../figma_app/43951";
+import { SlotsFileEnablement } from "../figma_app/43951";
 export async function $$h1() {
   let e = atomStoreManager.get(yV);
   if (!e) return;
-  let t = await subscribeAndAwaitData(nkF, {
+  let t = await subscribeAndAwaitData(SlotsFileEnablement, {
     fileKey: e.sourceFileKey ?? e.key
   });
   oA(t.file?.slotsFileEnablement)?.slotsEnabled || (await Z.postEnableSlotsForFile({
@@ -23,7 +23,7 @@ export function $$m0() {
   let e = function () {
     let e = q5();
     let t = e?.sourceFileKey ?? e?.key ?? "";
-    let r = Rs(nkF({
+    let r = Rs(SlotsFileEnablement({
       fileKey: t
     }), {
       enabled: !!t && getFeatureFlags().dse_slots_file_enablement
@@ -33,7 +33,7 @@ export function $$m0() {
   let t = getFeatureFlags();
   let r = useMemo(() => e ? g.filter(e => !t[e]) : [], [e, t]);
   useEffect(() => {
-    r.length > 0 && !isProdCluster() && _$$k.log("showing slots enablement banner due to missing flags:", r);
+    r.length > 0 && !isProdCluster() && logger.log("showing slots enablement banner due to missing flags:", r);
   }, [r]);
   return r.length > 0;
 }

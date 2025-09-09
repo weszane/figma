@@ -12,7 +12,7 @@ import { z } from "../905/821223";
 import { AppStateTsApi, TextAlignmentOptions } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
@@ -27,14 +27,14 @@ export function $$C0(e) {
   let t = jsx(_$$E, {
     name: "text_align_horizontal",
     children: jsx($$O3, {
-      recordingKey: Pt(e.recordingKey, "textAlignHorizontal")
+      recordingKey: generateRecordingKey(e.recordingKey, "textAlignHorizontal")
     })
   });
   let r = jsx(_$$E, {
     name: "text_align_vertical",
     children: jsx($$R1, {
       textAlignVertical: e.textAlignVertical || MIXED_MARKER,
-      recordingKey: Pt(e.recordingKey, "textAlignVertical")
+      recordingKey: generateRecordingKey(e.recordingKey, "textAlignVertical")
     })
   });
   let i = vK();

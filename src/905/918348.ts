@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";

@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Y } from "../905/830372";
@@ -27,13 +27,13 @@ import { tT } from "../905/723791";
 import { F } from "../469e6e40/308608";
 import { Jt } from "../figma_app/28323";
 import { Te } from "../figma_app/765689";
-import { RcX } from "../figma_app/43951";
+import { OrgSharedSettingView } from "../figma_app/43951";
 import { nF, lF } from "../469e6e40/68843";
 function O({
   org: e,
   isOrgAdmin: t
 }) {
-  let a = Rs(RcX, {
+  let a = Rs(OrgSharedSettingView, {
     orgId: e.id
   });
   let r = useDispatch();

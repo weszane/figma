@@ -3,7 +3,7 @@ import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { bx } from "../905/34809";
 import { sf } from "../905/929976";
 import { popModalStack } from "../905/156213";
@@ -45,7 +45,7 @@ let $$v8 = createOptimistThunk(async (e, t) => {
   });
   await XHR.post(`/api/folders/${t.fileKey}/pin`).then(() => {
     r.commit();
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       error: !1,
       message: getI18nString("file_browser.file_browser_actions.file_pinned_to_project")
     }));

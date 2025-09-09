@@ -1,7 +1,7 @@
 import _require from "../3592/633592";
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useEffect, useCallback, useRef, memo, createContext, useContext, useMemo, forwardRef, useState, useLayoutEffect, lazy, Suspense, Fragment as _$$Fragment } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { HandoffBindingsCpp, DesignGraphElements, ColorFormatEnum, LayoutTabType, IAssertResource, SceneGraphHelpers, Fullscreen, FileSourceType, Thumbnail, ComponentPropType, VariableDataType, OperationType, AppStateTsApi, LayoutSizingMode, BuildStatus, UIVisibilitySetting, NodePropertyCategory, Fonts, FitMode, DesignWorkspace, ViewType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager, Xr, AY, createLocalStorageAtom } from "../figma_app/27355";
@@ -13,7 +13,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
 import { selectWithShallowEqual } from "../905/103090";
-import { tw as _$$tw, ax as _$$ax, Uc, wr, tJ as _$$tJ, NI, aY as _$$aY, NT } from "../figma_app/741237";
+import { getSelectedDevModePropertiesPanelTab, setSelectedDevModePropertiesPanelTab, updateHoveredNode, clearSelection, replaceSelection, getEnabledDevModePropertiesPanelTabs, getPropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
 import { Fk, $y, wA as _$$wA, Gj } from "../figma_app/167249";
 import { ec as _$$ec, Te } from "../figma_app/29089";
 import { uQ as _$$uQ, NM, Zl, Tv } from "../figma_app/311375";
@@ -39,7 +39,7 @@ import { J as _$$J2 } from "../905/799737";
 import { buildUploadUrl, isGovCluster } from "../figma_app/169182";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c2 } from "../905/370443";
-import { D2i, oBY, Pns, XGw, Ssd, jJU, nlH } from "../figma_app/43951";
+import { FileDevModeTrialRequestPending, FileIsInDevModeTrial, FileDevModeRequestDenied, FileAccountTypeRequest, DeveloperRelatedLinksForNode, DeveloperRelatedLinks, FileCanExport } from "../figma_app/43951";
 import { U as _$$U } from "../figma_app/65327";
 import { I as _$$I } from "../3674/466343";
 import { DD, P_, u1 as _$$u } from "../3674/371829";
@@ -52,8 +52,8 @@ import { wH } from "../figma_app/680166";
 import { J as _$$J4 } from "../905/202542";
 import { qm } from "../figma_app/431689";
 import { R as _$$R2 } from "../3674/430035";
-import { Ay } from "../905/612521";
-import { F as _$$F } from "../905/302958";
+import { customHistory } from "../905/612521";
+import { VisualBellActions } from "../905/302958";
 import { w as _$$w } from "../905/281010";
 import { n as _$$n } from "../3674/214307";
 import { i$ as _$$i$ } from "../905/15667";
@@ -135,7 +135,7 @@ import { L3 } from "../figma_app/701001";
 import { aV as _$$aV, eY as _$$eY, q0, KH, p8 as _$$p3 } from "../figma_app/722362";
 import { I as _$$I2 } from "../figma_app/51637";
 import { S as _$$S, z as _$$z } from "../figma_app/106763";
-import { iZ as _$$iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f as _$$f2 } from "../905/940356";
 import { s2 as _$$s3 } from "../905/851937";
 import { hw as _$$hw, wY } from "../905/753206";
@@ -178,7 +178,7 @@ import { dP as _$$dP } from "../figma_app/119475";
 import { n as _$$n5 } from "../905/477505";
 import { gB } from "../905/294543";
 import { Be, $b } from "../469e6e40/370592";
-import { zq } from "../905/515076";
+import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { Rg, LO } from "../figma_app/243025";
 import { tK as _$$tK } from "../905/432392";
 import { KD } from "../figma_app/975811";
@@ -295,7 +295,7 @@ import { fI, nV as _$$nV } from "../figma_app/626177";
 import { X as _$$X3 } from "../905/606795";
 import { L as _$$L2 } from "../905/408237";
 import { A as _$$A14 } from "../svg/86097";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { z as _$$z4 } from "../905/239603";
 import { reportError } from "../905/11";
 import { Ns } from "../905/760074";
@@ -341,7 +341,6 @@ import { B0 } from "../figma_app/201703";
 import { s as _$$s5 } from "../figma_app/504088";
 import { hO as _$$hO, HT } from "../figma_app/69680";
 import { iT as _$$iT } from "../figma_app/74165";
-import { Pt as _$$Pt2 } from "../figma_app/806412";
 import { qs } from "../469e6e40/556776";
 import { d as _$$d9 } from "../905/480825";
 import { iA as _$$iA } from "../3674/705006";
@@ -359,7 +358,7 @@ import { BT, q$ } from "../figma_app/644255";
 import { K as _$$K4 } from "../905/918348";
 import { E as _$$E7 } from "../905/53857";
 import { Ak } from "../905/986103";
-import { s4 as _$$s7, Kv } from "../figma_app/544649";
+import { isInteractiveInspectionAndRollbackEnabled, isDevModeFocusViewActive } from "../figma_app/544649";
 import { F_ as _$$F_ } from "../905/858282";
 import { WZ } from "../905/893645";
 import { Y6 } from "../figma_app/91703";
@@ -400,7 +399,7 @@ import cP from "../vendor/7508";
 import cR from "../vendor/656470";
 import cO from "../vendor/260986";
 import { nl as _$$nl2 } from "../figma_app/897289";
-import { zX } from "../905/576487";
+import { VisualBellIcon } from "../905/576487";
 import { O as _$$O5, K as _$$K5 } from "../figma_app/140784";
 import { rg as _$$rg, aK as _$$aK } from "../figma_app/401069";
 import { N9 } from "../figma_app/385874";
@@ -408,7 +407,7 @@ import { Xo } from "../figma_app/482495";
 import { e as _$$e6 } from "../905/726668";
 import { Dc, hV as _$$hV } from "../figma_app/151766";
 import { O as _$$O6 } from "../figma_app/301719";
-import { PW } from "../figma_app/198712";
+import { assetTypeEnum } from "../figma_app/198712";
 import { cn as _$$cn } from "../905/959568";
 import { jj, MU, df as _$$df } from "../figma_app/970285";
 import { n3 as _$$n9 } from "../905/668609";
@@ -496,7 +495,7 @@ import { _o, wz } from "../figma_app/879363";
 function b({
   doReport: e
 }) {
-  let t = _$$tw()?.getCopy();
+  let t = getSelectedDevModePropertiesPanelTab()?.getCopy();
   let {
     commentsActive,
     isNodeSelected
@@ -533,10 +532,10 @@ let J = buildUploadUrl("bd68de9e9483d946011f6721dc4d37bcf7cc3021");
 function Q() {
   let e = _$$U("blocking_modal");
   let t = _$$tS() ?? "";
-  let n = Rs(D2i, {
+  let n = Rs(FileDevModeTrialRequestPending, {
     key: t
   });
-  let o = Rs(oBY, {
+  let o = Rs(FileIsInDevModeTrial, {
     key: t
   });
   let l = n.data?.file.status !== "error" && n.data?.file.data?.hasPermission && o.data?.file?.hasPermission === !1;
@@ -606,13 +605,13 @@ function eu({
     })]
   });
   let s = () => {
-    n(_$$F.enqueue({
+    n(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.error_generic"),
       error: !0,
       button: {
         text: getI18nString("admin_dashboard.requests.error_reload"),
         action: () => {
-          Ay.reload("Seat request reminder error");
+          customHistory.reload("Seat request reminder error");
         }
       }
     }));
@@ -713,7 +712,7 @@ function e_() {
     let n = _$$J3();
     let a = _$$tS() ?? "";
     let o = w_();
-    let l = Rs(Pns, {
+    let l = Rs(FileDevModeRequestDenied, {
       key: a
     });
     let s = o.loading;
@@ -731,7 +730,7 @@ function e_() {
   let t = _$$tS() ?? "";
   let n = _$$J3();
   let l = useSelector(e => _$$oc(H7(e)?.id ?? "", e));
-  let s = Rs(XGw, {
+  let s = Rs(FileAccountTypeRequest, {
     key: t
   });
   let {
@@ -3088,7 +3087,7 @@ function ij() {
   let c = r?.scaleFactor ?? 1;
   let u = "first-party" === e.type && (e.id === ANDROID || e.id === ANDROID_XML || e.id === _$$p || e.id === IOS_UIKIT);
   let p = useMemo(() => new Be(o), [o]);
-  let h = useMemo(() => zq.map(e => ({
+  let h = useMemo(() => CODEGEN_MEASUREMENT_UNITS.map(e => ({
     key: e,
     title: p.format(e)
   })), [p]);
@@ -4837,7 +4836,7 @@ let oZ = class {
     plugin: e,
     links: t
   }) {
-    _$$ax(IAssertResource.PLUGIN);
+    setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
     try {
       return (await _$$R3.instance.enqueue(this.createEnqueueArgs({
         command: "auth",
@@ -4998,7 +4997,7 @@ function o8({
         nodeId: e.nodeId
       };
       let c = _$$R3.instance.isCurrentlyRunning(r);
-      return (_$$ax(IAssertResource.PLUGIN), c && Jc()) ? _$$R3.instance.enqueue({
+      return (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), c && Jc()) ? _$$R3.instance.enqueue({
         ...r,
         onStart: async () => await xG({
           devResource: d
@@ -5843,7 +5842,7 @@ function l8({
     let e = d;
     if (!_$$G(e) || !_$$H2(e)) {
       if (e = "http://" + e, !FB(e) || !_$$G(e)) {
-        r(_$$F.enqueue({
+        r(VisualBellActions.enqueue({
           message: getI18nString("dev_handoff.developer_related_links.invalid_link"),
           error: !0,
           timeoutOverride: 2e3
@@ -5853,7 +5852,7 @@ function l8({
       c(e);
     }
     if (n.includes(e)) {
-      r(_$$F.enqueue({
+      r(VisualBellActions.enqueue({
         message: getI18nString("dev_handoff.developer_related_links.duplicate_link_error"),
         error: !0,
         timeoutOverride: 2e3
@@ -5892,7 +5891,7 @@ function l8({
       });
     } catch (e) {
       console.error(e);
-      r(_$$F.enqueue({
+      r(VisualBellActions.enqueue({
         message: getI18nString("dev_handoff.developer_related_links.link_error", {
           errorMessage: e.message
         }),
@@ -5979,11 +5978,11 @@ function so(e) {
 }
 _$$z4.union([si, _$$z4.$$null()]);
 function ss(e, t) {
-  let n = Rs(Ssd, {
+  let n = Rs(DeveloperRelatedLinksForNode, {
     fileKey: e,
     nodeId: t
   });
-  return k9(() => "loaded" === n.status && n.data.file?.developerRelatedLinksForNode ? [n.data.file.developerRelatedLinksForNode.map(e => ({
+  return useMemoStable(() => "loaded" === n.status && n.data.file?.developerRelatedLinksForNode ? [n.data.file.developerRelatedLinksForNode.map(e => ({
     ...e,
     linkPreview: so(e.linkPreviewJson)
   })), "loaded"] : [[], n.status], [n]);
@@ -6008,7 +6007,7 @@ let sd = registerModal(function (e) {
       await e;
     } catch (e) {
       console.error(e);
-      s(_$$F.enqueue({
+      s(VisualBellActions.enqueue({
         message: `Could not delete link: ${e.message}`,
         error: !0,
         timeoutOverride: 2e3
@@ -6077,7 +6076,7 @@ let sf = registerModal(function ({
     if (!x || !m) return;
     let n = d;
     if ((!_$$G(n) || !_$$H2(n)) && (n = "http://" + n, !_$$G(n))) {
-      v(_$$F.enqueue({
+      v(VisualBellActions.enqueue({
         message: getI18nString("dev_handoff.developer_related_links.invalid_link"),
         error: !0,
         timeoutOverride: 2e3
@@ -6113,7 +6112,7 @@ let sf = registerModal(function ({
       await i;
     } catch (e) {
       console.error(e);
-      v(_$$F.enqueue({
+      v(VisualBellActions.enqueue({
         message: `Could not edit link: ${e.message}`,
         error: !0,
         timeoutOverride: 2e3
@@ -6318,10 +6317,10 @@ function sy({
   }();
   let _ = oA();
   let [v, y] = function (e) {
-    let t = Rs(jJU, {
+    let t = Rs(DeveloperRelatedLinks, {
       fileKey: e
     });
-    return k9(() => "loaded" === t.status && t.data.file?.developerRelatedLinks ? [t.data.file.developerRelatedLinks.map(e => ({
+    return useMemoStable(() => "loaded" === t.status && t.data.file?.developerRelatedLinks ? [t.data.file.developerRelatedLinks.map(e => ({
       ...e,
       linkPreview: so(e.linkPreviewJson)
     })), "loaded"] : [[], t.status], [t]);
@@ -6756,7 +6755,7 @@ function s1({
 }
 function s2() {
   let e = _I();
-  let t = _$$iZ()?.id;
+  let t = selectCurrentUser()?.id;
   let n = _$$Tv();
   let i = _$$tS();
   let l = useDispatch();
@@ -7603,7 +7602,7 @@ let rk = memo(function (e) {
   let p = function (e) {
     _$$uQ();
     let t = selectWithShallowEqual(e => !_$$M3(e));
-    return n => Uc(n && t ? e : "");
+    return n => updateHoveredNode(n && t ? e : "");
   }(guid);
   let h = useAtomWithSubscription(_$$d7);
   let f = rA(guid);
@@ -8109,7 +8108,7 @@ function rJ() {
   let s = useAtomWithSubscription(_$$d8);
   let d = "LOADING" === s;
   let c = "RUNNING" === s;
-  let u = getObservableValue(_$$tw(), IAssertResource.PRIMARY) === IAssertResource.PLUGIN && !e;
+  let u = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY) === IAssertResource.PLUGIN && !e;
   let p = useDispatch();
   useEffect(() => p(_$$aq()), [p]);
   useEffect(() => {
@@ -8251,7 +8250,7 @@ function r4({
               default:
                 return !1;
             }
-          })(t) && _$$ax(IAssertResource.PRIMARY);
+          })(t) && setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
           wY();
         },
         children: jsx(_$$A5, {})
@@ -8267,7 +8266,7 @@ function r7({
   isSingle: o
 }) {
   return jsx(_$$E, {
-    recordingKey: _$$Pt2(i, "tab"),
+    recordingKey: generateRecordingKey(i, "tab"),
     onClick: n,
     actionOnPointerDown: !0,
     className: o ? "dev_handoff_panel_tab_group--tabsHeaderSingle--G5OnU dev_handoff_panel_tab_group--tabFocus--f8Y7h" : t ? "dev_handoff_panel_tab_group--tabActive--Ex7NX legacy_pages_panel--tabActive--hmo0j legacy_pages_panel--tab--inhND dev_handoff_panel_tab_group--tabFocus--f8Y7h" : "dev_handoff_panel_tab_group--tab--Y0iYX legacy_pages_panel--tab--inhND dev_handoff_panel_tab_group--tabFocus--f8Y7h",
@@ -8328,7 +8327,7 @@ function r6(e) {
 }
 function r9(e) {
   let t = useAtomWithSubscription(be);
-  let n = getObservableValue(_$$tw(), IAssertResource.PRIMARY);
+  let n = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY);
   let {
     commentsActive,
     versionHistoryActive
@@ -8727,7 +8726,7 @@ function dR() {
     let i = n.stackVerticalLayoutSize !== LayoutSizingMode.HUG_CONTENT;
     return a || i;
   }, e);
-  return !!_$$s7() && (n || t);
+  return !!isInteractiveInspectionAndRollbackEnabled() && (n || t);
 }
 function dD() {
   let e = useAtomWithSubscription(dT);
@@ -8819,7 +8818,7 @@ function dH() {
     emphasized: !0,
     arrowPosition: _$$F_.RIGHT_BODY,
     secondaryCta: r,
-    onStepShow: () => wr(),
+    onStepShow: () => clearSelection(),
     disableHighlight: !0
   }, {
     title: renderI18nText("dev_handoff.workflows.focus_view.onboarding.back.title"),
@@ -9321,10 +9320,10 @@ let c2 = "asset_panel--sourceName--uwyAu ellipsis--ellipsis--Tjyfa";
 let c5 = 4 * parsePxNumber(devHandoffAssetPreviewMaxWidth);
 let c3 = 4 * parsePxNumber(devHandoffAssetPreviewMaxHeight);
 let c4 = createLocalStorageAtom("asset_panel_export_list", {
-  [PW.ASSET_ICON]: [c8("SVG")],
-  [PW.ASSET_ILLUSTRATION]: [c8("SVG")],
-  [PW.ASSET_IMAGE]: [c8("PNG")],
-  [PW.ASSET_GIF]: void 0
+  [assetTypeEnum.ASSET_ICON]: [c8("SVG")],
+  [assetTypeEnum.ASSET_ILLUSTRATION]: [c8("SVG")],
+  [assetTypeEnum.ASSET_IMAGE]: [c8("PNG")],
+  [assetTypeEnum.ASSET_GIF]: void 0
 });
 let c7 = createLocalStorageAtom("asset_panel_img_include_source", !0);
 function c8(e) {
@@ -9394,11 +9393,11 @@ let c9 = memo(({
   });
   let I = function (e, t) {
     let n = useAtomWithSubscription(c4);
-    let a = t & ~PW.ASSET_COMPONENT;
-    let i = [c8(a & (PW.ASSET_ICON | PW.ASSET_ILLUSTRATION) ? "SVG" : "PNG")];
-    return getFeatureFlags().dt_insp_impr_assets ? void 0 === a || a === PW.NOT_ASSET || a === PW.ASSET_VIDEO || a === PW.ASSET_GIF ? [] : n?.[a] || i : i;
+    let a = t & ~assetTypeEnum.ASSET_COMPONENT;
+    let i = [c8(a & (assetTypeEnum.ASSET_ICON | assetTypeEnum.ASSET_ILLUSTRATION) ? "SVG" : "PNG")];
+    return getFeatureFlags().dt_insp_impr_assets ? void 0 === a || a === assetTypeEnum.NOT_ASSET || a === assetTypeEnum.ASSET_VIDEO || a === assetTypeEnum.ASSET_GIF ? [] : n?.[a] || i : i;
   }(0, e.type);
-  let C = e.type & (PW.ASSET_ICON | PW.ASSET_ILLUSTRATION) ? "SVG" : "PNG";
+  let C = e.type & (assetTypeEnum.ASSET_ICON | assetTypeEnum.ASSET_ILLUSTRATION) ? "SVG" : "PNG";
   let T = I?.[0]?.imageType;
   let S = useMemo(() => getFeatureFlags().dt_insp_impr_assets && I?.length && T ? I.every(e => e.imageType === T) ? getI18nString("dev_handoff.assets.files_same_format", {
     count: I.length,
@@ -9430,7 +9429,7 @@ let c9 = memo(({
   }, [B]);
   let z = e?.instancesGUIDs?.[0] ?? assetId;
   let V = useCallback(() => {
-    _$$tJ([z]);
+    replaceSelection([z]);
     getFeatureFlags().dt_insp_impr_assets && P(vI(z));
   }, [P, z]);
   let W = useMemo(() => [...(e?.instancesGUIDs ?? []), ...(e?.duplicateGUIDs ?? []), assetId], [assetId, e?.duplicateGUIDs, e?.instancesGUIDs]);
@@ -9439,13 +9438,13 @@ let c9 = memo(({
       Fullscreen?.setDevHandoffAssetExport(assetId, e);
     });
   }, [assetId]);
-  let U = !!(e.type & PW.ASSET_COMPONENT);
-  let K = !!(e.type & PW.ASSET_ICON);
-  let X = !!(e.type & PW.ASSET_IMAGE);
-  let J = !!(e.type & PW.ASSET_GIF);
-  let Q = !!(e.type & PW.ASSET_VIDEO);
+  let U = !!(e.type & assetTypeEnum.ASSET_COMPONENT);
+  let K = !!(e.type & assetTypeEnum.ASSET_ICON);
+  let X = !!(e.type & assetTypeEnum.ASSET_IMAGE);
+  let J = !!(e.type & assetTypeEnum.ASSET_GIF);
+  let Q = !!(e.type & assetTypeEnum.ASSET_VIDEO);
   let q = J || Q;
-  let Y = !!(e.type & PW.ASSET_ILLUSTRATION);
+  let Y = !!(e.type & assetTypeEnum.ASSET_ILLUSTRATION);
   let Z = (K || X) && !q;
   let $ = t?.length > 0 && !!c;
   let ee = !!e.sourceLibraryKey;
@@ -9733,7 +9732,7 @@ function un({
 }
 function ua() {
   let e = _$$tS() ?? "";
-  let t = Rs(nlH, {
+  let t = Rs(FileCanExport, {
     key: e
   });
   return !!_$$nl2() || t.data?.file && "error" !== t.data.file.status && t.data?.file?.data?.hasPermission;
@@ -9765,7 +9764,7 @@ function uo() {
   }, [t]);
   let l = ({
     type: e
-  }) => e & PW.ASSET_ICON ? 1 : e & PW.ASSET_COMPONENT ? 2 : 3;
+  }) => e & assetTypeEnum.ASSET_ICON ? 1 : e & assetTypeEnum.ASSET_COMPONENT ? 2 : 3;
   let s = useMemo(() => cM()(Object.values(e || {}), "hash").map(t => ({
     ...t,
     duplicateGUIDs: Object.values(e || {}).filter(e => e.hash === t.hash).map(({
@@ -9807,13 +9806,13 @@ function uo() {
 }
 function ul(e) {
   switch (e) {
-    case PW.ASSET_ICON:
+    case assetTypeEnum.ASSET_ICON:
       return getI18nString("dev_handoff.assets.icons_download");
-    case PW.ASSET_ILLUSTRATION:
+    case assetTypeEnum.ASSET_ILLUSTRATION:
       return getI18nString("dev_handoff.assets.illustrations_download");
-    case PW.ASSET_IMAGE:
+    case assetTypeEnum.ASSET_IMAGE:
       return getI18nString("dev_handoff.assets.images_download");
-    case PW.ASSET_GIF:
+    case assetTypeEnum.ASSET_GIF:
       return getI18nString("dev_handoff.assets.gifs_download");
     default:
       return getI18nString("fullscreen.export.export");
@@ -9836,13 +9835,13 @@ function us({
   let b = _$$dh();
   let j = v ?? b;
   let w = !m || 0 === m.length;
-  let N = useMemo(() => e !== PW.ASSET_GIF && (e === PW.ASSET_IMAGE ? w && !_ : w), [w, _, e]);
-  let k = cD()(Object.values(n ?? {})).filter(t => t.type === (e === PW.ASSET_GIF ? "gif" : "image"));
-  let A = useMemo(() => (e === PW.ASSET_GIF || e === PW.ASSET_IMAGE) && k.length > 20, [e, k]);
+  let N = useMemo(() => e !== assetTypeEnum.ASSET_GIF && (e === assetTypeEnum.ASSET_IMAGE ? w && !_ : w), [w, _, e]);
+  let k = cD()(Object.values(n ?? {})).filter(t => t.type === (e === assetTypeEnum.ASSET_GIF ? "gif" : "image"));
+  let A = useMemo(() => (e === assetTypeEnum.ASSET_GIF || e === assetTypeEnum.ASSET_IMAGE) && k.length > 20, [e, k]);
   return {
     onExportAll: useCallback(async n => {
-      let a = e === PW.ASSET_GIF;
-      let i = e === PW.ASSET_IMAGE;
+      let a = e === assetTypeEnum.ASSET_GIF;
+      let i = e === assetTypeEnum.ASSET_IMAGE;
       let o = Object.keys(t).map(e => t[e]?.instancesGUIDs?.[0] ?? t[e]?.duplicateGUIDs?.[0] ?? e);
       let r = (i && _ || a) && !!k.length;
       let d = !!o.length;
@@ -9853,13 +9852,13 @@ function us({
       s(!0);
       trackEventAnalytics("Asset Panel Export Clicked");
       let y = o.length * (m?.length ?? 0);
-      x(_$$F.enqueue({
+      x(VisualBellActions.enqueue({
         message: r ? getI18nString("dev_handoff.assets.preparing_time", {
           count: (v ? y : 0) + k.length
         }) : getI18nString("dev_handoff.assets.preparing", {
           count: y
         }),
-        icon: zX.SPINNER,
+        icon: VisualBellIcon.SPINNER,
         preventDismissal: !0,
         type: "dev-mode-all-asset-download"
       }));
@@ -9895,14 +9894,14 @@ function us({
         }), x(_$$rg()));
       } catch (e) {
         reportError(_$$e.DEVELOPER_TOOLS, e);
-        r && k.length > 1 && !b && x(_$$F.enqueue({
+        r && k.length > 1 && !b && x(VisualBellActions.enqueue({
           message: getI18nString("dev_handoff.assets.too_many_image_sources"),
-          icon: zX.EXCLAMATION,
+          icon: VisualBellIcon.EXCLAMATION,
           timeoutOverride: 1 / 0,
           error: !0
         }));
       } finally {
-        x(_$$F.dequeue({
+        x(VisualBellActions.dequeue({
           matchType: "dev-mode-all-asset-download"
         }));
         c(!1);
@@ -9949,11 +9948,11 @@ function ur({
 }
 function ud(e) {
   switch (e) {
-    case PW.ASSET_ICON:
+    case assetTypeEnum.ASSET_ICON:
       return getI18nString("dev_handoff.assets.icons_open_settings");
-    case PW.ASSET_ILLUSTRATION:
+    case assetTypeEnum.ASSET_ILLUSTRATION:
       return getI18nString("dev_handoff.assets.illustrations_open_settings");
-    case PW.ASSET_IMAGE:
+    case assetTypeEnum.ASSET_IMAGE:
       return getI18nString("dev_handoff.assets.images_open_settings");
     default:
       return getI18nString("general.open");
@@ -9994,11 +9993,11 @@ function uc({
   }, [m, _]);
   let b = function (e) {
     switch (e) {
-      case PW.ASSET_ICON:
+      case assetTypeEnum.ASSET_ICON:
         return getI18nString("dev_handoff.assets.icons_settings");
-      case PW.ASSET_ILLUSTRATION:
+      case assetTypeEnum.ASSET_ILLUSTRATION:
         return getI18nString("dev_handoff.assets.illustrations_settings");
-      case PW.ASSET_IMAGE:
+      case assetTypeEnum.ASSET_IMAGE:
         return getI18nString("dev_handoff.assets.images_settings");
       default:
         return getI18nString("general.settings");
@@ -10027,11 +10026,11 @@ function uc({
           openFile: g,
           pickerShown: f,
           propertyList: m,
-          recordingKey: _$$Pt2("assets", e, "exportList"),
+          recordingKey: generateRecordingKey("assets", e, "exportList"),
           selectedPropertyType: NodePropertyCategory.EXPORT
         }), jsx("div", {
           className: "asset_panel--settingsModalRow--MxPJl",
-          children: e === PW.ASSET_IMAGE && jsx(Checkbox, {
+          children: e === assetTypeEnum.ASSET_IMAGE && jsx(Checkbox, {
             checked: c,
             onChange: u,
             label: jsx(Label, {
@@ -10050,7 +10049,7 @@ function uu({
   let n = !ua();
   let [o, l] = useState(!1);
   let s = ud(e);
-  return e === PW.ASSET_GIF ? null : jsxs(Fragment, {
+  return e === assetTypeEnum.ASSET_GIF ? null : jsxs(Fragment, {
     children: [jsx(_$$d3, {
       "aria-label": n ? getI18nString("fullscreen.properties_panel.export_disabled") : s,
       "aria-expanded": o,
@@ -10094,13 +10093,13 @@ function up({
   let x = !ua() || d || isLocalExporting;
   let m = function (e) {
     switch (e) {
-      case PW.ASSET_ICON:
+      case assetTypeEnum.ASSET_ICON:
         return getI18nString("dev_handoff.assets.icons_download_menu");
-      case PW.ASSET_ILLUSTRATION:
+      case assetTypeEnum.ASSET_ILLUSTRATION:
         return getI18nString("dev_handoff.assets.illustrations_download_menu");
-      case PW.ASSET_IMAGE:
+      case assetTypeEnum.ASSET_IMAGE:
         return getI18nString("dev_handoff.assets.images_download_menu");
-      case PW.ASSET_GIF:
+      case assetTypeEnum.ASSET_GIF:
         return getI18nString("dev_handoff.assets.gifs_download_menu");
       default:
         return getI18nString("dev_handoff.assets");
@@ -10132,7 +10131,7 @@ function up({
               children: renderI18nText("dev_handoff.assets.nothing_to_export")
             }) : null]
           })
-        }), e !== PW.ASSET_GIF && jsx(q7, {
+        }), e !== assetTypeEnum.ASSET_GIF && jsx(q7, {
           onClick: () => u(!0),
           children: _
         })]
@@ -10146,15 +10145,15 @@ function up({
 }
 function uh(e) {
   switch (e) {
-    case PW.ASSET_ICON:
+    case assetTypeEnum.ASSET_ICON:
       return "icons";
-    case PW.ASSET_ILLUSTRATION:
+    case assetTypeEnum.ASSET_ILLUSTRATION:
       return "illustrations";
-    case PW.ASSET_IMAGE:
+    case assetTypeEnum.ASSET_IMAGE:
       return "images";
-    case PW.ASSET_GIF:
+    case assetTypeEnum.ASSET_GIF:
       return "gifs";
-    case PW.ASSET_VIDEO:
+    case assetTypeEnum.ASSET_VIDEO:
       return "videos";
     default:
       return "assets";
@@ -10177,19 +10176,19 @@ function uf({
   });
   let c = useRef(null);
   if (0 === totalItems || !e) return null;
-  let u = n !== PW.ASSET_VIDEO;
+  let u = n !== assetTypeEnum.ASSET_VIDEO;
   return jsxs(VZ, {
     title: function (e) {
       switch (e) {
-        case PW.ASSET_ICON:
+        case assetTypeEnum.ASSET_ICON:
           return getI18nString("dev_handoff.assets.icons");
-        case PW.ASSET_ILLUSTRATION:
+        case assetTypeEnum.ASSET_ILLUSTRATION:
           return getI18nString("dev_handoff.assets.illustrations");
-        case PW.ASSET_IMAGE:
+        case assetTypeEnum.ASSET_IMAGE:
           return getI18nString("dev_handoff.assets.images");
-        case PW.ASSET_GIF:
+        case assetTypeEnum.ASSET_GIF:
           return getI18nString("dev_handoff.assets.gifs");
-        case PW.ASSET_VIDEO:
+        case assetTypeEnum.ASSET_VIDEO:
           return getI18nString("dev_handoff.assets.videos");
         default:
           return getI18nString("dev_handoff.assets");
@@ -10298,21 +10297,21 @@ function ux() {
       }),
       children: [jsx(uf, {
         items: icons,
-        assetType: PW.ASSET_ICON
+        assetType: assetTypeEnum.ASSET_ICON
       }), jsx(uf, {
         items: illustrations,
-        assetType: PW.ASSET_ILLUSTRATION
+        assetType: assetTypeEnum.ASSET_ILLUSTRATION
       }), jsx(uf, {
         items: images,
-        assetType: PW.ASSET_IMAGE,
+        assetType: assetTypeEnum.ASSET_IMAGE,
         mediaByGuid: t
       }), jsx(uf, {
         items: gifs,
-        assetType: PW.ASSET_GIF,
+        assetType: assetTypeEnum.ASSET_GIF,
         mediaByGuid: t
       }), jsx(uf, {
         items: videos,
-        assetType: PW.ASSET_VIDEO
+        assetType: assetTypeEnum.ASSET_VIDEO
       })]
     }), getFeatureFlags().dt_nested_components && totalComponents > 0 && jsx(VZ, {
       hideHeader: z4.getIsExtension(),
@@ -11544,8 +11543,8 @@ let pL = memo(function () {
   });
   let r = _$$hA();
   let d = useDispatch();
-  let c = getObservableValue(_$$tw(), IAssertResource.PRIMARY);
-  let p = new Set(NI().map(e => r5[e]).filter(e => null != e));
+  let c = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY);
+  let p = new Set(getEnabledDevModePropertiesPanelTabs().map(e => r5[e]).filter(e => null != e));
   let h = {};
   Object.values(r5).forEach(e => {
     h[e] = p.has(e);
@@ -11556,7 +11555,7 @@ let pL = memo(function () {
       reportError(_$$e.DEVELOPER_TOOLS, Error(`DevHandoffRightPanel: Unknown tabId '${e}' passed to onSetTab`));
       return;
     }
-    _$$ax(t);
+    setSelectedDevModePropertiesPanelTab(t);
     e === r5[IAssertResource.PLUGIN] && d(_$$b({
       [xb]: !0
     }));
@@ -11637,13 +11636,13 @@ function pz({
     }) {
       return e.map(e => ({
         displayText: e.name,
-        onMouseEnter: () => Uc(e.guid),
-        onMouseExit: () => Uc(""),
+        onMouseEnter: () => updateHoveredNode(e.guid),
+        onMouseExit: () => updateHoveredNode(""),
         icon: jsx(Bf, {
           guid: e.guid,
           isMenuIcon: !0
         }),
-        callback: () => _$$tJ([e.guid])
+        callback: () => replaceSelection([e.guid])
       })).filter(pB);
     }({
       children: t.childrenNodes
@@ -11651,13 +11650,13 @@ function pz({
     return t ? {
       displayText: t?.name ?? "",
       isChecked: t.guid === e.guid,
-      onMouseEnter: () => Uc(t.guid),
-      onMouseExit: () => Uc(""),
+      onMouseEnter: () => updateHoveredNode(t.guid),
+      onMouseExit: () => updateHoveredNode(""),
       icon: jsx(Bf, {
         guid: t?.guid ?? "",
         isMenuIcon: !0
       }),
-      callback: () => _$$tJ([t.guid]),
+      callback: () => replaceSelection([t.guid]),
       children: n && n.length > 0 ? n : void 0,
       callbackOnClickWithChildren: !0
     } : null;
@@ -11714,9 +11713,9 @@ function pH({
   return t ? jsx("button", {
     title: t.name,
     className: "dev_handoff_breadcrumbs--pathElement--AKgt0",
-    onClick: () => _$$tJ([t.guid]),
-    onMouseEnter: () => Uc(t.guid),
-    onMouseLeave: () => Uc(""),
+    onClick: () => replaceSelection([t.guid]),
+    onMouseEnter: () => updateHoveredNode(t.guid),
+    onMouseLeave: () => updateHoveredNode(""),
     children: t.name
   }) : null;
 }
@@ -11731,13 +11730,13 @@ function pW({
   let c = e.map(d.get).filter(isNotNullish);
   let u = c.map(e => ({
     displayText: e.name,
-    onMouseEnter: () => Uc(e.guid),
-    onMouseExit: () => Uc(""),
+    onMouseEnter: () => updateHoveredNode(e.guid),
+    onMouseExit: () => updateHoveredNode(""),
     icon: jsx(Bf, {
       guid: e.guid,
       isMenuIcon: !0
     }),
-    callback: () => _$$tJ([e.guid])
+    callback: () => replaceSelection([e.guid])
   }));
   return jsxs(Fragment, {
     children: [r && i && jsx(_$$j, {
@@ -12572,7 +12571,7 @@ function hV({
   });
 }
 function hH() {
-  let e = getObservableValue(_$$tw(), IAssertResource.PRIMARY);
+  let e = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY);
   let t = LS();
   let n = NM();
   let s = _$$ro();
@@ -12626,7 +12625,7 @@ function hH() {
     recordingKey: "extensionPluginsTab"
   });
   useEffect(() => {
-    c.find(t => t.id === e) || _$$ax(IAssertResource.PRIMARY);
+    c.find(t => t.id === e) || setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
   }, [e, t]);
   return jsxs(zN, {
     children: [jsxs("div", {
@@ -12641,7 +12640,7 @@ function hH() {
           onClick: () => {
             var e;
             e = t.id;
-            return void _$$ax(e);
+            return void setSelectedDevModePropertiesPanelTab(e);
           },
           isSingle: 1 === c.length
         }, t.title))
@@ -12658,7 +12657,7 @@ function hH() {
           },
           children: jsx(_$$A5, {})
         }), jsx(sO, {}), jsx(hV, {
-          setActiveTabId: _$$ax
+          setActiveTabId: setSelectedDevModePropertiesPanelTab
         })]
       })]
     }), c.map(t => jsx("div", {
@@ -12857,7 +12856,7 @@ let fs = memo(function (e) {
             let r = a.get(e);
             let d = p(i) ?? i;
             if (r) {
-              let e = !getFeatureFlags().dt_multi_node && !_$$s7();
+              let e = !getFeatureFlags().dt_multi_node && !isInteractiveInspectionAndRollbackEnabled();
               let a = () => {
                 "width" === t ? fl(r, d, r.size.y) : fl(r, r.size.x, d);
                 o && (h("dev_mode.focus_view.resizing", {
@@ -12954,8 +12953,8 @@ function fp() {
       doneChangingFocusNodeForInteractiveInspection: s
     };
   }();
-  let c = Kv();
-  return _$$s7() ? jsxs(Fragment, {
+  let c = isDevModeFocusViewActive();
+  return isInteractiveInspectionAndRollbackEnabled() ? jsxs(Fragment, {
     children: [jsxs("div", {
       className: "focus_canvas_ui--interactiveInspectionTools--k17Pz",
       "data-onboarding-key": dC,
@@ -13077,7 +13076,7 @@ function ff() {
   let h = QV();
   let f = _$$U2();
   let x = _$$U("focus_view_back");
-  let v = getObservableValue(_$$aY(), DesignWorkspace.DESIGN);
+  let v = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let [, y] = useAtomValueAndSetter(_o);
   let [b] = useAtomValueAndSetter(wz);
   let j = xo();
@@ -13092,7 +13091,7 @@ function ff() {
   let I = N.showOverview ? getI18nString("dev_handoff.workflows.focus_view.back_to_rfd_tooltip") : getI18nString("dev_handoff.workflows.focus_view.back_to_page_tooltip");
   if (_$$h(() => {
     n && HandoffBindingsCpp.focusOnNode(n, !1);
-    v === DesignWorkspace.PROTOTYPE && NT(DesignWorkspace.DESIGN);
+    v === DesignWorkspace.PROTOTYPE && setPropertiesPanelTab(DesignWorkspace.DESIGN);
     getFeatureFlags().dt_workflows_recently_viewed && u && n && h(u, n);
     f("Dev Mode Focus View Shown", {
       source: b || "init",
@@ -13183,7 +13182,7 @@ export function $$fg0() {
   let e = _I();
   let t = _$$aV();
   let n = useSelector(e => e.mirror.appModel.showUi);
-  let s = _$$iZ();
+  let s = selectCurrentUser();
   let d = useDispatch();
   let c = _$$I2();
   X_();

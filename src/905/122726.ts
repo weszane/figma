@@ -1,6 +1,6 @@
 import { p as _$$p } from '../905/428660';
 import { communityPagePaths } from '../905/528121';
-import { Ay } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { parseQuery } from '../905/634134';
 import { languageCodes } from '../905/816253';
 import { bL } from '../905/934145';
@@ -154,7 +154,7 @@ export class $$y0 {
       let a = new URLSearchParams(n).toString();
       return `${i}${a && `?${a}`}`;
     }
-    return e.subView === 'hubFileEmbed' ? `/community/file/${e.hubFileId}/embed` : e.subView === 'handle' ? bL(e.handle, e.profileTab, t.user) : e.subView === 'searchAndBrowse' ? e.data ? MU(e.data) : Ay.location.pathname : '/community';
+    return e.subView === 'hubFileEmbed' ? `/community/file/${e.hubFileId}/embed` : e.subView === 'handle' ? bL(e.handle, e.profileTab, t.user) : e.subView === 'searchAndBrowse' ? e.data ? MU(e.data) : customHistory.location.pathname : '/community';
   }
 }
 export const B = $$y0;

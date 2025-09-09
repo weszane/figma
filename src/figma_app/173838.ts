@@ -1,11 +1,11 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Rs } from "../figma_app/288654";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { FPublicationStatusType } from "../figma_app/191312";
-import { a9b, ehp } from "../figma_app/43951";
+import { HubFile, OpenEditorFileData } from "../figma_app/43951";
 import { B4 } from "../905/71785";
 export function $$d0(e) {
-  let t = Rs(a9b, {
+  let t = Rs(HubFile, {
     hubFileId: e
   });
   return "loaded" !== t.status ? null : t.data.hubFile;
@@ -20,7 +20,7 @@ export function $$c1() {
     let i = e && figFilePublishedAsHubFile[e];
     return i ? B4(hubFiles[i]) : null;
   });
-  let t = Rs(ehp, {
+  let t = Rs(OpenEditorFileData, {
     fileKey: e || ""
   }, {
     enabled: !!e

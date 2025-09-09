@@ -8,7 +8,7 @@ import { S } from "../figma_app/924300";
 import { ZU } from "../figma_app/986347";
 import { U } from "../figma_app/427950";
 import { throwTypeError } from "../figma_app/465776";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { uc } from "../figma_app/930338";
 import { QE } from "../figma_app/914216";
 import { F } from "../figma_app/127204";
@@ -25,7 +25,7 @@ function f({
         }),
         children: jsx(F, {
           flyoutConfig: e,
-          recordingKey: Pt(If, e.flyoutRecordingKey)
+          recordingKey: generateRecordingKey(If, e.flyoutRecordingKey)
         })
       }, e.dropdownKey);
     case ZU.ACTION:
@@ -53,7 +53,7 @@ function f({
         children: jsx(QE, {
           item: e,
           numUnreadComments: 0,
-          recordingKey: Pt(If, e.recordingKey)
+          recordingKey: generateRecordingKey(If, e.recordingKey)
         })
       }, e.recordingKey);
     default:

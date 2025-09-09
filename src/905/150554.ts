@@ -4,7 +4,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/116389";
 import { logError, logInfo } from "../905/714362";
 import { Av } from "../figma_app/646357";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { r6 } from "../figma_app/517115";
 import { u as _$$u } from "../905/203573";
@@ -18,7 +18,7 @@ async function p(e, t) {
   } = e;
   let r = {
     session_id: null,
-    search_id: _$$g(),
+    search_id: generateUUIDv4(),
     node_id: node.guid
   };
   try {

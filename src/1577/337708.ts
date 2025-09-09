@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { fP, mc } from "../905/691059";
 import { u as _$$u } from "../905/65923";
 import { E as _$$E } from "../905/632989";
@@ -16,7 +16,7 @@ import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app
 import x from "classnames";
 import { colorToHex } from "../905/436288";
 import { $K, DA, tK, ol, Uv } from "../figma_app/191804";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E2 } from "../905/984674";
@@ -24,7 +24,7 @@ import { showModal, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { O1, KD } from "../figma_app/317394";
 import { dH } from "../figma_app/722362";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { cD } from "../figma_app/598018";
 import { I_ } from "../figma_app/616107";
 import { FEditorType } from "../figma_app/53721";
@@ -155,14 +155,14 @@ function Q({
     }));
   }, [x, k, Q, f]);
   let ea = cD();
-  let en = TA();
+  let en = getUserId();
   let eo = Bw();
   let er = useCallback(() => {
     let t = Q.some((e, t) => Q.some((i, a) => t !== a && DA(e, i)));
     if (W(t), t) return;
     let a = Q.map(e => colorToHex(e, 1));
     if (k && en && a.length) {
-      let t = i?.uuid || _$$g();
+      let t = i?.uuid || generateUUIDv4();
       i ? NK({
         name: k,
         teamId: ea,
@@ -296,7 +296,7 @@ export let $$$0 = registerModal(function ({
   ...r
 }) {
   let l = useDispatch();
-  let s = TA();
+  let s = getUserId();
   let c = cD();
   let d = hS(r);
   let u = dH();

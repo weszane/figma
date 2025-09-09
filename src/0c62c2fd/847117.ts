@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -32,7 +32,7 @@ import { Gi } from "../figma_app/528509";
 import { cY, yD, _9, AU } from "../905/81459";
 import { jN } from "../905/612685";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
-import { NSA } from "../figma_app/43951";
+import { FileByKey } from "../figma_app/43951";
 import { X$ } from "../figma_app/465071";
 import { K as _$$K } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
@@ -286,7 +286,7 @@ export function $$ee2({
     });
     return r;
   }(C, e.files), [C, e.files]);
-  let A = _$$p(NSA, k);
+  let A = _$$p(FileByKey, k);
   let F = $$et4({
     isImportComplete: g,
     fileImport: e,

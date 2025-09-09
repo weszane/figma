@@ -1,4 +1,4 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { atom, Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { z } from "../905/239603";
@@ -11,7 +11,7 @@ import { reportError } from "../905/11";
 import { Vg } from "../figma_app/147952";
 import { nl, cW, ZT } from "../figma_app/844435";
 import { tS } from "../figma_app/516028";
-import { _TC } from "../figma_app/43951";
+import { RecentlyUsedActionsView } from "../figma_app/43951";
 import { getPluginByFileId } from "../figma_app/300692";
 import { bD } from "../figma_app/45218";
 import { CN } from "../figma_app/915202";
@@ -19,7 +19,7 @@ import { hasLocalFileId, SV } from "../figma_app/155287";
 var l = o;
 export let $$I2 = atom([]);
 export function $$S1() {
-  let [e] = IT(_TC({}));
+  let [e] = IT(RecentlyUsedActionsView({}));
   let t = nl();
   let r = cW();
   let o = ZT();

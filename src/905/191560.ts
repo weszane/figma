@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { isFigmaMirrorAndroid, isInFigmaMobile, isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { E as _$$E, Qg, WY, My, Jv, xw, hE, GG, qw, Hh, Re, OZ, kL, I$, KS, AP, ET, $j } from "../905/194276";
@@ -32,7 +32,7 @@ import { k as _$$k } from "../905/585996";
 import { k as _$$k2 } from "../905/644504";
 import { XHR } from "../905/910117";
 import { Q9 } from "../905/773401";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
 import { sS } from "../figma_app/516028";
 import { FResourceCategoryType } from "../figma_app/191312";
@@ -356,16 +356,16 @@ function H(e) {
         t(Qg({
           message: e.message
         }));
-      });else if (TA()) _$$k2.twoFactor(d || "").then(e => {
-        Ay.redirect(e.data.meta.redirect);
+      }); else if (TA()) _$$k2.twoFactor(d || "").then(e => {
+        customHistory.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
         let n = _$$J(e, i?.message || getI18nString("auth.default-error"));
-        "invalid_session" === i.reason ? Ay.redirect("/") : t(Qg({
+        "invalid_session" === i.reason ? customHistory.redirect("/") : t(Qg({
           message: n,
           invalidInput: RE.TOTP_KEY
         }));
-      });else switch (_) {
+      }); else switch (_) {
         case qB.SIGN_IN:
           t(Jv({
             formId: i
@@ -450,7 +450,7 @@ function H(e) {
 let X = "join_org--modalText--t6wL6";
 function Q(e) {
   let t = useDispatch();
-  let i = Ay.location.pathname + Ay.location.search;
+  let i = customHistory.location.pathname + customHistory.location.search;
   let [s, o] = useState(!1);
   let d = useSelector(e => e.user);
   let c = useSelector(sS);
@@ -513,14 +513,14 @@ function Q(e) {
             resource_id_or_key: c
           }).then(() => {
             o(!1);
-            t(_$$F.enqueue({
+            t(VisualBellActions.enqueue({
               message: getI18nString("permissions.join_org.request_sent")
             }));
             t(popModalStack());
           }, e => {
             o(!1);
             t(popModalStack());
-            t(_$$F.enqueue({
+            t(VisualBellActions.enqueue({
               message: e.message || e.data.message,
               error: !0
             }));
@@ -819,7 +819,7 @@ function eb(e) {
   };
   let f = e => {
     let t = g(e);
-    Ay.unsafeRedirect(t);
+    customHistory.unsafeRedirect(t);
     XHR.post("/api/session/clear_cont");
     setTimeout(() => {
       window.close();
@@ -860,7 +860,7 @@ function eb(e) {
     f(t);
   };
   let v = () => {
-    Ay.unsafeRedirect("figma://login");
+    customHistory.unsafeRedirect("figma://login");
   };
   let I = () => {
     trackEventAnalytics("AppAuth", {
@@ -926,7 +926,7 @@ function eb(e) {
     users: e.auth.appAuthUsers,
     onUserSelect: A,
     trackOnChangeAccount: I
-  });else {
+  }); else {
     let e;
     let i;
     e = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? getI18nString("auth.generic-go-back-and-try-again") : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.open-figma-for-vs-code") : getI18nString("auth.open-specific-app", {
@@ -967,14 +967,14 @@ function ev(e) {
   let t = useDispatch();
   _$$h(() => {
     r();
-    Ay.replace("/login", null);
+    customHistory.replace("/login", null);
   });
   let i = () => {
     let e = getI18nString("auth.generic-app-auth-error");
     if (isFigmaMirrorAndroid() || isInFigmaMobile()) {
       let t = new URLSearchParams();
       t.append("error", e);
-      Ay.redirect("/mobile-app?" + t.toString());
+      customHistory.redirect("/mobile-app?" + t.toString());
     } else {
       t(Qg({
         message: e
@@ -992,7 +992,7 @@ function ev(e) {
     }).then(() => {
       desktopAPIInstance ? desktopAPIInstance.finishAppAuth(e.auth.redirectUrl) : setTimeout(() => {
         let t = e.auth.redirectUrl || (isFigmaMirrorAndroid() || isInFigmaMobile() ? "/mobile-app" : null);
-        null != t ? (console.log("Opening: " + t), Ay.redirect(t)) : Ay.reload("AppAuthRedeemForm");
+        null != t ? (console.log("Opening: " + t), customHistory.redirect(t)) : customHistory.reload("AppAuthRedeemForm");
       }, 500);
     }).catch(e => {
       console.error(e);
@@ -1093,7 +1093,7 @@ function eD() {
         trackingProperties: {
           trackingDescriptor: _$$c.TRY_AGAIN
         },
-        onClick: () => Ay.reload("User clicked try again from enable cookies auth page"),
+        onClick: () => customHistory.reload("User clicked try again from enable cookies auth page"),
         children: renderI18nText("auth.try_again")
       })
     })
@@ -1601,7 +1601,7 @@ function eJ(e) {
         className: ek,
         children: jsx(_$$N, {
           onClick: () => {
-            e.auth.existingSession ? Ay.redirect("/") : t(_$$E({
+            e.auth.existingSession ? customHistory.redirect("/") : t(_$$E({
               formState: qB.EMAIL_ONLY
             }));
           },
@@ -1622,11 +1622,11 @@ function e2(e) {
       _$$g("validate_code_attempt", e.auth.origin);
       t(kL());
       i ? _$$k2.validateCode(i).then(e => {
-        Ay.redirect(e.data.meta.redirect);
+        customHistory.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
         let n = _$$J(e, i?.message || getI18nString("auth.default-error"));
-        "invalid_session" === i.reason ? Ay.redirect("/") : t(Qg({
+        "invalid_session" === i.reason ? customHistory.redirect("/") : t(Qg({
           message: n,
           invalidInput: RE.VERIFICATION_CODE
         }));
@@ -1687,7 +1687,7 @@ function e2(e) {
             }).catch(e => {
               let i = e.data;
               let n = _$$J(e, i?.message || getI18nString("auth.validate-code.code-resend-error"));
-              "invalid_session" === i.reason && Ay.redirect("/");
+              "invalid_session" === i.reason && customHistory.redirect("/");
               t(_$$s2.error(n));
             });
           },
@@ -1844,7 +1844,7 @@ function te() {
     children: renderI18nText("auth.magic_link_check_email.go_back")
   });
   useEffect(() => {
-    o && Ay.redirect(s);
+    o && customHistory.redirect(s);
   }, [o, s]);
   let A = jsx("strong", {
     className: e6,
@@ -1870,7 +1870,7 @@ function te() {
       f(!1);
       return;
     }
-    Ay.redirect(s || "/");
+    customHistory.redirect(s || "/");
   };
   return jsxs("div", {
     className: y()(_$$s.flex.flexColumn.px36.pt8.pb12.$, e5),
@@ -2051,7 +2051,7 @@ function ts() {
         if (n?.data?.meta?.email_validated_at) {
           let e = NQ(i, "fuid", n?.data?.meta?.id);
           setTimeout(() => {
-            Ay.redirect(e);
+            customHistory.redirect(e);
           }, 2e3);
         } else e = setTimeout(t, 7e3 + 3e3 * Math.random());
       });
@@ -2274,7 +2274,7 @@ function tl(e) {
     })
   });
   if (e.auth.formState === qB.SIGN_UP) {
-    let t = "true" === new URLSearchParams(Ay.location.search).get("with_community_header");
+    let t = "true" === new URLSearchParams(customHistory.location.search).get("with_community_header");
     return jsx(fu, {
       name: "Sign Up",
       children: jsx(eQ, {
@@ -2293,21 +2293,21 @@ function tl(e) {
   if (e.auth.formState === qB.RESET_PASSWORD) return jsx(en, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.VALIDATE_CODE) return jsx(e2, {
+  }); else if (e.auth.formState === qB.VALIDATE_CODE) return jsx(e2, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.SAML_START) return jsx(ej, {
+  }); else if (e.auth.formState === qB.SAML_START) return jsx(ej, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.EMAIL_ONLY) return jsx(eP, {
+  }); else if (e.auth.formState === qB.EMAIL_ONLY) return jsx(eP, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.JOIN_ORG) return jsx(Q, {
+  }); else if (e.auth.formState === qB.JOIN_ORG) return jsx(Q, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.VERIFY_HUMAN) return jsx(j, {
+  }); else if (e.auth.formState === qB.VERIFY_HUMAN) return jsx(j, {
     ...e
-  });else if (e.auth.formState === qB.TWO_FACTOR) return jsx(H, {
+  }); else if (e.auth.formState === qB.TWO_FACTOR) return jsx(H, {
     onFormSubmit: r,
     ...e
   });

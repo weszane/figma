@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { getSessionStorage } from "../905/657224";
 import l from "classnames";

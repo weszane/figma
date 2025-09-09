@@ -10,10 +10,10 @@ import { initISOString, incrementSessionCounter, getTrackingSessionId } from '..
 import { YQ } from '../905/502364';
 import { getFeatureFlags } from '../905/601108';
 import { observabilityClient } from '../905/602906';
-import { k as _$$k2 } from '../905/651849';
+import { logger } from '../905/651849';
 import { getLocalStorage, sessionStorageRef } from '../905/657224';
 import { getInitialReferrer, getCurrentReferrer } from '../905/747968';
-import { g as _$$g } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { getEnvironmentInfo } from '../905/883621';
 import { getInitialOptions, isDevEnvironment, isLocalCluster } from '../figma_app/169182';
 import { getFalseValue } from '../figma_app/897289';
@@ -143,7 +143,7 @@ function _(e) {
       return r;
     }(e.options || {})
   };
-  getFeatureFlags().figment_debugger && (i.figment_debugger_uuid = _$$g());
+  getFeatureFlags().figment_debugger && (i.figment_debugger_uuid = generateUUIDv4());
   return i;
 }
 let y = '__figma_iframe_anonymous_id';
@@ -166,7 +166,7 @@ class E {
   constructor(e) {
     this._userId = e;
     this._storage = getCookieOrStorage();
-    this._anonymousId = _$$g();
+    this._anonymousId = generateUUIDv4();
     let t = this._storage.get(ANONYMOUS_ID_COOKIE);
     t == null ? this._storage.set(ANONYMOUS_ID_COOKIE, this._anonymousId, {
       sameSite: 'none'
@@ -177,7 +177,7 @@ class E {
       id: () => this._userId,
       anonymousId: () => this._anonymousId,
       reset: () => {
-        this._anonymousId = _$$g();
+        this._anonymousId = generateUUIDv4();
         this._storage.set(ANONYMOUS_ID_COOKIE, this._anonymousId);
         this._userId = null;
       }
@@ -662,14 +662,14 @@ class V {
     options: i
   }) {
     (getFeatureFlags().analytics_log_request_to_console || String(this._storage?.analytics_log_request_to_console).toLowerCase() === 'true') && t.forEach(e => {
-      _$$k2.log('%cevent json: ', 'font-weight: bold', {
+      logger.log('%cevent json: ', 'font-weight: bold', {
         text: JSON.stringify(e)
       });
     });
     let r = null;
     if (e === 'monitor' && getFeatureFlags().figment_debugger && (r = this._prepareEventVisualizerPayload(t), _$$N(r, tM.PENDING)), this._disableTracking) return Promise.resolve();
     if (e === 'monitor' && getFeatureFlags().figment_rate_limiting && !this._requestRateLimiter.requestStarted(t.map(e => e.data.event))) {
-      isDevEnvironment() && _$$k2.error('More than 500 figment requests pending');
+      isDevEnvironment() && logger.error('More than 500 figment requests pending');
       this._requestRateLimiter.requestComplete();
       return Promise.resolve();
     }
@@ -700,13 +700,13 @@ class V {
   }
   getOnRequestResponse(e) {
     return t => {
-      t.status === 0 ? this._disableTracking === null && (this._disableTracking = !0, _$$k2.warn('[Figment] Request failed with status 0, disabling further tracking')) : _$$N(e, tM.SUCCESS);
+      t.status === 0 ? this._disableTracking === null && (this._disableTracking = !0, logger.warn('[Figment] Request failed with status 0, disabling further tracking')) : _$$N(e, tM.SUCCESS);
       this._disableTracking === null && (this._disableTracking = !1);
     };
   }
   getOnRequestError(e, t) {
     return i => {
-      _$$k2.error(`[Figment] Http Error: ${i}`);
+      logger.error(`[Figment] Http Error: ${i}`);
       _$$N(t, tM.FAILURE);
       getFeatureFlags().figment_sentry_errors && !this.isUsingDevAssets() && reportError(_$$e.DATA_INFRA, i, {
         extra: {
@@ -1883,7 +1883,7 @@ let AnalyticsEventDefinitions = {
     mlEvent: !0
   }
 };
-function getAnalyticsByName(e: string) {
+function getAnalyticsByName(e) {
   return e in AnalyticsEventDefinitions ? AnalyticsEventDefinitions[e] : {};
 }
 export function clearAnalyticsStorage() {
@@ -1898,7 +1898,7 @@ export let trackFullScreenAnalytics = (e, t = {}, i = {}) => {
 let isDevLogAnalyticsEnabled = !!navigator.cookieEnabled && localStorage.getItem('DEV_LOG_ANALYTICS') === 'yes';
 window.setDevLogAnalytics = function (e = !0) {
   localStorage.setItem('DEV_LOG_ANALYTICS', e ? 'yes' : 'no');
-  (isDevLogAnalyticsEnabled = e) ? _$$k2.log('dev logging of analytics is enabled') : _$$k2.log('dev logging of analytics is disabled');
+  (isDevLogAnalyticsEnabled = e) ? logger.log('dev logging of analytics is enabled') : logger.log('dev logging of analytics is disabled');
 };
 /**
  * trackEvent - Tracks an analytics event using the main analytics instance.
@@ -1907,7 +1907,7 @@ window.setDevLogAnalytics = function (e = !0) {
  * @param properties Event properties.
  * @param options Additional tracking options.
  */
-export function trackEvent(eventName: string, properties: Record<string, any>, options: Record<string, any>) {
+export function trackEvent(eventName, properties, options) {
   YQ({
     id: eventName,
     properties
@@ -1921,8 +1921,8 @@ export function trackEvent(eventName: string, properties: Record<string, any>, o
       if (typeof value === 'string' && value.length > 50) value = `${value.slice(0, 50)}...`;
       acc[key] = value;
       return acc;
-    }, {} as Record<string, any>);
-    _$$k2.log(`%ctrack: ${eventName}`, 'font-weight: bold', {
+    }, {});
+    logger.log(`%ctrack: ${eventName}`, 'font-weight: bold', {
       ...summarizedProps,
       raw: properties
     }, {
@@ -1947,7 +1947,7 @@ export function trackEvent(eventName: string, properties: Record<string, any>, o
  * @param properties Event properties.
  * @param options Additional tracking options.
  */
-function trackFullscreenEvent(eventName: string, properties: Record<string, any>, options: Record<string, any>) {
+function trackFullscreenEvent(eventName, properties, options) {
   YQ({
     id: eventName,
     properties
@@ -1955,7 +1955,7 @@ function trackFullscreenEvent(eventName: string, properties: Record<string, any>
 
   // Log to console if enabled
   if (getFeatureFlags().analytics_log_to_console) {
-    _$$k2.log(`%ctrack: ${eventName}`, 'font-weight: bold', {
+    logger.log(`%ctrack: ${eventName}`, 'font-weight: bold', {
       properties
     }, {
       options: {
@@ -1974,7 +1974,7 @@ function trackFullscreenEvent(eventName: string, properties: Record<string, any>
  * getAnonymousId - Returns the current anonymous analytics ID.
  * Original variable: $$ea2
  */
-const getAnonymousId = (): string | undefined => b();
+const getAnonymousId = () => b();
 /**
  * AnalyticsEventManager - manages defined analytics events, throttling, and options.
  * Original variable: $$es1

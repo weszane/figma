@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
@@ -12,7 +12,7 @@ import { showModalHandler, popModalStack, hideSpecificModal } from "../905/15621
 import { yH } from "../figma_app/240735";
 import { fu } from "../figma_app/831799";
 import { FAccessLevelType, FPaymentHealthStatusType } from "../figma_app/191312";
-import { yQw } from "../figma_app/43951";
+import { TeamById } from "../figma_app/43951";
 import { getPermissionsState } from "../figma_app/642025";
 import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
@@ -33,7 +33,7 @@ let $$S0 = registerModal(function (e) {
   let i = useDispatch();
   let o = t.teams[e.teamId];
   let y = t.user?.id || "";
-  let b = Rs(yQw, {
+  let b = Rs(TeamById, {
     teamId: e.teamId
   });
   let S = useMemo(() => b.transform(({

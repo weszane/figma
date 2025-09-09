@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback, useState, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
 import { pO } from "../figma_app/422062";
@@ -26,7 +26,7 @@ import { p as _$$p } from "../905/597320";
 import { V3 } from "../figma_app/976345";
 import { K as _$$K } from "../905/628118";
 import { fu } from "../figma_app/831799";
-import { vmp, NI1 } from "../figma_app/43951";
+import { PaginatedAbandonedDraftFilesView, ProjectNameById } from "../figma_app/43951";
 import { J7, SN } from "../figma_app/650409";
 import { O as _$$O } from "../905/833838";
 import { DashboardSections } from "../905/548208";
@@ -232,7 +232,7 @@ function ee(e) {
       isReversed: u(t, e)
     }));
   }, [r]);
-  let p = Rs(vmp, {
+  let p = Rs(PaginatedAbandonedDraftFilesView, {
     firstPageSize: 20,
     sortOrder: a.isReversed ? "desc" : "asc",
     cursorColumn: a.columnName,
@@ -240,7 +240,7 @@ function ee(e) {
     queryString: l,
     showTrashed: d
   });
-  let U = Rs(NI1, {
+  let U = Rs(ProjectNameById, {
     projectId: e.abandonedDraftFolderId
   });
   ("errors" === p.status || "errors" === U.status) && (e.planType === _$$O.TEAM ? t(sf({

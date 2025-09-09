@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { V } from "../figma_app/473391";
 import { JA, VI } from "../figma_app/608944";
 export function $$o0(e) {

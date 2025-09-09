@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, memo, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -52,7 +52,7 @@ let P = memo(function ({
   let p = q5();
   let _ = X$("LibraryPreferencesModal").unwrapOr(null);
   let f = H3(_);
-  let E = new URLSearchParams(Ay.location.search).get("teamToMoveFileToOnNavigate");
+  let E = new URLSearchParams(customHistory.location.search).get("teamToMoveFileToOnNavigate");
   let T = _$$R();
   _$$h(() => {
     T({

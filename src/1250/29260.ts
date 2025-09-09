@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useMemo, useEffect } from "react";
 import { createPortal } from "../vendor/944059";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K } from "../905/443068";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
@@ -16,7 +16,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { n_ } from "../figma_app/566371";
 import { oW } from "../905/675859";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { v as _$$v, L as _$$L } from "../1250/232926";
 import { OG } from "../1250/340571";
 import { XU } from "../1250/282084";
@@ -395,7 +395,7 @@ function q({
     value: e
   }))), [n, directories]);
   useEffect(() => {
-    errors && errors.length > 0 && b(_$$F.enqueue({
+    errors && errors.length > 0 && b(VisualBellActions.enqueue({
       message: getI18nString("dev_handoff.component_browser_onboarding.directory_selection_error"),
       error: !0
     }));
@@ -417,7 +417,7 @@ function q({
       });
       e();
     } catch (e) {
-      b(_$$F.enqueue({
+      b(VisualBellActions.enqueue({
         message: e.message,
         error: !0
       }));

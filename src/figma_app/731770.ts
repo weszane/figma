@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { h as _$$h } from "../905/207101";

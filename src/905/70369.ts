@@ -15,7 +15,7 @@ import { JT } from "../figma_app/632248";
 import { wj, qy } from "../figma_app/862289";
 import { E as _$$E } from "../905/719609";
 import { z } from "../905/788559";
-import { Rw, XU } from "../905/576487";
+import { VisualBellType, BellId } from "../905/576487";
 import { A as _$$A } from "../4711/136271";
 export function $$b3(e, t) {
   for (let i of e) if (i.type === t) return !0;
@@ -27,29 +27,29 @@ export function $$v0(e) {
 export function $$I2(e, t) {
   return e?.messageComponentKey ? function (e) {
     switch (e.messageComponentKey) {
-      case Rw.UPSELL_LIBRARIES_COMPONENT_CREATION_NUDGE:
+      case VisualBellType.UPSELL_LIBRARIES_COMPONENT_CREATION_NUDGE:
         return jsx(E, {});
-      case Rw.SLIDES_REMOVE_AUTO_LAYOUT:
+      case VisualBellType.SLIDES_REMOVE_AUTO_LAYOUT:
         {
           let {
             SlidesRemovedAutoLayoutVisualBell
           } = _require;
           return jsx(SlidesRemovedAutoLayoutVisualBell, {});
         }
-      case Rw.SLIDE_CONVERSION_VISUAL_BELL:
+      case VisualBellType.SLIDE_CONVERSION_VISUAL_BELL:
         {
           let {
             SlideConversionVisualBell
           } = _require2;
           return jsx(SlideConversionVisualBell, {});
         }
-      case Rw.DESIGN_LINTER_COPY_SELECTION:
+      case VisualBellType.DESIGN_LINTER_COPY_SELECTION:
         return jsx(x, {});
-      case Rw.BOARD_TO_DECK_FEEDBACK:
+      case VisualBellType.BOARD_TO_DECK_FEEDBACK:
         return jsx(S, {});
-      case Rw.SLIDES_OUTLINE_TO_DECK_FEEDBACK:
+      case VisualBellType.SLIDES_OUTLINE_TO_DECK_FEEDBACK:
         return jsx(w, {});
-      case Rw.FIRST_DRAFT_FEEDBACK:
+      case VisualBellType.FIRST_DRAFT_FEEDBACK:
         return jsx(C, {
           aiTrackingContext: e.aiTrackingContext
         });
@@ -64,14 +64,14 @@ export function $$I2(e, t) {
       params
     } = e;
     switch (id) {
-      case XU.FILE_MOVE_FOLDER_BELL_ID:
+      case BellId.FILE_MOVE_FOLDER_BELL_ID:
         return renderI18nText("visual_bell.file_move_folder", {
           folderName: jsx("span", {
             className: _$$s.fontSemiBold.$,
             children: params.text
           })
         });
-      case XU.SITES_PUBLISH_SUCCESS_BELL_ID:
+      case BellId.SITES_PUBLISH_SUCCESS_BELL_ID:
         return renderI18nText("sites.toolbar.publish_modal.published_your_site_is_live_at", {
           domain: jsx("div", {
             style: {
@@ -88,7 +88,7 @@ export function $$I2(e, t) {
             })
           })
         });
-      case XU.FIGMAKE_PUBLISH_SUCCESS_BELL_ID:
+      case BellId.FIGMAKE_PUBLISH_SUCCESS_BELL_ID:
         return renderI18nText("figmake.publish.published_your_site_is_live_at", {
           domain: jsx("div", {
             style: {

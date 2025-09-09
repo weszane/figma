@@ -15,7 +15,7 @@ import { go } from '../1250/447088';
 import { Z } from '../1250/621895';
 import { V as _$$V } from '../1250/993385';
 import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
-import { iQA } from '../figma_app/43951';
+import { LibraryComponentDataByLibraryKey } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
 import { u as _$$u } from '../figma_app/187359';
 import { FFileType } from '../figma_app/191312';
@@ -31,13 +31,13 @@ import { IT } from '../figma_app/566371';
 import { Fj } from '../figma_app/594947';
 import { Gi, qY } from '../figma_app/622574';
 import { eY } from '../figma_app/722362';
-import { sq } from '../figma_app/741237';
+import { setNodeExpanded } from '../figma_app/741237';
 import { ce, EC, Fs, Hk, L1, mF, Tw, xB } from '../figma_app/755939';
 import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
 import { U as _$$U } from '../figma_app/901889';
 import { ky } from '../figma_app/925970';
 import { FU } from '../figma_app/933328';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useSelector, useDispatch } from 'react-redux';
 import { A as _$$A } from '../vendor/850789';
 function $(e) {
   let t = new Map();
@@ -315,7 +315,7 @@ export function $$ea12({
         AppStateTsApi?.cooperFocusView().panToSelectedNodeIfOutsideViewport(0.6);
       }, 0)) : console.warn('Expected exactly one node to be inserted, but found', d.length);
     }
-    sq(c, !0);
+    setNodeExpanded(c, !0);
   };
 }
 export function $$er3(e) {
@@ -336,7 +336,7 @@ export function $$er3(e) {
   };
 }
 export function $$ei9(e) {
-  let t = iQA.Query({
+  let t = LibraryComponentDataByLibraryKey.Query({
     libraryKey: e
   });
   let [n] = IT(t, {

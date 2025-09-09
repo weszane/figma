@@ -3,7 +3,7 @@ import { K } from "../905/443068";
 import { F } from "../905/427107";
 import { getI18nString } from "../905/303541";
 import { dG } from "../figma_app/753501";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { H } from "../905/777871";
 import { oV, Zb } from "../905/706046";
@@ -25,7 +25,7 @@ export function $$p0({
         ...e,
         stops: i,
         stopsVar: n
-      }, zk.YES);
+      }, yesNoTrackingEnum.YES);
     },
     disabled: e.stops.length < 2,
     "aria-label": getI18nString("fullscreen.properties_panel.flip_gradient"),

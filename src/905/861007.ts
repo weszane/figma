@@ -11,7 +11,7 @@ import { kt, dW } from "../figma_app/858013";
 import { k } from "../905/700890";
 import { B } from "../905/714743";
 import { OT } from "../905/70369";
-import { zX, Ox } from "../905/576487";
+import { VisualBellIcon, VisualBellShape } from "../905/576487";
 import { Kk, hR, Nl, H0, Xy, m$ } from "../figma_app/143628";
 import { A as _$$A } from "../1617/210240";
 import { A as _$$A2 } from "../svg/261385";
@@ -24,45 +24,45 @@ export function $$I0({
   iconURL: u,
   progress: I
 }) {
-  if (t === zX.SPINNER) return jsx("div", {
+  if (t === VisualBellIcon.SPINNER) return jsx("div", {
     className: Kk,
     children: jsx(kt, {})
   });
-  if (t === zX.IMAGE_BACKED_SPINNER) return jsx("div", {
+  if (t === VisualBellIcon.IMAGE_BACKED_SPINNER) return jsx("div", {
     className: Kk,
     children: jsx(dW, {})
   });
-  if (t === zX.CHECK) return jsx(B, {
+  if (t === VisualBellIcon.CHECK) return jsx(B, {
     className: Kk,
     svg: _$$A2
   });
-  if (t === zX.GREEN_CHECK) return jsx(_$$g, {
+  if (t === VisualBellIcon.GREEN_CHECK) return jsx(_$$g, {
     style: {
       "--color-icon": "var(--color-icon-success)"
     }
   });
-  if (t === zX.CHECK_WITH_CIRCLE) return jsx(W, {});
-  if (t === zX.EXCLAMATION) return jsx(B, {
+  if (t === VisualBellIcon.CHECK_WITH_CIRCLE) return jsx(W, {});
+  if (t === VisualBellIcon.EXCLAMATION) return jsx(B, {
     className: Kk,
     svg: _$$A3
   });
-  if (t === zX.RETURN_TO_INSTANCE) return jsx(B, {
+  if (t === VisualBellIcon.RETURN_TO_INSTANCE) return jsx(B, {
     className: Kk,
     svg: _$$A
-  });else if (t === zX.UNDO) return jsx(B, {
+  });else if (t === VisualBellIcon.UNDO) return jsx(B, {
     className: Kk,
     svg: _$$A
-  });else if (t === zX.PROGRESS) return jsx(k, {
+  });else if (t === VisualBellIcon.PROGRESS) return jsx(k, {
     className: hR,
     fraction: OT(I),
     pathFill: "#FFFFFF"
-  });else if (t === zX.FROM_URL) return jsx("img", {
-    className: i === Ox.CIRCLE ? Nl : e ? H0 : Xy,
+  });else if (t === VisualBellIcon.FROM_URL) return jsx("img", {
+    className: i === VisualBellShape.CIRCLE ? Nl : e ? H0 : Xy,
     src: u,
     alt: ""
-  });else if (t === zX.NOTES_ON_RECTANGLE) return jsx(w, {
+  });else if (t === VisualBellIcon.NOTES_ON_RECTANGLE) return jsx(w, {
     className: p()(Kk, m$)
-  });else if (t === zX.EYEDROPPER) return jsx(G, {});else if (t === zX.BRUSH) return jsx(_$$g2, {});else if (t === zX.SPARKLE) return jsx(V, {});else if (t === zX.WARNING_EXCLAMATION_WITH_TRIANGLE) return jsx(_$$e, {});
+  });else if (t === VisualBellIcon.EYEDROPPER) return jsx(G, {});else if (t === VisualBellIcon.BRUSH) return jsx(_$$g2, {});else if (t === VisualBellIcon.SPARKLE) return jsx(V, {});else if (t === VisualBellIcon.WARNING_EXCLAMATION_WITH_TRIANGLE) return jsx(_$$e, {});
   return null;
 }
 export const H = $$I0;

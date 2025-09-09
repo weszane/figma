@@ -11,7 +11,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
 import { Te } from "../figma_app/765689";
-import { FuG } from "../figma_app/43951";
+import { AdminRequestDashboardRowIds } from "../figma_app/43951";
 let $$f7 = "UPGRADE_REQUESTS_PRODUCT_DROPDOWN";
 let $$E4 = "UPGRADE_REQUESTS_BILLING_GROUP_DROPDOWN";
 let $$y10 = "UPGRADE_REQUESTS_SORT_DROPDOWN";
@@ -80,7 +80,7 @@ export function $$M19({
   filterParams: r,
   processedRequestIds: n
 }) {
-  let a = Rs(FuG, {
+  let a = Rs(AdminRequestDashboardRowIds, {
     planType: e,
     planId: t,
     filterParams: r

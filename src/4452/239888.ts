@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N as _$$N } from "../905/438674";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
@@ -18,7 +18,7 @@ import { B } from "../905/900597";
 import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { N as _$$N2 } from "../figma_app/55043";
-import { sMZ } from "../figma_app/43951";
+import { UserFlagByName } from "../figma_app/43951";
 import { px, S2, Um } from "../figma_app/465071";
 import { b as _$$b2, A as _$$A } from "../905/723768";
 var _ = m;
@@ -42,7 +42,7 @@ export function $$w0() {
     href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
     children: renderI18nText("resource_connection.request_modal.learn_more")
   });
-  let k = Rs(sMZ, {
+  let k = Rs(UserFlagByName, {
     name: "seen_connected_projects_org_member_banner"
   });
   let q = useMemo(() => "loaded" !== k.status || !!k.data?.currentUser?.userFlagByName, [k]);

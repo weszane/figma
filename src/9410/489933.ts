@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { selectWithShallowEqual } from "../905/103090";
 import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useMemo, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { A as _$$A } from "../vendor/850789";
 import { selectWithShallowEqual } from "../905/103090";
 import { zK } from "../figma_app/913823";

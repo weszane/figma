@@ -143,7 +143,7 @@ function e(t, d, f, p, g) {
             y++;
             A++;
           }
-          if (o[v] = y, y > i) f += 2;else if (A > n) d += 2;else if (h) {
+          if (o[v] = y, y > i) f += 2; else if (A > n) d += 2; else if (h) {
             var x = s + u - b;
             if (x >= 0 && x < l && -1 !== a[x]) {
               var N = i - a[x];
@@ -159,7 +159,7 @@ function e(t, d, f, p, g) {
             N++;
             w++;
           }
-          if (a[x] = N, N > i) g += 2;else if (w > n) p += 2;else if (!h) {
+          if (a[x] = N, N > i) g += 2; else if (w > n) p += 2; else if (!h) {
             var v = s + u - E;
             if (v >= 0 && v < l && -1 !== o[v]) {
               var y = o[v];
@@ -201,7 +201,7 @@ function e(t, d, f, p, g) {
         var f = h && r.match(a);
         var p = d && i.match(a);
         var g = f && t.match(c);
-        var m = p && e.match(u);
+        var m = p && e.match(ExpiringCache);
         return g || m ? 5 : f || p ? 4 : n && !h && d ? 3 : h || d ? 2 : n || s ? 1 : 0;
       }
       for (var r = 1; r < t.length - 1;) {
@@ -274,7 +274,7 @@ function n(t, e) {
   r > i ? t = t.substring(r - i) : r < i && (e = e.substring(0, r));
   var n = Math.min(r, i);
   if (t == e) return n;
-  for (s = 0, l = 1, void 0;;) {
+  for (s = 0, l = 1, void 0; ;) {
     var s;
     var l;
     var o = t.substring(n - l);

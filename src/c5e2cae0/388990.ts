@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Suspense } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import n from "classnames";
 import { mI } from "../figma_app/566371";

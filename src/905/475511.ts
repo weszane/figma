@@ -1,4 +1,4 @@
-import { eJ, Tq } from "../figma_app/243058";
+import { CodeLibraryIdHandler, CodeFileIdHandler } from "../figma_app/243058";
 import { PW } from "../905/497152";
 import { oz, nV } from "../905/808701";
 export function $$s1(e) {
@@ -28,9 +28,9 @@ function l(e) {
     isCodeBehavior,
     codeBehaviorData
   } = e.codeComponentFields;
-  let o = eJ.fromString(belongsToCodeLibraryId);
+  let o = CodeLibraryIdHandler.fromString(belongsToCodeLibraryId);
   if (!o) return null;
-  let l = Tq.fromString(exportedFromCodeFileId);
+  let l = CodeFileIdHandler.fromString(exportedFromCodeFileId);
   return l ? {
     belongsToCodeLibraryId: o,
     exportedFromCodeFileId: l,

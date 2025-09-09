@@ -1,44 +1,54 @@
-import { z } from '../905/239603';
-import { parseSessionLocalID } from '../905/871411';
-import { Lv } from '../905/929949';
-import { sD } from '../figma_app/243058';
-import { Axis, FileAndBranchTipType, PropertyScope, SchemaJoinStatus, ViewType, LayoutTabType, DesignGraphElements, DiagramElementType, UserActionState, NodePropertyCategory, NoneColor, SessionStatus, BranchingOperation, VariableDataType } from '../figma_app/763686';
-export let $$l3 = z.string();
-z.string();
-export let $$d1 = {
-  isInitialized: !1,
-  hasMissingFonts: !1,
+import type { SessionLocalID } from '../905/871411'
+import { z } from 'zod'
+import { parseSessionLocalID } from '../905/871411'
+import { getResolvedTypeName } from '../905/929949'
+import { VariableIdHandler } from '../figma_app/243058'
+import { Axis, BranchingOperation, DesignGraphElements, DiagramElementType, FileAndBranchTipType, LayoutTabType, NodePropertyCategory, NoneColor, PropertyScope, SchemaJoinStatus, SessionStatus, UserActionState, VariableDataType, ViewType } from '../figma_app/763686'
+
+/**
+ * Zod schema for string validation.
+ * Original name: $$l3
+ */
+export const stringSchema = z.string()
+
+/**
+ * Default application state object.
+ * Original name: $$d1
+ */
+export const defaultAppState = {
+  isInitialized: false,
+  hasMissingFonts: false,
   activeUserAction: UserActionState.DEFAULT,
   currentTool: DesignGraphElements.SELECT,
   currentStampToolName: null,
   activeCanvasEditModeType: LayoutTabType.DESIGN_LAYOUT,
-  showUi: !0,
-  showKeyboardShortcuts: !1,
+  showUi: true,
+  showKeyboardShortcuts: false,
   topLevelMode: ViewType.LAYOUT,
   urlNodeId: '-1:-1',
-  showArtboardOutline: !1,
-  useRealmsForPluginDev: !1,
-  showComments: !0,
+  showArtboardOutline: false,
+  useRealmsForPluginDev: false,
+  showComments: true,
   currentSelectedGradientStop: {
     type: NoneColor.NONE,
-    index: -1
+    index: -1,
   },
   currentSelectedProperty: {
     type: NodePropertyCategory.NONE,
-    indices: []
+    indices: [],
   },
-  isUserPresent: !1,
-  showTogglePrototypeModeButton: !1,
-  forcePublishFlattened: !1,
-  prototypeCanvasUiVisible: !1,
-  showTooltips: !1,
-  prototypeBackgroundPickerOpen: !1,
+  isUserPresent: false,
+  showTogglePrototypeModeButton: false,
+  forcePublishFlattened: false,
+  prototypeCanvasUiVisible: false,
+  showTooltips: false,
+  prototypeBackgroundPickerOpen: false,
   pastableStyleCount: 0,
   statePropertyToFocus: '',
   hoveredNode: '',
   multiplayerSessionState: SchemaJoinStatus.UNJOINED,
-  isReadOnly: !0,
-  isSceneReadOnly: !0,
+  isReadOnly: true,
+  isSceneReadOnly: true,
   hyperlinkLocation: null,
   onCanvasNameEditorInfo: {
     mode: DiagramElementType.NONE,
@@ -47,37 +57,37 @@ export let $$d1 = {
     angle: 0,
     padding: {
       x: 0,
-      y: 0
+      y: 0,
     },
     margin: {
       x: 0,
-      y: 0
+      y: 0,
     },
     cornerRadius: 0,
     fontSize: 11,
     measurementId: '',
     initMeasurementText: '',
-    isCentered: !1,
-    invertTextPosition: !1,
+    isCentered: false,
+    invertTextPosition: false,
     axis: Axis.X,
     trackId: '',
-    isTLF: !1,
+    isTLF: false,
     initialText: '',
-    isShownOnLeft: !1,
-    shouldOpenDropdown: !1,
+    isShownOnLeft: false,
+    shouldOpenDropdown: false,
     varWidthNodeId: '',
     varWidthIndex: -1,
     varWidthTextDirection: {
       x: 0,
-      y: 0
-    }
+      y: 0,
+    },
   },
   votingSessionInfo: {
     sessionId: '',
     votingStage: SessionStatus.NO_SESSION,
     userVoteLimit: 0,
     votedNodes: [],
-    userIdToVoteStampIds: {}
+    userIdToVoteStampIds: {},
   },
   loadingEmbeds: [],
   temporarilyExpandedInstanceLayers: [],
@@ -88,10 +98,10 @@ export let $$d1 = {
   pagesList: [],
   devHandoffCodeLanguage: {
     type: 'first-party',
-    id: 'WEB'
+    id: 'WEB',
   },
   devHandoffPreferences: {
-    codeExtensionPreferences: {}
+    codeExtensionPreferences: {},
   },
   branchingSceneState: FileAndBranchTipType.ATTACHED_FILE_TIP,
   lastBranchingStagingAction: BranchingOperation.NONE,
@@ -103,171 +113,230 @@ export let $$d1 = {
       rangeText: '',
       rangeStart: 0,
       rangeEnd: 0,
-      noSuggestionsFound: !1
-    }
+      noSuggestionsFound: false,
+    },
   },
   onCanvasPillInfo: null,
   activeTextReviewPlugin: null,
-  hotReloadPluginDev: !0,
-  useLocalRelatedLinkPlugin: !1
-};
-var $$c4 = (e => (e[e.MIXED_OR_NO_SYMBOLS = 0] = 'MIXED_OR_NO_SYMBOLS', e[e.SYMBOLS_ONLY = 1] = 'SYMBOLS_ONLY', e))($$c4 || {});
-var $$u7 = (e => (e[e.NO = 0] = 'NO', e[e.YES = 1] = 'YES', e[e.YES_WITHOUT_TRACKING_AS_EDIT = 2] = 'YES_WITHOUT_TRACKING_AS_EDIT', e[e.YES_FORCE_TRACKING_AS_EDIT = 3] = 'YES_FORCE_TRACKING_AS_EDIT', e[e.NO_BUT_TRACK_AS_EDIT = 4] = 'NO_BUT_TRACK_AS_EDIT', e))($$u7 || {});
-var $$p2 = (e => (e[e.NOT_ASSET = 0] = 'NOT_ASSET', e[e.ASSET_ICON = 1] = 'ASSET_ICON', e[e.ASSET_IMAGE = 2] = 'ASSET_IMAGE', e[e.ASSET_GIF = 4] = 'ASSET_GIF', e[e.ASSET_VIDEO = 8] = 'ASSET_VIDEO', e[e.ASSET_COMPONENT = 16] = 'ASSET_COMPONENT', e[e.ASSET_ILLUSTRATION = 32] = 'ASSET_ILLUSTRATION', e))($$p2 || {});
-export function $$_0(e) {
-  return e.map(e => PropertyScope[e]);
+  hotReloadPluginDev: true,
+  useLocalRelatedLinkPlugin: false,
 }
-export function $$h5(e) {
-  return e ? e.map(e => PropertyScope[e]) : [PropertyScope.ALL_SCOPES];
+
+/**
+ * Enum for symbol usage.
+ * Original name: $$c4
+ */
+export enum SymbolUsageEnum {
+  MIXED_OR_NO_SYMBOLS = 0,
+  SYMBOLS_ONLY = 1,
 }
-export function $$m6(e) {
-  let t = {
-    entries: []
-  };
-  Object.keys(e).forEach(r => {
-    let o = e[r];
-    if (o) {
-      if (o.isMixed) return;
-      {
-        let e = function (e) {
-          function t(e) {
-            if (e.type !== VariableDataType.ALIAS) return null;
-            let t = sD.fromString(e.value);
-            return t ? sD.toKiwi(t) : null;
+export const symbolUsageEnum = SymbolUsageEnum
+
+/**
+ * Enum for yes/no tracking options.
+ * Original name: $$u7
+ */
+export enum YesNoTrackingEnum {
+  NO = 0,
+  YES = 1,
+  YES_WITHOUT_TRACKING_AS_EDIT = 2,
+  YES_FORCE_TRACKING_AS_EDIT = 3,
+  NO_BUT_TRACK_AS_EDIT = 4,
+}
+export const yesNoTrackingEnum = YesNoTrackingEnum
+
+/**
+ * Enum for asset types.
+ * Original name: $$p2
+ */
+export enum AssetTypeEnum {
+  NOT_ASSET = 0,
+  ASSET_ICON = 1,
+  ASSET_IMAGE = 2,
+  ASSET_GIF = 4,
+  ASSET_VIDEO = 8,
+  ASSET_COMPONENT = 16,
+  ASSET_ILLUSTRATION = 32,
+}
+export const assetTypeEnum = AssetTypeEnum
+
+/**
+ * Maps array of property scope keys to their corresponding PropertyScope values.
+ * Original name: $$_0
+ * @param keys Array of PropertyScope keys
+ * @returns Array of PropertyScope values
+ */
+export function mapPropertyScopeKeys(keys: (keyof typeof PropertyScope)[]): PropertyScope[] {
+  return keys.map(key => PropertyScope[key])
+}
+
+/**
+ * Maps array of property scope keys to their corresponding PropertyScope values, or returns all scopes if input is falsy.
+ * Original name: $$h5
+ * @param keys Array of PropertyScope keys or undefined
+ * @returns Array of PropertyScope values
+ */
+export function getPropertyScopes(keys?: (keyof typeof PropertyScope)[]): PropertyScope[] {
+  return keys ? keys.map(key => PropertyScope[key]) : [PropertyScope.ALL_SCOPES]
+}
+
+/**
+ * Converts variable data object to a structured variable entries object.
+ * Original name: $$m6
+ * @param variableData Object containing variable data fields
+ * @returns Object with entries array
+ */
+export function convertVariableDataToEntries(variableData: Record<string, any>) {
+  const result: { entries: any[] } = { entries: [] }
+
+  Object.keys(variableData).forEach((field) => {
+    const value = variableData[field]
+    if (value) {
+      if (value.isMixed)
+        return
+      function convertVariableData(variable: any) {
+        /**
+         * Helper to resolve alias variable IDs.
+         */
+        function resolveAlias(variable: any) {
+          if (variable.type !== VariableDataType.ALIAS)
+            return null
+          const id = VariableIdHandler.fromString(variable.value)
+          return id ? VariableIdHandler.toKiwi(id) : null
+        }
+
+        switch (variable.type) {
+          case VariableDataType.BOOLEAN:
+            return {
+              dataType: 'BOOLEAN',
+              resolvedDataType: 'BOOLEAN',
+              value: { boolValue: variable.value },
+            }
+          case VariableDataType.FLOAT:
+            return {
+              dataType: 'FLOAT',
+              resolvedDataType: 'FLOAT',
+              value: { floatValue: variable.value },
+            }
+          case VariableDataType.COLOR:
+            return {
+              dataType: 'COLOR',
+              resolvedDataType: 'COLOR',
+              value: { colorValue: variable.value },
+            }
+          case VariableDataType.STRING:
+            return {
+              dataType: 'STRING',
+              resolvedDataType: 'STRING',
+              value: { textValue: variable.value },
+            }
+          case VariableDataType.ALIAS: {
+            const alias = resolveAlias(variable)
+            if (!alias)
+              return null
+            return {
+              dataType: 'ALIAS',
+              resolvedDataType: getResolvedTypeName(variable.resolvedType),
+              value: { alias },
+            }
           }
-          switch (e.type) {
-            case VariableDataType.BOOLEAN:
+          case VariableDataType.NODE_FIELD_ALIAS: {
+            const guids: SessionLocalID[] = []
+            for (const stablePath of variable.value.stablePathToNode) {
+              const parsed = parseSessionLocalID(stablePath)
+              if (!parsed)
+                return null
+              guids.push(parsed)
+            }
+            const nodeField = variable.value.nodeField
+            const indexOrKey = variable.value.indexOrKey
+            if (!guids || !nodeField || !indexOrKey)
+              return null
+            if (nodeField === 'COMPONENT_PROP_ASSIGNMENTS') {
               return {
-                dataType: 'BOOLEAN',
-                resolvedDataType: 'BOOLEAN',
+                dataType: 'NODE_FIELD_ALIAS',
+                resolvedDataType: getResolvedTypeName(variable.resolvedType),
                 value: {
-                  boolValue: e.value
-                }
-              };
-            case VariableDataType.FLOAT:
-              return {
-                dataType: 'FLOAT',
+                  nodeFieldAliasValue: {
+                    stablePathToNode: { guids },
+                    nodeField,
+                    indexOrKey,
+                  },
+                },
+              }
+            }
+            return null
+          }
+          case VariableDataType.FONT_STYLE: {
+            let fontStyleEntry = null
+            if (variable.value.asFloat && resolveAlias(variable.value.asFloat)) {
+              fontStyleEntry = {
                 resolvedDataType: 'FLOAT',
-                value: {
-                  floatValue: e.value
-                }
-              };
-            case VariableDataType.COLOR:
-              return {
-                dataType: 'COLOR',
-                resolvedDataType: 'COLOR',
-                value: {
-                  colorValue: e.value
-                }
-              };
-            case VariableDataType.STRING:
-              return {
-                dataType: 'STRING',
+                fontStyleKey: 'asFloat',
+                variableId: resolveAlias(variable.value.asFloat),
+              }
+            }
+            else if (variable.value.asString && resolveAlias(variable.value.asString)) {
+              fontStyleEntry = {
                 resolvedDataType: 'STRING',
-                value: {
-                  textValue: e.value
-                }
-              };
-            case VariableDataType.ALIAS:
-              {
-                let r = t(e);
-                if (!r) return null;
-                return {
-                  dataType: 'ALIAS',
-                  resolvedDataType: Lv(e.resolvedType),
-                  value: {
-                    alias: r
-                  }
-                };
+                fontStyleKey: 'asString',
+                variableId: resolveAlias(variable.value.asString),
               }
-            case VariableDataType.NODE_FIELD_ALIAS:
-              {
-                let t = [];
-                for (let r of e.value.stablePathToNode) {
-                  let e = parseSessionLocalID(r);
-                  if (!e) return null;
-                  t.push(e);
-                }
-                let r = e.value.nodeField;
-                let n = e.value.indexOrKey;
-                if (!t || !r || !n) return null;
-                if (r === 'COMPONENT_PROP_ASSIGNMENTS') {
-                  return {
-                    dataType: 'NODE_FIELD_ALIAS',
-                    resolvedDataType: Lv(e.resolvedType),
-                    value: {
-                      nodeFieldAliasValue: {
-                        stablePathToNode: {
-                          guids: t
-                        },
-                        nodeField: r,
-                        indexOrKey: n
-                      }
-                    }
-                  };
-                }
-                return null;
-              }
-            case VariableDataType.FONT_STYLE:
-              {
-                let r = e.value.asFloat && t(e.value.asFloat) ? {
-                  resolvedDataType: 'FLOAT',
-                  fontStyleKey: 'asFloat',
-                  variableId: t(e.value.asFloat)
-                } : e.value.asString && t(e.value.asString) ? {
-                  resolvedDataType: 'STRING',
-                  fontStyleKey: 'asString',
-                  variableId: t(e.value.asString)
-                } : null;
-                if (!r) return null;
-                return {
-                  dataType: 'FONT_STYLE',
-                  resolvedDataType: 'FONT_STYLE',
-                  value: {
-                    fontStyleValue: {
-                      [r.fontStyleKey]: {
-                        dataType: 'ALIAS',
-                        resolvedDataType: r.resolvedDataType,
-                        value: {
-                          alias: r.variableId
-                        }
-                      }
-                    }
-                  }
-                };
-              }
-            case VariableDataType.MAP:
-            case VariableDataType.EXPRESSION:
-            case VariableDataType.SYMBOL_ID:
-            case VariableDataType.TEXT_DATA:
-            case VariableDataType.MANAGED_STRING_ALIAS:
-            case VariableDataType.CMS_ALIAS:
-            case VariableDataType.IMAGE:
-            case VariableDataType.LINK:
-            case VariableDataType.JS_RUNTIME_ALIAS:
-            case VariableDataType.SLOT_CONTENT_ID:
-            case VariableDataType.DATE:
-              return null;
+            }
+            if (!fontStyleEntry)
+              return null
+            return {
+              dataType: 'FONT_STYLE',
+              resolvedDataType: 'FONT_STYLE',
+              value: {
+                fontStyleValue: {
+                  [fontStyleEntry.fontStyleKey]: {
+                    dataType: 'ALIAS',
+                    resolvedDataType: fontStyleEntry.resolvedDataType,
+                    value: { alias: fontStyleEntry.variableId },
+                  },
+                },
+              },
+            }
           }
-        }(o);
-        e && t.entries?.push({
-          variableData: e,
-          variableField: r
-        });
+          // Unsupported types
+          case VariableDataType.MAP:
+          case VariableDataType.EXPRESSION:
+          case VariableDataType.SYMBOL_ID:
+          case VariableDataType.TEXT_DATA:
+          case VariableDataType.MANAGED_STRING_ALIAS:
+          case VariableDataType.CMS_ALIAS:
+          case VariableDataType.IMAGE:
+          case VariableDataType.LINK:
+          case VariableDataType.JS_RUNTIME_ALIAS:
+          case VariableDataType.SLOT_CONTENT_ID:
+          case VariableDataType.DATE:
+            return null
+        }
       }
-    } else {
-      t.entries.push({
-        variableField: r
-      });
+      const entry = convertVariableData(value)
+      if (entry) {
+        result.entries.push({
+          variableData: entry,
+          variableField: field,
+        })
+      }
     }
-  });
-  return t;
+    else {
+      result.entries.push({
+        variableField: field,
+      })
+    }
+  })
+  return result
 }
-export const Ae = $$_0;
-export const Gf = $$d1;
-export const PW = $$p2;
-export const ZI = $$l3;
-export const fV = $$c4;
-export const gK = $$h5;
-export const w3 = $$m6;
-export const zk = $$u7;
+
+// Export original names for compatibility
+export const Ae = mapPropertyScopeKeys
+export const Gf = defaultAppState
+export const PW = assetTypeEnum
+export const ZI = stringSchema
+export const fV = symbolUsageEnum
+export const gK = getPropertyScopes
+export const w3 = convertVariableDataToEntries
+export const zk = yesNoTrackingEnum

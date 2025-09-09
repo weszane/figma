@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { y } from "../905/958284";
 import { r as _$$r } from "../905/121508";
 let o = e => {
@@ -87,7 +87,7 @@ export function $$l0(e, t) {
         }
       }(e)
     };
-    k.log("Curator", JSON.stringify(t, null, 2));
+    logger.log("Curator", JSON.stringify(t, null, 2));
   }
 }
 export const R = $$l0;

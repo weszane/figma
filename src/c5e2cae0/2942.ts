@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { nD } from "../figma_app/416935";
 import { ZC } from "../figma_app/39751";
@@ -17,7 +17,7 @@ import { FFileType } from "../figma_app/191312";
 import { UpgradeSteps, SubscriptionType } from "../figma_app/831101";
 import { D } from "../905/347702";
 import { lX, nt } from "../9420/394825";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { GH } from "../905/18797";
 import { BR, Ky, fD, Rq } from "../figma_app/345997";
 let $$b2 = D(({
@@ -28,7 +28,7 @@ let $$b2 = D(({
   let p = useSelector(e => e.loadingState);
   let x = useSelector(t => e ? t.teamUserByTeamId[e] : null);
   let y = useSelector(e => e.selectedView);
-  let b = iZ();
+  let b = selectCurrentUser();
   let [w, A] = useState(!0);
   let I = ZC(e);
   let k = _$$sx();

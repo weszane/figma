@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useId, Component } from "react";
-import { connect, useSelector, useDispatch } from "../vendor/514228";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { sha1Hex } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -12,7 +12,7 @@ import h from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { buildUploadUrl } from "../figma_app/169182";
 import { ZB } from "../905/491152";
 import { reportError } from "../905/11";
@@ -22,8 +22,8 @@ import { CY, N_ } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { R as _$$R } from "../905/792510";
 import { W as _$$W } from "../905/841666";
 import { Lj } from "../figma_app/835219";
@@ -45,7 +45,7 @@ import { Wi, sD, IZ, oH, EL, qA, UP } from "../figma_app/740025";
 import { Ii, vC, $x, nK, $W, j4, xw } from "../figma_app/599979";
 import { D as _$$D } from "../905/274925";
 import { Ni } from "../figma_app/188152";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { bH, cp, HF, zv, yS, cU, vK, Rj, al, a6, ow } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
@@ -459,14 +459,14 @@ class ts extends Component {
           let t = this.props.hubFile.comments_setting === Ni.ENABLED && this.props.hubFile.viewer_mode !== FTemplateCategoryType.PROTOTYPE;
           let i = metadata.commentsSetting === Ni.ENABLED && metadata.viewerMode !== FTemplateCategoryType.PROTOTYPE;
           (metadata.commentsSetting !== this.props.hubFile.comments_setting || t !== i) && this.props.dispatch(cO());
-          this.props.isEditHubFilePageMode && Ay.reload("Published hubfile updated");
-          this.props.dispatch(_$$F.enqueue({
+          this.props.isEditHubFilePageMode && customHistory.reload("Published hubfile updated");
+          this.props.dispatch(VisualBellActions.enqueue({
             message: getI18nString("community.publishing.changes_saved"),
-            icon: zX.CHECK
+            icon: VisualBellIcon.CHECK
           }));
         }), this.setState({
           step: 2
-        })) : this.props.dispatch(_$$F.enqueue({
+        })) : this.props.dispatch(VisualBellActions.enqueue({
           message: getI18nString("community.error.profile_not_found"),
           error: !0
         }));
@@ -883,7 +883,7 @@ class ts extends Component {
       });
     }) : (this.setState({
       isGeneratingThumbnail: !1
-    }), this.props.dispatch(_$$F.enqueue({
+    }), this.props.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.error.slide_template_publishing_error"),
       error: !0
     })));
@@ -1390,7 +1390,7 @@ let $$tl0 = registerModal(function (e) {
     hubFileId: e.hubFile.id
   }));
   let a = e.hubFile?.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE;
-  let o = Pc();
+  let o = selectUser();
   let {
     addCommunityProfileUser,
     setNextStep,
@@ -1455,7 +1455,7 @@ let $$tl0 = registerModal(function (e) {
   if (step === _$$D.Step.CONNECT_PROFILES) return jsx(_$$$, {
     onSubmit: i => {
       if (setNextStep(_$$D.Step.INFO), !i || !e.publisher) {
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           type: "profile-merge-error",
           message: getI18nString("community.publishing.unable_to_connect_profiles"),
           error: !0
@@ -1522,7 +1522,7 @@ let $$tl0 = registerModal(function (e) {
             view: "communityHub",
             subView: "hubFile",
             hubFileId: e.hubFile.id
-          })) : Ay.redirect(n, "_blank"), h());
+          })) : customHistory.redirect(n, "_blank"), h());
         },
         text: getI18nString("community.publishing.view_page"),
         dataTestId: "hub-file-publish-view-page"

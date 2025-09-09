@@ -1,31 +1,63 @@
-import { atom, atomStoreManager } from "../figma_app/27355";
-import { z } from "../905/239603";
-import { isZoomIntegration } from "../figma_app/469876";
-import { m } from "../905/298920";
-import { G } from "../905/231128";
-export function $$l2(e) {
-  return !!(isZoomIntegration() && G()) && (m({
-    url: e
-  }), !0);
+import type { PrimitiveAtom } from 'jotai'
+import { z } from 'zod'
+import { isNotTopWindow } from '../905/231128'
+import { sendMessageToParent } from '../905/298920'
+import { atom, atomStoreManager } from '../figma_app/27355'
+import { isZoomIntegration } from '../figma_app/469876'
+
+/**
+ * Sends a URL message to the parent window if running in Zoom integration and not top window.
+ * @param url - The URL to send.
+ * @returns True if the message was sent, false otherwise.
+ * (Original: $$l2)
+ */
+export function sendUrlToParent(url: string): boolean {
+  if (!(isZoomIntegration() && isNotTopWindow()))
+    return false
+  sendMessageToParent({ url })
+  return true
 }
-export function $$d1() {
-  return !!(isZoomIntegration() && G()) && (m({
-    action: "backToFiles"
-  }), !0);
+
+/**
+ * Sends a 'backToFiles' action message to the parent window if running in Zoom integration and not top window.
+ * @returns True if the message was sent, false otherwise.
+ * (Original: $$d1)
+ */
+export function sendBackToFilesAction(): boolean {
+  if (!(isZoomIntegration() && isNotTopWindow()))
+    return false
+  sendMessageToParent({ action: 'backToFiles' })
+  return true
 }
-let $$c3 = atom(null);
-let u = z.object({
-  type: z.literal("collaborationHostNameMessage"),
-  collaborationHostName: z.string().nullable().optional()
-});
-export function $$p0(e) {
-  if (e.origin !== window.self.origin) return;
-  let t = u.safeParse(e.data);
-  if (!t.success) return;
-  let r = t.data;
-  "collaborationHostNameMessage" === r.type && atomStoreManager.set($$c3, r.collaborationHostName);
+
+// Atom to store collaboration host name (Original: $$c3)
+export const collaborationHostNameAtom = atom<string | null>(null)
+
+// Zod schema for collaboration host name message (Original: u)
+const collaborationHostNameMessageSchema = z.object({
+  type: z.literal('collaborationHostNameMessage'),
+  collaborationHostName: z.string().nullable().optional(),
+})
+
+/**
+ * Handles incoming messages for collaboration host name.
+ * @param event - The message event.
+ * (Original: $$p0)
+ */
+export function handleCollaborationHostNameMessage(event: MessageEvent) {
+  if (event.origin !== window.self.origin)
+    return
+  const result = collaborationHostNameMessageSchema.safeParse(event.data)
+  if (!result.success)
+    return
+  const { type, collaborationHostName } = result.data
+  if (type === 'collaborationHostNameMessage') {
+    atomStoreManager.set(collaborationHostNameAtom as PrimitiveAtom<string | null>, collaborationHostName)
+  }
 }
-export const FR = $$p0;
-export const LR = $$d1;
-export const Lf = $$l2;
-export const Ui = $$c3;
+
+// Exported aliases for backward compatibility
+export const FR = handleCollaborationHostNameMessage
+export const LR = sendBackToFilesAction
+export const Lf = sendUrlToParent
+export const Ui = collaborationHostNameAtom

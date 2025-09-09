@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useCallback, useState, createRef, useRef, useMemo, memo, Fragment as _$$Fragment, forwardRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { gZ, hE, HG, bL } from "../905/598775";
 import { IK } from "../905/521428";
 import { AppStateTsApi, Fullscreen, VariableDataType } from "../figma_app/763686";
@@ -8,9 +8,9 @@ import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { createAtomWithEquality, atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import h from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { D8, GG } from "../905/511649";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
@@ -79,7 +79,7 @@ function ep({
     a.includes(e) || i();
   }, [a, e, i]);
   return jsx("div", {
-    "data-testid": Pt(eu, e),
+    "data-testid": generateRecordingKey(eu, e),
     children: jsx(_$$k2, {
       name: "slides_advanced_edit_theme_modal",
       children: jsx(_$$bL, {
@@ -131,7 +131,7 @@ function em({
       o && (AppStateTsApi.slideThemeLibBindings().deleteTheme(e), trackEventAnalytics("Theme Removed"), i());
     });
   }, [e, o, i]);
-  let m = Pt(t, "removeTheme");
+  let m = generateRecordingKey(t, "removeTheme");
   return jsx(_$$K, {
     htmlAttributes: {
       "data-tooltip": c,
@@ -162,7 +162,7 @@ function eg({
     children: [jsx(_$$E, {
       className: "slides_edit_theme_modal--themeNameDisplay--i3HaU",
       onClick: () => s(!0),
-      recordingKey: Pt(t, "editThemeNameButton"),
+      recordingKey: generateRecordingKey(t, "editThemeNameButton"),
       "aria-describedby": eh,
       children: i
     }), jsx(_$$E2, {
@@ -199,7 +199,7 @@ function ef({
     onChange: u,
     onKeyDown: p,
     placeholder: getI18nString("slides.properties_panel.theme.panel_title"),
-    recordingKey: Pt(i, "editThemeName"),
+    recordingKey: generateRecordingKey(i, "editThemeName"),
     value: s
   });
 }
@@ -249,7 +249,7 @@ function eA({
   recordingKey: o
 }) {
   let c = function (e) {
-    let t = k9(() => e.map(e => e.node_id), [e]);
+    let t = useMemoStable(() => e.map(e => e.node_id), [e]);
     return Fk((e, t) => {
       let i = {};
       for (let n of t) {
@@ -354,7 +354,7 @@ function ey({
   useEffect(() => () => {
     b(sw());
   }, [b]);
-  let D = Pt(c, "textStyleRow", t.node_id);
+  let D = generateRecordingKey(c, "textStyleRow", t.node_id);
   return jsx(D8, {
     "aria-controls": _$$W2,
     "aria-expanded": E,
@@ -439,7 +439,7 @@ function ev({
       };
     });
   }, [o, t]);
-  let c = k9(() => ({
+  let c = useMemoStable(() => ({
     color: i,
     minHeight: KL.MIN_THEME_TEXT_STYLE_PREVIEW_HEIGHT,
     maxHeight: KL.MAX_THEME_TEXT_STYLE_PREVIEW_HEIGHT,
@@ -590,7 +590,7 @@ function ex({
             },
             onContextMenu: lQ,
             opacity: paint.color.a,
-            recordingKey: Pt(t, "colorChit", variableId),
+            recordingKey: generateRecordingKey(t, "colorChit", variableId),
             showEditIcon: !0,
             tooltipText: variableName
           }, variableId);
@@ -928,12 +928,12 @@ let eW = memo(function ({
 }) {
   let A = kO(e);
   let y = lK(e);
-  let b = k9(() => y, [y]);
+  let b = useMemoStable(() => y, [y]);
   let v = Xo(e);
-  let I = k9(() => v.map(e => e.node_id), [v]);
+  let I = useMemoStable(() => v.map(e => e.node_id), [v]);
   let [E, x] = useState(!1);
   let w = p && (E || h);
-  let C = k9(() => {
+  let C = useMemoStable(() => {
     let e = b.map(e => o.has(e.variableId) ? e.paint.color : null).filter(e => !!e);
     let t = b.map(e => o.has(e.variableId) ? null : e.paint.color).filter(e => !!e);
     let i = [];
@@ -1166,7 +1166,7 @@ export function $$eX0({
         }
         return i;
       }, e);
-      return k9(() => t, [t]);
+      return useMemoStable(() => t, [t]);
     }();
     let _ = useSelector(e => e.fonts);
     let A = UG();
@@ -1186,7 +1186,7 @@ export function $$eX0({
         name: h[r] ?? "",
         onClickEdit: d ? e => d(e, r) : void 0,
         onClickRow: () => o(r, Array.from(g[r] ?? eZ)),
-        recordingKey: Pt(c, "option", r),
+        recordingKey: generateRecordingKey(c, "option", r),
         themeId: r,
         width: t
       })
@@ -1325,7 +1325,7 @@ function eJ({
     children: jsx(IK, {
       variant: "secondary",
       onClick: e,
-      recordingKey: Pt(t, "createThemeButton"),
+      recordingKey: generateRecordingKey(t, "createThemeButton"),
       children: getI18nString("slides.properties_panel.theme.theme_dropdown.create_new_theme_button")
     })
   }, "create_new_slide_theme_button");
@@ -1351,7 +1351,7 @@ function e0({
       [e$]: r === t
     }),
     forwardedRef: e => a(t, e),
-    recordingKey: Pt(o, "option", t),
+    recordingKey: generateRecordingKey(o, "option", t),
     children: e
   }, t);
 }

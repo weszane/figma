@@ -3,13 +3,13 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { w as _$$w } from "../905/5147";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { isLocalDevOnCluster } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
 import { reportError, setSentryTag } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { nA, lp, eH, J4 } from "../figma_app/91703";
 import { x2 } from "../figma_app/714946";
@@ -24,7 +24,7 @@ import { l as _$$l } from "../905/26554";
 import { $5 } from "../figma_app/869006";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -138,7 +138,7 @@ function K(e) {
         await j(i.signalPayload, n);
       } else {
         let e = `/file/${t.fileKey}/?viewer=1&node-id=${n}`;
-        Ay.redirect(e);
+        customHistory.redirect(e);
       }
     }
   };
@@ -236,14 +236,14 @@ let X = registerModal(function () {
   });
 }, "MultiplayerCursorLimitModal");
 export let $$ec1 = createOptimistThunk(e => {
-  let t = parseQuery(Ay.location.search).flash;
+  let t = parseQuery(customHistory.location.search).flash;
   t && e.dispatch(_$$s.flash(t));
 });
 export class $$eu0 {
   constructor(e) {
     this.store = e;
     this.hasShownMultiplayerDecodeError = !1;
-    this.dispatch = () => {};
+    this.dispatch = () => { };
     this.hasUnsavedChanges = () => {
       let e = this.store.getState();
       return !!(e.saveStatus && e.saveStatus.hasUnsavedChanges);
@@ -301,7 +301,7 @@ export class $$eu0 {
     AW();
   }
   handleMultiplayerSignal(e, t, i) {
-    if ("force-refresh" === e) Ay.reload("Multiplayer got force-refresh signal");else if ("too-many-connections" === e) {
+    if ("force-refresh" === e) customHistory.reload("Multiplayer got force-refresh signal"); else if ("too-many-connections" === e) {
       if (this.hasUnsavedChanges()) {
         let e = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved");
         let t = getI18nString("unsaved_changes.syncing.too_many_people_in_file");
@@ -319,9 +319,9 @@ export class $$eu0 {
           signalPayload: t
         }
       }));
-    } else if ("message-decode-failure" === e) this.hasShownMultiplayerDecodeError || (this.hasShownMultiplayerDecodeError = !0, this.dispatch(_$$F.enqueue({
+    } else if ("message-decode-failure" === e) this.hasShownMultiplayerDecodeError || (this.hasShownMultiplayerDecodeError = !0, this.dispatch(VisualBellActions.enqueue({
       message: getI18nString("unsaved_changes.syncing.experiencing_server_issues")
-    })));else if ("invalid-permissions" === e) {
+    }))); else if ("invalid-permissions" === e) {
       let e;
       let t;
       this.hasUnsavedChanges() ? (t = getI18nString("unsaved_changes.syncing.changes_cannot_be_saved"), e = getI18nString("unsaved_changes.syncing.unsaved_revoked_access")) : (t = getI18nString("unsaved_changes.syncing.access_revoked"), e = getI18nString("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(eH({
@@ -393,7 +393,7 @@ export class $$eu0 {
           nodeId: e,
           movedToFile: r
         }
-      })) : this.store.dispatch(_$$F.enqueue({
+      })) : this.store.dispatch(VisualBellActions.enqueue({
         message: r ? getI18nString("unsaved_changes.syncing.the_main_component_has_been_moved_to_moved_to_file", {
           movedToFile: r
         }) : getI18nString("unsaved_changes.syncing.the_main_component_has_been_deleted")
@@ -401,7 +401,7 @@ export class $$eu0 {
     }
   }
   showComponentRemovedDialog() {
-    this.store.dispatch(_$$F.enqueue({
+    this.store.dispatch(VisualBellActions.enqueue({
       message: getI18nString("design_systems.instance_panel.component_removed")
     }));
   }
@@ -429,7 +429,7 @@ export class $$eu0 {
     return g.toString();
   }
   notifyCursorHidden() {
-    this.store.dispatch(_$$F.enqueue({
+    this.store.dispatch(VisualBellActions.enqueue({
       message: getI18nString("unsaved_changes.syncing.your_cursor_has_been_hidden_from_others_users"),
       button: {
         text: getI18nString("unsaved_changes.syncing.learn_more"),
@@ -439,24 +439,24 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => {}
+      onDismiss: () => { }
     }));
   }
   isWindowActive() {
     return !document.hidden;
   }
   notifyCursorUnhiddenFromObserver() {
-    this.store.dispatch(_$$F.enqueue({
+    this.store.dispatch(VisualBellActions.enqueue({
       message: getI18nString("unsaved_changes.syncing.your_cursor_is_now_visible_to_others_as_someone_is_observing_you")
     }));
   }
   notifyCursorUnhiddenFromConnectionCount() {
-    this.store.dispatch(_$$F.enqueue({
+    this.store.dispatch(VisualBellActions.enqueue({
       message: getI18nString("unsaved_changes.syncing.your_cursor_is_now_visible_to_others_as_users_have_left_the_file")
     }));
   }
   notifyEditorConvertedToViewer() {
-    this.store.dispatch(_$$F.enqueue({
+    this.store.dispatch(VisualBellActions.enqueue({
       message: getI18nString("unsaved_changes.syncing.you_have_been_converted_to_a_viewer_with_a_hidden_cursor"),
       button: {
         text: getI18nString("unsaved_changes.syncing.learn_more"),
@@ -466,7 +466,7 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => {}
+      onDismiss: () => { }
     }));
   }
   prettyPrintMessage(e) {

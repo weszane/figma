@@ -10,9 +10,9 @@ import { getInitialOptions } from "../figma_app/169182";
 import { NU } from "../905/11";
 import { logDebug, logWarning } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { b as _$$b } from "../905/985254";
-import { k as _$$k } from "../905/651849";
+import { logger } from "../905/651849";
 import { uE } from "../figma_app/314264";
 function y() {
   return debugState || (logDebug("Labs", "No global redux store set, so creating a mock store with empty userFlags"), y$(() => ({
@@ -66,7 +66,7 @@ class b {
       canOverride: i,
       defaultValue: n
     }) {
-      return i ? e && t ? (_$$k.error("[getEffectiveLabValue] Both override flags are set"), n) : !!e || !t && n : n;
+      return i ? e && t ? (logger.error("[getEffectiveLabValue] Both override flags are set"), n) : !!e || !t && n : n;
     }({
       trueOverrideUserFlag: t,
       falseOverrideUserFlag: i,
@@ -96,7 +96,7 @@ class b {
     };
     a[r ? this.trueOverrideUserFlag : this.falseOverrideUserFlag] = !0;
     t(_$$b(a));
-    t(F.enqueue({
+    t(VisualBellActions.enqueue({
       message: this.getVisualBellMessage(r)
     }));
     this.trackChange({

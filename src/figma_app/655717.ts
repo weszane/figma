@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import a from "../vendor/77708";
 import { selectWithShallowEqual } from "../905/103090";
 import { uQ } from "../figma_app/311375";

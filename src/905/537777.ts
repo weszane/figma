@@ -1,11 +1,11 @@
-import { gr } from "../figma_app/243058";
+import { VariableSetIdCompatHandler } from "../figma_app/243058";
 export function $$r3(e) {
-  let t = gr.fromString(e);
-  return t ? gr.toKiwi(t) : null;
+  let t = VariableSetIdCompatHandler.fromString(e);
+  return t ? VariableSetIdCompatHandler.toKiwi(t) : null;
 }
 export function $$a1(e) {
-  let t = gr.fromKiwi(e);
-  return t ? gr.toString(t) : "<invalid>";
+  let t = VariableSetIdCompatHandler.fromKiwi(e);
+  return t ? VariableSetIdCompatHandler.toString(t) : "<invalid>";
 }
 export function $$s4(e) {
   return $$a1({
@@ -13,14 +13,14 @@ export function $$s4(e) {
   });
 }
 export function $$o0(e, t) {
-  return gr.toString(gr.fromRef({
+  return VariableSetIdCompatHandler.toString(VariableSetIdCompatHandler.fromRef({
     key: e,
     version: t
   }));
 }
 export function $$l2(e) {
-  let t = gr.fromString(e);
-  return !!t && gr.isValid(t);
+  let t = VariableSetIdCompatHandler.fromString(e);
+  return !!t && VariableSetIdCompatHandler.isValid(t);
 }
 export const Hc = $$o0;
 export const dI = $$a1;

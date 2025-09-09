@@ -14,7 +14,7 @@ import { z } from "../905/239603";
 import { u8 } from "../figma_app/976749";
 import { Eo } from "../figma_app/80990";
 import { FComponentType } from "../figma_app/191312";
-import { IUX, Bu2 } from "../figma_app/43951";
+import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
 import { Zi } from "../905/395857";
 import { FEditorType } from "../figma_app/53721";
 let I = z.object({
@@ -65,9 +65,9 @@ export async function $$w1() {
   let r = getFeatureFlags().ds_enable_code_presets_sidecar_table;
   let n = await Promise.all(libraryConfigs.map(async ({
     libraryKey: e
-  }) => r ? await subscribeAndAwaitData(IUX, {
+  }) => r ? await subscribeAndAwaitData(CodeComponentsInLibrary, {
     libraryKey: e
-  }) : await subscribeAndAwaitData(Bu2, {
+  }) : await subscribeAndAwaitData(LibraryAssetDataOfType, {
     libraryKey: e,
     assetType: FComponentType.CODE_COMPONENT
   })));
@@ -109,11 +109,11 @@ export function $$L3() {
   } = useAtomWithSubscription($$x2);
   let r = getFeatureFlags().ds_enable_code_presets_sidecar_table ? libraryConfigs.map(({
     libraryKey: e
-  }) => IUX.Query({
+  }) => CodeComponentsInLibrary.Query({
     libraryKey: e
   })) : libraryConfigs.map(({
     libraryKey: e
-  }) => Bu2.Query({
+  }) => LibraryAssetDataOfType.Query({
     libraryKey: e,
     assetType: FComponentType.CODE_COMPONENT
   }));

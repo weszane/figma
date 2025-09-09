@@ -1,6 +1,6 @@
 import { oneLine } from 'common-tags';
-import { az as extractFilterFields, Gz as getFilterReferences } from '../905/19248';
-import { V as isComputedField } from '../905/52806';
+import { collectLeftProperties, collectRightPropertiesWithType } from '../905/19248';
+import { isComputedField } from '../905/52806';
 import { isScalarField } from '../905/320277';
 import { hasCursorProperties, isEmbedded } from '../905/552287';
 import { areTypesCompatible, validateUniqueArgumentNames } from '../905/690753';
@@ -96,7 +96,7 @@ export class ObjectFieldDefinition {
     for (const {
       type,
       ref
-    } of getFilterReferences(this.filter)) {
+    } of collectRightPropertiesWithType(this.filter)) {
       if (type === 'parent') {
         fields.add(ref);
       }
@@ -115,7 +115,7 @@ export class ObjectFieldDefinition {
         fields.add(fieldName);
       }
     }
-    for (const fieldName of extractFilterFields(this.filter)) {
+    for (const fieldName of collectLeftProperties(this.filter)) {
       fields.add(fieldName);
     }
     return fields;

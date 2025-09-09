@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";

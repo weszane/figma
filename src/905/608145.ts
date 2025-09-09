@@ -7,10 +7,10 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { e as _$$e2 } from "../905/280005";
 import { reportError } from "../905/11";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { zM } from "../figma_app/580736";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { HT } from "../figma_app/69680";
@@ -21,10 +21,10 @@ import { s as _$$s } from "../905/58247";
 import { showModalHandler } from "../905/156213";
 import { Q7 } from "../905/15667";
 import { s0 } from "../figma_app/350203";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { nV } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
-import { Br, ax, gX } from "../figma_app/741237";
+import { updateActiveTextReviewPlugin, setSelectedDevModePropertiesPanelTab, updateFullscreenAppModel } from "../figma_app/741237";
 import { $4 } from "../figma_app/506364";
 import { noop } from "../905/813868";
 import { xG } from "../905/277373";
@@ -57,7 +57,7 @@ export function $$Y2({
     name: {
       type: "string-key",
       key: e,
-      string: _$$A(e)
+      string: formatI18nMessage(e)
     },
     menuAction: t,
     disabled: i,
@@ -68,7 +68,7 @@ export function $$Y2({
   };
 }
 function q() {
-  fullscreenValue.dispatch(_$$F.enqueue({
+  fullscreenValue.dispatch(VisualBellActions.enqueue({
     message: "File must be fully loaded to run plugin.",
     type: "missing-file-key-to-run-plugin",
     error: !0
@@ -264,7 +264,7 @@ export function $$J0(e, t, i) {
       }
     case "set-text-review-plugin":
       if (O) return _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
-      Br(i.textReviewPluginInfo);
+      updateActiveTextReviewPlugin(i.textReviewPluginInfo);
       $4.reset();
       return;
     case "run-last":
@@ -293,7 +293,7 @@ export function $$J0(e, t, i) {
     case "manage-plugins":
       {
         if ("dev" === w || "inspect" === w) {
-          ax(IAssertResource.PLUGIN);
+          setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
           atomStoreManager.set(HT, "development");
           mN.getInstance()?.getIframeId() === Wh.INSPECT && wY();
           return;
@@ -323,7 +323,7 @@ export function $$J0(e, t, i) {
         return;
       }
     case "browse":
-      Ay.redirect("/community/plugins", "_blank");
+      customHistory.redirect("/community/plugins", "_blank");
       return;
     case "browse-plugins":
       if (nV(), fullscreenValue.dispatch(EG({
@@ -334,7 +334,7 @@ export function $$J0(e, t, i) {
         isWidget: !1,
         triggeredFrom: t
       }), "dev" === w || "inspect" === w) {
-        ax(IAssertResource.PLUGIN);
+        setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
         atomStoreManager.set(HT, "recents_and_saved");
         mN.getInstance()?.getIframeId() === Wh.INSPECT && wY();
         return;
@@ -459,7 +459,7 @@ export function $$J0(e, t, i) {
       {
         if (!W) return;
         let e = debugState.getState().mirror.appModel.useLocalRelatedLinkPlugin;
-        gX({
+        updateFullscreenAppModel({
           useLocalRelatedLinkPlugin: !e
         });
         return;
@@ -473,7 +473,7 @@ export function $$J0(e, t, i) {
     case "toggle-hot-reload-plugin-dev":
       {
         let e = debugState.getState().mirror.appModel.hotReloadPluginDev;
-        gX({
+        updateFullscreenAppModel({
           hotReloadPluginDev: !e
         });
         return;

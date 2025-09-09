@@ -1,6 +1,6 @@
 import { noop } from "../figma_app/465776";
 import { nearlyEqual } from "../figma_app/492908";
-import { Ws, GU, PK, sD, Kw, gr, cd, _H, Tq, eJ } from "../figma_app/243058";
+import { SymbolIdHandler, StateGroupIdHandler, StyleIdHandler, VariableIdHandler, VariableOverrideIdHandler, VariableSetIdCompatHandler, ResponsiveSetIdHandler, CodeComponentIdHandler, CodeFileIdHandler, CodeLibraryIdHandler } from "../figma_app/243058";
 import { sg, Xf, iU } from "../905/859698";
 import { qg } from "../figma_app/385874";
 import { og } from "../figma_app/646357";
@@ -86,37 +86,37 @@ export class $$g0 extends _$$s {
     return this.isSubscribedAsset ? this.assetRef ? e.fromRef(this.assetRef) : null : e.fromLocalNodeIdStr(this.guid);
   }
   get symbolId() {
-    return this.isSymbol ? this._assetId(Ws) : null;
+    return this.isSymbol ? this._assetId(SymbolIdHandler) : null;
   }
   get stateGroupId() {
-    return this.isStateGroup ? this._assetId(GU) : null;
+    return this.isStateGroup ? this._assetId(StateGroupIdHandler) : null;
   }
   get styleId() {
-    return this.isStyle ? this._assetId(PK) : null;
+    return this.isStyle ? this._assetId(StyleIdHandler) : null;
   }
   get variableId() {
-    return this.isVariable ? this._assetId(sD) : null;
+    return this.isVariable ? this._assetId(VariableIdHandler) : null;
   }
   get variableOverrideId() {
-    return this.isVariableOverride ? this._assetId(Kw) : null;
+    return this.isVariableOverride ? this._assetId(VariableOverrideIdHandler) : null;
   }
   get overriddenVariableId() {
-    return this.isVariableOverride && this.nodeChange.overriddenVariableId ? sD.fromKiwi(this.nodeChange.overriddenVariableId) : null;
+    return this.isVariableOverride && this.nodeChange.overriddenVariableId ? VariableIdHandler.fromKiwi(this.nodeChange.overriddenVariableId) : null;
   }
   get variableCollectionId() {
-    return this.isVariableCollection ? this._assetId(gr) : this.isVariable && this.nodeChange.variableSetID ? gr.fromKiwi(this.nodeChange.variableSetID) : null;
+    return this.isVariableCollection ? this._assetId(VariableSetIdCompatHandler) : this.isVariable && this.nodeChange.variableSetID ? VariableSetIdCompatHandler.fromKiwi(this.nodeChange.variableSetID) : null;
   }
   get responsiveSetAssetId() {
-    return this.isResponsiveSetAsset ? this._assetId(cd) : null;
+    return this.isResponsiveSetAsset ? this._assetId(ResponsiveSetIdHandler) : null;
   }
   get codeComponentId() {
-    return this.isCodeComponentAsset ? this._assetId(_H) : null;
+    return this.isCodeComponentAsset ? this._assetId(CodeComponentIdHandler) : null;
   }
   get codeFileId() {
-    return this.isCodeFileAsset ? this._assetId(Tq) : null;
+    return this.isCodeFileAsset ? this._assetId(CodeFileIdHandler) : null;
   }
   get codeLibraryId() {
-    return this.isCodeLibraryAsset ? this._assetId(eJ) : null;
+    return this.isCodeLibraryAsset ? this._assetId(CodeLibraryIdHandler) : null;
   }
   get publishId() {
     let e = this.nodeChange.publishID;
@@ -248,7 +248,7 @@ export class $$g0 extends _$$s {
       for (let i of GP) {
         let n = t[i];
         if (n) {
-          let t = PK.fromKiwi(n);
+          let t = StyleIdHandler.fromKiwi(n);
           t && e.push(t);
         }
       }
@@ -263,7 +263,7 @@ export class $$g0 extends _$$s {
     let e = new Set();
     function t(t) {
       if (!t) return;
-      let i = sD.fromKiwi(t);
+      let i = VariableIdHandler.fromKiwi(t);
       i && e.add(i);
     }
     for (let e of EI) !function (e) {
@@ -319,7 +319,7 @@ export class $$g0 extends _$$s {
       overrideKey: this.overrideKey,
       backingSymbolId: this.backingSymbolId,
       publishId: this.publishId,
-      consumedStyleIds: this.consumedStyleIds.map(PK.toString),
+      consumedStyleIds: this.consumedStyleIds.map(StyleIdHandler.toString),
       name: this.name,
       field: Object.keys(this.nodeChange),
       text: this.text,

@@ -1,9 +1,9 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { e as _$$e } from "../905/149844";
 import l from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Z6 } from "../figma_app/451499";
@@ -75,7 +75,7 @@ export function $$v1(e) {
         callback: () => t(e),
         icon: i,
         displayText: a,
-        recordingKey: Pt(n, "createActionOption", e),
+        recordingKey: generateRecordingKey(n, "createActionOption", e),
         "data-onboarding-key": `create-action-${e}`
       };
     }({
@@ -89,7 +89,7 @@ export function $$v1(e) {
   return jsxs(Fragment, {
     children: [jsx(e6, {
       ref: I,
-      recordingKey: Pt(recordingKey, "createActionDropdown"),
+      recordingKey: generateRecordingKey(recordingKey, "createActionDropdown"),
       className: R,
       onClick: A,
       "aria-label": getI18nString("proto.prototype_panel.create_action_button"),

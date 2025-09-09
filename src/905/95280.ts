@@ -1,12 +1,12 @@
 import { useMemo, useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { F } from "../905/241044";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX, Ox } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon, VisualBellShape } from "../905/576487";
 import { hideModal, showModalHandler } from "../905/156213";
 import { vF, HF } from "../figma_app/841351";
 import { jsx } from "react/jsx-runtime";
@@ -108,13 +108,13 @@ export function $$I0(e, t, i, n) {
   let r = F(i?.user.handle);
   if (r && i?.touched_at && Fullscreen.getChunkChangeMap().has(e)) {
     if (!Fullscreen.getChangesToCompareFromHistoryChangesState().has(e)) {
-      t(_$$F.dequeue({
+      t(VisualBellActions.dequeue({
         matchType: "view_changes"
       }));
       return;
     }
-    t(_$$F.dequeue({}));
-    t(_$$F.enqueue({
+    t(VisualBellActions.dequeue({}));
+    t(VisualBellActions.enqueue({
       message: getI18nString("collaboration.feedback.compare_changes_modal.action_text", {
         lastEditedBy: r,
         lastEditedAt: _$$A(i.touched_at).fromNow()
@@ -135,8 +135,8 @@ export function $$I0(e, t, i, n) {
           }));
         }
       },
-      icon: "" !== i.user.img_url ? zX.FROM_URL : zX.NONE,
-      iconShape: Ox.CIRCLE,
+      icon: "" !== i.user.img_url ? VisualBellIcon.FROM_URL : VisualBellIcon.NONE,
+      iconShape: VisualBellShape.CIRCLE,
       iconURL: i.user.img_url
     }));
   }

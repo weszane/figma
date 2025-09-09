@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { $n } from "../905/521428";
 import { hasDesktopAPI } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -27,7 +27,7 @@ function h() {
       className: _$$s.mt8.$,
       children: jsx($n, {
         variant: "secondary",
-        onClick: () => Ay.reload("Reload due to properties panel error"),
+        onClick: () => customHistory.reload("Reload due to properties panel error"),
         children: e ? getI18nString("fullscreen.error.reload_tab") : getI18nString("fullscreen.error.refresh_page")
       })
     })]

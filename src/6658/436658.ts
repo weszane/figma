@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { vF } from "../vendor/150583";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
@@ -7,8 +7,8 @@ import { hC } from "../figma_app/901889";
 import { gY, IT } from "../figma_app/566371";
 import { useSprigWithSampling } from "../905/99656";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { a as _$$a } from "../6658/303587";
 import { P as _$$P } from "../6658/832968";
 import { RL, S6, K5, LO, _E, bV, t2 } from "../1250/51387";
@@ -17,7 +17,7 @@ import { I as _$$I2 } from "../6658/286262";
 import { A as _$$A2 } from "../6658/341273";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { mO } from "../figma_app/410317";
 import { d as _$$d } from "../6658/928537";
 import { v as _$$v } from "../1250/232926";
@@ -31,7 +31,7 @@ export function $$E2({
   suggestions: _,
   entrypoint: g
 }) {
-  let b = iZ();
+  let b = selectCurrentUser();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -165,7 +165,7 @@ export function $$E2({
           };
           return n;
         });
-        A(_$$F.enqueue({
+        A(VisualBellActions.enqueue({
           message: r,
           type: "Disconnect component"
         }));
@@ -180,7 +180,7 @@ export function $$E2({
           };
           return n;
         });
-        A(_$$F.enqueue({
+        A(VisualBellActions.enqueue({
           message: n.message,
           type: "Disconnect component error",
           error: !0
@@ -284,7 +284,7 @@ export function $$E2({
         };
         return n;
       });
-      A(_$$F.enqueue({
+      A(VisualBellActions.enqueue({
         message: getI18nString("dev_handoff.component_browser.connected_message", {
           componentName: row.component.name
         }),
@@ -308,7 +308,7 @@ export function $$E2({
         };
         return t;
       });
-      A(_$$F.enqueue({
+      A(VisualBellActions.enqueue({
         message: e.message,
         type: "Connect component error",
         error: !0
@@ -403,7 +403,7 @@ export function $$E2({
         };
         return n;
       });
-      A(_$$F.enqueue({
+      A(VisualBellActions.enqueue({
         message: getI18nString("dev_handoff.component_browser.updated_message", {
           componentName: row.component.name
         })
@@ -425,7 +425,7 @@ export function $$E2({
         };
         return t;
       });
-      A(_$$F.enqueue({
+      A(VisualBellActions.enqueue({
         message: e.message,
         error: !0
       }));
@@ -693,19 +693,19 @@ export function $$E2({
             code_connect_ids: e
           });
         } catch (e) {
-          A(_$$F.enqueue({
+          A(VisualBellActions.enqueue({
             message: ignore ? getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_undo_ignored") : getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_undo_connected"),
             error: !0
           }));
         }
       };
-      A(_$$F.enqueue({
+      A(VisualBellActions.enqueue({
         message: ignore ? getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.confirmation_ignored", {
           count: success_count
         }) : getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.confirmation_connected", {
           count: success_count
         }),
-        icon: zX.CHECK_WITH_CIRCLE,
+        icon: VisualBellIcon.CHECK_WITH_CIRCLE,
         button: {
           text: getI18nString("general.undo"),
           action: () => {
@@ -730,7 +730,7 @@ export function $$E2({
         });
         return n;
       });
-      A(_$$F.enqueue({
+      A(VisualBellActions.enqueue({
         message: ignore ? getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_ignored") : getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.error_connected"),
         error: !0
       }));
@@ -808,7 +808,7 @@ export function $$E2({
         location: e.trackingProps.location,
         entrypoint: e.trackingProps.entrypoint
       });
-      A(_$$F.enqueue({
+      A(VisualBellActions.enqueue({
         message: getI18nString("dev_handoff.component_browser.ignored_message", {
           componentName: row.component.name
         }),
@@ -822,7 +822,7 @@ export function $$E2({
         t[o] = row;
         return t;
       });
-      A(_$$F.enqueue({
+      A(VisualBellActions.enqueue({
         message: t.message,
         type: "Ignore component error",
         error: !0
@@ -1033,7 +1033,7 @@ export function $$E2({
             };
             return n;
           });
-          A(_$$F.enqueue({
+          A(VisualBellActions.enqueue({
             message: getI18nString("dev_handoff.component_browser.connected_message", {
               componentName: row.component.name
             }),
@@ -1059,7 +1059,7 @@ export function $$E2({
             };
             return n;
           });
-          A(_$$F.enqueue({
+          A(VisualBellActions.enqueue({
             message: n.message,
             type: "Connect component error",
             error: !0

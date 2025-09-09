@@ -24,7 +24,7 @@ import { V as _$$V } from "../9410/526350";
 import { vN, Iv, fK, gH, r$, d$, $N, NG, S7, m4, BX, _8 as _$$_, J_ } from "../7222/396421";
 import { mp } from "../figma_app/29287";
 import { Ji, Zx, h0, qm } from "../figma_app/553488";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { useSetAtom } from "../vendor/525001";
 import { IT } from "../figma_app/566371";
@@ -52,8 +52,8 @@ import { ServiceCategories as _$$e3 } from "../905/165054";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { logInfo, logError } from "../905/714362";
 import { Point } from "../905/736624";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { k8 } from "../figma_app/49598";
 import { Nw } from "../figma_app/78808";
 import { yy } from "../figma_app/933328";
@@ -64,7 +64,7 @@ import { x as _$$x } from "../905/764527";
 import { V as _$$V2 } from "../905/900932";
 import { JT } from "../figma_app/632248";
 import { y as _$$y } from "../figma_app/13082";
-import { k as _$$k2 } from "../905/651849";
+import { logger } from "../905/651849";
 import { RL, B3 } from "../figma_app/862289";
 import { zF } from "../figma_app/297822";
 import { v0, Hn, Wb, Gd, M0 } from "../9410/341455";
@@ -89,8 +89,8 @@ import { G7 } from "../figma_app/336853";
 import { dq, sZ } from "../905/845253";
 import { Rs } from "../figma_app/288654";
 import { w4, y1 } from "../905/445814";
-import { iZ } from "../905/372672";
-import { bgg } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { SlidesAiFileDisabledForFilePickerView } from "../figma_app/43951";
 import { GQ, lJ } from "../905/50159";
 var r;
 var c = d;
@@ -619,7 +619,7 @@ async function eJ({
       });
       n.push(e);
     } catch (e) {
-      _$$k2.error("Failed to insert preset", e);
+      logger.error("Failed to insert preset", e);
     }
     Promise.allSettled(n).then(() => {
       t.signal.aborted && e1(a);
@@ -846,7 +846,7 @@ let e3 = async ({
   let g = figjamEntryPointData?.selectedGuids;
   let _ = !figjamFileKey;
   if (e.signal.aborted || _ || !areSlidePresetsLoaded || !openFileKey) return;
-  slidePresetModules?.length || _$$k2.warn("No slide preset modules found...");
+  slidePresetModules?.length || logger.warn("No slide preset modules found...");
   let x = [];
   try {
     if (AppStateTsApi && AppStateTsApi.uiState().leftPanelCollapsedUI3.set(!0), _$$tO(), !SlidesAiBindings) return;
@@ -864,12 +864,12 @@ let e3 = async ({
       dispatch
     })]), e.signal);
     if ("rejected" === n.status) {
-      _$$k2.error("Failed to ingest templates", n.reason);
+      logger.error("Failed to ingest templates", n.reason);
       D0(getI18nString("slides.present_summary.visual_bells.error_unknown"));
       return;
     }
     if (x = n.value, "rejected" === r.status) {
-      _$$k2.error("Failed to fetch canvas data from file", r.reason);
+      logger.error("Failed to fetch canvas data from file", r.reason);
       D0(getI18nString("slides.present_summary.visual_bells.error_unknown"));
       return;
     }
@@ -893,7 +893,7 @@ let e3 = async ({
       return;
     }
     D0(getI18nString("slides.present_summary.visual_bells.error_unknown"));
-    _$$k2.error("Failed to generate slides", t);
+    logger.error("Failed to generate slides", t);
   } finally {
     removeAllPlaceholderOverlays();
     openFileKey !== atomStoreManager.get(ze) || addFirstPresetToEmptyDeck();
@@ -1151,11 +1151,11 @@ function tl({
         libraryKey: e
       }, {
         reportAsSentryError: !0
-      }), h(_$$F.enqueue({
+      }), h(VisualBellActions.enqueue({
         type: "slides-template",
         message: getI18nString("slides.templates.toast.no_longer_available"),
         error: !0,
-        icon: zX.EXCLAMATION
+        icon: VisualBellIcon.EXCLAMATION
       }))) : logError(_$$e3.SLIDES, "No library key found for slides template", {}, {
         reportAsSentryError: !0
       });
@@ -1530,13 +1530,13 @@ function tT({
 function tw({
   file: e
 }) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let [i, r] = useAtomValueAndSetter(oQ);
   let {
     disabled,
     tooltipText
   } = function (e) {
-    let t = Rs(bgg, {
+    let t = Rs(SlidesAiFileDisabledForFilePickerView, {
       fileKey: e
     });
     if ("loaded" !== t.status) return {

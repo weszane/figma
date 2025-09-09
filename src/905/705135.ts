@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { u4 } from "../figma_app/991591";
 import { mW } from "../figma_app/797994";
 import { PE } from "../figma_app/251115";

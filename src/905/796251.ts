@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { getI18nString } from "../905/303541";
 import { PY } from "../905/34809";

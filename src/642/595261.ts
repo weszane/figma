@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback, forwardRef, useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { VariableResolvedDataType } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Yi } from "../figma_app/933328";
 import { valueOrFallback, isInvalidValue } from "../905/216495";
 import { SG, u as _$$u } from "../figma_app/852050";
@@ -125,11 +125,11 @@ export function $$w0({
       children: [jsx(fn, {
         leftInput: H({
           corner: OK.TOP_LEFT,
-          recordingKey: Pt(t, "rectangleTopLeftCornerRadiusInput")
+          recordingKey: generateRecordingKey(t, "rectangleTopLeftCornerRadiusInput")
         }),
         rightInput: H({
           corner: OK.TOP_RIGHT,
-          recordingKey: Pt(t, "rectangleTopRightCornerRadiusInput")
+          recordingKey: generateRecordingKey(t, "rectangleTopRightCornerRadiusInput")
         }),
         rightLabel: null,
         leftLabel: null,
@@ -138,16 +138,16 @@ export function $$w0({
         ref: O,
         leftInput: H({
           corner: OK.BOTTOM_LEFT,
-          recordingKey: Pt(t, "rectangleBottomLeftCornerRadiusInput")
+          recordingKey: generateRecordingKey(t, "rectangleBottomLeftCornerRadiusInput")
         }),
         rightInput: H({
           corner: OK.BOTTOM_RIGHT,
-          recordingKey: Pt(t, "rectangleBottomRightCornerRadiusInput")
+          recordingKey: generateRecordingKey(t, "rectangleBottomRightCornerRadiusInput")
         }),
         rightLabel: null,
         leftLabel: null,
         icon: jsx(_$$E, {
-          recordingKey: Pt(t, "cornerSmoothingToggle"),
+          recordingKey: generateRecordingKey(t, "cornerSmoothingToggle"),
           rowRef: O
         })
       })]

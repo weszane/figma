@@ -30,7 +30,7 @@ import { A as _$$A, E3 } from '../figma_app/711113';
 import { cs, cV, Gg, Gq, qA, sD, Uc, Zi } from '../figma_app/740025';
 import { AC, XU } from '../figma_app/777551';
 import { xw as _$$xw } from '../figma_app/951233';
-import { shallowEqual, useSelector } from '../vendor/514228';
+import { shallowEqual, useSelector } from 'react-redux';
 var $$M4 = (e => (e[e.NONE = 0] = 'NONE', e[e.PENDING = 1] = 'PENDING', e[e.DISPLAY_ONLY = 2] = 'DISPLAY_ONLY', e[e.ADMIN_IN_DIFFERENT_WORKSPACE = 3] = 'ADMIN_IN_DIFFERENT_WORKSPACE', e[e.ADMIN = 4] = 'ADMIN', e[e.NONE_WITH_INHERITED_ADMIN = 5] = 'NONE_WITH_INHERITED_ADMIN', e[e.PENDING_WITH_INHERITED_ADMIN = 6] = 'PENDING_WITH_INHERITED_ADMIN', e[e.DISPLAY_ONLY_WITH_INHERITED_ADMIN = 7] = 'DISPLAY_ONLY_WITH_INHERITED_ADMIN', e[e.EXPLICIT_ADMIN = 8] = 'EXPLICIT_ADMIN', e))($$M4 || {});
 let $$F43 = [1, 6];
 let $$j8 = [2, 7];

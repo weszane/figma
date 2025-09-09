@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useState, useEffect, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/150656";
@@ -16,7 +16,7 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { EJ } from "../figma_app/930338";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { q4 } from "../905/294085";
@@ -523,7 +523,7 @@ export function $$eE0({
   }, [cancelDebouncedFragmentTextSearch, debouncedAssetSearch, eR, flushDebouncedAssetSearch, cancelDebouncedAssetSearch, debouncedFragmentTextSearch, flushDebouncedFragmentTextSearch, C, eU, eF, d, c, _cancelDebouncedFragmentTextSearch, _debouncedFragmentTextSearch, _flushDebouncedFragmentTextSearch]);
   let ez = useCallback(e => {
     w(e);
-    R(_$$g());
+    R(generateUUIDv4());
     (eU.activeTab === xA.COMPONENTS || 0 === e.length) && debouncedAssetSearch(e, eR);
     d && (eU.activeTab === xA.FRAGMENTS || 0 === e.length) && debouncedFragmentTextSearch(e);
     c && (eU.activeTab === xA.COMMUNITY || 0 === e.length) && _debouncedFragmentTextSearch(e);

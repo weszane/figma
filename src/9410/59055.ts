@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useState, useMemo, useEffect, useRef, forwardRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { hS, bL } from "../905/437088";
 import { Fullscreen, AppStateTsApi, Multiplayer } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";

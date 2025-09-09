@@ -1,6 +1,6 @@
 import { D } from "../905/347702";
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { b } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";

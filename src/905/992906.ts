@@ -1,7 +1,7 @@
 import { parseSessionLocalID, isValidSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseAndNormalizeQuery } from "../905/634134";
 import { sy } from "../figma_app/930338";
@@ -91,7 +91,7 @@ export class $$y0 {
   selectedViewToPath(e, t) {
     if ("prototype" === e.view) {
       let i;
-      if (e.file.key === Zt) return "/test/interactions/proto" === Ay.location.pathname ? `/test/interactions/proto${Ay.location.search}` : "/test/interactions/deck" === Ay.location.pathname ? `/test/interactions/deck${Ay.location.search}` : "/test/interactions/presenter" === Ay.location.pathname ? `/test/interactions/presenter${Ay.location.search}` : `/test/interactions${Ay.location.search}`;
+      if (e.file.key === Zt) return "/test/interactions/proto" === customHistory.location.pathname ? `/test/interactions/proto${customHistory.location.search}` : "/test/interactions/deck" === customHistory.location.pathname ? `/test/interactions/deck${customHistory.location.search}` : "/test/interactions/presenter" === customHistory.location.pathname ? `/test/interactions/presenter${customHistory.location.search}` : `/test/interactions${customHistory.location.search}`;
       let n = this.selectedViewName(e, t);
       let r = e.file;
       let a = n ? sy(n) : "";

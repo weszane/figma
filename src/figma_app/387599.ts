@@ -1,6 +1,6 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { B6, zy } from "../vendor/130505";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { sT } from "../figma_app/640564";
 import { bP, IQ } from "../figma_app/600006";
 import { UX } from "../figma_app/455722";
@@ -11,10 +11,10 @@ function c(e, t, r = !1) {
   if ("search" in e && e.search.sessionId && (sT() || t || r)) return e.search.sessionId;
 }
 export function $$u3(e, t = !1) {
-  let r = !!B6(Ay.location.pathname, {
+  let r = !!B6(customHistory.location.pathname, {
     path: [bP.path, IQ.path]
   });
-  return d(Ay.location.state) || c(e, r, t);
+  return d(customHistory.location.state) || c(e, r, t);
 }
 export function $$p1(e = !1) {
   let t = d(zy().state);
@@ -30,7 +30,7 @@ export function $$_0() {
   }) ?? void 0;
 }
 export function $$h2(e) {
-  let t = !!B6(Ay.location.pathname, {
+  let t = !!B6(customHistory.location.pathname, {
     path: [bP.path, IQ.path]
   });
   let r = !!sT();

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { FEditorType } from "../figma_app/53721";
 import { $A } from "../905/862883";
 export function $$$$o1() {

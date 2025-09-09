@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { A as _$$A } from "../905/251970";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";

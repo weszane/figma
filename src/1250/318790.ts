@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { languageCodes } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -20,7 +20,7 @@ import { N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
 import { gik } from "../figma_app/6204";
-if (443 == require.j) {}
+if (443 == require.j) { }
 var k = (e => (e.BRAZILIAN = "brazilian", e.NON_BRAZILIAN = "non_brazilian", e))(k || {});
 let E = 443 == require.j ? 864e5 : null;
 let C = () => Date.now() - E;

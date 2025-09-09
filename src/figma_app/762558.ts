@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useStore } from "../vendor/514228";
+import { useStore } from "react-redux";
 import { debounce } from "../905/915765";
 import { isNullish } from "../figma_app/95419";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";

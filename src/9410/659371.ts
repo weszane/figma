@@ -11,7 +11,7 @@ import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../fig
 import { Uz } from "../905/63728";
 import { q8 } from "../figma_app/459490";
 import { getI18nString } from "../905/303541";
-import { A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
 import { Ib } from "../905/129884";
@@ -104,7 +104,7 @@ export function $$G11() {
   _ && v && i.push({
     type: "tidy_up",
     disabled: !1,
-    displayText: A("tidy-up"),
+    displayText: formatI18nMessage("tidy-up"),
     svgSrc: _$$A4,
     fplIcon: jsx(D, {}),
     tooltipOverrides: {
@@ -115,7 +115,7 @@ export function $$G11() {
   h && i.push({
     type: "wrap_in_section",
     disabled: !1,
-    displayText: A("create-section-from-selection"),
+    displayText: formatI18nMessage("create-section-from-selection"),
     svgSrc: _$$A3,
     fplIcon: jsx(_$$c, {}),
     tooltipOverrides: {

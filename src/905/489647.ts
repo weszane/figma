@@ -7,14 +7,14 @@ import { trackEventAnalytics } from "../905/449184";
 import { YQ } from "../905/502364";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { dX } from "../905/294543";
-import { $n } from "../905/515076";
+import { getCodegenLanguagePreference } from "../905/515076";
 import { createOptimistThunk } from "../905/350402";
 import { W9 } from "../figma_app/559491";
 import { s as _$$s } from "../905/58247";
 import { TN } from "../figma_app/147952";
 import { IN } from "../905/116101";
 import { fullscreenValue } from "../figma_app/455680";
-import { ax } from "../figma_app/741237";
+import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { noop } from "../905/813868";
 import { cb } from "../figma_app/12796";
 import { isSingleDevWithCodegen } from "../figma_app/300692";
@@ -138,13 +138,13 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
       return;
     case FEditorType.DevHandoff:
       if ($ && isSingleDevWithCodegen($)) {
-        let t = $n($);
+        let t = getCodegenLanguagePreference($);
         e.dispatch(dX({
           plugin: $,
           codeLanguage: t
         }));
       } else {
-        ax(IAssertResource.PLUGIN);
+        setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
         _$$s({
           ...Y,
           initialFdResourceTab: _$$s2.PLUGIN,

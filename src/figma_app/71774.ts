@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { BrowserInfo } from "../figma_app/778880";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -13,7 +13,7 @@ export function $$u0(e) {
     onPointerDown: t => BrowserInfo.isIpad ? e.setPinned() : void 0,
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip": getI18nString("whiteboard.inserts.dock_to_side"),
-    recordingKey: Pt("universalInsert", "pin"),
+    recordingKey: generateRecordingKey("universalInsert", "pin"),
     dataTestId: "universal-insert-modal-popout-button",
     "data-not-draggable": !0,
     children: jsx(B, {

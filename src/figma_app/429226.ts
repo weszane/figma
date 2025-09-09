@@ -1,5 +1,5 @@
 import { Xc } from "../905/927405";
-import { _H } from "../figma_app/243058";
+import { CodeComponentIdHandler } from "../figma_app/243058";
 import { defaultSessionLocalID, sessionLocalIDToString, parseSessionLocalID, isValidSessionLocalID } from "../905/871411";
 export function $$s0(e) {
   var t;
@@ -23,7 +23,7 @@ export function $$o1(e) {
     }
   };
   {
-    let e = _H.fromString(r);
+    let e = CodeComponentIdHandler.fromString(r);
     if (e) return {
       nodeID: s,
       interactionID: defaultSessionLocalID,

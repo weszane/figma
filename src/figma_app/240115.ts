@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { A } from "../905/891805";
 import { AppStateTsApi, StateHierarchy, ItemType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";

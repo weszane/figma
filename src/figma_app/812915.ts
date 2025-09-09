@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { W, Hg } from "../figma_app/304955";
 import { VH, Ac } from "../figma_app/178419";
 import { j } from "../figma_app/171378";

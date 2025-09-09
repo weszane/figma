@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, Fragment as _$$Fragment, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -21,7 +21,7 @@ import { fu } from "../figma_app/831799";
 import { u as _$$u } from "../figma_app/187359";
 import { _G } from "../figma_app/516028";
 import { ev } from "../905/909811";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { B as _$$B } from "../905/714743";
 import { i as _$$i } from "../905/651613";
 import { b as _$$b } from "../905/937225";
@@ -112,7 +112,7 @@ function j({
       showingDefaultSubscriptionsForUser: !1,
       showingDefaultSubscriptionsForTeamId: null,
       disabled: !d,
-      recordingKey: Pt(p, "fileRowSubscriptionToggle")
+      recordingKey: generateRecordingKey(p, "fileRowSubscriptionToggle")
     })]
   });
 }

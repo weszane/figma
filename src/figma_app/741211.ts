@@ -1,10 +1,10 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import s from "../vendor/128080";
 import { trackEventAnalytics } from "../905/449184";
 import { xj, ok } from "../figma_app/851625";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { ZC } from "../figma_app/39751";
 import { J } from "../905/931050";
 import { subscribeAndAwaitData } from "../905/553831";
@@ -12,13 +12,13 @@ import { Rs } from "../figma_app/288654";
 import { Xm, gB, e1, tT } from "../905/723791";
 import { r as _$$r } from "../905/520829";
 import { serializeQuery } from "../905/634134";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { $ } from "../905/240853";
 import { hZ } from "../figma_app/996356";
 import { hZ as _$$hZ } from "../figma_app/990058";
-import { w2r, gMg } from "../figma_app/43951";
+import { OrgAdminUserView, OrgAdminUserMinimalFieldsView } from "../figma_app/43951";
 import { nG } from "../figma_app/585126";
 import { n as _$$n } from "../905/902560";
 import { xw } from "../figma_app/951233";
@@ -202,12 +202,12 @@ export function $$B6(e) {
   let o = null;
   s && (o = s.campfireModelEnabledAt);
   let l = useMemo(() => z(r, e), [r, e]);
-  let d = Rs(w2r, l);
+  let d = Rs(OrgAdminUserView, l);
   let [u, p] = useState(null);
   let m = useCallback(() => {
-    subscribeAndAwaitData(w2r, {
+    subscribeAndAwaitData(OrgAdminUserView, {
       ...l,
-      refetchToken: _$$g()
+      refetchToken: generateUUIDv4()
     }).then(e => {
       p(resourceUtils.loaded(e));
     }, e => {
@@ -234,13 +234,13 @@ export function $$B6(e) {
     e.forEach(e => {
       if (e.type === Wd.ORG_USER) {
         let r = t[e.user_id];
-        r ? i.has(e.user_id) ? a.push(e.user_id) : (n.push(r), i.add(e.user_id)) : k.warn(`sortedUsers returned a user (${e.type}-${e.id}) that is not in redux`);
+        r ? i.has(e.user_id) ? a.push(e.user_id) : (n.push(r), i.add(e.user_id)) : logger.warn(`sortedUsers returned a user (${e.type}-${e.id}) that is not in redux`);
       } else {
         let t = r.idpUsers[e.id];
-        t && (e.type === Wd.ORG_INVITE && t.isOrgInvite || e.type === Wd.IDP_USER && !t.isOrgInvite) ? i.has(e.id) ? a.push(e.id) : (n.push(t), i.add(e.id)) : k.warn(`sortedUsers returned a user (${e.type}-${e.id}) that is not in redux`);
+        t && (e.type === Wd.ORG_INVITE && t.isOrgInvite || e.type === Wd.IDP_USER && !t.isOrgInvite) ? i.has(e.id) ? a.push(e.id) : (n.push(t), i.add(e.id)) : logger.warn(`sortedUsers returned a user (${e.type}-${e.id}) that is not in redux`);
       }
     });
-    a.length && k.error(`ERROR: Duplicate user result in sortedUsers: ${a}.`);
+    a.length && logger.error(`ERROR: Duplicate user result in sortedUsers: ${a}.`);
     return n;
   }(f, T, I), [I, T, f]);
   let A = useCallback(() => {
@@ -280,7 +280,7 @@ export function $$G0({
     searchQuery: e,
     filter: t
   }), [t, a, e]);
-  let b = Rs(gMg, y);
+  let b = Rs(OrgAdminUserMinimalFieldsView, y);
   let T = _$$r.LOADING;
   if ("loaded" === b.status && b.data?.orgAdminUsersMinimalFields?.status === tT.Loaded ? T = _$$r.SUCCESS : ("errors" === b.status || b.data?.orgAdminUsersMinimalFields?.status === tT.Error) && (T = _$$r.FAILURE), useEffect(() => {
     if (T !== _$$r.SUCCESS) return;

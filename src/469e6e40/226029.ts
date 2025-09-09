@@ -10,7 +10,7 @@ import { T5, S2, D6, A8, X$ } from "../figma_app/465071";
 import { WZ } from "../905/893645";
 import { F_, EL } from "../905/858282";
 import { rRT, LPt } from "../figma_app/6204";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { bL, Y9, JU, UC } from "../figma_app/57171";
 import { O as _$$O } from "../905/487602";
@@ -28,7 +28,7 @@ import { Rs } from "../figma_app/288654";
 import { Xm, gB } from "../905/723791";
 import { MX, RG, EQ, EO } from "../figma_app/684446";
 import { FMemberRoleType, FOrganizationRoleType, FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
-import { $56 } from "../figma_app/43951";
+import { AdminSettingsSelectorView } from "../figma_app/43951";
 import { kA } from "../figma_app/336853";
 import { FC } from "../figma_app/212807";
 import { sZ } from "../905/845253";
@@ -516,7 +516,7 @@ function eL() {
       groupsUserIsAdminOf
     } = EQ(s, e.user?.id, !n);
     let o = useMemo(() => r ? groupsUserIsAdminOf : [], [r, groupsUserIsAdminOf]);
-    let d = Rs($56, {
+    let d = Rs(AdminSettingsSelectorView, {
       orgId: t.id
     }, {
       enabled: kA(t)

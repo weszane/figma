@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { resourceUtils } from "../905/989992";
 import { Rs, p } from "../figma_app/288654";
 import { VI, DI } from "../figma_app/687776";
-import { oGE, rH3 } from "../figma_app/43951";
+import { ProjectTilePermissions, ProjectCanView } from "../figma_app/43951";
 export function $$l3(e) {
   let t = e.canEdit;
   let r = !e.isOrphanedOrgProject;
@@ -28,7 +28,7 @@ export function $$l3(e) {
   };
 }
 export function $$d2(e, t = !0) {
-  let r = Rs(oGE, {
+  let r = Rs(ProjectTilePermissions, {
     projectId: e
   }, {
     enabled: t
@@ -40,7 +40,7 @@ export function $$c1(e) {
     let r = useMemo(() => e.map(e => ({
       projectId: e
     })), [e]);
-    let d = p(oGE, r, {
+    let d = p(ProjectTilePermissions, r, {
       enabled: t
     });
     return {
@@ -90,7 +90,7 @@ export function $$u0(e, t = !0) {
   let r = useMemo(() => e.map(e => ({
     projectId: e
   })), [e]);
-  let s = p(rH3, r, {
+  let s = p(ProjectCanView, r, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(s.map(e => e.result)).transform(t => e.reduce((e, r, n) => (e[r] = !!t[n]?.project?.canRead, e), {})), [s, e]);

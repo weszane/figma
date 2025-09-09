@@ -4,7 +4,7 @@ import { l as _$$l } from "../905/241412";
 import { x as _$$x } from "../905/587214";
 import { r as _$$r } from "../905/571562";
 import { WorkspaceType } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -80,7 +80,7 @@ export function $$v0({
       }
     }), jsx(K0, {
       className: "new_page_dropdown--newPageButton--sYJsl",
-      recordingKey: Pt(e, "newPageDropdown"),
+      recordingKey: generateRecordingKey(e, "newPageDropdown"),
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": getI18nString("fullscreen.pages_panel.add_new_page"),
       "data-tooltip-show-above": !0,

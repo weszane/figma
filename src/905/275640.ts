@@ -3,7 +3,7 @@ import { debug } from "../figma_app/465776";
 import { selectWithShallowEqual } from "../905/103090";
 import { fullscreenValue } from "../figma_app/455680";
 import { MIXED_MARKER } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 export function $$d10(...e) {
   return selectWithShallowEqual(t => {
     let i = {};
@@ -63,7 +63,7 @@ export function $$_3(e) {
   });
 }
 export function $$A0(e) {
-  return useCallback((t, i = zk.YES) => {
+  return useCallback((t, i = yesNoTrackingEnum.YES) => {
     fullscreenValue.updateSelectionProperties({
       [e]: t
     }, {

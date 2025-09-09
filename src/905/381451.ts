@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef, useMemo, useCallback } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { wm, ID } from "../905/19536";
+import { useMemoShallow, useStableState } from "../905/19536";
 import { reportError } from "../905/11";
 import { A as _$$A } from "../905/17894";
 let $$d = Symbol("RESET");
 export function $$c0(e, t, i = _$$A) {
-  let u = wm(() => t, [t]);
-  let [p, m] = ID({
+  let u = useMemoShallow(() => t, [t]);
+  let [p, m] = useStableState({
     status: "idle"
   }, shallowEqual);
   useEffect(() => {

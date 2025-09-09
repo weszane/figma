@@ -3,7 +3,7 @@ import { Z } from "../905/829242";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Fullscreen, Fonts, AppStateTsApi } from "../figma_app/763686";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { reportError } from "../905/11";
 import { eY } from "../figma_app/722362";
 import { Fk } from "../figma_app/167249";
@@ -41,7 +41,7 @@ export function $$m1({
         lineHeight: r
       };
     }, e);
-    return k9(() => t, [t]);
+    return useMemoStable(() => t, [t]);
   }(t);
   $$g2({
     themeId: e,

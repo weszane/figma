@@ -9,7 +9,7 @@ import { _I } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { m0, vn, E3 } from "../figma_app/976749";
 import { k as _$$k } from "../figma_app/564183";
-import { NT } from "../figma_app/741237";
+import { setPropertiesPanelTab } from "../figma_app/741237";
 import { T } from "../905/858738";
 import { p8 } from "../figma_app/722362";
 import { w4, Fj, go } from "../figma_app/927140";
@@ -50,7 +50,7 @@ function N(e, t) {
     if ("illustration" !== e) return;
     r = t.isReadOnly ? DesignWorkspace.COMMENT : DesignWorkspace.ILLUSTRATION;
   }
-  atomStoreManager.get(Kh) !== DesignGraphElements.COMMENTS && NT(r);
+  atomStoreManager.get(Kh) !== DesignGraphElements.COMMENTS && setPropertiesPanelTab(r);
 }
 export function $$C2() {
   let e = useAtomWithSubscription(w4);

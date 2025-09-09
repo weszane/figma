@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Dw } from "../figma_app/976345";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { e5 } from "../figma_app/297957";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { Ct } from "../figma_app/598018";
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -230,7 +230,7 @@ let D = registerModal(function (e) {
   });
 }, "TeamCreationSpeedBump");
 export function $$L0() {
-  let e = TA();
+  let e = getUserId();
   let t = useDispatch();
   let i = _$$f("team_creation_speed_bump_dismissed");
   let c = useSelector(e => e.teams);

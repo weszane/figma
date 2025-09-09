@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import u from "../vendor/737647";
 import { setupLazyComponentFactory } from "../905/992467";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
 import { dP } from "../figma_app/119475";
@@ -104,7 +104,7 @@ export function $$V0({
       onInputSubmitted: M,
       icon: c ? _$$A2 : _$$A3,
       isInConditional: void 0 !== c,
-      recordingKey: Pt(d, "expressionBuilder"),
+      recordingKey: generateRecordingKey(d, "expressionBuilder"),
       requestedTypes: f
     })
   });
@@ -198,7 +198,7 @@ function H({
             onClose: O,
             onSubmit: w,
             placeholderText: R(),
-            recordingKey: Pt(d, "search"),
+            recordingKey: generateRecordingKey(d, "search"),
             requestedTypes: c,
             resolvedType: r,
             setError: C,
@@ -216,7 +216,7 @@ function H({
       onWheel: () => {
         autoCloseOnScroll && g.current.trim() === _.trim() && O("scroll_cancel");
       },
-      recordingKey: Pt(d, "closeBuilder")
+      recordingKey: generateRecordingKey(d, "closeBuilder")
     })]
   });
 }
@@ -254,7 +254,7 @@ export function $$z2({
   let P = A ? getI18nString("proto.expression_builder_entry.placeholder_ui3_lhs") : x ? getI18nString("proto.expression_builder_entry.placeholder_ui3_rhs") : getI18nString("proto.expression_builder_entry.placeholder");
   return jsx(D8, {
     onClick: r,
-    recordingKey: Pt(a, "openExpressionBuilder"),
+    recordingKey: generateRecordingKey(a, "openExpressionBuilder"),
     className: tY,
     children: jsxs("div", {
       className: L,

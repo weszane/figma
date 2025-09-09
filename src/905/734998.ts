@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 export function $$a0({
   containerRef: e,
   items: t,

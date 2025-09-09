@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { nn } from "../figma_app/186343";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { cT } from "../figma_app/32128";
 import { Qy } from "../figma_app/146384";
 let c = /^Page \d+$/;
@@ -10,7 +10,7 @@ var u = (e => (e.FILE_LOADING = "fileLoading", e.K_12 = "k12", e.READ_ONLY = "re
 export function $$p1() {
   let e = sZ();
   let t = !!e?.k12_google_org;
-  let i = iZ()?.profile?.job_title;
+  let i = selectCurrentUser()?.profile?.job_title;
   return t && "student" === i;
 }
 function h() {

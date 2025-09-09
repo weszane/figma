@@ -1,16 +1,16 @@
 import { jsx } from "react/jsx-runtime";
 import { createRef, useContext, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { DesignGraphElements, GradientToolApi, StyleVariableOperation, CopyPasteType, LayoutTabType, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sH } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
-import { wm } from "../905/19536";
+import { useMemoShallow } from "../905/19536";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { selectWithShallowEqual } from "../905/103090";
-import { o6, dp } from "../figma_app/806412";
-import { g as _$$g } from "../905/880308";
+import { RecordingPureComponent, setupPlayback } from "../figma_app/878298";
+import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { XE } from "../figma_app/91703";
 import { Yi } from "../figma_app/933328";
@@ -22,7 +22,7 @@ import { isValidValue } from "../905/216495";
 import { Tm, bn, x$ } from "../figma_app/385874";
 import { lJ } from "../905/275640";
 import { q5 } from "../figma_app/516028";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { f as _$$f } from "../905/135117";
 import { q } from "../905/65944";
 import { $ } from "../figma_app/297778";
@@ -45,14 +45,14 @@ export function $$L0(e) {
   };
 }
 export function $$F2(e) {
-  return wm(() => $$L0(e), [e]);
+  return useMemoShallow(() => $$L0(e), [e]);
 }
-class M extends o6 {
+class M extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.paintRef = createRef();
-    this.paintPickerSessionId = _$$g();
-    this.onClose = dp(this, "close", () => {
+    this.paintPickerSessionId = generateUUIDv4();
+    this.onClose = setupPlayback(this, "close", () => {
       this.props.currentTool === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default", null);
       this.props.onClose ? this.props.onClose() : this.props.dispatch(XE());
       this.paintRef.current && d9(this.paintRef.current, this.paintPickerSessionId);
@@ -66,7 +66,7 @@ class M extends o6 {
     this.onColorChange = (e, t) => {
       n8(e, this.props.paint, this.props.currentSelectedGradientStop, this.onPaintChange, t);
     };
-    this.onBlendModeChange = (e, t = zk.YES) => {
+    this.onBlendModeChange = (e, t = yesNoTrackingEnum.YES) => {
       this.onPaintChange({
         ...this.props.paint,
         blendMode: e
@@ -94,7 +94,7 @@ class M extends o6 {
       });
       let m = !bn(paint.type) && bn(e);
       let h = "IMAGE" !== paint.type && "IMAGE" === e || "VIDEO" !== paint.type && "VIDEO" === e;
-      let g = m || h ? zk.NO : zk.YES;
+      let g = m || h ? yesNoTrackingEnum.NO : yesNoTrackingEnum.YES;
       this.props.onChange(n, g);
       bn(paint.type) && "GRADIENT_LINEAR" === e && permissionScopeHandler.user("set-gradient-type-to-linear", () => {
         GradientToolApi.resetThirdHandleLocation();
@@ -105,7 +105,7 @@ class M extends o6 {
       if (!e) {
         _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
           let e = $(this.props.paint);
-          this.onPaintChange(e, zk.YES);
+          this.onPaintChange(e, yesNoTrackingEnum.YES);
         });
         return;
       }
@@ -128,7 +128,7 @@ class M extends o6 {
           i.visible = !0;
           this.paintRef.current = i;
           _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
-            this.onPaintChange(i, zk.YES);
+            this.onPaintChange(i, yesNoTrackingEnum.YES);
           });
           let n = this.props.paint.colorVar ? hW(this.props.paint.colorVar) : void 0;
           let r = {
@@ -331,7 +331,7 @@ export function $$j1({
   });
 }
 M.displayName = "PaintPicker";
-class U extends o6 {
+class U extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.modalRef = createRef();

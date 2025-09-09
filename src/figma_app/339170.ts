@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { x as _$$x } from "../905/697290";
 import l from "classnames";
 import { ZC } from "../figma_app/39751";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
 import { getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
@@ -37,7 +37,7 @@ export function $$b0({
   let C = getI18nString("properties.dropdown.apply_variable_mode");
   let w = T ? getI18nString("dev_handoff.workflows.focus_view.no_variable_modes") : getI18nString("dev_handoff.workflows.focus_view.no_variables");
   let O = useMemo(() => ({
-    recordingKey: Pt(t, "applyMode"),
+    recordingKey: generateRecordingKey(t, "applyMode"),
     "aria-expanded": !!v,
     "aria-label": N ? w : C,
     htmlAttributes: {
@@ -74,7 +74,7 @@ export function $$b0({
     }), jsx(bt, {
       consumptionTarget: r,
       showLibrarySets: e,
-      recordingKey: Pt(t, "applyModeDropdown")
+      recordingKey: generateRecordingKey(t, "applyModeDropdown")
     })]
   }) : null;
 }
@@ -94,10 +94,10 @@ export function $$T1() {
     dropdown: jsx(bt, {
       consumptionTarget: Jo.SELECTION,
       showLibrarySets: !1,
-      recordingKey: Pt(e, "applyModeDropdown")
+      recordingKey: generateRecordingKey(e, "applyModeDropdown")
     }),
     isSelected: !!a,
-    recordingKey: Pt(e, "applyMode") || "applyMode",
+    recordingKey: generateRecordingKey(e, "applyMode") || "applyMode",
     dataTestId: "applyModeButton"
   } : null, [a, r, !1, s]);
 }

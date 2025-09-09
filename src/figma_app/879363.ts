@@ -1,6 +1,6 @@
 import { Wh } from "../figma_app/615482";
 import { useEffect } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";

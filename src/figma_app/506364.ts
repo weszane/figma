@@ -1,4 +1,4 @@
-import { q } from "../905/196201";
+import { LRUCache } from "../905/196201";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
@@ -13,7 +13,7 @@ import { X } from "../905/326527";
 import { QC } from "../905/461516";
 let g = new class {
   constructor() {
-    this._suggestionsCache = new q(100);
+    this._suggestionsCache = new LRUCache(100);
     this._textReviewPluginRunner = new X();
     this._currentPromise = null;
   }

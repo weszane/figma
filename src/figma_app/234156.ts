@@ -5,7 +5,7 @@ import { q } from "../905/932270";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { ZC } from "../figma_app/39751";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Pyi, vE6 } from "../figma_app/27776";
 var l = o;
@@ -38,7 +38,7 @@ export function $$g0(e) {
         "data-testid": "toolbelt-mode-segmented-control",
         "data-onboarding-key": onboardingKey
       },
-      recordingKey: Pt(recordingKey, "toolbeltModeSegmentedControl"),
+      recordingKey: generateRecordingKey(recordingKey, "toolbeltModeSegmentedControl"),
       children: [jsx("div", {
         className: "toolbelt_mode_segmented_control--selectedOption--UKFE-",
         "aria-hidden": !0,

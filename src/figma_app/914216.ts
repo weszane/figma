@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useEffect, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { b as _$$b, bL, mc, YJ, hE } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
@@ -9,8 +9,8 @@ import { DesignGraphElements, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import p from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
-import { A as _$$A } from "../905/482208";
+import { generateRecordingKey } from "../figma_app/878298";
+import { formatI18nMessage } from "../905/482208";
 import { T as _$$T } from "../905/868547";
 import { z4 } from "../905/37051";
 import { Um } from "../905/848862";
@@ -28,7 +28,7 @@ var _ = p;
 let O = memo(function ({
   item: e
 }) {
-  let t = useSelector(t => _$$A(e.label));
+  let t = useSelector(t => formatI18nMessage(e.label));
   return jsx("div", {
     className: Pf,
     children: t
@@ -39,7 +39,7 @@ let R = memo(function ({
   recordingKey: t
 }) {
   let r = useSelector(t => Yh(t.mirror.appModel, e.action));
-  let i = useSelector(t => _$$A(e.action));
+  let i = useSelector(t => formatI18nMessage(e.action));
   return jsx(FK, {
     action: e.action,
     isEnabled: r,
@@ -175,7 +175,7 @@ export let $$j1 = memo(function ({
   let l = q5();
   let d = _$$T(o);
   if (!i(e)) return null;
-  let c = e.dontChainRecordingKeys ? e.recordingKey : Pt(r, e.recordingKey);
+  let c = e.dontChainRecordingKeys ? e.recordingKey : generateRecordingKey(r, e.recordingKey);
   switch (e.type) {
     case ZU.LABEL:
       return jsx(O, {

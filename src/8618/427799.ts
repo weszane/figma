@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useRef, Fragment as _$$Fragment, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { C as _$$C } from "../905/504203";

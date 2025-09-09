@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useMemo, useCallback, useEffect, useReducer, useLayoutEffect, Fragment as _$$Fragment, memo, useContext } from "react";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { G as _$$G } from "../905/289770";
 import { Multiplayer, PaintTools, SnapshotLevel, AppStateTsApi, DesignGraphElements, LayoutTabType, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -25,7 +25,7 @@ import { p as _$$p } from "../figma_app/372802";
 import { buildUploadUrl, buildStaticUrl } from "../figma_app/169182";
 import { o as _$$o } from "../905/755806";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { n as _$$n } from "../vendor/547481";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { w as _$$w, L as _$$L } from "../905/842040";
@@ -439,7 +439,7 @@ en.WIGGLE_MODE_REPLENISH_SHAKES = 3.5;
 en.WIGGLE_MODE_SHAKE_GRACE_PERIOD = .3;
 en.WIGGLE_MODE_SHAKE_RESET_TIME = .5;
 en.WIGGLE_MODE_LEAVE_CANVAS_GRACE_PERIOD = .3;
-let ea = xx(function (e) {
+let ea = memoizeByArgs(function (e) {
   return e.reduce((e, t) => (e[t.sessionID] = t, e), {});
 });
 function es(e, t, r, n, i) {

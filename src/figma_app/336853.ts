@@ -8,7 +8,7 @@ import { Qw } from "../figma_app/47866";
 import { getI18nString } from "../905/303541";
 import { FCostCenterType } from "../figma_app/191312";
 import { Ct, Gv, CT } from "../figma_app/736948";
-import { les } from "../figma_app/43951";
+import { OrgWorkspaceCount } from "../figma_app/43951";
 import { X$, D6, Az, sI } from "../figma_app/465071";
 export function $$m2(e, t) {
   let r = e.map(e => e.domain.toLowerCase());
@@ -89,7 +89,7 @@ export function $$L3(e) {
   let r = D6("useEnterpriseOrgDirectoryEnabled");
   let i = Az(t);
   let a = sI(r);
-  let s = Rs(les({
+  let s = Rs(OrgWorkspaceCount({
     orgId: e
   }));
   return useMemo(() => Qw.transformAll([i, a, s], (e, t, r) => !!e && !t && !!r.org?.workspaceCount.data), [i, a, s]);

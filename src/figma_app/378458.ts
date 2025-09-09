@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useCallback, useMemo, memo, useRef, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { o as _$$o } from "../905/821217";
 import { y as _$$y } from "../905/661502";
 import { O as _$$O } from "../905/969533";
@@ -11,7 +11,7 @@ import { _ as _$$_ } from "../905/569825";
 import { am } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { wv } from "../figma_app/236327";
 import { L as _$$L } from "../figma_app/942671";
 import { getI18nString } from "../905/303541";
@@ -495,7 +495,7 @@ export function $$W1({
     items: T,
     onSelectItem: S,
     parentRect: e,
-    recordingKey: Pt(r, "dropdown"),
+    recordingKey: generateRecordingKey(r, "dropdown"),
     showPoint: !1,
     children: [jsx("div", {
       style: {
@@ -519,10 +519,10 @@ export function $$W1({
           let t = -1;
           try {
             t = parseInt(e, 10);
-          } catch (e) {}
+          } catch (e) { }
           t > 0 && p(t);
         },
-        recordingKey: Pt(r, "dropdown", "zoomInput")
+        recordingKey: generateRecordingKey(r, "dropdown", "zoomInput")
       })
     }), jsx(wv, {})]
   });
@@ -597,7 +597,7 @@ export let $$K0 = memo(function ({
         isUI3: !0,
         onClick: h,
         onboardingKey: q,
-        recordingKey: Pt(e, "zoomButton"),
+        recordingKey: generateRecordingKey(e, "zoomButton"),
         selected: a.showing,
         children: I
       }), m]

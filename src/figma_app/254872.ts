@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { O } from "../905/969533";
 import { reportError } from "../905/11";
@@ -58,7 +58,7 @@ export function $$v0({
 }) {
   let n = useDispatch();
   return useCallback(i => {
-    if (e) n(oB());else if (i) {
+    if (e) n(oB()); else if (i) {
       let e = i.getBoundingClientRect();
       n(j7({
         type: b,

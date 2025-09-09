@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { UIVisibilitySetting } from "../figma_app/763686";
 import { ty, Rm, Y2, DT } from "../figma_app/320164";
 import { BrowserInfo } from "../figma_app/778880";
@@ -12,7 +12,7 @@ import { up, Kz } from "../905/760074";
 import { ck } from "../905/87821";
 import { Kx } from "../figma_app/546509";
 import { tB, tS, q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { $n } from "../905/521428";
 import { J as _$$J } from "../905/614223";
 import { l as _$$l } from "../905/728491";
@@ -21,7 +21,7 @@ import { B as _$$B2 } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { Rh } from "../905/844322";
-import { _iU, sMs, QD8 } from "../figma_app/43951";
+import { BranchOpenMergeRequest, FileCanView, FileCanManage } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { getPermissionsState } from "../figma_app/642025";
 import { FEditorType } from "../figma_app/53721";
@@ -35,7 +35,7 @@ import { lQ } from "../905/934246";
 import { c as _$$c } from "../figma_app/769913";
 import { getFeatureFlags } from "../905/601108";
 import { dR, jM } from "../905/508367";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { My } from "../905/194276";
 import { qB } from "../905/862321";
 import { g as _$$g } from "../905/248178";
@@ -116,7 +116,7 @@ function k() {
   let t = useSelector(tB);
   let r = M4.useFile(t?.key || "").data;
   let i = useSelector(e => getPermissionsState(e));
-  let s = Rs(_iU, {
+  let s = Rs(BranchOpenMergeRequest, {
     branchFileKey: t && t?.key || ""
   }, {
     enabled: !!(t && t?.key)
@@ -124,8 +124,8 @@ function k() {
   let o = up(t ?? {
     fileRepoId: null
   }, i.repos);
-  let l = _$$l(sMs, o?.default_file_key ?? "").unwrapOr(!1);
-  let d = _$$l(QD8, t?.key ?? "").unwrapOr(!1);
+  let l = _$$l(FileCanView, o?.default_file_key ?? "").unwrapOr(!1);
+  let d = _$$l(FileCanManage, t?.key ?? "").unwrapOr(!1);
   if (!t || !r || !o) return null;
   let c = o.default_file_key;
   let u = "loaded" === s.status && (null === s.data.file || s.data.file && AM(s.data.file) === pT.MERGED);
@@ -489,7 +489,7 @@ function eC({
   let c = {
     [ao.key]: ao.value
   };
-  let u = dR(_$$Ay.location.pathname, c);
+  let u = dR(customHistory.location.pathname, c);
   let p = e ? u : jM();
   return jsxs("div", {
     className: yp,
@@ -545,7 +545,7 @@ function eD({
   let u = {
     [ao.key]: ao.value
   };
-  let p = dR(_$$Ay.location.pathname, u);
+  let p = dR(customHistory.location.pathname, u);
   let _ = e ? p : jM();
   let h = nF(!0);
   let m = _6();
@@ -655,7 +655,7 @@ function eD({
 }
 export function $$ek0() {
   let e = q5();
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = nF(!0);
   let E = useSelector(e => e.progressBarState.mode);
   let y = ck();

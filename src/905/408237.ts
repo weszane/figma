@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { d as _$$d } from "../905/884707";
-import { o6 } from "../figma_app/806412";
+import { RecordingPureComponent } from "../figma_app/878298";
 import { mv, u2 } from "../905/511649";
 let l = "lazy_input--lazyInput--1mJeW";
-class d extends o6 {
+class d extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.procrastinating = !1;

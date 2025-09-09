@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { ui } from "../905/941249";
 import { VP, aF } from "../905/18797";

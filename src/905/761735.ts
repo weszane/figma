@@ -1,7 +1,6 @@
-import { NU } from '../905/11';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { z as _$$z } from '../905/239603';
-import { datadogRum } from '../905/270963';
+import { datadogRum } from '@datadog/browser-rum';
 import { oJ as _$$oJ } from '../905/312028';
 import { g as _$$g2 } from '../905/346780';
 import { D as _$$D } from '../905/412108';
@@ -10,26 +9,27 @@ import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { Rh as _$$Rh, rI as _$$rI, S3 as _$$S2, BO } from '../905/485103';
 import { createFieldRef } from '../905/552287';
 import { getFeatureFlags } from '../905/601108';
-import { M as _$$M } from '../905/609813';
+import { TimerHandler } from '../905/609813';
 import { dZ as _$$dZ2, iO as _$$iO, Sj as _$$Sj, Oh } from '../905/663269';
 import { measureAsyncDuration } from '../905/670985';
-import { J as _$$J } from '../905/679168';
+import { serializeArgs } from '../905/679168';
 import { logError } from '../905/714362';
 import { $W, cy as _$$cy, H as _$$H, h5 as _$$h2, mJ as _$$mJ, mv as _$$mv, pJ as _$$pJ, sG as _$$sG, tt as _$$tt, Mx, zD } from '../905/787926';
-import { Y as _$$Y } from '../905/806400';
+import { EntityType } from '../905/806400';
 import { C as _$$C } from '../905/807275';
 import { PriorityLevels as _$$aG, createAliasedFieldRef, createParentRef, createSessionRef, createViewRef, makeFieldRefOptional, mergeFieldRefs, NULL_FIELD_REF } from '../905/871467';
-import { g as _$$g } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { getEnvironmentInfo } from '../905/883621';
 import { XHR } from '../905/910117';
 import { ConnectionAttemptTypes, FileOperationTypes, PriorityLevels } from '../905/957591';
-import { $kt, apG, DSh, ehp, ib2, w2r, wZi, XRH } from '../figma_app/43951';
+import { FileBrowserRecentFilesView, FileBrowserSearchBarData, FileBrowserSidebarData, getAllResourceViews, GraftingUpdateSloData, OpenEditorFileData, OrgAdminUserView, SubscriptionUpdateSloData } from '../figma_app/43951';
 import { getLaunchDarklyFlagsExport } from '../figma_app/169182';
 import { APIParameterUtils, createMetaValidator } from '../figma_app/181241';
-import { isInteractionPathCheck, getFalseValue, isInteractionOrEvalMode } from '../figma_app/897289';
 import { gP as _$$gP } from '../figma_app/594947';
 import { Go1, QKp, TOI } from '../figma_app/822011';
-import { desktopAPIInstance, bellFeedAPIInstance, getBellFeedAPI } from '../figma_app/876459';
+import { bellFeedAPIInstance, desktopAPIInstance, getBellFeedAPI } from '../figma_app/876459';
+import { getFalseValue, isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
+import { LogToConsoleMode } from '../figma_app/763686';
 let n = {};
 require.d(n, {
   AccountTypeRequestStatusFragment: () => Ax,
@@ -995,7 +995,7 @@ o.addEnum({
 });
 let l = [...o.enums];
 let c = {
-  name: _$$Y.AccountManagerMessage,
+  name: EntityType.AccountManagerMessage,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1047,7 +1047,7 @@ let c = {
   }]
 };
 let u = {
-  name: _$$Y.AccountTypeRequest,
+  name: EntityType.AccountTypeRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1068,7 +1068,7 @@ let u = {
     name: 'requestableOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     filter: {
       and: [['id', '=', createParentRef('requestableUserId')], ['orgId', '=', createParentRef('planId')]]
@@ -1078,7 +1078,7 @@ let u = {
     name: 'requestableTeamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     filter: {
       and: [['id', '=', createParentRef('requestableUserId')], ['teamId', '=', createParentRef('planId')]]
@@ -1188,14 +1188,14 @@ let u = {
     name: 'billableProduct',
     type: {
       kind: 'object',
-      name: _$$Y.BillableProduct
+      name: EntityType.BillableProduct
     },
     filter: ['key', '=', createParentRef('billableProductKey')],
     nullable: !0
   }]
 };
 let p = {
-  name: _$$Y.ActiveFileUser,
+  name: EntityType.ActiveFileUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1216,7 +1216,7 @@ let p = {
   }]
 };
 let m = {
-  name: _$$Y.ActivityLog,
+  name: EntityType.ActivityLog,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -1233,7 +1233,7 @@ let m = {
     name: 'actor',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('actorId')]
@@ -1294,7 +1294,7 @@ let m = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     bannedFromViews: !0
@@ -1328,7 +1328,7 @@ let m = {
   }]
 };
 let h = {
-  name: _$$Y.AdminRequestDashboardRow,
+  name: EntityType.AdminRequestDashboardRow,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1344,7 +1344,7 @@ let h = {
     name: 'request',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !1,
@@ -1356,7 +1356,7 @@ let h = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !1,
@@ -1368,7 +1368,7 @@ let h = {
     name: 'requestNullable',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0
@@ -1376,14 +1376,14 @@ let h = {
     name: 'userNullable',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0
   }]
 };
 let g = {
-  name: _$$Y.AdminRequestDashboardRowCount,
+  name: EntityType.AdminRequestDashboardRowCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1399,7 +1399,7 @@ let g = {
   }]
 };
 let f = {
-  name: _$$Y.AdminRequestDashboardRowId,
+  name: EntityType.AdminRequestDashboardRowId,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1409,7 +1409,7 @@ let f = {
   }]
 };
 let _ = {
-  name: _$$Y.AiMeterUsage,
+  name: EntityType.AiMeterUsage,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1452,7 +1452,7 @@ let _ = {
   }]
 };
 let A = {
-  name: _$$Y.AllowlistedPlugin,
+  name: EntityType.AllowlistedPlugin,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1468,7 +1468,7 @@ let A = {
     name: 'plugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     filter: ['id', '=', createParentRef('pluginId')],
     nullable: !0
@@ -1476,7 +1476,7 @@ let A = {
     name: 'pluginV2',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     args: [{
       name: 'orgId',
@@ -1526,7 +1526,7 @@ let A = {
     name: 'allowlistedLicenseGroup',
     type: {
       kind: 'object',
-      name: _$$Y.LicenseGroup
+      name: EntityType.LicenseGroup
     },
     filter: ['id', '=', createParentRef('allowlistGroupId')],
     nullable: !0
@@ -1534,7 +1534,7 @@ let A = {
     name: 'allowlistedWorkspace',
     type: {
       kind: 'object',
-      name: _$$Y.Workspace
+      name: EntityType.Workspace
     },
     filter: ['id', '=', createParentRef('allowlistGroupId')],
     nullable: !0,
@@ -1545,7 +1545,7 @@ let A = {
     name: 'allowlistedWorkspacePublicInfo',
     type: {
       kind: 'object',
-      name: _$$Y.WorkspacePublicInfo
+      name: EntityType.WorkspacePublicInfo
     },
     filter: ['id', '=', createParentRef('allowlistGroupId')],
     nullable: !0
@@ -1553,7 +1553,7 @@ let A = {
     name: 'allowlistedOrgV2',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('allowlistGroupId')],
     nullable: !0,
@@ -1563,7 +1563,7 @@ let A = {
   }]
 };
 let y = {
-  name: _$$Y.ApprovedLibrary,
+  name: EntityType.ApprovedLibrary,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1589,7 +1589,7 @@ let y = {
     name: 'libraryKeyToFile',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryKeyToFile
+      name: EntityType.LibraryKeyToFile
     },
     filter: ['fileKey', '=', createParentRef('fileKey')],
     nullable: !0
@@ -1608,7 +1608,7 @@ let y = {
   }]
 };
 let b = {
-  name: _$$Y.AssetPublishStatus,
+  name: EntityType.AssetPublishStatus,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1670,7 +1670,7 @@ let b = {
   }]
 };
 let v = {
-  name: _$$Y.AssetTransferRequest,
+  name: EntityType.AssetTransferRequest,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -1687,7 +1687,7 @@ let v = {
     name: 'sourceFolder',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('sourceFolderId')],
@@ -1704,7 +1704,7 @@ let v = {
     name: 'sourceTeam',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('sourceTeamId')],
@@ -1742,7 +1742,7 @@ let v = {
     name: 'sourceUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('sourceUserId')]
@@ -1750,7 +1750,7 @@ let v = {
     name: 'destinationUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('destinationUserId')]
@@ -1786,7 +1786,7 @@ let v = {
   }]
 };
 let I = {
-  name: _$$Y.AtMention,
+  name: EntityType.AtMention,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -1915,7 +1915,7 @@ let x = [{
   name: 'containingFrame',
   type: {
     kind: 'object',
-    name: _$$Y.LibraryItemContainingFrame
+    name: EntityType.LibraryItemContainingFrame
   },
   embedded: !0,
   nullable: !0
@@ -1923,7 +1923,7 @@ let x = [{
   name: 'file',
   type: {
     kind: 'object',
-    name: _$$Y.File
+    name: EntityType.File
   },
   bannedFromViews: !0,
   filter: ['key', '=', createParentRef('fileKey')],
@@ -1939,7 +1939,7 @@ let x = [{
   name: 'libraryKeyToFile',
   type: {
     kind: 'object',
-    name: _$$Y.LibraryKeyToFile
+    name: EntityType.LibraryKeyToFile
   },
   bannedFromViews: !0,
   filter: ['libraryKey', '=', createParentRef('libraryKey')],
@@ -1986,13 +1986,13 @@ let x = [{
   }
 }];
 let S = {
-  name: _$$Y.LibraryAsset,
+  name: EntityType.LibraryAsset,
   permissionRequired: !1,
   fields: [...x, {
     name: 'codePresetMetadata',
     type: {
       kind: 'object',
-      name: _$$Y.CodePresetMetadata
+      name: EntityType.CodePresetMetadata
     },
     filter: {
       and: [['libraryKey', '=', createParentRef('libraryKey')], ['assetId', '=', createParentRef('id')]]
@@ -2004,7 +2004,7 @@ let w = [{
   name: '_teamPlanUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   args: [{
     name: 'userId',
@@ -2022,7 +2022,7 @@ let w = [{
   name: '_orgPlanUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   args: [{
     name: 'userId',
@@ -2041,7 +2041,7 @@ let C = {
   name: '_planUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   filter: {
     and: [['planParentType', '=', 'Org'], ['planParentId', '=', createParentRef('orgId')], ['userId', '=', createParentRef('userId')]]
@@ -2053,7 +2053,7 @@ let T = {
   name: '_planUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   filter: {
     and: [['planParentType', '=', 'Team'], ['planParentId', '=', createParentRef('teamId')], ['userId', '=', createParentRef('userId')]]
@@ -2065,7 +2065,7 @@ let k = {
   name: '_currentPlanUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   args: [{
     name: 'userId',
@@ -2084,7 +2084,7 @@ let R = {
   name: '_planUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   args: [{
     name: 'userId',
@@ -2103,7 +2103,7 @@ let N = [{
   name: '_teamPlanUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   args: [{
     name: 'userId',
@@ -2121,7 +2121,7 @@ let N = [{
   name: '_orgPlanUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   args: [{
     name: 'userId',
@@ -2140,7 +2140,7 @@ let P = [{
   name: '_currentPlanUserRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserRecord
+    name: EntityType.PlanUserRecord
   },
   args: [{
     name: 'userId',
@@ -2272,7 +2272,7 @@ let O = [{
   name: 'draftsProject',
   type: {
     kind: 'object',
-    name: _$$Y.Project
+    name: EntityType.Project
   },
   filter: ['id', '=', createParentRef('draftsFolderId')],
   checkCanRead: {
@@ -2283,7 +2283,7 @@ let O = [{
   name: 'licenseGroupMember',
   type: {
     kind: 'object',
-    name: _$$Y.LicenseGroupMember
+    name: EntityType.LicenseGroupMember
   },
   filter: ['orgUserId', '=', createParentRef('id')],
   nullable: !0
@@ -2291,7 +2291,7 @@ let O = [{
   name: 'licenseGroupAdmins',
   type: {
     kind: 'objects',
-    name: _$$Y.LicenseGroupAdmin
+    name: EntityType.LicenseGroupAdmin
   },
   filter: ['orgUserId', '=', createParentRef('id')],
   nullable: !0,
@@ -2300,7 +2300,7 @@ let O = [{
   name: 'workspaceUsers',
   type: {
     kind: 'objects',
-    name: _$$Y.WorkspaceUser
+    name: EntityType.WorkspaceUser
   },
   filter: ['orgUserId', '=', createParentRef('id')],
   expectedMaxCount: 1e3
@@ -2308,7 +2308,7 @@ let O = [{
   name: 'designOrgAccountTypeRequest',
   type: {
     kind: 'object',
-    name: _$$Y.OrgAccountTypeRequest
+    name: EntityType.OrgAccountTypeRequest
   },
   filter: {
     and: [['orgUserId', '=', createParentRef('id')], ['_editorTypeRaw', '=', 0]]
@@ -2322,7 +2322,7 @@ let O = [{
   name: 'whiteboardOrgAccountTypeRequest',
   type: {
     kind: 'object',
-    name: _$$Y.OrgAccountTypeRequest
+    name: EntityType.OrgAccountTypeRequest
   },
   filter: {
     and: [['orgUserId', '=', createParentRef('id')], ['_editorTypeRaw', '=', 1]]
@@ -2336,7 +2336,7 @@ let O = [{
   name: 'designAccountTypeRequest',
   type: {
     kind: 'object',
-    name: _$$Y.AccountTypeRequest
+    name: EntityType.AccountTypeRequest
   },
   filter: {
     and: [['requestableUserId', '=', createParentRef('id')], ['requestableUserType', '=', 'OrgUser'], ['_editorTypeRaw', '=', 0]]
@@ -2346,7 +2346,7 @@ let O = [{
   name: 'whiteboardAccountTypeRequest',
   type: {
     kind: 'object',
-    name: _$$Y.AccountTypeRequest
+    name: EntityType.AccountTypeRequest
   },
   filter: {
     and: [['requestableUserId', '=', createParentRef('id')], ['requestableUserType', '=', 'OrgUser'], ['_editorTypeRaw', '=', 1]]
@@ -2356,7 +2356,7 @@ let O = [{
   name: 'devModeAccountTypeRequest',
   type: {
     kind: 'object',
-    name: _$$Y.AccountTypeRequest
+    name: EntityType.AccountTypeRequest
   },
   filter: {
     and: [['requestableUserId', '=', createParentRef('id')], ['requestableUserType', '=', 'OrgUser'], ['_editorTypeRaw', '=', 2]]
@@ -2366,7 +2366,7 @@ let O = [{
   name: 'fileBrowserPreferences',
   type: {
     kind: 'object',
-    name: _$$Y.FileBrowserPreferences
+    name: EntityType.FileBrowserPreferences
   },
   nullable: !0,
   filter: {
@@ -2376,7 +2376,7 @@ let O = [{
   name: 'fileBrowserSectionPreferences',
   type: {
     kind: 'objects',
-    name: _$$Y.FileBrowserSectionPreferences
+    name: EntityType.FileBrowserSectionPreferences
   },
   nullable: !0,
   filter: {
@@ -2387,7 +2387,7 @@ let O = [{
   name: 'favoritedResources',
   type: {
     kind: 'objects',
-    name: _$$Y.FavoritedResource
+    name: EntityType.FavoritedResource
   },
   filter: {
     and: [['userId', '=', createParentRef('userId')], ['orgId', '=', createParentRef('orgId')]]
@@ -2401,7 +2401,7 @@ let O = [{
   name: 'favoritedFiles',
   type: {
     kind: 'objects',
-    name: _$$Y.FavoritedFile
+    name: EntityType.FavoritedFile
   },
   nullable: !0,
   filter: {
@@ -2412,7 +2412,7 @@ let O = [{
   name: 'favoritedPrototypes',
   type: {
     kind: 'objects',
-    name: _$$Y.FavoritedPrototype
+    name: EntityType.FavoritedPrototype
   },
   nullable: !0,
   filter: {
@@ -2423,7 +2423,7 @@ let O = [{
   name: 'favoritedProjects',
   type: {
     kind: 'objects',
-    name: _$$Y.FavoritedProject
+    name: EntityType.FavoritedProject
   },
   nullable: !0,
   filter: {
@@ -2434,7 +2434,7 @@ let O = [{
   name: 'favoritedTeams',
   type: {
     kind: 'objects',
-    name: _$$Y.FavoritedTeam
+    name: EntityType.FavoritedTeam
   },
   nullable: !0,
   filter: {
@@ -2445,7 +2445,7 @@ let O = [{
   name: 'favoritedWorkspaces',
   type: {
     kind: 'objects',
-    name: _$$Y.FavoritedWorkspace
+    name: EntityType.FavoritedWorkspace
   },
   nullable: !0,
   filter: {
@@ -2456,7 +2456,7 @@ let O = [{
   name: 'userSidebarSections',
   type: {
     kind: 'objects',
-    name: _$$Y.UserSidebarSection
+    name: EntityType.UserSidebarSection
   },
   nullable: !0,
   filter: {
@@ -2467,7 +2467,7 @@ let O = [{
   name: 'recentSearches',
   type: {
     kind: 'objects',
-    name: _$$Y.RecentSearch
+    name: EntityType.RecentSearch
   },
   nullable: !0,
   filter: {
@@ -2478,7 +2478,7 @@ let O = [{
   name: 'pluginRequests',
   type: {
     kind: 'objects',
-    name: _$$Y.PluginRequest
+    name: EntityType.PluginRequest
   },
   nullable: !0,
   filter: ['orgUserId', '=', createParentRef('id')],
@@ -2487,7 +2487,7 @@ let O = [{
   name: 'orgUserFlag',
   type: {
     kind: 'object',
-    name: _$$Y.OrgUserEvent
+    name: EntityType.OrgUserEvent
   },
   args: [{
     name: 'eventType',
@@ -2518,7 +2518,7 @@ let O = [{
   name: 'activeSeatTypeUpgrade',
   type: {
     kind: 'object',
-    name: _$$Y.OrgUserUpgrade
+    name: EntityType.OrgUserUpgrade
   },
   orderBy: [['createdAt', 'DESC']],
   filter: {
@@ -2553,7 +2553,7 @@ let O = [{
   name: 'latestProvisionalAccess',
   type: {
     kind: 'object',
-    name: _$$Y.ProvisionalAccess
+    name: EntityType.ProvisionalAccess
   },
   orderBy: [['endsAt', 'DESC']],
   filter: {
@@ -2589,7 +2589,7 @@ let O = [{
   name: 'pendingAccountTypeRequests',
   type: {
     kind: 'objects',
-    name: _$$Y.AccountTypeRequest
+    name: EntityType.AccountTypeRequest
   },
   filter: {
     and: [['requestableUserId', '=', createParentRef('id')], ['requestableUserType', '=', 'OrgUser'], ['status', '=', 'pending']]
@@ -2600,7 +2600,7 @@ let O = [{
   name: 'currentSeat',
   type: {
     kind: 'object',
-    name: _$$Y.Seat
+    name: EntityType.Seat
   },
   filter: {
     and: [['currentPlanUserId', '=', createParentRef('id')], ['currentPlanUserType', '=', 'OrgUser'], ['deprovisionedAt', '=', null]]
@@ -2610,7 +2610,7 @@ let O = [{
   name: 'provisionalAccesses',
   type: {
     kind: 'objects',
-    name: _$$Y.ProvisionalAccess
+    name: EntityType.ProvisionalAccess
   },
   filter: {
     and: [['planUserId', '=', createParentRef('id')], ['planUserType', '=', 'OrgUser']]
@@ -2621,7 +2621,7 @@ let O = [{
   name: 'orgUserDowngrades',
   type: {
     kind: 'objects',
-    name: _$$Y.OrgUserUpgrade
+    name: EntityType.OrgUserUpgrade
   },
   nullable: !0,
   filter: {
@@ -2635,7 +2635,7 @@ let O = [{
   name: 'planUserMembershipRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUserMembershipRecord
+    name: EntityType.PlanUserMembershipRecord
   },
   nullable: !0,
   filter: {
@@ -2643,20 +2643,20 @@ let O = [{
   }
 }, C];
 let D = {
-  name: _$$Y.BaseOrgUser,
+  name: EntityType.BaseOrgUser,
   permissionRequired: !1,
   fields: [...O, {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0
@@ -2664,7 +2664,7 @@ let D = {
     name: 'designUserUpgrades',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgUserUpgrade
+      name: EntityType.OrgUserUpgrade
     },
     nullable: !0,
     checkCanRead: {
@@ -2686,7 +2686,7 @@ let D = {
     name: 'whiteboardUserUpgrades',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgUserUpgrade
+      name: EntityType.OrgUserUpgrade
     },
     nullable: !0,
     checkCanRead: {
@@ -2708,7 +2708,7 @@ let D = {
     name: 'mostRecentDesignUserUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserUpgrade
+      name: EntityType.OrgUserUpgrade
     },
     nullable: !0,
     checkCanRead: {
@@ -2730,7 +2730,7 @@ let D = {
     name: 'mostRecentWhiteboardUserUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserUpgrade
+      name: EntityType.OrgUserUpgrade
     },
     nullable: !0,
     checkCanRead: {
@@ -2752,7 +2752,7 @@ let D = {
     name: 'mostRecentDevModeUserUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserUpgrade
+      name: EntityType.OrgUserUpgrade
     },
     nullable: !0,
     checkCanRead: {
@@ -2774,7 +2774,7 @@ let D = {
     name: 'devModeBetaUsedEvent',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserEvent
+      name: EntityType.OrgUserEvent
     },
     filter: {
       and: [['orgUserId', '=', createParentRef('id')], ['eventType', '=', 'dev_mode_beta_used']]
@@ -2817,7 +2817,7 @@ let D = {
   }]
 };
 let L = {
-  name: _$$Y.BillingTrial,
+  name: EntityType.BillingTrial,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -2913,7 +2913,7 @@ let L = {
     name: 'periodicUpdateField',
     type: {
       kind: 'object',
-      name: _$$Y.PeriodicUpdate
+      name: EntityType.PeriodicUpdate
     },
     nullable: !0,
     resolver: {
@@ -2922,7 +2922,7 @@ let L = {
   }]
 };
 let F = {
-  name: _$$Y.Checkpoint,
+  name: EntityType.Checkpoint,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -2933,7 +2933,7 @@ let F = {
   }]
 };
 let M = {
-  name: _$$Y.CodeConnect,
+  name: EntityType.CodeConnect,
   naturalKey: new Set(['fileKey', 'id']),
   permissionRequired: !1,
   fields: [{
@@ -2994,7 +2994,7 @@ let M = {
   }]
 };
 let j = {
-  name: _$$Y.CodeExtensionLanguage,
+  name: EntityType.CodeExtensionLanguage,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -3017,7 +3017,7 @@ let j = {
   }]
 };
 let U = {
-  name: _$$Y.CodeExtensionPreferences,
+  name: EntityType.CodeExtensionPreferences,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -3045,7 +3045,7 @@ let U = {
   }]
 };
 let B = {
-  name: _$$Y.ColorPalette,
+  name: EntityType.ColorPalette,
   permissionRequired: !0,
   naturalKey: new Set(['uuid']),
   fields: [{
@@ -3086,7 +3086,7 @@ let B = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')],
@@ -3124,7 +3124,7 @@ let B = {
   }]
 };
 let V = {
-  name: _$$Y.Comment,
+  name: EntityType.Comment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -3180,7 +3180,7 @@ let V = {
     name: 'clientMeta',
     type: {
       kind: 'object',
-      name: _$$Y.CommentClientMeta
+      name: EntityType.CommentClientMeta
     },
     embedded: !0,
     nullable: !0
@@ -3188,14 +3188,14 @@ let V = {
     name: 'messageMeta',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0
   }, {
     name: 'messageMetaStylized',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0,
     nullable: !0
@@ -3209,14 +3209,14 @@ let V = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
     name: 'attachments',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentAttachment
+      name: EntityType.CommentAttachment
     },
     filter: ['fileCommentId', '=', createParentRef('id')],
     expectedMaxCount: 5
@@ -3224,7 +3224,7 @@ let V = {
     name: 'reactions',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentReaction
+      name: EntityType.CommentReaction
     },
     filter: ['fileCommentId', '=', createParentRef('id')],
     expectedMaxCount: 200
@@ -3238,7 +3238,7 @@ let V = {
     name: 'commentPin',
     type: {
       kind: 'object',
-      name: _$$Y.CommentPin
+      name: EntityType.CommentPin
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['fileCommentId', '=', createParentRef('id')]]
@@ -3248,7 +3248,7 @@ let V = {
     name: 'filePrototypeInfo',
     type: {
       kind: 'object',
-      name: _$$Y.FilePrototypeInfo
+      name: EntityType.FilePrototypeInfo
     },
     filter: ['key', '=', createParentRef('key')],
     bannedFromViews: !0
@@ -3289,7 +3289,7 @@ let V = {
   }]
 };
 let G = {
-  name: _$$Y.CommentAttachment,
+  name: EntityType.CommentAttachment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -3380,7 +3380,7 @@ let G = {
     name: 'metadata',
     type: {
       kind: 'object',
-      name: _$$Y.CommentAttachmentMetadata
+      name: EntityType.CommentAttachmentMetadata
     },
     embedded: !0
   }, {
@@ -3391,7 +3391,7 @@ let G = {
   }]
 };
 let z = {
-  name: _$$Y.CommentAttachmentMetadata,
+  name: EntityType.CommentAttachmentMetadata,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -3404,7 +3404,7 @@ let z = {
     name: 'dimensions',
     type: {
       kind: 'object',
-      name: _$$Y.Dimensions
+      name: EntityType.Dimensions
     },
     nullable: !0,
     embedded: !0
@@ -3412,14 +3412,14 @@ let z = {
     name: 'thumbnail_dimensions',
     type: {
       kind: 'object',
-      name: _$$Y.Dimensions
+      name: EntityType.Dimensions
     },
     nullable: !0,
     embedded: !0
   }]
 };
 let H = {
-  name: _$$Y.CommentClientMeta,
+  name: EntityType.CommentClientMeta,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -3456,7 +3456,7 @@ let H = {
     name: 'nodeOffset',
     type: {
       kind: 'object',
-      name: _$$Y.Vector
+      name: EntityType.Vector
     },
     nullable: !0,
     embedded: !0
@@ -3470,7 +3470,7 @@ let H = {
     name: 'selectionBoxAnchor',
     type: {
       kind: 'object',
-      name: _$$Y.Vector
+      name: EntityType.Vector
     },
     nullable: !0,
     embedded: !0
@@ -3486,7 +3486,7 @@ let H = {
   }]
 };
 let W = {
-  name: _$$Y.CommentMessageMeta,
+  name: EntityType.CommentMessageMeta,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -3511,7 +3511,7 @@ let W = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0,
@@ -3541,14 +3541,14 @@ let W = {
     name: 'children',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0,
     nullable: !0
   }]
 };
 let K = {
-  name: _$$Y.CommentPin,
+  name: EntityType.CommentPin,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -3584,7 +3584,7 @@ let K = {
   }]
 };
 let Y = {
-  name: _$$Y.CommentReaction,
+  name: EntityType.CommentReaction,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -3616,7 +3616,7 @@ let Y = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
@@ -3633,7 +3633,7 @@ let Y = {
   }]
 };
 let q = {
-  name: _$$Y.CommentReadStatus,
+  name: EntityType.CommentReadStatus,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -3681,7 +3681,7 @@ let q = {
   }]
 };
 let $ = {
-  name: _$$Y.CommunityBadge,
+  name: EntityType.CommunityBadge,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -3722,14 +3722,14 @@ let $ = {
     nullable: !0,
     type: {
       kind: 'objects',
-      name: _$$Y.Profile
+      name: EntityType.Profile
     },
     filter: ['id', '=', createParentRef('profileId')],
     expectedMaxCount: 200
   }]
 };
 let Z = {
-  name: _$$Y.CommunityComment,
+  name: EntityType.CommunityComment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -3789,7 +3789,7 @@ let Z = {
     name: 'messageMeta',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0,
     deprecated: {
@@ -3800,7 +3800,7 @@ let Z = {
     name: 'communityMessageMeta',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityCommentMessageMeta
+      name: EntityType.CommunityCommentMessageMeta
     },
     embedded: !0,
     nullable: !0
@@ -3808,14 +3808,14 @@ let Z = {
     name: 'profile',
     type: {
       kind: 'object',
-      name: _$$Y.Profile
+      name: EntityType.Profile
     },
     filter: ['id', '=', createParentRef('profileId')]
   }, {
     name: 'plugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     filter: ['id', '=', createParentRef('pluginId')],
     nullable: !0
@@ -3823,14 +3823,14 @@ let Z = {
     name: 'hubFile',
     type: {
       kind: 'object',
-      name: _$$Y.HubFile
+      name: EntityType.HubFile
     },
     filter: ['id', '=', createParentRef('hubFileId')],
     nullable: !0
   }]
 };
 let X = {
-  name: _$$Y.CommunityCommentMessageMeta,
+  name: EntityType.CommunityCommentMessageMeta,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -3869,14 +3869,14 @@ let X = {
     name: 'children',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityCommentMessageMeta
+      name: EntityType.CommunityCommentMessageMeta
     },
     embedded: !0,
     nullable: !0
   }]
 };
 let Q = {
-  name: _$$Y.CommunityHubFollow,
+  name: EntityType.CommunityHubFollow,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -3896,7 +3896,7 @@ let Q = {
   }]
 };
 let J = {
-  name: _$$Y.CommunityHubLike,
+  name: EntityType.CommunityHubLike,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -3947,7 +3947,7 @@ let J = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -4098,7 +4098,7 @@ let ee = [{
   nullable: !0
 }];
 let et = {
-  name: _$$Y.CommunityLibrary,
+  name: EntityType.CommunityLibrary,
   naturalKey: new Set(['fileKey', 'id']),
   permissionRequired: !1,
   fields: [...ee, {
@@ -4110,7 +4110,7 @@ let et = {
     name: 'hubFile',
     type: {
       kind: 'object',
-      name: _$$Y.HubFile
+      name: EntityType.HubFile
     },
     filter: ['id', '=', createParentRef('hubFileId')]
   }, {
@@ -4150,7 +4150,7 @@ let et = {
     name: 'libraryHierarchyPaths',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryHierarchyPath
+      name: EntityType.LibraryHierarchyPath
     },
     args: [{
       name: 'initialPageSize',
@@ -4164,7 +4164,7 @@ let et = {
     name: 'variableCollections',
     type: {
       kind: 'objects',
-      name: _$$Y.VariableSet
+      name: EntityType.VariableSet
     },
     filter: {
       and: [['unpublishedAt', '=', null], ['hubFileId', '=', createParentRef('hubFileId')]]
@@ -4180,7 +4180,7 @@ let et = {
     name: 'components',
     type: {
       kind: 'objects',
-      name: _$$Y.Component
+      name: EntityType.Component
     },
     filter: {
       and: [['unpublishedAt', '=', null], ['hubFileId', '=', createParentRef('hubFileId')]]
@@ -4196,7 +4196,7 @@ let et = {
     name: 'stateGroups',
     type: {
       kind: 'objects',
-      name: _$$Y.StateGroup
+      name: EntityType.StateGroup
     },
     filter: {
       and: [['unpublishedAt', '=', null], ['hubFileId', '=', createParentRef('hubFileId')]]
@@ -4212,7 +4212,7 @@ let et = {
     name: 'modules',
     type: {
       kind: 'objects',
-      name: _$$Y.Module
+      name: EntityType.Module
     },
     filter: {
       and: [['unpublishedAt', '=', null], ['hubFileId', '=', createParentRef('hubFileId')]]
@@ -4228,7 +4228,7 @@ let et = {
     name: 'libraryKeyToFile',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryKeyToFile
+      name: EntityType.LibraryKeyToFile
     },
     filter: ['hubFileId', '=', createParentRef('hubFileId')],
     nullable: !0
@@ -4254,7 +4254,7 @@ let ei = [{
   name: 'communityLibrary',
   type: {
     kind: 'object',
-    name: _$$Y.CommunityLibrary
+    name: EntityType.CommunityLibrary
   },
   filter: ['hubFileId', '=', createParentRef('hubFileId')],
   nullable: !0,
@@ -4280,7 +4280,7 @@ let en = [{
   }
 }];
 let er = {
-  name: _$$Y.CommunityLibraryFileSubscription,
+  name: EntityType.CommunityLibraryFileSubscription,
   permissionRequired: !0,
   fields: [...en, ...ei, {
     name: 'canRead',
@@ -4305,7 +4305,7 @@ let er = {
   }]
 };
 let ea = {
-  name: _$$Y.CommunityM10nResourceStat,
+  name: EntityType.CommunityM10nResourceStat,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -4336,7 +4336,7 @@ let ea = {
     name: 'monetizedResourceMetadata',
     type: {
       kind: 'object',
-      name: _$$Y.MonetizedResourceMetadata
+      name: EntityType.MonetizedResourceMetadata
     },
     filter: ['id', '=', createParentRef('monetizedResourceMetadataId')]
   }, {
@@ -4389,7 +4389,7 @@ let ea = {
   }]
 };
 let es = {
-  name: _$$Y.CommunityPublisher,
+  name: EntityType.CommunityPublisher,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -4435,7 +4435,7 @@ let es = {
     name: 'profile',
     type: {
       kind: 'object',
-      name: _$$Y.Profile
+      name: EntityType.Profile
     },
     filter: ['id', '=', createParentRef('profileId')],
     nullable: !0
@@ -4449,7 +4449,7 @@ let es = {
   }]
 };
 let eo = {
-  name: _$$Y.CommunityQuickstartLibrary,
+  name: EntityType.CommunityQuickstartLibrary,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -4459,7 +4459,7 @@ let eo = {
   }, ...ei]
 };
 let el = {
-  name: _$$Y.CommunityRatingStats,
+  name: EntityType.CommunityRatingStats,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -4533,7 +4533,7 @@ let el = {
   }]
 };
 let ed = {
-  name: _$$Y.CommunityResourcePayment,
+  name: EntityType.CommunityResourcePayment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -4641,7 +4641,7 @@ let eu = [{
   name: 'libraryKeyToFile',
   type: {
     kind: 'object',
-    name: _$$Y.LibraryKeyToFile
+    name: EntityType.LibraryKeyToFile
   },
   filter: ['fileKey', '=', createParentRef('fileKey')],
   nullable: !0
@@ -4708,7 +4708,7 @@ let eu = [{
   name: 'checkpoint',
   type: {
     kind: 'object',
-    name: _$$Y.Checkpoint
+    name: EntityType.Checkpoint
   },
   embedded: !0,
   typechecked: !1
@@ -4716,7 +4716,7 @@ let eu = [{
   name: 'file',
   type: {
     kind: 'object',
-    name: _$$Y.File
+    name: EntityType.File
   },
   filter: ['key', '=', createParentRef('fileKey')],
   nullable: !0,
@@ -4727,7 +4727,7 @@ let eu = [{
   name: 'hubFile',
   type: {
     kind: 'object',
-    name: _$$Y.HubFile
+    name: EntityType.HubFile
   },
   filter: ['id', '=', createParentRef('hubFileId')],
   nullable: !0,
@@ -4738,7 +4738,7 @@ let eu = [{
   name: 'user',
   type: {
     kind: 'object',
-    name: _$$Y.User
+    name: EntityType.User
   },
   filter: ['id', '=', createParentRef('userId')],
   nullable: !0
@@ -4792,7 +4792,7 @@ let em = {
   name: 'assetAttribution',
   type: {
     kind: 'object',
-    name: _$$Y.AssetAttribution
+    name: EntityType.AssetAttribution
   },
   computed: !0,
   nullable: !0,
@@ -4814,7 +4814,7 @@ let em = {
   }
 };
 let eh = {
-  name: _$$Y.Component,
+  name: EntityType.Component,
   naturalKey: new Set(['componentKey']),
   permissionRequired: !1,
   fields: [...ep, {
@@ -4861,7 +4861,7 @@ let eh = {
     name: 'containingFrame',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryItemContainingFrame
+      name: EntityType.LibraryItemContainingFrame
     },
     embedded: !0,
     nullable: !0
@@ -4890,7 +4890,7 @@ let eh = {
   }, em]
 };
 let eg = {
-  name: _$$Y.ConfirmedRenewalSeatCount,
+  name: EntityType.ConfirmedRenewalSeatCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -4961,7 +4961,7 @@ let eg = {
   }]
 };
 let ef = {
-  name: _$$Y.TeamComponentUpdate,
+  name: EntityType.TeamComponentUpdate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -4987,7 +4987,7 @@ let ef = {
     name: 'component',
     type: {
       kind: 'object',
-      name: _$$Y.Component
+      name: EntityType.Component
     },
     filter: ['componentKey', '=', createParentRef('componentKey')],
     nullable: !0,
@@ -5021,7 +5021,7 @@ let ef = {
   }]
 };
 let e_ = {
-  name: _$$Y.ProjectComponentUpdate,
+  name: EntityType.ProjectComponentUpdate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5047,7 +5047,7 @@ let e_ = {
     name: 'component',
     type: {
       kind: 'object',
-      name: _$$Y.Component
+      name: EntityType.Component
     },
     filter: ['componentKey', '=', createParentRef('componentKey')],
     nullable: !0,
@@ -5081,7 +5081,7 @@ let e_ = {
   }]
 };
 let eA = {
-  name: _$$Y.FileComponentUpdate,
+  name: EntityType.FileComponentUpdate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5107,7 +5107,7 @@ let eA = {
     name: 'component',
     type: {
       kind: 'object',
-      name: _$$Y.Component
+      name: EntityType.Component
     },
     filter: ['componentKey', '=', createParentRef('componentKey')],
     nullable: !0,
@@ -5141,7 +5141,7 @@ let eA = {
   }]
 };
 let ey = {
-  name: _$$Y.TeamStateGroupUpdate,
+  name: EntityType.TeamStateGroupUpdate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5162,7 +5162,7 @@ let ey = {
     name: 'stateGroup',
     type: {
       kind: 'object',
-      name: _$$Y.StateGroup
+      name: EntityType.StateGroup
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0,
@@ -5202,7 +5202,7 @@ let ey = {
   }]
 };
 let eb = {
-  name: _$$Y.ProjectStateGroupUpdate,
+  name: EntityType.ProjectStateGroupUpdate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5223,7 +5223,7 @@ let eb = {
     name: 'stateGroup',
     type: {
       kind: 'object',
-      name: _$$Y.StateGroup
+      name: EntityType.StateGroup
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0,
@@ -5263,7 +5263,7 @@ let eb = {
   }]
 };
 let ev = {
-  name: _$$Y.FileStateGroupUpdate,
+  name: EntityType.FileStateGroupUpdate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5284,7 +5284,7 @@ let ev = {
     name: 'stateGroup',
     type: {
       kind: 'object',
-      name: _$$Y.StateGroup
+      name: EntityType.StateGroup
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0,
@@ -5324,7 +5324,7 @@ let ev = {
   }]
 };
 let eI = {
-  name: _$$Y.DescendedRolesOnTeam,
+  name: EntityType.DescendedRolesOnTeam,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5353,7 +5353,7 @@ let eI = {
     name: 'teamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0
@@ -5361,7 +5361,7 @@ let eI = {
     name: 'projectEditRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     filter: {
       and: [['teamId', '=', createParentRef('teamId')], ['id', 'in', createParentRef('projectEditRoleIds')]]
@@ -5371,7 +5371,7 @@ let eI = {
   }]
 };
 let eE = {
-  name: _$$Y.DefaultTeam,
+  name: EntityType.DefaultTeam,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5397,7 +5397,7 @@ let eE = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')],
@@ -5408,7 +5408,7 @@ let eE = {
   }]
 };
 let ex = {
-  name: _$$Y.DeveloperLink,
+  name: EntityType.DeveloperLink,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5433,7 +5433,7 @@ let ex = {
   }]
 };
 let eS = {
-  name: _$$Y.DeveloperToken,
+  name: EntityType.DeveloperToken,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5481,7 +5481,7 @@ let eS = {
   }]
 };
 let ew = {
-  name: _$$Y.DeveloperRelatedLink,
+  name: EntityType.DeveloperRelatedLink,
   naturalKey: new Set(['fileKey', 'id']),
   permissionRequired: !1,
   fields: [{
@@ -5523,7 +5523,7 @@ let ew = {
   }]
 };
 let eC = {
-  name: _$$Y.DeviceTryFile,
+  name: EntityType.DeviceTryFile,
   naturalKey: new Set(['fileKey']),
   permissionRequired: !1,
   fields: [{
@@ -5557,7 +5557,7 @@ let eC = {
   }]
 };
 let eT = {
-  name: _$$Y.Dimensions,
+  name: EntityType.Dimensions,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -5579,7 +5579,7 @@ let eT = {
   }]
 };
 let ek = {
-  name: _$$Y.DiscoverableLibrary,
+  name: EntityType.DiscoverableLibrary,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5596,7 +5596,7 @@ let ek = {
     name: 'library',
     type: {
       kind: 'object',
-      name: _$$Y.Library
+      name: EntityType.Library
     },
     filter: {
       and: [['fileKey', '=', createParentRef('fileKey')], ['hubFileId', '=', null]]
@@ -5608,7 +5608,7 @@ let ek = {
   }]
 };
 let eR = {
-  name: _$$Y.EduGracePeriod,
+  name: EntityType.EduGracePeriod,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5647,14 +5647,14 @@ let eR = {
   }]
 };
 let eN = {
-  name: _$$Y.EmbeddedSCIMInfo,
+  name: EntityType.EmbeddedSCIMInfo,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
     name: 'enterpriseFields',
     type: {
       kind: 'object',
-      name: _$$Y.SCIMEnterpriseFields
+      name: EntityType.SCIMEnterpriseFields
     },
     embedded: !0,
     nullable: !0
@@ -5662,7 +5662,7 @@ let eN = {
     name: 'figmaEnterpriseFields',
     type: {
       kind: 'object',
-      name: _$$Y.SCIMFigmaEnterpriseFields
+      name: EntityType.SCIMFigmaEnterpriseFields
     },
     embedded: !0,
     nullable: !0
@@ -5701,7 +5701,7 @@ let eN = {
     name: 'name',
     type: {
       kind: 'object',
-      name: _$$Y.SCIMName
+      name: EntityType.SCIMName
     },
     nullable: !0,
     embedded: !0
@@ -5714,7 +5714,7 @@ let eN = {
   }]
 };
 let eP = {
-  name: _$$Y.EsOrgUsersInfo,
+  name: EntityType.EsOrgUsersInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5724,7 +5724,7 @@ let eP = {
   }]
 };
 let eO = {
-  name: _$$Y.ExperimentAssignment,
+  name: EntityType.ExperimentAssignment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5804,7 +5804,7 @@ let eD = [{
   nullable: !0
 }];
 let eL = {
-  name: _$$Y.FavoritedFile,
+  name: EntityType.FavoritedFile,
   permissionRequired: !1,
   fields: [...eD, {
     name: 'readableFile',
@@ -5817,7 +5817,7 @@ let eL = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('resourceId')],
     checkCanRead: {
@@ -5839,7 +5839,7 @@ let eL = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['key', '=', createParentRef('resourceId')], ['_editorTypeRaw', '=', 1]]
@@ -5855,13 +5855,13 @@ let eL = {
   }]
 };
 let eF = {
-  name: _$$Y.FavoritedProject,
+  name: EntityType.FavoritedProject,
   permissionRequired: !1,
   fields: [...eD, {
     name: 'readableProject',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     args: [{
       name: 'userId',
@@ -5878,13 +5878,13 @@ let eF = {
   }]
 };
 let eM = {
-  name: _$$Y.FavoritedPrototype,
+  name: EntityType.FavoritedPrototype,
   permissionRequired: !1,
   fields: [...eD, {
     name: 'readablePrototype',
     type: {
       kind: 'object',
-      name: _$$Y.Prototype
+      name: EntityType.Prototype
     },
     args: [{
       name: 'userId',
@@ -5901,7 +5901,7 @@ let eM = {
   }]
 };
 let ej = {
-  name: _$$Y.FavoritedResource,
+  name: EntityType.FavoritedResource,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5936,7 +5936,7 @@ let ej = {
   }
 };
 let eU = {
-  name: _$$Y.FavoritedResourceV2,
+  name: EntityType.FavoritedResourceV2,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -5975,7 +5975,7 @@ let eU = {
     name: 'favoritedFile',
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -5985,7 +5985,7 @@ let eU = {
     name: 'favoritedPrototype',
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     nullable: !0,
     filter: {
@@ -5995,7 +5995,7 @@ let eU = {
     name: 'favoritedProject',
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedProject
+      name: EntityType.FavoritedProject
     },
     nullable: !0,
     filter: {
@@ -6005,7 +6005,7 @@ let eU = {
     name: 'favoritedTeam',
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedTeam
+      name: EntityType.FavoritedTeam
     },
     nullable: !0,
     filter: {
@@ -6015,7 +6015,7 @@ let eU = {
     name: 'favoritedWorkspace',
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedWorkspace
+      name: EntityType.FavoritedWorkspace
     },
     nullable: !0,
     filter: {
@@ -6025,7 +6025,7 @@ let eU = {
     name: 'favoritedFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -6036,7 +6036,7 @@ let eU = {
     name: 'favoritedPrototypes',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     nullable: !0,
     filter: {
@@ -6047,7 +6047,7 @@ let eU = {
     name: 'favoritedProjects',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedProject
+      name: EntityType.FavoritedProject
     },
     nullable: !0,
     filter: {
@@ -6058,7 +6058,7 @@ let eU = {
     name: 'favoritedTeams',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedTeam
+      name: EntityType.FavoritedTeam
     },
     nullable: !0,
     filter: {
@@ -6069,7 +6069,7 @@ let eU = {
     name: 'favoritedWorkspaces',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedWorkspace
+      name: EntityType.FavoritedWorkspace
     },
     nullable: !0,
     filter: {
@@ -6080,7 +6080,7 @@ let eU = {
     name: 'userSidebarSections',
     type: {
       kind: 'objects',
-      name: _$$Y.UserSidebarSection
+      name: EntityType.UserSidebarSection
     },
     nullable: !0,
     filter: {
@@ -6091,7 +6091,7 @@ let eU = {
     name: 'userSidebarSectionsV2',
     type: {
       kind: 'objects',
-      name: _$$Y.UserSidebarSection
+      name: EntityType.UserSidebarSection
     },
     nullable: !0,
     filter: {
@@ -6101,7 +6101,7 @@ let eU = {
   }]
 };
 let eB = {
-  name: _$$Y.FavoritedResources,
+  name: EntityType.FavoritedResources,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6129,7 +6129,7 @@ let eB = {
     name: 'favoritedFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -6140,7 +6140,7 @@ let eB = {
     name: 'favoritedPrototypes',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     nullable: !0,
     filter: {
@@ -6151,7 +6151,7 @@ let eB = {
     name: 'favoritedProjects',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedProject
+      name: EntityType.FavoritedProject
     },
     nullable: !0,
     filter: {
@@ -6162,7 +6162,7 @@ let eB = {
     name: 'favoritedTeams',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedTeam
+      name: EntityType.FavoritedTeam
     },
     nullable: !0,
     filter: {
@@ -6173,7 +6173,7 @@ let eB = {
     name: 'favoritedWorkspaces',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedWorkspace
+      name: EntityType.FavoritedWorkspace
     },
     nullable: !0,
     filter: {
@@ -6206,13 +6206,13 @@ let eB = {
   }]
 };
 let eV = {
-  name: _$$Y.FavoritedTeam,
+  name: EntityType.FavoritedTeam,
   permissionRequired: !1,
   fields: [...eD, {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     args: [{
       name: 'userId',
@@ -6229,13 +6229,13 @@ let eV = {
   }]
 };
 let eG = {
-  name: _$$Y.FavoritedWorkspace,
+  name: EntityType.FavoritedWorkspace,
   permissionRequired: !1,
   fields: [...eD, {
     name: 'licenseGroup',
     type: {
       kind: 'object',
-      name: _$$Y.LicenseGroup
+      name: EntityType.LicenseGroup
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -6247,7 +6247,7 @@ let eG = {
     name: 'workspace',
     type: {
       kind: 'object',
-      name: _$$Y.Workspace
+      name: EntityType.Workspace
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -6257,7 +6257,7 @@ let eG = {
   }]
 };
 let ez = {
-  name: _$$Y.FeedComment,
+  name: EntityType.FeedComment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6284,14 +6284,14 @@ let ez = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
     name: 'messageMeta',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0
   }, {
@@ -6303,7 +6303,7 @@ let ez = {
     name: 'reactions',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedReaction
+      name: EntityType.FeedReaction
     },
     expectedMaxCount: 1e3,
     orderBy: [['createdAt', 'ASC']],
@@ -6314,7 +6314,7 @@ let ez = {
     name: 'attachments',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedCommentAttachment
+      name: EntityType.FeedCommentAttachment
     },
     expectedMaxCount: 10,
     orderBy: [['uploadedAt', 'ASC']],
@@ -6322,7 +6322,7 @@ let ez = {
   }]
 };
 let eH = {
-  name: _$$Y.FeedCommentAttachment,
+  name: EntityType.FeedCommentAttachment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6407,7 +6407,7 @@ let eH = {
     name: 'metadata',
     type: {
       kind: 'object',
-      name: _$$Y.CommentAttachmentMetadata
+      name: EntityType.CommentAttachmentMetadata
     },
     embedded: !0
   }, {
@@ -6418,7 +6418,7 @@ let eH = {
   }]
 };
 let eW = {
-  name: _$$Y.FeedPost,
+  name: EntityType.FeedPost,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6456,7 +6456,7 @@ let eW = {
     name: 'creator',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('creatorId')]
   }, {
@@ -6468,7 +6468,7 @@ let eW = {
     name: 'reactions',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedReaction
+      name: EntityType.FeedReaction
     },
     expectedMaxCount: 1e3,
     orderBy: [['createdAt', 'ASC']],
@@ -6479,7 +6479,7 @@ let eW = {
     name: 'comments',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedComment
+      name: EntityType.FeedComment
     },
     expectedMaxCount: 1e3,
     filter: ['feedPostPublicUuid', '=', createParentRef('publicUuid')]
@@ -6492,14 +6492,14 @@ let eW = {
     name: 'viewerIds',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedViewer
+      name: EntityType.FeedViewer
     },
     embedded: !0
   }, {
     name: 'views',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedSeenState
+      name: EntityType.FeedSeenState
     },
     expectedMaxCount: 1e4,
     filter: ['feedPostPublicUuid', '=', createParentRef('publicUuid')],
@@ -6517,7 +6517,7 @@ let eW = {
     name: 'reactionsForUser',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedReaction
+      name: EntityType.FeedReaction
     },
     args: [{
       name: 'userId',
@@ -6545,7 +6545,7 @@ let eW = {
     name: 'isFollower',
     type: {
       kind: 'object',
-      name: _$$Y.FeedPostFollower
+      name: EntityType.FeedPostFollower
     },
     nullable: !0,
     args: [{
@@ -6604,7 +6604,7 @@ let eW = {
     name: 'descriptionMeta',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0,
     nullable: !1
@@ -6618,7 +6618,7 @@ let eW = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -6628,7 +6628,7 @@ let eW = {
   }]
 };
 let eK = {
-  name: _$$Y.FeedPostFollower,
+  name: EntityType.FeedPostFollower,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6648,7 +6648,7 @@ let eK = {
   }]
 };
 let eY = {
-  name: _$$Y.FeedPostResult,
+  name: EntityType.FeedPostResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6687,7 +6687,7 @@ let eY = {
     name: 'feedPost',
     type: {
       kind: 'object',
-      name: _$$Y.FeedPost
+      name: EntityType.FeedPost
     },
     filter: ['publicUuid', '=', createParentRef('publicUuid')],
     orderBy: [['createdAt', 'DESC']],
@@ -6696,7 +6696,7 @@ let eY = {
   }]
 };
 let eq = {
-  name: _$$Y.FeedReaction,
+  name: EntityType.FeedReaction,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6727,7 +6727,7 @@ let eq = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
@@ -6738,7 +6738,7 @@ let eq = {
   }]
 };
 let e$ = {
-  name: _$$Y.FeedSeenState,
+  name: EntityType.FeedSeenState,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6759,7 +6759,7 @@ let e$ = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
@@ -6770,7 +6770,7 @@ let e$ = {
   }]
 };
 let eZ = {
-  name: _$$Y.FeedTag,
+  name: EntityType.FeedTag,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6805,7 +6805,7 @@ let eZ = {
   }]
 };
 let eX = {
-  name: _$$Y.FeedTagFollower,
+  name: EntityType.FeedTagFollower,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6826,13 +6826,13 @@ let eX = {
     name: 'feedTag',
     type: {
       kind: 'object',
-      name: _$$Y.FeedTag
+      name: EntityType.FeedTag
     },
     filter: ['id', '=', createParentRef('feedTagId')]
   }]
 };
 let eQ = {
-  name: _$$Y.FeedViewer,
+  name: EntityType.FeedViewer,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -6844,13 +6844,13 @@ let eQ = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('id')]
   }]
 };
 let eJ = {
-  name: _$$Y.FigFileCheckpoint,
+  name: EntityType.FigFileCheckpoint,
   permissionRequired: !1,
   naturalKey: new Set(['id', 'fileKey']),
   fields: [{
@@ -6883,14 +6883,14 @@ let eJ = {
     name: 'checkpoint',
     type: {
       kind: 'object',
-      name: _$$Y.FileCheckpoint
+      name: EntityType.FileCheckpoint
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('checkpointId')]
   }]
 };
 let e0 = {
-  name: _$$Y.FigFileLink,
+  name: EntityType.FigFileLink,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -6938,7 +6938,7 @@ let e0 = {
   }]
 };
 let e1 = {
-  name: _$$Y.FigFileLinkExpirationConfig,
+  name: EntityType.FigFileLinkExpirationConfig,
   permissionRequired: !1,
   naturalKey: new Set(['figFileKey']),
   fields: [{
@@ -6994,7 +6994,7 @@ let e1 = {
     name: 'setByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('setByUserId')],
     nullable: !0
@@ -7002,7 +7002,7 @@ let e1 = {
 };
 let e2 = {
   naturalKey: new Set(['fileKey', 'anonymousUserId']),
-  name: _$$Y.FigFilePasswordAuthentication,
+  name: EntityType.FigFilePasswordAuthentication,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -7034,7 +7034,7 @@ let e2 = {
   }]
 };
 let e5 = {
-  name: _$$Y.FigFilePwdConfig,
+  name: EntityType.FigFilePwdConfig,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey']),
   fields: [{
@@ -7068,7 +7068,7 @@ let e5 = {
     name: 'setByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('setByUserId')],
     nullable: !0
@@ -7080,7 +7080,7 @@ let e5 = {
   }]
 };
 let e4 = {
-  name: _$$Y.FigFileWorkshopMode,
+  name: EntityType.FigFileWorkshopMode,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey']),
   fields: [{
@@ -7140,7 +7140,7 @@ let e9 = {
   name: 'canViewPrototypeV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7197,7 +7197,7 @@ let tt = {
   name: 'canViewV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7254,7 +7254,7 @@ let tn = {
   name: 'canEditV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7311,7 +7311,7 @@ let ta = {
   name: 'canEditCanvasV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7368,7 +7368,7 @@ let to = {
   name: 'canPublishTemplateV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7425,7 +7425,7 @@ let td = {
   name: 'canInsertTemplateV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7470,7 +7470,7 @@ let tu = {
   name: 'canAdminWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7503,7 +7503,7 @@ let tm = {
   name: 'isOwnerWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7536,7 +7536,7 @@ let tg = {
   name: 'canBecomeEditorV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7581,7 +7581,7 @@ let t_ = {
   name: 'canClickButtonToUpgradeAndEditWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7638,7 +7638,7 @@ let ty = {
   name: 'canManageV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7683,7 +7683,7 @@ let tv = {
   name: 'hasRoleAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7716,7 +7716,7 @@ let tE = {
   name: 'canBeMentionedInCommentWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7749,7 +7749,7 @@ let tS = {
   name: 'canDownloadFileWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7794,7 +7794,7 @@ let tC = {
   name: 'canExportWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7839,7 +7839,7 @@ let tk = {
   name: 'canAccessFileThroughApiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7872,7 +7872,7 @@ let tN = {
   name: 'canModifyRolesWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7917,7 +7917,7 @@ let tO = {
   name: 'canViewMetadataWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7962,7 +7962,7 @@ let tL = {
   name: 'canGainViewWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -7995,7 +7995,7 @@ let tM = {
   name: 'canGainViewPrototypeWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8040,7 +8040,7 @@ let tU = {
   name: 'canAccessFragmentsWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8085,7 +8085,7 @@ let tV = {
   name: 'canAccessLibraryWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8130,7 +8130,7 @@ let tz = {
   name: 'canRenameV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8175,7 +8175,7 @@ let tW = {
   name: 'canDeleteV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8220,7 +8220,7 @@ let tY = {
   name: 'canTrashV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8277,7 +8277,7 @@ let t$ = {
   name: 'canRestoreV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8334,7 +8334,7 @@ let tX = {
   name: 'canRestoreToOtherFoldersWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8391,7 +8391,7 @@ let tJ = {
   name: 'canPermanentlyDeleteV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8448,7 +8448,7 @@ let t1 = {
   name: 'canMoveWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8505,7 +8505,7 @@ let t5 = {
   name: 'canFavoriteV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8562,7 +8562,7 @@ let t3 = {
   name: 'canViewAndCreateCommentsV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8619,7 +8619,7 @@ let t7 = {
   name: 'canMoveCommentsV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8676,7 +8676,7 @@ let t9 = {
   name: 'canEditIgnorePaidStatusV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8733,7 +8733,7 @@ let it = {
   name: 'canEditIgnoreEduGracePeriodV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8790,7 +8790,7 @@ let ir = {
   name: 'canViewLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8835,7 +8835,7 @@ let is = {
   name: 'canOrgViewLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8880,7 +8880,7 @@ let il = {
   name: 'canEditLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8925,7 +8925,7 @@ let ic = {
   name: 'canEditLinkAccessIgnorePasswordsWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8958,7 +8958,7 @@ let ip = {
   name: 'canOrgEditLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -8991,7 +8991,7 @@ let ih = {
   name: 'canViewMetadataLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9036,7 +9036,7 @@ let i_ = {
   name: 'canViewPrototypeLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9081,7 +9081,7 @@ let iy = {
   name: 'canOrgViewPrototypeLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9126,7 +9126,7 @@ let iv = {
   name: 'canAccessFullDevModeV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9171,7 +9171,7 @@ let iE = {
   name: 'isEligibleForDevModeTrialV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9204,7 +9204,7 @@ let iS = {
   name: 'isInDevModeTrialV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9237,7 +9237,7 @@ let iC = {
   name: 'devModeTrialRequestPendingWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9270,7 +9270,7 @@ let ik = {
   name: 'devModeRequestPendingWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9303,7 +9303,7 @@ let iN = {
   name: 'devModeRequestDeniedWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9348,7 +9348,7 @@ let iO = {
   name: 'canAccessDevModeEntryPointV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9405,7 +9405,7 @@ let iL = {
   name: 'canAccessFullDevModeOrgPlusV2WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9462,7 +9462,7 @@ let iM = {
   name: 'canAccessFullCodeConnectWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9507,7 +9507,7 @@ let iU = {
   name: 'canUseDevModeDemoFileWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9552,7 +9552,7 @@ let iV = {
   name: 'canViewComponentBrowserWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9609,7 +9609,7 @@ let iz = {
   name: 'canCreateCodeConnectWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9666,7 +9666,7 @@ let iW = {
   name: 'canConsumeCodeConnectWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9723,7 +9723,7 @@ let iY = {
   name: 'canViewAnnotationsWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9780,7 +9780,7 @@ let i$ = {
   name: 'canViewAnnotationsMegadotWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9837,7 +9837,7 @@ let iX = {
   name: 'canEditAnnotationsWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9882,7 +9882,7 @@ let iJ = {
   name: 'canAccessTextureModeWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9927,7 +9927,7 @@ let i1 = {
   name: 'canUseFigmaAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -9984,7 +9984,7 @@ let i5 = {
   name: 'canUseFigmaAiBaseWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10041,7 +10041,7 @@ let i3 = {
   name: 'canUseFigmaAiIgnoreAiToggleWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10098,7 +10098,7 @@ let i7 = {
   name: 'canUseFigjamAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10155,7 +10155,7 @@ let i9 = {
   name: 'canUseSlidesAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10212,7 +10212,7 @@ let nt = {
   name: 'canUseFigmakeAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10269,7 +10269,7 @@ let nn = {
   name: 'canUseFigmakeAiBaseWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10326,7 +10326,7 @@ let na = {
   name: 'canUseFragmentSearchAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10371,7 +10371,7 @@ let no = {
   name: 'canUseSlidesDesignToggleWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10404,7 +10404,7 @@ let nd = {
   name: 'cannotPublishToCommunityWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10449,7 +10449,7 @@ let nu = {
   name: 'canSendWebhookWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10506,7 +10506,7 @@ let nm = {
   name: 'isWorkspaceVisibleWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10563,7 +10563,7 @@ let ng = {
   name: 'canPinToWorkspaceWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10620,7 +10620,7 @@ let n_ = {
   name: 'canViewWorkspacePinWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10665,7 +10665,7 @@ let ny = {
   name: 'seatTypePaidStatusTestPermissionWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10698,7 +10698,7 @@ let nv = {
   name: 'mustUpgradeToShareDraftWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10743,7 +10743,7 @@ let nE = {
   name: 'mustRequestAccountUpgradeToEditWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10800,7 +10800,7 @@ let nS = {
   name: 'mustRequestEditorRoleToEditWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10863,7 +10863,7 @@ let nC = {
   name: 'canAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10926,7 +10926,7 @@ let nk = {
   name: 'canCreateBranchWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -10983,7 +10983,7 @@ let nN = {
   name: 'canEditOrAccessFullDevModeWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11028,7 +11028,7 @@ let nO = {
   name: 'shouldUseConnectedPlanUserWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11061,7 +11061,7 @@ let nL = {
   name: 'shouldUseConnectedPlanUserDevModeWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11094,7 +11094,7 @@ let nM = {
   name: 'mustRequestUpgradeToEditDeveloperLinksWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11127,7 +11127,7 @@ let nU = {
   name: 'canRunExtensionsWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11172,7 +11172,7 @@ let nV = {
   name: 'canEditCmsStructureWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11229,7 +11229,7 @@ let nz = [iP, iO, nw, tT, tk, tj, tU, iF, iM, iD, iL, ib, iv, tB, tV, iQ, iJ, nC
   name: 'canPublishSiteWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11272,7 +11272,7 @@ let nz = [iP, iO, nw, tT, tk, tj, tU, iF, iM, iD, iL, ib, iv, tB, tV, iQ, iJ, nC
   name: 'canTestPlanRecordPermissionWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11317,7 +11317,7 @@ let nW = {
   name: 'canViewPrototypeWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11374,7 +11374,7 @@ let nY = {
   name: 'canViewV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11431,7 +11431,7 @@ let n$ = {
   name: 'canEditV3WithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11476,7 +11476,7 @@ let nX = {
   name: 'canAdminWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11509,7 +11509,7 @@ let nJ = {
   name: 'isOwnerWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11542,7 +11542,7 @@ let n1 = {
   name: 'canManageWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11575,7 +11575,7 @@ let n5 = {
   name: 'canMoveWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11620,7 +11620,7 @@ let n3 = {
   name: 'canViewLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11677,7 +11677,7 @@ let n7 = {
   name: 'canEditLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11734,7 +11734,7 @@ let n9 = {
   name: 'canViewPrototypeLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11779,7 +11779,7 @@ let rt = {
   name: 'canOrgViewLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11812,7 +11812,7 @@ let rn = {
   name: 'canOrgEditLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11845,7 +11845,7 @@ let ra = {
   name: 'canOrgViewPrototypeLinkAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11890,7 +11890,7 @@ let ro = {
   name: 'canDiscoverWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11935,7 +11935,7 @@ let rd = {
   name: 'shouldUseConnectedPlanUserWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -11968,7 +11968,7 @@ let ru = {
   name: 'canViewWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12001,7 +12001,7 @@ let rm = {
   name: 'canEditWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12034,7 +12034,7 @@ let rg = {
   name: 'isOwnerWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12067,7 +12067,7 @@ let r_ = {
   name: 'canDiscoverWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12100,7 +12100,7 @@ let ry = {
   name: 'canCreateCooperFileWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12133,7 +12133,7 @@ let rv = {
   name: 'canCreateFigjamFileWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12166,7 +12166,7 @@ let rE = {
   name: 'canCreateDesignFileWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12199,7 +12199,7 @@ let rS = {
   name: 'canCreateSitesFileWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12232,7 +12232,7 @@ let rC = {
   name: 'canCreateSlidesFileWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12265,7 +12265,7 @@ let rk = {
   name: 'canCreateFigmakeFileWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12298,7 +12298,7 @@ let rN = {
   name: 'canModifyRolesWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12331,7 +12331,7 @@ let rO = {
   name: 'canMoveWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12364,7 +12364,7 @@ let rL = {
   name: 'canTransferExternallyWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12397,7 +12397,7 @@ let rM = {
   name: 'canTransferCopyWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12430,7 +12430,7 @@ let rU = {
   name: 'canTrashWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12463,7 +12463,7 @@ let rV = {
   name: 'canRestoreWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12496,7 +12496,7 @@ let rz = {
   name: 'canPermanentlyDeleteWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12529,7 +12529,7 @@ let rW = {
   name: 'shouldUseConnectedPlanUserDesignWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12562,7 +12562,7 @@ let rY = {
   name: 'shouldUseConnectedPlanUserFigjamWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12595,7 +12595,7 @@ let r$ = {
   name: 'shouldUseConnectedPlanUserSlidesWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12628,7 +12628,7 @@ let rX = {
   name: 'shouldUseConnectedPlanUserDevModeWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12661,7 +12661,7 @@ let rJ = {
   name: 'shouldUseConnectedPlanUserSitesWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12694,7 +12694,7 @@ let r1 = {
   name: 'shouldUseConnectedPlanUserFigmakeWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12736,7 +12736,7 @@ let r5 = {
   name: 'shouldUseConnectedPlanUserWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12778,7 +12778,7 @@ let r3 = {
   name: 'canConnectWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12811,7 +12811,7 @@ let r7 = {
   name: 'canViewLimitedInfoWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12844,7 +12844,7 @@ let r9 = {
   name: 'canViewWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12877,7 +12877,7 @@ let at = {
   name: 'canViewWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12910,7 +12910,7 @@ let an = {
   name: 'isGuestWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12943,7 +12943,7 @@ let aa = {
   name: 'isMemberWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -12976,7 +12976,7 @@ let ao = {
   name: 'isAdminWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13009,7 +13009,7 @@ let ad = {
   name: 'cannotJoinOrgUserExternalContentRestrictedWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13042,7 +13042,7 @@ let au = {
   name: 'cannotJoinOrgGuestsBannedWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13075,7 +13075,7 @@ let am = {
   name: 'canUseFigmaAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13108,7 +13108,7 @@ let ag = {
   name: 'canUseFigmaAiIgnoreAiToggleWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13141,7 +13141,7 @@ let a_ = {
   name: 'canUseFigmaCollabAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13174,7 +13174,7 @@ let ay = {
   name: 'canUseFigmaCollabAiIgnoreAiToggleWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13207,7 +13207,7 @@ let av = {
   name: 'hostPlanHasFigmaAiEnabledWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13231,7 +13231,7 @@ let aE = {
   name: 'isGuestWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::IS_GUEST',
   embedded: !0
@@ -13247,7 +13247,7 @@ let aS = {
   name: 'isMemberWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::IS_MEMBER',
   embedded: !0
@@ -13263,7 +13263,7 @@ let aC = {
   name: 'isAdminWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::IS_ADMIN',
   embedded: !0
@@ -13272,7 +13272,7 @@ let aT = {
   name: 'canUpgradeAutoPathwayDeveloperWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_UPGRADE_AUTO_PATHWAY_DEVELOPER',
   embedded: !0
@@ -13281,7 +13281,7 @@ let ak = {
   name: 'canUpgradeAutoPathwayCollaboratorWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_UPGRADE_AUTO_PATHWAY_COLLABORATOR',
   embedded: !0
@@ -13290,7 +13290,7 @@ let aR = {
   name: 'canUpgradeAutoPathwayExpertWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_UPGRADE_AUTO_PATHWAY_EXPERT',
   embedded: !0
@@ -13299,7 +13299,7 @@ let aN = {
   name: 'canUpgradeAutoPathwayContentWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_UPGRADE_AUTO_PATHWAY_CONTENT',
   embedded: !0
@@ -13308,7 +13308,7 @@ let aP = {
   name: 'canUpgradeCollaboratorWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_UPGRADE_COLLABORATOR',
   embedded: !0
@@ -13317,7 +13317,7 @@ let aO = {
   name: 'canUpgradeDeveloperWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_UPGRADE_DEVELOPER',
   embedded: !0
@@ -13326,7 +13326,7 @@ let aD = {
   name: 'canUpgradeExpertWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_UPGRADE_EXPERT',
   embedded: !0
@@ -13335,7 +13335,7 @@ let aL = {
   name: 'canUpgradeContentWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_UPGRADE_CONTENT',
   embedded: !0
@@ -13344,7 +13344,7 @@ let aF = {
   name: 'canUseFileViewHistoryWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_USE_FILE_VIEW_HISTORY',
   embedded: !0
@@ -13353,7 +13353,7 @@ let aM = {
   name: 'needUpgradeCollaboratorWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::NEED_UPGRADE_COLLABORATOR',
   embedded: !0
@@ -13362,7 +13362,7 @@ let aj = {
   name: 'needUpgradeDeveloperWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::NEED_UPGRADE_DEVELOPER',
   embedded: !0
@@ -13371,7 +13371,7 @@ let aU = {
   name: 'needUpgradeExpertWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::NEED_UPGRADE_EXPERT',
   embedded: !0
@@ -13380,7 +13380,7 @@ let aB = {
   name: 'needUpgradeContentWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::NEED_UPGRADE_CONTENT',
   embedded: !0
@@ -13389,7 +13389,7 @@ let aV = {
   name: 'canConnectWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_CONNECT',
   embedded: !0
@@ -13398,7 +13398,7 @@ let aG = {
   name: 'canViewInvoicesWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_VIEW_INVOICES',
   embedded: !0
@@ -13407,7 +13407,7 @@ let az = {
   name: 'isEligibleProvisionalAccessCollaboratorWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::IS_ELIGIBLE_PROVISIONAL_ACCESS_COLLABORATOR',
   embedded: !0
@@ -13416,7 +13416,7 @@ let aH = {
   name: 'isEligibleProvisionalAccessDeveloperWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::IS_ELIGIBLE_PROVISIONAL_ACCESS_DEVELOPER',
   embedded: !0
@@ -13425,7 +13425,7 @@ let aW = {
   name: 'isEligibleProvisionalAccessExpertWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::IS_ELIGIBLE_PROVISIONAL_ACCESS_EXPERT',
   embedded: !0
@@ -13434,7 +13434,7 @@ let aK = {
   name: 'isEligibleProvisionalAccessContentWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::IS_ELIGIBLE_PROVISIONAL_ACCESS_CONTENT',
   embedded: !0
@@ -13443,7 +13443,7 @@ let aY = {
   name: 'canSetupGithubAppWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_SETUP_GITHUB_APP',
   embedded: !0
@@ -13464,7 +13464,7 @@ let aq = [{
   name: 'canConsumeGithubAppWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   permissionName: 'PLAN::CAN_CONSUME_GITHUB_APP',
   embedded: !0
@@ -13603,7 +13603,7 @@ let aZ = {
   name: 'canViewWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13636,7 +13636,7 @@ let aQ = {
   name: 'canEditWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13669,7 +13669,7 @@ let a0 = {
   name: 'canAdminWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13702,7 +13702,7 @@ let a2 = {
   name: 'isOwnerWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13735,7 +13735,7 @@ let a4 = {
   name: 'editRoleAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13768,7 +13768,7 @@ let a6 = {
   name: 'adminRoleAccessWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13801,7 +13801,7 @@ let a8 = {
   name: 'canDiscoverWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13834,7 +13834,7 @@ let se = {
   name: 'canDeleteWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13867,7 +13867,7 @@ let si = {
   name: 'canViewInAdminWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13900,7 +13900,7 @@ let sr = {
   name: 'canViewLimitedInfoWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13933,7 +13933,7 @@ let ss = {
   name: 'canUseFigmaAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13966,7 +13966,7 @@ let sl = {
   name: 'canUseFigmaAiIgnoreAiToggleWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -13999,7 +13999,7 @@ let sc = {
   name: 'canUseFigmaCollabAiWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -14032,7 +14032,7 @@ let sp = {
   name: 'canUseFigmaCollabAiIgnoreAiToggleWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -14065,7 +14065,7 @@ let sh = {
   name: 'hostPlanHasFigmaAiEnabledWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -14098,7 +14098,7 @@ let sf = {
   name: 'canViewWithReasons',
   type: {
     kind: 'object',
-    name: _$$Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: 'userId',
@@ -14115,7 +14115,7 @@ let sA = {
   name: 'permissionFlagTestFlag',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14139,7 +14139,7 @@ let sy = {
   name: 'permissionFlagCampfire',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14163,7 +14163,7 @@ let sb = {
   name: 'permissionFlagCanDiscoverPendingInvite',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14187,7 +14187,7 @@ let sv = {
   name: 'permissionFlagCommunityHubAdmin',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14211,7 +14211,7 @@ let sI = {
   name: 'permissionFlagCommunityHubAdminReviewer',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14235,7 +14235,7 @@ let sE = {
   name: 'permissionFlagCommunityHubImageInspection',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14259,7 +14259,7 @@ let sx = {
   name: 'permissionFlagExemptGuestsFromMfaRequirement',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14283,7 +14283,7 @@ let sS = {
   name: 'permissionFlagFcGeneral',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14307,7 +14307,7 @@ let sw = {
   name: 'permissionFlagPv2LoadableEditorLicenseTypeMapping',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14331,7 +14331,7 @@ let sC = {
   name: 'permissionFlagPv2PlanRecordPerms',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14355,7 +14355,7 @@ let sT = {
   name: 'permissionFlagPv2PlanRecordDummyPolicy',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14379,7 +14379,7 @@ let sk = {
   name: 'permissionFlagSites',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14403,7 +14403,7 @@ let sR = {
   name: 'permissionFlagStsK12GoogleOrgEnabled',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14427,7 +14427,7 @@ let sN = {
   name: 'permissionFlagPermEnableDebuggerLogForUser',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14451,7 +14451,7 @@ let sP = {
   name: 'permissionFlagProTemplatesFigjam',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14475,7 +14475,7 @@ let sO = {
   name: 'permissionFlagOrgFileExportSetting',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14499,7 +14499,7 @@ let sD = {
   name: 'permissionFlagFcPlanEnabled',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14523,7 +14523,7 @@ let sL = {
   name: 'permissionFlagCooper',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14547,7 +14547,7 @@ let sF = {
   name: 'permissionFlagDtLitmus',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14571,7 +14571,7 @@ let sM = {
   name: 'permissionFlagMakeAiAllowlistForAtlassian',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14595,7 +14595,7 @@ let sj = {
   name: 'permissionFlagDevModeDemoFile',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14619,7 +14619,7 @@ let sU = {
   name: 'permissionFlagProductTrialsLg',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14643,7 +14643,7 @@ let sB = {
   name: 'permissionFlagProductTrialsFigmake',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14667,7 +14667,7 @@ let sV = {
   name: 'permissionFlagSlidesStarterTeamDesignToggle',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14691,7 +14691,7 @@ let sG = {
   name: 'permissionFlagLitmusGuestAccess',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14715,7 +14715,7 @@ let sz = {
   name: 'permissionFlagBake',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14739,7 +14739,7 @@ let sH = {
   name: 'permissionFlagBakeCheckPlan',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14763,7 +14763,7 @@ let sW = {
   name: 'permissionFlagBakePlanEnabled',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14787,7 +14787,7 @@ let sK = {
   name: 'permissionFlagCmtyMakeDiscovery',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14811,7 +14811,7 @@ let sY = {
   name: 'permissionFlagCmtyMakePublishing',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14835,7 +14835,7 @@ let sq = {
   name: 'permissionFlagCmtyMakePublishingUpdates',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14859,7 +14859,7 @@ let s$ = {
   name: 'permissionFlagMakeTemplatePublishing',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14883,7 +14883,7 @@ let sZ = {
   name: 'permissionFlagMakeTemplateDiscovery',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14907,7 +14907,7 @@ let sX = {
   name: 'permissionFlagBakeStarterLimit',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14931,7 +14931,7 @@ let sQ = {
   name: 'permissionFlagBakeStarterPaywall',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14955,7 +14955,7 @@ let sJ = {
   name: 'permissionFlagBakeMonetizationPlan',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -14979,7 +14979,7 @@ let s0 = {
   name: 'permissionFlagCeIlRoot',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -15003,7 +15003,7 @@ let s1 = {
   name: 'permissionFlagStsStarterEnabled',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -15027,7 +15027,7 @@ let s2 = {
   name: 'permissionFlagDenyCollabWithoutProductsEnabled',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -15051,7 +15051,7 @@ let s5 = {
   name: 'permissionFlagBuzzPluginsRunnable',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -15075,7 +15075,7 @@ let s4 = {
   name: 'permissionFlagSharedContainerSettingPermV2',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -15099,7 +15099,7 @@ let s3 = {
   name: 'permissionFlagUserGroups',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -15123,7 +15123,7 @@ let s6 = {
   name: 'permissionFlagPermissionsPlanTestFlag',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -15145,7 +15145,7 @@ let s7 = {
   name: 'permissionFlagPermissionsOrgTestFlag',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -15166,7 +15166,7 @@ let s8 = {
   name: 'permissionFlagPermissionsTeamTestFlag',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -19359,7 +19359,7 @@ let la = [{
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19384,7 +19384,7 @@ let ls = [{
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   nullable: !0,
   computed: !0,
@@ -19404,7 +19404,7 @@ let lo = [{
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19447,7 +19447,7 @@ let ll = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19496,7 +19496,7 @@ let ld = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19543,7 +19543,7 @@ let lc = [{
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19592,7 +19592,7 @@ let lu = [{
   name: 'planUser',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   args: [{
     name: 'parentId',
@@ -19650,7 +19650,7 @@ let lp = [{
   name: 'planUserById',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   args: [{
     name: 'requestingUserId',
@@ -19721,7 +19721,7 @@ let lm = [{
   name: 'draftsFolderOwnerPlanUser',
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19745,7 +19745,7 @@ let lh = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19764,7 +19764,7 @@ let lg = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19783,7 +19783,7 @@ let lf = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19802,7 +19802,7 @@ let l_ = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19837,7 +19837,7 @@ let lA = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19877,7 +19877,7 @@ let ly = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19927,7 +19927,7 @@ let lb = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -19971,7 +19971,7 @@ let lv = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -20011,7 +20011,7 @@ let lI = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -20051,7 +20051,7 @@ let lE = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -20091,7 +20091,7 @@ let lx = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -20131,7 +20131,7 @@ let lS = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -20171,7 +20171,7 @@ let lw = {
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -20211,7 +20211,7 @@ let lC = [{
   }],
   type: {
     kind: 'object',
-    name: _$$Y.PlanUser
+    name: EntityType.PlanUser
   },
   computed: !0,
   nullable: !0,
@@ -20559,7 +20559,7 @@ let lz = [{
   name: 'planPublicInfo',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPublicInfo
+    name: EntityType.PlanPublicInfo
   },
   computed: !0,
   args: [{
@@ -20580,7 +20580,7 @@ let lH = [{
   name: 'plan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   computed: !0,
   args: [{
@@ -20599,7 +20599,7 @@ let lW = [{
   name: 'planPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   computed: !0,
   args: [{
@@ -20618,7 +20618,7 @@ let lK = [{
   name: 'planPublicInfo',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPublicInfo
+    name: EntityType.PlanPublicInfo
   },
   computed: !0,
   args: [{
@@ -20636,7 +20636,7 @@ let lY = [{
   name: 'plan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   computed: !0,
   args: [{
@@ -20653,7 +20653,7 @@ let lq = [{
   name: 'planPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   computed: !0,
   args: [{
@@ -20670,7 +20670,7 @@ let l$ = [{
   name: 'plan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   nullable: !0,
   computed: !0,
@@ -20690,7 +20690,7 @@ let lZ = [{
   name: 'planPublicInfo',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPublicInfo
+    name: EntityType.PlanPublicInfo
   },
   nullable: !0,
   computed: !0,
@@ -20703,7 +20703,7 @@ let lX = [{
   name: 'planPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   nullable: !0,
   computed: !0,
@@ -20723,7 +20723,7 @@ let lQ = [{
   name: 'planPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   nullable: !0,
   computed: !0,
@@ -20746,7 +20746,7 @@ let lJ = [{
   name: 'plan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   nullable: !0,
   computed: !0,
@@ -20769,7 +20769,7 @@ let l0 = [{
   name: 'planPublicInfo',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPublicInfo
+    name: EntityType.PlanPublicInfo
   },
   nullable: !0,
   computed: !0,
@@ -20785,7 +20785,7 @@ let l1 = [{
   name: 'connectedPlan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -20803,7 +20803,7 @@ let l1 = [{
   name: 'connectedPlanPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -20822,7 +20822,7 @@ let l2 = [{
   name: 'connectedPlan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -20840,7 +20840,7 @@ let l2 = [{
   name: 'connectedPlanPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -20859,7 +20859,7 @@ let l5 = [{
   name: 'connectedPlan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -20877,7 +20877,7 @@ let l5 = [{
   name: 'connectedPlanPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -20896,7 +20896,7 @@ let l4 = {
   name: 'plan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -20916,13 +20916,13 @@ let l4 = {
     }
   }
 };
-_$$Y.Plan;
-_$$Y.Plan;
+EntityType.Plan;
+EntityType.Plan;
 let l3 = [{
   name: 'resolvedHostOrConnectedPlan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -20961,7 +20961,7 @@ let l3 = [{
   name: 'resolvedHostOrConnectedPlanPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21001,7 +21001,7 @@ let l6 = [{
   name: 'resolvedHostOrConnectedPlanDevMode',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -21041,7 +21041,7 @@ let l6 = [{
   name: 'resolvedHostOrConnectedPlanDevModePermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21082,7 +21082,7 @@ let l7 = [{
   name: 'resolvedHostOrConnectedPlanDesign',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -21121,7 +21121,7 @@ let l7 = [{
   name: 'resolvedHostOrConnectedPlanDesignPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21161,7 +21161,7 @@ let l8 = [{
   name: 'resolvedHostOrConnectedPlanFigjam',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -21200,7 +21200,7 @@ let l8 = [{
   name: 'resolvedHostOrConnectedPlanFigjamPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21240,7 +21240,7 @@ let l9 = [{
   name: 'resolvedHostOrConnectedPlanSlides',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -21279,7 +21279,7 @@ let l9 = [{
   name: 'resolvedHostOrConnectedPlanSlidesPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21319,7 +21319,7 @@ let de = [{
   name: 'resolvedHostOrConnectedPlanDevMode',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -21358,7 +21358,7 @@ let de = [{
   name: 'resolvedHostOrConnectedPlanDevModePermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21398,7 +21398,7 @@ let dt = [{
   name: 'resolvedHostOrConnectedPlanSites',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -21437,7 +21437,7 @@ let dt = [{
   name: 'resolvedHostOrConnectedPlanSitesPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21477,7 +21477,7 @@ let di = [{
   name: 'resolvedHostOrConnectedPlanFigmake',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -21516,7 +21516,7 @@ let di = [{
   name: 'resolvedHostOrConnectedPlanFigmakePermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21556,7 +21556,7 @@ let dn = [{
   name: 'resolvedHostOrConnectedPlan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'userId',
@@ -21608,7 +21608,7 @@ let dn = [{
   name: 'resolvedHostOrConnectedPlanPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'userId',
@@ -21661,7 +21661,7 @@ let dr = [{
   name: 'planPermissions',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPermissions
+    name: EntityType.PlanPermissions
   },
   args: [{
     name: 'planParentId',
@@ -21710,7 +21710,7 @@ let da = [{
   name: 'planPublicInfo',
   type: {
     kind: 'object',
-    name: _$$Y.PlanPublicInfo
+    name: EntityType.PlanPublicInfo
   },
   args: [{
     name: 'planParentId',
@@ -21739,7 +21739,7 @@ let ds = [{
   name: 'plan',
   type: {
     kind: 'object',
-    name: _$$Y.Plan
+    name: EntityType.Plan
   },
   args: [{
     name: 'planParentId',
@@ -21788,7 +21788,7 @@ let dl = [{
   name: 'planConnectedProjectsForUser',
   type: {
     kind: 'objects',
-    name: _$$Y.ConnectedProjectForPlanUser
+    name: EntityType.ConnectedProjectForPlanUser
   },
   args: [{
     name: 'planParentId',
@@ -21836,7 +21836,7 @@ function dh({
     name: '_userGroupResourcePermissions',
     type: {
       kind: 'objects',
-      name: _$$Y.UserGroupResourcePermission
+      name: EntityType.UserGroupResourcePermission
     },
     filter: {
       and: [['resourceType', '=', e], ['resourceId', '=', createParentRef(t)]]
@@ -21848,7 +21848,7 @@ function dh({
     name: '_permissionsFromUserGroups',
     type: {
       kind: 'object',
-      name: _$$Y.PermissionsFromUserGroups
+      name: EntityType.PermissionsFromUserGroups
     },
     args: [{
       name: 'userId',
@@ -21928,7 +21928,7 @@ let db = [{
   name: '_orgPlanRecord',
   type: {
     kind: 'object',
-    name: _$$Y.OrgPlanRecord
+    name: EntityType.OrgPlanRecord
   },
   filter: {
     and: [['id', '=', createParentRef('id')], ['planParentType', '=', 'Org'], ['planParentId', '=', createParentRef('planParentId')]]
@@ -21939,7 +21939,7 @@ let db = [{
   name: '_teamPlanRecord',
   type: {
     kind: 'object',
-    name: _$$Y.TeamPlanRecord
+    name: EntityType.TeamPlanRecord
   },
   filter: {
     and: [['id', '=', createParentRef('id')], ['planParentType', '=', 'Team'], ['planParentId', '=', createParentRef('planParentId')]]
@@ -21951,7 +21951,7 @@ let dv = [{
   name: '_teamPlanRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanRecord
+    name: EntityType.PlanRecord
   },
   filter: {
     and: [['planParentType', '=', 'Team'], ['planParentId', '=', createParentRef('teamId')], ['deactivatedAt', '=', null]]
@@ -21962,7 +21962,7 @@ let dv = [{
   name: '_orgPlanRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanRecord
+    name: EntityType.PlanRecord
   },
   filter: {
     and: [['planParentType', '=', 'Org'], ['planParentId', '=', createParentRef('parentOrgId')], ['deactivatedAt', '=', null]]
@@ -21989,7 +21989,7 @@ let dI = [{
   name: '_teamPlanRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanRecord
+    name: EntityType.PlanRecord
   },
   filter: {
     and: [['planParentType', '=', 'Team'], ['planParentId', '=', createParentRef('id')], ['deactivatedAt', '=', null]]
@@ -22000,7 +22000,7 @@ let dI = [{
   name: '_orgPlanRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanRecord
+    name: EntityType.PlanRecord
   },
   filter: {
     and: [['planParentType', '=', 'Org'], ['planParentId', '=', createParentRef('orgId')], ['deactivatedAt', '=', null]]
@@ -22027,7 +22027,7 @@ let dE = {
   name: '_planRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanRecord
+    name: EntityType.PlanRecord
   },
   filter: {
     and: [['planParentType', '=', 'Org'], ['planParentId', '=', createParentRef('id')], ['deactivatedAt', '=', null]]
@@ -22039,7 +22039,7 @@ let dx = [{
   name: '_connectedTeamPlanRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanRecord
+    name: EntityType.PlanRecord
   },
   filter: {
     and: [['planParentType', '=', 'Team'], ['planParentId', '=', createParentRef('connectedPlanId')], ['deactivatedAt', '=', null]]
@@ -22050,7 +22050,7 @@ let dx = [{
   name: '_connectedOrgPlanRecord',
   type: {
     kind: 'object',
-    name: _$$Y.PlanRecord
+    name: EntityType.PlanRecord
   },
   filter: {
     and: [['planParentType', '=', 'Org'], ['planParentId', '=', createParentRef('connectedPlanId')], ['deactivatedAt', '=', null]]
@@ -22092,7 +22092,7 @@ let dS = [{
   name: 'library',
   type: {
     kind: 'object',
-    name: _$$Y.Library
+    name: EntityType.Library
   },
   filter: {
     and: [['fileKey', '=', createParentRef('fileKey')], ['hubFileId', '=', null]]
@@ -22105,7 +22105,7 @@ let dS = [{
   name: 'communityLibrary',
   type: {
     kind: 'object',
-    name: _$$Y.CommunityLibrary
+    name: EntityType.CommunityLibrary
   },
   filter: {
     and: [['hubFileId', '=', createParentRef('hubFileId')], ['hubFileId', '<>', null]]
@@ -22118,7 +22118,7 @@ let dS = [{
   name: 'libraryFileSubscriptionOverride',
   type: {
     kind: 'object',
-    name: _$$Y.LibraryFileSubscription
+    name: EntityType.LibraryFileSubscription
   },
   args: [{
     name: 'subscribingFileKey',
@@ -22134,7 +22134,7 @@ let dS = [{
   name: 'communityLibraryKeyToFile',
   type: {
     kind: 'object',
-    name: _$$Y.LibraryKeyToFile
+    name: EntityType.LibraryKeyToFile
   },
   filter: {
     and: [['hubFileId', '=', createParentRef('hubFileId')], ['hubFileId', '<>', null]]
@@ -22145,7 +22145,7 @@ let dS = [{
   name: 'teamLibraryKeyToFile',
   type: {
     kind: 'object',
-    name: _$$Y.LibraryKeyToFile
+    name: EntityType.LibraryKeyToFile
   },
   filter: {
     and: [['fileKey', '=', createParentRef('fileKey')], ['hubFileId', '=', null]]
@@ -22194,7 +22194,7 @@ let dS = [{
   }
 }];
 let dw = {
-  name: _$$Y.LibraryOrgSubscription,
+  name: EntityType.LibraryOrgSubscription,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -22216,7 +22216,7 @@ let dw = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     checkCanRead: {
@@ -22226,7 +22226,7 @@ let dw = {
     name: 'libraryWorkspaceSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryWorkspaceSubscription
+      name: EntityType.LibraryWorkspaceSubscription
     },
     args: [{
       name: 'subscribingFileWorkspaceId',
@@ -22243,7 +22243,7 @@ let dw = {
     name: 'libraryTeamSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryTeamSubscription
+      name: EntityType.LibraryTeamSubscription
     },
     args: [{
       name: 'subscribingFileTeamId',
@@ -22259,7 +22259,7 @@ let dw = {
     name: 'libraryUserSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryUserSubscription
+      name: EntityType.LibraryUserSubscription
     },
     args: [{
       name: 'subscribingUserId',
@@ -22277,7 +22277,7 @@ let dw = {
 let dC = {
   type: {
     kind: 'objects',
-    name: _$$Y.LibraryOrgSubscription
+    name: EntityType.LibraryOrgSubscription
   },
   args: [{
     name: 'userId',
@@ -22294,7 +22294,7 @@ let dC = {
   expectedMaxCount: 1e3
 };
 let dT = {
-  name: _$$Y.LibraryTeamSubscription,
+  name: EntityType.LibraryTeamSubscription,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -22315,7 +22315,7 @@ let dT = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('teamId')],
     checkCanRead: {
@@ -22325,7 +22325,7 @@ let dT = {
     name: 'libraryUserSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryUserSubscription
+      name: EntityType.LibraryUserSubscription
     },
     args: [{
       name: 'subscribingUserId',
@@ -22343,7 +22343,7 @@ let dT = {
 let dk = {
   type: {
     kind: 'objects',
-    name: _$$Y.LibraryTeamSubscription
+    name: EntityType.LibraryTeamSubscription
   },
   args: [{
     name: 'userId',
@@ -22360,7 +22360,7 @@ let dk = {
   expectedMaxCount: 1e3
 };
 let dR = {
-  name: _$$Y.LibraryUserSubscription,
+  name: EntityType.LibraryUserSubscription,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -22381,7 +22381,7 @@ let dR = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }]
@@ -22389,7 +22389,7 @@ let dR = {
 let dN = {
   type: {
     kind: 'objects',
-    name: _$$Y.LibraryUserSubscription
+    name: EntityType.LibraryUserSubscription
   },
   args: [{
     name: 'userId',
@@ -22523,7 +22523,7 @@ let dO = [{
   name: 'currentUserFileFollower',
   type: {
     kind: 'object',
-    name: _$$Y.FileFollower
+    name: EntityType.FileFollower
   },
   args: [{
     name: 'userId',
@@ -22540,7 +22540,7 @@ let dO = [{
   name: 'comments',
   type: {
     kind: 'objects',
-    name: _$$Y.Comment
+    name: EntityType.Comment
   },
   orderBy: [['createdAt', 'DESC']],
   filter: {
@@ -22551,7 +22551,7 @@ let dO = [{
   name: 'unresolvedComments',
   type: {
     kind: 'objects',
-    name: _$$Y.Comment
+    name: EntityType.Comment
   },
   args: [{
     name: 'initialPageSize',
@@ -22574,7 +22574,7 @@ let dO = [{
   name: 'resolvedComments',
   type: {
     kind: 'objects',
-    name: _$$Y.Comment
+    name: EntityType.Comment
   },
   args: [{
     name: 'initialPageSize',
@@ -22597,7 +22597,7 @@ let dO = [{
   name: 'commentsPaginated',
   type: {
     kind: 'objects',
-    name: _$$Y.Comment
+    name: EntityType.Comment
   },
   args: [{
     name: 'initialPageSize',
@@ -22618,7 +22618,7 @@ let dO = [{
   name: 'mobileComments',
   type: {
     kind: 'objects',
-    name: _$$Y.Comment
+    name: EntityType.Comment
   },
   args: [{
     name: 'initialPageSize',
@@ -22641,7 +22641,7 @@ let dO = [{
   name: 'mobileCommentThread',
   type: {
     kind: 'objects',
-    name: _$$Y.Comment
+    name: EntityType.Comment
   },
   args: [{
     name: 'initialPageSize',
@@ -22667,7 +22667,7 @@ let dO = [{
   name: 'commentAttachments',
   type: {
     kind: 'objects',
-    name: _$$Y.CommentAttachment
+    name: EntityType.CommentAttachment
   },
   filter: {
     and: [['fileKey', '=', createParentRef('key')], ['fileCommentId', '<>', null], ['deletedAt', '=', null]]
@@ -22678,7 +22678,7 @@ let dO = [{
   name: 'currentUserCommentReadStatus',
   type: {
     kind: 'object',
-    name: _$$Y.CommentReadStatus
+    name: EntityType.CommentReadStatus
   },
   args: [{
     name: 'userId',
@@ -22695,7 +22695,7 @@ let dO = [{
   name: 'reactions',
   type: {
     kind: 'objects',
-    name: _$$Y.CommentReaction
+    name: EntityType.CommentReaction
   },
   args: [{
     name: 'initialPageSize',
@@ -22710,14 +22710,14 @@ let dO = [{
   name: 'presenter',
   type: {
     kind: 'object',
-    name: _$$Y.FilePresenter
+    name: EntityType.FilePresenter
   },
   args: [],
   filter: ['fileKey', '=', createParentRef('key')],
   nullable: !0
 }];
 let dD = {
-  name: _$$Y.File,
+  name: EntityType.File,
   naturalKey: new Set(['key']),
   permissionRequired: !0,
   fields: [{
@@ -22730,7 +22730,7 @@ let dD = {
     name: 'sourceLibraryKeyToFile',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryKeyToFile
+      name: EntityType.LibraryKeyToFile
     },
     filter: {
       and: [['hubFileId', '=', null], ['fileKey', '=', createParentRef('sourceFileKey')]]
@@ -22789,7 +22789,7 @@ let dD = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.RecentFile2
+      name: EntityType.RecentFile2
     },
     nullable: !0,
     filter: {
@@ -22901,7 +22901,7 @@ let dD = {
     name: 'filePreviewFragments',
     type: {
       kind: 'object',
-      name: _$$Y.FilePreviewFragments
+      name: EntityType.FilePreviewFragments
     },
     filter: ['fileKey', '=', createParentRef('key')],
     bannedFromViews: !0,
@@ -23017,7 +23017,7 @@ let dD = {
     name: 'trashedUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('trashedUserId')]
@@ -23025,7 +23025,7 @@ let dD = {
     name: 'trackTags',
     type: {
       kind: 'object',
-      name: _$$Y.FileTrackTags
+      name: EntityType.FileTrackTags
     },
     embedded: !0,
     nullable: !0
@@ -23069,7 +23069,7 @@ let dD = {
     name: 'creator',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('creatorId')]
@@ -23077,7 +23077,7 @@ let dD = {
     name: 'ownerRole',
     type: {
       kind: 'object',
-      name: _$$Y.FileRole
+      name: EntityType.FileRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('key')], ['resourceType', '=', 'file'], ['level', '=', e6.OWNER]]
@@ -23090,7 +23090,7 @@ let dD = {
     name: 'roles',
     type: {
       kind: 'objects',
-      name: _$$Y.FileRole
+      name: EntityType.FileRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('key')], ['resourceType', '=', 'file']]
@@ -23103,7 +23103,7 @@ let dD = {
     name: 'readableRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.FileRole
+      name: EntityType.FileRole
     },
     args: [{
       name: 'userId',
@@ -23123,7 +23123,7 @@ let dD = {
     name: 'roleOnObjectForUser',
     type: {
       kind: 'object',
-      name: _$$Y.FileRole
+      name: EntityType.FileRole
     },
     args: [{
       name: 'userId',
@@ -23143,7 +23143,7 @@ let dD = {
     name: 'roleOnObjectRepoForUser',
     type: {
       kind: 'object',
-      name: _$$Y.RepoRole
+      name: EntityType.RepoRole
     },
     args: [{
       name: 'userId',
@@ -23160,7 +23160,7 @@ let dD = {
     name: 'roleOnObjectProjectForUser',
     type: {
       kind: 'object',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     args: [{
       name: 'userId',
@@ -23177,7 +23177,7 @@ let dD = {
     name: 'roleOnObjectTeamForUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     args: [{
       name: 'userId',
@@ -23194,7 +23194,7 @@ let dD = {
     name: 'pendingUserOrgJoinRequest',
     type: {
       kind: 'object',
-      name: _$$Y.OrgJoinRequest
+      name: EntityType.OrgJoinRequest
     },
     args: [{
       name: 'userId',
@@ -23211,7 +23211,7 @@ let dD = {
     name: 'userAuthn',
     type: {
       kind: 'object',
-      name: _$$Y.UserAuthn
+      name: EntityType.UserAuthn
     },
     args: [{
       name: 'userId',
@@ -23227,7 +23227,7 @@ let dD = {
     name: 'currentOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     args: [{
       name: 'userId',
@@ -23244,7 +23244,7 @@ let dD = {
     name: 'currentPrivilegedOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     args: [{
       name: 'userId',
@@ -23261,7 +23261,7 @@ let dD = {
     name: 'currentPartialOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.GuestOrgUser
+      name: EntityType.GuestOrgUser
     },
     args: [{
       name: 'userId',
@@ -23278,7 +23278,7 @@ let dD = {
     name: 'currentBaseOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     args: [{
       name: 'userId',
@@ -23295,7 +23295,7 @@ let dD = {
     name: 'currentTeamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     args: [{
       name: 'userId',
@@ -23312,7 +23312,7 @@ let dD = {
     name: 'sourceFile',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     nullable: !0,
     filter: ['key', '=', createParentRef('sourceFileKey')],
@@ -23326,7 +23326,7 @@ let dD = {
     name: '_sourceFile_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     nullable: !0,
     filter: ['key', '=', createParentRef('sourceFileKey')],
@@ -23335,7 +23335,7 @@ let dD = {
     name: 'repo',
     type: {
       kind: 'object',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('fileRepoId')],
@@ -23349,7 +23349,7 @@ let dD = {
     name: '_repoForLegacyViews',
     type: {
       kind: 'object',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('fileRepoId')],
@@ -23361,7 +23361,7 @@ let dD = {
     name: '_repo_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('fileRepoId')],
@@ -23370,7 +23370,7 @@ let dD = {
     name: 'project',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     args: [{
       name: 'userId',
@@ -23388,7 +23388,7 @@ let dD = {
     name: '_project_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('folderId')],
@@ -23397,7 +23397,7 @@ let dD = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')],
@@ -23408,7 +23408,7 @@ let dD = {
     name: 'teamLimitedInfo',
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')],
@@ -23419,7 +23419,7 @@ let dD = {
     name: 'teamPublicInfo',
     type: {
       kind: 'object',
-      name: _$$Y.TeamPublicInfo
+      name: EntityType.TeamPublicInfo
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')]
@@ -23427,7 +23427,7 @@ let dD = {
     name: 'orgPublicInfo',
     type: {
       kind: 'object',
-      name: _$$Y.OrgPublicInfo
+      name: EntityType.OrgPublicInfo
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('parentOrgId')]
@@ -23435,7 +23435,7 @@ let dD = {
     name: '_orgForLegacyViews',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('parentOrgId')],
@@ -23447,7 +23447,7 @@ let dD = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('parentOrgId')],
     nullable: !0,
@@ -23458,7 +23458,7 @@ let dD = {
     name: 'orgInfo',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('parentOrgId')],
     nullable: !0
@@ -23466,7 +23466,7 @@ let dD = {
     name: '_team_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')],
@@ -23475,7 +23475,7 @@ let dD = {
     name: '_teamForLegacyViews',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')],
@@ -23487,7 +23487,7 @@ let dD = {
     name: '_org_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('parentOrgId')],
     nullable: !0,
@@ -23496,7 +23496,7 @@ let dD = {
     name: 'publishedHubFile',
     type: {
       kind: 'object',
-      name: _$$Y.HubFile
+      name: EntityType.HubFile
     },
     nullable: !0,
     filter: ['figFileId', '=', createParentRef('_id')],
@@ -23507,7 +23507,7 @@ let dD = {
     name: 'feedPosts',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedPost
+      name: EntityType.FeedPost
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['pending', '=', !1]]
@@ -23518,7 +23518,7 @@ let dD = {
     name: 'fileCanvasMentions',
     type: {
       kind: 'objects',
-      name: _$$Y.FileCanvasMention
+      name: EntityType.FileCanvasMention
     },
     args: [{
       name: 'userId',
@@ -23536,7 +23536,7 @@ let dD = {
     name: 'fileCanvasMentionAny',
     type: {
       kind: 'object',
-      name: _$$Y.FileCanvasMention
+      name: EntityType.FileCanvasMention
     },
     args: [{
       name: 'userId',
@@ -23554,7 +23554,7 @@ let dD = {
     name: 'atMention',
     type: {
       kind: 'object',
-      name: _$$Y.AtMention
+      name: EntityType.AtMention
     },
     args: [{
       name: 'userId',
@@ -23572,7 +23572,7 @@ let dD = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -23586,7 +23586,7 @@ let dD = {
     name: 'currentUserFileCanvasMentionReadStatus',
     type: {
       kind: 'object',
-      name: _$$Y.FileCanvasMentionReadStatus
+      name: EntityType.FileCanvasMentionReadStatus
     },
     args: [{
       name: 'userId',
@@ -23603,7 +23603,7 @@ let dD = {
     name: 'libraryHierarchyPaths',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryHierarchyPath
+      name: EntityType.LibraryHierarchyPath
     },
     args: [{
       name: 'initialPageSize',
@@ -23619,7 +23619,7 @@ let dD = {
     name: 'library',
     type: {
       kind: 'object',
-      name: _$$Y.Library
+      name: EntityType.Library
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['hubFileId', '=', null]]
@@ -23633,7 +23633,7 @@ let dD = {
     name: 'libraryFileSubscriptions',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryFileSubscription
+      name: EntityType.LibraryFileSubscription
     },
     args: [{
       name: 'userId',
@@ -23658,7 +23658,7 @@ let dD = {
     name: 'libraryFileSubscriptionOverrides',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryFileSubscription
+      name: EntityType.LibraryFileSubscription
     },
     args: [{
       name: 'userId',
@@ -23676,7 +23676,7 @@ let dD = {
     name: 'libraryFileSubscriptionOverridesV2',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryFileSubscription
+      name: EntityType.LibraryFileSubscription
     },
     args: [],
     filter: ['fileKey', '=', createParentRef('key')],
@@ -23685,7 +23685,7 @@ let dD = {
     name: 'communityLibraryFileSubscriptions',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityLibraryFileSubscription
+      name: EntityType.CommunityLibraryFileSubscription
     },
     args: [{
       name: 'userId',
@@ -23710,7 +23710,7 @@ let dD = {
     name: 'communityQuickstartLibraries',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityQuickstartLibrary
+      name: EntityType.CommunityQuickstartLibrary
     },
     args: [{
       name: 'userId',
@@ -23738,7 +23738,7 @@ let dD = {
     name: 'libraryPresetSubscriptions',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryPresetSubscription
+      name: EntityType.LibraryPresetSubscription
     },
     args: [{
       name: 'userId',
@@ -23875,14 +23875,14 @@ let dD = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.FigFileWorkshopMode
+      name: EntityType.FigFileWorkshopMode
     },
     filter: ['fileKey', '=', createParentRef('key')]
   }, {
     name: 'orgSharedSetting',
     type: {
       kind: 'object',
-      name: _$$Y.SharedOrgLicenseGroupSetting
+      name: EntityType.SharedOrgLicenseGroupSetting
     },
     nullable: !0,
     filter: {
@@ -23893,7 +23893,7 @@ let dD = {
     nullable: !0,
     type: {
       kind: 'objects',
-      name: _$$Y.VotingSession
+      name: EntityType.VotingSession
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')]]
@@ -23905,14 +23905,14 @@ let dD = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OpenMergeRequest
+      name: EntityType.OpenMergeRequest
     },
     filter: ['branchFileKey', '=', createParentRef('key')]
   }, {
     name: 'fileMerges',
     type: {
       kind: 'objects',
-      name: _$$Y.FileMerge
+      name: EntityType.FileMerge
     },
     filter: ['branchFileKey', '=', createParentRef('key')],
     expectedMaxCount: 1e3,
@@ -23921,7 +23921,7 @@ let dD = {
     name: 'fileRoleRequests',
     type: {
       kind: 'objects',
-      name: _$$Y.FileRoleRequest
+      name: EntityType.FileRoleRequest
     },
     args: [{
       name: 'initialPageSize',
@@ -23940,7 +23940,7 @@ let dD = {
     name: 'fileRoleRequest',
     type: {
       kind: 'object',
-      name: _$$Y.FileRoleRequest
+      name: EntityType.FileRoleRequest
     },
     args: [{
       name: 'id',
@@ -23956,7 +23956,7 @@ let dD = {
     name: 'pendingUserFileRoleRequest',
     type: {
       kind: 'object',
-      name: _$$Y.FileRoleRequest
+      name: EntityType.FileRoleRequest
     },
     args: [{
       name: 'userId',
@@ -23976,7 +23976,7 @@ let dD = {
     name: 'fileVersions',
     type: {
       kind: 'objects',
-      name: _$$Y.FileVersion
+      name: EntityType.FileVersion
     },
     filter: ['fileKey', '=', createParentRef('key')],
     expectedMaxCount: 3e4,
@@ -23989,7 +23989,7 @@ let dD = {
     name: 'recentFileVersions',
     type: {
       kind: 'objects',
-      name: _$$Y.FileVersion
+      name: EntityType.FileVersion
     },
     filter: ['fileKey', '=', createParentRef('key')],
     expectedMaxCount: 500,
@@ -23998,7 +23998,7 @@ let dD = {
     name: 'folderOwnerRole',
     type: {
       kind: 'object',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     nullable: !0,
     filter: {
@@ -24009,7 +24009,7 @@ let dD = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     filter: ['draftsFolderId', '=', createParentRef('folderId')]
   }, {
@@ -24053,7 +24053,7 @@ let dD = {
     name: 'stylesWithLegacySourceAssets',
     type: {
       kind: 'objects',
-      name: _$$Y.StyleWithLegacySourceAsset
+      name: EntityType.StyleWithLegacySourceAsset
     },
     args: [{
       name: 'initialPageSize',
@@ -24460,7 +24460,7 @@ let dD = {
     name: 'eduGracePeriod',
     type: {
       kind: 'object',
-      name: _$$Y.EduGracePeriod
+      name: EntityType.EduGracePeriod
     },
     args: [{
       name: 'userId',
@@ -24691,7 +24691,7 @@ let dD = {
     name: 'fileCanAccessFeatureGate',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -24706,7 +24706,7 @@ let dD = {
     name: 'fileIsBakeEnabled',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -24777,7 +24777,7 @@ let dD = {
     name: 'prototypeLibCppConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FilePrototypeLibCppConfig
+      name: EntityType.FilePrototypeLibCppConfig
     },
     nullable: !0,
     filter: ['fileKey', '=', createParentRef('key')]
@@ -24785,7 +24785,7 @@ let dD = {
     name: 'variableSets',
     type: {
       kind: 'objects',
-      name: _$$Y.VariableSet
+      name: EntityType.VariableSet
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['unpublishedAt', '=', null], ['hubFileId', '=', null]]
@@ -24805,7 +24805,7 @@ let dD = {
     name: 'variableCollections',
     type: {
       kind: 'objects',
-      name: _$$Y.VariableSet
+      name: EntityType.VariableSet
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['unpublishedAt', '=', null], ['hubFileId', '=', null]]
@@ -24821,7 +24821,7 @@ let dD = {
     name: 'variables',
     type: {
       kind: 'objects',
-      name: _$$Y.Variable
+      name: EntityType.Variable
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['unpublishedAt', '=', null], ['hubFileId', '=', null]]
@@ -24843,7 +24843,7 @@ let dD = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryAsset
+      name: EntityType.LibraryAsset
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['libraryKey', '=', createFieldRef('libraryKey')], ['unpublishedAt', '=', null]]
@@ -24865,7 +24865,7 @@ let dD = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryAsset
+      name: EntityType.LibraryAsset
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['libraryKey', '=', createFieldRef('libraryKey')], ['assetType', '=', createFieldRef('assetType')], ['unpublishedAt', '=', null]]
@@ -24881,7 +24881,7 @@ let dD = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryAsset
+      name: EntityType.LibraryAsset
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')], ['libraryKey', '=', createFieldRef('libraryKey')], ['assetType', '=', e7.CodeComponent], ['unpublishedAt', '=', null]]
@@ -25012,7 +25012,7 @@ let dD = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Invite
+      name: EntityType.Invite
     },
     args: [{
       name: 'userId',
@@ -25028,7 +25028,7 @@ let dD = {
     name: 'components',
     type: {
       kind: 'objects',
-      name: _$$Y.Component
+      name: EntityType.Component
     },
     args: [{
       name: 'initialPageSize',
@@ -25048,7 +25048,7 @@ let dD = {
     name: 'styles',
     type: {
       kind: 'objects',
-      name: _$$Y.Style
+      name: EntityType.Style
     },
     args: [{
       name: 'initialPageSize',
@@ -25064,7 +25064,7 @@ let dD = {
     name: 'stateGroups',
     type: {
       kind: 'objects',
-      name: _$$Y.StateGroup
+      name: EntityType.StateGroup
     },
     args: [{
       name: 'initialPageSize',
@@ -25080,7 +25080,7 @@ let dD = {
     name: 'modules',
     type: {
       kind: 'objects',
-      name: _$$Y.Module
+      name: EntityType.Module
     },
     args: [{
       name: 'userId',
@@ -25100,7 +25100,7 @@ let dD = {
     name: 'fileSeenStates',
     type: {
       kind: 'objects',
-      name: _$$Y.FileSeenState
+      name: EntityType.FileSeenState
     },
     filter: {
       and: [['fileKey', '=', createParentRef('key')]]
@@ -25110,7 +25110,7 @@ let dD = {
     name: 'linkedFigFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.LinkedFigFile
+      name: EntityType.LinkedFigFile
     },
     filter: {
       and: [['sourceFileKey', '=', createParentRef('key')]]
@@ -25124,7 +25124,7 @@ let dD = {
     name: 'figFileLinks',
     type: {
       kind: 'objects',
-      name: _$$Y.FigFileLink
+      name: EntityType.FigFileLink
     },
     filter: {
       and: [['sourceFileKey', '=', createParentRef('key')]]
@@ -25150,7 +25150,7 @@ let dD = {
     name: 'template',
     type: {
       kind: 'object',
-      name: _$$Y.Template
+      name: EntityType.Template
     },
     filter: ['fileKey', '=', createParentRef('key')],
     nullable: !0
@@ -25189,7 +25189,7 @@ let dD = {
     name: 'passwordAuthentication',
     type: {
       kind: 'object',
-      name: _$$Y.FigFilePasswordAuthentication
+      name: EntityType.FigFilePasswordAuthentication
     },
     args: [{
       name: 'anonymousUserId',
@@ -25206,7 +25206,7 @@ let dD = {
     name: 'sourceFilePasswordAuthentication',
     type: {
       kind: 'object',
-      name: _$$Y.FigFilePasswordAuthentication
+      name: EntityType.FigFilePasswordAuthentication
     },
     args: [{
       name: 'anonymousUserId',
@@ -25223,7 +25223,7 @@ let dD = {
     name: 'pwdConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FigFilePwdConfig
+      name: EntityType.FigFilePwdConfig
     },
     filter: ['figFileId', '=', createParentRef('_id')],
     nullable: !0,
@@ -25235,7 +25235,7 @@ let dD = {
     name: 'pwdConfigV2',
     type: {
       kind: 'object',
-      name: _$$Y.FigFilePwdConfig
+      name: EntityType.FigFilePwdConfig
     },
     filter: ['fileKey', '=', createParentRef('key')],
     nullable: !0
@@ -25243,7 +25243,7 @@ let dD = {
     name: 'sourceFilePwdConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FigFilePwdConfig
+      name: EntityType.FigFilePwdConfig
     },
     filter: ['fileKey', '=', createParentRef('sourceFileKey')],
     nullable: !0
@@ -25251,7 +25251,7 @@ let dD = {
     name: 'linkExpirationConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FigFileLinkExpirationConfig
+      name: EntityType.FigFileLinkExpirationConfig
     },
     filter: {
       and: [['figFileKey', '=', createParentRef('key')], ['accessReverted', '=', !1]]
@@ -25267,7 +25267,7 @@ let dD = {
     name: 'sourceFileLinkExpirationConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FigFileLinkExpirationConfig
+      name: EntityType.FigFileLinkExpirationConfig
     },
     filter: ['figFileKey', '=', createParentRef('sourceFileKey')],
     nullable: !0
@@ -25275,7 +25275,7 @@ let dD = {
     name: 'fileLinkExpirationConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FigFileLinkExpirationConfig
+      name: EntityType.FigFileLinkExpirationConfig
     },
     filter: ['figFileKey', '=', createParentRef('key')],
     nullable: !0
@@ -25293,7 +25293,7 @@ let dD = {
     name: 'figFileCheckpoint',
     type: {
       kind: 'object',
-      name: _$$Y.FigFileCheckpoint
+      name: EntityType.FigFileCheckpoint
     },
     filter: ['id', '=', createParentRef('figFileCheckpointId')],
     nullable: !0,
@@ -25305,7 +25305,7 @@ let dD = {
     name: 'figFileCheckpointV2',
     type: {
       kind: 'object',
-      name: _$$Y.FigFileCheckpoint
+      name: EntityType.FigFileCheckpoint
     },
     filter: ['fileKey', '=', createParentRef('key')],
     nullable: !0
@@ -25379,7 +25379,7 @@ let dD = {
     name: 'favoriteFile',
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     args: [{
       name: 'userId',
@@ -25416,7 +25416,7 @@ let dD = {
     name: 'developerRelatedLinks',
     type: {
       kind: 'objects',
-      name: _$$Y.DeveloperRelatedLink
+      name: EntityType.DeveloperRelatedLink
     },
     filter: ['fileKey', '=', createParentRef('key')],
     expectedMaxCount: 1e4
@@ -25424,7 +25424,7 @@ let dD = {
     name: 'developerRelatedLinksForNode',
     type: {
       kind: 'objects',
-      name: _$$Y.DeveloperRelatedLink
+      name: EntityType.DeveloperRelatedLink
     },
     args: [{
       name: 'nodeId',
@@ -25440,7 +25440,7 @@ let dD = {
     name: 'devModeActivity',
     type: {
       kind: 'objects',
-      name: _$$Y.DevModeActivity
+      name: EntityType.DevModeActivity
     },
     args: [{
       name: 'nodeId',
@@ -25456,7 +25456,7 @@ let dD = {
     name: 'activeFileUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.ActiveFileUser
+      name: EntityType.ActiveFileUser
     },
     filter: ['id', '=', createParentRef('key')],
     nullable: !0,
@@ -25465,7 +25465,7 @@ let dD = {
     name: 'defaultColorPaletteData',
     type: {
       kind: 'object',
-      name: _$$Y.FileColorPalette
+      name: EntityType.FileColorPalette
     },
     filter: ['fileKey', '=', createParentRef('key')],
     nullable: !0
@@ -25473,7 +25473,7 @@ let dD = {
     name: 'userColorPaletteOverrideData',
     type: {
       kind: 'object',
-      name: _$$Y.UserColorPaletteOverrideForFile
+      name: EntityType.UserColorPaletteOverrideForFile
     },
     args: [{
       name: 'userId',
@@ -25610,7 +25610,7 @@ let dD = {
     name: 'code_connect_for_node_lk',
     type: {
       kind: 'objects',
-      name: _$$Y.CodeConnect
+      name: EntityType.CodeConnect
     },
     args: [{
       name: 'nodeId',
@@ -25664,7 +25664,7 @@ let dD = {
     name: 'preload_code_connect_lk',
     type: {
       kind: 'object',
-      name: _$$Y.PreloadCodeConnect
+      name: EntityType.PreloadCodeConnect
     },
     args: [{
       name: 'nodes',
@@ -25700,7 +25700,7 @@ let dD = {
     name: 'componentUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.FileComponentUpdate
+      name: EntityType.FileComponentUpdate
     },
     nullable: !0,
     resolver: {
@@ -25712,7 +25712,7 @@ let dD = {
     name: 'stateGroupUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.FileStateGroupUpdate
+      name: EntityType.FileStateGroupUpdate
     },
     nullable: !0,
     resolver: {
@@ -25724,7 +25724,7 @@ let dD = {
     name: 'libraryKeyToFile',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryKeyToFile
+      name: EntityType.LibraryKeyToFile
     },
     filter: ['fileKey', '=', createParentRef('key')],
     nullable: !0
@@ -25770,7 +25770,7 @@ let dD = {
     name: 'computedWorkspacePublicInfo',
     type: {
       kind: 'object',
-      name: _$$Y.ComputedWorkspacePublicInfo
+      name: EntityType.ComputedWorkspacePublicInfo
     },
     nullable: !0,
     computed: !0,
@@ -25781,7 +25781,7 @@ let dD = {
     name: 'computedWorkspace',
     type: {
       kind: 'object',
-      name: _$$Y.ComputedWorkspace
+      name: EntityType.ComputedWorkspace
     },
     args: [{
       name: 'userId',
@@ -25833,7 +25833,7 @@ let dD = {
     name: 'fileViewHistory',
     type: {
       kind: 'objects',
-      name: _$$Y.FileViewHistory
+      name: EntityType.FileViewHistory
     },
     filter: ['fileKey', '=', createParentRef('key')],
     orderBy: [['viewedAt', 'DESC']],
@@ -25847,7 +25847,7 @@ let dD = {
     name: 'paginatedFileViewHistory',
     type: {
       kind: 'objects',
-      name: _$$Y.FileViewHistory
+      name: EntityType.FileViewHistory
     },
     args: [{
       name: 'firstPageSize',
@@ -25878,7 +25878,7 @@ let dD = {
     name: 'siteMount',
     type: {
       kind: 'object',
-      name: _$$Y.SiteMount
+      name: EntityType.SiteMount
     },
     filter: ['fileKey', '=', createParentRef('key')],
     nullable: !0,
@@ -25898,7 +25898,7 @@ let dD = {
     name: 'activeProjectResourceConnections',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     filter: {
@@ -25912,7 +25912,7 @@ let dD = {
     name: 'fileSharingGroups',
     type: {
       kind: 'objects',
-      name: _$$Y.SharingGroup
+      name: EntityType.SharingGroup
     },
     filter: {
       and: [['resourceType', '=', 'file'], ['resourceId', '=', createParentRef('key')]]
@@ -25926,7 +25926,7 @@ let dD = {
     name: 'fileCompositeSharingGroup',
     type: {
       kind: 'object',
-      name: _$$Y.FileCompositeSharingGroup
+      name: EntityType.FileCompositeSharingGroup
     },
     args: [{
       name: 'userId',
@@ -25991,7 +25991,7 @@ let dD = {
     name: 'fileCmsCollections',
     type: {
       kind: 'objects',
-      name: _$$Y.FileCmsCollection
+      name: EntityType.FileCmsCollection
     },
     checkCanRead: {
       userId: createSessionRef('userId'),
@@ -26017,7 +26017,7 @@ let dD = {
     name: 'slotsFileEnablement',
     type: {
       kind: 'object',
-      name: _$$Y.SlotsFileEnablement
+      name: EntityType.SlotsFileEnablement
     },
     args: [],
     filter: ['fileKey', '=', createParentRef('key')],
@@ -26026,7 +26026,7 @@ let dD = {
     name: 'sharedContainerSetting',
     type: {
       kind: 'object',
-      name: _$$Y.SharedContainerSetting
+      name: EntityType.SharedContainerSetting
     },
     computed: !0,
     nullable: !0,
@@ -26051,7 +26051,7 @@ let dF = dD.fields.filter(e => e.name !== 'canRead').map(e => dL.has(e.name) ? e
   bannedFromViews: !0
 });
 let dM = {
-  name: _$$Y.FilePrototypeInfo,
+  name: EntityType.FilePrototypeInfo,
   naturalKey: new Set(['key']),
   permissionRequired: !0,
   fields: [{
@@ -26084,14 +26084,14 @@ let dM = {
   }, ...dF]
 };
 let dj = {
-  name: _$$Y.FileActivity,
+  name: EntityType.FileActivity,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
     name: 'lastSeen',
     type: {
       kind: 'object',
-      name: _$$Y.OrgActivity
+      name: EntityType.OrgActivity
     },
     args: [{
       name: 'userId',
@@ -26113,7 +26113,7 @@ let dj = {
     name: 'lastEdit',
     type: {
       kind: 'object',
-      name: _$$Y.OrgActivity
+      name: EntityType.OrgActivity
     },
     args: [{
       name: 'userId',
@@ -26135,7 +26135,7 @@ let dj = {
     name: 'lastDesignEdit',
     type: {
       kind: 'object',
-      name: _$$Y.OrgActivity
+      name: EntityType.OrgActivity
     },
     args: [{
       name: 'userId',
@@ -26157,7 +26157,7 @@ let dj = {
     name: 'lastDesignSeen',
     type: {
       kind: 'object',
-      name: _$$Y.OrgActivity
+      name: EntityType.OrgActivity
     },
     args: [{
       name: 'userId',
@@ -26179,7 +26179,7 @@ let dj = {
     name: 'lastWhiteboardEdit',
     type: {
       kind: 'object',
-      name: _$$Y.OrgActivity
+      name: EntityType.OrgActivity
     },
     args: [{
       name: 'userId',
@@ -26201,7 +26201,7 @@ let dj = {
     name: 'lastWhiteboardSeen',
     type: {
       kind: 'object',
-      name: _$$Y.OrgActivity
+      name: EntityType.OrgActivity
     },
     args: [{
       name: 'userId',
@@ -26222,7 +26222,7 @@ let dj = {
   }]
 };
 let dU = {
-  name: _$$Y.FileBrowserPreferences,
+  name: EntityType.FileBrowserPreferences,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -26308,7 +26308,7 @@ let dU = {
   }]
 };
 let dB = {
-  name: _$$Y.FileBrowserSectionPreferences,
+  name: EntityType.FileBrowserSectionPreferences,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -26359,7 +26359,7 @@ let dB = {
   }]
 };
 let dV = {
-  name: _$$Y.FileCanvasMention,
+  name: EntityType.FileCanvasMention,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey', 'id']),
   fields: [{
@@ -26386,7 +26386,7 @@ let dV = {
     name: 'mentionedByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('mentionedByUserId')]
   }, {
@@ -26399,7 +26399,7 @@ let dV = {
     name: 'lastEditedByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('lastEditedByUserId')],
     nullable: !0
@@ -26407,7 +26407,7 @@ let dV = {
     name: 'messageMeta',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0
   }, {
@@ -26449,7 +26449,7 @@ let dV = {
   }]
 };
 let dG = {
-  name: _$$Y.FileCanvasMentionReadStatus,
+  name: EntityType.FileCanvasMentionReadStatus,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey', 'userId']),
   fields: [{
@@ -26502,7 +26502,7 @@ let dG = {
   }]
 };
 let dz = {
-  name: _$$Y.FileCheckpoint,
+  name: EntityType.FileCheckpoint,
   permissionRequired: !1,
   naturalKey: new Set(['id']),
   fields: [{
@@ -26541,7 +26541,7 @@ let dz = {
   }]
 };
 let dH = {
-  name: _$$Y.FileColorPalette,
+  name: EntityType.FileColorPalette,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -26563,7 +26563,7 @@ let dH = {
     name: 'colorPalette',
     type: {
       kind: 'object',
-      name: _$$Y.ColorPalette
+      name: EntityType.ColorPalette
     },
     filter: ['uuid', '=', createParentRef('colorPaletteUuid')],
     nullable: !0,
@@ -26573,7 +26573,7 @@ let dH = {
   }]
 };
 let dW = {
-  name: _$$Y.FileFollower,
+  name: EntityType.FileFollower,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -26614,7 +26614,7 @@ let dW = {
   }]
 };
 let dK = {
-  name: _$$Y.FileMerge,
+  name: EntityType.FileMerge,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -26630,7 +26630,7 @@ let dK = {
     name: 'branchFile',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('branchFileKey')],
     checkCanRead: {
@@ -26669,7 +26669,7 @@ let dK = {
     name: 'mergeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.MergeRequest
+      name: EntityType.MergeRequest
     },
     filter: ['fileMergeId', '=', createParentRef('id')],
     nullable: !0
@@ -26683,7 +26683,7 @@ let dK = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0
@@ -26696,7 +26696,7 @@ let dK = {
   }]
 };
 let dY = {
-  name: _$$Y.FilePresenter,
+  name: EntityType.FilePresenter,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -26744,7 +26744,7 @@ let dY = {
   }]
 };
 let dq = {
-  name: _$$Y.FilePrototypeLibCppConfig,
+  name: EntityType.FilePrototypeLibCppConfig,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -26827,7 +26827,7 @@ let d$ = [{
   name: 'user',
   type: {
     kind: 'object',
-    name: _$$Y.User
+    name: EntityType.User
   },
   filter: ['id', '=', createParentRef('userId')],
   nullable: !0
@@ -26844,19 +26844,19 @@ let d$ = [{
   name: 'invite',
   type: {
     kind: 'object',
-    name: _$$Y.Invite
+    name: EntityType.Invite
   },
   filter: ['roleId', '=', createParentRef('id')],
   nullable: !0
 }];
 let dZ = {
-  name: _$$Y.FileRole,
+  name: EntityType.FileRole,
   permissionRequired: !1,
   fields: [...d$, {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('resourceId')],
     checkCanRead: {
@@ -26900,7 +26900,7 @@ let dZ = {
   }]
 };
 let dX = {
-  name: _$$Y.FileRoleRequest,
+  name: EntityType.FileRoleRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -26932,7 +26932,7 @@ let dX = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     bannedFromViews: !0
@@ -26950,7 +26950,7 @@ let dX = {
     name: 'requesterUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('requesterUserId')],
     nullable: !0
@@ -26978,7 +26978,7 @@ let dX = {
   }]
 };
 let dQ = {
-  name: _$$Y.FileSeenState,
+  name: EntityType.FileSeenState,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -27014,13 +27014,13 @@ let dQ = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }]
 };
 let dJ = {
-  name: _$$Y.FileShareBroadcast,
+  name: EntityType.FileShareBroadcast,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -27077,21 +27077,21 @@ let dJ = {
     name: 'fromUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('fromUserId')]
   }, {
     name: 'targetUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('targetUserId')]
   }, {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     checkCanRead: {
@@ -27133,7 +27133,7 @@ let dJ = {
   }]
 };
 let d0 = {
-  name: _$$Y.FileTrackTags,
+  name: EntityType.FileTrackTags,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -27187,7 +27187,7 @@ let d0 = {
   }]
 };
 let d1 = {
-  name: _$$Y.FileVersion,
+  name: EntityType.FileVersion,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey', 'id']),
   fields: [{
@@ -27243,21 +27243,21 @@ let d1 = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
     name: 'checkpoint',
     type: {
       kind: 'object',
-      name: _$$Y.FileVersionCheckpoint
+      name: EntityType.FileVersionCheckpoint
     },
     embedded: !0,
     nullable: !0
   }]
 };
 let d2 = {
-  name: _$$Y.FileVersionCheckpoint,
+  name: EntityType.FileVersionCheckpoint,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -27280,14 +27280,14 @@ let d2 = {
     name: 'meta',
     type: {
       kind: 'object',
-      name: _$$Y.FileVersionCheckpointMeta
+      name: EntityType.FileVersionCheckpointMeta
     },
     embedded: !0,
     nullable: !0
   }]
 };
 let d5 = {
-  name: _$$Y.FileVersionCheckpointMeta,
+  name: EntityType.FileVersionCheckpointMeta,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -27308,27 +27308,27 @@ let d5 = {
   }]
 };
 let d4 = {
-  name: _$$Y.GuestOrgUser,
+  name: EntityType.GuestOrgUser,
   permissionRequired: !1,
   fields: [...O, {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0
   }]
 };
 let d3 = {
-  name: _$$Y.ConnectedProjectForPlanUser,
+  name: EntityType.ConnectedProjectForPlanUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -27354,7 +27354,7 @@ let d3 = {
     name: 'project',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: ['id', '=', createParentRef('projectId')],
     nullable: !0,
@@ -27364,7 +27364,7 @@ let d3 = {
   }]
 };
 let d6 = {
-  name: _$$Y.HubFile,
+  name: EntityType.HubFile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -27493,7 +27493,7 @@ let d6 = {
     name: 'profile',
     type: {
       kind: 'object',
-      name: _$$Y.Profile
+      name: EntityType.Profile
     },
     filter: ['id', '=', createParentRef('profileId')]
   }, {
@@ -27506,7 +27506,7 @@ let d6 = {
     name: 'currentHubFileVersion',
     type: {
       kind: 'object',
-      name: _$$Y.HubFileVersion
+      name: EntityType.HubFileVersion
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('currentHubFileVersionId')]
@@ -27587,7 +27587,7 @@ let d6 = {
     name: 'publishedByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('userId')]
@@ -27596,7 +27596,7 @@ let d6 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -27625,7 +27625,7 @@ let d6 = {
     name: 'hubFileMonetizedResourceMetadata',
     type: {
       kind: 'object',
-      name: _$$Y.MonetizedResourceMetadata
+      name: EntityType.MonetizedResourceMetadata
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('monetizedResourceMetadataId')]
@@ -27634,7 +27634,7 @@ let d6 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.CommunityComment
+      name: EntityType.CommunityComment
     },
     args: [{
       name: 'profileId',
@@ -27650,7 +27650,7 @@ let d6 = {
     name: 'hubFileDuplicates',
     type: {
       kind: 'object',
-      name: _$$Y.HubFileDuplicate
+      name: EntityType.HubFileDuplicate
     },
     args: [{
       name: 'userId',
@@ -27667,7 +27667,7 @@ let d6 = {
     name: 'hubFileDuplicatesList',
     type: {
       kind: 'objects',
-      name: _$$Y.HubFileDuplicate
+      name: EntityType.HubFileDuplicate
     },
     args: [{
       name: 'userId',
@@ -27686,7 +27686,7 @@ let d6 = {
     name: 'communityResourcePayment',
     type: {
       kind: 'object',
-      name: _$$Y.CommunityResourcePayment
+      name: EntityType.CommunityResourcePayment
     },
     nullable: !0,
     args: [{
@@ -27704,7 +27704,7 @@ let d6 = {
     name: 'userMonetizationMetadata',
     type: {
       kind: 'object',
-      name: _$$Y.UserMonetizationMetadata
+      name: EntityType.UserMonetizationMetadata
     },
     filter: ['userId', '=', createParentRef('id')],
     nullable: !0,
@@ -27730,7 +27730,7 @@ let d6 = {
     name: 'communityPublisher',
     type: {
       kind: 'object',
-      name: _$$Y.CommunityPublisher
+      name: EntityType.CommunityPublisher
     },
     args: [{
       name: 'userId',
@@ -27748,7 +27748,7 @@ let d6 = {
     name: 'communityPublishers',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityPublisher
+      name: EntityType.CommunityPublisher
     },
     nullable: !0,
     filter: ['hubFileId', '=', createParentRef('id')],
@@ -27772,7 +27772,7 @@ let d6 = {
     name: 'modules',
     type: {
       kind: 'objects',
-      name: _$$Y.Module
+      name: EntityType.Module
     },
     args: [{
       name: 'userId',
@@ -27796,7 +27796,7 @@ let d6 = {
     name: 'modules_v2',
     type: {
       kind: 'objects',
-      name: _$$Y.Module
+      name: EntityType.Module
     },
     filter: {
       and: [['unpublishedAt', '=', null], ['hubFileId', '=', createParentRef('id')]]
@@ -27806,7 +27806,7 @@ let d6 = {
     name: 'libraryAssets',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryAsset
+      name: EntityType.LibraryAsset
     },
     args: [{
       name: 'libraryKey',
@@ -27834,7 +27834,7 @@ let d6 = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryAsset
+      name: EntityType.LibraryAsset
     },
     filter: {
       and: [['unpublishedAt', '=', null], ['libraryKey', '=', createFieldRef('libraryKey')], ['assetType', '=', createFieldRef('assetType')]]
@@ -27850,7 +27850,7 @@ let d6 = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryAsset
+      name: EntityType.LibraryAsset
     },
     filter: {
       and: [['unpublishedAt', '=', null], ['libraryKey', '=', createFieldRef('libraryKey')], ['assetType', '=', e7.CodeComponent]]
@@ -27860,7 +27860,7 @@ let d6 = {
     name: 'libraryKeyToFile',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryKeyToFile
+      name: EntityType.LibraryKeyToFile
     },
     filter: ['hubFileId', '=', createParentRef('id')],
     nullable: !0
@@ -27879,7 +27879,7 @@ let d6 = {
     name: 'badges',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityBadge
+      name: EntityType.CommunityBadge
     },
     filter: ['hubFileId', '=', createParentRef('id')],
     expectedMaxCount: 200
@@ -27894,7 +27894,7 @@ let d6 = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.CommunityLibrary
+      name: EntityType.CommunityLibrary
     },
     filter: ['hubFileId', '=', createParentRef('id')],
     checkCanRead: {
@@ -27904,7 +27904,7 @@ let d6 = {
     name: 'variableCollections',
     type: {
       kind: 'objects',
-      name: _$$Y.VariableSet
+      name: EntityType.VariableSet
     },
     filter: {
       and: [['unpublishedAt', '=', null], ['hubFileId', '=', createParentRef('id')]]
@@ -27920,7 +27920,7 @@ let d6 = {
     name: 'libraryHierarchyPaths',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryHierarchyPath
+      name: EntityType.LibraryHierarchyPath
     },
     args: [{
       name: 'initialPageSize',
@@ -27933,7 +27933,7 @@ let d6 = {
   }, r8, r9]
 };
 let d7 = {
-  name: _$$Y.HubFileDuplicate,
+  name: EntityType.HubFileDuplicate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -27975,7 +27975,7 @@ let d7 = {
   }]
 };
 let d8 = {
-  name: _$$Y.HubFileVersion,
+  name: EntityType.HubFileVersion,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28058,7 +28058,7 @@ let d8 = {
   }]
 };
 let d9 = {
-  name: _$$Y.IDPGroup,
+  name: EntityType.IDPGroup,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28101,7 +28101,7 @@ let d9 = {
     name: 'orgSamlConfig',
     type: {
       kind: 'object',
-      name: _$$Y.OrgSamlConfig
+      name: EntityType.OrgSamlConfig
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('orgSamlConfigId')],
@@ -28111,7 +28111,7 @@ let d9 = {
   }]
 };
 let ce = {
-  name: _$$Y.IDPUser,
+  name: EntityType.IDPUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28138,7 +28138,7 @@ let ce = {
     embedded: !0,
     type: {
       kind: 'object',
-      name: _$$Y.EmbeddedSCIMInfo
+      name: EntityType.EmbeddedSCIMInfo
     }
   }, {
     name: 'orgSamlId',
@@ -28155,7 +28155,7 @@ let ce = {
     name: 'orgSamlConfig',
     type: {
       kind: 'object',
-      name: _$$Y.OrgSamlConfig
+      name: EntityType.OrgSamlConfig
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('orgSamlId')],
@@ -28210,7 +28210,7 @@ let ce = {
   }]
 };
 let ct = {
-  name: _$$Y.Invite,
+  name: EntityType.Invite,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28266,7 +28266,7 @@ let ct = {
     name: 'fileRole',
     type: {
       kind: 'object',
-      name: _$$Y.FileRole
+      name: EntityType.FileRole
     },
     filter: ['id', '=', createParentRef('roleId')],
     nullable: !0,
@@ -28292,7 +28292,7 @@ let ct = {
   }]
 };
 let ci = {
-  name: _$$Y.OrgIpRange,
+  name: EntityType.OrgIpRange,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28334,7 +28334,7 @@ let ci = {
   }]
 };
 let cn = {
-  name: _$$Y.JamboardOfferRedeemedAt,
+  name: EntityType.JamboardOfferRedeemedAt,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28355,7 +28355,7 @@ let cn = {
   }]
 };
 let cr = {
-  name: _$$Y.LastFrameSelection,
+  name: EntityType.LastFrameSelection,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28384,7 +28384,7 @@ let cr = {
   }]
 };
 let ca = {
-  name: _$$Y.LatestClipboardData,
+  name: EntityType.LatestClipboardData,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28413,14 +28413,14 @@ let ca = {
   }]
 };
 let cs = {
-  name: _$$Y.Library,
+  name: EntityType.Library,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey', 'id']),
   fields: [...ee, {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['id', '=', createParentRef('fileKey')],
     nullable: !0
@@ -28471,7 +28471,7 @@ let cs = {
     name: 'approvedLibraries',
     type: {
       kind: 'objects',
-      name: _$$Y.ApprovedLibrary
+      name: EntityType.ApprovedLibrary
     },
     filter: ['fileKey', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -28479,7 +28479,7 @@ let cs = {
   }]
 };
 let co = {
-  name: _$$Y.LibraryFileSubscription,
+  name: EntityType.LibraryFileSubscription,
   permissionRequired: !1,
   fields: [...en, {
     name: 'hubFileId',
@@ -28497,7 +28497,7 @@ let co = {
     name: 'communityLibraryKeyToFile',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryKeyToFile
+      name: EntityType.LibraryKeyToFile
     },
     filter: {
       and: [['hubFileId', '=', createParentRef('hubFileId')], ['hubFileId', '<>', null]]
@@ -28508,7 +28508,7 @@ let co = {
     name: 'teamLibraryKeyToFile',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryKeyToFile
+      name: EntityType.LibraryKeyToFile
     },
     filter: {
       and: [['fileKey', '=', createParentRef('libraryFileKey')], ['hubFileId', '=', null]]
@@ -28534,7 +28534,7 @@ let co = {
     name: 'library',
     type: {
       kind: 'object',
-      name: _$$Y.Library
+      name: EntityType.Library
     },
     filter: {
       and: [['fileKey', '=', createParentRef('libraryFileKey')], ['hubFileId', '=', null]]
@@ -28547,7 +28547,7 @@ let co = {
     name: 'communityLibrary',
     type: {
       kind: 'object',
-      name: _$$Y.CommunityLibrary
+      name: EntityType.CommunityLibrary
     },
     filter: {
       and: [['hubFileId', '=', createParentRef('hubFileId')], ['hubFileId', '<>', null]]
@@ -28584,7 +28584,7 @@ let co = {
   }]
 };
 let cl = {
-  name: _$$Y.LibraryHierarchyPath,
+  name: EntityType.LibraryHierarchyPath,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28625,7 +28625,7 @@ let cl = {
     name: 'components',
     type: {
       kind: 'objects',
-      name: _$$Y.Component
+      name: EntityType.Component
     },
     args: [{
       name: 'initialPageSize',
@@ -28641,7 +28641,7 @@ let cl = {
     name: 'styles',
     type: {
       kind: 'objects',
-      name: _$$Y.Style
+      name: EntityType.Style
     },
     args: [{
       name: 'initialPageSize',
@@ -28657,7 +28657,7 @@ let cl = {
     name: 'stateGroups',
     type: {
       kind: 'objects',
-      name: _$$Y.StateGroup
+      name: EntityType.StateGroup
     },
     args: [{
       name: 'initialPageSize',
@@ -28672,7 +28672,7 @@ let cl = {
   }]
 };
 let cd = {
-  name: _$$Y.LibraryItemContainingFrame,
+  name: EntityType.LibraryItemContainingFrame,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -28715,14 +28715,14 @@ let cd = {
     name: 'containingStateGroup',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryItemContainingStateGroup
+      name: EntityType.LibraryItemContainingStateGroup
     },
     embedded: !0,
     nullable: !0
   }]
 };
 let cc = {
-  name: _$$Y.LibraryItemContainingStateGroup,
+  name: EntityType.LibraryItemContainingStateGroup,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -28740,7 +28740,7 @@ let cc = {
   }]
 };
 let cu = {
-  name: _$$Y.LibraryKeyToFile,
+  name: EntityType.LibraryKeyToFile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -28770,7 +28770,7 @@ let cu = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     deprecated: {
@@ -28788,7 +28788,7 @@ let cu = {
     name: 'fileCanAccess',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -28803,7 +28803,7 @@ let cu = {
     name: '_file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -28812,7 +28812,7 @@ let cu = {
     name: 'teamTemplateFile',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -28824,7 +28824,7 @@ let cu = {
     name: 'hubFile',
     type: {
       kind: 'object',
-      name: _$$Y.HubFile
+      name: EntityType.HubFile
     },
     filter: ['id', '=', createParentRef('hubFileId')],
     nullable: !0,
@@ -28836,14 +28836,14 @@ let cu = {
     name: 'libraryPublishScope',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryPublishScope
+      name: EntityType.LibraryPublishScope
     },
     filter: ['libraryKey', '=', createParentRef('libraryKey')],
     nullable: !0
   }]
 };
 let cp = {
-  name: _$$Y.LibraryPublish,
+  name: EntityType.LibraryPublish,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -28880,7 +28880,7 @@ let cp = {
     name: 'assetPublishStatuses',
     type: {
       kind: 'objects',
-      name: _$$Y.AssetPublishStatus
+      name: EntityType.AssetPublishStatus
     },
     expectedMaxCount: 1e4,
     filter: ['libraryPublishId', '=', createParentRef('id')],
@@ -28895,7 +28895,7 @@ let cp = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     bannedFromViews: !0
@@ -28924,7 +28924,7 @@ let cp = {
   }]
 };
 let cm = {
-  name: _$$Y.LibraryPublishV2,
+  name: EntityType.LibraryPublishV2,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -28990,7 +28990,7 @@ let cm = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     bannedFromViews: !0
@@ -29019,7 +29019,7 @@ let cm = {
   }]
 };
 let ch = {
-  name: _$$Y.LibraryPublishScope,
+  name: EntityType.LibraryPublishScope,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29045,7 +29045,7 @@ let ch = {
   }]
 };
 let cg = {
-  name: _$$Y.LibraryWorkspaceSubscription,
+  name: EntityType.LibraryWorkspaceSubscription,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29066,7 +29066,7 @@ let cg = {
     name: 'workspace',
     type: {
       kind: 'object',
-      name: _$$Y.Workspace
+      name: EntityType.Workspace
     },
     filter: ['id', '=', createParentRef('workspaceId')],
     checkCanRead: {
@@ -29076,7 +29076,7 @@ let cg = {
     name: 'libraryTeamSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryTeamSubscription
+      name: EntityType.LibraryTeamSubscription
     },
     args: [{
       name: 'subscribingFileTeamId',
@@ -29091,7 +29091,7 @@ let cg = {
   }]
 };
 let cf = {
-  name: _$$Y.LicenseGroupFullPaidStatusCount,
+  name: EntityType.LicenseGroupFullPaidStatusCount,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -29108,7 +29108,7 @@ let cf = {
   }]
 };
 let c_ = {
-  name: _$$Y.LicenseGroupMemberCounts,
+  name: EntityType.LicenseGroupMemberCounts,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29124,7 +29124,7 @@ let c_ = {
     name: 'fullPaidStatusCounts',
     type: {
       kind: 'objects',
-      name: _$$Y.LicenseGroupFullPaidStatusCount
+      name: EntityType.LicenseGroupFullPaidStatusCount
     },
     embedded: !0
   }, {
@@ -29148,7 +29148,7 @@ let c_ = {
   }]
 };
 let cA = {
-  name: _$$Y.LicenseGroup,
+  name: EntityType.LicenseGroup,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29164,7 +29164,7 @@ let cA = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     bannedFromViews: !0
@@ -29201,7 +29201,7 @@ let cA = {
     name: 'allowlistedPlugins',
     type: {
       kind: 'objects',
-      name: _$$Y.AllowlistedPlugin
+      name: EntityType.AllowlistedPlugin
     },
     filter: {
       and: [['allowlistGroupId', '=', createParentRef('id')], ['allowlistGroupType', '=', 'LicenseGroup']]
@@ -29255,7 +29255,7 @@ let cA = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.LicenseGroupMemberCounts
+      name: EntityType.LicenseGroupMemberCounts
     },
     resolver: {
       type: 'HTTP',
@@ -29281,7 +29281,7 @@ let cA = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LicenseGroupAssignedBillableProductSeatCount
+      name: EntityType.LicenseGroupAssignedBillableProductSeatCount
     },
     resolver: {
       type: 'HTTP',
@@ -29299,7 +29299,7 @@ let cA = {
   }]
 };
 let cy = {
-  name: _$$Y.LicenseGroupAdmin,
+  name: EntityType.LicenseGroupAdmin,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29320,7 +29320,7 @@ let cy = {
     name: 'licenseGroup',
     type: {
       kind: 'object',
-      name: _$$Y.LicenseGroup
+      name: EntityType.LicenseGroup
     },
     filter: ['id', '=', createParentRef('licenseGroupId')]
   }, {
@@ -29336,7 +29336,7 @@ let cy = {
   }]
 };
 let cb = {
-  name: _$$Y.LicenseGroupMember,
+  name: EntityType.LicenseGroupMember,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29380,7 +29380,7 @@ let cb = {
     name: 'idpGroup',
     type: {
       kind: 'object',
-      name: _$$Y.IDPGroup
+      name: EntityType.IDPGroup
     },
     filter: ['id', '=', createParentRef('idpGroupUuid')],
     nullable: !0
@@ -29402,13 +29402,13 @@ let cb = {
     name: 'licenseGroup',
     type: {
       kind: 'object',
-      name: _$$Y.LicenseGroup
+      name: EntityType.LicenseGroup
     },
     filter: ['id', '=', createParentRef('licenseGroupId')]
   }]
 };
 let cv = {
-  name: _$$Y.LicenseGroupsConfig,
+  name: EntityType.LicenseGroupsConfig,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29430,7 +29430,7 @@ let cv = {
     name: 'licenseGroups',
     type: {
       kind: 'objects',
-      name: _$$Y.LicenseGroup
+      name: EntityType.LicenseGroup
     },
     args: [{
       name: 'initialPageSize',
@@ -29445,7 +29445,7 @@ let cv = {
   }]
 };
 let cI = {
-  name: _$$Y.LinkedFigFile,
+  name: EntityType.LinkedFigFile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29479,7 +29479,7 @@ let cI = {
   }
 };
 let cE = {
-  name: _$$Y.MergeRequest,
+  name: EntityType.MergeRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29506,7 +29506,7 @@ let cE = {
     name: 'branchFile',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('branchFileKey')],
     checkCanRead: {
@@ -29530,7 +29530,7 @@ let cE = {
     name: 'owner',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('ownedBy')],
     nullable: !0
@@ -29562,7 +29562,7 @@ let cE = {
     name: 'closer',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('closedBy')],
     nullable: !0
@@ -29576,7 +29576,7 @@ let cE = {
     name: 'reviewers',
     type: {
       kind: 'objects',
-      name: _$$Y.MergeRequestReviewer
+      name: EntityType.MergeRequestReviewer
     },
     filter: ['mergeRequestKey', '=', createParentRef('key')],
     expectedMaxCount: 100
@@ -29605,7 +29605,7 @@ let cE = {
   }]
 };
 let cx = {
-  name: _$$Y.MergeRequestReviewer,
+  name: EntityType.MergeRequestReviewer,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29626,7 +29626,7 @@ let cx = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0
@@ -29661,7 +29661,7 @@ let cx = {
   }]
 };
 let cS = {
-  name: _$$Y.Module,
+  name: EntityType.Module,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29721,7 +29721,7 @@ let cS = {
     name: 'checkpoint',
     type: {
       kind: 'object',
-      name: _$$Y.Checkpoint
+      name: EntityType.Checkpoint
     },
     embedded: !0
   }, {
@@ -29775,7 +29775,7 @@ let cS = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -29784,7 +29784,7 @@ let cS = {
     name: 'hubFile',
     type: {
       kind: 'object',
-      name: _$$Y.HubFile
+      name: EntityType.HubFile
     },
     filter: ['id', '=', createParentRef('hubFileId')],
     nullable: !0
@@ -29792,7 +29792,7 @@ let cS = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0
@@ -29800,7 +29800,7 @@ let cS = {
     name: 'containingFrame',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryItemContainingFrame
+      name: EntityType.LibraryItemContainingFrame
     },
     embedded: !0,
     nullable: !0
@@ -29826,7 +29826,7 @@ let cS = {
   }]
 };
 let cw = {
-  name: _$$Y.MonetizedResourceMetadata,
+  name: EntityType.MonetizedResourceMetadata,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -29907,7 +29907,7 @@ let cw = {
     name: 'hubFile',
     type: {
       kind: 'object',
-      name: _$$Y.HubFile
+      name: EntityType.HubFile
     },
     filter: ['id', '=', createParentRef('hubFileId')],
     nullable: !0
@@ -29915,7 +29915,7 @@ let cw = {
     name: 'plugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     filter: ['id', '=', createParentRef('pluginId')],
     nullable: !0
@@ -29923,14 +29923,14 @@ let cw = {
     name: 'widget',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     filter: ['id', '=', createParentRef('widgetId')],
     nullable: !0
   }]
 };
 let cC = {
-  name: _$$Y.OnboardingUserSignalAnswer,
+  name: EntityType.OnboardingUserSignalAnswer,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -29951,14 +29951,14 @@ let cC = {
   }]
 };
 let cT = {
-  name: _$$Y.OnboardingUserSignalData,
+  name: EntityType.OnboardingUserSignalData,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
     name: 'workLocationV1',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalAnswer
+      name: EntityType.OnboardingUserSignalAnswer
     },
     embedded: !0,
     nullable: !0
@@ -29966,7 +29966,7 @@ let cT = {
     name: 'expandedUsagePurposeV1',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalAnswer
+      name: EntityType.OnboardingUserSignalAnswer
     },
     embedded: !0,
     nullable: !0
@@ -29974,7 +29974,7 @@ let cT = {
     name: 'howCollabV1',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalAnswer
+      name: EntityType.OnboardingUserSignalAnswer
     },
     embedded: !0,
     nullable: !0
@@ -29982,7 +29982,7 @@ let cT = {
     name: 'howWillYouUseFigmaV1',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalAnswer
+      name: EntityType.OnboardingUserSignalAnswer
     },
     embedded: !0,
     nullable: !0
@@ -29990,7 +29990,7 @@ let cT = {
     name: 'expandedUsagePurposeV2',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalAnswer
+      name: EntityType.OnboardingUserSignalAnswer
     },
     embedded: !0,
     nullable: !0
@@ -29998,7 +29998,7 @@ let cT = {
     name: 'howCollabV2',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalAnswer
+      name: EntityType.OnboardingUserSignalAnswer
     },
     embedded: !0,
     nullable: !0
@@ -30006,7 +30006,7 @@ let cT = {
     name: 'haveUsedFigmaProductsBeforeV1',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalAnswer
+      name: EntityType.OnboardingUserSignalAnswer
     },
     embedded: !0,
     nullable: !0
@@ -30014,14 +30014,14 @@ let cT = {
     name: 'whatBringsYouToFigmaTodayV1',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalAnswer
+      name: EntityType.OnboardingUserSignalAnswer
     },
     embedded: !0,
     nullable: !0
   }]
 };
 let ck = {
-  name: _$$Y.OnboardingUserSignals,
+  name: EntityType.OnboardingUserSignals,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -30042,7 +30042,7 @@ let ck = {
     name: 'signals',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignalData
+      name: EntityType.OnboardingUserSignalData
     },
     embedded: !0,
     nullable: !0
@@ -30054,7 +30054,7 @@ let ck = {
   }]
 };
 let cR = {
-  name: _$$Y.OpenMergeRequest,
+  name: EntityType.OpenMergeRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -30070,7 +30070,7 @@ let cR = {
     name: 'mergeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.MergeRequest
+      name: EntityType.MergeRequest
     },
     filter: ['key', '=', createParentRef('mergeRequestKey')]
   }, {
@@ -30082,7 +30082,7 @@ let cR = {
     name: 'branchFile',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('branchFileKey')],
     checkCanRead: {
@@ -30136,7 +30136,7 @@ let cD = [{
   name: 'currentBaseOrgUser',
   type: {
     kind: 'object',
-    name: _$$Y.BaseOrgUser
+    name: EntityType.BaseOrgUser
   },
   args: [{
     name: 'userId',
@@ -30154,7 +30154,7 @@ let cD = [{
   nullable: !0,
   type: {
     kind: 'object',
-    name: _$$Y.PlanSubscription
+    name: EntityType.PlanSubscription
   },
   orderBy: [['createdAt', 'DESC']],
   filter: {
@@ -30189,7 +30189,7 @@ let cD = [{
   name: 'expOneClickAskToEditOrgId',
   type: {
     kind: 'object',
-    name: _$$Y.ExpOneClickAskToEditOrgId
+    name: EntityType.ExpOneClickAskToEditOrgId
   },
   resolver: {
     type: 'Statsig',
@@ -30205,12 +30205,12 @@ let cD = [{
   }
 }];
 let cL = {
-  name: _$$Y.OrgPublicInfo,
+  name: EntityType.OrgPublicInfo,
   permissionRequired: !1,
   fields: [...cD, ...lK, ...ls, dE]
 };
 let cF = {
-  name: _$$Y.OrgInfo,
+  name: EntityType.OrgInfo,
   permissionRequired: !1,
   fields: [...cD, {
     name: 'name',
@@ -30288,7 +30288,7 @@ let cF = {
     name: 'inviteWhitelist',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInviteAllowlist
+      name: EntityType.OrgInviteAllowlist
     },
     nullable: !0,
     embedded: !0
@@ -30318,7 +30318,7 @@ let cF = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgAllowedPublicPlugins
+      name: EntityType.OrgAllowedPublicPlugins
     },
     filter: ['orgId', '=', createParentRef('id')]
   }, {
@@ -30344,7 +30344,7 @@ let cF = {
     name: 'sharedOrgLicenseGroupSetting',
     type: {
       kind: 'object',
-      name: _$$Y.SharedOrgLicenseGroupSetting
+      name: EntityType.SharedOrgLicenseGroupSetting
     },
     nullable: !0,
     deprecated: {
@@ -30358,7 +30358,7 @@ let cF = {
     name: 'orgSharedSetting',
     type: {
       kind: 'object',
-      name: _$$Y.SharedOrgLicenseGroupSetting
+      name: EntityType.SharedOrgLicenseGroupSetting
     },
     nullable: !0,
     filter: {
@@ -30389,7 +30389,7 @@ let cF = {
     name: 'orgSamlConfigs',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgSamlConfig
+      name: EntityType.OrgSamlConfig
     },
     filter: ['orgId', '=', createParentRef('id')],
     checkCanRead: {
@@ -30401,7 +30401,7 @@ let cF = {
     name: 'currentIDPUser',
     type: {
       kind: 'object',
-      name: _$$Y.ComputedIDPUser
+      name: EntityType.ComputedIDPUser
     },
     nullable: !0,
     computed: !0,
@@ -30440,7 +30440,7 @@ let cF = {
     name: 'taxInfo',
     type: {
       kind: 'object',
-      name: _$$Y.TaxInfo
+      name: EntityType.TaxInfo
     },
     args: [{
       name: 'userId',
@@ -30465,7 +30465,7 @@ let cF = {
     name: 'devModeOptInPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'organization'], ['property', '=', 'DEV_MODE_OPT_IN_REQUIREMENT_ACCEPTANCE_DATE']]
@@ -30475,7 +30475,7 @@ let cF = {
     name: 'isSalesAssistedPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'organization'], ['property', '=', 'is_sales_assisted']]
@@ -30485,7 +30485,7 @@ let cF = {
     name: 'subscriptionShouldNotAutoRenewPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'organization'], ['property', '=', 'SUBSCRIPTION_SHOULD_NOT_AUTO_RENEW']]
@@ -30537,7 +30537,7 @@ let cF = {
     name: 'devModeAccountTypeRequests',
     type: {
       kind: 'objects',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'Org'], ['_editorTypeRaw', '=', 2], ['status', '=', 'pending']]
@@ -30548,7 +30548,7 @@ let cF = {
     name: 'orgDefaultPaidStatusDesign',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -30570,7 +30570,7 @@ let cF = {
     name: 'orgDefaultPaidStatusWhiteboard',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -30592,7 +30592,7 @@ let cF = {
     name: 'upgradeApprovalSettings',
     type: {
       kind: 'object',
-      name: _$$Y.UpgradeApprovalSettings
+      name: EntityType.UpgradeApprovalSettings
     },
     embedded: !0,
     nullable: !0
@@ -30656,7 +30656,7 @@ let cF = {
     name: 'aiDataSharingEnabledAtPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'organization'], ['property', '=', 'AI_DATA_SHARING_ENABLED_AT']]
@@ -30689,7 +30689,7 @@ let cF = {
     name: 'aiDataSharingSearchEnabledAtPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'organization'], ['property', '=', 'AI_DATA_SHARING_SEARCH_ENABLED_AT']]
@@ -30718,7 +30718,7 @@ let cF = {
     name: 'aiDataSharingGenerativeEnabledAtPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'organization'], ['property', '=', 'AI_DATA_SHARING_GENERATIVE_ENABLED_AT']]
@@ -30747,7 +30747,7 @@ let cF = {
     name: 'billingTrials',
     type: {
       kind: 'objects',
-      name: _$$Y.BillingTrial
+      name: EntityType.BillingTrial
     },
     nullable: !0,
     filter: {
@@ -30758,7 +30758,7 @@ let cF = {
     name: 'slidesDisabledAt',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -30780,7 +30780,7 @@ let cF = {
     name: 'sitesDisabledAt',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -30802,7 +30802,7 @@ let cF = {
     name: 'cooperDisabledAt',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -30824,7 +30824,7 @@ let cF = {
     name: 'figmakeDisabledAt',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -30920,7 +30920,7 @@ let cF = {
     name: '_org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('id')],
     bannedFromViews: !0
@@ -30929,7 +30929,7 @@ let cF = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -30943,7 +30943,7 @@ let cF = {
     name: 'currentOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     args: [{
       name: 'userId',
@@ -30960,7 +30960,7 @@ let cF = {
     name: 'currentPrivilegedOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     args: [{
       name: 'userId',
@@ -30977,7 +30977,7 @@ let cF = {
     name: '_unlimitedConnectionsEnabledAtPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     bannedFromViews: !0,
     filter: {
@@ -30999,7 +30999,7 @@ let cF = {
     name: '_testingOnlyUnlimitedConnectionsEnabledAtPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     bannedFromViews: !0,
     filter: {
@@ -31021,7 +31021,7 @@ let cF = {
     name: '_hostPlanActiveResourceConnections',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -31033,7 +31033,7 @@ let cF = {
     name: '_connectedPlanActiveResourceConnections',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -31045,7 +31045,7 @@ let cF = {
     name: '_hostPlanPendingResourceConnectionInvites',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnectionInvite
+      name: EntityType.ResourceConnectionInvite
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -31074,7 +31074,7 @@ let cF = {
     name: 'whitelistedPlugins',
     type: {
       kind: 'objects',
-      name: _$$Y.AllowlistedPlugin
+      name: EntityType.AllowlistedPlugin
     },
     filter: ['orgId', '=', createParentRef('id')],
     expectedMaxCount: 1e4
@@ -31082,7 +31082,7 @@ let cF = {
     name: 'allowlistedPlugins',
     type: {
       kind: 'objects',
-      name: _$$Y.AllowlistedPlugin
+      name: EntityType.AllowlistedPlugin
     },
     filter: {
       and: [['allowlistGroupId', '=', createParentRef('id')], ['allowlistGroupType', '=', 'Org']]
@@ -31092,7 +31092,7 @@ let cF = {
     name: 'flagOrgGuestMfaForGoogleSso',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -31123,7 +31123,7 @@ let cF = {
     name: 'flagOrgGuestMfaForSamlSso',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -31154,7 +31154,7 @@ let cF = {
     name: '_org_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0,
@@ -31163,7 +31163,7 @@ let cF = {
     name: 'sitesPublishingDisabledAt',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -31185,7 +31185,7 @@ let cF = {
     name: 'supabaseDisabledAt',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -31207,7 +31207,7 @@ let cF = {
     name: 'featureFlagCampfireProvisionalAccessEnabled',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -31226,7 +31226,7 @@ let cF = {
     name: 'resourceHubCmtyTabDisabledAt',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     nullable: !0,
     filter: {
@@ -31248,7 +31248,7 @@ let cF = {
     name: 'orgDomains',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgDomain
+      name: EntityType.OrgDomain
     },
     filter: ['orgId', '=', createParentRef('id')],
     expectedMaxCount: 1500
@@ -31256,7 +31256,7 @@ let cF = {
     name: 'workspaces',
     type: {
       kind: 'objects',
-      name: _$$Y.Workspace
+      name: EntityType.Workspace
     },
     checkCanRead: {
       userId: createSessionRef('userId')
@@ -31278,7 +31278,7 @@ let cF = {
   }, ...cO('Org'), ...dd, R, dE]
 };
 let cM = {
-  name: _$$Y.OrgMemberCount,
+  name: EntityType.OrgMemberCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -31293,7 +31293,7 @@ let cM = {
   }]
 };
 let cj = {
-  name: _$$Y.OrgWorkspaceCount,
+  name: EntityType.OrgWorkspaceCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -31308,7 +31308,7 @@ let cj = {
   }]
 };
 let cU = {
-  name: _$$Y.OrgDiscoverableTeamCount,
+  name: EntityType.OrgDiscoverableTeamCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -31323,7 +31323,7 @@ let cU = {
   }]
 };
 let cB = {
-  name: _$$Y.Org,
+  name: EntityType.Org,
   permissionRequired: !0,
   fields: [...cF.fields.filter(e => e.name !== 'canRead'), {
     name: 'googleSsoOnlyAt',
@@ -31341,7 +31341,7 @@ let cB = {
     name: 'teams',
     type: {
       kind: 'objects',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     args: [{
       name: 'userId',
@@ -31359,7 +31359,7 @@ let cB = {
     name: 'activeTeams',
     type: {
       kind: 'objects',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     args: [{
       name: 'userId',
@@ -31379,7 +31379,7 @@ let cB = {
     name: 'teamsWithSummary',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamWithSummary
+      name: EntityType.TeamWithSummary
     },
     args: [{
       name: 'userId',
@@ -31398,7 +31398,7 @@ let cB = {
     name: 'teamsById',
     type: {
       kind: 'objects',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     args: [{
       name: 'userId',
@@ -31427,7 +31427,7 @@ let cB = {
     name: 'teamsByIdInAdmin',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamInAdmin
+      name: EntityType.TeamInAdmin
     },
     args: [{
       name: 'userId',
@@ -31456,7 +31456,7 @@ let cB = {
     name: 'members',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     nullable: !0,
     filter: ['orgId', '=', createParentRef('id')],
@@ -31469,7 +31469,7 @@ let cB = {
     name: 'baseOrgUserMembers',
     type: {
       kind: 'objects',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     args: [{
@@ -31484,7 +31484,7 @@ let cB = {
     name: 'baseOrgUserMembersById',
     type: {
       kind: 'objects',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     args: [{
@@ -31526,7 +31526,7 @@ let cB = {
     name: 'installedPlugins',
     type: {
       kind: 'objects',
-      name: _$$Y.PluginInstall
+      name: EntityType.PluginInstall
     },
     args: [{
       name: 'initialPageSize',
@@ -31566,7 +31566,7 @@ let cB = {
     name: 'pluginRequests',
     type: {
       kind: 'objects',
-      name: _$$Y.PluginRequest
+      name: EntityType.PluginRequest
     },
     filter: ['orgId', '=', createParentRef('id')],
     expectedMaxCount: 1e4,
@@ -31577,7 +31577,7 @@ let cB = {
     name: 'pendingPluginRequests',
     type: {
       kind: 'objects',
-      name: _$$Y.PluginRequest
+      name: EntityType.PluginRequest
     },
     filter: {
       and: [['orgId', '=', createParentRef('id')], ['status', '=', 'pending']]
@@ -31607,7 +31607,7 @@ let cB = {
     name: 'licenseGroupsConfig',
     type: {
       kind: 'object',
-      name: _$$Y.LicenseGroupsConfig
+      name: EntityType.LicenseGroupsConfig
     },
     filter: ['orgId', '=', createParentRef('id')],
     nullable: !0,
@@ -31616,7 +31616,7 @@ let cB = {
     name: 'librarySubscriptions',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryOrgSubscription
+      name: EntityType.LibraryOrgSubscription
     },
     filter: {
       and: [['orgId', '=', createParentRef('id')]]
@@ -31627,7 +31627,7 @@ let cB = {
     name: 'librarySubscriptionByLibraryKey',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryOrgSubscription
+      name: EntityType.LibraryOrgSubscription
     },
     args: [{
       name: 'fileKey',
@@ -31643,7 +31643,7 @@ let cB = {
     name: 'librarySubscriptionByLibraryHubFileId',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryOrgSubscription
+      name: EntityType.LibraryOrgSubscription
     },
     args: [{
       name: 'hubFileId',
@@ -31659,10 +31659,10 @@ let cB = {
     name: 'approvedLibraries',
     type: {
       kind: 'objects',
-      name: _$$Y.ApprovedLibrary
+      name: EntityType.ApprovedLibrary
     },
     filter: {
-      and: [['resourceType', '=', _$$Y.Org], ['resourceId', '=', createParentRef('id')]]
+      and: [['resourceType', '=', EntityType.Org], ['resourceId', '=', createParentRef('id')]]
     },
     nullable: !0,
     expectedMaxCount: 200
@@ -31752,7 +31752,7 @@ let cB = {
     name: 'orgBillingPeriods',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgBillingPeriod
+      name: EntityType.OrgBillingPeriod
     },
     args: [{
       name: 'orgId',
@@ -31769,7 +31769,7 @@ let cB = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.ActiveOrgBillingPeriod
+      name: EntityType.ActiveOrgBillingPeriod
     },
     args: [{
       name: 'orgId',
@@ -31793,7 +31793,7 @@ let cB = {
     name: 'licenseGroups',
     type: {
       kind: 'objects',
-      name: _$$Y.LicenseGroup
+      name: EntityType.LicenseGroup
     },
     filter: ['orgId', '=', createParentRef('id')],
     nullable: !0,
@@ -31809,7 +31809,7 @@ let cB = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.OrgMemberCount
+      name: EntityType.OrgMemberCount
     },
     resolver: {
       type: 'HTTP',
@@ -31833,7 +31833,7 @@ let cB = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.OrgWorkspaceCount
+      name: EntityType.OrgWorkspaceCount
     },
     resolver: {
       type: 'HTTP',
@@ -31857,7 +31857,7 @@ let cB = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.OrgDiscoverableTeamCount
+      name: EntityType.OrgDiscoverableTeamCount
     },
     resolver: {
       type: 'HTTP',
@@ -31881,7 +31881,7 @@ let cB = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.ActivityLog
+      name: EntityType.ActivityLog
     },
     filter: ['orgId', '=', createParentRef('id')],
     checkCanRead: {
@@ -31905,7 +31905,7 @@ let cB = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.ActivityLog
+      name: EntityType.ActivityLog
     },
     filter: {
       and: [['orgId', '=', createParentRef('id')], ['actedOnIdOrKey', '=', createFieldRef('actedOnIdOrKey')]]
@@ -31918,7 +31918,7 @@ let cB = {
     name: 'newDesignEditors',
     type: {
       kind: 'object',
-      name: _$$Y.OrgAdminNewEditorsInfo
+      name: EntityType.OrgAdminNewEditorsInfo
     },
     args: [{
       name: 'userId',
@@ -31943,7 +31943,7 @@ let cB = {
     name: 'newFigjamEditors',
     type: {
       kind: 'object',
-      name: _$$Y.OrgAdminNewEditorsInfo
+      name: EntityType.OrgAdminNewEditorsInfo
     },
     args: [{
       name: 'userId',
@@ -31968,7 +31968,7 @@ let cB = {
     name: 'newDevmodeEditors',
     type: {
       kind: 'object',
-      name: _$$Y.OrgAdminNewEditorsInfo
+      name: EntityType.OrgAdminNewEditorsInfo
     },
     args: [{
       name: 'userId',
@@ -31993,7 +31993,7 @@ let cB = {
     name: 'ipAllowlistRanges',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgIpRange
+      name: EntityType.OrgIpRange
     },
     filter: {
       and: [['orgId', '=', createParentRef('id')], ['productType', '=', 'ip_allowlist']]
@@ -32003,7 +32003,7 @@ let cB = {
     name: 'pluginUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     args: [{
       name: 'orgId',
@@ -32029,7 +32029,7 @@ let cB = {
     name: 'widgetUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     args: [{
       name: 'orgId',
@@ -32055,7 +32055,7 @@ let cB = {
     name: 'fontFileUpdateForOrg',
     type: {
       kind: 'objects',
-      name: _$$Y.FontFile
+      name: EntityType.FontFile
     },
     nullable: !0,
     args: [{
@@ -32074,7 +32074,7 @@ let cB = {
     name: 'billingRemodelEnabledExperiment',
     type: {
       kind: 'object',
-      name: _$$Y.BillingRemodelEnabledExperiment
+      name: EntityType.BillingRemodelEnabledExperiment
     },
     resolver: {
       type: 'Statsig',
@@ -32103,7 +32103,7 @@ let cB = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.AssignedBillableProductSeatCount
+      name: EntityType.AssignedBillableProductSeatCount
     },
     resolver: {
       type: 'HTTP',
@@ -32134,7 +32134,7 @@ let cB = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.AvailableBillableProductSeatCount
+      name: EntityType.AvailableBillableProductSeatCount
     },
     resolver: {
       type: 'HTTP',
@@ -32154,7 +32154,7 @@ let cB = {
     name: 'expSocialProofExpansionOrgId',
     type: {
       kind: 'object',
-      name: _$$Y.ExpSocialProofExpansionOrgId
+      name: EntityType.ExpSocialProofExpansionOrgId
     },
     args: [{
       name: 'userId',
@@ -32195,7 +32195,7 @@ let cB = {
   }]
 };
 let cV = {
-  name: _$$Y.OrgAccountTypeRequest,
+  name: EntityType.OrgAccountTypeRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32239,7 +32239,7 @@ let cV = {
   }]
 };
 let cG = {
-  name: _$$Y.OrgActivity,
+  name: EntityType.OrgActivity,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32276,7 +32276,7 @@ let cG = {
   }]
 };
 let cz = {
-  name: _$$Y.OrgAdminUserSearchResult,
+  name: EntityType.OrgAdminUserSearchResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32299,7 +32299,7 @@ let cz = {
     name: 'orgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('orgUserId')]
@@ -32313,7 +32313,7 @@ let cz = {
     name: 'idpUser',
     type: {
       kind: 'object',
-      name: _$$Y.IDPUser
+      name: EntityType.IDPUser
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('idpUserId')]
@@ -32327,7 +32327,7 @@ let cz = {
     name: 'orgInvite',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInvite
+      name: EntityType.OrgInvite
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('orgInviteId')]
@@ -32376,7 +32376,7 @@ let cz = {
   }]
 };
 let cH = {
-  name: _$$Y.OrgAdminUserMinimalFieldsSearchResult,
+  name: EntityType.OrgAdminUserMinimalFieldsSearchResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32392,14 +32392,14 @@ let cH = {
     name: 'orgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('orgUserId')]
   }]
 };
 let cW = {
-  name: _$$Y.OrgAdminUsersInfo,
+  name: EntityType.OrgAdminUsersInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32415,7 +32415,7 @@ let cW = {
     name: 'designEditorCutoff',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserFetchNewEditorCutoff
+      name: EntityType.OrgUserFetchNewEditorCutoff
     },
     embedded: !0,
     nullable: !0
@@ -32423,7 +32423,7 @@ let cW = {
     name: 'designEditorBuffer',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserFetchNewEditorBuffer
+      name: EntityType.OrgUserFetchNewEditorBuffer
     },
     embedded: !0,
     nullable: !0
@@ -32431,7 +32431,7 @@ let cW = {
     name: 'whiteboardEditorCutoff',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserFetchNewEditorCutoff
+      name: EntityType.OrgUserFetchNewEditorCutoff
     },
     embedded: !0,
     nullable: !0
@@ -32439,7 +32439,7 @@ let cW = {
     name: 'whiteboardEditorBuffer',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserFetchNewEditorBuffer
+      name: EntityType.OrgUserFetchNewEditorBuffer
     },
     embedded: !0,
     nullable: !0
@@ -32451,7 +32451,7 @@ let cW = {
   }]
 };
 let cK = {
-  name: _$$Y.OrgAllowedPublicPlugins,
+  name: EntityType.OrgAllowedPublicPlugins,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32472,13 +32472,13 @@ let cK = {
   }]
 };
 let cY = {
-  name: _$$Y.OrgAwareTeamRole,
+  name: EntityType.OrgAwareTeamRole,
   permissionRequired: !0,
   fields: [...d$, {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -32507,7 +32507,7 @@ let cY = {
   }]
 };
 let cq = {
-  name: _$$Y.OrgBillingPeriod,
+  name: EntityType.OrgBillingPeriod,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32572,7 +32572,7 @@ let cq = {
     name: 'periodicUpdateField',
     type: {
       kind: 'object',
-      name: _$$Y.PeriodicUpdate
+      name: EntityType.PeriodicUpdate
     },
     nullable: !0,
     resolver: {
@@ -32581,7 +32581,7 @@ let cq = {
   }]
 };
 let c$ = {
-  name: _$$Y.OrgDomain,
+  name: EntityType.OrgDomain,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32631,7 +32631,7 @@ let c$ = {
   }]
 };
 let cZ = {
-  name: _$$Y.OrgInvite,
+  name: EntityType.OrgInvite,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32686,7 +32686,7 @@ let cZ = {
   }]
 };
 let cX = {
-  name: _$$Y.OrgInviteAllowlist,
+  name: EntityType.OrgInviteAllowlist,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -32719,7 +32719,7 @@ let cX = {
   }]
 };
 let cQ = {
-  name: _$$Y.OrgJoinRequest,
+  name: EntityType.OrgJoinRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32744,7 +32744,7 @@ let cQ = {
   }]
 };
 let cJ = {
-  name: _$$Y.OrgSetting,
+  name: EntityType.OrgSetting,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32770,7 +32770,7 @@ let cJ = {
   }]
 };
 let c0 = {
-  name: _$$Y.OrgTeamResult,
+  name: EntityType.OrgTeamResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32788,7 +32788,7 @@ let c0 = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('teamId')], ['deletedAt', '=', null]]
@@ -32804,7 +32804,7 @@ let c0 = {
     name: 'ownerRole',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     filter: {
       and: [['teamId', '=', createParentRef('teamId')], ['level', '=', 999]]
@@ -32818,7 +32818,7 @@ let c0 = {
     name: 'teamOwnerRole',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('teamId')], ['level', '=', e6.OWNER], ['resourceType', '=', 'team'], ['userId', '<>', null], ['pendingEmail', '=', null]]
@@ -32848,7 +32848,7 @@ let c0 = {
     name: 'owner',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('ownerId')],
     deprecated: {
@@ -32878,7 +32878,7 @@ let c0 = {
   }]
 };
 let c1 = {
-  name: _$$Y.OrgTeamResultInAdmin,
+  name: EntityType.OrgTeamResultInAdmin,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32902,7 +32902,7 @@ let c1 = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('teamId')], ['deletedAt', '=', null]]
@@ -32915,20 +32915,20 @@ let c1 = {
   }]
 };
 let c2 = {
-  name: _$$Y.OrgUser,
+  name: EntityType.OrgUser,
   permissionRequired: !1,
   fields: [...O, {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     args: [{
       name: 'userId',
@@ -32945,7 +32945,7 @@ let c2 = {
   }]
 };
 let c5 = {
-  name: _$$Y.OrgUserEvent,
+  name: EntityType.OrgUserEvent,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -32980,7 +32980,7 @@ let c5 = {
   }]
 };
 let c4 = {
-  name: _$$Y.OrgUserFetchNewEditorBuffer,
+  name: EntityType.OrgUserFetchNewEditorBuffer,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -33000,7 +33000,7 @@ let c4 = {
   }]
 };
 let c3 = {
-  name: _$$Y.OrgUserFetchNewEditorCutoff,
+  name: EntityType.OrgUserFetchNewEditorCutoff,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -33022,7 +33022,7 @@ let c3 = {
   }]
 };
 let c6 = {
-  name: _$$Y.OrgUserUpgrade,
+  name: EntityType.OrgUserUpgrade,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33070,7 +33070,7 @@ let c6 = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     checkCanRead: {
@@ -33093,7 +33093,7 @@ let c6 = {
     name: 'actor',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('actorId')]
@@ -33114,7 +33114,7 @@ let c6 = {
     name: 'resourceFile',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserUpgradeWithFile
+      name: EntityType.OrgUserUpgradeWithFile
     },
     nullable: !0,
     filter: {
@@ -33124,7 +33124,7 @@ let c6 = {
     name: 'resourceProject',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserUpgradeWithProject
+      name: EntityType.OrgUserUpgradeWithProject
     },
     nullable: !0,
     filter: {
@@ -33134,7 +33134,7 @@ let c6 = {
     name: 'resourceTeam',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserUpgradeWithTeam
+      name: EntityType.OrgUserUpgradeWithTeam
     },
     nullable: !0,
     filter: {
@@ -33144,7 +33144,7 @@ let c6 = {
     name: 'resourceRepo',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserUpgradeWithRepo
+      name: EntityType.OrgUserUpgradeWithRepo
     },
     nullable: !0,
     filter: {
@@ -33154,7 +33154,7 @@ let c6 = {
     name: 'resourceOrg',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserUpgradeWithOrg
+      name: EntityType.OrgUserUpgradeWithOrg
     },
     nullable: !0,
     filter: {
@@ -33238,7 +33238,7 @@ let c6 = {
   }]
 };
 let c7 = {
-  name: _$$Y.OrgSamlConfig,
+  name: EntityType.OrgSamlConfig,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33288,7 +33288,7 @@ let c7 = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     bannedFromViews: !0
@@ -33296,7 +33296,7 @@ let c7 = {
     name: 'orgDomains',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgDomain
+      name: EntityType.OrgDomain
     },
     filter: ['orgSamlConfigId', '=', createParentRef('id')],
     expectedMaxCount: 2e3
@@ -33304,7 +33304,7 @@ let c7 = {
     name: 'idpGroups',
     type: {
       kind: 'objects',
-      name: _$$Y.IDPGroup
+      name: EntityType.IDPGroup
     },
     filter: ['orgSamlConfigId', '=', createParentRef('id')],
     expectedMaxCount: 2e3
@@ -33332,7 +33332,7 @@ let c7 = {
     name: '_seatManagedViaScim',
     type: {
       kind: 'object',
-      name: _$$Y.IDPUser
+      name: EntityType.IDPUser
     },
     nullable: !0,
     filter: {
@@ -33381,7 +33381,7 @@ let c7 = {
   }]
 };
 let c8 = {
-  name: _$$Y.OrgUserUpgradeWithFile,
+  name: EntityType.OrgUserUpgradeWithFile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33405,7 +33405,7 @@ let c8 = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -33419,7 +33419,7 @@ let c8 = {
   }]
 };
 let c9 = {
-  name: _$$Y.OrgUserUpgradeWithOrg,
+  name: EntityType.OrgUserUpgradeWithOrg,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33443,7 +33443,7 @@ let c9 = {
     name: 'orgInfo',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -33454,14 +33454,14 @@ let c9 = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0
   }]
 };
 let ue = {
-  name: _$$Y.OrgUserUpgradeWithProject,
+  name: EntityType.OrgUserUpgradeWithProject,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33485,7 +33485,7 @@ let ue = {
     name: 'project',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -33495,7 +33495,7 @@ let ue = {
   }]
 };
 let ut = {
-  name: _$$Y.OrgUserUpgradeWithRepo,
+  name: EntityType.OrgUserUpgradeWithRepo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33519,7 +33519,7 @@ let ut = {
     name: 'repo',
     type: {
       kind: 'object',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -33532,7 +33532,7 @@ let ut = {
   }]
 };
 let ui = {
-  name: _$$Y.OrgUserUpgradeWithTeam,
+  name: EntityType.OrgUserUpgradeWithTeam,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33556,7 +33556,7 @@ let ui = {
     name: 'teamLimitedInfo',
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -33567,14 +33567,14 @@ let ui = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0
   }]
 };
 let un = {
-  name: _$$Y.PendingUserMentions,
+  name: EntityType.PendingUserMentions,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey', 'id']),
   fields: [{
@@ -33611,7 +33611,7 @@ let un = {
   }]
 };
 let ur = {
-  name: _$$Y.PermissionFeatureFlag,
+  name: EntityType.PermissionFeatureFlag,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33633,7 +33633,7 @@ let ur = {
   }]
 };
 let ua = {
-  name: _$$Y.PinnedFile,
+  name: EntityType.PinnedFile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33664,7 +33664,7 @@ let ua = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     nullable: !0,
     filter: ['key', '=', createParentRef('key')],
@@ -33679,14 +33679,14 @@ let ua = {
     name: 'pinnedByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('pinnedBy')]
   }]
 };
 let us = {
-  name: _$$Y.PinnedFileV2,
+  name: EntityType.PinnedFileV2,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33720,7 +33720,7 @@ let us = {
     name: 'description',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0,
     nullable: !0
@@ -33743,7 +33743,7 @@ let us = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     nullable: !0,
     filter: ['key', '=', createParentRef('fileKey')],
@@ -33758,7 +33758,7 @@ let us = {
     name: 'creator',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('creatorId')]
@@ -33831,7 +33831,7 @@ let us = {
   }]
 };
 let uo = {
-  name: _$$Y.PinnedPlugin,
+  name: EntityType.PinnedPlugin,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -33849,14 +33849,14 @@ let uo = {
     name: 'plugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('pluginId')]
   }]
 };
 let ul = {
-  name: _$$Y.PlanConnectionCount,
+  name: EntityType.PlanConnectionCount,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -33880,7 +33880,7 @@ let ul = {
   }]
 };
 let ud = {
-  name: _$$Y.PlanKey,
+  name: EntityType.PlanKey,
   permissionRequired: !1,
   computed: !0,
   embedded: !0,
@@ -33898,7 +33898,7 @@ let ud = {
   }]
 };
 let uc = {
-  name: _$$Y.PlanProperties,
+  name: EntityType.PlanProperties,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -33957,7 +33957,7 @@ let uu = {
   }]
 };
 let up = {
-  name: _$$Y.PlanUserMembershipRecord,
+  name: EntityType.PlanUserMembershipRecord,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -34025,7 +34025,7 @@ let up = {
     name: 'actor',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('actorId')],
     nullable: !0
@@ -34040,7 +34040,7 @@ let up = {
   }]
 };
 let um = {
-  name: _$$Y.PlanUserUpgrade,
+  name: EntityType.PlanUserUpgrade,
   permissionRequired: !1,
   computed: !0,
   embedded: !0,
@@ -34071,7 +34071,7 @@ let um = {
   }]
 };
 let uh = {
-  name: _$$Y.PlanUserKey,
+  name: EntityType.PlanUserKey,
   permissionRequired: !1,
   computed: !0,
   embedded: !0,
@@ -34089,7 +34089,7 @@ let uh = {
   }]
 };
 let ug = {
-  name: _$$Y.Plugin,
+  name: EntityType.Plugin,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -34283,14 +34283,14 @@ let ug = {
     name: 'profile',
     type: {
       kind: 'object',
-      name: _$$Y.Profile
+      name: EntityType.Profile
     },
     filter: ['id', '=', createParentRef('profileId')]
   }, {
     name: 'currentPluginVersion',
     type: {
       kind: 'object',
-      name: _$$Y.PluginVersion
+      name: EntityType.PluginVersion
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('currentPluginVersionId')]
@@ -34298,7 +34298,7 @@ let ug = {
     name: 'installedPlugins',
     type: {
       kind: 'objects',
-      name: _$$Y.PluginInstall
+      name: EntityType.PluginInstall
     },
     args: [{
       name: 'initialPageSize',
@@ -34312,7 +34312,7 @@ let ug = {
     name: 'monetizedResourceMetadata',
     type: {
       kind: 'object',
-      name: _$$Y.MonetizedResourceMetadata
+      name: EntityType.MonetizedResourceMetadata
     },
     filter: ['id', '=', createParentRef('monetizedResourceMetadataId')],
     nullable: !0
@@ -34320,7 +34320,7 @@ let ug = {
     name: 'userMonetizationMetadata',
     type: {
       kind: 'object',
-      name: _$$Y.UserMonetizationMetadata
+      name: EntityType.UserMonetizationMetadata
     },
     filter: ['userId', '=', createParentRef('userId')],
     nullable: !0
@@ -34328,7 +34328,7 @@ let ug = {
     name: 'communityResourcePayment',
     type: {
       kind: 'object',
-      name: _$$Y.CommunityResourcePayment
+      name: EntityType.CommunityResourcePayment
     },
     nullable: !0,
     args: [{
@@ -34345,7 +34345,7 @@ let ug = {
     name: 'orgWhitelist',
     type: {
       kind: 'object',
-      name: _$$Y.AllowlistedPlugin
+      name: EntityType.AllowlistedPlugin
     },
     nullable: !0,
     args: [{
@@ -34362,7 +34362,7 @@ let ug = {
     name: 'pluginRequests',
     type: {
       kind: 'objects',
-      name: _$$Y.PluginRequest
+      name: EntityType.PluginRequest
     },
     args: [{
       name: 'orgId',
@@ -34383,7 +34383,7 @@ let ug = {
     name: 'communityPublishers',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityPublisher
+      name: EntityType.CommunityPublisher
     },
     args: [{
       name: 'initialPageSize',
@@ -34400,7 +34400,7 @@ let ug = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     args: [{
@@ -34415,7 +34415,7 @@ let ug = {
     name: 'creator',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('userId')]
@@ -34424,7 +34424,7 @@ let ug = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -34439,7 +34439,7 @@ let ug = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     args: [{
       name: 'userId',
@@ -34455,7 +34455,7 @@ let ug = {
     name: '_org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     args: [{
@@ -34471,7 +34471,7 @@ let ug = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -34480,7 +34480,7 @@ let ug = {
     name: '_org_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -34489,7 +34489,7 @@ let ug = {
     name: 'pluginCommunityPublisher',
     type: {
       kind: 'object',
-      name: _$$Y.PluginCommunityPublisher
+      name: EntityType.PluginCommunityPublisher
     },
     nullable: !0,
     args: [{
@@ -34608,7 +34608,7 @@ let ug = {
     name: 'pluginRun',
     type: {
       kind: 'object',
-      name: _$$Y.PluginRun
+      name: EntityType.PluginRun
     },
     args: [{
       name: 'userId',
@@ -34625,7 +34625,7 @@ let ug = {
     name: 'badges',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityBadge
+      name: EntityType.CommunityBadge
     },
     args: [],
     nullable: !0,
@@ -34658,7 +34658,7 @@ let ug = {
     name: 'installedPluginForUser',
     type: {
       kind: 'object',
-      name: _$$Y.PluginInstall
+      name: EntityType.PluginInstall
     },
     args: [{
       name: 'userId',
@@ -34675,7 +34675,7 @@ let ug = {
     name: 'installedPluginsForUser',
     type: {
       kind: 'objects',
-      name: _$$Y.PluginInstall
+      name: EntityType.PluginInstall
     },
     filter: ['userId', '=', createParentRef('userId')],
     nullable: !0,
@@ -34729,21 +34729,21 @@ let ug = {
   }, ...dm]
 };
 let uf = {
-  name: _$$Y.PluginCodegenSettings,
+  name: EntityType.PluginCodegenSettings,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
     name: 'language',
     type: {
       kind: 'object',
-      name: _$$Y.CodeExtensionLanguage
+      name: EntityType.CodeExtensionLanguage
     },
     embedded: !0
   }, {
     name: 'preferences',
     type: {
       kind: 'object',
-      name: _$$Y.CodeExtensionPreferences
+      name: EntityType.CodeExtensionPreferences
     },
     embedded: !0
   }, {
@@ -34755,7 +34755,7 @@ let uf = {
   }]
 };
 let u_ = {
-  name: _$$Y.PluginInstall,
+  name: EntityType.PluginInstall,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -34799,7 +34799,7 @@ let u_ = {
     name: 'plugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     nullable: !0,
     args: [{
@@ -34842,7 +34842,7 @@ let u_ = {
   }]
 };
 let uA = {
-  name: _$$Y.PluginPreferences,
+  name: EntityType.PluginPreferences,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -34865,7 +34865,7 @@ let uA = {
     name: 'preferences',
     type: {
       kind: 'object',
-      name: _$$Y.PluginPreferencesConfig
+      name: EntityType.PluginPreferencesConfig
     },
     nullable: !0,
     embedded: !0
@@ -34873,7 +34873,7 @@ let uA = {
     name: 'baseOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     args: [{
       name: 'currentUserId',
@@ -34908,7 +34908,7 @@ let uA = {
     name: 'autoRunPlugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('autoRunPluginId')]
@@ -34967,14 +34967,14 @@ let uA = {
   }]
 };
 let uy = {
-  name: _$$Y.PluginPreferencesConfig,
+  name: EntityType.PluginPreferencesConfig,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
     name: 'pins',
     type: {
       kind: 'objects',
-      name: _$$Y.PinnedPlugin
+      name: EntityType.PinnedPlugin
     },
     embedded: !0
   }, {
@@ -34989,14 +34989,14 @@ let uy = {
     name: 'codegenSettings',
     type: {
       kind: 'object',
-      name: _$$Y.PluginCodegenSettings
+      name: EntityType.PluginCodegenSettings
     },
     nullable: !0,
     embedded: !0
   }]
 };
 let ub = {
-  name: _$$Y.PluginCommunityPublisher,
+  name: EntityType.PluginCommunityPublisher,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -35037,7 +35037,7 @@ let ub = {
   }]
 };
 let uv = {
-  name: _$$Y.PluginRequest,
+  name: EntityType.PluginRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -35064,7 +35064,7 @@ let uv = {
     name: 'plugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     filter: ['id', '=', createParentRef('pluginId')],
     nullable: !0
@@ -35077,7 +35077,7 @@ let uv = {
     name: 'orgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     filter: ['id', '=', createParentRef('orgUserId')],
     nullable: !0
@@ -35085,7 +35085,7 @@ let uv = {
     name: '_org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     bannedFromViews: !0
@@ -35120,7 +35120,7 @@ let uv = {
     name: 'workspaceAllowlistedPlugins',
     type: {
       kind: 'objects',
-      name: _$$Y.AllowlistedPlugin
+      name: EntityType.AllowlistedPlugin
     },
     filter: {
       and: [['orgId', '=', createParentRef('orgId')], ['pluginId', '=', createParentRef('pluginId')], ['allowlistGroupType', '=', 'Workspace']]
@@ -35149,7 +35149,7 @@ let uv = {
   }]
 };
 let uI = {
-  name: _$$Y.PluginRun,
+  name: EntityType.PluginRun,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -35174,7 +35174,7 @@ let uI = {
   }]
 };
 let uE = {
-  name: _$$Y.PluginSecurityFormResponses,
+  name: EntityType.PluginSecurityFormResponses,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -35216,7 +35216,7 @@ let uE = {
     name: 'plugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     filter: ['id', '=', createParentRef('pluginId')]
   }, {
@@ -35241,7 +35241,7 @@ let uE = {
   }]
 };
 let ux = {
-  name: _$$Y.PluginVersion,
+  name: EntityType.PluginVersion,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -35257,7 +35257,7 @@ let ux = {
     name: 'plugin',
     type: {
       kind: 'object',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     filter: ['id', '=', createParentRef('pluginId')]
   }, {
@@ -35392,20 +35392,20 @@ let ux = {
   }]
 };
 let uS = {
-  name: _$$Y.PrivilegedOrgUser,
+  name: EntityType.PrivilegedOrgUser,
   permissionRequired: !1,
   fields: [...O, {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     args: [{
       name: 'userId',
@@ -35436,7 +35436,7 @@ let uS = {
   }]
 };
 let uw = {
-  name: _$$Y.UpgradeApprovalSettings,
+  name: EntityType.UpgradeApprovalSettings,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -35466,7 +35466,7 @@ let uw = {
   }]
 };
 let uC = {
-  name: _$$Y.ProAccountTypeRequest,
+  name: EntityType.ProAccountTypeRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -35514,7 +35514,7 @@ let uC = {
   }]
 };
 let uT = {
-  name: _$$Y.Profile,
+  name: EntityType.Profile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -35598,7 +35598,7 @@ let uT = {
     name: 'badges',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityBadge
+      name: EntityType.CommunityBadge
     },
     filter: ['profileId', '=', createParentRef('id')],
     expectedMaxCount: 200
@@ -35606,7 +35606,7 @@ let uT = {
     name: 'communityHubFollowing',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityHubFollow
+      name: EntityType.CommunityHubFollow
     },
     filter: ['followerProfileId', '=', createParentRef('id')],
     expectedMaxCount: 1e4
@@ -35614,7 +35614,7 @@ let uT = {
     name: 'communityHubFollowed',
     type: {
       kind: 'objects',
-      name: _$$Y.CommunityHubFollow
+      name: EntityType.CommunityHubFollow
     },
     filter: ['followedProfileId', '=', createParentRef('id')],
     expectedMaxCount: 200
@@ -35634,7 +35634,7 @@ let uT = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -35736,7 +35736,7 @@ let uT = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('primaryUserId')],
     nullable: !0,
@@ -35748,7 +35748,7 @@ let uT = {
     name: 'associatedUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['profileId', '=', createParentRef('id')],
     checkCanRead: {
@@ -35760,7 +35760,7 @@ let uT = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('teamId')]]
@@ -35773,7 +35773,7 @@ let uT = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -35826,7 +35826,7 @@ let uT = {
 let uk = {
   type: {
     kind: 'object',
-    name: _$$Y.ProjectRole
+    name: EntityType.ProjectRole
   },
   filter: {
     and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'folder'], ['level', '=', e6.OWNER]]
@@ -35836,7 +35836,7 @@ let uk = {
 let uR = {
   type: {
     kind: 'object',
-    name: _$$Y.ProjectRole
+    name: EntityType.ProjectRole
   },
   args: [{
     name: 'userId',
@@ -35851,7 +35851,7 @@ let uR = {
   }
 };
 let uN = {
-  name: _$$Y.Project,
+  name: EntityType.Project,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -36020,7 +36020,7 @@ let uN = {
     name: 'roles',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'folder']]
@@ -36047,7 +36047,7 @@ let uN = {
     name: 'favoriteProject',
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedProject
+      name: EntityType.FavoritedProject
     },
     args: [{
       name: 'userId',
@@ -36092,7 +36092,7 @@ let uN = {
     name: 'pinnedFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.PinnedFile
+      name: EntityType.PinnedFile
     },
     filter: ['folderId', '=', createParentRef('id')],
     expectedMaxCount: 1e3
@@ -36100,7 +36100,7 @@ let uN = {
     name: 'files',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['folderId', '=', createParentRef('id')],
     checkCanRead: {
@@ -36116,7 +36116,7 @@ let uN = {
     name: 'fileUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -36139,7 +36139,7 @@ let uN = {
     name: 'untrashedFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['folderId', '=', createParentRef('id')], ['deletedAt', '=', null], ['trashedAt', '=', null]]
@@ -36157,7 +36157,7 @@ let uN = {
     name: 'trashedWithFolderFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['folderId', '=', createParentRef('id')], ['deletedAt', '=', null], ['trashedAt', '<>', null], ['trashedWithParent', '=', Go1.FOLDER]]
@@ -36175,7 +36175,7 @@ let uN = {
     name: 'undeletedFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['folderId', '=', createParentRef('id')], ['deletedAt', '=', null]]
@@ -36193,7 +36193,7 @@ let uN = {
     name: 'undeletedFilesHighLimit',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['folderId', '=', createParentRef('id')], ['deletedAt', '=', null]]
@@ -36223,7 +36223,7 @@ let uN = {
     name: 'whiteboardFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['folderId', '=', createParentRef('id')], ['_editorTypeRaw', '=', 1]]
@@ -36241,7 +36241,7 @@ let uN = {
     name: 'siteFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['folderId', '=', createParentRef('id')], ['_editorTypeRaw', '=', 3]]
@@ -36259,7 +36259,7 @@ let uN = {
     name: 'figmakeFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['folderId', '=', createParentRef('id')], ['_editorTypeRaw', '=', 5]]
@@ -36291,7 +36291,7 @@ let uN = {
     name: 'filesPartial',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     args: [{
       name: 'initialPageSize',
@@ -36333,7 +36333,7 @@ let uN = {
     name: 'repos',
     type: {
       kind: 'objects',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     args: [{
       name: 'initialPageSize',
@@ -36351,7 +36351,7 @@ let uN = {
     name: 'repoUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -36374,7 +36374,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('teamId')]]
@@ -36387,7 +36387,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('teamId')],
     checkCanRead: {
@@ -36398,7 +36398,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     filter: ['id', '=', createParentRef('teamId')],
     checkCanRead: {
@@ -36409,7 +36409,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.TeamPublicInfo
+      name: EntityType.TeamPublicInfo
     },
     filter: ['id', '=', createParentRef('teamId')]
   }, {
@@ -36417,7 +36417,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: {
       and: [['id', '=', createParentRef('orgId')]]
@@ -36430,7 +36430,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('orgId')],
     checkCanRead: {
@@ -36441,14 +36441,14 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgPublicInfo
+      name: EntityType.OrgPublicInfo
     },
     filter: ['id', '=', createParentRef('orgId')]
   }, {
     name: '_team_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')],
@@ -36457,7 +36457,7 @@ let uN = {
     name: '_draftFolderOrg_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('orgId')],
@@ -36466,7 +36466,7 @@ let uN = {
     name: 'subscription',
     type: {
       kind: 'object',
-      name: _$$Y.ProjectSubscription
+      name: EntityType.ProjectSubscription
     },
     args: [{
       name: 'userId',
@@ -36509,7 +36509,7 @@ let uN = {
     name: 'roleOnObjectTeamForUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     args: [{
       name: 'userId',
@@ -36527,7 +36527,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -36541,7 +36541,7 @@ let uN = {
     name: 'userAuthn',
     type: {
       kind: 'object',
-      name: _$$Y.UserAuthn
+      name: EntityType.UserAuthn
     },
     args: [{
       name: 'userId',
@@ -36557,7 +36557,7 @@ let uN = {
     name: 'currentOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     args: [{
       name: 'userId',
@@ -36578,7 +36578,7 @@ let uN = {
     name: 'currentBaseOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     args: [{
       name: 'userId',
@@ -36599,7 +36599,7 @@ let uN = {
     name: 'currentPrivilegedOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     args: [{
       name: 'userId',
@@ -36616,7 +36616,7 @@ let uN = {
     name: 'currentTeamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     args: [{
       name: 'userId',
@@ -36634,7 +36634,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     filter: ['draftsFolderId', '=', createParentRef('id')]
   }, {
@@ -36642,7 +36642,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     filter: ['draftsFolderId', '=', createParentRef('id')]
   }, {
@@ -36650,7 +36650,7 @@ let uN = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     filter: ['draftsFolderId', '=', createParentRef('id')]
   }, {
@@ -36814,7 +36814,7 @@ let uN = {
     name: 'componentUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectComponentUpdate
+      name: EntityType.ProjectComponentUpdate
     },
     nullable: !0,
     resolver: {
@@ -36826,7 +36826,7 @@ let uN = {
     name: 'stateGroupUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectStateGroupUpdate
+      name: EntityType.ProjectStateGroupUpdate
     },
     nullable: !0,
     resolver: {
@@ -36838,7 +36838,7 @@ let uN = {
     name: 'activeProjectResourceConnections',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     filter: {
@@ -36852,7 +36852,7 @@ let uN = {
     name: 'disconnectedProjectResourceConnections',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     filter: {
@@ -36866,7 +36866,7 @@ let uN = {
     name: 'pendingAssetTransferRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AssetTransferRequest
+      name: EntityType.AssetTransferRequest
     },
     nullable: !0,
     filter: {
@@ -36879,7 +36879,7 @@ let uN = {
     name: 'pendingResourceConnectionInvite',
     type: {
       kind: 'object',
-      name: _$$Y.ResourceConnectionInvite
+      name: EntityType.ResourceConnectionInvite
     },
     nullable: !0,
     filter: {
@@ -36892,7 +36892,7 @@ let uN = {
     name: '_mostRecentResourceConnection',
     type: {
       kind: 'object',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     filter: {
@@ -36904,7 +36904,7 @@ let uN = {
     name: '_mostRecentActiveResourceConnection',
     type: {
       kind: 'object',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     filter: {
@@ -36916,7 +36916,7 @@ let uN = {
     name: 'mostRecentResourceConnection',
     type: {
       kind: 'object',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     filter: {
@@ -36930,7 +36930,7 @@ let uN = {
     name: 'computedWorkspace',
     type: {
       kind: 'object',
-      name: _$$Y.ComputedWorkspace
+      name: EntityType.ComputedWorkspace
     },
     args: [{
       name: 'userId',
@@ -36954,7 +36954,7 @@ let uN = {
   }, ...df, ...du, r4, r3, rA, ry, rI, rE, rb, rv, rT, rk, rx, rS, rw, rC, rf, r_, rp, rm, rR, rN, rP, rO, rG, rz, rB, rV, rF, rM, rD, rL, rj, rU, rc, r6, r7, ru, rh, rg, rH, rW, rZ, rX, r2, rK, rY, r0, r1, rQ, rJ, rq, r$, r5, lg, ...l2, lv, lI, lE, lx, lS, lw, lb, ...l7, ...l8, ...l9, ...de, ...dt, ...di, ...dn]
 };
 let uP = {
-  name: _$$Y.ProjectLimitedInfo,
+  name: EntityType.ProjectLimitedInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -36987,7 +36987,7 @@ let uP = {
     name: '_project',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: ['id', '=', createParentRef('id')],
     bannedFromViews: !0
@@ -37024,7 +37024,7 @@ let uP = {
   }]
 };
 let uO = {
-  name: _$$Y.ProjectRole,
+  name: EntityType.ProjectRole,
   permissionRequired: !1,
   fields: [...d$, {
     name: 'isShared',
@@ -37036,7 +37036,7 @@ let uO = {
     name: 'project',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: {
       and: [['id', '=', createParentRef('resourceId')], ['trashedAt', '=', null], ['deletedAt', '=', null]]
@@ -37049,7 +37049,7 @@ let uO = {
     name: 'sharedWithYouFolder',
     type: {
       kind: 'object',
-      name: _$$Y.SharedWithYouFolder
+      name: EntityType.SharedWithYouFolder
     },
     filter: {
       and: [['resourceId', '=', createParentRef('resourceId')], ['resourceType', '=', 'folder'], ['userId', '=', createParentRef('userId')]]
@@ -37061,7 +37061,7 @@ let uO = {
   }]
 };
 let uD = {
-  name: _$$Y.ProjectSubscription,
+  name: EntityType.ProjectSubscription,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -37082,7 +37082,7 @@ let uD = {
     name: 'project',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('folderId')],
@@ -37102,7 +37102,7 @@ let uD = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     nullable: !0,
     checkCanRead: {
@@ -37112,7 +37112,7 @@ let uD = {
   }]
 };
 let uL = {
-  name: _$$Y.Prototype,
+  name: EntityType.Prototype,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -37167,7 +37167,7 @@ let uL = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     checkCanRead: {
@@ -37204,7 +37204,7 @@ let uL = {
     name: 'recentPrototype',
     type: {
       kind: 'object',
-      name: _$$Y.RecentPrototype
+      name: EntityType.RecentPrototype
     },
     args: [{
       name: 'userId',
@@ -37221,7 +37221,7 @@ let uL = {
     name: 'favoritePrototype',
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     args: [{
       name: 'userId',
@@ -37270,7 +37270,7 @@ let uL = {
   }]
 };
 let uF = {
-  name: _$$Y.ProvisionalAccess,
+  name: EntityType.ProvisionalAccess,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -37328,7 +37328,7 @@ let uF = {
     name: 'billableProduct',
     type: {
       kind: 'object',
-      name: _$$Y.BillableProduct
+      name: EntityType.BillableProduct
     },
     filter: ['key', '=', createParentRef('billableProductKey')],
     nullable: !0
@@ -37336,7 +37336,7 @@ let uF = {
     name: 'periodicUpdateField',
     type: {
       kind: 'object',
-      name: _$$Y.PeriodicUpdate
+      name: EntityType.PeriodicUpdate
     },
     nullable: !0,
     resolver: {
@@ -37345,7 +37345,7 @@ let uF = {
   }]
 };
 let uM = {
-  name: _$$Y.RecentFile,
+  name: EntityType.RecentFile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -37378,7 +37378,7 @@ let uM = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -37392,7 +37392,7 @@ let uM = {
   }]
 };
 let uj = {
-  name: _$$Y.RecentPrototype,
+  name: EntityType.RecentPrototype,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -37418,7 +37418,7 @@ let uj = {
     name: 'prototype',
     type: {
       kind: 'object',
-      name: _$$Y.Prototype
+      name: EntityType.Prototype
     },
     filter: ['id', '=', createParentRef('prototypeId')],
     shadowCheckCanRead: {
@@ -37427,7 +37427,7 @@ let uj = {
   }]
 };
 let uU = {
-  name: _$$Y.RecentSearch,
+  name: EntityType.RecentSearch,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -37450,13 +37450,13 @@ let uU = {
     embedded: !0,
     type: {
       kind: 'objects',
-      name: _$$Y.SearchInfo
+      name: EntityType.SearchInfo
     },
     nullable: !0
   }]
 };
 let uB = {
-  name: _$$Y.RelevanceReason,
+  name: EntityType.RelevanceReason,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -37482,7 +37482,7 @@ function uV(e) {
   throw new Error('Unnecessary usage of `deprecatedInjectNullAnonymousUserId`.');
 }
 let uG = {
-  name: _$$Y.Repo,
+  name: EntityType.Repo,
   naturalKey: new Set(['defaultFileKey', 'id']),
   permissionRequired: !0,
   fields: [{
@@ -37581,7 +37581,7 @@ let uG = {
     name: 'ownerRole',
     type: {
       kind: 'object',
-      name: _$$Y.RepoRole
+      name: EntityType.RepoRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'file_repo'], ['level', '=', e6.OWNER]]
@@ -37591,7 +37591,7 @@ let uG = {
     name: 'passwordAuthentication',
     type: {
       kind: 'object',
-      name: _$$Y.FigFilePasswordAuthentication
+      name: EntityType.FigFilePasswordAuthentication
     },
     args: [{
       name: 'anonymousUserId',
@@ -37608,7 +37608,7 @@ let uG = {
     name: 'pwdConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FigFilePwdConfig
+      name: EntityType.FigFilePwdConfig
     },
     filter: ['fileKey', '=', createParentRef('defaultFileKey')],
     nullable: !0
@@ -37616,7 +37616,7 @@ let uG = {
     name: 'roles',
     type: {
       kind: 'objects',
-      name: _$$Y.RepoRole
+      name: EntityType.RepoRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'file_repo']]
@@ -37626,7 +37626,7 @@ let uG = {
     name: '_defaultFile',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('defaultFileKey')],
     nullable: !0,
@@ -37635,7 +37635,7 @@ let uG = {
     name: 'sourceFile',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('defaultFileKey')],
     nullable: !0,
@@ -37649,7 +37649,7 @@ let uG = {
     name: '_sourceFile_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('defaultFileKey')],
     nullable: !0,
@@ -37659,7 +37659,7 @@ let uG = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     filter: ['draftsFolderId', '=', createParentRef('folderId')]
   }, {
@@ -37677,7 +37677,7 @@ let uG = {
     name: 'currentTeamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     args: [{
       name: 'userId',
@@ -37736,7 +37736,7 @@ let uG = {
     name: 'files',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['fileRepoId', '=', createParentRef('id')],
     nullable: !0,
@@ -37752,7 +37752,7 @@ let uG = {
     name: '_activeBranches',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['fileRepoId', '=', createParentRef('id')], ['sourceFileKey', '<>', null], ['trashedAt', '=', null]]
@@ -37764,7 +37764,7 @@ let uG = {
     name: 'activeBranches',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['fileRepoId', '=', createParentRef('id')], ['sourceFileKey', '<>', null], ['trashedAt', '=', null]]
@@ -37786,7 +37786,7 @@ let uG = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: {
       and: [['id', '=', createParentRef('folderId')]]
@@ -37798,7 +37798,7 @@ let uG = {
     name: '_project_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('folderId')],
@@ -37808,7 +37808,7 @@ let uG = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('teamId')]]
@@ -37820,7 +37820,7 @@ let uG = {
     name: '_team_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')],
@@ -37829,7 +37829,7 @@ let uG = {
     name: 'roleOnObjectForUser',
     type: {
       kind: 'object',
-      name: _$$Y.RepoRole
+      name: EntityType.RepoRole
     },
     args: [{
       name: 'userId',
@@ -37846,7 +37846,7 @@ let uG = {
     name: 'roleOnObjectRepoForUser',
     type: {
       kind: 'object',
-      name: _$$Y.RepoRole
+      name: EntityType.RepoRole
     },
     args: [{
       name: 'userId',
@@ -37863,7 +37863,7 @@ let uG = {
     name: 'roleOnObjectProjectForUser',
     type: {
       kind: 'object',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     args: [{
       name: 'userId',
@@ -37880,7 +37880,7 @@ let uG = {
     name: 'roleOnObjectTeamForUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     args: [{
       name: 'userId',
@@ -37898,7 +37898,7 @@ let uG = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -37912,7 +37912,7 @@ let uG = {
     name: 'userAuthn',
     type: {
       kind: 'object',
-      name: _$$Y.UserAuthn
+      name: EntityType.UserAuthn
     },
     args: [{
       name: 'userId',
@@ -37928,7 +37928,7 @@ let uG = {
     name: 'currentPrivilegedOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     args: [{
       name: 'userId',
@@ -37945,7 +37945,7 @@ let uG = {
     name: 'currentBaseOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     args: [{
       name: 'userId',
@@ -37962,7 +37962,7 @@ let uG = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('parentOrgId')],
     nullable: !0
@@ -37970,7 +37970,7 @@ let uG = {
     name: '_org_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('parentOrgId')],
@@ -37979,7 +37979,7 @@ let uG = {
     name: 'orgSharedSetting',
     type: {
       kind: 'object',
-      name: _$$Y.SharedOrgLicenseGroupSetting
+      name: EntityType.SharedOrgLicenseGroupSetting
     },
     nullable: !0,
     filter: {
@@ -38172,7 +38172,7 @@ let uG = {
     name: 'linkExpirationConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FigFileLinkExpirationConfig
+      name: EntityType.FigFileLinkExpirationConfig
     },
     filter: {
       and: [['figFileKey', '=', createParentRef('defaultFileKey')], ['accessReverted', '=', !1]]
@@ -38186,7 +38186,7 @@ let uG = {
     name: 'mainFileLinkExpirationConfig',
     type: {
       kind: 'object',
-      name: _$$Y.FigFileLinkExpirationConfig
+      name: EntityType.FigFileLinkExpirationConfig
     },
     filter: ['figFileKey', '=', createParentRef('defaultFileKey')],
     nullable: !0
@@ -38194,7 +38194,7 @@ let uG = {
     name: 'activeProjectResourceConnections',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     nullable: !0,
     filter: {
@@ -38208,7 +38208,7 @@ let uG = {
     name: 'teamPublicInfo',
     type: {
       kind: 'object',
-      name: _$$Y.TeamPublicInfo
+      name: EntityType.TeamPublicInfo
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('teamId')]
@@ -38216,27 +38216,27 @@ let uG = {
     name: 'orgPublicInfo',
     type: {
       kind: 'object',
-      name: _$$Y.OrgPublicInfo
+      name: EntityType.OrgPublicInfo
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('parentOrgId')]
   }, ...dA, ...dp, nZ, nX, rs, ro, n6, n7, nq, n$, n0, n1, n2, n5, ri, rn, re, rt, rr, ra, n4, n3, nH, n8, n9, nW, nK, nY, nQ, nJ, rl, rd, ld, lf, ...l5]
 };
 let uz = {
-  name: _$$Y.RepoRole,
+  name: EntityType.RepoRole,
   permissionRequired: !1,
   fields: [...d$, {
     name: 'repo',
     type: {
       kind: 'object',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     filter: ['id', '=', createParentRef('resourceId')],
     bannedFromViews: !0
   }]
 };
 let uH = {
-  name: _$$Y.Resource,
+  name: EntityType.Resource,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -38334,7 +38334,7 @@ let uH = {
   }]
 };
 let uW = {
-  name: _$$Y.ResourceSave,
+  name: EntityType.ResourceSave,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -38362,7 +38362,7 @@ let uW = {
     name: 'hubFile',
     type: {
       kind: 'object',
-      name: _$$Y.HubFile
+      name: EntityType.HubFile
     },
     filter: ['id', '=', createParentRef('hubFileId')]
   }, {
@@ -38381,13 +38381,13 @@ let uW = {
     name: 'resource',
     type: {
       kind: 'object',
-      name: _$$Y.Resource
+      name: EntityType.Resource
     },
     filter: ['id', '=', createParentRef('resourceId')]
   }]
 };
 let uK = {
-  name: _$$Y.SCIMEnterpriseFields,
+  name: EntityType.SCIMEnterpriseFields,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -38417,7 +38417,7 @@ let uK = {
   }]
 };
 let uY = {
-  name: _$$Y.SCIMFigmaEnterpriseFields,
+  name: EntityType.SCIMFigmaEnterpriseFields,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -38448,7 +38448,7 @@ let uY = {
   }]
 };
 let uq = {
-  name: _$$Y.SCIMName,
+  name: EntityType.SCIMName,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -38466,7 +38466,7 @@ let uq = {
   }]
 };
 let u$ = {
-  name: _$$Y.SearchInfo,
+  name: EntityType.SearchInfo,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -38482,7 +38482,7 @@ let u$ = {
   }]
 };
 let uZ = {
-  name: _$$Y.SearchWorkspaceFilesResult,
+  name: EntityType.SearchWorkspaceFilesResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -38494,7 +38494,7 @@ let uZ = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('id')],
     nullable: !0,
@@ -38508,7 +38508,7 @@ let uZ = {
   }]
 };
 let uX = {
-  name: _$$Y.Seat,
+  name: EntityType.Seat,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -38565,7 +38565,7 @@ let uX = {
   }]
 };
 let uQ = {
-  name: _$$Y.EmbeddedSeat,
+  name: EntityType.EmbeddedSeat,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -38605,7 +38605,7 @@ let uQ = {
   }]
 };
 let uJ = {
-  name: _$$Y.SharedOrgLicenseGroupSetting,
+  name: EntityType.SharedOrgLicenseGroupSetting,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -38706,7 +38706,7 @@ let uJ = {
   }]
 };
 let u0 = {
-  name: _$$Y.SharedWithYouFile,
+  name: EntityType.SharedWithYouFile,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -38770,7 +38770,7 @@ let u0 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['key', '=', createParentRef('resourceId')], ['trashedAt', '=', null], ['deletedAt', '=', null]]
@@ -38793,7 +38793,7 @@ let u0 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('parentTeamId')],
     checkCanRead: {
@@ -38804,7 +38804,7 @@ let u0 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     filter: ['id', '=', createParentRef('parentTeamId')],
     checkCanRead: {
@@ -38821,7 +38821,7 @@ let u0 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('parentOrgId')]
   }, {
@@ -38861,7 +38861,7 @@ let u0 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('sharedBy')]
   }, {
@@ -38910,7 +38910,7 @@ let u0 = {
   }]
 };
 let u1 = {
-  name: _$$Y.SharedWithYouFolder,
+  name: EntityType.SharedWithYouFolder,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -38959,7 +38959,7 @@ let u1 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: {
       and: [['id', '=', createParentRef('resourceId')], ['deletedAt', '=', null], ['trashedAt', '=', null]]
@@ -38978,7 +38978,7 @@ let u1 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('parentTeamId')],
     checkCanRead: {
@@ -38989,7 +38989,7 @@ let u1 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     filter: ['id', '=', createParentRef('parentTeamId')],
     checkCanRead: {
@@ -39006,7 +39006,7 @@ let u1 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('parentOrgId')]
   }, {
@@ -39020,7 +39020,7 @@ let u1 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('sharedBy')]
   }, {
@@ -39069,7 +39069,7 @@ let u1 = {
   }]
 };
 let u2 = {
-  name: _$$Y.SharedWithYouPrototype,
+  name: EntityType.SharedWithYouPrototype,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -39139,7 +39139,7 @@ let u2 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Prototype
+      name: EntityType.Prototype
     },
     filter: {
       and: [['fileKey', '=', createParentRef('resourceId')], ['deleted', '=', !1]]
@@ -39158,7 +39158,7 @@ let u2 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('parentTeamId')],
     checkCanRead: {
@@ -39169,7 +39169,7 @@ let u2 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     filter: ['id', '=', createParentRef('parentTeamId')],
     checkCanRead: {
@@ -39186,7 +39186,7 @@ let u2 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('parentOrgId')]
   }, {
@@ -39213,7 +39213,7 @@ let u2 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('sharedBy')]
   }, {
@@ -39262,7 +39262,7 @@ let u2 = {
   }]
 };
 let u5 = {
-  name: _$$Y.SharedWithYouRepo,
+  name: EntityType.SharedWithYouRepo,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -39325,7 +39325,7 @@ let u5 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     filter: {
       and: [['id', '=', createParentRef('resourceId')], ['trashedAt', '=', null], ['deletedAt', '=', null]]
@@ -39347,7 +39347,7 @@ let u5 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('parentTeamId')],
     checkCanRead: {
@@ -39358,7 +39358,7 @@ let u5 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     filter: ['id', '=', createParentRef('parentTeamId')],
     checkCanRead: {
@@ -39375,7 +39375,7 @@ let u5 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('parentOrgId')]
   }, {
@@ -39389,7 +39389,7 @@ let u5 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('sharedBy')]
   }, {
@@ -39438,7 +39438,7 @@ let u5 = {
   }]
 };
 let u4 = {
-  name: _$$Y.SharedWithYouResource,
+  name: EntityType.SharedWithYouResource,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -39455,7 +39455,7 @@ let u4 = {
     name: 'sharedWithYouFile',
     type: {
       kind: 'object',
-      name: _$$Y.SharedWithYouFile
+      name: EntityType.SharedWithYouFile
     },
     filter: {
       and: [['id', '=', createParentRef('swyResourceId')], ['resourceType', '=', 'file']]
@@ -39470,7 +39470,7 @@ let u4 = {
     name: 'sharedWithYouFolder',
     type: {
       kind: 'object',
-      name: _$$Y.SharedWithYouFolder
+      name: EntityType.SharedWithYouFolder
     },
     filter: {
       and: [['id', '=', createParentRef('swyResourceId')], ['resourceType', '=', 'folder']]
@@ -39483,7 +39483,7 @@ let u4 = {
     name: 'sharedWithYouRepo',
     type: {
       kind: 'object',
-      name: _$$Y.SharedWithYouRepo
+      name: EntityType.SharedWithYouRepo
     },
     filter: {
       and: [['id', '=', createParentRef('swyResourceId')], ['resourceType', '=', 'file_repo']]
@@ -39498,7 +39498,7 @@ let u4 = {
     name: 'sharedWithYouPrototype',
     type: {
       kind: 'object',
-      name: _$$Y.SharedWithYouPrototype
+      name: EntityType.SharedWithYouPrototype
     },
     filter: {
       and: [['id', '=', createParentRef('swyResourceId')], ['resourceType', '=', 'prototype']]
@@ -39512,7 +39512,7 @@ let u4 = {
   }]
 };
 let u3 = {
-  name: _$$Y.SharedWithYouTeam,
+  name: EntityType.SharedWithYouTeam,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -39556,7 +39556,7 @@ let u3 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('resourceId')], ['deletedAt', '=', null]]
@@ -39575,7 +39575,7 @@ let u3 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('parentOrgId')]
   }, {
@@ -39589,7 +39589,7 @@ let u3 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('sharedBy')]
   }, {
@@ -39635,7 +39635,7 @@ let u3 = {
   }]
 };
 let u6 = {
-  name: _$$Y.SiteBundle,
+  name: EntityType.SiteBundle,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -39684,7 +39684,7 @@ let u6 = {
     name: 'publishedByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('publishedByUserId')],
     nullable: !0
@@ -39701,7 +39701,7 @@ let u6 = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -39710,7 +39710,7 @@ let u6 = {
     name: 'fileVersion',
     type: {
       kind: 'object',
-      name: _$$Y.FileVersion
+      name: EntityType.FileVersion
     },
     filter: ['id', '=', createParentRef('fileVersionId')],
     nullable: !0
@@ -39794,7 +39794,7 @@ let u6 = {
   }]
 };
 let u7 = {
-  name: _$$Y.SiteDomain,
+  name: EntityType.SiteDomain,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -39838,14 +39838,14 @@ let u7 = {
     name: 'pairedDomain',
     type: {
       kind: 'object',
-      name: _$$Y.SiteDomain
+      name: EntityType.SiteDomain
     },
     filter: ['id', '=', createParentRef('pairedDomainId')],
     nullable: !0
   }]
 };
 let u8 = {
-  name: _$$Y.SiteMount,
+  name: EntityType.SiteMount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -39862,7 +39862,7 @@ let u8 = {
     name: 'siteDomain',
     type: {
       kind: 'object',
-      name: _$$Y.SiteDomain
+      name: EntityType.SiteDomain
     },
     filter: ['id', '=', createParentRef('siteDomainId')],
     nullable: !0
@@ -39876,7 +39876,7 @@ let u8 = {
     name: 'customDomain',
     type: {
       kind: 'object',
-      name: _$$Y.SiteDomain
+      name: EntityType.SiteDomain
     },
     filter: ['id', '=', createParentRef('customDomainId')],
     nullable: !0
@@ -39884,7 +39884,7 @@ let u8 = {
     name: 'publishEvents',
     type: {
       kind: 'objects',
-      name: _$$Y.SitePublishEvent
+      name: EntityType.SitePublishEvent
     },
     filter: ['siteMountId', '=', createParentRef('id')],
     orderBy: [['createdAt', 'DESC']],
@@ -39899,7 +39899,7 @@ let u8 = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -40024,7 +40024,7 @@ let u8 = {
     name: 'pwdConfig',
     type: {
       kind: 'object',
-      name: _$$Y.SitePwdConfig
+      name: EntityType.SitePwdConfig
     },
     filter: ['siteMountId', '=', createParentRef('id')],
     nullable: !0,
@@ -40037,7 +40037,7 @@ let u8 = {
   }]
 };
 let u9 = {
-  name: _$$Y.SitePublishEvent,
+  name: EntityType.SitePublishEvent,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -40064,7 +40064,7 @@ let u9 = {
     name: 'siteBundle',
     type: {
       kind: 'object',
-      name: _$$Y.SiteBundle
+      name: EntityType.SiteBundle
     },
     filter: ['id', '=', createParentRef('siteBundleId')],
     nullable: !0
@@ -40072,7 +40072,7 @@ let u9 = {
     name: 'siteMount',
     type: {
       kind: 'object',
-      name: _$$Y.SiteMount
+      name: EntityType.SiteMount
     },
     filter: ['id', '=', createParentRef('siteMountId')]
   }, {
@@ -40096,7 +40096,7 @@ let u9 = {
     name: 'actor',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('actorId')],
     nullable: !0
@@ -40108,7 +40108,7 @@ let u9 = {
   }]
 };
 let pe = {
-  name: _$$Y.SlideThemeVariableInfo,
+  name: EntityType.SlideThemeVariableInfo,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -40125,7 +40125,7 @@ let pe = {
     name: 'variable',
     type: {
       kind: 'object',
-      name: _$$Y.VariableLog
+      name: EntityType.VariableLog
     },
     nullable: !0,
     filter: {
@@ -40134,7 +40134,7 @@ let pe = {
   }]
 };
 let pt = {
-  name: _$$Y.SlideThemeStyleInfo,
+  name: EntityType.SlideThemeStyleInfo,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -40151,7 +40151,7 @@ let pt = {
     name: 'style',
     type: {
       kind: 'object',
-      name: _$$Y.StyleLog
+      name: EntityType.StyleLog
     },
     nullable: !0,
     filter: {
@@ -40160,7 +40160,7 @@ let pt = {
   }]
 };
 let pi = {
-  name: _$$Y.SlidesTheme,
+  name: EntityType.SlidesTheme,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -40202,7 +40202,7 @@ let pi = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('fileKey')],
@@ -40217,21 +40217,21 @@ let pi = {
     name: 'variables',
     type: {
       kind: 'objects',
-      name: _$$Y.SlideThemeVariableInfo
+      name: EntityType.SlideThemeVariableInfo
     },
     embedded: !0
   }, {
     name: 'styles',
     type: {
       kind: 'objects',
-      name: _$$Y.SlideThemeStyleInfo
+      name: EntityType.SlideThemeStyleInfo
     },
     embedded: !0
   }, {
     name: 'variableSet',
     type: {
       kind: 'object',
-      name: _$$Y.VariableSetLog
+      name: EntityType.VariableSetLog
     },
     nullable: !0,
     filter: {
@@ -40240,7 +40240,7 @@ let pi = {
   }]
 };
 let pn = {
-  name: _$$Y.StateGroup,
+  name: EntityType.StateGroup,
   permissionRequired: !1,
   fields: [...ep, {
     name: 'key',
@@ -40310,7 +40310,7 @@ let pn = {
     name: 'containingFrame',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryItemContainingFrame
+      name: EntityType.LibraryItemContainingFrame
     },
     embedded: !0,
     nullable: !0
@@ -40327,7 +40327,7 @@ let pn = {
   }, em]
 };
 let pr = {
-  name: _$$Y.StudentApplication,
+  name: EntityType.StudentApplication,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -40419,12 +40419,12 @@ let pa = [...ep, {
   nullable: !0
 }];
 let ps = {
-  name: _$$Y.Style,
+  name: EntityType.Style,
   permissionRequired: !1,
   fields: [...pa, em]
 };
 let po = {
-  name: _$$Y.StyleLog,
+  name: EntityType.StyleLog,
   permissionRequired: !1,
   fields: [{
     name: 'description',
@@ -40447,7 +40447,7 @@ let po = {
     name: 'checkpoint',
     type: {
       kind: 'object',
-      name: _$$Y.Checkpoint
+      name: EntityType.Checkpoint
     },
     embedded: !0
   }, {
@@ -40508,13 +40508,13 @@ let po = {
   }]
 };
 let pl = {
-  name: _$$Y.StyleWithDestinationAsset,
+  name: EntityType.StyleWithDestinationAsset,
   permissionRequired: !0,
   fields: [...pa, {
     name: 'destinationAsset',
     type: {
       kind: 'object',
-      name: _$$Y.Style
+      name: EntityType.Style
     },
     filter: ['key', '=', createParentRef('destinationKey')],
     nullable: !0
@@ -40550,7 +40550,7 @@ let pl = {
   }
 };
 let pd = {
-  name: _$$Y.StyleWithDestinationAssetV2,
+  name: EntityType.StyleWithDestinationAssetV2,
   permissionRequired: !0,
   fields: [...pl.fields, {
     name: 'canRead',
@@ -40594,13 +40594,13 @@ let pd = {
   }]
 };
 let pc = {
-  name: _$$Y.StyleWithLegacySourceAsset,
+  name: EntityType.StyleWithLegacySourceAsset,
   permissionRequired: !1,
   fields: [...pa, {
     name: 'legacySourceAsset',
     type: {
       kind: 'object',
-      name: _$$Y.Style
+      name: EntityType.Style
     },
     filter: {
       and: [['destinationKey', '=', createParentRef('key')], ['movedByFigma', '<>', null]]
@@ -40630,7 +40630,7 @@ let pc = {
   }]
 };
 let pu = {
-  name: _$$Y.SupabaseOrg,
+  name: EntityType.SupabaseOrg,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -40667,7 +40667,7 @@ let pu = {
   }]
 };
 let pp = {
-  name: _$$Y.SupabaseAuth,
+  name: EntityType.SupabaseAuth,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -40688,7 +40688,7 @@ let pp = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.SupabaseOrg
+      name: EntityType.SupabaseOrg
     },
     embedded: !0,
     nullable: !0
@@ -40714,7 +40714,7 @@ let ph = {
   }]
 };
 let pg = {
-  name: _$$Y.TaxInfo,
+  name: EntityType.TaxInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -40773,7 +40773,7 @@ let pf = [{
   nullable: !0,
   type: {
     kind: 'object',
-    name: _$$Y.PlanSubscription
+    name: EntityType.PlanSubscription
   },
   orderBy: [['createdAt', 'DESC']],
   filter: {
@@ -40802,7 +40802,7 @@ let pf = [{
   name: 'roleOnObjectTeamForUser',
   type: {
     kind: 'object',
-    name: _$$Y.TeamRole
+    name: EntityType.TeamRole
   },
   args: [{
     name: 'userId',
@@ -40822,7 +40822,7 @@ let pf = [{
   name: 'currentTeamUser',
   type: {
     kind: 'object',
-    name: _$$Y.TeamUser
+    name: EntityType.TeamUser
   },
   args: [{
     name: 'userId',
@@ -40878,7 +40878,7 @@ let pf = [{
   name: 'expOneClickAskToEditTeamIdPublic',
   type: {
     kind: 'object',
-    name: _$$Y.ExpOneClickAskToEditTeamId
+    name: EntityType.ExpOneClickAskToEditTeamId
   },
   resolver: {
     type: 'Statsig',
@@ -40981,7 +40981,7 @@ let p_ = [...pf, {
   name: 'upgradeApprovalSettings',
   type: {
     kind: 'object',
-    name: _$$Y.UpgradeApprovalSettings
+    name: EntityType.UpgradeApprovalSettings
   },
   embedded: !0,
   nullable: !0
@@ -41046,7 +41046,7 @@ let p_ = [...pf, {
   name: 'teamDefaultPaidStatusDesign',
   type: {
     kind: 'object',
-    name: _$$Y.PlanProperties
+    name: EntityType.PlanProperties
   },
   nullable: !0,
   filter: {
@@ -41056,7 +41056,7 @@ let p_ = [...pf, {
   name: 'teamDefaultPaidStatusWhiteboard',
   type: {
     kind: 'object',
-    name: _$$Y.PlanProperties
+    name: EntityType.PlanProperties
   },
   nullable: !0,
   filter: {
@@ -41067,7 +41067,7 @@ let p_ = [...pf, {
   nullable: !0,
   type: {
     kind: 'object',
-    name: _$$Y.User
+    name: EntityType.User
   },
   args: [{
     name: 'userId',
@@ -41081,7 +41081,7 @@ let p_ = [...pf, {
   name: '_testingOnlyUnlimitedConnectionsEnabledAtPlanProperty',
   type: {
     kind: 'object',
-    name: _$$Y.PlanProperties
+    name: EntityType.PlanProperties
   },
   bannedFromViews: !0,
   filter: {
@@ -41103,7 +41103,7 @@ let p_ = [...pf, {
   name: 'orgSharedSetting',
   type: {
     kind: 'object',
-    name: _$$Y.SharedOrgLicenseGroupSetting
+    name: EntityType.SharedOrgLicenseGroupSetting
   },
   nullable: !0,
   filter: {
@@ -41113,7 +41113,7 @@ let p_ = [...pf, {
   name: '_hostPlanActiveResourceConnections',
   type: {
     kind: 'objects',
-    name: _$$Y.ResourceConnection
+    name: EntityType.ResourceConnection
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -41125,7 +41125,7 @@ let p_ = [...pf, {
   name: '_connectedPlanActiveResourceConnections',
   type: {
     kind: 'objects',
-    name: _$$Y.ResourceConnection
+    name: EntityType.ResourceConnection
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -41137,7 +41137,7 @@ let p_ = [...pf, {
   name: '_hostPlanPendingResourceConnectionInvites',
   type: {
     kind: 'objects',
-    name: _$$Y.ResourceConnectionInvite
+    name: EntityType.ResourceConnectionInvite
   },
   nullable: !0,
   bannedFromViews: !0,
@@ -41166,7 +41166,7 @@ let p_ = [...pf, {
   name: 'featureFlagCampfireProvisionalAccessEnabled',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   resolver: {
@@ -41185,7 +41185,7 @@ let p_ = [...pf, {
   name: 'orgSamlConfigs',
   type: {
     kind: 'objects',
-    name: _$$Y.OrgSamlConfig
+    name: EntityType.OrgSamlConfig
   },
   filter: ['orgId', '=', createParentRef('orgId')],
   checkCanRead: {
@@ -41198,7 +41198,7 @@ let p_ = [...pf, {
   name: 'currentIDPUser',
   type: {
     kind: 'object',
-    name: _$$Y.ComputedIDPUser
+    name: EntityType.ComputedIDPUser
   },
   nullable: !0,
   computed: !0,
@@ -41222,13 +41222,13 @@ let p_ = [...pf, {
   }
 }, ...d_, ...cO('Team'), ...dc];
 let pA = {
-  name: _$$Y.TeamPublicInfo,
+  name: EntityType.TeamPublicInfo,
   permissionRequired: !1,
   fields: [...pf, {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.OrgPublicInfo
+      name: EntityType.OrgPublicInfo
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0
@@ -41236,7 +41236,7 @@ let pA = {
     name: 'orgPublicInfo',
     type: {
       kind: 'object',
-      name: _$$Y.OrgPublicInfo
+      name: EntityType.OrgPublicInfo
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0
@@ -41244,7 +41244,7 @@ let pA = {
     name: 'orgForGuests',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -41255,7 +41255,7 @@ let pA = {
     name: 'orgForMembers',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -41266,7 +41266,7 @@ let pA = {
     name: '_org_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -41274,7 +41274,7 @@ let pA = {
   }, ...N, ...lz, ...la]
 };
 let py = {
-  name: _$$Y.TeamLimitedInfo,
+  name: EntityType.TeamLimitedInfo,
   permissionRequired: !0,
   fields: [...p_, {
     name: 'canRead',
@@ -41300,7 +41300,7 @@ let py = {
     name: '_team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('id')],
     bannedFromViews: !0
@@ -41308,7 +41308,7 @@ let py = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -41317,7 +41317,7 @@ let py = {
     name: '_org_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -41325,7 +41325,7 @@ let py = {
   }]
 };
 let pb = {
-  name: _$$Y.Team,
+  name: EntityType.Team,
   permissionRequired: !0,
   fields: [...p_, {
     name: 'imgUrls',
@@ -41392,7 +41392,7 @@ let pb = {
     name: 'licenseGroup',
     type: {
       kind: 'object',
-      name: _$$Y.LicenseGroup
+      name: EntityType.LicenseGroup
     },
     filter: ['id', '=', createParentRef('licenseGroupId')],
     nullable: !0
@@ -41406,7 +41406,7 @@ let pb = {
     name: 'workspace',
     type: {
       kind: 'object',
-      name: _$$Y.Workspace
+      name: EntityType.Workspace
     },
     filter: ['id', '=', createParentRef('workspaceId')],
     nullable: !0
@@ -41414,7 +41414,7 @@ let pb = {
     name: 'workspaceSharedSetting',
     type: {
       kind: 'object',
-      name: _$$Y.SharedOrgLicenseGroupSetting
+      name: EntityType.SharedOrgLicenseGroupSetting
     },
     nullable: !0,
     filter: {
@@ -41424,7 +41424,7 @@ let pb = {
     name: 'taxInfo',
     type: {
       kind: 'object',
-      name: _$$Y.TaxInfo
+      name: EntityType.TaxInfo
     },
     args: [{
       name: 'userId',
@@ -41461,7 +41461,7 @@ let pb = {
     name: 'eduGracePeriod',
     type: {
       kind: 'object',
-      name: _$$Y.EduGracePeriod
+      name: EntityType.EduGracePeriod
     },
     args: [{
       name: 'userId',
@@ -41522,7 +41522,7 @@ let pb = {
     name: 'expSlidesStarterTeamLimitsOnTeam',
     type: {
       kind: 'object',
-      name: _$$Y.ExpSlidesStarterTeamLimits
+      name: EntityType.ExpSlidesStarterTeamLimits
     },
     resolver: {
       type: 'Statsig',
@@ -41545,7 +41545,7 @@ let pb = {
     name: 'expStarterGlobalFileLimitOnTeam',
     type: {
       kind: 'object',
-      name: _$$Y.ExpStarterGlobalFileLimitOnTeam
+      name: EntityType.ExpStarterGlobalFileLimitOnTeam
     },
     resolver: {
       type: 'Statsig',
@@ -41564,7 +41564,7 @@ let pb = {
     name: 'featureFlagSitesDesignStarterCombinedLimit',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     resolver: {
       type: 'Statsig',
@@ -41627,7 +41627,7 @@ let pb = {
     name: 'roles',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'team']]
@@ -41640,7 +41640,7 @@ let pb = {
     name: 'pendingRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'team'], {
@@ -41655,7 +41655,7 @@ let pb = {
     name: 'roleUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -41674,7 +41674,7 @@ let pb = {
     name: 'roleDeletionUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRoleLog
+      name: EntityType.TeamRoleLog
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -41690,7 +41690,7 @@ let pb = {
     name: 'adminRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     nullable: !0,
     filter: {
@@ -41704,7 +41704,7 @@ let pb = {
     name: 'ownerRole',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     filter: {
       and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'team'], ['level', '=', e6.OWNER], ['userId', '<>', null], ['pendingEmail', '=', null]]
@@ -41718,7 +41718,7 @@ let pb = {
     name: 'roleOnObjectForUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     args: [{
       name: 'userId',
@@ -41738,7 +41738,7 @@ let pb = {
     name: 'projects',
     type: {
       kind: 'objects',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     nullable: !0,
     filter: {
@@ -41753,7 +41753,7 @@ let pb = {
     name: 'allProjects',
     type: {
       kind: 'objects',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     args: [{
       name: 'userId',
@@ -41774,7 +41774,7 @@ let pb = {
     name: 'allActiveProjects',
     type: {
       kind: 'objects',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     args: [{
       name: 'userId',
@@ -41795,7 +41795,7 @@ let pb = {
     name: 'projectUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -41840,7 +41840,7 @@ let pb = {
     name: 'orgEditProjects',
     type: {
       kind: 'objects',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     args: [{
       name: 'userId',
@@ -41869,7 +41869,7 @@ let pb = {
     name: 'currentOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     args: [{
       name: 'userId',
@@ -41886,7 +41886,7 @@ let pb = {
     name: 'currentPrivilegedOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     args: [{
       name: 'userId',
@@ -41903,7 +41903,7 @@ let pb = {
     name: 'currentBaseOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     args: [{
       name: 'userId',
@@ -41920,7 +41920,7 @@ let pb = {
     name: 'userAuthn',
     type: {
       kind: 'object',
-      name: _$$Y.UserAuthn
+      name: EntityType.UserAuthn
     },
     args: [{
       name: 'userId',
@@ -41972,7 +41972,7 @@ let pb = {
     name: 'libraryTeamSubscriptionOverrides',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryTeamSubscription
+      name: EntityType.LibraryTeamSubscription
     },
     args: [{
       name: 'userId',
@@ -41990,7 +41990,7 @@ let pb = {
     name: 'libraryTeamSubscriptionOverridesV2',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryTeamSubscription
+      name: EntityType.LibraryTeamSubscription
     },
     args: [],
     filter: ['teamId', '=', createParentRef('id')],
@@ -41999,7 +41999,7 @@ let pb = {
     name: 'libraryTeamCommunitySubscriptions',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryTeamSubscription
+      name: EntityType.LibraryTeamSubscription
     },
     filter: {
       and: [['teamId', '=', createParentRef('id')], ['hubFileId', '<>', null]]
@@ -42009,7 +42009,7 @@ let pb = {
     name: 'licenseGroupAdmins',
     type: {
       kind: 'objects',
-      name: _$$Y.LicenseGroupAdmin
+      name: EntityType.LicenseGroupAdmin
     },
     filter: {
       and: [['licenseGroupId', '<>', null], ['licenseGroupId', '=', createParentRef('licenseGroupId')]]
@@ -42030,7 +42030,7 @@ let pb = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -42042,7 +42042,7 @@ let pb = {
     name: 'orgPermissioned',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -42053,7 +42053,7 @@ let pb = {
     name: 'orgForMembers',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -42064,7 +42064,7 @@ let pb = {
     name: 'orgForGuests',
     type: {
       kind: 'object',
-      name: _$$Y.OrgInfo
+      name: EntityType.OrgInfo
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -42075,7 +42075,7 @@ let pb = {
     name: '_org_permsV2',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     nullable: !0,
@@ -42140,7 +42140,7 @@ let pb = {
     name: 'experimentAssignments',
     type: {
       kind: 'objects',
-      name: _$$Y.ExperimentAssignment
+      name: EntityType.ExperimentAssignment
     },
     filter: {
       and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'Team']]
@@ -42150,7 +42150,7 @@ let pb = {
     name: 'teamFileCounts',
     type: {
       kind: 'object',
-      name: _$$Y.TeamFileCount
+      name: EntityType.TeamFileCount
     },
     nullable: !0,
     filter: ['teamId', '=', createParentRef('id')]
@@ -42158,7 +42158,7 @@ let pb = {
     name: 'pendingTeamRoleRequests',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRoleRequest
+      name: EntityType.TeamRoleRequest
     },
     args: [{
       name: 'userId',
@@ -42233,7 +42233,7 @@ let pb = {
     name: 'fileUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.File
+      name: EntityType.File
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -42296,7 +42296,7 @@ let pb = {
     name: 'sampledEditors',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     nullable: !0,
     filter: {
@@ -42309,7 +42309,7 @@ let pb = {
     name: 'aiDataSharingEnabledAtPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'team'], ['property', '=', 'AI_DATA_SHARING_ENABLED_AT']]
@@ -42331,7 +42331,7 @@ let pb = {
     name: 'aiDataSharingSearchEnabledAtPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'team'], ['property', '=', 'AI_DATA_SHARING_SEARCH_ENABLED_AT']]
@@ -42360,7 +42360,7 @@ let pb = {
     name: 'aiDataSharingGenerativeEnabledAtPlanProperty',
     type: {
       kind: 'object',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'team'], ['property', '=', 'AI_DATA_SHARING_GENERATIVE_ENABLED_AT']]
@@ -42401,7 +42401,7 @@ let pb = {
     name: 'planProperties',
     type: {
       kind: 'objects',
-      name: _$$Y.PlanProperties
+      name: EntityType.PlanProperties
     },
     filter: {
       and: [['planId', '=', createParentRef('id')], ['planType', '=', 'team']]
@@ -42411,7 +42411,7 @@ let pb = {
     name: 'communityProfile',
     type: {
       kind: 'object',
-      name: _$$Y.Profile
+      name: EntityType.Profile
     },
     nullable: !0,
     filter: ['teamId', '=', createParentRef('id')]
@@ -42419,7 +42419,7 @@ let pb = {
     name: 'repoUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -42470,7 +42470,7 @@ let pb = {
     name: 'componentUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamComponentUpdate
+      name: EntityType.TeamComponentUpdate
     },
     nullable: !0,
     resolver: {
@@ -42482,7 +42482,7 @@ let pb = {
     name: 'stateGroupUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamStateGroupUpdate
+      name: EntityType.TeamStateGroupUpdate
     },
     nullable: !0,
     resolver: {
@@ -42494,7 +42494,7 @@ let pb = {
     name: 'discoverableLibraries',
     type: {
       kind: 'objects',
-      name: _$$Y.DiscoverableLibrary
+      name: EntityType.DiscoverableLibrary
     },
     args: [{
       name: 'userId',
@@ -42518,7 +42518,7 @@ let pb = {
     name: 'fontFileUpdateForTeam',
     type: {
       kind: 'objects',
-      name: _$$Y.FontFile
+      name: EntityType.FontFile
     },
     nullable: !0,
     args: [{
@@ -42537,7 +42537,7 @@ let pb = {
     name: 'billingRemodelEnabledExperiment',
     type: {
       kind: 'object',
-      name: _$$Y.BillingRemodelEnabledExperiment
+      name: EntityType.BillingRemodelEnabledExperiment
     },
     resolver: {
       type: 'Statsig',
@@ -42555,7 +42555,7 @@ let pb = {
     name: 'pendingAssetTransferRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AssetTransferRequest
+      name: EntityType.AssetTransferRequest
     },
     nullable: !0,
     filter: {
@@ -42579,7 +42579,7 @@ let pb = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.AssignedBillableProductSeatCount
+      name: EntityType.AssignedBillableProductSeatCount
     },
     resolver: {
       type: 'HTTP',
@@ -42610,7 +42610,7 @@ let pb = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.AvailableBillableProductSeatCount
+      name: EntityType.AvailableBillableProductSeatCount
     },
     resolver: {
       type: 'HTTP',
@@ -42636,7 +42636,7 @@ let pb = {
     name: 'fileViewHistoryTeamUserEvents',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamUserEvent
+      name: EntityType.TeamUserEvent
     },
     nullable: !0,
     filter: {
@@ -42660,7 +42660,7 @@ let pb = {
     name: 'expOneClickAskToEditTeamId',
     type: {
       kind: 'object',
-      name: _$$Y.ExpOneClickAskToEditTeamId
+      name: EntityType.ExpOneClickAskToEditTeamId
     },
     args: [{
       name: 'userId',
@@ -42686,7 +42686,7 @@ let pb = {
     name: 'trackTags',
     type: {
       kind: 'object',
-      name: _$$Y.TeamTrackTags
+      name: EntityType.TeamTrackTags
     },
     embedded: !0,
     nullable: !0
@@ -42694,7 +42694,7 @@ let pb = {
     name: 'expSocialProofExpansionTeamId',
     type: {
       kind: 'object',
-      name: _$$Y.ExpSocialProofExpansionTeamId
+      name: EntityType.ExpSocialProofExpansionTeamId
     },
     args: [{
       name: 'userId',
@@ -42735,7 +42735,7 @@ let pb = {
   }]
 };
 let pv = {
-  name: _$$Y.TeamActivity,
+  name: EntityType.TeamActivity,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -42766,7 +42766,7 @@ let pv = {
   }]
 };
 let pI = {
-  name: _$$Y.TeamFileCount,
+  name: EntityType.TeamFileCount,
   permissionRequired: !1,
   naturalKey: new Set(['id']),
   fields: [{
@@ -42826,13 +42826,13 @@ let pI = {
   }]
 };
 let pE = {
-  name: _$$Y.TeamRole,
+  name: EntityType.TeamRole,
   permissionRequired: !1,
   fields: [...d$, {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -42917,7 +42917,7 @@ let pE = {
     name: 'eduGracePeriod',
     type: {
       kind: 'object',
-      name: _$$Y.EduGracePeriod
+      name: EntityType.EduGracePeriod
     },
     filter: {
       and: [['teamId', '=', createParentRef('resourceId')], ['userId', '=', createParentRef('userId')]]
@@ -42926,7 +42926,7 @@ let pE = {
   }]
 };
 let px = {
-  name: _$$Y.TeamRoleRequest,
+  name: EntityType.TeamRoleRequest,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -42986,7 +42986,7 @@ let px = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('teamId')],
     args: [{
@@ -43027,13 +43027,13 @@ let px = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('requesterUserId')]
   }]
 };
 let pS = {
-  name: _$$Y.TeamUserEvent,
+  name: EntityType.TeamUserEvent,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -43068,7 +43068,7 @@ let pS = {
   }]
 };
 let pw = {
-  name: _$$Y.TeamUser,
+  name: EntityType.TeamUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -43112,7 +43112,7 @@ let pw = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('teamId')]]
@@ -43124,7 +43124,7 @@ let pw = {
     name: '_team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('teamId')],
     nullable: !0,
@@ -43133,7 +43133,7 @@ let pw = {
     name: 'teamInfo',
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     filter: ['id', '=', createParentRef('teamId')],
     nullable: !0,
@@ -43144,7 +43144,7 @@ let pw = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: {
       and: [['id', '=', createParentRef('userId')]]
@@ -43153,7 +43153,7 @@ let pw = {
     name: 'designAccountTypeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: {
       and: [['requestableUserId', '=', createParentRef('id')], ['requestableUserType', '=', 'TeamUser'], ['_editorTypeRaw', '=', 0]]
@@ -43163,7 +43163,7 @@ let pw = {
     name: 'whiteboardAccountTypeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: {
       and: [['requestableUserId', '=', createParentRef('id')], ['requestableUserType', '=', 'TeamUser'], ['_editorTypeRaw', '=', 1]]
@@ -43173,7 +43173,7 @@ let pw = {
     name: 'devModeAccountTypeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: {
       and: [['requestableUserId', '=', createParentRef('id')], ['requestableUserType', '=', 'TeamUser'], ['_editorTypeRaw', '=', 2]]
@@ -43183,7 +43183,7 @@ let pw = {
     name: 'draftsProject',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: ['id', '=', createParentRef('draftsFolderId')],
     checkCanRead: {
@@ -43194,7 +43194,7 @@ let pw = {
     name: 'favoritedFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -43205,7 +43205,7 @@ let pw = {
     name: 'favoritedPrototypes',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     nullable: !0,
     filter: {
@@ -43216,7 +43216,7 @@ let pw = {
     name: 'favoritedProjects',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedProject
+      name: EntityType.FavoritedProject
     },
     nullable: !0,
     filter: {
@@ -43227,7 +43227,7 @@ let pw = {
     name: 'planlessFavoritedFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -43238,7 +43238,7 @@ let pw = {
     name: 'planlessFavoritedPrototypes',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     nullable: !0,
     filter: {
@@ -43249,7 +43249,7 @@ let pw = {
     name: 'planlessFavoritedProjects',
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedProject
+      name: EntityType.FavoritedProject
     },
     nullable: !0,
     filter: {
@@ -43260,7 +43260,7 @@ let pw = {
     name: 'fileBrowserPreferences',
     type: {
       kind: 'object',
-      name: _$$Y.FileBrowserPreferences
+      name: EntityType.FileBrowserPreferences
     },
     nullable: !0,
     filter: {
@@ -43270,7 +43270,7 @@ let pw = {
     name: 'teamUserEvents',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamUserEvent
+      name: EntityType.TeamUserEvent
     },
     args: [{
       name: 'eventType',
@@ -43316,7 +43316,7 @@ let pw = {
     name: 'activeSeatTypeUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUserUpgrade
+      name: EntityType.TeamUserUpgrade
     },
     orderBy: [['createdAt', 'DESC']],
     filter: {
@@ -43330,7 +43330,7 @@ let pw = {
     name: 'latestProvisionalAccess',
     type: {
       kind: 'object',
-      name: _$$Y.ProvisionalAccess
+      name: EntityType.ProvisionalAccess
     },
     orderBy: [['endsAt', 'DESC']],
     filter: {
@@ -43342,7 +43342,7 @@ let pw = {
     name: 'teamProjectRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     nullable: !0,
     filter: {
@@ -43353,7 +43353,7 @@ let pw = {
     name: 'teamRole',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     nullable: !0,
     filter: {
@@ -43399,7 +43399,7 @@ let pw = {
     name: 'pendingAccountTypeRequests',
     type: {
       kind: 'objects',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: {
       and: [['requestableUserId', '=', createParentRef('id')], ['requestableUserType', '=', 'TeamUser'], ['status', '=', 'pending']]
@@ -43410,7 +43410,7 @@ let pw = {
     name: 'currentSeat',
     type: {
       kind: 'object',
-      name: _$$Y.Seat
+      name: EntityType.Seat
     },
     filter: {
       and: [['currentPlanUserId', '=', createParentRef('id')], ['currentPlanUserType', '=', 'TeamUser'], ['deprovisionedAt', '=', null]]
@@ -43420,7 +43420,7 @@ let pw = {
     name: 'provisionalAccesses',
     type: {
       kind: 'objects',
-      name: _$$Y.ProvisionalAccess
+      name: EntityType.ProvisionalAccess
     },
     filter: {
       and: [['planUserId', '=', createParentRef('id')], ['planUserType', '=', 'TeamUser']]
@@ -43431,7 +43431,7 @@ let pw = {
     name: 'lastActive',
     type: {
       kind: 'object',
-      name: _$$Y.TeamActivity
+      name: EntityType.TeamActivity
     },
     orderBy: [['actionAt', 'DESC']],
     filter: {
@@ -43442,7 +43442,7 @@ let pw = {
     name: 'teamUserDowngrades',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamUserUpgrade
+      name: EntityType.TeamUserUpgrade
     },
     nullable: !0,
     filter: {
@@ -43453,7 +43453,7 @@ let pw = {
     name: 'mostRecentDesignUserUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUserUpgrade
+      name: EntityType.TeamUserUpgrade
     },
     nullable: !0,
     filter: {
@@ -43465,7 +43465,7 @@ let pw = {
     name: 'mostRecentWhiteboardUserUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUserUpgrade
+      name: EntityType.TeamUserUpgrade
     },
     nullable: !0,
     filter: {
@@ -43477,7 +43477,7 @@ let pw = {
     name: 'activeDesignUserUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUserUpgrade
+      name: EntityType.TeamUserUpgrade
     },
     nullable: !0,
     filter: {
@@ -43489,7 +43489,7 @@ let pw = {
     name: 'activeWhiteboardUserUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUserUpgrade
+      name: EntityType.TeamUserUpgrade
     },
     nullable: !0,
     filter: {
@@ -43500,7 +43500,7 @@ let pw = {
   }, T]
 };
 let pC = {
-  name: _$$Y.TeamWithSummary,
+  name: EntityType.TeamWithSummary,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -43517,7 +43517,7 @@ let pC = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('id')],
     checkCanRead: {
@@ -43528,7 +43528,7 @@ let pC = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -43608,7 +43608,7 @@ let pC = {
   }]
 };
 let pT = {
-  name: _$$Y.TeamInAdmin,
+  name: EntityType.TeamInAdmin,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -43625,7 +43625,7 @@ let pT = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('id')],
     checkCanRead: {
@@ -43656,7 +43656,7 @@ let pT = {
     name: 'teamUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     nullable: !0,
     filter: ['teamId', '=', createParentRef('id')],
@@ -43665,7 +43665,7 @@ let pT = {
 };
 let pk = {
   naturalKey: new Set(['fileKey']),
-  name: _$$Y.Template,
+  name: EntityType.Template,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -43754,7 +43754,7 @@ let pk = {
     name: 'publishedByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('publishedByUserId')],
     deprecated: {
@@ -43766,7 +43766,7 @@ let pk = {
     name: 'publishedByUserNullable',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('publishedByUserId')],
     nullable: !0
@@ -43800,7 +43800,7 @@ let pk = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     checkCanRead: {
@@ -43849,7 +43849,7 @@ let pk = {
   }]
 };
 let pR = {
-  name: _$$Y.SubscriptionUpdateSloData,
+  name: EntityType.SubscriptionUpdateSloData,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -43874,7 +43874,7 @@ let pR = {
   }]
 };
 let pN = {
-  name: _$$Y.UnclaimedDomainUser,
+  name: EntityType.UnclaimedDomainUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -43890,7 +43890,7 @@ let pN = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('userId')]
@@ -43958,7 +43958,7 @@ let pP = [{
   name: 'teamUsers',
   type: {
     kind: 'objects',
-    name: _$$Y.TeamUser
+    name: EntityType.TeamUser
   },
   nullable: !0,
   filter: ['userId', '=', createParentRef('id')],
@@ -43983,7 +43983,7 @@ let pP = [{
   }],
   type: {
     kind: 'objects',
-    name: _$$Y.RecentFile2
+    name: EntityType.RecentFile2
   },
   nullable: !0,
   filter: {
@@ -44022,7 +44022,7 @@ let pP = [{
   }],
   type: {
     kind: 'objects',
-    name: _$$Y.RecentFile2
+    name: EntityType.RecentFile2
   },
   nullable: !0,
   filter: {
@@ -44038,7 +44038,7 @@ let pP = [{
   }
 }];
 let pO = {
-  name: _$$Y.User,
+  name: EntityType.User,
   permissionRequired: !1,
   fields: [...pP, {
     name: 'createdAt',
@@ -44098,7 +44098,7 @@ let pO = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -44134,7 +44134,7 @@ let pO = {
     name: 'testPlan',
     type: {
       kind: 'object',
-      name: _$$Y.TestPlan
+      name: EntityType.TestPlan
     },
     nullable: !0,
     computed: !0,
@@ -44145,7 +44145,7 @@ let pO = {
     name: 'testPlanUser',
     type: {
       kind: 'object',
-      name: _$$Y.TestPlanUser
+      name: EntityType.TestPlanUser
     },
     nullable: !0,
     computed: !0,
@@ -44160,7 +44160,7 @@ let pO = {
     name: 'draftsProject',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: ['id', '=', createParentRef('draftsFolderId')],
     checkCanRead: {
@@ -44171,7 +44171,7 @@ let pO = {
     name: 'userMonetizationMetadata',
     type: {
       kind: 'object',
-      name: _$$Y.UserMonetizationMetadata
+      name: EntityType.UserMonetizationMetadata
     },
     filter: ['userId', '=', createParentRef('id')],
     nullable: !0
@@ -44179,7 +44179,7 @@ let pO = {
     name: 'accountManagerMessages',
     type: {
       kind: 'objects',
-      name: _$$Y.AccountManagerMessage
+      name: EntityType.AccountManagerMessage
     },
     filter: ['targetUserId', '=', createParentRef('id')],
     nullable: !0,
@@ -44188,7 +44188,7 @@ let pO = {
     name: 'onboardingSignals',
     type: {
       kind: 'object',
-      name: _$$Y.OnboardingUserSignals
+      name: EntityType.OnboardingUserSignals
     },
     nullable: !0,
     filter: ['userId', '=', createParentRef('id')]
@@ -44196,7 +44196,7 @@ let pO = {
     name: 'profile',
     type: {
       kind: 'object',
-      name: _$$Y.UserProfile
+      name: EntityType.UserProfile
     },
     embedded: !0,
     nullable: !0
@@ -44210,7 +44210,7 @@ let pO = {
     name: 'communityProfile',
     type: {
       kind: 'object',
-      name: _$$Y.Profile
+      name: EntityType.Profile
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('profileId')]
@@ -44218,7 +44218,7 @@ let pO = {
     name: 'communityProfileNotificationBell',
     type: {
       kind: 'object',
-      name: _$$Y.CommunityNotificationBell
+      name: EntityType.CommunityNotificationBell
     },
     nullable: !0,
     resolver: {
@@ -44230,7 +44230,7 @@ let pO = {
     name: 'notificationExperimentInfo',
     type: {
       kind: 'object',
-      name: _$$Y.NotificationExperimentInfo
+      name: EntityType.NotificationExperimentInfo
     },
     args: [{
       name: 'cacheNonce',
@@ -44249,7 +44249,7 @@ let pO = {
     name: 'desktopPushNotification',
     type: {
       kind: 'object',
-      name: _$$Y.DesktopPushNotification
+      name: EntityType.DesktopPushNotification
     },
     args: [{
       name: 'cacheNonce',
@@ -44268,7 +44268,7 @@ let pO = {
     name: 'assetTransferReload',
     type: {
       kind: 'object',
-      name: _$$Y.AssetTransferReload
+      name: EntityType.AssetTransferReload
     },
     args: [{
       name: 'cacheNonce',
@@ -44371,7 +44371,7 @@ let pO = {
     name: 'roleDeletionUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.RoleLog
+      name: EntityType.RoleLog
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -44387,7 +44387,7 @@ let pO = {
     name: 'teamRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     nullable: !0,
     filter: {
@@ -44398,7 +44398,7 @@ let pO = {
     name: 'teamRoleUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -44414,7 +44414,7 @@ let pO = {
     name: 'teamEditRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     filter: {
       and: [['userId', '=', createParentRef('id')], ['resourceType', '=', 'team'], ['level', '>=', e6.EDIT_FILE_METADATA]]
@@ -44424,7 +44424,7 @@ let pO = {
     name: 'orgAwareTeamRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgAwareTeamRole
+      name: EntityType.OrgAwareTeamRole
     },
     args: [{
       name: 'orgId',
@@ -44444,7 +44444,7 @@ let pO = {
     name: 'teamRole',
     type: {
       kind: 'object',
-      name: _$$Y.TeamRole
+      name: EntityType.TeamRole
     },
     args: [{
       name: 'teamId',
@@ -44461,7 +44461,7 @@ let pO = {
     name: 'teamRoleRequestUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamRoleRequest
+      name: EntityType.TeamRoleRequest
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -44483,7 +44483,7 @@ let pO = {
     name: 'projectRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     nullable: !0,
     filter: {
@@ -44494,7 +44494,7 @@ let pO = {
     name: 'projectRoleUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -44510,7 +44510,7 @@ let pO = {
     name: 'teamProjectRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     args: [{
       name: 'teamId',
@@ -44527,7 +44527,7 @@ let pO = {
     name: 'createdProjects',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     args: [{
       name: 'initialPageSize',
@@ -44545,7 +44545,7 @@ let pO = {
     name: 'sharedProjectRolesWithoutOrgDeletedDrafts',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     nullable: !0,
     filter: {
@@ -44580,7 +44580,7 @@ let pO = {
     name: 'projectEditRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     filter: {
       and: [['userId', '=', createParentRef('id')], ['resourceType', '=', 'folder'], ['level', '>=', e6.EDIT_FILE_METADATA]]
@@ -44590,7 +44590,7 @@ let pO = {
     name: 'projectRole',
     type: {
       kind: 'object',
-      name: _$$Y.ProjectRole
+      name: EntityType.ProjectRole
     },
     args: [{
       name: 'projectId',
@@ -44607,7 +44607,7 @@ let pO = {
     name: 'projectSubscriptions',
     type: {
       kind: 'objects',
-      name: _$$Y.ProjectSubscription
+      name: EntityType.ProjectSubscription
     },
     nullable: !0,
     filter: ['userId', '=', createParentRef('id')],
@@ -44616,7 +44616,7 @@ let pO = {
     name: 'fileRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.FileRole
+      name: EntityType.FileRole
     },
     nullable: !0,
     filter: {
@@ -44627,7 +44627,7 @@ let pO = {
     name: 'fileRoleUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.FileRole
+      name: EntityType.FileRole
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -44643,7 +44643,7 @@ let pO = {
     name: 'pendingFileRoleRequest',
     type: {
       kind: 'object',
-      name: _$$Y.FileRoleRequest
+      name: EntityType.FileRoleRequest
     },
     args: [{
       name: 'fileKey',
@@ -44663,7 +44663,7 @@ let pO = {
     name: 'repoRoles',
     type: {
       kind: 'objects',
-      name: _$$Y.RepoRole
+      name: EntityType.RepoRole
     },
     nullable: !0,
     filter: {
@@ -44674,7 +44674,7 @@ let pO = {
     name: 'repoRoleUpdates',
     type: {
       kind: 'objects',
-      name: _$$Y.RepoRole
+      name: EntityType.RepoRole
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -44690,7 +44690,7 @@ let pO = {
     name: 'repoRole',
     type: {
       kind: 'object',
-      name: _$$Y.RepoRole
+      name: EntityType.RepoRole
     },
     args: [{
       name: 'repoId',
@@ -44707,7 +44707,7 @@ let pO = {
     name: 'guestOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.GuestOrgUser
+      name: EntityType.GuestOrgUser
     },
     args: [{
       name: 'orgId',
@@ -44724,7 +44724,7 @@ let pO = {
     name: 'baseOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     args: [{
       name: 'orgId',
@@ -44741,7 +44741,7 @@ let pO = {
     name: 'currentTeamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     args: [{
       name: 'teamId',
@@ -44758,7 +44758,7 @@ let pO = {
     name: 'planUserRecords',
     type: {
       kind: 'objects',
-      name: _$$Y.PlanUserRecord
+      name: EntityType.PlanUserRecord
     },
     filter: ['userId', '=', createParentRef('id')],
     nullable: !0,
@@ -44770,7 +44770,7 @@ let pO = {
     name: 'orgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     args: [{
       name: 'orgId',
@@ -44787,7 +44787,7 @@ let pO = {
     name: 'privilegedOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     args: [{
       name: 'orgId',
@@ -44804,7 +44804,7 @@ let pO = {
     name: 'currentPartialOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.GuestOrgUser
+      name: EntityType.GuestOrgUser
     },
     args: [{
       name: 'orgId',
@@ -44825,7 +44825,7 @@ let pO = {
     name: 'guestOrgUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.GuestOrgUser
+      name: EntityType.GuestOrgUser
     },
     nullable: !0,
     filter: {
@@ -44840,7 +44840,7 @@ let pO = {
     name: 'baseOrgUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     args: [{
@@ -44857,7 +44857,7 @@ let pO = {
     name: 'guestBaseOrgUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     args: [{
@@ -44874,7 +44874,7 @@ let pO = {
     name: 'orgUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     nullable: !0,
     filter: {
@@ -44885,7 +44885,7 @@ let pO = {
     name: 'privilegedOrgUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     nullable: !0,
     args: [{
@@ -44902,7 +44902,7 @@ let pO = {
     name: 'allOrgUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.GuestOrgUser
+      name: EntityType.GuestOrgUser
     },
     nullable: !0,
     filter: ['userId', '=', createParentRef('id')],
@@ -44911,7 +44911,7 @@ let pO = {
     name: 'allBaseOrgUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     args: [{
@@ -44926,7 +44926,7 @@ let pO = {
     name: 'teamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     args: [{
       name: 'teamId',
@@ -44943,7 +44943,7 @@ let pO = {
     name: 'userFlags',
     type: {
       kind: 'objects',
-      name: _$$Y.UserFlag
+      name: EntityType.UserFlag
     },
     filter: ['userId', '=', createParentRef('id')],
     expectedMaxCount: 1e4
@@ -44951,7 +44951,7 @@ let pO = {
     name: 'userFlagByName',
     type: {
       kind: 'object',
-      name: _$$Y.UserFlag
+      name: EntityType.UserFlag
     },
     args: [{
       name: 'name',
@@ -44967,7 +44967,7 @@ let pO = {
     name: 'userTeamFlags',
     type: {
       kind: 'objects',
-      name: _$$Y.UserTeamFlag
+      name: EntityType.UserTeamFlag
     },
     filter: ['userId', '=', createParentRef('id')],
     expectedMaxCount: 200
@@ -44975,7 +44975,7 @@ let pO = {
     name: 'fileBrowserPreferences',
     type: {
       kind: 'object',
-      name: _$$Y.FileBrowserPreferences
+      name: EntityType.FileBrowserPreferences
     },
     nullable: !0,
     filter: {
@@ -44985,7 +44985,7 @@ let pO = {
     name: 'userPreferences',
     type: {
       kind: 'object',
-      name: _$$Y.UserPreferences
+      name: EntityType.UserPreferences
     },
     nullable: !0,
     filter: ['userId', '=', createParentRef('id')]
@@ -44993,7 +44993,7 @@ let pO = {
     name: 'eduGracePeriodUpdate',
     type: {
       kind: 'object',
-      name: _$$Y.EduGracePeriod
+      name: EntityType.EduGracePeriod
     },
     args: [{
       name: 'updatedAtTimestamp',
@@ -45011,7 +45011,7 @@ let pO = {
     name: 'fileBrowserSectionPreferences',
     type: {
       kind: 'objects',
-      name: _$$Y.FileBrowserSectionPreferences
+      name: EntityType.FileBrowserSectionPreferences
     },
     nullable: !0,
     filter: {
@@ -45022,7 +45022,7 @@ let pO = {
     name: 'recentPrototypes',
     type: {
       kind: 'objects',
-      name: _$$Y.RecentPrototype
+      name: EntityType.RecentPrototype
     },
     orderBy: [['viewedAt', 'DESC']],
     filter: {
@@ -45033,7 +45033,7 @@ let pO = {
     name: 'installedPlugins',
     type: {
       kind: 'objects',
-      name: _$$Y.PluginInstall
+      name: EntityType.PluginInstall
     },
     args: [{
       name: 'initialPageSize',
@@ -45047,7 +45047,7 @@ let pO = {
     name: 'plugins',
     type: {
       kind: 'objects',
-      name: _$$Y.Plugin
+      name: EntityType.Plugin
     },
     args: [{
       name: 'initialPageSize',
@@ -45117,7 +45117,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedResource
+      name: EntityType.FavoritedResource
     },
     filter: {
       and: [['userId', '=', createParentRef('id')], ['orgId', '=', createFieldRef('orgId')]]
@@ -45138,7 +45138,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -45162,7 +45162,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -45180,7 +45180,7 @@ let pO = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -45197,7 +45197,7 @@ let pO = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     nullable: !0,
     filter: {
@@ -45214,7 +45214,7 @@ let pO = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.FavoritedProject
+      name: EntityType.FavoritedProject
     },
     nullable: !0,
     filter: {
@@ -45225,7 +45225,7 @@ let pO = {
     args: [],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedFile
+      name: EntityType.FavoritedFile
     },
     nullable: !0,
     filter: {
@@ -45243,7 +45243,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     nullable: !0,
     filter: {
@@ -45267,7 +45267,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedPrototype
+      name: EntityType.FavoritedPrototype
     },
     nullable: !0,
     filter: {
@@ -45285,7 +45285,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedProject
+      name: EntityType.FavoritedProject
     },
     nullable: !0,
     filter: {
@@ -45303,7 +45303,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedTeam
+      name: EntityType.FavoritedTeam
     },
     nullable: !0,
     filter: {
@@ -45321,7 +45321,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.FavoritedWorkspace
+      name: EntityType.FavoritedWorkspace
     },
     nullable: !0,
     filter: {
@@ -45339,7 +45339,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.UserSidebarSection
+      name: EntityType.UserSidebarSection
     },
     nullable: !0,
     filter: {
@@ -45363,7 +45363,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.UserSidebarSection
+      name: EntityType.UserSidebarSection
     },
     nullable: !0,
     filter: {
@@ -45375,7 +45375,7 @@ let pO = {
     args: [],
     type: {
       kind: 'objects',
-      name: _$$Y.FileShareBroadcast
+      name: EntityType.FileShareBroadcast
     },
     nullable: !0,
     checkCanRead: {
@@ -45398,7 +45398,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.RecentSearch
+      name: EntityType.RecentSearch
     },
     nullable: !0,
     filter: {
@@ -45416,7 +45416,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.RecentFile
+      name: EntityType.RecentFile
     },
     nullable: !0,
     orderBy: [['actionAt', 'DESC']],
@@ -45444,7 +45444,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.RecentFile2
+      name: EntityType.RecentFile2
     },
     nullable: !0,
     orderBy: [['actionAt', 'DESC']],
@@ -45463,7 +45463,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.RecentFile2
+      name: EntityType.RecentFile2
     },
     nullable: !0,
     orderBy: [['actionAt', 'DESC']],
@@ -45487,7 +45487,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.RecentFile2
+      name: EntityType.RecentFile2
     },
     nullable: !0,
     orderBy: [['actionAt', 'DESC']],
@@ -45506,7 +45506,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.PermissionFeatureFlag
+      name: EntityType.PermissionFeatureFlag
     },
     nullable: !0,
     resolver: {
@@ -45748,7 +45748,7 @@ let pO = {
     args: [],
     type: {
       kind: 'objects',
-      name: _$$Y.SharedWithYouFile
+      name: EntityType.SharedWithYouFile
     },
     filter: {
       and: [['userId', '=', createParentRef('id')], ['resourceType', '=', 'file']]
@@ -45770,7 +45770,7 @@ let pO = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.IDPUser
+      name: EntityType.IDPUser
     },
     filter: ['userName', '=', createParentRef('email')],
     checkCanRead: {
@@ -45782,7 +45782,7 @@ let pO = {
     name: 'studentApplications',
     type: {
       kind: 'objects',
-      name: _$$Y.StudentApplication
+      name: EntityType.StudentApplication
     },
     nullable: !0,
     filter: {
@@ -45854,7 +45854,7 @@ let pO = {
     nullable: !0,
     type: {
       kind: 'objects',
-      name: _$$Y.FeedPost
+      name: EntityType.FeedPost
     },
     filter: {
       and: [['creatorId', '=', createParentRef('id')], ['orgId', '=', createFieldRef('orgId')]]
@@ -45866,7 +45866,7 @@ let pO = {
     args: [],
     type: {
       kind: 'object',
-      name: _$$Y.UserJamboardOfferEligibility
+      name: EntityType.UserJamboardOfferEligibility
     },
     resolver: {
       type: 'HTTP',
@@ -45884,7 +45884,7 @@ let pO = {
     name: 'feedTagFollowers',
     type: {
       kind: 'objects',
-      name: _$$Y.FeedTagFollower
+      name: EntityType.FeedTagFollower
     },
     nullable: !0,
     filter: ['userId', '=', createParentRef('id')],
@@ -45893,7 +45893,7 @@ let pO = {
     name: 'libraryUserSubscriptions',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryUserSubscription
+      name: EntityType.LibraryUserSubscription
     },
     filter: ['userId', '=', createParentRef('id')],
     expectedMaxCount: 1e3
@@ -45901,7 +45901,7 @@ let pO = {
     name: 'userAuthn',
     type: {
       kind: 'object',
-      name: _$$Y.UserAuthn
+      name: EntityType.UserAuthn
     },
     nullable: !0,
     filter: ['userId', '=', createParentRef('id')]
@@ -45919,7 +45919,7 @@ let pO = {
     name: 'developerTokens',
     type: {
       kind: 'objects',
-      name: _$$Y.DeveloperToken
+      name: EntityType.DeveloperToken
     },
     nullable: !0,
     filter: ['userId', '=', createParentRef('id')],
@@ -45928,7 +45928,7 @@ let pO = {
     name: 'experimentAssignments',
     type: {
       kind: 'objects',
-      name: _$$Y.ExperimentAssignment
+      name: EntityType.ExperimentAssignment
     },
     nullable: !0,
     filter: {
@@ -46138,7 +46138,7 @@ let pO = {
     name: 'allTeamUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     nullable: !0,
     filter: ['userId', '=', createParentRef('id')],
@@ -46201,12 +46201,12 @@ let pO = {
   }]
 };
 let pD = {
-  name: _$$Y.UserPublic,
+  name: EntityType.UserPublic,
   permissionRequired: !1,
   fields: [...pP]
 };
 let pL = {
-  name: _$$Y.UserAuthn,
+  name: EntityType.UserAuthn,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46237,7 +46237,7 @@ let pL = {
   }]
 };
 let pF = {
-  name: _$$Y.UserColorPaletteOverrideForFile,
+  name: EntityType.UserColorPaletteOverrideForFile,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -46264,7 +46264,7 @@ let pF = {
     name: 'colorPalette',
     type: {
       kind: 'object',
-      name: _$$Y.ColorPalette
+      name: EntityType.ColorPalette
     },
     filter: ['uuid', '=', createParentRef('colorPaletteUuid')],
     nullable: !0,
@@ -46297,7 +46297,7 @@ let pF = {
   }]
 };
 let pM = {
-  name: _$$Y.UserColorProfilePreference,
+  name: EntityType.UserColorProfilePreference,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46329,7 +46329,7 @@ let pM = {
   }]
 };
 let pj = {
-  name: _$$Y.UserFlag,
+  name: EntityType.UserFlag,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46365,7 +46365,7 @@ let pj = {
   }]
 };
 let pU = {
-  name: _$$Y.UserJamboardOfferEligibility,
+  name: EntityType.UserJamboardOfferEligibility,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46397,7 +46397,7 @@ let pU = {
   }]
 };
 let pB = {
-  name: _$$Y.UserMonetizationMetadata,
+  name: EntityType.UserMonetizationMetadata,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46476,7 +46476,7 @@ let pB = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -46533,7 +46533,7 @@ let pB = {
   }]
 };
 let pV = {
-  name: _$$Y.UserNotificationBell,
+  name: EntityType.UserNotificationBell,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46566,7 +46566,7 @@ let pV = {
   }]
 };
 let pG = {
-  name: _$$Y.UserNotificationBell2,
+  name: EntityType.UserNotificationBell2,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46599,7 +46599,7 @@ let pG = {
   }]
 };
 let pz = {
-  name: _$$Y.CommunityNotificationBell,
+  name: EntityType.CommunityNotificationBell,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46615,7 +46615,7 @@ let pz = {
   }]
 };
 let pH = {
-  name: _$$Y.UserPreferences,
+  name: EntityType.UserPreferences,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46631,13 +46631,13 @@ let pH = {
     name: 'preferences',
     type: {
       kind: 'object',
-      name: _$$Y.UserPreferencesHash
+      name: EntityType.UserPreferencesHash
     },
     embedded: !0
   }]
 };
 let pW = {
-  name: _$$Y.UserPreferencesHash,
+  name: EntityType.UserPreferencesHash,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -46649,7 +46649,7 @@ let pW = {
   }]
 };
 let pK = {
-  name: _$$Y.UserProfile,
+  name: EntityType.UserProfile,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -46675,7 +46675,7 @@ let pK = {
   }]
 };
 let pY = {
-  name: _$$Y.UserSidebarSection,
+  name: EntityType.UserSidebarSection,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46721,7 +46721,7 @@ let pY = {
   }]
 };
 let pq = {
-  name: _$$Y.UserTeamFlag,
+  name: EntityType.UserTeamFlag,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -46756,7 +46756,7 @@ let pq = {
   }]
 };
 let p$ = {
-  name: _$$Y.Variable,
+  name: EntityType.Variable,
   permissionRequired: !1,
   fields: [...eu, {
     name: 'key',
@@ -46796,7 +46796,7 @@ let p$ = {
     name: 'variableSet',
     type: {
       kind: 'object',
-      name: _$$Y.VariableSet
+      name: EntityType.VariableSet
     },
     filter: ['id', '=', createParentRef('variableSetId')],
     deprecated: {
@@ -46807,13 +46807,13 @@ let p$ = {
     name: 'variableCollection',
     type: {
       kind: 'object',
-      name: _$$Y.VariableSet
+      name: EntityType.VariableSet
     },
     filter: ['id', '=', createParentRef('variableSetId')]
   }]
 };
 let pZ = {
-  name: _$$Y.VariableLog,
+  name: EntityType.VariableLog,
   permissionRequired: !1,
   fields: [{
     name: 'fileKey',
@@ -46873,7 +46873,7 @@ let pZ = {
     name: 'checkpoint',
     type: {
       kind: 'object',
-      name: _$$Y.Checkpoint
+      name: EntityType.Checkpoint
     },
     embedded: !0
   }, {
@@ -46923,13 +46923,13 @@ let pZ = {
   }]
 };
 let pX = {
-  name: _$$Y.VariableSet,
+  name: EntityType.VariableSet,
   permissionRequired: !1,
   fields: [...eu, {
     name: 'checkpoint',
     type: {
       kind: 'object',
-      name: _$$Y.Checkpoint
+      name: EntityType.Checkpoint
     },
     embedded: !0
   }, {
@@ -46942,7 +46942,7 @@ let pX = {
     name: 'modes',
     type: {
       kind: 'objects',
-      name: _$$Y.VariableSetMode
+      name: EntityType.VariableSetMode
     },
     nullable: !0,
     embedded: !0
@@ -46987,7 +46987,7 @@ let pX = {
     name: 'variables',
     type: {
       kind: 'objects',
-      name: _$$Y.Variable
+      name: EntityType.Variable
     },
     filter: {
       and: [['variableSetId', '=', createParentRef('id')], ['unpublishedAt', '=', null]]
@@ -47007,7 +47007,7 @@ let pX = {
   }, em]
 };
 let pQ = {
-  name: _$$Y.VariableSetLog,
+  name: EntityType.VariableSetLog,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -47054,13 +47054,13 @@ let pQ = {
     name: 'checkpoint',
     type: {
       kind: 'object',
-      name: _$$Y.Checkpoint
+      name: EntityType.Checkpoint
     },
     embedded: !0
   }]
 };
 let pJ = {
-  name: _$$Y.VariableSetMode,
+  name: EntityType.VariableSetMode,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -47094,7 +47094,7 @@ let pJ = {
   }]
 };
 let p0 = {
-  name: _$$Y.Vector,
+  name: EntityType.Vector,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -47118,7 +47118,7 @@ let p0 = {
   }]
 };
 let p1 = {
-  name: _$$Y.ViewerRestrictedDraftAccessLog,
+  name: EntityType.ViewerRestrictedDraftAccessLog,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey', 'id']),
   fields: [{
@@ -47141,7 +47141,7 @@ let p1 = {
     name: 'viewerUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('viewerUserId')]
@@ -47164,7 +47164,7 @@ let p1 = {
   }]
 };
 let p2 = {
-  name: _$$Y.VotingSession,
+  name: EntityType.VotingSession,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -47210,7 +47210,7 @@ let p2 = {
   }]
 };
 let p5 = {
-  name: _$$Y.WorkspaceMemberCount,
+  name: EntityType.WorkspaceMemberCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -47225,7 +47225,7 @@ let p5 = {
   }]
 };
 let p4 = {
-  name: _$$Y.WorkspacePublicInfo,
+  name: EntityType.WorkspacePublicInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -47236,7 +47236,7 @@ let p4 = {
     name: 'librarySubscriptions',
     type: {
       kind: 'objects',
-      name: _$$Y.LibraryWorkspaceSubscription
+      name: EntityType.LibraryWorkspaceSubscription
     },
     filter: ['workspaceId', '=', createParentRef('id')],
     nullable: !0,
@@ -47244,7 +47244,7 @@ let p4 = {
   }]
 };
 let p3 = {
-  name: _$$Y.Workspace,
+  name: EntityType.Workspace,
   permissionRequired: !0,
   fields: [...p4.fields, {
     name: 'orgId',
@@ -47255,7 +47255,7 @@ let p3 = {
     name: 'org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('orgId')],
     checkCanRead: {
@@ -47286,7 +47286,7 @@ let p3 = {
     name: 'colorConfig',
     type: {
       kind: 'object',
-      name: _$$Y.WorkspaceColorConfig
+      name: EntityType.WorkspaceColorConfig
     },
     embedded: !0,
     nullable: !0
@@ -47311,7 +47311,7 @@ let p3 = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -47325,7 +47325,7 @@ let p3 = {
     name: 'currentBaseOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     args: [{
       name: 'userId',
@@ -47342,7 +47342,7 @@ let p3 = {
     name: 'mirroringLicenseGroup',
     type: {
       kind: 'object',
-      name: _$$Y.LicenseGroup
+      name: EntityType.LicenseGroup
     },
     filter: ['mirroredWorkspaceId', '=', createParentRef('id')],
     nullable: !0
@@ -47350,7 +47350,7 @@ let p3 = {
     name: 'librarySubscriptionByLibraryKey',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryWorkspaceSubscription
+      name: EntityType.LibraryWorkspaceSubscription
     },
     args: [{
       name: 'fileKey',
@@ -47366,7 +47366,7 @@ let p3 = {
     name: 'librarySubscriptionByLibraryHubFileId',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryWorkspaceSubscription
+      name: EntityType.LibraryWorkspaceSubscription
     },
     args: [{
       name: 'hubFileId',
@@ -47382,10 +47382,10 @@ let p3 = {
     name: 'approvedLibraries',
     type: {
       kind: 'objects',
-      name: _$$Y.ApprovedLibrary
+      name: EntityType.ApprovedLibrary
     },
     filter: {
-      and: [['resourceType', '=', _$$Y.Workspace], ['resourceId', '=', createParentRef('id')]]
+      and: [['resourceType', '=', EntityType.Workspace], ['resourceId', '=', createParentRef('id')]]
     },
     nullable: !0,
     expectedMaxCount: 200
@@ -47393,7 +47393,7 @@ let p3 = {
     name: 'activeTeams',
     type: {
       kind: 'objects',
-      name: _$$Y.WorkspaceTeamResult
+      name: EntityType.WorkspaceTeamResult
     },
     args: [{
       name: 'userId',
@@ -47428,7 +47428,7 @@ let p3 = {
     name: 'defaultTeams',
     type: {
       kind: 'objects',
-      name: _$$Y.DefaultTeam
+      name: EntityType.DefaultTeam
     },
     filter: {
       and: [['resourceId', '=', createParentRef('id')], ['resourceType', '=', 'Workspace']]
@@ -47439,7 +47439,7 @@ let p3 = {
     name: 'admins',
     type: {
       kind: 'objects',
-      name: _$$Y.WorkspaceUser
+      name: EntityType.WorkspaceUser
     },
     filter: {
       and: [['workspaceId', '=', createParentRef('id')], ['permission', '=', 'admin']]
@@ -47449,7 +47449,7 @@ let p3 = {
     name: 'members',
     type: {
       kind: 'objects',
-      name: _$$Y.WorkspaceUser
+      name: EntityType.WorkspaceUser
     },
     filter: {
       and: [['workspaceId', '=', createParentRef('id')], ['isMainWorkspace', '=', !0]]
@@ -47466,7 +47466,7 @@ let p3 = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.WorkspaceMemberCount
+      name: EntityType.WorkspaceMemberCount
     },
     resolver: {
       type: 'HTTP',
@@ -47485,7 +47485,7 @@ let p3 = {
     name: 'pinnedFiles',
     type: {
       kind: 'objects',
-      name: _$$Y.PinnedFileV2
+      name: EntityType.PinnedFileV2
     },
     nullable: !0,
     filter: {
@@ -47501,7 +47501,7 @@ let p3 = {
     name: 'orgSharedSetting',
     type: {
       kind: 'object',
-      name: _$$Y.SharedOrgLicenseGroupSetting
+      name: EntityType.SharedOrgLicenseGroupSetting
     },
     nullable: !0,
     filter: {
@@ -47511,7 +47511,7 @@ let p3 = {
     name: 'workspaceSharedSetting',
     type: {
       kind: 'object',
-      name: _$$Y.SharedOrgLicenseGroupSetting
+      name: EntityType.SharedOrgLicenseGroupSetting
     },
     nullable: !0,
     filter: {
@@ -47576,7 +47576,7 @@ let p3 = {
     name: 'allowlistedPlugins',
     type: {
       kind: 'objects',
-      name: _$$Y.AllowlistedPlugin
+      name: EntityType.AllowlistedPlugin
     },
     filter: {
       and: [['allowlistGroupId', '=', createParentRef('id')], ['allowlistGroupType', '=', 'Workspace']]
@@ -47617,7 +47617,7 @@ let p3 = {
   }, ..._$$oJ]
 };
 let p6 = {
-  name: _$$Y.WorkspaceTeamResult,
+  name: EntityType.WorkspaceTeamResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -47629,7 +47629,7 @@ let p6 = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('id')], ['deletedAt', '=', null]]
@@ -47647,7 +47647,7 @@ let p6 = {
   }]
 };
 let p7 = {
-  name: _$$Y.WorkspaceColorConfig,
+  name: EntityType.WorkspaceColorConfig,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -47661,7 +47661,7 @@ let p7 = {
   }]
 };
 let p8 = {
-  name: _$$Y.WorkspaceUser,
+  name: EntityType.WorkspaceUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -47717,7 +47717,7 @@ let p8 = {
     name: 'idpGroup',
     type: {
       kind: 'object',
-      name: _$$Y.IDPGroup
+      name: EntityType.IDPGroup
     },
     filter: ['id', '=', createParentRef('idpGroupUuid')],
     nullable: !0
@@ -47730,7 +47730,7 @@ let p8 = {
     name: 'workspace',
     type: {
       kind: 'object',
-      name: _$$Y.Workspace
+      name: EntityType.Workspace
     },
     filter: ['id', '=', createParentRef('workspaceId')],
     shadowCheckCanRead: {
@@ -47751,7 +47751,7 @@ let p8 = {
     name: 'baseOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('orgUserId')]
@@ -55792,7 +55792,7 @@ let AE = {
   }
 };
 let Ax = {
-  type: _$$Y.AccountTypeRequest,
+  type: EntityType.AccountTypeRequest,
   fields: {
     id: NULL_FIELD_REF,
     status: NULL_FIELD_REF,
@@ -55802,14 +55802,14 @@ let Ax = {
   }
 };
 let AS = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: {
     hasFileLinkPassword: NULL_FIELD_REF,
     linkAccess: NULL_FIELD_REF
   }
 };
 let Aw = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: mergeFieldRefs(AS.fields, {
     clientMeta: createAliasedFieldRef('checkpointClientMeta', NULL_FIELD_REF),
     thumbnailGuid: NULL_FIELD_REF,
@@ -55825,7 +55825,7 @@ let Aw = {
   })
 };
 let AC = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: {
     fileRepoId: NULL_FIELD_REF,
     editorType: NULL_FIELD_REF,
@@ -55834,14 +55834,14 @@ let AC = {
   }
 };
 let AT = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: {
     key: NULL_FIELD_REF,
     name: NULL_FIELD_REF
   }
 };
 let Ak = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: {
     key: NULL_FIELD_REF,
     workspaceId: NULL_FIELD_REF,
@@ -55858,7 +55858,7 @@ let Ak = {
   }
 };
 let AR = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: mergeFieldRefs(Aw.fields, AC.fields, AT.fields, Ak.fields, {
     key: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -55870,7 +55870,7 @@ let AR = {
   })
 };
 let AN = {
-  type: _$$Y.EmbeddedSCIMInfo,
+  type: EntityType.EmbeddedSCIMInfo,
   fields: {
     enterpriseFields: {
       costCenter: NULL_FIELD_REF,
@@ -55936,7 +55936,7 @@ let AP = {
   licenseType: NULL_FIELD_REF
 };
 let AO = {
-  type: _$$Y.BaseOrgUser,
+  type: EntityType.BaseOrgUser,
   fields: {
     id: NULL_FIELD_REF,
     user: {
@@ -56040,7 +56040,7 @@ let AO = {
   }
 };
 let AD = {
-  type: _$$Y.LibraryItemContainingFrame,
+  type: EntityType.LibraryItemContainingFrame,
   fields: {
     backgroundColor: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -56051,7 +56051,7 @@ let AD = {
   }
 };
 let AL = {
-  type: _$$Y.Component,
+  type: EntityType.Component,
   fields: {
     componentKey: NULL_FIELD_REF,
     containingFrame: mergeFieldRefs(AD.fields, {
@@ -56077,7 +56077,7 @@ let AL = {
   }
 };
 let AF = {
-  type: _$$Y.DeveloperRelatedLink,
+  type: EntityType.DeveloperRelatedLink,
   fields: {
     id: NULL_FIELD_REF,
     nodeId: NULL_FIELD_REF,
@@ -56089,7 +56089,7 @@ let AF = {
   }
 };
 let AM = {
-  type: _$$Y.FavoritedFile,
+  type: EntityType.FavoritedFile,
   fields: {
     id: NULL_FIELD_REF,
     orgId: NULL_FIELD_REF,
@@ -56143,7 +56143,7 @@ let AM = {
   }
 };
 let Aj = {
-  type: _$$Y.FavoritedProject,
+  type: EntityType.FavoritedProject,
   fields: {
     id: NULL_FIELD_REF,
     orgId: NULL_FIELD_REF,
@@ -56188,7 +56188,7 @@ let Aj = {
   }
 };
 let AU = {
-  type: _$$Y.FavoritedPrototype,
+  type: EntityType.FavoritedPrototype,
   fields: {
     id: NULL_FIELD_REF,
     orgId: NULL_FIELD_REF,
@@ -56223,7 +56223,7 @@ let AU = {
   }
 };
 let AB = {
-  type: _$$Y.FavoritedTeam,
+  type: EntityType.FavoritedTeam,
   fields: {
     id: NULL_FIELD_REF,
     orgId: NULL_FIELD_REF,
@@ -56249,7 +56249,7 @@ let AB = {
   }
 };
 let AV = {
-  type: _$$Y.FavoritedWorkspace,
+  type: EntityType.FavoritedWorkspace,
   fields: {
     id: NULL_FIELD_REF,
     orgId: NULL_FIELD_REF,
@@ -56265,7 +56265,7 @@ let AV = {
   }
 };
 let AG = {
-  type: _$$Y.User,
+  type: EntityType.User,
   fields: {
     id: NULL_FIELD_REF,
     handle: NULL_FIELD_REF,
@@ -56283,7 +56283,7 @@ let AG = {
   }
 };
 let Az = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: {
     branchCheckpointId: NULL_FIELD_REF,
     checkpointId: NULL_FIELD_REF,
@@ -56339,7 +56339,7 @@ let Az = {
   }
 };
 let AH = {
-  type: _$$Y.FileRoleRequest,
+  type: EntityType.FileRoleRequest,
   fields: {
     id: NULL_FIELD_REF,
     requesterUserId: NULL_FIELD_REF,
@@ -56354,7 +56354,7 @@ let AH = {
   }
 };
 let AW = {
-  type: _$$Y.FileSeenState,
+  type: EntityType.FileSeenState,
   fields: {
     id: NULL_FIELD_REF,
     updatedAt: NULL_FIELD_REF,
@@ -56370,7 +56370,7 @@ let AW = {
   }
 };
 let AK = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: {
     branchCheckpointId: NULL_FIELD_REF,
     clientMeta: createAliasedFieldRef('checkpointClientMeta', NULL_FIELD_REF),
@@ -56453,7 +56453,7 @@ let AK = {
   }
 };
 let AY = {
-  type: _$$Y.RecentFile2,
+  type: EntityType.RecentFile2,
   fields: {
     id: NULL_FIELD_REF,
     actionAt: NULL_FIELD_REF,
@@ -56461,7 +56461,7 @@ let AY = {
   }
 };
 let Aq = {
-  type: _$$Y.Repo,
+  type: EntityType.Repo,
   fields: {
     id: NULL_FIELD_REF,
     folderId: NULL_FIELD_REF,
@@ -56486,7 +56486,7 @@ let Aq = {
   }
 };
 let A$ = {
-  type: _$$Y.Team,
+  type: EntityType.Team,
   fields: {
     id: NULL_FIELD_REF,
     createdAt: NULL_FIELD_REF,
@@ -56518,7 +56518,7 @@ let A$ = {
   }
 };
 let AZ = {
-  type: _$$Y.LibraryAsset,
+  type: EntityType.LibraryAsset,
   fields: {
     assetType: NULL_FIELD_REF,
     version: NULL_FIELD_REF,
@@ -56535,7 +56535,7 @@ let AZ = {
   }
 };
 let AX = {
-  type: _$$Y.CodePresetMetadata,
+  type: EntityType.CodePresetMetadata,
   fields: {
     presetName: NULL_FIELD_REF,
     presetIcon: NULL_FIELD_REF,
@@ -56560,7 +56560,7 @@ let AQ = {
   numModuleAssets: NULL_FIELD_REF
 };
 let AJ = {
-  type: _$$Y.Library,
+  type: EntityType.Library,
   fields: mergeFieldRefs(AQ, {
     file: {
       name: NULL_FIELD_REF,
@@ -56573,7 +56573,7 @@ let AJ = {
   })
 };
 let A0 = {
-  type: _$$Y.Library,
+  type: EntityType.Library,
   fields: mergeFieldRefs(AQ, AJ.fields, {
     file: {
       key: NULL_FIELD_REF
@@ -56581,7 +56581,7 @@ let A0 = {
   })
 };
 let A1 = {
-  type: _$$Y.CommunityLibrary,
+  type: EntityType.CommunityLibrary,
   fields: mergeFieldRefs(AQ, {
     name: NULL_FIELD_REF,
     hubFileId: NULL_FIELD_REF,
@@ -56606,11 +56606,11 @@ let A2 = {
   scopes: NULL_FIELD_REF
 };
 let A5 = {
-  type: _$$Y.VariableLog,
+  type: EntityType.VariableLog,
   fields: A2
 };
 let A4 = {
-  type: _$$Y.Variable,
+  type: EntityType.Variable,
   fields: mergeFieldRefs(A2, {
     variableCollection: {
       key: NULL_FIELD_REF,
@@ -56623,7 +56623,7 @@ let A4 = {
   })
 };
 let A3 = {
-  type: _$$Y.VariableSetMode,
+  type: EntityType.VariableSetMode,
   fields: {
     id: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -56633,7 +56633,7 @@ let A3 = {
   }
 };
 let A6 = {
-  type: _$$Y.VariableSet,
+  type: EntityType.VariableSet,
   fields: {
     checkpoint: {
       key: NULL_FIELD_REF
@@ -56656,19 +56656,19 @@ let A6 = {
   }
 };
 let A7 = {
-  type: _$$Y.VariableSet,
+  type: EntityType.VariableSet,
   fields: mergeFieldRefs(A6.fields, {
     variables: A4.fields
   })
 };
 let A8 = {
-  type: _$$Y.VariableSet,
+  type: EntityType.VariableSet,
   fields: mergeFieldRefs(A6.fields, {
     numVariables: NULL_FIELD_REF
   })
 };
 let A9 = {
-  type: _$$Y.CommentMessageMeta,
+  type: EntityType.CommentMessageMeta,
   fields: {
     t: NULL_FIELD_REF,
     user: {
@@ -56693,7 +56693,7 @@ let A9 = {
   }
 };
 let ye = {
-  type: _$$Y.CommentMessageMeta,
+  type: EntityType.CommentMessageMeta,
   fields: {
     t: NULL_FIELD_REF,
     user: {
@@ -56716,7 +56716,7 @@ let ye = {
   }
 };
 let yt = {
-  type: _$$Y.CommentMessageMeta,
+  type: EntityType.CommentMessageMeta,
   fields: {
     t: NULL_FIELD_REF,
     user: {
@@ -56726,7 +56726,7 @@ let yt = {
   }
 };
 let yi = {
-  type: _$$Y.Comment,
+  type: EntityType.Comment,
   fields: {
     id: NULL_FIELD_REF,
     orderId: NULL_FIELD_REF,
@@ -56756,7 +56756,7 @@ let yi = {
   }
 };
 let yn = {
-  type: _$$Y.Comment,
+  type: EntityType.Comment,
   fields: mergeFieldRefs(yi.fields, {
     reactions: {
       id: NULL_FIELD_REF,
@@ -56792,7 +56792,7 @@ let yn = {
   })
 };
 let yr = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: {
     key: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -56830,7 +56830,7 @@ let yr = {
   }
 };
 let ya = {
-  type: _$$Y.Project,
+  type: EntityType.Project,
   fields: {
     id: NULL_FIELD_REF,
     path: NULL_FIELD_REF,
@@ -56853,7 +56853,7 @@ let ya = {
   }
 };
 let ys = {
-  type: _$$Y.Module,
+  type: EntityType.Module,
   fields: {
     key: NULL_FIELD_REF,
     version: NULL_FIELD_REF,
@@ -56876,7 +56876,7 @@ let ys = {
   }
 };
 let yo = {
-  type: _$$Y.Org,
+  type: EntityType.Org,
   fields: {
     bigmaEnabledAt: NULL_FIELD_REF,
     workspaces: {
@@ -56885,7 +56885,7 @@ let yo = {
   }
 };
 let yl = {
-  type: _$$Y.Plan,
+  type: EntityType.Plan,
   fields: {
     id: NULL_FIELD_REF,
     type: NULL_FIELD_REF,
@@ -56935,14 +56935,14 @@ let yl = {
   }
 };
 let yd = {
-  type: _$$Y.LicenseGroupMember,
+  type: EntityType.LicenseGroupMember,
   fields: {
     id: NULL_FIELD_REF,
     licenseGroupId: NULL_FIELD_REF
   }
 };
 let yc = {
-  type: _$$Y.WorkspaceUser,
+  type: EntityType.WorkspaceUser,
   fields: {
     id: NULL_FIELD_REF,
     orgUserId: NULL_FIELD_REF,
@@ -56953,7 +56953,7 @@ let yc = {
   }
 };
 let yu = {
-  type: _$$Y.PrivilegedOrgUser,
+  type: EntityType.PrivilegedOrgUser,
   fields: {
     workspaceUsers: yc.fields,
     licenseGroupMember: yd.fields,
@@ -56961,7 +56961,7 @@ let yu = {
   }
 };
 let yp = {
-  type: _$$Y.PlanUser,
+  type: EntityType.PlanUser,
   fields: {
     key: {
       type: NULL_FIELD_REF,
@@ -57001,7 +57001,7 @@ let yp = {
   }
 };
 let ym = {
-  type: _$$Y.PlanUser,
+  type: EntityType.PlanUser,
   fields: {
     id: NULL_FIELD_REF,
     userId: NULL_FIELD_REF,
@@ -57029,7 +57029,7 @@ let ym = {
   }
 };
 let yh = {
-  type: _$$Y.PlanPermissions,
+  type: EntityType.PlanPermissions,
   fields: {
     id: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -57064,7 +57064,7 @@ let yh = {
   }
 };
 let yg = {
-  type: _$$Y.Plugin,
+  type: EntityType.Plugin,
   fields: {
     id: NULL_FIELD_REF,
     currentPluginVersionId: NULL_FIELD_REF,
@@ -57113,7 +57113,7 @@ let yg = {
   }
 };
 let yf = {
-  type: _$$Y.Team,
+  type: EntityType.Team,
   fields: {
     subscription: NULL_FIELD_REF,
     studentTeamAt: NULL_FIELD_REF,
@@ -57143,14 +57143,14 @@ let yf = {
   }
 };
 let y_ = {
-  type: _$$Y.PermissionEvaluationResult,
+  type: EntityType.PermissionEvaluationResult,
   fields: {
     result: NULL_FIELD_REF,
     publicDenyReasons: NULL_FIELD_REF
   }
 };
 let yA = {
-  type: _$$Y.Project,
+  type: EntityType.Project,
   fields: {
     canCreateCooperFileWithReasons: [{
       userId: createSessionRef('userId')
@@ -57173,7 +57173,7 @@ let yA = {
   }
 };
 let yy = {
-  type: _$$Y.Project,
+  type: EntityType.Project,
   fields: {
     id: NULL_FIELD_REF,
     updatedAt: NULL_FIELD_REF,
@@ -57201,7 +57201,7 @@ let yy = {
   }
 };
 let yb = {
-  type: _$$Y.Project,
+  type: EntityType.Project,
   fields: mergeFieldRefs(yA.fields, {
     canRead: [{
       userId: createSessionRef('userId')
@@ -57266,7 +57266,7 @@ let yb = {
   })
 };
 let yv = {
-  type: _$$Y.Prototype,
+  type: EntityType.Prototype,
   fields: {
     isFavorited: [{
       userId: createSessionRef('userId'),
@@ -57278,7 +57278,7 @@ let yv = {
   }
 };
 let yI = {
-  type: _$$Y.Repo,
+  type: EntityType.Repo,
   fields: {
     id: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -57300,7 +57300,7 @@ let yI = {
   }
 };
 let yE = {
-  type: _$$Y.File,
+  type: EntityType.File,
   fields: {
     key: NULL_FIELD_REF,
     canView: createAliasedFieldRef('canViewV3', [{
@@ -57331,7 +57331,7 @@ let yE = {
   }
 };
 let yx = {
-  type: _$$Y.Repo,
+  type: EntityType.Repo,
   fields: {
     parentOrgId: NULL_FIELD_REF,
     teamId: NULL_FIELD_REF,
@@ -57369,7 +57369,7 @@ let yx = {
   }
 };
 let yS = {
-  type: _$$Y.SharedWithYouFile,
+  type: EntityType.SharedWithYouFile,
   fields: {
     id: NULL_FIELD_REF,
     sharedAt: NULL_FIELD_REF,
@@ -57443,7 +57443,7 @@ let yS = {
   }
 };
 let yw = {
-  type: _$$Y.SharedWithYouFolder,
+  type: EntityType.SharedWithYouFolder,
   fields: {
     sharedAt: NULL_FIELD_REF,
     sharedBy: NULL_FIELD_REF,
@@ -57483,7 +57483,7 @@ let yw = {
   }
 };
 let yC = {
-  type: _$$Y.SharedWithYouRepo,
+  type: EntityType.SharedWithYouRepo,
   fields: {
     sharedAt: NULL_FIELD_REF,
     sharedBy: NULL_FIELD_REF,
@@ -57548,7 +57548,7 @@ let yC = {
   }
 };
 let yT = {
-  type: _$$Y.SharedWithYouPrototype,
+  type: EntityType.SharedWithYouPrototype,
   fields: {
     sharedAt: NULL_FIELD_REF,
     sharedBy: NULL_FIELD_REF,
@@ -57612,7 +57612,7 @@ let yT = {
   }
 };
 let yk = {
-  type: _$$Y.Project,
+  type: EntityType.Project,
   fields: mergeFieldRefs(yA.fields, {
     id: NULL_FIELD_REF,
     path: NULL_FIELD_REF,
@@ -57637,7 +57637,7 @@ let yk = {
   })
 };
 let yR = {
-  type: _$$Y.StateGroup,
+  type: EntityType.StateGroup,
   fields: {
     containingFrame: AD.fields,
     defaultStateKey: NULL_FIELD_REF,
@@ -57674,11 +57674,11 @@ let yN = {
   thumbnailUrl: NULL_FIELD_REF
 };
 let yP = {
-  type: _$$Y.StyleLog,
+  type: EntityType.StyleLog,
   fields: yN
 };
 let yO = {
-  type: _$$Y.Style,
+  type: EntityType.Style,
   fields: mergeFieldRefs(yN, {
     name: NULL_FIELD_REF,
     unpublishedAt: NULL_FIELD_REF,
@@ -57694,7 +57694,7 @@ let yO = {
   })
 };
 let yD = {
-  type: _$$Y.Style,
+  type: EntityType.Style,
   fields: mergeFieldRefs(yN, {
     name: NULL_FIELD_REF,
     unpublishedAt: NULL_FIELD_REF,
@@ -57703,7 +57703,7 @@ let yD = {
   })
 };
 let yL = {
-  type: _$$Y.Team,
+  type: EntityType.Team,
   fields: {
     aiFeaturesDisabledAt: NULL_FIELD_REF,
     communityBlockedAt: NULL_FIELD_REF,
@@ -57746,7 +57746,7 @@ let yL = {
   }
 };
 let yF = {
-  type: _$$Y.Team,
+  type: EntityType.Team,
   fields: {
     canAdmin: [{
       userId: createSessionRef('userId')
@@ -57776,14 +57776,14 @@ let yF = {
   }
 };
 let yM = {
-  type: _$$Y.Workspace,
+  type: EntityType.Workspace,
   fields: {
     id: NULL_FIELD_REF,
     description: NULL_FIELD_REF
   }
 };
 let yj = {
-  type: _$$Y.User,
+  type: EntityType.User,
   fields: {
     baseOrgUser: [{
       orgId: createViewRef('orgId')
@@ -57796,7 +57796,7 @@ let yj = {
   }
 };
 let yU = {
-  type: _$$Y.User,
+  type: EntityType.User,
   fields: {
     id: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -57806,7 +57806,7 @@ let yU = {
   }
 };
 let yB = {
-  type: _$$Y.Workspace,
+  type: EntityType.Workspace,
   fields: {
     id: NULL_FIELD_REF,
     colorConfig: {
@@ -57815,7 +57815,7 @@ let yB = {
   }
 };
 let yV = {
-  type: _$$Y.Workspace,
+  type: EntityType.Workspace,
   fields: mergeFieldRefs(yB.fields, {
     id: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -57823,7 +57823,7 @@ let yV = {
   })
 };
 let yG = {
-  type: _$$Y.Workspace,
+  type: EntityType.Workspace,
   fields: mergeFieldRefs(yM.fields, {
     id: NULL_FIELD_REF,
     canAdmin: [{
@@ -57841,7 +57841,7 @@ let yG = {
   })
 };
 let yz = {
-  type: _$$Y.WorkspaceUser,
+  type: EntityType.WorkspaceUser,
   fields: {
     baseOrgUser: {
       user: {
@@ -57854,14 +57854,14 @@ let yz = {
   }
 };
 let yH = {
-  type: _$$Y.Workspace,
+  type: EntityType.Workspace,
   fields: {
     name: NULL_FIELD_REF,
     admins: yz.fields
   }
 };
 let yW = {
-  type: _$$Y.Workspace,
+  type: EntityType.Workspace,
   fields: mergeFieldRefs(yB.fields, yG.fields, yH.fields, {
     id: NULL_FIELD_REF,
     name: NULL_FIELD_REF,
@@ -57873,13 +57873,13 @@ let yW = {
   })
 };
 let yK = {
-  type: _$$Y.CommentMessageMeta,
+  type: EntityType.CommentMessageMeta,
   fields: {
     t: NULL_FIELD_REF
   }
 };
 let yY = {
-  type: _$$Y.Workspace,
+  type: EntityType.Workspace,
   fields: {
     id: NULL_FIELD_REF,
     canAdmin: [{
@@ -57899,7 +57899,7 @@ let yY = {
   }
 };
 let yq = {
-  type: _$$Y.WorkspaceUser,
+  type: EntityType.WorkspaceUser,
   fields: {
     workspaceId: NULL_FIELD_REF,
     isMainWorkspace: NULL_FIELD_REF,
@@ -60915,7 +60915,7 @@ let va = {
   }
 };
 let vs = {
-  type: _$$Y.CommentMessageMeta,
+  type: EntityType.CommentMessageMeta,
   fields: {
     t: NULL_FIELD_REF,
     user: {
@@ -62147,7 +62147,7 @@ let vW = {
   }
 };
 let vK = {
-  type: _$$Y.FeedCommentAttachment,
+  type: EntityType.FeedCommentAttachment,
   fields: {
     id: NULL_FIELD_REF,
     feedCommentId: NULL_FIELD_REF,
@@ -62172,7 +62172,7 @@ let vK = {
   }
 };
 let vY = {
-  type: _$$Y.FeedPost,
+  type: EntityType.FeedPost,
   fields: {
     id: NULL_FIELD_REF,
     publicUuid: NULL_FIELD_REF,
@@ -65160,7 +65160,7 @@ let I3 = {
   }
 };
 let I6 = {
-  type: _$$Y.Project,
+  type: EntityType.Project,
   fields: {
     team: {
       id: NULL_FIELD_REF,
@@ -77486,7 +77486,7 @@ let Tr = {
   }
 };
 let Ta = {
-  type: _$$Y.PlanPermissions,
+  type: EntityType.PlanPermissions,
   fields: {
     id: NULL_FIELD_REF,
     key: {
@@ -78623,7 +78623,7 @@ let TV = {
   }
 };
 let TG = {
-  name: _$$Y.AdminRequestDashboardTotalRowCount,
+  name: EntityType.AdminRequestDashboardTotalRowCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -78639,7 +78639,7 @@ let TG = {
   }]
 };
 let Tz = {
-  name: _$$Y.PersistentLastFrameSelection,
+  name: EntityType.PersistentLastFrameSelection,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -78691,7 +78691,7 @@ let Tz = {
   }]
 };
 let TH = {
-  name: _$$Y.RecentNetworkControlRejection,
+  name: EntityType.RecentNetworkControlRejection,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -78746,17 +78746,17 @@ let TW = [{
   nullable: !0
 }];
 let TK = {
-  name: _$$Y.TeamRoleLog,
+  name: EntityType.TeamRoleLog,
   permissionRequired: !1,
   fields: [...TW]
 };
 let TY = {
-  name: _$$Y.RoleLog,
+  name: EntityType.RoleLog,
   permissionRequired: !1,
   fields: [...TW]
 };
 let Tq = {
-  name: _$$Y.DevModeSuggestedUpgradableUser,
+  name: EntityType.DevModeSuggestedUpgradableUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -78777,7 +78777,7 @@ let Tq = {
     name: 'orgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     filter: {
       and: [['id', '=', createParentRef('id')], ['orgId', '=', createParentRef('planId')]]
@@ -78791,7 +78791,7 @@ let Tq = {
     name: 'privilegedOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     filter: {
       and: [['id', '=', createParentRef('id')], ['orgId', '=', createParentRef('planId')]]
@@ -78801,7 +78801,7 @@ let Tq = {
     name: 'teamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     filter: {
       and: [['id', '=', createParentRef('id')], ['teamId', '=', createParentRef('planId')]]
@@ -78810,7 +78810,7 @@ let Tq = {
   }]
 };
 let T$ = {
-  name: _$$Y.PreloadCodeConnect,
+  name: EntityType.PreloadCodeConnect,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -78839,7 +78839,7 @@ let T$ = {
   }]
 };
 let TZ = {
-  name: _$$Y.LibraryPresetSubscription,
+  name: EntityType.LibraryPresetSubscription,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -78855,7 +78855,7 @@ let TZ = {
     name: 'communityLibrary',
     type: {
       kind: 'object',
-      name: _$$Y.CommunityLibrary
+      name: EntityType.CommunityLibrary
     },
     filter: ['hubFileId', '=', createParentRef('hubFileId')],
     nullable: !0,
@@ -78866,7 +78866,7 @@ let TZ = {
     name: 'libraryOrgSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryOrgSubscription
+      name: EntityType.LibraryOrgSubscription
     },
     args: [{
       name: 'subscribingFileOrgId',
@@ -78883,7 +78883,7 @@ let TZ = {
     name: 'libraryWorkspaceSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryWorkspaceSubscription
+      name: EntityType.LibraryWorkspaceSubscription
     },
     args: [{
       name: 'subscribingFileWorkspaceId',
@@ -78900,7 +78900,7 @@ let TZ = {
     name: 'libraryTeamSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryTeamSubscription
+      name: EntityType.LibraryTeamSubscription
     },
     args: [{
       name: 'subscribingFileTeamId',
@@ -78916,7 +78916,7 @@ let TZ = {
     name: 'libraryUserSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryUserSubscription
+      name: EntityType.LibraryUserSubscription
     },
     args: [{
       name: 'subscribingUserId',
@@ -78933,7 +78933,7 @@ let TZ = {
     name: 'libraryFileSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryFileSubscription
+      name: EntityType.LibraryFileSubscription
     },
     args: [{
       name: 'subscribingFileKey',
@@ -78948,7 +78948,7 @@ let TZ = {
   }]
 };
 let TX = {
-  name: _$$Y.RecentFile2,
+  name: EntityType.RecentFile2,
   permissionRequired: !1,
   naturalKey: new Set(['id', 'userId']),
   fields: [{
@@ -78986,7 +78986,7 @@ let TX = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -79035,7 +79035,7 @@ let TX = {
   }]
 };
 let TQ = {
-  name: _$$Y.DevModeActivityMeta,
+  name: EntityType.DevModeActivityMeta,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -79055,7 +79055,7 @@ let TQ = {
 };
 let TJ = {
   naturalKey: new Set(['fileKey', 'id']),
-  name: _$$Y.DevModeActivity,
+  name: EntityType.DevModeActivity,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -79082,7 +79082,7 @@ let TJ = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
@@ -79100,7 +79100,7 @@ let TJ = {
     name: 'metadata',
     type: {
       kind: 'object',
-      name: _$$Y.DevModeActivityMeta
+      name: EntityType.DevModeActivityMeta
     },
     embedded: !0,
     nullable: !0
@@ -79114,14 +79114,14 @@ let TJ = {
     name: 'version',
     type: {
       kind: 'object',
-      name: _$$Y.FileVersion
+      name: EntityType.FileVersion
     },
     filter: ['id', '=', createParentRef('versionId')],
     nullable: !0
   }]
 };
 let T0 = {
-  name: _$$Y.TermsOfServiceAcceptance,
+  name: EntityType.TermsOfServiceAcceptance,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -79150,7 +79150,7 @@ let T0 = {
   }]
 };
 let T1 = {
-  name: _$$Y.OrgAdminNewEditorsInfo,
+  name: EntityType.OrgAdminNewEditorsInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -79161,7 +79161,7 @@ let T1 = {
     name: 'cutoff',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserFetchNewEditorCutoff
+      name: EntityType.OrgUserFetchNewEditorCutoff
     },
     embedded: !0,
     nullable: !0
@@ -79169,14 +79169,14 @@ let T1 = {
     name: 'buffer',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUserFetchNewEditorBuffer
+      name: EntityType.OrgUserFetchNewEditorBuffer
     },
     embedded: !0,
     nullable: !0
   }]
 };
 let T2 = {
-  name: _$$Y.LibraryPresetSubscriptionV2,
+  name: EntityType.LibraryPresetSubscriptionV2,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -79220,7 +79220,7 @@ let T2 = {
     name: 'communityLibrary',
     type: {
       kind: 'object',
-      name: _$$Y.CommunityLibrary
+      name: EntityType.CommunityLibrary
     },
     filter: ['hubFileId', '=', createParentRef('hubFileId')],
     nullable: !0,
@@ -79231,7 +79231,7 @@ let T2 = {
     name: 'libraryOrgSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryOrgSubscription
+      name: EntityType.LibraryOrgSubscription
     },
     args: [{
       name: 'subscribingFileOrgId',
@@ -79248,7 +79248,7 @@ let T2 = {
     name: 'libraryWorkspaceSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryWorkspaceSubscription
+      name: EntityType.LibraryWorkspaceSubscription
     },
     args: [{
       name: 'subscribingFileWorkspaceId',
@@ -79265,7 +79265,7 @@ let T2 = {
     name: 'libraryTeamSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryTeamSubscription
+      name: EntityType.LibraryTeamSubscription
     },
     args: [{
       name: 'subscribingFileTeamId',
@@ -79281,7 +79281,7 @@ let T2 = {
     name: 'libraryUserSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryUserSubscription
+      name: EntityType.LibraryUserSubscription
     },
     args: [{
       name: 'subscribingUserId',
@@ -79298,7 +79298,7 @@ let T2 = {
     name: 'libraryFileSubscriptionOverride',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryFileSubscription
+      name: EntityType.LibraryFileSubscription
     },
     args: [{
       name: 'subscribingFileKey',
@@ -79333,7 +79333,7 @@ let T2 = {
   }]
 };
 let T5 = {
-  name: _$$Y.ClientReload,
+  name: EntityType.ClientReload,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -79366,7 +79366,7 @@ let T5 = {
   }]
 };
 let T4 = {
-  name: _$$Y.RecentIdleTimeoutSettingChange,
+  name: EntityType.RecentIdleTimeoutSettingChange,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -79395,7 +79395,7 @@ let T3 = [{
   name: 'emptyDeveloperSeat',
   type: {
     kind: 'object',
-    name: _$$Y.EmbeddedSeat
+    name: EntityType.EmbeddedSeat
   },
   nullable: !0,
   embedded: !0
@@ -79403,7 +79403,7 @@ let T3 = [{
   name: 'emptyCollaboratorSeat',
   type: {
     kind: 'object',
-    name: _$$Y.EmbeddedSeat
+    name: EntityType.EmbeddedSeat
   },
   nullable: !0,
   embedded: !0
@@ -79411,7 +79411,7 @@ let T3 = [{
   name: 'emptyExpertSeat',
   type: {
     kind: 'object',
-    name: _$$Y.EmbeddedSeat
+    name: EntityType.EmbeddedSeat
   },
   nullable: !0,
   embedded: !0
@@ -79419,7 +79419,7 @@ let T3 = [{
   name: 'emptyContentSeat',
   type: {
     kind: 'object',
-    name: _$$Y.EmbeddedSeat
+    name: EntityType.EmbeddedSeat
   },
   nullable: !0,
   embedded: !0
@@ -79428,7 +79428,7 @@ let T6 = [{
   name: 'key',
   type: {
     kind: 'object',
-    name: _$$Y.PlanKey
+    name: EntityType.PlanKey
   },
   embedded: !0
 }, {
@@ -79650,7 +79650,7 @@ let T6 = [{
   name: 'termsOfServiceAcceptanceByTermsKey',
   type: {
     kind: 'object',
-    name: _$$Y.TermsOfServiceAcceptance
+    name: EntityType.TermsOfServiceAcceptance
   },
   nullable: !0,
   args: [{
@@ -79679,7 +79679,7 @@ let T6 = [{
   }],
   type: {
     kind: 'objects',
-    name: _$$Y.AssignedBillableProductSeatCount
+    name: EntityType.AssignedBillableProductSeatCount
   },
   resolver: {
     type: 'HTTP',
@@ -79710,7 +79710,7 @@ let T6 = [{
   }],
   type: {
     kind: 'objects',
-    name: _$$Y.AvailableBillableProductSeatCount
+    name: EntityType.AvailableBillableProductSeatCount
   },
   resolver: {
     type: 'HTTP',
@@ -79742,7 +79742,7 @@ let T6 = [{
   }],
   type: {
     kind: 'objects',
-    name: _$$Y.AssignedBillableProductSeatCountV2
+    name: EntityType.AssignedBillableProductSeatCountV2
   },
   resolver: {
     type: 'HTTP',
@@ -79775,7 +79775,7 @@ let T6 = [{
   }],
   type: {
     kind: 'objects',
-    name: _$$Y.AvailableBillableProductSeatCountV2
+    name: EntityType.AvailableBillableProductSeatCountV2
   },
   resolver: {
     type: 'HTTP',
@@ -79796,7 +79796,7 @@ let T6 = [{
   name: 'hostPlanResourceConnections',
   type: {
     kind: 'objects',
-    name: _$$Y.ResourceConnection
+    name: EntityType.ResourceConnection
   },
   nullable: !0,
   filter: {
@@ -79810,7 +79810,7 @@ let T6 = [{
   name: 'monetizationConfig',
   type: {
     kind: 'object',
-    name: _$$Y.MonetizationConfig
+    name: EntityType.MonetizationConfig
   },
   embedded: !0,
   nullable: !0
@@ -79818,7 +79818,7 @@ let T6 = [{
   name: 'connectedPlanResourceConnections',
   type: {
     kind: 'objects',
-    name: _$$Y.ResourceConnection
+    name: EntityType.ResourceConnection
   },
   nullable: !0,
   filter: {
@@ -79832,7 +79832,7 @@ let T6 = [{
   name: 'hostPlanPendingResourceConnectionInvites',
   type: {
     kind: 'objects',
-    name: _$$Y.ResourceConnectionInvite
+    name: EntityType.ResourceConnectionInvite
   },
   nullable: !0,
   filter: {
@@ -79846,7 +79846,7 @@ let T6 = [{
   name: 'connectingPlanPendingResourceConnectionInvites',
   type: {
     kind: 'objects',
-    name: _$$Y.ResourceConnectionInvite
+    name: EntityType.ResourceConnectionInvite
   },
   nullable: !0,
   filter: {
@@ -79861,7 +79861,7 @@ let T6 = [{
   nullable: !0,
   type: {
     kind: 'object',
-    name: _$$Y.PlanSubscription
+    name: EntityType.PlanSubscription
   },
   orderBy: [['createdAt', 'DESC']],
   filter: {
@@ -79904,7 +79904,7 @@ let T6 = [{
   name: 'planConnectionCount',
   type: {
     kind: 'object',
-    name: _$$Y.PlanConnectionCount
+    name: EntityType.PlanConnectionCount
   },
   embedded: !0,
   nullable: !0
@@ -79912,7 +79912,7 @@ let T6 = [{
   name: 'featureFlagFcPlanEnabled',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   resolver: {
@@ -79931,7 +79931,7 @@ let T6 = [{
   name: 'featureFlagBakePlanEnabled',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   resolver: {
@@ -79950,7 +79950,7 @@ let T6 = [{
   name: 'featureFlagBakeMonetizationPlan',
   type: {
     kind: 'object',
-    name: _$$Y.StatsigFeatureGate
+    name: EntityType.StatsigFeatureGate
   },
   nullable: !0,
   resolver: {
@@ -79973,26 +79973,26 @@ let T6 = [{
   nullable: !0
 }];
 let T7 = {
-  name: _$$Y.Plan,
+  name: EntityType.Plan,
   permissionRequired: !1,
   computed: !0,
   fields: [...T6, ...lT]
 };
 let T8 = {
-  name: _$$Y.PlanPermissions,
+  name: EntityType.PlanPermissions,
   permissionRequired: !1,
   computed: !0,
   fields: [...T6, ...T3, ...aq]
 };
 let T9 = {
-  name: _$$Y.PlanPublicInfo,
+  name: EntityType.PlanPublicInfo,
   permissionRequired: !1,
   computed: !0,
   fields: [{
     name: 'key',
     type: {
       kind: 'object',
-      name: _$$Y.PlanKey
+      name: EntityType.PlanKey
     },
     embedded: !0
   }, {
@@ -80015,7 +80015,7 @@ let T9 = {
     name: 'featureFlagFcPlanEnabled',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -80034,7 +80034,7 @@ let T9 = {
     name: 'featureFlagBakePlanEnabled',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -80053,7 +80053,7 @@ let T9 = {
     name: 'featureFlagBakeMonetizationPlan',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -80077,7 +80077,7 @@ let T9 = {
   }]
 };
 let ke = {
-  name: _$$Y.HasConnectedPlanUserInOrgFolder,
+  name: EntityType.HasConnectedPlanUserInOrgFolder,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80093,7 +80093,7 @@ let ke = {
   }]
 };
 let kt = {
-  name: _$$Y.TestPlan,
+  name: EntityType.TestPlan,
   permissionRequired: !1,
   computed: !0,
   fields: [{
@@ -80109,7 +80109,7 @@ let kt = {
   }]
 };
 let ki = {
-  name: _$$Y.TestPlanUser,
+  name: EntityType.TestPlanUser,
   permissionRequired: !1,
   computed: !0,
   fields: [{
@@ -80126,7 +80126,7 @@ let ki = {
     name: 'plan',
     type: {
       kind: 'object',
-      name: _$$Y.TestPlan
+      name: EntityType.TestPlan
     },
     embedded: !0,
     nullable: !0
@@ -80134,7 +80134,7 @@ let ki = {
     name: 'currentUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [],
     filter: ['id', '=', createParentRef('id')]
@@ -80142,7 +80142,7 @@ let ki = {
     name: 'userById',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -80155,7 +80155,7 @@ let ki = {
   }]
 };
 let kn = {
-  name: _$$Y.AbandonedDraftFile,
+  name: EntityType.AbandonedDraftFile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80172,7 +80172,7 @@ let kn = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -80186,7 +80186,7 @@ let kn = {
   }]
 };
 let kr = {
-  name: _$$Y.AbandonedDraftFolder,
+  name: EntityType.AbandonedDraftFolder,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80208,7 +80208,7 @@ let kr = {
     name: 'project',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: {
       and: [['id', '=', createParentRef('projectId')], ['isAbandonedDrafts', '=', !0]]
@@ -80220,7 +80220,7 @@ let kr = {
   }]
 };
 let ka = {
-  name: _$$Y.NotificationExperimentInfo,
+  name: EntityType.NotificationExperimentInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80260,7 +80260,7 @@ let ka = {
   }]
 };
 let ks = {
-  name: _$$Y.LockClient,
+  name: EntityType.LockClient,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80275,7 +80275,7 @@ let ks = {
   }]
 };
 let ko = {
-  name: _$$Y.AssetAttribution,
+  name: EntityType.AssetAttribution,
   computed: !0,
   permissionRequired: !1,
   fields: [{
@@ -80310,21 +80310,21 @@ let ko = {
   }]
 };
 let kl = {
-  name: _$$Y.PlanUser,
+  name: EntityType.PlanUser,
   permissionRequired: !1,
   computed: !0,
   fields: [{
     name: 'key',
     type: {
       kind: 'object',
-      name: _$$Y.PlanUserKey
+      name: EntityType.PlanUserKey
     },
     embedded: !0
   }, {
     name: 'planKey',
     type: {
       kind: 'object',
-      name: _$$Y.PlanKey
+      name: EntityType.PlanKey
     },
     embedded: !0
   }, {
@@ -80406,7 +80406,7 @@ let kl = {
     name: 'draftsProject',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: ['id', '=', createParentRef('draftsFolderId')],
     checkCanRead: {
@@ -80444,7 +80444,7 @@ let kl = {
     name: 'activeSeatTypeUpgrade',
     type: {
       kind: 'object',
-      name: _$$Y.EmbeddedOrgUserUpgrade
+      name: EntityType.EmbeddedOrgUserUpgrade
     },
     nullable: !0,
     embedded: !0
@@ -80452,7 +80452,7 @@ let kl = {
     name: 'licenseGroupAdmins',
     type: {
       kind: 'objects',
-      name: _$$Y.LicenseGroupAdmin
+      name: EntityType.LicenseGroupAdmin
     },
     filter: ['orgUserId', '=', createParentRef('_planUserId')],
     nullable: !0,
@@ -80461,7 +80461,7 @@ let kl = {
     name: 'designAccountTypeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: {
       and: [['requestableUserId', '=', createParentRef('_planUserId')], ['requestableUserType', '=', createParentRef('_planUserTypeCamelCase')], ['_editorTypeRaw', '=', 0]]
@@ -80471,7 +80471,7 @@ let kl = {
     name: 'whiteboardAccountTypeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: {
       and: [['requestableUserId', '=', createParentRef('_planUserId')], ['requestableUserType', '=', createParentRef('_planUserTypeCamelCase')], ['_editorTypeRaw', '=', 1]]
@@ -80481,7 +80481,7 @@ let kl = {
     name: 'devModeAccountTypeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: {
       and: [['requestableUserId', '=', createParentRef('_planUserId')], ['requestableUserType', '=', createParentRef('_planUserTypeCamelCase')], ['_editorTypeRaw', '=', 2]]
@@ -80508,7 +80508,7 @@ let kl = {
     name: 'pendingAccountTypeRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     nullable: !0,
     filter: {
@@ -80518,7 +80518,7 @@ let kl = {
     name: 'latestProvisionalAccess',
     type: {
       kind: 'object',
-      name: _$$Y.ProvisionalAccess
+      name: EntityType.ProvisionalAccess
     },
     orderBy: [['endsAt', 'DESC']],
     filter: {
@@ -80546,7 +80546,7 @@ let kl = {
     name: 'fromOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.PrivilegedOrgUser
+      name: EntityType.PrivilegedOrgUser
     },
     filter: {
       and: [['userId', '=', createParentRef('userId')], ['orgId', '=', createParentRef('_orgId')]]
@@ -80576,7 +80576,7 @@ let kl = {
     name: 'currentSeat',
     type: {
       kind: 'object',
-      name: _$$Y.Seat
+      name: EntityType.Seat
     },
     filter: {
       and: [['currentPlanUserId', '=', createParentRef('_planUserId')], ['currentPlanUserType', '=', createParentRef('_planUserTypeCamelCase')], ['deprovisionedAt', '=', null]]
@@ -80595,7 +80595,7 @@ let kl = {
   }]
 };
 let kd = {
-  name: _$$Y.EmbeddedOrgUserUpgrade,
+  name: EntityType.EmbeddedOrgUserUpgrade,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -80638,7 +80638,7 @@ let kd = {
     name: 'billableProduct',
     type: {
       kind: 'object',
-      name: _$$Y.EmbeddedBillableProduct
+      name: EntityType.EmbeddedBillableProduct
     },
     embedded: !0,
     nullable: !0
@@ -80652,7 +80652,7 @@ let kd = {
   }]
 };
 let kc = {
-  name: _$$Y.EmbeddedBillableProduct,
+  name: EntityType.EmbeddedBillableProduct,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -80668,7 +80668,7 @@ let kc = {
   }]
 };
 let ku = {
-  name: _$$Y.DesktopPushNotificationMessage,
+  name: EntityType.DesktopPushNotificationMessage,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -80698,7 +80698,7 @@ let ku = {
   }]
 };
 let kp = {
-  name: _$$Y.DesktopPushNotification,
+  name: EntityType.DesktopPushNotification,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80731,13 +80731,13 @@ let kp = {
     name: 'message',
     type: {
       kind: 'object',
-      name: _$$Y.DesktopPushNotificationMessage
+      name: EntityType.DesktopPushNotificationMessage
     },
     embedded: !0
   }]
 };
 let km = {
-  name: _$$Y.BillableProduct,
+  name: EntityType.BillableProduct,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80763,7 +80763,7 @@ let km = {
   }]
 };
 let kh = {
-  name: _$$Y.TeamUserUpgrade,
+  name: EntityType.TeamUserUpgrade,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80841,7 +80841,7 @@ let kh = {
     name: 'actor',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('actorId')]
@@ -80878,7 +80878,7 @@ let kh = {
   }]
 };
 let kg = {
-  name: _$$Y.AssetTransferReload,
+  name: EntityType.AssetTransferReload,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80911,7 +80911,7 @@ let kg = {
   }]
 };
 let kf = {
-  name: _$$Y.DomainOrgAdminToRemove,
+  name: EntityType.DomainOrgAdminToRemove,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -80929,7 +80929,7 @@ let kf = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0
@@ -80955,7 +80955,7 @@ let k_ = [{
   name: 'template',
   type: {
     kind: 'object',
-    name: _$$Y.Template
+    name: EntityType.Template
   },
   filter: ['id', '=', createParentRef('id')],
   checkCanRead: {
@@ -80968,7 +80968,7 @@ let k_ = [{
   name: 'file',
   type: {
     kind: 'object',
-    name: _$$Y.File
+    name: EntityType.File
   },
   bannedFromViews: !0,
   filter: ['key', '=', createParentRef('fileKey')],
@@ -80983,13 +80983,13 @@ let k_ = [{
   name: 'libraryKeyToFile',
   type: {
     kind: 'object',
-    name: _$$Y.LibraryKeyToFile
+    name: EntityType.LibraryKeyToFile
   },
   filter: ['fileKey', '=', createParentRef('fileKey')],
   nullable: !0
 }];
 let kA = {
-  name: _$$Y.TeamTemplateResult,
+  name: EntityType.TeamTemplateResult,
   permissionRequired: !1,
   fields: [...k_, {
     name: 'totalTemplatesByTeam',
@@ -81005,7 +81005,7 @@ let kA = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: ['id', '=', createParentRef('teamId')],
     checkCanRead: {
@@ -81016,7 +81016,7 @@ let kA = {
     name: 'teamLimitedInfo',
     type: {
       kind: 'object',
-      name: _$$Y.TeamLimitedInfo
+      name: EntityType.TeamLimitedInfo
     },
     filter: ['id', '=', createParentRef('teamId')],
     checkCanRead: {
@@ -81026,7 +81026,7 @@ let kA = {
   }]
 };
 let ky = {
-  name: _$$Y.CommunityBlock,
+  name: EntityType.CommunityBlock,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -81061,7 +81061,7 @@ let ky = {
   }]
 };
 let kb = {
-  name: _$$Y.OrgMfaGuestInfo,
+  name: EntityType.OrgMfaGuestInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -81081,7 +81081,7 @@ let kb = {
   }]
 };
 let kv = {
-  name: _$$Y.OrgMfaMemberInfo,
+  name: EntityType.OrgMfaMemberInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -81101,7 +81101,7 @@ let kv = {
   }]
 };
 let kI = {
-  name: _$$Y.PlanSubscription,
+  name: EntityType.PlanSubscription,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -81150,7 +81150,7 @@ let kI = {
   }]
 };
 let kE = {
-  name: _$$Y.BillingRemodelEnabledExperiment,
+  name: EntityType.BillingRemodelEnabledExperiment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -81166,7 +81166,7 @@ let kE = {
   }]
 };
 let kx = {
-  name: _$$Y.FilePreviewFragments,
+  name: EntityType.FilePreviewFragments,
   permissionRequired: !1,
   naturalKey: new Set(['fileKey']),
   fields: [{
@@ -81201,18 +81201,18 @@ let kx = {
   }]
 };
 let kS = {
-  name: _$$Y.PlanRecordPublicInfo,
+  name: EntityType.PlanRecordPublicInfo,
   permissionRequired: !1,
   fields: [...dy, ...db]
 };
 let kw = {
-  name: _$$Y.PlanRecord,
+  name: EntityType.PlanRecord,
   permissionRequired: !1,
   fields: [...dy, ...db, {
     name: 'currentPlanUserRecord',
     type: {
       kind: 'object',
-      name: _$$Y.PlanUserRecord
+      name: EntityType.PlanUserRecord
     },
     args: [{
       name: 'userId',
@@ -81816,7 +81816,7 @@ let kw = {
     name: 'featureFlagFcPlanEnabled',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -81836,7 +81836,7 @@ let kw = {
     name: 'featureFlagBakePlanEnabled',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -81856,7 +81856,7 @@ let kw = {
     name: 'featureFlagBakeMonetizationPlan',
     type: {
       kind: 'object',
-      name: _$$Y.StatsigFeatureGate
+      name: EntityType.StatsigFeatureGate
     },
     nullable: !0,
     resolver: {
@@ -81920,13 +81920,13 @@ let kw = {
   }]
 };
 let kC = {
-  name: _$$Y.OrgPlanRecord,
+  name: EntityType.OrgPlanRecord,
   permissionRequired: !1,
   fields: [...dy, {
     name: '_org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('planParentId')],
     nullable: !0,
@@ -81934,13 +81934,13 @@ let kC = {
   }]
 };
 let kT = {
-  name: _$$Y.TeamPlanRecord,
+  name: EntityType.TeamPlanRecord,
   permissionRequired: !1,
   fields: [...dy, {
     name: '_team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('planParentId')], ['orgId', '=', null]]
@@ -81984,7 +81984,7 @@ let kk = [{
   }
 }];
 let kR = {
-  name: _$$Y.PlanUserRecord,
+  name: EntityType.PlanUserRecord,
   permissionRequired: !1,
   fields: [...kk, {
     name: 'createdAt',
@@ -82000,7 +82000,7 @@ let kR = {
     name: 'planRecord',
     type: {
       kind: 'object',
-      name: _$$Y.PlanRecord
+      name: EntityType.PlanRecord
     },
     filter: ['id', '=', createParentRef('planId')],
     checkCanRead: {
@@ -82032,7 +82032,7 @@ let kR = {
     name: '_orgPlanUserRecord',
     type: {
       kind: 'object',
-      name: _$$Y.OrgPlanUserRecord
+      name: EntityType.OrgPlanUserRecord
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -82043,7 +82043,7 @@ let kR = {
     name: '_teamPlanUserRecord',
     type: {
       kind: 'object',
-      name: _$$Y.TeamPlanUserRecord
+      name: EntityType.TeamPlanUserRecord
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -82378,13 +82378,13 @@ let kR = {
   }]
 };
 let kN = {
-  name: _$$Y.OrgPlanUserRecord,
+  name: EntityType.OrgPlanUserRecord,
   permissionRequired: !1,
   fields: [...kk, {
     name: '_orgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     nullable: !0,
     filter: {
@@ -82395,7 +82395,7 @@ let kN = {
     name: '_org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     filter: ['id', '=', createParentRef('planParentId')],
     nullable: !0,
@@ -82403,13 +82403,13 @@ let kN = {
   }]
 };
 let kP = {
-  name: _$$Y.TeamPlanUserRecord,
+  name: EntityType.TeamPlanUserRecord,
   permissionRequired: !1,
   fields: [...kk, {
     name: '_teamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     nullable: !0,
     filter: {
@@ -82420,7 +82420,7 @@ let kP = {
     name: '_team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('planParentId')], ['orgId', '=', null]]
@@ -82430,7 +82430,7 @@ let kP = {
   }]
 };
 let kO = {
-  name: _$$Y.FileViewHistory,
+  name: EntityType.FileViewHistory,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -82448,7 +82448,7 @@ let kO = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     checkCanRead: {
@@ -82463,7 +82463,7 @@ let kO = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }, {
@@ -82513,7 +82513,7 @@ let kO = {
   }]
 };
 let kD = {
-  name: _$$Y.TeamTemplateSearchResult,
+  name: EntityType.TeamTemplateSearchResult,
   permissionRequired: !1,
   fields: [...k_, {
     name: 'totalSearchResults',
@@ -82523,7 +82523,7 @@ let kD = {
   }]
 };
 let kL = {
-  name: _$$Y.MemberFlyoutInfo,
+  name: EntityType.MemberFlyoutInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -82547,7 +82547,7 @@ let kL = {
     name: 'orgUser',
     type: {
       kind: 'object',
-      name: _$$Y.BaseOrgUser
+      name: EntityType.BaseOrgUser
     },
     filter: ['id', '=', createParentRef('orgUserId')],
     nullable: !0
@@ -82555,14 +82555,14 @@ let kL = {
     name: 'teamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     filter: ['id', '=', createParentRef('teamUserId')],
     nullable: !0
   }]
 };
 let kF = {
-  name: _$$Y.ActionsHistory,
+  name: EntityType.ActionsHistory,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -82578,7 +82578,7 @@ let kF = {
     name: 'recentlyUsedActions',
     type: {
       kind: 'objects',
-      name: _$$Y.QuickActionsRecentCommandSelectedArgs
+      name: EntityType.QuickActionsRecentCommandSelectedArgs
     },
     nullable: !0,
     embedded: !0
@@ -82601,7 +82601,7 @@ let kF = {
   }]
 };
 let kM = {
-  name: _$$Y.QuickActionsRecentCommandSelectedArgs,
+  name: EntityType.QuickActionsRecentCommandSelectedArgs,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -82613,7 +82613,7 @@ let kM = {
     name: 'selectedRunPluginArgs',
     type: {
       kind: 'object',
-      name: _$$Y.SelectedRunPluginArgs
+      name: EntityType.SelectedRunPluginArgs
     },
     nullable: !0,
     embedded: !0
@@ -82621,14 +82621,14 @@ let kM = {
     name: 'extensionInfo',
     type: {
       kind: 'object',
-      name: _$$Y.ExtensionInfo
+      name: EntityType.ExtensionInfo
     },
     nullable: !0,
     embedded: !0
   }]
 };
 let kj = {
-  name: _$$Y.SelectedRunPluginArgs,
+  name: EntityType.SelectedRunPluginArgs,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -82660,7 +82660,7 @@ let kj = {
   }]
 };
 let kU = {
-  name: _$$Y.ExtensionInfo,
+  name: EntityType.ExtensionInfo,
   embedded: !0,
   permissionRequired: !1,
   fields: [{
@@ -82688,7 +82688,7 @@ let kU = {
   }]
 };
 let kB = {
-  name: _$$Y.StatsigFeatureGate,
+  name: EntityType.StatsigFeatureGate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -82724,7 +82724,7 @@ let kG = {
   }]
 };
 let kz = {
-  name: _$$Y.ResourceConnection,
+  name: EntityType.ResourceConnection,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -82750,7 +82750,7 @@ let kz = {
     name: 'projectLimitedInfo',
     type: {
       kind: 'object',
-      name: _$$Y.ProjectLimitedInfo
+      name: EntityType.ProjectLimitedInfo
     },
     filter: ['id', '=', createParentRef('resourceId')],
     checkCanRead: {
@@ -82772,7 +82772,7 @@ let kz = {
     name: '_hostOrg',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -82781,7 +82781,7 @@ let kz = {
     name: '_hostTeam',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -82831,7 +82831,7 @@ let kz = {
     name: '_connectedOrg',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -82840,7 +82840,7 @@ let kz = {
     name: '_connectedTeam',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -82923,7 +82923,7 @@ let kz = {
     name: '_connectedOrgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     args: [{
       name: 'userId',
@@ -82941,7 +82941,7 @@ let kz = {
     name: '_connectedTeamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     args: [{
       name: 'userId',
@@ -82959,7 +82959,7 @@ let kz = {
     name: 'resourceConnectedUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnectedUser
+      name: EntityType.ResourceConnectedUser
     },
     args: [{
       name: 'userId',
@@ -82977,7 +82977,7 @@ let kz = {
     name: 'allResourceConnectedUsers',
     type: {
       kind: 'objects',
-      name: _$$Y.ResourceConnectedUser
+      name: EntityType.ResourceConnectedUser
     },
     filter: ['resourceConnectionId', '=', createParentRef('id')],
     expectedMaxCount: 200,
@@ -82986,7 +82986,7 @@ let kz = {
     name: 'resourceConnectionInvite',
     type: {
       kind: 'object',
-      name: _$$Y.ResourceConnectionInvite
+      name: EntityType.ResourceConnectionInvite
     },
     nullable: !0,
     filter: ['resourceConnectionId', '=', createParentRef('id')]
@@ -83019,7 +83019,7 @@ let kz = {
     name: '_disconnectedByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('disconnectedBy')],
     nullable: !0,
@@ -83056,7 +83056,7 @@ let kz = {
     name: 'sharingGroups',
     type: {
       kind: 'objects',
-      name: _$$Y.SharingGroup
+      name: EntityType.SharingGroup
     },
     nullable: !0,
     filter: {
@@ -83070,7 +83070,7 @@ let kz = {
     name: 'project',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     filter: ['id', '=', createParentRef('resourceId')],
     bannedFromViews: !0,
@@ -83109,7 +83109,7 @@ let kz = {
     name: 'assetTransferRequest',
     type: {
       kind: 'object',
-      name: _$$Y.AssetTransferRequest
+      name: EntityType.AssetTransferRequest
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('assetTransferRequestId')],
@@ -83180,7 +83180,7 @@ let kW = {
   }]
 };
 let kK = {
-  name: _$$Y.ResourceConnectionInvite,
+  name: EntityType.ResourceConnectionInvite,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -83202,7 +83202,7 @@ let kK = {
     name: '_hostOrg',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -83211,7 +83211,7 @@ let kK = {
     name: '_hostTeam',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -83291,7 +83291,7 @@ let kK = {
     name: '_connectingOrg',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -83300,7 +83300,7 @@ let kK = {
     name: '_connectingTeam',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -83319,7 +83319,7 @@ let kK = {
     name: 'projectLimitedInfo',
     type: {
       kind: 'object',
-      name: _$$Y.ProjectLimitedInfo
+      name: EntityType.ProjectLimitedInfo
     },
     filter: ['id', '=', createParentRef('resourceId')],
     checkCanRead: {
@@ -83397,7 +83397,7 @@ let kK = {
     name: '_hostInviter',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('hostInviterId')],
     nullable: !0,
@@ -83406,7 +83406,7 @@ let kK = {
     name: 'hostInviterPublic',
     type: {
       kind: 'object',
-      name: _$$Y.UserPublic
+      name: EntityType.UserPublic
     },
     filter: ['id', '=', createParentRef('hostInviterId')],
     nullable: !0
@@ -83414,7 +83414,7 @@ let kK = {
     name: '_handledByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('handledBy')],
     nullable: !0,
@@ -83465,7 +83465,7 @@ let kK = {
   }]
 };
 let kY = {
-  name: _$$Y.ResourceConnectedUser,
+  name: EntityType.ResourceConnectedUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -83485,7 +83485,7 @@ let kY = {
   }]
 };
 let kq = {
-  name: _$$Y.ResourceConnectedUserWithPlan,
+  name: EntityType.ResourceConnectedUserWithPlan,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -83501,7 +83501,7 @@ let kq = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0
@@ -83538,7 +83538,7 @@ let kq = {
   }]
 };
 let k$ = {
-  name: _$$Y.SharingGroup,
+  name: EntityType.SharingGroup,
   permissionRequired: !0,
   fields: [{
     name: 'level',
@@ -83574,7 +83574,7 @@ let k$ = {
     name: 'resourceConnection',
     type: {
       kind: 'object',
-      name: _$$Y.ResourceConnection
+      name: EntityType.ResourceConnection
     },
     filter: ['id', '=', createParentRef('groupId')],
     nullable: !0,
@@ -83586,7 +83586,7 @@ let k$ = {
     name: 'libraryKeyToFile',
     type: {
       kind: 'object',
-      name: _$$Y.LibraryKeyToFile
+      name: EntityType.LibraryKeyToFile
     },
     filter: ['fileKey', '=', createParentRef('resourceId')],
     nullable: !0,
@@ -83628,7 +83628,7 @@ let k$ = {
   }]
 };
 let kZ = {
-  name: _$$Y.FileCompositeSharingGroup,
+  name: EntityType.FileCompositeSharingGroup,
   permissionRequired: !1,
   computed: !0,
   fields: [{
@@ -83655,7 +83655,7 @@ let kZ = {
   }]
 };
 let kX = {
-  name: _$$Y.ResourceConnectionSharingGroupUser,
+  name: EntityType.ResourceConnectionSharingGroupUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -83671,7 +83671,7 @@ let kX = {
     name: 'userPublic',
     type: {
       kind: 'object',
-      name: _$$Y.UserPublic
+      name: EntityType.UserPublic
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0
@@ -83718,7 +83718,7 @@ let kX = {
   }]
 };
 let kQ = {
-  name: _$$Y.ExpSlidesStarterTeamLimits,
+  name: EntityType.ExpSlidesStarterTeamLimits,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -83764,7 +83764,7 @@ let kQ = {
   }]
 };
 let kJ = {
-  name: _$$Y.ExpStarterGlobalFileLimitOnTeam,
+  name: EntityType.ExpStarterGlobalFileLimitOnTeam,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -83786,7 +83786,7 @@ let kJ = {
   }]
 };
 let k0 = {
-  name: _$$Y.GraftingUpdateSloData,
+  name: EntityType.GraftingUpdateSloData,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -83811,7 +83811,7 @@ let k0 = {
   }]
 };
 let k1 = {
-  name: _$$Y.LitmusProject,
+  name: EntityType.LitmusProject,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -83844,7 +83844,7 @@ let k1 = {
     name: 'githubRepository',
     type: {
       kind: 'object',
-      name: _$$Y.GithubRepository
+      name: EntityType.GithubRepository
     },
     filter: ['id', '=', createParentRef('githubRepositoryId')],
     expectedMaxCount: 1,
@@ -83858,7 +83858,7 @@ let k1 = {
     name: 'comparisons',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparison
+      name: EntityType.LitmusComparison
     },
     filter: ['litmusProjectId', '=', createParentRef('id')],
     orderBy: [['createdAt', 'DESC']],
@@ -83870,7 +83870,7 @@ let k1 = {
     name: 'activeComparisons',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparison
+      name: EntityType.LitmusComparison
     },
     filter: {
       and: [['litmusProjectId', '=', createParentRef('id')], ['archivedAt', '=', null]]
@@ -83884,7 +83884,7 @@ let k1 = {
     name: 'builds',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusBuild
+      name: EntityType.LitmusBuild
     },
     filter: ['litmusProjectId', '=', createParentRef('id')],
     orderBy: [['createdAt', 'DESC']],
@@ -83893,7 +83893,7 @@ let k1 = {
     name: 'currentUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -83908,7 +83908,7 @@ let k1 = {
     name: '_orgUser',
     type: {
       kind: 'object',
-      name: _$$Y.OrgUser
+      name: EntityType.OrgUser
     },
     args: [{
       name: 'userId',
@@ -83926,7 +83926,7 @@ let k1 = {
     name: '_teamUser',
     type: {
       kind: 'object',
-      name: _$$Y.TeamUser
+      name: EntityType.TeamUser
     },
     args: [{
       name: 'userId',
@@ -83944,7 +83944,7 @@ let k1 = {
     name: '_org',
     type: {
       kind: 'object',
-      name: _$$Y.Org
+      name: EntityType.Org
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -83953,7 +83953,7 @@ let k1 = {
     name: '_team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     nullable: !0,
     bannedFromViews: !0,
@@ -83961,7 +83961,7 @@ let k1 = {
   }, l4, l_, ae, at]
 };
 let k2 = {
-  name: _$$Y.LitmusComparison,
+  name: EntityType.LitmusComparison,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -84026,7 +84026,7 @@ let k2 = {
     name: 'litmusProject',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusProject
+      name: EntityType.LitmusProject
     },
     filter: ['id', '=', createParentRef('litmusProjectId')],
     checkCanRead: {
@@ -84038,21 +84038,21 @@ let k2 = {
     name: 'baseBuild',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusBuild
+      name: EntityType.LitmusBuild
     },
     filter: ['id', '=', createParentRef('baseBuildId')]
   }, {
     name: 'headBuild',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusBuild
+      name: EntityType.LitmusBuild
     },
     filter: ['id', '=', createParentRef('headBuildId')]
   }, {
     name: 'results',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparisonResult
+      name: EntityType.LitmusComparisonResult
     },
     filter: ['litmusComparisonId', '=', createParentRef('id')],
     deprecated: {
@@ -84064,7 +84064,7 @@ let k2 = {
     name: 'artifacts',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparisonArtifact
+      name: EntityType.LitmusComparisonArtifact
     },
     filter: ['litmusComparisonId', '=', createParentRef('id')],
     expectedMaxCount: 1e3
@@ -84072,7 +84072,7 @@ let k2 = {
     name: 'artifact',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusComparisonArtifact
+      name: EntityType.LitmusComparisonArtifact
     },
     args: [{
       name: 'id',
@@ -84088,7 +84088,7 @@ let k2 = {
     name: 'result',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusComparisonResult
+      name: EntityType.LitmusComparisonResult
     },
     deprecated: {
       reason: 'Replaced by artifact',
@@ -84177,7 +84177,7 @@ let k2 = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparisonResult
+      name: EntityType.LitmusComparisonResult
     },
     filter: {
       and: [['litmusComparisonId', '=', createParentRef('id')], ['status', '=', createFieldRef('status')]]
@@ -84193,7 +84193,7 @@ let k2 = {
     name: 'pr',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusPullRequest
+      name: EntityType.LitmusPullRequest
     },
     filter: ['id', '=', createParentRef('litmusPullRequestId')],
     nullable: !0
@@ -84251,7 +84251,7 @@ let k2 = {
     name: 'comments',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComment
+      name: EntityType.LitmusComment
     },
     orderBy: [['createdAt', 'ASC']],
     expectedMaxCount: 1e3,
@@ -84283,7 +84283,7 @@ let k2 = {
   }]
 };
 let k5 = {
-  name: _$$Y.LitmusComparisonResult,
+  name: EntityType.LitmusComparisonResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -84333,7 +84333,7 @@ let k5 = {
     name: 'baseVariant',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusArtifactVariant
+      name: EntityType.LitmusArtifactVariant
     },
     filter: ['id', '=', createParentRef('baseVariantId')],
     expectedMaxCount: 1,
@@ -84342,7 +84342,7 @@ let k5 = {
     name: 'headVariant',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusArtifactVariant
+      name: EntityType.LitmusArtifactVariant
     },
     filter: ['id', '=', createParentRef('headVariantId')],
     expectedMaxCount: 1,
@@ -84371,7 +84371,7 @@ let k5 = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparisonResult
+      name: EntityType.LitmusComparisonResult
     },
     filter: {
       and: [['headArtifactId', '=', createParentRef('headArtifactId')], ['id', '<>', createParentRef('id')], ['status', '=', createFieldRef('status')]]
@@ -84381,7 +84381,7 @@ let k5 = {
     name: 'difference',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusDifference
+      name: EntityType.LitmusDifference
     },
     filter: ['id', '=', createParentRef('litmusDifferenceId')],
     nullable: !0,
@@ -84389,7 +84389,7 @@ let k5 = {
   }]
 };
 let k4 = {
-  name: _$$Y.LitmusComparisonReview,
+  name: EntityType.LitmusComparisonReview,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -84426,13 +84426,13 @@ let k4 = {
     name: 'reviewer',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('reviewerId')]
   }]
 };
 let k3 = {
-  name: _$$Y.LitmusArtifact,
+  name: EntityType.LitmusArtifact,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -84472,7 +84472,7 @@ let k3 = {
     name: 'variants',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusArtifactVariant
+      name: EntityType.LitmusArtifactVariant
     },
     filter: {
       and: [['litmusProjectId', '=', createParentRef('litmusProjectId')], ['litmusArtifactId', '=', createParentRef('id')]]
@@ -84482,7 +84482,7 @@ let k3 = {
     name: 'designConnections',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusDesignConnection
+      name: EntityType.LitmusDesignConnection
     },
     filter: {
       and: [['litmusProjectId', '=', createParentRef('litmusProjectId')], ['path', '=', createParentRef('path')]]
@@ -84492,7 +84492,7 @@ let k3 = {
   }]
 };
 let k6 = {
-  name: _$$Y.LitmusArtifactVariant,
+  name: EntityType.LitmusArtifactVariant,
   permissionRequired: !1,
   fields: [{
     name: 'litmusProjectId',
@@ -84539,7 +84539,7 @@ let k6 = {
     name: 'artifact',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusArtifact
+      name: EntityType.LitmusArtifact
     },
     filter: {
       and: [['litmusProjectId', '=', createParentRef('litmusProjectId')], ['id', '=', createParentRef('litmusArtifactId')]]
@@ -84558,7 +84558,7 @@ let k6 = {
   }]
 };
 let k7 = {
-  name: _$$Y.LitmusBuild,
+  name: EntityType.LitmusBuild,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -84610,7 +84610,7 @@ let k7 = {
     name: 'buildResult',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusBuildResult
+      name: EntityType.LitmusBuildResult
     },
     filter: {
       and: [['litmusProjectId', '=', createParentRef('litmusProjectId')], ['id', '=', createParentRef('litmusBuildResultId')]]
@@ -84618,7 +84618,7 @@ let k7 = {
   }]
 };
 let k8 = {
-  name: _$$Y.LitmusPullRequest,
+  name: EntityType.LitmusPullRequest,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -84684,7 +84684,7 @@ let k8 = {
   }]
 };
 let k9 = {
-  name: _$$Y.LitmusComment,
+  name: EntityType.LitmusComment,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -84718,14 +84718,14 @@ let k9 = {
     name: 'messageMeta',
     type: {
       kind: 'objects',
-      name: _$$Y.CommentMessageMeta
+      name: EntityType.CommentMessageMeta
     },
     embedded: !0
   }, {
     name: 'clientMeta',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusCommentClientMeta
+      name: EntityType.LitmusCommentClientMeta
     },
     embedded: !0
   }, {
@@ -84760,7 +84760,7 @@ let k9 = {
     name: 'parent',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusComment
+      name: EntityType.LitmusComment
     },
     filter: ['id', '=', createParentRef('parentId')],
     nullable: !0
@@ -84768,13 +84768,13 @@ let k9 = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')]
   }]
 };
 let Re = {
-  name: _$$Y.LitmusCommentClientMeta,
+  name: EntityType.LitmusCommentClientMeta,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -84801,7 +84801,7 @@ let Re = {
   }]
 };
 let Rt = {
-  name: _$$Y.GithubRepository,
+  name: EntityType.GithubRepository,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -84821,7 +84821,7 @@ let Rt = {
   }]
 };
 let Ri = {
-  name: _$$Y.FontFile,
+  name: EntityType.FontFile,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -84867,7 +84867,7 @@ let Ri = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     nullable: !0,
@@ -84958,7 +84958,7 @@ let Ri = {
     name: 'variationAxes',
     type: {
       kind: 'objects',
-      name: _$$Y.VariationAxis
+      name: EntityType.VariationAxis
     },
     nullable: !0,
     embedded: !0,
@@ -84967,7 +84967,7 @@ let Ri = {
     name: 'variationInstances',
     type: {
       kind: 'objects',
-      name: _$$Y.VariationInstance
+      name: EntityType.VariationInstance
     },
     nullable: !0,
     embedded: !0,
@@ -85017,7 +85017,7 @@ let Ri = {
   }]
 };
 let Rn = {
-  name: _$$Y.VariationAxis,
+  name: EntityType.VariationAxis,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -85050,7 +85050,7 @@ let Rn = {
   }]
 };
 let Rr = {
-  name: _$$Y.VariationInstance,
+  name: EntityType.VariationInstance,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -85075,7 +85075,7 @@ let Rr = {
   }]
 };
 let Ra = {
-  name: _$$Y.AssetForPublish,
+  name: EntityType.AssetForPublish,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -85101,7 +85101,7 @@ let Ra = {
   }]
 };
 let Rs = {
-  name: _$$Y.CollectionFieldSchema,
+  name: EntityType.CollectionFieldSchema,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85165,7 +85165,7 @@ let Rs = {
   }]
 };
 let Ro = {
-  name: _$$Y.CollectionItemField,
+  name: EntityType.CollectionItemField,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85192,7 +85192,7 @@ let Ro = {
     name: 'assetsForPublish',
     type: {
       kind: 'objects',
-      name: _$$Y.AssetForPublish
+      name: EntityType.AssetForPublish
     },
     embedded: !0,
     nullable: !0
@@ -85215,13 +85215,13 @@ let Ro = {
     name: 'fieldSchema',
     type: {
       kind: 'object',
-      name: _$$Y.CollectionFieldSchema
+      name: EntityType.CollectionFieldSchema
     },
     filter: ['id', '=', createParentRef('fieldSchemaId')]
   }]
 };
 let Rl = {
-  name: _$$Y.CollectionItemV2,
+  name: EntityType.CollectionItemV2,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85276,7 +85276,7 @@ let Rl = {
     name: 'fields',
     type: {
       kind: 'objects',
-      name: _$$Y.CollectionItemField
+      name: EntityType.CollectionItemField
     },
     filter: ['itemId', '=', createParentRef('id')],
     nullable: !0,
@@ -85289,14 +85289,14 @@ let Rl = {
     name: 'allFields',
     type: {
       kind: 'objects',
-      name: _$$Y.CollectionItemField
+      name: EntityType.CollectionItemField
     },
     filter: ['itemId', '=', createParentRef('id')],
     expectedMaxCount: 100
   }]
 };
 let Rd = {
-  name: _$$Y.CollectionV2,
+  name: EntityType.CollectionV2,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85345,7 +85345,7 @@ let Rd = {
     name: 'fieldSchemas',
     type: {
       kind: 'objects',
-      name: _$$Y.CollectionFieldSchema
+      name: EntityType.CollectionFieldSchema
     },
     filter: ['collectionId', '=', createParentRef('id')],
     nullable: !0,
@@ -85354,7 +85354,7 @@ let Rd = {
     name: 'items',
     type: {
       kind: 'objects',
-      name: _$$Y.CollectionItemV2
+      name: EntityType.CollectionItemV2
     },
     filter: ['collectionId', '=', createParentRef('id')],
     expectedMaxCount: 200,
@@ -85369,7 +85369,7 @@ let Rd = {
     }],
     type: {
       kind: 'object',
-      name: _$$Y.CollectionItemV2
+      name: EntityType.CollectionItemV2
     },
     filter: {
       and: [['collectionId', '=', createParentRef('id')], ['stableId', '=', createFieldRef('itemStableId')]]
@@ -85390,7 +85390,7 @@ let Rd = {
   }]
 };
 let Rc = {
-  name: _$$Y.AssignedBillableProductSeatCount,
+  name: EntityType.AssignedBillableProductSeatCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85411,7 +85411,7 @@ let Rc = {
   }]
 };
 let Ru = {
-  name: _$$Y.AvailableBillableProductSeatCount,
+  name: EntityType.AvailableBillableProductSeatCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85432,7 +85432,7 @@ let Ru = {
   }]
 };
 let Rp = {
-  name: _$$Y.AssignedBillableProductSeatCountV2,
+  name: EntityType.AssignedBillableProductSeatCountV2,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85460,7 +85460,7 @@ let Rp = {
   }]
 };
 let Rm = {
-  name: _$$Y.AvailableBillableProductSeatCountV2,
+  name: EntityType.AvailableBillableProductSeatCountV2,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85488,7 +85488,7 @@ let Rm = {
   }]
 };
 let Rh = {
-  name: _$$Y.LicenseGroupAssignedBillableProductSeatCount,
+  name: EntityType.LicenseGroupAssignedBillableProductSeatCount,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85509,7 +85509,7 @@ let Rh = {
   }]
 };
 let Rg = {
-  name: _$$Y.FileCmsCollection,
+  name: EntityType.FileCmsCollection,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -85540,7 +85540,7 @@ let Rg = {
     name: 'collectionV2',
     type: {
       kind: 'object',
-      name: _$$Y.CollectionV2
+      name: EntityType.CollectionV2
     },
     filter: ['id', '=', createParentRef('collectionId')],
     nullable: !0,
@@ -85549,7 +85549,7 @@ let Rg = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['key', '=', createParentRef('fileKey')],
     checkCanRead: {
@@ -85595,7 +85595,7 @@ let Rg = {
   }]
 };
 let Rf = {
-  name: _$$Y.TrashedResource,
+  name: EntityType.TrashedResource,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85615,7 +85615,7 @@ let Rf = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: {
       and: [['_id', '=', createParentRef('fileId')], ['_id', '<>', null], ['fileRepoId', '=', null]]
@@ -85639,7 +85639,7 @@ let Rf = {
     name: 'repo',
     type: {
       kind: 'object',
-      name: _$$Y.Repo
+      name: EntityType.Repo
     },
     filter: {
       and: [['id', '=', createParentRef('repoId')], ['id', '<>', null]]
@@ -85653,7 +85653,7 @@ let Rf = {
   }]
 };
 let R_ = {
-  name: _$$Y.LitmusBuildResult,
+  name: EntityType.LitmusBuildResult,
   permissionRequired: !1,
   fields: [{
     name: 'litmusProjectId',
@@ -85681,7 +85681,7 @@ let R_ = {
     name: 'artifacts',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusArtifact
+      name: EntityType.LitmusArtifact
     },
     filter: {
       and: [['litmusProjectId', '=', createParentRef('litmusProjectId')], ['litmusBuildResultId', '=', createParentRef('id')]]
@@ -85691,7 +85691,7 @@ let R_ = {
     name: 'artifact',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusArtifact
+      name: EntityType.LitmusArtifact
     },
     args: [{
       name: 'id',
@@ -85704,7 +85704,7 @@ let R_ = {
   }]
 };
 let RA = {
-  name: _$$Y.PeriodicUpdate,
+  name: EntityType.PeriodicUpdate,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85720,7 +85720,7 @@ let RA = {
 };
 let Ry = {
   computed: !0,
-  name: _$$Y.ComputedIDPUser,
+  name: EntityType.ComputedIDPUser,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85741,7 +85741,7 @@ let Ry = {
     name: 'idpUser',
     type: {
       kind: 'object',
-      name: _$$Y.IDPUser
+      name: EntityType.IDPUser
     },
     nullable: !0,
     filter: {
@@ -85751,7 +85751,7 @@ let Ry = {
 };
 let Rb = {
   computed: !0,
-  name: _$$Y.ComputedWorkspacePublicInfo,
+  name: EntityType.ComputedWorkspacePublicInfo,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85762,7 +85762,7 @@ let Rb = {
     name: 'workspace',
     type: {
       kind: 'object',
-      name: _$$Y.WorkspacePublicInfo
+      name: EntityType.WorkspacePublicInfo
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0
@@ -85770,7 +85770,7 @@ let Rb = {
 };
 let Rv = {
   computed: !0,
-  name: _$$Y.ComputedWorkspace,
+  name: EntityType.ComputedWorkspace,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85781,7 +85781,7 @@ let Rv = {
     name: 'workspace',
     type: {
       kind: 'object',
-      name: _$$Y.Workspace
+      name: EntityType.Workspace
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0,
@@ -85791,7 +85791,7 @@ let Rv = {
   }]
 };
 let RI = {
-  name: _$$Y.LitmusComparisonArtifact,
+  name: EntityType.LitmusComparisonArtifact,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -85834,7 +85834,7 @@ let RI = {
     name: 'headArtifact',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusArtifact
+      name: EntityType.LitmusArtifact
     },
     filter: ['id', '=', createParentRef('headArtifactId')],
     nullable: !0
@@ -85842,7 +85842,7 @@ let RI = {
     name: 'baseArtifact',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusArtifact
+      name: EntityType.LitmusArtifact
     },
     filter: ['id', '=', createParentRef('baseArtifactId')],
     nullable: !0
@@ -85850,7 +85850,7 @@ let RI = {
     name: 'results',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparisonResult
+      name: EntityType.LitmusComparisonResult
     },
     filter: ['litmusComparisonArtifactId', '=', createParentRef('id')],
     expectedMaxCount: 1e3
@@ -85858,7 +85858,7 @@ let RI = {
     name: 'result',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusComparisonResult
+      name: EntityType.LitmusComparisonResult
     },
     args: [{
       name: 'id',
@@ -85880,7 +85880,7 @@ let RI = {
     }],
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparisonResult
+      name: EntityType.LitmusComparisonResult
     },
     filter: {
       and: [['litmusComparisonArtifactId', '=', createParentRef('id')], ['status', '=', createFieldRef('status')]]
@@ -85890,7 +85890,7 @@ let RI = {
     name: 'availableResults',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparisonResult
+      name: EntityType.LitmusComparisonResult
     },
     filter: {
       and: [['litmusComparisonArtifactId', '=', createParentRef('id')], ['status', '<>', 'not_started']]
@@ -85900,7 +85900,7 @@ let RI = {
     name: 'reviews',
     type: {
       kind: 'objects',
-      name: _$$Y.LitmusComparisonReview
+      name: EntityType.LitmusComparisonReview
     },
     filter: ['litmusComparisonArtifactId', '=', createParentRef('id')],
     orderBy: [['reviewedAt', 'DESC']],
@@ -85909,7 +85909,7 @@ let RI = {
     name: 'comparison',
     type: {
       kind: 'object',
-      name: _$$Y.LitmusComparison
+      name: EntityType.LitmusComparison
     },
     filter: ['id', '=', createParentRef('litmusComparisonId')],
     bannedFromViews: !0
@@ -85941,7 +85941,7 @@ let RI = {
   }]
 };
 let RE = {
-  name: _$$Y.ActiveOrgBillingPeriod,
+  name: EntityType.ActiveOrgBillingPeriod,
   computed: !0,
   permissionRequired: !1,
   fields: [{
@@ -85972,7 +85972,7 @@ let RE = {
   }]
 };
 let Rx = {
-  name: _$$Y.PermissionEvaluationResult,
+  name: EntityType.PermissionEvaluationResult,
   permissionRequired: !1,
   computed: !0,
   embedded: !0,
@@ -85993,7 +85993,7 @@ let Rx = {
   }]
 };
 let RS = {
-  name: _$$Y.LitmusDifference,
+  name: EntityType.LitmusDifference,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86030,7 +86030,7 @@ let RS = {
   }]
 };
 let Rw = {
-  name: _$$Y.LitmusDesignConnection,
+  name: EntityType.LitmusDesignConnection,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86069,7 +86069,7 @@ let Rw = {
     name: 'file',
     type: {
       kind: 'object',
-      name: _$$Y.File
+      name: EntityType.File
     },
     filter: ['id', '=', createParentRef('fileKey')],
     checkCanRead: {
@@ -86081,7 +86081,7 @@ let Rw = {
   }]
 };
 let RC = {
-  name: _$$Y.CodePresetMetadata,
+  name: EntityType.CodePresetMetadata,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86137,7 +86137,7 @@ let RC = {
   }]
 };
 let RT = {
-  name: _$$Y.EditorTypeLicenseTypeTuple,
+  name: EntityType.EditorTypeLicenseTypeTuple,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -86155,7 +86155,7 @@ let RT = {
   }]
 };
 let Rk = {
-  name: _$$Y.MonetizationConfig,
+  name: EntityType.MonetizationConfig,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -86168,13 +86168,13 @@ let Rk = {
     name: 'editorTypeToLicenseTypeMap',
     type: {
       kind: 'objects',
-      name: _$$Y.EditorTypeLicenseTypeTuple
+      name: EntityType.EditorTypeLicenseTypeTuple
     },
     embedded: !0
   }]
 };
 let RR = {
-  name: _$$Y.ExpOneClickAskToEditTeamId,
+  name: EntityType.ExpOneClickAskToEditTeamId,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86189,7 +86189,7 @@ let RR = {
   }]
 };
 let RN = {
-  name: _$$Y.ExpOneClickAskToEditOrgId,
+  name: EntityType.ExpOneClickAskToEditOrgId,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86204,7 +86204,7 @@ let RN = {
   }]
 };
 let RP = {
-  name: _$$Y.PersonalDraftToPlanDraftLocation,
+  name: EntityType.PersonalDraftToPlanDraftLocation,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86248,7 +86248,7 @@ let RP = {
     name: 'toDraftsFolder',
     type: {
       kind: 'object',
-      name: _$$Y.Project
+      name: EntityType.Project
     },
     nullable: !0,
     filter: ['id', '=', createParentRef('toDraftsFolderId')],
@@ -86258,7 +86258,7 @@ let RP = {
   }]
 };
 let RO = {
-  name: _$$Y.TeamTrackTags,
+  name: EntityType.TeamTrackTags,
   permissionRequired: !1,
   embedded: !0,
   fields: [{
@@ -86270,7 +86270,7 @@ let RO = {
   }]
 };
 let RD = {
-  name: _$$Y.ExpSocialProofExpansionOrgId,
+  name: EntityType.ExpSocialProofExpansionOrgId,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86285,7 +86285,7 @@ let RD = {
   }]
 };
 let RL = {
-  name: _$$Y.ExpSocialProofExpansionTeamId,
+  name: EntityType.ExpSocialProofExpansionTeamId,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86300,7 +86300,7 @@ let RL = {
   }]
 };
 let RF = {
-  name: _$$Y.AccountTypeRequestsFromPlan,
+  name: EntityType.AccountTypeRequestsFromPlan,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86316,7 +86316,7 @@ let RF = {
     name: 'request',
     type: {
       kind: 'object',
-      name: _$$Y.AccountTypeRequest
+      name: EntityType.AccountTypeRequest
     },
     filter: ['id', '=', createParentRef('id')],
     nullable: !0
@@ -86324,14 +86324,14 @@ let RF = {
     name: 'user',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('userId')],
     nullable: !0
   }]
 };
 let RM = {
-  name: _$$Y.OrgJoinedTeamResult,
+  name: EntityType.OrgJoinedTeamResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86343,7 +86343,7 @@ let RM = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('id')], ['deletedAt', '=', null]]
@@ -86360,7 +86360,7 @@ let RM = {
   }]
 };
 let Rj = {
-  name: _$$Y.OrgUnassignedTeamResult,
+  name: EntityType.OrgUnassignedTeamResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86372,7 +86372,7 @@ let Rj = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('id')], ['deletedAt', '=', null]]
@@ -86390,7 +86390,7 @@ let Rj = {
   }]
 };
 let RU = {
-  name: _$$Y.OrgDiscoverableTeamResult,
+  name: EntityType.OrgDiscoverableTeamResult,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86402,7 +86402,7 @@ let RU = {
     name: 'team',
     type: {
       kind: 'object',
-      name: _$$Y.Team
+      name: EntityType.Team
     },
     filter: {
       and: [['id', '=', createParentRef('id')], ['deletedAt', '=', null]]
@@ -86420,7 +86420,7 @@ let RU = {
   }]
 };
 let RB = {
-  name: _$$Y.UserGroupResourcePermission,
+  name: EntityType.UserGroupResourcePermission,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86456,14 +86456,14 @@ let RB = {
     name: '_userGroup',
     type: {
       kind: 'object',
-      name: _$$Y.UserGroup
+      name: EntityType.UserGroup
     },
     filter: ['id', '=', createParentRef('groupId')],
     bannedFromViews: !0
   }]
 };
 let RV = {
-  name: _$$Y.PermissionsFromUserGroups,
+  name: EntityType.PermissionsFromUserGroups,
   permissionRequired: !1,
   computed: !0,
   fields: [{
@@ -86492,7 +86492,7 @@ let RV = {
   }]
 };
 let RG = {
-  name: _$$Y.UserGroupMember,
+  name: EntityType.UserGroupMember,
   permissionRequired: !1,
   fields: [{
     name: 'id',
@@ -86533,7 +86533,7 @@ let RG = {
   }]
 };
 let Rz = {
-  name: _$$Y.UserGroup,
+  name: EntityType.UserGroup,
   permissionRequired: !0,
   fields: [{
     name: 'id',
@@ -86583,7 +86583,7 @@ let Rz = {
     nullable: !0,
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     args: [{
       name: 'userId',
@@ -86612,7 +86612,7 @@ let Rz = {
     name: 'currentUserGroupMember',
     type: {
       kind: 'object',
-      name: _$$Y.UserGroupMember
+      name: EntityType.UserGroupMember
     },
     args: [{
       name: 'userId',
@@ -86628,7 +86628,7 @@ let Rz = {
   }, ...P, sg, sf]
 };
 let RH = {
-  name: _$$Y.SitePwdConfig,
+  name: EntityType.SitePwdConfig,
   naturalKey: new Set(['siteMountId']),
   permissionRequired: !0,
   fields: [{
@@ -86656,7 +86656,7 @@ let RH = {
     name: 'setByUser',
     type: {
       kind: 'object',
-      name: _$$Y.User
+      name: EntityType.User
     },
     filter: ['id', '=', createParentRef('setByUserId')],
     nullable: !0
@@ -86669,7 +86669,7 @@ let RH = {
     name: 'siteMount',
     type: {
       kind: 'object',
-      name: _$$Y.SiteMount
+      name: EntityType.SiteMount
     },
     filter: ['id', '=', createParentRef('siteMountId')],
     nullable: !0,
@@ -86714,7 +86714,7 @@ let RH = {
   }]
 };
 let RW = {
-  name: _$$Y.SlotsFileEnablement,
+  name: EntityType.SlotsFileEnablement,
   fields: [{
     name: 'id',
     type: {
@@ -86735,7 +86735,7 @@ let RW = {
   permissionRequired: !1
 };
 let RK = {
-  name: _$$Y.SharedContainerSetting,
+  name: EntityType.SharedContainerSetting,
   permissionRequired: !1,
   computed: !0,
   fields: [{
@@ -87121,7 +87121,7 @@ let RY = {
       name: 'currentUser',
       type: {
         kind: 'object',
-        name: _$$Y.User
+        name: EntityType.User
       },
       args: [{
         name: 'userId',
@@ -87135,7 +87135,7 @@ let RY = {
       name: 'userPublic',
       type: {
         kind: 'object',
-        name: _$$Y.UserPublic
+        name: EntityType.UserPublic
       },
       args: [{
         name: 'userId',
@@ -87150,7 +87150,7 @@ let RY = {
       name: 'team',
       type: {
         kind: 'object',
-        name: _$$Y.Team
+        name: EntityType.Team
       },
       args: [{
         name: 'id',
@@ -87174,7 +87174,7 @@ let RY = {
       name: 'teamInAdmin',
       type: {
         kind: 'object',
-        name: _$$Y.TeamInAdmin
+        name: EntityType.TeamInAdmin
       },
       args: [{
         name: 'id',
@@ -87197,7 +87197,7 @@ let RY = {
       name: 'teamPublicInfo',
       type: {
         kind: 'object',
-        name: _$$Y.TeamPublicInfo
+        name: EntityType.TeamPublicInfo
       },
       args: [{
         name: 'id',
@@ -87211,7 +87211,7 @@ let RY = {
       name: 'teamLimitedInfo',
       type: {
         kind: 'object',
-        name: _$$Y.TeamLimitedInfo
+        name: EntityType.TeamLimitedInfo
       },
       args: [{
         name: 'id',
@@ -87235,7 +87235,7 @@ let RY = {
       name: 'project',
       type: {
         kind: 'object',
-        name: _$$Y.Project
+        name: EntityType.Project
       },
       args: [{
         name: 'id',
@@ -87259,7 +87259,7 @@ let RY = {
       name: 'recentPrototypes',
       type: {
         kind: 'objects',
-        name: _$$Y.RecentPrototype
+        name: EntityType.RecentPrototype
       },
       args: [{
         name: 'userId',
@@ -87274,7 +87274,7 @@ let RY = {
       name: 'lastFrameSelection',
       type: {
         kind: 'object',
-        name: _$$Y.LastFrameSelection
+        name: EntityType.LastFrameSelection
       },
       args: [{
         name: 'userId',
@@ -87293,7 +87293,7 @@ let RY = {
       name: 'persistentLastFrameSelection',
       type: {
         kind: 'object',
-        name: _$$Y.PersistentLastFrameSelection
+        name: EntityType.PersistentLastFrameSelection
       },
       args: [{
         name: 'userId',
@@ -87312,7 +87312,7 @@ let RY = {
       name: 'recentIdleTimeoutSettingChange',
       type: {
         kind: 'object',
-        name: _$$Y.RecentIdleTimeoutSettingChange
+        name: EntityType.RecentIdleTimeoutSettingChange
       },
       args: [{
         name: 'userId',
@@ -87337,7 +87337,7 @@ let RY = {
       name: 'recentNetworkControlRejection',
       type: {
         kind: 'object',
-        name: _$$Y.RecentNetworkControlRejection
+        name: EntityType.RecentNetworkControlRejection
       },
       args: [{
         name: 'userId',
@@ -87362,7 +87362,7 @@ let RY = {
       name: 'latestClipboardData',
       type: {
         kind: 'object',
-        name: _$$Y.LatestClipboardData
+        name: EntityType.LatestClipboardData
       },
       args: [{
         name: 'userId',
@@ -87386,7 +87386,7 @@ let RY = {
       name: 'file',
       type: {
         kind: 'object',
-        name: _$$Y.File
+        name: EntityType.File
       },
       args: [{
         name: 'key',
@@ -87417,7 +87417,7 @@ let RY = {
       name: 'fileV2',
       type: {
         kind: 'object',
-        name: _$$Y.File
+        name: EntityType.File
       },
       args: [{
         name: 'key',
@@ -87439,7 +87439,7 @@ let RY = {
       name: '_fileViewableByPrototypeViewers',
       type: {
         kind: 'object',
-        name: _$$Y.File
+        name: EntityType.File
       },
       args: [{
         name: 'key',
@@ -87476,7 +87476,7 @@ let RY = {
       name: 'filePrototypeInfo',
       type: {
         kind: 'object',
-        name: _$$Y.FilePrototypeInfo
+        name: EntityType.FilePrototypeInfo
       },
       args: [{
         name: 'key',
@@ -87497,7 +87497,7 @@ let RY = {
       name: 'libraryKeyToFile',
       type: {
         kind: 'object',
-        name: _$$Y.LibraryKeyToFile
+        name: EntityType.LibraryKeyToFile
       },
       args: [{
         name: 'libraryKey',
@@ -87511,7 +87511,7 @@ let RY = {
       name: 'hubFile',
       type: {
         kind: 'object',
-        name: _$$Y.HubFile
+        name: EntityType.HubFile
       },
       args: [{
         name: 'id',
@@ -87534,7 +87534,7 @@ let RY = {
       name: 'figFileWorkshopMode',
       type: {
         kind: 'object',
-        name: _$$Y.FigFileWorkshopMode
+        name: EntityType.FigFileWorkshopMode
       },
       args: [{
         name: 'fileKey',
@@ -87548,7 +87548,7 @@ let RY = {
       name: 'figFileLinkExpirationConfig',
       type: {
         kind: 'object',
-        name: _$$Y.FigFileLinkExpirationConfig
+        name: EntityType.FigFileLinkExpirationConfig
       },
       args: [{
         name: 'figFileKey',
@@ -87562,7 +87562,7 @@ let RY = {
       name: 'repo',
       type: {
         kind: 'object',
-        name: _$$Y.Repo
+        name: EntityType.Repo
       },
       args: [{
         name: 'id',
@@ -87589,7 +87589,7 @@ let RY = {
       name: 'prototype',
       type: {
         kind: 'object',
-        name: _$$Y.Prototype
+        name: EntityType.Prototype
       },
       args: [{
         name: 'id',
@@ -87613,7 +87613,7 @@ let RY = {
       name: 'org',
       type: {
         kind: 'object',
-        name: _$$Y.Org
+        name: EntityType.Org
       },
       args: [{
         name: 'id',
@@ -87637,7 +87637,7 @@ let RY = {
       name: 'orgInfo',
       type: {
         kind: 'object',
-        name: _$$Y.OrgInfo
+        name: EntityType.OrgInfo
       },
       args: [{
         name: 'id',
@@ -87661,7 +87661,7 @@ let RY = {
       name: 'orgPublicInfo',
       type: {
         kind: 'object',
-        name: _$$Y.OrgPublicInfo
+        name: EntityType.OrgPublicInfo
       },
       args: [{
         name: 'id',
@@ -87675,7 +87675,7 @@ let RY = {
       name: 'planUserRecords',
       type: {
         kind: 'objects',
-        name: _$$Y.PlanUserRecord
+        name: EntityType.PlanUserRecord
       },
       args: [{
         name: 'userId',
@@ -87693,7 +87693,7 @@ let RY = {
       name: 'planUserRecord',
       type: {
         kind: 'object',
-        name: _$$Y.PlanUserRecord
+        name: EntityType.PlanUserRecord
       },
       args: [{
         name: 'userId',
@@ -87719,7 +87719,7 @@ let RY = {
       name: 'planRecord',
       type: {
         kind: 'object',
-        name: _$$Y.PlanRecord
+        name: EntityType.PlanRecord
       },
       args: [{
         name: 'id',
@@ -87736,7 +87736,7 @@ let RY = {
       name: 'planRecordPublicInfo',
       type: {
         kind: 'object',
-        name: _$$Y.PlanRecordPublicInfo
+        name: EntityType.PlanRecordPublicInfo
       },
       args: [{
         name: 'id',
@@ -87750,7 +87750,7 @@ let RY = {
       name: 'planRecordInfoFromPlanParent',
       type: {
         kind: 'object',
-        name: _$$Y.PlanRecord
+        name: EntityType.PlanRecord
       },
       args: [{
         name: 'planParentId',
@@ -87775,7 +87775,7 @@ let RY = {
       name: 'planRecordPublicInfoFromPlanParent',
       type: {
         kind: 'object',
-        name: _$$Y.PlanRecordPublicInfo
+        name: EntityType.PlanRecordPublicInfo
       },
       args: [{
         name: 'planParentId',
@@ -87797,7 +87797,7 @@ let RY = {
       name: 'orgJoinRequest',
       type: {
         kind: 'object',
-        name: _$$Y.OrgJoinRequest
+        name: EntityType.OrgJoinRequest
       },
       args: [{
         name: 'userId',
@@ -87820,7 +87820,7 @@ let RY = {
       name: 'pendingConfirmedRenewalSeatCounts',
       type: {
         kind: 'objects',
-        name: _$$Y.ConfirmedRenewalSeatCount
+        name: EntityType.ConfirmedRenewalSeatCount
       },
       args: [{
         name: 'planParentId',
@@ -87848,7 +87848,7 @@ let RY = {
       name: 'workspace',
       type: {
         kind: 'object',
-        name: _$$Y.Workspace
+        name: EntityType.Workspace
       },
       args: [{
         name: 'id',
@@ -87871,7 +87871,7 @@ let RY = {
       name: 'idpGroup',
       type: {
         kind: 'object',
-        name: _$$Y.IDPGroup
+        name: EntityType.IDPGroup
       },
       args: [{
         name: 'id',
@@ -87885,7 +87885,7 @@ let RY = {
       name: 'pinnedFile',
       type: {
         kind: 'object',
-        name: _$$Y.PinnedFileV2
+        name: EntityType.PinnedFileV2
       },
       args: [{
         name: 'id',
@@ -87910,7 +87910,7 @@ let RY = {
       name: 'licenseGroup',
       type: {
         kind: 'object',
-        name: _$$Y.LicenseGroup
+        name: EntityType.LicenseGroup
       },
       args: [{
         name: 'id',
@@ -87933,7 +87933,7 @@ let RY = {
       name: 'health',
       type: {
         kind: 'object',
-        name: _$$Y.User
+        name: EntityType.User
       },
       filter: ['id', '<>', '-1'],
       nullable: !0,
@@ -87942,7 +87942,7 @@ let RY = {
       name: 'style',
       type: {
         kind: 'object',
-        name: _$$Y.Style
+        name: EntityType.Style
       },
       args: [{
         name: 'key',
@@ -87965,7 +87965,7 @@ let RY = {
       name: 'styleWithDestinationAsset',
       type: {
         kind: 'object',
-        name: _$$Y.StyleWithDestinationAsset
+        name: EntityType.StyleWithDestinationAsset
       },
       args: [{
         name: 'key',
@@ -87988,7 +87988,7 @@ let RY = {
       name: 'styleWithDestinationAssetV2',
       type: {
         kind: 'object',
-        name: _$$Y.StyleWithDestinationAssetV2
+        name: EntityType.StyleWithDestinationAssetV2
       },
       args: [{
         name: 'key',
@@ -88018,7 +88018,7 @@ let RY = {
       name: 'viewerRestrictedDraftAccessLog',
       type: {
         kind: 'object',
-        name: _$$Y.ViewerRestrictedDraftAccessLog
+        name: EntityType.ViewerRestrictedDraftAccessLog
       },
       args: [{
         name: 'fileKey',
@@ -88032,7 +88032,7 @@ let RY = {
       name: 'libraryPublish',
       type: {
         kind: 'object',
-        name: _$$Y.LibraryPublish
+        name: EntityType.LibraryPublish
       },
       args: [{
         name: 'id',
@@ -88055,7 +88055,7 @@ let RY = {
       name: 'libraryPublishV2',
       type: {
         kind: 'object',
-        name: _$$Y.LibraryPublishV2
+        name: EntityType.LibraryPublishV2
       },
       args: [{
         name: 'id',
@@ -88078,7 +88078,7 @@ let RY = {
       name: 'component',
       type: {
         kind: 'object',
-        name: _$$Y.Component
+        name: EntityType.Component
       },
       args: [{
         name: 'componentKey',
@@ -88101,7 +88101,7 @@ let RY = {
       name: 'stateGroup',
       type: {
         kind: 'object',
-        name: _$$Y.StateGroup
+        name: EntityType.StateGroup
       },
       args: [{
         name: 'key',
@@ -88128,7 +88128,7 @@ let RY = {
       name: 'variableSet',
       type: {
         kind: 'object',
-        name: _$$Y.VariableSet
+        name: EntityType.VariableSet
       },
       args: [{
         name: 'key',
@@ -88151,7 +88151,7 @@ let RY = {
       name: 'libraryAsset',
       type: {
         kind: 'object',
-        name: _$$Y.LibraryAsset
+        name: EntityType.LibraryAsset
       },
       args: [{
         name: 'key',
@@ -88178,7 +88178,7 @@ let RY = {
       name: 'variableCollection',
       type: {
         kind: 'object',
-        name: _$$Y.VariableSet
+        name: EntityType.VariableSet
       },
       args: [{
         name: 'key',
@@ -88201,7 +88201,7 @@ let RY = {
       name: 'variable',
       type: {
         kind: 'object',
-        name: _$$Y.Variable
+        name: EntityType.Variable
       },
       args: [{
         name: 'key',
@@ -88224,7 +88224,7 @@ let RY = {
       name: 'plugin',
       type: {
         kind: 'object',
-        name: _$$Y.Plugin
+        name: EntityType.Plugin
       },
       args: [{
         name: 'pluginId',
@@ -88254,7 +88254,7 @@ let RY = {
       name: 'pluginPreferences',
       type: {
         kind: 'object',
-        name: _$$Y.PluginPreferences
+        name: EntityType.PluginPreferences
       },
       args: [{
         name: 'currentUserId',
@@ -88299,7 +88299,7 @@ let RY = {
       }],
       type: {
         kind: 'object',
-        name: _$$Y.ActionsHistory
+        name: EntityType.ActionsHistory
       },
       filter: ['userId', '=', createFieldRef('userId')],
       nullable: !0
@@ -88313,7 +88313,7 @@ let RY = {
       }],
       type: {
         kind: 'object',
-        name: _$$Y.PluginSecurityFormResponses
+        name: EntityType.PluginSecurityFormResponses
       },
       nullable: !0,
       filter: ['pluginId', '=', createFieldRef('pluginId')],
@@ -88324,7 +88324,7 @@ let RY = {
       name: 'communityProfile',
       type: {
         kind: 'object',
-        name: _$$Y.Profile
+        name: EntityType.Profile
       },
       args: [{
         name: 'profileId',
@@ -88340,7 +88340,7 @@ let RY = {
       name: 'communityHubLike',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityHubLike
+        name: EntityType.CommunityHubLike
       },
       args: [{
         name: 'profileId',
@@ -88372,7 +88372,7 @@ let RY = {
       name: 'communityHubLikeForResource',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityHubLike
+        name: EntityType.CommunityHubLike
       },
       args: [{
         name: 'profileId',
@@ -88398,7 +88398,7 @@ let RY = {
       name: 'communityResourcePayment',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityResourcePayment
+        name: EntityType.CommunityResourcePayment
       },
       args: [{
         name: 'monetizedResourceMetadataId',
@@ -88425,7 +88425,7 @@ let RY = {
       name: 'communityResourcePaymentV2',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityResourcePayment
+        name: EntityType.CommunityResourcePayment
       },
       args: [{
         name: 'monetizedResourceMetadataId',
@@ -88450,7 +88450,7 @@ let RY = {
       name: 'communityResourcePaymentsForUser',
       type: {
         kind: 'objects',
-        name: _$$Y.CommunityResourcePayment
+        name: EntityType.CommunityResourcePayment
       },
       args: [{
         name: 'userId',
@@ -88469,7 +88469,7 @@ let RY = {
       name: 'communityRatingStatsForHubFile',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityRatingStats
+        name: EntityType.CommunityRatingStats
       },
       args: [{
         name: 'hubFileId',
@@ -88486,7 +88486,7 @@ let RY = {
       name: 'communityRatingStatsForWidget',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityRatingStats
+        name: EntityType.CommunityRatingStats
       },
       args: [{
         name: 'widgetId',
@@ -88503,7 +88503,7 @@ let RY = {
       name: 'communityRatingStatsForPlugin',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityRatingStats
+        name: EntityType.CommunityRatingStats
       },
       args: [{
         name: 'pluginId',
@@ -88520,7 +88520,7 @@ let RY = {
       name: 'monetizedResourceMetadata',
       type: {
         kind: 'object',
-        name: _$$Y.MonetizedResourceMetadata
+        name: EntityType.MonetizedResourceMetadata
       },
       args: [{
         name: 'id',
@@ -88534,7 +88534,7 @@ let RY = {
       name: 'communityM10nResourceStat',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityM10nResourceStat
+        name: EntityType.CommunityM10nResourceStat
       },
       args: [{
         name: 'sessionUserId',
@@ -88558,7 +88558,7 @@ let RY = {
       name: 'userMonetizationMetadata',
       type: {
         kind: 'object',
-        name: _$$Y.UserMonetizationMetadata
+        name: EntityType.UserMonetizationMetadata
       },
       args: [{
         name: 'userId',
@@ -88583,7 +88583,7 @@ let RY = {
       name: 'feedPost',
       type: {
         kind: 'object',
-        name: _$$Y.FeedPost
+        name: EntityType.FeedPost
       },
       args: [{
         name: 'publicUuid',
@@ -88597,7 +88597,7 @@ let RY = {
       name: 'mobileFeedPost',
       type: {
         kind: 'object',
-        name: _$$Y.FeedPost
+        name: EntityType.FeedPost
       },
       args: [{
         name: 'id',
@@ -88611,7 +88611,7 @@ let RY = {
       name: 'developerLinks',
       type: {
         kind: 'objects',
-        name: _$$Y.DeveloperLink
+        name: EntityType.DeveloperLink
       },
       args: [{
         name: 'key',
@@ -88626,7 +88626,7 @@ let RY = {
       name: 'developerRelatedLinks',
       type: {
         kind: 'objects',
-        name: _$$Y.DeveloperRelatedLink
+        name: EntityType.DeveloperRelatedLink
       },
       args: [{
         name: 'nodeId',
@@ -88648,7 +88648,7 @@ let RY = {
       name: 'accountTypeRequest',
       type: {
         kind: 'object',
-        name: _$$Y.AccountTypeRequest
+        name: EntityType.AccountTypeRequest
       },
       args: [{
         name: 'id',
@@ -88663,7 +88663,7 @@ let RY = {
       name: 'teamRoleRequest',
       type: {
         kind: 'object',
-        name: _$$Y.TeamRoleRequest
+        name: EntityType.TeamRoleRequest
       },
       args: [{
         name: 'teamId',
@@ -88688,7 +88688,7 @@ let RY = {
       name: 'devModeActivity',
       type: {
         kind: 'objects',
-        name: _$$Y.DevModeActivity
+        name: EntityType.DevModeActivity
       },
       args: [{
         name: 'nodeId',
@@ -88710,7 +88710,7 @@ let RY = {
       name: 'communityLibraryByHubFileId',
       type: {
         kind: 'object',
-        name: _$$Y.CommunityLibrary
+        name: EntityType.CommunityLibrary
       },
       args: [{
         name: 'hubFileId',
@@ -88727,7 +88727,7 @@ let RY = {
       name: 'communityQuickstartLibraries',
       type: {
         kind: 'objects',
-        name: _$$Y.CommunityQuickstartLibrary
+        name: EntityType.CommunityQuickstartLibrary
       },
       args: [{
         name: 'userId',
@@ -88751,7 +88751,7 @@ let RY = {
       name: 'orgAdminUsers',
       type: {
         kind: 'objects',
-        name: _$$Y.OrgAdminUserSearchResult
+        name: EntityType.OrgAdminUserSearchResult
       },
       args: [{
         name: 'orgId',
@@ -88798,7 +88798,7 @@ let RY = {
       name: 'orgAdminUsersMinimalFields',
       type: {
         kind: 'objects',
-        name: _$$Y.OrgAdminUserMinimalFieldsSearchResult
+        name: EntityType.OrgAdminUserMinimalFieldsSearchResult
       },
       args: [{
         name: 'orgId',
@@ -88845,7 +88845,7 @@ let RY = {
       name: 'orgAdminUsersInfo',
       type: {
         kind: 'object',
-        name: _$$Y.OrgAdminUsersInfo
+        name: EntityType.OrgAdminUsersInfo
       },
       args: [{
         name: 'orgId',
@@ -88874,7 +88874,7 @@ let RY = {
       name: 'unclaimedDomainUsers',
       type: {
         kind: 'objects',
-        name: _$$Y.UnclaimedDomainUser
+        name: EntityType.UnclaimedDomainUser
       },
       args: [{
         name: 'orgId',
@@ -88927,7 +88927,7 @@ let RY = {
       name: 'orgMfaGuestInfo',
       type: {
         kind: 'object',
-        name: _$$Y.OrgMfaGuestInfo
+        name: EntityType.OrgMfaGuestInfo
       },
       args: [{
         name: 'orgId',
@@ -88957,7 +88957,7 @@ let RY = {
       name: 'orgMfaMemberInfo',
       type: {
         kind: 'object',
-        name: _$$Y.OrgMfaMemberInfo
+        name: EntityType.OrgMfaMemberInfo
       },
       args: [{
         name: 'orgId',
@@ -88987,7 +88987,7 @@ let RY = {
       name: 'abandonedDraftFiles',
       type: {
         kind: 'objects',
-        name: _$$Y.AbandonedDraftFile
+        name: EntityType.AbandonedDraftFile
       },
       args: [{
         name: 'userId',
@@ -89050,7 +89050,7 @@ let RY = {
       name: 'abandonedDraftFolders',
       type: {
         kind: 'objects',
-        name: _$$Y.AbandonedDraftFolder
+        name: EntityType.AbandonedDraftFolder
       },
       args: [{
         name: 'userId',
@@ -89115,7 +89115,7 @@ let RY = {
       name: 'orgDiscoverableTeams',
       type: {
         kind: 'objects',
-        name: _$$Y.OrgDiscoverableTeamResult
+        name: EntityType.OrgDiscoverableTeamResult
       },
       args: [{
         name: 'userId',
@@ -89155,7 +89155,7 @@ let RY = {
       name: 'orgTeams',
       type: {
         kind: 'objects',
-        name: _$$Y.OrgTeamResult
+        name: EntityType.OrgTeamResult
       },
       args: [{
         name: 'orgId',
@@ -89203,7 +89203,7 @@ let RY = {
       name: 'orgJoinedTeams',
       type: {
         kind: 'objects',
-        name: _$$Y.OrgJoinedTeamResult
+        name: EntityType.OrgJoinedTeamResult
       },
       args: [{
         name: 'userId',
@@ -89243,7 +89243,7 @@ let RY = {
       name: 'orgUnassignedTeams',
       type: {
         kind: 'objects',
-        name: _$$Y.OrgUnassignedTeamResult
+        name: EntityType.OrgUnassignedTeamResult
       },
       args: [{
         name: 'userId',
@@ -89283,7 +89283,7 @@ let RY = {
       name: 'orgTeamsInAdmin',
       type: {
         kind: 'objects',
-        name: _$$Y.OrgTeamResultInAdmin
+        name: EntityType.OrgTeamResultInAdmin
       },
       args: [{
         name: 'orgId',
@@ -89331,7 +89331,7 @@ let RY = {
       name: 'allTeamRoles',
       type: {
         kind: 'objects',
-        name: _$$Y.TeamRole
+        name: EntityType.TeamRole
       },
       args: [{
         name: 'userId',
@@ -89348,7 +89348,7 @@ let RY = {
       name: 'esOrgUsersInfo',
       type: {
         kind: 'objects',
-        name: _$$Y.EsOrgUsersInfo
+        name: EntityType.EsOrgUsersInfo
       },
       args: [{
         name: 'orgId',
@@ -89387,7 +89387,7 @@ let RY = {
       name: 'feedPosts',
       type: {
         kind: 'objects',
-        name: _$$Y.FeedPostResult
+        name: EntityType.FeedPostResult
       },
       args: [{
         name: 'orgId',
@@ -89434,7 +89434,7 @@ let RY = {
       name: 'profile',
       type: {
         kind: 'object',
-        name: _$$Y.Profile
+        name: EntityType.Profile
       },
       args: [{
         name: 'profileId',
@@ -89448,7 +89448,7 @@ let RY = {
       name: 'sharedWithYouResources',
       type: {
         kind: 'objects',
-        name: _$$Y.SharedWithYouResource
+        name: EntityType.SharedWithYouResource
       },
       args: [{
         name: 'userId',
@@ -89536,7 +89536,7 @@ let RY = {
       name: 'siteBundle',
       type: {
         kind: 'object',
-        name: _$$Y.SiteBundle
+        name: EntityType.SiteBundle
       },
       args: [{
         name: 'fileKey',
@@ -89556,7 +89556,7 @@ let RY = {
       name: 'siteBundles',
       type: {
         kind: 'objects',
-        name: _$$Y.SiteBundle
+        name: EntityType.SiteBundle
       },
       args: [{
         name: 'fileKey',
@@ -89579,7 +89579,7 @@ let RY = {
       name: 'siteMount',
       type: {
         kind: 'object',
-        name: _$$Y.SiteMount
+        name: EntityType.SiteMount
       },
       args: [{
         name: 'fileKey',
@@ -89602,7 +89602,7 @@ let RY = {
       name: 'sitePublishEvents',
       type: {
         kind: 'objects',
-        name: _$$Y.SitePublishEvent
+        name: EntityType.SitePublishEvent
       },
       args: [{
         name: 'siteMountId',
@@ -89627,7 +89627,7 @@ let RY = {
       name: 'webFonts',
       type: {
         kind: 'objects',
-        name: _$$Y.FontFile
+        name: EntityType.FontFile
       },
       args: [{
         name: 'fileKey',
@@ -89649,7 +89649,7 @@ let RY = {
       name: 'userNotificationBell',
       type: {
         kind: 'object',
-        name: _$$Y.UserNotificationBell
+        name: EntityType.UserNotificationBell
       },
       args: [{
         name: 'userId',
@@ -89666,7 +89666,7 @@ let RY = {
       name: 'persistentUserNotificationBells',
       type: {
         kind: 'objects',
-        name: _$$Y.UserNotificationBell2
+        name: EntityType.UserNotificationBell2
       },
       args: [{
         name: 'userId',
@@ -89685,7 +89685,7 @@ let RY = {
       name: 'allPlanNotificationBellState',
       type: {
         kind: 'object',
-        name: _$$Y.UserNotificationBell2
+        name: EntityType.UserNotificationBell2
       },
       args: [{
         name: 'userId',
@@ -89705,7 +89705,7 @@ let RY = {
       name: 'userColorProfilePreference',
       type: {
         kind: 'object',
-        name: _$$Y.UserColorProfilePreference
+        name: EntityType.UserColorProfilePreference
       },
       args: [{
         name: 'userId',
@@ -89720,7 +89720,7 @@ let RY = {
       name: 'colorPalettesForTeam',
       type: {
         kind: 'objects',
-        name: _$$Y.ColorPalette
+        name: EntityType.ColorPalette
       },
       args: [{
         name: 'teamId',
@@ -89738,7 +89738,7 @@ let RY = {
       name: 'resourceSave',
       type: {
         kind: 'object',
-        name: _$$Y.ResourceSave
+        name: EntityType.ResourceSave
       },
       args: [{
         name: 'hubFileId',
@@ -89760,7 +89760,7 @@ let RY = {
       name: 'resourceSaves',
       type: {
         kind: 'objects',
-        name: _$$Y.ResourceSave
+        name: EntityType.ResourceSave
       },
       args: [{
         name: 'userId',
@@ -89776,7 +89776,7 @@ let RY = {
       name: 'resourceSaveFromResourceId',
       type: {
         kind: 'object',
-        name: _$$Y.ResourceSave
+        name: EntityType.ResourceSave
       },
       args: [{
         name: 'resourceId',
@@ -89798,7 +89798,7 @@ let RY = {
       name: 'userResourceSaves',
       type: {
         kind: 'objects',
-        name: _$$Y.ResourceSave
+        name: EntityType.ResourceSave
       },
       args: [{
         name: 'userId',
@@ -89814,7 +89814,7 @@ let RY = {
       name: 'orgResourceSaves',
       type: {
         kind: 'objects',
-        name: _$$Y.ResourceSave
+        name: EntityType.ResourceSave
       },
       args: [{
         name: 'resourceId',
@@ -89839,7 +89839,7 @@ let RY = {
       name: 'pluginInstall',
       type: {
         kind: 'object',
-        name: _$$Y.PluginInstall
+        name: EntityType.PluginInstall
       },
       args: [{
         name: 'pluginId',
@@ -89861,7 +89861,7 @@ let RY = {
       name: 'orgPluginInstalls',
       type: {
         kind: 'objects',
-        name: _$$Y.PluginInstall
+        name: EntityType.PluginInstall
       },
       args: [{
         name: 'pluginId',
@@ -89886,7 +89886,7 @@ let RY = {
       name: 'orgAllowlistedPlugins',
       type: {
         kind: 'objects',
-        name: _$$Y.AllowlistedPlugin
+        name: EntityType.AllowlistedPlugin
       },
       args: [{
         name: 'pluginId',
@@ -89911,7 +89911,7 @@ let RY = {
       name: 'colorPaletteForUuid',
       type: {
         kind: 'object',
-        name: _$$Y.ColorPalette
+        name: EntityType.ColorPalette
       },
       args: [{
         name: 'uuid',
@@ -89928,7 +89928,7 @@ let RY = {
       name: 'appliedColorPaletteForFile',
       type: {
         kind: 'object',
-        name: _$$Y.FileColorPalette
+        name: EntityType.FileColorPalette
       },
       args: [{
         name: 'fileKey',
@@ -89949,7 +89949,7 @@ let RY = {
       name: 'pendingUserMentions',
       type: {
         kind: 'objects',
-        name: _$$Y.PendingUserMentions
+        name: EntityType.PendingUserMentions
       },
       args: [{
         name: 'fileCommentId',
@@ -89964,7 +89964,7 @@ let RY = {
       name: 'billingTrialForResourceAndPlanType',
       type: {
         kind: 'object',
-        name: _$$Y.BillingTrial
+        name: EntityType.BillingTrial
       },
       args: [{
         name: 'resourceId',
@@ -89994,7 +89994,7 @@ let RY = {
       name: 'billingTrialForResource',
       type: {
         kind: 'object',
-        name: _$$Y.BillingTrial
+        name: EntityType.BillingTrial
       },
       args: [{
         name: 'resourceId',
@@ -90018,7 +90018,7 @@ let RY = {
       name: 'jamboardOfferRedeemedAt',
       type: {
         kind: 'object',
-        name: _$$Y.JamboardOfferRedeemedAt
+        name: EntityType.JamboardOfferRedeemedAt
       },
       args: [{
         name: 'userId',
@@ -90034,7 +90034,7 @@ let RY = {
       name: 'subscriptionUpdateSloData',
       type: {
         kind: 'object',
-        name: _$$Y.SubscriptionUpdateSloData
+        name: EntityType.SubscriptionUpdateSloData
       },
       args: [{
         name: 'id',
@@ -90048,7 +90048,7 @@ let RY = {
       name: 'graftingUpdateSloData',
       type: {
         kind: 'object',
-        name: _$$Y.GraftingUpdateSloData
+        name: EntityType.GraftingUpdateSloData
       },
       args: [{
         name: 'id',
@@ -90062,7 +90062,7 @@ let RY = {
       name: 'slidesTheme',
       type: {
         kind: 'objects',
-        name: _$$Y.SlidesTheme
+        name: EntityType.SlidesTheme
       },
       args: [{
         name: 'themeKey',
@@ -90078,7 +90078,7 @@ let RY = {
       name: 'adminRequestDashboardRows',
       type: {
         kind: 'objects',
-        name: _$$Y.AdminRequestDashboardRow
+        name: EntityType.AdminRequestDashboardRow
       },
       args: [{
         name: 'planType',
@@ -90138,7 +90138,7 @@ let RY = {
       name: 'adminDashboardRequests',
       type: {
         kind: 'objects',
-        name: _$$Y.AdminRequestDashboardRow
+        name: EntityType.AdminRequestDashboardRow
       },
       args: [{
         name: 'planType',
@@ -90199,7 +90199,7 @@ let RY = {
       name: 'accountTypeRequestsFromPlan',
       type: {
         kind: 'objects',
-        name: _$$Y.AccountTypeRequestsFromPlan
+        name: EntityType.AccountTypeRequestsFromPlan
       },
       args: [{
         name: 'planType',
@@ -90262,7 +90262,7 @@ let RY = {
       name: 'adminRequestDashboardRowCount',
       type: {
         kind: 'object',
-        name: _$$Y.AdminRequestDashboardRowCount
+        name: EntityType.AdminRequestDashboardRowCount
       },
       args: [{
         name: 'planType',
@@ -90305,7 +90305,7 @@ let RY = {
       name: 'adminDashboardRequestsCount',
       type: {
         kind: 'object',
-        name: _$$Y.AdminRequestDashboardRowCount
+        name: EntityType.AdminRequestDashboardRowCount
       },
       args: [{
         name: 'planType',
@@ -90349,7 +90349,7 @@ let RY = {
       name: 'adminDashboardRequestIds',
       type: {
         kind: 'objects',
-        name: _$$Y.AdminRequestDashboardRowId
+        name: EntityType.AdminRequestDashboardRowId
       },
       args: [{
         name: 'planType',
@@ -90393,7 +90393,7 @@ let RY = {
       name: 'adminRequestDashboardTotalRowCount',
       type: {
         kind: 'object',
-        name: _$$Y.AdminRequestDashboardTotalRowCount
+        name: EntityType.AdminRequestDashboardTotalRowCount
       },
       args: [{
         name: 'planType',
@@ -90436,7 +90436,7 @@ let RY = {
       name: 'adminDashboardRequestsTotalCount',
       type: {
         kind: 'object',
-        name: _$$Y.AdminRequestDashboardTotalRowCount
+        name: EntityType.AdminRequestDashboardTotalRowCount
       },
       args: [{
         name: 'planType',
@@ -90480,7 +90480,7 @@ let RY = {
       name: 'favoritedResource',
       type: {
         kind: 'object',
-        name: _$$Y.FavoritedResourceV2
+        name: EntityType.FavoritedResourceV2
       },
       args: [{
         name: 'userId',
@@ -90508,7 +90508,7 @@ let RY = {
       name: 'favoritedResources',
       type: {
         kind: 'object',
-        name: _$$Y.FavoritedResources
+        name: EntityType.FavoritedResources
       },
       args: [{
         name: 'userId',
@@ -90537,7 +90537,7 @@ let RY = {
       name: 'devModeSuggestedUpgrades',
       type: {
         kind: 'objects',
-        name: _$$Y.DevModeSuggestedUpgradableUser
+        name: EntityType.DevModeSuggestedUpgradableUser
       },
       args: [{
         name: 'planType',
@@ -90581,7 +90581,7 @@ let RY = {
       name: 'devModeSuggestedUpgradesFlag',
       type: {
         kind: 'objects',
-        name: _$$Y.DevModeSuggestedUpgradableUser
+        name: EntityType.DevModeSuggestedUpgradableUser
       },
       args: [{
         name: 'planType',
@@ -90625,7 +90625,7 @@ let RY = {
       name: 'deviceTryFile',
       type: {
         kind: 'object',
-        name: _$$Y.DeviceTryFile
+        name: EntityType.DeviceTryFile
       },
       args: [{
         name: 'fileKey',
@@ -90640,7 +90640,7 @@ let RY = {
       name: 'orgLibrarySubscriptions',
       type: {
         kind: 'objects',
-        name: _$$Y.LibraryOrgSubscription
+        name: EntityType.LibraryOrgSubscription
       },
       args: [{
         name: 'orgId',
@@ -90658,7 +90658,7 @@ let RY = {
       name: 'libraryPresetSubscriptions',
       type: {
         kind: 'objects',
-        name: _$$Y.LibraryPresetSubscription
+        name: EntityType.LibraryPresetSubscription
       },
       args: [{
         name: 'userId',
@@ -90686,7 +90686,7 @@ let RY = {
       name: 'aiMeterUsage',
       type: {
         kind: 'objects',
-        name: _$$Y.AiMeterUsage
+        name: EntityType.AiMeterUsage
       },
       args: [{
         name: 'fileKey',
@@ -90718,7 +90718,7 @@ let RY = {
       name: 'supabaseAuth',
       type: {
         kind: 'object',
-        name: _$$Y.SupabaseAuth
+        name: EntityType.SupabaseAuth
       },
       args: [{
         name: 'fileKey',
@@ -90750,7 +90750,7 @@ let RY = {
       name: 'libraryPresetSubscriptionsV2',
       type: {
         kind: 'objects',
-        name: _$$Y.LibraryPresetSubscriptionV2
+        name: EntityType.LibraryPresetSubscriptionV2
       },
       args: [{
         name: 'group',
@@ -90770,7 +90770,7 @@ let RY = {
       name: 'clientReload',
       type: {
         kind: 'object',
-        name: _$$Y.ClientReload
+        name: EntityType.ClientReload
       },
       args: [{
         name: 'userId',
@@ -90795,7 +90795,7 @@ let RY = {
       name: 'lockClient',
       type: {
         kind: 'object',
-        name: _$$Y.LockClient
+        name: EntityType.LockClient
       },
       args: [{
         name: 'userId',
@@ -90820,7 +90820,7 @@ let RY = {
       name: 'searchWorkspaceFiles',
       type: {
         kind: 'objects',
-        name: _$$Y.SearchWorkspaceFilesResult
+        name: EntityType.SearchWorkspaceFilesResult
       },
       args: [{
         name: 'query',
@@ -90874,7 +90874,7 @@ let RY = {
       name: 'domainOrgAdminsToRemove',
       type: {
         kind: 'objects',
-        name: _$$Y.DomainOrgAdminToRemove
+        name: EntityType.DomainOrgAdminToRemove
       },
       args: [{
         name: 'userId',
@@ -90915,7 +90915,7 @@ let RY = {
       name: 'templatesByTeam',
       type: {
         kind: 'objects',
-        name: _$$Y.TeamTemplateResult
+        name: EntityType.TeamTemplateResult
       },
       args: [{
         name: 'teamId',
@@ -90963,7 +90963,7 @@ let RY = {
       name: 'templatesByOrg',
       type: {
         kind: 'objects',
-        name: _$$Y.TeamTemplateResult
+        name: EntityType.TeamTemplateResult
       },
       args: [{
         name: 'orgId',
@@ -91028,7 +91028,7 @@ let RY = {
       name: 'templatesByOrgWorkspaces',
       type: {
         kind: 'objects',
-        name: _$$Y.TeamTemplateResult
+        name: EntityType.TeamTemplateResult
       },
       args: [{
         name: 'orgId',
@@ -91100,7 +91100,7 @@ let RY = {
       name: 'templatesSearch',
       type: {
         kind: 'objects',
-        name: _$$Y.TeamTemplateSearchResult
+        name: EntityType.TeamTemplateSearchResult
       },
       args: [{
         name: 'orgId',
@@ -91161,7 +91161,7 @@ let RY = {
       name: 'memberFlyoutInfo',
       type: {
         kind: 'object',
-        name: _$$Y.MemberFlyoutInfo
+        name: EntityType.MemberFlyoutInfo
       },
       args: [{
         name: 'userId',
@@ -91205,7 +91205,7 @@ let RY = {
       name: 'collectionV2',
       type: {
         kind: 'object',
-        name: _$$Y.CollectionV2
+        name: EntityType.CollectionV2
       },
       args: [{
         name: 'id',
@@ -91224,7 +91224,7 @@ let RY = {
       name: 'collectionFieldSchema',
       type: {
         kind: 'object',
-        name: _$$Y.CollectionFieldSchema
+        name: EntityType.CollectionFieldSchema
       },
       args: [{
         name: 'id',
@@ -91242,7 +91242,7 @@ let RY = {
       name: 'fileCmsCollections',
       type: {
         kind: 'objects',
-        name: _$$Y.FileCmsCollection
+        name: EntityType.FileCmsCollection
       },
       args: [{
         name: 'fileKey',
@@ -91264,7 +91264,7 @@ let RY = {
       name: 'oneFileCmsCollection',
       type: {
         kind: 'object',
-        name: _$$Y.FileCmsCollection
+        name: EntityType.FileCmsCollection
       },
       args: [{
         name: 'fileKey',
@@ -91291,7 +91291,7 @@ let RY = {
       name: 'collectionItemV2',
       type: {
         kind: 'object',
-        name: _$$Y.CollectionItemV2
+        name: EntityType.CollectionItemV2
       },
       args: [{
         name: 'id',
@@ -91310,7 +91310,7 @@ let RY = {
       name: 'collectionItemByStableId',
       type: {
         kind: 'object',
-        name: _$$Y.CollectionItemV2
+        name: EntityType.CollectionItemV2
       },
       args: [{
         name: 'stableId',
@@ -91336,7 +91336,7 @@ let RY = {
       name: 'itemsForCollectionV2',
       type: {
         kind: 'objects',
-        name: _$$Y.CollectionItemV2
+        name: EntityType.CollectionItemV2
       },
       args: [{
         name: 'collectionId',
@@ -91355,7 +91355,7 @@ let RY = {
       name: 'testFeatureGateFromRoot',
       type: {
         kind: 'object',
-        name: _$$Y.StatsigFeatureGate
+        name: EntityType.StatsigFeatureGate
       },
       nullable: !0,
       resolver: {
@@ -91370,7 +91370,7 @@ let RY = {
       name: 'testPeriodicUpdate',
       type: {
         kind: 'object',
-        name: _$$Y.PeriodicUpdate
+        name: EntityType.PeriodicUpdate
       },
       nullable: !0,
       resolver: {
@@ -91393,7 +91393,7 @@ let RY = {
       name: 'testPlanFromRoot',
       type: {
         kind: 'object',
-        name: _$$Y.TestPlan
+        name: EntityType.TestPlan
       },
       nullable: !0,
       computed: !0,
@@ -91419,7 +91419,7 @@ let RY = {
       name: 'litmusProject',
       type: {
         kind: 'object',
-        name: _$$Y.LitmusProject
+        name: EntityType.LitmusProject
       },
       args: [{
         name: 'id',
@@ -91443,7 +91443,7 @@ let RY = {
       name: 'litmusProjects',
       type: {
         kind: 'objects',
-        name: _$$Y.LitmusProject
+        name: EntityType.LitmusProject
       },
       checkCanRead: {
         fieldName: 'canView',
@@ -91455,7 +91455,7 @@ let RY = {
       name: 'litmusComparisons',
       type: {
         kind: 'objects',
-        name: _$$Y.LitmusComparison
+        name: EntityType.LitmusComparison
       },
       filter: ['litmusProjectId', '<>', null],
       orderBy: [['createdAt', 'DESC']],
@@ -91467,7 +91467,7 @@ let RY = {
       name: 'litmusComparison',
       type: {
         kind: 'object',
-        name: _$$Y.LitmusComparison
+        name: EntityType.LitmusComparison
       },
       args: [{
         name: 'id',
@@ -91484,7 +91484,7 @@ let RY = {
       name: '_teamUser',
       type: {
         kind: 'object',
-        name: _$$Y.TeamUser
+        name: EntityType.TeamUser
       },
       nullable: !0,
       args: [{
@@ -91499,7 +91499,7 @@ let RY = {
       name: '_teamUserByUserIdAndTeamId',
       type: {
         kind: 'object',
-        name: _$$Y.TeamUser
+        name: EntityType.TeamUser
       },
       nullable: !0,
       args: [{
@@ -91523,7 +91523,7 @@ let RY = {
       name: '_orgUser',
       type: {
         kind: 'object',
-        name: _$$Y.OrgUser
+        name: EntityType.OrgUser
       },
       nullable: !0,
       args: [{
@@ -91538,7 +91538,7 @@ let RY = {
       name: '_orgUserByUserIdAndOrgId',
       type: {
         kind: 'object',
-        name: _$$Y.OrgUser
+        name: EntityType.OrgUser
       },
       nullable: !0,
       args: [{
@@ -91562,7 +91562,7 @@ let RY = {
       name: 'resourceConnectionInvite',
       type: {
         kind: 'object',
-        name: _$$Y.ResourceConnectionInvite
+        name: EntityType.ResourceConnectionInvite
       },
       args: [{
         name: 'id',
@@ -91579,7 +91579,7 @@ let RY = {
       name: 'resourceConnection',
       type: {
         kind: 'object',
-        name: _$$Y.ResourceConnection
+        name: EntityType.ResourceConnection
       },
       args: [{
         name: 'id',
@@ -91596,7 +91596,7 @@ let RY = {
       name: 'resourceConnectionSharingGroups',
       type: {
         kind: 'objects',
-        name: _$$Y.SharingGroup
+        name: EntityType.SharingGroup
       },
       args: [{
         name: 'resourceConnectionId',
@@ -91615,7 +91615,7 @@ let RY = {
       name: 'personalDraftToPlanDraftLocation',
       type: {
         kind: 'object',
-        name: _$$Y.PersonalDraftToPlanDraftLocation
+        name: EntityType.PersonalDraftToPlanDraftLocation
       },
       args: [{
         name: 'userId',
@@ -91630,7 +91630,7 @@ let RY = {
       name: 'trashedResources',
       type: {
         kind: 'objects',
-        name: _$$Y.TrashedResource
+        name: EntityType.TrashedResource
       },
       args: [{
         name: 'userId',
@@ -91719,7 +91719,7 @@ let RY = {
       name: 'paginatedFilesByProjectId',
       type: {
         kind: 'objects',
-        name: _$$Y.File
+        name: EntityType.File
       },
       args: [{
         name: 'projectId',
@@ -91767,7 +91767,7 @@ let RY = {
       name: 'paginatedFilesByProjectIdAndEditorType',
       type: {
         kind: 'objects',
-        name: _$$Y.File
+        name: EntityType.File
       },
       args: [{
         name: 'projectId',
@@ -91860,7 +91860,7 @@ let RY = {
       name: 'teamUserDescendedRoles',
       type: {
         kind: 'objects',
-        name: _$$Y.DescendedRolesOnTeam
+        name: EntityType.DescendedRolesOnTeam
       },
       args: [{
         name: 'userId',
@@ -91898,7 +91898,7 @@ let RY = {
       name: 'userGroup',
       type: {
         kind: 'object',
-        name: _$$Y.UserGroup
+        name: EntityType.UserGroup
       },
       args: [{
         name: 'id',
@@ -91923,13 +91923,13 @@ let RY = {
       },
       filterArg: {
         string: {
-          bigint: [`${_$$Y.DevModeActivity}.user.id`, `${_$$Y.Component}.user.id`, `${_$$Y.FavoritedProject}.readableProject.id`, `${_$$Y.FavoritedPrototype}.prototype.id`, `${_$$Y.FavoritedPrototype}.readablePrototype.id`, `${_$$Y.FavoritedTeam}.team.id`, `${_$$Y.FavoritedWorkspace}.licenseGroup.id`, `${_$$Y.FavoritedWorkspace}.workspace.id`, `${_$$Y.File}.publishedHubFile.figFileId`, `${_$$Y.OrgAwareTeamRole}.team.id`, `${_$$Y.OrgUserUpgradeWithProject}.project.id`, `${_$$Y.OrgUserUpgradeWithRepo}.repo.id`, `${_$$Y.OrgUserUpgradeWithTeam}.team.id`, `${_$$Y.OrgUserUpgradeWithTeam}.teamLimitedInfo.id`, `${_$$Y.ProjectRole}.project.id`, `${_$$Y.RepoRole}.repo.id`, `${_$$Y.SharedWithYouFolder}.folder.id`, `${_$$Y.SharedWithYouRepo}.repo.id`, `${_$$Y.SharedWithYouTeam}.team.id`, `${_$$Y.StateGroup}.user.id`, `${_$$Y.Style}.user.id`, `${_$$Y.StyleWithDestinationAsset}.user.id`, `${_$$Y.StyleWithDestinationAssetV2}.user.id`, `${_$$Y.StyleWithLegacySourceAsset}.user.id`, `${_$$Y.TeamRole}.team.id`, `${_$$Y.Template}.publishedByUser.id`, `${_$$Y.Template}.publishedByUserNullable.id`, `${_$$Y.Variable}.user.id`, `${_$$Y.VariableSet}.user.id`, `${_$$Y.LibraryAsset}.user.id`, 'root.developerLinks.key', 'root.plugin.id', 'root.pluginSecurityFormResponse.pluginId', `${_$$Y.File}.trashedUser.id`, `${_$$Y.FilePrototypeInfo}.trashedUser.id`, `${_$$Y.ResourceConnectionInvite}.projectLimitedInfo.id`, `${_$$Y.ResourceConnection}.projectLimitedInfo.id`, `${_$$Y.ResourceConnection}.project.id`, `${_$$Y.TeamRole}.eduGracePeriod.teamId`],
-          uuid: [`${_$$Y.File}.passwordAuthentication.anonymousUserId`, `${_$$Y.File}.sourceFilePasswordAuthentication.anonymousUserId`, `${_$$Y.Repo}.passwordAuthentication.anonymousUserId`]
+          bigint: [`${EntityType.DevModeActivity}.user.id`, `${EntityType.Component}.user.id`, `${EntityType.FavoritedProject}.readableProject.id`, `${EntityType.FavoritedPrototype}.prototype.id`, `${EntityType.FavoritedPrototype}.readablePrototype.id`, `${EntityType.FavoritedTeam}.team.id`, `${EntityType.FavoritedWorkspace}.licenseGroup.id`, `${EntityType.FavoritedWorkspace}.workspace.id`, `${EntityType.File}.publishedHubFile.figFileId`, `${EntityType.OrgAwareTeamRole}.team.id`, `${EntityType.OrgUserUpgradeWithProject}.project.id`, `${EntityType.OrgUserUpgradeWithRepo}.repo.id`, `${EntityType.OrgUserUpgradeWithTeam}.team.id`, `${EntityType.OrgUserUpgradeWithTeam}.teamLimitedInfo.id`, `${EntityType.ProjectRole}.project.id`, `${EntityType.RepoRole}.repo.id`, `${EntityType.SharedWithYouFolder}.folder.id`, `${EntityType.SharedWithYouRepo}.repo.id`, `${EntityType.SharedWithYouTeam}.team.id`, `${EntityType.StateGroup}.user.id`, `${EntityType.Style}.user.id`, `${EntityType.StyleWithDestinationAsset}.user.id`, `${EntityType.StyleWithDestinationAssetV2}.user.id`, `${EntityType.StyleWithLegacySourceAsset}.user.id`, `${EntityType.TeamRole}.team.id`, `${EntityType.Template}.publishedByUser.id`, `${EntityType.Template}.publishedByUserNullable.id`, `${EntityType.Variable}.user.id`, `${EntityType.VariableSet}.user.id`, `${EntityType.LibraryAsset}.user.id`, 'root.developerLinks.key', 'root.plugin.id', 'root.pluginSecurityFormResponse.pluginId', `${EntityType.File}.trashedUser.id`, `${EntityType.FilePrototypeInfo}.trashedUser.id`, `${EntityType.ResourceConnectionInvite}.projectLimitedInfo.id`, `${EntityType.ResourceConnection}.projectLimitedInfo.id`, `${EntityType.ResourceConnection}.project.id`, `${EntityType.TeamRole}.eduGracePeriod.teamId`],
+          uuid: [`${EntityType.File}.passwordAuthentication.anonymousUserId`, `${EntityType.File}.sourceFilePasswordAuthentication.anonymousUserId`, `${EntityType.Repo}.passwordAuthentication.anonymousUserId`]
         }
       },
       computedFieldArg: {
         string: {
-          bigint: [`${_$$Y.UserMonetizationMetadata}.canRead.root.user.userId`]
+          bigint: [`${EntityType.UserMonetizationMetadata}.canRead.root.user.userId`]
         }
       }
     },
@@ -92016,7 +92016,7 @@ class Np {
     this.reportStuck = e;
     this.tags = t;
     this.stuckBucketTimers = [];
-    this.timer = new _$$M({});
+    this.timer = new TimerHandler({});
     this.stuckBucketTimers = [{
       duration: 15e3,
       label: '15sec'
@@ -92036,7 +92036,7 @@ class Np {
       duration: e,
       label: t
     }) => {
-      let i = new _$$M({
+      let i = new TimerHandler({
         onTimeout: (e, n) => {
           i.finish();
           navigator.onLine && this.reportStuck(t, e, n);
@@ -92220,9 +92220,9 @@ class Nm {
       switch (e.type) {
         case 'SUBSCRIBE_VIEW_CLIENT':
           {
-            let t = _$$J(e.view._name, e.args);
+            let t = serializeArgs(e.view._name, e.args);
             if (!this.clientE2ESubscriptionTimers.has(t)) {
-              let i = new _$$M({}, {
+              let i = new TimerHandler({}, {
                 load_type: e.loadType,
                 priority: e.priority
               });
@@ -92234,7 +92234,7 @@ class Nm {
               });
             }
             if (!this.initialSubscriptionTimers.has(t)) {
-              let i = new _$$M({
+              let i = new TimerHandler({
                 onTimeout: (n, r) => {
                   let a = i.finish();
                   if (navigator.onLine) {
@@ -92269,10 +92269,10 @@ class Nm {
           }
         case 'SUBSCRIBE_VIEW_SERVER':
           {
-            let t = _$$J(e.view._name, e.args);
+            let t = serializeArgs(e.view._name, e.args);
             if (!this.serverSubscriptionTimers.has(t)) {
               let i = document.visibilityState;
-              let n = new _$$M({
+              let n = new TimerHandler({
                 onTimeout: (t, n) => {
                   navigator.onLine && this.reportCustomEvent(Nl.SUBSCRIPTION_STUCK, {
                     view_name: e.view._name,
@@ -92299,14 +92299,14 @@ class Nm {
           }
         case 'UNSUBSCRIBE_VIEW_SERVER':
           {
-            let t = _$$J(e.view._name, e.args);
+            let t = serializeArgs(e.view._name, e.args);
             this.clearTimers(t);
             break;
           }
         case 'SESSION.NOTIFY_OBSERVERS':
           {
             if (e.result.status === 'loading') break;
-            let t = _$$J(e.view._name, e.args);
+            let t = serializeArgs(e.view._name, e.args);
             let i = this.serverSubscriptionTimers.get(t);
             let n = this.clientE2ESubscriptionTimers.get(t);
             let r = this.initialSubscriptionTimers.get(t);
@@ -92374,7 +92374,7 @@ class Nm {
       switch (e.type) {
         case 'SUBSCRIBE_VIEW_CLIENT':
           {
-            let t = _$$J(e.view._name, e.args);
+            let t = serializeArgs(e.view._name, e.args);
             if (!this.clientE2ESubscriptionTimersV2.has(t)) {
               let i = new Np((t, i, n) => {
                 this.reportCustomEvent(Nl.INITIAL_VIEW_STUCK_LOADING, {
@@ -92406,10 +92406,10 @@ class Nm {
           }
         case 'SUBSCRIBE_VIEW_SERVER':
           {
-            let t = _$$J(e.view._name, e.args);
+            let t = serializeArgs(e.view._name, e.args);
             if (!this.serverSubscriptionTimersV2.has(t)) {
               let i = document.visibilityState;
-              let n = new _$$M({
+              let n = new TimerHandler({
                 onTimeout: (t, n) => {
                   navigator.onLine && this.reportCustomEvent(Nl.SUBSCRIPTION_STUCK_V2, {
                     view_name: e.view._name,
@@ -92436,13 +92436,13 @@ class Nm {
           }
         case 'UNSUBSCRIBE_VIEW_SERVER':
           {
-            let t = _$$J(e.view._name, e.args);
+            let t = serializeArgs(e.view._name, e.args);
             this.clearTimersV2(t);
             break;
           }
         case 'DONE':
           {
-            let t = _$$J(e.viewName, e.args);
+            let t = serializeArgs(e.viewName, e.args);
             let i = this.serverSubscriptionTimersV2.get(t);
             let n = this.clientE2ESubscriptionTimersV2.get(t);
             let r = e.clientStatus === 'loaded' ? 'ok' : e.clientStatus === 'errors' ? 'error' : 'loading';
@@ -92468,7 +92468,7 @@ class Nm {
     };
     this.errorHandler = e => {
       if (e.type === 'SESSION.NOTIFY_OBSERVERS') {
-        let t = _$$J(e.view._name, e.args);
+        let t = serializeArgs(e.view._name, e.args);
         if (e.result.errors && e.result.errors.length > 0 && !this.erroredViews.has(t)) {
           let i = e.result.errors.every(e => e.retriable);
           this.reportCustomEvent(Nl.ERRORED_VIEW, {
@@ -92476,7 +92476,7 @@ class Nm {
             status: e.result.status,
             retriable: i.toString()
           });
-          i && this.erroredViews.set(t, new _$$M());
+          i && this.erroredViews.set(t, new TimerHandler());
         } else if (e.result.status === 'loaded' && e.result.errors && e.result.errors.length === 0) {
           let i = this.erroredViews.get(t);
           i && (this.erroredViews.$$delete(t), this.reportNumericEvent(No.ERROR_RECOVERY_LATENCY, i.getTime(), {
@@ -92508,7 +92508,7 @@ class Nm {
             }), this.syncTimers.has(e.transactionId)) {
               break;
             }
-            let t = new _$$M({
+            let t = new TimerHandler({
               onTimeout: (e, t) => {
                 this.reportCustomEvent(Nl.SYNC_STUCK, {
                   backgrounded: String(e),
@@ -92519,7 +92519,7 @@ class Nm {
               timeoutMs: 1e4
             });
             if (this.syncTimers.set(e.transactionId, t), this.optimisticMutationSloTimer.has(e.transactionId.toString())) break;
-            let i = new _$$M({
+            let i = new TimerHandler({
               onTimeout: (t, n, r) => {
                 if (i.finish(), this.reportCustomEvent(Nl.OPTIMISTIC_MUTATION_FAIL, {
                   currently_backgrounded: String(document.visibilityState === 'hidden'),
@@ -92621,7 +92621,7 @@ class Nm {
         case 'OPTIMISTIC_MUTATION_CREATED':
           {
             if (this.optimisticMutationTimers.has(e.transactionId)) break;
-            let t = new _$$M({
+            let t = new TimerHandler({
               isConnectedToLG: this.client.connection.isConnected()
             });
             this.optimisticMutationTimers.set(e.transactionId, t);
@@ -92668,10 +92668,10 @@ class Nm {
         for (let t in e.mutations) {
           for (let i in e.mutations[t]) {
             let e = `${t}+${i}`;
-            this.realtimeUpdateTimers.set(e, new _$$M({
+            this.realtimeUpdateTimers.set(e, new TimerHandler({
               isConnectedToLG: this.client.connection.isConnected()
             }));
-            let n = new _$$M({
+            let n = new TimerHandler({
               onTimeout: (t, i, r) => {
                 n.finish();
                 this.reportCustomEvent(Nl.OPTIMISTIC_MUTATION_FAIL, {
@@ -92733,7 +92733,7 @@ class Nm {
           loadingPaths: [...t]
         }, {
           reportAsSentryError: !0,
-          logToConsole: NU.ALWAYS
+          logToConsole: LogToConsoleMode.ALWAYS
         });
       }
     };
@@ -93129,13 +93129,13 @@ class NE {
   async measure() {
     if (!this.unsubscribeCallback) {
       try {
-        let e = await NI.createLGUpdateSloData(_$$g());
+        let e = await NI.createLGUpdateSloData(generateUUIDv4());
         this.sloEntryId = e.data.meta.id;
         await new Promise(e => {
           this.subscriptionObserver = t => {
             (t.status === 'loaded' || t.status === 'errors') && e();
           };
-          this.unsubscribeCallback = this.client.subscribe(this.use100x ? apG : DSh, {
+          this.unsubscribeCallback = this.client.subscribe(this.use100x ? GraftingUpdateSloData : SubscriptionUpdateSloData, {
             id: this.sloEntryId
           }, e => this.subscriptionObserver(e));
         });
@@ -93143,7 +93143,7 @@ class NE {
         return;
       }
     }
-    let e = _$$g();
+    let e = generateUUIDv4();
     let t = new Promise(t => {
       this.subscriptionObserver = i => {
         i.status === 'loaded' && ('subscriptionUpdateSloData' in i.data ? i.data.subscriptionUpdateSloData?.key : i.data.graftingUpdateSloData.status === 'loaded' ? i.data.graftingUpdateSloData.data?.key : void 0) === e && t();
@@ -93153,7 +93153,7 @@ class NE {
       let i = Date.now();
       await NI.updateLGUpdateSloData(this.sloEntryId, e);
       let n = !1;
-      let r = new _$$M({
+      let r = new TimerHandler({
         onTimeout: (e, t) => {
           n = !0;
           _$$Rh(Nl.SUBSCRIPTION_UPDATE_FAILURE, {
@@ -93199,7 +93199,7 @@ let Nx = new class {
     this.debugLogs.push(i);
   }
   startRecording() {
-    let e = _$$g();
+    let e = generateUUIDv4();
     this.recordings.set(e, new _$$C(5120));
     return e;
   }
@@ -93248,7 +93248,7 @@ let NS = new class {
   }
 }();
 let Nw = ['AWSALBTG', 'AWSALBTGCORS', 'AWSALB', 'AWSALBCORS'];
-let NC = [wZi, ib2, $kt, w2r, ehp];
+let NC = [FileBrowserRecentFilesView, FileBrowserSearchBarData, FileBrowserSidebarData, OrgAdminUserView, OpenEditorFileData];
 export function $$NT0(e) {
   let t = observableState.get();
   if (t) {
@@ -93401,7 +93401,7 @@ export function $$NT0(e) {
     d.emitInitialEvents();
     return d;
   }(e, i));
-  let n = XRH();
+  let n = getAllResourceViews();
   let r = observableState.get();
   window.LIVEGRAPH = {
     client: r,

@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { hA } from "../figma_app/88239";
 import { eY } from "../figma_app/722362";
 import { Fk } from "../figma_app/167249";

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useContext, useRef, useCallback, useState, forwardRef, useImperativeHandle } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { K } from "../905/443068";
 import { U as _$$U } from "../905/708285";
@@ -8,7 +8,7 @@ import { RR } from "../figma_app/338442";
 import { VariableDataType, Command, VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { X } from "../905/606795";
 import { Uz } from "../905/63728";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { X as _$$X } from "../905/190511";
 import { sD } from "../905/937198";
@@ -16,7 +16,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { Sh } from "../figma_app/889655";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { L as _$$L } from "../figma_app/884735";
 import { UT } from "../figma_app/95266";
@@ -70,7 +70,7 @@ let M = memo(function ({
       removeBoundData: !1
     }) : onExpressionSubmitted ? onExpressionSubmitted(void 0) : onVariableSelected && onVariableSelected(void 0);
   }, [T, onExpressionSubmitted, onVariableSelected, M, j]);
-  let B = rf(i, "click", () => showBindingUI?.(d.current));
+  let B = useHandleMouseEvent(i, "click", () => showBindingUI?.(d.current));
   if (!s) return null;
   a = T ? Xx(C.resolvedType) ?? void 0 : "MIXED" !== x ? x : void 0;
   let V = onExpressionSubmitted ? jsx(y3, {
@@ -101,7 +101,7 @@ let M = memo(function ({
     children: jsx(K, {
       onClick: U,
       "aria-label": G,
-      recordingKey: Pt(i, "detachBindingButton"),
+      recordingKey: generateRecordingKey(i, "detachBindingButton"),
       htmlAttributes: {
         "data-tooltip": G,
         "data-tooltip-type": Ib.TEXT,
@@ -183,7 +183,7 @@ export function $$K0({
       }), jsx("span", {
         className: Ds,
         children: jsx(K, {
-          onClick: () => clearVariableConsumption(zk.YES),
+          onClick: () => clearVariableConsumption(yesNoTrackingEnum.YES),
           "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
           htmlAttributes: {
             "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip"),
@@ -218,7 +218,7 @@ export function $$Y2(e) {
   }) : jsx(Ig, {
     children: jsx($, {
       label: t,
-      recordingKey: Pt(e.recordingKey, "textContent")
+      recordingKey: generateRecordingKey(e.recordingKey, "textContent")
     })
   });
 }
@@ -268,14 +268,14 @@ function $({
   if (!s?.guid && !o) return null;
   let d = jsx(Z, {
     value: i,
-    recordingKey: Pt(e, "input"),
+    recordingKey: generateRecordingKey(e, "input"),
     isCmsTextNode: o
   });
   let u = jsxs(Fragment, {
     children: [jsx(V5, {
       variableScope: PropertyScope.TEXT_CONTENT
     }), jsx(_$$K, {
-      recordingKey: Pt(e, "assignTextContent"),
+      recordingKey: generateRecordingKey(e, "assignTextContent"),
       tooltip: l,
       showAlways: !0
     })]

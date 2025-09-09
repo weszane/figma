@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { MeasurementUnit } from "../figma_app/763686";
 import s from "../vendor/3757";
 import { debugState } from "../905/407919";
@@ -7,7 +7,7 @@ import { U } from "../figma_app/901889";
 import { getI18nString } from "../905/303541";
 import { v4, AC, QN } from "../figma_app/655139";
 import { FIGMA_PROPERTIES, WEB, ANDROID, ANDROID_XML, IOS as _$$p, IOS_UIKIT } from "../905/359509";
-import { D8, ZA, GL, zZ, dW } from "../905/515076";
+import { updateCodeExtensionPreferences, isCodegenSupported, getPluginUniqueId, filterCodegenPreferences, applyCodeExtensionPreferences } from "../905/515076";
 import { S0 } from "../figma_app/844435";
 import { d1 } from "../figma_app/603466";
 import { isActionSchema, isSelectSchema } from "../figma_app/155287";
@@ -38,7 +38,7 @@ export function $$T2() {
       languageId: r.id,
       ...s
     }));
-    D8(e, r, i);
+    updateCodeExtensionPreferences(e, r, i);
   }, [e, t]);
 }
 export function $$I7(e) {
@@ -110,7 +110,7 @@ export function $$O10(e) {
 export function $$R3(e) {
   let t = v4();
   let r = $$O10(e ?? t);
-  return ZA(e ?? t, r);
+  return isCodegenSupported(e ?? t, r);
 }
 export function $$L1(e, t) {
   let r = $$O10(e);
@@ -173,8 +173,8 @@ export function $$j5({
   onChangePreferences: a
 }) {
   let s = [];
-  if (!n || "first-party" === r.type || GL(n) !== r.id) return s;
-  for (let o of zZ(n, findCodegenLanguage(n, r.pluginLanguage))) {
+  if (!n || "first-party" === r.type || getPluginUniqueId(n) !== r.id) return s;
+  for (let o of filterCodegenPreferences(n, findCodegenLanguage(n, r.pluginLanguage))) {
     e && isActionSchema(o) && s.push({
       name: o.propertyName,
       displayText: o?.label || o.propertyName,
@@ -209,7 +209,7 @@ export function $$U9() {
   useEffect(() => {
     if (!t) return;
     let r = e.pluginLanguage;
-    r && dW(t, findCodegenLanguage(t, r));
+    r && applyCodeExtensionPreferences(t, findCodegenLanguage(t, r));
   }, [e, t]);
 }
 export const $Q = $$N0;

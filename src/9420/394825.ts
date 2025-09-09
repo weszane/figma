@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { c2, he } from "../905/382883";
 import { getLocalStorage } from "../905/657224";
 import { ZC } from "../figma_app/39751";
 import { FFileType } from "../figma_app/191312";
 import { D } from "../905/347702";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { BR, O1, Ky } from "../figma_app/345997";
 let u = e => `SAVED_CART::${e}`;
 export function $$m3({
@@ -25,7 +25,7 @@ export function $$E5({
   collaborators: d,
   setCollaborators: u
 }) {
-  let m = iZ();
+  let m = selectCurrentUser();
   let E = useSelector(e => (r ? e.teamUserByTeamId[r] : {}) || {});
   let T = useSelector(e => e.payment.numDesignEditors);
   let y = useSelector(e => e.payment.numWhiteboardEditors);

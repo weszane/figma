@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { ZA } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { GH, H5 } from "../905/234821";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 let l = new Date();
 let $$d1 = {
   id: "",
@@ -186,7 +186,7 @@ function p(e) {
 }
 export function $$m2(e) {
   let t = ZA();
-  let i = iZ();
+  let i = selectCurrentUser();
   let {
     canvasMentionArgs,
     canvasMentionSubscription

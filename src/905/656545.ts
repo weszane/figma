@@ -12,7 +12,7 @@ import { Eo } from "../figma_app/80990";
 import { M } from "../figma_app/155411";
 import { kd, Rh, oT } from "../905/291654";
 import { FAuthProviderType } from "../figma_app/191312";
-import { fy7 } from "../figma_app/43951";
+import { LibraryPresetSubscriptionsV2 } from "../figma_app/43951";
 import { T } from "../figma_app/856733";
 import { D, n as _$$n } from "../905/347702";
 var $$b1 = (e => (e.PLUGIN_INSERT_COMPONENT = "PLUGIN_INSERT_COMPONENT", e.PLUGIN_INSERT_STATE_GROUP = "PLUGIN_INSERT_STATE_GROUP", e.PLUGIN_INSERT_STYLE = "PLUGIN_INSERT_STYLE", e.LIBRARY_SWAP = "LIBRARY_SWAP", e.LOAD_COMPONENT = "LOAD_COMPONENT", e.SWAP_TO_COMPONENT = "SWAP_TO_COMPONENT", e.INSERT_SHARED_COMPONENT = "INSERT_SHARED_COMPONENT", e.INSERT_SHARED_STATE_GROUP = "INSERT_SHARED_STATE_GROUP", e.LOAD_STYLE = "LOAD_STYLE", e.LOAD_VARIABLE = "LOAD_VARIABLE", e.LOAD_VARIABLE_SET = "LOAD_VARIABLE_SET", e))($$b1 || {});
@@ -29,7 +29,7 @@ export async function $$I0(e, t, i, n, r, a) {
   throw Error("Apple EULA not accepted");
 }
 let E = D(async e => {
-  let t = fy7.Query({
+  let t = LibraryPresetSubscriptionsV2.Query({
     group: M()
   });
   let i = await QO(t, (e, i) => {

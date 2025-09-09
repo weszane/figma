@@ -9,18 +9,24 @@ const ERROR_TRACKING_CONFIG = {
   MAX_ERRORS_PER_TYPE: 5,
   FLUSH_DEBOUNCE_DELAY: 1000,
   // 1 second
-  MAX_ERROR_MESSAGE_LENGTH: 50
+  MAX_ERROR_MESSAGE_LENGTH: 50,
 } as const;
 
 /**
  * Supported error types for widget error tracking
  */
-type ErrorType = "validation" | "invalid_prop" | "applying_prop" | "locked_down_api_usage" | "scene_divergence" | "widget_update_error";
+type ErrorType =
+  | "validation"
+  | "invalid_prop"
+  | "applying_prop"
+  | "locked_down_api_usage"
+  | "scene_divergence"
+  | "widget_update_error";
 
 /**
  * Widget context information for error tracking
  */
-interface WidgetContext {
+export interface WidgetContext {
   widgetNodeID?: string;
   pluginID?: string;
   widgetName?: string;
@@ -61,7 +67,7 @@ class WidgetErrorTracker {
     applying_prop: 0,
     locked_down_api_usage: 0,
     scene_divergence: 0,
-    widget_update_error: 0
+    widget_update_error: 0,
   };
   private readonly scheduleFlushErrors: () => void;
   constructor() {
@@ -84,7 +90,11 @@ class WidgetErrorTracker {
       return false;
     }
     const selectedView = debugState.getState().selectedView;
-    return Boolean(selectedView && "isPlaygroundFile" in selectedView && selectedView.isPlaygroundFile);
+    return Boolean(
+      selectedView &&
+        "isPlaygroundFile" in selectedView &&
+        selectedView.isPlaygroundFile,
+    );
   }
 
   /**
@@ -95,9 +105,16 @@ class WidgetErrorTracker {
    * @param errors - Array of error instances
    * @param context - Widget context information
    */
-  private trackErrorInner(errorType: ErrorType, errors: Error[], context: WidgetContext = {}): void {
+  private trackErrorInner(
+    errorType: ErrorType,
+    errors: Error[],
+    context: WidgetContext = {},
+  ): void {
     // Early return if rate limit exceeded
-    if (this.numErrorsReported[errorType] >= ERROR_TRACKING_CONFIG.MAX_ERRORS_PER_TYPE) {
+    if (
+      this.numErrorsReported[errorType] >=
+      ERROR_TRACKING_CONFIG.MAX_ERRORS_PER_TYPE
+    ) {
       return;
     }
     this.numErrorsReported[errorType] += 1;
@@ -105,7 +122,7 @@ class WidgetErrorTracker {
       type: errorType,
       errors,
       isInPlaygroundFile: this.isInPlaygroundFile(),
-      ...context
+      ...context,
     };
     this.errorsReported.push(errorReport);
     this.scheduleFlushErrors();
@@ -163,16 +180,20 @@ class WidgetErrorTracker {
    * Groups errors by widget node ID for the specified error type
    * Original method: part of sendSegmentErrors logic
    */
-  private groupErrorsByWidgetNode(errorType: ErrorType): Record<string, ReportedError> {
+  private groupErrorsByWidgetNode(
+    errorType: ErrorType,
+  ): Record<string, ReportedError> {
     const groupedErrors: Record<string, ReportedError> = {};
-    const filteredErrors = this.errorsReported.filter(error => error.type === errorType);
+    const filteredErrors = this.errorsReported.filter(
+      (error) => error.type === errorType,
+    );
     for (const errorReport of filteredErrors) {
       const nodeId = errorReport.widgetNodeID;
       if (!nodeId) continue;
       if (!(nodeId in groupedErrors)) {
         groupedErrors[nodeId] = {
           ...errorReport,
-          errors: []
+          errors: [],
         };
       }
       groupedErrors[nodeId].errors.push(...errorReport.errors);
@@ -185,7 +206,13 @@ class WidgetErrorTracker {
    * Original: inline logic in sendSegmentErrors
    */
   private formatErrorMessages(errors: Error[]): string {
-    return errors.map(error => error.toString().slice(0, ERROR_TRACKING_CONFIG.MAX_ERROR_MESSAGE_LENGTH)).join("\n");
+    return errors
+      .map((error) =>
+        error
+          .toString()
+          .slice(0, ERROR_TRACKING_CONFIG.MAX_ERROR_MESSAGE_LENGTH),
+      )
+      .join("\n");
   }
 
   /**
@@ -215,7 +242,7 @@ class WidgetErrorTracker {
         widgetNodeID,
         pluginID: errorGroup.pluginID,
         widgetName: errorGroup.widgetName,
-        widgetVersionID: errorGroup.widgetVersionID
+        widgetVersionID: errorGroup.widgetVersionID,
       };
       trackEventAnalytics("Widget Error", analyticsData);
     }

@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import r from "../vendor/523035";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -19,8 +19,8 @@ import { aD, Sn, EC } from "../469e6e40/875985";
 import { tQ } from "../469e6e40/878707";
 import { A } from "../svg/330858";
 var l = r;
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
 export var $$k0 = (e => (e.FILE_BROWSER = "file_browser", e.BILLING = "billing", e))($$k0 || {});
 export function $$E1(e) {
   let t = T5("AdminRenewalBanner").unwrapOr(null);
@@ -137,7 +137,7 @@ function N(e) {
         children: [!a && jsx(V, {
           innerText: "Learn More",
           onClick: () => {
-            Ay.unsafeRedirect("https://help.figma.com/hc/articles/27468498501527-Updates-to-Figma-s-pricing-seats-and-billing-experience", "_blank");
+            customHistory.unsafeRedirect("https://help.figma.com/hc/articles/27468498501527-Updates-to-Figma-s-pricing-seats-and-billing-experience", "_blank");
           },
           variant: "secondary",
           children: jsx("span", {

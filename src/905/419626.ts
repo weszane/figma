@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { At } from "../905/973142";
 import { j_, El } from "../figma_app/9619";
 import { C, A } from "../figma_app/686450";
-import { qP } from "../figma_app/806412";
+import { useSetupPlayback } from "../figma_app/878298";
 export function $$d0({
   autoFocus: e,
   description: t,
@@ -14,7 +14,7 @@ export function $$d0({
   ariaLabelledBy: p,
   recordingKey: m
 }) {
-  let h = qP(m, "onInputChange", e => {
+  let h = useSetupPlayback(m, "onInputChange", e => {
     let t = "lexical" === j_(e) ? El(e) : At(e);
     c(e, t);
   });

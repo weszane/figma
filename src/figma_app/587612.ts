@@ -1,5 +1,5 @@
 import { useMemo, useContext, useCallback } from "react";
-import { n3, IA } from "../905/859698";
+import { n3, VariableStyleId } from "../905/859698";
 import { oU } from "../figma_app/273493";
 import { Fullscreen, ItemType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -26,7 +26,7 @@ export function $$g1(e) {
     if (e?.current) {
       permissionScopeHandler.user("slides-create-style", () => {
         Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !0);
-        Fullscreen?.selectStyle(n3.INVALID, IA.INVALID);
+        Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID);
       });
       let r = e.current.getBoundingClientRect();
       t({

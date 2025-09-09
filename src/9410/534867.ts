@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { assert, debug } from "../figma_app/465776";
 import { encodeStringToBase64, encodeBase64 } from "../905/561685";
@@ -9,7 +9,7 @@ import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { vN, xH, Uz } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
-import { o6, Pt, C0, Z7, cZ, aH } from "../figma_app/806412";
+import { RecordingPureComponent, generateRecordingKey, handleKeyboardEvent, handleChangeEvent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { B as _$$B } from "../905/714743";
@@ -39,7 +39,7 @@ let U = "Loading suggestions...";
 function G(e) {
   assert(null !== e, "We should never be in the middle state if there are no optional parameters");
 }
-class K extends o6 {
+class K extends RecordingPureComponent {
   onSuggestions = e => {
     switch (e.type) {
       case "SUGGESTIONS":
@@ -78,7 +78,7 @@ class K extends o6 {
         return;
       }
       t = this.firstOptionalIndex - 1;
-    } else if ("final" === e) t = this.props.parameters.length - 1;else {
+    } else if ("final" === e) t = this.props.parameters.length - 1; else {
       if (0 === e) {
         this.props.onExitParameterEntry();
         return;
@@ -172,7 +172,7 @@ class K extends o6 {
     let s = "";
     "skip" === t ? (a = `Skip "${e.name}"`, s = "skip") : "freeform" === t ? (a = this.state.searchQuery, s = "skip") : (a = t.name, s = t.name, n = Y(t, ZR));
     return jsx(W, {
-      recordingKey: Pt(this.props, "suggestion", s),
+      recordingKey: generateRecordingKey(this.props, "suggestion", s),
       active: i === this.state.activeItemIndex,
       suggestion: a,
       onClick: e => this.onSelectItem(i, "enter"),
@@ -201,7 +201,7 @@ class K extends o6 {
     this.pendingLoadingMessage = null;
     this.firstOptionalIndex = null;
     this.eventID = 0;
-    this.onKeyDown = C0(this, "keydown", e => {
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       let t = e => {
         let t = this.state.activeItemIndex + e;
         return t < 0 ? this.state.items.length - 1 : t % this.state.items.length;
@@ -262,7 +262,7 @@ class K extends o6 {
           }
       }
     });
-    this.onSearchChange = Z7(this, "change", e => {
+    this.onSearchChange = handleChangeEvent(this, "change", e => {
       let t = e.currentTarget.value;
       this.onTextChange(t);
     });
@@ -680,11 +680,11 @@ export function $$V0(e, t, i) {
     value: t[e.key].name
   }, e.key));
 }
-class W extends o6 {
+class W extends RecordingPureComponent {
   constructor() {
     super(...arguments);
-    this.onClick = cZ(this, "click", e => {
-      if (!this.props.onClick) return aH;
+    this.onClick = handleMouseEvent(this, "click", e => {
+      if (!this.props.onClick) return SKIP_RECORDING;
       this.props.onClick(e);
     });
   }
@@ -710,7 +710,7 @@ class W extends o6 {
 }
 function Y(e, t) {
   let i = "";
-  if (e.iconUrl) i = e.iconUrl;else if (e.icon && "string" == typeof e.icon) i = "data:image/svg+xml;base64," + encodeStringToBase64(e.icon);else {
+  if (e.iconUrl) i = e.iconUrl; else if (e.icon && "string" == typeof e.icon) i = "data:image/svg+xml;base64," + encodeStringToBase64(e.icon); else {
     if (!e.icon || "string" == typeof e.icon) return;
     i = "data:application/octet-stream;base64," + encodeBase64(e.icon);
   }
@@ -720,7 +720,7 @@ function Y(e, t) {
   });
 }
 W.displayName = "ParameterSuggestion";
-class J extends o6 {
+class J extends RecordingPureComponent {
   render() {
     let e = new URL(this.props.src);
     return e.hostname === window.location.hostname ? (reportError(_$$e.EXTENSIBILITY, Error("same-origin URL blocked in UntrustedImage")), jsx(Fragment, {})) : ["https:", "http:", "data:", "blob:"].includes(e.protocol) ? jsx("img", {

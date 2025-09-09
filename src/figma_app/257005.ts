@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback, useRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { Wn } from "../figma_app/88484";
 import { Uz } from "../905/63728";
@@ -16,7 +16,7 @@ import { Q1 } from "../905/201596";
 import { nb } from "../figma_app/543100";
 import { FC } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
-import { b6L, dDF } from "../figma_app/43951";
+import { CommunityPlaygroundFileSelectorRecentFilesView, FileCanEdit } from "../figma_app/43951";
 import { YN, iP } from "../figma_app/349248";
 import { Lk, uH } from "../figma_app/162807";
 import { $W } from "../905/144933";
@@ -38,7 +38,7 @@ export function $$O4(e) {
   });
 }
 export function $$R5() {
-  let e = Rs(b6L({}));
+  let e = Rs(CommunityPlaygroundFileSelectorRecentFilesView({}));
   useEffect(() => {
     if ("loaded" === e.status) {
       let t = YN(e.data.currentUser.recentFiles2);
@@ -111,7 +111,7 @@ export function $$P2({
   }) => ({
     key: e
   })), [o]);
-  let E = _$$p(dDF, g);
+  let E = _$$p(FileCanEdit, g);
   let I = useMemo(() => E.map(({
     result: e
   }) => e.transform(e => !!e.file?.hasPermission)), [E]);

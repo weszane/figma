@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useDelayedTrue } from "../905/815905";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Rs } from "../figma_app/288654";
 import { reportError } from "../905/11";
@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { fileEntityDataMapper } from "../905/943101";
 import { FContainerKindType } from "../figma_app/191312";
-import { vgO } from "../figma_app/43951";
+import { EditWorkspacePinnedFileView } from "../figma_app/43951";
 import { p as _$$p } from "../0c62c2fd/698840";
 import { p as _$$p2, N } from "../0c62c2fd/687448";
 export function $$g0({
@@ -18,7 +18,7 @@ export function $$g0({
 }) {
   let g = useDispatch();
   let h = _$$p2(getI18nString("file_browser.pinning.pin_modal.edit.confirmation_bell"), "file-browser-workspace-edit-pin");
-  let x = Rs(vgO, {
+  let x = Rs(EditWorkspacePinnedFileView, {
     pinnedFileId: e
   });
   if ("loaded" !== x.status) return null;

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { DP } from "../905/158740";
 import { Qf } from "../905/266289";
 import { Fullscreen } from "../figma_app/763686";

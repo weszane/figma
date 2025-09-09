@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { Fullscreen } from "../figma_app/763686";
 import l from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
@@ -95,7 +95,7 @@ function M(e) {
         let e = data.url.pathname.split(/\//)[3];
         if (e) try {
           i = decodeURI(e).replace(/-/g, " ");
-        } catch (e) {}
+        } catch (e) { }
       }
       t = i ? jsx("div", {
         className: Qq,
@@ -220,7 +220,7 @@ function M(e) {
   });
   let q = jsx(_$$E, {
     className: `${ho} ${vk}`,
-    recordingKey: Pt(e, "secondaryButton"),
+    recordingKey: generateRecordingKey(e, "secondaryButton"),
     onClick: l,
     children: Y
   });
@@ -232,7 +232,7 @@ function M(e) {
     }),
     onClick: f,
     "data-testid": "hyperlink.edit",
-    recordingKey: Pt(e, "editHyperlinkPopup"),
+    recordingKey: generateRecordingKey(e, "editHyperlinkPopup"),
     children: [t && jsxs(Fragment, {
       children: [jsx(_$$B, {
         className: Kk,
@@ -265,7 +265,7 @@ function M(e) {
                 className: yF
               }), jsx(_$$E, {
                 className: hc,
-                recordingKey: Pt(e, "unfurlHyperlinkPopup"),
+                recordingKey: generateRecordingKey(e, "unfurlHyperlinkPopup"),
                 onClick: y,
                 htmlAttributes: {
                   "data-testid": "hyperlink.preview"

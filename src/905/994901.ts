@@ -2,7 +2,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { ds } from "../figma_app/314264";
 import { d1 } from "../905/766303";
@@ -100,7 +100,7 @@ export let $$g0 = createOptimistThunk(async (e, {
       domain: vO(t),
       userId: e.getState().user?.id
     });
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "embed_failed",
       message: getI18nString("whiteboard.embed_actions.embed_failed"),
       timeoutOverride: 5e3,

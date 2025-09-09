@@ -4,6 +4,15 @@ import * as t from '@babel/types'
 export default declare((_, opts) => {
   return {
     visitor: {
+      // VariableDeclarator(path) {
+      //   const { node } = path
+      //   const { id, init } = node
+      //   if (t.isCallExpression(init)) {
+      //     const args = init.arguments
+      //     const first = args[0]
+      //     path.scope.rename(id.name, first.name)
+      //   }
+      // },
       ImportDeclaration(p) {
         const sourceValue = p.node.source.value
         // 快速路径匹配

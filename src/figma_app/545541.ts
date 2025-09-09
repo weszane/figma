@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { U, iT } from "../figma_app/901889";
@@ -9,17 +9,17 @@ import { XHR } from "../905/910117";
 import { D as _$$D } from "../905/273829";
 import { _I } from "../figma_app/473493";
 import { xb } from "../figma_app/910914";
-import { $n } from "../905/515076";
+import { getCodegenLanguagePreference } from "../905/515076";
 import { Bs } from "../figma_app/120227";
 import { b as _$$b } from "../905/985254";
 import { m0 } from "../figma_app/976749";
 import { YN, mf, uf, _P } from "../figma_app/844435";
 import { qZ } from "../905/201014";
-import { bw } from "../figma_app/741237";
+import { updateDevHandoffCodeLanguage } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { FUnitType, FOverrideType, FPluginType, FPublicationStatusType } from "../figma_app/191312";
-import { JuA } from "../figma_app/43951";
+import { PluginPreferencesView } from "../figma_app/43951";
 import { X$, H3 } from "../figma_app/465071";
 import { isDevModeWithCodegen } from "../figma_app/300692";
 import { getMappedPluginId } from "../figma_app/455620";
@@ -330,11 +330,11 @@ export function $$F0() {
     loaded,
     preferences
   } = function () {
-    let e = TA();
+    let e = getUserId();
     let {
       loaded: _loaded,
       preferences: _preferences
-    } = V(Rs(JuA, {
+    } = V(Rs(PluginPreferencesView, {
       targetOrgId: null,
       targetUserId: e
     }));
@@ -370,7 +370,7 @@ export function $$F0() {
   let w = useMemo(() => x?.pinnedPluginIDs ?? T.pinnedPluginIDs, [T, x]);
   let O = X$("usePluginPreferences").unwrapOr(null);
   let R = H3(O) ?? null;
-  let L = TA();
+  let L = getUserId();
   let D = YN();
   let M = useMemo(() => w.map(e => {
     let t = C.get(e);
@@ -539,12 +539,12 @@ export function $$U2() {
   let g = _P(p?.id ?? "", _);
   if (!t) {
     if (_loaded3 && plugin) {
-      if (!isDevModeWithCodegen(plugin) || !(e = $n(plugin))) return;
+      if (!isDevModeWithCodegen(plugin) || !(e = getCodegenLanguagePreference(plugin))) return;
     } else if (_ && g.loaded && localCodegenSettings) {
       if (p?.type === "published-plugin" && !g.plugin || g.plugin && !isDevModeWithCodegen(g.plugin)) return;
       e = p;
     } else localCodegenSettings?.language.type === "first-party" && (e = p);
-    e && (!plugin && localCodegenSettings && u(e, g.plugin ?? null, localCodegenSettings.preferences), bw(e), r(!0));
+    e && (!plugin && localCodegenSettings && u(e, g.plugin ?? null, localCodegenSettings.preferences), updateDevHandoffCodeLanguage(e), r(!0));
   }
 }
 async function B(e) {
@@ -555,7 +555,7 @@ async function B(e) {
 function G() {
   let e = X$("useLGOrgPluginPreferences").unwrapOr(null);
   let t = H3(e) ?? null;
-  return V(Rs(JuA, {
+  return V(Rs(PluginPreferencesView, {
     targetOrgId: t,
     targetUserId: null
   }));

@@ -13,7 +13,7 @@ import { J as _$$J2 } from "../905/125993";
 import { B as _$$B } from "../905/107177";
 import { getSingletonSceneGraph } from "../905/700578";
 import { oy, gZ, Go, LZ } from "../figma_app/964367";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { MM, wv } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -181,7 +181,7 @@ export function $$A0({
           }),
           isCollapsedByDefault: !0,
           isChevronAlwaysVisible: !0,
-          recordingKey: Pt(e, "additionalSettingsCollapsibleRow"),
+          recordingKey: generateRecordingKey(e, "additionalSettingsCollapsibleRow"),
           children: [jsx(Label, {
             children: "JSX Flavor"
           }), jsx(DE, {

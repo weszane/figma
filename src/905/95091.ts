@@ -4,7 +4,7 @@ import { U } from "../905/708285";
 import { dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { colorToHex } from "../905/436288";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { X } from "../905/190511";
@@ -73,7 +73,7 @@ export function $$x1({
     children: jsx(K, {
       "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
       onClick: e,
-      recordingKey: Pt(t, "paint", "detachVariableButton"),
+      recordingKey: generateRecordingKey(t, "paint", "detachVariableButton"),
       htmlAttributes: {
         onMouseDown: dG,
         "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
@@ -102,7 +102,7 @@ function S({
   }));
   let I = getFeatureFlags().ds_qw_variable_and_style_visibility && g ? jsx($$x1, {
     onClick: h,
-    recordingKey: Pt(l, "paint", "detachVariableButton")
+    recordingKey: generateRecordingKey(l, "paint", "detachVariableButton")
   }) : jsx(Fragment, {});
   return jsxs(Fragment, {
     children: [jsx(_$$s, {
@@ -121,7 +121,7 @@ function S({
       styleValue: i,
       onClick: s,
       shouldStretch: getFeatureFlags().ds_qw_variable_and_style_visibility,
-      recordingKey: Pt(l, "styleButton")
+      recordingKey: generateRecordingKey(l, "styleButton")
     }), I]
   });
 }

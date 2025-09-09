@@ -3,7 +3,7 @@ import { forwardRef, useState, useCallback, useEffect } from "react";
 import { debounce } from "../905/915765";
 import { BackgroundPattern } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
@@ -78,10 +78,10 @@ export function $$C3({
       onChange: e => t(e),
       onMouseDown: e => e.stopPropagation(),
       property: e,
-      recordingKey: Pt("videoType"),
+      recordingKey: generateRecordingKey("videoType"),
       children: jsx(A, {
         value: "MP4",
-        recordingKey: Pt("videoType", "mp4")
+        recordingKey: generateRecordingKey("videoType", "mp4")
       })
     })
   });
@@ -106,21 +106,21 @@ export function $$w0({
       onChange: e => t(e),
       onMouseDown: e => e.stopPropagation(),
       property: e,
-      recordingKey: Pt("imageType"),
+      recordingKey: generateRecordingKey("imageType"),
       children: [jsx(S, {
         value: "PNG",
-        recordingKey: Pt("imageType", "png")
+        recordingKey: generateRecordingKey("imageType", "png")
       }), jsx(S, {
         value: "JPEG",
-        recordingKey: Pt("imageType", "jpeg"),
+        recordingKey: generateRecordingKey("imageType", "jpeg"),
         fullWidth: !0
       }), jsx(S, {
         value: "PDF",
-        recordingKey: Pt("imageType", "pdf"),
+        recordingKey: generateRecordingKey("imageType", "pdf"),
         fullWidth: !0
       }), !!getFeatureFlags().buzz_print_export && jsx(S, {
         value: "PDF Print",
-        recordingKey: Pt("imageType", "pdf_print"),
+        recordingKey: generateRecordingKey("imageType", "pdf_print"),
         fullWidth: !0
       })]
     })
@@ -136,7 +136,7 @@ export function $$O2({
 }) {
   let o = b.map((e, t) => jsx(N, {
     value: e,
-    recordingKey: Pt("constraints", e.value),
+    recordingKey: generateRecordingKey("constraints", e.value),
     fullWidth: !0
   }, t));
   return jsx(_$$E, {
@@ -153,7 +153,7 @@ export function $$O2({
       onChange: e => r(e),
       onMouseDown: e => e.stopPropagation(),
       property: t,
-      recordingKey: Pt("contraint"),
+      recordingKey: generateRecordingKey("contraint"),
       children: o
     })
   });

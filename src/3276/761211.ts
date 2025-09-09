@@ -1,5 +1,5 @@
-import { useDispatch } from "../vendor/514228";
-import { Pt } from "../figma_app/806412";
+import { useDispatch } from "react-redux";
+import { generateRecordingKey } from "../figma_app/878298";
 import { j7 } from "../905/929976";
 import { LO } from "../figma_app/8833";
 import { t as _$$t } from "../469e6e40/489933";
@@ -40,7 +40,7 @@ export function $$y0(e) {
       if (e.showRequestFlow) return Promise.resolve();
       let n = validatePublishedPluginInOrgAllowlist();
       if (!hasLocalFileId(e.resource) && !n) return Promise.resolve();
-      if (M) E();else {
+      if (M) E(); else {
         let {
           e
         } = t;
@@ -76,7 +76,7 @@ export function $$y0(e) {
     onPointerDownCallback: () => {
       e.showRequestFlow || hasLocalFileId(e.resource) || M || F.getAndCache(e.resource, n);
     },
-    recordingKey: Pt("plugin", e.resource.plugin_id)
+    recordingKey: generateRecordingKey("plugin", e.resource.plugin_id)
   });
 }
 export const c = $$y0;

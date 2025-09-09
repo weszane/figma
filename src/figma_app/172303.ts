@@ -1,5 +1,5 @@
 import { debugState } from "../905/407919";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 export function $$a0(e, t, r, a, s, o, l) {
   let d = {
     type: e,
@@ -8,8 +8,8 @@ export function $$a0(e, t, r, a, s, o, l) {
     timeoutOverride: a ?? 5e3,
     icon: s ?? void 0,
     button: o ?? void 0,
-    ...r,
+    ...r
   };
-  debugState.dispatch(F.enqueue(d));
+  debugState.dispatch(VisualBellActions.enqueue(d));
 }
 export const j = $$a0;

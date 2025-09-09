@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { ItemType, AppStateTsApi, SelfDesignType, StateHierarchy } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";

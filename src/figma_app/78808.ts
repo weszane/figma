@@ -1,7 +1,7 @@
 import { NC } from '../905/17179';
 import { d as _$$d } from '../905/91820';
 import { showModalHandler } from '../905/156213';
-import { F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { n as _$$n } from '../905/347702';
 import { createOptimistThunk } from '../905/350402';
@@ -9,7 +9,7 @@ import { OpenTarget } from '../905/380844';
 import { subscribeAndAwaitData } from '../905/553831';
 import { s as _$$s2 } from '../905/573154';
 import { getFeatureFlags } from '../905/601108';
-import { Ay } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { to as _$$to } from '../905/612685';
 import { serializeQuery } from '../905/634134';
 import { logError } from '../905/714362';
@@ -20,7 +20,7 @@ import { WB } from '../905/761735';
 import { VERSION_HISTORY_SET_FILE_LAST_SEEN_AT } from '../905/784363';
 import { XHR } from '../905/910117';
 import { debounce } from '../905/915765';
-import { zCd } from '../figma_app/43951';
+import { FileCreationPermissionsView } from '../figma_app/43951';
 import { isDevEnvironment } from '../figma_app/169182';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { ds } from '../figma_app/314264';
@@ -51,7 +51,7 @@ let $$B18 = createOptimistThunk((e, t) => {
   let r = _$$S.putFile(t).then(() => {
     t.onSuccess?.();
   }).catch(r => {
-    if (t.onError?.(), e.dispatch(F.enqueue({
+    if (t.onError?.(), e.dispatch(VisualBellActions.enqueue({
       message: getI18nString('file_permissions.generic_error'),
       error: !0
     })), isDevEnvironment()) {
@@ -75,19 +75,19 @@ let $$V11 = createOptimistThunk(async (e, t) => {
   let s = t.folderId || a.folderId;
   let o = !1;
   if (s) {
-    let e = oA((await subscribeAndAwaitData(zCd, {
+    let e = oA((await subscribeAndAwaitData(FileCreationPermissionsView, {
       projectId: s
     })).project);
     o = !!e && !!a.editorType && d6(e, a.editorType);
   }
   o && (i.folder_id = s);
   t.versionId && (i.version_id = t.versionId);
-  e.dispatch(F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     type: 'file_duplicating',
     message: getI18nString('visual_bell.duplicating')
   }));
   XHR.post(`/api/multiplayer/${a.key}/copy?${serializeQuery(i)}`).then(i => {
-    e.dispatch(F.dequeue({}));
+    e.dispatch(VisualBellActions.dequeue({}));
     let s = !!r.openFile;
     if (!i.data.error && i.data.meta && s) {
       let s = i.data.meta;
@@ -109,10 +109,10 @@ let $$V11 = createOptimistThunk(async (e, t) => {
         });
         return;
       }
-      Ay.redirect(_$$to(s), '_blank');
+      customHistory.redirect(_$$to(s), '_blank');
     }
   }).catch(() => {
-    e.dispatch(F.dequeue({}));
+    e.dispatch(VisualBellActions.dequeue({}));
     e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_copy_error')));
   });
 });
@@ -134,7 +134,7 @@ let $$W7 = createOptimistThunk(async (e, t, {
 }) => {
   let n = await r.fetchFile(t.fileKey);
   let i = XHR.post(`/api/files/${t.fileKey}/workshop`).then(() => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString('whiteboard.open_sessions.open_session_started_notification'),
       button: {
         text: getI18nString('whiteboard.open_sessions.open_session_started_notification_copy_link'),
@@ -148,7 +148,7 @@ let $$W7 = createOptimistThunk(async (e, t, {
       }
     }));
   }).catch(() => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString('whiteboard.open_sessions.open_session_start_failed_notification'),
       error: !0
     }));
@@ -193,11 +193,11 @@ let $$K2 = createOptimistThunk(async (e, t) => {
 let $$Y0 = createOptimistThunk((e, t) => {
   $$U1(t.file_key, t.thumbnail_guid).then(() => {
     let r = getFeatureFlags().dse_library_pg_thumbnails ? t.thumbnail_guid ? getI18nString('file_browser.file_browser_actions.file_thumbnail_set') : getI18nString('file_browser.file_browser_actions.default_file_thumbnail_restored') : t.thumbnail_guid ? getI18nString('file_browser.file_browser_actions.thumbnail_set') : getI18nString('file_browser.file_browser_actions.default_thumbnail_restored');
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: r
     }));
   }).catch(() => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString('file_browser.error_try_again'),
       error: !0
     }));
@@ -224,7 +224,7 @@ let $$X9 = createOptimistThunk((e, t) => {
 let $$q12 = createOptimistThunk((e, t) => {
   Dk(t.embedCode).then(() => {
     ds('Embed Code Copied', t.fileKey, e.getState());
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: 'embeded_code_copied_to_clipboard',
       message: getI18nString('file_browser.file_browser_actions.embed_code_copied')
     }));
@@ -247,7 +247,7 @@ function J(e, t) {
     button: t.visualBellButton,
     ...i
   };
-  e.dispatch(F.enqueue(r));
+  e.dispatch(VisualBellActions.enqueue(r));
 }
 let $$Z8 = _$$n(createOptimistThunk((e, t) => {
   let r;

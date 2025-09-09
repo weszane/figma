@@ -1,11 +1,11 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback, useState, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { o as _$$o } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { MM, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
@@ -96,7 +96,7 @@ function P({
     "aria-label": getI18nString("fullscreen.properties_panel.borders.border_per_side"),
     "data-tooltip": getI18nString("fullscreen.properties_panel.borders.border_per_side"),
     dataTestId: `stroke-button-${isInvalidValue(a) ? "mixed" : a.join(",")}`,
-    recordingKey: Pt(r, "borderSide")
+    recordingKey: generateRecordingKey(r, "borderSide")
   };
   let l = Fz(a, t);
   return jsx(_$$d, {
@@ -149,7 +149,7 @@ function D(e) {
   o.push(jsx(MM, {
     checked: om.ALL === e.borderOption,
     onClick: () => s(om.ALL),
-    recordingKey: Pt(e, om.ALL),
+    recordingKey: generateRecordingKey(e, om.ALL),
     children: jsxs("div", {
       className: C,
       children: [jsx("div", {
@@ -167,7 +167,7 @@ function D(e) {
     o.push(jsx(MM, {
       checked: r === e.borderOption,
       onClick: () => s(r),
-      recordingKey: Pt(e, i),
+      recordingKey: generateRecordingKey(e, i),
       children: jsxs("div", {
         className: C,
         children: [jsx("div", {
@@ -185,7 +185,7 @@ function D(e) {
   o.push(jsx(MM, {
     checked: om.CUSTOM === e.borderOption,
     onClick: () => s(om.CUSTOM),
-    recordingKey: Pt(e, om.CUSTOM),
+    recordingKey: generateRecordingKey(e, om.CUSTOM),
     children: jsxs("div", {
       className: C,
       children: [jsx("div", {
@@ -239,7 +239,7 @@ function L({
   return jsx(_$$e, {
     condition: !0,
     wrapper: t => jsx(sA, {
-      recordingKey: Pt(o, "independentStrokeWeightInputWrapper"),
+      recordingKey: generateRecordingKey(o, "independentStrokeWeightInputWrapper"),
       fields: E,
       resolvedType: VariableResolvedDataType.FLOAT,
       currentFieldValue: isValidValue(i) ? i : void 0,

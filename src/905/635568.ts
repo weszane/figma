@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { jD } from "../905/765855";
 import { LR } from "../figma_app/120210";
 import { t as _$$t } from "../905/192333";

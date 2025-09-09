@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useEffect, Suspense } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { isMobileUA } from "../figma_app/778880";
 import { s_ } from "../905/17223";
@@ -12,7 +12,7 @@ import { Rs } from "../figma_app/288654";
 import { A as _$$A } from "../905/654645";
 import { Vy, u8, A5 } from "../figma_app/391338";
 import { FResourceCategoryType, FOrganizationLevelType, FPlanNameType, FMemberRoleType, FUserTypeClassification, FAccessLevelType, FPermissionLevelType } from "../figma_app/191312";
-import { Cb9, N66, yQw, ZY7, vD4, WEk } from "../figma_app/43951";
+import { PendingTeamRoleRequestsByTeamId, TeamMembersModalView, TeamById, TeamAdminSettingsPage, TeamSettings, PendingAssetTransferRequestByTeam } from "../figma_app/43951";
 import { e6 as _$$e } from "../905/557142";
 import { debug } from "../figma_app/465776";
 import b from "classnames";
@@ -23,7 +23,7 @@ import { oB, j7, sf } from "../905/929976";
 import { showModalHandler, hideModal, popModalStack, hideSpecificModal, updateModal } from "../905/156213";
 import { P as _$$P } from "../905/842406";
 import { Um } from "../905/848862";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { OL as _$$OL, QN } from "../figma_app/12796";
 import { $S } from "../905/351260";
 import { yN } from "../905/727738";
@@ -131,7 +131,7 @@ let X = "members_list_row--avatarWithHandle--yirlt";
 let et = "team-member-list-row-dropdown";
 function ea(e) {
   let t = useDispatch();
-  let a = Pc();
+  let a = selectUser();
   let i = _$$P();
   let l = Um();
   let o = useMemo(() => e.teamLgResult.transform(({
@@ -464,7 +464,7 @@ function el(e) {
   });
 }
 function eo(e) {
-  let t = Rs(Cb9, {
+  let t = Rs(PendingTeamRoleRequestsByTeamId, {
     teamId: e.teamId
   });
   if ("loaded" === t.status) {
@@ -486,7 +486,7 @@ function ed(e) {
     lgDataLoaded,
     lgData
   } = function (e) {
-    let t = Rs(N66, {
+    let t = Rs(TeamMembersModalView, {
       teamId: e
     });
     let a = t.transform(e => e.team?.roles.reduce((t, a) => {
@@ -538,7 +538,7 @@ function ed(e) {
     };
   }(e.teamId);
   let i = useSelector(t => t.teamMembersByTeamId[e.teamId] || {});
-  let l = Rs(yQw, {
+  let l = Rs(TeamById, {
     teamId: e.teamId
   });
   let o = e => {
@@ -653,7 +653,7 @@ let tn = {
 let tr = registerModal(function () {
   let e = useDispatch();
   let t = cD();
-  let a = Rs(ZY7, {
+  let a = Rs(TeamAdminSettingsPage, {
     teamId: t
   });
   let n = _$$oA(a.data?.team);
@@ -822,7 +822,7 @@ function tf(e) {
     communityProfileHandle: i.community_profile_handle,
     communityProfileId: i.community_profile_id
   }), [i, l]);
-  let [u] = IT(vD4({
+  let [u] = IT(TeamSettings({
     teamId: e.team.id
   }));
   let [m] = mI(u);
@@ -871,7 +871,7 @@ function tf(e) {
     if ("loaded" === m.status && m.data) return m.data.team?.workspace;
   }, [m]);
   let L = m.data?.team && oA(m.data.team)?.hasActiveProjectConnection;
-  let P = Rs(WEk, {
+  let P = Rs(PendingAssetTransferRequestByTeam, {
     teamId: i.id
   });
   let D = getFeatureFlags().ai_ga;

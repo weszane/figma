@@ -1,5 +1,5 @@
 import { permissionScopeHandler } from "../905/189185";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { lg } from "../figma_app/976749";
 import { ZT } from "../figma_app/844435";
@@ -54,7 +54,7 @@ export function $$x0(e) {
     onPointerDownCallback: () => {
       hasLocalFileId(e.resource) || y || F.getAndCache(e.resource, t);
     },
-    recordingKey: Pt("widget", e.resource.plugin_id)
+    recordingKey: generateRecordingKey("widget", e.resource.plugin_id)
   });
 }
 let b = new Point(64, 32);

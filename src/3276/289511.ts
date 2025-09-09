@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { YQ } from "../905/502364";
 import { jD } from "../905/765855";

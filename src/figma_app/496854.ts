@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { hr } from "../905/352022";
 import { FPlanNameType } from "../figma_app/191312";
 export function $$o1() {

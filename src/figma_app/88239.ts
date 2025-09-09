@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback } from "react";
-import { useSelector, useStore, useDispatch } from "../vendor/514228";
+import { useSelector, useStore, useDispatch } from "react-redux";
 import { AppStateTsApi, HandoffBindingsCpp, AutosaveEventType } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import o from "../vendor/523035";

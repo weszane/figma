@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useContext, useCallback, useEffect, cloneElement } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { Uz } from "../905/63728";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
 import { V } from "../figma_app/473391";
 import { o as _$$o } from "../figma_app/915774";
@@ -98,7 +98,7 @@ function R({
     (0 !== e.detail || e.nativeEvent.pointerType) && (keyboardNavigationItem?.focus(), v());
   }, [v, keyboardNavigationItem]);
   let O = `componentScrollContainerTile.${e}.${t}`;
-  let R = rf(O, "click", w);
+  let R = useHandleMouseEvent(O, "click", w);
   return jsx(L, {
     enableKeyboardNavigation: !0,
     isList: r,

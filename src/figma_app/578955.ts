@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { U } from "../figma_app/901889";
 import { tS } from "../figma_app/516028";
 import { u as _$$u } from "../figma_app/443973";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { T1 } from "../figma_app/545293";
 import { B, t as _$$t } from "../figma_app/325988";
@@ -16,7 +16,7 @@ async function _(e) {
   } = e;
   let n = {
     session_id: null,
-    search_id: _$$g(),
+    search_id: generateUUIDv4(),
     node_id: e.node.guid
   };
   try {
@@ -87,12 +87,12 @@ async function m(e, t, r, n, a) {
           a[e] = t;
         });
         Object.entries(e.props).forEach(([e, t]) => {
-          let r = function(e) {
+          let r = function (e) {
             let t = e.split("#");
             return 2 !== t.length ? e : t.reverse().join("#");
           }(e);
           let n = p?.parsedDefs.find(e => e.rawProp === r);
-          a[r] = n ? function(e, t) {
+          a[r] = n ? function (e, t) {
             switch (t) {
               case "BOOLEAN":
                 return "true" === e;
@@ -107,7 +107,7 @@ async function m(e, t, r, n, a) {
       }
     });
   });
-  let f = function(e) {
+  let f = function (e) {
     let t = {};
     e.forEach(e => {
       Object.entries(e).forEach(([e, r]) => {
@@ -148,7 +148,7 @@ export function $$f1(e, t, r, c) {
     h(g);
     y(!0);
     let n = new AbortController();
-    (function(e, t, r, n, i, s) {
+    (function (e, t, r, n, i, s) {
       let o;
       switch ($$E0()) {
         case z_.GPT:
@@ -193,4 +193,4 @@ export function $$E0() {
   return getFeatureFlags().anticipation_props_fs ? z_.FS : z_.GPT;
 }
 export const p3 = $$E0;
-export const V2 = $$f1; 
+export const V2 = $$f1;

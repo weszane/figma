@@ -1,7 +1,7 @@
 import { CanvasSearchHelpers, SelectionState, HandoffBindingsCpp, AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { NC } from "../905/17179";
 import { logInfo } from "../905/714362";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { G } from "../905/674940";
 import { fullscreenValue } from "../figma_app/455680";
 import { wY } from "../905/753206";
@@ -26,7 +26,7 @@ let $$_0 = createOptimistThunk(e => {
   null != AppStateTsApi && AppStateTsApi.uiState().showMemoryUsage.set(!1);
   e.dispatch(XE());
   fullscreenValue.isReady() && (Fullscreen.fullscreenWasClosed(), wY());
-  e.dispatch(F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: "unsaved_changes"
   }));
   G.clear();

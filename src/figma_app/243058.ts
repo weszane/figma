@@ -1,375 +1,404 @@
-import { $y, cI, I0, iF, iV, Kj, kY, M4, sS, UG, Uw, VP } from '../905/859698';
-import { defaultSessionLocalIDString, sessionLocalIDToString, isValidSessionLocalID, defaultSessionLocalID, parseSessionLocalID } from '../905/871411';
-import { debug } from '../figma_app/465776';
-function y(e, t) {
-  function r(t, r) {
-    return t.startsWith(e) ? r(t.slice(e.length)) : null;
+// Imports refactored to match new exported names
+import type {
+  ReturnKeyVersion,
+} from '../905/859698'
+import {
+  CodeComponentId,
+  CodeFileId,
+  CodeLibraryId,
+  ManagedStringId,
+  ModuleId,
+  ResponsiveSetId,
+  StateGroupId,
+  StyleId,
+  SymbolId,
+  VariableCollectionId,
+  VariableID,
+  VariableOverrideId,
+} from '../905/859698'
+import {
+  defaultSessionLocalID,
+  defaultSessionLocalIDString,
+  isValidSessionLocalID,
+  parseSessionLocalID,
+  sessionLocalIDToString,
+} from '../905/871411'
+import { debug } from '../figma_app/465776'
+
+/**
+ * Utility for handling prefixed node IDs and their conversions.
+ * Original function: y
+ */
+function createNodeIdHandler(prefix: string, refType: ReturnKeyVersion) {
+  /**
+   * Helper to match and process prefixed strings.
+   */
+  function matchPrefix(str: string, fn: (s: string) => any) {
+    return str.startsWith(prefix) ? fn(str.slice(prefix.length)) : null
   }
-  function n(e) {
-    return t.fromString(e);
+  /**
+   * Converts string to refType.
+   */
+  function refFromString(str: string) {
+    return refType.fromString(str)
   }
-  function i(e) {
-    return r(e, e => n(e) ? null : parseSessionLocalID(e));
+  /**
+   * Returns sessionLocalID if string is not a refType.
+   */
+  function guidObjIfLocal(str: string) {
+    return matchPrefix(str, s => refFromString(s) ? null : parseSessionLocalID(s))
   }
-  function a(e) {
-    return r(e, e => n(e));
+  /**
+   * Returns refType if string is a refType.
+   */
+  function refIfSubscribed(str: string) {
+    return matchPrefix(str, s => refFromString(s))
   }
-  function s(t) {
-    return e + sessionLocalIDToString(t);
+  /**
+   * Converts sessionLocalID to prefixed string.
+   */
+  function fromLocalNodeIdObj(id: any) {
+    return prefix + sessionLocalIDToString(id)
   }
-  function o(r) {
-    return e + t.toString(r);
+  /**
+   * Converts refType to prefixed string.
+   */
+  function fromRef(ref: any) {
+    return prefix + refType.toString(ref)
   }
+
   return {
-    toString(e) {
-      return e;
+    /**
+     * Returns the input string.
+     * Original: toString
+     */
+    toString(str: string) {
+      return str
     },
-    toKiwi(e) {
-      return r(e, e => {
-        let t = n(e);
-        if (t) {
-          return {
-            assetRef: t
-          };
-        }
-        let r = parseSessionLocalID(e);
-        if (r) {
-          return {
-            guid: r
-          };
-        }
-      }) ?? {
-        guid: defaultSessionLocalID
-      };
+    /**
+     * Converts string to Kiwi object.
+     * Original: toKiwi
+     */
+    toKiwi(str: string) {
+      return (
+        matchPrefix(str, (s) => {
+          const ref = refFromString(s)
+          if (ref) {
+            return { assetRef: ref }
+          }
+          const guid = parseSessionLocalID(s)
+          if (guid) {
+            return { guid }
+          }
+        }) ?? { guid: defaultSessionLocalID }
+      )
     },
-    toGuidObjIfLocal: i,
-    toGuidStrIfLocal(e) {
-      return r(e, e => n(e) ? null : e);
+    /**
+     * Returns sessionLocalID if local.
+     * Original: toGuidObjIfLocal
+     */
+    toGuidObjIfLocal: guidObjIfLocal,
+    /**
+     * Returns guid string if local.
+     * Original: toGuidStrIfLocal
+     */
+    toGuidStrIfLocal(str: string) {
+      return matchPrefix(str, s => refFromString(s) ? null : s)
     },
-    toRefIfSubscribed: a,
-    fromString(e) {
-      return r(e, t => parseSessionLocalID(t) || n(t) ? e : null);
+    /**
+     * Returns refType if subscribed.
+     * Original: toRefIfSubscribed
+     */
+    toRefIfSubscribed: refIfSubscribed,
+    /**
+     * Parses string to node ID.
+     * Original: fromString
+     */
+    fromString(str: string) {
+      return matchPrefix(str, s => parseSessionLocalID(s) || refFromString(s) ? str : null)
     },
-    fromLocalNodeIdObj: s,
-    fromLocalNodeIdStr(t) {
-      return parseSessionLocalID(t) ? e + t : null;
+    /**
+     * Converts sessionLocalID to prefixed string.
+     * Original: fromLocalNodeIdObj
+     */
+    fromLocalNodeIdObj,
+    /**
+     * Converts sessionLocalID string to prefixed string.
+     * Original: fromLocalNodeIdStr
+     */
+    fromLocalNodeIdStr(str: string) {
+      return parseSessionLocalID(str) ? prefix + str : null
     },
-    fromRef: o,
-    fromKiwi(e) {
-      if (!e) return null;
-      let {
-        guid,
-        assetRef
-      } = e;
-      if (guid && !assetRef) return s(guid);
+    /**
+     * Converts refType to prefixed string.
+     * Original: fromRef
+     */
+    fromRef,
+    /**
+     * Converts Kiwi object to node ID string.
+     * Original: fromKiwi
+     */
+    fromKiwi(obj: any) {
+      if (!obj)
+        return null
+      const { guid, assetRef } = obj
+      if (guid && !assetRef)
+        return fromLocalNodeIdObj(guid)
       if (!guid && assetRef) {
-        let e = t.fromKiwi(assetRef);
-        if (e) return o(e);
+        const ref = refType.fromKiwi(assetRef)
+        if (ref)
+          return fromRef(ref)
       }
-      return null;
+      return null
     },
-    isValid(e) {
-      let r = i(e);
-      if (r) return isValidSessionLocalID(r);
-      let n = a(e);
-      return !!n && t.isValid(n);
-    }
-  };
-}
-let tnode0 = y('CodeLibraryId:', sS);
-export const $$n8 = {
-  INVALID: tnode0.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode0.toString,
-  toKiwi: tnode0.toKiwi,
-  toGuidObjIfLocal: tnode0.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode0.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode0.toRefIfSubscribed,
-  fromString: tnode0.fromString,
-  fromLocalNodeIdObj: tnode0.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode0.fromLocalNodeIdStr,
-  fromRef: tnode0.fromRef,
-  fromKiwi: tnode0.fromKiwi,
-  isValid: tnode0.isValid
-};
-let tnode1 = y('CodeFileId:', VP);
-export const $$i3 = {
-  INVALID: tnode1.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode1.toString,
-  toKiwi: tnode1.toKiwi,
-  toGuidObjIfLocal: tnode1.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode1.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode1.toRefIfSubscribed,
-  fromString: tnode1.fromString,
-  fromLocalNodeIdObj: tnode1.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode1.fromLocalNodeIdStr,
-  fromRef: tnode1.fromRef,
-  fromKiwi: tnode1.fromKiwi,
-  isValid: tnode1.isValid
-};
-let tnode2 = y('CodeComponentId:', kY);
-export const $$a6 = {
-  INVALID: tnode2.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode2.toString,
-  toKiwi: tnode2.toKiwi,
-  toGuidObjIfLocal: tnode2.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode2.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode2.toRefIfSubscribed,
-  fromString: tnode2.fromString,
-  fromLocalNodeIdObj: tnode2.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode2.fromLocalNodeIdStr,
-  fromRef: tnode2.fromRef,
-  fromKiwi: tnode2.fromKiwi,
-  isValid: tnode2.isValid
-};
-let tnode3 = y('ManagedStringId:', iF);
-export const $$s10 = {
-  INVALID: tnode3.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode3.toString,
-  toKiwi: tnode3.toKiwi,
-  toGuidObjIfLocal: tnode3.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode3.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode3.toRefIfSubscribed,
-  fromString: tnode3.fromString,
-  fromLocalNodeIdObj: tnode3.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode3.fromLocalNodeIdStr,
-  fromRef: tnode3.fromRef,
-  fromKiwi: tnode3.fromKiwi,
-  isValid: tnode3.isValid
-};
-let tnode4 = y('ResponsiveSetId:', I0);
-export const $$o7 = {
-  INVALID: tnode4.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode4.toString,
-  toKiwi: tnode4.toKiwi,
-  toGuidObjIfLocal: tnode4.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode4.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode4.toRefIfSubscribed,
-  fromString: tnode4.fromString,
-  fromLocalNodeIdObj: tnode4.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode4.fromLocalNodeIdStr,
-  fromRef: tnode4.fromRef,
-  fromKiwi: tnode4.fromKiwi,
-  isValid: tnode4.isValid
-};
-let tnode5 = y('SymbolId:', Uw);
-export const $$l4 = {
-  INVALID: tnode5.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode5.toString,
-  toKiwi: tnode5.toKiwi,
-  toGuidObjIfLocal: tnode5.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode5.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode5.toRefIfSubscribed,
-  fromString: tnode5.fromString,
-  fromLocalNodeIdObj: tnode5.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode5.fromLocalNodeIdStr,
-  fromRef: tnode5.fromRef,
-  fromKiwi: tnode5.fromKiwi,
-  isValid: tnode5.isValid
-};
-let tnode6 = y('StateGroupId:', Kj);
-export const $$d0 = {
-  INVALID: tnode6.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode6.toString,
-  toKiwi: tnode6.toKiwi,
-  toGuidObjIfLocal: tnode6.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode6.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode6.toRefIfSubscribed,
-  fromString: tnode6.fromString,
-  fromLocalNodeIdObj: tnode6.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode6.fromLocalNodeIdStr,
-  fromRef: tnode6.fromRef,
-  fromKiwi: tnode6.fromKiwi,
-  isValid: tnode6.isValid
-};
-let tnode7 = y('StyleId:', $y);
-export const $$c2 = {
-  INVALID: tnode7.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode7.toString,
-  toKiwi: tnode7.toKiwi,
-  toGuidObjIfLocal: tnode7.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode7.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode7.toRefIfSubscribed,
-  fromString: tnode7.fromString,
-  fromLocalNodeIdObj: tnode7.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode7.fromLocalNodeIdStr,
-  fromRef: tnode7.fromRef,
-  fromKiwi: tnode7.fromKiwi,
-  isValid: tnode7.isValid,
-  fromBindingsObj(t) {
-    return t.guid && t.guid !== defaultSessionLocalIDString ? e.fromLocalNodeIdStr(t.guid) : e.fromRef(t.ref);
+    /**
+     * Validates node ID string.
+     * Original: isValid
+     */
+    isValid(str: string) {
+      const guid = guidObjIfLocal(str)
+      if (guid)
+        return isValidSessionLocalID(guid)
+      const ref = refIfSubscribed(str)
+      return !!ref && refType.isValid(ref)
+    },
   }
-};
-let tnode8 = y('VariableID:', M4);
-export const $$u11 = {
-  INVALID: tnode8.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode8.toString,
-  toKiwi: tnode8.toKiwi,
-  toGuidObjIfLocal: tnode8.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode8.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode8.toRefIfSubscribed,
-  fromString: tnode8.fromString,
-  fromLocalNodeIdObj: tnode8.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode8.fromLocalNodeIdStr,
-  fromRef: tnode8.fromRef,
-  fromKiwi: tnode8.fromKiwi,
-  isValid: tnode8.isValid
-};
-let tnode9 = y('VariableOverrideId:', cI);
-export const $$p1 = {
-  INVALID: tnode9.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode9.toString,
-  toKiwi: tnode9.toKiwi,
-  toGuidObjIfLocal: tnode9.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode9.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode9.toRefIfSubscribed,
-  fromString: tnode9.fromString,
-  fromLocalNodeIdObj: tnode9.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode9.fromLocalNodeIdStr,
-  fromRef: tnode9.fromRef,
-  fromKiwi: tnode9.fromKiwi,
-  isValid: tnode9.isValid
-};
-let tnode10 = 'VariableSetID:';
-let rnode11 = y('VariableCollectionId:', iV);
-let nnode12 = y(tnode10, iV);
-function inode13({
-  current: e,
-  deprecated: r
-}) {
-  return n => n.startsWith(tnode10) ? r(n) : e(n);
 }
-export const $$_9 = {
-  INVALID: rnode11.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: rnode11.toString,
-  toKiwi: inode13({
-    current: rnode11.toKiwi,
-    deprecated: nnode12.toKiwi
+
+// Node ID handlers grouped by business logic
+export const CodeLibraryIdHandler = createNodeIdHandler('CodeLibraryId:', CodeLibraryId)
+export const CodeFileIdHandler = createNodeIdHandler('CodeFileId:', CodeFileId)
+export const CodeComponentIdHandler = createNodeIdHandler('CodeComponentId:', CodeComponentId)
+export const ManagedStringIdHandler = createNodeIdHandler('ManagedStringId:', ManagedStringId)
+export const ResponsiveSetIdHandler = createNodeIdHandler('ResponsiveSetId:', ResponsiveSetId)
+export const SymbolIdHandler = createNodeIdHandler('SymbolId:', SymbolId)
+export const StateGroupIdHandler = createNodeIdHandler('StateGroupId:', StateGroupId)
+export const StyleIdHandler = {
+  ...createNodeIdHandler('StyleId:', StyleId),
+  /**
+   * Converts bindings object to StyleId string.
+   * Original: fromBindingsObj
+   */
+  fromBindingsObj(bindings: any) {
+    return bindings.guid && bindings.guid !== defaultSessionLocalIDString
+      ? StyleIdHandler.fromLocalNodeIdStr(bindings.guid)
+      : StyleIdHandler.fromRef(bindings.ref)
+  },
+}
+export const VariableIdHandler = createNodeIdHandler('VariableID:', VariableID)
+export const VariableOverrideIdHandler = createNodeIdHandler('VariableOverrideId:', VariableOverrideId)
+export const VariableCollectionIdHandler = createNodeIdHandler('VariableCollectionId:', VariableCollectionId)
+export const VariableSetIdHandler = createNodeIdHandler('VariableSetID:', VariableCollectionId)
+export const ModuleIdHandler = createNodeIdHandler('ModuleId:', ModuleId)
+
+// Handles deprecated VariableSetID prefix
+/**
+ * Handles both current and deprecated VariableSetID formats.
+ * Original: inode13
+ */
+function handleVariableSetId({
+  current,
+  deprecated,
+}: {
+  current: (str: string) => any
+  deprecated: (str: string) => any
+}) {
+  const deprecatedPrefix = 'VariableSetID:'
+  return (str: string) =>
+    str.startsWith(deprecatedPrefix) ? deprecated(str) : current(str)
+}
+
+export const VariableSetIdCompatHandler = {
+  INVALID: VariableCollectionIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  toString: VariableCollectionIdHandler.toString,
+  toKiwi: handleVariableSetId({
+    current: VariableCollectionIdHandler.toKiwi,
+    deprecated: VariableSetIdHandler.toKiwi,
   }),
-  toGuidObjIfLocal: inode13({
-    current: rnode11.toGuidObjIfLocal,
-    deprecated: nnode12.toGuidObjIfLocal
+  toGuidObjIfLocal: handleVariableSetId({
+    current: VariableCollectionIdHandler.toGuidObjIfLocal,
+    deprecated: VariableSetIdHandler.toGuidObjIfLocal,
   }),
-  toGuidStrIfLocal: inode13({
-    current: rnode11.toGuidStrIfLocal,
-    deprecated: nnode12.toGuidStrIfLocal
+  toGuidStrIfLocal: handleVariableSetId({
+    current: VariableCollectionIdHandler.toGuidStrIfLocal,
+    deprecated: VariableSetIdHandler.toGuidStrIfLocal,
   }),
-  toRefIfSubscribed: inode13({
-    current: rnode11.toRefIfSubscribed,
-    deprecated: nnode12.toRefIfSubscribed
+  toRefIfSubscribed: handleVariableSetId({
+    current: VariableCollectionIdHandler.toRefIfSubscribed,
+    deprecated: VariableSetIdHandler.toRefIfSubscribed,
   }),
-  fromString: inode13({
-    current: rnode11.fromString,
-    deprecated: nnode12.fromString
+  fromString: handleVariableSetId({
+    current: VariableCollectionIdHandler.fromString,
+    deprecated: VariableSetIdHandler.fromString,
   }),
-  fromLocalNodeIdObj: rnode11.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: rnode11.fromLocalNodeIdStr,
-  fromRef: rnode11.fromRef,
-  fromKiwi: rnode11.fromKiwi,
-  isValid: inode13({
-    current: rnode11.isValid,
-    deprecated: nnode12.isValid
-  })
-};
-let tnode14 = y('ModuleId:', UG);
-export const h = {
-  INVALID: tnode14.fromLocalNodeIdStr(defaultSessionLocalIDString),
-  toString: tnode14.toString,
-  toKiwi: tnode14.toKiwi,
-  toGuidObjIfLocal: tnode14.toGuidObjIfLocal,
-  toGuidStrIfLocal: tnode14.toGuidStrIfLocal,
-  toRefIfSubscribed: tnode14.toRefIfSubscribed,
-  fromString: tnode14.fromString,
-  fromLocalNodeIdObj: tnode14.fromLocalNodeIdObj,
-  fromLocalNodeIdStr: tnode14.fromLocalNodeIdStr,
-  fromRef: tnode14.fromRef,
-  fromKiwi: tnode14.fromKiwi,
-  isValid: tnode14.isValid
-};
-export const $$m5 = {
-  fromKiwi: e => {
-    if (e.guid) {
+  fromLocalNodeIdObj: VariableCollectionIdHandler.fromLocalNodeIdObj,
+  fromLocalNodeIdStr: VariableCollectionIdHandler.fromLocalNodeIdStr,
+  fromRef: VariableCollectionIdHandler.fromRef,
+  fromKiwi: VariableCollectionIdHandler.fromKiwi,
+  isValid: handleVariableSetId({
+    current: VariableCollectionIdHandler.isValid,
+    deprecated: VariableSetIdHandler.isValid,
+  }),
+}
+
+/**
+ * CanvasNodeId handler for multiple node types.
+ * Original: $$m5
+ */
+export const CanvasNodeIdHandler = {
+  /**
+   * Converts Kiwi object to CanvasNodeId.
+   * Original: fromKiwi
+   */
+  fromKiwi(obj: any) {
+    if (obj.guid) {
       return {
         type: 'guid',
-        guid: sessionLocalIDToString(e.guid)
-      };
+        guid: sessionLocalIDToString(obj.guid),
+      }
     }
-    if (e.stateGroupId) {
-      let t = $$d0.fromKiwi(e.stateGroupId);
-      if (t) {
+    if (obj.stateGroupId) {
+      const stateGroupId = StateGroupIdHandler.fromKiwi(obj.stateGroupId)
+      if (stateGroupId) {
         return {
           type: 'stateGroup',
-          stateGroupId: t
-        };
+          stateGroupId,
+        }
       }
     }
-    if (e.symbolId) {
-      let t = $$l4.fromKiwi(e.symbolId);
-      if (t) {
+    if (obj.symbolId) {
+      const symbolId = SymbolIdHandler.fromKiwi(obj.symbolId)
+      if (symbolId) {
         return {
           type: 'symbol',
-          symbolId: t
-        };
+          symbolId,
+        }
       }
     }
-    debug(!1, 'Unhandled CanvasNodeId type');
+    debug(false, 'Unhandled CanvasNodeId type')
   },
-  toGuidStrIfLocal: e => {
-    switch (e.type) {
+  /**
+   * Converts CanvasNodeId to guid string if local.
+   * Original: toGuidStrIfLocal
+   */
+  toGuidStrIfLocal(node: any) {
+    switch (node.type) {
       case 'guid':
-        return e.guid;
+        return node.guid
       case 'symbol':
-        return $$l4.toGuidStrIfLocal(e.symbolId);
+        return SymbolIdHandler.toGuidStrIfLocal(node.symbolId)
       case 'stateGroup':
-        return $$d0.toGuidStrIfLocal(e.stateGroupId);
+        return StateGroupIdHandler.toGuidStrIfLocal(node.stateGroupId)
     }
   },
-  toRefIfSubscribed: e => {
-    switch (e.type) {
+  /**
+   * Converts CanvasNodeId to ref if subscribed.
+   * Original: toRefIfSubscribed
+   */
+  toRefIfSubscribed(node: any) {
+    switch (node.type) {
       case 'guid':
-        return null;
+        return null
       case 'symbol':
-        return $$l4.toRefIfSubscribed(e.symbolId);
+        return SymbolIdHandler.toRefIfSubscribed(node.symbolId)
       case 'stateGroup':
-        return $$d0.toRefIfSubscribed(e.stateGroupId);
+        return StateGroupIdHandler.toRefIfSubscribed(node.stateGroupId)
     }
   },
-  toString: e => {
-    switch (e.type) {
+  /**
+   * Converts CanvasNodeId to string.
+   * Original: toString
+   */
+  toString(node: any) {
+    switch (node.type) {
       case 'guid':
-        return e.guid;
+        return node.guid
       case 'symbol':
-        return $$l4.toString(e.symbolId);
+        return SymbolIdHandler.toString(node.symbolId)
       case 'stateGroup':
-        return $$d0.toString(e.stateGroupId);
+        return StateGroupIdHandler.toString(node.stateGroupId)
     }
   },
-  fromString: e => {
-    let t = $$l4.fromString(e);
-    if (t) {
+  /**
+   * Parses string to CanvasNodeId.
+   * Original: fromString
+   */
+  fromString(str: string) {
+    const symbolId = SymbolIdHandler.fromString(str)
+    if (symbolId) {
       return {
         type: 'symbol',
-        symbolId: t
-      };
+        symbolId,
+      }
     }
-    let r = $$d0.fromString(e);
-    return r ? {
-      type: 'stateGroup',
-      stateGroupId: r
-    } : parseSessionLocalID(e) ? {
-      type: 'guid',
-      guid: e
-    } : null;
-  }
-};
-export const GU = $$d0;
-export const Kw = $$p1;
-export const PK = $$c2;
-export const Tq = $$i3;
-export const Ws = $$l4;
-export const YB = $$m5;
-export const _H = $$a6;
-export const cd = $$o7;
-export const eJ = $$n8;
-export const gr = $$_9;
-export const oW = $$s10;
-export const sD = $$u11;
+    const stateGroupId = StateGroupIdHandler.fromString(str)
+    if (stateGroupId) {
+      return {
+        type: 'stateGroup',
+        stateGroupId,
+      }
+    }
+    return parseSessionLocalID(str)
+      ? { type: 'guid', guid: str }
+      : null
+  },
+}
+
+// Exported aliases for business logic grouping
+export const GU = StateGroupIdHandler
+export const Kw = VariableOverrideIdHandler
+export const PK = StyleIdHandler
+export const Tq = CodeFileIdHandler
+export const Ws = SymbolIdHandler
+export const YB = CanvasNodeIdHandler
+export const _H = CodeComponentIdHandler
+export const cd = ResponsiveSetIdHandler
+export const eJ = CodeLibraryIdHandler
+export const gr = VariableSetIdCompatHandler
+export const oW = ManagedStringIdHandler
+export const sD = VariableIdHandler
+export const h = ModuleIdHandler
+
+// Export INVALID constants for each handler
+export const $$n8 = {
+  INVALID: CodeLibraryIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...CodeLibraryIdHandler,
+}
+export const $$i3 = {
+  INVALID: CodeFileIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...CodeFileIdHandler,
+}
+export const $$a6 = {
+  INVALID: CodeComponentIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...CodeComponentIdHandler,
+}
+export const $$s10 = {
+  INVALID: ManagedStringIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...ManagedStringIdHandler,
+}
+export const $$o7 = {
+  INVALID: ResponsiveSetIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...ResponsiveSetIdHandler,
+}
+export const $$l4 = {
+  INVALID: SymbolIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...SymbolIdHandler,
+}
+export const $$d0 = {
+  INVALID: StateGroupIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...StateGroupIdHandler,
+}
+export const $$c2 = {
+  INVALID: StyleIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...StyleIdHandler,
+}
+export const $$u11 = {
+  INVALID: VariableIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...VariableIdHandler,
+}
+export const $$p1 = {
+  INVALID: VariableOverrideIdHandler.fromLocalNodeIdStr(defaultSessionLocalIDString),
+  ...VariableOverrideIdHandler,
+}
+export const $$_9 = VariableSetIdCompatHandler
+export const $$m5 = CanvasNodeIdHandler

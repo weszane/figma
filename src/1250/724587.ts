@@ -3,7 +3,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { Ex, zE, _Y } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { DQ, Pw, _X } from "../figma_app/121751";
 import { u8, A5, MF } from "../figma_app/391338";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
@@ -21,7 +21,7 @@ import { showModalHandler } from "../905/156213";
 import { fu, $z } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { TN } from "../figma_app/211146";
-import { yQw } from "../figma_app/43951";
+import { TeamById } from "../figma_app/43951";
 import { w5, oc } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { UpsellModalType } from "../905/165519";
@@ -79,7 +79,7 @@ function R(e) {
     label: A5.PlanSwitcherTeamBadges.isProOrStudentTeam,
     enableFullRead: DQ(Pw.GROUP_7)
   });
-  let R = Rs(yQw({
+  let R = Rs(TeamById({
     teamId: e.teamId
   }), {
     enabled: !p && _X(Pw.GROUP_7)

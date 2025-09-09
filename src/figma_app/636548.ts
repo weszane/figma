@@ -3,7 +3,7 @@ import { StateHierarchy } from "../figma_app/763686";
 import { E } from "../905/277716";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { i as _$$i } from "../figma_app/741237";
+import { renameNode } from "../figma_app/741237";
 import { R as _$$R } from "../figma_app/930125";
 import { z6 } from "../figma_app/967154";
 import { Kk } from "../figma_app/956479";
@@ -25,7 +25,7 @@ export function $$_0({
     name: "component_title_control",
     children: jsx(_$$R, {
       onSubmit: e => {
-        _$$i(containingProductComponent.guid, e);
+        renameNode(containingProductComponent.guid, e);
       },
       value: f ? getI18nString("design_systems.component_panel.current_variant") : containingProductComponent.name,
       canEdit: !f,

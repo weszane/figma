@@ -2,7 +2,7 @@ import { LinterCppBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { g } from "../905/871474";
+import { generateUUIDv4 } from "../905/871474";
 import { fY, Iy, u2 } from "../figma_app/761118";
 import { td } from "../figma_app/827216";
 class o {
@@ -231,7 +231,7 @@ class c {
     type: i
   }) {
     if (!e || !t) return "";
-    let n = g();
+    let n = generateUUIDv4();
     let r = {
       id: n,
       rootNodeIdToViolatingNodeIdSet: new Map([[e, new Set([t])]]),

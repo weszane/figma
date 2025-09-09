@@ -1,9 +1,9 @@
 import { registerModal } from "../905/102752";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useLayoutEffect, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { DiagramElementType, InteractionCpp, Fullscreen, AppStateTsApi, LayoutSizingType, Axis, HandoffBindingsCpp, LayoutTabType, UIVisibilitySetting, DesignGraphElements, ViewType } from "../figma_app/763686";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { xo } from "../figma_app/473493";
 import { e as _$$e } from "../905/383776";
 import { l7, ZO } from "../figma_app/88239";
@@ -14,7 +14,7 @@ import { k as _$$k } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
 import { p8 } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { debugState } from "../905/407919";
 import { uE } from "../figma_app/314264";
 import { kF } from "../figma_app/915202";
@@ -40,7 +40,7 @@ import { lJ, kl } from "../905/275640";
 import { lg } from "../figma_app/164212";
 import { lerp, clamp } from "../figma_app/492908";
 import { Fo } from "../905/63728";
-import { AF, v_ } from "../figma_app/806412";
+import { useHandleChangeEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { Dm } from "../figma_app/8833";
 import { f7 } from "../figma_app/896988";
 import { _X, Z0 } from "../figma_app/62612";
@@ -48,15 +48,15 @@ import { permissionScopeHandler as _$$l2, scopeAwareFunction } from "../905/1891
 import { getSingletonSceneGraph } from "../905/700578";
 import { U as _$$U } from "../figma_app/901889";
 import { YQ } from "../905/502364";
-import { Kv } from "../figma_app/544649";
-import { i as _$$i } from "../figma_app/741237";
+import { isDevModeFocusViewActive } from "../figma_app/544649";
+import { renameNode } from "../figma_app/741237";
 import { W as _$$W, d as _$$d } from "../figma_app/833988";
 import { xv, uQ } from "../figma_app/151869";
 import { s as _$$s } from "../905/780421";
 import { g as _$$g } from "../figma_app/240060";
 import { Ay } from "../figma_app/838407";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { fu } from "../figma_app/831799";
 import { L as _$$L } from "../905/657783";
 import { yX, ey as _$$ey } from "../figma_app/918700";
@@ -134,10 +134,10 @@ function X(e, t, i) {
       document.removeEventListener("mousedown", e);
     };
   }, []);
-  let I = AF("onCanvasRename", "change", e => {
+  let I = useHandleChangeEvent("onCanvasRename", "change", e => {
     x(e.target.value);
   });
-  let k = v_("onCanvasRename", "keydown", e => {
+  let k = useHandleKeyboardEvent("onCanvasRename", "keydown", e => {
     if (!w) {
       if ("Escape" === e.key && disableSaveOnEscape) {
         b(!1);
@@ -499,7 +499,7 @@ function eh() {
   return jsx(Q, {
     name: o ? e : "",
     setName: t => {
-      e && (_$$l2.user("rename-frame", () => _$$i(i, t)), n({
+      e && (_$$l2.user("rename-frame", () => renameNode(i, t)), n({
         newTitle: t,
         nodeType: "FRAME"
       }), t !== e && _$$d(t).length > 0 && YQ({
@@ -543,7 +543,7 @@ function eg() {
   let i = useSelector(e => e.mirror.appModel.currentPage);
   let o = useMemo(() => HandoffBindingsCpp.findMeasurement(measurementId, i), [measurementId, i]);
   let l = useRef(!o?.freeText);
-  let d = Kv();
+  let d = isDevModeFocusViewActive();
   let c = function () {
     let e = _$$U();
     return useCallback((t, i, r) => {
@@ -615,7 +615,7 @@ function ex() {
   return null != e && t ? jsx(ey, {
     name: e,
     setNameWithNodeId: (e, t) => {
-      _$$l2.user("rename-section", () => _$$i(e, t ? t.trim() : ""));
+      _$$l2.user("rename-section", () => renameNode(e, t ? t.trim() : ""));
       i({
         newTitle: t,
         nodeType: "SECTION"
@@ -743,7 +743,7 @@ function ey(e) {
   });
 }
 function ek(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   return jsx(fu, {
     name: "Starter team edit confirmation modal",
     properties: {
@@ -770,7 +770,7 @@ function ek(e) {
         trackEventAnalytics("Starter File Edit Modal Cancel Clicked", {
           fileKey: e.fileKey
         });
-        _$$Ay.redirect("/files/recents-and-sharing");
+        customHistory.redirect("/files/recents-and-sharing");
       },
       children: jsx("div", {
         className: jE,
@@ -799,7 +799,7 @@ let eA = registerModal(function (e) {
 function eO() {
   return useSelector(e => e.progressBarState);
 }
-export let $$eL4 = xx((e, t, i) => {
+export let $$eL4 = memoizeByArgs((e, t, i) => {
   e(gI());
   e(mV({}));
 });
@@ -846,7 +846,7 @@ export function $$eD3() {
 }
 export function $$eM0(e) {
   let t = q5();
-  let i = iZ();
+  let i = selectCurrentUser();
   return e.showStartModal && i && t && t.key ? jsx(ek, {
     fileKey: t.key
   }) : jsx(Fragment, {});

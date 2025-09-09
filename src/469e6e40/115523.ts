@@ -12,14 +12,14 @@ import { fu } from "../figma_app/831799";
 import { t as _$$t } from "../figma_app/55043";
 import { Z as _$$Z } from "../4452/80578";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { P0Z } from "../figma_app/43951";
+import { ResourceConnectionByPlan } from "../figma_app/43951";
 import { S2 } from "../figma_app/465071";
 import { O as _$$O } from "../figma_app/809387";
 import { J7, SN } from "../figma_app/650409";
 import { e0 } from "../905/696396";
 import { K as _$$K2 } from "../4452/401058";
 import { A as _$$A } from "../4452/239888";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import { d as _$$d } from "../c5e2cae0/368426";
@@ -63,7 +63,7 @@ import { Ax } from "../figma_app/616261";
 import { EJ } from "../figma_app/930338";
 import { L as _$$L } from "../905/408237";
 import { In } from "../905/672640";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { C1 } from "../figma_app/12796";
 var T = I;
 let B = "connected_projects_table--planRow--PfOxe";
@@ -464,7 +464,7 @@ function eO(e) {
     isHostPlanAdmin
   } = e.resourceConnection;
   let o = useDispatch();
-  let d = Pc();
+  let d = selectUser();
   let [c, _] = useState("ALL");
   let [u, m] = useState("");
   let {
@@ -1026,7 +1026,7 @@ export function $$eq0(e) {
   let t = S2().unwrapOr(null);
   let a = t?.key.parentId;
   let k = t?.key.type;
-  let E = Rs(P0Z, {
+  let E = Rs(ResourceConnectionByPlan, {
     planId: a,
     planType: k
   }, {

@@ -10,7 +10,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { hT, YM } from "../905/561087";
 import { nb } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
-import { Vny, YOu } from "../figma_app/43951";
+import { SiteMount, FileLastPublishedAt } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { R as _$$R } from "../905/441305";
@@ -18,7 +18,7 @@ import { renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { registerModal } from "../905/102752";
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $y } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -268,7 +268,7 @@ let R = registerModal(function ({
 async function L(e) {
   for (let {
     result
-  } of await subscribeMultipleAndAwaitAll(Vny, e.map(e => ({
+  } of await subscribeMultipleAndAwaitAll(SiteMount, e.map(e => ({
     fileKey: e
   })))) if (result.transform(e => e.siteMount.status === tT.Loaded && e.siteMount.data && "published" === e.siteMount.data.status).unwrapOr(!1)) return !0;
   return !1;
@@ -329,7 +329,7 @@ let $$M2 = createOptimistThunk(async (e, t, {
     try {
       for (let {
         result
-      } of await subscribeMultipleAndAwaitAll(YOu, e.map(e => ({
+      } of await subscribeMultipleAndAwaitAll(FileLastPublishedAt, e.map(e => ({
         fileKey: e.key
       })))) if (result.transform(e => !!e.file?.lastPublishedAt).unwrapOr(!1)) {
         trackEventAnalytics("Show File Delete Unpublish Warning");

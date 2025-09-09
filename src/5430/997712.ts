@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { N_ } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";

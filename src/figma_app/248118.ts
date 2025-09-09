@@ -1,18 +1,18 @@
 import { useMemo, useCallback } from "react";
-import { useStore } from "../vendor/514228";
+import { useStore } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { IAssertResource } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { reportError } from "../905/11";
 import { gB } from "../905/294543";
-import { $n } from "../905/515076";
+import { getCodegenLanguagePreference } from "../905/515076";
 import { Ym } from "../figma_app/806075";
 import { sf } from "../905/929976";
 import { c as _$$c } from "../905/882587";
 import { Im } from "../905/608145";
 import { E3 } from "../figma_app/976749";
 import { EL } from "../figma_app/740025";
-import { ax } from "../figma_app/741237";
+import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { Eh, cb } from "../figma_app/12796";
 import { getCurrentPluginVersion, isSingleDevEditorType, isValidForCooperDevCodegen } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
@@ -87,9 +87,9 @@ export function $$N1(e, t) {
     }
     let n = $$x4(r);
     if (isSingleDevEditorType(r) && P(_), isValidForCooperDevCodegen(r)) {
-      p($n(r));
+      p(getCodegenLanguagePreference(r));
       P(_);
-      ax(IAssertResource.PRIMARY);
+      setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
       return;
     }
     Im({
@@ -140,9 +140,9 @@ export function $$L5(e, t) {
     }
     let n = $$R7(a);
     if (isSingleDevEditorType(a) && P(u), isValidForCooperDevCodegen(a)) {
-      l($n(a));
+      l(getCodegenLanguagePreference(a));
       P(u);
-      ax(IAssertResource.PRIMARY);
+      setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
       return;
     }
     Im(r, t, e || n);

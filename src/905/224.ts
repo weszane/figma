@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -16,7 +16,7 @@ import { c as _$$c } from "../905/370443";
 import { VG } from "../905/389382";
 import { q5 } from "../figma_app/516028";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
-import { kQI } from "../figma_app/43951";
+import { TeamCanEdit } from "../figma_app/43951";
 import { WW, Wf, LF } from "../figma_app/345997";
 import { vL, Bi, Pj } from "../905/652992";
 import { mapUpsellModalTypeToSource, UpsellSourceType } from "../figma_app/831101";
@@ -908,7 +908,7 @@ var $$n0;
   e.useShouldHideStarterCtaForOpenFile = function () {
     let e = q5();
     let t = e?.teamId;
-    let i = Rs(kQI({
+    let i = Rs(TeamCanEdit({
       id: t ?? ""
     }), {
       enabled: !!t

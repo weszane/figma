@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { PQ } from "../figma_app/91703";
 import { NG, UK } from "../figma_app/506549";
 import { c4 } from "../figma_app/805925";

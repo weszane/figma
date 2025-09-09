@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { w4, Z9 } from "../figma_app/770359";
 import { lV, lr } from "../figma_app/617606";
 import { lQ } from "../905/934246";
@@ -16,7 +16,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Dm } from "../figma_app/8833";
 import { UK } from "../figma_app/740163";
 import { Ib } from "../905/129884";
@@ -169,13 +169,13 @@ export function $$X1({
   let en = useCallback(async () => {
     try {
       await et.format();
-      Q(_$$F.enqueue({
+      Q(VisualBellActions.enqueue({
         message: getI18nString("sites.code_component.format_code_success"),
         error: !1
       }));
     } catch (e) {
       Ho(e, lV.CODE_IN_SITES, a5.FORMAT);
-      Q(_$$F.enqueue({
+      Q(VisualBellActions.enqueue({
         message: getI18nString("sites.code_component.format_code_error", {
           message: e.message.split("\n")[0]
         }),

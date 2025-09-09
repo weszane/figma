@@ -7,7 +7,7 @@ import { debugState } from "../905/407919";
 import { XHR } from "../905/910117";
 import { eN } from "../figma_app/401061";
 import { $o } from "../905/762943";
-import { s4 } from "../figma_app/544649";
+import { isInteractiveInspectionAndRollbackEnabled } from "../figma_app/544649";
 import { L } from "../figma_app/53571";
 import { wz } from "../figma_app/879363";
 import { j7, sf } from "../905/929976";
@@ -177,7 +177,7 @@ export function $$I1() {
       };
       debugState.dispatch(sf(e));
     },
-    isInteractiveInspectionEnabled: () => s4(),
+    isInteractiveInspectionEnabled: () => isInteractiveInspectionAndRollbackEnabled(),
     isChangingInspectionValues: eN,
     onUnexpectedEditInFocusView() {},
     getUnitName(e, t) {

@@ -12,10 +12,10 @@ import { H as _$$H } from "../figma_app/580834";
 import { Q as _$$Q } from "../905/384324";
 import { O as _$$O } from "../905/410575";
 import { u as _$$u } from "../905/486140";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr, vm, yU } from "../figma_app/678782";
 import { Xo } from "../figma_app/482495";
@@ -26,7 +26,7 @@ import { c as _$$c } from "../905/370443";
 import { Em } from "../figma_app/976749";
 import { e } from "../905/621515";
 import { UK } from "../figma_app/740163";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { N as _$$N } from "../figma_app/268271";
@@ -47,7 +47,7 @@ let B = () => {
   let r = "1" === localStorage.getItem("property-labels-visible");
   let n = _$$f(pN);
   let a = _$$f("did_sign_up_as_ui3_user");
-  let s = iZ();
+  let s = selectCurrentUser();
   let o = useMemo(() => {
     if (!s) return 0;
     let e = a ? new Date(s.created_at) : n ? n.createdAt : new Date();
@@ -252,17 +252,17 @@ function q(e) {
   let T = b ? jsx(er, {
     options: h,
     appliedAlignment: g?.horizontal,
-    recordingKey: Pt(e.recordingKey, "alignButton", "horizontal")
+    recordingKey: generateRecordingKey(e.recordingKey, "alignButton", "horizontal")
   }) : jsx(Q, {
     options: h,
-    recordingKey: Pt(e.recordingKey, "alignButton")
+    recordingKey: generateRecordingKey(e.recordingKey, "alignButton")
   });
   let S = b ? jsx(er, {
     options: m,
     appliedAlignment: g?.vertical,
-    recordingKey: Pt(e.recordingKey, "alignButton", "vertical")
+    recordingKey: generateRecordingKey(e.recordingKey, "alignButton", "vertical")
   }) : jsx(Q, {
-    recordingKey: Pt(e.recordingKey, "alignButton"),
+    recordingKey: generateRecordingKey(e.recordingKey, "alignButton"),
     options: m
   });
   let A = yU(Rg);
@@ -407,7 +407,7 @@ function er({
 let en = () => {
   let e = Xo();
   return useCallback((t, r, n) => ({
-    "aria-label": _$$A(t),
+    "aria-label": formatI18nMessage(t),
     "data-tooltip": t,
     "data-tooltip-type": Ib.LOOKUP,
     children: r,
@@ -423,7 +423,7 @@ let en = () => {
 let ei = () => {
   let e = Xo();
   return useCallback((t, r, n) => ({
-    "aria-label": _$$A(t),
+    "aria-label": formatI18nMessage(t),
     "data-tooltip": t,
     "data-tooltip-type": Ib.LOOKUP,
     children: r,

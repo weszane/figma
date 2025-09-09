@@ -4,13 +4,13 @@ import { V } from "../905/900932";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText } from "../905/303541";
 import { Dz } from "../figma_app/847915";
-import { A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { JT } from "../figma_app/632248";
 export function $$u0(e) {
   if (e.extensionSearchString) return e.extensionSearchString;
   if (e.displayText && !e.displayForQuickCommand) return e.displayText;
   let t = e.displayForQuickCommand ? e.displayForQuickCommand : Dz(e);
-  return A(t, e.args);
+  return formatI18nMessage(t, e.args);
 }
 export function $$p3(e) {
   return e.action === JT.MAGIC_LINK ? renderI18nText("magic_link.qa_suggestion_button") : $$u0(e);

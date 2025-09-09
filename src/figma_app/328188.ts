@@ -8,7 +8,7 @@ import { serializeQuery } from "../905/634134";
 import { K } from "../figma_app/748328";
 import { dq } from "../905/845253";
 import { FStudentTeamStatusType } from "../figma_app/191312";
-import { Qxm, jl4 } from "../figma_app/43951";
+import { OrgTeamsInAdminView, OrgTeamView } from "../figma_app/43951";
 import { Ef } from "../905/81982";
 import { dy } from "../figma_app/967319";
 import { ig } from "../figma_app/713624";
@@ -167,7 +167,7 @@ function v({
 }) {
   let h = !d && getFeatureFlags().org_teams_in_admin_lg_view && !c;
   let m = dq();
-  let g = Rs(h ? Qxm : jl4, {
+  let g = Rs(h ? OrgTeamsInAdminView : OrgTeamView, {
     orgId: p ?? m,
     firstPageSize: i || 25,
     queryParams: $$C2(e, t, r, d),

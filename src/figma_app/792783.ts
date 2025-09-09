@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { useAtomValue } from "../vendor/525001";
 import { D } from "../905/12032";
 export function $$s0() {

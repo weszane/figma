@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { b } from "../905/985254";
 import { Fu } from "../figma_app/545877";

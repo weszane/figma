@@ -5,7 +5,7 @@ import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { N7 } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { serializeQuery } from "../905/634134";
 import { NONE_SYMBOL } from "../905/992467";
 import { A as _$$A } from "../905/560427";
@@ -157,10 +157,10 @@ let V = createOptimistThunk((e, t) => {
     }
   } else if (t.openNewFileIn === ai.NEW_TAB) {
     let e = serializeQuery(i);
-    Ay.redirect(`/file/new${e ? "?" + e : ""}`, "_blank");
+    customHistory.redirect(`/file/new${e ? "?" + e : ""}`, "_blank");
   } else if (N7(e.getState().currentUserOrgId, t.org_id)) {
     let e = serializeQuery(i);
-    Ay.redirect(`/file/new${e ? "?" + e : ""}`);
+    customHistory.redirect(`/file/new${e ? "?" + e : ""}`);
   } else $N(e, t, !1);
   _$$L();
   let r = t.openNewFileIn === ai.SAME_TAB && (!desktopAPIInstance || t.allowOnDesktop) ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF;

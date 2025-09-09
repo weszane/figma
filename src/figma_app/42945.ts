@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useMemo, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { AppStateTsApi } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -16,7 +16,7 @@ import { wq } from "../905/234821";
 import { F$ } from "../figma_app/12220";
 import { kC } from "../905/428519";
 import { UP } from "../figma_app/740025";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { getObservableValue } from "../figma_app/84367";
 import { kT } from "../905/380385";
 import { Qv } from "../figma_app/45218";
@@ -96,7 +96,7 @@ export function $$V5(e) {
   let p = useSelector(e => e.comments.showOnlyParticipating);
   let v = useSelector(e => e.mirror.appModel.currentPage);
   let C = e.currentNode || v;
-  let w = TA() || void 0;
+  let w = getUserId() || void 0;
   let O = useSelector(e => e.selectedView.commentThreadId);
   let R = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, defaultSessionLocalIDString);
   let P = getObservableValue(AppStateTsApi?.cooperFocusView().focusedNodeId, defaultSessionLocalIDString);

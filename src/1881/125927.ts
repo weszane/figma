@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import o from "classnames";
 import { xf } from "../figma_app/416935";
 import { Rs } from "../figma_app/288654";
@@ -14,7 +14,7 @@ import { fu } from "../figma_app/831799";
 import { Gu } from "../905/513035";
 import { sZ } from "../905/845253";
 import { FPlanFeatureType } from "../figma_app/191312";
-import { s5A } from "../figma_app/43951";
+import { OrgInviteModalView } from "../figma_app/43951";
 import { H_ } from "../figma_app/336853";
 import { d as _$$d } from "../905/44199";
 import { Gv } from "../figma_app/736948";
@@ -43,7 +43,7 @@ export function $$U3({
   let R = useSelector(({
     licenseGroups: i
   }) => e ? i[e] : void 0);
-  let N = Rs(s5A, {
+  let N = Rs(OrgInviteModalView, {
     workspaceId: i
   }, {
     enabled: !!i

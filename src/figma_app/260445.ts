@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef, useState, useId, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { VariableDataType, VariableResolvedDataType, OperationType, VariablesBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -9,7 +9,7 @@ import { Yi } from "../figma_app/933328";
 import { C, B } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
 import { mm, u as _$$u, bL, BQ } from "../figma_app/852050";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { VZ } from "../905/959568";
 import { h as _$$h } from "../905/65944";
 import { p as _$$p } from "../905/427409";
@@ -77,7 +77,7 @@ export function $$v1(e, t, r, n) {
     i ? m(Yi({
       item: i,
       callback: i => {
-        setVariableValueOrOverrideForMode(e, t, r, y$(n, i), zk.YES, "alias-variable");
+        setVariableValueOrOverrideForMode(e, t, r, y$(n, i), yesNoTrackingEnum.YES, "alias-variable");
       }
     })) : permissionScopeHandler.user("unalias-variable", () => VariablesBindings.detachVariableValueForMode(t, r, null)) && fullscreenValue.triggerAction("commit");
   }, [m, n, setVariableValueOrOverrideForMode, e, t, r]);

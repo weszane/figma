@@ -3,7 +3,7 @@ import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { Pq, _Z, Rc, l5, vj } from "../figma_app/819288";
 import { WB } from "../905/761735";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
@@ -73,7 +73,7 @@ let $$v6 = createOptimistThunk((e, t) => {
   let i = e.getState().user;
   let n = WB();
   if (!i || !n) return;
-  let r = g();
+  let r = generateUUIDv4();
   let c = XHR.post(`/api/feed_posts/${t.postUuid}/comments`, {
     message_meta: t.messageMeta,
     uuid: r,

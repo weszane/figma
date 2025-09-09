@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { o as _$$o } from "../905/89370";
 import { CanvasSearchHelpers, FilterOption, PageViewMode } from "../figma_app/763686";
@@ -10,11 +10,11 @@ import u from "classnames";
 import { globalPerfTimer } from "../905/542194";
 import { am } from "../figma_app/901889";
 import { Uz, Fo } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Fk } from "../905/125333";
 import { b as _$$b } from "../figma_app/556971";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { lg } from "../figma_app/976749";
 import { jr, W0 } from "../figma_app/896988";
 import { Z } from "../905/104740";
@@ -84,7 +84,7 @@ export function $$I0({
     } = CanvasSearchHelpers.replaceInMultipleResults(t, {
       preserveCase: B
     }, FilterOption.ALL);
-    numReplaced > 0 && (P(!0), N(_$$F.enqueue({
+    numReplaced > 0 && (P(!0), N(VisualBellActions.enqueue({
       type: "canvas-search-replace-all",
       message: getI18nString(D ? "canvas_search.replace_all_message_figjam" : L === PageViewMode.ACTIVE_PAGE ? "canvas_search.replace_all_message" : "canvas_search.replace_all_message_all_pages", {
         count: numReplaced
@@ -107,7 +107,7 @@ export function $$I0({
     }), jsx(_$$H, {
       value: t,
       placeholder: getI18nString("canvas_search.replace_placeholder"),
-      recordingKey: Pt(I, "replace_input"),
+      recordingKey: generateRecordingKey(I, "replace_input"),
       onChange: i,
       onFocus: e => {
         u?.(e, !A());
@@ -135,13 +135,13 @@ export function $$I0({
           "data-tooltip-type": Ib.TEXT
         },
         onClick: () => K("button"),
-        recordingKey: Pt(I, "replace_one"),
+        recordingKey: generateRecordingKey(I, "replace_one"),
         children: renderI18nText("canvas_search.replace_one")
       }), jsx($n, {
         disabled: G,
         variant: "secondary",
         onClick: H,
-        recordingKey: Pt(I, "replace_all"),
+        recordingKey: generateRecordingKey(I, "replace_all"),
         children: renderI18nText("canvas_search.replace_all")
       })]
     })]

@@ -1,5 +1,5 @@
 import { n as _$$n } from "../905/347702";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";

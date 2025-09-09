@@ -14,8 +14,8 @@ import { s7 } from "../905/551193";
 import { Rm } from "../figma_app/86989";
 import { x as _$$x } from "../905/239551";
 import { Vi } from "../figma_app/364284";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { canRunPluginWithinOrg, formatPluginName, filterResourcesByMatch, getCurrentPluginVersionId } from "../figma_app/300692";
 import { D as _$$D2 } from "../905/629114";
 import { clearWidgetSyncedState, getSyncedState, getSyncedMap } from "../905/486749";
@@ -383,12 +383,12 @@ export function $$M1({
           let g = t?.[_pluginID3]?.[l];
           let f = g?.redirect_icon_url || n?.redirect_icon_url || "";
           r.removeSelfAndChildren();
-          fullscreenValue.dispatch(F.enqueue({
+          fullscreenValue.dispatch(VisualBellActions.enqueue({
             type: "widget-update-success",
             message: getI18nString("widgets.widget_name_updated", {
               widgetName: p
             }),
-            icon: zX.FROM_URL,
+            icon: VisualBellIcon.FROM_URL,
             iconURL: f,
             button: {
               text: "Undo",
@@ -424,10 +424,10 @@ export function $$M1({
                     let e = getSceneGraphInstance().get(u);
                     e && (e.shouldPreventWidgetAutoUpdate = !0, e.relativeTransform = relativeTransform);
                   }
-                  fullscreenValue.dispatch(F.enqueue({
+                  fullscreenValue.dispatch(VisualBellActions.enqueue({
                     type: "widget-update-undo-success",
                     message: `${widgetName} reverted to previous version`,
-                    icon: zX.FROM_URL,
+                    icon: VisualBellIcon.FROM_URL,
                     iconURL,
                     error: !1
                   }));
@@ -455,7 +455,7 @@ export function $$M1({
             isLocalWidget: !1,
             currentWidgetVersionID: l
           });
-          fullscreenValue.dispatch(F.enqueue({
+          fullscreenValue.dispatch(VisualBellActions.enqueue({
             type: "widget-update-error",
             message: `Unable to update widget: ${e}`,
             error: !0

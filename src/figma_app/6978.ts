@@ -4,7 +4,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
@@ -28,7 +28,7 @@ export function $$m0(e) {
       mixed: isInvalidValue(t),
       checked: !1 === t,
       onChange: f,
-      recordingKey: Pt(e, "clipContentCheckbox"),
+      recordingKey: generateRecordingKey(e, "clipContentCheckbox"),
       label: jsx(Label, {
         children: renderI18nText("fullscreen.properties_panel.transform_panel.clip_content")
       }),

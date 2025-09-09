@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useContext, useRef, useEffect, forwardRef, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { nearlyEqual } from "../figma_app/492908";
 import { d as _$$d } from "../905/976845";
 import { G as _$$G } from "../905/117393";
@@ -11,7 +11,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { c2 } from "../figma_app/243213";
 import { hC } from "../figma_app/901889";
 import { BrowserInfo } from "../figma_app/778880";
-import { Pt, o6 } from "../figma_app/806412";
+import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
 import { z5, rC } from "../905/713722";
@@ -22,7 +22,7 @@ import { dq } from "../905/845253";
 import { Xo } from "../figma_app/482495";
 import { F as _$$F2 } from "../905/258517";
 import { ol } from "../figma_app/598018";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { Pd, j5 } from "../figma_app/178475";
 import { $z } from "../figma_app/297733";
@@ -141,7 +141,7 @@ export function $$Q2({
       hslva: e,
       rgba: n
     });
-    t.onColorChange(n, r ? zk.YES : zk.NO_BUT_TRACK_AS_EDIT);
+    t.onColorChange(n, r ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO_BUT_TRACK_AS_EDIT);
     r && t.analytics && _$$F2.trackFromFullscreen(t.analytics.name, {
       source: "slider",
       color: z5.format(n),
@@ -165,7 +165,7 @@ export function $$Q2({
       hslva: e,
       rgba: n
     });
-    t.onOpacityChange(n.a, r ? zk.YES : zk.NO_BUT_TRACK_AS_EDIT);
+    t.onOpacityChange(n.a, r ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO_BUT_TRACK_AS_EDIT);
     r && t.analytics && _$$F2.trackFromFullscreen(t.analytics.name, {
       source: "slider",
       color: z5.format(n),
@@ -209,7 +209,7 @@ export function $$Q2({
             fill: "dark" === t.theme ? "white" : "black",
             selected: i,
             onPointerDown: ed,
-            recordingKey: Pt(e, "dropperButton"),
+            recordingKey: generateRecordingKey(e, "dropperButton"),
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip": getI18nString("fullscreen.color_controls.eyedropper"),
             tooltipForScreenReadersOnly: !0,
@@ -218,7 +218,7 @@ export function $$Q2({
             })
           })
         }), jsx($$er4, {
-          recordingKey: Pt(e, "hexInput"),
+          recordingKey: generateRecordingKey(e, "hexInput"),
           ...et,
           onColorChange: el
         })]
@@ -231,20 +231,20 @@ export function $$Q2({
           color: r.hslva,
           changeCallback: es,
           containerClass: aw,
-          recordingKey: Pt(e, "hueControl")
+          recordingKey: generateRecordingKey(e, "hueControl")
         }), !t.hideOpacity && jsx(xp, {
           width: 140,
           color: r.hslva,
           changeCallback: eo,
           containerClass: aw,
-          recordingKey: Pt(e, "opacityControl")
+          recordingKey: generateRecordingKey(e, "opacityControl")
         })]
       }), jsx(_$$T, {
         size: 184,
         color: r.hslva,
         changeCallback: es,
         ignoreWheelCallback: !0,
-        recordingKey: Pt(e, "slvControl")
+        recordingKey: generateRecordingKey(e, "slvControl")
       })]
     });
   })();
@@ -260,18 +260,18 @@ export function $$Q2({
       recordingKey: e,
       showNewUI: V
     }), t.colorFormat === ColorFormatEnum.HEX && jsx($$er4, {
-      recordingKey: Pt(e, "hexInput"),
+      recordingKey: generateRecordingKey(e, "hexInput"),
       ...et
     }), t.colorFormat === ColorFormatEnum.RGB && jsx($$en3, {
-      recordingKey: Pt(e, "rgbInput"),
+      recordingKey: generateRecordingKey(e, "rgbInput"),
       ...et
     }), t.colorFormat === ColorFormatEnum.CSS && jsx($$ei6, {
-      recordingKey: Pt(e, "cssInput"),
+      recordingKey: generateRecordingKey(e, "cssInput"),
       ...et
     }), (t.colorFormat === ColorFormatEnum.HSL || t.colorFormat === ColorFormatEnum.HSB) && jsx($$ea5, {
       value: r.hslva,
       changeCallback: es,
-      recordingKey: Pt(e, "hslvInput"),
+      recordingKey: generateRecordingKey(e, "hslvInput"),
       ...et
     }, t.colorFormat)]
   });
@@ -279,7 +279,7 @@ export function $$Q2({
     children: [jsx(ee, {
       color: r.hslva,
       onChange: es,
-      recordingKey: Pt(e, "slvControl")
+      recordingKey: generateRecordingKey(e, "slvControl")
     }), jsxs(Id, {
       children: [t.additionalControls && jsx("div", {
         className: CX,
@@ -299,13 +299,13 @@ export function $$Q2({
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.sample_color")
             },
-            recordingKey: Pt(e, "dropperButton"),
+            recordingKey: generateRecordingKey(e, "dropperButton"),
             onClick: ed,
             children: jsx(_$$G, {})
           }) : jsx(YW, {
             selected: t.currentTool === DesignGraphElements.DROPPER_COLOR,
             onMouseDown: ed,
-            recordingKey: Pt(e, "dropperButton"),
+            recordingKey: generateRecordingKey(e, "dropperButton"),
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.eyedropper"),
             tooltipForScreenReadersOnly: !0,
@@ -320,13 +320,13 @@ export function $$Q2({
             color: r.hslva,
             changeCallback: es,
             containerClass: aw,
-            recordingKey: Pt(e, "hueControl")
+            recordingKey: generateRecordingKey(e, "hueControl")
           }), jsx(xp, {
             width: 156,
             color: r.hslva,
             changeCallback: eo,
             containerClass: aw,
-            recordingKey: Pt(e, "opacityControl")
+            recordingKey: generateRecordingKey(e, "opacityControl")
           })]
         })]
       }), V ? jsx("div", {
@@ -401,7 +401,7 @@ export function $$er4(e) {
       noBorderOnFocus: !0,
       onChange: e.onColorChange,
       property: e.color,
-      recordingKey: Pt(e, "color"),
+      recordingKey: generateRecordingKey(e, "color"),
       squareRightBorder: !0
     }), l && jsx(Pd, {
       className: ke,
@@ -415,11 +415,11 @@ export function $$er4(e) {
       noLeftBorder: !0,
       noBorderOnFocus: !0,
       dispatch: t,
-      recordingKey: Pt(e, "opacity")
+      recordingKey: generateRecordingKey(e, "opacity")
     })]
   });
 }
-export class $$en3 extends o6 {
+export class $$en3 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.formatter = new o1({
@@ -458,7 +458,7 @@ export class $$en3 extends o6 {
         minimizeScrubTargetWidth: !0,
         noBorderOnFocus: !0,
         onValueChange: this.onRChange,
-        recordingKey: Pt(this.props, "red"),
+        recordingKey: generateRecordingKey(this.props, "red"),
         scrubMultiplier: 1 / 255,
         squareRightBorder: !0,
         value: this.props.color.r
@@ -472,7 +472,7 @@ export class $$en3 extends o6 {
         noBorderOnFocus: !0,
         noLeftBorder: !0,
         onValueChange: this.onGChange,
-        recordingKey: Pt(this.props, "green"),
+        recordingKey: generateRecordingKey(this.props, "green"),
         scrubMultiplier: 1 / 255,
         squareRightBorder: !0,
         value: this.props.color.g
@@ -486,7 +486,7 @@ export class $$en3 extends o6 {
         noBorderOnFocus: !0,
         noLeftBorder: !0,
         onValueChange: this.onBChange,
-        recordingKey: Pt(this.props, "blue"),
+        recordingKey: generateRecordingKey(this.props, "blue"),
         scrubMultiplier: 1 / 255,
         squareRightBorder: !0,
         value: this.props.color.b
@@ -497,13 +497,13 @@ export class $$en3 extends o6 {
         onValueChange: this.onAChange,
         noLeftBorder: !0,
         noBorderOnFocus: !0,
-        recordingKey: Pt(this.props, "opacity")
+        recordingKey: generateRecordingKey(this.props, "opacity")
       })]
     });
   }
 }
 $$en3.displayName = "RgbInputs";
-export class $$ei6 extends o6 {
+export class $$ei6 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.formatter = _$$F;
@@ -515,7 +515,7 @@ export class $$ei6 extends o6 {
         formatter: this.formatter,
         property: this.props.color,
         onChange: this.props.onColorChange,
-        recordingKey: Pt(this.props, "color"),
+        recordingKey: generateRecordingKey(this.props, "color"),
         autoFocus: !this.props.preventAutoFocus,
         noBorderOnFocus: !0
       })
@@ -523,7 +523,7 @@ export class $$ei6 extends o6 {
   }
 }
 $$ei6.displayName = "CssInputs";
-export class $$ea5 extends o6 {
+export class $$ea5 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.formatter360 = new o1({
@@ -571,7 +571,7 @@ export class $$ea5 extends o6 {
         minimizeScrubTargetWidth: !0,
         noBorderOnFocus: !0,
         onValueChange: this.onHChange,
-        recordingKey: Pt(this.props, "hue"),
+        recordingKey: generateRecordingKey(this.props, "hue"),
         scrubMultiplier: 1 / 360,
         squareRightBorder: !0,
         value: this.props.value.h
@@ -585,7 +585,7 @@ export class $$ea5 extends o6 {
         noBorderOnFocus: !0,
         noLeftBorder: !0,
         onValueChange: this.onSChange,
-        recordingKey: Pt(this.props, "saturation"),
+        recordingKey: generateRecordingKey(this.props, "saturation"),
         scrubMultiplier: .01,
         squareRightBorder: !0,
         value: this.props.value.s
@@ -599,7 +599,7 @@ export class $$ea5 extends o6 {
         noBorderOnFocus: !0,
         noLeftBorder: !0,
         onValueChange: "l" in this.props.value ? this.onLChange : this.onVChange,
-        recordingKey: Pt(this.props, "value"),
+        recordingKey: generateRecordingKey(this.props, "value"),
         scrubMultiplier: .01,
         squareRightBorder: !0,
         value: "l" in this.props.value ? this.props.value.l : this.props.value.v
@@ -610,7 +610,7 @@ export class $$ea5 extends o6 {
         onValueChange: this.onAChange,
         noLeftBorder: !0,
         noBorderOnFocus: !0,
-        recordingKey: Pt(this.props, "opacity")
+        recordingKey: generateRecordingKey(this.props, "opacity")
       })]
     });
   }
@@ -633,7 +633,7 @@ export function $$es7(e) {
       children: [jsx(_$$D, {
         color: e.color,
         onMouseDown: e.onChitMouseDown,
-        recordingKey: Pt(e.recordingKey, "chit")
+        recordingKey: generateRecordingKey(e.recordingKey, "chit")
       }), jsx(AN, {
         className: p()(uh, {
           [ym]: s
@@ -643,7 +643,7 @@ export function $$es7(e) {
         formatter: o,
         property: e.color,
         onChange: e.onColorChange,
-        recordingKey: Pt(e, "color")
+        recordingKey: generateRecordingKey(e, "color")
       })]
     }), jsx(Pd, {
       decimals: e.opacityDecimals,
@@ -658,7 +658,7 @@ export function $$es7(e) {
       noLeftBorder: !0,
       noBorderOnFocus: !0,
       dispatch: t,
-      recordingKey: Pt(e, "opacity")
+      recordingKey: generateRecordingKey(e, "opacity")
     })]
   });
 }

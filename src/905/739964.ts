@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, Suspense } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -20,7 +20,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { Ih } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { Jh } from "../figma_app/441925";
 import { sx as _$$sx } from "../figma_app/307841";
@@ -35,7 +35,7 @@ import { AG } from "../figma_app/217457";
 import { vc } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/224";
 import { FOrganizationLevelType, FFileType } from "../figma_app/191312";
-import { kQI } from "../figma_app/43951";
+import { TeamCanEdit } from "../figma_app/43951";
 import { vr, LN } from "../figma_app/514043";
 import { X$ } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
@@ -515,7 +515,7 @@ export function $$ed1(e) {
       area: _$$e.MONETIZATION_UPGRADES
     },
     onError: () => {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("consumption_paywalls.error.modal"),
         error: !0
       }));
@@ -688,7 +688,7 @@ function eu(e) {
     isLoading
   } = function (e) {
     let t = e.team?.id;
-    let i = Rs(kQI, {
+    let i = Rs(TeamCanEdit, {
       id: t ?? ""
     }, {
       enabled: !!t

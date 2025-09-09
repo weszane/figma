@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, useMemo, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { hS } from "../905/437088";
 import { r as _$$r } from "../905/571838";

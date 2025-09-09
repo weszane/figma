@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useRef, useLayoutEffect } from "react";
-import { useSelector, useDispatch, useStore } from "../vendor/514228";
+import { useSelector, useDispatch, useStore } from "react-redux";
 import { debounce } from "../905/915765";
 import { isNotNullish } from "../figma_app/95419";
 import { Et } from "../figma_app/397267";
@@ -13,7 +13,7 @@ import { Z as _$$Z } from "../905/498136";
 import { l as _$$l2 } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { k9, zN } from "../905/19536";
+import { useMemoStable, useStableMemo } from "../905/19536";
 import y from "classnames";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
@@ -21,8 +21,8 @@ import { h as _$$h } from "../905/455748";
 import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { j as _$$j } from "../905/918929";
-import { Pt } from "../figma_app/806412";
-import { g as _$$g } from "../905/880308";
+import { generateRecordingKey } from "../figma_app/878298";
+import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { xd, uO, qy } from "../905/972515";
 import { Zl, iN, Z4, YU, ez as _$$ez, TQ } from "../905/211621";
@@ -778,15 +778,15 @@ function eW(e) {
   let t4 = useMemo(() => e9 ? publishedLibraryItemsByLibraryKey[e9] ?? null : null, [e9, publishedLibraryItemsByLibraryKey]);
   let t8 = function (e, t, r, n) {
     let a = useAtomWithSubscription(qp);
-    let s = k9(() => t ? new Set(t.map(e => Av(e))) : [], [t]);
-    let o = k9(() => {
+    let s = useMemoStable(() => t ? new Set(t.map(e => Av(e))) : [], [t]);
+    let o = useMemoStable(() => {
       Object.keys(a);
     }, [a]);
     let l = _$$h(e);
     let d = _$$h(o);
     let c = _$$h(s);
     let u = _$$h(r) && !r;
-    let p = zN(useMemo(() => n.map(Av), [n]));
+    let p = useStableMemo(useMemo(() => n.map(Av), [n]));
     let _ = _$$h(p);
     return l || d || c || u || _;
   }(e9, t4, isLoadingSubscribedLibraries, selectedItems);
@@ -948,7 +948,7 @@ export function $$eY2(e) {
   }));
   let _ = useDispatch();
   let h = useRef(null);
-  let [m, g] = useState(_$$g());
+  let [m, g] = useState(generateUUIDv4());
   let f = instanceSwapPickerShown.isShown ? new Point(instanceSwapPickerShown.initialX, instanceSwapPickerShown.initialY) : new Point(0, 0);
   let E = useCallback(() => {
     dropdownShown?.type === YU(pickerType) && _(oB());
@@ -1018,7 +1018,7 @@ export function $$eY2(e) {
     onClose: S,
     onDragEnd: y,
     onDragStart: E,
-    recordingKey: Pt(e.recordingKey, "modal"),
+    recordingKey: generateRecordingKey(e.recordingKey, "modal"),
     title: c ? z : title,
     children: jsx($$eK1, {
       ...e,
@@ -1067,7 +1067,7 @@ export function $$e$0({
   return jsx(_$$K, {
     "aria-label": c ? getI18nString("design_systems.instance_swap_picker.show_as_grid") : getI18nString("design_systems.instance_swap_picker.show_as_list"),
     onClick: m,
-    recordingKey: Pt("toggleGridViewButton", t ? "preferredValues" : "instanceSwapPicker"),
+    recordingKey: generateRecordingKey("toggleGridViewButton", t ? "preferredValues" : "instanceSwapPicker"),
     htmlAttributes: {
       onMouseDown: dG,
       "data-tooltip": c ? getI18nString("design_systems.instance_swap_picker.show_as_grid") : getI18nString("design_systems.instance_swap_picker.show_as_list"),

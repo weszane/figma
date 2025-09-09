@@ -1,310 +1,420 @@
-import { PropTypes } from "../905/816730";
-import { InternalError } from "../905/845428";
-function a(e, t) {
-  let i = {
-    ...t
-  };
-  e.forEach(e => {
-    delete i[e];
-  });
-  return i;
+import { PropTypes } from '../905/816730'
+import { InternalError } from '../905/845428'
+
+/**
+ * Removes specified keys from an object.
+ * @param keys - Keys to remove.
+ * @param obj - Source object.
+ * @returns New object without specified keys.
+ * (Original: function a)
+ */
+export function removeKeys(keys: string[], obj: Record<string, any>): Record<string, any> {
+  const result = { ...obj }
+  keys.forEach((key) => {
+    delete result[key]
+  })
+  return result
 }
-let s = PropTypes.exact({
-  vertical: PropTypes.$$float.isOptional,
-  horizontal: PropTypes.$$float.isOptional
-});
-let o = PropTypes.exact({
-  top: PropTypes.$$float.isOptional,
-  left: PropTypes.$$float.isOptional,
-  bottom: PropTypes.$$float.isOptional,
-  right: PropTypes.$$float.isOptional
-});
-let l = PropTypes.oneOf([PropTypes.$$float, o, s]);
-let d = PropTypes.oneOf([PropTypes.$$float, "fill-parent"]);
-let c = PropTypes.oneOf([d, "hug-contents"]);
-let u = PropTypes.$$float.isOptional;
-let p = PropTypes.oneOf(["center", "start", "end"]);
-let m = PropTypes.exact({
-  horizontal: PropTypes.oneOf([PropTypes.$$float, "auto"]).isOptional,
-  vertical: PropTypes.oneOf([PropTypes.$$float, "auto"]).isOptional
-});
-let h = {
-  spacing: PropTypes.oneOf([PropTypes.$$float, "auto", m]).isOptional,
-  padding: l.isOptional,
-  direction: PropTypes.oneOf(["horizontal", "vertical"]).isOptional,
-  horizontalAlignItems: p.isOptional,
-  verticalAlignItems: PropTypes.oneOf([p, "baseline"]).isOptional,
-  wrap: PropTypes.bool.isOptional
-};
-let g = {
-  width: c.isOptional,
-  height: c.isOptional
-};
-let f = PropTypes.oneOf([PropTypes.exact({
-  type: "top",
-  offset: PropTypes.$$float
-}), PropTypes.exact({
-  type: "bottom",
-  offset: PropTypes.$$float
-}), PropTypes.exact({
-  type: "center",
-  offset: PropTypes.$$float
-}), PropTypes.exact({
-  type: "top-bottom",
-  topOffset: PropTypes.$$float,
-  bottomOffset: PropTypes.$$float
-}), PropTypes.exact({
-  type: "vertical-scale",
-  topOffsetPercent: PropTypes.$$float,
-  bottomOffsetPercent: PropTypes.$$float
-})]);
-let _ = PropTypes.oneOf([PropTypes.exact({
-  type: "left",
-  offset: PropTypes.$$float
-}), PropTypes.exact({
-  type: "right",
-  offset: PropTypes.$$float
-}), PropTypes.exact({
-  type: "center",
-  offset: PropTypes.$$float
-}), PropTypes.exact({
-  type: "left-right",
-  leftOffset: PropTypes.$$float,
-  rightOffset: PropTypes.$$float
-}), PropTypes.exact({
-  type: "horizontal-scale",
-  leftOffsetPercent: PropTypes.$$float,
-  rightOffsetPercent: PropTypes.$$float
-})]);
-let A = PropTypes.oneOf(["visible", "hidden", "scroll"]);
-let y = PropTypes.oneOf(["pass-through", "normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"]);
-let b = PropTypes.string;
-let v = PropTypes.exact({
-  r: PropTypes.$$float,
-  g: PropTypes.$$float,
-  b: PropTypes.$$float,
-  a: PropTypes.$$float
-});
-let I = PropTypes.exact({
-  x: PropTypes.$$float,
-  y: PropTypes.$$float
-});
-let E = {
-  x: PropTypes.oneOf([PropTypes.$$float, _]).isOptional,
-  y: PropTypes.oneOf([PropTypes.$$float, f]).isOptional
-};
-let x = PropTypes.exact({
-  type: "drop-shadow",
-  color: PropTypes.oneOf([b, v]),
-  offset: I,
-  blur: PropTypes.$$float,
-  blendMode: y.isOptional,
-  spread: PropTypes.$$float.isOptional,
+
+/**
+ * PropTypes definitions for layout and style.
+ * (Original: let s, o, l, d, c, u, p, m, h, g, f, _, A, y, b, v, I, E, x, S, w, C, T, k, R, N, P, O, D, L, F, M, j, U, B, V, G, z, H, W, K, Y, q, $, Z, X, Q, J, ee, et, ei, en, er, ea, es, eo, ed, eA, ey, eb, ev, eI, eE, ex, eS, ew, eC, $$eT2)
+ */
+export const verticalHorizontalProps = PropTypes.exact({
+  vertical: PropTypes.float.isOptional,
+  horizontal: PropTypes.float.isOptional,
+})
+
+export const edgeProps = PropTypes.exact({
+  top: PropTypes.float.isOptional,
+  left: PropTypes.float.isOptional,
+  bottom: PropTypes.float.isOptional,
+  right: PropTypes.float.isOptional,
+})
+
+export const paddingProps = PropTypes.oneOf([PropTypes.float, edgeProps, verticalHorizontalProps])
+export const dimensionProps = PropTypes.oneOf([PropTypes.float, 'fill-parent'])
+export const sizeProps = PropTypes.oneOf([dimensionProps, 'hug-contents'])
+export const optionalFloat = PropTypes.float.isOptional
+export const alignItemsProps = PropTypes.oneOf(['center', 'start', 'end'])
+
+export const spacingProps = PropTypes.exact({
+  horizontal: PropTypes.oneOf([PropTypes.float, 'auto']).isOptional,
+  vertical: PropTypes.oneOf([PropTypes.float, 'auto']).isOptional,
+})
+
+export const layoutProps = {
+  spacing: PropTypes.oneOf([PropTypes.float, 'auto', spacingProps]).isOptional,
+  padding: paddingProps.isOptional,
+  direction: PropTypes.oneOf(['horizontal', 'vertical']).isOptional,
+  horizontalAlignItems: alignItemsProps.isOptional,
+  verticalAlignItems: PropTypes.oneOf([alignItemsProps, 'baseline']).isOptional,
+  wrap: PropTypes.bool.isOptional,
+}
+
+export const widthHeightProps = {
+  width: sizeProps.isOptional,
+  height: sizeProps.isOptional,
+}
+
+export const verticalConstraintProps = PropTypes.oneOf([
+  PropTypes.exact({ type: 'top', offset: PropTypes.float }),
+  PropTypes.exact({ type: 'bottom', offset: PropTypes.float }),
+  PropTypes.exact({ type: 'center', offset: PropTypes.float }),
+  PropTypes.exact({ type: 'top-bottom', topOffset: PropTypes.float, bottomOffset: PropTypes.float }),
+  PropTypes.exact({ type: 'vertical-scale', topOffsetPercent: PropTypes.float, bottomOffsetPercent: PropTypes.float }),
+])
+
+export const horizontalConstraintProps = PropTypes.oneOf([
+  PropTypes.exact({ type: 'left', offset: PropTypes.float }),
+  PropTypes.exact({ type: 'right', offset: PropTypes.float }),
+  PropTypes.exact({ type: 'center', offset: PropTypes.float }),
+  PropTypes.exact({ type: 'left-right', leftOffset: PropTypes.float, rightOffset: PropTypes.float }),
+  PropTypes.exact({ type: 'horizontal-scale', leftOffsetPercent: PropTypes.float, rightOffsetPercent: PropTypes.float }),
+])
+
+export const overflowProps = PropTypes.oneOf(['visible', 'hidden', 'scroll'])
+export const blendModeProps = PropTypes.oneOf([
+  'pass-through',
+  'normal',
+  'multiply',
+  'screen',
+  'overlay',
+  'darken',
+  'lighten',
+  'color-dodge',
+  'color-burn',
+  'hard-light',
+  'soft-light',
+  'difference',
+  'exclusion',
+  'hue',
+  'saturation',
+  'color',
+  'luminosity',
+])
+export const stringProp = PropTypes.string
+
+export const colorProps = PropTypes.exact({
+  r: PropTypes.float,
+  g: PropTypes.float,
+  b: PropTypes.float,
+  a: PropTypes.float,
+})
+
+export const offsetProps = PropTypes.exact({
+  x: PropTypes.float,
+  y: PropTypes.float,
+})
+
+export const positionProps = {
+  x: PropTypes.oneOf([PropTypes.float, horizontalConstraintProps]).isOptional,
+  y: PropTypes.oneOf([PropTypes.float, verticalConstraintProps]).isOptional,
+}
+
+export const dropShadowProps = PropTypes.exact({
+  type: 'drop-shadow',
+  color: PropTypes.oneOf([stringProp, colorProps]),
+  offset: offsetProps,
+  blur: PropTypes.float,
+  blendMode: blendModeProps.isOptional,
+  spread: PropTypes.float.isOptional,
   visible: PropTypes.bool.isOptional,
-  showShadowBehindNode: PropTypes.bool.isOptional
-});
-let S = PropTypes.exact({
-  type: "inner-shadow",
-  color: PropTypes.oneOf([b, v]),
-  offset: I,
-  blur: PropTypes.$$float,
-  blendMode: y.isOptional,
-  spread: PropTypes.$$float.isOptional,
-  visible: PropTypes.bool.isOptional
-});
-let w = PropTypes.exact({
-  type: PropTypes.oneOf(["layer-blur", "background-blur"]),
-  blur: PropTypes.$$float,
-  visible: PropTypes.bool.isOptional
-});
-let C = PropTypes.oneOf([x, S, w]);
-let T = {
-  blendMode: y.isOptional,
-  opacity: PropTypes.$$float.isOptional,
-  effect: PropTypes.oneOf([C, PropTypes.arrayOf(C)]).isOptional,
-  ...E,
+  showShadowBehindNode: PropTypes.bool.isOptional,
+})
+
+export const innerShadowProps = PropTypes.exact({
+  type: 'inner-shadow',
+  color: PropTypes.oneOf([stringProp, colorProps]),
+  offset: offsetProps,
+  blur: PropTypes.float,
+  blendMode: blendModeProps.isOptional,
+  spread: PropTypes.float.isOptional,
+  visible: PropTypes.bool.isOptional,
+})
+
+export const blurEffectProps = PropTypes.exact({
+  type: PropTypes.oneOf(['layer-blur', 'background-blur']),
+  blur: PropTypes.float,
+  visible: PropTypes.bool.isOptional,
+})
+
+export const effectProps = PropTypes.oneOf([dropShadowProps, innerShadowProps, blurEffectProps])
+
+export const baseStyleProps = {
+  blendMode: blendModeProps.isOptional,
+  opacity: PropTypes.float.isOptional,
+  effect: PropTypes.oneOf([effectProps, PropTypes.arrayOf(effectProps)]).isOptional,
+  ...positionProps,
   name: PropTypes.string.isOptional,
-  hidden: PropTypes.bool.isOptional
-};
-let k = {
-  type: PropTypes.oneOf(["image", "solid", "gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
-  blendMode: y.isOptional,
+  hidden: PropTypes.bool.isOptional,
+}
+
+export const paintTypeProps = {
+  type: PropTypes.oneOf([
+    'image',
+    'solid',
+    'gradient-linear',
+    'gradient-radial',
+    'gradient-angular',
+    'gradient-diamond',
+  ]),
+  blendMode: blendModeProps.isOptional,
   visible: PropTypes.bool.isOptional,
-  opacity: PropTypes.$$float.isOptional
-};
-let R = PropTypes.exact({
-  ...k,
-  type: "solid",
-  color: PropTypes.oneOf([v, b])
-});
-let N = PropTypes.exact({
-  position: PropTypes.$$float,
-  color: v
-});
-let P = PropTypes.exact({
-  ...k,
-  type: PropTypes.oneOf(["gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
-  gradientHandlePositions: PropTypes.arrayOf(I),
-  gradientStops: PropTypes.arrayOf(N)
-});
-let O = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.$$float));
-let D = PropTypes.oneOf(["fill", "fit", "tile", "crop"]);
-let L = PropTypes.exact({
-  ...k,
-  type: "image",
+  opacity: PropTypes.float.isOptional,
+}
+
+export const solidPaintProps = PropTypes.exact({
+  ...paintTypeProps,
+  type: 'solid',
+  color: PropTypes.oneOf([colorProps, stringProp]),
+})
+
+export const gradientStopProps = PropTypes.exact({
+  position: PropTypes.float,
+  color: colorProps,
+})
+
+export const gradientPaintProps = PropTypes.exact({
+  ...paintTypeProps,
+  type: PropTypes.oneOf([
+    'gradient-linear',
+    'gradient-radial',
+    'gradient-angular',
+    'gradient-diamond',
+  ]),
+  gradientHandlePositions: PropTypes.arrayOf(offsetProps),
+  gradientStops: PropTypes.arrayOf(gradientStopProps),
+})
+
+export const imageTransformProps = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.float))
+export const scaleModeProps = PropTypes.oneOf(['fill', 'fit', 'tile', 'crop'])
+
+export const imagePaintProps = PropTypes.exact({
+  ...paintTypeProps,
+  type: 'image',
   src: PropTypes.string.isOptional,
   imageHash: PropTypes.string.isOptional,
   imageSize: PropTypes.exact({
-    width: PropTypes.$$float,
-    height: PropTypes.$$float
+    width: PropTypes.float,
+    height: PropTypes.float,
   }).isOptional,
-  scaleMode: D.isOptional,
-  imageTransform: O.isOptional,
-  scalingFactor: PropTypes.$$float.isOptional,
-  rotation: PropTypes.$$float.isOptional,
-  imageRef: PropTypes.string.isOptional
-});
-let F = PropTypes.oneOf([R, P, L]);
-let M = PropTypes.oneOf(["inside", "outside", "center"]);
-let j = PropTypes.arrayOf(PropTypes.$$float.min(0));
-let U = PropTypes.oneOf([P, R]);
-let B = PropTypes.oneOf([b, v, U, PropTypes.arrayOf(U)]);
-let V = PropTypes.oneOf([b, v, F, PropTypes.arrayOf(U)]);
-let G = {
-  fill: V.isOptional,
-  stroke: B.isOptional,
-  strokeWidth: PropTypes.$$float.isOptional,
-  strokeAlign: M.isOptional,
-  strokeDashPattern: j.isOptional
-};
-let z = {
-  width: d.isOptional,
-  height: d.isOptional
-};
-let H = {
-  rotation: PropTypes.$$float.isOptional,
-  flipVertical: PropTypes.bool.isOptional
-};
-let W = {
-  cornerRadius: PropTypes.oneOf([PropTypes.$$float, PropTypes.exact({
-    topLeft: PropTypes.$$float.isOptional,
-    topRight: PropTypes.$$float.isOptional,
-    bottomLeft: PropTypes.$$float.isOptional,
-    bottomRight: PropTypes.$$float.isOptional
-  })]).isOptional
-};
-let K = PropTypes.oneOf([100, 200, 300, 400, 500, 600, 700, 800, 900]);
-let Y = PropTypes.oneOf(["thin", "extra-light", "light", "normal", "medium", "semi-bold", "bold", "extra-bold", "black"]);
-let q = PropTypes.oneOf([K, Y]);
-let $ = {
+  scaleMode: scaleModeProps.isOptional,
+  imageTransform: imageTransformProps.isOptional,
+  scalingFactor: PropTypes.float.isOptional,
+  rotation: PropTypes.float.isOptional,
+  imageRef: PropTypes.string.isOptional,
+})
+
+export const fillProps = PropTypes.oneOf([solidPaintProps, gradientPaintProps, imagePaintProps])
+export const strokeAlignProps = PropTypes.oneOf(['inside', 'outside', 'center'])
+export const strokeDashPatternProps = PropTypes.arrayOf(PropTypes.float.min(0))
+export const gradientUnionProps = PropTypes.oneOf([gradientPaintProps, solidPaintProps])
+export const strokeProps = PropTypes.oneOf([stringProp, colorProps, gradientUnionProps, PropTypes.arrayOf(gradientUnionProps)])
+export const fillUnionProps = PropTypes.oneOf([stringProp, colorProps, fillProps, PropTypes.arrayOf(gradientUnionProps)])
+
+export const shapeProps = {
+  fill: fillUnionProps.isOptional,
+  stroke: strokeProps.isOptional,
+  strokeWidth: PropTypes.float.isOptional,
+  strokeAlign: strokeAlignProps.isOptional,
+  strokeDashPattern: strokeDashPatternProps.isOptional,
+}
+
+export const simpleDimensionProps = {
+  width: dimensionProps.isOptional,
+  height: dimensionProps.isOptional,
+}
+
+export const rotationProps = {
+  rotation: PropTypes.float.isOptional,
+  flipVertical: PropTypes.bool.isOptional,
+}
+
+export const cornerRadiusProps = {
+  cornerRadius: PropTypes.oneOf([
+    PropTypes.float,
+    PropTypes.exact({
+      topLeft: PropTypes.float.isOptional,
+      topRight: PropTypes.float.isOptional,
+      bottomLeft: PropTypes.float.isOptional,
+      bottomRight: PropTypes.float.isOptional,
+    }),
+  ]).isOptional,
+}
+
+export const fontWeightNumberProps = PropTypes.oneOf([100, 200, 300, 400, 500, 600, 700, 800, 900])
+export const fontWeightStringProps = PropTypes.oneOf([
+  'thin',
+  'extra-light',
+  'light',
+  'normal',
+  'medium',
+  'semi-bold',
+  'bold',
+  'extra-bold',
+  'black',
+])
+export const fontWeightProps = PropTypes.oneOf([fontWeightNumberProps, fontWeightStringProps])
+
+export const textProps = {
   fontFamily: PropTypes.string.isOptional,
-  letterSpacing: PropTypes.oneOf([PropTypes.$$float, PropTypes.string]).isOptional,
-  textDecoration: PropTypes.oneOf(["none", "strikethrough", "underline"]).isOptional,
-  fontSize: PropTypes.$$float.isOptional,
+  letterSpacing: PropTypes.oneOf([PropTypes.float, PropTypes.string]).isOptional,
+  textDecoration: PropTypes.oneOf(['none', 'strikethrough', 'underline']).isOptional,
+  fontSize: PropTypes.float.isOptional,
   italic: PropTypes.bool.isOptional,
-  textCase: PropTypes.oneOf(["upper", "lower", "title", "original", "small-caps", "small-caps-forced"]).isOptional,
-  fontWeight: q.isOptional,
+  textCase: PropTypes.oneOf([
+    'upper',
+    'lower',
+    'title',
+    'original',
+    'small-caps',
+    'small-caps-forced',
+  ]).isOptional,
+  fontWeight: fontWeightProps.isOptional,
   fontPostScriptName: PropTypes.string.isOptional,
   href: PropTypes.string.isOptional,
-  fill: PropTypes.oneOf([b, v, F, PropTypes.arrayOf(F)]).isOptional
-};
-let Z = {
-  ...T,
-  ...G,
-  width: d,
-  height: d,
-  ...H,
-  ...W,
-  overflow: A.isOptional
-};
-let X = {
-  ...T,
-  ...G,
-  ...z,
-  ...H,
-  ...W
-};
-let Q = {
-  ...T,
-  ...G,
-  ...H,
-  ...z
-};
-let J = {
-  ...T,
-  ...H,
-  ...a(["strokeAlign"], G),
-  length: d.isOptional,
-  strokeCap: PropTypes.oneOf(["none", "round", "square", "arrow-lines", "arrow-equilateral"]).isOptional
-};
-let ee = {
-  ...T,
-  ...g,
-  ...H,
-  ...$,
-  ...a(["fill"], G),
-  paragraphIndent: PropTypes.$$float.isOptional,
-  paragraphSpacing: PropTypes.$$float.isOptional,
-  horizontalAlignText: PropTypes.oneOf(["left", "right", "center", "justified"]).isOptional,
-  verticalAlignText: PropTypes.oneOf(["top", "center", "bottom"]).isOptional,
-  lineHeight: PropTypes.oneOf([PropTypes.$$float, PropTypes.string, "auto"]).isOptional,
-  truncate: PropTypes.oneOf([PropTypes.bool, PropTypes.integer]).isOptional
-};
-a(["fill"], X);
-PropTypes.oneOf([PropTypes.string, L]);
-let et = {
-  ...a(["width", "height"], Z),
-  ...h,
-  ...g
-};
-let ei = PropTypes.oneOf([PropTypes.dictionaryOf(PropTypes.any), PropTypes.arrayOf(PropTypes.any), PropTypes.string, null, void 0]);
-let en = {
-  children: PropTypes.oneOf([ei, PropTypes.arrayOf(ei)]).isOptional
-};
-let er = {
+  fill: PropTypes.oneOf([stringProp, colorProps, fillProps, PropTypes.arrayOf(fillProps)]).isOptional,
+}
+
+export const frameProps = {
+  ...baseStyleProps,
+  ...shapeProps,
+  width: dimensionProps,
+  height: dimensionProps,
+  ...rotationProps,
+  ...cornerRadiusProps,
+  overflow: overflowProps.isOptional,
+}
+
+export const groupProps = {
+  ...baseStyleProps,
+  ...shapeProps,
+  ...simpleDimensionProps,
+  ...rotationProps,
+  ...cornerRadiusProps,
+}
+
+export const vectorProps = {
+  ...baseStyleProps,
+  ...shapeProps,
+  ...rotationProps,
+  ...simpleDimensionProps,
+}
+
+export const lineProps = {
+  ...baseStyleProps,
+  ...rotationProps,
+  ...removeKeys(['strokeAlign'], shapeProps),
+  length: dimensionProps.isOptional,
+  strokeCap: PropTypes.oneOf([
+    'none',
+    'round',
+    'square',
+    'arrow-lines',
+    'arrow-equilateral',
+  ]).isOptional,
+}
+
+export const textNodeProps = {
+  ...baseStyleProps,
+  ...widthHeightProps,
+  ...rotationProps,
+  ...textProps,
+  ...removeKeys(['fill'], shapeProps),
+  paragraphIndent: PropTypes.float.isOptional,
+  paragraphSpacing: PropTypes.float.isOptional,
+  horizontalAlignText: PropTypes.oneOf([
+    'left',
+    'right',
+    'center',
+    'justified',
+  ]).isOptional,
+  verticalAlignText: PropTypes.oneOf([
+    'top',
+    'center',
+    'bottom',
+  ]).isOptional,
+  lineHeight: PropTypes.oneOf([
+    PropTypes.float,
+    PropTypes.string,
+    'auto',
+  ]).isOptional,
+  truncate: PropTypes.oneOf([
+    PropTypes.bool,
+    PropTypes.integer,
+  ]).isOptional,
+}
+
+export const autoLayoutFrameProps = {
+  ...removeKeys(['width', 'height'], frameProps),
+  ...layoutProps,
+  ...widthHeightProps,
+}
+
+export const anyPropType = PropTypes.oneOf([
+  PropTypes.dictionaryOf(PropTypes.any),
+  PropTypes.arrayOf(PropTypes.any),
+  PropTypes.string,
+  null,
+  void 0,
+])
+
+export const childrenProps = {
+  children: PropTypes.oneOf([anyPropType, PropTypes.arrayOf(anyPropType)]).isOptional,
+}
+
+export const hoverStyleProps = {
   hoverStyle: PropTypes.exact({
-    fill: V.isOptional,
-    stroke: B.isOptional,
-    opacity: PropTypes.$$float.isOptional
-  }).isOptional
-};
-let ea = {
-  ...T,
+    fill: fillUnionProps.isOptional,
+    stroke: strokeProps.isOptional,
+    opacity: PropTypes.float.isOptional,
+  }).isOptional,
+}
+
+export const clickableProps = {
+  ...baseStyleProps,
   onClick: PropTypes.any.isOptional,
   tooltip: PropTypes.string.isOptional,
-  ...er,
-  positioning: PropTypes.oneOf(["auto", "absolute"]).isOptional
-};
-let es = {
-  minWidth: u,
-  minHeight: u,
-  maxWidth: u,
-  maxHeight: u
-};
-let eo = e => ({
-  ...ea,
-  ...es,
-  ...ee,
-  font: PropTypes.exact({
-    family: PropTypes.string,
-    style: PropTypes.string
-  }).isOptional
-});
-export function $$el0(e) {
-  let t = eo(e);
-  return PropTypes.exact({
-    ...t,
-    children: PropTypes.any.isOptional
-  });
+  ...hoverStyleProps,
+  positioning: PropTypes.oneOf(['auto', 'absolute']).isOptional,
 }
-let ed = e => ({
-  ...a(["href"], $),
-  ...er
-});
-export function $$ec4(e) {
-  let t = a(["minWidth", "minHeight", "maxWidth", "maxHeight"], eo(e));
-  let i = ed(e);
-  let r = a(["width", "height"], $$em3(e));
+
+export const minMaxProps = {
+  minWidth: optionalFloat,
+  minHeight: optionalFloat,
+  maxWidth: optionalFloat,
+  maxHeight: optionalFloat,
+}
+
+/**
+ * Generates props for a generic element.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function eo)
+ */
+export function elementProps(_e: any) {
+  return {
+    ...clickableProps,
+    ...minMaxProps,
+    ...textNodeProps,
+    font: PropTypes.exact({
+      family: PropTypes.string,
+      style: PropTypes.string,
+    }).isOptional,
+  }
+}
+
+/**
+ * Generates props for a text input element.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$ec4)
+ */
+export function textInputProps(e: any) {
+  const t = removeKeys(['minWidth', 'minHeight', 'maxWidth', 'maxHeight'], elementProps(e))
+  const i = removeKeys(['href'], textProps)
+  const r = removeKeys(['width', 'height'], autoLayoutFrameProps)
   return PropTypes.exact({
     ...t,
     placeholder: PropTypes.string.isOptional,
@@ -312,144 +422,274 @@ export function $$ec4(e) {
     value: PropTypes.oneOf([PropTypes.string, null]),
     placeholderProps: PropTypes.exact(i).isOptional,
     inputFrameProps: r.isOptional,
-    width: d.isOptional,
-    inputBehavior: PropTypes.oneOf(["wrap", "truncate", "multiline"]).isOptional
-  });
+    width: dimensionProps.isOptional,
+    inputBehavior: PropTypes.oneOf(['wrap', 'truncate', 'multiline']).isOptional,
+  })
 }
-export function $$eu10(e) {
+
+/**
+ * Generates props for a generic element with children.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$eu10)
+ */
+export function elementWithChildrenProps(_e: any) {
   return PropTypes.exact({
-    ...en
-  });
+    ...childrenProps,
+  })
 }
-export function $$ep1(e) {
+
+/**
+ * Generates props for a clickable element.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$ep1)
+ */
+export function clickableElementProps(_e: any) {
   return PropTypes.exact({
-    ...ea,
-    ...es,
-    ...Z,
-    ...en
-  });
+    ...clickableProps,
+    ...minMaxProps,
+    ...frameProps,
+    ...childrenProps,
+  })
 }
-export function $$em3(e) {
+
+/**
+ * Generates props for an auto-layout frame.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$em3)
+ */
+export function autoLayoutFramePropsFn(_e: any) {
   return PropTypes.exact({
-    ...ea,
-    ...es,
-    ...et,
-    ...en
-  });
+    ...clickableProps,
+    ...minMaxProps,
+    ...autoLayoutFrameProps,
+    ...childrenProps,
+  })
 }
-export function $$eh7(e) {
+
+/**
+ * Generates props for an arc element.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$eh7)
+ */
+export function arcProps(_e: any) {
   return PropTypes.exact({
-    ...ea,
-    ...es,
-    ...Q,
+    ...clickableProps,
+    ...minMaxProps,
+    ...vectorProps,
     arcData: PropTypes.exact({
-      startingAngle: PropTypes.$$float,
-      endingAngle: PropTypes.$$float,
-      innerRadius: PropTypes.$$float.range(0, 1)
-    }).isOptional
-  });
+      startingAngle: PropTypes.float,
+      endingAngle: PropTypes.float,
+      innerRadius: PropTypes.float.range(0, 1),
+    }).isOptional,
+  })
 }
-export function $$eg9(e) {
+
+/**
+ * Generates props for a vector element.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$eg9)
+ */
+export function vectorElementProps(_e: any) {
   return PropTypes.exact({
-    ...ea,
-    ...es,
-    ...X
-  });
+    ...clickableProps,
+    ...minMaxProps,
+    ...groupProps,
+  })
 }
-export function $$ef5(e) {
+
+/**
+ * Generates props for an image element.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$ef5)
+ */
+export function imageElementProps(_e: any) {
+  // Make all non-optional props optional
+  const optionalFrameProps = (() => {
+    const t = { ...frameProps }
+    Object.keys(t).forEach((key) => {
+      if (t[key]?.type !== 'optional') {
+        t[key] = t[key].isOptional
+      }
+    })
+    return t
+  })()
   return PropTypes.exact({
-    ...ea,
-    ...es,
-    ...function (e) {
-      let t = {
-        ...e
-      };
-      Object.keys(t).forEach(e => {
-        "optional" !== t[e].type && (t[e] = t[e].isOptional);
-      });
-      return t;
-    }(Z),
-    src: PropTypes.string
-  });
+    ...clickableProps,
+    ...minMaxProps,
+    ...optionalFrameProps,
+    src: PropTypes.string,
+  })
 }
-export function $$e_8(e) {
+
+/**
+ * Generates props for a line element.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$e_8)
+ */
+export function lineElementProps(_e: any) {
   return PropTypes.exact({
-    ...ea,
-    ...J
-  });
+    ...clickableProps,
+    ...lineProps,
+  })
 }
-let eA = {
+
+/**
+ * Generates props for a generic element.
+ * @param e - Custom props.
+ * @returns PropTypes definition.
+ * (Original: function $$el0)
+ */
+export function genericElementProps(e: any) {
+  const t = elementProps(e)
+  return PropTypes.exact({
+    ...t,
+    children: PropTypes.any.isOptional,
+  })
+}
+
+// Property menu item types
+export const propertyMenuBaseProps = {
   tooltip: PropTypes.string,
-  propertyName: PropTypes.string
-};
-let ey = {
-  selectedOption: PropTypes.string
-};
-let eb = PropTypes.exact({
-  ...eA,
-  itemType: "action",
-  icon: PropTypes.string.isOptional
-});
-let ev = PropTypes.exact({
-  ...eA,
-  itemType: "toggle",
+  propertyName: PropTypes.string,
+}
+
+export const propertyMenuSelectedOptionProps = {
+  selectedOption: PropTypes.string,
+}
+
+export const propertyMenuActionProps = PropTypes.exact({
+  ...propertyMenuBaseProps,
+  itemType: 'action',
   icon: PropTypes.string.isOptional,
-  isToggled: PropTypes.bool
-});
-let eI = PropTypes.exact({
-  ...eA,
-  itemType: "link",
+})
+
+export const propertyMenuToggleProps = PropTypes.exact({
+  ...propertyMenuBaseProps,
+  itemType: 'toggle',
+  icon: PropTypes.string.isOptional,
+  isToggled: PropTypes.bool,
+})
+
+export const propertyMenuLinkProps = PropTypes.exact({
+  ...propertyMenuBaseProps,
+  itemType: 'link',
   icon: PropTypes.oneOf([PropTypes.string, null]).isOptional,
-  href: PropTypes.string
-});
-let eE = PropTypes.exact({
-  itemType: "separator"
-});
-let ex = PropTypes.exact({
+  href: PropTypes.string,
+})
+
+export const propertyMenuSeparatorProps = PropTypes.exact({
+  itemType: 'separator',
+})
+
+export const propertyMenuOptionProps = PropTypes.exact({
   option: PropTypes.string,
-  tooltip: PropTypes.string
-});
-let eS = PropTypes.exact({
-  ...eA,
-  ...ey,
-  itemType: "color-selector",
-  options: PropTypes.arrayOf(ex)
-});
-let ew = PropTypes.exact({
+  tooltip: PropTypes.string,
+})
+
+export const propertyMenuColorSelectorProps = PropTypes.exact({
+  ...propertyMenuBaseProps,
+  ...propertyMenuSelectedOptionProps,
+  itemType: 'color-selector',
+  options: PropTypes.arrayOf(propertyMenuOptionProps),
+})
+
+export const propertyMenuDropdownOptionProps = PropTypes.exact({
   option: PropTypes.string,
-  label: PropTypes.string
-});
-let eC = PropTypes.exact({
-  ...eA,
-  ...ey,
-  itemType: "dropdown",
-  options: PropTypes.arrayOf(ew)
-});
-let $$eT2 = PropTypes.arrayOf(PropTypes.oneOf([eb, eE, eS, eC, ev, eI]));
-export function $$ek6(e, t) {
-  "color-selector" === e.itemType ? function (e, t) {
-    let i = e.options.map(e => e.option);
-    let n = `usePropertyMenu.args[0][${t}]`;
-    eR(e.options, e.selectedOption, t);
-    let a = e => e.match("^#(?:[0-9a-fA-F]{3}){1,2}$");
-    if (0 !== i.filter(e => !a(e)).length) throw new InternalError(`${n}.options do not have valid hexcode strings.`);
-  }(e, t) : "dropdown" === e.itemType && eR(e.options, e.selectedOption, t);
+  label: PropTypes.string,
+})
+
+export const propertyMenuDropdownProps = PropTypes.exact({
+  ...propertyMenuBaseProps,
+  ...propertyMenuSelectedOptionProps,
+  itemType: 'dropdown',
+  options: PropTypes.arrayOf(propertyMenuDropdownOptionProps),
+})
+
+export const propertyMenuItemProps = PropTypes.arrayOf(
+  PropTypes.oneOf([
+    propertyMenuActionProps,
+    propertyMenuSeparatorProps,
+    propertyMenuColorSelectorProps,
+    propertyMenuDropdownProps,
+    propertyMenuToggleProps,
+    propertyMenuLinkProps,
+  ]),
+)
+
+/**
+ * Validates property menu options.
+ * @param e - Property menu item.
+ * @param t - Index.
+ * (Original: function $$ek6)
+ */
+export function validatePropertyMenuOptions(e: any, t: number) {
+  if (e.itemType === 'color-selector') {
+    validateColorSelectorOptions(e, t)
+  }
+  else if (e.itemType === 'dropdown') {
+    validateDropdownOptions(e, t)
+  }
 }
-function eR(e, t, i) {
-  let n = `usePropertyMenu.args[0][${i}]`;
-  let a = e.map(e => e.option);
-  if (0 === a.length) throw new InternalError(`${n}.options is empty.`);
-  if (new Set(a).size !== a.length) throw new InternalError(`${n}.options has duplicate values.`);
-  a.includes(t) || console.warn(`${n}.selectedOption is not included in ${n}.options.`);
+
+/**
+ * Validates color selector options.
+ * @param e - Property menu item.
+ * @param t - Index.
+ * (Original: function eR)
+ */
+function validateColorSelectorOptions(e: any, t: number) {
+  const options = e.options.map((opt: any) => opt.option)
+  const n = `usePropertyMenu.args[0][${t}]`
+  validateOptions(options, e.selectedOption, t)
+  const isHex = (str: string) => /^#(?:[0-9a-f]{3}){1,2}$/i.test(str)
+  if (options.filter(opt => !isHex(opt)).length !== 0) {
+    throw new InternalError(`${n}.options do not have valid hexcode strings.`)
+  }
 }
-export const BR = $$el0;
-export const Bb = $$ep1;
-export const Ed = $$eT2;
-export const L1 = $$em3;
-export const L3 = $$ec4;
-export const MQ = $$ef5;
-export const OV = $$ek6;
-export const QK = $$eh7;
-export const gJ = $$e_8;
-export const r8 = $$eg9;
-export const yL = $$eu10;
+
+/**
+ * Validates dropdown options.
+ * @param e - Property menu item.
+ * @param t - Index.
+ * (Original: function eR)
+ */
+function validateDropdownOptions(e: any, t: number) {
+  validateOptions(e.options.map((opt: any) => opt.option), e.selectedOption, t)
+}
+
+/**
+ * Validates options for uniqueness and inclusion.
+ * @param options - Array of option strings.
+ * @param selected - Selected option.
+ * @param index - Index.
+ * (Original: function eR)
+ */
+function validateOptions(options: string[], selected: string, index: number) {
+  const n = `usePropertyMenu.args[0][${index}]`
+  if (options.length === 0)
+    throw new InternalError(`${n}.options is empty.`)
+  if (new Set(options).size !== options.length)
+    throw new InternalError(`${n}.options has duplicate values.`)
+  if (!options.includes(selected))
+    console.warn(`${n}.selectedOption is not included in ${n}.options.`)
+}
+
+// Exported names (Original: export const BR, Bb, Ed, L1, L3, MQ, OV, QK, gJ, r8, yL)
+export const BR = genericElementProps
+export const Bb = clickableElementProps
+export const Ed = propertyMenuItemProps
+export const L1 = autoLayoutFramePropsFn
+export const L3 = textInputProps
+export const MQ = imageElementProps
+export const OV = validatePropertyMenuOptions
+export const QK = arcProps
+export const gJ = lineElementProps
+export const r8 = vectorElementProps
+export const yL = elementWithChildrenProps

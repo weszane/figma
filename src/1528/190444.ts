@@ -5,7 +5,7 @@ import { PluginHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import o from "classnames";
 import { A as _$$A } from "../905/920142";
-import { Pt, o6, cZ } from "../figma_app/806412";
+import { generateRecordingKey, RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { Yo } from "../figma_app/637027";
 import { t } from "../905/331623";
@@ -77,7 +77,7 @@ let P = class e extends PureComponent {
         let l = `${e.pluginTypeAndID}-${e.relaunchButton.command}`;
         let r = jsx(M, {
           relaunchData: e,
-          recordingKey: Pt(this.props, "relaunch", l),
+          recordingKey: generateRecordingKey(this.props, "relaunch", l),
           onRelaunch: this.onRelaunch,
           onRemoveRelaunchData: this.onRemoveRelaunchData,
           firstButtonForPlugin: n !== t,
@@ -115,10 +115,10 @@ let P = class e extends PureComponent {
 P.displayName = "PluginPanel";
 P.refreshCache = new _$$O2(_$$A.duration(1, "day"));
 export let $$F0 = P;
-class M extends o6 {
+class M extends RecordingPureComponent {
   constructor() {
     super(...arguments);
-    this.onRelaunch = cZ(this, "click", () => {
+    this.onRelaunch = handleMouseEvent(this, "click", () => {
       this.props.onRelaunch(this.props.relaunchData);
     });
   }
@@ -127,7 +127,7 @@ class M extends o6 {
       ...{
         ...this.props,
         onRelaunch: this.onRelaunch,
-        recordingKey: Pt(this.props, "removeButton")
+        recordingKey: generateRecordingKey(this.props, "removeButton")
       }
     });
   }

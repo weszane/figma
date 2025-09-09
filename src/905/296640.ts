@@ -1,14 +1,14 @@
 import { useCallback, useState, useEffect } from "react";
 import { trackEventAnalytics } from "../905/449184";
 import { ZC } from "../figma_app/39751";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 export function $$o0(e, t) {
   return useCallback(i => {
     let {
       event,
       ...a
     } = i || {};
-    let o = event && Pt(e, event) || e;
+    let o = event && generateRecordingKey(e, event) || e;
     trackEventAnalytics(o, {
       ...t,
       ...a

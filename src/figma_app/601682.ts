@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { FPlanNameType } from "../figma_app/191312";

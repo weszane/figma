@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { IK } from "../905/521428";
 import { T } from "../905/632137";
 import o from "classnames";

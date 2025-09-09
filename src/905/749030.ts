@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
-import { zN } from "../905/19536";
+import { useStableMemo } from "../905/19536";
 import { f as _$$f } from "../905/412913";
 import { Ui } from "../905/709171";
 import { nR } from "../figma_app/852050";
@@ -14,7 +14,7 @@ import { ub, PW } from "../figma_app/633080";
 import { AH } from "../905/571648";
 let _ = _$$f();
 export function $$$$A0(e, t, i) {
-  let n = zN(i ?? [ub.VARIABLE, ub.STYLE]);
+  let n = useStableMemo(i ?? [ub.VARIABLE, ub.STYLE]);
   let d = AH(t?.type === PW.STYLE ? t.key : null, t?.type === PW.STYLE ? t : null);
   let m = d?.status === "loaded" ? d.data : null;
   let A = nR();

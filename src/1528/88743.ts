@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useLayoutEffect, useCallback, useMemo, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { $n, WW } from "../905/521428";
 import { K as _$$K2 } from "../905/851274";
 import { O as _$$O } from "../905/969533";
 import { DocumentColorProfileEnum, Command } from "../figma_app/763686";
 import { atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, atom, Xr } from "../figma_app/27355";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { B4 } from "../figma_app/385215";
 import { WN } from "../figma_app/638601";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -58,7 +58,7 @@ import { DG } from "../figma_app/789";
 import { k as _$$k4 } from "../figma_app/564183";
 import { isIntegrationContext } from "../figma_app/469876";
 import { dR } from "../figma_app/440875";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { t as _$$t2 } from "../figma_app/501766";
 import { YJ } from "../figma_app/144692";
 import { Lx, v7 } from "../9410/896213";
@@ -669,7 +669,7 @@ function eu({
               }), jsx(pu, {
                 ref,
                 selectedCooperFrameNodeId: s,
-                recordingKey: Pt(s, "exportModalPreview"),
+                recordingKey: generateRecordingKey(s, "exportModalPreview"),
                 useAbsoluteBounds: !0,
                 panelWidth: 337,
                 panelHeight: 337,
@@ -838,7 +838,7 @@ function eF(e) {
   let k = _$$e2();
   let A = _$$G();
   let w = xo();
-  let P = iZ();
+  let P = selectCurrentUser();
   let F = WN();
   useEffect(() => {
     D.current && isRightPanelCollapsed && O(D.current.clientWidth);
@@ -872,7 +872,7 @@ function eF(e) {
       }), (isRightPanelCollapsed || j) && !I && jsx("div", {
         className: wR,
         children: jsx(_$$H, {
-          recordingKey: Pt("header", "zoomMenu")
+          recordingKey: generateRecordingKey("header", "zoomMenu")
         })
       }), jsx("div", {
         className: Oh,

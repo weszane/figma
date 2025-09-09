@@ -357,7 +357,7 @@ const isPerfApiAvailable
  * PerfTimer class for advanced performance measurement.
  * Original: d
  */
-class PerfTimer extends Timer {
+export class PerfTimer extends Timer {
   static operationSeq = 0
   _isUnreliable = false
   name: string

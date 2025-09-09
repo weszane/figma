@@ -1,42 +1,100 @@
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
-import { A } from "../905/482208";
-import { fullscreenValue } from "../figma_app/455680";
-export function $$o1(e) {
-  if (e.isBackground) return;
-  let t = function (e) {
-    let t = $$d0(e.name, e.vmType);
-    return e.isBackground ? A("plugins-background", {
-      plugin: t
-    }) : e.isInsert ? A("plugins-inserting", {
-      plugin: t
-    }) : A("plugins-running", {
-      plugin: t
-    });
-  }(e);
-  fullscreenValue.dispatch(F.enqueue({
-    type: "plugins-status",
-    message: t,
-    icon: e.isBackground ? zX.NONE : e.shouldShowCheck ? zX.CHECK : zX.SPINNER,
-    timeoutType: "exact",
-    timeoutOverride: e.isBackground ? 1 / 0 : e.shouldShowCheck ? 1e3 : void 0,
-    delay: e.delayOverride ?? 300,
-    button: e.isInsert ? void 0 : {
-      text: e.isBackground ? A("plugins-stop") : A("plugins-cancel"),
-      action: t => {
-        e.cancelCallback();
+import { VisualBellActions } from '../905/302958'
+import { formatI18nMessage } from '../905/482208'
+import { VisualBellIcon } from '../905/576487'
+import { fullscreenValue } from '../figma_app/455680'
+
+/**
+ * Formats the plugin name based on vmType.
+ * @param name - The plugin name.
+ * @param vmType - The type of VM.
+ * @returns Formatted plugin name.
+ * @originalName $$d0
+ */
+export function formatPluginName(name: string, vmType: string): string {
+  return vmType === 'realms'
+    ? `${name} (${formatI18nMessage('plugins-realms-vm')})`
+    : name
+}
+
+/**
+ * Dispatches a visual bell notification for plugin status.
+ * @param params - Plugin status parameters.
+ * @originalName $$o1
+ */
+export function notifyPluginStatus(params: {
+  name: string
+  vmType: string
+  isBackground: boolean
+  isInsert: boolean
+  shouldShowCheck: boolean
+  delayOverride?: number
+  cancelCallback: () => void
+}): void {
+  if (params.isBackground)
+    return
+
+  // Compose status message
+  const message = params.isBackground
+    ? formatI18nMessage('plugins-background', { plugin: formatPluginName(params.name, params.vmType) })
+    : params.isInsert
+      ? formatI18nMessage('plugins-inserting', { plugin: formatPluginName(params.name, params.vmType) })
+      : formatI18nMessage('plugins-running', { plugin: formatPluginName(params.name, params.vmType) })
+
+  // Determine icon
+  const icon = params.isBackground
+    ? VisualBellIcon.NONE
+    : params.shouldShowCheck
+      ? VisualBellIcon.CHECK
+      : VisualBellIcon.SPINNER
+
+  // Determine timeout
+  const timeoutOverride = params.isBackground
+    ? Infinity
+    : params.shouldShowCheck
+      ? 1000
+      : undefined
+
+  // Compose button if not insert
+  const button = params.isInsert
+    ? undefined
+    : {
+        text: params.isBackground
+          ? formatI18nMessage('plugins-stop')
+          : formatI18nMessage('plugins-cancel'),
+        action: () => {
+          params.cancelCallback()
+        },
       }
-    }
-  }));
+
+  fullscreenValue.dispatch(
+    VisualBellActions.enqueue({
+      type: 'plugins-status',
+      message,
+      icon,
+      timeoutType: 'exact',
+      timeoutOverride,
+      delay: params.delayOverride ?? 300,
+      button,
+    }),
+  )
 }
-export function $$l2(e) {
-  fullscreenValue && fullscreenValue.isReady() && e.shouldShowVisualBell && fullscreenValue.dispatch(F.dequeue({
-    matchType: "plugins-status"
-  }));
+
+/**
+ * Dequeues the visual bell notification for plugin status.
+ * @param params - Parameters to control dequeue behavior.
+ * @originalName $$l2
+ */
+export function dequeuePluginStatus(params: { shouldShowVisualBell: boolean }): void {
+  if (fullscreenValue && fullscreenValue.isReady() && params.shouldShowVisualBell) {
+    fullscreenValue.dispatch(
+      VisualBellActions.dequeue({
+        matchType: 'plugins-status',
+      }),
+    )
+  }
 }
-export function $$d0(e, t) {
-  return "realms" === t ? `${e} (${A("plugins-realms-vm")})` : e;
-}
-export const WW = $$d0;
-export const Ym = $$o1;
-export const pN = $$l2;
+
+// Export aliases for backward compatibility
+export const WW = formatPluginName // $$d0
+export const Ym = notifyPluginStatus // $$o1
+export const pN = dequeuePluginStatus // $$l2

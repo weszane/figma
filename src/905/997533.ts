@@ -3,7 +3,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { t as _$$t } from "../905/897919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rg } from "../figma_app/827447";
 import { getInitialOptions } from "../figma_app/169182";
 import { P as _$$P } from "../905/724705";
@@ -48,7 +48,7 @@ let $$k5 = createOptimistThunk((e, {
   let a = t.data;
   if (a && a.reason && "object" == typeof a.reason) {
     if ("mfa_required_by_org" === a.reason.missing && a.reason.mfa_setup_token) {
-      Ay.redirect(`/mfa_auth?mfa_setup_token=${a.reason.mfa_setup_token}`);
+      customHistory.redirect(`/mfa_auth?mfa_setup_token=${a.reason.mfa_setup_token}`);
       return;
     }
     if ("two_factor" === a.reason.missing) {
@@ -157,7 +157,7 @@ let M = (e, t) => {
     invalidInput: RE.PASSWORD
   };
 };
-let $$j4 = (e = "") => !!parseQuery(Ay.location.search).is_not_gen_0 || e && P.includes(e);
+let $$j4 = (e = "") => !!parseQuery(customHistory.location.search).is_not_gen_0 || e && P.includes(e);
 let U = (e, t, i) => {
   let n = "";
   YH(e).length > 500 && (n = getI18nString("auth.input-validation.long-password"));
@@ -178,7 +178,7 @@ export function $$B0({
 }) {
   let i = new URL(e);
   i.searchParams.set("cont", t);
-  Ay.redirect(i.toString());
+  customHistory.redirect(i.toString());
 }
 export let $$V6 = createOptimistThunk((e, {
   formId: t

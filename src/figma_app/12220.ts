@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { cm } from "../figma_app/815945";
+import { memoizeWeak } from "../figma_app/815945";
 import { L4 } from "../figma_app/819288";
 import { parsePxNumber } from "../figma_app/783094";
 import { gB, oA } from "../905/723791";
@@ -70,7 +70,7 @@ export function $$S4(e, t, r) {
 export function $$v7(e) {
   return e === hm;
 }
-let $$A12 = cm(e => e.map(e => e.user ? {
+let $$A12 = memoizeWeak(e => e.map(e => e.user ? {
   user_id: e.user.id,
   user_annotated: {
     id: e.user.id,
@@ -83,7 +83,7 @@ let $$A12 = cm(e => e.map(e => e.user ? {
   styles: e.styles ? e.styles : void 0,
   children: e.children?.length ? $$A12(e.children) : void 0
 }));
-let x = cm(e => ({
+let x = memoizeWeak(e => ({
   x: e.x,
   y: e.y,
   ...(e.nodeId ? {
@@ -102,7 +102,7 @@ let x = cm(e => ({
     stable_path: e.stablePath
   } : {})
 }));
-let $$N0 = cm(e => ({
+let $$N0 = memoizeWeak(e => ({
   id: e.id,
   handle: e.handle,
   img_url: e.imgUrl

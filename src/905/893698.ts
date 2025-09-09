@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { o as _$$o } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A } from "../905/891805";
@@ -174,7 +174,7 @@ export function $$P0() {
     if (i) try {
       let n = JSON.parse(i);
       "boolean" == typeof n && e !== n && t(n);
-    } catch (e) {}
+    } catch (e) { }
   }, [e, t]);
   useStorageEventSync({
     onSync: n,

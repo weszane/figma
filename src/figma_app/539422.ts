@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useId, useMemo, useEffect, useRef } from "react";
 import { createPortal } from "../vendor/944059";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { oB, j7 } from "../905/929976";
 import { UV } from "../905/504727";
 import { j } from "../905/834956";

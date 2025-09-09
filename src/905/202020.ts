@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useRef, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
@@ -14,7 +14,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { E9, pf } from "../figma_app/314264";
 import { J8, By } from "../905/760074";
 import { createOptimistThunk } from "../905/350402";
@@ -65,7 +65,7 @@ let x = createOptimistThunk(async (e, t) => {
 });
 let S = createOptimistThunk(async (e, t) => {
   let i = await J8(t.branches.map(e => e.key));
-  "error" === i.status ? e.dispatch(_$$s.error(i.message)) : e.dispatch(_$$F.enqueue({
+  "error" === i.status ? e.dispatch(_$$s.error(i.message)) : e.dispatch(VisualBellActions.enqueue({
     type: "file_restored",
     message: getI18nString("collaboration.branching.branches_restored", {
       branchCount: t.branches.length
@@ -108,10 +108,10 @@ let w = createOptimistThunk(async (e, t) => {
         e.dispatch(S({
           branches: t.branches
         }));
-        e.dispatch(_$$F.dequeue({}));
+        e.dispatch(VisualBellActions.dequeue({}));
       }
     };
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "file_deleted",
       message: getI18nString("collaboration.branching.branch_archived"),
       button: a
@@ -217,7 +217,7 @@ export function $$V0(e) {
   return jsxs("li", {
     className: `branch_row--container--MD7zC ${e.isSelected ? "branch_row--selected--qBm47" : ""}`,
     onContextMenu: e => {
-      if (e.preventDefault(), e.stopPropagation(), m) t(oB());else {
+      if (e.preventDefault(), e.stopPropagation(), m) t(oB()); else {
         let n = {
           top: e.clientY,
           right: e.clientX,
@@ -313,7 +313,7 @@ export function $$V0(e) {
       className: "branch_row--menuColumn--XSWVZ",
       children: jsx(_$$d, {
         onClick: e => {
-          if (e.stopPropagation(), e.preventDefault(), m) t(oB());else {
+          if (e.stopPropagation(), e.preventDefault(), m) t(oB()); else {
             let e = A.current;
             t(j7({
               type: i,

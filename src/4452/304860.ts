@@ -10,7 +10,7 @@ import { showModalHandler } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { V as _$$V } from '../905/223084';
 import { B as _$$B } from '../905/261906';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { N_ } from '../905/332483';
 import { c as _$$c } from '../905/370443';
@@ -20,7 +20,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
 import { ud } from '../905/513035';
 import { $n } from '../905/521428';
-import { zX } from '../905/576487';
+import { VisualBellIcon } from '../905/576487';
 import { oA } from '../905/663269';
 import { g as _$$g } from '../905/687265';
 import { e0 } from '../905/696396';
@@ -49,7 +49,7 @@ import { k as _$$k } from '../figma_app/618031';
 import { Ro } from '../figma_app/805373';
 import { zRx } from '../figma_app/822011';
 import { fu } from '../figma_app/831799';
-import { useDispatch } from '../vendor/514228';
+import { useDispatch } from 'react-redux';
 FPlanNameType.STUDENT;
 FPlanNameType.STARTER;
 let M = N_.dict(() => '-');
@@ -281,9 +281,9 @@ function er(e) {
     p.props?.close({
       source: 'button'
     });
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString('plan_settings.auto_approval_settings.approval_settings_applied'),
-      icon: zX.CHECK_WITH_CIRCLE
+      icon: VisualBellIcon.CHECK_WITH_CIRCLE
     }));
   }, [Y, t, p.props, z.key.parentId, z.key.type]);
   let J = useCallback((e, t) => {

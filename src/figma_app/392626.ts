@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch, useStore, useSelector } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { $n } from "../905/521428";
@@ -17,12 +17,12 @@ import { qc } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { xr, _J } from "../figma_app/314264";
 import { N as _$$N } from "../905/98916";
-import { NqM } from "../figma_app/43951";
+import { TeamHasPublishedSite } from "../figma_app/43951";
 import { mg, nX } from "../figma_app/336853";
 import { HE, Cl, Eq } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
@@ -68,7 +68,7 @@ function B(e) {
   let [ea, es] = useState(!1);
   let [eo, el] = useState(!1);
   let ed = hS(e);
-  let ec = Rs(NqM, {
+  let ec = Rs(TeamHasPublishedSite, {
     teamId: e.teamId
   });
   let eu = _$$N(e.folderId ?? "");
@@ -145,20 +145,20 @@ function B(e) {
     XHR.post("/api/asset_transfer/create_request", t).then(() => {
       e.onRequestClose && e.onRequestClose();
       eT();
-      n(_$$F.enqueue({
+      n(VisualBellActions.enqueue({
         message: "Transfer request sent"
       }));
     }, e => {
-      "Destination user not found" === e.message || "Destination user is not part of the provided destination org" === e.message || "Destination user is not part of the provided destination team" === e.message ? (ei("email_match"), es(!1)) : "This team already has a transfer initiated" === e.message ? (ei("transfer_already_initiated"), eT(), n(_$$F.enqueue({
+      "Destination user not found" === e.message || "Destination user is not part of the provided destination org" === e.message || "Destination user is not part of the provided destination team" === e.message ? (ei("email_match"), es(!1)) : "This team already has a transfer initiated" === e.message ? (ei("transfer_already_initiated"), eT(), n(VisualBellActions.enqueue({
         message: "A team transfer was already initiated for this team.",
         error: !0
-      })), es(!1)) : "This project already has a transfer initiated" === e.message ? (ei("transfer_already_initiated"), eT(), n(_$$F.enqueue({
+      })), es(!1)) : "This project already has a transfer initiated" === e.message ? (ei("transfer_already_initiated"), eT(), n(VisualBellActions.enqueue({
         message: "A project transfer was already initiated for this team.",
         error: !0
-      }))) : "Folder is invite-only" === e.message || "Folder is view-only" === e.message ? (ei("view_or_invite_only_folder"), eT(), n(_$$F.enqueue({
+      }))) : "Folder is invite-only" === e.message || "Folder is view-only" === e.message ? (ei("view_or_invite_only_folder"), eT(), n(VisualBellActions.enqueue({
         message: "Projects that are view-only or invite-only can't be transferred.",
         error: !0
-      }))) : (ei("network_or_other_error"), eT(), n(_$$F.enqueue({
+      }))) : (ei("network_or_other_error"), eT(), n(VisualBellActions.enqueue({
         message: e.message || "Something went wrong - check your connection and try again",
         error: !0
       })), es(!1));

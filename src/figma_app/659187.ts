@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { HandoffBindingsCpp } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";

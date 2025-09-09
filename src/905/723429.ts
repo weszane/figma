@@ -8,7 +8,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { gP } from "../figma_app/594947";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
@@ -243,7 +243,7 @@ async function z(e) {
   let t = debugState.getState().openFile?.key;
   let i = debugState.getState().openFile?.libraryKey;
   if (!t || !i) return;
-  let y = _$$g();
+  let y = generateUUIDv4();
   let b = gP("make_large_paste_threshold").get("sizeBytes", 25e4);
   let x = atomStoreManager.get(Om);
   let S = atomStoreManager.get(jb);

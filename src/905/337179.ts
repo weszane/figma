@@ -3,10 +3,10 @@ import { Children, isValidElement, createRef } from "react";
 import { PluginHelpers } from "../figma_app/763686";
 import s from "classnames";
 import { Uz } from "../905/63728";
-import { o6, C0, Am, uA } from "../figma_app/806412";
+import { RecordingPureComponent, handleKeyboardEvent, handlePointerEvent, RecordingComponent } from "../figma_app/878298";
 var o = s;
 var $$c0 = (e => (e.UPWARDS = "upwards", e.DOWNWARDS = "downwards", e))($$c0 || {});
-export class $$u2 extends o6 {
+export class $$u2 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.isPointerInTypeaheadView = !0;
@@ -48,7 +48,7 @@ export class $$u2 extends o6 {
         };
       }
     };
-    this.handleKeyDown = C0(this, "keydown", e => {
+    this.handleKeyDown = handleKeyboardEvent(this, "keydown", e => {
       if (this.props.shouldNotHandleKeyDown) return;
       let t = !0;
       let i = this.props.typeahead;
@@ -75,10 +75,10 @@ export class $$u2 extends o6 {
         t && this.props.onClear();
       }, 50) : "suggestions" === this.props.typeahead.type && (e.keyCode === Uz.ENTER || e.keyCode === Uz.TAB) && this.props.dispatchTypeahead(null);
     });
-    this.handlePointerUp = Am(this, "pointerup", () => {
+    this.handlePointerUp = handlePointerEvent(this, "pointerup", () => {
       this.holdTimeout && (clearTimeout(this.holdTimeout), this.props.setIsPointerDownInTypeahead?.(!1), this.isPointerInTypeaheadView || this.props.setWasPointerDownInTypeahead?.(!1));
     });
-    this.handlePointerDown = Am(this, "pointerdown", e => {
+    this.handlePointerDown = handlePointerEvent(this, "pointerdown", e => {
       e.stopPropagation();
       e.preventDefault();
       this.holdTimeout = window.setTimeout(() => {
@@ -134,12 +134,12 @@ export class $$u2 extends o6 {
   }
 }
 $$u2.displayName = "TypeaheadView";
-export class $$p1 extends uA {
+export class $$p1 extends RecordingComponent {
   constructor() {
     super(...arguments);
     this.containerRef = createRef();
-    this.handlePointerDown = Am(this, "pointerdown", e => this.props.onPointerDown());
-    this.handlePointerUp = Am(this, "pointerup", () => this.props.onClick());
+    this.handlePointerDown = handlePointerEvent(this, "pointerdown", e => this.props.onPointerDown());
+    this.handlePointerUp = handlePointerEvent(this, "pointerup", () => this.props.onClick());
   }
   componentDidUpdate(e, t) {
     super.componentDidUpdate(e, t);

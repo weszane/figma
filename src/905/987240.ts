@@ -5,7 +5,7 @@ import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { atomStoreManager } from "../figma_app/27355";
 import { reportNullOrUndefined } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { s4 } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
 import { _P, Zh } from "../figma_app/2590";
@@ -45,7 +45,7 @@ export let $$y0 = createOptimistThunk((e, {
       default:
         throwTypeError(w);
     }
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "proto-editor-play-button-clicked",
       message: t
     }));

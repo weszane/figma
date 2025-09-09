@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { q7 } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -10,7 +10,7 @@ import { fk } from "../figma_app/618433";
 import { SQ, PF, YW } from "../figma_app/78808";
 import { hideModal, showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/852057";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { F as _$$F } from "../905/224";
 import { xp } from "../905/87821";
 import { q5 } from "../figma_app/516028";
@@ -149,7 +149,7 @@ export function $$B0(e) {
       onClick: t,
       disabled: i,
       "data-test-id": `savepoint-menu-item-${e}`,
-      children: _$$A(e)
+      children: formatI18nMessage(e)
     }, e);
     let a = T.editorType === FEditorType.Slides && oA(t.org?.isSlidesDisabled) || T.editorType === FEditorType.Whiteboard && !!t.org?.figjamDisabledAt || T.editorType === FEditorType.Sites && !!t.org?.isSitesDisabled || T.editorType === FEditorType.Cooper && !!t.org?.isCooperDisabled;
     let u = r("savepoint-compare", () => {

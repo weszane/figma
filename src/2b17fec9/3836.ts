@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { getI18nString } from "../905/303541";

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Rs } from "../figma_app/288654";
 import { qc } from "../figma_app/858013";
@@ -13,7 +13,7 @@ import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
 import { Tn } from "../figma_app/933328";
 import { NJ } from "../figma_app/518077";
-import { fPW, TKc } from "../figma_app/43951";
+import { WorkspaceAdminSettingsView, WorkspaceInfoView } from "../figma_app/43951";
 import { U5 } from "../figma_app/336853";
 import { J0, oU } from "../figma_app/967319";
 import { Ft } from "../figma_app/707808";
@@ -98,7 +98,7 @@ function q(e) {
 function $({
   workspaceId: e
 }) {
-  let t = Rs(fPW, {
+  let t = Rs(WorkspaceAdminSettingsView, {
     workspaceId: e
   });
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
@@ -139,7 +139,7 @@ function G({
   let E = useSelector(({
     selectedView: e
   }) => e);
-  let C = Rs(TKc, {
+  let C = Rs(WorkspaceInfoView, {
     workspaceId: e
   });
   let S = "loaded" !== C.status;

@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { Multiplayer } from "../figma_app/763686";
@@ -10,13 +10,13 @@ import { Dv, Fj, jI } from "../905/763714";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { hk } from "../figma_app/632319";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/383776";
 import { hA, l7, ZO } from "../figma_app/88239";
 import { createOptimistThunk } from "../905/350402";
 import { J4 } from "../figma_app/91703";
 import { z4 } from "../905/37051";
-import { wr } from "../figma_app/741237";
+import { clearSelection } from "../figma_app/741237";
 import { XM, e2 } from "../905/486443";
 import { Oc } from "../figma_app/552876";
 import { z3 } from "../figma_app/386952";
@@ -28,13 +28,13 @@ let $$N10 = createOptimistThunk((e, t) => {
   let i = r ? getI18nString("collaboration.spotlight.visual_bell.user_left_the_spotlight", {
     userName: n
   }) : getI18nString("collaboration.spotlight.visual_bell.the_presenter_left_the_spotlight");
-  e.dispatch(F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     message: i,
     type: "presentation_stopped_alert"
   }));
 });
 let $$C5 = createOptimistThunk((e, t) => {
-  e.dispatch(F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: "presentation_stopped_alert"
   }));
 });
@@ -88,7 +88,7 @@ export function $$R12(e) {
   }, [R]);
   let P = O();
   let D = useCallback(() => {
-    isNotNullish(presenterSessionID) && ("prototype" !== _ && wr(), P(presenterSessionID));
+    isNotNullish(presenterSessionID) && ("prototype" !== _ && clearSelection(), P(presenterSessionID));
   }, [presenterSessionID, P, _]);
   let k = useCallback(() => {
     D();

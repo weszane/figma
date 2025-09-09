@@ -9,7 +9,7 @@ import { l5, vj, Wf } from "../figma_app/819288";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { getFalseValue } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { We, UU, Qe } from "../figma_app/770088";
 import { Hx } from "../figma_app/530167";
 import { pP, jD } from "../905/765855";
@@ -1242,7 +1242,7 @@ export class $$tA0 extends Component {
           let t = e.getCurrentContent();
           t = Modifier.removeInlineStyle(t, n, "HIGHLIGHT");
           e = EditorState.push(e, t, "change-inline-style");
-          this.props.dispatch(_$$F.enqueue({
+          this.props.dispatch(VisualBellActions.enqueue({
             message: getI18nString("hyperlink.invalid_link_plain")
           }));
         }

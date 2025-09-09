@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, Suspense } from "react";
-import { useDispatch, connect } from "../vendor/514228";
+import { useDispatch, connect } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { s as _$$s } from "../905/403855";
 import { buildUploadUrl } from "../figma_app/169182";

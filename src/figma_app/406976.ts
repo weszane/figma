@@ -13,7 +13,7 @@ import { ds } from "../figma_app/314264";
 import { ZR, O8 } from "../905/313095";
 import { X } from "../905/853613";
 import { tS } from "../figma_app/516028";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { Ev, Eo } from "../figma_app/216057";
 import { y as _$$y, v as _$$v } from "../905/456837";
 function T(e) {
@@ -72,7 +72,7 @@ export function $$S1({
   resolvedType: e
 }) {
   let t = tS();
-  let r = TA();
+  let r = getUserId();
   _$$h(() => {
     t && r && analyticsEventManager.trackDefinedEvent("variables.inline_creation_dialog_opened", {
       fileKey: t,

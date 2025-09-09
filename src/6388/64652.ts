@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useState, memo, useRef, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { clamp } from "../figma_app/492908";
 import { O as _$$O } from "../905/969533";
 import { k as _$$k } from "../905/44647";
@@ -15,7 +15,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { Te } from "../1250/12342";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
-import { hq, i as _$$i } from "../figma_app/741237";
+import { expandNodeToRoot, renameNode } from "../figma_app/741237";
 import { aV, p8 } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
@@ -95,7 +95,7 @@ function Z() {
     });
     setIsOpen(e);
   }, [x, m, setIsOpen]);
-  let [b,, j] = BN(a, e);
+  let [b, , j] = BN(a, e);
   return jsxs(_$$A, {
     isFullHeight: !r,
     children: [jsx(_$$$2, {}), !t && jsx(_$$I, {
@@ -445,7 +445,7 @@ function eR({
     } : null;
   }, t);
   let x = useCallback(e => {
-    l || (a(e), hq(e));
+    l || (a(e), expandNodeToRoot(e));
   }, [l]);
   useEffect(() => {
     let e = ({
@@ -464,7 +464,7 @@ function eR({
     renamingGuid: i,
     startRenaming: x,
     stopRenaming: function (e, t, o) {
-      l || (i && e && (permissionScopeHandler.user("set-node-name", () => _$$i(i, t || "")), fullscreenValue.commit()), a(null));
+      l || (i && e && (permissionScopeHandler.user("set-node-name", () => renameNode(i, t || "")), fullscreenValue.commit()), a(null));
     },
     thumbnailGuid: null,
     topNodeProperties: u,
@@ -529,7 +529,7 @@ function eB({
   let v = useCallback(e => {
     if (l) return;
     let t = getSingletonSceneGraph().get(e);
-    t && "SLIDE" !== t.type && (a(e), hq(e));
+    t && "SLIDE" !== t.type && (a(e), expandNodeToRoot(e));
   }, [l]);
   useEffect(() => {
     let e = ({
@@ -559,7 +559,7 @@ function eB({
       renamingGuid: i,
       startRenaming: v,
       stopRenaming: function (e, t, o) {
-        l || (i && e && (permissionScopeHandler.user("set-node-name", () => _$$i(i, t || "")), fullscreenValue.commit()), a(null));
+        l || (i && e && (permissionScopeHandler.user("set-node-name", () => renameNode(i, t || "")), fullscreenValue.commit()), a(null));
       },
       topNodeProperties: m,
       versionHistory: x,

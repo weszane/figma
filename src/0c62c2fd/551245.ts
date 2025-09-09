@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
 import { Rs } from "../figma_app/288654";
@@ -9,9 +9,9 @@ import { R } from "../905/441305";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { E9 } from "../figma_app/314264";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { FContainerKindType } from "../figma_app/191312";
-import { qBf } from "../figma_app/43951";
+import { DeleteWorkspacePinnedFileView } from "../figma_app/43951";
 import { p as _$$p } from "../0c62c2fd/698840";
 import { p as _$$p2 } from "../0c62c2fd/687448";
 export function $$b0({
@@ -19,11 +19,11 @@ export function $$b0({
   open: t,
   onClose: r
 }) {
-  let b = TA();
+  let b = getUserId();
   let v = useDispatch();
   let y = _$$p2(getI18nString("file_browser.pinning.delete_pin_modal.confirmation_bell"), "file-browser-workspace-delete-pin");
   let [w, j] = useState(!1);
-  let T = Rs(qBf, {
+  let T = Rs(DeleteWorkspacePinnedFileView, {
     pinnedFileId: e
   });
   if ("loaded" !== T.status) return null;

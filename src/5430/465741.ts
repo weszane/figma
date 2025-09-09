@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { hasDesktopAPI } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { N as _$$N } from "../figma_app/469468";
 import { AG } from "../figma_app/999312";
 import { fk } from "../5430/480225";
@@ -172,7 +172,7 @@ function W() {
   _4(t);
   let r = H(t);
   useEffect(() => {
-    0 === r.query.trim().length && Ay.replace("/community");
+    0 === r.query.trim().length && customHistory.replace("/community");
   }, [r.query]);
   let {
     filterState,
@@ -247,7 +247,7 @@ function W() {
               creators: r.creators && Z.isSearchType(r.creators) ? r.creators : Z.ALL,
               sort_by: r.sortBy
             });
-            Ay.replace(s.href);
+            customHistory.replace(s.href);
             v();
           },
           context: gM.SEARCH

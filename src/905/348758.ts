@@ -1,8 +1,8 @@
 import { n3 } from "../905/859698";
-import { cm } from "../figma_app/815945";
+import { memoizeWeak } from "../figma_app/815945";
 import { e1, oA, gB } from "../905/723791";
 import { Zt, KC, rZ } from "../figma_app/349248";
-export let $$o0 = cm(e => {
+export let $$o0 = memoizeWeak(e => {
   if ("loaded" !== e.status) return {
     result: e
   };

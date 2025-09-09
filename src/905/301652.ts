@@ -1,8 +1,8 @@
-export function $$n0() {
+export function generateAnnomousPrefill() {
   return "anonymous-name-prefill";
 }
-export function $$r1(e) {
+export function generateAnonymouseName(e) {
   return `anonymous-name-${e}`;
 }
-export const H = $$n0;
-export const K = $$r1;
+export const H = generateAnnomousPrefill;
+export const K = generateAnonymouseName;

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { te } from "../figma_app/275462";
 import { b as _$$b } from "../905/985254";
@@ -8,7 +8,7 @@ import { c as _$$c } from "../905/370443";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { MY, q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
@@ -25,7 +25,7 @@ export function $$j0() {
   let e = MY();
   let t = q5();
   let s = useDispatch();
-  let j = iZ();
+  let j = selectCurrentUser();
   let {
     show,
     isShowing,

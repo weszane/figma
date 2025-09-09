@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { Mq } from "../figma_app/991591";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FProductAccessType } from "../figma_app/191312";
 import { No } from "../figma_app/465071";
 import { useEffect, useCallback } from "react";
@@ -22,7 +22,7 @@ export function $$I2() {
   return e?.canView && !e.canEdit;
 }
 export function $$S1() {
-  let e = iZ();
+  let e = selectCurrentUser();
   let t = q5();
   let r = $$I2();
   let T = No();

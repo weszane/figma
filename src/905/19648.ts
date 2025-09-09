@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo, useRef, useImperativeHandle } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { E } from "../905/632989";
 import o from "classnames";
 import { V } from "../figma_app/312987";

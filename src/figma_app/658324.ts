@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import a from "../vendor/239910";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { getI18nString } from "../905/303541";
 import { qH } from "../figma_app/934005";
 import { M4, IT } from "../905/713695";
@@ -66,7 +66,7 @@ export async function $$y2(e) {
       upcomingPlanInvoices: t
     });
   } catch (e) {
-    k.error(e);
+    logger.error(e);
   }
 }
 let b = M4.Mutation((e, {

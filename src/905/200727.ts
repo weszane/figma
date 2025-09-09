@@ -4,7 +4,7 @@ import { O } from "../905/655700";
 import { hA } from "../figma_app/88239";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { HdA } from "../figma_app/43951";
+import { FileIsEligibleForDevModeTrial } from "../figma_app/43951";
 import { px, No } from "../figma_app/465071";
 import { cD } from "../figma_app/598018";
 export function $$p0() {
@@ -15,7 +15,7 @@ export function $$p0() {
   let m = O();
   let h = hA() ? "focus_view" : "dev_mode";
   let g = q5();
-  let f = Rs(HdA, {
+  let f = Rs(FileIsEligibleForDevModeTrial, {
     key: g?.key || ""
   }, {
     enabled: !!g?.key

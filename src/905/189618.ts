@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useLayoutEffect, useEffect } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import s from "classnames";
 import { wY } from "../figma_app/708845";
 import { BrowserInfo } from "../figma_app/778880";

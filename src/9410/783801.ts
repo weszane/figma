@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { L as _$$L } from "../905/477111";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
@@ -16,25 +16,25 @@ import { Q } from "../905/463586";
 import { hx } from "../905/292918";
 import { m0 } from "../figma_app/976749";
 import { cb, Ns, HJ, Kz } from "../905/760074";
-import { op7, grH } from "../figma_app/43951";
+import { RepoFiles, MergeStatusRepoFiles } from "../figma_app/43951";
 import { Kn, PW } from "../905/535806";
 import { e0 } from "../905/696396";
 import { $l } from "../905/721248";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { W as _$$W } from "../905/95038";
 import { Um } from "../905/848862";
 import { y as _$$y } from "../905/725962";
 import { throwTypeError } from "../figma_app/465776";
 import { ZC } from "../figma_app/39751";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { ie, ov } from "../905/300250";
 import { T as _$$T } from "../figma_app/640519";
 import { showModalHandler } from "../905/156213";
 import { ss } from "../905/746499";
 import { my, RK } from "../905/561832";
 import { q5, l3 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { l as _$$l, O as _$$O } from "../figma_app/471586";
 import { eg, IS, o3 } from "../figma_app/452252";
 import { DF } from "../figma_app/146384";
@@ -58,7 +58,7 @@ function j(e) {
   } = i;
   let j = function (e) {
     let t = e?.fileRepoId || "";
-    let i = Rs(op7, {
+    let i = Rs(RepoFiles, {
       repoId: t
     });
     return useMemo(() => {
@@ -174,7 +174,7 @@ function H({
     appMergingStatus: i,
     openFileMerge: r
   }) {
-    let n = Rs(grH, {
+    let n = Rs(MergeStatusRepoFiles, {
       repoId: e
     });
     let [a, s] = useState(0);
@@ -242,7 +242,7 @@ function H({
   }, [_]);
   let x = f && (o?.state === 3 || o?.state === 4 || (s = o?.mergeFile, c?.direction === 0 ? s?.sourceFileKey === t : s?.key === t));
   let y = useMemo(() => o?.state !== 2 || l?.state === 3 ? null : {
-    icon: zX.CHECK,
+    icon: VisualBellIcon.CHECK,
     type: "file-merge-submit",
     message: c?.direction === 0 ? getI18nString("collaboration.branching.merge_success") : getI18nString("collaboration.branching.update_success"),
     button: c?.direction === 0 ? {
@@ -261,13 +261,13 @@ function H({
     timeoutOverride: 1e4
   }, [u, c?.direction, c?.mergeResultFileversionId, o.mergeFile?.key, o.mergeFile?.sourceFileKey, o.state, t, l?.state]);
   useEffect(() => {
-    if (0 === o.state || x || u(_$$F.clearAll()), 0 === o.state && (!l || l?.state === 2)) {
-      u(_$$F.clearAll());
+    if (0 === o.state || x || u(VisualBellActions.clearAll()), 0 === o.state && (!l || l?.state === 2)) {
+      u(VisualBellActions.clearAll());
       return;
     }
     if (4 === o.state && l && 1 === l.state && l.mergeFile) {
       let e = o.mergeFile.key === t ? Kn.FROM_SOURCE : Kn.TO_SOURCE;
-      u(_$$F.clearAll());
+      u(VisualBellActions.clearAll());
       u(showModalHandler({
         type: my,
         data: {
@@ -283,7 +283,7 @@ function H({
         }
       }));
     }
-    y && u(_$$F.enqueue(y));
+    y && u(VisualBellActions.enqueue(y));
     let e = c?.direction === 0 ? Kn.TO_SOURCE : Kn.FROM_SOURCE;
     if (l && 1 === l.state && (3 === o.state || 4 === o.state)) {
       let t;
@@ -321,7 +321,7 @@ function H({
 }
 let q = "filename_view--renaming--fsHo8";
 export function $$X0(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = q5();
   let o = i?.repo;
   let d = !!(i && o && Ns(i, o));
@@ -369,7 +369,7 @@ export function $$X0(e) {
         isRenaming: p,
         dataTestId: "repo_name_data_test_id"
       }) : jsx(o3, {
-        recordingKey: Pt(e.recordingKey, "fileName")
+        recordingKey: generateRecordingKey(e.recordingKey, "fileName")
       })
     }), e.shouldShowConnectedBadge && v && jsx(_$$W, {
       hostPlanName: v.hostPlanName,

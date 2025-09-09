@@ -1,13 +1,13 @@
 import { useMemo, useEffect } from "react";
 import { isNotNullish } from "../figma_app/95419";
-import { gr } from "../figma_app/243058";
+import { VariableSetIdCompatHandler } from "../figma_app/243058";
 import { ey as _$$ey } from "../905/859698";
 import { VariablesBindings, HandoffBindingsCpp } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atom, useAtomValueAndSetter, Pj } from "../figma_app/27355";
-import { wm, k9 } from "../905/19536";
+import { useMemoShallow, useMemoStable } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import h from "../vendor/656470";
 import g from "../vendor/990460";
@@ -18,7 +18,7 @@ import { tS } from "../figma_app/516028";
 import { U } from "../905/506188";
 import { je } from "../figma_app/155728";
 import { GI, Rn, ZI, Av } from "../figma_app/633080";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { eF, Io, CS, cn } from "../figma_app/394327";
 import { iG, AQ } from "../figma_app/481279";
 import { Gc, L9, Fx, XC, qy, jt, TD, uk, xA, bO, LC, ZG, Eo, JB, Tg, Cg, Ev, BJ, cp, Oj, Ri, Jo, H2, wh, Yt, hz, Ho, hy, A6, Zc } from "../figma_app/216057";
@@ -98,7 +98,7 @@ export function $$$14(e, t) {
   return $$J35(e)?.modeValues?.[t] ?? void 0;
 }
 export function $$X38(e) {
-  let t = wm(() => e, [e]);
+  let t = useMemoShallow(() => e, [e]);
   let r = useMemo(() => atom(e => t.map(t => isNotNullish(t) ? e(Cg)[t] ?? null : null)), [t]);
   return useAtomWithSubscription(r);
 }
@@ -114,7 +114,7 @@ export function $$J35(e) {
   return i ? ZI(i) : null;
 }
 export function $$Z18(e, t) {
-  let r = wm(() => e, [e]);
+  let r = useMemoShallow(() => e, [e]);
   let i = useMemo(() => atom(e => r.map(r => {
     if (!r) return null;
     let n = e(Ev(r));
@@ -128,7 +128,7 @@ export function $$Z18(e, t) {
   return useAtomWithSubscription(i);
 }
 export function $$Q30(e, t) {
-  let r = wm(() => e, [e]);
+  let r = useMemoShallow(() => e, [e]);
   let i = useMemo(() => atom(e => {
     let n = {};
     r.forEach(r => {
@@ -179,7 +179,7 @@ export function $$ei1() {
 export function $$ea37(e) {
   let t = useMemo(() => Oj(e), [e]);
   let r = useAtomWithSubscription(t);
-  return k9(() => {
+  return useMemoStable(() => {
     let e = {};
     for (let t of Object.values(r)) if ("loaded" === t.status) for (let r of t.data.variableCollection?.variables ?? []) e[_$$ey(r.key)] = r;
     return e;
@@ -193,7 +193,7 @@ export function $$es21(e) {
   let s = useAtomWithSubscription(i);
   let o = je();
   let l = !!o.data?.find(t => t.fileKey === e);
-  return wm(() => {
+  return useMemoShallow(() => {
     if (!l || !a && !s) return resourceUtils.loaded([]);
     if (a?.status === "loading" || a?.status === "disabled" || s?.status === "loading") return resourceUtils.loading();
     let e = a && resourceUtils.from(a);
@@ -227,7 +227,7 @@ export function $$el36(e) {
   let s = useAtomWithSubscription(i);
   let o = je();
   let l = o.data?.find(t => t.fileKey === e);
-  return wm(() => {
+  return useMemoShallow(() => {
     if (!l || !a && !s) return resourceUtils.loaded([]);
     if (a?.status === "loading" || s?.status === "loading") return resourceUtils.loading();
     let e = a && resourceUtils.from(a);
@@ -255,10 +255,10 @@ export function $$ed20(e = {}) {
 let ec = _$$n((e = {}) => {
   let t = !1 === e.enabled;
   let r = je();
-  let i = wm(() => r.data?.map(e => e.fileKey) ?? [], [r.data]);
+  let i = useMemoShallow(() => r.data?.map(e => e.fileKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : H2(i), [t, i]);
   let s = useAtomWithSubscription(a);
-  return wm(() => {
+  return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e : resourceUtils.loaded({
       items: m()(Object.values(s).map(e => kX({
@@ -271,10 +271,10 @@ let ec = _$$n((e = {}) => {
 let eu = _$$n((e = {}) => {
   let t = !1 === e.enabled;
   let r = je();
-  let i = wm(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
+  let i = useMemoShallow(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : wh(i), [t, i]);
   let s = useAtomWithSubscription(a);
-  return wm(() => {
+  return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e : resourceUtils.loaded({
       items: Object.values(s).flatMap(e => C$(e, !1))
@@ -307,8 +307,8 @@ export function $$eh29(e) {
 }
 let em = _$$n(e => {
   let t = je();
-  let r = wm(() => t.data?.filter(e => !wJ(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
-  let i = wm(() => t.data?.filter(e => wJ(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
+  let r = useMemoShallow(() => t.data?.filter(e => !wJ(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
+  let i = useMemoShallow(() => t.data?.filter(e => wJ(e.fileKey)).map(e => e.fileKey) ?? [], [t.data]);
   let a = e?.enabled === !1;
   let s = useMemo(() => {
     if (a) {
@@ -332,7 +332,7 @@ let em = _$$n(e => {
     return hz(i);
   }, [a, i]);
   let d = useAtomWithSubscription(l);
-  return wm(() => {
+  return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values({
       ...o,
       ...d
@@ -361,10 +361,10 @@ let em = _$$n(e => {
 let eg = _$$n(e => {
   let t = e?.enabled === !1;
   let r = je();
-  let i = wm(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
+  let i = useMemoShallow(() => r.data?.map(e => e.libraryKey) ?? [], [r.data]);
   let a = useMemo(() => t ? Jo(i) : Ho(i), [t, i]);
   let s = useAtomWithSubscription(a);
-  return wm(() => {
+  return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e.transform(() => ({
       libraryVariableSets: [],
@@ -420,13 +420,13 @@ export function $$eS7() {
 }
 export function $$ev24() {
   let e = Pj();
-  function t(e, r, n, i = zk.YES, a = "set-variable-value-for-mode") {
+  function t(e, r, n, i = yesNoTrackingEnum.YES, a = "set-variable-value-for-mode") {
     let s = permissionScopeHandler.user(a, () => VariablesBindings?.setVariableValueForMode(e, r, n) ?? !1);
-    s && i === zk.YES && fullscreenValue.triggerAction("commit");
+    s && i === yesNoTrackingEnum.YES && fullscreenValue.triggerAction("commit");
     return s;
   }
-  function r(e, t, n, i, s = zk.YES, o = "set-variable-override-for-mode") {
-    let c = gr.fromString(e);
+  function r(e, t, n, i, s = yesNoTrackingEnum.YES, o = "set-variable-override-for-mode") {
+    let c = VariableSetIdCompatHandler.fromString(e);
     if (!c) {
       logError("variables", "Failed to set variable override. Invalid variable set id.", {
         variableSetId: e
@@ -448,14 +448,14 @@ export function $$ev24() {
       return;
     }
     permissionScopeHandler.user(o, () => u.setVariableOverrideForMode(t, n, p));
-    s === zk.YES && fullscreenValue.triggerAction("commit");
+    s === yesNoTrackingEnum.YES && fullscreenValue.triggerAction("commit");
   }
   function n(e, t) {
     permissionScopeHandler.user("clear-variable-alias", () => VariablesBindings?.detachVariableValueForMode(e, t, null)) && fullscreenValue.triggerAction("commit");
   }
   function i(e, t, r) {
     permissionScopeHandler.user("clear-variable-override-alias", () => {
-      let n = gr.fromString(r);
+      let n = VariableSetIdCompatHandler.fromString(r);
       return n ? VariablesBindings?.detachVariableValueForMode(e, t, n) : (logError("variables", "Failed to clear variable override alias. Invalid variable set id.", {
         variableSetId: r
       }), !1);
@@ -464,7 +464,7 @@ export function $$ev24() {
   return {
     setVariableValueForMode: t,
     setVariableOverrideForMode: r,
-    setVariableValueOrOverrideForMode: function (n, i, a, s, o = zk.YES, l) {
+    setVariableValueOrOverrideForMode: function (n, i, a, s, o = yesNoTrackingEnum.YES, l) {
       let d = e.get(ZG(n));
       let c = e.get(hy(i));
       if (!d) {

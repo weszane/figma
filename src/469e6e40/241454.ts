@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { P as _$$P } from "../905/697522";
 import { getFeatureFlags } from "../905/601108";
@@ -11,7 +11,7 @@ import { NU } from "../figma_app/204891";
 import { y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { E as _$$E } from "../905/984674";
 import { k as _$$k2 } from "../figma_app/618031";
 import { q as _$$q } from "../905/749058";
@@ -484,7 +484,7 @@ function V(e) {
             lastUpdateTimestampOverride: e.lastUpdateTimestampIfUsingUnloadedOrgUsers,
             params: a,
             successCallback: () => {
-              t(_$$F.enqueue({
+              t(VisualBellActions.enqueue({
                 message: getI18nString("confirm_account_change.account_type_successfully_updated.seat_rename", {
                   numUsers: e.orgUserIds.length
                 }),
@@ -534,7 +534,7 @@ let $$H3 = registerModal(function (e) {
         params: a,
         successCallback: () => {
           let a = e.orgUserIds.length;
-          t(_$$F.enqueue({
+          t(VisualBellActions.enqueue({
             message: getI18nString("confirm_billing_group_change.success_message", {
               numUsers: a
             }),
@@ -597,7 +597,7 @@ let $$Y0 = registerModal(function (e) {
       x(e.meta);
     }).catch(e => {
       let t = e?.data?.message || getI18nString("org_join_request.generic_fetch_error");
-      l(_$$F.enqueue({
+      l(VisualBellActions.enqueue({
         message: t,
         type: "org-join-request-get-error",
         error: !0
@@ -661,7 +661,7 @@ let $$Y0 = registerModal(function (e) {
           }, b);
           e.then(() => {
             k();
-            l(_$$F.enqueue({
+            l(VisualBellActions.enqueue({
               message: getI18nString("org_join_request.request_approved_message", {
                 requesterName: v ?? ""
               }),
@@ -669,7 +669,7 @@ let $$Y0 = registerModal(function (e) {
             }));
           }, e => {
             let t = e.message || e?.data?.message || getI18nString("org_join_request.approve_error");
-            l(_$$F.enqueue({
+            l(VisualBellActions.enqueue({
               message: t,
               type: "org-join-request-approve-failure",
               error: !0

@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { SceneGraphHelpers } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { isInvalidValue } from "../905/216495";
 import { B9 } from "../figma_app/722362";
 import { _S } from "../figma_app/516028";
@@ -14,7 +14,7 @@ export function $$h0(e) {
   let i = useSelector(e => e.mirror.appModel[t]);
   let h = B9();
   let g = useAtomWithSubscription(_S);
-  let f = k9(() => {
+  let f = useMemoStable(() => {
     let t = new Set();
     for (let i of e) {
       let e = h.get(i);

@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { N7, QV } from "../905/508367";
 import { OpenTarget, desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { BrowserInfo } from "../figma_app/778880";
 import { oB, sf } from "../905/929976";
 import { NA } from "../905/738636";
@@ -13,7 +13,7 @@ import { z4 } from "../905/37051";
 import { Tf, nb } from "../figma_app/543100";
 import { dq } from "../905/845253";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { M4 } from "../905/713695";
 import { cD } from "../figma_app/598018";
 import { U } from "../905/18613";
@@ -21,7 +21,7 @@ import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai } from "../figma_app/915202";
 import { O } from "../905/833838";
 export function $$S0() {
-  let e = iZ();
+  let e = selectCurrentUser();
   let t = dq();
   let i = cD();
   let a = _6();
@@ -140,7 +140,7 @@ let C = ({
     source: U.OFFLINE_FILE_TILE
   }));
   let r = Tf.getEditUrl(e, i);
-  Ay.redirect(r, "_blank");
+  customHistory.redirect(r, "_blank");
   t.preventDefault();
 };
 let T = async ({

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { hS } from "../905/437088";
 import { k as _$$k } from "../905/443820";
 import { bL } from "../905/38914";

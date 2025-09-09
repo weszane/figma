@@ -1,1138 +1,2094 @@
-import { createDeferredPromise, throwAsyncIf, throwIf, once, noop } from "../905/419236";
-import { ConnectionAttemptTypes } from "../905/957591";
-import m from "../vendor/546838";
-import { F, V } from "../905/52806";
-import { A as _$$A, J } from "../905/679168";
-import { A as _$$A2 } from "../905/763387";
-import { A as _$$A3 } from "../905/870891";
-import { Ay } from "../905/795642";
-import { A as _$$A4 } from "../905/42339";
-import { A as _$$A5 } from "../905/113115";
-class a {
-  constructor(e, t) {
-    this.key = e;
-    this.value = t;
+/* eslint-disable no-console */
+import type { ObjectTypeDefinition } from './644409'
+import deepmerge from 'deepmerge'
+import { ComputationHandler } from '../905/42339'
+import { ComputedFieldDef, isComputedField } from '../905/52806'
+import { ComputationObjectNode } from '../905/113115'
+import { createDeferredPromise, noop, once, throwAsyncIf, throwIf } from '../905/419236'
+import { LiveViewNode, serializeArgs } from '../905/679168'
+import { QueryInstanceNode } from '../905/763387'
+import { QueryNode } from '../905/795642'
+import { PaginatedQueryNode } from '../905/870891'
+import { ConnectionAttemptTypes } from '../905/957591'
+
+/**
+ * Entry wrapper for Map values (original: class a)
+ */
+class MapEntry<K, V> {
+  constructor(public key: K, public value: V) {}
+
+  /**
+   * Returns the value (original: orInsert)
+   */
+  orInsert(): V {
+    return this.value
   }
-  orInsert() {
-    return this.value;
+
+  /**
+   * Returns the value (original: orInsertWith)
+   */
+  orInsertWith(): V {
+    return this.value
   }
-  orInsertWith() {
-    return this.value;
-  }
-  andModify(e) {
-    e(this.value);
-    return this;
-  }
-}
-class s {
-  constructor(e, t) {
-    this.key = e;
-    this.map = t;
-  }
-  orInsert(e) {
-    this.map.set(this.key, e);
-    return e;
-  }
-  orInsertWith(e) {
-    return this.orInsert(e());
-  }
-  andModify() {
-    return this;
-  }
-}
-class o extends Map {
-  entry(e) {
-    return this.has(e) ? new a(e, this.get(e)) : new s(e, this);
+
+  /**
+   * Modifies the value using the provided function (original: andModify)
+   */
+  andModify(fn: (value: V) => void): this {
+    fn(this.value)
+    return this
   }
 }
-class l extends a {
-  orDefault() {
-    return this.value;
+
+/**
+ * Entry wrapper for missing Map values (original: class s)
+ */
+class MapInsertEntry<K, V> {
+  /**
+   * The map can be any Map<K, V> (original: map)
+   */
+  constructor(public key: K, public map: Map<K, V>) {}
+
+  /**
+   * Inserts the value if missing (original: orInsert)
+   */
+  orInsert(value: V): V {
+    this.map.set(this.key, value)
+    return value
+  }
+
+  /**
+   * Inserts the value using a factory function if missing (original: orInsertWith)
+   */
+  orInsertWith(factory: () => V): V {
+    return this.orInsert(factory())
+  }
+
+  /**
+   * No-op for missing entry (original: andModify)
+   */
+  andModify(): this {
+    return this
   }
 }
-class d extends s {
-  orDefault() {
-    return this.orInsert(this.map.$$default(this.key));
+
+/**
+ * Map with entry() helper (original: class o)
+ */
+class EntryMap<K, V> extends Map<K, V> {
+  /**
+   * Returns an entry wrapper for the given key (original: entry)
+   */
+  entry(key: K): MapEntry<K, V> | MapInsertEntry<K, V> {
+    return this.has(key)
+      ? new MapEntry(key, this.get(key) as V)
+      : new MapInsertEntry(key, this)
   }
 }
-class c extends Map {
-  default;
-  constructor(e, t) {
-    super(t);
-    this.$$default = e;
-  }
-  entry(e) {
-    return this.has(e) ? new l(e, this.get(e)) : new d(e, this);
+
+/**
+ * Entry wrapper with default value (original: class l)
+ */
+class DefaultMapEntry<K, V> extends MapEntry<K, V> {
+  /**
+   * Returns the value (original: orDefault)
+   */
+  orDefault(): V {
+    return this.value
   }
 }
-class u {
-  constructor(e, t, i, n, r) {
-    this.emitter = n;
-    this.isInitialConnection = r;
-    this.serverFields = e;
-    this.shadowFields = e;
-    this.objectName = i;
-    t || (this.serverId = e.id);
+
+/**
+ * Insert entry wrapper with default value (original: class d)
+ */
+class DefaultMapInsertEntry<K, V> extends MapInsertEntry<K, V> {
+  /**
+   * Inserts the default value if missing (original: orDefault)
+   */
+  orDefault(): V {
+    // DefaultMapInsertEntry.orDefault
+    return this.orInsert((this.map as DefaultEntryMap<K, V>).default(this.key))
   }
-  serverId = null;
-  serverFields;
-  shadowFields;
-  objectName;
-  shadowMutations = new Set();
-  shadowQueries = new Set();
-  serverQueries = new Set();
-  serverIdResolveList = [];
-  isUpdatedAtDifferent(e) {
-    return void 0 !== this.serverFields.updatedAt && void 0 !== e.updatedAt && ("string" == typeof this.serverFields.updatedAt && "string" == typeof e.updatedAt ? this.serverFields.updatedAt !== e.updatedAt : !(this.serverFields.updatedAt instanceof Date) || !(e.updatedAt instanceof Date) || this.serverFields.updatedAt.getTime() !== e.updatedAt.getTime());
+}
+
+/**
+ * Map with default value factory (original: class c)
+ */
+class DefaultEntryMap<K, V> extends Map<K, V> {
+  default: (key: K) => V
+
+  constructor(defaultFn: (key: K) => V, entries?: readonly (readonly [K, V])[] | null) {
+    super(entries)
+    this.default = defaultFn
   }
-  fields() {
-    return 0 === this.shadowMutations.size ? this.serverFields : this.shadowFields;
+
+  /**
+   * Returns an entry wrapper for the given key (original: entry)
+   */
+  entry(key: K): DefaultMapEntry<K, V> | DefaultMapInsertEntry<K, V> {
+    return this.has(key)
+      ? new DefaultMapEntry(key, this.get(key) as V)
+      : new DefaultMapInsertEntry(key, this)
   }
-  dependentQueries() {
-    return 0 === this.shadowMutations.size ? this.serverQueries : this.shadowQueries;
+}
+
+/**
+ * Instance state for object queries (original: class u)
+ */
+class ObjectInstanceState {
+  emitter: any
+  isInitialConnection: any
+  serverFields: any
+  shadowFields: any
+  objectName: string
+  serverId: any = null
+  shadowMutations = new Set()
+  shadowQueries = new Set()
+  serverQueries = new Set()
+  serverIdResolveList: any[] = []
+
+  constructor(fields: any, hasShadow: boolean, objectName: string, emitter: any, isInitialConnection?: any) {
+    this.emitter = emitter
+    this.isInitialConnection = isInitialConnection
+    this.serverFields = fields
+    this.shadowFields = fields
+    this.objectName = objectName
+    if (!hasShadow) {
+      this.serverId = fields.id
+    }
   }
-  resolvePendingServerIdList(e) {
-    for (let t of (this.serverId = e.id, this.serverIdResolveList)) t(this.serverId);
-    this.serverIdResolveList = [];
+
+  /**
+   * Checks if updatedAt is different (original: isUpdatedAtDifferent)
+   */
+  isUpdatedAtDifferent(fields: any): boolean {
+    if (
+      typeof this.serverFields.updatedAt !== 'undefined'
+      && typeof fields.updatedAt !== 'undefined'
+    ) {
+      if (
+        typeof this.serverFields.updatedAt === 'string'
+        && typeof fields.updatedAt === 'string'
+      ) {
+        return this.serverFields.updatedAt !== fields.updatedAt
+      }
+      if (
+        !(this.serverFields.updatedAt instanceof Date)
+        || !(fields.updatedAt instanceof Date)
+      ) {
+        return true
+      }
+      return this.serverFields.updatedAt.getTime() !== fields.updatedAt.getTime()
+    }
+    return false
   }
-  applyMutation(e) {
-    if (this.isUpdatedAtDifferent(e)) {
-      let t = "string" == typeof e.updatedAt ? new Date(e.updatedAt) : e.updatedAt;
-      if (!isNaN(t.getTime())) {
-        let e = new Date();
-        let i = e.getTime() - t.getTime();
+
+  /**
+   * Returns current fields (original: fields)
+   */
+  fields(): any {
+    return this.shadowMutations.size === 0 ? this.serverFields : this.shadowFields
+  }
+
+  /**
+   * Returns dependent queries (original: dependentQueries)
+   */
+  dependentQueries(): Set<any> {
+    return this.shadowMutations.size === 0 ? this.serverQueries : this.shadowQueries
+  }
+
+  /**
+   * Resolves pending server id list (original: resolvePendingServerIdList)
+   */
+  resolvePendingServerIdList(fields: any): void {
+    this.serverId = fields.id
+    for (const cb of this.serverIdResolveList) cb(this.serverId)
+    this.serverIdResolveList = []
+  }
+
+  /**
+   * Applies mutation to instance (original: applyMutation)
+   */
+  applyMutation(fields: any): void {
+    if (this.isUpdatedAtDifferent(fields)) {
+      const updatedAt = typeof fields.updatedAt === 'string' ? new Date(fields.updatedAt) : fields.updatedAt
+      if (!isNaN(updatedAt.getTime())) {
+        const now = new Date()
+        const latency = now.getTime() - updatedAt.getTime()
         this.emitter.emit({
-          type: "SUBSCRIPTION_UPDATE_LATENCY",
+          type: 'SUBSCRIPTION_UPDATE_LATENCY',
           objectName: this.objectName,
-          latencyMs: i,
-          currentTime: e,
-          updatedAt: t,
-          isInitialConnection: this.isInitialConnection?.()
-        });
+          latencyMs: latency,
+          currentTime: now,
+          updatedAt,
+          isInitialConnection: this.isInitialConnection?.(),
+        })
       }
     }
-    if (this.serverFields = {
-      ...this.serverFields,
-      ...e
-    }, this.shadowFields = {
-      ...this.shadowFields,
-      id: e.id
-    }, this.resolvePendingServerIdList(e), 0 === this.shadowMutations.size) for (let e of this.dependentQueries().values()) for (let t of e.observers) t.onUpdateResult(this.serverFields, e.missingFields);
+    this.serverFields = { ...this.serverFields, ...fields }
+    this.shadowFields = { ...this.shadowFields, id: fields.id }
+    this.resolvePendingServerIdList(fields)
+    if (this.shadowMutations.size === 0) {
+      for (const query of this.dependentQueries().values()) {
+        for (const observer of query.observers) {
+          observer.onUpdateResult(this.serverFields, query.missingFields)
+        }
+      }
+    }
   }
-  applyShadowMutation(e, t, i) {
-    0 === this.shadowMutations.size && (this.shadowFields = {
-      ...this.serverFields
-    }, this.shadowQueries = new Set(this.serverQueries));
-    this.shadowMutations.add(e);
-    i && (this.shadowFields = {
-      ...this.shadowFields,
-      ...i,
-      ...t
-    });
+
+  /**
+   * Applies shadow mutation (original: applyShadowMutation)
+   */
+  applyShadowMutation(transactionId: any, fields: any, patch: any): void {
+    if (this.shadowMutations.size === 0) {
+      this.shadowFields = { ...this.serverFields }
+      this.shadowQueries = new Set(this.serverQueries)
+    }
+    this.shadowMutations.add(transactionId)
+    if (patch) {
+      this.shadowFields = { ...this.shadowFields, ...patch, ...fields }
+    }
   }
-  removeShadowMutation(e, t) {
-    t ? this.shadowMutations.$$delete(e) : this.shadowMutations = new Set();
+
+  /**
+   * Removes shadow mutation (original: removeShadowMutation)
+   */
+  removeShadowMutation(transactionId: any, clearAll: boolean): void {
+    if (clearAll) {
+      this.shadowMutations.delete(transactionId)
+    }
+    else {
+      this.shadowMutations = new Set()
+    }
   }
-  getServerSideId() {
-    if (this.serverId) return Promise.resolve(this.serverId);
-    let [e, t] = createDeferredPromise();
-    this.serverIdResolveList.push(t);
-    return e;
+
+  /**
+   * Returns server-side id, resolves if not present (original: getServerSideId)
+   */
+  getServerSideId(): Promise<any> {
+    if (this.serverId)
+      return Promise.resolve(this.serverId)
+    const [promise, resolver] = createDeferredPromise()
+    this.serverIdResolveList.push(resolver)
+    return promise
   }
 }
-class p {
-  constructor(e, t, i, n) {
-    this.objectDef = e;
-    this.emitter = t;
-    this.useUnitTestBehaviors = i;
-    this.isInitialConnection = n;
+
+/**
+ * Store for object queries and instances (original: class p)
+ */
+class ObjectStore {
+  objectDef: any
+  emitter: any
+  useUnitTestBehaviors: boolean
+  isInitialConnection: any
+
+  instanceStates = new EntryMap<any, ObjectInstanceState>()
+  instanceStatesByUuid = new EntryMap<any, ObjectInstanceState>()
+  shadowInstances = new Set<ObjectInstanceState>()
+  queryStates = new EntryMap<any, any>()
+  possiblyOrphanedQueryResults = new EntryMap<any, any>()
+  possiblyOrphanInstances = new Set<ObjectInstanceState>()
+
+  constructor(objectDef: any, emitter: any, useUnitTestBehaviors: boolean, isInitialConnection: any) {
+    this.objectDef = objectDef
+    this.emitter = emitter
+    this.useUnitTestBehaviors = useUnitTestBehaviors
+    this.isInitialConnection = isInitialConnection
   }
-  instanceStates = new o();
-  instanceStatesByUuid = new o();
-  shadowInstances = new Set();
-  queryStates = new o();
-  possiblyOrphanedQueryResults = new o();
-  possiblyOrphanInstances = new Set();
-  getAllQueryIds() {
-    return Array.from(this.queryStates.keys());
+
+  /**
+   * Returns all query ids (original: getAllQueryIds)
+   */
+  getAllQueryIds(): any[] {
+    return Array.from(this.queryStates.keys())
   }
-  addInstance(e, t) {
-    if (this.emitter.emit({
-      type: "STORE.ADD_INSTANCE",
+
+  /**
+   * Adds an instance to a query (original: addInstance)
+   */
+  addInstance(query: any, instance: ObjectInstanceState): void {
+    this.emitter.emit({
+      type: 'STORE.ADD_INSTANCE',
       objectName: this.objectDef.name,
-      instance: t.fields()
-    }), p.internalAssert("failed" !== e.results.type, "Instance added to a failed query"), e.results.instances.has(t)) {
-      if (e.missingFields.length && "loaded" === e.results.type) for (let i of e.observers) i.onUpdateResult(t.fields(), e.missingFields);
-    } else {
-      if (e.results.instances.add(t), "loaded" === e.results.type) for (let i of e.observers) i.onAddResult(t.fields(), e.missingFields);
-      t.dependentQueries().add(e);
+      instance: instance.fields(),
+    })
+    ObjectStore.internalAssert(query.results.type !== 'failed', 'Instance added to a failed query')
+    if (query.results.instances.has(instance)) {
+      if (query.missingFields.length && query.results.type === 'loaded') {
+        for (const observer of query.observers) {
+          observer.onUpdateResult(instance.fields(), query.missingFields)
+        }
+      }
+    }
+    else {
+      query.results.instances.add(instance)
+      if (query.results.type === 'loaded') {
+        for (const observer of query.observers) {
+          observer.onAddResult(instance.fields(), query.missingFields)
+        }
+      }
+      instance.dependentQueries().add(query)
     }
   }
-  removeInstance(e, t, i) {
-    if (this.emitter.emit({
-      type: "STORE.REMOVE_INSTANCE",
+
+  /**
+   * Removes an instance from a query (original: removeInstance)
+   */
+  removeInstance(query: any, instance: ObjectInstanceState, restore: boolean): void {
+    this.emitter.emit({
+      type: 'STORE.REMOVE_INSTANCE',
       objectName: this.objectDef.name,
-      instance: t.fields()
-    }), p.internalAssert("failed" !== e.results.type, "Instance removed from a failed query"), !e.results.instances.has(t)) {
-      throwAsyncIf(!1, "tried to remove instance that does not exist");
-      return;
+      instance: instance.fields(),
+    })
+    ObjectStore.internalAssert(query.results.type !== 'failed', 'Instance removed from a failed query')
+    if (!query.results.instances.has(instance)) {
+      throwAsyncIf(false, 'tried to remove instance that does not exist')
+      return
     }
-    for (let n of (e.results.instances.$$delete(t), e.observers)) i ? n.onRemoveResult(t.fields()) : n.detachChild(t.fields());
-    t.dependentQueries().$$delete(e);
-  }
-  assembleResults(e) {
-    let t = {};
-    let {
-      queryDef,
-      query
-    } = e;
-    for (let e of this.instanceStates.values()) Array.from(queryDef.projectedFields.keys()).every(t => Object.keys(e.fields()).includes(t) && query.matches(e.fields())) && (t[e.fields().id] = !0);
-    return t;
-  }
-  applyShadowMutationAdd(e, t, i) {
-    let n = this.instanceStates.entry(t).orInsertWith(() => new u({
-      id: t
-    }, !0, this.objectDef.name, this.emitter));
-    this.shadowInstances.add(n);
-    n.applyShadowMutation(e, {
-      id: t
-    }, i);
-    let r = [];
-    let a = new Set();
-    for (let [e, t] of this.queryStates.entries()) t.query.matches(n.fields()) && "loaded" === t.results.type && (r.push(e), this.addInstance(t, n), t.observers.forEach(e => a.add(e)));
-    return [r, a];
-  }
-  applyShadowMutationAddWithUUID(e, t, i) {
-    let n = this.instanceStatesByUuid.entry(t).orInsertWith(() => new u({
-      id: t,
-      uuid: t
-    }, !0, this.objectDef.name, this.emitter));
-    this.shadowInstances.add(n);
-    n.applyShadowMutation(e, {
-      uuid: t
-    }, {
-      ...i,
-      id: t
-    });
-    let r = [];
-    let a = new Set();
-    for (let [e, t] of this.queryStates.entries()) t.query.matches(n.fields()) && "failed" !== t.results.type && (r.push(e), this.addInstance(t, n), t.observers.forEach(e => a.add(e)));
-    return [r, a];
-  }
-  applyShadowMutationDelete(e, t, i) {
-    this.shadowInstances.add(i);
-    i.applyShadowMutation(e, {
-      id: t
-    }, null);
-    let n = [];
-    let r = new Set();
-    for (let e of i.dependentQueries().values()) "failed" !== e.results.type && (this.removeInstance(e, i, !1), n.push(e.queryId), e.observers.forEach(e => r.add(e)));
-    return [n, r];
-  }
-  applyShadowMutationDeleteWithUUID(e, t, i) {
-    this.shadowInstances.add(i);
-    i.applyShadowMutation(e, {
-      uuid: t
-    }, null);
-    let n = [];
-    let r = new Set();
-    for (let e of i.dependentQueries().values()) "failed" !== e.results.type && (this.removeInstance(e, i, !1), n.push(e.queryId), e.observers.forEach(e => r.add(e)));
-    return [n, r];
-  }
-  applyShadowMutationUpdate(e, t, i, n) {
-    this.shadowInstances.add(i);
-    i.applyShadowMutation(e, {
-      id: t
-    }, n);
-    let r = i.fields();
-    let a = [];
-    let s = new Set();
-    for (let e of this.queryStates.values()) if ("failed" !== e.results.type) {
-      if (e.results.instances.has(i)) {
-        if (e.query.matches(r)) for (let t of e.observers) t.onUpdateResult(r, e.missingFields);else this.removeInstance(e, i, !1);
-        e.observers.forEach(e => s.add(e));
-        a.push(e.queryId);
-      } else e.query.matches(r) && (this.addInstance(e, i), e.observers.forEach(e => s.add(e)), a.push(e.queryId));
+    query.results.instances.delete(instance)
+    for (const observer of query.observers) {
+      restore ? observer.onRemoveResult(instance.fields()) : observer.detachChild(instance.fields())
     }
-    return [a, s];
+    instance.dependentQueries().delete(query)
   }
-  applyShadowMutationUpdateWithUUID(e, t, i, n) {
-    this.shadowInstances.add(i);
-    i.applyShadowMutation(e, {
-      uuid: t
-    }, n);
-    let r = i.fields();
-    let a = [];
-    let s = new Set();
-    for (let e of this.queryStates.values()) if ("failed" !== e.results.type) {
-      if (e.results.instances.has(i)) {
-        if (e.query.matches(r)) for (let t of e.observers) t.onUpdateResult(r, e.missingFields);else this.removeInstance(e, i, !1);
-        e.observers.forEach(e => s.add(e));
-        a.push(e.queryId);
-      } else e.query.matches(r) && (this.addInstance(e, i), e.observers.forEach(e => s.add(e)), a.push(e.queryId));
+
+  /**
+   * Assembles results for a query (original: assembleResults)
+   */
+  assembleResults(query: any): Record<string, boolean> {
+    const results: Record<string, boolean> = {}
+    const { queryDef, query: queryObj } = query
+    for (const instance of this.instanceStates.values()) {
+      const allFieldsPresent = Array.from(queryDef.projectedFields.keys()).every(
+        (field: string) => Object.keys(instance.fields()).includes(field) && queryObj.matches(instance.fields()),
+      )
+      if (allFieldsPresent) {
+        results[instance.fields().id] = true
+      }
     }
-    return [a, s];
+    return results
   }
-  removeShadowMutations(e, t, i) {
-    for (let n in t) {
-      let t = this.instanceStates.get(n);
-      if (void 0 !== t && t.shadowMutations.has(e) && (t.removeShadowMutation(e, i), 0 === t.shadowMutations.size)) {
-        this.shadowInstances.$$delete(t);
-        let e = t.fields();
-        for (let i of t.dependentQueries().values()) for (let t of i.observers) t.restoreChild(e);
-        for (let i of this.queryStates.values()) if ("failed" !== i.results.type) {
-          if (i.results.instances.has(t)) {
-            if (t.dependentQueries().has(i)) for (let t of i.observers) t.onUpdateResult(e, i.missingFields);else this.removeInstance(i, t, !0);
-          } else t.dependentQueries().has(i) && this.addInstance(i, t);
+
+  /**
+   * Applies shadow mutation for add (original: applyShadowMutationAdd)
+   */
+  applyShadowMutationAdd(transactionId: any, id: any, patch: any): [any[], Set<any>] {
+    const instance = this.instanceStates.entry(id).orInsertWith(
+      () => new ObjectInstanceState({ id }, true, this.objectDef.name, this.emitter),
+    )
+    this.shadowInstances.add(instance)
+    instance.applyShadowMutation(transactionId, { id }, patch)
+    const affectedQueries: any[] = []
+    const affectedObservers = new Set<any>()
+    for (const [queryId, query] of this.queryStates.entries()) {
+      if (query.query.matches(instance.fields()) && query.results.type === 'loaded') {
+        affectedQueries.push(queryId)
+        this.addInstance(query, instance)
+        query.observers.forEach(o => affectedObservers.add(o))
+      }
+    }
+    return [affectedQueries, affectedObservers]
+  }
+
+  /**
+   * Applies shadow mutation for add with UUID (original: applyShadowMutationAddWithUUID)
+   */
+  applyShadowMutationAddWithUUID(transactionId: any, uuid: any, patch: any): [any[], Set<any>] {
+    const instance = this.instanceStatesByUuid.entry(uuid).orInsertWith(
+      () => new ObjectInstanceState({ id: uuid, uuid }, true, this.objectDef.name, this.emitter),
+    )
+    this.shadowInstances.add(instance)
+    instance.applyShadowMutation(transactionId, { uuid }, { ...patch, id: uuid })
+    const affectedQueries: any[] = []
+    const affectedObservers = new Set<any>()
+    for (const [queryId, query] of this.queryStates.entries()) {
+      if (query.query.matches(instance.fields()) && query.results.type !== 'failed') {
+        affectedQueries.push(queryId)
+        this.addInstance(query, instance)
+        query.observers.forEach(o => affectedObservers.add(o))
+      }
+    }
+    return [affectedQueries, affectedObservers]
+  }
+
+  /**
+   * Applies shadow mutation for delete (original: applyShadowMutationDelete)
+   */
+  applyShadowMutationDelete(transactionId: any, id: any, instance: ObjectInstanceState): [any[], Set<any>] {
+    this.shadowInstances.add(instance)
+    instance.applyShadowMutation(transactionId, { id }, null)
+    const affectedQueries: any[] = []
+    const affectedObservers = new Set<any>()
+    for (const query of instance.dependentQueries().values()) {
+      if (query.results.type !== 'failed') {
+        this.removeInstance(query, instance, false)
+        affectedQueries.push(query.queryId)
+        query.observers.forEach(o => affectedObservers.add(o))
+      }
+    }
+    return [affectedQueries, affectedObservers]
+  }
+
+  /**
+   * Applies shadow mutation for delete with UUID (original: applyShadowMutationDeleteWithUUID)
+   */
+  applyShadowMutationDeleteWithUUID(transactionId: any, uuid: any, instance: ObjectInstanceState): [any[], Set<any>] {
+    this.shadowInstances.add(instance)
+    instance.applyShadowMutation(transactionId, { uuid }, null)
+    const affectedQueries: any[] = []
+    const affectedObservers = new Set<any>()
+    for (const query of instance.dependentQueries().values()) {
+      if (query.results.type !== 'failed') {
+        this.removeInstance(query, instance, false)
+        affectedQueries.push(query.queryId)
+        query.observers.forEach(o => affectedObservers.add(o))
+      }
+    }
+    return [affectedQueries, affectedObservers]
+  }
+
+  /**
+   * Applies shadow mutation for update (original: applyShadowMutationUpdate)
+   */
+  applyShadowMutationUpdate(transactionId: any, id: any, instance: ObjectInstanceState, patch: any): [any[], Set<any>] {
+    this.shadowInstances.add(instance)
+    instance.applyShadowMutation(transactionId, { id }, patch)
+    const fields = instance.fields()
+    const affectedQueries: any[] = []
+    const affectedObservers = new Set<any>()
+    for (const query of this.queryStates.values()) {
+      if (query.results.type !== 'failed') {
+        if (query.results.instances.has(instance)) {
+          if (query.query.matches(fields)) {
+            for (const observer of query.observers) observer.onUpdateResult(fields, query.missingFields)
+          }
+          else {
+            this.removeInstance(query, instance, false)
+          }
+          query.observers.forEach(o => affectedObservers.add(o))
+          affectedQueries.push(query.queryId)
         }
-        this.checkOrphanInstance(t);
-      }
-    }
-  }
-  removeShadowMutationsWithUUID(e, t, i) {
-    for (let n in t) {
-      let t = this.instanceStatesByUuid.get(n);
-      if (void 0 !== t && t.shadowMutations.has(e) && (t.removeShadowMutation(e, i), 0 === t.shadowMutations.size)) {
-        this.shadowInstances.$$delete(t);
-        let e = t.fields();
-        for (let i of t.dependentQueries().values()) for (let t of i.observers) t.restoreChild(e);
-        for (let i of this.queryStates.values()) if ("failed" !== i.results.type) {
-          if (i.results.instances.has(t)) {
-            if (t.dependentQueries().has(i)) for (let t of i.observers) t.onUpdateResult(e, i.missingFields);else this.removeInstance(i, t, !0);
-          } else t.dependentQueries().has(i) && this.addInstance(i, t);
+        else {
+          if (query.query.matches(fields)) {
+            this.addInstance(query, instance)
+            query.observers.forEach(o => affectedObservers.add(o))
+            affectedQueries.push(query.queryId)
+          }
         }
-        this.checkOrphanInstance(t);
+      }
+    }
+    return [affectedQueries, affectedObservers]
+  }
+
+  /**
+   * Applies shadow mutation for update with UUID (original: applyShadowMutationUpdateWithUUID)
+   */
+  applyShadowMutationUpdateWithUUID(transactionId: any, uuid: any, instance: ObjectInstanceState, patch: any): [any[], Set<any>] {
+    this.shadowInstances.add(instance)
+    instance.applyShadowMutation(transactionId, { uuid }, patch)
+    const fields = instance.fields()
+    const affectedQueries: any[] = []
+    const affectedObservers = new Set<any>()
+    for (const query of this.queryStates.values()) {
+      if (query.results.type !== 'failed') {
+        if (query.results.instances.has(instance)) {
+          if (query.query.matches(fields)) {
+            for (const observer of query.observers) observer.onUpdateResult(fields, query.missingFields)
+          }
+          else {
+            this.removeInstance(query, instance, false)
+          }
+          query.observers.forEach(o => affectedObservers.add(o))
+          affectedQueries.push(query.queryId)
+        }
+        else {
+          if (query.query.matches(fields)) {
+            this.addInstance(query, instance)
+            query.observers.forEach(o => affectedObservers.add(o))
+            affectedQueries.push(query.queryId)
+          }
+        }
+      }
+    }
+    return [affectedQueries, affectedObservers]
+  }
+
+  /**
+   * Removes shadow mutations (original: removeShadowMutations)
+   */
+  removeShadowMutations(transactionId: any, mutations: Record<string, any>, clearAll: boolean): void {
+    for (const id in mutations) {
+      const instance = this.instanceStates.get(id)
+      if (
+        typeof instance !== 'undefined'
+        && instance.shadowMutations.has(transactionId)
+        && (instance.removeShadowMutation(transactionId, clearAll), instance.shadowMutations.size === 0)
+      ) {
+        this.shadowInstances.delete(instance)
+        const fields = instance.fields()
+        for (const query of instance.dependentQueries().values()) {
+          for (const observer of query.observers) observer.restoreChild(fields)
+        }
+        for (const query of this.queryStates.values()) {
+          if (query.results.type !== 'failed') {
+            if (query.results.instances.has(instance)) {
+              if (instance.dependentQueries().has(query)) {
+                for (const observer of query.observers) observer.onUpdateResult(fields, query.missingFields)
+              }
+              else {
+                this.removeInstance(query, instance, true)
+              }
+            }
+            else {
+              if (instance.dependentQueries().has(query))
+                this.addInstance(query, instance)
+            }
+          }
+        }
+        this.checkOrphanInstance(instance)
       }
     }
   }
-  resolvePendingServerIdList(e) {
-    for (let t of Object.values(e)) {
-      let e = this.objectDef.readPlainObject(t);
-      e.uuid && this.instanceStatesByUuid.has(e.uuid) && this.instanceStatesByUuid.get(e.uuid).resolvePendingServerIdList(e);
+
+  /**
+   * Removes shadow mutations with UUID (original: removeShadowMutationsWithUUID)
+   */
+  removeShadowMutationsWithUUID(transactionId: any, mutations: Record<string, any>, clearAll: boolean): void {
+    for (const uuid in mutations) {
+      const instance = this.instanceStatesByUuid.get(uuid)
+      if (
+        typeof instance !== 'undefined'
+        && instance.shadowMutations.has(transactionId)
+        && (instance.removeShadowMutation(transactionId, clearAll), instance.shadowMutations.size === 0)
+      ) {
+        this.shadowInstances.delete(instance)
+        const fields = instance.fields()
+        for (const query of instance.dependentQueries().values()) {
+          for (const observer of query.observers) observer.restoreChild(fields)
+        }
+        for (const query of this.queryStates.values()) {
+          if (query.results.type !== 'failed') {
+            if (query.results.instances.has(instance)) {
+              if (instance.dependentQueries().has(query)) {
+                for (const observer of query.observers) observer.onUpdateResult(fields, query.missingFields)
+              }
+              else {
+                this.removeInstance(query, instance, true)
+              }
+            }
+            else {
+              if (instance.dependentQueries().has(query))
+                this.addInstance(query, instance)
+            }
+          }
+        }
+        this.checkOrphanInstance(instance)
+      }
     }
   }
-  applyMutations(e, t) {
-    for (let [t, i] of Object.entries(e)) {
-      let e = this.objectDef.readPlainObject(i);
-      if (this.instanceStates.has(t)) this.instanceStates.get(t).applyMutation(e);else if (e.uuid && this.instanceStatesByUuid.has(e.uuid)) {
-        let t = this.instanceStatesByUuid.get(e.uuid);
-        this.instanceStates.set(e.id, t);
-        t.applyMutation(e);
-      } else {
-        let t = new u(e, !1, this.objectDef.name, this.emitter, this.isInitialConnection);
-        e.uuid && this.instanceStatesByUuid.set(e.uuid, t);
-        this.instanceStates.set(e.id, t);
-        this.possiblyOrphanInstances.add(t);
+
+  /**
+   * Resolves pending server id list (original: resolvePendingServerIdList)
+   */
+  resolvePendingServerIdList(instances: Record<string, any>): void {
+    for (const obj of Object.values(instances)) {
+      const plainObj = this.objectDef.readPlainObject(obj)
+      if (plainObj.uuid && this.instanceStatesByUuid.has(plainObj.uuid)) {
+        this.instanceStatesByUuid.get(plainObj.uuid).resolvePendingServerIdList(plainObj)
       }
-    }
-    for (let [i, n] of Object.entries(t)) {
-      if (!this.queryStates.has(i)) {
-        this.possiblyOrphanedQueryResults.set(i, n);
-        continue;
-      }
-      let t = this.queryStates.get(i);
-      this.setQueryStateResults(t, n, e);
     }
   }
-  applyMutations__UNIT_TEST(e) {
-    if (!this.useUnitTestBehaviors) throw Error("applyMutations__UNIT_TEST called when useUnitTestBehaviors is false");
-    for (let [t, i] of Object.entries(e)) {
-      if (null === i) {
-        this.instanceStates.$$delete(t);
-        continue;
+
+  /**
+   * Applies mutations to instances and queries (original: applyMutations)
+   */
+  applyMutations(instances: Record<string, any>, queries: Record<string, any>): void {
+    for (const [id, obj] of Object.entries(instances)) {
+      const plainObj = this.objectDef.readPlainObject(obj)
+      if (this.instanceStates.has(id)) {
+        this.instanceStates.get(id).applyMutation(plainObj)
       }
-      let e = {
-        id: t,
-        ...i
-      };
-      if (this.instanceStates.has(t)) this.instanceStates.get(t).applyMutation(e);else if (e.uuid && this.instanceStatesByUuid.has(e.uuid)) {
-        let t = this.instanceStatesByUuid.get(e.uuid);
-        this.instanceStates.set(e.id, t);
-        t.applyMutation(e);
-      } else {
-        let t = new u(e, !1, this.objectDef.name, this.emitter);
-        e.uuid && this.instanceStatesByUuid.set(e.uuid, t);
-        this.instanceStates.set(e.id, t);
-        this.possiblyOrphanInstances.add(t);
+      else if (plainObj.uuid && this.instanceStatesByUuid.has(plainObj.uuid)) {
+        const instance = this.instanceStatesByUuid.get(plainObj.uuid)
+        this.instanceStates.set(plainObj.id, instance)
+        instance.applyMutation(plainObj)
+      }
+      else {
+        const instance = new ObjectInstanceState(plainObj, false, this.objectDef.name, this.emitter, this.isInitialConnection)
+        if (plainObj.uuid)
+          this.instanceStatesByUuid.set(plainObj.uuid, instance)
+        this.instanceStates.set(plainObj.id, instance)
+        this.possiblyOrphanInstances.add(instance)
       }
     }
-    for (let e of this.queryStates.values()) {
-      let t = this.assembleResults(e);
-      this.setQueryStateResults(e, {
-        results: t,
-        fullResults: !0
-      });
+    for (const [queryId, queryState] of Object.entries(queries)) {
+      if (!this.queryStates.has(queryId)) {
+        this.possiblyOrphanedQueryResults.set(queryId, queryState)
+        continue
+      }
+      const query = this.queryStates.get(queryId)
+      this.setQueryStateResults(query, queryState, instances)
     }
   }
-  subscribe(e, t) {
-    let i = this.queryStates.entry(e.queryId).orInsertWith(() => ({
-      queryId: e.queryId,
+
+  /**
+   * Applies mutations for unit tests (original: applyMutations__UNIT_TEST)
+   */
+  applyMutations__UNIT_TEST(instances: Record<string, any>): void {
+    if (!this.useUnitTestBehaviors)
+      throw new Error('applyMutations__UNIT_TEST called when useUnitTestBehaviors is false')
+    for (const [id, obj] of Object.entries(instances)) {
+      if (obj === null) {
+        this.instanceStates.delete(id)
+        continue
+      }
+      const plainObj = { id, ...obj }
+      if (this.instanceStates.has(id)) {
+        this.instanceStates.get(id).applyMutation(plainObj)
+      }
+      else if (plainObj.uuid && this.instanceStatesByUuid.has(plainObj.uuid)) {
+        const instance = this.instanceStatesByUuid.get(plainObj.uuid)
+        this.instanceStates.set(plainObj.id, instance)
+        instance.applyMutation(plainObj)
+      }
+      else {
+        const instance = new ObjectInstanceState(plainObj, false, this.objectDef.name, this.emitter)
+        if (plainObj.uuid)
+          this.instanceStatesByUuid.set(plainObj.uuid, instance)
+        this.instanceStates.set(plainObj.id, instance)
+        this.possiblyOrphanInstances.add(instance)
+      }
+    }
+    for (const query of this.queryStates.values()) {
+      const results = this.assembleResults(query)
+      this.setQueryStateResults(query, { results, fullResults: true })
+    }
+  }
+
+  /**
+   * Subscribes to a query (original: subscribe)
+   */
+  subscribe(queryObj: any, observer: any): () => void {
+    const queryState = this.queryStates.entry(queryObj.queryId).orInsertWith(() => ({
+      queryId: queryObj.queryId,
       results: {
-        type: "loading",
-        instances: new Set()
+        type: 'loading',
+        instances: new Set(),
       },
-      query: e.substituted(),
-      queryDef: e.queryDef,
+      query: queryObj.substituted(),
+      queryDef: queryObj.queryDef,
       observers: new Set(),
-      missingFields: []
-    }));
-    if (p.internalAssert(!i.observers.has(t), "Duplicate subscription for query id"), i.observers.add(t), this.useUnitTestBehaviors) this.setQueryStateResults(i, {
-      results: this.assembleResults(i),
-      fullResults: !0
-    });else if (this.possiblyOrphanedQueryResults.has(e.queryId)) {
-      this.setQueryStateResults(i, this.possiblyOrphanedQueryResults.get(e.queryId));
-      this.possiblyOrphanedQueryResults.$$delete(e.queryId);
-    } else if ("loaded" === i.results.type) {
-      let e = {};
-      for (let t of i.results.instances.values()) {
-        let i = t.fields();
-        e[i.id] = i;
-      }
-      t.onInitialResults(e, void 0, i.missingFields);
-    } else "failed" === i.results.type && t.onError(i.results.error);
-    return () => {
-      if (p.internalAssert(i.observers.has(t), "Duplicate unsubscription for query"), i.observers.$$delete(t), 0 === i.observers.size) {
-        if ("failed" !== i.results.type) for (let e of i.results.instances.values()) {
-          e.dependentQueries().$$delete(i);
-          this.checkOrphanInstance(e);
-        }
-        this.queryStates.$$delete(e.queryId);
-      }
-    };
-  }
-  getIdFromUuid(e) {
-    if (!this.instanceStatesByUuid.has(e)) throw Error(`uuid ${e} doesn't exist in object store ${this.objectDef.name}`);
-    return this.instanceStatesByUuid.get(e).getServerSideId();
-  }
-  setQueryStateResults(e, t, i) {
-    if ("error" in t) {
-      if ("loaded" !== e.results.type) for (let i of (e.results = {
-        type: "failed",
-        error: t.error
-      }, e.observers)) i.onError(t.error);
-      return;
+      missingFields: [],
+    }))
+    ObjectStore.internalAssert(!queryState.observers.has(observer), 'Duplicate subscription for query id')
+    queryState.observers.add(observer)
+
+    if (this.useUnitTestBehaviors) {
+      this.setQueryStateResults(queryState, {
+        results: this.assembleResults(queryState),
+        fullResults: true,
+      })
     }
-    let {
-      results,
-      fullResults,
-      pagination,
-      missingFields
-    } = t;
-    if (missingFields && (e.missingFields = e.missingFields.concat(missingFields)), "loaded" === e.results.type) {
-      for (let [i, a] of Object.entries(results)) {
-        if (!this.instanceStates.has(i)) {
-          throwAsyncIf(this.instanceStates.has(i), `objectId is missing from ${this.objectDef.name} store`, {
-            objectId: i,
-            queryResults: JSON.stringify(t)
-          });
-          continue;
+    else if (this.possiblyOrphanedQueryResults.has(queryObj.queryId)) {
+      this.setQueryStateResults(queryState, this.possiblyOrphanedQueryResults.get(queryObj.queryId))
+      this.possiblyOrphanedQueryResults.delete(queryObj.queryId)
+    }
+    else if (queryState.results.type === 'loaded') {
+      const results: Record<string, any> = {}
+      for (const instance of queryState.results.instances.values()) {
+        const fields = instance.fields()
+        results[fields.id] = fields
+      }
+      observer.onInitialResults(results, undefined, queryState.missingFields)
+    }
+    else if (queryState.results.type === 'failed') {
+      observer.onError(queryState.results.error)
+    }
+
+    return () => {
+      ObjectStore.internalAssert(queryState.observers.has(observer), 'Duplicate unsubscription for query')
+      queryState.observers.delete(observer)
+      if (queryState.observers.size === 0) {
+        if (queryState.results.type !== 'failed') {
+          for (const instance of queryState.results.instances.values()) {
+            instance.dependentQueries().delete(queryState)
+            this.checkOrphanInstance(instance)
+          }
         }
-        let r = this.instanceStates.get(i);
-        if (this.shadowInstances.has(r)) {
-          !0 === a ? r.serverQueries.add(e) : r.serverQueries.$$delete(e);
-          continue;
+        this.queryStates.delete(queryObj.queryId)
+      }
+    }
+  }
+
+  /**
+   * Gets id from uuid (original: getIdFromUuid)
+   */
+  getIdFromUuid(uuid: any): Promise<any> {
+    if (!this.instanceStatesByUuid.has(uuid)) {
+      throw new Error(`uuid ${uuid} doesn't exist in object store ${this.objectDef.name}`)
+    }
+    return this.instanceStatesByUuid.get(uuid).getServerSideId()
+  }
+
+  /**
+   * Sets query state results (original: setQueryStateResults)
+   */
+  setQueryStateResults(query: any, state: any, _instances?: Record<string, any>): void {
+    if ('error' in state) {
+      if (query.results.type !== 'loaded') {
+        query.results = {
+          type: 'failed',
+          error: state.error,
         }
-        !0 === a ? this.addInstance(e, r) : (this.removeInstance(e, r, !0), this.possiblyOrphanInstances.add(r));
+        for (const observer of query.observers) observer.onError(state.error)
+      }
+      return
+    }
+    const { results, fullResults, pagination, missingFields } = state
+    if (missingFields) {
+      query.missingFields = query.missingFields.concat(missingFields)
+    }
+    if (query.results.type === 'loaded') {
+      for (const [id, present] of Object.entries(results)) {
+        if (!this.instanceStates.has(id)) {
+          throwAsyncIf(this.instanceStates.has(id), `objectId is missing from ${this.objectDef.name} store`, {
+            objectId: id,
+            queryResults: JSON.stringify(state),
+          })
+          continue
+        }
+        const instance = this.instanceStates.get(id)
+        if (this.shadowInstances.has(instance)) {
+          if (present === true)
+            instance.serverQueries.add(query)
+          else instance.serverQueries.delete(query)
+          continue
+        }
+        if (present === true) {
+          this.addInstance(query, instance)
+        }
+        else {
+          this.removeInstance(query, instance, true)
+          this.possiblyOrphanInstances.add(instance)
+        }
       }
       if (fullResults) {
-        for (let t of e.results.instances) this.shadowInstances.has(t) || results[t.fields().id] || (this.removeInstance(e, t, !0), this.possiblyOrphanInstances.add(t));
-        for (let t of this.shadowInstances.values()) results[t.fields().id] || t.serverQueries.$$delete(e);
+        for (const instance of query.results.instances) {
+          if (!this.shadowInstances.has(instance) && !results[instance.fields().id]) {
+            this.removeInstance(query, instance, true)
+            this.possiblyOrphanInstances.add(instance)
+          }
+        }
+        for (const instance of this.shadowInstances.values()) {
+          if (!results[instance.fields().id])
+            instance.serverQueries.delete(query)
+        }
       }
-    } else {
-      fullResults || console.error("[Livegraph] Partial results received while query is in a non-loaded state", {
-        queryState: e.results.type,
-        queryId: e.queryId
-      });
-      p.internalAssert(fullResults, "Partial results received while query is in a non-loaded state", {
-        queryState: e.results.type,
-        queryId: e.queryId
-      });
-      e.results = {
-        type: "loaded",
-        instances: "loading" === e.results.type ? e.results.instances : new Set()
-      };
-      let t = {};
-      for (let i in results) {
-        p.internalAssert(results[i], "Pending mutations for objectId is falsy");
-        p.internalAssert(this.instanceStates.has(i), "Query result contains id not found in instanceStates");
-        let n = this.instanceStates.get(i);
-        n.serverQueries.add(e);
-        this.shadowInstances.has(n) || (t[i] = n.fields(), e.results.instances.add(n));
+    }
+    else {
+      if (!fullResults) {
+        console.error('[Livegraph] Partial results received while query is in a non-loaded state', {
+          queryState: query.results.type,
+          queryId: query.queryId,
+        })
       }
-      for (let i of this.shadowInstances.values()) {
-        let n = i.fields();
-        e.query.matches(n) && (t[n.id] = n);
+      ObjectStore.internalAssert(fullResults, 'Partial results received while query is in a non-loaded state', {
+        queryState: query.results.type,
+        queryId: query.queryId,
+      })
+      query.results = {
+        type: 'loaded',
+        instances: query.results.type === 'loading' ? query.results.instances : new Set(),
       }
-      for (let i of e.observers) i.onInitialResults(t, pagination, missingFields);
+      const resultFields: Record<string, any> = {}
+      for (const id in results) {
+        ObjectStore.internalAssert(results[id], 'Pending mutations for objectId is falsy')
+        ObjectStore.internalAssert(this.instanceStates.has(id), 'Query result contains id not found in instanceStates')
+        const instance = this.instanceStates.get(id)
+        instance.serverQueries.add(query)
+        if (!this.shadowInstances.has(instance)) {
+          resultFields[id] = instance.fields()
+          query.results.instances.add(instance)
+        }
+      }
+      for (const instance of this.shadowInstances.values()) {
+        const fields = instance.fields()
+        if (query.query.matches(fields))
+          resultFields[fields.id] = fields
+      }
+      for (const observer of query.observers) observer.onInitialResults(resultFields, pagination, missingFields)
     }
   }
-  cleanupOrphans() {
-    for (let e of (this.possiblyOrphanedQueryResults.clear(), this.possiblyOrphanInstances)) this.checkOrphanInstance(e);
-  }
-  checkOrphanInstance(e) {
-    let t = this.instanceStates.has(e.fields().id);
-    let i = this.instanceStates.get(e.fields().id) === e;
-    let n = 0 === e.dependentQueries().size;
-    let r = this.shadowInstances.has(e);
-    if (t && i && n && !r) {
-      this.instanceStates.$$delete(e.fields().id);
-      let t = e.fields().uuid;
-      t && this.instanceStatesByUuid.$$delete(t);
+
+  /**
+   * Cleans up orphaned instances and query results (original: cleanupOrphans)
+   */
+  cleanupOrphans(): void {
+    this.possiblyOrphanedQueryResults.clear()
+    for (const instance of this.possiblyOrphanInstances) {
+      this.checkOrphanInstance(instance)
     }
   }
-  static internalAssert(e, t, i) {
-    throwIf(e, t, i);
+
+  /**
+   * Checks if an instance is orphaned and removes it (original: checkOrphanInstance)
+   */
+  checkOrphanInstance(instance: ObjectInstanceState): void {
+    const hasId = this.instanceStates.has(instance.fields().id)
+    const isSame = this.instanceStates.get(instance.fields().id) === instance
+    const noDeps = instance.dependentQueries().size === 0
+    const notShadow = !this.shadowInstances.has(instance)
+    if (hasId && isSame && noDeps && notShadow) {
+      this.instanceStates.delete(instance.fields().id)
+      const uuid = instance.fields().uuid
+      if (uuid)
+        this.instanceStatesByUuid.delete(uuid)
+    }
+  }
+
+  /**
+   * Throws if condition is true (original: internalAssert)
+   */
+  static internalAssert(condition: boolean, message: string, details?: any): void {
+    throwIf(condition, message, details)
   }
 }
-var h = m;
-let f = /(,\"sessionId\":\"session-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\")/;
-let _ = /(,\"anonymousUserId\":(null|\"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\"))/;
-class $$A {
-  constructor(e) {
-    this.objectDef = e;
+
+/**
+ * Regex patterns for session and anonymous user IDs (original: let f, let _)
+ */
+const SESSION_ID_REGEX = /(,"sessionId":"session-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")/
+const ANONYMOUS_USER_ID_REGEX = /(,"anonymousUserId":(null|"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"))/
+
+/**
+ * State for a computation subscription (original: states)
+ */
+interface ComputationState {
+  state: {
+    type: 'loading' | 'loaded' | 'failed'
+    value?: any
+    errors?: Array<{
+      code: string
+      path: string[]
+      error: Error
+      retriable?: boolean
+    }>
   }
-  states = new c(() => ({
-    state: {
-      type: "loading"
-    },
-    observers: new Set()
-  }));
-  stripSessionArgs(e) {
-    return e.replace(f, "").replace(_, "");
+  observers: Set<any>
+}
+
+/**
+ * Store for computed field subscriptions (original: class $$A)
+ */
+export class ComputationStore {
+  objectDef: ObjectTypeDefinition
+  states: DefaultEntryMap<string, ComputationState>
+
+  constructor(objectDef: any) {
+    this.objectDef = objectDef
+    this.states = new DefaultEntryMap<string, ComputationState>(() => ({
+      state: { type: 'loading' },
+      observers: new Set(),
+    }))
   }
-  applyMutations(e) {
-    for (let [t, i] of Object.entries(e)) {
-      let e = this.stripSessionArgs(t);
-      let n = this.states.entry(e).orDefault();
-      if ("error" in i) "loaded" !== n.state.type && (n.state = {
-        type: "failed",
-        errors: [{
-          code: "computedFieldError",
-          path: ["computedFieldFunction"],
-          error: Error(i.error.message),
-          retriable: i.error.retriable
-        }]
-      });else {
-        let {
-          value
-        } = i;
-        let {
-          fieldName
-        } = i;
+
+  /**
+   * Removes session and anonymous user IDs from the computation key (original: stripSessionArgs)
+   */
+  stripSessionArgs(key: string): string {
+    return key.replace(SESSION_ID_REGEX, '').replace(ANONYMOUS_USER_ID_REGEX, '')
+  }
+
+  /**
+   * Applies mutations to computation states (original: applyMutations)
+   */
+  applyMutations(mutations: Record<string, any>): void {
+    for (const [rawKey, mutation] of Object.entries(mutations)) {
+      let key = this.stripSessionArgs(rawKey)
+      const stateEntry = this.states.entry(key).orDefault()
+
+      if ('error' in mutation) {
+        if (stateEntry.state.type !== 'loaded') {
+          stateEntry.state = {
+            type: 'failed',
+            errors: [{
+              code: 'computedFieldError',
+              path: ['computedFieldFunction'],
+              error: new Error(mutation.error.message),
+              retriable: mutation.error.retriable,
+            }],
+          }
+        }
+      }
+      else {
+        const { value, fieldName } = mutation
         if (this.objectDef.fields.has(fieldName)) {
-          e = this.objectDef.readPlainObjectField(fieldName, value);
-          let i = this.objectDef.fields.get(fieldName);
-          i instanceof F && i?.isComputedObject() && value && "object" == typeof value && "loaded" === n.state.type ? n.state = {
-            type: "loaded",
-            value: h()(n.state.value, value, {
-              arrayMerge: (e, t, i) => t
-            })
-          } : n.state = {
-            type: "loaded",
-            value
-          };
+          // let computedValue = this.objectDef.readPlainObjectField(fieldName, value)
+          const fieldDef = this.objectDef.fields.get(fieldName)
+          if (
+            fieldDef instanceof ComputedFieldDef
+            && fieldDef?.isComputedObject()
+            && value
+            && typeof value === 'object'
+            && stateEntry.state.type === 'loaded'
+          ) {
+            stateEntry.state = {
+              type: 'loaded',
+              value: deepmerge(stateEntry.state.value, value, {
+                arrayMerge: (_old, newArr) => newArr,
+              }),
+            }
+          }
+          else {
+            stateEntry.state = {
+              type: 'loaded',
+              value,
+            }
+          }
         }
       }
-      for (let e of n.observers.values()) "loaded" === n.state.type ? e.onUpdateResult(n.state.value) : "failed" === n.state.type && e.onErrors(n.state.errors);
+
+      for (const observer of stateEntry.observers.values()) {
+        if (stateEntry.state.type === 'loaded') {
+          observer.onUpdateResult(stateEntry.state.value)
+        }
+        else if (stateEntry.state.type === 'failed') {
+          observer.onErrors(stateEntry.state.errors)
+        }
+      }
     }
   }
-  subscribe({
-    computationId: e
-  }, t) {
-    let i = this.stripSessionArgs(e);
-    let r = this.states.entry(i).orDefault();
-    throwIf(!r.observers.has(t), "Duplicate subscription for computation");
-    r.observers.add(t);
-    "loaded" === r.state.type ? t.onUpdateResult(r.state.value) : "failed" === r.state.type && t.onErrors(r.state.errors);
+
+  /**
+   * Subscribes to a computation (original: subscribe)
+   */
+  subscribe(
+    { computationId }: { computationId: string },
+    observer: any,
+  ): () => void {
+    const key = this.stripSessionArgs(computationId)
+    const stateEntry = this.states.entry(key).orDefault()
+    throwIf(stateEntry.observers.has(observer), 'Duplicate subscription for computation')
+    stateEntry.observers.add(observer)
+
+    if (stateEntry.state.type === 'loaded') {
+      observer.onUpdateResult(stateEntry.state.value)
+    }
+    else if (stateEntry.state.type === 'failed') {
+      observer.onErrors(stateEntry.state.errors)
+    }
+
     return () => {
-      r.observers.$$delete(t);
-      0 === r.observers.size && this.states.$$delete(i);
-    };
+      stateEntry.observers.delete(observer)
+      if (stateEntry.observers.size === 0) {
+        this.states.delete(key)
+      }
+    }
   }
 }
-class b {
-  constructor(e, t, i, n, r, a) {
-    this.key = e;
-    this.viewRef = t;
-    this.viewDef = i;
-    this.context = n;
-    this.traceId = a;
-    this.view = new _$$A(e, i, n, r);
+
+/**
+ * Subscription for a view (original: class b)
+ */
+export class ViewSubscription {
+  key: string
+  viewRef: any
+  viewDef: any
+  context: any
+  traceId: any
+  view: LiveViewNode
+  subscriptions: any[] = []
+
+  constructor(
+    key: string,
+    viewRef: any,
+    viewDef: any,
+    context: any,
+    emitter: any,
+    traceId: any,
+  ) {
+    this.key = key
+    this.viewRef = viewRef
+    this.viewDef = viewDef
+    this.context = context
+    this.traceId = traceId
+    this.view = new LiveViewNode(key, viewDef, context, emitter)
   }
-  view;
-  subscriptions = [];
-  getSubscriptionObservers() {
-    return this.subscriptions;
+
+  /**
+   * Returns all subscription observers (original: getSubscriptionObservers)
+   */
+  getSubscriptionObservers(): any[] {
+    return this.subscriptions
   }
-  addSubscription(e) {
-    this.subscriptions.push(e);
+
+  /**
+   * Adds a subscription observer (original: addSubscription)
+   */
+  addSubscription(subscription: any): void {
+    this.subscriptions.push(subscription)
   }
-  removeSubscription(e) {
-    this.subscriptions = this.subscriptions.filter(t => t !== e);
+
+  /**
+   * Removes a subscription observer (original: removeSubscription)
+   */
+  removeSubscription(subscription: any): void {
+    this.subscriptions = this.subscriptions.filter(s => s !== subscription)
   }
-  viewArgs() {
-    return this.view.viewArgs;
+
+  /**
+   * Returns view arguments (original: viewArgs)
+   */
+  viewArgs(): any {
+    return this.view.viewArgs
   }
-  activeView() {
-    return this.view;
+
+  /**
+   * Returns the active view node (original: activeView)
+   */
+  activeView(): LiveViewNode {
+    return this.view
   }
-  setOptionalMissing(e) {
-    this.context.options && (this.context.options?.forceMissingOptionals || (this.context.options.forceMissingOptionals = []), this.context.options.forceMissingOptionals.push(e));
+
+  /**
+   * Marks an optional field as missing (original: setOptionalMissing)
+   */
+  setOptionalMissing(field: string): void {
+    if (this.context.options) {
+      if (!this.context.options.forceMissingOptionals) {
+        this.context.options.forceMissingOptionals = []
+      }
+      this.context.options.forceMissingOptionals.push(field)
+    }
   }
-  unsetOptionalMissing() {
-    this.context.options && (this.context.options.forceMissingOptionals = []);
+
+  /**
+   * Unsets all optional missing fields (original: unsetOptionalMissing)
+   */
+  unsetOptionalMissing(): void {
+    if (this.context.options) {
+      this.context.options.forceMissingOptionals = []
+    }
   }
-  enableViewCaching() {
-    this.context.options && (this.context.options.bustViewCache = !1);
+
+  /**
+   * Enables view caching (original: enableViewCaching)
+   */
+  enableViewCaching(): void {
+    if (this.context.options) {
+      this.context.options.bustViewCache = false
+    }
   }
-  disableViewCaching() {
-    this.context.options && (this.context.options.bustViewCache = !0);
+
+  /**
+   * Disables view caching (original: disableViewCaching)
+   */
+  disableViewCaching(): void {
+    if (this.context.options) {
+      this.context.options.bustViewCache = true
+    }
   }
-  destroy() {
-    this.view.destroy();
+
+  /**
+   * Destroys the view node (original: destroy)
+   */
+  destroy(): void {
+    this.view.destroy()
   }
 }
-class S {
-  constructor(e, t = {}, i = {}, n) {
-    this.viewKey = e;
-    this.sessionArgs = t;
-    this.viewArgs = i;
-    this.options = n;
+
+/**
+ * Context for a view (original: class S)
+ */
+export class ViewContext {
+  viewKey: string
+  sessionArgs: any
+  viewArgs: any
+  options: any
+
+  constructor(viewKey: string, sessionArgs: any = {}, viewArgs: any = {}, options?: any) {
+    this.viewKey = viewKey
+    this.sessionArgs = sessionArgs
+    this.viewArgs = viewArgs
+    this.options = options
   }
 }
-class C {
-  constructor(e) {
-    this.emitter = e;
+/**
+ * Logger for view context events (original: class C)
+ */
+class ContextLogger {
+  emitter: any
+
+  constructor(emitter: any) {
+    this.emitter = emitter
   }
-  criticalAndPage(e) {}
-  error(e) {}
-  warn(e) {}
-  info(e) {}
-  debug(e, ...t) {
-    switch (e) {
-      case "VIEW_QUERY_NODE.ADD_RESULT":
-      case "VIEW_QUERY_NODE.UPDATE_RESULT":
-      case "VIEW_QUERY_NODE.REMOVE_RESULT":
+
+  /**
+   * Logs critical and page events (original: criticalAndPage)
+   */
+  criticalAndPage(_event: any): void {
+    // Implement as needed
+  }
+
+  /**
+   * Logs error events (original: error)
+   */
+  error(_event: any): void {
+    // Implement as needed
+  }
+
+  /**
+   * Logs warning events (original: warn)
+   */
+  warn(_event: any): void {
+    // Implement as needed
+  }
+
+  /**
+   * Logs info events (original: info)
+   */
+  info(_event: any): void {
+    // Implement as needed
+  }
+
+  /**
+   * Logs debug events (original: debug)
+   */
+  debug(eventType: string, ...args: any[]): void {
+    switch (eventType) {
+      case 'VIEW_QUERY_NODE.ADD_RESULT':
+      case 'VIEW_QUERY_NODE.UPDATE_RESULT':
+      case 'VIEW_QUERY_NODE.REMOVE_RESULT':
         this.emitter.emit({
-          type: e,
-          queryId: t[0],
-          instance: t[1]
-        });
-        break;
-      case "VIEW_QUERY_NODE.INITIAL_RESULT":
+          type: eventType,
+          queryId: args[0],
+          instance: args[1],
+        })
+        break
+      case 'VIEW_QUERY_NODE.INITIAL_RESULT':
         this.emitter.emit({
-          type: e,
-          queryId: t[0],
-          instances: t[1]
-        });
+          type: eventType,
+          queryId: args[0],
+          instances: args[1],
+        })
+        break
+      default:
+        // No-op for other debug events
+        break
     }
   }
 }
-export class $$T0 {
-  constructor(e, t, i, n, r, a, s, o, l, d, c, u) {
-    for (let [m, h] of (this.args = e, this.schema = t, this.viewRegistry = i, this.emitter = n, this.onPaginationChange = r, this.isInitialConnection = a, this.onRetriableViewFailure = s, this.getRetryCountOnResult = o, this.analyticsLogger = l, this.shouldBubbleUpNonNullableResultErrors = d, this.errorsLoggedForAnalyticsFraction = c, this.useUnitTestBehaviors = u, this.contextLogger = new C(this.emitter), t.objects)) this.stores[m] = {
-      queries: new p(h, this.emitter, !!this.useUnitTestBehaviors, this.isInitialConnection),
-      computations: new $$A(h)
-    };
-  }
-  viewSubscriptions = new Map();
-  failedViewSubscriptions = new Map();
-  contextLogger;
-  forceMissingOptionalsForViews = new Map();
-  nextSubscriptionId = 1;
-  paginationQueryNodeMap = new Map();
-  computationObjectNodes = {};
-  stores = {};
-  getAllQueryIds() {
-    let e = [];
-    for (let t of Object.values(this.stores)) t && e.push(...t.queries.getAllQueryIds());
-    return e;
-  }
-  resolvePendingServerIdList(e) {
-    for (let [t, i] of Object.entries(e)) {
-      let e = this.getStores(t);
-      e && e.queries.resolvePendingServerIdList(i.instances);
+
+/**
+ * Main session store for managing views, queries, computations, and subscriptions (original: class $$T0)
+ */
+export class MainSessionStore {
+  args: any
+  schema: any
+  viewRegistry: any
+  emitter: any
+  onPaginationChange: any
+  isInitialConnection: any
+  onRetriableViewFailure: any
+  getRetryCountOnResult: any
+  analyticsLogger: any
+  shouldBubbleUpNonNullableResultErrors: any
+  errorsLoggedForAnalyticsFraction: any
+  useUnitTestBehaviors: any
+  contextLogger: ContextLogger
+  stores: Record<string, { queries: ObjectStore; computations: ComputationStore }>
+  viewSubscriptions: Map<string, ViewSubscription> = new Map()
+  failedViewSubscriptions: Map<string, ViewSubscription> = new Map()
+  forceMissingOptionalsForViews: Map<string, string[]> = new Map()
+  nextSubscriptionId = 1
+  paginationQueryNodeMap: Map<any, any> = new Map()
+  computationObjectNodes: Record<string, any[]> = {}
+  isInMutationBatch = false
+  shouldNotifyOnMutationBatchCompletion = false
+
+  constructor(
+    args: any,
+    schema: any,
+    viewRegistry: any,
+    emitter: any,
+    onPaginationChange: any,
+    isInitialConnection: any,
+    onRetriableViewFailure: any,
+    getRetryCountOnResult: any,
+    analyticsLogger: any,
+    shouldBubbleUpNonNullableResultErrors: any,
+    errorsLoggedForAnalyticsFraction: any,
+    useUnitTestBehaviors: any,
+  ) {
+    this.args = args
+    this.schema = schema
+    this.viewRegistry = viewRegistry
+    this.emitter = emitter
+    this.onPaginationChange = onPaginationChange
+    this.isInitialConnection = isInitialConnection
+    this.onRetriableViewFailure = onRetriableViewFailure
+    this.getRetryCountOnResult = getRetryCountOnResult
+    this.analyticsLogger = analyticsLogger
+    this.shouldBubbleUpNonNullableResultErrors = shouldBubbleUpNonNullableResultErrors
+    this.errorsLoggedForAnalyticsFraction = errorsLoggedForAnalyticsFraction
+    this.useUnitTestBehaviors = useUnitTestBehaviors
+    this.contextLogger = new ContextLogger(this.emitter)
+    this.stores = {}
+
+    for (const [objectName, objectDef] of schema.objects) {
+      this.stores[objectName] = {
+        queries: new ObjectStore(objectDef, this.emitter, !!this.useUnitTestBehaviors, this.isInitialConnection),
+        computations: new ComputationStore(objectDef),
+      }
     }
   }
-  applyMutations(e) {
-    for (let [t, i] of (this.emitter.emit({
-      type: "SESSION.APPLY_MUTATIONS",
-      mutations: e
-    }), Object.entries(e))) {
-      let {
-        instances,
-        queries,
-        computations
-      } = i;
-      let a = this.getStores(t);
-      a && (a.queries.applyMutations(instances, queries), a.computations.applyMutations(computations));
+
+  /**
+   * Returns all query ids across all stores (original: getAllQueryIds)
+   */
+  getAllQueryIds(): any[] {
+    const ids: any[] = []
+    for (const store of Object.values(this.stores)) {
+      if (store) ids.push(...store.queries.getAllQueryIds())
     }
-    for (let t of (this.notifyObservers(), Object.keys(e))) {
-      let e = this.getStores(t);
-      e && e.queries.cleanupOrphans();
+    return ids
+  }
+
+  /**
+   * Resolves pending server id list for all stores (original: resolvePendingServerIdList)
+   */
+  resolvePendingServerIdList(mutations: Record<string, any>): void {
+    for (const [objectName, mutation] of Object.entries(mutations)) {
+      const store = this.getStores(objectName)
+      if (store) store.queries.resolvePendingServerIdList(mutation.instances)
     }
   }
-  applyMutations__UNIT_TEST(e) {
-    for (let [t, i] of Object.entries(e)) {
-      let e = this.getStores(t);
-      e && e.queries.applyMutations__UNIT_TEST(i);
-    }
-    this.notifyObservers();
-  }
-  applyShadowMutations(e, t, i) {
+
+  /**
+   * Applies mutations to all stores (original: applyMutations)
+   */
+  applyMutations(mutations: Record<string, any>): void {
     this.emitter.emit({
-      type: "SESSION.APPLY_SHADOW_MUTATIONS",
-      transactionId: e,
-      mutations: t,
-      operationType: i
-    });
-    let r = new Map();
-    let a = new Set();
-    let s = {};
-    let o = {};
-    for (let [e, t] of this.viewSubscriptions.entries()) o[e] = t.activeView().root.result().status;
-    this.transformComputedObjectMutations(t, i);
-    let l = (e, t, i, n) => {
-      for (let r of Object.keys(n)) {
-        let n = this.schema.objects.get(t)?.fields.get(r);
-        n && V(n) && (s[t] || (s[t] = {
-          instanceIds: e ? void 0 : [],
-          fieldNames: []
-        }), e || s[t].instanceIds?.includes(i) || s[t].instanceIds?.push(i), s[t].fieldNames.includes(r) || s[t].fieldNames.push(r));
-      }
-    };
-    for (let [s, o] of Object.entries(t)) {
-      let t = this.getStores(s);
-      if (t) for (let [d, c] of Object.entries(o)) {
-        let o = t.queries.instanceStates.get(d);
-        if (void 0 === o) {
-          if ("update" === i || "delete" === i) {
-            console.warn(`Update/delete triggered on non-existent instance of object type ${s}, id ${d}`);
-            continue;
-          }
-          throwIf(c, "Optimistic mutation is not defined");
-          let [o, u] = t.queries.applyShadowMutationAdd(e, d, c);
-          for (let e of o) k(r, s).add(e);
-          u.forEach(e => a.add(e));
-          l(!0, s, d, c);
-        } else if (null === c) {
-          let [i, n] = t.queries.applyShadowMutationDelete(e, d, o);
-          for (let e of i) k(r, s).add(e);
-          n.forEach(e => a.add(e));
-        } else {
-          let [i, n] = t.queries.applyShadowMutationUpdate(e, d, o, c);
-          for (let e of i) k(r, s).add(e);
-          n.forEach(e => a.add(e));
-          l(!1, s, d, c);
-        }
+      type: 'SESSION.APPLY_MUTATIONS',
+      mutations,
+    })
+    for (const [objectName, mutation] of Object.entries(mutations)) {
+      const { instances, queries, computations } = mutation
+      const store = this.getStores(objectName)
+      if (store) {
+        store.queries.applyMutations(instances, queries)
+        store.computations.applyMutations(computations)
       }
     }
-    let d = [];
-    let c = [];
-    for (let [e, t] of this.viewSubscriptions.entries()) "loaded" === o[e] && "loading" === t.activeView().root.result().status && (d.push(t.activeView().root.queryDef.objectFieldDef.name), c.push(t.activeView().root.getLoadingPathsForDebugging()));
-    d.length > 0 && this.emitter.emit({
-      type: "SESSION.OPTIMISTIC_UPDATE_INSUFFICIENT_DATA",
-      loadedToLoadingViews: d,
-      loadingPaths: c
-    });
-    this.notifyObservers();
-    return [r, s, a];
-  }
-  removeShadowMutations(e, t, i) {
-    for (let [n, r] of (this.emitter.emit({
-      type: "SESSION.REMOVE_SHADOW_MUTATIONS",
-      transactionId: e,
-      mutations: t,
-      success: i
-    }), Object.entries(t))) {
-      let t = this.getStores(n);
-      t && t.queries.removeShadowMutations(e, r, i);
+    this.notifyObservers()
+    for (const objectName of Object.keys(mutations)) {
+      const store = this.getStores(objectName)
+      if (store) store.queries.cleanupOrphans()
     }
-    this.notifyObservers();
   }
-  applyShadowMutationsWithUUID(e, t, i) {
+
+  /**
+   * Applies mutations for unit tests (original: applyMutations__UNIT_TEST)
+   */
+  applyMutations__UNIT_TEST(mutations: Record<string, any>): void {
+    for (const [objectName, instances] of Object.entries(mutations)) {
+      const store = this.getStores(objectName)
+      if (store) store.queries.applyMutations__UNIT_TEST(instances)
+    }
+    this.notifyObservers()
+  }
+
+  /**
+   * Applies shadow mutations (original: applyShadowMutations)
+   */
+  applyShadowMutations(transactionId: any, mutations: Record<string, any>, operationType: string): [Map<string, Set<any>>, Record<string, any>, Set<any>] {
     this.emitter.emit({
-      type: "SESSION.APPLY_SHADOW_MUTATIONS",
-      transactionId: e,
-      mutations: t,
-      operationType: i
-    });
-    let r = new Map();
-    let a = {};
-    let s = {};
-    for (let [e, t] of this.viewSubscriptions.entries()) s[e] = t.activeView().root.result().status;
-    let o = new Set();
-    let l = (e, t, i) => {
-      for (let n of Object.keys(i)) {
-        let i = this.schema.objects.get(e)?.fields.get(n);
-        i && V(i) && (a[e] || (a[e] = {
-          instanceUuids: [],
-          fieldNames: []
-        }), a[e].instanceUuids?.includes(t) || a[e].instanceUuids?.push(t), a[e].fieldNames.includes(n) || a[e].fieldNames.push(n));
-      }
-    };
-    for (let [a, s] of Object.entries(t)) {
-      if (a in this.schema.computedObjectFields) {
-        console.warn(`UUID optimistic updates for computed objects are not supported. Optimistically updating computed object '${a}' may not work`);
-        continue;
-      }
-      let t = this.getStores(a);
-      if (t) for (let [d, c] of Object.entries(s)) {
-        let s = t.queries.instanceStatesByUuid.get(d);
-        if (void 0 === s) {
-          if ("update" === i || "delete" === i) {
-            console.warn(`Update/delete triggered on non-existent instance of object type ${a}, uuid ${d}`);
-            continue;
+      type: 'SESSION.APPLY_SHADOW_MUTATIONS',
+      transactionId,
+      mutations,
+      operationType,
+    })
+    const affectedQueries = new Map<string, Set<any>>()
+    const affectedObservers = new Set<any>()
+    const computedFields: Record<string, any> = {}
+    const viewStatuses: Record<string, any> = {}
+
+    for (const [key, subscription] of this.viewSubscriptions.entries()) {
+      viewStatuses[key] = subscription.activeView().root.result().status
+    }
+
+    this.transformComputedObjectMutations(mutations, operationType)
+
+    const collectComputedFields = (
+      isAdd: boolean,
+      objectName: string,
+      instanceId: any,
+      patch: any,
+    ) => {
+      for (const fieldName of Object.keys(patch)) {
+        const fieldDef = this.schema.objects.get(objectName)?.fields.get(fieldName)
+        if (fieldDef && isComputedField(fieldDef)) {
+          if (!computedFields[objectName]) {
+            computedFields[objectName] = {
+              instanceIds: isAdd ? undefined : [],
+              fieldNames: [],
+            }
           }
-          throwIf(c, "Optimistic uuid mutation is not defined");
-          let [s, u] = t.queries.applyShadowMutationAddWithUUID(e, d, c);
-          for (let e of s) k(r, a).add(e);
-          u.forEach(e => o.add(e));
-          l(a, d, c);
-        } else if ("delete" === i) {
-          let [i, n] = t.queries.applyShadowMutationDeleteWithUUID(e, d, s);
-          for (let e of i) k(r, a).add(e);
-          n.forEach(e => o.add(e));
-        } else if (null !== c) {
-          let [i, n] = t.queries.applyShadowMutationUpdateWithUUID(e, d, s, c);
-          for (let e of i) k(r, a).add(e);
-          n.forEach(e => o.add(e));
-          l(a, d, c);
-        }
-      }
-    }
-    let d = [];
-    let c = [];
-    for (let [e, t] of this.viewSubscriptions.entries()) "loaded" === s[e] && "loading" === t.activeView().root.result().status && (d.push(t.activeView().root.queryDef.objectFieldDef.name), c.push(t.activeView().root.getLoadingPathsForDebugging()));
-    d.length > 0 && this.emitter.emit({
-      type: "SESSION.OPTIMISTIC_UPDATE_INSUFFICIENT_DATA",
-      loadedToLoadingViews: d,
-      loadingPaths: c
-    });
-    this.notifyObservers();
-    return [r, a, o];
-  }
-  transformComputedObjectMutations(e, t) {
-    for (let [i, n] of Object.entries(e)) if (i in this.schema.computedObjectFields) {
-      for (let [r, a] of Object.entries(n)) {
-        let n = [];
-        for (let e of this.computationObjectNodes[i] ?? []) if (e.computedObject?.id === r) {
-          n.push(e);
-          break;
-        }
-        if (0 === n.length) {
-          if ("update" === t || "delete" === t) {
-            console.warn(`Update/delete triggered on non-existent instance of computed object type ${i}, id ${r}`);
-            continue;
+          if (!isAdd && !computedFields[objectName].instanceIds?.includes(instanceId)) {
+            computedFields[objectName].instanceIds?.push(instanceId)
           }
-          for (let t of this.schema.computedObjectFields[i] ?? []) for (let i of Object.values(e[t.parentName] ?? {})) i && i[t.fieldName]?.id === r && (i[t.fieldName] = a);
-        } else for (let t of n) {
-          let i = t.parent;
-          let n = i.queryDef.name;
-          let r = i.instance.id;
-          let s = i.instance.uuid;
-          e[n] || (e[n] = {});
-          let o = e[n]?.[r];
-          !o && s && (o = e[n]?.[s]);
-          o || (o = {}, e[n][r] = o);
-          null === a ? o[t.fieldName] = null : o[t.fieldName] = {
-            ...(t.computedObject ?? {}),
-            ...a
-          };
+          if (!computedFields[objectName].fieldNames.includes(fieldName)) {
+            computedFields[objectName].fieldNames.push(fieldName)
+          }
         }
       }
-      delete e[i];
+    }
+
+    for (const [objectName, objectMutations] of Object.entries(mutations)) {
+      const store = this.getStores(objectName)
+      if (store) {
+        for (const [instanceId, patch] of Object.entries(objectMutations)) {
+          const instance = store.queries.instanceStates.get(instanceId)
+          if (instance === undefined) {
+            if (operationType === 'update' || operationType === 'delete') {
+              console.warn(`Update/delete triggered on non-existent instance of object type ${objectName}, id ${instanceId}`)
+              continue
+            }
+            throwIf(patch, 'Optimistic mutation is not defined')
+            const [queryIds, observers] = store.queries.applyShadowMutationAdd(transactionId, instanceId, patch)
+            for (const qid of queryIds) getOrCreateSet(affectedQueries, objectName).add(qid)
+            observers.forEach(o => affectedObservers.add(o))
+            collectComputedFields(true, objectName, instanceId, patch)
+          } else if (patch === null) {
+            const [queryIds, observers] = store.queries.applyShadowMutationDelete(transactionId, instanceId, instance)
+            for (const qid of queryIds) getOrCreateSet(affectedQueries, objectName).add(qid)
+            observers.forEach(o => affectedObservers.add(o))
+          } else {
+            const [queryIds, observers] = store.queries.applyShadowMutationUpdate(transactionId, instanceId, instance, patch)
+            for (const qid of queryIds) getOrCreateSet(affectedQueries, objectName).add(qid)
+            observers.forEach(o => affectedObservers.add(o))
+            collectComputedFields(false, objectName, instanceId, patch)
+          }
+        }
+      }
+    }
+
+    const loadedToLoadingViews: string[] = []
+    const loadingPaths: any[] = []
+    for (const [key, subscription] of this.viewSubscriptions.entries()) {
+      if (
+        viewStatuses[key] === 'loaded' &&
+        subscription.activeView().root.result().status === 'loading'
+      ) {
+        loadedToLoadingViews.push(subscription.activeView().root.queryDef.objectFieldDef.name)
+        loadingPaths.push(subscription.activeView().root.getLoadingPathsForDebugging())
+      }
+    }
+    if (loadedToLoadingViews.length > 0) {
+      this.emitter.emit({
+        type: 'SESSION.OPTIMISTIC_UPDATE_INSUFFICIENT_DATA',
+        loadedToLoadingViews,
+        loadingPaths,
+      })
+    }
+    this.notifyObservers()
+    return [affectedQueries, computedFields, affectedObservers]
+  }
+
+  /**
+   * Removes shadow mutations (original: removeShadowMutations)
+   */
+  removeShadowMutations(transactionId: any, mutations: Record<string, any>, success: boolean): void {
+    this.emitter.emit({
+      type: 'SESSION.REMOVE_SHADOW_MUTATIONS',
+      transactionId,
+      mutations,
+      success,
+    })
+    for (const [objectName, mutation] of Object.entries(mutations)) {
+      const store = this.getStores(objectName)
+      if (store) store.queries.removeShadowMutations(transactionId, mutation, success)
+    }
+    this.notifyObservers()
+  }
+
+  /**
+   * Applies shadow mutations with UUID (original: applyShadowMutationsWithUUID)
+   */
+  applyShadowMutationsWithUUID(transactionId: any, mutations: Record<string, any>, operationType: string): [Map<string, Set<any>>, Record<string, any>, Set<any>] {
+    this.emitter.emit({
+      type: 'SESSION.APPLY_SHADOW_MUTATIONS',
+      transactionId,
+      mutations,
+      operationType,
+    })
+    const affectedQueries = new Map<string, Set<any>>()
+    const computedFields: Record<string, any> = {}
+    const viewStatuses: Record<string, any> = {}
+    const affectedObservers = new Set<any>()
+
+    for (const [key, subscription] of this.viewSubscriptions.entries()) {
+      viewStatuses[key] = subscription.activeView().root.result().status
+    }
+
+    const collectComputedFields = (
+      objectName: string,
+      uuid: any,
+      patch: any,
+    ) => {
+      for (const fieldName of Object.keys(patch)) {
+        const fieldDef = this.schema.objects.get(objectName)?.fields.get(fieldName)
+        if (fieldDef && isComputedField(fieldDef)) {
+          if (!computedFields[objectName]) {
+            computedFields[objectName] = {
+              instanceUuids: [],
+              fieldNames: [],
+            }
+          }
+          if (!computedFields[objectName].instanceUuids.includes(uuid)) {
+            computedFields[objectName].instanceUuids.push(uuid)
+          }
+          if (!computedFields[objectName].fieldNames.includes(fieldName)) {
+            computedFields[objectName].fieldNames.push(fieldName)
+          }
+        }
+      }
+    }
+
+    for (const [objectName, objectMutations] of Object.entries(mutations)) {
+      if (objectName in this.schema.computedObjectFields) {
+        console.warn(`UUID optimistic updates for computed objects are not supported. Optimistically updating computed object '${objectName}' may not work`)
+        continue
+      }
+      const store = this.getStores(objectName)
+      if (store) {
+        for (const [uuid, patch] of Object.entries(objectMutations)) {
+          const instance = store.queries.instanceStatesByUuid.get(uuid)
+          if (instance === undefined) {
+            if (operationType === 'update' || operationType === 'delete') {
+              console.warn(`Update/delete triggered on non-existent instance of object type ${objectName}, uuid ${uuid}`)
+              continue
+            }
+            throwIf(patch, 'Optimistic uuid mutation is not defined')
+            const [queryIds, observers] = store.queries.applyShadowMutationAddWithUUID(transactionId, uuid, patch)
+            for (const qid of queryIds) getOrCreateSet(affectedQueries, objectName).add(qid)
+            observers.forEach(o => affectedObservers.add(o))
+            collectComputedFields(objectName, uuid, patch)
+          } else if (operationType === 'delete') {
+            const [queryIds, observers] = store.queries.applyShadowMutationDeleteWithUUID(transactionId, uuid, instance)
+            for (const qid of queryIds) getOrCreateSet(affectedQueries, objectName).add(qid)
+            observers.forEach(o => affectedObservers.add(o))
+          } else if (patch !== null) {
+            const [queryIds, observers] = store.queries.applyShadowMutationUpdateWithUUID(transactionId, uuid, instance, patch)
+            for (const qid of queryIds) getOrCreateSet(affectedQueries, objectName).add(qid)
+            observers.forEach(o => affectedObservers.add(o))
+            collectComputedFields(objectName, uuid, patch)
+          }
+        }
+      }
+    }
+
+    const loadedToLoadingViews: string[] = []
+    const loadingPaths: any[] = []
+    for (const [key, subscription] of this.viewSubscriptions.entries()) {
+      if (
+        viewStatuses[key] === 'loaded' &&
+        subscription.activeView().root.result().status === 'loading'
+      ) {
+        loadedToLoadingViews.push(subscription.activeView().root.queryDef.objectFieldDef.name)
+        loadingPaths.push(subscription.activeView().root.getLoadingPathsForDebugging())
+      }
+    }
+    if (loadedToLoadingViews.length > 0) {
+      this.emitter.emit({
+        type: 'SESSION.OPTIMISTIC_UPDATE_INSUFFICIENT_DATA',
+        loadedToLoadingViews,
+        loadingPaths,
+      })
+    }
+    this.notifyObservers()
+    return [affectedQueries, computedFields, affectedObservers]
+  }
+
+  /**
+   * Transforms computed object mutations (original: transformComputedObjectMutations)
+   */
+  transformComputedObjectMutations(mutations: Record<string, any>, operationType: string): void {
+    for (const [objectName, objectMutations] of Object.entries(mutations)) {
+      if (objectName in this.schema.computedObjectFields) {
+        for (const [id, patch] of Object.entries(objectMutations)) {
+          const nodes: any[] = []
+          for (const node of this.computationObjectNodes[objectName] ?? []) {
+            if (node.computedObject?.id === id) {
+              nodes.push(node)
+              break
+            }
+          }
+          if (nodes.length === 0) {
+            if (operationType === 'update' || operationType === 'delete') {
+              console.warn(`Update/delete triggered on non-existent instance of computed object type ${objectName}, id ${id}`)
+              continue
+            }
+            for (const field of this.schema.computedObjectFields[objectName] ?? []) {
+              for (const obj of Object.values(mutations[field.parentName] ?? {})) {
+                if (obj && obj[field.fieldName]?.id === id) {
+                  obj[field.fieldName] = patch
+                }
+              }
+            }
+          } else {
+            for (const node of nodes) {
+              const parent = node.parent
+              const parentName = parent.queryDef.name
+              const instanceId = parent.instance.id
+              const instanceUuid = parent.instance.uuid
+              mutations[parentName] ||= {}
+              let obj = mutations[parentName]?.[instanceId]
+              if (!obj && instanceUuid) obj = mutations[parentName]?.[instanceUuid]
+              if (!obj) {
+                obj = {}
+                mutations[parentName][instanceId] = obj
+              }
+              if (patch === null) {
+                obj[node.fieldName] = null
+              } else {
+                obj[node.fieldName] = {
+                  ...(node.computedObject ?? {}),
+                  ...patch,
+                }
+              }
+            }
+          }
+        }
+        delete mutations[objectName]
+      }
     }
   }
-  removeShadowMutationsWithUUID(e, t, i) {
-    for (let [n, r] of (this.emitter.emit({
-      type: "SESSION.REMOVE_SHADOW_MUTATIONS",
-      transactionId: e,
-      mutations: t,
-      success: i
-    }), Object.entries(t))) {
-      let t = this.getStores(n);
-      t && t.queries.removeShadowMutationsWithUUID(e, r, i);
+
+  /**
+   * Removes shadow mutations with UUID (original: removeShadowMutationsWithUUID)
+   */
+  removeShadowMutationsWithUUID(transactionId: any, mutations: Record<string, any>, success: boolean): void {
+    this.emitter.emit({
+      type: 'SESSION.REMOVE_SHADOW_MUTATIONS',
+      transactionId,
+      mutations,
+      success,
+    })
+    for (const [objectName, mutation] of Object.entries(mutations)) {
+      const store = this.getStores(objectName)
+      if (store) store.queries.removeShadowMutationsWithUUID(transactionId, mutation, success)
     }
-    this.notifyObservers();
+    this.notifyObservers()
   }
-  getIdFromUuid(e, t) {
-    let i = this.getStores(e);
-    if (!i) throw Error(`objectName ${e} doesn't exist`);
-    return i.queries.getIdFromUuid(t);
+
+  /**
+   * Gets id from uuid for a given object (original: getIdFromUuid)
+   */
+  getIdFromUuid(objectName: string, uuid: any): Promise<any> {
+    const store = this.getStores(objectName)
+    if (!store) throw new Error(`objectName ${objectName} doesn't exist`)
+    return store.queries.getIdFromUuid(uuid)
   }
-  getViewDef(e) {
-    let t = this.viewRegistry.get(e._name);
-    if (!t) throw Error(`View with name ${e._name} not found`);
-    return t;
+
+  /**
+   * Gets view definition by view reference (original: getViewDef)
+   */
+  getViewDef(viewRef: any): any {
+    const viewDef = this.viewRegistry.get(viewRef._name)
+    if (!viewDef) throw new Error(`View with name ${viewRef._name} not found`)
+    return viewDef
   }
-  getViewResult(e, t) {
-    let i = J(this.getViewDef(e).name, t);
-    return this.viewSubscriptions.has(i) ? this.viewSubscriptions.get(i).activeView().result() : null;
+
+  /**
+   * Gets view result by view reference and args (original: getViewResult)
+   */
+  getViewResult(viewRef: any, args: any): any {
+    const key = serializeArgs(this.getViewDef(viewRef).name, args)
+    return this.viewSubscriptions.has(key)
+      ? this.viewSubscriptions.get(key)!.activeView().result()
+      : null
   }
-  getViewResultByViewNameAndArgs(e, t) {
-    let i = J(e, t);
-    return this.viewSubscriptions.has(i) ? this.viewSubscriptions.get(i).activeView().result() : null;
+
+  /**
+   * Gets view result by view name and args (original: getViewResultByViewNameAndArgs)
+   */
+  getViewResultByViewNameAndArgs(viewName: string, args: any): any {
+    const key = serializeArgs(viewName, args)
+    return this.viewSubscriptions.has(key)
+      ? this.viewSubscriptions.get(key)!.activeView().result()
+      : null
   }
-  subscribe(e, t, i, r) {
-    let a;
-    let s = this.getViewDef(e);
-    s.validateArguments(t).unwrap();
-    let o = J(s.name, t);
-    this.viewSubscriptions.has(o) ? a = this.viewSubscriptions.get(o) : (this.args.sessionId || this.emitter.emit({
-      type: "SESSION.SUBSCRIBE_BEFORE_SESSION_ID_SET",
-      sessionArgs: this.args,
-      viewName: s.name
-    }), a = new b(o, e, s, new S(o, this.args, t, {
-      logger: this.contextLogger,
-      analyticsLogger: this.analyticsLogger,
-      paginationQueryNodeMap: this.paginationQueryNodeMap,
-      computationObjectNodes: this.computationObjectNodes,
-      shouldBubbleUpNonNullableResultErrors: this.shouldBubbleUpNonNullableResultErrors,
-      forceMissingOptionals: this.forceMissingOptionalsForViews.get(s.name),
-      errorsLoggedForAnalyticsFraction: this.errorsLoggedForAnalyticsFraction,
-      emitter: this.emitter
-    }), this, r), this.viewSubscriptions.set(o, a));
-    let l = {
+
+  /**
+   * Subscribes to a view (original: subscribe)
+   */
+  subscribe(viewRef: any, args: any, observer: any, traceId?: any): any {
+    let subscription: ViewSubscription
+    const viewDef = this.getViewDef(viewRef)
+    viewDef.validateArguments(args).unwrap()
+    const key = serializeArgs(viewDef.name, args)
+    if (this.viewSubscriptions.has(key)) {
+      subscription = this.viewSubscriptions.get(key)!
+    } else {
+      if (!this.args.sessionId) {
+        this.emitter.emit({
+          type: 'SESSION.SUBSCRIBE_BEFORE_SESSION_ID_SET',
+          sessionArgs: this.args,
+          viewName: viewDef.name,
+        })
+      }
+      subscription = new ViewSubscription(
+        key,
+        viewRef,
+        viewDef,
+        new ViewContext(key, this.args, args, {
+          logger: this.contextLogger,
+          analyticsLogger: this.analyticsLogger,
+          paginationQueryNodeMap: this.paginationQueryNodeMap,
+          computationObjectNodes: this.computationObjectNodes,
+          shouldBubbleUpNonNullableResultErrors: this.shouldBubbleUpNonNullableResultErrors,
+          forceMissingOptionals: this.forceMissingOptionalsForViews.get(viewDef.name),
+          errorsLoggedForAnalyticsFraction: this.errorsLoggedForAnalyticsFraction,
+          emitter: this.emitter,
+        }),
+        this,
+        traceId,
+      )
+      this.viewSubscriptions.set(key, subscription)
+    }
+    const subscriptionObj = {
       id: this.nextSubscriptionId++,
-      view: e,
-      args: t,
-      observer: i,
+      view: viewRef,
+      args,
+      observer,
       unsubscribe: once(() => {
-        a.removeSubscription(l);
-        0 === a.getSubscriptionObservers().length && (this.viewSubscriptions.$$delete(o), a.destroy());
+        subscription.removeSubscription(subscriptionObj)
+        if (subscription.getSubscriptionObservers().length === 0) {
+          this.viewSubscriptions.delete(key)
+          subscription.destroy()
+        }
       }),
-      clientUnsubscribed: !1,
-      lastResult: null
-    };
-    a.addSubscription(l);
-    $$T0.nextTick(() => {
-      l.clientUnsubscribed || this.notifyObserver(a, l);
-    });
-    return l;
+      clientUnsubscribed: false,
+      lastResult: null,
+    }
+    subscription.addSubscription(subscriptionObj)
+    MainSessionStore.nextTick(() => {
+      if (!subscriptionObj.clientUnsubscribed) {
+        this.notifyObserver(subscription, subscriptionObj)
+      }
+    })
+    return subscriptionObj
   }
-  cleanupFailedSubscription(e) {
-    let t = this.viewSubscriptions.get(e);
-    if (t) {
-      for (let e of t.getSubscriptionObservers()) {
-        let t = {
-          status: "errors",
+
+  /**
+   * Cleans up failed subscription (original: cleanupFailedSubscription)
+   */
+  cleanupFailedSubscription(key: string): void {
+    const subscription = this.viewSubscriptions.get(key)
+    if (subscription) {
+      for (const sub of subscription.getSubscriptionObservers()) {
+        const result = {
+          status: 'errors',
           data: null,
-          errors: []
-        };
-        $$T0.nextTick(() => {
-          e.clientUnsubscribed || (e.observer(t), e.lastResult = t);
-        });
+          errors: [],
+        }
+        MainSessionStore.nextTick(() => {
+          if (!sub.clientUnsubscribed) {
+            sub.observer(result)
+            sub.lastResult = result
+          }
+        })
       }
-      this.failedViewSubscriptions.set(e, t);
-      this.viewSubscriptions.$$delete(e);
+      this.failedViewSubscriptions.set(key, subscription)
+      this.viewSubscriptions.delete(key)
     }
   }
-  hasActiveSubscriptions(e, t) {
-    let i = J(e, t);
-    let n = this.viewSubscriptions.get(i);
-    return !!n && n.getSubscriptionObservers().length > 0;
+
+  /**
+   * Checks if there are active subscriptions for a view (original: hasActiveSubscriptions)
+   */
+  hasActiveSubscriptions(viewName: string, args: any): boolean {
+    const key = serializeArgs(viewName, args)
+    const subscription = this.viewSubscriptions.get(key)
+    return !!subscription && subscription.getSubscriptionObservers().length > 0
   }
-  getActiveSubscription(e) {
-    let t = this.viewSubscriptions.get(e);
-    if (t) return {
-      viewRef: t.viewRef,
-      args: t.viewArgs(),
-      traceId: t.traceId
-    };
+
+  /**
+   * Gets active subscription by key (original: getActiveSubscription)
+   */
+  getActiveSubscription(key: string): { viewRef: any; args: any; traceId: any } | undefined {
+    const subscription = this.viewSubscriptions.get(key)
+    if (subscription) {
+      return {
+        viewRef: subscription.viewRef,
+        args: subscription.viewArgs(),
+        traceId: subscription.traceId,
+      }
+    }
+    return undefined
   }
-  uniqueSubscriptions() {
-    let e = [];
-    for (let [t, i] of this.failedViewSubscriptions.entries()) this.viewSubscriptions.has(t) || e.push({
-      viewRef: i.viewRef,
-      args: i.viewArgs(),
-      status: i.activeView().result().status,
-      viewDef: i.viewDef
-    });
-    for (let t of (this.failedViewSubscriptions.clear(), this.viewSubscriptions.values())) e.push({
-      viewRef: t.viewRef,
-      args: t.viewArgs(),
-      traceId: t.traceId,
-      status: t.activeView().result().status,
-      viewDef: t.viewDef
-    });
-    return e;
+
+  /**
+   * Returns all unique subscriptions (original: uniqueSubscriptions)
+   */
+  uniqueSubscriptions(): any[] {
+    const result: any[] = []
+    for (const [key, subscription] of this.failedViewSubscriptions.entries()) {
+      if (!this.viewSubscriptions.has(key)) {
+        result.push({
+          viewRef: subscription.viewRef,
+          args: subscription.viewArgs(),
+          status: subscription.activeView().result().status,
+          viewDef: subscription.viewDef,
+        })
+      }
+    }
+    this.failedViewSubscriptions.clear()
+    for (const subscription of this.viewSubscriptions.values()) {
+      result.push({
+        viewRef: subscription.viewRef,
+        args: subscription.viewArgs(),
+        traceId: subscription.traceId,
+        status: subscription.activeView().result().status,
+        viewDef: subscription.viewDef,
+      })
+    }
+    return result
   }
-  startReconnectionStateForPaginationQueries() {
-    for (let e of this.paginationQueryNodeMap.values()) e.startReconnectionState();
+
+  /**
+   * Starts reconnection state for pagination queries (original: startReconnectionStateForPaginationQueries)
+   */
+  startReconnectionStateForPaginationQueries(): void {
+    for (const node of this.paginationQueryNodeMap.values()) {
+      node.startReconnectionState()
+    }
   }
-  subscribeQuery(e, t) {
+
+  /**
+   * Subscribes to a query (original: subscribeQuery)
+   */
+  subscribeQuery(query: any, observer: any): () => void {
     this.emitter.emit({
-      type: "SESSION.SUBSCRIBE_QUERY",
-      query: e
-    });
-    let i = this.getStores(e.objectName);
-    return i ? i.queries.subscribe(e, t) : () => {};
+      type: 'SESSION.SUBSCRIBE_QUERY',
+      query,
+    })
+    const store = this.getStores(query.objectName)
+    return store ? store.queries.subscribe(query, observer) : () => {}
   }
-  requestPaginationChange(e, t, i) {
-    this.onPaginationChange(e, t.queryId, i);
-    this.notifyObservers();
+
+  /**
+   * Requests pagination change (original: requestPaginationChange)
+   */
+  requestPaginationChange(view: any, query: any, pagination: any): void {
+    this.onPaginationChange(view, query.queryId, pagination)
+    this.notifyObservers()
   }
-  subscribeComputation(e, t) {
+
+  /**
+   * Subscribes to a computation (original: subscribeComputation)
+   */
+  subscribeComputation(computation: any, observer: any): () => void {
     this.emitter.emit({
-      type: "SESSION.SUBSCRIBE_COMPUTATION",
-      computation: e
-    });
-    let i = this.getStores(e.objectName);
-    return i ? i.computations.subscribe(e, t) : () => {};
+      type: 'SESSION.SUBSCRIBE_COMPUTATION',
+      computation,
+    })
+    const store = this.getStores(computation.objectName)
+    return store ? store.computations.subscribe(computation, observer) : () => {}
   }
-  isInMutationBatch = !1;
-  shouldNotifyOnMutationBatchCompletion = !1;
-  batchMutations(e) {
-    this.isInMutationBatch = !0;
-    this.shouldNotifyOnMutationBatchCompletion = !1;
+
+  /**
+   * Batches mutations and notifies observers after completion (original: batchMutations)
+   */
+  batchMutations(fn: () => void): void {
+    this.isInMutationBatch = true
+    this.shouldNotifyOnMutationBatchCompletion = false
     try {
-      e();
+      fn()
     } finally {
-      this.isInMutationBatch = !1;
-      this.shouldNotifyOnMutationBatchCompletion && this.notifyObservers();
+      this.isInMutationBatch = false
+      if (this.shouldNotifyOnMutationBatchCompletion) {
+        this.notifyObservers()
+      }
     }
   }
-  notifyObservers() {
+
+  /**
+   * Notifies all observers (original: notifyObservers)
+   */
+  notifyObservers(): void {
     if (this.isInMutationBatch) {
-      this.shouldNotifyOnMutationBatchCompletion = !0;
-      return;
+      this.shouldNotifyOnMutationBatchCompletion = true
+      return
     }
-    for (let e of this.viewSubscriptions.values()) for (let t of e.getSubscriptionObservers()) this.notifyObserver(e, t);
-  }
-  notifyObserver(e, t) {
-    let i;
-    let n = e.activeView().result();
-    t.lastResult !== n && (t.lastResult?.status !== "loaded" || "loading" !== n.status || void 0 !== e.activeView().viewResultForDebugging) && (t.lastResult?.status === "loaded" && "errors" === n.status && this.emitter.emit({
-      type: "VIEW.STATE_TRANSITION",
-      viewName: e.viewRef._name,
-      transitionType: "LOADED_TO_ERROR",
-      userId: this.args.userId,
-      isInitialConnection: this.isInitialConnection(),
-      sessionId: this.args.sessionId || ""
-    }), t.lastResult?.status === "loaded" && t.lastResult?.errors.length === 0 && "loaded" === n.status && n.errors.length > 0 && this.emitter.emit({
-      type: "VIEW.STATE_TRANSITION",
-      viewName: e.viewRef._name,
-      transitionType: "LOADED_TO_LOADED_WITH_ERROR",
-      userId: this.args.userId,
-      isInitialConnection: this.isInitialConnection(),
-      sessionId: this.args.sessionId || ""
-    }), t.clientUnsubscribed || (t.observer(n), t.lastResult = n), n.errors && n.errors.length > 0 ? n.errors.every(e => e.retriable) && this.onRetriableViewFailure(e.key) : "loaded" === n.status && (i = this.getRetryCountOnResult(e.key)), this.emitter.emit({
-      type: "SESSION.NOTIFY_OBSERVERS",
-      view: e.viewRef,
-      args: e.viewArgs(),
-      result: n,
-      subscriptionId: t.id,
-      retryCount: i
-    }));
-  }
-  getStores(e) {
-    return this.stores[e] || (this.emitter.emit({
-      type: "SESSION.UNEXPECTED_OBJECT_NAME",
-      objectName: e
-    }), null);
-  }
-  getViewLoadType(e) {
-    let t = this.viewSubscriptions.get(e);
-    return t && "loading" !== t.activeView().result().status ? ConnectionAttemptTypes.Reinitialization : ConnectionAttemptTypes.Initial;
-  }
-  static nextTick(e) {
-    setTimeout(e, 0);
-  }
-  static async tick() {
-    return new Promise(e => {
-      this.nextTick(() => {
-        e();
-      });
-    });
-  }
-  setOptionalMissingForView(e, t) {
-    if (this.forceMissingOptionalsForViews.has(e)) {
-      let i = this.forceMissingOptionalsForViews.get(e);
-      this.forceMissingOptionalsForViews.set(e, [...i, t]);
-    } else this.forceMissingOptionalsForViews.set(e, [t]);
-    for (let [i, n] of this.viewSubscriptions.entries()) if (n.viewRef._name === e) for (let e of (n.disableViewCaching(), n.setOptionalMissing(t), n.getSubscriptionObservers())) this.notifyObserver(n, e);
-  }
-  unsetOptionalMissingForView(e) {
-    for (let [t, i] of this.viewSubscriptions.entries()) if (i.viewRef._name === e) {
-      for (let e of (i.unsetOptionalMissing(), i.getSubscriptionObservers())) this.notifyObserver(i, e);
-      i.enableViewCaching();
+    for (const subscription of this.viewSubscriptions.values()) {
+      for (const sub of subscription.getSubscriptionObservers()) {
+        this.notifyObserver(subscription, sub)
+      }
     }
-    this.forceMissingOptionalsForViews.$$delete(e);
   }
-  getViewSubscriptionsForTesting() {
-    return this.viewSubscriptions;
-  }
-  getViewSubscriptionsForDebugging() {
-    let e = {};
-    for (let [t, i] of this.viewSubscriptions.entries()) {
-      let n = {
-        ...i.activeView().root.result(),
-        optionalErrorPaths: i.activeView().root.getOptionalErrorPathsForDebugging()
-      };
-      "loading" === n.status && (n = {
-        ...n,
-        loadingPaths: i.activeView().root.getLoadingPathsForDebugging()
-      });
-      e[t] = n;
+
+  /**
+   * Notifies a single observer (original: notifyObserver)
+   */
+  notifyObserver(subscription: ViewSubscription, sub: any): void {
+    let retryCount: any
+    const result = subscription.activeView().result()
+    if (
+      sub.lastResult !== result &&
+      (
+        sub.lastResult?.status !== 'loaded' ||
+        result.status !== 'loading' ||
+        subscription.activeView().viewResultForDebugging !== undefined
+      )
+    ) {
+      if (
+        sub.lastResult?.status === 'loaded' &&
+        result.status === 'errors'
+      ) {
+        this.emitter.emit({
+          type: 'VIEW.STATE_TRANSITION',
+          viewName: subscription.viewRef._name,
+          transitionType: 'LOADED_TO_ERROR',
+          userId: this.args.userId,
+          isInitialConnection: this.isInitialConnection(),
+          sessionId: this.args.sessionId || '',
+        })
+      }
+      if (
+        sub.lastResult?.status === 'loaded' &&
+        sub.lastResult?.errors.length === 0 &&
+        result.status === 'loaded' &&
+        result.errors.length > 0
+      ) {
+        this.emitter.emit({
+          type: 'VIEW.STATE_TRANSITION',
+          viewName: subscription.viewRef._name,
+          transitionType: 'LOADED_TO_LOADED_WITH_ERROR',
+          userId: this.args.userId,
+          isInitialConnection: this.isInitialConnection(),
+          sessionId: this.args.sessionId || '',
+        })
+      }
+      if (!sub.clientUnsubscribed) {
+        sub.observer(result)
+        sub.lastResult = result
+      }
+      if (result.errors && result.errors.length > 0) {
+        if (result.errors.every((err: any) => err.retriable)) {
+          this.onRetriableViewFailure(subscription.key)
+        }
+      } else if (result.status === 'loaded') {
+        retryCount = this.getRetryCountOnResult(subscription.key)
+      }
+      this.emitter.emit({
+        type: 'SESSION.NOTIFY_OBSERVERS',
+        view: subscription.viewRef,
+        args: subscription.viewArgs(),
+        result,
+        subscriptionId: sub.id,
+        retryCount,
+      })
     }
-    return e;
   }
-  prettyPrintLiveViewTree(e) {
-    let t = "";
-    let i = null;
-    if ("string" == typeof e) {
-      if (!this.viewSubscriptions.has(e)) {
-        let e = [...this.viewSubscriptions.keys()].join("\n").replace(/"/g, '\\"');
-        throw Error(`Subscription key not found, possible options: 
-${e}`);
-      }
-      t = e;
-      i = this.viewSubscriptions.get(t).activeView().root;
-    } else if (e instanceof _$$A2) {
-      t = e.parent.key;
-      i = e;
-    } else throw Error("Please enter a subscription key or a LiveViewInstanceNode");
-    let r = i.context.viewArgs;
-    let a = i.debugState(e => {
-      if (e instanceof _$$A2) return `I: ${e.instance.id ? e.instance.id : "Root Instance"}`;
-      if (e instanceof Ay) {
-        let t = [];
-        let i = e.query.queryDef;
-        r && Object.keys(r).forEach(e => {
-          t.push(`${i.objectDef.name}.${e} = ${r[e]}`);
-        });
-        let n = `Q: ${i.objectFieldDef.name} - `;
-        t.length > 0 ? n += `args:(${t.join()})` : n += `(${i.objectDef.name})`;
-        return n;
-      }
-      if (e instanceof _$$A4 || e instanceof _$$A5) {
-        let t = e.result();
-        return "loaded" === t.status ? `C: ${e.fieldName} = ${t.data}` : `C: ${e.fieldName} is loading`;
-      }
-      if (e instanceof _$$A3) return "PaginationQueryNode";
-      noop(e);
-      return Error("Unexpected node type");
-    });
-    return `Logging LiveView tree for subscription: ${t} 
-View Name: ${i.queryDef.objectFieldDef.name} 
-` + _$$A.debugStateAsString(a);
+
+  /**
+   * Gets store for an object name (original: getStores)
+   */
+  getStores(objectName: string): { queries: ObjectStore; computations: ComputationStore } | null {
+    if (this.stores[objectName]) return this.stores[objectName]
+    this.emitter.emit({
+      type: 'SESSION.UNEXPECTED_OBJECT_NAME',
+      objectName,
+    })
+    return null
   }
-  setViewResultForDebugging(e, t, i, n) {
-    let r = this.viewSubscriptions.get(e);
-    r ? (r.activeView().setViewResultForDebugging({
-      status: t,
-      data: i,
-      errors: n
-    }), this.notifyObservers()) : console.log(`setViewResultForDebugging: ${e} doesn't exist`);
+
+  /**
+   * Gets view load type (original: getViewLoadType)
+   */
+  getViewLoadType(key: string): ConnectionAttemptTypes {
+    const subscription = this.viewSubscriptions.get(key)
+    return subscription && subscription.activeView().result().status !== 'loading'
+      ? ConnectionAttemptTypes.Reinitialization
+      : ConnectionAttemptTypes.Initial
   }
-  unsetViewResultForDebugging(e) {
-    let t = this.viewSubscriptions.get(e);
-    t ? (t.activeView().setViewResultForDebugging(void 0), this.notifyObservers()) : console.log(`unsetViewResultForDebugging: ${e} doesn't exist`);
+
+  /**
+   * Schedules a function for next tick (original: nextTick)
+   */
+  static nextTick(fn: () => void): void {
+    setTimeout(fn, 0)
+  }
+
+  /**
+   * Returns a promise resolved on next tick (original: tick)
+   */
+  static async tick(): Promise<void> {
+    return new Promise((resolve) => {
+      MainSessionStore.nextTick(() => {
+        resolve()
+      })
+    })
+  }
+
+  /**
+   * Sets optional missing for a view (original: setOptionalMissingForView)
+   */
+  setOptionalMissingForView(viewName: string, field: string): void {
+    if (this.forceMissingOptionalsForViews.has(viewName)) {
+      const arr = this.forceMissingOptionalsForViews.get(viewName)!
+      this.forceMissingOptionalsForViews.set(viewName, [...arr, field])
+    } else {
+      this.forceMissingOptionalsForViews.set(viewName, [field])
+    }
+    for (const [, subscription] of this.viewSubscriptions.entries()) {
+      if (subscription.viewRef._name === viewName) {
+        subscription.disableViewCaching()
+        subscription.setOptionalMissing(field)
+        for (const sub of subscription.getSubscriptionObservers()) {
+          this.notifyObserver(subscription, sub)
+        }
+      }
+    }
+  }
+
+  /**
+   * Unsets optional missing for a view (original: unsetOptionalMissingForView)
+   */
+  unsetOptionalMissingForView(viewName: string): void {
+    for (const [, subscription] of this.viewSubscriptions.entries()) {
+      if (subscription.viewRef._name === viewName) {
+        subscription.unsetOptionalMissing()
+        for (const sub of subscription.getSubscriptionObservers()) {
+          this.notifyObserver(subscription, sub)
+        }
+        subscription.enableViewCaching()
+      }
+    }
+    this.forceMissingOptionalsForViews.delete(viewName)
+  }
+
+  /**
+   * Gets view subscriptions for testing (original: getViewSubscriptionsForTesting)
+   */
+  getViewSubscriptionsForTesting(): Map<string, ViewSubscription> {
+    return this.viewSubscriptions
+  }
+
+  /**
+   * Gets view subscriptions for debugging (original: getViewSubscriptionsForDebugging)
+   */
+  getViewSubscriptionsForDebugging(): Record<string, any> {
+    const result: Record<string, any> = {}
+    for (const [key, subscription] of this.viewSubscriptions.entries()) {
+      let debugResult = {
+        ...subscription.activeView().root.result(),
+        optionalErrorPaths: subscription.activeView().root.getOptionalErrorPathsForDebugging(),
+      }
+      if (debugResult.status === 'loading') {
+        debugResult = {
+          ...debugResult,
+          loadingPaths: subscription.activeView().root.getLoadingPathsForDebugging(),
+        }
+      }
+      result[key] = debugResult
+    }
+    return result
+  }
+
+  /**
+   * Pretty prints live view tree for a subscription (original: prettyPrintLiveViewTree)
+   */
+  prettyPrintLiveViewTree(input: string | QueryInstanceNode): string {
+    let key = ''
+    let root: any = null
+    if (typeof input === 'string') {
+      if (!this.viewSubscriptions.has(input)) {
+        const options = [...this.viewSubscriptions.keys()].join('\n').replace(/"/g, '\\"')
+        throw new Error(`Subscription key not found, possible options: \n${options}`)
+      }
+      key = input
+      root = this.viewSubscriptions.get(key)!.activeView().root
+    } else if (input instanceof QueryInstanceNode) {
+      key = input.parent.key
+      root = input
+    } else {
+      throw new TypeError('Please enter a subscription key or a LiveViewInstanceNode')
+    }
+    const viewArgs = root.context.viewArgs
+    const debugState = root.debugState((node: any) => {
+      if (node instanceof QueryInstanceNode)
+        return `I: ${node.instance.id ? node.instance.id : 'Root Instance'}`
+      if (node instanceof QueryNode) {
+        const argsArr: string[] = []
+        const queryDef = node.query.queryDef
+        if (viewArgs) {
+          Object.keys(viewArgs).forEach((arg) => {
+            argsArr.push(`${queryDef.objectDef.name}.${arg} = ${viewArgs[arg]}`)
+          })
+        }
+        let label = `Q: ${queryDef.objectFieldDef.name} - `
+        label += argsArr.length > 0 ? `args:(${argsArr.join()})` : `(${queryDef.objectDef.name})`
+        return label
+      }
+      if (node instanceof ComputationHandler || node instanceof ComputationObjectNode) {
+        const result = node.result()
+        return result.status === 'loaded'
+          ? `C: ${node.fieldName} = ${result.data}`
+          : `C: ${node.fieldName} is loading`
+      }
+      if (node instanceof PaginatedQueryNode)
+        return 'PaginationQueryNode'
+      noop(node)
+      return new Error('Unexpected node type')
+    })
+    return `Logging LiveView tree for subscription: ${key} 
+View Name: ${root.queryDef.objectFieldDef.name} 
+${LiveViewNode.debugStateAsString(debugState)}`
+  }
+
+  /**
+   * Sets view result for debugging (original: setViewResultForDebugging)
+   */
+  setViewResultForDebugging(key: string, status: string, data: any, errors: any): void {
+    const subscription = this.viewSubscriptions.get(key)
+    if (subscription) {
+      subscription.activeView().setViewResultForDebugging({
+        status,
+        data,
+        errors,
+      })
+      this.notifyObservers()
+    } else {
+      console.log(`setViewResultForDebugging: ${key} doesn't exist`)
+    }
+  }
+
+  /**
+   * Unsets view result for debugging (original: unsetViewResultForDebugging)
+   */
+  unsetViewResultForDebugging(key: string): void {
+    const subscription = this.viewSubscriptions.get(key)
+    if (subscription) {
+      subscription.activeView().setViewResultForDebugging(undefined)
+      this.notifyObservers()
+    } else {
+      console.log(`unsetViewResultForDebugging: ${key} doesn't exist`)
+    }
   }
 }
-function k(e, t) {
-  e.has(t) || e.set(t, new Set());
-  return e.get(t);
+
+/**
+ * Helper to get or create a Set in a Map (original: function k)
+ */
+function getOrCreateSet<K, V>(map: Map<K, Set<V>>, key: K): Set<V> {
+  if (!map.has(key)) map.set(key, new Set<V>())
+  return map.get(key)!
 }
-export const A = $$T0;
+
+/** Exported session store (original: export const A = $$T0) */
+export const A = MainSessionStore

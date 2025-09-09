@@ -14,7 +14,7 @@ import { D as _$$D7 } from '../905/12032';
 import { L as _$$L3 } from '../905/13390';
 import { Sc, VP } from '../905/18797';
 import { P4 as _$$P2 } from '../905/18800';
-import { DD, k9, zN } from '../905/19536';
+import { useMemoCustom, useMemoStable, useStableMemo } from '../905/19536';
 import { a as _$$a8 } from '../905/29104';
 import { z4 } from '../905/37051';
 import { bL } from '../905/38914';
@@ -76,7 +76,7 @@ import { e as _$$e3 } from '../905/280005';
 import { h as _$$h5 } from '../905/284399';
 import { V as _$$V2 } from '../905/292707';
 import { e as _$$e1 } from '../905/295932';
-import { F as _$$F7 } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R5 } from '../905/304671';
 import { b as _$$b3, c as _$$c3 } from '../905/308099';
@@ -87,7 +87,7 @@ import { V as _$$V4 } from '../905/355181';
 import { Q as _$$Q5 } from '../905/363675';
 import { n as _$$n } from '../905/366526';
 import { c as _$$c5 } from '../905/370443';
-import { iZ as _$$iZ, TA } from '../905/372672';
+import { selectCurrentUser, getUserId } from '../905/372672';
 import { k as _$$k2 } from '../905/381239';
 import { c2 as _$$c } from '../905/382883';
 import { e as _$$e10 } from '../905/383776';
@@ -136,7 +136,7 @@ import { U as _$$U3 } from '../905/566881';
 import { d as _$$d8, O as _$$O } from '../905/572941';
 import { s as _$$s4 } from '../905/573154';
 import { jO } from '../905/573265';
-import { zX } from '../905/576487';
+import { VisualBellIcon } from '../905/576487';
 import { e as _$$e7 } from '../905/579635';
 import { uo as _$$uo } from '../905/581543';
 import { k as _$$k6 } from '../905/582200';
@@ -153,7 +153,7 @@ import { getFeatureFlags } from '../905/601108';
 import { K as _$$K3 } from '../905/604638';
 import { QL } from '../905/609392';
 import { i as _$$i3 } from '../905/610691';
-import { Ay } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { rl as _$$rl } from '../905/612685';
 import { J as _$$J5 } from '../905/614223';
 import { b as _$$b4, c as _$$c4 } from '../905/618904';
@@ -225,7 +225,7 @@ import { bL as _$$bL2, c$ as _$$c$ } from '../905/867927';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { createDeferredPromise } from '../905/874553';
 import { Cp as _$$Cp, ow as _$$ow2, KQ, Ty, U$, UA, WE } from '../905/879323';
-import { g as _$$g } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { Db } from '../905/881862';
 import { NP } from '../905/889931';
 import { IY } from '../905/901759';
@@ -294,7 +294,7 @@ import { ZS } from '../figma_app/33126';
 import { ZC } from '../figma_app/39751';
 import { Y9 as _$$Y4 } from '../figma_app/42724';
 import { i as _$$i2 } from '../figma_app/43065';
-import { _Dk, aAC, CH9, ehp, fjN, hqi, L8O, LYR, NMv, O24, oMw, ozA, SCo, VOM, xaw, yFE } from '../figma_app/43951';
+import { FileCreationDropdownView, ComponentByKey, PinnedFiles, OpenEditorFileData, DesktopPushNotificationView, ActiveFileUsersForFileView, FolderPageView, LibraryPublish, FileThumbnail, ProductTrialsView, ClientReloadView, LegacySourceStyleData, RecentIdleTimeoutSettingChangeView, DesktopNewTabRecentFilesView, RecentNetworkControlRejectionView, StyleByKey } from '../figma_app/43951';
 import { Zm as _$$Zm } from '../figma_app/45218';
 import { e as _$$e11, n as _$$n5 } from '../figma_app/48514';
 import { Q6 } from '../figma_app/48566';
@@ -341,7 +341,7 @@ import { FFileType, FPlanFeatureType, FBillingEntityType, FProductAccessType, FP
 import { Bx, kx } from '../figma_app/191804';
 import { zT } from '../figma_app/192142';
 import { CR, Np } from '../figma_app/193867';
-import { zk } from '../figma_app/198712';
+import { yesNoTrackingEnum } from '../figma_app/198712';
 import { a6 as _$$a6, M3 } from '../figma_app/198840';
 import { LK } from '../figma_app/199513';
 import { NM } from '../figma_app/204891';
@@ -512,7 +512,7 @@ import { Z as _$$Z } from '../figma_app/788481';
 import { em as _$$em, eN as _$$eN, lq as _$$lq, G5, I_ } from '../figma_app/792958';
 import { M0 as _$$M5 } from '../figma_app/803054';
 import { Ro } from '../figma_app/805373';
-import { cZ as _$$cZ, o6 as _$$o6, rf as _$$rf, Pt } from '../figma_app/806412';
+import { handleMouseEvent, RecordingPureComponent, useHandleMouseEvent, generateRecordingKey } from '../figma_app/878298';
 import { O as _$$O3 } from '../figma_app/806649';
 import { fD } from '../figma_app/816671';
 import { I as _$$I3 } from '../figma_app/827540';
@@ -575,7 +575,7 @@ import db from '../vendor/128080';
 import { rH as _$$rH, Ck, fK, IN, zB } from '../vendor/167083';
 import av from '../vendor/260986';
 import { P as _$$P } from '../vendor/348225';
-import { useSelector, connect, useStore, useDispatch } from '../vendor/514228';
+import { useSelector, connect, useStore, useDispatch } from 'react-redux';
 import { useAtomValue } from '../vendor/525001';
 import { N as _$$N7 } from '../vendor/930821';
 import { flushSync } from '../vendor/944059';
@@ -672,9 +672,9 @@ function eu() {
   let e = useDispatch();
   !function () {
     let e = useStore();
-    let t = useMemo(() => _$$g(), []);
+    let t = useMemo(() => generateUUIDv4(), []);
     let r = useAtomWithSubscription(_$$d2);
-    let n = Rs(fjN, {
+    let n = Rs(DesktopPushNotificationView, {
       cacheNonce: t
     }, {
       enabled: !r
@@ -1873,7 +1873,7 @@ let nG = memo(e => {
 });
 let nV = memo(() => {
   let e = useSelector(e => e.mirror.appModel.isInitialized);
-  let t = TA();
+  let t = getUserId();
   return !e || t ? null : getInitialOptions().consent_region === 'implicit' ? jsx(C$, {
     variant: _$$a3.FILE_VIEWER,
     dismissIcon: _$$A,
@@ -1986,7 +1986,7 @@ let n0 = new _$$b({
 var n5 = (e => (e[e.ReloadNow = 0] = 'ReloadNow', e[e.ReloadWhenConvenient = 1] = 'ReloadWhenConvenient', e))(n5 || {});
 function n6(e) {
   getFeatureFlags().ip_restrictions_livegraph_auth_failure && e.type === 'CONNECTION_STATE' && e.state.type === 'error' && e.state.errorType === 'authFail' && getRequest('/api/ip_check').catch(e => {
-    if (e?.data?.status === 403 && ['ip_allowlist', 'ip_account_restriction'].includes(e?.data?.reason) && !Ay.location.pathname.includes('ip_account_restriction')) {
+    if (e?.data?.status === 403 && ['ip_allowlist', 'ip_account_restriction'].includes(e?.data?.reason) && !customHistory.location.pathname.includes('ip_account_restriction')) {
       let t = e.data.reason === 'ip_account_restriction' ? 'network_access_restriction' : e.data.reason;
       let r = `/ip_account_restriction?reason=${t}&redirect_uri=${encodeURIComponent(window.location.href)}`;
       location.assign(r);
@@ -3441,7 +3441,7 @@ function si() {
   let a = useRef(null);
   _$$Z2(i === 'legacy' ? 'light' : i, a, e);
   let s = _$$E3(e);
-  let o = zN(s ? e.urlParams : null);
+  let o = useStableMemo(s ? e.urlParams : null);
   return s ? jsx('div', {
     ref: a,
     style: _$$sx2.overflowHidden.m0.colorBg.colorText.add({
@@ -4811,7 +4811,7 @@ function oG({
 let oz = M4.Mutation(async e => {
   await Eh.validateTrial(e);
 });
-let oK = createRemovableAtomFamily(e => Z1(O24.Query({
+let oK = createRemovableAtomFamily(e => Z1(ProductTrialsView.Query({
   orgId: e
 }), e => e?.org?.canAdmin && e.org.billingTrials?.length ? function (e) {
   let t = e.filter(e => e.status === _$$Q4.PENDING && e.trialType === FBillingEntityType.PRODUCT);
@@ -5275,7 +5275,7 @@ function lj({
   }
 }
 function lJ() {
-  let [e] = IT(VOM({}));
+  let [e] = IT(DesktopNewTabRecentFilesView({}));
   let t = useMemo(() => e.transform(e => _$$YN2(e.currentUser.recentFiles)), [e]);
   useEffect(() => {
     t.status === 'loaded' && Wn(t.data);
@@ -5303,10 +5303,10 @@ function l5({
   recentItems: e
 }) {
   let t = useDispatch();
-  let r = _$$iZ();
+  let r = selectCurrentUser();
   let n = useSelector(e => e.activeFileUsers);
   let i = lJ().status === 'loaded';
-  let a = DD(() => filterNotNullish(e.map(e => e.type === _$$nb.FILE || e.type === _$$nb.REPO ? l1(e).key : null)), [e], (e, t) => {
+  let a = useMemoCustom(() => filterNotNullish(e.map(e => e.type === _$$nb.FILE || e.type === _$$nb.REPO ? l1(e).key : null)), [e], (e, t) => {
     let r = new Set(e);
     for (let e of t) {
       if (!r.has(e)) return !1;
@@ -5317,7 +5317,7 @@ function l5({
   let s = useMemo(() => a.map(e => ({
     fileKey: e
   })), [a]);
-  let o = _$$p(hqi, s, {
+  let o = _$$p(ActiveFileUsersForFileView, s, {
     enabled: !0
   });
   useEffect(() => {
@@ -5605,7 +5605,7 @@ function dr() {
   let f = function ({
     enabled: e = !0
   } = {}) {
-    let t = Rs(_Dk, {
+    let t = Rs(FileCreationDropdownView, {
       orgId: null
     }, {
       enabled: e
@@ -5678,7 +5678,7 @@ function dr() {
     o.current && c(o.current.scrollTop);
   }, [o]);
   let N = parsePxNumber('-120px');
-  let C = TA();
+  let C = getUserId();
   IT(_$$OL({
     userId: C ?? ''
   }), {
@@ -5821,7 +5821,7 @@ function dR() {
       let r = useMemo(() => t.map(e => ({
         key: e
       })), [t]);
-      _$$p(aAC, r, {
+      _$$p(ComponentByKey, r, {
         enabled: e
       });
     }();
@@ -5837,7 +5837,7 @@ function dR() {
         key: t,
         openFileKey: e
       })), [o, e]);
-      let d = _$$p(yFE, l);
+      let d = _$$p(StyleByKey, l);
       let c = useMemo(() => dO(d), [d]);
       let u = useMemo(() => ({
         ...a,
@@ -5885,7 +5885,7 @@ function dR() {
         key: t,
         openFileKey: e
       })), [s, e]);
-      let l = _$$p(yFE, o);
+      let l = _$$p(StyleByKey, o);
       return {
         localUnpublishedStyles: useMemo(() => dO(l), [l]),
         unpublishedLocalStyleKeyToNodeIds: s,
@@ -5992,7 +5992,7 @@ function dB({
   !function () {
     let e = useDispatch();
     let t = _$$tS();
-    let r = Rs(ozA, {
+    let r = Rs(LegacySourceStyleData, {
       fileKey: t ?? ''
     }, {
       enabled: !!t
@@ -6021,7 +6021,7 @@ function dG({
     let t = useDispatch();
     let r = useAtomWithSubscription(dU);
     let n = _$$ud();
-    let i = k9(() => {
+    let i = useMemoStable(() => {
       let e = {};
       for (let t of Object.values(n)) {
         let r = t?.library_key;
@@ -6058,7 +6058,7 @@ function dH() {
     let d = useRef(200);
     let c = useMemo(() => r.state === Qx.UPLOADING ? r.libraryPublishId : null, [r]);
     o !== c && (l(c), i(0), s(void 0));
-    let u = Rs(LYR, {
+    let u = Rs(LibraryPublish, {
       id: c || ''
     }, {
       enabled: !!c
@@ -6185,7 +6185,7 @@ function dH() {
       if (_ || (s(t => (t || onPublishProgress({
         publishType: r.publishType,
         dispatch: e,
-        icon: zX.PROGRESS,
+        icon: VisualBellIcon.PROGRESS,
         progressKey: 'library-publish'
       }), u.count)), e(_$$h8({
         key: 'library-publish',
@@ -6260,7 +6260,7 @@ let dX = {
 };
 function dJ() {
   let e = Td();
-  let [t] = _$$IT(ehp({
+  let [t] = _$$IT(OpenEditorFileData({
     fileKey: e
   }), {
     enabled: !!e
@@ -6372,7 +6372,7 @@ let cr = memo(({
   let u = useCallback(t => {
     d(e, t);
   }, [d, e]);
-  let p = Rs(NMv({
+  let p = Rs(FileThumbnail({
     fileKey: e.file.key
   })).unwrapOr(void 0)?.file;
   return jsxs('div', {
@@ -6495,7 +6495,7 @@ function co() {
   let n = r.unwrapOr(void 0)?.files;
   assert(!!n, 'Files is undefined');
   assert(n.length > 0, 'No files in folder');
-  let [i] = IT(CH9({
+  let [i] = IT(PinnedFiles({
     folderId: e
   }));
   mI(i);
@@ -6528,7 +6528,7 @@ function cc() {
 function cu() {
   let e = dJ();
   assert(!!e, 'Folder id is undefined');
-  let [t] = IT(CH9({
+  let [t] = IT(PinnedFiles({
     folderId: e
   }));
   let [r] = mI(t);
@@ -6601,7 +6601,7 @@ function cm() {
 function cg() {
   let e = dJ();
   assert(!!e, 'Folder id is undefined');
-  let [t] = IT(L8O({
+  let [t] = IT(FolderPageView({
     projectId: e
   }));
   let [r] = mI(t);
@@ -6686,7 +6686,7 @@ function cE() {
 }
 function cX() {
   let e = useDispatch();
-  let t = !_$$iZ();
+  let t = !selectCurrentUser();
   let r = _$$e11();
   let n = _$$xo();
   let i = _$$l5();
@@ -6726,12 +6726,12 @@ function c2() {
   let e = useDispatch();
   let t = q5();
   let r = _$$tS();
-  let n = _$$iZ();
+  let n = selectCurrentUser();
   let i = function () {
     let e = q5();
     let t = _$$J6();
     let r = _$$tS();
-    let n = _$$iZ();
+    let n = selectCurrentUser();
     let {
       userLacksLicenseAccess
     } = KI({
@@ -6751,7 +6751,7 @@ function c2() {
   let u = !!t && !!r;
   let _ = u && !!n && n.id !== t.creatorId;
   let h = u && t.canView && !t.canEdit;
-  let m = 'prevSelectedView' in (Ay.location.state ?? {});
+  let m = 'prevSelectedView' in (customHistory.location.state ?? {});
   let g = useRef(void 0);
   d.view === 'fullscreen' && void 0 !== d.commentThreadId && void 0 === g.current && (g.current = d.commentThreadId);
   let f = getSessionStorage();
@@ -6790,7 +6790,7 @@ function c2() {
 }
 let c6 = _$$ex('dev_mode_toggle_disabled_tracked_tooltip', () => {
   let e = _$$U4();
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let r = D6('ModeSwitcherTrackedTooltip').unwrapOr(null);
   let n = r?.planKey.type === FOrganizationLevelType.TEAM;
   let i = q5();
@@ -6861,7 +6861,7 @@ function ue({
   tooltipType: n,
   onClick_UI3_DO_NOT_REUSE: i
 }) {
-  let a = _$$iZ();
+  let a = selectCurrentUser();
   let s = q5();
   let {
     onModeSwitch,
@@ -6869,7 +6869,7 @@ function ue({
     isDesignViewLoaded,
     isDevHandoffViewLoaded
   } = _$$eJ();
-  let p = _$$rf(Pt('designToolbelt', 'toggleDevMode'), 'click', () => {
+  let p = useHandleMouseEvent(generateRecordingKey('designToolbelt', 'toggleDevMode'), 'click', () => {
     i?.();
     e || onModeSwitch(t ? 'design' : 'handoff');
   });
@@ -6913,7 +6913,7 @@ function ut({
   let i = U4();
   let a = _$$_I();
   let s = _$$xo();
-  let o = _$$iZ();
+  let o = selectCurrentUser();
   let d = !!hA() && a;
   !function () {
     let e = useDispatch();
@@ -6931,14 +6931,14 @@ function ut({
         let a;
         let c;
         n ? (i = s ? getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_dev_mode') : o ? getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_draw') : getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.switched_to_design'), a = s ? 'dev-mode' : o ? 'draw-mode' : 'design-mode', c = 3e3) : (i = s ? getI18nString('dev_handoff.inspect_mode.switched_to_inspect') : getI18nString('dev_handoff.inspect_mode.switched_to_design'), a = s ? 'dev-mode' : 'design-mode', c = 1200);
-        l.has(t) || r ? (l.$$delete(t), d(new Set(l))) : (e(_$$F7.dequeue({
+        l.has(t) || r ? (l.$$delete(t), d(new Set(l))) : (e(VisualBellActions.dequeue({
           matchType: 'switched_editor_mode'
-        })), e(_$$F7.enqueue({
+        })), e(VisualBellActions.enqueue({
           type: 'switched_editor_mode',
           message: i,
           delay: 200,
           timeoutOverride: c
-        })), e(_$$F7.enqueue({
+        })), e(VisualBellActions.enqueue({
           type: `${xM}-switched-to-${a}`,
           message: i,
           role: 'status',
@@ -7647,7 +7647,7 @@ function pm(e) {
           name: 'layer_header_button',
           children: jsx(_$$F8, {
             flyoutConfig: e,
-            recordingKey: Pt(If, e.flyoutRecordingKey)
+            recordingKey: generateRecordingKey(If, e.flyoutRecordingKey)
           })
         }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(_$$E8, {
           name: 'layer_header_button',
@@ -7661,7 +7661,7 @@ function pm(e) {
           children: jsx(QE, {
             item: e,
             numUnreadComments: 0,
-            recordingKey: Pt(If, e.recordingKey)
+            recordingKey: generateRecordingKey(If, e.recordingKey)
           })
         }, e.recordingKey) : e.type === ZU.CUSTOM_ACTION ? jsx(CX, {
           item: e
@@ -7904,7 +7904,7 @@ function pB() {
   let i = getObservableValue(AppStateTsApi?.offsetPathState().minSliderOffset, 0);
   let a = getObservableValue(AppStateTsApi?.offsetPathState().maxSliderOffset, 0);
   let s = (e, r) => {
-    r === zk.YES && t('change_offset_with_slider');
+    r === yesNoTrackingEnum.YES && t('change_offset_with_slider');
     OffsetPathTsApi?.setOffset(e);
     OffsetPathTsApi?.apply();
   };
@@ -8172,7 +8172,7 @@ function p$({
     updateWatchedStablePaths
   } = Cn();
   let o = _$$e_();
-  let d = TA();
+  let d = getUserId();
   let c = _$$p3('showUi');
   let u = useFullscreenReady();
   return jsx(Fragment, {
@@ -8261,7 +8261,7 @@ let p4 = {
 let _r = 'notification--button--FF-NW text--_negText--j9g-L';
 let _n = 'notification--action--v-pvn';
 var _i = (e => (e[e.BOTTOM_RIGHT = 0] = 'BOTTOM_RIGHT', e[e.TOP_CENTER = 1] = 'TOP_CENTER', e))(_i || {});
-class _a extends _$$o6 {
+class _a extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.notificationStyle = () => {
@@ -8291,7 +8291,7 @@ class _a extends _$$o6 {
       throw new Error('position must be implemented in subclass.');
     };
     this.onDisplay = null;
-    this.onAccept = _$$cZ(this, 'click', e => {
+    this.onAccept = handleMouseEvent(this, 'click', e => {
       e.stopPropagation();
       this.getCurrentNotif() && (this.actionCallback(), this.dequeueNotification());
     });
@@ -8333,7 +8333,7 @@ class _a extends _$$o6 {
             className: _n,
             children: jsx(_$$E6, {
               onClick: this.onAccept,
-              recordingKey: Pt(this.props, 'accept'),
+              recordingKey: generateRecordingKey(this.props, 'accept'),
               className: _r,
               children: n
             })
@@ -8552,7 +8552,7 @@ function _I() {
     })]
   });
   let d = () => {
-    Ay.redirect('/login?cont=', '_blank');
+    customHistory.redirect('/login?cont=', '_blank');
   };
   return jsx(_$$w, {
     children: jsx('div', {
@@ -8776,8 +8776,8 @@ let _C = memo(() => {
   (function () {
     let e = useDispatch();
     let t = function () {
-      let e = useMemo(() => _$$g(), []);
-      let t = Rs(oMw, {
+      let e = useMemo(() => generateUUIDv4(), []);
+      let t = Rs(ClientReloadView, {
         cacheNonce: e
       });
       return useMemo(() => {
@@ -8826,8 +8826,8 @@ let _C = memo(() => {
     }, [e, t.shouldReload, t.reason]);
   })();
   (function () {
-    let e = useMemo(() => _$$g(), []);
-    let t = Rs(xaw, {
+    let e = useMemo(() => generateUUIDv4(), []);
+    let t = Rs(RecentNetworkControlRejectionView, {
       cacheNonce: e
     });
     useEffect(() => {
@@ -8849,8 +8849,8 @@ let _C = memo(() => {
   })();
   (function () {
     let e = debugState;
-    let t = useMemo(() => _$$g(), []);
-    let r = Rs(SCo, {
+    let t = useMemo(() => generateUUIDv4(), []);
+    let r = Rs(RecentIdleTimeoutSettingChangeView, {
       cacheNonce: t
     });
     useEffect(() => {
@@ -8861,7 +8861,7 @@ let _C = memo(() => {
       });
     }, [r, e]);
   })();
-  let s = zN({
+  let s = useStableMemo({
     back: getI18nString('common.back'),
     close: getI18nString('common.close'),
     danger: getI18nString('common.danger'),
@@ -8932,7 +8932,7 @@ let _O = createDeferredPromise();
 _$$v.setDelegate(new Bf());
 (function (e) {
   if (!getFeatureFlags().web_vitals_report) return;
-  let t = Ay.location.pathname + Ay.location.search;
+  let t = customHistory.location.pathname + customHistory.location.search;
   let r = !!document.querySelector('meta[name="is_preload_streaming"]');
   let n = !!document.querySelector('meta[name="is_serving_resized_image"]');
   function i(i) {
@@ -8943,7 +8943,7 @@ _$$v.setDelegate(new Bf());
       id: i.id,
       value: i.value,
       initialPath: t,
-      normalized_current_path: normalizePathnameStrict(Ay.location.pathname),
+      normalized_current_path: normalizePathnameStrict(customHistory.location.pathname),
       bundle: e,
       used_codesplitting: !0,
       bundle_streaming: r,
@@ -8966,8 +8966,8 @@ _$$v.setDelegate(new Bf());
       }(),
       value: i.timeStamp,
       initialPath: t,
-      normalized_current_path: normalizePathnameStrict(Ay.location.pathname),
-      id: _$$g(),
+      normalized_current_path: normalizePathnameStrict(customHistory.location.pathname),
+      id: generateUUIDv4(),
       bundle: e,
       used_codesplitting: !0,
       bundle_streaming: r,
@@ -9045,9 +9045,9 @@ function _P() {
   });
 }
 function _D() {
-  let e = parseAndNormalizeQuery(Ay.location.search);
+  let e = parseAndNormalizeQuery(customHistory.location.search);
   let t = FFileType.DESIGN;
-  e.editor_type === 'whiteboard' || e.type === 'whiteboard' || Ay.location.pathname === '/jam' || Ay.location.pathname === '/board/new' ? t = FFileType.WHITEBOARD : Ay.location.pathname === '/slides/new' || e.type === 'slides' || e.editor_type === 'slides' ? t = FFileType.SLIDES : getFeatureFlags().sites && (Ay.location.pathname === '/site/new' || e.type === 'sites' || e.editor_type === 'sites') ? t = FFileType.SITES : getFeatureFlags().cooper && (Ay.location.pathname === '/buzz/new' || e.type === 'buzz' || e.editor_type === 'buzz' || e.type === 'cooper' || e.editor_type === 'cooper') ? t = FFileType.COOPER : _$$aI() && (Ay.location.pathname === '/rev/new' || Ay.location.pathname === '/make/new' || e.type === 'figmake' || e.editor_type === 'figmake') && (t = FFileType.FIGMAKE);
+  e.editor_type === 'whiteboard' || e.type === 'whiteboard' || customHistory.location.pathname === '/jam' || customHistory.location.pathname === '/board/new' ? t = FFileType.WHITEBOARD : customHistory.location.pathname === '/slides/new' || e.type === 'slides' || e.editor_type === 'slides' ? t = FFileType.SLIDES : getFeatureFlags().sites && (customHistory.location.pathname === '/site/new' || e.type === 'sites' || e.editor_type === 'sites') ? t = FFileType.SITES : getFeatureFlags().cooper && (customHistory.location.pathname === '/buzz/new' || e.type === 'buzz' || e.editor_type === 'buzz' || e.type === 'cooper' || e.editor_type === 'cooper') ? t = FFileType.COOPER : _$$aI() && (customHistory.location.pathname === '/rev/new' || customHistory.location.pathname === '/make/new' || e.type === 'figmake' || e.editor_type === 'figmake') && (t = FFileType.FIGMAKE);
   t !== 'whiteboard' && _$$Q().render(jsx('div', {
     style: {
       position: 'absolute',
@@ -9100,13 +9100,13 @@ function _D() {
 }
 let _k = performance.now();
 t(async () => {
-  if (Ay.location.pathname === '/preload-editor') {
+  if (customHistory.location.pathname === '/preload-editor') {
     F$('prototype-lib').then(() => {
       xK.start('editorPreloaded');
       window.startPreloadedTab = function (e) {
         if (window.preloadedTabStart = performance.now(), !getInitialOptions().user_data) {
-          Ay.replace(e.path, null);
-          Ay.reload('preloaded tab not logged in');
+          customHistory.replace(e.path, null);
+          customHistory.reload('preloaded tab not logged in');
           return;
         }
         let t = !1;
@@ -9124,31 +9124,31 @@ t(async () => {
           console.log(`Opening file ${e.fileKey} in a preloaded tab at ${e.path} with org ${n}`);
           getInitialOptions().org_id = n;
           window.startUserStateXHR();
-          Ay.replace(e.path, null);
+          customHistory.replace(e.path, null);
           _$$n(_P, () => ns, {
             loadBlank: t
           });
         }, t => {
           console.error('Reloading because of', t);
-          Ay.replace(e.path, null);
-          Ay.reload('preloaded tab error');
+          customHistory.replace(e.path, null);
+          customHistory.reload('preloaded tab error');
         });
       };
     });
-  } else if (Ay.location.pathname === '/file/new' || Ay.location.pathname === '/design/new' || Ay.location.pathname === '/board/new' || Ay.location.pathname === '/slides/new' || Ay.location.pathname === '/site/new' || Ay.location.pathname === '/buzz/new' || Ay.location.pathname === '/rev/new' || Ay.location.pathname === '/make/new' || Ay.location.pathname === '/jam') {
+  } else if (customHistory.location.pathname === '/file/new' || customHistory.location.pathname === '/design/new' || customHistory.location.pathname === '/board/new' || customHistory.location.pathname === '/slides/new' || customHistory.location.pathname === '/site/new' || customHistory.location.pathname === '/buzz/new' || customHistory.location.pathname === '/rev/new' || customHistory.location.pathname === '/make/new' || customHistory.location.pathname === '/jam') {
     if (document.visibilityState === 'prerender') {
       document.addEventListener('visibilitychange', function e() {
         document.visibilityState !== 'prerender' && (_D(), document.removeEventListener('visibilitychange', e));
       });
     } else {
-      let e = parseQuery(Ay.location.search);
+      let e = parseQuery(customHistory.location.search);
       e['try-plugin-id'] && e['try-plugin-version-id'] && e['try-plugin-name'] ? await _$$n(_L, () => ns) : _D();
     }
   } else {
     xK.updateAppEntryTimeEvents(d, _k);
     let e = ns;
     if (isInteractionPathCheck()) {
-      let t = parseQuerySimple(Ay.location.search);
+      let t = parseQuerySimple(customHistory.location.search);
       let r = {
         prototypeApp: void 0,
         skewKiwiSerialization: void 0,

@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { getI18nString } from "../905/303541";
 import { jU } from "../figma_app/544879";

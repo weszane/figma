@@ -4,7 +4,7 @@ import { getCookieValue } from "../905/657224";
 import { trackEventAnalytics } from "../905/449184";
 import { FJ } from "../905/508367";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { logWarning } from "../905/714362";
 import { XHR } from "../905/910117";
 import { WY, Ts, OZ, fX, m9, dl, E as _$$E, Sr, Qg } from "../905/194276";
@@ -86,7 +86,7 @@ export function $$k0(e, t, r) {
     redirectPath: e
   });
   document.cookie = `${C}=${encodeURIComponent(n)}; path=/`;
-  let i = t ? Ay.unsafeRedirectMsTeams : Ay.redirect;
+  let i = t ? customHistory.unsafeRedirectMsTeams : customHistory.redirect;
   let a = "/start_google_sso?should_use_redirect_instead=1";
   t && (a += "&from_ms_teams=1");
   i(a);

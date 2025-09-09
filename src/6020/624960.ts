@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
 import { o as _$$o } from "../905/821217";
@@ -12,7 +12,7 @@ import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import $$m from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
-import { rf, Pt, AF, iQ, v_ } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/11182";
 import { fullscreenValue } from "../figma_app/455680";
@@ -137,16 +137,16 @@ export function $$F1(t) {
   let Z = scopeAwareFunction.user("delete-prototype-starting-points", () => {
     H && Fullscreen.deletePrototypeStartingPoints(H);
   });
-  let W = rf(Pt(t.recordingKey, "minusButton"), "click", t => {
+  let W = useHandleMouseEvent(generateRecordingKey(t.recordingKey, "minusButton"), "click", t => {
     Z();
   });
-  let $ = rf(Pt(t.recordingKey, "nameLabel"), "click", t => {
+  let $ = useHandleMouseEvent(generateRecordingKey(t.recordingKey, "nameLabel"), "click", t => {
     R(!0);
   });
   useEffect(() => (fullscreenValue.fromFullscreen.on("focusPrototypeStartingPointPanelToEditName", $), () => {
     fullscreenValue.fromFullscreen.removeListener("focusPrototypeStartingPointPanelToEditName", $);
   }), [$]);
-  let tt = rf(t.recordingKey, "click", t => {
+  let tt = useHandleMouseEvent(t.recordingKey, "click", t => {
     K(!0);
     permissionScopeHandler.user("add-prototype-starting-point", () => {
       fullscreenValue.triggerAction("add-prototype-starting-point");
@@ -165,7 +165,7 @@ export function $$F1(t) {
           position: normalizeValue(e) ? normalizeValue(e)?.position : ""
         }) : C(normalizeValue(e)?.name || "");
       },
-      recordingKey: Pt(t, "startingPointNameInput")
+      recordingKey: generateRecordingKey(t, "startingPointNameInput")
     }) : jsx(JU, {
       className: "prototype_starting_point_panel--startingPointNameLabel--Mipwi raw_components--textAreaInput--mi1Ag raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t",
       onClick: $,
@@ -181,7 +181,7 @@ export function $$F1(t) {
       "data-tooltip": getI18nString("proto.starting_points.edit_description")
     },
     "aria-label": getI18nString("proto.starting_points.edit_description"),
-    recordingKey: Pt(t, "startingPointPanelIcon"),
+    recordingKey: generateRecordingKey(t, "startingPointPanelIcon"),
     children: jsx(p, {})
   });
   let tr = jsx(DE, {
@@ -244,7 +244,7 @@ export function $$F1(t) {
         startingPoint: to,
         closeModal: J,
         parentPanelRectObject: U.current.getBoundingClientRect(),
-        recordingKey: Pt(t, "startingPointDescriptionModal")
+        recordingKey: generateRecordingKey(t, "startingPointDescriptionModal")
       })]
     })]
   }) : te ? null : jsx(Zk, {
@@ -256,7 +256,7 @@ export function $$F1(t) {
         children: jsx(_$$E, {
           className: "prototype_starting_point_panel--panelTitleText--F75N0 draggable_list--panelTitleText--SwKez",
           onClick: tt,
-          recordingKey: Pt(t, "panelTitle"),
+          recordingKey: generateRecordingKey(t, "panelTitle"),
           children: renderI18nText("proto.starting_points.flow_starting_point_title")
         })
       }), jsx("span", {
@@ -271,7 +271,7 @@ export function $$F1(t) {
               "data-tooltip": getI18nString("proto.starting_points.add_starting_point_tooltip")
             },
             "aria-label": getI18nString("proto.starting_points.add_starting_point_tooltip"),
-            recordingKey: Pt(t, "plusButton"),
+            recordingKey: generateRecordingKey(t, "plusButton"),
             children: jsx(_$$e, {})
           })
         })
@@ -284,11 +284,11 @@ function L(t) {
 }
 export function $$z0(t) {
   let [e, o] = useState(t.defaultValue);
-  let r = AF(t.recordingKey, "change", t => {
+  let r = useHandleChangeEvent(t.recordingKey, "change", t => {
     o(t.target.value);
   });
-  let a = iQ(t.recordingKey, "blur", scopeAwareFunction.user("rename-starting-point", () => t.submitRename(e)));
-  let l = v_(t.recordingKey, "keydown", o => {
+  let a = useHandleGenericEvent(t.recordingKey, "blur", scopeAwareFunction.user("rename-starting-point", () => t.submitRename(e)));
+  let l = useHandleKeyboardEvent(t.recordingKey, "keydown", o => {
     "Enter" === o.key ? t.submitRename(e) : "Escape" === o.key ? t.submitRename("") : t.shouldListenForTabKeyboardEvent && o.keyCode === Uz.TAB && (o.preventDefault(), t.submitRename(e), t.onTabKeyboardEvent?.(o.shiftKey));
   });
   return jsx(_$$o, {

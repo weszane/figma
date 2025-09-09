@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, memo } from "react";
 import { b, YJ } from "../figma_app/860955";
 import { H_ } from "../905/963340";
-import { iQ, Pt } from "../figma_app/806412";
+import { useHandleGenericEvent, generateRecordingKey } from "../figma_app/878298";
 import { SU } from "../figma_app/451499";
 import { g } from "../905/412697";
 import { cJ } from "../905/561485";
@@ -67,11 +67,11 @@ let h = memo(function ({
   disabled: a,
   onFocus: l
 }) {
-  let d = iQ(Pt(r, e), "focus", () => {
+  let d = useHandleGenericEvent(generateRecordingKey(r, e), "focus", () => {
     a || l?.(e);
   });
   return jsx(H_, {
-    recordingKey: Pt(r, e),
+    recordingKey: generateRecordingKey(r, e),
     disabled: a,
     checked: t,
     onChange: () => i(e),

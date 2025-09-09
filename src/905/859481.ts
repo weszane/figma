@@ -3,13 +3,13 @@ import { d as _$$d } from "../905/976845";
 import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue, getCommonFromArray } from "../905/216495";
 import { Gt } from "../905/275640";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { a2 } from "../figma_app/762558";
 import { om } from "../figma_app/395097";
@@ -18,7 +18,7 @@ import { Kt } from "../figma_app/156285";
 import { _2 } from "../905/185121";
 import { CL } from "../figma_app/722913";
 import { dL } from "../figma_app/473914";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K } from "../905/443068";
 import { F as _$$F } from "../905/427107";
 import { Fullscreen } from "../figma_app/763686";
@@ -62,11 +62,11 @@ function j(e) {
       icon: o,
       iconClassName: O1,
       id: "start-end-point-select",
-      onChange: (t, i = zk.YES) => {
+      onChange: (t, i = yesNoTrackingEnum.YES) => {
         if (("CHANGED_END" === e.syncState || "CHANGED_BOTH" === e.syncState) && (r = !1), e.updateSyncState("changed start"), r && -1 !== Gp.indexOf(t)) e.onChange({
           leftEndCap: t,
           rightEndCap: t
-        }, i);else if (e.onChange({
+        }, i); else if (e.onChange({
           leftEndCap: t
         }, i), t === e.rightEndCap) {
           e.updateSyncState("reset");
@@ -74,10 +74,10 @@ function j(e) {
         }
       },
       property: e.leftEndCap,
-      recordingKey: Pt(e, "startEndPoint"),
+      recordingKey: generateRecordingKey(e, "startEndPoint"),
       children: [Gp.map(t => jsx(NC, {
         value: t,
-        recordingKey: Pt(e, "startEndPoint", t),
+        recordingKey: generateRecordingKey(e, "startEndPoint", t),
         children: jsxs("span", {
           className: Z6,
           children: [Sp(t, "left"), jsx(_$$o, {
@@ -86,7 +86,7 @@ function j(e) {
         })
       }, t)), i && jsx(sK, {}), i && yh.map(t => jsx(NC, {
         value: t,
-        recordingKey: Pt(e, "startEndPoint", t),
+        recordingKey: generateRecordingKey(e, "startEndPoint", t),
         children: jsxs("span", {
           className: Z6,
           children: [Sp(t, "left"), jsx(_$$o, {
@@ -97,7 +97,7 @@ function j(e) {
     })
   });
   let u = jsx(K, {
-    recordingKey: Pt(e, "swapCap"),
+    recordingKey: generateRecordingKey(e, "swapCap"),
     onClick: () => {
       permissionScopeHandler.user("swap-stroke-end-caps", () => {
         Fullscreen && (Fullscreen.swapStrokeEndCaps(), Fullscreen.commit());
@@ -133,11 +133,11 @@ function j(e) {
       icon: f,
       iconClassName: O1,
       id: "end-end-point-select",
-      onChange: (t, i = zk.YES) => {
+      onChange: (t, i = yesNoTrackingEnum.YES) => {
         if (("CHANGED_START" === e.syncState || "CHANGED_BOTH" === e.syncState) && (r = !1), e.updateSyncState("changed end"), r && -1 !== Gp.indexOf(t)) e.onChange({
           leftEndCap: t,
           rightEndCap: t
-        }, i);else if (e.onChange({
+        }, i); else if (e.onChange({
           rightEndCap: t
         }, i), e.leftEndCap === t) {
           e.updateSyncState("reset");
@@ -145,10 +145,10 @@ function j(e) {
         }
       },
       property: e.rightEndCap,
-      recordingKey: Pt(e, "endEndPoint"),
+      recordingKey: generateRecordingKey(e, "endEndPoint"),
       children: [Gp.map(t => jsx(NC, {
         value: t,
-        recordingKey: Pt(e, "endEndPoint", t),
+        recordingKey: generateRecordingKey(e, "endEndPoint", t),
         children: jsxs("span", {
           className: Z6,
           children: [Sp(t, "right"), jsx(_$$o, {
@@ -157,7 +157,7 @@ function j(e) {
         })
       }, t)), i && jsx(sK, {}), i && yh.map(t => jsx(NC, {
         value: t,
-        recordingKey: Pt(e, "endEndPoint", t),
+        recordingKey: generateRecordingKey(e, "endEndPoint", t),
         children: jsxs("span", {
           className: Z6,
           children: [Sp(t, "right"), jsx(_$$o, {
@@ -183,7 +183,7 @@ function V(e) {
   kC();
   let r = Ey(i);
   let a = kW(i);
-  let d = (t, i = zk.YES) => {
+  let d = (t, i = yesNoTrackingEnum.YES) => {
     if (e.setIndividualBorderOption(t), t === om.CUSTOM) return;
     let n = e6(t);
     fullscreenValue.updateSelectionProperties(n, {
@@ -206,7 +206,7 @@ function V(e) {
       dropdownShown: e.dropdownShown,
       strokeAlign: e.strokeAlign,
       gridLeft: !0,
-      recordingKey: Pt(e, "align"),
+      recordingKey: generateRecordingKey(e, "align"),
       disabled: !r
     }),
     rightLabel: renderI18nText("fullscreen.properties_panel.section_stroke.label_weight"),
@@ -220,7 +220,7 @@ function V(e) {
         e.onNonPaintsChange(...t);
       },
       gridRight: !0,
-      recordingKey: Pt(e, "weight"),
+      recordingKey: generateRecordingKey(e, "weight"),
       disabled: !a,
       dataTestId: "stroke-weight",
       selectBorderSides: d
@@ -228,7 +228,7 @@ function V(e) {
     leftIcon: jsx(G, {
       disableAdvancedSettings: e.disableAdvancedSettings,
       isUI3: !0,
-      recordingKey: Pt(e, "more"),
+      recordingKey: generateRecordingKey(e, "more"),
       showStrokePicker: e.showStrokePicker,
       stopPropagation: e.stopPropagation,
       toggleSettings: e.toggleSettings
@@ -237,7 +237,7 @@ function V(e) {
       borderOption: e.individualBorderOption,
       setBorderOption: e.setIndividualBorderOption,
       onChange: d,
-      recordingKey: Pt(e, "borderSide")
+      recordingKey: generateRecordingKey(e, "borderSide")
     }) : null
   });
 }
@@ -325,7 +325,7 @@ export function $$H0(e) {
       numSelectedByType: e.numSelectedByType,
       onChange: e.onNonPaintsChange,
       pickerShown: e.pickerShown,
-      recordingKey: Pt(e, "advanced"),
+      recordingKey: generateRecordingKey(e, "advanced"),
       strokeBrushGuid: d,
       strokeCap: e.strokeCap,
       strokeJoin: e.strokeJoin,

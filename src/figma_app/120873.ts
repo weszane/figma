@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import s from "classnames";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { TI } from "../905/713722";
 import { tZ, u as _$$u, BQ } from "../figma_app/852050";
 import { Oi } from "../figma_app/394327";
@@ -34,7 +34,7 @@ export function $$h1({
   let O = _$$u(t);
   let R = BQ(O?.node_id ?? void 0);
   let L = useMemo(() => v, [v]);
-  let P = rf(N, "click", e => {
+  let P = useHandleMouseEvent(N, "click", e => {
     L && L(e);
   });
   if (R && "MIXED" !== R && R.resolvedType === VariableResolvedDataType.COLOR) {

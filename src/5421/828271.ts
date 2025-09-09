@@ -1,7 +1,7 @@
 import { ex as _$$ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, memo, useMemo, useCallback, useRef, useContext, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { Label } from "../905/270045";
 import { d as _$$d } from "../905/976845";
@@ -20,7 +20,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { U as _$$U } from "../figma_app/901889";
 import { ZC } from "../figma_app/39751";
 import { d as _$$d2, s as _$$s } from "../figma_app/429226";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
 import { B as _$$B } from "../905/714743";
@@ -36,7 +36,7 @@ import { NE } from "../3276/373312";
 import { q5 } from "../figma_app/516028";
 import { o3, nt } from "../905/226610";
 import { dK, Xt } from "../figma_app/889655";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { J as _$$J2 } from "../905/980942";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
@@ -97,7 +97,7 @@ function eu() {
     className: "magic_link--magicLinkButton--CWefW",
     "data-testid": "magic-link-entry",
     children: jsx(_$$K, {
-      recordingKey: Pt("prototypeInteractionList", "magicLinkButton"),
+      recordingKey: generateRecordingKey("prototypeInteractionList", "magicLinkButton"),
       "aria-label": i,
       onClick: () => {
         $I({
@@ -180,7 +180,7 @@ let $$eT0 = memo(function ({
     fullscreenValue.updateSelectionProperties({
       prototypeInteractions: e
     }, {
-      shouldCommit: zk.NO_BUT_TRACK_AS_EDIT
+      shouldCommit: yesNoTrackingEnum.NO_BUT_TRACK_AS_EDIT
     });
     fullscreenValue.commit();
   };
@@ -242,7 +242,7 @@ let $$eT0 = memo(function ({
       let r = [];
       for (let e of o) {
         let t = sessionLocalIDToString(e.id);
-        if (t && !i.has(t)) r.push(e);else {
+        if (t && !i.has(t)) r.push(e); else {
           if (!(t = Fullscreen.generateUniqueID())) continue;
           let n = parseSessionLocalID(t);
           if (!n) continue;
@@ -268,7 +268,7 @@ let $$eT0 = memo(function ({
     shouldIgnoreKeyboardEvents: l.length > 0 || s.type !== NodePropertyCategory.PROTOTYPE_INTERACTION && s.type !== NodePropertyCategory.PROTOTYPE_INHERITED_INTERNAL_INTERACTION,
     showResetInteractionsButton: C,
     toggleScrollBehaviorPicker: () => {
-      if (f?.id === AO) t(XE());else {
+      if (f?.id === AO) t(XE()); else {
         let e = cn(R.current);
         t(u1({
           id: AO,
@@ -334,7 +334,7 @@ function eS(e) {
           onMouseDown: d,
           onMouseMove: c,
           onMouseUp: u,
-          recordingKey: Pt("prototypeInteractionList", i),
+          recordingKey: generateRecordingKey("prototypeInteractionList", i),
           selected: r,
           singletonRow: e.interactionGroups.length <= 1
         }, p ? void 0 : i),
@@ -361,7 +361,7 @@ function eS(e) {
         openFile: e.openFile,
         pickerShown: null,
         propertyList: e.inheritedInternalInteractionGroups,
-        recordingKey: Pt("prototypeInheritedInternalInteractionList"),
+        recordingKey: generateRecordingKey("prototypeInheritedInternalInteractionList"),
         renderProperty: (n, i, r, a, l, s, d, c, u) => jsx(eA, {
           autoOpenVariablePicker: t,
           category: _$$J2.INHERITED_INTERNAL,
@@ -375,7 +375,7 @@ function eS(e) {
           onMouseDown: d,
           onMouseMove: c,
           onMouseUp: u,
-          recordingKey: Pt("prototypeInheritedInternalInteractionList", i),
+          recordingKey: generateRecordingKey("prototypeInheritedInternalInteractionList", i),
           selected: r,
           singletonRow: e.inheritedInternalInteractionGroups.length <= 1
         }, p ? void 0 : i),
@@ -449,7 +449,7 @@ function eA({
     U && ed?.focus();
     let o = eB(t);
     let i = n.metaKey || n.ctrlKey;
-    if (i) ea ? o = G.filter(e => !o.includes(e)) : o.push(...G);else if (!U && n.shiftKey) {
+    if (i) ea ? o = G.filter(e => !o.includes(e)) : o.push(...G); else if (!U && n.shiftKey) {
       var r;
       let n;
       let i;
@@ -542,7 +542,7 @@ function eA({
       if (t.transitionNodeID) {
         let e = et.get(sessionLocalIDToString(t.transitionNodeID));
         if (e) {
-          if (e.isState) n = e.parentGuid || "";else {
+          if (e.isState) n = e.parentGuid || ""; else {
             eW = !0;
             break;
           }
@@ -597,14 +597,14 @@ function eA({
     onMouseEnter: ek,
     onMouseLeave: eP,
     onClick: eI,
-    recordingKey: Pt(B, "draggableRow"),
+    recordingKey: generateRecordingKey(B, "draggableRow"),
     selected: ea,
     "aria-selected": ea,
     children: jsx(s2, {
       label: null,
       leftIcon: jsx(_$$d, {
         "aria-expanded": eQ && !!Q,
-        recordingKey: Pt(B, "interactionIcon"),
+        recordingKey: generateRecordingKey(B, "interactionIcon"),
         htmlAttributes: {
           onMouseDown: e$,
           "data-tooltip-type": Ib.TEXT,
@@ -615,7 +615,7 @@ function eA({
       }),
       input: jsxs(D8, {
         onMouseDown: e$,
-        recordingKey: Pt(B, "interactionText"),
+        recordingKey: generateRecordingKey(B, "interactionText"),
         className: "prototype_interaction_list--ellipsis--ro1zN ellipsis--ellipsis--Tjyfa",
         onMouseEnter: showTooltip,
         children: [eM(t.event, ei, !!U), eR && jsxs("span", {
@@ -630,7 +630,7 @@ function eA({
         children: jsx(_$$K, {
           onClick: ez,
           "aria-label": getI18nString("proto.prototype_panel.remove_interaction_tooltip"),
-          recordingKey: Pt(B, "removeButton"),
+          recordingKey: generateRecordingKey(B, "removeButton"),
           htmlAttributes: {
             onMouseDown: e$
           },
@@ -676,7 +676,7 @@ function eA({
     children: jsx(_$$K, {
       onClick: ez,
       "aria-label": getI18nString("proto.prototype_panel.remove_interaction_tooltip"),
-      recordingKey: Pt(B, "removeButton"),
+      recordingKey: generateRecordingKey(B, "removeButton"),
       htmlAttributes: {
         onMouseDown: e$
       },
@@ -693,7 +693,7 @@ function eA({
     selected: g || ea,
     hasFocus: eJ,
     singletonRow: _,
-    recordingKey: Pt(B, "draggableRow")
+    recordingKey: generateRecordingKey(B, "draggableRow")
   }) : jsx("div", {
     children: jsxs(_$$e, {
       ref: ep,
@@ -705,7 +705,7 @@ function eA({
       onMouseLeave: eP,
       onMouseMove: T,
       onMouseUp: O,
-      recordingKey: Pt(B, "draggableRow"),
+      recordingKey: generateRecordingKey(B, "draggableRow"),
       selected: eJ,
       selectedSecondary: eQ,
       singletonRow: _,

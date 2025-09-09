@@ -2,7 +2,7 @@ import { sD } from "../905/937198";
 import { YR } from "../905/622391";
 import { isNotNullish } from "../figma_app/95419";
 import { subscribeAndAwaitData } from "../905/553831";
-import { Lst } from "../figma_app/43951";
+import { ListCollectionsView } from "../figma_app/43951";
 import { b } from "../905/148729";
 async function d({
   fileKey: e
@@ -13,7 +13,7 @@ async function d({
     });
     return null;
   }
-  let t = (await subscribeAndAwaitData(Lst, {
+  let t = (await subscribeAndAwaitData(ListCollectionsView, {
     fileKey: e
   })).fileCmsCollections;
   return t?.map(e => e.collectionV2).map(b).filter(isNotNullish);

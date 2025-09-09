@@ -29,7 +29,7 @@ var O = /\w*$/;
 var S = /^\[object .+?Constructor\]$/;
 var T = /^(?:0|[1-9]\d*)$/;
 var j = {};
-j[n] = j["[object Array]"] = j[y] = j[v] = j[s] = j[l] = j[A] = j[x] = j[N] = j[E] = j[w] = j[c] = j[u] = j[h] = j[f] = j[p] = j[g] = j[m] = j[k] = j[q] = j[_] = j[L] = !0;
+j[n] = j["[object Array]"] = j[y] = j[v] = j[s] = j[l] = j[A] = j[x] = j[N] = j[E] = j[w] = j[c] = j[ExpiringCache] = j[h] = j[f] = j[p] = j[g] = j[m] = j[k] = j[q] = j[_] = j[L] = !0;
 j["[object Error]"] = j[o] = j[b] = !1;
 var C = "object" == typeof require.g && require.g && require.g.Object === Object && require.g;
 var R = "object" == typeof self && self && self.Object === Object && self;
@@ -55,7 +55,7 @@ function F(t) {
   var e = !1;
   if (null != t && "function" != typeof t.toString) try {
     e = !!(t + "");
-  } catch (t) {}
+  } catch (t) { }
   return e;
 }
 function $(t) {
@@ -277,10 +277,10 @@ function tM(t) {
   if (null != t) {
     try {
       return Q.call(t);
-    } catch (t) {}
+    } catch (t) { }
     try {
       return t + "";
-    } catch (t) {}
+    } catch (t) { }
   }
   return "";
 }
@@ -406,7 +406,7 @@ module.exports = function (t) {
               return new t.constructor(o, t.byteOffset, t.length);
             case c:
               return z(i ? r($(t), !0) : $(t), U, new t.constructor());
-            case u:
+            case ExpiringCache:
             case g:
               return new h(t);
             case f:

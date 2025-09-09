@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { OF } from "../figma_app/562352";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { m as _$$m, y as _$$y } from "../9410/643761";
 import { PN } from "../figma_app/897289";
 import { Fe, uz } from "../905/284552";
@@ -110,7 +110,7 @@ export async function $$E3(e, t, i) {
       } catch {
         try {
           let t = await _(i);
-          k.warn("Reverting to fallback video source");
+          logger.warn("Reverting to fallback video source");
           await uz(t, !1, a);
           e(a);
         } catch {

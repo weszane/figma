@@ -19,7 +19,7 @@ import { k as _$$k5 } from '../642/978258';
 import { reportError } from '../905/11';
 import { F as _$$F4 } from '../905/224';
 import { T as _$$T2 } from '../905/2124';
-import { k9 } from '../905/19536';
+import { useMemoStable } from '../905/19536';
 import { zD, zz } from '../905/32188';
 import { bL as _$$bL3 } from '../905/38914';
 import { k as _$$k3 } from '../905/44647';
@@ -49,7 +49,7 @@ import { P as _$$P8 } from '../905/143421';
 import { _ as _$$_5 } from '../905/144222';
 import { e as _$$e9 } from '../905/149844';
 import { t as _$$t5 } from '../905/150656';
-import { popModalStack, showModalHandler, hideModal } from '../905/156213';
+import { hideModal, popModalStack, showModalHandler } from '../905/156213';
 import { ServiceCategories as _$$e2 } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { L as _$$L3 } from '../905/173490';
@@ -60,7 +60,7 @@ import { permissionScopeHandler as _$$l2, scopeAwareFunction as _$$nc } from '..
 import { P as _$$P7 } from '../905/201667';
 import { h as _$$h5 } from '../905/207101';
 import { A as _$$A18 } from '../905/215698';
-import { MIXED_MARKER, valueOrFallback, normalizeValue, isInvalidValue, isValidValue } from '../905/216495';
+import { isInvalidValue, isValidValue, MIXED_MARKER, normalizeValue, valueOrFallback } from '../905/216495';
 import { Cn } from '../905/225265';
 import { n6 as _$$n } from '../905/234821';
 import { z as _$$z } from '../905/239603';
@@ -75,7 +75,7 @@ import { E as _$$E2 } from '../905/277716';
 import { Cj } from '../905/291654';
 import { Wv as _$$Wv, IA } from '../905/291714';
 import { y as _$$y } from '../905/292472';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { v as _$$v3 } from '../905/318279';
 import { B as _$$B3 } from '../905/330741';
@@ -84,7 +84,7 @@ import { I as _$$I2 } from '../905/342732';
 import { P as _$$P } from '../905/347284';
 import { P as _$$P3 } from '../905/351996';
 import { c as _$$c2 } from '../905/370443';
-import { iZ as _$$iZ } from '../905/372672';
+import { selectCurrentUser } from '../905/372672';
 import { W as _$$W2 } from '../905/378870';
 import { c2 as _$$c6 } from '../905/382883';
 import { Q as _$$Q2 } from '../905/384324';
@@ -140,14 +140,14 @@ import { LM, PK, vK } from '../905/566585';
 import { N as _$$N2 } from '../905/568293';
 import { AH, V0 } from '../905/571648';
 import { a as _$$a8 } from '../905/575557';
-import { zX } from '../905/576487';
+import { VisualBellIcon } from '../905/576487';
 import { k as _$$k4 } from '../905/582200';
 import { x as _$$x2 } from '../905/587214';
 import { O as _$$O4 } from '../905/587457';
 import { D as _$$D2 } from '../905/591570';
 import { getFeatureFlags } from '../905/601108';
 import { QL } from '../905/609392';
-import { Ay as _$$Ay } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { J as _$$J } from '../905/614223';
 import { BT } from '../905/618447';
 import { jS, Q1 } from '../905/619652';
@@ -203,7 +203,7 @@ import { $A } from '../905/862883';
 import { u as _$$u8 } from '../905/866761';
 import { bL as _$$bL4, RT } from '../905/867927';
 import { vu } from '../905/870778';
-import { g as _$$g } from '../905/871474';
+import { generateUUIDv4 } from '../905/871474';
 import { b as _$$b3 } from '../905/874849';
 import { A as _$$A14 } from '../905/891805';
 import { V as _$$V3 } from '../905/900932';
@@ -323,7 +323,7 @@ import { CVP, Ep1, j4N, oBL } from '../figma_app/27776';
 import { GQ as _$$GQ, nJ as _$$nJ, bQ } from '../figma_app/32128';
 import { ZC } from '../figma_app/39751';
 import { pO as _$$pO } from '../figma_app/42945';
-import { TNJ } from '../figma_app/43951';
+import { TeamCanAdmin } from '../figma_app/43951';
 import { Kk } from '../figma_app/47085';
 import { kF, Q6 } from '../figma_app/48566';
 import { FEditorType } from '../figma_app/53721';
@@ -349,13 +349,12 @@ import { j5 } from '../figma_app/178475';
 import { APIParameterUtils, createPaginatedValidator } from '../figma_app/181241';
 import { dh as _$$dh } from '../figma_app/186343';
 import { FFileType, FOrganizationLevelType, FPlanNameType } from '../figma_app/191312';
-import { zk } from '../figma_app/198712';
+import { yesNoTrackingEnum } from '../figma_app/198712';
 import { pt as _$$pt } from '../figma_app/198840';
 import { ih as _$$ih } from '../figma_app/200284';
 import { B0 } from '../figma_app/201703';
 import { Uf } from '../figma_app/223206';
 import { rM as _$$rM } from '../figma_app/241541';
-import { sD as _$$sD } from '../figma_app/243058';
 import { p as _$$p7, vo as _$$vo, xn as _$$xn2, MM } from '../figma_app/246831';
 import { PE } from '../figma_app/251115';
 import { G as _$$G, h as _$$h2 } from '../figma_app/257072';
@@ -450,13 +449,12 @@ import { Ay as _$$Ay2, Tu } from '../figma_app/724968';
 import { E as _$$E4 } from '../figma_app/726115';
 import { lB as _$$lB, tB as _$$tB, EE } from '../figma_app/731583';
 import { dP as _$$dP, Ku as _$$Ku, lK as _$$lK, sT as _$$sT, UK } from '../figma_app/740163';
-import { i as _$$i, tJ as _$$tJ, NT } from '../figma_app/741237';
+import { renameNode, replaceSelection, setPropertiesPanelTab } from '../figma_app/741237';
 import { Jo } from '../figma_app/755783';
 import { az as _$$az, ce as _$$ce, d2 as _$$d2, xB as _$$xB, Co, EC, Ef, Fs, Hb, hc, Ku, Lm, Lo, mF, Tw, U_, YA } from '../figma_app/755939';
-import { SceneGraphHelpers, AppStateTsApi, DesignWorkspace, CooperTemplateTypesTsBindings, Fullscreen, ItemType, CooperHelpers, SchemaJoinStatus, ViewType, LayoutTabType, DesignGraphElements, SelfDesignType, DiagramElementType, UIVisibilitySetting, NodePropertyCategory, ImageToolsBindings, VariableResolvedDataType, GradientToolApi, SocialMediaFormats } from '../figma_app/763686';
+import { AppStateTsApi, CooperHelpers, CooperTemplateTypesTsBindings, DesignGraphElements, DesignWorkspace, DiagramElementType, Fullscreen, GradientToolApi, ImageToolsBindings, ItemType, LayoutTabType, NodePropertyCategory, SceneGraphHelpers, SchemaJoinStatus, SelfDesignType, SocialMediaFormats, UIVisibilitySetting, VariableResolvedDataType, ViewType } from '../figma_app/763686';
 import { wV } from '../figma_app/779965';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
-import { aH as _$$aH, Pt } from '../figma_app/806412';
 import { Ad } from '../figma_app/811257';
 import { _YF } from '../figma_app/822011';
 import { fu } from '../figma_app/831799';
@@ -467,7 +465,7 @@ import { rE as _$$rE, bW, Oj } from '../figma_app/850075';
 import { b as _$$b4, bL as _$$bL2, mc as _$$mc3, q7, Q$, YJ } from '../figma_app/860955';
 import { Ag as _$$Ag, B3 } from '../figma_app/862289';
 import { s as _$$s0 } from '../figma_app/874592';
-import { generateRecordingKey } from '../figma_app/878298';
+import { generateRecordingKey, SKIP_RECORDING } from '../figma_app/878298';
 import { Sh } from '../figma_app/889655';
 import { isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
 import { U as _$$U } from '../figma_app/901889';
@@ -491,7 +489,7 @@ import { jv as _$$jv, Wh as _$$Wh } from '../figma_app/985200';
 import { A as _$$A19 } from '../vendor/21595';
 import { A as _$$A8 } from '../vendor/90566';
 import { P as _$$P6 } from '../vendor/348225';
-import s, { useDispatch, useSelector } from '../vendor/514228';
+import s, { useDispatch, useSelector } from 'react-redux';
 import { A as _$$A17 } from '../vendor/850789';
 import xh from '../vendor/907065';
 import { N as _$$N3 } from '../vendor/930821';
@@ -997,7 +995,7 @@ let en = (e, t, n, l, r, i, o) => {
     let b = e => {
       r(!1);
       i(!1);
-      d(_$$F.enqueue({
+      d(VisualBellActions.enqueue({
         message: getI18nString('cooper.toolbar.export_modal.visual_bell.exported_asset_success', {
           assetCount: e
         })
@@ -1183,7 +1181,7 @@ function eZ() {
     setActiveSecondaryToolbeltId,
     closeSecondaryToolbelt
   } = LH();
-  let T = !!_$$iZ();
+  let T = !!selectCurrentUser();
   let I = AE();
   useEffect(() => {
     activeToolId !== DesignGraphElements.VECTOR_BEND && activeToolId !== DesignGraphElements.VECTOR_PAINT_BUCKET && activeToolId !== DesignGraphElements.SHAPE_BUILDER && (editModeType === LayoutTabType.VECTOR ? setActiveSecondaryToolbeltId(_$$R2.PenTool) : setActiveSecondaryToolbeltId(null));
@@ -1208,7 +1206,7 @@ function eZ() {
       icon: j > 0 ? jsx(_$$X, {}) : jsx(_$$f, {}),
       onActivateTool: activateTool,
       activeToolId,
-      recordingKey: Pt('toolbarView', 'toolComment'),
+      recordingKey: generateRecordingKey('toolbarView', 'toolComment'),
       tooltipText: getI18nString('fullscreen_actions.comment'),
       tooltipShortcut: b(DesignGraphElements.COMMENTS)
     }, 'comments'), n && !h && T && jsx(_$$F2, {})]
@@ -1236,7 +1234,7 @@ function eZ() {
               modeLabel: getI18nString('fullscreen.toolbar.toolbelt_mode_segmented_control.buzz'),
               onToggleMode: () => {
                 _o();
-                r === SelfDesignType.DESIGN ? activePanel && activePanel.panel !== eA.COMMENTS && openPanel(activePanel.panel) : activeToolId === DesignGraphElements.COMMENTS ? NT(DesignWorkspace.COMMENT) : NT(DesignWorkspace.DESIGN);
+                r === SelfDesignType.DESIGN ? activePanel && activePanel.panel !== eA.COMMENTS && openPanel(activePanel.panel) : activeToolId === DesignGraphElements.COMMENTS ? setPropertiesPanelTab(DesignWorkspace.COMMENT) : setPropertiesPanelTab(DesignWorkspace.DESIGN);
               },
               getTooltipShortcut: (e, t) => e !== t ? I('toggle-buzz-tool-mode') : void 0
             })]
@@ -1469,7 +1467,7 @@ function tz({
   }] : [], [c, x, u]);
   let g = useMemo(() => [{
     type: _$$k2.DIVIDER,
-    key: _$$g()
+    key: generateUUIDv4()
   }, ...Object.entries(i).map(([e]) => ({
     type: _$$k2.TEXT,
     id: mF.USE_CASE,
@@ -1613,7 +1611,7 @@ function t$({
 function tV({
   file: e
 }) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let n = useDispatch();
   let l = _$$aZ();
   let r = useSelector(e => e.currentUserOrgId);
@@ -1636,7 +1634,7 @@ function tV({
         let o = `/file/${e.key}`;
         o = _$$mc2(o, t);
         o = vk(o, r, i, a);
-        _$$Ay.redirect(o, '_blank');
+        customHistory.redirect(o, '_blank');
         l();
       },
       subtitle: jsx(_$$lJ, {
@@ -2662,11 +2660,11 @@ function nX({
     });
   }, [j, y, r, n, t]);
   if (x.status !== 'loaded' || u) return jsx(_$$ah, {});
-  h.length || (r(_$$F.enqueue({
+  h.length || (r(VisualBellActions.enqueue({
     type: 'buzz-template',
     message: getI18nString('slides.templates.toast.no_longer_available'),
     error: !0,
-    icon: zX.EXCLAMATION
+    icon: VisualBellIcon.EXCLAMATION
   })), n({
     type: mF.ALL
   }));
@@ -2800,7 +2798,7 @@ function nQ({
     insertAsChildOfCanvas: !0,
     insertionCallback: (n, l, r) => {
       let o;
-      n.length === 1 && (o = CooperTemplateTypesTsBindings?.getCooperTemplateType(n[0]), i && _$$l2.user('set-community-asset-name-untitled', () => _$$i(n[0], getI18nString('cooper.templates.new_asset'))));
+      n.length === 1 && (o = CooperTemplateTypesTsBindings?.getCooperTemplateType(n[0]), i && _$$l2.user('set-community-asset-name-untitled', () => renameNode(n[0], getI18nString('cooper.templates.new_asset'))));
       y(n, l, r);
       m('brand_template_inserted', {
         product_type: 'buzz',
@@ -4197,11 +4195,11 @@ function lY({
   let x = c.data.template_name;
   let h = useMemo(() => [...u].sort(go), [u]);
   if (c.status !== 'loaded' || d) return jsx(_$$ah, {});
-  u.length || (l(_$$F.enqueue({
+  u.length || (l(VisualBellActions.enqueue({
     type: 'buzz-template',
     message: getI18nString('slides.templates.toast.no_longer_available'),
     error: !0,
-    icon: zX.EXCLAMATION
+    icon: VisualBellIcon.EXCLAMATION
   })), t({
     type: Ef.DEFAULT
   }));
@@ -4567,7 +4565,7 @@ function rS({
       'mixed': isInvalidValue(e),
       'onChange': d,
       'rangeAnchor': l,
-      'recordingKey': Pt(c, 'slider'),
+      'recordingKey': generateRecordingKey(c, 'slider'),
       'step': i,
       'value': isValidValue(e) ? e : 0
     }), n]
@@ -4695,7 +4693,7 @@ function rM({
     min: 0
   }));
   let c = n ? isInvalidValue(n) ? MIXED_MARKER : n : 0;
-  let u = e => l(e, zk.YES);
+  let u = e => l(e, yesNoTrackingEnum.YES);
   return jsx(rs, {
     children: jsx(_$$E2, {
       name: _$$_2.CornersSlider,
@@ -4719,7 +4717,7 @@ function rM({
               'formatter': d.current,
               'labelWidth': 88,
               'onValueChange': u,
-              'recordingKey': Pt(e, 'cornersInput'),
+              'recordingKey': generateRecordingKey(e, 'cornersInput'),
               'resolution': 1,
               'scrubMultiplier': 0.1,
               smallNudgeAmount,
@@ -4728,7 +4726,7 @@ function rM({
               'children': jsx(_$$a7, {})
             })
           }),
-          recordingKey: Pt(e, 'cornersSlider')
+          recordingKey: generateRecordingKey(e, 'cornersSlider')
         })
       })
     })
@@ -4932,7 +4930,7 @@ function iv(e, t) {
   let a = !n || i ? 0 : void 0;
   let s = !l || o ? 0 : void 0;
   let d = kl('fontStyle');
-  return k9(() => {
+  return useMemoStable(() => {
     if (!d || isInvalidValue(d)) {
       return {
         bold: a,
@@ -5217,7 +5215,7 @@ let oO = memo(({
     let t = UN().getCurrentPage();
     !((t?.directlySelectedNodes?.length ?? 0) > 50) && e && (C.current || (C.current = !0), l(void 0, {
       fontFamily: e
-    }, zk.NO));
+    }, yesNoTrackingEnum.NO));
   }, [l]), 50);
   let R = useCallback(() => {
     if (N.cancel(), C.current) {
@@ -5227,7 +5225,7 @@ let oO = memo(({
       l(void 0, {
         fontFamily: '',
         selectedFontFamily: e
-      }, zk.NO);
+      }, yesNoTrackingEnum.NO);
     }
   }, [l, A, N]);
   let w = R4(m);
@@ -5247,12 +5245,12 @@ let oO = memo(({
   let G = _$$sZ() ?? null;
   let U = q5()?.team ?? null;
   let K = q5();
-  let W = Rs(TNJ, {
+  let W = Rs(TeamCanAdmin, {
     id: U?.id
   }, {
     enabled: !!U
   });
-  let H = _$$iZ();
+  let H = selectCurrentUser();
   let X = Rk({
     enabled: S === Qr.SHARED_FONTS || u?.type === oP,
     user: H,
@@ -5353,7 +5351,7 @@ let oO = memo(({
     globalPerfTimer.start('update_text_node_font');
     R();
     z(t ?? null);
-    l(t, void 0, i ? zk.YES : zk.NO);
+    l(t, void 0, i ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
     let o = t ? r[t] : void 0;
     let a = If(o)?.source;
     trackEventAnalytics('font picker font selected', {
@@ -5435,7 +5433,7 @@ let oO = memo(({
           className: 'font_picker--searchIcon--ddk2i'
         }), jsx(oB, {
           query: searchQueryPlaceholderFontFamily || E,
-          recordingKey: Pt(t, 'search'),
+          recordingKey: generateRecordingKey(t, 'search'),
           onClose: en,
           onChange: et,
           searchBarInputRef: B
@@ -5495,7 +5493,7 @@ let oO = memo(({
               index: e.index,
               isMouseDisabled: es,
               isSelected: A === n.family,
-              recordingKey: Pt(t, n.family),
+              recordingKey: generateRecordingKey(t, n.family),
               selectedNodeIds: d || []
             }, `font-list-item-${Km(n)}`)
           }, Km(n)) : null;
@@ -5518,7 +5516,7 @@ let oO = memo(({
           variant: 'secondary',
           innerText: 'Learn more',
           onClick: () => {
-            _$$Ay.unsafeRedirect(gg, '_blank');
+            customHistory.unsafeRedirect(gg, '_blank');
           },
           children: renderI18nText('fullscreen.properties_panel.font_picker.no_shared_fonts.cta')
         });
@@ -5603,7 +5601,7 @@ function oM({
       onCancel: n,
       onChange: t,
       property: e,
-      recordingKey: Pt(l, 'select'),
+      recordingKey: generateRecordingKey(l, 'select'),
       targetDomNode: document.body,
       children: c
     })
@@ -5883,12 +5881,12 @@ function o7({
             inputProps: R.getInputProps({
               value: d,
               onChange: c,
-              recordingKey: Pt(o4, 'styleSearchBar')
+              recordingKey: generateRecordingKey(o4, 'styleSearchBar')
             }),
             setQuery: c,
             setKeyboardNavigationItem: S,
             scrollToTop: s,
-            recordingKey: Pt(o4, 'styleSearchBar'),
+            recordingKey: generateRecordingKey(o4, 'styleSearchBar'),
             onClose: e
           }), x.status === 'loaded' && !v && jsx(_$$vo, {
             recordingKey: o4,
@@ -6286,13 +6284,13 @@ function am({
       children: [jsx(ah, {
         alignment: e,
         alignmentOptions: t,
-        onAlignmentChanged: e => n(e, zk.YES),
-        recordingKey: Pt(a, 'horizontal')
+        onAlignmentChanged: e => n(e, yesNoTrackingEnum.YES),
+        recordingKey: generateRecordingKey(a, 'horizontal')
       }), jsx(ag, {
         alignment: l,
         alignmentOptions: r,
-        onAlignmentChanged: e => i(e, zk.YES),
-        recordingKey: Pt(a, 'vertical')
+        onAlignmentChanged: e => i(e, yesNoTrackingEnum.YES),
+        recordingKey: generateRecordingKey(a, 'vertical')
       })]
     })
   });
@@ -6320,7 +6318,7 @@ function ah({
           'tooltipShowAbove': !1,
           'isActive': a,
           'onClick': () => n(t),
-          'recordingKey': Pt(l, t),
+          'recordingKey': generateRecordingKey(l, t),
           'children': i()
         })
       }, t);
@@ -6350,7 +6348,7 @@ function ag({
           'tooltipShowAbove': !1,
           'isActive': a,
           'onClick': () => n(t),
-          'recordingKey': Pt(l, t),
+          'recordingKey': generateRecordingKey(l, t),
           'children': i()
         })
       }, t);
@@ -6382,7 +6380,7 @@ function ab() {
   let [e, t] = _$$lJ2('textDecoration');
   let n = e && !isInvalidValue(e) && e === 'UNDERLINE';
   let l = useCallback(() => {
-    n ? t('NONE', zk.YES) : t('UNDERLINE', zk.YES);
+    n ? t('NONE', yesNoTrackingEnum.YES) : t('UNDERLINE', yesNoTrackingEnum.YES);
   }, [n, t]);
   return {
     isUnderlined: n,
@@ -6446,7 +6444,7 @@ function aE() {
     fullscreenValue.updateSelectionProperties({
       fontSize: e
     }, {
-      shouldCommit: zk.YES
+      shouldCommit: yesNoTrackingEnum.YES
     });
   }, []);
   return e ? jsx(_$$R4, {
@@ -7050,7 +7048,7 @@ function aO({
               onActionExecuted: () => {
                 e.dontCloseOnExecute || t();
               },
-              recordingKey: Pt(l, e.trackingId)
+              recordingKey: generateRecordingKey(l, e.trackingId)
             }, `menu-action-${r}-${n}`)), r < e.length - 1 ? jsx(aF, {}, `divider-${r}`) : null]
           }))
         })
@@ -7125,7 +7123,7 @@ function aV({
   let c = useRef(new KD({
     min: 0
   }));
-  let u = e => r(e, zk.YES);
+  let u = e => r(e, yesNoTrackingEnum.YES);
   let x = l ? isInvalidValue(l) ? MIXED_MARKER : l : 0;
   return jsx(aD, {
     padding: e,
@@ -7149,7 +7147,7 @@ function aV({
             'formatter': c.current,
             'labelWidth': 88,
             'onValueChange': u,
-            'recordingKey': Pt(t, 'blurInput'),
+            'recordingKey': generateRecordingKey(t, 'blurInput'),
             'resolution': 1,
             'scrubMultiplier': 0.1,
             smallNudgeAmount,
@@ -7158,7 +7156,7 @@ function aV({
             'children': jsx(_$$V4, {})
           })
         }),
-        recordingKey: Pt(t, 'blurSlider')
+        recordingKey: generateRecordingKey(t, 'blurSlider')
       })
     })
   });
@@ -7189,7 +7187,7 @@ function aK({
         children: e.map(e => createElement(_$$t5.Tab, {
           ...l[e],
           key: e,
-          recordingKey: Pt(n, 'tab', e)
+          recordingKey: generateRecordingKey(n, 'tab', e)
         }, t[e].displayName))
       })
     }), jsx(a$, {}), e.map(e => createElement(_$$t5.TabPanel, {
@@ -7215,20 +7213,20 @@ function aH({
         max: 1,
         step: 0.01,
         bigStep: 0.1,
-        onChange: e => r(e, zk.YES),
+        onChange: e => r(e, yesNoTrackingEnum.YES),
         ariaLabel: getI18nString('cooper.inline_menu.opacity'),
         numberInput: jsx(_$$E2, {
           name: _$$_2.OpacityInput,
           children: jsx(_$$Y2, {
             'dispatch': n,
             'value': i,
-            'onValueChange': e => r(e, zk.YES),
+            'onValueChange': e => r(e, yesNoTrackingEnum.YES),
             'labelWidth': 88,
             'data-tooltip': getI18nString('cooper.inline_menu.opacity'),
-            'recordingKey': Pt(t, 'opacityInput')
+            'recordingKey': generateRecordingKey(t, 'opacityInput')
           })
         }),
-        recordingKey: Pt(t, 'opacitySlider')
+        recordingKey: generateRecordingKey(t, 'opacitySlider')
       })
     })
   });
@@ -7316,7 +7314,7 @@ function aZ({
         'mixed': isInvalidValue(opacity),
         'onChange': onOpacityChange,
         'rangeAnchor': 0,
-        'recordingKey': Pt(n, 'overlayOpacitySlider'),
+        'recordingKey': generateRecordingKey(n, 'overlayOpacitySlider'),
         'step': 0.01,
         'value': isValidValue(opacity) ? opacity ?? 0 : 0
       })
@@ -7329,7 +7327,7 @@ function aZ({
         'max': 0.9,
         'onValueChange': onOpacityChange,
         'labelWidth': 88,
-        'recordingKey': Pt(n, 'overlayOpacityInput')
+        'recordingKey': generateRecordingKey(n, 'overlayOpacityInput')
       })
     }), jsx(_$$E2, {
       name: _$$_2.OverlayColorPicker,
@@ -7337,7 +7335,7 @@ function aZ({
         'aria-expanded': e,
         'onClick': t,
         paint,
-        'recordingKey': Pt(n, 'overlayColorPicker')
+        'recordingKey': generateRecordingKey(n, 'overlayColorPicker')
       })
     })]
   });
@@ -7391,10 +7389,10 @@ function a5({
             'value': shadowOpacity,
             'onValueChange': onChangeShadowOpacity,
             'dispatch': n,
-            'recordingKey': Pt(t, 'shadowOpacityInput')
+            'recordingKey': generateRecordingKey(t, 'shadowOpacityInput')
           })
         }),
-        recordingKey: Pt(t, 'shadowOpacitySlider')
+        recordingKey: generateRecordingKey(t, 'shadowOpacitySlider')
       })
     })
   });
@@ -7461,7 +7459,7 @@ function a8({
     } = Cl();
     let t = GV();
     let n = iS();
-    return k9(() => {
+    return useMemoStable(() => {
       let l = [];
       anyCooperFrames || l.push('OPACITY');
       t[ItemType.EFFECTS_ITEM] && l.push('SHADOW');
@@ -7801,7 +7799,7 @@ function sh({
             color: e,
             opacity: 1,
             type: 'SOLID'
-          }, zk.YES),
+          }, yesNoTrackingEnum.YES),
           opacity: 1,
           isSelected: isValidValue(t) && Vm(e, t?.color) && t?.opacity === 1,
           recordingKey: `cooperFloatingPanelColorChit-${l}`
@@ -7810,7 +7808,7 @@ function sh({
         children: jsx(sl, {
           color: e.color,
           opacity: e.opacity,
-          onClick: () => n(e, zk.YES),
+          onClick: () => n(e, yesNoTrackingEnum.YES),
           isSelected: isValidValue(t) && Vm(e.color, t?.color) && e.opacity === t?.opacity
         }, l)
       }, l))]
@@ -7831,7 +7829,7 @@ function sh({
             color: e,
             opacity: 1,
             type: 'SOLID'
-          }, zk.YES),
+          }, yesNoTrackingEnum.YES),
           opacity: 1,
           isSelected: isValidValue(t) && Vm(e, t?.color) && t?.opacity === 1
         }, l)
@@ -8059,7 +8057,7 @@ function sj({
           color: t,
           opacity: 1,
           type: 'SOLID'
-        }, zk.YES),
+        }, yesNoTrackingEnum.YES),
         opacity: 1,
         isSelected: !!(e && isValidValue(e) && Vm(t, e?.color) && e.opacity === 1)
       }, n)
@@ -8067,7 +8065,7 @@ function sj({
       children: jsx(sl, {
         color: t.color,
         opacity: t.opacity,
-        onClick: () => l(t, zk.YES),
+        onClick: () => l(t, yesNoTrackingEnum.YES),
         isSelected: !!(e && isValidValue(e) && Vm(t.color, e?.color) && e?.opacity === t.opacity)
       }, n)
     }, n)), i < 4 && jsx(sE, {}), jsx(sy, {
@@ -8090,7 +8088,7 @@ function sj({
           color: t,
           opacity: 1,
           type: 'SOLID'
-        }, zk.YES),
+        }, yesNoTrackingEnum.YES),
         opacity: 1,
         isSelected: !!(e && isValidValue(e) && Vm(t, e?.color))
       }, n)
@@ -8847,22 +8845,22 @@ function s6({
       switch (t.activeTab) {
         case sd.SOLID:
           let a = o.current;
-          a ? l(a, zk.NO) : l(Tm.initPaint('SOLID', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel'), zk.YES);
+          a ? l(a, yesNoTrackingEnum.NO) : l(Tm.initPaint('SOLID', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel'), yesNoTrackingEnum.YES);
           break;
         case sd.GRADIENT:
           let s = c.current;
           if (s) {
-            l(s, zk.NO);
+            l(s, yesNoTrackingEnum.NO);
             r(s);
           } else {
             let e = Tm.initPaint('GRADIENT_LINEAR', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel');
-            l(e, zk.YES);
+            l(e, yesNoTrackingEnum.YES);
             r(e);
           }
           break;
         case sd.MEDIA:
           let d = u.current;
-          d ? l(d, zk.NO) : l(Tm.initPaint('IMAGE', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel'), zk.YES);
+          d ? l(d, yesNoTrackingEnum.NO) : l(Tm.initPaint('IMAGE', s2.color, valueOrFallback(i.current, {}), 'cooper-inline-toolbar-fill-panel'), yesNoTrackingEnum.YES);
           break;
         case sd.NONE:
           fullscreenValue.updateSelectionProperties({
@@ -9098,15 +9096,15 @@ function di({
       manager: e,
       children: [jsx(_$$t5.Tab, {
         ...t.FIT,
-        recordingKey: Pt(n, 'tab', 'FIT'),
+        recordingKey: generateRecordingKey(n, 'tab', 'FIT'),
         children: l.current.format('FIT')
       }), jsx(_$$t5.Tab, {
         ...t.FILL,
-        recordingKey: Pt(n, 'tab', 'FILL'),
+        recordingKey: generateRecordingKey(n, 'tab', 'FILL'),
         children: l.current.format('FILL')
       }), jsx(_$$t5.Tab, {
         ...t.STRETCH,
-        recordingKey: Pt(n, 'tab', 'STRETCH'),
+        recordingKey: generateRecordingKey(n, 'tab', 'STRETCH'),
         children: l.current.format('STRETCH')
       })]
     })
@@ -9142,7 +9140,7 @@ function da({
             t({
               ...e,
               transform: r
-            }, l ? zk.YES : zk.NO);
+            }, l ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
           }
         })
       })
@@ -9156,7 +9154,7 @@ function ds({
   disabled: l
 }) {
   let r = useCallback(() => {
-    e === LayoutTabType.RASTER ? (n(Lt(t, 90), zk.YES), _$$l2.user('image-rotate-clockwise', () => {
+    e === LayoutTabType.RASTER ? (n(Lt(t, 90), yesNoTrackingEnum.YES), _$$l2.user('image-rotate-clockwise', () => {
       Fullscreen?.repairThumbnails();
     })) : fullscreenValue.triggerActionInUserEditScope('rotate-90-clockwise');
   }, [e, n, t]);
@@ -9490,8 +9488,8 @@ function dR({
       dashPattern: l,
       strokeWeight: i,
       strokePaint: e,
-      onStrokeWeightChange: e => s(e, zk.YES),
-      onDashPatternChange: e => r(e ?? [], zk.YES),
+      onStrokeWeightChange: e => s(e, yesNoTrackingEnum.YES),
+      onDashPatternChange: e => r(e ?? [], yesNoTrackingEnum.YES),
       strokePaintPickerOpen: t,
       onStrokePaintClick: n
     })
@@ -9793,7 +9791,7 @@ let dU = memo(() => {
   let b = function () {
     let e = gI();
     let [t, n] = useState({});
-    let l = k9(() => t, [t]);
+    let l = useMemoStable(() => t, [t]);
     useLayoutEffect(() => {
       if (!e.length) {
         n({});
@@ -11001,7 +10999,7 @@ function uI({
     let t = useDispatch();
     return useCallback(n => {
       e(n);
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: n,
         error: !0
       }));
@@ -11675,7 +11673,7 @@ function u4({
         u(!1);
       },
       onFocus: () => {
-        _$$tJ([e]);
+        replaceSelection([e]);
         u(!0);
       },
       onKeyDown: e => {
@@ -11692,7 +11690,7 @@ function u4({
       onTargetDragLeave: () => i(!1),
       onTargetDrop: t => {
         if (fullscreenValue.fileArrayToString) {
-          _$$tJ([e]);
+          replaceSelection([e]);
           let n = isValidValue(paint) ? paint : void 0;
           let l = fullscreenValue.fileArrayToString(Array.from(t.files));
           Fullscreen?.dropImageOnPaintThumbnail(n?.blendMode ?? 'NORMAL', n?.opacity ?? 1, l, paintIndex ?? 0, NodePropertyCategory.FILL);
@@ -12894,8 +12892,8 @@ function xq() {
   });
   return e ? jsx(_$$Y3, {
     isDragTarget: () => !0,
-    onTargetDragEnter: () => _$$aH,
-    onTargetDragLeave: () => _$$aH,
+    onTargetDragEnter: () => SKIP_RECORDING,
+    onTargetDragLeave: () => SKIP_RECORDING,
     onTargetDrop: e => {
       if (fullscreenValue.fileArrayToString) {
         let t = fullscreenValue.fileArrayToString(Array.from(e.files)).replace('File', 'File.png');
@@ -13935,7 +13933,7 @@ function pB({
     let t = useDispatch();
     return useCallback(async n => {
       let l = await t(Oe(n));
-      let r = _$$sD.fromString(l);
+      let r = VariableIdHandler.fromString(l);
       if (r) {
         e({
           type: 'SOLID',
@@ -13944,12 +13942,12 @@ function pB({
           blendMode: 'NORMAL',
           colorVar: {
             value: {
-              alias: _$$sD.toKiwi(r)
+              alias: VariableIdHandler.toKiwi(r)
             },
             dataType: 'ALIAS',
             resolvedDataType: 'COLOR'
           }
-        }, zk.YES);
+        }, yesNoTrackingEnum.YES);
       }
     }, [t, e]);
   }(l);
@@ -14000,7 +13998,7 @@ function pB({
           resolvedType: VariableResolvedDataType.COLOR,
           disabledVariableIds: h,
           pickerType: 'color-picker',
-          recordingKey: Pt('cooperColorPicker', 'libraryColors'),
+          recordingKey: generateRecordingKey('cooperColorPicker', 'libraryColors'),
           onVariableSelected: c,
           onStyleSelected: u,
           onClose: _$$lQ,
@@ -14196,7 +14194,7 @@ function pX({
               ...e,
               stops: n,
               stopsVar: l
-            }, zk.YES);
+            }, yesNoTrackingEnum.YES);
           },
           disabled: e.stops.length < 2,
           children: jsxs('div', {
@@ -14236,7 +14234,7 @@ function pJ({
       r({
         ...e,
         paintFilter: i
-      }, l ? zk.YES : zk.NO);
+      }, l ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
     }(e, n, l, r, t);
   }, [e, t]);
   return jsx('div', {
@@ -14667,7 +14665,7 @@ let mw = memo(({
       }), y.showing && jsx(_$$tH, {
         boundaryKey: 'CooperBrowseAllResourcesModal',
         onError: () => {
-          E(_$$F.enqueue({
+          E(VisualBellActions.enqueue({
             message: 'Unable to open inserts menu',
             type: 'react-error'
           }));

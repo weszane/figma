@@ -8,13 +8,13 @@ import { atomStoreManager } from "../figma_app/27355";
 import { isAppShellEnabled } from "../905/561581";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { BrowserInfo } from "../figma_app/778880";
 import { parseAndNormalizeQuery, parseQuery, serializeQuery } from "../905/634134";
 import { sy } from "../figma_app/930338";
 import { isEvalViewPathCheck } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { c5 } from "../905/93909";
 import { h as _$$h } from "../905/662353";
 import { L8, gN, At } from "../905/760074";
@@ -103,7 +103,7 @@ export class $$D1 {
         Vv(e, t);
       }
       s.claim && (d.claim = s.claim);
-      s["google-classroom"] && debugState.dispatch(F.enqueue({
+      s["google-classroom"] && debugState.dispatch(VisualBellActions.enqueue({
         message: getI18nString("whiteboard.google_classroom.addon.submission_reminder"),
         timeoutOverride: 1 / 0,
         onDismiss: lQ
@@ -152,7 +152,7 @@ export class $$D1 {
   selectedViewToPath(e, t) {
     if ("fullscreen" === e.view) {
       let i;
-      if (e.fileKey === Zt) return isEvalViewPathCheck() ? `/test/eval/view${Ay.location.search}` : `/test/interactions${Ay.location.search}`;
+      if (e.fileKey === Zt) return isEvalViewPathCheck() ? `/test/eval/view${customHistory.location.search}` : `/test/interactions${customHistory.location.search}`;
       let n = this.selectedViewName(e, t);
       let a = n ? sy(n) : "";
       let p = {};

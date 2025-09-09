@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import a from "../vendor/879378";
 import { A } from "../vendor/21595";
 import { NC } from "../905/17179";

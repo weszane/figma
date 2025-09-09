@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { dR } from "../905/508367";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -15,7 +15,7 @@ export function $$u0() {
     e(Ts({
       origin: t,
       formState: r,
-      redirectUrl: dR(Ay.location.pathname, {
+      redirectUrl: dR(customHistory.location.pathname, {
         [ao.key]: ao.value
       }),
       signedUpFromOpenSession: !0

@@ -19,7 +19,7 @@ import { n as _$$n } from "../1528/289390";
 import { Q as _$$Q } from "../9410/629866";
 import { cT, n0, GQ, vr, TU, _4, bi, Ye } from "../figma_app/32128";
 import { G as _$$G, N as _$$N } from "../b2835def/560769";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { t as _$$t } from "../905/150656";
 import { $ as _$$$2 } from "../905/455748";
 import { F as _$$F } from "../905/680873";
@@ -58,12 +58,12 @@ import { Hz } from "../figma_app/591738";
 import { S as _$$S } from "../642/159607";
 import { n1 } from "../figma_app/657017";
 import { Gq } from "../figma_app/361662";
-import { wr } from "../figma_app/741237";
+import { clearSelection } from "../figma_app/741237";
 import { LR } from "../figma_app/120210";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
-import { kQI } from "../figma_app/43951";
+import { TeamCanEdit } from "../figma_app/43951";
 import { jO } from "../figma_app/242339";
 import { w5 } from "../figma_app/345997";
 import { h as _$$h2 } from "../figma_app/198885";
@@ -91,7 +91,7 @@ import { t as _$$t3, E as _$$E2 } from "../905/511388";
 import { P as _$$P2, J as _$$J } from "../figma_app/582341";
 import { JA } from "../figma_app/608944";
 import { l6, c$, sK } from "../905/794875";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { U as _$$U } from "../905/966438";
 import { m as _$$m } from "../642/720139";
 import { Wh } from "../figma_app/615482";
@@ -423,7 +423,7 @@ function eY({
   let i = t ? getI18nString("design_systems.assets_panel.show_as_grid") : getI18nString("design_systems.assets_panel.show_as_list");
   return jsx(K0, {
     ref: s,
-    recordingKey: Pt(a, "toggleComponentsSidebarViewMode"),
+    recordingKey: generateRecordingKey(a, "toggleComponentsSidebarViewMode"),
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip": i,
     svg: t ? '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="#454545" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M4 1H1v3h3zM0 0v5h5V0zm11 1H8v3h3zM7 0v5h5V0zM4 8H1v3h3zM0 7v5h5V7zm11 1H8v3h3zM7 7v5h5V7z"/></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#000" fill-opacity="1" fill-rule="nonzero" stroke="none" d="M6 6h2v1H6zm0 10h2v1H6zm0-5h2v1H6zm4-5h8v1h-8zm0 10h8v1h-8zm0-5h8v1h-8z"/></svg>',
@@ -1056,7 +1056,7 @@ function t6({
   containerSizingOptions: e,
   recordingKey: t
 }) {
-  let s = iZ();
+  let s = selectCurrentUser();
   let a = q5();
   let [i, l] = useAtomValueAndSetter(e0);
   let d = _$$A2(e => {
@@ -1470,7 +1470,7 @@ function t9({
   let G = W && u?.data?.component || null;
   let Y = _$$K3(!0);
   let X = useCallback(() => {
-    W || wr();
+    W || clearSelection();
   }, [W]);
   let [Q, eh] = useLocalStorageSync("has-auto-expanded-component-libraries-for-nux", !1);
   let eT = n1();
@@ -1489,7 +1489,7 @@ function t9({
   let eN = S || B.isLoading;
   let eI = jO();
   let eC = k?.teamId ? b[k.teamId] : null;
-  let eM = Rs(kQI, {
+  let eM = Rs(TeamCanEdit, {
     id: k?.teamId ?? ""
   }, {
     enabled: !!k?.teamId

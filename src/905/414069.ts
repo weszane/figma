@@ -1,6 +1,6 @@
 import { debugState } from "../905/407919";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { subscribeObservable } from "../figma_app/84367";
 import { fullscreenValue } from "../figma_app/455680";
 import { N } from "../905/293182";
@@ -26,7 +26,7 @@ export function $$p0(e) {
     onChangeImmediate() {
       if (!$$u1()) return;
       let e = t.getMessage(t.getObservable().getCopy());
-      e && debugState.dispatch(F.enqueue({
+      e && debugState.dispatch(VisualBellActions.enqueue({
         type: "settings_changed",
         ...e
       }));

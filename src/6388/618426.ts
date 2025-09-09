@@ -1,16 +1,16 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useMemo, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { c$ } from "../905/867927";
 import { f as _$$f } from "../905/335032";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { f4 } from "../figma_app/722362";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { r as _$$r } from "../figma_app/711157";
 import { tR } from "../6388/410011";
 import { Y } from "../6388/262412";
@@ -98,7 +98,7 @@ export function $$I0({
         legend: renderI18nText("slides.properties_panel.shadow.legend"),
         value: selectedShadowStyle,
         onChange: onChangeShadowStyleControl,
-        recordingKey: Pt(e, "shadowStyle"),
+        recordingKey: generateRecordingKey(e, "shadowStyle"),
         children: S.map(e => jsx(c$, {
           value: e,
           icon: shadowStylePresetOptions[e].icon,
@@ -118,12 +118,12 @@ export function $$I0({
             "data-tooltip": getI18nString("slides.properties_panel.shadow_opacity"),
             value: shadowOpacity,
             onValueChange: onChangeShadowOpacity,
-            recordingKey: Pt(e, "shadowOpacity", "input"),
+            recordingKey: generateRecordingKey(e, "shadowOpacity", "input"),
             dispatch: t
           })
         }),
         onChange: onChangeShadowOpacity,
-        recordingKey: Pt(e, "shadowOpacity"),
+        recordingKey: generateRecordingKey(e, "shadowOpacity"),
         sliderTrackableName: "slides_shadow_opacity_slider",
         step: .01,
         value: shadowOpacity
@@ -226,7 +226,7 @@ export function $$T1() {
         radius: e.radius,
         spread: 0,
         opacity: n * (e.opacityMultiplier || 1)
-      })) : null, zk.YES);
+      })) : null, yesNoTrackingEnum.YES);
       r(e);
     },
     onChangeShadowOpacity: o => {
@@ -235,7 +235,7 @@ export function $$T1() {
         t(e.map((e, t) => ({
           ...e,
           opacity: n?.value?.[t]?.opacityMultiplier ? o * (n?.value?.[t]?.opacityMultiplier || 1) : o
-        })), zk.YES);
+        })), yesNoTrackingEnum.YES);
       }
     }
   };

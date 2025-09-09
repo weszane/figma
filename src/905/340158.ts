@@ -8,7 +8,7 @@ import { O as _$$O } from "../905/566074";
 import { c2 } from "../905/382883";
 import { logError } from "../905/714362";
 import { FComponentType } from "../figma_app/191312";
-import { IUX, Bu2 } from "../figma_app/43951";
+import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
 import { PW as _$$PW } from "../905/497152";
 import { RG, pz, yP } from "../figma_app/825489";
 import { sC } from "../905/395857";
@@ -82,11 +82,11 @@ let I = createRemovableAtomFamily(({
       }
     }(e)) {
       case FComponentType.CODE_COMPONENT:
-        return e => IUX.Query({
+        return e => CodeComponentsInLibrary.Query({
           libraryKey: e
         });
       case FComponentType.RESPONSIVE_SET:
-        return e => Bu2.Query({
+        return e => LibraryAssetDataOfType.Query({
           libraryKey: e,
           assetType: FComponentType.RESPONSIVE_SET
         });

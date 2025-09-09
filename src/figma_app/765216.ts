@@ -1,8 +1,8 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Bu, d3 } from "../figma_app/156285";
 import { useMemo, useState, useRef, useEffect, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { PropertyScope, NodePropertyCategory, Fullscreen, DistributionType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString, parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
@@ -126,7 +126,7 @@ function R({
         U(!1);
       },
       onTargetDrop: K,
-      recordingKey: Pt(e, "dropTarget"),
+      recordingKey: generateRecordingKey(e, "dropTarget"),
       children: jsx("div", {
         ref: B,
         className: h()("stroke_paint_picker--chitContainer--11NPs", {
@@ -134,7 +134,7 @@ function R({
         }),
         children: jsx(J, {
           paint: D,
-          recordingKey: Pt(e, "chit"),
+          recordingKey: generateRecordingKey(e, "chit"),
           className: "stroke_paint_picker--chit--G7Akm ui3_illustration_paint_row--alwaysOutlinedChit--oqcjo",
           onFocus: z
         })
@@ -171,7 +171,7 @@ function R({
         },
         offset: new Point(0, 8)
       },
-      recordingKey: Pt(e, "paintPicker"),
+      recordingKey: generateRecordingKey(e, "paintPicker"),
       selectedStyle: null,
       updateStillImageAndSelectionPropertiesForGIF: $,
       variableScopes: C
@@ -230,7 +230,7 @@ function G({
         },
         offset: new Point(0, 8)
       },
-      recordingKey: Pt(t, "brushDropdownTrigger"),
+      recordingKey: generateRecordingKey(t, "brushDropdownTrigger"),
       onboardingKey: yl
     })
   });
@@ -249,7 +249,7 @@ export function $$V0({
       atom: e
     }), t && jsx(G, {
       atom: e,
-      recordingKey: Pt(s, "brushPicker")
+      recordingKey: generateRecordingKey(s, "brushPicker")
     }), r]
   });
 }

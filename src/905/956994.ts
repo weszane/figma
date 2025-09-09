@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { MJ, Nc } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Ph } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
@@ -18,7 +18,7 @@ export function $$p1({
     let r = `font-set-option-${e}-${t}`;
     "divider" !== e ? o.push(jsx(Lz, {
       value: e,
-      recordingKey: Pt(i, e)
+      recordingKey: generateRecordingKey(i, e)
     }, r)) : o.length > 0 && o[o.length - 1].key && o.push(jsx(sK, {}, r));
   });
   return o;

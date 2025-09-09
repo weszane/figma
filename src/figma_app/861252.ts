@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
 import { AppStateTsApi } from "../figma_app/763686";
@@ -14,7 +14,7 @@ import { o as _$$o } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { x as _$$x } from "../905/587214";
 import { f as _$$f } from "../905/335032";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
@@ -27,7 +27,7 @@ import { jl } from "../figma_app/471982";
 import { to } from "../figma_app/828186";
 import { U as _$$U } from "../905/492359";
 import { S as _$$S } from "../5132/724052";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { m as _$$m } from "../figma_app/694193";
 import { xo } from "../figma_app/473493";
 import { cJ, Em } from "../figma_app/976749";
@@ -89,7 +89,7 @@ function R(e) {
     canZoom
   } = e;
   return jsx(_$$E, {
-    recordingKey: Pt(recordingKey, "zoomInButton"),
+    recordingKey: generateRecordingKey(recordingKey, "zoomInButton"),
     className: p()("zoom_menu--zoomPlus--zMtgE", {
       [C]: canZoom
     }),
@@ -118,7 +118,7 @@ function L(e) {
     canZoom
   } = e;
   return jsx(_$$E, {
-    recordingKey: Pt(recordingKey, "zoomOutButton"),
+    recordingKey: generateRecordingKey(recordingKey, "zoomOutButton"),
     className: p()("zoom_menu--zoomMinus--BrHt4", {
       [C]: canZoom
     }),
@@ -147,7 +147,7 @@ function B() {
   return !e && t ? jsxs(_$$E, {
     className: "x78zum5 x153ncpu x1q0g3np xl56j7k x6s0dn4 x1jnr06f xgqmno8 xsqpjig",
     onClick: () => {
-      Ay.unsafeRedirect(_$$m, "_blank");
+      customHistory.unsafeRedirect(_$$m, "_blank");
     },
     children: [jsx("div", {
       className: "x1tk3asg x17akokd x1qxcl5b xclx6tv",

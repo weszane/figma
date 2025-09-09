@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { dx, Nn, MZ } from "../figma_app/399472";
 import { A, jT } from "../figma_app/711113";
 import { getPluginMetadata } from "../figma_app/300692";
@@ -23,7 +23,7 @@ export function $$m0({
           plugin_id: I0(m) ? m.id : void 0,
           src: Nn.COMMUNITY_PAGE
         }));
-        r(F.enqueue({
+        r(VisualBellActions.enqueue({
           message: getI18nString("community.detail_view.accepted_publisher_invite")
         }));
       },
@@ -33,7 +33,7 @@ export function $$m0({
           plugin_id: I0(m) ? m.id : void 0,
           src: Nn.COMMUNITY_PAGE
         }));
-        r(F.enqueue({
+        r(VisualBellActions.enqueue({
           message: getI18nString("community.detail_view.declined_publisher_invite")
         }));
       },

@@ -10,7 +10,7 @@ import { vr } from '../figma_app/514043';
 import { Fj } from '../figma_app/594947';
 import { k } from '../figma_app/618031';
 import { I1 } from '../figma_app/990058';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useSelector, useDispatch } from 'react-redux';
 export function $$h0(e, t) {
   let a = useDispatch();
   let {

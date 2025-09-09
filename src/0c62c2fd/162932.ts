@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo, createRef } from "react";
-import { connect, useDispatch } from "../vendor/514228";
+import { connect, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { $n } from "../905/521428";
 import { o as _$$o } from "../905/821217";
@@ -77,7 +77,7 @@ let $$L0 = connect(e => ({
     })),
     loading: u,
     canAdmin: teamPermissions.canAdmin
-  }), [dispatch, e.dropdownShown, u, p, teamPermissions.canAdmin, teamId,,]);
+  }), [dispatch, e.dropdownShown, u, p, teamPermissions.canAdmin, teamId, ,]);
   let g = useCallback(() => {
     m && dispatch(LN({
       teamId: e.teamId,

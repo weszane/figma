@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { v as _$$v } from "../figma_app/306727";
 import { q as _$$q } from "../905/838985";
 import { G as _$$G } from "../905/117393";
@@ -44,7 +44,7 @@ import { Fullscreen, DesignGraphElements, ViewType, LayoutTabType, UserInterface
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getFilteredFeatureFlags } from "../905/717445";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { WN } from "../figma_app/638601";
 import { F as _$$F2 } from "../figma_app/832508";
 import { y as _$$y3 } from "../figma_app/778611";
@@ -59,7 +59,7 @@ import { getI18nString } from "../905/303541";
 import { _Y } from "../figma_app/275462";
 import { to } from "../figma_app/828186";
 import { xo } from "../figma_app/473493";
-import { Kv } from "../figma_app/544649";
+import { isDevModeFocusViewActive } from "../figma_app/544649";
 import { n6 } from "../905/234821";
 import { k as _$$k3 } from "../figma_app/564183";
 import { wg } from "../figma_app/101956";
@@ -301,7 +301,7 @@ function eX({
     isSelected: t,
     children: jsx(_$$I2, {
       toolType: r,
-      recordingKey: Pt("illustrationToolbar.drawing", String(r)),
+      recordingKey: generateRecordingKey("illustrationToolbar.drawing", String(r)),
       isSelected: t,
       onClick: () => {
         "pen" === r && a || Fullscreen.setDefaultEditMode();
@@ -552,7 +552,7 @@ export function $$e00(e) {
     showPublish
   } = _$$U();
   let v = e => {
-    if (!suppressRecordingKeys) return Pt("toolbarView", e);
+    if (!suppressRecordingKeys) return generateRecordingKey("toolbarView", e);
   };
   let A = uh(h);
   let x = AE();
@@ -715,7 +715,7 @@ export function $$e00(e) {
   let eO = hv({
     isEnabledForViewers: !1
   }) || m;
-  let eR = Kv();
+  let eR = isDevModeFocusViewActive();
   return jsxs(kF, {
     editorTheme: eb,
     children: [jsxs("div", {

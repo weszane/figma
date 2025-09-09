@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { nt } from "../figma_app/687776";
 export function $$s0() {
   let e = useSelector(e => e.user?.drafts_folder_id);

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useMemo, createRef, useState, useRef, useCallback, useLayoutEffect, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { J } from "../905/614223";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";

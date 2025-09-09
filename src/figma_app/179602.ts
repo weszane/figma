@@ -1,11 +1,11 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { Us } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { _8, dL } from "../figma_app/530167";
 import { s as _$$s } from "../905/608932";
 import { registerModal } from "../905/102752";
@@ -40,7 +40,7 @@ export function $$f1(e) {
   };
   let I = (e, t) => {
     T(e, t);
-    m(F.enqueue({
+    m(VisualBellActions.enqueue({
       message: t ? getI18nString("community.comments.restricted_this_user_s_comments") : getI18nString("community.comments.unrestricted_this_user_s_comments"),
       type: "profile-restricted-change",
       button: {

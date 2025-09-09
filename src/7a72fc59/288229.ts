@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { A } from "../905/891805";
 import { generateRecordingKey } from "../figma_app/878298";

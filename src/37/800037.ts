@@ -11,7 +11,7 @@ import { e1 } from "../vendor/850527";
 import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
 import { RT, vJ, UD, Ac, bb, n1, uT, Kp, Ey, ns, gC, w$, $$if, Jj, Q$, XK, I2, Cy, Ni, ff, bS, kF, pF, Mv, sT, lJ } from "../vendor/408361";
-import { qP, Pt } from "../figma_app/806412";
+import { useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { M3 } from "../figma_app/119475";
 import { B as _$$B } from "../905/714743";
@@ -592,7 +592,7 @@ function eO({
   let p = useCallback(e => {
     "node_id" in e ? s(e.node_id) : "COMPONENT_PROP" === e.type ? s(lC(e)) : s(e.name);
   }, [s]);
-  let d = qP(u ?? "", "ENTER", useCallback(() => {
+  let d = useSetupPlayback(u ?? "", "ENTER", useCallback(() => {
     c.update(() => {
       let e = vJ()?.getNodes();
       a(e?.[0]);
@@ -644,7 +644,7 @@ function eO({
           });
         },
         pickerType: "fields",
-        recordingKey: Pt(u, "variableList"),
+        recordingKey: generateRecordingKey(u, "variableList"),
         selectedItemID: null
       })
     })]
@@ -1197,7 +1197,7 @@ export function $$ev0({
         currentView,
         setCurrentView,
         onItemSelect: eP,
-        recordingKey: Pt(U, "selectVariablePlugin")
+        recordingKey: generateRecordingKey(U, "selectVariablePlugin")
       }), jsx(eh, {
         listItems: eb,
         resolvedType: r,

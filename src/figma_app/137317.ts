@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/150656";
 import { bL, RT } from "../905/867927";
@@ -186,7 +186,7 @@ function L({
   selectedTabKey: r
 }) {
   let i = e.reduce((e, t) => (e[t.key] = !0, e), {});
-  let [a,, s] = _$$t.useManagedTabs(i, r, t, {
+  let [a, , s] = _$$t.useManagedTabs(i, r, t, {
     recordingKey: "devHandoffPanelTabs"
   });
   return jsx("div", {

@@ -12,7 +12,7 @@ import { O0, Ox, wv } from '../905/247509';
 import { kiwiParserCodec } from '../905/294864';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { $ as _$$$ } from '../905/330495';
-import { iZ } from '../905/372672';
+import { selectCurrentUser } from '../905/372672';
 import { cF } from '../905/382883';
 import { debugState } from '../905/407919';
 import { trackEventAnalytics } from '../905/449184';
@@ -30,7 +30,7 @@ import { G as _$$G3 } from '../905/702115';
 import { u as _$$u, qW, Ss, xY } from '../905/720292';
 import { H1, q1 } from '../905/822030';
 import { $8, f as _$$f, rb as _$$rb, S as _$$S, _H, b6, bV, dp, gO, Ik, K9, Kk, Lq, m7, m_, mq, ND, nL, Q9, sh, t4, tH, vF, Wc, wH, xZ, ZJ, Zl } from '../905/850755';
-import { AW, cs, FO } from '../905/869235';
+import { styleIdMapping, activeVisualAttributes, ProjectDevelopmentPhases } from '../905/869235';
 import { defaultSessionLocalIDString, sessionLocalIDToString } from '../905/871411';
 import { dF, Dx, mH } from '../905/917193';
 import { sf } from '../905/929976';
@@ -52,7 +52,7 @@ import { DiffImpl, SceneGraphHelpers, Fullscreen, FileSourceType, UIVisibilitySe
 import { _t, Ht, Nb, tP, V_, w_ } from '../figma_app/841351';
 import { lF } from '../figma_app/915202';
 import { Ib } from '../figma_app/955484';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useSelector, useDispatch } from 'react-redux';
 let y = E;
 let ea = [2, 3, 6, 13, 25, 50, 75, 100, 200, 300, 1e3];
 function es(e, t, r) {
@@ -177,7 +177,7 @@ function eu({
         if (x) {
           let e = function (e, t, r, n, i) {
             let a = new Map();
-            for (let [l, d] of AW) {
+            for (let [l, d] of styleIdMapping) {
               let c = null;
               let u = null;
               if (ar(l) && (e[l] && e[l].guid && (c = sessionLocalIDToString(e[l].guid)), t[l] && t[l].guid && (u = sessionLocalIDToString(t[l].guid))), c || u) {
@@ -226,7 +226,7 @@ function eu({
             }
             return a;
           }(E, x?.change, r, n, i);
-          for (let e of cs) {
+          for (let e of activeVisualAttributes) {
             if (!cF(x.change[e], E[e]) && (e !== 'textData' || x.change[e]?.characters !== E[e]?.characters)) {
               if (e === 'transform' && y || d && !es(x.change.guid, n, b) && !es(E.guid, r, b)) {
                 continue;
@@ -456,7 +456,7 @@ export function $$eE2(e) {
     origin
   } = e;
   let D = tS();
-  let k = iZ()?.id;
+  let k = selectCurrentUser()?.id;
   let [M, F] = useState(Ss.SIDE_BY_SIDE);
   let [j, G] = useState(q0);
   let [V, H] = useState(!0);
@@ -606,7 +606,7 @@ export function $$eE2(e) {
       zoomToSelection: !0
     }), eT(e), J(sessionLocalIDToString(t.basis.guid)), et(sessionLocalIDToString(t.change.guid)));
   }, [eh?.id, eT]);
-  let eG = useMemo(() => eI && kF(eI, FO.LEGO, void 0, O0) || {}, [eI]);
+  let eG = useMemo(() => eI && kF(eI, ProjectDevelopmentPhases.LEGO, void 0, O0) || {}, [eI]);
   let eV = !mf(eG);
   let eH = discreteDiffingInput ? discreteDiffingInput.nodeId : nodeId;
   let {
@@ -901,7 +901,7 @@ export function $$eE2(e) {
               children: jsxs(qW, {
                 zoomPercentageOptions: ea,
                 resetStateOnChangeValue: nodeId,
-                compareThumbnailSource: FO.LEGO,
+                compareThumbnailSource: ProjectDevelopmentPhases.LEGO,
                 zoomOnMousePointer: !0,
                 children: [jsxs('div', {
                   className: bV,

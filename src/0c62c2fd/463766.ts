@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -19,7 +19,7 @@ import { DashboardSections } from "../905/548208";
 import { o0 } from "../905/844131";
 import { l as _$$l } from "../4452/447644";
 import { nF, lF } from "../4452/710166";
-if (443 == require.j) {}
+if (443 == require.j) { }
 export function $$T0() {
   let e = useDispatch();
   let t = S2();

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
-import { c1 } from "../figma_app/806412";
+import { useDispatch } from "react-redux";
+import { createRecordingCallback } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { Ib } from "../905/129884";
@@ -35,7 +35,7 @@ function f({
   let I = useDispatch();
   let E = Xs();
   let x = isInvalidValue(t) ? g : {};
-  let S = c1(A);
+  let S = createRecordingCallback(A);
   return jsx($j, {
     className: z,
     "data-tooltip": "width" === u ? getI18nString("fullscreen.properties_panel.transform_panel.width") : getI18nString("fullscreen.properties_panel.transform_panel.height"),

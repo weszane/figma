@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
-import { uA, cZ } from "../figma_app/806412";
+import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
 import { Ib } from "../905/129884";
-export class $$s0 extends uA {
+export class $$s0 extends RecordingComponent {
   constructor(e) {
     super(e);
     this.styleOverrides = () => ({});
     this.applyDefaultStyles = () => !0;
-    this.onClick = cZ(this, "click", () => {
+    this.onClick = handleMouseEvent(this, "click", () => {
       this.props.onClick && this.props.onClick(this.props.tab);
     });
     this.onMouseEnter = e => {

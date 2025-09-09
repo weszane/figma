@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { N as _$$N } from "../905/438674";
 import { bL } from "../905/38914";
@@ -7,10 +7,10 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { CorePerfInfo, DocumentMode } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { XE } from "../figma_app/976749";
@@ -34,7 +34,7 @@ export function $$C2(e) {
   let t = hS({
     open: !0,
     preventUserClose: !0,
-    onClose: () => {}
+    onClose: () => { }
   });
   let r = useSelector(e => e.mirror.appModel.isReadOnly);
   let u = useSelector(e => e.selectedView);
@@ -111,7 +111,7 @@ export function $$C2(e) {
                 isReadOnly: r
               });
             },
-            recordingKey: Pt(e, "crash"),
+            recordingKey: generateRecordingKey(e, "crash"),
             href: L.secondaryButtonExternalLink,
             newTab: !0,
             variant: "secondary",
@@ -122,11 +122,11 @@ export function $$C2(e) {
               variant: "primary",
               href: L.buttonExternalLink,
               newTab: !0,
-              recordingKey: Pt(e, "crash"),
+              recordingKey: generateRecordingKey(e, "crash"),
               children: L.buttonCTA
             }) : jsx($n, {
               variant: "primary",
-              recordingKey: Pt(e, "crash"),
+              recordingKey: generateRecordingKey(e, "crash"),
               onClick: () => {
                 L.buttonCTA === getI18nString("memory_warning_modal.recovery_mode_button") && $$A0({
                   warningEvent: "OPEN_RECOVERY_MODE",
@@ -135,7 +135,7 @@ export function $$C2(e) {
                   isReadOnly: r
                 });
                 ("showRecoveryMode" === O || r) && N(sf(C));
-                ("showReload" === O || "showRecoveryMode" === O) && Ay.reload("Memory warning panel");
+                ("showReload" === O || "showRecoveryMode" === O) && customHistory.reload("Memory warning panel");
               },
               children: L.buttonCTA
             })

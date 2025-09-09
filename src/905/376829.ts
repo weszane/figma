@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, createElement, useCallback, useMemo, useRef, useState, Component } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
@@ -30,7 +30,7 @@ import { A as _$$A } from "../3850/824007";
 import { G as _$$G } from "../figma_app/119843";
 import U from "classnames";
 import { Rs } from "../figma_app/288654";
-import { N63 } from "../figma_app/43951";
+import { SearchFilterWorkspaceView } from "../figma_app/43951";
 import { p as _$$p } from "../figma_app/353099";
 import { h as _$$h } from "../905/207101";
 import { e as _$$e } from "../905/621515";
@@ -47,7 +47,7 @@ import { nD, uB } from "../905/572991";
 import { debounce } from "../905/915765";
 import { wv, MM } from "../figma_app/236327";
 import { lV, R1 } from "../figma_app/802781";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Cf } from "../905/504727";
 import { g as _$$g2 } from "../905/210813";
 import { Kc } from "../figma_app/626700";
@@ -229,7 +229,7 @@ let ep = (e, t) => {
 function em(e) {
   let t = useSelector(e => e.currentUserOrgId);
   let i = "NON_ORG_TEAMS" !== e.planId && e.planId || t;
-  let n = Rs(N63, {
+  let n = Rs(SearchFilterWorkspaceView, {
     orgId: i
   });
   let {
@@ -319,7 +319,7 @@ let ex = wv;
 let eS = "NON_ORG_TEAMS";
 let ew = {};
 function eC(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = useSelector(e => t ? e.authedUsers.byId[t.id]?.plans : null);
   if (i && 0 === i.length) return jsx(Fragment, {});
   let n = [];

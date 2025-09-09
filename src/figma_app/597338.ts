@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { L as _$$L } from "../905/704296";
 import { HistoryChangesBindings, ChangeType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";

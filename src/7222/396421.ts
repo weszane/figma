@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState, useRef, useEffect, createContext, useContext } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { AppStateTsApi, ThemeMode, SourceType, TemplateType } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { l as _$$l } from "../905/716947";
@@ -17,10 +17,10 @@ import { Bs } from "../figma_app/933328";
 import { qY } from "../figma_app/622574";
 import { Cu } from "../figma_app/314264";
 import { q5, tS } from "../figma_app/516028";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { a6 } from "../figma_app/198840";
 import { FFileType } from "../figma_app/191312";
-import { hN$ } from "../figma_app/43951";
+import { EditorFilePickerRecentFilesByEditorTypeView } from "../figma_app/43951";
 import { YN } from "../figma_app/349248";
 import { IT } from "../905/713695";
 import { Fk } from "../figma_app/167249";
@@ -327,7 +327,7 @@ export function $$el8(e) {
   };
 }
 let en = getFeatureFlags().editor_file_picker_recent_files_standalone_view ? function (e) {
-  let [t] = IT(hN$({
+  let [t] = IT(EditorFilePickerRecentFilesByEditorTypeView({
     _editorTypeRaw: mapFileTypeToNumericString(e)
   }));
   let r = useMemo(() => t.transform(e => YN(e.currentUser.recentFiles2ByEditorType)), [t]);
@@ -351,7 +351,7 @@ export function $$ea10() {
 export function $$es2() {
   let [, e] = useLocalStorageSync(j, {});
   let t = q5();
-  let r = TA();
+  let r = getUserId();
   let u = (() => {
     let e = localStorage.getItem(j);
     if (!e) return {};

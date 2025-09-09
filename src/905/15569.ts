@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { wm, ID } from "../905/19536";
+import { useMemoShallow, useStableState } from "../905/19536";
 import c from "lodash-es/mapValues";
 import { reportError } from "../905/11";
 import { d as _$$d } from "../905/381451";
@@ -16,8 +16,8 @@ export function $$_0(e) {
   let t = B7(e);
   return function (i, s = {}) {
     f(e);
-    let l = wm(() => i, [i]);
-    let [c, g] = ID({
+    let l = useMemoShallow(() => i, [i]);
+    let [c, g] = useStableState({
       status: "idle"
     }, shallowEqual);
     useEffect(() => {

@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect, useId } from "react";
-import { useDispatch } from "../vendor/514228";
-import { gr } from "../figma_app/243058";
+import { useDispatch } from "react-redux";
+import { VariableSetIdCompatHandler } from "../figma_app/243058";
 import { yG } from "../905/859698";
 import { SceneGraphTsApi } from "../figma_app/763686";
 import d from "../vendor/181640";
 import p from "../vendor/223926";
 import h from "lodash-es/mapValues";
 import x from "../vendor/626715";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
@@ -145,7 +145,7 @@ export function $$V0({
     let t = isInvalidValue(e) || void 0 === e ? e : function (e, t) {
       let n = e.find(e => e.modeData.collectionID === t);
       if (n) return n;
-      let o = gr.toRefIfSubscribed(t);
+      let o = VariableSetIdCompatHandler.toRefIfSubscribed(t);
       if (o) return e.find(e => e.setKey === o.key);
     }(allVariableSets, e) || k;
     let n = (() => {
@@ -231,7 +231,7 @@ function U({
     children: allVariableSets.length > 0 ? [localVariableSets.length > 0 && jsx(O, {
       isHeader: !0,
       formattedValue: getI18nString("variables.mode_properties_panel.assets_created_in_file.subheading")
-    }, Pt(s, "local_variables")), ...localVariableSets.map(e => H(e, !1)), ...subscribedVariableSetsWithSections.map((e, t) => H(e, localVariableSets.length > 0 || t > 0))] : []
+    }, generateRecordingKey(s, "local_variables")), ...localVariableSets.map(e => H(e, !1)), ...subscribedVariableSetsWithSections.map((e, t) => H(e, localVariableSets.length > 0 || t > 0))] : []
   });
 }
 let F = {

@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useId, useState, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { K as _$$K } from "../905/443068";
 import { f as _$$f } from "../905/335032";
 import { getFeatureFlags } from "../905/601108";
 import c from "../vendor/223926";
-import { Ay } from "../905/612521";
-import { Pt } from "../figma_app/806412";
+import { customHistory } from "../905/612521";
+import { generateRecordingKey } from "../figma_app/878298";
 import { logError } from "../905/714362";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -163,7 +163,7 @@ export function $$$0({
             }
           })) : _(l, e, t);
         },
-        recordingKey: Pt(i, `variableModeEntry-${t}`),
+        recordingKey: generateRecordingKey(i, `variableModeEntry-${t}`),
         showExplicitOnly: t,
         showInheritedModeOption: void 0 === n || n,
         variableSetKey: l,
@@ -241,7 +241,7 @@ export function $$W1(e) {
     Object.entries(i).map(([t, l]) => {
       for (let i of (r.length > 0 && l.length > 0 && r.push(jsx(sK, {})), l)) r.push(jsx(U, {
         value: i.modeId,
-        recordingKey: Pt(e, `varSetSelect=${t}`, `value=${i.modeId.guid}`, `varSetKey=${t}`),
+        recordingKey: generateRecordingKey(e, `varSetSelect=${t}`, `value=${i.modeId.guid}`, `varSetKey=${t}`),
         fullWidth: !0,
         rightSettingsIcon: i.isCompatible ? void 0 : s
       }, `mode-option-${t}-${i.modeId.guid}-${n}`));
@@ -249,12 +249,12 @@ export function $$W1(e) {
     t.some(e => !e.isCompatible) && (r.push(jsx(sK, {})), l === iw.REVIEW_UPDATES ? r.push(jsx(U, {
       value: iw.REVIEW_UPDATES,
       iconToReplaceCheck: s,
-      recordingKey: Pt(e, "incompatible-modes-review-updates"),
+      recordingKey: generateRecordingKey(e, "incompatible-modes-review-updates"),
       additionalStylesClassName: B
     }, "incompatible-modes-updates")) : l === iw.LEARN_MORE && r.push(jsx(U, {
       value: iw.LEARN_MORE,
       iconToReplaceCheck: s,
-      recordingKey: Pt(e, "incompatible-modes-learn-more"),
+      recordingKey: generateRecordingKey(e, "incompatible-modes-learn-more"),
       additionalStylesClassName: B
     }, "incompatible-modes-learn-more")));
     return r;
@@ -264,7 +264,7 @@ export function $$W1(e) {
     isEqual: (e, t) => e === t
   }), [el.collectionsInFamily]);
   let eo = useCallback(e => {
-    if (e === el.activeCollectionKeyInFamily) onChange(Z, Q);else {
+    if (e === el.activeCollectionKeyInFamily) onChange(Z, Q); else {
       let t = modeOptions.find(t => t.modeId.collectionKey === e && t.isCompatible);
       if (!t) return;
       onChange(t.modeId, t.name);
@@ -280,21 +280,21 @@ export function $$W1(e) {
     let o = [];
     n && o.push(jsx(U, {
       value: Mo,
-      recordingKey: Pt(e, "value:MIXED"),
+      recordingKey: generateRecordingKey(e, "value:MIXED"),
       selected: !0
     }, Mo), jsx(sK, {}));
     l ? r && o.push(jsx(U, {
       value: UE,
-      recordingKey: Pt(e, "value:INHERIT")
+      recordingKey: generateRecordingKey(e, "value:INHERIT")
     }, UE), jsx(sK, {})) : s.length > 0 && i && o.push(jsx(U, {
       value: Ws,
-      recordingKey: Pt(e, "value:DEFAULT"),
+      recordingKey: generateRecordingKey(e, "value:DEFAULT"),
       disabled: !s[0].isCompatible,
       selected: t === Ws
     }, Ws), jsx(sK, {}));
     t === Yn && o.push(jsx(U, {
       value: Yn,
-      recordingKey: Pt(e, "value:DELETED"),
+      recordingKey: generateRecordingKey(e, "value:DELETED"),
       disabled: !0,
       selected: !0
     }, Yn));
@@ -316,7 +316,7 @@ export function $$W1(e) {
     id: `var-set-mode-${variableSetKey}-${showExplicitOnly}`,
     inputClassName: UZ,
     onChange: e => {
-      e === iw.LEARN_MORE ? Ay.unsafeRedirect(Yc, "_blank") : e === iw.REVIEW_UPDATES ? W(showModalHandler({
+      e === iw.LEARN_MORE ? customHistory.unsafeRedirect(Yc, "_blank") : e === iw.REVIEW_UPDATES ? W(showModalHandler({
         type: _$$T,
         data: {
           initialTab: Wv.UPDATES,
@@ -329,7 +329,7 @@ export function $$W1(e) {
       }).format(e));
     },
     property: Z,
-    recordingKey: Pt(recordingKey, `varSetSelect=${variableSetKey}`),
+    recordingKey: generateRecordingKey(recordingKey, `varSetSelect=${variableSetKey}`),
     tooltip: Q,
     children: [...eh, ...ei]
   });
@@ -360,10 +360,10 @@ export function $$W1(e) {
       inputClassName: UZ,
       onChange: eo,
       property: el.activeCollectionKeyInFamily,
-      recordingKey: Pt(recordingKey, `varSetInFamilySelect=${variableSetKey}`),
+      recordingKey: generateRecordingKey(recordingKey, `varSetInFamilySelect=${variableSetKey}`),
       children: Array.from(el.collectionsInFamily.entries()).map(([e, t]) => jsx(H, {
         value: e,
-        recordingKey: Pt(recordingKey, `varSetInFamilyOption=${e}`),
+        recordingKey: generateRecordingKey(recordingKey, `varSetInFamilyOption=${e}`),
         children: t
       }, `var-set-in-family-option-${e}`))
     });

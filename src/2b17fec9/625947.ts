@@ -1,14 +1,14 @@
 import { R1 } from "../figma_app/479760";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo, useRef, useId, forwardRef, useLayoutEffect, memo, Fragment as _$$Fragment, createRef, useContext } from "react";
-import { useDispatch, useStore, useSelector } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "react-redux";
 import { MentionsCppBindings, Fullscreen, Command, ConfirmationLevel, ShapeSidebarMode, UserInterfaceElements, DesignGraphElements, CustomPosition, WhiteboardAiVisualCppBindings, IPanelType, WhiteboardCanvasAIBindings, EligibilityStatus, AppStateTsApi, UserActionState, LayoutTabType, Side, InteractionCpp, PointerAction, UIVisibilitySetting, VisibilityState, DiagramElementType, NodePropertyCategory, SourceType, WhiteboardFeatures, ColorOptions, WhiteboardTsApi, ConnectorType, ImageToolsBindings, CanvasSearchHelpers, SelectionState, EditAction, SessionStatus, ViewType, NavigationDirection, MindmapCppBindings, TransactionCommand, WhiteboardStarterKitCppBindings, CollaborationType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, useAtomWithSubscription, atom, createLocalStorageAtom, Xr, um as _$$um } from "../figma_app/27355";
 import { isMobileNotFigmaMobile, BrowserInfo, isNotMobile, isIpadDevice, isAnyMobile } from "../figma_app/778880";
 import { q8 } from "../figma_app/459490";
 import { tH as _$$tH, H4 } from "../905/751457";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { uO as _$$uO, Gb } from "../figma_app/933328";
 import { T as _$$T } from "../905/858738";
 import { aV as _$$aV, p8 as _$$p, eY as _$$eY, KH, dH as _$$dH } from "../figma_app/722362";
@@ -21,7 +21,7 @@ import { A as _$$A } from "../9410/188255";
 import { pO as _$$pO } from "../figma_app/42945";
 import { J as _$$J } from "../642/485582";
 import { Fl, wW } from "../figma_app/656450";
-import { iZ as _$$iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { LQ, MX, h1 as _$$h, wm } from "../905/77316";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _X as _$$_X, Yb, ZT, Z0, Pl, kE } from "../figma_app/62612";
@@ -77,7 +77,7 @@ import ek from "../vendor/656470";
 import eM from "../vendor/223926";
 import { J as _$$J2, AW, kv as _$$kv } from "../figma_app/451499";
 import { yw as _$$yw, pf as _$$pf, vo as _$$vo, KG, ko, fT as _$$fT, z9, N0, KE, Ln, UH, Nd, ek as _$$ek, DP, vz, vD as _$$vD } from "../figma_app/351862";
-import { Pt, rf as _$$rf } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { h as _$$h3 } from "../2b17fec9/813960";
 import { W as _$$W2 } from "../2b17fec9/185058";
 import { uB as _$$uB, HB, U_, yX as _$$yX, es as _$$es, B8, AE, ke, Yg, OP } from "../9410/757252";
@@ -160,7 +160,7 @@ import { popModalStack, showModalHandler, showModal } from "../905/156213";
 import { zN } from "../figma_app/579169";
 import { mW as _$$mW } from "../figma_app/797994";
 import { UQ } from "../figma_app/864723";
-import { bel } from "../figma_app/43951";
+import { TeamFileCountsByTeamId } from "../figma_app/43951";
 import { UpsellModalType } from "../905/165519";
 import { EL } from "../905/858282";
 import { uv as _$$uv, CR } from "../figma_app/419216";
@@ -297,7 +297,7 @@ import { k as _$$k4 } from "../905/443820";
 import { Ol } from "../figma_app/279454";
 import { N as _$$N } from "../905/438674";
 import { A as _$$A0 } from "../svg/336063";
-import { xx as _$$xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { $D as _$$$D, nF as _$$nF, DG } from "../figma_app/789";
 import { H as _$$H3 } from "../2b17fec9/68162";
 import { F as _$$F2 } from "../1291/661220";
@@ -385,15 +385,15 @@ import { Fo, vN as _$$vN, xH as _$$xH, Uz, sC as _$$sC, Te as _$$Te } from "../9
 import { hS as _$$hS } from "../905/437088";
 import { bL as _$$bL2 } from "../905/38914";
 import { vo as _$$vo2, Y9, nB as _$$nB, wi } from "../figma_app/272243";
-import { Ay as _$$Ay3 } from "../905/612521";
-import { Lf as _$$Lf } from "../figma_app/564528";
+import { customHistory } from "../905/612521";
+import { sendUrlToParent } from "../figma_app/564528";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { v as _$$v2 } from "../figma_app/759243";
 import { nG as _$$nG, tT as _$$tT } from "../9410/584673";
 import { A as _$$A16 } from "../svg/16929";
 import { A as _$$A17 } from "../6828/70690";
 import { A as _$$A18 } from "../svg/888006";
-import { zX } from "../905/576487";
+import { VisualBellIcon } from "../905/576487";
 import { um as _$$um2, ez as _$$ez2 } from "../figma_app/835718";
 import { m as _$$m6 } from "../905/99004";
 import { JT } from "../figma_app/632248";
@@ -403,14 +403,13 @@ import { p as _$$p4 } from "../9410/363670";
 import { i as _$$i6 } from "../642/423085";
 import { s as _$$s7 } from "../905/551945";
 import { Tj } from "../figma_app/342207";
-import { wr, tJ as _$$tJ3 } from "../figma_app/741237";
+import { clearSelection, replaceSelection } from "../figma_app/741237";
 import { a as _$$a8 } from "../905/290931";
 import { U as _$$U2 } from "../figma_app/441035";
 import { o2 as _$$o4, sd as _$$sd, Cq, NI, $J as _$$$J } from "../905/278499";
 import { i as _$$i7 } from "../figma_app/690245";
 import { E as _$$E7 } from "../905/690713";
 import { g as _$$g4 } from "../905/757007";
-import { Pt as _$$Pt } from "../figma_app/878298";
 import { x as _$$x3 } from "../905/312412";
 import { P as _$$P4 } from "../905/994270";
 import { cq as _$$cq } from "../905/794154";
@@ -465,7 +464,7 @@ import { isNullish, isNotNullish } from "../figma_app/95419";
 import { b as _$$b7, bL as _$$bL3, mc as _$$mc2, r1 as _$$r4, wv as _$$wv3, Ov, ME, YJ, q7 } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { r as _$$r5, Q as _$$Q3 } from "../figma_app/67145";
-import { g as _$$g6 } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { isPrimaryLocaleEnglish } from "../figma_app/363242";
 import { c$ as _$$c$3, l6 as _$$l9, uQ as _$$uQ2, sK as _$$sK } from "../905/794875";
 import { V as _$$V4 } from "../figma_app/144634";
@@ -540,7 +539,7 @@ import { $ as _$$$4 } from "../905/379902";
 import { A as _$$A38 } from "../svg/883901";
 import { A as _$$A39 } from "../svg/376762";
 import { lR as _$$lR, jW as _$$jW, ie as _$$ie, A$, Kr, jP as _$$jP } from "../figma_app/837500";
-import { zk as _$$zk2 } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { kL as _$$kL2, ai as _$$ai2, Lt as _$$Lt, hF as _$$hF2 } from "../1006/823759";
 import { mx as _$$mx } from "../figma_app/191804";
 import { t as _$$t7 } from "../905/398894";
@@ -594,7 +593,7 @@ import { u as _$$u3 } from "../905/486140";
 import { K as _$$K5 } from "../905/107582";
 import { E as _$$E8 } from "../905/737393";
 import { F as _$$F7 } from "../905/544329";
-import { A as _$$A61 } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { A as _$$A62 } from "../svg/450549";
 import { A as _$$A63 } from "../svg/247653";
 import { A as _$$A64 } from "../svg/304791";
@@ -789,7 +788,7 @@ async function Y(e, t, i, n, r, a) {
     }, {
       forwardToDatadog: !0
     });
-    a && r(_$$F.enqueue({
+    a && r(VisualBellActions.enqueue({
       message: getI18nString("whiteboard.visual_bell.canvas_at_mentions_mentioned_user_will_be_invited_to_file", {
         handle: n.handle
       }),
@@ -816,7 +815,7 @@ async function Y(e, t, i, n, r, a) {
 }
 function X() {
   let e = useDispatch();
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let [i, n] = useAtomValueAndSetter(LQ);
   let r = useAtomWithSubscription(MX);
   let {
@@ -1510,7 +1509,7 @@ function tM({
         addToRecentsBehavior: ConfirmationLevel.YES_WITHOUT_REORDER,
         toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_RECENTS,
         testId: `recents-${QA}-${a.shapeType}`,
-        recordingKey: Pt(_$$eu, `${QA}-${a.shapeType}`)
+        recordingKey: generateRecordingKey(_$$eu, `${QA}-${a.shapeType}`)
       }, `recents-${a.shapeType}`) : null;
     })
   });
@@ -1534,7 +1533,7 @@ function tU({
       addToRecentsBehavior: ConfirmationLevel.YES,
       toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_REGULAR,
       testId: `${e}-${QA}-${t}`,
-      recordingKey: Pt(Yu, `${QA}-${t}`)
+      recordingKey: generateRecordingKey(Yu, `${QA}-${t}`)
     }, `${e}-${t}`))
   }, e);
 }
@@ -1648,7 +1647,7 @@ function tV({
           addToRecentsBehavior: ConfirmationLevel.YES_WITHOUT_REORDER,
           toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_RECENTS,
           testId: `recents-${QA}-${i.shapeType}`,
-          recordingKey: Pt(_$$eu, `${QA}-${i.shapeType}`)
+          recordingKey: generateRecordingKey(_$$eu, `${QA}-${i.shapeType}`)
         }, `recents-${i.shapeType}`) : null;
       }
     });
@@ -1678,7 +1677,7 @@ function tV({
         addToRecentsBehavior: ConfirmationLevel.NO,
         color: t,
         disableDragging: !0,
-        recordingKey: Pt(qD, e),
+        recordingKey: generateRecordingKey(qD, e),
         shapeType: e,
         size: "large",
         strokeStyleType: i,
@@ -1690,7 +1689,7 @@ function tV({
         setConnectorTool: r,
         size: "large",
         testId: `${Xi}-${e}`,
-        recordingKey: Pt(qD, `${Xi}-${e}`)
+        recordingKey: generateRecordingKey(qD, `${Xi}-${e}`)
       }, e)
     });
   }({
@@ -1729,7 +1728,7 @@ function tV({
           addToRecentsBehavior: ConfirmationLevel.YES,
           toolSetSource: ShapeSidebarMode.SHAPES_SIDEBAR_REGULAR,
           testId: `${a}-${QA}-${e}`,
-          recordingKey: Pt(Yu, `${QA}-${e}`)
+          recordingKey: generateRecordingKey(Yu, `${QA}-${e}`)
         }, `${a}-${e}`)
       })];
     }, []);
@@ -1877,7 +1876,7 @@ function tK({
       addToRecentsBehavior: ConfirmationLevel.NO,
       color: t,
       disableDragging: !0,
-      recordingKey: Pt(qD, e),
+      recordingKey: generateRecordingKey(qD, e),
       shapeType: e,
       size: "large",
       strokeStyleType: i,
@@ -1889,7 +1888,7 @@ function tK({
       setConnectorTool: r,
       size: "large",
       testId: `${Xi}-${e}`,
-      recordingKey: Pt(qD, `${Xi}-${e}`)
+      recordingKey: generateRecordingKey(qD, `${Xi}-${e}`)
     }, e))
   });
 }
@@ -2579,7 +2578,7 @@ function iN({
   let r = n?.type === _$$eg;
   let a = useSelector(e => e.isRenaming);
   let s = q5();
-  let c = _$$iZ();
+  let c = selectCurrentUser();
   let u = !!s && DF(s, c);
   let p = s?.project?.activeProjectResourceConnections?.[0];
   let h = useRef(null);
@@ -3550,7 +3549,7 @@ function n6(e) {
     currentSessionId,
     currentFileKey
   } = e;
-  let s = Rs(bel, {
+  let s = Rs(TeamFileCountsByTeamId, {
     teamId
   });
   if ("loaded" !== s.status) return null;
@@ -5678,7 +5677,7 @@ function oM() {
   let r = Be();
   let a = r.plugins;
   let s = useMemo(() => Object.values(a).sort(YW).filter(e => "user" === e.installed_by), [a]);
-  let d = _$$xx(() => s);
+  let d = memoizeByArgs(() => s);
   let c = Ol(d());
   let [u, p] = useState(!1);
   let h = useMemo(() => u ? c : c.slice(0, 40), [c, u]);
@@ -6335,7 +6334,7 @@ function lu() {
   i = filterByAllowlist(i);
   let n = Be().widgets;
   let r = useMemo(() => Object.values(n).sort(YW).filter(e => "user" === e.installed_by), [n]);
-  let a = _$$xx(() => r);
+  let a = memoizeByArgs(() => r);
   let s = Ol(a());
   let [d, c] = useState(!1);
   let u = useMemo(() => d ? s : s.slice(0, 40), [s, d]);
@@ -7040,7 +7039,7 @@ function lF({
     }));
   }, [$]);
   let eo = Object.keys(_$$yQ()).join(",");
-  let el = _$$iZ();
+  let el = selectCurrentUser();
   let ed = _$$sZ();
   let ec = G7(ed);
   let eu = Gi();
@@ -7795,7 +7794,7 @@ let dJ = registerModal(function (e) {
           children: jsx(_$$v2, {
             location: "MODAL",
             onPointerUp: () => {
-              _$$Lf(_$$nG) || _$$Ay3.unsafeRedirect(_$$nG, "_blank");
+              sendUrlToParent(_$$nG) || customHistory.unsafeRedirect(_$$nG, "_blank");
             }
           })
         })
@@ -8579,12 +8578,12 @@ function cx() {
   let t = useDispatch();
   let i = _$$um2();
   useEffect(() => {
-    e.status === _$$c6.LOADING ? t(_$$F.enqueue({
+    e.status === _$$c6.LOADING ? t(VisualBellActions.enqueue({
       message: getI18nString("whiteboard.ai_modal.streaming"),
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       type: cf,
       timeoutOverride: 1 / 0
-    })) : t(_$$F.dequeue({
+    })) : t(VisualBellActions.dequeue({
       matchType: cf
     }));
     e.status === _$$c6.ERROR && i(e.errorMessage, _$$ez2.GENERATE);
@@ -8713,7 +8712,7 @@ function cW({
             f();
           },
           disabled: b || j && h.trim().length < g,
-          recordingKey: _$$Pt(n, "enter"),
+          recordingKey: generateRecordingKey(n, "enter"),
           variant: j ? "primary" : "secondary",
           children: _
         })]
@@ -8724,7 +8723,7 @@ function cW({
     extra: w,
     content: i,
     onDismiss: hasAcceptButton ? void 0 : onDismiss,
-    recordingKey: _$$Pt(n, "toast"),
+    recordingKey: generateRecordingKey(n, "toast"),
     ref: toastRef,
     shouldAutoFocus: !0,
     children: jsx(_$$B4, {
@@ -9520,7 +9519,7 @@ function uB() {
         otherRelevantNodes,
         pastPrompts
       } = await i();
-      wr();
+      clearSelection();
       let x = a.trim();
       await t?.start({
         userPrompt: x,
@@ -9632,7 +9631,7 @@ function uB() {
         otherRelevantNodes,
         pastPrompts
       } = await e();
-      wr();
+      clearSelection();
       "" !== i.trim() && addPromptToHistory(i);
       let g = _$$qq({
         create: !0,
@@ -9773,8 +9772,8 @@ function uB() {
   }, [_, n, e, a, s]);
   let w = uS();
   let I = useCallback(() => {
-    _$$tJ3(b);
-    x === uc.HIDE_PROMPT_BOX ? (_ && (_$$tJ3(b), w(b)), g({
+    replaceSelection(b);
+    x === uc.HIDE_PROMPT_BOX ? (_ && (replaceSelection(b), w(b)), g({
       type: "SET_GENERATION_DONE_STATE",
       doneState: uc.SHOW_PROMPT_BOX
     })) : (g({
@@ -9787,7 +9786,7 @@ function uB() {
   m && (L = m.stop, N = m.state);
   let O = useCallback(() => {
     L();
-    _$$tJ3(b);
+    replaceSelection(b);
     uL([]);
   }, [b, L]);
   useEffect(() => {
@@ -10471,7 +10470,7 @@ function p0({
             children: u || i
           }),
           readonly: a,
-          recordingKey: Pt(s, "radioOptions"),
+          recordingKey: generateRecordingKey(s, "radioOptions"),
           children: jsx("div", {
             className: "inline_toolbar_menu--optionContainer--jjLSi",
             children: t.map(e => jsx(_$$c$4, {
@@ -10891,7 +10890,7 @@ function hZ({
               onPointerUp: e ? () => h(i) : _$$lQ
             },
             children: n[t]
-          }, Pt("shapeWithTextFillTypeKey", hU[t]));
+          }, generateRecordingKey("shapeWithTextFillTypeKey", hU[t]));
         })
       })
     }), jsx(hP, {
@@ -12128,8 +12127,8 @@ function fh({
     });
     Fullscreen?.uploadPaintImage("NORMAL", 1);
   };
-  let h = useMemo(() => _$$g6(), []);
-  let m = useMemo(() => _$$g6(), []);
+  let h = useMemo(() => generateUUIDv4(), []);
+  let m = useMemo(() => generateUUIDv4(), []);
   let f = useMemo(() => Wj(_$$B5.length + 1, getI18nString("whiteboard.inline_menu.washi_tape_pattern"), h), [h]);
   let _ = e => jsx("div", {
     id: m,
@@ -12191,7 +12190,7 @@ function fh({
       caret: "down",
       onKeyDown: a,
       onPointerDown: r,
-      recordingKey: _$$Pt(e, "washiTapePatternSelectorButton"),
+      recordingKey: generateRecordingKey(e, "washiTapePatternSelectorButton"),
       role: "combobox",
       tooltip: Array.isArray(t) ? getI18nString("whiteboard.delightful_toolbar.mixed") : _$$M5(t),
       children: !Array.isArray(t) && _$$B5.includes(t) ? jsx(_$$W6, {
@@ -12229,7 +12228,7 @@ function fh({
           d && i(e);
         },
         selectionState: !n && a ? "selected" : "unselected",
-        recordingKey: _$$Pt(e, "washiTapePatternSelectorOption", t.name)
+        recordingKey: generateRecordingKey(e, "washiTapePatternSelectorOption", t.name)
       })
     }, t.name),
     value: r
@@ -13194,7 +13193,7 @@ function fR() {
               });
               break;
             case "AI_LEARN_MORE":
-              _$$Ay3.unsafeRedirect(_$$nG2, "_blank");
+              customHistory.unsafeRedirect(_$$nG2, "_blank");
           }
       }
     }, e._native_contextual_toolbar_request_menu_items = e => {
@@ -13586,7 +13585,7 @@ let _u = e => function () {
   let [i, n] = _$$lJ2("connectorStartCap" === e ? "connectorStartCapForSelection" : "connectorEndCapForSelection");
   let r = kl("connectorStartCap" === e ? "connectorStartCapDirection" : "connectorEndCapDirection");
   let a = "connectorStartCap" === e ? getI18nString("whiteboard.inline_menu.connector_start_point") : getI18nString("whiteboard.inline_menu.connector_end_point");
-  let s = useMemo(() => _$$g6(), []);
+  let s = useMemo(() => generateUUIDv4(), []);
   let [d, p] = useState(!1);
   let h = kl("connectorLineStyleForSelection");
   let m = e => {
@@ -13670,7 +13669,7 @@ let _u = e => function () {
       onPointerUp: e => {
         d && i(e);
       },
-      recordingKey: _$$Pt(`${e}Control`, String(t)),
+      recordingKey: generateRecordingKey(`${e}Control`, String(t)),
       role: "option",
       svg: _h(t),
       svgStyle: {
@@ -14069,7 +14068,7 @@ function xn({
   let V = i.reduce((e, t) => e + t.items.length, 0) + (j ? j.reduce((e, t) => e + t.items.length, 0) : 0) + (u ? 1 : 0);
   let [G] = useState(() => {
     let e = Array(V);
-    for (let t = 0; t < i.length; t++) e[t] = _$$g6();
+    for (let t = 0; t < i.length; t++) e[t] = generateUUIDv4();
     return e;
   });
   let K = new _$$W8();
@@ -15133,7 +15132,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   });
 }], [WhiteboardFeatures.WHITEBOARD_STROKE, _$$nm], [WhiteboardFeatures.WHITEBOARD_SHAPE, function () {
   let [e, t] = _$$lJ2("shapeWithTextTypeForSelection");
-  let i = _$$g6();
+  let i = generateUUIDv4();
   if (!e) return null;
   let n = isInvalidValue(e) || !e ? "1" : `${xS.format(e)}`;
   let r = getI18nString("whiteboard.inline_menu.change_shape");
@@ -15198,10 +15197,10 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   }, [a, r]);
   let [c, p] = useState(null);
   let h = useCallback(e => {
-    e && (p(e), _$$tJ3(r, !1), s(e));
+    e && (p(e), replaceSelection(r, !1), s(e));
   }, [s, r]);
   if (!t || "INSTANCE" !== i || !n || e) return null;
-  let m = _$$g6();
+  let m = generateUUIDv4();
   let f = getI18nString("whiteboard.inline_menu.change_shape");
   let _ = getI18nString("whiteboard.inline_menu.change_shape_label", {
     currentShape: n
@@ -15322,7 +15321,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let m = c.length > 0 ? [...h, "divider", ...c] : [...h];
   let f = Math.max(4, 32 * m.indexOf(e[0]));
   let _ = getI18nString("whiteboard.inline_menu.font_family");
-  let x = _$$g6();
+  let x = generateUUIDv4();
   let g = c.length > 0;
   let j = pU(e);
   let b = j ? getI18nString("whiteboard.inline_menu.font_family_label", {
@@ -15344,7 +15343,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         }),
         onChange: p,
         value: e[0],
-        recordingKey: Pt("fontFamilyControl", "radioOptions"),
+        recordingKey: generateRecordingKey("fontFamilyControl", "radioOptions"),
         children: [h.map(e => {
           let t = pD(e);
           if (!t) return null;
@@ -15558,7 +15557,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         }),
         onChange: w,
         value: E?.toString(),
-        recordingKey: Pt("whiteboardTextStyle", "radioOptions"),
+        recordingKey: generateRecordingKey("whiteboardTextStyle", "radioOptions"),
         children: hp.map(e => jsxs(CU, {
           value: e.toString(),
           "aria-label": hg.format(e),
@@ -15811,7 +15810,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       onPointerUp: e => {
         r && t(e);
       },
-      recordingKey: _$$Pt("textAlignmentControl", function (e) {
+      recordingKey: generateRecordingKey("textAlignmentControl", function (e) {
         switch (e) {
           case "LEFT":
             break;
@@ -15918,7 +15917,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       onPointerUp: e => {
         n && t(e);
       },
-      recordingKey: _$$Pt("textAlignmentVControl", function (e) {
+      recordingKey: generateRecordingKey("textAlignmentVControl", function (e) {
         switch (e) {
           case "TOP":
             return "top";
@@ -16012,7 +16011,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       },
       active: r ? "LOUD" : "NONE",
       focused: a,
-      recordingKey: _$$Pt("connectorLineStyleControl", String(e)),
+      recordingKey: generateRecordingKey("connectorLineStyleControl", String(e)),
       role: "option"
     }, String(e)),
     OptionWrapper: SC(getI18nString("whiteboard.inline_menu.line_shape"), d),
@@ -16089,10 +16088,10 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
             previousLanguage: f3(e),
             language: f3(n)
           });
-          t(n, _$$zk2.YES);
+          t(n, yesNoTrackingEnum.YES);
         },
         value: isInvalidValue(e) ? void 0 : e ?? _$$jW,
-        recordingKey: Pt("codeBlockLanguageSelector", "radioOptions"),
+        recordingKey: generateRecordingKey("codeBlockLanguageSelector", "radioOptions"),
         children: _$$ie.map(e => jsx(CU, {
           value: e,
           "aria-label": _$$lR.format(e),
@@ -16112,7 +16111,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         previousLanguage: f3(e),
         language: f3(n)
       });
-      t(n, _$$zk2.YES);
+      t(n, yesNoTrackingEnum.YES);
     },
     onCancel: () => {
       i("figjam_code_block_language_select", {
@@ -16142,7 +16141,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         previousTheme: f6(e),
         theme: f6(Kr(n))
       });
-      t(Kr(n), _$$zk2.YES);
+      t(Kr(n), yesNoTrackingEnum.YES);
     },
     optionSize: "medium",
     paletteType: "codeBlockTheme",
@@ -16324,7 +16323,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let e = kl("locked");
   let t = kl("sectionContentsHidden");
   let [i, n] = useState(void 0);
-  let r = _$$g6();
+  let r = generateUUIDv4();
   let {
     getTriggerProps,
     manager
@@ -16356,7 +16355,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
               fullscreenValue.triggerActionInUserEditScope("lock-selected-nodes");
               analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_all.selected", {});
             },
-            recordingKey: Pt("lockOption", "lock_all"),
+            recordingKey: generateRecordingKey("lockOption", "lock_all"),
             "aria-label": getI18nString("whiteboard.inline_menu.lock_all"),
             children: getI18nString("whiteboard.inline_menu.lock_all")
           }), jsx(q7, {
@@ -16364,7 +16363,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
               fullscreenValue.triggerActionInUserEditScope("lock-selected-section-only");
               analyticsEventManager.trackDefinedEvent("figjam.lock_options.lock_background_only.selected", {});
             },
-            recordingKey: Pt("lockOption", "lock_section_background_only"),
+            recordingKey: generateRecordingKey("lockOption", "lock_section_background_only"),
             "aria-label": getI18nString("whiteboard.inline_menu.lock_background_only"),
             children: getI18nString("whiteboard.inline_menu.lock_background_only")
           })]
@@ -16438,7 +16437,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
               fullWidth: !0,
               selected: e.isSelected,
               onMouseUp: e.onClick,
-              recordingKey: Pt("lockOption", t),
+              recordingKey: generateRecordingKey("lockOption", t),
               ignoreCheck: !0,
               children: n
             }, t)
@@ -16507,12 +16506,12 @@ function xY() {
   let t = e => {
     fullscreenValue.triggerActionInUserEditScope(e);
   };
-  let i = _$$g6();
+  let i = generateUUIDv4();
   let [n, r] = useState(!1);
   let a = e.map(e => ({
     value: e,
     content: x$[e],
-    label: _$$A61(e),
+    label: formatI18nMessage(e),
     shortcutKey: e,
     isSelected: !1
   }));
@@ -16558,7 +16557,7 @@ function xY() {
       onPointerUp: e => {
         n && t(e);
       },
-      recordingKey: Pt("alignmentControl", zS(e)),
+      recordingKey: generateRecordingKey("alignmentControl", zS(e)),
       role: "option",
       svg: xZ[e],
       tooltip: e,
@@ -17777,7 +17776,7 @@ function g9({
       },
       onNotFound: () => {
         p(qV());
-        p(_$$F.enqueue({
+        p(VisualBellActions.enqueue({
           message: getI18nString("whiteboard.timer.song_not_available_error"),
           error: !0,
           type: _$$lm
@@ -19737,13 +19736,13 @@ function jf(e) {
         flexGrow: !0,
         onClick: onCancel,
         disabled: onCancelDisabled,
-        recordingKey: Pt(recordingKey, "cancel"),
+        recordingKey: generateRecordingKey(recordingKey, "cancel"),
         children: cancelButtonText
       }), jsx(jm, {
         flexGrow: !0,
         onClick: onConfirm,
         disabled: onConfirmDisabled,
-        recordingKey: Pt(recordingKey, "confirm"),
+        recordingKey: generateRecordingKey(recordingKey, "confirm"),
         children: confirmButtonText
       })]
     })]
@@ -19951,7 +19950,7 @@ let jZ = () => {
   let e = useDispatch();
   let t = _$$F8(useSelector(e => e.timer.volume));
   let i = _$$F8(useSelector(e => e.timer.setBy));
-  let n = _$$F8(_$$iZ());
+  let n = _$$F8(selectCurrentUser());
   let r = _$$F8(useSelector(e => e.timer.isMuted));
   let a = _$$F8(jD());
   let s = useSelector(e => e.music.music);
@@ -20734,7 +20733,7 @@ function bC({
 }) {
   let [i, n] = useState(null);
   let [r, a] = useState(!1);
-  let s = TA();
+  let s = getUserId();
   let d = by({
     votingSessionInfo: e
   });
@@ -20781,7 +20780,7 @@ function bE({
   votingSessionInfo: e
 }) {
   let [t, i] = useState(null);
-  let n = TA();
+  let n = getUserId();
   let r = by({
     votingSessionInfo: e
   });
@@ -20866,7 +20865,7 @@ function bw({
         disabled: r,
         "data-tooltip-type": r ? Ib.TEXT : void 0,
         "data-tooltip": r ? getI18nString("voting.modal.end_disabled_logged_out_tooltip") : void 0,
-        recordingKey: Pt(i, "endVotingSession"),
+        recordingKey: generateRecordingKey(i, "endVotingSession"),
         children: jsx("span", {
           children: renderI18nText("voting.modal.end_for_all")
         })
@@ -21418,7 +21417,7 @@ function bR({
       className: _$$s.flex.justifyCenter.$,
       children: jsx(jm, {
         onClick: i,
-        recordingKey: Pt(e, "joinVotingSession"),
+        recordingKey: generateRecordingKey(e, "joinVotingSession"),
         children: renderI18nText("meetings_panel.voting.join_vote")
       })
     })]
@@ -21609,7 +21608,7 @@ function bV(e) {
           });
           setOnPastVotesClick();
         },
-        recordingKey: Pt(recordingKey, "viewPastVotingSessions"),
+        recordingKey: generateRecordingKey(recordingKey, "viewPastVotingSessions"),
         children: renderI18nText("meetings_panel.voting.view_past_results_prompt")
       }), !BrowserInfo.isMeetDevice && jsx(jm, {
         flexGrow: a,
@@ -21620,7 +21619,7 @@ function bV(e) {
           });
           setOnNewSessionClick();
         },
-        recordingKey: Pt(recordingKey, "newVote"),
+        recordingKey: generateRecordingKey(recordingKey, "newVote"),
         children: jsx("div", {
           className: _$$s.px4.$,
           children: renderI18nText("meetings_panel.voting.new_vote")
@@ -21767,7 +21766,7 @@ function bq({
   let h = _$$tS();
   return jsx("li", {
     children: jsxs(_$$E2, {
-      recordingKey: Pt(l, "viewPastVotingSession"),
+      recordingKey: generateRecordingKey(l, "viewPastVotingSession"),
       className: ex()("previous_votes_view--previousVotesListItem--77yUn", r && "previous_votes_view--showSeparator--nHjDd"),
       onClick: () => {
         trackEventAnalytics("view_past_voting_session", {
@@ -22122,7 +22121,7 @@ let yr = memo(e => {
         "aria-label": getI18nString("general.back"),
         onClick: goBack,
         actionOnPointerDown: BrowserInfo.isIpad,
-        recordingKey: Pt(recordingKey, "backButton"),
+        recordingKey: generateRecordingKey(recordingKey, "backButton"),
         ref: backButtonRef,
         children: jsx(_$$C, {})
       }), headerText && jsx("span", {
@@ -22138,7 +22137,7 @@ let yr = memo(e => {
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip": getI18nString("meetings_panel.header.overflow_menu_aria_label")
           },
-          recordingKey: Pt(recordingKey, "expandMenuItems"),
+          recordingKey: generateRecordingKey(recordingKey, "expandMenuItems"),
           "aria-expanded": isDropdownShown,
           children: jsx(_$$A78, {})
         })
@@ -22147,7 +22146,7 @@ let yr = memo(e => {
           items: _,
           showPoint: !0,
           minWidth: 135,
-          recordingKey: Pt(recordingKey, "expandMenuItems")
+          recordingKey: generateRecordingKey(recordingKey, "expandMenuItems")
         }), onMinimize && jsx(_$$K, {
           onClick: onMinimize,
           "aria-label": getI18nString("common.close"),
@@ -22521,7 +22520,7 @@ function yT() {
         isMuted: !0,
         userInitiated: !1
       }));
-      s(_$$F.enqueue({
+      s(VisualBellActions.enqueue({
         message: getI18nString("whiteboard.timer.unmute_music_message"),
         button: {
           text: getI18nString("whiteboard.timer.unmute_music_button"),
@@ -22605,7 +22604,7 @@ function yI({
   });
 }
 function yF() {
-  let e = Pt("toolbarView", _$$ec2.recordingKey);
+  let e = generateRecordingKey("toolbarView", _$$ec2.recordingKey);
   let t = useRef(null);
   let i = q5();
   let n = useSelector(e => _$$Yh(e.mirror.appModel, _$$ec2.action) && i);
@@ -22949,7 +22948,7 @@ function y0() {
         [yJ]: E,
         [yq]: !C
       }),
-      onClick: _$$rf("meetingsPanelToolbar", "click", s),
+      onClick: useHandleMouseEvent("meetingsPanelToolbar", "click", s),
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": T ? getI18nString("meetings_panel.toolbar_tooltip") : getI18nString("meetings_panel.toolbar_tooltip.no_voting"),
       "aria-label": T ? getI18nString("meetings_panel.toolbar.aria_label") : getI18nString("meetings_panel.toolbar.aria_label.no_voting"),
@@ -23070,7 +23069,7 @@ function y8() {
   let i = Um();
   let n = useSelector(e => e.multiplayer);
   let r = _$$dR2();
-  let a = _$$iZ();
+  let a = selectCurrentUser();
   let s = useMemo(() => n.allUsers.find(e => e.sessionID === n.sessionID) || null, [n.allUsers, n.sessionID]);
   let u = B4();
   let p = _$$aV();
@@ -23393,7 +23392,7 @@ function v_() {
 }
 let vg = memo(function () {
   let e = useDispatch();
-  let t = TA();
+  let t = getUserId();
   let i = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let n = useSelector(e => e.voting.selectedVotePinId);
   let r = [SessionStatus.ENDED, SessionStatus.JOINED].includes(i.votingStage);
@@ -23735,7 +23734,7 @@ function vR(e) {
 }
 let vD = {
   brainstorm: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "brainstorm",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.brainstorm"),
     svg: jsx(function () {
@@ -23759,7 +23758,7 @@ let vD = {
     }
   },
   agenda: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "agenda",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.agenda"),
     svg: jsx(function () {
@@ -23798,7 +23797,7 @@ let vD = {
     }
   },
   flow: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "flow",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.flow"),
     svg: jsx(function () {
@@ -23825,7 +23824,7 @@ let vD = {
     }
   },
   bug_bash: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "bug_bash",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.bug_bash"),
     svg: jsx(function () {
@@ -23892,7 +23891,7 @@ let vD = {
     }
   },
   design_crit: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "design_crit",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.design_crit"),
     svg: jsx(function () {
@@ -23918,7 +23917,7 @@ let vD = {
     }
   },
   user_journey: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "user_journey",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.user_journey"),
     svg: jsx(function () {
@@ -23952,7 +23951,7 @@ let vD = {
     }
   },
   standup: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "standup",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.standup.title"),
     svg: jsx(function () {
@@ -24006,7 +24005,7 @@ let vD = {
     }
   },
   retro: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "retro",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.retro"),
     svg: jsx(function () {
@@ -24047,7 +24046,7 @@ let vD = {
     }
   },
   templates: {
-    ariaId: _$$g6(),
+    ariaId: generateUUIDv4(),
     key: "templates",
     localizedLabel: () => getI18nString("whiteboard.starter_kit.options.templates"),
     className: "starter_kit_ui--optionTemplates--UEEVb",
@@ -24084,8 +24083,8 @@ function vU(e) {
     children
   });
 }
-let vF = _$$g6();
-let vH = _$$g6();
+let vF = generateUUIDv4();
+let vH = generateUUIDv4();
 function vB({
   isFromNewFile: e
 }) {
@@ -24311,7 +24310,7 @@ let vW = memo(({
       }), jsx(_$$l3, {}), y.showing && jsx(_$$tH, {
         boundaryKey: "FigJamBrowseAllResourcesModal",
         onError: () => {
-          I(_$$F.enqueue({
+          I(VisualBellActions.enqueue({
             message: "Unable to open inserts menu",
             type: "react-error"
           }));

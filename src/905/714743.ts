@@ -1,22 +1,22 @@
 import { jsx } from "react/jsx-runtime";
 import { createRef } from "react";
 import a from "classnames";
-import { o6, cZ, Am } from "../figma_app/806412";
+import { RecordingPureComponent, handleMouseEvent, handlePointerEvent } from "../figma_app/878298";
 var s = a;
 export function $$l1(e) {
   return e;
 }
-export class $$d0 extends o6 {
+export class $$d0 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.spanRef = createRef();
-    this.onClick = cZ(this, "click", e => {
+    this.onClick = handleMouseEvent(this, "click", e => {
       this.props.onClick(e);
     });
-    this.onMouseDown = cZ(this, "mousedown", e => {
+    this.onMouseDown = handleMouseEvent(this, "mousedown", e => {
       this.props.onMouseDown(e);
     });
-    this.onPointerUp = Am(this, "pointerup", e => {
+    this.onPointerUp = handlePointerEvent(this, "pointerup", e => {
       this.props.onPointerUp(e);
     });
   }

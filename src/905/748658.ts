@@ -3,7 +3,7 @@ import { Rs } from "../figma_app/288654";
 import { g } from "../905/370185";
 import { Q2, sD } from "../905/937198";
 import { tS } from "../figma_app/516028";
-import { Z85 } from "../figma_app/43951";
+import { OneItemView } from "../figma_app/43951";
 import { k } from "../905/366917";
 import { J } from "../905/458135";
 export function $$u0({
@@ -22,7 +22,7 @@ export function $$u0({
     collectionStableId: t
   });
   let p = (e ?? "") !== "" && (t ?? "") !== "" && (collectionDatabaseId ?? "") !== "" && null != i;
-  let m = Rs(Z85, {
+  let m = Rs(OneItemView, {
     fileKey: i ?? "",
     collectionId: collectionDatabaseId ?? "",
     itemStableId: e ?? ""

@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
 import { subscribeAndAwaitData } from "../905/553831";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { ps, Xv } from "../figma_app/845611";
 import { QL, EM } from "../905/609392";
-import { s7T } from "../figma_app/43951";
+import { AccountTypeRequestByIdView } from "../figma_app/43951";
 import { w } from "../905/281010";
 var m = (e => (e.AdminUpgradeEmail = "admin_upgrade_email", e.UnknownDeeplink = "unknown_deeplink", e))(m || {});
 let h = {
@@ -17,7 +17,7 @@ let h = {
 };
 export async function $$x0(e, t) {
   try {
-    let a = await subscribeAndAwaitData(s7T, {
+    let a = await subscribeAndAwaitData(AccountTypeRequestByIdView, {
       requestId: e
     });
     let s = oA(a.accountTypeRequest);
@@ -26,7 +26,7 @@ export async function $$x0(e, t) {
       return;
     }
     if ("pending" !== s.status) {
-      t(F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("admin_dashboard.requests.this_request_has_already_been_handled"),
         type: s?.status === "approved" ? "requests-approved" : "requests-denied"
       }));
@@ -79,7 +79,7 @@ export function $$f1() {
   }, [l, e, t, d]);
 }
 let v = (e, t) => {
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     message: t || getI18nString("admin_dashboard.requests.error_generic"),
     error: !0
   }));
@@ -90,7 +90,7 @@ let b = (e, t) => {
   }) : getI18nString("admin_dashboard.requests.success_approve_multiple", {
     numRequests: 1
   });
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     message: a,
     type: "requests-approved"
   }));

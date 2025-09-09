@@ -2,7 +2,7 @@ import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { _J } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
@@ -42,7 +42,7 @@ let $$_3 = createOptimistThunk(async (e, t) => {
       disabled: !1,
       url: r
     }));
-    t.shouldShowVisualBell && e.dispatch(F.enqueue({
+    t.shouldShowVisualBell && e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("flash.team_join_link_actions.invite_links_reset")
     }));
   }).catch(t => {

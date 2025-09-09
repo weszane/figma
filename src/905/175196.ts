@@ -19,7 +19,7 @@ import { isAppShellEnabled } from "../905/561581";
 import { entrypointVariant } from "../905/709735";
 import { bj } from "../905/280919";
 import { fF, hi } from "../905/194389";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getSentryConfig } from "../905/256712";
 import { BrowserInfo } from "../figma_app/778880";
 import { getUserPlan, setUserPlanTag } from "../905/912096";
@@ -166,6 +166,6 @@ bj({
 });
 alertOnNumericIds(getInitialOptions(), {
   verb: "INITIAL_OPTIONS",
-  pathname: Ay.location.pathname
+  pathname: customHistory.location.pathname
 });
 setLogHandler(reportError);

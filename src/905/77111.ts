@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Vq, c$, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 function l(e, t) {
@@ -43,11 +43,11 @@ export function $$c1({
     closeDropdown: d,
     children: [jsx(c$, {
       onClick: u,
-      recordingKey: Pt(p, "detachVariable"),
+      recordingKey: generateRecordingKey(p, "detachVariable"),
       children: getI18nString("variables.binding_ui.detach_variable_tooltip")
     }), jsx(c$, {
       onClick: c,
-      recordingKey: Pt(p, "applyVariable"),
+      recordingKey: generateRecordingKey(p, "applyVariable"),
       children: getI18nString("fullscreen.properties_panel.apply_variable_ellipses")
     })]
   }) : jsxs(Vq, {
@@ -62,11 +62,11 @@ export function $$c1({
       onClick: t => {
         e?.current && (g(t), l(e.current, ""));
       },
-      recordingKey: Pt(p, "cut"),
+      recordingKey: generateRecordingKey(p, "cut"),
       children: getI18nString("fullscreen_actions.cut")
     }), jsx(c$, {
       onClick: g,
-      recordingKey: Pt(p, "copy"),
+      recordingKey: generateRecordingKey(p, "copy"),
       children: getI18nString("fullscreen_actions.copy")
     }), jsx(c$, {
       onClick: () => {
@@ -75,15 +75,15 @@ export function $$c1({
           d();
         });
       },
-      recordingKey: Pt(p, "paste"),
+      recordingKey: generateRecordingKey(p, "paste"),
       children: getI18nString("fullscreen_actions.paste")
     }), jsx(c$, {
       onClick: h,
-      recordingKey: Pt(p, "selectAll"),
+      recordingKey: generateRecordingKey(p, "selectAll"),
       children: getI18nString("fullscreen_actions.select-all")
     }), jsx(wv, {}), jsx(c$, {
       onClick: c,
-      recordingKey: Pt(p, "applyVariable"),
+      recordingKey: generateRecordingKey(p, "applyVariable"),
       children: getI18nString("fullscreen.properties_panel.apply_variable_ellipses")
     })]
   });

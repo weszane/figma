@@ -3,7 +3,7 @@ import { s as _$$s } from "../5430/771444";
 import { ai } from "../figma_app/487970";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import a from "classnames";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -25,16 +25,16 @@ import { E as _$$E } from "../905/53857";
 import { I as _$$I } from "../5430/750114";
 import { J as _$$J } from "../905/125993";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { WB } from "../905/761735";
 import { Rs } from "../figma_app/288654";
 import { oA, tT } from "../905/723791";
 import { reportError } from "../905/11";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { qB } from "../905/862321";
 import { YQ } from "../905/502364";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { AG } from "../figma_app/999312";
 import { FL } from "../figma_app/248365";
 import { wr } from "../figma_app/387599";
@@ -44,7 +44,7 @@ import { e as _$$e2 } from "../5430/411458";
 import { d6, uR, s1 } from "../figma_app/304207";
 import { showModalHandler } from "../905/156213";
 import { Cu } from "../figma_app/314264";
-import { PN2, Ko6, H$B, KC4 } from "../figma_app/43951";
+import { ResourceSaveFromResourceId, ResourceSave, PluginInstall, AllowlistedPlugin } from "../figma_app/43951";
 import { g3 } from "../figma_app/707808";
 import { a as _$$a } from "../figma_app/601188";
 import { G$, FF } from "../figma_app/588092";
@@ -115,7 +115,7 @@ function et(e, t, r, s) {
     if (_$$U(e)) {
       let t = () => {
         let t = XHR.post(`/api/hub_file/${e.id}/save`);
-        let s = `optimistic-resource-save-${_$$g()}`;
+        let s = `optimistic-resource-save-${generateUUIDv4()}`;
         WB().optimisticallyCreate({
           ResourceSave: {
             [s]: {
@@ -128,7 +128,7 @@ function et(e, t, r, s) {
           }
         }, t);
         t.then(() => {
-          r(_$$F.enqueue({
+          r(VisualBellActions.enqueue({
             message: getI18nString("community.saves.file_saved_for_your_profile"),
             type: "resource-save"
           }));
@@ -257,7 +257,7 @@ function es({
   }, a);
   let d = o ? getI18nString("community.saves.added_to_your_saves") : getI18nString("community.saves.resource_saved_for_your_profile");
   a.then(() => {
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       message: i ? getI18nString("community.saves.resource_saved_for_everyone_at", {
         orgName: n || "your org"
       }) : d,
@@ -265,13 +265,13 @@ function es({
       button: o && s ? {
         text: getI18nString("community.saves.go_there"),
         action: () => {
-          Ay.push(s);
+          customHistory.push(s);
         }
       } : void 0
     }));
   }).catch(e => {
     reportError(_$$e.COMMUNITY, e);
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_save_resource"),
       type: "RESOURCE_SAVE_FAILED",
       error: !0
@@ -294,7 +294,7 @@ function ei(e, t, r, s) {
       loggedIn: !!n.user,
       orgId: s
     }), ee), _$$U(e)) ? XHR.del(`/api/hub_file/${e.id}/save`).then(() => {
-      r(_$$F.enqueue({
+      r(VisualBellActions.enqueue({
         message: getI18nString("community.saves.file_removed_from_your_profile"),
         type: "resource-save"
       }));
@@ -356,7 +356,7 @@ function en(e, t, r, s) {
       }, t);
       let l = a ? getI18nString("community.saves.removed_from_saves") : getI18nString("community.saves.resource_removed_from_your_profile");
       t.then(() => {
-        i(_$$F.enqueue({
+        i(VisualBellActions.enqueue({
           message: r ? getI18nString("community.saves.resource_removed_for_everyone_at", {
             orgName: s || "your org"
           }) : l,
@@ -390,18 +390,18 @@ function eo({
 function ea(e, t) {
   let r = useDispatch();
   let s = function (e) {
-    let t = Rs(PN2, {
+    let t = Rs(ResourceSaveFromResourceId, {
       resourceId: e.id,
       orgIds: []
     }, {
       enabled: XW(e) && !rZ(e)
     });
-    let r = Rs(Ko6, {
+    let r = Rs(ResourceSave, {
       hubFileId: e.id
     }, {
       enabled: !XW(e) && _$$U(e)
     });
-    let s = Rs(H$B, {
+    let s = Rs(PluginInstall, {
       pluginId: e.id,
       orgIds: []
     }, {
@@ -438,19 +438,19 @@ function ea(e, t) {
 function el(e, t, r) {
   let s = useDispatch();
   let o = useSelector(e => Tm(e));
-  let a = Rs(H$B, {
+  let a = Rs(PluginInstall, {
     pluginId: t.id,
     orgIds: Object.keys(o)
   }, {
     enabled: !XW(e)
   });
-  let l = Rs(PN2, {
+  let l = Rs(ResourceSaveFromResourceId, {
     resourceId: e.id,
     orgIds: Object.keys(o)
   }, {
     enabled: XW(e)
   });
-  let c = Rs(KC4, {
+  let c = Rs(AllowlistedPlugin, {
     pluginId: t.id,
     orgIds: Object.keys(o)
   });

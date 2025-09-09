@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useState, useCallback, useRef } from "react";
-import { useDispatch, useStore, useSelector } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { b as _$$b } from "../905/985254";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { NT, g5 } from "../figma_app/579169";
 import { q5, Cq } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { Lh, D8, WO } from "../figma_app/242339";
 import { N as _$$N } from "../figma_app/268271";
@@ -27,7 +27,7 @@ import { e as _$$e2 } from "../figma_app/278289";
 import { P as _$$P, B as _$$B } from "../figma_app/846647";
 import { Fullscreen, UserInterfaceElements } from "../figma_app/763686";
 import { FP } from "../figma_app/91703";
-import { wr } from "../figma_app/741237";
+import { clearSelection } from "../figma_app/741237";
 import { F_, EL } from "../905/858282";
 import { en as _$$en, aD, wy, eN, zU, nt, l7, d4 as _$$d } from "../figma_app/202626";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -86,7 +86,7 @@ function k(e) {
     })
   }), o = "Assets");
   useEffect(() => {
-    wr();
+    clearSelection();
     t(FP({
       tab: UserInterfaceElements.ASSETS
     }));
@@ -584,7 +584,7 @@ function en({
 export let $$ei0 = "tooltips_plus_onboarding_reset_onboarding";
 export function $$ea1() {
   let e = useDispatch();
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = q5()?.canEditCanvas;
   let f = useAtomWithSubscription(NT);
   let E = useAtomWithSubscription(g5);

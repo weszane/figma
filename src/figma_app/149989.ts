@@ -10,7 +10,7 @@ import u from "classnames";
 import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { Uz } from "../905/63728";
-import { Pt, rf } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { tH } from "../905/751457";
 import { Nt, c2, yn, lv, dP } from "../figma_app/119475";
 import { B as _$$B } from "../905/714743";
@@ -742,7 +742,7 @@ export function $$el3({
         value: F,
         onChange: eX,
         onKeyDown: eq,
-        recordingKey: Pt(f, "input")
+        recordingKey: generateRecordingKey(f, "input")
       })
     }), en, jsx(Id, {
       className: p()({
@@ -785,7 +785,7 @@ export function $$el3({
     }), es?.type === A7 && jsx(ip, {
       dsStyle: es.data.dsStyle,
       position: es.data.position,
-      recordingKey: Pt(f, "contextMenu")
+      recordingKey: generateRecordingKey(f, "contextMenu")
     })]
   });
 }
@@ -873,7 +873,7 @@ export function $$eu0({
   recordingKey: e,
   onClose: t
 }) {
-  let r = rf(e, "mousedown", useCallback(e => {
+  let r = useHandleMouseEvent(e, "mousedown", useCallback(e => {
     t();
     e.stopPropagation();
   }, [t]));

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { qc } from "../figma_app/858013";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";

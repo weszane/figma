@@ -4,12 +4,12 @@ import { i as _$$i } from "../vendor/218335";
 import { H } from "../vendor/373976";
 import { u as _$$u } from "../vendor/363976";
 import { createPortal } from "../vendor/944059";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { IAssertResource } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { U as _$$U } from "../figma_app/901889";
 import { hh } from "../905/417232";
 import { c$ } from "../figma_app/236327";
@@ -25,7 +25,7 @@ import { dG } from "../figma_app/753501";
 import { m0 } from "../figma_app/976749";
 import { Gt } from "../figma_app/248118";
 import { x as _$$x } from "../figma_app/844435";
-import { ax } from "../figma_app/741237";
+import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { Um } from "../905/848862";
 import { bD } from "../figma_app/45218";
 import { Ib } from "../905/129884";
@@ -124,7 +124,7 @@ function G(e) {
     shownPlugins.push(e);
   }
   let y = shownPlugins[shownPlugins.length - 1]?.plugin_id;
-  let b = k9(() => new Set(pinnedPlugins.map(e => e.plugin_id)), [pinnedPlugins]);
+  let b = useMemoStable(() => new Set(pinnedPlugins.map(e => e.plugin_id)), [pinnedPlugins]);
   useEffect(() => {
     p(Vg({
       resourceType: bD.PLUGIN,
@@ -239,12 +239,12 @@ function U({
       "data-tooltip-type": H || B ? void 0 : Ib.TEXT,
       "data-tooltip": H || B ? void 0 : e.name,
       onClick: t => {
-        _ ? (ax(IAssertResource.PLUGIN), y(IN({
+        _ ? (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), y(IN({
           fdPreviewResource: {
             id: e.plugin_id,
             type: _$$s2.PLUGIN
           }
-        }))) : C ? D(t) : l && (ax(IAssertResource.PLUGIN), u !== e.plugin_id && (r(), f("Dev Handoff Ran Pinned Plugin", {
+        }))) : C ? D(t) : l && (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), u !== e.plugin_id && (r(), f("Dev Handoff Ran Pinned Plugin", {
           pluginId: e.plugin_id
         })), s(!1));
       },

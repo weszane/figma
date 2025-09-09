@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { atom } from "../figma_app/27355";
 import a from "../vendor/128080";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";

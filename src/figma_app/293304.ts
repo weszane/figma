@@ -1,14 +1,14 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useContext } from "react";
 import { flushSync } from "../vendor/944059";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { Uz } from "../905/63728";
-import { Pt, of, v_, aH } from "../figma_app/806412";
+import { generateRecordingKey, useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -52,7 +52,7 @@ export function $$C1({
         recordingKey: s,
         onEnterPressed: d
       }), o && (i ? jsx(_$$t, {
-        recordingKey: Pt(s, "inspectionPanel")
+        recordingKey: generateRecordingKey(s, "inspectionPanel")
       }) : jsx(RO, {
         recordingKey: s
       }))]
@@ -76,7 +76,7 @@ function w({
   let P = e.styleType;
   let D = useRef(null);
   let k = useContext(zK);
-  let M = of(Pt(h, "styleName"), "submit", () => {
+  let M = useHandleFocusEvent(generateRecordingKey(h, "styleName"), "submit", () => {
     if ("" === C) return;
     let r = t ? In(t) : void 0;
     let n = r ? r + "/" + C : C;
@@ -92,12 +92,12 @@ function w({
       isRenaming: !1
     }));
   };
-  let j = v_(h, "keydown", e => {
-    if (e.keyCode === Uz.TAB) M();else if (e.keyCode === Uz.ENTER) {
+  let j = useHandleKeyboardEvent(h, "keydown", e => {
+    if (e.keyCode === Uz.TAB) M(); else if (e.keyCode === Uz.ENTER) {
       M();
       k === zM.EDIT_STYLE && "" === C || N?.();
     } else {
-      if (e.keyCode !== Uz.ESCAPE) return aH;
+      if (e.keyCode !== Uz.ESCAPE) return SKIP_RECORDING;
       flushSync(() => {
         w(t ? kH(t) : "");
       });
@@ -130,10 +130,10 @@ function w({
       },
       onFocus: () => (R(ay({
         isRenaming: !0
-      })), w(C), aH),
+      })), w(C), SKIP_RECORDING),
       onKeyDown: j,
       placeholder: Qv(P),
-      recordingKey: Pt(h, "styleName"),
+      recordingKey: generateRecordingKey(h, "styleName"),
       value: C
     })]
   });

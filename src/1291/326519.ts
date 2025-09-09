@@ -5,7 +5,7 @@ import { A as _$$A } from "../905/251970";
 import o from "classnames";
 import { A as _$$A2 } from "../vendor/850789";
 import { BrowserInfo } from "../figma_app/778880";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { IW } from "../figma_app/563413";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -39,7 +39,7 @@ export function $$k3() {
       type: Rt.ORG_FACE_STAMPS
     }),
     iconComponent: bE(),
-    recordingKey: Pt("inserts", "more", "facestamps"),
+    recordingKey: generateRecordingKey("inserts", "more", "facestamps"),
     rightCaret: !0
   }) : null;
 }

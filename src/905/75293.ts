@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, createRef, memo, useContext, useRef, useCallback, useId, cloneElement } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { languageCodes } from "../905/816253";
 import { assertNotNullish } from "../figma_app/465776";
 import { mapRange } from "../figma_app/492908";
@@ -14,7 +14,7 @@ import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { qP, Pt } from "../figma_app/806412";
+import { useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { Point } from "../905/736624";
 import { B as _$$B } from "../905/714743";
@@ -86,7 +86,7 @@ export function $$el2({
   let h = useDispatch();
   let [f, A] = useState(!1);
   let [y, E] = useState(m);
-  let S = qP(o, "close", () => {
+  let S = useSetupPlayback(o, "close", () => {
     h(XE());
     fullscreenValue.deselectProperty();
   });
@@ -139,14 +139,14 @@ export function $$el2({
             className: "grid_settings--gridChit--jhGgg paint_panels--chit--twQEy",
             onClick: O,
             color: t.color,
-            recordingKey: Pt(o, "chit")
+            recordingKey: generateRecordingKey(o, "chit")
           }), jsx(ef, {
             className: "grid_settings--gridColor--x16XZ grid_settings--_centered--oVZG8",
             ...D
           }), jsx(e_, {
             value: t.color.a,
             onValueChange: k,
-            recordingKey: Pt(o, "opacity")
+            recordingKey: generateRecordingKey(o, "opacity")
           })]
         });
         return jsxs(Fragment, {
@@ -175,14 +175,14 @@ export function $$el2({
             className: "grid_settings--stripesChit--gdIOd paint_panels--chit--twQEy",
             onClick: O,
             color: t.color,
-            recordingKey: Pt(o, "chit")
+            recordingKey: generateRecordingKey(o, "chit")
           }), jsx(ef, {
             className: "grid_settings--stripesColor--E3N63 grid_settings--_centered--oVZG8",
             ...D
           }), jsx(e_, {
             value: t.color.a,
             onValueChange: k,
-            recordingKey: Pt(o, "opacity")
+            recordingKey: generateRecordingKey(o, "opacity")
           })]
         });
         return jsxs(Fragment, {
@@ -280,7 +280,7 @@ let ec = memo(function ({
   });
   let d = Um();
   return jsx(eb, {
-    recordingKey: Pt(r, "numSectionsVar"),
+    recordingKey: generateRecordingKey(r, "numSectionsVar"),
     fieldName: "numSectionsVar",
     layoutGrid: t,
     onChange: i,
@@ -303,7 +303,7 @@ let ec = memo(function ({
           numSectionsVar: void 0
         });
       },
-      recordingKey: Pt(r, "numSections"),
+      recordingKey: generateRecordingKey(r, "numSections"),
       tooltipForScreenReadersOnly: !0,
       value: t.numSections,
       children: [jsx(Z0, {
@@ -378,7 +378,7 @@ let ep = memo(function ({
     min: 0,
     onValueChange: c,
     placeholder: d ? getI18nString("fullscreen.grids_panel.grid_settings.auto") : void 0,
-    recordingKey: Pt(r, "sectionSize"),
+    recordingKey: generateRecordingKey(r, "sectionSize"),
     smallNudgeAmount: o,
     tooltipForScreenReadersOnly: !0,
     value: d ? void 0 : t.sectionSize
@@ -386,7 +386,7 @@ let ep = memo(function ({
   return jsx(_$$E, {
     name: "grid_settings_section_size_input",
     children: d ? u() : jsx(eb, {
-      recordingKey: Pt(r, "sectionSizeVar"),
+      recordingKey: generateRecordingKey(r, "sectionSizeVar"),
       fieldName: "sectionSizeVar",
       inputClassName: e,
       layoutGrid: t,
@@ -407,7 +407,7 @@ let em = memo(function ({
   return jsx(_$$E, {
     name: "grid_settings_gutter_size_input",
     children: jsx(eb, {
-      recordingKey: Pt(r, "gutterSizeVar"),
+      recordingKey: generateRecordingKey(r, "gutterSizeVar"),
       fieldName: "gutterSizeVar",
       inputClassName: e,
       layoutGrid: t,
@@ -428,7 +428,7 @@ let em = memo(function ({
             gutterSizeVar: void 0
           });
         },
-        recordingKey: Pt(r, "gutter"),
+        recordingKey: generateRecordingKey(r, "gutter"),
         smallNudgeAmount: o,
         tooltipForScreenReadersOnly: !0,
         value: t.gutterSize
@@ -471,7 +471,7 @@ let eh = memo(function ({
     children: jsxs(_$$bL, {
       onChange: m,
       value: e.type,
-      recordingKey: Pt(r, "type"),
+      recordingKey: generateRecordingKey(r, "type"),
       children: [jsx(l9, {
         label: jsx(HiddenLabel, {
           children: getI18nString("fullscreen.grid_panel.layout_guide_type")
@@ -505,19 +505,19 @@ let eh = memo(function ({
       id: "layout-grid-settings-layout-type",
       onChange: m,
       property: e.type,
-      recordingKey: Pt(r, "type"),
+      recordingKey: generateRecordingKey(r, "type"),
       children: [jsx(er, {
         value: "MIN",
-        recordingKey: Pt(r, "type", "MIN")
+        recordingKey: generateRecordingKey(r, "type", "MIN")
       }), jsx(er, {
         value: "MAX",
-        recordingKey: Pt(r, "type", "MAX")
+        recordingKey: generateRecordingKey(r, "type", "MAX")
       }), jsx(er, {
         value: "CENTER",
-        recordingKey: Pt(r, "type", "CENTER")
+        recordingKey: generateRecordingKey(r, "type", "CENTER")
       }), jsx(er, {
         value: "STRETCH",
-        recordingKey: Pt(r, "type", "STRETCH")
+        recordingKey: generateRecordingKey(r, "type", "STRETCH")
       })]
     })
   });
@@ -554,7 +554,7 @@ let eg = memo(function ({
     dispatch: l,
     min: 0,
     onValueChange: c,
-    recordingKey: Pt(r, "offset"),
+    recordingKey: generateRecordingKey(r, "offset"),
     smallNudgeAmount: o,
     tooltipForScreenReadersOnly: !0,
     value: d ? 0 : t.offset
@@ -562,7 +562,7 @@ let eg = memo(function ({
   return jsx(_$$E, {
     name: "grid_settings_offset_input",
     children: d ? u() : jsx(eb, {
-      recordingKey: Pt(r, "offsetVar"),
+      recordingKey: generateRecordingKey(r, "offsetVar"),
       fieldName: "offsetVar",
       inputClassName: e,
       layoutGrid: t,
@@ -591,7 +591,7 @@ let ef = memo(function ({
           color: e
         });
       },
-      recordingKey: Pt(r, "color"),
+      recordingKey: generateRecordingKey(r, "color"),
       noBorderOnFocus: !0
     })
   });
@@ -644,7 +644,7 @@ export function $$ey1(e) {
   return getFeatureFlags().ce_tv_fpl_select ? jsxs(_$$bL, {
     onChange: d,
     value: "GRID" === layoutGrid.pattern ? "GRID" : layoutGrid.axis,
-    recordingKey: Pt(e, "pattern"),
+    recordingKey: generateRecordingKey(e, "pattern"),
     children: [jsx(l9, {
       label: jsx(HiddenLabel, {
         children: getI18nString("fullscreen.grid_panel.layout_guide_type")
@@ -675,16 +675,16 @@ export function $$ey1(e) {
     inputClassName: "grid_settings--gridTypeInput--wsH1b",
     onChange: d,
     property: "GRID" === layoutGrid.pattern ? "GRID" : layoutGrid.axis,
-    recordingKey: Pt(e, "pattern"),
+    recordingKey: generateRecordingKey(e, "pattern"),
     children: [jsx(eo, {
       value: "GRID",
-      recordingKey: Pt(e, "pattern", "GRID")
+      recordingKey: generateRecordingKey(e, "pattern", "GRID")
     }), jsx(eo, {
       value: "X",
-      recordingKey: Pt(e, "pattern", "X")
+      recordingKey: generateRecordingKey(e, "pattern", "X")
     }), jsx(eo, {
       value: "Y",
-      recordingKey: Pt(e, "pattern", "Y")
+      recordingKey: generateRecordingKey(e, "pattern", "Y")
     })]
   });
 }

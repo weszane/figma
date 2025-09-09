@@ -1,4 +1,4 @@
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { N } from "../905/55273";
 import { _d, p8, s9, uM, n4, uS, Nj, MM, sH, JX, BS, cA, mW, Nv, LZ } from "../905/259345";
 function s(e) {
@@ -559,7 +559,7 @@ function I(e, t = 40) {
 }
 export function $$E2(e, t, i = 0) {
   let a = 0 === N.LOG_FILTERS.length || N.LOG_FILTERS.includes(e);
-  i >= N.LOG_LEVEL && a && k.log(`${i} ${e}: ${t}`);
+  i >= N.LOG_LEVEL && a && logger.log(`${i} ${e}: ${t}`);
 }
 export class $$x0 {
   constructor() {
@@ -640,11 +640,11 @@ function w(e, t = [], i, r, s, o) {
     return t && !("layoutPositioning" in t && "ABSOLUTE" === t.layoutPositioning && n);
   }).map(e => e[1]);
   g.length > 0 && (c = mW(g));
-  c.left >= 0 ? e.paddingLeft = c.left : k.log("paddingLeftCandidate is negative", c.left);
+  c.left >= 0 ? e.paddingLeft = c.left : logger.log("paddingLeftCandidate is negative", c.left);
   let f = m - c.right;
-  f >= 0 ? e.paddingRight = m - c.right : k.log("paddingRightCandidate is negative", f);
-  c.top >= 0 ? e.paddingTop = c.top : k.log("paddingTopCandidate is negative", c.top);
-  h - c.bottom >= 0 ? e.paddingBottom = h - c.bottom : k.log("paddingBottomCandidate is negative", c.top);
+  f >= 0 ? e.paddingRight = m - c.right : logger.log("paddingRightCandidate is negative", f);
+  c.top >= 0 ? e.paddingTop = c.top : logger.log("paddingTopCandidate is negative", c.top);
+  h - c.bottom >= 0 ? e.paddingBottom = h - c.bottom : logger.log("paddingBottomCandidate is negative", c.top);
   e.resize(m, h);
   return e;
 }
@@ -654,11 +654,11 @@ function C(e, t) {
   if (i <= r ? e.layoutMode = "VERTICAL" : e.layoutMode = "HORIZONTAL", e.layoutSizingHorizontal = "FIXED", e.layoutSizingVertical = "FIXED", e.resize(i, r), t) {
     let i = e.width;
     let r = e.height;
-    t.left >= 0 ? e.paddingLeft = t.left : k.log("paddingLeftCandidate is negative", t.left);
+    t.left >= 0 ? e.paddingLeft = t.left : logger.log("paddingLeftCandidate is negative", t.left);
     let a = i - t.right;
-    a >= 0 ? e.paddingRight = i - t.right : k.log("paddingRightCandidate is negative", a);
-    t.top >= 0 ? e.paddingTop = t.top : k.log("paddingTopCandidate is negative", t.top);
-    r - t.bottom >= 0 ? e.paddingBottom = r - t.bottom : k.log("paddingBottomCandidate is negative", t.top);
+    a >= 0 ? e.paddingRight = i - t.right : logger.log("paddingRightCandidate is negative", a);
+    t.top >= 0 ? e.paddingTop = t.top : logger.log("paddingTopCandidate is negative", t.top);
+    r - t.bottom >= 0 ? e.paddingBottom = r - t.bottom : logger.log("paddingBottomCandidate is negative", t.top);
   }
 }
 function T(e) {
@@ -724,8 +724,8 @@ export function $$k1(e, t, i, l, d, c, p = !1) {
   }
   if (_.length > 1 && (_ = v(_, _, c)), 1 !== _.length) {
     let e = new S("graph could not resolve: " + _.length + " vertices");
-    k.log(e);
-    _.forEach((e, t) => k.log(t + ": " + function e(t, i) {
+    logger.log(e);
+    _.forEach((e, t) => logger.log(t + ": " + function e(t, i) {
       return "NODE" === t.type ? t.node.name : "LIST" === t.type || "GROUP" === t.type ? "\n" + " ".repeat(i ?? 0) + t.type + ": " + t.children.map(t => e(t, i ?? 2)).join(", ") : "";
     }(e, 0) + "\n\n"));
     return e;
@@ -806,7 +806,7 @@ export function $$k1(e, t, i, l, d, c, p = !1) {
     t.children.forEach(e => {
       if ("LIST" === e.type || "GROUP" === e.type || "FRAME" === e.type) {
         let i = r.getNodeForVertexId(e.id);
-        i ? c.appendChild(i) : k.log("Could not find vertex in store", t.id);
+        i ? c.appendChild(i) : logger.log("Could not find vertex in store", t.id);
       } else {
         c.appendChild(e.node);
         let t = e.node;

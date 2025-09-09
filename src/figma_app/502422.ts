@@ -5,7 +5,7 @@ import { WB } from "../905/761735";
 import { subscribeAndAwaitData } from "../905/553831";
 import { Rs } from "../figma_app/288654";
 import { reportError } from "../905/11";
-import { sMZ } from "../figma_app/43951";
+import { UserFlagByName } from "../figma_app/43951";
 import { H } from "../905/17478";
 class p {
   constructor(e) {
@@ -21,7 +21,7 @@ class p {
       }
       this.pendingIncrementCount += 1;
       try {
-        e = await subscribeAndAwaitData(sMZ, {
+        e = await subscribeAndAwaitData(UserFlagByName, {
           name: this.userFlagName
         });
       } catch (e) {
@@ -58,7 +58,7 @@ class p {
         reportError(_$$e.GROWTH_PLATFORM, Error(`Attempted to reset user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
         return;
       }
-      let e = await subscribeAndAwaitData(sMZ, {
+      let e = await subscribeAndAwaitData(UserFlagByName, {
         name: this.userFlagName
       });
       let t = e.currentUser?.userFlagByName;
@@ -91,7 +91,7 @@ export function $$m1(e) {
   return atomStoreManager.get(h(e)).increment();
 }
 export function $$g0(e) {
-  return Rs(sMZ, {
+  return Rs(UserFlagByName, {
     name: e
   }, {
     enabled: !!getInitialOptions().user_data?.id

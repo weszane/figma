@@ -1,55 +1,63 @@
-import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
-export let $$r10 = "1.0.0";
-export function $$a8() {
-  return "figma.closePlugin();";
+import { isDevOrInspect, ManifestEditorType } from '../figma_app/155287'
+
+/**
+ * Version constant (original: $$r10)
+ */
+export const pS = '1.0.0'
+
+/**
+ * Returns code to close the Figma plugin (original: $$a8)
+ * @returns {string}
+ */
+export const hl = (): string => 'figma.closePlugin();'
+
+/**
+ * Shows the HTML page in "ui.html" (original: b)
+ */
+const b = `// This shows the HTML page in "ui.html".
+figma.showUI(__html__);`
+
+
+/**
+ * Inspect/codegen HTML snippets (original: E)
+ */
+const E = {
+  inspect: `
+  <h2>Selection Change Observer</h2>
+  <p>Observe the contents of figma.selection change as you change the selection in the file.</p>
+  <p>ID of selection is: </p>
+  <p id=selection></p>
+
+  <script>
+
+  onmessage = (event) => {
+    document.getElementById('selection').innerHTML = event.data.pluginMessage[0] ? event.data.pluginMessage[0].id : 'No selection';
+  }
+
+  </script>
+  `,
+  codegen: '',
 }
-export function $$s2(e) {
-  if (e?.includes(ManifestEditorType.INSPECT)) throw Error("Inspect panel plugins cannot be created without a UI");
-  return function (e) {
-    if (0 === e.length) return "";
-    let t = p + "\n\n";
-    1 === e.length && void 0 !== e[0] ? (t += A(e[0])("5") + "\n\n", t += m + "\n") : t += e.map(e => y(e) + "\n" + ("  " + u(A(e)("5"), 2) + "\n\n  " + u(m, 2)) + "\n}\n").join("\n");
-    return t;
-  }(e && e.length > 0 ? e : [ManifestEditorType.FIGMA]);
-}
-export function $$o5(e) {
-  return function (e) {
-    if (0 === e.length) return "";
-    if (isDevOrInspect(e)) return h.inspect;
-    let t = "";
-    1 === e.length && void 0 !== e[0] ? (t += I(e[0]) + "\n\n", t += p + "\n\n", t += b + "\n\n", t += v(A(e[0])("msg.count")) + "\n") : (t += p + "\n\n", t += e.map(e => y(e) + "\n" + ("  " + u(I(e), 2) + "\n\n  " + u(b, 2) + "\n\n  " + u(v(A(e)("msg.count")), 2)) + "\n}\n").join("\n"));
-    return t;
-  }(e && e.length > 0 ? e : [ManifestEditorType.FIGMA]);
-}
-export function $$l9(e) {
-  return function (e) {
-    if (0 === e.length) return "";
-    if (isDevOrInspect(e)) return E.inspect;
-    let t = "Rectangle Creator";
-    1 === e.length && e[0] === ManifestEditorType.FIGJAM ? t = "Shape & Connector Creator" : 1 === e.length && e[0] === ManifestEditorType.SLIDES ? t = "Slide Creator" : e.length > 1 && (t = "Shape Creator");
-    return x(t);
-  }(e && e.length > 0 ? e : [ManifestEditorType.FIGMA]);
-}
-export function $$d11(e) {
-  return h[e];
-}
-export function $$c7(e) {
-  return E[e];
-}
-function u(e, t) {
-  let i = " ".repeat(t);
-  let n = e.split("\n");
-  for (let e = 1; e < n.length; e++) 0 !== n[e].length && (n[e] = i + n[e]);
-  return n.join("\n");
-}
-let p = `// This file holds the main code for plugins. Code in this file has access to
+
+/**
+ * Plugin code comments (original: p)
+ */
+const p = `// This file holds the main code for plugins. Code in this file has access to
 // the *figma document* via the figma global object.
 // You can access browser APIs in the <script> tag inside "ui.html" which has a
-// full browser environment (See https://www.figma.com/plugin-docs/how-plugins-run).`;
-let m = `// Make sure to close the plugin when you're done. Otherwise the plugin will
+// full browser environment (See https://www.figma.com/plugin-docs/how-plugins-run).`
+
+/**
+ * Plugin close code comment (original: m)
+ */
+const m = `// Make sure to close the plugin when you're done. Otherwise the plugin will
 // keep running, which shows the cancel button at the bottom of the screen.
-figma.closePlugin();`;
-let h = {
+figma.closePlugin();`
+
+/**
+ * Inspect/codegen plugin code snippets (original: h)
+ */
+const h = {
   inspect: `// This plugin will open a tab that indicates that it will monitor the current
 // selection on the page. It cannot change the document itself.
 
@@ -81,10 +89,127 @@ figma.codegen.on('generate', (event) => {
     },
   ];
 });
-`
-};
-let g = e => `// This plugin creates rectangles on the screen.
-const numberOfRectangles = ${e};
+`,
+}
+
+/**
+ * Generates main plugin code based on editor type (original: $$s2)
+ * @param {ManifestEditorType[]} editors
+ * @returns {string}
+ */
+export function MQ(editors: ManifestEditorType[]): string {
+  if (editors?.includes(ManifestEditorType.INSPECT)) {
+    throw new Error('Inspect panel plugins cannot be created without a UI')
+  }
+  const types = editors && editors.length > 0 ? editors : [ManifestEditorType.FIGMA]
+  if (types.length === 0)
+    return ''
+  let code = `${p}\n\n`
+  if (types.length === 1 && types[0] !== undefined) {
+    code += `${getEditorCode(types[0])('5')}\n\n`
+    code += `${m}\n`
+  }
+  else {
+    code += types.map(type =>
+      `${getEditorConditional(type)}\n`
+      + `  ${indent(getEditorCode(type)('5'), 2)}\n\n  ${indent(m, 2)}`
+      + `\n}\n`,
+    ).join('\n')
+  }
+  return code
+}
+
+/**
+ * Generates plugin code with UI and message handling (original: $$o5)
+ * @param {ManifestEditorType[]} editors
+ * @returns {string}
+ */
+export function Pg(editors: ManifestEditorType[]): string {
+  const types = editors && editors.length > 0 ? editors : [ManifestEditorType.FIGMA]
+  if (types.length === 0)
+    return ''
+  if (isDevOrInspect(types))
+    return h.inspect
+  let code = ''
+  if (types.length === 1 && types[0] !== undefined) {
+    code += `${getEditorIntro(types[0])}\n\n`
+    code += `${p}\n\n`
+    code += `${b}\n\n`
+    code += `${v(getEditorCode(types[0])('msg.count'))}\n`
+  }
+  else {
+    code += `${p}\n\n`
+    code += types.map(type =>
+      `${getEditorConditional(type)}\n`
+      + `  ${indent(getEditorIntro(type), 2)}\n\n  ${indent(b, 2)}\n\n  ${indent(v(getEditorCode(type)('msg.count')), 2)}`
+      + `\n}\n`,
+    ).join('\n')
+  }
+  return code
+}
+
+/**
+ * Generates HTML for plugin UI (original: $$l9)
+ * @param {ManifestEditorType[]} editors
+ * @returns {string}
+ */
+export function kE(editors: ManifestEditorType[]): string {
+  const types = editors && editors.length > 0 ? editors : [ManifestEditorType.FIGMA]
+  if (types.length === 0)
+    return ''
+  if (isDevOrInspect(types))
+    return E.inspect
+  let title = 'Rectangle Creator'
+  if (types.length === 1 && types[0] === ManifestEditorType.FIGJAM) {
+    title = 'Shape & Connector Creator'
+  }
+  else if (types.length === 1 && types[0] === ManifestEditorType.SLIDES) {
+    title = 'Slide Creator'
+  }
+  else if (types.length > 1) {
+    title = 'Shape Creator'
+  }
+  return x(title)
+}
+
+/**
+ * Returns code snippet for inspect/codegen (original: $$d11)
+ * @param {keyof typeof h} type
+ * @returns {string}
+ */
+export const rK = (type: keyof typeof h): string => h[type]
+
+/**
+ * Returns HTML snippet for inspect/codegen (original: $$c7)
+ * @param {keyof typeof E} type
+ * @returns {string}
+ */
+export const hW = (type: keyof typeof E): string => E[type]
+
+/**
+ * Indents each line of a string by the given number of spaces (original: u)
+ * @param {string} str
+ * @param {number} spaces
+ * @returns {string}
+ */
+function indent(str: string, spaces: number): string {
+  const pad = ' '.repeat(spaces)
+  const lines = str.split('\n')
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i].length !== 0)
+      lines[i] = pad + lines[i]
+  }
+  return lines.join('\n')
+}
+
+/**
+ * Returns code for creating rectangles (original: g)
+ * @param {string|number} count
+ * @returns {string}
+ */
+function rectangleCode(count: string | number): string {
+  return `// This plugin creates rectangles on the screen.
+const numberOfRectangles = ${count};
 
 const nodes: SceneNode[] = [];
 for (let i = 0; i < numberOfRectangles; i++) {
@@ -95,9 +220,17 @@ for (let i = 0; i < numberOfRectangles; i++) {
   nodes.push(rect);
 }
 figma.currentPage.selection = nodes;
-figma.viewport.scrollAndZoomIntoView(nodes);`;
-let f = e => `// This plugin creates shapes and connectors on the screen.
-const numberOfShapes = ${e};
+figma.viewport.scrollAndZoomIntoView(nodes);`
+}
+
+/**
+ * Returns code for creating shapes/connectors (original: f)
+ * @param {string|number} count
+ * @returns {string}
+ */
+function shapeConnectorCode(count: string | number): string {
+  return `// This plugin creates shapes and connectors on the screen.
+const numberOfShapes = ${count};
 
 const nodes: SceneNode[] = [];
 for (let i = 0; i < numberOfShapes; i++) {
@@ -126,9 +259,17 @@ for (let i = 0; i < numberOfShapes - 1; i++) {
 }
 
 figma.currentPage.selection = nodes;
-figma.viewport.scrollAndZoomIntoView(nodes);`;
-let _ = e => `// This plugin creates slides and puts the user in grid view.
-const numberOfSlides = ${e};
+figma.viewport.scrollAndZoomIntoView(nodes);`
+}
+
+/**
+ * Returns code for creating slides (original: _)
+ * @param {string|number} count
+ * @returns {string}
+ */
+function slideCode(count: string | number): string {
+  return `// This plugin creates slides and puts the user in grid view.
+const numberOfSlides = ${count};
 
 const nodes: SlideNode[] = [];
 for (let i = 0; i < numberOfSlides; i++) {
@@ -137,56 +278,87 @@ for (let i = 0; i < numberOfSlides; i++) {
 }
 
 figma.viewport.slidesView = 'grid';
-figma.currentPage.selection = nodes;`;
-function A(e) {
-  return e === ManifestEditorType.FIGMA ? g : e === ManifestEditorType.FIGJAM ? f : e === ManifestEditorType.SLIDES ? _ : e => "";
+figma.currentPage.selection = nodes;`
 }
-function y(e) {
-  let t = "";
-  e === ManifestEditorType.FIGMA && (t += "// Runs this code if the plugin is run in Figma\nif (figma.editorType === 'figma') {");
-  e === ManifestEditorType.FIGJAM && (t += "// Runs this code if the plugin is run in FigJam\nif (figma.editorType === 'figjam') {");
-  e === ManifestEditorType.SLIDES && (t += "// Runs this code if the plugin is run in Slides\nif (figma.editorType === 'slides') {");
-  return t;
+
+/**
+ * Returns code generator function based on editor type (original: A)
+ * @param {ManifestEditorType} type
+ * @returns {(count: string|number) => string}
+ */
+function getEditorCode(type: ManifestEditorType): (count: string | number) => string {
+  if (type === ManifestEditorType.FIGMA)
+    return rectangleCode
+  if (type === ManifestEditorType.FIGJAM)
+    return shapeConnectorCode
+  if (type === ManifestEditorType.SLIDES)
+    return slideCode
+  return () => ''
 }
-let b = `// This shows the HTML page in "ui.html".
-figma.showUI(__html__);`;
-let v = e => `// Calls to "parent.postMessage" from within the HTML page will trigger this
+
+/**
+ * Returns conditional code block for editor type (original: y)
+ * @param {ManifestEditorType} type
+ * @returns {string}
+ */
+function getEditorConditional(type: ManifestEditorType): string {
+  if (type === ManifestEditorType.FIGMA)
+    return '// Runs this code if the plugin is run in Figma\nif (figma.editorType === \'figma\') {'
+  if (type === ManifestEditorType.FIGJAM)
+    return '// Runs this code if the plugin is run in FigJam\nif (figma.editorType === \'figjam\') {'
+  if (type === ManifestEditorType.SLIDES)
+    return '// Runs this code if the plugin is run in Slides\nif (figma.editorType === \'slides\') {'
+  return ''
+}
+
+
+/**
+ * Returns code for handling UI messages (original: v)
+ * @param {string} code
+ * @returns {string}
+ */
+function v(code: string): string {
+  return `// Calls to "parent.postMessage" from within the HTML page will trigger this
 // callback. The callback will be passed the "pluginMessage" property of the
 // posted message.
 figma.ui.onmessage =  (msg: {type: string, count: number}) => {
   // One way of distinguishing between different types of messages sent from
   // your HTML page is to use an object with a "type" property like this.
   if (msg.type === 'create-shapes') {
-    ${u(e, 4)}
+    ${indent(code, 4)}
   }
 
-  ${u(m, 2)}
-};`;
-function I(e) {
-  let t = "// This plugin will open a window to prompt the user to enter a number, and\n";
-  e === ManifestEditorType.FIGMA && (t += "// it will then create that many rectangles on the screen.");
-  e === ManifestEditorType.FIGJAM && (t += "// it will then create that many shapes and connectors on the screen.");
-  e === ManifestEditorType.SLIDES && (t += "// it will then create that many slides on the screen.");
-  return t;
+  ${indent(m, 2)}
+};`
 }
-let E = {
-  inspect: `
-  <h2>Selection Change Observer</h2>
-  <p>Observe the contents of figma.selection change as you change the selection in the file.</p>
-  <p>ID of selection is: </p>
-  <p id=selection></p>
 
-  <script>
+/**
+ * Returns intro comment for plugin code (original: I)
+ * @param {ManifestEditorType} type
+ * @returns {string}
+ */
+function getEditorIntro(type: ManifestEditorType): string {
+  let intro = '// This plugin will open a window to prompt the user to enter a number, and\n'
+  if (type === ManifestEditorType.FIGMA)
+    intro += '// it will then create that many rectangles on the screen.'
+  else if (type === ManifestEditorType.FIGJAM)
+    intro += '// it will then create that many shapes and connectors on the screen.'
+  else if (type === ManifestEditorType.SLIDES)
+    intro += '// it will then create that many slides on the screen.'
+  return intro
+}
 
-  onmessage = (event) => {
-    document.getElementById('selection').innerHTML = event.data.pluginMessage[0] ? event.data.pluginMessage[0].id : 'No selection';
-  }
 
-  </script>
-  `,
-  codegen: ""
-};
-let x = e => `<h2>${e}</h2>
+
+
+
+/**
+ * Generates HTML for plugin UI (original: x)
+ * @param {string} title
+ * @returns {string}
+ */
+function x(title: string): string {
+  return `<h2>${title}</h2>
 <p>Count: <input id="count" type="number" value="5"></p>
 <button id="create">Create</button>
 <button id="cancel">Cancel</button>
@@ -203,9 +375,18 @@ document.getElementById('cancel').onclick = () => {
 }
 
 </script>
-`;
-let $$S1 = 'throw new Error("This plugin template uses TypeScript. Follow the instructions in `README.md` to generate `code.js`.")';
-let $$w6 = `Below are the steps to get your plugin running. You can also find instructions at:
+`
+}
+
+/**
+ * TypeScript error message (original: $$S1)
+ */
+export const Bt = 'throw new Error("This plugin template uses TypeScript. Follow the instructions in `README.md` to generate `code.js`.")'
+
+/**
+ * Plugin quickstart instructions (original: $$w6)
+ */
+export const fN = `Below are the steps to get your plugin running. You can also find instructions at:
 
   https://www.figma.com/plugin-docs/plugin-quickstart-guide/
 
@@ -245,8 +426,12 @@ We recommend writing TypeScript code using Visual Studio code:
     you reopen Visual Studio Code.
 
 That's it! Visual Studio Code will regenerate the JavaScript file every time you save.
-`;
-let $$C0 = `{
+`
+
+/**
+ * TypeScript compiler config (original: $$C0)
+ */
+export const Ah = `{
   "compilerOptions": {
     "target": "es6",
     "lib": ["es6"],
@@ -257,18 +442,14 @@ let $$C0 = `{
     ]
   }
 }
-`;
-let $$T4 = 1920;
-let $$k3 = 1080;
-export const Ah = $$C0;
-export const Bt = $$S1;
-export const MQ = $$s2;
-export const Oq = $$k3;
-export const PJ = $$T4;
-export const Pg = $$o5;
-export const fN = $$w6;
-export const hW = $$c7;
-export const hl = $$a8;
-export const kE = $$l9;
-export const pS = $$r10;
-export const rK = $$d11;
+`
+
+/**
+ * Slide width (original: $$T4)
+ */
+export const PJ = 1920
+
+/**
+ * Slide height (original: $$k3)
+ */
+export const Oq = 1080

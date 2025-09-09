@@ -7,7 +7,7 @@ import { q8, dZ } from "../figma_app/459490";
 import { lg } from "../figma_app/976749";
 import { sZ } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
-import { YTs, erJ } from "../figma_app/43951";
+import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseSlidesAi } from "../figma_app/43951";
 import { T5 } from "../figma_app/465071";
 import { PE } from "../figma_app/251115";
 export function $$h0() {
@@ -47,7 +47,7 @@ let y = atom("loading");
 export function $$b2(e) {
   let t = Xr(y);
   let r = sZ();
-  let l = Rs(dZ(r) ? YTs : erJ, {
+  let l = Rs(dZ(r) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseSlidesAi, {
     key: e
   }, {
     enabled: !!e

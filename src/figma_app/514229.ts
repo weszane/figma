@@ -5,7 +5,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { fullscreenValue } from "../figma_app/455680";
 import { i2 } from "../905/913055";
 import { KH } from "../figma_app/722362";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 export let $$p2 = e => Uint8Array.from(e.match(/.{1,2}/g).map(e => parseInt(e, 16)));
 export function $$_1() {
   let e = KH();
@@ -97,7 +97,7 @@ export function $$h0({
       r && (m.setSelectionToSingleNode(c.guid), c.isGridChild || fullscreenValue.updateSelectionProperties({
         aspectRatioLockToggled: !0
       }, {
-        shouldCommit: zk.NO
+        shouldCommit: yesNoTrackingEnum.NO
       }));
       Fullscreen?.showSelectionOverlayImmediately();
     }

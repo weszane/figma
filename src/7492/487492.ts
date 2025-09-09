@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { createContext, useContext, useRef, useCallback, useEffect, useMemo, memo, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { assertNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
@@ -63,12 +63,12 @@ import { A as _$$A2 } from "../svg/957897";
 import { A as _$$A3 } from "../svg/465311";
 import { A as _$$A4 } from "../svg/586486";
 import { A as _$$A5 } from "../1617/579393";
-if (443 == require.j) {}
+if (443 == require.j) { }
 var p = g;
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
 export var $$eI2 = (e => (e.COMMUNITY = "community", e.RECENT = "recent", e.DEVELOPMENT = "development", e.DEVELOPMENT_MISSING_LOCAL = "development_missing_local", e.ORG_PRIVATE = "org_private", e.SAVED = "saved", e.INVITED = "invited", e))($$eI2 || {});
 function em(e) {
   let i = useSelector(e => e.orgById);
@@ -463,7 +463,7 @@ function eN(e) {
   } = ew();
   let g = u?.type === lD && u?.data.localFileId === e.localFileId && u?.data.pluginId === d;
   let p = useCallback(t => {
-    if (t.stopPropagation(), g) i(oB());else {
+    if (t.stopPropagation(), g) i(oB()); else {
       let n = t.currentTarget.getBoundingClientRect();
       i(j7({
         type: lD,
@@ -669,7 +669,7 @@ function eP(e) {
     })]
   });
   let Q = function (e, i) {
-    if (m0()) ;else if (e && i) return !0;
+    if (m0()); else if (e && i) return !0;
     return !1;
   }(e.showEditorTypeIcon, r);
   let X = m0();
@@ -775,7 +775,7 @@ function eA(e) {
   } = Ys(e.widgetId);
   let _ = useCallback(t => {
     if (j) {
-      if (t.preventDefault(), t.stopPropagation(), f) i(oB());else {
+      if (t.preventDefault(), t.stopPropagation(), f) i(oB()); else {
         let n = t.currentTarget.getBoundingClientRect();
         i(j7({
           type: cH,
@@ -875,7 +875,7 @@ function eS(e) {
   } = ej();
   let v = g?.type === jZ.DEVELOPMENT_WIDGET_DROPDOWN && g?.data.isRecentTile === e.isRecentTile && g?.data.localFileId === e.localFileId && g?.data.pluginId === a && g?.data.targetRect;
   let I = useCallback(t => {
-    if (t.stopPropagation(), v) i(oB());else {
+    if (t.stopPropagation(), v) i(oB()); else {
       let n = t.currentTarget.getBoundingClientRect();
       i(j7({
         type: jZ.DEVELOPMENT_WIDGET_DROPDOWN,
@@ -1229,7 +1229,7 @@ export function $$eH1(e) {
   let p = useRef(null);
   let I = useCallback(t => {
     if (o) {
-      if (t.preventDefault(), t.stopPropagation(), g) i(oB());else {
+      if (t.preventDefault(), t.stopPropagation(), g) i(oB()); else {
         let n = t.currentTarget.getBoundingClientRect();
         i(j7({
           type: cH,

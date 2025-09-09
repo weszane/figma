@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { defaultLanguage, languageCodes, subsetLanguages, allLanguages } from "../905/816253";
 import { getLanguageDisplayName, getI18nResourceKey } from "../905/528121";
 import { throwError } from "../figma_app/465776";
@@ -14,7 +14,7 @@ import { $n } from "../905/521428";
 import { captureException } from "../vendor/288996";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { isDevEnvironment } from "../figma_app/169182";
 import { I7 } from "../figma_app/594947";
 import { s as _$$s2 } from "../905/573154";
@@ -25,7 +25,7 @@ import { fu } from "../figma_app/831799";
 import { aq } from "../figma_app/412189";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { T as _$$T, e as _$$e } from "../905/949616";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { k as _$$k2 } from "../905/93362";
 export let $$P0 = registerModal(function ({
   open: e,
@@ -110,7 +110,7 @@ export let $$P0 = registerModal(function ({
     onError: e,
     onSuccess: t
   }) {
-    let i = TA();
+    let i = getUserId();
     return n => {
       if (_$$T("product_locale", n, {
         maxAge: _$$e
@@ -136,7 +136,7 @@ export let $$P0 = registerModal(function ({
       });
     },
     onSuccess: () => {
-      Ay.reload("User changed locale preference");
+      customHistory.reload("User changed locale preference");
     }
   });
   return jsx(fu, {

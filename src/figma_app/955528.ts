@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState, useMemo, useEffect, useContext } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, MeterExceededError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientNoTextSelectedError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError } from "../figma_app/316567";
 import { ch, DE } from "../figma_app/571325";
@@ -17,8 +17,8 @@ import { useSprigWithSampling } from "../905/99656";
 import { getFalseValue } from "../figma_app/897289";
 import { BE } from "../figma_app/991591";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Tv } from "../figma_app/311375";
 import { u1, XE } from "../figma_app/91703";
 import { vu } from "../figma_app/8833";
@@ -276,26 +276,26 @@ export function $$Q9(e) {
   let o = ZC(r) !== r;
   let l = useDispatch();
   useEffect(() => () => {
-    l(_$$F.dequeue({
+    l(VisualBellActions.dequeue({
       matchType: K
     }));
     cT(JT.SLIDES_REWRITE_TEXT);
   }, [l]);
   useEffect(() => {
     if (o) {
-      if (r === qy.RUNNING) l(_$$F.enqueue({
+      if (r === qy.RUNNING) l(VisualBellActions.enqueue({
         message: getI18nString("slides.properties_panel.rewrite_text.action_rewriting"),
-        icon: zX.SPINNER,
+        icon: VisualBellIcon.SPINNER,
         type: K,
         timeoutOverride: 1 / 0,
         button: {
           text: getI18nString("slides.properties_panel.rewrite_text.action_stop"),
           action: () => cT(JT.SLIDES_REWRITE_TEXT)
         }
-      }));else if (r === qy.CANCELLED) l(_$$F.dequeue({
+      })); else if (r === qy.CANCELLED) l(VisualBellActions.dequeue({
         matchType: K
-      }));else if (r === qy.DONE) l(_$$F.enqueue({
-        icon: zX.CHECK,
+      })); else if (r === qy.DONE) l(VisualBellActions.enqueue({
+        icon: VisualBellIcon.CHECK,
         message: getI18nString("slides.properties_panel.rewrite_text.action_done"),
         type: K,
         timeoutOverride: 8e3,
@@ -303,8 +303,8 @@ export function $$Q9(e) {
           text: getI18nString("slides.properties_panel.rewrite_text.action_rewrite_again"),
           action: () => e()
         },
-        onDismiss: () => {}
-      }));else if (r === qy.ERROR) {
+        onDismiss: () => { }
+      })); else if (r === qy.ERROR) {
         let r = t.error;
         let n = function (e) {
           if (e instanceof n4) return getI18nString("slides.properties_panel.rewrite_text.error.no_text_characters_found");
@@ -323,7 +323,7 @@ export function $$Q9(e) {
             not_implemented: getI18nString("ai.error.not_implemented")
           };
           let r = "generic";
-          if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? r = "content_length_limit_exceeded" : MeterExceededError.isInstance(e) ? r = "meter_exceeded" : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? r = "rate_limit_exceeded" : ClientNoTextSelectedError.isInstance(e) ? r = "text_tool_no_text" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? r = "service_issue" : OfflineError.isInstance(e) ? r = "offline" : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? r = "unsafe_or_harmful_content" : UnauthorizedError.isInstance(e) ? r = "unauthorized" : NotImplementedError.isInstance(e) ? r = "not_implemented" : e?.statusCode === 404 ? r = "service_issue" : e?.statusCode === 429 || e?.statusCode === 529 ? r = "rate_limit_exceeded" : e?.statusCode === 403 && (r = "ai_opt_out_error");else if (e instanceof G1) switch (e.type) {
+          if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? r = "content_length_limit_exceeded" : MeterExceededError.isInstance(e) ? r = "meter_exceeded" : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? r = "rate_limit_exceeded" : ClientNoTextSelectedError.isInstance(e) ? r = "text_tool_no_text" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? r = "service_issue" : OfflineError.isInstance(e) ? r = "offline" : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? r = "unsafe_or_harmful_content" : UnauthorizedError.isInstance(e) ? r = "unauthorized" : NotImplementedError.isInstance(e) ? r = "not_implemented" : e?.statusCode === 404 ? r = "service_issue" : e?.statusCode === 429 || e?.statusCode === 529 ? r = "rate_limit_exceeded" : e?.statusCode === 403 && (r = "ai_opt_out_error"); else if (e instanceof G1) switch (e.type) {
             case "content_length_limit_exceeded":
             case "meter_exceeded":
             case "rate_limit_exceeded":
@@ -360,15 +360,15 @@ export function $$Q9(e) {
               return !0;
           }
         }(r);
-        l(_$$F.enqueue({
-          icon: zX.CLOSE_FILLED,
+        l(VisualBellActions.enqueue({
+          icon: VisualBellIcon.CLOSE_FILLED,
           message: n,
           type: K,
           button: i ? {
             text: getI18nString("slides.properties_panel.rewrite_text.action_rewrite_again"),
             action: () => e()
           } : void 0,
-          onDismiss: () => {}
+          onDismiss: () => { }
         }));
       }
     }

@@ -79,7 +79,7 @@ export class ViewDefinition {
     objectDef: any,        // originally 'i'
     schema: any,           // originally 'n'
     metadata: any,         // originally 'a'
-    context: any           // originally 'o'
+    context?: any           // originally 'o'
   ) {
     this.name = name
     this.metadata = metadata

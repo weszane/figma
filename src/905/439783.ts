@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useContext } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { y as _$$y } from "../905/292472";
 import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";

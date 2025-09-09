@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
@@ -124,7 +124,7 @@ export function $$W0(e) {
     let r = getI18nString("design_systems.libraries_modal.plural.num_style", {
       numStyles: t
     });
-    if (e > 0 && t > 0) i = Yx([n, r], "unit");else if (e > 0) i = n;else {
+    if (e > 0 && t > 0) i = Yx([n, r], "unit"); else if (e > 0) i = n; else {
       if (!(t > 0)) return "";
       i = r;
     }

@@ -6,7 +6,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E } from "../905/277716";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
@@ -45,7 +45,7 @@ export function $$_0({
     rectangleCornerToolIndependentActive: d,
     setRectangleCornerToolIndependentActive: p
   }) : h && !_ && (S = jsx(_$$E, {
-    recordingKey: Pt(e, "cornerSmoothingToggle"),
+    recordingKey: generateRecordingKey(e, "cornerSmoothingToggle"),
     rowRef: t
   }));
   return {
@@ -80,7 +80,7 @@ export let $$b1 = memo(function ({
       htmlAttributes: {
         "data-testid": "individual-corners-toggle-button"
       },
-      recordingKey: Pt(n, "rectangleCornerToolIndependentToggle"),
+      recordingKey: generateRecordingKey(n, "rectangleCornerToolIndependentToggle"),
       children: jsx(Q, {})
     })
   });

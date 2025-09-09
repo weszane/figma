@@ -1,11 +1,11 @@
 import { useRef, useEffect, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { A } from "../905/920142";
 import { XHR } from "../905/910117";
 import { YQ } from "../905/502364";
 import { showModalHandler } from "../905/156213";
 import { v } from "../figma_app/380543";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { J } from "../figma_app/333189";
 import { d4 } from "../905/759412";
 export let $$_2 = "link_expired_event";
@@ -26,7 +26,7 @@ let m = (e, t) => {
   }, [e, t]);
 };
 export function $$g1(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = useDispatch();
   let {
     file,

@@ -1,5 +1,5 @@
 import { useMemo, useRef, useEffect, createContext, useContext } from "react";
-import { useStore, useSelector } from "../vendor/514228";
+import { useStore, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { isEmptyObject } from "../figma_app/493477";
 import { FileSourceType } from "../figma_app/763686";

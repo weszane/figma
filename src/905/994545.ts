@@ -7,7 +7,7 @@ import o from "lodash-es/snakeCase";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { ze } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
 import { B9, Py } from "../figma_app/346422";
@@ -131,7 +131,7 @@ async function b(e, t) {
 export async function $$v1(e) {
   let t = getSingletonSceneGraph().getCurrentPage().childrenNodes.filter(e => "SECTION" === e.type);
   if (0 === t.length) {
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: "No top-level sections found.",
       error: !0
     }));
@@ -153,7 +153,7 @@ export async function $$v1(e) {
     let r = n[0];
     i.set(t, r);
   }), a.length > 0) {
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: `Failed to export designs: ${a.join("; ")}`,
       error: !0
     }));
@@ -161,7 +161,7 @@ export async function $$v1(e) {
   }
   let s = 0;
   let o = i.size;
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     message: `Exporting ${o} designs`,
     error: !1
   }));
@@ -178,7 +178,7 @@ export async function $$v1(e) {
         i.name = r;
       });
       s++;
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         message: `Exported ${s}/${o} designs`,
         error: !1
       }));
@@ -189,7 +189,7 @@ export async function $$v1(e) {
     } catch (i) {
       console.error(`Error generating code for ${t}:`, i);
       s++;
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         message: `Exported ${s}/${o} designs`,
         error: !1
       }));
@@ -203,7 +203,7 @@ export async function $$v1(e) {
   let c = l.filter(e => "error" in e);
   if (c.length > 0) {
     let t = c.map(e => `${e.section}: ${e.error}`).join("; ");
-    if (e(F.enqueue({
+    if (e(VisualBellActions.enqueue({
       message: `Errors exporting: ${t}`,
       error: !0,
       timeoutOverride: 1 / 0
@@ -230,13 +230,13 @@ export async function $$v1(e) {
       }
     }));
     await b(t, `d2r-export-${Date.now()}.zip`);
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: `Exported ${d.length} component${1 !== d.length ? "s" : ""}`,
       error: !1
     }));
   } catch (t) {
     console.error("Error exporting designs to React:", t);
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: `Error exporting designs: ${String(t)}`,
       error: !0
     }));

@@ -7,12 +7,12 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rw } from "../figma_app/930338";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { _G, Pv } from "../905/619652";
 import { yV, tS } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
@@ -30,7 +30,7 @@ let $$N2 = atom(null, (e, t) => {
     let r = e($$S0);
     t($$S0, [...r, {
       status: "pending",
-      uniqueId: _$$g()
+      uniqueId: generateUUIDv4()
     }]);
   }
 });
@@ -47,7 +47,7 @@ export function $$w13(e) {
 }
 export function $$O9(e) {
   function t(e, r = !0) {
-    debugState.dispatch(_$$F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: "figmake_attachment_failed_to_load",
       message: e,
       timeoutOverride: 5e3,
@@ -55,7 +55,7 @@ export function $$O9(e) {
       button: {
         text: getI18nString("figmake.attachments.learn_more_button"),
         action: () => {
-          Ay.unsafeRedirect("https://help.figma.com/hc/articles/31722591905559", "_blank");
+          customHistory.unsafeRedirect("https://help.figma.com/hc/articles/31722591905559", "_blank");
         }
       }
     }));
@@ -104,7 +104,7 @@ export function $$D8(e, t) {
   return $$P7(e) && e.nodeGuid === t;
 }
 function k() {
-  return _$$g();
+  return generateUUIDv4();
 }
 export function $$M10() {
   let [e, t] = useAtomValueAndSetter($$S0);
@@ -124,26 +124,26 @@ let F = [];
 let j = debounce(function (e, t, r) {
   if (e !== t) switch (t) {
     case "loading":
-      debugState.dispatch(_$$F.enqueue({
+      debugState.dispatch(VisualBellActions.enqueue({
         message: getI18nString("figmake.chat.a11y_attachment_loading"),
         role: "status"
       }));
       break;
     case "success":
       let n = "IMAGE" === r.type ? getI18nString("figmake.chat.a11y_image_attached_successfully") : getI18nString("figmake.chat.a11y_design_attached_successfully");
-      debugState.dispatch(_$$F.enqueue({
+      debugState.dispatch(VisualBellActions.enqueue({
         message: n,
         role: "status"
       }));
       break;
     case "error":
-      debugState.dispatch(_$$F.enqueue({
+      debugState.dispatch(VisualBellActions.enqueue({
         message: getI18nString("figmake.chat.a11y_attachment_failed_to_load"),
         role: "status"
       }));
       break;
     case "removed":
-      debugState.dispatch(_$$F.enqueue({
+      debugState.dispatch(VisualBellActions.enqueue({
         message: getI18nString("figmake.chat.a11y_attachment_removed"),
         role: "status"
       }));

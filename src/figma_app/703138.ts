@@ -3,7 +3,7 @@ import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { hm } from "../905/380385";
 let $$u10 = NC("GENERIC_COMMENT_COMMIT_CREATED_COMMENT");
@@ -67,7 +67,7 @@ let $$y7 = createOptimistThunk(async (e, t) => {
     onSuccess && onSuccess(t.meta);
   }).catch(t => {
     let r = J(t);
-    r && (e.dispatch(F.enqueue({
+    r && (e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: getI18nString("community.comments.failed_to_create_comment", {
         errorMessage: r
@@ -104,7 +104,7 @@ let $$b2 = createOptimistAction("GENERIC_COMMENT_EDIT", async (e, t, {
     }));
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(r));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.comments.failed_to_edit_comment"),
       error: !0
     }));
@@ -129,13 +129,13 @@ let $$T4 = createOptimistThunk((e, t, {
       resourceId: id,
       comments: [u]
     }));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.comments.comment_deleted")
     }));
     onFinish?.(!1);
   }).catch(t => {
     let r = J(t);
-    r && (e.dispatch(F.enqueue({
+    r && (e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: getI18nString("community.comments.failed_to_delete_comment", {
         errorMessage: r
@@ -164,14 +164,14 @@ let $$I6 = createOptimistThunk((e, t) => {
       resourceId: id,
       resourceType: type
     }));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.comments.comment_reported_and_hidden"),
       type: "COMMENT_REPORTED"
     }));
     onFinish?.(!1);
   }).catch(t => {
     let r = J(t);
-    r && (e.dispatch(F.enqueue({
+    r && (e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.comments.failed_to_report_comment", {
         errorMessage: r
       }),

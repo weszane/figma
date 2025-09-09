@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { mG } from "../figma_app/15924";
@@ -15,7 +15,7 @@ import { RW } from "../figma_app/684168";
 import { j } from "../905/813868";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { R as _$$R } from "../figma_app/612938";
 import { aL } from "../figma_app/45218";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
@@ -45,7 +45,7 @@ export function $$O0({
   let j = F && gn(publishedExtension);
   let U = Kp(e);
   let B = function (e) {
-    let t = TA();
+    let t = getUserId();
     let r = useSelector(e => e.authedActiveCommunityProfile);
     let a = ej(e);
     return useCallback(() => {

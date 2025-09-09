@@ -2,11 +2,11 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { Uz, xH } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { B } from "../905/969273";
 import { _0, PI, sZ } from "../figma_app/948389";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { e as _$$e } from "../905/280005";
 import { RK } from "../figma_app/815170";
@@ -176,7 +176,7 @@ export function $$R1({
     onDismiss: T,
     extra: a,
     dataTestId: "errorView",
-    recordingKey: Pt(y, "toast"),
+    recordingKey: generateRecordingKey(y, "toast"),
     shouldAutoFocus: !0,
     children: jsxs(_$$B, {
       justify: "space-between",
@@ -187,7 +187,7 @@ export function $$R1({
         children: I
       }), jsx(_$$B, {
         children: E && E.map(e => jsx(k, {
-          recordingKey: Pt(y, e.type),
+          recordingKey: generateRecordingKey(y, e.type),
           button: e,
           aiTrackingContext: s
         }, e.type))

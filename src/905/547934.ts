@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { n as _$$n } from "../905/64411";
 import { lY } from "../905/939482";

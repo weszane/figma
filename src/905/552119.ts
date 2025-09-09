@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
-import { Ay } from "../905/612521";
+import { useDispatch } from "react-redux";
+import { customHistory } from "../905/612521";
 import { Uz, xH } from "../905/63728";
 import { getI18nString } from "../905/303541";
 import { hideModalHandler } from "../905/156213";
@@ -83,7 +83,7 @@ export function $$f0({
           key: Uz.ENTER,
           modifier: [xH.META]
         }],
-        onAction: () => Ay.redirect(i.link, "_blank")
+        onAction: () => customHistory.redirect(i.link, "_blank")
       }, f) : void 0;
     }, [e, _, A, w, b?.libraryKey, f]),
     tertiaryAction: S

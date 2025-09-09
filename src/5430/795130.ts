@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { N as _$$N } from "../figma_app/469468";
 import { getI18nString } from "../905/303541";
@@ -16,7 +16,7 @@ import { YW } from "../figma_app/350203";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { IE } from "../5430/231178";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { LE } from "../905/71785";
 import { Ib } from "../905/129884";
 import { T as _$$T } from "../5132/203178";
@@ -29,7 +29,7 @@ export function $$T0({
   let T = useDispatch();
   let I = _$$N(`(max-width: ${YW}px)`);
   let N = _$$T();
-  let E = iZ();
+  let E = selectCurrentUser();
   let S = useCallback(() => {
     if (I) {
       T(showModalHandler({

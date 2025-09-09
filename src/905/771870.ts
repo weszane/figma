@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { connect } from "../vendor/514228";
-import { cd, _H } from "../figma_app/243058";
+import { connect } from "react-redux";
+import { ResponsiveSetIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { Fullscreen, StylesBindings } from "../figma_app/763686";
 import { NQ } from "../905/508367";
 import { T1 } from "../905/711212";
@@ -18,7 +18,7 @@ var n;
           item
         } = this.props;
         let t = this.state.fallbackLocalThumbnailGuid;
-        Do(item) ? t = item.type === PW.RESPONSIVE_SET ? cd.toGuidStrIfLocal(item.assetId) : item.type === PW.CODE_COMPONENT ? _H.toGuidStrIfLocal(item.assetId) : this.state.fallbackLocalThumbnailGuid : item.isLocal && (t = item.node_id);
+        Do(item) ? t = item.type === PW.RESPONSIVE_SET ? ResponsiveSetIdHandler.toGuidStrIfLocal(item.assetId) : item.type === PW.CODE_COMPONENT ? CodeComponentIdHandler.toGuidStrIfLocal(item.assetId) : this.state.fallbackLocalThumbnailGuid : item.isLocal && (t = item.node_id);
         return t && this.props.thumbnails[t] || null;
       };
       this.onError = () => {
@@ -81,7 +81,7 @@ var n;
       if (!t) return !0;
       if (item.type === PW.STATE_GROUP) {
         if (item.version !== t.content_hash) return !0;
-      } else if (item.type === PW.VARIABLE || item.type === PW.VARIABLE_SET || item.type === PW.MANAGED_STRING) return !1;else if (item.type === PW.MODULE) {
+      } else if (item.type === PW.VARIABLE || item.type === PW.VARIABLE_SET || item.type === PW.MANAGED_STRING) return !1; else if (item.type === PW.MODULE) {
         if (item.version !== t.content_hash) return !0;
       } else if (item.type === PW.RESPONSIVE_SET || item.type === PW.CODE_COMPONENT || item.type === PW.CODE_FILE || item.type === PW.CODE_LIBRARY) {
         if (item.version !== t.content_hash) return !0;

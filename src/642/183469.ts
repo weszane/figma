@@ -1,7 +1,7 @@
 import { Wh } from "../figma_app/615482";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useContext, useRef, createRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { getSingleKey, isEmptyObject } from "../figma_app/493477";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -22,7 +22,7 @@ import { getFilteredFeatureFlags } from "../905/717445";
 import { Fo } from "../905/63728";
 import { V as _$$V } from "../905/418494";
 import { BrowserInfo } from "../figma_app/778880";
-import { rf, o6, cZ, aH, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, RecordingPureComponent, handleMouseEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
 import { reportNullOrUndefined } from "../905/11";
 import { bG } from "../905/149328";
 import { Point } from "../905/736624";
@@ -36,11 +36,11 @@ import { m0 } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { E as _$$E } from "../905/95280";
-import { bd, hq, GL, kH, Yu, wr, Uc, sK, yF, sq, tU, pr, tJ, Ir, D$, Dh } from "../figma_app/741237";
+import { updateTemporarilyExpandedInstanceLayers, expandNodeToRoot, selectNodesInRange, duplicateSelection, transferSelection, clearSelection, updateHoveredNode, setNodeExpandedRecursive, setSelectionExpanded, setNodeExpanded, setNodeLocked, setNodeVisible, replaceSelection, setNodeTemporarilyExpanded, removeFromSelection, addToSelection } from "../figma_app/741237";
 import { NF, Ht, no } from "../figma_app/701001";
 import { _Z } from "../figma_app/623300";
 import { S as _$$S } from "../figma_app/106763";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { y0 } from "../figma_app/718307";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { wA as _$$wA, $y, Fk } from "../figma_app/167249";
@@ -326,8 +326,8 @@ function eO(e) {
   let {
     nestedObjectRowHeight
   } = useContext(y0);
-  let c = rf(recordingKey, "click", e => {
-    bd([guid]);
+  let c = useHandleMouseEvent(recordingKey, "click", e => {
+    updateTemporarilyExpandedInstanceLayers([guid]);
   });
   let u = {
     transform: `translate3d(0px, ${top}px, 0)`,
@@ -360,7 +360,7 @@ function eO(e) {
     })]
   });
 }
-class eF extends o6 {
+class eF extends RecordingPureComponent {
   renderPlainIndents(e) {
     let t = [];
     for (let s = 0; s < e + 1; s++) t.push(jsx("span", {
@@ -398,7 +398,7 @@ let eV = new _$$V();
 function eU(e) {
   return "object" === e.rowType ? e.guid : "layer-expansion" === e.rowType ? `expand-${e.containingPrimaryInstanceGUID}` : e.sectionId;
 }
-class ez extends o6 {
+class ez extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.state = {
@@ -472,7 +472,7 @@ class ez extends o6 {
       let n = this.state.rowToScrollToData?.guid === e;
       if (!r || !n) {
         let t = this.getScene().get(e);
-        t && t.parentGuid && hq(t.parentGuid);
+        t && t.parentGuid && expandNodeToRoot(t.parentGuid);
         this.scrollToNodeIdAfterUpdate = e;
         return;
       }
@@ -612,7 +612,7 @@ class ez extends o6 {
         }
       }));
     };
-    this.rowContainerMouseDown = cZ(this, "mousedown", e => {
+    this.rowContainerMouseDown = handleMouseEvent(this, "mousedown", e => {
       let t = this.guidAtMousePosition(e.clientY);
       if (!t || (e.stopPropagation(), document.activeElement && "blur" in document.activeElement && !this.props.renamingGuid && document.activeElement.blur(), this.props.ignoreRightClickForSelection && 2 === e.button)) return;
       if (this.props.onSelectNodesFromLayersPanel?.(), (this.props.allowToggleSelection ?? !0) && Fo(e)) {
@@ -623,7 +623,7 @@ class ez extends o6 {
       let s = getSingleKey(this.props.sceneGraphSelection);
       let r = null;
       if (s ? r = s : this.rangeSelectAnchorNodeId && K3(this.props.sceneGraphSelection, this.rangeSelectAnchorNodeId) && (r = this.rangeSelectAnchorNodeId), (this.props.allowSelectRange ?? !0) && e.shiftKey && r) {
-        GL(r, t);
+        selectNodesInRange(r, t);
         fullscreenValue.commit();
         return;
       }
@@ -675,7 +675,7 @@ class ez extends o6 {
         }));
       }
     };
-    this.onMouseUp = cZ(this, "mouseup", e => {
+    this.onMouseUp = handleMouseEvent(this, "mouseup", e => {
       let t = this.getScene();
       let s = !1;
       if (this.hasCrossedDragThreshold = !1, this.state.mouseDown && !this.props.renamingGuid) {
@@ -696,8 +696,8 @@ class ez extends o6 {
           if (!l || void 0 === index) return;
           let a = e.altKey;
           let o = Lc(l, index);
-          a ? (this.props.onSelectNodesFromLayersPanel?.(), permissionScopeHandler.user("duplicate-selection", () => kH(l.guid, o, section))) : (this.props.onSelectNodesFromLayersPanel?.(), permissionScopeHandler.user("reparent-selection", () => Yu(l.guid, o, section)));
-          hq(l.guid);
+          a ? (this.props.onSelectNodesFromLayersPanel?.(), permissionScopeHandler.user("duplicate-selection", () => duplicateSelection(l.guid, o, section))) : (this.props.onSelectNodesFromLayersPanel?.(), permissionScopeHandler.user("reparent-selection", () => transferSelection(l.guid, o, section)));
+          expandNodeToRoot(l.guid);
           SceneGraphHelpers.clearTemporarilyExpanded();
           fullscreenValue.commit();
         }
@@ -705,7 +705,7 @@ class ez extends o6 {
       if (this.setState({
         mouseDown: null,
         dropTarget: null
-      }), this.isDraggingToToggle && (s = !0, this.isDraggingToToggle = null, fullscreenValue.commit()), !s) return aH;
+      }), this.isDraggingToToggle && (s = !0, this.isDraggingToToggle = null, fullscreenValue.commit()), !s) return SKIP_RECORDING;
     }, {
       recordMetadata: e => {
         let t = this.getScene();
@@ -751,7 +751,7 @@ class ez extends o6 {
       return this.isOutOfViewLeft(e) ? Math.max(0, r) : this.isOutOfViewRight(e) && t ? t - s > (this.props.width ?? 0) ? r : t - (this.props.width ?? 0) : void 0;
     };
     this.onScrollContainerMouseDown = () => {
-      wr();
+      clearSelection();
       fullscreenValue.commit();
     };
     this.scrollContainerRef = e => {
@@ -759,7 +759,7 @@ class ez extends o6 {
       this.scrollContainerEl = e?.getClipContainer();
     };
     this.containerMouseLeave = e => {
-      Uc("");
+      updateHoveredNode("");
       null != this.hoverToExpandGroupTimeout && clearTimeout(this.hoverToExpandGroupTimeout);
     };
     this.expandMouseDown = (e, t) => {
@@ -770,7 +770,7 @@ class ez extends o6 {
         nonInteraction: 0
       });
       let r = !s.isExpanded;
-      t.altKey ? sK(s.guid, r) : Fo(t) && !isEmptyObject(this.props.sceneGraphSelection) ? yF(s.guid, r) : sq(s.guid, r);
+      t.altKey ? setNodeExpandedRecursive(s.guid, r) : Fo(t) && !isEmptyObject(this.props.sceneGraphSelection) ? setSelectionExpanded(s.guid, r) : setNodeExpanded(s.guid, r);
       this.justToggledExpandedGuid = s.guid;
     };
     this.isDraggingToToggle = null;
@@ -783,7 +783,7 @@ class ez extends o6 {
         locked: r
       };
       permissionScopeHandler.user("set-locked", () => {
-        tU(s.guid, r, t.altKey);
+        setNodeLocked(s.guid, r, t.altKey);
       });
     };
     this.visibleMouseDown = (e, t) => {
@@ -795,7 +795,7 @@ class ez extends o6 {
         visible: r
       };
       permissionScopeHandler.user("set-visible", () => {
-        pr(s.guid, r, t.altKey);
+        setNodeVisible(s.guid, r, t.altKey);
       });
     };
     this.hoverToExpandGroupTimeout = null;
@@ -819,7 +819,7 @@ class ez extends o6 {
             });
           }(s, visible, !1));
         }
-        this.state.mouseDown || Uc(s.guid);
+        this.state.mouseDown || updateHoveredNode(s.guid);
       };
       BrowserInfo.firefox && this.isScrolling ? this.handleMouseEnterAfterScroll = r : r();
     };
@@ -875,7 +875,7 @@ class ez extends o6 {
     fullscreenValue.fromFullscreen.removeListener("scrollToNode", this.scrollToNode);
   }
   updateSelection(e) {
-    this.props.onSelectionUpdated ? this.props.onSelectionUpdated(e) : (_$$S("panel"), tJ([e]), fullscreenValue.commit());
+    this.props.onSelectionUpdated ? this.props.onSelectionUpdated(e) : (_$$S("panel"), replaceSelection([e]), fullscreenValue.commit());
   }
   UNSAFE_componentWillUpdate(e) {
     if (e.renamingGuid && e.renamingGuid !== this.props.renamingGuid) this.scrollToNodeIdAfterUpdate = e.renamingGuid;else if (e.currentPage && e.currentPage !== this.props.currentPage) {
@@ -964,11 +964,11 @@ class ez extends o6 {
       r.uiOrderedChildren.length && i && (s = r.guid);
     }
     this.lastExpansionTarget !== s && (this.lastExpansionTarget && null != this.hoverToExpandGroupTimeout && clearTimeout(this.hoverToExpandGroupTimeout), s && (this.hoverToExpandGroupTimeout = setTimeout(() => {
-      this.state.mouseDown && Ir(s, !0);
+      this.state.mouseDown && setNodeTemporarilyExpanded(s, !0);
     }, 1e3)), this.lastExpansionTarget = s);
   }
   toggleSelected(e) {
-    this.props.sceneGraphSelection[e] ? D$([e]) : (Dh([e]), this.rangeSelectAnchorNodeId = e);
+    this.props.sceneGraphSelection[e] ? removeFromSelection([e]) : (addToSelection([e]), this.rangeSelectAnchorNodeId = e);
     fullscreenValue.commit();
   }
   relativeY(e) {
@@ -1156,9 +1156,9 @@ class ez extends o6 {
       width: s,
       guid: e.containingPrimaryInstanceGUID,
       level: e.level,
-      onMouseEnter: () => Uc(""),
+      onMouseEnter: () => updateHoveredNode(""),
       dispatch: this.props.dispatch,
-      recordingKey: Pt(this.props, "layerExpansion", e.containingPrimaryInstanceGUID)
+      recordingKey: generateRecordingKey(this.props, "layerExpansion", e.containingPrimaryInstanceGUID)
     }, t);
   }
   renderSectionHeader(e) {
@@ -1234,7 +1234,7 @@ class ez extends o6 {
         onMouseDown: this.onScrollContainerMouseDown,
         onScroll: this.onScroll,
         onScrollLeftChanged: this.onScrollLeftChanged,
-        recordingKey: Pt(this.props, "scrollContainer"),
+        recordingKey: generateRecordingKey(this.props, "scrollContainer"),
         scrollContainerRef: this.scrollContainerInnerRef,
         width: this.props.width,
         children: [jsx(jq, {
@@ -1263,7 +1263,7 @@ function eW(e) {
   let c = getObservableOrFallback(AppStateTsApi.uiState().hoveredComponentPropDef);
   let u = no();
   let g = getObservableOrFallback(AppStateTsApi.canvasViewState().temporarilyHoveredNodes);
-  let f = TA();
+  let f = getUserId();
   let x = useSelector(e => e.mirror.sceneGraphSelection);
   let y = useSelector(e => e.mirror.objectsPanelRowRebuildCounter);
   let b = useSelector(e => e.mirror.appModel.temporarilyExpandedInstanceLayers);

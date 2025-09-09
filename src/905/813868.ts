@@ -13,7 +13,7 @@ import { showVisualBell, getFullscreenViewEditorType } from "../figma_app/300692
 import { R as _$$R } from "../figma_app/612938";
 import { o8, Fr, r_ } from "../905/622391";
 import { setSyncedValues } from "../905/486749";
-import { Ym } from "../905/571565";
+import { notifyPluginStatus } from "../905/571565";
 import { k as _$$k2 } from "../figma_app/644304";
 import { x as _$$x } from "../905/239551";
 import { z } from "../905/223332";
@@ -56,7 +56,7 @@ export function $$I0({
   "universal-insert" === C && "figma" === getFullscreenViewEditorType() && fullscreenValue.dispatch(_$$b({
     seen_widget_insert_onboarding_modal: !0
   }));
-  "undo_widget_update" !== S && Ym({
+  "undo_widget_update" !== S && notifyPluginStatus({
     name: t,
     isInsert: !0,
     cancelCallback: () => {},

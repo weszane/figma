@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { b } from "../figma_app/517135";
 import { uQ } from "../figma_app/151869";
 import { valueOrFallback, isInvalidValue } from "../905/216495";

@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { n4, uW } from "../905/187165";
 import { C_ } from "../905/345933";
 export function $$o1() {

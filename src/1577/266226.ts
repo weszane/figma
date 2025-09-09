@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -15,8 +15,8 @@ import { Y } from "../905/830372";
 import { showModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { z5 } from "../905/713722";
-import { TA } from "../905/372672";
-import { iP2 } from "../figma_app/43951";
+import { getUserId } from "../905/372672";
+import { ColorPalettesForTeam } from "../figma_app/43951";
 import { cD } from "../figma_app/598018";
 import { fJ } from "../figma_app/616107";
 import { Ib } from "../905/129884";
@@ -187,11 +187,11 @@ export let $$B0 = registerModal(function ({
   theme: i,
   ...c
 }) {
-  let d = TA();
+  let d = getUserId();
   let u = cD();
   let _ = hS(c);
   let h = useDispatch();
-  let [y] = IT(iP2({
+  let [y] = IT(ColorPalettesForTeam({
     teamId: u
   }), {
     enabled: !!u

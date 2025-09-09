@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { l as _$$l } from "../905/716947";
@@ -56,7 +56,7 @@ function q(e, t) {
 let $ = {};
 let Z = e => {
   if (!$[e]) {
-    if (H[e]) $[e] = setupDebounceAtoms("", H[e]);else {
+    if (H[e]) $[e] = setupDebounceAtoms("", H[e]); else {
       let t = atom("");
       $[e] = {
         currentValueAtom: t,
@@ -244,7 +244,7 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
         ...I,
         tier: e(KK(!0)).data?.tier
       };
-      if (g?.type === _$$I.LOCAL) S.localSearchResultCount = i.normalizedSearchResults.length;else {
+      if (g?.type === _$$I.LOCAL) S.localSearchResultCount = i.normalizedSearchResults.length; else {
         let [e, t] = u()(i.normalizedSearchResults, e => e.library_key && e.library_key === r);
         S.localSearchResultCount = e.length;
         S.subscribedSearchResultCount = t.length;

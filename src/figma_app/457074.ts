@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { UserInterfaceElements } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { localStorageRef } from "../905/657224";

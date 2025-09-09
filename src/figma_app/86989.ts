@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { getStorage } from "../905/657224";
 import { trackEventAnalytics } from "../905/449184";
-import { k as _$$k } from "../905/651849";
+import { logger } from "../905/651849";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -26,7 +26,7 @@ import { h as _$$h } from "../905/193918";
 import { P as _$$P, V } from "../905/837980";
 import { I as _$$I2 } from "../905/750915";
 import { n as _$$n } from "../905/347702";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { getPluginVersion, getPluginMetadata } from "../figma_app/300692";
 function P(e, t, r, n) {
   return i => {
@@ -73,12 +73,12 @@ export let $$D12 = _$$n((e, t, r, n, i, s) => {
           }));
           return;
         }
-        m3(r) ? e(P(t, r, () => a(), () => a())) : _$$k.error("Can only initiate checkout for a monetized or local resource.");
+        m3(r) ? e(P(t, r, () => a(), () => a())) : logger.error("Can only initiate checkout for a monetized or local resource.");
       } else {
         e(e => {
           e(Ts({
             origin: "freemium_checkout_modal_in_open_session",
-            redirectUrl: Ay.location.pathname,
+            redirectUrl: customHistory.location.pathname,
             signedUpFromOpenSession: !0
           }));
           e(showModalHandler({
@@ -191,7 +191,7 @@ export function $$G1() {
   return useSelector(e => e.communityPayments);
 }
 export function $$V0(e) {
-  return B(e, $$G1(), iZ() || void 0);
+  return B(e, $$G1(), selectCurrentUser() || void 0);
 }
 export function $$H3(e) {
   let t = $$G1();

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -9,7 +9,7 @@ import { isInvalidValue, isMixedArray, isValidValue, normalizeValue, MIXED_MARKE
 import { lJ } from "../905/275640";
 import { F } from "../905/258517";
 import { TK } from "../905/129660";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { bi } from "../figma_app/836943";
 import { El } from "../905/361629";
 export function $$_4() {
@@ -25,7 +25,7 @@ export function $$_4() {
   }, [i, t, e]);
 }
 export function $$A5(e, t, i) {
-  t !== zk.NO && F.trackFromFullscreen("ee_track_user_action", {
+  t !== yesNoTrackingEnum.NO && F.trackFromFullscreen("ee_track_user_action", {
     category: "TEXT",
     property: e,
     source: i
@@ -102,9 +102,9 @@ export function $$I6(e, t) {
       textCase: e,
       fontVariantCaps: i
     }, {
-      shouldCommit: zk.YES
+      shouldCommit: yesNoTrackingEnum.YES
     });
-    $$A5("TEXT_CASE", zk.YES, t);
+    $$A5("TEXT_CASE", yesNoTrackingEnum.YES, t);
   };
   "SMALL_CAPS" === e ? i("ORIGINAL", "SMALL") : "SMALL_CAPS_FORCED" === e ? i("ORIGINAL", "ALL_SMALL") : i(e, "NORMAL");
 }

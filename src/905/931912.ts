@@ -1,7 +1,7 @@
 import n from "lodash-es/mapValues";
 import a from "../vendor/149674";
 import { trackEventAnalytics, getAnonymousId } from "../905/449184";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { getInitialOptions } from "../figma_app/169182";
 import { normalizeUrl } from "../3973/348894";
 import { G } from "../figma_app/714966";
@@ -115,20 +115,20 @@ let g = {
 let f = class e {
   static sendMessage(t) {
     if (!e.iframe?.contentWindow || !e.iframeUrl) {
-      k.warn("[Sprigma] Skipping sending because sandbox iframe is not ready:", t);
+      logger.warn("[Sprigma] Skipping sending because sandbox iframe is not ready:", t);
       return;
     }
     if (!e.isSDKReady) {
-      k.debug("[Sprigma] Sprig SDK is not yet ready, sending message to queue");
+      logger.debug("[Sprigma] Sprig SDK is not yet ready, sending message to queue");
       e.messageQueue.push(t);
-      k.debug("[Sprigma] Currently queued messages:", [...e.messageQueue]);
+      logger.debug("[Sprigma] Currently queued messages:", [...e.messageQueue]);
       return;
     }
-    k.debug(`[Sprigma] Sending message to sandbox at ${e.iframeUrl}:`, t);
+    logger.debug(`[Sprigma] Sending message to sandbox at ${e.iframeUrl}:`, t);
     e.iframe.contentWindow.postMessage(t, e.iframeUrl);
   }
   static updatePageUrl(t) {
-    t !== e.pageUrl && (k.debug(`[Sprigma] Setting 'pageUrl' to ${t}`), e.pageUrl = t, e.sendMessage({
+    t !== e.pageUrl && (logger.debug(`[Sprigma] Setting 'pageUrl' to ${t}`), e.pageUrl = t, e.sendMessage({
       type: G.Call,
       content: {
         args: ["trackPageView", t]
@@ -138,7 +138,7 @@ let f = class e {
   static setUserData(t, i) {
     let n = t?.id;
     if (!n) return;
-    k.debug(`[Sprigma] Setting user ID to ${n}`);
+    logger.debug(`[Sprigma] Setting user ID to ${n}`);
     e.sendMessage({
       type: G.Call,
       content: {
@@ -149,7 +149,7 @@ let f = class e {
       user: t,
       userAnalyticsData: i
     })), e => void 0 !== e);
-    Object.keys(a).length > 0 && (k.debug("[Sprigma] Syncing the following attributes to Sprig:", Object.keys(a)), e.sendMessage({
+    Object.keys(a).length > 0 && (logger.debug("[Sprigma] Syncing the following attributes to Sprig:", Object.keys(a)), e.sendMessage({
       type: G.Call,
       content: {
         args: ["setAttributes", a]
@@ -158,7 +158,7 @@ let f = class e {
   }
   static processQueuedMessages() {
     let t;
-    if (e.messageQueue.length) for (k.debug("[Sprigma] Processing queued messages:", [...e.messageQueue]); t = e.messageQueue.shift();) e.sendMessage(t);
+    if (e.messageQueue.length) for (logger.debug("[Sprigma] Processing queued messages:", [...e.messageQueue]); t = e.messageQueue.shift();) e.sendMessage(t);
   }
   static listenForMatchingMessage(t, i, n) {
     return new Promise((r, a) => {
@@ -170,16 +170,16 @@ let f = class e {
         if (n.data?.type !== t) return;
         let a = n.data;
         if (n.origin !== e.iframeUrl) {
-          k.warn(`[Sprigma] Ignoring message from unexpected origin ${n.origin}`);
+          logger.warn(`[Sprigma] Ignoring message from unexpected origin ${n.origin}`);
           return;
         }
-        (!i || i(a)) && (k.debug(`[Sprigma] Received matching message from sandbox at ${n.origin}:`, a), window.removeEventListener("message", o), s && clearTimeout(s), r(a));
+        (!i || i(a)) && (logger.debug(`[Sprigma] Received matching message from sandbox at ${n.origin}:`, a), window.removeEventListener("message", o), s && clearTimeout(s), r(a));
       };
       window.addEventListener("message", o);
     });
   }
   static onWindowResize() {
-    k.debug(`[Sprigma] Sending window dimensions to sandbox: height=${window.innerHeight} width=${window.innerWidth}`);
+    logger.debug(`[Sprigma] Sending window dimensions to sandbox: height=${window.innerHeight} width=${window.innerWidth}`);
     e.sendMessage({
       type: G.Call,
       content: {
@@ -194,7 +194,7 @@ let f = class e {
     height: t,
     width: i
   }) {
-    e.iframe && (k.debug(`[Sprigma] Updating sandbox iframe dimensions: height=${t ?? "unchanged"} width=${i ?? "unchanged"}`), void 0 !== t && (e.iframe.height = t.toString()), void 0 !== i && (e.iframe.width = i.toString()), e.updateScreenAreasToAvoid());
+    e.iframe && (logger.debug(`[Sprigma] Updating sandbox iframe dimensions: height=${t ?? "unchanged"} width=${i ?? "unchanged"}`), void 0 !== t && (e.iframe.height = t.toString()), void 0 !== i && (e.iframe.width = i.toString()), e.updateScreenAreasToAvoid());
   }
   static setScreenAreasToAvoid(t) {
     e.screenAreasToAvoid = t;
@@ -248,12 +248,12 @@ let f = class e {
         let t = e.incomingRequestsForPermissionToShowSurvey.shift();
         if (!t) continue;
         let i = e.onAttemptToShowSurveyCallbacks.map(e => e());
-        k.debug(`[Sprigma] Requesting permission to show survey ${t.content.surveyId}, handlers =`, e.onAttemptToShowSurveyCallbacks);
+        logger.debug(`[Sprigma] Requesting permission to show survey ${t.content.surveyId}, handlers =`, e.onAttemptToShowSurveyCallbacks);
         e.sendMessage({
           type: G.GetPermissionToShowSurvey,
           content: {
             surveyId: t?.content.surveyId,
-            canShow: await Promise.all(i).then(e => e.every(e => e)).catch(e => (k.error(`[Sprigma] Failed to get permission to show survey ${t.content.surveyId}, reason =`, e), !1))
+            canShow: await Promise.all(i).then(e => e.every(e => e)).catch(e => (logger.error(`[Sprigma] Failed to get permission to show survey ${t.content.surveyId}, reason =`, e), !1))
           }
         });
       }
@@ -287,7 +287,7 @@ let f = class e {
     async function a() {
       let a;
       if (!e.iframeUrl) {
-        k.warn("[Sprigma] Skipping loading Sprig SDK because `sprig_iframe_url` is not set");
+        logger.warn("[Sprigma] Skipping loading Sprig SDK because `sprig_iframe_url` is not set");
         e.iframe = null;
         return;
       }
@@ -305,12 +305,12 @@ let f = class e {
       s.style.transition = "right 0.3s, bottom 0.3s";
       document.body.appendChild(s);
       e.iframe = s;
-      k.debug("[Sprigma] Sandbox iframe injected into DOM");
+      logger.debug("[Sprigma] Sandbox iframe injected into DOM");
       let m = setInterval(() => {
         e.updatePageUrl(normalizeUrl(location.href));
       }, 100);
       e.tearDownIframeCallback = () => {
-        k.debug("[Sprigma] Sandbox iframe is tearing down as there are no users left");
+        logger.debug("[Sprigma] Sandbox iframe is tearing down as there are no users left");
         window.removeEventListener("resize", e.onWindowResize);
         e.isSDKReady = !1;
         clearInterval(m);
@@ -329,9 +329,9 @@ let f = class e {
       trackEventAnalytics("sprig_sdk_ready", {
         time_to_readiness: a.content.timeToReadinessInMs
       });
-      k.info("[Sprigma] Sprig SDK is ready");
+      logger.info("[Sprigma] Sprig SDK is ready");
       let h = getAnonymousId();
-      h && (k.debug(`[Sprigma] Setting anonymous ID to ${h}`), e.sendMessage({
+      h && (logger.debug(`[Sprigma] Setting anonymous ID to ${h}`), e.sendMessage({
         type: G.Call,
         content: {
           args: ["setPartnerAnonymousId", h]
@@ -346,7 +346,7 @@ let f = class e {
       r();
       e.processQueuedMessages();
     }
-    void 0 === e.iframe ? a() : k.debug("[Sprigma] Sandbox iframe has already been initialized");
+    void 0 === e.iframe ? a() : logger.debug("[Sprigma] Sandbox iframe has already been initialized");
     e.instanceCount++;
   }
   sendMessage(...t) {

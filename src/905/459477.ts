@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { Mz } from "../vendor/925040";
 import { analyticsEventManager } from "../905/449184";

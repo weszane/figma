@@ -2,11 +2,11 @@ import { createOptimistCommitAction, createOptimistRevertAction } from "../905/6
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { b6, Qi } from "../figma_app/559491";
 import { M5, ZO } from "../figma_app/350203";
@@ -53,7 +53,7 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
   let x = `/api/${_$$n(r)}/${t}/install`;
   let N = XHR.post(x, A);
   if (v.user && I?.resource) {
-    let e = `optimistic-plugin-install-${_$$g()}`;
+    let e = `optimistic-plugin-install-${generateUUIDv4()}`;
     let t = N3(I.resource, {
       userId: p ? null : v.user.id,
       orgId: p ?? null
@@ -91,7 +91,7 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
         }
         return e.getState().user?.community_profile_id ? getI18nString(r === vt.PLUGIN ? "community.saves.plugin_saved_for_your_account_and_profile" : "community.saves.widget_saved_for_your_account_and_profile") : r === vt.PLUGIN ? getI18nString("community.saves.plugin_saved_for_your_account") : getI18nString("community.saves.widget_saved_for_your_account");
       })();
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: t,
         type: "plugin-installed"
       }));
@@ -104,7 +104,7 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
   }).catch(t => {
     b?.();
     e.dispatch(createOptimistRevertAction(S));
-    403 === t.data.status ? e.dispatch(F.enqueue({
+    403 === t.data.status ? e.dispatch(VisualBellActions.enqueue({
       message: r === vt.PLUGIN ? getI18nString("community.actions.unable_to_save_plugin_error", {
         error: J(t, t.data?.message)
       }) : getI18nString("community.actions.unable_to_save_widget_error", {
@@ -112,7 +112,7 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
       }),
       type: "PLUGIN_INSTALL_FAILED",
       error: !0
-    })) : e.dispatch(F.enqueue({
+    })) : e.dispatch(VisualBellActions.enqueue({
       message: r === vt.PLUGIN ? getI18nString("community.actions.unable_to_save_plugin_please_try_again") : getI18nString("community.actions.unable_to_save_widget_please_try_again"),
       type: "PLUGIN_INSTALL_FAILED",
       error: !0
@@ -174,7 +174,7 @@ let $$A3 = createOptimistAction("UNSAVE_EXTENSION", (e, {
         button: {
           text: getI18nString("community.undo"),
           action: () => {
-            e.dispatch(F.dequeue({
+            e.dispatch(VisualBellActions.dequeue({
               matchType: "PLUGIN_UNINSTALL_SUCCESS"
             }));
             e.dispatch($$v0({
@@ -187,7 +187,7 @@ let $$A3 = createOptimistAction("UNSAVE_EXTENSION", (e, {
           }
         }
       };
-      e.dispatch(F.enqueue(n));
+      e.dispatch(VisualBellActions.enqueue(n));
     }
     trackEventAnalytics(xQ(l) ? M5.WIDGET_UNINSTALLED : M5.PLUGIN_UNINSTALLED, {
       communityHubEntity: xQ(l) ? ZO.WIDGETS : ZO.PLUGINS,
@@ -222,7 +222,7 @@ let N = createOptimistThunk((e, t) => {
   }) => {
     t.callback(!e.meta.previously_installed_plugin);
   }).catch(r => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "plugin-save-error",
       message: t.resourceType === vt.PLUGIN ? getI18nString("community.actions.unable_to_save_plugin_error", {
         error: J(r, r.data.message || "unknown error")

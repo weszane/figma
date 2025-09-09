@@ -3,11 +3,11 @@ import { useRef, useCallback, useEffect } from "react";
 import { a as _$$a } from "../905/339331";
 import { r as _$$r } from "../905/571562";
 import o from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { GG } from "../905/511649";
 import { isInvalidValue, normalizeValue } from "../905/216495";
 import { Uq } from "../905/633462";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 var l = o;
 var h = (e => (e[e.SPACEBAR = 0] = "SPACEBAR", e[e.ENTER = 1] = "ENTER", e[e.MOUSE = 2] = "MOUSE", e[e.NONE = 3] = "NONE", e[e.DOWN_ARROW = 4] = "DOWN_ARROW", e[e.UP_ARROW = 5] = "UP_ARROW", e))(h || {});
 var g = (e => (e[e.UP = 0] = "UP", e[e.DOWN = 1] = "DOWN", e))(g || {});
@@ -39,7 +39,7 @@ class A {
     let t = this.isBigStep ? this.bigStep : this.step;
     let i = (Math.round((isInvalidValue(this.value) || null == this.value ? 0 : this.value) / t) + (0 === e ? 1 : -1)) * t;
     i = Math.max(i = Math.min(i, this.max), this.min);
-    this.onValueChange(i, zk.NO);
+    this.onValueChange(i, yesNoTrackingEnum.NO);
   }
   consumeProps(e) {
     let {
@@ -179,7 +179,7 @@ function v(e) {
       endNode: jsx("div", {
         className: "stepper_input--endNode--Dqnj5"
       }),
-      recordingKey: Pt(recordingKey, "input"),
+      recordingKey: generateRecordingKey(recordingKey, "input"),
       children: icon
     }), !disabled && jsxs("div", {
       className: "stepper_input--endNodeOverlay---iG4y",

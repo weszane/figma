@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { dR } from "../905/508367";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { ks, vd, Us } from "../figma_app/637027";
@@ -87,7 +87,7 @@ function I({
             s(Ts({
               origin: "figjam_try_share_modal",
               formState: qB.SIGN_UP,
-              redirectUrl: dR(Ay.location.pathname, {
+              redirectUrl: dR(customHistory.location.pathname, {
                 [ao.key]: ao.value
               }),
               signedUpFromOpenSession: !0

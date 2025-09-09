@@ -1,13 +1,13 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { Q } from "../905/730680";
 import { J } from "../905/525097";
 import { E } from "../905/267344";
 import { DrawingElementType } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
@@ -50,7 +50,7 @@ export function $$$$x1(e) {
   let l = useId();
   let d = t => jsx(NC, {
     value: t,
-    recordingKey: Pt(e, t),
+    recordingKey: generateRecordingKey(e, t),
     children: jsxs("span", {
       className: Z6,
       children: [Sp(t), jsx(_$$o, {

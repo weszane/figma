@@ -15,7 +15,7 @@ import { Dj } from "../figma_app/297957";
 import { fu } from "../figma_app/831799";
 import { Ju } from "../905/712921";
 import { e0 } from "../905/696396";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -33,7 +33,7 @@ import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { k as _$$k } from "../905/44647";
 import { B as _$$B } from "../905/261906";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { az as _$$az } from "../figma_app/805373";
 import { m as _$$m } from "../905/602189";
 import { j as _$$j } from "../905/584270";
@@ -235,7 +235,7 @@ function Z({
   teamId: l
 }) {
   let n = useDispatch();
-  let d = TA();
+  let d = getUserId();
   let o = e.id === d;
   let c = Dj();
   let u = i === Ju.PRO && c();

@@ -1,30 +1,29 @@
-import { LinterCppBindings, SceneIdentifier, VariableResolvedDataType, SceneGraphHelpers, VariableDataType } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { atomStoreManager } from "../figma_app/27355";
-import { g as _$$g } from "../905/871474";
-import { jq } from "../figma_app/761118";
-import { C as _$$C } from "../905/887158";
-import { n3 } from "../905/859698";
-import { debugState } from "../905/407919";
-import { AV, Oe } from "../figma_app/933328";
-import { W9, gU, Hf, ne } from "../figma_app/407414";
-import { Bw, pg, kl, xR, jd, Hu } from "../figma_app/327683";
-import { Nd } from "../figma_app/512532";
-import { sD } from "../figma_app/243058";
-import { TW, sB, d$ } from "../905/958097";
-import { g as _$$g2 } from "../905/880308";
-import { nw } from "../figma_app/194671";
-import { permissionScopeHandler } from "../905/189185";
-import { rO } from "../figma_app/409807";
-import { getSingletonSceneGraph } from "../905/700578";
-import { c_ } from "../905/695660";
-import { qN } from "../figma_app/273493";
-import { xv, f3 } from "../905/936278";
-import { J3, JJ, Zf, Ef } from "../905/107436";
-import { L$ } from "../905/989106";
+import { Ef, J3, JJ, Zf } from '../905/107436';
+import { permissionScopeHandler } from '../905/189185';
+import { debugState } from '../905/407919';
+import { getFeatureFlags } from '../905/601108';
+import { c_ } from '../905/695660';
+import { getSingletonSceneGraph } from '../905/700578';
+import { n3 } from '../905/859698';
+import { generateUUIDv4 } from '../905/871474';
+import { C as _$$C } from '../905/887158';
+import { f3, xv } from '../905/936278';
+import { d$, sB, TW } from '../905/958097';
+import { L$ } from '../905/989106';
+import { atomStoreManager } from '../figma_app/27355';
+import { nw } from '../figma_app/194671';
+import { VariableIdHandler } from '../figma_app/243058';
+import { qN } from '../figma_app/273493';
+import { Bw, Hu, jd, kl, pg, xR } from '../figma_app/327683';
+import { gU, Hf, ne, W9 } from '../figma_app/407414';
+import { rO } from '../figma_app/409807';
+import { Nd } from '../figma_app/512532';
+import { jq } from '../figma_app/761118';
+import { LinterCppBindings, SceneGraphHelpers, SceneIdentifier, VariableDataType, VariableResolvedDataType } from '../figma_app/763686';
+import { AV, Oe } from '../figma_app/933328';
 function m(e) {
   let t;
-  if ("mixed" !== e.fontNameOrMixed) return e.fontNameOrMixed.family;
+  if (e.fontNameOrMixed !== 'mixed') return e.fontNameOrMixed.family;
   if (!e.textData) return;
   let {
     characters
@@ -33,7 +32,7 @@ function m(e) {
   let n = {};
   for (let t = 0; t < characters.length; t++) {
     let i = e.getRangeFontName(t, t + 1);
-    if ("mixed" === i) continue;
+    if (i === 'mixed') continue;
     let r = i.family;
     n[r] = (n[r] ?? 0) + 1;
   }
@@ -44,7 +43,7 @@ function m(e) {
 function h(e, t) {
   let i = [];
   for (let n of t) {
-    let t = "TEXT" === n.style_type && n.meta?.style_thumbnail ? n.meta.style_thumbnail : null;
+    let t = n.style_type === 'TEXT' && n.meta?.style_thumbnail ? n.meta.style_thumbnail : null;
     if (!t) continue;
     let {
       fontSize,
@@ -67,7 +66,7 @@ function $$g({
     if (t.isLocal) {
       let e = LinterCppBindings?.copyLocalStyleToLinterScene(t.node_id);
       if (!e) {
-        r(Error("Failed to copy local style to linter scene"));
+        r(new Error('Failed to copy local style to linter scene'));
         return;
       }
       t = {
@@ -78,13 +77,13 @@ function $$g({
     o(AV({
       targetGuids: [e],
       style: t,
-      inheritStyleKeyField: "inheritTextStyleKey",
+      inheritStyleKeyField: 'inheritTextStyleKey',
       fromSearch: !1,
       onSuccess: () => {
         i(!0);
       },
       onError: () => {
-        r(Error("Failed to apply style for preview"));
+        r(new Error('Failed to apply style for preview'));
       },
       targetUpsertScene: SceneIdentifier.LINTER_SCENE,
       omitFullscreenCommit: !0
@@ -93,22 +92,22 @@ function $$g({
     o(AV({
       targetGuids: [e],
       style: t,
-      inheritStyleKeyField: "inheritTextStyleKey",
+      inheritStyleKeyField: 'inheritTextStyleKey',
       fromSearch: !1,
       onSuccess: () => {
         s && W9(r, t.key.toString(), i);
         n(!0);
       },
       onError: () => {
-        a(Error("Failed to apply style"));
+        a(new Error('Failed to apply style'));
       },
       omitFullscreenCommit: !0
     }));
   });
 }
 function v(e, t, i, r) {
-  var a;
-  var s;
+  let a;
+  let s;
   let o = function ({
     localVariables: e,
     libraryVariableSetIdToSet: t,
@@ -137,48 +136,50 @@ function v(e, t, i, r) {
     libraryVariableSetIdToSet: i.libraryVariableSetIdToSet
   });
   let l = [...Object.values(o.localVariables), ...Object.values(o.libraryVariables)];
-  if (0 === l.length) return null;
+  if (l.length === 0) return null;
   a = l.filter(e => void 0 !== e.resolvedValue && e.variable.resolvedType === VariableResolvedDataType.FLOAT);
   s = t.numericValue;
-  let d = [...a.filter(e => e?.resolvedValue !== "MIXED" && "number" == typeof e?.resolvedValue?.value && e?.resolvedValue?.value > 0)].sort((e, t) => Math.abs(Number(e.resolvedValue.value) - s) - Math.abs(Number(t.resolvedValue.value) - s)).slice(0, 1);
-  if (0 === d.length) return null;
+  let d = [...a.filter(e => e?.resolvedValue !== 'MIXED' && typeof e?.resolvedValue?.value == 'number' && e?.resolvedValue?.value > 0)].sort((e, t) => Math.abs(Number(e.resolvedValue.value) - s) - Math.abs(Number(t.resolvedValue.value) - s)).slice(0, 1);
+  if (d.length === 0) return null;
   let c = [];
-  for (let e of d) c.push({
-    variableId: e.variable.node_id,
-    resolvedValue: e.resolvedValue
-  });
+  for (let e of d) {
+    c.push({
+      variableId: e.variable.node_id,
+      resolvedValue: e.resolvedValue
+    });
+  }
   let u = {
     fixes: c,
-    suggestionId: _$$g2()
+    suggestionId: generateUUIDv4()
   };
   let m = c.map(e => {
     let t = i.availableVariables[e.variableId];
-    return t ? "LIBRARY" === t.subscriptionStatus ? t.key.toString() : t.keyForPublish.toString() : null;
-  }).filter(e => null !== e);
-  gU(u.suggestionId, void 0, m, "HEURISTIC", r);
+    return t ? t.subscriptionStatus === 'LIBRARY' ? t.key.toString() : t.keyForPublish.toString() : null;
+  }).filter(e => e !== null);
+  gU(u.suggestionId, void 0, m, 'HEURISTIC', r);
   return u;
 }
 function I(e) {
   switch (e) {
-    case "RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS":
+    case 'RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS':
       return _$$C.REQUIRE_BOTTOM_LEFT_CORNER_RADIUS_VARIABLES;
-    case "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS":
+    case 'RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS':
       return _$$C.REQUIRE_BOTTOM_RIGHT_CORNER_RADIUS_VARIABLES;
-    case "RECTANGLE_TOP_LEFT_CORNER_RADIUS":
+    case 'RECTANGLE_TOP_LEFT_CORNER_RADIUS':
       return _$$C.REQUIRE_TOP_LEFT_CORNER_RADIUS_VARIABLES;
-    case "RECTANGLE_TOP_RIGHT_CORNER_RADIUS":
+    case 'RECTANGLE_TOP_RIGHT_CORNER_RADIUS':
       return _$$C.REQUIRE_TOP_RIGHT_CORNER_RADIUS_VARIABLES;
-    case "STACK_SPACING_HORIZONTAL":
+    case 'STACK_SPACING_HORIZONTAL':
       return _$$C.REQUIRE_HORIZONTAL_SPACING_VARIABLES;
-    case "STACK_SPACING_VERTICAL":
+    case 'STACK_SPACING_VERTICAL':
       return _$$C.REQUIRE_VERTICAL_SPACING_VARIABLES;
-    case "STACK_PADDING_TOP":
+    case 'STACK_PADDING_TOP':
       return _$$C.REQUIRE_TOP_PADDING_VARIABLES;
-    case "STACK_PADDING_BOTTOM":
+    case 'STACK_PADDING_BOTTOM':
       return _$$C.REQUIRE_BOTTOM_PADDING_VARIABLES;
-    case "STACK_PADDING_LEFT":
+    case 'STACK_PADDING_LEFT':
       return _$$C.REQUIRE_LEFT_PADDING_VARIABLES;
-    case "STACK_PADDING_RIGHT":
+    case 'STACK_PADDING_RIGHT':
       return _$$C.REQUIRE_RIGHT_PADDING_VARIABLES;
     default:
       return null;
@@ -193,10 +194,10 @@ function w(e, t) {
   return n > 0 && r && s >= 2 && !a && !i ? n : null;
 }
 function C(e, t) {
-  if ("GRID" !== e.stackMode) return null;
+  if (e.stackMode !== 'GRID') return null;
   let i = e.getVariableConsumptionMap();
-  let n = "ROW" === t ? i.GRID_ROW_GAP : i.GRID_COLUMN_GAP;
-  let r = "ROW" === t ? e.gridRowGap : e.gridColumnGap;
+  let n = t === 'ROW' ? i.GRID_ROW_GAP : i.GRID_COLUMN_GAP;
+  let r = t === 'ROW' ? e.gridRowGap : e.gridColumnGap;
   return r > 0 && !n ? r : null;
 }
 async function T(e, t, i, n, r, a) {
@@ -204,7 +205,7 @@ async function T(e, t, i, n, r, a) {
     fixes,
     suggestionId
   } = t;
-  if (!fixes || 0 === fixes.length) return !1;
+  if (!fixes || fixes.length === 0) return !1;
   let l = fixes[0];
   if (!l) return !1;
   let {
@@ -222,11 +223,11 @@ async function T(e, t, i, n, r, a) {
     return !0;
   }
   try {
-    if (permissionScopeHandler.user("design-linter-apply-spacing-variable", () => {
-      e.setBoundVariable("itemSpacing", f);
+    if (permissionScopeHandler.user('design-linter-apply-spacing-variable', () => {
+      e.setBoundVariable('itemSpacing', f);
     }), a) {
       let e = h.variableSetId;
-      let t = "LIBRARY" === h.subscriptionStatus ? h.key.toString() : h.keyForPublish.toString();
+      let t = h.subscriptionStatus === 'LIBRARY' ? h.key.toString() : h.keyForPublish.toString();
       Hf({
         suggestionId,
         variableKey: t,
@@ -237,7 +238,7 @@ async function T(e, t, i, n, r, a) {
     }
     return !0;
   } catch (e) {
-    console.error("Design linting error setting bound variable: ", e);
+    console.error('Design linting error setting bound variable: ', e);
     return !1;
   }
 }
@@ -254,7 +255,7 @@ async function k({
     fixes,
     suggestionId
   } = i;
-  if (!fixes || 0 === fixes.length) return !1;
+  if (!fixes || fixes.length === 0) return !1;
   let d = fixes[0];
   if (!d) return !1;
   let {
@@ -268,15 +269,15 @@ async function k({
   let _ = await f(Oe(g));
   if (!_) return Promise.resolve(!1);
   if (a) {
-    "ROW" === t ? e.gridRowGap = resolvedValue.value : e.gridColumnGap = resolvedValue.value;
+    t === 'ROW' ? e.gridRowGap = resolvedValue.value : e.gridColumnGap = resolvedValue.value;
     return !0;
   }
   try {
-    if (permissionScopeHandler.user("design-linter-apply-spacing-variable", () => {
-      "ROW" === t ? e.setBoundVariable("gridRowGap", _) : e.setBoundVariable("gridColumnGap", _);
+    if (permissionScopeHandler.user('design-linter-apply-spacing-variable', () => {
+      t === 'ROW' ? e.setBoundVariable('gridRowGap', _) : e.setBoundVariable('gridColumnGap', _);
     }), s) {
       let e = g.variableSetId;
-      let t = "LIBRARY" === g.subscriptionStatus ? g.key.toString() : g.keyForPublish.toString();
+      let t = g.subscriptionStatus === 'LIBRARY' ? g.key.toString() : g.keyForPublish.toString();
       Hf({
         suggestionId,
         variableKey: t,
@@ -287,7 +288,7 @@ async function k({
     }
     return !0;
   } catch (e) {
-    console.error("Design linting error setting bound variable: ", e);
+    console.error('Design linting error setting bound variable: ', e);
     return !1;
   }
 }
@@ -299,10 +300,10 @@ async function N(e, t, i) {
   };
   try {
     let u = t.assetType;
-    if ("COMPONENT" === u) return Promise.resolve(r);
+    if (u === 'COMPONENT') return Promise.resolve(r);
     let p = t.assetId;
     let g = i.availableVariables[p];
-    if ("FILL" === u || "STROKE" === u) {
+    if (u === 'FILL' || u === 'STROKE') {
       if (g?.resolvedType !== VariableResolvedDataType.COLOR) return Promise.resolve(r);
       let t = e.resolveVariable(p);
       let a = await Bw({
@@ -321,7 +322,7 @@ async function N(e, t, i) {
         r.valid = !0;
         r.fixContext = e;
       }
-    } else if ("TEXT_STYLE" === u) {
+    } else if (u === 'TEXT_STYLE') {
       let i = atomStoreManager.get(jq);
       let n = function (e, t) {
         let i = debugState.getState().library.used__LIVEGRAPH.styles[n3(t)];
@@ -331,14 +332,14 @@ async function N(e, t, i) {
         } = i;
         let r = data.meta?.style_thumbnail ? data.meta.style_thumbnail : null;
         return r ? {
-          fontFamily: m(e) ?? "",
+          fontFamily: m(e) ?? '',
           fontSize: r.metrics.fontSize ?? 0,
           lineHeight: r.metrics.lineHeight?.value ?? 0
         } : null;
       }(e, t.assetId);
       if (!n) return Promise.resolve(r);
       let l = h(n, i.allStyles);
-      let u = l.map(e => e.key.toString()).length > 0 ? _$$g() : "";
+      let u = l.map(e => e.key.toString()).length > 0 ? generateUUIDv4() : '';
       l.length > 0 && (r.valid = !0, r.fixContext = {
         suggestionId: u,
         fixes: {
@@ -364,7 +365,7 @@ async function N(e, t, i) {
     }
     return Promise.resolve(r);
   } catch (e) {
-    console.error("Design linting error getting library mismatch fix: ", e);
+    console.error('Design linting error getting library mismatch fix: ', e);
     return Promise.resolve(r);
   }
 }
@@ -380,8 +381,8 @@ async function P({
     let {
       assetType
     } = t;
-    if ("COMPONENT" === assetType) return !1;
-    if ("TEXT_STYLE" === assetType) {
+    if (assetType === 'COMPONENT') return !1;
+    if (assetType === 'TEXT_STYLE') {
       let t = i.fixes.fixes[0];
       if (!t) return !1;
       let n = e.guid;
@@ -394,22 +395,22 @@ async function P({
         shouldLogFix: a
       });
     }
-    if ("FILL" !== assetType && "STROKE" !== assetType) {
+    if (assetType !== 'FILL' && assetType !== 'STROKE') {
       let t = I(assetType);
       if (!t) return !1;
       switch (assetType) {
-        case "RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS":
-        case "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS":
-        case "RECTANGLE_TOP_LEFT_CORNER_RADIUS":
-        case "RECTANGLE_TOP_RIGHT_CORNER_RADIUS":
+        case 'RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS':
+        case 'RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS':
+        case 'RECTANGLE_TOP_LEFT_CORNER_RADIUS':
+        case 'RECTANGLE_TOP_RIGHT_CORNER_RADIUS':
           return await Nd(e, i.fixes, n, t, r, a);
-        case "STACK_SPACING_HORIZONTAL":
-        case "STACK_SPACING_VERTICAL":
+        case 'STACK_SPACING_HORIZONTAL':
+        case 'STACK_SPACING_VERTICAL':
           return await T(e, i.fixes, n, t, r, a);
-        case "STACK_PADDING_TOP":
-        case "STACK_PADDING_BOTTOM":
-        case "STACK_PADDING_LEFT":
-        case "STACK_PADDING_RIGHT":
+        case 'STACK_PADDING_TOP':
+        case 'STACK_PADDING_BOTTOM':
+        case 'STACK_PADDING_LEFT':
+        case 'STACK_PADDING_RIGHT':
           return await nw(e, i.fixes, n, t, r, a);
         default:
           return !1;
@@ -417,15 +418,15 @@ async function P({
     }
     return await pg(e, i.fixes, n, _$$C.REQUIRE_ASSETS_FROM_SELECTED_LIBRARIES, r, a, assetType);
   } catch (e) {
-    console.error("Design linting error swapping variables: ", e);
+    console.error('Design linting error swapping variables: ', e);
     return e;
   }
 }
 let O = {
   id: _$$C.REQUIRE_ASSETS_FROM_SELECTED_LIBRARIES,
-  description: "Detects assets that are not from the selected libraries.",
+  description: 'Detects assets that are not from the selected libraries.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_library_match,
-  detect: function ({
+  detect({
     node: e,
     detectionMetadata: t
   }) {
@@ -442,13 +443,13 @@ let O = {
       i.didSkipNode = !0;
       return Promise.resolve(i);
     }
-    if ("SYMBOL" === e.type || "INSTANCE" === e.type || e.isStateGroup) {
+    if (e.type === 'SYMBOL' || e.type === 'INSTANCE' || e.isStateGroup) {
       let t = function (e, t, i) {
         let r = e.symbolId;
-        let a = getSingletonSceneGraph().get(r ?? "");
-        let s = a?.sourceLibraryKey ?? "";
-        a?.type === "SYMBOL" && a?.parentNode?.isStateGroup && (r = a.parentNode.guid, s = a.parentNode.sourceLibraryKey ?? "");
-        let o = SceneGraphHelpers?.getAssetKey(r ?? "");
+        let a = getSingletonSceneGraph().get(r ?? '');
+        let s = a?.sourceLibraryKey ?? '';
+        a?.type === 'SYMBOL' && a?.parentNode?.isStateGroup && (r = a.parentNode.guid, s = a.parentNode.sourceLibraryKey ?? '');
+        let o = SceneGraphHelpers?.getAssetKey(r ?? '');
         return o && s && t.has(s) && !i.has(s) ? {
           assetId: o.toString(),
           libraryKey: s
@@ -462,7 +463,7 @@ let O = {
         r.push({
           assetId,
           libraryKey,
-          assetType: "COMPONENT"
+          assetType: 'COMPONENT'
         });
       }
     }
@@ -476,10 +477,10 @@ let O = {
         libraryKey
       } = d;
       let i = availableVariables[variableId];
-      i && "library_key" in i && r.push({
+      i && 'library_key' in i && r.push({
         assetId: variableId,
         libraryKey,
-        assetType: "FILL"
+        assetType: 'FILL'
       });
     }
     let {
@@ -492,10 +493,10 @@ let O = {
         libraryKey
       } = p;
       let i = availableVariables[variableId];
-      i && "library_key" in i && r.push({
+      i && 'library_key' in i && r.push({
         assetId: variableId,
         libraryKey,
-        assetType: "STROKE"
+        assetType: 'STROKE'
       });
     }
     let m = function ({
@@ -504,13 +505,13 @@ let O = {
       selectedLibraryKeys: i
     }) {
       let r = [];
-      let a = ["RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS", "RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS", "RECTANGLE_TOP_LEFT_CORNER_RADIUS", "RECTANGLE_TOP_RIGHT_CORNER_RADIUS", "STACK_SPACING", "STACK_PADDING_TOP", "STACK_PADDING_BOTTOM", "STACK_PADDING_LEFT", "STACK_PADDING_RIGHT"];
+      let a = ['RECTANGLE_BOTTOM_LEFT_CORNER_RADIUS', 'RECTANGLE_BOTTOM_RIGHT_CORNER_RADIUS', 'RECTANGLE_TOP_LEFT_CORNER_RADIUS', 'RECTANGLE_TOP_RIGHT_CORNER_RADIUS', 'STACK_SPACING', 'STACK_PADDING_TOP', 'STACK_PADDING_BOTTOM', 'STACK_PADDING_LEFT', 'STACK_PADDING_RIGHT'];
       for (let [s, o] of Object.entries(e.getVariableConsumptionMap())) {
-        if (!a.includes(s) || !o || !("type" in o) || o.type !== VariableDataType.ALIAS) continue;
-        let l = sD.fromString(o.value) ?? "";
+        if (!a.includes(s) || !o || !('type' in o) || o.type !== VariableDataType.ALIAS) continue;
+        let l = VariableIdHandler.fromString(o.value) ?? '';
         let d = t[l];
-        if (!(!d || !("library_key" in d) || i.has(d.library_key))) {
-          if ("STACK_SPACING" === s) {
+        if (!(!d || !('library_key' in d) || i.has(d.library_key))) {
+          if (s === 'STACK_SPACING') {
             let t = e.stackMode;
             r.push({
               variableId: l,
@@ -546,7 +547,7 @@ let O = {
       availableLibraryKeys: t,
       selectedLibraryKeys: i
     }) {
-      if ("TEXT" !== e.type || null === e.inheritedTextStyle) return null;
+      if (e.type !== 'TEXT' || e.inheritedTextStyle === null) return null;
       let n = e.inheritedTextStyle;
       let r = debugState.getState().library.used__LIVEGRAPH.styles[n.key];
       if (!r || r?.data === null) return null;
@@ -556,7 +557,7 @@ let O = {
       return library_key && t.has(library_key) && !i.has(library_key) ? {
         variableId: n.key,
         libraryKey: library_key,
-        assetType: "TEXT_STYLE"
+        assetType: 'TEXT_STYLE'
       } : null;
     }({
       node: e,
@@ -571,7 +572,7 @@ let O = {
       r.push({
         assetId: variableId,
         libraryKey,
-        assetType: "TEXT_STYLE"
+        assetType: 'TEXT_STYLE'
       });
     }
     r.length > 0 && (i.failedGuidToContext[e.guid] = r);
@@ -582,24 +583,24 @@ let O = {
 };
 let D = {
   id: _$$C.EXTENSIBILITY_RULE,
-  description: "This is a temporary extensibility rule for testing and future implementation. Based on the explorations, we can iterate on UI and grouping, such as creating clusters of issues based on a new enum returned by the plugin code.",
+  description: 'This is a temporary extensibility rule for testing and future implementation. Based on the explorations, we can iterate on UI and grouping, such as creating clusters of issues based on a new enum returned by the plugin code.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_ext_rule,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
       failedGuidToContext: {}
     };
-    "FRAME" === e.type ? t.failedGuidToContext[e.guid] = [{
-      explanation: "Temporary extensibility rule detection: This is a frame node",
-      subtype: "No Frames Allowed"
-    }] : "TEXT" === e.type && (t.failedGuidToContext[e.guid] = [{
-      explanation: "Temporary extensibility rule detection: This is a text node",
-      subtype: "Text node alert \u{1F6A8}"
+    e.type === 'FRAME' ? t.failedGuidToContext[e.guid] = [{
+      explanation: 'Temporary extensibility rule detection: This is a frame node',
+      subtype: 'No Frames Allowed'
+    }] : e.type === 'TEXT' && (t.failedGuidToContext[e.guid] = [{
+      explanation: 'Temporary extensibility rule detection: This is a text node',
+      subtype: 'Text node alert \u{1F6A8}'
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     return Promise.resolve({
       ruleId: _$$C.EXTENSIBILITY_RULE,
       guid: e.guid,
@@ -607,19 +608,19 @@ let D = {
       fixContext: {}
     });
   },
-  fix: function ({
+  fix({
     node: e,
     fixContext: t,
     forFixPreview: i
   }) {
-    return i ? Promise.resolve(!1) : (console.warn("ExtensibilityRule: Applying fix for node:", e.guid, "with context:", t), Promise.resolve(!0));
+    return i ? Promise.resolve(!1) : (console.warn('ExtensibilityRule: Applying fix for node:', e.guid, 'with context:', t), Promise.resolve(!0));
   }
 };
 let F = {
   id: _$$C.REQUIRE_TEXT_STYLES,
-  description: "Detects missing text styles for text nodes.",
+  description: 'Detects missing text styles for text nodes.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_ts,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -630,11 +631,11 @@ let F = {
       t.didSkipNode = !0;
       return Promise.resolve(t);
     }
-    if (c_(e) || "TEXT" !== e.type || null !== e.inheritedTextStyle) return Promise.resolve(t);
+    if (c_(e) || e.type !== 'TEXT' || e.inheritedTextStyle !== null) return Promise.resolve(t);
     t.didSkipNode = !1;
     let i = m(e);
     let n = function (e) {
-      if ("mixed" !== e.fontSizeOrMixed || !e.textData) return e.fontSize;
+      if (e.fontSizeOrMixed !== 'mixed' || !e.textData) return e.fontSize;
       let {
         characters,
         characterStyleIDs,
@@ -645,7 +646,7 @@ let F = {
         [e.fontSize]: characters.length
       };
       for (let t of characterStyleIDs) {
-        if (0 === t) continue;
+        if (t === 0) continue;
         let i = styleOverrideTable.find(e => e.styleID === t);
         i && i.fontSize && (r[e.fontSize] = (r[e.fontSize] ?? 0) - 1, r[i.fontSize] = (r[i.fontSize] ?? 0) + 1);
       }
@@ -655,7 +656,7 @@ let F = {
       return a;
     }(e);
     let r = function (e) {
-      if ("mixed" !== e.lineHeightOrMixed) return e.lineHeightOrMixed.value;
+      if (e.lineHeightOrMixed !== 'mixed') return e.lineHeightOrMixed.value;
       if (!e.textData) return -1;
       let {
         characters
@@ -664,7 +665,7 @@ let F = {
       let i = {};
       for (let n = 0; n < characters.length; n++) {
         let t = e.getRangeLineHeight(n, n + 1);
-        if ("mixed" === t) continue;
+        if (t === 'mixed') continue;
         let r = t.value;
         i[r] = (i[r] ?? 0) + 1;
       }
@@ -680,7 +681,7 @@ let F = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_TEXT_STYLES,
       guid: e.guid,
@@ -690,7 +691,7 @@ let F = {
       let e = atomStoreManager.get(jq);
       let i = h(t, e.allStyles);
       let r = i.map(e => e.key.toString());
-      let d = r.length > 0 ? _$$g() : "";
+      let d = r.length > 0 ? generateUUIDv4() : '';
       ne(d, r, _$$C.REQUIRE_TEXT_STYLES);
       return Promise.resolve({
         ...n,
@@ -701,12 +702,12 @@ let F = {
         }
       });
     } catch (e) {
-      console.error("Error getting fix for text styles:", e);
+      console.error('Error getting fix for text styles:', e);
       n.valid = !1;
       return Promise.resolve(n);
     }
   },
-  fix: function ({
+  fix({
     node: e,
     fixContext: t,
     forFixPreview: i,
@@ -740,7 +741,7 @@ async function M(e, t, i) {
     r && (n.valid = !0, n.fixContext = r);
     return Promise.resolve(n);
   } catch (e) {
-    console.error("Design linting error getting fill variable fix: ", e);
+    console.error('Design linting error getting fill variable fix: ', e);
     return Promise.resolve(n);
   }
 }
@@ -754,15 +755,15 @@ async function j({
   try {
     return await pg(e, t, i, _$$C.REQUIRE_FILL_COLOR_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing fills variables: ", e);
+    console.error('Design linting error fixing fills variables: ', e);
     return e;
   }
 }
 let U = {
   id: _$$C.REQUIRE_FILL_COLOR_VARIABLES,
-  description: "Detects missing color variables for Fill prop, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing color variables for Fill prop, and applies a fix to use the most appropriate variable.',
   enabled: () => !0,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -803,7 +804,7 @@ async function B(e, t, i) {
     r && (n.valid = !0, n.fixContext = r);
     return Promise.resolve(n);
   } catch (e) {
-    console.error("Design linting error getting stroke variable fix: ", e);
+    console.error('Design linting error getting stroke variable fix: ', e);
     return Promise.resolve(n);
   }
 }
@@ -817,15 +818,15 @@ async function V({
   try {
     return await pg(e, t, i, _$$C.REQUIRE_STROKE_COLOR_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing stroke variables: ", e);
+    console.error('Design linting error fixing stroke variables: ', e);
     return e;
   }
 }
 let G = {
   id: _$$C.REQUIRE_STROKE_COLOR_VARIABLES,
-  description: "Detects missing missing color variable for stroke props, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing missing color variable for stroke props, and applies a fix to use the most appropriate variable.',
   enabled: () => !0,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -859,15 +860,15 @@ async function z({
   try {
     return await Nd(e, t, i, _$$C.REQUIRE_BOTTOM_LEFT_CORNER_RADIUS_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing corner radius variables: ", e);
+    console.error('Design linting error fixing corner radius variables: ', e);
     return e;
   }
 }
 let H = {
   id: _$$C.REQUIRE_BOTTOM_LEFT_CORNER_RADIUS_VARIABLES,
-  description: "Detects missing number variables for bottom left corner radius fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for bottom left corner radius fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_corners,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -887,7 +888,7 @@ let H = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_BOTTOM_LEFT_CORNER_RADIUS_VARIABLES,
       guid: e.guid,
@@ -898,7 +899,7 @@ let H = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting corner radius variable fix: ", e);
+      console.error('Design linting error getting corner radius variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -914,15 +915,15 @@ async function W({
   try {
     return await Nd(e, t, i, _$$C.REQUIRE_BOTTOM_RIGHT_CORNER_RADIUS_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing corner radius variables: ", e);
+    console.error('Design linting error fixing corner radius variables: ', e);
     return e;
   }
 }
 let K = {
   id: _$$C.REQUIRE_BOTTOM_RIGHT_CORNER_RADIUS_VARIABLES,
-  description: "Detects missing number variables for bottom right corner radius fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for bottom right corner radius fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_corners,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -942,7 +943,7 @@ let K = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_BOTTOM_RIGHT_CORNER_RADIUS_VARIABLES,
       guid: e.guid,
@@ -953,7 +954,7 @@ let K = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting corner radius variable fix: ", e);
+      console.error('Design linting error getting corner radius variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -969,15 +970,15 @@ async function Y({
   try {
     return await Nd(e, t, i, _$$C.REQUIRE_TOP_LEFT_CORNER_RADIUS_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing corner radius variables: ", e);
+    console.error('Design linting error fixing corner radius variables: ', e);
     return e;
   }
 }
 let q = {
   id: _$$C.REQUIRE_TOP_LEFT_CORNER_RADIUS_VARIABLES,
-  description: "Detects missing number variables for top left corner radius fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for top left corner radius fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_corners,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -997,7 +998,7 @@ let q = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_TOP_LEFT_CORNER_RADIUS_VARIABLES,
       guid: e.guid,
@@ -1008,7 +1009,7 @@ let q = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting corner radius variable fix: ", e);
+      console.error('Design linting error getting corner radius variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1024,15 +1025,15 @@ async function $({
   try {
     return await Nd(e, t, i, _$$C.REQUIRE_TOP_RIGHT_CORNER_RADIUS_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing corner radius variables: ", e);
+    console.error('Design linting error fixing corner radius variables: ', e);
     return e;
   }
 }
 let Z = {
   id: _$$C.REQUIRE_TOP_RIGHT_CORNER_RADIUS_VARIABLES,
-  description: "Detects missing number variables for top right corner radius fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for top right corner radius fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_corners,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1052,7 +1053,7 @@ let Z = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_TOP_RIGHT_CORNER_RADIUS_VARIABLES,
       guid: e.guid,
@@ -1063,7 +1064,7 @@ let Z = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting corner radius variable fix: ", e);
+      console.error('Design linting error getting corner radius variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1079,7 +1080,7 @@ async function X({
   try {
     return await k({
       sourceNode: e,
-      gapType: "COLUMN",
+      gapType: 'COLUMN',
       fixContext: t,
       fixMetadata: i,
       ruleId: _$$C.REQUIRE_GRID_COLUMN_GAP_VARIABLES,
@@ -1087,15 +1088,15 @@ async function X({
       shouldLogFix: r
     });
   } catch (e) {
-    console.error("Design linting error fixing spacing variables: ", e);
+    console.error('Design linting error fixing spacing variables: ', e);
     return e;
   }
 }
 let Q = {
   id: _$$C.REQUIRE_GRID_COLUMN_GAP_VARIABLES,
-  description: "Detects missing number variables for grid column gap fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for grid column gap fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_grids,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1105,13 +1106,13 @@ let Q = {
       t.didSkipNode = !0;
       return Promise.resolve(t);
     }
-    let i = C(e, "COLUMN");
+    let i = C(e, 'COLUMN');
     i && (t.failedGuidToContext[e.guid] = [{
       numericValue: i
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_GRID_COLUMN_GAP_VARIABLES,
       guid: e.guid,
@@ -1122,7 +1123,7 @@ let Q = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting spacing variable fix: ", e);
+      console.error('Design linting error getting spacing variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1138,7 +1139,7 @@ async function J({
   try {
     return await k({
       sourceNode: e,
-      gapType: "ROW",
+      gapType: 'ROW',
       fixContext: t,
       fixMetadata: i,
       ruleId: _$$C.REQUIRE_GRID_ROW_GAP_VARIABLES,
@@ -1146,15 +1147,15 @@ async function J({
       shouldLogFix: r
     });
   } catch (e) {
-    console.error("Design linting error fixing spacing variables: ", e);
+    console.error('Design linting error fixing spacing variables: ', e);
     return e;
   }
 }
 let ee = {
   id: _$$C.REQUIRE_GRID_ROW_GAP_VARIABLES,
-  description: "Detects missing number variables for grid row gap fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for grid row gap fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_grids,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1164,13 +1165,13 @@ let ee = {
       t.didSkipNode = !0;
       return Promise.resolve(t);
     }
-    let i = C(e, "ROW");
+    let i = C(e, 'ROW');
     i && (t.failedGuidToContext[e.guid] = [{
       numericValue: i
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_GRID_ROW_GAP_VARIABLES,
       guid: e.guid,
@@ -1181,7 +1182,7 @@ let ee = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting spacing variable fix: ", e);
+      console.error('Design linting error getting spacing variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1197,15 +1198,15 @@ async function et({
   try {
     return await nw(e, t, i, _$$C.REQUIRE_BOTTOM_PADDING_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing padding variables: ", e);
+    console.error('Design linting error fixing padding variables: ', e);
     return e;
   }
 }
 let ei = {
   id: _$$C.REQUIRE_BOTTOM_PADDING_VARIABLES,
-  description: "Detects missing number variables for bottom stack padding fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for bottom stack padding fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_padding,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1223,7 +1224,7 @@ let ei = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_BOTTOM_PADDING_VARIABLES,
       guid: e.guid,
@@ -1234,7 +1235,7 @@ let ei = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting padding variable fix: ", e);
+      console.error('Design linting error getting padding variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1250,15 +1251,15 @@ async function en({
   try {
     return await nw(e, t, i, _$$C.REQUIRE_LEFT_PADDING_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing padding variables: ", e);
+    console.error('Design linting error fixing padding variables: ', e);
     return e;
   }
 }
 let er = {
   id: _$$C.REQUIRE_LEFT_PADDING_VARIABLES,
-  description: "Detects missing number variables for left stack padding fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for left stack padding fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_padding,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1276,7 +1277,7 @@ let er = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_LEFT_PADDING_VARIABLES,
       guid: e.guid,
@@ -1287,7 +1288,7 @@ let er = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting padding variable fix: ", e);
+      console.error('Design linting error getting padding variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1303,15 +1304,15 @@ async function ea({
   try {
     return await nw(e, t, i, _$$C.REQUIRE_RIGHT_PADDING_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing padding variables: ", e);
+    console.error('Design linting error fixing padding variables: ', e);
     return e;
   }
 }
 let es = {
   id: _$$C.REQUIRE_RIGHT_PADDING_VARIABLES,
-  description: "Detects missing number variables for right stack padding fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for right stack padding fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_padding,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1329,7 +1330,7 @@ let es = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_RIGHT_PADDING_VARIABLES,
       guid: e.guid,
@@ -1340,7 +1341,7 @@ let es = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting padding variable fix: ", e);
+      console.error('Design linting error getting padding variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1356,15 +1357,15 @@ async function eo({
   try {
     return await nw(e, t, i, _$$C.REQUIRE_TOP_PADDING_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing padding variables: ", e);
+    console.error('Design linting error fixing padding variables: ', e);
     return e;
   }
 }
 let el = {
   id: _$$C.REQUIRE_TOP_PADDING_VARIABLES,
-  description: "Detects missing number variables for top stack padding fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for top stack padding fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_padding,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1382,7 +1383,7 @@ let el = {
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_TOP_PADDING_VARIABLES,
       guid: e.guid,
@@ -1393,7 +1394,7 @@ let el = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting padding variable fix: ", e);
+      console.error('Design linting error getting padding variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1409,15 +1410,15 @@ async function ed({
   try {
     return await T(e, t, i, _$$C.REQUIRE_HORIZONTAL_SPACING_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing spacing variables: ", e);
+    console.error('Design linting error fixing spacing variables: ', e);
     return e;
   }
 }
 let ec = {
   id: _$$C.REQUIRE_HORIZONTAL_SPACING_VARIABLES,
-  description: "Detects missing number variables for horizontal stack spacing fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for horizontal stack spacing fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_spacing,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1427,13 +1428,13 @@ let ec = {
       t.didSkipNode = !0;
       return Promise.resolve(t);
     }
-    let i = w(e, "HORIZONTAL");
+    let i = w(e, 'HORIZONTAL');
     i && (t.failedGuidToContext[e.guid] = [{
       numericValue: i
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_HORIZONTAL_SPACING_VARIABLES,
       guid: e.guid,
@@ -1444,7 +1445,7 @@ let ec = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting spacing variable fix: ", e);
+      console.error('Design linting error getting spacing variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1460,15 +1461,15 @@ async function eu({
   try {
     return await T(e, t, i, _$$C.REQUIRE_VERTICAL_SPACING_VARIABLES, n, r);
   } catch (e) {
-    console.error("Design linting error fixing spacing variables: ", e);
+    console.error('Design linting error fixing spacing variables: ', e);
     return e;
   }
 }
 let ep = {
   id: _$$C.REQUIRE_VERTICAL_SPACING_VARIABLES,
-  description: "Detects missing number variables for vertical stack spacing fields, and applies a fix to use the most appropriate variable.",
+  description: 'Detects missing number variables for vertical stack spacing fields, and applies a fix to use the most appropriate variable.',
   enabled: () => !!getFeatureFlags().aip_flower_garden_spacing,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1478,13 +1479,13 @@ let ep = {
       t.didSkipNode = !0;
       return Promise.resolve(t);
     }
-    let i = w(e, "VERTICAL");
+    let i = w(e, 'VERTICAL');
     i && (t.failedGuidToContext[e.guid] = [{
       numericValue: i
     }]);
     return Promise.resolve(t);
   },
-  getFix: function (e, t, i) {
+  getFix(e, t, i) {
     let n = {
       ruleId: _$$C.REQUIRE_VERTICAL_SPACING_VARIABLES,
       guid: e.guid,
@@ -1495,7 +1496,7 @@ let ep = {
       r && (n.valid = !0, n.fixContext = r);
       return Promise.resolve(n);
     } catch (e) {
-      console.error("Design linting error getting spacing variable fix: ", e);
+      console.error('Design linting error getting spacing variable fix: ', e);
       return Promise.resolve(n);
     }
   },
@@ -1532,7 +1533,7 @@ async function e_(e, t, i) {
     s && (n.valid = !0, n.fixContext = s);
     return Promise.resolve(n);
   } catch (e) {
-    console.error("Design linting error getting text contrast fix: ", e);
+    console.error('Design linting error getting text contrast fix: ', e);
     return Promise.resolve(n);
   }
 }
@@ -1546,15 +1547,15 @@ async function eA({
   try {
     return await pg(e, t, i, _$$C.TEXT_BACKGROUND_CONTRAST_AA, n, r);
   } catch (e) {
-    console.error("Design linting error fixing fills variables: ", e);
+    console.error('Design linting error fixing fills variables: ', e);
     return e;
   }
 }
 let ey = {
   id: _$$C.TEXT_BACKGROUND_CONTRAST_AA,
-  description: "Text background contrast AA",
+  description: 'Text background contrast AA',
   enabled: () => !!getFeatureFlags().aip_flower_garden_text_bg_aa,
-  detect: function ({
+  detect({
     node: e
   }) {
     let t = {
@@ -1565,16 +1566,16 @@ let ey = {
       t.didSkipNode = !0;
       return Promise.resolve(t);
     }
-    if ("TEXT" !== e.type) return Promise.resolve(t);
+    if (e.type !== 'TEXT') return Promise.resolve(t);
     let {
       paint
     } = kl(e.fills);
-    if (!paint || !paint.colorVar?.value || paint.colorVar?.dataType !== "ALIAS") return Promise.resolve(t);
+    if (!paint || !paint.colorVar?.value || paint.colorVar?.dataType !== 'ALIAS') return Promise.resolve(t);
     let n = function (e) {
       let t = e.sceneGraph.getCurrentPage();
       let i = t?.guid;
       if (!i) return;
-      let n = xv(i, e.absoluteBoundingBox, e.guid).filter(e => !["SECTION", "CANVAS"].includes(e.type));
+      let n = xv(i, e.absoluteBoundingBox, e.guid).filter(e => !['SECTION', 'CANVAS'].includes(e.type));
       let {
         blendedBackground
       } = f3(n);
@@ -1582,8 +1583,8 @@ let ey = {
     }(e);
     let r = Hu(paint.color);
     if (!n || !r) return Promise.resolve(t);
-    let a = e.getStyledTextSegments(["fontSize", "fontWeight"]);
-    let s = J3("TEXT", a);
+    let a = e.getStyledTextSegments(['fontSize', 'fontWeight']);
+    let s = J3('TEXT', a);
     let o = JJ(Zf.auto, new Set([s]));
     let {
       contrast,

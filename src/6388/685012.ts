@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { IK } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { AppStateTsApi, BuzzCloneHelpers } from "../figma_app/763686";
@@ -9,14 +9,14 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Vs } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { v as _$$v } from "../6388/913037";
 import { jw, kG } from "../figma_app/327588";
 import { c3, YB, DG } from "../6388/934960";
 import { Uk } from "../6388/447908";
 import { PU } from "../figma_app/334505";
 import { UD } from "../figma_app/624361";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { eY } from "../figma_app/722362";
 import { A as _$$A } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
@@ -68,7 +68,7 @@ export function $$C0({
             if (!s) continue;
             let r = n[0];
             let a = n[1];
-            if (r === PU.TEXT) s.characters = a;else if (r === PU.IMAGE) {
+            if (r === PU.TEXT) s.characters = a; else if (r === PU.IMAGE) {
               let e = a.split(",")[1];
               let t = a.split(";")[0]?.split(":")[1] || "";
               if (!e || !t) continue;
@@ -119,11 +119,11 @@ export function $$C0({
           let t = e(r, s, i, a);
           t && c.push(t);
         });
-        a === u - 1 ? (t(F.dequeue({
+        a === u - 1 ? (t(VisualBellActions.dequeue({
           matchType: I
-        })), g(c)) : (t(F.dequeue({
+        })), g(c)) : (t(VisualBellActions.dequeue({
           matchType: I
-        })), t(F.enqueue({
+        })), t(VisualBellActions.enqueue({
           message: getI18nString("buzz.bulk_create.generating_assets_with_count", {
             count_progress: a,
             count_total: x
@@ -153,21 +153,21 @@ export function $$C0({
         }(r);
         for (let [a, u] of o) {
           let o = x;
-          if (d.createRow(o), x++, 0 === Object.keys(r).length) for (let r = 0; r < e; r++) c(u, n, i, a, o, r, s, e, l, t);else for (let r = 0; r < e; r += 10) setTimeout(() => {
+          if (d.createRow(o), x++, 0 === Object.keys(r).length) for (let r = 0; r < e; r++) c(u, n, i, a, o, r, s, e, l, t); else for (let r = 0; r < e; r += 10) setTimeout(() => {
             for (let d = 0; d < 10 && !(r + d >= e); d++) c(u, n, i, a, o, r + d, s, e, l, t);
           }, h * r);
         }
       });
     }, [i, r, c, l, t]);
   }(0, useCallback(e => {
-    c(F.enqueue({
+    c(VisualBellActions.enqueue({
       message: getI18nString("buzz.bulk_create.success", {
         count: w
       }),
       type: "Buzz bulk create success"
     }));
     L || AppStateTsApi?.cooperFocusView().exitFocusedNodeView();
-    tJ(e);
+    replaceSelection(e);
     A(!1);
     l(w);
     k({});

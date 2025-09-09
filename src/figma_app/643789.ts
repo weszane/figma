@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { resourceUtils } from "../905/989992";
 import { p } from "../figma_app/288654";
 import { FMemberRoleType } from "../figma_app/191312";
-import { y_L, Bl3 } from "../figma_app/43951";
+import { TeamTilePermissions, TeamCanView } from "../figma_app/43951";
 import { A8 } from "../figma_app/465071";
 import { e6 } from "../905/557142";
 export function $$c1(e) {
@@ -25,7 +25,7 @@ export function $$u2(e) {
     let r = useMemo(() => e.map(e => ({
       teamId: e
     })), [e]);
-    let s = p(y_L, r, {
+    let s = p(TeamTilePermissions, r, {
       enabled: t
     });
     return {
@@ -59,7 +59,7 @@ export function $$p0(e, t = !0) {
   let r = useMemo(() => e.map(e => ({
     id: e
   })), [e]);
-  let s = p(Bl3, r, {
+  let s = p(TeamCanView, r, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(s.map(e => e.result)).transform(t => e.reduce((e, r, n) => (e[r] = !!t[n]?.team?.hasPermission, e), {})), [s, e]);

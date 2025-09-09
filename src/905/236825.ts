@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useLayoutEffect } from "react";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Y } from "../905/830372";
 import { B } from "../905/222272";
@@ -63,7 +63,7 @@ export let $$p0 = forwardRef(function ({
           }), e && jsx(K, {
             "aria-label": "close",
             onClick: e,
-            recordingKey: Pt(h, "dismiss"),
+            recordingKey: generateRecordingKey(h, "dismiss"),
             children: jsx(L, {})
           })]
         }), i]

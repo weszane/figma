@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { buildUploadUrl } from "../figma_app/169182";
 import { d as _$$d } from "../905/884707";
 import { $$, nR, tB, CY, N_ } from "../figma_app/637027";

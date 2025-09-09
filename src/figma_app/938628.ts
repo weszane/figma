@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useMemo, createRef, useLayoutEffect, useRef, useCallback, createContext, useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
@@ -12,7 +12,7 @@ import g from "classnames";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { am } from "../figma_app/901889";
 import { getFilteredFeatureFlags } from "../905/717445";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { B as _$$B } from "../905/714743";
@@ -32,7 +32,7 @@ import { $$, gq, $j, Ht, w2, Zp } from "../figma_app/178475";
 import { Xw } from "../figma_app/201694";
 import { Tv, I9 } from "../figma_app/151869";
 import { Fk } from "../figma_app/167249";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { fn, DE, sY } from "../figma_app/811257";
 import { selectWithShallowEqual } from "../905/103090";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -377,10 +377,10 @@ function Q(e) {
     dispatch: t,
     inputClassName: LI,
     onValueChange: (e, t) => {
-      t === zk.YES && Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION);
+      t === yesNoTrackingEnum.YES && Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION);
       R(e, "horizontal");
     },
-    recordingKey: Pt(e.recordingKey, "collapsed-horizontal-constraint-input"),
+    recordingKey: generateRecordingKey(e.recordingKey, "collapsed-horizontal-constraint-input"),
     smallNudgeAmount,
     softDisabled: !f && !y && !S,
     value: x(u.horizontalConstraint, "horizontal"),
@@ -396,10 +396,10 @@ function Q(e) {
     dispatch: t,
     inputClassName: LI,
     onValueChange: (e, t) => {
-      t === zk.YES && Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION);
+      t === yesNoTrackingEnum.YES && Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION);
       R(e, "vertical");
     },
-    recordingKey: Pt(e.recordingKey, "collapsed-vertical-constraint-input"),
+    recordingKey: generateRecordingKey(e.recordingKey, "collapsed-vertical-constraint-input"),
     smallNudgeAmount,
     softDisabled: !b && !I && !v,
     value: x(u.verticalConstraint, "vertical"),
@@ -512,7 +512,7 @@ function el(e) {
         }, !0);
       },
       value: t ? eo.format("AUTO") : r.format(e.constraint),
-      recordingKey: Pt(e, "select"),
+      recordingKey: generateRecordingKey(e, "select"),
       children: [jsx(l9, {
         label: jsx(HiddenLabel, {
           children: p
@@ -642,7 +642,7 @@ function e_(e) {
     let l = S(t, s);
     return jsx(D8, {
       className: o,
-      recordingKey: Pt(e, "constraint", t),
+      recordingKey: generateRecordingKey(e, "constraint", t),
       onMouseDown: _(r, a),
       onMouseEnter: h(t),
       onMouseLeave: m,
@@ -657,7 +657,7 @@ function e_(e) {
     let a = "HORIZONTAL" === r ? "constraint_selector--innerUI3V2HorizontalTarget--kJ2Ck constraint_selector--_innerUI3V2Target--PtYtd" : "constraint_selector--innerUI3V2VerticalTarget--rNFiS constraint_selector--_innerUI3V2Target--PtYtd";
     return jsx(D8, {
       className: a,
-      recordingKey: Pt(e, "constraint", t),
+      recordingKey: generateRecordingKey(e, "constraint", t),
       onMouseDown: E,
       onMouseMove: y,
       onMouseLeave: b,
@@ -778,7 +778,7 @@ function eg(e) {
     let c = "SCALE" === i;
     return jsx(D8, {
       ...Ay.props(eE.baseConstraintButton, eE[t]),
-      recordingKey: Pt(e, "constraint", t),
+      recordingKey: generateRecordingKey(e, "constraint", t),
       onMouseDown: u(r, s),
       children: c ? jsx("div", {
         ...Ay.props(eT[t]),
@@ -793,7 +793,7 @@ function eg(e) {
     let a = "CENTER" === d(i);
     return jsx(D8, {
       ...Ay.props(ey.baseInnerTarget, "HORIZONTAL" === i ? ey.horizontalInnerTarget : ey.verticalInnerTarget, !a && t === i && ey.innerTargetHover),
-      recordingKey: Pt(e, "constraint", r),
+      recordingKey: generateRecordingKey(e, "constraint", r),
       onMouseDown: _,
       onMouseMove: h,
       onMouseLeave: m,
@@ -1142,7 +1142,7 @@ function eA(e) {
     onValueChange: e => {
       J(e, "TOP", u.verticalConstraint, u.horizontalConstraint, P);
     },
-    recordingKey: Pt(e.recordingKey, "top-constraint-input"),
+    recordingKey: generateRecordingKey(e.recordingKey, "top-constraint-input"),
     smallNudgeAmount,
     softDisabled: !("MIN" === u.verticalConstraint || "STRETCH" === u.verticalConstraint),
     value: isInvalidValue(o) ? MIXED_MARKER : o
@@ -1167,7 +1167,7 @@ function eA(e) {
     onValueChange: e => {
       J(e, "BOTTOM", u.verticalConstraint, u.horizontalConstraint, P);
     },
-    recordingKey: Pt(e.recordingKey, "bottom-constraint-input"),
+    recordingKey: generateRecordingKey(e.recordingKey, "bottom-constraint-input"),
     smallNudgeAmount,
     softDisabled: !("MAX" === u.verticalConstraint || "STRETCH" === u.verticalConstraint),
     value: isInvalidValue(d) ? MIXED_MARKER : d
@@ -1192,7 +1192,7 @@ function eA(e) {
     onValueChange: e => {
       J(e, "LEFT", u.verticalConstraint, u.horizontalConstraint, P);
     },
-    recordingKey: Pt(e.recordingKey, "left-constraint-input"),
+    recordingKey: generateRecordingKey(e.recordingKey, "left-constraint-input"),
     smallNudgeAmount,
     softDisabled: !("MIN" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint),
     value: isInvalidValue(c) ? MIXED_MARKER : c
@@ -1217,7 +1217,7 @@ function eA(e) {
     onValueChange: e => {
       J(e, "RIGHT", u.verticalConstraint, u.horizontalConstraint, P);
     },
-    recordingKey: Pt(e.recordingKey, "right-constraint-input"),
+    recordingKey: generateRecordingKey(e.recordingKey, "right-constraint-input"),
     smallNudgeAmount,
     softDisabled: !("MAX" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint),
     value: isInvalidValue(l) ? MIXED_MARKER : l
@@ -1232,7 +1232,7 @@ function eA(e) {
       disableHorizontalStretchScaleConstraints: D,
       disableVerticalStretchScaleConstraints: k,
       dispatch: t,
-      recordingKey: Pt(e, "constraintSelector"),
+      recordingKey: generateRecordingKey(e, "constraintSelector"),
       readOnly: e.readOnly
     })
   });
@@ -1386,7 +1386,7 @@ function eH(e) {
         }),
         className: f()(mJ, triggerClassName),
         disabled,
-        recordingKey: Pt(e, "toggleMenu"),
+        recordingKey: generateRecordingKey(e, "toggleMenu"),
         ...getTriggerProps(),
         children: [jsx("span", {
           children: ej(isMixedOverride ? MIXED_MARKER : x)
@@ -1407,7 +1407,7 @@ function eH(e) {
             }),
             onChange: R,
             value: x?.toString(),
-            recordingKey: Pt(e, "layoutChange"),
+            recordingKey: generateRecordingKey(e, "layoutChange"),
             children: [!!showSectionOption && jsx(CU, {
               value: ContainerType.SECTION?.toString(),
               disabled: !canBecomeSection,
@@ -1478,7 +1478,7 @@ function eW({
       onFocus: () => d(!0),
       onBlur: () => d(!1)
     },
-    recordingKey: Pt(a, e.name),
+    recordingKey: generateRecordingKey(a, e.name),
     children: jsxs("span", {
       className: l ? cl : dj,
       children: [jsx(ph, {
@@ -1616,7 +1616,7 @@ function tp(e) {
     "data-tooltip-type": Ib.TEXT,
     "data-onboarding-key": to
   };
-  let o = Pt(e, "aspectRatioLockToggle");
+  let o = generateRecordingKey(e, "aspectRatioLockToggle");
   return jsx("div", {
     className: xe,
     children: jsx(_$$E, {
@@ -1695,12 +1695,12 @@ function tj(e, t) {
     if (r !== By.SYNTAX_UNRECOGNIZED) return;
     let i = _$$v2(n);
     null != i && (n = _$$q2(n), permissionScopeHandler.user(e, () => {
-      t(n, i) !== zk.NO && Fullscreen.triggerAction("commit", {});
+      t(n, i) !== yesNoTrackingEnum.NO && Fullscreen.triggerAction("commit", {});
     }));
   };
 }
 function tB(e, t) {
-  return tj(e, (e, r) => Fullscreen.setNodeSelectionSizeWithAnchor(e, t, r) ? zk.YES : zk.NO);
+  return tj(e, (e, r) => Fullscreen.setNodeSelectionSizeWithAnchor(e, t, r) ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
 }
 let tG = tB("relative-h", Axis.Y);
 let tV = tB("relative-w", Axis.X);
@@ -2088,14 +2088,14 @@ function t4(e) {
     onSizeConstraintClick: e.onSizeConstraintClick,
     onEvaluateExpressionError: relativeInputHandler,
     disabled: g || b,
-    recordingKey: Pt(e, `${key}Input`),
+    recordingKey: generateRecordingKey(e, `${key}Input`),
     showResizingTooltips: u
   }) : jsx(_$$E, {
     name: `${key}_input`,
     children: jsx(_$$e2, {
       condition: !m,
       wrapper: t => jsx(sA, {
-        recordingKey: Pt(e, `${key}InputWrapper`),
+        recordingKey: generateRecordingKey(e, `${key}InputWrapper`),
         fields: S,
         disabled: e.disabled,
         resolvedType: VariableResolvedDataType.FLOAT,
@@ -2121,7 +2121,7 @@ function t4(e) {
         onScrubEnd: () => {
           AspectRatioLockBindings?.hideAspectRatioLockResizingLines();
         },
-        recordingKey: Pt(e, `${key}Input`),
+        recordingKey: generateRecordingKey(e, `${key}Input`),
         tooltipForScreenReadersOnly: !1,
         children: jsx("span", {
           className: `${QK} svg`,
@@ -2263,7 +2263,7 @@ function re(e) {
           }),
           value: t,
           disabled: !!_,
-          recordingKey: Pt(e, "select", t)
+          recordingKey: generateRecordingKey(e, "select", t)
         }, t));
       }), g && !_)) {
         let [t, i] = removeLimitIcons;
@@ -2276,7 +2276,7 @@ function re(e) {
             svg: t,
             fallbackSvg: i
           }),
-          recordingKey: Pt(e, "select", zg)
+          recordingKey: generateRecordingKey(e, "select", zg)
         }, zg));
       }
       return r;
@@ -2295,9 +2295,9 @@ function re(e) {
   let V = Fp();
   let H = t9();
   let z = useCallback((t, r) => {
-    if ("number" == typeof t) R.onValueChange(t, r);else if (t === minMaxOptions[0]) e.onSizeConstraintClick("min");else if (t === minMaxOptions[1]) e.onSizeConstraintClick("max");else if (t === zg) {
-      setMinValue(null, zk.NO);
-      setMaxValue(null, zk.NO);
+    if ("number" == typeof t) R.onValueChange(t, r); else if (t === minMaxOptions[0]) e.onSizeConstraintClick("min"); else if (t === minMaxOptions[1]) e.onSizeConstraintClick("max"); else if (t === zg) {
+      setMinValue(null, yesNoTrackingEnum.NO);
+      setMaxValue(null, yesNoTrackingEnum.NO);
       fullscreenValue.triggerAction("commit");
       D({
         ...P,
@@ -2479,7 +2479,7 @@ function rd(e) {
     let s = "no-fill-component" === t.disabledReason ? getI18nString("fullscreen.properties_panel.stack_panel.sizing_disabled.no_fill_component") : i ? getI18nString("fullscreen.properties_panel.stack_panel.sizing_disabled.select_all_fill") : void 0;
     return jsx(_$$c$2, {
       value: t.size,
-      recordingKey: Pt(e.recordingKey, "select", r),
+      recordingKey: generateRecordingKey(e.recordingKey, "select", r),
       disabled: a,
       tooltip: s,
       tooltipType: Ib.TEXT,
@@ -2542,7 +2542,7 @@ function rd(e) {
       },
       onOptionFocus: (t, r) => e.onHover(t ?? null, r),
       property: e.size,
-      recordingKey: Pt(e, "select"),
+      recordingKey: generateRecordingKey(e, "select"),
       tooltip: e.axis === Axis.X ? getI18nString("fullscreen.properties_panel.constraints_resizing_panel.horizontal_resizing") : getI18nString("fullscreen.properties_panel.constraints_resizing_panel.vertical_resizing"),
       truncation: "none",
       children: G
@@ -2659,7 +2659,7 @@ function rm(e) {
     className: oH,
     axis: Axis.X,
     size: t,
-    recordingKey: Pt(e.recordingKey, "widthInput"),
+    recordingKey: generateRecordingKey(e.recordingKey, "widthInput"),
     dropdownAlignment: "left",
     onHover: e => i(e, Axis.X)
   });
@@ -2668,7 +2668,7 @@ function rm(e) {
     className: T1,
     axis: Axis.Y,
     size: r,
-    recordingKey: Pt(e.recordingKey, "heightInput"),
+    recordingKey: generateRecordingKey(e.recordingKey, "heightInput"),
     dropdownAlignment: "right",
     onHover: e => i(e, Axis.Y)
   });
@@ -2904,7 +2904,7 @@ function rF(e) {
     disabled: !!l,
     "data-tooltip": getI18nString("properties.tooltip.ignore_auto_layout"),
     "data-tooltip-type": Ib.TEXT,
-    recordingKey: Pt(e, "absolutePosition")
+    recordingKey: generateRecordingKey(e, "absolutePosition")
   };
   return jsx(_$$f, {
     "aria-label": getI18nString("properties.tooltip.ignore_auto_layout"),
@@ -2919,7 +2919,7 @@ function rF(e) {
     offIcon: jsx(rk, {}),
     onChange: () => {
       permissionScopeHandler.user("set-stack-position", () => {
-        "ABSOLUTE" === i ? (s("AUTO"), o("Remove Absolute Position")) : (s("ABSOLUTE", zk.NO), Fullscreen.bringSelectionToFrontVisually(), Fullscreen.triggerAction("commit", {}), _$$F.trackFromFullscreen("add_absolute_position", {
+        "ABSOLUTE" === i ? (s("AUTO"), o("Remove Absolute Position")) : (s("ABSOLUTE", yesNoTrackingEnum.NO), Fullscreen.bringSelectionToFrontVisually(), Fullscreen.triggerAction("commit", {}), _$$F.trackFromFullscreen("add_absolute_position", {
           source: "properties_panel",
           parent_node_ids: u
         }));
@@ -2937,7 +2937,7 @@ let rj = memo(function (e) {
     })
   });
 });
-let rV = tj("relative-x", (e, t) => Fullscreen?.setNodeSelectionOffsetWithAnchor(e, Axis.X, t) ? zk.YES : zk.NO);
+let rV = tj("relative-x", (e, t) => Fullscreen?.setNodeSelectionOffsetWithAnchor(e, Axis.X, t) ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
 let rH = memo(e => o3(nt.fplScrubbableInput) ? jsx(rW, {
   ...e
 }) : jsx(rz, {
@@ -2960,7 +2960,7 @@ function rz(e) {
       disabled: e.disabled,
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": getI18nString("properties.tooltip.xposition"),
-      recordingKey: Pt(e.recordingKey, "xInput"),
+      recordingKey: generateRecordingKey(e.recordingKey, "xInput"),
       children: jsx("span", {
         className: `${QK} svg`,
         children: renderI18nText("fullscreen.properties_panel.transform_panel.x")
@@ -2993,17 +2993,17 @@ function rW(e) {
       value: t,
       onChange: (e, {
         commit: t
-      }) => onValueChange(e, t ? zk.YES : zk.NO),
+      }) => onValueChange(e, t ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO),
       disabled: e.disabled || null == t,
       icon: jsx("span", {
         className: HO,
         children: renderI18nText("fullscreen.properties_panel.transform_panel.x")
       }),
-      recordingKey: Pt(e.recordingKey, "xInput")
+      recordingKey: generateRecordingKey(e.recordingKey, "xInput")
     })
   });
 }
-let rK = tj("relative-y", (e, t) => Fullscreen?.setNodeSelectionOffsetWithAnchor(e, Axis.Y, t) ? zk.YES : zk.NO);
+let rK = tj("relative-y", (e, t) => Fullscreen?.setNodeSelectionOffsetWithAnchor(e, Axis.Y, t) ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
 let rY = memo(e => o3(nt.fplScrubbableInput) ? jsx(rX, {
   ...e
 }) : jsx(r$, {
@@ -3026,7 +3026,7 @@ function r$(e) {
       disabled: e.disabled,
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": getI18nString("properties.tooltip.yposition"),
-      recordingKey: Pt(e.recordingKey, "yInput"),
+      recordingKey: generateRecordingKey(e.recordingKey, "yInput"),
       children: jsx("span", {
         className: `${QK} svg`,
         children: renderI18nText("fullscreen.properties_panel.transform_panel.y")
@@ -3059,13 +3059,13 @@ function rX(e) {
       value: t,
       onChange: (e, {
         commit: t
-      }) => onValueChange(e, t ? zk.YES : zk.NO),
+      }) => onValueChange(e, t ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO),
       disabled: e.disabled || null == t,
       icon: jsx("span", {
         className: HO,
         children: renderI18nText("fullscreen.properties_panel.transform_panel.y")
       }),
-      recordingKey: Pt(e.recordingKey, "yInput")
+      recordingKey: generateRecordingKey(e.recordingKey, "yInput")
     })
   });
 }
@@ -3230,7 +3230,7 @@ export function $$r48(e) {
     disableStretchScaleConstraints: y,
     dispatch: o,
     dropdownShown: u,
-    recordingKey: Pt(e, "width")
+    recordingKey: generateRecordingKey(e, "width")
   });
   let v = jsx(el, {
     id: "height-select",
@@ -3241,7 +3241,7 @@ export function $$r48(e) {
     disableStretchScaleConstraints: b,
     dispatch: o,
     dropdownShown: u,
-    recordingKey: Pt(e, "height")
+    recordingKey: generateRecordingKey(e, "height")
   });
   let C = jsx(_$$E, {
     name: "constraint_selector",
@@ -3253,7 +3253,7 @@ export function $$r48(e) {
       disableHorizontalStretchScaleConstraints: y,
       disableVerticalStretchScaleConstraints: b,
       dispatch: o,
-      recordingKey: Pt(e, "constraintSelector")
+      recordingKey: generateRecordingKey(e, "constraintSelector")
     })
   });
   let w = renderI18nText("properties.label.position");
@@ -3267,7 +3267,7 @@ export function $$r48(e) {
   });
   let P = d ? jsx(_$$d, {
     "aria-expanded": g,
-    recordingKey: Pt(e, "constraintsButton"),
+    recordingKey: generateRecordingKey(e, "constraintsButton"),
     onClick: () => f(!g),
     "aria-label": getI18nString("fullscreen.properties_panel.constraints_panel.constraints"),
     htmlAttributes: {
@@ -3428,7 +3428,7 @@ export function $$r62(e) {
       r(e);
       _();
     },
-    recordingKey: Pt(e, "countInput"),
+    recordingKey: generateRecordingKey(e, "countInput"),
     resolution: .01,
     scrubMultiplier: .1 * smallNudgeAmount,
     smallNudgeAmount,
@@ -3456,7 +3456,7 @@ export function $$r62(e) {
       s(e);
       h();
     },
-    recordingKey: Pt(e, "starInnerScaleInput"),
+    recordingKey: generateRecordingKey(e, "starInnerScaleInput"),
     resolution: .001,
     scrubMultiplier,
     smallNudgeAmount,
@@ -3507,7 +3507,7 @@ export let $$r70 = memo(function (e) {
         inputClassName: hF,
         noBorderOnFocus: !1,
         onValueChange: r,
-        recordingKey: Pt(e, "arcStart"),
+        recordingKey: generateRecordingKey(e, "arcStart"),
         scrubMultiplier,
         smallNudgeAmount,
         value: t,
@@ -3526,7 +3526,7 @@ export let $$r70 = memo(function (e) {
         min: -1,
         noBorderOnFocus: !1,
         onValueChange: s,
-        recordingKey: Pt(e, "arcSweep"),
+        recordingKey: generateRecordingKey(e, "arcSweep"),
         resolution: .001,
         scrubMultiplier,
         smallNudgeAmount,
@@ -3541,7 +3541,7 @@ export let $$r70 = memo(function (e) {
         inputClassName: PK,
         noBorderOnFocus: !1,
         onValueChange: l,
-        recordingKey: Pt(e, "arcRatio"),
+        recordingKey: generateRecordingKey(e, "arcRatio"),
         resolution: .001,
         scrubMultiplier,
         smallNudgeAmount,
@@ -3567,7 +3567,7 @@ export function $$r96(e) {
   let d = jsx(DE, {
     input: jsx($$ns3, {
       handleMirroring: t.handleMirroring,
-      recordingKey: Pt(e, "mirroring")
+      recordingKey: generateRecordingKey(e, "mirroring")
     }),
     icon: null,
     label: getI18nString("fullscreen.properties_panel.section_vector.label_mirroring")
@@ -3661,7 +3661,7 @@ function nr(e) {
         shouldCommit: t
       });
     },
-    recordingKey: Pt(e, "xInput"),
+    recordingKey: generateRecordingKey(e, "xInput"),
     tooltipForScreenReadersOnly: !0,
     children: jsx("span", {
       className: QK,
@@ -3686,7 +3686,7 @@ function nr(e) {
         shouldCommit: t
       });
     },
-    recordingKey: Pt(e, "yInput"),
+    recordingKey: generateRecordingKey(e, "yInput"),
     tooltipForScreenReadersOnly: !0,
     children: jsx("span", {
       className: QK,
@@ -3695,7 +3695,7 @@ function nr(e) {
   });
   let o = jsx($$ns3, {
     handleMirroring: e.handleMirroring,
-    recordingKey: Pt(e, "mirroring")
+    recordingKey: generateRecordingKey(e, "mirroring")
   });
   let l = jsx($j, {
     className: BP,
@@ -3710,7 +3710,7 @@ function nr(e) {
       });
     },
     dispatch: e.dispatch,
-    recordingKey: Pt(e, "cornerRadiusInput"),
+    recordingKey: generateRecordingKey(e, "cornerRadiusInput"),
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.corner_radius"),
     children: jsx(_$$B, {
@@ -3812,13 +3812,13 @@ export function $$ns3(e) {
     recordingKey: e.recordingKey,
     children: [jsx(ni, {
       value: "NONE",
-      recordingKey: Pt(e, "NONE")
+      recordingKey: generateRecordingKey(e, "NONE")
     }), jsx(ni, {
       value: "ANGLE",
-      recordingKey: Pt(e, "ANGLE")
+      recordingKey: generateRecordingKey(e, "ANGLE")
     }), jsx(ni, {
       value: "ANGLE_AND_LENGTH",
-      recordingKey: Pt(e, "ANGLE_AND_LENGTH")
+      recordingKey: generateRecordingKey(e, "ANGLE_AND_LENGTH")
     })]
   });
 }

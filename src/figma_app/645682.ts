@@ -1,12 +1,12 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useRef, useCallback, memo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { IK } from "../905/521428";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { u1, Uv, XE } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
@@ -123,7 +123,7 @@ export let $$K0 = memo(function (e) {
       borderBottom: "none"
     } : void 0,
     children: [jsx(Y, {
-      recordingKey: Pt(e, "restore")
+      recordingKey: generateRecordingKey(e, "restore")
     }), (() => {
       let e = r?.id === uA;
       let t = valueOrFallback(s, "");
@@ -204,7 +204,7 @@ function Y({
       onClick: function () {
         fullscreenValue.triggerActionInUserEditScope("restore-symbol-or-state-group");
       },
-      recordingKey: Pt(e, "restoreComponentButton"),
+      recordingKey: generateRecordingKey(e, "restoreComponentButton"),
       children: renderI18nText("design_systems.instance_panel.restore_component")
     });
     return jsx("div", {
@@ -222,7 +222,7 @@ function Y({
       className: ns,
       children: jsx(IK, {
         variant: "secondary",
-        recordingKey: Pt(e, "resetVariantButton"),
+        recordingKey: generateRecordingKey(e, "resetVariantButton"),
         onClick: function () {
           let e;
           if (f) {

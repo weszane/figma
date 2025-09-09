@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { b as _$$b, bL, mc, YJ, hE, q7, Q$, N_ } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
@@ -15,9 +15,9 @@ import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import y from "classnames";
-import { Ay as _$$Ay } from "../905/612521";
-import { g as _$$g } from "../905/880308";
-import { Lf } from "../figma_app/564528";
+import { customHistory } from "../905/612521";
+import { generateUUIDv4 } from "../905/871474";
+import { sendUrlToParent } from "../figma_app/564528";
 import { a as _$$a } from "../905/29104";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { wv } from "../figma_app/236327";
@@ -115,7 +115,7 @@ export function $$ei4() {
 }
 export function $$ea0() {
   var e;
-  let t = _$$g();
+  let t = generateUUIDv4();
   let r = $$ei4();
   let a = getFeatureFlags().figjam_synthesize_handbrake;
   let [s, c] = useState(!1);
@@ -247,7 +247,7 @@ export function $$ea0() {
       closeMenu: () => c(!1)
     }),
     additionalOptionOnChange: () => {
-      Lf($$J1) || _$$Ay.unsafeRedirect($$J1, "_blank");
+      sendUrlToParent($$J1) || customHistory.unsafeRedirect($$J1, "_blank");
     },
     additionalOptions: el,
     onChange: r,

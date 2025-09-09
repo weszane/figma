@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useLayoutEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { dP } from "../figma_app/119475";
 import { P } from "../905/347284";
 import { a3, Vm } from "../905/703676";

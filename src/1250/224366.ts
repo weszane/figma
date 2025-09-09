@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { HandoffBindingsCpp, Fullscreen } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { sf } from "../905/929976";

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useLayoutEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { sha1HexFromBytes } from "../905/125019";
 import { DesignGraphElements, ToolType, Fullscreen, NodePropertyCategory } from "../figma_app/763686";
@@ -8,7 +8,7 @@ import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/273
 import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { Uv } from "../figma_app/191804";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { GI, IZ, SK } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
@@ -231,7 +231,7 @@ let $$K0 = memo(function ({
           active: ef ? "LOUD" : "NONE",
           isNewSubmenu: !0,
           buttonStyle: eu,
-          recordingKey: r && Pt(r, "pencil-small-button"),
+          recordingKey: r && generateRecordingKey(r, "pencil-small-button"),
           tabIndex: -1
         })
       }), jsx("div", {
@@ -247,7 +247,7 @@ let $$K0 = memo(function ({
           active: eE ? "LOUD" : "NONE",
           isNewSubmenu: !0,
           buttonStyle: eu,
-          recordingKey: r && Pt(r, "pencil-large-button"),
+          recordingKey: r && generateRecordingKey(r, "pencil-large-button"),
           tabIndex: -1
         })
       })]
@@ -269,7 +269,7 @@ let $$K0 = memo(function ({
               Iw(t);
             },
             tooltip: _$$M(e),
-            recordingKey: r && Pt(r, `washi-tape-pattern.${e.name}`)
+            recordingKey: r && generateRecordingKey(r, `washi-tape-pattern.${e.name}`)
           }, e.name);
         })
       }), eT && jsxs(Fragment, {
@@ -302,7 +302,7 @@ let $$K0 = memo(function ({
             onMouseLeave: () => {
               en(!1);
             },
-            recordingKey: r && Pt(r, "washi-tape-pattern-upload"),
+            recordingKey: r && generateRecordingKey(r, "washi-tape-pattern-upload"),
             tabIndex: -1,
             children: !Q || ee || _$$B2.map(e => e.image).includes(Q) ? jsx(HL, {
               value: WW,
@@ -333,7 +333,7 @@ let $$K0 = memo(function ({
           showPopover: M,
           setShowPopover: K,
           alwaysUseCurrentColorInSwatch: !0,
-          recordingKey: r && Pt(r, "pencil-color-more")
+          recordingKey: r && generateRecordingKey(r, "pencil-color-more")
         }),
         color: ey || Uv,
         isOpen: ep && M,
@@ -348,7 +348,7 @@ let $$K0 = memo(function ({
             tool: DesignGraphElements[e]
           }
         },
-        recordingKey: r && Pt(r, "customColorPopover"),
+        recordingKey: r && generateRecordingKey(r, "customColorPopover"),
         alignment: "right"
       })
     }) : function () {
@@ -378,7 +378,7 @@ let $$K0 = memo(function ({
               paletteType: ex,
               background: "light",
               tooltip: s,
-              recordingKey: r && Pt(r, `pencil-color-${a}`)
+              recordingKey: r && generateRecordingKey(r, `pencil-color-${a}`)
             }, a + "-" + i);
           }), jsx(_$$s, {
             colorPalettePickerState: {
@@ -387,7 +387,7 @@ let $$K0 = memo(function ({
               isColorPalettePickerOpen: $
             },
             paletteType: ex,
-            recordingKey: Pt(r || "color-palettes", "pencil") || "pencil",
+            recordingKey: generateRecordingKey(r || "color-palettes", "pencil") || "pencil",
             disabled: eO,
             isInDltSubmenu: !0
           })]
@@ -400,7 +400,7 @@ let $$K0 = memo(function ({
               paletteType: ex,
               showPopover: M,
               setShowPopover: K,
-              recordingKey: r && Pt(r, "pencil-color-more")
+              recordingKey: r && generateRecordingKey(r, "pencil-color-more")
             }),
             color: t || Uv,
             isOpen: ep && M,
@@ -415,7 +415,7 @@ let $$K0 = memo(function ({
                 tool: DesignGraphElements[e]
               }
             },
-            recordingKey: r && Pt(r, "customColorPopover")
+            recordingKey: r && generateRecordingKey(r, "customColorPopover")
           })
         })]
       });

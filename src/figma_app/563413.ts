@@ -13,7 +13,7 @@ import { ZC } from "../figma_app/39751";
 import { M } from "../figma_app/648761";
 import { getInitialOptions } from "../figma_app/169182";
 import { Uz } from "../905/63728";
-import { AF, v_, rf, Pt } from "../figma_app/806412";
+import { useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { L as _$$L } from "../905/408237";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -69,11 +69,11 @@ export function $$P7(e, t) {
     e.onBlur && e.onBlur();
     d(!1);
   }, [e]);
-  let v = AF(e.recordingKey, "change", t => {
+  let v = useHandleChangeEvent(e.recordingKey, "change", t => {
     let r = t.target;
     e.onChange(r.value);
   });
-  let A = v_(e.recordingKey, "keydown", t => {
+  let A = useHandleKeyboardEvent(e.recordingKey, "keydown", t => {
     if (!(e.isKeyDownHandled && e.isKeyDownHandled(t))) {
       if (" " === t.key && t.stopPropagation(), t.keyCode === Uz.ESCAPE) {
         b.current?.blur();
@@ -87,13 +87,13 @@ export function $$P7(e, t) {
     r();
     onClick && onClick();
   }, [r, onClick]);
-  let C = rf(e.recordingKey, "click", t => {
+  let C = useHandleMouseEvent(e.recordingKey, "click", t => {
     t.stopPropagation();
     e.clearSearch();
     o(!1);
     r();
   });
-  let w = v_(e.recordingKey + ".clear", "keydown", t => {
+  let w = useHandleKeyboardEvent(e.recordingKey + ".clear", "keydown", t => {
     t.stopPropagation();
     e.clearSearch();
     o(!1);
@@ -424,7 +424,7 @@ let $$B2 = forwardRef((e, t) => {
       hideXIcon: e.hideXIcon,
       query: e.query,
       onClearSearchClick,
-      recordingKey: Pt(e, "closeX")
+      recordingKey: generateRecordingKey(e, "closeX")
     })]
   });
 });
@@ -466,7 +466,7 @@ let $$G5 = forwardRef((e, t) => {
       hideXIcon: e.hideXIcon,
       query: e.query,
       onClearSearchClick,
-      recordingKey: Pt(e, "clearSearch")
+      recordingKey: generateRecordingKey(e, "clearSearch")
     })]
   });
 });

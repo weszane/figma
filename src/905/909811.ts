@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component, PureComponent } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { getSingletonSceneGraph } from "../905/700578";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
@@ -8,7 +8,7 @@ import { DV } from "../figma_app/930338";
 import { o as _$$o } from "../905/605383";
 import { j7 } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { Gj } from "../figma_app/646357";
 import { FEditorType } from "../figma_app/53721";
 import { PW } from "../figma_app/633080";
@@ -169,7 +169,7 @@ export function $$D1(e) {
         }
       }
     }));
-    e.sceneGraphSelection && e.sceneGraph && !sp(e.sceneGraph, e.sceneGraphSelection, t.node_id) && (wr(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(t.node_id), Dh([t.node_id]), fullscreenValue.commit());
+    e.sceneGraphSelection && e.sceneGraph && !sp(e.sceneGraph, e.sceneGraphSelection, t.node_id) && (clearSelection(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(t.node_id), addToSelection([t.node_id]), fullscreenValue.commit());
   };
   let d = null;
   let v = !1;

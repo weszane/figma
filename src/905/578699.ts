@@ -1,165 +1,306 @@
-import { D } from "../905/644409";
-import { oneLine } from "../vendor/619199";
-import { findItemByName } from "../905/957591";
-import { validateAndParseArgument } from "../905/119577";
-import { CustomError } from "../905/962682";
-import { validateUniqueArgumentNames } from "../905/690753";
-class n {
-  name;
-  values;
-  annotations;
-  constructor(e) {
-    this.name = e.name;
-    this.values = e.values;
-    this.annotations = e.annotations;
+import { oneLine } from 'common-tags'
+import { validateAndParseArgument } from '../905/119577'
+import { ObjectTypeDefinition } from '../905/644409'
+import { validateUniqueArgumentNames } from '../905/690753'
+import { findItemByName } from '../905/957591'
+import { CustomError } from '../905/962682'
+
+/**
+ * Represents an Enum definition.
+ * Original class name: n
+ */
+export class EnumDefinition {
+  name: string
+  values: any[]
+  annotations: any
+
+  constructor(enumDef: { name: string; values: any[]; annotations: any }) {
+    this.name = enumDef.name
+    this.values = enumDef.values
+    this.annotations = enumDef.annotations
   }
-  isValidValue(e) {
-    return this.values.some(t => "string" == typeof t ? e === t : e === t[1]);
+
+  /**
+   * Checks if the provided value is valid for this enum.
+   * Original method: isValidValue
+   */
+  isValidValue(value: any): boolean {
+    return this.values.some(v => typeof v === 'string' ? value === v : value === v[1])
   }
-  validate(e) {}
+
+  /**
+   * Validates the enum definition.
+   * Original method: validate
+   */
+  validate(_schema: any): void {
+    // No-op for now
+  }
 }
-class c {
-  args;
-  constructor(e) {
-    this.args = e && e.args || [{
-      name: "userId",
-      type: {
-        kind: "string"
-      },
-      nullable: !0
-    }];
-    this.args.find(e => "sessionId" === e.name) || this.args.push({
-      name: "sessionId",
-      type: {
-        kind: "string"
-      },
-      nullable: !0
-    });
-    this.args.find(e => "anonymousUserId" === e.name) || this.args.push({
-      name: "anonymousUserId",
-      type: {
-        kind: "string"
-      },
-      nullable: !0
-    });
-    validateUniqueArgumentNames("Session definition ", this.args);
-    this.validateUserIdArgument(this.args);
+
+/**
+ * Represents a Session definition.
+ * Original class name: c
+ */
+export class SessionDefinition {
+  args: any[]
+
+  constructor(sessionDef?: { args?: any[] }) {
+    this.args = sessionDef?.args || [{
+      name: 'userId',
+      type: { kind: 'string' },
+      nullable: true,
+    }]
+    if (!this.args.find(arg => arg.name === 'sessionId')) {
+      this.args.push({
+        name: 'sessionId',
+        type: { kind: 'string' },
+        nullable: true,
+      })
+    }
+    if (!this.args.find(arg => arg.name === 'anonymousUserId')) {
+      this.args.push({
+        name: 'anonymousUserId',
+        type: { kind: 'string' },
+        nullable: true,
+      })
+    }
+    validateUniqueArgumentNames('Session definition ', this.args)
+    this.validateUserIdArgument(this.args)
   }
-  validateUserIdArgument(e) {
-    for (let t of e) if ("userId" === t.name) {
-      if (!["string", "bigint"].includes(t.type.kind)) throw new CustomError((0, oneLine)`
+
+  /**
+   * Validates the 'userId' argument type.
+   * Original method: validateUserIdArgument
+   */
+  validateUserIdArgument(args: any[]): void {
+    for (const arg of args) {
+      if (arg.name === 'userId') {
+        if (!['string', 'bigint'].includes(arg.type.kind)) {
+          throw new CustomError(oneLine`
             Session definition error: 'userId' arg must be of type 'string' or 'bigint'
-          `);
-      return;
+          `)
+        }
+        return
+      }
     }
-    throw new CustomError((0, oneLine)`
+    throw new CustomError(oneLine`
       Session definition error: 'userId' arg of type 'string' or 'bigint' is required
-    `);
+    `)
   }
-  parseAndValidateArguments(e, t) {
-    let i = {
+
+  /**
+   * Parses and validates session arguments.
+   * Original method: parseAndValidateArguments
+   */
+  parseAndValidateArguments(args: Record<string, any>, context: any): Record<string, any> {
+    const result = {
       userId: null,
-      sessionId: "",
-      anonymousUserId: null
-    };
-    for (let n in e) {
-      let r = findItemByName(this.args, n);
-      if (r) {
-        let s = validateAndParseArgument(t, r, e[n]);
-        if ("error" === s.type) throw new CustomError((0, oneLine)`
-            Session argument error: '${s.argName}' '${s.msg}'`);
-        i[n] = s.parsedValue;
-      } else throw new CustomError((0, oneLine)`
-          Session argument error: '${n}' is not a valid argument
-          name`);
+      sessionId: '',
+      anonymousUserId: null,
     }
-    for (let t of this.args) if (!(t.name in e)) throw new CustomError((0, oneLine)`
-          Session argument error: the argument '${t.name}' is missing`);
-    return i;
+    for (const key in args) {
+      const argDef = findItemByName(this.args, key)
+      if (argDef) {
+        const parsed = validateAndParseArgument(context, argDef, args[key])
+        if (parsed.type === 'error') {
+          throw new CustomError(oneLine`
+            Session argument error: '${parsed.argName}' '${parsed.msg}'`)
+        }
+        result[key] = parsed.parsedValue
+      } else {
+        throw new CustomError(oneLine`
+          Session argument error: '${key}' is not a valid argument
+          name`)
+      }
+    }
+    for (const arg of this.args) {
+      if (!(arg.name in args)) {
+        throw new CustomError(oneLine`
+          Session argument error: the argument '${arg.name}' is missing`)
+      }
+    }
+    return result
   }
 }
-class u {
-  typeConversionExemptions = {
+
+/**
+ * Handles legacy config and type conversion exemptions.
+ * Original class name: u
+ */
+export class LegacyConfigHandler {
+  typeConversionExemptions: Record<string, any> = {
     viewArg: {},
     filterArg: {},
-    computedFieldArg: {}
-  };
-  allowAllConversions;
-  constructor(e) {
-    this.populateTypeConversions(e);
-    this.allowAllConversions = e?.allowAllExemptions ?? !0;
+    computedFieldArg: {},
   }
-  populateTypeConversions(e) {
-    if (!e?.exemptions) return;
-    let t = JSON.parse(JSON.stringify(e?.exemptions));
-    for (let i of Object.keys(e?.exemptions)) for (let [n, r] of Object.entries(t[i])) for (let t of Object.keys(r)) r[t] = new Set(e.exemptions[i][n][t]);
-    this.typeConversionExemptions = t;
+  allowAllConversions: boolean
+
+  constructor(config?: { exemptions?: any; allowAllExemptions?: boolean }) {
+    this.populateTypeConversions(config)
+    this.allowAllConversions = config?.allowAllExemptions ?? true
   }
-  isTypeConversionExempted(e, t, i, n) {
+
+  /**
+   * Populates type conversion exemptions from config.
+   * Original method: populateTypeConversions
+   */
+  populateTypeConversions(config?: { exemptions?: any }): void {
+    if (!config?.exemptions) return
+    const exemptionsCopy = JSON.parse(JSON.stringify(config.exemptions))
+    for (const key of Object.keys(config.exemptions)) {
+      for (const [name, obj] of Object.entries(exemptionsCopy[key])) {
+        for (const field of Object.keys(obj)) {
+          obj[field] = new Set(config.exemptions[key][name][field])
+        }
+      }
+    }
+    this.typeConversionExemptions = exemptionsCopy
+  }
+
+  /**
+   * Checks if a type conversion is exempted.
+   * Original method: isTypeConversionExempted
+   */
+  isTypeConversionExempted(
+    exemptionType: string,
+    argType: string,
+    objectName: string,
+    fieldName: string
+  ): boolean {
     try {
-      return this.allowAllConversions || this.typeConversionExemptions[e][t][i].has(n);
-    } catch (e) {
-      return !1;
+      return this.allowAllConversions || this.typeConversionExemptions[exemptionType][argType][objectName].has(fieldName)
+    } catch {
+      return false
     }
   }
-  toJSON() {
+
+  /**
+   * Serializes the legacy config handler.
+   * Original method: toJSON
+   */
+  toJSON(): string {
     return JSON.stringify({
       typeConversionExemptions: this.typeConversionExemptions,
-      allowAllConversions: this.allowAllConversions
-    });
+      allowAllConversions: this.allowAllConversions,
+    })
   }
 }
-export class $$p0 {
-  constructor(e, t, i) {
-    for (let i of (this.schema = e, this.session = new c(e.session), this.legacyConfig = new u(e.legacyConfigDef), this._objectMapping = t, this.enums = new Map(), e.enums || [])) this.enums.set(i.name, new n(i));
-    for (let t of (this.objects = new Map(), e.objects)) this.objects.set(t.name, new D(t, i));
-    for (let t of e.objects) this.objects.get(t.name).constructComputedFields(t, this);
-    this.enums.forEach(e => e.validate(this));
-    this.objects.forEach(e => e.validate(this));
+
+/**
+ * Main schema handler.
+ * Original class name: $$p0
+ */
+export class SchemaHandler {
+  schema: any
+  enums: Map<string, EnumDefinition>
+  objects: Map<string, ObjectTypeDefinition>
+  session: SessionDefinition
+  legacyConfig: LegacyConfigHandler
+  computedObjectFields: Record<string, Array<{ parentName: string; fieldName: string }>> = {}
+  _objectMapping: any
+
+  constructor(schema: any, objectMapping: any, context: any) {
+    this.schema = schema
+    this.session = new SessionDefinition(schema.session)
+    this.legacyConfig = new LegacyConfigHandler(schema.legacyConfigDef)
+    this._objectMapping = objectMapping
+    this.enums = new Map()
+    for (const enumDef of schema.enums || []) {
+      this.enums.set(enumDef.name, new EnumDefinition(enumDef))
+    }
+    this.objects = new Map()
+    for (const objDef of schema.objects) {
+      this.objects.set(objDef.name, new ObjectTypeDefinition(objDef, context))
+    }
+    for (const objDef of schema.objects) {
+      this.objects.get(objDef.name)?.constructComputedFields(objDef, this)
+    }
+    this.enums.forEach(enumObj => enumObj.validate(this))
+    this.objects.forEach(obj => obj.validate(this))
   }
-  enums;
-  objects;
-  session;
-  legacyConfig;
-  computedObjectFields = {};
-  _objectMapping;
-  addComputedObject(e) {
-    if (!e.isComputedObject()) return;
-    let t = e.type.name;
-    this.computedObjectFields[t] || (this.computedObjectFields[t] = []);
-    this.computedObjectFields[t].push({
-      parentName: e.objectDef.name,
-      fieldName: e.name
-    });
+
+  /**
+   * Adds a computed object field.
+   * Original method: addComputedObject
+   */
+  addComputedObject(field: any): void {
+    if (!field.isComputedObject()) return
+    const typeName = field.type.name
+    if (!this.computedObjectFields[typeName]) {
+      this.computedObjectFields[typeName] = []
+    }
+    this.computedObjectFields[typeName].push({
+      parentName: field.objectDef.name,
+      fieldName: field.name,
+    })
   }
-  typeWithKind(e, t) {
-    let i = this[e].get(t);
-    if (i) return i;
-    throw new CustomError(`${e} with name '${t}' isn't present in schema`);
+
+  /**
+   * Gets type by kind and name.
+   * Original method: typeWithKind
+   */
+  typeWithKind(kind: 'enums' | 'objects', name: string): any {
+    const collection = this[kind].get(name)
+    if (collection) return collection
+    throw new CustomError(`${kind} with name '${name}' isn't present in schema`)
   }
-  enumDef({
-    name: e
-  }) {
-    return this.typeWithKind("enums", e);
+
+  /**
+   * Gets enum definition by name.
+   * Original method: enumDef
+   */
+  enumDef({ name }: { name: string }): EnumDefinition {
+    return this.typeWithKind('enums', name)
   }
-  objectDef({
-    name: e
-  }) {
-    return this.typeWithKind("objects", e);
+
+  /**
+   * Gets object definition by name.
+   * Original method: objectDef
+   */
+  objectDef({ name }: { name: string }): ObjectTypeDefinition {
+    return this.typeWithKind('objects', name)
   }
-  toJSON() {
-    return this.schema;
+
+  /**
+   * Serializes the schema handler.
+   * Original method: toJSON
+   */
+  toJSON(): any {
+    return this.schema
   }
-  fieldType(e, t) {
-    if (!this.objects.has(e)) return;
-    let i = this.objects.get(e);
-    if (i.fields.has(t)) return i.fields.get(t).type;
+
+  /**
+   * Gets the field type for an object.
+   * Original method: fieldType
+   */
+  fieldType(objectName: string, fieldName: string): any {
+    if (!this.objects.has(objectName)) return
+    const obj = this.objects.get(objectName)
+    if (obj?.fields.has(fieldName)) {
+      return obj.fields.get(fieldName).type
+    }
   }
-  dsl() {
-    return this.schema;
+
+  /**
+   * Gets the DSL schema.
+   * Original method: dsl
+   */
+  dsl(): any {
+    return this.schema
   }
-  get objectMapping() {
-    return this._objectMapping;
+
+  /**
+   * Gets the object mapping.
+   * Original getter: objectMapping
+   */
+  get objectMapping(): any {
+    return this._objectMapping
   }
 }
-export const S = $$p0;
+
+// Refactored exports
+export const S = SchemaHandler
+// export const YJ = SchemaHandler
+// export const EnumDef = EnumDefinition
+// export const SessionDef = SessionDefinition
+// export const LegacyConfig = LegacyConfigHandler

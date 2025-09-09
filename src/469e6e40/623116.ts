@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { h as _$$h } from "../905/207101";
 import { r as _$$r } from "../905/520829";
 import { xj, ok } from "../figma_app/851625";
@@ -28,8 +28,8 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { Me, $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { p as _$$p } from "../905/597320";
@@ -51,7 +51,7 @@ import { Rs } from "../figma_app/288654";
 import { A as _$$A2 } from "../905/956262";
 import { dq } from "../905/845253";
 import { FOrganizationRoleType, FAccessLevelType, FPermissionLevelType } from "../figma_app/191312";
-import { LPq, z$o, kC9 } from "../figma_app/43951";
+import { WorkspaceAdminOnboardingOverlayView, AddUnassignedTeamsModalView, WorkspaceDefaultTeamsView } from "../figma_app/43951";
 import { U as _$$U } from "../905/455766";
 import { b as _$$b } from "../905/168239";
 import { R4, uU, gx, G5, b4 } from "../figma_app/481749";
@@ -164,7 +164,7 @@ let ed = r1(eo);
 var ec = (e => (e.AddTeamsToWorkspace = "AddTeamsToWorkspace", e.CheckUnassignedTeams = "CheckUnassignedTeams", e))(ec || {});
 function e_() {
   let e = dq();
-  let t = Rs(LPq({
+  let t = Rs(WorkspaceAdminOnboardingOverlayView({
     orgId: e
   }));
   let a = useAtomWithSubscription(ed);
@@ -309,7 +309,7 @@ let eV = registerModal(function ({
     selectedAll: N,
     isUnassignedTeamsModal: !0
   });
-  let L = Rs(z$o, {
+  let L = Rs(AddUnassignedTeamsModalView, {
     workspaceId: e
   });
   let P = L.data ? oA(L.data.workspace) : null;
@@ -602,7 +602,7 @@ function e7(e, t, a, n) {
     },
     onRevokeTeamTransferRequest: e => {
       t && t.get(e) && XHR.del(`/api/asset_transfer/${t.get(e)?.asset_transfer_request_id}`).then(() => n(e), () => {
-        s(_$$F.enqueue({
+        s(VisualBellActions.enqueue({
           message: getI18nString("asset_transfers.error_message.something_went_wrong_check_your_connection"),
           error: !0
         }));
@@ -1136,7 +1136,7 @@ let tN = registerModal(function (e) {
     status: "loaded",
     data: tu()(l.data, e => e.id)
   }, [l]);
-  let d = Rs(kC9, {
+  let d = Rs(WorkspaceDefaultTeamsView, {
     workspaceId
   });
   let c = d?.data?.workspace;
@@ -1320,7 +1320,7 @@ function tL(e) {
   }, [org.id]);
   let ec = e => {
     eo(t => new Map(t.set(e, null)));
-    en(_$$F.enqueue({
+    en(VisualBellActions.enqueue({
       message: getI18nString("asset_transfers.revoke.transfer_revoked")
     }));
   };
@@ -1390,24 +1390,24 @@ function tL(e) {
   let e4 = () => {
     if (Q) return;
     Z(!0);
-    en(_$$F.enqueue({
+    en(VisualBellActions.enqueue({
       message: getI18nString("teams_table.csv_export.preparing_request"),
       type: "orgTeam.exportCSV",
-      icon: zX.SPINNER
+      icon: VisualBellIcon.SPINNER
     }));
     let t = eY ? `/api/workspace/${eY}/export_teams` : `/api/orgs/${e.org.id}/export_teams`;
     XHR.post(t).then(() => {
-      en(_$$F.enqueue({
+      en(VisualBellActions.enqueue({
         message: getI18nString("teams_table.csv_export.generating"),
         type: "orgTeam.exportCSV",
-        icon: zX.CHECK
+        icon: VisualBellIcon.CHECK
       }));
       Z(!1);
     }, () => {
-      en(_$$F.enqueue({
+      en(VisualBellActions.enqueue({
         message: getI18nString("teams_table.csv_export.error"),
         type: "orgTeam.exportCSV",
-        icon: zX.EXCLAMATION,
+        icon: VisualBellIcon.EXCLAMATION,
         error: !0
       }));
       Z(!1);

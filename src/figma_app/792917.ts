@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";

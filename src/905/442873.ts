@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { dI, sH } from "../905/537777";
 import { sA, t9, Fw } from "../905/711212";
 import { Eo } from "../figma_app/80990";

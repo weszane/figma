@@ -3,7 +3,7 @@ import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { ce } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { S as _$$S } from "../905/539306";
 import { sf } from "../905/929976";
 import { uM } from "../905/738636";
@@ -53,7 +53,7 @@ let $$N6 = createOptimistThunk(e => {
     entryPoint: "desktop_new_tab",
     previousView: t.selectedView && (QB(t.selectedView) || bN(t.selectedView)) ? t.selectedView : void 0
   });
-  Ay.redirect(n);
+  customHistory.redirect(n);
 });
 let $$C8 = NC("DESKTOP_NEW_TAB_SET_LOADING_BACKGROUND_COLOR");
 let $$w7 = NC("DESKTOP_NEW_TAB_SET_IS_SEARCH_BAR_FOCUSED");

@@ -1,9 +1,9 @@
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
 import { Rs } from "../figma_app/288654";
-import { InN } from "../figma_app/43951";
+import { DtmMigrationInfo } from "../figma_app/43951";
 export function $$s0(e) {
-  let t = Rs(InN, {}, {
+  let t = Rs(DtmMigrationInfo, {}, {
     enabled: getFeatureFlags().dtm_deprecation_post_migration_onboarding
   });
   if (!e || !getFeatureFlags().dtm_deprecation_post_migration_onboarding) return {

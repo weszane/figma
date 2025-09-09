@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
@@ -17,7 +17,7 @@ import { b as _$$b } from "../905/985254";
 import { z } from "../905/373223";
 import { uE } from "../figma_app/314264";
 import { HE, O_ } from "../905/967587";
-import { InN, sMZ } from "../figma_app/43951";
+import { DtmMigrationInfo, UserFlagByName } from "../figma_app/43951";
 import { nx } from "../figma_app/12796";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { X } from "../905/698965";
@@ -32,13 +32,13 @@ export function $$A1({
   let n = useSelector(e => e.plans);
   let a = useSelector(e => getPermissionsStateMemoized(e));
   let d = z();
-  let g = Rs(InN, {}, {
+  let g = Rs(DtmMigrationInfo, {}, {
     enabled: getFeatureFlags().dtm_deprecation_post_migration_onboarding
   });
   let b = oA(g.data?.personalDraftToPlanDraftLocation);
   let w = oA(b?.toDraftsFolder?.team?.trackTags)?.is_auto_created_for_dtm_migration ?? !1;
   let I = b?.status === "complete";
-  let A = Rs(sMZ({
+  let A = Rs(UserFlagByName({
     name: "seen_dtm_post_migration_badge"
   }));
   let N = !!A?.data?.currentUser?.userFlagByName;

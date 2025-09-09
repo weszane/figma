@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance, bellFeedAPIInstance } from "../figma_app/876459";
 import { k0, RM } from "../figma_app/623293";
-import { Ay, af, Cs } from "../905/612521";
+import { customHistory, isMakeRoute, isMainAppRoute } from "../905/612521";
 import { isFigmaMobileApp, isAndroidUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { logWarning } from "../905/714362";
@@ -153,12 +153,12 @@ export function $$P3(e) {
   return {};
 }
 export function $$D6() {
-  let e = Ay.location.pathname;
+  let e = customHistory.location.pathname;
   for (let t of ["/c", "/community", "/@", "/user", "/org", "/team"]) if (e.startsWith(t)) return !0;
   return !1;
 }
 export function $$k0() {
-  return !/Mobi/.test(navigator.userAgent) || /iPad/.test(navigator.userAgent) || /Macintosh/.test(navigator.userAgent) || af() && !!getFeatureFlags().load_fullscreen_make_mobile_web;
+  return !/Mobi/.test(navigator.userAgent) || /iPad/.test(navigator.userAgent) || /Macintosh/.test(navigator.userAgent) || isMakeRoute() && !!getFeatureFlags().load_fullscreen_make_mobile_web;
 }
 export function $$M1(e = "fullscreen-app") {
   return L(e).then(() => {});
@@ -168,7 +168,7 @@ function j(e) {
   return "/preload-editor" === e || "/preload-android-proto" === e || e.startsWith("/mobile-preload");
 }
 export function $$U5() {
-  return j(F) && isFigmaMobileApp() && isAndroidUA || Sh(F) || desktopAPIInstance && desktopAPIInstance.isFileBrowserTab() || bellFeedAPIInstance || $$D6() || j(Ay.location.pathname) && !desktopAPIInstance ? "never" : !getFeatureFlags().preload_fullscreen_on_load || "complete" === document.readyState || Cs() ? "immediately" : "eventually";
+  return j(F) && isFigmaMobileApp() && isAndroidUA || Sh(F) || desktopAPIInstance && desktopAPIInstance.isFileBrowserTab() || bellFeedAPIInstance || $$D6() || j(customHistory.location.pathname) && !desktopAPIInstance ? "never" : !getFeatureFlags().preload_fullscreen_on_load || "complete" === document.readyState || isMainAppRoute() ? "immediately" : "eventually";
 }
 export function $$B2() {
   function e() {
@@ -191,7 +191,7 @@ export async function $$H4(e, t = "fullscreen-app") {
     return S(e, t);
   }
   try {
-    G && G !== e && (await Ay.reloadAndWaitForever("tsApisForCpp changed", {
+    G && G !== e && (await customHistory.reloadAndWaitForever("tsApisForCpp changed", {
       from: UserAppType[G.CommonApp().appType()],
       to: UserAppType[e.CommonApp().appType()]
     }));

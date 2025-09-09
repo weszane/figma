@@ -4,7 +4,7 @@ import { oA } from "../905/663269";
 import { p } from "../figma_app/288654";
 import { _R } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
-import { XRI } from "../figma_app/43951";
+import { FileTilePermissions } from "../figma_app/43951";
 let c = e => (t, i) => i ? t.filter(t => {
   let n = i[t];
   return !!n?.[e];
@@ -20,7 +20,7 @@ export function $$A1(e, t = !0) {
   let i = useMemo(() => e.map(e => ({
     fileKey: e
   })), [e]);
-  let c = p(XRI, i, {
+  let c = p(FileTilePermissions, i, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(c.map(e => e.result)).transform(e => {

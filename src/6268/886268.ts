@@ -25,7 +25,7 @@ import { S as _$$S } from "../905/711470";
 import { Ib } from "../905/129884";
 import { Bt, xV, kZ } from "../figma_app/88239";
 import { bh } from "../1250/224366";
-import { iAs } from "../figma_app/43951";
+import { LibraryKeyToFileLink } from "../figma_app/43951";
 import { e6 as _$$e } from "../figma_app/707808";
 import { k1, qd, Mj } from "../1250/428971";
 import { d as _$$d } from "../905/976845";
@@ -51,7 +51,7 @@ import { W as _$$W } from "../905/569454";
 import { M as _$$M } from "../1250/358700";
 import { N as _$$N } from "../905/865305";
 import { hC } from "../figma_app/901889";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { mc as _$$mc, fP } from "../905/691059";
 import { N as _$$N2 } from "../905/438674";
 import { e as _$$e2 } from "../905/295932";
@@ -79,7 +79,7 @@ import { l as _$$l2 } from "../1250/511088";
 import { showModalHandler } from "../905/156213";
 import { DP } from "../905/640017";
 import { trackEventAnalytics } from "../905/449184";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { D6 } from "../figma_app/465071";
 import { codeSuggestionAPIHandler } from "../905/70843";
 import { WG } from "../1250/218868";
@@ -1212,13 +1212,13 @@ let np = registerModal(function (e) {
           planParentType: _,
           planParentId: m
         });
-        c(_$$F.enqueue({
+        c(VisualBellActions.enqueue({
           type: "success",
           message: getI18nString("dev_handoff.codebase_suggestions.deletion_request_received_it_may_take_a_few_minutes_to_complete")
         }));
         e.onClose();
       } catch (e) {
-        c(_$$F.enqueue({
+        c(VisualBellActions.enqueue({
           type: "error",
           message: getI18nString("dev_handoff.codebase_suggestions.failed_to_submit_deletion_request_please_try_again_later")
         }));
@@ -1924,7 +1924,7 @@ function nM({
   });
 }
 export function $$nD1(e) {
-  let n = Rs(iAs({
+  let n = Rs(LibraryKeyToFileLink({
     libraryKey: e ?? ""
   }), {
     enabled: !!e

@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Us, M7 } from "../figma_app/637027";
@@ -11,7 +11,7 @@ import { E9 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { _6 } from "../figma_app/386952";
-import { bel } from "../figma_app/43951";
+import { TeamFileCountsByTeamId } from "../figma_app/43951";
 import { WW, Wf } from "../figma_app/345997";
 import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
@@ -24,7 +24,7 @@ export let $$w0 = registerModal(function (e) {
   let n = useDispatch();
   let b = _6();
   let w = useSelector(e => e.folders);
-  let T = Rs(bel, {
+  let T = Rs(TeamFileCountsByTeamId, {
     teamId
   });
   let j = E9();

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { A } from "../vendor/737188";
 import { s as _$$s } from "../cssbuilder/589278";
 import { RK } from "../figma_app/815170";

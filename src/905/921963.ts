@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Xr } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -123,7 +123,7 @@ export function $$N0(e) {
           newOwnerName: e.role.user.handle,
           onConfirmTransfer: r
         }
-      }));else if (a && s && l && e.isStarterTier) {
+      })); else if (a && s && l && e.isStarterTier) {
         let i = Zm(e.role, N);
         i?.endsWith(getInitialOptions().figma_email_suffix) ? r() : p ? _$$h(a, e.repo || null, t, {
           handlesVisualBell: !0,

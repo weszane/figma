@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
 import { Uz } from "../905/63728";

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { setupAutofocusHandler } from "../905/128376";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";

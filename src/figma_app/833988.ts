@@ -4,7 +4,7 @@ import { analyticsEventManager } from "../905/449184";
 import { isGovCluster } from "../figma_app/169182";
 import { zN } from "../figma_app/579169";
 import { tS } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 let c = ["dev", "done", "eng", "experiment", "not final", "final", "finalized", "hand off", "handoff", "implementation", "launch", "m1", "m2", "m3", "m4", "milestone", "mvp", "proposal", "qa", "ready", "ship", "spec", "\u2611\uFE0F", "\u2705", "\u2714\uFE0F", "\u2747\uFE0F", "\u2B50\uFE0F", "\u{1F3C1}", "\u{1F49A}", "\u{1F4CC}", "\u{1F680}", "\u{1F6A2} ", "\u{1F7E2}", "\u{1F7E9}", "\u{1F9EA}"];
 export function $$u1(e) {
   let t = (e || "").toLowerCase();
@@ -13,7 +13,7 @@ export function $$u1(e) {
   return [...r];
 }
 export function $$p0() {
-  let e = iZ();
+  let e = selectCurrentUser();
   let t = tS();
   let r = useAtomWithSubscription(zN);
   let c = "loaded" !== r.status || !0 === r.data || isGovCluster();

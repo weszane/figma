@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { Up, GZ, dR } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { XHR } from "../905/910117";
@@ -122,7 +122,7 @@ export async function $$v6(e, t) {
   return !1;
 }
 export function $$I5() {
-  $$E8() && Ay.redirect("/settings#fonts");
+  $$E8() && customHistory.redirect("/settings#fonts");
 }
 export function $$E8() {
   return !!_() && !desktopAPIInstance && !_$$m;

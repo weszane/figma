@@ -1,5 +1,5 @@
 import { z, Ip } from "../905/239603";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { createMetaValidator } from "../figma_app/181241";
 import { WU } from "../figma_app/35887";
 let o = z.object({
@@ -30,7 +30,7 @@ let $$l0 = new class {
     this.FileMetadataSchemaValidator = createMetaValidator("FileMetadataSchemaValidator", o, null, !1);
   }
   getFileMetadata(e) {
-    let t = new URLSearchParams(Ay.location.search);
+    let t = new URLSearchParams(customHistory.location.search);
     let i = new URLSearchParams();
     let n = t.get("force-incremental") || "";
     "" !== n && i.append("force-incremental", n);

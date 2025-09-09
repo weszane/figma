@@ -1,6 +1,6 @@
 import { trackEventAnalytics } from '../905/449184';
 import { FJ } from '../905/508367';
-import { Ay } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { logDebug, logError } from '../905/714362';
 import { createDeferredPromise } from '../905/874553';
 import { getInitialOptions } from '../figma_app/169182';
@@ -249,7 +249,7 @@ export class WAFManager {
   attachRefreshButtonHandler() {
     const button = document.getElementById('WAF-refresh-button');
     button?.addEventListener('click', () => {
-      Ay.reload('WAF');
+      customHistory.reload('WAF');
     });
   }
 

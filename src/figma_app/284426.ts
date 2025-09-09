@@ -5,7 +5,7 @@ import { HiddenLabel } from "../905/270045";
 import { ColorFormatEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { l6, c$ as _$$c$ } from "../905/794875";
 import { NC, DW, O4, Hi, jS } from "../905/698732";
@@ -48,23 +48,23 @@ function f({
     neverConstrain: !!s?.current,
     onChange: a,
     property: r,
-    recordingKey: Pt(l, "colorFormatSelect"),
+    recordingKey: generateRecordingKey(l, "colorFormatSelect"),
     targetDomNode: s?.current,
     children: [jsx(_$$c$, {
       value: ColorFormatEnum.HEX,
-      recordingKey: Pt(l, "hexOption")
+      recordingKey: generateRecordingKey(l, "hexOption")
     }), jsx(_$$c$, {
       value: ColorFormatEnum.RGB,
-      recordingKey: Pt(l, "rgbOption")
+      recordingKey: generateRecordingKey(l, "rgbOption")
     }), jsx(_$$c$, {
       value: ColorFormatEnum.CSS,
-      recordingKey: Pt(l, "cssOption")
+      recordingKey: generateRecordingKey(l, "cssOption")
     }), jsx(_$$c$, {
       value: ColorFormatEnum.HSL,
-      recordingKey: Pt(l, "hslOption")
+      recordingKey: generateRecordingKey(l, "hslOption")
     }), jsx(_$$c$, {
       value: ColorFormatEnum.HSB,
-      recordingKey: Pt(l, "hsvOption")
+      recordingKey: generateRecordingKey(l, "hsvOption")
     })]
   });
 }
@@ -82,7 +82,7 @@ function E({
     children: jsxs(bL, {
       value: String(e),
       onChange: e => t(Number(e)),
-      recordingKey: Pt(i, "colorFormatSelect"),
+      recordingKey: generateRecordingKey(i, "colorFormatSelect"),
       children: [jsx(l9, {
         label: jsx(HiddenLabel, {
           children: $$m0.format(e)

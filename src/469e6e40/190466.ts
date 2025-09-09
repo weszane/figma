@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, useRef, useState, useEffect, Fragment as _$$Fragment, useCallback, forwardRef, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -58,7 +58,7 @@ import { Cu } from "../figma_app/314264";
 import { Gu } from "../905/513035";
 import { x as _$$x } from "../469e6e40/446220";
 import { mm, a3 } from "../figma_app/684446";
-import { BGY } from "../figma_app/43951";
+import { MemberFlyoutInfoView } from "../figma_app/43951";
 import { k_, XO, PR, w6 } from "../figma_app/609194";
 import { QS, bC, Ad } from "../figma_app/951233";
 import { n0 } from "../figma_app/345997";
@@ -1227,7 +1227,7 @@ export let $$e50 = {
         default:
           throwTypeError(e);
       }
-      let n = Rs(BGY, {
+      let n = Rs(MemberFlyoutInfoView, {
         ...t,
         planType: e.planType
       }).transform(t => {

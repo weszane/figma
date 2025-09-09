@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { B } from "../905/872019";
 import { _ as _$$_ } from "../905/862468";
@@ -12,7 +12,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { Tv } from "../figma_app/311375";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ay } from "../905/281495";
-import { aY, NT, tJ } from "../figma_app/741237";
+import { getPropertiesPanelTab, setPropertiesPanelTab, replaceSelection } from "../figma_app/741237";
 import { getObservableValue } from "../figma_app/84367";
 import { Zh } from "../figma_app/2590";
 import { Yh } from "../figma_app/357047";
@@ -52,12 +52,12 @@ function j() {
     close
   } = cq();
   let g = useRef(null);
-  let b = getObservableValue(aY(), DesignWorkspace.DESIGN);
+  let b = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   useEffect(() => {
-    state === qy.INITIAL && null === g.current && (g.current = b, NT(DesignWorkspace.PROTOTYPE));
+    state === qy.INITIAL && null === g.current && (g.current = b, setPropertiesPanelTab(DesignWorkspace.PROTOTYPE));
   }, [state, b]);
   useEffect(() => () => {
-    state === qy.INITIAL && null !== g.current && NT(g.current);
+    state === qy.INITIAL && null !== g.current && setPropertiesPanelTab(g.current);
   }, [state]);
   let T = Xr(d_);
   let C = Xr(pD);
@@ -71,7 +71,7 @@ function j() {
   let G = !onlyTopLevelNodesSelected;
   switch (useEffect(() => {
     if (state === qy.RUNNING && G) {
-      tJ(topLevelFrameIds);
+      replaceSelection(topLevelFrameIds);
       C(renderI18nText("magic_link.running_and_selecting_top_level_frames"));
       let e = setTimeout(() => {
         C(renderI18nText("magic_link.running"));

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { $n } from "../905/521428";
 import { Fullscreen } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { Zk } from "../figma_app/626177";
@@ -25,7 +25,7 @@ export function $$u0({
         onClick: () => {
           Fullscreen.upgradeToLatestVectorOperationVersion();
         },
-        recordingKey: Pt(e, "updateBoolean"),
+        recordingKey: generateRecordingKey(e, "updateBoolean"),
         children: u
       })
     })]

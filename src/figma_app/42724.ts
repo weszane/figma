@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { A } from "../905/920142";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -22,7 +22,7 @@ export function $$_1(e) {
     n(Ts({
       origin: i,
       formState: a,
-      redirectUrl: Ay.location.pathname
+      redirectUrl: customHistory.location.pathname
     }));
     n(showModalHandler({
       type: x,

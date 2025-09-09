@@ -1,12 +1,12 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback, cloneElement, Children } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { E as _$$E } from "../905/465157";
 import { VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { Q } from "../figma_app/67145";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { sT } from "../figma_app/740163";
@@ -82,7 +82,7 @@ export function $$L3(e) {
       isNotPencilTool: e.gridRight,
       inputRef: o,
       field: S || "STROKE_WEIGHT",
-      recordingKey: Pt(e, "strokeWeightInputWrapper"),
+      recordingKey: generateRecordingKey(e, "strokeWeightInputWrapper"),
       children: getFeatureFlags().ce_multi_border_weight_input ? jsx(ig, {
         bigNudgeAmount,
         className: c()(TL, {

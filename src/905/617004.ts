@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { l as _$$l } from "../905/152724";
 import { sf } from "../905/929976";
 import { Cu } from "../figma_app/314264";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Ro } from "../figma_app/805373";
 import { v_ } from "../figma_app/878651";
 import { W } from "../905/316655";
@@ -69,7 +69,7 @@ export function $$g1(e) {
     toggleFollowing,
     hideFollowButton
   } = e;
-  let p = iZ();
+  let p = selectCurrentUser();
   let g = useDispatch();
   return jsx("div", {
     className,

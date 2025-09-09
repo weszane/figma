@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -50,7 +50,7 @@ function L({
   let r = hS({
     preventUserClose: !0,
     open: !0,
-    onClose: () => {}
+    onClose: () => { }
   });
   let a = useCallback(() => {
     if (!t) {

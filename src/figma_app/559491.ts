@@ -9,7 +9,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { KH, nF } from "../figma_app/471982";
 import { Qi } from "../905/172918";
 import { AC } from "../figma_app/777551";
@@ -607,7 +607,7 @@ let $$ea2 = createOptimistThunk(async (e, t) => {
     let t = getI18nString("community.actions.could_not_publish_plugin_error", {
       error: _$$J(r, r.message)
     });
-    r instanceof qW ? MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message")) : r.message.includes("invalid word") || e.dispatch(F.enqueue({
+    r instanceof qW ? MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message")) : r.message.includes("invalid word") || e.dispatch(VisualBellActions.enqueue({
       message: t,
       error: !0
     }));
@@ -648,7 +648,7 @@ let $$es11 = createOptimistThunk(async (e, t) => {
     callback();
   } catch (r) {
     let t = _$$J(r, r.message);
-    r instanceof qW ? MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message")) : e.dispatch(F.enqueue({
+    r instanceof qW ? MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message")) : e.dispatch(VisualBellActions.enqueue({
       message: t,
       error: !0
     }));
@@ -692,7 +692,7 @@ let $$eo35 = createOptimistThunk(async (e, {
       src: "updatePublishedPluginRole"
     }));
   }).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.publishing.could_not_publish_plugin_error", {
         error: _$$J(t, t.data?.message)
       }),
@@ -740,7 +740,7 @@ let $$el10 = createOptimistThunk(async (e, t) => {
     }));
     t.onSuccess?.();
   }).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.publishing.could_not_publish_plugin_error", {
         error: _$$J(t, t.data?.message)
       }),
@@ -767,7 +767,7 @@ let $$ed17 = createOptimistThunk((e, {
       ...getResourceRoleInfo(t)
     });
   }).catch(r => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: xQ(t) ? getI18nString("community.actions.could_not_publish_widget_error", {
         error: _$$J(r, r.data?.message)
       }) : getI18nString("community.actions.could_not_publish_plugin_error", {
@@ -857,7 +857,7 @@ let $$eu34 = createOptimistThunk(async (e, t) => {
       metadata: E
     }));
   } catch (t) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: _$$J(t, t.message),
       error: !0
     }));

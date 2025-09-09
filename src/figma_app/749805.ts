@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import i from "../vendor/879378";
 import { GZ } from "../905/508367";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { P as _$$P } from "../905/724705";
 import { XHR } from "../905/910117";
@@ -47,14 +47,14 @@ function A(e, t, r, i, l, A) {
   };
   let M = () => !!A && A.getState().modalShown?.type === xn;
   let F = () => {
-    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (Pg(), U2.clear()), w) Ay.reload("idleSessionTimeout-embed");else if (O) {
+    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (Pg(), U2.clear()), w) customHistory.reload("idleSessionTimeout-embed");else if (O) {
       let {
         pathname,
         search
-      } = Ay.location;
+      } = customHistory.location;
       let r = `${pathname}${search}&integration_host=msft`;
       window.location.replace(r);
-    } else z4.getIsExtension() && getFeatureFlags().dt_dev_mode_vscode_idle_timeout ? $g() : Ay.redirect(`/idle_timeout?fuid=${e.id}&redirect_uri=${encodeURIComponent(window.location.href)}`);
+    } else z4.getIsExtension() && getFeatureFlags().dt_dev_mode_vscode_idle_timeout ? $g() : customHistory.redirect(`/idle_timeout?fuid=${e.id}&redirect_uri=${encodeURIComponent(window.location.href)}`);
   };
   let j = () => Math.floor(Date.now() / 1e3);
   S && v.forEach(e => {

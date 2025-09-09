@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useContext, useCallback, useId, useState, useEffect, useRef, createRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { bL, c$, RT } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { bL as _$$bL } from "../905/911410";
@@ -15,7 +15,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
 import { getFilteredFeatureFlags } from "../905/717445";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { Point } from "../905/736624";
 import { Vi, GI } from "../905/125333";
@@ -31,7 +31,7 @@ import { isInvalidValue, MIXED_MARKER, isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { ax } from "../figma_app/722362";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { $j, M4 } from "../figma_app/178475";
 import { u as _$$u } from "../figma_app/110635";
@@ -125,7 +125,7 @@ let N = new class {
   getDashRanges(e) {
     let t = [];
     let i = 0;
-    for (;;) {
+    for (; ;) {
       let n = e.slice(i).match(/[^ ,]+/);
       if (!n || void 0 === n.index) break;
       let r = i + n.index;
@@ -330,31 +330,31 @@ function ex(e) {
     config: Vb("gap", defaultStyleAtom),
     icon: jsx(_$$E, {}),
     valueType: ey.PERCENT,
-    recordingKey: Pt(e.recordingKey, "brush", "gap")
+    recordingKey: generateRecordingKey(e.recordingKey, "brush", "gap")
   });
   let a = jsx(eI, {
     config: Vb("wiggle", defaultStyleAtom),
     icon: jsx(_$$K, {}),
     valueType: ey.PERCENT,
-    recordingKey: Pt(e.recordingKey, "brush", "wiggle")
+    recordingKey: generateRecordingKey(e.recordingKey, "brush", "wiggle")
   });
   let s = jsx(eI, {
     config: Vb("sizeJitter", defaultStyleAtom),
     icon: jsx(_$$a2, {}),
     valueType: ey.PERCENT,
-    recordingKey: Pt(e.recordingKey, "brush", "sizeJitter")
+    recordingKey: generateRecordingKey(e.recordingKey, "brush", "sizeJitter")
   });
   let o = jsx(eI, {
     config: Vb("angularJitter", defaultStyleAtom),
     icon: jsx(_$$n, {}),
     valueType: ey.ANGLE,
-    recordingKey: Pt(e.recordingKey, "brush", "angularJitter")
+    recordingKey: generateRecordingKey(e.recordingKey, "brush", "angularJitter")
   });
   let l = jsx(eI, {
     config: Vb("rotation", defaultStyleAtom),
     icon: jsx(_$$a, {}),
     valueType: ey.ANGLE,
-    recordingKey: Pt(e.recordingKey, "brush", "rotation")
+    recordingKey: generateRecordingKey(e.recordingKey, "brush", "rotation")
   });
   return jsxs(Fragment, {
     children: [r, a, getFilteredFeatureFlags().ce_il_scatter_size_jitter && s, o, l, getFeatureFlags().ce_il_var_width_points && jsxs(Fragment, {
@@ -363,10 +363,10 @@ function ex(e) {
         label: getI18nString("fullscreen.properties_panel.width_profile.label"),
         input: jsx(D7, {
           source: "flyout",
-          recordingKey: Pt(e.recordingKey, "widthProfile")
+          recordingKey: generateRecordingKey(e.recordingKey, "widthProfile")
         }),
         icon: jsx(iI, {
-          recordingKey: Pt(e.recordingKey, "flipWidthProfile")
+          recordingKey: generateRecordingKey(e.recordingKey, "flipWidthProfile")
         })
       })]
     })]
@@ -392,14 +392,14 @@ function eS(e) {
       onChange: a,
       value: e.strokeBrushGuid ?? defaultSessionLocalID,
       brushInputClassName: "advanced_stroke--newBrushButton--sca9V",
-      recordingKey: Pt(e.recordingKey, "brushDropdownTrigger"),
+      recordingKey: generateRecordingKey(e.recordingKey, "brushDropdownTrigger"),
       positioningProps: e.positioningProps
     }), e.brushType === DistributionType.STRETCH && jsx(ew, {
       defaultStyleAtom: e.defaultStyleAtom,
-      recordingKey: Pt(e.recordingKey, "stretchBrushSettings")
+      recordingKey: generateRecordingKey(e.recordingKey, "stretchBrushSettings")
     }), e.brushType === DistributionType.SCATTER && jsx(ex, {
       defaultStyleAtom: e.defaultStyleAtom,
-      recordingKey: Pt(e.recordingKey, "scatterBrushSettings")
+      recordingKey: generateRecordingKey(e.recordingKey, "scatterBrushSettings")
     })]
   });
 }
@@ -435,10 +435,10 @@ function ew(e) {
         label: getI18nString("fullscreen.properties_panel.width_profile.label"),
         input: jsx(D7, {
           source: "flyout",
-          recordingKey: Pt(e.recordingKey, "widthProfile")
+          recordingKey: generateRecordingKey(e.recordingKey, "widthProfile")
         }),
         icon: jsx(iI, {
-          recordingKey: Pt(e.recordingKey, "flipWidthProfile")
+          recordingKey: generateRecordingKey(e.recordingKey, "flipWidthProfile")
         })
       })]
     })]
@@ -459,19 +459,19 @@ function eN(e) {
       transformType: ir.QUADRATIC,
       icon: jsx(_$$Y, {}),
       valueType: ey.PERCENT,
-      recordingKey: Pt(e, "frequency")
+      recordingKey: generateRecordingKey(e, "frequency")
     }), jsx(eI, {
       config: _$$i2("wiggle", e.defaultStyleAtom),
       transformType: ir.QUADRATIC,
       icon: jsx(_$$K, {}),
       valueType: ey.PERCENT,
-      recordingKey: Pt(e, "wiggle")
+      recordingKey: generateRecordingKey(e, "wiggle")
     }), jsx(eI, {
       config: _$$i2("smoothen", e.defaultStyleAtom),
       transformType: ir.QUADRATIC,
       icon: jsx(_$$k2, {}),
       valueType: ey.PERCENT,
-      recordingKey: Pt(e, "smoothen")
+      recordingKey: generateRecordingKey(e, "smoothen")
     }), (o || strokePanelTerminalPointCount > 0) && jsxs(Fragment, {
       children: [jsx(e_, {}), jsx(_$$x, {
         onChange,
@@ -479,7 +479,7 @@ function eN(e) {
         dropdownShown: s,
         strokePanelTerminalPointCount: e.strokePanelTerminalPointCount,
         disabled: e.endPointSettingsDisabled,
-        recordingKey: Pt(e.recordingKey, "endPoint"),
+        recordingKey: generateRecordingKey(e.recordingKey, "endPoint"),
         strokePanelMode
       })]
     })]
@@ -577,7 +577,7 @@ function eV(e) {
     legend: jsx(_$$q, {
       children: getI18nString("fullscreen.properties_panel.stroke_settings.path_style")
     }),
-    recordingKey: Pt(e, "pathStyle"),
+    recordingKey: generateRecordingKey(e, "pathStyle"),
     children: [jsx(c$, {
       icon: jsx(_$$h, {}),
       value: "STRAIGHT",
@@ -608,7 +608,7 @@ function eV(e) {
     }(b),
     iconClassName: W ? "stroke_settings--lineStyleSvgDisabled--yc1q6" : "stroke_settings--lineStyleSvg--dSwnh stroke_settings--lineStyleSvgDisabled--yc1q6",
     id: "line-style-select",
-    onChange: (t, i = zk.YES) => {
+    onChange: (t, i = yesNoTrackingEnum.YES) => {
       D.current = "FOCUS_NEXT_EVENT";
       let n = 2 * (maxStrokeWeight ?? 1);
       switch (t) {
@@ -634,11 +634,11 @@ function eV(e) {
       C(e);
     },
     property: b,
-    recordingKey: Pt(e, "strokeStyle"),
+    recordingKey: generateRecordingKey(e, "strokeStyle"),
     children: [jsx(ej, {
       additionalStylesClassName: eL,
       value: "LINE",
-      recordingKey: Pt(e, "LINE"),
+      recordingKey: generateRecordingKey(e, "LINE"),
       children: jsxs("span", {
         className: eL,
         children: [jsx(_$$t, {}), jsx(_$$o, {
@@ -647,7 +647,7 @@ function eV(e) {
       })
     }), jsx(ej, {
       value: "SIMPLE_DASH",
-      recordingKey: Pt(e, "SIMPLE_DASH"),
+      recordingKey: generateRecordingKey(e, "SIMPLE_DASH"),
       additionalStylesClassName: eL,
       children: jsxs("span", {
         className: eL,
@@ -657,7 +657,7 @@ function eV(e) {
       })
     }), jsx(sK, {}), jsx(ej, {
       value: "CUSTOM_DASH",
-      recordingKey: Pt(e, "CUSTOM_DASH")
+      recordingKey: generateRecordingKey(e, "CUSTOM_DASH")
     })]
   });
   let ee = jsx($j, {
@@ -670,7 +670,7 @@ function eV(e) {
     min: 0,
     onValueChange: t => {
       let i;
-      if (D.current = "NONE", !dashPattern || isInvalidValue(dashPattern) || 2 !== dashPattern.length) i = [t, t];else {
+      if (D.current = "NONE", !dashPattern || isInvalidValue(dashPattern) || 2 !== dashPattern.length) i = [t, t]; else {
         let e = dashPattern[0];
         let n = dashPattern[1];
         i = E && e === n ? [t, t] : [t, n];
@@ -679,7 +679,7 @@ function eV(e) {
         dashPattern: i
       });
     },
-    recordingKey: Pt(e, "dash"),
+    recordingKey: generateRecordingKey(e, "dash"),
     smallNudgeAmount: 1,
     tooltipForScreenReadersOnly: !0,
     value: eB(dashPattern)
@@ -705,7 +705,7 @@ function eV(e) {
       });
     },
     placeholder: void 0 !== R && isValidValue(R) && E && k === R ? String(parseFloat(R.toFixed(2))) : void 0,
-    recordingKey: Pt(e, "gap"),
+    recordingKey: generateRecordingKey(e, "gap"),
     smallNudgeAmount: 1,
     tooltipForScreenReadersOnly: !0,
     value: void 0 !== R && isValidValue(R) && E && k === R ? void 0 : R
@@ -720,7 +720,7 @@ function eV(e) {
       });
     },
     placeholder: getI18nString("fullscreen.properties_panel.stroke_settings.dash_gap"),
-    recordingKey: Pt(e, "dashes"),
+    recordingKey: generateRecordingKey(e, "dashes"),
     disabled: W
   });
   let en = jsx(_$$o3, {
@@ -730,13 +730,13 @@ function eV(e) {
         dashCap: t
       });
     },
-    recordingKey: Pt(e, "dashCap"),
+    recordingKey: generateRecordingKey(e, "dashCap"),
     label: getI18nString("fullscreen.properties_panel.stroke_settings.dash_cap"),
     kind: "dashCap"
   });
   let er = jsx(D7, {
     source: "flyout",
-    recordingKey: Pt(e.recordingKey, "widthProfile")
+    recordingKey: generateRecordingKey(e.recordingKey, "widthProfile")
   });
   return jsxs(Fragment, {
     children: [Z && void 0 !== connectorLineStyle && jsx(cS, {
@@ -771,7 +771,7 @@ function eV(e) {
       label: getI18nString("fullscreen.properties_panel.width_profile.label"),
       input: er,
       icon: jsx(iI, {
-        recordingKey: Pt(e.recordingKey, "flipWidthProfile")
+        recordingKey: generateRecordingKey(e.recordingKey, "flipWidthProfile")
       })
     })]
   });
@@ -804,7 +804,7 @@ function eG(e) {
             miterLimitAngle: t
           });
         },
-        recordingKey: Pt(e, "miterAngle"),
+        recordingKey: generateRecordingKey(e, "miterAngle"),
         tooltipForScreenReadersOnly: !0,
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.miter_angle"),
@@ -887,7 +887,7 @@ export function $$ez0(e) {
   let en = () => {
     let t = jsx(D7, {
       source: "flyout",
-      recordingKey: Pt(e.recordingKey, "widthProfile")
+      recordingKey: generateRecordingKey(e.recordingKey, "widthProfile")
     });
     return jsxs(Fragment, {
       children: [jsx(eV, {
@@ -897,7 +897,7 @@ export function $$ez0(e) {
         dropdownShown: e.dropdownShown,
         maxStrokeWeight: e.maxStrokeWeight,
         onChange: e.onChange,
-        recordingKey: Pt(e.recordingKey, "lineStyle"),
+        recordingKey: generateRecordingKey(e.recordingKey, "lineStyle"),
         strokeCap: e.strokeCap,
         strokePanelMode: e.strokePanelMode,
         strokePanelTerminalPointCount: e.strokePanelTerminalPointCount,
@@ -909,7 +909,7 @@ export function $$ez0(e) {
           dropdownShown: e.dropdownShown,
           strokePanelTerminalPointCount: e.strokePanelTerminalPointCount,
           disabled: et,
-          recordingKey: Pt(e.recordingKey, "endPoint"),
+          recordingKey: generateRecordingKey(e.recordingKey, "endPoint"),
           strokePanelMode
         }), jsx(e_, {})]
       }), X && jsx(eG, {
@@ -917,7 +917,7 @@ export function $$ez0(e) {
         strokeJoin: e.strokeJoin,
         miterLimitAngle: e.miterLimitAngle,
         disabled: !M,
-        recordingKey: Pt(e.recordingKey, "join"),
+        recordingKey: generateRecordingKey(e.recordingKey, "join"),
         showValueinDisabledStrokeJoin: U
       }), getFeatureFlags().ce_il_stroke_endcap_custom_sizing && getFeatureFlags().ce_il_var_width_points && jsxs(Fragment, {
         children: [jsx(e_, {}), jsx(ev, {
@@ -925,13 +925,13 @@ export function $$ez0(e) {
           label: getI18nString("fullscreen.properties_panel.width_profile.label"),
           input: t,
           icon: jsx(iI, {
-            recordingKey: Pt(e.recordingKey, "flipWidthProfile")
+            recordingKey: generateRecordingKey(e.recordingKey, "flipWidthProfile")
           })
         })]
       })]
     });
   };
-  let er = Pt(e, "modal");
+  let er = generateRecordingKey(e, "modal");
   let ea = getFilteredFeatureFlags().ce_il_strokes ? jsxs(_$$J, {
     children: [jsx("div", {
       className: "stroke_settings--segmentedControl--U-Xpx",
@@ -940,7 +940,7 @@ export function $$ez0(e) {
         legend: jsx(_$$q, {
           children: getI18nString("fullscreen.properties_panel.stroke_settings.stroke_type")
         }),
-        recordingKey: Pt(e, "strokeTypeControl"),
+        recordingKey: generateRecordingKey(e, "strokeTypeControl"),
         onChange: q,
         children: [jsx(RT, {
           value: "Basic",
@@ -973,7 +973,7 @@ export function $$ez0(e) {
       })
     }), jsxs(eE, {
       children: ["Basic" === e.strokeType && en(), "Brush" === e.strokeType && jsx(eS, {
-        recordingKey: Pt(e.recordingKey, "brushPicker"),
+        recordingKey: generateRecordingKey(e.recordingKey, "brushPicker"),
         onChange: e.onChange,
         strokeBrushGuid: e.strokeBrushGuid,
         brushType: e.brushType,
@@ -989,7 +989,7 @@ export function $$ez0(e) {
         strokePanelTerminalPointCount: e.strokePanelTerminalPointCount,
         endPointProperty: ei,
         onChange: e.onChange,
-        recordingKey: Pt(e.recordingKey, "dynamicStroke"),
+        recordingKey: generateRecordingKey(e.recordingKey, "dynamicStroke"),
         endPointSettingsDisabled: et,
         strokePanelMode,
         defaultStyleAtom: e.defaultStyleAtom ?? GI

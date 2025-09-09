@@ -1,5 +1,5 @@
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 export function $$r3(e, t) {
   if (!e) return;
   let i = t[e];

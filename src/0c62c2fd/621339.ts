@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { captureMessage } from "../905/11";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { yH } from "../figma_app/240735";

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { M } from "../figma_app/749682";
 import { NONE_SYMBOL } from "../905/992467";
 import { c$ } from "../figma_app/236327";

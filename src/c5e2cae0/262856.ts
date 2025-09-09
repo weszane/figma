@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import l from "classnames";
 import { WB } from "../905/761735";
 import { ks, tM, vd } from "../figma_app/637027";

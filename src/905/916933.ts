@@ -5,8 +5,8 @@ import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { fullscreenValue } from "../figma_app/455680";
 import { q } from "../905/807667";
 import { hasTextReviewCapability } from "../figma_app/300692";
@@ -58,7 +58,7 @@ export let $$S0 = _$$n(async (e, t, i) => {
     numUnloadedPages: n
   });
   let d = () => {
-    fullscreenValue.dispatch(F.dequeue({
+    fullscreenValue.dispatch(VisualBellActions.dequeue({
       matchType: "loading-pages-for-plugin"
     }));
   };
@@ -68,12 +68,12 @@ export let $$S0 = _$$n(async (e, t, i) => {
     atomStoreManager.set(nc, !0);
     y = e;
   });
-  e && manifestContainsWidget(e) && t?.widgetAction === "insert" && fullscreenValue.dispatch(F.dequeue({
+  e && manifestContainsWidget(e) && t?.widgetAction === "insert" && fullscreenValue.dispatch(VisualBellActions.dequeue({
     matchType: "plugins-status"
   }));
-  fullscreenValue.dispatch(F.enqueue({
+  fullscreenValue.dispatch(VisualBellActions.enqueue({
     message: a,
-    icon: zX.IMAGE_BACKED_SPINNER,
+    icon: VisualBellIcon.IMAGE_BACKED_SPINNER,
     type: "loading-pages-for-plugin",
     delay: 1e3,
     timeoutOverride: 1 / 0,

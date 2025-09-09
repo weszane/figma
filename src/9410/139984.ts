@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useCallback, useRef, useMemo, useState } from "react";
-import { useSelector, useDispatch, useStore } from "../vendor/514228";
+import { useSelector, useDispatch, useStore } from "react-redux";
 import { DesignGraphElements, Fullscreen, SchemaJoinStatus } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { uM } from "../905/738636";
@@ -23,7 +23,7 @@ import { wn, HQ, bn, Le, $2, mf, h0 } from "../figma_app/61403";
 import { W as _$$W, Y as _$$Y } from "../figma_app/467880";
 import { s as _$$s } from "../905/573154";
 import { E as _$$E } from "../905/453826";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Of, XC } from "../figma_app/631279";
 import { b as _$$b2 } from "../9410/881782";
 import { Mz } from "../vendor/925040";
@@ -524,7 +524,7 @@ export function $$eo1() {
   let P = useAtomWithSubscription(a8);
   let B = _$$f("has_cursor_bot_onboarding_v2");
   !function (e, t, i) {
-    let r = iZ();
+    let r = selectCurrentUser();
     let n = useDispatch();
     let s = _$$f("has_cursor_bot_onboarding_v2");
     let o = Cq({

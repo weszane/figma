@@ -1,381 +1,822 @@
-import { MIXED_MARKER } from '../905/216495';
-import { kiwiParserCodec } from '../905/294864';
-import { debugState } from '../905/407919';
-import { trackEventAnalytics } from '../905/449184';
-import { reactTimerGroup } from '../905/542194';
-import { getFeatureFlags } from '../905/601108';
-import { extractOriginalTextMap } from '../905/744769';
-import { getPropertyActions } from '../905/770460';
-import { defaultSessionLocalID, sessionLocalIDToString } from '../905/871411';
-import { debounce } from '../905/915765';
-import { w3, zk } from '../figma_app/198712';
-import { fullscreenValue } from '../figma_app/455680';
-import { debug } from '../figma_app/465776';
-import { SceneGraphHelpers, AppStateTsApi, Fullscreen, ScrollBehavior } from '../figma_app/763686';
-import { desktopAPIInstance } from '../figma_app/876459';
-export let $$E6 = sessionLocalIDToString(defaultSessionLocalID);
-export function $$y3(e) {
-  SceneGraphHelpers.addToSelection(e);
+import { MIXED_MARKER } from '../905/216495'
+import { kiwiParserCodec } from '../905/294864'
+import { debugState } from '../905/407919'
+import { trackEventAnalytics } from '../905/449184'
+import { reactTimerGroup } from '../905/542194'
+import { getFeatureFlags } from '../905/601108'
+import { extractOriginalTextMap } from '../905/744769'
+import { getPropertyActions } from '../905/770460'
+import { defaultSessionLocalID, sessionLocalIDToString } from '../905/871411'
+import { debounce } from '../905/915765'
+import { convertVariableDataToEntries, YesNoTrackingEnum } from '../figma_app/198712'
+import { fullscreenValue } from '../figma_app/455680'
+import { debug } from '../figma_app/465776'
+import { AppStateTsApi, Fullscreen, SceneGraphHelpers, ScrollBehavior } from '../figma_app/763686'
+import { desktopAPIInstance } from '../figma_app/876459'
+
+// Refactored selection and scene graph helpers with meaningful names and types
+
+/**
+ * The current session local ID as a string.
+ * (was $$E6)
+ */
+let currentSessionLocalIDString = sessionLocalIDToString(defaultSessionLocalID)
+
+/**
+ * Adds nodes to the current selection.
+ * (was $$y3)
+ */
+export function addToSelection(nodeIds: string[]) {
+  SceneGraphHelpers.addToSelection(nodeIds)
 }
-export function $$b2(e) {
-  SceneGraphHelpers.removeFromSelection(e);
+
+/**
+ * Removes nodes from the current selection.
+ * (was $$b2)
+ */
+export function removeFromSelection(nodeIds: string[]) {
+  SceneGraphHelpers.removeFromSelection(nodeIds)
 }
-export function $$T30(e, t = !0) {
-  SceneGraphHelpers.replaceSelection(e, t);
+
+/**
+ * Replaces the current selection with the given nodes.
+ * (was $$T30)
+ */
+export function replaceSelection(nodeIds: string[], keepSelection: boolean = true) {
+  SceneGraphHelpers.replaceSelection(nodeIds, keepSelection)
 }
-export function $$I33() {
-  SceneGraphHelpers.clearSelection();
+
+/**
+ * Clears the current selection.
+ * (was $$I33)
+ */
+export function clearSelection() {
+  SceneGraphHelpers.clearSelection()
 }
-export function $$S5(e, t) {
-  SceneGraphHelpers.selectNodesInRange(e, t);
+
+/**
+ * Selects nodes in a given range.
+ * (was $$S5)
+ */
+export function selectNodesInRange(startNodeId: string, endNodeId: string) {
+  SceneGraphHelpers.selectNodesInRange(startNodeId, endNodeId)
 }
-export function $$v13(e, t, r = ScrollBehavior.SCROLLS) {
-  SceneGraphHelpers.transferSelection(e, t, r);
+
+/**
+ * Transfers selection from one set of nodes to another.
+ * (was $$v13)
+ */
+export function transferSelection(fromNodeIds: string[], toNodeIds: string[], scrollBehavior: ScrollBehavior = ScrollBehavior.SCROLLS) {
+  SceneGraphHelpers.transferSelection(fromNodeIds, toNodeIds, scrollBehavior)
 }
-export function $$A25(e, t, r = ScrollBehavior.SCROLLS) {
-  SceneGraphHelpers.duplicateSelection(e, t, r);
+
+/**
+ * Duplicates the current selection.
+ * (was $$A25)
+ */
+export function duplicateSelection(nodeIds: string[], targetNodeIds: string[], scrollBehavior: ScrollBehavior = ScrollBehavior.SCROLLS) {
+  SceneGraphHelpers.duplicateSelection(nodeIds, targetNodeIds, scrollBehavior)
 }
-export function $$x23(e, t) {
-  let r = debugState?.getState().mirror.sceneGraph.get(e);
-  r && (getFeatureFlags().sts_code && (r.isCodeFile || r.isCodeInstance || r.isCodeComponent) || t && getFeatureFlags().slide_chapters && r.isCanvasGridRow ? r.setHasBeenManuallyRenamed(!0) : getFeatureFlags().slide_chapters && r.isCanvasGridRow && r.setHasBeenManuallyRenamed(!1), r.name = t);
+
+/**
+ * Renames a node and sets manual rename flags based on feature flags.
+ * (was $$x23)
+ */
+export function renameNode(nodeId: string, newName: string) {
+  let node = debugState?.getState().mirror.sceneGraph.get(nodeId)
+  if (node) {
+    if (getFeatureFlags().sts_code && (node.isCodeFile || node.isCodeInstance || node.isCodeComponent)
+      || newName && getFeatureFlags().slide_chapters && node.isCanvasGridRow) {
+      node.setHasBeenManuallyRenamed(true)
+    }
+    else if (getFeatureFlags().slide_chapters && node.isCanvasGridRow) {
+      node.setHasBeenManuallyRenamed(false)
+    }
+    node.name = newName
+  }
 }
-export function $$N0(e) {
-  Object.keys(debugState?.getState().mirror.sceneGraphSelection).forEach(t => $$x23(t, e));
+
+/**
+ * Renames all selected nodes.
+ * (was $$N0)
+ */
+export function renameSelectedNodes(newName: string) {
+  Object.keys(debugState?.getState().mirror.sceneGraphSelection).forEach(nodeId => renameNode(nodeId, newName))
 }
-export function $$C29(e, t) {
-  let r = debugState?.getState().mirror.sceneGraph.get(e);
-  r && (r.isExpanded = t);
+
+/**
+ * Sets the expanded state of a node.
+ * (was $$C29)
+ */
+export function setNodeExpanded(nodeId: string, isExpanded: boolean) {
+  let node = debugState?.getState().mirror.sceneGraph.get(nodeId)
+  if (node)
+    node.isExpanded = isExpanded
 }
-export function $$w7(e, t) {
-  let r = debugState?.getState().mirror.sceneGraph.get(e);
-  r && (r.isTemporarilyExpanded = t);
+
+/**
+ * Sets the temporary expanded state of a node.
+ * (was $$w7)
+ */
+export function setNodeTemporarilyExpanded(nodeId: string, isTemporarilyExpanded: boolean) {
+  let node = debugState?.getState().mirror.sceneGraph.get(nodeId)
+  if (node)
+    node.isTemporarilyExpanded = isTemporarilyExpanded
 }
-export function $$O4(e, t) {
-  let r = debugState?.getState().mirror.sceneGraph.get(e);
-  r && (r.isSymbolPublishable = t);
+
+/**
+ * Sets whether a node is symbol publishable.
+ * (was $$O4)
+ */
+export function setNodeSymbolPublishable(nodeId: string, isPublishable: boolean) {
+  let node = debugState?.getState().mirror.sceneGraph.get(nodeId)
+  if (node)
+    node.isSymbolPublishable = isPublishable
 }
-export function $$R24(e, t) {
-  let r = debugState?.getState().mirror.sceneGraph.get(e);
-  r && (r.isPublishable = t);
+
+/**
+ * Sets whether a node is publishable.
+ * (was $$R24)
+ */
+export function setNodePublishable(nodeId: string, isPublishable: boolean) {
+  let node = debugState?.getState().mirror.sceneGraph.get(nodeId)
+  if (node)
+    node.isPublishable = isPublishable
 }
-export function $$L22(e) {
-  SceneGraphHelpers.expandUpToRoot(e);
+
+/**
+ * Expands a node up to the root.
+ * (was $$L22)
+ */
+export function expandNodeToRoot(nodeId: string) {
+  SceneGraphHelpers.expandUpToRoot(nodeId)
 }
-export function $$P28(e, t) {
-  SceneGraphHelpers.setExpandedRecursive(e, t);
+
+/**
+ * Recursively sets expanded state for a node.
+ * (was $$P28)
+ */
+export function setNodeExpandedRecursive(nodeId: string, isExpanded: boolean) {
+  SceneGraphHelpers.setExpandedRecursive(nodeId, isExpanded)
 }
-export function $$D34(e, t) {
-  SceneGraphHelpers.setSelectionExpanded(e, t);
+
+/**
+ * Sets expanded state for the selection.
+ * (was $$D34)
+ */
+export function setSelectionExpanded(nodeIds: string[], isExpanded: boolean) {
+  SceneGraphHelpers.setSelectionExpanded(nodeIds, isExpanded)
 }
-export function $$k21(e) {
-  Fullscreen?.updateAppModel(e);
+
+/**
+ * Updates the fullscreen app model.
+ * (was $$k21)
+ */
+export function updateFullscreenAppModel(model: any) {
+  Fullscreen?.updateAppModel(model)
 }
-export function $$M11(e) {
-  $$k21({
-    hoveredNode: e
-  });
+
+/**
+ * Updates the hovered node in the fullscreen app model.
+ * (was $$M11)
+ */
+export function updateHoveredNode(nodeId: string) {
+  updateFullscreenAppModel({ hoveredNode: nodeId })
 }
-export function $$F19(e) {
-  AppStateTsApi.uiState().hoveredComponentPropDef.set(e);
+
+/**
+ * Sets the hovered component property definition.
+ * (was $$F19)
+ */
+export function setHoveredComponentPropDef(propDef: any) {
+  AppStateTsApi.uiState().hoveredComponentPropDef.set(propDef)
 }
-export function $$j17(e) {
-  $$k21({
-    temporarilyExpandedInstanceLayers: e
-  });
+
+/**
+ * Updates temporarily expanded instance layers in the fullscreen app model.
+ * (was $$j17)
+ */
+export function updateTemporarilyExpandedInstanceLayers(layers: any) {
+  updateFullscreenAppModel({ temporarilyExpandedInstanceLayers: layers })
 }
-export function $$U18(e) {
-  $$k21({
-    devHandoffCodeLanguage: e
-  });
+
+/**
+ * Updates dev handoff code language in the fullscreen app model.
+ * (was $$U18)
+ */
+export function updateDevHandoffCodeLanguage(language: string) {
+  updateFullscreenAppModel({ devHandoffCodeLanguage: language })
 }
-export function $$B14(e) {
-  $$k21({
-    devHandoffPreferences: e
-  });
+
+/**
+ * Updates dev handoff preferences in the fullscreen app model.
+ * (was $$B14)
+ */
+export function updateDevHandoffPreferences(preferences: any) {
+  updateFullscreenAppModel({ devHandoffPreferences: preferences })
 }
-export function $$G15() {
-  return AppStateTsApi?.propertiesPanelState()?.propertiesPanelTab;
+
+/**
+ * Gets the current properties panel tab.
+ * (was $$G15)
+ */
+export function getPropertiesPanelTab() {
+  return AppStateTsApi?.propertiesPanelState()?.propertiesPanelTab
 }
-export function $$V9(e) {
-  return $$G15()?.set(e);
+
+/**
+ * Sets the current properties panel tab.
+ * (was $$V9)
+ */
+export function setPropertiesPanelTab(tab: any) {
+  return getPropertiesPanelTab()?.set(tab)
 }
-export function $$H8() {
-  return AppStateTsApi?.devModePropertiesPanelState()?.getEnabledTabs() ?? [];
+
+/**
+ * Gets enabled tabs for the dev mode properties panel.
+ * (was $$H8)
+ */
+export function getEnabledDevModePropertiesPanelTabs() {
+  return AppStateTsApi?.devModePropertiesPanelState()?.getEnabledTabs() ?? []
 }
-export function $$z32() {
-  return AppStateTsApi?.devModePropertiesPanelState()?.selectedTab;
+
+/**
+ * Gets the selected tab for the dev mode properties panel.
+ * (was $$z32)
+ */
+export function getSelectedDevModePropertiesPanelTab() {
+  return AppStateTsApi?.devModePropertiesPanelState()?.selectedTab
 }
-export function $$W16(e) {
-  return $$z32()?.set(e);
+
+/**
+ * Sets the selected tab for the dev mode properties panel.
+ * (was $$W16)
+ */
+export function setSelectedDevModePropertiesPanelTab(tab: any) {
+  return getSelectedDevModePropertiesPanelTab()?.set(tab)
 }
-export function $$K1(e) {
-  $$k21({
-    activeTextReviewPlugin: e
-  });
+
+/**
+ * Updates the active text review plugin in the fullscreen app model.
+ * (was $$K1)
+ */
+export function updateActiveTextReviewPlugin(plugin: any) {
+  updateFullscreenAppModel({ activeTextReviewPlugin: plugin })
 }
-export function $$Y31(e, t, r) {
-  SceneGraphHelpers.setNodeLocked(e, t, r);
+
+/**
+ * Sets node locked state.
+ * (was $$Y31)
+ */
+function setNodeLocked(nodeId: string, isLocked: boolean, recursive?: boolean) {
+  SceneGraphHelpers.setNodeLocked(nodeId, isLocked, recursive)
 }
-export function $$$27(e, t, r) {
-  SceneGraphHelpers.setNodeVisible(e, t, r);
+
+/**
+ * Sets node visible state.
+ * (was $$$27)
+ */
+function setNodeVisible(nodeId: string, isVisible: boolean, recursive?: boolean) {
+  SceneGraphHelpers.setNodeVisible(nodeId, isVisible, recursive)
 }
-let X = ['x', 'y', 'width', 'height', 'minWidth', 'minHeight', 'maxWidth', 'maxHeight', 'angle', 'canBecomeFrame', 'canBecomeGroup', 'canBecomeSection', 'aspectRatioLockToggled', 'miterLimitAngle', 'terminalCap', 'dashCap', 'dynamicStrokeFrequency', 'dynamicStrokeSmoothen', 'dynamicStrokeWiggle', 'scatterBrushGap', 'scatterBrushWiggle', 'scatterBrushAngularJitter', 'scatterBrushRotation', 'scatterBrushSizeJitter', 'availableOTFeaturesForSelection', 'availableOTFeaturesForFonts', 'toggledOnOTFeaturesForSelection', 'toggledOffOTFeaturesForSelection', 'mixedStateOTFeaturesForSelection', 'detectedList', 'destinationOverlayPositionType', 'destinationOverlayBackgroundInteraction', 'destinationOverlayBackgroundType', 'destinationOverlayBackgroundColor', 'name', 'numSelected', 'numSelectedByType', 'arcStart', 'arcSweep', 'arcRadius', 'fontFamily', 'previewFontFamily', 'fontStyle', 'fontVariations', 'intrinsicLineHeight', 'textContent', 'textPathStartForward', 'prototypeInteractions', 'prototypeInheritedInternalInteractions', 'isValidPrototypingSourceSelected', 'selectionIsHyperlink', 'whiteboardControls', 'whiteboardColor', 'whiteboardDividedSwatchColors', 'whiteboardStrokeColor', 'whiteboardFontFamilies', 'whiteboardFontSizes', 'whiteboardTextAlignHorizontal', 'whiteboardTextAlignVertical', 'whiteboardStrokeStyle', 'whiteboardNumSelected', 'whiteboardNumSelectedByType', 'whiteboardSelectionCanSummarize', 'whiteboardSelectionCanCluster', 'whiteboardSelectionCanShowAiOnboardingBadge', 'whiteboardStickyAIControlsShown', 'whiteboardMindmapAIControlsShown', 'nodeSelectedValidForQuickAdd', 'whiteboardStrokeWeight', 'washiTapePaint', 'washiTapePaintIsMixed', 'connectorLineStyleForSelection', 'connectorStartCapForSelection', 'connectorEndCapForSelection', 'connectorTextBackgroundTransparent', 'codeBlockLanguage', 'codeBlockTheme', 'leftEndCap', 'rightEndCap', 'leftCapSize', 'rightCapSize', 'maxStrokeWeight', 'shapeWithTextTypeForSelection', 'shapeWithTextFillType', 'shapeWithTextOpacityOverride', 'platformShapeFillType', 'platformShapeOpacityOverride', 'authorVisibility', 'imageAspectRatio', 'imageHasNoStroke', 'imageOverlayPaint', 'sectionContentsHidden', 'isSection', 'variableConsumptionInfo', 'borderTopVisible', 'borderRightVisible', 'borderBottomVisible', 'borderLeftVisible', 'borderSharedWeight', 'stackCounterSpacing', 'gridRowCount', 'gridColumnCount', 'gridTrackSize', 'gridTrackSizingType', 'directlySubscribedAssetKeys', 'numVideosSelected', 'videoAutoplay', 'videoMediaLoop', 'videoMuted', 'videoShowControls', 'themeId', 'objectAnimationType', 'objectAnimationDuration', 'objectAnimationPhase', 'shadow', 'blur', 'htmlWidgetYouTubeVideoURL', 'htmlWidgetGoogleMapLocation', 'htmlWidgetGoogleMapZoom', 'htmlWidgetMailchimpFormURL', 'htmlWidgetMailchimpInputPlaceholder', 'htmlWidgetMailchimpSubmitButtonLabel', 'htmlWidgetMailchimpLayoutIsVertical', 'htmlWidgetGenericEmbedUrl', 'htmlWidgetGenericEmbedCodeType', 'htmlWidgetGenericEmbedIframeHtml', 'htmlWidgetGenericEmbedAllowFullscreen', 'appear', 'hover', 'press', 'focus', 'scrollParallax', 'scrollTransform', 'cursor', 'marquee', 'code'];
-export function $$q10(e, t, r, a, o) {
-  reactTimerGroup.start('update-selection-properties');
+
+// List of property keys for selection updates (was X)
+const selectionPropertyKeys = [
+  'x',
+  'y',
+  'width',
+  'height',
+  'minWidth',
+  'minHeight',
+  'maxWidth',
+  'maxHeight',
+  'angle',
+  'canBecomeFrame',
+  'canBecomeGroup',
+  'canBecomeSection',
+  'aspectRatioLockToggled',
+  'miterLimitAngle',
+  'terminalCap',
+  'dashCap',
+  'dynamicStrokeFrequency',
+  'dynamicStrokeSmoothen',
+  'dynamicStrokeWiggle',
+  'scatterBrushGap',
+  'scatterBrushWiggle',
+  'scatterBrushAngularJitter',
+  'scatterBrushRotation',
+  'scatterBrushSizeJitter',
+  'availableOTFeaturesForSelection',
+  'availableOTFeaturesForFonts',
+  'toggledOnOTFeaturesForSelection',
+  'toggledOffOTFeaturesForSelection',
+  'mixedStateOTFeaturesForSelection',
+  'detectedList',
+  'destinationOverlayPositionType',
+  'destinationOverlayBackgroundInteraction',
+  'destinationOverlayBackgroundType',
+  'destinationOverlayBackgroundColor',
+  'name',
+  'numSelected',
+  'numSelectedByType',
+  'arcStart',
+  'arcSweep',
+  'arcRadius',
+  'fontFamily',
+  'previewFontFamily',
+  'fontStyle',
+  'fontVariations',
+  'intrinsicLineHeight',
+  'textContent',
+  'textPathStartForward',
+  'prototypeInteractions',
+  'prototypeInheritedInternalInteractions',
+  'isValidPrototypingSourceSelected',
+  'selectionIsHyperlink',
+  'whiteboardControls',
+  'whiteboardColor',
+  'whiteboardDividedSwatchColors',
+  'whiteboardStrokeColor',
+  'whiteboardFontFamilies',
+  'whiteboardFontSizes',
+  'whiteboardTextAlignHorizontal',
+  'whiteboardTextAlignVertical',
+  'whiteboardStrokeStyle',
+  'whiteboardNumSelected',
+  'whiteboardNumSelectedByType',
+  'whiteboardSelectionCanSummarize',
+  'whiteboardSelectionCanCluster',
+  'whiteboardSelectionCanShowAiOnboardingBadge',
+  'whiteboardStickyAIControlsShown',
+  'whiteboardMindmapAIControlsShown',
+  'nodeSelectedValidForQuickAdd',
+  'whiteboardStrokeWeight',
+  'washiTapePaint',
+  'washiTapePaintIsMixed',
+  'connectorLineStyleForSelection',
+  'connectorStartCapForSelection',
+  'connectorEndCapForSelection',
+  'connectorTextBackgroundTransparent',
+  'codeBlockLanguage',
+  'codeBlockTheme',
+  'leftEndCap',
+  'rightEndCap',
+  'leftCapSize',
+  'rightCapSize',
+  'maxStrokeWeight',
+  'shapeWithTextTypeForSelection',
+  'shapeWithTextFillType',
+  'shapeWithTextOpacityOverride',
+  'platformShapeFillType',
+  'platformShapeOpacityOverride',
+  'authorVisibility',
+  'imageAspectRatio',
+  'imageHasNoStroke',
+  'imageOverlayPaint',
+  'sectionContentsHidden',
+  'isSection',
+  'variableConsumptionInfo',
+  'borderTopVisible',
+  'borderRightVisible',
+  'borderBottomVisible',
+  'borderLeftVisible',
+  'borderSharedWeight',
+  'stackCounterSpacing',
+  'gridRowCount',
+  'gridColumnCount',
+  'gridTrackSize',
+  'gridTrackSizingType',
+  'directlySubscribedAssetKeys',
+  'numVideosSelected',
+  'videoAutoplay',
+  'videoMediaLoop',
+  'videoMuted',
+  'videoShowControls',
+  'themeId',
+  'objectAnimationType',
+  'objectAnimationDuration',
+  'objectAnimationPhase',
+  'shadow',
+  'blur',
+  'htmlWidgetYouTubeVideoURL',
+  'htmlWidgetGoogleMapLocation',
+  'htmlWidgetGoogleMapZoom',
+  'htmlWidgetMailchimpFormURL',
+  'htmlWidgetMailchimpInputPlaceholder',
+  'htmlWidgetMailchimpSubmitButtonLabel',
+  'htmlWidgetMailchimpLayoutIsVertical',
+  'htmlWidgetGenericEmbedUrl',
+  'htmlWidgetGenericEmbedCodeType',
+  'htmlWidgetGenericEmbedIframeHtml',
+  'htmlWidgetGenericEmbedAllowFullscreen',
+  'appear',
+  'hover',
+  'press',
+  'focus',
+  'scrollParallax',
+  'scrollTransform',
+  'cursor',
+  'marquee',
+  'code',
+]
+
+/**
+ * Debounced style edit tracking.
+ * (was Z)
+ */
+const trackStyleEdit = debounce((styleType: any) => {
+  trackEventAnalytics('Style Edited', { styleType })
+}, 500)
+
+/**
+ * Updates selection properties and handles style tracking.
+ * (was $$q10)
+ */
+/**
+ * Updates selection properties and handles style tracking.
+ * (was $$q10)
+ * @param properties - Properties to update.
+ * @param node - The node to update.
+ * @param trackingType - Tracking type for analytics.
+ * @param styleType - Style type for tracking.
+ * @param extra - Additional data for update.
+ */
+function updateSelectionProperties(
+  properties: Record<string, any>,
+  node: any,
+  trackingType: YesNoTrackingEnum,
+  styleType: any,
+  extra?: any,
+) {
+  reactTimerGroup.start('update-selection-properties')
   try {
-    !function (e, t, r, a, o) {
-      let l = {
-        ...e
-      };
-      let d = function (e) {
-        let t = Object.create(null);
-        for (let r of X) {
-          if (r in e) {
-            let n = e[r];
-            n !== MIXED_MARKER && (t[r] = n);
-            delete e[r];
+    // Create a copy of the properties to avoid mutation
+    const propsCopy = { ...properties }
+
+    /**
+     * Extracts selection properties from the provided properties.
+     * Only includes keys defined in selectionPropertyKeys and not MIXED_MARKER.
+     */
+    function extractSelectionProps(props: Record<string, any>): Record<string, any> {
+      const result: Record<string, any> = Object.create(null)
+      for (const key of selectionPropertyKeys) {
+        if (key in props) {
+          const value = props[key]
+          if (value !== MIXED_MARKER) {
+            result[key] = value
           }
+          delete props[key]
         }
-        return t;
-      }(l);
-      let c = function (e) {
-        let t = {
-          guid: {
-            sessionID: 0,
-            localID: 0
-          }
-        };
-        for (let r in e) {
-          let n = e[r];
-          n !== MIXED_MARKER && (t[r] = n);
-        }
-        return t;
-      }(l);
-      if (a = $$J20(a), t?.guid) {
-        if (d) {
-          let e = d.fontFamily && d.fontStyle;
-          if (debug(!e, 'UI should never simultaneously update font family and style'), d.fontFamily && t.fontStyle && (c.fontName = {
-            family: d.fontFamily,
-            style: t.fontStyle,
-            postscript: ''
-          }), t.fontFamily && d.fontStyle && (c.fontName = {
-            family: t.fontFamily,
-            style: d.fontStyle,
-            postscript: ''
-          }), d.fontVariations && (c.fontVariations = d.fontVariations), d.variableConsumptionInfo?.variableConsumptionMap) {
-            let e = d.variableConsumptionInfo.variableConsumptionMap;
-            let t = w3(e);
-            c.variableConsumptionMap = t;
-            c.parameterConsumptionMap = t;
-          }
-        }
-        let e = kiwiParserCodec.encodeMessage({
-          type: 'NODE_CHANGES',
-          sessionID: 0,
-          ackID: 0,
-          nodeChanges: [c]
-        });
-        Fullscreen?.updateSelectedStyleProperties(e, r, a === zk.YES);
-        debug(t.styleType != null, 'unknown style type');
-        Z(t.styleType);
-      } else {
-        let e = kiwiParserCodec.encodeMessage({
-          type: 'NODE_CHANGES',
-          sessionID: 0,
-          ackID: 0,
-          nodeChanges: [c]
-        });
-        SceneGraphHelpers.updateSelectionProperties(d, r, o, a === zk.YES, e);
       }
-    }(e, t, r, a, o);
-  } catch (e) {
-    throw e;
-  } finally {
-    reactTimerGroup.stop('update-selection-properties');
+      return result
+    }
+
+    /**
+     * Extracts node changes from the remaining properties.
+     * Only includes keys not in selectionPropertyKeys and not MIXED_MARKER.
+     */
+    function extractNodeChanges(props: Record<string, any>): Record<string, any> {
+      const result: Record<string, any> = {
+        guid: { sessionID: 0, localID: 0 },
+      }
+      for (const key in props) {
+        const value = props[key]
+        if (value !== MIXED_MARKER) {
+          result[key] = value
+        }
+      }
+      return result
+    }
+
+    const selectionProps = extractSelectionProps(propsCopy)
+    const nodeChanges = extractNodeChanges(propsCopy)
+    const normalizedStyleType = normalizeTrackingEnum(styleType)
+
+    // Handle font family and style updates
+    if (node?.guid) {
+      if (selectionProps) {
+        const hasFontFamilyAndStyle = selectionProps.fontFamily && selectionProps.fontStyle
+        debug(!hasFontFamilyAndStyle, 'UI should never simultaneously update font family and style')
+
+        if (selectionProps.fontFamily && node.fontStyle) {
+          nodeChanges.fontName = {
+            family: selectionProps.fontFamily,
+            style: node.fontStyle,
+            postscript: '',
+          }
+        }
+        if (node.fontFamily && selectionProps.fontStyle) {
+          nodeChanges.fontName = {
+            family: node.fontFamily,
+            style: selectionProps.fontStyle,
+            postscript: '',
+          }
+        }
+        if (selectionProps.fontVariations) {
+          nodeChanges.fontVariations = selectionProps.fontVariations
+        }
+        if (selectionProps.variableConsumptionInfo?.variableConsumptionMap) {
+          const variableMap = selectionProps.variableConsumptionInfo.variableConsumptionMap
+          const entries = convertVariableDataToEntries(variableMap)
+          nodeChanges.variableConsumptionMap = entries
+          nodeChanges.parameterConsumptionMap = entries
+        }
+      }
+
+      // Encode node changes and update fullscreen style properties
+      const encoded = kiwiParserCodec.encodeMessage({
+        type: 'NODE_CHANGES',
+        sessionID: 0,
+        ackID: 0,
+        nodeChanges: [nodeChanges],
+      })
+      Fullscreen?.updateSelectedStyleProperties(
+        encoded,
+        trackingType,
+        normalizedStyleType === YesNoTrackingEnum.YES,
+      )
+      debug(node.styleType != null, 'unknown style type')
+      trackStyleEdit(node.styleType)
+    }
+    else {
+      // Encode node changes and update selection properties via SceneGraphHelpers
+      const encoded = kiwiParserCodec.encodeMessage({
+        type: 'NODE_CHANGES',
+        sessionID: 0,
+        ackID: 0,
+        nodeChanges: [nodeChanges],
+      })
+      SceneGraphHelpers.updateSelectionProperties(
+        selectionProps,
+        trackingType,
+        extra,
+        normalizedStyleType === YesNoTrackingEnum.YES,
+        encoded,
+      )
+    }
+  }
+  // eslint-disable-next-line no-useless-catch
+  catch (err) {
+    throw err
+  }
+  finally {
+    reactTimerGroup.stop('update-selection-properties')
   }
 }
-export function $$J20(e) {
-  switch (e) {
-    case zk.YES:
-    case zk.YES_FORCE_TRACKING_AS_EDIT:
-    case zk.YES_WITHOUT_TRACKING_AS_EDIT:
-      return zk.YES;
+
+/**
+ * Normalizes tracking enum values.
+ * (was $$J20)
+ */
+function normalizeTrackingEnum(value: YesNoTrackingEnum): YesNoTrackingEnum {
+  switch (value) {
+    case YesNoTrackingEnum.YES:
+    case YesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT:
+    case YesNoTrackingEnum.YES_WITHOUT_TRACKING_AS_EDIT:
+      return YesNoTrackingEnum.YES
     default:
-      return zk.NO;
+      return YesNoTrackingEnum.NO
   }
 }
-let Z = debounce(e => {
-  trackEventAnalytics('Style Edited', {
-    styleType: e
-  });
-}, 500);
-let Q = Object.create(null);
-var ee = (e => (e[e.SceneGraph = 0] = 'SceneGraph', e[e.AppModel = 1] = 'AppModel', e[e.Selection = 2] = 'Selection', e[e.SelectionProperties = 3] = 'SelectionProperties', e))(ee || {});
-let et = new Set([0, 1, 2, 3]);
-export function $$er26(e = et) {
-  e.has(0) && fullscreenValue.fromFullscreen.on('sceneGraphMirrorUpdate', ei);
-  e.has(2) && (fullscreenValue.fromFullscreen.on('selection:addSelectors', es), fullscreenValue.fromFullscreen.on('selection:removeSelectors', eo), fullscreenValue.fromFullscreen.on('selection:replaceSelectors', el));
-  e.has(1) && fullscreenValue.fromFullscreen.on('updateAppModel', ed);
-  e.has(3) && fullscreenValue.fromFullscreen.on('selectionPropertiesUpdate', ec);
+
+// Internal state for fullscreen event handling (was Q)
+let fullscreenEventState: Record<string, any> = Object.create(null)
+
+/**
+ * Fullscreen event types enum.
+ * (was ee)
+ */
+enum FullscreenEventType {
+  SceneGraph = 0,
+  AppModel = 1,
+  Selection = 2,
+  SelectionProperties = 3,
 }
-export function $$en12() {
-  let e = Q;
-  Q = Object.create(null);
-  return e;
+const fullscreenEventTypesSet = new Set([
+  FullscreenEventType.SceneGraph,
+  FullscreenEventType.AppModel,
+  FullscreenEventType.Selection,
+  FullscreenEventType.SelectionProperties,
+])
+
+/**
+ * Registers fullscreen event handlers.
+ * (was $$er26)
+ */
+function registerFullscreenEventHandlers(eventTypes: Set<number> = fullscreenEventTypesSet) {
+  if (eventTypes.has(FullscreenEventType.SceneGraph)) {
+    fullscreenValue.fromFullscreen.on('sceneGraphMirrorUpdate', handleSceneGraphMirrorUpdate)
+  }
+  if (eventTypes.has(FullscreenEventType.Selection)) {
+    fullscreenValue.fromFullscreen.on('selection:addSelectors', handleAddSelectors)
+    fullscreenValue.fromFullscreen.on('selection:removeSelectors', handleRemoveSelectors)
+    fullscreenValue.fromFullscreen.on('selection:replaceSelectors', handleReplaceSelectors)
+  }
+  if (eventTypes.has(FullscreenEventType.AppModel)) {
+    fullscreenValue.fromFullscreen.on('updateAppModel', handleUpdateAppModel)
+  }
+  if (eventTypes.has(FullscreenEventType.SelectionProperties)) {
+    fullscreenValue.fromFullscreen.on('selectionPropertiesUpdate', handleSelectionPropertiesUpdate)
+  }
 }
-function ei(e) {
-  debug(!Q.invalidateSceneGraph, 'We should get at most one sceneGraphMirrorUpdate per frame. We got two.');
-  Q.invalidateSceneGraph = {
-    rebuildRows: !e || e.rebuildRows
-  };
+
+/**
+ * Returns and resets the fullscreen event state.
+ * (was $$en12)
+ */
+function consumeFullscreenEventState() {
+  const state = fullscreenEventState
+  fullscreenEventState = Object.create(null)
+  return state
 }
-function ea(e, t) {
-  return e[t] | e[t + 1] << 8 | e[t + 2] << 16 | e[t + 3] << 24;
+
+/**
+ * Handles scene graph mirror update events.
+ * (was ei)
+ */
+function handleSceneGraphMirrorUpdate(event: { rebuildRows?: boolean }) {
+  debug(!fullscreenEventState.invalidateSceneGraph, 'We should get at most one sceneGraphMirrorUpdate per frame. We got two.')
+  fullscreenEventState.invalidateSceneGraph = {
+    rebuildRows: !event || event.rebuildRows,
+  }
 }
-function es(e) {
-  debug(!Q.selection?.replace, 'addSelectors and replaceSelectors called on the same frame');
-  Q.selection ||= Object.create(null);
-  Q.selection.add ||= Object.create(null);
-  Q.selection.userTriggered ||= e.userTriggered;
-  let t = e.buffer;
-  if (t) {
-    for (let e = 0; e < t.length; e += 8) {
-      let r = ea(t, e);
-      let n = ea(t, e + 4);
-      let i = sessionLocalIDToString({
-        sessionID: r,
-        localID: n
-      });
-      Q.selection.add[i] = !0;
+
+/**
+ * Reads a 32-bit integer from a buffer.
+ * (was ea)
+ */
+function readInt32(buffer: Uint8Array, offset: number): number {
+  return buffer[offset] | buffer[offset + 1] << 8 | buffer[offset + 2] << 16 | buffer[offset + 3] << 24
+}
+
+/**
+ * Handles add selectors event.
+ * (was es)
+ */
+function handleAddSelectors(event: { buffer?: Uint8Array, userTriggered?: boolean }) {
+  debug(!fullscreenEventState.selection?.replace, 'addSelectors and replaceSelectors called on the same frame')
+  fullscreenEventState.selection ||= Object.create(null)
+  fullscreenEventState.selection.add ||= Object.create(null)
+  fullscreenEventState.selection.userTriggered ||= event.userTriggered
+  const buffer = event.buffer
+  if (buffer) {
+    for (let i = 0; i < buffer.length; i += 8) {
+      const sessionID = readInt32(buffer, i)
+      const localID = readInt32(buffer, i + 4)
+      const idString = sessionLocalIDToString({ sessionID, localID })
+      fullscreenEventState.selection.add[idString] = true
     }
   }
 }
-function eo(e) {
-  debug(!Q.selection?.replace, 'removeSelectors and replaceSelectors called on the same frame');
-  Q.selection ||= Object.create(null);
-  Q.selection.remove ||= Object.create(null);
-  Q.selection.userTriggered ||= e.userTriggered;
-  let t = e.buffer;
-  if (t) {
-    for (let e = 0; e < t.length; e += 8) {
-      let r = ea(t, e);
-      let n = ea(t, e + 4);
-      let i = sessionLocalIDToString({
-        sessionID: r,
-        localID: n
-      });
-      Q.selection.remove[i] = !0;
+
+/**
+ * Handles remove selectors event.
+ * (was eo)
+ */
+function handleRemoveSelectors(event: { buffer?: Uint8Array, userTriggered?: boolean }) {
+  debug(!fullscreenEventState.selection?.replace, 'removeSelectors and replaceSelectors called on the same frame')
+  fullscreenEventState.selection ||= Object.create(null)
+  fullscreenEventState.selection.remove ||= Object.create(null)
+  fullscreenEventState.selection.userTriggered ||= event.userTriggered
+  const buffer = event.buffer
+  if (buffer) {
+    for (let i = 0; i < buffer.length; i += 8) {
+      const sessionID = readInt32(buffer, i)
+      const localID = readInt32(buffer, i + 4)
+      const idString = sessionLocalIDToString({ sessionID, localID })
+      fullscreenEventState.selection.remove[idString] = true
     }
   }
 }
-function el(e) {
-  debug(!Q.selection?.add, 'addSelectors and replaceSelectors called on the same frame');
-  debug(!Q.selection?.remove, 'removeSelectors and replaceSelectors called on the same frame');
-  Q.selection ||= Object.create(null);
-  Q.selection.replace ||= Object.create(null);
-  Q.selection.userTriggered ||= e.userTriggered;
-  let t = e.buffer;
-  if (t) {
-    for (let e = 0; e < t.length; e += 8) {
-      let r = ea(t, e);
-      let n = ea(t, e + 4);
-      let i = sessionLocalIDToString({
-        sessionID: r,
-        localID: n
-      });
-      Q.selection.replace[i] = !0;
+
+/**
+ * Handles replace selectors event.
+ * (was el)
+ */
+function handleReplaceSelectors(event: { buffer?: Uint8Array, userTriggered?: boolean }) {
+  debug(!fullscreenEventState.selection?.add, 'addSelectors and replaceSelectors called on the same frame')
+  debug(!fullscreenEventState.selection?.remove, 'removeSelectors and replaceSelectors called on the same frame')
+  fullscreenEventState.selection ||= Object.create(null)
+  fullscreenEventState.selection.replace ||= Object.create(null)
+  fullscreenEventState.selection.userTriggered ||= event.userTriggered
+  const buffer = event.buffer
+  if (buffer) {
+    for (let i = 0; i < buffer.length; i += 8) {
+      const sessionID = readInt32(buffer, i)
+      const localID = readInt32(buffer, i + 4)
+      const idString = sessionLocalIDToString({ sessionID, localID })
+      fullscreenEventState.selection.replace[idString] = true
     }
   }
 }
-function ed({
-  changes: e,
-  shouldIgnoreUserPrefs: t
+
+/**
+ * Handles update app model event.
+ * (was ed)
+ */
+function handleUpdateAppModel({
+  changes,
+  shouldIgnoreUserPrefs,
+}: {
+  changes: Record<string, any>
+  shouldIgnoreUserPrefs?: Record<string, any>
 }) {
   if (desktopAPIInstance) {
-    let t;
-    let r = {};
-    let n = {};
-    let i = 'actionEnabled__';
-    for (let t of Object.keys(e)) {
-      if (t.startsWith(i)) {
-        r[t.substr(i.length)] = e[t].value;
-      } else {
-        let r = getPropertyActions(t);
-        if (void 0 !== r) {
-          let i = e[t].value;
-          for (let {
-            name,
-            propertyValue
-          } of r.actions) n[name] = i === propertyValue;
+    let shortcuts
+    let actionEnabledState: Record<string, any> = {}
+    let actionCheckedState: Record<string, any> = {}
+    const actionPrefix = 'actionEnabled__'
+    for (let key of Object.keys(changes)) {
+      if (key.startsWith(actionPrefix)) {
+        actionEnabledState[key.substr(actionPrefix.length)] = changes[key].value
+      }
+      else {
+        const propertyActions = getPropertyActions(key)
+        if (propertyActions !== undefined) {
+          const value = changes[key].value
+          for (let { name, propertyValue } of propertyActions.actions) {
+            actionCheckedState[name] = value === propertyValue
+          }
         }
       }
     }
-    e.keyboardShortcuts && (t = extractOriginalTextMap(e.keyboardShortcuts.value));
-    let a = Object.keys(r).length > 0;
-    let s = Object.keys(n).length > 0;
-    let o = void 0 !== t;
-    (a || s || o) && desktopAPIInstance.updateFullscreenMenuState({
-      actionEnabledState: a ? r : void 0,
-      actionCheckedState: s ? n : void 0,
-      actionShortcuts: t
-    });
+    if (changes.keyboardShortcuts) {
+      shortcuts = extractOriginalTextMap(changes.keyboardShortcuts.value)
+    }
+    const hasEnabled = Object.keys(actionEnabledState).length > 0
+    const hasChecked = Object.keys(actionCheckedState).length > 0
+    const hasShortcuts = shortcuts !== undefined
+    if (hasEnabled || hasChecked || hasShortcuts) {
+      desktopAPIInstance.updateFullscreenMenuState({
+        actionEnabledState: hasEnabled ? actionEnabledState : undefined,
+        actionCheckedState: hasChecked ? actionCheckedState : undefined,
+        actionShortcuts: shortcuts,
+      })
+    }
   }
-  let r = Object.create(null);
-  let n = Object.create(null);
-  for (let i in e) {
-    r[i] = e[i].value;
-    n[i] = t?.[i];
+  let appModelChanges: Record<string, any> = Object.create(null)
+  let appModelChangesShouldIgnoreUserPrefs: Record<string, any> = Object.create(null)
+  for (let key in changes) {
+    appModelChanges[key] = changes[key].value
+    appModelChangesShouldIgnoreUserPrefs[key] = shouldIgnoreUserPrefs?.[key]
   }
-  Q.appModelChanges = {
-    ...Q.appModelChanges,
-    ...r
-  };
-  Q.appModelChangesShouldIgnoreUserPrefs = {
-    ...Q.appModelChangesShouldIgnoreUserPrefs,
-    ...n
-  };
+  fullscreenEventState.appModelChanges = {
+    ...fullscreenEventState.appModelChanges,
+    ...appModelChanges,
+  }
+  fullscreenEventState.appModelChangesShouldIgnoreUserPrefs = {
+    ...fullscreenEventState.appModelChangesShouldIgnoreUserPrefs,
+    ...appModelChangesShouldIgnoreUserPrefs,
+  }
 }
-function ec(e) {
-  let t = e.buffer && e.buffer.length > 0 ? kiwiParserCodec.decodeMessage(e.buffer) : null;
-  delete e.buffer;
-  debug(!Q.selectionProperties, 'Updating selectionProperties multiple times on a frame');
-  Q.selectionProperties = {
-    message: t,
-    derivedProperties: e
-  };
+
+/**
+ * Handles selection properties update event.
+ * (was ec)
+ */
+function handleSelectionPropertiesUpdate(event: { buffer?: Uint8Array }) {
+  const message = event.buffer && event.buffer.length > 0 ? kiwiParserCodec.decodeMessage(event.buffer) : null
+  delete event.buffer
+  debug(!fullscreenEventState.selectionProperties, 'Updating selectionProperties multiple times on a frame')
+  fullscreenEventState.selectionProperties = {
+    message,
+    derivedProperties: event,
+  }
 }
-export const BH = $$N0;
-export const Br = $$K1;
-export const D$ = $$b2;
-export const Dh = $$y3;
-export const G9 = $$O4;
-export const GL = $$S5;
-export const Hr = $$E6;
-export const Ir = $$w7;
-export const NI = $$H8;
-export const NT = $$V9;
-export const T8 = $$q10;
-export const Uc = $$M11;
-export const XP = $$en12;
-export const Yu = $$v13;
-export const aB = $$B14;
-export const aY = $$G15;
-export const ax = $$W16;
-export const bd = $$j17;
-export const bw = $$U18;
-export const dH = $$F19;
-export const dZ = $$J20;
-export const gX = $$k21;
-export const hq = $$L22;
-export const i = $$x23;
-export const iT = $$R24;
-export const kH = $$A25;
-export const n_ = $$er26;
-export const pr = $$$27;
-export const sK = $$P28;
-export const sq = $$C29;
-export const tJ = $$T30;
-export const tU = $$Y31;
-export const tw = $$z32;
-export const wr = $$I33;
-export const yF = $$D34;
+
+// Export original names for compatibility
+export const BH = renameSelectedNodes
+export const Br = updateActiveTextReviewPlugin
+export const D$ = removeFromSelection
+export const Dh = addToSelection
+export const G9 = setNodeSymbolPublishable
+export const GL = selectNodesInRange
+export const Hr = currentSessionLocalIDString
+export const Ir = setNodeTemporarilyExpanded
+export const NI = getEnabledDevModePropertiesPanelTabs
+export const NT = setPropertiesPanelTab
+export const T8 = updateSelectionProperties
+export const Uc = updateHoveredNode
+export const XP = consumeFullscreenEventState
+export const Yu = transferSelection
+export const aB = updateDevHandoffPreferences
+export const aY = getPropertiesPanelTab
+export const ax = setSelectedDevModePropertiesPanelTab
+export const bd = updateTemporarilyExpandedInstanceLayers
+export const bw = updateDevHandoffCodeLanguage
+export const dH = setHoveredComponentPropDef
+export const dZ = normalizeTrackingEnum
+export const gX = updateFullscreenAppModel
+export const hq = expandNodeToRoot
+export const i = renameNode
+export const iT = setNodePublishable
+export const kH = duplicateSelection
+export const n_ = registerFullscreenEventHandlers
+export const pr = setNodeVisible
+export const sK = setNodeExpandedRecursive
+export const sq = setNodeExpanded
+export const tJ = replaceSelection
+export const tU = setNodeLocked
+export const tw = getSelectedDevModePropertiesPanelTab
+export const wr = clearSelection
+export const yF = setSelectionExpanded

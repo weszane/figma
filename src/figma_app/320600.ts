@@ -1,17 +1,17 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState, useEffect, useMemo, Component } from "react";
 import { createPortal } from "../vendor/944059";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { SettingsAction } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { xx } from "../figma_app/815945";
-import { o6 } from "../figma_app/806412";
+import { memoizeByArgs } from "../figma_app/815945";
+import { RecordingPureComponent } from "../figma_app/878298";
 import { n as _$$n } from "../figma_app/339971";
 import { tn } from "../figma_app/473493";
 import { ho, oB } from "../905/929976";
 import { Dm } from "../figma_app/8833";
 import { k$, gN, id, Dz } from "../figma_app/847915";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { n as _$$n2 } from "../figma_app/307143";
 import { fu } from "../figma_app/831799";
 import { d$ } from "../figma_app/291792";
@@ -356,7 +356,7 @@ let ec = () => {
   }, [e, r, t?.editor_type]);
 };
 let ep = "preferences-menu";
-class e_ extends o6 {
+class e_ extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.multilevelDropdownRef = e => {
@@ -368,7 +368,7 @@ class e_ extends o6 {
     this.selectPreferencesMenu = () => {
       this.multilevelDropdown && this.multilevelDropdown.setActiveItemPath(this.getPathToPreferences());
     };
-    this.getPathToPreferences = () => [_$$A(ep)];
+    this.getPathToPreferences = () => [formatI18nMessage(ep)];
   }
   componentDidUpdate(e, t) {
     if (super.componentDidUpdate(e, t), this.props.selectionToUpdate && this.props.selectionToUpdate === SettingsAction.PREFERENCES) {
@@ -456,7 +456,7 @@ export class $$em1 extends Component {
         }
       });
     };
-    this.transformMenuItems = xx(e => jv(e, {
+    this.transformMenuItems = memoizeByArgs(e => jv(e, {
       appModel: this.props.appModel,
       selectedView: this.props.selectedView,
       sceneGraph: this.props.sceneGraph,

@@ -1,14 +1,14 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { Fullscreen, SymbolOverrideType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { wm } from "../905/19536";
+import { useMemoShallow } from "../905/19536";
 import c from "../vendor/128080";
 import { analyticsEventManager } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { c$, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
@@ -172,7 +172,7 @@ export function $$H1(e) {
     toggleDropdown,
     dropdownShown
   } = $$$2(instanceAndSublayerGUIDs);
-  let O = Pt(e, "toggleInstanceOptionDropdown", instanceAndSublayerGUIDs.join("-"));
+  let O = generateRecordingKey(e, "toggleInstanceOptionDropdown", instanceAndSublayerGUIDs.join("-"));
   return showAllInstanceOptions || needsUpdate ? jsxs("span", {
     children: [jsx("div", {
       ref: T,
@@ -215,12 +215,12 @@ export function $$z0({
     children: t.map((e, t) => "option" === e.type ? jsxs(c$, {
       className: VM,
       onClick: e.callback,
-      recordingKey: Pt(r, e.displayText),
+      recordingKey: generateRecordingKey(r, e.displayText),
       disabled: e.disabled,
       children: [e.displayText, e.shortcut && jsx("span", {
         children: e.shortcut
       })]
-    }, "reset-component-prop-assignment" === e.value ? Pt(e.value, t) : e.value) : jsx(wv, {}, t))
+    }, "reset-component-prop-assignment" === e.value ? generateRecordingKey(e.value, t) : e.value) : jsx(wv, {}, t))
   }) : null;
 }
 function W() {
@@ -250,7 +250,7 @@ export function $$K4(e) {
   } = useMemo(() => cB(componentUpdatesForAllPages, stateGroupUpdatesForAllPages, s), [componentUpdatesForAllPages, stateGroupUpdatesForAllPages, s]);
   let c = jR(componentInstanceUpdateInfo, stateInstanceUpdateInfo);
   let u = c > 0 && c === s.length;
-  return wm(() => ({
+  return useMemoShallow(() => ({
     needsUpdate: u,
     numSelectedInstancesToUpdate: c,
     componentInstanceUpdateInfo,

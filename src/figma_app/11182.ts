@@ -1,6 +1,6 @@
 import { Dk } from "../figma_app/623293";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
 import { Np } from "../figma_app/193867";
 import { o as _$$o } from "../905/721794";
@@ -12,7 +12,7 @@ let $$c3 = createOptimistThunk((e, t) => {
     successText: t.successText
   };
   Dk(r, s).then(() => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "copied_to_clipboard",
       message: s.successText ?? getI18nString("fullscreen_actions.copied_to_clipboard")
     }));
@@ -23,7 +23,7 @@ let $$u0 = createOptimistThunk((e, t) => {
   let s = r.length;
   let o = r.join("; ");
   Dk(o).then(() => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("copy_to_clipboard.emails_copied_to_clipboard", {
         numEmails: s,
         emailText: o
@@ -75,7 +75,7 @@ let $$h1 = createOptimistThunk(async (e, t) => {
   }
   try {
     await Dk(o);
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "link_copied_to_clipboard",
       message: r
     }));

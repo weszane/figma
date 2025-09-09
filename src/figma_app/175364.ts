@@ -5,7 +5,7 @@ import { r as _$$r } from "../905/571562";
 import o from "../vendor/128080";
 import { ZC } from "../figma_app/39751";
 import { Uz } from "../905/63728";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { c$, wv, MM } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
 import { BK } from "../905/848862";
@@ -66,7 +66,7 @@ export function $$T1(e) {
 }
 function I(e) {
   let t = useMemo(() => e.selected ? e.labelForSelectedItem ? e.labelForSelectedItem(e.selected) : e.selected.toString() : e.placeholder, [e]);
-  let r = rf(Pt(e, "dropdownButton"), "click", () => {
+  let r = useHandleMouseEvent(generateRecordingKey(e, "dropdownButton"), "click", () => {
     e.onSelect();
   });
   return jsx(f, {
@@ -86,7 +86,7 @@ function I(e) {
   });
 }
 function S(e) {
-  let t = rf(Pt(e, "dropdownIconButton"), "click", () => {
+  let t = useHandleMouseEvent(generateRecordingKey(e, "dropdownIconButton"), "click", () => {
     e.onSelect();
   });
   return jsx(_$$d, {

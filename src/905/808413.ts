@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { c2 } from "../905/382883";
 import { ZA } from "../figma_app/288654";
 import { y } from "../figma_app/705249";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 class l {
   constructor(e, t, i) {
     this.args = e;
@@ -31,7 +31,7 @@ class d {
 }
 export function $$c0(e) {
   let t = ZA();
-  let i = iZ();
+  let i = selectCurrentUser();
   let {
     args,
     subscription

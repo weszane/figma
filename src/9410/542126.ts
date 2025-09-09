@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useMemo, useEffect } from "react";
 import { createPortal } from "../vendor/944059";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { o as _$$o } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { b as _$$b, bL, mc, YJ, Q$, Ov, ME } from "../figma_app/860955";
@@ -11,7 +11,7 @@ import { EditAction } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { BrowserInfo } from "../figma_app/778880";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { yo } from "../905/125333";
 import { y0, wv, MM } from "../figma_app/236327";
 import { B as _$$B } from "../905/714743";
@@ -83,7 +83,7 @@ function D({
         d(sV(EditAction.FIND));
         c.hide();
       },
-      recordingKey: Pt(i, "settings.find")
+      recordingKey: generateRecordingKey(i, "settings.find")
     }, "find"), jsx(y0, {
       primaryText: getI18nString("canvas_search.replace"),
       checked: L === EditAction.REPLACE,
@@ -91,7 +91,7 @@ function D({
         d(sV(EditAction.REPLACE));
         c.hide();
       },
-      recordingKey: Pt(i, "settings", "replace")
+      recordingKey: generateRecordingKey(i, "settings", "replace")
     }, "replace"), jsx(wv, {}, "sep1")];
     let t = (t, n = !1) => {
       let a = !!A[t];
@@ -117,7 +117,7 @@ function D({
           d(dY());
           c.hide();
         },
-        recordingKey: Pt(i, "settings", "All")
+        recordingKey: generateRecordingKey(i, "settings", "All")
       }));
       b4.forEach(e => t(e));
       e.push(jsx(wv, {}, "sep2"));
@@ -137,7 +137,7 @@ function D({
     minWidth: t,
     options: B,
     propagateCloseClick: !0,
-    recordingKey: Pt(i, "settings"),
+    recordingKey: generateRecordingKey(i, "settings"),
     showPoint: !0,
     targetRect: h.current.getBoundingClientRect()
   });
@@ -150,7 +150,7 @@ function D({
         onClick: () => c.toggle(),
         actionOnPointerDown: !0,
         "aria-label": getI18nString("canvas_search.settings"),
-        recordingKey: Pt(i, "settings"),
+        recordingKey: generateRecordingKey(i, "settings"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip": getI18nString("canvas_search.settings")
@@ -171,7 +171,7 @@ function M(e) {
     count: t,
     onClick: e.onClick,
     buttonRef: e.buttonRef,
-    recordingKey: Pt(e, "settings", kM[e.option])
+    recordingKey: generateRecordingKey(e, "settings", kM[e.option])
   });
 }
 function P({
@@ -240,7 +240,7 @@ function F({
       manager,
       children: [jsx(_$$d, {
         "aria-label": getI18nString("canvas_search.settings"),
-        recordingKey: Pt(a, "settings"),
+        recordingKey: generateRecordingKey(a, "settings"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip": getI18nString("canvas_search.settings")
@@ -253,7 +253,7 @@ function F({
             value: C.toString(),
             onChange: e => I(parseInt(e)),
             title: null,
-            recordingKey: Pt(a, "mode_change"),
+            recordingKey: generateRecordingKey(a, "mode_change"),
             children: [jsx(CU, {
               value: EditAction.FIND.toString(),
               children: jsx("span", {
@@ -284,7 +284,7 @@ function F({
           })
         }), L && jsxs(YJ, {
           children: [jsx(B, {
-            recordingKey: Pt(a, "settings", "All"),
+            recordingKey: generateRecordingKey(a, "settings", "All"),
             checked: !b4.some(e => !!y[e]),
             onChange: () => {
               h(dY());
@@ -294,7 +294,7 @@ function F({
             count: Object.values(x).reduce((e, t) => e + t, 0),
             minWidth: e
           }), b4.map(t => jsx(B, {
-            recordingKey: Pt(a, "settings", kM[t]),
+            recordingKey: generateRecordingKey(a, "settings", kM[t]),
             checked: !!y[t],
             onChange: e => k(e, t),
             icon: sW(t),
@@ -304,7 +304,7 @@ function F({
           }, t))]
         }), jsx(YJ, {
           children: _V.map(e => jsx(B, {
-            recordingKey: Pt(a, "settings", kM[e]),
+            recordingKey: generateRecordingKey(a, "settings", kM[e]),
             checked: !!y[e],
             onChange: () => A(e),
             icon: sW(e),
@@ -346,7 +346,7 @@ function B({
         })
       }), n, !!a && jsx(Ov, {
         children: jsx(ME, {
-          "data-testid": Pt(s, "count"),
+          "data-testid": generateRecordingKey(s, "count"),
           children: a
         })
       })]

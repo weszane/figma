@@ -1,13 +1,13 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { A } from "../905/956262";
@@ -74,7 +74,7 @@ export function $$N0() {
       XHR.post("/api/send_mobile_download_email");
       trackEventAnalytics("post_comment_mobile_app_download_prompt_email_me_cta_clicked");
       n.complete();
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
       }));
     },

@@ -1,7 +1,7 @@
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { $ } from "../905/383708";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { FU } from "../figma_app/933328";
 import { d1 } from "../905/766303";
@@ -65,7 +65,7 @@ let $$f0 = createOptimistThunk(async (e, t) => {
     canvasPosition: new Point(canvasX, canvasY),
     percentageOffset: new Point(.5, .5),
     insertAsChildOfCanvas: !1
-  })) : e.dispatch(F.enqueue({
+  })) : e.dispatch(VisualBellActions.enqueue({
     type: "insert_component_error",
     message: getI18nString("design_systems.subscriptions.this_component_is_not_available"),
     error: !0

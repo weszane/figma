@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { languageCodes } from "../905/816253";
 import { N as _$$N } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
@@ -22,8 +22,8 @@ import { zo } from "../1250/615231";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
 import { kKu } from "../figma_app/6204";
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
 var C = (e => (e.SPAIN = "spain", e.NON_SPAIN = "non_spain", e))(C || {});
 let I = 443 == require.j ? 864e5 : null;
 let $$A = () => Date.now() - I;

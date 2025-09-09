@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, createRef } from "react";
 import { flushSync } from "../vendor/944059";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -19,7 +19,7 @@ import { O as _$$O } from "../905/487602";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
-import { of, v_, aH } from "../figma_app/806412";
+import { useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { c$, wv } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -390,14 +390,14 @@ function er({
       Fullscreen.editVariantMinWidthForTextStyleNode(sessionLocalIDToString(o), r, e);
     });
   };
-  let O = of("responsiveTextStyleVariantName", "submit", () => {
+  let O = useHandleFocusEvent("responsiveTextStyleVariantName", "submit", () => {
     "" !== h && permissionScopeHandler.user("update-responsive-text-style-variant-name", () => {
       Fullscreen.editVariantNameForTextStyleNode(sessionLocalIDToString(o), r, h);
     });
   });
-  let R = v_("responsiveTextStyleVariantName", "keydown", t => {
-    if ("Tab" === t.key || "Enter" === t.key) O();else {
-      if ("Escape" !== t.key) return aH;
+  let R = useHandleKeyboardEvent("responsiveTextStyleVariantName", "keydown", t => {
+    if ("Tab" === t.key || "Enter" === t.key) O(); else {
+      if ("Escape" !== t.key) return SKIP_RECORDING;
       flushSync(() => {
         m(e.name);
       });
@@ -432,7 +432,7 @@ function er({
               onChange: e => {
                 m(e.target.value);
               },
-              onFocus: () => (m(h), aH),
+              onFocus: () => (m(h), SKIP_RECORDING),
               onKeyDown: R,
               placeholder: getI18nString("sites.panel.responsive_text_style.custom"),
               recordingKey: "responsiveTextStyleVariantCustomName",

@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { oA } from '../905/723791';
 import { resourceUtils } from '../905/989992';
-import { a$M } from '../figma_app/43951';
+import { FileCanUseSlidesDesignToggle } from '../figma_app/43951';
 import { getObservableValue } from '../figma_app/84367';
 import { Rs } from '../figma_app/288654';
 import { vu } from '../figma_app/516028';
 import { AppStateTsApi, SelfDesignType } from '../figma_app/763686';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
-import { useSelector } from '../vendor/514228';
+import { useSelector } from 'react-redux';
 export function $$_1() {
   return getObservableValue(AppStateTsApi?.interopToolMode(), SelfDesignType.SELF) === SelfDesignType.SELF;
 }
@@ -18,7 +18,7 @@ export function $$m2() {
   let e = function () {
     let e = useSelector(vu);
     let t = e?.key ?? null;
-    let r = Rs(a$M, {
+    let r = Rs(FileCanUseSlidesDesignToggle, {
       key: t ?? ''
     }, {
       enabled: !!t

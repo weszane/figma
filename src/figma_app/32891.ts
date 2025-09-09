@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { PanelType, ViewType } from "../figma_app/763686";
 import { T } from "../905/868547";
 import { R } from "../905/105002";

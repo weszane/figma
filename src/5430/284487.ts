@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import o from "classnames";
 import { m as _$$m } from "../5430/656485";
 import { qD } from "../figma_app/471982";

@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -35,7 +35,7 @@ import { E as _$$E2 } from "../905/984674";
 import { S as _$$S2 } from "../905/433182";
 import { P as _$$P2 } from "../905/688136";
 import { B as _$$B } from "../905/55104";
-import { tWm } from "../figma_app/43951";
+import { DestinationProjectsForTeam } from "../figma_app/43951";
 import { Yf, BY, KF, Zg, Rt, mt, Al } from "../905/615608";
 import { CE, oA as _$$oA, Cr, kA, C2, FJ } from "../figma_app/397283";
 function G({
@@ -56,7 +56,7 @@ function G({
       className: _$$s.colorBorder.bSolid.bt1.wFull.$
     })
   });
-  let c = Rs(tWm, {
+  let c = Rs(DestinationProjectsForTeam, {
     teamId: o ? o.id : ""
   }, {
     enabled: !!o

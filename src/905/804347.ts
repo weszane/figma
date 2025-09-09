@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, createElement, useState, Component, memo, useCallback, useId, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
 import { Rs, p as _$$p } from "../figma_app/288654";
@@ -10,7 +10,7 @@ import { G as _$$G } from "../905/186289";
 import { resourceUtils } from "../905/989992";
 import { aQ } from "../figma_app/672951";
 import { L as _$$L } from "../905/406205";
-import { oGE, y_L, H5I } from "../figma_app/43951";
+import { ProjectTilePermissions, TeamTilePermissions, TeamOrphanedStatus } from "../figma_app/43951";
 import { x as _$$x } from "../905/695363";
 import { XU, C0, ue } from "../figma_app/756995";
 import { h as _$$h } from "../905/971482";
@@ -48,7 +48,7 @@ import { showModalHandler } from "../905/156213";
 import { _J } from "../figma_app/314264";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
-import { iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { VP } from "../905/18797";
 import { p9 } from "../figma_app/88768";
 import { hasViewerRoleAccessOnTeam, canMemberOrg } from "../figma_app/642025";
@@ -80,7 +80,7 @@ import eq from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
-import { Ay as _$$Ay2 } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { A as _$$A } from "../905/351112";
 import { S as _$$S } from "../figma_app/11182";
 import { BK } from "../905/848862";
@@ -114,7 +114,7 @@ let b = _$$h({
   [XU.GRID]: function (e) {
     let t = e.searchResult.model;
     let i = t.id;
-    let r = Rs(oGE, {
+    let r = Rs(ProjectTilePermissions, {
       projectId: i
     });
     if ("loaded" === r.status && r.data.project) {
@@ -409,7 +409,7 @@ let eh = _$$h({
       onJoin,
       onLeave
     } = em(t.id, canUserViewTeam);
-    let p = iZ();
+    let p = selectCurrentUser();
     return jsx("div", {
       children: jsx(d, {
         ...e,
@@ -429,7 +429,7 @@ let eh = _$$h({
   },
   [XU.LIST]: function (e) {
     let t = e.searchResult.model;
-    let i = Rs(y_L, {
+    let i = Rs(TeamTilePermissions, {
       teamId: t.id
     });
     let r = !1;
@@ -702,19 +702,19 @@ function eK(e) {
 var e$ = eq;
 function e0() {
   let e = useDispatch();
-  let t = TA();
-  let i = TA();
+  let t = getUserId();
+  let i = getUserId();
   return useCallback((n, r) => {
     if (oJ(r)) {
       r?.stopPropagation();
       let e = n.id;
       if (e === t) {
-        _$$Ay2.redirect(`/files/${i}/user/${e}`, "_blank");
+        customHistory.redirect(`/files/${i}/user/${e}`, "_blank");
         return;
       }
       let a = n.org_id;
       let s = a ? `/files/${a}/user/${e}` : `/files/user/${e}`;
-      _$$Ay2.redirect(s, "_blank");
+      customHistory.redirect(s, "_blank");
       return;
     }
     r?.preventDefault();
@@ -742,7 +742,7 @@ function e6(e) {
   });
   l.push({
     displayText: getI18nString("file_browser.open_in_new_tab"),
-    callback: (e, t, i, n) => _$$Ay2.redirect(`${location.origin}` + o, "_blank")
+    callback: (e, t, i, n) => customHistory.redirect(`${location.origin}` + o, "_blank")
   });
   l.push(_$$w2);
   l.push({
@@ -937,7 +937,7 @@ export function $$tt0(e) {
   let p = useMemo(() => e.searchModelType === uH.TEAMS ? t.map(e => ({
     teamId: e.model.id
   })) : [], [e.searchModelType, t]);
-  let m = _$$p(H5I, p, {
+  let m = _$$p(TeamOrphanedStatus, p, {
     enabled: e.searchModelType === uH.TEAMS
   });
   let h = useDispatch();

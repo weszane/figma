@@ -7,7 +7,7 @@ import { eY as _$$eY, dH } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { p as _$$p } from "../figma_app/372802";
 import { m as _$$m, f as _$$f } from "../905/70820";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { hD, kh, qT } from "../figma_app/387100";
 import { t as _$$t } from "../905/241707";
 import { hA } from "../figma_app/88239";
@@ -18,14 +18,14 @@ import { LZ, s9, iW } from "../figma_app/34798";
 import { createPortal } from "../vendor/944059";
 import { isNotNullish } from "../figma_app/95419";
 import { DP as _$$DP } from "../905/158740";
-import { k9, zN } from "../905/19536";
+import { useMemoStable, useStableMemo } from "../905/19536";
 import k from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { IL, am as _$$am, hC } from "../figma_app/901889";
 import { getInitialOptions } from "../figma_app/169182";
 import { _X, qc } from "../figma_app/62612";
 import { mJ, uQ } from "../figma_app/311375";
-import { Kv, EG } from "../figma_app/544649";
+import { isDevModeFocusViewActive, isInteractiveInspectionResizing } from "../figma_app/544649";
 import { UU } from "../figma_app/770088";
 import { Qx, Uu, ZR, Dm } from "../figma_app/8833";
 import { LO } from "../9410/571209";
@@ -65,7 +65,7 @@ import { Ig } from "../figma_app/155647";
 import { zi } from "../905/824449";
 import { f$ } from "../figma_app/836943";
 import { GN } from "../figma_app/249941";
-import { sD, oW } from "../figma_app/243058";
+import { VariableIdHandler, ManagedStringIdHandler } from "../figma_app/243058";
 import { SU } from "../figma_app/451499";
 import { A as _$$A2 } from "../2854/731650";
 import { A as _$$A3 } from "../2854/160761";
@@ -87,7 +87,6 @@ import { E as _$$E } from "../905/632989";
 import { J as _$$J2 } from "../905/125993";
 import { A as _$$A11 } from "../905/251970";
 import { w as _$$w2 } from "../905/442596";
-import { useHandleKeyboardEvent } from "../figma_app/878298";
 import { At } from "../905/973142";
 import { j_, El } from "../figma_app/9619";
 import { A as _$$A12, C as _$$C2 } from "../figma_app/686450";
@@ -95,7 +94,7 @@ import { Mz, HY } from "../vendor/231521";
 import { DF } from "../vendor/463802";
 import { Sd } from "../vendor/425002";
 import { $$if, XK, vJ, I2, Jj } from "../vendor/408361";
-import { rf, iQ, Pt, qP, v_ as _$$v_ } from "../figma_app/806412";
+import { useHandleMouseEvent, useHandleGenericEvent, generateRecordingKey, useSetupPlayback, useHandleKeyboardEvent } from "../figma_app/878298";
 import { D8, GG } from "../905/511649";
 import { useSprigWithSampling } from "../905/99656";
 import { n } from "../905/734251";
@@ -123,12 +122,12 @@ import { A as _$$A15 } from "../5724/713301";
 import { J as _$$J3 } from "../905/526136";
 import { A as _$$A16 } from "../vendor/850789";
 import { wY } from "../figma_app/708845";
-import { wr, Dh, tw as _$$tw, ax as _$$ax, Uc } from "../figma_app/741237";
+import { clearSelection, addToSelection, getSelectedDevModePropertiesPanelTab, setSelectedDevModePropertiesPanelTab, updateHoveredNode } from "../figma_app/741237";
 import { BK } from "../905/848862";
 import { s as _$$s } from "../905/172385";
 import { S as _$$S3 } from "../figma_app/106763";
 import { O as _$$O2 } from "../3591/240710";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { go, gk } from "../3674/705006";
 import { Mk } from "../figma_app/31188";
 import { PW } from "../905/497152";
@@ -755,8 +754,8 @@ function tl({
   });
   let o = [e.xVar, e.yVar, e.radiusVar, e.spreadVar, e.colorVar].map(e => {
     if (e?.value?.alias) {
-      let t = sD.fromKiwi(e.value.alias);
-      if (t) return sD.toString(t);
+      let t = VariableIdHandler.fromKiwi(e.value.alias);
+      if (t) return VariableIdHandler.toString(t);
     }
     return null;
   });
@@ -2058,10 +2057,10 @@ function nk({
   useEffect(() => {
     c && v.current?.focus();
   }, [c]);
-  let w = rf(e, "mousedown", () => {
+  let w = useHandleMouseEvent(e, "mousedown", () => {
     p(t);
   });
-  let N = iQ(e, "focus", () => {
+  let N = useHandleGenericEvent(e, "focus", () => {
     n || p(t);
   });
   let k = useCallback(e => {
@@ -2109,7 +2108,7 @@ function nk({
         className: A()("annotation_categories_edit_window--colorSelectTrigger--AJgOU", {
           "annotation_categories_edit_window--active---7kjY": manager.isOpen
         }),
-        recordingKey: Pt(e, "colorSelectTrigger"),
+        recordingKey: generateRecordingKey(e, "colorSelectTrigger"),
         ...getTriggerProps({}),
         "aria-label": r ? getI18nString("dev_handoff.annotations.categories_edit_window.category_color_selector.aria_label", {
           color: r.label()
@@ -2156,7 +2155,7 @@ function nk({
         value: s ?? "",
         className: "annotation_categories_edit_window--labelInput--vtlaI",
         onChange: k,
-        recordingKey: Pt(e, "labelInput"),
+        recordingKey: generateRecordingKey(e, "labelInput"),
         placeholder: getI18nString("dev_handoff.annotations.categories_edit_window.category_label_placeholder")
       })
     }), jsxs("div", {
@@ -2169,7 +2168,7 @@ function nk({
           "data-tooltip": getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_button"),
           "data-tooltip-type": "text"
         },
-        recordingKey: Pt(e, "removeButton"),
+        recordingKey: generateRecordingKey(e, "removeButton"),
         ..._getTriggerProps({}),
         children: jsx(_$$O, {})
       }), jsxs(_$$mc2, {
@@ -2191,12 +2190,12 @@ function nk({
             children: jsxs(jk, {
               children: [jsx($n, {
                 variant: "secondary",
-                recordingKey: Pt(e, "removeCategoryCancel"),
+                recordingKey: generateRecordingKey(e, "removeCategoryCancel"),
                 onClick: () => L(!1),
                 children: getI18nString("general.cancel")
               }), jsx($n, {
                 variant: "destructive",
-                recordingKey: Pt(e, "removeCategoryConfirm"),
+                recordingKey: generateRecordingKey(e, "removeCategoryConfirm"),
                 onClick: () => {
                   g(l);
                   L(!1);
@@ -2284,7 +2283,7 @@ let nA = registerModal(function (e) {
     P(dragItem.categoryId);
     T(!1);
   }, [h, u, t]);
-  let O = rf("editCategoriesModal", "mousedown", e => {
+  let O = useHandleMouseEvent("editCategoriesModal", "mousedown", e => {
     e.target === I.current && k(-1);
   }, {
     includeTarget: !0
@@ -2407,7 +2406,7 @@ let nA = registerModal(function (e) {
           children: renderI18nText("dev_handoff.annotations.categories_edit_window.title")
         }), jsx(jk, {
           children: jsx(_$$K, {
-            recordingKey: Pt(recordingKey, "addCategory"),
+            recordingKey: generateRecordingKey(recordingKey, "addCategory"),
             "aria-label": getI18nString("dev_handoff.annotations.categories_edit_window.add_category_button"),
             onClick: M,
             children: jsx(_$$x, {})
@@ -2439,7 +2438,7 @@ let nA = registerModal(function (e) {
                 onLabelChange: H,
                 onRemove: F,
                 onSelect: k,
-                recordingKey: Pt(recordingKey, "annotationCategoryItem", t),
+                recordingKey: generateRecordingKey(recordingKey, "annotationCategoryItem", t),
                 shouldFocusLabelInput: S === e
               }, e) : null;
             })
@@ -2453,12 +2452,12 @@ let nA = registerModal(function (e) {
           children: [jsx($n, {
             variant: "secondary",
             onClick: W,
-            recordingKey: Pt(recordingKey, "cancel"),
+            recordingKey: generateRecordingKey(recordingKey, "cancel"),
             children: renderI18nText("general.cancel")
           }), jsx($n, {
             onClick: G,
             disabled: !!y,
-            recordingKey: Pt(recordingKey, "done"),
+            recordingKey: generateRecordingKey(recordingKey, "done"),
             htmlAttributes: y ? {
               "data-tooltip-type": "text",
               "data-tooltip": y.message
@@ -2493,7 +2492,7 @@ function nB({
 }) {
   let o = uQ() === e;
   let l = e => {
-    e && (wr(), _$$S3("annotations"), Dh([e]));
+    e && (clearSelection(), _$$S3("annotations"), addToSelection([e]));
   };
   let s = i.slice(0, 3).map(e => e.name).join(", ");
   return jsxs(D8, {
@@ -2613,7 +2612,7 @@ let nK = {
               return {
                 annotationType: nE.MANAGED_STRING,
                 nodeId: t.guid,
-                uniqueId: `${t.guid}-${oW.toString(e.managedStringId)}`,
+                uniqueId: `${t.guid}-${ManagedStringIdHandler.toString(e.managedStringId)}`,
                 meta: {
                   ...e
                 }
@@ -2661,7 +2660,7 @@ function nX({
   let l = useDispatch();
   let s = hC();
   let r = e => {
-    e && (wr(), _$$S3("annotations"), Dh([e]), _$$tw()?.getCopy() !== IAssertResource.STRING_MANAGEMENT && _$$ax(IAssertResource.STRING_MANAGEMENT));
+    e && (clearSelection(), _$$S3("annotations"), addToSelection([e]), getSelectedDevModePropertiesPanelTab()?.getCopy() !== IAssertResource.STRING_MANAGEMENT && setSelectedDevModePropertiesPanelTab(IAssertResource.STRING_MANAGEMENT));
   };
   return jsxs("div", {
     className: A()(er, eh, {
@@ -2680,7 +2679,7 @@ function nX({
           nodeId: n
         });
         navigator.clipboard.writeText(i).then(() => {
-          l(_$$F.enqueue({
+          l(VisualBellActions.enqueue({
             message: getI18nString("string_translation_management.copied_to_clipboard", {
               stringKey: i
             })
@@ -2832,7 +2831,7 @@ function n$({
   let K = D === DesignGraphElements.ANNOTATE && !P && null !== O && O !== e;
   let X = j && !k && !d && !P;
   let J = useCallback(() => {
-    null === H && (Uc(e), X && !P && C("hover_minimized_annotation", {
+    null === H && (updateHoveredNode(e), X && !P && C("hover_minimized_annotation", {
       nodeId: e,
       nodeType
     }), L(!0));
@@ -3122,8 +3121,8 @@ function n5({
   useEffect(() => (document.addEventListener("keydown", en), () => {
     document.removeEventListener("keydown", en);
   }), [en]);
-  let ea = qP("annotationLabelInput", "submit", r);
-  let ei = _$$v_("annotationLabelInput", "keydown", e => {
+  let ea = useSetupPlayback("annotationLabelInput", "submit", r);
+  let ei = useHandleKeyboardEvent("annotationLabelInput", "keydown", e => {
     e?.stopPropagation();
     t();
   });
@@ -3207,13 +3206,13 @@ function n5({
     displayTextClassName: eI,
     isChecked: null === u,
     callback: () => Z(null),
-    recordingKey: Pt("category-option", "no-category")
+    recordingKey: generateRecordingKey("category-option", "no-category")
   }), [u, Z]);
   let eb = useMemo(() => ({
     name: "edit-categories",
     displayText: getI18nString("dev_handoff.annotations.edit_categories_option_label"),
     callback: eg,
-    recordingKey: Pt("category-option", "edit-categories")
+    recordingKey: generateRecordingKey("category-option", "edit-categories")
   }), [eg]);
   let ej = useMemo(() => [ey, {
     separator: !0,
@@ -3233,7 +3232,7 @@ function n5({
     }),
     isChecked: u === e.id,
     callback: () => Z(e.id),
-    recordingKey: Pt("category-option", e.label)
+    recordingKey: generateRecordingKey("category-option", e.label)
   })), ...(es.length > 0 ? [{
     separator: !0,
     displayText: ""
@@ -3551,7 +3550,7 @@ let an = memo(function ({
   shouldDelayHover: _,
   isInCentralTLF: v
 }) {
-  let y = k9(() => ({
+  let y = useMemoStable(() => ({
     nodeId: e,
     annotationType: n,
     meta: l,
@@ -3624,13 +3623,13 @@ let aa = memo(function ({
   let N = NW();
   let k = tO();
   let I = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
-  let C = Kv();
+  let C = isDevModeFocusViewActive();
   let T = s9();
   let L = E_();
   let R = !!hA();
   let D = useDispatch();
   let M = (e, t) => {
-    e && (wr(), _$$S3("annotations"), t ? (HandoffBindingsCpp.setEnableZoomToSelection(!1), Dh([e]), HandoffBindingsCpp.setEnableZoomToSelection(!0)) : Dh([e]));
+    e && (clearSelection(), _$$S3("annotations"), t ? (HandoffBindingsCpp.setEnableZoomToSelection(!1), addToSelection([e]), HandoffBindingsCpp.setEnableZoomToSelection(!0)) : addToSelection([e]));
   };
   let F = useRef(l);
   F.current = l;
@@ -3640,7 +3639,7 @@ let aa = memo(function ({
   useEffect(() => {
     C && (AppStateTsApi?.editorState().focusedAnnotationId.set(null), j(null));
   }, [C, j]);
-  let z = _$$v_(`annotationDisplay-${e}`, "keydown", useCallback(e => {
+  let z = useHandleKeyboardEvent(`annotationDisplay-${e}`, "keydown", useCallback(e => {
     !I && l && null === b && L === defaultSessionLocalIDString && ("Backspace" === e.key || "Delete" === e.key ? T && (k(nodeId, annotationIndex), w.current?.blur()) : "Enter" === e.key ? T && (e.preventDefault(), j(annotationIndex)) : "Escape" === e.key ? w.current?.blur() : f7(e));
   }, [annotationIndex, k, b, l, I, nodeId, L, j, T]));
   useEffect(() => (document.addEventListener("keydown", z), () => document.removeEventListener("keydown", z)), [z]);
@@ -3758,7 +3757,7 @@ function ai({
   nodeId: e,
   properties: t
 }) {
-  let n = k9(() => [...t].sort((e, t) => tk.get(e.type).index - tk.get(t.type).index), [t]);
+  let n = useMemoStable(() => [...t].sort((e, t) => tk.get(e.type).index - tk.get(t.type).index), [t]);
   let i = _$$wA((e, t, n) => {
     let a = e.get(t);
     return n.map(t => {
@@ -3990,7 +3989,7 @@ function aj() {
       let {
         tlfsWithNodes,
         newAnnotationNode: _newAnnotationNode
-      } = k9(() => {
+      } = useMemoStable(() => {
         let e = [...a];
         let l = null;
         h && f && !n.has(f) && (t === DesignGraphElements.ANNOTATE || null !== i) && e.push(f);
@@ -4069,7 +4068,7 @@ function aj() {
         });
       }
       return {
-        allAnnotations: zN(m),
+        allAnnotations: useStableMemo(m),
         newAnnotationNode: _newAnnotationNode
       };
     }({
@@ -4128,7 +4127,7 @@ function aj() {
         }
       }
     }, [y, g]);
-    let w = k9(() => {
+    let w = useMemoStable(() => {
       let t = 0;
       let n = null;
       let a = y.map(a => {
@@ -4309,7 +4308,7 @@ function aj() {
       };
     }, [e.width, k, w, t, f, a, c, p, A, n]);
     return {
-      nodesWithAnnotationInfo: k9(() => {
+      nodesWithAnnotationInfo: useMemoStable(() => {
         if (null === annotationBeingEditedIndex) return _nodesWithAnnotationInfo;
         let t = [..._nodesWithAnnotationInfo];
         let n = {
@@ -4382,7 +4381,7 @@ function aj() {
       [e]: t
     } : n);
   }, []);
-  let G = EG();
+  let G = isInteractiveInspectionResizing();
   if (!n) return null;
   let U = f.zoomScale < .05;
   let K = f.x + f.width / 2;

@@ -9,7 +9,7 @@ import { s as _$$s } from "../905/504529";
 import { dI } from "../905/805904";
 import m from "../vendor/805353";
 import { u as _$$u } from "../figma_app/852050";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { h as _$$h } from "../905/65944";
 import { WT } from "../905/824449";
 import { M as _$$M } from "../905/968248";
@@ -192,7 +192,7 @@ export function $$B0({
       n(e);
     }, [a])];
   }(t, e => {
-    i(e, zk.YES);
+    i(e, yesNoTrackingEnum.YES);
   });
   return jsx(_$$h, {
     boundVariable: c,

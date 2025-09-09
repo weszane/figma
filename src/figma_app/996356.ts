@@ -2,7 +2,7 @@ import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { popModalStack } from "../905/156213";
 let $$c1 = createOptimistThunk((e, t) => {
@@ -46,7 +46,7 @@ let $$c1 = createOptimistThunk((e, t) => {
         numExisting: e
       });
     }
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: i
     }));
   }).catch(t => {
@@ -54,7 +54,7 @@ let $$c1 = createOptimistThunk((e, t) => {
     e.dispatch($$p3({
       creating: !1
     }));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: r,
       error: !0
     }));

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { y as _$$y } from "../905/582657";
 import { U } from "../905/103637";
@@ -9,7 +9,7 @@ import { l as _$$l } from "../905/509505";
 import { E as _$$E2 } from "../905/235326";
 import { Fullscreen } from "../figma_app/763686";
 import _ from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
 import { dT } from "../figma_app/889655";
@@ -80,7 +80,7 @@ export function $$A0(e) {
         onClick: function () {
           Fullscreen && (backingSymbolGUID && !isInvalidValue(backingSymbolGUID) ? Fullscreen.goToSymbolOrStateGroupById(backingSymbolGUID, !0) : backingStateGroupGUID && !isInvalidValue(backingStateGroupGUID) && Fullscreen.goToSymbolOrStateGroupById(backingStateGroupGUID, !0));
         },
-        recordingKey: Pt(e.recordingKey, "instanceAttributionButton"),
+        recordingKey: generateRecordingKey(e.recordingKey, "instanceAttributionButton"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip": tooltip

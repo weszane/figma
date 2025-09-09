@@ -1,29 +1,29 @@
 import { atom } from 'jotai';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { createOptimistThunk } from '../905/350402';
 import { debugState } from '../905/407919';
-import { zX } from '../905/576487';
+import { VisualBellIcon } from '../905/576487';
 import { gc } from '../figma_app/120227';
-import { PW } from '../figma_app/198712';
+import { assetTypeEnum } from '../figma_app/198712';
 import { mJ } from '../figma_app/311375';
-import { tJ } from '../figma_app/741237';
+import { replaceSelection } from '../figma_app/741237';
 import { MeasurementUnit } from '../figma_app/763686';
 let $$m7 = atom(!1);
 let $$g3 = atom({});
 export function $$f8({
   type: e
 }) {
-  return e & PW.ASSET_GIF;
+  return e & assetTypeEnum.ASSET_GIF;
 }
 export function $$E5({
   type: e
 }) {
-  return e & PW.ASSET_VIDEO;
+  return e & assetTypeEnum.ASSET_VIDEO;
 }
 export function $$y4(e) {
-  return e & PW.ASSET_ICON ? 'icon' : e & PW.ASSET_ILLUSTRATION ? 'illustration' : e & PW.ASSET_IMAGE ? 'img' : e & PW.ASSET_VIDEO ? 'video' : e & PW.ASSET_GIF ? 'gif' : e & PW.ASSET_COMPONENT ? 'component' : void 0;
+  return e & assetTypeEnum.ASSET_ICON ? 'icon' : e & assetTypeEnum.ASSET_ILLUSTRATION ? 'illustration' : e & assetTypeEnum.ASSET_IMAGE ? 'img' : e & assetTypeEnum.ASSET_VIDEO ? 'video' : e & assetTypeEnum.ASSET_GIF ? 'gif' : e & assetTypeEnum.ASSET_COMPONENT ? 'component' : void 0;
 }
 export function $$b10({
   pxWidth: e,
@@ -86,7 +86,7 @@ export function $$I1({
   hideDot: a,
   shouldShowTypeLabel: s
 }) {
-  let l = e & PW.ASSET_VIDEO ? getI18nString('dev_handoff.assets.video') : e & PW.ASSET_GIF ? getI18nString('dev_handoff.assets.gif') : e & PW.ASSET_IMAGE ? getI18nString('dev_handoff.assets.image') : e & PW.ASSET_ICON ? getI18nString('dev_handoff.assets.icon') : e & PW.ASSET_COMPONENT ? getI18nString('dev_handoff.assets.instance') : e & PW.ASSET_ILLUSTRATION ? getI18nString('dev_handoff.assets.asset') : void 0;
+  let l = e & assetTypeEnum.ASSET_VIDEO ? getI18nString('dev_handoff.assets.video') : e & assetTypeEnum.ASSET_GIF ? getI18nString('dev_handoff.assets.gif') : e & assetTypeEnum.ASSET_IMAGE ? getI18nString('dev_handoff.assets.image') : e & assetTypeEnum.ASSET_ICON ? getI18nString('dev_handoff.assets.icon') : e & assetTypeEnum.ASSET_COMPONENT ? getI18nString('dev_handoff.assets.instance') : e & assetTypeEnum.ASSET_ILLUSTRATION ? getI18nString('dev_handoff.assets.asset') : void 0;
   return jsxs('span', {
     children: [s && l, !a && jsxs(Fragment, {
       children: ['\xA0', '\xB7 ']
@@ -98,7 +98,7 @@ export function $$I1({
   });
 }
 export function $$S6(e) {
-  return e & (PW.ASSET_ICON | PW.ASSET_IMAGE | PW.ASSET_GIF | PW.ASSET_VIDEO);
+  return e & (assetTypeEnum.ASSET_ICON | assetTypeEnum.ASSET_IMAGE | assetTypeEnum.ASSET_GIF | assetTypeEnum.ASSET_VIDEO);
 }
 let v = 'return_to_previous';
 let A = null;
@@ -113,10 +113,10 @@ let $$C9 = createOptimistThunk((e, t) => {
 let $$w2 = createOptimistThunk(e => {
   let t = Object.keys(e.getState().mirror.sceneGraphSelection).sort();
   let r = A && t.length === 1 && A.selectedGUID === t[0];
-  r && !x ? (document.addEventListener('keydown', O), e.dispatch(F.enqueue({
+  r && !x ? (document.addEventListener('keydown', O), e.dispatch(VisualBellActions.enqueue({
     type: v,
     message: '',
-    icon: zX.RETURN_TO_INSTANCE,
+    icon: VisualBellIcon.RETURN_TO_INSTANCE,
     button: {
       text: getI18nString('dev_handoff.assets.return_to_previous'),
       action: R
@@ -126,7 +126,7 @@ let $$w2 = createOptimistThunk(e => {
       x = !1;
       document.removeEventListener('keydown', O);
     }
-  })), x = !0, clearTimeout(N)) : !r && x && (document.removeEventListener('keydown', O), e.dispatch(F.dequeue({
+  })), x = !0, clearTimeout(N)) : !r && x && (document.removeEventListener('keydown', O), e.dispatch(VisualBellActions.dequeue({
     matchType: v
   })), x = !1, N = setTimeout(() => {
     A = null;
@@ -135,12 +135,12 @@ let $$w2 = createOptimistThunk(e => {
 function O(e) {
   let t = e.ctrlKey && e.altKey && e.metaKey;
   let r = e.ctrlKey && e.altKey && e.shiftKey;
-  (t || r) && e.code === 'KeyK' && (R(), debugState.dispatch(F.dequeue({
+  (t || r) && e.code === 'KeyK' && (R(), debugState.dispatch(VisualBellActions.dequeue({
     matchType: v
   })));
 }
 function R() {
-  A && (tJ(A.guidsToReturnTo), A = null, x = !1);
+  A && (replaceSelection(A.guidsToReturnTo), A = null, x = !1);
   document.removeEventListener('keydown', O);
 }
 export const $R = $$T0;

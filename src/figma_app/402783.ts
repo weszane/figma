@@ -8,7 +8,7 @@ import { am } from "../figma_app/901889";
 import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
 import { getTrackingSessionId } from "../905/471229";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { b as _$$b } from "../905/985254";
 import { Ay, nU, c6 } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
@@ -26,7 +26,7 @@ import { mr, sh } from "../figma_app/864246";
 import { b7 } from "../figma_app/101849";
 class w {
   static generateLocalRequestId() {
-    return _$$g();
+    return generateUUIDv4();
   }
 }
 let O = D((e, t, r) => {

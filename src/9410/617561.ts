@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { z } from "../9410/836234";
 import { AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { U } from "../figma_app/901889";

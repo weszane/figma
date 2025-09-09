@@ -1,7 +1,7 @@
-import { useSelector } from "../vendor/514228";
-import { TA } from "../905/372672";
+import { useSelector } from "react-redux";
+import { getUserId } from "../905/372672";
 export function $$a0() {
-  let e = TA();
+  let e = getUserId();
   let t = useSelector(t => e ? t.authedUsers.byId[e]?.plans : null);
   let i = {};
   t?.forEach(e => {

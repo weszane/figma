@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Uz } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { P } from "../905/994270";
@@ -31,7 +31,7 @@ export function $$g0({
     shortcuts: [{
       key: Uz.ESCAPE
     }],
-    recordingKey: Pt(A, "cancel"),
+    recordingKey: generateRecordingKey(A, "cancel"),
     onAction: e => {
       _ && nP({
         ..._,
@@ -46,7 +46,7 @@ export function $$g0({
     shortcuts: [{
       key: Uz.ESCAPE
     }],
-    recordingKey: Pt(A, "stop"),
+    recordingKey: generateRecordingKey(A, "stop"),
     onAction: e => {
       _ && nP({
         ..._,

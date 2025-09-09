@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
@@ -8,7 +8,7 @@ import { i as _$$i } from "../905/718764";
 import { getStorage } from "../905/657224";
 import u from "classnames";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { buildUploadUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { Ts } from "../905/194276";
@@ -27,8 +27,8 @@ import { nF } from "../figma_app/789";
 import { Cu } from "../figma_app/314264";
 import { BI } from "../figma_app/546509";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
-import { H as _$$H } from "../905/301652";
+import { selectCurrentUser } from "../905/372672";
+import { generateAnnomousPrefill } from "../905/301652";
 import { x as _$$x } from "../905/749159";
 import { A as _$$A, Uw, bO, JD } from "../905/219868";
 import { V as _$$V } from "../905/670859";
@@ -42,7 +42,7 @@ function V({
   file: t
 }) {
   let r = useDispatch();
-  let n = useMemo(() => BrowserInfo.isMeetDevice ? getI18nString("figjam_try.google_meet_user_name") : localStorage.getItem(_$$H()) || "", []);
+  let n = useMemo(() => BrowserInfo.isMeetDevice ? getI18nString("figjam_try.google_meet_user_name") : localStorage.getItem(generateAnnomousPrefill()) || "", []);
   let [s, o] = useState(n);
   let [l, d] = useState(!1);
   let c = nF();
@@ -54,7 +54,7 @@ function V({
       r(Ts({
         origin: "logged_out_footer",
         formState: qB.SIGN_IN,
-        redirectUrl: Ay.location.pathname
+        redirectUrl: customHistory.location.pathname
       }));
       r(showModalHandler({
         type: _$$x,
@@ -280,7 +280,7 @@ function z({
   });
 }
 export function $$W0(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = q5();
   let i = !!r?.isTryFile;
   let a = debugState.getState().selectedView;

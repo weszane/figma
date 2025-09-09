@@ -4,7 +4,7 @@ import { r1, jk, vo, Y9, nB } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { bL } from "../905/911410";
 import { DesignGraphElements } from "../figma_app/763686";
-import { Pt, rf } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { n as _$$n } from "../905/734251";
 import { dH } from "../figma_app/722362";
 function p({
@@ -26,7 +26,7 @@ function p({
       children: i && tabs.map(e => createElement(_$$t.Tab, {
         ...i[e.name],
         key: e.name + "Tab",
-        recordingKey: e.recordingKey ? Pt(l, e.recordingKey) : void 0
+        recordingKey: e.recordingKey ? generateRecordingKey(l, e.recordingKey) : void 0
       }, e.displayText))
     }), c && jsx(jk, {
       children: c
@@ -92,7 +92,7 @@ export let $$h0 = forwardRef(function ({
         })]
       })
     }), jsx(g, {
-      recordingKey: Pt(l, "closer"),
+      recordingKey: generateRecordingKey(l, "closer"),
       onClose: t
     })]
   });
@@ -101,7 +101,7 @@ function g({
   recordingKey: e,
   onClose: t
 }) {
-  let i = rf(e, "mousedown", useCallback(e => {
+  let i = useHandleMouseEvent(e, "mousedown", useCallback(e => {
     t();
     e.stopPropagation();
   }, [t]));

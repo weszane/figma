@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { oU, Sr, B3 } from "../905/535224";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -22,9 +22,9 @@ import { WX } from "../figma_app/350203";
 import { E$, LR, Im, CI, Dy } from "../figma_app/844435";
 import { Sz } from "../figma_app/12535";
 import { ud } from "../905/862913";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
-import { igD } from "../figma_app/43951";
+import { CommunityUniversalPostingModalRecentFileKeysView } from "../figma_app/43951";
 import { IT } from "../905/713695";
 import { Yj } from "../figma_app/951233";
 import { bD } from "../figma_app/45218";
@@ -211,7 +211,7 @@ function X(e) {
 }
 function q(e) {
   let t = useDispatch();
-  let r = Pc();
+  let r = selectUser();
   let i = [];
   let o = {
     [gr.FILES]: getI18nString("community.view_bar.files"),
@@ -254,12 +254,12 @@ function q(e) {
 var J = (e => (e[e.Fetched = 0] = "Fetched", e[e.Fetching = 1] = "Fetching", e[e.NeverFetched = 2] = "NeverFetched", e))(J || {});
 let Z = [FFileType.DESIGN, FFileType.WHITEBOARD];
 let $$Q0 = registerModal(function (e) {
-  let t = Pc();
+  let t = selectUser();
   let r = useDispatch();
   let o = useSelector(e => !!e.user);
   let l = useSelector(e => e.currentUserOrgId);
   let d = function () {
-    let [e] = IT(igD({}));
+    let [e] = IT(CommunityUniversalPostingModalRecentFileKeysView({}));
     return useMemo(() => e.transform(e => {
       let t = [];
       for (let r of e.currentUser.recentFiles2 ?? []) r.file && t.push(r.file.key);

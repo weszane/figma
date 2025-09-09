@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { H0 } from "../figma_app/191804";
 import { Point } from "../905/736624";
 import { Jn } from "../905/17223";
 import { i as _$$i, C as _$$C } from "../905/64217";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { $ } from "../905/355181";
 import { j7 } from "../905/929976";
 import { popModalStack } from "../905/156213";
@@ -113,7 +113,7 @@ export let $$k0 = registerModal(function (e) {
     });
   };
   let V = e => {
-    if ("ArrowLeft" === e.key) 0 !== i && U(-1);else if ("ArrowRight" === e.key) {
+    if ("ArrowLeft" === e.key) 0 !== i && U(-1); else if ("ArrowRight" === e.key) {
       if (i === O.length - 1) return;
       U(1);
     }
@@ -146,14 +146,14 @@ export let $$k0 = registerModal(function (e) {
     if (H.current) {
       let n = H.current.value.trim();
       (n || e) && onUpdateAltText(n, i).then(e => {
-        e && (200 !== e.status ? t(_$$F.enqueue({
+        e && (200 !== e.status ? t(VisualBellActions.enqueue({
           message: getI18nString("comments.failed_to_update_alt_text")
         })) : D(e => (e[i] = {
           ...e[i],
           altText: n
         }, e)));
       }).catch(e => {
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           message: getI18nString("comments.failed_to_update_alt_text")
         }));
       });

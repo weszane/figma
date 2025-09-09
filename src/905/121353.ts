@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { t as _$$t } from "../905/150656";
 import { $n } from "../905/521428";
@@ -55,7 +55,7 @@ import { j6, fu } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
 import { eY } from "../figma_app/722362";
 import { sZ } from "../905/845253";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { xw } from "../figma_app/951233";
 import { vt } from "../figma_app/45218";
 import { e0 } from "../905/696396";
@@ -461,7 +461,7 @@ export function $$em0(e) {
     figFile,
     existingHubFile
   } = e;
-  let o = Pc();
+  let o = selectUser();
   let l = _$$h2(figFile);
   let d = useSelector(e => xw(e) ?? void 0, c2);
   let c = sZ();

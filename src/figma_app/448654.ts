@@ -4,7 +4,7 @@ import { oA } from "../905/663269";
 import { p } from "../figma_app/288654";
 import { _R } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
-import { rwE } from "../figma_app/43951";
+import { RepoTilePermissions } from "../figma_app/43951";
 export function $$c7(e) {
   let t = e.canEdit;
   let r = e.canMove;
@@ -66,7 +66,7 @@ export function $$y5(e, t = !0) {
   let r = useMemo(() => e.map(e => ({
     repoId: e
   })), [e]);
-  let a = p(rwE, r, {
+  let a = p(RepoTilePermissions, r, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(a.map(e => e.result)).transform(e => {

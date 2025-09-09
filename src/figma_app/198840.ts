@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
 import { xf } from "../figma_app/416935";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Gc } from "../905/63728";
 import { gU } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
@@ -201,7 +201,7 @@ export function $$U5(e) {
   let t = X$(e);
   return Gc(e => {
     e?.preventDefault();
-    Ay.redirect(t, "_blank");
+    customHistory.redirect(t, "_blank");
   });
 }
 export const HF = $$F0;

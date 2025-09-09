@@ -2,7 +2,7 @@ import type { Atom } from 'jotai'
 import type { AtomFamily } from 'jotai/vanilla/utils/atomFamily'
 import { atom } from 'jotai'
 import { useSetAtom, useStore } from 'jotai/react'
-import { atomFamily, unwrap } from 'jotai/utils'
+import { atomFamily, atomWithDefault, unwrap } from 'jotai/utils'
 import { useDebugValue, useEffect, useMemo, useReducer } from 'react'
 import { createAtomWithEquality } from '../905/12800'
 import { setupDebounceAtoms } from '../905/20215'
@@ -146,4 +146,4 @@ export const M2 = createAtomWithEquality
 export const LJ = createCustomAtom
 export const FZ = setupCustomAtom
 export const eU = atom
-export { atom, atomStoreManager, createCustomAtom, setupAtomWithMount }
+export { atom, atomStoreManager, atomWithDefault, createCustomAtom, createLocalStorageAtom, setupAtomWithMount }

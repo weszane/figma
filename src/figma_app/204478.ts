@@ -1,6 +1,6 @@
 import { atom, createLocalStorageAtom } from "../figma_app/27355";
 import { getAnonymousId } from "../905/449184";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Ec } from "../figma_app/240545";
 let $$o4 = atom(void 0);
 let $$l6 = atom(void 0);
@@ -12,7 +12,7 @@ let $$u0 = atom(!1);
 let $$p1 = createLocalStorageAtom(Ec, [], {
   subscribeToChanges: !0
 });
-let _ = getAnonymousId() ?? g();
+let _ = getAnonymousId() ?? generateUUIDv4();
 let $$h3 = atom(_);
 export const Ai = $$u0;
 export const Gn = $$p1;

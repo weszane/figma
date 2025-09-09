@@ -3,7 +3,7 @@ import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { s as _$$s, Q } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { cL } from "../905/748726";
 import { popModalStack, showModalHandler } from "../905/156213";
@@ -16,7 +16,7 @@ import { e6 } from "../905/557142";
 import { t as _$$t2 } from "../figma_app/32680";
 import { oE } from "../905/249410";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { T as _$$T } from "../figma_app/257703";
 import { fu } from "../figma_app/831799";
 import { v as _$$v } from "../905/124421";
@@ -325,7 +325,7 @@ let $$M3 = createOptimistThunk((e, {
           teamId: s,
           canEditTeam: void 0
         }
-      }));else {
+      })); else {
         let t = s && {
           ...n.teams[s],
           canEdit: hasEditorRoleAccessOnTeam(s, n),
@@ -430,7 +430,7 @@ let $$B1 = createOptimistThunk((e, {
   folderName: r
 }) => {
   let a = n && r ? `Moved '${n.name}' to ${r}` : void 0;
-  i >= e6.EDITOR && r && n ? a && e.dispatch(_$$F.enqueue({
+  i >= e6.EDITOR && r && n ? a && e.dispatch(VisualBellActions.enqueue({
     type: "file-moved",
     message: ((e, t, i, n) => {
       if (0 === e.length) return n;
@@ -439,7 +439,7 @@ let $$B1 = createOptimistThunk((e, {
       let a = `been invited to edit '${t}' in ${i}`;
       return r.length > 1 ? `${r[0]} and ` + (r.length > 2 ? `${r.length - 1} others have ` : "1 other has ") + a : `${r[0]} has ${a}`;
     })(t, n.name, r, a)
-  })) : e.dispatch(_$$F.enqueue({
+  })) : e.dispatch(VisualBellActions.enqueue({
     type: "invite-sent",
     message: getI18nString("file_permissions_modal.invited_num_people", {
       num_invites: t.length

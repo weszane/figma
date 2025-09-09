@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { t as _$$t } from "../905/150656";
 import { UserInterfaceElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { ow, Em } from "../figma_app/976749";
 import { _6 } from "../figma_app/386952";
@@ -85,7 +85,7 @@ export function $$y4(e, t) {
     [$$p0]: !S,
     [$$x1]: v && w && !1
   }, e.toString(), N, {
-    recordingKey: Pt(t, "tabs")
+    recordingKey: generateRecordingKey(t, "tabs")
   });
 }
 export const ay = $$p0;

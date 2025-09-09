@@ -1,11 +1,11 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useState, useRef, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { sha1HexFromBytes } from "../905/125019";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { _L } from "../9410/635978";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { tB } from "../figma_app/731583";
 import { y7 } from "../figma_app/385874";
 import { _X, Yb } from "../figma_app/62612";
@@ -193,8 +193,8 @@ function k({
     let n = i?.parentNode?.type || "";
     if (isSupportedNodeType(n)) {
       let e = i?.parentGuid;
-      e && !N.includes(e) && tJ([e]);
-    } else N.includes(e) || tJ([e]);
+      e && !N.includes(e) && replaceSelection([e]);
+    } else N.includes(e) || replaceSelection([e]);
     t && "dormant" !== L ? t?.paused ? t?.play() : t?.pause() : (T(!1), P());
   }, [L, P, e, N, k]);
   let M = DD(e);

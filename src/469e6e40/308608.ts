@@ -1,13 +1,13 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useLayoutEffect, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import d from "classnames";
 import { ResourceStatus } from "../905/957591";
 import { parsePxNumber } from "../figma_app/783094";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { R as _$$R } from "../905/165069";
 import { Rs } from "../figma_app/288654";
@@ -23,8 +23,8 @@ import { y2 } from "../figma_app/563413";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { $ as _$$$, V as _$$V2 } from "../905/355181";
 import { In } from "../905/672640";
@@ -51,9 +51,9 @@ import { PO, Te } from "../figma_app/765689";
 import { q as _$$q } from "../4452/876838";
 import { QL, EM } from "../905/609392";
 import { Um } from "../905/848862";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { MX, EQ } from "../figma_app/684446";
-import { oSh, EEx, HpJ } from "../figma_app/43951";
+import { OrgUsersByIdView, AdminRequestDashboardView, AdminRequestDashOrgInfo } from "../figma_app/43951";
 import { $ as _$$$2 } from "../figma_app/126651";
 import { Sm } from "../figma_app/482728";
 import { e0 as _$$e2 } from "../905/696396";
@@ -299,7 +299,7 @@ let eI = registerModal(function ({
       g(!1);
     }).$$finally(() => g(!1)) : g(!1);
   }, [_, t, e.userId, r, l]);
-  let x = Rs(oSh, {
+  let x = Rs(OrgUsersByIdView, {
     orgId: t,
     orgUserIds: u ? [u] : []
   }, {
@@ -473,7 +473,7 @@ export function $$eD0({
   let [eQ, eZ] = useState(eK);
   let [e0, e1] = useState(null);
   let e2 = MX();
-  let e4 = TA();
+  let e4 = getUserId();
   let e5 = t === ps.ORG;
   let e3 = useMemo(() => e5 ? EQ(e2, e4, !1).groupsUserIsAdminOf : [], [e2, e4, e5]);
   let e8 = useMemo(() => e3 ? e3.map(e => e.id) : [], [e3]);
@@ -502,7 +502,7 @@ export function $$eD0({
   let te = useMemo(() => JSON.stringify({
     billing_group_ids: e6
   }), [e6]);
-  let tt = Rs(EEx({
+  let tt = Rs(AdminRequestDashboardView({
     planType: t,
     planId: a,
     sortOrder: Q === i5.NEWEST_FIRST ? "desc" : "asc",
@@ -524,7 +524,7 @@ export function $$eD0({
     }),
     processedRequestIds: eq
   });
-  let ts = Rs(HpJ({
+  let ts = Rs(AdminRequestDashOrgInfo({
     orgId: a
   }), {
     enabled: e5
@@ -771,13 +771,13 @@ export function $$eD0({
     })]
   });
   let tR = () => {
-    z(_$$F.enqueue({
+    z(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.error_generic"),
       error: !0,
       button: {
         text: getI18nString("admin_dashboard.requests.error_reload"),
         action: () => {
-          Ay.reload("Admin requests dashboard error");
+          customHistory.reload("Admin requests dashboard error");
         }
       }
     }));
@@ -785,13 +785,13 @@ export function $$eD0({
   let tO = ({
     multiple: e
   }) => {
-    z(_$$F.enqueue({
+    z(VisualBellActions.enqueue({
       message: e ? getI18nString("admin_dashboard.requests.error_multiple") : getI18nString("admin_dashboard.requests.error_single"),
       error: !0,
       button: {
         text: getI18nString("admin_dashboard.requests.error_reload"),
         action: () => {
-          Ay.reload("Admin requests dashboard error");
+          customHistory.reload("Admin requests dashboard error");
         }
       }
     }));
@@ -809,7 +809,7 @@ export function $$eD0({
     e && a && (n = getI18nString("admin_dashboard.requests.success_approve_multiple_async", {
       numRequests: t
     }));
-    z(_$$F.enqueue({
+    z(VisualBellActions.enqueue({
       message: n,
       type: e ? "requests-approved" : "requests-denied"
     }));
@@ -817,7 +817,7 @@ export function $$eD0({
   let tD = ({
     requesterName: e
   }) => {
-    z(_$$F.enqueue({
+    z(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.success_approve_with_name", {
         requesterName: e
       }),
@@ -825,7 +825,7 @@ export function $$eD0({
     }));
   };
   let tM = () => {
-    z(_$$F.enqueue({
+    z(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.this_request_has_already_been_handled"),
       type: "requests-approved"
     }));
@@ -907,13 +907,13 @@ export function $$eD0({
   }) => {
     ew(ej.current);
     eb(s ? "approving_all_button" : e ? "approving" : "denying");
-    s && tg && z(_$$F.enqueue({
+    s && tg && z(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.selected_count_approving", {
         numSelected: tg
       }),
       type: eO,
       timeoutOverride: 1 / 0,
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       preventDismissal: !0,
       role: "status"
     }));
@@ -971,7 +971,7 @@ export function $$eD0({
     }).catch(() => {
       tR();
     }).$$finally(() => {
-      s && z(_$$F.dequeue({
+      s && z(VisualBellActions.dequeue({
         matchType: eO
       }));
       _();

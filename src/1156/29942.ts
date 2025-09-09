@@ -2,7 +2,7 @@ import _require2 from "../7099/87099";
 import _require from "../6256/886256";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useCallback, lazy, forwardRef, useMemo, useRef, useEffect, Suspense, createElement } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lV, U1, MK } from "../figma_app/617606";
 import l, { Hg, W as _$$W } from "../figma_app/304955";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -120,7 +120,7 @@ import { Pe } from "../1156/713925";
 import { Ng, YT, vG } from "../figma_app/176302";
 import { S as _$$S } from "../1156/521776";
 import { ty as _$$ty, Rm, Y2, DT } from "../figma_app/320164";
-import { Ay as _$$Ay2 } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { My } from "../905/194276";
 import { qB } from "../905/862321";
 import { g as _$$g2 } from "../905/248178";
@@ -137,7 +137,7 @@ import { z as _$$z } from "../vendor/999105";
 import { W as _$$W4 } from "../905/592530";
 import { A as _$$A5 } from "../vendor/90566";
 import { P as _$$P4 } from "../905/347284";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { L as _$$L2 } from "../1156/365427";
 import { N as _$$N3 } from "../1156/229926";
 import { N as _$$N4 } from "../1156/461005";
@@ -659,7 +659,7 @@ function tN() {
             Rm({
               dispatch: t,
               origin: _$$ty.FIGMA_REV_LOGGED_OUT_FOOTER_WITH_GOOGLE,
-              redirectUrl: _$$Ay2.location.pathname
+              redirectUrl: customHistory.location.pathname
             }).then(e => {
               "login" === e.type && t(My({
                 userId: e.user.id
@@ -672,7 +672,7 @@ function tN() {
                 dispatch: t,
                 origin: _$$ty.FIGMA_REV_LOGGED_OUT_FOOTER_WITH_GOOGLE,
                 message: e.message,
-                redirectUrl: _$$Ay2.location.pathname
+                redirectUrl: customHistory.location.pathname
               });
             });
           }
@@ -3406,7 +3406,7 @@ function rL({
     scrollEndRef: p,
     scrollToBottomOnMount: t.length > 0
   });
-  let N = iZ();
+  let N = selectCurrentUser();
   rT({
     messagesForRendering: t,
     currentUserId: N?.id,
@@ -3754,7 +3754,7 @@ function rD({
     scrollToBottomOnMount: !0,
     numScrollToBottomRetries: 0
   });
-  let j = iZ();
+  let j = selectCurrentUser();
   rT({
     messagesForRendering: t,
     currentUserId: j?.id,
@@ -5092,7 +5092,7 @@ export default function App() {
     } = $W(e);
     let s = void 0 !== exchange && exchange.messages.length > 0;
     let l = _$$tS();
-    let o = iZ();
+    let o = selectCurrentUser();
     useEffect(() => {
       if (!s || !l || user?.userID !== o?.id) return;
       let e = e => {

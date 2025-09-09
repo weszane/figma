@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useEffect, useRef, useMemo, useCallback, Fragment as _$$Fragment } from "react";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { debounce } from "../905/915765";
 import { t as _$$t } from "../905/150656";
 import { k as _$$k } from "../905/443820";
@@ -9,13 +9,13 @@ import { getFeatureFlags } from "../905/601108";
 import _ from "classnames";
 import { bellFeedAPIInstance, desktopAPIInstance } from "../figma_app/876459";
 import { ek as _$$ek, zv } from "../figma_app/640683";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { F as _$$F } from "../905/680873";
 import { ZC } from "../figma_app/39751";
 import { XHR } from "../905/910117";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F2 } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { UN } from "../figma_app/976345";
 import { oB, sf } from "../905/929976";
 import { Ow } from "../figma_app/297957";
@@ -24,7 +24,7 @@ import { H as _$$H } from "../905/422284";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { FC } from "../figma_app/212807";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { vU } from "../figma_app/193867";
 import { gN, X2, Zo, td } from "../figma_app/273118";
 import { notificationAPI } from "../905/894881";
@@ -212,7 +212,7 @@ function ef(e) {
     try {
       setIsDisabled(!0);
       let n = (await callbacks.buildNotificationActionRequest(block.notification_action)).data.meta.updated_notification_blob;
-      e && t(_$$F2.enqueue({
+      e && t(VisualBellActions.enqueue({
         message: e,
         error: !1,
         role: "status"
@@ -858,7 +858,7 @@ export function $$eY4(e, t) {
       }) => {
         w(e.meta);
       }).catch(e => {
-        i(_$$F2.enqueue({
+        i(VisualBellActions.enqueue({
           message: getI18nString("user_notification.an_error_occurred_while_fetching_your_community_notifications"),
           type: "user-notification",
           error: !0
@@ -873,7 +873,7 @@ export function $$eY4(e, t) {
       }) => {
         w(e.meta);
       }).catch(e => {
-        i(_$$F2.enqueue({
+        i(VisualBellActions.enqueue({
           message: getI18nString("user_notification.an_error_occurred_while_fetching_your_notifications"),
           type: "user-notification",
           error: !0
@@ -909,7 +909,7 @@ export function $$eY4(e, t) {
       })).then(() => {
         m(new Map(Array.from(_, ([e, t]) => (t.is_unread = !1, [e, t]))));
       }).catch(() => {
-        i(_$$F2.enqueue({
+        i(VisualBellActions.enqueue({
           message: getI18nString("user_notification.an_error_occurred_marking_all_as_read"),
           type: "user-notification",
           error: !0
@@ -1030,7 +1030,7 @@ function eW(e, t) {
     }) : null;
   }
   e.Feed = function (e) {
-    let a = Pc();
+    let a = selectUser();
     let l = useSelector(e => a ? e.authedUsers.byId[a.id]?.plans : null);
     let s = useStore();
     let d = useDispatch();
@@ -1081,16 +1081,16 @@ function eW(e, t) {
       if (!desktopAPIInstance && r) d(_$$H({
         params: n.searchParams.toString(),
         hash: n.hash
-      }));else if (t.deeplink.use_unsafe) Ay.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank");else if (e.inDesktopTray) Ay.redirect(n.href);else try {
+      }));else if (t.deeplink.use_unsafe) customHistory.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank");else if (e.inDesktopTray) customHistory.redirect(n.href);else try {
         let e = vU(s.getState(), o);
         if ("teamFeed" === e.view) {
-          m && t.plan?.id.toString() === m.id ? d(sf(e)) : Ay.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
+          m && t.plan?.id.toString() === m.id ? d(sf(e)) : customHistory.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
           return;
         }
-        Ay.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
+        customHistory.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
         return;
       } catch {
-        Ay.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
+        customHistory.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
       }
     }, [d, _, e.currentPlanFilter, e.inDesktopTray, u, s, m]);
     if (e.isFetchingNotifications) return jsx("div", {

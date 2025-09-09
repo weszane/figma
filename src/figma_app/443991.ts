@@ -5,7 +5,7 @@ import { Point } from "../905/736624";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { yJ } from "../905/395917";
 import { yJ as _$$yJ } from "../figma_app/240735";
@@ -114,7 +114,7 @@ let S = createOptimistThunk((e, t) => {
         userInitiated: !1
       }));
       e.dispatch($$I1());
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("avatar_actions.team_icon_updated")
       }));
     }, t => {
@@ -147,7 +147,7 @@ let S = createOptimistThunk((e, t) => {
       img_url: t.smallUrl,
       img_url_500_500: t.largeUrl,
       onfulfilled: () => {
-        e.dispatch(F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           message: getI18nString("avatar_actions.workspace_icon_updated")
         }));
       },

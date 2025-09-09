@@ -2,8 +2,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { atomStoreManager, atom } from "../figma_app/27355";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { jO } from "../905/573265";
 import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
@@ -21,10 +21,10 @@ export function $$A3(e, t) {
       atomStoreManager.set(_9, {
         state: VW.PUBLISH_TEMPLATE_COMPLETED
       });
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         type: $$_0,
         message: t.isPublishedTemplate ? getI18nString("cooper.templates.template_updates_published") : getI18nString("cooper.templates.template_published"),
-        icon: zX.CHECK
+        icon: VisualBellIcon.CHECK
       }));
       e(hideModal());
     },
@@ -41,7 +41,7 @@ export function $$A3(e, t) {
       atomStoreManager.set(_9, {
         state: VW.PUBLISH_TEMPLATE_ERRORED
       });
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         type: $$_0,
         message: getI18nString("cooper.templates.template_failed_published"),
         error: !0
@@ -50,9 +50,9 @@ export function $$A3(e, t) {
   });
 }
 export function $$y2(e) {
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     type: $$_0,
-    icon: zX.EXCLAMATION,
+    icon: VisualBellIcon.EXCLAMATION,
     error: !0,
     message: getI18nString("cooper.templates.template_publish_error_mark_at_least_one_ready")
   }));
@@ -69,7 +69,7 @@ let b = {
         atomStoreManager.set(_9, {
           state: VW.PUBLISH_HUB_FILE_COMPLETED
         });
-        dispatch(F.dequeue({
+        dispatch(VisualBellActions.dequeue({
           matchType: $$_0
         }));
         break;
@@ -90,7 +90,7 @@ let b = {
       dispatch
     } = e;
     let n = atomStoreManager.get(UV);
-    [VW.PUBLISH_TEMPLATE_INITIATED, VW.PUBLISH_HUB_FILE_INITIATED].includes(n) && dispatch(F.enqueue({
+    [VW.PUBLISH_TEMPLATE_INITIATED, VW.PUBLISH_HUB_FILE_INITIATED].includes(n) && dispatch(VisualBellActions.enqueue({
       type: $$_0,
       message: publishType === M$.UNPUBLISH ? getI18nString("cooper.templates.template_unpublishing") : getI18nString("cooper.templates.template_publishing"),
       icon: e.icon,
@@ -130,9 +130,9 @@ let b = {
     }
     switch (error) {
       case jO.Offline:
-        dispatch(F.enqueue({
+        dispatch(VisualBellActions.enqueue({
           type: $$_0,
-          icon: zX.EXCLAMATION,
+          icon: VisualBellIcon.EXCLAMATION,
           error: !0,
           message: getI18nString("cooper.templates.template_publish_error_offline")
         }));
@@ -141,26 +141,26 @@ let b = {
         MZ(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
         break;
       case jO.NoItemsToPublish:
-        dispatch(F.enqueue({
+        dispatch(VisualBellActions.enqueue({
           type: $$_0,
-          icon: zX.EXCLAMATION,
+          icon: VisualBellIcon.EXCLAMATION,
           error: !0,
           message: getI18nString("cooper.templates.template_publish_error_empty")
         }));
         break;
       case jO.ErrorCode:
-        dispatch(413 === e.errorCode ? F.enqueue({
+        dispatch(413 === e.errorCode ? VisualBellActions.enqueue({
           type: $$_0,
           error: !0,
           message: getI18nString("cooper.templates.template_publish_error_page_name_too_long")
-        }) : F.enqueue({
+        }) : VisualBellActions.enqueue({
           type: $$_0,
           error: !0,
           message: getI18nString("cooper.templates.template_publish_error_something_went_wrong")
         }));
         break;
       default:
-        dispatch(F.enqueue({
+        dispatch(VisualBellActions.enqueue({
           type: $$_0,
           error: !0,
           message: getI18nString("cooper.templates.template_publish_error_something_went_wrong")

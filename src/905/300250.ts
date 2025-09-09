@@ -4,11 +4,11 @@ import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { s9 } from "../905/194389";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { XHR, getRequest } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { Nf } from "../figma_app/864378";
@@ -17,7 +17,7 @@ import { rY, XA } from "../905/985490";
 import { gf, FK, fA, ds, Mt } from "../905/585030";
 import { HJ, cb } from "../905/760074";
 import { fullscreenValue } from "../figma_app/455680";
-import { NT } from "../figma_app/741237";
+import { setPropertiesPanelTab } from "../figma_app/741237";
 import { De, eN, oJ, mN, lt } from "../905/346794";
 import { Qx, WO } from "../905/491806";
 import { FEditorType } from "../figma_app/53721";
@@ -31,7 +31,7 @@ async function T(e, t, i) {
       cause: n
     });
     HJ(e, PW.ON_MERGE, i);
-    t(F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.error_creating_image_usages"),
       error: !0
     }));
@@ -40,7 +40,7 @@ async function T(e, t, i) {
 }
 let k = createOptimistThunk((e, t) => {
   let i = t?.message || getI18nString("collaboration.branching.error_merging");
-  e.dispatch(F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     message: i,
     type: "file-merge-submit",
     error: !0
@@ -87,9 +87,9 @@ let $$R3 = createOptimistThunk(async (e, t) => {
       mergeParams
     }));
   } else {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: pendingMessage,
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       type: "file-merge-submit"
     }));
     e.dispatch($$j4({}));
@@ -136,20 +136,20 @@ let $$N7 = createOptimistThunk((e, t) => {
       userInitiated: t.userInitiated,
       reason: t.reason
     });
-    e.getState().openFile?.canEdit ? (NT(DesignWorkspace.DESIGN), fullscreenValue.triggerAction("enter-layout-mode")) : (NT(DesignWorkspace.INSPECT), fullscreenValue.triggerAction("enter-preview-mode"));
+    e.getState().openFile?.canEdit ? (setPropertiesPanelTab(DesignWorkspace.DESIGN), fullscreenValue.triggerAction("enter-layout-mode")) : (setPropertiesPanelTab(DesignWorkspace.INSPECT), fullscreenValue.triggerAction("enter-preview-mode"));
   }).catch(e => {
     let t = new s9("Refreshing due to error in abandonDiff", {
       cause: e
     });
     cb(t);
-    Ay.reload("Merge cancelled");
+    customHistory.reload("Merge cancelled");
   });
 });
 let $$P0 = createOptimistThunk(async (e, t) => {
   if (t.mergeParams.mergeOnFileOpen) {
-    if (await waitForAnimationFrame(), eN() || (Multiplayer.updateConnectionStateIfNeeded(!0), await oJ(SchemaJoinStatus.JOINED)), e.dispatch(F.enqueue({
+    if (await waitForAnimationFrame(), eN() || (Multiplayer.updateConnectionStateIfNeeded(!0), await oJ(SchemaJoinStatus.JOINED)), e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.merging"),
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       type: "file-merge-submit"
     })), e.getState().mirror.appModel.isReadOnly) {
       HJ(Error("mergeOnFileOpen: app model is in read only state"), PW.ON_MERGE, t.mergeParams.direction);
@@ -257,7 +257,7 @@ let O = async (e, t, i, n, r = null) => {
           }), PW.ON_MERGE, i.direction, {
             file_merge_id: e.data?.failure_info?.file_merge_id
           });
-          t(F.clearAll());
+          t(VisualBellActions.clearAll());
           t(showModalHandler({
             type: my,
             data: {
@@ -308,7 +308,7 @@ let O = async (e, t, i, n, r = null) => {
         }), PW.ON_MERGE, i.direction, {
           file_merge_id: e.data.failure_info?.file_merge_id || null
         });
-        t(F.clearAll());
+        t(VisualBellActions.clearAll());
         t(showModalHandler({
           type: my,
           data: {
@@ -331,7 +331,7 @@ let O = async (e, t, i, n, r = null) => {
       HJ(Error("merge: Encountered unknown server error while creating FileMerge record"), PW.ON_MERGE, i.direction, {
         file_merge_id: e.data?.failure_info?.file_merge_id
       });
-      t(F.clearAll());
+      t(VisualBellActions.clearAll());
       t(showModalHandler({
         type: my,
         data: {

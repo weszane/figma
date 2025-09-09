@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { AppStateTsApi, DesignGraphElements, Fullscreen, Command } from "../figma_app/763686";
 import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { yE } from "../905/125333";
@@ -11,7 +11,7 @@ import { w as _$$w } from "../0c62c2fd/912149";
 import { q5 } from "../figma_app/516028";
 import { t as _$$t } from "../905/851577";
 import { N as _$$N } from "../905/645480";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
 import { X$, YY } from "../figma_app/465071";
@@ -57,7 +57,7 @@ export function $$L9() {
   }, [i, n, e, t]);
 }
 export function $$R1() {
-  let e = TA();
+  let e = getUserId();
   let t = useAtomWithSubscription(Rg);
   let [i, n] = useAtomValueAndSetter(Gn);
   useEffect(() => {

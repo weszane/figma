@@ -7,14 +7,14 @@ import { PanelType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
 import { tc } from "../905/15667";
 import { tf, fu } from "../figma_app/831799";
 import { fullscreenValue } from "../figma_app/455680";
 import { q } from "../figma_app/590592";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { q5 } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
@@ -72,7 +72,7 @@ export function $$P2(e) {
     n(f0.SETTINGS);
     closeOverlay();
     let t = getSingletonSceneGraph().getCurrentPage();
-    e ? e !== t?.guid && (getSingletonSceneGraph().setCurrentPageFromNodeAsync(e), tJ([e])) : t && t.setSelectionToSingleNode("-1:-1");
+    e ? e !== t?.guid && (getSingletonSceneGraph().setCurrentPageFromNodeAsync(e), replaceSelection([e])) : t && t.setSelectionToSingleNode("-1:-1");
   };
 }
 export function $$D1({
@@ -84,7 +84,7 @@ export function $$D1({
   return r?.canEdit ? jsx(K, {
     "aria-label": getI18nString("sites.metadata.modal_button_site"),
     onClick: s,
-    recordingKey: Pt(e, "websiteSettingsButton"),
+    recordingKey: generateRecordingKey(e, "websiteSettingsButton"),
     htmlAttributes: {
       "data-tooltip": getI18nString("sites.metadata.modal_button_site"),
       "data-tooltip-type": Ib.TEXT
@@ -109,7 +109,7 @@ export function $$M0({
   });
   let d = getUpgradeEligibility(FProductAccessType.FIGMAKE);
   let c = getI18nString("figmake.metadata.modal_button_site");
-  let E = Pt(e, "websiteSettingsButton");
+  let E = generateRecordingKey(e, "websiteSettingsButton");
   if (getFeatureFlags().bake_monetization_plan && d === _$$q.CAN_UPGRADE) return jsx(fu, {
     name: "site_settings_button_upgrade_entry_point",
     children: jsx(k, {

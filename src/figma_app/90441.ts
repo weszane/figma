@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, useLayoutEffect } from "react";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import s from "classnames";
 import { wY, cU } from "../figma_app/708845";
 import { $ } from "../905/455748";
@@ -26,7 +26,7 @@ export function $$p1({
   frozen: I,
   setSizeChanged: S
 }) {
-  let v = k9(() => e, [e]);
+  let v = useMemoStable(() => e, [e]);
   let A = {
     pointerEvents: u,
     zIndex: p

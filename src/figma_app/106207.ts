@@ -1,16 +1,16 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { CustomPosition, SourceType, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { J as _$$J } from "../905/931050";
 import { r as _$$r } from "../905/520829";
 import { PerfTimer } from "../905/609396";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { Cx, yH } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
@@ -22,7 +22,7 @@ import { gY } from "../figma_app/973927";
 import { n as _$$n } from "../905/815475";
 import { sf } from "../figma_app/12535";
 import { tS } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { to } from "../905/612685";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { VP } from "../905/18797";
@@ -134,7 +134,7 @@ export async function $$U2({
       enableTracking: !o
     });
   } catch (e) {
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("whiteboard.inserts.insert_template_failed_v2"),
       error: !0
     }));
@@ -274,7 +274,7 @@ async function W({
       storeInRecentsKey: $A.FigJam,
       ...t
     }));
-    Ay.redirect(to(fig_file), a ? "_blank" : void 0);
+    customHistory.redirect(to(fig_file), a ? "_blank" : void 0);
   }).catch(() => {
     let t = {
       error: !0,
@@ -282,7 +282,7 @@ async function W({
         hubFileName: i
       })
     };
-    e(_$$F.enqueue(t));
+    e(VisualBellActions.enqueue(t));
     n();
   });
 }
@@ -385,7 +385,7 @@ let J = {
   url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+P///38ACfsD/QVDRcoAAAAASUVORK5CYII="
 };
 export function $$Z8(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = _$$J(() => t ? sf(e, t) : Promise.reject(Error("User not logged in")), [e, t]);
   let [i, a] = useState(J);
   useEffect(() => {

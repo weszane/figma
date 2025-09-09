@@ -3,11 +3,11 @@ import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { selectWithShallowEqual } from "../905/103090";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { gL } from "../figma_app/618433";
 import { _j } from "../figma_app/843119";
 import { Mw, f4 } from "../figma_app/722362";
@@ -69,7 +69,7 @@ export function $$b0() {
     } = data?.fieldSchemas.find(e => e.stableId === C) ?? {};
     let L = !!I?.isInstanceSublayer && I?.type === "TEXT" && fieldType === _j.RICH_TEXT;
     useEffect(() => () => {
-      t(F.clearAll());
+      t(VisualBellActions.clearAll());
     }, [t]);
     let {
       checkTransitions
@@ -229,7 +229,7 @@ export function $$b0() {
       states: {
         IDLE: {
           onEnter: () => {
-            t(F.clearAll());
+            t(VisualBellActions.clearAll());
           }
         },
         SELECT_NODE_FOR_COLLECTION_BINDING: {
@@ -239,13 +239,13 @@ export function $$b0() {
             let {
               collectionName
             } = e;
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.pick_a_webpage_to_connect", {
                 collection_name: collectionName ?? ""
               }),
               timeoutOverride: 1 / 0,
-              icon: zX.PICK
+              icon: VisualBellIcon.PICK
             }));
           }
         },
@@ -256,13 +256,13 @@ export function $$b0() {
             let {
               collectionName
             } = e;
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.click_to_connect_this_page", {
                 collection_name: collectionName ?? ""
               }),
               timeoutOverride: 1 / 0,
-              icon: zX.PICK
+              icon: VisualBellIcon.PICK
             }));
           }
         },
@@ -273,13 +273,13 @@ export function $$b0() {
             let {
               collectionName
             } = e;
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.click_to_connect_this_frame", {
                 collection_name: collectionName ?? ""
               }),
               timeoutOverride: 1 / 0,
-              icon: zX.PICK
+              icon: VisualBellIcon.PICK
             }));
           }
         },
@@ -287,10 +287,10 @@ export function $$b0() {
           onEnter: ({
             setCurrentState: e
           }) => {
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.connected_new_cms_page_created"),
-              icon: zX.GREEN_CHECK
+              icon: VisualBellIcon.GREEN_CHECK
             }));
             let n = setTimeout(() => {
               e("IDLE");
@@ -302,10 +302,10 @@ export function $$b0() {
           onEnter: ({
             setCurrentState: e
           }) => {
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.connected_new_cms_list_created"),
-              icon: zX.GREEN_CHECK
+              icon: VisualBellIcon.GREEN_CHECK
             }));
             let n = setTimeout(() => {
               e("IDLE");
@@ -320,13 +320,13 @@ export function $$b0() {
             let {
               fieldSchemaName
             } = e;
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.pick_a_layer_to_connect", {
                 field_name: fieldSchemaName ?? ""
               }),
               timeoutOverride: 1 / 0,
-              icon: zX.PICK
+              icon: VisualBellIcon.PICK
             }));
           }
         },
@@ -337,23 +337,23 @@ export function $$b0() {
             let {
               fieldSchemaName
             } = e;
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.click_to_connect_this_layer", {
                 field_name: fieldSchemaName ?? ""
               }),
               timeoutOverride: 1 / 0,
-              icon: zX.PICK
+              icon: VisualBellIcon.PICK
             }));
           }
         },
         HOVERED_TEXT_IN_INSTANCE_FOR_RICH_TEXT_FIELD_BINDING: {
           onEnter: () => {
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.rich_text_in_instances_not_supported"),
               timeoutOverride: 1 / 0,
-              icon: zX.PICK
+              icon: VisualBellIcon.PICK
             }));
           }
         },
@@ -361,10 +361,10 @@ export function $$b0() {
           onEnter: ({
             setCurrentState: e
           }) => {
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               type: g,
               message: getI18nString("cms_specs.connected"),
-              icon: zX.GREEN_CHECK
+              icon: VisualBellIcon.GREEN_CHECK
             }));
             let n = setTimeout(() => {
               e("IDLE");
@@ -398,7 +398,7 @@ export function $$b0() {
         for (let e of s) if ("RESPONSIVE_SET" === e.type && "/" !== e.name) permissionScopeHandler.user("dakota-set-collection-binding", () => {
           e.setDakotaSelectorCollection(t, InsertSourceType.CMS_CONNECT_MODE);
           o = !0;
-        });else {
+        }); else {
           S(t);
           o = !0;
           break;

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef, memo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { E as _$$E } from "../905/632989";
@@ -10,7 +10,7 @@ import { o as _$$o } from "../905/530496";
 import { A as _$$A } from "../905/891805";
 import { y as _$$y } from "../905/661502";
 import { e as _$$e } from "../905/149844";
-import { n3, IA } from "../905/859698";
+import { n3, VariableStyleId } from "../905/859698";
 import { StyleVariableOperation, CopyPasteType, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString } from "../905/871411";
@@ -19,7 +19,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import v from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
-import { o6, Pt } from "../figma_app/806412";
+import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E2 } from "../905/277716";
 import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
@@ -69,7 +69,7 @@ export let $$ef1 = 4;
 export function $$e_2(e) {
   return e && "isShown" in e ? new Point(e.isShown ? e.initialX : 0, e.isShown ? e.initialY : 0) : new Point(e ? e.initialX : 0, e ? e.initialY : 0);
 }
-class eA extends o6 {
+class eA extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.STYLE_UPDATE_DROPDOWN_ID = `style-update-dropdown-${this.props.inheritStyleKeyField}`;
@@ -124,7 +124,7 @@ class eA extends o6 {
       permissionScopeHandler.user("detach-style", () => {
         _$$f(StyleVariableOperation.STYLE_DETACH, CopyPasteType.DIRECT, () => {
           Fullscreen.applyStyleToSelection(this.props.inheritStyleKeyField, defaultSessionLocalIDString, !0);
-          Fullscreen.selectStyle(n3.INVALID, IA.INVALID);
+          Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID);
         });
       });
       trackEventAnalytics("Style Detached", {
@@ -198,7 +198,7 @@ class eA extends o6 {
       className: cL,
       "data-non-interactive": !0,
       children: jsx(_$$g, {
-        recordingKey: Pt(this.props, "titleButton"),
+        recordingKey: generateRecordingKey(this.props, "titleButton"),
         dsStyle: e,
         displayAsDonut: QN(this.props.inheritStyleKeyField),
         onClick: this.toggleShowingStyles,
@@ -216,7 +216,7 @@ class eA extends o6 {
         className: v9,
         children: jsx(_$$K, {
           actionOnPointerDown: !0,
-          recordingKey: Pt(this.props, "detachButton"),
+          recordingKey: generateRecordingKey(this.props, "detachButton"),
           "aria-label": getI18nString("design_systems.styles.detach_style"),
           onClick: this.detachStyle,
           htmlAttributes: {
@@ -228,7 +228,7 @@ class eA extends o6 {
       }), this.props.removeAllProperties && jsx("span", {
         className: N4,
         children: jsx(_$$K, {
-          recordingKey: Pt(this.props, "removeAllButton"),
+          recordingKey: generateRecordingKey(this.props, "removeAllButton"),
           onClick: this.props.removeAllProperties,
           "aria-label": getI18nString("fullscreen.properties_panel.remove"),
           htmlAttributes: {
@@ -272,7 +272,7 @@ class eA extends o6 {
         onMouseDown: this.stopPropagation,
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("design_systems.styles.update_available"),
-        recordingKey: Pt(this.props, ""),
+        recordingKey: generateRecordingKey(this.props, ""),
         children: jsx(_$$o, {})
       }), this.props.dropdownShown?.type === this.STYLE_UPDATE_DROPDOWN_ID && (this.selectUpdateOptionRef.current ? jsx(Cf, {
         targetRect: this.selectUpdateOptionRef.current.getBoundingClientRect(),
@@ -280,7 +280,7 @@ class eA extends o6 {
         children: s.map(e => jsx(c$, {
           className: VM,
           onClick: e.callback,
-          recordingKey: Pt(this.props, e.displayText),
+          recordingKey: generateRecordingKey(this.props, e.displayText),
           children: e.displayText
         }, e.value))
       }) : null)]
@@ -291,7 +291,7 @@ class eA extends o6 {
       name: "toggle_advanced_settings_button",
       children: jsx(_$$K, {
         onClick: this.props.onToggleAdvancedSettings,
-        recordingKey: Pt(this.props, "more"),
+        recordingKey: generateRecordingKey(this.props, "more"),
         "aria-label": this.props.advancedSettingsTooltip,
         htmlAttributes: {
           onMouseDown: this.stopPropagation,
@@ -355,7 +355,7 @@ class eA extends o6 {
           children: jsx(_$$B, {
             visible: this.props.styleVisibility.styleIsVisible,
             onChange: this.props.styleVisibility.onToggleStyleVisibility,
-            recordingKey: Pt(this.props, "visibleToggle")
+            recordingKey: generateRecordingKey(this.props, "visibleToggle")
           })
         })
       }), !this.props.isUI3 && this.renderAdvancedSettings(), this.renderStyleButtons(t), this.props.insetRightButton, jsx(zK.Consumer, {
@@ -366,7 +366,7 @@ class eA extends o6 {
             children: jsx(_$$d, {
               "aria-label": `${this.props.title}, ${A}`,
               "aria-expanded": a.includes(this.props.styleType) ? !!c : !!u,
-              recordingKey: Pt(this.props, "showStylesButton"),
+              recordingKey: generateRecordingKey(this.props, "showStylesButton"),
               onClick: this.toggleShowingStyles,
               htmlAttributes: {
                 "data-tooltip-type": Ib.TEXT,
@@ -386,7 +386,7 @@ class eA extends o6 {
             children: jsx("span", {
               className: N4,
               children: jsx(_$$K, {
-                recordingKey: Pt(this.props, "addButton"),
+                recordingKey: generateRecordingKey(this.props, "addButton"),
                 onClick: i,
                 "aria-label": this.props.overrideAddPropertyTooltip ?? getI18nString("fullscreen.properties_panel.add"),
                 htmlAttributes: {
@@ -437,13 +437,13 @@ class eA extends o6 {
       isPanelBodyCollapsedAtom: this.props.isPanelBodyCollapsedAtom
     };
     let E = {
-      recordingKey: Pt(this.props, "panelTitle"),
+      recordingKey: generateRecordingKey(this.props, "panelTitle"),
       onClick: this.titleClicked
     };
     if (p) r = jsx(_$$Q2, {
       ...v,
       children: this.renderStyleTitle(mainStyle, c || u)
-    });else if (getFeatureFlags().eu_fpl_migration_interactive_panel) {
+    }); else if (getFeatureFlags().eu_fpl_migration_interactive_panel) {
       let e = jsx("h2", {
         className: yr,
         children: this.props.title

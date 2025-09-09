@@ -1,5 +1,5 @@
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Eh } from "../figma_app/617654";
 import { u } from "../905/774364";
 import { createOptimistThunk } from "../905/350402";
@@ -17,7 +17,7 @@ let $$d1 = createOptimistThunk(async (e, t) => {
     let o = t.workspace.name;
     o && (n = getI18nString("workspace.you_joined_the_workspace", {
       groupName: o
-    }), e.dispatch(_$$F.enqueue({
+    }), e.dispatch(VisualBellActions.enqueue({
       type: "self-assign-workspace",
       message: n
     })));
@@ -26,7 +26,7 @@ let $$d1 = createOptimistThunk(async (e, t) => {
       userInitiated: !1
     }));
   }).catch(t => {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "self-assign-workspace",
       message: t.data?.message || getI18nString("workspace.an_error_occurred_while_submitting_your_workspace_selection"),
       error: !0
@@ -46,12 +46,12 @@ let $$c0 = createOptimistThunk(async (e, t) => {
       workspaceId: t.workspace.id,
       addedTeamIds: r
     }));
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "workspace-default-teams-set",
       message: getI18nString("workspace.succesfully_updated_default_teams")
     }));
   } catch (t) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "workspace-default-teams-set",
       message: t.data?.message || getI18nString("workspace.failed_to_update_default_teams_please_try_again"),
       error: !0

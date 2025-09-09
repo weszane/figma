@@ -4,11 +4,11 @@ import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { gB } from "../905/723791";
 import { FUserRoleType } from "../figma_app/191312";
-import { B5G, TKM, aON, s5h, Pn8 } from "../figma_app/43951";
+import { WorkspacesCanAdminView, CurrentUserAssignedWorkspaceView, WorkspacePageView, OrgHasWorkspacesView, CanCreateTeamView } from "../figma_app/43951";
 import { $q } from "../figma_app/482728";
 import { UNASSIGNED } from "../905/247093";
 export function $$p2(e) {
-  let t = Rs(B5G, {
+  let t = Rs(WorkspacesCanAdminView, {
     orgId: e
   });
   return useMemo(() => {
@@ -26,13 +26,13 @@ export function $$_6(e) {
   return r?.workspaceId ?? null;
 }
 export function $$h0(e) {
-  let t = Rs(TKM, {
+  let t = Rs(CurrentUserAssignedWorkspaceView, {
     orgId: e
   });
   return resourceUtils.useTransform(t, e => $$_6(e.currentUser));
 }
 export function $$m3(e, t) {
-  let r = Rs(aON, {
+  let r = Rs(WorkspacePageView, {
     orgId: e ?? "",
     workspaceId: t ?? ""
   }, {
@@ -44,14 +44,14 @@ export function $$g4(e) {
   return (e?.workspaces?.length || 0) > 0 && !!e?.bigmaEnabledAt;
 }
 export function $$f5(e) {
-  let t = Rs(s5h, {
+  let t = Rs(OrgHasWorkspacesView, {
     orgId: e
   });
   return resourceUtils.useTransform(t, e => $$g4(e.org));
 }
 export var $$E7 = (e => (e[e.IS_GUEST = 1] = "IS_GUEST", e[e.WRONG_WORKSPACE = 2] = "WRONG_WORKSPACE", e[e.TEAM_CREATION_CONTROL = 3] = "TEAM_CREATION_CONTROL", e[e.LG_LOADING = 4] = "LG_LOADING", e))($$E7 || {});
 export function $$y1(e, t) {
-  let r = Rs(Pn8, {
+  let r = Rs(CanCreateTeamView, {
     orgId: e?.id ?? null
   });
   let {

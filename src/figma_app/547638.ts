@@ -16,7 +16,7 @@ import { A as _$$A } from "../figma_app/180822";
 import { N as _$$N } from "../905/852320";
 import { Q as _$$Q } from "../figma_app/447352";
 import { T as _$$T } from "../905/256551";
-import { sD, _H } from "../figma_app/243058";
+import { VariableIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { ey, nK } from "../905/859698";
 import { CanvasOperation, Fullscreen } from "../figma_app/763686";
 import { s as _$$s } from "../905/583953";
@@ -1106,16 +1106,16 @@ let P = [{
     let n = [];
     for (let e of t) {
       let t;
-      t = e.assetRef && e.assetRef.key && e.assetRef.version ? sD.fromRef({
+      t = e.assetRef && e.assetRef.key && e.assetRef.version ? VariableIdHandler.fromRef({
         key: ey(e.assetRef.key),
         version: nK(e.assetRef.version)
-      }) : sD.fromLocalNodeIdObj(e.guid ?? defaultSessionLocalID);
+      }) : VariableIdHandler.fromLocalNodeIdObj(e.guid ?? defaultSessionLocalID);
       let r = Fullscreen?.transitiveConsumersOfVariable(t);
       r && (n = n.concat(Array.from(r)));
     }
     let i = t.map(e => {
-      let t = sD.INVALID;
-      e.guid ? t = sD.fromLocalNodeIdObj(e.guid) : e.assetRef && void 0 !== e.assetRef.key && void 0 !== e.assetRef.version && (t = sD.fromRef({
+      let t = VariableIdHandler.INVALID;
+      e.guid ? t = VariableIdHandler.fromLocalNodeIdObj(e.guid) : e.assetRef && void 0 !== e.assetRef.key && void 0 !== e.assetRef.version && (t = VariableIdHandler.fromRef({
         key: ey(e.assetRef.key),
         version: nK(e.assetRef.version)
       }));
@@ -1545,7 +1545,7 @@ let Y = e => Z(e, e => e.event?.interactionType === "ON_KEY_DOWN" && e.event?.ke
 let $ = (e, t) => !!e.behaviors && t in e.behaviors;
 function X(e, t) {
   if (!e.behaviors?.code || 0 === e.behaviors.code.length) return !1;
-  let r = _H.fromString(e.behaviors.code[0].codeComponentId);
+  let r = CodeComponentIdHandler.fromString(e.behaviors.code[0].codeComponentId);
   if (!r) return !1;
   let n = e.sceneGraph.getCodeComponentNode(r);
   return !!n?.isCodeBehavior && n?.name === t;

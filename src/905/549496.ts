@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, Component } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, r1, nB } from "../figma_app/272243";

@@ -1,12 +1,12 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useState, useLayoutEffect, useEffect, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
-import { rf, Pt } from "../figma_app/806412";
+import { useDispatch } from "react-redux";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../897/929006";
 import { cJ } from "../figma_app/976749";
 import { _P } from "../figma_app/2590";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { nA } from "../905/203369";
@@ -62,7 +62,7 @@ let y = memo(function (e) {
     let i = f(P(new Point(e.clientX, e.clientY)), N.mouseDownT, t, n, 100);
     1 === N.index ? setTempBezierValues([i.x, i.y, tempBezierValues[2], tempBezierValues[3]]) : 2 === N.index && setTempBezierValues([tempBezierValues[0], tempBezierValues[1], i.x, i.y]);
   };
-  let C = rf(e.recordingKey, "mouseup", e => {
+  let C = useHandleMouseEvent(e.recordingKey, "mouseup", e => {
     if (e.stopPropagation(), null === N || !S.current) return;
     let t = 1 === N.index ? new Point(0, 0) : new Point(1, 1);
     let i = f(P(new Point(e.clientX, e.clientY)), N.mouseDownT, t, n, 100);
@@ -89,7 +89,7 @@ let y = memo(function (e) {
       };
     }
   });
-  let O = rf(e.recordingKey, "mousedown", e => {
+  let O = useHandleMouseEvent(e.recordingKey, "mousedown", e => {
     e.stopPropagation();
     let t = P(new Point(e.clientX, e.clientY));
     let i = x(new Point(tempBezierValues[0], tempBezierValues[1]), n, 100);
@@ -431,7 +431,7 @@ function $(e) {
         if (h.offset) e.onInput(z({
           x: h.offset.x.transformValue(n.x),
           y: h.offset.y.transformValue(n.y)
-        }, w));else if ("SPRING_HANDLE" === h.handle) {
+        }, w)); else if ("SPRING_HANDLE" === h.handle) {
           let e = {
             x: new P().translate(A.x - n.x),
             y: new P().translate(A.y - n.y)
@@ -636,7 +636,7 @@ export let $$Y0 = memo(function (e) {
       transitionDuration: a
     });
     BG.trigger("restartSpringAnimation");
-    r === zk.YES && t(_P({
+    r === yesNoTrackingEnum.YES && t(_P({
       name: "Prototype Spring Animations Set Custom Value",
       params: {
         editedValue: i,
@@ -649,9 +649,9 @@ export let $$Y0 = memo(function (e) {
       value: t,
       onInput: n,
       onChange: (e, t) => {
-        w(e, t, zk.YES);
+        w(e, t, yesNoTrackingEnum.YES);
       },
-      recordingKey: Pt(e, "springCurve"),
+      recordingKey: generateRecordingKey(e, "springCurve"),
       isNarrowPanel: e.isNarrowPanel
     });
     return jsx(TN, {
@@ -674,7 +674,7 @@ export let $$Y0 = memo(function (e) {
         i[hD.STIFFNESS] = e;
         w(i, "STIFFNESS", t);
       },
-      recordingKey: Pt(e, "springStiffnessInput"),
+      recordingKey: generateRecordingKey(e, "springStiffnessInput"),
       smallNudgeAmount: 1,
       tooltipForScreenReadersOnly: !0,
       value: n[hD.STIFFNESS]
@@ -699,7 +699,7 @@ export let $$Y0 = memo(function (e) {
         i[hD.DAMPING] = e;
         w(i, "DAMPING", t);
       },
-      recordingKey: Pt(e, "springDampingInput"),
+      recordingKey: generateRecordingKey(e, "springDampingInput"),
       smallNudgeAmount: 1,
       tooltipForScreenReadersOnly: !0,
       value: n[hD.DAMPING]
@@ -724,7 +724,7 @@ export let $$Y0 = memo(function (e) {
         i[hD.MASS] = e;
         w(i, "MASS", t);
       },
-      recordingKey: Pt(e, "springMassInput"),
+      recordingKey: generateRecordingKey(e, "springMassInput"),
       smallNudgeAmount: 1,
       tooltipForScreenReadersOnly: !0,
       value: n[hD.MASS]
@@ -740,7 +740,7 @@ export let $$Y0 = memo(function (e) {
       formatter: _$$n,
       property: t,
       onChange: r,
-      recordingKey: Pt(e, "cubicBezierFunctionInput")
+      recordingKey: generateRecordingKey(e, "cubicBezierFunctionInput")
     });
     return jsx(_$$A, {
       label: getI18nString("proto.easing_behavior.bezier"),
@@ -751,7 +751,7 @@ export let $$Y0 = memo(function (e) {
     tempBezierValues: t,
     setTempBezierValues: n,
     updateSelectionProperties: e.updateSelectionProperties,
-    recordingKey: Pt(e, "cubicBezierCurve"),
+    recordingKey: generateRecordingKey(e, "cubicBezierCurve"),
     isNarrowPanel: e.isNarrowPanel
   });
   return jsx(_$$y.Consumer, {

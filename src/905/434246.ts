@@ -4,14 +4,14 @@ import { H8, Pf } from "../905/590952";
 import { iq } from "../figma_app/976749";
 import { DP } from "../905/640017";
 import { FN, E2 } from "../905/389382";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
 import { i_ } from "../905/187165";
 let p = "avatar_with_product_background--brandIconContainerDesign--5S-TM avatar_with_product_background--brandIconContainer--CMT3e";
 export function $$m0({
   licenseType: e
 }) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = iq();
   let m = DP();
   let h = e === FProductAccessType.WHITEBOARD && i ? "light" : i_(m);

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { N as _$$N } from "../905/852320";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { SU } from "../figma_app/451499";
 import { normalizeValue } from "../905/216495";
@@ -36,7 +36,7 @@ export class $$f1 extends PureComponent {
       willShowDropdown: this.props.willShowDropdown,
       children: e.map((e, t) => "SELECT_DIVIDER" === e ? jsx(sK, {}, t) : jsx(m, {
         value: e,
-        recordingKey: Pt(this.props, e)
+        recordingKey: generateRecordingKey(this.props, e)
       }, t))
     });
   }

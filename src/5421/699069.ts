@@ -5,7 +5,7 @@ import { ChatMessageType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tS } from "../figma_app/516028";
 import { zy } from "../figma_app/656450";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { e as _$$e } from "../figma_app/259678";
 import { r as _$$r } from "../1156/29942";
 import { E as _$$E } from "../figma_app/626557";
@@ -38,7 +38,7 @@ export function $$I0({
   onChatInputFocus: D
 }) {
   let R = tS();
-  let M = iZ();
+  let M = selectCurrentUser();
   let V = _$$E(t);
   let B = function (e) {
     let [t, n] = useState([]);

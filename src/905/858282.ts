@@ -5,7 +5,7 @@ import { Ay } from "../figma_app/272902";
 import o from "classnames";
 import { A as _$$A } from "../vendor/518290";
 import { Uz } from "../905/63728";
-import { uA, cZ, aH, Pt } from "../figma_app/806412";
+import { RecordingComponent, handleMouseEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
 import { i as _$$i, C as _$$C } from "../905/64217";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Uu, Dm } from "../figma_app/8833";
@@ -21,7 +21,7 @@ var $$I1 = (e => (e[e.TOP = 0] = "TOP", e[e.BOTTOM = 1] = "BOTTOM", e[e.RIGHT_TI
 var $$E0 = (e => (e.FALLBACK = "fallback", e.BEST_EFFORT = "best_effort", e))($$E0 || {});
 var x = (e => (e[e.IGNORE = 0] = "IGNORE", e))(x || {});
 var $$S3 = (e => (e.Active = "Active", e.Dragging = "Dragging", e.None = "None", e))($$S3 || {});
-export class $$w2 extends uA {
+export class $$w2 extends RecordingComponent {
   constructor(e) {
     super(e);
     this.stopPropagation = e => e.stopPropagation();
@@ -73,7 +73,7 @@ export class $$w2 extends uA {
       let t = e.target;
       t && ("input" === t.tagName.toLowerCase() || "label" === t.tagName.toLowerCase() || "img" === t.tagName.toLowerCase() || "a" === t.tagName.toLowerCase()) || t && "function" == typeof t.closest && t.closest("[data-not-draggable]") || ("None" === this.dragState ? this.setDragState("Active", "nativeEvent" in e ? e.nativeEvent : e) : console.error("Should not be already dragging in a mousedown handler"));
     };
-    this.mouseDown = cZ(this, "mousedown", this._onMouseDown, {
+    this.mouseDown = handleMouseEvent(this, "mousedown", this._onMouseDown, {
       includeTarget: !0,
       recordMetadata: e => ({
         pageX: e.pageX,
@@ -84,8 +84,8 @@ export class $$w2 extends uA {
         pageY: e.pageY
       })
     });
-    this.documentMouseMove = cZ(this, "mousemove", e => {
-      if (this.props.hidden || "None" === this.dragState) return aH;
+    this.documentMouseMove = handleMouseEvent(this, "mousemove", e => {
+      if (this.props.hidden || "None" === this.dragState) return SKIP_RECORDING;
       switch ("Active" === this.dragState && this.setDragState("Dragging", e), this.dragState) {
         case "Active":
         case "Dragging":
@@ -104,14 +104,14 @@ export class $$w2 extends uA {
         pageY: e.pageY
       })
     });
-    this.documentMouseUp = cZ(this, "mouseup", e => {
+    this.documentMouseUp = handleMouseEvent(this, "mouseup", e => {
       switch (this.dragState) {
         case "Active":
         case "Dragging":
           this.setDragState("None", "nativeEvent" in e ? e.nativeEvent : e);
           break;
         case "None":
-          return aH;
+          return SKIP_RECORDING;
         default:
           throwTypeError(this.dragState);
       }
@@ -274,7 +274,7 @@ export class $$w2 extends uA {
                 onClose: this.props.onClose,
                 onMouseDown: this.stopPropagation,
                 onMouseMove: this.documentMouseMove,
-                recordingKey: Pt(this.props, "draggableModal"),
+                recordingKey: generateRecordingKey(this.props, "draggableModal"),
                 stickyHeader: this.props.stickyHeader,
                 title: this.props.title,
                 titleIconSvgClassName: this.props.titleIconSvgClassName,
@@ -296,7 +296,7 @@ export class $$w2 extends uA {
             lockAspectRatio: !!this.props.lockAspectRatio,
             onEdgeDoubleClick: this.props.onEdgeDoubleClick,
             onResizeEnd: this.props.onResizeEnd,
-            recordingKey: Pt(this.props, "resizeTarget"),
+            recordingKey: generateRecordingKey(this.props, "resizeTarget"),
             resizeTo: this.props.onResize,
             setIsResizing: e => this.setState({
               isResizing: e

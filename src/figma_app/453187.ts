@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { Rs } from "../figma_app/288654";
-import { i1D } from "../figma_app/43951";
+import { WorkspaceModalPluginRequests } from "../figma_app/43951";
 let s = (e, t, r) => {
-  let s = Rs(i1D, {
+  let s = Rs(WorkspaceModalPluginRequests, {
     orgId: e
   }, {
     enabled: !!e

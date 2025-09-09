@@ -7,7 +7,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { subscribeAndAwaitData } from "../905/553831";
 import { reportError } from "../905/11";
 import { logWarning } from "../905/714362";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { d6, bJ } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
 import { gN } from "../figma_app/976345";
@@ -19,7 +19,7 @@ import { W } from "../905/39853";
 import { cu, zX, pl, MS } from "../905/615657";
 import { Ij } from "../905/902099";
 import { FFileType } from "../figma_app/191312";
-import { cQi } from "../figma_app/43951";
+import { FileImport } from "../figma_app/43951";
 import { aW, sK } from "../figma_app/598018";
 import { kI, Y5, mO, dv, NU } from "../905/163189";
 zip.workerScriptsPath = "/js/zip/";
@@ -45,7 +45,7 @@ let $$C6 = createOptimistThunk(async e => {
   let I = dv(o.name).toLowerCase();
   let C = t.user?.drafts_folder_id;
   let T = o.folderId ?? ("folder" === t.selectedView.view ? t.selectedView.folderId : C);
-  let k = T && (await subscribeAndAwaitData(cQi, {
+  let k = T && (await subscribeAndAwaitData(FileImport, {
     projectId: T
   }, {
     retainMs: 3e4
@@ -127,7 +127,7 @@ let $$C6 = createOptimistThunk(async e => {
     let e = new Uint8Array(await o.blob.slice(0, 20).arrayBuffer());
     L = f6(e) ? "fig-zip" : "fig-kiwi";
   }
-  let F = _$$g();
+  let F = generateUUIDv4();
   trackEventAnalytics("File Import Begin", {
     importId: F
   });

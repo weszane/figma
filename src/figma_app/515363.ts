@@ -8,7 +8,7 @@ import { F } from "../905/680873";
 import { observabilityClient } from "../905/602906";
 import { LogLevelStr } from "../905/361972";
 import { reportError } from "../905/11";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { z } from "../905/239603";
 import { tc } from "../figma_app/386952";
 import { n as _$$n, V } from "../905/788423";
@@ -198,7 +198,7 @@ function M({
 }) {
   getFeatureFlags().contentful_paint_performance_monitor && performance.mark(e, {
     detail: {
-      navigationId: e === I ? _$$g() : null,
+      navigationId: e === I ? generateUUIDv4() : null,
       isLoaded: t,
       contextArgs: r
     }

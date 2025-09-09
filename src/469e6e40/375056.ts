@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, createElement, Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Yy } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { $ as _$$$ } from "../905/692618";

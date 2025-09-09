@@ -6,14 +6,14 @@ import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Fj } from "../figma_app/594947";
 import { sZ } from "../905/845253";
-import { T32 } from "../figma_app/43951";
+import { OrgIdpManagementPageView } from "../figma_app/43951";
 import { z as _$$z } from "../469e6e40/221397";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { J as _$$J } from "../905/129695";
 import { xk } from "@stylexjs/stylex";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { p as _$$p } from "../469e6e40/619494";
@@ -71,7 +71,7 @@ function E(e) {
         }
       }));
     }).catch(e => {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: e.message
       }));
     });
@@ -124,7 +124,7 @@ function F(e) {
         let n = e.text.slice(-20);
         a = `${t}...${n}`;
       }
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("idp_management.text_copied", {
           copiedText: a
         })
@@ -748,11 +748,11 @@ let em = {
                 _$$a.deleteOrgSamlConfig({
                   org_saml_config_id: e.idpData.id
                 }).then(() => {
-                  a(_$$F.enqueue({
+                  a(VisualBellActions.enqueue({
                     message: getI18nString("idp_management.flyout.idp_removed")
                   }));
                 }).catch(e => {
-                  a(_$$F.enqueue({
+                  a(VisualBellActions.enqueue({
                     message: e.message
                   }));
                 });
@@ -1157,7 +1157,7 @@ function ek(e) {
 export function $$eE0() {
   var e;
   let t = sZ();
-  let a = Rs(T32, {
+  let a = Rs(OrgIdpManagementPageView, {
     orgId: t.id
   });
   let i = (e = a.data?.org ? oA(a.data.org) : null) ? {

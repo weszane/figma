@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { FEditorType } from "../figma_app/53721";
 export function $$a0() {
   let e = useSelector(e => e.selectedView);

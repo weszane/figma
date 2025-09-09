@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, memo, forwardRef, useContext } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { o as _$$o } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { E as _$$E2 } from "../905/172252";
@@ -11,7 +11,7 @@ import _ from "../vendor/961736";
 import { G$ } from "../figma_app/191804";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { bG } from "../905/149328";
 import { Point } from "../905/736624";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -298,7 +298,7 @@ function ei(e) {
     preloadThumbnail: !!e.ThumbnailOverride
   });
   let p = `componentThumb.${e.recordingNodePath}`;
-  let _ = rf(e.buttonProps?.onContextMenu ? p : `${p}_UNUSED`, "contextmenu", t => {
+  let _ = useHandleMouseEvent(e.buttonProps?.onContextMenu ? p : `${p}_UNUSED`, "contextmenu", t => {
     e.buttonProps?.onContextMenu?.(t);
   }, {
     recordMetadata: e => {
@@ -326,7 +326,7 @@ function ei(e) {
       };
     }
   });
-  let h = rf(p, "click", t => {
+  let h = useHandleMouseEvent(p, "click", t => {
     if (e.buttonProps?.onItemClick?.(t, e.item), e.buttonProps?.clickToInsert) {
       let r = new PointerEvent(t.type, {
         ...t,

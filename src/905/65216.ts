@@ -2,8 +2,8 @@ import { Fullscreen } from "../figma_app/763686";
 import { DS } from "../figma_app/387100";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { ds } from "../figma_app/314264";
 let u = "return_to_instance";
@@ -25,10 +25,10 @@ let $$f1 = createOptimistThunk(e => {
   let t = e.getState();
   let i = Object.keys(t.mirror.sceneGraphSelection);
   let n = p && 1 === i.length && (i[0] === p.mainComponentGUID || DS(t.mirror.sceneGraph, i[0]).some(e => e.guid === p?.mainComponentGUID));
-  n && !$$m ? (document.addEventListener("keydown", _), e.dispatch(F.enqueue({
+  n && !$$m ? (document.addEventListener("keydown", _), e.dispatch(VisualBellActions.enqueue({
     type: u,
     message: "",
-    icon: zX.RETURN_TO_INSTANCE,
+    icon: VisualBellIcon.RETURN_TO_INSTANCE,
     button: {
       text: getI18nString("design_systems.actions.return_to_instance"),
       action: () => {
@@ -44,7 +44,7 @@ let $$f1 = createOptimistThunk(e => {
       $$m = !1;
       document.removeEventListener("keydown", _);
     }
-  })), $$m = !0, clearTimeout(h)) : !n && $$m && (document.removeEventListener("keydown", _), e.dispatch(F.dequeue({
+  })), $$m = !0, clearTimeout(h)) : !n && $$m && (document.removeEventListener("keydown", _), e.dispatch(VisualBellActions.dequeue({
     matchType: u
   })), $$m = !1, h = setTimeout(() => {
     p = null;
@@ -59,7 +59,7 @@ function _(e) {
       keyboardShortcut: "K",
       keyboardShortcutFull: t ? "meta+control+alt+k" : "control+alt+shift+k"
     }
-  }), debugState.dispatch(F.dequeue({
+  }), debugState.dispatch(VisualBellActions.dequeue({
     matchType: u
   })));
 }

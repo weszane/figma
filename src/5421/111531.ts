@@ -20,7 +20,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { dZ, tJ as _$$tJ } from "../figma_app/741237";
+import { normalizeTrackingEnum, replaceSelection } from "../figma_app/741237";
 import { Zk } from "../figma_app/626177";
 import { Wv } from "../figma_app/711157";
 import { Ct } from "../figma_app/205280";
@@ -39,10 +39,10 @@ import { SourceMapConsumer } from "../vendor/956116";
 import { createPortal } from "../vendor/944059";
 import { sH, gn } from "../5421/58503";
 import { XH, zV, fl, pn } from "../1156/993639";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import Y from "classnames";
 import { wY } from "../figma_app/708845";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { c as _$$c } from "../7a72fc59/376662";
 import { Fk } from "../figma_app/167249";
 import { $5 } from "../figma_app/504321";
@@ -70,7 +70,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { A as _$$A } from "../7a72fc59/43307";
 import { Ku } from "../figma_app/740163";
 import { Ou, qg } from "../figma_app/385874";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { S7 } from "../figma_app/259578";
 import { n1 } from "../905/698732";
 import { tb as _$$tb } from "../figma_app/703447";
@@ -124,7 +124,7 @@ import { d as _$$d2 } from "../1006/820986";
 import { jN } from "../figma_app/930338";
 import { tS as _$$tS } from "../figma_app/516028";
 import { KP } from "../figma_app/440875";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { e as _$$e, $v } from "../figma_app/259678";
 import { Xu } from "../figma_app/588582";
 import { $W, Z3 } from "../figma_app/325537";
@@ -624,7 +624,7 @@ function eB(e) {
     }
     return t;
   }, [e.property, l]);
-  let d = useCallback((n, o = zk.YES) => {
+  let d = useCallback((n, o = yesNoTrackingEnum.YES) => {
     let i = "bg-";
     "color" === e.property ? i = "text-" : "border-color" === e.property && (i = "border-");
     let r = Math.round(255 * n.r);
@@ -860,7 +860,7 @@ function e9() {
     ignore: e => !!(v.current && v.current.contains(e))
   });
   let I = useRef(null);
-  let C = useCallback((e, n, o = zk.YES) => {
+  let C = useCallback((e, n, o = yesNoTrackingEnum.YES) => {
     let i = DY(e, c);
     if (i) {
       let n = `${FF}/${i.fontId}`;
@@ -882,7 +882,7 @@ function e9() {
           computedStylesValue: e
         }]
       }], o, "font-family");
-      dZ(o) && permissionScopeHandler.user("direct-manipulation", () => {
+      normalizeTrackingEnum(o) && permissionScopeHandler.user("direct-manipulation", () => {
         HL(i, I);
       });
     }
@@ -1457,7 +1457,7 @@ function tC() {
         value: n,
         computedStylesValue: n
       }]
-    }], zk.YES, "text-align");
+    }], yesNoTrackingEnum.YES, "text-align");
   }, [classNameEditingController]);
   return jsx(eC, {
     target: jsx(ar, {
@@ -1486,7 +1486,7 @@ function tE({
       children: jsx(tj, {
         alignment: e,
         alignmentOptions: t,
-        onAlignmentChanged: e => n(e, zk.YES)
+        onAlignmentChanged: e => n(e, yesNoTrackingEnum.YES)
       })
     })
   });
@@ -1527,7 +1527,7 @@ function tA() {
         value: n,
         computedStylesValue: n
       }]
-    }], zk.YES, "font-weight");
+    }], yesNoTrackingEnum.YES, "font-weight");
   }, [classNameEditingController, r]);
   return jsx(_$$R, {
     children: jsx(ar, {
@@ -1557,7 +1557,7 @@ function tw() {
         value: o,
         computedStylesValue: o
       }]
-    }], zk.YES, "font-style");
+    }], yesNoTrackingEnum.YES, "font-style");
   }, [classNameEditingController, n]);
   return jsx(_$$R, {
     children: jsx(ar, {
@@ -1588,7 +1588,7 @@ function tk() {
         value: n,
         computedStylesValue: n
       }]
-    }], zk.YES, "text-decoration");
+    }], yesNoTrackingEnum.YES, "text-decoration");
   }, [classNameEditingController, r]);
   return jsx(_$$R, {
     children: jsx(ar, {
@@ -1766,7 +1766,7 @@ function tU() {
         value: `${e}px`,
         computedStylesValue: `${e}px`
       }]
-    }], zk.YES, "font-size");
+    }], yesNoTrackingEnum.YES, "font-size");
   }, [classNameEditingController]);
   return jsx(_$$R, {
     children: jsx(tD, {
@@ -1950,7 +1950,7 @@ function ny({
     setChatError,
     clearChatError
   } = _$$tk(t);
-  let m = iZ();
+  let m = selectCurrentUser();
   let g = _$$tS();
   let y = Xu();
   let f = useMemo(() => getSingletonSceneGraph().get(t), [t]);
@@ -2547,7 +2547,7 @@ function nT({
     if (v.current) return;
     v.current = !0;
     let t = "on_selection" === e ? getI18nString("figmake.toolbar.error.inconsistency") : getI18nString("figmake.toolbar.error.save");
-    I(_$$F.enqueue({
+    I(VisualBellActions.enqueue({
       message: t,
       error: !0,
       button: {
@@ -3358,7 +3358,7 @@ function nU({
     });
   }, [U]);
   let q = useCallback(() => {
-    !F && W && (_$$tJ([W]), Z(null));
+    !F && W && (replaceSelection([W]), Z(null));
     AppStateTsApi?.codeSelection().showMainComponent.set(!1);
   }, [F, W, Z]);
   let X = getFeatureFlags().code_layers_zoom_controls;

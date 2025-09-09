@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { AppStateTsApi, SceneGraphHelpers, Fullscreen, ViewType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString } from "../905/871411";
@@ -222,9 +222,9 @@ export function $$w2({
       w(!1);
       D();
     }), l) ? {
-      onMouseDown: () => {},
-      onMouseMove: () => {},
-      onCarouselItemReorder: () => {},
+      onMouseDown: () => { },
+      onMouseMove: () => { },
+      onCarouselItemReorder: () => { },
       isDraggingCarouselItems: !1,
       isClickingCarouselItems: !1,
       detachedCarouselItemGuids: [],

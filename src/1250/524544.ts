@@ -1,12 +1,12 @@
 import { useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { ResourceStatus } from "../905/957591";
 import { selectWithShallowEqual } from "../905/103090";
 import { Rs } from "../figma_app/288654";
 import { h3 } from "../figma_app/976345";
 import { jl } from "../figma_app/199513";
-import { iZ } from "../905/372672";
-import { xO7 } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { FileKeysInProject } from "../figma_app/43951";
 import { nx } from "../figma_app/12796";
 if (443 == require.j) {}
 let m = 443 == require.j ? 9e5 : null;
@@ -14,11 +14,11 @@ export function $$p2(e, t) {
   return !(new Date().getTime() - e.getTime() > m) && (!t || e.getTime() > t.getTime());
 }
 export function $$g1() {
-  let e = iZ();
+  let e = selectCurrentUser();
   let t = useSelector(e => e.userFlags);
   let n = e?.personal_drafts_folder_id ?? "";
   let a = !!n;
-  let o = Rs(xO7, {
+  let o = Rs(FileKeysInProject, {
     projectId: n
   }, {
     enabled: a
@@ -45,7 +45,7 @@ export function $$f0() {
     deletedFilesByKey: e.deletedFilesByKey,
     loadedFolders: e.loadedFolders
   }));
-  let s = iZ();
+  let s = selectCurrentUser();
   let _ = useDispatch();
   let u = useSelector(e => e.userFlags);
   let m = s?.personal_drafts_folder_id;

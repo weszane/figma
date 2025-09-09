@@ -10,7 +10,7 @@ import { ol, H0, GL } from "../figma_app/191804";
 import { Hd } from "../figma_app/583114";
 import { wY } from "../figma_app/708845";
 import { isAnyMobile } from "../figma_app/778880";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { GG } from "../905/511649";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -275,7 +275,7 @@ export function $$O0(e) {
                   "aria-live": "polite",
                   children: message.onClick ? jsx(_$$E, {
                     className: l()(B),
-                    recordingKey: Pt(e, "message"),
+                    recordingKey: generateRecordingKey(e, "message"),
                     onClick: message.onClick,
                     children: jsx(_$$T, {
                       children: message.text
@@ -305,7 +305,7 @@ export function $$O0(e) {
                       },
                       children: jsx(_$$E, {
                         className: l()(O),
-                        recordingKey: Pt(e, "button"),
+                        recordingKey: generateRecordingKey(e, "button"),
                         onClick: button.onClick,
                         children: button.text
                       })
@@ -313,7 +313,7 @@ export function $$O0(e) {
                       className: L,
                       children: jsx(GG, {
                         className: l()(U),
-                        recordingKey: Pt(e, "closeButton"),
+                        recordingKey: generateRecordingKey(e, "closeButton"),
                         onClick: () => {
                           onCloseCallback && onCloseCallback();
                           D(!0);

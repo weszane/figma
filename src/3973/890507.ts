@@ -1,6 +1,6 @@
 import { n as _$$n, D } from "../905/347702";
 import { trackEventAnalytics, analyticsEventManager, getAnonymousId } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { PerfTimer } from "../905/609396";
 import { isFigmaMirrorAndroidApp, isFigmaMobileIOSApp } from "../figma_app/778880";
@@ -86,7 +86,7 @@ export function $$E10(e, t, r, a, o, u, c = null, p = null, f = null, h = "") {
     errored: !o,
     error_cause: null === c ? null : bT[c],
     entry_route: function () {
-      let e = Ay.location.pathname;
+      let e = customHistory.location.pathname;
       return normalizePathname(e);
     }(),
     entry_point: window.ENTRY_POINT,

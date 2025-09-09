@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { resourceUtils } from "../905/989992";
 import { p } from "../figma_app/288654";
-import { vE } from "../figma_app/43951";
+import { PrototypeTilePermissions } from "../figma_app/43951";
 export function $$o1(e) {
   return {
     canRead: e.canRead,
@@ -13,7 +13,7 @@ export function $$l0(e, t = !0) {
   let r = useMemo(() => e.map(e => ({
     prototypeId: e
   })), [e]);
-  let d = p(vE, r, {
+  let d = p(PrototypeTilePermissions, r, {
     enabled: t
   });
   return useMemo(() => resourceUtils.all(d.map(e => e.result)).transform(e => {

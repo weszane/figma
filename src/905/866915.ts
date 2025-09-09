@@ -1,6 +1,6 @@
 import { useContext, useState, useRef, useEffect, useCallback } from "react";
 import { lQ } from "../905/934246";
-import { aH } from "../figma_app/806412";
+import { SKIP_RECORDING } from "../figma_app/878298";
 import { nS } from "../figma_app/274383";
 import { T } from "../905/355691";
 export function $$l0(e = lQ, t = !1, i = !0) {
@@ -31,7 +31,7 @@ export function $$l0(e = lQ, t = !1, i = !0) {
     }, 400)) : u({
       isHovered: !0,
       hoverTarget: e.target
-    }), !T.RECORD_DETAILED_EVENTS) return aH;
+    }), !T.RECORD_DETAILED_EVENTS) return SKIP_RECORDING;
   }, [t]);
   let h = useCallback(e => {
     c.isHovered && e.target !== c.hoverTarget && u({
@@ -43,7 +43,7 @@ export function $$l0(e = lQ, t = !1, i = !0) {
     if (clearTimeout(p.current), u({
       isHovered: !1,
       hoverTarget: null
-    }), !T.RECORD_DETAILED_EVENTS) return aH;
+    }), !T.RECORD_DETAILED_EVENTS) return SKIP_RECORDING;
   }, []);
   let f = useCallback(e => {
     e.preventDefault();

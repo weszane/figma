@@ -4,7 +4,7 @@ import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { yJ, U2 } from "../figma_app/78808";
@@ -78,11 +78,11 @@ let $$E2 = createOptimistThunk((e, t) => {
               view: "folder",
               folderId: o
             }));
-            e.dispatch(F.dequeue({}));
+            e.dispatch(VisualBellActions.dequeue({}));
           }
         });
       }
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         type: "file_restored",
         message: t,
         button: s

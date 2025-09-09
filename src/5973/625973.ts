@@ -1,6 +1,6 @@
 import { m as _$$m } from '../905/18160';
 import { B as _$$B } from '../905/94678';
-import { D6, Hi } from '../905/117560';
+import { toMatrix2x3, toArray2x3 } from '../905/117560';
 import { sha1BytesFromHex, bytesToHex, sha1Hex, sha1HexFromString } from '../905/125019';
 import { c as _$$c } from '../905/154079';
 import { permissionScopeHandler, zk } from '../905/189185';
@@ -9,7 +9,7 @@ import { bG, rw } from '../905/333600';
 import { Aw, LV, Mn, Ug } from '../905/340677';
 import { c2 } from '../905/382883';
 import { DI, JQ } from '../905/389786';
-import { cN, gJ, NN } from '../905/409381';
+import { getGradientTransformMatrix, getLinearGradientPoints, getRadialGradientPoints } from '../905/409381';
 import { $2, loadNonPluginFont, waitForAllFontsLoaded, getClosestFontName } from '../905/426868';
 import { SceneNode } from '../905/499575';
 import { Cv, fx, pu, sJ, u0, x_, y$ } from '../905/532366';
@@ -22,7 +22,7 @@ import { k as _$$k } from '../905/749197';
 import { f as _$$f } from '../905/797463';
 import { S as _$$S, V as _$$V, parseJSX } from '../905/802325';
 import { defaultSessionLocalIDString, sessionLocalIDToString, parseSessionLocalID } from '../905/871411';
-import { hp, Lv, SE } from '../905/929949';
+import { nodeProperties, getResolvedTypeName, textStyleProperties } from '../905/929949';
 import { PT, SJ } from '../905/946258';
 import { n as _$$n } from '../905/992140';
 import { tV as _$$tV, ao, D1, KQ, sU, UD, Y_ } from '../905/998509';
@@ -30,7 +30,7 @@ import { O as _$$O, S as _$$S2 } from '../3383/83383';
 import { h as _$$h, iz as _$$iz, rt as _$$rt, c1, jd, KY, qK, s$, v6 } from '../figma_app/17669';
 import { MaterializeInvisibleChildrenBindings } from '../figma_app/175377';
 import { Hc, kX, mu } from '../figma_app/197743';
-import { PK, sD } from '../figma_app/243058';
+import { StyleIdHandler, VariableIdHandler } from '../figma_app/243058';
 import { Ji, MT } from '../figma_app/387100';
 import { throwTypeError } from '../figma_app/465776';
 import { CUSTOM_IMAGE_TYPE_STR, getComponentInfoById, getInstanceIdsForDef, getInstanceNodeProps, getTypeInfoCached, toCamelCase, toTitleCase, usagePropsToRawProps } from '../figma_app/664063';
@@ -725,7 +725,7 @@ export class $$K15 {
           break;
         case 'boundVariables':
           if (typeof t == 'object') {
-            for (let [e, n] of Object.entries(t)) hp.includes(e) && n && typeof n == 'object' && 'type' in n && 'id' in n && n.type === 'VARIABLE_ALIAS' && typeof n.id == 'string' && i.setBoundVariable(e, n.id);
+            for (let [e, n] of Object.entries(t)) nodeProperties.includes(e) && n && typeof n == 'object' && 'type' in n && 'id' in n && n.type === 'VARIABLE_ALIAS' && typeof n.id == 'string' && i.setBoundVariable(e, n.id);
           }
           break;
         case 'gridRowAnchorIndex':
@@ -3106,7 +3106,7 @@ let ti = (e, t, i, n) => {
                 position: e.position
               } : null;
             }).filter(e => e !== null) ?? [],
-            gradientHandlePositions: e.type === 'GRADIENT_LINEAR' ? gJ(e.transform) : NN(e.transform),
+            gradientHandlePositions: e.type === 'GRADIENT_LINEAR' ? getLinearGradientPoints(e.transform) : getRadialGradientPoints(e.transform),
             blendMode: _$$nl(e.blendMode),
             opacity: e.opacity
           });
@@ -3161,7 +3161,7 @@ let ti = (e, t, i, n) => {
                 return 'fill';
             }
           }(e.imageScaleMode));
-          e.imageScaleMode === 'STRETCH' && e.transform && (i.imageTransform = Hi(e.transform));
+          e.imageScaleMode === 'STRETCH' && e.transform && (i.imageTransform = toArray2x3(e.transform));
           e.imageScaleMode === 'TILE' && e.scale && (i.scalingFactor = e.scale);
           return e9(i);
         }
@@ -3269,7 +3269,7 @@ let tn = ({
           return {
             paint: te({
               type: e.type.toUpperCase().replace('-', '_'),
-              transform: D6(cN(e.type, e.gradientHandlePositions)),
+              transform: toMatrix2x3(getGradientTransformMatrix(e.type, e.gradientHandlePositions)),
               stopsVar: r,
               stops: o,
               opacity: e.opacity,
@@ -3310,7 +3310,7 @@ let tn = ({
                 }
                 return 'FILL';
               }(e.scaleMode),
-              transform: e.imageTransform && e.imageTransform.length === 2 && e.imageTransform[0]?.length === 3 && e.imageTransform[1]?.length === 3 ? D6(e.imageTransform) : void 0,
+              transform: e.imageTransform && e.imageTransform.length === 2 && e.imageTransform[0]?.length === 3 && e.imageTransform[1]?.length === 3 ? toMatrix2x3(e.imageTransform) : void 0,
               paintFilter: e.filters
             })
           };
@@ -4877,7 +4877,7 @@ let i_ = ei({
     } = t;
     if (data !== null) {
       for (let e of iL) i = iM(data, e.split('/'), sessionLocalIDToString);
-      for (let e of iD) i = iM(data, e.split('/'), Hi);
+      for (let e of iD) i = iM(data, e.split('/'), toArray2x3);
       return data;
     }
   },
@@ -4903,7 +4903,7 @@ let i_ = ei({
     if (void 0 === data || Object.keys(data).length === 0) return;
     let o = data;
     for (let e of iL) o = iM(o, e.split('/'), parseSessionLocalID);
-    for (let e of iD) o = iM(o, e.split('/'), D6);
+    for (let e of iD) o = iM(o, e.split('/'), toMatrix2x3);
     return {
       props: {
         behaviors: o
@@ -5305,7 +5305,7 @@ function ne(e, t, i) {
   };
   let r = nr(e, t);
   let o = e.getRangeLineType(0, r.length - 1);
-  let a = SE.reduce((t, i) => {
+  let a = textStyleProperties.reduce((t, i) => {
     let n = e.getRangeBoundVariable(0, r.length - 1, i);
     n !== null && n !== 'mixed' && (t[i] = n);
     return t;
@@ -5715,7 +5715,7 @@ let ns = ei({
     node: e,
     fieldNames: t
   }, i, n) => {
-    let r = [...SE, 'characters'].some(t => void 0 !== e.boundVariables[t]);
+    let r = [...textStyleProperties, 'characters'].some(t => void 0 !== e.boundVariables[t]);
     if (t.includes('text-data') || r && i.includeVariables) {
       let r = ne(e, i, n);
       let {
@@ -6005,7 +6005,7 @@ function np(e, t, i) {
     hyperlink,
     inheritedTextStyle
   } = e;
-  let h = SE.reduce((t, i) => {
+  let h = textStyleProperties.reduce((t, i) => {
     let n = e.getRangeBoundVariable(0, e.characters.length - 1, i);
     n !== null && n !== 'mixed' && (t[i] = n);
     return t;
@@ -7718,7 +7718,7 @@ class ru {
   }
   variableAliasToJSXExpressionContainer(e) {
     if (!e) return null;
-    let t = sD.fromString(e.id);
+    let t = VariableIdHandler.fromString(e.id);
     return t ? this.variableIdToJSXExpresssionContainer(t) : null;
   }
   variableIdToJSXExpresssionContainer(e) {
@@ -7748,7 +7748,7 @@ class ru {
   variableDataToJSXExpressionContainer(e) {
     if (e?.value?.alias) {
       let t = e.value.alias;
-      let i = sD.fromKiwi(t);
+      let i = VariableIdHandler.fromKiwi(t);
       if (i) return this.variableIdToJSXExpresssionContainer(i);
     }
     return null;
@@ -7805,10 +7805,10 @@ class ru {
     if (i) {
       return {
         value: {
-          alias: sD.toKiwi(i.id)
+          alias: VariableIdHandler.toKiwi(i.id)
         },
         dataType: 'ALIAS',
-        resolvedDataType: Lv(i.variableResolvedType)
+        resolvedDataType: getResolvedTypeName(i.variableResolvedType)
       };
     }
   }
@@ -7832,7 +7832,7 @@ class ru {
     if (i) return this.options.scene.getVariableNode(i) ?? null;
     let n = this.findVariableCollection(e);
     if (!n) return null;
-    let r = n.variableIds.map(e => this.options.scene.getVariableNode(sD.fromString(e))).filter(e6).find(e => e.name === t);
+    let r = n.variableIds.map(e => this.options.scene.getVariableNode(VariableIdHandler.fromString(e))).filter(e6).find(e => e.name === t);
     return r ? (this.variableNameToId[t] = r.id, r) : null;
   }
   trackVariableUsage(e) {
@@ -7895,7 +7895,7 @@ class ru {
       return;
     }
     let a = this.options.styleInfoByName?.[name]?.id;
-    let l = a ? PK.fromString(a) : void 0;
+    let l = a ? StyleIdHandler.fromString(a) : void 0;
     if (!l) {
       this.trackDeserializeIssue({
         message: 'Could not find style',
@@ -8290,7 +8290,7 @@ export function $$rg40(e, t = {}) {
         for (let [n, r] of (i.append('const variables = {'), i.newline(), Object.entries(e))) {
           for (let [e, o] of (i.append(`  ${JSON.stringify(n)}: {`), i.newline(), Object.entries(r))) {
             if (typeof o == 'object' && 'type' in o && o.type === 'VARIABLE_ALIAS') {
-              let n = sD.fromString(o.id);
+              let n = VariableIdHandler.fromString(o.id);
               if (!n) continue;
               let {
                 collectionName,

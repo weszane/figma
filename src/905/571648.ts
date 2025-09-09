@@ -1,8 +1,8 @@
 import { useMemo, useCallback } from "react";
-import { useSelector, shallowEqual } from "../vendor/514228";
+import { useSelector, shallowEqual } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { zN } from "../905/19536";
+import { useStableMemo } from "../905/19536";
 import { parsePxInt } from "../figma_app/783094";
 import { f as _$$f } from "../905/412913";
 import { Oo } from "../905/709171";
@@ -94,7 +94,7 @@ export function $$F6(e, t) {
     approvedLibraryKeysByResourceType: l
   }) : e.name < i.name ? -1 : 1, [t, d, l]);
   let y = useMemo(() => ("loaded" === a.status ? a.data : []).filter(f).sort(_), [a, f, _]);
-  return zN({
+  return useStableMemo({
     status: "loading" === a.status || "disabled" === a.status ? "loading" : "loaded",
     libraries: y
   }, shallowEqual);
@@ -137,7 +137,7 @@ export function $$j4({
     };
   }, [t, l, e, s]);
   let u = "loading" === a.status || t?.status === "loading" || t?.status === "disabled" || isLoadingLibraryData;
-  return zN({
+  return useStableMemo({
     status: u ? "loading" : "loaded",
     stylesByFileKey
   }, shallowEqual);
@@ -216,7 +216,7 @@ export function $$B3(e, t, i, d, c, u) {
     }
     return [Math.min(i, parsePxInt(stylePickerMaxHeight)), e];
   }, [M, t]);
-  return zN({
+  return useStableMemo({
     status,
     items: M,
     height: B,

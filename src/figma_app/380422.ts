@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { W as _$$W } from "../905/933320";
 import { r as _$$r } from "../905/571838";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import c from "../vendor/524488";
 import { wY } from "../figma_app/708845";
 import { Uz } from "../905/63728";
@@ -57,10 +57,10 @@ export function $$W0({
   } = useAtomWithSubscription(WP);
   let G = useSelector(tB);
   let V = g5($A.Design).productComponents;
-  let H = k9(() => V.map(e => e.library_key), [V]);
+  let H = useMemoStable(() => V.map(e => e.library_key), [V]);
   let z = _$$U(H);
   let W = oh(fi) || "loading" === z.status;
-  let $ = k9(() => currentSearch?.result.data?.map(e => e.library_key), [currentSearch]);
+  let $ = useMemoStable(() => currentSearch?.result.data?.map(e => e.library_key), [currentSearch]);
   let X = _$$U($ || []);
   let q = z3("faux");
   let J = _$$s2(currentSearch);

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { b as _$$b } from "../905/985254";
@@ -60,9 +60,9 @@ export function $$y0(e) {
     trackingContextName: "Gen1 Welcome Modal",
     testId: "NuxOnboardingOverlay-Gen1"
   } : {
-    trackingContextName: "Gen 0 NUX",
-    testId: "NuxOnboardingOverlay-Gen0"
-  };
+      trackingContextName: "Gen 0 NUX",
+      testId: "NuxOnboardingOverlay-Gen0"
+    };
   return jsx(_$$b2, {
     isGen1: y,
     trackingContextName,

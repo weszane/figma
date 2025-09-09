@@ -3,7 +3,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { hV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getInitialOptions } from "../figma_app/169182";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { UK } from "../figma_app/740163";
 import { tB } from "../figma_app/516028";
 import { O } from "../905/207358";
@@ -12,7 +12,7 @@ import { r as _$$r } from "../905/501976";
 let p = "[TEST] ";
 let h = "[Codegen] ";
 function g(e, t) {
-  e.dispatch(F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     message: t,
     error: !0
   }));
@@ -53,7 +53,7 @@ async function b(e, t) {
       }
     });
     n++;
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: `Exported ${n}/${t.length} test cases`,
       error: !1
     }));
@@ -94,7 +94,7 @@ export async function $$y0(e) {
     let a = new Map();
     let r = n.childrenNodes.filter(e => "SECTION" === e.type);
     if (0 === r.length) {
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: "No codebases defined in section.",
         error: !0
       }));

@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { On } from "../9420/975542";
 import { getI18nString } from "../905/303541";
 export function $$i0({

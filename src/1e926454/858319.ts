@@ -1,8 +1,8 @@
 import { useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { hZ, cL } from "../905/748726";
 import { um } from "../905/14223";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { yI, t9 } from "../905/915142";
 import { ls } from "../905/158283";
 export function $$c0({
@@ -12,7 +12,7 @@ export function $$c0({
 }) {
   let c = useDispatch();
   let p = useSelector(e => e.contacts);
-  let u = Pc();
+  let u = selectUser();
   useEffect(() => {
     c(um());
   }, [c]);

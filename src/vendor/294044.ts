@@ -25,7 +25,7 @@ class h extends $$a {
     return this.matrix.get(this.rowIndices[e], this.columnIndices[r]);
   }
 }
-export function $$d0(e) {
+export function determinant(e) {
   if ((e = _$$A.checkMatrix(e)).isSquare()) {
     let r;
     let n;
@@ -48,9 +48,9 @@ export function $$d0(e) {
       r = e.get(0, 0);
       n = e.get(0, 1);
       s = e.get(0, 2);
-      return r * $$d0(i) - n * $$d0(o) + s * $$d0(a);
+      return r * determinant(i) - n * determinant(o) + s * determinant(a);
     }
   }
   throw Error("determinant can only be calculated for a square matrix");
 }
-export const a = $$d0;
+export const a = determinant;

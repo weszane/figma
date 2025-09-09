@@ -1,11 +1,11 @@
 import { jsx, Fragment } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { s as _$$s } from "../cssbuilder/589278";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 export function $$d0(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = useSelector(e => t ? e.authedUsers.byId[t.id]?.has_content_from_other_plans : null);
   if (!t && !i) return jsx(Fragment, {});
   let d = {

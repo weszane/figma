@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { permissionScopeHandler } from "../905/189185";
 import { Point } from "../905/736624";
 import { FU, b$, Bs } from "../figma_app/933328";

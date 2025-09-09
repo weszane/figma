@@ -4,7 +4,7 @@ import { A as _$$A } from "../vendor/648136";
 import { _m } from "../vendor/891888";
 import { mergeSorted } from "../figma_app/656233";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { zN } from "../905/19536";
+import { useStableMemo } from "../905/19536";
 import c from "../vendor/73823";
 import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
@@ -478,7 +478,7 @@ function ep({
     c && null != Ru(c, l) && (clearTimeout(m.current), p(!0), m.current = setTimeout(() => p(!1), 250));
   }, [l, c]);
   useEffect(() => () => clearTimeout(m.current), []);
-  let g = zN(e);
+  let g = useStableMemo(e);
   return jsx(eh, {
     ...l,
     style: g,

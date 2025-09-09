@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useMemo, Fragment } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { q as _$$q } from "../905/932270";
 import { Fullscreen } from "../figma_app/763686";
@@ -8,7 +8,7 @@ import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { F_ } from "../figma_app/191804";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -16,7 +16,7 @@ import { isValidValue } from "../905/216495";
 import { lJ } from "../905/275640";
 import { Sh } from "../figma_app/889655";
 import { Yv } from "../figma_app/616107";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Z9, iN } from "../figma_app/634656";
 import { Ru } from "../figma_app/630194";
 import { eQ, _W } from "../figma_app/285009";
@@ -77,7 +77,7 @@ export function $$W3() {
   let S = ($$U1("SHAPE_WITH_TEXT") || I || b) && !y && !p && !c;
   let [v, A] = lJ("whiteboardStrokeColor");
   let x = useCallback(e => {
-    e && t(e, zk.NO);
+    e && t(e, yesNoTrackingEnum.NO);
   }, [t]);
   let [w, O] = useState(e);
   useEffect(() => {
@@ -105,7 +105,7 @@ export function $$W3() {
   let W = $$H4();
   let Y = $$V5();
   let Q = $$z0();
-  let ee = _$$g();
+  let ee = generateUUIDv4();
   let et = [];
   Y && (c ? et.push({
     strokeWeight: _$$wv,

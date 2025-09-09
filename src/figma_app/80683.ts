@@ -12,7 +12,7 @@ import { Gu } from "../905/513035";
 import { Ye, N_ } from "../905/332483";
 import { Zx } from "../figma_app/217457";
 import { FBillingPeriodType, FOrganizationLevelType } from "../figma_app/191312";
-import { rRb, SJD, H8X } from "../figma_app/43951";
+import { SeatCountDataForPlan, SeatCountDataForPlanByBillingInterval, LicenseGroupSeatCountsView } from "../figma_app/43951";
 let E = Ye.dict(() => ({
   assigned: 0,
   available: 0,
@@ -24,7 +24,7 @@ export function $$y1(e, t) {
     data: E
   });
   let a = useCallback(() => {
-    subscribeAndAwaitData(rRb, {
+    subscribeAndAwaitData(SeatCountDataForPlan, {
       planParentId: e,
       planType: t
     }).then(e => {
@@ -69,7 +69,7 @@ function b(e) {
   });
 }
 export function $$T3(e, t, r) {
-  let [n] = IT(rRb({
+  let [n] = IT(SeatCountDataForPlan({
     planParentId: e,
     planType: t
   }), r);
@@ -133,7 +133,7 @@ export function $$v4(e) {
     planParentId: e.teamId,
     planType: FOrganizationLevelType.TEAM
   } : null;
-  let o = Rs(SJD(a));
+  let o = Rs(SeatCountDataForPlanByBillingInterval(a));
   return useMemo(() => t ? r ? o.transform(e => {
     let t = {
       [FBillingPeriodType.MONTH]: N_.dict(() => ({
@@ -168,7 +168,7 @@ export function $$v4(e) {
   }) : resourceUtils.disabled() : resourceUtils.error(["proration_billing_disabled"]), [r, o, t]);
 }
 export function $$A2(e) {
-  let t = Rs(H8X(e ? {
+  let t = Rs(LicenseGroupSeatCountsView(e ? {
     licenseGroupId: e.licenseGroupId
   } : null));
   return useMemo(() => t.transform(e => {

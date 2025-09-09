@@ -1,14 +1,14 @@
 import { useMemo, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { hU, ZI, EJ } from "../figma_app/934707";
-import { gvX } from "../figma_app/43951";
+import { NotificationExperimentInfoView } from "../figma_app/43951";
 export function $$u0(e = !1) {
   let t = useDispatch();
-  let i = useMemo(() => g(), []);
-  let c = Rs(gvX({
+  let i = useMemo(() => generateUUIDv4(), []);
+  let c = Rs(NotificationExperimentInfoView({
     cacheNonce: i
   }));
   useEffect(() => {

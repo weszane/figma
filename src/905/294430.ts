@@ -7,11 +7,11 @@ import { O as _$$O } from "../905/487602";
 import { StyleVariableOperation, CopyPasteType, VariableResolvedDataType, AppStateTsApi, ProcessStage, PropertyScope, AccessLevel, LayoutTabType, NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { Q as _$$Q } from "../figma_app/67145";
-import { Pt, qP } from "../figma_app/806412";
+import { generateRecordingKey, useSetupPlayback } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { k as _$$k2 } from "../905/582200";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -22,7 +22,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
 import { a2 } from "../figma_app/762558";
@@ -39,7 +39,7 @@ import { cS, Zo } from "../figma_app/334459";
 import { Ad, Y9, Oe } from "../figma_app/811257";
 import { rf } from "../figma_app/960196";
 import { yw, li, ir, iQ, I6 } from "../905/159279";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { sH, dI } from "../905/805904";
 import $ from "classnames";
@@ -152,14 +152,14 @@ function ed({
         s({
           ...a,
           [t]: r
-        }, zk.YES);
+        }, yesNoTrackingEnum.YES);
       });
       oz(`EFFECT_${t.slice(0, -3).toUpperCase()}`, r);
     } else t && _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       s({
         ...a,
         [t]: void 0
-      }, zk.YES);
+      }, yesNoTrackingEnum.YES);
     });
   }, [c, s, a, t]);
   let p = useRef(null);
@@ -263,7 +263,7 @@ function ep(e) {
       max: aO,
       min: 0,
       onValueChange: onStartRadiusChange,
-      recordingKey: Pt(e, "startBlurInput"),
+      recordingKey: generateRecordingKey(e, "startBlurInput"),
       resolution: 0.1,
       scrubMultiplier: 0.1,
       smallNudgeAmount: e.smallNudgeAmount,
@@ -281,7 +281,7 @@ function ep(e) {
     children: [isProgressiveBlur ? r : null, jsx(cS, {
       label: isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("fullscreen.properties_panel.effects.blur"),
       input: jsx(ed, {
-        recordingKey: Pt(e, "radiusVar"),
+        recordingKey: generateRecordingKey(e, "radiusVar"),
         fieldName: "radiusVar",
         effect: e.effect,
         onChange: e.onChange,
@@ -296,7 +296,7 @@ function ep(e) {
           max: isProgressiveBlur ? aO : void 0,
           min: 0,
           onValueChange: e.onRadiusChange,
-          recordingKey: Pt(e, "blurInput"),
+          recordingKey: generateRecordingKey(e, "blurInput"),
           resolution: 0.1,
           scrubMultiplier: 0.1,
           smallNudgeAmount: e.smallNudgeAmount,
@@ -354,7 +354,7 @@ function em(e) {
               ...t,
               blurOpType: i,
               ...a
-            }, zk.YES);
+            }, yesNoTrackingEnum.YES);
           },
           legend: jsx(_$$q, {
             children: renderI18nText("properties_panel.effects.blur.type")
@@ -389,7 +389,7 @@ function eh(e) {
       children: jsx(cS, {
         label: renderI18nText("fullscreen.properties_panel.effects.blur"),
         input: jsx(ed, {
-          recordingKey: Pt(e, "radiusVar"),
+          recordingKey: generateRecordingKey(e, "radiusVar"),
           fieldName: "radiusVar",
           effect: e.effect,
           onChange: e.onChange,
@@ -403,7 +403,7 @@ function eh(e) {
             inputClassName: ea,
             min: 0,
             onValueChange: t,
-            recordingKey: Pt(e, "blurInput"),
+            recordingKey: generateRecordingKey(e, "blurInput"),
             resolution: 0.1,
             scrubMultiplier: 0.1,
             smallNudgeAmount: e.smallNudgeAmount,
@@ -431,7 +431,7 @@ function ek(e, t, i) {
   return Bf().map(r => jsx(_$$c$, {
     value: r,
     disabled: !eT(r, e, t),
-    recordingKey: Pt(i, r),
+    recordingKey: generateRecordingKey(i, r),
     tooltip: function (e, t, i) {
       if (e !== t) switch (i[t]) {
         case "allowed":
@@ -493,7 +493,7 @@ function eP(e) {
     }
     updatePreview(e);
   }, 50);
-  let h = qP(recordingKey, "focus-option", e => {
+  let h = useSetupPlayback(recordingKey, "focus-option", e => {
     m(e);
   }, {
     record: e => ({
@@ -624,11 +624,11 @@ function eq({
       },
       handleDrag: i => {
         let r = eJ(i, n.current, t);
-        r !== a.current && (a.current = r, e(r, zk.NO));
+        r !== a.current && (a.current = r, e(r, yesNoTrackingEnum.NO));
       },
       handleDragEnd: i => {
         let r = eJ(i, n.current, t);
-        r !== a.current && (a.current = r, e(r, zk.YES));
+        r !== a.current && (a.current = r, e(r, yesNoTrackingEnum.YES));
         a.current = null;
         n.current = null;
       },
@@ -888,13 +888,13 @@ function e1(e) {
             e.onChange({
               ...e.effect,
               specularAngle: t < 0 ? t + 360 : t
-            }, i.commit ? zk.YES : zk.NO);
+            }, i.commit ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
           },
-          recordingKey: Pt(e, "lightAngle"),
+          recordingKey: generateRecordingKey(e, "lightAngle"),
           value: (e.effect.specularAngle || 0) > 180 ? (e.effect.specularAngle || 0) - 360 : e.effect.specularAngle || 0
         }), jsx(e2, {
           effect: e.effect,
-          recordingKey: Pt(e, "lightIntensity"),
+          recordingKey: generateRecordingKey(e, "lightIntensity"),
           onChange: e.onChange
         })]
       })]
@@ -915,7 +915,7 @@ function e2(e) {
     onChange: (t, i) => e.onChange({
       ...e.effect,
       specularIntensity: t / 100
-    }, i.commit ? zk.YES : zk.NO),
+    }, i.commit ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO),
     icon: jsx(_$$Z, {}),
     formatter: t,
     recordingKey: e.recordingKey
@@ -999,7 +999,7 @@ function e8(e) {
       max: ml,
       min: 0,
       onValueChange: onNoiseSizeChange,
-      recordingKey: Pt(e, "noiseSize"),
+      recordingKey: generateRecordingKey(e, "noiseSize"),
       resolution: 0.1,
       scrubMultiplier: 0.1,
       smallNudgeAmount: e.smallNudgeAmount,
@@ -1024,7 +1024,7 @@ function e8(e) {
       max: aO,
       min: 0,
       onValueChange: onRadiusChange,
-      recordingKey: Pt(e, "textureRadius"),
+      recordingKey: generateRecordingKey(e, "textureRadius"),
       resolution: 0.1,
       scrubMultiplier: 0.1,
       smallNudgeAmount: e.smallNudgeAmount,
@@ -1083,7 +1083,7 @@ function e9(e) {
               ...e.effect,
               clipToShape: t
             };
-            e.onChange(i, zk.YES);
+            e.onChange(i, yesNoTrackingEnum.YES);
           },
           label: jsx(Label, {
             children: getI18nString("properties_panel.effects.texture.clip_to_shape")
@@ -1123,7 +1123,7 @@ function ta(e) {
     children: [jsx(_$$D2, {
       paint: e.paint,
       onMouseDown: i,
-      recordingKey: Pt(e, "chit"),
+      recordingKey: generateRecordingKey(e, "chit"),
       className: x7
     }), jsx(So, {
       appendedColorInputClassname: e.appendedColorInputClassName,
@@ -1141,7 +1141,7 @@ function ta(e) {
       onMouseDown: r,
       onTypeMouseDown: i,
       paint: e.paint,
-      recordingKey: Pt(e, "value"),
+      recordingKey: generateRecordingKey(e, "value"),
       visible: !0
     }), jsx(Pd, {
       className: Z()("paint_with_opacity--opacityInputContainer--x9eKU", n1),
@@ -1161,7 +1161,7 @@ function ta(e) {
           visible: !0
         }, i);
       },
-      recordingKey: Pt(e, "opacity"),
+      recordingKey: generateRecordingKey(e, "opacity"),
       value: e.paint.opacity
     })]
   });
@@ -1249,7 +1249,7 @@ function to(e) {
       inputClassName: ea,
       max: ml,
       onValueChange: onNoiseSizeChange,
-      recordingKey: Pt(e, "noiseSize"),
+      recordingKey: generateRecordingKey(e, "noiseSize"),
       resolution: 0.1,
       scrubMultiplier: 0.1,
       smallNudgeAmount: e.smallNudgeAmount,
@@ -1272,7 +1272,7 @@ function to(e) {
       dispatch: e.dispatch,
       inputClassName: ea,
       onValueChange: onDensityChange,
-      recordingKey: Pt(e, "density"),
+      recordingKey: generateRecordingKey(e, "density"),
       smallNudgeAmount: e.smallNudgeAmount,
       tooltipForScreenReadersOnly: !0,
       value: e.effect.density ?? 0,
@@ -1293,7 +1293,7 @@ function to(e) {
       dispatch: e.dispatch,
       inputClassName: ea,
       onValueChange: onOpacityChange,
-      recordingKey: Pt(e, "opacity"),
+      recordingKey: generateRecordingKey(e, "opacity"),
       smallNudgeAmount: e.smallNudgeAmount,
       tooltipForScreenReadersOnly: !0,
       value: e.effect.opacity ?? 0,
@@ -1431,7 +1431,7 @@ function tl(e) {
               ...e.effect,
               noiseType: i
             };
-            e.onChange(n, zk.YES);
+            e.onChange(n, yesNoTrackingEnum.YES);
           },
           children: [jsx(RT, {
             label: getI18nString("properties_panel.effects.noise.type.mono"),
@@ -1466,14 +1466,14 @@ function tl(e) {
       color: e.effect.color,
       onChange: h,
       onClose: () => u(AccessLevel.PRIMARY),
-      recordingKey: Pt(e, "colorPicker"),
+      recordingKey: generateRecordingKey(e, "colorPicker"),
       variableData: e.effect.colorVar
     }), t === AccessLevel.SECONDARY && jsx(gA, {
       initialPosition: a,
       color: e.effect.secondaryColor ?? e.effect.color,
       onChange: g,
       onClose: () => u(AccessLevel.SECONDARY),
-      recordingKey: Pt(e, "colorPicker"),
+      recordingKey: generateRecordingKey(e, "colorPicker"),
       variableData: e.effect.colorVar
     })]
   });
@@ -1579,7 +1579,7 @@ function tm(e) {
     children: [jsx(cS, {
       label: renderI18nText("fullscreen.properties_panel.effects.position"),
       input: jsx(ed, {
-        recordingKey: Pt(e, "xVar"),
+        recordingKey: generateRecordingKey(e, "xVar"),
         fieldName: "xVar",
         effect: e.effect,
         onChange: e.onChange,
@@ -1595,7 +1595,7 @@ function tm(e) {
           max: 3e4,
           min: -3e4,
           onValueChange: onXChange,
-          recordingKey: Pt(e, "xInput"),
+          recordingKey: generateRecordingKey(e, "xInput"),
           smallNudgeAmount: e.smallNudgeAmount,
           tooltipForScreenReadersOnly: !0,
           value: e.effect.offset.x,
@@ -1608,7 +1608,7 @@ function tm(e) {
     }), jsx(cS, {
       label: null,
       input: jsx(ed, {
-        recordingKey: Pt(e, "yVar"),
+        recordingKey: generateRecordingKey(e, "yVar"),
         fieldName: "yVar",
         effect: e.effect,
         onChange: e.onChange,
@@ -1623,7 +1623,7 @@ function tm(e) {
           max: 3e4,
           min: -3e4,
           onValueChange: onYChange,
-          recordingKey: Pt(e, "yInput"),
+          recordingKey: generateRecordingKey(e, "yInput"),
           smallNudgeAmount: e.smallNudgeAmount,
           tooltipForScreenReadersOnly: !0,
           value: e.effect.offset.y,
@@ -1638,7 +1638,7 @@ function tm(e) {
   let c = jsx(cS, {
     label: renderI18nText("fullscreen.properties_panel.effects.blur"),
     input: jsx(ed, {
-      recordingKey: Pt(e, "radiusVar"),
+      recordingKey: generateRecordingKey(e, "radiusVar"),
       fieldName: "radiusVar",
       effect: e.effect,
       onChange: e.onChange,
@@ -1652,7 +1652,7 @@ function tm(e) {
         max: 250,
         min: 0,
         onValueChange: onRadiusChange,
-        recordingKey: Pt(e, "blurInput"),
+        recordingKey: generateRecordingKey(e, "blurInput"),
         resolution: 0.1,
         scrubMultiplier: 0.1,
         smallNudgeAmount: e.smallNudgeAmount,
@@ -1669,7 +1669,7 @@ function tm(e) {
   let u = jsx(cS, {
     label: renderI18nText("fullscreen.properties_panel.effects.spread"),
     input: jsx(ed, {
-      recordingKey: Pt(e, "spreadVar"),
+      recordingKey: generateRecordingKey(e, "spreadVar"),
       fieldName: "spreadVar",
       effect: e.effect,
       onChange: e.onChange,
@@ -1684,7 +1684,7 @@ function tm(e) {
         max: 3e4,
         min: -3e4,
         onValueChange: onSpreadChange,
-        recordingKey: Pt(e, "spreadInput"),
+        recordingKey: generateRecordingKey(e, "spreadInput"),
         smallNudgeAmount: e.smallNudgeAmount,
         tooltipForScreenReadersOnly: e.selectionContainsOnlySpreadEligibleNodes,
         value: e.effect.spread,
@@ -1739,7 +1739,7 @@ function th(e) {
       colorVar: r
     };
     _$$f(StyleVariableOperation.VARIABLE_ATTACH, CopyPasteType.DIRECT, () => {
-      e.onChange(a, zk.YES);
+      e.onChange(a, yesNoTrackingEnum.YES);
     });
     oz("EFFECT_COLOR", r);
   };
@@ -1749,7 +1749,7 @@ function th(e) {
       colorVar: void 0
     };
     _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
-      e.onChange(i, zk.YES);
+      e.onChange(i, yesNoTrackingEnum.YES);
     });
     t.stopPropagation();
   };
@@ -1817,7 +1817,7 @@ function th(e) {
               opacity: e.effect.color.a
             },
             onClick: c,
-            recordingKey: Pt(e, "colorVariableInput")
+            recordingKey: generateRecordingKey(e, "colorVariableInput")
           })
         }), jsx("span", {
           className: "ui3_effects_settings_picker--colorVariableUnbindButton---TaIC",
@@ -1866,7 +1866,7 @@ function th(e) {
               };
               e.onChange(i);
             },
-            recordingKey: Pt(e, "showShadowBehindNode")
+            recordingKey: generateRecordingKey(e, "showShadowBehindNode")
           })
         })
       })]
@@ -1875,7 +1875,7 @@ function th(e) {
       color: e.effect.color,
       onChange: p,
       onClose: u,
-      recordingKey: Pt(e, "colorPicker"),
+      recordingKey: generateRecordingKey(e, "colorPicker"),
       variableData: e.effect.colorVar,
       onVariableChange: m,
       variableScopes: new Set([PropertyScope.EFFECT_COLOR])
@@ -1929,7 +1929,7 @@ function tg(e) {
       onBlendModeChange: e.onBlendModeChange,
       dispatch: e.dispatch,
       dropdownShown: e.dropdownShown,
-      recordingKey: Pt(e, "blendMode")
+      recordingKey: generateRecordingKey(e, "blendMode")
     })]
   });
 }
@@ -1985,8 +1985,8 @@ function tA(e) {
     pickerId: e.pickerId,
     effect: e.effect,
     showBlendModeOption: "DROP_SHADOW" === u || "INNER_SHADOW" === u || "NOISE" === u,
-    onTypeChange: (t, i = zk.YES) => {
-      (i === zk.YES || i === zk.YES_FORCE_TRACKING_AS_EDIT) && (o(a, t), s(t));
+    onTypeChange: (t, i = yesNoTrackingEnum.YES) => {
+      (i === yesNoTrackingEnum.YES || i === yesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT) && (o(a, t), s(t));
       let n = UF(e.effect, t);
       e.onChange({
         ...e.effect,
@@ -1994,7 +1994,7 @@ function tA(e) {
         ...n
       }, i);
     },
-    onBlendModeChange: (t, i = zk.YES) => {
+    onBlendModeChange: (t, i = yesNoTrackingEnum.YES) => {
       let n = {
         ...e.effect,
         blendMode: t
@@ -2006,7 +2006,7 @@ function tA(e) {
     options: e.options,
     allowedEffects: e.allowedEffects
   });
-  let h = Pt(e, "modal");
+  let h = generateRecordingKey(e, "modal");
   let g = i ? a : e.effect.type;
   return t ? jsx(_$$bL, {
     defaultPosition: {
@@ -2162,7 +2162,7 @@ class tM extends PureComponent {
   constructor() {
     super(...arguments);
     this.context = null;
-    this.effectsList = xx(e => valueOrFallback(this.props.effects, []).map(qq));
+    this.effectsList = memoizeByArgs(e => valueOrFallback(this.props.effects, []).map(qq));
     this.onEffectsChange = (e, t) => {
       fullscreenValue.updateSelectionProperties({
         effects: e
@@ -2198,7 +2198,7 @@ class tM extends PureComponent {
           onChange: this.onEffectsChange,
           pickerShown: this.props.pickerShown,
           propertyList: e,
-          recordingKey: Pt(this.props, "effectsList"),
+          recordingKey: generateRecordingKey(this.props, "effectsList"),
           selectedPropertyType: NodePropertyCategory.EFFECT,
           selectionContainsAnyKnockoutShadowEligibleNodes: this.props.selectionContainsAnyKnockoutShadowEligibleNodes,
           selectionContainsOnlySpreadEligibleNodes: this.props.selectionContainsOnlySpreadEligibleNodes,
@@ -2283,7 +2283,7 @@ class tU extends PureComponent {
       onRemoveEffect: this.removeProperty.bind(this, t),
       pickerShown: this.props.pickerShown,
       productType: this.props.productType,
-      recordingKey: Pt(this.props, t),
+      recordingKey: generateRecordingKey(this.props, t),
       selected: i,
       selectionContainsAnyKnockoutShadowEligibleNodes: this.props.selectionContainsAnyKnockoutShadowEligibleNodes,
       selectionContainsOnlySpreadEligibleNodes: this.props.selectionContainsOnlySpreadEligibleNodes,
@@ -2338,9 +2338,9 @@ class tV extends PureComponent {
         productType: this.props.productType
       }));
     };
-    this.onTypeChange = (e, t = zk.YES) => {
+    this.onTypeChange = (e, t = yesNoTrackingEnum.YES) => {
       let i = IK(e);
-      (t === zk.YES || t === zk.YES_FORCE_TRACKING_AS_EDIT) && (this.logEffectChange(this.state.userChosenEffectType, e), this.setState({
+      (t === yesNoTrackingEnum.YES || t === yesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT) && (this.logEffectChange(this.state.userChosenEffectType, e), this.setState({
         userChosenEffectType: e
       }));
       let n = UF(this.props.effect, e);
@@ -2355,7 +2355,7 @@ class tV extends PureComponent {
       this.props.onChange({
         ...this.props.effect,
         visible: e
-      }, zk.YES);
+      }, yesNoTrackingEnum.YES);
     };
     this.toggleSettings = e => {
       if (e && e.stopPropagation(), t_(), this.settingsPickerShown()) {
@@ -2437,7 +2437,7 @@ class tV extends PureComponent {
     let m = this.props.selected && !this.props.hasFocus;
     let h = jsx(_$$d, {
       onClick: this.toggleSettings,
-      recordingKey: Pt(this.props, "toggleSettings"),
+      recordingKey: generateRecordingKey(this.props, "toggleSettings"),
       "aria-expanded": !!r,
       "aria-label": getI18nString("properties_panel.effects.effect_settings"),
       children: jsx("span", {
@@ -2462,19 +2462,19 @@ class tV extends PureComponent {
         onChange: this.onTypeChange,
         onMouseDown: this.stopPropagation,
         property: this.props.effect.type,
-        recordingKey: Pt(this.props, "select")
+        recordingKey: generateRecordingKey(this.props, "select")
       }), u]
     });
     let A = jsx(_$$B, {
       visible: this.props.effect.visible,
       onChange: this.toggleVisible,
-      recordingKey: Pt(this.props, "visibleToggle"),
+      recordingKey: generateRecordingKey(this.props, "visibleToggle"),
       selected: p
     });
     let b = jsx(_$$T, {
       selected: p,
       children: jsx(_$$K, {
-        recordingKey: Pt(this.props, "removeButton"),
+        recordingKey: generateRecordingKey(this.props, "removeButton"),
         onClick: this.props.onRemoveEffect,
         "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
         htmlAttributes: {
@@ -2550,7 +2550,7 @@ class tV extends PureComponent {
           onChange: this.onChange,
           options: d,
           pickerId: this.ui3FlyoutPickerID,
-          recordingKey: Pt(this.props, "settings"),
+          recordingKey: generateRecordingKey(this.props, "settings"),
           selectionContainsAnyKnockoutShadowEligibleNodes: this.props.selectionContainsAnyKnockoutShadowEligibleNodes,
           selectionContainsOnlySpreadEligibleNodes: this.props.selectionContainsOnlySpreadEligibleNodes,
           smallNudgeAmount: this.props.smallNudgeAmount

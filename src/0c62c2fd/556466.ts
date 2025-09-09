@@ -7,7 +7,7 @@ import { h as _$$h } from "../figma_app/334471";
 import { FPermissionDenialReason } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
 import { q, J } from "../905/202542";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { p as _$$p, u as _$$u } from "../1250/964548";
 import { V } from "../0c62c2fd/421640";
 import { ud } from "../figma_app/681697";
@@ -16,7 +16,7 @@ import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { tc } from "../905/15667";
 import { E as _$$E } from "../figma_app/61705";
 import { c as _$$c } from "../905/370443";
@@ -167,7 +167,7 @@ export function $$R0({
                       fileCreationOptionState: r
                     }
                   });
-                  n(F.enqueue({
+                  n(VisualBellActions.enqueue({
                     message: getI18nString("general.an_error_occurred"),
                     error: !0
                   }));

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { oY } from "../figma_app/387100";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import l from "classnames";
 import { V, B } from "../905/714743";
 import { Dm } from "../figma_app/8833";
@@ -75,7 +75,7 @@ export let $$x0 = forwardRef(function (e, t) {
 export function $$b1({
   node: e
 }) {
-  let t = xx((e, t) => D(e, t));
+  let t = memoizeByArgs((e, t) => D(e, t));
   let a = e ? t(e.guid, e.objectsPanelThumbnailId) : "";
   let s = a ? V(a) : function (e) {
     let t = null;

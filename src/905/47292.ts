@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { Rs } from "../figma_app/288654";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { dq } from "../905/845253";
-import { bUn } from "../figma_app/43951";
+import { WorkspacesDirectoryView } from "../figma_app/43951";
 import { wM } from "../figma_app/329496";
 import { useMemo, useCallback } from "react";
 import { bL, gZ } from "../905/598775";
@@ -137,7 +137,7 @@ export function $$w0({
   let u = dq();
   let p = t?.find(e => "workspace" === e.type);
   let m = p && "workspace" === p.type && p.id;
-  let h = Rs(bUn, {
+  let h = Rs(WorkspacesDirectoryView, {
     orgId: u
   });
   let g = "loaded" !== h.status;

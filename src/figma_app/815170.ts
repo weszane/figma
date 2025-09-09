@@ -3,7 +3,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
 import { ce } from "../figma_app/347146";
 import { desktopAPIInstance, popoutAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { V3 } from "../figma_app/976345";
 import { sf } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
@@ -80,10 +80,10 @@ export let $$T0 = createOptimistThunk(function (e, {
     }
   }
   if (url.startsWith("mailto:") || url.startsWith("tel:") || url.startsWith("https://connect.stripe.com/setup/")) {
-    Ay.unsafeRedirect(url, "_blank");
+    customHistory.unsafeRedirect(url, "_blank");
     return;
   }
-  desktopAPIInstance || popoutAPIInstance || ce() ? Ay.unsafeRedirect(url, "_blank") : Ay.postRedirect(`/exit?url=${encodeURIComponent(url)}`, "_blank");
+  desktopAPIInstance || popoutAPIInstance || ce() ? customHistory.unsafeRedirect(url, "_blank") : customHistory.postRedirect(`/exit?url=${encodeURIComponent(url)}`, "_blank");
   trackEventAnalytics("Hyperlink Click", R);
 });
 export const RK = $$T0;

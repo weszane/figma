@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { O as _$$O } from "../905/501876";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";

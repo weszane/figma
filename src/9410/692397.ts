@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useContext } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import o from "classnames";
 import { b as _$$b } from "../figma_app/556971";
@@ -9,7 +9,7 @@ import { oz, o5 } from "../905/292918";
 import { oj, Ns, Kz } from "../905/760074";
 import { Um } from "../905/848862";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { e0 } from "../905/696396";
 import { x as _$$x } from "../905/106997";
 import { X } from "../9410/208213";
@@ -105,7 +105,7 @@ export function $$k4() {
 export function $$N1({
   openFile: e
 }) {
-  let t = iZ();
+  let t = selectCurrentUser();
   return jsxs("div", {
     className: T,
     children: [jsx(ur, {

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Z } from '../905/116724';
 import { s as _$$s } from '../905/139639';
 import { permissionScopeHandler } from '../905/189185';
-import { F as _$$F2 } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { trackEventAnalytics } from '../905/449184';
 import { YQ } from '../905/502364';
@@ -16,14 +16,14 @@ import { fullscreenValue } from '../figma_app/455680';
 import { Wh } from '../figma_app/615482';
 import { p8 } from '../figma_app/722362';
 import { dP, UK } from '../figma_app/740163';
-import { i as _$$i, BH, hq } from '../figma_app/741237';
+import { renameNode, renameSelectedNodes, expandNodeToRoot } from '../figma_app/741237';
 import { AppStateTsApi, ViewType, UserInterfaceElements, SelectionPanelType } from '../figma_app/763686';
 import { tu } from '../figma_app/779249';
 import { parseMsNumber } from '../figma_app/783094';
 import { d as _$$d, W as _$$W } from '../figma_app/833988';
 import { R } from '../figma_app/941983';
 import { U } from '../figma_app/964810';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useSelector, useDispatch } from 'react-redux';
 let $$w4 = 240;
 let $$O10 = 500;
 let $$R14 = 240;
@@ -105,12 +105,12 @@ export function $$z2() {
     if (d) return;
     let r = getSingletonSceneGraph().get(e);
     if (r?.isResponsiveSetOrWebpage && r.parentNode?.defaultResponsiveSetId === e) {
-      _(_$$F2.enqueue({
+      _(VisualBellActions.enqueue({
         message: getI18nString('sites.panel.pages_panel.cant_rename_default_responsive_set')
       }));
       return;
     }
-    !r?.isReactFiber && (p.current !== UserInterfaceElements.LAYERS && p.current !== UserInterfaceElements.CODE && l.showLayersPanel(), setIsLayersOpen(!0), t(e), r?.parentGuid && hq(r.parentGuid));
+    !r?.isReactFiber && (p.current !== UserInterfaceElements.LAYERS && p.current !== UserInterfaceElements.CODE && l.showLayersPanel(), setIsLayersOpen(!0), t(e), r?.parentGuid && expandNodeToRoot(r.parentGuid));
   }, [p, _, d, l, setIsLayersOpen]);
   let S = useCallback((e, n, i) => {
     if (d) return;
@@ -119,7 +119,7 @@ export function $$z2() {
       let e = getSingletonSceneGraph().get(l);
       let t = n || '';
       let r = AppStateTsApi.uiState().focusModeState.getCopy();
-      e?.isCodeFile ? (t = tu(t), (!n || T(e.codeFilePath, i, t)) && (t = e.name), permissionScopeHandler.user('set-node-name', () => _$$i(l, t))) : e?.isResponsiveSetOrWebpage || e?.isBreakpointFrame || e?.isDerivedWebpageBreakpoint ? (t ||= e?.name, permissionScopeHandler.user('set-node-name', () => _$$i(l, t))) : SelectionPanelType.RESPONSIVE_SET === r || SelectionPanelType.COMPONENT_SET === r ? permissionScopeHandler.user('set-node-name', () => BH(t)) : permissionScopeHandler.user('set-node-name', () => _$$i(l, t));
+      e?.isCodeFile ? (t = tu(t), (!n || T(e.codeFilePath, i, t)) && (t = e.name), permissionScopeHandler.user('set-node-name', () => renameNode(l, t))) : e?.isResponsiveSetOrWebpage || e?.isBreakpointFrame || e?.isDerivedWebpageBreakpoint ? (t ||= e?.name, permissionScopeHandler.user('set-node-name', () => renameNode(l, t))) : SelectionPanelType.RESPONSIVE_SET === r || SelectionPanelType.COMPONENT_SET === r ? permissionScopeHandler.user('set-node-name', () => renameSelectedNodes(t)) : permissionScopeHandler.user('set-node-name', () => renameNode(l, t));
       fullscreenValue.commit();
       t !== i && e?.type && ['FRAME', 'SECTION'].includes(e.type) && (y({
         newTitle: t,

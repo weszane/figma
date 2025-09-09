@@ -1,9 +1,9 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useCallback, useMemo, PureComponent, createRef, Component } from "react";
-import { useDispatch, useSelector, connect } from "../vendor/514228";
+import { useDispatch, useSelector, connect } from "react-redux";
 import a from "../vendor/241899";
 import { hasDesktopAPI } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { x as _$$x } from "../905/211326";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -30,7 +30,7 @@ import { N$, u8 } from "../figma_app/350203";
 import { X as _$$X } from "../5430/966412";
 import { Vq } from "../figma_app/342207";
 import { buildUploadUrl } from "../figma_app/169182";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { qc, kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { CS } from "../figma_app/275462";
@@ -72,7 +72,7 @@ import { l as _$$l } from "../905/152724";
 import { t as _$$t2 } from "../5430/535653";
 import { tx as _$$tx2 } from "../figma_app/395505";
 import { oB, j7, sf } from "../905/929976";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { H as _$$H } from "../5430/997712";
 import { a as _$$a2 } from "../905/925868";
@@ -90,7 +90,7 @@ import { NJ } from "../figma_app/419216";
 import { O9D } from "../figma_app/6204";
 import { z as _$$z2 } from "../905/353894";
 import { Rs } from "../figma_app/288654";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { S as _$$S2 } from "../5430/465757";
 import { C as _$$C } from "../905/237873";
 import { bV, up } from "../figma_app/808294";
@@ -101,7 +101,7 @@ import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
 import { N as _$$N3 } from "../905/696711";
 import { Cu } from "../figma_app/314264";
-import { aom, wW7 } from "../figma_app/43951";
+import { CommunityResourceStat, UserMonetizationMetadata } from "../figma_app/43951";
 import { P5, D6, VU } from "../figma_app/175992";
 import { s as _$$s3 } from "../5430/114211";
 import { P as _$$P } from "../905/347284";
@@ -268,9 +268,9 @@ function J({
   let r = AG();
   let s = CS();
   let o = si(e) && !r;
-  let [a, l] = useState(_$$g());
+  let [a, l] = useState(generateUUIDv4());
   let c = useCallback(() => {
-    l(_$$g());
+    l(generateUUIDv4());
   }, []);
   let d = r ? Vq.large : void 0;
   let u = useMemo(() => e.redirect_cover_image_url ? {
@@ -749,7 +749,7 @@ let tg = createOptimistThunk(async (e, t, {
 });
 let tE = registerModal(function () {
   let e = useDispatch();
-  let t = iZ();
+  let t = selectCurrentUser();
   let [r, s] = useState([]);
   let [a, l] = useState(!0);
   let [c, d] = useState(!0);
@@ -765,7 +765,7 @@ let tE = registerModal(function () {
       l(!1);
       s(e.meta);
     }).catch(() => {
-      e(_$$F.enqueue({
+      e(VisualBellActions.enqueue({
         type: "get-payout-statements-error",
         message: getI18nString("community.seller.payout_statement_error"),
         error: !0
@@ -1086,7 +1086,7 @@ function ry({
     id,
     is_subscription
   } = e.monetized_resource_metadata;
-  let n = Rs(aom, {
+  let n = Rs(CommunityResourceStat, {
     monetizedResourceMetadataId: id
   });
   let a = new vr("usd");
@@ -1094,7 +1094,7 @@ function ry({
     resource: e
   });
   if ("loaded" !== n.status || n.errors?.length) {
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_load_stats_for_a_resource"),
       error: !0
     }));
@@ -1201,7 +1201,7 @@ function rj({
   profileId: t
 }) {
   let r = useDispatch();
-  let s = iZ();
+  let s = selectCurrentUser();
   let [a, l] = useState(!1);
   let [{
     data: c,
@@ -1223,7 +1223,7 @@ function rj({
     !p && u && h();
   }, [p, u, h]);
   let [x, f] = useState(!1);
-  let y = Rs(wW7, {
+  let y = Rs(UserMonetizationMetadata, {
     userId: e
   });
   let v = () => {
@@ -1328,7 +1328,7 @@ function rj({
       });
       if (getFeatureFlags().cmty_m10n_turn_creator_dash_off || "loading" === y.status) return e;
       if ("loaded" !== y.status || y.errors?.length) {
-        r(_$$F.enqueue({
+        r(VisualBellActions.enqueue({
           message: getI18nString("community.actions.unable_to_load_creator_stats"),
           error: !0
         }));
@@ -1383,7 +1383,7 @@ let rk = e => {
 };
 function rA() {
   let e = useDispatch();
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = useSelector(e => e.dropdownShown?.data?.profile);
   let s = useSelector(e => e.dropdownShown?.data?.targetRect);
   if (!r) return jsx(Fragment, {});
@@ -1398,7 +1398,7 @@ function rA() {
       blockedProfileId: r,
       profileId: t?.community_profile_id || "",
       onSuccess: () => {
-        e(_$$F.enqueue({
+        e(VisualBellActions.enqueue({
           message: "Restricted this user's comments",
           type: "profile-restricted-change",
           button: {
@@ -1431,7 +1431,7 @@ function rA() {
       blockedProfileId: r,
       profileId: t?.community_profile_id || "",
       onSuccess: () => {
-        e(_$$F.enqueue({
+        e(VisualBellActions.enqueue({
           message: "Restricted this user's comments",
           type: "profile-restricted-change",
           button: {
@@ -1454,7 +1454,7 @@ function rA() {
       blockedProfileId: r,
       profileId: t?.community_profile_id || "",
       onSuccess: () => {
-        e(_$$F.enqueue({
+        e(VisualBellActions.enqueue({
           message: "Unrestricted this user's comments",
           type: "profile-restricted-change",
           button: {
@@ -1723,7 +1723,7 @@ function rq() {
     }), jsx(nR, {
       target: "_blank",
       onClick: () => {
-        Ay.push("/community");
+        customHistory.push("/community");
       },
       children: renderI18nText("community.explore_resources")
     })]
@@ -1780,7 +1780,7 @@ function r8(e) {
     canEdit,
     canSellOnCommunity
   } = e;
-  let s = iZ();
+  let s = selectCurrentUser();
   let o = useCallback(() => {
     if (s) return _$$tx2(s);
   }, [s]);
@@ -1951,7 +1951,7 @@ function r7({
   let a = useDispatch();
   let l = r === e.id;
   return (useEffect(() => {
-    t !== g3.SAVES || l || Ay.push(bL(e.profile_handle, g3.RESOURCES));
+    t !== g3.SAVES || l || customHistory.push(bL(e.profile_handle, g3.RESOURCES));
   }, [t, l, s, e.profile_handle, a]), t === g3.METRICS) ? jsx("div", {
     className: tV,
     children: jsx(rj, {
@@ -1968,7 +1968,7 @@ function r6({
   let {
     tabView
   } = RA(xn);
-  let r = iZ();
+  let r = selectCurrentUser();
   let n = useDispatch();
   let a = useSelector(t => E1(e, t));
   let l = useSelector(t => kJ(t, e));
@@ -2053,7 +2053,7 @@ function se({
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
         });
-        Ay.push(bL(this.props.profile.profile_handle, g3.RESOURCES));
+        customHistory.push(bL(this.props.profile.profile_handle, g3.RESOURCES));
       };
       this.onMetricsTabClick = () => {
         trackEventAnalytics("Profile Resources Tab Clicked", {
@@ -2064,7 +2064,7 @@ function se({
         YQ({
           id: "profile-metrics-tab-clicked"
         });
-        Ay.push(bL(this.props.profile.profile_handle, g3.METRICS, this.props.currentUser));
+        customHistory.push(bL(this.props.profile.profile_handle, g3.METRICS, this.props.currentUser));
       };
       this.onSavesTabClick = () => {
         YQ({
@@ -2075,7 +2075,7 @@ function se({
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
         });
-        Ay.push(bL(this.props.profile.profile_handle, g3.SAVES));
+        customHistory.push(bL(this.props.profile.profile_handle, g3.SAVES));
       };
       this.showFollowsModal = e => {
         this.props.dispatch(sf({
@@ -2236,7 +2236,7 @@ export function $$si0({
   let l = t?.params.profileHandle ?? r?.params.profileHandle ?? null;
   let [c] = IT(ss(l ?? ""));
   useEffect(() => {
-    "errors" === c.status && (404 !== c.errors.status || s ? s && e ? Ay.redirect(e.href) : a(_$$s.error(getI18nString("community.actions.error_fetching_profile_information"))) : Ay.redirect("/404"));
+    "errors" === c.status && (404 !== c.errors.status || s ? s && e ? customHistory.redirect(e.href) : a(_$$s.error(getI18nString("community.actions.error_fetching_profile_information"))) : customHistory.redirect("/404"));
   }, [a, c, s, e]);
   let u = c.data?.profile ?? null;
   return s ? jsx(eA, {

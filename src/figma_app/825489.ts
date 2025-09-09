@@ -15,7 +15,7 @@ import { F } from "../905/686267";
 import { kX, cM } from "../905/261982";
 import { yV } from "../figma_app/516028";
 import { createAtomWithReduxWithState, createReduxSubscriptionAtomWithState, setupReduxAtomWithState, attachReducerWrapper } from "../905/270322";
-import { DtB, vsj, Acj, eHy, CfA } from "../figma_app/43951";
+import { SubscribedLibrariesForFile, CommunityLibraryComponentsAndStateGroups, CommunityLibraryStyleData, CommunityLibraryVariableCollectionDataWithVariables, CommunityLibraryModules } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
 import { gM } from "../figma_app/155728";
 import { Me } from "../figma_app/598018";
@@ -27,7 +27,7 @@ let $$x0 = atom(e => {
   let r = t.parentOrgId;
   let n = !!t.teamId;
   let i = T9(t?.project);
-  let a = e(DtB.Query({
+  let a = e(SubscribedLibrariesForFile.Query({
     fileKey: t.key ?? "",
     teamId: t.teamId ?? "-1",
     workspaceId: t.team?.workspaceId ?? null,
@@ -62,16 +62,16 @@ let $$k4 = (() => {
       modules: {}
     };
     if (!t || !DU(r ?? void 0)) return n;
-    let i = e(vsj.Query({
+    let i = e(CommunityLibraryComponentsAndStateGroups.Query({
       hubFileId: t
     }));
     let a = J(i);
     let s = _$$o(i);
-    let l = e(Acj.Query({
+    let l = e(CommunityLibraryStyleData.Query({
       hubFileId: t
     }));
     let d = F(l);
-    let u = e(eHy.Query({
+    let u = e(CommunityLibraryVariableCollectionDataWithVariables.Query({
       hubFileId: t
     }));
     let p = kX({
@@ -82,7 +82,7 @@ let $$k4 = (() => {
       type: "community",
       value: u
     }, !0);
-    let y = e(CfA.Query({
+    let y = e(CommunityLibraryModules.Query({
       hubFileId: t
     }));
     let b = _$$i(y);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, useRef, useCallback, memo, forwardRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
 import { getFirstKey } from "../figma_app/493477";
@@ -17,10 +17,10 @@ import { k as _$$k } from "../905/44647";
 import { ActionType, NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import S from "classnames";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { Pt, c1 } from "../figma_app/806412";
+import { generateRecordingKey, createRecordingCallback } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k3 } from "../905/582200";
 import { Point } from "../905/736624";
@@ -45,7 +45,7 @@ import { o3, nt } from "../905/226610";
 import { Pe } from "../figma_app/12796";
 import { H4 } from "../figma_app/679183";
 import { Dc, hV } from "../figma_app/151766";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
 import { a as _$$a } from "../figma_app/997280";
@@ -116,10 +116,10 @@ export function $$eA2() {
 let ex = class e extends PureComponent {
   constructor(e) {
     super(e);
-    this.exportList = xx(e => valueOrFallback(e, []).map(_$$m));
+    this.exportList = memoizeByArgs(e => valueOrFallback(e, []).map(_$$m));
     this.onExportChange = (e, t) => {
       let r = 0 === e.length;
-      let n = r ? zk.NO : t;
+      let n = r ? yesNoTrackingEnum.NO : t;
       fullscreenValue.updateSelectionProperties({
         exportSettings: e
       }, {
@@ -211,7 +211,7 @@ let ex = class e extends PureComponent {
       });
       return jsx(_$$z, {
         onClick: this.onClickExport,
-        recordingKey: Pt(this.props, "export"),
+        recordingKey: generateRecordingKey(this.props, "export"),
         disabled: !!this.state.isRenameLayersRunning,
         children: jsx(ph, {
           text: this.state.isRenameLayersRunning ? getI18nString("fullscreen.properties_panel.export_generating_name") : e,
@@ -235,7 +235,7 @@ let ex = class e extends PureComponent {
           currentPage: this.props.currentPage,
           numSelected: this.props.numSelected,
           panelWidth: this.props.panelWidth,
-          recordingKey: Pt(this.props, "previewThumbnail"),
+          recordingKey: generateRecordingKey(this.props, "previewThumbnail"),
           sceneGraphSelection: this.props.sceneGraphSelection,
           shouldComputeThumbnails: this._shouldRenderPreviewThumbnail,
           useAbsoluteBounds: t,
@@ -305,7 +305,7 @@ let ex = class e extends PureComponent {
             openFile: this.props.openFile,
             pickerShown: this.props.pickerShown,
             propertyList: t,
-            recordingKey: Pt(this.props, "exportList"),
+            recordingKey: generateRecordingKey(this.props, "exportList"),
             selectedPropertyType: NodePropertyCategory.EXPORT,
             standalone: this.props.standalone,
             title: this.props.title
@@ -385,7 +385,7 @@ export function $$ew3(e) {
     onChange,
     propertyList
   } = e;
-  let c = c1(e);
+  let c = createRecordingCallback(e);
   let u = valueOrFallback(e.propertyList, []).length <= 1;
   let p = o3(nt.useGridPart2) && !0;
   let _ = useCallback(e => {
@@ -514,7 +514,7 @@ let eF = forwardRef(function ({
   shouldUseGrid: C,
   singletonRow: w
 }, O) {
-  let L = c1(S);
+  let L = createRecordingCallback(S);
   let P = useDispatch();
   let D = getFeatureFlags().fpl_select_migration;
   let k = Qu();
@@ -782,7 +782,7 @@ function eU(e) {
       onChange: e.onChange,
       pickerShown: s,
       dispatch: e.dispatch,
-      recordingKey: Pt(e, "settings"),
+      recordingKey: generateRecordingKey(e, "settings"),
       dropdownShown: e.dropdownShown,
       onSuffixChange: r,
       suffixClassName: _$$ei

@@ -1,7 +1,7 @@
 import _require from "../5973/625973";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { S as _$$S, V } from "../905/802325";
 import { zk, permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -11,7 +11,7 @@ import { Uz, xH } from "../905/63728";
 import { logWarning } from "../905/714362";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y } from "../905/830372";
 import { Ay } from "../figma_app/432652";
 import { JT } from "../figma_app/632248";
@@ -137,7 +137,7 @@ export function $$y0() {
         nodeHandlerManager: t,
         transformCustomJSX: r1 ?? (() => { })
       });
-      e(_$$F.enqueue({
+      e(VisualBellActions.enqueue({
         type: "FIRST_DRAFT_FINE_TUNE_JSX",
         message: "Finished!",
         button: {

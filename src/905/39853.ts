@@ -32,7 +32,7 @@ import { U_ } from "../905/327855";
 import { FEditorType } from "../figma_app/53721";
 import { F as _$$F2 } from "../905/877554";
 import { bJ } from "../figma_app/687776";
-import { F as _$$F3 } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { gN } from "../figma_app/976345";
 import { bE } from "../905/466026";
 import { y$ } from "../905/81009";
@@ -1523,7 +1523,7 @@ async function eV(e, t, i, n, a, s, o, l, d) {
       let n = !!i && d !== i && !!p && (await bJ(i, p));
       let r = t.folders[d];
       let a = new OL.InvalidPermissions(r?.name);
-      e.dispatch(_$$F3.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: a.message,
         type: "restricted-import-type",
         error: !0,

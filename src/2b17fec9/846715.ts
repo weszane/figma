@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, memo, useCallback, useEffect, useMemo, useContext, useRef, useReducer } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
 import { DesignGraphElements, Fullscreen, ViewType, ToolType, AlignmentPosition, ConfirmationLevel, LayoutTabType } from "../figma_app/763686";
@@ -77,7 +77,7 @@ import { H as _$$H } from "../figma_app/7677";
 import { t as _$$t3 } from "../figma_app/532797";
 import { X as _$$X3 } from "../figma_app/668312";
 import { f as _$$f } from "../905/809171";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { F as _$$F } from "../figma_app/832508";
 import { z as _$$z3 } from "../figma_app/47967";
 import { N as _$$N3 } from "../figma_app/176280";
@@ -500,7 +500,7 @@ function eq() {
       icon: e > 0 ? jsx(_$$X3, {}) : jsx(_$$f, {}),
       onActivateTool: activateTool,
       activeToolId,
-      recordingKey: Pt("toolbarView", "toolComment"),
+      recordingKey: generateRecordingKey("toolbarView", "toolComment"),
       tooltipText: getI18nString("fullscreen_actions.comment"),
       tooltipShortcut: o(DesignGraphElements.COMMENTS)
     }), jsx(_$$F, {})]
@@ -675,7 +675,7 @@ function tu({
               paletteType: "sticky",
               background: "light",
               tooltip: a,
-              recordingKey: Pt(e, a)
+              recordingKey: generateRecordingKey(e, a)
             }, _$$F2.format(t) + "-" + i);
           })
         })
@@ -690,7 +690,7 @@ function tu({
           background: "light",
           onClick: () => m(t),
           tooltip: a,
-          recordingKey: Pt(e, a)
+          recordingKey: generateRecordingKey(e, a)
         }, _$$F2.format(t) + "-" + i);
       })), jsx(_$$s3, {
         colorPalettePickerState: {
@@ -699,7 +699,7 @@ function tu({
           isColorPalettePickerOpen: s
         },
         paletteType: "sticky",
-        recordingKey: Pt(e || "color-palettes", "sticky") || "sticky",
+        recordingKey: generateRecordingKey(e || "color-palettes", "sticky") || "sticky",
         disabled: y,
         isInDltSubmenu: !0
       })]
@@ -718,13 +718,13 @@ let tp = () => {
     transform: "translate(32px, 32px) rotate(5deg) translate(0, -8px) translate(-32px, -32px)",
     offset: .1
   }, {
-    transform: "translate(32px, 32px) rotate(5deg) translate(0, -10px) translate(-32px, -32px)",
-    offset: .35
-  }, t, {
-    transform: "translate(-32px, 32px) rotate(-3deg) translate(32px, -32px) "
-  }, t, {
-    transform: "translate(32px, 32px) rotate(1deg) translate(-32px, -32px) "
-  }, t];
+      transform: "translate(32px, 32px) rotate(5deg) translate(0, -10px) translate(-32px, -32px)",
+      offset: .35
+    }, t, {
+      transform: "translate(-32px, 32px) rotate(-3deg) translate(32px, -32px) "
+    }, t, {
+      transform: "translate(32px, 32px) rotate(1deg) translate(-32px, -32px) "
+    }, t];
   [_$$eB, gz, Sk].forEach((t, n) => {
     document.getElementsByClassName(t)[0].parentElement?.animate(i, {
       ...e,
@@ -1115,7 +1115,7 @@ let tw = memo(function () {
         className: u()({
           [Uq]: !1
         }),
-        onPointerDown: e => {},
+        onPointerDown: e => { },
         role: void 0,
         children: jsxs("div", {
           className: u()(iU, {

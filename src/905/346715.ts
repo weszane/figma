@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -16,7 +16,7 @@ import { qc } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
@@ -288,7 +288,7 @@ let $$F0 = registerModal(function (e) {
                   _$$c.createResourceConnectionInvite(t).then(() => {
                     et(!1);
                     u();
-                    i(_$$F.enqueue({
+                    i(VisualBellActions.enqueue({
                       message: getI18nString("resource_connection.visual_bell.we_ve_sent_a_notification_to_plan_name", {
                         connectedPlanName: K || ""
                       })
@@ -297,22 +297,22 @@ let $$F0 = registerModal(function (e) {
                       initiated_first_resource_connection: !0
                     }));
                   }).catch(e => {
-                    "Connecting invitee not found" === e.message ? (J("email_user_not_found"), et(!1)) : "Connecting invitee is not part of the connecting plan" === e.message ? (J("email_not_match_plan"), et(!1)) : "A pending invite already exists for this resource" === e.message ? (u(), i(_$$F.enqueue({
+                    "Connecting invitee not found" === e.message ? (J("email_user_not_found"), et(!1)) : "Connecting invitee is not part of the connecting plan" === e.message ? (J("email_not_match_plan"), et(!1)) : "A pending invite already exists for this resource" === e.message ? (u(), i(VisualBellActions.enqueue({
                       message: getI18nString("resource_connection.visual_bell.pending_connection_request_exists"),
                       error: !0
-                    })), et(!1)) : "A connection already exists for this resource" === e.message ? (u(), i(_$$F.enqueue({
+                    })), et(!1)) : "A connection already exists for this resource" === e.message ? (u(), i(VisualBellActions.enqueue({
                       message: getI18nString("resource_connection.visual_bell.connection_already_exists"),
                       error: !0
-                    }))) : "Host plan has reached active connection and outgoing invite limit" === e.message ? (u(), i(_$$F.enqueue({
+                    }))) : "Host plan has reached active connection and outgoing invite limit" === e.message ? (u(), i(VisualBellActions.enqueue({
                       message: N.key.type === FOrganizationLevelType.ORG ? getI18nString("resource_connection.visual_bell.org_at_limit") : getI18nString("resource_connection.visual_bell.team_at_limit"),
                       error: !0
-                    }))) : "Connecting plan owner's email domain cannot match host plan email domain" === e.message ? (u(), i(_$$F.enqueue({
+                    }))) : "Connecting plan owner's email domain cannot match host plan email domain" === e.message ? (u(), i(VisualBellActions.enqueue({
                       message: N.key.type === FOrganizationLevelType.ORG ? getI18nString("resource_connection.visual_bell.same_team_owner_domain_host_org_error") : getI18nString("resource_connection.visual_bell.same_team_owner_domain_host_team_error"),
                       error: !0
-                    }))) : "Cannot initiate connection when org does not allow external guests to join organization" === e.message ? (u(), i(_$$F.enqueue({
+                    }))) : "Cannot initiate connection when org does not allow external guests to join organization" === e.message ? (u(), i(VisualBellActions.enqueue({
                       message: getI18nString("resource_connection.visual_bell.org_does_not_allow_external_guests_to_join_organization"),
                       error: !0
-                    }))) : (u(), i(_$$F.enqueue({
+                    }))) : (u(), i(VisualBellActions.enqueue({
                       message: getI18nString("resource_connection.visual_bell.generic_error"),
                       error: !0
                     })), et(!1));
@@ -413,11 +413,11 @@ let M = registerModal(function (e) {
                 invitee_email: g
               }).then(() => {
                 t(hideModal());
-                t(_$$F.enqueue({
+                t(VisualBellActions.enqueue({
                   message: getI18nString("resource_connection.visual_bell.instructions_sent")
                 }));
               }).catch(e => {
-                "User already exists" === e.message ? E("email_user_already_exists") : "Invitee email domain cannot match host plan email domain" === e.message ? E("email_same_domain") : t(_$$F.enqueue({
+                "User already exists" === e.message ? E("email_user_already_exists") : "Invitee email domain cannot match host plan email domain" === e.message ? E("email_same_domain") : t(VisualBellActions.enqueue({
                   message: getI18nString("resource_connection.visual_bell.generic_error"),
                   error: !0
                 }));

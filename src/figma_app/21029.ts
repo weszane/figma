@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { useFullscreenReady } from "../905/924253";
 import { Fk } from "../figma_app/167249";

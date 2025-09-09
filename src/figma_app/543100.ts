@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { atom, useAtomWithSubscription, createRemovableAtomFamily } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
@@ -8,7 +8,7 @@ import { LH, oj, mr, CE, yR } from "../905/760074";
 import { fileEntityDataMapper } from "../905/943101";
 import { Z } from "../905/190310";
 import { FEntityType, FFileType } from "../figma_app/191312";
-import { sMs, cfd, eSI } from "../figma_app/43951";
+import { FileCanView, RepoCanView, PrototypeCanView } from "../figma_app/43951";
 import { F as _$$F } from "../905/915030";
 import { I4 } from "../figma_app/840917";
 import { Ph, Uj, i4 } from "../905/862913";
@@ -561,11 +561,11 @@ export function $$N4(e) {
   let t = $$x1.getFileKeyForAutosaveChanges(e);
   return I4(t || "");
 }
-let $$C7 = createRemovableAtomFamily(e => atom(t => "FILE" === e.type || "PINNED_FILE" === e.type ? t(sMs.Query({
+let $$C7 = createRemovableAtomFamily(e => atom(t => "FILE" === e.type || "PINNED_FILE" === e.type ? t(FileCanView.Query({
   key: e.file.key
-})).transform(e => !!e.file?.hasPermission) : "REPO" === e.type ? t(cfd.Query({
+})).transform(e => !!e.file?.hasPermission) : "REPO" === e.type ? t(RepoCanView.Query({
   repoId: e.repo.id
-})).transform(e => !!oA(e.repo)?.canView) : "PROTOTYPE" === e.type ? t(eSI.Query({
+})).transform(e => !!oA(e.repo)?.canView) : "PROTOTYPE" === e.type ? t(PrototypeCanView.Query({
   prototypeId: e.prototype.id
 })).transform(e => !!oA(e.prototype)?.canRead) : "OFFLINE_FILE" === e.type ? resourceUtils.loaded(!0) : void throwTypeError(e)), $$x1.sameObject);
 let $$w3 = {

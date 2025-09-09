@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
 import { $n } from "../905/521428";
 import { k } from "../905/443820";
@@ -8,7 +8,7 @@ import { Dk } from "../figma_app/623293";
 import { getSupportEmail } from "../figma_app/169182";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { mW } from "../469e6e40/182832";
 import { showModalHandler, popModalStack } from "../905/156213";
 import { _g } from "../figma_app/336853";
@@ -31,7 +31,7 @@ function j(e) {
   }, [t, e.org, e.orgDomains, e.orgSamlConfig]);
   let o = useCallback((e, a) => {
     Dk(e).then(() => {
-      t(F.enqueue({
+      t(VisualBellActions.enqueue({
         type: a,
         message: getI18nString("org_settings.sso.copied")
       }));

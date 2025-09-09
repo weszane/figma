@@ -1,7 +1,7 @@
 import { n as _$$n } from "../905/121869";
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { logError } from "../905/714362";
 import { tH, H4 } from "../905/751457";
 import { popModalStack } from "../905/156213";
@@ -107,7 +107,7 @@ class f extends Component {
     let i = this.modalStack.length - 1;
     for (; i >= 0;) {
       let e = this.modalStack[i];
-      if (i === this.modalStack.length - 1) t.add(i);else if (e.registeredModal?.supportsBackgroundVisible) t.add(i);else break;
+      if (i === this.modalStack.length - 1) t.add(i); else if (e.registeredModal?.supportsBackgroundVisible) t.add(i); else break;
       if (!e.modal.showModalsBeneath) break;
       i--;
     }

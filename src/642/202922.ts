@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useContext, useRef, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { m as _$$m } from "../905/367152";
 import { M as _$$M } from "../1528/793871";
@@ -9,8 +9,8 @@ import { Fullscreen, AppStateTsApi, ComponentPropType, StateHierarchy } from "..
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
-import { Pt, rf } from "../figma_app/806412";
-import { g as _$$g } from "../905/880308";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
+import { generateUUIDv4 } from "../905/871474";
 import { c$, wv } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
@@ -97,17 +97,17 @@ function ee(e) {
         className: "bubbled_instances_list--instanceSection--tLYN0",
         onMouseEnter: () => _(n.connectedGUIDs),
         onMouseLeave: b,
-        recordingKey: Pt(e, a[0]) ?? "",
+        recordingKey: generateRecordingKey(e, a[0]) ?? "",
         children: showUnbubbledPrimaryInstances ? jsx(en, {
           data: n,
           showNumHidden,
           onUnbubbleInstance: x,
-          recordingKey: Pt(e, "checkbox", a[0]),
+          recordingKey: generateRecordingKey(e, "checkbox", a[0]),
           wideContainer
         }) : jsx(es, {
           data: n,
           onUnbubbleInstance: x,
-          recordingKey: Pt(e, "unbubble", a[0]),
+          recordingKey: generateRecordingKey(e, "unbubble", a[0]),
           wideContainer
         })
       }, i);
@@ -349,7 +349,7 @@ export function $$eg0({
     if (!d) return;
     let e = (await submit({
       components: [d],
-      clientLifecycleId: _$$g()
+      clientLifecycleId: generateUUIDv4()
     }))[0];
     e && permissionScopeHandler.user("apply-suggested-props", () => {
       apply(e);
@@ -384,7 +384,7 @@ export function $$eg0({
       }), !en && jsxs(c$, {
         className: eh,
         onClick: et,
-        recordingKey: Pt("openCreatePropModal", xb(ComponentPropType.VARIANT)),
+        recordingKey: generateRecordingKey("openCreatePropModal", xb(ComponentPropType.VARIANT)),
         children: [jsx(Nu, {
           children: jsx(Fragment, {
             children: jsx(_$$m, {})
@@ -393,7 +393,7 @@ export function $$eg0({
       }), ei.map(e => jsxs(c$, {
         className: eh,
         onClick: () => Q(e),
-        recordingKey: Pt("openCreatePropModal", xb(e)),
+        recordingKey: generateRecordingKey("openCreatePropModal", xb(e)),
         children: [jsx(Nu, {
           children: zn(e, !0)
         }), xb(e)]
@@ -448,8 +448,8 @@ function ef({
   isInSelectionActionsPanel: a
 }) {
   let o = useRef(null);
-  let u = rf("openCreatePropModalDropdown", "click", i);
-  let p = rf("openCreatePropModalDropdown", "mousedown", e => e?.stopPropagation());
+  let u = useHandleMouseEvent("openCreatePropModalDropdown", "click", i);
+  let p = useHandleMouseEvent("openCreatePropModalDropdown", "mousedown", e => e?.stopPropagation());
   return jsx(pG, {
     onClick: u,
     onMouseDown: p,

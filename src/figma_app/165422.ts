@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { J } from "../905/614223";
 import { UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";

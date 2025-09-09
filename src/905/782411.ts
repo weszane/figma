@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { N } from "../905/972754";
 import { ku, Os, qA, fn } from "../figma_app/255679";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { ZC } from "../figma_app/39751";
 import { uo, yH } from "../905/879323";

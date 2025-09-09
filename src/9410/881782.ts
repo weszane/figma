@@ -17,16 +17,16 @@ import { getObservableValue } from '../figma_app/84367';
 import { Fz } from '../figma_app/106207';
 import { HD, UE, Uv } from '../figma_app/191804';
 import { xT } from '../figma_app/195407';
-import { zk } from '../figma_app/198712';
+import { yesNoTrackingEnum } from '../figma_app/198712';
 import { viewportNavigatorContext } from '../figma_app/298911';
 import { cy, E6, WY } from '../figma_app/387100';
 import { fullscreenValue } from '../figma_app/455680';
 import { $i, a8, Dh, Ds, H7, iB, jE, jr, Lw, nG, oO, Sf, WW } from '../figma_app/467440';
 import { $1, dK, L7, mF, tF, Y4, YX } from '../figma_app/631279';
-import { aY, NT, wr } from '../figma_app/741237';
+import { getPropertiesPanelTab, setPropertiesPanelTab, clearSelection } from '../figma_app/741237';
 import { SceneGraphHelpers, AppStateTsApi, DesignWorkspace, Fullscreen, CustomPosition, LayoutTabType, PluginHelpers, DesignGraphElements, InteractionCpp, PaintTools, SourceType } from '../figma_app/763686';
 import { getFalseValue } from '../figma_app/897289';
-import { useDispatch, useSelector } from '../vendor/514228';
+import { useDispatch, useSelector } from 'react-redux';
 let O = getFalseValue() ? 0 : 300;
 class L {
   constructor(e, t, i, r, n, s, o, l, d, c, u, p, h, m, f, g, _, x, y, C, v) {
@@ -678,7 +678,7 @@ class L {
           this.setCursorDirection(e.direction);
           return;
         case HQ.SET_PROPERTIES_PANEL_TAB:
-          NT(e.tab);
+          setPropertiesPanelTab(e.tab);
           return;
         case HQ.UPDATE_SELECTED_NODE_PROPERTIES:
           {
@@ -690,11 +690,11 @@ class L {
               });
               return;
             }
-            this.appModel.activeCanvasEditModeType === LayoutTabType.TEXT && (wr(), SceneGraphHelpers.setSelectedNodeAndCanvas(t, !1));
+            this.appModel.activeCanvasEditModeType === LayoutTabType.TEXT && (clearSelection(), SceneGraphHelpers.setSelectedNodeAndCanvas(t, !1));
             fullscreenValue.updateSelectionProperties({
               ...(typeof e.properties == 'function' ? e.properties(i) : e.properties)
             }, {
-              shouldCommit: zk.YES,
+              shouldCommit: yesNoTrackingEnum.YES,
               editScopeType: SourceType.ONBOARDING
             });
             return;
@@ -743,7 +743,7 @@ export function $$R0() {
   let {
     insertTemplate
   } = Fz();
-  let N = getObservableValue(aY(), DesignWorkspace.DESIGN);
+  let N = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let A = useSelector(e => e.mirror.appModel.showUi);
   let O = useSelector(e => e.mirror.appModel);
   let R = useRef();

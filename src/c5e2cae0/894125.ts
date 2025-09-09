@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { analyticsEventManager } from "../905/449184";
 import { clearPaymentFlowData } from "../figma_app/169182";
@@ -10,7 +10,7 @@ import { sf } from "../905/929976";
 import { c as _$$c } from "../905/370443";
 import { $z } from "../figma_app/831799";
 import { Al } from "../9420/394825";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { OI, Mt } from "../c5e2cae0/2942";
 import { Ju } from "../905/712921";
 import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
@@ -110,7 +110,7 @@ export function $$b1(e) {
   } = t;
   let _ = useDispatch();
   let u = useSelector(e => e.payment.billingPeriod);
-  let S = iZ()?.id;
+  let S = selectCurrentUser()?.id;
   let N = T(teamFlowType, u, useSelector(e => e.payment.promo), e.selectedView.planType || Sc.UNDETERMINED);
   let b = N.findIndex(e => e.step === paymentStep);
   return jsxs("div", {

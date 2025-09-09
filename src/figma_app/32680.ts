@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { s as _$$s } from "../905/403855";
 import { U } from "../905/275247";
 import { Rs } from "../figma_app/288654";
@@ -15,7 +15,7 @@ import { WX } from "../figma_app/482142";
 import { E9 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { Aqu } from "../figma_app/43951";
+import { TeamFileLimitsInfo } from "../figma_app/43951";
 import { WW, Wf, h as _$$h, PX } from "../figma_app/345997";
 import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
@@ -25,7 +25,7 @@ function x(e) {
   let t = useDispatch();
   let r = $Y(e.teamId);
   let m = void 0 === e.canEditTeam ? r : e.canEditTeam;
-  let y = Rs(Aqu({
+  let y = Rs(TeamFileLimitsInfo({
     teamId: e.teamId
   }), {
     enabled: !!e.teamId

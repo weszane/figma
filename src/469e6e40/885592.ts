@@ -49,7 +49,7 @@ import { BillingCycle } from '../figma_app/831101';
 import { _8, $b, _k, fA, fx, gL, gl, Jv, ly, nm, qH, TQ, Z4, z7, zz } from '../figma_app/934005';
 import { J0 } from '../figma_app/967319';
 import * as N from '../vendor/116389';
-import { useStore, useDispatch } from '../vendor/514228';
+import { useStore, useDispatch } from 'react-redux';
 import * as T from '../vendor/923386';
 let I = N;
 let A = T;

@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useCallback, PureComponent, useId, useMemo, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { assertNotNullish, debug } from "../figma_app/465776";
 import { isFakeTouchEvent } from "../905/955878";
 import { isValidSessionLocalID } from "../905/871411";
-import { Pt, o6 } from "../figma_app/806412";
+import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
@@ -12,7 +12,7 @@ import { fu, kp } from "../figma_app/831799";
 import { xv } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
-import { wr } from "../figma_app/741237";
+import { clearSelection } from "../figma_app/741237";
 import { valueOrFallback, isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
 import { kl, lJ, pw, zj, DQ, fC, Gt } from "../905/275640";
 import { _P, $J, Qx } from "../figma_app/2590";
@@ -113,7 +113,7 @@ function z(e) {
   } = e;
   let l = useCallback(() => {
     let e = t.current;
-    if (pickerShown && pickerShown.id === $T) dispatch(XE());else if (e && e instanceof HTMLElement) {
+    if (pickerShown && pickerShown.id === $T) dispatch(XE()); else if (e && e instanceof HTMLElement) {
       let t = cn(e);
       dispatch(u1({
         id: $T,
@@ -144,7 +144,7 @@ function z(e) {
       onClick: l,
       color: c,
       opacity: c.a,
-      recordingKey: Pt(e, "chit"),
+      recordingKey: generateRecordingKey(e, "chit"),
       className: "prototype_background_panel--chit--F--d0 paint_panels--chit--twQEy"
     }), jsx(AN, {
       className: "prototype_background_panel--color--e5Pc8 paint_panels--colorInput--nSz13",
@@ -152,7 +152,7 @@ function z(e) {
       formatter: TI,
       property: c,
       onChange: s,
-      recordingKey: Pt(e, "colorInput"),
+      recordingKey: generateRecordingKey(e, "colorInput"),
       noBorderOnFocus: !0
     })]
   });
@@ -166,7 +166,7 @@ function z(e) {
       color: c,
       boundVariable: null,
       onChange: s,
-      recordingKey: Pt(e, "colorPicker")
+      recordingKey: generateRecordingKey(e, "colorPicker")
     })]
   });
 }
@@ -200,7 +200,7 @@ class J extends PureComponent {
       let i = jsx(et, {
         presetIdentifier: this.deviceInfo().presetIdentifier,
         onChange: this.onModelChange,
-        recordingKey: Pt(this.props, "modelDropdown")
+        recordingKey: generateRecordingKey(this.props, "modelDropdown")
       });
       let r = t ? jsx(dx, {
         left: i,
@@ -296,11 +296,11 @@ class J extends PureComponent {
       dispatch: this.props.dispatch,
       prototypeDevice: this.props.prototypeDevice,
       isUI3: this.props.isUI3,
-      recordingKey: Pt(this.props, "deviceDropdown")
+      recordingKey: generateRecordingKey(this.props, "deviceDropdown")
     });
     let n = jsxs(bL, {
       onChange: this.onChangeOrientation,
-      recordingKey: Pt(this.props, "orientationControl"),
+      recordingKey: generateRecordingKey(this.props, "orientationControl"),
       value: this.currentDeviceOrientation(),
       legend: jsx(_$$q, {
         children: getI18nString("presets.device_panel.rotation")
@@ -331,7 +331,7 @@ class J extends PureComponent {
       dispatch: this.props.dispatch,
       smallNudgeAmount: this.props.smallNudgeAmount,
       bigNudgeAmount: this.props.bigNudgeAmount,
-      recordingKey: Pt(this.props, "deviceSizeInputs")
+      recordingKey: generateRecordingKey(this.props, "deviceSizeInputs")
     });
     return jsxs(Zk, {
       children: [jsx(fI, {
@@ -347,7 +347,7 @@ class J extends PureComponent {
         pickerShown: this.props.pickerShown,
         dispatch: this.props.dispatch,
         prototypeBackgroundColor: this.props.prototypeBackgroundColor,
-        recordingKey: Pt(this.props, "backgroundPanel")
+        recordingKey: generateRecordingKey(this.props, "backgroundPanel")
       }), this.renderDevicePreview(), !this.props.isUI3 && "CUSTOM" === this.props.prototypeDevice.type && s]
     });
   }
@@ -385,7 +385,7 @@ function Q(e) {
     dispatch: e.dispatch,
     inputClassName: "prototype_device_panel--leftColInput--pAJSy prototype_device_panel--input--vNirJ",
     onValueChange: t,
-    recordingKey: Pt(e, "deviceWidth"),
+    recordingKey: generateRecordingKey(e, "deviceWidth"),
     smallNudgeAmount: e.smallNudgeAmount,
     tooltipForScreenReadersOnly: !0,
     value: e.prototypeDevice.size.x,
@@ -402,7 +402,7 @@ function Q(e) {
     dispatch: e.dispatch,
     inputClassName: "prototype_device_panel--input--vNirJ",
     onValueChange: n,
-    recordingKey: Pt(e, "deviceHeight"),
+    recordingKey: generateRecordingKey(e, "deviceHeight"),
     smallNudgeAmount: e.smallNudgeAmount,
     tooltipForScreenReadersOnly: !0,
     value: e.prototypeDevice.size.y,
@@ -417,7 +417,7 @@ function Q(e) {
   });
 }
 J.displayName = "PrototypeDevicePanel";
-class ee extends o6 {
+class ee extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.formatter = {
@@ -462,7 +462,7 @@ class ee extends o6 {
       onChange: e => {
         "NONE" === e || "PRESENTATION" === e || "CUSTOM" === e ? this.onChange(e) : this.onChange(Fh(e, this.props.prototypeDevice));
       },
-      recordingKey: Pt(this.props, "select"),
+      recordingKey: generateRecordingKey(this.props, "select"),
       value: t,
       children: [jsx(l9, {
         label: jsx(HiddenLabel, {
@@ -500,7 +500,7 @@ class ee extends o6 {
   }
 }
 ee.displayName = "DeviceDropdown";
-class et extends o6 {
+class et extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.formatter = {
@@ -525,7 +525,7 @@ class et extends o6 {
     let n = this.props.presetIdentifier;
     return jsxs(_$$bL, {
       onChange: this.props.onChange,
-      recordingKey: Pt(this.props, "select"),
+      recordingKey: generateRecordingKey(this.props, "select"),
       value: n,
       children: [jsx(l9, {
         label: jsx(HiddenLabel, {
@@ -644,7 +644,7 @@ let e_ = function (e) {
       },
       checked: ef(e.videoPlayback.autoplay),
       mixed: isInvalidValue(e.videoPlayback.autoplay),
-      recordingKey: Pt(e, "autoPlayToggle")
+      recordingKey: generateRecordingKey(e, "autoPlayToggle")
     })
   });
   let n = jsx(_$$f, {
@@ -667,7 +667,7 @@ let e_ = function (e) {
       }));
     },
     "data-testid": "videoLoopToggle",
-    recordingKey: Pt(e, "videoLoopToggle"),
+    recordingKey: generateRecordingKey(e, "videoLoopToggle"),
     "aria-label": getI18nString("proto.prototype_panel.loop"),
     htmlAttributes: {
       "data-tooltip": getI18nString("proto.prototype_panel.loop"),
@@ -694,7 +694,7 @@ let e_ = function (e) {
       }));
     },
     "data-testid": "videoSoundToggle",
-    recordingKey: Pt(e, "videoSoundToggle"),
+    recordingKey: generateRecordingKey(e, "videoSoundToggle"),
     "aria-label": getI18nString("proto.prototype_panel.sound"),
     htmlAttributes: {
       "data-tooltip": getI18nString("proto.prototype_panel.sound"),
@@ -783,7 +783,7 @@ function eK(e) {
       children: [u, l && jsx(Fragment, {
         children: getFeatureFlags().ce_tv_fpl_select ? jsx(eG, {
           disabled: disableScrollBehaviorItem,
-          recordingKey: Pt(e, "scrollBehavior")
+          recordingKey: generateRecordingKey(e, "scrollBehavior")
         }) : jsxs(fI, {
           children: [jsx("div", {
             className: eF,
@@ -794,14 +794,14 @@ function eK(e) {
             })
           }), jsx(eY, {
             ariaLabelledBy: s,
-            recordingKey: Pt(e, "scrollBehavior"),
+            recordingKey: generateRecordingKey(e, "scrollBehavior"),
             dropdownShown,
             disabled: disableScrollBehaviorItem
           })]
         })
       }), a && jsx(ez, {
         disabled: disableOverflowBehaviorItem,
-        recordingKey: Pt(e, "scrollDirection")
+        recordingKey: generateRecordingKey(e, "scrollDirection")
       })]
     })
   }) : null;
@@ -1093,7 +1093,7 @@ export let $$e70 = kp(function (e) {
     F(_P({
       name: "Show Prototype Settings Clicked"
     }));
-    wr();
+    clearSelection();
   }, [F]);
   let $ = useRef(!1);
   let z = useRef(!1);
@@ -1137,24 +1137,24 @@ export let $$e70 = kp(function (e) {
       panelName: ON.PROTOTYPE
     }), U ? jsxs(Fragment, {
       children: [!R && isTopLevelFrameAndValidPrototypeSourceSelected && jsx(_$$A2, {
-        recordingKey: Pt(e, "startingPointPanel")
+        recordingKey: generateRecordingKey(e, "startingPointPanel")
       }), er && jsx(y7, {}), !isCodeInstanceSelected && jsx(eK, {
         dropdownShown,
         disableOverflowBehaviorItem: !!(isInstanceSelected || isInstanceSublayerSelected),
         disableScrollBehaviorItem: !!isInstanceSublayerSelected,
-        recordingKey: Pt(e, "scrollBehaviorPanel")
+        recordingKey: generateRecordingKey(e, "scrollBehaviorPanel")
       }), Q && jsx(e_, {
         updateSelectionProperties: fullscreenValue.updateSelectionProperties,
         dispatch: F,
         videoPlayback: B,
-        recordingKey: Pt(e, "prototypeVideoPlaybackPanel")
+        recordingKey: generateRecordingKey(e, "prototypeVideoPlaybackPanel")
       }), !R && jsx(_$$k, {
         name: "show_prototype_settings_panel",
         children: jsx(Zk, {
           className: rq,
           children: jsx(_$$z, {
             onClick: K,
-            recordingKey: Pt(e, "prototypeSettingsButton"),
+            recordingKey: generateRecordingKey(e, "prototypeSettingsButton"),
             children: renderI18nText("proto.menu.show_prototype_settings")
           })
         })

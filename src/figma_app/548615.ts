@@ -1,6 +1,6 @@
 import { useMemo, useRef, useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { l2 } from "../figma_app/584405";
 import { OW, sc, A9, OX, A5 } from "../figma_app/407414";
 import { NM, $C } from "../figma_app/99772";
@@ -70,7 +70,7 @@ export function $$_2() {
 export function $$h1(e, t) {
   useEffect(() => {
     if (t) {
-      let t = g();
+      let t = generateUUIDv4();
       OX({
         impressionId: t,
         source: e

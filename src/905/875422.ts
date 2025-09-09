@@ -1,7 +1,7 @@
 import _require from "../0c62c2fd/847117";
 import { atomStoreManager } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { A } from "../905/658244";
 import { registerModal, createModalConfig } from "../905/102752";
 import { createOptimistThunk } from "../905/350402";
@@ -18,7 +18,7 @@ export let $$f0 = createOptimistThunk((e, t) => {
   if (!_$$F) return;
   let i = kI(t.name);
   if (i && atomStoreManager.get(D)) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "pdf_import_failed_because_pdf_importing_is_disabled",
       message: getI18nString("fullscreen.file_import.import_pdf_blocked"),
       error: !0

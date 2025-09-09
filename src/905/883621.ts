@@ -52,6 +52,9 @@ export interface EnvironmentInfo {
   desktop_channel?: string
   desktop_version?: string
   desktop_client_id?: string
+  integration_host?: any
+  integration_context?: any
+
 }
 
 /**

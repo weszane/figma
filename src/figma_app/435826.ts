@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories } from "../905/165054";
 import { ey } from "../905/859698";
 import { LibraryPubSub, VariablesBindings, Fullscreen } from "../figma_app/763686";
@@ -12,7 +12,7 @@ import { PerfTimer } from "../905/609396";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { yA, rX, As, t5, _K, f$, Qn } from "../figma_app/933328";
 import { ni, kX, V2 } from "../905/63598";
 import { hideModal } from "../905/156213";
@@ -21,7 +21,7 @@ import { wM } from "../figma_app/852050";
 import { c as _$$c } from "../905/210851";
 import { yV, q5 } from "../figma_app/516028";
 import { Z } from "../905/116724";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { rt } from "../figma_app/615482";
 import { aD } from "../figma_app/646357";
 import { T as _$$T } from "../905/486858";
@@ -276,7 +276,7 @@ export function $$G6(e, t = aD.ALL, r) {
       variableSets: [e.key].toString(),
       entrypoint: $(r, !1)
     });
-    t && a(F.enqueue({
+    t && a(VisualBellActions.enqueue({
       type: "default-mode-changed",
       message: getI18nString("variables.authoring_modal.default_mode_changed")
     }));
@@ -318,7 +318,7 @@ export function $$G6(e, t = aD.ALL, r) {
         let n = await ee(scopedVariableSetUpdates);
         await et(scopedLibraryAssetUpdates);
         a(kX());
-        n && a(F.enqueue({
+        n && a(VisualBellActions.enqueue({
           type: "default-mode-changed",
           message: getI18nString("variables.authoring_modal.default_mode_changed")
         }));
@@ -368,7 +368,7 @@ export function $$z2({
   hasChangesToPull: t,
   disabled: r
 }) {
-  let i = TA() ?? void 0;
+  let i = getUserId() ?? void 0;
   let a = q5();
   let [s, o] = useAtomValueAndSetter(H);
   let c = ZC(e);

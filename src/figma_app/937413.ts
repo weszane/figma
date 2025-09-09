@@ -7,7 +7,7 @@ import { XHR } from "../905/910117";
 import { d6 } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { Rh } from "../905/844322";
@@ -19,7 +19,7 @@ import { F as _$$F2 } from "../905/224";
 import { x as _$$x } from "../905/439650";
 import { _ as _$$_ } from "../905/780571";
 import { FFileType } from "../figma_app/191312";
-import { M5e } from "../figma_app/43951";
+import { FileOperationsView } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { R5, mx } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
@@ -88,7 +88,7 @@ async function j({
   state: n,
   toDraft: i
 }) {
-  let a = await subscribeMultipleAndAwaitAll(M5e, e.map(e => ({
+  let a = await subscribeMultipleAndAwaitAll(FileOperationsView, e.map(e => ({
     fileKey: e
   })));
   let s = [];
@@ -205,7 +205,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
             fileKey: t.key,
             editorType: mapFileTypeToEditorType(t.editor_type)
           }));
-          e.dispatch(_$$F.dequeue({}));
+          e.dispatch(VisualBellActions.dequeue({}));
         }
       } : void 0;
       if (n > 0 && ("folder" !== r.selectedView.view || r.selectedView.folderId !== o)) {
@@ -222,17 +222,17 @@ let $$U3 = createOptimistThunk(async (e, t) => {
               view: "folder",
               folderId: o
             }));
-            e.dispatch(_$$F.dequeue({}));
+            e.dispatch(VisualBellActions.dequeue({}));
           }
         };
-        e.dispatch(_$$F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           type: "file_duplicated",
           message: a,
           button: r
         }));
       } else if ("folder" === r.selectedView.view) {
         let r = i(1 === copyFiles.length ? t[0].resolve?.data?.meta : void 0);
-        e.dispatch(_$$F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           type: "file_duplicated",
           message: 1 === copyFiles.length ? getI18nString("user_view.file_duplicated") : getI18nString("user_view.files_duplicated", {
             intArg: copyFiles.length

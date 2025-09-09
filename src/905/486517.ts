@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { T } from "../905/745591";
 import a from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { uA, Pt } from "../figma_app/806412";
+import { RecordingComponent, generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Hx } from "../figma_app/530167";
 import { Qd } from "../905/380385";
@@ -23,7 +23,7 @@ export function $$I0(e) {
     isUI3: !0
   });
 }
-class $$E extends uA {
+class $$E extends RecordingComponent {
   constructor(e) {
     super(e);
     this.pointerMoved = !1;
@@ -74,7 +74,7 @@ class $$E extends uA {
           this.pointerMoved = !0;
           this.placeMention(i + t);
         },
-        recordingKey: Pt(this.props.recordingKey, i + t, "item"),
+        recordingKey: generateRecordingKey(this.props.recordingKey, i + t, "item"),
         children: [jsx("div", {
           className: "mentions_typeahead--avatar--Po0PL",
           children: jsx(Ro, {

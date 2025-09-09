@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { Suspense } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
@@ -17,8 +17,8 @@ import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { F_ } from "../905/858282";
 import { d8X } from "../figma_app/6204";
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
 let y = "seen_seat_approval_overlay";
 let $$w1 = "settings_tab_click";
 function k({

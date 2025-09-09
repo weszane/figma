@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { Fullscreen, Position } from "../figma_app/763686";
@@ -17,7 +17,7 @@ import { S as _$$S } from "../figma_app/420927";
 import { Sh } from "../905/470286";
 import { sx as _$$sx } from "../905/941192";
 import { jD, ac, kA, eB, xE } from "../905/765855";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { Yb } from "../figma_app/62612";
 import { F4 } from "../905/691205";
@@ -49,7 +49,7 @@ export function $$H1(e) {
     case Ib.TEXT:
       return r;
     case Ib.LOOKUP:
-      return _$$A(r);
+      return formatI18nMessage(r);
   }
   return "";
 }
@@ -193,7 +193,7 @@ function W(e) {
         t = e.tooltip.target.text;
         break;
       case Ui.KEY:
-        t = _$$A(VZ(e.tooltip.target.key));
+        t = formatI18nMessage(VZ(e.tooltip.target.key));
         r = e.tooltip.target.key;
         break;
       case Ui.ELEMENT:
@@ -319,7 +319,7 @@ function W(e) {
               if (r()) return jsx(_$$x, {
                 tooltipKey: target.key
               });
-              let a = _$$A(VZ(t.target.key));
+              let a = formatI18nMessage(VZ(t.target.key));
               let s = c1(e.keyboardShortcuts, VZ(t.target.key));
               if (s) return jsxs("span", {
                 className: GQ,
@@ -410,7 +410,7 @@ export function $$Y4(e, t, r, n) {
       let o = 1 / 0;
       for (let e = 0; e < r.length; e++) {
         let t = r[e];
-        if (null === a) a = _$$E(t);else if (t.top === a.top && t.bottom === a.bottom) {
+        if (null === a) a = _$$E(t); else if (t.top === a.top && t.bottom === a.bottom) {
           a.left = Math.min(t.left, a.left);
           a.right = Math.max(t.right, a.right);
           a.width += t.width;
@@ -659,7 +659,7 @@ function q(e, t) {
     };
   }()), i.tooltip)) {
     if (!s) {
-      if (i.tooltip.state === zr.PENDING || i.tooltip.hideImmediately) t.dispatch(jD());else if (i.tooltip.state === zr.SHOWING) {
+      if (i.tooltip.state === zr.PENDING || i.tooltip.hideImmediately) t.dispatch(jD()); else if (i.tooltip.state === zr.SHOWING) {
         let e = i.tooltip.hideAfterDelay ?? 300;
         t.dispatch(ac({
           timeoutDelay: e

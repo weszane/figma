@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { flatten, mapFilter } from "../figma_app/656233";
 import { VariableDataType } from "../figma_app/763686";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import o from "../vendor/728460";
 import { F_ } from "../figma_app/191804";
 import { hg } from "../figma_app/852050";
@@ -36,7 +36,7 @@ export function $$g1({
     return Array.from(t);
   }(u), [u]);
   let g = l()(h, hg(h));
-  let f = k9(() => g, [g]);
+  let f = useMemoStable(() => g, [g]);
   let _ = useCallback((e, t, i, n) => {
     let r = function (e, t, i) {
       let {

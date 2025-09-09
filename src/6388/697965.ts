@@ -5,7 +5,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import a from "classnames";
 import { _ as _$$_ } from "../vendor/853977";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/730894";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
@@ -354,7 +354,7 @@ function K(e) {
           onMouseUp: t => Q.onMouseUpItem(t, Q.isDraggingCarouselItems, Q.isClickingCarouselItems, e),
           onScrollToCarouselItem: scrollToCarouselItem,
           parentCarouselItemConfig: Q.carouselItemsById[Q.carouselItemsById[e]?.parentGuid],
-          recordingKey: itemRecodingKeyPrefix ? Pt(recordingKey, itemRecodingKeyPrefix, t) : void 0,
+          recordingKey: itemRecodingKeyPrefix ? generateRecordingKey(recordingKey, itemRecodingKeyPrefix, t) : void 0,
           reorderScrollerRef: reorderGroupScrollContainerRef,
           selectedSlideCount: Q.selectedItemIds.length,
           shouldIndentChildren: !!shouldIndentChildren,

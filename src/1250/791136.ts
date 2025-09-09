@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K } from "../905/498709";
 import { j7, oB } from "../905/929976";
 import { A } from "../1250/278368";

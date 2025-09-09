@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { q } from "../figma_app/590592";
 export function $$$$a0() {
   let e = useSelector(e => e.mirror?.appModel.showUi);

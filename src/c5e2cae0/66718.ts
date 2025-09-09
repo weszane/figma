@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { xf } from "../figma_app/416935";
 import { XHR } from "../905/910117";

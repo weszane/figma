@@ -9,8 +9,8 @@ import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { A as _$$A } from "../905/658244";
 import { registerModal, createModalConfig } from "../905/102752";
 import { showModalHandler, hideModalHandler } from "../905/156213";
@@ -2629,10 +2629,10 @@ class eI {
   }
   async convertPdfToScene(e, t, i, n) {
     let r;
-    debugState.dispatch(_$$F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: eh,
       message: getI18nString("visual_bell.import_pdf"),
-      icon: zX.IMAGE_BACKED_SPINNER
+      icon: VisualBellIcon.IMAGE_BACKED_SPINNER
     }));
     let l = await this.convertPdf({
       pdfBytes: e,
@@ -2641,7 +2641,7 @@ class eI {
       cursorY: n
     });
     let d = l.status;
-    if (debugState.dispatch(_$$F.dequeue({
+    if (debugState.dispatch(VisualBellActions.dequeue({
       matchType: eh
     })), d === PerfResult.SUCCESS) {
       let {
@@ -2655,7 +2655,7 @@ class eI {
         i = !0;
         reportError(_$$e.FIGJAM, e);
       }
-      (hadImageExtractError || i) && debugState.dispatch(_$$F.enqueue({
+      (hadImageExtractError || i) && debugState.dispatch(VisualBellActions.enqueue({
         type: eg,
         message: getI18nString("fullscreen.file_import.import_pdf_images_not_imported")
       }));
@@ -2674,7 +2674,7 @@ class eI {
       default:
         throwTypeError(d);
     }
-    debugState.dispatch(_$$F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: eg,
       message: r
     }));

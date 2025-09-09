@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { k as _$$k } from "../905/651849";
+import { logger } from "../905/651849";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
 import { ag, i5, f0 } from "../figma_app/975811";
@@ -542,7 +542,7 @@ export class $$A27 {
       case "SKIP_TO":
         return `${getI18nString("proto.action_update_media_set")} (${i})`;
     }
-    _$$k.error("You should not be using PrototypeVideoActionSidebarFormatter to format non-video actions!");
+    logger.error("You should not be using PrototypeVideoActionSidebarFormatter to format non-video actions!");
     return "";
   }
 }

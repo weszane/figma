@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Suspense, useState, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -25,8 +25,8 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { J as _$$J } from "../905/231762";
 import { sx as _$$sx } from "../905/941192";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Y as _$$Y } from "../905/830372";
 import { Pf } from "../905/590952";
 import { E as _$$E2 } from "../905/984674";
@@ -104,15 +104,15 @@ function ea(e) {
           planType: FOrganizationLevelType.ORG,
           planId: e
         });
-        n(_$$F.enqueue({
+        n(VisualBellActions.enqueue({
           type: "update-org-renewal-counts",
-          icon: zX.CHECK_WITH_CIRCLE,
+          icon: VisualBellIcon.CHECK_WITH_CIRCLE,
           message: getI18nString("billing_modals.renewal.seats_at_renewal_confirmed"),
           onDismiss: lQ
         }));
         t();
       }).catch(e => {
-        n(_$$F.enqueue({
+        n(VisualBellActions.enqueue({
           type: "update-org-renewal-counts",
           message: _$$J(e, getI18nString("general.an_error_occurred")),
           error: !0

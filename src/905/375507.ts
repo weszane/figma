@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, createRef, PureComponent, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -9,15 +9,15 @@ import { HiddenLabel, Label } from "../905/270045";
 import { $n } from "../905/521428";
 import { e as _$$e } from "../905/149844";
 import { trackEventAnalytics } from "../905/449184";
-import { ot } from "../905/165290";
+import { cleanFontVersion } from "../905/165290";
 import { Ax, Jt } from "../figma_app/616261";
-import { uA } from "../figma_app/806412";
+import { RecordingComponent } from "../figma_app/878298";
 import { Yx } from "../figma_app/930338";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { IU } from "../figma_app/421401";
 import { Ex, zE } from "../figma_app/919079";
 import { R as _$$R } from "../905/307199";
@@ -53,7 +53,7 @@ import { o as _$$o } from "../905/821217";
 import { J as _$$J2 } from "../905/614223";
 import { Rs } from "../figma_app/288654";
 import { P as _$$P } from "../905/347284";
-import { UAQ, JM$ } from "../figma_app/43951";
+import { SharedFontsModalTeamPermissions, SharedFontsModalOrgPermissions } from "../figma_app/43951";
 import { g as _$$g } from "../905/763242";
 import { Ib } from "../905/129884";
 import { Hj, A3, FO } from "../905/682977";
@@ -83,7 +83,7 @@ function H(e) {
     }));
     onShowDeleteFontsModal();
   };
-  let g = xx(e => {
+  let g = memoizeByArgs(e => {
     let t = e[`org-${orgId}`];
     if (!t) return {};
     let i = {};
@@ -283,7 +283,7 @@ function en(e) {
     className: "shared_fonts_collision--bullet--ortUn",
     children: e.fontStyle
   }) : jsxs("div", {
-    children: [e.fontFile.family, " ", e.fontFile.style, " ", ot(e.fontFile.version), e.fontFile.variation_axes && jsx(_$$B, {
+    children: [e.fontFile.family, " ", e.fontFile.style, " ", cleanFontVersion(e.fontFile.version), e.fontFile.variation_axes && jsx(_$$B, {
       className: J,
       svg: _$$A2
     })]
@@ -485,12 +485,12 @@ function eR(e) {
     width,
     uniqueResourceId
   } = e;
-  let F = Rs(UAQ, {
+  let F = Rs(SharedFontsModalTeamPermissions, {
     teamId: resourceId
   }, {
     enabled: "team" === resourceType
   });
-  let M = Rs(JM$, {
+  let M = Rs(SharedFontsModalOrgPermissions, {
     orgId: resourceId
   }, {
     enabled: "org" === resourceType
@@ -873,7 +873,7 @@ let eO = "shared_fonts--modalInfo--1Z1ZN";
 let eD = "shared_fonts--checkboxControl--EvIzD";
 let eL = "shared_fonts--familyColumn--7PnCb shared_fonts--column--bUnQT table--column--974RA";
 let eF = "shared_fonts--dateColumn--tQtqD shared_fonts--column--bUnQT table--column--974RA";
-let eM = class e extends uA {
+let eM = class e extends RecordingComponent {
   constructor(e) {
     super(e);
     this.fileInput = document.createElement("input");
@@ -1408,7 +1408,7 @@ let eG = registerModal(function (e) {
             children: collision.uploaded.version ? renderI18nText("design_systems.shared_fonts.family_info_with_version", {
               fontFamily: existing.family,
               fontStyle: existing.style,
-              fontVersion: ot(collision.uploaded.version)
+              fontVersion: cleanFontVersion(collision.uploaded.version)
             }) : renderI18nText("design_systems.shared_fonts.family_info_without_version", {
               fontFamily: existing.family,
               fontStyle: existing.style

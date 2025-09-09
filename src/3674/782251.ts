@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { SelectionPaintHelpers } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";

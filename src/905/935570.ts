@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useContext, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { h as _$$h } from "../905/207101";
 import { r as _$$r } from "../905/520829";

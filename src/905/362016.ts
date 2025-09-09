@@ -10,7 +10,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { Gj, Lk } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { LH } from "../905/872904";
-import { jXq } from "../figma_app/43951";
+import { LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { c as _$$c } from "../905/511370";
 import { lH, Ze } from "../905/297574";
@@ -322,7 +322,7 @@ export function $$H0(e) {
 function W({
   libraryFileKey: e
 }) {
-  let t = Rs(jXq, {
+  let t = Rs(LibraryVariableCollectionDataWithVariables, {
     fileKey: e
   });
   let i = t.data?.file?.variableCollections;

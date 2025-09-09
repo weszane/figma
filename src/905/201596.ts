@@ -1,5 +1,5 @@
 import { useRef, useEffect, useMemo, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { AppStateTsApi } from "../figma_app/763686";
 import { Rs } from "../figma_app/288654";
@@ -13,7 +13,7 @@ import { $T } from "../figma_app/12535";
 import { fullscreenValue } from "../figma_app/455680";
 import { FC } from "../figma_app/212807";
 import { FFileType } from "../figma_app/191312";
-import { FBc } from "../figma_app/43951";
+import { PublishedHubFileForFile } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { getObservableValue } from "../figma_app/84367";
 import { p6 } from "../figma_app/803787";
@@ -53,7 +53,7 @@ export function $$T1(e) {
   let t = FC();
   let i = useSelector(e => e.authedProfilesById);
   let a = useSelector(e => e.figFileDuplicatedFromHubFile);
-  let s = Rs(FBc({
+  let s = Rs(PublishedHubFileForFile({
     fileKey: e?.key ?? ""
   }), {
     enabled: !!e

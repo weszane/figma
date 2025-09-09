@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Kh } from "../905/403166";
 import { Xm } from "../905/723791";
 import { reportError } from "../905/11";
-import { qZS } from "../figma_app/43951";
+import { FileWithCommentsAndReactions } from "../figma_app/43951";
 let $$c3 = "You are trying to use comments functionality but didn't wire a provider for comments";
 let u = createContext(void 0);
 let $$p8 = u.Provider;
@@ -119,7 +119,7 @@ export function $$I9() {
     return t;
   }($$A11());
 }
-export const $J = qZS;
+export const $J = FileWithCommentsAndReactions;
 export const AK = $$y1;
 export const GH = $$m2;
 export const H5 = $$c3;

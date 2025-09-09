@@ -2,25 +2,25 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { RecordingContext } from "../905/959312";
 import { tf } from "../figma_app/831799";
-import { o6, cZ, aH, Am, C0, Ht, Z7, Fk, cC, fA } from "../figma_app/806412";
-class l extends o6 {
+import { RecordingPureComponent, handleMouseEvent, SKIP_RECORDING, handlePointerEvent, handleKeyboardEvent, handleGenericEvent, handleChangeEvent, isRecordingEnabled, useRecordingKey, handleEvent } from "../figma_app/878298";
+class l extends RecordingPureComponent {
   constructor() {
     super(...arguments);
-    this.onClick = cZ(this, "click", e => this.props.onClick ? this.props.onClick(e) : aH);
-    this.onContextClick = cZ(this, "contextmenu", e => this.props.onContextMenu ? this.props.onContextMenu(e) : aH);
-    this.onDoubleClick = cZ(this, "dblclick", e => this.props.onDoubleClick ? this.props.onDoubleClick(e) : aH);
-    this.onMouseDown = cZ(this, "mousedown", e => this.props.onMouseDown ? this.props.onMouseDown(e) : aH);
-    this.onMouseUp = cZ(this, "mouseup", e => this.props.onMouseUp ? this.props.onMouseUp(e) : aH);
-    this.onMouseMove = cZ(this, "mousemove", e => this.props.onMouseMove ? this.props.onMouseMove(e) : aH);
-    this.onMouseEnter = cZ(this, "mouseenter", e => this.props.onMouseEnter ? this.props.onMouseEnter(e) : aH);
-    this.onMouseLeave = cZ(this, "mouseleave", e => this.props.onMouseLeave ? this.props.onMouseLeave(e) : aH);
-    this.onPointerDown = Am(this, "pointerdown", e => this.props.onPointerDown ? this.props.onPointerDown(e) : aH);
-    this.onPointerUp = Am(this, "pointerup", e => this.props.onPointerUp ? this.props.onPointerUp(e) : aH);
-    this.onPointerMove = Am(this, "pointermove", e => this.props.onPointerMove ? this.props.onPointerMove(e) : aH);
-    this.onKeyUp = C0(this, "keyup", e => this.props.onKeyUp ? this.props.onKeyUp(e) : aH);
-    this.onKeyDown = C0(this, "keydown", e => this.props.onKeyDown ? this.props.onKeyDown(e) : aH);
-    this.onFocus = Ht(this, "focus", e => this.props.onFocus ? this.props.onFocus(e) : aH);
-    this.onBlur = Ht(this, "blur", e => this.props.onBlur ? this.props.onBlur(e) : aH);
+    this.onClick = handleMouseEvent(this, "click", e => this.props.onClick ? this.props.onClick(e) : SKIP_RECORDING);
+    this.onContextClick = handleMouseEvent(this, "contextmenu", e => this.props.onContextMenu ? this.props.onContextMenu(e) : SKIP_RECORDING);
+    this.onDoubleClick = handleMouseEvent(this, "dblclick", e => this.props.onDoubleClick ? this.props.onDoubleClick(e) : SKIP_RECORDING);
+    this.onMouseDown = handleMouseEvent(this, "mousedown", e => this.props.onMouseDown ? this.props.onMouseDown(e) : SKIP_RECORDING);
+    this.onMouseUp = handleMouseEvent(this, "mouseup", e => this.props.onMouseUp ? this.props.onMouseUp(e) : SKIP_RECORDING);
+    this.onMouseMove = handleMouseEvent(this, "mousemove", e => this.props.onMouseMove ? this.props.onMouseMove(e) : SKIP_RECORDING);
+    this.onMouseEnter = handleMouseEvent(this, "mouseenter", e => this.props.onMouseEnter ? this.props.onMouseEnter(e) : SKIP_RECORDING);
+    this.onMouseLeave = handleMouseEvent(this, "mouseleave", e => this.props.onMouseLeave ? this.props.onMouseLeave(e) : SKIP_RECORDING);
+    this.onPointerDown = handlePointerEvent(this, "pointerdown", e => this.props.onPointerDown ? this.props.onPointerDown(e) : SKIP_RECORDING);
+    this.onPointerUp = handlePointerEvent(this, "pointerup", e => this.props.onPointerUp ? this.props.onPointerUp(e) : SKIP_RECORDING);
+    this.onPointerMove = handlePointerEvent(this, "pointermove", e => this.props.onPointerMove ? this.props.onPointerMove(e) : SKIP_RECORDING);
+    this.onKeyUp = handleKeyboardEvent(this, "keyup", e => this.props.onKeyUp ? this.props.onKeyUp(e) : SKIP_RECORDING);
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => this.props.onKeyDown ? this.props.onKeyDown(e) : SKIP_RECORDING);
+    this.onFocus = handleGenericEvent(this, "focus", e => this.props.onFocus ? this.props.onFocus(e) : SKIP_RECORDING);
+    this.onBlur = handleGenericEvent(this, "blur", e => this.props.onBlur ? this.props.onBlur(e) : SKIP_RECORDING);
   }
   render() {
     let {
@@ -76,7 +76,7 @@ $$p3.displayName = "RecordableA";
 export class $$m6 extends l {
   constructor() {
     super(...arguments);
-    this.onChange = Z7(this, "change", e => this.props.onChange ? this.props.onChange(e) : aH);
+    this.onChange = handleChangeEvent(this, "change", e => this.props.onChange ? this.props.onChange(e) : SKIP_RECORDING);
   }
   node(e, t) {
     return jsx("input", {
@@ -92,7 +92,7 @@ $$m6.displayName = "RecordableInput";
 export class $$h4 extends l {
   constructor() {
     super(...arguments);
-    this.onChange = Z7(this, "change", e => this.props.onChange ? this.props.onChange(e) : aH);
+    this.onChange = handleChangeEvent(this, "change", e => this.props.onChange ? this.props.onChange(e) : SKIP_RECORDING);
   }
   node(e, t) {
     return jsx("textarea", {
@@ -106,11 +106,11 @@ export class $$h4 extends l {
 export function $$g2({
   children: e
 }) {
-  let t = useMemo(() => Fk() ? function (e, t) {
-    let i = cC(t.recordingKey);
+  let t = useMemo(() => isRecordingEnabled() ? function (e, t) {
+    let i = useRecordingKey(t.recordingKey);
     return useMemo(() => {
       if (!e || !t.recordingKey) return e;
-      let n = fA(i, t.eventName, t => Array.isArray(t) ? e(...t) : e(t));
+      let n = handleEvent(i, t.eventName, t => Array.isArray(t) ? e(...t) : e(t));
       return (...e) => n(e);
     }, [i, t.eventName, e, t.recordingKey]);
   } : null, []);

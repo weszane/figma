@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { IAssertResource, UIVisibilitySetting, DesignWorkspace } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { globalPerfTimer } from "../905/542194";
@@ -17,10 +17,10 @@ import { IN, pM, KE } from "../905/116101";
 import { b as _$$b } from "../905/985254";
 import { E3 } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
-import { ax, tw, NT } from "../figma_app/741237";
+import { setSelectedDevModePropertiesPanelTab, getSelectedDevModePropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
-import { iZ } from "../905/372672";
-import { dDF } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { FileCanEdit } from "../figma_app/43951";
 import { getPluginMetadata, getPluginVersion, isDevModePlugin } from "../figma_app/300692";
 import { Nb, V_, Eg } from "../figma_app/841351";
 import { FEditorType } from "../figma_app/53721";
@@ -35,7 +35,7 @@ export function $$k0(e, t) {
   let [k, M] = useAtomValueAndSetter(_$$R);
   let [F, j] = useAtomValueAndSetter(_$$c2);
   let U = tS() ?? "";
-  let B = Rs(dDF, {
+  let B = Rs(FileCanEdit, {
     key: U
   })?.data?.file?.hasPermission;
   let G = _I();
@@ -44,7 +44,7 @@ export function $$k0(e, t) {
   let [z, W] = useAtomValueAndSetter(_$$t);
   let K = useSelector(e => e.selectedView);
   let Y = useSelector(e => e.mirror.appModel.prototypeCanvasUiVisible);
-  let $ = !iZ();
+  let $ = !selectCurrentUser();
   let X = E3();
   let q = X === FEditorType.DevHandoff;
   let J = X === FEditorType.Illustration;
@@ -62,7 +62,7 @@ export function $$k0(e, t) {
       globalPerfTimer.start("switch_to_inspect_mode.left_panel_tti");
       globalPerfTimer.start("switch_to_inspect_mode.right_panel_tti");
       let i = Q.getState();
-      if (i.universalInsertModal.showing && (ax(IAssertResource.PLUGIN), i.universalInsertModal.fdPreviewResource)) {
+      if (i.universalInsertModal.showing && (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), i.universalInsertModal.fdPreviewResource)) {
         let e = getPluginMetadata(i.universalInsertModal.fdPreviewResource.id, i.publishedPlugins);
         let t = getPluginVersion(e);
         isDevModePlugin(t) && (n = {
@@ -105,7 +105,7 @@ export function $$k0(e, t) {
     {
       globalPerfTimer.start("switch_to_design_mode.toolbelt_animation");
       let n = Q.getState();
-      if (tw()?.getCopy() === IAssertResource.PLUGIN && n.universalInsertModal.fdPreviewResource) {
+      if (getSelectedDevModePropertiesPanelTab()?.getCopy() === IAssertResource.PLUGIN && n.universalInsertModal.fdPreviewResource) {
         let e = getPluginMetadata(n.universalInsertModal.fdPreviewResource.id, n.publishedPlugins);
         let t = getPluginVersion(e);
         t?.manifest?.editorType?.includes(ManifestEditorType.FIGMA) && r(pM({
@@ -124,7 +124,7 @@ export function $$k0(e, t) {
       r(KE());
       G || (H || r(_$$b({
         dev_mode_should_see_paywall_reminder: !0
-      })), B || NT(DesignWorkspace.INSPECT), W(_$$c.DEFAULT));
+      })), B || setPropertiesPanelTab(DesignWorkspace.INSPECT), W(_$$c.DEFAULT));
       Ym(Q.getState(), FEditorType.Design, e, t, ee);
       return !0;
     }

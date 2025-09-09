@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { AnimationTriggerType } from "../figma_app/763686";
 import { analyticsEventManager } from "../905/449184";
 import { isInvalidValue } from "../905/216495";

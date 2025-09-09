@@ -9,7 +9,7 @@ import { NavigationRoutes, MemberSections, DashboardSections, BillingSections } 
 import { isAppShellEnabled } from '../905/561581';
 import { mL, UC } from '../905/563637';
 import { getFeatureFlags } from '../905/601108';
-import { Ay } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { parseQuery, parseQuerySimple, serializeQuery } from '../905/634134';
 import { K } from '../905/807535';
 import { g as _$$g } from '../905/817247';
@@ -549,7 +549,7 @@ export class $$q1 {
           let n = _$$g(t[5]);
           let i = _$$E(r);
           n === GroupType.MEMBERS && (e = i ?? oU);
-          let a = new URLSearchParams(Ay.location.search).get(u5);
+          let a = new URLSearchParams(customHistory.location.search).get(u5);
           let s = a ? vQ(a) : void 0;
           let l = t[3];
           if (!$(l)) {
@@ -745,7 +745,7 @@ export class $$q1 {
       case 'teamFeed':
         {
           if (e.currentUserOrgId === null || !getFeatureFlags().xr_debounce_threshold) return null;
-          let r = new URLSearchParams(Ay.location.search);
+          let r = new URLSearchParams(customHistory.location.search);
           return {
             view: 'teamFeed',
             postUuid: t[3],
@@ -868,7 +868,7 @@ export class $$q1 {
         e.teamId === null ? p += '/n' : p += `/${e.teamId}`;
         e.teamFlowType && (p += `/${e.teamFlowType}`);
         e.paymentStep && (p += `/${e.paymentStep}`);
-        let f = new URLSearchParams(Ay.location.search);
+        let f = new URLSearchParams(customHistory.location.search);
         (e.searchParams || f) && (a = {
           ...a,
           ...(f.get('onCompleteRedirectFileKey') ? {
@@ -973,8 +973,8 @@ export class $$q1 {
         e.tab && (p += `/${e.tab}`);
         break;
       case 'resourceHub':
-        p = Ay.location.pathname;
-        new URLSearchParams(Ay.location.search).forEach((e, t) => {
+        p = customHistory.location.pathname;
+        new URLSearchParams(customHistory.location.search).forEach((e, t) => {
           t !== 'fuid' && (a[t] = e);
         });
         break;
@@ -1048,7 +1048,7 @@ export class $$q1 {
     if (t) return W[t].missingResourceType;
   }
   appendQueryParams(e, t) {
-    let r = new URLSearchParams(Ay.location.search);
+    let r = new URLSearchParams(customHistory.location.search);
     t.forEach(t => {
       r.has(t) && (e[t] = r.get(t));
     });

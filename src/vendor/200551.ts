@@ -20,7 +20,7 @@ module.exports = function (e, n, i, o, l, s) {
   for (let t = 0; t < l; t++) for (let a = 0; a < o; a++) {
     let m = (t * o + a) * 4;
     let h = r(e, n, m, m);
-    Math.abs(h) > p ? !s.includeAA && (u(e, a, t, o, l, n) || u(n, a, t, o, l, e)) ? i && !s.diffMask && d(i, m, ...s.aaColor) : (i && d(i, m, ...(h < 0 && s.diffColorAlt || s.diffColor)), y++) : i && !s.diffMask && c(e, m, s.alpha, i);
+    Math.abs(h) > p ? !s.includeAA && (ExpiringCache(e, a, t, o, l, n) || ExpiringCache(n, a, t, o, l, e)) ? i && !s.diffMask && d(i, m, ...s.aaColor) : (i && d(i, m, ...(h < 0 && s.diffColorAlt || s.diffColor)), y++) : i && !s.diffMask && c(e, m, s.alpha, i);
   }
   return y;
 };
@@ -36,7 +36,7 @@ let t = {
 function a(e) {
   return ArrayBuffer.isView(e) && 1 === e.constructor.BYTES_PER_ELEMENT;
 }
-function u(e, t, a, u, i, o) {
+function ExpiringCache(e, t, a, u, i, o) {
   let l;
   let s;
   let d;

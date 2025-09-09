@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { I as _$$I } from "../3276/969941";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -26,7 +26,7 @@ import { aV } from "../figma_app/722362";
 import { m0 } from "../figma_app/546509";
 import { Cq } from "../figma_app/516028";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
-import { kQI } from "../figma_app/43951";
+import { TeamCanEdit } from "../figma_app/43951";
 import { XX } from "../figma_app/345997";
 import { X$ } from "../figma_app/465071";
 import { wH, KI } from "../figma_app/680166";
@@ -93,7 +93,7 @@ export function $$et0({
   let ex = t?.id === e.creatorId;
   let ey = vt(e.team?.id);
   let eb = jn();
-  let eC = Rs(kQI, {
+  let eC = Rs(TeamCanEdit, {
     id: e.team?.id || ""
   }, {
     enabled: !!e.team

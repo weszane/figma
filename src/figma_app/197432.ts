@@ -1,7 +1,7 @@
 import { Multiplayer } from "../figma_app/763686";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { A7 } from "../905/87821";
 import { _ } from "../905/401345";
@@ -38,10 +38,10 @@ export function $$h1(e, t) {
   let E = wasInUnclaimedTryFile && !openFile.isTryFile;
   let y = (null !== previousCanEdit && openFile.canEdit !== previousCanEdit || null !== previousCanView && openFile.canView !== previousCanView) && !E && openFile.key === previousFileKey;
   let b = () => {
-    let e = new URLSearchParams(Ay.location.search);
+    let e = new URLSearchParams(customHistory.location.search);
     e.set("perms-refresh", "1");
-    Ay.replace(`${Ay.location.pathname}?${e.toString()}`, Ay.location.state);
-    Ay.reload("file access changed");
+    customHistory.replace(`${customHistory.location.pathname}?${e.toString()}`, customHistory.location.state);
+    customHistory.reload("file access changed");
     n?.();
     n = void 0;
   };

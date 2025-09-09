@@ -1,15 +1,15 @@
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { h, I } from "../3973/647885";
 let l = "library-update";
 let d = "library-update";
 function c(e) {
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     type: l,
     message: getI18nString("design_systems.update_actions.updating_assets"),
-    icon: zX.PROGRESS,
+    icon: VisualBellIcon.PROGRESS,
     progressKey: d
   }));
 }
@@ -42,26 +42,26 @@ let $$h1 = createOptimistThunk(e => {
     progress: t.total,
     total: t.total
   }));
-  e.dispatch(F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: l
   }));
-  e.dispatch(F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     type: l,
     message: getI18nString("design_systems.update_actions.update_success"),
-    icon: zX.CHECK
+    icon: VisualBellIcon.CHECK
   }));
 });
 let $$g0 = createOptimistThunk(e => {
   e.dispatch(I({
     key: d
   }));
-  e.dispatch(F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: l
   }));
-  e.dispatch(F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     type: l,
     message: getI18nString("design_systems.update_actions.update_failure"),
-    icon: zX.EXCLAMATION
+    icon: VisualBellIcon.EXCLAMATION
   }));
 });
 export const V2 = $$g0;

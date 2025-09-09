@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, useLayoutEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { h as _$$h } from "../905/994594";
 import { A as _$$A } from "../905/251970";

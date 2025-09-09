@@ -1,7 +1,7 @@
 import _require from "../5609/415609";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/632989";
 import { k as _$$k } from "../905/443820";

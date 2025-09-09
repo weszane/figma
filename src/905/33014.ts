@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import r from "classnames";
-import { k as _$$k } from "../905/651849";
+import { logger } from "../905/651849";
 import { Lf } from "../figma_app/637027";
 import { N } from "../905/551536";
 import { B } from "../905/714743";
@@ -110,7 +110,7 @@ export function $$A0({
     let r = i.target.value;
     if (!n) {
       i.preventDefault();
-      _$$k.error("HTMLInputElement is missing name attribute:", i.target);
+      logger.error("HTMLInputElement is missing name attribute:", i.target);
       return;
     }
     "region" === n && r === I && (r = "");
@@ -125,7 +125,7 @@ export function $$A0({
     let r = i.target.value;
     if (!n) {
       i.preventDefault();
-      _$$k.error("HTMLInputElement is missing name attribute:", i.target);
+      logger.error("HTMLInputElement is missing name attribute:", i.target);
       return;
     }
     t({

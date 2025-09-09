@@ -1,8 +1,8 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Command, DesignGraphElements } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { showModalHandler } from "../905/156213";
 import { x } from "../905/749159";
@@ -66,7 +66,7 @@ export function $$p1() {
     $$u0(t);
     e(Ts({
       origin: "signed_out_edit",
-      redirectUrl: Ay.location.pathname
+      redirectUrl: customHistory.location.pathname
     }));
     e(showModalHandler({
       type: x,

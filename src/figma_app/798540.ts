@@ -1,6 +1,6 @@
 import { useCallback, useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { n3, IA } from "../905/859698";
+import { n3, VariableStyleId } from "../905/859698";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString } from "../905/871411";
@@ -59,7 +59,7 @@ export function $$E0(e, t) {
             let s = e.absoluteTransform.m02;
             let o = e.size.x;
             if (s <= i + 16) {
-              if (e.parentGuid === t) HH(e, 16, e.relativeTransform.m12);else {
+              if (e.parentGuid === t) HH(e, 16, e.relativeTransform.m12); else {
                 let r = e;
                 for (; r.parentGuid !== t && r.parentNode;) r = r.parentNode;
                 HH(r, 16, r.relativeTransform.m12);
@@ -81,7 +81,7 @@ export function $$E0(e, t) {
             let p = e.absoluteTransform.m12;
             if (p < n + 16 || p + u > o - 16) {
               let t;
-              e.inheritedTextStyle && (Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !1), Fullscreen?.selectStyle(n3.INVALID, IA.INVALID));
+              e.inheritedTextStyle && (Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !1), Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID));
               let r = Math.max(0, n + 16 - p);
               let d = Math.max(0, p + u - (o - 16));
               let _ = e.lineHeightOrMixed;

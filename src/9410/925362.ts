@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useLayoutEffect, useCallback } from "react";
-import { useStore, useDispatch } from "../vendor/514228";
+import { useStore, useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { F } from "../905/680873";

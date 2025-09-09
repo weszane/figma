@@ -2,7 +2,7 @@ import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { s as _$$s2 } from "../905/381752";
 import { Y } from "../figma_app/887000";
 import { createOptimistThunk } from "../905/350402";
@@ -27,7 +27,7 @@ export function $$E0(e) {
         billing_contact: e.data.meta
       }
     }));
-    dispatch(F.enqueue({
+    dispatch(VisualBellActions.enqueue({
       message: getI18nString("visual_bell.team_billing_contact_updated"),
       type: "team-billing-contact-changed"
     }));
@@ -96,7 +96,7 @@ export function $$S3(e) {
     dispatch(_$$Be({
       teamId
     }));
-    dispatch(F.enqueue({
+    dispatch(VisualBellActions.enqueue({
       message: getI18nString("billing_modals.renewal.toast.success"),
       type: "team-billing-renewal"
     }));
@@ -125,7 +125,7 @@ export function $$v7(e) {
     dispatch(_$$Be({
       teamId
     }));
-    dispatch(F.enqueue({
+    dispatch(VisualBellActions.enqueue({
       message: getI18nString("billing_modals.renewal.toast.success"),
       type: "team-billing-renewal"
     }));

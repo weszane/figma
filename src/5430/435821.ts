@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { trackEventAnalytics } from "../905/449184";
 import { B } from "../905/714743";

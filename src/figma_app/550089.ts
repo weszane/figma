@@ -1,11 +1,11 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { flushSync } from "../vendor/944059";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Fullscreen, SceneGraphHelpers } from "../figma_app/763686";
 import { defaultSessionLocalIDArrayString, defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
@@ -13,7 +13,7 @@ import { lg } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
-import { Uc } from "../figma_app/741237";
+import { updateHoveredNode } from "../figma_app/741237";
 import { FFileType } from "../figma_app/191312";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { requestDeferredExecution } from "../905/561433";
@@ -24,7 +24,7 @@ let A = parsePxNumber(y9S);
 let x = parsePxNumber(IuL);
 let N = parsePxNumber(MJh);
 let C = (e, t, r) => r ? e === FFileType.WHITEBOARD ? x : t ? N : 0 : 0;
-let w = xx((e, t, r, n, i) => {
+let w = memoizeByArgs((e, t, r, n, i) => {
   let {
     x,
     y,
@@ -131,12 +131,12 @@ function P(e) {
     setZoomScale: (e, t) => Fullscreen.setCanvasZoomScale(t),
     setHovering: e => {
       if (!e) {
-        Uc(defaultSessionLocalIDString);
+        updateHoveredNode(defaultSessionLocalIDString);
         return;
       }
       let t = Fullscreen.getCommentAnchorDataAtPosition(e.x, e.y).stablePath;
       let r = t ? getSingletonSceneGraph().getFromStablePath(R(t)) : null;
-      r && !v.has(r.type) ? Uc(r.guid) : Uc(defaultSessionLocalIDString);
+      r && !v.has(r.type) ? updateHoveredNode(r.guid) : updateHoveredNode(defaultSessionLocalIDString);
     },
     setCurrentPageIdAsync: async e => await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e),
     pageIdForNodeId: e => Fullscreen.getPageIdFromNode(e),

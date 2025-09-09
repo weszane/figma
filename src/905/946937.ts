@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -24,9 +24,9 @@ import { jd } from "../figma_app/528509";
 import { q5 } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FFileType, FProductAccessType, FPlanAccessType } from "../figma_app/191312";
-import { pTp, x8f } from "../figma_app/43951";
+import { PublishUpsellTeamPlan, PublishUpsellTeamRoles } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { UpsellModalType } from "../905/165519";
@@ -44,10 +44,10 @@ export let $$V0 = registerModal(function (e) {
   } = e;
   let s = useDispatch();
   let o = FC();
-  let l = iZ();
+  let l = selectCurrentUser();
   let d = !!team && canEditTeam(team?.id, o);
   let p = w5(team);
-  let m = Rs(pTp(team ? {
+  let m = Rs(PublishUpsellTeamPlan(team ? {
     teamId: team.id
   } : null));
   let h = resourceUtils.useTransform(m, e => e?.team?.canEdit ?? !1);
@@ -114,7 +114,7 @@ function G(e) {
   let {
     onStylesClick
   } = e;
-  let h = Rs(x8f, {});
+  let h = Rs(PublishUpsellTeamRoles, {});
   let g = q5();
   let _ = w5(e.team);
   let A = useMemo(() => h.transform(e => e.currentUser.teamEditRoles.some(e => {

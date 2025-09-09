@@ -1,5 +1,5 @@
 import { jsx, Fragment } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { cQ } from "../905/18800";
 export function $$o0({

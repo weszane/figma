@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import s, { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";

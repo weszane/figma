@@ -49,9 +49,9 @@ import { deepClone } from '../905/284190';
 import { y as _$$y2 } from '../905/292472';
 import { dX } from '../905/294543';
 import { A as _$$A2 } from '../905/295481';
-import { m as _$$m3 } from '../905/298920';
+import { sendMessageToParent } from '../905/298920';
 import { O as _$$O } from '../905/301080';
-import { F as _$$F4 } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { EE } from '../905/316062';
 import { t as _$$t } from '../905/316903';
@@ -93,7 +93,7 @@ import { r as _$$r5 } from '../905/501976';
 import { l as _$$l3 } from '../905/509505';
 import { h as _$$h6 } from '../905/510194';
 import { h as _$$h2 } from '../905/513745';
-import { D8 } from '../905/515076';
+import { updateCodeExtensionPreferences } from '../905/515076';
 import { $n } from '../905/521428';
 import { F as _$$F2 } from '../905/544329';
 import { s as _$$s } from '../905/551945';
@@ -104,7 +104,7 @@ import { encodeBase64 } from '../905/561685';
 import { i4 as _$$i } from '../905/566585';
 import { Q as _$$Q } from '../905/567676';
 import { N as _$$N5 } from '../905/568293';
-import { XU, zX } from '../905/576487';
+import { BellId, VisualBellIcon } from '../905/576487';
 import { y as _$$y } from '../905/582657';
 import { O as _$$O2 } from '../905/587457';
 import { D as _$$D } from '../905/591570';
@@ -113,7 +113,7 @@ import { getFeatureFlags } from '../905/601108';
 import { _ as _$$_ } from '../905/607842';
 import { D as _$$D5 } from '../905/629114';
 import { R as _$$R } from '../905/649743';
-import { k as _$$k3 } from '../905/651849';
+import { logger } from '../905/651849';
 import { Bi } from '../905/652992';
 import { z as _$$z } from '../905/653569';
 import { i } from '../905/661697';
@@ -200,7 +200,7 @@ import { isZoomIntegration, IntegrationUtils } from '../figma_app/469876';
 import { xt } from '../figma_app/475303';
 import { tS as _$$tS } from '../figma_app/516028';
 import { N5 } from '../figma_app/528509';
-import { LR } from '../figma_app/564528';
+import { sendBackToFilesAction } from '../figma_app/564528';
 import { zM } from '../figma_app/580736';
 import { L as _$$L3 } from '../figma_app/582681';
 import { Bu, dd } from '../figma_app/604494';
@@ -218,7 +218,7 @@ import { AppStateTsApi, SwitchState, Fullscreen, EasingType, SelfDesignType, Log
 import { X as _$$X4 } from '../figma_app/765161';
 import { BrowserInfo } from '../figma_app/778880';
 import { As } from '../figma_app/802241';
-import { of, Pt } from '../figma_app/806412';
+import { useHandleFocusEvent, generateRecordingKey } from '../figma_app/878298';
 import { hV as _$$hV, M3 as _$$M2, _p, lW, MH, pn, rH, u2 } from '../figma_app/847915';
 import { YA } from '../figma_app/865646';
 import { desktopAPIInstance } from '../figma_app/876459';
@@ -538,7 +538,7 @@ async function tR(e) {
             e.button && ('text' in e.button ? t.push(e.button.text) : ('primary' in e.button && t.push(e.button.primary.text), 'secondary' in e.button && t.push(e.button.secondary.text)));
           }
         } else {
-          'i18n' in e ? t = e.i18n?.id !== void 0 ? XU[e.i18n.id] : void 0 : 'messageComponentKey' in e && (t = e.messageComponentKey);
+          'i18n' in e ? t = e.i18n?.id !== void 0 ? BellId[e.i18n.id] : void 0 : 'messageComponentKey' in e && (t = e.messageComponentKey);
         }
         if (t) return t;
         {
@@ -556,7 +556,7 @@ async function tR(e) {
     }), 'secondary' in i.button && (i.button.secondary.action = () => {
       n.secondButtonClickCount = (n.secondButtonClickCount ?? 0) + 1;
     })));
-    e.dispatch(_$$F4.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       ...i,
       onDequeue: e => {
         n.dismissReason = e;
@@ -569,7 +569,7 @@ async function tR(e) {
   });
   i({
     message: 'Short message with icon',
-    icon: zX.EXCLAMATION
+    icon: VisualBellIcon.EXCLAMATION
   });
   i({
     message: 'This is a longer message and I expect it to wrap around to the next line and possibly even be truncated. Lorem ipsum dolor set amet'
@@ -580,7 +580,7 @@ async function tR(e) {
   });
   i({
     i18n: {
-      id: XU.FILE_MOVE_FOLDER_BELL_ID,
+      id: BellId.FILE_MOVE_FOLDER_BELL_ID,
       params: {
         text: 'Some folder'
       }
@@ -588,7 +588,7 @@ async function tR(e) {
   });
   i({
     i18n: {
-      id: XU.FILE_MOVE_FOLDER_BELL_ID,
+      id: BellId.FILE_MOVE_FOLDER_BELL_ID,
       params: {
         text: 'Some folder'
       }
@@ -603,7 +603,7 @@ async function tR(e) {
   });
   i({
     message: 'Single button bell with icon',
-    icon: zX.RETURN_TO_INSTANCE,
+    icon: VisualBellIcon.RETURN_TO_INSTANCE,
     button: {
       text: 'Do it',
       action: lQ
@@ -636,7 +636,7 @@ async function tR(e) {
       });
     });
   });
-  _$$k3.table(t);
+  logger.table(t);
 }
 function tU(e, t, i) {
   return {
@@ -662,7 +662,7 @@ function tB(e, t, i, n, r) {
       return (s.codeExtensionPreferences[a.id]?.unit ?? MeasurementUnit.PIXEL) === i;
     },
     callback: () => {
-      D8(s, a, {
+      updateCodeExtensionPreferences(s, a, {
         unit: i
       });
     }
@@ -3102,7 +3102,7 @@ async function tJ() {
   let e = _$$D5();
   let t = figma.currentPage.selection;
   if (t.length !== 1 || t[0].type !== 'FRAME') {
-    _$$k3.log('Please select a single frame to test object detection');
+    logger.log('Please select a single frame to test object detection');
     return;
   }
   let i = t[0];
@@ -3138,7 +3138,7 @@ async function tJ() {
 async function t0() {
   let e = figma.currentPage.selection;
   if (e.length !== 1 || e[0].type !== 'FRAME') {
-    _$$k3.log('Please select a single frame to test object detection');
+    logger.log('Please select a single frame to test object detection');
     return;
   }
   let t = e[0];
@@ -3568,7 +3568,7 @@ function no(e) {
     onClose
   });
   let d = setupAutofocusHandler();
-  let c = of(na, 'submit', e => {
+  let c = useHandleFocusEvent(na, 'submit', e => {
     e.preventDefault();
     t && r && (permissionScopeHandler.user('set-missing-font', () => {
       fullscreenValue.setMissingFont(t, r);
@@ -3593,7 +3593,7 @@ function no(e) {
             i(e.currentTarget.value);
           },
           placeholder: 'Font family',
-          recordingKey: Pt(na, 'fontFamily'),
+          recordingKey: generateRecordingKey(na, 'fontFamily'),
           required: !0
         }), jsx('p', {
           children: 'Font style'
@@ -3602,7 +3602,7 @@ function no(e) {
           onChange: e => {
             a(e.currentTarget.value);
           },
-          recordingKey: Pt(na, 'fontStyle'),
+          recordingKey: generateRecordingKey(na, 'fontStyle'),
           placeholder: 'Font style',
           required: !0
         })]
@@ -3611,7 +3611,7 @@ function no(e) {
           children: jsx($n, {
             variant: 'primary',
             type: 'submit',
-            recordingKey: Pt(na, 'setMissingFontButton'),
+            recordingKey: generateRecordingKey(na, 'setMissingFontButton'),
             children: 'Set missing font'
           })
         })
@@ -3734,11 +3734,11 @@ let nE = [{
       let l = [];
       let d = () => {
         console.log('[Update via instance swap] Updated all instances of:', l.map(e => [e.name, e.type, e.isStateGroup ? e.stateGroupKey : e.componentKey]));
-        l.length === 0 ? t(_$$F4.enqueue({
+        l.length === 0 ? t(VisualBellActions.enqueue({
           message: 'Nothing to update'
-        })) : l.length === 1 ? t(_$$F4.enqueue({
+        })) : l.length === 1 ? t(VisualBellActions.enqueue({
           message: `Updated all instances of ${l[0].name}`
-        })) : t(_$$F4.enqueue({
+        })) : t(VisualBellActions.enqueue({
           message: `Updated all instances of ${l.length} components, including ${l[l.length - 1].name}`
         }));
       };
@@ -3863,7 +3863,7 @@ export function $$nN0(e) {
     'callback': (e, t, i, n) => {
       if (n?.preventDefault(), trackEventAnalytics('Back to files button clicked', {
         source: 'fullscreen_menu'
-      }), !LR()) {
+      }), !sendBackToFilesAction()) {
         if (n.metaKey || n.button === 1) {
           let e = debugState.getState().openFile;
           let t = e?.project?.id || null;
@@ -5978,7 +5978,7 @@ export function $$nN0(e) {
         callback: () => {
           let e = () => {
             atomStoreManager.set(rx, null);
-            debugState.dispatch(_$$F4.enqueue({
+            debugState.dispatch(VisualBellActions.enqueue({
               message: 'Reset Code Connect mock'
             }));
           };
@@ -5986,7 +5986,7 @@ export function $$nN0(e) {
             try {
               let e = JSON.parse(t);
               atomStoreManager.set(rx, e);
-              debugState.dispatch(_$$F4.enqueue({
+              debugState.dispatch(VisualBellActions.enqueue({
                 message: 'Set Code Connect mock'
               }));
             } catch (t) {
@@ -6003,7 +6003,7 @@ export function $$nN0(e) {
           _$$r5('get_code', void 0, e).then(t => {
             let i = t.content.map(e => e.text).join('\n');
             navigator.clipboard.writeText(i).then(() => {
-              e.dispatch(_$$F4.enqueue({
+              e.dispatch(VisualBellActions.enqueue({
                 message: 'Copied code to clipboard'
               }));
             });
@@ -6089,7 +6089,7 @@ export function $$nN0(e) {
         callback(e, t, n) {
           let r = i();
           r.forEach(e => e.resetToDefault(debugState.getState().user, n));
-          n(_$$F4.enqueue({
+          n(VisualBellActions.enqueue({
             message: getI18nString('lab.menu.changed_to_default', {
               count: r.length
             })
@@ -6193,7 +6193,7 @@ export function $$nN0(e) {
       name: 'sign-out',
       flags: IntegrationUtils.isGoogleClassroomIntegration() ? [] : ['!integration'],
       callback: (e, t, i) => {
-        IntegrationUtils.isGoogleClassroomIntegration() ? _$$m3({
+        IntegrationUtils.isGoogleClassroomIntegration() ? sendMessageToParent({
           action: 'logOut'
         }) : i(S5());
       },

@@ -1,5 +1,5 @@
 import { useState, useRef, useContext, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { GitReferenceType, DiffImpl, MergeStatus, PreviewStage, UndoActionStatus, StateTransitionResult, PluginModalType, AutosaveEventType } from "../figma_app/763686";
@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { rY, XA } from "../905/985490";
 import { cb, HJ, C2 } from "../905/760074";
@@ -374,7 +374,7 @@ export function $$G9(e, t, i, a, s, l, d) {
 export class $$z0 {
   constructor(e) {
     this.context = e;
-    this.eventId = _$$g();
+    this.eventId = generateUUIDv4();
     this.startTime = null;
   }
   commitStart() {

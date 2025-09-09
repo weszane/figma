@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { q5 } from "../figma_app/516028";

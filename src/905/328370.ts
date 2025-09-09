@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { eE } from "../figma_app/336853";
 class l extends PureComponent {

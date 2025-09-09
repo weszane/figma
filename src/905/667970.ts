@@ -1,10 +1,10 @@
 import { V } from "../905/749397";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
 import { qB } from "../905/862321";
 import { getI18nString } from "../905/303541";
-import { H } from "../905/301652";
+import { generateAnnomousPrefill } from "../905/301652";
 import { Ts, v$, GG, WY, OZ, fX, BZ, m9, bA, IY, LP, kQ, Re, i_, EM, ND, Qg, ET, kL, I$, QS, dl, NX } from "../905/194276";
 let u = "/files";
 let p = {
@@ -45,7 +45,7 @@ export function $$g2(e = p, t) {
   if (Ts.matches(t)) {
     let e;
     let i = getInitialOptions();
-    let o = parseQuery(Ay.location.search).signup_source;
+    let o = parseQuery(customHistory.location.search).signup_source;
     e = t.payload.redirectUrl ? t.payload.redirectUrl : o ? "/" : i.redirect_url || u;
     let c = i.phone_number ? getI18nString("auth.two-factor.sms-hint", {
       phoneNumber: i.phone_number
@@ -56,7 +56,7 @@ export function $$g2(e = p, t) {
       email: i.email || "",
       name: i.name || function () {
         try {
-          return localStorage.getItem(H());
+          return localStorage.getItem(generateAnnomousPrefill());
         } catch (e) {}
       }() || "",
       jobTitle: "",

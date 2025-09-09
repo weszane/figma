@@ -13,7 +13,7 @@ import { fu } from "../figma_app/831799";
 import { m0 } from "../figma_app/976749";
 import { wR } from "../figma_app/765689";
 import { yF } from "../figma_app/386952";
-import { lrh } from "../figma_app/43951";
+import { ViewerRestrictedDraftAccessLog } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { q as _$$q } from "../905/202542";
 import { defaultValidator } from "../figma_app/181241";
@@ -65,7 +65,7 @@ export function $$N0({
 }) {
   let n = Bj(500);
   let a = m0();
-  let l = Rs(lrh, {
+  let l = Rs(ViewerRestrictedDraftAccessLog, {
     fileKey: e.key,
     orgId: e.parentOrgId || null,
     teamId: e.teamId || null

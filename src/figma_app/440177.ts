@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useState, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Fo, Uz } from "../905/63728";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../figma_app/564183";
@@ -49,7 +49,7 @@ import { X as _$$X } from "../figma_app/934313";
 import { J as _$$J } from "../figma_app/785050";
 import { K as _$$K2 } from "../905/443068";
 import { A as _$$A } from "../905/24328";
-import { wr, Dh, Uc } from "../figma_app/741237";
+import { clearSelection, addToSelection, updateHoveredNode } from "../figma_app/741237";
 import { o as _$$o } from "../figma_app/254634";
 import { U as _$$U } from "../figma_app/914726";
 let I = "code_and_measurement_hint--icon--5-cVy";
@@ -471,15 +471,15 @@ let eA = () => {
   }, [e]);
 };
 let ex = e => useCallback(() => {
-  wr();
-  Dh([e]);
+  clearSelection();
+  addToSelection([e]);
 }, [e]);
 let eN = e => {
   let t = useCallback(() => {
-    Uc(e);
+    updateHoveredNode(e);
   }, [e]);
   let r = useCallback(() => {
-    Uc("");
+    updateHoveredNode("");
   }, []);
   return useMemo(() => ({
     onMouseOver: t,

@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { sha1HexFromBytes } from "../905/125019";
 import { A as _$$A } from "../905/920165";
 import { K } from "../905/443068";
 import { K as _$$K } from "../905/851274";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { _P } from "../figma_app/2590";
 import { X7 } from "../905/713167";
@@ -62,7 +62,7 @@ export function $$_0(e) {
     }) => {
       n ? (e.setGIFCoverFrame(t), i.current || (i.current = !0, d("scrub"))) : e.onGIFFrameChange(t);
     },
-    recordingKey: Pt(e, "gifFramePicker"),
+    recordingKey: generateRecordingKey(e, "gifFramePicker"),
     step: 1,
     value: e.animationFrame || 0
   });
@@ -88,7 +88,7 @@ function A({
       t(!1);
     },
     "aria-label": getI18nString("fullscreen.properties_panel.stop"),
-    recordingKey: Pt(r, "stopGIF"),
+    recordingKey: generateRecordingKey(r, "stopGIF"),
     children: jsx(d, {})
   }) : jsx(K, {
     disabled: i,
@@ -96,7 +96,7 @@ function A({
       t(!0);
     },
     "aria-label": getI18nString("fullscreen.properties_panel.play"),
-    recordingKey: Pt(r, "playGIF"),
+    recordingKey: generateRecordingKey(r, "playGIF"),
     children: jsx(_$$K, {})
   });
 }

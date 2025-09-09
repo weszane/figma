@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useLayoutEffect, useMemo, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { ZC } from "../figma_app/39751";
 import { Uz } from "../905/63728";
 import { NONE_SYMBOL } from "../905/992467";
@@ -25,8 +25,8 @@ import { E as _$$E } from "../905/881732";
 import { hL } from "../905/697795";
 import { dq } from "../905/845253";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
-import { FHz } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { FeedPostWithDetails } from "../figma_app/43951";
 import { M8 } from "../905/772425";
 import { Dr } from "../905/530837";
 import { Ib } from "../905/129884";
@@ -245,11 +245,11 @@ export let $$eb0 = registerModal(function (e) {
   }, [e.autofocusCommentInput]);
   let C = ZC(e.postUuid);
   useEffect(() => {
-    n && (e.inFileView || C === e.postUuid || "teamFeed" !== u.view || (_.current = !1, Ay.replace(Kc(n, {
+    n && (e.inFileView || C === e.postUuid || "teamFeed" !== u.view || (_.current = !1, customHistory.replace(Kc(n, {
       uuid: e.postUuid
     }))));
   }, [C, e.postUuid, n, e.inFileView, u]);
-  let b = Rs(FHz, {
+  let b = Rs(FeedPostWithDetails, {
     publicUuid: e.postUuid
   });
   useEffect(() => {
@@ -345,7 +345,7 @@ export let $$eb0 = registerModal(function (e) {
 }, _$$E, ModalSupportsBackground.YES);
 function eT(e) {
   let t = useDispatch();
-  let n = iZ();
+  let n = selectCurrentUser();
   let a = dq();
   let d = useCallback(() => {
     t(hideModal());

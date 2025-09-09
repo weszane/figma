@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, Component } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import o from "classnames";
 import { F2 } from "../905/826900";

@@ -1,15 +1,15 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { subscribeAndAwaitData } from "../905/553831";
 import { Wk, oA } from "../905/723791";
 import { getI18nString } from "../905/303541";
 import { DQ, Pw } from "../figma_app/121751";
 import { HZ, A5 } from "../figma_app/391338";
 import { FPlanLimitationType, FFileType, FPaymentHealthStatusType } from "../figma_app/191312";
-import { Aqu, yU5 } from "../figma_app/43951";
+import { TeamFileLimitsInfo, TeamFileLimitsInfoByProject } from "../figma_app/43951";
 import { XX, WW } from "../figma_app/345997";
 import { canAdminTeam } from "../figma_app/642025";
 import { t as _$$t2 } from "../905/504360";
@@ -28,7 +28,7 @@ export async function $$x10(e) {
     let n = await M4.fetchFile(e);
     if (!n?.trashed_at || !n?.team_id) return;
     t.push(n);
-    let i = (await subscribeAndAwaitData(Aqu, {
+    let i = (await subscribeAndAwaitData(TeamFileLimitsInfo, {
       teamId: n.team_id
     })).team;
     i?.id && (r[i.id] = i);
@@ -51,7 +51,7 @@ export async function $$C19(e) {
       folder_id: e.folderId
     };
     if (n && t.push(n), !e.folderId) return;
-    let i = await subscribeAndAwaitData(yU5, {
+    let i = await subscribeAndAwaitData(TeamFileLimitsInfoByProject, {
       projectId: e.folderId
     });
     let a = i.project?.team;
@@ -327,7 +327,7 @@ export function $$J6(e) {
 export function $$Z13(e, t, r) {
   return e ? Object.keys(_$$t2(t.byTeamId, e.id)).filter(e => r[e]) : [];
 }
-export let $$Q17 = xx(function (e, t, r) {
+export let $$Q17 = memoizeByArgs(function (e, t, r) {
   return e ? $$Z13(e, t, r).map(e => r[e]) : [];
 });
 export function $$ee20(e, t) {

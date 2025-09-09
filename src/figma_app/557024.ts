@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { t as _$$t } from "../905/150656";
@@ -20,8 +20,8 @@ import { fu } from "../figma_app/831799";
 import { Ns, ci } from "../905/760074";
 import { $n } from "../905/930279";
 import { sS, tB } from "../figma_app/516028";
-import { iZ } from "../905/372672";
-import { op7 } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { RepoFiles } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
@@ -58,7 +58,7 @@ function k(e) {
   };
 }
 export function $$M0(e) {
-  let t = Rs(op7, {
+  let t = Rs(RepoFiles, {
     repoId: e
   }, {
     enabled: null !== e
@@ -117,7 +117,7 @@ function F() {
   });
   let L = useSelector(sS);
   let k = useSelector(tB);
-  let F = iZ();
+  let F = selectCurrentUser();
   let j = $n();
   let U = $$M0(k?.fileRepoId || "");
   let B = useMemo(() => "loaded" === U.status ? U.data.repo : null, [U]);

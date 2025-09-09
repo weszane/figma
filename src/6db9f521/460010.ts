@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useState, useCallback, useEffect, useMemo, useImperativeHandle, createElement, memo, useLayoutEffect, createRef, useContext, useId } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { AppStateTsApi, Command, AnimationTriggerType, SlideAnimation, UserActionState, documentStateTsApi, SlidesObjectAnimationBindings, IgnoreSelectionUIHidingBindings, SlideConstantsCppBindings, EasingType, SlideTransitionType, AnimationEventType, ItemType, ThemeColorStatus, ThemeMode, Fullscreen, SourceType, SelfDesignType, StateHierarchy, ImageToolsBindings, GeometricValues, NodePropertyCategory, DesignWorkspace, ViewType, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Hm, Bs, AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
 import { T as _$$T } from "../905/858738";
@@ -44,7 +44,7 @@ import { l as _$$l2 } from "../905/479687";
 import { g as _$$g } from "../905/687265";
 import { oW as _$$oW } from "../905/675859";
 import { fq, Jn, NG, m4, S7 } from "../7222/396421";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { B4 } from "../figma_app/385215";
 import { WN } from "../figma_app/638601";
 import { k as _$$k3 } from "../figma_app/564183";
@@ -67,7 +67,7 @@ import { Z as _$$Z } from "../905/829242";
 import { Ay as _$$Ay, c6 } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
 import { debugState } from "../905/407919";
-import { zX, Rw } from "../905/576487";
+import { VisualBellIcon, VisualBellType } from "../905/576487";
 import { permissionScopeHandler as _$$l3, scopeAwareFunction as _$$nc } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { LOADING_STATUS } from "../905/989992";
@@ -83,7 +83,7 @@ import { Q as _$$Q2, ic as _$$ic } from "../figma_app/688398";
 import { A as _$$A2 } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 import { sZ as _$$sZ } from "../905/845253";
-import { iZ as _$$iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { ol as _$$ol } from "../figma_app/598018";
 import { D as _$$D2 } from "../7222/938408";
 import { nv, Ci, qm, Ji } from "../figma_app/553488";
@@ -114,11 +114,11 @@ import { Gu } from "../figma_app/262240";
 import { K as _$$K3 } from "../905/443068";
 import { z as _$$z } from "../940032c6/265110";
 import { defaultSessionLocalIDString, isValidSessionLocalID, parseSessionLocalID, sessionLocalIDToString } from "../905/871411";
-import { Pt, aH as _$$aH, of as _$$of } from "../figma_app/806412";
+import { generateRecordingKey, SKIP_RECORDING, useHandleFocusEvent, useHandleGenericEvent } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { logError } from "../905/714362";
 import { s as _$$s5 } from "../cssbuilder/589278";
-import { Uc, tJ as _$$tJ } from "../figma_app/741237";
+import { updateHoveredNode, replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue, MIXED_MARKER, valueOrFallback, normalizeValue } from "../905/216495";
 import { A5, lJ as _$$lJ, kl, pw, DQ, Gt, fC } from "../905/275640";
 import { Fk, wA as _$$wA } from "../figma_app/167249";
@@ -231,7 +231,7 @@ import { E as _$$E4 } from "../vendor/464923";
 import { D as _$$D4 } from "../vendor/212109";
 import { $ as _$$$ } from "../vendor/909072";
 import { m as _$$m3 } from "../2b17fec9/628878";
-import { useHandleValueEvent, useHandleGenericEvent } from "../figma_app/878298";
+// import { useHandleValueEvent, useHandleGenericEvent } from "../figma_app/878298";
 import { A as _$$A6 } from "../2b17fec9/467175";
 import { K as _$$K4 } from "../6388/341838";
 import { Ah } from "../6388/574648";
@@ -350,12 +350,12 @@ import { u3 } from "../figma_app/152690";
 import { MH } from "../figma_app/394327";
 import { N as _$$N4 } from "../2b17fec9/152433";
 import { r as _$$r5 } from "../905/571562";
-import { n3 as _$$n5, IA as _$$IA } from "../905/859698";
+import { n3 as _$$n5, VariableStyleId as _$$IA } from "../905/859698";
 import { waitForAnimationFrame } from "../905/236856";
 import { ZC } from "../figma_app/39751";
 import { XE, Uv, bS } from "../figma_app/91703";
 import { TK } from "../905/129660";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Xo as _$$Xo, kO } from "../figma_app/687767";
 import { KL, Z3 as _$$Z7, oS as _$$oS } from "../figma_app/450967";
 import { it as _$$it } from "../figma_app/587612";
@@ -391,7 +391,7 @@ import { A as _$$A1 } from "../svg/392615";
 import { a as _$$a4 } from "../905/558168";
 import { Qr } from "../figma_app/98483";
 import { E as _$$E6 } from "../905/235326";
-import { Ay as _$$Ay4 } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { F as _$$F3 } from "../897/590880";
 import { Wd } from "../441/430710";
 import { e as _$$e6 } from "../6401/216695";
@@ -456,7 +456,7 @@ let X = forwardRef(function (e, t) {
     onFinished,
     smoothScroll
   } = e;
-  let c = k9(() => items, [items]);
+  let c = useMemoStable(() => items, [items]);
   let u = useRef(null);
   let p = useRef([]);
   let x = function (e) {
@@ -927,10 +927,10 @@ function eE() {
 let eP = "slides-outline-to-deck-loading";
 let eD = "slides-outline-to-deck-completed";
 function eR(e, t, i) {
-  debugState.dispatch(_$$F.dequeue({
+  debugState.dispatch(VisualBellActions.dequeue({
     matchType: eP
   }));
-  debugState.dispatch(_$$F.enqueue({
+  debugState.dispatch(VisualBellActions.enqueue({
     message: e,
     type: i,
     icon: t,
@@ -938,10 +938,10 @@ function eR(e, t, i) {
   }));
 }
 function eM(e) {
-  eR(e, zX.EXCLAMATION, "slides-outline-to-deck-canceled");
+  eR(e, VisualBellIcon.EXCLAMATION, "slides-outline-to-deck-canceled");
 }
 function eF(e) {
-  eR(e, zX.EXCLAMATION, "slides-outline-to-deck-error");
+  eR(e, VisualBellIcon.EXCLAMATION, "slides-outline-to-deck-error");
 }
 let eU = async ({
   params: e,
@@ -1077,14 +1077,14 @@ let tt = async ({
     }));
     _ = "Generating slides from your outline";
     g = () => _$$cT(JT.SLIDES_OUTLINE_TO_DECK);
-    debugState.dispatch(_$$F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       message: _,
       type: eP,
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       button: {
         text: "Stop",
         action: () => {
-          debugState.dispatch(_$$F.dequeue({
+          debugState.dispatch(VisualBellActions.dequeue({
             matchType: eP
           }));
           g();
@@ -1196,14 +1196,14 @@ let tt = async ({
     }
     await _$$Z(Promise.all(f), e.signal);
     fullscreenValue.commit();
-    e.signal.aborted || (debugState.dispatch(_$$F.dequeue({
+    e.signal.aborted || (debugState.dispatch(VisualBellActions.dequeue({
       matchType: eP
-    })), debugState.dispatch(_$$F.enqueue({
+    })), debugState.dispatch(VisualBellActions.enqueue({
       type: eD,
-      messageComponentKey: Rw.SLIDES_OUTLINE_TO_DECK_FEEDBACK,
-      icon: zX.GREEN_CHECK,
+      messageComponentKey: VisualBellType.SLIDES_OUTLINE_TO_DECK_FEEDBACK,
+      icon: VisualBellIcon.GREEN_CHECK,
       onDismiss: () => {
-        debugState.dispatch(_$$F.dequeue({
+        debugState.dispatch(VisualBellActions.dequeue({
           matchType: eD
         }));
       },
@@ -2417,7 +2417,7 @@ function ip() {
       finish
     } = JY();
     let d = function () {
-      let e = _$$iZ();
+      let e = selectCurrentUser();
       let t = _$$sZ();
       let i = _$$ol();
       return {
@@ -3232,7 +3232,7 @@ function n$({
   let [L] = _$$A3(i || n, 150);
   let P = !L && (f || o);
   useEffect(() => {
-    E && Uc(f ? E : defaultSessionLocalIDString);
+    E && updateHoveredNode(f ? E : defaultSessionLocalIDString);
   }, [f, E]);
   return jsxs("div", {
     className: _$$s5.flex.wFull.py4.$,
@@ -3246,7 +3246,7 @@ function n$({
       onMouseMove: x,
       onMouseDown: p,
       onMouseUp: h,
-      recordingKey: Pt(_, "dragHandle"),
+      recordingKey: generateRecordingKey(_, "dragHandle"),
       children: jsx(_$$B, {})
     }), jsx(ExpandableSection, {
       expanded: o,
@@ -3266,8 +3266,8 @@ function n$({
         }));
       },
       onMouseDown: p,
-      onMouseEnter: () => (j(!0), _$$aH),
-      onMouseLeave: () => (j(!1), _$$aH),
+      onMouseEnter: () => (j(!0), SKIP_RECORDING),
+      onMouseLeave: () => (j(!1), SKIP_RECORDING),
       onMouseMove: x,
       onMouseUp: h,
       recordingKey: _,
@@ -3284,17 +3284,17 @@ function n$({
       children: jsxs("div", {
         className: _$$s5.flex.flexColumn.px16.py8.$,
         children: [jsx(nR, {
-          recordingKey: Pt(_, "animationType")
+          recordingKey: generateRecordingKey(_, "animationType")
         }), jsx(nj, {
-          recordingKey: Pt(_, "animationDuration")
+          recordingKey: generateRecordingKey(_, "animationDuration")
         }), jsx(i8, {
           hideAfterPreviousOption: 0 === e.interactionIndex && e.startCondition === AnimationTriggerType.TRIGGER,
           startCondition: e.startCondition,
           onChange: m,
-          recordingKey: Pt(_, "animationTrigger"),
+          recordingKey: generateRecordingKey(_, "animationTrigger"),
           nodeId: E
         }), jsx(nS, {
-          recordingKey: Pt(_, "animationPhase")
+          recordingKey: generateRecordingKey(_, "animationPhase")
         })]
       })
     })]
@@ -3329,7 +3329,7 @@ function nB({
     }) : T && (E({
       type: "SET_OBJECT_ANIMATION_SELECTION",
       selectedNodeIds: [T]
-    }), _$$tJ([T]), fullscreenValue.commit());
+    }), replaceSelection([T]), fullscreenValue.commit());
   }, [j, E, T]);
   useEffect(() => {
     b(o);
@@ -3345,7 +3345,7 @@ function nB({
   let [P] = _$$A3(i || n, 150);
   let D = !P && (g || j);
   useEffect(() => {
-    T && Uc(g ? T : defaultSessionLocalIDString);
+    T && updateHoveredNode(g ? T : defaultSessionLocalIDString);
   }, [g, T]);
   let {
     manager,
@@ -3363,7 +3363,7 @@ function nB({
       onMouseMove: p,
       onMouseDown: u,
       onMouseUp: x,
-      recordingKey: Pt(m, "dragHandle"),
+      recordingKey: generateRecordingKey(m, "dragHandle"),
       children: jsx(_$$B, {})
     }), jsxs("div", {
       className: iY,
@@ -3407,17 +3407,17 @@ function nB({
           children: jsxs("div", {
             className: _$$s5.flex.flexColumn.px16.py8.$,
             children: [jsx(nR, {
-              recordingKey: Pt(m, "animationType")
+              recordingKey: generateRecordingKey(m, "animationType")
             }), jsx(nj, {
-              recordingKey: Pt(m, "animationDuration")
+              recordingKey: generateRecordingKey(m, "animationDuration")
             }), jsx(i8, {
               hideAfterPreviousOption: 0 === e.interactionIndex && e.startCondition === AnimationTriggerType.TRIGGER,
               startCondition: e.startCondition,
               onChange: h,
-              recordingKey: Pt(m, "animationTrigger"),
+              recordingKey: generateRecordingKey(m, "animationTrigger"),
               nodeId: T
             }), jsx(nS, {
-              recordingKey: Pt(m, "animationPhase")
+              recordingKey: generateRecordingKey(m, "animationPhase")
             })]
           })
         })]
@@ -3439,7 +3439,7 @@ function nz({
       children: () => jsx(nH, {
         item: e,
         slideId: t,
-        recordingKey: Pt(l, "deleteButton")
+        recordingKey: generateRecordingKey(l, "deleteButton")
       })
     }), jsx(VF, {
       isVisible: !n,
@@ -3546,7 +3546,7 @@ function nq({
 }) {
   return jsx(bL, {
     onClose: e => {
-      "outside" !== e.source && _$$tJ([]);
+      "outside" !== e.source && replaceSelection([]);
     },
     width: 208,
     defaultPosition: n,
@@ -3559,16 +3559,16 @@ function nq({
         children: jsxs("div", {
           className: _$$s5.flex.flexColumn.$,
           children: [jsx(nR, {
-            recordingKey: Pt(i, "animationType")
+            recordingKey: generateRecordingKey(i, "animationType")
           }), jsx(nj, {
-            recordingKey: Pt(i, "animationDuration")
+            recordingKey: generateRecordingKey(i, "animationDuration")
           }), jsx(i8, {
             hideAfterPreviousOption: !1,
             startCondition: e,
             onChange: t,
-            recordingKey: Pt(i, "animationTrigger")
+            recordingKey: generateRecordingKey(i, "animationTrigger")
           }), jsx(nS, {
-            recordingKey: Pt(i, "animationPhase")
+            recordingKey: generateRecordingKey(i, "animationPhase")
           })]
         })
       })]
@@ -3587,8 +3587,8 @@ function nW({
     let i = t ? e.get(t) : null;
     return i?.objectAnimations;
   }, d);
-  let u = k9(() => c ? kP.fromPrototypeInteractions(c) : [], [c]);
-  let p = k9(() => {
+  let u = useMemoStable(() => c ? kP.fromPrototypeInteractions(c) : [], [c]);
+  let p = useMemoStable(() => {
     let e = {};
     u.forEach(t => {
       if (uc(t)) {
@@ -3744,14 +3744,14 @@ function nW({
                 }) : x && (o({
                   type: "SET_OBJECT_ANIMATION_SELECTION",
                   selectedNodeIds: [x]
-                }), _$$tJ([x]), fullscreenValue.commit());
+                }), replaceSelection([x]), fullscreenValue.commit());
               },
               onMouseDown: e => {
                 2 !== e.button && s(e);
               },
               onMouseMove: a,
               onMouseUp: c,
-              recordingKey: Pt(e, "actionsList", i),
+              recordingKey: generateRecordingKey(e, "actionsList", i),
               slideId: d
             }, i), v === i && jsx("div", {
               className: "slides_object_animations_panel--dragIndicatorInto--65j3O"
@@ -3772,7 +3772,7 @@ function nW({
         N(g, e);
         i2(O, u, e, _);
       },
-      recordingKey: Pt(e, "multiEditModal"),
+      recordingKey: generateRecordingKey(e, "multiEditModal"),
       startCondition: g,
       defaultPosition: R
     })]
@@ -3833,7 +3833,7 @@ function nQ({
       "data-tooltip-type": Ib.TEXT
     },
     onClick: _$$nc.user("delete-selected-slide-object-animations", o),
-    recordingKey: Pt(n, "bulkDeleteButton"),
+    recordingKey: generateRecordingKey(n, "bulkDeleteButton"),
     children: jsx(_$$z, {})
   });
 }
@@ -3856,7 +3856,7 @@ function nX({
       "data-tooltip-type": Ib.TEXT
     },
     onClick: s,
-    recordingKey: Pt(t, "playButton"),
+    recordingKey: generateRecordingKey(t, "playButton"),
     children: jsx(iT, {})
   });
 }
@@ -3883,7 +3883,7 @@ function nZ({
     onClick: _$$nc.user("add-slide-object-animation", () => {
       fullscreenValue.triggerAction("add-slide-object-animation");
     }),
-    recordingKey: Pt(e, "plusButton"),
+    recordingKey: generateRecordingKey(e, "plusButton"),
     children: jsx(_$$x2, {})
   });
 }
@@ -5208,7 +5208,7 @@ function sP({
           "data-tooltip": getI18nString("slides.properties_panel.slide_transitions.delete_button.tooltip"),
           "data-tooltip-type": Ib.TEXT
         },
-        recordingKey: Pt(t, "deleteButton"),
+        recordingKey: generateRecordingKey(t, "deleteButton"),
         children: jsx(_$$z, {})
       })
     })
@@ -5389,7 +5389,7 @@ function sU({
         input: jsx(sN, {
           behavior: e.behavior,
           onChange: o,
-          recordingKey: Pt(i, "styleControl")
+          recordingKey: generateRecordingKey(i, "styleControl")
         })
       }), _ && jsx(_$$E5, {
         name: "slide_transition_direction",
@@ -5398,7 +5398,7 @@ function sU({
           input: jsx(_$$sP, {
             onChange: d,
             property: e.direction ?? null,
-            recordingKey: Pt(i, "directionControl")
+            recordingKey: generateRecordingKey(i, "directionControl")
           })
         })
       }), g && jsxs(Fragment, {
@@ -5407,7 +5407,7 @@ function sU({
           input: jsx(sT, {
             easingType: e.easingType,
             onChange: x,
-            recordingKey: Pt(i, "easingControl")
+            recordingKey: generateRecordingKey(i, "easingControl")
           })
         }), jsx(LabelInputRow, {
           labelTx: renderI18nText("slides.properties_panel.slide_transition.duration"),
@@ -5415,7 +5415,7 @@ function sU({
             duration: e.duration,
             easingType: e.easingType,
             onChange: p,
-            recordingKey: Pt(i, "durationControl")
+            recordingKey: generateRecordingKey(i, "durationControl")
           })
         })]
       })]
@@ -5454,11 +5454,11 @@ function sU({
               AppStateTsApi?.slideAnimationBindings().setSlideTransitionForAll(t);
               fullscreenValue.commit();
             });
-            l(_$$F.enqueue({
+            l(VisualBellActions.enqueue({
               message: getI18nString("slides.properties_panel.slide_transition.apply_all_slides_confirmation")
             }));
           },
-          recordingKey: Pt(i, "applyToAllButton"),
+          recordingKey: generateRecordingKey(i, "applyToAllButton"),
           children: renderI18nText("slides.properties_panel.slide_transition.apply_to_all")
         })
       })]
@@ -5514,7 +5514,7 @@ function as({
         children: jsx(IK, {
           onClick: () => {
             fullscreenValue.triggerActionInUserEditScope("insert-slide-numbers-all-slides");
-            t(_$$F.enqueue({
+            t(VisualBellActions.enqueue({
               message: getI18nString("slides.properties_panel.slide_number.insert_all_slides_confirmation")
             }));
           },
@@ -5544,13 +5544,13 @@ function aa({
         onChange: e => {
           "SLIDE" === n && "SUBSECTION" === e ? l("SUBSECTION") : "SUBSECTION" === n && "SLIDE" === e ? l("SLIDE") : "TOTAL_WITHIN_DECK" === n && "SUBSECTION" === e ? l("TOTAL_WITHIN_SECTION") : "TOTAL_WITHIN_SECTION" === n && "SLIDE" === e ? l("TOTAL_WITHIN_DECK") : l("SLIDE");
         },
-        recordingKey: Pt(e, "slideNumberDropdown"),
+        recordingKey: generateRecordingKey(e, "slideNumberDropdown"),
         children: [jsx(_$$c$, {
           value: "SLIDE",
-          recordingKey: Pt(e, "slideNumberSlide")
+          recordingKey: generateRecordingKey(e, "slideNumberSlide")
         }), jsx(_$$c$, {
           value: "SUBSECTION",
-          recordingKey: Pt(e, "slideNumberSubsection")
+          recordingKey: generateRecordingKey(e, "slideNumberSubsection")
         })]
       })
     })
@@ -5645,19 +5645,19 @@ function ac({
         formatter: u,
         property: o || "/",
         onChange: e => d(e),
-        recordingKey: Pt(e, "slideNumberSeparatorDropdown"),
+        recordingKey: generateRecordingKey(e, "slideNumberSeparatorDropdown"),
         children: [jsx(_$$c$, {
           value: "of",
-          recordingKey: Pt(e, "slideNumberSeparatorOf")
+          recordingKey: generateRecordingKey(e, "slideNumberSeparatorOf")
         }), jsx(_$$c$, {
           value: "-",
-          recordingKey: Pt(e, "slideNumberSeparatorDash")
+          recordingKey: generateRecordingKey(e, "slideNumberSeparatorDash")
         }), jsx(_$$c$, {
           value: "\u2022",
-          recordingKey: Pt(e, "slideNumberSeparatorDot")
+          recordingKey: generateRecordingKey(e, "slideNumberSeparatorDot")
         }), jsx(_$$c$, {
           value: "/",
-          recordingKey: Pt(e, "slideNumberSeparatorSlash")
+          recordingKey: generateRecordingKey(e, "slideNumberSeparatorSlash")
         })]
       })
     })
@@ -5686,11 +5686,11 @@ function ap({
           formatter: _$$lR,
           dispatch: t,
           dropdownShown: i,
-          recordingKey: Pt(e, "codeBlockLanguage"),
+          recordingKey: generateRecordingKey(e, "codeBlockLanguage"),
           children: _$$ie2.map(t => jsx(_$$c$, {
             value: t,
             ariaLabel: _$$lR.format(t),
-            recordingKey: Pt(e, "codeBlockLanguage", t)
+            recordingKey: generateRecordingKey(e, "codeBlockLanguage", t)
           }, t))
         })
       }), a && jsx(_$$iz, {
@@ -5703,11 +5703,11 @@ function ap({
           formatter: A$,
           dispatch: t,
           dropdownShown: i,
-          recordingKey: Pt(e, "codeBlockTheme"),
+          recordingKey: generateRecordingKey(e, "codeBlockTheme"),
           children: pd.map(t => jsx(_$$c$, {
             value: t,
             ariaLabel: A$.format(t),
-            recordingKey: Pt(e, "codeBlockTheme", t)
+            recordingKey: generateRecordingKey(e, "codeBlockTheme", t)
           }, t))
         })
       })]
@@ -5731,9 +5731,9 @@ function am({
     let l = new Set(r.variableIDs);
     n && (n = n.filter(e => l.has(e)));
     let s = AppStateTsApi?.slideThemeLibBindings().swapSelectedSlidesToNewTheme(e, n || []);
-    void 0 !== s && (s === ThemeColorStatus.NO_THEME_COLORS ? t(_$$F.enqueue({
+    void 0 !== s && (s === ThemeColorStatus.NO_THEME_COLORS ? t(VisualBellActions.enqueue({
       message: getI18nString("slides.properties_panel.theme.shuffle_no_change_visual_bell")
-    })) : s === ThemeColorStatus.NONE_AVAILABLE && t(_$$F.enqueue({
+    })) : s === ThemeColorStatus.NONE_AVAILABLE && t(VisualBellActions.enqueue({
       message: getI18nString("slides.properties_panel.theme.no_swap_available")
     })), d && analyticsEventManager.trackDefinedEvent("slides.editor.theme_swap", {
       fromThemeId: isInvalidValue(i) ? "Mixed" : i,
@@ -5760,7 +5760,7 @@ function am({
           selectedThemeId: i ?? n,
           onChange: x,
           onCreateNewTheme: h,
-          recordingKey: Pt(e, "themeDropdown"),
+          recordingKey: generateRecordingKey(e, "themeDropdown"),
           allowShuffle: !0,
           allowEditTheme: !0
         })
@@ -6341,7 +6341,7 @@ function oN({
     },
     shouldUseEyedropperStyleCreationFlow: !1
   });
-  let j = _$$of(Pt("createStyleModal"), "submit", () => {
+  let j = useHandleFocusEvent(generateRecordingKey("createStyleModal"), "submit", () => {
     let t = createStyle();
     o(XE());
     o(Uv());
@@ -6388,12 +6388,12 @@ function oN({
               children: [jsx($n, {
                 variant: "secondary",
                 onClick: () => h(!x),
-                recordingKey: Pt(t, "showHideOptionsButton"),
+                recordingKey: generateRecordingKey(t, "showHideOptionsButton"),
                 children: x ? renderI18nText("design_systems.create_style.hide_options") : renderI18nText("design_systems.create_style.show_more_options")
               }), jsx($n, {
                 onClick: j,
                 disabled: !styleRef,
-                recordingKey: Pt(t, "createStyleButton"),
+                recordingKey: generateRecordingKey(t, "createStyleButton"),
                 children: renderI18nText("design_systems.create_style.create_style")
               })]
             })
@@ -6471,7 +6471,7 @@ function oU({
           }
         },
         "aria-label": getI18nString("fullscreen.properties_panel.tooltip_applyStyles"),
-        recordingKey: Pt(l, "showStylesButton"),
+        recordingKey: generateRecordingKey(l, "showStylesButton"),
         children: jsx(oM, {})
       })
     })]
@@ -6542,7 +6542,7 @@ function o$({
             }
           },
           disabled: !y,
-          recordingKey: Pt(o, "addStyleButton"),
+          recordingKey: generateRecordingKey(o, "addStyleButton"),
           htmlAttributes: {
             "data-tooltip": getI18nString("slides.properties_panel.text_style.create_new_style"),
             "data-tooltip-type": Ib.TEXT
@@ -6583,7 +6583,7 @@ function o$({
         className: _$$s5.p8.bt1.bSolid.colorBorder.$,
         children: jsx(oH, {
           closePicker: n,
-          recordingKey: Pt(o, "custom")
+          recordingKey: generateRecordingKey(o, "custom")
         })
       })]
     })
@@ -6643,7 +6643,7 @@ function oz({
     onMouseMove: u,
     onMouseEnter: () => g(!0),
     onMouseLeave: () => g(!1),
-    recordingKey: Pt(h, e.name),
+    recordingKey: generateRecordingKey(h, e.name),
     children: [jsx("span", {
       className: iG()(_$$s5.eventsNone.$, t ? _$$s5.visible.$ : _$$s5.invisible.$),
       children: jsx(_$$l2, {})
@@ -6677,7 +6677,7 @@ function oz({
           }
           t?.stopPropagation();
         },
-        recordingKey: Pt(h, e.name, "editButton"),
+        recordingKey: generateRecordingKey(h, e.name, "editButton"),
         "aria-expanded": b,
         children: jsx(_$$A9, {})
       })
@@ -6725,7 +6725,7 @@ function oH({
     }), jsxs(D8, {
       className: oV,
       onClick: e,
-      recordingKey: Pt(t, "custom"),
+      recordingKey: generateRecordingKey(t, "custom"),
       children: [jsx("div", {
         className: _$$s5.pr8.$,
         children: jsx(In, {
@@ -6788,7 +6788,7 @@ function oq({
       appendedClassName: "slides_text_style_row--textStyleRow--FE95p"
     }), jsx(oN, {
       closePicker: x,
-      recordingKey: Pt(a, "createTextStyleModal")
+      recordingKey: generateRecordingKey(a, "createTextStyleModal")
     })]
   });
 }
@@ -6857,7 +6857,7 @@ function oQ({
   let s = Fk((e, t) => e.get(t)?.name ?? "", n);
   let [a, o] = useAtomValueAndSetter(q0);
   let d = a[n];
-  let c = k9(() => ({
+  let c = useMemoStable(() => ({
     color: t,
     minHeight: KL.MIN_THEME_TEXT_STYLE_PREVIEW_HEIGHT,
     maxHeight: KL.MAX_THEME_TEXT_STYLE_PREVIEW_HEIGHT
@@ -6910,14 +6910,14 @@ function oX({
       lineHeight: t.lineHeightPx ?? 0
     };
   });
-  let u = k9(() => ({
+  let u = useMemoStable(() => ({
     name: s,
     fontFamily,
     fontStyle,
     fontSize,
     lineHeight
   }), [s, fontFamily, fontStyle, fontSize, lineHeight]);
-  let p = k9(() => ({
+  let p = useMemoStable(() => ({
     color: t,
     minHeight: KL.MIN_THEME_TEXT_STYLE_PREVIEW_HEIGHT,
     maxHeight: KL.MAX_THEME_TEXT_STYLE_PREVIEW_HEIGHT
@@ -6994,7 +6994,7 @@ function o0({
     })), Fullscreen?.selectStyleByGuid(e.node_id), await waitForAnimationFrame(), fullscreenValue.updateSelectionProperties({
       fontFamily
     }, {
-      shouldCommit: zk.NO,
+      shouldCommit: yesNoTrackingEnum.NO,
       editScopeType: SourceType.USER
     }), await waitForAnimationFrame(), fullscreenValue.updateSelectionProperties({
       fontStyle,
@@ -7002,14 +7002,14 @@ function o0({
       lineHeight: TK(x, lineHeight),
       letterSpacing
     }, {
-      shouldCommit: zk.NO,
+      shouldCommit: yesNoTrackingEnum.NO,
       editScopeType: SourceType.USER
     }), Fullscreen?.selectStyle(_$$n5.INVALID, _$$IA.INVALID), fullscreenValue.triggerAction("commit"));
   };
   return jsx($n, {
     variant: "primary",
     onClick: h,
-    recordingKey: Pt(t, "saveButton"),
+    recordingKey: generateRecordingKey(t, "saveButton"),
     children: renderI18nText("slides.properties_panel.text_style.save_button")
   });
 }
@@ -7050,7 +7050,7 @@ function o1({
         inheritTextStyleKey,
         styleIdForText,
         previouslyAppliedStyle: x,
-        recordingKey: Pt(e, "textStyle")
+        recordingKey: generateRecordingKey(e, "textStyle")
       }), u && jsx(o5, {
         fonts: a,
         versionsForStyles: o,
@@ -7065,7 +7065,7 @@ function o1({
         input: jsx(IK, {
           variant: "secondary",
           onClick: () => p(!0),
-          recordingKey: Pt(e, "showDetails"),
+          recordingKey: generateRecordingKey(e, "showDetails"),
           children: renderI18nText("slides.properties_panel.text.show_details")
         }),
         label: null
@@ -7127,7 +7127,7 @@ function o5({
       });
     },
     onDetachVariableClick: clearVariableConsumption,
-    recordingKey: Pt(n, "fontFamily"),
+    recordingKey: generateRecordingKey(n, "fontFamily"),
     showPlaceholder: !1,
     versionsForStyles: t
   }) : null;
@@ -7155,7 +7155,7 @@ function o5({
           showTypeVariablePicker: _$$lQ
         });
       },
-      recordingKey: Pt(n, "fontStyle"),
+      recordingKey: generateRecordingKey(n, "fontStyle"),
       showMissingIcon: !1,
       versionsForStyles: t
     })
@@ -7169,7 +7169,7 @@ function o5({
       disabled: u,
       editingStyleGuid: void 0,
       hideVariableOptions: !0,
-      recordingKey: Pt(n, "fontSize")
+      recordingKey: generateRecordingKey(n, "fontSize")
     })
   }) : null;
   let C = createRef();
@@ -7181,7 +7181,7 @@ function o5({
     rowElementRef: C,
     editingStyleGuid: void 0,
     disableVariables: !0,
-    recordingKey: Pt(n, "lineHeight")
+    recordingKey: generateRecordingKey(n, "lineHeight")
   }) : null;
   let O = _ ? jsx(_$$I, {
     bigNudgeAmount,
@@ -7191,7 +7191,7 @@ function o5({
     editingStyleGuid: void 0,
     letterSpacing: _,
     onChange: i,
-    recordingKey: Pt(n, "letterSpacing"),
+    recordingKey: generateRecordingKey(n, "letterSpacing"),
     rowElementRef: C,
     smallNudgeAmount
   }) : null;
@@ -7249,7 +7249,7 @@ function o2({
         }),
         tooltip: getI18nString("slides.properties_panel.text.bold"),
         trackingName: "slides_bold_button",
-        recordingKey: Pt(t, "bold")
+        recordingKey: generateRecordingKey(t, "bold")
       }), jsx(o6, {
         selected: isItalic,
         disabled: u,
@@ -7261,7 +7261,7 @@ function o2({
         }),
         tooltip: getI18nString("slides.properties_panel.text.italic"),
         trackingName: "slides_italic_button",
-        recordingKey: Pt(t, "italic")
+        recordingKey: generateRecordingKey(t, "italic")
       }), jsx(o6, {
         selected: isUnderline,
         disabled: !1,
@@ -7273,7 +7273,7 @@ function o2({
         }),
         tooltip: getI18nString("slides.properties_panel.text.underline"),
         trackingName: "slides_underline_button",
-        recordingKey: Pt(t, "underline")
+        recordingKey: generateRecordingKey(t, "underline")
       }), jsx(o6, {
         selected: isUnorderedList,
         disabled: !1,
@@ -7285,7 +7285,7 @@ function o2({
         }),
         tooltip: getI18nString("slides.properties_panel.text.unordered_list"),
         trackingName: "slides_unordered_list_button",
-        recordingKey: Pt(t, "unorderedList")
+        recordingKey: generateRecordingKey(t, "unorderedList")
       })]
     })
   });
@@ -7328,7 +7328,7 @@ function o8({
     leftInput: jsx(_$$E5, {
       name: "slides_text_align_horizontal",
       children: jsx(jw, {
-        recordingKey: Pt(e, "textAlignHorizontal")
+        recordingKey: generateRecordingKey(e, "textAlignHorizontal")
       })
     }),
     rightLabel: null,
@@ -7336,7 +7336,7 @@ function o8({
       name: "slides_text_align_vertical",
       children: jsx(Ln, {
         textAlignVertical: t,
-        recordingKey: Pt(e, "textAlignVertical")
+        recordingKey: generateRecordingKey(e, "textAlignVertical")
       })
     })
   });
@@ -7633,7 +7633,7 @@ function df({
       }
     }), []);
     let [u, p] = useState(() => dj(e, s, d));
-    let x = k9(() => o ? dy : dg, [o]);
+    let x = useMemoStable(() => o ? dy : dg, [o]);
     f4(() => {
       p(dj(e, s, d));
     });
@@ -7738,7 +7738,7 @@ function db({
     legend: renderI18nText("slides.properties_panel.border_panel.legend"),
     value: e,
     onChange: n,
-    recordingKey: Pt(l, "borderStyle"),
+    recordingKey: generateRecordingKey(l, "borderStyle"),
     children: t.map(e => jsx(_$$c$2, {
       value: e,
       icon: i[e].icon,
@@ -7765,7 +7765,7 @@ function dE({
     inheritStyleName: n,
     inheritStyleId: t,
     pickerId: `${Yr}-border`,
-    recordingKey: Pt(s, "color"),
+    recordingKey: generateRecordingKey(s, "color"),
     hideCustomColorPickerFillTypeToggle: !1
   });
 }
@@ -7796,7 +7796,7 @@ function dv({
       max: 50,
       min: 1,
       onValueChange: a,
-      recordingKey: Pt(o, "borderWidth"),
+      recordingKey: generateRecordingKey(o, "borderWidth"),
       smallNudgeAmount,
       targetDomNode: l,
       tooltipForScreenReadersOnly: !0,
@@ -7805,7 +7805,7 @@ function dv({
       children: i.map(e => jsx(dm, {
         value: e,
         disabled: !!n,
-        recordingKey: Pt(o, "borderWidth", "select", e),
+        recordingKey: generateRecordingKey(o, "borderWidth", "select", e),
         children: e
       }, `border-width-${e}`))
     })
@@ -7892,7 +7892,7 @@ function dO({
         icon: m,
         id: e,
         onValueChange: h,
-        recordingKey: Pt(t, "cornerRadius"),
+        recordingKey: generateRecordingKey(t, "cornerRadius"),
         scrubbingDisabled: 1e6 === p,
         targetDomNode: i,
         tooltipForScreenReadersOnly: !1,
@@ -7900,11 +7900,11 @@ function dO({
         willShowDropdown: () => (fullscreenValue.commit(), Promise.resolve()),
         children: [dk.map(e => jsx(dN, {
           value: e,
-          recordingKey: Pt(t, "cornerRadius", "select", e),
+          recordingKey: generateRecordingKey(t, "cornerRadius", "select", e),
           children: e
         }, `corner-radius-${e}`)), jsx(_$$sK, {}, "divider"), jsx(dN, {
           value: 1e6,
-          recordingKey: Pt(t, "cornerRadius", "select", "circular"),
+          recordingKey: generateRecordingKey(t, "cornerRadius", "select", "circular"),
           children: renderI18nText("slides.properties_panel.corners_panel.circular")
         }, "corner-radius-circular")]
       })
@@ -8011,7 +8011,7 @@ function dV({
         return;
       }
       i && _$$e6(e.searchParams, "starting-point-node-id", i);
-      _$$Ay4.redirect(e.toString(), "_blank");
+      customHistory.redirect(e.toString(), "_blank");
     }
   }, [t, i]);
   return jsx(_$$r, {
@@ -8133,11 +8133,11 @@ function cl({
           value: isInvalidValue(i) ? MIXED_MARKER : (i || 0) / 100,
           onValueChange: a,
           dispatch: t,
-          recordingKey: Pt(e, "blurStrength", "input")
+          recordingKey: generateRecordingKey(e, "blurStrength", "input")
         })
       }),
       onChange: a,
-      recordingKey: Pt(e, "blurStrength"),
+      recordingKey: generateRecordingKey(e, "blurStrength"),
       sliderTrackableName: "slides_blur_strength_slider",
       step: 0.01,
       value: isInvalidValue(i) ? MIXED_MARKER : (i || 0) / 100
@@ -8184,15 +8184,15 @@ function co({
   return e ? jsxs("div", {
     children: [jsx(_$$Y6, {
       isDragTarget: () => !0,
-      onTargetDragEnter: () => (u(!0), _$$aH),
-      onTargetDragLeave: () => (u(!1), _$$aH),
+      onTargetDragEnter: () => (u(!0), SKIP_RECORDING),
+      onTargetDragLeave: () => (u(!1), SKIP_RECORDING),
       onTargetDrop: i => {
         if (u(!1), fullscreenValue.fileArrayToString) {
           let n = fullscreenValue.fileArrayToString(Array.from(i.files));
           Fullscreen?.dropImageOnPaintThumbnail(e?.blendMode ?? "NORMAL", e?.opacity ?? 1, n, t, s);
         }
       },
-      recordingKey: Pt(n, "imageDragTarget"),
+      recordingKey: generateRecordingKey(n, "imageDragTarget"),
       children: jsxs("div", {
         className: iG()(_$$s5.relative.wAuto.h100.flex.itemsCenter.justifyCenter.radiusMedium.$, xm, {
           [_$$s5.colorBorderSelected.bSolid.b1.$]: d
@@ -8243,7 +8243,7 @@ function co({
                 let n = e.opacity || 1;
                 Fullscreen?.uploadPaintMedia(i, n);
               },
-              recordingKey: Pt(n, "uploadMedia")
+              recordingKey: generateRecordingKey(n, "uploadMedia")
             })
           })
         })]
@@ -8261,7 +8261,7 @@ function co({
                 imageScaleMode: t
               });
             },
-            recordingKey: Pt(n, "imageScaleMode"),
+            recordingKey: generateRecordingKey(n, "imageScaleMode"),
             children: [jsx(_$$l4, {
               label: jsx(HiddenLabel, {
                 children: renderI18nText("slides.properties_panel.fill.fill_type_media.scale_options.legend")
@@ -8396,12 +8396,12 @@ function cc({
     leftLabel: null,
     leftInput: jsx(_$$P5, {
       rowRef: t,
-      recordingKey: Pt(e, "overlay")
+      recordingKey: generateRecordingKey(e, "overlay")
     }),
     rightLabel: null,
     rightInput: jsx(cr, {
       rowRef: t,
-      recordingKey: Pt(e, "blur")
+      recordingKey: generateRecordingKey(e, "blur")
     })
   });
 }
@@ -8454,7 +8454,7 @@ function ch({
   let b = useCallback(e => {
     f !== e && ("NONE" === e ? fullscreenValue.updateSelectionProperties({
       fillPaints: []
-    }) : cx[e] && g(Tm.initPaint(cx[e], _$$li.color, valueOrFallback(d, {}), "slides-fill-panel"), zk.YES), j(e));
+    }) : cx[e] && g(Tm.initPaint(cx[e], _$$li.color, valueOrFallback(d, {}), "slides-fill-panel"), yesNoTrackingEnum.YES), j(e));
   }, [d, g, f]);
   f4(() => {
     j(y(o));
@@ -8476,7 +8476,7 @@ function ch({
         legend: renderI18nText("slides.properties_panel.fill.legend"),
         value: f,
         onChange: b,
-        recordingKey: Pt(e, "fillType"),
+        recordingKey: generateRecordingKey(e, "fillType"),
         children: cp.filter(e => !(n && "NONE" === e)).map(e => jsx(_$$c$2, {
           value: e,
           icon: _[e].icon,
@@ -8495,7 +8495,7 @@ function ch({
           inheritStyleKey: p,
           inheritStyleId: h,
           pickerId: cu,
-          recordingKey: Pt(e, "color"),
+          recordingKey: generateRecordingKey(e, "color"),
           hideCustomColorPickerFillTypeToggle: !0
         })
       }), v && jsx(co, {
@@ -8651,10 +8651,10 @@ function cv({
         recordingKey: cE,
         children: [jsx(_$$c$, {
           value: Pm.Light,
-          recordingKey: Pt(cE, "lightOption")
+          recordingKey: generateRecordingKey(cE, "lightOption")
         }, Pm.Light), jsx(_$$c$, {
           value: Pm.Dark,
-          recordingKey: Pt(cE, "darkOption")
+          recordingKey: generateRecordingKey(cE, "darkOption")
         }, Pm.Dark)]
       })
     })]
@@ -8781,13 +8781,13 @@ function cC({
               },
               placeholder: getI18nString("slides.properties_panel.link_panel.placeholder"),
               property: d,
-              recordingKey: Pt(e, "link"),
+              recordingKey: generateRecordingKey(e, "link"),
               children: x.map(t => jsx(_$$c$, {
                 value: {
                   type: "guid",
                   guid: parseSessionLocalID(t)
                 },
-                recordingKey: Pt(e, t)
+                recordingKey: generateRecordingKey(e, t)
               }, t))
             })
           })
@@ -8842,13 +8842,13 @@ function cL({
               onValueChange: e => {
                 l(e);
               },
-              recordingKey: Pt(e, "opacity"),
+              recordingKey: generateRecordingKey(e, "opacity"),
               tooltipForScreenReadersOnly: !1,
               value: o,
               willShowDropdown: () => (fullscreenValue.commit(), Promise.resolve()),
               children: cA.map(t => jsx(cw, {
                 value: t,
-                recordingKey: Pt(e, "opacity", "select", t),
+                recordingKey: generateRecordingKey(e, "opacity", "select", t),
                 children: a.format(t)
               }, `opacity-${t}`))
             })
@@ -9031,7 +9031,7 @@ let cU = memo(function () {
   let i = Um();
   let n = Xo();
   let a = GV();
-  let o = !!_$$iZ();
+  let o = !!selectCurrentUser();
   let {
     setPropertiesPanelCollapsed
   } = _$$iT();
@@ -9155,7 +9155,7 @@ let cK = memo(({
       }), H.showing && jsx(_$$tH, {
         boundaryKey: "FigJamBrowseAllResourcesModal",
         onError: () => {
-          Y(_$$F.enqueue({
+          Y(VisualBellActions.enqueue({
             message: "Unable to open inserts menu",
             type: "react-error"
           }));
@@ -9228,7 +9228,7 @@ function cz() {
       n.current = t;
       let r = useDispatch();
       let a = gY(b_);
-      let o = _$$iZ();
+      let o = selectCurrentUser();
       let d = yZ();
       let c = useMemo(() => !o || !d || !_$$DF(e, o), [o, d, e]);
       return useCallback(e => {

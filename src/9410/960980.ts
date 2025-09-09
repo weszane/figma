@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { SessionStatus } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
 import { isIpadDevice, getIsMobile } from "../figma_app/778880";
@@ -119,7 +119,7 @@ export function $$D5(e) {
         currentPlan: F.Plan.STARTER,
         upsellPlan: F.Plan.PRO
       }
-    }));else if ("eligible" === t) {
+    })); else if ("eligible" === t) {
       e();
       return !0;
     }

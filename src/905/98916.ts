@@ -1,9 +1,9 @@
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { IT } from "../figma_app/566371";
-import { JJY, I2e } from "../figma_app/43951";
+import { ProjectFileCount, FolderUntrashedFilesAndSitesView } from "../figma_app/43951";
 export function $$o1(e, t) {
-  let [i] = IT(JJY.Query(e ? {
+  let [i] = IT(ProjectFileCount.Query(e ? {
     projectId: e
   } : null));
   return i.transform(e => {
@@ -17,7 +17,7 @@ export function $$o1(e, t) {
   });
 }
 export function $$l0(e) {
-  return Rs(I2e({
+  return Rs(FolderUntrashedFilesAndSitesView({
     projectId: e
   }), {
     enabled: !!e

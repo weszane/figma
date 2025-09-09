@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Pw } from "../905/521428";
 import { s_ } from "../905/17223";
 import { Lf } from "../figma_app/637027";
@@ -10,7 +10,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
 import { G } from "../905/971006";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { qE } from "../figma_app/152745";
 import { H } from "../905/216861";
 import { createEmptyAddress } from "../figma_app/831101";
@@ -20,7 +20,7 @@ import { X } from "../905/33014";
 import { A as _$$A } from "../905/289352";
 export let $$w0 = registerModal(function (e) {
   let t = useDispatch();
-  let r = iZ();
+  let r = selectCurrentUser();
   let g = _6();
   let w = H();
   let [C, L] = useState("");

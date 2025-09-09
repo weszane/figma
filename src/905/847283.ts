@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useStore } from "../vendor/514228";
+import { useStore } from "react-redux";
 import { ds } from "../figma_app/314264";
 var $$s0 = (e => (e.START = "start", e.STOP = "stop", e.IGNORE = "ignore", e))($$s0 || {});
 export function $$o1() {

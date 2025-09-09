@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { sha1Hex } from "../905/125019";
 import { getFeatureFlags } from "../905/601108";
 import o from "../vendor/128080";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { N as _$$N } from "../figma_app/469468";
 import { fs } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
@@ -38,7 +38,7 @@ export function $$F0(e) {
 export function $$j32(e) {
   return $$F0(e);
 }
-export let $$U25 = () => po(Ay.location.pathname).remainingPath.split("/").slice(1);
+export let $$U25 = () => po(customHistory.location.pathname).remainingPath.split("/").slice(1);
 export function $$B36(e) {
   let t = B6(new URL(e).pathname, {
     path: Xu.path
@@ -245,7 +245,7 @@ export function $$ep3(e) {
 }
 export function $$e_27() {
   let e = _$$N(`(max-width: ${YW - 1}px)`);
-  let t = Ay.location.pathname.startsWith("/community");
+  let t = customHistory.location.pathname.startsWith("/community");
   return e && t;
 }
 export async function $$eh10(e) {

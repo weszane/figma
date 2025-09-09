@@ -1,5 +1,5 @@
 import { createEmptyMixin as CreateEmptyMixin } from '../905/112832';
-import { PK as PKUtil } from '../figma_app/243058';
+import { StyleIdHandler} from '../figma_app/243058';
 import { nM as NMUtil } from '../figma_app/276332';
 
 /**
@@ -15,12 +15,10 @@ export function withStyleMixin<TBase extends new (...args: any[]) => any>(Base: 
      * (Original: idForPluginApi)
      */
     get idForPluginApi(): string {
-      return this.styleKeyForPublish
-        ? NMUtil({
-            key: this.styleKeyForPublish,
-            version: this.isLocalStyle ? '' : this.getStyleVersion(),
-          })
-        : '';
+      return this.styleKeyForPublish ? NMUtil({
+        key: this.styleKeyForPublish,
+        version: this.isLocalStyle ? '' : this.getStyleVersion()
+      }) : '';
     }
 
     /**
@@ -28,7 +26,7 @@ export function withStyleMixin<TBase extends new (...args: any[]) => any>(Base: 
      * (Original: styleAssetId)
      */
     get styleAssetId(): any {
-      return PKUtil.fromBindingsObj(this.styleId);
+      return StyleIdHandler.fromBindingsObj(this.styleId);
     }
 
     /**

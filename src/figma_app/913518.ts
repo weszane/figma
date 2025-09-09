@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { SessionStatus } from "../figma_app/763686";
 import { atom, Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { am } from "../figma_app/901889";

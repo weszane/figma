@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { c2 } from "../905/382883";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { B } from "../905/714743";
@@ -18,7 +18,7 @@ import { F as _$$F } from "../905/801537";
 import { R9 } from "../905/61477";
 import { nv } from "../905/182534";
 import { HI } from "../905/977218";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { WY, qy, dC, uR, jD } from "../figma_app/162807";
 import { HY, kI, b3 } from "../905/779036";
 import { Ze, p$, Kk, R_ } from "../905/954985";
@@ -145,7 +145,7 @@ function N({
   results: o,
   filterLimitReached: p
 }) {
-  let h = TA();
+  let h = getUserId();
   return wG(o) && wG(e) ? jsx("div", {
     className: p$,
     children: s ? renderI18nText("search.empty_state.no_results_matching", {

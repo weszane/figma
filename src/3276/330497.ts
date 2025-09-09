@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch, useStore, useSelector } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { E } from "../905/632989";
 import { getI18nString } from "../905/303541";

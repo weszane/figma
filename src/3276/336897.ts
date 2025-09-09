@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { b as _$$b, q7, mc, bL } from "../figma_app/860955";
 import { u as _$$u } from "../905/65923";
 import { bL as _$$bL, O6, HG } from "../905/598775";
@@ -19,7 +19,7 @@ import { dG } from "../figma_app/753501";
 import { T as _$$T } from "../905/868547";
 import { Py, AD } from "../figma_app/578768";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { Cf } from "../905/504727";
 import { fI, YW } from "../figma_app/626177";
@@ -51,7 +51,7 @@ function V(e) {
   } = e;
   let C = q5();
   let E = useSelector(e => e.multiplayer);
-  let A = iZ();
+  let A = selectCurrentUser();
   let L = U(user);
   let {
     getTriggerProps,

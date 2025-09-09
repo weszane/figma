@@ -9,11 +9,11 @@ import { o as runWithResolve } from '../905/757420';
 import { parseInteger } from '../905/833686';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { documentStateTsApi } from '../905/880730';
-import { WI as normalizeOptions } from '../905/929949';
+import { resolveVariableValue } from '../905/929949';
 import { Q as ChangeListenerQueue, P as ChangeListeners } from '../905/931498';
 import { glU as DetachedComponentsManager, XJn as FirstDraftManager, fHP as GroupTypeEnum, mHF as LinterManager, NfO as NodeGroupManager, CUU as SceneActions, Pt4 as StyleKeyManager, Egt as SymbolUpdater, CWU as VariableManager } from '../figma_app/13528';
 import { PWo as AssetTypeEnum, iZB as ConstraintsFacetTsApiGenerated, Sie as NodeContextEnum, UNF as NodeTsApi, Fk7 as NodeTsApiGenerated, $DY as PrototypingFacetTsApiGenerated, ppO as RenderableBaseFacetTsApiGenerated, mSn as SceneGraphTsApi, juq as SceneTypeEnum, vNG as SceneUpdater, KtY as StackFacetTsApiGenerated, HzA as TrackingEnum } from '../figma_app/175377';
-import { gr as VariableCollectionId, sD as VariableId } from '../figma_app/243058';
+import { VariableSetIdCompatHandler as VariableCollectionId, VariableIdHandler as VariableId } from '../figma_app/243058';
 import { debug, throwTypeError } from '../figma_app/465776';
 
 /** @type {number} Index for history document. */
@@ -303,9 +303,9 @@ export class TSSceneGraph {
    * @param options - Creation options.
    */
   createVariable(name, type, options) {
-    const opts = normalizeOptions(options);
+    const opts = resolveVariableValue(options);
     const guid = SceneActions?.createVariable(this.scene, name, type, opts);
-    const id = guid ? VariableId.fromString(guid) : null;
+    const id = guid ? VariableIdHandler.fromString(guid) : null;
     if (!id) throw new Error('Failed to create variable');
     return this.getVariableFacetInternal(id, false);
   }
@@ -332,7 +332,7 @@ export class TSSceneGraph {
    */
   createVariableCollection(options) {
     let guid = SceneActions?.createVariableCollection(this.scene, options);
-    let id = guid ? VariableCollectionId.fromString(guid) : null;
+    let id = guid ? VariableSetIdCompatHandler.fromString(guid) : null;
     if (!id) throw new Error('Failed to create variable collection');
     return this.getVariableCollectionFacetInternal(id, false);
   }

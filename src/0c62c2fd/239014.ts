@@ -16,7 +16,7 @@ import { lv } from "../figma_app/204891";
 import { V } from "../figma_app/385855";
 import { getI18nString } from "../905/303541";
 import { q5 } from "../figma_app/516028";
-import { SPC } from "../figma_app/43951";
+import { PageThumbnailsByFileKeyView } from "../figma_app/43951";
 import { S } from "../figma_app/787550";
 import { qp } from "../figma_app/932601";
 if (443 == require.j) {}
@@ -105,7 +105,7 @@ let I = z.record(z.object({
 }));
 export function $$N1(e) {
   let t = q5();
-  let r = Rs(SPC, {
+  let r = Rs(PageThumbnailsByFileKeyView, {
     fileKey: t?.key ?? ""
   }, {
     enabled: !!(t?.key && e)

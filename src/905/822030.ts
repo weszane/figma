@@ -8,7 +8,7 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { aR, lE } from "../905/945781";
 var p = u;
@@ -71,7 +71,7 @@ let k = memo(function ({
     t.stopPropagation();
     g?.(e);
   }, [g, e]);
-  let L = rf(w, "click", D);
+  let L = useHandleMouseEvent(w, "click", D);
   let F = useCallback(() => {
     f?.(C);
   }, [C, f]);
@@ -212,7 +212,7 @@ function B({
       node: E.node,
       onBoxClicked: t,
       onBoxHovered: i,
-      recordingKey: Pt(m, P(E.node.value)),
+      recordingKey: generateRecordingKey(m, P(E.node.value)),
       rect: E.rect,
       renderOverlay: E.renderOverlay,
       renderTag: E.renderTag,
@@ -342,7 +342,7 @@ let W = memo(function (e) {
       node: m,
       onBoxClicked,
       onBoxHovered: f,
-      recordingKey: Pt(recordingKey, "overlays", "highlight"),
+      recordingKey: generateRecordingKey(recordingKey, "overlays", "highlight"),
       selectedNodeId,
       transform
     }), jsx(H, {
@@ -352,7 +352,7 @@ let W = memo(function (e) {
       transform,
       ignoreState,
       hoveredNodeIdAtom,
-      recordingKey: Pt(recordingKey, "overlays", "highlight", "hovered-or-selected")
+      recordingKey: generateRecordingKey(recordingKey, "overlays", "highlight", "hovered-or-selected")
     })]
   });
 });

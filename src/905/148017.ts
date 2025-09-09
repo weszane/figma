@@ -10,9 +10,9 @@ import { O as _$$O } from "../905/487602";
 import { AppStateTsApi, NodePropertyCategory, StyleVariableOperation, CopyPasteType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E2 } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { getI18nString } from "../905/303541";
@@ -162,7 +162,7 @@ class en extends PureComponent {
   constructor() {
     super(...arguments);
     this.context = null;
-    this.layoutGrids = xx(e => {
+    this.layoutGrids = memoizeByArgs(e => {
       let t = valueOrFallback(e, []);
       let i = F(this.props.bigNudgeAmount);
       return t.map(e => function (e, t) {
@@ -197,7 +197,7 @@ class en extends PureComponent {
           onChange: this.onGridsChange,
           pickerShown: this.props.pickerShown,
           propertyList: this.layoutGrids(this.props.layoutGrids),
-          recordingKey: Pt(this.props, "list"),
+          recordingKey: generateRecordingKey(this.props, "list"),
           selectedPropertyType: NodePropertyCategory.LAYOUT_GRID,
           showFrameGrids: this.props.showFrameGrids,
           smallNudgeAmount: this.props.smallNudgeAmount,
@@ -275,14 +275,14 @@ class ea extends PureComponent {
       onMouseUp: d,
       onRemoveGrid: this.removeProperty.bind(this, t),
       pickerShown: this.props.pickerShown,
-      recordingKey: Pt(this.props, "grid", t),
+      recordingKey: generateRecordingKey(this.props, "grid", t),
       selected: i,
       singletonRow: valueOrFallback(this.props.propertyList, []).length <= 1,
       smallNudgeAmount: this.props.smallNudgeAmount,
       useFPLGrid: this.props.useFPLGrid,
       version: this.props.version
     }, this.props.useFPLGrid ? void 0 : `grid-${t}`);
-    this.memoizedStyleVisibility = xx(e => ({
+    this.memoizedStyleVisibility = memoizeByArgs(e => ({
       styleIsVisible: e,
       onToggleStyleVisibility: this.onToggleGridStyleVisibility
     }));
@@ -370,7 +370,7 @@ class es extends PureComponent {
       children: jsx(_$$d, {
         ref: this.windowButtonRef,
         "aria-label": getI18nString("fullscreen.grid_panel.layout_guide_settings"),
-        recordingKey: Pt(this.props, "settings"),
+        recordingKey: generateRecordingKey(this.props, "settings"),
         "aria-expanded": !!t,
         onClick: this.toggleSettings,
         actionOnPointerDown: !0,
@@ -400,13 +400,13 @@ class es extends PureComponent {
       children: jsx(_$$B, {
         visible: this.props.layoutGrid.visible,
         onChange: this.onVisibleChange,
-        recordingKey: Pt(this.props, "visibleToggle")
+        recordingKey: generateRecordingKey(this.props, "visibleToggle")
       })
     });
     let v = jsx(_$$E2, {
       name: "remove_grid_button",
       children: jsx(_$$K, {
-        recordingKey: Pt(this.props, "removeButton"),
+        recordingKey: generateRecordingKey(this.props, "removeButton"),
         onClick: this.props.onRemoveGrid,
         "aria-label": getI18nString("fullscreen.grid_panel.remove_layout_guide"),
         htmlAttributes: {
@@ -422,7 +422,7 @@ class es extends PureComponent {
       initialY: t.initialY || 0,
       layoutGrid: this.props.layoutGrid,
       onChange: this.onChange,
-      recordingKey: Pt(this.props, "settings"),
+      recordingKey: generateRecordingKey(this.props, "settings"),
       bigNudgeAmount: this.props.bigNudgeAmount,
       smallNudgeAmount: this.props.smallNudgeAmount
     });

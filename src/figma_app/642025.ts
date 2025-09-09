@@ -8,7 +8,7 @@ import { jh } from '../figma_app/35887';
 import { cn, GU } from '../figma_app/141320';
 import { FAccessLevelType, FBasicPermissionType, FOrganizationRoleType, FPermissionLevelType, FResourceCategoryType } from '../figma_app/191312';
 import { oq } from '../figma_app/528509';
-import { xx } from '../figma_app/815945';
+import { memoizeByArgs } from '../figma_app/815945';
 function h(e, t, r, n, i, a, s, o, l, d, c, u, p, _, h) {
   return {
     currentUserOrgId: e,
@@ -28,7 +28,7 @@ function h(e, t, r, n, i, a, s, o, l, d, c, u, p, _, h) {
     currentTeamId: h
   };
 }
-let m = xx(h);
+let m = memoizeByArgs(h);
 export function $$g10(e) {
   return h(e.currentUserOrgId, e.user, e.fileByKey, e.repos, e.folders, e.teams, e.roles, e.orgById, e.orgUsersByOrgId, e.teamUserByTeamId, e.userEduGracePeriods, e.licenseGroups, e.orgTeams, e.openFile, e.currentTeamId);
 }

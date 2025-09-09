@@ -1,11 +1,11 @@
 import { trackEventAnalytics } from "../905/449184";
 import { dR } from "../905/508367";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { isMobileUA } from "../figma_app/778880";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { Hx } from "../905/321397";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { wr } from "../figma_app/387599";
 import { JJ } from "../figma_app/471982";
 import { YN } from "../figma_app/275462";
@@ -27,7 +27,7 @@ async function j(e, l, i, t, a, r) {
     s = _$$F(t, l, c);
   } catch (l) {
     let e = l?.data?.message || getI18nString("file_browser.error_try_again");
-    i(F.enqueue({
+    i(VisualBellActions.enqueue({
       message: e,
       type: "error"
     }));
@@ -94,7 +94,7 @@ let $$T1 = (e, l = {
       !0 === l.isFreemiumPreview && (g = dR(g, {
         "is-freemium-preview": "1"
       }));
-      Ay.redirect(g, isMobileUA ? void 0 : "_blank");
+      customHistory.redirect(g, isMobileUA ? void 0 : "_blank");
     });
   }
   YN() && l.skipWorkspaceSelection ? h() : await j(e, i, n, u, h);
@@ -111,7 +111,7 @@ let $$A2 = (e, l = {
     })) : l.userId && (t = dR(t, {
       fuid: l.userId
     }));
-    Ay.redirect(t, isMobileUA ? void 0 : "_blank");
+    customHistory.redirect(t, isMobileUA ? void 0 : "_blank");
   }
   YN() && l.skipWorkspaceSelection ? o() : await j(e, i, t, n, o);
 };
@@ -127,7 +127,7 @@ let $$S0 = (e, l = {
     })) : l.userId && (t = dR(t, {
       fuid: l.userId
     }));
-    Ay.redirect(t, isMobileUA ? void 0 : "_blank");
+    customHistory.redirect(t, isMobileUA ? void 0 : "_blank");
   }
   YN() && l.skipWorkspaceSelection ? o() : await j(e, i, t, n, o, !0);
 };

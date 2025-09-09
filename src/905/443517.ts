@@ -36,7 +36,7 @@ import { Q8 } from '../figma_app/604494';
 import { wC } from '../figma_app/632248';
 import { filterNotNullish } from '../figma_app/656233';
 import { $L } from '../figma_app/737746';
-import { AF } from '../figma_app/806412';
+import { useHandleChangeEvent } from '../figma_app/878298';
 let h = m;
 let U = 'parameter_entry--keyContainer--ytJCE parameter_entry--centerItemsVertically--wrvs-';
 let B = 'parameter_entry--keyLabel--gQEn3';
@@ -488,7 +488,7 @@ function $({
   let v = {
     minWidth: p ? `${p}px` : void 0
   };
-  let I = AF('onSearchChange', 'change', e => {
+  let I = useHandleChangeEvent('onSearchChange', 'change', e => {
     f(e.currentTarget.value);
   });
   return jsx('div', {

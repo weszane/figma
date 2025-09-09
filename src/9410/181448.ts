@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useMemo, useCallback, useLayoutEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { E as _$$E } from "../905/632989";
 import { k as _$$k } from "../905/381239";
@@ -12,10 +12,10 @@ import { WorkspaceType, DataLoadStatus, Multiplayer, SchemaJoinStatus, AppStateT
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import g from "classnames";
-import { v_, aH, AF, iQ, Pt, rf } from "../figma_app/806412";
+import { useHandleKeyboardEvent, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Yh } from "../figma_app/888478";
 import { $ as _$$$ } from "../0c62c2fd/637169";
 import { lg } from "../figma_app/976749";
@@ -43,7 +43,7 @@ function R({
   useEffect(() => {
     o.current?.select();
   }, []);
-  let l = v_(i, "keydown", e => {
+  let l = useHandleKeyboardEvent(i, "keydown", e => {
     if (e.keyCode === Uz.ESCAPE) {
       s(!1);
       e.stopPropagation();
@@ -53,16 +53,16 @@ function R({
     } else {
       if (e.keyCode !== Uz.TAB) {
         jr(e, W0.NO);
-        return aH;
+        return SKIP_RECORDING;
       }
       e.preventDefault();
       s(!0);
     }
   });
-  let d = AF(i, "change", e => {
+  let d = useHandleChangeEvent(i, "change", e => {
     a || t(e.currentTarget.value);
   });
-  let c = iQ(i, "blur", () => {
+  let c = useHandleGenericEvent(i, "blur", () => {
     s(!0);
   });
   return jsx(ks, {
@@ -151,21 +151,21 @@ export function $$U1({
   let ed = useMemo(() => Fy(Z, i) === DataLoadStatus.LOADED, [i, Z]);
   let ec = Multiplayer.getSessionState() === SchemaJoinStatus.JOINED;
   let eu = useMemo(() => W && !ec && !ed && Multiplayer.isIncrementalSession(), [W, ed, ec]);
-  let ep = Pt("pagesPanel", "row", Q) || "";
-  let eh = rf(ep, "contextmenu", e => {
+  let ep = generateRecordingKey("pagesPanel", "row", Q) || "";
+  let eh = useHandleMouseEvent(ep, "contextmenu", e => {
     e.preventDefault();
     !eu && H && H({
       nodeId: i,
       e
     });
   });
-  let em = rf(ep, "dblclick", () => {
+  let em = useHandleMouseEvent(ep, "dblclick", () => {
     eu || l || d(i);
   });
-  let ef = rf(ep, "click", e => {
+  let ef = useHandleMouseEvent(ep, "click", e => {
     if (!X && !l) {
       if (eu) {
-        et(_$$F.enqueue({
+        et(VisualBellActions.enqueue({
           type: "offline-page-switch",
           message: getI18nString("fullscreen.pages_panel.unavailable_offline")
         }));

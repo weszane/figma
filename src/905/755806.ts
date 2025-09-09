@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { tS } from "../figma_app/516028";
 import { qr } from "../figma_app/637336";
 import { W5, Eo } from "../figma_app/120294";

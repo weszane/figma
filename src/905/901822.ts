@@ -2,12 +2,12 @@ import { useCallback, useState, useEffect, useRef } from "react";
 import { A } from "../vendor/90566";
 import { hC } from "../figma_app/901889";
 import { ZC } from "../figma_app/39751";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { n as _$$n } from "../905/884252";
 export function $$u3() {
-  let e = iZ();
+  let e = selectCurrentUser();
   let t = q5();
   return {
     org_id: t?.parentOrgId ?? void 0,
@@ -49,10 +49,10 @@ export function $$m2(e) {
   let l = "" === e;
   let d = ZC(l);
   useEffect(() => {
-    i(g());
+    i(generateUUIDv4());
   }, [a]);
   useEffect(() => {
-    l && !d && i(g());
+    l && !d && i(generateUUIDv4());
   }, [l, d]);
   return t;
 }

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { A } from "../vendor/737188";
-import { uA } from "../figma_app/806412";
+import { RecordingComponent } from "../figma_app/878298";
 import { v } from "../905/318279";
 let a = /(https?:\/\/)?(www\.)?figma.com\/@/;
 export function $$l1(e) {
@@ -22,7 +22,7 @@ export function $$l1(e) {
     children: e
   });
 }
-export class $$c0 extends uA {
+export class $$c0 extends RecordingComponent {
   constructor(e) {
     super(e);
     this.onChange = e => {

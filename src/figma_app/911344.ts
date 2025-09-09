@@ -7,7 +7,7 @@ import { buildStaticUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { fullscreenValue } from "../figma_app/455680";
 import { T as _$$T } from "../905/858738";
 import { p as _$$p, H } from "../905/216429";
@@ -195,7 +195,7 @@ class I {
         requestMicrophone: microphoneAccess
       });
     } catch (e) {
-      desktopAPIInstance && fullscreenValue.dispatch(F.enqueue({
+      desktopAPIInstance && fullscreenValue.dispatch(VisualBellActions.enqueue({
         type: "desktop-unsupported",
         error: !0,
         message: "Camera access is only available in the latest version of Figma Desktop"

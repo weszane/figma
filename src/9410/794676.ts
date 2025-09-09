@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useMemo, useRef, useCallback, memo, useLayoutEffect } from "react";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { y as _$$y } from "../905/725962";
 import { DP } from "../905/158740";
 import { getFeatureFlags } from "../905/601108";
@@ -42,12 +42,12 @@ import { y4 } from "../figma_app/298277";
 import { XS } from "../figma_app/178752";
 import { q5, MY } from "../figma_app/516028";
 import { dq, sZ } from "../905/845253";
-import { iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { Bc } from "../figma_app/615482";
 import { KeyboardLayout, SchemaJoinStatus, Multiplayer, FullscreenPerfInfo, CorePerfInfo, AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { As, CZ, rd, v7 } from "../figma_app/475303";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { FU } from "../905/26824";
 import { b as _$$b } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
@@ -74,7 +74,7 @@ import { atom, useAtomWithSubscription, atomStoreManager, Xr } from "../figma_ap
 import eO from "../vendor/879378";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { Rs } from "../figma_app/288654";
-import { NSA } from "../figma_app/43951";
+import { FileByKey } from "../figma_app/43951";
 import { U2 } from "../figma_app/193867";
 import { K as _$$K } from "../905/12775";
 import { M as _$$M2 } from "../figma_app/333189";
@@ -83,7 +83,7 @@ import eY from "classnames";
 import { w as _$$w } from "../figma_app/922802";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { H as _$$H } from "../905/444904";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { Ob } from "../905/191560";
@@ -98,7 +98,7 @@ import { cq, QA } from "../figma_app/107215";
 import { nF } from "../figma_app/789";
 import { QL } from "../905/609392";
 import { T as _$$T } from "../905/868547";
-import { K as _$$K2 } from "../905/301652";
+import { generateAnonymouseName } from "../905/301652";
 import { x as _$$x3 } from "../905/749159";
 import { K as _$$K3 } from "../905/443068";
 import { C as _$$C } from "../905/866991";
@@ -175,7 +175,7 @@ let ec = (e, t, i, r) => {
   e(_$$b({
     keyboard_manual_supported_bell: !0
   }));
-  e(_$$F.enqueue({
+  e(VisualBellActions.enqueue({
     message: getI18nString("keyboard_settings.new_keyboard_name_keyboard_shortcuts_are_available", {
       newKeyboardName: As(t)
     }),
@@ -201,7 +201,7 @@ let eu = (e, t, i) => {
   e(_$$b({
     keyboard_generic_supported_first_bell: !0
   }));
-  e(_$$F.enqueue({
+  e(VisualBellActions.enqueue({
     message: getI18nString("keyboard_settings.new_keyboard_name_keyboard_shortcuts_are_now_available", {
       newKeyboardName: As(t)
     }),
@@ -301,7 +301,7 @@ function e4(e) {
   useEffect(() => {
     t(Ts({
       origin: "request_permissions_entry",
-      redirectUrl: _$$Ay.location.pathname,
+      redirectUrl: customHistory.location.pathname,
       formState: qB.ACCOUNT_PICKER,
       accountPickerData: e.accountPickerData
     }));
@@ -311,7 +311,7 @@ function e4(e) {
     onBackClick: () => {
       i.formState === qB.ACCOUNT_PICKER ? e.closeAuth() : t(Ts({
         origin: "request_permissions_entry",
-        redirectUrl: _$$Ay.location.pathname,
+        redirectUrl: customHistory.location.pathname,
         formState: qB.ACCOUNT_PICKER,
         accountPickerData: e.accountPickerData
       }));
@@ -345,7 +345,7 @@ function e6(e) {
     }) : jsx(_$$H, {
       org: e.org,
       switchAccountsSection: jsx(function () {
-        let e = iZ();
+        let e = selectCurrentUser();
         return !e || desktopAPIInstance ? null : jsx("div", {
           className: eJ()(_$$s2.mt24.$, "mfa_required--secondaryText--eCIsl"),
           children: renderI18nText("mfa_required_modal.account_switcher.text", {
@@ -398,7 +398,7 @@ function tm(e) {
   } = e;
   !function () {
     let e = useDispatch();
-    let t = iZ();
+    let t = selectCurrentUser();
     let i = !t;
     let r = nF();
     let s = r.enabled;
@@ -429,7 +429,7 @@ function tm(e) {
     let f = MY();
     useEffect(() => {
       if (s && !_$$T(c) && "loaded" === f.status) {
-        let t = localStorage.getItem(_$$K2(o));
+        let t = localStorage.getItem(generateAnonymouseName(o));
         i ? t ? QA(t) : e(showModal({
           type: _$$e2
         })) : f.data?.canEdit || h || e(showModal({
@@ -442,7 +442,7 @@ function tm(e) {
     let x = g?.name;
     useEffect(() => {
       if (s && !_$$T(c) && i && u && _ && x === getI18nString("fullscreen.fullscreen_view_selector.untitled")) {
-        let t = localStorage.getItem(_$$K2(o));
+        let t = localStorage.getItem(generateAnonymouseName(o));
         t && e(_$$S({
           userName: t,
           file_key: _
@@ -456,7 +456,7 @@ function tm(e) {
   } = function (e) {
     let [t, i] = useState(!1);
     let r = useDispatch();
-    let s = iZ();
+    let s = selectCurrentUser();
     let o = q5();
     let l = o?.name;
     let d = !s;
@@ -485,7 +485,7 @@ function tm(e) {
       r(Ts({
         origin: "logged_out_footer",
         formState: qB.SIGN_UP,
-        redirectUrl: _$$Ay.location.pathname
+        redirectUrl: customHistory.location.pathname
       }));
       r(showModalHandler({
         type: _$$x3,
@@ -670,11 +670,11 @@ export function $$t80({
     onCanvasExpired: e
   }) {
     let t = useSelector(e => U2(e.selectedView));
-    let i = TA();
+    let i = getUserId();
     let r = dq();
     let [s, o] = useState(!1);
     let d = _$$K();
-    let c = Rs(NSA, {
+    let c = Rs(FileByKey, {
       fileKey: t ?? ""
     }, {
       enabled: !!t
@@ -956,10 +956,10 @@ export function $$t80({
     useEffect(() => {
       if (i?.updateUndoEnabled && i.updateUndoEnabled(h), i?.updateRedoEnabled && i.updateRedoEnabled(m), u) {
         let t = t => {
-          e(_$$F.dequeue({
+          e(VisualBellActions.dequeue({
             matchType: "undo_redo_gesture"
           }));
-          e(_$$F.enqueue({
+          e(VisualBellActions.enqueue({
             message: t,
             type: "undo_redo_gesture",
             timeoutOverride: 750
@@ -1155,7 +1155,7 @@ export function $$t80({
       }
     }
   }, [i, h, Y]);
-  let er = TA();
+  let er = getUserId();
   useEffect(() => {
     er && i(oQ());
   }, [i, er]);
@@ -1276,7 +1276,7 @@ function t9({
     updateWatchedStablePaths
   } = Cn();
   let h = _$$e_();
-  let m = TA();
+  let m = getUserId();
   ox({
     file: t,
     onCanvasExpired: n

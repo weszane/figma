@@ -1,7 +1,7 @@
 import { J6, k4, lV } from "../figma_app/617606";
 import { Fullscreen, ChatMessageType } from "../figma_app/763686";
 import { tS } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Xu } from "../figma_app/588582";
 import { P } from "../1156/852405";
 import { yc } from "../1156/354790";
@@ -12,7 +12,7 @@ export function $$x0() {
   let {
     codeLibraryInstance
   } = oA();
-  let n = iZ();
+  let n = selectCurrentUser();
   let x = qE(e, codeLibraryInstance?.guid || "");
   let m = Xu();
   let h = P();

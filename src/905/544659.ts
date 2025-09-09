@@ -1,4 +1,4 @@
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { buildStaticUrl } from "../figma_app/169182";
 import { ManifestErrorType } from "../figma_app/155287";
 let s = RegExp("^(?:(https?:|wss?:)(?:[/][/]))?((?:[*][.])?(?:(?:(?:[-a-z\\d])+)[.])+[a-z]{2,})((?:[/][-a-zA-Z\\d%_.~+@]*)*$)");
@@ -105,7 +105,7 @@ let _ = (e, t = "") => {
 export function $$A3(e, t) {
   let i = c(t);
   if (!i.isValid) {
-    k.warn(i.validationErr);
+    logger.warn(i.validationErr);
     return !0;
   }
   if (t.includes("*")) return !0;
@@ -127,7 +127,7 @@ export function $$y1(e, t) {
   if (!i) return;
   let a = c(t);
   if (!a.isValid) {
-    k.warn(a.validationErr);
+    logger.warn(a.validationErr);
     return;
   }
   if (t.includes("*")) return;

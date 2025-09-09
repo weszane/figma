@@ -8,7 +8,7 @@ import { Pe, Bk } from "../4452/207203";
 import { createMapperFactory, processAdditionalConfig } from "../905/508958";
 import { W } from "../4452/143028";
 import { FFileType, FSeatAssignmentReasonType, FPlanRestrictionType } from "../figma_app/191312";
-import { khT } from "../figma_app/43951";
+import { TeamPeopleTableView } from "../figma_app/43951";
 import { e6 } from "../905/557142";
 import { pw, wv } from "../figma_app/121751";
 import { mZ } from "../905/276025";
@@ -52,7 +52,7 @@ export function $$E1(e) {
 let w = createRemovableAtomFamily(e => atom(i => {
   let t = i(mZ(!0)).data;
   let n = t ? t.campfireModelEnabledAt : null;
-  return pw("migrate_team_data_to_livegraph", wv.GROUP_1) ? i(khT.Query({
+  return pw("migrate_team_data_to_livegraph", wv.GROUP_1) ? i(TeamPeopleTableView.Query({
     teamId: e
   })).transform(e => {
     let i = e.teamInAdmin;

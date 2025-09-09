@@ -3,7 +3,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { Rs } from "../figma_app/288654";
 import { g } from "../905/370185";
 import { Q2, sD } from "../905/937198";
-import { Lst } from "../figma_app/43951";
+import { ListCollectionsView } from "../figma_app/43951";
 import { b } from "../905/148729";
 export function $$c0({
   fileKey: e
@@ -14,7 +14,7 @@ export function $$c0({
     reportAsSentryError: !0
   });
   let t = (e ?? "") !== "";
-  let i = Rs(Lst, {
+  let i = Rs(ListCollectionsView, {
     fileKey: e ?? ""
   }, {
     enabled: t

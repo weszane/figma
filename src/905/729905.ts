@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useContext, useMemo, useEffect, useCallback } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { wm, zN } from "../905/19536";
+import { useMemoShallow, useStableMemo } from "../905/19536";
 import l from "../vendor/656470";
 import { analyticsEventManager } from "../905/449184";
 import { n1 } from "../figma_app/657017";
@@ -26,7 +26,7 @@ var d = l;
   }) {
     let n = useContext(t);
     let s = useMemo(() => n?.path ? [...n.path, ...e] : e, [e, n?.path]);
-    let l = wm(() => ({
+    let l = useMemoShallow(() => ({
       path: s
     }), [s]);
     return jsx(t.Provider, {
@@ -164,7 +164,7 @@ var d = l;
   }) {
     let s = useContext(t);
     let l = useMemo(() => s?.path ? !i && e ? [...s.path, e] : s.path : e ? [e] : [], [i, e, s?.path]);
-    let d = wm(() => ({
+    let d = useMemoShallow(() => ({
       path: l
     }), [l]);
     return jsx(t.Provider, {
@@ -181,7 +181,7 @@ var d = l;
   }) {
     let c = useContext(t);
     let u = useMemo(() => c ? [...c.path, e] : [e], [c, e]);
-    let p = wm(() => ({
+    let p = useMemoShallow(() => ({
       path: u
     }), [u]);
     l({
@@ -254,7 +254,7 @@ var d = l;
       children,
       ...s
     } = e;
-    let l = zN(paths);
+    let l = useStableMemo(paths);
     let c = useMemo(() => children.flat().filter(e => !!e), [children]);
     let u = useMemo(() => c.map((e, t) => function (e, t) {
       let n = d()(l.slice(0, t + 1));

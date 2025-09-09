@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { FirstDraftHelpers, VariablesBindings } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { zN } from "../905/19536";
+import { useStableMemo } from "../905/19536";
 import { permissionScopeHandler } from "../905/189185";
 import { x$, i6, v2 } from "../905/188715";
 import { Au, g5, iR } from "../figma_app/193952";
@@ -680,8 +680,8 @@ export function $$K1(e) {
 let Y = [];
 export function $$q0(e, t = Y) {
   let i = e?.pageId;
-  e = zN(e);
-  t = zN(t);
+  e = useStableMemo(e);
+  t = useStableMemo(t);
   let l = getSingletonSceneGraph();
   let [d, c] = useState(null);
   let [u, p] = useState(null);

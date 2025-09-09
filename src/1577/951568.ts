@@ -8,9 +8,9 @@ import { oA, Xm, gB } from "../905/723791";
 import { CT } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
 import { FBillingModelType } from "../figma_app/191312";
-import { WF4 } from "../figma_app/43951";
+import { OrgProductTermsEligibleInfo } from "../figma_app/43951";
 import { D6, j_ } from "../figma_app/465071";
-export let $$p1 = createRemovableAtomFamily(e => atom(t => e ? t(WF4.Query({
+export let $$p1 = createRemovableAtomFamily(e => atom(t => e ? t(OrgProductTermsEligibleInfo.Query({
   orgId: e
 })).transform(({
   org: e

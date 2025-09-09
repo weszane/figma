@@ -1,19 +1,19 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { i as _$$i } from "../905/718764";
 import { l as _$$l } from "../905/716947";
 import l from "../vendor/523035";
 import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { n1 } from "../figma_app/657017";
 import { d1 } from "../905/766303";
 import { Fl } from "../figma_app/236178";
-import { $cq } from "../figma_app/43951";
+import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
 import { fi } from "../figma_app/155728";
 import { ol } from "../figma_app/598018";
 import { ev } from "../905/909811";
@@ -43,7 +43,7 @@ export function $$F0({
 }) {
   let B = n1();
   let V = _$$er();
-  let G = Rs($cq, {
+  let G = Rs(LibraryModalAssetsDataByLibraryKey, {
     libraryKey: e
   }, {
     enabled: B
@@ -65,7 +65,7 @@ export function $$F0({
   let J = _$$c2({
     libraryKey: e
   });
-  let ee = rf("communityLibraryFileView.backCaret", "mousedown", t);
+  let ee = useHandleMouseEvent("communityLibraryFileView.backCaret", "mousedown", t);
   let et = Go(e ?? _$$l(""));
   let ei = jN(e);
   let en = useSelector(e => !!$?.org_id && e.orgById[$.org_id]?.bigma_enabled);

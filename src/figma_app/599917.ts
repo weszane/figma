@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { connect, useDispatch, useSelector } from "../vendor/514228";
-import { Ay } from "../905/612521";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { customHistory } from "../905/612521";
 import { oJ } from "../905/63728";
 import { xn } from "../905/934145";
 import { sf } from "../905/929976";
@@ -17,7 +17,7 @@ class h extends PureComponent {
     super(...arguments);
     this.onClick = e => {
       if (e.preventDefault(), e.stopPropagation(), oJ(e) || this.props.openInNewTab) {
-        Ay.redirect(this.props.hrefPath || "", "_blank");
+        customHistory.redirect(this.props.hrefPath || "", "_blank");
         return;
       }
       let t = m(this.props);
@@ -84,7 +84,7 @@ export function $$f1(e) {
     className: M2,
     onClick: e => {
       if (e.preventDefault(), e.stopPropagation(), oJ(e)) {
-        Ay.redirect(i || "", "_blank");
+        customHistory.redirect(i || "", "_blank");
         return;
       }
       t(sf(r));

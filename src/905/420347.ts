@@ -1,5 +1,5 @@
 import { useMemo, useRef } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { createRemovableAtomFamily, atom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { Bq } from "../905/760682";

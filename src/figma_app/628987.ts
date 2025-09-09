@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
@@ -16,7 +16,7 @@ import { K4, P6 } from "../905/535224";
 import { h as _$$h } from "../905/207101";
 import { selectWithShallowEqual } from "../905/103090";
 import { buildStaticUrl } from "../figma_app/169182";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { E as _$$E2 } from "../905/277716";
@@ -58,8 +58,8 @@ let ea = buildStaticUrl("font/previews");
 let es = getFeatureFlags().font_index_250317 ? "font_previews.3e7c0297f334e1a1002e3f2f2dc38dcb.json.br" : "font_previews.be806b368d91ef4a0f93e8d2136d49a9.json.br";
 let eo = `${ea}/${es}`;
 let el = !1;
-class ed extends a3 {}
-class ec extends c$ {}
+class ed extends a3 { }
+class ec extends c$ { }
 export function $$eu1() {
   let e = selectWithShallowEqual(e => Cy(e.mirror));
   let t = useRef(e);
@@ -168,7 +168,7 @@ export function $$em2({
   let eF = useRef(null);
   let ej = useRef(null);
   let eU = useCallback(e => {
-    if (ef?.id === eo) eg(XE());else {
+    if (ef?.id === eo) eg(XE()); else {
       eC(!0);
       eg(Uv());
       let e = "row" === em ? cn(ej.current, parsePxNumber(kaq)) : ej.current.getBoundingClientRect();
@@ -194,10 +194,10 @@ export function $$em2({
   for (let e of (!eG || eG in ea || (eB.push(jsx(ec, {
     value: eG,
     disabled: !0,
-    recordingKey: Pt(r, eG)
+    recordingKey: generateRecordingKey(r, eG)
   }, `current-font-${eG}`)), eB.push(jsx(sK, {}, "current-font-divider"))), ew)) eB.push(jsx(ec, {
     value: e,
-    recordingKey: Pt(r, e),
+    recordingKey: generateRecordingKey(r, e),
     children: e
   }, `font-name-${e}`));
   let eH = !isInteractionPathCheck() || ef?.id === eo || eN;
@@ -262,7 +262,7 @@ export function $$em2({
             role: "combobox"
           },
           onClick: eU,
-          recordingKey: Pt(r, "openFontPickerButton"),
+          recordingKey: generateRecordingKey(r, "openFontPickerButton"),
           children: [eV && jsx(_$$B, {
             svg: _$$A,
             className: q_
@@ -299,15 +299,15 @@ export function $$em2({
           nodeIds: eP.current
         }), Promise.resolve()),
         children: eB
-      });else if (eb || eT) return jsx(Ad, {
+      }); else if (eb || eT) return jsx(Ad, {
         ref: ej,
         label: null,
         input: u
-      });else if ("button" === em) return jsx(D8, {
+      }); else if ("button" === em) return jsx(D8, {
         forwardedRef: ej,
         "data-non-interactive": !0,
         children: u
-      });else return jsx(DE, {
+      }); else return jsx(DE, {
         appendedClassName: m()({
           [A5]: a
         }),

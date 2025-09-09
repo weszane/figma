@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent, createRef, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import u from "classnames";

@@ -1,8 +1,8 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { oA } from "../905/663269";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { w } from "../905/281010";
 export function $$d1(e) {
   let t = oA(e.createdAt) || new Date();
@@ -20,13 +20,13 @@ export function $$d1(e) {
 export function $$c0() {
   let e = useDispatch();
   let t = () => {
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.error_generic"),
       error: !0,
       button: {
         text: getI18nString("admin_dashboard.requests.error_reload"),
         action: () => {
-          Ay.reload("Seat request reminder error");
+          customHistory.reload("Seat request reminder error");
         }
       }
     }));
@@ -40,7 +40,7 @@ export function $$c0() {
           t();
           return;
         }
-        e(F.enqueue({
+        e(VisualBellActions.enqueue({
           message: getI18nString("fullscreen.toolbar.reminder_sent"),
           type: "request-reminder-sent"
         }));

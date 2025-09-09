@@ -1,11 +1,11 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { s_ } from "../905/17223";
 import { ks, nR, $$ } from "../figma_app/637027";
 import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { W } from "../5430/573261";
 import { hideModal, showModalHandler } from "../905/156213";
 import { xF, yo } from "../figma_app/494261";
@@ -214,7 +214,7 @@ let $$w1 = registerModal(function (e) {
           }));
           return;
         }
-        t(F.enqueue({
+        t(VisualBellActions.enqueue({
           error: !0,
           message: getI18nString("allowlist_plugins_modals.add_plugin.invalid_url_notification")
         }));
@@ -275,7 +275,7 @@ let $$k2 = registerModal(function (e) {
           }));
           return;
         }
-        t(F.enqueue({
+        t(VisualBellActions.enqueue({
           error: !0,
           message: getI18nString("allowlist_widgets_modals.add_widget.invalid_url_notification")
         }));

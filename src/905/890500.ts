@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { b, q7, bL, mc } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { Df, Mv, AY, QY } from "../figma_app/770088";
 import { showModalHandler } from "../905/156213";
 import { I_ } from "../905/234821";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { kT } from "../905/380385";
 import { v } from "../905/266815";
 import { E as _$$E } from "../905/565019";
@@ -17,7 +17,7 @@ var A = (e => (e.EDIT = "edit", e.DELETE = "delete", e.COPY_LINK = "copy_link", 
 export function $$y0(e) {
   let t = I_();
   let i = useDispatch();
-  let A = iZ();
+  let A = selectCurrentUser();
   let y = v();
   let {
     manager,

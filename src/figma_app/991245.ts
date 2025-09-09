@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { bellFeedAPIInstance, getBellFeedAPI } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
 import { BrowserInfo } from "../figma_app/778880";
@@ -65,7 +65,7 @@ function S(e, t, r, n) {
           quickReplyInfo: t
         }));
         bellFeedAPIInstance.toggleTrayWindow(!0);
-      } else r && Ay.redirect(r);
+      } else r && customHistory.redirect(r);
     });
   };
 }

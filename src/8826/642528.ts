@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useRef, memo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/658074";
 import { W as _$$W } from "../figma_app/462192";
@@ -8,7 +8,7 @@ import { SceneGraphHelpers, GridLayoutApi, GridDirection, LayoutSizingType, Axis
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { B as _$$B } from "../905/714743";
 import { S as _$$S } from "../905/177206";
 import { N as _$$N } from "../905/696319";
@@ -32,7 +32,7 @@ import { E as _$$E3 } from "../905/172252";
 import T from "classnames";
 import { M as _$$M } from "../figma_app/634148";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { hF, qE, QK } from "../figma_app/960598";
 import { A as _$$A } from "../svg/904889";
 import { A as _$$A2 } from "../svg/452687";
@@ -100,8 +100,8 @@ function W({
     let l = e !== g;
     let i = t !== m;
     (l || i) && permissionScopeHandler.user("grid-panel-empty-grid-immediate-resize", () => {
-      l && o(e, zk.NO);
-      i && u(t, zk.NO);
+      l && o(e, yesNoTrackingEnum.NO);
+      i && u(t, yesNoTrackingEnum.NO);
     });
   };
   let O = !a || !s || isInvalidValue(a) || isInvalidValue(s);
@@ -138,10 +138,10 @@ function W({
     let n = null !== e && e >= 1 && e <= 100 && e !== g;
     let l = null !== t && t >= 1 && t <= 100 && t !== m;
     n || l ? permissionScopeHandler.user("grid-panel-commit", () => {
-      let i = n && !l ? zk.YES : zk.NO;
-      getFeatureFlags().ce_tv_grid_reflow && C?.mode === "hover" ? GridLayoutApi?.setDimensions(t, e) : (n && o(e, i), l && u(t, zk.YES));
+      let i = n && !l ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO;
+      getFeatureFlags().ce_tv_grid_reflow && C?.mode === "hover" ? GridLayoutApi?.setDimensions(t, e) : (n && o(e, i), l && u(t, yesNoTrackingEnum.YES));
     }) : permissionScopeHandler.user("grid-panel-commit", () => {
-      u(t, zk.YES);
+      u(t, yesNoTrackingEnum.YES);
     });
   };
   let V = (e, t) => {
@@ -165,7 +165,7 @@ function W({
           "--cols": T
         }
       }),
-      recordingKey: Pt(e, "button"),
+      recordingKey: generateRecordingKey(e, "button"),
       disabled: t,
       children: [jsx("div", {
         className: "grid_picker--gridWidgetLabel--ceNc2",
@@ -199,8 +199,8 @@ function W({
             let n = g !== e;
             let l = m !== t;
             (n || l) && permissionScopeHandler.user("grid-panel-revert-on-escape", () => {
-              n && o(e, zk.NO);
-              l && u(t, zk.NO);
+              n && o(e, yesNoTrackingEnum.NO);
+              l && u(t, yesNoTrackingEnum.NO);
             });
           }
           S(null);
@@ -239,7 +239,7 @@ function W({
           }) => {
             C?.mode !== "input" && (K(e, t), r(!1));
           },
-          recordingKey: Pt(e, "gridBoxes"),
+          recordingKey: generateRecordingKey(e, "gridBoxes"),
           initialGridSize: _.current
         })]
       })
@@ -257,7 +257,7 @@ function X(e, t) {
     if (n instanceof HTMLInputElement) {
       let e = n.value;
       let l = null;
-      if ("" === e) l = null;else {
+      if ("" === e) l = null; else {
         let t = parseInt(e, 10);
         l = isNaN(t) ? null : t;
       }
@@ -306,7 +306,7 @@ let q = memo(function ({
     onValueChange: (e, t) => {
       t ? i(e) : n(e);
     },
-    recordingKey: Pt(e, "colInput"),
+    recordingKey: generateRecordingKey(e, "colInput"),
     value: t,
     children: jsx(_$$B, {
       svg: _$$A,
@@ -339,7 +339,7 @@ let J = memo(function ({
     onValueChange: (e, t) => {
       t ? i(e) : n(e);
     },
-    recordingKey: Pt(e, "rowInput"),
+    recordingKey: generateRecordingKey(e, "rowInput"),
     value: t,
     children: jsx(_$$B, {
       svg: _$$A2,
@@ -541,7 +541,7 @@ let et = memo(function ({
         mode: e?.mode || "hover",
         onCommit: i,
         onReEnableHover: n,
-        recordingKey: Pt(r, u + 1, d + 1)
+        recordingKey: generateRecordingKey(r, u + 1, d + 1)
       }, t);
     })
   });
@@ -588,7 +588,7 @@ function ec({
       leftInput: jsx(Ht, {
         value: n?.rowAnchorIndex ?? void 0,
         onValueChange: e => r(GridDirection.ROW, e),
-        recordingKey: Pt(e, "grid-rows"),
+        recordingKey: generateRecordingKey(e, "grid-rows"),
         id: "grid-rows",
         dispatch: lQ,
         "data-tooltip-type": Ib.TEXT,
@@ -601,7 +601,7 @@ function ec({
       rightInput: jsx(Ht, {
         value: n?.columnAnchorIndex ?? void 0,
         onValueChange: e => r(GridDirection.COLUMN, e),
-        recordingKey: Pt(e, "grid-columns"),
+        recordingKey: generateRecordingKey(e, "grid-columns"),
         id: "grid-columns",
         dispatch: lQ,
         "data-tooltip-type": Ib.TEXT,
@@ -618,7 +618,7 @@ function ec({
       leftInput: jsx(Ht, {
         value: n?.rowSpan,
         onValueChange: e => o(GridDirection.ROW, e),
-        recordingKey: Pt(e, "grid-rows"),
+        recordingKey: generateRecordingKey(e, "grid-rows"),
         id: "grid-rows",
         dispatch: lQ,
         "data-tooltip-type": Ib.TEXT,
@@ -631,7 +631,7 @@ function ec({
       rightInput: jsx(Ht, {
         value: n?.columnSpan,
         onValueChange: e => o(GridDirection.COLUMN, e),
-        recordingKey: Pt(e, "grid-columns"),
+        recordingKey: generateRecordingKey(e, "grid-columns"),
         id: "grid-columns",
         dispatch: lQ,
         "data-tooltip-type": Ib.TEXT,
@@ -700,7 +700,7 @@ function ed({
           svg: _$$A3,
           className: QK
         }),
-        recordingKey: Pt(e, "gridColumnSpan"),
+        recordingKey: generateRecordingKey(e, "gridColumnSpan"),
         "data-testid": "grid-column-span-input"
       }),
       rightInput: jsx(_$$N, {
@@ -717,7 +717,7 @@ function ed({
           svg: _$$A4,
           className: QK
         }),
-        recordingKey: Pt(e, "gridRowSpan"),
+        recordingKey: generateRecordingKey(e, "gridRowSpan"),
         "data-testid": "grid-row-span-input"
       }),
       icon: null
@@ -747,17 +747,17 @@ function ep({
     leftLabel: getI18nString("fullscreen.properties_panel.stack_panel.grid"),
     rightLabel: getI18nString("fullscreen.properties_panel.section_autoLayout.label_gap"),
     leftInput: jsx(Y, {
-      recordingKey: Pt(e, "gridPicker"),
+      recordingKey: generateRecordingKey(e, "gridPicker"),
       disabled: !!(t || n)
     }),
     topRightInput: jsx(eg, {
-      recordingKey: Pt(e, "gridColumnSpacingControl")
+      recordingKey: generateRecordingKey(e, "gridColumnSpacingControl")
     }),
     bottomRightInput: jsx(e_, {
-      recordingKey: Pt(e, "gridRowSpacingControl")
+      recordingKey: generateRecordingKey(e, "gridRowSpacingControl")
     }),
     topIcon: jsx(_$$o, {
-      recordingKey: Pt(e, "stackLayoutDetails")
+      recordingKey: generateRecordingKey(e, "stackLayoutDetails")
     }),
     bottomIcon: null
   });

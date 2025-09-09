@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { useStore } from "../vendor/514228";
+import { useStore } from "react-redux";
 import { SceneGraphHelpers, ViewType } from "../figma_app/763686";
 import { Ql } from "../figma_app/387100";
 import { selectWithShallowEqual } from "../905/103090";

@@ -1,7 +1,7 @@
 import { ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { WW } from "../905/521428";
 import { generateRecordingKey } from "../figma_app/878298";
 import p from "../vendor/223926";
@@ -27,8 +27,8 @@ import { O as _$$O2 } from "../905/969533";
 import { wv } from "../figma_app/439493";
 import { Fn } from "../figma_app/769101";
 import { debugState } from "../905/407919";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 let a = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -223,10 +223,10 @@ export function $$F0() {
       commandName: e.relaunchButton.name
     });
     n = "figjam-plugin-relaunched";
-    debugState.dispatch(F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       message: t,
       type: n,
-      icon: zX.CHECK,
+      icon: VisualBellIcon.CHECK,
       timeoutOverride: 3e3
     }));
     let {

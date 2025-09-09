@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { showModalHandler } from "../905/156213";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useState, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -13,14 +13,14 @@ import { a as _$$a } from "../905/676930";
 import { B as _$$B } from "../905/950875";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { k as _$$k2 } from "../905/651849";
+import { logger } from "../905/651849";
 import { A as _$$A } from "../905/920142";
 import { rb, $z, c as _$$c } from "../figma_app/617427";
 import { Ph, o as _$$o } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { J as _$$J } from "../905/231762";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { c as _$$c2 } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { e0 } from "../905/696396";
@@ -164,7 +164,7 @@ async function q(e) {
     planType: FOrganizationLevelType.ORG,
     planId: e
   })])).forEach(e => {
-    "rejected" === e.status && _$$k2.error(e.reason);
+    "rejected" === e.status && logger.error(e.reason);
   });
 }
 let $ = {
@@ -554,7 +554,7 @@ function z(e) {
           orgId: e.orgId
         });
       } catch (e) {
-        s(_$$F.enqueue({
+        s(VisualBellActions.enqueue({
           message: _$$J(e, getI18nString("org_admin_settings.schedule_cancellation_modal.generic_error")),
           error: !0
         }));
@@ -564,18 +564,18 @@ function z(e) {
       try {
         await q(e.orgId);
       } catch (e) {
-        _$$k2.error(e);
+        logger.error(e);
       }
-      s(_$$F.enqueue({
+      s(VisualBellActions.enqueue({
         message: getI18nString("org_admin_settings.schedule_cancellation_modal.success", {
           orgName: e.orgName,
           scheduledCancellationDate: e.scheduledCancellationDate
         }),
-        icon: zX.WARNING_EXCLAMATION_WITH_TRIANGLE
+        icon: VisualBellIcon.WARNING_EXCLAMATION_WITH_TRIANGLE
       }));
       t();
     })().catch(e => {
-      _$$k2.error(e);
+      logger.error(e);
       a(!1);
     });
   }, [s, e.orgId, e.onClose, e.orgName, e.scheduledCancellationDate]);
@@ -676,7 +676,7 @@ function W(e) {
           orgId: e.orgId
         });
       } catch (e) {
-        a(_$$F.enqueue({
+        a(VisualBellActions.enqueue({
           message: _$$J(e, getI18nString("org_admin_settings.unschedule_cancellation_modal.generic_error")),
           error: !0
         }));
@@ -686,15 +686,15 @@ function W(e) {
       try {
         await q(e.orgId);
       } catch (e) {
-        _$$k2.error(e);
+        logger.error(e);
       }
-      a(_$$F.enqueue({
+      a(VisualBellActions.enqueue({
         message: getI18nString("org_admin_settings.unschedule_cancellation_modal.success"),
-        icon: zX.CHECK_WITH_CIRCLE
+        icon: VisualBellIcon.CHECK_WITH_CIRCLE
       }));
       onClose();
     })().catch(e => {
-      _$$k2.error(e);
+      logger.error(e);
       s(!1);
     });
   }, [a, e.orgId, onClose]);

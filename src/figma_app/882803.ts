@@ -10,7 +10,7 @@ import { P as _$$P } from "../905/547523";
 import { L as _$$L } from "../905/473569";
 import _ from "classnames";
 import { R7 } from "../905/508367";
-import { k as _$$k2 } from "../905/651849";
+import { logger } from "../905/651849";
 import { BrowserInfo } from "../figma_app/778880";
 import { _d } from "../figma_app/795674";
 import { Fe, uz } from "../905/284552";
@@ -111,7 +111,7 @@ export let $$N0 = memo(({
     try {
       await uz(e, r, n);
     } catch {
-      _$$k2.warn("Reverting to fallback video source");
+      logger.warn("Reverting to fallback video source");
       await uz(t ?? null, !1, n);
     }
     l && D();

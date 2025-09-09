@@ -3,8 +3,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { oA } from "../905/663269";
 import { bellFeedAPIInstance } from "../figma_app/876459";
 import { reportError } from "../905/11";
-import { g } from "../905/880308";
-import { dA6, nKj, qZS, JgS } from "../figma_app/43951";
+import { generateUUIDv4 } from "../905/871474";
+import { FilePresenterData, DesktopTabPreviewView, FileWithCommentsAndReactions, PersistentUserNotificationBellData } from "../figma_app/43951";
 import { td } from "../figma_app/273118";
 export class $$u2 {
   constructor() {
@@ -22,7 +22,7 @@ export class $$u2 {
     }
   }
   subscribeToFilePresenterData(e, t) {
-    return t.subscribe(dA6, {
+    return t.subscribe(FilePresenterData, {
       fileKey: e
     }, t => {
       if ("loaded" === t.status && t.data.file?.presenter) {
@@ -57,7 +57,7 @@ export class $$u2 {
     });
   }
   subscribeToTabPreviewData(e, t) {
-    return t.subscribe(nKj, {
+    return t.subscribe(DesktopTabPreviewView, {
       fileKey: e
     }, e => {
       if ("loaded" === e.status && e.data.file) {
@@ -69,8 +69,8 @@ export class $$u2 {
     });
   }
   subscribeToFileCommentData(e, t) {
-    let i = "menubar" + g();
-    return t.subscribe(qZS, {
+    let i = "menubar" + generateUUIDv4();
+    return t.subscribe(FileWithCommentsAndReactions, {
       fileKey: e
     }, t => {
       if ("loaded" === t.status && t.data.file?.currentUserCommentReadStatus) {
@@ -148,7 +148,7 @@ export function $$p1(e) {
 }
 export function $$m0(e) {
   let t = !1;
-  return e.subscribe(JgS, {}, e => {
+  return e.subscribe(PersistentUserNotificationBellData, {}, e => {
     if ("loaded" !== e.status) return;
     let i = (oA(e.data.persistentUserNotificationBells) || []).find(e => e.notificationSpaceId === td);
     i && i.bell !== t && (t = i.bell, bellFeedAPIInstance?.setBell(i.bell));

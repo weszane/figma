@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect, useState, createElement } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { SettingsAction, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -60,7 +60,7 @@ function M({
         data: {
           selectionToUpdate: SettingsAction.PREFERENCES
         }
-      }));else {
+      })); else {
         let e = s ? 42 : 0;
         i(j7({
           type: pi,

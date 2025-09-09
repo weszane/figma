@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hideModal } from "../905/156213";
 export function $$s0() {
   let e = useDispatch();

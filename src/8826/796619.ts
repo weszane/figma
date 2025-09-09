@@ -1,13 +1,13 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useId } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { languageCodes } from "../905/816253";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { bL, DZ, mc, c$, wv } from "../905/493196";
 import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
@@ -50,7 +50,7 @@ function T({
   let u = () => {
     o.showing && (o.hide(), fullscreenValue.deselectProperty());
   };
-  let h = Pt(n, "trigger");
+  let h = generateRecordingKey(n, "trigger");
   let {
     x,
     y
@@ -97,7 +97,7 @@ function T({
           top: y,
           right: x
         },
-        recordingKey: Pt(n, "window"),
+        recordingKey: generateRecordingKey(n, "window"),
         children: n.children
       })
     }) : null]
@@ -471,7 +471,7 @@ function J({
             setting: null != t ? "reverseStackingOrder" : void 0,
             enabled: "TRUE" === t
           }),
-          recordingKey: Pt(t, "reverseStackingOrder"),
+          recordingKey: generateRecordingKey(t, "reverseStackingOrder"),
           children: [jsx(DZ, {
             id: I,
             width: "fill"
@@ -513,7 +513,7 @@ function J({
           enabled: !!t
         }),
         property: c,
-        recordingKey: Pt(t, "reverseStackingOrder"),
+        recordingKey: generateRecordingKey(t, "reverseStackingOrder"),
         children: [jsx(_$$c$, {
           value: !0
         }), jsx(_$$c$, {
@@ -535,7 +535,7 @@ function ee({
     name: "baseline_alignment_control",
     children: jsx(_$$k2, {
       label: getI18nString("fullscreen.properties_panel.stack_panel.align_text_baseline"),
-      recordingKey: Pt(t, "alignToBaseline"),
+      recordingKey: generateRecordingKey(t, "alignToBaseline"),
       property: i,
       disabled: r,
       onChange: t => {
@@ -602,7 +602,7 @@ function et({
             setting: null != t ? "bordersTakeSpace" : void 0,
             enabled: "TRUE" === t
           }),
-          recordingKey: Pt(t, "bordersTakeSpace"),
+          recordingKey: generateRecordingKey(t, "bordersTakeSpace"),
           children: [jsx(DZ, {
             id: j,
             width: "fill"
@@ -645,7 +645,7 @@ function et({
           enabled: !!t
         }),
         property: S,
-        recordingKey: Pt(t, "bordersTakeSpace"),
+        recordingKey: generateRecordingKey(t, "bordersTakeSpace"),
         children: [jsx(_$$c$, {
           value: !0
         }), jsx(_$$c$, {

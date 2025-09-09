@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { XHR } from "../905/910117";
 import { nR, $$, vd } from "../figma_app/637027";
 import { v as _$$v } from "../905/755077";

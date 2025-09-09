@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { J, q } from '../905/202542';
 import { getI18nString } from '../905/303541';
 import { oA } from '../905/723791';
-import { ly7, NI1 } from '../figma_app/43951';
+import { HasConnectedPlanUserInOrg, ProjectNameById } from '../figma_app/43951';
 import { FOrganizationLevelType, FProductAccessType } from '../figma_app/191312';
 import { p as _$$p, Rs } from '../figma_app/288654';
 import { Cy, wH } from '../figma_app/680166';
@@ -42,13 +42,13 @@ export function $$E4(e) {
   let t = e.filter(e => e != null).map(e => ({
     projectId: e
   }));
-  let r = _$$p(NI1, t);
+  let r = _$$p(ProjectNameById, t);
   return useMemo(() => r.reduce((e, t) => (t.args.projectId && e.set(t.args.projectId, t?.result?.data?.project?.path ?? null), e), new Map()), [r]);
 }
 export function $$y0(e, t) {
   let r = e?.parentId || '';
   let n = e?.type === FOrganizationLevelType.ORG;
-  let i = Rs(ly7, {
+  let i = Rs(HasConnectedPlanUserInOrg, {
     org_id: r,
     license_type: t
   }, {

@@ -5,7 +5,7 @@ import { WB } from '../905/761735';
 import { debounce } from '../905/915765';
 import { resourceUtils } from '../905/989992';
 import { atom, createRemovableAtomFamily, setupAtomWithMount, atomStoreManager } from '../figma_app/27355';
-import { bsh, cmY, jXq, Lom, o9k, QEv, u6n } from '../figma_app/43951';
+import { VariableCollectionByKey, VariablesByVariableCollectionKey, LibraryVariableCollectionDataWithVariables, VariableByKey, LibraryVariableCollectionData, UserColorProfilePreferenceView, LibraryModuleData } from '../figma_app/43951';
 function u(e, t) {
   return lw(e, t);
 }
@@ -45,12 +45,12 @@ function g(e) {
     });
   }(e, t), h);
 }
-let $$f4 = m(QEv);
-let $$_6 = m(cmY);
-let $$A3 = m(Lom);
-let $$y8 = m(u6n);
-let $$b1 = g(bsh);
-let $$v5 = g(Lom);
+let $$f4 = m(UserColorProfilePreferenceView);
+let $$_6 = m(VariablesByVariableCollectionKey);
+let $$A3 = m(VariableByKey);
+let $$y8 = m(LibraryModuleData);
+let $$b1 = g(VariableCollectionByKey);
+let $$v5 = g(VariableByKey);
 function I(e, t) {
   let i = createRemovableAtomFamily(t => p(e, t), u);
   let n = t(i);
@@ -78,8 +78,8 @@ export function $$E2(e, t) {
     a && l();
   });
 }
-let $$x0 = e => I(o9k, e);
-let $$S7 = e => I(jXq, e);
+let $$x0 = e => I(LibraryVariableCollectionData, e);
+let $$S7 = e => I(LibraryVariableCollectionDataWithVariables, e);
 export const BV = $$x0;
 export const Ew = $$b1;
 export const QO = $$E2;

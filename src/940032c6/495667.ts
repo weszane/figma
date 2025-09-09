@@ -1,9 +1,9 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { WB } from "../905/761735";
 import { gY } from "../figma_app/566371";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Jm } from "../figma_app/387599";
 import { KH, A7 } from "../figma_app/471982";
 import { XW, Qc, $3, qY, Vm } from "../figma_app/427318";
@@ -13,7 +13,7 @@ import { C, $ } from "../figma_app/382445";
 import { showModalHandler } from "../905/156213";
 import { s0, M5 } from "../figma_app/350203";
 import { Cu } from "../figma_app/314264";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { M4 } from "../905/713695";
 import { U, xQ, vt } from "../figma_app/45218";
 import { a as _$$a } from "../figma_app/601188";
@@ -21,7 +21,7 @@ import { G$, FF } from "../figma_app/588092";
 export function $$k0(e, t, i, p) {
   let b = function (e, t, i, l) {
     let a = useDispatch();
-    let s = iZ();
+    let s = selectCurrentUser();
     let r = Jm();
     let o = () => {
       XW(e) || (Cu(v()), U(e) ? a(zm({
@@ -81,7 +81,7 @@ export function $$k0(e, t, i, p) {
   }(e, t, i, p);
   let v = function (e, t, i, p) {
     let x = useDispatch();
-    let m = iZ();
+    let m = selectCurrentUser();
     let b = Jm();
     let y = gY($$w);
     let v = gY(S);
@@ -110,7 +110,7 @@ export function $$k0(e, t, i, p) {
         }
       }, i);
       i.catch(e => {
-        x(F.enqueue({
+        x(VisualBellActions.enqueue({
           message: getI18nString("community.actions.unable_to_like_this_resource_error", {
             error: J(e, e.data?.message)
           }),
@@ -152,7 +152,7 @@ export function $$k0(e, t, i, p) {
         }
       }, a);
       a.catch(e => {
-        x(F.enqueue({
+        x(VisualBellActions.enqueue({
           message: getI18nString("community.actions.unable_to_unlike_this_resource_error", {
             error: J(e, e.data.message)
           }),

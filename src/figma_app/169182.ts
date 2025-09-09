@@ -82,20 +82,12 @@ if (zoom_client_user_agent) {
 // Original: $$m24 - Empty object
 const emptyObject = {}
 
-// Feature Flag Related Functions
 
-/**
- * Original: $$h5 - Returns feature flag rules.
- * @returns {Record<string, any>} Feature flag rules.
- */
 export function getFeatureFlagRulesExport() {
   return getFeatureFlagRules()
 }
 
-/**
- * Original: $$g26 - Returns LaunchDarkly flags.
- * @returns {Record<string, any>} LaunchDarkly client flags.
- */
+
 export function getLaunchDarklyFlagsExport() {
   return getLaunchDarklyFlags()
 }
@@ -159,7 +151,7 @@ export function getPaymentFlowData() {
  * @returns {InitialOptions} Initial options.
  */
 export function getInitialOptions(): InitialOptions {
-  return window.INITIAL_OPTIONS || {}
+  return window.INITIAL_OPTIONS || {} as InitialOptions
 }
 
 /**

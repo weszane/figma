@@ -1,77 +1,76 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useState, useCallback, useEffect, useRef, useMemo, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
-import { noop, debug } from "../figma_app/465776";
-import { debounce } from "../905/915765";
-import { range } from "../figma_app/492908";
-import { n3, IA } from "../905/859698";
-import { Fullscreen, LayoutTabType, DesignGraphElements } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { xx } from "../figma_app/815945";
-import { localStorageRef } from "../905/657224";
-import { trackEventAnalytics } from "../905/449184";
-import { ZC } from "../figma_app/39751";
-import { Pt, rf } from "../figma_app/806412";
-import { _f } from "../905/760682";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { k as _$$k } from "../905/582200";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { oB, j7 } from "../905/929976";
-import { XE } from "../figma_app/91703";
-import { Bn, ay } from "../905/879323";
-import { GT } from "../905/711212";
-import { Zs, sw, rk, YG } from "../figma_app/914957";
-import { dG, ft } from "../figma_app/753501";
-import { fullscreenValue } from "../figma_app/455680";
-import { p8 } from "../figma_app/722362";
-import { q5 } from "../figma_app/516028";
-import { QT, XV, og, Kw, LX } from "../figma_app/646357";
-import { kH, In, ke } from "../905/309735";
-import { i4, A7 } from "../9314/278494";
-import { PW } from "../figma_app/633080";
-import { vL } from "../905/826900";
-import { e as _$$e, q as _$$q } from "../figma_app/905311";
-import { Bs } from "../figma_app/229710";
-import { ks, $4, fI, K0, Zk } from "../figma_app/626177";
-import { E as _$$E } from "../905/632989";
-import { K as _$$K } from "../905/443068";
-import { k as _$$k2 } from "../905/44647";
-import { O as _$$O } from "../905/969533";
-import { x as _$$x } from "../905/587214";
-import { Zk as _$$Zk } from "../figma_app/276332";
-import { Ib } from "../905/129884";
-import { useHandleChangeEvent, generateRecordingKey, useHandleKeyboardEvent, useHandleMouseEvent } from "../figma_app/878298";
-import q from "classnames";
-import { Uz, Fo } from "../905/63728";
-import { jNX, dGl, uj0 } from "../figma_app/27776";
-import { d as _$$d } from "../905/976845";
-import { A as _$$A } from "../905/891805";
-import { parsePxInt } from "../figma_app/783094";
-import { EF } from "../905/709171";
-import { P$ } from "../figma_app/80990";
-import { zi } from "../905/824449";
-import { Z as _$$Z } from "../905/248978";
-import { ms, c$, wv } from "../figma_app/236327";
-import { Um } from "../905/848862";
-import { QA, Ug, lM, l0, Pc, mx, g5, Md, VB, t_, dm, j3, KU, a2, Nr, h$, rM } from "../figma_app/463500";
-import { b as _$$b, bL, mc, q7, Q$ } from "../figma_app/860955";
-import { e as _$$e2 } from "../905/149844";
-import { e as _$$e3 } from "../905/678389";
-import { G as _$$G } from "../905/117393";
-import { E as _$$E2 } from "../905/375716";
-import { n as _$$n } from "../905/317686";
-import { getFeatureFlags } from "../905/601108";
-import { Nu } from "../figma_app/23780";
-import { Cf } from "../905/504727";
-import { lk } from "../905/182453";
-import { x as _$$x2 } from "../905/346809";
-var H = q;
-let G = "styles--contextMenu--C-hVT";
-let Z = "styles--caret--DZmzh";
-let $$Q = "styles--rowSelectedExpanded--MGvUV";
-let J = "styles--panelHeaderRow--Kxqgo styles--styleTypeSectionRow--wVTIO";
-let ee = "styles--panelHeaderRowFaded--pfgKz styles--panelHeaderRow--Kxqgo styles--styleTypeSectionRow--wVTIO draggable_list--panelHeaderRowFaded--kETRR";
-let et = "styles--panelTitleText--v7gXm draggable_list--panelTitleText--SwKez";
+import q from 'classnames';
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { k as _$$k2 } from '../905/44647';
+import { Fo, Uz } from '../905/63728';
+import { G as _$$G } from '../905/117393';
+import { Ib } from '../905/129884';
+import { e as _$$e2 } from '../905/149844';
+import { lk } from '../905/182453';
+import { permissionScopeHandler } from '../905/189185';
+import { Z as _$$Z } from '../905/248978';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { In, ke, kH } from '../905/309735';
+import { n as _$$n } from '../905/317686';
+import { x as _$$x2 } from '../905/346809';
+import { E as _$$E2 } from '../905/375716';
+import { K as _$$K } from '../905/443068';
+import { trackEventAnalytics } from '../905/449184';
+import { Cf } from '../905/504727';
+import { k as _$$k } from '../905/582200';
+import { x as _$$x } from '../905/587214';
+import { getFeatureFlags } from '../905/601108';
+import { E as _$$E } from '../905/632989';
+import { localStorageRef } from '../905/657224';
+import { e as _$$e3 } from '../905/678389';
+import { EF } from '../905/709171';
+import { GT } from '../905/711212';
+import { _f } from '../905/760682';
+import { zi } from '../905/824449';
+import { vL } from '../905/826900';
+import { Um } from '../905/848862';
+import { n3, VariableStyleId } from '../905/859698';
+import { ay, Bn } from '../905/879323';
+import { A as _$$A } from '../905/891805';
+import { debounce } from '../905/915765';
+import { j7, oB } from '../905/929976';
+import { O as _$$O } from '../905/969533';
+import { d as _$$d } from '../905/976845';
+import { A7, i4 } from '../9314/278494';
+import { Nu } from '../figma_app/23780';
+import { dGl, jNX, uj0 } from '../figma_app/27776';
+import { ZC } from '../figma_app/39751';
+import { P$ } from '../figma_app/80990';
+import { XE } from '../figma_app/91703';
+import { Bs } from '../figma_app/229710';
+import { c$, ms, wv } from '../figma_app/236327';
+import { Zk as _$$Zk } from '../figma_app/276332';
+import { fullscreenValue } from '../figma_app/455680';
+import { a2, dm, g5, h$, j3, KU, l0, lM, Md, mx, Nr, Pc, QA, rM, t_, Ug, VB } from '../figma_app/463500';
+import { debug, noop } from '../figma_app/465776';
+import { range } from '../figma_app/492908';
+import { q5 } from '../figma_app/516028';
+import { $4, fI, K0, ks, Zk } from '../figma_app/626177';
+import { PW } from '../figma_app/633080';
+import { Kw, LX, og, QT, XV } from '../figma_app/646357';
+import { p8 } from '../figma_app/722362';
+import { dG, ft } from '../figma_app/753501';
+import { DesignGraphElements, Fullscreen, LayoutTabType } from '../figma_app/763686';
+import { parsePxInt } from '../figma_app/783094';
+import { memoizeByArgs } from '../figma_app/815945';
+import { b as _$$b, bL, mc, q7, Q$ } from '../figma_app/860955';
+import { generateRecordingKey, useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
+import { isInteractionPathCheck } from '../figma_app/897289';
+import { e as _$$e, q as _$$q } from '../figma_app/905311';
+import { rk, sw, YG, Zs } from '../figma_app/914957';
+let H = q;
+let G = 'styles--contextMenu--C-hVT';
+let Z = 'styles--caret--DZmzh';
+let $$Q = 'styles--rowSelectedExpanded--MGvUV';
+let J = 'styles--panelHeaderRow--Kxqgo styles--styleTypeSectionRow--wVTIO';
+let ee = 'styles--panelHeaderRowFaded--pfgKz styles--panelHeaderRow--Kxqgo styles--styleTypeSectionRow--wVTIO draggable_list--panelHeaderRowFaded--kETRR';
+let et = 'styles--panelTitleText--v7gXm draggable_list--panelTitleText--SwKez';
 function el({
   childLeft: e,
   childRight: t,
@@ -116,12 +115,12 @@ function el({
     F(h);
   }, [h]);
   let Y = useCallback(e => {
-    "" === e.trim() ? (B(a, h), F(h)) : B(a, e);
+    e.trim() === '' ? (B(a, h), F(h)) : B(a, e);
   }, [a, h, B]);
-  let z = useHandleChangeEvent(generateRecordingKey(R, "text-input"), "change", useCallback(e => {
+  let z = useHandleChangeEvent(generateRecordingKey(R, 'text-input'), 'change', useCallback(e => {
     F(e.currentTarget.value);
   }, [F]));
-  let q = useHandleKeyboardEvent(generateRecordingKey(R, "text-input"), "keydown", e => {
+  let q = useHandleKeyboardEvent(generateRecordingKey(R, 'text-input'), 'keydown', e => {
     e.keyCode === Uz.ESCAPE ? (B(a, h), F(h)) : e.keyCode === Uz.ENTER && Y(e.currentTarget.value);
   }, {
     recordMetadata: e => ({
@@ -133,16 +132,16 @@ function el({
       }
     })
   });
-  let G = useHandleKeyboardEvent(R, "keydown", e => {
-    c && !u && (e.keyCode === Uz.BACKSPACE || e.keyCode === Uz.DELETE) ? l() : c && !u && e.keyCode === Uz.G && Fo(e) ? (C(), e.preventDefault()) : !u && "Tab" !== e.key && e.nativeEvent && fullscreenValue.forwardKeyboardEvent(e.nativeEvent);
+  let G = useHandleKeyboardEvent(R, 'keydown', e => {
+    c && !u && (e.keyCode === Uz.BACKSPACE || e.keyCode === Uz.DELETE) ? l() : c && !u && e.keyCode === Uz.G && Fo(e) ? (C(), e.preventDefault()) : !u && e.key !== 'Tab' && e.nativeEvent && fullscreenValue.forwardKeyboardEvent(e.nativeEvent);
   });
   let Z = useCallback(() => {
     Y(K);
   }, [Y, K]);
-  let J = useHandleMouseEvent(R, "contextmenu", e => {
+  let J = useHandleMouseEvent(R, 'contextmenu', e => {
     S(e);
   });
-  let ee = useHandleMouseEvent(R, "mousemove", e => {
+  let ee = useHandleMouseEvent(R, 'mousemove', e => {
     T(e);
   }, {
     recordMetadata: e => ({
@@ -158,11 +157,11 @@ function el({
       pageY: e.pageY
     })
   });
-  let et = useHandleMouseEvent(R, "mousedown", e => {
+  let et = useHandleMouseEvent(R, 'mousedown', e => {
     v(e);
     r();
   });
-  let el = useHandleMouseEvent(R, "mouseenter", useCallback(() => {
+  let el = useHandleMouseEvent(R, 'mouseenter', useCallback(() => {
     $(!0);
     j?.(!0);
   }, [$, j]));
@@ -170,7 +169,7 @@ function el({
     $(!1);
     j?.(!1);
   }, [$, j]);
-  let es = useHandleMouseEvent(R, "dblclick", useCallback(e => {
+  let es = useHandleMouseEvent(R, 'dblclick', useCallback(e => {
     E(e);
   }, [E]));
   let eo = Math.min((g - 1) * 3, 18);
@@ -179,27 +178,27 @@ function el({
   let ei = N || D;
   let ed = H()({
     [$$Q]: !y && ei,
-    "styles--folderSecondarySelected--SL0JY": D || N && !p
+    'styles--folderSecondarySelected--SL0JY': D || N && !p
   });
   let ec = H()({
-    "styles--rowSelectedSecondaryLightBlue--S-zy- draggable_list--rowSelectedSecondary--yOI1g raw_components--rowSelectedSecondary---U7Us raw_components--rowSelected--M2Eip": ei,
+    'styles--rowSelectedSecondaryLightBlue--S-zy- draggable_list--rowSelectedSecondary--yOI1g raw_components--rowSelectedSecondary---U7Us raw_components--rowSelected--M2Eip': ei,
     [$$Q]: !m && ei
   });
-  let eu = H()("styles--rowWithBorder--bphZ-", {
+  let eu = H()('styles--rowWithBorder--bphZ-', {
     [ed]: x,
     [ec]: !x,
-    "styles--rowWithHover--RWNMH": !ei && (o || O && !d)
+    'styles--rowWithHover--RWNMH': !ei && (o || O && !d)
   });
-  let ey = jsx("div", {
-    className: u ? "styles--rowContentsRenaming--oDTtO styles--rowContents--37JBy" : "styles--rowContents--37JBy",
+  let ey = jsx('div', {
+    className: u ? 'styles--rowContentsRenaming--oDTtO styles--rowContents--37JBy' : 'styles--rowContents--37JBy',
     style: {
-      width: "100%"
+      width: '100%'
     },
     children: u ? jsx(ks, {
-      autoCapitalize: "off",
-      autoCorrect: "off",
+      autoCapitalize: 'off',
+      autoCorrect: 'off',
       autoFocus: !0,
-      className: "styles--input--LbjR0",
+      className: 'styles--input--LbjR0',
       innerRef: U,
       onBlur: Z,
       onChange: z,
@@ -207,13 +206,13 @@ function el({
       spellCheck: !1,
       value: K
     }) : jsxs(Fragment, {
-      children: [jsx("div", {
-        className: "styles--name--KWZ8d ellipsis--ellipsis--Tjyfa",
+      children: [jsx('div', {
+        className: 'styles--name--KWZ8d ellipsis--ellipsis--Tjyfa',
         ref: w,
         ...M,
         children: h
-      }), L && jsx("div", {
-        className: "styles--textStyle--DiUv4",
+      }), L && jsx('div', {
+        className: 'styles--textStyle--DiUv4',
         children: L
       })]
     })
@@ -235,12 +234,12 @@ function el({
     selected: N,
     selectedSecondary: !1,
     tabIndex: 0,
-    children: [eo > 0 && jsx("span", {
+    children: [eo > 0 && jsx('span', {
       style: {
         gridColumnEnd: `span ${eo}`
       }
-    }), jsxs("div", {
-      className: "styles--childLeftContainer--Hu61K",
+    }), jsxs('div', {
+      className: 'styles--childLeftContainer--Hu61K',
       style: {
         gridColumnEnd: `span ${ea || i ? er - 7 : er}`
       },
@@ -306,7 +305,7 @@ function en({
   return jsx(el, {
     childLeft: jsx(_$$E, {
       onClick: M,
-      className: "styles--caretContainer--4-dqw",
+      className: 'styles--caretContainer--4-dqw',
       ref: B,
       children: i && !y ? jsx(_$$k2, {
         className: Z
@@ -316,14 +315,14 @@ function en({
     }),
     childRight: A && jsx($4, {
       children: jsx(_$$K, {
-        recordingKey: Pt(k, "addButton"),
-        "aria-label": getI18nString("design_systems.styles.tooltips.create"),
-        onClick: q,
-        htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": getI18nString("design_systems.styles.tooltips.create")
+        'recordingKey': generateRecordingKey(k, 'addButton'),
+        'aria-label': getI18nString('design_systems.styles.tooltips.create'),
+        'onClick': q,
+        'htmlAttributes': {
+          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip': getI18nString('design_systems.styles.tooltips.create')
         },
-        children: jsx(_$$x, {})
+        'children': jsx(_$$x, {})
       })
     }),
     deleteSelectedItems: e,
@@ -393,7 +392,7 @@ function eu({
   }, [g, E.node_id, E.style_type, a]);
   let Y = _.isShown && !_.isCreating && _.style.node_id === E.node_id && EF(_.style, E);
   let W = (N || B) && !i || Y;
-  let q = useCallback(function () {
+  let q = useCallback(() => {
     let e = F.current;
     if (e) {
       let t = e.getBoundingClientRect();
@@ -410,49 +409,49 @@ function eu({
     M(XE());
   }, [M, m, R, E, Y]);
   let H = useCallback(e => {
-    (2 === e.button || e.ctrlKey) && T(F.current);
+    (e.button === 2 || e.ctrlKey) && T(F.current);
     p(e);
     Y && q();
   }, [q, p, Y, T]);
   let X = K.current;
   let G = !!X && X.offsetWidth < X.scrollWidth;
   let Z = useMemo(() => !r && E.description && G ? {
-    "data-tooltip-type": Ib.SPECIAL,
-    "data-tooltip": _$$Z,
-    "data-tooltip-style-name": kH(E.name),
-    "data-tooltip-style-description": E.description,
-    "data-tooltip-max-width": jNX * parsePxInt(dGl)
+    'data-tooltip-type': Ib.SPECIAL,
+    'data-tooltip': _$$Z,
+    'data-tooltip-style-name': kH(E.name),
+    'data-tooltip-style-description': E.description,
+    'data-tooltip-max-width': jNX * parsePxInt(dGl)
   } : null, [G, r, E.name, E.description]);
-  let Q = "TEXT" === E.style_type && E.meta?.style_thumbnail ? E.meta.style_thumbnail : null;
+  let Q = E.style_type === 'TEXT' && E.meta?.style_thumbnail ? E.meta.style_thumbnail : null;
   return jsx(el, {
     childLeft: jsxs(Fragment, {
       children: [jsx(zi, {
         dsStyle: E,
         disableTooltip: !0
-      }), w && "FILL" === E.style_type && jsx("div", {
-        className: "styles--selectedRing--UniEc"
+      }), w && E.style_type === 'FILL' && jsx('div', {
+        className: 'styles--selectedRing--UniEc'
       })]
     }),
     childRight: W && jsxs($4, {
-      children: [jsx("div", {
+      children: [jsx('div', {
         style: {
-          gridColumnEnd: "span 1"
+          gridColumnEnd: 'span 1'
         }
       }), jsx(_$$d, {
-        recordingKey: Pt(h, "customButton"),
-        "aria-expanded": Y,
-        onClick: q,
-        htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": a ? getI18nString("design_systems.styles.edit_style") : getI18nString("design_systems.styles.view_style"),
-          onMouseDown: dG,
-          tabIndex: 0,
-          onKeyDown: e => {
-            ("Enter" === e.key || "Space" === e.key) && (e.preventDefault(), q());
+        'recordingKey': generateRecordingKey(h, 'customButton'),
+        'aria-expanded': Y,
+        'onClick': q,
+        'htmlAttributes': {
+          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip': a ? getI18nString('design_systems.styles.edit_style') : getI18nString('design_systems.styles.view_style'),
+          'onMouseDown': dG,
+          'tabIndex': 0,
+          'onKeyDown': e => {
+            (e.key === 'Enter' || e.key === 'Space') && (e.preventDefault(), q());
           }
         },
-        children: jsx(_$$A, {}),
-        "aria-label": a ? getI18nString("design_systems.styles.edit_style") : getI18nString("design_systems.styles.view_style")
+        'children': jsx(_$$A, {}),
+        'aria-label': a ? getI18nString('design_systems.styles.edit_style') : getI18nString('design_systems.styles.view_style')
       })]
     }),
     deleteSelectedItems: e,
@@ -493,15 +492,15 @@ function ey({
   setDefaultToolOnCreateStyle: t,
   children: l
 }) {
-  let s = !p8("isReadOnly");
-  return jsxs("div", {
-    className: "styles--styleTypeSection--jPjTq component_tiles--section--qMua7",
+  let s = !p8('isReadOnly');
+  return jsxs('div', {
+    className: 'styles--styleTypeSection--jPjTq component_tiles--section--qMua7',
     children: [s ? jsx(em, {
       styleType: e,
       recordingKey: `style-section-header-${e}`,
       setDefaultToolOnCreateStyle: t
-    }) : jsx("div", {
-      className: "styles--styleTypeSectionHeader--224lA component_tiles--sectionHeader--eEC6d raw_components--panelTitle--VAQQA",
+    }) : jsx('div', {
+      className: 'styles--styleTypeSectionHeader--224lA component_tiles--sectionHeader--eEC6d raw_components--panelTitle--VAQQA',
       children: QT(e)
     }), l]
   });
@@ -515,7 +514,7 @@ function em({
   let i = useDispatch();
   let d = useRef(null);
   let c = useCallback(() => {
-    t && fullscreenValue.triggerAction("set-tool-default");
+    t && fullscreenValue.triggerAction('set-tool-default');
     let l = _$$Zk(e);
     let n = d.current?.getBoundingClientRect();
     l && n && i(Zs({
@@ -525,43 +524,43 @@ function em({
       inheritStyleKeyField: l
     }));
   }, [t, e, i]);
-  return jsxs("div", {
-    className: "styles--styleTypeSectionRow--wVTIO",
+  return jsxs('div', {
+    className: 'styles--styleTypeSectionRow--wVTIO',
     onMouseEnter: () => a(!0),
     onMouseLeave: () => a(!1),
     onFocusCapture: () => a(!0),
     onBlur: () => a(!1),
     ref: d,
-    children: [jsx("h3", {
-      className: "styles--styleTypeSectionRowLabel--PrKm-",
+    children: [jsx('h3', {
+      className: 'styles--styleTypeSectionRowLabel--PrKm-',
       children: QT(e)
-    }), jsx("div", {
+    }), jsx('div', {
       style: {
         opacity: r ? 1 : 0
       },
       children: jsx(_$$K, {
-        recordingKey: Pt(l, "addButton"),
-        "aria-label": getI18nString("design_systems.styles.tooltips.create_style_from_section", {
+        'recordingKey': generateRecordingKey(l, 'addButton'),
+        'aria-label': getI18nString('design_systems.styles.tooltips.create_style_from_section', {
           kind: XV(e).toLowerCase()
         }),
-        onClick: c,
-        htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
-          "data-tooltip": getI18nString("design_systems.styles.tooltips.create_style_from_section", {
+        'onClick': c,
+        'htmlAttributes': {
+          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip': getI18nString('design_systems.styles.tooltips.create_style_from_section', {
             kind: XV(e).toLowerCase()
           })
         },
-        children: jsx(_$$x, {})
+        'children': jsx(_$$x, {})
       })
     })]
   });
 }
-ey.displayName = "StyleTypeSection";
+ey.displayName = 'StyleTypeSection';
 let eg = ms;
 let eh = c$;
 let ew = wv;
-let eS = "styles-by-type-context-menu";
-let eb = .75 * parsePxInt(uj0);
+let eS = 'styles-by-type-context-menu';
+let eb = 0.75 * parsePxInt(uj0);
 function ek({
   styleRowRef: e,
   onEditStyle: t,
@@ -592,7 +591,7 @@ function ek({
     onRenameItem: l,
     selectedItems: x,
     styleRowRef: e
-  }) : jsx("div", {});
+  }) : jsx('div', {});
 }
 function eC({
   styleRowRef: e,
@@ -633,66 +632,68 @@ function eC({
     let e = t[0];
     i(e.name, !1, e.styleTypeSection);
   }, [i, t]);
-  if (-1 === g) return jsx("div", {});
-  if (!h) return l > 1 ? jsx("div", {}) : jsx(eg, {
-    style: r.data.position,
-    className: G,
-    children: jsx(eh, {
-      recordingKey: "edit-style-option",
-      onClick: w,
-      children: renderI18nText("design_systems.styles.view_style")
-    })
-  });
-  let C = 1 === l && (t[0].type === PW.STYLE ? jsx(eh, {
-    recordingKey: "edit-style-option",
+  if (g === -1) return jsx('div', {});
+  if (!h) {
+    return l > 1 ? jsx('div', {}) : jsx(eg, {
+      style: r.data.position,
+      className: G,
+      children: jsx(eh, {
+        recordingKey: 'edit-style-option',
+        onClick: w,
+        children: renderI18nText('design_systems.styles.view_style')
+      })
+    });
+  }
+  let C = l === 1 && (t[0].type === PW.STYLE ? jsx(eh, {
+    recordingKey: 'edit-style-option',
     onClick: w,
-    children: renderI18nText("design_systems.styles.edit_style")
+    children: renderI18nText('design_systems.styles.edit_style')
   }) : jsx(eh, {
-    recordingKey: "rename-folder-option",
+    recordingKey: 'rename-folder-option',
     onClick: b,
-    children: renderI18nText("design_systems.styles.rename_folder")
+    children: renderI18nText('design_systems.styles.rename_folder')
   }));
   return jsxs(eg, {
     style: r.data.position,
     className: G,
     children: [jsx(eh, {
-      recordingKey: "create-folder-option",
+      recordingKey: 'create-folder-option',
       onClick: d,
-      children: renderI18nText("design_systems.styles.add_new_folder")
+      children: renderI18nText('design_systems.styles.add_new_folder')
     }), C, jsx(eh, {
-      recordingKey: "delete-style-option",
+      recordingKey: 'delete-style-option',
       onClick: u,
-      children: renderI18nText("design_systems.styles.delete_styles", {
+      children: renderI18nText('design_systems.styles.delete_styles', {
         numStyles: l
       })
     }), jsx(ew, {}), jsx(eh, {
-      recordingKey: "cut-style-option",
+      recordingKey: 'cut-style-option',
       onClick: y,
-      children: renderI18nText("design_systems.styles.cut_styles", {
+      children: renderI18nText('design_systems.styles.cut_styles', {
         numStyles: l
       })
     }), jsx(eh, {
-      recordingKey: "copy-style-option",
+      recordingKey: 'copy-style-option',
       onClick: m,
-      children: renderI18nText("design_systems.styles.copy_styles", {
+      children: renderI18nText('design_systems.styles.copy_styles', {
         numStyles: l
       })
     }), jsx(eh, {
-      recordingKey: "duplicate-style-option",
+      recordingKey: 'duplicate-style-option',
       onClick: p,
-      children: renderI18nText("design_systems.styles.duplicate_styles", {
+      children: renderI18nText('design_systems.styles.duplicate_styles', {
         numStyles: l
       })
     }), !!g && jsx(eh, {
-      recordingKey: "paste-style-option",
+      recordingKey: 'paste-style-option',
       onClick: x,
-      children: renderI18nText("design_systems.styles.paste_styles", {
+      children: renderI18nText('design_systems.styles.paste_styles', {
         numStyles: g
       })
     })]
   });
 }
-let eA = "local-style-creation-dropdown";
+let eA = 'local-style-creation-dropdown';
 function eM({
   setDefaultToolOnCreateStyle: e
 }) {
@@ -707,15 +708,15 @@ function eP({
 }) {
   let t = useDispatch();
   let l = useContext(lk);
-  let r = !p8("isReadOnly");
+  let r = !p8('isReadOnly');
   let a = useRef(null);
   let i = useRef(null);
   let d = a.current;
   let c = Um();
   let u = c?.type === eA;
   let y = c?.data?.targetRect;
-  let m = "localStyleHeader";
-  let x = 0 === Bs().length;
+  let m = 'localStyleHeader';
+  let x = Bs().length === 0;
   let g = useSelector(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
   let h = useMemo(() => y || (u && d ? d.getBoundingClientRect() : null), [y, d, u]);
   let w = () => {
@@ -730,10 +731,10 @@ function eP({
     e.stopPropagation();
     t(YG());
     let l = a.current;
-    u ? w() : l && (trackEventAnalytics("editor-local-styles-dropdown-show"), k());
+    u ? w() : l && (trackEventAnalytics('editor-local-styles-dropdown-show'), k());
   };
   let E = t => {
-    e && fullscreenValue.triggerAction("set-tool-default");
+    e && fullscreenValue.triggerAction('set-tool-default');
     w();
     let n = _$$Zk(t);
     let s = i.current?.getBoundingClientRect();
@@ -752,17 +753,17 @@ function eP({
       className: et,
       onMouseDown: e => v && C(e),
       onClick: e => e.stopPropagation(),
-      children: renderI18nText("design_systems.styles.local_styles")
+      children: renderI18nText('design_systems.styles.local_styles')
     }), r && jsxs(Fragment, {
       children: [jsx(K0, {
-        ref: a,
-        onMouseDown: C,
-        onClick: e => e.stopPropagation(),
-        className: u ? "styles--stylesHeaderButtonHighlight--WTeWy raw_components--iconButtonSelected--bJibL raw_components--_iconButton---ybo6" : "styles--stylesHeaderButton--jhpA5 draggable_list--addButton--D0q--",
-        "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": getI18nString("design_systems.create_style.create_style"),
-        recordingKey: Pt(m, "addButton"),
-        children: jsx(_$$e2, {})
+        'ref': a,
+        'onMouseDown': C,
+        'onClick': e => e.stopPropagation(),
+        'className': u ? 'styles--stylesHeaderButtonHighlight--WTeWy raw_components--iconButtonSelected--bJibL raw_components--_iconButton---ybo6' : 'styles--stylesHeaderButton--jhpA5 draggable_list--addButton--D0q--',
+        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip': getI18nString('design_systems.create_style.create_style'),
+        'recordingKey': generateRecordingKey(m, 'addButton'),
+        'children': jsx(_$$e2, {})
       }), u && h && jsx(Cf, {
         targetRect: h,
         minWidth: 128,
@@ -778,10 +779,10 @@ function eP({
             E(e);
           };
           return jsxs(c$, {
-            className: "styles--createStyleDropdownRow--7iCXQ",
+            className: 'styles--createStyleDropdownRow--7iCXQ',
             onClick: s,
             onPointerUp: s,
-            recordingKey: Pt(m, `dropdown-option-${e}`),
+            recordingKey: generateRecordingKey(m, `dropdown-option-${e}`),
             children: [jsx(Nu, {
               children: icon
             }), label]
@@ -793,29 +794,29 @@ function eP({
 }
 function eK(e) {
   switch (e) {
-    case "TEXT":
+    case 'TEXT':
       return {
         icon: jsx(_$$e3, {}),
-        label: getI18nString("design_systems.styles.dropdown.text")
+        label: getI18nString('design_systems.styles.dropdown.text')
       };
-    case "FILL":
+    case 'FILL':
       return {
         icon: jsx(_$$G, {}),
-        label: getI18nString("design_systems.styles.dropdown.fill")
+        label: getI18nString('design_systems.styles.dropdown.fill')
       };
-    case "GRID":
+    case 'GRID':
       return {
         icon: jsx(_$$E2, {}),
-        label: getI18nString("design_systems.styles.dropdown.guide")
+        label: getI18nString('design_systems.styles.dropdown.guide')
       };
-    case "EFFECT":
+    case 'EFFECT':
       return {
         icon: jsx(_$$n, {}),
-        label: getI18nString("design_systems.styles.dropdown.effect")
+        label: getI18nString('design_systems.styles.dropdown.effect')
       };
     default:
       noop(e);
-      return Error(`Invalid style type: ${e}`);
+      return new Error(`Invalid style type: ${e}`);
   }
 }
 function eF({
@@ -831,19 +832,19 @@ function eF({
     onClick,
     ...d
   } = getTriggerProps();
-  let c = !p8("isReadOnly");
-  let u = 0 === Bs().length;
+  let c = !p8('isReadOnly');
+  let u = Bs().length === 0;
   let y = useSelector(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
   let m = u && !manager.isOpen && !y;
   let x = useCallback(() => {
-    m && (manager.setOpen(!0), trackEventAnalytics("editor-local-styles-dropdown-show"));
+    m && (manager.setOpen(!0), trackEventAnalytics('editor-local-styles-dropdown-show'));
   }, [manager, m]);
   let f = useCallback(e => {
-    manager.isOpen || trackEventAnalytics("editor-local-styles-dropdown-show");
+    manager.isOpen || trackEventAnalytics('editor-local-styles-dropdown-show');
     onClick(e);
   }, [manager.isOpen, onClick]);
   let g = useCallback(n => {
-    e && fullscreenValue.triggerAction("set-tool-default");
+    e && fullscreenValue.triggerAction('set-tool-default');
     let s = _$$Zk(n);
     let o = t.current?.getBoundingClientRect();
     s && o && l({
@@ -860,7 +861,7 @@ function eF({
       className: et,
       onMouseDown: x,
       onClick: e => e.stopPropagation(),
-      children: renderI18nText("design_systems.styles.local_styles")
+      children: renderI18nText('design_systems.styles.local_styles')
     }), c && jsx(eO, {
       manager,
       triggerProps: {
@@ -868,7 +869,7 @@ function eF({
         onClick: f
       },
       onMenuItemClick: g,
-      recordingKey: "localStyleHeader"
+      recordingKey: 'localStyleHeader'
     })]
   });
 }
@@ -881,10 +882,10 @@ function eO({
   return jsxs(bL, {
     manager: e,
     children: [jsx(_$$d, {
-      "aria-label": getI18nString("design_systems.create_style.create_style"),
-      recordingKey: Pt(s, "addButton"),
+      'aria-label': getI18nString('design_systems.create_style.create_style'),
+      'recordingKey': generateRecordingKey(s, 'addButton'),
       ...t,
-      children: jsx(_$$e2, {})
+      'children': jsx(_$$e2, {})
     }), jsx(mc, {
       children: og.map(e => {
         let {
@@ -893,7 +894,7 @@ function eO({
         } = eK(e);
         return jsxs(q7, {
           onClick: () => l(e),
-          recordingKey: Pt(s, `menu-item-${e}`),
+          recordingKey: generateRecordingKey(s, `menu-item-${e}`),
           children: [jsx(Q$, {
             children: icon
           }), label]
@@ -902,16 +903,16 @@ function eO({
     })]
   });
 }
-let e$ = "collapsed-style-folders";
+let e$ = 'collapsed-style-folders';
 export function $$eU0({
   scrollContainer: e,
   setDefaultToolOnCreateStyle: t,
   recordingKey: l
 }) {
   let s = Bs();
-  let o = p8("isReadOnly");
-  return 0 === s.length && o ? null : jsx(_$$k, {
-    name: "local_styles_panel",
+  let o = p8('isReadOnly');
+  return s.length === 0 && o ? null : jsx(_$$k, {
+    name: 'local_styles_panel',
     children: jsx(Zk, {
       children: jsx(eY, {
         scrollContainer: e,
@@ -940,12 +941,12 @@ function eY({
   let B = y === LayoutTabType.GRADIENT || y === LayoutTabType.RASTER || m === DesignGraphElements.DROPPER_COLOR;
   useEffect(() => {
     let e = () => {
-      !B && (a(Bn(null)), i.isShown && (a(sw()), Fullscreen.selectStyle(n3.INVALID, IA.INVALID)));
+      !B && (a(Bn(null)), i.isShown && (a(sw()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID)));
     };
     let t = ft();
-    t ? window.addEventListener("pointerdown", e) : window.addEventListener("mousedown", e);
+    t ? window.addEventListener('pointerdown', e) : window.addEventListener('mousedown', e);
     return () => {
-      t ? window.removeEventListener("pointerdown", e) : window.removeEventListener("mousedown", e);
+      t ? window.removeEventListener('pointerdown', e) : window.removeEventListener('mousedown', e);
     };
   }, [a, i.isShown, B]);
   let {
@@ -969,14 +970,14 @@ function eY({
     };
   }, [g]);
   let K = useCallback(e => {
-    debug(null != e.content_hash, "style does not have a hash");
+    debug(e.content_hash != null, 'style does not have a hash');
     Fullscreen.selectStyleByGuid(e.node_id);
     a(ay({
       isRenaming: !1
     }));
-    trackEventAnalytics("Style Inspected", {
+    trackEventAnalytics('Style Inspected', {
       styleType: e.style_type,
-      from: "styleListClick"
+      from: 'styleListClick'
     });
   }, [a]);
   let F = useCallback((e, t, l) => {
@@ -1010,20 +1011,22 @@ function eY({
     let n = e[t];
     let s = (e, t) => {
       let n = ke(e.name);
-      let s = null != t ? t : n.length - 1;
+      let s = t != null ? t : n.length - 1;
       n[s] = l;
-      let o = Pc(n.join("/"));
-      permissionScopeHandler.user("rename-style", () => Fullscreen.renameNode(e.node_id, o));
+      let o = Pc(n.join('/'));
+      permissionScopeHandler.user('rename-style', () => Fullscreen.renameNode(e.node_id, o));
     };
     if (n.name !== l) {
-      if (n.type === PW.STYLE) s(n);else {
+      if (n.type === PW.STYLE) {
+        s(n);
+      } else {
         mx(t, e).forEach(t => {
           let l = e[t];
           l.type === PW.STYLE && s(l, n.level - 1);
         });
         let o = new Set(h.folderNames);
         o.$$delete(n.name);
-        let r = In(n.name) + "/" + l;
+        let r = `${In(n.name)}/${l}`;
         o.add(r);
         O({
           type: h.type,
@@ -1032,7 +1035,7 @@ function eY({
         });
       }
     }
-    fullscreenValue.triggerAction("commit");
+    fullscreenValue.triggerAction('commit');
     S(null);
     E(null);
   }, [h, O]);
@@ -1059,8 +1062,8 @@ function eY({
   let W = useCallback(() => {
     N(!1);
   }, []);
-  return jsxs("div", {
-    className: "styles--localStylesPanel--T4Gqs",
+  return jsxs('div', {
+    className: 'styles--localStylesPanel--T4Gqs',
     ref: x,
     children: [jsx(eM, {
       setDefaultToolOnCreateStyle: t
@@ -1068,27 +1071,29 @@ function eY({
       let o = stylesByType.get(s);
       if (!o) return;
       let r = foldersAndStylesByType.get(s);
-      if (r) return jsx(ez, {
-        isDragging: R,
-        onContextMenu: U,
-        onDragEnd: W,
-        onDragStart: z,
-        onEditStyle: K,
-        onInspectStyle: K,
-        onRenameItem: F,
-        recordingKey: Pt(l, `style-section-${s}`),
-        renamingFolder: k,
-        renamingStyleID: w,
-        scrollContainer: e,
-        setDefaultToolOnCreateStyle: t,
-        stopRenamingItem: $,
-        storedStyleList: o,
-        styleList: r,
-        styleRowRef: T.current,
-        styleType: s,
-        updateContextMenuStyleRef: Y,
-        updateSelection: O
-      }, s);
+      if (r) {
+        return jsx(ez, {
+          isDragging: R,
+          onContextMenu: U,
+          onDragEnd: W,
+          onDragStart: z,
+          onEditStyle: K,
+          onInspectStyle: K,
+          onRenameItem: F,
+          recordingKey: generateRecordingKey(l, `style-section-${s}`),
+          renamingFolder: k,
+          renamingStyleID: w,
+          scrollContainer: e,
+          setDefaultToolOnCreateStyle: t,
+          stopRenamingItem: $,
+          storedStyleList: o,
+          styleList: r,
+          styleRowRef: T.current,
+          styleType: s,
+          updateContextMenuStyleRef: Y,
+          updateSelection: O
+        }, s);
+      }
     })]
   });
 }
@@ -1112,14 +1117,14 @@ function ez({
   recordingKey: $
 }) {
   let U = q5();
-  let Y = !p8("isReadOnly");
+  let Y = !p8('isReadOnly');
   let z = useDispatch();
   let W = useSelector(e => e.stylePreviewShown);
   let q = useSelector(t => i4(t, e));
   let H = useSelector(t => A7(t, e, l));
   let [X, V] = useState(() => {
     if (localStorageRef && U) {
-      let t = JSON.parse(localStorageRef.getItem(e$) || "{}");
+      let t = JSON.parse(localStorageRef.getItem(e$) || '{}');
       if (U.key in t) {
         let l = t[U.key];
         if (e in l) return new Set(l[e]);
@@ -1128,7 +1133,7 @@ function ez({
         localStorageRef.setItem(e$, JSON.stringify(t));
       }
     }
-    return new Set(l.filter(e => "STYLE_FOLDER" === e.type).map(e => e.name));
+    return new Set(l.filter(e => e.type === 'STYLE_FOLDER').map(e => e.name));
   });
   let [G, Z] = useState([]);
   let [Q, J] = useState(null);
@@ -1144,16 +1149,16 @@ function ez({
   let es = ZC(X);
   useEffect(() => {
     if (!es || !localStorageRef || !U || _f(es, X)) return;
-    let t = JSON.parse(localStorageRef.getItem(e$) || "{}");
+    let t = JSON.parse(localStorageRef.getItem(e$) || '{}');
     let l = t[U.key];
     l && (l[e] = [...X], localStorageRef.setItem(e$, JSON.stringify(t)));
   }, [X, U, es, e]);
-  let eo = useCallback(e => !!e && "STYLE_FOLDER" === e.type, []);
+  let eo = useCallback(e => !!e && e.type === 'STYLE_FOLDER', []);
   let er = useCallback((e, t) => {
     let n = new Set(e);
     let s = [];
     l.forEach((e, t) => {
-      if (n.has(e) && (s.push(t), "STYLE_FOLDER" === e.type)) {
+      if (n.has(e) && (s.push(t), e.type === 'STYLE_FOLDER')) {
         let e = mx(t, l);
         s.push(...e);
       }
@@ -1168,23 +1173,23 @@ function ez({
     return d;
   }, [l]);
   let ea = useCallback(() => {
-    W.isShown && (z(sw()), z(XE()), Fullscreen.selectStyle(n3.INVALID, IA.INVALID));
+    W.isShown && (z(sw()), z(XE()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
   }, [z, W.isShown]);
   let ei = useMemo(() => {
     if (!Q) return null;
-    if ("in" === Q.type) {
+    if (Q.type === 'in') {
       let e = l[Q.index];
       return e ? {
         folderNameToNestUnder: e.name,
         dividerStyles: {
-          display: "none"
+          display: 'none'
         }
       } : null;
     }
-    if (null == Q.index || null == ee || !q) return null;
+    if (Q.index == null || ee == null || !q) return null;
     let e = null;
     let t = null;
-    0 === Q.index ? t = l[Q.index] : Q.index === l.length ? e = l[Q.index - 1] : (e = l[Q.index - 1], t = l[Q.index]);
+    Q.index === 0 ? t = l[Q.index] : Q.index === l.length ? e = l[Q.index - 1] : (e = l[Q.index - 1], t = l[Q.index]);
     return g5({
       prevItem: e,
       nextItem: t,
@@ -1198,21 +1203,21 @@ function ez({
   let ed = useCallback((n, s, o, r) => {
     if (!t || !s && !o || !ei) return;
     let a = ei.folderNameToNestUnder;
-    if (null === a) return;
+    if (a === null) return;
     let i = [];
     let d = [];
     n.forEach(e => {
-      Md(s, e, o, a) && ("STYLE_FOLDER" === e.type ? d.push(e) : i.push(e));
+      Md(s, e, o, a) && (e.type === 'STYLE_FOLDER' ? d.push(e) : i.push(e));
     });
     let c = i.concat(d);
     if (!c.length) return;
-    let y = permissionScopeHandler.user("reorder-styles", () => VB(c, s, o, a, l, t, r || !1));
+    let y = permissionScopeHandler.user('reorder-styles', () => VB(c, s, o, a, l, t, r || !1));
     let m = new Set();
     let p = new Set();
     c.forEach(e => {
       let t = t_(e);
       let l = y?.get(t);
-      l && ("STYLE_FOLDER" === e.type ? m.add(l) : p.add(t));
+      l && (e.type === 'STYLE_FOLDER' ? m.add(l) : p.add(t));
     });
     P({
       type: e,
@@ -1227,11 +1232,11 @@ function ez({
     });
     V(x);
     ea();
-    r || fullscreenValue.triggerAction("commit");
+    r || fullscreenValue.triggerAction('commit');
     return er(c, o);
   }, [P, X, ei, er, ea, t, l, e]);
   let ec = useCallback((e, t) => {
-    if ("STYLE_FOLDER" !== t.type) return;
+    if (t.type !== 'STYLE_FOLDER') return;
     let n = l.indexOf(t);
     let s = dm(t).filter(e => In(e.name) === t.name);
     if (!s.length) return ed(e, t, l[n + 1]);
@@ -1241,14 +1246,14 @@ function ez({
       return ed(e, t, l[n + 1]);
     }
   }, [ed, l]);
-  let em = xx((e, t) => {
+  let em = memoizeByArgs((e, t) => {
     let n = new Map();
     let s = t.map(e => e.type === PW.STYLE ? e.node_id : e.name);
     e.forEach(e => {
       let o = s.indexOf(e);
-      -1 !== o && mx(o, l).forEach(e => {
+      o !== -1 && mx(o, l).forEach(e => {
         let l = t[e];
-        let s = "STYLE_FOLDER" === l.type ? l.name : l.node_id;
+        let s = l.type === 'STYLE_FOLDER' ? l.name : l.node_id;
         let o = n.get(s);
         o || (o = 0);
         n.set(s, o + 1);
@@ -1259,23 +1264,23 @@ function ez({
   let ep = useCallback(() => {
     if (!q) return;
     let t = QA(q, l);
-    if (0 === t.length) return;
+    if (t.length === 0) return;
     let {
       prevItem,
       nextItem
     } = j3(t, l);
     ed(t, prevItem, nextItem, !0);
-    let o = In(t[0]?.name || "");
-    let r = getI18nString("design_systems.create_style.new_folder");
+    let o = In(t[0]?.name || '');
+    let r = getI18nString('design_systems.create_style.new_folder');
     o && (r = `${o}/${r}`);
     let a = (e, t) => {
       if (e.type === PW.STYLE) {
-        let l = r + "/" + t + kH(e.name);
-        permissionScopeHandler.user("rename-style", () => {
+        let l = `${r}/${t}${kH(e.name)}`;
+        permissionScopeHandler.user('rename-style', () => {
           Fullscreen.renameNode(e.node_id, l);
         });
       } else {
-        let l = t + kH(e.name) + "/";
+        let l = `${t + kH(e.name)}/`;
         e.styles.forEach(e => {
           a(e, l);
         });
@@ -1285,7 +1290,7 @@ function ez({
       }
     };
     t.forEach(e => {
-      a(e, "");
+      a(e, '');
     });
     P({
       type: e,
@@ -1296,7 +1301,7 @@ function ez({
   }, [P, ed, q, w, l, e]);
   let ex = useCallback((e, t) => {
     let n = l[e];
-    "STYLE_FOLDER" === n.type && V(e => {
+    n.type === 'STYLE_FOLDER' && V(e => {
       let l = new Set(e);
       t ? l.add(n.name) : l.$$delete(n.name);
       return l;
@@ -1306,13 +1311,13 @@ function ez({
     V(n => {
       let s = new Set(n);
       let o = l[e];
-      if ("STYLE_FOLDER" === o.type) {
+      if (o.type === 'STYLE_FOLDER') {
         let e = In(o.name);
-        let l = "" === e ? t : e + "/" + t;
+        let l = e === '' ? t : `${e}/${t}`;
         X.has(o.name) && (X.$$delete(o.name), X.add(l));
         KU(o).forEach(e => {
           if (X.has(e.name)) {
-            let t = e.name.replace(o.name, "");
+            let t = e.name.replace(o.name, '');
             X.add(l + t);
             X.$$delete(e.name);
           }
@@ -1326,23 +1331,23 @@ function ez({
     A(l, e);
   }, [A, l]);
   let ew = useCallback((e, t, l) => {
-    let n = t > .5 ? 1 : Math.round(1e3 * t) / 1e3;
+    let n = t > 0.5 ? 1 : Math.round(1e3 * t) / 1e3;
     J({
       index: e,
-      type: l ? "in" : "before"
+      type: l ? 'in' : 'before'
     });
     et(n);
   }, []);
   let eS = useCallback(() => {
-    V(e => permissionScopeHandler.user("delete-styles", () => {
+    V(e => permissionScopeHandler.user('delete-styles', () => {
       let t = new Set(e);
       (q ? QA(q, l) : []).forEach(e => {
-        "STYLE_FOLDER" === e.type ? (a2(e, U?.key || null), X.$$delete(e.name), KU(e).forEach(e => X.$$delete(e.name))) : Nr(e, U?.key || null);
+        e.type === 'STYLE_FOLDER' ? (a2(e, U?.key || null), X.$$delete(e.name), KU(e).forEach(e => X.$$delete(e.name))) : Nr(e, U?.key || null);
       });
       return t;
     }));
-    fullscreenValue.triggerAction("commit");
-    W.isShown && (z(sw()), z(XE()), Fullscreen.selectStyle(n3.INVALID, IA.INVALID));
+    fullscreenValue.triggerAction('commit');
+    W.isShown && (z(sw()), z(XE()), Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID));
     P(null);
   }, [W.isShown, P, q, l, U?.key, X, z]);
   let eb = useMemo(() => {
@@ -1350,16 +1355,16 @@ function ez({
     return Ug(e).map(e => e.node_id);
   }, [q, l]);
   let eC = useCallback(() => {
-    permissionScopeHandler.user("cut-styles", () => Fullscreen && Fullscreen.cutStyles(eb));
+    permissionScopeHandler.user('cut-styles', () => Fullscreen && Fullscreen.cutStyles(eb));
   }, [eb]);
   let eE = useCallback(() => {
-    permissionScopeHandler.user("copy-styles", () => Fullscreen && Fullscreen.copyStyles(eb));
+    permissionScopeHandler.user('copy-styles', () => Fullscreen && Fullscreen.copyStyles(eb));
   }, [eb]);
   let ej = useCallback(() => {
-    permissionScopeHandler.user("duplicate-styles", () => Fullscreen && Fullscreen.duplicateStyles(eb));
+    permissionScopeHandler.user('duplicate-styles', () => Fullscreen && Fullscreen.duplicateStyles(eb));
   }, [eb]);
   let ev = useCallback(() => {
-    permissionScopeHandler.user("paste-styles", () => Fullscreen && Fullscreen.pasteStyles());
+    permissionScopeHandler.user('paste-styles', () => Fullscreen && Fullscreen.pasteStyles());
   }, []);
   !function ({
     cutSelectedItems: e,
@@ -1370,7 +1375,7 @@ function ez({
     useEffect(() => {
       if (!l) return;
       let s = (e, t) => {
-        e.target && ("INPUT" === e.target.tagName || "TEXTAREA" === e.target.tagName) || (t(), e.stopPropagation());
+        e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') || (t(), e.stopPropagation());
       };
       let o = t => {
         s(t, e);
@@ -1381,13 +1386,13 @@ function ez({
       let a = e => {
         s(e, t);
       };
-      document.addEventListener("cut", o);
-      document.addEventListener("paste", r);
-      document.addEventListener("copy", a);
+      document.addEventListener('cut', o);
+      document.addEventListener('paste', r);
+      document.addEventListener('copy', a);
       return () => {
-        document.removeEventListener("cut", o);
-        document.removeEventListener("paste", r);
-        document.removeEventListener("copy", a);
+        document.removeEventListener('cut', o);
+        document.removeEventListener('paste', r);
+        document.removeEventListener('copy', a);
       };
     }, [e, n, t, l]);
   }({
@@ -1402,7 +1407,7 @@ function ez({
   let eT = useCallback(() => {
     C();
   }, [C]);
-  let eR = rf($, "ondragend", useCallback(() => {
+  let eR = useHandleMouseEvent($, 'ondragend', useCallback(() => {
     J(null);
     et(null);
     Z([]);
@@ -1417,7 +1422,7 @@ function ez({
         if (!n) continue;
         let s = ke(n.name);
         for (let e = 0; e < s.length; e++) {
-          let t = s.slice(0, e).join("/");
+          let t = s.slice(0, e).join('/');
           l.$$delete(t);
         }
       }
@@ -1432,25 +1437,27 @@ function ez({
   let eB = useMemo(() => H ? h$(H, l) : [], [H, l]);
   let eA = useMemo(() => [...eD, ...eB].sort((e, t) => e - t), [eD, eB]);
   let eM = useCallback((e, t, s, o, a, i) => {
-    let d = "STYLE_FOLDER" === e.type ? e.name : e.node_id;
+    let d = e.type === 'STYLE_FOLDER' ? e.name : e.node_id;
     let c = !1;
     let u = !1;
-    for (let t of G) if ("STYLE_FOLDER" === e.type) {
-      if (e.name === t) {
-        u = !0;
+    for (let t of G) {
+      if (e.type === 'STYLE_FOLDER') {
+        if (e.name === t) {
+          u = !0;
+          break;
+        }
+        e.name.startsWith(t) && (c = !0);
+      } else if (In(e.name) === t) {
+        c = !0;
         break;
       }
-      e.name.startsWith(t) && (c = !0);
-    } else if (In(e.name) === t) {
-      c = !0;
-      break;
     }
     if (!u && !c && em(X, l).has(d)) return null;
     let y = eA && eA[eA.length - 1] === t;
     let m = eA && eA[0] === t;
     if (e.type === PW.STYLE) {
       let l = rM(e);
-      let d = null != r && r === e.node_id;
+      let d = r != null && r === e.node_id;
       return jsx(eu, {
         deleteSelectedItems: eS,
         dsStyle: e,
@@ -1478,7 +1485,7 @@ function ez({
       }, e.node_id);
     }
     {
-      let l = null != p && p.name === e.name && p.styleTypeSection === e.styleTypeSection;
+      let l = p != null && p.name === e.name && p.styleTypeSection === e.styleTypeSection;
       let r = ei?.folderNameToNestUnder || null;
       return jsx(en, {
         deleteSelectedItems: eS,
@@ -1512,7 +1519,7 @@ function ez({
     let s = new Set();
     t.forEach(e => {
       let t = l[e];
-      "STYLE_FOLDER" === t.type ? n.add(t.name) : s.add(t.node_id);
+      t.type === 'STYLE_FOLDER' ? n.add(t.name) : s.add(t.node_id);
     });
     P({
       type: e,
@@ -1526,7 +1533,7 @@ function ez({
     eK.current && eD.length ? (eK.current(), eL.current && !eL.current.contains(document.activeElement) && eL.current.focus()) : eF.current && !eD.length && (eF.current(), eL.current = null);
   }, [eK, eD, eL]);
   return jsx(vL, {
-    name: "StyleDraggableList",
+    name: 'StyleDraggableList',
     focusFunctionRef: eK,
     blurFunctionRef: eF,
     children: jsxs(ey, {
@@ -1542,7 +1549,7 @@ function ez({
         onDragStart: eT,
         onInsertItemsBetweenValues: ed,
         onInsertItemsIn: ec,
-        recordingKey: "style-draggable-list",
+        recordingKey: 'style-draggable-list',
         renderListItem: eM,
         scrollContainer: F,
         selectedIndices: eD,

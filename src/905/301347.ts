@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { s as _$$s } from "../905/518538";
 import { mW, qN } from "../905/123443";
 export function $$d15() {
@@ -62,7 +62,7 @@ export function $$w10() {
   let i = getI18nString("comments.comments_cannot_be_placed_in_this_area");
   let l = e.commentDisabledPositionBellMessage ?? i;
   return useCallback(() => {
-    t(F.enqueue({
+    t(VisualBellActions.enqueue({
       message: l
     }));
   }, [l, t]);

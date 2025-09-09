@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createRef } from "react";
-import { o6 } from "../figma_app/806412";
+import { RecordingPureComponent } from "../figma_app/878298";
 import { ms } from "../figma_app/236327";
 import { P } from "../905/347284";
 import { Dm } from "../figma_app/8833";
 import { vL } from "../905/826900";
 import { DU } from "../figma_app/575164";
-export class $$u0 extends o6 {
+export class $$u0 extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.onKeyDownFromFullscreen = e => {
@@ -47,7 +47,7 @@ export class $$u0 extends o6 {
     });
   }
 }
-export class $$p1 extends o6 {
+export class $$p1 extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.scrollContainerRef = createRef();

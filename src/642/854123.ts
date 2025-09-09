@@ -9,13 +9,13 @@ import { useFullscreenReady } from "../905/924253";
 import { R as _$$R } from "../figma_app/941983";
 import { TY } from "../figma_app/701001";
 import { aV, p8 } from "../figma_app/722362";
-import { iZ, Pc } from "../905/372672";
+import { selectCurrentUser, selectUser } from "../905/372672";
 import { debounce } from "../905/915765";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { j6, fu } from "../figma_app/831799";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import C from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { FJ } from "../905/508367";
@@ -63,7 +63,7 @@ import { KF } from "../figma_app/957070";
 var j = C;
 function P() {
   let e = useDispatch();
-  let t = iZ();
+  let t = selectCurrentUser();
   let {
     isEditingFile,
     unsortedTeams
@@ -118,7 +118,7 @@ function D() {
 }
 function G() {
   let e = j6();
-  let t = Pc().locale;
+  let t = selectUser().locale;
   let [s, i] = useState("");
   let [l, a] = useState(!1);
   let o = createRef();
@@ -843,7 +843,7 @@ export function $$eO0({
   let s = aV();
   let g = useFullscreenReady();
   let f = p8("topLevelMode");
-  let x = iZ();
+  let x = selectCurrentUser();
   let y = s ? _$$R.topLevelMode : f;
   let _ = TY();
   let b = _$$k();

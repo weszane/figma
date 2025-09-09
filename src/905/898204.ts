@@ -2,7 +2,7 @@ import { useMemo, useCallback, useSyncExternalStore } from "react";
 import { f } from "../905/693155";
 import { Timer } from "../905/609396";
 import { vF, J4 } from "../figma_app/290870";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 function d(e, t, i, n) {
   let r = new Set(t);

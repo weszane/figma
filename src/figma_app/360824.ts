@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, forwardRef, useRef, useState, useCallback } from "react";
-import { useStore } from "../vendor/514228";
+import { useStore } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { $n } from "../905/521428";
 import { A as _$$A } from "../905/593436";
@@ -8,11 +8,10 @@ import { C as _$$C } from "../905/520159";
 import { A as _$$A2 } from "../905/251970";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { generateRecordingKey } from "../figma_app/878298";
 import h from "classnames";
 import { h as _$$h } from "../905/207101";
 import { Uz, sN, xH } from "../905/63728";
-import { AF, Pt as _$$Pt } from "../figma_app/806412";
+import { useHandleChangeEvent, generateRecordingKey } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -106,7 +105,7 @@ export let $$V5 = forwardRef(({
     t && t.scrollToBottom();
   });
   _$$C2(m);
-  let I = AF(_$$Pt(r, "textArea"), "change", e => {
+  let I = useHandleChangeEvent(generateRecordingKey(r, "textArea"), "change", e => {
     t(e.currentTarget.value);
   });
   let S = $$z2(o, p);
@@ -223,7 +222,7 @@ export function $$H3({
         children: [jsx("div", {
           className: _$$s.flex.flexRow.gap4.$,
           children: eo && jsx(_$$K, {
-            recordingKey: _$$Pt(g, "backButton"),
+            recordingKey: generateRecordingKey(g, "backButton"),
             onClick: y || pop,
             "aria-label": getI18nString("qa.go_back"),
             children: jsx(_$$C, {})
@@ -284,7 +283,7 @@ export function $$H3({
           children: [jsx(_$$y2, {
             helpUrlVariant: e
           }), K && jsx(_$$K, {
-            recordingKey: _$$Pt(g, "closeButton"),
+            recordingKey: generateRecordingKey(g, "closeButton"),
             onClick: y || pop,
             "aria-label": getI18nString("common.close"),
             children: jsx(_$$A2, {

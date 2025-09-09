@@ -19,7 +19,7 @@ import { j2 as _$$j12 } from '../642/384859';
 import { qh } from '../642/435480';
 import { J as _$$J2 } from '../642/485582';
 import { A as _$$A19 } from '../642/502017';
-import { noop, u as _$$u9 } from '../642/638075';
+import { u as _$$u9, noop } from '../642/638075';
 import { c as _$$c0 } from '../642/688711';
 import { B as _$$B8 } from '../642/707257';
 import { X2 } from '../642/755347';
@@ -44,7 +44,7 @@ import { r as _$$r9 } from '../905/11924';
 import { D as _$$D6 } from '../905/12032';
 import { tc as _$$tc } from '../905/15667';
 import { u as _$$u4 } from '../905/16237';
-import { k9 as _$$k } from '../905/19536';
+import { useMemoStable } from '../905/19536';
 import { findContainingResponsiveSet } from '../905/26360';
 import { a as _$$a5 } from '../905/29104';
 import { a as _$$a1 } from '../905/38236';
@@ -62,7 +62,7 @@ import { n as _$$n10 } from '../905/79930';
 import { o as _$$o1 } from '../905/89370';
 import { c as _$$c3 } from '../905/90943';
 import { useSprigWithSampling } from '../905/99656';
-import { registerModal, ModalSupportsBackground } from '../905/102752';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { h as _$$h } from '../905/104000';
 import { Z as _$$Z7 } from '../905/104740';
 import { R as _$$R9 } from '../905/105002';
@@ -82,7 +82,7 @@ import { Q as _$$Q4 } from '../905/149004';
 import { Av } from '../905/149328';
 import { x as _$$x2 } from '../905/149501';
 import { e as _$$e9 } from '../905/149844';
-import { showModal, hideModal, showModalHandler, hideModalHandler, popModalStack, showModalConditional } from '../905/156213';
+import { hideModal, hideModalHandler, popModalStack, showModal, showModalConditional, showModalHandler } from '../905/156213';
 import { pW as _$$pW } from '../905/160095';
 import { ServiceCategories as _$$e2 } from '../905/165054';
 import { R as _$$R6 } from '../905/165069';
@@ -106,7 +106,7 @@ import { Q7 } from '../905/203369';
 import { h as _$$h3 } from '../905/207101';
 import { O as _$$O9 } from '../905/208152';
 import { N2 } from '../905/213527';
-import { valueOrFallback, toArray, isInvalidValue, isValidValue, MIXED_MARKER } from '../905/216495';
+import { isInvalidValue, isValidValue, MIXED_MARKER, toArray, valueOrFallback } from '../905/216495';
 import { b as _$$b14 } from '../905/217163';
 import { y as _$$y } from '../905/225297';
 import { J as _$$J9 } from '../905/231762';
@@ -135,7 +135,7 @@ import { G as _$$G4 } from '../905/289770';
 import { createSavepoint } from '../905/294113';
 import { a as _$$a8, G as _$$G5 } from '../905/298663';
 import { $ as _$$$ } from '../905/302575';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R10 } from '../905/309415';
 import { t as _$$t2 } from '../905/316903';
@@ -147,7 +147,7 @@ import { a as _$$a18 } from '../905/361302';
 import { Q as _$$Q5 } from '../905/363675';
 import { O as _$$O0 } from '../905/365108';
 import { c as _$$c8 } from '../905/370443';
-import { iZ as _$$iZ, Pc } from '../905/372672';
+import { selectCurrentUser, selectUser } from '../905/372672';
 import { W as _$$W6 } from '../905/378870';
 import { k as _$$k4 } from '../905/381239';
 import { c2 as _$$c6 } from '../905/382883';
@@ -208,7 +208,7 @@ import { N as _$$N9 } from '../905/568293';
 import { r as _$$r2 } from '../905/571562';
 import { N as _$$N7 } from '../905/572042';
 import { s as _$$s5 } from '../905/573154';
-import { zX } from '../905/576487';
+import { VisualBellIcon } from '../905/576487';
 import { e as _$$e7 } from '../905/579755';
 import { k as _$$k10 } from '../905/582200';
 import { y as _$$y9 } from '../905/582657';
@@ -218,7 +218,7 @@ import { O as _$$O5 } from '../905/587457';
 import { H8, Pf } from '../905/590952';
 import { G as _$$G8 } from '../905/594445';
 import { getFeatureFlags } from '../905/601108';
-import { Ay as _$$Ay4 } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { jN as _$$jN } from '../905/612685';
 import { J as _$$J } from '../905/614223';
 import { compareVersions } from '../905/616700';
@@ -285,9 +285,9 @@ import { qB } from '../905/862321';
 import { h as _$$h7 } from '../905/864281';
 import { Ay as _$$Ay7 } from '../905/865071';
 import { bL as _$$bL, c$ as _$$c$2, RT } from '../905/867927';
-import { defaultSessionLocalIDString, sessionLocalIDToString, isValidSessionLocalID, parseSessionLocalID, defaultSessionLocalID } from '../905/871411';
+import { defaultSessionLocalID, defaultSessionLocalIDString, isValidSessionLocalID, parseSessionLocalID, sessionLocalIDToString } from '../905/871411';
 import { b as _$$b11 } from '../905/874849';
-import { g as _$$g5 } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { d as _$$d6 } from '../905/884707';
 import { k as _$$k9 } from '../905/888808';
 import { DM } from '../905/889062';
@@ -481,7 +481,7 @@ import { dC as _$$dC, iO as _$$iO, lf as _$$lf, lT as _$$lT, Mj as _$$Mj, ou as 
 import { hv as _$$hv, YZ as _$$YZ, BW, WD, z_ } from '../figma_app/11610';
 import { EI } from '../figma_app/21029';
 import { a1 as _$$a } from '../figma_app/23780';
-import { atom, useAtomValueAndSetter, useAtomWithSubscription, mg as _$$mg, createRemovableAtomFamily, Ut, Xr, atomStoreManager } from '../figma_app/27355';
+import { mg as _$$mg, atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Ut, Xr } from '../figma_app/27355';
 import { MGP } from '../figma_app/27776';
 import { Mk } from '../figma_app/31188';
 import { bi as _$$bi, cT as _$$cT, g_ as _$$g_, TU as _$$TU, vr as _$$vr, GQ } from '../figma_app/32128';
@@ -490,7 +490,7 @@ import { ZC } from '../figma_app/39751';
 import { Y9 as _$$Y } from '../figma_app/42724';
 import { pO as _$$pO } from '../figma_app/42945';
 import { c as _$$c7 } from '../figma_app/43065';
-import { DuV, e54, lPt, Vny, x9E } from '../figma_app/43951';
+import { SiteBundles, WebFontsForFile, SiteMountWithPublishEvents, SiteMount, FilePublishSitePermissions } from '../figma_app/43951';
 import { vt as _$$vt } from '../figma_app/45218';
 import { H as _$$H3 } from '../figma_app/47866';
 import { z as _$$z } from '../figma_app/47967';
@@ -504,12 +504,12 @@ import { $g, _X as _$$_X, QZ } from '../figma_app/62612';
 import { Q as _$$Q13 } from '../figma_app/67145';
 import { p7 as _$$p8, Ut as _$$Ut } from '../figma_app/72338';
 import { Nw } from '../figma_app/78808';
-import { getObservableValue, getObservableOrFallback } from '../figma_app/84367';
+import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { $5 } from '../figma_app/84580';
 import { o0 as _$$o6, u3 as _$$u6, Kd } from '../figma_app/85384';
 import { bS as _$$bS, u1 as _$$u7, FP, Uv, XE } from '../figma_app/91703';
 import { Iy, XS } from '../figma_app/95367';
-import { isNullish, isNotNullish } from '../figma_app/95419';
+import { isNotNullish, isNullish } from '../figma_app/95419';
 import { hE as _$$hE2, sO as _$$sO } from '../figma_app/97020';
 import { Df, Jo, Xs } from '../figma_app/98483';
 import { wg as _$$wg, LZ } from '../figma_app/101956';
@@ -545,7 +545,7 @@ import { $P, dh as _$$dh, A$ } from '../figma_app/186343';
 import { _Y as _$$_Y, KB as _$$KB, G_, QK } from '../figma_app/191312';
 import { b as _$$b1 } from '../figma_app/192260';
 import { $C, jx as _$$jx, Ic } from '../figma_app/198516';
-import { zk as _$$zk } from '../figma_app/198712';
+import { yesNoTrackingEnum } from '../figma_app/198712';
 import { a6 as _$$a14 } from '../figma_app/198840';
 import { Xw } from '../figma_app/201694';
 import { o0 as _$$o2, Nm } from '../figma_app/202307';
@@ -559,13 +559,12 @@ import { c$ as _$$c$4, gw as _$$gw, wv as _$$wv } from '../figma_app/236327';
 import { P as _$$P6 } from '../figma_app/237095';
 import { F as _$$F2 } from '../figma_app/241247';
 import { rM as _$$rM } from '../figma_app/241541';
-import { _H as _$$_H, Tq as _$$Tq, PK } from '../figma_app/243058';
+import { StyleIdHandler } from '../figma_app/243058';
 import { Q as _$$Q9 } from '../figma_app/246112';
 import { MM as _$$MM, UP as _$$UP } from '../figma_app/246831';
 import { Bf } from '../figma_app/249941';
 import { Si as _$$Si, uQ as _$$uQ, PE } from '../figma_app/251115';
 import { Pu, Py } from '../figma_app/251814';
-import { isInteractionPathCheck, PN } from '../figma_app/897289';
 import { aq as _$$aq } from '../figma_app/257798';
 import { a as _$$a2 } from '../figma_app/258808';
 import { e as _$$e0 } from '../figma_app/259678';
@@ -639,7 +638,7 @@ import { cP as _$$cP, dg as _$$dg, vX as _$$vX } from '../figma_app/451499';
 import { o3 as _$$o3, O0 } from '../figma_app/452252';
 import { additionalValue, fullscreenValue } from '../figma_app/455680';
 import { iW as _$$iW, S2 as _$$S3, No, X$, YY } from '../figma_app/465071';
-import { assert, throwTypeError, debug } from '../figma_app/465776';
+import { assert, debug, throwTypeError } from '../figma_app/465776';
 import { _ as _$$_2 } from '../figma_app/467504';
 import { _t as _$$_t2, VJ } from '../figma_app/471982';
 import { i as _$$i5 } from '../figma_app/472709';
@@ -647,7 +646,7 @@ import { NP } from '../figma_app/473317';
 import { D as _$$D2, o as _$$o4 } from '../figma_app/478029';
 import { kG as _$$kG, Xo } from '../figma_app/482495';
 import { P as _$$P } from '../figma_app/483257';
-import { nearlyEqual, clamp } from '../figma_app/492908';
+import { clamp, nearlyEqual } from '../figma_app/492908';
 import { _ as _$$_5 } from '../figma_app/496441';
 import { t as _$$t8 } from '../figma_app/501766';
 import { y as _$$y5 } from '../figma_app/504415';
@@ -728,11 +727,11 @@ import { y0 as _$$y0 } from '../figma_app/718307';
 import { aV as _$$aV, eY as _$$eY, f4 as _$$f2, p8 as _$$p2, s6 as _$$s2, KH, Mw } from '../figma_app/722362';
 import { zp } from '../figma_app/740025';
 import { sT as _$$sT, UK as _$$UK, EU, Ku, RU } from '../figma_app/740163';
-import { aY as _$$aY, dZ as _$$dZ, i as _$$i, tJ as _$$tJ, D$, Dh, NT, Uc, Yu } from '../figma_app/741237';
+import { addToSelection, getPropertiesPanelTab, normalizeTrackingEnum, removeFromSelection, renameNode, replaceSelection, setPropertiesPanelTab, transferSelection, updateHoveredNode } from '../figma_app/741237';
 import { s as _$$s9 } from '../figma_app/749682';
 import { wo as _$$wo } from '../figma_app/753501';
 import { c as _$$c5 } from '../figma_app/763535';
-import { CmsHelpers, AccessibilityAttributes, EqualityType, SideType, GraphicObjectTypes, SceneGraphHelpers, AppStateTsApi, DesignWorkspace, Fullscreen, TextBlockType, Multiplayer, CustomPosition, TrackType, ItemType, ComponentPropType, FontSourceType, ChatMessageType, ScrollBehavior, MatchType, ViewType, ImageExportType, SitesBindingsCpp, PanelType, DesignGraphElements, UIVisibilitySetting, MixedBlockType, SquareShapes, Command, NodePropertyCategory, VariableResolvedDataType, FontHelpers, InsertSourceType, NodeTsApi, PrototypingTsApi, UserInterfaceElements, DataLoadStatus, SelectionPanelType, CodeComponentHelper, VariableDataType } from '../figma_app/763686';
+import { AccessibilityAttributes, AppStateTsApi, ChatMessageType, CmsHelpers, CodeComponentHelper, Command, ComponentPropType, CustomPosition, DataLoadStatus, DesignGraphElements, DesignWorkspace, EqualityType, FontHelpers, FontSourceType, Fullscreen, GraphicObjectTypes, ImageExportType, InsertSourceType, ItemType, MatchType, MixedBlockType, Multiplayer, NodePropertyCategory, NodeTsApi, PanelType, PrototypingTsApi, SceneGraphHelpers, ScrollBehavior, SelectionPanelType, SideType, SitesBindingsCpp, SquareShapes, TextBlockType, TrackType, UIVisibilitySetting, UserInterfaceElements, VariableDataType, VariableResolvedDataType, ViewType } from '../figma_app/763686';
 import { C as _$$C } from '../figma_app/765025';
 import { e6 as _$$e1, hu as _$$hu, kI as _$$kI, TZ as _$$TZ, Ez } from '../figma_app/766708';
 import { K2 } from '../figma_app/777551';
@@ -746,7 +745,6 @@ import { TL as _$$TL, wT as _$$wT, GC, RK, zA } from '../figma_app/791586';
 import { uF as _$$uF, OP } from '../figma_app/792958';
 import { _I as _$$_I } from '../figma_app/798608';
 import { cR as _$$cR, iP as _$$iP, jd as _$$jd, NR as _$$NR, SJ as _$$SJ, So as _$$So, tV as _$$tV2, Ws as _$$Ws, ww as _$$ww, Br, GG, M0 } from '../figma_app/803054';
-import { aH as _$$aH, c1 as _$$c4, iQ as _$$iQ, rf as _$$rf, v_ as _$$v_, AF, Pt } from '../figma_app/806412';
 import { O as _$$O2 } from '../figma_app/806649';
 import { fn as _$$fn2, s2 as _$$s8, Y9 as _$$Y5, Ad, DE } from '../figma_app/811257';
 import { C5 as _$$C4, c$ as _$$c$3, h5 as _$$h4, mg as _$$mg2, oA as _$$oA2, Gu, Ve } from '../figma_app/812915';
@@ -766,9 +764,10 @@ import { DF } from '../figma_app/861252';
 import { A2 } from '../figma_app/872077';
 import { y as _$$y3 } from '../figma_app/873852';
 import { wh as _$$wh2, AP, OG } from '../figma_app/876589';
-import { Pt as _$$Pt2, rf as _$$rf2 } from '../figma_app/878298';
+import { createRecordingCallback, generateRecordingKey, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
 import { w as _$$w7 } from '../figma_app/883622';
 import { jr as _$$jr2, W0 as _$$W7 } from '../figma_app/896988';
+import { isInteractionPathCheck, PN } from '../figma_app/897289';
 import { i as _$$i8 } from '../figma_app/901786';
 import { am as _$$am, hC as _$$hC, U as _$$U5 } from '../figma_app/901889';
 import { $D as _$$$D, up as _$$up, HB, MT } from '../figma_app/903209';
@@ -824,7 +823,7 @@ import { DF as _$$DF } from '../vendor/463802';
 import { E as _$$E9 } from '../vendor/464923';
 import { k_ as _$$k_, Db } from '../vendor/491721';
 import { T as _$$T6 } from '../vendor/513042';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useDispatch, useSelector } from 'react-redux';
 import { Q as _$$Q8 } from '../vendor/568295';
 import { _ as _$$_8 } from '../vendor/646701';
 import { TW as _$$TW, YZ, Zk } from '../vendor/677121';
@@ -915,10 +914,10 @@ function E({
     });
   }, [n]);
   let m = useCallback(() => {
-    Uc(n);
+    updateHoveredNode(n);
   }, [n]);
   let g = useCallback(() => {
-    Uc('');
+    updateHoveredNode('');
   }, []);
   if (!o) return null;
   let f = e * zoomScale - 1;
@@ -956,10 +955,10 @@ function A({
     }));
   }, [n, t, s?.fieldType]);
   let d = useCallback(() => {
-    Uc(n);
+    updateHoveredNode(n);
   }, [n]);
   let c = useCallback(() => {
-    Uc('');
+    updateHoveredNode('');
   }, []);
   return s ? jsx(I, {
     focused: i,
@@ -1025,7 +1024,7 @@ let U = () => {
   let e = _$$_X({
     subscribeToUpdates_expensive: !0
   });
-  return _$$k(() => e, [e]);
+  return useMemoStable(() => e, [e]);
 };
 let K = memo(({
   children: e
@@ -1463,9 +1462,9 @@ function tz() {
   _$$C_(b, p);
   let y = AE();
   let v = _$$uh();
-  let j = getObservableValue(_$$aY(), DesignWorkspace.DESIGN);
+  let j = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let k = Oc();
-  let S = _$$iZ();
+  let S = selectCurrentUser();
   if (useEffect(() => {
     j !== DesignWorkspace.PROTOTYPE && activeToolId === DesignGraphElements.SITES_LINK && (activateTool(DesignGraphElements.SELECT), Fullscreen.setDefaultEditMode());
   }, [activeToolId, j, activateTool]), useEffect(() => {
@@ -1518,7 +1517,7 @@ function tz() {
     onActivateTool: activateTool,
     onboardingKey: 'frame',
     overlayId: 'FrameTools',
-    recordingKey: Pt(tD, 'regionFlyout'),
+    recordingKey: generateRecordingKey(tD, 'regionFlyout'),
     tooltipText: getI18nString('fullscreen.flyout.region_tools')
   });
   let I = [{
@@ -1568,7 +1567,7 @@ function tz() {
     items: I,
     onActivateTool: activateTool,
     overlayId: 'ShapeAndMediaTools',
-    recordingKey: Pt(tD, 'shapeFlyout'),
+    recordingKey: generateRecordingKey(tD, 'shapeFlyout'),
     tooltipText: getI18nString('fullscreen.flyout.shape_tools')
   });
   let N = getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan;
@@ -1595,12 +1594,12 @@ function tz() {
     onActivateTool: activateTool,
     onboardingKey: _$$N4,
     overlayId: 'CodeTools',
-    recordingKey: Pt(tD, 'codeFlyout'),
+    recordingKey: generateRecordingKey(tD, 'codeFlyout'),
     tooltipText: getI18nString('fullscreen.flyout.code_tools')
   });
   let A = jsx(_$$I, {
     overlayId: 'PenTools',
-    recordingKey: Pt(tD, 'penFlyout'),
+    recordingKey: generateRecordingKey(tD, 'penFlyout'),
     tooltipText: getI18nString('fullscreen.flyout.drawing_tools'),
     items: [{
       toolId: DesignGraphElements.VECTOR_PEN,
@@ -1630,7 +1629,7 @@ function tz() {
             editorTheme: 'seascape',
             children: [x && jsx(_$$I, {
               overlayId: 'SelectTools',
-              recordingKey: Pt(tD, 'moveFlyout'),
+              recordingKey: generateRecordingKey(tD, 'moveFlyout'),
               tooltipText: getI18nString('fullscreen.flyout.move_tools'),
               items: [{
                 toolId: DesignGraphElements.SELECT,
@@ -1679,13 +1678,13 @@ function tz() {
               activeToolId,
               tooltipText: getFeatureFlags().sts_video ? getI18nString('fullscreen_actions.place_image_or_video') : getI18nString('fullscreen_actions.place_image'),
               tooltipShortcut: v(DesignGraphElements.IMAGE_OR_VIDEO),
-              recordingKey: Pt(tD, 'image-tool')
+              recordingKey: generateRecordingKey(tD, 'image-tool')
             }), x && jsx(_$$N3, {
               toolId: DesignGraphElements.TYPE,
               icon: jsx(_$$B2, {}),
               onActivateTool: activateTool,
               activeToolId,
-              recordingKey: Pt(tD, 'toolType'),
+              recordingKey: generateRecordingKey(tD, 'toolType'),
               tooltipText: getI18nString('fullscreen_actions.set-tool-type'),
               tooltipShortcut: v(DesignGraphElements.TYPE),
               onboardingKey: 'tool-type-onboarding'
@@ -1694,7 +1693,7 @@ function tz() {
               icon: c > 0 ? jsx(_$$X2, {}) : jsx(_$$f3, {}),
               onActivateTool: activeToolId === DesignGraphElements.COMMENTS ? () => activateTool(DesignGraphElements.SELECT) : activateTool,
               activeToolId,
-              recordingKey: Pt(tD, 'toolComment'),
+              recordingKey: generateRecordingKey(tD, 'toolComment'),
               tooltipText: getI18nString('fullscreen_actions.comment'),
               tooltipShortcut: v(DesignGraphElements.COMMENTS)
             }), x && jsx(_$$N3, {
@@ -1822,7 +1821,7 @@ function ij({
 }) {
   let [a, s] = useAtomValueAndSetter(_$$mC(e?.guid ?? ''));
   let d = getFeatureFlags().living_designs_image_attachments;
-  let c = _$$iZ();
+  let c = selectCurrentUser();
   let u = _$$tS();
   let {
     changedFiles
@@ -1846,7 +1845,7 @@ function ij({
       changedFiles
     });
   }
-  let m = e ? _$$Tq.fromLocalNodeIdStr(e.guid) : void 0;
+  let m = e ? CodeFileIdHandler.fromLocalNodeIdStr(e.guid) : void 0;
   let h = e?.codeFilePath && getFeatureFlags().multi_file_code_layers;
   let g = m && e && !h ? _$$nt(e, m).name : void 0;
   return jsx(_$$U2, {
@@ -1962,7 +1961,7 @@ function iO({
       legend: jsx(_$$q2, {
         children: getI18nString('sites.panel.code_window_display_picker.hidden_legend')
       }),
-      recordingKey: Pt('codeWindow', 'panelConfiguration'),
+      recordingKey: generateRecordingKey('codeWindow', 'panelConfiguration'),
       children: [jsx(_$$A6, {
         selectedValue: t,
         value: 'chat',
@@ -2647,7 +2646,7 @@ function ny({
     recordingKey: s,
     mirrorResizeHorizontally: !0
   });
-  let o = _$$rf(s, 'mousedown', e => {
+  let o = useHandleMouseEvent(s, 'mousedown', e => {
     e.stopPropagation();
     e.preventDefault();
     startResizing([a], {
@@ -3032,7 +3031,7 @@ function lG({
   useEffect(() => {
     c.current || r === e || (o(e), d.current = null);
   }, [e, r]);
-  let u = _$$iQ(s, 'blur', () => {
+  let u = useHandleGenericEvent(s, 'blur', () => {
     c.current = !1;
     d.current?.();
   });
@@ -3225,7 +3224,7 @@ function ax({
   fileKey: e,
   onClose: t
 }) {
-  let [i] = IT(lPt.Query({
+  let [i] = IT(SiteMountWithPublishEvents.Query({
     fileKey: e
   }));
   if (i.status === _$$H3.LOADING) {
@@ -3876,7 +3875,7 @@ function a8({
   let {
     data
   } = M4.useFile(e);
-  let i = Pc();
+  let i = selectUser();
   let n = function (e) {
     let t = useSelector(t => Rv(e?.team_id ?? null, t, null, e?.parent_org_id ?? null), _$$c6);
     let i = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
@@ -4066,7 +4065,7 @@ let sr = registerModal(({
   figFileKey: e,
   entryPoint: t
 }) => {
-  let i = _$$iZ();
+  let i = selectCurrentUser();
   let n = _$$sZ();
   let {
     status,
@@ -4161,7 +4160,7 @@ function sp({
   let T = _$$S3();
   let I = YY(T).unwrapOr(!1);
   let E = _$$ol();
-  let N = _$$iZ();
+  let N = selectCurrentUser();
   let R = _$$sZ();
   let A = Oc();
   let L = {
@@ -4581,7 +4580,7 @@ function sv(e) {
     upgradeDisabledReason
   } = function (e, t) {
     let i = function (e, t) {
-      let i = Rs(x9E, {
+      let i = Rs(FilePublishSitePermissions, {
         fileKey: e.key
       });
       return resourceUtils.useTransform(i, i => {
@@ -4862,7 +4861,7 @@ function sV() {
         Rm({
           dispatch: e,
           origin: _$$ty.FIGMA_REV_LOGGED_OUT_HEADER_WITH_GOOGLE,
-          redirectUrl: _$$Ay4.location.pathname
+          redirectUrl: customHistory.location.pathname
         }).then(t => {
           t.type === 'login' && e(My({
             userId: t.user.id
@@ -4875,7 +4874,7 @@ function sV() {
             dispatch: e,
             origin: _$$ty.FIGMA_REV_LOGGED_OUT_HEADER_WITH_GOOGLE,
             message: t.message,
-            redirectUrl: _$$Ay4.location.pathname
+            redirectUrl: customHistory.location.pathname
           });
         });
       },
@@ -5185,7 +5184,7 @@ function s7() {
     figmakeInFullscreen
   } = Ve();
   let t = q5();
-  let i = _$$iZ();
+  let i = selectCurrentUser();
   let n = DG(t?.key || '').enabled;
   return figmakeInFullscreen ? jsxs(Fragment, {
     children: [jsx(s3, {}), jsx(sJ, {}), t && jsx(_$$w2, {
@@ -5264,7 +5263,7 @@ function re() {
   let i = !getFeatureFlags().bake_publish_flow;
   let n = Fk(e => e.getCurrentPage()?.guid);
   let a = q5();
-  let s = _$$iZ();
+  let s = selectCurrentUser();
   let r = DG(a?.key || '').enabled;
   let {
     codeLibraryInstance
@@ -6054,13 +6053,13 @@ let rQ = registerModal(({
     } catch (i) {
       t = e.length;
     }
-    t > 0 && r(_$$F.enqueue({
+    t > 0 && r(VisualBellActions.enqueue({
       type: 'font_deleted',
       message: getI18nString('shared_fonts.unsuccessful_deletes', {
         numUnsuccessfulDeletes: t,
         totalDeletes: e.length
       }),
-      icon: zX.EXCLAMATION,
+      icon: VisualBellIcon.EXCLAMATION,
       error: !0
     }));
     d(!1);
@@ -6581,7 +6580,7 @@ function ob() {
   };
   let d = function () {
     let e = _$$tS();
-    let t = Rs(e54({
+    let t = Rs(WebFontsForFile({
       fileKey: e || ''
     }), {
       enabled: !!e
@@ -6630,9 +6629,9 @@ function ob() {
         [om.FILE_SIZE_TOO_LARGE]: getI18nString('sites.metadata.fonts.file_size_is_over_limit_of_25_mb_and_couldn_t_be_uploaded')
       };
       let a = e !== om.FILE_SIZE_TOO_LARGE;
-      n[e] ? l(_$$F.enqueue({
+      n[e] ? l(VisualBellActions.enqueue({
         message: n[e],
-        icon: zX.WARNING_EXCLAMATION_WITH_TRIANGLE,
+        icon: VisualBellIcon.WARNING_EXCLAMATION_WITH_TRIANGLE,
         ...(a && {
           button: {
             text: getI18nString('sites.metadata.fonts.upload'),
@@ -6656,16 +6655,16 @@ function ob() {
       });
       if (r.length === 0) return;
       n(e => new Set(e).add(uploadTarget));
-      l(_$$F.enqueue({
+      l(VisualBellActions.enqueue({
         type: 'web-font-uploading',
         message: getI18nString('sites.metadata.fonts.uploading_font_file', {
           numFiles: r.length
         }),
-        icon: zX.SPINNER,
+        icon: VisualBellIcon.SPINNER,
         timeoutOverride: 1 / 0
       }));
       let o = await oh(r, e, t ?? '');
-      l(_$$F.dequeue({
+      l(VisualBellActions.dequeue({
         matchType: 'web-font-uploading'
       }));
       n(e => {
@@ -6673,12 +6672,12 @@ function ob() {
         t.$$delete(uploadTarget);
         return t;
       });
-      o.success ? l(_$$F.enqueue({
+      o.success ? l(VisualBellActions.enqueue({
         type: 'web-font-uploaded',
         message: getI18nString('sites.metadata.fonts.success_the_uploaded_font_is_ready_to_publish', {
           numFiles: r.length
         }),
-        icon: zX.CHECK
+        icon: VisualBellIcon.CHECK
       })) : _(o.error, r.length, uploadTarget);
       d.resetFileInput();
     }, [e, l, t, d, _]);
@@ -7435,7 +7434,7 @@ function oY({
   let [c, x] = useState(r);
   let [m, h] = useState(null);
   let [g, f] = useState(!1);
-  let _ = Rs(Vny({
+  let _ = Rs(SiteMount({
     fileKey: d || ''
   }), {
     enabled: !!d
@@ -7486,19 +7485,19 @@ function oY({
               fileKey: d,
               new_base_domain: `${c}${o}`
             }).then(() => {
-              n(_$$F.dequeue({
+              n(VisualBellActions.dequeue({
                 matchType: _$$V.PublishingSuccess
               }));
-              n(_$$F.enqueue({
+              n(VisualBellActions.enqueue({
                 message: getI18nString('sites.metadata.domains.domain_updated'),
                 timeoutOverride: 5e3,
-                icon: zX.CHECK
+                icon: VisualBellIcon.CHECK
               }));
             }).catch(() => {
-              n(_$$F.enqueue({
+              n(VisualBellActions.enqueue({
                 message: getI18nString('sites.metadata.domains.domain_updated_error'),
                 error: !0,
-                icon: zX.WARNING_EXCLAMATION_WITH_TRIANGLE
+                icon: VisualBellIcon.WARNING_EXCLAMATION_WITH_TRIANGLE
               }));
             }).$$finally(() => {
               i(!1);
@@ -7950,7 +7949,7 @@ function dn({
             d && c(j(S(e)));
           },
           placeholder: 'www.mywebsite.com',
-          recordingKey: Pt(i, 'title')
+          recordingKey: generateRecordingKey(i, 'title')
         }), !!d && jsx(_$$Z5, {
           'style': {
             'marginLeft': '-28px',
@@ -8051,7 +8050,7 @@ let ds = registerModal(e => {
   } = e;
   let i = _$$hS(e);
   let n = useDispatch();
-  let [a] = IT(Vny.Query({
+  let [a] = IT(SiteMount.Query({
     fileKey: e.fileKey
   }));
   let r = _$$oA3(a.data?.siteMount);
@@ -8089,7 +8088,7 @@ let ds = registerModal(e => {
                 }
               }, e);
               e.then(e => {
-                e.status === 200 && n(_$$F.enqueue({
+                e.status === 200 && n(VisualBellActions.enqueue({
                   type: 'custom_domain_removed',
                   message: getI18nString('sites.metadata.domain.domain_removed')
                 }));
@@ -8223,7 +8222,7 @@ function dm({
   redirectedDomain: t
 }) {
   let i = useDispatch();
-  let [n] = IT(Vny.Query({
+  let [n] = IT(SiteMount.Query({
     fileKey: e
   }));
   let a = _$$oA3(n.data?.siteMount);
@@ -8801,7 +8800,7 @@ function dz({
   recordingKey: e,
   fileKey: t
 }) {
-  let i = Rs(Vny({
+  let i = Rs(SiteMount({
     fileKey: t
   }), {
     enabled: !0
@@ -8850,7 +8849,7 @@ function dz({
           }, _$$z8.unsetPassword({
             fileKey: t
           }));
-          d(_$$F.enqueue({
+          d(VisualBellActions.enqueue({
             type: 'site-password-unset-success',
             message: getI18nString('sites.settings.password_protection.unset_password_success')
           }));
@@ -8910,10 +8909,10 @@ function dz({
           fileKey: t,
           password: y
         }));
-        d(_$$F.enqueue({
+        d(VisualBellActions.enqueue({
           type: 'site-password-set-success',
           message: getI18nString('sites.settings.password_protection.set_password_success'),
-          icon: zX.CHECK
+          icon: VisualBellIcon.CHECK
         }));
       } else {
         throw new Error('Livegraph client unavailable');
@@ -8973,7 +8972,7 @@ function dz({
         id: 'password-protection',
         onChange: S,
         checked: m,
-        recordingKey: Pt(e, 'password_protection')
+        recordingKey: generateRecordingKey(e, 'password_protection')
       })]
     }), m && jsxs('form', {
       onSubmit: I,
@@ -9008,7 +9007,7 @@ function dz({
               ..._$$xk(dB.passwordInput, L && dB.passwordInputError, c && dB.passwordInputDisabled),
               'value': y,
               'readOnly': c,
-              'recordingKey': Pt(e, 'password')
+              'recordingKey': generateRecordingKey(e, 'password')
             }), jsx('span', {
               className: 'x10l6tqk xibut22 x78zum5 x6s0dn4',
               children: y.length > 0 && jsx(_$$K2, {
@@ -9037,7 +9036,7 @@ function dz({
             disabled: !0,
             className: 'x153ncpu xt7dq6l xh8yej3 xge78cn',
             value: '**************',
-            recordingKey: Pt(e, 'password')
+            recordingKey: generateRecordingKey(e, 'password')
           }), L && j === 'API_UNSET_FAILED' && jsx('div', {
             ..._$$xk(dB.errorMessage),
             'data-testid': 'password-error-message',
@@ -9316,7 +9315,7 @@ function d8({
   labelHidden: x,
   recordingKey: m
 }) {
-  let g = _$$c4(m);
+  let g = createRecordingCallback(m);
   let f = r ? getSingletonSceneGraph().get(r) : void 0;
   useEffect(() => {
     r && !f && t('');
@@ -9581,7 +9580,7 @@ function cl({
   page: t,
   isSiteLevelSetting: i
 }) {
-  let n = Pt(e, 'title');
+  let n = generateRecordingKey(e, 'title');
   let s = Oc();
   let r = useMemo(() => s ? getI18nString('figmake.metadata.controls.site_title.label') : i ? getI18nString('sites.metadata.controls.title_site.label') : getI18nString('sites.metadata.controls.title_page.label'), [i, s]);
   return jsx(dK, {
@@ -9624,7 +9623,7 @@ function ca({
       onKeyDown: cn,
       value: s ?? n.description,
       placeholder: i ? getI18nString('sites.metadata.controls.description_site.placeholder') : getI18nString('sites.metadata.controls.description_page.placeholder'),
-      recordingKey: Pt(e, 'description'),
+      recordingKey: generateRecordingKey(e, 'description'),
       minHeight: 104,
       maxHeight: 156
     }),
@@ -9660,7 +9659,7 @@ function cr({
       'onKeyDown': cn,
       'value': s ?? n.lang,
       'placeholder': getI18nString('sites.metadata.controls.language.placeholder'),
-      'recordingKey': Pt(e, 'lang')
+      'recordingKey': generateRecordingKey(e, 'lang')
     }),
     description: c ? getI18nString('sites.metadata.controls.language.infotext_invalid') : getI18nString('sites.metadata.controls.language.infotext'),
     isInvalid: c
@@ -9669,7 +9668,7 @@ function cr({
 function co({
   recordingKey: e
 }) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let i = Oc();
   let {
     codeLibraryInstance
@@ -9735,7 +9734,7 @@ function co({
           children: jsx($n, {
             variant: 'destructiveSecondary',
             onClick: p,
-            recordingKey: Pt(e, 'wipe_chat_history_button'),
+            recordingKey: generateRecordingKey(e, 'wipe_chat_history_button'),
             children: getI18nString('figmake.chat_management.wipe_chat_settings.label')
           })
         })]
@@ -9747,7 +9746,7 @@ function co({
       title: getI18nString('figmake.chat_management.wipe_chat_settings.confirmation.title'),
       confirmText: getI18nString('figmake.chat_management.wipe_chat_settings.confirmation.button_text'),
       destructive: !0,
-      recordingKey: Pt(e, 'confirm_delete_chat_modal'),
+      recordingKey: generateRecordingKey(e, 'confirm_delete_chat_modal'),
       children: getI18nString('figmake.chat_management.wipe_chat_settings.confirmation.message')
     })]
   }) : null;
@@ -9782,7 +9781,7 @@ function cc({
       'onKeyDown': cn,
       'value': s ?? n.googleAnalyticsID,
       'placeholder': getI18nString('sites.metadata.controls.google_analytics_id.placeholder'),
-      'recordingKey': Pt(e, 'google_analytics_id')
+      'recordingKey': generateRecordingKey(e, 'google_analytics_id')
     }),
     description: c ? getI18nString('sites.metadata.controls.google_analytics_id.infotext_invalid') : void 0,
     isInvalid: c
@@ -9825,7 +9824,7 @@ function cu({
         p();
       },
       checked: !!d,
-      recordingKey: Pt(e, 'allow_search_indexing')
+      recordingKey: generateRecordingKey(e, 'allow_search_indexing')
     })
   });
 }
@@ -9853,7 +9852,7 @@ function cp({
         o();
       },
       checked: !!n,
-      recordingKey: Pt(e, 'add_bypass_link'),
+      recordingKey: generateRecordingKey(e, 'add_bypass_link'),
       children: getI18nString('sites.metadata.controls.bypass_link_site.description')
     })
   });
@@ -9883,7 +9882,7 @@ function cx({
         o();
       },
       checked: !n,
-      recordingKey: Pt(e, 'ignore_reduced_motion'),
+      recordingKey: generateRecordingKey(e, 'ignore_reduced_motion'),
       children: getI18nString('sites.metadata.controls.reduced_motion.description')
     })
   });
@@ -9956,7 +9955,7 @@ function cm({
       imageCandidates: d,
       label: getI18nString('sites.metadata.controls.favicon.label'),
       nodeId: s.faviconID,
-      recordingKey: Pt(n, 'favicon'),
+      recordingKey: generateRecordingKey(n, 'favicon'),
       removeImage: () => c(''),
       removeString: getI18nString('sites.metadata.image_selector.remove_selection'),
       selectImage: c
@@ -10030,7 +10029,7 @@ function ch({
       imageCandidates: d,
       label: getI18nString('sites.metadata.controls.social_image.label'),
       nodeId: s.socialImageID,
-      recordingKey: Pt(n, 'social_image'),
+      recordingKey: generateRecordingKey(n, 'social_image'),
       removeImage: () => c(''),
       removeString: getI18nString('sites.metadata.image_selector.remove_selection'),
       selectImage: c
@@ -10162,7 +10161,7 @@ function cb({
           type: ct
         })),
         variant: 'destructiveSecondary',
-        recordingKey: Pt(e, 'unpublishButton'),
+        recordingKey: generateRecordingKey(e, 'unpublishButton'),
         children: r ? renderI18nText('figmake.metadata.controls.publish_status.unpublish_site') : renderI18nText('sites.metadata.controls.publish_status.unpublish_site')
       }) : jsx(sj, {
         file: t
@@ -10205,7 +10204,7 @@ function cj({
     let t = e?.plan?.tier === Agb.STARTER;
     let i = Oc();
     let n = function (e) {
-      let t = Rs(x9E({
+      let t = Rs(FilePublishSitePermissions({
         fileKey: e || ''
       }), {
         enabled: !!e
@@ -12227,7 +12226,7 @@ function pr({
   isResizingPanel: t,
   codeInstanceGuid: i
 }) {
-  let n = _$$iZ();
+  let n = selectCurrentUser();
   let r = _$$tS();
   let d = useAtomWithSubscription(EB);
   zA();
@@ -13156,7 +13155,7 @@ async function xw(e, t, i) {
     })
   });
   let a = () => {
-    i(_$$F.enqueue({
+    i(VisualBellActions.enqueue({
       type: 'copied_to_clipboard',
       message: getI18nString('fullscreen_actions.copied_to_clipboard')
     }));
@@ -14305,7 +14304,7 @@ function mu({
           f.current?.click();
         }
       },
-      recordingKey: Pt(c, 'dropTarget'),
+      recordingKey: generateRecordingKey(c, 'dropTarget'),
       ..._$$xk(md.dropArea, t === 1 && md.loadingState, g ? md.dropAreaHover : md.dropAreaDefault, e && md.dropAreaWithImageDefault, e && p && md.dropAreaWithImageDrag),
       style: {
         backgroundImage: e && t === 2 ? m ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${e.url})` : `url(${e.url})` : void 0
@@ -14381,7 +14380,7 @@ function mp({
             className: 'x12bdpze x1y5e3q9 x1n2onr6',
             children: jsx(mu, {
               ...e,
-              recordingKey: Pt(c, 'imageUploader')
+              recordingKey: generateRecordingKey(c, 'imageUploader')
             })
           }), jsx(x$, {
             id: s,
@@ -14512,7 +14511,7 @@ function mx({
         imageStatus: p,
         onChange: f,
         onDrop: g,
-        recordingKey: Pt(r, 'imageUploader'),
+        recordingKey: generateRecordingKey(r, 'imageUploader'),
         showDeleteButton: !0,
         toggleDetailView: () => {
           if (k.showing) {
@@ -14542,7 +14541,7 @@ function mx({
         showDeleteButton: !1,
         imageHoverButton: jsx($n, {
           iconPrefix: jsx(_$$A15, {}),
-          recordingKey: Pt(r, 'uploadButton'),
+          recordingKey: generateRecordingKey(r, 'uploadButton'),
           variant: 'primary',
           children: renderI18nText('dakota.image_detail_modal.replace_image')
         })
@@ -14551,7 +14550,7 @@ function mx({
       initialFilename: o?.fileName,
       initialPosition: k.initialPosition,
       onClose: w,
-      recordingKey: Pt('imageDetailsModal', t.id),
+      recordingKey: generateRecordingKey('imageDetailsModal', t.id),
       updateAltText: e => {
         o && _({
           ...o,
@@ -14653,7 +14652,7 @@ function mf({
     }
     v(n, c, i, e);
   }
-  let S = _$$iQ(d, 'blur', r);
+  let S = useHandleGenericEvent(d, 'blur', r);
   return jsxs(Fragment, {
     children: [jsx(_$$Y3.Root, {
       className: k ? 'dakota_item_panel--fieldset__hasErrors--Y0QK5' : void 0,
@@ -14715,7 +14714,7 @@ function mv({
     return t != null && !(i.size > 1) && i.has(t);
   }(r);
   let [c, u] = useAtomValueAndSetter(pE(r));
-  d ? c == null ? (_$$sD('pendingCmsItemId is null'), s = mm(_$$g5())) : s = mm(c) : s = i.item;
+  d ? c == null ? (_$$sD('pendingCmsItemId is null'), s = mm(generateUUIDv4())) : s = mm(c) : s = i.item;
   let p = _$$uE(r);
   let [x, m] = useAtomValueAndSetter(pT(s?.id));
   let h = useAtomWithSubscription(pC(s?.id));
@@ -14818,14 +14817,14 @@ function mv({
         switch (i.fieldType) {
           case _$$_j.LINK:
             return jsx(mb, {
-              recordingKey: Pt(n, `inputRow.${i.name}`),
+              recordingKey: generateRecordingKey(n, `inputRow.${i.name}`),
               fieldSchema: i,
               value: C(i.id),
               submit: S
             });
           case _$$_j.IMAGE:
             return jsx(mx, {
-              recordingKey: Pt(n, `inputRow.${i.name}`),
+              recordingKey: generateRecordingKey(n, `inputRow.${i.name}`),
               collection: e,
               fieldSchema: i,
               currentImageFieldValue: C(i.id),
@@ -14834,7 +14833,7 @@ function mv({
           case _$$_j.SLUG:
           case _$$_j.PLAIN_TEXT:
             return jsx(mf, {
-              recordingKey: Pt(n, `inputRow.${i.name}`),
+              recordingKey: generateRecordingKey(n, `inputRow.${i.name}`),
               item: s,
               collectionId: r,
               fieldSchema: i,
@@ -15056,23 +15055,23 @@ function mz(e) {
     i(null);
     e && (d.current = e, d.current.select());
   }, []);
-  let u = AF(e.recordingKey, 'change', t => {
+  let u = useHandleChangeEvent(e.recordingKey, 'change', t => {
     e.readOnly || i(t.currentTarget?.value);
   });
-  let p = _$$v_(e.recordingKey, 'keydown', t => {
+  let p = useHandleKeyboardEvent(e.recordingKey, 'keydown', t => {
     if (!e.readOnly && !n) {
       if (t.keyCode === Uz.ESCAPE) {
         e.stopRenaming?.(!1);
       } else if (t.keyCode === Uz.ENTER) {
         e.stopRenaming?.(!0, t.currentTarget.value, e.value);
       } else {
-        if (t.keyCode !== Uz.TAB) return _$$aH;
+        if (t.keyCode !== Uz.TAB) return SKIP_RECORDING;
         t.preventDefault();
         e.stopRenaming?.(!0, t.currentTarget.value, e.value);
       }
     }
   });
-  let x = _$$iQ(e.recordingKey, 'blur', t => {
+  let x = useHandleGenericEvent(e.recordingKey, 'blur', t => {
     e.readOnly || e.stopRenaming?.(!0, t.currentTarget.value, e.value);
   });
   let {
@@ -15950,7 +15949,7 @@ function hr({
   }) {
     return useCallback(t => {
       e();
-      _$$F.enqueue({
+      VisualBellActions.enqueue({
         message: t,
         error: !0
       });
@@ -16251,7 +16250,7 @@ let hd = registerModal(e => {
                       included
                     } = e;
                     return included ? {
-                      id: _$$g5(),
+                      id: generateUUIDv4(),
                       name,
                       fieldType,
                       required,
@@ -16415,10 +16414,10 @@ function hp() {
         error: t.message
       }
     });
-    e(_$$F.enqueue({
+    e(VisualBellActions.enqueue({
       type: 'cms_import_csv',
       message: 'Failed to import',
-      icon: zX.EXCLAMATION
+      icon: VisualBellIcon.EXCLAMATION
     }));
   };
   return () => e(showModalHandler({
@@ -16426,26 +16425,26 @@ function hp() {
     data: {
       onSubmit: async a => {
         try {
-          e(_$$F.enqueue({
+          e(VisualBellActions.enqueue({
             type: 'cms_import_csv',
             message: 'Importing data...',
-            icon: zX.SPINNER
+            icon: VisualBellIcon.SPINNER
           }));
           let l = await t(a);
           let s = l?.id;
           if (!s) {
-            e(_$$F.enqueue({
+            e(VisualBellActions.enqueue({
               type: 'cms_import_csv',
               message: 'Failed to import',
-              icon: zX.EXCLAMATION
+              icon: VisualBellIcon.EXCLAMATION
             }));
             return;
           }
           i(s);
-          e(_$$F.enqueue({
+          e(VisualBellActions.enqueue({
             type: 'cms_import_csv',
             message: 'Processing data...',
-            icon: zX.SPINNER
+            icon: VisualBellIcon.SPINNER
           }));
           let r = await m5({
             rows: a.rows,
@@ -16460,10 +16459,10 @@ function hp() {
             collection_id: s,
             num_items: r.length
           });
-          e(_$$F.enqueue({
+          e(VisualBellActions.enqueue({
             type: 'cms_import_csv',
             message: 'Done!',
-            icon: zX.CHECK_WITH_CIRCLE
+            icon: VisualBellIcon.CHECK_WITH_CIRCLE
           }));
         } catch (e) {
           l(e);
@@ -16567,7 +16566,7 @@ class hm {
         case _$$_j.DATE:
           l = n;
       }
-      let s = _$$g5();
+      let s = generateUUIDv4();
       _$$hl.updateSingleItemData({
         fieldId: s,
         item: {
@@ -16603,7 +16602,7 @@ class hm {
         let n = this._fieldNameToTypeMap[e.fieldName];
         i !== 'LOADING' && t && n ? this._setItemFieldData(i, t, n, e.value) : this._itemQueue.push(e);
       } else {
-        let i = _$$g5();
+        let i = generateUUIDv4();
         this._itemToIdMap[e.collectionItemId] = 'LOADING';
         _$$hl.createItem({
           collection: t,
@@ -16619,7 +16618,7 @@ class hm {
     };
     this.fileKey = e;
     this._collection = {
-      id: _$$g5(),
+      id: generateUUIDv4(),
       idOnly: !0
     };
     this._currentFieldPos = _$$TZ;
@@ -16715,10 +16714,10 @@ function hb() {
         mlEvent: !0
       });
       r(!0);
-      e(_$$F.enqueue({
+      e(VisualBellActions.enqueue({
         type: 'cms_ai_collection_creation',
         message: getI18nString('dakota.ai.visual_bell.working'),
-        icon: zX.SPINNER
+        icon: VisualBellIcon.SPINNER
       }));
       let n = new hm(m);
       let l = n.getCollectionId();
@@ -16739,10 +16738,10 @@ function hb() {
       trackEventAnalytics(G5, w, {
         mlEvent: !0
       });
-      e(_$$F.enqueue({
+      e(VisualBellActions.enqueue({
         type: 'cms_ai_collection_creation',
         message: getI18nString('dakota.ai.visual_bell.done'),
-        icon: zX.CHECK_WITH_CIRCLE
+        icon: VisualBellIcon.CHECK_WITH_CIRCLE
       }));
     },
     className: 'x1n2onr6 x78zum5 xdt5ytf x1qughib x1edz59j',
@@ -17017,17 +17016,17 @@ function hO({
       children: jsxs('div', {
         className: 'x78zum5 x6s0dn4 x1nfngrj',
         children: [jsx($n, {
-          recordingKey: Pt(i, 'newItemButton'),
+          recordingKey: generateRecordingKey(i, 'newItemButton'),
           iconPrefix: jsx(_$$x5, {}),
           variant: 'secondary',
           onClick: () => {
-            let e = _$$g5();
+            let e = generateUUIDv4();
             p(e);
             c(new Set([e]));
           },
           children: renderI18nText('dakota.table_view.header.new_item')
         }), jsx($n, {
-          recordingKey: Pt(i, 'editFieldsButton'),
+          recordingKey: generateRecordingKey(i, 'editFieldsButton'),
           iconPrefix: jsx(_$$I4, {}),
           variant: 'secondary',
           onClick() {
@@ -17392,7 +17391,7 @@ function h1(e) {
       }), addButtonProps && fileInEditableState && jsx('div', {
         className: _$$s4.flex.gap8.itemsCenter.$,
         children: jsx(_$$K2, {
-          'recordingKey': Pt(e.recordingKey, addButtonProps.recordingKey ?? ''),
+          'recordingKey': generateRecordingKey(e.recordingKey, addButtonProps.recordingKey ?? ''),
           'aria-label': addButtonProps.label,
           'onClick': addButtonProps.onClick,
           'htmlAttributes': {
@@ -17424,7 +17423,7 @@ function h5(e) {
       onClick: e => {
         e.preventDefault();
         e.stopPropagation();
-        debugState.dispatch(_$$F.dequeue({
+        debugState.dispatch(VisualBellActions.dequeue({
           matchType: US
         }));
         _$$J0(() => {
@@ -17635,15 +17634,15 @@ function h9() {
   }, [n]);
   useEffect(() => () => {
     d(null);
-    debugState.dispatch(_$$F.dequeue({
+    debugState.dispatch(VisualBellActions.dequeue({
       matchType: US
     }));
   }, [d]);
   useEffect(() => {
-    s && (s === n?.guid || s === n?.exportedFromCodeFile?.guid) ? debugState.dispatch(_$$F.enqueue({
+    s && (s === n?.guid || s === n?.exportedFromCodeFile?.guid) ? debugState.dispatch(VisualBellActions.enqueue({
       type: US,
       message: getI18nString('sites.panel.code_view_opened_in_make_view'),
-      icon: zX.UNDO,
+      icon: VisualBellIcon.UNDO,
       onDismiss: () => {
         d(null);
       },
@@ -17654,7 +17653,7 @@ function h9() {
         }
       },
       timeoutOverride: 1 / 0
-    })) : debugState.dispatch(_$$F.dequeue({
+    })) : debugState.dispatch(VisualBellActions.dequeue({
       matchType: US
     }));
   }, [s, n?.guid, n?.exportedFromCodeFile?.guid, t, d]);
@@ -17774,7 +17773,7 @@ function ga() {
     callback: () => {
       WS().then(t => {
         if (!t) {
-          e(_$$F.enqueue({
+          e(VisualBellActions.enqueue({
             message: 'Invalid CMS data from clipboard'
           }));
           return;
@@ -18036,7 +18035,7 @@ function gu(e) {
       'data-testid': 'dakota-collections-panel',
       'children': [jsx(ga, {}), jsx(_$$P2, {
         enableOverscroll: !0,
-        recordingKey: Pt('scrollContainer'),
+        recordingKey: generateRecordingKey('scrollContainer'),
         width,
         onScroll(e) {
           n(e > 0);
@@ -18063,20 +18062,20 @@ let gN = ({
   let x = useCallback(e => {
     e && (p.current = e, p.current.select());
   }, []);
-  let m = _$$rf(l, 'dblclick', () => {
+  let m = useHandleMouseEvent(l, 'dblclick', () => {
     _$$F8.trackFromFullscreen('action_rename_selection', {
       source: 'click'
     });
     s(e);
   });
-  let h = AF(l, 'change', e => {
+  let h = useHandleChangeEvent(l, 'change', e => {
     d(e.currentTarget?.value);
   });
   let g = (...e) => {
     r(...e);
     d(null);
   };
-  let f = _$$v_(l, 'keydown', e => {
+  let f = useHandleKeyboardEvent(l, 'keydown', e => {
     if (!c) {
       if (e.keyCode === Uz.ESCAPE) {
         g(!1);
@@ -18085,7 +18084,7 @@ let gN = ({
       } else {
         if (e.keyCode !== Uz.TAB) {
           _$$jr2(e, _$$W7.NO);
-          return _$$aH;
+          return SKIP_RECORDING;
         }
         e.preventDefault();
         g(!0, p.current?.value, n);
@@ -18097,7 +18096,7 @@ let gN = ({
     renamingValue: o,
     initInputRef: x,
     onDoubleClick: m,
-    onBlur: _$$iQ(l, 'blur', () => {
+    onBlur: useHandleGenericEvent(l, 'blur', () => {
       g(!0, p.current?.value, n);
     }),
     onKeyDown: f,
@@ -18165,10 +18164,10 @@ function gR({
     shouldSkip: !1,
     regenerateAfterImagesLoaded: !0
   });
-  let L = _$$rf2(x, 'click', useCallback(e => {
+  let L = useHandleMouseEvent(x, 'click', useCallback(e => {
     e.shiftKey ? u(t) : Fo(e) ? d(t) : y(t);
   }, [y, u, d, t]));
-  let P = _$$rf2(x, 'contextmenu', useCallback(e => {
+  let P = useHandleMouseEvent(x, 'contextmenu', useCallback(e => {
     o?.(t, e);
   }, [o, t]));
   let {
@@ -18209,7 +18208,7 @@ function gR({
       f(null);
     },
     onStart: e => {
-      S[e.dragItem.id] || _$$tJ([e.dragItem.id]);
+      S[e.dragItem.id] || replaceSelection([e.dragItem.id]);
     }
   }));
   let X = h ? gA.webpageRowBgSelected : K && !e ? gA.webpageRowBgHover : null;
@@ -18508,7 +18507,7 @@ function gL(e) {
   let Y = e => {
     _$$S9('panel');
     getSingletonSceneGraph().setCurrentPageFromNodeAsync(e);
-    _$$tJ([e]);
+    replaceSelection([e]);
     fullscreenValue.commit();
     M(e);
     i(e);
@@ -18518,7 +18517,7 @@ function gL(e) {
       let i = $.indexOf(e);
       let n = $.indexOf(t);
       let l = $.slice(Math.min(i, n), Math.max(i, n) + 1);
-      Dh(l);
+      addToSelection(l);
       fullscreenValue.commit();
     } else {
       Y(e);
@@ -18526,14 +18525,14 @@ function gL(e) {
     }
   };
   let Z = e => {
-    _[e] ? D$([e]) : (Dh([e]), i(e));
+    _[e] ? removeFromSelection([e]) : (addToSelection([e]), i(e));
     fullscreenValue.commit();
   };
   let Q = () => {
     if (!n) return;
     let e = $.indexOf(n);
     let t = PA(S, n);
-    t && _$$l.user('reparent-selection', () => Yu(t.guid, Lc(t, e) - 1));
+    t && _$$l.user('reparent-selection', () => transferSelection(t.guid, Lc(t, e) - 1));
   };
   let ee = (e, t) => {
     let i = S.get(e);
@@ -18588,7 +18587,7 @@ function gL(e) {
         defaultSize: K,
         onResize: e => {
           P(e);
-          Uc('');
+          updateHoveredNode('');
         },
         side: 'bottom',
         ref: y,
@@ -18707,7 +18706,7 @@ function gO() {
         onSelectionUpdated: e => {
           getSingletonSceneGraph().setCurrentPageFromNodeAsync(e);
           _$$S9('panel');
-          _$$tJ([e]);
+          replaceSelection([e]);
           fullscreenValue.commit();
         },
         onToggleLayers: toggleLayersAction,
@@ -18815,12 +18814,12 @@ function gU({
   if (!function () {
     let e = q5();
     let t = e?.key;
-    let i = Rs(DuV, {
+    let i = Rs(SiteBundles, {
       fileKey: t ?? ''
     }, {
       enabled: !!t
     });
-    let n = Rs(Vny, {
+    let n = Rs(SiteMount, {
       fileKey: t || ''
     }, {
       enabled: !!t
@@ -19193,7 +19192,7 @@ let g9 = memo(() => {
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
     team: _$$e2.SITES_EDITOR,
     onError: () => {
-      n(_$$F.enqueue({
+      n(VisualBellActions.enqueue({
         message: getI18nString('sites.left_panel.visual_bell.left_panel_error_boundary_message'),
         type: 'react-error'
       }));
@@ -19864,7 +19863,7 @@ function fD({
       t.history.back();
     },
     'disabled': !i.canMoveBackward,
-    'recordingKey': Pt(e, 'back'),
+    'recordingKey': generateRecordingKey(e, 'back'),
     'children': jsx(_$$C6, {})
   });
 }
@@ -19880,7 +19879,7 @@ function fz({
       t.history.forward();
     },
     'disabled': !i.canMoveForward,
-    'recordingKey': Pt(e, 'forward'),
+    'recordingKey': generateRecordingKey(e, 'forward'),
     'children': jsx(_$$e12, {})
   });
 }
@@ -19894,7 +19893,7 @@ function fB({
     'onClick': () => {
       t.history.refresh();
     },
-    'recordingKey': Pt(e, 'reload'),
+    'recordingKey': generateRecordingKey(e, 'reload'),
     'children': jsx(_$$T4, {})
   });
 }
@@ -20220,7 +20219,7 @@ function f8({
     children: [n && jsx(_$$K2, {
       'aria-label': getI18nString('sites.modal.open-debug-tools'),
       'onClick': t,
-      'recordingKey': Pt(e, 'open-debug-tools'),
+      'recordingKey': generateRecordingKey(e, 'open-debug-tools'),
       'children': jsx(_$$J10, {})
     }), jsx(fB, {
       recordingKey: e
@@ -20233,7 +20232,7 @@ function f8({
       'onClick': () => {
         i.history.restart();
       },
-      'recordingKey': Pt(e, 'restart'),
+      'recordingKey': generateRecordingKey(e, 'restart'),
       'children': jsx(_$$H8, {})
     })]
   });
@@ -20249,7 +20248,7 @@ function f6({
     children: [jsx(_$$K2, {
       'aria-label': getI18nString('sites.modal.close'),
       'onClick': e,
-      'recordingKey': Pt(i, 'close'),
+      'recordingKey': generateRecordingKey(i, 'close'),
       'children': jsx(_$$C6, {})
     }), jsx('div', {
       className: 'sites_full_page_preview--headerTitle---5-ip',
@@ -20271,7 +20270,7 @@ function f7(e) {
     'children': [jsx('div', {
       className: 'sites_full_page_preview--leftControls--nbIXH',
       children: jsx(f6, {
-        recordingKey: Pt(t, 'navigation-controls'),
+        recordingKey: generateRecordingKey(t, 'navigation-controls'),
         onClose: e.onClose,
         modalHistory: e.modalHistory
       })
@@ -20290,7 +20289,7 @@ function f7(e) {
     }), jsx('div', {
       className: 'sites_full_page_preview--rightControls--boJ0z',
       children: jsx(f8, {
-        recordingKey: Pt(t, 'controls'),
+        recordingKey: generateRecordingKey(t, 'controls'),
         toggleDebugTools: e.toggleDebugTools
       })
     })]
@@ -20493,7 +20492,7 @@ function _t({
     recordingKey: s,
     mirrorResizeHorizontally: !0
   });
-  let o = _$$rf(s, 'mousedown', e => {
+  let o = useHandleMouseEvent(s, 'mousedown', e => {
     e.stopPropagation();
     e.preventDefault();
     startResizing([a], {
@@ -21300,7 +21299,7 @@ function _B({
               e.stopPropagation();
               toggle({});
             },
-            'recordingKey': Pt(e, 'overflowMenuButton'),
+            'recordingKey': generateRecordingKey(e, 'overflowMenuButton'),
             'children': jsx(_$$A20, {})
           })
         })]
@@ -21316,7 +21315,7 @@ function _B({
       onSelectItem: e => {
         e.callback && e.callback();
       },
-      recordingKey: Pt(e, 'overflowMenu'),
+      recordingKey: generateRecordingKey(e, 'overflowMenu'),
       items: C()
     })]
   });
@@ -21334,7 +21333,7 @@ function _$({
         mode: 'fullscreen'
       });
     },
-    'recordingKey': Pt(e, 'open-full-preview'),
+    'recordingKey': generateRecordingKey(e, 'open-full-preview'),
     'children': jsx(_$$V5, {})
   });
 }
@@ -21522,7 +21521,7 @@ function _X({
     },
     tabIndex: 0,
     title: jsx(_z, {
-      recordingKey: _$$Pt2(_U, 'header'),
+      recordingKey: generateRecordingKey(_U, 'header'),
       height: M(),
       width: F(),
       scale,
@@ -21584,7 +21583,7 @@ let _6 = [{
   text: getI18nString('sites.onboarding.templates.explore')
 }, {
   type: _$$k1.DIVIDER,
-  key: _$$g5()
+  key: generateUUIDv4()
 }, {
   type: _$$k1.SECTION_HEADER,
   text: getI18nString('sites.onboarding.templates.templates')
@@ -22268,7 +22267,7 @@ function bL() {
 }
 function bO() {
   useEffect(() => {
-    NT(DesignWorkspace.SITE);
+    setPropertiesPanelTab(DesignWorkspace.SITE);
   }, []);
   return jsxs(Fragment, {
     children: [jsx('div', {
@@ -22319,16 +22318,16 @@ function bQ({
     _$$l.user('update-cms-rich-text-layout', () => {
       switch (e) {
         case 'WIDTH_AND_HEIGHT':
-          i('RESIZE_TO_FIT_WITH_IMPLICIT_SIZE', _$$zk.NO);
-          s('RESIZE_TO_FIT_WITH_IMPLICIT_SIZE', _$$zk.NO);
+          i('RESIZE_TO_FIT_WITH_IMPLICIT_SIZE', yesNoTrackingEnum.NO);
+          s('RESIZE_TO_FIT_WITH_IMPLICIT_SIZE', yesNoTrackingEnum.NO);
           break;
         case 'HEIGHT':
-          i('FIXED', _$$zk.NO);
-          s('RESIZE_TO_FIT_WITH_IMPLICIT_SIZE', _$$zk.NO);
+          i('FIXED', yesNoTrackingEnum.NO);
+          s('RESIZE_TO_FIT_WITH_IMPLICIT_SIZE', yesNoTrackingEnum.NO);
           break;
         case 'NONE':
-          i('FIXED', _$$zk.NO);
-          s('FIXED', _$$zk.NO);
+          i('FIXED', yesNoTrackingEnum.NO);
+          s('FIXED', yesNoTrackingEnum.NO);
       }
       fullscreenValue.commit();
     });
@@ -22436,12 +22435,12 @@ function yn({
 }
 function yl(e) {
   let t = e.cmsRichTextDescriptor.textStyleId;
-  let i = t.guid !== defaultSessionLocalIDString ? PK.fromLocalNodeIdStr(t.guid) : PK.fromRef(t.ref);
+  let i = t.guid !== defaultSessionLocalIDString ? StyleIdHandler.fromLocalNodeIdStr(t.guid) : StyleIdHandler.fromRef(t.ref);
   let n = null;
   let a = null;
-  if (i && PK.isValid(i)) {
+  if (i && StyleIdHandler.isValid(i)) {
     let e = getSingletonSceneGraph().getStyleNode(i);
-    e && !e.isSoftDeleted && (n = PK.toKiwi(i), a = e.styleKeyForPublish);
+    e && !e.isSoftDeleted && (n = StyleIdHandler.toKiwi(i), a = e.styleKeyForPublish);
   }
   let s = () => {
     e.openStylePicker && e.openStylePicker(e.cmsStyleClass, n, a);
@@ -22603,7 +22602,7 @@ function y_({
 }
 function yb(e) {
   return jsxs(_$$bL6, {
-    recordingKey: Pt(e.recordingKey, 'collectionDropdown'),
+    recordingKey: generateRecordingKey(e.recordingKey, 'collectionDropdown'),
     value: e.currentCollection?.name ?? getI18nString('dakota.properties_panel.collection_panel.collection_dropdown_nullstate'),
     onChange: t => {
       e.setCollectionAction(e.collectionList.find(e => e.name === t)?.id ?? null);
@@ -22634,7 +22633,7 @@ function yy(e) {
     collectionList: e.collectionList
   });
   let n = jsx(_$$K2, {
-    'recordingKey': Pt(e.recordingKey, 'removeCollectionButton'),
+    'recordingKey': generateRecordingKey(e.recordingKey, 'removeCollectionButton'),
     'onClick': () => t(null),
     'aria-label': getI18nString('dakota.collection_selector.disconnect_submenu_title'),
     'htmlAttributes': {
@@ -22659,7 +22658,7 @@ function yv({
   let a = jsx('div', {
     className: yu,
     children: jsx(_$$E5, {
-      'recordingKey': Pt(t, 'goToCollectionButton'),
+      'recordingKey': generateRecordingKey(t, 'goToCollectionButton'),
       'className': yx,
       'aria-label': getI18nString('dakota.properties_panel.collection_panel.go_to_collection_label'),
       'htmlAttributes': {
@@ -22714,7 +22713,7 @@ function yj({
     children: s.get(e.id) ?? ''
   }, e.id));
   let o = jsxs(_$$bL6, {
-    recordingKey: Pt(t, 'itemSelectorDropdown'),
+    recordingKey: generateRecordingKey(t, 'itemSelectorDropdown'),
     value: n,
     onChange: e => {
       e && _$$l.user('cms-update-item-page-item', () => {
@@ -22746,7 +22745,7 @@ function yk({
   let n = jsx('div', {
     className: yu,
     children: jsx(_$$E5, {
-      'recordingKey': Pt(e, 'goToMainComponentRowButton'),
+      'recordingKey': generateRecordingKey(e, 'goToMainComponentRowButton'),
       'className': yx,
       'aria-label': getI18nString('dakota.properties_panel.collection_panel.go_to_component_label'),
       'htmlAttributes': {
@@ -22803,7 +22802,7 @@ function yw({
     }, a));
   }
   let r = jsxs(_$$bL6, {
-    recordingKey: Pt(t, 'repeaterLimitDropdown'),
+    recordingKey: generateRecordingKey(t, 'repeaterLimitDropdown'),
     value: a ? a.toString() : '0',
     onChange: e => {
       _$$l.user('dakota-update-selector-limit', () => {
@@ -22893,7 +22892,7 @@ function yq({
         value: t,
         computedStylesValue: t
       }]
-    }], _$$zk.YES, 'visibility');
+    }], yesNoTrackingEnum.YES, 'visibility');
   }, [i, r]);
   let d = r ? getI18nString('fullscreen.properties_panel.tooltip_hide') : getI18nString('fullscreen.properties_panel.tooltip_show');
   return jsx('div', {
@@ -22911,7 +22910,7 @@ function yq({
       'offIcon': jsx(_$$_0, {}),
       'onChange': o,
       'onIcon': jsx(noop, {}),
-      'recordingKey': Pt(n, 'visibleToggle'),
+      'recordingKey': generateRecordingKey(n, 'visibleToggle'),
       'variant': 'highlighted'
     })
   });
@@ -22945,12 +22944,12 @@ function yW({
       leftInput: o({
         corner: OK.TOP_LEFT,
         value: i,
-        recordingKey: Pt(e, 'rectangleTopLeftCornerRadiusInput')
+        recordingKey: generateRecordingKey(e, 'rectangleTopLeftCornerRadiusInput')
       }),
       rightInput: o({
         corner: OK.TOP_RIGHT,
         value: n,
-        recordingKey: Pt(e, 'rectangleTopRightCornerRadiusInput')
+        recordingKey: generateRecordingKey(e, 'rectangleTopRightCornerRadiusInput')
       }),
       rightLabel: null,
       leftLabel: null,
@@ -22959,12 +22958,12 @@ function yW({
       leftInput: o({
         corner: OK.BOTTOM_LEFT,
         value: a,
-        recordingKey: Pt(e, 'rectangleBottomLeftCornerRadiusInput')
+        recordingKey: generateRecordingKey(e, 'rectangleBottomLeftCornerRadiusInput')
       }),
       rightInput: o({
         corner: OK.BOTTOM_RIGHT,
         value: s,
-        recordingKey: Pt(e, 'rectangleBottomRightCornerRadiusInput')
+        recordingKey: generateRecordingKey(e, 'rectangleBottomRightCornerRadiusInput')
       }),
       rightLabel: null,
       leftLabel: null,
@@ -23143,7 +23142,7 @@ let yZ = memo(({
         isTokenizable: !0,
         noBorderOnHover: !0,
         onValueChange: c,
-        recordingKey: Pt(n, 'opacity'),
+        recordingKey: generateRecordingKey(n, 'opacity'),
         ui3RightJustifyPercentSign: !1,
         value: o,
         children: jsx('div', {
@@ -23171,7 +23170,7 @@ let yZ = memo(({
     }), isIndependentCornerExpanded && jsx(yW, {
       onValueChange,
       ...g,
-      recordingKey: Pt(n, 'independentCornerRadius'),
+      recordingKey: generateRecordingKey(n, 'independentCornerRadius'),
       disabled: !f
     })]
   });
@@ -23194,7 +23193,7 @@ function ve({
   let m = [];
   m.push(y9.map(e => jsx(vt, {
     value: e,
-    recordingKey: Pt(r, `${e}`),
+    recordingKey: generateRecordingKey(r, `${e}`),
     children: e
   }, `font-size-${e}`)));
   return jsx(Fragment, {
@@ -23283,7 +23282,7 @@ function vs({
         value: i,
         computedStylesValue: i
       }]
-    }], _$$zk.YES, 'text-align');
+    }], yesNoTrackingEnum.YES, 'text-align');
   }, [t]);
   let d = function (e) {
     let t = _$$CQ('vertical-align', e);
@@ -23321,7 +23320,7 @@ function vs({
         value: i,
         computedStylesValue: i
       }]
-    }], _$$zk.YES, 'vertical-align');
+    }], yesNoTrackingEnum.YES, 'vertical-align');
   }, [t]);
   return jsx(_$$fn2, {
     ref: n,
@@ -23332,7 +23331,7 @@ function vs({
         textAlignHorizontal: r,
         onChange: o,
         disabled: !i,
-        recordingKey: Pt(s.recordingKey, 'textAlignHorizontal')
+        recordingKey: generateRecordingKey(s.recordingKey, 'textAlignHorizontal')
       })
     }),
     rightLabel: null,
@@ -23342,7 +23341,7 @@ function vs({
         textAlignVertical: d,
         onChange: c,
         disabled: !i,
-        recordingKey: Pt(s.recordingKey, 'textAlignVertical')
+        recordingKey: generateRecordingKey(s.recordingKey, 'textAlignVertical')
       })
     }),
     icon: void 0
@@ -23428,7 +23427,7 @@ let vc = memo(({
   }(e, o);
   let p = _$$wc('font-size', e);
   let x = useRef(null);
-  let m = useCallback((e, i, n = _$$zk.YES) => {
+  let m = useCallback((e, i, n = yesNoTrackingEnum.YES) => {
     let l = DY(e, o);
     l && (t.addClassesToInspectedElements([{
       className: `font-[${e.replace(/ /g, '_')}]`,
@@ -23438,7 +23437,7 @@ let vc = memo(({
         value: e,
         computedStylesValue: e
       }]
-    }], n, 'font-family'), _$$dZ(n) && _$$l.user('direct-manipulation', () => {
+    }], n, 'font-family'), normalizeTrackingEnum(n) && _$$l.user('direct-manipulation', () => {
       _$$HL(l, x);
     }));
   }, [t, o]);
@@ -23467,7 +23466,7 @@ let vc = memo(({
       hideTypographyVariableOptions: !0,
       id: 'web-direct-manipulation-font-family-combo-box',
       onChange: m,
-      recordingKey: Pt(n, 'fontFamily'),
+      recordingKey: generateRecordingKey(n, 'fontFamily'),
       restrictedFontSet: _$$Qr.GOOGLE_FONTS,
       useLegacyFontPickerDropdown: !1,
       versionsForStyles: d
@@ -23478,7 +23477,7 @@ let vc = memo(({
         fontSize: p ?? 16,
         onFontSizeChange: h,
         disabled: !g,
-        recordingKey: Pt(n, 'fontSize')
+        recordingKey: generateRecordingKey(n, 'fontSize')
       }),
       rightInput: void 0,
       icon: void 0,
@@ -23489,7 +23488,7 @@ let vc = memo(({
       classNameEditingController: t,
       editingEnabled: g,
       alignmentRowRef: r,
-      recordingKey: Pt(n, 'textAlignment')
+      recordingKey: generateRecordingKey(n, 'textAlignment')
     })]
   });
 });
@@ -23501,7 +23500,7 @@ let vu = memo(e => {
     if (i.current) return;
     i.current = !0;
     let t = e === 'on_selection' ? getI18nString('figmake.toolbar.error.inconsistency') : getI18nString('figmake.toolbar.error.save');
-    n(_$$F.enqueue({
+    n(VisualBellActions.enqueue({
       message: t,
       error: !0,
       button: {
@@ -23517,12 +23516,12 @@ let vu = memo(e => {
       directManipulationEditor: t,
       classNameEditingController: o,
       classNameEditingEnabledState: d,
-      recordingKey: Pt(e, 'WebAppearancePanel')
+      recordingKey: generateRecordingKey(e, 'WebAppearancePanel')
     }), jsx(vc, {
       directManipulationEditor: t,
       classNameEditingController: o,
       classNameEditingEnabledState: d,
-      recordingKey: Pt(e, 'WebTypePanel')
+      recordingKey: generateRecordingKey(e, 'WebTypePanel')
     })]
   });
 });
@@ -23925,24 +23924,24 @@ function jr(e) {
   let N = vV('sites_add_accessibility_tag');
   let R = vV('sites_remove_accessibility_tag');
   let A = useCallback((e, t) => ({
-    onMouseEnter: _$$rf(e, 'mouseenter', () => {
+    onMouseEnter: useHandleMouseEvent(e, 'mouseenter', () => {
       T(t);
     }),
-    onMouseLeave: _$$rf(e, 'mouseleave', () => {
+    onMouseLeave: useHandleMouseEvent(e, 'mouseleave', () => {
       T(0);
     })
   }), [T]);
-  let L = Pt(e.recordingKey, jn) ?? '';
+  let L = generateRecordingKey(e.recordingKey, jn) ?? '';
   let {
     onMouseEnter,
     onMouseLeave
   } = A(L, 3);
-  let F = Pt(e.recordingKey, 'aria-current') ?? '';
+  let F = generateRecordingKey(e.recordingKey, 'aria-current') ?? '';
   let {
     onMouseEnter: _onMouseEnter,
     onMouseLeave: _onMouseLeave
   } = A(F, 4);
-  let z = Pt(e.recordingKey, ja) ?? '';
+  let z = generateRecordingKey(e.recordingKey, ja) ?? '';
   let {
     onMouseEnter: _onMouseEnter2,
     onMouseLeave: _onMouseLeave2
@@ -24031,13 +24030,13 @@ function jr(e) {
               value: p,
               type: 'textarea',
               disabled: !0,
-              recordingKey: Pt(e.recordingKey, 'labelInput')
+              recordingKey: generateRecordingKey(e.recordingKey, 'labelInput')
             }),
             icon: jsx('span', {
               className: 'styles-module--iconVisibleOnHover--W-hXx',
               children: jsx(ju, {
                 onClick: () => {
-                  NT(DesignWorkspace.DAKOTA);
+                  setPropertiesPanelTab(DesignWorkspace.DAKOTA);
                 }
               })
             })
@@ -24054,7 +24053,7 @@ function jr(e) {
                 _(!1);
                 R(vG(t.labelType));
               },
-              recordingKey: Pt(e.recordingKey, 'label')
+              recordingKey: generateRecordingKey(e.recordingKey, 'label')
             }) : null,
             dataTestId: 'accessibility-label-row'
           }), jsx('div', {
@@ -24070,7 +24069,7 @@ function jr(e) {
               },
               onMouseEnter: () => T(2),
               onMouseLeave: () => T(0),
-              recordingKey: Pt(e.recordingKey, 'labelInput')
+              recordingKey: generateRecordingKey(e.recordingKey, 'labelInput')
             })
           })]
         }) : null;
@@ -24097,7 +24096,7 @@ function jr(e) {
       className: 'styles-module--accessibilityDropdown--vl6Sz',
       showPoint: !1,
       alwaysShowCheckMarkOffset: !0,
-      recordingKey: Pt(e.recordingKey, 'dropdown')
+      recordingKey: generateRecordingKey(e.recordingKey, 'dropdown')
     })]
   });
 }
@@ -24112,7 +24111,7 @@ function jo({
     'ref': e,
     'onClick': t,
     'disabled': i,
-    'recordingKey': Pt(n, 'plus_button'),
+    'recordingKey': generateRecordingKey(n, 'plus_button'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.add_tooltip'),
       'data-tooltip-type': Ib.TEXT
@@ -24127,7 +24126,7 @@ function jd({
   return jsx(_$$K2, {
     'aria-label': getI18nString('sites.panel.remove_tooltip'),
     'onClick': e,
-    'recordingKey': Pt(t, 'minus_button'),
+    'recordingKey': generateRecordingKey(t, 'minus_button'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.remove_tooltip'),
       'data-tooltip-type': Ib.TEXT
@@ -24142,7 +24141,7 @@ function jc({
   return jsx(_$$K2, {
     'aria-label': getI18nString('sites.panel.reset_tooltip'),
     'onClick': e,
-    'recordingKey': Pt(t, 'reset_button'),
+    'recordingKey': generateRecordingKey(t, 'reset_button'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.reset_tooltip'),
       'data-tooltip-type': Ib.TEXT
@@ -24157,7 +24156,7 @@ function ju({
   return jsx(_$$K2, {
     'aria-label': getI18nString('sites.panel.edit_cms_accessibility_label_tooltip'),
     'onClick': e,
-    'recordingKey': Pt(t, 'edit_accessible_label_button'),
+    'recordingKey': generateRecordingKey(t, 'edit_accessible_label_button'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.edit_cms_accessibility_label_tooltip'),
       'data-tooltip-type': Ib.TEXT
@@ -24216,7 +24215,7 @@ function jx({
           options: i.tagOptions,
           onChange: d,
           onDropdownHidden: () => t(0),
-          recordingKey: Pt(n, 'tagInput')
+          recordingKey: generateRecordingKey(n, 'tagInput')
         })
       })]
     }),
@@ -24225,7 +24224,7 @@ function jx({
         d(_$$_11.AUTO);
         x('html_tag');
       },
-      recordingKey: Pt(n, 'tag')
+      recordingKey: generateRecordingKey(n, 'tag')
     }) : null
   });
 }
@@ -24253,7 +24252,7 @@ function jm({
             children: getI18nString('sites.panel.accessibility.decorative')
           }),
           checked: !!t,
-          recordingKey: Pt(e, 'isDecorativeImageToggle')
+          recordingKey: generateRecordingKey(e, 'isDecorativeImageToggle')
         })
       })]
     }),
@@ -24635,7 +24634,7 @@ function jD({
   return void 0 === n || isInvalidValue(n) ? null : jsx(_$$d5, {
     checked: n,
     onChange: e => {
-      a(e, _$$zk.YES);
+      a(e, yesNoTrackingEnum.YES);
     },
     label: jsx('label', {
       children: jL(e.parameterName)
@@ -24786,7 +24785,7 @@ function jK({
     onKeyDown: c,
     submit: s,
     maxHeight: 120,
-    recordingKey: Pt(o, 'embedTextInput'),
+    recordingKey: generateRecordingKey(o, 'embedTextInput'),
     ...d
   });
 }
@@ -24906,7 +24905,7 @@ function jW(e) {
       submit: h,
       minHeight: 120,
       isInvalid: y,
-      recordingKey: Pt(e.recordingKey, 'genericEmbedHtmlInput')
+      recordingKey: generateRecordingKey(e.recordingKey, 'genericEmbedHtmlInput')
     }, 'generic-embed-html-input-row')
   }) : jsx('div', {
     className: 'x1gskr33',
@@ -24918,7 +24917,7 @@ function jW(e) {
       submit: m,
       delay: 50,
       isInvalid: y,
-      recordingKey: Pt(e.recordingKey, 'genericEmbedUrlInput')
+      recordingKey: generateRecordingKey(e.recordingKey, 'genericEmbedUrlInput')
     }, 'generic-embed-url-input-row')
   });
   return jsxs(Fragment, {
@@ -24935,7 +24934,7 @@ function jW(e) {
           value: _$$w6.HTML,
           label: getI18nString('sites.panel.html_widget.generic.html_label')
         }],
-        recordingKey: Pt(e.recordingKey, 'genericEmbedTypeControl')
+        recordingKey: generateRecordingKey(e.recordingKey, 'genericEmbedTypeControl')
       })
     }), jsx(DE, {
       icon: null,
@@ -25017,7 +25016,7 @@ function jW(e) {
           }
         },
         embedType: t,
-        recordingKey: Pt(e.recordingKey, 'embedConfigControls')
+        recordingKey: generateRecordingKey(e.recordingKey, 'embedConfigControls')
       })]
     })]
   });
@@ -25214,7 +25213,7 @@ function j8({
       });
     },
     icon: t === 'REFLOW' ? jsx(_$$F9, {}) : jsx(_$$l3, {}),
-    recordingKey: Pt(j4, 'scalingModeDropdown'),
+    recordingKey: generateRecordingKey(j4, 'scalingModeDropdown'),
     children: [jsx(_$$c$6, {
       value: 'REFLOW',
       icon: jsx(_$$F9, {})
@@ -25257,7 +25256,7 @@ function j7({
         e === 'responsiveSetScalingMinFontSize' ? Fullscreen.setResponsiveSetScalingMinFontSize(t) : Fullscreen.setResponsiveSetScalingMaxFontSize(t);
       });
     },
-    recordingKey: Pt(j4, e)
+    recordingKey: generateRecordingKey(j4, e)
   });
 }
 function j9({
@@ -25274,7 +25273,7 @@ function j9({
         e === 'responsiveSetScalingMinLayoutWidth' ? Fullscreen.setResponsiveSetScalingMinLayoutWidth(t) : Fullscreen.setResponsiveSetScalingMaxLayoutWidth(t);
       });
     },
-    recordingKey: Pt(j4, e)
+    recordingKey: generateRecordingKey(j4, e)
   });
 }
 let ke = {
@@ -25373,26 +25372,26 @@ function kc(e) {
             id: 'sites-position-select',
             onChange: j,
             property: k,
-            recordingKey: Pt(e.recordingKey, 'dropdown'),
+            recordingKey: generateRecordingKey(e.recordingKey, 'dropdown'),
             textAlign: 'right',
             children: [jsx(kd, {
               disabled: !f,
               tooltip: f ? void 0 : 'position-panel-relative-disabled',
               value: 'RELATIVE',
-              recordingKey: Pt(e.recordingKey, 'relative')
+              recordingKey: generateRecordingKey(e.recordingKey, 'relative')
             }), jsx(kd, {
               disabled: v,
               value: 'ABSOLUTE',
-              recordingKey: Pt(e.recordingKey, 'absolute')
+              recordingKey: generateRecordingKey(e.recordingKey, 'absolute')
             }), jsx(kd, {
               disabled: y || v,
               tooltip: y ? 'position-panel-fixed-disabled' : void 0,
               value: 'FIXED',
-              recordingKey: Pt(e.recordingKey, 'fixed')
+              recordingKey: generateRecordingKey(e.recordingKey, 'fixed')
             }), jsx(kd, {
               disabled: v,
               value: 'STICKY',
-              recordingKey: Pt(e.recordingKey, 'sticky')
+              recordingKey: generateRecordingKey(e.recordingKey, 'sticky')
             })]
           })
         })
@@ -25972,7 +25971,7 @@ function wl({
         'dispatch': a,
         'min': 0,
         'onValueChange': t,
-        'recordingKey': Pt(i, 'delayInput'),
+        'recordingKey': generateRecordingKey(i, 'delayInput'),
         'scrubMultiplier': ws,
         'tooltipForScreenReadersOnly': !0,
         'value': e,
@@ -26009,7 +26008,7 @@ function wa({
           'data-tooltip-type': Ib.TEXT,
           'data-tooltip': getI18nString('proto.animation_panel.easing_duration_tooltip'),
           'tooltipForScreenReadersOnly': !0,
-          'recordingKey': Pt(a, 'springDurationInput')
+          'recordingKey': generateRecordingKey(a, 'springDurationInput')
         })
       }) : jsx(W4, {
         'dispatch': d,
@@ -26020,7 +26019,7 @@ function wa({
         'data-tooltip-type': Ib.TEXT,
         'data-tooltip': getI18nString('proto.animation_panel.easing_duration_tooltip'),
         'tooltipForScreenReadersOnly': !0,
-        'recordingKey': Pt(a, 'durationInput')
+        'recordingKey': generateRecordingKey(a, 'durationInput')
       })
     })
   });
@@ -26127,7 +26126,7 @@ function wu({
     onChange: e => {
       t(wo(e));
     },
-    recordingKey: Pt(c, 'drilldownEasingType')
+    recordingKey: generateRecordingKey(c, 'drilldownEasingType')
   });
   return jsx(k8, {
     children: jsxs(_$$O10, {
@@ -26142,7 +26141,7 @@ function wu({
         updateSelectionProperties: e => {
           r(e.easingFunction);
         },
-        recordingKey: Pt(c, 'easingEditor')
+        recordingKey: generateRecordingKey(c, 'easingEditor')
       })]
     })
   });
@@ -26191,10 +26190,10 @@ function wm({
     t(parseSessionLocalID(e) ?? defaultSessionLocalID);
   }, [t]);
   let x = e => {
-    Uc(e);
+    updateHoveredNode(e);
   };
   let m = () => {
-    Uc('');
+    updateHoveredNode('');
   };
   return jsx(wh, {
     ariaLabelledBy: i,
@@ -26270,7 +26269,7 @@ function wy({
         dispatch: m,
         onMouseDown: g,
         ui3RightJustifyPercentSign: !1,
-        recordingKey: Pt(x, 'opacity'),
+        recordingKey: generateRecordingKey(x, 'opacity'),
         children: jsx(_$$N1, {
           className: kW
         })
@@ -26287,7 +26286,7 @@ function wy({
         'onMouseDown': g,
         'onValueChange': t,
         'postScrubMultiplier': 0.1,
-        'recordingKey': Pt(x, 'scale'),
+        'recordingKey': generateRecordingKey(x, 'scale'),
         'scrubMultiplier': 1,
         'scrubStartValue': 0.1,
         'smallNudgeAmount': 0.01,
@@ -26306,7 +26305,7 @@ function wy({
         'onMouseDown': g,
         'data-tooltip-type': Ib.TEXT,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.offset_x'),
-        'recordingKey': Pt(x, 'offsetX'),
+        'recordingKey': generateRecordingKey(x, 'offsetX'),
         ...h,
         'children': jsx('span', {
           className: kY,
@@ -26321,7 +26320,7 @@ function wy({
         'onMouseDown': g,
         'data-tooltip-type': Ib.TEXT,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.offset_y'),
-        'recordingKey': Pt(x, 'offsetY'),
+        'recordingKey': generateRecordingKey(x, 'offsetY'),
         ...h,
         'children': jsx('span', {
           className: kY,
@@ -26338,7 +26337,7 @@ function wy({
         'onMouseDown': g,
         'data-tooltip-type': Ib.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.rotation'),
-        'recordingKey': Pt(x, 'rotation'),
+        'recordingKey': generateRecordingKey(x, 'rotation'),
         ...h,
         'children': jsx(_$$a18, {
           className: kW
@@ -26390,7 +26389,7 @@ function wj({
     onChange: e => {
       t(wo(e));
     },
-    recordingKey: Pt(c, 'easingType')
+    recordingKey: generateRecordingKey(c, 'easingType')
   });
   let y = renderI18nText('sites.panel.interactions_panel.transition');
   return jsx(k8, {
@@ -26401,7 +26400,7 @@ function wj({
         input: b,
         button: jsx(k7, {
           onClick: p,
-          recordingKey: Pt(c, 'drilldownButton')
+          recordingKey: generateRecordingKey(c, 'drilldownButton')
         })
       }) : jsx(k5, {
         label: y,
@@ -26435,16 +26434,16 @@ function wk({
           dispatch: i,
           dropdownShown: n,
           dropdownWidth: 140,
-          recordingKey: Pt(t, 'trigger'),
+          recordingKey: generateRecordingKey(t, 'trigger'),
           children: [jsx(wT, {
             value: 'THIS_LAYER_IN_VIEW',
-            recordingKey: Pt(t, 'thisLayerInView')
+            recordingKey: generateRecordingKey(t, 'thisLayerInView')
           }), jsx(wT, {
             value: 'PAGE_LOAD',
             recordingKey: 'pageLoad'
           }), jsx(wT, {
             value: 'OTHER_LAYER_IN_VIEW',
-            recordingKey: Pt(t, 'otherLayerInView')
+            recordingKey: generateRecordingKey(t, 'otherLayerInView')
           })]
         })
       }), r === 'OTHER_LAYER_IN_VIEW' && jsx(k5, {
@@ -26474,7 +26473,7 @@ function wk({
         input: jsx(w_, {
           value: p,
           onChange: x,
-          recordingKey: Pt(t, 'replay')
+          recordingKey: generateRecordingKey(t, 'replay')
         })
       })
     }) : null]
@@ -26548,7 +26547,7 @@ function ww({
     }),
     button: jsx(k7, {
       onClick: p,
-      recordingKey: Pt(i, e, 'drilldownButton')
+      recordingKey: generateRecordingKey(i, e, 'drilldownButton')
     })
   });
 }
@@ -26583,7 +26582,7 @@ function wS({
       offsetX: c,
       offsetY: x,
       opacity: o,
-      recordingKey: Pt(t, e),
+      recordingKey: generateRecordingKey(t, e),
       rotation: h,
       scale: s,
       setOffsetX: p,
@@ -26596,7 +26595,7 @@ function wS({
       drilldownCallback: C,
       easingFunction: v,
       easingType: f,
-      recordingKey: Pt(t, e),
+      recordingKey: generateRecordingKey(t, e),
       setDelay: w,
       setEasingFunction: j,
       setEasingType: _,
@@ -27166,7 +27165,7 @@ function Sh(e, t) {
 let Sg = createRemovableAtomFamily(e => _$$mg(atom(t => {
   let i = t(Mk[PW.CODE_COMPONENT].local);
   let n = t(Mk[PW.CODE_COMPONENT].subscribed);
-  let l = _$$_H.fromString(e);
+  let l = CodeComponentIdHandler.fromString(e);
   return l ? i[l] || n[l] : void 0;
 }), e => e));
 function Sf(e) {
@@ -28509,7 +28508,7 @@ function CU(e) {
         'max': CH,
         'min': CK,
         'onValueChange': n,
-        'recordingKey': Pt(e.recordingKey, 'speedInput'),
+        'recordingKey': generateRecordingKey(e.recordingKey, 'speedInput'),
         'smallNudgeAmount': CX,
         'tooltipForScreenReadersOnly': !0,
         'value': i
@@ -28522,10 +28521,10 @@ function CU(e) {
         'max': CH,
         'onChange': (e, {
           commit: t
-        }) => n(e, t ? _$$zk.YES : _$$zk.NO),
+        }) => n(e, t ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO),
         'step': CX,
         'bigStep': CV,
-        'recordingKey': Pt(e.recordingKey, 'speedSlider')
+        'recordingKey': generateRecordingKey(e.recordingKey, 'speedSlider')
       })
     })]
   });
@@ -28568,16 +28567,16 @@ function CW({
           dispatch: i,
           dropdownShown: n,
           dropdownWidth: 140,
-          recordingKey: Pt(t, 'trigger'),
+          recordingKey: generateRecordingKey(t, 'trigger'),
           children: [jsx(C1, {
             value: 'PAGE_HEIGHT',
-            recordingKey: Pt(t, 'onScroll')
+            recordingKey: generateRecordingKey(t, 'onScroll')
           }), jsx(C1, {
             value: 'THIS_LAYER_IN_VIEW',
-            recordingKey: Pt(t, 'thisLayerInView')
+            recordingKey: generateRecordingKey(t, 'thisLayerInView')
           }), jsx(C1, {
             value: 'OTHER_LAYER_IN_VIEW',
-            recordingKey: Pt(t, 'otherLayerInView')
+            recordingKey: generateRecordingKey(t, 'otherLayerInView')
           })]
         })
       }), r === 'OTHER_LAYER_IN_VIEW' && jsx(k5, {
@@ -28607,7 +28606,7 @@ function CW({
         input: jsx(w_, {
           value: p,
           onChange: x,
-          recordingKey: Pt(t, 'replay')
+          recordingKey: generateRecordingKey(t, 'replay')
         })
       })
     }) : null, jsx(CZ, {
@@ -28641,7 +28640,7 @@ function CY({
     label: s,
     input: n,
     onClick: r,
-    recordingKey: Pt(i, e, 'drilldownButton')
+    recordingKey: generateRecordingKey(i, e, 'drilldownButton')
   });
 }
 let CJ = e => {
@@ -28699,7 +28698,7 @@ function CQ({
       offsetX: r,
       offsetY: d,
       opacity: a,
-      recordingKey: Pt(t, e),
+      recordingKey: generateRecordingKey(t, e),
       rotation: u,
       scale: i,
       setOffsetX: o,
@@ -28894,7 +28893,7 @@ function Td({
   } = e;
   let p = _$$I6(initialX, initialY, shouldPin, o, (e, t) => new Mi(e, t));
   if (!codeComponentId) return null;
-  let x = _$$_H.fromString(codeComponentId);
+  let x = CodeComponentIdHandler.fromString(codeComponentId);
   if (!x) return null;
   let m = x.toString();
   if (nodeIds.length === 0) return null;
@@ -29058,7 +29057,7 @@ function Tc({
           },
           children: jsx(To, {
             onClick: c,
-            recordingKey: Pt(n, 'backButton')
+            recordingKey: generateRecordingKey(n, 'backButton')
           })
         }, 'backButton'), jsx(_$$P7.span, {
           'layout': !0,
@@ -29207,12 +29206,12 @@ function Tx({
   let [k, w] = useState(!1);
   let [S, C] = useAtomValueAndSetter(noop);
   let [T, I] = useState(!1);
-  let E = _$$v_(g, 'keydown', e => {
-    if (e.key !== 'Shift') return _$$aH;
+  let E = useHandleKeyboardEvent(g, 'keydown', e => {
+    if (e.key !== 'Shift') return SKIP_RECORDING;
     I(!0);
   });
-  let N = _$$v_(g, 'keyup', e => {
-    if (e.key !== 'Shift') return _$$aH;
+  let N = useHandleKeyboardEvent(g, 'keyup', e => {
+    if (e.key !== 'Shift') return SKIP_RECORDING;
     I(!1);
   });
   useEffect(() => (document.addEventListener('keydown', E), document.addEventListener('keyup', N), () => {
@@ -29277,7 +29276,7 @@ function Tx({
         Fullscreen?.hoverInteractions([]);
         j(!1);
       },
-      'recordingKey': Pt(g, 'draggable-behavior-row-wrapper'),
+      'recordingKey': generateRecordingKey(g, 'draggable-behavior-row-wrapper'),
       'selected': f,
       'children': jsx(_$$s8, {
         label: null,
@@ -29285,7 +29284,7 @@ function Tx({
           'selected': f,
           'data-tooltip-type': Ib.TEXT,
           'data-tooltip': getI18nString('sites.panel.interactions_panel.interaction_settings'),
-          'recordingKey': Pt(g, 'icon'),
+          'recordingKey': generateRecordingKey(g, 'icon'),
           'className': v && !k ? `${zY} ${kQ}` : kQ,
           'children': jsx(Ss, {
             behaviorType: i,
@@ -29293,7 +29292,7 @@ function Tx({
           })
         }),
         input: jsx(D8, {
-          recordingKey: Pt(g, 'behaviorName'),
+          recordingKey: generateRecordingKey(g, 'behaviorName'),
           className: kZ,
           children: function ({
             behaviorType: e,
@@ -29353,7 +29352,7 @@ function Tx({
                 });
               })(i, b, m?.name);
             },
-            recordingKey: Pt(g, 'minus_button')
+            recordingKey: generateRecordingKey(g, 'minus_button')
           })
         })
       })
@@ -29480,7 +29479,7 @@ let Tb = memo(({
     codeComponent,
     onClick: x,
     onRemove: m,
-    recordingKey: Pt(i, `codeRow-${name}`),
+    recordingKey: generateRecordingKey(i, `codeRow-${name}`),
     rowRef: h,
     selected: r(Xc.Code, e),
     show: !0
@@ -30033,7 +30032,7 @@ function TA(e) {
             let t = getSingletonSceneGraph().get(e);
             if (t) {
               Tv({
-                codeComponentId: _$$_H.fromLocalNodeIdStr(e),
+                codeComponentId: CodeComponentIdHandler.fromLocalNodeIdStr(e),
                 isEnabled: !0
               }, d);
               let i = Object.keys(d)[0];
@@ -30091,7 +30090,7 @@ function TA(e) {
     onRemove: () => {
       n(!1);
     },
-    recordingKey: Pt(e.recordingKey, 'appearRow')
+    recordingKey: generateRecordingKey(e.recordingKey, 'appearRow')
   });
   let ew = jsx(Tx, {
     selected: ef(Xc.ScrollParallax),
@@ -30103,7 +30102,7 @@ function TA(e) {
     onRemove: () => {
       _(!1);
     },
-    recordingKey: Pt(e.recordingKey, 'scrollParallaxRow')
+    recordingKey: generateRecordingKey(e.recordingKey, 'scrollParallaxRow')
   });
   let eS = jsx(Tx, {
     selected: ef(Xc.ScrollTransform),
@@ -30115,7 +30114,7 @@ function TA(e) {
     onRemove: () => {
       v(!1);
     },
-    recordingKey: Pt(e.recordingKey, 'scrollTransformRow')
+    recordingKey: generateRecordingKey(e.recordingKey, 'scrollTransformRow')
   });
   let eC = jsx(Tx, {
     selected: ef(Xc.Cursor),
@@ -30127,7 +30126,7 @@ function TA(e) {
     onRemove: () => {
       k(!1);
     },
-    recordingKey: Pt(e.recordingKey, 'cursorRow')
+    recordingKey: generateRecordingKey(e.recordingKey, 'cursorRow')
   });
   let eT = jsx(Tx, {
     selected: ef(Xc.Marquee),
@@ -30139,7 +30138,7 @@ function TA(e) {
     onRemove: () => {
       S(!1);
     },
-    recordingKey: Pt(e.recordingKey, 'marqueeRow')
+    recordingKey: generateRecordingKey(e.recordingKey, 'marqueeRow')
   });
   let eI = jsx(Tx, {
     selected: ef(Xc.Hover),
@@ -30151,7 +30150,7 @@ function TA(e) {
       c(!1);
     },
     summaryText: B,
-    recordingKey: Pt(e.recordingKey, 'hoverRow')
+    recordingKey: generateRecordingKey(e.recordingKey, 'hoverRow')
   });
   let eE = jsx(Tx, {
     selected: ef(Xc.Focus),
@@ -30162,7 +30161,7 @@ function TA(e) {
     onRemove: () => {
       g(!1);
     },
-    recordingKey: Pt(e.recordingKey, 'focusRow')
+    recordingKey: generateRecordingKey(e.recordingKey, 'focusRow')
   });
   let eN = jsx(Tx, {
     selected: ef(Xc.Press),
@@ -30174,7 +30173,7 @@ function TA(e) {
       x(!1);
     },
     summaryText: U,
-    recordingKey: Pt(e.recordingKey, 'pressRow')
+    recordingKey: generateRecordingKey(e.recordingKey, 'pressRow')
   });
   let eA = K === 'PAGE_LOAD' ? 'loading' : 'scrolling';
   let eL = $5(el, 'loading', !0) || C && eA === 'loading';
@@ -30203,7 +30202,7 @@ function TA(e) {
       componentId: n
     }) => {
       let l;
-      let a = _$$_H.fromString(n);
+      let a = CodeComponentIdHandler.fromString(n);
       let s = a ? t[a] : void 0;
       switch (s?.codeBehaviorData?.category ?? '') {
         case 'motion':
@@ -30344,7 +30343,7 @@ function TA(e) {
               fullscreenValue.updateSelectionProperties({
                 prototypeInteractions: l
               }, {
-                shouldCommit: _$$zk.NO_BUT_TRACK_AS_EDIT
+                shouldCommit: yesNoTrackingEnum.NO_BUT_TRACK_AS_EDIT
               });
               fullscreenValue.commit();
             },
@@ -30822,7 +30821,7 @@ let T2 = memo(({
   let S = useDispatch();
   let C = L3();
   let T = _$$G5();
-  let I = _$$iZ();
+  let I = selectCurrentUser();
   let E = _$$dR();
   let N = B4();
   let A = $0();
@@ -30844,10 +30843,10 @@ let T2 = memo(({
     !c && n && x(!0);
     _$$R6(() => {
       try {
-        debugState.dispatch(_$$F.enqueue({
+        debugState.dispatch(VisualBellActions.enqueue({
           message: getI18nString('sites.metadata.copying_frames'),
           type: 'design-to-sites-load',
-          icon: zX.SPINNER,
+          icon: VisualBellIcon.SPINNER,
           timeoutOverride: 3e5
         }));
         debug(!!n, 'sourceFileData is undefined. This should never happen');
@@ -30862,20 +30861,20 @@ let T2 = memo(({
             l(Ut);
             let t = a.getDirectlySelectedNodes()[0]?.guid;
             debug(!!t, 'newlyCopiedNodeId is undefined. This should never happen');
-            _$$i(t, getI18nString('sites.modal.desktop'));
+            renameNode(t, getI18nString('sites.modal.desktop'));
             fullscreenValue.triggerActionEnum(Command.CREATE_RESPONSIVE_SET);
             let i = a.getDirectlySelectedNodes()[0]?.guid;
             debug(!!i, 'newResponsiveSetId is undefined. This should never happen');
             u2(i);
             fullscreenValue.triggerActionEnum(Command.ZOOM_TO_SELECTION);
-            d(_$$F.clearAll());
-            debugState.dispatch(_$$F.dequeue({
+            d(VisualBellActions.clearAll());
+            debugState.dispatch(VisualBellActions.dequeue({
               matchType: 'design-to-sites-load'
             }));
-            debugState.dispatch(_$$F.enqueue({
+            debugState.dispatch(VisualBellActions.enqueue({
               message: getI18nString('sites.metadata.done'),
               type: 'design-to-sites-complete',
-              icon: zX.CHECK,
+              icon: VisualBellIcon.CHECK,
               timeoutOverride: 3e3
             }));
             let s = performance.now() - e;
@@ -30892,13 +30891,13 @@ let T2 = memo(({
         logError('design_to_sites', `Error copying nodes into sites on load: ${e instanceof Error ? e.message : ''}`, {
           reportAsSentryError: !0
         });
-        debugState.dispatch(_$$F.dequeue({
+        debugState.dispatch(VisualBellActions.dequeue({
           matchType: 'design-to-sites-load'
         }));
-        debugState.dispatch(_$$F.enqueue({
+        debugState.dispatch(VisualBellActions.enqueue({
           message: getI18nString('sites.metadata.couldnt_copy_frames'),
           type: 'design-to-sites-complete',
-          icon: zX.WARNING_EXCLAMATION_WITH_TRIANGLE,
+          icon: VisualBellIcon.WARNING_EXCLAMATION_WITH_TRIANGLE,
           timeoutOverride: 3e3,
           error: !0
         }));
@@ -30908,10 +30907,10 @@ let T2 = memo(({
   _$$W();
   (function (e) {
     let [t, i] = useState([]);
-    let n = Rs(DuV, {
+    let n = Rs(SiteBundles, {
       fileKey: e
     });
-    let l = Rs(Vny, {
+    let l = Rs(SiteMount, {
       fileKey: e
     });
     if (n.status !== 'loaded' || l.status !== 'loaded' || !getFeatureFlags().sts_ppp) return;
@@ -30938,24 +30937,24 @@ let T2 = memo(({
     fullscreenValue.isReady() && (Multiplayer && Multiplayer.sendSitesViewState(v), SitesBindingsCpp && SitesBindingsCpp.notifyUpdateToSitesViewState());
   }, [v]);
   useEffect(() => {
-    A && O && _$$a8(O) ? S(_$$F.enqueue({
+    A && O && _$$a8(O) ? S(VisualBellActions.enqueue({
       message: getI18nString('left_rail.user_away_from_canvas_notification', {
         userHandle: A.name
       }),
       type: $$T11,
       timeoutOverride: 1e4
-    })) : S(_$$F.dequeue({
+    })) : S(VisualBellActions.dequeue({
       matchType: $$T11
     }));
   }, [S, A, O]);
   useEffect(() => {
-    T && I && E && E.userID === I.id && (N(), S(_$$F.enqueue({
+    T && I && E && E.userID === I.id && (N(), S(VisualBellActions.enqueue({
       message: getI18nString('left_rail.spotlight_session_ended_only_available'),
       type: $$T02
     })));
   }, [I, S, T, E, N]);
   useEffect(() => {
-    Multiplayer && F && M && T && (_$$j$(F.sessionID), S(_$$F.enqueue({
+    Multiplayer && F && M && T && (_$$j$(F.sessionID), S(VisualBellActions.enqueue({
       message: getI18nString('left_rail.ask_to_spotlight_ended_only_available'),
       type: $$T50
     })));

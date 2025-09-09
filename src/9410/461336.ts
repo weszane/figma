@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { BJ } from "../figma_app/9054";
 import { trackEventAnalytics } from "../905/449184";
@@ -12,7 +12,7 @@ import { showModalHandler } from "../905/156213";
 import { isInvalidValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
 import { tS } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Fk } from "../figma_app/167249";
 import { ku, jo, EH } from "../figma_app/241341";
 import { $ } from "../905/330495";
@@ -63,7 +63,7 @@ export function $$v2(e) {
   }, [i, t, s, a, e]);
 }
 export function $$E1(e, t) {
-  let i = iZ()?.id;
+  let i = selectCurrentUser()?.id;
   let d = uQ();
   let c = Fk((e, t) => e?.get(t ?? "")?.name.trim(), d);
   let m = tS();

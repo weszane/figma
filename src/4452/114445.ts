@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, forwardRef, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
@@ -15,7 +15,7 @@ import { m$ } from "../figma_app/240735";
 import { Gu } from "../905/513035";
 import { d as _$$d } from "../figma_app/603561";
 import { FOrganizationLevelType, FUserRoleType } from "../figma_app/191312";
-import { oSh } from "../figma_app/43951";
+import { OrgUsersByIdView } from "../figma_app/43951";
 import { S2 } from "../figma_app/465071";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { lR, e6 } from "../figma_app/617427";
@@ -433,7 +433,7 @@ let er = {
       A?.key.type === FOrganizationLevelType.TEAM && t();
       return () => P(null);
     }, [T, N, A?.key.parentId, A?.key.type, e?.userId]);
-    let D = Rs(oSh, {
+    let D = Rs(OrgUsersByIdView, {
       orgId: A?.key.parentId ?? "",
       orgUserIds: L ? [L.id] : []
     }, {

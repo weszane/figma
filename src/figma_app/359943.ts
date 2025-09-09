@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useId, useMemo, memo, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { YJ, bL, UC } from "../figma_app/57171";
 import { Y9, JU } from "../figma_app/322555";
 import { E as _$$E } from "../905/632989";
@@ -10,7 +10,7 @@ import { DeviceType, AppStateTsApi, Fullscreen, SideType, PrototypingTsApi, Cont
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
-import { Pt, o6 } from "../figma_app/806412";
+import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
 import { logWarning } from "../905/714362";
 import { E as _$$E2 } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
@@ -298,7 +298,7 @@ export function $$e_2({
         toggle: () => l(t.type),
         children: [jsx(Y9, {
           children: jsx(JU, {
-            recordingKey: Pt(e, t.headerRecordingKey),
+            recordingKey: generateRecordingKey(e, t.headerRecordingKey),
             className: nK,
             children: jsx(eh, {
               name: t.name,
@@ -309,7 +309,7 @@ export function $$e_2({
           children: jsx(ef, {
             framePresets: t.presetList,
             onSelectPreset: d,
-            recordingKey: Pt(e, t.listRecordingKey),
+            recordingKey: generateRecordingKey(e, t.listRecordingKey),
             children: t.children
           })
         })]
@@ -362,91 +362,91 @@ let em = memo(function ({
         name: getI18nString("proto.frame_preset_panel.phone"),
         expanded: i === DeviceType.PHONE,
         onMouseDown: () => t(DeviceType.PHONE),
-        recordingKey: Pt(e, "phoneToggle")
+        recordingKey: generateRecordingKey(e, "phoneToggle")
       }), i === DeviceType.PHONE && jsx(ef, {
         framePresets: sE.phonePresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "phoneRows")
+        recordingKey: generateRecordingKey(e, "phoneRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.tablet"),
         expanded: i === DeviceType.TABLET,
         onMouseDown: () => t(DeviceType.TABLET),
-        recordingKey: Pt(e, "framePresetPanel", "tabletToggle")
+        recordingKey: generateRecordingKey(e, "framePresetPanel", "tabletToggle")
       }), i === DeviceType.TABLET && jsx(ef, {
         framePresets: sE.tabletPresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "tabletRows")
+        recordingKey: generateRecordingKey(e, "tabletRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.desktop"),
         expanded: i === DeviceType.DESKTOP,
         onMouseDown: () => t(DeviceType.DESKTOP),
-        recordingKey: Pt(e, "desktopToggle")
+        recordingKey: generateRecordingKey(e, "desktopToggle")
       }), i === DeviceType.DESKTOP && jsx(ef, {
         framePresets: sE.desktopPresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "desktopRows"),
+        recordingKey: generateRecordingKey(e, "desktopRows"),
         children: jsx(es, {})
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.presentation"),
         expanded: i === DeviceType.PRESENTATION,
         onMouseDown: () => t(DeviceType.PRESENTATION),
-        recordingKey: Pt(e, "presentationToggle")
+        recordingKey: generateRecordingKey(e, "presentationToggle")
       }), i === DeviceType.PRESENTATION && jsx(ef, {
         framePresets: sE.presentationPresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "presentationRows"),
+        recordingKey: generateRecordingKey(e, "presentationRows"),
         children: jsx(el, {})
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.watch"),
         expanded: i === DeviceType.WATCH,
         onMouseDown: () => t(DeviceType.WATCH),
-        recordingKey: Pt(e, "watchToggle")
+        recordingKey: generateRecordingKey(e, "watchToggle")
       }), i === DeviceType.WATCH && jsx(ef, {
         framePresets: sE.watchPresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "watchRows")
+        recordingKey: generateRecordingKey(e, "watchRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.paper"),
         expanded: i === DeviceType.PAPER,
         onMouseDown: () => t(DeviceType.PAPER),
-        recordingKey: Pt(e, "paperToggle")
+        recordingKey: generateRecordingKey(e, "paperToggle")
       }), i === DeviceType.PAPER && jsx(ef, {
         framePresets: sE.paperPresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "paperRows")
+        recordingKey: generateRecordingKey(e, "paperRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.social_media"),
         expanded: i === DeviceType.SOCIALMEDIA,
         onMouseDown: () => t(DeviceType.SOCIALMEDIA),
-        recordingKey: Pt(e, "socialMediaToggle")
+        recordingKey: generateRecordingKey(e, "socialMediaToggle")
       }), i === DeviceType.SOCIALMEDIA && jsx(ef, {
         framePresets: sE.socialMediaPresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "socialMediaRows"),
+        recordingKey: generateRecordingKey(e, "socialMediaRows"),
         children: jsx(ei, {})
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.figma_community"),
         expanded: i === DeviceType.FIGMA,
         onMouseDown: () => t(DeviceType.FIGMA),
-        recordingKey: Pt(e, "figmaToggle")
+        recordingKey: generateRecordingKey(e, "figmaToggle")
       }), i === DeviceType.FIGMA && jsx(ef, {
         framePresets: sE.figmaPresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "figmaRows")
+        recordingKey: generateRecordingKey(e, "figmaRows")
       }), jsx(eg, {
         name: getI18nString("proto.frame_preset_panel.archive"),
         expanded: i === DeviceType.ARCHIVE,
         onMouseDown: () => t(DeviceType.ARCHIVE),
-        recordingKey: Pt(e, "archiveToggle")
+        recordingKey: generateRecordingKey(e, "archiveToggle")
       }), i === DeviceType.ARCHIVE && jsx(ef, {
         framePresets: sE.archivedPresets,
         onSelectPreset: r,
-        recordingKey: Pt(e, "archiveRows")
+        recordingKey: generateRecordingKey(e, "archiveRows")
       })]
     })
   });
 });
-class eg extends o6 {
+class eg extends RecordingPureComponent {
   render() {
     return jsx(_$$k2, {
       name: "frame_preset_header_panel",
@@ -492,7 +492,7 @@ let ef = memo(function ({
             className: aD,
             onClick: () => t(e),
             actionOnPointerDown: !0,
-            recordingKey: Pt(i, e.name),
+            recordingKey: generateRecordingKey(i, e.name),
             htmlAttributes: {
               tabIndex: 0
             },
@@ -515,7 +515,7 @@ let ef = memo(function ({
       children: [e.map(e => jsxs(fI, {
         className: Dc,
         onMouseDown: () => t(e),
-        recordingKey: Pt(i, e.name),
+        recordingKey: generateRecordingKey(i, e.name),
         children: [jsx("div", {
           className: jL,
           children: e.i18nName()
@@ -527,7 +527,7 @@ let ef = memo(function ({
     })
   });
 });
-export class $$eE1 extends o6 {
+export class $$eE1 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.state = {
@@ -584,7 +584,7 @@ export class $$eE1 extends o6 {
     };
     this.renderPresetOption = (e, t) => jsx(c$, {
       value: e.name,
-      recordingKey: Pt(this.props, e.name),
+      recordingKey: generateRecordingKey(this.props, e.name),
       focused: !(this.state.focusedPreset?.name !== e.name),
       children: jsx(eb, {
         framePreset: e,
@@ -625,18 +625,18 @@ export class $$eE1 extends o6 {
         onChange: this.onChange,
         onOptionFocus: this.onFocus,
         property: i,
-        recordingKey: Pt(this.props, "select"),
+        recordingKey: generateRecordingKey(this.props, "select"),
         children: [!!this.props.showSectionOption && jsx(c$, {
           value: ContainerType.SECTION,
-          recordingKey: Pt(this.props, "SECTION"),
+          recordingKey: generateRecordingKey(this.props, "SECTION"),
           disabled: !this.props.canBecomeSection
         }), jsx(c$, {
           value: ContainerType.FRAME,
-          recordingKey: Pt(this.props, "FRAME"),
+          recordingKey: generateRecordingKey(this.props, "FRAME"),
           disabled: !o || !this.props.canBecomeFrame
         }), jsx(c$, {
           value: ContainerType.GROUP,
-          recordingKey: Pt(this.props, "GROUP"),
+          recordingKey: generateRecordingKey(this.props, "GROUP"),
           disabled: !this.props.canBecomeGroup
         }), s && jsx(sK, {}), s && sE.phonePresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.tabletPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.desktopPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.presentationPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.watchPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.paperPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.socialMediaPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.figmaPresets.map(this.renderPresetOption), s && jsx(sK, {}), s && sE.archivedPresets.map(this.renderPresetOption)]
       })

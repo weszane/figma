@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
 import { o as _$$o } from "../905/821217";
@@ -10,7 +10,7 @@ import { PrototypingTsApi, Fullscreen, NodePropertyCategory } from "../figma_app
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { logError } from "../905/714362";
 import { k as _$$k } from "../905/582200";
 import { k as _$$k2 } from "../6020/640789";
@@ -93,13 +93,13 @@ function F({
     onMouseDown: b,
     onMouseMove: w,
     onMouseUp: I,
-    recordingKey: Pt(A, "draggableRow"),
+    recordingKey: generateRecordingKey(A, "draggableRow"),
     selected: t && e,
     singletonRow: o <= 1,
     children: [!m && T && T === i.nodeID ? jsx(_$$m, {
       defaultValue: i.prototypeStartingPoint.name || "",
       submitRename: t => k(i.nodeID, t),
-      recordingKey: Pt(A, "startingPointNameInput"),
+      recordingKey: generateRecordingKey(A, "startingPointNameInput"),
       shouldListenForTabKeyboardEvent: o > 1,
       onTabKeyboardEvent: t => E(t ? r - 1 : r + 1),
       className: "prototype_flows_panel--startingPointNameInput--fH7vx prototype_starting_point_panel--startingPointNameInput--uR8GY raw_components--textAreaInput--mi1Ag raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t"
@@ -236,7 +236,7 @@ export let $$L0 = function (t) {
             Fullscreen.insertPrototypeStartingPointsBetween(e, n, r);
           });
         },
-        onDeleteProperty: v ? () => {} : t => {
+        onDeleteProperty: v ? () => { } : t => {
           let e = R.filter((e, o) => t.has(o)).map(t => t.nodeID);
           e.length > 0 && Fullscreen.deletePrototypeStartingPoints(e);
         },
@@ -258,7 +258,7 @@ export let $$L0 = function (t) {
           onMouseDown: p,
           onMouseMove: d,
           onMouseUp: c,
-          recordingKey: Pt("prototypeFlowsList", e),
+          recordingKey: generateRecordingKey("prototypeFlowsList", e),
           renamingStartingPointNodeId: m,
           selectFlowRowAndSetToEditName: L,
           selected: i,

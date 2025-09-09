@@ -6,7 +6,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { Lb } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { jW } from "../figma_app/640683";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions, isLocalDevOnCluster } from "../figma_app/169182";
 import { subscribeAndAwaitData } from "../905/553831";
 import { BrowserInfo } from "../figma_app/778880";
@@ -18,7 +18,7 @@ import { dK, xt, x2 } from "../figma_app/149304";
 import { XHR } from "../905/910117";
 import { DI } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { b as _$$b } from "../905/620668";
 import { createOptimistThunk } from "../905/350402";
 import { yJ, GZ } from "../figma_app/78808";
@@ -35,7 +35,7 @@ import { W as _$$W } from "../905/242083";
 import { UE } from "../905/628874";
 import { A7 } from "../905/87821";
 import { getFeatureFlags } from "../905/601108";
-import { Mx } from "../905/165290";
+import { getFontMetadataList } from "../905/165290";
 import { bE } from "../905/466026";
 import { yJ as _$$yJ2 } from "../905/584989";
 import { ky } from "../figma_app/214121";
@@ -43,11 +43,11 @@ import { LQ } from "../figma_app/741211";
 import { d1 } from "../905/766303";
 import { nk } from "../figma_app/2023";
 import { fullscreenValue } from "../figma_app/455680";
-import { NT } from "../figma_app/741237";
+import { setPropertiesPanelTab } from "../figma_app/741237";
 import { xK } from "../905/125218";
 import { jN } from "../905/612685";
 import { hZ } from "../figma_app/841351";
-import { mapEditorTypeToYF, FEditorType, mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
+import { mapEditorTypeToWorkspaceType, FEditorType, mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../figma_app/849666";
 import { ag, u6, p9, Jt, yf } from "../905/509613";
 import { g_ } from "../905/646788";
@@ -56,7 +56,7 @@ import { e8 } from "../figma_app/557318";
 import { R as _$$R } from "../figma_app/941983";
 import { zR, DH, BL } from "../905/327855";
 import { Bz } from "../figma_app/298277";
-import { ehp } from "../figma_app/43951";
+import { OpenEditorFileData } from "../figma_app/43951";
 import { S$ } from "../figma_app/345997";
 import { xN } from "../905/672897";
 import { w2, i_ } from "../905/187165";
@@ -87,7 +87,7 @@ async function ea(e, t, i) {
   let n = t.getState();
   let s = e.data.meta;
   if (s || reportError(_$$e.FRONTEND_PLATFORM, Error("We are expecting FileMetadata but got undefined"), t => (t.setExtra("response", e), t)), s.redirect_to_password_auth) {
-    await Ay.redirectAndWaitForever(jN({
+    await customHistory.redirectAndWaitForever(jN({
       file: {
         key: s.file_key,
         name: s.name
@@ -106,7 +106,7 @@ async function ea(e, t, i) {
     needsUpgrade: s.needs_upgrade
   })), s.file_repo && t.dispatch(bE({
     repo: s.file_repo
-  })), s.script !== Fig.fullscreenScriptHash && (await Ay.reloadAndWaitForever("Fullscreen version mismatch", {
+  })), s.script !== Fig.fullscreenScriptHash && (await customHistory.reloadAndWaitForever("Fullscreen version mismatch", {
     isInProgressVisibleLoad: xK.isInProgressVisibleLoad(),
     latestFullscreenVersion: s.script,
     currentFullscreenVersion: Fig.fullscreenScriptHash
@@ -115,10 +115,10 @@ async function ea(e, t, i) {
       for (let i of [t, e]) for (let n in i) if (!!e[n] != !!t[n]) return `${n} changed to ${!!t[n]}`;
       return null;
     }(l, c);
-    null !== e && (await Ay.reloadAndWaitForever(`Feature flag change: ${e}`));
+    null !== e && (await customHistory.reloadAndWaitForever(`Feature flag change: ${e}`));
   }
   await fullscreenValue.loadAndStartFullscreenIfNecessary();
-  Fullscreen.setEditorType(mapEditorTypeToYF(i));
+  Fullscreen.setEditorType(mapEditorTypeToWorkspaceType(i));
   let m = s.team;
   m && t.dispatch(_$$yJ({
     team: m,
@@ -139,13 +139,13 @@ async function ea(e, t, i) {
     g = !e || !!e.updateCommentsMode;
   }
   h?.thumbnail_guid && AppStateTsApi.canvasViewState().thumbnailNodeId.set(h.thumbnail_guid);
-  selectedView.showInspectPanel ? NT(DesignWorkspace.INSPECT) : g || (s.can_edit ? NT(DesignWorkspace.DESIGN) : NT(DesignWorkspace.COMMENT));
+  selectedView.showInspectPanel ? setPropertiesPanelTab(DesignWorkspace.INSPECT) : g || (s.can_edit ? setPropertiesPanelTab(DesignWorkspace.DESIGN) : setPropertiesPanelTab(DesignWorkspace.COMMENT));
   selectedView.nodeId && (_ = selectedView.nodeId);
   selectedView.fallbackStateGroupId && (A = selectedView.fallbackStateGroupId);
   selectedView.viewport && (y = selectedView.viewport);
   selectedView.devModeFocusId && (b = selectedView.devModeFocusId);
   let I = {
-    sharedFontsList: Mx(s.shared_fonts),
+    sharedFontsList: getFontMetadataList(s.shared_fonts),
     localizedToUnlocalized: [],
     renames: {
       family: {},
@@ -220,10 +220,10 @@ class ek extends PureComponent {
       let {
         selectedView
       } = this.props;
-      "DUPLICATE" === selectedView.landingState && this.props.user && null != e && Ay.redirect(`${e.url}/duplicate`);
+      "DUPLICATE" === selectedView.landingState && this.props.user && null != e && customHistory.redirect(`${e.url}/duplicate`);
     };
     this.decline = () => {
-      Ay.redirect("/");
+      customHistory.redirect("/");
     };
   }
   render() {
@@ -400,7 +400,7 @@ let $$ej0 = createOptimistThunk(async (e, {
     }));
   }
   let d = l.openFile?.key;
-  subscribeAndAwaitData(ehp, {
+  subscribeAndAwaitData(OpenEditorFileData, {
     fileKey: n
   });
   let c = e.getState();
@@ -492,7 +492,7 @@ let eU = createOptimistThunk((e, t) => {
   } = t;
   if (!Bz()) {
     if (!file) return;
-    Ay.redirect(jN({
+    customHistory.redirect(jN({
       file: t.file
     }));
   }
@@ -521,7 +521,7 @@ function eB(e) {
   });
   return xK.timeAsync("fileMetadataRequest", () => t);
 }
-let eV = jW.exec(Ay.location.pathname);
+let eV = jW.exec(customHistory.location.pathname);
 let eG = null;
 let ez = null;
 eV && (ez = eB(eG = eV[1]));
@@ -578,7 +578,7 @@ let eH = createOptimistThunk(async (e, {
     BL(t, A, m);
     _$$b(mapEditorTypeToFileType(c));
     setLastUsedEditorType(c);
-    t && i && void 0 === parseQuery(Ay.location.search).embed_host && Lb().then(() => {
+    t && i && void 0 === parseQuery(customHistory.location.search).embed_host && Lb().then(() => {
       setTimeout(() => {
         t.key === e.getState().openFile?.key && e.dispatch(GZ({
           fileKey: t.key
@@ -636,7 +636,7 @@ export async function $$eW1(e, t, i, n, r) {
       teamName: e.name
     });
     let l = getI18nString("visual_bell.button_text");
-    n.dispatch(_$$F.enqueue({
+    n.dispatch(VisualBellActions.enqueue({
       type: "upgrade-success-with-publish",
       message: o,
       button: {

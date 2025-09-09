@@ -6,7 +6,7 @@ import { Hz, RF, p2, H9, aI } from "../905/714062";
 import { gl, jN, yA, FR, C8, M2, q1, gh, oM, nX } from "../905/171315";
 import { WY, uH, uR } from "../figma_app/162807";
 import { P } from "../905/16832";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/484713";
 import { hO } from "../figma_app/545293";
@@ -14,7 +14,7 @@ import { Q8, sC, BA, R9 } from "../905/61477";
 import { n as _$$n } from "../905/624711";
 import { f as _$$f } from "../figma_app/882858";
 import { L as _$$L } from "../905/713563";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { E as _$$E } from "../905/632989";
 import v from "classnames";
 import { M3 } from "../figma_app/119475";
@@ -89,7 +89,7 @@ export function $$k0({
   let b = useAtomWithSubscription(L8);
   let v = useAtomWithSubscription(Hz);
   let [I, E] = useAtomValueAndSetter(Q8);
-  let x = iZ();
+  let x = selectCurrentUser();
   let S = RF(b, i);
   let w = function () {
     let e = useAtomWithSubscription(Hz);

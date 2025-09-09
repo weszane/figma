@@ -2,7 +2,7 @@ import { h as _$$h, G } from "../905/706725";
 import { throwTypeError } from "../figma_app/465776";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { dd } from "../figma_app/604494";
 import { D as _$$D } from "../905/417423";
@@ -152,7 +152,7 @@ export function $$x15(e) {
   });
 }
 export async function $$N7(e, t, r, l, c, u, p, _) {
-  let h = _$$g();
+  let h = generateUUIDv4();
   let m = Date.now();
   let g = atomStoreManager.get(dd);
   let f = $$E9(t, g, h, e, !1, r, u);

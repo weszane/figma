@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Fullscreen, LayoutTabType } from "../figma_app/763686";
 import { m0 } from "../figma_app/546509";
 export function $$o0() {

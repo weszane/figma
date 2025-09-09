@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useEffect, useMemo, Suspense, useCallback, createRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { b as _$$b, bL, mc, N_, q7, wv } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
@@ -12,14 +12,14 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { FJ } from "../905/508367";
 import { Tf } from "../905/280919";
 import { A as _$$A } from "../905/920142";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, buildUploadUrl, isDevEnvironment, isGovCluster, isLocalCluster, isStagingCluster } from "../figma_app/169182";
 import { vN, xH } from "../905/63728";
 import { Rs } from "../figma_app/288654";
-import { o6, dp, Pt, cZ } from "../figma_app/806412";
+import { RecordingPureComponent, setupPlayback, generateRecordingKey, handleMouseEvent } from "../figma_app/878298";
 import { I7 } from "../figma_app/594947";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { hS } from "../905/437088";
 import { bL as _$$bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -32,7 +32,7 @@ import { c$, wv as _$$wv, X3 } from "../figma_app/236327";
 import { RW } from "../figma_app/637027";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { serializeQuery } from "../905/634134";
-import { iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { FPlanNameType } from "../figma_app/191312";
 import { X$ } from "../figma_app/465071";
 import { k as _$$k2 } from "../905/93362";
@@ -48,7 +48,7 @@ import { hx } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
 import { q5 } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
-import { cBX } from "../figma_app/43951";
+import { UserWithTeams } from "../figma_app/43951";
 import { w5 } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { mapFileTypeToEditorTypeNullable, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
@@ -170,7 +170,7 @@ function q({
   open: e,
   onClose: t
 }) {
-  let r = iZ();
+  let r = selectCurrentUser();
   let a = X$("SupportChatbot");
   let s = a.unwrapOr(null)?.tier || null;
   let {
@@ -2248,7 +2248,7 @@ function tM({
     if (null != t) return t.get(e);
   }(t), [t]);
   let a = getI18nState()?.getPrimaryLocale(!0) ?? defaultLanguage;
-  let s = null === TA();
+  let s = null === getUserId();
   let {
     show,
     isShowing,
@@ -2708,7 +2708,7 @@ export function $$t60(e) {
     let r = t?.teamId;
     let n = e.user?.id;
     let s = !useSelector(e => !!(t && e.figFileDuplicatedFromHubFile[t.key]));
-    let o = Rs(cBX, {});
+    let o = Rs(UserWithTeams, {});
     let l = function () {
       let e = _$$f("dismissed_move_drafts_nudge");
       let t = _$$f("ran_move_drafts_nudge_v2_num_3");
@@ -2795,11 +2795,11 @@ export function $$t60(e) {
     })]
   });
 }
-let t7 = class e extends o6 {
+let t7 = class e extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.zendeskRef = createRef();
-    this.dropdownID = _$$g();
+    this.dropdownID = generateUUIDv4();
     this.onKeyDown = e => {
       "Divide" === e.key && vN(e, xH.CONTROL | xH.SHIFT) && (e.preventDefault(), e.stopPropagation());
     };
@@ -2873,7 +2873,7 @@ let t7 = class e extends o6 {
         userInitiated: !0
       }));
       setTimeout(() => {
-        _$$Ay.reload("Nux reset");
+        customHistory.reload("Nux reset");
       }, 1e3);
       this.closeDropdownAndLogEvent("Reset Nux");
     };
@@ -2895,7 +2895,7 @@ let t7 = class e extends o6 {
         type: D
       }));
     };
-    this.onClickBugReport = dp(this, Pt("bugReporter", "click") || "", ({
+    this.onClickBugReport = setupPlayback(this, generateRecordingKey("bugReporter", "click") || "", ({
       isPerformanceIssue: e
     }) => {
       this.closeDropdownAndLogEvent("help_widget_bug_report");
@@ -2997,7 +2997,7 @@ let t7 = class e extends o6 {
         this.closeDropdownAndLogEvent("import_html_to_figma");
       };
     };
-    this.onClickSetCommitSHA = dp(this, Pt("setCommitSHA", "click") || "", () => {
+    this.onClickSetCommitSHA = setupPlayback(this, generateRecordingKey("setCommitSHA", "click") || "", () => {
       this.closeDropdownAndLogEvent("help_widget_set_commit_sha");
       this.props.dispatch(showModalHandler({
         type: _$$H,
@@ -3005,10 +3005,10 @@ let t7 = class e extends o6 {
         showModalsBeneath: !0
       }));
     });
-    this.onInProductHelpClick = cZ(this, "click", () => {
+    this.onInProductHelpClick = handleMouseEvent(this, "click", () => {
       "hidden" !== this.props.inProductHelpViewType ? this.props.hideInProductHelpView() : this.props.showInProductHelpView();
     });
-    this.onClick = cZ(this, "click", () => {
+    this.onClick = handleMouseEvent(this, "click", () => {
       !ci(this.props.user?.email) && this.props.canShowInProductHelp() ? "hidden" !== this.props.inProductHelpViewType ? this.props.hideInProductHelpView() : this.props.showInProductHelpView() : this.props.setDropDownOpen(!this.props.dropDownOpen);
       atomStoreManager.set(jH, !0);
     });

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, memo, useEffect, useMemo, useRef, PureComponent, useLayoutEffect, Component, useId, createContext, useContext } from "react";
-import { useSelector, useDispatch, connect } from "../vendor/514228";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { lQ } from "../905/934246";
 import { assertNotNullish } from "../figma_app/95419";
 import { M3 } from "../figma_app/91703";
@@ -8,7 +8,7 @@ import { tc as _$$tc } from "../905/15667";
 import { fu, L0 } from "../figma_app/831799";
 import { wR } from "../figma_app/765689";
 import { Ir, nk as _$$nk, m1 } from "../figma_app/2023";
-import { iZ as _$$iZ, Pc } from "../905/372672";
+import { selectCurrentUser, selectUser } from "../905/372672";
 import { FPublicationStatusType, FFileType, FPlanNameType, FOrganizationLevelType, FTeamAccessPermissionType, FPermissionLevelType, FViewPermissionType, FResourceCategoryType, FContainerType, FTemplateCategoryType, FUserVerificationStatusType, FProductAccessType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { w5, n0 as _$$n } from "../figma_app/345997";
@@ -41,7 +41,7 @@ import { JT } from "../figma_app/173838";
 import { HW, iq as _$$iq, lg, m0 } from "../figma_app/976749";
 import { Hz, Of, Yw, Pb } from "../905/201596";
 import { q5 } from "../figma_app/516028";
-import { x9E, FBc } from "../figma_app/43951";
+import { FilePublishSitePermissions, PublishedHubFileForFile } from "../figma_app/43951";
 import { td as _$$td } from "../figma_app/558805";
 import { Wl, l7, hA, ZO, NZ } from "../figma_app/88239";
 import { $A } from "../905/782918";
@@ -92,7 +92,7 @@ import { Qy } from "../figma_app/146384";
 import { m as _$$m2 } from "../905/636019";
 import { IT } from "../figma_app/566371";
 import { $z } from "../figma_app/617427";
-import { F as _$$F2 } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { L as _$$L2 } from "../905/92291";
 import { A as _$$A2 } from "../5724/600086";
 import { h as _$$h } from "../905/142086";
@@ -163,7 +163,7 @@ import { K as _$$K3 } from "../905/443068";
 import { a as _$$a } from "../905/5627";
 import { Dk } from "../figma_app/623293";
 import { L as _$$L3 } from "../905/408237";
-import { zX } from "../905/576487";
+import { VisualBellIcon } from "../905/576487";
 import { Dp, yJ, ml, hP, U as _$$U2, W7, cH, nM as _$$nM, M3 as _$$M, Fn, $j, d4 as _$$d2, lX } from "../905/759412";
 import { Um } from "../905/848862";
 import { l6, c$ as _$$c$, sK } from "../905/794875";
@@ -178,7 +178,7 @@ import { k2 } from "../figma_app/10554";
 import { e0 as _$$e5 } from "../905/696396";
 import { y4I, _YF } from "../figma_app/822011";
 import { c2 } from "../905/382883";
-import { wm } from "../905/19536";
+import { useMemoShallow } from "../905/19536";
 import nA from "../vendor/241899";
 import { t as _$$t5 } from "../905/331623";
 import { W as _$$W2 } from "../905/841666";
@@ -620,7 +620,7 @@ let eX = registerModal(function (e) {
     ...e,
     onClose: o
   });
-  let d = _$$iZ();
+  let d = selectCurrentUser();
   let c = d?.id;
   let u = useCallback(() => {
     Cu({
@@ -675,7 +675,7 @@ let eQ = registerModal(function (e) {
     ...e,
     onClose: s
   });
-  let l = _$$iZ();
+  let l = selectCurrentUser();
   let d = l?.id;
   let c = useCallback(() => {
     Cu({
@@ -703,7 +703,7 @@ function eJ({
 }) {
   let i;
   let r = useDispatch();
-  let s = _$$iZ();
+  let s = selectCurrentUser();
   let o = s?.id;
   let l = t.key;
   let d = !!t.has_file_link_password;
@@ -930,7 +930,7 @@ let to = registerModal(function (e) {
                       file_key: e.fileKey
                     }));
                     s(hideModalHandler());
-                    s(_$$F2.enqueue({
+                    s(VisualBellActions.enqueue({
                       message: getI18nString("file_permissions_modal.share_as.google_device.open_session_ended")
                     }));
                   },
@@ -1447,7 +1447,7 @@ function is({
     let d = QU();
     let c = _$$W(e.editor_type);
     let u = function (e, t) {
-      let i = Rs(x9E, {
+      let i = Rs(FilePublishSitePermissions, {
         fileKey: e
       }, {
         enabled: null != t && [FFileType.FIGMAKE, FFileType.SITES].includes(t)
@@ -2084,9 +2084,9 @@ function i$(e) {
           e.password && (Dk(e.password), trackEventAnalytics("file_password_copied", {
             user: e.userId,
             file_key: e.fileKey
-          }), t(_$$F2.enqueue({
+          }), t(VisualBellActions.enqueue({
             message: getI18nString("file_access_row.passwords.copied"),
-            icon: zX.CHECK,
+            icon: VisualBellIcon.CHECK,
             type: "success"
           })));
         },
@@ -2518,7 +2518,7 @@ function na({
   let _ = _$$L();
   let b = _$$o();
   let v = HW();
-  let I = _$$iZ();
+  let I = selectCurrentUser();
   let E = mapFileTypeToEditorType(e.editor_type);
   let x = t ? t.canEdit : e.hasEditRole;
   let S = !!(i && i.bigma_enabled);
@@ -2896,7 +2896,7 @@ function na({
               return;
             }
             if ("unprotected" === el || !o || i || C || E === FEditorType.Slides || _$$$(p, E, o), !em && "edit" === el && U === _9.ANYONE) {
-              p(_$$F2.enqueue({
+              p(VisualBellActions.enqueue({
                 message: getI18nString("permissions_modal.file_share_settings.please_enter_a_password"),
                 error: !0
               }));
@@ -3988,7 +3988,7 @@ let ri = connect((e, t) => {
 })(rt);
 function rn(e) {
   let t = useDispatch();
-  let i = Pc();
+  let i = selectUser();
   let s = useSelector(e => e.modalShown?.type === jS);
   let o = q5();
   let l = o?.trackTags?.isTemplate || !1;
@@ -3997,7 +3997,7 @@ function rn(e) {
     canPublishAsHubFile,
     reason
   } = Of(o);
-  let p = Rs(FBc({
+  let p = Rs(PublishedHubFileForFile({
     fileKey: o?.key ?? ""
   }), {
     enabled: !!o
@@ -4022,7 +4022,7 @@ function rn(e) {
   let y = o?.editorType === _YF.SLIDES;
   let b = o && _$$W(o.editorType);
   let v = canPublishAsHubFile && !_ && "loading" !== p.status && (!HF(h) || Pg(h)) && b;
-  let I = wm(() => o && ny()(o, "key", "teamId", "parentOrgId", "editorType"), [o]);
+  let I = useMemoShallow(() => o && ny()(o, "key", "teamId", "parentOrgId", "editorType"), [o]);
   useLayoutEffect(() => {
     s && I && v && re({
       openFile: I,
@@ -4153,7 +4153,7 @@ function rg({
 }
 function rb() {
   let e = q5();
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let i = J();
   let s = _$$o();
   let o = e?.editorType;
@@ -4367,7 +4367,7 @@ function rR({
   let d = ee(e);
   let c = _$$X$("RoleRows");
   let u = YY(c).unwrapOr(!1);
-  let p = Pc();
+  let p = selectUser();
   if (!getFeatureFlags().file_share_modal_scroll && !l && a.length > 3) return jsx(KZ, {
     roles: a
   });
@@ -5129,7 +5129,7 @@ function ay({
 }) {
   let s = _$$X$("UserSeenStateRows");
   let o = YY(s).unwrapOr(!1);
-  let l = Pc();
+  let l = selectUser();
   let d = (r, a) => jsx(aA, {
     canEditRole: QZ(e.hasEditRole, e, i),
     canMakeAdmin: !1,
@@ -5324,7 +5324,7 @@ function aD({
   searchResultToken: i
 }) {
   let r = useSelector(e => e.autocomplete);
-  let s = Pc();
+  let s = selectUser();
   let o = useSelector(e => e.contacts.usersByEmail);
   let {
     sharingSuggestions,
@@ -5374,7 +5374,7 @@ function aY({
   ...t
 }) {
   return !function (e) {
-    let t = _$$iZ();
+    let t = selectCurrentUser();
     let i = HW();
     if (t?.sharing_restricted) return !1;
     let n = !e.canView && e.canViewPrototype;
@@ -5412,7 +5412,7 @@ function aq({
       });
       let l = _$$Z(r);
       if (i && l.filter(e => !H_(i.org_domains?.domains || [], e)).length > 0) {
-        n(_$$F2.enqueue({
+        n(VisualBellActions.enqueue({
           message: getI18nString("file_permissions_modal.external_sharing_unavailable", {
             planName: i.name
           }),
@@ -5430,12 +5430,12 @@ function aq({
       }) => {
         let t = e.meta;
         n(cL());
-        t.filter(e => !e.errored).length > 0 && n(_$$F2.enqueue({
+        t.filter(e => !e.errored).length > 0 && n(VisualBellActions.enqueue({
           message: getI18nString("file_permissions_modal.link_has_been_sent")
         }));
         t && Ef(t, resourceType, resourceIdOrKey, n, void 0, i ? i.name : void 0);
       }, e => {
-        n(_$$F2.enqueue({
+        n(VisualBellActions.enqueue({
           message: e.message,
           error: !0
         }));
@@ -5505,7 +5505,7 @@ function a$({
       let d = useDispatch();
       let [c, u] = useAtomValueAndSetter(_$$H2);
       let p = _$$P().usersByEmail;
-      let g = Pc();
+      let g = selectUser();
       let f = o || s === _$$e4.VIEW_PROTOTYPES;
       let _ = aB({
         isPrototypeInvite: f
@@ -5664,7 +5664,7 @@ function aZ({
   planRecordId: p
 }) {
   let h = useDispatch();
-  let g = Pc();
+  let g = selectUser();
   let f = useSelector(e => e.autocomplete);
   let _ = useSelector(e => e.contacts);
   let A = !Um();
@@ -5682,7 +5682,7 @@ function aZ({
   }, [t]);
   let v = function (e) {
     let t = useSelector(e => e.contacts);
-    let i = Pc().email;
+    let i = selectUser().email;
     return useCallback(n => {
       let r = e?.org_domains || aP;
       return yI(n.trim(), t.usersByEmail[n] || n, e, r, i);
@@ -5760,7 +5760,7 @@ function a0({
   let x = _$$X$("InviteTabLoaded");
   let S = YY(x).unwrapOr(!1);
   let w = useDispatch();
-  let C = Pc();
+  let C = selectUser();
   let {
     hasEditRole,
     key,
@@ -6515,7 +6515,7 @@ export let $$sm0 = registerModal(function ({
   isLockedTeam: i = !1
 }) {
   var s;
-  let l = assertNotNullish(_$$iZ(), "FilePermissions: user is not logged in");
+  let l = assertNotNullish(selectCurrentUser(), "FilePermissions: user is not logged in");
   let d = M4.File.useValue(e).data;
   let c = $S({
     fileKey: e,

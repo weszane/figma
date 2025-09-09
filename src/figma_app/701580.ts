@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { isEmptyObject } from "../figma_app/493477";
 import { Y9, Wk } from "../figma_app/272243";
@@ -38,7 +38,7 @@ import { $J } from "../905/491152";
 import { G4 } from "../figma_app/707808";
 import { Z as _$$Z } from "../figma_app/684783";
 import { L as _$$L, I as _$$I } from "../1577/16430";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { avG } from "../figma_app/27776";
 import { i as _$$i } from "../figma_app/566312";
 import { a as _$$a } from "../905/925868";
@@ -283,7 +283,7 @@ let $ = (e, t = 3) => {
     });
   }
   e.SmallStickyTopBar = function (e) {
-    let r = iZ() ? {} : {
+    let r = selectCurrentUser() ? {} : {
       top: avG
     };
     return jsx("div", {

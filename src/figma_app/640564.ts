@@ -1,4 +1,4 @@
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { C } from "../905/237873";
 import { H, e as _$$e } from "../figma_app/324237";
 import { Z } from "../905/942203";
@@ -173,7 +173,7 @@ export function $$v3(e) {
   } : /\/community*/.test(e) ? {
     reactRouterHandled: !0,
     subView: "searchAndBrowse"
-  } : (k.warn(`If this is firing, it means you're trying to use logged-out Community routing on a non-Community URL.
+  } : (logger.warn(`If this is firing, it means you're trying to use logged-out Community routing on a non-Community URL.
 url: ${e}`), {
     reactRouterHandled: !1,
     subView: !1

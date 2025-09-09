@@ -1,5 +1,5 @@
 import { NC } from "../905/17179";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { createOptimistThunk } from "../905/350402";
 import { Q } from "../905/618914";
 import { FMemberRoleType } from "../figma_app/191312";
@@ -14,7 +14,7 @@ let $$u1 = createOptimistThunk(async (e, t) => {
     let e = await Q(gq(!0));
     a = A8(e, FMemberRoleType.GUEST);
   } catch (e) {
-    k.error("Error fetching plan user:", e);
+    logger.error("Error fetching plan user:", e);
     return;
   }
   if (!i.currentUserOrgId || !a || n.isFetching) return;
@@ -36,8 +36,8 @@ let $$u1 = createOptimistThunk(async (e, t) => {
     e.dispatch($$p2({
       fetching: !1
     }));
-    k.error("An error occurred while fetching domains");
-    k.error(t);
+    logger.error("An error occurred while fetching domains");
+    logger.error(t);
   }));
 });
 let $$p2 = NC("ORG_DOMAINS_IS_FETCHING");

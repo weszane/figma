@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { bL, Y9, JU, X0, UC } from "../figma_app/57171";
 import { E as _$$E } from "../905/632989";
 import { K } from "../905/443068";
@@ -10,9 +10,9 @@ import { g as _$$g } from "../905/687265";
 import { Fullscreen, Command, ActionType } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { jo } from "../figma_app/753501";
 import { A0, Br } from "../figma_app/454974";
 import { q5 } from "../figma_app/516028";
@@ -77,14 +77,14 @@ export function $$M0({
         size: "lg",
         "data-onboarding-key": BZ,
         children: [jsx(JU, {
-          recordingKey: Pt(s, "layersCollapsedRow"),
+          recordingKey: generateRecordingKey(s, "layersCollapsedRow"),
           htmlAttributes: {
             onContextMenu: jo
           },
           children: renderI18nText("fullscreen.pages_panel.layers_tab")
         }), e && jsx(X0, {
           children: jsx(A, {
-            recordingKey: Pt(s, "layersOptionMenu")
+            recordingKey: generateRecordingKey(s, "layersOptionMenu")
           })
         })]
       }), jsx(UC, {
@@ -112,14 +112,14 @@ function A(e) {
   };
   if (A0(ActionType.LAYERS_PANEL_OVERFLOW_MENU)) {
     let s = [{
-      displayText: _$$A(i),
+      displayText: formatI18nMessage(i),
       callback: l,
       sideText: c1(t, i),
       rightJustifySideText: !0,
       icon: jsx(_$$_, {}),
       recordingKey: i
     }, {
-      displayText: _$$A("auto-rename-layers"),
+      displayText: formatI18nMessage("auto-rename-layers"),
       callback: () => {
         Br({
           source: ActionType.LAYERS_PANEL_OVERFLOW_MENU,
@@ -140,12 +140,12 @@ function A(e) {
     });
   }
   return s ? jsx(K, {
-    "aria-label": _$$A(i),
+    "aria-label": formatI18nMessage(i),
     onClick: l,
-    recordingKey: Pt(e.recordingKey, i),
+    recordingKey: generateRecordingKey(e.recordingKey, i),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": _$$A(i)
+      "data-tooltip": formatI18nMessage(i)
     },
     children: jsx(_$$_, {})
   }) : jsx(Fragment, {});

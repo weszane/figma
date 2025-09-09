@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { J as _$$J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
@@ -15,7 +15,7 @@ import { ks, nR, vd } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
 import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { u as _$$u } from "../905/16237";
 import { popModalStack } from "../905/156213";
 import { $V } from "../figma_app/990058";
@@ -30,7 +30,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ud } from "../905/513035";
 import { FProductAccessType, FOrganizationLevelType, FPlanNameType, FMemberRoleType, FFileType } from "../figma_app/191312";
 import { _6 } from "../figma_app/386952";
-import { kdQ } from "../figma_app/43951";
+import { ConfiguredUpgradeRequestModalView } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { UQ } from "../figma_app/864723";
 import { tS, q5 } from "../figma_app/516028";
@@ -464,7 +464,7 @@ export function $$eb0(e) {
     er ? ew() : (t(popModalStack()), ex?.());
   };
   let eR = _$$u();
-  let eN = Rs(kdQ, {
+  let eN = Rs(ConfiguredUpgradeRequestModalView, {
     orgId: planParentId,
     permission: planUserPermission
   }, {
@@ -510,7 +510,7 @@ export function $$eb0(e) {
     },
     severity: SeverityLevel.Critical,
     onError: () => {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("request_upgrade.modal.error"),
         error: !0
       }));
@@ -572,7 +572,7 @@ export function $$eb0(e) {
                     request_id: ee,
                     message: O
                   }).catch(() => {
-                    t(_$$F.enqueue({
+                    t(VisualBellActions.enqueue({
                       message: "Error updating request message.",
                       error: !0
                     }));

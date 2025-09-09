@@ -7,7 +7,7 @@ import { hasDesktopAPI } from "../figma_app/876459";
 import { getIsMac, getIsLinux, getIsWindows, isIpadDevice } from "../figma_app/778880";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { _o, k$, gN, id, Dz, TV, WJ, f4 } from "../figma_app/847915";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
 import { ck } from "../905/87821";
@@ -145,7 +145,7 @@ export const jv = function e(t, i) {
       ...t
     };
     let d = Dz(t);
-    l.displayText = (TV(t) || _o(t)) && t.displayText || r || _$$A(d, t.args);
+    l.displayText = (TV(t) || _o(t)) && t.displayText || r || formatI18nMessage(d, t.args);
     _o(t) && t.shortcutText ? l.shortcut = t.shortcutText : l.shortcut = c1(i.appModel.keyboardShortcuts, d);
     l.disabled = o;
     l.visuallyDisabledWithSelection = _o(t) ? t.visuallyDisabledWithSelection : void 0;

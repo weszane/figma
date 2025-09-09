@@ -12,7 +12,7 @@ import { m3 } from "../figma_app/45218";
 import { G4 } from "../figma_app/707808";
 import { Ho } from "../figma_app/878651";
 import { Dy } from "../figma_app/165422";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { Point } from "../905/736624";
 import { I as _$$I } from "../figma_app/4253";
@@ -24,7 +24,7 @@ import { UG, _Q, qb, Jr, RL, Hs, fz } from "../figma_app/2590";
 import { defaultViewportState } from "../figma_app/298911";
 import { VL } from "../figma_app/112055";
 import { jJ } from "../905/508367";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
@@ -36,7 +36,7 @@ import { S as _$$S } from "../figma_app/420927";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { mT } from "../figma_app/976345";
 import { A as _$$A } from "../5132/237216";
 import { UU } from "../figma_app/770088";
@@ -51,7 +51,7 @@ import { O as _$$O2 } from "../905/365108";
 import { V as _$$V } from "../905/604512";
 import { getFeatureFlags } from "../905/601108";
 import { atom } from "../figma_app/27355";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { hY } from "../figma_app/349969";
 import { ur } from "../figma_app/632319";
 import { ex as _$$ex } from "../905/524523";
@@ -386,7 +386,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
       let r = -1;
       try {
         r = parseInt(t, 10);
-      } catch (e) {}
+      } catch (e) { }
       r > 0 && (trackEventAnalytics("Hub File Viewer User Input Zoom Set", {
         hubFileId: e.id,
         source: "userInput",
@@ -505,8 +505,8 @@ let ef = "hub_file_viewer--caret--LG-MD";
         -1 === a ? a = e.shiftKey ? r.length - 1 : 0 : e.shiftKey ? 0 === a ? a = r.length - 1 : a-- : a === r.length - 1 ? a = 0 : a++;
         let s = r[a];
         d(s);
-        t(_$$F.clearAll());
-        t(_$$F.enqueue({
+        t(VisualBellActions.clearAll());
+        t(VisualBellActions.enqueue({
           message: getI18nString("community.hub_file_viewer.zoom", {
             percent: GP(s.scalingOptionId)
           })
@@ -568,7 +568,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
           showShortcut: r.scalingOptionId === u.scalingOptionId,
           currentScalingInfo: t,
           scalingHandlerOverride: s,
-          recordingKey: Pt({
+          recordingKey: generateRecordingKey({
             recordingKey: n
           }, `option-${Ti(r.scalingOptionId)}`),
           isFooter: void 0
@@ -910,7 +910,7 @@ function eW(e) {
     featureFlags: getFeatureFlags(),
     trackingSessionId: getInitialOptions().tracking_session_id || null,
     bowser: BrowserInfo,
-    forceMobileOptimizations: null != parseQuery(_$$Ay.location.search)["mobile-optimizations"],
+    forceMobileOptimizations: null != parseQuery(customHistory.location.search)["mobile-optimizations"],
     deviceInfoByIdentifier: hY,
     trackAnalyticsEvent: trackEventAnalytics,
     definedAnalyticsHandler: analyticsEventManager,
@@ -1025,7 +1025,7 @@ class eK extends PureComponent {
       if (!this.props.viewer) return;
       _$$r.logValue("viewerSceneDidCompleteInitialLoad", Math.round(performance.now()));
       this.props.viewerLoadTimeTracker.handleViewerLoaded();
-      let e = parseQuery(_$$Ay.location.search)["node-id"];
+      let e = parseQuery(customHistory.location.search)["node-id"];
       this.props.viewer.navigateToFrameAndCloseOverlays(e);
       let t = this.props.viewer.getPrototypeBackgroundColor();
       this.setBackgroundColor(t || _$$o);
@@ -1048,7 +1048,7 @@ class eK extends PureComponent {
       }, 300);
     };
     this.bindEventsToViewer = e => {
-      parseQuery(_$$Ay.location.search);
+      parseQuery(customHistory.location.search);
       this.setState({
         zoomBounds: e.getZoomBounds()
       });

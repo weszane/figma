@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { Fullscreen, DesignGraphElements } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";

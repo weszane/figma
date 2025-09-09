@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo, useEffect, useLayoutEffect, memo, useContext } from "react";
-import { useDispatch, useSelector, connect } from "../vendor/514228";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { RR } from "../figma_app/338442";
 import { AppStateTsApi, DesignGraphElements, UserActionState, Fullscreen, ItemType, ScaleToolTsApi, TextAlignmentOptions } from "../figma_app/763686";
@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
-import { c1, qP, Pt } from "../figma_app/806412";
+import { createRecordingCallback, useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { Ku, sT } from "../figma_app/740163";
 import { m as _$$m } from "../905/571439";
 import { MIXED_MARKER, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
@@ -94,7 +94,7 @@ function ec(e) {
   } = e;
   let p = "width" === property ? Yq.Width : Yq.Height;
   let _ = useDispatch();
-  let h = c1(recordingKey);
+  let h = createRecordingCallback(recordingKey);
   let m = function () {
     if (selectionRegionsBounds && selectionRegionsBounds.length) {
       let e = selectionRegionsBounds[0][property];
@@ -211,7 +211,7 @@ function ey(e) {
   let P = !g || L;
   let [D, k] = useState(Ps);
   let M = getObservableOrFallback(AppStateTsApi.canvasViewState().scaleToolLastCanvasAnchorPoint);
-  let F = qP(e.recordingKey ?? "", "anchorPointChange", k);
+  let F = useSetupPlayback(e.recordingKey ?? "", "anchorPointChange", k);
   let [j, et] = useState(void 0);
   let ei = useCallback(e => {
     void 0 === j ? et(e) : j !== e && et(null);
@@ -479,7 +479,7 @@ let eI = memo(function ({
   let p = scopeAwareFunction.user("change-anchor-point", e => {
     ScaleToolTsApi.setAnchorPoint(e);
   });
-  let h = qP(e ?? "", "anchorPointChange", e => {
+  let h = useSetupPlayback(e ?? "", "anchorPointChange", e => {
     p(e);
   });
   let {
@@ -594,7 +594,7 @@ export function $$eN9() {
   return useMemo(() => Object.values(e).filter(e => !e.deletedFromSceneGraph), [e]);
 }
 let $$eC6 = parsePxInt(wQn);
-let ew = (e, t) => e ? Pt(e, t) : t;
+let ew = (e, t) => e ? generateRecordingKey(e, t) : t;
 export var $$eO8 = (e => (e[e.DEFAULT_EXPANDED = 0] = "DEFAULT_EXPANDED", e[e.DEFAULT_SIMPLIFIED = 1] = "DEFAULT_SIMPLIFIED", e[e.OVERRIDDEN_EXPANDED = 2] = "OVERRIDDEN_EXPANDED", e))($$eO8 || {});
 (n || (n = {})).ConnectedFillPanel = connect(e => ({
   library: e.library,

@@ -1,11 +1,11 @@
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 export function $$s0(e, t, a = !0) {
-  let i = new URLSearchParams(Ay.location.search);
+  let i = new URLSearchParams(customHistory.location.search);
   if ("true" === i.get(e)) {
     if (a) {
       i.$$delete(e);
       let t = i.toString().length > 0 ? `?${i.toString()}` : "";
-      Ay.replace(`${Ay.location.pathname}${t}`);
+      customHistory.replace(`${customHistory.location.pathname}${t}`);
     }
     t();
   }

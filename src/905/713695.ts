@@ -12,13 +12,13 @@ import { debugState } from '../905/407919';
 import { observableState } from '../905/441145';
 import { trackEventAnalytics } from '../905/449184';
 import { BO, rI } from '../905/485103';
-import { W as _$$W } from '../905/491061';
+import { RetainedPromiseManager } from '../905/491061';
 import { Y as _$$Y } from '../905/493958';
 import { waitForVisibility } from '../905/621429';
 import { logError } from '../905/714362';
 import { j as _$$j } from '../905/745286';
 import { p as _$$p2 } from '../905/844455';
-import { g as _$$g } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { NU, S8, wQ } from '../905/893701';
 import { shouldSampleRequest, XHR } from '../905/910117';
 import { getUserPlan } from '../905/912096';
@@ -288,7 +288,7 @@ class k {
       });
       return;
     }
-    let a = _$$g();
+    let a = generateUUIDv4();
     typeof t == 'function' ? (ht(!1), i = jM(n, e => t(e)), ht(!0)) : i = t;
     Object.assign(i, {
       _version: a
@@ -523,7 +523,7 @@ class z {
         let s = t();
         let o = [++E];
         let d = !e.enabled || e.enabled(a);
-        let c = new _$$W(() => atomStoreManager.sub(w, () => {}));
+        let c = new RetainedPromiseManager(() => atomStoreManager.sub(w, () => {}));
         let m = async () => {
           getFalseValue() || (await waitForVisibility());
           let t = e.fetch(a, s);

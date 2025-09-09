@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -10,7 +10,7 @@ import { popModalStack } from "../905/156213";
 import { Yu, sp } from "../905/355291";
 import { Ve, MV } from "../905/264101";
 import { Z } from "../905/854480";
-import { iZ, pS } from "../905/372672";
+import { selectCurrentUser, hasPasswordOrSSO } from "../905/372672";
 import { registerModal } from "../905/102752";
 import { _ as _$$_ } from "../905/799322";
 import { aY, F4, Hx, G6 } from "../figma_app/639088";
@@ -19,7 +19,7 @@ export let $$y0 = registerModal(function (e) {
     open,
     onClose
   } = e;
-  let f = iZ();
+  let f = selectCurrentUser();
   let y = Z();
   let b = useDispatch();
   let v = hS({
@@ -27,13 +27,13 @@ export let $$y0 = registerModal(function (e) {
     onClose
   });
   return (_$$h(() => {
-    f && pS(f) && b(Ve({
+    f && hasPasswordOrSSO(f) && b(Ve({
       token: f.password_token
     }));
   }), f) ? jsx(bL, {
     manager: v,
     width: "lg",
-    children: pS(f) ? jsxs(vo, {
+    children: hasPasswordOrSSO(f) ? jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
           children: renderI18nText("auth.two-factor-setup.two_factor_recovery_codes")

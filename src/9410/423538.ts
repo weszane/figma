@@ -11,7 +11,7 @@ import { p4 } from "../figma_app/412398";
 import { t_ } from "../9410/141954";
 import { B as _$$B } from "../905/521763";
 import { fullscreenValue } from "../figma_app/455680";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
 import { S } from "../figma_app/106763";
 import { ce, yh } from "../9410/58505";
@@ -401,7 +401,7 @@ export function $$j2({
       if (e) {
         let t = 1 === e.childCount && e.childrenNodes[0].isResponsiveSet && 1 === e.childrenNodes[0].childCount && e.childrenNodes[0].childrenNodes[0].isBreakpointFrame && 0 === e.childrenNodes[0].childrenNodes[0].childCount;
         let i = null;
-        t ? (wr(), S("panel"), Dh([e.childrenGuids[0]])) : permissionScopeHandler.ai("first-draft-sites-page-create", () => {
+        t ? (clearSelection(), S("panel"), addToSelection([e.childrenGuids[0]])) : permissionScopeHandler.ai("first-draft-sites-page-create", () => {
           Fullscreen.createResponsiveSet(null);
         });
         i = getSingletonSceneGraph().get(Fullscreen.getFirstSelectedNodeIdForCurrentPage());

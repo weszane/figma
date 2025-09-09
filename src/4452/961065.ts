@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { tT } from "../905/663269";
 import { Xf } from "../figma_app/153916";
@@ -22,7 +22,7 @@ import { Pn, Yo, oU } from "../figma_app/84966";
 import { NJ } from "../figma_app/518077";
 import { MX, EQ, Cz, RG } from "../figma_app/684446";
 import { FOrganizationLevelType, FDomainVerificationStatusType, FUserRoleType } from "../figma_app/191312";
-import { HpJ, KR2, Wt6 } from "../figma_app/43951";
+import { AdminRequestDashOrgInfo, AdminNotificationsCountView, OrgTaxIdView } from "../figma_app/43951";
 import { i0, m3, hX, EZ } from "../figma_app/614170";
 import { Ib } from "../905/129884";
 import { A as _$$A } from "../svg/57540";
@@ -31,7 +31,7 @@ export function $$k0(e) {
   let {
     getConfig
   } = I7("exp_all_admin_request_dash");
-  let a = Rs(HpJ, {
+  let a = Rs(AdminRequestDashOrgInfo, {
     orgId: e.planId
   }, {
     enabled: e.planType === ps.ORG
@@ -41,7 +41,7 @@ export function $$k0(e) {
     isIntendedAudience: !!(e.planType === ps.ORG && "loaded" === a.status && a.data?.org?.bigmaEnabledAt) && !1 === e.isOrgAdmin
   });
   let m = e.isOrgAdmin ? [null, ...(e.managedBillingGroups ?? [])] : e.managedBillingGroups;
-  let _ = Rs(KR2, {
+  let _ = Rs(AdminNotificationsCountView, {
     planType: e.planType,
     planId: e.planId,
     filterParams: r || o ? JSON.stringify({
@@ -194,7 +194,7 @@ function F(e) {
   let a = MX();
   let i = e.invoices && hX(e.invoices);
   let l = e.org.bigma_enabled && e.orgUser.license_admin && e.orgUser.permission !== FUserRoleType.ADMIN;
-  let o = Rs(Wt6, {
+  let o = Rs(OrgTaxIdView, {
     orgId: e.org.id
   });
   let c = "loaded" === o.status ? o.data.org?.taxIdVerificationStatus : null;
@@ -262,7 +262,7 @@ function B(e) {
   let v = ZY({
     isIntendedAudience: e.org.bigma_enabled && !a
   });
-  let b = Rs(Wt6, {
+  let b = Rs(OrgTaxIdView, {
     orgId: e.org.id
   }, {
     enabled: a

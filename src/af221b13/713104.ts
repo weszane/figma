@@ -1,12 +1,12 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { A } from "../5132/237216";
 import { Vm } from "../figma_app/427318";
 import { aI } from "../figma_app/558929";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { px, S2 } from "../figma_app/465071";
 import { getPluginVersion } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
@@ -15,7 +15,7 @@ import { om, x1 } from "../figma_app/465413";
 import { o as _$$o } from "../5430/992445";
 import { A as _$$A } from "../5724/965092";
 export function $$f0(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = useDispatch();
   let [f, b] = useState(!0);
   let v = e.resource;

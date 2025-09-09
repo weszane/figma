@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { X7 } from "../905/193529";
 export function $$s0() {
   return useSelector(e => !!e.screenreader.enabled);

@@ -5,12 +5,12 @@ import { P } from "../905/412913";
 import { fileEntityModel } from "../905/806985";
 import { NS } from "../905/71785";
 import { $L, Ko, XS, Vp, cI } from "../figma_app/633080";
-import { ZI } from "../figma_app/198712";
+import { stringSchema } from "../figma_app/198712";
 let u = XHR.requiredHeaders;
 let $$p0 = new class {
   constructor() {
     this.LibraryComponentV2DestinationSchemaValidator = createMetaValidator("LibraryComponentV2Destination", z.object({
-      node_id: ZI,
+      node_id: stringSchema,
       file_key: z.string(),
       component: $L,
       component_set: Ko.optional()

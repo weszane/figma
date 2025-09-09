@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback, memo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { l as _$$l } from "../6401/369764";
 import { AppStateTsApi, RotationType, FlappBindings, PresetType } from "../figma_app/763686";
@@ -12,12 +12,12 @@ import p from "classnames";
 import { hk, O5 } from "../figma_app/632319";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { hY } from "../figma_app/349969";
 import { eo } from "../905/505138";
 import { mr } from "../figma_app/386952";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { getObservableValue } from "../figma_app/84367";
 import { I as _$$I } from "../905/537408";
 import { xu, yx } from "../figma_app/778443";
@@ -70,10 +70,10 @@ export function $$L0(e) {
     });
   }, [nodeId, N, v, f]);
   useEffect(() => {
-    nodeId === g && (E(F.enqueue({
+    nodeId === g && (E(VisualBellActions.enqueue({
       type: "slides-embedded-prototype",
       message: getI18nString("slides.inserting_embed.visual_bell"),
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       timeoutOverride: 1 / 0
     })), setActiveEmbed(), setTimeout(() => {
       nodeId === AppStateTsApi?.flappData().embeddablePrototypeIdPendingInsertion.getCopy() && FlappBindings?.embeddablePrototypeLoadFailed();
@@ -310,7 +310,7 @@ function j({
     t && _$$e(r, "fuid", t);
     i && _$$e(r, "starting-point-node-id", i);
     return n;
-  }(e, TA(), a);
+  }(e, getUserId(), a);
   return jsx("div", {
     className: pU,
     children: jsx("iframe", {

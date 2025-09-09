@@ -6,7 +6,7 @@ import { isSpecialNodeType } from "../905/266460";
 import { MT } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
-import { Fk } from "../figma_app/806412";
+import { isRecordingEnabled } from "../figma_app/878298";
 import { Vi } from "../figma_app/364284";
 import { K3 } from "../figma_app/678300";
 import { vo } from "../figma_app/164212";
@@ -121,7 +121,7 @@ function b(e, t, r, n, i) {
       isDescendantOfModule: "MODULE" === e.type || opts.isDescendantOfModule
     }
   };
-  Fk() && (l.pathFromRoot = [...pathFromRoot, n]);
+  isRecordingEnabled() && (l.pathFromRoot = [...pathFromRoot, n]);
   return l;
 }
 function T(e, t, r, n, i, a) {
@@ -188,7 +188,7 @@ export function $$S2(e) {
         rowHeight: a,
         opts: r
       };
-      Fk() && (o.pathFromRoot = [n]);
+      isRecordingEnabled() && (o.pathFromRoot = [n]);
       (function e(t, r) {
         let n;
         let {

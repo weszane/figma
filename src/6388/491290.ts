@@ -1,8 +1,8 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k } from "../905/582200";
 import { v as _$$v } from "../642/135773";
@@ -115,7 +115,7 @@ function N({
         })
       }),
       onChange: onOpacityChange,
-      recordingKey: Pt(e, "opacity"),
+      recordingKey: generateRecordingKey(e, "opacity"),
       sliderTrackableName: "slides_image_overlay_opacity_slider",
       step: .01,
       value: h ? MIXED_MARKER : overlayPaint?.opacity || 0
@@ -129,7 +129,7 @@ function N({
         inheritStyleKey: void 0,
         inheritStyleName: void 0,
         inheritStyleId: void 0,
-        recordingKey: Pt(e, "color"),
+        recordingKey: generateRecordingKey(e, "color"),
         hideCustomColorPickerFillTypeToggle: !1
       })
     })]

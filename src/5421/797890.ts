@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, useMemo, useId, memo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
 import { i as _$$i } from "../905/97346";
@@ -14,7 +14,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import y from "classnames";
 import { parsePxNumber, parsePercentNumber } from "../figma_app/783094";
 import { d as _$$d } from "../figma_app/429226";
-import { Pt, v_, aH } from "../figma_app/806412";
+import { generateRecordingKey, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { captureMessage } from "../905/11";
 import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
@@ -69,7 +69,7 @@ import { IK, $n } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { Label } from "../905/270045";
 import { k as _$$k2 } from "../905/582200";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { zZ } from "../figma_app/299859";
 import { lg } from "../figma_app/651753";
 import { t as _$$t2 } from "../5421/711842";
@@ -116,7 +116,7 @@ function es({
     (!t || !t.keyCodes || 0 === t.keyCodes.length) && n && p.current && (o(!1), p.current.focus(), c(!0));
   }, [o, n, t]);
   useEffect(() => {
-    if (!d) return () => {};
+    if (!d) return () => { };
     let t = new _$$L();
     let n = t.onPress(t => {
       e({
@@ -200,7 +200,7 @@ function ej(e) {
     return jsx(eb, {
       value: t,
       icon: n,
-      recordingKey: Pt(e, t),
+      recordingKey: generateRecordingKey(e, t),
       disabled: !function (t) {
         if ("NONE" === t) return !0;
         let n = !!e.interactionsOnSelectedNodes && e.interactionsOnSelectedNodes.every(t => e.interactionsOnSelectedNodes && areSessionLocalIDsEqual(t.sourceNodeID, e.interactionsOnSelectedNodes[0].sourceNodeID)) && !isValidValue(e.property);
@@ -244,7 +244,7 @@ function ej(e) {
       id: "interaction-type-select",
       onChange: e.onChange,
       property: e.property,
-      recordingKey: Pt(e, "select"),
+      recordingKey: generateRecordingKey(e, "select"),
       children: b
     }), E]
   });
@@ -327,7 +327,7 @@ function ew(e) {
         "ON_KEY_DOWN" === o && s(!0);
       },
       property: e.interactionType,
-      recordingKey: Pt(e, "interactionDropdown")
+      recordingKey: generateRecordingKey(e, "interactionDropdown")
     });
     let b = c ? jsx(_$$A4, {
       labelId: f,
@@ -351,7 +351,7 @@ function ew(e) {
             transitionTimeout: e
           });
         },
-        recordingKey: Pt(e, "timeoutInput"),
+        recordingKey: generateRecordingKey(e, "timeoutInput"),
         scrubMultiplier: o / 1e3,
         tooltipForScreenReadersOnly: !0,
         value: e.timeout,
@@ -380,7 +380,7 @@ function ew(e) {
             mediaHitTime: e
           });
         },
-        recordingKey: Pt(e, "mediaHitTimeInput"),
+        recordingKey: generateRecordingKey(e, "mediaHitTimeInput"),
         scrubMultiplier: o / 1e3,
         tooltipForScreenReadersOnly: !0,
         value: e.mediaHitTime,
@@ -404,7 +404,7 @@ function ew(e) {
           });
         },
         placeholder: getI18nString("proto.trigger.add_delay_placeholder"),
-        recordingKey: Pt(e, "delayInput"),
+        recordingKey: generateRecordingKey(e, "delayInput"),
         scrubMultiplier: o / 1e3,
         tooltipForScreenReadersOnly: !0,
         value: u ? e.interactionDuration : void 0,
@@ -430,7 +430,7 @@ function ew(e) {
     mediaHitTime,
     keyTrigger,
     interactionsOnSelectedNodes: interactionsOnSelectedNodesAndComponents,
-    recordingKey: Pt(e.recordingKey, Qe)
+    recordingKey: generateRecordingKey(e.recordingKey, Qe)
   });
 }
 let ek = "prototype_interaction_edit_modal--contentContainer--bo2b4";
@@ -558,7 +558,7 @@ function eM(e) {
               onExpand: E,
               onNewActionAdded: e.onNewActionAdded,
               onSelect: e.onSelect,
-              recordingKey: Pt(e.recordingKey, _$$eG, a),
+              recordingKey: generateRecordingKey(e.recordingKey, _$$eG, a),
               selectedActionIndex,
               selectedInteractions,
               setAutoOpenExpressionBuilder: e.setAutoOpenExpressionBuilder,
@@ -592,7 +592,7 @@ function e$({
         stateManagementVersion: 0
       });
     },
-    recordingKey: Pt(t, "revert-state-management-version"),
+    recordingKey: generateRecordingKey(t, "revert-state-management-version"),
     htmlAttributes: {
       "data-testid": "revert-state-management-button"
     },
@@ -610,14 +610,14 @@ function e$({
         } : {}),
         stateManagementVersion: 1
       });
-      l(_$$F.enqueue({
+      l(VisualBellActions.enqueue({
         type: "state-management-updated",
         message: getI18nString("proto.state_management.visual_bell_updated_message"),
         button: {
           text: getI18nString("proto.state_management.visual_bell_update_all"),
           action: () => {
             fullscreenValue.triggerActionInUserEditScope("update-interactions-state-management-on-page");
-            l(_$$F.enqueue({
+            l(VisualBellActions.enqueue({
               type: "state-management-updated-all",
               message: getI18nString("proto.state_management.visual_bell_update_all_message")
             }));
@@ -625,7 +625,7 @@ function e$({
         }
       }));
     },
-    recordingKey: Pt(t, "update-state-management-version"),
+    recordingKey: generateRecordingKey(t, "update-state-management-version"),
     children: renderI18nText("proto.state_management.update_controls")
   });
   let p = 1 === o ? renderI18nText("proto.state_management.new_controls") : renderI18nText("proto.state_management.old_controls");
@@ -718,7 +718,7 @@ function eW(e) {
     newActionIndexPath,
     onNewActionAdded: e.onNewActionAdded,
     onSelect: e.onSelect,
-    recordingKey: Pt(e, Qe),
+    recordingKey: generateRecordingKey(e, Qe),
     resetNewActionIndexPath: e.resetNewActionIndexPath,
     selectedActionIndex: e.selectedActionIndex,
     setAutoOpenExpressionBuilder: e.setAutoOpenExpressionBuilder,
@@ -730,7 +730,7 @@ function eW(e) {
   return jsxs("div", {
     children: [b, !r && showPanel && jsx(e$, {
       transition,
-      recordingKey: Pt(e, "stateManagementVersionPanel"),
+      recordingKey: generateRecordingKey(e, "stateManagementVersionPanel"),
       updateSelectionProperties,
       stateManagementVersion: _,
       selectedInteractions
@@ -793,8 +793,8 @@ let $$e90 = memo(function ({
   } = Ay(n, e);
   let l = selectedInteractions.length > 0;
   let [s, d] = useState(!1);
-  let c = v_(dJ, "keydown", e => "Shift" !== e.key ? aH : (d(!0), t && l) ? void 0 : aH);
-  let p = v_(dJ, "keyup", e => "Shift" !== e.key ? aH : (d(!1), t && l) ? void 0 : aH);
+  let c = useHandleKeyboardEvent(dJ, "keydown", e => "Shift" !== e.key ? SKIP_RECORDING : (d(!0), t && l) ? void 0 : SKIP_RECORDING);
+  let p = useHandleKeyboardEvent(dJ, "keyup", e => "Shift" !== e.key ? SKIP_RECORDING : (d(!1), t && l) ? void 0 : SKIP_RECORDING);
   if (useEffect(() => (document.addEventListener("keydown", c), document.addEventListener("keyup", p), () => {
     document.removeEventListener("keydown", c);
     document.removeEventListener("keyup", p);
@@ -993,7 +993,7 @@ let e7 = memo(function ({
     if (interactionsOnSelectedNodesAndComponents && selectedInteractions) {
       var t = !1;
       var n = !1;
-      if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypinglMultipleActionsModal();else {
+      if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypinglMultipleActionsModal(); else {
         for (let r = 0; r < selectedInteractions?.length; r++) {
           let a = selectedInteractions[r];
           let l = [];
@@ -1030,7 +1030,7 @@ let e7 = memo(function ({
     if (!interactionsOnSelectedNodesAndComponents || !selectedInteractions || !e.path.length || void 0 === e.path[0]) return;
     let [t, n, o] = e.path;
     let i = e.isConditional();
-    if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypinglMultipleActionsModal();else if (i) {
+    if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypinglMultipleActionsModal(); else if (i) {
       let e = !1;
       let i = !1;
       let r = selectedInteractions.map(r => {
@@ -1094,7 +1094,7 @@ let e7 = memo(function ({
         e9(e);
       },
       onSelect: em,
-      recordingKey: Y ? Pt("leftCol", dJ) : dJ,
+      recordingKey: Y ? generateRecordingKey("leftCol", dJ) : dJ,
       resetNewActionIndexPath: () => {
         e9(new Op([]));
       },
@@ -1195,7 +1195,7 @@ let e7 = memo(function ({
     onClick: () => tp(X),
     "aria-label": getI18nString("proto.prototype_panel.delete"),
     disabled: tI,
-    recordingKey: Pt(dJ, "actionDeleteButton"),
+    recordingKey: generateRecordingKey(dJ, "actionDeleteButton"),
     htmlAttributes: {
       "data-tooltip": getI18nString("proto.prototype_panel.delete"),
       "data-tooltip-type": Ib.TEXT
@@ -1279,7 +1279,7 @@ let e7 = memo(function ({
       }), tN]
     }), showPanel && jsx(e$, {
       transition,
-      recordingKey: Pt(dJ, "stateManagementVersionPanel"),
+      recordingKey: generateRecordingKey(dJ, "stateManagementVersionPanel"),
       updateSelectionProperties,
       stateManagementVersion: e_,
       selectedInteractions
@@ -1405,7 +1405,7 @@ function e4({
         onDrop: lQ,
         onExpand: lQ,
         onSelect: lQ,
-        recordingKey: Pt(dJ, Qe, _$$eG, m),
+        recordingKey: generateRecordingKey(dJ, Qe, _$$eG, m),
         selectedActionIndex: e,
         selectedInteractions,
         setAutoOpenExpressionBuilder: r,
@@ -1431,7 +1431,7 @@ function e4({
       onDrop: lQ,
       onExpand: n,
       onSelect: lQ,
-      recordingKey: Pt(dJ, Qe, _$$eG, m),
+      recordingKey: generateRecordingKey(dJ, Qe, _$$eG, m),
       selectedActionIndex: e,
       selectedInteractions,
       setAutoOpenExpressionBuilder: r,

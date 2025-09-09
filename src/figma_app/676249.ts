@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";

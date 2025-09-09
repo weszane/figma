@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Fullscreen, WhiteboardAiVisualCppBindings, MindmapCppBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -8,8 +8,8 @@ import { am } from "../figma_app/901889";
 import { PerfTimer } from "../905/609396";
 import { getTrackingSessionId } from "../905/471229";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Ay } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
@@ -36,7 +36,7 @@ export function $$v0() {
     trackingSessionId: getTrackingSessionId(),
     fileSeq: v?.toString() || null
   };
-  let w = useCallback(() => N(F.enqueue({
+  let w = useCallback(() => N(VisualBellActions.enqueue({
     message: getI18nString("whiteboard.ai_expand_mindmap.generic_error")
   })), [N]);
   let O = e => {
@@ -54,12 +54,12 @@ export function $$v0() {
       });
       return;
     }
-    N(F.dequeue({
+    N(VisualBellActions.dequeue({
       matchType: "ai-expand-mindmap-success"
     }));
-    N(F.enqueue({
+    N(VisualBellActions.enqueue({
       message: getI18nString("whiteboard.ai_modal.streaming"),
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       type: "ai-expand-mindmap-loading",
       timeoutOverride: 1 / 0
     }));
@@ -73,7 +73,7 @@ export function $$v0() {
       r && O(r);
       let i = permissionScopeHandler.user("expand-figjam-ai-mindmap", () => WhiteboardAiVisualCppBindings?.expandWithFigjamAiMindmapNodes(n, e) ?? []);
       let o = t.stop();
-      i.length ? (N(F.enqueue({
+      i.length ? (N(VisualBellActions.enqueue({
         message: getI18nString("whiteboard.ai_expand_mindmap.generation_success"),
         type: "ai-expand-mindmap-success",
         button: {
@@ -107,7 +107,7 @@ export function $$v0() {
         elapsed_ms: r
       });
     }).$$finally(() => {
-      N(F.dequeue({
+      N(VisualBellActions.dequeue({
         matchType: "ai-expand-mindmap-loading"
       }));
     });

@@ -1,13 +1,13 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useId, useCallback, memo, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { b as _$$b } from "../905/946806";
 import { FileFormat, FillType, StickyTableConfig, AppStateTsApi, Fullscreen } from "../figma_app/763686";
-import { Pt, of } from "../figma_app/806412";
+import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { n as _$$n } from "../figma_app/339971";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { rg } from "../figma_app/401069";
@@ -135,7 +135,7 @@ function j(e) {
         let t = M.find(t => w(t) === e);
         void 0 !== t && onChangeAreaType(t);
       },
-      recordingKey: Pt(recordingKey, "exportAreaTypeSelect"),
+      recordingKey: generateRecordingKey(recordingKey, "exportAreaTypeSelect"),
       children: [jsx(DZ, {
         id: l
       }), jsx(mc, {
@@ -176,7 +176,7 @@ function z(e) {
         let t = G.find(t => x(t) === e);
         void 0 !== t && onChangeBackgroundType(t);
       },
-      recordingKey: Pt(recordingKey, "backgroundTypeSelect"),
+      recordingKey: generateRecordingKey(recordingKey, "backgroundTypeSelect"),
       children: [jsx(DZ, {
         id: u
       }), jsx(mc, {
@@ -244,7 +244,7 @@ function W(e) {
         let t = T().find(t => S(t) === e);
         void 0 !== t && onChangeContentType(t);
       },
-      recordingKey: Pt(recordingKey, "contentTypeSelect"),
+      recordingKey: generateRecordingKey(recordingKey, "contentTypeSelect"),
       children: [jsx(DZ, {
         id: l
       }), jsx(mc, {
@@ -279,7 +279,7 @@ function $(e) {
       }),
       value: s,
       onChange: e => onChangeFileType(I[e]),
-      recordingKey: Pt(recordingKey, "exportFileTypeRadioGroup"),
+      recordingKey: generateRecordingKey(recordingKey, "exportFileTypeRadioGroup"),
       children: (BrowserInfo.isIpadNative ? [FileFormat.PNG, FileFormat.JPEG, FileFormat.PDF] : [FileFormat.PNG, FileFormat.JPEG, FileFormat.PDF, FileFormat.CSV]).map(e => {
         let t = E(e);
         let i = disabledFileTypes.includes(e) ? {
@@ -329,7 +329,7 @@ function X(e) {
         let i = ZF.find(t => SD.format(t) === e);
         void 0 !== i && o(i, fileType);
       },
-      recordingKey: Pt(recordingKey, "qualitySelect"),
+      recordingKey: generateRecordingKey(recordingKey, "qualitySelect"),
       children: [jsx(DZ, {
         id: d
       }), jsx(mc, {
@@ -364,7 +364,7 @@ let J = memo(function (e) {
   let F = useSelector(e => !!e.mirror.selectionProperties.numSelected);
   let [M, U] = useState(F ? "selection" : "file");
   let [B, V] = useState(!1);
-  let G = of(Q, "submit", () => {
+  let G = useHandleFocusEvent(Q, "submit", () => {
     V(!0);
     b(_$$n.set({
       message: getI18nString("whiteboard.figjam_export.exporting"),

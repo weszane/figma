@@ -5,7 +5,7 @@ import { ScrollBehavior } from "../figma_app/763686";
 import { F0, rV, PA, nO } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { Fj, GY } from "../figma_app/76123";
 import { cX, YI, K3 } from "../figma_app/678300";
 import { n as _$$n } from "../figma_app/583890";
@@ -81,7 +81,7 @@ export function $$I0(e, t, r, n, i, a = !1) {
   return s;
 }
 let $$S14 = 16;
-let v = xx((e, t) => {
+let v = memoizeByArgs((e, t) => {
   let r = 1 / 0;
   YI(e, t, t => {
     t && (r = Math.min(r, F0(e, t.guid)));
@@ -89,15 +89,15 @@ let v = xx((e, t) => {
   r === 1 / 0 && (r = 0);
   return r;
 });
-let A = xx((e, t, r) => null !== t && null === t.guid && t.children.length > 0 && !t.children.some(t => rV(e, t, r)));
-let x = xx((e, t) => {
+let A = memoizeByArgs((e, t, r) => null !== t && null === t.guid && t.children.length > 0 && !t.children.some(t => rV(e, t, r)));
+let x = memoizeByArgs((e, t) => {
   let r = new Set();
   YI(e, t, e => {
     e && r.add(e.type);
   });
   return r;
 });
-let N = xx((e, t) => {
+let N = memoizeByArgs((e, t) => {
   if (!t) return {};
   let r = {};
   t.children.forEach(t => {
@@ -105,7 +105,7 @@ let N = xx((e, t) => {
   });
   return r;
 });
-let C = xx((e, t, r) => {
+let C = memoizeByArgs((e, t, r) => {
   let n = e.get(r);
   if (!n) return null;
   for (; n;) {

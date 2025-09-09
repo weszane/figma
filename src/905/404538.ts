@@ -1,4 +1,4 @@
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { createRemovableAtomFamily, atom, atomStoreManager } from "../figma_app/27355";

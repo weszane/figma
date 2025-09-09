@@ -6,7 +6,7 @@ import { Ay } from "../figma_app/272902";
 import l from "classnames";
 import { e as _$$e } from "../905/280005";
 import { oJ } from "../905/63728";
-import { o6, cZ, aH } from "../figma_app/806412";
+import { RecordingPureComponent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { B } from "../905/714743";
 import { S } from "../905/339549";
@@ -208,14 +208,14 @@ export let $$N4 = forwardRef(function ({
     ...t
   });
 });
-export class $$C11 extends o6 {
+export class $$C11 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.stopPropagationForPointerDown = e => {
       ft() && dG(e);
     };
-    this.onClick = cZ(this, "click", e => {
-      if (!this.props.onClick) return aH;
+    this.onClick = handleMouseEvent(this, "click", e => {
+      if (!this.props.onClick) return SKIP_RECORDING;
       this.props.onClick(e);
     });
   }
@@ -251,7 +251,7 @@ export class $$C11 extends o6 {
   }
 }
 $$C11.displayName = "Dropdown";
-export class $$w7 extends o6 {
+export class $$w7 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.mouseOverTimestamp = 0;
@@ -276,7 +276,7 @@ export class $$w7 extends o6 {
       });
       this.props.onHover && this.props.onHover(!1);
     };
-    this.onPointerUp = cZ(this, "mouseup", e => {
+    this.onPointerUp = handleMouseEvent(this, "mouseup", e => {
       if (!this.props.href) {
         if (this.props.onPointerUp) {
           this.props.onPointerUp(e);
@@ -295,7 +295,7 @@ export class $$w7 extends o6 {
         document.elementFromPoint(r.clientX, r.clientY) === t && t.click();
       }
     };
-    this.onClick = cZ(this, "click", e => {
+    this.onClick = handleMouseEvent(this, "click", e => {
       this.props.href && oJ(e) || (this.props.href ? _$$e(this.props.href, e) : clearTimeout(this.mouseUpTimer), this.props.onClick?.(e));
     });
     this.ariaRole = () => this.props.header ? "presentation" : "role" in this.props ? this.props.role ?? "menuitem" : "menuitem";
@@ -382,7 +382,7 @@ class L extends PureComponent {
 }
 L.displayName = "IndentedSeparator";
 export var $$P0 = (e => (e.Checkmark = "Checkmark", e.Checkbox = "Checkbox", e))($$P0 || {});
-export class $$D1 extends o6 {
+export class $$D1 extends RecordingPureComponent {
   render() {
     return jsxs($$w7, {
       ...this.props,
@@ -413,7 +413,7 @@ $$D1.displayName = "CheckableOption";
 $$D1.defaultProps = {
   displayType: "Checkmark"
 };
-export class $$k15 extends o6 {
+export class $$k15 extends RecordingPureComponent {
   render() {
     return jsxs($$D1, {
       ...this.props,
@@ -428,7 +428,7 @@ export class $$k15 extends o6 {
 }
 let $$M12 = tf($$D1);
 let $$F13 = tf($$k15);
-export class $$j9 extends o6 {
+export class $$j9 extends RecordingPureComponent {
   render() {
     return jsxs(Fragment, {
       children: [jsx($$C11, {
@@ -447,7 +447,7 @@ export class $$j9 extends o6 {
 }
 $$j9.displayName = "DropdownWithScrim";
 let U = e => !!e.closeDropdown;
-export class $$B6 extends o6 {
+export class $$B6 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.mouseMotionSinceMouseDown = 0;
@@ -455,21 +455,21 @@ export class $$B6 extends o6 {
     this.closeDropdown = () => {
       U(this.props) ? this.props.closeDropdown() : this.props.dispatch(oB());
     };
-    this.onMouseDown = cZ(this, "mousedown", e => {
+    this.onMouseDown = handleMouseEvent(this, "mousedown", e => {
       this.mouseMotionSinceMouseDown = 0;
       this.closeDropdown();
       e.stopPropagation();
     });
-    this.onMouseMove = cZ(this, "mousemove", e => {
+    this.onMouseMove = handleMouseEvent(this, "mousemove", e => {
       if (isInteractionOrEvalMode()) {
-        if (!(this.mouseMotionSinceMouseDown < this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY)) return aH;
+        if (!(this.mouseMotionSinceMouseDown < this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY)) return SKIP_RECORDING;
         this.mouseMotionSinceMouseDown += this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY;
       } else {
         this.mouseMotionSinceMouseDown += Math.abs(e.nativeEvent.movementX);
         this.mouseMotionSinceMouseDown += Math.abs(e.nativeEvent.movementY);
       }
     });
-    this.onMouseUp = cZ(this, "mouseup", e => {
+    this.onMouseUp = handleMouseEvent(this, "mouseup", e => {
       this.mouseMotionSinceMouseDown >= this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY && (this.closeDropdown(), e.stopPropagation());
     });
   }

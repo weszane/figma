@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Multiplayer } from "../figma_app/763686";
 import { atom, atomStoreManager, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { R9 } from "../905/977824";
 import { KP, Ww } from "../figma_app/440875";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Wh } from "../figma_app/615482";
 import { H, q } from "../905/457575";
 import { jx, Ic } from "../figma_app/198516";
@@ -43,7 +43,7 @@ export function $$y6(e) {
   let r = R9.useInfoBySessionId({
     updateSynchronously: !1
   });
-  let n = iZ();
+  let n = selectCurrentUser();
   let a = useSelector(({
     multiplayer: {
       allUsers: e
@@ -67,7 +67,7 @@ export function $$T0(e) {
   let c = R9.useInfoBySessionId({
     updateSynchronously: !1
   });
-  let u = iZ();
+  let u = selectCurrentUser();
   let p = useSelector(({
     multiplayer: {
       allUsers: e

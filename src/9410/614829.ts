@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { E as _$$E } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { l7 } from "../figma_app/88239";
 import { jo } from "../figma_app/753501";
@@ -56,7 +56,7 @@ export function $$v0({
         htmlAttributes: {
           onContextMenu: P
         },
-        recordingKey: Pt(j, "collapsedRow"),
+        recordingKey: generateRecordingKey(j, "collapsedRow"),
         children: [jsx("span", {
           className: l()(II, {
             [dK]: L
@@ -83,7 +83,7 @@ export function $$v0({
       children: jsxs(_$$E, {
         onClick: T,
         className: Rm,
-        recordingKey: Pt(j, "collapsedRow"),
+        recordingKey: generateRecordingKey(j, "collapsedRow"),
         children: [jsx(_$$g, {
           isExpanded: t
         }), jsx("span", {
@@ -96,7 +96,7 @@ export function $$v0({
         recordingKey: j
       }) : jsx(_$$i, {
         onClick: E,
-        recordingKey: Pt(j, "newPage"),
+        recordingKey: generateRecordingKey(j, "newPage"),
         tooltipText: k
       })
     })]

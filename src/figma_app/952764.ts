@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
-import { sD } from "../figma_app/243058";
+import { useDispatch, useSelector } from "react-redux";
+import { VariableIdHandler } from "../figma_app/243058";
 import { VariableDataType, VariablesBindings, VariableResolvedDataType, AppStateTsApi, LayoutTabType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -12,7 +12,7 @@ import { Tm, bn } from "../figma_app/385874";
 import { lJ } from "../905/275640";
 import { bL } from "../figma_app/852050";
 import { eY } from "../figma_app/722362";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { AH } from "../905/571648";
 import { WH } from "../figma_app/836943";
 import { E_ } from "../figma_app/177697";
@@ -26,7 +26,7 @@ export function $$S1(e) {
     blendMode: "NORMAL",
     colorVar: {
       value: {
-        alias: sD.toKiwi(e)
+        alias: VariableIdHandler.toKiwi(e)
       },
       dataType: "ALIAS",
       resolvedDataType: "COLOR"
@@ -85,10 +85,10 @@ export function $$w5(e) {
   let r = useAtomWithSubscription(E_);
   return useCallback(async n => {
     let i = await t(Oe(n));
-    let l = sD.fromString(i);
+    let l = VariableIdHandler.fromString(i);
     l && (r ? permissionScopeHandler.user("slides-edit-theme-color", () => {
       AppStateTsApi?.slideThemeLibBindings().setThemeColorVariableFromSubscribedVariableColorValue(r?.varId || "", r?.modeId || "", i);
-    }) : e($$S1(l), zk.YES));
+    }) : e($$S1(l), yesNoTrackingEnum.YES));
   }, [t, r, e]);
 }
 export function $$O3(e, t, r) {

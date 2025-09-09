@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { ZC } from "../figma_app/39751";
 import { jy } from "../905/116101";

@@ -1,22 +1,22 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, Fragment as _$$Fragment, useRef, useState, useContext } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
-import { WI } from "../905/929949";
+import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
 import { L as _$$L } from "../905/210923";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
 import { RU, EU } from "../figma_app/740163";
 import { Kd, BQ, u as _$$u, t8 } from "../figma_app/852050";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { gq, Pd } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
@@ -61,7 +61,7 @@ export function $$G1(e) {
       easing: "linear"
     });
   }, [e.containerRef]));
-  let c = (getFeatureFlags().prototype_variable_debug_view ? d : void 0) ?? a ?? l ?? WI(e.variable.resolvedType);
+  let c = (getFeatureFlags().prototype_variable_debug_view ? d : void 0) ?? a ?? l ?? resolveVariableValue(e.variable.resolvedType);
   return c ? jsx(nE, {
     variableSetId: e.variableSetId,
     variableID: e.variable.node_id,
@@ -89,8 +89,8 @@ export function $$z2(e) {
     type: VariableDataType.STRING,
     resolvedType: VariableResolvedDataType.STRING,
     value: t
-  }, zk.YES), !0);
-  let [_, y] = _$$L(e.variableValue, (t, i = zk.NO) => {
+  }, yesNoTrackingEnum.YES), !0);
+  let [_, y] = _$$L(e.variableValue, (t, i = yesNoTrackingEnum.NO) => {
     e.onChange(t, i);
   });
   let v = e.isInaccessible ? getI18nString("variables.authoring_modal.table.inaccessible_variable_tooltip") : void 0;
@@ -104,7 +104,7 @@ export function $$z2(e) {
         }),
         children: jsx(sJ, {
           noBorder: !0,
-          recordingKey: Pt(e.recordingKey, "stringVariableInputControl"),
+          recordingKey: generateRecordingKey(e.recordingKey, "stringVariableInputControl"),
           iconLayout: i === $.CELL ? "flex" : "absolute",
           handleClearOverride: e.isOverridden ? e.clearVariableOverride : void 0,
           children: jsx(w, {
@@ -116,7 +116,7 @@ export function $$z2(e) {
               onSubmit: m,
               onFinish: lQ,
               originalValue: _.value,
-              recordingKey: Pt(e.recordingKey, "textInput"),
+              recordingKey: generateRecordingKey(e.recordingKey, "textInput"),
               type: $.CELL
             })
           })
@@ -130,7 +130,7 @@ export function $$z2(e) {
         }, e.innerContainerClassName),
         children: jsx(sJ, {
           noBorder: !0,
-          recordingKey: Pt(e.recordingKey, "booleanVariableInputControl"),
+          recordingKey: generateRecordingKey(e.recordingKey, "booleanVariableInputControl"),
           iconLayout: i === $.CELL ? "flex" : "absolute",
           handleClearOverride: e.isOverridden ? e.clearVariableOverride : void 0,
           children: jsx(w, {
@@ -138,7 +138,7 @@ export function $$z2(e) {
               disabled: e.isInaccessible,
               checked: _.value,
               id: $$V0,
-              recordingKey: Pt(e.recordingKey, "toggleInput"),
+              recordingKey: generateRecordingKey(e.recordingKey, "toggleInput"),
               label: jsx(Label, {
                 children: Oi(_)
               }),
@@ -147,7 +147,7 @@ export function $$z2(e) {
                   type: VariableDataType.BOOLEAN,
                   resolvedType: VariableResolvedDataType.BOOLEAN,
                   value: t
-                }, zk.YES);
+                }, yesNoTrackingEnum.YES);
               }
             })
           })
@@ -160,7 +160,7 @@ export function $$z2(e) {
             bigNudgeAmount: u,
             "data-tooltip": v ?? "",
             "data-tooltip-type": Ib.TEXT,
-            dataTestId: Pt(e.recordingKey, "numberInput"),
+            dataTestId: generateRecordingKey(e.recordingKey, "numberInput"),
             disabled: e.isInaccessible,
             dispatch: t,
             id: $$V0,
@@ -174,9 +174,9 @@ export function $$z2(e) {
                 type: VariableDataType.FLOAT,
                 resolvedType: VariableResolvedDataType.FLOAT,
                 value: e
-              }, t ?? zk.NO);
+              }, t ?? yesNoTrackingEnum.NO);
             },
-            recordingKey: Pt(e.recordingKey, "numberInput"),
+            recordingKey: generateRecordingKey(e.recordingKey, "numberInput"),
             scrubbingDisabled: !0,
             smallNudgeAmount: p,
             value: _.value
@@ -196,12 +196,12 @@ export function $$z2(e) {
             noBorder: !0,
             handleClearOverride: e.isOverridden ? e.clearVariableOverride : void 0,
             onPickerOpen: e.onPickerOpen,
-            recordingKey: Pt(e.recordingKey, "numberInput"),
+            recordingKey: generateRecordingKey(e.recordingKey, "numberInput"),
             children: r
           }) : jsx(sJ, {
             disabled: e.isInaccessible,
             inputClassName: e.inputClassName,
-            recordingKey: Pt(e.recordingKey, "numberInput"),
+            recordingKey: generateRecordingKey(e.recordingKey, "numberInput"),
             noBorder: !0,
             iconLayout: i === $.CELL ? "flex" : "absolute",
             handleClearOverride: e.isOverridden ? e.clearVariableOverride : void 0,
@@ -216,7 +216,7 @@ export function $$z2(e) {
           innerContainerClassName: e.innerContainerClassName,
           contextType: i,
           variableValue: _,
-          recordingKey: Pt(e.recordingKey, "colorInput"),
+          recordingKey: generateRecordingKey(e.recordingKey, "colorInput"),
           onVariableValueChange: y,
           setVariableAction: e.setVariableAction,
           tooltip: v
@@ -269,7 +269,7 @@ function H({
     e && i({
       ...t,
       value: e
-    }, n ?? zk.NO);
+    }, n ?? yesNoTrackingEnum.NO);
   };
   return jsxs("div", {
     className: h()({
@@ -291,17 +291,17 @@ function H({
         },
         className: "variables_modal_value_input--colorChit--yRVZo",
         color: t.value,
-        recordingKey: Pt(d, "openColorPicker")
+        recordingKey: generateRecordingKey(d, "openColorPicker")
       })
     }), jsx(AN, {
       className: "variables_modal_value_input--colorInput--l-7v7",
       disabled: o,
       formatter: TI,
       property: t.value,
-      onChange: e => S(e, zk.YES),
+      onChange: e => S(e, yesNoTrackingEnum.YES),
       noBorderOnFocus: !0,
-      dataTestId: Pt(d, "textInput"),
-      recordingKey: Pt(d, "textInput")
+      dataTestId: generateRecordingKey(d, "textInput"),
+      recordingKey: generateRecordingKey(d, "textInput")
     }), e === $.CELL ? t.value.a < 1 && jsx(Pd, {
       disabled: o,
       className: U,
@@ -316,7 +316,7 @@ function H({
       noLeftBorder: !0,
       noBorderOnFocus: !0,
       dispatch: u,
-      recordingKey: Pt(d, "opacityInput")
+      recordingKey: generateRecordingKey(d, "opacityInput")
     }) : jsx(Pd, {
       disabled: o,
       className: U,
@@ -331,7 +331,7 @@ function H({
       noLeftBorder: !0,
       noBorderOnFocus: !0,
       dispatch: u,
-      recordingKey: Pt(d, "opacityInput")
+      recordingKey: generateRecordingKey(d, "opacityInput")
     }), function () {
       if (!g || !s || o) return null;
       let e = t.value;
@@ -346,7 +346,7 @@ function H({
         onChange: (e, n) => i({
           ...t,
           value: e
-        }, n ?? zk.NO),
+        }, n ?? yesNoTrackingEnum.NO),
         onClose: () => A(!1)
       });
     }()]
@@ -370,7 +370,7 @@ function W(e) {
       onClick: () => {
         !e.isInaccessible && i && i.showBindingUI(t.current);
       },
-      recordingKey: Pt(e.recordingKey, "alias"),
+      recordingKey: generateRecordingKey(e.recordingKey, "alias"),
       thumbnailValue: s,
       tooltipOverride: e.isInaccessible ? getI18nString("variables.authoring_modal.table.inaccessible_variable_tooltip") : void 0,
       value: a?.name ?? getI18nString("variables.missing_name"),

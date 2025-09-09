@@ -1,7 +1,7 @@
 import { useContext, useState, useCallback } from "react";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { zN } from "../905/19536";
+import { useStableMemo } from "../905/19536";
 import { useLocalStorageSync } from "../905/657224";
 import { PW } from "../figma_app/633080";
 import { A as _$$A } from "../905/749030";
@@ -34,7 +34,7 @@ export function $$u0({
     resolvedType: t,
     lastSelection: h
   }));
-  let A = zN(f);
+  let A = useStableMemo(f);
   let y = useCallback(() => {
     let e = "grid" === A.layout ? "list" : "grid";
     m(e);

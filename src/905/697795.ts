@@ -1,9 +1,9 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { ce } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay, s0 } from "../905/612521";
+import { customHistory, hasViewProperty } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
@@ -26,7 +26,7 @@ import { f as _$$f } from "../figma_app/252485";
 import { yt } from "../905/766303";
 import { GT } from "../figma_app/840917";
 import { AE, Nn } from "../905/225144";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { Iu, vU } from "../figma_app/193867";
 let n;
 export function $$D3() {
@@ -105,23 +105,23 @@ export function $$M2(e, t) {
   }
   $$F6(i, XE(t));
 }
-export let $$j1 = createOptimistThunk(e => Ay.listen(t => {
+export let $$j1 = createOptimistThunk(e => customHistory.listen(t => {
   "POP" === t && function (t) {
     if (t) {
       let i = e.getState();
       let n = i.selectedView;
-      if (!s0(t)) return;
+      if (!hasViewProperty(t)) return;
       let {
         jsCommitHash,
         searchSessionId,
         ...s
       } = t;
       if (void 0 !== jsCommitHash && jsCommitHash !== $$D3()) {
-        Ay.reload("Navigating to a state that was pushed by an older version of this application");
+        customHistory.reload("Navigating to a state that was pushed by an older version of this application");
         return;
       }
       if ("fullscreen" === n.view && !fullscreenValue.isReady()) {
-        Ay.reload("User navigated before fullscreen fully initialized");
+        customHistory.reload("User navigated before fullscreen fully initialized");
         return;
       }
       if ("fullscreen" === s.view && !s.fileKey) {
@@ -145,10 +145,10 @@ export let $$j1 = createOptimistThunk(e => Ay.listen(t => {
         $$M2(i, s);
       }
     }
-  }(Ay.location.state);
-  s0(Ay.location.state) || function () {
+  }(customHistory.location.state);
+  hasViewProperty(customHistory.location.state) || function () {
     let t = e.getState();
-    let i = vU(t, Ay.location.pathname, Ay.location.search, Ay.location.hash, null);
+    let i = vU(t, customHistory.location.pathname, customHistory.location.search, customHistory.location.hash, null);
     null !== i && e.dispatch(sf({
       ...i,
       fromPopstate: !0
@@ -181,7 +181,7 @@ export function $$B8(e, t, i, n) {
   n(UN({
     fileKey: t
   }));
-  Ay.redirect(e, "_blank");
+  customHistory.redirect(e, "_blank");
 }
 export function $$V0(e, t, i, n) {
   trackEventAnalytics("Open Prototype in New Tab Click", {
@@ -189,7 +189,7 @@ export function $$V0(e, t, i, n) {
     pageId: i,
     uiSelectedView: JSON.stringify(n)
   });
-  Ay.redirect(e, "_blank");
+  customHistory.redirect(e, "_blank");
 }
 export function $$G5(e, t) {
   t(V3({
@@ -197,7 +197,7 @@ export function $$G5(e, t) {
   }));
 }
 export function $$z7(e, t) {
-  let i = TA();
+  let i = getUserId();
   let n = e || t;
   let s = useSelector(e => getFeatureFlags().limited_plan_spaces ? e.plans : i ? e.authedUsers.byId[i]?.plans : null);
   return !!s?.find(e => e.plan_id === n);

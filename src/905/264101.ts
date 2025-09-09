@@ -1,4 +1,4 @@
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { XHR } from "../905/910117";
 import { cT } from "../905/997533";
@@ -87,7 +87,7 @@ let $$b10 = createOptimistThunk((e, t) => {
   }) => {
     if (o) {
       let i = getInitialOptions().redirect_url;
-      i ? Ay.redirect(i) : e.dispatch(cT({
+      i ? customHistory.redirect(i) : e.dispatch(cT({
         data: {
           meta: {
             id: t.meta.id,
@@ -196,7 +196,7 @@ let $$w12 = createOptimistThunk((e, t) => {
   }) => {
     if (d) {
       let i = getInitialOptions().redirect_url;
-      i ? Ay.redirect(i) : e.dispatch(cT({
+      i ? customHistory.redirect(i) : e.dispatch(cT({
         data: {
           meta: {
             id: t.meta.id,

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, PureComponent, Fragment as _$$Fragment, useCallback, useMemo, Suspense } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { K as _$$K } from "../905/807535";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
@@ -28,7 +28,7 @@ import { e as _$$e2 } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { r1 } from "../figma_app/545877";
 import { FPlanNameType, FUserRoleType, FOrganizationLevelType, FAccessLevelType, FPublicationStatusType } from "../figma_app/191312";
-import { Iwl, gLw, QZ8, M9I, QS3 } from "../figma_app/43951";
+import { EnterpriseOrgAdminOnboardingSequenceView, WorkspacesTableView, ExtensionRequestTableView, AllowlistPluginsSectionView, OrgTeamsIdAndName } from "../figma_app/43951";
 import { No, H3, X$, px, j_ } from "../figma_app/465071";
 import { U as _$$U } from "../905/455766";
 import { rq } from "../905/425180";
@@ -68,7 +68,7 @@ import { N_, Ye, Oq } from "../905/332483";
 import { Um } from "../905/848862";
 import { dq, sZ } from "../905/845253";
 import { FC } from "../figma_app/212807";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { NJ } from "../figma_app/518077";
 import { g as _$$g3 } from "../905/817247";
 import { MX, NV, EQ, cZ, EO } from "../figma_app/684446";
@@ -102,8 +102,8 @@ import { $$, ks, nR as _$$nR, CY, TA, vd, Ph, tM as _$$tM, qM } from "../figma_a
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { J as _$$J } from "../905/231762";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { q as _$$q } from "../905/749058";
 import { b as _$$b2 } from "../905/985254";
 import { E as _$$E2 } from "../905/453826";
@@ -301,7 +301,7 @@ function W() {
   let a = e?.tier === FPlanNameType.ENTERPRISE;
   let n = T();
   let i = useAtomWithSubscription(z);
-  let r = Rs(Iwl, {
+  let r = Rs(EnterpriseOrgAdminOnboardingSequenceView, {
     orgId: t || null
   }, {
     enabled: a
@@ -1339,10 +1339,10 @@ class tZ extends PureComponent {
         errorMessage: ""
       }
     }));
-    this.props.dispatch(_$$F.enqueue({
+    this.props.dispatch(VisualBellActions.enqueue({
       message: getI18nString("activity_log.table.preparing_request_for_csv"),
       type: "orgRoster.exportCSV",
-      icon: zX.SPINNER
+      icon: VisualBellIcon.SPINNER
     }));
     let t = this.displayedFilterParams();
     XHR.post("/api/activity_logs/export", {
@@ -1352,16 +1352,16 @@ class tZ extends PureComponent {
       end_time: _$$H(t.date.end),
       event_names: t.eventName?.join(",")
     }).then(() => {
-      this.props.dispatch(_$$F.enqueue({
+      this.props.dispatch(VisualBellActions.enqueue({
         message: getI18nString("activity_log.table.activity_log.table.csv_requested_success"),
         type: "orgRoster.exportCSV",
-        icon: zX.CHECK
+        icon: VisualBellIcon.CHECK
       }));
     }, e => {
-      this.props.dispatch(_$$F.enqueue({
+      this.props.dispatch(VisualBellActions.enqueue({
         message: _$$J(e, e.data?.message) || getI18nString("activity_log.table.csv_requested_error"),
         type: "orgRoster.exportCSV",
-        icon: zX.EXCLAMATION,
+        icon: VisualBellIcon.EXCLAMATION,
         error: !0
       }));
     }).then(() => {
@@ -1829,7 +1829,7 @@ let aw = registerModal(function (e) {
           }).then(({
             data: n
           }) => {
-            t(_$$F.enqueue({
+            t(VisualBellActions.enqueue({
               type: "license-group-delete",
               message: getI18nString("billing_groups_table.billing_groups_deleted_toast", {
                 licenseGroupsCount: e.licenseGroups.length,
@@ -1842,7 +1842,7 @@ let aw = registerModal(function (e) {
               deletingAll: a.length === e.licenseGroups.length
             }));
           }).catch(e => {
-            t(_$$F.enqueue({
+            t(VisualBellActions.enqueue({
               error: !0,
               message: e.message ?? getI18nString("billing_groups_table.delete_modal.an_error_occurred_while_deleting_billing_groups")
             }));
@@ -2062,7 +2062,7 @@ let aS = registerModal(function (e) {
         data: e
       }) => {
         let a = !u && 0 === d.length;
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           type: "license-group-edit",
           message: u ? getI18nString("billing_groups_table.billing_group_edited_toast", {
             workspaceName: x
@@ -2081,7 +2081,7 @@ let aS = registerModal(function (e) {
         }), _(!0));
       };
       let n = e => {
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           error: !0,
           message: e.message
         }));
@@ -2952,7 +2952,7 @@ let nk = registerModal(function (e) {
     }).then(({
       data: e
     }) => {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         type: "workspace-edit",
         message: p ? getI18nString("workspace_table.workspace_edited_toast", {
           workspaceName: v
@@ -2967,7 +2967,7 @@ let nk = registerModal(function (e) {
         orgId: o
       });
     }).catch(e => {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         error: !0,
         message: e.message
       }));
@@ -3169,7 +3169,7 @@ let nL = registerModal(function (e) {
               orgId: a,
               workspaceIds: l
             }).then(() => {
-              t(_$$F.enqueue({
+              t(VisualBellActions.enqueue({
                 type: "workspace-delete",
                 message: getI18nString("workspace_table.workspaces_deleted_toast", {
                   licenseGroupsCount: e.workspaces.length,
@@ -3179,7 +3179,7 @@ let nL = registerModal(function (e) {
               n();
               t(hideModal());
             }).catch(e => {
-              t(_$$F.enqueue({
+              t(VisualBellActions.enqueue({
                 error: !0,
                 message: e.message ?? getI18nString("workspace_table.an_error_occurred_while_deleting_workspaces")
               }));
@@ -3489,7 +3489,7 @@ let nG = new Ef([], {
 function nz(e) {
   let t = useDispatch();
   let [a, n] = useState("");
-  let l = Rs(gLw, {
+  let l = Rs(WorkspacesTableView, {
     orgId: e.org.id
   });
   let o = "loaded" !== l.status;
@@ -4730,7 +4730,7 @@ function sA(e) {
     name: e => e[1].name ?? "",
     last_requested: e => e[1].lastRequestedDates[0].getTime()
   }), []);
-  let c = Rs(QZ8, {
+  let c = Rs(ExtensionRequestTableView, {
     orgId
   });
   if ("loading" === c.status) return null;
@@ -4796,7 +4796,7 @@ function sR({
   let o = No().unwrapOr(null);
   let c = o?.tier === FPlanNameType.ENTERPRISE;
   let _ = o?.key.type === FOrganizationLevelType.ORG;
-  let m = Rs(M9I, {
+  let m = Rs(AllowlistPluginsSectionView, {
     orgId: e
   });
   let [p] = IT(sD(e), {
@@ -5008,7 +5008,7 @@ function sB(e) {
   let C = useSelector(({
     activityLogs: e
   }) => e);
-  let S = iZ();
+  let S = selectCurrentUser();
   let N = useSelector(({
     teamRoleRequests: e
   }) => e);
@@ -5126,7 +5126,7 @@ function sB(e) {
       title: _$$O(e.selectedTab, e.selectedSecondaryTab)
     }), jsx(qc, {})]
   });
-  let eJ = Rs(QS3({
+  let eJ = Rs(OrgTeamsIdAndName({
     orgId: n.id
   }), {
     enabled: e.selectedTab === J7.ACTIVITY

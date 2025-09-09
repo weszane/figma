@@ -1,15 +1,15 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { c2 } from "../905/382883";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import d from "../vendor/181640";
 import u from "../vendor/104014";
 import _ from "lodash-es/mapValues";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { hC } from "../figma_app/901889";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -158,7 +158,7 @@ export function $$G0(e) {
         recordingKey: "mode-learn-more",
         displayText: getI18nString("variables.modes.option.learn_more"),
         callback: () => {
-          Ay.unsafeRedirect(Yc, "_blank");
+          customHistory.unsafeRedirect(Yc, "_blank");
         },
         iconType: "info"
       }])];
@@ -206,13 +206,13 @@ export function $$G0(e) {
     return useMemo(() => {
       let e = [];
       for (let [t, n] of (Object.values(O).length > 0 && e.push({
-        recordingKey: Pt(r, "local"),
+        recordingKey: generateRecordingKey(r, "local"),
         displayText: getI18nString("variables.mode_properties_panel.assets_created_in_file.subheading"),
         header: !0
       }), Object.entries(O))) {
         let i = getFeatureFlags().ds_new_mode_dropdown_data ? V(t, n.modeOptions, n.explicitMode, n.inheritMode, o, g, d, T, W) : N(t, n.modeOptions, n.explicitMode, n.inheritMode);
         e.push({
-          recordingKey: Pt(r, t),
+          recordingKey: generateRecordingKey(r, t),
           displayText: n.collectionName,
           children: i
         });
@@ -226,11 +226,11 @@ export function $$G0(e) {
         });
         let i = G.data?.[t] ?? getI18nString("variables.mode_properties_panel.used_variables.subheading");
         for (let [t, a] of (e.push({
-          recordingKey: Pt(r, "fileName-" + i),
+          recordingKey: generateRecordingKey(r, "fileName-" + i),
           displayText: i,
           header: !0
         }), Object.entries(n).sort(([e, t], [r, n]) => t.collectionName.localeCompare(n.collectionName)))) e.push({
-          recordingKey: Pt(r, t),
+          recordingKey: generateRecordingKey(r, t),
           displayText: a.collectionName,
           children: getFeatureFlags().ds_new_mode_dropdown_data ? V(t, a.modeOptions, a.explicitMode, a.inheritMode, o, g, d, T, W, M[t]) : N(t, a.modeOptions, a.explicitMode, a.inheritMode, M)
         });
@@ -328,7 +328,7 @@ function V(e, t, r, i, a, s, o, l, d, c) {
           initialTab: Wv.UPDATES,
           entrypoint: r6.VARIABLE_APPLY_MODE_DROPDOWN_INCOMPATIBLE_LINK
         }
-      })) : Ay.unsafeRedirect(Yc, "_blank");
+      })) : customHistory.unsafeRedirect(Yc, "_blank");
     },
     iconType: "info"
   }));

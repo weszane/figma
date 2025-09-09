@@ -3,7 +3,7 @@ import { IntegrationUtils } from "../figma_app/469876";
 import { Hm } from "../figma_app/658673";
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { LR } from "../figma_app/120210";
 import { Ib } from "../905/129884";

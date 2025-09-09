@@ -64,7 +64,7 @@ import { i6 as _$$i2, Ie } from '../905/291654';
 import { createSavepoint } from '../905/294113';
 import { w as _$$w } from '../905/294864';
 import { _N, Vg } from '../905/300621';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText, getI18nStringAlias } from '../905/303541';
 import { R as _$$R3 } from '../905/307199';
 import { b as _$$b3, c as _$$c4 } from '../905/308099';
@@ -94,7 +94,7 @@ import { Q as _$$Q } from '../905/463586';
 import { Sh } from '../905/470286';
 import { MZ } from '../905/470594';
 import { createPluginInstance } from '../905/472793';
-import { A as _$$A } from '../905/482208';
+import { formatI18nMessage } from '../905/482208';
 import { Vy, zT } from '../905/484695';
 import { S3 } from '../905/485103';
 import { as as _$$as, Dl } from '../905/487011';
@@ -118,7 +118,7 @@ import { r6 as _$$r } from '../905/542608';
 import { fJ, x5 } from '../905/543054';
 import { xK } from '../905/543466';
 import { g as _$$g5 } from '../905/544669';
-import { P as _$$P3 } from '../905/545265';
+import { PluginApiMetrics } from '../905/545265';
 import { y8 as _$$y6 } from '../905/551193';
 import { subscribeAndAwaitData } from '../905/553831';
 import { $e } from '../905/554703';
@@ -126,10 +126,10 @@ import { requestDeferredExecution } from '../905/561433';
 import { oz as _$$oz } from '../905/561485';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { j as _$$j } from '../905/564614';
-import { pN as _$$pN } from '../905/571565';
+import { dequeuePluginStatus } from '../905/571565';
 import { s as _$$s } from '../905/573154';
 import { m as _$$m } from '../905/575846';
-import { zX } from '../905/576487';
+import { VisualBellIcon } from '../905/576487';
 import { l as _$$l2, q as _$$q } from '../905/578831';
 import { f as _$$f } from '../905/580661';
 import { Io } from '../905/581543';
@@ -140,7 +140,7 @@ import { getFeatureFlags } from '../905/601108';
 import { observabilityClient } from '../905/602906';
 import { a as _$$a3 } from '../905/608122';
 import { Timer } from '../905/609396';
-import { Ay as _$$Ay2, Cs } from '../905/612521';
+import { customHistory, isMainAppRoute } from '../905/612521';
 import { jN } from '../905/612685';
 import { qm } from '../905/617744';
 import { o8 as _$$o3, Fr } from '../905/622391';
@@ -206,7 +206,7 @@ import { $A, ds as _$$ds, vt } from '../905/862883';
 import { parseSessionLocalID, defaultSessionLocalIDString } from '../905/871411';
 import { B as _$$B5 } from '../905/872019';
 import { Bn } from '../905/879323';
-import { g as _$$g } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { Db } from '../905/881862';
 import { g5, Iz, uM, wv } from '../905/888175';
 import { bS, bX, fs, pi, vU } from '../905/889931';
@@ -247,7 +247,7 @@ import { bJ as _$$bJ } from '../figma_app/16595';
 import { sO as _$$sO } from '../figma_app/21029';
 import { useAtomWithSubscription, atomStoreManager } from '../figma_app/27355';
 import { WY } from '../figma_app/31188';
-import { iAs } from '../figma_app/43951';
+import { LibraryKeyToFileLink } from '../figma_app/43951';
 import { FEditorType, mapYFToEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { sF as _$$sF, zJ } from '../figma_app/59657';
 import { J as _$$J2 } from '../figma_app/61771';
@@ -283,7 +283,7 @@ import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 import { tK as _$$tK } from '../figma_app/191804';
 import { LC } from '../figma_app/192142';
 import { zg } from '../figma_app/193867';
-import { zk } from '../figma_app/198712';
+import { yesNoTrackingEnum } from '../figma_app/198712';
 import { Nh } from '../figma_app/201703';
 import { kJ } from '../figma_app/204937';
 import { no as _$$no } from '../figma_app/209965';
@@ -401,7 +401,7 @@ import { pM } from '../figma_app/728005';
 import { Om } from '../figma_app/731583';
 import { qZ } from '../figma_app/738358';
 import { W_ as _$$W_, UK } from '../figma_app/740163';
-import { i as _$$i, n_ as _$$n_, gX, NT, T8 } from '../figma_app/741237';
+import { renameNode, registerFullscreenEventHandlers, updateFullscreenAppModel, setPropertiesPanelTab, updateSelectionProperties } from '../figma_app/741237';
 import { WJ as _$$WJ, P1, S9 } from '../figma_app/745458';
 import { s as _$$s4 } from '../figma_app/751989';
 import { w as _$$w2 } from '../figma_app/757236';
@@ -413,7 +413,7 @@ import { S as _$$S } from '../figma_app/787550';
 import { T as _$$T } from '../figma_app/792332';
 import { Ts as _$$Ts3 } from '../figma_app/793953';
 import { Ym } from '../figma_app/806075';
-import { Fk } from '../figma_app/806412';
+import { isRecordingEnabled } from '../figma_app/878298';
 import { RK } from '../figma_app/815170';
 import { G_h } from '../figma_app/822011';
 import { Ik } from '../figma_app/831696';
@@ -456,7 +456,7 @@ import { Ay as _$$Ay } from '../vendor/159563';
 import { hp } from '../vendor/162266';
 import ah from '../vendor/223926';
 import { deflateRaw } from '../vendor/323834';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useSelector, useDispatch } from 'react-redux';
 import oA from '../vendor/805353';
 import { A as _$$A5 } from '../vendor/850789';
 import { unmountComponentAtNode } from '../vendor/944059';
@@ -3054,7 +3054,7 @@ class aZ extends PureComponent {
       permissionScopeHandler.user('rename-modal-submit', () => {
         for (let e in t) {
           let n = this.props.getNode(e);
-          n && t[e] !== n.name && (_$$i(e, t[e]), i = !0);
+          n && t[e] !== n.name && (renameNode(e, t[e]), i = !0);
         }
       });
       i && fullscreenValue.commit();
@@ -3505,7 +3505,7 @@ async function sq(e, t, i) {
     numCols: e[0].length,
     hasRepeatingContent: t
   });
-  i(_$$F.enqueue({
+  i(VisualBellActions.enqueue({
     message: 'Pasting data into designs...',
     type: 'SMART_PASTE',
     timeoutOverride: 1 / 0
@@ -3514,7 +3514,7 @@ async function sq(e, t, i) {
     let o = getSingletonSceneGraph().getCurrentPage();
     let l = o?.directlySelectedNodes;
     if (!l) {
-      i(_$$F.enqueue({
+      i(VisualBellActions.enqueue({
         message: 'Smart Paste: No nodes selected to paste into',
         type: 'SMART_PASTE_ERROR'
       }));
@@ -3595,7 +3595,7 @@ async function sq(e, t, i) {
         numCols: e[0].length,
         hasRepeatingContent: t
       });
-      i(_$$F.enqueue({
+      i(VisualBellActions.enqueue({
         message: 'Done!',
         type: 'SMART_PASTE_SUCCESS'
       }));
@@ -3614,12 +3614,12 @@ async function sq(e, t, i) {
       numCols: e[0].length,
       hasRepeatingContent: t
     });
-    i(_$$F.enqueue({
+    i(VisualBellActions.enqueue({
       message: 'Couldn\'t paste data',
       type: 'SMART_PASTE_ERROR'
     }));
   } finally {
-    i(_$$F.dequeue({
+    i(VisualBellActions.dequeue({
       matchType: 'SMART_PASTE'
     }));
   }
@@ -3655,7 +3655,7 @@ function or({
     });
     return;
   }
-  n.dispatch(_$$F.enqueue({
+  n.dispatch(VisualBellActions.enqueue({
     message: 'Page must include at least one responsive set to preview HTML',
     error: !0
   }));
@@ -3796,8 +3796,8 @@ class oo {
             shouldOpenInNewTab: !0,
             isSlides: !0
           });
-          this._store.dispatch(_$$F.enqueue({
-            icon: zX.NOTES_ON_RECTANGLE,
+          this._store.dispatch(VisualBellActions.enqueue({
+            icon: VisualBellIcon.NOTES_ON_RECTANGLE,
             message: getI18nString('slides.presenter_view.visual_bells.opened_presentation_in_new_tab')
           }));
           break;
@@ -3811,8 +3811,8 @@ class oo {
             isSlides: !0,
             isPresenterViewWithPopoutAudienceView: !0
           });
-          this._store.dispatch(_$$F.enqueue({
-            icon: zX.NOTES_ON_RECTANGLE,
+          this._store.dispatch(VisualBellActions.enqueue({
+            icon: VisualBellIcon.NOTES_ON_RECTANGLE,
             message: getI18nString('slides.presenter_view.visual_bells.opened_presenter_and_audience_views_in_new_tabs')
           }));
           break;
@@ -3934,7 +3934,7 @@ let ov = (e, t, i, n, r) => {
   if (e != null) {
     try {
       let a = getInitialOptions().tracking_session_id;
-      let s = _$$g();
+      let s = generateUUIDv4();
       trackEventAnalytics('mirror_frame_tracking', {
         pageName: 'fullscreen',
         fileKey: e,
@@ -4126,7 +4126,7 @@ let oN = class e {
     this.processStateMachineEvent('spawn');
   }
   needsAlphaGPUBackingStore() {
-    return !!new URLSearchParams(_$$Ay2.location.search).get('needsAlpha');
+    return !!new URLSearchParams(customHistory.location.search).get('needsAlpha');
   }
   init() {
     if (!this._worker) {
@@ -4295,7 +4295,7 @@ let lw = new class {
     } = _$$e8();
     addShutdownAction(() => fullscreenValue.commit());
     createPluginInstance(noOpVm, {
-      stats: new _$$P3(),
+      stats: new PluginApiMetrics(),
       name: 'First Party',
       command: JSON.stringify(t),
       queryMode: !1,
@@ -4475,7 +4475,7 @@ async function lO({
       allowedDomains: gH,
       apiVersion: pS,
       capabilities: [],
-      stats: new _$$P3(),
+      stats: new PluginApiMetrics(),
       checkSyntax: !0,
       code: `(${n})();`,
       command: JSON.stringify(t),
@@ -4572,7 +4572,7 @@ async function lF(e, {
       queryMode: !1,
       showLaunchErrors: !0,
       showRuntimeErrors: !0,
-      stats: new _$$P3(),
+      stats: new PluginApiMetrics(),
       titleIconURL: '',
       userID: o,
       vmType: 'cppvm',
@@ -4819,7 +4819,7 @@ class lV {
   mountWidget(e, t, i, n, r, a, s) {
     let o = getSceneGraphInstance().get(t);
     if (!o) {
-      _$$pN({
+      dequeuePluginStatus({
         shouldShowVisualBell: !0
       });
       return new Error(`Widget node ${t} doesn't exist.`);
@@ -4980,7 +4980,7 @@ class lV {
     }) && _$$wY();
   }
   clickHyperlink(e) {
-    _$$Ay2.postRedirect(`/exit?url=${encodeURIComponent(e)}`, '_blank');
+    customHistory.postRedirect(`/exit?url=${encodeURIComponent(e)}`, '_blank');
   }
   addWidgetToRecentlyUsed(e, t) {
     if (e && !this.canInteractWithWidget(t, e)) return;
@@ -5337,10 +5337,10 @@ let lX = class e extends sP(sN(sR)) {
       return !!(t && t.name.toLowerCase().endsWith('.sketch')) && (this.backToFiles(), this._store.dispatch(b6(e.dataTransfer)), !0);
     };
     this.updateSelectionProperties = (e, t = {}) => {
-      let i = t.shouldCommit ?? zk.YES;
+      let i = t.shouldCommit ?? yesNoTrackingEnum.YES;
       let n = t.overwrite ?? VisibilityCondition.ALWAYS;
       let r = t.editScopeType ?? SourceType.USER;
-      T8(e, this._state.mirror.selectedStyleProperties, r, i, n);
+      updateSelectionProperties(e, this._state.mirror.selectedStyleProperties, r, i, n);
     };
     this.nullCurrentSelectedProperty = {
       currentSelectedProperty: {
@@ -5349,7 +5349,7 @@ let lX = class e extends sP(sN(sR)) {
       }
     };
     this.updateAppModel = e => {
-      gX(e);
+      updateFullscreenAppModel(e);
     };
     this.resetLoadedFigFile = () => {
       CorePerfInfo && CorePerfInfo?.resetLocalMax();
@@ -5406,12 +5406,12 @@ let lX = class e extends sP(sN(sR)) {
     this.getCurrentFileName = () => this._state.openFile?.name || 'Untitled';
     this.isCopyExportRestricted = () => this._state.openFile != null && Pe(this._state.openFile);
     this.onShowImageScaledDownWarningInfoClick = () => {
-      _$$Ay2.unsafeRedirect('https://help.figma.com/hc/articles/360040028034', '_blank');
-      this.dispatch(_$$F.dequeue({}));
+      customHistory.unsafeRedirect('https://help.figma.com/hc/articles/360040028034', '_blank');
+      this.dispatch(VisualBellActions.dequeue({}));
     };
     this.onShowGIFConvertedAndScaledDownWarningInfoClick = () => {
-      _$$Ay2.unsafeRedirect('https://help.figma.com/hc/articles/360040028034', '_blank');
-      this.dispatch(_$$F.dequeue({}));
+      customHistory.unsafeRedirect('https://help.figma.com/hc/articles/360040028034', '_blank');
+      this.dispatch(VisualBellActions.dequeue({}));
     };
     this._viewportQueryParamValue = '';
     this.hasUnsavedChanges = () => !!(this._state.saveStatus && this._state.saveStatus.hasUnsavedChanges);
@@ -5443,7 +5443,7 @@ let lX = class e extends sP(sN(sR)) {
       Fullscreen?.restoreSoftDeletedNode(e);
     };
     this.handleUpgradeRefresh = () => {
-      _$$Ay2.reload('Multiplayer got handleUpgradeRefresh');
+      customHistory.reload('Multiplayer got handleUpgradeRefresh');
     };
     this._writeFilesQueue = [];
     this.toggleMenu = (e, t, i) => {
@@ -5556,8 +5556,8 @@ let lX = class e extends sP(sN(sR)) {
     this.showNudgeDesignModeAfterTemplateSetPasted = () => {
       let e = atomStoreManager.get(Ji(!0));
       let t = e.data?.seatTypeLicenseTypes;
-      t?.includes(G_h.DESIGN) && (debugState.dispatch(_$$F.dequeue({})), debugState.dispatch(_$$F.enqueue({
-        icon: zX.DESIGN_MODE,
+      t?.includes(G_h.DESIGN) && (debugState.dispatch(VisualBellActions.dequeue({})), debugState.dispatch(VisualBellActions.enqueue({
+        icon: VisualBellIcon.DESIGN_MODE,
         message: getI18nString('cooper.toolbelt.toast.switch_design_mode_edit_template'),
         button: {
           text: getI18nString('cooper.toolbelt.toast.switch_design_mode'),
@@ -5824,7 +5824,7 @@ let lX = class e extends sP(sN(sR)) {
       this.dispatch(_$$s.error('The interaction recorder is not supported on /test/interactions'));
       return;
     }
-    Fk() && (this._store.getState().interactionTestDialogShown ? this.dispatch(_$$l2()) : this.dispatch(_$$q()));
+    isRecordingEnabled() && (this._store.getState().interactionTestDialogShown ? this.dispatch(_$$l2()) : this.dispatch(_$$q()));
   }
   togglePerfHUDVisibility() {
     if (!getFeatureFlags().perf_hud) return;
@@ -5850,7 +5850,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showImageScaledDownWarning() {
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: 'image_resized',
       message: getI18nString('bindings.image_resized_message'),
       button: {
@@ -5860,7 +5860,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showGIFConvertedAndScaledDownWarning() {
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: 'gif_converted_resized',
       message: getI18nString('bindings.gif_resized_and_converted_to_static_image'),
       button: {
@@ -6170,7 +6170,7 @@ let lX = class e extends sP(sN(sR)) {
     this.NOT_LOCALIZED_showMobileNativeToast(n, i);
   }
   NOT_LOCALIZED_showVisualBell(e, t, i, n) {
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: e,
       message: t,
       error: i,
@@ -6178,7 +6178,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   NOT_LOCALIZED_showVisualBellInf(e, t, i) {
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: e,
       message: t,
       error: i,
@@ -6187,7 +6187,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showVisualBellLocalized(e, t, i, n) {
     let r = i?.icon;
-    let a = r ? zX[r] : void 0;
+    let a = r ? VisualBellIcon[r] : void 0;
     let s = getI18nStringAlias(t, i);
     let o = window.FigmaMobile;
     o?.showToast ? this.NOT_LOCALIZED_showMobileNativeToast(s, null) : (e === 'copy-as' && YQ({
@@ -6204,7 +6204,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showVisualBellForMultiEdit(e) {
     let t = getI18nString('visual_bell.multi_editing');
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: e,
       message: t,
       onDismiss: () => fullscreenValue.triggerAction('focus-mode-exit'),
@@ -6214,7 +6214,7 @@ let lX = class e extends sP(sN(sR)) {
   showVisualBellForMultiEditGlueError(e) {
     let t = getI18nString('visual_bell.multi_edit_glue_error');
     let i = getI18nString('visual_bell.multi_edit_glue_error.repair_button');
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: e,
       message: t,
       button: {
@@ -6225,7 +6225,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showVisualBellWithUndo(e, t, i) {
     let n = getI18nString('bindings.undo');
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: e,
       message: t,
       button: {
@@ -6236,7 +6236,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showVisualBellWithNodesLocalized(e, t, i) {
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: e,
       message: t,
       interpolate: {
@@ -6247,7 +6247,7 @@ let lX = class e extends sP(sN(sR)) {
   showVisualBellWithButtonLocalized(e, t, i, n, r, a) {
     let s = getI18nStringAlias(t, i);
     let o = getI18nStringAlias(n);
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: e,
       message: s,
       button: {
@@ -6272,7 +6272,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showVisualBellWithReloadButtonLocalized(e, t, i, n, r) {
     this.showVisualBellWithButtonLocalized(e, t, null, i, () => {
-      _$$Ay2.reload(n);
+      customHistory.reload(n);
     }, r);
   }
   showAutosaveVisualBell() {
@@ -6295,7 +6295,7 @@ let lX = class e extends sP(sN(sR)) {
       } else {
         e = getI18nString('autosave.visual_bell.offline');
       }
-      this.dispatch(_$$F.enqueue({
+      this.dispatch(VisualBellActions.enqueue({
         type: 'save',
         message: e
       }));
@@ -6388,7 +6388,7 @@ let lX = class e extends sP(sN(sR)) {
       text: getI18nString('bindings.paste_as_layers'),
       action: e => {
         this.triggerActionInUserEditScope('paste-widgets-as-sublayers');
-        this.dispatch(_$$F.dequeue({
+        this.dispatch(VisualBellActions.dequeue({
           matchType: 'paste-widgets-as-sublayers'
         }));
       }
@@ -6413,7 +6413,7 @@ let lX = class e extends sP(sN(sR)) {
           }
       }
     }(e);
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: 'paste-widgets-as-sublayers',
       message: n,
       timeoutOverride: 5e3,
@@ -6422,13 +6422,13 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   dismissEphemeralVisualBells() {
-    this.dispatch(_$$F.dequeue({
+    this.dispatch(VisualBellActions.dequeue({
       matchTimeout: 'ephemeral'
     }));
   }
   showVisualBellWithDelayLocalized(e, t, i, n, r) {
     let a = getI18nStringAlias(t, i);
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: e,
       message: a,
       error: n,
@@ -6436,7 +6436,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   clearVisualBellType(e) {
-    this.dispatch(_$$F.dequeue({
+    this.dispatch(VisualBellActions.dequeue({
       matchType: e
     }));
   }
@@ -6554,7 +6554,7 @@ let lX = class e extends sP(sN(sR)) {
     _$$P2(e, t, i);
   }
   showPushOverridesVisualBell() {
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: 'push_overrides',
       message: getI18nString('design_systems.component_panel.changes_pushed_to_main_component')
     }));
@@ -6728,7 +6728,7 @@ let lX = class e extends sP(sN(sR)) {
     let a = r.sceneGraph.get(e);
     let o = a?.name;
     let l = null;
-    let d = _$$A('link-copied');
+    let d = formatI18nMessage('link-copied');
     if (n) {
       switch (t) {
         case FigmaSite.SITE:
@@ -6758,8 +6758,8 @@ let lX = class e extends sP(sN(sR)) {
           throwTypeError(t);
       }
     } else {
-      console.error(`file key is empty in copying link, pathname is ${_$$Ay2.location.pathname}`);
-      l = `${location.protocol}//${location.host}${_$$Ay2.location.pathname}?node-id=${encodeURIComponent(EO(e))}`;
+      console.error(`file key is empty in copying link, pathname is ${customHistory.location.pathname}`);
+      l = `${location.protocol}//${location.host}${customHistory.location.pathname}?node-id=${encodeURIComponent(EO(e))}`;
     }
     let g = r.selectionProperties.responsiveSetTitle || a?.name || n?.name;
     if (getFeatureFlags().ce_copy_labelled_links && g) {
@@ -6770,7 +6770,7 @@ let lX = class e extends sP(sN(sR)) {
     } else {
       i = Dk(l);
     }
-    i.then(() => this.dispatch(_$$F.enqueue({
+    i.then(() => this.dispatch(VisualBellActions.enqueue({
       message: d
     })));
   }
@@ -6787,7 +6787,7 @@ let lX = class e extends sP(sN(sR)) {
       file: i,
       nodeId: e,
       cmsItemId: t
-    }) : (console.error(`file key is empty in generating link to node, pathname is ${_$$Ay2.location.pathname}`), n = `${location.protocol}//${location.host}${_$$Ay2.location.pathname}?node-id=${encodeURIComponent(EO(e))}`);
+    }) : (console.error(`file key is empty in generating link to node, pathname is ${customHistory.location.pathname}`), n = `${location.protocol}//${location.host}${customHistory.location.pathname}?node-id=${encodeURIComponent(EO(e))}`);
     return n;
   }
   generateLinkToRemoteNode(e, t) {
@@ -6799,9 +6799,9 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   generateRedirectLinkForSignedOutEdit(e, t) {
-    if (!e) return _$$Ay2.location.pathname;
+    if (!e) return customHistory.location.pathname;
     let i = this.generateLinkToNode(e);
-    return t ? `${i}${_$$Ay2.location.hash}` : i;
+    return t ? `${i}${customHistory.location.hash}` : i;
   }
   getLocalGUIDFromUrl(e) {
     let {
@@ -6996,7 +6996,7 @@ let lX = class e extends sP(sN(sR)) {
       fs();
       bX();
     }
-    _$$n_();
+    registerFullscreenEventHandlers();
     _$$n_2();
     getFeatureFlags()?.fullscreen_use_metrics_event_loop && requestAnimationFrame(tV);
     getFeatureFlags()?.fullscreen_use_threaded_rendering && oN.getInstance().spawnAndStart();
@@ -7033,7 +7033,7 @@ let lX = class e extends sP(sN(sR)) {
         e.view === 'fullscreen' && isDesignOrIllustration(e.editorType) && M9(() => yF([FontSourceType.LOCAL]), e => {
           getFeatureFlags().desktop_font_reload_on_focus_ux && FontHelpers?.resetNeedsMissingFontsCheck();
           i(this._store.dispatch, e);
-        }, e => this.dispatch(_$$F.enqueue(e)));
+        }, e => this.dispatch(VisualBellActions.enqueue(e)));
       }));
     }).catch(e => {
       e.message === 'fetchFontList(): no results' && getFeatureFlags().ce_font_network_status_ui && MZ(this._store.dispatch, getI18nString('check_network_compatibility.error_bell.fetch_font_list.message'));
@@ -7063,10 +7063,10 @@ let lX = class e extends sP(sN(sR)) {
     if (!e && this.isInWorkshopMode()) return;
     let i = this._store.getState().selectedView;
     if (i.view !== 'fullscreen' || i.editorType === FEditorType.Design && !this.session.user) return;
-    let n = parseQuery(_$$Ay2.location.search);
+    let n = parseQuery(customHistory.location.search);
     this.dispatch(Ts({
       origin: 'signed_out_edit',
-      redirectUrl: this.generateRedirectLinkForSignedOutEdit(n['node-id'], _$$Ay2.location.hash),
+      redirectUrl: this.generateRedirectLinkForSignedOutEdit(n['node-id'], customHistory.location.hash),
       signedUpFromOpenSession: this.isInWorkshopMode()
     }));
     this.dispatch(showModalHandler({
@@ -7147,7 +7147,7 @@ let lX = class e extends sP(sN(sR)) {
           return;
         }
         if (didStart) {
-          this.dispatch(_$$F.enqueue({
+          this.dispatch(VisualBellActions.enqueue({
             type: 'codegen-my-cool-plugin-server',
             message: getI18nString('mcp.dev_mode_server_enabled', {
               url: `http://127.0.0.1:${port}/${desktopAPIInstance?.hasFeature('addMcpStreamableHttpSupport') ? 'mcp' : 'sse'}`
@@ -7157,7 +7157,7 @@ let lX = class e extends sP(sN(sR)) {
           throw new Error(getI18nString('my_cool_plugin.codegen_server_failed_to_start'));
         }
       } else {
-        this.dispatch(_$$F.enqueue({
+        this.dispatch(VisualBellActions.enqueue({
           type: 'codegen-my-cool-plugin-server',
           message: getI18nString('my_cool_plugin.codegen_server_stopped')
         }));
@@ -7166,7 +7166,7 @@ let lX = class e extends sP(sN(sR)) {
       let t = e.message.includes('EADDRINUSE');
       t || reportError(_$$e.DEVELOPER_TOOLS, e);
       console.error(getI18nString('my_cool_plugin.codegen_server_failed_to_start'), e);
-      this.dispatch(_$$F.enqueue({
+      this.dispatch(VisualBellActions.enqueue({
         type: 'codegen-my-cool-plugin-server',
         message: t ? getI18nString('my_cool_plugin.codegen_server_failed_to_start_port_in_use', {
           port: pM
@@ -7222,7 +7222,7 @@ let lX = class e extends sP(sN(sR)) {
     let e = this._state.openFile?.key;
     e && lZ(e).then(t => {
       if (!t || !t.fixedScrolling || t.fixedScrolling.length === 0) {
-        this.dispatch(_$$F.enqueue({
+        this.dispatch(VisualBellActions.enqueue({
           type: 'no_broken_fixed_scrolling_metadata',
           message: 'We finished scanning your document, and everything looks fine.'
         }));
@@ -7235,7 +7235,7 @@ let lX = class e extends sP(sN(sR)) {
       }
       let i = documentStateTsApi && Fullscreen ? Fullscreen.selectBrokenFixedScrollingNodesOnPage(documentStateTsApi.getActiveCanvas(), t) : 0;
       if (i === 0) {
-        this.dispatch(_$$F.enqueue({
+        this.dispatch(VisualBellActions.enqueue({
           type: 'no_broken_fixed_scrolling_nodes_found',
           message: 'We finished scanning this page, and everything looks fine.'
         }));
@@ -7246,7 +7246,7 @@ let lX = class e extends sP(sN(sR)) {
         });
         return;
       }
-      this.dispatch(_$$F.enqueue({
+      this.dispatch(VisualBellActions.enqueue({
         type: 'selected_broken_fixed_scrolling_nodes',
         message: `We found ${i} layers on this page that look like their scroll setting is incorrect. Select the "fix position when scrolling" checkbox to repair them.`
       }));
@@ -7256,7 +7256,7 @@ let lX = class e extends sP(sN(sR)) {
         error: !1
       });
     }).catch(t => {
-      this.dispatch(_$$F.enqueue({
+      this.dispatch(VisualBellActions.enqueue({
         type: 'error_finding_broken_fixed_scrolling_nodes',
         message: `We ran into an error. Please contact ${getSupportEmail()}`
       }));
@@ -7493,7 +7493,7 @@ let lX = class e extends sP(sN(sR)) {
           fileNeedsMovingBeforePublish: this.isInDrafts()
         });
       } catch {
-        this.dispatch(_$$F.enqueue({
+        this.dispatch(VisualBellActions.enqueue({
           message: getI18nString('templates.publishing.bell.no_publish_access'),
           type: 'template-publish-error',
           error: !0
@@ -7577,7 +7577,7 @@ let lX = class e extends sP(sN(sR)) {
             fileKey: n[1]
           });
         } catch (e) {
-          this.dispatch(_$$F.enqueue({
+          this.dispatch(VisualBellActions.enqueue({
             message: getI18nString('bindings.no_file_access'),
             type: 'NAVIGATE_FILE_FAILED',
             error: !0
@@ -7585,7 +7585,7 @@ let lX = class e extends sP(sN(sR)) {
           return;
         }
       }
-      t === TabMode.CURRENT_TAB ? location.href = e : _$$Ay2.redirect(e, '_blank');
+      t === TabMode.CURRENT_TAB ? location.href = e : customHistory.redirect(e, '_blank');
     }
   }
   trimName(e, t) {
@@ -7697,13 +7697,13 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   openHelp() {
-    _$$Ay2.unsafeRedirect('https://help.figma.com', '_blank');
+    customHistory.unsafeRedirect('https://help.figma.com', '_blank');
   }
   openSupportForum() {
-    _$$Ay2.unsafeRedirect('https://forum.figma.com', '_blank');
+    customHistory.unsafeRedirect('https://forum.figma.com', '_blank');
   }
   openTutorials() {
-    _$$Ay2.unsafeRedirect('https://www.youtube.com/figmadesign', '_blank');
+    customHistory.unsafeRedirect('https://www.youtube.com/figmadesign', '_blank');
   }
   keyboardWillShow() {
     Fullscreen?.keyboardWillShow();
@@ -7792,7 +7792,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   focusPrototypeStartingPointPanelToEditName() {
-    NT(DesignWorkspace.PROTOTYPE);
+    setPropertiesPanelTab(DesignWorkspace.PROTOTYPE);
     this.fromFullscreen.trigger('focusPrototypeStartingPointPanelToEditName', {});
   }
   handleZoomActionTriggeredToSetOnboardingFlag() {
@@ -8048,7 +8048,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   async requestOpenExternalSourceFileLibraryKey(e, t, i, n) {
-    let r = await subscribeAndAwaitData(iAs, {
+    let r = await subscribeAndAwaitData(LibraryKeyToFileLink, {
       libraryKey: _$$l(e)
     });
     let a = _$$c2({
@@ -8059,14 +8059,14 @@ let lX = class e extends sP(sN(sR)) {
       mainComponent: !0
     });
     if (a == null) {
-      this.dispatch(_$$F.enqueue({
+      this.dispatch(VisualBellActions.enqueue({
         message: getI18nString('bindings.no_file_access'),
         type: 'NAVIGATE_FILE_FAILED',
         error: !0
       }));
       return;
     }
-    _$$Ay2.redirect(a.link, '_blank');
+    customHistory.redirect(a.link, '_blank');
   }
   loadedCompareChanges() {
     _$$j.trigger('loadedCompareChanges');
@@ -8141,7 +8141,7 @@ let lX = class e extends sP(sN(sR)) {
     _$$lc();
   }
   movedSingleNodeVisualBell(e, t, i) {
-    this.dispatch(_$$F.enqueue({
+    this.dispatch(VisualBellActions.enqueue({
       type: 'moved-single-node',
       message: getI18nString('visual_bell.moved_single_node', {
         nodeName: EJ(t, 30),
@@ -8240,7 +8240,7 @@ let lX = class e extends sP(sN(sR)) {
     let i = {
       action: JT.AUTO_RENAME_LAYERS,
       source: Tr(e),
-      clientLifecycleId: _$$g(),
+      clientLifecycleId: generateUUIDv4(),
       file_key: this.openFileKey(),
       quick_actions_session_id: null,
       product_type: 'design'
@@ -8382,6 +8382,6 @@ let lX = class e extends sP(sN(sR)) {
 lX.interfaceFontPromise = null;
 lX.fontListPromise = null;
 export let $$lQ0 = lX;
-Cs() && $$lQ0.startFetchingFontList();
+isMainAppRoute() && $$lQ0.startFetchingFontList();
 export const W = $$lQ0;
 export const a = $$lq1;

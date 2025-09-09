@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Gu } from "../figma_app/262240";
 import { bL, mc, q7 } from "../figma_app/860955";
 import { AnimationTriggerType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
 import { Dm } from "../figma_app/8833";
-import { A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { Q } from "../figma_app/320600";
 import { Z4, D0 } from "../9410/315461";
@@ -86,7 +86,7 @@ export function $$x1({
         onClick: () => {
           e.callback && e.callback();
         },
-        children: A(e.name)
+        children: formatI18nMessage(e.name)
       }, e.name))
     })
   });

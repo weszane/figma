@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { updateModal } from "../905/156213";
 import { MH, dM } from "../figma_app/803787";
@@ -18,7 +18,7 @@ export function $$u0(e, t, r) {
       asset: e,
       sectionPosition: t,
       sectionNameForTracking: r
-    });else {
+    }); else {
       if (l?.type !== VI || !l?.data) return;
       o(updateModal({
         data: {

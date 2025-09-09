@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { AppStateTsApi, ViewType, DataLoadStatus } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";

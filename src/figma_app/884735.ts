@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useContext, useCallback, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { R as _$$R } from "../905/57445";
 import { o as _$$o } from "../905/821217";
 import { K as _$$K } from "../905/443068";
@@ -12,14 +12,14 @@ import { permissionScopeHandler } from "../905/189185";
 import h from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { ms, c$ } from "../figma_app/236327";
 import { a as _$$a } from "../905/632329";
 import { n as _$$n } from "../905/734251";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { n0 } from "../figma_app/389091";
 import { j7 } from "../905/929976";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { o3, nt } from "../905/226610";
 import { Sh } from "../figma_app/889655";
 import { Ib } from "../905/129884";
@@ -81,7 +81,7 @@ export function $$H0(e) {
   let $ = useRef(null);
   let X = sD.concat("-", nodeField);
   let q = useRef(null);
-  let J = rf(`propPill.${nodeField}`, "click", () => {
+  let J = useHandleMouseEvent(`propPill.${nodeField}`, "click", () => {
     !selectionHasInstanceSublayer && def && q.current && (q.current && (nodeField === RR.TEXT || nodeField === RR.VISIBLE) ? _?.showBindingUI(q.current) : V(j7({
       type: X,
       data: {
@@ -92,7 +92,7 @@ export function $$H0(e) {
   });
   let Z = useCallback(() => {
     let e = def?.explicitDefID;
-    containingProductComponentGUID && e && (wr(), Dh([containingProductComponentGUID]), V(n0({
+    containingProductComponentGUID && e && (clearSelection(), addToSelection([containingProductComponentGUID]), V(n0({
       propDefId: e
     })));
   }, [containingProductComponentGUID, def, V]);
@@ -189,7 +189,7 @@ export function $$z1(e) {
   let o = useDispatch();
   let c = containingInstanceGUID || containingProductComponentGUID;
   let u = useCallback(() => {
-    c && propDefId && (wr(), Dh([c]), o(n0({
+    c && propDefId && (clearSelection(), addToSelection([c]), o(n0({
       propDefId
     })));
   }, [c, propDefId, o]);

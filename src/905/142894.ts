@@ -1,5 +1,5 @@
 import { isNotNullish } from "../figma_app/95419";
-import { GU, sD } from "../figma_app/243058";
+import { StateGroupIdHandler, VariableIdHandler } from "../figma_app/243058";
 import { s as _$$s } from "../905/583953";
 import { c1 } from "../905/589717";
 import { R } from "../905/741991";
@@ -37,7 +37,7 @@ export class $$d0 extends R {
     return this.nodeChange.internalOnly || this.parent?.internalOnly || !1;
   }
   get stateGroupId() {
-    return this.isStateGroup ? this._assetId(GU) : this.isSymbol ? this.parent?.stateGroupId ?? null : null;
+    return this.isStateGroup ? this._assetId(StateGroupIdHandler) : this.isSymbol ? this.parent?.stateGroupId ?? null : null;
   }
   get backingSymbol() {
     let e = this.backingSymbolId;
@@ -100,7 +100,7 @@ export class $$d0 extends R {
         (function i(n, a) {
           if (a?.dataType === "ALIAS") !function (i, n) {
             if (!n?.value?.alias) return;
-            let a = sD.fromKiwi(n.value.alias);
+            let a = VariableIdHandler.fromKiwi(n.value.alias);
             if (!a) return;
             let s = t.getVariableByVariableId(a);
             s && e[i].push(s);

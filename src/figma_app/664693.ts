@@ -14,7 +14,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { Y1 } from "../905/143116";
 import { h as _$$h } from "../905/207101";
 import { Uz, xH } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { tH, H4 } from "../905/751457";
 import { x as _$$x } from "../905/868466";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -180,7 +180,7 @@ function G(e) {
             children: [jsx("div", {
               className: _$$s.h24.$,
               children: jsx(_$$K, {
-                recordingKey: Pt(e.recordingKey, "backButton"),
+                recordingKey: generateRecordingKey(e.recordingKey, "backButton"),
                 onClick: e.onBack,
                 "aria-label": getI18nString("qa.go_back"),
                 children: jsx(_$$C, {})
@@ -225,7 +225,7 @@ function G(e) {
               modifier: [xH.META]
             }],
             onAction: e.onBack,
-            recordingKey: Pt(e.recordingKey, "generate"),
+            recordingKey: generateRecordingKey(e.recordingKey, "generate"),
             children: renderI18nText("first_draft.make_kit.lint.done")
           })
         })

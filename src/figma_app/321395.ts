@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { tW, W5, zy, B6 } from "../vendor/130505";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { serializeQuery } from "../905/634134";
 import { captureMessage } from "../905/11";
 import { iY, p_ } from "../figma_app/598412";
@@ -34,10 +34,10 @@ export class $$c8 {
     });
   }
   pushToHistory() {
-    Ay.push(this.href, this.state);
+    customHistory.push(this.href, this.state);
   }
   replaceInHistory() {
-    Ay.replace(this.href, this.state);
+    customHistory.replace(this.href, this.state);
   }
   get pathname() {
     let e = this.constructor;

@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 export function $$r0(e) {
   return useSelector(t => t.userFlags[e]);
 }

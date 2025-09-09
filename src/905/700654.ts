@@ -289,7 +289,7 @@ export class NoOpVm extends PluginWrapper {
     return result.handle;
   }
 
-  newJsxRenderer<T = any>(component: INoOpVm<T>): INoOpVm<any> {
+  newJsxRenderer(component: any): INoOpVm<any> {
     return wrapHandle(this, H(component));
   }
 

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Rs } from "../figma_app/288654";
-import { g } from "../905/880308";
-import { gfM } from "../figma_app/43951";
+import { generateUUIDv4 } from "../905/871474";
+import { LockClientView } from "../figma_app/43951";
 import { kY } from "../figma_app/336853";
 export function $$c0() {
-  let e = useMemo(() => g(), []);
+  let e = useMemo(() => generateUUIDv4(), []);
   let t = useSelector(kY);
-  let i = Rs(gfM, {
+  let i = Rs(LockClientView, {
     cacheNonce: e
   });
   return useMemo(() => {

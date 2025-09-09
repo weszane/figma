@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { BrowserInfo } from "../figma_app/778880";

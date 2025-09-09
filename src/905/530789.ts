@@ -4,8 +4,8 @@ import { createPortal } from "../vendor/944059";
 import { E } from "../905/632989";
 import { x } from "../905/587214";
 import { permissionScopeHandler } from "../905/189185";
-import { ts } from "../905/929949";
-import { Pt, rf } from "../figma_app/806412";
+import { supportedResolvedTypes } from "../905/929949";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { c$ } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { rW } from "../figma_app/852050";
@@ -47,7 +47,7 @@ export function $$E0(e) {
     children: [jsx(u, {
       ref: s,
       onClick: o,
-      recordingKey: Pt(e.recordingKey, "createVariableButton"),
+      recordingKey: generateRecordingKey(e.recordingKey, "createVariableButton"),
       "aria-label": getI18nString("variables.authoring_modal.create_variable_button_label"),
       "aria-controls": e.id,
       "aria-expanded": showing
@@ -84,7 +84,7 @@ export function $$x1({
     leanPadding: 2,
     minWidth: 130,
     targetRect: t,
-    children: ts.map(e => jsx(S, {
+    children: supportedResolvedTypes.map(e => jsx(S, {
       groupPrefix: r ?? "",
       groups: s,
       insertVariableBetweenIDs: p,
@@ -101,7 +101,7 @@ function S(e) {
   let t = rW(e.variableSetID);
   let i = ay();
   let a = F(e.resolvedType);
-  let s = rf(Pt(e.recordingKey, "createVariableOption", a.name.toLowerCase()), "click", useCallback(() => {
+  let s = useHandleMouseEvent(generateRecordingKey(e.recordingKey, "createVariableOption", a.name.toLowerCase()), "click", useCallback(() => {
     let n = e.groupPrefix;
     if (e.insertVariableBetweenIDs?.[0]) {
       let i = t.find(t => t.node_id === e.insertVariableBetweenIDs[0]);

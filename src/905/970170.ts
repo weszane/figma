@@ -5,7 +5,7 @@ import { yJ, c3, Yp, bE } from "../figma_app/78808";
 import { ru } from "../905/879323";
 import { ER } from "../905/466026";
 import { VK, YK } from "../905/880488";
-import { qNg, m0h, SMQ, n8j } from "../figma_app/43951";
+import { FilesForTeam, FilesForProject, FileByKeyForRealtimeShim, FilesForRepo } from "../figma_app/43951";
 import { H } from "../905/715533";
 import { fJ, aj, w7, Ut } from "../905/25169";
 function m(e) {
@@ -62,7 +62,7 @@ function g(e, t) {
 let $$f3 = new H({
   name: "TeamChannelFilesShim",
   ...fJ,
-  livegraphView: qNg,
+  livegraphView: FilesForTeam,
   livegraphArgs: (e, t) => ({
     teamId: e,
     updatedAtTimestamp: t
@@ -96,7 +96,7 @@ let $$f3 = new H({
 let $$_1 = new H({
   name: "FolderChannelFilesShim",
   ...aj,
-  livegraphView: m0h,
+  livegraphView: FilesForProject,
   livegraphArgs: (e, t) => ({
     projectId: e,
     updatedAtTimestamp: t
@@ -130,7 +130,7 @@ let $$_1 = new H({
 let $$A4 = new H({
   name: "FileChannelFilesShim",
   ...w7,
-  livegraphView: SMQ,
+  livegraphView: FileByKeyForRealtimeShim,
   livegraphArgs: e => ({
     fileKey: e
   }),
@@ -167,7 +167,7 @@ let $$A4 = new H({
 let $$y5 = new H({
   name: "FileRepoChannelFilesShim",
   ...Ut,
-  livegraphView: n8j,
+  livegraphView: FilesForRepo,
   livegraphArgs: e => ({
     repoId: e
   }),

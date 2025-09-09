@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { d as _$$d } from "../905/75621";
 import { B as _$$B } from "../905/853081";
@@ -63,8 +63,8 @@ import { SceneNode } from "../905/499575";
 import { GI, oY } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { q as _$$q3 } from "../905/196201";
-import { xx } from "../figma_app/815945";
+import { LRUCache } from "../905/196201";
+import { memoizeByArgs } from "../figma_app/815945";
 import ef from "classnames";
 import { B as _$$B2, V as _$$V2 } from "../905/714743";
 import { t as _$$t2 } from "../905/331623";
@@ -133,7 +133,7 @@ import { A as _$$A51 } from "../2854/586337";
 import { A as _$$A52 } from "../svg/660901";
 var n;
 var eE = ef;
-let tb = new _$$q3(750);
+let tb = new LRUCache(750);
 export function $$tT1(e, t) {
   let r = tb.get(e);
   r && r.thumbnailId === t || (r = {
@@ -542,7 +542,7 @@ export function $$tI2(e) {
     return s;
   }
   function n(e) {
-    let t = xx((e, t) => $$tT1(e, t));
+    let t = memoizeByArgs((e, t) => $$tT1(e, t));
     let {
       guid,
       node,

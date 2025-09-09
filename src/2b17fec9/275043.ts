@@ -27,7 +27,7 @@ import { m as _$$m2 } from "../2b17fec9/405130";
 import { w as _$$w } from "../figma_app/461518";
 import { g as _$$g } from "../figma_app/391708";
 import { z as _$$z2 } from "../figma_app/849005";
-import { aH, Pt } from "../figma_app/806412";
+import { SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
 import { LR } from "../figma_app/120210";
 import { AE } from "../9410/757252";
 import { C as _$$C2 } from "../9410/365876";
@@ -45,10 +45,10 @@ import { EJ, Mm, vO } from "../figma_app/827329";
 import { lx, Jc, Qd, Lz } from "../figma_app/27927";
 import { Uz } from "../905/63728";
 import { D8 } from "../905/511649";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { J as _$$J } from "../figma_app/900567";
 import { Zh, $y, yG, dR, vu, ll, bz, ke, zO, bj, Bx, z6, ac, cq, UJ } from "../figma_app/731560";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { oB } from "../figma_app/273493";
 import { d as _$$d } from "../vendor/456530";
@@ -177,7 +177,7 @@ function ee(e = lQ, t = !0) {
   let d = useCallback(e => (s({
     isHovered: !0,
     hoverTarget: e.target
-  }), aH), []);
+  }), SKIP_RECORDING), []);
   let c = useCallback(e => {
     n.isHovered && e.target !== n.hoverTarget && s({
       isHovered: !0,
@@ -187,7 +187,7 @@ function ee(e = lQ, t = !0) {
   let u = useCallback(() => (clearTimeout(l.current), s({
     isHovered: !1,
     hoverTarget: null
-  }), aH), []);
+  }), SKIP_RECORDING), []);
   let p = useCallback(n => {
     n.preventDefault();
     i.shouldFinishClick && e(n);
@@ -273,7 +273,7 @@ let en = forwardRef((e, t) => {
     onPointerDown: disabled ? void 0 : e => {
       if (e.preventDefault(), e.stopPropagation(), T({
         type: "start click"
-      }), !et.RECORD_DETAILED_EVENTS) return aH;
+      }), !et.RECORD_DETAILED_EVENTS) return SKIP_RECORDING;
     },
     onTouchEnd,
     onTouchStart,
@@ -291,7 +291,7 @@ let en = forwardRef((e, t) => {
       "aria-hidden": !inTabOrder,
       "aria-label": w && inTabOrder ? function (e) {
         try {
-          return _$$A(e) || e;
+          return formatI18nMessage(e) || e;
         } catch (t) {
           return e;
         }
@@ -425,17 +425,17 @@ let ef = memo(function ({
     }));
   }
   return jsx(D8, {
-    recordingKey: Pt(SH, `${e}.animatedIcon`),
+    recordingKey: generateRecordingKey(SH, `${e}.animatedIcon`),
     className: H()(ke, {
       [zO]: i,
       [bj]: _,
       [Bx]: A
     }),
     onPointerDown: () => {
-      if (!j && (T(!0), !et.RECORD_DETAILED_EVENTS)) return aH;
+      if (!j && (T(!0), !et.RECORD_DETAILED_EVENTS)) return SKIP_RECORDING;
     },
     onPointerUp: () => {
-      if (T(!1), !et.RECORD_DETAILED_EVENTS) return aH;
+      if (T(!1), !et.RECORD_DETAILED_EVENTS) return SKIP_RECORDING;
     },
     onTouchStart: e => {
       e.preventDefault();
@@ -671,7 +671,7 @@ let ew = memo(function ({
     isActive: u,
     onClick: _,
     onboardingKey: s,
-    recordingKey: Pt(eb, x),
+    recordingKey: generateRecordingKey(eb, x),
     toolType: x,
     children: jsx(ef, {
       Icon: f.Icon,
@@ -805,7 +805,7 @@ function eO({
     isActive: l,
     onClick: p,
     onboardingKey: Nr,
-    recordingKey: Pt(eb, _),
+    recordingKey: generateRecordingKey(eb, _),
     toolType: _,
     children: jsx(ef, {
       Icon: f,
@@ -936,7 +936,7 @@ function eP({
       isActive: o,
       onClick: p,
       onboardingKey: u.onboardingKey,
-      recordingKey: Pt(I1, u.recordingKey),
+      recordingKey: generateRecordingKey(I1, u.recordingKey),
       secondaryToolbeltId: _$$w2.DiagrammingTools,
       size: {
         width: 64,
@@ -1004,7 +1004,7 @@ function eX() {
   return jsx($n, {
     onClick: () => e(),
     variant: "secondary",
-    recordingKey: Pt(d6, "MORESHAPES"),
+    recordingKey: generateRecordingKey(d6, "MORESHAPES"),
     children: renderI18nText("whiteboard.shapes.more_shapes")
   });
 }
@@ -1027,7 +1027,7 @@ function e0({
         isColorPalettePickerOpen: t
       },
       paletteType: "base",
-      recordingKey: Pt(d6, "PALETTE_PICKER"),
+      recordingKey: generateRecordingKey(d6, "PALETTE_PICKER"),
       isInDltSubmenu: !1
     })]
   });
@@ -1073,7 +1073,7 @@ function e1() {
     optionSize: "medium",
     palettePickerPopoverWrapper: e0,
     paletteType: "base",
-    recordingKey: Pt(d6, "shape-color"),
+    recordingKey: generateRecordingKey(d6, "shape-color"),
     setIsColorPopoverOpen: a,
     shouldRenderCirclesWithContentBoxSizing: !0,
     swatchStyle: {
@@ -1097,7 +1097,7 @@ function e2() {
         connectorStyle: e,
         setConnectorTool: i,
         size: "small",
-        recordingKey: Pt(d6, e),
+        recordingKey: generateRecordingKey(d6, e),
         disableDragging: !0
       }, e)), e_.map(t => jsx(_$$h, {
         shapeType: t,
@@ -1107,7 +1107,7 @@ function e2() {
         toolSetSource: ShapeSidebarMode.NONE,
         size: "small",
         disableDragging: "MINDMAP_TREE_NUCLEUS" === t,
-        recordingKey: Pt(d6, t)
+        recordingKey: generateRecordingKey(d6, t)
       }, t))]
     }), jsx(_$$X, {
       extended: !0
@@ -1189,7 +1189,7 @@ function tr({
     },
     paletteType: e,
     isPaletteLoading: t,
-    recordingKey: Pt(i, "colorPalettes")
+    recordingKey: generateRecordingKey(i, "colorPalettes")
   });
 }
 let ta = "whiteboard_tool_color_swatch_picker--colorSwatch---N8tP";
@@ -1230,7 +1230,7 @@ function ts({
       onChange: m,
       legend: t,
       disabled: l,
-      recordingKey: Pt(d, "colorSelect"),
+      recordingKey: generateRecordingKey(d, "colorSelect"),
       "data-testid": c["data-testid"],
       options: colors.map((e, t) => {
         let i = _$$F2.format(e);
@@ -1281,7 +1281,7 @@ function to({
       setShowCustomColorPopover: u,
       disabled: s,
       "data-testid": l["data-testid"],
-      recordingKey: Pt(o, "customColorButton")
+      recordingKey: generateRecordingKey(o, "customColorButton")
     }),
     color: d,
     isOpen: !s && c,
@@ -1296,7 +1296,7 @@ function to({
         tool: DesignGraphElements[e]
       }
     },
-    recordingKey: Pt(o, "customColorPopover")
+    recordingKey: generateRecordingKey(o, "customColorPopover")
   });
 }
 function tl({
@@ -1318,7 +1318,7 @@ function tl({
     onClick: () => r(!i),
     tooltipText: getI18nString("whiteboard.colors.custom"),
     disabled: a,
-    recordingKey: Pt(s, "customColorButton"),
+    recordingKey: generateRecordingKey(s, "customColorButton"),
     "data-testid": o["data-testid"],
     children: jsx(td, {
       color: Cz(e, t, "light"),
@@ -1589,7 +1589,7 @@ function tO() {
       onClick: () => t("THIN"),
       tooltipText: getI18nString("whiteboard.delightful_toolbar.thin"),
       disabled: !i,
-      recordingKey: Pt(_$$t2, "sizeSelect.thin"),
+      recordingKey: generateRecordingKey(_$$t2, "sizeSelect.thin"),
       children: jsx(tR, {
         stroke: "THIN" === e ? "var(--color-bg-figjam)" : "var(--color-icon-secondary)"
       })
@@ -1599,7 +1599,7 @@ function tO() {
       onClick: () => t("THICK"),
       tooltipText: getI18nString("whiteboard.delightful_toolbar.thick"),
       disabled: !i,
-      recordingKey: Pt(_$$t2, "sizeSelect.thick"),
+      recordingKey: generateRecordingKey(_$$t2, "sizeSelect.thick"),
       children: jsx(tM, {
         stroke: "THICK" === e ? "var(--color-bg-figjam)" : "var(--color-icon-secondary)"
       })
@@ -3547,7 +3547,7 @@ function tJ() {
           Iw(i);
         },
         tooltipText: _$$M(t),
-        recordingKey: Pt(_$$t2, `washiTapePatternSelect.${t.name}`),
+        recordingKey: generateRecordingKey(_$$t2, `washiTapePatternSelect.${t.name}`),
         children: jsx(tq, {
           value: i
         })
@@ -3634,7 +3634,7 @@ function t2({
     secondaryToolbeltId: _$$w2.DrawingTools,
     tooltipText: s.getText(),
     tooltipShortcut: a(i),
-    recordingKey: Pt(I1, s.recordingKey),
+    recordingKey: generateRecordingKey(I1, s.recordingKey),
     "data-testid": "toolbelt-drawing-button",
     disabled: e,
     hoverBgDisabled: !0,
@@ -3731,7 +3731,7 @@ function t9({
     isActive: t,
     tooltipText: s.getText(),
     tooltipShortcut: a(s.toolId),
-    recordingKey: Pt(_$$t2, s.recordingKey),
+    recordingKey: generateRecordingKey(_$$t2, s.recordingKey),
     children: jsx("div", {
       className: "drawing_secondary_toolbelt--subMenuDrawingToolIconWrapper--rV31e",
       style: void 0 !== r ? {
@@ -3813,7 +3813,7 @@ function io({
         tooltipText: getI18nString("fullscreen_actions.browse-all-resources-dlt"),
         tooltipShortcut: t(zK.INSERTS_MENU),
         onboardingKey: yl,
-        recordingKey: Pt(I1, hj.INSERTS),
+        recordingKey: generateRecordingKey(I1, hj.INSERTS),
         disabled: e
       })
     })
@@ -3896,9 +3896,9 @@ function iT({
       easing: "cubic-bezier(0.37, 0, 0.48, 1.33)"
     }));
     n.play();
-    n.finished.then(() => r.play()).catch(() => {});
-    r.finished.then(() => a.play()).catch(() => {});
-    a.finished.then(() => s.play()).catch(() => {});
+    n.finished.then(() => r.play()).catch(() => { });
+    r.finished.then(() => a.play()).catch(() => { });
+    a.finished.then(() => s.play()).catch(() => { });
     return () => {
       n.cancel();
       a.cancel();
@@ -4223,7 +4223,7 @@ function iP({
     isActive: activeToolId === DesignGraphElements.STICKY,
     onClick: a,
     onboardingKey: s.onboardingKey,
-    recordingKey: Pt(I1, s.recordingKey),
+    recordingKey: generateRecordingKey(I1, s.recordingKey),
     secondaryToolbeltId: _$$w2.StickyTools,
     tooltipShortcut: o(s.toolId),
     tooltipText: s.getText(),

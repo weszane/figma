@@ -1,9 +1,9 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { WB } from "../905/761735";
 import { gY } from "../figma_app/566371";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Jm } from "../figma_app/387599";
 import { KH, A7 } from "../figma_app/471982";
 import { XW, Qc, $3, qY, Vm } from "../figma_app/427318";
@@ -13,7 +13,7 @@ import { C as _$$C, $ } from "../figma_app/382445";
 import { showModalHandler } from "../905/156213";
 import { s0, M5 } from "../figma_app/350203";
 import { Cu } from "../figma_app/314264";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { M4 } from "../905/713695";
 import { U, xQ, vt } from "../figma_app/45218";
 import { a as _$$a } from "../figma_app/601188";
@@ -21,7 +21,7 @@ import { G$, FF } from "../figma_app/588092";
 export function $$$$w0(e, t, r, m) {
   let g = function (e, t, r, i) {
     let n = useDispatch();
-    let o = iZ();
+    let o = selectCurrentUser();
     let a = Jm();
     let l = () => {
       XW(e) || (Cu(b()), U(e) ? n(zm({
@@ -81,7 +81,7 @@ export function $$$$w0(e, t, r, m) {
   }(e, t, r, m);
   let b = function (e, t, r, m) {
     let _ = useDispatch();
-    let p = iZ();
+    let p = selectCurrentUser();
     let g = Jm();
     let v = gY(C);
     let b = gY(L);
@@ -110,7 +110,7 @@ export function $$$$w0(e, t, r, m) {
         }
       }, r);
       r.catch(e => {
-        _(F.enqueue({
+        _(VisualBellActions.enqueue({
           message: getI18nString("community.actions.unable_to_like_this_resource_error", {
             error: J(e, e.data?.message)
           }),
@@ -152,7 +152,7 @@ export function $$$$w0(e, t, r, m) {
         }
       }, n);
       n.catch(e => {
-        _(F.enqueue({
+        _(VisualBellActions.enqueue({
           message: getI18nString("community.actions.unable_to_unlike_this_resource_error", {
             error: J(e, e.data.message)
           }),

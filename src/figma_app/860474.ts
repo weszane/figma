@@ -7,7 +7,7 @@ import { At } from "../905/973142";
 import { j_, El } from "../figma_app/9619";
 import { Fk, Ch, Wy, ml, hw, yo } from "../905/125333";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { sV } from "../figma_app/712525";
 import { H1, z, XJ, X0 } from "../figma_app/451700";
 import { kM } from "../figma_app/421886";
@@ -104,7 +104,7 @@ export function $$E0(e) {
       e.dispatch(sV(EditAction.REPLACE));
     },
     showMissingFontBell() {
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         type: "canvas-search-missing-fonts",
         message: getI18nString("canvas_search.missing_fonts"),
         button: {

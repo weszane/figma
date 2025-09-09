@@ -1,10 +1,10 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { defaultSessionLocalIDString, sessionLocalIDToString } from "../905/871411";
 import l from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -301,7 +301,7 @@ let L = memo(({
           copyActionEnabled: t,
           hasCodeDiff: !0,
           hideHints: !0,
-          recordingKey: Pt("styles_code_panel", e.name)
+          recordingKey: generateRecordingKey("styles_code_panel", e.name)
         })
       }, e.name) : null;
     })]

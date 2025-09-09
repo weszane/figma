@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect, useCallback } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { getLocalStorage } from "../905/657224";
 import { tS } from "../figma_app/516028";
 export function $$o0({

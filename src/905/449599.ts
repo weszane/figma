@@ -1,7 +1,7 @@
 import n, { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import a, { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { S as _$$S } from "../figma_app/78808";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Bb, ju, E_, Re, Ub, JT, co, _t, ZG, Yc, IM, QU, xe, H0, Fx, bH, kO, iL, Ax, Ay, NY, pA } from "../figma_app/274571";
@@ -9,7 +9,7 @@ import { jN } from "../905/612685";
 import { d as _$$d } from "../905/91820";
 import { Vn, mr } from "../figma_app/864246";
 import { Xv } from "../905/225144";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 let d = `
 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M10 2H3C2.44772 2 2 2.44772 2 3V10C2 10.5523 2.44772 11 3 11V12C1.89543 12 1 11.1046 1 10V3C1 1.89543 1.89543 1 3 1H10C11.1046 1 12 1.89543 12 3H11C11 2.44772 10.5523 2 10 2ZM6 5H13C13.5523 5 14 5.44772 14 6V13C14 13.5523 13.5523 14 13 14H6C5.44772 14 5 13.5523 5 13V6C5 5.44772 5.44772 5 6 5ZM4 6C4 4.89543 4.89543 4 6 4H13C14.1046 4 15 4.89543 15 6V13C15 14.1046 14.1046 15 13 15H6C4.89543 15 4 14.1046 4 13V6Z" fill="black" fill-opacity="0.9"/>
@@ -263,7 +263,7 @@ let S = new class {
     this.summaryMountedListeners = {};
   }
   attachMountedListener(e) {
-    let t = _$$g();
+    let t = generateUUIDv4();
     this.summaryMountedListeners[t] = e;
     return t;
   }
@@ -634,7 +634,7 @@ export function $$w0({
             });
             p.length > 0 && Ay(y, p, m);
             NY.copySummaryDataToClipboard(t, b);
-            debugState.dispatch(F.enqueue({
+            debugState.dispatch(VisualBellActions.enqueue({
               message: getI18nString("whiteboard.ai_summary.copy_text_to_clipboard"),
               error: !1,
               type: "copy-summary-text-to-clipboard"

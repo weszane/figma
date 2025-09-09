@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { FontSourceType, FontHelpers } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { a as _$$a } from "../905/714538";

@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback, useEffect, useLayoutEffect } from "react";
 import { createPortal } from "../vendor/944059";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { yW, FJ } from "../vendor/491721";
 import { DF } from "../vendor/463802";
 import { Sd, Bt } from "../vendor/425002";

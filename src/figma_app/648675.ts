@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { UserActionState } from "../figma_app/763686";
 import { isInvalidValue } from "../905/216495";
 import { kl } from "../905/275640";

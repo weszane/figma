@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Jn } from "../905/17223";
 import { tM, rb, Us, vd } from "../figma_app/637027";

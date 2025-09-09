@@ -3,10 +3,10 @@ import { bT } from "../905/851937";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { waitForAnimationFrame } from "../905/236856";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { debugState } from "../905/407919";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { dW } from "../905/515076";
+import { applyCodeExtensionPreferences } from "../905/515076";
 import { wR } from "../figma_app/765689";
 import { q5 } from "../figma_app/516028";
 import { f$, n4, hY } from "../figma_app/603466";
@@ -199,7 +199,7 @@ let y = class e {
     this.log("prepPluginForRun", "Prepping plugin for run", {
       plugin: e
     });
-    dW(e, null);
+    applyCodeExtensionPreferences(e, null);
     f$();
     n4();
     hY();
@@ -212,7 +212,7 @@ let y = class e {
       runningPluginState: iu,
       ...n
     };
-    k.log("[PluginManager]", `[${t}]`, r, i);
+    logger.log("[PluginManager]", `[${t}]`, r, i);
   }
 };
 y.instance = new y();

@@ -1,6 +1,6 @@
 import { NC } from "../905/17179";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Q } from "../905/618914";
 import { EO } from "../figma_app/684446";
 import { FMemberRoleType } from "../figma_app/191312";
@@ -46,7 +46,7 @@ let y = async (e, t, r) => {
         key: EO(r)
       }));
     } catch (t) {
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         type: "get-license-groups",
         message: t.data?.message || getI18nString("license_group.an_error_occurred_while_fetching_workspaces"),
         error: !0

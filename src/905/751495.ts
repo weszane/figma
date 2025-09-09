@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { g as _$$g } from "../905/749786";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
@@ -16,7 +16,7 @@ import { Yu } from "../905/355291";
 import { yJ } from "../figma_app/24841";
 import { qC, lJ, vJ } from "../905/264101";
 import { Z } from "../905/854480";
-import { iZ, pS } from "../905/372672";
+import { selectCurrentUser, hasPasswordOrSSO } from "../905/372672";
 import { ed, r6 } from "../905/990455";
 import { registerModal } from "../905/102752";
 import { _ as _$$_ } from "../905/799322";
@@ -28,7 +28,7 @@ let $$C0 = registerModal(function (e) {
     onClose
   } = e;
   let r = useDispatch();
-  let s = iZ();
+  let s = selectCurrentUser();
   let d = Z();
   let c = () => {
     if (!s) return null;
@@ -51,7 +51,7 @@ let $$C0 = registerModal(function (e) {
   return s ? s.email_validated_at ? jsx(bL, {
     width: "lg",
     manager: u,
-    children: pS(s) ? s.two_factor_secret_loaded ? s.two_factor_app_enabled ? jsx(k, {}) : jsx(N, {}) : jsx(R, {}) : jsx(_$$_, {
+    children: hasPasswordOrSSO(s) ? s.two_factor_secret_loaded ? s.two_factor_app_enabled ? jsx(k, {}) : jsx(N, {}) : jsx(R, {}) : jsx(_$$_, {
       twoFactorAuth: d,
       fplModal: !0,
       title: renderI18nText("auth.two-factor-setup.set_up_two_factor_authentication")
@@ -107,7 +107,7 @@ function k() {
 }
 function R() {
   let e = useDispatch();
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = Z();
   let r = T();
   return t ? jsxs(vo, {
@@ -156,7 +156,7 @@ function R() {
             children: renderI18nText("auth.two-factor-setup.cancel")
           }), jsx($n, {
             onClick: () => {
-              pS(t) && e(lJ({
+              hasPasswordOrSSO(t) && e(lJ({
                 token: t.password_token,
                 mfaToken: t.mfa_setup_token
               }));

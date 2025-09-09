@@ -8,12 +8,12 @@ import { vt } from "../figma_app/306946";
 import { M } from "../1250/758461";
 import { YW } from "../figma_app/350203";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { nx } from "../figma_app/12796";
 import { px, S2, sI } from "../figma_app/465071";
 if (443 == require.j) {}
 export function $$f0() {
-  let e = iZ();
+  let e = selectCurrentUser();
   let t = px();
   let n = S2();
   let a = sI(t).unwrapOr(!1);

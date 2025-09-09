@@ -1,16 +1,16 @@
 import { useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { jm } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { Rs } from "../figma_app/288654";
 import { isIpadDevice } from "../figma_app/778880";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
 import { $ } from "../905/851662";
 import { _ as _$$_ } from "../905/170564";
 import { lg } from "../figma_app/976749";
 import { FDeviceType } from "../figma_app/191312";
-import { o$Q } from "../figma_app/43951";
+import { LatestClipboardData } from "../figma_app/43951";
 import { ds } from "../figma_app/314264";
 import { aq } from "../figma_app/412189";
 export function $$E0(e, t) {
@@ -22,7 +22,7 @@ export function $$y1() {
   let r = "whiteboard" === lg();
   let a = aq();
   let E = isIpadDevice ? FDeviceType.DESKTOP : FDeviceType.IPAD;
-  let y = Rs(o$Q, {
+  let y = Rs(LatestClipboardData, {
     deviceType: E
   });
   useEffect(() => {
@@ -35,7 +35,7 @@ export function $$y1() {
       copy_timestamp: n.timestamp
     };
     ds("crossDeviceCopyPaste_s3_header_fetch_start", i.openFile?.key, i, o);
-    let l = _$$g();
+    let l = generateUUIDv4();
     t.current = l;
     T(() => fetch(n.presignedDownloadUrl, {
       method: "HEAD"

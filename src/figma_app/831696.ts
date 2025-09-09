@@ -2,13 +2,13 @@ import { isEmptyObject } from "../figma_app/493477";
 import { PrototypingTsApi } from "../figma_app/763686";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { parseQuery, serializeQuery } from "../905/634134";
 import { EO } from "../905/691205";
 import { FFileType } from "../figma_app/191312";
 export function $$u3(e, t, r, n, s) {
   let c = {};
-  let u = parseQuery(Ay.location.search);
+  let u = parseQuery(customHistory.location.search);
   for (let e in u) "" !== e && (c[e] = u[e]);
   e.scalingInfo?.viewportScalingMode && (c.scaling = e.scalingInfo.viewportScalingMode);
   e.scalingInfo?.contentScalingMode && (c["content-scaling"] = e.scalingInfo?.contentScalingMode);

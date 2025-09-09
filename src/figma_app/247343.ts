@@ -2,7 +2,7 @@ import { createOptimistCommitAction, createOptimistRevertAction } from "../905/6
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { j } from "../905/869261";
 import { showModalHandler } from "../905/156213";
 import { FPlanRestrictionType } from "../figma_app/191312";
@@ -49,7 +49,7 @@ createOptimistThunk((e, {
           case FPlanRestrictionType.RESTRICTED:
             l = getI18nString("team_user.actions.team_members_downgraded_to_viewer_restricted.seat_rename", m);
         }
-        e.dispatch(F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           type: "team-paid-status-updated",
           message: l
         }));

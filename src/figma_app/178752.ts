@@ -1,16 +1,16 @@
 import { useMemo, useEffect } from "react";
-import { useSelector, useStore } from "../vendor/514228";
+import { useSelector, useStore } from "react-redux";
 import { ZC } from "../figma_app/39751";
 import { Rs } from "../figma_app/288654";
 import { eB } from "../figma_app/933328";
 import { LH } from "../905/872904";
-import { MWb } from "../figma_app/43951";
+import { WorkspaceSubscribedLibrariesForFile } from "../figma_app/43951";
 import { PW } from "../figma_app/633080";
 import { tS } from "../figma_app/516028";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 export function $$_1(e) {
   let t = useSelector(e => e.library);
-  let r = TA();
+  let r = getUserId();
   let a = useSelector(e => e.recentlyUsed.libraryItems);
   return useMemo(() => {
     let n = [];
@@ -33,7 +33,7 @@ export function $$h0() {
   let e = tS();
   let t = LH();
   let r = useStore();
-  let c = Rs(MWb, {
+  let c = Rs(WorkspaceSubscribedLibrariesForFile, {
     fileKey: e
   }, {
     enabled: !!e && !!t

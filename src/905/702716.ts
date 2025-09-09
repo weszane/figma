@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { CY } from "../figma_app/637027";
 import { z } from "../905/284530";
 import { B } from "../905/714743";

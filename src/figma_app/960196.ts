@@ -1,19 +1,19 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useContext, useMemo, useState, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { VariableDataType, VariableResolvedDataType, VariablesBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { wv } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
 import { B } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
 import { bL, u as _$$u } from "../figma_app/852050";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
 import { Nw, y7 } from "../figma_app/505098";
@@ -66,7 +66,7 @@ function P({
       let e = A ? getI18nString("variables.binding_ui.create_variable_property_button_tooltip") : getI18nString("variables.binding_ui.create_variable_button_tooltip");
       return jsx(K, {
         "aria-label": e,
-        recordingKey: Pt(m, "createVariable"),
+        recordingKey: generateRecordingKey(m, "createVariable"),
         onClick: N,
         htmlAttributes: {
           "data-tooltip": e,
@@ -257,7 +257,7 @@ function j({
       resolvedType: VariableResolvedDataType.COLOR,
       value: r
     };
-    permissionScopeHandler.user("set-color-variable-value", () => VariablesBindings.setVariableValueForMode(e, t, i)) && n === zk.YES && fullscreenValue.triggerAction("commit");
+    permissionScopeHandler.user("set-color-variable-value", () => VariablesBindings.setVariableValueForMode(e, t, i)) && n === yesNoTrackingEnum.YES && fullscreenValue.triggerAction("commit");
   }, [e, t]);
   if (y?.resolvedType === VariableResolvedDataType.COLOR && y?.type !== VariableDataType.NODE_FIELD_ALIAS) return jsxs(Fragment, {
     children: [jsx(_$$I, {
@@ -271,7 +271,7 @@ function j({
       onClose: T,
       recordingKey: "variableBindingsDropdown"
     }), jsx($3, {
-      recordingKey: Pt("variableBindingsDropdown", "closer"),
+      recordingKey: generateRecordingKey("variableBindingsDropdown", "closer"),
       onClose: T
     })]
   });

@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { setupAutofocusHandler } from "../905/128376";
 import { Rq } from "../905/38914";
 import { Y9, hE, nB, wi } from "../figma_app/272243";

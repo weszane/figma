@@ -5,7 +5,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { w } from "../905/5147";
 import { logError } from "../905/714362";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { cb } from "../905/760074";
 import { nX } from "../905/617744";
 import { ap, NQ } from "../905/535806";
@@ -273,7 +273,7 @@ class f extends Error {
     let r = DiffImpl.getConflictingChunkGroups(e.branchModalTrackingId);
     if (r.error) throw Error(r.error);
     let a = r.conflictingChunkGroups.map(e => ({
-      id: _$$g(),
+      id: generateUUIDv4(),
       sourceChunks: e.sourceChunks.map(e => t(e, GitReferenceType.SOURCE)),
       branchChunks: e.branchChunks.map(e => t(e, GitReferenceType.BRANCH)),
       secondarySourceChunkGUIDs: e.sourceChunkParentGUIDs,

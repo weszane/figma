@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useContext } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { u as _$$u } from "../905/911813";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";

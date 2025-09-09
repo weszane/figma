@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { N } from "../905/438674";
 import { renderI18nText } from "../905/303541";
@@ -7,8 +7,8 @@ import { Y } from "../905/830372";
 import { E } from "../905/984674";
 import { Nn, dx, MZ } from "../figma_app/399472";
 import { getPluginVersion } from "../figma_app/300692";
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
 function c(e) {
   return {
     ...(e.is_widget ? {

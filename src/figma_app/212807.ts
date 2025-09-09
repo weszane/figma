@@ -1,4 +1,4 @@
-import { useSelector, shallowEqual } from "../vendor/514228";
+import { useSelector, shallowEqual } from "react-redux";
 import { Pq, Pe } from "../figma_app/12796";
 import { getPermissionsState } from "../figma_app/642025";
 export function $$s1() {

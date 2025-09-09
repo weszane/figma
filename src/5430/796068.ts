@@ -1,13 +1,13 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { I } from "../figma_app/4253";
 import { QQ, C } from "../figma_app/808294";
 import { K2 } from "../figma_app/777551";
 import { XW, qY } from "../figma_app/427318";
 import { bb } from "../figma_app/399472";
 import { MK, Gl } from "../figma_app/599979";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { U, xQ, I0, m3 } from "../figma_app/45218";
 import { d as _$$d, NY, EV } from "../5430/309696";
 export function $$h0({
@@ -29,7 +29,7 @@ export function $$h0({
   }, [t, x]);
   let g = m3(x);
   let v = I(x);
-  let b = iZ();
+  let b = selectCurrentUser();
   return jsxs(Fragment, {
     children: [f && jsx(_$$d, {
       onClick: y,

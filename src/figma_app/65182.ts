@@ -1,9 +1,9 @@
 import { useMemo, useRef, useState, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { uN } from "../figma_app/338442";
 import { ComponentPropType, ComponentType, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { Mz } from "../vendor/925040";
 import { createOptimistThunk } from "../905/350402";
 import { tL } from "../figma_app/933328";
@@ -64,7 +64,7 @@ let O = () => Mz([Qp, (e, t) => t], (e, t) => {
 });
 export var $$R1 = (e => (e.ADD = "ADD", e.REMOVE = "REMOVE", e))($$R1 || {});
 export function $$L9(e) {
-  let t = k9(() => {
+  let t = useMemoStable(() => {
     var t;
     var r;
     return $$T2(e?.type) ? (t = e.type, r = e.preferredValues, $$T2(t) ? r.filter(e => "key" in e && "string" == typeof e.key && "type" in e && e.type in ComponentType) : []) : [];
@@ -172,7 +172,7 @@ export function $$F8(e) {
   let t = useSelector(Lg);
   let r = useSelector(FZ);
   let a = useMemo(() => !!t && M(r[t] ?? {}), [t, r]);
-  return k9(() => a ? new Set(e.filter(e => !M(e)).map(e => e.node_id)) : new Set(), [a, e]);
+  return useMemoStable(() => a ? new Set(e.filter(e => !M(e)).map(e => e.node_id)) : new Set(), [a, e]);
 }
 export const J0 = $$S0;
 export const Kn = $$R1;

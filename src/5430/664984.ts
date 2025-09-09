@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { r as _$$r } from "../905/520829";
 import { logError } from "../905/714362";
@@ -7,13 +7,13 @@ import { vt } from "../figma_app/306946";
 import { ek, MJ } from "../figma_app/657017";
 import { g } from "../905/347448";
 import { nm } from "../905/352022";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { T5 } from "../figma_app/465071";
 import { O } from "../905/833838";
 var $$h3 = (e => (e.SITES_DISABLED_FOR_STARTER = "sites_disabled_for_starter", e.SITES_DISABLED_FOR_ORG = "sites_disabled_for_org", e.COOPER_DISABLED_FOR_ORG = "cooper_disabled_for_org", e.FIGMAKE_DISABLED_FOR_ORG = "figmake_disabled_for_org", e))($$h3 || {});
 function x(e) {
   let t = useAtomWithSubscription(g);
-  let r = iZ();
+  let r = selectCurrentUser();
   useEffect(() => {
     t === _$$r.INIT && nm()(e).catch(e => {
       logError("Error loading plans for authed users", e, {
@@ -46,7 +46,7 @@ function x(e) {
   }, [t, r]);
 }
 export function $$f1(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let {
     teams,
     orgs
@@ -56,7 +56,7 @@ export function $$f1(e) {
   return useMemo(() => !!t && (teams.length || orgs.length ? Object.values(teams).some(e => MJ(null, e, null)) || Object.values(orgs).some(e => MJ(e, null, null)) : o), [t, teams, orgs, o]);
 }
 export function $$y2(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = useSelector(e => e.searchResults?.data?.org);
   let {
     teams,
@@ -68,7 +68,7 @@ export function $$g0(e) {
   let t = useDispatch();
   let r = function (e) {
     let t = useAtomWithSubscription(g);
-    let r = iZ();
+    let r = selectCurrentUser();
     useEffect(() => {
       t === _$$r.INIT && nm()(e).catch(e => {
         logError("Error loading plans for authed users", e, {

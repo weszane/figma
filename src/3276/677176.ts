@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { pV } from "../figma_app/819288";
 import { Point } from "../905/736624";
 import { WN } from "../figma_app/638601";
@@ -11,7 +11,7 @@ import { MP } from "../figma_app/936061";
 import { Z } from "../905/104740";
 import { Z0, $$ } from "../figma_app/62612";
 import { q5 } from "../figma_app/516028";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { b7 } from "../905/380385";
 import { s as _$$s } from "../905/518538";
@@ -19,7 +19,7 @@ import { fG, pC, gu } from "../905/301347";
 import { XC } from "../905/512783";
 import { c4 } from "../figma_app/70421";
 export function $$w2(e) {
-  let t = TA();
+  let t = getUserId();
   let n = q5()?.canEdit;
   return useCallback(o => !!(!0 !== e && b7(o.sidebarItemType)) && (!!n || o.comments[0].user_id === t), [e, t, n]);
 }

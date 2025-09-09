@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { N_ } from "../vendor/956898";
 import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";

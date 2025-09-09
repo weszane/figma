@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { hZ } from "../905/748726";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { hp, bp } from "../905/913057";
 import { Ib } from "../905/129884";
 import { UE, Ej, o8, Io, dK } from "../905/70359";
@@ -61,7 +61,7 @@ export function $$f1(e) {
     e.autocomplete.tokens.forEach(e => t.add(e.content.id));
     return t;
   }, [e.autocomplete.tokens]);
-  let u = TA();
+  let u = getUserId();
   let g = (n, r) => {
     let a = e.searchResultToken(n);
     i.has(a.content.id) || (t(hZ({

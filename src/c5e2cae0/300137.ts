@@ -11,7 +11,7 @@ import { sx } from "../905/941192";
 import { fu, tf } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
 import { Cn } from "../c5e2cae0/453906";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { SubscriptionType } from "../figma_app/831101";
 let g = M4.Query({
   fetch: async () => (await Cn.maintenancePoc1()).data.meta
@@ -39,7 +39,7 @@ function y({
   isReviewPage: a,
   isCampfireCart: h
 }) {
-  let v = iZ();
+  let v = selectCurrentUser();
   let y = function (e) {
     let {
       data,

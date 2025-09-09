@@ -1,5 +1,5 @@
 import { useMemo, useEffect, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
@@ -12,7 +12,7 @@ import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { P as _$$P, o as _$$o } from "../905/717906";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { AC } from "../figma_app/777551";
 import { L as _$$L } from "../905/178090";
 import { Vl, mV } from "../905/837497";
@@ -24,9 +24,9 @@ import { p8 } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
 import { tS } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { FPublicationStatusType, FPublisherType, FPinStatusType, FUserRoleType } from "../figma_app/191312";
-import { BB3, k_1 } from "../figma_app/43951";
+import { InstalledPlugins, Plugin } from "../figma_app/43951";
 import { mn, oh } from "../905/18797";
 import { Eh, cb } from "../figma_app/12796";
 import { filterEntriesByPluginVersionEditorType, filterPublishedResources, sortResourcesByCreatedAt, filterResourcesByMatch, filterEntriesByEditorType, canRunPlugin, convertEditorTypeToFileType, isEditorTypeMatch, isDevModePlugin, getCurrentPluginVersion, getPluginByFileId, getPluginVersion } from "../figma_app/300692";
@@ -99,7 +99,7 @@ export function $$q12(e) {
 export function $$J38({
   includePendingPublishers: e = !0
 } = {}) {
-  let t = TA();
+  let t = getUserId();
   let r = $$$32();
   return useMemo(() => {
     if (!t) return [];
@@ -113,7 +113,7 @@ function Z() {
   return useMemo(() => Object.values(t).filter(t => e.every(e => e.id !== t.plugin_id)), [e, t]);
 }
 export function $$Q11() {
-  let e = TA();
+  let e = getUserId();
   let t = $$J38();
   let r = Z();
   return useMemo(() => t.reduce((t, r) => {
@@ -149,12 +149,12 @@ export function $$ee5() {
   return e.length + t.length;
 }
 export function $$et33() {
-  let e = TA();
+  let e = getUserId();
   let t = $$J38();
   return null != e ? t.filter(t => dN(t, e)) : [];
 }
 export function $$er30(e) {
-  let t = TA();
+  let t = getUserId();
   let r = $$$32()[e];
   let n = $$X27();
   if (r) return dN(r, t ?? "");
@@ -164,14 +164,14 @@ export function $$er30(e) {
 export function $$en31({
   includePendingPublishers: e = !0
 } = {}) {
-  let t = TA();
+  let t = getUserId();
   let r = $$X27();
   if (!t) return [];
   let n = filterPublishedResources(Object.values(r));
   return sortResourcesByCreatedAt(filterResourcesByMatch(n, t, e));
 }
 export function $$ei7() {
-  let e = TA();
+  let e = getUserId();
   let t = $$en31();
   let r = ea();
   return useMemo(() => t.reduce((t, r) => {
@@ -212,7 +212,7 @@ export function $$es6() {
   return e.length + t.length;
 }
 export function $$eo51() {
-  let e = TA();
+  let e = getUserId();
   let t = $$en31();
   return null != e ? t.filter(t => dN(t, e)) : [];
 }
@@ -481,10 +481,10 @@ let eg = d()(e => {
 export function $$ef4() {
   let e = useDispatch();
   let t = useSelector(e => e.currentUserOrgId);
-  let r = Rs(BB3, {
+  let r = Rs(InstalledPlugins, {
     orgId: t
   });
-  let a = TA();
+  let a = getUserId();
   let s = $$eq15();
   return useMemo(() => {
     if ("loaded" !== r.status) return {
@@ -588,8 +588,8 @@ export function $$ey43(e) {
 }
 export function $$eb28(e, t) {
   let r = sZ()?.id ?? null;
-  let i = TA();
-  let a = Rs(k_1, {
+  let i = getUserId();
+  let a = Rs(Plugin, {
     orgId: r,
     pluginId: e
   }, {
@@ -609,12 +609,12 @@ export function $$eT49(e, {
   enabled: t
 }) {
   let r = sZ()?.id ?? null;
-  let i = TA();
+  let i = getUserId();
   let a = useMemo(() => e.map(e => ({
     orgId: r,
     pluginId: e
   })), [e, r]);
-  let s = _$$p(k_1, a, {
+  let s = _$$p(Plugin, a, {
     enabled: t
   });
   let o = [];
@@ -661,7 +661,7 @@ export function $$ex1() {
   let e = useSelector(e => e.recentlyUsed.widgets);
   let t = $$z53();
   let r = _$$o2();
-  let a = TA();
+  let a = getUserId();
   let s = $$eq15();
   return useMemo(() => {
     let n = [];
@@ -687,7 +687,7 @@ export function $$eC8() {
   let e = useSelector(e => e.recentlyUsed.plugins);
   let t = $$H41();
   let r = _$$o2();
-  let a = TA();
+  let a = getUserId();
   let s = useMemo(() => {
     let n = [];
     r && a && e[r].forEach(r => {
@@ -732,7 +732,7 @@ export function $$eL24() {
 export function $$eP48() {
   let e = useSelector(e => e.recentlyUsed.plugins);
   let t = useSelector(e => e.recentlyUsed.widgets);
-  let r = TA();
+  let r = getUserId();
   let a = _$$o2();
   return useMemo(() => {
     let n = {};
@@ -878,7 +878,7 @@ export function $$eG9(e) {
           reportAsSentryError: !0
         });
         let i = getI18nString("community.actions.an_error_occurred_while_searching_for_plugins");
-        h(_$$F.enqueue({
+        h(VisualBellActions.enqueue({
           error: !0,
           message: i
         }));
@@ -947,7 +947,7 @@ export function $$eV17(e) {
           reportAsSentryError: !0
         });
         let i = getI18nString("community.actions.an_error_occurred_while_searching_for_widgets");
-        f(_$$F.enqueue({
+        f(VisualBellActions.enqueue({
           error: !0,
           message: i
         }));
@@ -1072,7 +1072,7 @@ export function $$eQ34(e) {
   let c = !a || l || d?.org_id;
   let u = !s && !c;
   return {
-    validatePublishedPluginInOrgAllowlist: useCallback(() => !u || (t(_$$F.enqueue({
+    validatePublishedPluginInOrgAllowlist: useCallback(() => !u || (t(VisualBellActions.enqueue({
       message: getI18nString("universal_insert.plugin_not_in_allowlist"),
       error: !0
     })), !1), [u, t]),

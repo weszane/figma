@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { L8, rG } from "../905/124270";

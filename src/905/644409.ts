@@ -1,93 +1,207 @@
-import { throwIf } from "../905/419236";
-import { isObjectType, isEmbedded, isComputed } from "../905/552287";
-import { ObjectFieldDefinition } from "../905/824218";
-import { ScalarField } from "../905/320277";
-import { F, V } from "../905/52806";
-import { CustomError } from "../905/962682";
-import { oneLine } from "common-tags";
-export class $$c0 {
-  name;
-  fields;
-  queriedFields = [];
-  needsTransform;
-  embedded;
-  pendingComputedFields = new Set();
-  naturalKey;
-  deprecated;
-  annotations;
-  fieldGuide;
-  def;
-  constructor(e, t) {
-    for (let i of (this.def = e, this.name = e.name, this.fields = new Map(), this.embedded = e.embedded, this.naturalKey = e.naturalKey, this.annotations = e.annotations, this.deprecated = e.deprecated, t && this.name in t && (this.fieldGuide = t[this.name]), e.fields)) {
-      let e = this.fieldGuide && i.name in this.fieldGuide ? new Date(this.fieldGuide[i.name].firstSeen) : void 0;
-      isObjectType(i) ? (this.fields.set(i.name, new ObjectFieldDefinition(i, e)), isEmbedded(i) && this.queriedFields.push(i.name)) : isComputed(i) ? this.pendingComputedFields.add(i.name) : (this.fields.set(i.name, new ScalarField(i, e)), this.queriedFields.push(i.name));
+import { oneLine } from 'common-tags'
+import { ComputedFieldDef, isComputedField } from '../905/52806'
+import { ScalarField } from '../905/320277'
+import { throwIf } from '../905/419236'
+import { isComputed, isEmbedded, isObjectType } from '../905/552287'
+import { ObjectFieldDefinition } from '../905/824218'
+import { CustomError } from '../905/962682'
+
+/**
+ * Represents an object type definition with fields, computed fields, and validation logic.
+ * Original class name: $$c0
+ */
+export class ObjectTypeDefinition {
+  name: string
+  fields: Map<string, ScalarField | ObjectFieldDefinition | ComputedFieldDef>
+  queriedFields: string[] = []
+  needsTransform: boolean
+  embedded: boolean
+  pendingComputedFields: Set<string> = new Set()
+  naturalKey: Set<string>
+  deprecated: boolean
+  annotations: any
+  fieldGuide: any
+  def: any
+
+  /**
+   * Constructs an ObjectTypeDefinition instance.
+   * @param def - The object type definition.
+   * @param fieldGuideMap - Optional field guide mapping.
+   */
+  constructor(def: any, fieldGuideMap?: Record<string, any>) {
+    this.def = def
+    this.name = def.name
+    this.fields = new Map()
+    this.embedded = def.embedded
+    this.naturalKey = def.naturalKey
+    this.annotations = def.annotations
+    this.deprecated = def.deprecated
+    if (fieldGuideMap && this.name in fieldGuideMap) {
+      this.fieldGuide = fieldGuideMap[this.name]
     }
-    this.needsTransform = e.fields.some(({
-      type: e
-    }) => u(e) || "list" === e.kind && u(e.ofType));
+    for (const field of def.fields) {
+      // Determine firstSeen date if available
+      const firstSeen = this.fieldGuide && field.name in this.fieldGuide ? new Date(this.fieldGuide[field.name].firstSeen) : undefined
+      if (isObjectType(field)) {
+        this.fields.set(field.name, new ObjectFieldDefinition(field, firstSeen))
+        if (isEmbedded(field)) {
+          this.queriedFields.push(field.name)
+        }
+      }
+      else if (isComputed(field)) {
+        this.pendingComputedFields.add(field.name)
+      }
+      else {
+        this.fields.set(field.name, new ScalarField(field, firstSeen))
+        this.queriedFields.push(field.name)
+      }
+    }
+
+    // Determine if any field needs transformation
+    this.needsTransform = def.fields.some(({
+      type,
+    }) => isDateType(type) || type.kind === 'list' && isDateType(type.ofType))
   }
-  constructComputedFields(e, t) {
-    for (let i of e.fields) if (isComputed(i)) {
-      let e = this.fieldGuide && i.name in this.fieldGuide ? new Date(this.fieldGuide[i.name].firstSeen) : void 0;
-      let n = new F(i, this, t, e);
-      this.fields.set(i.name, n);
-      this.pendingComputedFields.$$delete(i.name);
-      t.addComputedObject(n);
+
+  /**
+   * Constructs computed fields for the object type.
+   * Original method name: constructComputedFields
+   * @param def - The object type definition.
+   * @param schema - The schema instance.
+   */
+  constructComputedFields(def: any, schema: any): void {
+    for (const field of def.fields) {
+      if (isComputed(field)) {
+        const firstSeen = this.fieldGuide && field.name in this.fieldGuide ? new Date(this.fieldGuide[field.name].firstSeen) : undefined
+        const computedField = new ComputedFieldDef(field, this, schema, firstSeen)
+        this.fields.set(field.name, computedField)
+        this.pendingComputedFields.delete(field.name)
+        schema.addComputedObject(computedField)
+      }
     }
   }
-  validate(e) {
-    if ("root" === this.name) {
-      for (let e of this.fields.values()) if (e instanceof ObjectFieldDefinition) {
-        if (e.embedded) throw new CustomError((0, oneLine)`
-               root fields cannot be embedded type, but '${e.name}'
-               is embedded`);
-      } else if (!(e instanceof F)) throw new CustomError((0, oneLine)`
-            root fields must be of object type or computed field type, but '${e.name}' is
-            '${e.type.kind}'`);
-    } else this.embedded || this.fieldDef("id");
-    for (let t of this.fields.values()) {
-      if (V(t) && void 0 === t.viewDef) throw new CustomError(`Error constructing lazy viewDef for computed field '${t.name}' of object '${this.name}'`);
-      t.validate(e, this);
+
+  /**
+   * Validates the object type definition.
+   * Original method name: validate
+   * @param schema - The schema instance.
+   */
+  validate(schema: any): void {
+    if (this.name === 'root') {
+      for (const field of this.fields.values()) {
+        if (field instanceof ObjectFieldDefinition) {
+          if (field.embedded) {
+            throw new CustomError(oneLine`
+              root fields cannot be embedded type, but '${field.name}'
+              is embedded`)
+          }
+        }
+        else if (!(field instanceof ComputedFieldDef)) {
+          throw new CustomError(oneLine`
+            root fields must be of object type or computed field type, but '${field.name}' is
+            '${field.type.kind}'`)
+        }
+      }
+    }
+    else {
+      if (!this.embedded) {
+        this.fieldDef('id')
+      }
+    }
+    for (const field of this.fields.values()) {
+      if (isComputedField(field) && field.viewDef === undefined) {
+        throw new CustomError(`Error constructing lazy viewDef for computed field '${field.name}' of object '${this.name}'`)
+      }
+      field.validate(schema, this)
     }
   }
-  fieldDef(e) {
-    let t = this.fields.get(e);
-    if (t) return t;
-    if (this.pendingComputedFields.has(e)) throw new CustomError((0, oneLine)`
-        field '${e}' is a computed field of '${this.name}', but computed fields haven't yet been constructed.
+
+  /**
+   * Retrieves the field definition by name.
+   * Original method name: fieldDef
+   * @param fieldName - The name of the field.
+   * @returns The field definition.
+   */
+  fieldDef(fieldName: string): ScalarField | ObjectFieldDefinition | ComputedFieldDef {
+    const field = this.fields.get(fieldName)
+    if (field)
+      return field
+    if (this.pendingComputedFields.has(fieldName)) {
+      throw new CustomError(oneLine`
+        field '${fieldName}' is a computed field of '${this.name}', but computed fields haven't yet been constructed.
         You may need to re-order objects in the Schema definition.
-      `);
-    throw new CustomError((0, oneLine)`
-      field '${e}' isn't present in object type '${this.name}'`);
+      `)
+    }
+    throw new CustomError(oneLine`
+      field '${fieldName}' isn't present in object type '${this.name}'`)
   }
-  readPlainObject(e) {
-    if (!this.needsTransform) return e;
-    let t = {
-      id: e.id
-    };
-    for (let [i, {
-      type: n
+
+  /**
+   * Reads a plain object and transforms fields if needed.
+   * Original method name: readPlainObject
+   * @param obj - The plain object to read.
+   * @returns The transformed object.
+   */
+  readPlainObject(obj: Record<string, any>): Record<string, any> {
+    if (!this.needsTransform)
+      return obj
+    const result: Record<string, any> = {
+      id: obj.id,
+    }
+    for (const [fieldName, {
+      type,
     }] of this.fields.entries()) {
-      if (!(i in e)) continue;
-      let r = e[i];
-      t[i] = this.readPlainObjectField(i, r, n);
+      if (!(fieldName in obj))
+        continue
+      const value = obj[fieldName]
+      result[fieldName] = this.readPlainObjectField(fieldName, value, type)
     }
-    return t;
+    return result
   }
-  readPlainObjectField(e, t, i) {
-    if (!this.needsTransform) return t;
-    if (i || (i = this.fields.get(e).type), null !== t) {
-      if (u(i)) return p(t);
-      if ("list" === i.kind && u(i.ofType)) return t.map(p);
+
+  /**
+   * Reads and transforms a single field value if needed.
+   * Original method name: readPlainObjectField
+   * @param fieldName - The field name.
+   * @param value - The field value.
+   * @param type - The field type.
+   * @returns The transformed value.
+   */
+  readPlainObjectField(fieldName: string, value: any, type?: any): any {
+    if (!this.needsTransform)
+      return value
+    if (!type)
+      type = this.fields.get(fieldName)?.type
+    if (value !== null) {
+      if (isDateType(type))
+        return parseDate(value)
+      if (type.kind === 'list' && isDateType(type.ofType))
+        return value.map(parseDate)
     }
-    return t;
+    return value
   }
 }
-function u(e) {
-  return "date" === e.kind || "datetime" === e.kind;
+
+/**
+ * Checks if a type is a date or datetime type.
+ * Original function name: u
+ * @param type - The type to check.
+ * @returns True if the type is date or datetime.
+ */
+function isDateType(type: any): boolean {
+  return type.kind === 'date' || type.kind === 'datetime'
 }
-function p(e) {
-  throwIf("string" == typeof e, "readDateFromString: input is not a string");
-  return new Date(e);
+
+/**
+ * Parses a date value from a string.
+ * Original function name: p
+ * @param value - The value to parse.
+ * @returns The parsed Date object.
+ */
+function parseDate(value: any): Date {
+  throwIf(typeof value !== 'string', 'readDateFromString: input is not a string')
+  return new Date(value)
 }
-export const D = $$c0;
+
+// Export with refactored name
+export const D = ObjectTypeDefinition

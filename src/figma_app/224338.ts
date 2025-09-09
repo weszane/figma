@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { AppStateTsApi } from "../figma_app/763686";
 import { Y } from "../905/912236";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { KH } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
@@ -23,14 +23,14 @@ export function $$_0() {
 }
 export function $$h1() {
   let e = KH();
-  return k9(() => {
+  return useMemoStable(() => {
     let t = getSingletonSceneGraph();
     return e && t ? Object.keys(e).filter(e => t.get(e)?.isSlideOrTemplate() ?? !1) : [];
   }, [e]);
 }
 export function $$m5() {
   let e = KH();
-  return k9(() => {
+  return useMemoStable(() => {
     let t = getSingletonSceneGraph();
     let r = new Set();
     Object.keys(e).forEach(e => {
@@ -42,7 +42,7 @@ export function $$m5() {
 }
 export function $$g4() {
   let e = KH();
-  return k9(() => {
+  return useMemoStable(() => {
     let t = getSingletonSceneGraph();
     let r = new Set();
     Object.keys(e).forEach(e => {

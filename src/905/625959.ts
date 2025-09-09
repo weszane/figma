@@ -1,6 +1,6 @@
 import { Actions } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { q } from "../905/196201";
+import { LRUCache } from "../905/196201";
 import { YQ } from "../905/502364";
 import { b } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
@@ -33,8 +33,8 @@ export function $$d1() {
 }
 export let $$c0 = new class {
   constructor(e, t) {
-    this._permanentCache = new q(e);
-    this._temporaryCache = new q(t);
+    this._permanentCache = new LRUCache(e);
+    this._temporaryCache = new LRUCache(t);
   }
   get(e, t, i) {
     let a = `${e} ${t}`;

@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { EJ } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { $D } from "../figma_app/789";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { q } from "../905/495564";
 import { e6 } from "../905/557142";
 import { QB } from "../figma_app/707808";
@@ -32,7 +32,7 @@ function g(e, t, r) {
   });
 }
 export function $$f0(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = useSelector(e => e.multiplayer);
   let a = q();
   let s = cJ();
@@ -45,7 +45,7 @@ export function $$f0(e) {
   t ? E = f.id === t.id : "sessionId" in f && (E = y);
   let I = "role" in e ? g(f.handle, E, e.role.level) : g(f.handle, E);
   let S = function (e) {
-    let t = iZ();
+    let t = selectCurrentUser();
     return function (e) {
       let {
         localUser,

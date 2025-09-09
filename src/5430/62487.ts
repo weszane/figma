@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { PerfTimer } from "../905/609396";
 import { getI18nString } from "../905/303541";
 import { pY, MZ, Dy } from "../figma_app/925970";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { mk } from "../figma_app/999312";
 import { yl } from "../figma_app/777551";
 import { L as _$$L } from "../905/178090";
@@ -58,7 +58,7 @@ let T = e => {
   };
 };
 let I = (e, t) => {
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     message: t.message || getI18nString("community.error.search_request_failed"),
     error: !0,
     type: "community-search-error",

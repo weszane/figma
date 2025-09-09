@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useState, useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -16,7 +16,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { u as _$$u } from "../1e926454/858319";
 import { dr, eb as _$$eb, oU } from "../4452/405965";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { H_ } from "../figma_app/336853";
@@ -140,7 +140,7 @@ export function $$ee0(e) {
     initialView
   } = e;
   let $ = useDispatch();
-  let G = Pc();
+  let G = selectUser();
   let V = useSelector(e => e.autocomplete);
   let z = useSelector(e => e.contacts);
   let H = useSelector(e => e.dropdownShown);

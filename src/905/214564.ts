@@ -3,7 +3,7 @@ import r from "classnames";
 import { il } from "../vendor/291472";
 import { parsePxNumber } from "../figma_app/783094";
 import { iA, PC, OV } from "../905/403166";
-import { o6, Pt } from "../figma_app/806412";
+import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
 import { Hn, f6, xD, ri } from "../905/337179";
 import { useState, useCallback, useEffect } from "react";
 import { Uz } from "../905/63728";
@@ -62,7 +62,7 @@ let g = function (e) {
 };
 let f = "30px";
 let _ = "emoji_typeahead--emojiPreview--3rFYm";
-export class $$A0 extends o6 {
+export class $$A0 extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.getDefaultEmojiSkinTone = () => il.getDefaultSkin() || 1;
@@ -137,7 +137,7 @@ export class $$A0 extends o6 {
           this.pointerMoved = !0;
           this.placeEmoji(t);
         },
-        recordingKey: Pt(this.props.recordingKey, t, "item"),
+        recordingKey: generateRecordingKey(this.props.recordingKey, t, "item"),
         children: [this.props.isComments ? jsx("p", {
           className: _,
           children: iA(r)

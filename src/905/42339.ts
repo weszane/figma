@@ -1,68 +1,164 @@
-import { DEFAULT_LOADING_STATE } from "../905/957591";
-export class $$r0 {
-  constructor(e, t, i, n, r) {
-    this.parent = e;
-    this.computation = t.parameterizedComputation(n.sessionArgs, n.viewArgs, r, e.queryDef.objectDef.naturalKey);
-    let a = t.computedFieldDef.name;
-    a in r ? (this.unsubscribe = () => {}, this.onUpdateResult(r[a])) : this.unsubscribe = i.subscribeComputation(this.computation, this);
+import { DEFAULT_LOADING_STATE } from '../905/957591'
+
+/**
+ * Represents a computation handler for a parent object.
+ * Handles subscription, result updates, error handling, and lifecycle.
+ */
+export class ComputationHandler {
+  parent: any
+  computation: any
+  unsubscribe: () => void
+  _result: any
+
+  /**
+   * Initializes the ComputationHandler.
+   * @param parent - The parent object.
+   * @param computationManager - Manages computations and field definitions.
+   * @param subscriber - Handles subscription logic.
+   * @param args - Contains sessionArgs and viewArgs.
+   * @param initialResults - Initial computation results.
+   */
+  constructor(
+    parent: any,
+    computationManager: any,
+    subscriber: any,
+    args: { sessionArgs: any, viewArgs: any },
+    initialResults: Record<string, any>,
+  ) {
+    this.parent = parent
+    this.computation = computationManager.parameterizedComputation(
+      args.sessionArgs,
+      args.viewArgs,
+      initialResults,
+      parent.queryDef.objectDef.naturalKey,
+    )
+    const fieldName = computationManager.computedFieldDef.name
+    if (fieldName in initialResults) {
+      this.unsubscribe = () => {}
+      this.onUpdateResult(initialResults[fieldName])
+    }
+    else {
+      this.unsubscribe = subscriber.subscribeComputation(this.computation, this)
+    }
   }
-  computation;
-  unsubscribe;
-  _result;
-  get path() {
-    return [...this.parent.path, this.computation.computationId];
+
+  /**
+   * Returns the computation path.
+   */
+  get path(): any[] {
+    return [...this.parent.path, this.computation.computationId]
   }
-  get fieldName() {
-    return this.computation.fieldName;
+
+  /**
+   * Returns the field name of the computation.
+   */
+  get fieldName(): string {
+    return this.computation.fieldName
   }
-  destroy() {
-    this.unsubscribe();
+
+  /**
+   * Cleans up the subscription.
+   */
+  destroy(): void {
+    this.unsubscribe()
   }
-  onUpdateResult(e) {
+
+  /**
+   * Handles result updates for the computation.
+   * @param result - The new result data.
+   */
+  onUpdateResult(result: any): void {
+    // Original: onUpdateResult
     this._result = {
-      status: "loaded",
+      status: 'loaded',
       errors: [],
-      data: e
-    };
-    this.parent.resetResult();
-    this.parent.resultsUpdated();
+      data: result,
+    }
+    this.parent.resetResult()
+    this.parent.resultsUpdated()
   }
-  onErrors(e) {
-    let {
-      name
-    } = this.computation.fieldDef;
+
+  /**
+   * Handles errors for the computation.
+   * @param errors - Array of error objects.
+   */
+  onErrors(errors: any[]): void {
+    // Original: onErrors
+    const { name } = this.computation.fieldDef
     this._result = {
-      status: "errors",
+      status: 'errors',
       data: null,
-      errors: e.map(e => ({
-        ...e,
-        path: [name, ...e.path]
-      }))
-    };
-    this.parent.resetResult();
-    this.parent.resultsUpdated();
+      errors: errors.map(err => ({
+        ...err,
+        path: [name, ...err.path],
+      })),
+    }
+    this.parent.resetResult()
+    this.parent.resultsUpdated()
   }
-  recreateIfStale(e, t) {}
-  getLoadingPathsForDebugging() {
-    return this._result ? [] : [this.computation.fieldDef.name];
+
+  /**
+   * Placeholder for stale computation recreation logic.
+   * @param arg1 - First argument.
+   * @param arg2 - Second argument.
+   */
+  recreateIfStale(_arg1: any, _arg2: any): void {
+    // Original: recreateIfStale
   }
-  getOptionalErrorPathsForDebugging() {
-    return [];
+
+  /**
+   * Returns loading paths for debugging.
+   */
+  getLoadingPathsForDebugging(): string[] {
+    // Original: getLoadingPathsForDebugging
+    return this._result ? [] : [this.computation.fieldDef.name]
   }
-  result() {
-    return this._result ? this._result : DEFAULT_LOADING_STATE;
+
+  /**
+   * Returns optional error paths for debugging.
+   */
+  getOptionalErrorPathsForDebugging(): string[] {
+    // Original: getOptionalErrorPathsForDebugging
+    return []
   }
-  isLoaded() {
-    return !!this._result;
+
+  /**
+   * Returns the current result or the default loading state.
+   */
+  result(): any {
+    // Original: result
+    return this._result ? this._result : DEFAULT_LOADING_STATE
   }
-  debugState(e) {
+
+  /**
+   * Checks if the computation is loaded.
+   */
+  isLoaded(): boolean {
+    // Original: isLoaded
+    return !!this._result
+  }
+
+  /**
+   * Returns debug state for the computation.
+   * @param debugFn - Debugging function.
+   */
+  debugState(debugFn: (handler: ComputationHandler) => any): object {
+    // Original: debugState
     return {
-      _: e(this)
-    };
+      _: debugFn(this),
+    }
   }
 }
-export function $$a1(e) {
-  return e instanceof $$r0;
+
+/**
+ * Checks if the given object is an instance of ComputationHandler.
+ * @param obj - Object to check.
+ */
+export function isComputationHandler(obj: any): obj is ComputationHandler {
+  // Original: $$a1
+  return obj instanceof ComputationHandler
 }
-export const A = $$r0;
-export const N = $$a1;
+
+// Refactored exports to match new names
+export const A = ComputationHandler
+export const N = isComputationHandler

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useEffect, useCallback, useRef, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import r, { C as _$$C } from "../905/222694";
 import { lQ } from "../905/934246";
 import { C as _$$C2 } from "../905/520159";
@@ -10,7 +10,7 @@ import { V as _$$V } from "../1577/311426";
 import { trackEventAnalytics } from "../905/449184";
 import { B as _$$B } from "../905/907815";
 import { Rs } from "../figma_app/288654";
-import p, { g as _$$g } from "../905/880308";
+import p, { generateUUIDv4 } from "../905/871474";
 import { oW } from "../905/675859";
 import { qc } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
@@ -21,8 +21,8 @@ import { AY, Fm, dB, lV, k7, _v } from "../figma_app/770088";
 import { kR, I_, GH } from "../905/234821";
 import { dr } from "../figma_app/568591";
 import { G9, gj } from "../figma_app/12220";
-import { iZ } from "../905/372672";
-import { Uhm } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { QuickReply_CommentThreadByRootComment } from "../figma_app/43951";
 import { mp } from "../905/772425";
 import { kT, Dw } from "../905/380385";
 import { rf } from "../figma_app/585209";
@@ -47,7 +47,7 @@ let O = new class {
 }();
 let q = null;
 let $$U0 = forwardRef((e, t) => {
-  let i = Rs(Uhm, {
+  let i = Rs(QuickReply_CommentThreadByRootComment, {
     fileKey: e.quickReplyInfo.fileKey,
     rootId: e.quickReplyInfo.threadId
   });
@@ -96,7 +96,7 @@ let $$U0 = forwardRef((e, t) => {
   });
 });
 function H(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   return t ? "loading" === e.result.status || "disabled" === e.result.status ? jsx(qc, {
     size: "medium"
   }) : "errors" === e.result.status || null == e.result.data.file ? jsx("div", {
@@ -384,7 +384,7 @@ function V(e) {
         submitReply({
           threadId,
           threadUuid: W.uuid || void 0,
-          uuid: _$$g()
+          uuid: generateUUIDv4()
         });
       },
       placeholderText: getI18nString("comments.reply"),

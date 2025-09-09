@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Ay } from "@stylexjs/stylex";
 import { trackEventAnalytics } from "../905/449184";
 import { MD } from "../figma_app/672951";

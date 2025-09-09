@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import n from "classnames";
 import a from "lodash-es/mapValues";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { Jm } from "../figma_app/387599";
 import { a4 } from "../figma_app/321395";
@@ -121,7 +121,7 @@ export function $$g0({
           href: _.href,
           onClick: r => {
             r.preventDefault();
-            Ay.push(_.href);
+            customHistory.push(_.href);
             trackEventAnalytics("resource_type_filter_changed", {
               resource_type: t,
               from: e,

@@ -3,7 +3,7 @@ import { Uz } from "../905/63728";
 import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
 import { x$ } from "../figma_app/385874";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { $ } from "../figma_app/297778";
 import { Ug } from "../905/706046";
 export function $$u2(e, t, i, n, r) {
@@ -57,7 +57,7 @@ export function $$p0(e, t, i, o, d) {
       }), d({
         ...t,
         stops: e
-      }, zk.YES));
+      }, yesNoTrackingEnum.YES));
     }
     e.accept();
   }

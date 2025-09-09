@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { c2 } from "../905/382883";
 import { g as _$$g } from "../905/125190";
 import { UserInterfaceElements } from "../figma_app/763686";
@@ -9,7 +9,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/376628";
 import { FP } from "../figma_app/91703";
 import { nE, fR, am } from "../figma_app/430563";
@@ -118,7 +118,7 @@ function j({
       buzzSubscribed: r,
       subscriptionType: "team"
     });
-  }(e, t, i ?? !1, n ?? !1, r ?? !1, o);else if (e.showingDefaultSubscriptionsForUser) {
+  }(e, t, i ?? !1, n ?? !1, r ?? !1, o); else if (e.showingDefaultSubscriptionsForUser) {
     var d;
     var c;
     var p;
@@ -215,7 +215,7 @@ export function $$U2({
   }), [t, i, s, library, openFile, d]);
   let [b, v] = useState(!1);
   let I = useCallback(() => {
-    i && d(_$$F.enqueue({
+    i && d(VisualBellActions.enqueue({
       message: getI18nString("design_systems.libraries_modal.contact_a_team_admin")
     }));
   }, [d, i]);

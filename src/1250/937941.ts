@@ -1,10 +1,10 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { R } from "../905/165069";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { tc } from "../905/15667";
 import { QL, EM } from "../905/609392";
 import { q5 } from "../figma_app/516028";
@@ -15,7 +15,7 @@ import { q0, qm } from "../figma_app/431689";
 import { i as _$$i } from "../905/46262";
 import { a_, TI } from "../905/513035";
 import { wR } from "../figma_app/765689";
-if (443 == require.j) {}
+if (443 == require.j) { }
 export function $$y0() {
   let e;
   let t = useDispatch();
@@ -75,7 +75,7 @@ export function $$y0() {
           requestCanBeNudged,
           upgradeRequestId
         } = qm(a);
-        requestCanBeNudged ? nudgeUpgradeRequest(upgradeRequestId) : t(F.enqueue({
+        requestCanBeNudged ? nudgeUpgradeRequest(upgradeRequestId) : t(VisualBellActions.enqueue({
           message: getI18nString("team_user.actions.request_sent_well_let_you_know")
         }));
       }

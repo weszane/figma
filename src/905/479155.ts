@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, createRef, useContext, useEffect, useCallback, useRef, useId, useState, useLayoutEffect } from "react";
 import { lQ } from "../905/934246";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Um } from "../905/848862";
 class l {
   constructor() {
@@ -125,7 +125,7 @@ export function $$_0(e) {
   let i = useContext($$p1);
   t.trackerRef.current?.reset();
   i.trackerRef.current?.reset();
-  let a = g();
+  let a = generateUUIDv4();
   return jsx(f.Provider, {
     value: a,
     children: e.children

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useId } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { b as _$$b, bL, mc, r1, Q$, Ov, rm } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { K as _$$K } from "../905/443068";
@@ -10,11 +10,11 @@ import { V as _$$V } from "../905/291719";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
-import { y6, nS, Pt } from "../figma_app/806412";
+import { addInteractionPath, removeInteractionPath, generateRecordingKey } from "../figma_app/878298";
 import { logError } from "../905/714362";
 import { wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { VU } from "../905/625959";
 import { LW, bs } from "../figma_app/553940";
 import { Um } from "../905/848862";
@@ -93,7 +93,7 @@ export function $$B1(e) {
   let E = useCallback(() => {
     u(null);
   }, []);
-  useEffect(() => (y6(E), () => nS(E)));
+  useEffect(() => (addInteractionPath(E), () => removeInteractionPath(E)));
   let y = (e, t) => {
     u(e);
     let r = e.actionOnFlyoutItemClick ?? e.action;
@@ -147,7 +147,7 @@ export function $$B1(e) {
           onChange: (t, {
             event: r
           }) => y(e.get(t), r),
-          recordingKey: Pt(recordingKey, "menu"),
+          recordingKey: generateRecordingKey(recordingKey, "menu"),
           children: item.children.map((e, t) => HK(e) ? null : jsx(G, {
             item: e,
             showItemIcon: i
@@ -211,7 +211,7 @@ function V(e) {
   let b = !!activeItem && !TY(f) && !disabled && styleActiveItem;
   let I = defaultItem.text || $$Y0(defaultItem.action);
   let v = j(defaultItem.property, defaultItem.propertyValue, defaultItem.action);
-  let C = Pt(recordingKey, "default", defaultItem.recordingKey);
+  let C = generateRecordingKey(recordingKey, "default", defaultItem.recordingKey);
   if (item.name === MR) return jsx($0, {
     item,
     defaultItem,
@@ -241,7 +241,7 @@ function V(e) {
   }), h && (w = jsxs(_$$e, {
     "aria-label": F(item.name),
     children: [w, jsx(_$$e.Trigger, {
-      recordingKey: Pt(recordingKey, "chevron"),
+      recordingKey: generateRecordingKey(recordingKey, "chevron"),
       size: "lg",
       ...getTriggerProps(),
       "aria-label": F(item.name)
@@ -364,7 +364,7 @@ function W({
       a(e, t);
     } : void 0,
     onboardingKey: e.onboardingKey,
-    recordingKey: Pt(s, "flyout", e.recordingKey),
+    recordingKey: generateRecordingKey(s, "flyout", e.recordingKey),
     shortcut: shortcutText,
     simulateHover: e.action === i,
     text,
@@ -392,7 +392,7 @@ function K({
     isEnabled,
     onPointerUp: t => r(e, t),
     onboardingKey: e.onboardingKey,
-    recordingKey: Pt(i, "flyout", e.recordingKey),
+    recordingKey: generateRecordingKey(i, "flyout", e.recordingKey),
     shortcut: shortcutText,
     simulateHover: e.action === t,
     text,
@@ -402,7 +402,7 @@ function K({
 }
 export function $$Y0(e) {
   try {
-    return _$$A(e);
+    return formatI18nMessage(e);
   } catch (t) {
     return getI18nString(`fullscreen_actions.${e}`);
   }

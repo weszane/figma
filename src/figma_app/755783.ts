@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { RR } from "../figma_app/338442";
 import { VariableResolvedDataType, Fullscreen, VariableDataType, LayoutTabType, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -51,7 +51,7 @@ export function $$I1() {
     consumedVariable
   } = u3(["VISIBLE"]);
   if (consumedVariable) {
-    if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.ALIAS) e = consumedVariable.value;else if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.EXPRESSION) {
+    if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.ALIAS) e = consumedVariable.value; else if (isValidValue(consumedVariable) && consumedVariable.type === VariableDataType.EXPRESSION) {
       for (let r of Pr(consumedVariable)) if (r.type === VariableDataType.ALIAS) {
         e = r.value;
         break;

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, Component, PureComponent, useId, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
 import { $n, IK } from "../905/521428";
@@ -15,7 +15,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import E from "classnames";
 import { analyticsEventManager } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { Fe } from "../905/284552";
 import { Y as _$$Y } from "../905/506207";
@@ -35,7 +35,7 @@ import { Zr } from "../figma_app/678782";
 import { J as _$$J } from "../905/95677";
 import { q5 } from "../figma_app/516028";
 import { Qn } from "../figma_app/12796";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { qo } from "../905/959568";
 import { X7 } from "../905/713167";
@@ -101,7 +101,7 @@ class eI extends Component {
   constructor(e) {
     super(e);
     this.onRotateClockwiseClick = () => {
-      this.props.onChange(Lt(this.props.paint, 90), zk.YES);
+      this.props.onChange(Lt(this.props.paint, 90), yesNoTrackingEnum.YES);
       permissionScopeHandler.user("image-rotate-clockwise", () => {
         Fullscreen.repairThumbnails();
       });
@@ -120,7 +120,7 @@ class eI extends Component {
       this.props.onChange({
         ...this.props.paint,
         paintFilter: n
-      }, r ? zk.YES : zk.NO);
+      }, r ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
       this.setState({
         forceThumbnailUpdate: r
       });
@@ -372,7 +372,7 @@ class eI extends Component {
       setPlaying: this.setGIFPlaying,
       playing: null != this.state.animatedImage && this.state.playing,
       setGIFCoverFrame: this.setGIFCoverFrame
-    });else return jsxs(Fragment, {
+    }); else return jsxs(Fragment, {
       children: [this.props.isAiEnabled && jsx(eC, {
         onClose: this.props.onClose
       }), jsx(fu, {
@@ -387,7 +387,7 @@ class eI extends Component {
             filterColorAdjust: this.props.paint.paintFilter,
             min: "contrast" === e ? -.3 : -1,
             max: "contrast" === e ? .3 : 1,
-            recordingKey: Pt(this.props, e)
+            recordingKey: generateRecordingKey(this.props, e)
           }, e))
         })
       })]
@@ -405,10 +405,10 @@ class eI extends Component {
     let c = jsxs(Fragment, {
       children: [getFeatureFlags().ce_tv_fpl_select ? jsx(ev, {
         ...this.props,
-        recordingKey: Pt(this.props, "imageScale")
+        recordingKey: generateRecordingKey(this.props, "imageScale")
       }) : jsx(eA, {
         ...this.props,
-        recordingKey: Pt(this.props, "imageScale")
+        recordingKey: generateRecordingKey(this.props, "imageScale")
       }), "TILE" === this.props.paint.imageScaleMode && jsx(ex, {
         className: y()({
           [_$$GA]: !this.props.insetImageSettings,
@@ -416,7 +416,7 @@ class eI extends Component {
         }),
         value: "TILE" !== this.props.paint.imageScaleMode ? 1 : this.props.paint.scale,
         onChange: this.onScalingFactorChange,
-        recordingKey: Pt(this.props, "scalingFactor")
+        recordingKey: generateRecordingKey(this.props, "scalingFactor")
       })]
     });
     let u = jsx("span", {
@@ -434,7 +434,7 @@ class eI extends Component {
       children: jsx(_$$K, {
         onClick: this.onRotateClockwiseClick,
         "aria-label": getI18nString("fullscreen.properties_panel.rotate_90"),
-        recordingKey: Pt(this.props, "rotateClockwise"),
+        recordingKey: generateRecordingKey(this.props, "rotateClockwise"),
         htmlAttributes: {
           "data-tooltip": getI18nString("fullscreen.properties_panel.rotate_90"),
           "data-tooltip-type": Ib.TEXT
@@ -472,7 +472,7 @@ class eI extends Component {
         onTargetDragEnter: this.onDragEnter,
         onTargetDragLeave: this.onDragLeave,
         onTargetDrop: this.onDrop,
-        recordingKey: Pt(this.props, "dropTarget"),
+        recordingKey: generateRecordingKey(this.props, "dropTarget"),
         children: jsxs("div", {
           className: y()({
             [mQ]: !this.props.insetImageSettings || this.props.insetImageSettings && s
@@ -565,7 +565,7 @@ class eA extends PureComponent {
   render() {
     let e = $$eS1.map((e, t) => jsx(em, {
       value: e,
-      recordingKey: Pt(this.props, e)
+      recordingKey: generateRecordingKey(this.props, e)
     }, t));
     return jsx(eh, {
       ariaLabel: getI18nString("fullscreen.properties_panel.image_scale_mode"),

@@ -7,7 +7,7 @@ import { E as _$$E } from "../905/984674";
 import { V as _$$V } from "../905/453937";
 import { e as _$$e } from "../905/311297";
 import { M as _$$M } from "../905/269719";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { sf } from "../905/929976";
 import { Tf } from "../figma_app/543100";
 import { o as _$$o } from "../905/895626";

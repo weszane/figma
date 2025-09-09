@@ -2,7 +2,7 @@ import { isDevEnvironment, getInitialOptions, isLocalCluster, isStagingCluster }
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { WJ } from "../figma_app/671547";
 import { j } from "../905/813868";
@@ -112,7 +112,7 @@ let g = createOptimistThunk(async (e, {
       isTextIframe: !1,
       entrypoint: WJ.PASTE
     });
-    if (c.nodeID && (Fullscreen.deleteNode(c.nodeID), e.dispatch(F.dequeue({
+    if (c.nodeID && (Fullscreen.deleteNode(c.nodeID), e.dispatch(VisualBellActions.dequeue({
       matchType: "plugins-status"
     }))), getFeatureFlags().widgets_paste_local_on_fail && isDevEnvironment() && i) {
       "error" === (await m(i, a)).status && e.dispatch(t);

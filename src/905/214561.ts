@@ -4,9 +4,9 @@ import { eV } from "../905/889062";
 import { nK } from "../figma_app/599979";
 import { $T } from "../figma_app/12535";
 import { q5 } from "../figma_app/516028";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 export function $$c0(e) {
-  let t = Pc();
+  let t = selectUser();
   let i = q5();
   let c = useMemo(async () => {
     if (!e) return null;

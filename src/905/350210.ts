@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef, PureComponent } from "react";
-import { useDispatch, connect } from "../vendor/514228";
+import { useDispatch, connect } from "react-redux";
 import { s as _$$s } from "../905/601732";
 import { j4, o1, f7, Rv, UU, mH } from "../figma_app/599979";
 import { getPermissionsState } from "../figma_app/642025";

@@ -18,12 +18,12 @@ import { O as _$$O } from "../figma_app/140784";
 import { $R } from "../figma_app/883490";
 import { GS } from "../figma_app/314264";
 import { UK } from "../figma_app/740163";
-import { D$, Dh, GL, Uc, Hr } from "../figma_app/741237";
+import { removeFromSelection, addToSelection, selectNodesInRange, updateHoveredNode, currentSessionLocalIDString } from "../figma_app/741237";
 import { eY } from "../figma_app/722362";
 import { S as _$$S } from "../figma_app/106763";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
-import { PW } from "../figma_app/198712";
+import { assetTypeEnum } from "../figma_app/198712";
 import { Ib as _$$Ib } from "../905/129884";
 import { m as _$$m } from "../905/70820";
 import { J as _$$J } from "../905/273120";
@@ -71,16 +71,16 @@ function j(e) {
       let n = Object.keys(selection);
       if (atomStoreManager.set(_$$m, null), AppStateTsApi?.editorState().focusedAnnotationId.set(null), t.metaKey) {
         var i;
-        selection[i = e.guid] ? D$([i]) : Dh([i]);
-      } else t.shiftKey && n.length > 0 ? GL(n[n.length - 1], e.guid) : HandoffBindingsCpp.selectAndPanToNode(e.guid);
+        selection[i = e.guid] ? removeFromSelection([i]) : addToSelection([i]);
+      } else t.shiftKey && n.length > 0 ? selectNodesInRange(n[n.length - 1], e.guid) : HandoffBindingsCpp.selectAndPanToNode(e.guid);
     },
     onMouseEnter: () => {
       s(!0);
-      Uc(e.guid);
+      updateHoveredNode(e.guid);
     },
     onMouseLeave: () => {
       s(!1);
-      Uc(Hr);
+      updateHoveredNode(currentSessionLocalIDString);
     },
     role: "button",
     tabIndex: 0,
@@ -110,9 +110,9 @@ export function $$U2(e) {
 }
 export let $$B3 = ["TABLE", "TABLE_CELL", "WASHI_TAPE", "STAMP", "STICKY", "SHAPE_WITH_TEXT", "WIDGET"];
 export function $$G5(e, t) {
-  let r = e?.type ?? PW.NOT_ASSET;
-  let n = !!(r & (PW.ASSET_IMAGE | PW.ASSET_ICON));
-  return t ? n : !!(r & PW.ASSET_IMAGE);
+  let r = e?.type ?? assetTypeEnum.NOT_ASSET;
+  let n = !!(r & (assetTypeEnum.ASSET_IMAGE | assetTypeEnum.ASSET_ICON));
+  return t ? n : !!(r & assetTypeEnum.ASSET_IMAGE);
 }
 function V(e) {
   return "SYMBOL" === e || "INSTANCE" === e;
@@ -332,7 +332,7 @@ function Q({
   assetInfo: t,
   hasEnabledStaticImagePaint: r
 }) {
-  let i = t.type & PW.ASSET_IMAGE || r;
+  let i = t.type & assetTypeEnum.ASSET_IMAGE || r;
   let a = _$$O({
     assetId: e,
     thumbnailVersion: t.thumbnailVersion,

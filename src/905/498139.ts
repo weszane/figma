@@ -1,12 +1,12 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useId, useState, useCallback, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { VariableDataType, VariableResolvedDataType, ComponentPropType, VariablesBindings } from "../figma_app/763686";
-import { WI } from "../905/929949";
+import { resolveVariableValue } from "../905/929949";
 import { parsePxNumber } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt, of } from "../figma_app/806412";
+import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y } from "../905/830372";
 import { kl } from "../905/275640";
@@ -67,7 +67,7 @@ function D({
             varValue: i.varValue
           });
         },
-        recordingKey: Pt(e, "componentPropNameInput"),
+        recordingKey: generateRecordingKey(e, "componentPropNameInput"),
         value: i.propName
       })
     }), jsx(VariableFormRow, {
@@ -85,12 +85,12 @@ function D({
             variableValue: i.varValue,
             contextType: $.FORM,
             onChange: l,
-            recordingKey: Pt(e, "variableValueInput")
+            recordingKey: generateRecordingKey(e, "variableValueInput")
           }), c && jsx(K, {
             type: "button",
             "aria-label": getI18nString("variables.authoring_modal.table.detach_alias"),
             onClick: () => l(c),
-            recordingKey: Pt(e, "detachVariableButton"),
+            recordingKey: generateRecordingKey(e, "detachVariableButton"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")
@@ -199,7 +199,7 @@ function U({
     });
     let n = kl("visible");
     let r = WB(e) === ComponentPropType.BOOL;
-    return WI(e, r ? n : i);
+    return resolveVariableValue(e, r ? n : i);
   }(i);
   let [G, z] = useState({
     propName: U,
@@ -212,7 +212,7 @@ function U({
     varSetID: null
   });
   let Y = useMemo(() => M() && G ? G.propName.length > 0 : !!W.varName && VariablesBindings.isValidVariableName(W.varName, W.varSetID ?? null), [G, M, W.varName, W.varSetID]);
-  let q = of(A, "submit", e => {
+  let q = useHandleFocusEvent(A, "submit", e => {
     e?.preventDefault();
     M() && G ? (b(G), G.varValue.type === VariableDataType.ALIAS && oz("component_prop_def", {
       type: VariableDataType.ALIAS,
@@ -278,7 +278,7 @@ function U({
         children: jsx($n, {
           type: "submit",
           disabled: !Y,
-          recordingKey: Pt(A, "createButton"),
+          recordingKey: generateRecordingKey(A, "createButton"),
           htmlAttributes: {
             "data-tooltip": getI18nString("variables.create_modal.invalid_variable_name"),
             "data-tooltip-type": Y ? void 0 : Ib.TEXT

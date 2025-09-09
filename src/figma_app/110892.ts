@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { IK } from "../905/521428";
 import { UserActionState } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";

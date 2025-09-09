@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rs } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { $E, w4 } from "../905/445814";
@@ -12,7 +12,7 @@ import { Q } from "../905/61477";
 import { EN, AR, K4 } from "../905/182534";
 import { hideModalHandler } from "../905/156213";
 import { _6 } from "../figma_app/386952";
-import { yf7 } from "../figma_app/43951";
+import { FileSearchResult } from "../figma_app/43951";
 import { vj } from "../905/574958";
 import { cr } from "../905/703676";
 import { a as _$$a } from "../905/682573";
@@ -38,7 +38,7 @@ export function $$v0({
   let N = G(R, l, C ? e : void 0);
   let P = useCallback(e => {
     e.preventDefault();
-    e.metaKey || 1 === e.button ? Ay.redirect(R, "_blank") : (u(hideModalHandler()), K4(u, T, _ ?? null, b, v));
+    e.metaKey || 1 === e.button ? customHistory.redirect(R, "_blank") : (u(hideModalHandler()), K4(u, T, _ ?? null, b, v));
   }, [R, _, b, v, u, T]);
   let O = useCallback(e => {
     e.preventDefault();
@@ -78,7 +78,7 @@ function I({
 }) {
   let {
     data
-  } = Rs(yf7, {
+  } = Rs(FileSearchResult, {
     projectId: e.folder_id
   }, {
     enabled: !!e.folder_id

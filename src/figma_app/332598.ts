@@ -1,14 +1,14 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "../vendor/944059";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { K } from "../905/443068";
 import { E as _$$E } from "../905/172252";
 import { X } from "../905/736922";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import p from "classnames";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { Z } from "../905/189618";
 import { d as _$$d } from "../905/86829";
 import { Me } from "../figma_app/617427";
@@ -168,7 +168,7 @@ export function $$G4(e) {
       ignoreLineBreaks: !1
     }));
   }, [F, et]);
-  let en = rf(Pt(recordingKey, "copy"), "click", er);
+  let en = useHandleMouseEvent(generateRecordingKey(recordingKey, "copy"), "click", er);
   let ei = useCallback(() => {
     F(lW({
       stringToCopy: window.getSelection()?.toString() || et(),
@@ -195,7 +195,7 @@ export function $$G4(e) {
     copyAllActionEnabled && J(e.shiftKey);
     X(!0);
   }, [J, copyAllActionEnabled]);
-  let eo = rf(Pt(recordingKey, "copy"), "mouseenter", es);
+  let eo = useHandleMouseEvent(generateRecordingKey(recordingKey, "copy"), "mouseenter", es);
   let el = useCallback(e => {
     J(!1);
     X(!1);

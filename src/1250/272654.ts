@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import i from "classnames";
 import { Rs } from "../figma_app/288654";
 import { x$, cn } from "../figma_app/141320";
@@ -12,20 +12,20 @@ import { hideModal } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { FStudentTeamStatusType } from "../figma_app/191312";
-import { UpR, FA_ } from "../figma_app/43951";
+import { EduOffboardingData, EduOffboardingTeam } from "../figma_app/43951";
 import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { A as _$$A } from "../svg/619883";
 var o = i;
 export let $$k0 = registerModal(function (e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let n = useDispatch();
   let i = _6();
-  let w = Rs(UpR, {});
-  let k = Rs(FA_, {
+  let w = Rs(EduOffboardingData, {});
+  let k = Rs(EduOffboardingTeam, {
     teamId: e.teamId || ""
   }, {
     enabled: !!e.teamId

@@ -1,5 +1,5 @@
 import { useMemo, useLayoutEffect } from "react";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { IT } from "../figma_app/566371";
 import { parseQuerySimple } from "../905/634134";
 import { C as _$$C } from "../905/237873";
@@ -19,7 +19,7 @@ var b = Reflect.get;
 var T = (e, t, r) => b(y(e), r, t);
 export function $$I3(e, t) {
   let r;
-  let n = decodeURIComponent(e || Ay.location.pathname);
+  let n = decodeURIComponent(e || customHistory.location.pathname);
   try {
     let e = pO($$N0)(n);
     if (!e) return null;
@@ -27,7 +27,7 @@ export function $$I3(e, t) {
   } catch (e) {
     return null;
   }
-  let a = $$x2.parseQueryString(t || Ay.location.search);
+  let a = $$x2.parseQueryString(t || customHistory.location.search);
   let s = r.categorySlug;
   let l = r.tagSlug;
   let {
@@ -148,7 +148,7 @@ export function $$R6(e) {
   useLayoutEffect(() => {
     if (u.length > 0 && (!editor_type || !u.includes(editor_type))) {
       let t = u[0];
-      Ay.replace(e.copyWith({}, {
+      customHistory.replace(e.copyWith({}, {
         editor_type: t,
         resource_type: resource_type && OU(t, resource_type, {
           anchorOn: "editorType"

@@ -7,14 +7,14 @@ import { Rs } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { Fj } from "../figma_app/594947";
 import { tS } from "../figma_app/516028";
-import { kS$ } from "../figma_app/43951";
+import { AiMeterUsageView } from "../figma_app/43951";
 import { n as _$$n } from "../905/347702";
 import { Ac, ag, u6 } from "../905/509613";
 import { JT } from "../figma_app/632248";
 var $$g1 = (e => (e.DAILY = "daily", e.MONTHLY = "monthly", e))($$g1 || {});
 function f() {
   let e = tS() ?? "";
-  let t = Rs(kS$, {
+  let t = Rs(AiMeterUsageView, {
     fileKey: e
   }, {
     enabled: !!e

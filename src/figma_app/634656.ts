@@ -1,5 +1,5 @@
 import { useRef, useMemo, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { oU } from "../figma_app/273493";
 import { ColorOptions, WhiteboardTsApi } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
@@ -10,9 +10,9 @@ import { WB } from "../905/761735";
 import { IT } from "../figma_app/566371";
 import { GI, IZ, ez, lC, U9, qL } from "../905/125333";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { tS } from "../figma_app/516028";
-import { nD6 } from "../figma_app/43951";
+import { AppliedColorPaletteForFile } from "../figma_app/43951";
 import { _ as _$$_ } from "../905/613917";
 import { canViewTeam } from "../figma_app/642025";
 import { cD } from "../figma_app/598018";
@@ -29,7 +29,7 @@ export function $$N2() {
   return (n, i, a) => {
     e && (r(i), WB().optimisticallyUpdate({}, _$$v.setUserColorPaletteOverrideForFile(e, n)).catch(e => {
       console.error(e);
-      a || t(F.enqueue({
+      a || t(VisualBellActions.enqueue({
         message: getI18nString("fullscreen.color_palette.apply_palette_failure")
       }));
     }).$$finally(() => {
@@ -39,7 +39,7 @@ export function $$N2() {
 }
 export function $$C4() {
   let e = tS() || "";
-  let [t] = IT(nD6({
+  let [t] = IT(AppliedColorPaletteForFile({
     fileKey: e
   }), {
     enabled: !!e
@@ -49,7 +49,7 @@ export function $$C4() {
 }
 export let $$w7 = D(() => {
   let e = tS();
-  let [t] = IT(nD6({
+  let [t] = IT(AppliedColorPaletteForFile({
     fileKey: e || ""
   }), {
     enabled: !!e

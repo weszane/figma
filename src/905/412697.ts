@@ -4,7 +4,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { fullscreenValue } from "../figma_app/455680";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 export function $$c0({
   property: e,
   onChange: t,
@@ -36,7 +36,7 @@ export function $$c0({
       i?.(e);
     }
     let f = performance.now();
-    t(n, c ? zk.YES_WITHOUT_TRACKING_AS_EDIT : zk.NO);
+    t(n, c ? yesNoTrackingEnum.YES_WITHOUT_TRACKING_AS_EDIT : yesNoTrackingEnum.NO);
     getFeatureFlags().ee_canvas_previews_logging && u && trackEventAnalytics("on_canvas_preview", {
       timeMs: performance.now() - f,
       directlySelectedNodesCount: l,
@@ -47,7 +47,7 @@ export function $$c0({
   }, c), [g, p, t, i, m, e, u, c]);
   let _ = useCallback(e => {
     g();
-    t(e, m !== e ? zk.YES_FORCE_TRACKING_AS_EDIT : void 0);
+    t(e, m !== e ? yesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT : void 0);
   }, [g, t, m]);
   return {
     valueBeforePreview: m,

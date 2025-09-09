@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import i from "classnames";
 import { Jn } from "../905/17223";
 import { tM, vd } from "../figma_app/637027";

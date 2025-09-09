@@ -130,7 +130,7 @@ export class $$m2 extends fG {
     if (kF(h)) {
       let e = T(h);
       let r = [];
-      for (;;) if (MK(e)) {
+      for (; ;) if (MK(e)) {
         r.push(ev());
         e = e.getNextSibling();
       } else {
@@ -317,7 +317,7 @@ function R(e, r) {
     let s = e.length;
     for (let i = 0; i < s; i++) {
       let s = e[i];
-      "\n" === s || "\r\n" === s ? n.push(c()) : "	" === s ? n.push(u()) : s.length > 0 && n.push(A(s, r));
+      "\n" === s || "\r\n" === s ? n.push(c()) : "	" === s ? n.push(ExpiringCache()) : s.length > 0 && n.push(A(s, r));
     }
   } else {
     let {

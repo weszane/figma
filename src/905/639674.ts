@@ -1,11 +1,11 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { e2 } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { _l } from "../905/105972";
 export function $$p0(e) {
   let t = useDispatch();
@@ -25,7 +25,7 @@ export function $$p0(e) {
         disabled: p,
         onClick: () => {
           if (!getFeatureFlags()["js-profiling"]) {
-            t(F.enqueue({
+            t(VisualBellActions.enqueue({
               message: "Please enable the js-profiling feature flag for yourself in order to collect a performance profile."
             }));
             return;
@@ -33,7 +33,7 @@ export function $$p0(e) {
           p || ("function" == typeof window.Profiler ? (i.current = new window.Profiler({
             sampleInterval: 1,
             maxBufferSize: 1e4
-          }), m(!0)) : t(F.enqueue({
+          }), m(!0)) : t(VisualBellActions.enqueue({
             message: "Performance profiling is only available in Chromium browsers."
           })));
         },

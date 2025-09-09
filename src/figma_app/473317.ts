@@ -7,7 +7,7 @@ import { m as _$$m } from "../905/375522";
 import { V } from "../905/921027";
 import { AppStateTsApi, TextAlignmentOptions } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { vx } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
@@ -57,7 +57,7 @@ export function $$I0(e) {
     value: e.textAutoResize,
     onChange: t => e.setTextResizing(t, "panel"),
     readonly: e.disabled,
-    recordingKey: Pt(e, "autoResize"),
+    recordingKey: generateRecordingKey(e, "autoResize"),
     legend: jsx(q, {
       children: getI18nString("fullscreeen.type_panel.resizing")
     }),

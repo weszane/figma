@@ -7,7 +7,7 @@ import { FJ } from "../905/508367";
 import { jm } from "../figma_app/416935";
 import { isDevEnvironment } from "../figma_app/169182";
 import { my } from "../figma_app/976749";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { FEditorType } from "../figma_app/53721";
 let h = atom("hidden");
 let $$m2 = atom(1);
@@ -65,7 +65,7 @@ export function $$A1(e) {
   }
 }
 export function $$x5() {
-  let e = Pc().locale;
+  let e = selectUser().locale;
   return async t => {
     let r = $$A1(e);
     try {

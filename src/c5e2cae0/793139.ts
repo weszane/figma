@@ -1,7 +1,7 @@
 import { ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { G } from "../figma_app/361869";
 import { s as _$$s } from "../c5e2cae0/341232";

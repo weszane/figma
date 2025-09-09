@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle, useState, createContext, useContext, Fragment as _$$Fragment, useCallback, useMemo, useId, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -10,7 +10,7 @@ import { k as _$$k } from "../905/443820";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { J as _$$J } from "../905/341359";
 import { A as _$$A } from "../vendor/90566";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { H as _$$H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
 import { IT } from "../figma_app/566371";
@@ -89,7 +89,7 @@ import { J as _$$J4 } from "../905/125993";
 import { NU } from "../figma_app/204891";
 import { J as _$$J5 } from "../905/896954";
 import { ye } from "../figma_app/314264";
-import { TA, Pc } from "../905/372672";
+import { getUserId, selectUser } from "../905/372672";
 import { IT as _$$IT, M4 } from "../905/713695";
 import { W as _$$W } from "../905/985740";
 import { $ as _$$$3 } from "../905/668315";
@@ -143,7 +143,7 @@ import { J as _$$J6 } from "../905/931050";
 import { r as _$$r4 } from "../905/520829";
 import { j6, fu } from "../figma_app/831799";
 import { i as _$$i2 } from "../905/810360";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { $$in, WX } from "../figma_app/350203";
 import { c as _$$c4 } from "../905/289751";
 import { J as _$$J7 } from "../905/296347";
@@ -958,7 +958,7 @@ let tu = forwardRef(function ({
   playgroundFileField: e,
   onTouched: t
 }, i) {
-  let s = TA() ?? void 0;
+  let s = getUserId() ?? void 0;
   let o = Lz(e, void 0)?.playgroundFile;
   let [l] = _$$IT(tm(o?.key || ""));
   let d = l.data;
@@ -1102,7 +1102,7 @@ function tp({
       children: [jsx(q7, {
         onClick: () => {
           let e = r?.url;
-          e && Ay.redirect(e, "_blank");
+          e && customHistory.redirect(e, "_blank");
         },
         children: getI18nString("community.publishing.playground_file.dropdown.open_file")
       }), t ? jsx(q7, {
@@ -2612,7 +2612,7 @@ function iM({
           buffer: l
         });
       } catch (e) {
-        e instanceof Error && debugState.dispatch(_$$F.enqueue({
+        e instanceof Error && debugState.dispatch(VisualBellActions.enqueue({
           message: e.message,
           error: !0
         }));
@@ -2675,7 +2675,7 @@ function iM({
           buffer: n
         });
       } catch (e) {
-        e instanceof Error && debugState.dispatch(_$$F.enqueue({
+        e instanceof Error && debugState.dispatch(VisualBellActions.enqueue({
           message: e.message,
           error: !0
         }));
@@ -2996,7 +2996,7 @@ function iM({
     A.current($$in, {
       step: WX.CLOSED
     });
-    t === k2.RESOURCE_PAGE && draftSubmissionResult?.result === "success" && Ay.reload("Resource updated on community hub");
+    t === k2.RESOURCE_PAGE && draftSubmissionResult?.result === "success" && customHistory.reload("Resource updated on community hub");
   }, [l, t, draftSubmissionResult, A]);
   let {
     isWidget,
@@ -3390,7 +3390,7 @@ function ij(e) {
   } : {
     securityForm: await _$$is.getBlankSecurityForm()
   }, [existingSecurityFormResponse]);
-  let m = Pc();
+  let m = selectUser();
   let h = useSelector(e => xw(e) ?? void 0, c2);
   let g = sZ();
   let f = D6("ExtensionPublishingModal");

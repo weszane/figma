@@ -1,6 +1,6 @@
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
 import { N } from "../905/696711";
 import { L } from "../905/92291";
@@ -21,7 +21,7 @@ let $$u1 = createOptimistThunk((e, {
   N(u, e, c);
   u.then(() => {
     if (s) {
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("google_device_try_file_modal.resent_email.visual_bell")
       }));
       return;
@@ -29,7 +29,7 @@ let $$u1 = createOptimistThunk((e, {
     d?.(r);
   }).catch(t => {
     if (t.data?.message === "Hit Claim Email Job timeout lock") {
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("google_device_try_file_modal.resent_email.email_resent")
       }));
       return;

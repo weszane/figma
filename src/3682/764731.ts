@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useMemo, Component, memo, useCallback, useId } from "react";
-import { useSelector, useDispatch, connect, useStore } from "../vendor/514228";
+import { useSelector, useDispatch, connect, useStore } from "react-redux";
 import { yF, oI, rO, cb, Pp, Zq, a6 } from "../905/989765";
 import { q5, tS } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { AM, eo as _$$eo, qr } from "../figma_app/637336";
 import { W5, bF } from "../figma_app/120294";
 import { $E, w as _$$w, bU, GA } from "../figma_app/120529";
@@ -60,12 +60,12 @@ import { Label } from "../905/270045";
 import { v as _$$v } from "../905/442517";
 import { P as _$$P2 } from "../3276/355202";
 import { L as _$$L2 } from "../905/473569";
-import { wm } from "../905/19536";
+import { useMemoShallow } from "../905/19536";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { Jn } from "../905/17223";
 import { kt } from "../figma_app/858013";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { L0 } from "../figma_app/831799";
 import { Cf } from "../905/504727";
 import { l6, c$ } from "../905/794875";
@@ -84,7 +84,7 @@ function j(e) {
   } = W5(fileKey);
   let i = userIdsInCall.size;
   let n = aV();
-  let l = iZ();
+  let l = selectCurrentUser();
   useEffect(() => {
     !isIpadDevice && l?.id && !userIdsInCall.has(l.id) && w$(i);
   }, [i, l?.id, userIdsInCall]);
@@ -661,7 +661,7 @@ function eS(e) {
     call,
     usersInCall
   } = e;
-  let i = iZ();
+  let i = selectCurrentUser();
   let n = mt(call);
   let l = useMemo(() => n?.filter(e => e !== i?.id)?.slice(0, 6).reduce((e, t) => {
     let o = usersInCall.find(({
@@ -710,7 +710,7 @@ let eP = connect(e => ({
   let {
     showWidgetParticipantList
   } = e;
-  let a = iZ();
+  let a = selectCurrentUser();
   let l = useDispatch();
   let {
     userIdsInCall
@@ -780,14 +780,14 @@ function e9(e, t, a, o, n, l, r) {
   let [d, _] = useState(null);
   let [u, p] = useState([]);
   let m = useSelector(e => e.dropdownShown?.type === o);
-  let h = wm(() => u.map(e => e.deviceId), [u]);
+  let h = useMemoShallow(() => u.map(e => e.deviceId), [u]);
   let N = useCallback(async () => {
     try {
       let e = await t();
       let a = new Set(h);
       (h.length !== e.length || e.some(e => !(e.deviceId in a))) && p(e);
     } catch {
-      r || c(_$$F.enqueue({
+      r || c(VisualBellActions.enqueue({
         message: getI18nString("collaboration.voice.error_fetching_devices"),
         error: !0,
         type: "voice-device-error"
@@ -806,7 +806,7 @@ function e9(e, t, a, o, n, l, r) {
     try {
       await a(e);
     } catch {
-      c(_$$F.enqueue({
+      c(VisualBellActions.enqueue({
         message: getI18nString("collaboration.voice.error_selecting_device"),
         error: !0,
         type: "voice-device-error"
@@ -1367,7 +1367,7 @@ function td({
 export function $$t_0() {
   let e = useSelector(e => e.mirror.appModel.showUi);
   let t = tS();
-  let a = iZ();
+  let a = selectCurrentUser();
   let u = useSelector(e => e.voice.showWidget);
   let p = useSelector(e => t && t in e.voice.activeCall);
   let v = useSelector(e => t && !!e.voice.activeCall[t]);

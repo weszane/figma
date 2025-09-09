@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { s as _$$s } from "../905/328136";
 import { A as _$$A } from "../905/351112";

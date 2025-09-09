@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { tG } from "../figma_app/757723";
 export function $$a2() {
   return !!useSelector(e => e.mirror.selectionProperties.whiteboardStickyAIControlsShown);

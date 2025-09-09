@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fM, Uj, mG } from "../figma_app/15924";
 import { hS } from "../905/437088";
@@ -20,7 +20,7 @@ import { Pg, lT } from "../figma_app/777551";
 import { cs } from "../figma_app/740025";
 import { ej } from "../figma_app/86989";
 import { G } from "../905/11536";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { m3, zF, U as _$$U } from "../figma_app/45218";
 var j = (e => (e.PATREON = "Patreon", e.GUMROAD = "Gumroad", e.UI8 = "UI8", e.LEMONSQUEEZY = "Lemon Squeezy", e))(j || {});
 let w = {
@@ -94,7 +94,7 @@ export function $$P0({
 }) {
   let u;
   let _ = useSelector(e => e.authedActiveCommunityProfile);
-  let d = TA();
+  let d = getUserId();
   let m = useSelector(e => e.authedUsers);
   let y = ej(e);
   let b = _$$A(e, !0);

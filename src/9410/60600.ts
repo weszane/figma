@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N as _$$N } from "../905/438674";
 import { E as _$$E } from "../905/53857";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";

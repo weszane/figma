@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { k } from "../905/582200";
 import { renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
@@ -35,7 +35,7 @@ export function $$g0(e) {
     fullscreenValue.triggerActionInUserEditScope(r ? "create-state-group-row" : "create-state-group");
   };
   return jsx(z, {
-    recordingKey: Pt(e, "mergeButton"),
+    recordingKey: generateRecordingKey(e, "mergeButton"),
     onClick: () => o(t),
     children: renderI18nText("design_systems.states_panel.combine_as_variants")
   }, "merge-button");

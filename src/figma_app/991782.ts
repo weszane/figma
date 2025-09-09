@@ -17,13 +17,13 @@ import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { c$ as _$$c$ } from "../figma_app/236327";
 import { _ as _$$_ } from "../figma_app/658134";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { BK } from "../905/848862";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -76,7 +76,7 @@ export function $$G2({
   });
 }
 let V = e => {
-  tJ(e);
+  replaceSelection(e);
   Fullscreen.triggerAction("zoom-to-selection", void 0);
 };
 let H = (e, t) => {
@@ -89,7 +89,7 @@ function z({
   recordingKey: e,
   error: t
 }) {
-  let r = useMemo(() => _$$g(), []);
+  let r = useMemo(() => generateUUIDv4(), []);
   let {
     showing,
     hide,

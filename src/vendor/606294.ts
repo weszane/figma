@@ -390,10 +390,10 @@ class d {
     return _$$A.diag(this.s);
   }
 }
-export function $$p0(e, r = !1) {
+export function inverse(e, r = !1) {
   return (e = _$$A2.checkMatrix(e), r) ? new d(e).inverse() : g(e, _$$A.eye(e.rows));
 }
 function g(e, r, n = !1) {
   return (e = _$$A2.checkMatrix(e), r = _$$A2.checkMatrix(r), n) ? new d(e).solve(r) : e.isSquare() ? new A(e).solve(r) : new h(e).solve(r);
 }
-export const D = $$p0;
+export const D = inverse;

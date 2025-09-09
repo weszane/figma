@@ -1,100 +1,99 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useMemo, createContext, useState, useContext, useCallback, useRef, useEffect, useLayoutEffect, useId, createRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
-import { k as _$$k } from "../905/44647";
-import { O as _$$O } from "../905/969533";
-import { uN } from "../figma_app/338442";
-import { Fullscreen, VariableSetErrorType, ComponentPropType, VariableDataType, VariableResolvedDataType, OperationType, VariablesBindings, StateHierarchy } from "../figma_app/763686";
-import c from "classnames";
-import { rf, v_, fo, Pt } from "../figma_app/806412";
-import { S as _$$S } from "../figma_app/552746";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { eY as _$$eY } from "../figma_app/722362";
-import { V2 } from "../figma_app/578955";
-import { iN } from "../figma_app/760428";
-import { aq } from "../figma_app/305626";
-import { ow, OC, _f, D1, i$ } from "../figma_app/150804";
-import { Y9, oO, fn, Ad } from "../figma_app/811257";
-import { IK } from "../905/521428";
-import { V as _$$V } from "../905/900932";
-import { getFeatureFlags } from "../905/601108";
-import { Dm, Vg } from "../figma_app/460003";
-import { wh, iz, wd, zn, xb, O2, OE } from "../figma_app/164212";
-import { an, RB } from "../figma_app/626952";
-import { c as _$$c } from "../figma_app/528598";
-import { permissionScopeHandler } from "../905/189185";
-import { ms, c$ } from "../figma_app/236327";
-import { fullscreenValue } from "../figma_app/455680";
-import { o3, nt } from "../905/226610";
-import { vL } from "../905/826900";
-import { q as _$$q } from "../figma_app/905311";
-import { dD, DD, Jg } from "../figma_app/941824";
-import { d as _$$d } from "../905/976845";
-import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
-import { A as _$$A } from "../905/891805";
-import { O as _$$O2 } from "../905/487602";
-import { y as _$$y } from "../905/582657";
-import { sD } from "../figma_app/243058";
-import { useHandleMouseEvent } from "../figma_app/878298";
-import { parsePxInt } from "../figma_app/783094";
-import { X as _$$X } from "../905/606795";
-import { selectWithShallowEqual } from "../905/103090";
-import { Uz } from "../905/63728";
-import { u2, GG } from "../905/511649";
-import { Yx } from "../figma_app/930338";
-import { s as _$$s } from "../cssbuilder/589278";
-import { n0 } from "../figma_app/389091";
-import { oB, j7 } from "../905/929976";
-import { u1, XE } from "../figma_app/91703";
-import { vq } from "../905/8732";
-import { dH, i as _$$i } from "../figma_app/741237";
-import { isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
-import { kH } from "../905/309735";
-import { Sh } from "../figma_app/889655";
-import { zr, Ib } from "../905/129884";
-import { cn } from "../905/959568";
-import { Pe } from "../figma_app/323320";
-import { q1, bk, xJ, Jj, zb, Po, zh } from "../figma_app/264776";
-import { aR, pf } from "../figma_app/530362";
-import { xP, wS } from "../figma_app/65182";
-import { Nw } from "../figma_app/505098";
-import { r as _$$r } from "../905/571838";
-import { t7 } from "../905/508367";
-import { jD } from "../905/765855";
-import { eP as _$$eP } from "../figma_app/613182";
-import { uj0 } from "../figma_app/27776";
-import { isNotNullish } from "../figma_app/95419";
-import { d as _$$d2 } from "../905/49800";
-import { HiddenLabel } from "../905/270045";
-import { U as _$$U } from "../905/708285";
-import { yG } from "../905/859698";
-import { k9 } from "../905/19536";
-import { r as _$$r2 } from "../905/12476";
-import { hg } from "../figma_app/355754";
-import { u as _$$u, BQ } from "../figma_app/852050";
-import { Aw } from "../figma_app/383828";
-import { y3 } from "../figma_app/741785";
-import { l6, c$ as _$$c$, sK } from "../905/794875";
-import { D5, Tj } from "../figma_app/218448";
-import { g as _$$g } from "../figma_app/594353";
-import { JV } from "../figma_app/260445";
-import { mY, R1, u3, y$, Px } from "../figma_app/152690";
-import { eF as _$$eF } from "../figma_app/394327";
-import { P as _$$P } from "../figma_app/120873";
-import { logError } from "../905/714362";
-import { Yi } from "../figma_app/933328";
-import { F$ } from "../figma_app/111825";
-import { ty as _$$ty } from "../figma_app/406976";
-import { D as _$$D } from "../figma_app/335489";
-import { K as _$$K2 } from "../905/636142";
-import { ZE } from "../figma_app/689119";
-import { K8, Ro, c6, zJ, BY, FG, tP, g1, aO, Me, p3 } from "../figma_app/631970";
-import { r as _$$r3 } from "../905/571562";
-import { Q as _$$Q } from "../figma_app/67145";
-import { a3, ow as _$$ow } from "../905/188421";
-import { Og } from "../figma_app/882817";
-var u = c;
+import c from 'classnames';
+import { createContext, createRef, useCallback, useContext, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { vq } from '../905/8732';
+import { r as _$$r2 } from '../905/12476';
+import { useMemoStable } from '../905/19536';
+import { k as _$$k } from '../905/44647';
+import { d as _$$d2 } from '../905/49800';
+import { Uz } from '../905/63728';
+import { selectWithShallowEqual } from '../905/103090';
+import { Ib, zr } from '../905/129884';
+import { ow as _$$ow, a3 } from '../905/188421';
+import { permissionScopeHandler } from '../905/189185';
+import { isInvalidValue, isValidValue, normalizeValue } from '../905/216495';
+import { nt, o3 } from '../905/226610';
+import { HiddenLabel } from '../905/270045';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { kH } from '../905/309735';
+import { K as _$$K } from '../905/443068';
+import { O as _$$O2 } from '../905/487602';
+import { t7 } from '../905/508367';
+import { GG, u2 } from '../905/511649';
+import { IK } from '../905/521428';
+import { r as _$$r3 } from '../905/571562';
+import { r as _$$r } from '../905/571838';
+import { y as _$$y } from '../905/582657';
+import { getFeatureFlags } from '../905/601108';
+import { X as _$$X } from '../905/606795';
+import { E as _$$E } from '../905/632989';
+import { K as _$$K2 } from '../905/636142';
+import { U as _$$U } from '../905/708285';
+import { logError } from '../905/714362';
+import { jD } from '../905/765855';
+import { c$ as _$$c$, l6, sK } from '../905/794875';
+import { vL } from '../905/826900';
+import { yG } from '../905/859698';
+import { A as _$$A } from '../905/891805';
+import { V as _$$V } from '../905/900932';
+import { j7, oB } from '../905/929976';
+import { cn } from '../905/959568';
+import { O as _$$O } from '../905/969533';
+import { d as _$$d } from '../905/976845';
+import { s as _$$s } from '../cssbuilder/589278';
+import { uj0 } from '../figma_app/27776';
+import { wS, xP } from '../figma_app/65182';
+import { Q as _$$Q } from '../figma_app/67145';
+import { u1, XE } from '../figma_app/91703';
+import { isNotNullish } from '../figma_app/95419';
+import { F$ } from '../figma_app/111825';
+import { P as _$$P } from '../figma_app/120873';
+import { _f, D1, i$, OC, ow } from '../figma_app/150804';
+import { mY, Px, R1, u3, y$ } from '../figma_app/152690';
+import { iz, O2, OE, wd, wh, xb, zn } from '../figma_app/164212';
+import { D5, Tj } from '../figma_app/218448';
+import { c$, ms } from '../figma_app/236327';
+import { VariableIdHandler } from '../figma_app/243058';
+import { JV } from '../figma_app/260445';
+import { bk, Jj, Po, q1, xJ, zb, zh } from '../figma_app/264776';
+import { aq } from '../figma_app/305626';
+import { Pe } from '../figma_app/323320';
+import { D as _$$D } from '../figma_app/335489';
+import { uN } from '../figma_app/338442';
+import { hg } from '../figma_app/355754';
+import { Aw } from '../figma_app/383828';
+import { n0 } from '../figma_app/389091';
+import { eF as _$$eF } from '../figma_app/394327';
+import { ty as _$$ty } from '../figma_app/406976';
+import { fullscreenValue } from '../figma_app/455680';
+import { Dm, Vg } from '../figma_app/460003';
+import { Nw } from '../figma_app/505098';
+import { c as _$$c } from '../figma_app/528598';
+import { aR, pf } from '../figma_app/530362';
+import { S as _$$S } from '../figma_app/552746';
+import { V2 } from '../figma_app/578955';
+import { g as _$$g } from '../figma_app/594353';
+import { eP as _$$eP } from '../figma_app/613182';
+import { an, RB } from '../figma_app/626952';
+import { aO, BY, c6, FG, g1, K8, Me, p3, Ro, tP, zJ } from '../figma_app/631970';
+import { ZE } from '../figma_app/689119';
+import { eY as _$$eY } from '../figma_app/722362';
+import { renameNode, setHoveredComponentPropDef } from '../figma_app/741237';
+import { y3 } from '../figma_app/741785';
+import { iN } from '../figma_app/760428';
+import { ComponentPropType, Fullscreen, OperationType, StateHierarchy, VariableDataType, VariableResolvedDataType, VariablesBindings, VariableSetErrorType } from '../figma_app/763686';
+import { parsePxInt } from '../figma_app/783094';
+import { Ad, fn, oO, Y9 } from '../figma_app/811257';
+import { u as _$$u, BQ } from '../figma_app/852050';
+import { generateRecordingKey, useHandleInputEvent, useHandleKeyboardEvent, useHandleMouseEvent } from '../figma_app/878298';
+import { Og } from '../figma_app/882817';
+import { Sh } from '../figma_app/889655';
+import { q as _$$q } from '../figma_app/905311';
+import { Yx } from '../figma_app/930338';
+import { Yi } from '../figma_app/933328';
+import { dD, DD, Jg } from '../figma_app/941824';
+import { useDispatch, useSelector } from 'react-redux';
+let u = c;
 function A({
   autosuggestedValues: e,
   instanceGUID: t,
@@ -104,24 +103,24 @@ function A({
   setIsHovered: o,
   productComponentGUID: l
 }) {
-  let d = 0 === Object.keys(e || {}).length;
-  let c = useMemo(() => a ? getI18nString("design_systems.component_properties.auto_suggest_loading") : d ? getI18nString("design_systems.component_properties.auto_suggest_empty") : getI18nString("design_systems.component_properties.auto_suggest_apply"), [s, a, d]);
+  let d = Object.keys(e || {}).length === 0;
+  let c = useMemo(() => a ? getI18nString('design_systems.component_properties.auto_suggest_loading') : d ? getI18nString('design_systems.component_properties.auto_suggest_empty') : getI18nString('design_systems.component_properties.auto_suggest_apply'), [s, a, d]);
   if (!getFeatureFlags().anticipation_props || !t) return null;
   let u = a || !a && d;
-  return jsx("div", {
-    className: "props_section--autoSuggestButtonWrapper--WRcYQ",
+  return jsx('div', {
+    className: 'props_section--autoSuggestButtonWrapper--WRcYQ',
     onMouseEnter: () => o(!0),
     onMouseLeave: () => o(!1),
     children: jsx(IK, {
-      variant: "secondary",
+      variant: 'secondary',
       disabled: u,
       onClick: () => {
         Dm(t, e, r, l);
       },
-      children: jsxs("span", {
-        className: "props_section--autosuggestButtonText--S97lu",
+      children: jsxs('span', {
+        className: 'props_section--autosuggestButtonText--S97lu',
         children: [jsx(_$$V, {
-          className: u ? "props_section--disabledIcon--VzOXX" : void 0
+          className: u ? 'props_section--disabledIcon--VzOXX' : void 0
         }), c]
       })
     })
@@ -149,13 +148,13 @@ function eu({
   inputRef: t,
   canEdit: r
 }) {
-  return r ? jsx("div", {
-    className: "false_input_containing_svg--falseInput--cKug0 raw_components--borderFocusWithin--BaipZ",
+  return r ? jsx('div', {
+    className: 'false_input_containing_svg--falseInput--cKug0 raw_components--borderFocusWithin--BaipZ',
     onClick: () => t.current?.focus(),
-    role: "textbox",
+    role: 'textbox',
     tabIndex: 0,
     children: e
-  }) : jsx("div", {
+  }) : jsx('div', {
     className: _$$s.hFull.wFull.relative.$,
     children: e
   });
@@ -171,7 +170,7 @@ function eb({
     position
   } = selectWithShallowEqual(e => e.tooltip);
   let d = useCallback(e => {
-    (" " === e.key || "Enter" === e.key) && e.stopPropagation();
+    (e.key === ' ' || e.key === 'Enter') && e.stopPropagation();
   }, []);
   let c = useCallback(e => {
     e.stopPropagation();
@@ -184,29 +183,29 @@ function eb({
       }
     }
     let n = t.getBoundingClientRect();
-    t.dispatchEvent(new MouseEvent("mousemove", {
+    t.dispatchEvent(new MouseEvent('mousemove', {
       clientX: n.x + n.width / 2,
       clientY: n.y + n.height / 2
     }));
   }, [r, position, state, targetRect]);
   return jsx(_$$K, {
-    "aria-label": e,
-    "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": e,
-    htmlAttributes: {
+    'aria-label': e,
+    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip': e,
+    'htmlAttributes': {
       onKeyDown: d,
       onKeyUp: d
     },
-    onClick: c,
+    'onClick': c,
     ...t,
-    children: jsx(_$$r, {})
+    'children': jsx(_$$r, {})
   });
 }
-let eI = "component_prop_def_row--ui3ComponentPropRow--Sld-J";
-let eS = "component_prop_def_row--isDraggingOtherRow--WdU8i";
-let ev = "component_prop_def_row--isDraggingRow--p9Tzv";
-let eA = "typed-prop-def-del-dropdown";
-let ex = "variant-prop-def-del-dropdown";
+let eI = 'component_prop_def_row--ui3ComponentPropRow--Sld-J';
+let eS = 'component_prop_def_row--isDraggingOtherRow--WdU8i';
+let ev = 'component_prop_def_row--isDraggingRow--p9Tzv';
+let eA = 'typed-prop-def-del-dropdown';
+let ex = 'variant-prop-def-del-dropdown';
 let eN = e => {
   e.stopPropagation();
 };
@@ -241,7 +240,7 @@ function ew(e) {
     propertySortOrder
   } = selectWithShallowEqual(e => {
     let t = Sh(e);
-    let r = 1 === t.length ? T(e, t[0]) : [];
+    let r = t.length === 1 ? T(e, t[0]) : [];
     return {
       pickerShown: e.pickerShown,
       selectedComponentPropDefId: e.selectedComponentPropDefId,
@@ -275,13 +274,13 @@ function ew(e) {
   let Z = componentPropDef.kind === uN.TYPED ? componentPropDef.type : void 0;
   let Q = componentPropDef.kind === uN.VARIANT ? componentPropDef.values : void 0;
   let ea = selectedComponentPropDefId && selectedComponentPropDefId === J;
-  let es = null !== G;
+  let es = G !== null;
   let el = useMemo(() => pickerShown?.id === aR && (componentPropDef.kind === uN.TYPED ? pickerShown.data.defID === J : pickerShown.data.name === componentPropDef.name), [componentPropDef, pickerShown, J]);
   useEffect(() => {
     es && inputRef.current?.select();
   }, [es, inputRef]);
   let eu = () => {
-    G ? (V(null), componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user("edit-prop-def-name", () => Fullscreen.editComponentPropDefName(componentPropDef.explicitDefID, G)) : componentPropDef.kind === uN.VARIANT && permissionScopeHandler.user("edit-variant-prop-name", () => q1(componentPropDef.name, G, allStates, propertySortOrder))) : V(componentPropDef.name);
+    G ? (V(null), componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user('edit-prop-def-name', () => Fullscreen.editComponentPropDefName(componentPropDef.explicitDefID, G)) : componentPropDef.kind === uN.VARIANT && permissionScopeHandler.user('edit-variant-prop-name', () => q1(componentPropDef.name, G, allStates, propertySortOrder))) : V(componentPropDef.name);
   };
   let eg = useCallback(() => {
     O(n0({
@@ -313,16 +312,16 @@ function ew(e) {
   }, [O, el, selectRow, useGrid, eg]);
   let ey = useCallback(() => {
     B(!0);
-    J && dH({
+    J && setHoveredComponentPropDef({
       nodeIDs: guids,
       defID: J
     });
   }, [guids, J]);
   let eb = useCallback(() => {
     B(!1);
-    dH({
+    setHoveredComponentPropDef({
       nodeIDs: [],
-      defID: ""
+      defID: ''
     });
   }, []);
   let eI = useCallback(e => {
@@ -341,24 +340,24 @@ function ew(e) {
       }
     }));
   }, [O, componentPropDef.kind, singletonRow, pickerShown]);
-  let eS = useHandleMouseEvent(recordingKey, "contextmenu", e => {
+  let eS = useHandleMouseEvent(recordingKey, 'contextmenu', e => {
     eI(e);
   });
-  let ev = useHandleMouseEvent(recordingKey, "mouseenter", e => {
+  let ev = useHandleMouseEvent(recordingKey, 'mouseenter', e => {
     ey();
   });
-  let eN = useHandleMouseEvent(recordingKey, "mouseleave", e => {
+  let eN = useHandleMouseEvent(recordingKey, 'mouseleave', e => {
     eb();
   });
-  let eC = useHandleMouseEvent(recordingKey, "mouseup", e => {
+  let eC = useHandleMouseEvent(recordingKey, 'mouseup', e => {
     ef(e);
   });
-  let ew = useHandleMouseEvent(recordingKey, "mousedown", e => {
+  let ew = useHandleMouseEvent(recordingKey, 'mousedown', e => {
     es && V(null);
     el && O(XE());
     onPropertyMouseDown && !useGrid && onPropertyMouseDown(e);
   });
-  let eR = useHandleMouseEvent(recordingKey, "mousemove", e => {
+  let eR = useHandleMouseEvent(recordingKey, 'mousemove', e => {
     onPropertyMouseMove && !useGrid && onPropertyMouseMove(e);
   }, {
     recordMetadata: e => ({
@@ -374,11 +373,11 @@ function ew(e) {
       pageY: e.pageY
     })
   });
-  rf(recordingKey, "dblclick", () => {
+  useHandleMouseEvent(recordingKey, 'dblclick', () => {
     selectRow();
     V(componentPropDef.name);
   });
-  let eL = rf(recordingKey, "click", () => {
+  let eL = useHandleMouseEvent(recordingKey, 'click', () => {
     useGrid || selectRow();
     V(componentPropDef.name);
   });
@@ -426,7 +425,7 @@ function ew(e) {
     editComponentPropPickerShown: el,
     toggleEditPropPicker: eE,
     onDeleteProp: () => {
-      componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user("delete-prop-def", () => Fullscreen.deleteComponentPropDefs([componentPropDef.explicitDefID])) : w && permissionScopeHandler.user("delete-variant-prop", () => bk([componentPropDef.name], allStates, propertySortOrder, w));
+      componentPropDef.kind === uN.TYPED ? permissionScopeHandler.user('delete-prop-def', () => Fullscreen.deleteComponentPropDefs([componentPropDef.explicitDefID])) : w && permissionScopeHandler.user('delete-variant-prop', () => bk([componentPropDef.name], allStates, propertySortOrder, w));
     },
     shouldShowErrorIcon: eF,
     preferredValuesUnpublishedError: eM,
@@ -483,67 +482,69 @@ function eO({
   let [em, eg] = useState(!1);
   let ef = useCallback(e => {
     eg(!0);
-    (e.target === S.current && null === e.relatedTarget || e.target === eh.current && null === e.relatedTarget) && e.stopPropagation();
+    (e.target === S.current && e.relatedTarget === null || e.target === eh.current && e.relatedTarget === null) && e.stopPropagation();
   }, [S]);
   let eE = useCallback(() => {
     eg(!1);
   }, []);
   if (F && !ec || eo || em && !I ? en.push(jsx(_$$d, {
-    onClick: Y,
-    "aria-label": getI18nString("design_systems.component_properties.edit_property"),
-    recordingKey: "componentPropEditButton",
-    "aria-expanded": K,
-    htmlAttributes: {
-      onDoubleClick: eN,
-      onMouseDown: eN,
-      onContextMenu: eC,
-      "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": getI18nString("design_systems.component_properties.edit_property")
+    'onClick': Y,
+    'aria-label': getI18nString('design_systems.component_properties.edit_property'),
+    'recordingKey': 'componentPropEditButton',
+    'aria-expanded': K,
+    'htmlAttributes': {
+      'onDoubleClick': eN,
+      'onMouseDown': eN,
+      'onContextMenu': eC,
+      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip': getI18nString('design_systems.component_properties.edit_property')
     },
-    children: jsx(_$$A, {})
+    'children': jsx(_$$A, {})
   }), jsx(_$$K, {
-    onClick: $,
-    recordingKey: "componentPropDeleteButton",
-    "aria-label": getI18nString("design_systems.component_properties.delete_property", {
+    'onClick': $,
+    'recordingKey': 'componentPropDeleteButton',
+    'aria-label': getI18nString('design_systems.component_properties.delete_property', {
       numSelected: 1
     }),
-    children: jsx(_$$O2, {})
+    'children': jsx(_$$O2, {})
   })) : useGrid && en.push(null, null), X) {
     let e = iz(v.error, ee);
     en.push(jsx(eb, {
-      "data-testid": `component-prop-error-icon-${D}`,
-      "data-tooltip-offset-y": 1,
-      "data-tooltip-timeout-delay": 50,
-      text: e
+      'data-testid': `component-prop-error-icon-${D}`,
+      'data-tooltip-offset-y': 1,
+      'data-tooltip-timeout-delay': 50,
+      'text': e
     }));
   }
-  en.length || en.push(jsx("div", {
+  en.length || en.push(jsx('div', {
     className: _$$s.w24.$
   }));
   let ey = useMemo(() => {
     if (v.kind === uN.VARIANT) {
-      if (M) return Yx(M, "unit");
+      if (M) return Yx(M, 'unit');
     } else {
       if (v.varValue.type === VariableDataType.ALIAS) {
-        let e = sD.fromString(v.varValue.value);
+        let e = VariableIdHandler.fromString(v.varValue.value);
         if (e) {
           let t = er.getVariableNode(e);
-          if (t) return jsx("div", {
-            className: "component_prop_def_row--variablePill--yJald",
-            children: t.name
-          });
+          if (t) {
+            return jsx('div', {
+              className: 'component_prop_def_row--variablePill--yJald',
+              children: t.name
+            });
+          }
         }
       }
-      if (v.varValue.resolvedType === VariableResolvedDataType.BOOLEAN) return v.varValue.value ? getI18nString("design_systems.component_properties.boolean_true") : getI18nString("design_systems.component_properties.boolean_false");
+      if (v.varValue.resolvedType === VariableResolvedDataType.BOOLEAN) return v.varValue.value ? getI18nString('design_systems.component_properties.boolean_true') : getI18nString('design_systems.component_properties.boolean_false');
       if (v.varValue.resolvedType === VariableResolvedDataType.SLOT_CONTENT_ID) return null;
       if (v.varValue.resolvedType !== VariableResolvedDataType.SYMBOL_ID) return v.defaultValue;
       {
         let e = wd([v.defaultValue], er);
-        if (e) return isInvalidValue(e) ? getI18nString("design_systems.instance_swap_picker.mixed") : kH(e.name);
+        if (e) return isInvalidValue(e) ? getI18nString('design_systems.instance_swap_picker.mixed') : kH(e.name);
       }
     }
   }, [v, er, M]);
-  let eT = ey || T === ComponentPropType.NUMBER && 0 === ey;
+  let eT = ey || T === ComponentPropType.NUMBER && ey === 0;
   let eA = useRef(null);
   let ex = useCallback(e => {
     O(e);
@@ -558,7 +559,7 @@ function eO({
     inputRef: S,
     canEdit: !0,
     children: [T ? zn(T) : jsx(_$$y, {}), jsx(u2, {
-      className: "component_prop_def_row--input--Heq8r props_panel--input--pkL0- raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u sf_pro--uiFontWithSFProFallback--m-p9V",
+      className: 'component_prop_def_row--input--Heq8r props_panel--input--pkL0- raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u sf_pro--uiFontWithSFProFallback--m-p9V',
       defaultValue: v.name,
       forwardedRef: S,
       onBlur: L,
@@ -569,7 +570,7 @@ function eO({
       onMouseDown: e => eN(e),
       onMouseLeave: N,
       onMouseUp: A,
-      recordingKey: "componentPropRowDefNameInput"
+      recordingKey: 'componentPropRowDefNameInput'
     })]
   });
   let [eO, eR] = useState(!1);
@@ -581,28 +582,28 @@ function eO({
     ref: eh,
     htmlAttributes: eL,
     onClick: f,
-    className: u()("component_prop_def_row--ui3ComponentPropDefNameContainer--fBQXq", "component_prop_def_row--ui3ComponentPropDefNameContainerFocus--ejeB2", {
-      "component_prop_def_row--isInGrid--ngO2H": useGrid,
-      "component_prop_def_row--ui3ComponentPropDefNameContainerDragging--VELue": eo,
-      "component_prop_def_row--isSelectedSecondary--0vLAL": useGrid && e && !eO
+    className: u()('component_prop_def_row--ui3ComponentPropDefNameContainer--fBQXq', 'component_prop_def_row--ui3ComponentPropDefNameContainerFocus--ejeB2', {
+      'component_prop_def_row--isInGrid--ngO2H': useGrid,
+      'component_prop_def_row--ui3ComponentPropDefNameContainerDragging--VELue': eo,
+      'component_prop_def_row--isSelectedSecondary--0vLAL': useGrid && e && !eO
     }),
-    children: [jsx("span", {
-      "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": getI18nString("design_systems.component_properties.property_icon_tooltip", {
+    children: [jsx('span', {
+      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip': getI18nString('design_systems.component_properties.property_icon_tooltip', {
         propertyType: xb(T ?? ComponentPropType.VARIANT)
       }),
-      children: T ? zn(T) : jsx(_$$y, {})
-    }), jsxs("div", {
-      className: "component_prop_def_row--ui3ComponentPropDefNameAndValue--2w-8p",
-      children: [jsx("div", {
-        ref: P,
-        className: "component_prop_def_row--componentPropDefName--bUVTI ellipsis--ellipsis--Tjyfa sf_pro--uiFontWithSFProFallback--m-p9V",
-        "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": k ? v.name : null,
-        children: v.name
-      }), eT && jsxs("div", {
-        className: "component_prop_def_row--componentPropVariantValues--mTqSx",
-        children: ["\u30FB", ey]
+      'children': T ? zn(T) : jsx(_$$y, {})
+    }), jsxs('div', {
+      className: 'component_prop_def_row--ui3ComponentPropDefNameAndValue--2w-8p',
+      children: [jsx('div', {
+        'ref': P,
+        'className': 'component_prop_def_row--componentPropDefName--bUVTI ellipsis--ellipsis--Tjyfa sf_pro--uiFontWithSFProFallback--m-p9V',
+        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip': k ? v.name : null,
+        'children': v.name
+      }), eT && jsxs('div', {
+        className: 'component_prop_def_row--componentPropVariantValues--mTqSx',
+        children: ['\u30FB', ey]
       })]
     })]
   });
@@ -672,22 +673,22 @@ function eP({
   let l = useMemo(() => getFeatureFlags().ds_image_props_sites ? e.filter(e => e.type !== ComponentPropType.IMAGE) : e, [e]);
   let c = useSelector(e => e.dropdownShown);
   let u = c?.type === eA;
-  let _ = e => (e?.key === "Backspace" || e?.key === "Delete") && (f(), !0);
-  let m = v_(o, "keydown", e => {
+  let _ = e => (e?.key === 'Backspace' || e?.key === 'Delete') && (f(), !0);
+  let m = useHandleKeyboardEvent(o, 'keydown', e => {
     _(e);
   });
-  let g = fo(`${o}.fullscreen`, "keydown", e => {
+  let g = useHandleInputEvent(`${o}.fullscreen`, 'keydown', e => {
     _(e.event) && e.accept();
   });
   let f = useCallback(() => {
     if (!r.length) return;
     let e = r.map(e => l[e].explicitDefID);
-    permissionScopeHandler.user("delete-prop-defs", () => Fullscreen.deleteComponentPropDefs(e));
+    permissionScopeHandler.user('delete-prop-defs', () => Fullscreen.deleteComponentPropDefs(e));
   }, [l, r]);
   let E = useCallback((e, t, r) => {
-    let n = t ? t.explicitDefID : "";
-    let i = r ? r.explicitDefID : "";
-    permissionScopeHandler.user("reorder-prop-defs", () => e.forEach(e => {
+    let n = t ? t.explicitDefID : '';
+    let i = r ? r.explicitDefID : '';
+    permissionScopeHandler.user('reorder-prop-defs', () => e.forEach(e => {
       Fullscreen.insertPropDefBetween(e.explicitDefID, n, i);
       n = e.explicitDefID;
     }));
@@ -704,7 +705,7 @@ function eP({
   return jsxs(vL, {
     handleKeyDown: g,
     ref: b,
-    name: "typed-props-list",
+    name: 'typed-props-list',
     focusOnMount: !0,
     children: [jsx(dD.Provider, {
       value: {
@@ -728,9 +729,9 @@ function eP({
           onPropertyMouseDown: d,
           onPropertyMouseMove: c,
           onPropertyMouseUp: u,
-          recordingKey: Pt(o, "row", r),
+          recordingKey: generateRecordingKey(o, 'row', r),
           selectRow: () => s([r]),
-          singletonRow: 1 === l.length
+          singletonRow: l.length === 1
         }, y ? void 0 : r),
         recordingKey: o
       })
@@ -739,8 +740,8 @@ function eP({
       positionFixed: !0,
       children: jsx(eL, {
         onClick: f,
-        recordingKey: "deleteProp",
-        children: renderI18nText("design_systems.component_properties.delete_property", {
+        recordingKey: 'deleteProp',
+        children: renderI18nText('design_systems.component_properties.delete_property', {
           numSelected: r.length
         })
       })
@@ -771,7 +772,7 @@ function $$e6(e) {
   let v = useSelector(e => e.instanceSwapPickerShown);
   let A = hg();
   let x = D5(variantPropDef.name, variantPropDef.values);
-  let N = k9(() => _$$D(guids, sceneGraph), [guids, sceneGraph]);
+  let N = useMemoStable(() => _$$D(guids, sceneGraph), [guids, sceneGraph]);
   let C = useRef(null);
   let w = useRef(null);
   let O = useId();
@@ -799,7 +800,7 @@ function $$e6(e) {
       } = R1();
       let {
         consumedVariable: _consumedVariable
-      } = u3(["VARIANT_PROPERTIES"]);
+      } = u3(['VARIANT_PROPERTIES']);
       let l = useCallback(e => {
         setVariableConsumptionMap({
           VARIANT_PROPERTIES: e
@@ -817,7 +818,7 @@ function $$e6(e) {
     }(t);
     let l = useSelector(e => e.fileVersion);
     let c = useCallback(t => {
-      let i = consumedVariable && isValidValue(consumedVariable) && !("isMixed" in consumedVariable && consumedVariable.isMixed) && consumedVariable.type === VariableDataType.EXPRESSION ? consumedVariable.value.expressionArguments[0] : {
+      let i = consumedVariable && isValidValue(consumedVariable) && !('isMixed' in consumedVariable && consumedVariable.isMixed) && consumedVariable.type === VariableDataType.EXPRESSION ? consumedVariable.value.expressionArguments[0] : {
         type: VariableDataType.MAP,
         resolvedType: VariableResolvedDataType.MAP,
         value: {}
@@ -850,7 +851,7 @@ function $$e6(e) {
           });
           _$$ty(r, t.resolvedType);
         }
-      })) : (delete i.value[e.name], setVariantProperties(0 === Object.keys(i.value).length ? null : {
+      })) : (delete i.value[e.name], setVariantProperties(Object.keys(i.value).length === 0 ? null : {
         type: VariableDataType.EXPRESSION,
         resolvedType: VariableResolvedDataType.SYMBOL_ID,
         value: {
@@ -860,16 +861,18 @@ function $$e6(e) {
       }));
     }, [consumedVariable, setVariantProperties, r, e, l]);
     let u = useMemo(() => {
-      if (consumedVariable && isValidValue(consumedVariable)) try {
-        let t = consumedVariable.value.expressionArguments[0].value[e.name];
-        if (!t) return null;
-        if (t.type === VariableDataType.EXPRESSION && t.value.expressionFunction === OperationType.STRINGIFY && (t = t.value.expressionArguments[0]), t?.type === VariableDataType.ALIAS) return t.value;
-      } catch (e) {
-        logError("variables", "error checking variant binding map", {
-          message: e.message
-        }, {
-          reportAsSentryError: !0
-        });
+      if (consumedVariable && isValidValue(consumedVariable)) {
+        try {
+          let t = consumedVariable.value.expressionArguments[0].value[e.name];
+          if (!t) return null;
+          if (t.type === VariableDataType.EXPRESSION && t.value.expressionFunction === OperationType.STRINGIFY && (t = t.value.expressionArguments[0]), t?.type === VariableDataType.ALIAS) return t.value;
+        } catch (e) {
+          logError('variables', 'error checking variant binding map', {
+            message: e.message
+          }, {
+            reportAsSentryError: !0
+          });
+        }
       }
       return null;
     }, [consumedVariable, e]);
@@ -881,13 +884,13 @@ function $$e6(e) {
       variableConsumptionMapValue: variantProperties
     };
   }(e.variantPropDef, guids);
-  let [F, j] = JV(["VARIANT_PROPERTIES"], onExpressionSubmitted && "TOGGLE" === x.type ? VariableResolvedDataType.BOOLEAN : VariableResolvedDataType.STRING, setBinding, {
-    requestedTypes: "TOGGLE" === x.type ? [VariableResolvedDataType.BOOLEAN] : [VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT],
+  let [F, j] = JV(['VARIANT_PROPERTIES'], onExpressionSubmitted && x.type === 'TOGGLE' ? VariableResolvedDataType.BOOLEAN : VariableResolvedDataType.STRING, setBinding, {
+    requestedTypes: x.type === 'TOGGLE' ? [VariableResolvedDataType.BOOLEAN] : [VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT],
     metadata: e.variantPropDef.name
   }, onExpressionSubmitted);
   function U(e, t) {
     let r = Tj(selectedPropertyValueHistory, e, t);
-    if (t === getI18nString("proto.assign_variant")) {
+    if (t === getI18nString('proto.assign_variant')) {
       j(w.current);
       return;
     }
@@ -901,7 +904,7 @@ function $$e6(e) {
         [e]: t
       };
       let o = Jj(s, r, allStateVariantProps);
-      null !== o && (n[i.guid] = o);
+      o !== null && (n[i.guid] = o);
     }
     let i = {};
     for (let e of Object.keys(n)) {
@@ -914,9 +917,9 @@ function $$e6(e) {
       v?.isShown && I(vq());
       return;
     }
-    0 !== Object.keys(i).length && (zb("Swapping A Variant", stateGroupGUID ?? "", {
-      source: forBubbledProps ? "bubbled_sidebar" : "sidebar"
-    }), permissionScopeHandler.user("change-variant-prop", () => Aw(i)));
+    Object.keys(i).length !== 0 && (zb('Swapping A Variant', stateGroupGUID ?? '', {
+      source: forBubbledProps ? 'bubbled_sidebar' : 'sidebar'
+    }), permissionScopeHandler.user('change-variant-prop', () => Aw(i)));
     updateHistory(r);
   }
   let G = statePropertyValues.hasOwnProperty(x.property) ? statePropertyValues[x.property] : void 0;
@@ -926,7 +929,7 @@ function $$e6(e) {
   }
   let z = _$$u(boundVariableId ?? void 0);
   let W = Px();
-  let K = useMemo(() => VariablesBindings.getVariableSetKeyForPublish(z?.variableSetId ?? "") ?? "", [z?.variableSetId]);
+  let K = useMemo(() => VariablesBindings.getVariableSetKeyForPublish(z?.variableSetId ?? '') ?? '', [z?.variableSetId]);
   let Y = K in W ? W[yG(K)] : void 0;
   let $ = useMemo(() => Y ? {
     [yG(K)]: Y
@@ -938,7 +941,7 @@ function $$e6(e) {
   } = (() => {
     if (isBound && z && isNotNullish(X)) {
       let t;
-      isNotNullish(X) && "MIXED" !== X && (V.some(e => e.toLowerCase() === X.value.toString().toLowerCase()) ? G?.toString().toLowerCase() !== X.value.toString().toLowerCase() && (t = getI18nString("design_systems.component_properties.invalid_variant_binding_state")) : t = getI18nString("design_systems.component_properties.invalid_variant_binding"));
+      isNotNullish(X) && X !== 'MIXED' && (V.some(e => e.toLowerCase() === X.value.toString().toLowerCase()) ? G?.toString().toLowerCase() !== X.value.toString().toLowerCase() && (t = getI18nString('design_systems.component_properties.invalid_variant_binding_state')) : t = getI18nString('design_systems.component_properties.invalid_variant_binding'));
       return {
         assignmentValue: onExpressionSubmitted && variableConsumptionMapValue ? jsx(y3, {
           targetVariableData: variableConsumptionMapValue.isMixed ? void 0 : variableConsumptionMapValue,
@@ -951,7 +954,7 @@ function $$e6(e) {
           isInConditional: !1,
           isMixed: variableConsumptionMapValue.isMixed,
           variantProperty: e.variantPropDef.name
-        }) : z && jsx("div", {
+        }) : z && jsx('div', {
           className: K8,
           children: jsx(_$$P, {
             classNameOverride: _$$s.wFull.$,
@@ -959,30 +962,30 @@ function $$e6(e) {
             invalid: void 0 !== t,
             isDeleted: _$$eF(z),
             isStandalone: !0,
-            thumbnailValue: "MIXED" === X || t ? void 0 : X,
+            thumbnailValue: X === 'MIXED' || t ? void 0 : X,
             tooltipOverride: t,
-            value: isInvalidValue(G) ? getI18nString("design_systems.component_properties.mixed") : z.name,
+            value: isInvalidValue(G) ? getI18nString('design_systems.component_properties.mixed') : z.name,
             variableId: isInvalidValue(G) ? void 0 : boundVariableId ?? void 0,
             variablePillContainerClassName: Ro
           })
         }),
-        iconButton: jsx("span", {
+        iconButton: jsx('span', {
           className: c6,
           children: jsx(_$$K, {
-            onClick: H,
-            "aria-label": getI18nString("design_systems.component_properties.detach_property"),
-            recordingKey: Pt(e.recordingKey, "detachVariantProp"),
-            htmlAttributes: {
-              "data-tooltip": getI18nString("design_systems.component_properties.detach_property"),
-              "data-tooltip-type": Ib.TEXT
+            'onClick': H,
+            'aria-label': getI18nString('design_systems.component_properties.detach_property'),
+            'recordingKey': generateRecordingKey(e.recordingKey, 'detachVariantProp'),
+            'htmlAttributes': {
+              'data-tooltip': getI18nString('design_systems.component_properties.detach_property'),
+              'data-tooltip-type': Ib.TEXT
             },
-            children: jsx(_$$U, {})
+            'children': jsx(_$$U, {})
           })
         })
       };
     }
     {
-      let r = G ? "TOGGLE" === x.type ? jsx(e7, {
+      let r = G ? x.type === 'TOGGLE' ? jsx(e7, {
         entry: x,
         selectedOption: G,
         viewOnly,
@@ -1001,9 +1004,9 @@ function $$e6(e) {
       }) : null;
       let i = jsx(_$$K2, {
         isPickerShowing: F,
-        onClick: () => U(x.property, getI18nString("proto.assign_variant")),
-        recordingKey: Pt(e.recordingKey, "assignVariantProp"),
-        tooltip: getI18nString("proto.apply_variant_unified")
+        onClick: () => U(x.property, getI18nString('proto.assign_variant')),
+        recordingKey: generateRecordingKey(e.recordingKey, 'assignVariantProp'),
+        tooltip: getI18nString('proto.apply_variant_unified')
       });
       return {
         assignmentValue: r,
@@ -1011,15 +1014,15 @@ function $$e6(e) {
       };
     }
   })();
-  let Z = jsx("div", {
+  let Z = jsx('div', {
     className: zJ,
-    children: jsx("p", {
-      id: O,
-      ref: C,
-      className: BY,
-      "data-tooltip-type": Ib.TEXT,
-      "data-tooltip": C.current && C.current.offsetWidth < C.current.scrollWidth ? x.property : null,
-      children: x.label
+    children: jsx('p', {
+      'id': O,
+      'ref': C,
+      'className': BY,
+      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip': C.current && C.current.offsetWidth < C.current.scrollWidth ? x.property : null,
+      'children': x.label
     })
   });
   return hideIcon ? jsx(_$$g, {
@@ -1055,7 +1058,7 @@ function e7({
       r(e.property, e.toggleTokenPair[t ? 0 : 1]);
     },
     disabled: i,
-    recordingKey: Pt(a, `toggle-${e.property}`)
+    recordingKey: generateRecordingKey(a, `toggle-${e.property}`)
   });
 }
 function e9({
@@ -1071,34 +1074,34 @@ function e9({
 }) {
   let _ = useDispatch();
   let m = useSelector(e => e.dropdownShown);
-  return jsx("div", {
+  return jsx('div', {
     className: u()(tP, {
       [g1]: o === O2.WIDE,
       [aO]: i
     }),
-    children: i ? jsx("p", {
+    children: i ? jsx('p', {
       className: Me,
-      children: isInvalidValue(t) ? getI18nString("design_systems.component_properties.mixed") : t
+      children: isInvalidValue(t) ? getI18nString('design_systems.component_properties.mixed') : t
     }) : jsx(l6, {
       ariaLabelledBy: c,
       className: ZE,
       dispatch: _,
-      dropdownAlignment: "right",
+      dropdownAlignment: 'right',
       dropdownShown: m,
       dropdownWidth: 200,
       fill: o === O2.UNBOUNDED,
       formatter: e8,
-      id: `states-property-select-${d.join("-")}-${e.property}`,
+      id: `states-property-select-${d.join('-')}-${e.property}`,
       inputClassName: p3,
       onChange: t => {
         r(e.property, t);
       },
       onMouseDown: () => _(_$$r2),
       property: t,
-      recordingKey: Pt(s, `select-${e.property}`),
+      recordingKey: generateRecordingKey(s, `select-${e.property}`),
       children: [...l].map(t => jsx(_$$c$, {
         value: t,
-        recordingKey: Pt(s, `select-${e.property}-option-${t}`)
+        recordingKey: generateRecordingKey(s, `select-${e.property}-option-${t}`)
       }, t))
     })
   });
@@ -1137,7 +1140,7 @@ function te({
       guids: t,
       hideIcon: u,
       index: i,
-      recordingKey: Pt(h, "row", t.join("-"), i),
+      recordingKey: generateRecordingKey(h, 'row', t.join('-'), i),
       sceneGraph: _,
       selectedPropertyValueHistory: g,
       stateGroupGUID: o,
@@ -1156,9 +1159,13 @@ class ta extends a3 {}
 class ts extends _$$c$ {}
 let to = e => {
   let t = {};
-  for (let r of e) if (r.stateInfo.propertyValues) for (let [e, n] of Object.entries(r.stateInfo.propertyValues)) {
-    t[e] = t[e] || {};
-    t[e][n] = (t[e][n] || 0) + 1;
+  for (let r of e) {
+    if (r.stateInfo.propertyValues) {
+      for (let [e, n] of Object.entries(r.stateInfo.propertyValues)) {
+        t[e] = t[e] || {};
+        t[e][n] = (t[e][n] || 0) + 1;
+      }
+    }
   }
   return t;
 };
@@ -1168,14 +1175,14 @@ function tl({
 }) {
   return jsx(e, {
     ...t,
-    className: "variant_prop_authoring_row--ui3ComboBoxInput--WyPgd ellipsis--ellipsis--Tjyfa"
+    className: 'variant_prop_authoring_row--ui3ComboBoxInput--WyPgd ellipsis--ellipsis--Tjyfa'
   });
 }
 function td({
   variantPropDef: e,
   recordingKey: t
 }) {
-  var r;
+  let r;
   let {
     dropdownShown,
     allStates,
@@ -1198,31 +1205,31 @@ function td({
   let f = useRef(null);
   let E = useRef(null);
   let [T, I] = useState(null);
-  let S = null != T;
+  let S = T != null;
   let v = useRef({});
   Object.keys(selectedStatesPropertyValues ?? {}).forEach(e => {
     v.current[e] = v.current[e] || createRef();
   });
-  let [A, x] = useState("");
+  let [A, x] = useState('');
   let N = propertyToFocusFullscreen || A;
   useEffect(() => {
     if (dropdownShown || !N) return;
     let e = v.current?.[N]?.current;
     e && (e.select(), fullscreenValue.updateAppModel({
-      statePropertyToFocus: ""
+      statePropertyToFocus: ''
     }));
-    x("");
+    x('');
   }, [N, dropdownShown]);
   let C = useCallback(e => {
-    e.target === E.current && null === e.relatedTarget && e.stopPropagation();
+    e.target === E.current && e.relatedTarget === null && e.stopPropagation();
   }, []);
   let w = useRef(null);
   function O(e, t) {
-    "" !== (t = t.trim()) && selectedStates && (permissionScopeHandler.user("rename-variant-prop", () => {
+    (t = t.trim()) !== '' && selectedStates && (permissionScopeHandler.user('rename-variant-prop', () => {
       Fullscreen && Po(() => {
         for (let r of selectedStates) {
           let n = r.stateInfo.propertyValues || {};
-          _$$i(r.symbol.node_id, zh({
+          renameNode(r.symbol.node_id, zh({
             ...n,
             [e]: t
           }, propertySortOrder || []));
@@ -1245,51 +1252,53 @@ function td({
   let V = !selectedStatesPropertyValues[G];
   let H = !!E.current && E.current.offsetWidth < E.current.scrollWidth;
   let z = S ? jsx(u2, {
-    "aria-label": getI18nString("design_systems.component_properties.property_name_edit", {
+    'aria-label': getI18nString('design_systems.component_properties.property_name_edit', {
       propertyName: G
     }),
-    className: "variant_prop_authoring_row--selectPropertyNameInput--T02iO variant_prop_authoring_row--selectPropertyName--g8Tfp raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u",
-    defaultValue: G,
-    forwardedRef: f,
-    onBlur: () => {
-      T && (I(null), permissionScopeHandler.user("rename-variant-property", () => q1(G, T, allStates ?? [], propertySortOrder ?? [])));
+    'className': 'variant_prop_authoring_row--selectPropertyNameInput--T02iO variant_prop_authoring_row--selectPropertyName--g8Tfp raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u',
+    'defaultValue': G,
+    'forwardedRef': f,
+    'onBlur': () => {
+      T && (I(null), permissionScopeHandler.user('rename-variant-property', () => q1(G, T, allStates ?? [], propertySortOrder ?? [])));
     },
-    onChange: e => I(e.currentTarget.value),
-    onContextMenu: e => {
+    'onChange': e => I(e.currentTarget.value),
+    'onContextMenu': e => {
       e.stopPropagation();
       e.preventDefault();
     },
-    onFocus: () => {
+    'onFocus': () => {
       f.current && (I(G), f.current.select());
     },
-    onKeyDown: e => {
+    'onKeyDown': e => {
       e.stopPropagation();
       (e.keyCode === Uz.ESCAPE || e.keyCode === Uz.ENTER) && (e.currentTarget.blur(), e.preventDefault(), useGrid && (w.current = () => {
         E.current?.focus();
       }));
     },
-    recordingKey: Pt(t, `componentPropRowDefNameInput-${G}`)
+    'recordingKey': generateRecordingKey(t, `componentPropRowDefNameInput-${G}`)
   }) : jsx(GG, {
-    "aria-label": getI18nString("design_systems.component_properties.property_name_edit", {
+    'aria-label': getI18nString('design_systems.component_properties.property_name_edit', {
       propertyName: G
     }),
-    forwardedRef: E,
-    onClick: () => I(G),
-    className: "variant_prop_authoring_row--selectPropertyName--g8Tfp",
-    "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": H ? G : null,
-    recordingKey: Pt(t, `componentPropRowDefName-${G}`),
-    children: jsx("div", {
-      className: "variant_prop_authoring_row--ui3SelectPropertyNameInner--eJnxr ellipsis--ellipsis--Tjyfa",
+    'forwardedRef': E,
+    'onClick': () => I(G),
+    'className': 'variant_prop_authoring_row--selectPropertyName--g8Tfp',
+    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip': H ? G : null,
+    'recordingKey': generateRecordingKey(t, `componentPropRowDefName-${G}`),
+    'children': jsx('div', {
+      className: 'variant_prop_authoring_row--ui3SelectPropertyNameInner--eJnxr ellipsis--ellipsis--Tjyfa',
       children: G
     })
   });
   r = Object.keys(P[G] || {}).some(e => P[G][e] === R[G][e]);
   let W = {
-    format: e => e !== ti ? e || xJ : r ? getI18nString("design_systems.component_properties.rename_prompt") : getI18nString("design_systems.component_properties.add_new_prompt"),
+    format: e => e !== ti ? e || xJ : r ? getI18nString('design_systems.component_properties.rename_prompt') : getI18nString('design_systems.component_properties.add_new_prompt'),
     parse: e => e,
     autocomplete: e => {
-      for (let t of k.sort((e, t) => e.length - t.length)) if (t && t.startsWith(e)) return t;
+      for (let t of k.sort((e, t) => e.length - t.length)) {
+        if (t && t.startsWith(e)) return t;
+      }
       return null;
     }
   };
@@ -1298,10 +1307,10 @@ function td({
       inputComponent: tl
     },
     children: [jsxs(ta, {
-      ariaLabel: getI18nString("design_systems.component_properties.property_value_edit", {
+      ariaLabel: getI18nString('design_systems.component_properties.property_value_edit', {
         propertyName: G
       }),
-      className: V ? "variant_prop_authoring_row--missingPropertyComboBox--9wy-0" : "variant_prop_authoring_row--propertyComboBox--7f6TZ",
+      className: V ? 'variant_prop_authoring_row--missingPropertyComboBox--9wy-0' : 'variant_prop_authoring_row--propertyComboBox--7f6TZ',
       dispatch: m,
       dropdownShown,
       formatter: W,
@@ -1309,23 +1318,23 @@ function td({
       icon: jsx(_$$r3, {}),
       id: `states-property-select-${G}`,
       onChange: e => {
-        permissionScopeHandler.user("add-variant-property", () => {
-          e !== ti ? O(G, e) : (O(G, getI18nString("design_systems.component_properties.new_value")), x(G));
+        permissionScopeHandler.user('add-variant-property', () => {
+          e !== ti ? O(G, e) : (O(G, getI18nString('design_systems.component_properties.new_value')), x(G));
         });
       },
-      property: selectedStatesPropertyValues[G] || "",
-      recordingKey: Pt(t, `propertyComboBox-${G}`),
+      property: selectedStatesPropertyValues[G] || '',
+      recordingKey: generateRecordingKey(t, `propertyComboBox-${G}`),
       ...(F && F > 0 ? {
         dropdownWidth: F,
-        dropdownAlignment: "right"
+        dropdownAlignment: 'right'
       } : {}),
       children: [k.map(e => jsx(ts, {
         value: e,
-        recordingKey: Pt(t, `value-${e}`)
+        recordingKey: generateRecordingKey(t, `value-${e}`)
       }, e)), jsx(sK, {}), jsx(ts, {
         value: ti,
-        recordingKey: Pt(t, "value-AddNewValue")
-      }, "add-new-value")]
+        recordingKey: generateRecordingKey(t, 'value-AddNewValue')
+      }, 'add-new-value')]
     }), jsx(_$$Q, {
       getIcon: () => void 0,
       setMaxWidth: B,
@@ -1333,10 +1342,10 @@ function td({
       formatOption: W.format
     })]
   });
-  let Y = getI18nString("design_systems.component_properties.missing_property");
+  let Y = getI18nString('design_systems.component_properties.missing_property');
   let $ = V ? jsx(eb, {
-    "data-tooltip-show-left": !0,
-    text: Y
+    'data-tooltip-show-left': !0,
+    'text': Y
   }) : null;
   return useGrid ? jsx(Jg, {
     hideGrabber: !0,
@@ -1347,7 +1356,7 @@ function td({
     leftInput: z,
     rightInput: K
   }) : jsx(fn, {
-    appendedClassName: "variant_prop_authoring_row--ui3PropertyRow--Ouo2e",
+    appendedClassName: 'variant_prop_authoring_row--ui3PropertyRow--Ouo2e',
     leftLabel: null,
     leftInput: z,
     rightLabel: null,
@@ -1371,24 +1380,24 @@ function tp({
   let _ = useSelector(e => e.dropdownShown);
   let m = _?.type === ex;
   let g = r.length === e.length;
-  let f = e => !g && (e?.key === "Backspace" || e?.key === "Delete") && (T(), !0);
-  let E = v_(l, "keydown", e => {
+  let f = e => !g && (e?.key === 'Backspace' || e?.key === 'Delete') && (T(), !0);
+  let E = useHandleKeyboardEvent(l, 'keydown', e => {
     f(e);
   });
-  let b = fo(`${l}.fullscreen`, "keydown", e => {
+  let b = useHandleInputEvent(`${l}.fullscreen`, 'keydown', e => {
     f(e.event) && e.accept();
   });
   let T = useCallback(() => {
     if (!r.length || !c) return;
     let t = r.map(t => e[t].name);
-    permissionScopeHandler.user("delete-variant-props", () => bk(t, d, u, c));
+    permissionScopeHandler.user('delete-variant-props', () => bk(t, d, u, c));
   }, [d, c, e, u, r]);
   let I = useCallback(e => {
     let t = e.map(e => e.name);
-    permissionScopeHandler.user("reorder-variant-props", () => {
+    permissionScopeHandler.user('reorder-variant-props', () => {
       d.forEach(e => {
         let r = e.stateInfo.propertyValues;
-        r && _$$i(e.symbol.node_id, zh(r, t));
+        r && renameNode(e.symbol.node_id, zh(r, t));
       });
     });
     fullscreenValue.commit();
@@ -1404,7 +1413,7 @@ function tp({
   return jsxs(vL, {
     handleKeyDown: b,
     ref: S,
-    name: "variant-props-list",
+    name: 'variant-props-list',
     focusOnMount: !0,
     children: [jsx(dD.Provider, {
       value: {
@@ -1420,7 +1429,7 @@ function tp({
         onDragEnd: () => setIsDraggingSomePropDef(!1),
         renderListItem: (r, i, a, d, c, u, _) => o ? jsx(td, {
           variantPropDef: r,
-          recordingKey: Pt(l, "row", i)
+          recordingKey: generateRecordingKey(l, 'row', i)
         }, A ? void 0 : i) : jsx(ew, {
           componentPropDef: r,
           guids: t,
@@ -1431,9 +1440,9 @@ function tp({
           onPropertyMouseDown: c,
           onPropertyMouseMove: u,
           onPropertyMouseUp: _,
-          recordingKey: Pt(l, "row", i),
+          recordingKey: generateRecordingKey(l, 'row', i),
           selectRow: () => s([i]),
-          singletonRow: 1 === e.length
+          singletonRow: e.length === 1
         }, A ? void 0 : i),
         recordingKey: l
       })
@@ -1442,8 +1451,8 @@ function tp({
       positionFixed: !0,
       children: jsx(tu, {
         onClick: T,
-        recordingKey: "deleteProp",
-        children: renderI18nText("design_systems.component_properties.delete_property", {
+        recordingKey: 'deleteProp',
+        children: renderI18nText('design_systems.component_properties.delete_property', {
           numSelected: r.length
         })
       })
@@ -1511,19 +1520,19 @@ export function $$tm3({
   return u ? jsx($$tT4, {
     row: N,
     isChevronAlwaysVisible: !0,
-    recordingKey: Pt(_, "instancePanelTitleCollapsibleRow", e.join("-")),
-    children: jsx("div", {
+    recordingKey: generateRecordingKey(_, 'instancePanelTitleCollapsibleRow', e.join('-')),
+    children: jsx('div', {
       className: Og,
       children: C
     })
-  }) : jsxs("div", {
-    children: [N, jsx("div", {
+  }) : jsxs('div', {
+    children: [N, jsx('div', {
       className: Og,
       children: C
     })]
   });
 }
-export var $$tg6 = (e => (e[e.ALL_PROPS = 0] = "ALL_PROPS", e[e.VARIANT_PROPS = 1] = "VARIANT_PROPS", e[e.TYPED_PROPS = 2] = "TYPED_PROPS", e))($$tg6 || {});
+export var $$tg6 = (e => (e[e.ALL_PROPS = 0] = 'ALL_PROPS', e[e.VARIANT_PROPS = 1] = 'VARIANT_PROPS', e[e.TYPED_PROPS = 2] = 'TYPED_PROPS', e))($$tg6 || {});
 export function $$tf1({
   propDimension: e,
   guids: t,
@@ -1612,11 +1621,13 @@ export function $$tE2({
       typedPropDefsToShow
     } = function (e, t, r, n, i) {
       let a = (t ? n.length : 0) + (r ? i.length : 0);
-      if (e || a <= 5) return {
-        numHiddenRows: 0,
-        variantPropDefsToShow: t ? n : [],
-        typedPropDefsToShow: r ? i : []
-      };
+      if (e || a <= 5) {
+        return {
+          numHiddenRows: 0,
+          variantPropDefsToShow: t ? n : [],
+          typedPropDefsToShow: r ? i : []
+        };
+      }
       let s = 4;
       let o = n;
       t ? s -= (o = n.slice(0, 4)).length : o = [];
@@ -1634,7 +1645,7 @@ export function $$tE2({
         ...b,
         ...o
       }), numHiddenRows > 0 && !_ && jsx($$tb5, {
-        label: getI18nString("design_systems.component_properties.show_more_property_rows", {
+        label: getI18nString('design_systems.component_properties.show_more_property_rows', {
           count: numHiddenRows
         }),
         onClick: () => m(!0)
@@ -1697,7 +1708,7 @@ function ty({
         selectedIndices: r === uN.VARIANT ? a : [],
         onSelectIndices: e => s(uN.VARIANT, e),
         isInStateAuthoringView: o,
-        recordingKey: Pt(L, "propDefs", uN.VARIANT)
+        recordingKey: generateRecordingKey(L, 'propDefs', uN.VARIANT)
       }), e && b && d === OE.ASSIGNMENT && jsx(te, {
         allStateVariantProps: m,
         backingStateVariantProps: f,
@@ -1706,20 +1717,20 @@ function ty({
         guids: _,
         hideIcon: w,
         onSelectedPropertyValueHistoryChange: G,
-        recordingKey: Pt(L, "propDefs", uN.VARIANT),
+        recordingKey: generateRecordingKey(L, 'propDefs', uN.VARIANT),
         sceneGraph: k,
         stateGroupGUID: b,
         statePropertyValues: y,
         variantPropDefs: c,
-        viewOnly: 0 === N || 1 === N
-      }), e && t && D && jsx("div", {
-        className: "props_section--divider--5xEyL"
+        viewOnly: N === 0 || N === 1
+      }), e && t && D && jsx('div', {
+        className: 'props_section--divider--5xEyL'
       }), t && d === OE.DEFINITION && jsx(eP, {
         defs: u,
         guids: _,
         selectedIndices: r === uN.TYPED ? a : [],
         onSelectIndices: e => s(uN.TYPED, e),
-        recordingKey: Pt(L, "propDefs", uN.TYPED)
+        recordingKey: generateRecordingKey(L, 'propDefs', uN.TYPED)
       }), t && d === OE.ASSIGNMENT && jsx(_$$c, {
         assignmentValues: h,
         containerWidth: S,
@@ -1731,10 +1742,10 @@ function ty({
         instanceSwapPickerInitialHeight: F,
         instanceSwapPickerInitialPosition: j,
         onChange: V,
-        recordingKey: Pt(L, "propDefs", uN.TYPED),
+        recordingKey: generateRecordingKey(L, 'propDefs', uN.TYPED),
         sceneGraph: k,
         typedPropDefs: u,
-        viewOnly: 0 === N || 2 === N
+        viewOnly: N === 0 || N === 2
       }), !I && jsx(aq, {
         flushWithContainer: P
       }), B && H && jsx(A, {
@@ -1753,13 +1764,13 @@ export function $$tb5({
   label: e,
   onClick: t
 }) {
-  return jsx("button", {
-    onClick: t,
-    "aria-label": e,
-    children: jsx(Ad, {
+  return jsx('button', {
+    'onClick': t,
+    'aria-label': e,
+    'children': jsx(Ad, {
       label: null,
-      input: jsx("div", {
-        className: "props_section--ui3ShowMoreText--9ZaYD",
+      input: jsx('div', {
+        className: 'props_section--ui3ShowMoreText--9ZaYD',
         children: e
       })
     })
@@ -1773,11 +1784,11 @@ export function $$tT4({
 }) {
   let [l, d] = useState(t ?? !1);
   let c = jsxs(_$$S.div, {
-    className: "props_section--ui3CollapsibleRowWrapper--0eG4n",
+    className: 'props_section--ui3CollapsibleRowWrapper--0eG4n',
     onMouseDown: () => d(!l),
-    children: [jsx("div", {
-      className: u()("props_section--ui3CollapsibleRowIcon--AMo-v", {
-        "props_section--ui3CollapsibleRowIconAlwaysVisible--BPU5Y": r
+    children: [jsx('div', {
+      className: u()('props_section--ui3CollapsibleRowIcon--AMo-v', {
+        'props_section--ui3CollapsibleRowIconAlwaysVisible--BPU5Y': r
       }),
       children: l ? jsx(_$$k, {}) : jsx(_$$O, {})
     }), e]

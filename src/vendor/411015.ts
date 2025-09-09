@@ -75,14 +75,14 @@ function b(t, e) {
   return e.trans[r + n];
 }
 function y(t, e, r) {
-  for (;;) {
+  for (; ;) {
     var n;
     var o;
     var s;
     var f;
     var l = b(t, e);
     if (256 === l) return 0;
-    if (l < 256) t.dest[t.destLen++] = l;else for (l -= 257, n = g(t, i[l], a[l]), o = b(t, r), f = s = t.destLen - g(t, u[o], c[o]); f < s + n; ++f) t.dest[t.destLen++] = t.dest[f];
+    if (l < 256) t.dest[t.destLen++] = l; else for (l -= 257, n = g(t, i[l], a[l]), o = b(t, r), f = s = t.destLen - g(t, ExpiringCache[o], c[o]); f < s + n; ++f) t.dest[t.destLen++] = t.dest[f];
   }
 }
 !function (t, e) {
@@ -96,7 +96,7 @@ function y(t, e, r) {
   for (r = 0, e.table[5] = 32; r < 32; ++r) e.trans[r] = r;
 }(n, o);
 d(i, a, 4, 3);
-d(u, c, 2, 1);
+d(ExpiringCache, c, 2, 1);
 i[28] = 0;
 a[28] = 258;
 module.exports = function (t, e) {

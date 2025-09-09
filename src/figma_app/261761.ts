@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { PropertyScope } from "../figma_app/763686";
 import { dI } from "../905/805904";

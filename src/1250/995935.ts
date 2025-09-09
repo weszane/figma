@@ -1,4 +1,4 @@
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { getSupportEmail, isProdCluster, isDevEnvironment } from "../figma_app/169182";
 import { m0, ow, lg } from "../figma_app/976749";
@@ -23,7 +23,7 @@ import { FJ } from "../905/508367";
 import { A as _$$A } from "../905/920142";
 import { getDeprecationDate, desktopAPIInstance, OpenTarget } from "../figma_app/876459";
 import { shouldShowDeprecationBannerAtom } from "../figma_app/369803";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { R as _$$R } from "../7021/67076";
 import { BrowserInfo } from "../figma_app/778880";
 import { GU, cn, zR } from "../figma_app/141320";
@@ -36,7 +36,7 @@ import { V as _$$V } from "../905/355181";
 import { lQ } from "../905/934246";
 import { b as _$$b } from "../905/946806";
 import { gY } from "../figma_app/566371";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { T as _$$T, b as _$$b2 } from "../1577/951568";
 import { w as _$$w } from "../1250/922745";
 import { l as _$$l } from "../7021/223482";
@@ -44,7 +44,7 @@ import { showModalHandler } from "../905/156213";
 import { fu, $z as _$$$z } from "../figma_app/831799";
 import { vK, jv } from "../905/84777";
 import { N_ as _$$N_ } from "../905/332483";
-import { iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { FPlanLimitationType, FOrganizationLevelType, FFileType, FPaymentHealthStatusType, FStudentTeamStatusType, FUserRoleType } from "../figma_app/191312";
 import { wA as _$$wA, kA } from "../figma_app/336853";
 import { Ju, IX } from "../905/712921";
@@ -365,7 +365,7 @@ let tF = {
       description: i,
       button: {
         buttonText: getI18nString("banner.browser_deprecation.learn_more"),
-        onClick: () => Ay.redirect("https://help.figma.com/hc/articles/360039827194-Figma-browser-requirements", "_blank")
+        onClick: () => customHistory.redirect("https://help.figma.com/hc/articles/360039827194-Figma-browser-requirements", "_blank")
       }
     };
     return jsx(_$$f2, {
@@ -443,7 +443,7 @@ let tG = {
       description: n,
       button: {
         buttonText: getI18nString("banner.desktop_app_deprecation.learn_more"),
-        onClick: () => Ay.unsafeRedirect("https://figma.com/downloads", "_blank")
+        onClick: () => customHistory.unsafeRedirect("https://figma.com/downloads", "_blank")
       },
       dismissedAtom: shouldShowDeprecationBannerAtom
     };
@@ -466,7 +466,7 @@ let tW = {
         description: "This file is in an Education team. To keep editing this file after 00/00, verify that you're a student or educator.",
         button: {
           buttonText: "Verify status",
-          onClick: () => Ay.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
+          onClick: () => customHistory.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
         }
       };
       return jsx(_$$f2, {
@@ -532,7 +532,7 @@ let t$ = {
   Banner: function (e) {
     let t = useDispatch();
     let n = q5();
-    let r = iZ();
+    let r = selectCurrentUser();
     let i = dq();
     let o = R$(r, i);
     let d = useSelector(e => {
@@ -1013,7 +1013,7 @@ let tX = {
     let t = q5();
     let n = cD();
     let r = useSelector(e => n ? e.teams[n] : null);
-    let i = iZ();
+    let i = selectCurrentUser();
     let o = nF();
     let l = useSelector(e => e.userEduGracePeriods);
     if (!n || !i) return null;
@@ -1027,7 +1027,7 @@ let tX = {
         }),
         button: {
           buttonText: getI18nString("banner.edu_grace_period.verify_status_button"),
-          onClick: () => Ay.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
+          onClick: () => customHistory.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
         }
       };
       return jsx(_$$f2, {
@@ -1045,7 +1045,7 @@ let tJ = {
     let t = q5();
     let n = cD();
     let r = useSelector(e => n ? e.teams[n] : null);
-    let i = iZ();
+    let i = selectCurrentUser();
     let o = nF();
     let l = useSelector(e => e.userEduGracePeriods);
     if (n && i) {
@@ -1063,7 +1063,7 @@ let tJ = {
           dismissible: !0,
           button: {
             buttonText: getI18nString("banner.edu_grace_period.verify_status_button"),
-            onClick: () => Ay.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
+            onClick: () => customHistory.redirect("/education/apply", BrowserInfo.isIpadNative ? void 0 : "_blank")
           }
         };
         return jsx(_$$f2, {
@@ -1159,7 +1159,7 @@ let t5 = {
     if (useEffect(() => {
       l && !i && (analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.force_client_reload_banner.shown", {}), o(!0));
     }, [l, i]), useEffect(() => {
-      t && !d && Ay.reload("force client reload banner", {
+      t && !d && customHistory.reload("force client reload banner", {
         isForceClientReloadBanner: !0
       });
     }, [t, d]), l) {
@@ -1191,7 +1191,7 @@ let t4 = {
     let t = useDispatch();
     let n = q5();
     let r = nF();
-    let i = iZ();
+    let i = selectCurrentUser();
     let o = _$$f("dismissed_figjam_try_drafts_banner");
     let l = _$$R("minute");
     if (!r?.enabled || !n || !i) return null;
@@ -1275,7 +1275,7 @@ let t2 = {
     }();
     let i = q5();
     let o = nF();
-    let l = iZ();
+    let l = selectCurrentUser();
     let d = _$$f("dismissed_figjam_try_claim_banner");
     let u = _$$R("minute");
     let m = i?.key;
@@ -1459,7 +1459,7 @@ let nt = {
     let m = lg();
     let g = sO();
     let f = _$$to2();
-    let h = iZ();
+    let h = selectCurrentUser();
     let b = h?.id && r && r.publishedByUserId === h.id;
     let x = J3();
     let y = WS();
@@ -1491,7 +1491,7 @@ let nt = {
         if (r && l) {
           if (f) {
             let e = new URL(_$$H(m, l.libraryKey), document.baseURI).href;
-            Ay.redirect(e, "_blank");
+            customHistory.redirect(e, "_blank");
           } else i({
             templateIdentifier: {
               type: vt.TeamTemplate,
@@ -1652,7 +1652,7 @@ let nr = {
   bannerId: om.SeatBillingTermsReminder,
   Banner: function () {
     let e = useDispatch();
-    let t = iZ();
+    let t = selectCurrentUser();
     let n = sZ();
     let i = !!n?.id;
     let o = gY(_$$l);
@@ -1729,7 +1729,7 @@ let nr = {
                       planParentId: n.id,
                       planType: FOrganizationLevelType.ORG
                     }).then(() => {
-                      e(_$$F.enqueue({
+                      e(VisualBellActions.enqueue({
                         message: getI18nString("seat_billing_terms.modal.success")
                       }));
                     }),
@@ -1764,11 +1764,11 @@ let no = {
   Banner: function (e) {
     let t = xo();
     let n = !!hA();
-    let r = TA();
+    let r = getUserId();
     let i = function () {
       let e = xo();
       let t = useDispatch();
-      let n = iZ();
+      let n = selectCurrentUser();
       let r = q5();
       return e && r && n ? async () => {
         let e = await _$$S.copyFile(r.key);
@@ -1787,7 +1787,7 @@ let no = {
             });
             return;
           }
-          Ay.redirect(jN({
+          customHistory.redirect(jN({
             file: t,
             isDevHandoff: !0
           }), "_blank");
@@ -1836,7 +1836,7 @@ let ns = {
   bannerId: om.OrderFormBillingTermsBanner,
   Banner: function () {
     let e = useDispatch();
-    let t = iZ();
+    let t = selectCurrentUser();
     let n = sZ();
     let r = Az(n);
     let [i, o] = useState(!1);
@@ -1924,7 +1924,7 @@ let ns = {
 let nl = {
   bannerId: om.NonAdminBillingTermsBanner,
   Banner: function () {
-    let e = iZ();
+    let e = selectCurrentUser();
     let t = sZ();
     let n = useAtomWithSubscription(_$$b2(t?.id ?? null));
     let a = useAtomWithSubscription(eg);
@@ -2057,7 +2057,7 @@ let nc = {
     let r = _$$N();
     let i = useSelector(e => !!e.saveStatus?.hasUnsavedChanges);
     if (useEffect(() => {
-      t && !i && Ay.reload("slots enablement reload banner", {
+      t && !i && customHistory.reload("slots enablement reload banner", {
         isSlotsEnablementReloadBanner: !0
       });
     }, [t, i]), r) {

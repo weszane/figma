@@ -5,7 +5,7 @@ import s from "classnames";
 import { UE, DA } from "../figma_app/191804";
 import { selectWithShallowEqual } from "../905/103090";
 import { GG } from "../905/511649";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
 import { z5 } from "../905/713722";
@@ -328,8 +328,8 @@ function P({
   swatchStyle: Z,
   shouldRenderCirclesWithContentBoxSizing: Q
 }) {
-  let ee = useRef(_$$g());
-  let et = useRef(_$$g());
+  let ee = useRef(generateUUIDv4());
+  let et = useRef(generateUUIDv4());
   let er = C(e.option);
   let en = iN(er, O);
   let ei = iN(er, "baseLight") && "base" === O;

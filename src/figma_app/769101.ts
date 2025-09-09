@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import { W as _$$W } from "../905/187396";
 import { Uz, sC, Te } from "../905/63728";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { fullscreenValue } from "../figma_app/455680";
 import { f7 } from "../figma_app/896988";
 import { W1 } from "../figma_app/439493";
@@ -83,7 +83,7 @@ export function $$E1({
   let X = r.length + (R ? R.length : 0) + (null != E ? 1 : 0);
   let [q] = useState(() => {
     let e = Array(X);
-    for (let t = 0; t < r.length; t++) e[t] = _$$g();
+    for (let t = 0; t < r.length; t++) e[t] = generateUUIDv4();
     null != E && (e[r.length] = y);
     return e;
   });

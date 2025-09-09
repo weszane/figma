@@ -1,22 +1,22 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useMemo, useCallback, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
-import { V } from "../905/735518";
-import { RR } from "../figma_app/338442";
-import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
-import { getI18nString } from "../905/303541";
-import { j7 } from "../905/929976";
-import { showModalHandler } from "../905/156213";
-import { Um } from "../905/848862";
-import { Ib } from "../905/129884";
-import { cn } from "../905/959568";
-import { YW } from "../figma_app/778125";
-import { sD, Xn } from "../905/429125";
-import { eM, Pp, Fv, wh, xb } from "../figma_app/164212";
-import { n as _$$n } from "../905/841238";
-import { Ms, Lg, Ln } from "../figma_app/505098";
-import { On, p1 } from "../figma_app/323320";
+import { useCallback, useMemo, useRef } from 'react';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { selectWithShallowEqual } from '../905/103090';
+import { Ib } from '../905/129884';
+import { showModalHandler } from '../905/156213';
+import { getI18nString } from '../905/303541';
+import { sD, Xn } from '../905/429125';
+import { V } from '../905/735518';
+import { n as _$$n } from '../905/841238';
+import { Um } from '../905/848862';
+import { j7 } from '../905/929976';
+import { cn } from '../905/959568';
+import { eM, Fv, Pp, wh, xb } from '../figma_app/164212';
+import { On, p1 } from '../figma_app/323320';
+import { RR } from '../figma_app/338442';
+import { Lg, Ln, Ms } from '../figma_app/505098';
+import { YW } from '../figma_app/778125';
+import { generateRecordingKey } from '../figma_app/878298';
+import { useDispatch } from 'react-redux';
 let I = e => e.stopPropagation();
 export function $$S1(e, t) {
   let r = useMemo(On, []);
@@ -55,13 +55,15 @@ export function $$v3(e, t, r, n) {
   });
   return useCallback(() => {
     if (t?.current) {
-      if (hasExistingDefs && !n) s(j7({
-        type: sD.concat("-", e),
-        data: {
-          nodeField: e,
-          targetRect: t.current.getBoundingClientRect()
-        }
-      }));else {
+      if (hasExistingDefs && !n) {
+        s(j7({
+          type: sD.concat('-', e),
+          data: {
+            nodeField: e,
+            targetRect: t.current.getBoundingClientRect()
+          }
+        }));
+      } else {
         Pp(containingProductComponent, !0, o, Fv.ICON);
         let n = t.current;
         let i = n ? cn(n, wh) : {};
@@ -90,16 +92,16 @@ export function $$A2(e) {
     };
   });
   let n = useMemo(() => eM(e).defaultType, [e]);
-  return hasExistingDefs ? getI18nString("design_systems.component_properties.apply_component_property", {
+  return hasExistingDefs ? getI18nString('design_systems.component_properties.apply_component_property', {
     propType: xb(n).toLocaleLowerCase()
-  }) : getI18nString("design_systems.component_properties.create_component_property_of_type", {
+  }) : getI18nString('design_systems.component_properties.create_component_property_of_type', {
     propType: xb(n).toLocaleLowerCase()
   });
 }
 export function $$x0(e) {
   let t = selectWithShallowEqual(e => e.modalShown);
   let r = useMemo(() => eM(e).defaultType, [e]);
-  let n = sD.concat("-", e);
+  let n = sD.concat('-', e);
   let a = Um();
   let s = !!a && a.type === n && a.data.nodeField === e;
   let o = !!t && t.type === _$$n.type && t.data?.propType === r;
@@ -116,16 +118,16 @@ export function $$N4({
   let c = $$v3(e, a, t);
   let u = $$A2(e);
   return o ? null : jsxs(Fragment, {
-    children: [jsx("div", {
+    children: [jsx('div', {
       ref: a,
       children: jsx(YW, {
-        recordingKey: Pt("applyPropRefButton", e),
-        selected: l,
-        "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": u,
-        onMouseDown: I,
-        onClick: c,
-        children: jsx(V, {})
+        'recordingKey': generateRecordingKey('applyPropRefButton', e),
+        'selected': l,
+        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip': u,
+        'onMouseDown': I,
+        'onClick': c,
+        'children': jsx(V, {})
       })
     }), jsx(Xn, {
       source: Fv.ICON,

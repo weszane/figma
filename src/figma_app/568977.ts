@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { HiddenLabel } from "../905/270045";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -7,7 +7,7 @@ import { bL as _$$bL, D0 } from "../905/4410";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
 import { Uz } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { S as _$$S } from "../905/177206";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -68,7 +68,7 @@ export function $$x1(e) {
         formatter: I,
         value: r,
         onChange: O,
-        recordingKey: Pt(e, "smallNudgeInput"),
+        recordingKey: generateRecordingKey(e, "smallNudgeInput"),
         htmlAttributes: {
           onKeyDown: w
         }
@@ -81,7 +81,7 @@ export function $$x1(e) {
     property: r,
     onChange: O,
     onKeyDown: w,
-    recordingKey: Pt(e, "smallNudgeInput")
+    recordingKey: generateRecordingKey(e, "smallNudgeInput")
   });
   let D = getFeatureFlags().ce_tv_fpl_input ? jsxs(Fragment, {
     children: [jsx(HiddenLabel, {
@@ -93,7 +93,7 @@ export function $$x1(e) {
         formatter: v,
         value: c,
         onChange: R,
-        recordingKey: Pt(e, "bigNudgeInput"),
+        recordingKey: generateRecordingKey(e, "bigNudgeInput"),
         htmlAttributes: {
           onKeyDown: w
         }
@@ -106,7 +106,7 @@ export function $$x1(e) {
     property: c,
     onChange: R,
     onKeyDown: w,
-    recordingKey: Pt(e, "bigNudgeInput")
+    recordingKey: generateRecordingKey(e, "bigNudgeInput")
   });
   let k = jsxs(Fragment, {
     children: [jsx(cS, {
@@ -121,7 +121,7 @@ export function $$x1(e) {
     onClose: C,
     draggable: "header",
     defaultPosition: L,
-    recordingKey: Pt(e, "modal"),
+    recordingKey: generateRecordingKey(e, "modal"),
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {

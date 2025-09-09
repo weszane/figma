@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { N as _$$N } from "../905/120979";
 import { $ } from "../905/953280";
 import { y as _$$y } from "../905/582657";

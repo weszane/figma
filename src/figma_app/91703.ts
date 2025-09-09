@@ -4,9 +4,9 @@ import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { GZ } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { LR } from "../figma_app/564528";
+import { sendBackToFilesAction } from "../figma_app/564528";
 import { YQ } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
@@ -122,7 +122,7 @@ let $$es24 = createOptimistThunk((e, t) => {
         }
       }));
     }
-    Ay.push(Np(r, i), {
+    customHistory.push(Np(r, i), {
       ...e.getState().selectedView,
       previousSelectedView: t.oldSelectedView,
       jsCommitHash: getInitialOptions().release_manifest_git_commit
@@ -176,8 +176,8 @@ let $$eA35 = createOptimistThunk((e, t) => {
     return;
   }
   if (GZ()) {
-    if (getFeatureFlags().integ_zoom_allow_file_switching && LR()) return;
-    Ay.redirect("/", "_blank");
+    if (getFeatureFlags().integ_zoom_allow_file_switching && sendBackToFilesAction()) return;
+    customHistory.redirect("/", "_blank");
     return;
   }
   let r = e.getState();
@@ -196,7 +196,7 @@ let $$eA35 = createOptimistThunk((e, t) => {
       let t = nX(e);
       let n = Eq(e);
       (t || n) && (e = Tk(e, t ? O.ORG : O.TEAM, t || n, r.lastVisitedPlan.planType, r.lastVisitedPlan.planId));
-      Ay.redirect(e);
+      customHistory.redirect(e);
       return;
     }
     "fullscreen" === selectedView.view && selectedView.prevSelectedView ? p = selectedView.prevSelectedView : openFile && c && (p = {
@@ -206,7 +206,7 @@ let $$eA35 = createOptimistThunk((e, t) => {
   }
   if (AppStateTsApi?.uiState().isRecovery.getCopy()) {
     let e = xS(r, p);
-    Ay.redirect(e);
+    customHistory.redirect(e);
   }
   fullscreenValue.dispatchIfSaved(sf(p));
   V();

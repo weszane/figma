@@ -4,10 +4,10 @@ import { K, rj, V1, T_, D7, qI, cp } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
 import { trackEventAnalytics } from "../905/449184";
-import { k as _$$k2 } from "../905/651849";
+import { logger } from "../905/651849";
 import { xQ } from "../905/535224";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { I5, RG } from "../905/165290";
+import { hasNonDefaultOpticalSize, createFontMetadata } from "../905/165290";
 import { debugState } from "../905/407919";
 import { BrowserInfo } from "../figma_app/778880";
 import { logWarning, logError } from "../905/714362";
@@ -228,7 +228,7 @@ export async function $$D5(e = [FontSourceType.LOCAL, FontSourceType.GOOGLE]) {
               if (getFeatureFlags().ce_skip_pingfangui_font && i.toLowerCase().includes("pingfangui.ttc") || /\.suit$/.test(i)) return;
               let r = e.fontFiles[i];
               let s = !1;
-              for (let e of r) if (e.variationAxes && I5(e.variationAxes)) {
+              for (let e of r) if (e.variationAxes && hasNonDefaultOpticalSize(e.variationAxes)) {
                 s = !0;
                 break;
               }
@@ -346,7 +346,7 @@ export function $$L6(e = null) {
     fileKey: e || void 0
   }).then(({
     data: e
-  }) => e && e.meta ? e.meta.fonts.map(e => RG(e)) : null).catch(() => null);
+  }) => e && e.meta ? e.meta.fonts.map(e => createFontMetadata(e)) : null).catch(() => null);
 }
 let F = new Map();
 export async function $$$$M0() {
@@ -456,7 +456,7 @@ export function $$U4(e, t, i, n, r) {
     } = e;
     if (!meta.url || !meta.font_info) return Promise.reject();
     let i = meta.font_info && meta.font_info.variation_instances;
-    let n = $$O11(i && i.length > 0 ? i.map(e => RG(meta.font_info, e)) ?? [] : [RG(meta.font_info)]);
+    let n = $$O11(i && i.length > 0 ? i.map(e => createFontMetadata(meta.font_info, e)) ?? [] : [createFontMetadata(meta.font_info)]);
     return 0 === n.length ? Promise.reject() : XHR.crossOriginGet(meta.url, null, {
       responseType: "arraybuffer",
       headers: {
@@ -516,7 +516,7 @@ export function $$Y1(e, t, i) {
   e().then(e => {
     let n = getFeatureFlags().ce_mfm_ingest_on_focus && !S && $$G7(e);
     let r = !1;
-    n && (_$$k2.info("Updated fullscreen with local fonts"), t(e), r = !0);
+    n && (logger.info("Updated fullscreen with local fonts"), t(e), r = !0);
     let a = "number" == typeof e.localFontsModifiedAt && e.localFontsModifiedAt > Date.now() / 1e3 - 604800;
     let s = $$W8();
     let l = "number" == typeof e.localFontsModifiedAt && "number" == typeof s && e.localFontsModifiedAt > s;
@@ -527,10 +527,10 @@ export function $$Y1(e, t, i) {
         t.startsWith("/System/Library/Fonts/") && getFeatureFlags().ce_ignore_modified_apple_fonts || (e[t] = i);
         return e;
       }, {})).length) {
-        _$$k2.info("No non-system modified fonts found");
+        logger.info("No non-system modified fonts found");
         return;
       }
-      _$$k2.info("showing visual bell for new local fonts", {
+      logger.info("showing visual bell for new local fonts", {
         getLocalFontsLastModified: $$W8(),
         desktopLocalFontsModifiedAt: e.localFontsModifiedAt
       });

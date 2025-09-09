@@ -5,7 +5,7 @@ import { FContainerType, FFileType, FAccessLevelType } from "../figma_app/191312
 import { A5 } from "../figma_app/707808";
 import { n as _$$n, a as _$$a } from "../905/114254";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -26,7 +26,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { Rs } from "../figma_app/288654";
 import { B as _$$B } from "../905/714743";
 import { $z } from "../figma_app/617427";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/859195";
 import { c as _$$c } from "../905/370443";
 import { fu, j6 } from "../figma_app/831799";
@@ -35,8 +35,8 @@ import { Et as _$$Et, mZ, b2 } from "../figma_app/622574";
 import { $x, $W } from "../figma_app/599979";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { iZ } from "../905/372672";
-import { ehp } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { OpenEditorFileData } from "../figma_app/43951";
 import { l as _$$l, s as _$$s } from "../905/618307";
 import { o as _$$o } from "../figma_app/633080";
 import { i as _$$i } from "../905/186961";
@@ -45,7 +45,7 @@ import { N as _$$N2 } from "../905/620375";
 import { A as _$$A } from "../905/81613";
 import { A as _$$A2 } from "../905/392698";
 import { pz } from "../figma_app/825489";
-import { zX } from "../905/576487";
+import { VisualBellIcon } from "../905/576487";
 import { $u } from "../figma_app/524655";
 import { r as _$$r } from "../905/149895";
 import { z as _$$z } from "../905/284530";
@@ -555,7 +555,7 @@ function tr({
   source: e
 }) {
   let t = q5();
-  let i = iZ();
+  let i = selectCurrentUser();
   let n = cD();
   let r = sZ();
   let a = t?.template || void 0;
@@ -1027,8 +1027,8 @@ function tN({
   source: t
 }) {
   let i = sZ();
-  let n = iZ();
-  let r = Rs(ehp, {
+  let n = selectCurrentUser();
+  let r = Rs(OpenEditorFileData, {
     fileKey: e || ""
   }, {
     enabled: !!e
@@ -1047,7 +1047,7 @@ function tP({
 }) {
   let t = q5();
   let i = sZ();
-  let n = iZ();
+  let n = selectCurrentUser();
   let r = T6(t, n);
   let a = t?.editorType === FFileType.SLIDES;
   let [o, l] = useAtomValueAndSetter(pz);
@@ -1082,7 +1082,7 @@ function tO({
   let [X, ea] = useAtomValueAndSetter(b2);
   let [es, ed] = useState({});
   let [ec, eu] = useState(() => o ? o.publishScope : t ? _$$i.ORG : _$$i.TEAM);
-  let ep = iZ();
+  let ep = selectCurrentUser();
   let em = useMemo(() => ep ? {
     name: ep.name,
     imgUrl: ep.img_url
@@ -1131,10 +1131,10 @@ function tO({
             atomStoreManager.set(ee, {
               state: Q.PUBLISH_TEMPLATE_SUCCESS
             });
-            e(_$$F.enqueue({
+            e(VisualBellActions.enqueue({
               type: ei,
               message: t.isPublishedTemplate ? getI18nString("cooper.templates.template_updates_published") : getI18nString("cooper.templates.template_published"),
-              icon: zX.CHECK
+              icon: VisualBellIcon.CHECK
             }));
             e(hideModal());
           },
@@ -1142,7 +1142,7 @@ function tO({
             atomStoreManager.set(ee, {
               state: Q.PUBLISH_TEMPLATE_ERRORED
             });
-            e(_$$F.enqueue({
+            e(VisualBellActions.enqueue({
               type: ei,
               message: getI18nString("cooper.templates.template_failed_published"),
               error: !0
@@ -1173,14 +1173,14 @@ function tO({
   }, []);
   let eP = () => {
     y(hideModal());
-    y(_$$F.enqueue({
+    y(VisualBellActions.enqueue({
       message: o ? getI18nString("templates.publishing.bell.updated") : getI18nString("templates.publishing.bell.success"),
       type: "template-publish-success"
     }));
     ea(!1);
   };
   let eO = () => {
-    y(_$$F.enqueue({
+    y(VisualBellActions.enqueue({
       message: getI18nString("templates.publishing.bell.failure"),
       type: "template-publish-error",
       error: !0
@@ -1289,7 +1289,7 @@ function tO({
     type: "image"
   } : void 0, [n, eb]);
   return (useEffect(() => {
-    l || y(_$$F.enqueue({
+    l || y(VisualBellActions.enqueue({
       message: getI18nString("templates.publishing.bell.no_publish_access"),
       type: "template-publish-error",
       error: !0

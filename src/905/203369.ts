@@ -5,14 +5,14 @@ import s from "classnames";
 import { Uz, sC, xH } from "../905/63728";
 import { By } from "../905/777187";
 import { BrowserInfo } from "../figma_app/778880";
-import { aH } from "../figma_app/806412";
+import { SKIP_RECORDING } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { _L, mb, ql } from "../905/668764";
 import { LS } from "../figma_app/975811";
 import { jr, W0 } from "../figma_app/896988";
 import { isValidValue, valueOrFallback, isInvalidValue, normalizeValue } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { jT } from "../figma_app/626177";
 import { p as _$$p } from "../905/427409";
 import { P, J } from "../figma_app/120873";
@@ -67,7 +67,7 @@ export class $$I3 extends PureComponent {
           if (r.errorType === By.SYNTAX_EMPTY && this.props.allowEmpty) this.props.onChange(null);else if (r.errorType === By.EVAL_NO_CURRENT_VALUE && isInvalidValue(t)) {
             if (this.props.mixedMathHandler) {
               let e = this.props.mixedMathHandler.getValue();
-              this.props.mixedMathHandler.onChange(e, n, zk.YES);
+              this.props.mixedMathHandler.onChange(e, n, yesNoTrackingEnum.YES);
             } else this.props.mixedMathCallback && this.props.mixedMathCallback(i);
           }
         }
@@ -93,7 +93,7 @@ export class $$I3 extends PureComponent {
       } else if (e.keyCode === Uz.ENTER) {
         t.blur();
         e.preventDefault();
-        return aH;
+        return SKIP_RECORDING;
       } else if (e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.DOWN_ARROW) {
         if (this.context?.boundVariableId || (e.preventDefault(), !this.props.formatter.incrementBy)) return;
         let i = this.props.property;
@@ -122,7 +122,7 @@ export class $$I3 extends PureComponent {
             let n = e.shiftKey;
             let r = mb(this.props.formatter, n, t);
             return ql(this.props.formatter, t, r * i);
-          }, zk.YES);
+          }, yesNoTrackingEnum.YES);
           this.props.onMixedMathNudge?.(e);
         }
         this.props.onNudge?.(e);
@@ -133,13 +133,13 @@ export class $$I3 extends PureComponent {
         this.context?.showBindingUI(t, {
           currentFieldValue: this.props.property
         });
-      } else if (e.keyCode !== Uz.TAB) return aH;
+      } else if (e.keyCode !== Uz.TAB) return SKIP_RECORDING;
     };
     this.onKeyUp = e => {
-      if (jr(e, this.shouldForwardUndo())) return aH;
+      if (jr(e, this.shouldForwardUndo())) return SKIP_RECORDING;
       this.props.onKeyUp?.(e);
       let t = this.inputRef.current;
-      if (!this.props.formatter.autocomplete) return aH;
+      if (!this.props.formatter.autocomplete) return SKIP_RECORDING;
       {
         let i = t.value;
         let n = i.length > 0 && t.selectionStart === i.length && t.selectionEnd === i.length;
@@ -153,7 +153,7 @@ export class $$I3 extends PureComponent {
     };
     this.onMouseUp = e => {
       let t = this.inputRef.current;
-      if (!this.state.editingValue && isInvalidValue(this.props.property) && t.select?.(), !this.needToSelectAll) return aH;
+      if (!this.state.editingValue && isInvalidValue(this.props.property) && t.select?.(), !this.needToSelectAll) return SKIP_RECORDING;
       t.selectionStart === t.selectionEnd && this.selectAll();
       this.needToSelectAll = !1;
     };

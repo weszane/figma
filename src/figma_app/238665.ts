@@ -4,7 +4,7 @@ import { $n } from "../905/521428";
 import { N } from "../905/438674";
 import { x } from "../905/587214";
 import { w } from "../905/955293";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { BK } from "../905/848862";
 import { hO } from "../905/616572";
@@ -55,7 +55,7 @@ function E({
       ref: _,
       variant: "primary",
       onClick: () => toggle(),
-      recordingKey: Pt(l, "createVariableButton"),
+      recordingKey: generateRecordingKey(l, "createVariableButton"),
       children: getI18nString("variables.authoring_modal.create")
     }), e && showing && _.current && jsx(mw, {
       targetRect: _.current.getBoundingClientRect(),

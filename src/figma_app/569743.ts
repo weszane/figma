@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { _ as _$$_ } from "../figma_app/658134";
@@ -35,7 +35,7 @@ export function $$E0({
   let [h, m] = useState(null);
   l && t && l().then(e => {
     e !== h && m(e);
-  }).catch(() => {});
+  }).catch(() => { });
   let g = "";
   e ? g = "translateY(100vh)" : null === h && (g += `translateY(-${a}px)`);
   null !== h && (n = h);
@@ -58,7 +58,7 @@ function y({
   let h = gN();
   o && r && o().then(e => {
     e !== c && _(e);
-  }).catch(() => {});
+  }).catch(() => { });
   let f = $$E0({
     offscreen: t,
     shouldRequestMobileNativeBottomOffset: r,

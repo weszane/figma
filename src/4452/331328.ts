@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -83,7 +83,7 @@ export function $$T1(e) {
   let l = useCallback(() => {
     let t = e.teamSharingSettings && e.teamSharingSettings.orgBrowsable;
     let a = e.teamSharingSettings && e.teamSharingSettings.hidden;
-    if (t) ;else if (a) return Fb.HIDDEN;
+    if (t); else if (a) return Fb.HIDDEN;
     return Fb.ORG_BROWSABLE;
   }, [e.teamSharingSettings]);
   let o = useCallback(() => {

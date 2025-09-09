@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { Q } from "../figma_app/447352";
 import { a as _$$a } from "../905/558168";
 import { VariableResolvedDataType } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
@@ -79,7 +79,7 @@ export function $$O0(e) {
         inputClassName: e.inputClassName,
         inputRef: t,
         noBorder: e.useSliderInput,
-        recordingKey: Pt(e, "cornerRadiusInputVariableWrapper"),
+        recordingKey: generateRecordingKey(e, "cornerRadiusInputVariableWrapper"),
         children: e.useSliderInput ? jsx(_$$U, {
           forwardedRef: t,
           disabled: e.disabled,
@@ -122,7 +122,7 @@ export function $$R1(e) {
       rn("cornerRadius");
       m(e);
     },
-    recordingKey: Pt(e, "cornerRadiusInput"),
+    recordingKey: generateRecordingKey(e, "cornerRadiusInput"),
     scrubMultiplier: .1 * smallNudgeAmount,
     smallNudgeAmount,
     value: _ ?? E,

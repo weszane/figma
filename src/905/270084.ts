@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { Checkbox } from "../905/274480";
 import { HiddenLabel } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import u from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { Og } from "../figma_app/243213";
@@ -89,12 +89,12 @@ function P(e) {
   let eA = useRef(null);
   let ey = useRef(null);
   let eb = useRef(null);
-  let ev = useMemo(() => xx((e, t) => e.map(e => t(e))), []);
+  let ev = useMemo(() => memoizeByArgs((e, t) => e.map(e => t(e))), []);
   let eI = useCallback(() => {
     let e = ev(items, getItemKey);
     return unselectableItemKeys ? e.filter(e => !unselectableItemKeys?.has(e)) : e;
   }, [items, getItemKey, unselectableItemKeys, ev]);
-  let eE = useMemo(() => xx((e, t, i, n) => e.filter(e => t.has(n(e)) && !i?.has(n(e)))), []);
+  let eE = useMemo(() => memoizeByArgs((e, t, i, n) => e.filter(e => t.has(n(e)) && !i?.has(n(e)))), []);
   let ex = useRef(sortState);
   let eS = useRef(items.length);
   let ew = useRef(isLoading);
@@ -540,7 +540,7 @@ class j extends Component {
       null == this.frameRequest && (this.frameRequest = requestAnimationFrame(this.setScrollTopState));
       this.props.onScroll && this.props.onScroll();
     };
-    this.itemKeys = xx((e, t) => e.map(e => t(e)));
+    this.itemKeys = memoizeByArgs((e, t) => e.map(e => t(e)));
     this.selectableItemKeys = () => {
       let e = this.itemKeys(this.props.items, this.props.getItemKey);
       return this.props.unselectableItemKeys ? e.filter(e => !this.props.unselectableItemKeys?.has(e)) : e;
@@ -733,7 +733,7 @@ class j extends Component {
         })
       }, e);
     };
-    this.filterToSelected = xx((e, t, i, n) => e.filter(e => t.has(n(e)) && !i?.has(n(e))));
+    this.filterToSelected = memoizeByArgs((e, t, i, n) => e.filter(e => t.has(n(e)) && !i?.has(n(e))));
     this.state = {
       scrollTop: 0,
       selectedItemKeys: new Set(),

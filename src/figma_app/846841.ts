@@ -18,7 +18,7 @@ import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { EJ } from "../figma_app/930338";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
@@ -386,7 +386,7 @@ export function $$eR6({
   let tB = tc.activeTab === Qx.COMMUNITY;
   let tG = useCallback(e => {
     ei(e);
-    eu(_$$g());
+    eu(generateUUIDv4());
     tk && (tU || 0 === e.length) && debouncedAssetSearch(e, ti);
     tF && (tU || 0 === e.length) && debouncedFragmentTextSearch(e);
     (tB || 0 === e.length) && _debouncedFragmentTextSearch(e);

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useContext, useRef, useMemo, useEffect, PureComponent, forwardRef, Children, Component } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { N_ } from "../vendor/956898";
 import { trackEventAnalytics } from "../905/449184";
 import { logDebug } from "../905/714362";

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { c2 } from "../905/382883";
 import { UU } from "../figma_app/397267";
 import { VariableDataType, StyleVariableOperation, CopyPasteType, VariablesBindings, VariableResolvedDataType, PropertyScope, HandoffBindingsCpp } from "../figma_app/763686";
@@ -9,13 +9,13 @@ import { areSessionLocalIDsEqual } from "../905/871411";
 import { sH, dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { k9, wm } from "../905/19536";
+import { useMemoStable, useMemoShallow } from "../905/19536";
 import m from "../vendor/239910";
 import f from "../vendor/523035";
 import { debugState } from "../905/407919";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { v4, xv } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
 import { Q } from "../905/217916";
@@ -31,7 +31,7 @@ import { Fk } from "../figma_app/167249";
 import { I7, P1 } from "../figma_app/745458";
 import { dK, $u } from "../figma_app/889655";
 import { Wv, ZI, PW } from "../figma_app/633080";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { f as _$$f } from "../905/135117";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
@@ -71,7 +71,7 @@ export function $$et7() {
   let t = A5("variableConsumptionInfo");
   return {
     variableConsumptionMap: e,
-    setVariableConsumptionMap: useCallback((e, r = zk.YES) => {
+    setVariableConsumptionMap: useCallback((e, r = yesNoTrackingEnum.YES) => {
       t({
         variableConsumptionMap: e
       }, r);
@@ -118,10 +118,10 @@ function ei(e) {
 }
 export function $$ea20(e = 0) {
   let t = ei(e);
-  let r = k9(() => normalizeValue(t)?.variableSetKeyToModeData || {}, [t]);
+  let r = useMemoStable(() => normalizeValue(t)?.variableSetKeyToModeData || {}, [t]);
   let n = $$ed15(e);
   let i = $$e_18();
-  return wm(() => {
+  return useMemoShallow(() => {
     for (let [e, t] of Object.entries(n)) if (!r[e] && i[e]) {
       let n = i[e];
       if (!n?.modes?.find(e => e.id === t)) continue;
@@ -189,7 +189,7 @@ export function $$eo5({
   includeSubtree: e = es
 } = {}) {
   let t = kl("variableConsumptionInfo");
-  return k9(() => (e ? normalizeValue(t)?.variableSetKeyToModeIncludingSubtree : normalizeValue(t)?.variableSetKeyToMode) ?? {}, [t, e]);
+  return useMemoStable(() => (e ? normalizeValue(t)?.variableSetKeyToModeIncludingSubtree : normalizeValue(t)?.variableSetKeyToMode) ?? {}, [t, e]);
 }
 export function $$el31(e) {
   let t = function (e) {
@@ -210,7 +210,7 @@ export function $$el31(e) {
 }
 export function $$ed15(e = 0) {
   let t = ei(e);
-  return k9(() => normalizeValue(t)?.variableSetKeyToPageLevelPresetMode || {}, [t]);
+  return useMemoStable(() => normalizeValue(t)?.variableSetKeyToPageLevelPresetMode || {}, [t]);
 }
 export function $$ec17(e = 0) {
   let t = useDispatch();
@@ -251,7 +251,7 @@ export function $$ec17(e = 0) {
       new_mode_id: f ? f.modeId.guid.toString() : "",
       sort_position: f && f.sortPosition ? f.sortPosition : ""
     });
-    Object.values(u).some(e => e.modeOptions.some(e => c2(e.modeId, n) && !e.isCompatible)) && n !== $$Y8 && n !== $$$10 && i && (_ ? t(_$$F.enqueue({
+    Object.values(u).some(e => e.modeOptions.some(e => c2(e.modeId, n) && !e.isCompatible)) && n !== $$Y8 && n !== $$$10 && i && (_ ? t(VisualBellActions.enqueue({
       message: getI18nString("variables.visual_bell.variables_incompatible_modes_needs_updates", {
         modeName: i
       }),
@@ -267,7 +267,7 @@ export function $$ec17(e = 0) {
           }));
         }
       }
-    })) : t(_$$F.enqueue({
+    })) : t(VisualBellActions.enqueue({
       message: getI18nString("variables.visual_bell.variables_incompatible_modes_no_updates", {
         modeName: i
       })
@@ -276,15 +276,15 @@ export function $$ec17(e = 0) {
 }
 export function $$eu22(e) {
   let t = $$ea20(e);
-  return wm(() => Object.fromEntries(Object.entries(t).filter(([e, t]) => !t.libraryKey && t.modeOptions.length > 1)), [t]);
+  return useMemoShallow(() => Object.fromEntries(Object.entries(t).filter(([e, t]) => !t.libraryKey && t.modeOptions.length > 1)), [t]);
 }
 export function $$ep1(e) {
   let t = $$ea20(e);
-  return wm(() => Object.fromEntries(Object.entries(t).filter(([e, t]) => !!t.libraryKey && t.modeOptions.length > 1)), [t]);
+  return useMemoShallow(() => Object.fromEntries(Object.entries(t).filter(([e, t]) => !!t.libraryKey && t.modeOptions.length > 1)), [t]);
 }
 export function $$e_18() {
   let e = jI();
-  return wm(() => {
+  return useMemoShallow(() => {
     if ("loaded" === e.status) {
       let t = e.data?.items.filter(e => e.modes && e.modes.length > 1);
       return g()(t, e => e.key);
@@ -359,7 +359,7 @@ export function $$ey28(e, t, r) {
         setVariableConsumptionMap(n);
       });
     }, [setVariableConsumptionMap, e, i]),
-    clearVariableConsumption: useCallback((t = zk.YES) => {
+    clearVariableConsumption: useCallback((t = yesNoTrackingEnum.YES) => {
       let r = {};
       e.forEach(e => {
         r[e] = null;

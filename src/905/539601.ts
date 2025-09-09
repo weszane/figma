@@ -6,7 +6,7 @@ import { A } from "../905/920142";
 import { C5 } from "../905/147383";
 import { FC } from "../figma_app/502422";
 import { Z1 } from "../905/401885";
-import { sMZ } from "../figma_app/43951";
+import { UserFlagByName } from "../figma_app/43951";
 class p {
   constructor(e) {
     assert(!!e.userFlagName);
@@ -14,7 +14,7 @@ class p {
     this.userFlagName = e.userFlagName;
   }
   getLifecycleAtom() {
-    return Z1(sMZ.Query({
+    return Z1(UserFlagByName.Query({
       name: this.userFlagName
     }), e => ({
       lifecycleState: function (e = null, t) {

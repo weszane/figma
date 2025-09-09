@@ -13,7 +13,7 @@ import { ColorSpaceEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
@@ -151,7 +151,7 @@ export class $$B5 extends PureComponent {
             },
             children: renderI18nText("fullscreen.properties_panel.include_id_attribute")
           }),
-          recordingKey: Pt(this.props, "svgID")
+          recordingKey: generateRecordingKey(this.props, "svgID")
         })
       }), Fullscreen && Fullscreen.shouldShowTextNodeExportOptions() && jsx(fI, {
         className: nM,
@@ -165,7 +165,7 @@ export class $$B5 extends PureComponent {
             },
             children: renderI18nText("fullscreen.properties_panel.outline_text")
           }),
-          recordingKey: Pt(this.props, "svgTextOutlines")
+          recordingKey: generateRecordingKey(this.props, "svgTextOutlines")
         })
       }), Fullscreen && Fullscreen.isStrokeMaskableAsSVG() && jsx(fI, {
         className: nM,
@@ -179,7 +179,7 @@ export class $$B5 extends PureComponent {
             },
             children: renderI18nText("fullscreen.properties_panel.simplify_stroke")
           }),
-          recordingKey: Pt(this.props, "svgSimplifyStroke")
+          recordingKey: generateRecordingKey(this.props, "svgSimplifyStroke")
         })
       })]
     });
@@ -187,7 +187,7 @@ export class $$B5 extends PureComponent {
       children: [jsx(J, {
         value: e.suffix || "",
         onChange: this.props.onSuffixChange,
-        recordingKey: Pt(this.props, "suffix")
+        recordingKey: generateRecordingKey(this.props, "suffix")
       }), jsx(ZH, {
         children: ({
           documentExportColorProfile: t
@@ -228,7 +228,7 @@ export class $$B5 extends PureComponent {
             label: jsx(Label, {
               children: renderI18nText("fullscreen.properties_panel.ignore_overlapping_layers")
             }),
-            recordingKey: Pt(this.props, "contentsOnly")
+            recordingKey: generateRecordingKey(this.props, "contentsOnly")
           })
         })
       }), Fullscreen && Fullscreen.shouldShowTextNodeExportOptions() && jsx(fI, {
@@ -241,7 +241,7 @@ export class $$B5 extends PureComponent {
             label: jsx(Label, {
               children: renderI18nText("fullscreen.properties_panel.include_bounding_box")
             }),
-            recordingKey: Pt(this.props, "useAbsoluteBounds")
+            recordingKey: generateRecordingKey(this.props, "useAbsoluteBounds")
           })
         })
       }), i]
@@ -297,7 +297,7 @@ export function $$z2({
     children: jsxs(_$$bL, {
       value: i?.toString() ?? "DOCUMENT",
       onChange: t,
-      recordingKey: Pt(d, "colorProfile"),
+      recordingKey: generateRecordingKey(d, "colorProfile"),
       children: [jsx(DZ, {
         id: $$G10,
         "data-testid": $$G10,
@@ -336,7 +336,7 @@ export function $$K1({
       onChange: t => {
         i && e(+t, i);
       },
-      recordingKey: Pt(s, "exportQuality"),
+      recordingKey: generateRecordingKey(s, "exportQuality"),
       children: [jsx(DZ, {
         id: $$H0,
         "data-testid": "export-settings-export-quality",
@@ -430,7 +430,7 @@ function X({
       onChange: t => {
         e("BICUBIC" === t);
       },
-      recordingKey: Pt(a, "imageSampling"),
+      recordingKey: generateRecordingKey(a, "imageSampling"),
       children: [jsx(DZ, {
         id: "export-settings-image-sampling",
         "data-testid": "export-settings-image-sampling",

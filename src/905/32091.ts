@@ -1,5 +1,5 @@
 import { w5 } from "../figma_app/345997";
-import { K, H } from "../905/301652";
+import { generateAnonymouseName, generateAnnomousPrefill } from "../905/301652";
 var $$a1 = (e => (e.ORG_DISABLED = "ORG_DISABLED", e.TEAM_NOT_PRO = "TEAM_NOT_PRO", e.CANNOT_EDIT_FILE = "CANNOT_EDIT_FILE", e.ERROR = "ERROR", e))($$a1 || {});
 export function $$s0(e) {
   let {
@@ -20,8 +20,8 @@ export function $$o3(e) {
   return "ERROR";
 }
 export function $$l2(e, t) {
-  localStorage.setItem(K(e), t);
-  localStorage.setItem(H(), t);
+  localStorage.setItem(generateAnonymouseName(e), t);
+  localStorage.setItem(generateAnnomousPrefill(), t);
 }
 export const M_ = $$s0;
 export const Q9 = $$a1;

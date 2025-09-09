@@ -8,12 +8,12 @@ import d from "classnames";
 import { BK } from "../905/848862";
 import { Ib } from "../905/129884";
 import { J5, FM } from "../figma_app/835688";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { r as _$$r } from "../905/857502";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { tS } from "../figma_app/516028";
 import { LB } from "../figma_app/29089";
 import { ZU } from "../figma_app/986347";
@@ -51,7 +51,7 @@ let $$A0 = {
       let r = useCallback(() => {
         let r = `${getInitialOptions().figma_url}/deck/${e}`;
         navigator.clipboard.writeText(r);
-        t(F.enqueue({
+        t(VisualBellActions.enqueue({
           type: "copy-presentation-link-success",
           message: getI18nString("fullscreen_actions.copy-presentation-link-success")
         }));

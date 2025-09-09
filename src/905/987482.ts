@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { A as _$$A } from "../905/920165";
 import { w_, Ih } from "../figma_app/273493";
-import { o6 } from "../figma_app/806412";
+import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/989956";
@@ -11,7 +11,7 @@ import { Ep } from "../figma_app/504823";
 import { VG } from "../figma_app/622881";
 import { MX, Kf } from "../905/306220";
 import { W } from "../905/979098";
-let f = class e extends o6 {
+let f = class e extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.mouseCallback = (e, t) => {

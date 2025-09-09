@@ -8,7 +8,7 @@ import { GridLayoutApi, SceneGraphHelpers, Axis, LayoutSizingType, SocialMediaFo
 import { getFeatureFlags } from "../905/601108";
 import { logError } from "../905/714362";
 import { getFalseValue, isInteractionPathCheck, isEvalViewPathCheck } from "../figma_app/897289";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { VF } from "../figma_app/679183";
 import { nl as _$$nl } from "../figma_app/359943";
 import { useState, useEffect, useMemo, memo, useCallback } from "react";
@@ -34,7 +34,7 @@ import { Y as _$$Y } from "../a88a4c5a/211633";
 import { pq } from "../8826/642528";
 import { q as _$$q } from "../8826/33573";
 import { SQ, tV, M0, Br, U4, So, Ws, SJ, d6, GG, ww, P1, iP, NR, Dj } from "../figma_app/803054";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { HH } from "../figma_app/828186";
 import { k as _$$k2 } from "../905/582200";
 import { k as _$$k3 } from "../8618/427799";
@@ -100,7 +100,7 @@ import { q5 } from "../figma_app/516028";
 import { b as _$$b2 } from "../905/600173";
 import { n } from "../905/796896";
 import { i as _$$i } from "../905/542104";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { fullscreenValue } from "../figma_app/455680";
 import { z as _$$z } from "../905/454433";
 import { lg } from "../figma_app/976749";
@@ -478,7 +478,7 @@ function e4() {
 }
 function tt(e) {
   return jsx(_$$z, {
-    recordingKey: Pt(e, "createTemplateSetButton"),
+    recordingKey: generateRecordingKey(e, "createTemplateSetButton"),
     onClick: () => {
       fullscreenValue.triggerActionInUserEditScope("create-state-group-row");
     },
@@ -495,7 +495,7 @@ function tn(e) {
 }
 function ti(e) {
   return jsx(_$$z, {
-    recordingKey: Pt(e, "createTemplateButton"),
+    recordingKey: generateRecordingKey(e, "createTemplateButton"),
     onClick: () => {
       fullscreenValue.triggerActionInUserEditScope("create-symbol");
     },
@@ -505,7 +505,7 @@ function ti(e) {
 }
 function tr(e) {
   return jsx(_$$z, {
-    recordingKey: Pt(e, "createMultipleTemplatesButton"),
+    recordingKey: generateRecordingKey(e, "createMultipleTemplatesButton"),
     onClick: () => {
       fullscreenValue.triggerActionInUserEditScope("create-multiple-symbols");
     },
@@ -924,7 +924,7 @@ function tb({
   });
 }
 function tT(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let n = Dj(t);
   return ((isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) && !window.figmaPerfTesting && !getFalseValue() && !isInteractionPathCheck() && !isEvalViewPathCheck() && logError("PropertiesPanel", "Rendering design tab with no shownPropertiesPanels", {
     isEmpty: isEmptyObject(e.shownPanels),

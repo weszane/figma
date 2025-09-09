@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -14,16 +14,16 @@ import { a as _$$a } from "../905/964520";
 import { DocumentColorProfileEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h } from "../905/207101";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k3 } from "../905/582200";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { LU, kG } from "../figma_app/327588";
 import { Pc, gI, dS } from "../figma_app/396464";
 import { rg } from "../figma_app/401069";
 import { hideModalHandler } from "../905/156213";
 import { ZH } from "../figma_app/504823";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { Um } from "../905/848862";
 import { eY } from "../figma_app/722362";
 import { registerModal } from "../905/102752";
@@ -53,7 +53,7 @@ export let $$M0 = registerModal(function (e) {
     value: 1
   });
   _$$h(() => {
-    0 === g.length && 0 === y.length && (B ? tJ([U]) : tJ(h));
+    0 === g.length && 0 === y.length && (B ? replaceSelection([U]) : replaceSelection(h));
   });
   useEffect(() => {
     M(_$$W(g, y, h, m));
@@ -137,13 +137,13 @@ export let $$M0 = registerModal(function (e) {
                     e();
                   } catch (e) {
                     t = !1;
-                    p(_$$F.enqueue({
+                    p(VisualBellActions.enqueue({
                       message: getI18nString("cooper.toolbar.export_modal.visual_bell.failed_to_export")
                     }));
                   } finally {
                     i(!1);
                   }
-                  t && (p(hideModalHandler()), p(_$$F.enqueue({
+                  t && (p(hideModalHandler()), p(VisualBellActions.enqueue({
                     message: getI18nString("cooper.toolbar.export_modal.visual_bell.exported_assets", {
                       assetCount: Q
                     })
@@ -204,7 +204,7 @@ function j({
             }) => jsx(Fragment, {
               children: jsx(pu, {
                 selectedCooperFrameNodeId: m,
-                recordingKey: Pt(m, "exportModalPreview"),
+                recordingKey: generateRecordingKey(m, "exportModalPreview"),
                 useAbsoluteBounds: !0,
                 panelWidth: 400,
                 panelHeight: 300,

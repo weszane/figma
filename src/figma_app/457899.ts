@@ -6,7 +6,7 @@ import { Ln } from "../905/84777";
 import { Gu } from "../905/513035";
 import { N_ } from "../905/332483";
 import { c as _$$c } from "../figma_app/681090";
-import { oe } from "../figma_app/43951";
+import { ModifyPlanUserSeatModalView } from "../figma_app/43951";
 import { IX } from "../905/712921";
 export function $$_1({
   prices: e,
@@ -62,7 +62,7 @@ export function $$h2({
   }, [i, t, s, u, l, h]);
 }
 export function $$m0(e) {
-  let [t] = IT(oe(e));
+  let [t] = IT(ModifyPlanUserSeatModalView(e));
   let [r] = mI(t);
   return r;
 }

@@ -1,11 +1,11 @@
 import { useMemo, useRef, useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { dA } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import u from "../vendor/223926";
 import { trackEventAnalytics } from "../905/449184";
 import { Point } from "../905/736624";
@@ -176,8 +176,8 @@ export function $$L0() {
     fullscreenValue?.isReady() && $r(new Set(e));
   }, []);
   return {
-    anchorPositions: useCallback(xx(t => fullscreenValue?.isReady() && e ? Fullscreen.getCanvasSpaceCommentLocations(t) : {}), [e]),
-    boundingBoxPositions: useCallback(xx((t, r, n) => {
+    anchorPositions: useCallback(memoizeByArgs(t => fullscreenValue?.isReady() && e ? Fullscreen.getCanvasSpaceCommentLocations(t) : {}), [e]),
+    boundingBoxPositions: useCallback(memoizeByArgs((t, r, n) => {
       if (!_$$y() || !r || !e) return {};
       let i = {};
       let a = j(t, r);

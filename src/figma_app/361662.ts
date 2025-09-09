@@ -1,5 +1,5 @@
 import { useContext, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { pi } from "../figma_app/314264";
 import { q5, _G } from "../figma_app/516028";

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { QB, y_, bL, Rz, rA, y$, ke } from "../905/174266";
 import { E as _$$E } from "../905/172252";
 import { g as _$$g } from "../905/125190";
@@ -26,9 +26,9 @@ import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { conditionalFeatureFlag } from "../figma_app/169182";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { zC, hB, OT } from "../905/70369";
-import { WX, zX } from "../905/576487";
+import { VisualBellDismissReason, VisualBellIcon } from "../905/576487";
 import { L as _$$L } from "../905/22352";
 import { H as _$$H } from "../905/861007";
 let M = {
@@ -100,7 +100,7 @@ export function $$B0(e) {
   let h = bell?.onDismiss;
   let m = useRef(!1);
   useEffect(() => () => {
-    _ && !m.current && _(WX.DISMISS);
+    _ && !m.current && _(VisualBellDismissReason.DISMISS);
     m.current = !1;
   }, [_]);
   let g = useCallback(e => {
@@ -108,14 +108,14 @@ export function $$B0(e) {
     !m.current && _ && (m.current = !0, _?.(function (e) {
       switch (e) {
         case "dismiss":
-          return WX.DISMISS;
+          return VisualBellDismissReason.DISMISS;
         case "timeout":
-          return WX.TIMEOUT;
+          return VisualBellDismissReason.TIMEOUT;
         case "action":
-          return WX.ACTION_BUTTON_CLICKED;
+          return VisualBellDismissReason.ACTION_BUTTON_CLICKED;
       }
     }(e)));
-    r(_$$F.dequeue({}));
+    r(VisualBellActions.dequeue({}));
   }, [r, _, h]);
   let f = useSelector(e => bell?.progressKey ? e.progress[bell.progressKey] : void 0);
   let E = bell ? zC(bell, f) : null;
@@ -230,7 +230,7 @@ function G({
   });
 }
 function V(e) {
-  return e.icon !== zX.FROM_URL ? jsx(H, {
+  return e.icon !== VisualBellIcon.FROM_URL ? jsx(H, {
     icon: e.icon,
     progress: e.progress
   }) : jsx(_$$H, {
@@ -242,55 +242,55 @@ function H({
   progress: t
 }) {
   switch (e) {
-    case zX.CHECK:
+    case VisualBellIcon.CHECK:
       return jsx(_$$g, {});
-    case zX.GREEN_CHECK:
+    case VisualBellIcon.GREEN_CHECK:
       return jsx(_$$g2, {
         style: {
           "--color-icon": "var(--color-icon-success)"
         }
       });
-    case zX.CHECK_WITH_CIRCLE:
+    case VisualBellIcon.CHECK_WITH_CIRCLE:
       return jsx(W, {});
-    case zX.EXCLAMATION:
+    case VisualBellIcon.EXCLAMATION:
       return jsx(r, {});
-    case zX.UNDO:
-    case zX.RETURN_TO_INSTANCE:
+    case VisualBellIcon.UNDO:
+    case VisualBellIcon.RETURN_TO_INSTANCE:
       return jsx(_$$E2, {});
-    case zX.SPINNER:
-    case zX.IMAGE_BACKED_SPINNER:
+    case VisualBellIcon.SPINNER:
+    case VisualBellIcon.IMAGE_BACKED_SPINNER:
       return jsx(y$, {});
-    case zX.PROGRESS:
+    case VisualBellIcon.PROGRESS:
       return jsx(ke, {
         progressFraction: OT(t)
       });
-    case zX.FROM_URL:
+    case VisualBellIcon.FROM_URL:
       return jsx(_$$w, {});
-    case zX.NOTES_ON_RECTANGLE:
+    case VisualBellIcon.NOTES_ON_RECTANGLE:
       return jsx(_$$w2, {});
-    case zX.STACK_SELECTION:
+    case VisualBellIcon.STACK_SELECTION:
       return jsx(_$$v, {});
-    case zX.CLOSE_FILLED:
+    case VisualBellIcon.CLOSE_FILLED:
       return jsx(_$$C, {
         style: {
           "--color-icon": "var(--color-icon-danger)"
         }
       });
-    case zX.EYEDROPPER:
+    case VisualBellIcon.EYEDROPPER:
       return jsx(_$$G, {});
-    case zX.BRUSH:
+    case VisualBellIcon.BRUSH:
       return jsx(_$$g3, {});
-    case zX.SPARKLE:
+    case VisualBellIcon.SPARKLE:
       return jsx(_$$V, {});
-    case zX.PICK:
+    case VisualBellIcon.PICK:
       return jsx(_$$o, {});
-    case zX.WARNING_EXCLAMATION_WITH_TRIANGLE:
+    case VisualBellIcon.WARNING_EXCLAMATION_WITH_TRIANGLE:
       return jsx(_$$e, {});
-    case zX.OFFLINE:
+    case VisualBellIcon.OFFLINE:
       return jsx(_$$V2, {});
-    case zX.DESIGN_MODE:
+    case VisualBellIcon.DESIGN_MODE:
       return jsx(_$$P, {});
-    case zX.NONE:
+    case VisualBellIcon.NONE:
     case void 0:
       return jsx(Fragment, {});
   }

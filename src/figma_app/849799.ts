@@ -14,7 +14,7 @@ import { J as _$$J } from "../905/341359";
 import { J as _$$J2 } from "../905/614223";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { z } from "../905/239603";
 import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 var b = (e => (e[e.ABUSE_TYPE_UNSPECIFIED = 0] = "ABUSE_TYPE_UNSPECIFIED", e[e.ABUSE_TYPE_SPAM = 1] = "ABUSE_TYPE_SPAM", e[e.ABUSE_TYPE_MALWARE = 2] = "ABUSE_TYPE_MALWARE", e[e.ABUSE_TYPE_PHISHING = 3] = "ABUSE_TYPE_PHISHING", e[e.ABUSE_TYPE_FRAUD_SCAM_IMPERSONATION = 4] = "ABUSE_TYPE_FRAUD_SCAM_IMPERSONATION", e[e.ABUSE_TYPE_INAPPROPRIATE_CONTENT = 5] = "ABUSE_TYPE_INAPPROPRIATE_CONTENT", e[e.ABUSE_TYPE_ILLEGAL_CONTENT = 6] = "ABUSE_TYPE_ILLEGAL_CONTENT", e[e.ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK = 99] = "ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK", e[e.ABUSE_TYPE_OTHER = 100] = "ABUSE_TYPE_OTHER", e[e.UNRECOGNIZED = -1] = "UNRECOGNIZED", e))(b || {});
@@ -118,7 +118,7 @@ function R(e, t, r) {
 }
 export let $$L0 = function (e) {
   let t = _6();
-  let r = iZ();
+  let r = selectCurrentUser();
   let [S, v] = useState(b.ABUSE_TYPE_UNSPECIFIED);
   let A = S > 0 && S !== b.ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK;
   let L = S === b.ABUSE_TYPE_DMCA_COPYRIGHT_TRADEMARK;

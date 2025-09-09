@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
 import { z } from "../905/788559";
@@ -53,7 +53,7 @@ function m({
   let b = e ? jsx(_$$r, {
     ...e,
     target: p,
-    recordingKey: Pt(y, "actionPanel", "primaryAction"),
+    recordingKey: generateRecordingKey(y, "actionPanel", "primaryAction"),
     disableKeyboardShortcuts: !0,
     children: e.text
   }, "primary-action") : null;
@@ -61,14 +61,14 @@ function m({
     variant: "secondary",
     ...t,
     target: p,
-    recordingKey: Pt(y, "actionPanel", "secondaryAction"),
+    recordingKey: generateRecordingKey(y, "actionPanel", "secondaryAction"),
     disableKeyboardShortcuts: !0,
     children: t.text
   }, "secondary-action") : null;
   let I = i ? jsx(_$$r, {
     variant: "secondary",
     ...i,
-    recordingKey: Pt(y, "actionPanel", "tertiaryAction"),
+    recordingKey: generateRecordingKey(y, "actionPanel", "tertiaryAction"),
     disableKeyboardShortcuts: !0,
     children: i.text
   }, "tertiary-action") : null;

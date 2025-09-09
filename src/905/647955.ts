@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { mH, dF, Dx } from "../905/917193";
 export function $$a0() {
   return useSelector(e => e.modalShown?.type === mH);

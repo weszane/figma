@@ -1,5 +1,5 @@
 import { NC } from "../905/17179";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { XHR } from "../905/910117";
 import { J } from "../905/231762";
 import { nM as _$$nM, pj as _$$pj, Hx as _$$Hx } from "../905/321397";
@@ -101,7 +101,7 @@ let G = (e, t, r, n, o, l, d) => {
       userFirstRanAt: t.meta.created_at
     }));
   }).catch(e => {
-    k.error(J(e));
+    logger.error(J(e));
   });
 };
 let $$V16 = (e, t) => r => {

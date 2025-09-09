@@ -1,12 +1,12 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, OutOfDateFeatureVersionError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError, FigjamVisualParsingError } from "../figma_app/316567";
 import { getFeatureFlags } from "../905/601108";
 import { j } from "../figma_app/602140";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { D } from "../905/347702";
 var $$_1 = (e => (e.SUMMARIZE = "sticky-summarization-error", e.CLUSTER = "sticky-cluster-error", e.GENERATE = "generate-error", e))($$_1 || {});
 export let $$h4 = {
@@ -23,7 +23,7 @@ export function $$g3() {
       case "reload":
         i = {
           text: getI18nString("whiteboard.ai.reload"),
-          action: () => Ay.reload("Resolving an error encountered in FigJam AI")
+          action: () => customHistory.reload("Resolving an error encountered in FigJam AI")
         };
         break;
       case "trace":
@@ -34,7 +34,7 @@ export function $$g3() {
           }
         });
     }
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       type: r,
       message: t,
       error: !!i,
@@ -81,7 +81,7 @@ export let $$f0 = D((e, t) => {
   };
   let n = "generic";
   let i = !0;
-  if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? n = "content_length_limit_exceeded" : OutOfDateFeatureVersionError.isInstance(e) ? "figjam_summarize" === e.featureName && (n = "figjam_summarize_out_of_date") : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? n = "rate_limit_exceeded" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? n = "service_issue" : OfflineError.isInstance(e) ? (n = "offline", i = !1) : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? (n = "unsafe_or_harmful_content", i = !1) : UnauthorizedError.isInstance(e) ? (n = "unauthorized", i = !1) : NotImplementedError.isInstance(e) ? (n = "not_implemented", i = !1) : FigjamVisualParsingError.isInstance(e) ? (n = "generic", i = !1) : e?.statusCode === 429 ? n = "rate_limit_exceeded" : e?.statusCode === 403 && (n = "ai_opt_out_error");else if (e instanceof G1) switch (e.type) {
+  if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? n = "content_length_limit_exceeded" : OutOfDateFeatureVersionError.isInstance(e) ? "figjam_summarize" === e.featureName && (n = "figjam_summarize_out_of_date") : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? n = "rate_limit_exceeded" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? n = "service_issue" : OfflineError.isInstance(e) ? (n = "offline", i = !1) : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? (n = "unsafe_or_harmful_content", i = !1) : UnauthorizedError.isInstance(e) ? (n = "unauthorized", i = !1) : NotImplementedError.isInstance(e) ? (n = "not_implemented", i = !1) : FigjamVisualParsingError.isInstance(e) ? (n = "generic", i = !1) : e?.statusCode === 429 ? n = "rate_limit_exceeded" : e?.statusCode === 403 && (n = "ai_opt_out_error"); else if (e instanceof G1) switch (e.type) {
     case "content_length_limit_exceeded":
       n = "content_length_limit_exceeded";
       break;

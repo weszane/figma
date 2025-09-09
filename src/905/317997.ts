@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
@@ -10,7 +10,7 @@ import { renderI18nText } from "../905/303541";
 import { X, U as _$$U } from "../905/77000";
 import { d1 } from "../905/766303";
 import { Lk } from "../figma_app/646357";
-import { $cq } from "../figma_app/43951";
+import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
 import { ev } from "../905/909811";
 import { C } from "../905/109977";
 import { r as _$$r } from "../905/336143";
@@ -51,7 +51,7 @@ export function $$w1(e) {
     productComponentStats,
     libraryKey
   });
-  let j = Rs($cq, {
+  let j = Rs(LibraryModalAssetsDataByLibraryKey, {
     libraryKey
   });
   let U = useMemo(() => "loaded" === j.status && j.data.libraryKeyToFile?.file ? j.data.libraryKeyToFile.file.variableCollections : [], [j]);

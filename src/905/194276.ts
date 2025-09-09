@@ -1,5 +1,5 @@
 import { NC } from "../905/17179";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -33,7 +33,7 @@ let $$$$E6 = createOptimistThunk((e, {
     ...XHR.defaults.headers,
     "X-Figma-User-ID": t
   };
-  Ay.replace(`/verify?fuid=${t}`, null);
+  customHistory.replace(`/verify?fuid=${t}`, null);
   e.dispatch($$I3({
     formState: qB.VALIDATE_EMAIL,
     userId: t
@@ -92,7 +92,7 @@ let $$Y21 = NC("AUTH_GOOGLE_SIGNUP");
 let $$q26 = NC("AUTH_SET_ORIGIN");
 export async function $$$25(e, t) {
   await XHR.post("/api/session/clear_cont").catch(() => {});
-  t ? Ay.unsafeRedirectMsTeams(e) : Ay.redirect(e);
+  t ? customHistory.unsafeRedirectMsTeams(e) : customHistory.redirect(e);
 }
 export const $j = $$V0;
 export const AP = $$B1;

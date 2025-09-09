@@ -1,10 +1,82 @@
-var $$n4 = (e => (e[e.NONE = 0] = "NONE", e[e.SPINNER = 1] = "SPINNER", e[e.IMAGE_BACKED_SPINNER = 2] = "IMAGE_BACKED_SPINNER", e[e.CHECK = 3] = "CHECK", e[e.GREEN_CHECK = 4] = "GREEN_CHECK", e[e.CHECK_WITH_CIRCLE = 5] = "CHECK_WITH_CIRCLE", e[e.EXCLAMATION = 6] = "EXCLAMATION", e[e.RETURN_TO_INSTANCE = 7] = "RETURN_TO_INSTANCE", e[e.PROGRESS = 8] = "PROGRESS", e[e.UNDO = 9] = "UNDO", e[e.FROM_URL = 10] = "FROM_URL", e[e.NOTES_ON_RECTANGLE = 11] = "NOTES_ON_RECTANGLE", e[e.STACK_SELECTION = 12] = "STACK_SELECTION", e[e.CLOSE_FILLED = 13] = "CLOSE_FILLED", e[e.EYEDROPPER = 14] = "EYEDROPPER", e[e.BRUSH = 15] = "BRUSH", e[e.SPARKLE = 16] = "SPARKLE", e[e.PICK = 17] = "PICK", e[e.WARNING_EXCLAMATION_WITH_TRIANGLE = 18] = "WARNING_EXCLAMATION_WITH_TRIANGLE", e[e.OFFLINE = 19] = "OFFLINE", e[e.DESIGN_MODE = 20] = "DESIGN_MODE", e))($$n4 || {});
-var $$r0 = (e => (e[e.SQUARE = 0] = "SQUARE", e[e.CIRCLE = 1] = "CIRCLE", e))($$r0 || {});
-var $$a3 = (e => (e[e.FILE_MOVE_FOLDER_BELL_ID = 0] = "FILE_MOVE_FOLDER_BELL_ID", e[e.SITES_PUBLISH_SUCCESS_BELL_ID = 1] = "SITES_PUBLISH_SUCCESS_BELL_ID", e[e.FIGMAKE_PUBLISH_SUCCESS_BELL_ID = 2] = "FIGMAKE_PUBLISH_SUCCESS_BELL_ID", e))($$a3 || {});
-var $$s1 = (e => (e.UPSELL_LIBRARIES_COMPONENT_CREATION_NUDGE = "visual-bell-upsell-library-component-creation-nudge", e.SLIDES_REMOVE_AUTO_LAYOUT = "slides-remove-auto-layout", e.SLIDE_CONVERSION_VISUAL_BELL = "slide-conversion-visual-bell", e.BOARD_TO_DECK_FEEDBACK = "board-to-deck-feedback", e.FIRST_DRAFT_FEEDBACK = "first-draft-feedback", e.SLIDES_OUTLINE_TO_DECK_FEEDBACK = "slides-outline-to-deck", e.DESIGN_LINTER_COPY_SELECTION = "design-linter-copy-selection", e))($$s1 || {});
-var $$o2 = (e => (e.TIMEOUT = "timeout", e.DISMISS = "dismiss", e.ACTION_BUTTON_CLICKED = "action_button_click", e))($$o2 || {});
-export const Ox = $$r0;
-export const Rw = $$s1;
-export const WX = $$o2;
-export const XU = $$a3;
-export const zX = $$n4;
+/**
+ * @fileoverview Refactored enums for notification and visual bell types.
+ * Original variable names: $$n4, $$r0, $$a3, $$s1, $$o2
+ */
+
+/**
+ * Enum for visual bell icons.
+ * Original: $$n4
+ */
+export enum VisualBellIcon {
+  NONE = 0,
+  SPINNER = 1,
+  IMAGE_BACKED_SPINNER = 2,
+  CHECK = 3,
+  GREEN_CHECK = 4,
+  CHECK_WITH_CIRCLE = 5,
+  EXCLAMATION = 6,
+  RETURN_TO_INSTANCE = 7,
+  PROGRESS = 8,
+  UNDO = 9,
+  FROM_URL = 10,
+  NOTES_ON_RECTANGLE = 11,
+  STACK_SELECTION = 12,
+  CLOSE_FILLED = 13,
+  EYEDROPPER = 14,
+  BRUSH = 15,
+  SPARKLE = 16,
+  PICK = 17,
+  WARNING_EXCLAMATION_WITH_TRIANGLE = 18,
+  OFFLINE = 19,
+  DESIGN_MODE = 20,
+}
+
+/**
+ * Enum for visual bell shapes.
+ * Original: $$r0
+ */
+export enum VisualBellShape {
+  SQUARE = 0,
+  CIRCLE = 1,
+}
+
+/**
+ * Enum for bell IDs.
+ * Original: $$a3
+ */
+export enum BellId {
+  FILE_MOVE_FOLDER_BELL_ID = 0,
+  SITES_PUBLISH_SUCCESS_BELL_ID = 1,
+  FIGMAKE_PUBLISH_SUCCESS_BELL_ID = 2,
+}
+
+/**
+ * Enum for visual bell types.
+ * Original: $$s1
+ */
+export enum VisualBellType {
+  UPSELL_LIBRARIES_COMPONENT_CREATION_NUDGE = "visual-bell-upsell-library-component-creation-nudge",
+  SLIDES_REMOVE_AUTO_LAYOUT = "slides-remove-auto-layout",
+  SLIDE_CONVERSION_VISUAL_BELL = "slide-conversion-visual-bell",
+  BOARD_TO_DECK_FEEDBACK = "board-to-deck-feedback",
+  FIRST_DRAFT_FEEDBACK = "first-draft-feedback",
+  SLIDES_OUTLINE_TO_DECK_FEEDBACK = "slides-outline-to-deck",
+  DESIGN_LINTER_COPY_SELECTION = "design-linter-copy-selection",
+}
+
+/**
+ * Enum for visual bell dismiss reasons.
+ * Original: $$o2
+ */
+export enum VisualBellDismissReason {
+  TIMEOUT = "timeout",
+  DISMISS = "dismiss",
+  ACTION_BUTTON_CLICKED = "action_button_click",
+}
+
+// Refactored exports to match new enum names
+export const Ox = VisualBellShape;
+export const Rw = VisualBellType;
+export const WX = VisualBellDismissReason;
+export const XU = BellId;
+export const zX = VisualBellIcon;

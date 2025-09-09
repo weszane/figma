@@ -2,7 +2,7 @@ import { GLContextType } from "../figma_app/763686";
 import { zD, j9 } from "../905/686312";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rh } from "../905/485103";
 import { BrowserInfo, isMobilePlatform, getIsLinux, getIsMac, getIsWindows, getIsChromeOS } from "../figma_app/778880";
 import { logError } from "../905/714362";
@@ -63,8 +63,8 @@ export function $$T6() {
 class I {
   constructor() {
     this._graphicsBackendOverride = GLContextType.None;
-    if (getFeatureFlags().webgl2_override) this._graphicsBackendOverride = GLContextType.WebGL2;else if (getFeatureFlags().webgl1_override) this._graphicsBackendOverride = GLContextType.WebGL1;else if (getFeatureFlags().webgpu_override) this._graphicsBackendOverride = GLContextType.WebGPU;else if (getFeatureFlags().webgpu_webgl_url_param && Ay.location) {
-      let e = new URLSearchParams(Ay.location.search);
+    if (getFeatureFlags().webgl2_override) this._graphicsBackendOverride = GLContextType.WebGL2;else if (getFeatureFlags().webgl1_override) this._graphicsBackendOverride = GLContextType.WebGL1;else if (getFeatureFlags().webgpu_override) this._graphicsBackendOverride = GLContextType.WebGPU;else if (getFeatureFlags().webgpu_webgl_url_param && customHistory.location) {
+      let e = new URLSearchParams(customHistory.location.search);
       "1" === e.get("force-webgpu") ? this._graphicsBackendOverride = GLContextType.WebGPU : "1" === e.get("force-webgl2") ? this._graphicsBackendOverride = GLContextType.WebGL2 : "1" === e.get("force-webgl1") && (this._graphicsBackendOverride = GLContextType.WebGL1);
     }
   }

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { G } from "../905/289770";
@@ -12,7 +12,7 @@ import { buildUploadUrl, isDevEnvironment } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { oW } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { tI } from "../figma_app/599327";
 import { hideSpecificModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
@@ -124,7 +124,7 @@ let $$L0 = registerModal(function (e) {
       if (isDevEnvironment()) throw e;
       reportError(_$$e.ACTIVATION, e);
       c(hideSpecificModal($$L0));
-      c(F.enqueue({
+      c(VisualBellActions.enqueue({
         message: "Something went wrong.",
         error: !0
       }));
@@ -145,7 +145,7 @@ let $$L0 = registerModal(function (e) {
     }
     c(hideSpecificModal($$L0));
     e.seatType === ud.DEVELOPER && A?.editorType === FFileType.DESIGN && u("handoff");
-    n && c(F.enqueue({
+    n && c(VisualBellActions.enqueue({
       message: "Error updating request message.",
       error: !0
     }));

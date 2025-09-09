@@ -12,7 +12,7 @@ import { v$ } from "../figma_app/455722";
 import { Fm } from "../figma_app/275462";
 import { PF } from "../figma_app/930386";
 import { G } from "../5430/654859";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { B } from "../905/714743";
 import { ky, Dy, Je } from "../figma_app/925970";
 import { A as _$$A } from "../1617/586892";

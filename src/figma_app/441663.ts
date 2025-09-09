@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { AC } from "../figma_app/777551";
 import { et, zn } from "../figma_app/559491";

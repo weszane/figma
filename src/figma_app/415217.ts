@@ -1,6 +1,6 @@
 import { n as _$$n } from "../905/347702";
 import { logError } from "../905/714362";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 var n;
 var $$i10;
 function o(e) {
@@ -283,7 +283,7 @@ let $$O23 = new class {
     this.pendingMessagesById = {};
   }
   sendMessage(e) {
-    let t = g();
+    let t = generateUUIDv4();
     let r = {
       ...e,
       requestId: t
@@ -316,7 +316,7 @@ let $$R24 = new class {
     this.callbacksById = {};
   }
   registerCallback(e, t) {
-    let r = g();
+    let r = generateUUIDv4();
     this.callbacksById[r] = t;
     o({
       ...e,

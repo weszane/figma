@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { FEditorType } from "../figma_app/53721";
 export function $$s2() {

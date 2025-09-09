@@ -1,11 +1,11 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC } from "../905/17179";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { RF, Nh } from "../905/890368";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistAction, createOptimistThunk } from "../905/350402";
 import { A } from "../905/654645";
 import { kW } from "../figma_app/391338";
@@ -31,7 +31,7 @@ let $$f3 = createOptimistThunk(async (e, t) => {
   } = t;
   await XHR.put(`/api/teams/${teamId}/restore`).then(() => {
     let t = `/files/team/${teamId}`;
-    Ay.redirect(t);
+    customHistory.redirect(t);
     e.dispatch(_$$s.flash(getI18nString("file_browser.file_browser_actions.restore_team_success")));
   }).catch(t => {
     e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.restore_team_error", {
@@ -60,7 +60,7 @@ let $$y16 = createOptimistThunk(async (e, t) => {
     teamId: t.teamId,
     presetsDisabled: r
   }).then(() => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: r ? getI18nString("settings_tab.ui_kits_disabled") : getI18nString("settings_tab.ui_kits_enabled"),
       type: "team.ui_kit_toggle",
       error: !1

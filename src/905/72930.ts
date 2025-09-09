@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { O } from "../905/969533";
 import { Ay } from "@stylexjs/stylex";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { gI, dS, Pc } from "../figma_app/396464";
 import { ZH } from "../figma_app/504823";
-import { wr, Dh, D$ } from "../figma_app/741237";
+import { clearSelection, addToSelection, removeFromSelection } from "../figma_app/741237";
 import { Um } from "../905/848862";
 import { eY } from "../figma_app/722362";
 import { l6, c$, sK } from "../905/794875";
@@ -62,14 +62,14 @@ export function $$v0({
     multipleSelections: S.concat(C ? A : []),
     onChange: e => {
       if (e === A) {
-        if (C) wr();else for (let e of x) S.includes(e) || Dh([e]);
+        if (C) clearSelection(); else for (let e of x) S.includes(e) || addToSelection([e]);
       } else if (S.includes(e)) {
         let t = l.get(e)?.parentGuid;
         if (t && v.includes(t)) {
           let i = l.get(t)?.childrenGuids;
-          if (i) for (let n of (D$([t]), i)) n !== e && Dh([n]);
-        } else D$([e]);
-      } else Dh([e]);
+          if (i) for (let n of (removeFromSelection([t]), i)) n !== e && addToSelection([n]);
+        } else removeFromSelection([e]);
+      } else addToSelection([e]);
     },
     openBelowTarget: !0,
     property: "",
@@ -121,7 +121,7 @@ function I({
     }) => jsx(Fragment, {
       children: jsx(pu, {
         selectedCooperFrameNodeId: e,
-        recordingKey: Pt(e, "exportDropdownPreview"),
+        recordingKey: generateRecordingKey(e, "exportDropdownPreview"),
         useAbsoluteBounds: !0,
         panelWidth: 32,
         panelHeight: 32,

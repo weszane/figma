@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { xk } from "@stylexjs/stylex";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
@@ -42,7 +42,7 @@ import { E as _$$E3 } from "../905/632989";
 import { E as _$$E4 } from "../905/391888";
 import { p as _$$p } from "../905/767868";
 import { M as _$$M } from "../905/269719";
-import { TA, Pc } from "../905/372672";
+import { getUserId, selectUser } from "../905/372672";
 import { A as _$$A2 } from "../905/100919";
 import { Ib } from "../905/129884";
 import { trackEventAnalytics } from "../905/449184";
@@ -53,7 +53,7 @@ import { L8, mr, gx } from "../905/760074";
 import { ac } from "../905/930279";
 import { M4 } from "../905/713695";
 import { e0 } from "../905/696396";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { oB, j7 } from "../905/929976";
 import { noop } from "../905/834956";
 import { kE } from "../905/466026";
@@ -104,7 +104,7 @@ function $(e) {
   }
 }
 function X(e) {
-  let t = TA();
+  let t = getUserId();
   let i = Tf.getTrashedUserId(e.tile);
   let r = jsx(_$$M, {
     tile: e.tile,
@@ -224,7 +224,7 @@ function eg(e) {
 }
 function ef(e) {
   let t = useDispatch();
-  let i = useMemo(() => e.dropdownId || _$$g(), [e.dropdownId]);
+  let i = useMemo(() => e.dropdownId || generateUUIDv4(), [e.dropdownId]);
   let s = useSelector(e => e.dropdownShown?.type === i);
   let o = () => {
     s ? t(oB()) : t(j7({
@@ -348,7 +348,7 @@ function eb({
 }) {
   let i = useDispatch();
   let s = useSelector(e => e.roles.byFileKey);
-  let o = Pc();
+  let o = selectUser();
   let l = useSelector(e => e.selectedBranchKeyByRepoId);
   let d = e.branches.filter(e => !e.trashed_at);
   let c = mr(e.repo, e.branches, l);

@@ -6,7 +6,7 @@ import { selectWithShallowEqual } from '../905/103090';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { teamsAtom } from '../905/338617';
 import { D } from '../905/347702';
-import { iZ } from '../905/372672';
+import { selectCurrentUser } from '../905/372672';
 import { trackEventAnalytics } from '../905/449184';
 import { subscribeAndAwaitData } from '../905/553831';
 import { getFeatureFlags } from '../905/601108';
@@ -16,14 +16,14 @@ import { l as _$$l } from '../905/716947';
 import { lQ } from '../905/934246';
 import { resourceUtils } from '../905/989992';
 import { qd } from '../figma_app/39751';
-import { ehp, kKC, N6_ } from '../figma_app/43951';
+import { OpenEditorFileData, FileCanTestPlanRecordPermission, FilePermissionsLgShadowView } from '../figma_app/43951';
 import { Bh, Rs } from '../figma_app/288654';
 import { IT, QV } from '../figma_app/566371';
 import { useAtomWithSubscription } from './27355';
 export async function $$S2(e) {
   let t = e.getState().selectedView;
   let r = t.view === 'fullscreen' && t.fileKey;
-  return r && (await subscribeAndAwaitData(ehp, {
+  return r && (await subscribeAndAwaitData(OpenEditorFileData, {
     fileKey: r
   })).file || null;
 }
@@ -33,7 +33,7 @@ export function $$v6() {
   });
   (function (e) {
     let t = getFeatureFlags().iam_pv2_lg_pol_smoke;
-    Rs(N6_, {
+    Rs(FilePermissionsLgShadowView, {
       fileKey: e,
       linkAccessOverrideKey: null
     }, {
@@ -42,13 +42,13 @@ export function $$v6() {
   })(e || '');
   (function (e) {
     let t = getFeatureFlags().pv2_plan_record_dummy_policy;
-    Rs(kKC, {
+    Rs(FileCanTestPlanRecordPermission, {
       key: e
     }, {
       enabled: t && !!e
     });
   })(e || '');
-  let t = Rs(ehp, {
+  let t = Rs(OpenEditorFileData, {
     fileKey: e || ''
   }, {
     enabled: !!e
@@ -92,7 +92,7 @@ export function $$F13() {
   let e = useSelector(e => e.selectedView?.view === 'prototype');
   let t = function () {
     let e = useSelector(e => e.selectedView?.view === 'fullscreen' ? e.selectedView.fileKey : null);
-    let t = Bh(ehp(e ? {
+    let t = Bh(OpenEditorFileData(e ? {
       fileKey: e
     } : null));
     return resourceUtils.useTransform(t, ({
@@ -107,14 +107,14 @@ export function $$U8() {
   let e = $$j14();
   return e?.editorType;
 }
-export let $$B17 = D(() => $$j14()?.key || null);
+export let $$B17 = () => $$j14()?.key || null;
 export function $$G18() {
   let e = $$j14();
   return (e?.sourceFileKey ?? e?.key) || null;
 }
 export function $$V5() {
   let e = $$j14();
-  let t = iZ();
+  let t = selectCurrentUser();
   return e?.creatorId === t?.id;
 }
 export function $$H1(e) {
@@ -146,7 +146,7 @@ function K() {
 }
 export let $$Y12 = getFeatureFlags().preload_open_editor_file_data ? function (e) {
   let t = qd(e ?? null);
-  let [r] = IT(ehp({
+  let [r] = IT(OpenEditorFileData({
     fileKey: e
   }), {
     enabled: !!e

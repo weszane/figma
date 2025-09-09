@@ -7,7 +7,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { jM, CZ, L8 } from "../905/124270";
 import { GX } from "../905/171315";
 import { y as _$$y } from "../905/713563";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $P, ej, w2 } from "../905/977218";
 import { vj } from "../905/574958";
 import { Q8, Q, ih, Yj, ic, sC } from "../905/61477";
@@ -15,14 +15,14 @@ import { Q0, kq } from "../905/994947";
 import { Xr, uH, hf, q6 } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rs } from "../figma_app/288654";
 import { B as _$$B } from "../905/714743";
 import { W } from "../905/95038";
 import { G as _$$G } from "../905/720066";
 import { uF, NE, Xx, e_, hl, KL } from "../905/182534";
 import { hideModalHandler } from "../905/156213";
-import { sn$ } from "../figma_app/43951";
+import { FolderSearchResult } from "../figma_app/43951";
 import { cr, yY, CO } from "../905/703676";
 import { a as _$$a } from "../905/682573";
 import { A as _$$A } from "../1617/110063";
@@ -44,7 +44,7 @@ function N({
   let u = _$$G(c, a, e);
   let m = useCallback(t => {
     t.preventDefault();
-    t.metaKey || 1 === t.button ? Ay.redirect(c, "_blank") : (l(hideModalHandler()), NE(l, e.model));
+    t.metaKey || 1 === t.button ? customHistory.redirect(c, "_blank") : (l(hideModalHandler()), NE(l, e.model));
   }, [c, l, e]);
   let h = useCallback(t => {
     t.preventDefault();
@@ -81,7 +81,7 @@ function P({
 }) {
   let {
     data
-  } = Rs(sn$, {
+  } = Rs(FolderSearchResult, {
     teamId: e.model.team_id ?? ""
   }, {
     enabled: !!e.model.team_id
@@ -111,7 +111,7 @@ function D({
   let u = _$$G(c, a, e);
   let m = useCallback(t => {
     t.preventDefault();
-    t.metaKey || 1 === t.button ? Ay.redirect(c, "_blank") : (l(hideModalHandler()), e_(l, e.model));
+    t.metaKey || 1 === t.button ? customHistory.redirect(c, "_blank") : (l(hideModalHandler()), e_(l, e.model));
   }, [c, l, e]);
   let h = useCallback(t => {
     t.preventDefault();
@@ -172,7 +172,7 @@ function $$j({
   let f = _$$G(h, i, a);
   let _ = useCallback(e => {
     e.preventDefault();
-    e.metaKey || 1 === e.button ? Ay.redirect(h, "_blank") : (d(hideModalHandler()), KL(d, a.model));
+    e.metaKey || 1 === e.button ? customHistory.redirect(h, "_blank") : (d(hideModalHandler()), KL(d, a.model));
   }, [h, d, a]);
   let A = useCallback(e => {
     e.preventDefault();

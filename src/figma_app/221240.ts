@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useMemo, useContext } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { sg } from "../905/859698";
 import { Fullscreen, HandoffBindingsCpp, FileSourceType } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";

@@ -37,7 +37,7 @@ import { Label } from '../905/270045';
 import { Cj } from '../905/270084';
 import { Checkbox } from '../905/274480';
 import { U as _$$U } from '../905/275247';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R } from '../905/304671';
 import { N_, Oq } from '../905/332483';
@@ -45,7 +45,7 @@ import { $ as _$$$, V as _$$V } from '../905/355181';
 import { Q as _$$Q } from '../905/363675';
 import { c as _$$c } from '../905/370443';
 import { Ck } from '../905/372455';
-import { TA } from '../905/372672';
+import { getUserId } from '../905/372672';
 import { FRequestsStr } from '../905/384551';
 import { rq } from '../905/425180';
 import { hS } from '../905/437088';
@@ -60,7 +60,7 @@ import { Gu, ud } from '../905/513035';
 import { Dd, OJ } from '../905/519092';
 import { r as _$$r } from '../905/520829';
 import { $n } from '../905/521428';
-import { zX } from '../905/576487';
+import { VisualBellIcon } from '../905/576487';
 import { Pf } from '../905/590952';
 import { X as _$$X } from '../905/596651';
 import { p as _$$p } from '../905/597320';
@@ -106,7 +106,7 @@ import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/273
 import { fAD, lRB } from '../figma_app/27776';
 import { yo } from '../figma_app/28323';
 import { x0 } from '../figma_app/35887';
-import { B5G, HpJ, oSh, s5A, TBj } from '../figma_app/43951';
+import { WorkspacesCanAdminView, AdminRequestDashOrgInfo, OrgUsersByIdView, OrgInviteModalView, OrgIdpGroupsView } from '../figma_app/43951';
 import { mapFileTypeToEditorType } from '../figma_app/53721';
 import { Yy } from '../figma_app/59509';
 import { G as _$$G, h as _$$h2 } from '../figma_app/124713';
@@ -167,7 +167,7 @@ import { uo } from '../figma_app/990058';
 import { Fb, MB } from '../figma_app/996356';
 import eT from '../vendor/128080';
 import { Ay as _$$Ay } from '../vendor/159563';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useSelector, useDispatch } from 'react-redux';
 let F = U;
 let eg = new class {
   constructor() {
@@ -211,7 +211,7 @@ let eb = registerModal(({
         licenseGroup: e.meta,
         orgId: a
       }))).catch(e => {
-        s(_$$F.enqueue({
+        s(VisualBellActions.enqueue({
           error: !0,
           message: e.message
         }));
@@ -794,7 +794,7 @@ function tv({
             orgId: e.id,
             lastUpdateTimestampOverride: T,
             successCallback: () => {
-              G(_$$F.enqueue({
+              G(VisualBellActions.enqueue({
                 message: s.length <= _$$O ? getI18nString('add_unassigned_members_modal.workspaces_success_message.instant', {
                   numUsers: s.length
                 }) : getI18nString('add_unassigned_members_modal.workspaces_success_message', {
@@ -819,7 +819,7 @@ function tv({
               license_group_id: a
             },
             successCallback: () => {
-              G(_$$F.enqueue({
+              G(VisualBellActions.enqueue({
                 message: s.length <= _$$O ? getI18nString('add_unassigned_members_modal.billing_groups_success_message.instant', {
                   numUsers: s.length
                 }) : getI18nString('add_unassigned_members_modal.billing_groups_success_message', {
@@ -896,7 +896,7 @@ let tf = registerModal(({
   let m = useSelector(({
     licenseGroups: t
   }) => e ? t[e] : void 0);
-  let g = Rs(s5A, {
+  let g = Rs(OrgInviteModalView, {
     workspaceId: t
   }, {
     enabled: !!t
@@ -1148,7 +1148,7 @@ function tT(e) {
 }
 function tL() {
   let e = useSelector(e => e.currentUserOrgId);
-  let t = Rs(TBj, {
+  let t = Rs(OrgIdpGroupsView, {
     orgId: e
   });
   let a = (t.status === 'loading' ? [] : _$$oA(t.data?.org?.orgSamlConfigs) ?? []).map(e => e.idpGroups).flat();
@@ -1691,7 +1691,7 @@ function ar(e) {
 function al(e) {
   let t = function (e) {
     let t = S2().unwrapOr(null);
-    let a = Rs(B5G, {
+    let a = Rs(WorkspacesCanAdminView, {
       orgId: t?.key?.parentId ?? null
     }, {
       enabled: t?.tier === FPlanNameType.ENTERPRISE
@@ -1984,7 +1984,7 @@ let a$ = registerModal(e => {
           planType: _$$OL.ORG,
           planId: orgId
         });
-        m(_$$F.enqueue({
+        m(VisualBellActions.enqueue({
           message: getI18nString('members_table.bulk_seat_change_success', {
             userCount: _
           }),
@@ -2295,7 +2295,7 @@ let a1 = registerModal(e => {
       r(e.data.meta);
     });
   }, [e.orgUser.id]);
-  let l = TA();
+  let l = getUserId();
   let o = useSelector(e => e.selectedView);
   return T8(jsx(bL, {
     width: 'lg',
@@ -2447,16 +2447,16 @@ function a9(e, t, a) {
   XHR.post(`/api/orgs/${t}/resend_email_verifications`, {
     org_user_ids: e
   }).then(() => {
-    a(_$$F.enqueue({
+    a(VisualBellActions.enqueue({
       message: getI18nString('members_table.verification_sent'),
       type: 'orgRoster.resendVerification',
-      icon: zX.CHECK
+      icon: VisualBellIcon.CHECK
     }));
   }, () => {
-    a(_$$F.enqueue({
+    a(VisualBellActions.enqueue({
       message: getI18nString('members_table.cannot_send_verification_email'),
       type: 'orgRoster.resendVerification',
-      icon: zX.EXCLAMATION,
+      icon: VisualBellIcon.EXCLAMATION,
       error: !0
     }));
   });
@@ -2514,7 +2514,7 @@ function nn(e) {
   let [v, f] = useState(!1);
   let [j, y] = useState(!1);
   let [C, T] = useState(new Date().toISOString());
-  let U = Rs(HpJ, {
+  let U = Rs(AdminRequestDashOrgInfo, {
     orgId: e.org.id
   }, {
     enabled: e.selectedView.view === 'licenseGroup'
@@ -2780,10 +2780,10 @@ function nn(e) {
       action: 'Export CSV'
     },
     'onClick': () => {
-      v || (f(!0), e.dispatch(_$$F.enqueue({
+      v || (f(!0), e.dispatch(VisualBellActions.enqueue({
         message: getI18nString('members_table.csv_export.preparing_request'),
         type: 'orgRoster.exportCSV',
-        icon: zX.SPINNER
+        icon: VisualBellIcon.SPINNER
       })), (e.selectedView.view !== 'orgAdminSettings' ? e.selectedView.view === 'licenseGroup' ? eg.getMemberCSVExport({
         billingGroupId: e.filters.licenseGroupFilter
       }) : _$$u.getMemberCSVExport({
@@ -2791,16 +2791,16 @@ function nn(e) {
       }) : _$$G.getMemberCSVExport({
         orgId: e.org.id
       })).then(() => {
-        e.dispatch(_$$F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           message: getI18nString('members_table.csv_export.generating'),
           type: 'orgRoster.exportCSV',
-          icon: zX.CHECK
+          icon: VisualBellIcon.CHECK
         }));
       }, () => {
-        e.dispatch(_$$F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           message: getI18nString('members_table.csv_export.error'),
           type: 'orgRoster.exportCSV',
-          icon: zX.EXCLAMATION,
+          icon: VisualBellIcon.EXCLAMATION,
           error: !0
         }));
       }), f(!1));
@@ -3173,7 +3173,7 @@ export function $$nc0(e) {
     optimisticIds,
     addOptimisticIds
   } = _$$K(sortedUsers);
-  let V = Rs(oSh, {
+  let V = Rs(OrgUsersByIdView, {
     orgId: org.id,
     orgUserIds: optimisticIds
   }, {

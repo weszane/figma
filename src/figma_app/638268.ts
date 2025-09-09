@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useRef, useState, useContext, useEffect, useMemo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { TextDecorationType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { A as _$$A } from "../vendor/850789";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Ui } from "../905/709171";
 import { isInvalidValue } from "../905/216495";
@@ -72,7 +72,7 @@ export let $$O0 = memo(function ({
     value: L
   } : void 0, [L, t, $]);
   w$(X);
-  let q = rf(O, "click", useCallback(e => {
+  let q = useHandleMouseEvent(O, "click", useCallback(e => {
     d?.(e);
   }, [d]));
   let J = useSelector(e => e.library);

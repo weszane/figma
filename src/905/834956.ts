@@ -2,12 +2,12 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, forwardRef } from "react";
 import { findDOMNode, createPortal } from "../vendor/944059";
 import { J as _$$J } from "../905/341359";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import l from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { y as _$$y } from "../905/52479";
 import { Uz } from "../905/63728";
-import { o6, C0, Ht, cZ } from "../figma_app/806412";
+import { RecordingPureComponent, handleKeyboardEvent, handleGenericEvent, handleMouseEvent } from "../figma_app/878298";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { Pg } from "../905/149328";
 import { Point } from "../905/736624";
@@ -40,21 +40,21 @@ let U = "multilevel_dropdown--iconContainer--ApRpE";
 let B = "multilevel_dropdown--icon--MPy7s";
 let V = "multilevel_dropdown--displayContents--MF4yS";
 let G = new KD();
-class z extends o6 {
+class z extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.justClickedToOpen = !1;
     this.delayedMount = new _$$W();
-    this.onKeyDown = C0(this, "keydown", e => {
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       ("Enter" === e.key || " " === e.key) && (e.stopPropagation(), e.preventDefault(), e.nativeEvent.stopImmediatePropagation(), this.props.onSelect(e, !0));
     });
-    this.onFocus = Ht(this, "focus", e => {
+    this.onFocus = handleGenericEvent(this, "focus", e => {
       !this.props.item.showDotDotDotButton && this.props.setActiveOption && this.props.setActiveOption(!1);
     });
-    this.onPointerDown = cZ(this, "mousedown", e => {
+    this.onPointerDown = handleMouseEvent(this, "mousedown", e => {
       this.justClickedToOpen = !1;
     });
-    this.onPointerUp = cZ(this, "mouseup", e => {
+    this.onPointerUp = handleMouseEvent(this, "mouseup", e => {
       if (this.justClickedToOpen) {
         this.justClickedToOpen = !1;
         return;
@@ -63,7 +63,7 @@ class z extends o6 {
       this.props.onSelect(e);
     });
     this.mouseEnterPos = new Point();
-    this.onPointerEnter = cZ(this, "mouseenter", e => {
+    this.onPointerEnter = handleMouseEvent(this, "mouseenter", e => {
       this.justClickedToOpen && (this.mouseEnterPos = new Point(e.clientX, e.clientY));
       this.props.onMouseEnter && this.props.onMouseEnter(e);
     }, {
@@ -73,10 +73,10 @@ class z extends o6 {
       }),
       playbackMetadata: e => e
     });
-    this.onPointerLeave = cZ(this, "mouseleave", e => {
+    this.onPointerLeave = handleMouseEvent(this, "mouseleave", e => {
       this.props.onMouseLeave && this.props.onMouseLeave(e);
     });
-    this.onPointerMove = cZ(this, "mousemove", e => {
+    this.onPointerMove = handleMouseEvent(this, "mousemove", e => {
       this.justClickedToOpen && this.mouseEnterPos && new Point(e.clientX, e.clientY).distanceTo(this.mouseEnterPos) > 5 && (this.justClickedToOpen = !1);
       this.props.onMouseMove && this.props.onMouseMove(e);
     }, {
@@ -281,7 +281,7 @@ function ei(e) {
 function en(e) {
   return e.map(ei).reduce((e, t) => e + t, 0);
 }
-let er = class e extends o6 {
+let er = class e extends RecordingPureComponent {
   constructor(t) {
     super(t);
     this.rootMenuTop = 0;
@@ -382,7 +382,7 @@ let er = class e extends o6 {
       e.stopPropagation();
       this.onKeyDown(e);
     };
-    this.onKeyDown = C0(this, "keydown", e => {
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       if (!this.state.activeItemSubmenuShown) {
         this.props.onKeyDown && this.props.onKeyDown(e);
         let t = this.currentVisibleItems();
@@ -578,7 +578,7 @@ let er = class e extends o6 {
       let t = e.some(e => e && (e.isChecked || e.isChildChecked || e.alwaysShowCheckMarkOffset || this.props.alwaysShowCheckMarkOffset));
       return e.map((e, i) => this.renderItem(e, i, t));
     };
-    this.visibleItemsForMaxHeight = xx(e => this.filterHiddenItems(e));
+    this.visibleItemsForMaxHeight = memoizeByArgs(e => this.filterHiddenItems(e));
     this.currentVisibleItems = () => this.visibleItemsForMaxHeight(this.props.items);
     this.updateSubmenuPosition = () => {
       let e;

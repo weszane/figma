@@ -1,7 +1,7 @@
 import { Fullscreen } from "../figma_app/763686";
 import { DS } from "../figma_app/387100";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { I2 } from "../905/70369";
 import { createOptimistThunk } from "../905/350402";
 import { Aw } from "../figma_app/383828";
@@ -36,7 +36,7 @@ export let $$h1 = createOptimistThunk(e => {
       if (!n || !n.symbolId || n.symbolId !== t) return !1;
     }
     return !0;
-  }(t.mirror.sceneGraph, i) && g(e) : (A(), g(e))) : f(t.mirror.sceneGraph, i) && e.dispatch(F.enqueue({
+  }(t.mirror.sceneGraph, i) && g(e) : (A(), g(e))) : f(t.mirror.sceneGraph, i) && e.dispatch(VisualBellActions.enqueue({
     type: c,
     message: getI18nString("design_systems.actions.variant_changed"),
     button: {
@@ -48,7 +48,7 @@ export let $$h1 = createOptimistThunk(e => {
   p = i;
 });
 function g(e) {
-  e.dispatch(F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: c
   }));
   u = null;

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useId } from "react";
-import { useDispatch } from "../vendor/514228";
-import { Ay } from "../905/612521";
+import { useDispatch } from "react-redux";
+import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { s as _$$s } from "../905/328136";
 import { B } from "../905/759157";
@@ -11,7 +11,7 @@ import { showModalHandler } from "../905/156213";
 import { Ro } from "../figma_app/564095";
 import { BK } from "../905/848862";
 import { sZ } from "../905/845253";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { FMemberRoleType } from "../figma_app/191312";
 import { D6, A8 } from "../figma_app/465071";
 import { w as _$$w } from "../figma_app/883622";
@@ -21,7 +21,7 @@ import { YW, ho } from "../figma_app/870683";
 import { H } from "../figma_app/441663";
 import { j } from "../905/834956";
 export function $$S2() {
-  let e = TA();
+  let e = getUserId();
   let t = sZ();
   let i = D6("useCanAdminOrgQuery");
   return useMemo(() => i.transform(i => !!t && !!e && A8(i, FMemberRoleType.ADMIN)), [i, t, e]);
@@ -36,7 +36,7 @@ export function $$C1(e) {
     targetRect
   } = e.dropdownData;
   let r = useDispatch();
-  let h = TA();
+  let h = getUserId();
   let g = $$S2();
   let _ = _$$s();
   let A = B();
@@ -61,7 +61,7 @@ export function $$C1(e) {
   }), T.push({
     displayText: getI18nString("file_browser.open_in_new_tab"),
     callback: (e, i, n, r) => {
-      publishedResource.is_widget ? Ay.redirect(YW(publishedResource.id), "_blank") : Ay.redirect(ho(publishedResource.id), "_blank");
+      publishedResource.is_widget ? customHistory.redirect(YW(publishedResource.id), "_blank") : customHistory.redirect(ho(publishedResource.id), "_blank");
     }
   }), T.push(_$$w));
   g.unwrapOr(!1) && ((Ro(publishedResource, h ?? "") || publishedResource.creator.id === h) && (C.push(KM.PUBLISH), T.push({

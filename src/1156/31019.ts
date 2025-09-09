@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { AIScopeHandler } from '../905/189185';
 import { O } from '../905/273186';
-import { F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
-import { iZ } from '../905/372672';
+import { selectCurrentUser } from '../905/372672';
 import { analyticsEventManager } from '../905/449184';
 import { q } from '../905/457575';
 import { getFeatureFlags } from '../905/601108';
@@ -23,7 +23,7 @@ import { q5 } from '../figma_app/516028';
 import { lV } from '../figma_app/617606';
 import { J } from '../figma_app/710077';
 import { Fullscreen } from '../figma_app/763686';
-import { useDispatch } from '../vendor/514228';
+import { useDispatch } from 'react-redux';
 var A = (e => (e.FAILED_TO_RETRIEVE_CODE_FILES = 'FAILED_TO_RETRIEVE_CODE_FILES', e))(A || {});
 class T extends Error {
   constructor(e, t) {
@@ -41,7 +41,7 @@ export function $$L0({
   clientLifecycleId: a,
   restoreToVersionTitle: l
 }) {
-  let o = iZ();
+  let o = selectCurrentUser();
   let c = q5();
   let d = c?.key || null;
   let x = useDispatch();
@@ -52,14 +52,14 @@ export function $$L0({
       if (d && e && o && t && c?.canEdit) {
         return async () => {
           if (f) {
-            x(F.enqueue({
+            x(VisualBellActions.enqueue({
               message: getI18nString('figmake.chat.version_restore_in_progress')
             }));
             return;
           }
           try {
             b(!0);
-            x(F.enqueue({
+            x(VisualBellActions.enqueue({
               message: getI18nString('figmake.chat.a11y_restoring_a_previous_version'),
               role: 'status'
             }));
@@ -84,7 +84,7 @@ export function $$L0({
               persistentEntityId: s,
               clientLifecycleId: a
             });
-            x(F.enqueue({
+            x(VisualBellActions.enqueue({
               message: getI18nString('figmake.chat.a11y_restoring_version_completed'),
               role: 'status'
             }));
@@ -100,7 +100,7 @@ export function $$L0({
               persistentEntityId: s,
               clientLifecycleId: a
             });
-            x(F.enqueue({
+            x(VisualBellActions.enqueue({
               message: getI18nString('figmake.chat.version_restore_failed'),
               error: !0
             }));

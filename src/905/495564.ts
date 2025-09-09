@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { i } from "../905/890459";
 export function $$a0(e) {
   let {

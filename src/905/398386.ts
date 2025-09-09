@@ -1,12 +1,12 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { tH, H4 } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { R } from "../905/687502";
 import { y4 } from "../figma_app/298277";
 import { _6 } from "../figma_app/386952";
@@ -34,10 +34,10 @@ export function $$_0(e) {
     containerStyle: "file_browser_page_view--tabletOptimizedContainer--EYJ4F file_browser_page_view--container--ktTUu",
     metaContainerStyle: "file_browser_page_view--tabletOptimizedMetaContainer--zpv8C file_browser_page_view--metaContainer--0kBjx"
   } : {
-    mobileToolBarSpacerStyle: "file_browser_page_view--mobileToolBarSpacer--bfkn5",
-    containerStyle: "file_browser_page_view--container--ktTUu",
-    metaContainerStyle: "file_browser_page_view--metaContainer--0kBjx"
-  };
+      mobileToolBarSpacerStyle: "file_browser_page_view--mobileToolBarSpacer--bfkn5",
+      containerStyle: "file_browser_page_view--container--ktTUu",
+      metaContainerStyle: "file_browser_page_view--metaContainer--0kBjx"
+    };
   let u = _6();
   let _ = useDispatch();
   let [A, y] = useState(!1);
@@ -66,7 +66,7 @@ export function $$_0(e) {
       boundaryKey: `FileBrowserPageToolbar${I}`,
       fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
       onError: () => {
-        _(F.enqueue({
+        _(VisualBellActions.enqueue({
           message: "Something went wrong.",
           type: "react-error"
         }));

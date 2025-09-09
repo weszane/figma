@@ -14,7 +14,7 @@ import { Ay } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { gI } from "../figma_app/396464";
 import { PU, aK } from "../figma_app/334505";
-import { wr } from "../figma_app/741237";
+import { clearSelection } from "../figma_app/741237";
 import { Ib } from "../905/129884";
 import { I9 } from "../figma_app/151869";
 import { oW } from "../905/675859";
@@ -171,7 +171,7 @@ export function $$R0({
   let T = $$L2(t);
   let N = d.size > 0;
   let w = useCallback(() => {
-    E && h && (I && Fullscreen?.findMissingFontsAndShowPopoverWithScope(PageSelectionType.CURRENT_SELECTION), E.forEach(e => d.add(e.guid)), c(d), r(e, d), wr());
+    E && h && (I && Fullscreen?.findMissingFontsAndShowPopoverWithScope(PageSelectionType.CURRENT_SELECTION), E.forEach(e => d.add(e.guid)), c(d), r(e, d), clearSelection());
   }, [h, r, e, d, E, I]);
   useEffect(() => {
     let e = (E ? E.map(e => e.guid) : []).every(e => d.has(e));

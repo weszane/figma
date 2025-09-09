@@ -3,7 +3,7 @@ import { A } from "../905/920142";
 import { Q } from "../905/467310";
 import { D } from "../905/347702";
 import { FOrganizationType } from "../figma_app/191312";
-import { BXv } from "../figma_app/43951";
+import { BillingTrialForResource } from "../figma_app/43951";
 import { A as _$$A } from "../905/475480";
 import { Z1 } from "../905/401885";
 var n;
@@ -22,7 +22,7 @@ var n;
     return !!t?.validated_at || !!t?.validatedAt;
   });
 })(n || (n = {}));
-export let $$p0 = createRemovableAtomFamily(e => Z1(BXv.Query({
+export let $$p0 = createRemovableAtomFamily(e => Z1(BillingTrialForResource.Query({
   resourceId: e,
   resourceType: FOrganizationType.ORG
 }), e => {

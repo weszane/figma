@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
@@ -25,7 +25,7 @@ import { C as _$$C } from "../905/520159";
 import { Hg, Bs } from "../905/672745";
 import { A as _$$A } from "../905/920142";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { nl, Pf } from "../905/590952";
 import { h as _$$h } from "../905/973388";
 import { sf } from "../905/929976";
@@ -50,7 +50,7 @@ import { F as _$$F2 } from "../905/224";
 import { Ct } from "../figma_app/199513";
 import { b as _$$b } from "../905/388233";
 import { N as _$$N2 } from "../figma_app/55043";
-import { SWF } from "../figma_app/43951";
+import { ProjectByIdForFolderSettings } from "../figma_app/43951";
 import { Bi } from "../905/652992";
 import { Ib } from "../905/129884";
 import { DV } from "../905/739964";
@@ -305,7 +305,7 @@ let Y = registerModal(function (e) {
                 }));
               } : () => {
                 if (!e.resourceConnection.projectTeamId) {
-                  m(_$$F.enqueue({
+                  m(VisualBellActions.enqueue({
                     message: getI18nString("resource_connection.visual_bell.generic_error")
                   }));
                   return;
@@ -333,7 +333,7 @@ let Y = registerModal(function (e) {
 }, "ResourceConnectManageModal");
 let eo = (e, t) => {
   let i = YO(e);
-  let n = Rs(SWF, {
+  let n = Rs(ProjectByIdForFolderSettings, {
     projectId: e
   });
   let a = useDispatch();
@@ -575,7 +575,7 @@ let $$el0 = registerModal(function (e) {
     folderId
   } = e;
   let u = j6();
-  let m = Rs(SWF, {
+  let m = Rs(ProjectByIdForFolderSettings, {
     projectId: folderId
   });
   let g = m.data?.project;

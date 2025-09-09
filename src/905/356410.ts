@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import r, { createContext, useState, useEffect, useContext, useMemo, useReducer } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import l from "classnames";

@@ -1,13 +1,13 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { VariableResolvedDataType, Fullscreen, VariableDataType, OperationType, PropertyScope } from "../figma_app/763686";
 import { sH } from "../905/805904";
 import { Yi, Oe } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { _X, V5, hu } from "../figma_app/260445";
 import { u3, y$ } from "../figma_app/152690";
 import { Io, MH } from "../figma_app/394327";
@@ -102,7 +102,7 @@ export function $$E0({
       assertNotNullish(sH(i));
       updateVariableConsumption(y$(VariableResolvedDataType.STRING, i));
       t?.();
-    } else clearVariableConsumption(zk.YES);
+    } else clearVariableConsumption(yesNoTrackingEnum.YES);
     fullscreenValue.triggerAction("leave-edit-mode");
   }
   return jsxs(_X, {
@@ -126,7 +126,7 @@ function x() {
     consumedVariable,
     updateVariableConsumption: useCallback(async t => {
       if (!t) {
-        clearVariableConsumption(zk.YES);
+        clearVariableConsumption(yesNoTrackingEnum.YES);
         return;
       }
       let i = await e(Oe(t));

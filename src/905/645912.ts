@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { SlideConstantsCppBindings, Fullscreen, InteractionCpp } from "../figma_app/763686";
@@ -11,14 +11,14 @@ import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { CZ } from "../905/294085";
 import { hO, G4, U2, d3, eQ } from "../figma_app/545293";
 import { g as _$$g, o as _$$o } from "../905/566160";
 import { fullscreenValue } from "../figma_app/455680";
 import { dh } from "../figma_app/186343";
 import { ze } from "../figma_app/516028";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { $z } from "../figma_app/297733";
 import { XG } from "../figma_app/98578";
 import { eg } from "../figma_app/297822";
@@ -58,7 +58,7 @@ export function $$L0(e, t) {
   let L = useAtomWithSubscription(hO.sortByAtom);
   let F = X();
   let M = useAtomWithSubscription(dd);
-  let j = TA();
+  let j = getUserId();
   let U = dh();
   let B = useAtomWithSubscription(ze);
   let V = Jb();
@@ -138,7 +138,7 @@ export function $$L0(e, t) {
       });
     } catch (e) {
       reportError(_$$e.ML_PLATFORM, Error("Fragment search insert error: " + e.message));
-      i(_$$F.enqueue({
+      i(VisualBellActions.enqueue({
         message: getI18nString("fragment_search.insert_toast_error"),
         error: !0
       }));

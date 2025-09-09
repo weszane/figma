@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback, useId } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { T as _$$T } from "../905/909590";
 import { bL, l9, mc, c$ } from "../905/493196";
@@ -20,9 +20,9 @@ import { um } from "../905/14223";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { KQ as _$$KQ } from "../figma_app/475472";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FPermissionLevelType, FAccessLevelType, FBasicPermissionType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
-import { Lqr } from "../figma_app/43951";
+import { TeamCreationWorkspaceView } from "../figma_app/43951";
 import { H_ } from "../figma_app/336853";
 import { C1 } from "../figma_app/12796";
 import { t9, yI } from "../905/915142";
@@ -50,7 +50,7 @@ function Q(e) {
   let i = useSelector(e => e.orgById);
   let l = useSelector(e => e.dropdownShown);
   let o = useSelector(e => e.autocomplete);
-  let d = iZ();
+  let d = selectCurrentUser();
   let c = t => {
     let a = e.currentOrgId ? i[e.currentOrgId] : null;
     return t9(t, a, n);
@@ -106,7 +106,7 @@ export let $$K0 = registerModal(function (e) {
   let t = useDispatch();
   let a = useSelector(e => e.currentUserOrgId) ?? "";
   let N = useSelector(e => e.orgById)[a];
-  let R = iZ();
+  let R = selectCurrentUser();
   let k = useSelector(e => e.orgDomains);
   let [P, D] = useState(!0);
   useEffect(() => {
@@ -118,7 +118,7 @@ export let $$K0 = registerModal(function (e) {
   useEffect(() => {
     t(um());
   }, [t]);
-  let V = Rs(Lqr({
+  let V = Rs(TeamCreationWorkspaceView({
     orgId: a
   }));
   let K = D6("TeamCreationModal");

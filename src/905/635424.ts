@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { A as _$$A } from "../905/410311";
 import { trackEventAnalytics } from "../905/449184";
 import { B } from "../905/714743";

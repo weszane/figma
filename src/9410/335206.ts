@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen, DesignGraphElements } from "../figma_app/763686";
 import { permissionScopeHandler as _$$l, scopeAwareFunction } from "../905/189185";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { qC } from "../figma_app/972736";
@@ -186,7 +186,7 @@ function B(e) {
       description: e.description,
       onClick: S,
       iconComponent: e.icon,
-      recordingKey: Pt("inserts", "more", e.recordingKey)
+      recordingKey: generateRecordingKey("inserts", "more", e.recordingKey)
     }), jsx(_$$M, {
       dragState,
       icon: h ? void 0 : e.icon
@@ -223,7 +223,7 @@ export function $$K7() {
       e();
     },
     iconComponent: Qp(),
-    recordingKey: Pt("inserts", "more", "stamp")
+    recordingKey: generateRecordingKey("inserts", "more", "stamp")
   });
 }
 export function $$H1() {
@@ -238,7 +238,7 @@ export function $$H1() {
       });
     },
     iconComponent: G$(),
-    recordingKey: Pt("inserts", "more", "comments")
+    recordingKey: generateRecordingKey("inserts", "more", "comments")
   });
 }
 export function $$z6() {
@@ -257,7 +257,7 @@ export function $$V5() {
     description: getI18nString("whiteboard.inserts.quick_actions_v2_description"),
     onClick: e,
     iconComponent: jsx(_$$j, {}),
-    recordingKey: Pt("inserts", "more", "quick-actions-v2")
+    recordingKey: generateRecordingKey("inserts", "more", "quick-actions-v2")
   });
 }
 export function $$W0() {

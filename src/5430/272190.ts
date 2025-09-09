@@ -1,6 +1,6 @@
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
@@ -32,7 +32,7 @@ export let $$u0 = createOptimistThunk(async (e, t, {
     let d = a.data.meta;
     desktopAPIInstance ? e.dispatch(RK({
       rawInput: d
-    })) : Ay.unsafeRedirect(d);
+    })) : customHistory.unsafeRedirect(d);
     setTimeout(() => {
       t.callback(!0);
     }, 1e3);

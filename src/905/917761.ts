@@ -5,14 +5,14 @@ import { Rs } from "../figma_app/288654";
 import { I7 } from "../figma_app/594947";
 import { kh } from "../905/86266";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType } from "../figma_app/191312";
-import { RcX } from "../figma_app/43951";
+import { OrgSharedSettingView } from "../figma_app/43951";
 import { No, H3 } from "../figma_app/465071";
 import { Sm } from "../figma_app/482728";
 import { c as _$$c } from "../905/606579";
 let f = e => {
-  let t = Rs(RcX({
+  let t = Rs(OrgSharedSettingView({
     orgId: e ?? null
   }), {
     enabled: !!e
@@ -35,7 +35,7 @@ export function $$_0(e, t) {
   let A = _$$c();
   let y = kh();
   let b = q5();
-  let v = iZ();
+  let v = selectCurrentUser();
   let I = useRef(!1);
   let E = y?.orgID ? _getConfig : getConfig;
   let x = useCallback(() => {

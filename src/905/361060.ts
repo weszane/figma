@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { c$ } from "../figma_app/236327";
 import { B } from "../905/714743";
 import { oB, j7 } from "../905/929976";

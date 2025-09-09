@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { dm } from "../905/535224";
 import { nR, $$ } from "../figma_app/637027";
 import { B } from "../905/714743";

@@ -1,416 +1,415 @@
-import { g as _$$g } from "../905/687265";
-import _require4 from "../951/130951";
-import _require3 from "../1971/941971";
-import _require2 from "../9756/399756";
-import _require from "../905/802325";
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { memo, useState, useCallback, useEffect, useRef, useMemo, createContext, useContext, useLayoutEffect, useReducer, lazy, Suspense, useDeferredValue, forwardRef, createRef, useId } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { i as _$$i } from "../905/718764";
-import { AppStateTsApi, ColorFormatEnum, DesignGraphElements, FirstDraftHelpers, AssetSource, Fullscreen, ComponentPropsAiCPPBindings, SceneGraphHelpers, UiParserHelpers, ImageToolsBindings, ActionType, DesignToBuzzHelpers, LayoutTabType, ContentFillNudgesStateBindings } from "../figma_app/763686";
-import { atom, atomStoreManager, useAtomValueAndSetter, createLocalStorageAtom, createRemovableAtomFamily, useAtomWithSubscription, AY, Xr } from "../figma_app/27355";
-import { tH as _$$tH, H4 } from "../905/751457";
-import { F as _$$F } from "../905/302958";
-import { PE, GM } from "../figma_app/251115";
-import { I as _$$I } from "../figma_app/827540";
-import { gB, QT, Ct } from "../9410/517270";
-import { _V, KY, el as _$$el, dL as _$$dL } from "../figma_app/322845";
-import { globalPerfTimer } from "../905/542194";
-import { h as _$$h } from "../905/207101";
-import { Kh } from "../figma_app/370763";
-import { s as _$$s } from "../figma_app/523506";
-import { V2, cW, ZT, QZ, f6, wW, $1, FG, AR, q3, ll as _$$ll, U6 } from "../figma_app/844435";
-import { h as _$$h2 } from "../9410/146161";
-import { dd as _$$dd, Lk, Rt, Q8, JB, IH, P_, jh, Bu, rE as _$$rE } from "../figma_app/604494";
-import { Hz, H5, Ag } from "../905/235578";
-import { JT, bL, Oy, ZM, vA, wj, jb, Nf, GX, C5 } from "../figma_app/930214";
-import { cq } from "../905/794154";
-import { $L, mP, Sq } from "../figma_app/737746";
-import { x as _$$x } from "../905/179739";
-import { Ev, eg as _$$eg, HD, NH, i6 as _$$i2, lw as _$$lw, F$, Mq, vI, mi } from "../figma_app/297822";
-import { kz, s3 as _$$s2 } from "../figma_app/171177";
-import { p as _$$p } from "../9410/363670";
-import { throwTypeError } from "../figma_app/465776";
-import { lQ as _$$lQ } from "../905/934246";
-import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
-import { Uz, xH } from "../905/63728";
-import { g as _$$g2 } from "../905/880308";
-import { s as _$$s3 } from "../cssbuilder/589278";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { T1, UF, lc as _$$lc, c as _$$c, G4, Hl } from "../figma_app/545293";
-import { aq as _$$aq } from "../figma_app/399472";
-import { ze, tB as _$$tB, tS as _$$tS, q5, Hu } from "../figma_app/516028";
-import { o3 as _$$o, nt as _$$nt } from "../905/226610";
-import { Eh } from "../figma_app/12796";
-import { FX } from "../9410/67768";
-import { I as _$$I2 } from "../figma_app/130633";
-import { b as _$$b } from "../figma_app/598297";
-import { eH as _$$eH } from "../figma_app/318590";
-import { wC, JT as _$$JT, OZ, UW, i0 as _$$i3 } from "../figma_app/632248";
-import { debugState } from "../905/407919";
-import { f as _$$f } from "../figma_app/109947";
-import { ES, TC } from "../905/198599";
-import { _M, Dl, SX, Q0, as as _$$as, hm, zQ } from "../905/487011";
-import { Sn, Jc, BY } from "../905/946805";
-import { B as _$$B, b as _$$b2 } from "../905/222272";
-import { n as _$$n } from "../905/895449";
-import { vj, Jj } from "../figma_app/883990";
-import { fu, oz as _$$oz, c0 } from "../figma_app/538006";
-import { iC as _$$iC, Do, mr } from "../figma_app/169086";
-import { R as _$$R } from "../1250/835893";
-import { e as _$$e2 } from "../905/149844";
-import { v as _$$v } from "../1250/821962";
-import { b as _$$b3 } from "../905/946806";
-import { getFeatureFlags } from "../905/601108";
-import { A as _$$A } from "../vendor/90566";
-import { reportError } from "../905/11";
-import { PN } from "../figma_app/897289";
-import { S as _$$S } from "../figma_app/420927";
-import { B as _$$B2 } from "../905/714743";
-import { sx as _$$sx } from "../905/941192";
-import { Q7 } from "../905/15667";
-import { Zj, Dz, WJ } from "../figma_app/847915";
-import { TW } from "../figma_app/567902";
-import { YT } from "../figma_app/506549";
-import { VU } from "../905/625959";
-import { UK } from "../figma_app/740163";
-import { eY as _$$eY, KH, f4, p8 } from "../figma_app/722362";
-import { sZ as _$$sZ, dq } from "../905/845253";
-import { getObservableOrFallback } from "../figma_app/84367";
-import { injectHtmlOrUiFiles, PluginPermissions, getPluginByFileId, filterArrayByEditorType, getCurrentPluginVersion } from "../figma_app/300692";
-import { R as _$$R2 } from "../figma_app/612938";
-import { l as _$$l } from "../905/202425";
-import { ManifestEditorType, isPrivatePlugin, hasLocalFileId, manifestContainsWidget } from "../figma_app/155287";
-import { Ib } from "../905/129884";
-import { V as _$$V } from "../905/480825";
-import { vg, Yh, c1 } from "../figma_app/357047";
-import { x0, fJ } from "../figma_app/963341";
-import { _ as _$$_, h as _$$h3 } from "../9410/755019";
-import { EG, ah as _$$ah, J8, Hr } from "../figma_app/995580";
-import { kp, BB, Z7, Sk, PV } from "../figma_app/98578";
-import { selectWithShallowEqual } from "../905/103090";
-import { filterNotNullish, shuffle } from "../figma_app/656233";
-import { U as _$$U } from "../905/103637";
-import { K as _$$K } from "../905/799615";
-import { T as _$$T } from "../905/336775";
-import { V as _$$V2 } from "../905/900932";
-import { u as _$$u } from "../905/866761";
-import ez from "../vendor/260986";
-import { E as _$$E } from "../905/984674";
-import { XE, ow as _$$ow, E3 as _$$E2, m0, my, lg as _$$lg } from "../figma_app/976749";
-import { getSingletonSceneGraph } from "../905/700578";
-import { logInfo, logWarning } from "../905/714362";
-import { Ay } from "../figma_app/432652";
-import { z as _$$z } from "../905/239603";
-import { qp } from "../905/977779";
-import { eD as _$$eD, ET } from "../figma_app/646357";
-import { Wg, YG, Ow } from "../905/921418";
-import { pS } from "../905/588985";
-import { E9 } from "../905/851937";
-import { wY, mv, iu as _$$iu } from "../905/753206";
-import { h as _$$h4 } from "../figma_app/198885";
-import { vx, t_ as _$$t_ } from "../905/91038";
-import { isDesignOrIllustration, FEditorType } from "../figma_app/53721";
-import { o8 as _$$o2 } from "../905/622391";
-import { gH } from "../figma_app/985200";
-import { P as _$$P } from "../905/545265";
-import { APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
-import { T5, D6, X$ } from "../figma_app/465071";
-import { wo } from "../figma_app/109130";
-import { b as _$$b4 } from "../figma_app/873852";
-import { z6, mX, jk, hc } from "../figma_app/846841";
-import { Qx, xA } from "../905/742325";
-import { B as _$$B3, t as _$$t2 } from "../figma_app/560453";
-import { s as _$$s4 } from "../905/234042";
-import { k as _$$k2 } from "../905/443820";
-import { m as _$$m } from "../905/270214";
-import { V as _$$V3 } from "../905/849455";
-import { x as _$$x2 } from "../7222/491815";
-import { C as _$$C } from "../905/47358";
-import { Z as _$$Z } from "../905/279476";
-import { W as _$$W } from "../9410/92046";
-import { g as _$$g3 } from "../905/125190";
-import { _ as _$$_2 } from "../7021/243271";
-import { N as _$$N } from "../vendor/930821";
-import { P as _$$P2 } from "../vendor/348225";
-import { hideModalHandler, showModalHandler, updateModal, popModalStack } from "../905/156213";
-import { iZ as _$$iZ, TA } from "../905/372672";
-import { J as _$$J } from "../905/273120";
-import { r as _$$r } from "../905/189361";
-import { x as _$$x3 } from "../905/773818";
-import { q as _$$q } from "../905/516087";
-import { a as _$$a } from "../figma_app/380422";
-import { U as _$$U2 } from "../figma_app/751728";
-import { $n } from "../905/521428";
-import { Point } from "../905/736624";
-import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { Ao } from "../905/748636";
-import { V as _$$V4 } from "../905/453354";
-import { ZC } from "../figma_app/39751";
-import { e as _$$e3 } from "../905/383776";
-import { ZO } from "../figma_app/88239";
-import { Sh } from "../figma_app/889655";
-import { xm, _g, oG as _$$oG } from "../figma_app/826288";
-import { Vr, I9 } from "../figma_app/151869";
-import iu from "../vendor/223926";
-import ih from "../vendor/104014";
-import { C as _$$C2 } from "../figma_app/444297";
-import { ImageToolsBindings } from "../figma_app/13528";
-import { Tv } from "../figma_app/311375";
-import { _p } from "../figma_app/297957";
-import { n as _$$n2 } from "../905/548236";
-import { y as _$$y } from "../905/705736";
-import { ou as _$$ou } from "../905/942991";
-import { W as _$$W2 } from "../5132/887999";
-import { xk } from "@stylexjs/stylex";
-import { rN as _$$rN, VY } from "../9410/607888";
-import { $ as _$$$ } from "../905/922405";
-import { Zr } from "../figma_app/678782";
-import { f6 as _$$f2 } from "../figma_app/915202";
-import { FX as _$$FX } from "../figma_app/291792";
-import { E as _$$E3 } from "../905/53857";
-import { Bc } from "../9410/255781";
-import { j as _$$j } from "../9410/853982";
-import { bG } from "../1250/506456";
-import { R as _$$R4 } from "../9410/46722";
-import { T as _$$T2 } from "../905/2124";
-import { B as _$$B4 } from "../9410/958580";
-import { s as _$$s5 } from "../figma_app/478542";
-import { g as _$$g4 } from "../9410/995605";
-import { $ as _$$$2 } from "../905/411599";
-import { X as _$$X } from "../905/647103";
-import { _ as _$$_3 } from "../905/862468";
-import { T as _$$T3 } from "../905/632137";
-import { B as _$$B5 } from "../905/872019";
-import { c as _$$c2 } from "../905/752260";
-import { f as _$$f3 } from "../905/555062";
-import { O as _$$O } from "../905/587457";
-import { r as _$$r2 } from "../figma_app/6042";
-import { O as _$$O2 } from "../figma_app/114128";
-import { $ as _$$$3 } from "../figma_app/183557";
-import { q8, dZ } from "../figma_app/459490";
-import { Ay as _$$Ay2 } from "../905/281495";
-import { Zh } from "../figma_app/2590";
-import { r6 as _$$r3 } from "../905/507950";
-import { J as _$$J2 } from "../905/494216";
-import { e as _$$e4 } from "../905/462154";
-import { bt } from "../figma_app/688194";
-import { mD } from "../figma_app/955528";
-import { O as _$$O3 } from "../9410/301359";
-import { f as _$$f4 } from "../9410/391621";
-import { hQ, J7, hG } from "../9410/512956";
-import { bJ } from "../figma_app/318123";
-import { RL, qy, wj as _$$wj, B3, lc as _$$lc2, zM, Ag as _$$Ag } from "../figma_app/862289";
-import { F as _$$F2 } from "../figma_app/757236";
-import { w as _$$w } from "../figma_app/588564";
-import { J as _$$J3, $ as _$$$4 } from "../9410/589087";
-import { K as _$$K2 } from "../9410/565440";
-import { s as _$$s6, w as _$$w2 } from "../905/286488";
-import { A as _$$A2 } from "../905/721854";
-import { Ay as _$$Ay3 } from "../figma_app/948389";
-import { $J, NI, dM as _$$dM, F9, bp, sd as _$$sd, o2 as _$$o3 } from "../905/278499";
-import { E as _$$E4, f as _$$f5 } from "../905/690713";
-import { is as _$$is, Oq } from "../905/904596";
-import { A as _$$A3 } from "../905/296182";
-import { F as _$$F3 } from "../905/382217";
-import { Rz } from "../905/990497";
-import { T as _$$T4 } from "../905/172092";
-import { zY, S6 } from "../figma_app/664693";
-import { G1 } from "../figma_app/691470";
-import { nearlyEqual } from "../figma_app/492908";
-import { t as _$$t3 } from "../905/150656";
-import { oB as _$$oB, qN, w_ } from "../figma_app/273493";
-import { permissionScopeHandler as _$$l2 } from "../905/189185";
-import { zN, k9 } from "../905/19536";
-import rF from "classnames";
-import { ei as _$$ei } from "../figma_app/9054";
-import { A as _$$A4 } from "../vendor/21595";
-import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
-import { DA, UE, tK as _$$tK, F_ } from "../figma_app/191804";
-import { Rh } from "../905/485103";
-import { Pt as _$$Pt } from "../figma_app/806412";
-import { YJ } from "../figma_app/50224";
-import { Db, AR as _$$AR } from "../figma_app/705029";
-import { getSessionStorage } from "../905/657224";
-import { loadPluginFont } from "../905/426868";
-import { z as _$$z2 } from "../figma_app/153551";
-import { YB, nd as _$$nd, $L as _$$$L, uq, oP as _$$oP, HS } from "../figma_app/857146";
-import { tb as _$$tb, l9 as _$$l3, N_ } from "../9410/234038";
-import { P as _$$P3, t as _$$t4 } from "../9410/636108";
-import { lH as _$$lH, Dk, lg as _$$lg2 } from "../figma_app/18582";
-import { X6, qO } from "../figma_app/234690";
-import { BY as _$$BY, uP, Mz, k5, jR, rO as _$$rO, nF as _$$nF } from "../figma_app/541950";
-import { lu as _$$lu } from "../figma_app/846140";
-import { w as _$$w3 } from "../figma_app/774411";
-import { q as _$$q2 } from "../905/196201";
-import { Og } from "../figma_app/109758";
-import { fv } from "../9410/215872";
-import { Dp, WX, TM } from "../9410/423538";
-import { Vh } from "../9410/671180";
-import { SV, gC } from "../9410/483857";
-import { sF as _$$sF } from "../figma_app/193952";
-import { fullscreenValue } from "../figma_app/455680";
-import { KK, h8 } from "../figma_app/144974";
-import { XG, nj as _$$nj } from "../figma_app/360824";
-import { k as _$$k3 } from "../905/788559";
-import { Vm, ks } from "../figma_app/838407";
-import { sI as _$$sI } from "../9410/797086";
-import n_ from "../vendor/950573";
-import { bL as _$$bL, c$ } from "../905/867927";
-import { q as _$$q3 } from "../905/932270";
-import { Label } from "../905/270045";
-import { A as _$$A5 } from "../905/920165";
-import { K as _$$K3 } from "../905/443068";
-import { Z as _$$Z2 } from "../905/606826";
-import { a as _$$a2 } from "../905/192547";
-import { C as _$$C3 } from "../905/520159";
-import { DP } from "../905/640017";
-import { D8 } from "../905/511649";
-import { H as _$$H } from "../905/286442";
-import { _ as _$$_4 } from "../905/614936";
-import { L0, MQ } from "../905/479155";
-import { k as _$$k4 } from "../905/341245";
-import { A as _$$A6 } from "../905/780920";
-import { F as _$$F4 } from "../905/989956";
-import { cd, ZI } from "../figma_app/650460";
-import { jR as _$$jR, N0, k0 as _$$k5, RO, Sb } from "../figma_app/728075";
-import { ER, NT, Ne, Xy, jF, X4, K4, pz } from "../figma_app/702372";
-import { wY as _$$wY } from "../figma_app/708845";
-import { Um } from "../905/848862";
-import { QS, dt as _$$dt, VA, he, fC } from "../figma_app/259578";
-import { p as _$$p2 } from "../figma_app/284426";
-import { e as _$$e5 } from "../905/987482";
-import { T as _$$T5 } from "../905/273689";
-import { A as _$$A7 } from "../svg/499035";
-import { A as _$$A8 } from "../9410/63984";
-import ay from "../vendor/267721";
-import { _i, iR as _$$iR, yZ } from "../figma_app/476572";
-import { Y as _$$Y } from "../905/830372";
-import { Z as _$$Z3 } from "../905/829242";
-import { Y6, NY, CN, FL, Vl, MR, w8 } from "../figma_app/347120";
-import { x as _$$x4 } from "../9410/392104";
-import { T as _$$T6 } from "../figma_app/949105";
-import { iK as _$$iK } from "../9410/845608";
-import { B as _$$B6 } from "../905/388732";
-import { Rw, zX } from "../905/576487";
-import { xF } from "../figma_app/566517";
-import { xk as _$$xk, DP as _$$DP } from "../figma_app/612859";
-import { Fk } from "../figma_app/167249";
-import { a as _$$a3 } from "../905/290931";
-import { eb as _$$eb, zs, qi } from "../9410/58505";
-import { bL as _$$bL2 } from "../905/911410";
-import { vo, Y9, hE, nB as _$$nB } from "../figma_app/272243";
-import { f as _$$f6 } from "../905/167712";
-import { A as _$$A9 } from "../905/891805";
-import { i as _$$i4 } from "../9410/157320";
-import { v as _$$v2 } from "../905/318279";
-import { v as _$$v3 } from "../905/981847";
-import { o as _$$o4 } from "../905/40561";
-import { N as _$$N2 } from "../905/438674";
-import { EJ, $M } from "../figma_app/930338";
-import { dP as _$$dP } from "../figma_app/119475";
-import { Dm } from "../figma_app/8833";
-import { z as _$$z3 } from "../905/654860";
-import { y as _$$y2 } from "../905/263077";
-import { y as _$$y3, O as _$$O4 } from "../figma_app/13082";
-import { t as _$$t5 } from "../905/605191";
-import { WS, jp } from "../905/370597";
-import { LZ, oy as _$$oy } from "../figma_app/964367";
-import { sha1HexFromBytes } from "../905/125019";
-import { UD } from "../figma_app/624361";
-import { _G, Pv } from "../905/619652";
-import { A as _$$A0 } from "../905/929620";
-import { A as _$$A1 } from "../af221b13/388839";
-import { xp } from "../905/966582";
-import { Ay as _$$Ay4, Tu, DI, Ti } from "../figma_app/724968";
-import { w as _$$w4, q as _$$q4 } from "../905/112768";
-import { p as _$$p3 } from "../figma_app/398051";
-import { Aw } from "../9410/40486";
-import { A as _$$A10 } from "../905/51743";
-import { to as _$$to2 } from "../figma_app/828186";
-import { wx, XV, hk, sF as _$$sF2 } from "../figma_app/593440";
-import { M as _$$M } from "../905/637515";
-import { c4 } from "../figma_app/805925";
-import { X as _$$X2 } from "../9410/57440";
-import { r as _$$r4 } from "../905/924231";
-import { a as _$$a4 } from "../905/964520";
-import { x as _$$x5, E as _$$E5 } from "../905/719609";
-import { _ as _$$_5 } from "../905/136246";
-import { b as _$$b5 } from "../905/985254";
-import { yy, Cb, U5 } from "../figma_app/543529";
-import { f as _$$f7 } from "../905/940356";
-import { R as _$$R5 } from "../905/304671";
-import { FUserTypeClassification, FMemberRoleType, FPlanNameType, FPlanAccessType, FProductAccessType, FFileType } from "../figma_app/191312";
-import { $7 } from "../905/509613";
-import { A as _$$A11 } from "../905/251970";
-import { OZ as _$$OZ } from "../905/783179";
-import { r7 as _$$r5, Kp } from "../figma_app/189990";
-import { G as _$$G } from "../905/750789";
-import { AC, G8 } from "../figma_app/777551";
-import { a as _$$a5 } from "../figma_app/453187";
-import { RW } from "../figma_app/684168";
-import { A as _$$A12 } from "../6828/718668";
-import { A as _$$A13 } from "../svg/617101";
-import { A as _$$A14 } from "../svg/586486";
-import { U as _$$U3 } from "../905/544380";
-import { t as _$$t6 } from "../905/572040";
-import { hasDesktopAPI } from "../figma_app/876459";
-import { R as _$$R6 } from "../905/240644";
-import { C as _$$C4 } from "../905/237873";
-import { $9, Gk } from "../figma_app/427318";
-import { e as _$$e6 } from "../figma_app/324237";
-import { vt } from "../figma_app/306946";
-import { q as _$$q5, S as _$$S2 } from "../figma_app/277543";
-import { Qi } from "../figma_app/559491";
-import { M4 } from "../905/713695";
-import { z as _$$z4, a as _$$a6 } from "../figma_app/601188";
-import { isNotNullish } from "../figma_app/95419";
-import { R as _$$R7 } from "../3591/975641";
-import { JZ } from "../figma_app/696043";
-import { oB as _$$oB2, j7 } from "../905/929976";
-import { NV, OX, x2, qu, xZ, Pt as _$$Pt2 } from "../figma_app/33586";
-import { bD } from "../figma_app/45218";
-import { h as _$$h5 } from "../figma_app/752483";
-import { dR as _$$dR } from "../figma_app/248118";
-import { j as _$$j2 } from "../905/813868";
-import { lM as _$$lM, q8 as _$$q6, U4, S3, Xq } from "../figma_app/254872";
-import { t as _$$t7 } from "../figma_app/198180";
-import { m as _$$m2 } from "../figma_app/321561";
-import { D as _$$D2, p as _$$p4 } from "../figma_app/930185";
-import { OX as _$$OX, M6 } from "../figma_app/592180";
-import { J as _$$J5 } from "../905/125993";
-import { S as _$$S3 } from "../figma_app/552746";
-import { dG } from "../figma_app/753501";
-import { Ro } from "../figma_app/564095";
-import { Dd } from "../figma_app/599979";
-import { c as _$$c3 } from "../905/566438";
-import { ms } from "../figma_app/38430";
-import { O as _$$O5 } from "../figma_app/959385";
-import { rH as _$$rH } from "../figma_app/467741";
-import { H8, Pf } from "../905/590952";
-import { E as _$$E6 } from "../905/632989";
-import { R_, JB as _$$JB, e2 as _$$e7 } from "../3591/130069";
-import { $J as _$$$J } from "../905/491152";
-import { i as _$$i5 } from "../905/186077";
-import { o as _$$o5, g as _$$g5 } from "../figma_app/449363";
-import { A as _$$A15 } from "../6828/6507";
-import { A as _$$A16 } from "../5724/693499";
-import dc from "../vendor/946678";
-import { A as _$$A17 } from "../vendor/850789";
-import { IT } from "../figma_app/566371";
-import { j as _$$j3 } from "../905/918929";
-import { k as _$$k6 } from "../905/22009";
-import { Ih, zd } from "../figma_app/740025";
-import { Ef } from "../905/81982";
-import { $W } from "../905/144933";
-import { S as _$$S4 } from "../905/562072";
-import { v5 } from "../figma_app/314264";
-import { y as _$$y4 } from "../905/236825";
-import { K as _$$K4 } from "../9410/280854";
-import { C as _$$C5 } from "../905/504203";
-var r = {};
+import { xk } from '@stylexjs/stylex';
+import rF from 'classnames';
+import { createContext, createRef, forwardRef, lazy, memo, Suspense, useCallback, useContext, useDeferredValue, useEffect, useId, useLayoutEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { reportError } from '../905/11';
+import { T as _$$T2 } from '../905/2124';
+import { Q7 } from '../905/15667';
+import { useMemoStable, useStableMemo } from '../905/19536';
+import { k as _$$k6 } from '../905/22009';
+import { o as _$$o4 } from '../905/40561';
+import { C as _$$C } from '../905/47358';
+import { A as _$$A10 } from '../905/51743';
+import { E as _$$E3 } from '../905/53857';
+import { Uz, xH } from '../905/63728';
+import { Ef } from '../905/81982';
+import { t_ as _$$t_, vx } from '../905/91038';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
+import { selectWithShallowEqual } from '../905/103090';
+import { U as _$$U } from '../905/103637';
+import { q as _$$q4, w as _$$w4 } from '../905/112768';
+import { sha1HexFromBytes } from '../905/125019';
+import { g as _$$g3 } from '../905/125190';
+import { J as _$$J5 } from '../905/125993';
+import { Ib } from '../905/129884';
+import { _ as _$$_5 } from '../905/136246';
+import { $W } from '../905/144933';
+import { e as _$$e2 } from '../905/149844';
+import { t as _$$t3 } from '../905/150656';
+import { hideModalHandler, popModalStack, showModalHandler, updateModal } from '../905/156213';
+import { ServiceCategories as _$$e } from '../905/165054';
+import { f as _$$f6 } from '../905/167712';
+import { T as _$$T4 } from '../905/172092';
+import { x as _$$x } from '../905/179739';
+import { i as _$$i5 } from '../905/186077';
+import { permissionScopeHandler as _$$l2 } from '../905/189185';
+import { r as _$$r } from '../905/189361';
+import { a as _$$a2 } from '../905/192547';
+import { LRUCache } from '../905/196201';
+import { ES, TC } from '../905/198599';
+import { l as _$$l } from '../905/202425';
+import { h as _$$h } from '../905/207101';
+import { B as _$$B, b as _$$b2 } from '../905/222272';
+import { nt as _$$nt, o3 as _$$o } from '../905/226610';
+import { s as _$$s4 } from '../905/234042';
+import { Ag, H5, Hz } from '../905/235578';
+import { y as _$$y4 } from '../905/236825';
+import { C as _$$C4 } from '../905/237873';
+import { z as _$$z } from '../905/239603';
+import { R as _$$R6 } from '../905/240644';
+import { A as _$$A11 } from '../905/251970';
+import { y as _$$y2 } from '../905/263077';
+import { Label } from '../905/270045';
+import { m as _$$m } from '../905/270214';
+import { J as _$$J } from '../905/273120';
+import { T as _$$T5 } from '../905/273689';
+import { $J, dM as _$$dM, o2 as _$$o3, sd as _$$sd, bp, F9, NI } from '../905/278499';
+import { Z as _$$Z } from '../905/279476';
+import { Ay as _$$Ay2 } from '../905/281495';
+import { H as _$$H } from '../905/286442';
+import { s as _$$s6, w as _$$w2 } from '../905/286488';
+import { a as _$$a3 } from '../905/290931';
+import { A as _$$A3 } from '../905/296182';
+import { VisualBellActions } from '../905/302958';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { R as _$$R5 } from '../905/304671';
+import { v as _$$v2 } from '../905/318279';
+import { T as _$$T } from '../905/336775';
+import { k as _$$k4 } from '../905/341245';
+import { jp, WS } from '../905/370597';
+import { selectCurrentUser, getUserId } from '../905/372672';
+import { F as _$$F3 } from '../905/382217';
+import { e as _$$e3 } from '../905/383776';
+import { B as _$$B6 } from '../905/388732';
+import { debugState } from '../905/407919';
+import { $ as _$$$2 } from '../905/411599';
+import { loadPluginFont } from '../905/426868';
+import { N as _$$N2 } from '../905/438674';
+import { K as _$$K3 } from '../905/443068';
+import { k as _$$k2 } from '../905/443820';
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
+import { V as _$$V4 } from '../905/453354';
+import { e as _$$e4 } from '../905/462154';
+import { L0, MQ } from '../905/479155';
+import { V as _$$V } from '../905/480825';
+import { Rh } from '../905/485103';
+import { as as _$$as, _M, Dl, hm, Q0, SX, zQ } from '../905/487011';
+import { $J as _$$$J } from '../905/491152';
+import { J as _$$J2 } from '../905/494216';
+import { C as _$$C5 } from '../905/504203';
+import { r6 as _$$r3 } from '../905/507950';
+import { $7 } from '../905/509613';
+import { D8 } from '../905/511649';
+import { q as _$$q } from '../905/516087';
+import { C as _$$C3 } from '../905/520159';
+import { $n } from '../905/521428';
+import { globalPerfTimer } from '../905/542194';
+import { U as _$$U3 } from '../905/544380';
+import { PluginApiMetrics } from '../905/545265';
+import { n as _$$n2 } from '../905/548236';
+import { f as _$$f3 } from '../905/555062';
+import { S as _$$S4 } from '../905/562072';
+import { c as _$$c3 } from '../905/566438';
+import { t as _$$t6 } from '../905/572040';
+import { VisualBellType, VisualBellIcon } from '../905/576487';
+import { O as _$$O } from '../905/587457';
+import { pS } from '../905/588985';
+import { H8, Pf } from '../905/590952';
+import { getFeatureFlags } from '../905/601108';
+import { t as _$$t5 } from '../905/605191';
+import { Z as _$$Z2 } from '../905/606826';
+import { _ as _$$_4 } from '../905/614936';
+import { _G, Pv } from '../905/619652';
+import { o8 as _$$o2 } from '../905/622391';
+import { VU } from '../905/625959';
+import { T as _$$T3 } from '../905/632137';
+import { E as _$$E6 } from '../905/632989';
+import { M as _$$M } from '../905/637515';
+import { DP } from '../905/640017';
+import { X as _$$X } from '../905/647103';
+import { z as _$$z3 } from '../905/654860';
+import { getSessionStorage } from '../905/657224';
+import { g as _$$g } from '../905/687265';
+import { E as _$$E4, f as _$$f5 } from '../905/690713';
+import { getSingletonSceneGraph } from '../905/700578';
+import { y as _$$y } from '../905/705736';
+import { M4 } from '../905/713695';
+import { logInfo, logWarning } from '../905/714362';
+import { B as _$$B2 } from '../905/714743';
+import { i as _$$i } from '../905/718764';
+import { E as _$$E5, x as _$$x5 } from '../905/719609';
+import { A as _$$A2 } from '../905/721854';
+import { Point } from '../905/736624';
+import { Qx, xA } from '../905/742325';
+import { Ao } from '../905/748636';
+import { G as _$$G } from '../905/750789';
+import { tH as _$$tH, H4 } from '../905/751457';
+import { c as _$$c2 } from '../905/752260';
+import { iu as _$$iu, mv, wY } from '../905/753206';
+import { x as _$$x3 } from '../905/773818';
+import { A as _$$A6 } from '../905/780920';
+import { OZ as _$$OZ } from '../905/783179';
+import { k as _$$k3 } from '../905/788559';
+import { cq } from '../905/794154';
+import { K as _$$K } from '../905/799615';
+import _require from '../905/802325';
+import { j as _$$j2 } from '../905/813868';
+import { Z as _$$Z3 } from '../905/829242';
+import { Y as _$$Y } from '../905/830372';
+import { sZ as _$$sZ, dq } from '../905/845253';
+import { Um } from '../905/848862';
+import { V as _$$V3 } from '../905/849455';
+import { E9 } from '../905/851937';
+import { _ as _$$_3 } from '../905/862468';
+import { u as _$$u } from '../905/866761';
+import { bL as _$$bL, c$ } from '../905/867927';
+import { B as _$$B5 } from '../905/872019';
+import { generateUUIDv4 } from '../905/871474';
+import { A as _$$A9 } from '../905/891805';
+import { n as _$$n } from '../905/895449';
+import { V as _$$V2 } from '../905/900932';
+import { is as _$$is, Oq } from '../905/904596';
+import { XHR } from '../905/910117';
+import { bL as _$$bL2 } from '../905/911410';
+import { j as _$$j3 } from '../905/918929';
+import { A as _$$A5 } from '../905/920165';
+import { Ow, Wg, YG } from '../905/921418';
+import { $ as _$$$ } from '../905/922405';
+import { r as _$$r4 } from '../905/924231';
+import { A as _$$A0 } from '../905/929620';
+import { oB as _$$oB2, j7 } from '../905/929976';
+import { q as _$$q3 } from '../905/932270';
+import { lQ as _$$lQ } from '../905/934246';
+import { f as _$$f7 } from '../905/940356';
+import { sx as _$$sx } from '../905/941192';
+import { ou as _$$ou } from '../905/942991';
+import { BY, Jc, Sn } from '../905/946805';
+import { b as _$$b3 } from '../905/946806';
+import { a as _$$a4 } from '../905/964520';
+import { xp } from '../905/966582';
+import { qp } from '../905/977779';
+import { v as _$$v3 } from '../905/981847';
+import { E as _$$E } from '../905/984674';
+import { b as _$$b5 } from '../905/985254';
+import { e as _$$e5 } from '../905/987482';
+import { F as _$$F4 } from '../905/989956';
+import { Rz } from '../905/990497';
+import _require4 from '../951/130951';
+import { bG } from '../1250/506456';
+import { v as _$$v } from '../1250/821962';
+import { R as _$$R } from '../1250/835893';
+import _require3 from '../1971/941971';
+import { e2 as _$$e7, JB as _$$JB, R_ } from '../3591/130069';
+import { R as _$$R7 } from '../3591/975641';
+import { W as _$$W2 } from '../5132/887999';
+import { A as _$$A16 } from '../5724/693499';
+import { A as _$$A15 } from '../6828/6507';
+import { A as _$$A12 } from '../6828/718668';
+import { _ as _$$_2 } from '../7021/243271';
+import { x as _$$x2 } from '../7222/491815';
+import { Aw } from '../9410/40486';
+import { R as _$$R4 } from '../9410/46722';
+import { X as _$$X2 } from '../9410/57440';
+import { eb as _$$eb, qi, zs } from '../9410/58505';
+import { A as _$$A8 } from '../9410/63984';
+import { FX } from '../9410/67768';
+import { W as _$$W } from '../9410/92046';
+import { h as _$$h2 } from '../9410/146161';
+import { i as _$$i4 } from '../9410/157320';
+import { fv } from '../9410/215872';
+import { l9 as _$$l3, tb as _$$tb, N_ } from '../9410/234038';
+import { Bc } from '../9410/255781';
+import { K as _$$K4 } from '../9410/280854';
+import { O as _$$O3 } from '../9410/301359';
+import { p as _$$p } from '../9410/363670';
+import { f as _$$f4 } from '../9410/391621';
+import { x as _$$x4 } from '../9410/392104';
+import { Dp, TM, WX } from '../9410/423538';
+import { gC, SV } from '../9410/483857';
+import { hG, hQ, J7 } from '../9410/512956';
+import { Ct, gB, QT } from '../9410/517270';
+import { K as _$$K2 } from '../9410/565440';
+import { $ as _$$$4, J as _$$J3 } from '../9410/589087';
+import { rN as _$$rN, VY } from '../9410/607888';
+import { P as _$$P3, t as _$$t4 } from '../9410/636108';
+import { Vh } from '../9410/671180';
+import { _ as _$$_, h as _$$h3 } from '../9410/755019';
+import { sI as _$$sI } from '../9410/797086';
+import { iK as _$$iK } from '../9410/845608';
+import { j as _$$j } from '../9410/853982';
+import { B as _$$B4 } from '../9410/958580';
+import { g as _$$g4 } from '../9410/995605';
+import _require2 from '../9756/399756';
+import { A as _$$A1 } from '../af221b13/388839';
+import { s as _$$s3 } from '../cssbuilder/589278';
+import { Zh } from '../figma_app/2590';
+import { r as _$$r2 } from '../figma_app/6042';
+import { Dm } from '../figma_app/8833';
+import { ei as _$$ei } from '../figma_app/9054';
+import { Eh } from '../figma_app/12796';
+import { O as _$$O4, y as _$$y3 } from '../figma_app/13082';
+// import { ImageToolsBindings } from '../figma_app/13528'
+import { lg as _$$lg2, lH as _$$lH, Dk } from '../figma_app/18582';
+import { atom, atomStoreManager, AY, createLocalStorageAtom, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
+import { Pt as _$$Pt2, NV, OX, qu, x2, xZ } from '../figma_app/33586';
+import { ms } from '../figma_app/38430';
+import { ZC } from '../figma_app/39751';
+import { bD } from '../figma_app/45218';
+import { YJ } from '../figma_app/50224';
+import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
+import { getObservableOrFallback } from '../figma_app/84367';
+import { ZO } from '../figma_app/88239';
+import { isNotNullish } from '../figma_app/95419';
+import { BB, kp, PV, Sk, Z7 } from '../figma_app/98578';
+import { wo } from '../figma_app/109130';
+import { Og } from '../figma_app/109758';
+import { f as _$$f } from '../figma_app/109947';
+import { O as _$$O2 } from '../figma_app/114128';
+import { dP as _$$dP } from '../figma_app/119475';
+import { I as _$$I2 } from '../figma_app/130633';
+import { h8, KK } from '../figma_app/144974';
+import { I9, Vr } from '../figma_app/151869';
+import { z as _$$z2 } from '../figma_app/153551';
+import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget, ManifestEditorType } from '../figma_app/155287';
+import { Fk } from '../figma_app/167249';
+import { iC as _$$iC, Do, mr } from '../figma_app/169086';
+import { s3 as _$$s2, kz } from '../figma_app/171177';
+import { APIParameterUtils } from '../figma_app/181241';
+import { $ as _$$$3 } from '../figma_app/183557';
+import { r7 as _$$r5, Kp } from '../figma_app/189990';
+import { FFileType, FMemberRoleType, FPlanAccessType, FPlanNameType, FProductAccessType, FUserTypeClassification } from '../figma_app/191312';
+import { tK as _$$tK, DA, F_, UE } from '../figma_app/191804';
+import { sF as _$$sF } from '../figma_app/193952';
+import { t as _$$t7 } from '../figma_app/198180';
+import { h as _$$h4 } from '../figma_app/198885';
+import { qO, X6 } from '../figma_app/234690';
+import { dR as _$$dR } from '../figma_app/248118';
+import { GM, PE } from '../figma_app/251115';
+import { lM as _$$lM, q8 as _$$q6, S3, U4, Xq } from '../figma_app/254872';
+import { dt as _$$dt, fC, he, QS, VA } from '../figma_app/259578';
+import { nB as _$$nB, hE, vo, Y9 } from '../figma_app/272243';
+import { oB as _$$oB, qN, w_ } from '../figma_app/273493';
+import { q as _$$q5, S as _$$S2 } from '../figma_app/277543';
+import { p as _$$p2 } from '../figma_app/284426';
+import { FX as _$$FX } from '../figma_app/291792';
+import { eg as _$$eg, i6 as _$$i2, lw as _$$lw, Ev, F$, HD, mi, Mq, NH, vI } from '../figma_app/297822';
+import { _p } from '../figma_app/297957';
+import { filterArrayByEditorType, getCurrentPluginVersion, getPluginByFileId, injectHtmlOrUiFiles, PluginPermissions } from '../figma_app/300692';
+import { vt } from '../figma_app/306946';
+import { Tv } from '../figma_app/311375';
+import { v5 } from '../figma_app/314264';
+import { bJ } from '../figma_app/318123';
+import { eH as _$$eH } from '../figma_app/318590';
+import { m as _$$m2 } from '../figma_app/321561';
+import { dL as _$$dL, el as _$$el, _V, KY } from '../figma_app/322845';
+import { e as _$$e6 } from '../figma_app/324237';
+import { CN, FL, MR, NY, Vl, w8, Y6 } from '../figma_app/347120';
+import { c1, vg, Yh } from '../figma_app/357047';
+import { nj as _$$nj, XG } from '../figma_app/360824';
+import { Kh } from '../figma_app/370763';
+import { a as _$$a } from '../figma_app/380422';
+import { p as _$$p3 } from '../figma_app/398051';
+import { aq as _$$aq } from '../figma_app/399472';
+import { S as _$$S } from '../figma_app/420927';
+import { $9, Gk } from '../figma_app/427318';
+import { Ay } from '../figma_app/432652';
+import { C as _$$C2 } from '../figma_app/444297';
+import { g as _$$g5, o as _$$o5 } from '../figma_app/449363';
+import { a as _$$a5 } from '../figma_app/453187';
+import { fullscreenValue } from '../figma_app/455680';
+import { dZ, q8 } from '../figma_app/459490';
+import { D6, T5, X$ } from '../figma_app/465071';
+import { throwTypeError } from '../figma_app/465776';
+import { rH as _$$rH } from '../figma_app/467741';
+import { iR as _$$iR, _i, yZ } from '../figma_app/476572';
+import { s as _$$s5 } from '../figma_app/478542';
+import { nearlyEqual } from '../figma_app/492908';
+import { YT } from '../figma_app/506549';
+import { tB as _$$tB, tS as _$$tS, Hu, q5, ze } from '../figma_app/516028';
+import { s as _$$s } from '../figma_app/523506';
+import { oz as _$$oz, c0, fu } from '../figma_app/538006';
+import { BY as _$$BY, nF as _$$nF, rO as _$$rO, jR, k5, Mz, uP } from '../figma_app/541950';
+import { Cb, U5, yy } from '../figma_app/543529';
+import { c as _$$c, lc as _$$lc, G4, Hl, T1, UF } from '../figma_app/545293';
+import { S as _$$S3 } from '../figma_app/552746';
+import { Qi } from '../figma_app/559491';
+import { B as _$$B3, t as _$$t2 } from '../figma_app/560453';
+import { Ro } from '../figma_app/564095';
+import { IT } from '../figma_app/566371';
+import { xF } from '../figma_app/566517';
+import { TW } from '../figma_app/567902';
+import { w as _$$w } from '../figma_app/588564';
+import { OX as _$$OX, M6 } from '../figma_app/592180';
+import { sF as _$$sF2, hk, wx, XV } from '../figma_app/593440';
+import { b as _$$b } from '../figma_app/598297';
+import { Dd } from '../figma_app/599979';
+import { a as _$$a6, z as _$$z4 } from '../figma_app/601188';
+import { dd as _$$dd, rE as _$$rE, Bu, IH, JB, jh, Lk, P_, Q8, Rt } from '../figma_app/604494';
+import { DP as _$$DP, xk as _$$xk } from '../figma_app/612859';
+import { R as _$$R2 } from '../figma_app/612938';
+import { UD } from '../figma_app/624361';
+import { i0 as _$$i3, JT as _$$JT, OZ, UW, wC } from '../figma_app/632248';
+import { eD as _$$eD, ET } from '../figma_app/646357';
+import { cd, ZI } from '../figma_app/650460';
+import { filterNotNullish, shuffle } from '../figma_app/656233';
+import { S6, zY } from '../figma_app/664693';
+import { Zr } from '../figma_app/678782';
+import { RW } from '../figma_app/684168';
+import { bt } from '../figma_app/688194';
+import { G1 } from '../figma_app/691470';
+import { JZ } from '../figma_app/696043';
+import { ER, jF, K4, Ne, NT, pz, X4, Xy } from '../figma_app/702372';
+import { AR as _$$AR, Db } from '../figma_app/705029';
+import { wY as _$$wY } from '../figma_app/708845';
+import { eY as _$$eY, f4, KH, p8 } from '../figma_app/722362';
+import { Ay as _$$Ay4, DI, Ti, Tu } from '../figma_app/724968';
+import { jR as _$$jR, k0 as _$$k5, N0, RO, Sb } from '../figma_app/728075';
+import { $L, mP, Sq } from '../figma_app/737746';
+import { Ih, zd } from '../figma_app/740025';
+import { UK } from '../figma_app/740163';
+import { U as _$$U2 } from '../figma_app/751728';
+import { h as _$$h5 } from '../figma_app/752483';
+import { dG } from '../figma_app/753501';
+import { F as _$$F2 } from '../figma_app/757236';
+import { ActionType, AppStateTsApi, AssetSource, ColorFormatEnum, ComponentPropsAiCPPBindings, ContentFillNudgesStateBindings, DesignGraphElements, DesignToBuzzHelpers, FirstDraftHelpers, Fullscreen, ImageToolsBindings, LayoutTabType, SceneGraphHelpers, UiParserHelpers } from '../figma_app/763686';
+import { w as _$$w3 } from '../figma_app/774411';
+import { AC, G8 } from '../figma_app/777551';
+import { c4 } from '../figma_app/805925';
+import { oG as _$$oG, _g, xm } from '../figma_app/826288';
+import { I as _$$I } from '../figma_app/827540';
+import { to as _$$to2 } from '../figma_app/828186';
+import { ks, Vm } from '../figma_app/838407';
+import { $1, ll as _$$ll, AR, cW, f6, FG, q3, QZ, U6, V2, wW, ZT } from '../figma_app/844435';
+import { lu as _$$lu } from '../figma_app/846140';
+import { hc, jk, mX, z6 } from '../figma_app/846841';
+import { Dz, WJ, Zj } from '../figma_app/847915';
+import { $L as _$$$L, nd as _$$nd, oP as _$$oP, HS, uq, YB } from '../figma_app/857146';
+import { Ag as _$$Ag, lc as _$$lc2, wj as _$$wj, B3, qy, RL, zM } from '../figma_app/862289';
+import { b as _$$b4 } from '../figma_app/873852';
+import { hasDesktopAPI } from '../figma_app/876459';
+import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
+import { Jj, vj } from '../figma_app/883990';
+import { Sh } from '../figma_app/889655';
+import { PN } from '../figma_app/897289';
+import { f6 as _$$f2 } from '../figma_app/915202';
+import { D as _$$D2, p as _$$p4 } from '../figma_app/930185';
+import { bL, C5, GX, jb, JT, Nf, Oy, vA, wj, ZM } from '../figma_app/930214';
+import { $M, EJ } from '../figma_app/930338';
+import { Ay as _$$Ay3 } from '../figma_app/948389';
+import { T as _$$T6 } from '../figma_app/949105';
+import { mD } from '../figma_app/955528';
+import { O as _$$O5 } from '../figma_app/959385';
+import { fJ, x0 } from '../figma_app/963341';
+import { oy as _$$oy, LZ } from '../figma_app/964367';
+import { E3 as _$$E2, lg as _$$lg, ow as _$$ow, m0, my, XE } from '../figma_app/976749';
+import { gH } from '../figma_app/985200';
+import { ah as _$$ah, EG, Hr, J8 } from '../figma_app/995580';
+import { A as _$$A7 } from '../svg/499035';
+import { A as _$$A14 } from '../svg/586486';
+import { A as _$$A13 } from '../svg/617101';
+import { A as _$$A4 } from '../vendor/21595';
+import { A as _$$A } from '../vendor/90566';
+import ih from '../vendor/104014';
+import iu from '../vendor/223926';
+import ez from '../vendor/260986';
+import ay from '../vendor/267721';
+import { P as _$$P2 } from '../vendor/348225';
+import { useDispatch, useSelector } from 'react-redux';
+import { A as _$$A17 } from '../vendor/850789';
+import { N as _$$N } from '../vendor/930821';
+import dc from '../vendor/946678';
+import n_ from '../vendor/950573';
+let r = {};
 require.d(r, {
   button: () => lL,
   buttonContent: () => lM,
@@ -437,12 +436,12 @@ function eP() {
     let t = {};
     for (let i in e.mirror.appModel) {
       vg(i) && (t[i] = e.mirror.appModel[i]);
-      "isReadOnly" === i && (t.isReadOnly = e.mirror.appModel.isReadOnly);
+      i === 'isReadOnly' && (t.isReadOnly = e.mirror.appModel.isReadOnly);
     }
     return t;
   });
 }
-var eV = ez;
+let eV = ez;
 async function eZ(e, t, i) {
   let r;
   return (await Ay.shared.assistantChat({
@@ -453,46 +452,58 @@ async function eZ(e, t, i) {
         let i = (e, t) => {
           for (let [r, n] of (e = {
             ...e
-          }, Object.entries(t))) if (void 0 === e[r] || null === e[r]) {
-            if (e[r] = n, Array.isArray(e[r])) for (let t of e[r]) delete t.index;
-          } else if ("string" == typeof e[r] && "string" == typeof n) e[r] += n;else if ("number" == typeof e[r] && "number" == typeof n) e[r] = n;else if (Array.isArray(e[r]) && Array.isArray(n)) {
-            let t = e[r];
-            for (let e = 0; e < n.length; e++) {
-              let {
-                index,
-                ...a
-              } = n[e];
-              if (index - t.length > 1) throw Error(`Error: An array has an empty value when tool_calls are constructed. tool_calls: ${t}; tool: ${n}`);
-              t[index] = i(t[index], a);
+          }, Object.entries(t))) {
+            if (void 0 === e[r] || e[r] === null) {
+              if (e[r] = n, Array.isArray(e[r])) {
+                for (let t of e[r]) delete t.index;
+              }
+            } else if (typeof e[r] == 'string' && typeof n == 'string') {
+              e[r] += n;
+            } else if (typeof e[r] == 'number' && typeof n == 'number') {
+              e[r] = n;
+            } else if (Array.isArray(e[r]) && Array.isArray(n)) {
+              let t = e[r];
+              for (let e = 0; e < n.length; e++) {
+                let {
+                  index,
+                  ...a
+                } = n[e];
+                if (index - t.length > 1) throw new Error(`Error: An array has an empty value when tool_calls are constructed. tool_calls: ${t}; tool: ${n}`);
+                t[index] = i(t[index], a);
+              }
+            } else {
+              typeof e[r] == 'object' && typeof n == 'object' && (e[r] = i(e[r], n));
             }
-          } else "object" == typeof e[r] && "object" == typeof n && (e[r] = i(e[r], n));
+          }
           return e;
         };
         return i(e, t.choices[0].delta);
       }(r, e), t.enqueue({
         ...r,
-        role: "assistant"
-      }), r.tool_calls && r.tool_calls.length > 0 && "tool_calls" === e.choices[0].finish_reason)) for (let e of r.tool_calls) {
-        let r = await i(e);
-        let n = {
-          tool_call_id: e.id,
-          role: "tool",
-          name: e.$$function.name,
-          content: JSON.stringify(r)
-        };
-        t.enqueue(n);
+        role: 'assistant'
+      }), r.tool_calls && r.tool_calls.length > 0 && e.choices[0].finish_reason === 'tool_calls')) {
+        for (let e of r.tool_calls) {
+          let r = await i(e);
+          let n = {
+            tool_call_id: e.id,
+            role: 'tool',
+            name: e.$$function.name,
+            content: JSON.stringify(r)
+          };
+          t.enqueue(n);
+        }
       }
     }
   })));
 }
 let tr = new class {
   sendFeatureRequest(e) {
-    return XHR.post("/api/ask_figma/request_feature", APIParameterUtils.toAPIParameters(e));
+    return XHR.post('/api/ask_figma/request_feature', APIParameterUtils.toAPIParameters(e));
   }
 }();
-var tn = (e => (e.Idle = "idle", e.Loading = "loading", e.Error = "error", e))(tn || {});
+var tn = (e => (e.Idle = 'idle', e.Loading = 'loading', e.Error = 'error', e))(tn || {});
 let ta = atom({
-  status: "idle",
+  status: 'idle',
   messages: []
 });
 let ts = _$$z.object({
@@ -516,13 +527,13 @@ let ts = _$$z.object({
   height: _$$z.number()
 });
 let to = _$$z.object({
-  type: _$$z.literal("fragments"),
-  status: _$$z.literal("success"),
+  type: _$$z.literal('fragments'),
+  status: _$$z.literal('success'),
   fragments: _$$z.array(ts)
 });
 let tl = _$$z.object({
-  type: _$$z.literal("fragments"),
-  status: _$$z.literal("success"),
+  type: _$$z.literal('fragments'),
+  status: _$$z.literal('success'),
   fragments: _$$z.array(ts.pick({
     score: !0,
     file_name: !0,
@@ -535,34 +546,34 @@ let tl = _$$z.object({
   images: _$$z.array(_$$z.string())
 });
 let td = _$$z.object({
-  type: _$$z.literal("selection"),
-  status: _$$z.literal("success"),
+  type: _$$z.literal('selection'),
+  status: _$$z.literal('success'),
   selectionLength: _$$z.number()
 });
 let tc = _$$z.object({
-  type: _$$z.literal("selection"),
-  status: _$$z.literal("success"),
+  type: _$$z.literal('selection'),
+  status: _$$z.literal('success'),
   selectionLength: _$$z.number(),
   images: _$$z.array(_$$z.string()),
   jsx: _$$z.array(_$$z.string())
 });
 let tu = _$$z.object({
-  type: _$$z.literal("plugin"),
-  status: _$$z.literal("success")
+  type: _$$z.literal('plugin'),
+  status: _$$z.literal('success')
 });
 let tp = _$$z.object({
-  type: _$$z.literal("plugin"),
-  status: _$$z.literal("success")
+  type: _$$z.literal('plugin'),
+  status: _$$z.literal('success')
 });
 let th = _$$z.object({
-  type: _$$z.literal("assets"),
+  type: _$$z.literal('assets'),
   queries: _$$z.array(_$$z.string()),
-  status: _$$z.literal("success"),
+  status: _$$z.literal('success'),
   assets: _$$z.any().array()
 });
 let tm = _$$z.object({
-  type: _$$z.literal("assets"),
-  status: _$$z.literal("success"),
+  type: _$$z.literal('assets'),
+  status: _$$z.literal('success'),
   assets: _$$z.array(_$$z.object({
     name: _$$z.string(),
     description: _$$z.string().optional()
@@ -570,14 +581,14 @@ let tm = _$$z.object({
   images: _$$z.array(_$$z.string())
 });
 let tf = _$$z.object({
-  type: _$$z.literal("request-feature"),
-  status: _$$z.literal("success"),
+  type: _$$z.literal('request-feature'),
+  status: _$$z.literal('success'),
   title: _$$z.string(),
   description: _$$z.string()
 });
 let tg = _$$z.object({
-  type: _$$z.literal("request-feature"),
-  status: _$$z.literal("success"),
+  type: _$$z.literal('request-feature'),
+  status: _$$z.literal('success'),
   images: _$$z.undefined()
 });
 let t_ = _$$z.object({
@@ -585,64 +596,66 @@ let t_ = _$$z.object({
   assistantFacing: _$$z.union([tl, tc, tp, tm, tg])
 });
 async function tx(e) {
-  if ("function" !== e.type) throw Error("Unexpected tool_call type:" + e.type);
+  if (e.type !== 'function') throw new Error(`Unexpected tool_call type:${e.type}`);
   let t = JSON.parse(e.$$function.$$arguments);
   let i = atomStoreManager.get(ze);
-  if (!i) throw Error("No file key found");
+  if (!i) throw new Error('No file key found');
   switch (e.$$function.name) {
-    case "autocomplete":
-    case "view_user_selection":
+    case 'autocomplete':
+    case 'view_user_selection':
       {
         let e = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes ?? [];
         let t = e?.slice(0, 10);
         let i = t.map(e => {
           let t = T1(e, UF.GPT);
-          if (!t) throw Error("Failed to export thumbnail");
+          if (!t) throw new Error('Failed to export thumbnail');
           return t;
         });
-        let r = t.map(e => "");
+        let r = t.map(e => '');
         return {
           userFacing: {
-            type: "selection",
-            status: "success",
+            type: 'selection',
+            status: 'success',
             selectionLength: e.length
           },
           assistantFacing: {
-            type: "selection",
-            status: "success",
+            type: 'selection',
+            status: 'success',
             selectionLength: e.length,
             images: i,
             jsx: r
           }
         };
       }
-    case "visual_search_with_selection":
-    case "search_designs_by_text":
+    case 'visual_search_with_selection':
+    case 'search_designs_by_text':
       {
         let r = [];
-        if ("visual_search_with_selection" === e.$$function.name) {
+        if (e.$$function.name === 'visual_search_with_selection') {
           let e = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
-          if (!e || 0 === e.length) throw Error("No selection found");
+          if (!e || e.length === 0) throw new Error('No selection found');
           r = (await _$$lc({
-            type: "input-selection",
+            type: 'input-selection',
             node: e[0],
             file_key: i,
             name: e[0].name
           })).slice(0, 3);
-        } else r = (await _$$c({
-          type: "input-text",
-          value: t.query,
-          file_key: i
-        })).slice(0, 3);
+        } else {
+          r = (await _$$c({
+            type: 'input-text',
+            value: t.query,
+            file_key: i
+          })).slice(0, 3);
+        }
         return {
           userFacing: {
-            type: "fragments",
-            status: "success",
+            type: 'fragments',
+            status: 'success',
             fragments: r
           },
           assistantFacing: {
-            type: "fragments",
-            status: "success",
+            type: 'fragments',
+            status: 'success',
             fragments: r.map(e => ({
               score: e.score,
               file_name: e.file_name,
@@ -656,29 +669,29 @@ async function tx(e) {
           }
         };
       }
-    case "search_components_by_text":
+    case 'search_components_by_text':
       {
         let e = t.queries.slice(0, 3);
-        if (0 === e.length) throw Error("No queries provided");
+        if (e.length === 0) throw new Error('No queries provided');
         let i = (await Promise.all(e.map(e => tb(e)))).map(e => e.slice(0, 3)).flat();
         let r = [];
         let n = [];
         i.map(e => {
           if (!e.thumbnail_url) return;
-          let t = e.thumbnail_url.startsWith("/") ? `${window.location.origin}${e.thumbnail_url}` : e.thumbnail_url;
+          let t = e.thumbnail_url.startsWith('/') ? `${window.location.origin}${e.thumbnail_url}` : e.thumbnail_url;
           r.push(e);
           n.push(t);
         });
         return {
           userFacing: {
-            type: "assets",
-            status: "success",
+            type: 'assets',
+            status: 'success',
             queries: t.queries,
             assets: r
           },
           assistantFacing: {
-            type: "assets",
-            status: "success",
+            type: 'assets',
+            status: 'success',
             assets: r.map(e => ({
               name: e.name,
               description: e.description
@@ -687,34 +700,34 @@ async function tx(e) {
           }
         };
       }
-    case "create_figma_plugin":
+    case 'create_figma_plugin':
       let r = _$$z.object({
         plugin_code: _$$z.string(),
         ui_code: _$$z.string().optional()
       }).safeParse(t);
-      if (!r.success) throw Error("Invalid args: " + r.error.toString());
+      if (!r.success) throw new Error(`Invalid args: ${r.error.toString()}`);
       let {
         plugin_code,
         ui_code
       } = r.data;
       return ty(plugin_code, ui_code);
-    case "edit_file":
+    case 'edit_file':
       {
         let e = _$$z.object({
           code: _$$z.string()
         }).safeParse(t);
-        if (!e.success) throw Error("Invalid args: " + e.error.toString());
+        if (!e.success) throw new Error(`Invalid args: ${e.error.toString()}`);
         let {
           code
         } = e.data;
         return ty(code);
       }
-    case "request_feature":
+    case 'request_feature':
       let s = _$$z.object({
         title: _$$z.string(),
         description: _$$z.string()
       }).safeParse(t);
-      if (!s.success) throw Error("Invalid args: " + s.error.toString());
+      if (!s.success) throw new Error(`Invalid args: ${s.error.toString()}`);
       let {
         title,
         description
@@ -727,25 +740,25 @@ async function tx(e) {
       await tr.sendFeatureRequest(d);
       return {
         userFacing: {
-          type: "request-feature",
-          status: "success",
+          type: 'request-feature',
+          status: 'success',
           title,
           description
         },
         assistantFacing: {
-          type: "request-feature",
-          status: "success"
+          type: 'request-feature',
+          status: 'success'
         }
       };
     default:
-      throw Error(`No function found for ${e.$$function.name}`);
+      throw new Error(`No function found for ${e.$$function.name}`);
   }
 }
 async function ty(e, t) {
   let i = atomStoreManager.get(ze);
   let r = _$$o2();
-  if (!r) throw Error("Cannot run plugin while logged out");
-  if (!i) throw Error("No file key found");
+  if (!r) throw new Error('Cannot run plugin while logged out');
+  if (!i) throw new Error('No file key found');
   await wY();
   let n = `
     <script src="https://cdn.tailwindcss.com"></script>
@@ -765,28 +778,28 @@ async function ty(e, t) {
     allowedDomains: gH,
     apiVersion: pS,
     capabilities: [],
-    stats: new _$$P(),
+    stats: new PluginApiMetrics(),
     checkSyntax: !0,
     code: a,
-    command: "",
+    command: '',
     disableSilenceConsole: !0,
     enablePrivatePluginApi: !1,
     enableProposedApi: !1,
     errorHandler: _$$lQ,
     isLocal: !0,
     isWidget: !1,
-    name: "Assistant plugin",
+    name: 'Assistant plugin',
     openFileKey: i,
     permissions: PluginPermissions.forFirstPartyPlugin(),
-    pluginID: "",
+    pluginID: '',
     pluginRunID: s,
-    pluginVersionID: "0",
+    pluginVersionID: '0',
     queryMode: !1,
     showLaunchErrors: !0,
     showRuntimeErrors: !0,
-    titleIconURL: "",
+    titleIconURL: '',
     userID: r,
-    vmType: "cppvm",
+    vmType: 'cppvm',
     editorType: [ManifestEditorType.FIGMA],
     incrementalSafeApi: !1,
     enableNativeJsx: !1,
@@ -794,12 +807,12 @@ async function ty(e, t) {
   });
   return {
     userFacing: {
-      type: "plugin",
-      status: "success"
+      type: 'plugin',
+      status: 'success'
     },
     assistantFacing: {
-      type: "plugin",
-      status: "success"
+      type: 'plugin',
+      status: 'success'
     }
   };
 }
@@ -807,13 +820,13 @@ async function tb(e) {
   let t = debugState.getState();
   let i = _$$tB(t);
   let r = vx(t);
-  if (!i || null == r) throw Error("No open file or file version found");
+  if (!i || r == null) throw new Error('No open file or file version found');
   let n = 1;
   for (; !Wg(debugState.getState()) && n <= 50;) {
     await new Promise(e => setTimeout(e, 200 * n));
     n++;
   }
-  if (!Wg(debugState.getState())) throw Error("Failed to initialize assets");
+  if (!Wg(debugState.getState())) throw new Error('Failed to initialize assets');
   let a = {
     type: _$$I2.ALL
   };
@@ -821,7 +834,7 @@ async function tb(e) {
   let o = atomStoreManager.get(qp);
   t = debugState.getState();
   let l = {
-    type: "input-text",
+    type: 'input-text',
     query: e,
     assetTypeOption: a,
     isKnownLibrary: e => !0,
@@ -845,10 +858,10 @@ async function tC(e, t, i, r) {
   try {
     let n;
     let a = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
-    let s = "string" == typeof e ? {
-      role: "user",
+    let s = typeof e == 'string' ? {
+      role: 'user',
       content: [{
-        type: "text",
+        type: 'text',
         text: `<user_message><user_input>${e}</user_input><selected_layer_ids>${a && JSON.stringify(a.map(e => e.guid))}</selected_layer_ids></user_message>`
       }]
     } : e;
@@ -860,15 +873,15 @@ async function tC(e, t, i, r) {
     let o = [];
     for (let e of t) {
       let t = function (e) {
-        if ("tool" !== e.role) return e;
+        if (e.role !== 'tool') return e;
         let t = e.content;
-        let i = "string" == typeof t ? JSON.parse(t) : t;
+        let i = typeof t == 'string' ? JSON.parse(t) : t;
         let r = t_.parse(i).assistantFacing;
         let n = r.type;
         switch (n) {
-          case "selection":
-          case "assets":
-          case "fragments":
+          case 'selection':
+          case 'assets':
+          case 'fragments':
             let {
               images,
               ...s
@@ -877,8 +890,8 @@ async function tC(e, t, i, r) {
               ...e,
               content: JSON.stringify(s)
             };
-          case "plugin":
-          case "request-feature":
+          case 'plugin':
+          case 'request-feature':
             return e;
           default:
             throwTypeError(n);
@@ -903,36 +916,38 @@ async function tC(e, t, i, r) {
         sendFollowup,
         newMessages
       } = function (e) {
-        if ("tool" !== e.role) return {
-          sendFollowup: !1,
-          newMessages: []
-        };
+        if (e.role !== 'tool') {
+          return {
+            sendFollowup: !1,
+            newMessages: []
+          };
+        }
         let t = e.content;
-        let i = "string" == typeof t ? JSON.parse(t) : t;
+        let i = typeof t == 'string' ? JSON.parse(t) : t;
         let r = t_.parse(i);
         let n = r.assistantFacing.type;
         switch (n) {
-          case "selection":
-          case "assets":
-          case "fragments":
+          case 'selection':
+          case 'assets':
+          case 'fragments':
             return {
               sendFollowup: !0,
               newMessages: [{
-                role: "user",
+                role: 'user',
                 content: [{
-                  type: "text",
-                  text: "\x3c!-- The tool call showed me the following images: --\x3e"
+                  type: 'text',
+                  text: '\x3C!-- The tool call showed me the following images: --\x3E'
                 }, ...r.assistantFacing.images.map(e => ({
-                  type: "image_url",
+                  type: 'image_url',
                   image_url: {
-                    url: e.startsWith("http") ? e : `data:image/jpeg;base64,${e}`,
-                    detail: "high"
+                    url: e.startsWith('http') ? e : `data:image/jpeg;base64,${e}`,
+                    detail: 'high'
                   }
                 }))]
               }]
             };
-          case "plugin":
-          case "request-feature":
+          case 'plugin':
+          case 'request-feature':
             return {
               sendFollowup: !1,
               newMessages: []
@@ -942,7 +957,7 @@ async function tC(e, t, i, r) {
         }
       }(value);
       newMessages.length > 0 && sendFollowup && (n = newMessages[newMessages.length - 1]);
-      i(e => "string" == typeof value.content && 0 === value.content.length || value.role !== e.messages[e.messages.length - 1]?.role ? {
+      i(e => typeof value.content == 'string' && value.content.length === 0 || value.role !== e.messages[e.messages.length - 1]?.role ? {
         status: tn.Loading,
         messages: [...e.messages, value, ...newMessages]
       } : {
@@ -952,33 +967,33 @@ async function tC(e, t, i, r) {
     }
     n && tC(n, atomStoreManager.get(ta).messages, i, r);
   } catch (e) {
-    logInfo("Send chat message failed: ", e.message);
+    logInfo('Send chat message failed: ', e.message);
     i(e => ({
       ...e,
       status: tn.Error
     }));
   }
 }
-let tA = memo(function (e) {
-  return jsx("svg", {
-    width: "24",
-    height: "24",
-    fill: "none",
-    viewBox: "0 0 24 24",
+let tA = memo(e => {
+  return jsx('svg', {
+    width: '24',
+    height: '24',
+    fill: 'none',
+    viewBox: '0 0 24 24',
     ...e,
-    children: jsx("path", {
-      fill: "var(--color-icon)",
-      d: "M11.5 5a6.5 6.5 0 0 1 4.935 10.728l3.419 3.419.064.078a.5.5 0 0 1-.693.693l-.079-.064-3.419-3.42A6.5 6.5 0 1 1 11.5 5m0 1a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11m-.485 2.44c.126-.505.844-.505.97 0l.515 2.06 2.06.515c.505.126.505.844 0 .97l-2.06.515-.515 2.06c-.126.505-.844.505-.97 0L10.5 12.5l-2.06-.515c-.505-.126-.505-.844 0-.97l2.06-.515z"
+    children: jsx('path', {
+      fill: 'var(--color-icon)',
+      d: 'M11.5 5a6.5 6.5 0 0 1 4.935 10.728l3.419 3.419.064.078a.5.5 0 0 1-.693.693l-.079-.064-3.419-3.42A6.5 6.5 0 1 1 11.5 5m0 1a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11m-.485 2.44c.126-.505.844-.505.97 0l.515 2.06 2.06.515c.505.126.505.844 0 .97l-2.06.515-.515 2.06c-.126.505-.844.505-.97 0L10.5 12.5l-2.06-.515c-.505-.126-.505-.844 0-.97l2.06-.515z'
     })
   });
 });
 function t$({
   url: e
 }) {
-  return jsx("img", {
+  return jsx('img', {
     src: e,
     className: _$$s3.maxW100.$,
-    alt: "debug"
+    alt: 'debug'
   });
 }
 function t0(e) {
@@ -986,54 +1001,58 @@ function t0(e) {
     obj,
     depth = 0
   } = e;
-  if (null === obj) return jsx("span", {
-    className: _$$s3.colorTextTertiary.$,
-    children: getI18nString("assistant.debug.null")
-  });
-  if ("object" != typeof obj) {
-    if ("string" == typeof obj) {
-      if (obj.startsWith("{") && obj.endsWith("}")) try {
-        let e = JSON.parse(obj);
-        return jsx(t0, {
-          obj: e,
-          depth
-        });
-      } catch (e) {}
-      return obj.startsWith("data:image") ? jsx(t$, {
+  if (obj === null) {
+    return jsx('span', {
+      className: _$$s3.colorTextTertiary.$,
+      children: getI18nString('assistant.debug.null')
+    });
+  }
+  if (typeof obj != 'object') {
+    if (typeof obj == 'string') {
+      if (obj.startsWith('{') && obj.endsWith('}')) {
+        try {
+          let e = JSON.parse(obj);
+          return jsx(t0, {
+            obj: e,
+            depth
+          });
+        } catch (e) {}
+      }
+      return obj.startsWith('data:image') ? jsx(t$, {
         url: obj
-      }) : obj.length > 300 && obj.match(/^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$/) ? jsx(t$, {
+      }) : obj.length > 300 && obj.match(/^([A-Z0-9+/]{4})*([A-Z0-9+/]{3}=|[A-Z0-9+/]{2}==)?$/i) ? jsx(t$, {
         url: `data:image/jpeg;base64,${obj}`
-      }) : jsxs("span", {
+      }) : jsxs('span', {
         className: _$$s3.colorTextSuccess.$,
         children: ['"', obj, '"']
       });
     }
-    return "number" == typeof obj ? jsx("span", {
+    return typeof obj == 'number' ? jsx('span', {
       className: _$$s3.colorTextSelected.$,
       children: obj
-    }) : "boolean" == typeof obj ? jsx("span", {
+    }) : typeof obj == 'boolean' ? jsx('span', {
       className: _$$s3.colorTextComponent.$,
       children: obj.toString()
-    }) : jsx("span", {
+    }) : jsx('span', {
       children: obj
     });
   }
   let r = Array.isArray(obj);
-  let a = r ? ["[", "]"] : ["{", "}"];
+  let a = r ? ['[', ']'] : ['{', '}'];
   let s = Object.entries(obj);
-  return jsxs("div", {
+  return jsxs('div', {
     style: {
       marginLeft: `${8 * depth}px`
     },
-    children: [a[0], s.length > 0 && jsx("div", {
-      children: s.map(([e, t], a) => jsxs("div", {
-        children: [!r && jsx("span", {
+    children: [a[0], s.length > 0 && jsx('div', {
+      children: s.map(([e, t], a) => jsxs('div', {
+        children: [!r && jsx('span', {
           className: _$$s3.colorTextDanger.$,
           children: `"${e}:" `
         }), jsx(t0, {
           obj: t,
           depth: depth + 1
-        }), a < s.length - 1 && ","]
+        }), a < s.length - 1 && ',']
       }, e))
     }), a[1]]
   });
@@ -1042,9 +1061,9 @@ function t1(e) {
   let {
     data
   } = e;
-  return jsx("pre", {
+  return jsx('pre', {
     contentEditable: !0,
-    className: "font-mono text-sm select-all text-wrap",
+    className: 'font-mono text-sm select-all text-wrap',
     children: jsx(t0, {
       obj: data
     })
@@ -1053,8 +1072,8 @@ function t1(e) {
 function t2({
   messages: e
 }) {
-  return jsx("div", {
-    children: jsx("div", {
+  return jsx('div', {
+    children: jsx('div', {
       className: _$$s3.px2.py2.$,
       children: jsx(t1, {
         data: e
@@ -1062,9 +1081,9 @@ function t2({
     })
   });
 }
-let t3 = registerModal(function ({
+let t3 = registerModal(({
   messages: e
-}) {
+}) => {
   let t = useDispatch();
   return jsx(Ao, {
     onClose: () => {
@@ -1074,28 +1093,28 @@ let t3 = registerModal(function ({
     initialWidth: 400,
     allowResizeWidth: !0,
     autoflowHeight: !0,
-    title: getI18nString("assistant.debug.title"),
+    title: getI18nString('assistant.debug.title'),
     dragHeaderOnly: !0,
-    children: jsxs("div", {
+    children: jsxs('div', {
       className: _$$s3.px2.py2.$,
       style: {
         height: 600,
-        overflowX: "scroll",
-        overflowY: "scroll"
+        overflowX: 'scroll',
+        overflowY: 'scroll'
       },
       children: [jsx($n, {
         onClick: () => {
           navigator.clipboard.writeText(JSON.stringify(e, void 0, 2));
         },
-        children: getI18nString("assistant.debug.copy_all")
+        children: getI18nString('assistant.debug.copy_all')
       }), jsx(t2, {
         messages: e
       })]
     })
   });
-}, "AssistantDebugModal", ModalSupportsBackground.YES);
+}, 'AssistantDebugModal', ModalSupportsBackground.YES);
 function t5() {
-  let [e, t] = useState("");
+  let [e, t] = useState('');
   let [i, r] = useAtomValueAndSetter(ta);
   let o = useDispatch();
   let l = useSelector(e => e.modalShown);
@@ -1121,25 +1140,25 @@ function t5() {
     }));
   }, [i.messages, o, l]);
   let u = useCallback(() => {
-    "/debug" === e ? d() : tC(e, i.messages, r, tx);
-    t("");
+    e === '/debug' ? d() : tC(e, i.messages, r, tx);
+    t('');
   }, [e, i.messages, r, d]);
   return jsxs(_$$n, {
     height: wC,
     hideActionPanel: !0,
     children: [jsx(_$$n.Body, {
-      children: 0 === i.messages.length ? jsx(t4, {}) : jsx(_$$q, {
+      children: i.messages.length === 0 ? jsx(t4, {}) : jsx(_$$q, {
         stretchContent: !1,
         useBottomPinning: !0,
         enableScrollShadow: !0,
-        children: jsxs("div", {
+        children: jsxs('div', {
           className: _$$s3.py8.flex.flexColumn.gap4.$,
           children: [i.messages.map((e, t) => jsx(ie, {
             message: e
-          }, `msg-${t}`)), jsx("div", {
+          }, `msg-${t}`)), jsx('div', {
             style: {
-              marginLeft: "44px",
-              marginRight: "12px"
+              marginLeft: '44px',
+              marginRight: '12px'
             },
             children: jsx(t8, {
               status: i.status
@@ -1149,7 +1168,7 @@ function t5() {
       })
     }), jsx(_$$n.Footer, {
       children: jsx(vj, {
-        placeholder: getI18nString("fullscreen_actions.assistant-chat"),
+        placeholder: getI18nString('fullscreen_actions.assistant-chat'),
         searchQuery: e,
         onSearchChange: t,
         endEnhancer: jsx(_$$r, {
@@ -1157,36 +1176,36 @@ function t5() {
             key: Uz.ENTER
           }],
           onAction: u,
-          disabled: 0 === e.length || i.status === tn.Loading,
-          children: getI18nString("assistant.chat.send_message")
+          disabled: e.length === 0 || i.status === tn.Loading,
+          children: getI18nString('assistant.chat.send_message')
         })
       })
     })]
   });
 }
 function t4() {
-  return jsxs("div", {
+  return jsxs('div', {
     className: _$$s3.flex.flexColumn.itemsCenter.justifyEnd.hFull.gap8.$,
-    children: [jsx(_$$m, {}), jsxs("div", {
+    children: [jsx(_$$m, {}), jsxs('div', {
       className: _$$s3.flex.flexRow.gap16.$,
-      children: [jsxs("div", {
+      children: [jsxs('div', {
         className: _$$s3.flex.flexColumn.itemsCenter.flexGrow1.gap8.$,
         children: [jsxs(t6, {
-          inputToSend: "Find similar designs to my selection",
-          children: [jsx(tA, {}), "Find designs"]
+          inputToSend: 'Find similar designs to my selection',
+          children: [jsx(tA, {}), 'Find designs']
         }), jsxs(t6, {
-          inputToSend: "I want to request a feature.",
-          children: [jsx(_$$V3, {}), getI18nString("assistant.chat.suggestion.request_feature")]
+          inputToSend: 'I want to request a feature.',
+          children: [jsx(_$$V3, {}), getI18nString('assistant.chat.suggestion.request_feature')]
         })]
-      }), jsxs("div", {
+      }), jsxs('div', {
         className: _$$s3.flex.flexColumn.itemsCenter.flexGrow1.gap8.$,
         children: [jsxs(t6, {
-          inputToSend: "Make a plugin that creates rectangles in a grid",
-          children: [jsx(_$$x2, {}), getI18nString("assistant.chat.suggestion.make_tool")]
+          inputToSend: 'Make a plugin that creates rectangles in a grid',
+          children: [jsx(_$$x2, {}), getI18nString('assistant.chat.suggestion.make_tool')]
         }), jsxs(t6, {
-          inputToSend: "",
+          inputToSend: '',
           disabled: !0,
-          children: [jsx(_$$C, {}), getI18nString("assistant.chat.suggestion.coming_soon")]
+          children: [jsx(_$$C, {}), getI18nString('assistant.chat.suggestion.coming_soon')]
         })]
       })]
     })]
@@ -1201,13 +1220,13 @@ function t6({
   let o = useCallback(() => {
     tC(t, r.messages, s, tx);
   }, [t, r.messages, s]);
-  return jsx("button", {
+  return jsx('button', {
     className: _$$s3.flex.flexColumn.justifyEnd.wFull.b1.colorBorder.gap8.textBodyLargeStrong.p12.$$if(i, _$$s3.colorTextSecondary).$,
     style: {
       borderRadius: 13,
       minWidth: 150,
       ...(i && {
-        "--color-icon": "var(--color-text-secondary)"
+        '--color-icon': 'var(--color-text-secondary)'
       })
     },
     onClick: o,
@@ -1218,7 +1237,7 @@ function t6({
 function t7({
   children: e
 }) {
-  return jsx("div", {
+  return jsx('div', {
     className: _$$s3.flex.flexRow.itemsCenter.wFull.b1.colorBorder.gap8.h40.textBodyLargeStrong.px4.mr12.$,
     style: {
       borderRadius: 13
@@ -1236,25 +1255,25 @@ function t8({
       break;
     case tn.Loading:
       t = jsxs(t7, {
-        children: [jsx("div", {
+        children: [jsx('div', {
           className: _$$s3.pl4.flex.itemsCenter.justifyCenter.$,
           children: jsx(_$$k2, {})
-        }), jsx("div", {
+        }), jsx('div', {
           className: _$$s3.colorTextSecondary.$,
-          children: getI18nString("assistant.chat.status.loading")
+          children: getI18nString('assistant.chat.status.loading')
         })]
       });
       break;
     case tn.Error:
       t = jsxs(t7, {
-        children: [jsx(_$$Z, {}), getI18nString("assistant.chat.status.error")]
+        children: [jsx(_$$Z, {}), getI18nString('assistant.chat.status.error')]
       });
       break;
     default:
       throwTypeError(e);
   }
   return jsx(_$$N, {
-    mode: "popLayout",
+    mode: 'popLayout',
     initial: !1,
     children: jsx(_$$P2.div, {
       initial: {
@@ -1275,14 +1294,14 @@ function t9(e) {
   let i = useSelector(_$$tB);
   try {
     let r = e.content;
-    let a = "string" == typeof r ? JSON.parse(r) : r;
+    let a = typeof r == 'string' ? JSON.parse(r) : r;
     let {
       userFacing
     } = t_.parse(a);
-    if ("fragments" === userFacing.type) {
+    if (userFacing.type === 'fragments') {
       let e = userFacing.fragments.map(e => ({
         ...e,
-        type: "fig-file-fragment"
+        type: 'fig-file-fragment'
       }));
       return jsx(_$$U2, {
         fragments: e,
@@ -1293,66 +1312,72 @@ function t9(e) {
         disableActionShortcuts: !0
       });
     }
-    if ("assets" === userFacing.type) return jsx(_$$x3, {
-      primary: !0,
-      columns: 3,
-      padding: 8,
-      gap: 12,
-      children: userFacing.assets.map((e, t) => jsx(_$$a, {
-        asset: e,
-        assetTypeDropdownSelection: _$$I2.ALL,
-        disableActionShortcuts: !0,
-        libraryNameByLibraryKeyFromLG: {},
-        openFileKey: i?.key ?? "",
-        queryId: "",
-        searchQuery: userFacing.queries[0],
-        searchSessionId: atomStoreManager.get(_$$dd) ?? "",
-        sectionPosition: t
-      }, t))
-    });
-    if ("selection" === userFacing.type) return jsxs(t7, {
-      children: [jsx(_$$W, {}), getI18nString("assistant.chat.tool_result.selection.success")]
-    });
-    if ("request-feature" === userFacing.type) return jsxs(t7, {
-      children: [jsx(_$$W, {}), getI18nString("assistant.chat.tool_result.feature_request")]
-    });
+    if (userFacing.type === 'assets') {
+      return jsx(_$$x3, {
+        primary: !0,
+        columns: 3,
+        padding: 8,
+        gap: 12,
+        children: userFacing.assets.map((e, t) => jsx(_$$a, {
+          asset: e,
+          assetTypeDropdownSelection: _$$I2.ALL,
+          disableActionShortcuts: !0,
+          libraryNameByLibraryKeyFromLG: {},
+          openFileKey: i?.key ?? '',
+          queryId: '',
+          searchQuery: userFacing.queries[0],
+          searchSessionId: atomStoreManager.get(_$$dd) ?? '',
+          sectionPosition: t
+        }, t))
+      });
+    }
+    if (userFacing.type === 'selection') {
+      return jsxs(t7, {
+        children: [jsx(_$$W, {}), getI18nString('assistant.chat.tool_result.selection.success')]
+      });
+    }
+    if (userFacing.type === 'request-feature') {
+      return jsxs(t7, {
+        children: [jsx(_$$W, {}), getI18nString('assistant.chat.tool_result.feature_request')]
+      });
+    }
     return jsxs(t7, {
-      children: [jsx(_$$g3, {}), getI18nString("assistant.chat.tool_result.success")]
+      children: [jsx(_$$g3, {}), getI18nString('assistant.chat.tool_result.success')]
     });
   } catch (e) {
     return jsxs(t7, {
-      children: [jsx(_$$Z, {}), getI18nString("assistant.chat.tool_result.error")]
+      children: [jsx(_$$Z, {}), getI18nString('assistant.chat.tool_result.error')]
     });
   }
 }
 function ie({
   message: e
 }) {
-  let t = _$$iZ();
-  return "user" === e.role && "string" != typeof e.content && e.content?.length && e.content[0]?.type === "text" && e.content[0].text.startsWith("\x3c!--") || "assistant" === e.role && !e.content || "tool" === e.role && !e.content ? null : jsx("div", {
+  let t = selectCurrentUser();
+  return e.role === 'user' && typeof e.content != 'string' && e.content?.length && e.content[0]?.type === 'text' && e.content[0].text.startsWith('\x3C!--') || e.role === 'assistant' && !e.content || e.role === 'tool' && !e.content ? null : jsx('div', {
     className: _$$s3.px12.py4.flex.wFull.$,
-    children: jsxs("div", {
+    children: jsxs('div', {
       className: _$$s3.gap8.flex.wFull.$,
-      children: [jsx("div", {
+      children: [jsx('div', {
         className: _$$s3.w24.h24.flexShrink0.flex.itemsCenter.justifyCenter.$,
-        children: "assistant" === e.role || "tool" === e.role ? jsx(_$$m, {}) : t?.img_url ? jsx(_$$J, {
+        children: e.role === 'assistant' || e.role === 'tool' ? jsx(_$$m, {}) : t?.img_url ? jsx(_$$J, {
           src: t.img_url,
           className: _$$s3.w16.h16.radiusFull.$
         }) : jsx(_$$_2, {})
-      }), jsxs("div", {
+      }), jsxs('div', {
         className: _$$s3.flex.flexColumn.wFull.pt2.$,
-        children: [jsx("span", {
+        children: [jsx('span', {
           className: _$$s3.textBodyLargeStrong.$,
-          children: "assistant" === e.role || "tool" === e.role ? "Figma" : "You"
-        }), "tool" === e.role ? jsx("div", {
+          children: e.role === 'assistant' || e.role === 'tool' ? 'Figma' : 'You'
+        }), e.role === 'tool' ? jsx('div', {
           className: _$$s3.wFull.pt4.$,
           children: jsx(t9, {
             ...e
           })
-        }) : "string" == typeof e.content ? jsx(it, {
+        }) : typeof e.content == 'string' ? jsx(it, {
           text: e.content
-        }) : jsx("div", {
-          children: e.content?.map((e, t) => "text" === e.type ? jsx(it, {
+        }) : jsx('div', {
+          children: e.content?.map((e, t) => e.type === 'text' ? jsx(it, {
             text: e.text
           }, `sub-t-${t}`) : null)
         })]
@@ -1365,32 +1390,32 @@ function it({
 }) {
   let t = e;
   try {
-    let i = new DOMParser().parseFromString(e, "text/xml").getElementsByTagName("user_input");
-    i.length > 0 && (t = i[0].textContent || "");
+    let i = new DOMParser().parseFromString(e, 'text/xml').getElementsByTagName('user_input');
+    i.length > 0 && (t = i[0].textContent || '');
   } catch {}
-  return jsx("div", {
-    children: t.split("\n").map((e, t) => jsxs("span", {
-      children: [e, jsx("br", {})]
+  return jsx('div', {
+    children: t.split('\n').map((e, t) => jsxs('span', {
+      children: [e, jsx('br', {})]
     }, `l-${t}`))
   });
 }
-let ic = memo(function (e) {
-  return jsx("svg", {
-    width: "24",
-    height: "24",
-    fill: "none",
-    viewBox: "0 0 24 24",
+let ic = memo(e => {
+  return jsx('svg', {
+    width: '24',
+    height: '24',
+    fill: 'none',
+    viewBox: '0 0 24 24',
     ...e,
-    children: jsx("path", {
-      fill: "var(--color-icon)",
-      fillRule: "evenodd",
-      d: "M16 17.5a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5V14H7v3.5A1.5 1.5 0 0 0 8.5 19h7a1.5 1.5 0 0 0 1.5-1.5V9.414a1 1 0 0 0-.293-.707l-3.414-3.414A1 1 0 0 0 12.586 5H8.5A1.5 1.5 0 0 0 7 6.5V11h1V6.5a.5.5 0 0 1 .5-.5H12v2.5a1.5 1.5 0 0 0 1.5 1.5H16zM13 6.414V8.5a.5.5 0 0 0 .5.5h2.086zm-2.146 3.732a.5.5 0 0 0-.708.708L11.293 12H5.5a.5.5 0 0 0 0 1h5.793l-1.147 1.146a.5.5 0 0 0 .708.708l2-2a.5.5 0 0 0 0-.708z",
-      clipRule: "evenodd"
+    children: jsx('path', {
+      fill: 'var(--color-icon)',
+      fillRule: 'evenodd',
+      d: 'M16 17.5a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5V14H7v3.5A1.5 1.5 0 0 0 8.5 19h7a1.5 1.5 0 0 0 1.5-1.5V9.414a1 1 0 0 0-.293-.707l-3.414-3.414A1 1 0 0 0 12.586 5H8.5A1.5 1.5 0 0 0 7 6.5V11h1V6.5a.5.5 0 0 1 .5-.5H12v2.5a1.5 1.5 0 0 0 1.5 1.5H16zM13 6.414V8.5a.5.5 0 0 0 .5.5h2.086zm-2.146 3.732a.5.5 0 0 0-.708.708L11.293 12H5.5a.5.5 0 0 0 0 1h5.793l-1.147 1.146a.5.5 0 0 0 .708.708l2-2a.5.5 0 0 0 0-.708z',
+      clipRule: 'evenodd'
     })
   });
 });
-var ip = iu;
-var im = ih;
+let ip = iu;
+let im = ih;
 function ig() {
   let e = useSelector(e => e.mirror?.appModel);
   return (t, i, r = !1) => {
@@ -1434,13 +1459,13 @@ function i_(e) {
 }
 let iw = new Set([_$$JT.REMOVE_BACKGROUND, _$$JT.UPSCALE_IMAGE]);
 let iS = new Set([...iw, _$$JT.EDIT_IMAGE]);
-var ij = (e => (e[e.NONE = 0] = "NONE", e[e.MULTI_IMAGE = 1] = "MULTI_IMAGE", e[e.SINGLE_IMAGE = 2] = "SINGLE_IMAGE", e[e.IMAGE_PLACEHOLDER = 3] = "IMAGE_PLACEHOLDER", e))(ij || {});
+var ij = (e => (e[e.NONE = 0] = 'NONE', e[e.MULTI_IMAGE = 1] = 'MULTI_IMAGE', e[e.SINGLE_IMAGE = 2] = 'SINGLE_IMAGE', e[e.IMAGE_PLACEHOLDER = 3] = 'IMAGE_PLACEHOLDER', e))(ij || {});
 let iI = new Map([[_$$JT.REMOVE_BACKGROUND, _$$b4.IMAGE_EDITING], [_$$JT.UPSCALE_IMAGE, _$$b4.IMAGE_EDITING], [_$$JT.GENERATE_IMAGE, _$$b4.IMAGE_EDITING], [_$$JT.EDIT_IMAGE, _$$b4.IMAGE_EDITING], [_$$JT.AUTO_RENAME_LAYERS, _$$b4.DESIGN_TOOLS], [_$$JT.CONTENT_FILL, _$$b4.DESIGN_TOOLS], [_$$JT.FIND_INSPIRATION, _$$b4.DESIGN_TOOLS], [_$$JT.FIRST_DRAFT, _$$b4.DESIGN_TOOLS], [_$$JT.FIRST_DRAFT_FINE_TUNE, _$$b4.DESIGN_TOOLS], [_$$JT.MAGIC_LINK, _$$b4.DESIGN_TOOLS], [_$$JT.MAKE_EDITS, _$$b4.DESIGN_TOOLS], [_$$JT.REWRITE_TEXT, _$$b4.RIFFING_AND_WRITING], [_$$JT.SLIDES_GENERATE_SPEAKER_NOTES, _$$b4.RIFFING_AND_WRITING], [_$$JT.SLIDES_REWRITE_TEXT, _$$b4.RIFFING_AND_WRITING], [_$$JT.SHORTEN_TEXT, _$$b4.RIFFING_AND_WRITING], [_$$JT.TRANSLATE_TEXT, _$$b4.RIFFING_AND_WRITING], [_$$JT.WHITEBOARD_GENERATE_CONTENT, _$$b4.TEMPLATES_AND_DIAGRAMS], [_$$JT.SUMMARIZE_STICKIES, _$$b4.ORGANIZE], [_$$JT.SORT_STICKIES_BY_TOPIC, _$$b4.ORGANIZE], [_$$JT.MIND_MAP_GENERATE_IDEAS, _$$b4.TEMPLATES_AND_DIAGRAMS], [OZ, _$$b4.DESIGN_TOOLS]]);
-let ik = [["set-tool-comments", _$$b4.COLLABORATION_TOOLS], ["present-as-prototype", _$$b4.COLLABORATION_TOOLS], ["set-tool-measure", _$$b4.HANDOFF_TOOLS], ["set-tool-annotate", _$$b4.HANDOFF_TOOLS], ["zoom-to-fit", _$$b4.VIEWER_TOOLS], ["export-selected-exportables", _$$b4.VIEWER_TOOLS], ["copy-as-png", _$$b4.VIEWER_TOOLS]];
-let iN = [["theme-light-mode", _$$b4.COMMON_SETTINGS], ["theme-dark-mode", _$$b4.COMMON_SETTINGS], ["theme-system", _$$b4.COMMON_SETTINGS]];
-let iA = [["theme-light-mode", _$$b4.COMMON_SETTINGS], ["theme-dark-mode", _$$b4.COMMON_SETTINGS], ["theme-system", _$$b4.COMMON_SETTINGS]];
-let iO = [["request-to-edit", _$$b4.COLLABORATION_TOOLS], ["set-tool-comments", _$$b4.COLLABORATION_TOOLS], ["present-as-prototype", _$$b4.COLLABORATION_TOOLS], ["zoom-to-fit", _$$b4.VIEWER_TOOLS], ["page-next", _$$b4.VIEWER_TOOLS], ["export-selected-exportables", _$$b4.VIEWER_TOOLS], ["toggle-rulers", _$$b4.VIEWER_TOOLS]];
-var iL = (e => (e.DESIGN_EDITOR_AI = "DESIGN_EDITOR_AI", e.DESIGN_EDITOR_NO_AI = "DESIGN_EDITOR_NO_AI", e.DESIGN_VIEWER = "DESIGN_VIEWER", e.DEV_MODE = "DEV", e.VARIABLES_TABLE = "VARIABLES_TABLE", e.COMPONENT_BROWSER = "COMPONENT_BROWSER", e.NONE = "NONE", e))(iL || {});
+let ik = [['set-tool-comments', _$$b4.COLLABORATION_TOOLS], ['present-as-prototype', _$$b4.COLLABORATION_TOOLS], ['set-tool-measure', _$$b4.HANDOFF_TOOLS], ['set-tool-annotate', _$$b4.HANDOFF_TOOLS], ['zoom-to-fit', _$$b4.VIEWER_TOOLS], ['export-selected-exportables', _$$b4.VIEWER_TOOLS], ['copy-as-png', _$$b4.VIEWER_TOOLS]];
+let iN = [['theme-light-mode', _$$b4.COMMON_SETTINGS], ['theme-dark-mode', _$$b4.COMMON_SETTINGS], ['theme-system', _$$b4.COMMON_SETTINGS]];
+let iA = [['theme-light-mode', _$$b4.COMMON_SETTINGS], ['theme-dark-mode', _$$b4.COMMON_SETTINGS], ['theme-system', _$$b4.COMMON_SETTINGS]];
+let iO = [['request-to-edit', _$$b4.COLLABORATION_TOOLS], ['set-tool-comments', _$$b4.COLLABORATION_TOOLS], ['present-as-prototype', _$$b4.COLLABORATION_TOOLS], ['zoom-to-fit', _$$b4.VIEWER_TOOLS], ['page-next', _$$b4.VIEWER_TOOLS], ['export-selected-exportables', _$$b4.VIEWER_TOOLS], ['toggle-rulers', _$$b4.VIEWER_TOOLS]];
+var iL = (e => (e.DESIGN_EDITOR_AI = 'DESIGN_EDITOR_AI', e.DESIGN_EDITOR_NO_AI = 'DESIGN_EDITOR_NO_AI', e.DESIGN_VIEWER = 'DESIGN_VIEWER', e.DEV_MODE = 'DEV', e.VARIABLES_TABLE = 'VARIABLES_TABLE', e.COMPONENT_BROWSER = 'COMPONENT_BROWSER', e.NONE = 'NONE', e))(iL || {});
 function iR() {
   let e = AppStateTsApi?.singleSlideView().isFocusedNodeViewFocused();
   let t = Vr();
@@ -1457,53 +1482,53 @@ function iD(e, t) {
 function iW({
   children: e
 }) {
-  return jsxs("div", {
-    className: "x78zum5 x1q0g3np x6s0dn4 xg2d0mh",
+  return jsxs('div', {
+    className: 'x78zum5 x1q0g3np x6s0dn4 xg2d0mh',
     children: [e, jsx(_$$E3, {
-      variant: "brandOutline",
-      children: renderI18nText("fullscreen_actions.new")
+      variant: 'brandOutline',
+      children: renderI18nText('fullscreen_actions.new')
     })]
   });
 }
-let i$ = memo(function (e) {
-  return jsx("svg", {
-    width: "24",
-    height: "24",
-    fill: "none",
-    viewBox: "0 0 24 24",
+let i$ = memo(e => {
+  return jsx('svg', {
+    width: '24',
+    height: '24',
+    fill: 'none',
+    viewBox: '0 0 24 24',
     ...e,
-    children: jsx("path", {
-      fill: "var(--color-icon)",
-      fillRule: "evenodd",
-      d: "M16.5 6A1.5 1.5 0 0 1 18 7.5v6a.5.5 0 0 1-1 0V10h-6v7h2.5a.5.5 0 0 1 0 1h-6A1.5 1.5 0 0 1 6 16.5v-9A1.5 1.5 0 0 1 7.5 6zM10 17v-7H7v6.5a.5.5 0 0 0 .5.5zM7 9h10V7.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9.7 7.7.315-1.26c.126-.505.844-.505.97 0l.315 1.26 1.26.315c.505.126.505.844 0 .97l-1.26.315-.315 1.26c-.126.505-.844.505-.97 0L16.7 18.3l-1.26-.315c-.505-.126-.505-.844 0-.97z",
-      clipRule: "evenodd"
+    children: jsx('path', {
+      fill: 'var(--color-icon)',
+      fillRule: 'evenodd',
+      d: 'M16.5 6A1.5 1.5 0 0 1 18 7.5v6a.5.5 0 0 1-1 0V10h-6v7h2.5a.5.5 0 0 1 0 1h-6A1.5 1.5 0 0 1 6 16.5v-9A1.5 1.5 0 0 1 7.5 6zM10 17v-7H7v6.5a.5.5 0 0 0 .5.5zM7 9h10V7.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9.7 7.7.315-1.26c.126-.505.844-.505.97 0l.315 1.26 1.26.315c.505.126.505.844 0 .97l-1.26.315-.315 1.26c-.126.505-.844.505-.97 0L16.7 18.3l-1.26-.315c-.505-.126-.505-.844 0-.97z',
+      clipRule: 'evenodd'
     })
   });
 });
-let i8 = memo(function (e) {
-  return _$$O() ? jsx("svg", {
-    width: "24",
-    height: "24",
-    fill: "none",
-    viewBox: "0 0 24 24",
+let i8 = memo(e => {
+  return _$$O() ? jsx('svg', {
+    width: '24',
+    height: '24',
+    fill: 'none',
+    viewBox: '0 0 24 24',
     ...e,
-    children: jsx("path", {
-      fill: "var(--color-icon)",
-      fillRule: "evenodd",
-      d: "M18 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0m-2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 7a.5.5 0 0 1 .5.5v1h1a.5.5 0 1 1 0 1h-1v1a.5.5 0 1 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 .5-.5M8.564 7.62l-.589 2.355-2.355.589c-1.495.374-1.495 2.498 0 2.872l2.355.588.59 2.356c.373 1.494 2.497 1.494 2.87 0l.59-2.356 2.355-.588c1.495-.374 1.495-2.498 0-2.872l-2.355-.589-.59-2.355c-.373-1.495-2.497-1.495-2.87 0m.97.242L8.8 10.8l-2.937.734c-.485.121-.485.81 0 .931L8.8 13.2l.734 2.937c.122.485.81.485.932 0L11.2 13.2l2.937-.735c.485-.12.485-.81 0-.93L11.2 10.8l-.734-2.938c-.121-.484-.81-.484-.932 0",
-      clipRule: "evenodd"
+    children: jsx('path', {
+      fill: 'var(--color-icon)',
+      fillRule: 'evenodd',
+      d: 'M18 7a2 2 0 1 1-4 0 2 2 0 0 1 4 0m-2 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 7a.5.5 0 0 1 .5.5v1h1a.5.5 0 1 1 0 1h-1v1a.5.5 0 1 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 .5-.5M8.564 7.62l-.589 2.355-2.355.589c-1.495.374-1.495 2.498 0 2.872l2.355.588.59 2.356c.373 1.494 2.497 1.494 2.87 0l.59-2.356 2.355-.588c1.495-.374 1.495-2.498 0-2.872l-2.355-.589-.59-2.355c-.373-1.495-2.497-1.495-2.87 0m.97.242L8.8 10.8l-2.937.734c-.485.121-.485.81 0 .931L8.8 13.2l.734 2.937c.122.485.81.485.932 0L11.2 13.2l2.937-.735c.485-.12.485-.81 0-.93L11.2 10.8l-.734-2.938c-.121-.484-.81-.484-.932 0',
+      clipRule: 'evenodd'
     })
-  }) : jsx("svg", {
-    width: "24",
-    height: "24",
-    fill: "none",
-    viewBox: "0 0 24 24",
+  }) : jsx('svg', {
+    width: '24',
+    height: '24',
+    fill: 'none',
+    viewBox: '0 0 24 24',
     ...e,
-    children: jsx("path", {
-      fill: "var(--color-icon)",
-      fillRule: "evenodd",
-      d: "m9.064 7.12-.589 2.356-2.355.589c-1.495.373-1.495 2.498 0 2.871l2.355.589.59 2.355c.373 1.495 2.497 1.495 2.87 0l.59-2.355 2.355-.589c1.495-.373 1.495-2.498 0-2.871l-2.355-.59-.59-2.354c-.373-1.495-2.497-1.495-2.87 0m.97.243L9.3 10.3l-2.937.735c-.485.12-.485.81 0 .931L9.3 12.7l.734 2.938c.122.484.81.484.932 0L11.7 12.7l2.937-.734c.485-.121.485-.81 0-.931L11.7 10.3l-.734-2.937c-.121-.485-.81-.485-.932 0M15.5 7a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1m1.5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M15.5 14a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 1 1 0 1H16v.5a.5.5 0 0 1-1 0V16h-.5a.5.5 0 0 1 0-1h.5v-.5a.5.5 0 0 1 .5-.5",
-      clipRule: "evenodd"
+    children: jsx('path', {
+      fill: 'var(--color-icon)',
+      fillRule: 'evenodd',
+      d: 'm9.064 7.12-.589 2.356-2.355.589c-1.495.373-1.495 2.498 0 2.871l2.355.589.59 2.355c.373 1.495 2.497 1.495 2.87 0l.59-2.355 2.355-.589c1.495-.373 1.495-2.498 0-2.871l-2.355-.59-.59-2.354c-.373-1.495-2.497-1.495-2.87 0m.97.243L9.3 10.3l-2.937.735c-.485.12-.485.81 0 .931L9.3 12.7l.734 2.938c.122.484.81.484.932 0L11.7 12.7l2.937-.734c.485-.121.485-.81 0-.931L11.7 10.3l-.734-2.937c-.121-.485-.81-.485-.932 0M15.5 7a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1m1.5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M15.5 14a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 1 1 0 1H16v.5a.5.5 0 0 1-1 0V16h-.5a.5.5 0 0 1 0-1h.5v-.5a.5.5 0 0 1 .5-.5',
+      clipRule: 'evenodd'
     })
   });
 });
@@ -1534,7 +1559,7 @@ function rC({
     },
     aiTrackingContext: d,
     instructionAction: {
-      type: "learn_more",
+      type: 'learn_more',
       url: UW
     },
     children: a
@@ -1547,13 +1572,13 @@ let rk = async ({
 }) => {
   let t = _$$Ay3();
   let i = await Ay.figjam.createVisual({
-    prompt: "",
-    visualType: "diagram",
+    prompt: '',
+    visualType: 'diagram',
     directMermaidText: e
   }, t);
-  Rz("diagram", i);
+  Rz('diagram', i);
 };
-var rB = rF;
+let rB = rF;
 function rY(e, t) {
   return YJ({
     nodeIds: Object.keys(e),
@@ -1562,13 +1587,13 @@ function rY(e, t) {
       detachInstances: !0,
       includeType: !0,
       skipNodeIdsWithoutType: t,
-      classPropName: "class",
-      autoLayoutTagName: "div",
-      frameTagName: "div"
+      classPropName: 'class',
+      autoLayoutTagName: 'div',
+      frameTagName: 'div'
     }
   });
 }
-let rX = "first_draft_prompt_history_";
+let rX = 'first_draft_prompt_history_';
 async function r$(e, t, i) {
   let r = getSingletonSceneGraph();
   for (let n of i.flatMap(e => e.nodeWeightInfos)) {
@@ -1585,35 +1610,35 @@ async function r$(e, t, i) {
     };
     try {
       await loadPluginFont(s);
-      _$$l2.user("first-draft-theme-modal-adjust-font-family", () => {
+      _$$l2.user('first-draft-theme-modal-adjust-font-family', () => {
         i.fontName = s;
       });
     } catch (r) {
       let e = {
         family: t,
-        style: "Regular"
+        style: 'Regular'
       };
       try {
         await loadPluginFont(e);
-        _$$l2.user("first-draft-theme-modal-adjust-font-family", () => {
+        _$$l2.user('first-draft-theme-modal-adjust-font-family', () => {
           i.fontName = e;
         });
       } catch (t) {
-        let e = void 0 === t ? "undefined" : t instanceof Error ? t.message : JSON.stringify(t);
-        analyticsEventManager.trackDefinedEvent("ai_generation.first_draft_font_error", {
+        let e = void 0 === t ? 'undefined' : t instanceof Error ? t.message : JSON.stringify(t);
+        analyticsEventManager.trackDefinedEvent('ai_generation.first_draft_font_error', {
           error: e,
           family: s.family,
           style: s.style,
-          location: "adjust-font"
+          location: 'adjust-font'
         });
       }
     }
-    _$$l2.user("first-draft-theme-modal-adjust-font-family", () => {
+    _$$l2.user('first-draft-theme-modal-adjust-font-family', () => {
       a?.letterSpacing !== void 0 && (i.letterSpacing = a.letterSpacing);
     });
   }
 }
-let ne = new _$$q2(40);
+let ne = new LRUCache(40);
 async function nt({
   changes: e,
   makeChangesSessionId: t,
@@ -1625,19 +1650,19 @@ async function nt({
   if (!a) return !1;
   let s = `${t}:${e.affectedId}`;
   if (ne.has(s)) {
-    reportError(_$$e.AI_GENERATION, Error("first-draft: Attempted to apply content changes twice"), {
+    reportError(_$$e.AI_GENERATION, new Error('first-draft: Attempted to apply content changes twice'), {
       extra: {
         clientLifecycleId: i
       }
     });
     return !1;
   }
-  if (ne.set(s, !0), !a.getSharedPluginData("jsx", "isImage")) {
-    _$$l2.ai("first-draft-iterate-text-content", () => function ({
+  if (ne.set(s, !0), !a.getSharedPluginData('jsx', 'isImage')) {
+    _$$l2.ai('first-draft-iterate-text-content', () => function ({
       node: e,
       textContent: t
     }) {
-      return "TEXT" !== e.type ? (logWarning("first-draft", "Update text called on a non-text node", {
+      return e.type !== 'TEXT' ? (logWarning('first-draft', 'Update text called on a non-text node', {
         nodeId: e.guid,
         nodeType: e.type
       }), !1) : (e.characters = t, !0);
@@ -1648,7 +1673,7 @@ async function nt({
     return !0;
   }
   {
-    let t = a.getSharedPluginData("jsx", "background");
+    let t = a.getSharedPluginData('jsx', 'background');
     await n.current.logImageLoad(() => Og({
       node: a,
       description: e.content,
@@ -1686,34 +1711,34 @@ async function na({
       jsxToInsert
     } = e;
     let l = getSingletonSceneGraph().get(affectedId);
-    if (!l) throw Error("Could not find affected node in the scene");
+    if (!l) throw new Error('Could not find affected node in the scene');
     let d = getSingletonSceneGraph().get(a);
-    if (!d) throw Error("Could not find root node in the scene");
+    if (!d) throw new Error('Could not find root node in the scene');
     let c = _$$BY(d);
     let u = l.parentNode;
-    if (!u) throw Error("Could not find affected node in the scene");
+    if (!u) throw new Error('Could not find affected node in the scene');
     let p = u.childrenGuids.indexOf(affectedId);
-    if (-1 === p) throw Error("Could not find affected node in the scene");
-    let h = "below";
-    "insert" === e.type && (h = e.insertBehavior);
+    if (p === -1) throw new Error('Could not find affected node in the scene');
+    let h = 'below';
+    e.type === 'insert' && (h = e.insertBehavior);
     let m = await ni(jsxToInsert);
-    if (!m || 0 === m.length) throw Error("Failed to parse JSX");
+    if (!m || m.length === 0) throw new Error('Failed to parse JSX');
     let f = fv(m);
-    if (0 === f.size) throw Error("Only building blocks can be inserted or replaced");
+    if (f.size === 0) throw new Error('Only building blocks can be inserted or replaced');
     await t({
-      jsxStr: "```jsx\n" + jsxToInsert + "\n```",
+      jsxStr: `\`\`\`jsx\n${jsxToInsert}\n\`\`\``,
       options: {
         ...Dp(),
-        insertBehavior: "inline",
+        insertBehavior: 'inline',
         dsKitKey: i,
         themeProperties: r,
         deviceType: c,
         parentNodeId: u.guid,
-        insertAtIndex: "above" === h ? p : p + 1,
+        insertAtIndex: h === 'above' ? p : p + 1,
         imageArgs: n
       }
     });
-    "replace" === e.type && _$$l2.ai("first-draft-make-changes-remove", () => {
+    e.type === 'replace' && _$$l2.ai('first-draft-make-changes-remove', () => {
       l.removeSelfAndChildren();
     });
   } catch (t) {
@@ -1730,53 +1755,57 @@ function nl() {
   let e = _$$eY();
   let t = Object.entries(KH()).filter(([e, t]) => t).map(([e]) => e);
   let i = null;
-  for (let r of t) if (i = function (t) {
-    let i = "";
-    let r = t;
-    for (; !i && r;) {
-      let t = e.get(r);
-      if (!t) break;
-      t.getSharedPluginData(SV, "userPrompt") && (i = r);
-      r = t.parentGuid || "";
+  for (let r of t) {
+    if (i = function (t) {
+      let i = '';
+      let r = t;
+      for (; !i && r;) {
+        let t = e.get(r);
+        if (!t) break;
+        t.getSharedPluginData(SV, 'userPrompt') && (i = r);
+        r = t.parentGuid || '';
+      }
+      return i || null;
+    }(r)) {
+      break;
     }
-    return i || null;
-  }(r)) break;
+  }
   return i;
 }
 function nh() {
-  return jsx("div", {
-    className: "animation_overlay--Sweep--yk3ZW"
+  return jsx('div', {
+    className: 'animation_overlay--Sweep--yk3ZW'
   });
 }
-var nx = n_;
-var ny = (e => (e.mobile = "MOBILE", e.web = "WEB", e))(ny || {});
+let nx = n_;
+var ny = (e => (e.mobile = 'MOBILE', e.web = 'WEB', e))(ny || {});
 function nb(e = 1) {
   let t = [{
-    label: getI18nString("first_draft.make_changes.prompt_labels.change_font"),
-    prompt: getI18nString("first_draft.make_changes.prompts.futuristic_font")
+    label: getI18nString('first_draft.make_changes.prompt_labels.change_font'),
+    prompt: getI18nString('first_draft.make_changes.prompts.futuristic_font')
   }, {
-    label: getI18nString("first_draft.make_changes.prompt_labels.colors"),
-    prompt: getI18nString("first_draft.make_changes.prompts.calming_colors")
+    label: getI18nString('first_draft.make_changes.prompt_labels.colors'),
+    prompt: getI18nString('first_draft.make_changes.prompts.calming_colors')
   }, {
-    label: getI18nString("first_draft.make_changes.prompt_labels.round_corners"),
-    prompt: getI18nString("first_draft.make_changes.prompts.round_corners")
+    label: getI18nString('first_draft.make_changes.prompt_labels.round_corners'),
+    prompt: getI18nString('first_draft.make_changes.prompts.round_corners')
   }, {
-    label: getI18nString("first_draft.make_changes.prompt_labels.colors"),
-    prompt: getI18nString("first_draft.make_changes.prompts.watermelon_theme")
+    label: getI18nString('first_draft.make_changes.prompt_labels.colors'),
+    prompt: getI18nString('first_draft.make_changes.prompts.watermelon_theme')
   }, {
-    label: getI18nString("first_draft.make_changes.prompt_labels.rewrite"),
-    prompt: getI18nString("first_draft.make_changes.prompts.punchier_text")
+    label: getI18nString('first_draft.make_changes.prompt_labels.rewrite'),
+    prompt: getI18nString('first_draft.make_changes.prompts.punchier_text')
   }, {
-    label: getI18nString("first_draft.make_changes.prompt_labels.imagery"),
-    prompt: getI18nString("first_draft.make_changes.prompts.vibrant_images")
+    label: getI18nString('first_draft.make_changes.prompt_labels.imagery'),
+    prompt: getI18nString('first_draft.make_changes.prompts.vibrant_images')
   }, {
-    label: getI18nString("first_draft.make_changes.prompt_labels.add"),
-    prompt: getI18nString("first_draft.make_changes.prompts.add_another_section")
+    label: getI18nString('first_draft.make_changes.prompt_labels.add'),
+    prompt: getI18nString('first_draft.make_changes.prompts.add_another_section')
   }, {
-    label: getI18nString("first_draft.make_changes.prompt_labels.replace"),
-    prompt: getI18nString("first_draft.make_changes.prompts.replace_hero_image")
+    label: getI18nString('first_draft.make_changes.prompt_labels.replace'),
+    prompt: getI18nString('first_draft.make_changes.prompts.replace_hero_image')
   }];
-  return eV()(nx()(t.filter(e => "" !== nC(e.label))), e => e.label).slice(0, e);
+  return eV()(nx()(t.filter(e => nC(e.label) !== '')), e => e.label).slice(0, e);
 }
 function nC(e) {
   return e.trim().toLowerCase();
@@ -1810,19 +1839,19 @@ function nB({
   let [s, o] = useState(!1);
   useEffect(() => {
     let e = () => r.current?.blur();
-    document.addEventListener("mousedown", e);
-    return () => document.removeEventListener("mousedown", e);
+    document.addEventListener('mousedown', e);
+    return () => document.removeEventListener('mousedown', e);
   }, []);
   useEffect(() => {
     let e = r.current;
     if (!e) return;
     let t = () => o(!0);
     let i = () => o(!1);
-    e.addEventListener("focus", t);
-    e.addEventListener("blur", i);
+    e.addEventListener('focus', t);
+    e.addEventListener('blur', i);
     return () => {
-      e.removeEventListener("focus", t);
-      e.removeEventListener("blur", i);
+      e.removeEventListener('focus', t);
+      e.removeEventListener('blur', i);
     };
   }, []);
   let l = useMemo(() => ({
@@ -1831,8 +1860,8 @@ function nB({
   }), [s, i]);
   return jsx(_$$_4, {
     fillWidth: !0,
-    children: jsx("div", {
-      className: "keyboard_navigation_on_focus--parent--XamDV",
+    children: jsx('div', {
+      className: 'keyboard_navigation_on_focus--parent--XamDV',
       tabIndex: 0,
       ref: r,
       children: jsx(nP, {
@@ -1885,7 +1914,7 @@ function nU({
   return jsx(D8, {
     forwardedRef: o,
     className: rB()(i, {
-      "keyboard_navigation_on_focus--active--vGhwX": active
+      'keyboard_navigation_on_focus--active--vGhwX': active
     }),
     ...r,
     ...s,
@@ -1906,23 +1935,23 @@ function nV({
 }) {
   let l = useCallback(() => {
     t(o.color);
-    fullscreenValue.triggerAction("commit");
+    fullscreenValue.triggerAction('commit');
   }, [o.color, t]);
   return jsx(nU, {
     primaryAction: l,
     children: jsx(cd, {
-      size: "medium",
+      size: 'medium',
       value: o.color,
-      background: "dark" === e ? "dark" : "light",
+      background: e === 'dark' ? 'dark' : 'light',
       onClick: l,
-      paletteType: "base",
+      paletteType: 'base',
       swatchStyle: {
         ...(i === s && {
           outline: r,
-          outlineOffset: "2px"
+          outlineOffset: '2px'
         }),
-        boxSizing: "border-box",
-        boxShadow: "none"
+        boxSizing: 'border-box',
+        boxShadow: 'none'
       }
     }, o.string)
   });
@@ -1930,25 +1959,25 @@ function nV({
 function nW(e) {
   return jsx(nU, {
     primaryAction: e.onClick,
-    children: jsx("div", {
+    children: jsx('div', {
       className: _$$s3.radiusFull.$,
-      children: -1 === e.activeColorIdx ? jsx(cd, {
-        size: "medium",
+      children: e.activeColorIdx === -1 ? jsx(cd, {
+        size: 'medium',
         value: e.value,
-        paletteType: "base",
-        selectionState: "selected_custom",
-        background: "dark" === e.theme ? "dark" : "light",
+        paletteType: 'base',
+        selectionState: 'selected_custom',
+        background: e.theme === 'dark' ? 'dark' : 'light',
         onClick: e.onClick,
         swatchStyle: {
-          boxSizing: "border-box",
-          boxShadow: "none"
+          boxSizing: 'border-box',
+          boxShadow: 'none'
         }
       }) : jsx(ZI, {
-        size: "medium",
+        size: 'medium',
         onClick: e.onClick,
         swatchStyle: {
-          boxSizing: "border-box",
-          boxShadow: "none"
+          boxSizing: 'border-box',
+          boxShadow: 'none'
         }
       })
     })
@@ -1963,7 +1992,7 @@ function nY({
   let s = useCallback(() => {
     i(!0);
   }, [i]);
-  let o = zN(r, DA);
+  let o = useStableMemo(r, DA);
   let {
     activeColorIdx,
     activeColorOutline
@@ -1975,10 +2004,10 @@ function nY({
   let c = Math.max(activeColorIdx, 0);
   return jsx(nB, {
     defaultActiveIndex: c,
-    children: jsx("div", {
+    children: jsx('div', {
       className: _$$s3.flex.flexGrow1.justifyBetween.$,
       style: {
-        boxSizing: "content-box"
+        boxSizing: 'content-box'
       },
       children: jsxs(Fragment, {
         children: [nz.map((i, r) => jsx(nV, {
@@ -1998,9 +2027,9 @@ function nY({
     })
   });
 }
-var nq = (e => (e.COLOR = "color", e.RADIUS = "radius", e.SPACING = "spacing", e.FONT = "font", e))(nq || {});
-var nX = (e => (e.TITLE = "title", e.BODY = "body", e.LABLE = "label", e))(nX || {});
-let nZ = "theme_editor--svgText--yyKtR";
+var nq = (e => (e.COLOR = 'color', e.RADIUS = 'radius', e.SPACING = 'spacing', e.FONT = 'font', e))(nq || {});
+var nX = (e => (e.TITLE = 'title', e.BODY = 'body', e.LABLE = 'label', e))(nX || {});
+let nZ = 'theme_editor--svgText--yyKtR';
 let nQ = createContext({
   activeTab: nq.COLOR,
   onTabChange: () => {},
@@ -2020,18 +2049,18 @@ function n$({
     onTabChange(i);
   }, [onTabChange, i]);
   return jsx(nU, {
-    "aria-label": e,
-    primaryAction: l,
-    className: rB()("theme_editor--iconButton--SYPlk theme_editor--baseIconButton--15rMM", activeTab === i && "theme_editor--iconActive--8Nsgk"),
-    onClick: l,
-    recordingKey: _$$Pt(recordingKey, i),
-    htmlAttributes: useMemo(() => ({
-      "data-tooltip": e,
-      "data-tooltip-type": Ib.TEXT,
-      "data-tooltip-show-above": !0,
-      "data-clickable": !0
+    'aria-label': e,
+    'primaryAction': l,
+    'className': rB()('theme_editor--iconButton--SYPlk theme_editor--baseIconButton--15rMM', activeTab === i && 'theme_editor--iconActive--8Nsgk'),
+    'onClick': l,
+    'recordingKey': generateRecordingKey(recordingKey, i),
+    'htmlAttributes': useMemo(() => ({
+      'data-tooltip': e,
+      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-show-above': !0,
+      'data-clickable': !0
     }), [e]),
-    children: t
+    'children': t
   });
 }
 function n6(e, t) {
@@ -2045,9 +2074,9 @@ function n7({
 }) {
   let o = useDispatch();
   let l = Um();
-  let c = useRef(document.getElementById(t || "fullscreen-root"));
+  let c = useRef(document.getElementById(t || 'fullscreen-root'));
   kz(Uz.ESCAPE, r);
-  kz(Uz.BACKSPACE, r, document.activeElement?.tagName.toLowerCase() !== "input");
+  kz(Uz.BACKSPACE, r, document.activeElement?.tagName.toLowerCase() !== 'input');
   let [u, p] = useState(ColorFormatEnum.HEX);
   let [h, m] = useState(n6(e, u));
   let [f, g] = useState({
@@ -2069,7 +2098,7 @@ function n7({
   _$$wY(c, () => x());
   let b = _$$A4(async (e, t) => {
     await i(e);
-    t && fullscreenValue.triggerAction("commit");
+    t && fullscreenValue.triggerAction('commit');
   }, 100);
   let C = useCallback((e, t) => {
     m(e);
@@ -2093,35 +2122,35 @@ function n7({
     canAcceptStyles: !1,
     canAcceptVariables: !1
   };
-  return jsxs("div", {
+  return jsxs('div', {
     className: _$$s3.flex.pr16.pl16.pt8.pb4.flexRow.justifyCenter.itemsEnd.flexGrow1.gap16.$,
-    children: [jsxs("div", {
+    children: [jsxs('div', {
       className: _$$s3.flex.flexRow.justifyCenter.itemsCenter.flexGrow1.gap8.$,
       children: [jsx(_$$K3, {
-        "aria-label": getI18nString("first_draft.theme_tool.close_panel"),
-        onClick: () => r(),
-        recordingKey: "closeSectionEditor",
-        children: jsx(_$$C3, {})
-      }), jsxs("div", {
+        'aria-label': getI18nString('first_draft.theme_tool.close_panel'),
+        'onClick': () => r(),
+        'recordingKey': 'closeSectionEditor',
+        'children': jsx(_$$C3, {})
+      }), jsxs('div', {
         className: _$$s3.flex.flexColumn.justifyBetween.wFull.itemsEnd.gap4.$,
-        children: [jsx("div", {
+        children: [jsx('div', {
           className: _$$s3.flex.justifyBetween.itemsCenter.wFull.$,
           children: jsx(_$$e5, {
             width: 168,
             color: h,
             changeCallback: C
           })
-        }), jsxs("div", {
+        }), jsxs('div', {
           className: _$$s3.flex.justifyBetween.itemsCenter.wFull.gap8.$,
           style: {
             maxWidth: 210
           },
           children: [jsx(_$$p2, {
-            selectClassName: rB()(_$$s3.flexShrink1.flexGrow0.flex.$, "theme_editor--colorSelect--wIbMH", "theme_editor--precedence--lvYGC"),
+            selectClassName: rB()(_$$s3.flexShrink1.flexGrow0.flex.$, 'theme_editor--colorSelect--wIbMH', 'theme_editor--precedence--lvYGC'),
             colorFormat: u,
             onColorFormatChange: e => {
               p(e);
-              "l" in h && e !== ColorFormatEnum.HSL ? m(qN(w_(h))) : e !== ColorFormatEnum.HSL || "l" in h || m(_$$oB(w_(h)));
+              'l' in h && e !== ColorFormatEnum.HSL ? m(qN(w_(h))) : e !== ColorFormatEnum.HSL || 'l' in h || m(_$$oB(w_(h)));
             },
             dispatch: o,
             dropdownShown: l
@@ -2136,45 +2165,45 @@ function n7({
           })]
         })]
       })]
-    }), jsx("div", {
+    }), jsx('div', {
       className: _$$s3.flex.justifyCenter.itemsCenter.relative.mr8.$,
       ref: y,
-      children: jsx("div", {
+      children: jsx('div', {
         style: {
           width: 115
         },
-        children: jsxs("div", {
+        children: jsxs('div', {
           style: {
-            position: "fixed",
+            position: 'fixed',
             width: 115,
             height: 115,
             ...f
           },
-          children: [jsx("div", {
-            className: rB()("theme_editor--pickerUnderlay--gfCHS", _$$s3.colorBg.elevation200.absolute.p2.$),
+          children: [jsx('div', {
+            className: rB()('theme_editor--pickerUnderlay--gfCHS', _$$s3.colorBg.elevation200.absolute.p2.$),
             style: {
               width: 115,
               height: 115,
               borderRadius: 14
             }
-          }), jsx("div", {
-            className: rB()("theme_editor--pickerOverlay--Ykwy9", _$$s3.flex.colorBg.absolute.p2.overflowHidden.justifyCenter.alignCenter.$),
+          }), jsx('div', {
+            className: rB()('theme_editor--pickerOverlay--Ykwy9', _$$s3.flex.colorBg.absolute.p2.overflowHidden.justifyCenter.alignCenter.$),
             style: {
               width: 115,
               height: 115,
               borderRadius: 14
             },
             children: jsx(_$$T5, {
-              containerClass: "theme_editor--pickerWrapper--fs-6V",
+              containerClass: 'theme_editor--pickerWrapper--fs-6V',
               size: 115,
               color: h,
               changeCallback: C,
               canvasWrapperStyles: {
                 outlineWidth: 0,
-                borderRadius: "13px"
+                borderRadius: '13px'
               },
               ghostStyles: {
-                boxShadow: "none"
+                boxShadow: 'none'
               }
             })
           })]
@@ -2210,37 +2239,37 @@ function n9(e) {
       }(e.activeTab),
       children: jsxs(_$$B, {
         fullWidth: !0,
-        justify: "space-between",
+        justify: 'space-between',
         children: [jsx(n$, {
           tab: nq.COLOR,
-          label: getI18nString("first_draft.theme_panel.color"),
+          label: getI18nString('first_draft.theme_panel.color'),
           children: jsx(cd, {
-            size: "medium",
+            size: 'medium',
             value: i,
-            paletteType: "base",
-            background: "dark" === t ? "dark" : "light",
+            paletteType: 'base',
+            background: t === 'dark' ? 'dark' : 'light',
             swatchStyle: {
-              boxSizing: "border-box",
-              boxShadow: "none"
+              boxSizing: 'border-box',
+              boxShadow: 'none'
             }
           })
         }), jsx(n$, {
           tab: nq.RADIUS,
-          label: getI18nString("first_draft.theme_panel.radius"),
+          label: getI18nString('first_draft.theme_panel.radius'),
           children: jsx(_$$B2, {
             svg: r,
-            className: "theme_editor--svgIcon--ongu6"
+            className: 'theme_editor--svgIcon--ongu6'
           })
         }), jsx(n$, {
           tab: nq.SPACING,
-          label: getI18nString("first_draft.theme_panel.spacing"),
+          label: getI18nString('first_draft.theme_panel.spacing'),
           children: jsx(_$$B2, {
             svg: s,
             className: nZ
           })
         }), jsx(n$, {
           tab: nq.FONT,
-          label: getI18nString("first_draft.theme_panel.font"),
+          label: getI18nString('first_draft.theme_panel.font'),
           children: jsx(_$$B2, {
             svg: _$$A7,
             className: nZ
@@ -2251,7 +2280,7 @@ function n9(e) {
   });
 }
 let ae = {
-  [nq.COLOR]: function (e) {
+  [nq.COLOR](e) {
     let t = DP();
     let [i, r] = useState(!1);
     let {
@@ -2264,30 +2293,30 @@ let ae = {
     return i ? jsx(n7, {
       onHide: o,
       ...e
-    }) : jsxs("div", {
+    }) : jsxs('div', {
       className: _$$s3.flex.flexRow.flexGrow1.p16.pt12.pb12.gap16.itemsCenter.$,
       children: [jsx(as, {
         recordingKey: e.recordingKey
-      }), jsx("div", {
+      }), jsx('div', {
         className: _$$s3.flex0.flexShrink0.$,
         children: jsxs(_$$bL, {
           onChange: e.onChangeColorMode,
           value: e.colorMode,
-          recordingKey: _$$Pt(e, "colorModePicker"),
+          recordingKey: generateRecordingKey(e, 'colorModePicker'),
           legend: jsx(_$$q3, {
-            children: renderI18nText("first_draft.theme_tool.color.mode_picker")
+            children: renderI18nText('first_draft.theme_tool.color.mode_picker')
           }),
           children: [jsx(c$, {
-            value: "light",
-            "aria-label": getI18nString("first_draft.theme_tool.color.light_mode"),
-            icon: jsx("div", {
+            'value': 'light',
+            'aria-label': getI18nString('first_draft.theme_tool.color.light_mode'),
+            'icon': jsx('div', {
               className: _$$s3.flex.w44.itemsCenter.justifyCenter.$,
               children: jsx(_$$Z2, {})
             })
           }), jsx(c$, {
-            value: "dark",
-            "aria-label": getI18nString("first_draft.theme_tool.color.dark_mode"),
-            icon: jsx("div", {
+            'value': 'dark',
+            'aria-label': getI18nString('first_draft.theme_tool.color.dark_mode'),
+            'icon': jsx('div', {
               className: _$$s3.flex.w44.itemsCenter.justifyCenter.$,
               children: jsx(_$$a2, {})
             })
@@ -2301,63 +2330,63 @@ let ae = {
       })]
     });
   },
-  [nq.RADIUS]: function (e) {
+  [nq.RADIUS](e) {
     let [t, i] = useState(e.cornerRadiusStop);
-    return jsxs("div", {
+    return jsxs('div', {
       className: _$$s3.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
       children: [jsx(as, {
         recordingKey: e.recordingKey
       }), jsx(Label, {
         className: _$$s3.opacity0_5.$,
-        children: renderI18nText("first_draft.theme_panel.radius")
+        children: renderI18nText('first_draft.theme_panel.radius')
       }), jsx(_$$A5, {
-        "aria-label": getI18nString("first_draft.theme_panel.radius"),
-        bigStep: .2,
-        defaultValue: t,
-        max: Ne,
-        min: Xy,
-        onChange: e.onChangeCornerRadiusStop,
-        rangeAnchor: Xy,
-        recordingKey: _$$Pt(e, "cornerRadiusSlider"),
-        step: .1,
-        value: e.cornerRadiusStop
+        'aria-label': getI18nString('first_draft.theme_panel.radius'),
+        'bigStep': 0.2,
+        'defaultValue': t,
+        'max': Ne,
+        'min': Xy,
+        'onChange': e.onChangeCornerRadiusStop,
+        'rangeAnchor': Xy,
+        'recordingKey': generateRecordingKey(e, 'cornerRadiusSlider'),
+        'step': 0.1,
+        'value': e.cornerRadiusStop
       })]
     });
   },
-  [nq.SPACING]: function (e) {
+  [nq.SPACING](e) {
     let [t, i] = useState(e.spacingStop);
-    return jsxs("div", {
+    return jsxs('div', {
       className: _$$s3.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
       children: [jsx(as, {
         recordingKey: e.recordingKey
       }), jsx(Label, {
         className: _$$s3.opacity0_5.$,
-        children: renderI18nText("first_draft.theme_panel.spacing")
+        children: renderI18nText('first_draft.theme_panel.spacing')
       }), jsx(_$$A5, {
-        "aria-label": getI18nString("first_draft.theme_panel.spacing"),
-        bigStep: .2,
-        defaultValue: t,
-        max: Ne,
-        min: Xy,
-        onChange: e.onChangeSpacingStop,
-        rangeAnchor: Xy,
-        recordingKey: _$$Pt(e, "spacingSizeSlider"),
-        step: jF,
-        value: e.spacingStop
+        'aria-label': getI18nString('first_draft.theme_panel.spacing'),
+        'bigStep': 0.2,
+        'defaultValue': t,
+        'max': Ne,
+        'min': Xy,
+        'onChange': e.onChangeSpacingStop,
+        'rangeAnchor': Xy,
+        'recordingKey': generateRecordingKey(e, 'spacingSizeSlider'),
+        'step': jF,
+        'value': e.spacingStop
       })]
     });
   },
-  [nq.FONT]: function (e) {
+  [nq.FONT](e) {
     let [t, i, r] = _$$t3.useTabs({
-      [nX.TITLE]: null !== e.titleFont,
-      [nX.BODY]: null !== e.bodyFont,
-      [nX.LABLE]: null !== e.labelFont
+      [nX.TITLE]: e.titleFont !== null,
+      [nX.BODY]: e.bodyFont !== null,
+      [nX.LABLE]: e.labelFont !== null
     }, {
-      recordingKey: _$$Pt(e, "fontEditor")
+      recordingKey: generateRecordingKey(e, 'fontEditor')
     });
-    return jsxs("div", {
+    return jsxs('div', {
       className: _$$s3.flex.flex1.flexColumn.$,
-      children: [jsxs("div", {
+      children: [jsxs('div', {
         className: _$$s3.flex.flex1.flexRow.gap8.p8.$,
         children: [jsx(as, {
           recordingKey: e.recordingKey
@@ -2365,18 +2394,18 @@ let ae = {
           manager: r,
           children: [jsx(_$$t3.Tab, {
             ...t.title,
-            children: renderI18nText("first_draft.theme_panel.label.fontTitle")
+            children: renderI18nText('first_draft.theme_panel.label.fontTitle')
           }), jsx(_$$t3.Tab, {
             ...t.body,
-            children: renderI18nText("first_draft.theme_panel.label.fontBody")
+            children: renderI18nText('first_draft.theme_panel.label.fontBody')
           }), jsx(_$$t3.Tab, {
             ...t.label,
-            children: renderI18nText("first_draft.theme_panel.label.fontLabel")
+            children: renderI18nText('first_draft.theme_panel.label.fontLabel')
           })]
         })]
-      }), jsx("div", {
+      }), jsx('div', {
         className: _$$s3.wFull.colorBgTertiary.h1.$
-      }), jsxs("div", {
+      }), jsxs('div', {
         className: _$$s3.flex.flex1.flexColumn.gap8.p8.$,
         children: [jsx(_$$t3.TabPanel, {
           ...i.title,
@@ -2405,10 +2434,10 @@ function at(e) {
   }, []);
   if (useLayoutEffect(i, [i]), !e.section) return null;
   let r = ae[e.section];
-  return jsx("div", {
+  return jsx('div', {
     ref: t,
     tabIndex: -1,
-    className: rB()("theme_editor--boxInherit--BjYCO", _$$s3.flex.relative.wFull.$),
+    className: rB()('theme_editor--boxInherit--BjYCO', _$$s3.flex.relative.wFull.$),
     children: jsx(r, {
       focusParent: i,
       ...e
@@ -2426,7 +2455,7 @@ function ai({
   return jsx(nB, {
     defaultActiveIndex: r > -1 ? r : 0,
     itemsPerRow: 5,
-    children: jsx("div", {
+    children: jsx('div', {
       className: _$$s3.flex.flex1.flexWrap.itemsCenter.rowGap8.justifyBetween.$,
       children: t.map(({
         key: t,
@@ -2434,17 +2463,17 @@ function ai({
         svg: a,
         onClick: s
       }) => jsx(nU, {
-        "aria-label": r,
-        recordingKey: _$$Pt(i, t),
-        className: rB()("theme_editor--fontIconButton--Vc-KE theme_editor--iconButton--SYPlk theme_editor--baseIconButton--15rMM", nZ, e === t && "theme_editor--selected--2BGbx"),
-        primaryAction: s,
-        onClick: s,
-        htmlAttributes: {
-          "data-tooltip": r,
-          "data-tooltip-show-above": !0,
-          "data-tooltip-type": Ib.TEXT
+        'aria-label': r,
+        'recordingKey': generateRecordingKey(i, t),
+        'className': rB()('theme_editor--fontIconButton--Vc-KE theme_editor--iconButton--SYPlk theme_editor--baseIconButton--15rMM', nZ, e === t && 'theme_editor--selected--2BGbx'),
+        'primaryAction': s,
+        'onClick': s,
+        'htmlAttributes': {
+          'data-tooltip': r,
+          'data-tooltip-show-above': !0,
+          'data-tooltip-type': Ib.TEXT
         },
-        children: jsx(_$$B2, {
+        'children': jsx(_$$B2, {
           svg: a
         })
       }, t))
@@ -2459,7 +2488,7 @@ function ar(e) {
     svg: i,
     onClick: () => e.onChangeTitleFont(t)
   }));
-  return null === e.titleFont ? null : jsx(ai, {
+  return e.titleFont === null ? null : jsx(ai, {
     selectedKey: t,
     items: i,
     recordingKey: e.recordingKey
@@ -2473,7 +2502,7 @@ function an(e) {
     svg: i,
     onClick: () => e.onChangeBodyFont(t)
   }));
-  return null === e.bodyFont ? null : jsx(ai, {
+  return e.bodyFont === null ? null : jsx(ai, {
     selectedKey: t,
     items: i,
     recordingKey: e.recordingKey
@@ -2487,7 +2516,7 @@ function aa(e) {
     svg: i,
     onClick: () => e.onChangeLabelFont(t)
   }));
-  return null === e.labelFont ? null : jsx(ai, {
+  return e.labelFont === null ? null : jsx(ai, {
     selectedKey: t,
     items: i,
     recordingKey: e.recordingKey
@@ -2501,13 +2530,13 @@ function as({
   } = cq();
   kz(Uz.ESCAPE, pop);
   kz(Uz.BACKSPACE, pop);
-  return jsx("div", {
+  return jsx('div', {
     className: _$$s3.h24.$,
     children: jsx(_$$K3, {
-      recordingKey: _$$Pt(e, "backButton"),
-      onClick: pop,
-      "aria-label": getI18nString("qa.go_back"),
-      children: jsx(_$$C3, {})
+      'recordingKey': generateRecordingKey(e, 'backButton'),
+      'onClick': pop,
+      'aria-label': getI18nString('qa.go_back'),
+      'children': jsx(_$$C3, {})
     })
   });
 }
@@ -2516,53 +2545,55 @@ function al(e) {
     close
   } = cq();
   f4(i => {
-    if (e) for (let e of Object.keys(i.mirror.sceneGraphSelection)) {
-      let i = getSingletonSceneGraph().get(e);
-      if (i && !i.isOrInFirstDraft) {
-        close();
-        return;
+    if (e) {
+      for (let e of Object.keys(i.mirror.sceneGraphSelection)) {
+        let i = getSingletonSceneGraph().get(e);
+        if (i && !i.isOrInFirstDraft) {
+          close();
+          return;
+        }
       }
     }
   });
 }
-var ad = (e => (e[e.READY_FOR_PROMPT = 0] = "READY_FOR_PROMPT", e[e.RUNNING = 1] = "RUNNING", e[e.FINISHED = 2] = "FINISHED", e[e.ERROR = 3] = "ERROR", e[e.ICANTDOTHIS = 4] = "ICANTDOTHIS", e))(ad || {});
-var ac = (e => (e.PROMPT = "prompt", e.THEME = "theme", e))(ac || {});
+var ad = (e => (e[e.READY_FOR_PROMPT = 0] = 'READY_FOR_PROMPT', e[e.RUNNING = 1] = 'RUNNING', e[e.FINISHED = 2] = 'FINISHED', e[e.ERROR = 3] = 'ERROR', e[e.ICANTDOTHIS = 4] = 'ICANTDOTHIS', e))(ad || {});
+var ac = (e => (e.PROMPT = 'prompt', e.THEME = 'theme', e))(ac || {});
 function au(e, t) {
   switch (t.type) {
-    case "NEW_ROOT_NODE":
-    case "EDIT_INFO_UPDATED":
+    case 'NEW_ROOT_NODE':
+    case 'EDIT_INFO_UPDATED':
       return t.payload;
-    case "SET_BRAND_COLOR":
+    case 'SET_BRAND_COLOR':
       return {
         ...e,
         brandColor: t.payload
       };
-    case "SET_RADIUS":
+    case 'SET_RADIUS':
       return {
         ...e,
         radius: t.payload
       };
-    case "SET_SPACING":
+    case 'SET_SPACING':
       return {
         ...e,
         spacing: t.payload
       };
-    case "SET_COLOR_MODE":
+    case 'SET_COLOR_MODE':
       return {
         ...e,
         colorMode: t.payload
       };
-    case "SET_TITLE_FONTS":
+    case 'SET_TITLE_FONTS':
       return {
         ...e,
         titleFonts: t.payload
       };
-    case "SET_BODY_FONTS":
+    case 'SET_BODY_FONTS':
       return {
         ...e,
         bodyFonts: t.payload
       };
-    case "SET_LABEL_FONTS":
+    case 'SET_LABEL_FONTS':
       return {
         ...e,
         labelFonts: t.payload
@@ -2609,10 +2640,10 @@ function am({
   let i = t.clientLifecycleId;
   let r = _$$tS();
   let s = useCallback(() => {
-    trackEventAnalytics("First Draft: Error", {
+    trackEventAnalytics('First Draft: Error', {
       file_key: r,
       clientLifecycleId: i,
-      view: "firstDraftMakeChanges"
+      view: 'firstDraftMakeChanges'
     }, {
       forwardToDatadog: !0,
       sendAsBeacon: !0,
@@ -2620,7 +2651,7 @@ function am({
     });
   }, [r, i]);
   return jsx(_$$tH, {
-    boundaryKey: "FirstDraftMakeChanges",
+    boundaryKey: 'FirstDraftMakeChanges',
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       clientLifecycleId: i,
@@ -2628,7 +2659,7 @@ function am({
     },
     onError: s,
     children: jsx(af, {
-      recordingKey: "firstDraftMakeChangesView",
+      recordingKey: 'firstDraftMakeChangesView',
       initialRootGuid: e,
       aiTrackingContext: t
     })
@@ -2637,7 +2668,7 @@ function am({
 function af(e) {
   let t = e.aiTrackingContext;
   let i = t.clientLifecycleId;
-  let [r, l] = useState("");
+  let [r, l] = useState('');
   let c = _$$tS();
   let u = _$$eY();
   let {
@@ -2654,7 +2685,7 @@ function af(e) {
     clientLifecycleId: e
   }) {
     let [t] = useState({
-      current: _$$g2()
+      current: generateUUIDv4()
     });
     let {
       insertJSX,
@@ -2662,17 +2693,17 @@ function af(e) {
       instrumentationRef: _instrumentationRef
     } = Vh({
       clientLifecycleId: e,
-      insertType: "makeChanges"
+      insertType: 'makeChanges'
     });
     return {
       applyMakeChanges: useCallback(async (a, s) => {
         let l = [];
-        for (let e of ("affectedId" in a && l.push(a.affectedId), "destinationId" in a && l.push(a.destinationId), l)) {
+        for (let e of ('affectedId' in a && l.push(a.affectedId), 'destinationId' in a && l.push(a.destinationId), l)) {
           if (!function e(t, i, r) {
             let n = t.get(i);
             return !!n && (n.guid === r || !!n.parentGuid && e(t, n.parentGuid, r));
           }(getSingletonSceneGraph(), e, s.rootNodeId)) {
-            reportError(_$$e.AI_GENERATION, Error("first-draft: Node does not have root node as ancestor"), {
+            reportError(_$$e.AI_GENERATION, new Error('first-draft: Node does not have root node as ancestor'), {
               extra: {
                 nodeId: e,
                 action: a,
@@ -2682,7 +2713,7 @@ function af(e) {
             return;
           }
           if (e === s.rootNodeId) {
-            reportError(_$$e.AI_GENERATION, Error("first-draft: Tried to mutate root node"), {
+            reportError(_$$e.AI_GENERATION, new Error('first-draft: Tried to mutate root node'), {
               extra: {
                 nodeId: e,
                 action: a,
@@ -2693,7 +2724,7 @@ function af(e) {
           }
         }
         switch (await resetAsync(), a.type) {
-          case "theme":
+          case 'theme':
             {
               let {
                 content
@@ -2702,7 +2733,7 @@ function af(e) {
                 let r = getSingletonSceneGraph().get(e);
                 if (!r) return;
                 let n = _$$BY(r);
-                if (["borderRadii", "spacing", "colors", "fontFamilies"].some(e => e in i)) {
+                if (['borderRadii', 'spacing', 'colors', 'fontFamilies'].some(e => e in i)) {
                   let e = k5(t, i);
                   jR(r, e, n);
                 }
@@ -2714,14 +2745,14 @@ function af(e) {
                   let i = X6(e) ?? UE;
                   return _$$tb(i, t.colors);
                 }(r);
-                let o = "darkMode" in i ? i.darkMode ? _$$lH.DARK : _$$lH.LIGHT : void 0;
-                if (o && a !== o && _$$l2.ai("first-draft-make-changes-theme-switch-mode", () => {
+                let o = 'darkMode' in i ? i.darkMode ? _$$lH.DARK : _$$lH.LIGHT : void 0;
+                if (o && a !== o && _$$l2.ai('first-draft-make-changes-theme-switch-mode', () => {
                   _$$t4(r, o, s);
-                }), "brandColor" in i && i.brandColor) {
+                }), 'brandColor' in i && i.brandColor) {
                   let e = _$$tK(i.brandColor);
                   if (e) {
                     let t = qO(e, o ?? a);
-                    _$$l2.ai("first-draft-make-changes-theme-brand-color", () => {
+                    _$$l2.ai('first-draft-make-changes-theme-brand-color', () => {
                       _$$l3(r, t, o ?? a ?? _$$lH.LIGHT, {}, s);
                     });
                   }
@@ -2729,7 +2760,7 @@ function af(e) {
               }(s.rootNodeId, s.currentTheme, content);
               break;
             }
-          case "text_or_image":
+          case 'text_or_image':
             await nt({
               changes: a,
               makeChangesSessionId: t.current,
@@ -2738,8 +2769,8 @@ function af(e) {
               instrumentationRef: _instrumentationRef
             });
             break;
-          case "insert":
-          case "replace":
+          case 'insert':
+          case 'replace':
             await na({
               action: a,
               options: s,
@@ -2747,45 +2778,45 @@ function af(e) {
             });
             await resetAsync();
             break;
-          case "remove":
-            _$$l2.ai("first-draft-make-changes-remove", () => {
+          case 'remove':
+            _$$l2.ai('first-draft-make-changes-remove', () => {
               let e = getSingletonSceneGraph().get(a.affectedId);
               e && e.removeSelfAndChildren();
             });
             break;
-          case "move":
+          case 'move':
             {
               let {
                 affectedId,
                 destinationId,
                 insertBehavior
               } = a;
-              _$$l2.ai("first-draft-make-changes-move", () => {
+              _$$l2.ai('first-draft-make-changes-move', () => {
                 let r = getSingletonSceneGraph();
                 let n = r.get(affectedId);
                 let a = r.get(destinationId);
                 let s = a?.parentNode;
                 let o = s?.childrenGuids.indexOf(destinationId) ?? -1;
-                n && s && ("above" === insertBehavior ? s.insertChild(n, o) : "below" === insertBehavior && (o < s.childCount - 1 ? s.insertChild(n, o + 1) : s.appendChild(n)));
+                n && s && (insertBehavior === 'above' ? s.insertChild(n, o) : insertBehavior === 'below' && (o < s.childCount - 1 ? s.insertChild(n, o + 1) : s.appendChild(n)));
               });
               break;
             }
-          case "replaceClasses":
+          case 'replaceClasses':
             {
               let {
                 affectedId,
                 classes
               } = a;
               let i = getSingletonSceneGraph().get(affectedId);
-              let r = i?.isIconLike && Dk(i) === _$$lg2.CONTENT ? "Icon" : void 0;
-              _$$l2.ai("first-draft-make-changes-replace-classes", () => {
+              let r = i?.isIconLike && Dk(i) === _$$lg2.CONTENT ? 'Icon' : void 0;
+              _$$l2.ai('first-draft-make-changes-replace-classes', () => {
                 for (let i of classes) _$$w3(affectedId, i, r);
               });
             }
         }
       }, [e, t, insertJSX, _instrumentationRef, resetAsync]),
       resetMakeChanges: useCallback(() => {
-        t.current = _$$g2();
+        t.current = generateUUIDv4();
       }, [t]),
       instrumentationRef: _instrumentationRef
     };
@@ -2793,17 +2824,17 @@ function af(e) {
     clientLifecycleId: i
   });
   let [y, b] = useState(0);
-  let [C, v] = useState(Error(getI18nString("first_draft.something_went_wrong")));
+  let [C, v] = useState(new Error(getI18nString('first_draft.something_went_wrong')));
   let [E, T] = useState(null);
   let [w, S, j] = _$$t3.useTabs({
     prompt: !0,
     theme: !0
   }, {
-    defaultActive: "theme",
-    recordingKey: _$$Pt(e, "tabs")
+    defaultActive: 'theme',
+    recordingKey: generateRecordingKey(e, 'tabs')
   });
   let [I, k] = useState(!1);
-  al(2 === y || 3 === y || 4 === y);
+  al(y === 2 || y === 3 || y === 4);
   let N = useRef(1);
   let A = useRef(null);
   useEffect(() => {
@@ -2817,8 +2848,8 @@ function af(e) {
   }, [I, f]);
   let B = useCallback(() => {
     N.current += 1;
-    instrumentationRef.current.trackFinished("stopped");
-    ax(t, "stopped");
+    instrumentationRef.current.trackFinished('stopped');
+    ax(t, 'stopped');
     b(0);
     k(!1);
   }, [b, t, N, instrumentationRef]);
@@ -2831,19 +2862,19 @@ function af(e) {
       generation_id: f?.firstDraftData?.generationId
     };
     try {
-      if (instrumentationRef.current.start(), b(1), T(null), R(Date.now()), !f) throw Error("Root node not found");
-      let n = f && f.getSharedPluginData(SV, "userPrompt") || "";
+      if (instrumentationRef.current.start(), b(1), T(null), R(Date.now()), !f) throw new Error('Root node not found');
+      let n = f && f.getSharedPluginData(SV, 'userPrompt') || '';
       let a = a_(f);
-      let s = "LOCAL" === a.type;
+      let s = a.type === 'LOCAL';
       let o = s ? FirstDraftHelpers.getKitKey(a.pageId) : a.key;
-      let l = allUsableKitEntries.find(e => "key" in e.dsKitKey && e.dsKitKey.key === o);
+      let l = allUsableKitEntries.find(e => 'key' in e.dsKitKey && e.dsKitKey.key === o);
       Object.assign(r, {
         dsKitType: a.type,
         isLocal: s,
         kitKey: o,
         kitIdentifier: l?.metadata?.identifier ?? null
       });
-      trackEventAnalytics("First Draft: Make Changes Started", {
+      trackEventAnalytics('First Draft: Make Changes Started', {
         ...r,
         hasNonRootNodeSelected: !(f.guid in m)
       }, {
@@ -2863,22 +2894,22 @@ function af(e) {
         [f.guid]: !0
       }, !0);
       if (!jsxStr || !_jsxStr) {
-        trackEventAnalytics("First Draft: Make Changes Ended", {
+        trackEventAnalytics('First Draft: Make Changes Ended', {
           ...r,
           timeElapsedMs: Date.now() - L,
-          status: "failed",
-          reason: "infer-jsx-failed",
+          status: 'failed',
+          reason: 'infer-jsx-failed',
           hasNonRootNodeSelected: !(f.guid in m)
         }, {
           forwardToDatadog: !0,
           batchRequest: !0,
           mlEvent: !0
         });
-        ax(t, "error");
+        ax(t, 'error');
         b(2);
         return;
       }
-      let h = A.current || "";
+      let h = A.current || '';
       let _ = function (e) {
         if (!getFeatureFlags().first_draft_prompt_history || !getFeatureFlags().first_draft_make_changes_history) return [];
         let t = getSessionStorage();
@@ -2902,14 +2933,14 @@ function af(e) {
           ..._$$rO(e, t),
           version: 2,
           brandColor: r,
-          darkMode: "dark" === n
+          darkMode: n === 'dark'
         };
       }(f);
       let C = await Ay.design.firstDraftMakeChanges({
         userPrompt: h,
         promptHistory: _,
         storedInitialPrompt: n,
-        kitKey: o ?? "",
+        kitKey: o ?? '',
         isLocal: s,
         currentTheme: y,
         jsx: jsxStr,
@@ -2937,53 +2968,57 @@ function af(e) {
           v.cancel();
           break;
         }
-        if (instrumentationRef.current.trackFirstByteReceived(), done && instrumentationRef.current.trackLastStreamByteReceived(), logInfo("makeChanges", "Response message", {
+        if (instrumentationRef.current.trackFirstByteReceived(), done && instrumentationRef.current.trackLastStreamByteReceived(), logInfo('makeChanges', 'Response message', {
           message: value
         }), value?.trace && T(value.trace), value?.action) {
-          if ("replaceClasses" === value.action.type && !getFeatureFlags().first_draft_surgical_edits) {
-            logWarning("makeChanges", "Unsupported action", {
+          if (value.action.type === 'replaceClasses' && !getFeatureFlags().first_draft_surgical_edits) {
+            logWarning('makeChanges', 'Unsupported action', {
               action: value.action.type
             });
-            Rh("first_draft.client.make_changes.unsupported_action", {
+            Rh('first_draft.client.make_changes.unsupported_action', {
               action: value.action.type
             });
-            E.push(Promise.reject(new G1("make_changes_unsupported", {})));
+            E.push(Promise.reject(new G1('make_changes_unsupported', {})));
             continue;
           }
-          if (trackEventAnalytics("First Draft: Make Changes Prompt Action", {
+          if (trackEventAnalytics('First Draft: Make Changes Prompt Action', {
             ...r,
             action: value.action.type
           }, {
             forwardToDatadog: !0,
             batchRequest: !0,
             mlEvent: !0
-          }), "iCantDoThis" === value.action.type) {
+          }), value.action.type === 'iCantDoThis') {
             let e = value.action.rationaleCategory;
-            E.push(Promise.reject(new G1("make_changes_unsupported", {
+            E.push(Promise.reject(new G1('make_changes_unsupported', {
               rationaleCategory: e
             })));
-          } else E.push(applyMakeChanges(value.action, {
-            dsKitKey: a,
-            rootNodeId: f.guid,
-            currentTheme: y,
-            imageArgs: {
-              initialUserPrompt: n
-            }
-          }));
+          } else {
+            E.push(applyMakeChanges(value.action, {
+              dsKitKey: a,
+              rootNodeId: f.guid,
+              currentTheme: y,
+              imageArgs: {
+                initialUserPrompt: n
+              }
+            }));
+          }
         }
         if (done) {
           let e = await Promise.allSettled(E);
           if (!E.length) {
-            logWarning("makeChanges", "No actions were applied from the prompt response");
-            Rh("first_draft.client.make_changes.no_actions_applied");
-            return new G1("make_changes_unsupported", {});
+            logWarning('makeChanges', 'No actions were applied from the prompt response');
+            Rh('first_draft.client.make_changes.no_actions_applied');
+            return new G1('make_changes_unsupported', {});
           }
-          if (e.every(e => "rejected" === e.status)) {
-            for (let t of e) if ("rejected" === t.status) throw t.reason;
+          if (e.every(e => e.status === 'rejected')) {
+            for (let t of e) {
+              if (t.status === 'rejected') throw t.reason;
+            }
           }
-          trackEventAnalytics("First Draft: Make Changes Ended", {
+          trackEventAnalytics('First Draft: Make Changes Ended', {
             ...r,
-            status: "completed",
+            status: 'completed',
             timeElapsedMs: Date.now() - L,
             hasNonRootNodeSelected: !(f.guid in m)
           }, {
@@ -2991,15 +3026,15 @@ function af(e) {
             batchRequest: !0,
             mlEvent: !0
           });
-          ax(t, "success");
-          instrumentationRef.current.trackFinished("success");
+          ax(t, 'success');
+          instrumentationRef.current.trackFinished('success');
           b(2);
-          fullscreenValue.triggerAction("commit");
+          fullscreenValue.triggerAction('commit');
           break;
         }
       }
     } catch (a) {
-      logWarning("makeChanges", "Error", {
+      logWarning('makeChanges', 'Error', {
         error: a
       });
       let e = a instanceof G1;
@@ -3007,13 +3042,13 @@ function af(e) {
         ...r,
         timeElapsedMs: Date.now() - L,
         error: a.toString(),
-        status: "failed",
-        reason: "error"
+        status: 'failed',
+        reason: 'error'
       };
-      let n = e ? "handled_internally" : reportError(_$$e.AI_GENERATION, a, {
+      let n = e ? 'handled_internally' : reportError(_$$e.AI_GENERATION, a, {
         extra: i
       });
-      trackEventAnalytics("First Draft: Make Changes Ended", {
+      trackEventAnalytics('First Draft: Make Changes Ended', {
         ...i,
         sentryEventId: n
       }, {
@@ -3021,17 +3056,17 @@ function af(e) {
         batchRequest: !0,
         mlEvent: !0
       });
-      ax(t, "error");
-      instrumentationRef.current.trackFinished("failure");
-      e && ("make_changes_unsupported" === a.type || "make_changes_moderated" === a.type) ? (trackEventAnalytics("First Draft: Make Changes Prompt Action", {
+      ax(t, 'error');
+      instrumentationRef.current.trackFinished('failure');
+      e && (a.type === 'make_changes_unsupported' || a.type === 'make_changes_moderated') ? (trackEventAnalytics('First Draft: Make Changes Prompt Action', {
         ...r,
-        action: "make_changes_unsupported" === a.type ? "iCantDoThis" : "blocked"
+        action: a.type === 'make_changes_unsupported' ? 'iCantDoThis' : 'blocked'
       }, {
         forwardToDatadog: !0,
         batchRequest: !0,
         mlEvent: !0
       }), b(4)) : b(3);
-      v(a instanceof Error ? a : Error("Unknown error"));
+      v(a instanceof Error ? a : new Error('Unknown error'));
     } finally {
       e === N.current && (N.current += 1);
     }
@@ -3046,15 +3081,15 @@ function af(e) {
       return jsx(_$$F3, {
         onStop: B,
         aiTrackingContext: t,
-        recordingKey: _$$Pt(e, "running"),
-        children: renderI18nText("first_draft.making_changes")
+        recordingKey: generateRecordingKey(e, 'running'),
+        children: renderI18nText('first_draft.making_changes')
       });
     case 3:
       H && _$$A8(D, E);
       return jsx(_$$E4, {
         error: C,
-        customMessage: getI18nString("first_draft.something_went_wrong"),
-        recordingKey: _$$Pt(e, "error"),
+        customMessage: getI18nString('first_draft.something_went_wrong'),
+        recordingKey: generateRecordingKey(e, 'error'),
         buttons: [{
           type: _$$f5.GO_BACK,
           callback: K
@@ -3066,20 +3101,20 @@ function af(e) {
       return jsx(_$$E4, {
         error: C,
         customMessage: (e => {
-          let t = getI18nString("first_draft.make_changes.i_cant_do_this");
+          let t = getI18nString('first_draft.make_changes.i_cant_do_this');
           if (e instanceof G1) {
-            if ("make_changes_moderated" === e.type) return getI18nString("ai.error.unsafe_or_harmful");
+            if (e.type === 'make_changes_moderated') return getI18nString('ai.error.unsafe_or_harmful');
             if (!getFeatureFlags().first_draft_make_changes_errors) return t;
-            if ("make_changes_unsupported" === e.type && e.data?.rationaleCategory) {
+            if (e.type === 'make_changes_unsupported' && e.data?.rationaleCategory) {
               let t = e.data.rationaleCategory;
               switch (t) {
-                case "component":
-                  return getI18nString("first_draft.make_changes.i_cant_do_this_component");
-                case "font":
-                  return getI18nString("first_draft.make_changes.i_cant_do_this_font");
-                case "layout":
-                  return getI18nString("first_draft.make_changes.i_cant_do_this_layout");
-                case "other":
+                case 'component':
+                  return getI18nString('first_draft.make_changes.i_cant_do_this_component');
+                case 'font':
+                  return getI18nString('first_draft.make_changes.i_cant_do_this_font');
+                case 'layout':
+                  return getI18nString('first_draft.make_changes.i_cant_do_this_layout');
+                case 'other':
                   break;
                 default:
                   return throwTypeError(t);
@@ -3088,7 +3123,7 @@ function af(e) {
           }
           return t;
         })(C),
-        recordingKey: _$$Pt(e, "unsupported"),
+        recordingKey: generateRecordingKey(e, 'unsupported'),
         buttons: [{
           type: _$$f5.GO_BACK,
           callback: K
@@ -3101,8 +3136,8 @@ function af(e) {
         type: _$$is.UNDO_MAKE_CHANGES,
         callback: () => {
           b(0);
-          fullscreenValue.triggerAction("undo");
-          trackEventAnalytics("First Draft: Make Changes Undo", {
+          fullscreenValue.triggerAction('undo');
+          trackEventAnalytics('First Draft: Make Changes Undo', {
             file_key: c,
             clientLifecycleId: i
           }, {
@@ -3118,7 +3153,7 @@ function af(e) {
       }));
       H && _$$A8(D, E);
       return jsx(Oq, {
-        recordingKey: _$$Pt(e, "iterate"),
+        recordingKey: generateRecordingKey(e, 'iterate'),
         iterateOptions: z,
         aiTrackingContext: {
           ...t,
@@ -3161,11 +3196,11 @@ function ag({
     b.current = Date.now();
     _(e);
   }, [_]);
-  let y = zN(i, (e, t) => e?.guid === t?.guid);
+  let y = useStableMemo(i, (e, t) => e?.guid === t?.guid);
   useEffect(() => {
     x({
-      type: "NEW_ROOT_NODE",
-      payload: ah(y?.guid ?? "")
+      type: 'NEW_ROOT_NODE',
+      payload: ah(y?.guid ?? '')
     });
   }, [y?.guid, x]);
   let b = useRef(-1 / 0);
@@ -3176,7 +3211,7 @@ function ag({
   useEffect(() => {
     C.current = _$$$L(y);
     v.current = _$$nF(uq(y));
-    let e = ah(y?.guid ?? "");
+    let e = ah(y?.guid ?? '');
     E.current = e.radius;
     T.current = e.spacing;
   }, [y]);
@@ -3192,9 +3227,9 @@ function ag({
       clientLifecycleId: u,
       generation_id: y?.firstDraftData?.generationId
     };
-    y && (t = "LOCAL" === (e = a_(y)).type ? e.pageId : e.key);
+    y && (t = (e = a_(y)).type === 'LOCAL' ? e.pageId : e.key);
     Object.assign(i, {
-      dsKitType: null != e ? e.type : null,
+      dsKitType: e != null ? e.type : null,
       kitKey: t
     });
     return i;
@@ -3207,20 +3242,20 @@ function ag({
   let R = g.bodyFonts;
   let M = g.labelFonts;
   let B = _$$ei(y?.guid);
-  let U = k9(() => B, [B]);
+  let U = useMemoStable(() => B, [B]);
   useEffect(() => {
-    let e = ah(y?.guid ?? "", {
+    let e = ah(y?.guid ?? '', {
       pinnedRanges: v.current
     });
-    nearlyEqual(_$$oB(N).h, _$$oB(e.brandColor).h, .01) && (e.brandColor = N);
+    nearlyEqual(_$$oB(N).h, _$$oB(e.brandColor).h, 0.01) && (e.brandColor = N);
     let t = U?.lastEditedAt ?? -1 / 0;
     (t > b.current || b.current - t > 1e3) && x({
-      type: "EDIT_INFO_UPDATED",
+      type: 'EDIT_INFO_UPDATED',
       payload: e
     });
   }, [N, x, U, y?.guid, g.radius, g.spacing]);
   let K = _$$A4(e => {
-    trackEventAnalytics("First Draft: Make Changes Color Change", {
+    trackEventAnalytics('First Draft: Make Changes Color Change', {
       ...I,
       color: e
     }, {
@@ -3230,10 +3265,10 @@ function ag({
     });
   }, 5e3);
   let H = useCallback(e => {
-    e !== k && (_$$l2.user("first-draft-switch-color-mode", () => {
+    e !== k && (_$$l2.user('first-draft-switch-color-mode', () => {
       _$$t4(y, e, F_(g.brandColor));
-    }), K(k), fullscreenValue.triggerAction("commit"), x({
-      type: "SET_COLOR_MODE",
+    }), K(k), fullscreenValue.triggerAction('commit'), x({
+      type: 'SET_COLOR_MODE',
       payload: e
     }));
   }, [k, K, x, y, g.brandColor]);
@@ -3241,10 +3276,12 @@ function ag({
   let V = useRef(null);
   let W = useRef(null);
   let Y = useCallback((e, t) => {
-    if (W.current) V.current = [e, W.current];else {
+    if (W.current) {
+      V.current = [e, W.current];
+    } else {
       W.current = e;
       let i = F_(t);
-      _$$l2.user("first-draft-apply-brand-color", () => {
+      _$$l2.user('first-draft-apply-brand-color', () => {
         _$$l3(y, e, k, z, i);
       });
       setTimeout(() => {
@@ -3264,12 +3301,12 @@ function ag({
     };
     Y(t, N);
     x({
-      type: "SET_BRAND_COLOR",
+      type: 'SET_BRAND_COLOR',
       payload: t
     });
   }, [x, K, k, Y, N]);
   let X = _$$A4(e => {
-    trackEventAnalytics("First Draft: Make Changes Radius Change", {
+    trackEventAnalytics('First Draft: Make Changes Radius Change', {
       ...I,
       radius: e
     }, {
@@ -3283,14 +3320,14 @@ function ag({
     _$$oP(C.current, e, E.current);
   }, 100);
   let $ = useCallback((e, t) => {
-    t.commit && fullscreenValue.triggerAction("commit");
+    t.commit && fullscreenValue.triggerAction('commit');
     e !== A && (Z(e), x({
-      type: "SET_RADIUS",
+      type: 'SET_RADIUS',
       payload: e
     }));
   }, [A, x, Z]);
   let et = _$$A4(e => {
-    trackEventAnalytics("First Draft: Make Changes Spacing Change", {
+    trackEventAnalytics('First Draft: Make Changes Spacing Change', {
       ...I,
       spacing: e
     }, {
@@ -3304,14 +3341,14 @@ function ag({
     HS(v.current, e, T.current);
   }, 100);
   let er = useCallback((e, t) => {
-    t.commit && fullscreenValue.triggerAction("commit");
+    t.commit && fullscreenValue.triggerAction('commit');
     e !== O && (ei(e), x({
-      type: "SET_SPACING",
+      type: 'SET_SPACING',
       payload: e
     }));
   }, [x, ei, O]);
   let en = _$$A4((e, t) => {
-    trackEventAnalytics("First Draft: Make Changes Font Change", {
+    trackEventAnalytics('First Draft: Make Changes Font Change', {
       ...I,
       font_location: e,
       font_type: t
@@ -3321,31 +3358,31 @@ function ag({
       mlEvent: !0
     });
   }, 1e3);
-  let ea = useCallback(e => 0 === e.length ? null : e[0].family, []);
+  let ea = useCallback(e => e.length === 0 ? null : e[0].family, []);
   let es = useCallback(async e => {
     await r$(_$$lu.TITLE, e, L);
-    en("title", e);
-    fullscreenValue.triggerAction("commit");
+    en('title', e);
+    fullscreenValue.triggerAction('commit');
     y && x({
-      type: "SET_TITLE_FONTS",
+      type: 'SET_TITLE_FONTS',
       payload: Mz(y, _$$BY(y)).title
     });
   }, [L, en, y, x]);
   let eo = useCallback(async e => {
     await r$(_$$lu.BODY, e, g.bodyFonts);
-    en("body", e);
-    fullscreenValue.triggerAction("commit");
+    en('body', e);
+    fullscreenValue.triggerAction('commit');
     y && x({
-      type: "SET_BODY_FONTS",
+      type: 'SET_BODY_FONTS',
       payload: Mz(y, _$$BY(y)).body
     });
   }, [g.bodyFonts, en, y, x]);
   let el = useCallback(async e => {
     await r$(_$$lu.LABEL, e, g.labelFonts);
-    en("label", e);
-    fullscreenValue.triggerAction("commit");
+    en('label', e);
+    fullscreenValue.triggerAction('commit');
     y && x({
-      type: "SET_LABEL_FONTS",
+      type: 'SET_LABEL_FONTS',
       payload: Mz(y, _$$BY(y)).label
     });
   }, [g.labelFonts, en, y, x]);
@@ -3364,9 +3401,9 @@ function ag({
       modifier: [xH.META]
     }],
     onAction: ec,
-    disabled: !y || 0 === e.length,
-    recordingKey: _$$Pt(d, "submit"),
-    children: renderI18nText("first_draft.make_changes")
+    disabled: !y || e.length === 0,
+    recordingKey: generateRecordingKey(d, 'submit'),
+    children: renderI18nText('first_draft.make_changes')
   });
   let em = jsx(_$$r, {
     shortcuts: [{
@@ -3374,16 +3411,16 @@ function ag({
       modifier: [xH.META]
     }],
     onAction: close,
-    recordingKey: _$$Pt(d, "doneTheming"),
-    children: renderI18nText("first_draft.done_theming")
+    recordingKey: generateRecordingKey(d, 'doneTheming'),
+    children: renderI18nText('first_draft.done_theming')
   });
   return jsxs(Fragment, {
     children: [jsx(_$$B, {
       fullWidth: !0,
-      align: "center",
-      justify: "space-between",
+      align: 'center',
+      justify: 'space-between',
       gap: 0,
-      children: "theme" === r.activeTab && jsx(at, {
+      children: r.activeTab === 'theme' && jsx(at, {
         bodyFont: ea(R),
         brandColor: N,
         colorMode: k,
@@ -3396,21 +3433,21 @@ function ag({
         onChangeLabelFont: el,
         onChangeSpacingStop: er,
         onChangeTitleFont: es,
-        recordingKey: _$$Pt(d, "themeEditorDrawer"),
+        recordingKey: generateRecordingKey(d, 'themeEditorDrawer'),
         section: eu,
         spacingStop: O,
         titleFont: ea(L)
       })
-    }), jsxs("div", {
-      className: rB()(_$$s3.p8.relative.$, "theme" === r.activeTab && "first_draft_make_changes_view--contentBoxed--L-H0e", eu && _$$s3.elevation500.radiusLarge.$),
-      "data-testid": "readyForPromptView",
-      children: [jsx(_$$t3.TabPanel, {
+    }), jsxs('div', {
+      'className': rB()(_$$s3.p8.relative.$, r.activeTab === 'theme' && 'first_draft_make_changes_view--contentBoxed--L-H0e', eu && _$$s3.elevation500.radiusLarge.$),
+      'data-testid': 'readyForPromptView',
+      'children': [jsx(_$$t3.TabPanel, {
         ...o.prompt,
         children: jsx(XG, {
           action: _$$JT.FIRST_DRAFT_MAKE_CHANGES,
           value: e,
           onChange: t,
-          recordingKey: _$$Pt(d, "prompt"),
+          recordingKey: generateRecordingKey(d, 'prompt'),
           suggestion: p,
           suggestionPills: getFeatureFlags().first_draft_new_prompt_pills ? m : void 0
         })
@@ -3425,24 +3462,24 @@ function ag({
           titleFont: ea(L),
           bodyFont: ea(R),
           labelFont: ea(M),
-          recordingKey: _$$Pt(d, "themeEditor")
+          recordingKey: generateRecordingKey(d, 'themeEditor')
         })
       }), jsxs(_$$B, {
         fullWidth: !0,
-        justify: "space-between",
+        justify: 'space-between',
         children: [jsxs(_$$t3.TabStrip, {
           manager: r,
           children: [jsx(_$$t3.Tab, {
             ...s.theme,
-            children: renderI18nText("first_draft.style")
+            children: renderI18nText('first_draft.style')
           }), jsx(_$$t3.Tab, {
             ...s.prompt,
-            children: jsx("span", {
-              "data-testid": "promptTabLabel",
-              children: renderI18nText("first_draft.prompt")
+            children: jsx('span', {
+              'data-testid': 'promptTabLabel',
+              'children': renderI18nText('first_draft.prompt')
             })
           })]
-        }), "prompt" === r.activeTab ? eh : em]
+        }), r.activeTab === 'prompt' ? eh : em]
       })]
     })]
   });
@@ -3450,34 +3487,38 @@ function ag({
 function a_(e) {
   let t = e.firstDraftData;
   if (t) {
-    if (t.kit.type === AssetSource.LOCAL) return {
-      type: "LOCAL",
-      pageId: FirstDraftHelpers.getPageIdFromKitKey(t.kit.key) ?? ""
-    };
-    if (t.kit.type === AssetSource.LIBRARY) return {
-      type: "1P_LIBRARY",
-      key: t.kit.key
-    };
+    if (t.kit.type === AssetSource.LOCAL) {
+      return {
+        type: 'LOCAL',
+        pageId: FirstDraftHelpers.getPageIdFromKitKey(t.kit.key) ?? ''
+      };
+    }
+    if (t.kit.type === AssetSource.LIBRARY) {
+      return {
+        type: '1P_LIBRARY',
+        key: t.kit.key
+      };
+    }
   }
-  return JSON.parse(e.getSharedPluginData(SV, "dsKitKey"));
+  return JSON.parse(e.getSharedPluginData(SV, 'dsKitKey'));
 }
 function ax(e, t) {
   switch (t) {
-    case "success":
+    case 'success':
       _$$as({
         ...e,
         status: _$$dM.COMPLETED,
         reason: F9.SUCCESS
       });
       break;
-    case "error":
+    case 'error':
       _$$as({
         ...e,
         status: _$$dM.FAILED,
         reason: F9.ERROR
       });
       break;
-    case "stopped":
+    case 'stopped':
       _$$as({
         ...e,
         status: _$$dM.FAILED,
@@ -3485,7 +3526,7 @@ function ax(e, t) {
       });
   }
 }
-var ab = ay;
+let ab = ay;
 function aj({
   node: e,
   tree: t,
@@ -3526,174 +3567,178 @@ function aI({
 function ak(e) {
   let t = function (e, t) {
     let i = {};
-    for (let r of e.childrenNodes) !function e(t, i, r, n, a = null) {
-      var s;
-      let o = r.components[t.guid];
-      s = r.isMobileDesign;
-      let l = ("FRAME" === t.type || "INSTANCE" === t.type) && (!s || function (e, t, i = .1) {
-        return Math.abs(e - t) < i;
-      }(t.size.x, i.size.x - i.stackLeftPadding - i.stackLeftPadding));
-      let c = [];
-      if (o && (n[t.guid] = {
-        isBuildingBlock: l,
-        name: o,
-        parentGuid: a?.guid ?? null,
-        isListItem: !1,
-        children: []
-      }, a && n[a.guid])) {
-        let e = n[a.guid];
-        e && e.children.push(t.guid);
-      }
-      for (let s of t.childrenNodes) c = c.concat(e(s, i, r, n, o ? t : a));
-      let u = {
-        node: t,
-        designNode: i,
-        tree: n,
-        nodeCanBeBuildingBlock: l,
-        descendantComponentGuids: c,
-        parentComponent: a
-      };
-      (function (e) {
-        let {
-          node,
-          tree,
-          nodeCanBeBuildingBlock,
-          parentComponent
-        } = e;
-        let a = {};
-        for (let e of node.childrenNodes) {
-          let t = tree[e.guid];
-          t && (a[t.name] || (a[t.name] = []), a[t.name].push(e.guid));
+    for (let r of e.childrenNodes) {
+      !function e(t, i, r, n, a = null) {
+        let s;
+        let o = r.components[t.guid];
+        s = r.isMobileDesign;
+        let l = (t.type === 'FRAME' || t.type === 'INSTANCE') && (!s || function (e, t, i = 0.1) {
+          return Math.abs(e - t) < i;
+        }(t.size.x, i.size.x - i.stackLeftPadding - i.stackLeftPadding));
+        let c = [];
+        if (o && (n[t.guid] = {
+          isBuildingBlock: l,
+          name: o,
+          parentGuid: a?.guid ?? null,
+          isListItem: !1,
+          children: []
+        }, a && n[a.guid])) {
+          let e = n[a.guid];
+          e && e.children.push(t.guid);
         }
-        let s = Object.entries(a).filter(([e, t]) => t.length > 1);
-        if (1 !== s.length) return;
-        let o = s[0][1];
-        let l = o[0];
-        for (let a of (tree[node.guid] || parentComponent || !l || aj(e, {
-          name: `${tree[l].name}List`,
-          isBuildingBlock: nodeCanBeBuildingBlock,
-          isListItem: !1,
-          inferReason: "list-view"
-        }), o)) {
-          let e = tree[a];
-          e && (e.isListItem = !0, e.isBuildingBlock = !1);
-        }
-      })(u);
-      (function (e) {
-        let {
-          node,
-          tree,
-          nodeCanBeBuildingBlock,
-          parentComponent,
-          descendantComponentGuids
-        } = e;
-        !tree[node.guid] && !parentComponent && nodeCanBeBuildingBlock && descendantComponentGuids.filter(e => !tree[e]?.isBuildingBlock && !tree[e]?.parentGuid).length > 0 && aj(e, {
-          name: `Component:${node.guid}`,
-          isBuildingBlock: !0,
-          isListItem: !1,
-          inferReason: "component-for-orphaned-atoms"
-        });
-      })(u);
-      (function (e) {
-        let {
-          node,
-          tree,
-          designNode,
-          descendantComponentGuids,
-          nodeCanBeBuildingBlock
-        } = e;
-        !tree[node.guid] && 0 === descendantComponentGuids.length && node.parentGuid === designNode.guid && nodeCanBeBuildingBlock && aj(e, {
-          name: `Component:${node.guid}`,
-          isBuildingBlock: !0,
-          isListItem: !1,
-          inferReason: "component-for-uncomponentized-element"
-        });
-      })(u);
-      (function (e) {
-        let {
-          node,
-          designNode,
-          tree
-        } = e;
-        let n = tree[node.guid];
-        if (n && n.isBuildingBlock && node.size.y > .66 * designNode.size.y && n.children.length > 1 && n.children.every(e => tree[e]?.isBuildingBlock)) {
-          for (let e of n.children) {
-            let t = tree[e];
-            t && (t.parentGuid = null);
+        for (let s of t.childrenNodes) c = c.concat(e(s, i, r, n, o ? t : a));
+        let u = {
+          node: t,
+          designNode: i,
+          tree: n,
+          nodeCanBeBuildingBlock: l,
+          descendantComponentGuids: c,
+          parentComponent: a
+        };
+        (function (e) {
+          let {
+            node,
+            tree,
+            nodeCanBeBuildingBlock,
+            parentComponent
+          } = e;
+          let a = {};
+          for (let e of node.childrenNodes) {
+            let t = tree[e.guid];
+            t && (a[t.name] || (a[t.name] = []), a[t.name].push(e.guid));
           }
-          aI(e);
-        }
-      })(u);
-      (function ({
-        node: e,
-        tree: t,
-        parentComponent: i,
-        nodeCanBeBuildingBlock: r,
-        descendantComponentGuids: n,
-        designNode: a
-      }) {
-        let s = e.childrenNodes[0];
-        if (r && 1 === e.childCount && s && t[s.guid]?.isBuildingBlock) {
-          let r = t[s.guid];
-          r && !t[e.guid] && (t[e.guid] = {
-            isBuildingBlock: !0,
-            name: r.name,
-            parentGuid: i?.guid ?? null,
+          let s = Object.entries(a).filter(([e, t]) => t.length > 1);
+          if (s.length !== 1) return;
+          let o = s[0][1];
+          let l = o[0];
+          for (let a of (tree[node.guid] || parentComponent || !l || aj(e, {
+            name: `${tree[l].name}List`,
+            isBuildingBlock: nodeCanBeBuildingBlock,
             isListItem: !1,
-            inferReason: "hoisted-singleton-building-block",
-            children: r.children
-          });
-          aI({
-            node: s,
-            designNode: a,
-            tree: t,
-            parentComponent: e,
-            descendantComponentGuids: n,
-            nodeCanBeBuildingBlock: !0
-          });
-        }
-      })(u);
-      let p = function ({
-        node: e,
-        designNode: t,
-        tree: i,
-        parentComponent: r,
-        descendantComponentGuids: n
-      }) {
-        if (e.size.x < 100 || e.size.y < 20 || n.length > 0 || "NONE" === e.stackMode || e.childCount <= 1) return [];
-        let a = e.childrenNodes[0];
-        let s = e.childrenNodes[e.childCount - 1];
-        let o = [];
-        for (let l of [a, s]) {
-          if (l?.type !== "FRAME" || l.size.x < 100 || l.size.y < 20) continue;
-          let a = FirstDraftHelpers.findSimilarNodes(l.guid, e.guid, !1, !1, !0);
-          let s = [l, ...a.map(e => getSingletonSceneGraph().get(e)).filter(e => !!e)];
-          let c = Array.from(_i(new Set(e.childrenGuids), new Set([l.guid, ...a])));
-          if (s.length >= 2 && s.length >= e.childCount - 1 && c.length <= 1) {
-            let a = c[0];
-            if (a) {
-              let t = e.childrenGuids.indexOf(a);
-              if (t > 0 && t < e.childCount - 1) return [];
-            }
-            for (let a of s) i[a.guid] || (aj({
-              node: a,
-              designNode: t,
-              tree: i,
-              parentComponent: i[e.guid] ? e : r,
-              descendantComponentGuids: n,
-              nodeCanBeBuildingBlock: !1
-            }, {
-              isBuildingBlock: !1,
-              name: `Component:${a.guid}`,
-              isListItem: !0,
-              inferReason: "similar-sublayers"
-            }), o.push(a.guid));
+            inferReason: 'list-view'
+          }), o)) {
+            let e = tree[a];
+            e && (e.isListItem = !0, e.isBuildingBlock = !1);
           }
-        }
-        return o;
-      }(u);
-      return n[t.guid] ? [t.guid, ...c, ...p] : [...c, ...p];
-    }(r, e, t, i);
+        })(u);
+        (function (e) {
+          let {
+            node,
+            tree,
+            nodeCanBeBuildingBlock,
+            parentComponent,
+            descendantComponentGuids
+          } = e;
+          !tree[node.guid] && !parentComponent && nodeCanBeBuildingBlock && descendantComponentGuids.filter(e => !tree[e]?.isBuildingBlock && !tree[e]?.parentGuid).length > 0 && aj(e, {
+            name: `Component:${node.guid}`,
+            isBuildingBlock: !0,
+            isListItem: !1,
+            inferReason: 'component-for-orphaned-atoms'
+          });
+        })(u);
+        (function (e) {
+          let {
+            node,
+            tree,
+            designNode,
+            descendantComponentGuids,
+            nodeCanBeBuildingBlock
+          } = e;
+          !tree[node.guid] && descendantComponentGuids.length === 0 && node.parentGuid === designNode.guid && nodeCanBeBuildingBlock && aj(e, {
+            name: `Component:${node.guid}`,
+            isBuildingBlock: !0,
+            isListItem: !1,
+            inferReason: 'component-for-uncomponentized-element'
+          });
+        })(u);
+        (function (e) {
+          let {
+            node,
+            designNode,
+            tree
+          } = e;
+          let n = tree[node.guid];
+          if (n && n.isBuildingBlock && node.size.y > 0.66 * designNode.size.y && n.children.length > 1 && n.children.every(e => tree[e]?.isBuildingBlock)) {
+            for (let e of n.children) {
+              let t = tree[e];
+              t && (t.parentGuid = null);
+            }
+            aI(e);
+          }
+        })(u);
+        (function ({
+          node: e,
+          tree: t,
+          parentComponent: i,
+          nodeCanBeBuildingBlock: r,
+          descendantComponentGuids: n,
+          designNode: a
+        }) {
+          let s = e.childrenNodes[0];
+          if (r && e.childCount === 1 && s && t[s.guid]?.isBuildingBlock) {
+            let r = t[s.guid];
+            r && !t[e.guid] && (t[e.guid] = {
+              isBuildingBlock: !0,
+              name: r.name,
+              parentGuid: i?.guid ?? null,
+              isListItem: !1,
+              inferReason: 'hoisted-singleton-building-block',
+              children: r.children
+            });
+            aI({
+              node: s,
+              designNode: a,
+              tree: t,
+              parentComponent: e,
+              descendantComponentGuids: n,
+              nodeCanBeBuildingBlock: !0
+            });
+          }
+        })(u);
+        let p = function ({
+          node: e,
+          designNode: t,
+          tree: i,
+          parentComponent: r,
+          descendantComponentGuids: n
+        }) {
+          if (e.size.x < 100 || e.size.y < 20 || n.length > 0 || e.stackMode === 'NONE' || e.childCount <= 1) return [];
+          let a = e.childrenNodes[0];
+          let s = e.childrenNodes[e.childCount - 1];
+          let o = [];
+          for (let l of [a, s]) {
+            if (l?.type !== 'FRAME' || l.size.x < 100 || l.size.y < 20) continue;
+            let a = FirstDraftHelpers.findSimilarNodes(l.guid, e.guid, !1, !1, !0);
+            let s = [l, ...a.map(e => getSingletonSceneGraph().get(e)).filter(e => !!e)];
+            let c = Array.from(_i(new Set(e.childrenGuids), new Set([l.guid, ...a])));
+            if (s.length >= 2 && s.length >= e.childCount - 1 && c.length <= 1) {
+              let a = c[0];
+              if (a) {
+                let t = e.childrenGuids.indexOf(a);
+                if (t > 0 && t < e.childCount - 1) return [];
+              }
+              for (let a of s) {
+                i[a.guid] || (aj({
+                  node: a,
+                  designNode: t,
+                  tree: i,
+                  parentComponent: i[e.guid] ? e : r,
+                  descendantComponentGuids: n,
+                  nodeCanBeBuildingBlock: !1
+                }, {
+                  isBuildingBlock: !1,
+                  name: `Component:${a.guid}`,
+                  isListItem: !0,
+                  inferReason: 'similar-sublayers'
+                }), o.push(a.guid));
+              }
+            }
+          }
+          return o;
+        }(u);
+        return n[t.guid] ? [t.guid, ...c, ...p] : [...c, ...p];
+      }(r, e, t, i);
+    }
     return i;
   }(e.frame, e);
   if (!t) return [];
@@ -3713,9 +3758,9 @@ function ak(e) {
       t ? r[t] = a : r[e] = a;
     }
     let n = i.get(e.guid);
-    if (!n) throw Error("Failed to detach design");
+    if (!n) throw new Error('Failed to detach design');
     let a = getSingletonSceneGraph().get(n);
-    if (!a) throw Error("Failed to detach design");
+    if (!a) throw new Error('Failed to detach design');
     e.parentNode && e.parentNode.appendChild(a);
     a.x = e.x;
     a.y = e.y;
@@ -3740,12 +3785,12 @@ function aN() {
   let r = i?.getSuggestedComponents;
   return {
     submit: useCallback(async (e, i, n, a) => {
-      let s = e.filter(e => ("FRAME" === e.type || "INSTANCE" === e.type) && !e.isStateGroup);
+      let s = e.filter(e => (e.type === 'FRAME' || e.type === 'INSTANCE') && !e.isStateGroup);
       let o = Y6();
       let {
         nodes,
         nodeMappings
-      } = _$$l2.user("clone-nodes", () => function (e, t) {
+      } = _$$l2.user('clone-nodes', () => function (e, t) {
         let i = [];
         let r = {
           x: NY(t.copiedDesigns).right() + CN,
@@ -3775,63 +3820,71 @@ function aN() {
       }), ab()(nodes, 10))) {
         let s = await _$$Z3(r ? r(e) : aA(e, i), n);
         if (n.aborted) return {};
-        for (let e of s) if (e) {
-          if (a?.remapNodeIdsForTest) for (let [t, i] of nodeMappings.entries()) {
-            let r = e.components[t];
-            r && (e.components[i] = r, delete e.components[t]);
-          }
-          _$$l2.user("componentize", () => {
-            !function (e, t) {
-              let i = getSingletonSceneGraph();
-              if (!i.getCurrentPage()) return;
-              let r = NY(t.buildingBlocks);
-              let n = NY(t.atoms);
-              let a = {
-                x: r.right() + CN,
-                y: CN
-              };
-              let s = {
-                x: n.right() + CN,
-                y: CN
-              };
-              let o = {};
-              for (let {
-                guid,
-                name,
-                isBuildingBlock
-              } of e) {
-                let e = i.get(function (e, t) {
-                  for (; t[e];) e = t[e];
-                  return e;
-                }(guid, o));
-                if (!e || "FRAME" !== e.type && "INSTANCE" !== e.type || ("FRAME" === e.type && MR(e, t.icons), !e.isAlive)) continue;
-                let c = FirstDraftHelpers.findSimilarNodes(e.guid, t.buildingBlocks.guid, !1, !0, !0).concat(FirstDraftHelpers.findSimilarNodes(e.guid, t.atoms.guid, !1, !0, !0));
-                let u = c[0] ? i.get(c[0]) : null;
-                if (!u) {
-                  if ("FRAME" === e.type) (u = i.createComponentFromNode(e.clone())).name = name;else {
-                    if (!(u = i.get(e.clone()))) throw Error("Failed to clone instance");
-                    _$$T6(u);
-                  }
-                  isBuildingBlock ? (t.buildingBlocks.appendChild(u), u.relativeTransform = {
-                    ...u.relativeTransform,
-                    m02: a.x,
-                    m12: a.y
-                  }, a.y += u.size.y + FL) : (t.atoms.appendChild(u), u.relativeTransform = {
-                    ...u.relativeTransform,
-                    m02: s.x,
-                    m12: s.y
-                  }, s.y += u.size.y + FL);
-                }
-                let p = w8(e, u);
-                if (p) for (let [e, t] of p?.entries()) {
-                  let r = i.get(t);
-                  let n = r?.overrideKey;
-                  n && (o[e] = n);
-                }
+        for (let e of s) {
+          if (e) {
+            if (a?.remapNodeIdsForTest) {
+              for (let [t, i] of nodeMappings.entries()) {
+                let r = e.components[t];
+                r && (e.components[i] = r, delete e.components[t]);
               }
-              Vl(t);
-            }(ak(e), o);
-          });
+            }
+            _$$l2.user('componentize', () => {
+              !function (e, t) {
+                let i = getSingletonSceneGraph();
+                if (!i.getCurrentPage()) return;
+                let r = NY(t.buildingBlocks);
+                let n = NY(t.atoms);
+                let a = {
+                  x: r.right() + CN,
+                  y: CN
+                };
+                let s = {
+                  x: n.right() + CN,
+                  y: CN
+                };
+                let o = {};
+                for (let {
+                  guid,
+                  name,
+                  isBuildingBlock
+                } of e) {
+                  let e = i.get(function (e, t) {
+                    for (; t[e];) e = t[e];
+                    return e;
+                  }(guid, o));
+                  if (!e || e.type !== 'FRAME' && e.type !== 'INSTANCE' || (e.type === 'FRAME' && MR(e, t.icons), !e.isAlive)) continue;
+                  let c = FirstDraftHelpers.findSimilarNodes(e.guid, t.buildingBlocks.guid, !1, !0, !0).concat(FirstDraftHelpers.findSimilarNodes(e.guid, t.atoms.guid, !1, !0, !0));
+                  let u = c[0] ? i.get(c[0]) : null;
+                  if (!u) {
+                    if (e.type === 'FRAME') {
+                      (u = i.createComponentFromNode(e.clone())).name = name;
+                    } else {
+                      if (!(u = i.get(e.clone()))) throw new Error('Failed to clone instance');
+                      _$$T6(u);
+                    }
+                    isBuildingBlock ? (t.buildingBlocks.appendChild(u), u.relativeTransform = {
+                      ...u.relativeTransform,
+                      m02: a.x,
+                      m12: a.y
+                    }, a.y += u.size.y + FL) : (t.atoms.appendChild(u), u.relativeTransform = {
+                      ...u.relativeTransform,
+                      m02: s.x,
+                      m12: s.y
+                    }, s.y += u.size.y + FL);
+                  }
+                  let p = w8(e, u);
+                  if (p) {
+                    for (let [e, t] of p?.entries()) {
+                      let r = i.get(t);
+                      let n = r?.overrideKey;
+                      n && (o[e] = n);
+                    }
+                  }
+                }
+                Vl(t);
+              }(ak(e), o);
+            });
+          }
         }
         t(t => ({
           loaded: Math.min(t.loaded + e.length, t.total),
@@ -3865,43 +3918,43 @@ async function aA(e, t) {
     } : null;
   });
 }
-var aR = (e => (e[e.COMPONENTIZE = 0] = "COMPONENTIZE", e[e.ADD_PROPS = 1] = "ADD_PROPS", e[e.LINT = 2] = "LINT", e[e.ALL = 3] = "ALL", e))(aR || {});
-var aD = (e => (e.INITIAL = "initial", e.COMPONENTIZE = "componentize", e.ADD_PROPS = "add_props", e.LINT = "lint", e.ALL = "all", e))(aD || {});
+var aR = (e => (e[e.COMPONENTIZE = 0] = 'COMPONENTIZE', e[e.ADD_PROPS = 1] = 'ADD_PROPS', e[e.LINT = 2] = 'LINT', e[e.ALL = 3] = 'ALL', e))(aR || {});
+var aD = (e => (e.INITIAL = 'initial', e.COMPONENTIZE = 'componentize', e.ADD_PROPS = 'add_props', e.LINT = 'lint', e.ALL = 'all', e))(aD || {});
 function aM(e) {
-  return e.filter(e => "FRAME" === e.type).length;
+  return e.filter(e => e.type === 'FRAME').length;
 }
 function aP(e) {
-  let [t, i] = useState("initial");
+  let [t, i] = useState('initial');
   let r = [{
     step: 3,
-    title: getI18nString("first_draft.make_kit.all_steps.title"),
-    description: getI18nString("first_draft.make_kit.all_steps.description")
+    title: getI18nString('first_draft.make_kit.all_steps.title'),
+    description: getI18nString('first_draft.make_kit.all_steps.description')
   }, {
     step: 0,
-    title: getI18nString("first_draft.make_kit.componentize_step.title"),
-    description: getI18nString("first_draft.make_kit.componentize_step.description")
+    title: getI18nString('first_draft.make_kit.componentize_step.title'),
+    description: getI18nString('first_draft.make_kit.componentize_step.description')
   }, {
     step: 1,
-    title: getI18nString("first_draft.make_kit.add_props_step.title"),
-    description: getI18nString("first_draft.make_kit.add_props_step.description")
+    title: getI18nString('first_draft.make_kit.add_props_step.title'),
+    description: getI18nString('first_draft.make_kit.add_props_step.description')
   }, {
     step: 2,
-    title: getI18nString("first_draft.make_kit.lint_step.title"),
-    description: getI18nString("first_draft.make_kit.lint_step.description")
+    title: getI18nString('first_draft.make_kit.lint_step.title'),
+    description: getI18nString('first_draft.make_kit.lint_step.description')
   }];
   let s = useCallback(e => {
     switch (e) {
       case 0:
-        i("componentize");
+        i('componentize');
         break;
       case 1:
-        i("add_props");
+        i('add_props');
         break;
       case 2:
-        i("lint");
+        i('lint');
         break;
       case 3:
-        i("all");
+        i('all');
     }
   }, []);
   let o = e => jsx(_$$B6.Item, {
@@ -3910,41 +3963,41 @@ function aP(e) {
         s(e.step);
       }
     },
-    children: jsxs("div", {
+    children: jsxs('div', {
       className: _$$s3.flex.flexColumn.p4.wFull.$,
-      children: [jsx("div", {
+      children: [jsx('div', {
         className: _$$s3.font13.wFitContent.$,
         children: e.title
-      }), jsx("div", {
+      }), jsx('div', {
         className: _$$s3.font11.colorTextSecondary.lh16.wFitContent.$,
         children: e.description
       })]
     })
   }, e.step);
   switch (t) {
-    case "initial":
+    case 'initial':
       return jsxs(_$$n, {
         hideActionPanel: !0,
         children: [jsx(_$$n.Header, {
-          children: jsxs("div", {
+          children: jsxs('div', {
             className: _$$s3.wFull.flex.flexColumn.p8.$,
-            children: [jsxs("div", {
+            children: [jsxs('div', {
               className: _$$s3.wFull.flex.gap4.$,
-              children: [jsx("div", {
+              children: [jsx('div', {
                 className: _$$s3.h24.$,
                 children: jsx(_$$K3, {
-                  recordingKey: _$$Pt(e.recordingKey, "backButton"),
-                  onClick: e.onBack,
-                  "aria-label": getI18nString("qa.go_back"),
-                  children: jsx(_$$C3, {})
+                  'recordingKey': generateRecordingKey(e.recordingKey, 'backButton'),
+                  'onClick': e.onBack,
+                  'aria-label': getI18nString('qa.go_back'),
+                  'children': jsx(_$$C3, {})
                 })
-              }), jsx("div", {
+              }), jsx('div', {
                 className: _$$s3.colorText.textBodyLarge.$,
-                children: renderI18nText("fullscreen_actions.quick_actions.first-draft-make-kit")
+                children: renderI18nText('fullscreen_actions.quick_actions.first-draft-make-kit')
               })]
-            }), jsx("div", {
+            }), jsx('div', {
               className: _$$s3.wFull.flex.font11.$,
-              children: renderI18nText("first_draft.make_kit.description")
+              children: renderI18nText('first_draft.make_kit.description')
             })]
           })
         }), jsx(_$$n.Body, {
@@ -3952,19 +4005,19 @@ function aP(e) {
             resultCount: r.length,
             maxVisibleResults: r.length,
             children: [o(r[0]), jsx(_$$B6.Section, {
-              header: "Individual steps",
+              header: 'Individual steps',
               children: r.slice(1).map(o)
             })]
           })
         })]
       });
-    case "componentize":
+    case 'componentize':
       return jsx(aB, {});
-    case "add_props":
+    case 'add_props':
       return jsx(aG, {});
-    case "lint":
+    case 'lint':
       return jsx(zY, {});
-    case "all":
+    case 'all':
       return jsx(aK, {});
   }
 }
@@ -3997,7 +4050,7 @@ function aB(e) {
     let e = getSingletonSceneGraph().getCurrentPage();
     if (!e) return;
     let t = e.directlySelectedNodes;
-    0 !== t.length && (await start({
+    t.length !== 0 && (await start({
       selectedNodes: t,
       submit
     }));
@@ -4007,7 +4060,7 @@ function aB(e) {
     close();
   }, [close, stop]);
   let m = useCallback(() => {
-    Fullscreen.triggerActionInUserEditScope("undo", {});
+    Fullscreen.triggerActionInUserEditScope('undo', {});
     close();
   }, [close]);
   let f = e.overrides?.state ?? state;
@@ -4016,27 +4069,27 @@ function aB(e) {
     case qy.INITIAL:
       return jsx(_$$A2, {
         action: _$$JT.FIRST_DRAFT_COMPONENTIZE,
-        actionLabel: renderI18nText("first_draft.make_kit.componentize_step.title"),
+        actionLabel: renderI18nText('first_draft.make_kit.componentize_step.title'),
         actionIcon: jsx(_$$K, {}),
         onPerform: e.overrides?.perform ?? p,
         instructionAction: {
-          type: "learn_more",
-          url: "https://figma.com"
+          type: 'learn_more',
+          url: 'https://figma.com'
         },
         aiTrackingContext,
         getCustomSelectedNodesAmount: aM,
-        children: renderI18nText("first_draft.make_kit.componentize_step.instructions")
+        children: renderI18nText('first_draft.make_kit.componentize_step.instructions')
       });
     case qy.RUNNING:
       return jsx(_$$F3, {
-        recordingKey: _$$Pt(e.recordingKey, "componentizeRunning"),
+        recordingKey: generateRecordingKey(e.recordingKey, 'componentizeRunning'),
         aiTrackingContext,
         onStop: h,
-        secondaryMessage: g.total ? getI18nString("first_draft.make_kit.x_of_y_frames", {
+        secondaryMessage: g.total ? getI18nString('first_draft.make_kit.x_of_y_frames', {
           loaded: g.loaded,
           total: g.total
         }) : void 0,
-        children: renderI18nText("first_draft.make_kit.componentize_step.running")
+        children: renderI18nText('first_draft.make_kit.componentize_step.running')
       });
     case qy.DONE:
       return jsx(Oq, {
@@ -4053,8 +4106,8 @@ function aB(e) {
       return null;
     case qy.ERROR:
       return jsx(_$$E4, {
-        error: "error" in i ? i.error : Error(),
-        recordingKey: _$$Pt(e.recordingKey, "error"),
+        error: 'error' in i ? i.error : new Error(),
+        recordingKey: generateRecordingKey(e.recordingKey, 'error'),
         buttons: [{
           type: _$$f5.OK,
           callback: close
@@ -4094,7 +4147,7 @@ function aG(e) {
     let e = getSingletonSceneGraph().getCurrentPage();
     if (!e) return;
     let t = e.directlySelectedNodes;
-    0 !== t.length && (await start({
+    t.length !== 0 && (await start({
       selectedNodes: t,
       submit
     }));
@@ -4104,7 +4157,7 @@ function aG(e) {
     close();
   }, [close, stop]);
   let m = useCallback(() => {
-    Fullscreen.triggerActionInUserEditScope("undo", {});
+    Fullscreen.triggerActionInUserEditScope('undo', {});
     close();
   }, [close]);
   let f = e.overrides?.state ?? state;
@@ -4113,26 +4166,26 @@ function aG(e) {
     case qy.INITIAL:
       return jsx(_$$A2, {
         action: _$$JT.FIRST_DRAFT_SUGGEST_PROPS,
-        actionLabel: renderI18nText("first_draft.make_kit.add_props_step.add_props_button"),
+        actionLabel: renderI18nText('first_draft.make_kit.add_props_step.add_props_button'),
         actionIcon: jsx(_$$K, {}),
         onPerform: p,
         instructionAction: {
-          type: "learn_more",
-          url: "https://figma.com"
+          type: 'learn_more',
+          url: 'https://figma.com'
         },
         aiTrackingContext,
-        children: renderI18nText("first_draft.make_kit.add_props_step.instructions")
+        children: renderI18nText('first_draft.make_kit.add_props_step.instructions')
       });
     case qy.RUNNING:
       return jsx(_$$F3, {
-        recordingKey: _$$Pt(e.recordingKey, "suggestPropsRunning"),
+        recordingKey: generateRecordingKey(e.recordingKey, 'suggestPropsRunning'),
         aiTrackingContext,
         onStop: h,
-        secondaryMessage: g.total ? getI18nString("first_draft.make_kit.x_of_y_components", {
+        secondaryMessage: g.total ? getI18nString('first_draft.make_kit.x_of_y_components', {
           loaded: g.loaded,
           total: g.total
         }) : void 0,
-        children: renderI18nText("first_draft.make_kit.add_props_step.running")
+        children: renderI18nText('first_draft.make_kit.add_props_step.running')
       });
     case qy.DONE:
       return jsx(Oq, {
@@ -4149,8 +4202,8 @@ function aG(e) {
       return null;
     case qy.ERROR:
       return jsx(_$$E4, {
-        error: "error" in s ? s.error : Error(),
-        recordingKey: _$$Pt(e.recordingKey, "error"),
+        error: 'error' in s ? s.error : new Error(),
+        recordingKey: generateRecordingKey(e.recordingKey, 'error'),
         buttons: [{
           type: _$$f5.OK,
           callback: close
@@ -4182,7 +4235,7 @@ function aK(e) {
     let e = getSingletonSceneGraph().getCurrentPage();
     if (!e) return;
     let i = e.directlySelectedNodes;
-    0 !== i.length && (await start({
+    i.length !== 0 && (await start({
       selectedNodes: i,
       submit
     }), await _start({
@@ -4225,18 +4278,18 @@ function aK(e) {
 async function aH(e, t) {
   return (await Promise.all(t.map(async t => {
     let i = await gC(t);
-    let r = e.replace("{{jsx}}", i.jsx);
+    let r = e.replace('{{jsx}}', i.jsx);
     let n = await Ay.openai.completeChat({
-      model: "gpt-4o-2024-08-06",
-      temperature: .5,
+      model: 'gpt-4o-2024-08-06',
+      temperature: 0.5,
       n: 1,
       messages: [{
-        role: "system",
+        role: 'system',
         content: r
       }, {
-        role: "user",
+        role: 'user',
         content: [{
-          type: "image_url",
+          type: 'image_url',
           image_url: {
             url: i.base64
           }
@@ -4244,14 +4297,14 @@ async function aH(e, t) {
       }],
       use_cache: !1,
       response_format: {
-        type: "json_object"
+        type: 'json_object'
       }
     });
     let a = n.choices[0]?.message.content;
     return a ? {
       ...function (e) {
-        if (!e) throw Error("No content detected in GPT response");
-        let t = JSON.parse(e.replace(/```json\n|```/g, ""));
+        if (!e) throw new Error('No content detected in GPT response');
+        let t = JSON.parse(e.replace(/```json\n|```/g, ''));
         let i = _$$AR.parse(t);
         return {
           isMobileDesign: i.isMobileDesign,
@@ -4260,23 +4313,23 @@ async function aH(e, t) {
       }(a),
       frame: t
     } : null;
-  }))).filter(e => null !== e);
+  }))).filter(e => e !== null);
 }
 async function az(e, t) {
   return (await Promise.all(t.map(async t => {
     let i = await gC(t);
-    let r = e.replace("{{jsx}}", i.jsx);
+    let r = e.replace('{{jsx}}', i.jsx);
     let n = await Ay.openai.completeChat({
-      model: "gpt-4o-2024-08-06",
-      temperature: .5,
+      model: 'gpt-4o-2024-08-06',
+      temperature: 0.5,
       n: 1,
       messages: [{
-        role: "system",
+        role: 'system',
         content: r
       }, {
-        role: "user",
+        role: 'user',
         content: [{
-          type: "image_url",
+          type: 'image_url',
           image_url: {
             url: i.base64
           }
@@ -4284,7 +4337,7 @@ async function az(e, t) {
       }],
       use_cache: !1,
       response_format: {
-        type: "json_object"
+        type: 'json_object'
       }
     });
     let a = n.choices[0]?.message.content;
@@ -4292,12 +4345,14 @@ async function az(e, t) {
       component: t,
       ...JSON.parse(a)
     } : null;
-  }))).filter(e => null !== e);
+  }))).filter(e => e !== null);
 }
 let aV = e => {
   let t = new Set();
   !function e(i) {
-    if (i.name.startsWith("[COMPONENT]") && t.add(i.guid), "childrenNodes" in i) for (let t of i.childrenNodes) e(t);
+    if (i.name.startsWith('[COMPONENT]') && t.add(i.guid), 'childrenNodes' in i) {
+      for (let t of i.childrenNodes) e(t);
+    }
   }(e);
   return t;
 };
@@ -4305,7 +4360,7 @@ let aW = (e, t) => {
   let i = 0;
   let r = e;
   for (; r.guid !== t.guid && i < 8;) {
-    if (i += 1, !r.parentNode) throw Error("Node is not a child of root, distance: " + i);
+    if (i += 1, !r.parentNode) throw new Error(`Node is not a child of root, distance: ${i}`);
     r = r.parentNode;
   }
   return i;
@@ -4317,24 +4372,24 @@ let aY = async ({
   let i = getSingletonSceneGraph().getCurrentPage();
   if (!i) return;
   let r = i.directlySelectedNodes;
-  if (0 === r.length) {
-    t(_$$F.enqueue({
-      type: "eval-componentize",
-      message: "No selected nodes"
+  if (r.length === 0) {
+    t(VisualBellActions.enqueue({
+      type: 'eval-componentize',
+      message: 'No selected nodes'
     }));
     return;
   }
   for (let e of r) {
-    if ("FRAME" !== e.type) {
-      t(_$$F.enqueue({
-        type: "eval-componentize",
-        message: "Selected node is not a frame"
+    if (e.type !== 'FRAME') {
+      t(VisualBellActions.enqueue({
+        type: 'eval-componentize',
+        message: 'Selected node is not a frame'
       }));
       return;
     }
-    if (e.name.startsWith("[TEST]")) {
-      t(_$$F.enqueue({
-        type: "eval-componentize",
+    if (e.name.startsWith('[TEST]')) {
+      t(VisualBellActions.enqueue({
+        type: 'eval-componentize',
         message: `Selected node ${e.name} is already a test node`
       }));
       return;
@@ -4342,9 +4397,9 @@ let aY = async ({
   }
   for (let i of r) {
     let r;
-    if (i.name = `[TEST] ${i.name}`, !(r = e ? (await aH(e, [i]))[0] : (await aA([i], ""))[0])) {
-      t(_$$F.enqueue({
-        type: "eval-componentize",
+    if (i.name = `[TEST] ${i.name}`, !(r = e ? (await aH(e, [i]))[0] : (await aA([i], ''))[0])) {
+      t(VisualBellActions.enqueue({
+        type: 'eval-componentize',
         message: `Failed to get suggested components for ${i.name}`
       }));
       return;
@@ -4359,34 +4414,34 @@ let aJ = async ({
 }) => {
   let r = getSingletonSceneGraph().getCurrentPage();
   if (!r) return;
-  let n = r.childrenNodes.filter(e => "FRAME" === e.type);
-  if (0 === n.length) {
-    t(_$$F.enqueue({
-      type: "eval-componentize",
-      message: "No frames found"
+  let n = r.childrenNodes.filter(e => e.type === 'FRAME');
+  if (n.length === 0) {
+    t(VisualBellActions.enqueue({
+      type: 'eval-componentize',
+      message: 'No frames found'
     }));
     return;
   }
   i();
-  t(_$$F.enqueue({
-    type: "eval-componentize",
-    message: "Starting eval"
+  t(VisualBellActions.enqueue({
+    type: 'eval-componentize',
+    message: 'Starting eval'
   }));
   let a = [];
   let s = 0;
-  let o = n.filter(e => e.name.startsWith("[TEST]"));
+  let o = n.filter(e => e.name.startsWith('[TEST]'));
   for (let i of ab()(o, 5)) {
     await Promise.all(i.map(async i => {
       let r;
-      r = e ? (await aH(e, [i]))[0] : (await aA([i], ""))[0];
+      r = e ? (await aH(e, [i]))[0] : (await aA([i], ''))[0];
       a.push({
         node: i,
         components: new Set(ak(r).map(e => e.guid)),
         expectedComponents: aV(i)
       });
       s += 1;
-      t(_$$F.enqueue({
-        type: "eval-componentize",
+      t(VisualBellActions.enqueue({
+        type: 'eval-componentize',
         message: `Completed ${s} / ${o.length}`
       }));
     }));
@@ -4404,11 +4459,11 @@ let aJ = async ({
       result: e
     });
   }
-  _$$l2.ai("eval-componentize", () => {
-    let e = getSingletonSceneGraph().createNode("CANVAS");
+  _$$l2.ai('eval-componentize', () => {
+    let e = getSingletonSceneGraph().createNode('CANVAS');
     e.name = `Eval Run ${r.name} ${new Date().toISOString()}`;
-    let t = getSingletonSceneGraph().createNode("FRAME");
-    t.name = "Results Frame";
+    let t = getSingletonSceneGraph().createNode('FRAME');
+    t.name = 'Results Frame';
     t.x = -1e3;
     t.y = -1e3;
     t.size = {
@@ -4416,25 +4471,25 @@ let aJ = async ({
       y: 220
     };
     t.fills = [{
-      type: "SOLID",
+      type: 'SOLID',
       color: {
-        r: .9,
-        g: .9,
-        b: .9,
+        r: 0.9,
+        g: 0.9,
+        b: 0.9,
         a: 1
       },
       visible: !0,
       opacity: 1,
-      blendMode: "NORMAL"
+      blendMode: 'NORMAL'
     }];
-    let i = getSingletonSceneGraph().createNode("TEXT");
-    for (let r of (i.name = "Results", ComponentPropsAiCPPBindings.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
+    let i = getSingletonSceneGraph().createNode('TEXT');
+    for (let r of (i.name = 'Results', ComponentPropsAiCPPBindings.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
 False Positive Count: ${l.reduce((e, t) => e + t.falsePositiveCount, 0)}
 Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 10, i.size = {
       x: 200,
       y: 200
     }, i.fills = i.fills.concat([{
-      type: "SOLID",
+      type: 'SOLID',
       color: {
         r: 0,
         g: 0,
@@ -4443,27 +4498,27 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
       },
       visible: !0,
       opacity: 1,
-      blendMode: "NORMAL"
+      blendMode: 'NORMAL'
     }]), t.appendChild(i), e.appendChild(t), l)) {
       let t = r.result;
       if (!yZ(t.expectedComponents, t.components)) {
         let i = FirstDraftHelpers.cloneNodeForComponentize(t.node.guid);
         let n = getSingletonSceneGraph().get(i.get(t.node.guid));
-        if (!n) throw Error("Failed to clone node");
-        n.name = t.node.name + ` (FNC: ${r.falseNegativeCount} FPC: ${r.falsePositiveCount} CC: ${r.correctCount})`;
+        if (!n) throw new Error('Failed to clone node');
+        n.name = `${t.node.name} (FNC: ${r.falseNegativeCount} FPC: ${r.falsePositiveCount} CC: ${r.correctCount})`;
         let a = (e, t) => {
           e.strokePaints = {
             data: e.strokePaints.data.concat([{
-              type: "SOLID",
+              type: 'SOLID',
               color: t,
               visible: !0,
               opacity: 1,
-              blendMode: "NORMAL"
+              blendMode: 'NORMAL'
             }]),
             blobs: e.strokePaints.blobs
           };
           e.strokeWeight = (8 - aW(e, n)) * 2;
-          e.strokeAlign = "OUTSIDE";
+          e.strokeAlign = 'OUTSIDE';
           e.borderStrokeWeightsIndependent = !1;
           e.borderBottomWeight = 2;
           e.borderTopWeight = 2;
@@ -4504,12 +4559,12 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
     }
     getSingletonSceneGraph().setCurrentPageAsync(e.guid);
   });
-  t(_$$F.enqueue({
-    type: "eval-componentize",
-    message: "Finished eval"
+  t(VisualBellActions.enqueue({
+    type: 'eval-componentize',
+    message: 'Finished eval'
   }));
 };
-let aq = ["componentizePrompt", "suggestProps", "componentizeResultMapping"];
+let aq = ['componentizePrompt', 'suggestProps', 'componentizeResultMapping'];
 class aX {
   constructor(e = 1) {
     this.queue = [];
@@ -4531,7 +4586,7 @@ class aX {
     });
   }
   async doNextTask() {
-    if (0 === this.queue.length || this.activeCount >= this.concurrencyLimit) return;
+    if (this.queue.length === 0 || this.activeCount >= this.concurrencyLimit) return;
     let e = this.queue.shift();
     if (!e) return;
     let [t, i] = e;
@@ -4547,10 +4602,10 @@ class aX {
   }
 }
 let sl = {
-  ORG: "org",
-  ALL: "all"
+  ORG: 'org',
+  ALL: 'all'
 };
-let sd = createLocalStorageAtom("firstDraftKitPickerTab", sl.ORG);
+let sd = createLocalStorageAtom('firstDraftKitPickerTab', sl.ORG);
 function sc({
   aiTrackingContext: e,
   ParentComponent: t
@@ -4561,7 +4616,7 @@ function sc({
     setSelectedKit,
     kitsAreLoaded
   } = _$$sI();
-  let [l, d] = useState("");
+  let [l, d] = useState('');
   let u = useRef(null);
   _$$y2(l, u);
   _$$z3();
@@ -4586,8 +4641,8 @@ function sc({
     u.current?.focus();
   }, [u]);
   let [_, x] = useAtomValueAndSetter(sd);
-  let y = T5("FirstDraftKitSelection").unwrapOr(null);
-  let b = y?.name || getI18nString("first_draft.kits.org_libraries.fallback");
+  let y = T5('FirstDraftKitSelection').unwrapOr(null);
+  let b = y?.name || getI18nString('first_draft.kits.org_libraries.fallback');
   let C = b && b.length > 20;
   let v = getFeatureFlags().first_draft_direct_gen && allUsableKitEntries.some(e => e.metadata.direct_generation);
   let E = f || allUsableKitEntries;
@@ -4596,46 +4651,50 @@ function sc({
       let e = _ === sl.ORG;
       E = E.filter(t => e === t.metadata.direct_generation);
     }
-  } else E = E.filter(e => !e.metadata.direct_generation);
+  } else {
+    E = E.filter(e => !e.metadata.direct_generation);
+  }
   return jsx(_$$s2, {
-    name: "firstDraftKitPicker",
-    recordingKey: "firstDraftKitPicker",
+    name: 'firstDraftKitPicker',
+    recordingKey: 'firstDraftKitPicker',
     children: jsx(_$$dP, {
-      children: jsxs("div", {
-        className: _$$s3.flex.flexColumn.gap8.pt8.$,
-        "data-testid": "kitSelectionListContainer",
-        children: [jsxs("div", {
-          className: rB()("kit_picker_view--navContainer--JHIEY", Dm),
-          children: [jsx("div", {
+      children: jsxs('div', {
+        'className': _$$s3.flex.flexColumn.gap8.pt8.$,
+        'data-testid': 'kitSelectionListContainer',
+        'children': [jsxs('div', {
+          className: rB()('kit_picker_view--navContainer--JHIEY', Dm),
+          children: [jsx('div', {
             className: _$$s3.h24.$,
             children: jsx(_$$K3, {
-              recordingKey: _$$Pt("firstDraftKitSelection", "backButton"),
-              onClick: pop,
-              "aria-label": getI18nString("qa.go_back"),
-              children: jsx(_$$C3, {})
+              'recordingKey': generateRecordingKey('firstDraftKitSelection', 'backButton'),
+              'onClick': pop,
+              'aria-label': getI18nString('qa.go_back'),
+              'children': jsx(_$$C3, {})
             })
-          }), jsx("input", {
-            ref: u,
-            "aria-autocomplete": "list",
-            className: rB()("kit_picker_view--searchInput--Yj6zW", Dm),
-            dir: "auto",
-            maxLength: 100,
-            onChange: e => {
+          }), jsx('input', {
+            'ref': u,
+            'aria-autocomplete': 'list',
+            'className': rB()('kit_picker_view--searchInput--Yj6zW', Dm),
+            'dir': 'auto',
+            'maxLength': 100,
+            'onChange': e => {
               !function (e) {
-                if (d(e), 0 === e.length) g(null);else {
+                if (d(e), e.length === 0) {
+                  g(null);
+                } else {
                   let t = e.toLowerCase();
                   g(allUsableKitEntries.filter(e => sp(e).toLowerCase().includes(t)));
                 }
               }(e.target.value);
             },
-            placeholder: getI18nString("first_draft.kits.search_placeholder"),
-            spellCheck: !1,
-            type: "search",
-            value: l
+            'placeholder': getI18nString('first_draft.kits.search_placeholder'),
+            'spellCheck': !1,
+            'type': 'search',
+            'value': l
           }), jsx(_$$y3, {
             helpUrlVariant: _$$JT.FIRST_DRAFT_MAKE_KIT
           })]
-        }), kitsAreLoaded && getFeatureFlags().first_draft_direct_gen ? jsx("div", {
+        }), kitsAreLoaded && getFeatureFlags().first_draft_direct_gen ? jsx('div', {
           className: _$$s3.wFull.pl8.pr8.$,
           children: v ? jsxs(fu, {
             value: _,
@@ -4644,30 +4703,30 @@ function sc({
             children: [jsx(_$$oz, {
               tabId: sl.ORG,
               onAction: () => x(sl.ORG),
-              recordingKey: _$$Pt("firstDraftKitSelection", "orgTab"),
+              recordingKey: generateRecordingKey('firstDraftKitSelection', 'orgTab'),
               htmlAttributes: {
                 ...(C && {
-                  "data-tooltip": b,
-                  "data-tooltip-type": Ib.TEXT
+                  'data-tooltip': b,
+                  'data-tooltip-type': Ib.TEXT
                 })
               },
-              children: renderI18nText("first_draft.kits.org_libraries", {
+              children: renderI18nText('first_draft.kits.org_libraries', {
                 orgName: EJ(b, 20)
               })
             }), jsx(_$$oz, {
               tabId: sl.ALL,
               onAction: () => x(sl.ALL),
-              recordingKey: _$$Pt("firstDraftKitSelection", "allTab"),
-              children: renderI18nText("first_draft.kits.all_libraries")
+              recordingKey: generateRecordingKey('firstDraftKitSelection', 'allTab'),
+              children: renderI18nText('first_draft.kits.all_libraries')
             })]
           }) : jsx(sh, {})
-        }) : null, jsx("div", {
-          style: {
+        }) : null, jsx('div', {
+          'style': {
             height: 312
           },
-          className: _$$s3.relative.$,
-          "data-testid": "kitSelectionListView",
-          children: kitsAreLoaded ? jsx(su, {
+          'className': _$$s3.relative.$,
+          'data-testid': 'kitSelectionListView',
+          'children': kitsAreLoaded ? jsx(su, {
             kitsToShow: E,
             searchQuery: l,
             onKitOptionSelected: m
@@ -4682,47 +4741,47 @@ function su({
   searchQuery: t,
   onKitOptionSelected: i
 }) {
-  if (t && 0 === e.length) {
+  if (t && e.length === 0) {
     let e = t.length > 20 ? `${t.slice(0, 20)}\u2026` : t;
-    return jsx("div", {
+    return jsx('div', {
       className: _$$s3.p8.selfCenter.justifyCenter.flex.flexGrow0.$,
-      children: renderI18nText("first_draft.kits.no_results", {
+      children: renderI18nText('first_draft.kits.no_results', {
         searchQuery: e
       })
     });
   }
   return jsx(_$$T4.Provider, {
     value: {
-      recordingKey: "firstDraftView"
+      recordingKey: 'firstDraftView'
     },
     children: jsx(_$$B6, {
       primary: !0,
       resultCount: e.length,
       children: e.map((e, t) => jsx(_$$B6.Item, {
         primaryAction: {
-          text: "Perform",
+          text: 'Perform',
           shortcuts: [{
             key: Uz.ENTER
           }],
           onAction: () => i(e)
         },
         actionLabel: !1,
-        recordingKey: _$$Pt("firstDraftKitSelection", t, "list-item"),
-        children: jsxs("div", {
-          className: _$$s3.p4.gap8.flexRow.flex.itemsCenter.$,
-          "data-testid": "fd-kit-item",
-          children: [jsx("div", {
-            className: "kit_picker_view--fileThumbnail--aGgkC",
+        recordingKey: generateRecordingKey('firstDraftKitSelection', t, 'list-item'),
+        children: jsxs('div', {
+          'className': _$$s3.p4.gap8.flexRow.flex.itemsCenter.$,
+          'data-testid': 'fd-kit-item',
+          'children': [jsx('div', {
+            className: 'kit_picker_view--fileThumbnail--aGgkC',
             style: {
               backgroundImage: `url(${e.thumbnailUrl})`
             }
-          }), jsxs("div", {
-            className: "kit_picker_view--kitDisplayInformation--Ypl2p",
-            children: [jsx("div", {
+          }), jsxs('div', {
+            className: 'kit_picker_view--kitDisplayInformation--Ypl2p',
+            children: [jsx('div', {
               children: sp(e)
-            }), e.numComponents > 0 && jsx("div", {
-              className: "kit_picker_view--componentCountText--bBnSq",
-              children: renderI18nText("first_draft.kits.components_count", {
+            }), e.numComponents > 0 && jsx('div', {
+              className: 'kit_picker_view--componentCountText--bBnSq',
+              children: renderI18nText('first_draft.kits.components_count', {
                 count: e.numComponents
               })
             })]
@@ -4734,10 +4793,10 @@ function su({
 }
 function sp(e) {
   switch (e.dsKitKey.type) {
-    case "LOCAL":
-    case "USER_LIBRARY":
+    case 'LOCAL':
+    case 'USER_LIBRARY':
       return e.name;
-    case "1P_LIBRARY":
+    case '1P_LIBRARY':
       if (e.metadata.identifier) return getI18nString(`first_draft.kits.${e.metadata.identifier}`) || e.name;
       return e.name;
     default:
@@ -4745,24 +4804,24 @@ function sp(e) {
   }
 }
 function sh() {
-  return jsxs("div", {
-    className: "kit_picker_view--tempGettingStartedNotice--ADe-Q",
-    children: [jsx("div", {
+  return jsxs('div', {
+    className: 'kit_picker_view--tempGettingStartedNotice--ADe-Q',
+    children: [jsx('div', {
       className: _$$s3.fontBold.$,
-      children: renderI18nText("first_draft.direct_gen.getting_started.heading")
-    }), jsxs("div", {
+      children: renderI18nText('first_draft.direct_gen.getting_started.heading')
+    }), jsxs('div', {
       className: _$$s3.inline.colorTextSecondary.flexWrap.$,
-      children: [renderI18nText("first_draft.direct_gen.getting_started.notice"), " ", jsx(_$$N2, {
+      children: [renderI18nText('first_draft.direct_gen.getting_started.notice'), ' ', jsx(_$$N2, {
         newTab: !0,
         trusted: !0,
-        href: "https://www.figma.com/blog/figma-ai-first-draft-byods/",
+        href: 'https://www.figma.com/blog/figma-ai-first-draft-byods/',
         onClick: e => e.stopPropagation(),
         htmlAttributes: {
-          "data-tooltip": getI18nString("qa.learn_more"),
-          "data-tooltip-type": Ib.TEXT,
-          "data-tooltip-show-above": !0
+          'data-tooltip': getI18nString('qa.learn_more'),
+          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-show-above': !0
         },
-        children: renderI18nText("qa.learn_more")
+        children: renderI18nText('qa.learn_more')
       })]
     })]
   });
@@ -4774,7 +4833,7 @@ function sm({
   setDescription: r
 }) {
   return jsx(_$$bL2, {
-    width: "sm",
+    width: 'sm',
     onClose: e,
     defaultPosition: {
       bottom: window.innerHeight - t.y - 16,
@@ -4783,12 +4842,12 @@ function sm({
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: renderI18nText("first_draft.reference_settings")
+          children: renderI18nText('first_draft.reference_settings')
         })
       }), jsx(_$$nB, {
         padding: 8,
         children: jsx(_$$v2, {
-          placeholder: getI18nString("first_draft.reference_settings.placeholder"),
+          placeholder: getI18nString('first_draft.reference_settings.placeholder'),
           value: i,
           onChange: e => {
             r(e.currentTarget.value);
@@ -4814,12 +4873,12 @@ function sf({
     x: 0,
     y: 0
   });
-  return jsxs("div", {
+  return jsxs('div', {
     className: _$$s3.p4.flex.flexRow.flexWrap.minW0.flexShrink0.$,
-    children: [s?.map(i => jsxs("div", {
+    children: [s?.map(i => jsxs('div', {
       className: _$$s3.relative.$,
       style: {
-        display: "flex"
+        display: 'flex'
       },
       children: [jsx(_$$v3, {
         thumbnailUrl: e?.get(i.guid)?.imageURL ?? zs,
@@ -4831,17 +4890,17 @@ function sf({
         onDelete: () => {
           t(i.guid);
         }
-      }), jsx("div", {
+      }), jsx('div', {
         className: _$$s3.absolute.colorBgSecondary.p4.$,
         style: {
-          bottom: "-4px",
-          left: "-4px",
-          borderRadius: "0 9px 0 0"
+          bottom: '-4px',
+          left: '-4px',
+          borderRadius: '0 9px 0 0'
         },
         children: jsx(_$$f6, {
-          onIcon: jsx(_$$A9, {}),
-          offIcon: jsx(_$$A9, {}),
-          onChange: (e, {
+          'onIcon': jsx(_$$A9, {}),
+          'offIcon': jsx(_$$A9, {}),
+          'onChange': (e, {
             event: t
           }) => {
             c.current = {
@@ -4850,15 +4909,15 @@ function sf({
             };
             l(e ? i.guid : null);
           },
-          checked: o === i.guid,
-          variant: "highlighted",
-          "aria-label": getI18nString("first_draft.reference_settings.adjust_settings") || ""
+          'checked': o === i.guid,
+          'variant': 'highlighted',
+          'aria-label': getI18nString('first_draft.reference_settings.adjust_settings') || ''
         })
       })]
     }, i.guid)), o && jsx(sm, {
       onClose: () => l(null),
       defaultPosition: c.current,
-      description: i.attachmentMetadata?.[o]?.description ?? "",
+      description: i.attachmentMetadata?.[o]?.description ?? '',
       setDescription: e => r({
         ...i,
         attachmentMetadata: {
@@ -4887,203 +4946,203 @@ function sg({
   let [f] = useState(function (e = 3, t) {
     let i = getFeatureFlags().first_draft_new_prompt_pills;
     let r = [{
-      label: getI18nString("first_draft.prompts.pricing_page.label"),
-      prompt: getI18nString("first_draft.prompts.pricing_page.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.pricing_page.label'),
+      prompt: getI18nString('first_draft.prompts.pricing_page.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.sign_in_screen.label"),
-      prompt: getI18nString("first_draft.prompts.sign_in_screen.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.sign_in_screen.label'),
+      prompt: getI18nString('first_draft.prompts.sign_in_screen.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.blog_post.label"),
-      prompt: getI18nString("first_draft.prompts.blog_post.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.blog_post.label'),
+      prompt: getI18nString('first_draft.prompts.blog_post.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.portfolio.label"),
-      prompt: getI18nString("first_draft.prompts.portfolio.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.portfolio.label'),
+      prompt: getI18nString('first_draft.prompts.portfolio.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.news_site.label"),
-      prompt: getI18nString("first_draft.prompts.news_site.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.news_site.label'),
+      prompt: getI18nString('first_draft.prompts.news_site.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.onboarding.label"),
-      prompt: getI18nString("first_draft.prompts.onboarding.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.onboarding.label'),
+      prompt: getI18nString('first_draft.prompts.onboarding.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.sign_in_screen.label"),
-      prompt: getI18nString("first_draft.prompts.sign_in_screen.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.sign_in_screen.label'),
+      prompt: getI18nString('first_draft.prompts.sign_in_screen.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.blog_post.label"),
-      prompt: getI18nString("first_draft.prompts.blog_post.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.blog_post.label'),
+      prompt: getI18nString('first_draft.prompts.blog_post.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.map_app_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.map_app_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.map_app_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.map_app_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.messaging_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.messaging_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.messaging_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.messaging_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.profile.label"),
-      prompt: getI18nString("first_draft.prompts.profile_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.profile.label'),
+      prompt: getI18nString('first_draft.prompts.profile_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.travel_app_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.travel_app_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.travel_app_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.travel_app_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.social_feed_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.social_feed_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.social_feed_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.social_feed_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.ticketing_app.label"),
-      prompt: getI18nString("first_draft.prompts.ticketing_app.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.ticketing_app.label'),
+      prompt: getI18nString('first_draft.prompts.ticketing_app.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.ride_sharing_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.ride_sharing_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.ride_sharing_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.ride_sharing_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.to_dos_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.to_dos_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.to_dos_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.to_dos_mobile.prompt'),
+      type: 'MOBILE'
     }];
     i && r.push({
-      label: getI18nString("first_draft.prompts.homepage.label"),
-      prompt: getI18nString("first_draft.prompts.homepage.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.homepage.label'),
+      prompt: getI18nString('first_draft.prompts.homepage.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.homepage.label"),
-      prompt: getI18nString("first_draft.prompts.homepage_2.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.homepage.label'),
+      prompt: getI18nString('first_draft.prompts.homepage_2.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.video_player_streaming.label"),
-      prompt: getI18nString("first_draft.prompts.video_player_streaming.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.video_player_streaming.label'),
+      prompt: getI18nString('first_draft.prompts.video_player_streaming.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.video_page_with_comments.label"),
-      prompt: getI18nString("first_draft.prompts.video_page_with_comments.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.video_page_with_comments.label'),
+      prompt: getI18nString('first_draft.prompts.video_page_with_comments.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.search_results_travel.label"),
-      prompt: getI18nString("first_draft.prompts.search_results_travel.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.search_results_travel.label'),
+      prompt: getI18nString('first_draft.prompts.search_results_travel.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.social_feed_text_heavy.label"),
-      prompt: getI18nString("first_draft.prompts.social_feed_text_heavy.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.social_feed_text_heavy.label'),
+      prompt: getI18nString('first_draft.prompts.social_feed_text_heavy.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.profile.label"),
-      prompt: getI18nString("first_draft.prompts.profile_social_media.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.profile.label'),
+      prompt: getI18nString('first_draft.prompts.profile_social_media.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.news_article.label"),
-      prompt: getI18nString("first_draft.prompts.news_article.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.news_article.label'),
+      prompt: getI18nString('first_draft.prompts.news_article.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.landing_page.label"),
-      prompt: getI18nString("first_draft.prompts.landing_page_beauty.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.landing_page.label'),
+      prompt: getI18nString('first_draft.prompts.landing_page_beauty.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.landing_page.label"),
-      prompt: getI18nString("first_draft.prompts.landing_page_tech.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.landing_page.label'),
+      prompt: getI18nString('first_draft.prompts.landing_page_tech.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.marketing_page_football.label"),
-      prompt: getI18nString("first_draft.prompts.marketing_page_football.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.marketing_page_football.label'),
+      prompt: getI18nString('first_draft.prompts.marketing_page_football.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.shopping.label"),
-      prompt: getI18nString("first_draft.prompts.shopping_hifi.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.shopping.label'),
+      prompt: getI18nString('first_draft.prompts.shopping_hifi.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.shopping.label"),
-      prompt: getI18nString("first_draft.prompts.product_details_shoes.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.shopping.label'),
+      prompt: getI18nString('first_draft.prompts.product_details_shoes.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.admin_dashboard_saas.label"),
-      prompt: getI18nString("first_draft.prompts.admin_dashboard_saas.prompt"),
-      type: "WEB"
+      label: getI18nString('first_draft.prompts.admin_dashboard_saas.label'),
+      prompt: getI18nString('first_draft.prompts.admin_dashboard_saas.prompt'),
+      type: 'WEB'
     }, {
-      label: getI18nString("first_draft.prompts.settings_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.settings_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.settings_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.settings_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.video_player_comments_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.video_player_comments_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.video_player_comments_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.video_player_comments_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.checkout_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.checkout_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.checkout_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.checkout_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.reviews_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.reviews_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.reviews_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.reviews_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.audio_player_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.audio_player_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.audio_player_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.audio_player_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.investing_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.investing_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.investing_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.investing_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.app_browsing_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.app_browsing_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.app_browsing_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.app_browsing_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.reservations_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.reservations_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.reservations_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.reservations_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.fitness_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.fitness_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.fitness_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.fitness_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.subscriptions_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.subscriptions_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.subscriptions_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.subscriptions_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.recipes_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.recipes_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.recipes_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.recipes_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.sports_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.sports_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.sports_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.sports_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.delivery_app_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.delivery_app_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.delivery_app_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.delivery_app_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.calendar_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.calendar_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.calendar_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.calendar_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.email_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.email_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.email_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.email_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.file_browser_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.file_browser_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.file_browser_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.file_browser_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.education_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.education_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.education_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.education_mobile.prompt'),
+      type: 'MOBILE'
     }, {
-      label: getI18nString("first_draft.prompts.shopping_mobile.label"),
-      prompt: getI18nString("first_draft.prompts.shopping_mobile.prompt"),
-      type: "MOBILE"
+      label: getI18nString('first_draft.prompts.shopping_mobile.label'),
+      prompt: getI18nString('first_draft.prompts.shopping_mobile.prompt'),
+      type: 'MOBILE'
     });
     let n = r;
     if (t) {
       let e = t.toLowerCase();
-      e.includes("mobile") ? n = n.filter(e => "MOBILE" === e.type) : e.includes("web") && (n = n.filter(e => "WEB" === e.type));
+      e.includes('mobile') ? n = n.filter(e => e.type === 'MOBILE') : e.includes('web') && (n = n.filter(e => e.type === 'WEB'));
     }
     let a = nx()(n);
     let s = {};
@@ -5093,7 +5152,7 @@ function sg({
       s[i] || (s[i] = t);
     }
     let l = Object.values(s).slice(0, e);
-    return l.length < e ? (reportError(_$$e.AI_GENERATION, Error(`Unable to generate ${e} unique presets`), {
+    return l.length < e ? (reportError(_$$e.AI_GENERATION, new Error(`Unable to generate ${e} unique presets`), {
       extra: {
         count: e,
         generatedCount: l.length,
@@ -5114,21 +5173,21 @@ function sg({
   let x = useCallback(e => {
     SceneGraphHelpers?.removeFromSelection([e]);
   }, []);
-  let y = useCallback(() => 0 !== e.prompt.length, [e]);
+  let y = useCallback(() => e.prompt.length !== 0, [e]);
   let b = getFeatureFlags().first_draft_direct_gen;
   let C = useRef(null);
   let v = () => r && jsx($n, {
-    "aria-label": sp(r),
-    iconPrefix: jsx(_$$i4, {
+    'aria-label': sp(r),
+    'iconPrefix': jsx(_$$i4, {
       style: {
         marginLeft: 2,
         marginRight: 4
       }
     }),
-    onClick: i,
-    recordingKey: _$$Pt(c, "changeKit"),
-    variant: "secondary",
-    children: sp(r)
+    'onClick': i,
+    'recordingKey': generateRecordingKey(c, 'changeKit'),
+    'variant': 'secondary',
+    'children': sp(r)
   });
   let E = _$$o4();
   m = b ? {
@@ -5137,13 +5196,13 @@ function sg({
   } : {
     growVertically: !1
   };
-  return jsxs("div", {
-    className: _$$s3.borderBox.$,
-    style: {
+  return jsxs('div', {
+    'className': _$$s3.borderBox.$,
+    'style': {
       padding: 8
     },
-    "data-testid": "readyForPromptView",
-    children: [jsx(XG, {
+    'data-testid': 'readyForPromptView',
+    'children': [jsx(XG, {
       action: _$$JT.FIRST_DRAFT,
       bottomContent: h && b && _ && p && _.length > 0 && jsx(sf, {
         promptValue: e,
@@ -5151,27 +5210,27 @@ function sg({
         selectedNodeThumbnailsCache: p,
         onDelete: x
       }),
-      featureNameForInstrumentation: "first_draft",
+      featureNameForInstrumentation: 'first_draft',
       onChange: i => t({
         ...e,
         prompt: i
       }),
       promptHistory: b ? [] : l,
-      recordingKey: _$$Pt(c, "generate"),
+      recordingKey: generateRecordingKey(c, 'generate'),
       refocusToInput: !1,
       suggestion: f[0].prompt,
       suggestionPills: f.slice(1),
       textAreaRef: C,
-      topNavContent: b ? jsx("div", {}) : jsx("div", {
-        className: "first_draft_prompt_view_v2--libraryButtonContainer--P-Bye",
+      topNavContent: b ? jsx('div', {}) : jsx('div', {
+        className: 'first_draft_prompt_view_v2--libraryButtonContainer--P-Bye',
         children: v()
       }),
       value: e.prompt,
       ...m
     }), jsxs(_$$B, {
       fullWidth: !0,
-      justify: "space-between",
-      children: [b && v() || jsx("div", {}), jsxs(_$$B, {
+      justify: 'space-between',
+      children: [b && v() || jsx('div', {}), jsxs(_$$B, {
         gap: 8,
         children: [b && jsx(_$$nj, {
           promptHistory: l,
@@ -5186,9 +5245,9 @@ function sg({
             modifier: [xH.META]
           }],
           onAction: g,
-          recordingKey: _$$Pt(c, "generate"),
+          recordingKey: generateRecordingKey(c, 'generate'),
           disabled: !y(),
-          children: renderI18nText("first_draft.generate")
+          children: renderI18nText('first_draft.generate')
         })]
       })]
     })]
@@ -5233,17 +5292,17 @@ function sy({
     primaryAction: r,
     enableFauxFocus: !1,
     children: jsx(_$$x3.GridItemHighlight, {
-      children: jsx("div", {
+      children: jsx('div', {
         className: _$$s3.colorBgSecondary.b1.colorBorder.wFull.flex.alignCenter.justifyCenter.$,
         style: {
-          aspectRatio: "1/1",
-          height: "56px",
-          overflow: "hidden",
-          borderRadius: "8px",
-          alignItems: "flex-start"
+          aspectRatio: '1/1',
+          height: '56px',
+          overflow: 'hidden',
+          borderRadius: '8px',
+          alignItems: 'flex-start'
         },
-        children: jsx("img", {
-          alt: getI18nString("first_draft.theme_preview", {
+        children: jsx('img', {
+          alt: getI18nString('first_draft.theme_preview', {
             index: e + 1
           }),
           src: t.dataURI,
@@ -5254,10 +5313,10 @@ function sy({
     })
   });
 }
-let sb = createLocalStorageAtom("draft_prompt_history", []);
-let sC = "first-draft-done-feedback";
+let sb = createLocalStorageAtom('draft_prompt_history', []);
+let sC = 'first-draft-done-feedback';
 let sv = createRemovableAtomFamily(() => atom({
-  prompt: ""
+  prompt: ''
 }));
 let sE = async ({
   params: {
@@ -5270,9 +5329,11 @@ let sE = async ({
   },
   abortController: s
 }) => {
-  if (s.signal.addEventListener("abort", () => {
+  if (s.signal.addEventListener('abort', () => {
     r.current = !1;
-  }), !e) throw Error(getI18nString("first_draft.no_design_generated"));
+  }), !e) {
+    throw new Error(getI18nString('first_draft.no_design_generated'));
+  }
   let o = await i(t, {
     designSystem: e,
     selectedNodeIds: n ?? void 0,
@@ -5286,7 +5347,7 @@ let sE = async ({
     FirstDraftHelpers.clearFDScene();
     return o.error;
   }
-  if (o?.success && !o?.nodeId) throw Error(getI18nString("first_draft.no_design_generated"));
+  if (o?.success && !o?.nodeId) throw new Error(getI18nString('first_draft.no_design_generated'));
   return {
     result: o
   };
@@ -5298,10 +5359,10 @@ function sT() {
   } = _$$wj(_$$JT.FIRST_DRAFT);
   let i = aiTrackingContext.clientLifecycleId;
   let r = useCallback(() => {
-    trackEventAnalytics("First Draft: Error", {
+    trackEventAnalytics('First Draft: Error', {
       file_key: e,
       clientLifecycleId: i,
-      view: "firstDraftGenerate"
+      view: 'firstDraftGenerate'
     }, {
       forwardToDatadog: !0,
       sendAsBeacon: !0,
@@ -5309,7 +5370,7 @@ function sT() {
     });
   }, [i, e]);
   return jsx(_$$tH, {
-    boundaryKey: "FirstDraft",
+    boundaryKey: 'FirstDraft',
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
     sentryTags: {
       clientLifecycleId: i,
@@ -5318,10 +5379,10 @@ function sT() {
     onError: r,
     children: jsx(_$$T4.Provider, {
       value: {
-        recordingKey: "firstDraftView"
+        recordingKey: 'firstDraftView'
       },
       children: jsx(sw, {
-        recordingKey: "firstDraftView"
+        recordingKey: 'firstDraftView'
       })
     })
   });
@@ -5366,13 +5427,15 @@ function sw({
   } = cq();
   let [M, P] = useState(!1 === hasLastSelectedKit);
   useEffect(() => {
-    if (M || !hasLastSelectedKit) return (hasLastSelectedKit ? push : replace)({
-      name: Sn.FIRST_DRAFT_KIT_PICKER,
-      module: jsx(sc, {
-        aiTrackingContext,
-        ParentComponent: sT
-      })
-    });
+    if (M || !hasLastSelectedKit) {
+      return (hasLastSelectedKit ? push : replace)({
+        name: Sn.FIRST_DRAFT_KIT_PICKER,
+        module: jsx(sc, {
+          aiTrackingContext,
+          ParentComponent: sT
+        })
+      });
+    }
   }, [aiTrackingContext, M, hasLastSelectedKit, e, push, replace]);
   let {
     promptHistory,
@@ -5396,7 +5459,7 @@ function sw({
     xF(e);
     let n = !0;
     selectedKit && !1 === selectedKit.metadata.has_theme && (n = !1);
-    0 === r.length && 0 === Object.keys(t).length && (n = !1);
+    r.length === 0 && Object.keys(t).length === 0 && (n = !1);
     n && b(await _$$xk(i, e, r, t));
   }, [selectedKit]);
   let {
@@ -5410,14 +5473,14 @@ function sw({
   });
   let en = useCallback(async () => {
     if (state === qy.RUNNING) {
-      logWarning("first-draft", "handleSubmit called while already running");
+      logWarning('first-draft', 'handleSubmit called while already running');
       return;
     }
     if (!selectedKit) {
-      logWarning("first-draft", "handleSubmit called without a selected kit");
+      logWarning('first-draft', 'handleSubmit called without a selected kit');
       return;
     }
-    debugState.dispatch(_$$F.dequeue({
+    debugState.dispatch(VisualBellActions.dequeue({
       matchType: sC
     }));
     addPromptToHistory(_.prompt);
@@ -5442,7 +5505,7 @@ function sw({
       iteration_view_type: $J.SUCCESS_WITH_ITERATION,
       interaction: _$$sd.GALLERY_SELECT,
       status: _$$o3.COMPLETED,
-      value: e.modeId || "null"
+      value: e.modeId || 'null'
     });
     t.ev.target?.item && (I.current[t.ev.target.index] = t.ev.target.item);
     await T.current.postTask(() => {
@@ -5451,11 +5514,11 @@ function sw({
         let i = h.get(t);
         let r = i?.firstDraftData;
         let n = r?.kit?.type ?? null;
-        trackEventAnalytics("First Draft: Multiple Options Selected", {
+        trackEventAnalytics('First Draft: Multiple Options Selected', {
           preset_name: e.modeId,
           clientLifecycleId: u,
           isLocal: n === AssetSource.LOCAL || null,
-          dsKitType: null !== n ? n === AssetSource.LOCAL ? "LOCAL" : "1P_LIBRARY" : null,
+          dsKitType: n !== null ? n === AssetSource.LOCAL ? 'LOCAL' : '1P_LIBRARY' : null,
           kitKey: r?.kit?.key ?? null,
           file_key: m
         }, {
@@ -5470,9 +5533,11 @@ function sw({
     }, {});
   }, [aiTrackingContext, w, u, h, m]);
   let eo = Fk((e, t) => {
-    for (let i of t) if (i) {
-      let t = e.get(i);
-      if (t) return Object.values(t.explicitVariableModes())[0] ?? null;
+    for (let i of t) {
+      if (i) {
+        let t = e.get(i);
+        if (t) return Object.values(t.explicitVariableModes())[0] ?? null;
+      }
     }
   }, [v.current, ...w]);
   useEffect(() => {
@@ -5481,7 +5546,7 @@ function sw({
       I.current[e] && (E.current = y[e], I.current[e].fauxFocus());
     }
   }, [eo, y]);
-  let el = () => 0 === y.length ? null : jsx(sx, {
+  let el = () => y.length === 0 ? null : jsx(sx, {
     options: y,
     onSelect: es
   });
@@ -5493,17 +5558,17 @@ function sw({
         ..._.attachmentMetadata,
         ...(v.current ? {
           [v.current]: {
-            description: "",
+            description: '',
             wasOutputOfPreviousGeneration: !0
           }
         } : {})
       }
-    }, debugState.dispatch(_$$F.enqueue({
+    }, debugState.dispatch(VisualBellActions.enqueue({
       type: sC,
-      messageComponentKey: Rw.FIRST_DRAFT_FEEDBACK,
-      icon: zX.GREEN_CHECK,
+      messageComponentKey: VisualBellType.FIRST_DRAFT_FEEDBACK,
+      icon: VisualBellIcon.GREEN_CHECK,
       onDismiss: () => {
-        debugState.dispatch(_$$F.dequeue({
+        debugState.dispatch(VisualBellActions.dequeue({
           matchType: sC
         }));
       },
@@ -5529,21 +5594,23 @@ function sw({
       });
     case qy.RUNNING:
       return jsx(_$$F3, {
-        recordingKey: _$$Pt(e, "running"),
+        recordingKey: generateRecordingKey(e, 'running'),
         onStop: ea,
         aiTrackingContext,
-        secondaryMessage: imageProgress.total && imageProgress.loaded ? getI18nString("first_draft.x_of_y_images", {
+        secondaryMessage: imageProgress.total && imageProgress.loaded ? getI18nString('first_draft.x_of_y_images', {
           loaded: imageProgress.loaded,
           total: imageProgress.total
         }) : void 0,
-        children: renderI18nText("first_draft.running")
+        children: renderI18nText('first_draft.running')
       });
     case qy.DONE:
       {
         let i = t.result;
-        if (H) return jsx(am, {
-          initialRootGuid: i.result?.nodeId
-        });
+        if (H) {
+          return jsx(am, {
+            initialRootGuid: i.result?.nodeId
+          });
+        }
         let r = [];
         if (KK() && !getFeatureFlags().first_draft_use_gemini && r.push({
           type: _$$is.MAKE_CHANGES,
@@ -5551,19 +5618,21 @@ function sw({
             FirstDraftHelpers.clearFDScene();
             z(!0);
           }
-        }), ec && _$$A8(V, executionTrace), K) return null;
+        }), ec && _$$A8(V, executionTrace), K) {
+          return null;
+        }
         return jsx(Oq, {
-          content: selectedKit?.dsKitKey.type === "USER_LIBRARY" ? null : (() => {
+          content: selectedKit?.dsKitKey.type === 'USER_LIBRARY' ? null : (() => {
             let e = [];
             let t = el();
-            return (t && e.push(t), 0 === e.length) ? null : jsx(_$$Y, {
-              direction: "vertical",
+            return (t && e.push(t), e.length === 0) ? null : jsx(_$$Y, {
+              direction: 'vertical',
               spacing: 8,
               children: e
             });
           })(),
           iterateOptions: r,
-          recordingKey: _$$Pt(e, "iterate"),
+          recordingKey: generateRecordingKey(e, 'iterate'),
           aiTrackingContext: {
             ...aiTrackingContext,
             iteration_view_type: $J.SUCCESS_WITH_ITERATION
@@ -5579,7 +5648,7 @@ function sw({
         ec && _$$A8(V, executionTrace);
         return jsx(_$$E4, {
           error,
-          recordingKey: _$$Pt(e, "error"),
+          recordingKey: generateRecordingKey(e, 'error'),
           buttons: [{
             type: _$$f5.OK,
             callback: close
@@ -5593,13 +5662,13 @@ function sw({
       throwTypeError(state);
   }
 }
-let sI = "7f12ea1300756f144a0fb5daaf68dbfc01103a46";
+let sI = '7f12ea1300756f144a0fb5daaf68dbfc01103a46';
 let sk = (e, t) => {
   let i = e => {
-    let t = e => "number" == typeof e && !isNaN(e);
+    let t = e => typeof e == 'number' && !isNaN(e);
     return t(e.x) && t(e.y) && t(e.width) && t(e.height);
   };
-  if (!i(e) || !i(t)) throw Error("Invalid bounding box - all position and size properties must be valid numbers");
+  if (!i(e) || !i(t)) throw new Error('Invalid bounding box - all position and size properties must be valid numbers');
   let r = Math.max(0, Math.min(e.x + e.width, t.x + t.width) - Math.max(e.x, t.x)) * Math.max(0, Math.min(e.y + e.height, t.y + t.height) - Math.max(e.y, t.y));
   let n = e.width * e.height + t.width * t.height - r;
   return [r, n];
@@ -5611,7 +5680,7 @@ let sN = {
       let n = i.iouDefaultCost;
       try {
         let [a, s] = sk(e.boundingBox, t.boundingBox);
-        void 0 !== i.iouThreshold && (r = r && (0 === s ? 0 : a / s) > i.iouThreshold);
+        void 0 !== i.iouThreshold && (r = r && (s === 0 ? 0 : a / s) > i.iouThreshold);
         n = s - a;
       } catch (e) {
         return {
@@ -5626,18 +5695,18 @@ let sN = {
     },
     options: {
       iouDefaultCost: 1,
-      iouThreshold: .2,
+      iouThreshold: 0.2,
       typeMismatchCost: 1
     }
   }
 };
 function sO(e) {
-  return e.fills.some(e => "IMAGE" === e.type);
+  return e.fills.some(e => e.type === 'IMAGE');
 }
-let sL = new Set(["VECTOR", "LINE"]);
-let sR = new Set(["VECTOR", "ROUNDED_RECTANGLE", "ELLIPSE", "STAR", "LINE", "REGULAR_POLYGON"]);
+let sL = new Set(['VECTOR', 'LINE']);
+let sR = new Set(['VECTOR', 'ROUNDED_RECTANGLE', 'ELLIPSE', 'STAR', 'LINE', 'REGULAR_POLYGON']);
 function sD(e) {
-  return !!(sL.has(e.type) || sR.has(e.type)) || "GROUP" === e.type && e.childrenNodes.every(e => sD(e));
+  return !!(sL.has(e.type) || sR.has(e.type)) || e.type === 'GROUP' && e.childrenNodes.every(e => sD(e));
 }
 function sB(e) {
   let t = atob(e);
@@ -5646,11 +5715,11 @@ function sB(e) {
   return i;
 }
 function sU(e) {
-  if (!e || !e.startsWith("data:") || -1 === e.indexOf(";base64,")) throw Error("Invalid data URL format");
-  let t = e.split(";base64,").pop();
-  if (!t) throw Error("Could not extract base64 data from URL");
-  let i = e.substring(5, e.indexOf(";"));
-  if (!i) throw Error("Could not extract mime type from data URL");
+  if (!e || !e.startsWith('data:') || !e.includes(';base64,')) throw new Error('Invalid data URL format');
+  let t = e.split(';base64,').pop();
+  if (!t) throw new Error('Could not extract base64 data from URL');
+  let i = e.substring(5, e.indexOf(';'));
+  if (!i) throw new Error('Could not extract mime type from data URL');
   return {
     base64: t,
     mimeType: i
@@ -5672,12 +5741,12 @@ function sG(e) {
     height: i.pixelSize.y
   };
 }
-async function sK(e, t, i, r, n, a, s, o = "Image") {
+async function sK(e, t, i, r, n, a, s, o = 'Image') {
   let l;
   let d = sB(a);
-  let c = await UD(d, s, "image");
-  if (_$$l2.user("create image node", () => {
-    (l = e.createNode("RECTANGLE")).size = {
+  let c = await UD(d, s, 'image');
+  if (_$$l2.user('create image node', () => {
+    (l = e.createNode('RECTANGLE')).size = {
       x: r,
       y: n
     };
@@ -5686,11 +5755,13 @@ async function sK(e, t, i, r, n, a, s, o = "Image") {
     l.y = i.y;
     t.appendChild(l);
     l.name = o;
-  }), !l) throw Error("Failed to create node");
+  }), !l) {
+    throw new Error('Failed to create node');
+  }
   return l;
 }
 async function sH(e, t, i, r, a, s, o) {
-  let l = await sK(e, t, i, r, a, s, o, "Placeholder");
+  let l = await sK(e, t, i, r, a, s, o, 'Placeholder');
   Vm(l.guid, jsx(_$$A0, {}));
   return l;
 }
@@ -5709,7 +5780,7 @@ async function sz(e, t, i, r, n, a, s, o) {
     imagePlaceholderRef: sI
   });
   let u = () => {
-    node && _$$l2.user("remove aborted node", () => {
+    node && _$$l2.user('remove aborted node', () => {
       node?.removeSelfAndChildren();
     });
   };
@@ -5717,18 +5788,20 @@ async function sz(e, t, i, r, n, a, s, o) {
     u();
     return new _$$lc2();
   }
-  if (!node) throw Error(`Failed to deserialize node${issues.length ? `: ${issues.map(e => e.message).join(", ")}` : ""}`);
-  let p = await Promise.all(s.objects.filter(e => "image" === e.cls || "vector" === e.cls).map(async e => {
+  if (!node) throw new Error(`Failed to deserialize node${issues.length ? `: ${issues.map(e => e.message).join(', ')}` : ''}`);
+  let p = await Promise.all(s.objects.filter(e => e.cls === 'image' || e.cls === 'vector').map(async e => {
     let t = function (e, t, i, r) {
       let n = new Uint8Array(r.width * r.height * 4);
-      for (let i = 0; i < r.height; i++) for (let a = 0; a < r.width; a++) {
-        let s = r.x + a;
-        let o = ((r.y + i) * t + s) * 4;
-        let l = (i * r.width + a) * 4;
-        n[l] = e[o] ?? 0;
-        n[l + 1] = e[o + 1] ?? 0;
-        n[l + 2] = e[o + 2] ?? 0;
-        n[l + 3] = e[o + 3] ?? 0;
+      for (let i = 0; i < r.height; i++) {
+        for (let a = 0; a < r.width; a++) {
+          let s = r.x + a;
+          let o = ((r.y + i) * t + s) * 4;
+          let l = (i * r.width + a) * 4;
+          n[l] = e[o] ?? 0;
+          n[l + 1] = e[o + 1] ?? 0;
+          n[l + 2] = e[o + 2] ?? 0;
+          n[l + 3] = e[o + 3] ?? 0;
+        }
       }
       return {
         data: n,
@@ -5737,21 +5810,25 @@ async function sz(e, t, i, r, n, a, s, o) {
       };
     }(function (e, t, i, r) {
       let n = new Uint8Array(e.length);
-      for (let a = 0; a < r; a++) for (let r = 0; r < i; r++) {
-        let s = (a * i + r) * 4;
-        let o = t[a * i + r];
-        n[s] = e[s] ?? 0;
-        n[s + 1] = e[s + 1] ?? 0;
-        n[s + 2] = e[s + 2] ?? 0;
-        n[s + 3] = (e[s + 3] ?? 0) * (o ?? 0) / 255;
+      for (let a = 0; a < r; a++) {
+        for (let r = 0; r < i; r++) {
+          let s = (a * i + r) * 4;
+          let o = t[a * i + r];
+          n[s] = e[s] ?? 0;
+          n[s + 1] = e[s + 1] ?? 0;
+          n[s + 2] = e[s + 2] ?? 0;
+          n[s + 3] = (e[s + 3] ?? 0) * (o ?? 0) / 255;
+        }
       }
       return n;
     }(r, function (e, t, i, r, n) {
       let a = new Uint8Array(r * n);
-      for (let s = 0; s < n; s++) for (let o = 0; o < r; o++) {
-        let l = Math.floor(o * t / r);
-        let d = Math.floor(s * i / n);
-        a[s * r + o] = e[d * t + l] ?? 0;
+      for (let s = 0; s < n; s++) {
+        for (let o = 0; o < r; o++) {
+          let l = Math.floor(o * t / r);
+          let d = Math.floor(s * i / n);
+          a[s * r + o] = e[d * t + l] ?? 0;
+        }
       }
       return a;
     }(e.mask, s.width, s.height, n, a), n, a), n, 0, {
@@ -5762,15 +5839,15 @@ async function sz(e, t, i, r, n, a, s, o) {
     });
     let i = sB(function (e, t, i) {
       let r = t * i * 4;
-      if (e.length !== r) throw Error(`Data length (${e.length}) does not match expected dimensions (${r})`);
+      if (e.length !== r) throw new Error(`Data length (${e.length}) does not match expected dimensions (${r})`);
       let {
         canvas,
         ctx
       } = function (e, t) {
-        let i = document.createElement("canvas");
+        let i = document.createElement('canvas');
         i.width = e;
         i.height = t;
-        let r = i.getContext("2d");
+        let r = i.getContext('2d');
         return {
           canvas: i,
           ctx: r
@@ -5781,9 +5858,9 @@ async function sz(e, t, i, r, n, a, s, o) {
         n.data.set(r);
         e.putImageData(n, 0, 0);
       })(ctx, t, i, e);
-      return canvas.toDataURL("image/png");
-    }(t.data, t.width, t.height).split(",")[1]);
-    let o = await UD(i, "image/png", "image");
+      return canvas.toDataURL('image/png');
+    }(t.data, t.width, t.height).split(',')[1]);
+    let o = await UD(i, 'image/png', 'image');
     return {
       type: e.cls,
       x: e.x,
@@ -5801,11 +5878,13 @@ async function sz(e, t, i, r, n, a, s, o) {
     node: e,
     graphics: t
   }) {
-    var i;
+    let i;
     let [r, n] = function (e, t) {
       let i = [];
       !function e(t) {
-        if (i.push(t), t.childrenNodes) for (let i of t.childrenNodes) e(i);
+        if (i.push(t), t.childrenNodes) {
+          for (let i of t.childrenNodes) e(i);
+        }
       }(e);
       let r = e.absoluteRenderBounds;
       if (!r) return [[], []];
@@ -5818,10 +5897,12 @@ async function sz(e, t, i, r, n, a, s, o) {
             isVisible
           } = function (e, t) {
             let i = e.absoluteBoundingBox;
-            if (!i) return {
-              relativeBounds: void 0,
-              isVisible: !1
-            };
+            if (!i) {
+              return {
+                relativeBounds: void 0,
+                isVisible: !1
+              };
+            }
             let r = {
               x: i.x - t.x,
               y: i.y - t.y,
@@ -5856,17 +5937,19 @@ async function sz(e, t, i, r, n, a, s, o) {
           height: e.height
         }
       })), i];
-    }(t, e => "image" === e.type || "vector" === e.type);
+    }(t, e => e.type === 'image' || e.type === 'vector');
     let [o, l] = function (e, t, i = sN.intersectionOverUnion) {
       let {
         columnsForRow,
         rowForColumn
       } = function (e, t = !1) {
-        if (0 === e.length || 0 === e[0].length) return {
-          columnsForRow: [],
-          rowForColumn: [],
-          gain: 0
-        };
+        if (e.length === 0 || e[0].length === 0) {
+          return {
+            columnsForRow: [],
+            rowForColumn: [],
+            gain: 0
+          };
+        }
         let i = e.length;
         let r = e[0].length;
         let n = !1;
@@ -5881,10 +5964,10 @@ async function sz(e, t, i, r, n, a, s, o) {
         t && a < 0 && (a = 0);
         !t && a > 0 && (a = 0);
         e = e.map(e => e.map(e => t ? -e + a : e - a));
-        let s = Array(i).fill(-1);
-        let o = Array(r).fill(-1);
-        let l = Array(r).fill(0);
-        let d = Array(i).fill(0);
+        let s = new Array(i).fill(-1);
+        let o = new Array(r).fill(-1);
+        let l = new Array(r).fill(0);
+        let d = new Array(i).fill(0);
         for (let t = 0; t < r; t++) {
           let {
             sink,
@@ -5894,9 +5977,9 @@ async function sz(e, t, i, r, n, a, s, o) {
           } = function (e, t, i, r, n, a) {
             let s = r.length;
             let o = r[0].length;
-            let l = Array(s).fill(0);
-            let d = Array(o).fill(!1);
-            let c = Array(s).fill(!1);
+            let l = new Array(s).fill(0);
+            let d = new Array(o).fill(!1);
+            let c = new Array(s).fill(!1);
             let u = Array.from({
               length: s
             }, (e, t) => t);
@@ -5904,8 +5987,8 @@ async function sz(e, t, i, r, n, a, s, o) {
             let h = null;
             let m = 0;
             let f = e;
-            let g = Array(s).fill(1 / 0);
-            for (; null === h;) {
+            let g = new Array(s).fill(1 / 0);
+            for (; h === null;) {
               d[f] = !0;
               let e = 1 / 0;
               let a = -1;
@@ -5915,18 +5998,20 @@ async function sz(e, t, i, r, n, a, s, o) {
                 o < g[s] && (l[s] = f, g[s] = o);
                 g[s] < e && (e = g[s], a = n);
               }
-              if (!isFinite(e)) return {
-                sink: null,
-                predecessors: l,
-                updatedU: t,
-                updatedV: i
-              };
+              if (!isFinite(e)) {
+                return {
+                  sink: null,
+                  predecessors: l,
+                  updatedU: t,
+                  updatedV: i
+                };
+              }
               let s = u[a];
               c[s] = !0;
               p--;
               u.splice(a, 1);
               m = g[s];
-              -1 === n[s] ? h = s : f = n[s];
+              n[s] === -1 ? h = s : f = n[s];
             }
             t[e] += m;
             for (let i = 0; i < d.length; i++) d[i] && i !== e && (t[i] += m - g[a[i]]);
@@ -5938,11 +6023,13 @@ async function sz(e, t, i, r, n, a, s, o) {
               updatedV: i
             };
           }(t, l, d, e, s, o);
-          if (null === sink) return {
-            columnsForRow: [],
-            rowForColumn: [],
-            gain: -1
-          };
+          if (sink === null) {
+            return {
+              columnsForRow: [],
+              rowForColumn: [],
+              gain: -1
+            };
+          }
           l = updatedU;
           d = updatedV;
           let c = sink;
@@ -5973,12 +6060,16 @@ async function sz(e, t, i, r, n, a, s, o) {
           distanceFunction,
           options
         } = i;
-        if (!distanceFunction) throw Error("`distanceFunction` must be set in config.");
-        if (!options) throw Error("`options` must be set in config.");
+        if (!distanceFunction) throw new Error('`distanceFunction` must be set in config.');
+        if (!options) throw new Error('`options` must be set in config.');
         let a = Array.from({
           length: e.length
-        }, () => Array(t.length).fill(0));
-        for (let i = 0; i < e.length; i++) for (let s = 0; s < t.length; s++) a[i][s] = distanceFunction(e[i], t[s], options).distance;
+        }, () => Array.from({
+          length: t.length
+        }).fill(0));
+        for (let i = 0; i < e.length; i++) {
+          for (let s = 0; s < t.length; s++) a[i][s] = distanceFunction(e[i], t[s], options).distance;
+        }
         return a;
       }(e, t, i));
       let {
@@ -5987,20 +6078,22 @@ async function sz(e, t, i, r, n, a, s, o) {
       } = i;
       for (let i = 0; i < columnsForRow.length; i++) {
         let o = columnsForRow[i];
-        -1 === o || distanceFunction(e[i], t[o], options).match || (rowForColumn[o] = -1, columnsForRow[i] = -1);
+        o === -1 || distanceFunction(e[i], t[o], options).match || (rowForColumn[o] = -1, columnsForRow[i] = -1);
       }
       return [columnsForRow, rowForColumn];
     }(r, a);
     let d = getSingletonSceneGraph();
-    _$$l2.ai("reconcile all graphics", () => {
+    _$$l2.ai('reconcile all graphics', () => {
       for (let e = 0; e < r.length; e++) {
         let t = o[e];
-        if (void 0 !== t && -1 !== t) {
+        if (void 0 !== t && t !== -1) {
           let i = s[t];
           let r = n[e];
           if (r && i?.imageSetForInsertion) {
-            if (sO(r)) r.insertImageInFillPaint(i.imageSetForInsertion);else if (sD(r)) {
-              let e = d.createNode("RECTANGLE");
+            if (sO(r)) {
+              r.insertImageInFillPaint(i.imageSetForInsertion);
+            } else if (sD(r)) {
+              let e = d.createNode('RECTANGLE');
               e.name = r.name || r.type;
               e.size = {
                 x: i.width,
@@ -6017,10 +6110,10 @@ async function sz(e, t, i, r, n, a, s, o) {
       }
     });
     i = n.filter(sO);
-    _$$l2.ai("Removing placeholder image fills", () => {
+    _$$l2.ai('Removing placeholder image fills', () => {
       i.forEach(e => {
         let t = e.fills;
-        e.fills = t.filter(e => !("IMAGE" === e.type && e.image && e.image.hash && sha1HexFromBytes(e.image.hash) === sI));
+        e.fills = t.filter(e => !(e.type === 'IMAGE' && e.image && e.image.hash && sha1HexFromBytes(e.image.hash) === sI));
       });
     });
     return e;
@@ -6028,7 +6121,7 @@ async function sz(e, t, i, r, n, a, s, o) {
     node,
     graphics: p
   });
-  _$$l2.user("place node", () => {
+  _$$l2.user('place node', () => {
     t.parentNode?.appendChild(h);
     h.x = t.x;
     h.y = t.y;
@@ -6057,7 +6150,7 @@ async function sY(e, t = 1) {
     },
     numDesigns: t
   })).jsx;
-  if (!i?.length) throw Error("No valid JSX received from server");
+  if (!i?.length) throw new Error('No valid JSX received from server');
   return i.flat();
 }
 async function sJ(e, t, i) {
@@ -6075,14 +6168,14 @@ async function sJ(e, t, i) {
         excludeVectorData: !0
       });
       if (!node) return null;
-      _$$l2.user("place node", () => {
+      _$$l2.user('place node', () => {
         node.x = i.x;
         node.y = i.y;
       });
       let r = sG(node);
       if (!r) return null;
       let n = r.base64;
-      _$$l2.user("hide and remove node", () => {
+      _$$l2.user('hide and remove node', () => {
         node.visible = !1;
         node.removeSelfAndChildren();
       });
@@ -6093,16 +6186,16 @@ async function sJ(e, t, i) {
     } catch (e) {
       return null;
     }
-  }))).filter(e => null !== e);
-  if (0 === r.length) {
-    console.warn("No valid JSX candidate thumbnails generated, defaulting to first candidate");
+  }))).filter(e => e !== null);
+  if (r.length === 0) {
+    console.warn('No valid JSX candidate thumbnails generated, defaulting to first candidate');
     return t[0];
   }
   let n = (await Ay.design.guiclip({
     image: e,
     candidates: r.map(e => e.base64)
   })).bestCandidateIndex;
-  return null == n ? (console.warn("Cannot get best candidate index from server, defaulting to first valid candidate"), r[0].jsx) : r[n].jsx;
+  return n == null ? (console.warn('Cannot get best candidate index from server, defaulting to first valid candidate'), r[0].jsx) : r[n].jsx;
 }
 async function sq(e) {
   let t = await Ay.design.uiParser({
@@ -6117,11 +6210,11 @@ async function sq(e) {
       y: e.y,
       width: e.width,
       height: e.height,
-      mask: new Uint8Array(atob(e.mask).split("").map(e => e.charCodeAt(0)))
+      mask: new Uint8Array(atob(e.mask).split('').map(e => e.charCodeAt(0)))
     }))
   };
   let r = sW.safeParse(i);
-  if (!r.success) throw Error("Unable to parse response from UI Parser");
+  if (!r.success) throw new Error('Unable to parse response from UI Parser');
   return r.data;
 }
 let sX = async ({
@@ -6129,7 +6222,7 @@ let sX = async ({
 }) => {
   let t;
   let i = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
-  if (!i || 1 !== i.length || void 0 === i[0]) throw Error("No image selected");
+  if (!i || i.length !== 1 || void 0 === i[0]) throw new Error('No image selected');
   let r = i[0];
   let n = r.size.x;
   let a = r.size.y;
@@ -6142,7 +6235,7 @@ let sX = async ({
       height
     } = function (e) {
       let t = sG(e);
-      if (!t) throw Error("Cannot process image");
+      if (!t) throw new Error('Cannot process image');
       return t;
     }(r);
     let {
@@ -6151,12 +6244,12 @@ let sX = async ({
     } = function (e, t, i) {
       return {
         node: e.parentNode,
-        location: new Point(e.x + t + (t + i) / 2 * .15, e.y)
+        location: new Point(e.x + t + (t + i) / 2 * 0.15, e.y)
       };
     }(r, width, height);
     let p = getSingletonSceneGraph();
     let h = p.getCurrentPage();
-    if (!h) throw Error("Cannot get current page from scene");
+    if (!h) throw new Error('Cannot get current page from scene');
     t = await sH(p, node ?? h, location, n, a, base64, mimeType);
     let m = zM((e, t) => sY(e, t), e);
     let f = zM((e, t, i) => sJ(e, t, i), e);
@@ -6165,7 +6258,7 @@ let sX = async ({
     let x = await f(base64, _, t);
     let y = await g(base64);
     let b = zM(sz, e, e => {
-      e && _$$l2.user("clean up reconciled node", () => {
+      e && _$$l2.user('clean up reconciled node', () => {
         e.removeSelfAndChildren();
       });
     });
@@ -6174,7 +6267,7 @@ let sX = async ({
     if (e instanceof _$$lc2) return;
     throw e;
   } finally {
-    _$$l2.user("remove placeholder node", () => {
+    _$$l2.user('remove placeholder node', () => {
       t && t.removeSelfAndChildren();
     });
   }
@@ -6185,12 +6278,12 @@ let sZ = async ({
 }) => {
   let i;
   let r = (t.width + t.height) / 2;
-  let n = new Point(t.node.x + t.width + .15 * r, t.node.y);
+  let n = new Point(t.node.x + t.width + 0.15 * r, t.node.y);
   let a = getSingletonSceneGraph();
   let s = a.getCurrentPage();
-  if (!s) throw Error("Cannot get current page from scene");
+  if (!s) throw new Error('Cannot get current page from scene');
   let o = sG(t.node);
-  if (!o) throw Error("Failed to get image data from node");
+  if (!o) throw new Error('Failed to get image data from node');
   let {
     base64,
     mimeType,
@@ -6206,7 +6299,7 @@ let sZ = async ({
       excludeVectorData: !0
     });
     let o = await UiParserHelpers?.generateNodeSegmentationFromWeb(t.node.guid);
-    if (!o) throw Error("UiParserHelpers is undefined, failed to create segmentation for node");
+    if (!o) throw new Error('UiParserHelpers is undefined, failed to create segmentation for node');
     let m = {
       width: o.width,
       height: o.height,
@@ -6223,7 +6316,7 @@ let sZ = async ({
   } catch (e) {
     throw e;
   } finally {
-    _$$l2.user("remove placeholder node", () => {
+    _$$l2.user('remove placeholder node', () => {
       i && i.removeSelfAndChildren();
     });
   }
@@ -6232,10 +6325,10 @@ function s0({
   fileInputRef: e,
   onFileInputChange: t
 }) {
-  return jsx("input", {
-    type: "file",
+  return jsx('input', {
+    type: 'file',
     ref: e,
-    accept: xp.join(","),
+    accept: xp.join(','),
     onChange: t,
     multiple: !1,
     className: _$$s3.hidden.$
@@ -6298,11 +6391,11 @@ function s1({
           }
         }), jsx(_$$A2, {
           action: e,
-          actionLabel: renderI18nText("image_to_design.action"),
+          actionLabel: renderI18nText('image_to_design.action'),
           actionIcon: jsx(_$$f3, {}),
           instructionAction: r ? void 0 : {
-            type: "custom",
-            label: renderI18nText("fragment_search.visual_search_image_upload_button"),
+            type: 'custom',
+            label: renderI18nText('fragment_search.visual_search_image_upload_button'),
             iconPrefix: jsx(_$$A1, {}),
             onPerform: () => p.current?.click()
           },
@@ -6319,7 +6412,7 @@ function s1({
           close();
         },
         aiTrackingContext,
-        children: renderI18nText("ai.working")
+        children: renderI18nText('ai.working')
       });
     case qy.DONE:
       return jsx(Oq, {
@@ -6343,7 +6436,7 @@ function s1({
       return null;
   }
 }
-let s9 = createLocalStorageAtom("make_video_prompt_history", []);
+let s9 = createLocalStorageAtom('make_video_prompt_history', []);
 let oe = lazy(() => _require4);
 function ot({
   action: e,
@@ -6355,9 +6448,9 @@ function ot({
 }) {
   return {
     action: e,
-    featureFlags: ["figjam_quick_actions_v2"],
+    featureFlags: ['figjam_quick_actions_v2'],
     tags: [_$$$.AI],
-    flags: ["edit", "whiteboard"],
+    flags: ['edit', 'whiteboard'],
     iconType: a,
     searchSynonyms: s,
     quickAction: {
@@ -6381,8 +6474,8 @@ function ot({
 let oi = [{
   callback: _$$lQ,
   action: _$$JT.TRANSLATE_TEXT,
-  flags: ["edit", "design", "slides", "sites", "cooper", "whiteboard"],
-  featureFlags: ["qa_text_features"],
+  flags: ['edit', 'design', 'slides', 'sites', 'cooper', 'whiteboard'],
+  featureFlags: ['qa_text_features'],
   tags: [_$$$.AI],
   quickAction: {
     beforeModuleOpen: () => {
@@ -6395,12 +6488,12 @@ let oi = [{
     }
   },
   iconType: jsx(_$$R4, {}),
-  searchSynonyms: ["change language"]
+  searchSynonyms: ['change language']
 }, {
   callback: _$$lQ,
   action: _$$JT.REWRITE_TEXT,
-  flags: ["edit", "design", "slides", "sites", "cooper", "whiteboard"],
-  featureFlags: ["qa_text_features"],
+  flags: ['edit', 'design', 'slides', 'sites', 'cooper', 'whiteboard'],
+  featureFlags: ['qa_text_features'],
   quickAction: {
     beforeModuleOpen: () => {
       B3(_$$JT.REWRITE_TEXT);
@@ -6413,7 +6506,7 @@ let oi = [{
   },
   iconType: jsx(_$$T2, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["revise this", "modify this", "adjust tone"]
+  searchSynonyms: ['revise this', 'modify this', 'adjust tone']
 }, {
   callback: () => {
     B3(_$$JT.SLIDES_GENERATE_SPEAKER_NOTES);
@@ -6422,36 +6515,36 @@ let oi = [{
     });
   },
   action: _$$JT.SLIDES_GENERATE_SPEAKER_NOTES,
-  flags: ["slides"],
+  flags: ['slides'],
   iconType: jsx(_$$B4, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["presenter notes", "speaker notes", "notes", "draft presenter notes", "draft speaker notes", "draft notes"]
+  searchSynonyms: ['presenter notes', 'speaker notes', 'notes', 'draft presenter notes', 'draft speaker notes', 'draft notes']
 }, {
   callback: () => mD(debugState.dispatch, {
-    source: "quick_actions",
+    source: 'quick_actions',
     toggle: !0
   }),
   action: _$$JT.SLIDES_REWRITE_TEXT,
-  flags: ["slides"],
+  flags: ['slides'],
   iconType: jsx(_$$s5, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["adjust tone", "tone dial", "professional", "casual", "concise", "expanded"]
+  searchSynonyms: ['adjust tone', 'tone dial', 'professional', 'casual', 'concise', 'expanded']
 }, {
   callback: () => mD(debugState.dispatch, {
-    source: "quick_actions",
+    source: 'quick_actions',
     toggle: !0
   }),
   action: _$$JT.SLIDES_REWRITE_TEXT,
-  flags: ["edit", "design"],
-  featureFlags: ["aip_tone_dial_fd"],
+  flags: ['edit', 'design'],
+  featureFlags: ['aip_tone_dial_fd'],
   iconType: jsx(_$$s5, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["adjust tone", "tone dial", "professional", "casual", "concise", "expanded"]
+  searchSynonyms: ['adjust tone', 'tone dial', 'professional', 'casual', 'concise', 'expanded']
 }, {
   callback: _$$lQ,
   action: _$$JT.SHORTEN_TEXT,
-  flags: ["edit", "design", "slides", "sites", "cooper", "whiteboard"],
-  featureFlags: ["qa_text_features"],
+  flags: ['edit', 'design', 'slides', 'sites', 'cooper', 'whiteboard'],
+  featureFlags: ['qa_text_features'],
   quickAction: {
     module: {
       name: Sn.SHORTEN,
@@ -6462,17 +6555,17 @@ let oi = [{
       B3(_$$JT.SHORTEN_TEXT);
       Yh(debugState.getState().mirror.appModel, _$$JT.SHORTEN_TEXT) && _$$Ag(_$$JT.SHORTEN_TEXT, _$$$4, {
         featureType: _$$JT.SHORTEN_TEXT,
-        source: "quick-actions"
+        source: 'quick-actions'
       });
     }
   },
   iconType: jsx(_$$g4, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["make concise", "condense", "reduce", "abbreviate", "shorter"]
+  searchSynonyms: ['make concise', 'condense', 'reduce', 'abbreviate', 'shorter']
 }, {
   callback: _$$lQ,
   action: _$$JT.FIRST_DRAFT,
-  flags: ["edit", "design"],
+  flags: ['edit', 'design'],
   featureFlags: [],
   quickAction: {
     module: {
@@ -6485,12 +6578,12 @@ let oi = [{
   },
   iconType: jsx(i$, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["first draft", "make designs", "generate design", "create design", "let's design"]
+  searchSynonyms: ['first draft', 'make designs', 'generate design', 'create design', 'let\'s design']
 }, {
   callback: _$$lQ,
   action: _$$JT.MAKE_EDITS,
-  flags: ["edit", "design"],
-  featureFlags: ["make_edits"],
+  flags: ['edit', 'design'],
+  featureFlags: ['make_edits'],
   quickAction: {
     module: {
       module: jsx(bt, {}),
@@ -6502,12 +6595,12 @@ let oi = [{
   },
   iconType: jsx(i$, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["make edit", "edit design", "prompt to edit"]
+  searchSynonyms: ['make edit', 'edit design', 'prompt to edit']
 }, {
   callback: _$$lQ,
   action: _$$JT.MAKE_EDITS_DEBUG,
-  flags: ["edit", "design", "whiteboard", "slides"],
-  featureFlags: ["make_edits", "make_edits_debug"],
+  flags: ['edit', 'design', 'whiteboard', 'slides'],
+  featureFlags: ['make_edits', 'make_edits_debug'],
   quickAction: {
     module: {
       module: jsx(Aw, {}),
@@ -6518,13 +6611,13 @@ let oi = [{
     }
   },
   iconType: jsx(i$, {}),
-  searchSynonyms: ["debug make edits"],
+  searchSynonyms: ['debug make edits'],
   tags: [_$$$.AI]
 }, {
   callback: _$$lQ,
   action: _$$JT.MAKE_EDITS_DEBUG_REVIEW,
-  flags: ["edit", "design", "whiteboard", "slides"],
-  featureFlags: ["make_edits", "make_edits_debug"],
+  flags: ['edit', 'design', 'whiteboard', 'slides'],
+  featureFlags: ['make_edits', 'make_edits_debug'],
   quickAction: {
     module: {
       module: jsx(Suspense, {
@@ -6538,13 +6631,13 @@ let oi = [{
     }
   },
   iconType: jsx(i$, {}),
-  searchSynonyms: ["debug make edits review"],
+  searchSynonyms: ['debug make edits review'],
   tags: [_$$$.AI]
 }, {
   callback: _$$lQ,
   action: _$$JT.MAKE_EDITS,
-  flags: ["whiteboard"],
-  featureFlags: ["make_edits_figjam"],
+  flags: ['whiteboard'],
+  featureFlags: ['make_edits_figjam'],
   quickAction: {
     module: {
       module: jsx(bt, {}),
@@ -6556,12 +6649,12 @@ let oi = [{
   },
   iconType: jsx(i$, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["make edit", "edit design", "prompt to edit"]
+  searchSynonyms: ['make edit', 'edit design', 'prompt to edit']
 }, {
   callback: _$$lQ,
   action: _$$JT.MAKE_EDITS,
-  flags: ["slides"],
-  featureFlags: ["make_edits_slides"],
+  flags: ['slides'],
+  featureFlags: ['make_edits_slides'],
   quickAction: {
     module: {
       module: jsx(bt, {}),
@@ -6573,22 +6666,22 @@ let oi = [{
   },
   iconType: jsx(i$, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["make edit", "edit design", "prompt to edit"]
+  searchSynonyms: ['make edit', 'edit design', 'prompt to edit']
 }, {
   callback: _$$lQ,
   action: _$$JT.FIRST_DRAFT_FINE_TUNE,
-  flags: ["edit", "design"],
-  featureFlags: ["first_draft_fine_tune"],
+  flags: ['edit', 'design'],
+  featureFlags: ['first_draft_fine_tune'],
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let e = lazy(() => _require2);
         let {
           aiTrackingContext
         } = _$$wj(_$$JT.FIRST_DRAFT_FINE_TUNE);
         let r = aiTrackingContext.clientLifecycleId;
         return jsx(_$$tH, {
-          boundaryKey: "FirstDraftFineTune",
+          boundaryKey: 'FirstDraftFineTune',
           fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
             clientLifecycleId: r,
@@ -6596,11 +6689,11 @@ let oi = [{
           },
           children: jsx(_$$T4.Provider, {
             value: {
-              recordingKey: "firstDraftFineTuneView"
+              recordingKey: 'firstDraftFineTuneView'
             },
             children: jsx(Suspense, {
-              fallback: jsx("div", {
-                children: getI18nString("first_draft.make_edits.loading")
+              fallback: jsx('div', {
+                children: getI18nString('first_draft.make_edits.loading')
               }),
               children: jsx(e, {})
             })
@@ -6616,16 +6709,16 @@ let oi = [{
   },
   iconType: jsx(i$, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["fine tune", "first draft fine tune"]
+  searchSynonyms: ['fine tune', 'first draft fine tune']
 }, {
   callback: _$$lQ,
   action: _$$JT.FIRST_DRAFT_MAKE_CHANGES,
-  flags: ["edit", "design"],
-  featureFlags: ["first_draft_native", "first_draft_make_changes", "first_draft_make_changes_reopen"],
-  notFeatureFlags: ["first_draft_use_gemini"],
+  flags: ['edit', 'design'],
+  featureFlags: ['first_draft_native', 'first_draft_make_changes', 'first_draft_make_changes_reopen'],
+  notFeatureFlags: ['first_draft_use_gemini'],
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let e = nl();
         let [t] = useState(e);
         return jsx(am, {
@@ -6637,26 +6730,26 @@ let oi = [{
   },
   iconType: jsx(i$, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["make changes", "adjust design", "modify design", "edit design"]
+  searchSynonyms: ['make changes', 'adjust design', 'modify design', 'edit design']
 }, {
   callback: _$$lQ,
   action: _$$JT.FIRST_DRAFT_MAKE_KIT,
-  flags: ["edit", "design"],
-  featureFlags: ["first_draft_native", "first_draft_make_kit"],
+  flags: ['edit', 'design'],
+  featureFlags: ['first_draft_native', 'first_draft_make_kit'],
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let {
           pop
         } = cq();
         return jsx(_$$tH, {
-          boundaryKey: "FirstDraftMakeKitView",
+          boundaryKey: 'FirstDraftMakeKitView',
           fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
             area: _$$e.AI_GENERATION
           },
           children: jsx(aP, {
-            recordingKey: "firstDraftMakeKitView",
+            recordingKey: 'firstDraftMakeKitView',
             onBack: pop
           })
         });
@@ -6671,15 +6764,15 @@ let oi = [{
   },
   iconType: jsx(i$, {}),
   tags: [_$$$.AI],
-  searchSynonyms: ["make kit", "create kit", "generate kit", "design kit"]
+  searchSynonyms: ['make kit', 'create kit', 'generate kit', 'design kit']
 }, {
   callback: _$$lQ,
   action: _$$JT.FIRST_DRAFT_MAKE_KIT_DEBUG,
-  flags: ["edit", "design"],
-  featureFlags: ["first_draft_native", "first_draft_make_kit", "first_draft_debug"],
+  flags: ['edit', 'design'],
+  featureFlags: ['first_draft_native', 'first_draft_make_kit', 'first_draft_debug'],
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let e = useDispatch();
         let {
           close
@@ -6703,15 +6796,17 @@ let oi = [{
           } = function (e, t, i, r) {
             let [n, s] = useState(() => {
               let n = localStorage.getItem(t);
-              if (n) try {
-                let e = JSON.parse(n);
-                if (i) return i.parse(e);
-                return e;
-              } catch (e) {
-                console.error(`Failed to parse saved state for ${t}:`, e);
+              if (n) {
+                try {
+                  let e = JSON.parse(n);
+                  if (i) return i.parse(e);
+                  return e;
+                } catch (e) {
+                  console.error(`Failed to parse saved state for ${t}:`, e);
+                }
               }
               return e.reduce((e, t) => (e[t] = {
-                override: "",
+                override: '',
                 enabled: r?.enabled ?? !1
               }, e), {});
             });
@@ -6747,30 +6842,30 @@ let oi = [{
             field: e,
             label: t,
             rows: i = 3,
-            placeholder: r = "Enter override"
-          }) => function (e, t, i, r, a, s = 3, o = "Enter override") {
+            placeholder: r = 'Enter override'
+          }) => function (e, t, i, r, a, s = 3, o = 'Enter override') {
             let l = e[t] || {
-              override: "",
+              override: '',
               enabled: !1
             };
             return jsxs(_$$B, {
               fullWidth: !0,
-              justify: "space-between",
-              children: [jsx("input", {
-                type: "checkbox",
+              justify: 'space-between',
+              children: [jsx('input', {
+                type: 'checkbox',
                 checked: l.enabled,
                 onChange: r(t)
-              }), jsx("div", {
+              }), jsx('div', {
                 style: {
-                  opacity: l.enabled ? 1 : .5,
-                  width: "100%"
+                  opacity: l.enabled ? 1 : 0.5,
+                  width: '100%'
                 },
                 children: jsxs(_$$Y, {
-                  direction: "vertical",
+                  direction: 'vertical',
                   spacing: 8,
                   children: [jsx(_$$E, {
                     children: i
-                  }), jsx("textarea", {
+                  }), jsx('textarea', {
                     className: _$$s3.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
                     rows: s,
                     value: l.override,
@@ -6789,25 +6884,27 @@ let oi = [{
             handleCheckboxChange,
             renderInput: c
           };
-        }(aq, "firstDraftMakeKitDebugState");
+        }(aq, 'firstDraftMakeKitDebugState');
         let o = useMemo(() => inputs.componentizeResultMapping.enabled ? async () => await function (e) {
-          if (!e || "" === e.trim()) return {};
+          if (!e || e.trim() === '') return {};
           try {
             return JSON.parse(e);
           } catch (e) {
-            console.warn("Failed to parse JSON:", e);
+            console.warn('Failed to parse JSON:', e);
             return {};
           }
         }(inputs.componentizeResultMapping.override) : inputs.componentizePrompt.enabled ? async e => await aH(inputs.componentizePrompt.override, e) : void 0, [inputs.componentizePrompt.override, inputs.componentizeResultMapping.override, inputs.componentizeResultMapping.enabled, inputs.componentizePrompt.enabled]);
         let l = useMemo(() => {
-          if (inputs.suggestProps.enabled) return async e => {
-            try {
-              return await az(inputs.suggestProps.override, e);
-            } catch (e) {
-              console.error("Failed to get suggested props:", e);
-              return [];
-            }
-          };
+          if (inputs.suggestProps.enabled) {
+            return async e => {
+              try {
+                return await az(inputs.suggestProps.override, e);
+              } catch (e) {
+                console.error('Failed to get suggested props:', e);
+                return [];
+              }
+            };
+          }
         }, [inputs.suggestProps.override, inputs.suggestProps.enabled]);
         let [d, c] = useState(!1);
         return d ? jsx(_$$x4.Provider, {
@@ -6816,40 +6913,40 @@ let oi = [{
             getSuggestedProps: l
           },
           children: jsx(aK, {})
-        }) : jsx("div", {
+        }) : jsx('div', {
           children: jsxs(_$$Y, {
-            direction: "vertical",
-            spacing: "auto",
+            direction: 'vertical',
+            spacing: 'auto',
             padding: 8,
             children: [jsx(_$$E, {
               fontSize: 14,
-              fontWeight: "medium",
-              children: "Make First Draft Kit (Debug)"
+              fontWeight: 'medium',
+              children: 'Make First Draft Kit (Debug)'
             }), jsxs(_$$Y, {
-              direction: "vertical",
+              direction: 'vertical',
               padding: 8,
-              width: "fill-parent",
+              width: 'fill-parent',
               spacing: 16,
               children: [renderInput({
-                field: "componentizePrompt",
-                label: "Componentize Prompt Override",
+                field: 'componentizePrompt',
+                label: 'Componentize Prompt Override',
                 rows: 3,
-                placeholder: "Enter override, must contain {{jsx}} for substitution"
+                placeholder: 'Enter override, must contain {{jsx}} for substitution'
               }), renderInput({
-                field: "suggestProps",
-                label: "Suggest Props Prompt Override",
+                field: 'suggestProps',
+                label: 'Suggest Props Prompt Override',
                 rows: 3,
-                placeholder: "Enter override, must contain {{jsx}} for substitution"
+                placeholder: 'Enter override, must contain {{jsx}} for substitution'
               }), renderInput({
-                field: "componentizeResultMapping",
-                label: "Componentize Result Mapping Override",
+                field: 'componentizeResultMapping',
+                label: 'Componentize Result Mapping Override',
                 rows: 3,
-                placeholder: "Enter override, must contain {{jsx}} for substitution"
+                placeholder: 'Enter override, must contain {{jsx}} for substitution'
               })]
             }), jsxs(_$$B, {
               gap: 8,
               children: [jsx($n, {
-                variant: "secondary",
+                variant: 'secondary',
                 onClick: async () => {
                   await aJ({
                     componentizePromptOverride: inputs.componentizePrompt.enabled ? inputs.componentizePrompt.override : void 0,
@@ -6857,18 +6954,18 @@ let oi = [{
                     close
                   });
                 },
-                children: "Eval componentize on page"
+                children: 'Eval componentize on page'
               }), jsx($n, {
-                variant: "secondary",
+                variant: 'secondary',
                 onClick: () => c(!0),
-                children: "Run on current selection"
+                children: 'Run on current selection'
               }), jsx($n, {
-                variant: "secondary",
+                variant: 'secondary',
                 onClick: () => aY({
                   componentizePromptOverride: inputs.componentizePrompt.enabled ? inputs.componentizePrompt.override : void 0,
                   dispatch: e
                 }),
-                children: "Generate test case from selected"
+                children: 'Generate test case from selected'
               })]
             })]
           })
@@ -6883,13 +6980,13 @@ let oi = [{
     }
   },
   iconType: jsx(i$, {}),
-  searchSynonyms: ["debug kit", "debug make kit"],
+  searchSynonyms: ['debug kit', 'debug make kit'],
   tags: [_$$$.AI]
 }, {
   callback: _$$lQ,
   action: _$$JT.FIRST_DRAFT_LINTING,
-  flags: ["edit", "design"],
-  featureFlags: ["first_draft_native", "first_draft_publish_ux"],
+  flags: ['edit', 'design'],
+  featureFlags: ['first_draft_native', 'first_draft_publish_ux'],
   quickAction: {
     module: {
       module: jsx(S6, {}),
@@ -6900,25 +6997,25 @@ let oi = [{
 }, {
   callback: _$$lQ,
   action: _$$JT.FIRST_DRAFT_DEBUG,
-  flags: ["edit", "design"],
-  featureFlags: ["first_draft_native", "first_draft_debug"],
+  flags: ['edit', 'design'],
+  featureFlags: ['first_draft_native', 'first_draft_debug'],
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let e = lazy(() => _require3);
         return jsx(_$$tH, {
-          boundaryKey: "MakeEdits",
+          boundaryKey: 'MakeEdits',
           fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {
             area: _$$e.AI_GENERATION
           },
           children: jsx(_$$T4.Provider, {
             value: {
-              recordingKey: "firstDraftDebugView"
+              recordingKey: 'firstDraftDebugView'
             },
             children: jsx(Suspense, {
-              fallback: jsx("div", {
-                children: "Loading..."
+              fallback: jsx('div', {
+                children: 'Loading...'
               }),
               children: jsx(e, {})
             })
@@ -6932,12 +7029,12 @@ let oi = [{
 }, {
   name: _$$JT.FIND_INSPIRATION,
   action: _$$JT.FIND_INSPIRATION,
-  displayNode: getFeatureFlags().fragment_search_tweaks ? renderI18nText("fullscreen_actions.quick_actions.find-inspiration-verbose") : renderI18nText("fullscreen_actions.find-inspiration"),
-  displayForQuickCommand: "find-inspiration-quick-command",
+  displayNode: getFeatureFlags().fragment_search_tweaks ? renderI18nText('fullscreen_actions.quick_actions.find-inspiration-verbose') : renderI18nText('fullscreen_actions.find-inspiration'),
+  displayForQuickCommand: 'find-inspiration-quick-command',
   args: {},
   tags: [_$$$.AI],
-  flags: ["design", "slides", "cooper"],
-  featureFlags: getFeatureFlags().hub_file_fragments ? [] : ["asset_suggestions"],
+  flags: ['design', 'slides', 'cooper'],
+  featureFlags: getFeatureFlags().hub_file_fragments ? [] : ['asset_suggestions'],
   callback: _$$lQ,
   quickAction: {
     module: {
@@ -6949,17 +7046,17 @@ let oi = [{
     beforeModuleOpen: () => jp(G4.ACTIONS_LIST)
   },
   iconType: jsx(_$$T, {}),
-  searchSynonyms: ["visual search", "image search", "selection search", "visual lookup", "find matching", "search for similar", "find similar designs", "find more like"]
+  searchSynonyms: ['visual search', 'image search', 'selection search', 'visual lookup', 'find matching', 'search for similar', 'find similar designs', 'find more like']
 }, {
   action: _$$JT.REMOVE_BACKGROUND,
   featureFlags: [],
   tags: [_$$$.AI],
-  flags: ["edit", "design", "slides", "cooper", "sites", "whiteboard"],
+  flags: ['edit', 'design', 'slides', 'cooper', 'sites', 'whiteboard'],
   iconType: jsx(_$$$2, {}),
   quickAction: {
     module: {
       module: jsx(_$$w4, {
-        source: "quick-actions"
+        source: 'quick-actions'
       }),
       name: Sn.BACKGROUND_REMOVE_TOAST
     },
@@ -6968,7 +7065,7 @@ let oi = [{
       if (B3(_$$JT.REMOVE_BACKGROUND), Yh(debugState.getState().mirror.appModel, _$$JT.REMOVE_BACKGROUND)) {
         let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
         _$$Ag(_$$JT.REMOVE_BACKGROUND, _$$J2, {
-          source: "quick-actions",
+          source: 'quick-actions',
           targets: e
         }, {
           isBatch: e.length > 1
@@ -6977,17 +7074,17 @@ let oi = [{
     }
   },
   callback: _$$lQ,
-  searchSynonyms: ["clean up image", "clean up picture", "make transparent", "delete background", "erase background", "eliminate background", "isolate subject"]
+  searchSynonyms: ['clean up image', 'clean up picture', 'make transparent', 'delete background', 'erase background', 'eliminate background', 'isolate subject']
 }, {
   action: _$$JT.UPSCALE_IMAGE,
   featureFlags: [],
   tags: [_$$$.AI],
-  flags: ["edit", "design", "slides", "cooper", "sites", "whiteboard"],
+  flags: ['edit', 'design', 'slides', 'cooper', 'sites', 'whiteboard'],
   iconType: jsx(_$$X, {}),
   quickAction: {
     module: {
       module: jsx(_$$q4, {
-        source: "quick-actions"
+        source: 'quick-actions'
       }),
       name: Sn.UPSCALE_IMAGE_TOAST
     },
@@ -6996,7 +7093,7 @@ let oi = [{
       if (B3(_$$JT.UPSCALE_IMAGE), Yh(debugState.getState().mirror.appModel, _$$JT.UPSCALE_IMAGE)) {
         let e = ImageToolsBindings?.getNodeImagePairsForEdit() ?? [];
         _$$Ag(_$$JT.UPSCALE_IMAGE, _$$r3, {
-          source: "quick-actions",
+          source: 'quick-actions',
           targets: e
         }, {
           isBatch: e.length > 1
@@ -7005,13 +7102,13 @@ let oi = [{
     }
   },
   callback: _$$lQ,
-  searchSynonyms: ["boost resolution", "sharpen image", "sharpen picture", "upscale image", "scale up", "enlarge image", "refine image", "improve image", "unblur", "reduce blur", "increase size", "increase quality", "enhance clarity", "crisp"]
+  searchSynonyms: ['boost resolution', 'sharpen image', 'sharpen picture', 'upscale image', 'scale up', 'enlarge image', 'refine image', 'improve image', 'unblur', 'reduce blur', 'increase size', 'increase quality', 'enhance clarity', 'crisp']
 }, {
   callback: _$$lQ,
   action: _$$JT.AUTO_RENAME_LAYERS,
-  featureFlags: ["eai_auto_rename_layers"],
+  featureFlags: ['eai_auto_rename_layers'],
   tags: [_$$$.AI],
-  flags: ["edit", "design"],
+  flags: ['edit', 'design'],
   iconType: jsx(_$$_3, {}),
   quickAction: {
     module: {
@@ -7029,13 +7126,13 @@ let oi = [{
       });
     }
   },
-  searchSynonyms: ["rename all layers", "name layers"]
+  searchSynonyms: ['rename all layers', 'name layers']
 }, {
   callback: _$$lQ,
   action: _$$JT.GENERATE_IMAGE,
   featureFlags: [],
   tags: [_$$$.AI],
-  flags: ["edit", "design", "slides", "cooper", "sites", "whiteboard"],
+  flags: ['edit', 'design', 'slides', 'cooper', 'sites', 'whiteboard'],
   iconType: jsx(_$$T3, {}),
   quickAction: {
     module: {
@@ -7046,13 +7143,13 @@ let oi = [{
       B3(_$$JT.GENERATE_IMAGE);
     }
   },
-  searchSynonyms: ["generate image", "make a picture", "generate graphic", "generate picture", "generate illustration", "create image"]
+  searchSynonyms: ['generate image', 'make a picture', 'generate graphic', 'generate picture', 'generate illustration', 'create image']
 }, {
   callback: _$$lQ,
   action: _$$JT.EDIT_IMAGE,
   featureFlags: [],
   tags: [_$$$.AI],
-  flags: ["edit", "design", "slides", "cooper", "sites", "whiteboard"],
+  flags: ['edit', 'design', 'slides', 'cooper', 'sites', 'whiteboard'],
   iconType: jsx(_$$T2, {}),
   quickAction: {
     module: {
@@ -7064,22 +7161,22 @@ let oi = [{
     },
     alwaysEnabled: !0
   },
-  searchSynonyms: ["edit image", "edit picture", "edit graphic", "edit illustration", "modify image", "change image", "style image"]
+  searchSynonyms: ['edit image', 'edit picture', 'edit graphic', 'edit illustration', 'modify image', 'change image', 'style image']
 }, {
   callback: _$$lQ,
   action: _$$JT.MAKE_VIDEO,
-  featureFlags: ["aip_mw_video"],
+  featureFlags: ['aip_mw_video'],
   tags: [_$$$.AI],
-  flags: ["edit", "design", "slides", "cooper", "sites", "whiteboard"],
+  flags: ['edit', 'design', 'slides', 'cooper', 'sites', 'whiteboard'],
   iconType: jsx(_$$T3, {}),
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let e = _$$to2();
         let {
           close
         } = cq();
-        let [i, r] = useState("");
+        let [i, r] = useState('');
         let {
           promptHistory,
           addPromptToHistory
@@ -7112,15 +7209,15 @@ let oi = [{
             return jsx(_$$A3, {
               action: _$$JT.MAKE_VIDEO,
               aiTrackingContext,
-              ariaLabel: getI18nString("fullscreen_actions.make_video"),
+              ariaLabel: getI18nString('fullscreen_actions.make_video'),
               extraFooter: jsx(Ti, {
                 fileInputRef: f,
                 disabled: h.length >= 1,
-                tooltip: h.length >= 1 ? getI18nString("video_ai.make_video.initial_frame_already_set") : getI18nString("video_ai.make_video.set_initial_frame"),
+                tooltip: h.length >= 1 ? getI18nString('video_ai.make_video.initial_frame_already_set') : getI18nString('video_ai.make_video.set_initial_frame'),
                 onFileUpload: g,
                 multiple: !1
               }),
-              featureNameForInstrumentation: "make_video",
+              featureNameForInstrumentation: 'make_video',
               maxLength: 1024,
               minLength: 3,
               onBack: e ? close : void 0,
@@ -7128,14 +7225,14 @@ let oi = [{
               onRun: _,
               prompt: i,
               promptHistory,
-              submitLabel: renderI18nText("ai.make_it"),
+              submitLabel: renderI18nText('ai.make_it'),
               useClose: e
             });
           case qy.RUNNING:
             return jsx(_$$F3, {
               onCancel: close,
               aiTrackingContext,
-              children: renderI18nText("video_ai.make_video.processing")
+              children: renderI18nText('video_ai.make_video.processing')
             });
           case qy.DONE:
             let x = {
@@ -7145,7 +7242,7 @@ let oi = [{
             return jsx(Oq, {
               iterateOptions: [],
               aiTrackingContext: x,
-              completionString: getI18nString("video_ai.make_video.initial_completion"),
+              completionString: getI18nString('video_ai.make_video.initial_completion'),
               showFeedback: !1
             });
           case qy.ERROR:
@@ -7167,11 +7264,11 @@ let oi = [{
       B3(_$$JT.MAKE_VIDEO);
     }
   },
-  searchSynonyms: ["make video", "generate video", "create video", "make animation", "make film", "make clip"]
+  searchSynonyms: ['make video', 'generate video', 'create video', 'make animation', 'make film', 'make clip']
 }, {
   action: _$$JT.MAGIC_LINK,
-  flags: ["edit", "design"],
-  featureFlags: ["prototype_ai_magic_link"],
+  flags: ['edit', 'design'],
+  featureFlags: ['prototype_ai_magic_link'],
   tags: [_$$$.AI],
   quickAction: {
     module: {
@@ -7181,9 +7278,9 @@ let oi = [{
     alwaysEnabled: !0,
     beforeModuleOpen: () => {
       debugState.dispatch(Zh({
-        name: "prototype.ai_magic_link_entry_clicked",
+        name: 'prototype.ai_magic_link_entry_clicked',
         params: {
-          source: "quick_actions"
+          source: 'quick_actions'
         }
       }));
       B3(_$$JT.MAGIC_LINK);
@@ -7191,12 +7288,12 @@ let oi = [{
     }
   },
   iconType: jsx(_$$B5, {}),
-  searchSynonyms: ["magic link", "add prototype links", "add prototype connections", "connect prototype", "add interactions", "make prototype"]
+  searchSynonyms: ['magic link', 'add prototype links', 'add prototype connections', 'connect prototype', 'add interactions', 'make prototype']
 }, {
   action: _$$JT.CONTENT_FILL,
   featureFlags: [],
   tags: [_$$$.AI],
-  flags: ["edit", "design", "sites"],
+  flags: ['edit', 'design', 'sites'],
   iconType: jsx(_$$c2, {}),
   quickAction: {
     module: {
@@ -7208,11 +7305,11 @@ let oi = [{
       B3(_$$JT.CONTENT_FILL);
     }
   },
-  searchSynonyms: ["fill content", "content fill", "lorem ipsum", "rewrite placeholder text", "replace duplicates", "rewrite duplicates"]
+  searchSynonyms: ['fill content', 'content fill', 'lorem ipsum', 'rewrite placeholder text', 'replace duplicates', 'rewrite duplicates']
 }, {
   action: _$$JT.ASSISTANT_CHAT,
-  featureFlags: ["prt_legacy_v3"],
-  flags: ["design", "slides", "cooper"],
+  featureFlags: ['prt_legacy_v3'],
+  flags: ['design', 'slides', 'cooper'],
   tags: [_$$$.AI],
   iconType: jsx(_$$V2, {}),
   quickAction: {
@@ -7227,22 +7324,22 @@ let oi = [{
       });
     }
   },
-  searchSynonyms: ["chat"]
+  searchSynonyms: ['chat']
 }, {
   action: _$$JT.IMAGE_TO_DESIGN,
-  featureFlags: ["gen_llava_lamp"],
-  flags: ["edit", "design"],
+  featureFlags: ['gen_llava_lamp'],
+  flags: ['edit', 'design'],
   tags: [_$$$.AI],
   iconType: jsx(_$$f3, {}),
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let {
           start
         } = RL(_$$JT.IMAGE_TO_DESIGN, sX);
         return jsx(s1, {
           action: _$$JT.IMAGE_TO_DESIGN,
-          instruction: renderI18nText("image_to_design.instruction"),
+          instruction: renderI18nText('image_to_design.instruction'),
           onPerform: () => {
             start({});
           }
@@ -7256,26 +7353,26 @@ let oi = [{
       Yh(debugState.getState().mirror.appModel, _$$JT.IMAGE_TO_DESIGN) && _$$Ag(_$$JT.IMAGE_TO_DESIGN, sX, {});
     }
   },
-  searchSynonyms: ["convert image to layers", "make image editable", "convert image to design", "generate design from image", "screenshot to design", "picture to design"]
+  searchSynonyms: ['convert image to layers', 'make image editable', 'convert image to design', 'generate design from image', 'screenshot to design', 'picture to design']
 }, {
   action: _$$JT.IMAGE_TO_DESIGN_ORACLE,
-  featureFlags: ["gen_llava_lamp"],
-  flags: ["edit", "design"],
+  featureFlags: ['gen_llava_lamp'],
+  flags: ['edit', 'design'],
   tags: [_$$$.AI],
   iconType: jsx(_$$V2, {}),
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let {
           start
         } = RL(_$$JT.IMAGE_TO_DESIGN_ORACLE, sZ);
         return jsx(s1, {
           action: _$$JT.IMAGE_TO_DESIGN_ORACLE,
-          instruction: renderI18nText("image_to_design.oracle_instruction"),
+          instruction: renderI18nText('image_to_design.oracle_instruction'),
           disableImageUpload: !0,
           onPerform: () => {
             let t = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
-            if (!t || 1 !== t.length || void 0 === t[0]) return;
+            if (!t || t.length !== 1 || void 0 === t[0]) return;
             let i = t[0];
             start({
               node: i,
@@ -7297,27 +7394,27 @@ let oi = [{
     atomStoreManager.set(bJ);
   },
   action: _$$JT.WHITEBOARD_GENERATE_CONTENT,
-  featureFlags: ["figjam_quick_actions_v2"],
+  featureFlags: ['figjam_quick_actions_v2'],
   tags: [_$$$.AI],
-  flags: ["edit", "whiteboard"],
+  flags: ['edit', 'whiteboard'],
   iconType: jsx(i8, {}),
-  searchSynonyms: ["create content", "add content", "generate content", "create diagram", "add diagram", "generate diagram", "create templates and diagrams", "add templates and diagrams", "generate templates and diagrams"]
+  searchSynonyms: ['create content', 'add content', 'generate content', 'create diagram', 'add diagram', 'generate diagram', 'create templates and diagrams', 'add templates and diagrams', 'generate templates and diagrams']
 }, {
   action: _$$JT.MERMAID_TO_DIAGRAM,
-  featureFlags: ["figjam_mermaid_to_diagram"],
+  featureFlags: ['figjam_mermaid_to_diagram'],
   tags: [_$$$.AI],
-  flags: ["edit", "whiteboard"],
+  flags: ['edit', 'whiteboard'],
   iconType: jsx(_$$r2, {}),
   quickAction: {
     module: {
-      module: jsx(function () {
+      module: jsx(() => {
         let e = RL(_$$JT.MERMAID_TO_DIAGRAM, rk);
         let {
           start,
           state,
           aiTrackingContext
         } = e;
-        let [s, o] = useState("");
+        let [s, o] = useState('');
         switch (state) {
           case qy.INITIAL:
             return jsx(_$$A3, {
@@ -7331,12 +7428,12 @@ let oi = [{
                   mermaidText: s
                 });
               },
-              submitLabel: getI18nString("figjam_ai.ai_actions.make_diagram_button")
+              submitLabel: getI18nString('figjam_ai.ai_actions.make_diagram_button')
             });
           case qy.RUNNING:
             return jsx(_$$F3, {
               aiTrackingContext,
-              children: getI18nString("figjam_ai.ai_actions.make_diagram_progress")
+              children: getI18nString('figjam_ai.ai_actions.make_diagram_progress')
             });
           case qy.DONE:
             return jsx(Oq, {
@@ -7365,46 +7462,46 @@ let oi = [{
 }, ot({
   action: _$$JT.SUMMARIZE_STICKIES,
   aiActionType: hG.SUMMARIZE_STICKIES,
-  actionLabel: renderI18nText("fullscreen_actions.summarize-stickies"),
-  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText('fullscreen_actions.summarize-stickies'),
+  instructionLabel: renderI18nText('figjam_ai.organize_stickies.make_selection_instruction'),
   icon: jsx(_$$O2, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_TOPIC,
   aiActionType: hG.SORT_STICKIES_BY_TOPIC,
-  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-topic"),
-  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText('fullscreen_actions.sort-stickies-by-topic'),
+  instructionLabel: renderI18nText('figjam_ai.organize_stickies.make_selection_instruction'),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_COLOR,
   aiActionType: hG.SORT_STICKIES_BY_COLOR,
-  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-color"),
-  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText('fullscreen_actions.sort-stickies-by-color'),
+  instructionLabel: renderI18nText('figjam_ai.organize_stickies.make_selection_instruction'),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_AUTHOR,
   aiActionType: hG.SORT_STICKIES_BY_AUTHOR,
-  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-author"),
-  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText('fullscreen_actions.sort-stickies-by-author'),
+  instructionLabel: renderI18nText('figjam_ai.organize_stickies.make_selection_instruction'),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_STAMP_COUNT,
   aiActionType: hG.SORT_STICKIES_BY_STAMP_COUNT,
-  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-stamp-count"),
-  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText('fullscreen_actions.sort-stickies-by-stamp-count'),
+  instructionLabel: renderI18nText('figjam_ai.organize_stickies.make_selection_instruction'),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.SORT_STICKIES_BY_STAMP_TYPE,
   aiActionType: hG.SORT_STICKIES_BY_STAMP_TYPE,
-  actionLabel: renderI18nText("fullscreen_actions.sort-stickies-by-stamp-type"),
-  instructionLabel: renderI18nText("figjam_ai.organize_stickies.make_selection_instruction"),
+  actionLabel: renderI18nText('fullscreen_actions.sort-stickies-by-stamp-type'),
+  instructionLabel: renderI18nText('figjam_ai.organize_stickies.make_selection_instruction'),
   icon: jsx(_$$$3, {})
 }), ot({
   action: _$$JT.MIND_MAP_GENERATE_IDEAS,
   aiActionType: hG.MIND_MAP_GENERATE_IDEAS,
-  actionLabel: renderI18nText("fullscreen_actions.mind-map-generate-ideas"),
-  instructionLabel: renderI18nText("figjam_ai.make_mindmap_ideas.make_selection_instruction"),
+  actionLabel: renderI18nText('fullscreen_actions.mind-map-generate-ideas'),
+  instructionLabel: renderI18nText('figjam_ai.make_mindmap_ideas.make_selection_instruction'),
   icon: jsx(_$$r2, {}),
-  searchSynonyms: ["generate new mind map ideas", "generate mind map ideas", "generate ideas"]
+  searchSynonyms: ['generate new mind map ideas', 'generate mind map ideas', 'generate ideas']
 })];
 function or() {
   let e = PE();
@@ -7417,15 +7514,17 @@ function or() {
   let d = _$$eH();
   let c = _$$sZ();
   return useMemo(() => oi.reduce((e, t) => {
-    for (let i of t.featureFlags || []) if (!getFeatureFlags()[i]) return e;
+    for (let i of t.featureFlags || []) {
+      if (!getFeatureFlags()[i]) return e;
+    }
     if (t.action === _$$JT.FIND_INSPIRATION) {
       if (!d && !o) return e;
       let i = {
         ...t
       };
-      getFeatureFlags().fragment_search_tweaks && l?.name && !l?.isSlide && (i.displayNode = renderI18nText("fullscreen_actions.quick_actions.find-inspiration-with-selection", {
+      getFeatureFlags().fragment_search_tweaks && l?.name && !l?.isSlide && (i.displayNode = renderI18nText('fullscreen_actions.quick_actions.find-inspiration-with-selection', {
         frameName: jsx(_$$E, {
-          color: "secondary",
+          color: 'secondary',
           children: l?.name
         })
       }));
@@ -7445,7 +7544,7 @@ function od(e) {
     push,
     close
   } = cq();
-  if (!submenuItem || !submenuItem.itemPath || submenuItem.submenu && 0 === submenuItem.submenu.length) return null;
+  if (!submenuItem || !submenuItem.itemPath || submenuItem.submenu && submenuItem.submenu.length === 0) return null;
   let s = TW(submenuItem);
   return jsx(_$$B6.Item, {
     primaryAction: {
@@ -7472,9 +7571,9 @@ function od(e) {
       }]
     },
     actionLabel: !1,
-    children: jsxs("div", {
+    children: jsxs('div', {
       className: _$$s3.flex.justifyBetween.wFull.$,
-      children: [jsx("div", {
+      children: [jsx('div', {
         className: _$$s3.ml28.$,
         children: s
       }), submenuItem.submenu && jsx(_$$a4, {})]
@@ -7482,34 +7581,36 @@ function od(e) {
   }, s);
 }
 function oc(e) {
-  let [t, i] = useState("");
+  let [t, i] = useState('');
   let [r, s] = useState([]);
   let {
     item,
     path
   } = e;
   if (useEffect(() => {
-    item.submenu && (s(item.submenu), i(""));
-  }, [item]), !item.submenu) return null;
+    item.submenu && (s(item.submenu), i(''));
+  }, [item]), !item.submenu) {
+    return null;
+  }
   let d = jsx(_$$B6, {
     resultCount: r.length,
     children: r.map(e => jsx(od, {
       submenuItem: e,
       path
-    }, e.extensionSearchString || ""))
+    }, e.extensionSearchString || ''))
   });
   let c = e => {
     i(e);
     item.submenu && s(item.submenu.filter(t => TW(t).toLowerCase().includes(e.toLowerCase())));
   };
-  let u = path.join(" > ");
+  let u = path.join(' > ');
   return jsxs(_$$n, {
     height: wC,
     children: [jsx(vj, {
       searchQuery: t,
       onSearchChange: c,
       onClear: () => {
-        c("");
+        c('');
       },
       placeholder: u
     }), jsx(_$$n.Body, {
@@ -7517,7 +7618,7 @@ function oc(e) {
     })]
   });
 }
-var oy = (e => (e.PERSONAL_DRAFT = "PERSONAL_DRAFT", e.TEAM_OR_ORG_DISABLED = "TEAM_OR_ORG_DISABLED", e.ORG_GUEST = "ORG_GUEST", e.NON_PAID_SEAT = "NON_PAID_SEAT", e.NO_ORG_OR_TEAM_USER = "NO_ORG_OR_TEAM_USER", e.ROLLING_OUT = "ROLLING_OUT", e))(oy || {});
+var oy = (e => (e.PERSONAL_DRAFT = 'PERSONAL_DRAFT', e.TEAM_OR_ORG_DISABLED = 'TEAM_OR_ORG_DISABLED', e.ORG_GUEST = 'ORG_GUEST', e.NON_PAID_SEAT = 'NON_PAID_SEAT', e.NO_ORG_OR_TEAM_USER = 'NO_ORG_OR_TEAM_USER', e.ROLLING_OUT = 'ROLLING_OUT', e))(oy || {});
 function oC({
   title: e,
   subTitle: t,
@@ -7525,29 +7626,29 @@ function oC({
   onClose: r,
   dataTestId: a
 }) {
-  return jsx("div", {
-    "data-testid": a,
-    className: _$$s3.colorBgBrandTertiary.p8.bRadius8.$,
-    children: jsxs("div", {
+  return jsx('div', {
+    'data-testid': a,
+    'className': _$$s3.colorBgBrandTertiary.p8.bRadius8.$,
+    'children': jsxs('div', {
       className: _$$s3.flex.gap8.$,
-      children: [i, jsxs("div", {
+      children: [i, jsxs('div', {
         className: _$$s3.flex.flexColumn.flexGrow1.$,
-        children: [jsx("span", {
-          className: "banner--title--gNQoq",
+        children: [jsx('span', {
+          className: 'banner--title--gNQoq',
           children: e
-        }), jsx("span", {
-          className: "banner--subtitle--8K4pM",
+        }), jsx('span', {
+          className: 'banner--subtitle--8K4pM',
           children: t
         })]
       }), r ? jsx(_$$K3, {
-        onClick: r,
-        "aria-label": getI18nString("qa.dismiss"),
-        htmlAttributes: {
-          "data-testid": "banner-close-icon"
+        'onClick': r,
+        'aria-label': getI18nString('qa.dismiss'),
+        'htmlAttributes': {
+          'data-testid': 'banner-close-icon'
         },
-        children: jsx(_$$A11, {
+        'children': jsx(_$$A11, {
           style: {
-            "--color-icon": "var(--color-icon-secondary)"
+            '--color-icon': 'var(--color-icon-secondary)'
           }
         })
       }) : null]
@@ -7563,9 +7664,9 @@ function ov() {
     let e = function () {
       let e = useMemo(() => [], []);
       let t = _$$R5();
-      let i = D6("useAIDisabledReasons").unwrapOr(null);
-      let r = X$("useAIDisabledReasons").unwrapOr(null);
-      let n = T5("useAIDisabledReasons").unwrapOr(null);
+      let i = D6('useAIDisabledReasons').unwrapOr(null);
+      let r = X$('useAIDisabledReasons').unwrapOr(null);
+      let n = T5('useAIDisabledReasons').unwrapOr(null);
       let s = PE();
       let o = q5();
       let l = i?.key.type === FUserTypeClassification.ORG_USER && i?.permission === FMemberRoleType.GUEST;
@@ -7577,32 +7678,32 @@ function ov() {
       let f = m && !!i;
       let g = _$$E2();
       if (s || g !== FEditorType.Design) return e;
-      if (!$7("useDisabledReasons")) return ["ROLLING_OUT"];
+      if (!$7('useDisabledReasons')) return ['ROLLING_OUT'];
       let _ = [];
-      !o || o.parentOrgId || o.teamId || _.push("PERSONAL_DRAFT");
-      d && _.push("TEAM_OR_ORG_DISABLED");
-      l && _.push("ORG_GUEST");
-      c && p && _.push("NON_PAID_SEAT");
-      m && !f && _.push("NO_ORG_OR_TEAM_USER");
+      !o || o.parentOrgId || o.teamId || _.push('PERSONAL_DRAFT');
+      d && _.push('TEAM_OR_ORG_DISABLED');
+      l && _.push('ORG_GUEST');
+      c && p && _.push('NON_PAID_SEAT');
+      m && !f && _.push('NO_ORG_OR_TEAM_USER');
       return _;
     }().sort((e, t) => oE(e) - oE(t));
     let t = {
-      seen_no_ai_org_disabled: _$$f7("seen_no_ai_org_disabled"),
-      seen_no_ai_team_or_org_user: _$$f7("seen_no_ai_team_or_org_user"),
-      seen_no_ai_rolling_out: _$$f7("seen_no_ai_rolling_out")
+      seen_no_ai_org_disabled: _$$f7('seen_no_ai_org_disabled'),
+      seen_no_ai_team_or_org_user: _$$f7('seen_no_ai_team_or_org_user'),
+      seen_no_ai_rolling_out: _$$f7('seen_no_ai_rolling_out')
     };
     return useMemo(() => {
       for (let i of e) {
         let e = function (e) {
           switch (e) {
             case oy.ROLLING_OUT:
-              return "seen_no_ai_rolling_out";
+              return 'seen_no_ai_rolling_out';
             case oy.TEAM_OR_ORG_DISABLED:
-              return "seen_no_ai_org_disabled";
+              return 'seen_no_ai_org_disabled';
             case oy.NON_PAID_SEAT:
             case oy.NO_ORG_OR_TEAM_USER:
             case oy.ORG_GUEST:
-              return "seen_no_ai_team_or_org_user";
+              return 'seen_no_ai_team_or_org_user';
             case oy.PERSONAL_DRAFT:
             case null:
               return null;
@@ -7610,13 +7711,17 @@ function ov() {
               throwTypeError(e);
           }
         }(i);
-        if (!e) return {
-          reason: i
-        };
-        if (!t[e]) return {
-          reason: i,
-          dismissKey: e
-        };
+        if (!e) {
+          return {
+            reason: i
+          };
+        }
+        if (!t[e]) {
+          return {
+            reason: i,
+            dismissKey: e
+          };
+        }
       }
       return {
         reason: null
@@ -7626,37 +7731,37 @@ function ov() {
   let r = useDispatch();
   let o = yy();
   let l = useAtomWithSubscription(Hu);
-  let d = getI18nString("qa.no_ai.title");
+  let d = getI18nString('qa.no_ai.title');
   switch (reason) {
     case oy.ROLLING_OUT:
     case null:
       return null;
     case oy.PERSONAL_DRAFT:
-      d = getI18nString("qa.no_ai.title.personal_draft");
-      e = getI18nString("qa.no_ai.subtitle.personal_draft");
+      d = getI18nString('qa.no_ai.title.personal_draft');
+      e = getI18nString('qa.no_ai.subtitle.personal_draft');
       break;
     case oy.TEAM_OR_ORG_DISABLED:
-      d = getI18nString("qa.no_ai.title.org_disabled");
-      e = getI18nString("qa.no_ai.subtitle.org_disabled");
+      d = getI18nString('qa.no_ai.title.org_disabled');
+      e = getI18nString('qa.no_ai.subtitle.org_disabled');
       break;
     case oy.NON_PAID_SEAT:
     case oy.NO_ORG_OR_TEAM_USER:
     case oy.ORG_GUEST:
-      d = getI18nString("qa.no_ai.title.not_available_here");
-      e = getI18nString("qa.no_ai.subtitle.team_or_org_user_no_access", {
-        orgOrTeamName: o?.name || l?.name || ""
+      d = getI18nString('qa.no_ai.title.not_available_here');
+      e = getI18nString('qa.no_ai.subtitle.team_or_org_user_no_access', {
+        orgOrTeamName: o?.name || l?.name || ''
       });
       break;
     default:
       throwTypeError(reason);
   }
-  return jsx("div", {
+  return jsx('div', {
     className: _$$s3.mx8.mb8.$,
     children: jsx(oC, {
       title: d,
       subTitle: e,
       icon: jsx(_$$C, {}),
-      dataTestId: "no-ai-banner",
+      dataTestId: 'no-ai-banner',
       onClose: dismissKey ? () => r(_$$b5({
         [dismissKey]: !0
       })) : void 0
@@ -7691,21 +7796,33 @@ function oN(e) {
   let a = _$$sZ();
   let s = RW();
   let o = _$$a5(a?.id, extension.plugin_id, s.loaded ? s.data?.workspaceId : void 0);
-  if (isPrivatePlugin(extension) && a && a.name) return {
-    text: a.name
-  };
-  if (hasLocalFileId(extension) && publishedExtension && AC(publishedExtension)) return {
-    text: getI18nString("qa.extensions.in_review"),
-    variant: _$$x5.BRAND
-  };
-  if (hasLocalFileId(extension)) return {
-    text: getI18nString("qa.extensions.development")
-  };
-  if (canRun) ;else if (o) return {
-    text: getI18nString("qa.extensions.approval_pending")
-  };else if (canRequest) return {
-    text: getI18nString("qa.extensions.needs_approval")
-  };
+  if (isPrivatePlugin(extension) && a && a.name) {
+    return {
+      text: a.name
+    };
+  }
+  if (hasLocalFileId(extension) && publishedExtension && AC(publishedExtension)) {
+    return {
+      text: getI18nString('qa.extensions.in_review'),
+      variant: _$$x5.BRAND
+    };
+  }
+  if (hasLocalFileId(extension)) {
+    return {
+      text: getI18nString('qa.extensions.development')
+    };
+  }
+  if (canRun) {
+    ;
+  } else if (o) {
+    return {
+      text: getI18nString('qa.extensions.approval_pending')
+    };
+  } else if (canRequest) {
+    return {
+      text: getI18nString('qa.extensions.needs_approval')
+    };
+  }
   return null;
 }
 function oA({
@@ -7724,20 +7841,20 @@ function oO(e) {
     searchQuery,
     fullscreenMenuAction
   } = e;
-  let r = "";
-  if (fullscreenMenuAction.searchSynonyms && (r += `Synonyms: ${fullscreenMenuAction.searchSynonyms.join(", ")}`), !h8()) return null;
+  let r = '';
+  if (fullscreenMenuAction.searchSynonyms && (r += `Synonyms: ${fullscreenMenuAction.searchSynonyms.join(', ')}`), !h8()) return null;
   let {
     details,
     score
   } = _$$ou(x0()).debugData(searchQuery, _g(fullscreenMenuAction).searchItem);
   let o = `Score:${score.toFixed(2)}`;
-  return jsx("div", {
-    className: _$$s3.ml8.colorTextSecondary.noWrap.$,
-    "data-tooltip": [details, r].filter(Boolean).join("\n"),
-    "data-tooltip-type": Ib.TEXT,
-    "data-tooltip-max-width": 300,
-    "data-testid": "search-debug-info",
-    children: o
+  return jsx('div', {
+    'className': _$$s3.ml8.colorTextSecondary.noWrap.$,
+    'data-tooltip': [details, r].filter(Boolean).join('\n'),
+    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-max-width': 300,
+    'data-testid': 'search-debug-info',
+    'children': o
   });
 }
 let oM = e => Zj(e) && !e.hideCheckForQuickCommand;
@@ -7761,7 +7878,7 @@ function oF({
   } = cq();
   let h = getObservableOrFallback(UK().showQuickCommandRankDebug);
   let m = V2();
-  let f = p8("keyboardShortcuts");
+  let f = p8('keyboardShortcuts');
   let _ = useCallback(() => {
     close();
   }, [close]);
@@ -7772,7 +7889,7 @@ function oF({
   let y = _$$r5();
   let b = useRef(!1);
   let E = useCallback(r => {
-    let n = r ? _$$OZ(r) : "";
+    let n = r ? _$$OZ(r) : '';
     let a = {
       ...i(),
       shortcutText: n
@@ -7784,16 +7901,16 @@ function oF({
   let T = useCallback((e, i) => {
     if (b.current) return;
     b.current = !0;
-    let a = i?.key === Uz.TAB ? "tab" : "enter";
+    let a = i?.key === Uz.TAB ? 'tab' : 'enter';
     if (x.isPending() && x.cancel(), e.disabled) return;
-    if ("plugins-menu-item" === e.name && !m) {
+    if (e.name === 'plugins-menu-item' && !m) {
       _();
       _$$R2.instance.handleUpgrade(Q7.RUN_PLUGIN);
       return;
     }
     let s = !!e.itemParameterArgs;
     let l = YT(e);
-    if (!(s || l || "enter" === a)) return;
+    if (!(s || l || a === 'enter')) return;
     let d = null;
     if (e.quickAction) {
       let t = {};
@@ -7805,66 +7922,68 @@ function oF({
       E(i);
       return;
     }
-    if (s) switch (a) {
-      case "enter":
-        if (e.runPluginArgs && !t) {
-          let t = {
-            ...e.runPluginArgs,
-            ...(e.itemParameterArgs?.command && {
-              command: e.itemParameterArgs.command
-            })
-          };
-          d = async () => {
-            await _$$R2.instance.enqueue({
-              mode: "run-forever",
-              runPluginArgs: t
+    if (s) {
+      switch (a) {
+        case 'enter':
+          if (e.runPluginArgs && !t) {
+            let t = {
+              ...e.runPluginArgs,
+              ...(e.itemParameterArgs?.command && {
+                command: e.itemParameterArgs.command
+              })
+            };
+            d = async () => {
+              await _$$R2.instance.enqueue({
+                mode: 'run-forever',
+                runPluginArgs: t
+              });
+            };
+          } else if (e.parametersRequired) {
+            let t = e.itemParameterArgs;
+            push({
+              name: Sn.PLUGIN_PARAMETER_ENTRY,
+              module: jsx(_$$r4, {
+                command: t.command,
+                displayName: t.displayName,
+                initialParameterValues: e.runPluginArgs?.parameterValues,
+                onExitParameterEntry: _$$lQ,
+                parameterOnly: t.parameterOnly,
+                parameters: t.parameters,
+                pluginId: t.pluginId,
+                pluginLocalFileId: t.pluginLocalFileId,
+                recentlyUsedCommandName: EG(e),
+                triggeredFrom: 'quick-actions'
+              })
             });
-          };
-        } else if (e.parametersRequired) {
-          let t = e.itemParameterArgs;
-          push({
-            name: Sn.PLUGIN_PARAMETER_ENTRY,
-            module: jsx(_$$r4, {
-              command: t.command,
-              displayName: t.displayName,
-              initialParameterValues: e.runPluginArgs?.parameterValues,
-              onExitParameterEntry: _$$lQ,
-              parameterOnly: t.parameterOnly,
-              parameters: t.parameters,
-              pluginId: t.pluginId,
-              pluginLocalFileId: t.pluginLocalFileId,
-              recentlyUsedCommandName: EG(e),
-              triggeredFrom: "quick-actions"
-            })
-          });
-          E(i);
-          return;
-        }
-        break;
-      case "tab":
-        if (e.itemParameterArgs) {
-          let t = e.itemParameterArgs;
-          push({
-            name: Sn.PLUGIN_PARAMETER_ENTRY,
-            module: jsx(_$$r4, {
-              command: t.command,
-              displayName: t.displayName,
-              initialParameterValues: e.runPluginArgs?.parameterValues,
-              onExitParameterEntry: _$$lQ,
-              parameterOnly: t.parameterOnly,
-              parameters: t.parameters,
-              pluginId: t.pluginId,
-              pluginLocalFileId: t.pluginLocalFileId,
-              recentlyUsedCommandName: EG(e),
-              triggeredFrom: "quick-actions"
-            })
-          });
-          E(i);
-          return;
-        }
-        break;
-      default:
-        throwTypeError(a);
+            E(i);
+            return;
+          }
+          break;
+        case 'tab':
+          if (e.itemParameterArgs) {
+            let t = e.itemParameterArgs;
+            push({
+              name: Sn.PLUGIN_PARAMETER_ENTRY,
+              module: jsx(_$$r4, {
+                command: t.command,
+                displayName: t.displayName,
+                initialParameterValues: e.runPluginArgs?.parameterValues,
+                onExitParameterEntry: _$$lQ,
+                parameterOnly: t.parameterOnly,
+                parameters: t.parameters,
+                pluginId: t.pluginId,
+                pluginLocalFileId: t.pluginLocalFileId,
+                recentlyUsedCommandName: EG(e),
+                triggeredFrom: 'quick-actions'
+              })
+            });
+            E(i);
+            return;
+          }
+          break;
+        default:
+          throwTypeError(a);
+      }
     }
     if (l) {
       push({
@@ -7883,7 +8002,7 @@ function oF({
       if (!e.action) return;
       let t = oP();
       if (t) return await t();
-      VU.get(e.action, "quick-actions", e.args)();
+      VU.get(e.action, 'quick-actions', e.args)();
     });
     E(i);
     oM(e) && !PN() ? x() : e.keepMenuOpen || _();
@@ -7893,22 +8012,24 @@ function oF({
           item: e
         }
       });
-    }) : reportError(_$$e.AI_FOR_PRODUCTION, Error("No valid action triggered from quick actions"), {
+    }) : reportError(_$$e.AI_FOR_PRODUCTION, new Error('No valid action triggered from quick actions'), {
       extra: {
         item: e
       }
     });
   }, [b, _, x, u, push, t, E, m]);
   let w = e.shortcutText || c1(f, d);
-  let j = "plugins-menu-item" === e.name && !!e.itemParameterArgs && e.itemParameterArgs.parameters.length > 0;
+  let j = e.name === 'plugins-menu-item' && !!e.itemParameterArgs && e.itemParameterArgs.parameters.length > 0;
   let I = YT(e);
   let k = cW();
   let N = ZT();
   let A = (() => {
-    if (e.itemParameterArgs && e.runPluginArgs && !t) return jsx(_$$_, {
-      runPluginArgs: e.runPluginArgs,
-      itemParameterArgs: e.itemParameterArgs
-    });
+    if (e.itemParameterArgs && e.runPluginArgs && !t) {
+      return jsx(_$$_, {
+        runPluginArgs: e.runPluginArgs,
+        itemParameterArgs: e.itemParameterArgs
+      });
+    }
     if (e.itemPath) {
       let t = e.itemPath;
       return jsx(_$$h3, {
@@ -7923,17 +8044,17 @@ function oF({
   })();
   let R = oM(e);
   let M = R ? WJ(c, e) : void 0;
-  let B = _$$h2("plugin");
-  let U = _$$h2("widget");
+  let B = _$$h2('plugin');
+  let U = _$$h2('widget');
   let G = _$$sZ();
-  let H = "go-to-page" === e.name ? `go-to-page-${e.args?.pageName}` : e.name || e.action;
+  let H = e.name === 'go-to-page' ? `go-to-page-${e.args?.pageName}` : e.name || e.action;
   useEffect(() => {
     e.onRender && e.onRender(!!t);
   }, [e, t]);
   let z = _$$o(_$$nt.quickActionsA11y);
   return jsx(_$$B6.Item, {
     primaryAction: {
-      text: "Perform",
+      text: 'Perform',
       shortcuts: [{
         key: Uz.ENTER
       }, {
@@ -7946,8 +8067,8 @@ function oF({
     actionLabel: !1,
     disabled: z ? e.disabled : void 0,
     recordingKey: H,
-    scrollMargin: "32px 0 16px 0",
-    type: z && R ? "checkbox" : "button",
+    scrollMargin: '32px 0 16px 0',
+    type: z && R ? 'checkbox' : 'button',
     isChecked: !!M,
     children: jsx(_$$_5, {
       checked: M,
@@ -7955,7 +8076,7 @@ function oF({
       displayNode: A,
       label: EG(e),
       icon: function (e) {
-        if ("plugins-menu-item" === e.name) {
+        if (e.name === 'plugins-menu-item') {
           let t;
           return (e.pluginId && (t = getPluginByFileId({
             idToSearch: e.pluginId,
@@ -7967,7 +8088,7 @@ function oF({
           })), t && !hasLocalFileId(t)) ? jsx(_$$V, {
             className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$,
             plugin: t,
-            role: "presentation"
+            role: 'presentation'
           }) : jsx(_$$B2, {
             className: _$$s3.colorIcon.w20.h20.bRadius4.$,
             svg: _$$A14,
@@ -7975,25 +8096,25 @@ function oF({
             autosize: !0
           });
         }
-        if (e.iconType && "string" == typeof e.iconType) {
-          var t;
-          return "external_link" === (t = e.iconType) ? jsx(_$$B2, {
+        if (e.iconType && typeof e.iconType == 'string') {
+          let t;
+          return (t = e.iconType) === 'external_link' ? jsx(_$$B2, {
             svg: _$$A13,
             className: _$$s3.colorIcon.$
-          }) : "import" === t ? jsx(_$$R, {}) : "plus" === t ? jsx(_$$e2, {}) : "widget" === t ? jsx(_$$v, {}) : void 0;
+          }) : t === 'import' ? jsx(_$$R, {}) : t === 'plus' ? jsx(_$$e2, {}) : t === 'widget' ? jsx(_$$v, {}) : void 0;
         }
-        if (e.iconType && "string" != typeof e.iconType) return e.iconType;
+        if (e.iconType && typeof e.iconType != 'string') return e.iconType;
       }(e),
-      badge: "run-local-plugin" === e.menuActionType || "insert-local-widget" === e.menuActionType ? jsx("div", {
+      badge: e.menuActionType === 'run-local-plugin' || e.menuActionType === 'insert-local-widget' ? jsx('div', {
         style: _$$sx.add({
-          maxWidth: "110px"
+          maxWidth: '110px'
         }).$,
         children: jsx(oA, {
-          text: getI18nString("fullscreen_actions.development")
+          text: getI18nString('fullscreen_actions.development')
         })
-      }) : G && (B.some(t => t.plugin_id === e.pluginId) || U.some(t => t.plugin_id === e.pluginId)) ? jsx("div", {
+      }) : G && (B.some(t => t.plugin_id === e.pluginId) || U.some(t => t.plugin_id === e.pluginId)) ? jsx('div', {
         style: _$$sx.add({
-          maxWidth: "110px"
+          maxWidth: '110px'
         }).$,
         children: jsx(oA, {
           text: G.name
@@ -8002,38 +8123,40 @@ function oF({
         searchQuery: t,
         fullscreenMenuAction: e
       }) : e.isRepairCommand && getFeatureFlags().internal_only_debug_tools ? jsx(_$$E5, {
-        children: "REPAIR"
-      }) : e.action === _$$JT.FIRST_DRAFT && e.disabled ? jsx("div", {
-        "data-tooltip": getI18nString("qa.unavailable"),
-        "data-tooltip-type": Ib.TEXT,
-        style: {
-          "--color-icon": "var(--color-icon-disabled)"
+        children: 'REPAIR'
+      }) : e.action === _$$JT.FIRST_DRAFT && e.disabled ? jsx('div', {
+        'data-tooltip': getI18nString('qa.unavailable'),
+        'data-tooltip-type': Ib.TEXT,
+        'style': {
+          '--color-icon': 'var(--color-icon-disabled)'
         },
-        children: jsx(_$$b3, {})
+        'children': jsx(_$$b3, {})
       }) : void 0,
       hoverBadges: (() => {
         if (BB(e)) {
           let t = _$$O4(e);
           return [jsx(_$$y3, {
             helpUrlVariant: t
-          }, "ai")];
+          }, 'ai')];
         }
-        if (Z7(e)) return [jsx(_$$E5, {
-          children: renderI18nText("general.beta")
-        }, "beta")];
+        if (Z7(e)) {
+          return [jsx(_$$E5, {
+            children: renderI18nText('general.beta')
+          }, 'beta')];
+        }
       })(),
       keyboardShortcut: w ? jsx(_$$S, {
         shortcut: w
       }) : j || I ? jsxs(Fragment, {
-        children: [jsx("div", {
-          className: _$$s3.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
-          "aria-hidden": !0,
-          id: "tab-hint",
-          children: renderI18nText("whiteboard.ai_modal.hint_tab")
+        children: [jsx('div', {
+          'className': _$$s3.colorBgTertiary.bRadius5.font11.h16.fontMedium.flex.itemsCenter.px4.mr8.$,
+          'aria-hidden': !0,
+          'id': 'tab-hint',
+          'children': renderI18nText('whiteboard.ai_modal.hint_tab')
         }), jsx(_$$B2, {
-          svg: _$$A12,
-          className: _$$s3.colorIcon.$,
-          "aria-describedby": "tab-hint"
+          'svg': _$$A12,
+          'className': _$$s3.colorIcon.$,
+          'aria-describedby': 'tab-hint'
         })]
       }) : void 0,
       dataTestId: H
@@ -8081,7 +8204,7 @@ function oB({
               ...i
             }
           });
-          o && ("plugin" === extensionType ? n.push(o) : a.push(o));
+          o && (extensionType === 'plugin' ? n.push(o) : a.push(o));
         });
         return {
           plugins: filterArrayByEditorType(r, n),
@@ -8103,13 +8226,13 @@ function oB({
       }), [e, t, i]);
     }();
     let r = function () {
-      let e = p8("pagesList");
+      let e = p8('pagesList');
       let t = bG({
         pagesList: e,
         isComparingChanges: !1
       });
       return useMemo(() => getFeatureFlags().qa_go_to_page ? e.map(e => ({
-        name: "go-to-page",
+        name: 'go-to-page',
         args: {
           pageName: e.name
         },
@@ -8118,9 +8241,9 @@ function oB({
         },
         iconType: jsx(ic, {}),
         displayNode: jsx(Fragment, {
-          children: renderI18nText("fullscreen_actions.quick_actions.go-to-page", {
+          children: renderI18nText('fullscreen_actions.quick_actions.go-to-page', {
             pageName: jsx(_$$E, {
-              color: "secondary",
+              color: 'secondary',
               children: e.name
             })
           })
@@ -8129,26 +8252,26 @@ function oB({
     }();
     let o = function () {
       let e = _p();
-      let t = Zr("send-to-make-from-design");
+      let t = Zr('send-to-make-from-design');
       let i = function () {
         let e = getSingletonSceneGraph().getDirectlySelectedNodes();
         return _$$j(e.map(e => e.name)) ?? null;
       }();
       let r = useMemo(() => i ? jsx(_$$E, {
-        color: "secondary",
+        color: 'secondary',
         children: i
       }) : null, [i]);
       return useMemo(() => t && i && e() ? [{
         ...Bc,
         displayNode: jsx(iW, {
-          children: renderI18nText("fullscreen_actions.quick_actions.send-frame-to-figma-make", {
+          children: renderI18nText('fullscreen_actions.quick_actions.send-frame-to-figma-make', {
             frameName: r
           })
         })
       }] : [], [t, i, e, r]);
     }();
     let l = function () {
-      let e = Zr("send-to-buzz-from-design");
+      let e = Zr('send-to-buzz-from-design');
       let t = useSelector(_$$tB);
       let i = useSelector(vx);
       let r = _$$eY();
@@ -8156,8 +8279,8 @@ function oB({
       let l = useMemo(() => ({
         tags: [_$$$.BETA],
         iconType: jsx(_$$W2, {}),
-        searchSynonyms: ["send to buzz", "export to buzz", "copy to buzz", "create buzz file", "figma buzz", "buzz"],
-        flags: ["edit", "design"],
+        searchSynonyms: ['send to buzz', 'export to buzz', 'copy to buzz', 'create buzz file', 'figma buzz', 'buzz'],
+        flags: ['edit', 'design'],
         callback: (e, r, n) => {
           _$$rN(n, VY({
             openFile: t,
@@ -8169,37 +8292,39 @@ function oB({
         if (!DesignToBuzzHelpers || !e || !t || !i) return [];
         let a = o.length > 0;
         let s = a ? DesignToBuzzHelpers.getSelectedNodesToSend() : DesignToBuzzHelpers.getTopLevelFramesToSend();
-        if (0 === s.length) return [];
-        if (1 === s.length) {
+        if (s.length === 0) return [];
+        if (s.length === 1) {
           let e = r.get(s[0]);
-          if (e?.isTopLevelFrame()) return [{
-            action: "send-to-buzz-from-design",
-            ...l,
-            displayNode: renderI18nText("buzz.send_from_design.send_node_to_figma_buzz", {
-              nodeName: jsx("span", {
-                className: "x1n0bwc9",
-                children: e.name
+          if (e?.isTopLevelFrame()) {
+            return [{
+              action: 'send-to-buzz-from-design',
+              ...l,
+              displayNode: renderI18nText('buzz.send_from_design.send_node_to_figma_buzz', {
+                nodeName: jsx('span', {
+                  className: 'x1n0bwc9',
+                  children: e.name
+                })
               })
-            })
-          }];
+            }];
+          }
         }
         return a ? [{
-          action: "send-selection-to-buzz-from-design",
+          action: 'send-selection-to-buzz-from-design',
           ...l,
-          displayNode: renderI18nText("buzz.send_from_design.send_selection_to_figma_buzz", {
+          displayNode: renderI18nText('buzz.send_from_design.send_selection_to_figma_buzz', {
             numSelectedNodes: s.length
           })
         }] : [{
-          action: "send-to-buzz-from-design",
+          action: 'send-to-buzz-from-design',
           ...l,
-          displayNode: renderI18nText("buzz.send_from_design.send_frames_to_figma_buzz", {
+          displayNode: renderI18nText('buzz.send_from_design.send_frames_to_figma_buzz', {
             numFrames: s.length
           })
         }];
       }, [o, i, e, t, r, l]);
     }();
     return useMemo(() => [...e, ...o, ...l, ...i, {
-      name: "wand-menu",
+      name: 'wand-menu',
       callback: _$$lQ,
       children: t
     }, ...r], [e, t, i, r, o, l]);
@@ -8227,7 +8352,7 @@ function oB({
           let i = ZO();
           let r = q5()?.canEdit;
           let n = PE();
-          return t ? "VARIABLES_TABLE" : i ? "COMPONENT_BROWSER" : e ? "DEV" : !1 === r ? "DESIGN_VIEWER" : r && n ? "DESIGN_EDITOR_AI" : r && !n ? "DESIGN_EDITOR_NO_AI" : "NONE";
+          return t ? 'VARIABLES_TABLE' : i ? 'COMPONENT_BROWSER' : e ? 'DEV' : !1 === r ? 'DESIGN_VIEWER' : r && n ? 'DESIGN_EDITOR_AI' : r && !n ? 'DESIGN_EDITOR_NO_AI' : 'NONE';
         }();
         let l = function (e, t) {
           let i = function () {
@@ -8251,11 +8376,11 @@ function oB({
                 let t = getSingletonSceneGraph().get(e);
                 return t?.isSlide;
               }).length > 0;
-              let h = Yh(e, "send-to-make-from-design");
-              if (0 === n.length || p) {
+              let h = Yh(e, 'send-to-make-from-design');
+              if (n.length === 0 || p) {
                 c = [_$$JT.GENERATE_IMAGE, _$$JT.REMOVE_BACKGROUND, _$$JT.UPSCALE_IMAGE, _$$JT.EDIT_IMAGE, _$$JT.AUTO_RENAME_LAYERS, _$$JT.CONTENT_FILL, _$$JT.FIND_INSPIRATION, _$$JT.FIRST_DRAFT, _$$JT.FIRST_DRAFT_FINE_TUNE, _$$JT.MAGIC_LINK, _$$JT.MAKE_EDITS, _$$JT.SLIDES_GENERATE_SPEAKER_NOTES, _$$JT.SLIDES_REWRITE_TEXT, _$$JT.REWRITE_TEXT, _$$JT.SHORTEN_TEXT, _$$JT.TRANSLATE_TEXT, _$$JT.WHITEBOARD_GENERATE_CONTENT, _$$JT.SUMMARIZE_STICKIES, _$$JT.SORT_STICKIES_BY_TOPIC, _$$JT.MIND_MAP_GENERATE_IDEAS];
                 o && c.push(OZ);
-                return [...c].map(e => t(d, e, !0)).filter(e => !!e).sort((e, t) => u.sort("", _g(e).searchItem, _g(t).searchItem));
+                return [...c].map(e => t(d, e, !0)).filter(e => !!e).sort((e, t) => u.sort('', _g(e).searchItem, _g(t).searchItem));
               }
               {
                 let n;
@@ -8263,35 +8388,35 @@ function oB({
                 let s = 0;
                 if (ImageToolsBindings) {
                   let e = ImageToolsBindings.getNodeImagePairsForEdit();
-                  e.length > 1 && getFeatureFlags().aip_batch_image_modify ? s = 1 : 1 === e.length ? s = 2 : ImageToolsBindings.getGenerateImageTarget() && (s = 3);
+                  e.length > 1 && getFeatureFlags().aip_batch_image_modify ? s = 1 : e.length === 1 ? s = 2 : ImageToolsBindings.getGenerateImageTarget() && (s = 3);
                 }
                 h && l() && c.push(_$$i3);
                 c.push(_$$JT.CONTENT_FILL, _$$JT.TRANSLATE_TEXT, _$$JT.REWRITE_TEXT, _$$JT.SHORTEN_TEXT, _$$JT.SLIDES_GENERATE_SPEAKER_NOTES, _$$JT.SLIDES_REWRITE_TEXT, _$$JT.GENERATE_IMAGE, _$$JT.REMOVE_BACKGROUND, _$$JT.UPSCALE_IMAGE, _$$JT.EDIT_IMAGE, _$$JT.FIRST_DRAFT_MAKE_CHANGES, _$$JT.AUTO_RENAME_LAYERS, _$$JT.MAGIC_LINK, _$$JT.FIND_INSPIRATION, _$$JT.FIRST_DRAFT, _$$JT.MAKE_EDITS, _$$JT.FIRST_DRAFT_FINE_TUNE, _$$JT.SUMMARIZE_STICKIES, _$$JT.SORT_STICKIES_BY_TOPIC, _$$JT.MIND_MAP_GENERATE_IDEAS);
                 o && c.push(OZ);
                 let p = [...c].map(e => t(d, e)).filter(e => !!e);
                 let m = p.sort((e, t) => function (e, t, i) {
-                  if (1 === e) {
-                    if (iw.has(t.action ?? "") && !iw.has(i.action ?? "")) return -1;
-                    if (!iw.has(t.action ?? "") && iw.has(i.action ?? "")) return 1;
-                  } else if (2 === e) {
-                    if (iS.has(t.action ?? "") && !iS.has(i.action ?? "")) return -1;
-                    if (!iS.has(t.action ?? "") && iS.has(i.action ?? "")) return 1;
+                  if (e === 1) {
+                    if (iw.has(t.action ?? '') && !iw.has(i.action ?? '')) return -1;
+                    if (!iw.has(t.action ?? '') && iw.has(i.action ?? '')) return 1;
+                  } else if (e === 2) {
+                    if (iS.has(t.action ?? '') && !iS.has(i.action ?? '')) return -1;
+                    if (!iS.has(t.action ?? '') && iS.has(i.action ?? '')) return 1;
                   }
-                  if (3 === e || 2 === e) {
+                  if (e === 3 || e === 2) {
                     if (t.action === _$$JT.GENERATE_IMAGE) return -1;
                     if (i.action === _$$JT.GENERATE_IMAGE) return 1;
                   }
-                }(s, e, t) ?? u.sort("", _g(e).searchItem, _g(t).searchItem));
-                let f = Object.values(d).filter(t => Yh(e, t.name || t.action || "") && !p.includes(t) && !t.searchOnly && !(t.featureFlags && t.featureFlags.includes("internal_only_debug_tools")) && _$$y("", _$$n2(t), {
+                }(s, e, t) ?? u.sort('', _g(e).searchItem, _g(t).searchItem));
+                let f = Object.values(d).filter(t => Yh(e, t.name || t.action || '') && !p.includes(t) && !t.searchOnly && !(t.featureFlags && t.featureFlags.includes('internal_only_debug_tools')) && _$$y('', _$$n2(t), {
                   actions: frecencyByAction,
                   queries: frecencyByQuery
-                }) > 0).sort((e, t) => u.sort("", _g(e).searchItem, _g(t).searchItem));
+                }) > 0).sort((e, t) => u.sort('', _g(e).searchItem, _g(t).searchItem));
                 f.length < 4 ? (n = 8 - f.length, a = f.length) : m.length < 4 ? (n = m.length, a = 8 - m.length) : (n = 4, a = 4);
                 return [...m.slice(0, n), ...f.slice(0, a)];
               }
             }, [e, t, frecencyByAction, frecencyByQuery, n, o, l]);
           }();
-          let [r] = useState(() => i(e, ""));
+          let [r] = useState(() => i(e, ''));
           return r;
         }(t, 0);
         let c = function (e, t) {
@@ -8313,62 +8438,64 @@ function oB({
         }(e, l);
         let u = function () {
           let e = I9();
-          let t = p8("activeCanvasEditModeType");
+          let t = p8('activeCanvasEditModeType');
           let i = _$$C2();
           return useCallback(() => {
             if (!e?.length) {
-              let e = [["canvas-search-replace", _$$b4.SUGGESTIONS], ["select-all", _$$b4.SUGGESTIONS], ["undo", _$$b4.SUGGESTIONS], ["toggle-rulers", _$$b4.COMMON_SETTINGS], ["toggle-snapping-to-pixels", _$$b4.COMMON_SETTINGS], ["toggle-sidebar", _$$b4.COMMON_SETTINGS], ["toggle-ui", _$$b4.COMMON_SETTINGS], ["toggle-multiplayer-cursors", _$$b4.COMMON_SETTINGS], ["show-nudge-amount-picker", _$$b4.COMMON_SETTINGS], ["open-shortcuts", _$$b4.COMMON_SETTINGS], ["open-account-settings", _$$b4.COMMON_SETTINGS]];
-              i && e.push(["copy-to-figma-slides", _$$b4.SUGGESTIONS]);
+              let e = [['canvas-search-replace', _$$b4.SUGGESTIONS], ['select-all', _$$b4.SUGGESTIONS], ['undo', _$$b4.SUGGESTIONS], ['toggle-rulers', _$$b4.COMMON_SETTINGS], ['toggle-snapping-to-pixels', _$$b4.COMMON_SETTINGS], ['toggle-sidebar', _$$b4.COMMON_SETTINGS], ['toggle-ui', _$$b4.COMMON_SETTINGS], ['toggle-multiplayer-cursors', _$$b4.COMMON_SETTINGS], ['show-nudge-amount-picker', _$$b4.COMMON_SETTINGS], ['open-shortcuts', _$$b4.COMMON_SETTINGS], ['open-account-settings', _$$b4.COMMON_SETTINGS]];
+              i && e.push(['copy-to-figma-slides', _$$b4.SUGGESTIONS]);
               return e;
             }
-            if (1 === e.length) {
+            if (e.length === 1) {
               let r = e[0];
-              let n = [["add-selection-ready-status", _$$b4.SUGGESTIONS], ["republish-selected-components", _$$b4.SUGGESTIONS], ["publish-changes-to-library", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS]];
-              let a = [["select-matching", _$$b4.SUGGESTIONS], ["outline-stroke", _$$b4.SUGGESTIONS], ["mask-selection", _$$b4.SUGGESTIONS], ["flatten-selection", _$$b4.SUGGESTIONS], ["unlock-all", _$$b4.SUGGESTIONS], ["convert-to-raster", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS]];
-              if (t === LayoutTabType.VECTOR) return [["flip-horizontal", _$$b4.SUGGESTIONS], ["flip-vertical", _$$b4.SUGGESTIONS], ["align-horizontal-center", _$$b4.SUGGESTIONS], ["align-vertical-center", _$$b4.SUGGESTIONS]];
+              let n = [['add-selection-ready-status', _$$b4.SUGGESTIONS], ['republish-selected-components', _$$b4.SUGGESTIONS], ['publish-changes-to-library', _$$b4.SUGGESTIONS], ['toggle-shown-for-selected-nodes', _$$b4.SUGGESTIONS]];
+              let a = [['select-matching', _$$b4.SUGGESTIONS], ['outline-stroke', _$$b4.SUGGESTIONS], ['mask-selection', _$$b4.SUGGESTIONS], ['flatten-selection', _$$b4.SUGGESTIONS], ['unlock-all', _$$b4.SUGGESTIONS], ['convert-to-raster', _$$b4.SUGGESTIONS], ['toggle-shown-for-selected-nodes', _$$b4.SUGGESTIONS]];
+              if (t === LayoutTabType.VECTOR) return [['flip-horizontal', _$$b4.SUGGESTIONS], ['flip-vertical', _$$b4.SUGGESTIONS], ['align-horizontal-center', _$$b4.SUGGESTIONS], ['align-vertical-center', _$$b4.SUGGESTIONS]];
               switch (r.type) {
-                case "SYMBOL":
+                case 'SYMBOL':
                   return n;
-                case "FRAME":
+                case 'FRAME':
                   if (r.isStateGroup) return n;
                   if (r.isGroup) return a;
-                  let s = [["add-selection-ready-status", _$$b4.SUGGESTIONS], ["select-matching", _$$b4.SUGGESTIONS], ["stack-selection", _$$b4.SUGGESTIONS], ["run-multi-stack-auto-layout", _$$b4.SUGGESTIONS], ["copy-properties", _$$b4.SUGGESTIONS], ["unlock-all", _$$b4.SUGGESTIONS], ["convert-to-raster", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS], ["replace-selected-frame-with-section", _$$b4.SUGGESTIONS]];
-                  i && s.push(["copy-to-figma-slides", _$$b4.SUGGESTIONS]);
+                  let s = [['add-selection-ready-status', _$$b4.SUGGESTIONS], ['select-matching', _$$b4.SUGGESTIONS], ['stack-selection', _$$b4.SUGGESTIONS], ['run-multi-stack-auto-layout', _$$b4.SUGGESTIONS], ['copy-properties', _$$b4.SUGGESTIONS], ['unlock-all', _$$b4.SUGGESTIONS], ['convert-to-raster', _$$b4.SUGGESTIONS], ['toggle-shown-for-selected-nodes', _$$b4.SUGGESTIONS], ['replace-selected-frame-with-section', _$$b4.SUGGESTIONS]];
+                  i && s.push(['copy-to-figma-slides', _$$b4.SUGGESTIONS]);
                   return s;
-                case "INSTANCE":
-                  return [["select-matching", _$$b4.SUGGESTIONS], ["detach-instance", _$$b4.SUGGESTIONS], ["reset-symbol", _$$b4.SUGGESTIONS], ["convert-to-raster", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS]];
-                case "SLICE":
-                  return [["export-selected-exportables", _$$b4.SUGGESTIONS], ["convert-to-raster", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS]];
-                case "WIDGET":
-                  return [["select-all-widgets", _$$b4.SUGGESTIONS], ["convert-to-raster", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS]];
-                case "SECTION":
-                  return [["add-selection-ready-status", _$$b4.SUGGESTIONS], ["select-matching", _$$b4.SUGGESTIONS], ["unlock-all", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS], ["replace-selected-section-with-frame", _$$b4.SUGGESTIONS]];
-                case "GROUP":
+                case 'INSTANCE':
+                  return [['select-matching', _$$b4.SUGGESTIONS], ['detach-instance', _$$b4.SUGGESTIONS], ['reset-symbol', _$$b4.SUGGESTIONS], ['convert-to-raster', _$$b4.SUGGESTIONS], ['toggle-shown-for-selected-nodes', _$$b4.SUGGESTIONS]];
+                case 'SLICE':
+                  return [['export-selected-exportables', _$$b4.SUGGESTIONS], ['convert-to-raster', _$$b4.SUGGESTIONS], ['toggle-shown-for-selected-nodes', _$$b4.SUGGESTIONS]];
+                case 'WIDGET':
+                  return [['select-all-widgets', _$$b4.SUGGESTIONS], ['convert-to-raster', _$$b4.SUGGESTIONS], ['toggle-shown-for-selected-nodes', _$$b4.SUGGESTIONS]];
+                case 'SECTION':
+                  return [['add-selection-ready-status', _$$b4.SUGGESTIONS], ['select-matching', _$$b4.SUGGESTIONS], ['unlock-all', _$$b4.SUGGESTIONS], ['toggle-shown-for-selected-nodes', _$$b4.SUGGESTIONS], ['replace-selected-section-with-frame', _$$b4.SUGGESTIONS]];
+                case 'GROUP':
                   return a;
-                case "ELLIPSE":
-                case "BOOLEAN_OPERATION":
-                case "LINE":
-                case "REGULAR_POLYGON":
-                case "RECTANGLE":
-                case "ROUNDED_RECTANGLE":
-                case "STAR":
-                case "VECTOR":
-                  return [["select-matching", _$$b4.SUGGESTIONS], ["flip-horizontal", _$$b4.SUGGESTIONS], ["mask-selection", _$$b4.SUGGESTIONS], ["flatten-selection", _$$b4.SUGGESTIONS], ["copy-properties", _$$b4.SUGGESTIONS], ["convert-to-raster", _$$b4.SUGGESTIONS], ["toggle-shown-for-selected-nodes", _$$b4.SUGGESTIONS]];
-                case "TEXT":
-                  return [["text-edit-hyperlink", _$$b4.SUGGESTIONS], ["text-toggle-strikethrough", _$$b4.SUGGESTIONS], ["copy-properties", _$$b4.SUGGESTIONS], ["paste-properties", _$$b4.SUGGESTIONS], ["text-font-size-increase", _$$b4.SUGGESTIONS], ["text-font-size-decrease", _$$b4.SUGGESTIONS], ["text-bold-increase", _$$b4.SUGGESTIONS], ["text-bold-decrease", _$$b4.SUGGESTIONS]];
+                case 'ELLIPSE':
+                case 'BOOLEAN_OPERATION':
+                case 'LINE':
+                case 'REGULAR_POLYGON':
+                case 'RECTANGLE':
+                case 'ROUNDED_RECTANGLE':
+                case 'STAR':
+                case 'VECTOR':
+                  return [['select-matching', _$$b4.SUGGESTIONS], ['flip-horizontal', _$$b4.SUGGESTIONS], ['mask-selection', _$$b4.SUGGESTIONS], ['flatten-selection', _$$b4.SUGGESTIONS], ['copy-properties', _$$b4.SUGGESTIONS], ['convert-to-raster', _$$b4.SUGGESTIONS], ['toggle-shown-for-selected-nodes', _$$b4.SUGGESTIONS]];
+                case 'TEXT':
+                  return [['text-edit-hyperlink', _$$b4.SUGGESTIONS], ['text-toggle-strikethrough', _$$b4.SUGGESTIONS], ['copy-properties', _$$b4.SUGGESTIONS], ['paste-properties', _$$b4.SUGGESTIONS], ['text-font-size-increase', _$$b4.SUGGESTIONS], ['text-font-size-decrease', _$$b4.SUGGESTIONS], ['text-bold-increase', _$$b4.SUGGESTIONS], ['text-bold-decrease', _$$b4.SUGGESTIONS]];
               }
             }
-            let r = [["select-matching", _$$b4.SUGGESTIONS], ["frame-selection", _$$b4.SUGGESTIONS], ["create-symbol", _$$b4.SUGGESTIONS], ["create-multiple-symbols", _$$b4.SUGGESTIONS], ["toggle-locked-for-selected-nodes", _$$b4.SUGGESTIONS], ["export-selected-exportables", _$$b4.SUGGESTIONS], ["align-horizontal-center", _$$b4.SUGGESTIONS], ["align-vertical-center", _$$b4.SUGGESTIONS]];
-            i && r.push(["copy-to-figma-slides", _$$b4.SUGGESTIONS]);
+            let r = [['select-matching', _$$b4.SUGGESTIONS], ['frame-selection', _$$b4.SUGGESTIONS], ['create-symbol', _$$b4.SUGGESTIONS], ['create-multiple-symbols', _$$b4.SUGGESTIONS], ['toggle-locked-for-selected-nodes', _$$b4.SUGGESTIONS], ['export-selected-exportables', _$$b4.SUGGESTIONS], ['align-horizontal-center', _$$b4.SUGGESTIONS], ['align-vertical-center', _$$b4.SUGGESTIONS]];
+            i && r.push(['copy-to-figma-slides', _$$b4.SUGGESTIONS]);
             return r;
           }, [e, i, t]);
         }();
         let p = useCallback((e, t) => {
           let i = r(n, e, !0);
-          if (i) return {
-            ...i,
-            category: t
-          };
+          if (i) {
+            return {
+              ...i,
+              category: t
+            };
+          }
         }, [r, n]);
         let m = i.map(e => ({
           ...e,
@@ -8380,8 +8507,8 @@ function oB({
         }, [m, p]);
         let g = iR();
         let _ = useMemo(() => {
-          if (g && !["DESIGN_EDITOR_NO_AI", "DESIGN_EDITOR_AI", "DEV", "VARIABLES_TABLE", "COMPONENT_BROWSER"].includes(o)) {
-            var e;
+          if (g && !['DESIGN_EDITOR_NO_AI', 'DESIGN_EDITOR_AI', 'DEV', 'VARIABLES_TABLE', 'COMPONENT_BROWSER'].includes(o)) {
+            let e;
             e = _$$b4.SUGGESTIONS;
             let t = l.map(t => ({
               ...t,
@@ -8390,19 +8517,19 @@ function oB({
             return eV()(filterNotNullish([...m, ...t]), EG);
           }
           switch (o) {
-            case "DESIGN_EDITOR_AI":
+            case 'DESIGN_EDITOR_AI':
               return f(c());
-            case "DEV":
+            case 'DEV':
               return f(ik);
-            case "VARIABLES_TABLE":
+            case 'VARIABLES_TABLE':
               return f(iA);
-            case "COMPONENT_BROWSER":
+            case 'COMPONENT_BROWSER':
               return f(iN);
-            case "DESIGN_VIEWER":
+            case 'DESIGN_VIEWER':
               return f(iO);
-            case "DESIGN_EDITOR_NO_AI":
+            case 'DESIGN_EDITOR_NO_AI':
               return f(u());
-            case "NONE":
+            case 'NONE':
               return [];
             default:
               throwTypeError(o);
@@ -8415,12 +8542,12 @@ function oB({
       }(e, t, i);
       let [l, c] = useState(o);
       useEffect(() => {
-        (r !== n || 0 === l.items.length && o.items.length > 0 || o.suggestionMode !== l.suggestionMode) && c(o);
+        (r !== n || l.items.length === 0 && o.items.length > 0 || o.suggestionMode !== l.suggestionMode) && c(o);
       }, [r, n, l.items.length, l.suggestionMode, o]);
       return l;
     }(e, t, l);
-    let p = "" !== i;
-    let m = useMemo(() => "" === i ? [] : t.search(e, i).slice(0, 25), [e, t, i]);
+    let p = i !== '';
+    let m = useMemo(() => i === '' ? [] : t.search(e, i).slice(0, 25), [e, t, i]);
     let f = function (e, t) {
       let i = my() === FEditorType.Design;
       let r = q5();
@@ -8430,25 +8557,25 @@ function oB({
       let [u, p] = useAtomValueAndSetter(ta);
       let h = useSelector(Eh);
       let m = _$$eH();
-      let f = T5("useSearchFallbacks").unwrapOr(null);
+      let f = T5('useSearchFallbacks').unwrapOr(null);
       let g = f?.name || r?.name;
       return useMemo(() => {
-        if ("" === e) return [];
+        if (e === '') return [];
         {
           let a = {
-            name: "find-community-matching",
+            name: 'find-community-matching',
             args: {
               searchQuery: e
             },
             callback: () => {},
-            displayNode: m ? renderI18nText("fullscreen_actions.quick_actions.find-in-community", {
+            displayNode: m ? renderI18nText('fullscreen_actions.quick_actions.find-in-community', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
-            }) : renderI18nText("fullscreen_actions.quick_actions.find-community-matching", {
+            }) : renderI18nText('fullscreen_actions.quick_actions.find-community-matching', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
             }),
@@ -8464,7 +8591,7 @@ function oB({
               },
               beforeModuleOpen: () => {
                 r?.key && Hl({
-                  type: "input-text",
+                  type: 'input-text',
                   value: e,
                   file_key: r.key
                 }, G4.ACTIONS_LIST, void 0, void 0, void 0, !0);
@@ -8474,33 +8601,33 @@ function oB({
             disabled: !i || !r?.canEdit || !m || getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search
           };
           let s = {
-            name: "find-assets-matching",
+            name: 'find-assets-matching',
             args: {
               searchQuery: e
             },
             callback: () => {},
-            displayNode: m ? o ? renderI18nText("fullscreen_actions.quick_actions.find-at-plan-file", {
+            displayNode: m ? o ? renderI18nText('fullscreen_actions.quick_actions.find-at-plan-file', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               }),
               planFileName: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: g
               })
-            }) : renderI18nText("fullscreen_actions.quick_actions.find-components", {
+            }) : renderI18nText('fullscreen_actions.quick_actions.find-components', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
-            }) : o ? renderI18nText("fullscreen_actions.quick_actions.find-components-matching", {
+            }) : o ? renderI18nText('fullscreen_actions.quick_actions.find-components-matching', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
-            }) : renderI18nText("fullscreen_actions.quick_actions.find-assets-matching", {
+            }) : renderI18nText('fullscreen_actions.quick_actions.find-assets-matching', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
             }),
@@ -8513,7 +8640,7 @@ function oB({
               retainSearchQuery: !0,
               beforeModuleOpen: t => {
                 ES({
-                  type: "input-text",
+                  type: 'input-text',
                   query: t.searchQuery,
                   assetTypeOption: {
                     type: _$$I2.ALL
@@ -8521,7 +8648,7 @@ function oB({
                   isKnownLibrary: l
                 });
                 r?.key && m && o && Hl({
-                  type: "input-text",
+                  type: 'input-text',
                   value: e,
                   file_key: r.key
                 }, G4.ACTIONS_LIST, void 0, void 0, void 0, !1);
@@ -8530,27 +8657,27 @@ function oB({
             disabled: !i || !r?.canEdit || getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search
           };
           let f = {
-            name: "find-assets-and-community-matching",
+            name: 'find-assets-and-community-matching',
             args: {
               searchQuery: e
             },
             callback: () => {},
-            displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? "fullscreen_actions.quick_actions.search-at-plan-file-and-community" : "fullscreen_actions.quick_actions.find-at-plan-file-and-community", {
+            displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? 'fullscreen_actions.quick_actions.search-at-plan-file-and-community' : 'fullscreen_actions.quick_actions.find-at-plan-file-and-community', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
-                children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? renderI18nText("fullscreen_actions.quick_actions.quoted-query", {
+                color: 'secondary',
+                children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? renderI18nText('fullscreen_actions.quick_actions.quoted-query', {
                   searchQuery: e
                 }) : e
               }),
               planFileName: g
-            }) : o ? renderI18nText("fullscreen_actions.quick_actions.find-components-matching", {
+            }) : o ? renderI18nText('fullscreen_actions.quick_actions.find-components-matching', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
-            }) : renderI18nText("fullscreen_actions.quick_actions.find-assets-matching", {
+            }) : renderI18nText('fullscreen_actions.quick_actions.find-assets-matching', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
             }),
@@ -8562,7 +8689,7 @@ function oB({
               },
               beforeModuleOpen: t => {
                 ES({
-                  type: "input-text",
+                  type: 'input-text',
                   query: t.searchQuery,
                   assetTypeOption: {
                     type: _$$I2.ALL
@@ -8570,7 +8697,7 @@ function oB({
                   isKnownLibrary: l
                 });
                 r?.key && m && o && Hl({
-                  type: "input-text",
+                  type: 'input-text',
                   value: e,
                   file_key: r.key
                 }, G4.ACTIONS_LIST, void 0, void 0, void 0, !1);
@@ -8580,14 +8707,14 @@ function oB({
             disabled: !i || !r?.canEdit || !getFeatureFlags().actions_prioritize_search_v3 && !getFeatureFlags().actions_prioritize_search
           };
           return [{
-            name: "assistant-chat-query",
+            name: 'assistant-chat-query',
             args: {
               searchQuery: e
             },
             callback: () => {},
-            displayNode: renderI18nText("fullscreen_actions.assistant-chat-query", {
+            displayNode: renderI18nText('fullscreen_actions.assistant-chat-query', {
               query: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
             }),
@@ -8607,20 +8734,20 @@ function oB({
             },
             disabled: !d
           }, s, a, f, {
-            name: "find-extensions-matching",
+            name: 'find-extensions-matching',
             args: {
               searchQuery: e
             },
-            displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? "fullscreen_actions.quick_actions.search-plugins-widgets" : "fullscreen_actions.quick_actions.find-plugins-widgets", {
+            displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? 'fullscreen_actions.quick_actions.search-plugins-widgets' : 'fullscreen_actions.quick_actions.find-plugins-widgets', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
-                children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? renderI18nText("fullscreen_actions.quick_actions.quoted-query", {
+                color: 'secondary',
+                children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? renderI18nText('fullscreen_actions.quick_actions.quoted-query', {
                   searchQuery: e
                 }) : e
               })
-            }) : renderI18nText("fullscreen_actions.quick_actions.find-extensions-matching", {
+            }) : renderI18nText('fullscreen_actions.quick_actions.find-extensions-matching', {
               searchQuery: jsx(_$$E, {
-                color: "secondary",
+                color: 'secondary',
                 children: e
               })
             }),
@@ -8635,7 +8762,7 @@ function oB({
       }, [e, o, i, r?.canEdit, r?.key, l, t, d, u, p, h, m, g]);
     }(i, r);
     return p ? getFeatureFlags().actions_prioritize_search ? eV()([...m.slice(0, 4), ...f, ...m.slice(4)], EG) : (getFeatureFlags().actions_prioritize_search_v3 && (f.reverse().map(e => {
-      "assistant-chat-query" === e.name ? e.category = _$$b4.MATCHING_ACTIONS : e.category = _$$b4.SEARCH_FOR;
+      e.name === 'assistant-chat-query' ? e.category = _$$b4.MATCHING_ACTIONS : e.category = _$$b4.SEARCH_FOR;
     }), m.map(e => e.category = _$$b4.MATCHING_ACTIONS)), eV()([...m, ...f], EG)) : items;
   }(g, _, m, {
     setActiveTab: e
@@ -8685,7 +8812,7 @@ function oB({
   } = Sk();
   let w = useMemo(() => {
     let e = 0;
-    getFeatureFlags().actions_prioritize_search_v3 && !getFeatureFlags().actions_prioritize_search && "" !== m && v.length > 1 && (e = v[0]?.items.length || 0);
+    getFeatureFlags().actions_prioritize_search_v3 && !getFeatureFlags().actions_prioritize_search && m !== '' && v.length > 1 && (e = v[0]?.items.length || 0);
     return e;
   }, [m, v]);
   return jsx(Fragment, {
@@ -8697,35 +8824,35 @@ function oB({
         category: e,
         items: t,
         globalIdxOfFirstItem: i
-      }) => null !== e && t.length > 0 && v.length > 1 ? jsx(_$$B6.Section, {
+      }) => e !== null && t.length > 0 && v.length > 1 ? jsx(_$$B6.Section, {
         header: function (e) {
           switch (e) {
             case _$$b4.RECENTS:
-              return getI18nString("qa.category.recents");
+              return getI18nString('qa.category.recents');
             case _$$b4.DESIGN_TOOLS:
-              return getI18nString("qa.category.design_tools");
+              return getI18nString('qa.category.design_tools');
             case _$$b4.RIFFING_AND_WRITING:
-              return getI18nString("qa.category.riffing_and_writing");
+              return getI18nString('qa.category.riffing_and_writing');
             case _$$b4.IMAGE_EDITING:
-              return getI18nString("qa.category.image_editing");
+              return getI18nString('qa.category.image_editing');
             case _$$b4.COLLABORATION_TOOLS:
-              return getI18nString("qa.category.collaboration_tools");
+              return getI18nString('qa.category.collaboration_tools');
             case _$$b4.HANDOFF_TOOLS:
-              return getI18nString("qa.category.handoff_tools");
+              return getI18nString('qa.category.handoff_tools');
             case _$$b4.VIEWER_TOOLS:
-              return getI18nString("qa.category.viewer_tools");
+              return getI18nString('qa.category.viewer_tools');
             case _$$b4.SUGGESTIONS:
-              return getI18nString("qa.category.suggestions");
+              return getI18nString('qa.category.suggestions');
             case _$$b4.COMMON_SETTINGS:
-              return getI18nString("qa.category.common_settings");
+              return getI18nString('qa.category.common_settings');
             case _$$b4.SEARCH_FOR:
-              return getI18nString("qa.category.search_for");
+              return getI18nString('qa.category.search_for');
             case _$$b4.MATCHING_ACTIONS:
-              return getI18nString("qa.category.matching_actions");
+              return getI18nString('qa.category.matching_actions');
             case _$$b4.ORGANIZE:
-              return getI18nString("qa.category.organize");
+              return getI18nString('qa.category.organize');
             case _$$b4.TEMPLATES_AND_DIAGRAMS:
-              return getI18nString("qa.category.templates_and_diagrams");
+              return getI18nString('qa.category.templates_and_diagrams');
             default:
               return throwTypeError(e);
           }
@@ -8767,50 +8894,50 @@ function oH({
   let r = _$$sZ();
   let s = Cb();
   let o = useMemo(() => ({
-    [BY.ALL]: getI18nString("qa.filter.all"),
-    [BY.PLUGINS]: getI18nString("qa.filter.plugins"),
-    [BY.WIDGETS]: getI18nString("qa.filter.widgets"),
-    [BY.FROM_ORG]: getI18nString("qa.filter.from_org_name", {
-      org_name: r?.name || ""
+    [BY.ALL]: getI18nString('qa.filter.all'),
+    [BY.PLUGINS]: getI18nString('qa.filter.plugins'),
+    [BY.WIDGETS]: getI18nString('qa.filter.widgets'),
+    [BY.FROM_ORG]: getI18nString('qa.filter.from_org_name', {
+      org_name: r?.name || ''
     }),
-    [BY.DEVELOPMENT]: getI18nString("qa.filter.development")
+    [BY.DEVELOPMENT]: getI18nString('qa.filter.development')
   }), [r?.name]);
   let l = useMemo(() => {
     let e = !!r && !s;
     let t = hasDesktopAPI();
     let n = [];
     i && n.push({
-      type: "checkableOption",
+      type: 'checkableOption',
       value: BY.ALL,
       text: o[BY.ALL]
     });
     n.push({
-      type: "checkableOption",
+      type: 'checkableOption',
       value: BY.PLUGINS,
       text: o[BY.PLUGINS]
     });
     i && n.push({
-      type: "checkableOption",
+      type: 'checkableOption',
       value: BY.WIDGETS,
       text: o[BY.WIDGETS]
     });
     (e || t) && n.push({
-      type: "separator"
+      type: 'separator'
     });
     e && n.push({
-      type: "checkableOption",
+      type: 'checkableOption',
       value: BY.FROM_ORG,
       text: o[BY.FROM_ORG]
     });
     t && n.push({
-      type: "checkableOption",
+      type: 'checkableOption',
       value: BY.DEVELOPMENT,
       text: o[BY.DEVELOPMENT]
     });
     return n;
   }, [r, s, i, o]);
   return jsx(c0, {
-    ariaLabel: getI18nString("qa.filter.aria_label"),
+    ariaLabel: getI18nString('qa.filter.aria_label'),
     buttonId: oV,
     displayAboveTarget: !1,
     id: oW,
@@ -8818,20 +8945,20 @@ function oH({
     labelForSelectedItem: e => o[e],
     menuId: oz,
     onSelectedChange: t,
-    placeholder: "Filter",
+    placeholder: 'Filter',
     recordingKey: oW,
     selected: e
   });
 }
-let oz = "extensions-filter-dropdown-menu";
-let oV = "extensions-filter-dropdown-button";
-let oW = "extensions-filter-dropdown";
+let oz = 'extensions-filter-dropdown-menu';
+let oV = 'extensions-filter-dropdown-button';
+let oW = 'extensions-filter-dropdown';
 let lr = e => {
   _$$j2({
     pluginID: e.plugin_id,
     widgetName: e.name,
-    pluginVersionID: "",
-    triggeredFrom: "quick-actions"
+    pluginVersionID: '',
+    triggeredFrom: 'quick-actions'
   });
 };
 function la({
@@ -8842,25 +8969,27 @@ function la({
     extension,
     publishedExtension
   } = e;
-  if (!hasLocalFileId(extension)) return jsx(_$$V, {
-    "aria-hidden": t,
-    plugin: extension,
-    className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$
-  });
+  if (!hasLocalFileId(extension)) {
+    return jsx(_$$V, {
+      'aria-hidden': t,
+      'plugin': extension,
+      'className': _$$s3.colorIcon.w20.h20.m2.bRadius4.$
+    });
+  }
   let a = publishedExtension && getCurrentPluginVersion(publishedExtension);
   return a && a.redirect_icon_url ? jsx(_$$V, {
-    "aria-hidden": t,
-    plugin: a,
-    className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$
+    'aria-hidden': t,
+    'plugin': a,
+    'className': _$$s3.colorIcon.w20.h20.m2.bRadius4.$
   }) : jsx(_$$B2, {
     ariaHidden: t,
     svg: _$$A14,
     className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$,
-    dataTestId: "qa2-dev-plugin-icon",
+    dataTestId: 'qa2-dev-plugin-icon',
     autosize: !0
   });
 }
-let l_ = "EXTENSION_OPTIONS_DROPDOWN";
+let l_ = 'EXTENSION_OPTIONS_DROPDOWN';
 function lx(e) {
   let t = Um();
   return hasLocalFileId(e) ? t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
@@ -8869,7 +8998,9 @@ function ly(e) {
   let t = useDispatch();
   let i = lx(e);
   return useCallback(r => {
-    if (i) t(_$$oB2());else {
+    if (i) {
+      t(_$$oB2());
+    } else {
       let i = r.getBoundingClientRect();
       t(j7({
         type: l_,
@@ -8898,7 +9029,7 @@ function lb(e) {
 function lC(e) {
   let t = ly(e);
   return {
-    text: "",
+    text: '',
     shortcuts: [Hz],
     onAction: e => {
       let i = e.target?.element;
@@ -8921,25 +9052,25 @@ function lv({
     borderWidth: 1,
     children: jsx(_$$J5, {})
   });
-  return jsx("div", {
+  return jsx('div', {
     className: _$$s3.flex.pl8.$,
-    children: i ? jsx("button", {
-      "aria-label": getI18nString("qa.plugins_widget.more_options", {
+    children: i ? jsx('button', {
+      'aria-label': getI18nString('qa.plugins_widget.more_options', {
         widget: e.name
       }),
-      onClick: s,
-      onPointerUp: dG,
-      className: rB()(_$$s3.bgTransparent.h24.$),
-      "data-testid": "extension-options-button",
-      children: o
+      'onClick': s,
+      'onPointerUp': dG,
+      'className': rB()(_$$s3.bgTransparent.h24.$),
+      'data-testid': 'extension-options-button',
+      'children': o
     }) : jsx(_$$S3.div, {
-      role: "button",
-      tabIndex: 0,
-      onClick: s,
-      onPointerUp: dG,
-      className: rB()(_$$s3.bgTransparent.h24.$),
-      "data-testid": "extension-options-button",
-      children: o
+      'role': 'button',
+      'tabIndex': 0,
+      'onClick': s,
+      'onPointerUp': dG,
+      'className': rB()(_$$s3.bgTransparent.h24.$),
+      'data-testid': 'extension-options-button',
+      'children': o
     })
   });
 }
@@ -8960,7 +9091,7 @@ function lE(e) {
   let p = qu(l);
   let h = _$$rH(augmentedExtension);
   let m = xZ(augmentedExtension);
-  let f = TA();
+  let f = getUserId();
   let g = !!publishedExtension && !!f && (Ro(publishedExtension, f) || Dd(publishedExtension, f));
   let _ = lx(extension);
   let x = _$$O5({
@@ -8972,9 +9103,9 @@ function lE(e) {
   let b = [];
   let C = !!publishedExtension;
   !hasLocalFileId(extension) && (C ? (d && g && y.push(d), y.push({
-    displayText: getI18nString("qa.extensions.view_details"),
+    displayText: getI18nString('qa.extensions.view_details'),
     callback: x
-  }), u && g && y.push(u), p && g && y.push(p), m && g && y.push(m), h && b.push(h), c && g && b.push(c)) : reportError(_$$e.AI_FOR_PRODUCTION, Error("[Quick Actions] Published extension is missing publishedExtension from Redux state"), {
+  }), u && g && y.push(u), p && g && y.push(p), m && g && y.push(m), h && b.push(h), c && g && b.push(c)) : reportError(_$$e.AI_FOR_PRODUCTION, new Error('[Quick Actions] Published extension is missing publishedExtension from Redux state'), {
     extra: {
       extensionId: extension.plugin_id,
       isWidget: manifestContainsWidget(extension),
@@ -8983,16 +9114,16 @@ function lE(e) {
   }));
   hasLocalFileId(extension) && (d && y.unshift(d), C && u && y.push(u), !extension.error && p && y.push(p), h && b.push(h), c && b.push(c));
   let v = y.some(Boolean) && b.some(Boolean) ? {
-    displayText: "",
+    displayText: '',
     separator: !0
   } : null;
   return jsx(ms, {
     parentRect: s?.data.targetRect,
-    lean: "left",
+    lean: 'left',
     minWidth: 64,
     items: [...y, v, ...b].filter(e => !!e),
-    dataTestId: "extensionOptionsDropdown",
-    recordingKey: "extensionOptionsDropdown"
+    dataTestId: 'extensionOptionsDropdown',
+    recordingKey: 'extensionOptionsDropdown'
   });
 }
 function lT({
@@ -9006,23 +9137,23 @@ function lT({
     extension
   } = e;
   let o = manifestContainsWidget(extension) ? jsx(_$$E, {
-    color: "tertiary",
+    color: 'tertiary',
     fontSize: 11,
-    children: renderI18nText("qa.extensions.widget")
+    children: renderI18nText('qa.extensions.widget')
   }) : jsx(_$$E, {
-    color: "tertiary",
+    color: 'tertiary',
     fontSize: 11,
-    children: renderI18nText("qa.extensions.plugin")
+    children: renderI18nText('qa.extensions.plugin')
   });
   let l = oN(e);
   let d = jsxs(Fragment, {
     children: [jsx(la, {
       isAccessibleIcon: a.isAccessibleExtensionRow,
       augmentedExtension: e
-    }), jsx("div", {
+    }), jsx('div', {
       className: _$$s3.px8.$,
       style: _$$sx.add({
-        maxWidth: l ? "205px" : "300px"
+        maxWidth: l ? '205px' : '300px'
       }).$,
       children: jsx(_$$G, {
         text: extension.name
@@ -9030,9 +9161,9 @@ function lT({
     }), jsx(_$$lM, {
       augmentedExtension: e,
       submenuRef: r
-    }), l && jsx("div", {
+    }), l && jsx('div', {
       style: _$$sx.add({
-        maxWidth: "110px"
+        maxWidth: '110px'
       }).$,
       children: jsx(oA, {
         text: l.text,
@@ -9040,30 +9171,30 @@ function lT({
       })
     })]
   });
-  return jsxs("div", {
+  return jsxs('div', {
     className: _$$s3.flex.itemsCenter.justifyBetween.wFull.$,
-    children: [a.isAccessibleExtensionRow ? jsx("button", {
+    children: [a.isAccessibleExtensionRow ? jsx('button', {
       className: _$$s3.flex.itemsCenter.$,
       onClick: a.onClick,
       onFocus: a.onFocus,
       style: _$$sx.add({
-        background: "transparent",
+        background: 'transparent',
         flexGrow: 1
       }).$,
       children: d
-    }) : jsx("div", {
+    }) : jsx('div', {
       className: _$$s3.flex.itemsCenter.$,
       children: d
-    }), jsx("div", {
+    }), jsx('div', {
       children: t ? jsx(lv, {
         ...(a.isAccessibleExtensionRow && {
           isAccessibleButton: !0
         }),
         extension,
         active: i
-      }) : jsx("span", {
-        "aria-hidden": !0,
-        children: o
+      }) : jsx('span', {
+        'aria-hidden': !0,
+        'children': o
       })
     })]
   });
@@ -9071,10 +9202,10 @@ function lT({
 function lw({
   manifestError: e
 }) {
-  return jsx("div", {
+  return jsx('div', {
     className: _$$s3.alignLeft.font11.lh16.pl32.$,
     children: jsx(_$$E, {
-      color: "danger",
+      color: 'danger',
       children: e.displayText
     })
   });
@@ -9084,7 +9215,7 @@ function lS({
 }) {
   return jsx(_$$R7, {
     className: _$$s3.font11.alignLeft.colorTextSecondary.lh16.pl32.$,
-    text: e.localFilePath.replace("/manifest.json", "")
+    text: e.localFilePath.replace('/manifest.json', '')
   });
 }
 function lj({
@@ -9119,10 +9250,10 @@ function lj({
       extension: _extension
     });
     let d = _$$t7(_extension, s);
-    let c = _$$dR(_extension.plugin_id, "quick-actions");
+    let c = _$$dR(_extension.plugin_id, 'quick-actions');
     let u = Kp(t);
     let p = useCallback(() => {
-      manifestContainsWidget(_extension) ? _$$l2.user("insert-widget", () => lr(_extension)) : s && i ? l(i.current) : c();
+      manifestContainsWidget(_extension) ? _$$l2.user('insert-widget', () => lr(_extension)) : s && i ? l(i.current) : c();
       s || u();
       d() && close();
     }, [_extension, s, i, l, c, u, d, close]);
@@ -9131,7 +9262,7 @@ function lj({
       actionText: e.displayText
     } : {
       onAction: p,
-      actionText: getI18nString("qa.extensions.run")
+      actionText: getI18nString('qa.extensions.run')
     };
   }({
     manifestError: c,
@@ -9175,7 +9306,7 @@ function lj({
     primaryAction: x,
     setActive: l,
     children: (i, r) => jsxs(Fragment, {
-      children: [jsxs("div", {
+      children: [jsxs('div', {
         className: _$$s3.flex.flexColumn.wFull.$,
         children: [jsx(lT, {
           augmentedExtension: e,
@@ -9191,7 +9322,7 @@ function lj({
   }) : jsxs(_$$p4, {
     primaryAction: x,
     setActive: l,
-    children: [jsxs("div", {
+    children: [jsxs('div', {
       className: _$$s3.flex.flexColumn.wFull.$,
       children: [jsx(lT, {
         augmentedExtension: e,
@@ -9251,7 +9382,7 @@ function lI({
     primaryAction: x,
     setActive: c,
     children: (i, r) => jsxs(Fragment, {
-      children: [jsx("div", {
+      children: [jsx('div', {
         className: _$$s3.flex.flexColumn.wFull.$,
         children: jsx(lT, {
           augmentedExtension: e,
@@ -9279,8 +9410,8 @@ function lk(e) {
   let t = useDispatch();
   let i = QZ();
   return hasDesktopAPI() && [BY.DEVELOPMENT, BY.ALL].includes(e) ? [{
-    itemKey: "newPlugin",
-    text: getI18nString("whiteboard.inserts.plugin_development_options_new_plugin"),
+    itemKey: 'newPlugin',
+    text: getI18nString('whiteboard.inserts.plugin_development_options_new_plugin'),
     svg: _$$e2,
     onAction: () => {
       t(popModalStack());
@@ -9292,8 +9423,8 @@ function lk(e) {
       }));
     }
   }, i ? {
-    itemKey: "newWidget",
-    text: getI18nString("whiteboard.inserts.widget_development_options_new_widget"),
+    itemKey: 'newWidget',
+    text: getI18nString('whiteboard.inserts.widget_development_options_new_widget'),
     svg: _$$e2,
     onAction: () => {
       t(popModalStack());
@@ -9305,11 +9436,11 @@ function lk(e) {
       }));
     }
   } : null, {
-    itemKey: "importFromManifest",
-    text: getI18nString("whiteboard.inserts.development_options_import"),
+    itemKey: 'importFromManifest',
+    text: getI18nString('whiteboard.inserts.development_options_import'),
     svg: _$$R,
     onAction: () => t(JZ({
-      resourceType: "unknown"
+      resourceType: 'unknown'
     }))
   }].filter(isNotNullish) : [];
 }
@@ -9345,11 +9476,11 @@ function lN({
   });
   return jsx(_$$p4, {
     primaryAction: o,
-    children: jsx("div", {
+    children: jsx('div', {
       className: _$$s3.flex.itemsCenter.alignLeft.wFull.justifyBetween.$,
-      children: jsxs("div", {
+      children: jsxs('div', {
         className: _$$s3.flex.$,
-        children: [jsx(i, {}), jsx("div", {
+        children: [jsx(i, {}), jsx('div', {
           className: _$$s3.ml8.$,
           children: t
         })]
@@ -9357,43 +9488,43 @@ function lN({
     })
   });
 }
-let lL = "button_with_faux_focus--button--4UzJZ";
-let lR = "button_with_faux_focus--icon--3ofHG";
-let lD = "button_with_faux_focus--buttonText--eXi6z";
-let lM = "button_with_faux_focus--buttonContent--QYGhy";
-let lP = "button_with_faux_focus--shortcut--XSTpu";
-let lF = "button_with_faux_focus--regularSize--PRZRN";
-let lB = "button_with_faux_focus--largeSize--KbVb-";
-let lU = "button_with_faux_focus--wideSize--vAeP3";
-let lG = "button_with_faux_focus--largeWideSize--7umaZ";
-let lK = "button_with_faux_focus--outlineStyle--HbkS5";
-let lH = "button_with_faux_focus--fauxFocus--ydUPp";
-let lz = "button_with_faux_focus--solidStyle--JXrgr";
-let lV = "button_with_faux_focus--primary--z-mFg button_with_faux_focus--solidStyle--JXrgr";
-let lW = "button_with_faux_focus--secondary--nFRZl button_with_faux_focus--outlineStyle--HbkS5";
-let lY = "button_with_faux_focus--destructive--mKBEK button_with_faux_focus--solidStyle--JXrgr";
-let lJ = "button_with_faux_focus--destructiveSecondary--Wtsn1 button_with_faux_focus--outlineStyle--HbkS5";
-let lq = "button_with_faux_focus--signup--CPfrM button_with_faux_focus--solidStyle--JXrgr";
-let lX = "button_with_faux_focus--link--qW4X-";
-let lZ = "button_with_faux_focus--destructiveLink--xx-J5 button_with_faux_focus--link--qW4X-";
+let lL = 'button_with_faux_focus--button--4UzJZ';
+let lR = 'button_with_faux_focus--icon--3ofHG';
+let lD = 'button_with_faux_focus--buttonText--eXi6z';
+let lM = 'button_with_faux_focus--buttonContent--QYGhy';
+let lP = 'button_with_faux_focus--shortcut--XSTpu';
+let lF = 'button_with_faux_focus--regularSize--PRZRN';
+let lB = 'button_with_faux_focus--largeSize--KbVb-';
+let lU = 'button_with_faux_focus--wideSize--vAeP3';
+let lG = 'button_with_faux_focus--largeWideSize--7umaZ';
+let lK = 'button_with_faux_focus--outlineStyle--HbkS5';
+let lH = 'button_with_faux_focus--fauxFocus--ydUPp';
+let lz = 'button_with_faux_focus--solidStyle--JXrgr';
+let lV = 'button_with_faux_focus--primary--z-mFg button_with_faux_focus--solidStyle--JXrgr';
+let lW = 'button_with_faux_focus--secondary--nFRZl button_with_faux_focus--outlineStyle--HbkS5';
+let lY = 'button_with_faux_focus--destructive--mKBEK button_with_faux_focus--solidStyle--JXrgr';
+let lJ = 'button_with_faux_focus--destructiveSecondary--Wtsn1 button_with_faux_focus--outlineStyle--HbkS5';
+let lq = 'button_with_faux_focus--signup--CPfrM button_with_faux_focus--solidStyle--JXrgr';
+let lX = 'button_with_faux_focus--link--qW4X-';
+let lZ = 'button_with_faux_focus--destructiveLink--xx-J5 button_with_faux_focus--link--qW4X-';
 let lQ = forwardRef(({
   active: e,
   children: t,
-  size: i = "regularSize",
+  size: i = 'regularSize',
   variant: a,
   ...s
 }, o) => jsx(_$$E6, {
   className: rB()({
     [lL]: !0,
-    [r[a ?? "primary"]]: !0,
+    [r[a ?? 'primary']]: !0,
     [r[i]]: !0,
     [lH]: e
   }),
   ...s,
   ref: o,
-  children: jsx("span", {
+  children: jsx('span', {
     className: lD,
-    children: jsx("span", {
+    children: jsx('span', {
       className: lM,
       children: t
     })
@@ -9434,7 +9565,7 @@ function l0({
       onClickCallback();
     },
     htmlAttributes: {
-      "data-testid": i
+      'data-testid': i
     },
     variant: r,
     active,
@@ -9446,10 +9577,10 @@ function l1({
 }) {
   let t = R_(e);
   let i = _$$JB(e);
-  return jsxs("div", {
-    className: _$$s3.mx8.mb8.p8.bRadius8.flex.justifyBetween.gap4.colorBgInfo.$,
-    "data-testid": "extension-invite-row",
-    children: [jsxs("div", {
+  return jsxs('div', {
+    'className': _$$s3.mx8.mb8.p8.bRadius8.flex.justifyBetween.gap4.colorBgInfo.$,
+    'data-testid': 'extension-invite-row',
+    'children': [jsxs('div', {
       className: _$$s3.flex.gap8.itemsCenter.font11.lh16.$,
       children: [jsx(H8, {
         user: e.creator,
@@ -9457,22 +9588,22 @@ function l1({
       }), jsx(_$$e7, {
         resource: e
       })]
-    }), jsxs("div", {
+    }), jsxs('div', {
       className: _$$s3.flex.gap4.$,
       children: [jsx(l0, {
         action: i,
-        dataTestId: "decline-invite-button",
-        variant: "secondary",
+        dataTestId: 'decline-invite-button',
+        variant: 'secondary',
         children: jsx(_$$E, {
           fontSize: 11,
-          children: renderI18nText("community.detail_view.decline")
+          children: renderI18nText('community.detail_view.decline')
         })
       }), jsx(l0, {
         action: t,
-        dataTestId: "accept-invite-button",
+        dataTestId: 'accept-invite-button',
         children: jsx(_$$E, {
           fontSize: 11,
-          children: renderI18nText("community.detail_view.accept")
+          children: renderI18nText('community.detail_view.accept')
         })
       })]
     })]
@@ -9506,11 +9637,11 @@ function l2({
     invitedWidgets: t,
     selectedFilter: i
   });
-  return 0 === r.length ? null : jsx("div", {
-    "data-testid": "extension-invite-section",
-    className: _$$s3.flex.flexColumn.$,
-    children: jsx(_$$B6.Section, {
-      header: getI18nString("community.detail_view.invitations"),
+  return r.length === 0 ? null : jsx('div', {
+    'data-testid': 'extension-invite-section',
+    'className': _$$s3.flex.flexColumn.$,
+    'children': jsx(_$$B6.Section, {
+      header: getI18nString('community.detail_view.invitations'),
       children: r.map(e => jsx(l1, {
         extension: e
       }, e.id))
@@ -9524,7 +9655,7 @@ function l8({
     extension,
     publishedExtension
   } = e;
-  let r = manifestContainsWidget(extension) ? renderI18nText("qa.extensions.widget") : renderI18nText("qa.extensions.plugin");
+  let r = manifestContainsWidget(extension) ? renderI18nText('qa.extensions.widget') : renderI18nText('qa.extensions.plugin');
   let a = publishedExtension?.unique_run_count ?? 0;
   let s = publishedExtension?.like_count ?? 0;
   let o = publishedExtension ? jsx(_$$o5, {
@@ -9532,16 +9663,16 @@ function l8({
     showTooltip: !1
   }) : null;
   let l = _$$g5(publishedExtension);
-  return jsx("div", {
+  return jsx('div', {
     className: _$$s3.flex.flexColumn.colorTextSecondary.textBodyMedium.$,
-    children: jsxs("div", {
+    children: jsxs('div', {
       className: _$$s3.flex.flexRow.$,
       children: [r, jsx(l9, {}), jsx(_$$B2, {
         svg: _$$A15,
         className: _$$s3.mx2.colorIconSecondary.$
-      }), jsx("div", {
+      }), jsx('div', {
         className: _$$s3.ml2.$,
-        children: getI18nString("qa.extensions.num_users", {
+        children: getI18nString('qa.extensions.num_users', {
           numUsers: a,
           numUsersStr: $M(a)
         })
@@ -9549,9 +9680,9 @@ function l8({
         svg: _$$A16,
         className: _$$s3.colorIconSecondary.$,
         style: _$$sx.add({
-          margin: "3px"
+          margin: '3px'
         }).$
-      }), jsx("div", {
+      }), jsx('div', {
         className: _$$s3.ml2.$,
         children: $M(s)
       }), l && jsx(l9, {}), o]
@@ -9559,12 +9690,12 @@ function l8({
   });
 }
 function l9() {
-  return jsx("div", {
-    className: _$$s3.w1.hFull.mx6.$,
-    style: _$$sx.add({
-      backgroundColor: "var(--color-border-fs)"
+  return jsx('div', {
+    'className': _$$s3.w1.hFull.mx6.$,
+    'style': _$$sx.add({
+      backgroundColor: 'var(--color-border-fs)'
     }).$,
-    "data-testid": "divider"
+    'data-testid': 'divider'
   });
 }
 function de({
@@ -9583,7 +9714,7 @@ function de({
   let d = H5.PUBLISHED_WITH_DETAILS;
   let c = _$$D2({
     source: d,
-    text: getI18nString("qa.extensions.view_details"),
+    text: getI18nString('qa.extensions.view_details'),
     onAction: l,
     augmentedExtension: e
   });
@@ -9592,16 +9723,16 @@ function de({
   return jsx(_$$p4, {
     primaryAction: c,
     setActive: o,
-    children: jsxs("div", {
+    children: jsxs('div', {
       className: _$$s3.flex.flexColumn.alignLeft.wFull.$,
-      children: [jsxs("div", {
+      children: [jsxs('div', {
         className: _$$s3.flex.itemsCenter.overflowHidden.$,
         children: [jsx(la, {
           augmentedExtension: e
         }), jsx(dt, {
           augmentedExtension: e
         })]
-      }), jsxs("div", {
+      }), jsxs('div', {
         className: _$$s3.flex.flexColumn.overflowHidden.ml32.$,
         children: [jsx(_$$G, {
           text: u,
@@ -9621,19 +9752,19 @@ function dt({
     extension
   } = e;
   let i = oN(e);
-  return jsxs("div", {
+  return jsxs('div', {
     className: _$$s3.flex.itemsCenter.ml8.$,
-    children: [jsx("div", {
+    children: [jsx('div', {
       className: _$$s3.pr8.colorText.textBodyLarge.$,
       style: _$$sx.add({
-        maxWidth: i ? "205px" : "300px"
+        maxWidth: i ? '205px' : '300px'
       }).$,
       children: jsx(_$$G, {
         text: extension.name
       })
-    }), i && jsx("div", {
+    }), i && jsx('div', {
       style: _$$sx.add({
-        maxWidth: "110px"
+        maxWidth: '110px'
       }).$,
       children: jsx(oA, {
         text: i.text,
@@ -9663,10 +9794,10 @@ function di({
       submenuRef: t
     }, key);
   });
-  return jsxs("div", {
-    "data-testid": r,
-    className: _$$s3.flex.flexColumn.$,
-    children: [t && jsx(_$$B6.Section, {
+  return jsxs('div', {
+    'data-testid': r,
+    'className': _$$s3.flex.flexColumn.$,
+    'children': [t && jsx(_$$B6.Section, {
       header: t,
       children: s
     }), !t && s]
@@ -9675,10 +9806,10 @@ function di({
 function dr({
   actions: e
 }) {
-  return 0 === e.length ? null : jsx("div", {
-    "data-testid": "extension-actions-section",
-    className: _$$s3.flex.flexColumn.$,
-    children: e.map(({
+  return e.length === 0 ? null : jsx('div', {
+    'data-testid': 'extension-actions-section',
+    'className': _$$s3.flex.flexColumn.$,
+    'children': e.map(({
       itemKey: e,
       ...t
     }) => jsx(lN, {
@@ -9691,17 +9822,17 @@ function dn({
   extensions: e
 }) {
   let t = useMemo(() => [...e].sort(bL), [e]);
-  return 0 === t.length ? null : jsx(di, {
+  return t.length === 0 ? null : jsx(di, {
     augmentedExtensions: t,
-    dataTestId: "my-extensions-section"
+    dataTestId: 'my-extensions-section'
   });
 }
 function da() {
   let e = QZ();
-  return jsx("div", {
-    className: _$$s3.flex.wFull.mt16.justifyCenter.alignCenter.colorTextSecondary.$,
-    "data-testid": "no-extensions-found",
-    children: e ? renderI18nText("qa.no_plugins_widgets_found") : renderI18nText("qa.no_plugins")
+  return jsx('div', {
+    'className': _$$s3.flex.wFull.mt16.justifyCenter.alignCenter.colorTextSecondary.$,
+    'data-testid': 'no-extensions-found',
+    'children': e ? renderI18nText('qa.no_plugins_widgets_found') : renderI18nText('qa.no_plugins')
   });
 }
 function ds({
@@ -9775,7 +9906,7 @@ function ds({
       useEffect(() => {
         e(Qi({
           publishedPlugins: i,
-          src: "Quick Actions V2 suggested extensions"
+          src: 'Quick Actions V2 suggested extensions'
         }));
       }, [i, e]);
       return {
@@ -9828,9 +9959,9 @@ function ds({
     otherExtensionsFromOrg: i,
     extensionActions: r
   }) {
-    let n = HD("My Extensions", e);
-    let a = HD("Suggested", t);
-    let s = HD("Other Extensions from Org", i);
+    let n = HD('My Extensions', e);
+    let a = HD('Suggested', t);
+    let s = HD('Other Extensions from Org', i);
     let o = NH(r);
     return _$$i2([n, a, s, o]);
   }({
@@ -9843,7 +9974,7 @@ function ds({
     r === Jc.EXTENSIONS && o && I && i({
       quickActionsSessionId: o,
       quickActionsQueryId: l,
-      searchQuery: "",
+      searchQuery: '',
       numSearchResults: b,
       currentSelection: u,
       module: r,
@@ -9855,13 +9986,13 @@ function ds({
     activeTab: Jc.EXTENSIONS,
     query: d,
     resultsCount: b
-  }), 0 === b) ? jsx(da, {}) : jsx(M6, {
+  }), b === 0) ? jsx(da, {}) : jsx(M6, {
     numResults: b,
     moduleFilters: t,
     children: jsxs(_$$B6, {
       primary: !0,
       resultCount: b,
-      dataTestId: "browseExtensions",
+      dataTestId: 'browseExtensions',
       children: [jsx(l2, {
         invitedPlugins: p,
         invitedWidgets: h,
@@ -9883,11 +10014,11 @@ function dl({
   extensions: e,
   hasLoaded: t
 }) {
-  return t ? 0 === e.length ? null : jsx(di, {
+  return t ? e.length === 0 ? null : jsx(di, {
     augmentedExtensions: e,
-    header: getI18nString("qa.suggested"),
+    header: getI18nString('qa.suggested'),
     showExtensionDetails: !0
-  }) : jsx("div", {
+  }) : jsx('div', {
     className: _$$s3.p8.$,
     children: jsx(_$$R6, {})
   });
@@ -9896,15 +10027,15 @@ function dd({
   extensions: e
 }) {
   let t = _$$sZ();
-  return t && 0 !== e.length ? jsx(di, {
+  return t && e.length !== 0 ? jsx(di, {
     augmentedExtensions: e,
-    header: getI18nString("qa.other_extensions_from_org", {
+    header: getI18nString('qa.other_extensions_from_org', {
       org_name: t.name
     }),
     showExtensionDetails: !0
   }) : null;
 }
-var du = dc;
+let du = dc;
 let dy = M4.Query({
   fetch: async e => (await $W.getExtensions(e)).data.meta,
   enabled: () => !getFeatureFlags().ext_extended_plugin_editor_types,
@@ -9946,9 +10077,9 @@ let db = M4.Query({
   }
 });
 function dC() {
-  return jsx("div", {
-    className: "x78zum5 xh8yej3 xw7yly9 xl56j7k x2b8uid x1n0bwc9",
-    children: getI18nString("search.error.max_query_length_exceeded")
+  return jsx('div', {
+    className: 'x78zum5 xh8yej3 xw7yly9 xl56j7k x2b8uid x1n0bwc9',
+    children: getI18nString('search.error.max_query_length_exceeded')
   });
 }
 function dv({
@@ -10016,7 +10147,7 @@ function dv({
         maxNumResults: 20
       }), {
         enabled: e.trim().length > 0 && !GX(e.trim()),
-        key: "searchPublishedExtensionsQuery"
+        key: 'searchPublishedExtensionsQuery'
       });
       return {
         status: n,
@@ -10035,29 +10166,29 @@ function dv({
     }(e);
     return useMemo(() => {
       switch (status) {
-        case "loading":
+        case 'loading':
           return {
             loading: !0,
             privateExtensions: [],
             publicExtensions: [],
             localExtensions: []
           };
-        case "loaded":
+        case 'loaded':
           return {
             loading: !1,
             publicExtensions: results.$$public,
             privateExtensions: results.$$private,
             localExtensions: n
           };
-        case "disabled":
+        case 'disabled':
           return {
             loading: !1,
             privateExtensions: [],
             publicExtensions: [],
             localExtensions: []
           };
-        case "errors":
-          reportError(_$$e.EXTENSIBILITY, Error("[useSearchExtensions] Unable to fetch search results"), {
+        case 'errors':
+          reportError(_$$e.EXTENSIBILITY, new Error('[useSearchExtensions] Unable to fetch search results'), {
             tags: {
               status
             },
@@ -10083,9 +10214,9 @@ function dv({
   }(p, t);
   useEffect(() => {
     let e = [...publicExtensions, ...privateExtensions];
-    0 !== e.length && f(Qi({
+    e.length !== 0 && f(Qi({
       publishedPlugins: e,
-      src: "Quick actions"
+      src: 'Quick actions'
     }));
   }, [f, privateExtensions, publicExtensions]);
   let {
@@ -10116,10 +10247,10 @@ function dv({
     fromOrgExtensions: i,
     communityExtensions: r
   }) {
-    let n = HD("My Extensions", e);
+    let n = HD('My Extensions', e);
     let a = NH(t);
-    let s = HD("From Org", i);
-    let o = HD("From Community", r);
+    let s = HD('From Org', i);
+    let o = HD('From Community', r);
     return _$$i2([n, a, s, o]);
   }({
     myExtensions,
@@ -10142,10 +10273,10 @@ function dv({
   }, [m, i, r, N, l, h, t, loading, A, p]), _$$iC({
     activeTab: Jc.EXTENSIONS,
     isLoading: loading,
-    passthroughErrorMessage: GX(p) ? getI18nString("search.error.max_query_length_exceeded") : null,
+    passthroughErrorMessage: GX(p) ? getI18nString('search.error.max_query_length_exceeded') : null,
     query: d,
     resultsCount: N
-  }), loading) ? jsx(_$$R6, {}) : GX(p) ? jsx(dC, {}) : 0 === N ? jsx(da, {}) : jsx(M6, {
+  }), loading) ? jsx(_$$R6, {}) : GX(p) ? jsx(dC, {}) : N === 0 ? jsx(da, {}) : jsx(M6, {
     numResults: N,
     moduleFilters: t,
     children: jsxs(_$$B6, {
@@ -10167,26 +10298,26 @@ function dE({
   extensions: e
 }) {
   let t = _$$sZ();
-  if (!t || 0 === e.length) return null;
+  if (!t || e.length === 0) return null;
   let [i, r] = du()(e, e => e.types.has(Ag.ORG_SAVED));
   let a = [...i, ...r];
   return jsx(di, {
     augmentedExtensions: a,
-    header: getI18nString("qa.from_org_name", {
+    header: getI18nString('qa.from_org_name', {
       org_name: t.name
     }),
     showExtensionDetails: !0,
-    dataTestId: "from-org-extensions-section"
+    dataTestId: 'from-org-extensions-section'
   });
 }
 function dT({
   extensions: e
 }) {
-  return 0 === e.length ? null : jsx(di, {
+  return e.length === 0 ? null : jsx(di, {
     augmentedExtensions: e,
-    header: getI18nString("qa.from_community"),
+    header: getI18nString('qa.from_community'),
     showExtensionDetails: !0,
-    dataTestId: "community-extensions-section"
+    dataTestId: 'community-extensions-section'
   });
 }
 let dw = (e, t, i) => {
@@ -10241,7 +10372,7 @@ function dI() {
     !function ({
       ref: e,
       handler: t,
-      eventType: i = "mousedown",
+      eventType: i = 'mousedown',
       eventOptions: r,
       recordingKey: n,
       enabled: s
@@ -10263,9 +10394,9 @@ function dI() {
     }({
       ref: useMemo(() => [e, t], [e, t]),
       handler: () => setTimeout(r, 0),
-      eventType: "mousedown",
+      eventType: 'mousedown',
       eventOptions: !0,
-      recordingKey: "click-to-dismiss",
+      recordingKey: 'click-to-dismiss',
       enabled: !0
     });
   }();
@@ -10315,14 +10446,14 @@ function dI() {
   });
   let es = useCallback(e => {
     r(e);
-    o(_$$g2());
+    o(generateUUIDv4());
     _$$lw();
-    x && (T || 0 === e.length) && (debouncedAssetSearch(e, {
+    x && (T || e.length === 0) && (debouncedAssetSearch(e, {
       type: _$$I2.ALL
     }), b && debouncedFragmentTextSearch(e), v && _debouncedFragmentTextSearch(e));
   }, [r, o, debouncedAssetSearch, debouncedFragmentTextSearch, x, T, b, v, _debouncedFragmentTextSearch]);
   let eo = useCallback(() => {
-    r("");
+    r('');
     x && (clearAssetSearchAndCancelDebounce(), b && clearFragmentSearchAndCancelDebounce(), v && _clearFragmentSearchAndCancelDebounce());
   }, [r, x, clearAssetSearchAndCancelDebounce, clearFragmentSearchAndCancelDebounce, b, v, _clearFragmentSearchAndCancelDebounce]);
   let el = useCallback(e => {
@@ -10350,7 +10481,7 @@ function dI() {
         key: Uz.KEY_1,
         modifier: [xH.ALT]
       },
-      children: renderI18nText("qa.all")
+      children: renderI18nText('qa.all')
     }), defaultViewAssetsTabVisible && jsx(_$$oz, {
       tabId: Jc.ASSETS,
       onAction: ed,
@@ -10358,7 +10489,7 @@ function dI() {
         key: Uz.KEY_2,
         modifier: [xH.ALT]
       },
-      children: renderI18nText("qa.assets")
+      children: renderI18nText('qa.assets')
     }), ep && jsx(_$$oz, {
       tabId: Jc.EXTENSIONS,
       onAction: () => el(Jc.EXTENSIONS),
@@ -10366,7 +10497,7 @@ function dI() {
         key: Uz.KEY_3,
         modifier: [xH.ALT]
       },
-      children: eh ? renderI18nText("qa.plugins_widgets") : renderI18nText("qa.plugins")
+      children: eh ? renderI18nText('qa.plugins_widgets') : renderI18nText('qa.plugins')
     })]
   });
   let ef = useCallback(e => {
@@ -10376,12 +10507,12 @@ function dI() {
     action: _$$JT.FIND_INSPIRATION,
     clientLifecycleId: void 0
   });
-  let e_ = v || b ? jsx("div", {
+  let e_ = v || b ? jsx('div', {
     className: _$$s3.flex.$,
     children: jsx(hc, {
       entryPoint: G4.ACTIONS_ASSETS_TAB,
       aiTrackingContext: eg,
-      recordingKey: generateRecordingKey("defaultView", "visualSearchIconButton")
+      recordingKey: generateRecordingKey('defaultView', 'visualSearchIconButton')
     })
   }) : void 0;
   let ex = u === Jc.EXTENSIONS;
@@ -10390,7 +10521,7 @@ function dI() {
   let eC = _$$o(_$$nt.quickActionsA11y);
   return jsx(_$$n, {
     height: wC,
-    recordingKey: "defaultView",
+    recordingKey: 'defaultView',
     children: jsxs(Do, {
       children: [jsx(vj, {
         searchQuery: i,
@@ -10403,13 +10534,13 @@ function dI() {
         descriptorId: eC ? eb : void 0
       }), eC && jsx(mr, {
         id: eb
-      }), (x || ex) && jsx("div", {
+      }), (x || ex) && jsx('div', {
         className: _$$s3.px8.pb8.$,
         children: jsxs(_$$b2, {
           primary: !1,
           gap: 8,
           fullWidth: !0,
-          justify: "space-between",
+          justify: 'space-between',
           children: [x && em, ex && jsx(oH, {
             extensionFilter: l,
             setExtensionFilter: d,
@@ -10477,8 +10608,8 @@ function dA() {
     } = q3();
     let d = _$$ll();
     let u = U6();
-    let p = _$$h2("plugin");
-    let h = _$$h2("widget");
+    let p = _$$h2('plugin');
+    let h = _$$h2('widget');
     let m = $1();
     let f = Oy();
     let g = useMemo(() => [{
@@ -10546,8 +10677,8 @@ function dA() {
   }, [close, r, s]);
   return jsx(_$$s, {
     children: jsx(_$$s2, {
-      name: "quickActions",
-      recordingKey: "quickActions",
+      name: 'quickActions',
+      recordingKey: 'quickActions',
       children: jsx(_$$p, {
         children: jsx(dk, {})
       })
@@ -10568,7 +10699,7 @@ function dM(e) {
   useEffect(() => {
     i && (t.cancel(), t());
   }, [i, t]);
-  return jsx("div", {
+  return jsx('div', {
     ref: o,
     onPointerEnter: () => {
       s(!0);
@@ -10582,7 +10713,7 @@ function dM(e) {
 function dP() {
   let e = debugState.getState();
   let t = _$$l(e);
-  let i = e.openFile?.key ?? "";
+  let i = e.openFile?.key ?? '';
   let r = v5(e.selectedView, null);
   let s = _$$FX();
   let o = [...or(), ...s];
@@ -10603,7 +10734,7 @@ function dP() {
   _$$K4();
   let w = useMemo(() => ({
     action: f,
-    source: "toast",
+    source: 'toast',
     toastType: p?.payload?.source,
     quickActionsSessionId: C,
     currentSelection: t,
@@ -10637,38 +10768,38 @@ function dP() {
   }, [m, f]);
   if (!I) return null;
   if (!m) {
-    console.warn("No menu item found for suggested action.");
+    console.warn('No menu item found for suggested action.');
     return null;
   }
   let L = _$$O4(m);
   return jsx(_$$s2, {
-    name: "quickActions",
-    recordingKey: "quickActions",
+    name: 'quickActions',
+    recordingKey: 'quickActions',
     children: jsx(_$$p, {
       children: jsx(_$$n, {
         children: jsx(dM, {
           timeoutMs: 1e4,
           children: jsx(_$$y4, {
             onDismiss: O,
-            recordingKey: "SuggestionToast",
+            recordingKey: 'SuggestionToast',
             children: jsxs(_$$B, {
-              justify: "space-between",
-              align: "center",
+              justify: 'space-between',
+              align: 'center',
               fullWidth: !0,
               children: [jsxs(_$$B, {
                 gap: 4,
-                align: "center",
-                children: [jsx("span", {
+                align: 'center',
+                children: [jsx('span', {
                   style: {
-                    "--color-icon": "var(--color-icon-brand)"
+                    '--color-icon': 'var(--color-icon-brand)'
                   },
                   children: y
                 }), jsxs(_$$B, {
-                  align: "center",
-                  children: [jsx("span", {
+                  align: 'center',
+                  children: [jsx('span', {
                     className: _$$s3.textBodyMediumStrong.$,
                     children: jsx(_$$E, {
-                      color: "brand",
+                      color: 'brand',
                       children: x
                     })
                   }), BB(m) && jsx(_$$y3, {
@@ -10676,7 +10807,7 @@ function dP() {
                   })]
                 })]
               }), jsx(_$$r, {
-                variant: "secondary",
+                variant: 'secondary',
                 shortcuts: [{
                   key: Uz.ENTER,
                   modifier: [xH.META]
@@ -10688,7 +10819,7 @@ function dP() {
                     isAi: !0
                   });
                 },
-                recordingKey: "SuggestionToast",
+                recordingKey: 'SuggestionToast',
                 children: _
               })]
             })
@@ -10703,29 +10834,29 @@ function dB() {
   let t = hk();
   let i = _$$sF2();
   return e ? jsx(_$$s2, {
-    name: "quickActions",
-    recordingKey: "quickActions",
+    name: 'quickActions',
+    recordingKey: 'quickActions',
     children: jsx(_$$p, {
       children: jsx(_$$n, {
         children: jsx(_$$y4, {
           onDismiss: t,
-          recordingKey: "VideoToast",
+          recordingKey: 'VideoToast',
           children: (() => {
             switch (e.status) {
-              case "success":
+              case 'success':
                 return jsxs(_$$B, {
-                  justify: "space-between",
-                  align: "center",
+                  justify: 'space-between',
+                  align: 'center',
                   fullWidth: !0,
                   children: [jsxs(_$$B, {
                     gap: 4,
-                    align: "center",
-                    children: [jsx("span", {
-                      className: "x2lah0s",
+                    align: 'center',
+                    children: [jsx('span', {
+                      className: 'x2lah0s',
                       children: jsx(_$$V2, {})
-                    }), jsx("span", {
+                    }), jsx('span', {
                       ...xk(dU.text),
-                      children: renderI18nText("video_ai.make_video.success", {
+                      children: renderI18nText('video_ai.make_video.success', {
                         prompt: e.prompt
                       })
                     })]
@@ -10735,24 +10866,24 @@ function dB() {
                       modifier: [xH.META]
                     }],
                     onAction: i,
-                    recordingKey: "VideoToast",
-                    children: renderI18nText("video_ai.make_video.insert")
+                    recordingKey: 'VideoToast',
+                    children: renderI18nText('video_ai.make_video.insert')
                   })]
                 });
-              case "error":
+              case 'error':
                 return jsxs(_$$B, {
                   gap: 4,
-                  align: "center",
-                  children: [jsx("span", {
-                    className: "x2lah0s",
+                  align: 'center',
+                  children: [jsx('span', {
+                    className: 'x2lah0s',
                     children: jsx(_$$C5, {
                       style: {
-                        "--color-icon": "var(--color-icon-danger)"
+                        '--color-icon': 'var(--color-icon-danger)'
                       }
                     })
-                  }), jsx("span", {
+                  }), jsx('span', {
                     ...xk(dU.text),
-                    children: renderI18nText("video_ai.make_video.error", {
+                    children: renderI18nText('video_ai.make_video.error', {
                       prompt: e.prompt
                     })
                   })]
@@ -10779,11 +10910,11 @@ export function $$dG0(e) {
   return (useEffect(() => {
     Fullscreen?.handleHasDesignAIPermissionChange();
   }, [r]), i) ? jsx(_$$tH, {
-    boundaryKey: "QuickActionsV2",
+    boundaryKey: 'QuickActionsV2',
     onError: () => {
-      t(_$$F.enqueue({
-        message: "Unable to open quick actions",
-        type: "react-error"
+      t(VisualBellActions.enqueue({
+        message: 'Unable to open quick actions',
+        type: 'react-error'
       }));
     },
     team: _$$e.AI_FOR_PRODUCTION,

@@ -2,7 +2,7 @@ import { setupLazyComponentFactory } from "../905/992467";
 import _require from "../5430/337035";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component, PureComponent, createElement } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { _ as _$$_ } from "../figma_app/496441";
 import { Gc } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";

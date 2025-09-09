@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription, atomStoreManager, atom, createValidatedLocalStorageAtom } from "../figma_app/27355";
 import { z } from "../905/239603";

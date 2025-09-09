@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { oW } from "../905/675859";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";

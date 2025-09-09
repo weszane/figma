@@ -1,13 +1,13 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { Y9, hE, nB, wi, jk, vo } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { bL } from "../905/38914";
 import { M, getFeatureFlags } from "../905/601108";
-import { Ay } from "../905/612521";
-import { F } from "../905/302958";
+import { customHistory } from "../905/612521";
+import { VisualBellActions } from "../905/302958";
 import { registerModal } from "../905/102752";
 import { section, sectionTitle, description, jsonInput, error, complementNote, currentState, flagList, flagItem, history, historyHeader, historyItem, historySubset, historyResult, culpritFlag } from "../905/912407";
 let m = "figma_ff_bisector_state";
@@ -41,7 +41,7 @@ let $$f0 = registerModal(function (e) {
       flags: n
     };
     localStorage.setItem(M, JSON.stringify(i));
-    Ay.reload("Feature flag bisector applying new flags");
+    customHistory.reload("Feature flag bisector applying new flags");
   }, []);
   let S = useCallback(() => {
     try {
@@ -52,7 +52,7 @@ let $$f0 = registerModal(function (e) {
           t[r] = n;
           continue;
         }
-        if ("object" == typeof n && n && "value" in n && "boolean" == typeof n.value) t[r] = n.value;else {
+        if ("object" == typeof n && n && "value" in n && "boolean" == typeof n.value) t[r] = n.value; else {
           E(`Value for "${r}" must be a boolean`);
           continue;
         }
@@ -105,7 +105,7 @@ let $$f0 = registerModal(function (e) {
       };
       b(e);
       T(e);
-      r(F.enqueue({
+      r(VisualBellActions.enqueue({
         message: `Culprit found: ${i[0]}`,
         type: "feature-flag-bisector-culprit-found"
       }));
@@ -120,7 +120,7 @@ let $$f0 = registerModal(function (e) {
       };
       b(e);
       T(e);
-      r(F.enqueue({
+      r(VisualBellActions.enqueue({
         message: "Complex interaction detected - multiple flags may be involved",
         type: "feature-flag-bisector-complex-interaction"
       }));
@@ -143,7 +143,7 @@ let $$f0 = registerModal(function (e) {
         };
         b(t);
         T(t);
-        r(F.enqueue({
+        r(VisualBellActions.enqueue({
           message: "Complex interaction detected - multiple flags may be involved",
           type: "feature-flag-bisector-complex-interaction"
         }));
@@ -170,7 +170,7 @@ let $$f0 = registerModal(function (e) {
     b(u);
     T(u);
     I(c);
-    r(F.enqueue({
+    r(VisualBellActions.enqueue({
       message: `Moving to next subset: ${d.length} flags, refreshing...`,
       type: "feature-flag-bisector-culprit-found"
     }));
@@ -181,11 +181,11 @@ let $$f0 = registerModal(function (e) {
     b(null);
     g("");
     E("");
-    r(F.enqueue({
+    r(VisualBellActions.enqueue({
       message: "Feature flag bisector reset successfully",
       type: "feature-flag-bisector-reset"
     }));
-    Ay.reload("Feature flag bisector applying new flags");
+    customHistory.reload("Feature flag bisector applying new flags");
   }, [r]);
   let x = useCallback(() => {
     if (!y) return;
@@ -194,13 +194,13 @@ let $$f0 = registerModal(function (e) {
       timestamp: new Date().toISOString()
     };
     navigator.clipboard.writeText(JSON.stringify(e, null, 2)).then(() => {
-      r(F.enqueue({
+      r(VisualBellActions.enqueue({
         message: "History copied to clipboard",
         type: "feature-flag-bisector-history-copied"
       }));
     }).catch(e => {
       console.error("Failed to copy history:", e);
-      r(F.enqueue({
+      r(VisualBellActions.enqueue({
         message: "Failed to copy history",
         type: "feature-flag-bisector-copy-failed",
         error: !0

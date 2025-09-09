@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { Et } from "../figma_app/397267";
 import { bL } from "../905/911410";
 import { vo, Y9, nB } from "../figma_app/272243";
@@ -32,7 +32,7 @@ import { _X, Pw, DQ } from "../figma_app/121751";
 import { MF, A5, HZ } from "../figma_app/391338";
 import { q5, tB } from "../figma_app/516028";
 import { FUserTypeClassification, FProductAccessType, FPlanAccessType, FTeamType } from "../figma_app/191312";
-import { dHY, ffQ } from "../figma_app/43951";
+import { CurrentUserInStudentPlanView, LibraryFileContext } from "../figma_app/43951";
 import { getPermissionsState, canGuestOrg, hasActiveEduTeam } from "../figma_app/642025";
 import { D6 } from "../figma_app/465071";
 import { x as _$$x } from "../figma_app/584132";
@@ -117,7 +117,7 @@ function H(e) {
     currentUserOrgId
   } = r;
   let d = !!(currentUserOrgId && canGuestOrg(currentUserOrgId, r));
-  let c = Rs(dHY, {}, {
+  let c = Rs(CurrentUserInStudentPlanView, {}, {
     enabled: _X(Pw.GROUP_7)
   });
   let p = !!(a && hasActiveEduTeam(r, a));
@@ -163,7 +163,7 @@ function e_({
     isPresetLibrary,
     isLoading
   } = function (e) {
-    let t = Rs(ffQ, {
+    let t = Rs(LibraryFileContext, {
       libraryKey: e
     });
     let s = fd(e);

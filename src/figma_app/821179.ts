@@ -11,7 +11,7 @@ import { v4 } from "../figma_app/655139";
 import { wJ } from "../figma_app/630951";
 import { eY } from "../figma_app/722362";
 import { _S } from "../figma_app/516028";
-import { J_J, yUR } from "../figma_app/43951";
+import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
 import { HX, ad, xQ } from "../figma_app/97042";
 import { mapPlatformToFramework } from "../905/359509";
 export function $$y1(e, t, r = new Set()) {
@@ -28,7 +28,7 @@ export function $$b0() {
   let b = v4();
   let T = mapPlatformToFramework(b.id);
   let [I] = useLocalStorageSync("code-connect-selected-language-storage-key", T);
-  let [S] = IT(J_J({
+  let [S] = IT(FileCanAccessFullCodeConnect({
     key: t ?? ""
   }));
   return useCallback(async e => {
@@ -48,7 +48,7 @@ export function $$b0() {
       } = HX(o.guid, r, y);
       let i = ad(o.guid, r, t, !1, y);
       if (!backingLibraryKey || !backingNodeId) continue;
-      let d = await subscribeAndAwaitData(yUR, {
+      let d = await subscribeAndAwaitData(CodeConnectForNodeLk, {
         libraryKey: backingLibraryKey,
         nodeId: backingNodeId,
         instances: i,

@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { uU, ng } from "../figma_app/205827";
 import { q } from "../905/236878";

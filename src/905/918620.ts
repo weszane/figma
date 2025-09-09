@@ -1,12 +1,12 @@
 import { useMemo, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { selectWithShallowEqual } from "../905/103090";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { L8 } from "../905/760074";
 import { Ad } from "../figma_app/2023";
-import { aNI, d0w, kQI, Hhe } from "../figma_app/43951";
+import { FileShareModalPermissionsV3, FileShareModalCurrentUserPermissions, TeamCanEdit, ResourceConnectionSharingGroupUsersByFile } from "../figma_app/43951";
 import { s5 } from "../figma_app/193867";
 import { Nf } from "../figma_app/357047";
 export function $$h0({
@@ -26,10 +26,10 @@ export function $$h0({
     repoId: null,
     currentOrgId: null
   };
-  let r = Rs(aNI, i, {
+  let r = Rs(FileShareModalPermissionsV3, i, {
     enabled: !!t
   });
-  let a = Rs(d0w, {
+  let a = Rs(FileShareModalCurrentUserPermissions, {
     fileKey: e
   });
   let s = useMemo(() => Ad(r, a), [r, a]);
@@ -42,7 +42,7 @@ export function $$g1(e) {
   let t = null;
   "string" == typeof e ? t = e : e && (t = e.team_id);
   let i = !!t;
-  let n = Rs(kQI, {
+  let n = Rs(TeamCanEdit, {
     id: t || ""
   }, {
     enabled: i
@@ -52,7 +52,7 @@ export function $$g1(e) {
 export function $$f3({
   fileKey: e
 }) {
-  let t = Rs(Hhe, {
+  let t = Rs(ResourceConnectionSharingGroupUsersByFile, {
     fileKey: e
   });
   return ("loaded" === t.status ? oA(t.data?.file?.resourceConnectionSharingGroupUsers) : void 0) ?? void 0;

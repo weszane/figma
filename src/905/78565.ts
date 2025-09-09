@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/251970";

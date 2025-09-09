@@ -5,7 +5,7 @@ import { E as _$$E } from "../905/632989";
 import { ComponentPropType, VariablesBindings, LayoutSizingMode, RelationType, LibraryUpdateStatus } from "../figma_app/763686";
 import { isValidSessionLocalID, sessionLocalIDToString, areSessionLocalIDsEqual, defaultSessionLocalIDString } from "../905/871411";
 import d from "classnames";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { R as _$$R } from "../905/307199";
 import { ph } from "../figma_app/709893";
 import { B as _$$B } from "../905/714743";
@@ -15,7 +15,7 @@ import { UK } from "../figma_app/740163";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Ib } from "../905/129884";
 import { UB } from "../figma_app/249941";
-import { fE, zX, wR, de, EY, oZ, FO, yC, b2, Rv } from "../905/869235";
+import { ReviewPhase, formatRenderName, createSinglePropertyRenderTreatment, createMultiPropertyRenderTreatment, createMultiNodeRenderTreatment, createDisplayNodeSinglePropertyRenderTreatment, ProjectDevelopmentPhases, visualAttributes2, visualAttributes, RenderStrategy } from "../905/869235";
 import { cF, c2 } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { Yx } from "../figma_app/930338";
@@ -25,7 +25,7 @@ import { s as _$$s } from "../905/583953";
 import { dI as _$$dI } from "../905/805904";
 import { TI } from "../905/713722";
 import { LN, wf } from "../figma_app/975811";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { R as _$$R2 } from "../figma_app/313269";
 import { p as _$$p } from "../905/241044";
@@ -84,7 +84,7 @@ function D(e) {
       if (renderDelta) {
         let t = o.find(t => JSON.stringify(t.id) === e);
         r = t;
-        chunkViewType !== fE.CONFLICT_REVIEW && (l = O(i, t));
+        chunkViewType !== ReviewPhase.CONFLICT_REVIEW && (l = O(i, t));
       } else if (!r?.type) return jsx("div", {
         className: k,
         children: "-"
@@ -152,7 +152,7 @@ function el(e, t, i, n) {
   return "new" === n && e in i ? i[e] : t[e];
 }
 function ed(e, t) {
-  return void 0 === e ? t : "boolean" == typeof e ? e ? getI18nString("collaboration.branching_node_treatments.value.true") : getI18nString("collaboration.branching_node_treatments.value.false") : "number" == typeof e ? e % 1 == 0 ? Math.trunc(e).toString() : e.toFixed(2).toString() : e.toString()[0] + zX(e.toString().slice(1));
+  return void 0 === e ? t : "boolean" == typeof e ? e ? getI18nString("collaboration.branching_node_treatments.value.true") : getI18nString("collaboration.branching_node_treatments.value.false") : "number" == typeof e ? e % 1 == 0 ? Math.trunc(e).toString() : e.toFixed(2).toString() : e.toString()[0] + formatRenderName(e.toString().slice(1));
 }
 function ec(e, t) {
   if (null != e) {
@@ -168,13 +168,13 @@ function ec(e, t) {
   return t;
 }
 function eu(e) {
-  return wR(e, (e, t, i) => ed(t, getI18nString("collaboration.branching_node_treatments.value.empty_dash")), (e, t, i) => ed(i, getI18nString("collaboration.branching_node_treatments.value.removed")));
+  return createSinglePropertyRenderTreatment(e, (e, t, i) => ed(t, getI18nString("collaboration.branching_node_treatments.value.empty_dash")), (e, t, i) => ed(i, getI18nString("collaboration.branching_node_treatments.value.removed")));
 }
 function ep(e) {
-  return wR(e, (e, t, i) => ec(t, getI18nString("collaboration.branching_node_treatments.value.empty_dash")), (e, t, i) => ec(i, getI18nString("collaboration.branching_node_treatments.value.removed")));
+  return createSinglePropertyRenderTreatment(e, (e, t, i) => ec(t, getI18nString("collaboration.branching_node_treatments.value.empty_dash")), (e, t, i) => ec(i, getI18nString("collaboration.branching_node_treatments.value.removed")));
 }
 function em(e, t) {
-  return wR(e, "", (i, n, r) => {
+  return createSinglePropertyRenderTreatment(e, "", (i, n, r) => {
     var a;
     a = t || e;
     return void 0 === n ? getI18nString("collaboration.branching_node_treatments.value.prefix_applied", {
@@ -187,7 +187,7 @@ function em(e, t) {
   });
 }
 function eh(e) {
-  return wR(e, (e, t, i, n, r, a) => {
+  return createSinglePropertyRenderTreatment(e, (e, t, i, n, r, a) => {
     if (!a || !a.has(e)) return getI18nString("collaboration.branching_node_treatments.value.empty_dash");
     let s = a.get(e);
     return s.previousChange?.name || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
@@ -198,7 +198,7 @@ function eh(e) {
   });
 }
 function eg(e, t) {
-  return wR(e, getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (i, n, r) => {
+  return createSinglePropertyRenderTreatment(e, getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (i, n, r) => {
     var a;
     a = t || e;
     return !isValidSessionLocalID(n) && isValidSessionLocalID(r) ? getI18nString("branching.chunk_details.guid_property_applied", {
@@ -211,7 +211,7 @@ function eg(e, t) {
   });
 }
 function ef(e, t) {
-  return wR(e, (e, i, r) => i ? jsx(t, {
+  return createSinglePropertyRenderTreatment(e, (e, i, r) => i ? jsx(t, {
     value: i
   }) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, i, r) => r ? jsx(t, {
     value: r
@@ -291,7 +291,7 @@ function eA(e) {
           className: "treatment_definition_reusables--valueCell--hdmLL",
           children: t || getI18nString("collaboration.branching_node_treatments.value.empty_dash")
         })]
-      }, _$$g()))
+      }, generateUUIDv4()))
     })
   });
 }
@@ -421,7 +421,7 @@ function ew(e, t, i) {
   }
   return n;
 }
-let eC = (e, t) => de(() => e, () => "lego-table", (i, r, a) => {
+let eC = (e, t) => createMultiPropertyRenderTreatment(() => e, () => "lego-table", (i, r, a) => {
   let s = r?.parameterConsumptionMap || a?.parameterConsumptionMap ? "parameterConsumptionMap" : "variableConsumptionMap";
   let o = new Set();
   let l = ew(r[s], 0, o);
@@ -454,7 +454,7 @@ function ek(e) {
     y: eT(e.y)
   };
 }
-let eR = (e, t) => wR(() => e, (e, t, i) => "lego-table", (e, i, r) => {
+let eR = (e, t) => createSinglePropertyRenderTreatment(() => e, (e, t, i) => "lego-table", (e, i, r) => {
   let a = _$$s.fromFigMatrix(i);
   let s = _$$s.fromFigMatrix(r);
   let o = [];
@@ -495,7 +495,7 @@ let eR = (e, t) => wR(() => e, (e, t, i) => "lego-table", (e, i, r) => {
     })
   });
 });
-let eN = (e, t) => wR(() => e, (e, t, i) => "lego-table", (i, r, a) => {
+let eN = (e, t) => createSinglePropertyRenderTreatment(() => e, (e, t, i) => "lego-table", (i, r, a) => {
   let s = r || [];
   let l = a || [];
   let d = Math.max(s.length, l.length);
@@ -529,7 +529,7 @@ let eN = (e, t) => wR(() => e, (e, t, i) => "lego-table", (i, r, a) => {
     children: c
   });
 });
-let eP = (e, t) => wR(() => e, (e, t, i) => "lego-table", (i, r, a) => {
+let eP = (e, t) => createSinglePropertyRenderTreatment(() => e, (e, t, i) => "lego-table", (i, r, a) => {
   let s = r || [];
   let o = a || [];
   let l = Math.max(s.length, o.length);
@@ -591,15 +591,15 @@ let eL = {
   STRETCH: () => getI18nString("collaboration.branching_node_treatments.value.layout_grid.stretch"),
   MAX: () => getI18nString("collaboration.branching_node_treatments.value.layout_grid.max")
 };
-let eF = de(() => getI18nString("collaboration.branching_node_treatments.property.type_details"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.type_details_edited"));
+let eF = createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.type_details"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.type_details_edited"));
 function eM(e) {
-  return wR(e, (e, t, i) => t ? wf.format(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? wf.format(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+  return createSinglePropertyRenderTreatment(e, (e, t, i) => t ? wf.format(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? wf.format(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 }
 function ej() {
-  return wR(() => getI18nString("collaboration.branching_node_treatments.property.order"), "", (e, t, i) => t?.sortPosition !== i?.sortPosition ? getI18nString("collaboration.branching_node_treatments.value.style_reordered") : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+  return createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.order"), "", (e, t, i) => t?.sortPosition !== i?.sortPosition ? getI18nString("collaboration.branching_node_treatments.value.style_reordered") : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 }
 function eU() {
-  return wR(() => getI18nString("collaboration.branching_node_treatments.property.order"), "", (e, t, i) => t !== i ? getI18nString("collaboration.branching_node_treatments.value.style_reordered") : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+  return createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.order"), "", (e, t, i) => t !== i ? getI18nString("collaboration.branching_node_treatments.value.style_reordered") : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 }
 let eB = {
   FILL: {
@@ -621,7 +621,7 @@ let eB = {
     description: ep(() => getI18nString("collaboration.branching_node_treatments.property.description")),
     sortPosition: eU(),
     sharedStyleMasterData: ej(),
-    fontName: wR(() => getI18nString("collaboration.branching_node_treatments.property.font"), (e, t, i) => t ? `${t.family} ${t.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash")),
+    fontName: createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.font"), (e, t, i) => t ? `${t.family} ${t.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash")),
     fontSize: eu(() => getI18nString("collaboration.branching_node_treatments.property.font_size")),
     lineHeight: eM(() => getI18nString("collaboration.branching_node_treatments.property.line_height")),
     letterSpacing: eM(() => getI18nString("collaboration.branching_node_treatments.property.letter_spacing")),
@@ -697,10 +697,10 @@ let eB = {
     })
   }
 };
-let eV = EY(() => getI18nString("collaboration.branching_node_treatments.property.prototype"), "", () => getI18nString("collaboration.branching_node_treatments.value.prototype_behavior_edited"));
-let eG = EY(() => getI18nString("collaboration.branching_node_treatments.property.plugin_data"), "", () => getI18nString("collaboration.branching_node_treatments.value.plugin_data_edited"));
-let ez = de(() => getI18nString("collaboration.branching_node_treatments.property.font_variations"), "", () => getI18nString("collaboration.branching_node_treatments.value.font_variations_edited"));
-let eH = de(() => getI18nString("collaboration.branching_node_treatments.property.widget_metadata"), "", () => getI18nString("collaboration.branching_node_treatments.value.widget_metadata_edited"));
+let eV = createMultiNodeRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.prototype"), "", () => getI18nString("collaboration.branching_node_treatments.value.prototype_behavior_edited"));
+let eG = createMultiNodeRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.plugin_data"), "", () => getI18nString("collaboration.branching_node_treatments.value.plugin_data_edited"));
+let ez = createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.font_variations"), "", () => getI18nString("collaboration.branching_node_treatments.value.font_variations_edited"));
+let eH = createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.widget_metadata"), "", () => getI18nString("collaboration.branching_node_treatments.value.widget_metadata_edited"));
 let eW = {
   [LayoutSizingMode.FILL_CONTAINER]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.fill"),
   [LayoutSizingMode.FIXED]: () => getI18nString("collaboration.branching_node_treatments.value.autolayout.fixed"),
@@ -923,14 +923,14 @@ let e$ = (e, t, i, n, r = !1) => {
 };
 let eZ = (e, t, i, r) => jsx(eA, {
   properties: Object.values(e$(e, t, i, r))
-}, _$$g());
+}, generateUUIDv4());
 function eX(e, t) {
   return e === t ? getI18nString("collaboration.branching_node_treatments.value.autolayout.none") : getI18nString("collaboration.branching_node_treatments.value.autolayout.px_amount", {
     value: e
   });
 }
-let eQ = de(() => getI18nString("collaboration.branching_node_treatments.property.auto_layout_details"), (e, t, i) => eZ(e, t, i, "old"), (e, t, i) => eZ(e, t, i, "new"));
-let eJ = e => de(() => getI18nString("collaboration.branching_node_treatments.property.auto_layout_details"), (e, t, i) => "lego-table", (t, i, r) => {
+let eQ = createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.auto_layout_details"), (e, t, i) => eZ(e, t, i, "old"), (e, t, i) => eZ(e, t, i, "new"));
+let eJ = e => createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.auto_layout_details"), (e, t, i) => "lego-table", (t, i, r) => {
   let a = e$(t, i, r, "old", !0);
   let s = e$(t, i, r, "new", !0);
   let o = new Set([...Object.keys(a), ...Object.keys(s)]);
@@ -946,11 +946,11 @@ let eJ = e => de(() => getI18nString("collaboration.branching_node_treatments.pr
     RenderTable: e
   }) : null;
 });
-let e0 = de(() => getI18nString("collaboration.branching_node_treatments.property.properties"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.prefix_applied", {
+let e0 = createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.properties"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.prefix_applied", {
   prefix: getI18nString("collaboration.branching_node_treatments.property.properties")
 }));
-let e1 = wR(() => getI18nString("collaboration.branching_node_treatments.property.hyperlink"), (e, t, i) => t?.url ? t.url : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.url ? i.url : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
-let e2 = wR(() => getI18nString("collaboration.branching_node_treatments.property.mention"), (e, t, i) => t?.id ? sessionLocalIDToString(t.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.id ? sessionLocalIDToString(i.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e1 = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.hyperlink"), (e, t, i) => t?.url ? t.url : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.url ? i.url : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e2 = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.mention"), (e, t, i) => t?.id ? sessionLocalIDToString(t.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.id ? sessionLocalIDToString(i.id) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 let e5 = (e, t, i) => {
   let r = el("borderTopWeight", e, t, i) ?? 0;
   let a = el("borderBottomWeight", e, t, i) ?? 0;
@@ -979,11 +979,11 @@ let e4 = (e, t, i) => {
     children: ed(r, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(a, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(s, getI18nString("collaboration.branching_node_treatments.value.empty_dash")) + ", " + ed(o, getI18nString("collaboration.branching_node_treatments.value.empty_dash"))
   });
 };
-let e3 = de(() => getI18nString("collaboration.branching_node_treatments.property.border_weights"), (e, t, i) => e5(t, i, "old"), (e, t, i) => e5(t, i, "new"));
-let e6 = de(() => getI18nString("collaboration.branching_node_treatments.property.radii"), (e, t, i) => e4(t, i, "old"), (e, t, i) => e4(t, i, "new"));
-let e7 = wR(() => getI18nString("collaboration.branching_node_treatments.property.line_height"), (e, t, i) => t?.units && t.value ? t.value.toString() + " " + t.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.units && i.value ? i.value.toString() + " " + i.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
-let e8 = wR(() => getI18nString("collaboration.branching_node_treatments.property.text_data"), (e, t, i) => t?.characters ? t.characters : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.characters ? i.characters : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
-let e9 = wR(() => getI18nString("collaboration.branching_node_treatments.property.letter_spacing"), (e, t, i) => t?.units && t.value ? t.value.toString() + " " + t.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.units && i.value ? i.value.toString() + " " + i.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e3 = createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.border_weights"), (e, t, i) => e5(t, i, "old"), (e, t, i) => e5(t, i, "new"));
+let e6 = createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.radii"), (e, t, i) => e4(t, i, "old"), (e, t, i) => e4(t, i, "new"));
+let e7 = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.line_height"), (e, t, i) => t?.units && t.value ? t.value.toString() + " " + t.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.units && i.value ? i.value.toString() + " " + i.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e8 = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.text_data"), (e, t, i) => t?.characters ? t.characters : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.characters ? i.characters : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let e9 = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.letter_spacing"), (e, t, i) => t?.units && t.value ? t.value.toString() + " " + t.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i?.units && i.value ? i.value.toString() + " " + i.units.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
 function te(e) {
   return (t, i, r) => {
     let a = el("textTruncation", i, r, e) ?? "DISABLED";
@@ -1001,8 +1001,8 @@ function te(e) {
     });
   };
 }
-let tt = de(() => getI18nString("collaboration.branching_node_treatments.property.text_truncation_details"), te("old"), te("new"));
-let ti = wR(() => getI18nString("collaboration.branching_node_treatments.property.size"), (e, t, i) => {
+let tt = createMultiPropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.text_truncation_details"), te("old"), te("new"));
+let ti = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.size"), (e, t, i) => {
   let n = ek(t);
   return n.x && n.y ? "x: " + n.x.toString() + "; y: " + n.y.toString() : getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 }, (e, t, i) => {
@@ -1017,9 +1017,9 @@ let tn = e => {
   });
   return t;
 };
-let tr = wR(() => getI18nString("collaboration.branching_node_treatments.property.dash_pattern"), (e, t, i) => t.length ? tn(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i.length ? tn(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
-let ta = wR(() => getI18nString("collaboration.branching_node_treatments.property.font_name"), (e, t, i) => t ? `${t.family} ${t.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
-let ts = wR(() => getI18nString("collaboration.branching_node_treatments.property.parent"), (e, t, i, n) => {
+let tr = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.dash_pattern"), (e, t, i) => t.length ? tn(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i.length ? tn(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let ta = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.font_name"), (e, t, i) => t ? `${t.family} ${t.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? `${i.family} ${i.style}` : getI18nString("collaboration.branching_node_treatments.value.empty_dash"));
+let ts = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.parent"), (e, t, i, n) => {
   let r = rY.getImmediateParentHierarchyNodeChange(n, RelationType.BASIS_PARENT);
   let a = r?.name;
   return areSessionLocalIDsEqual(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.empty_dash") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
@@ -1028,7 +1028,7 @@ let ts = wR(() => getI18nString("collaboration.branching_node_treatments.propert
   let a = r?.name;
   return areSessionLocalIDsEqual(t?.guid, i?.guid) ? getI18nString("collaboration.branching_node_treatments.value.node_reordered") : a || getI18nString("collaboration.branching_node_treatments.value.empty_dash");
 });
-let to = wR(() => getI18nString("collaboration.branching_node_treatments.property.annotations"), (e, t, i) => {
+let to = createSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.annotations"), (e, t, i) => {
   let n = Array.isArray(t) ? t.length : 0;
   return getI18nString("collaboration.branching_node_treatments.value.annotations", {
     count: n
@@ -1039,7 +1039,7 @@ let to = wR(() => getI18nString("collaboration.branching_node_treatments.propert
     count: n
   });
 });
-let tl = oZ(() => getI18nString("collaboration.branching_node_treatments.property.position_rotation_or_scale"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.position_rotation_or_scale_changed"));
+let tl = createDisplayNodeSinglePropertyRenderTreatment(() => getI18nString("collaboration.branching_node_treatments.property.position_rotation_or_scale"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), () => getI18nString("collaboration.branching_node_treatments.value.position_rotation_or_scale_changed"));
 function td(e) {
   switch (e) {
     case "BUILD":
@@ -1050,8 +1050,8 @@ function td(e) {
       return getI18nString("dev_handoff.status.none");
   }
 }
-let tc = wR(() => getI18nString("dev_handoff.status"), (e, t, i) => td(t?.status), (e, t, i) => td(i?.status));
-let tu = oZ(() => getI18nString("dev_handoff.status"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => {
+let tc = createSinglePropertyRenderTreatment(() => getI18nString("dev_handoff.status"), (e, t, i) => td(t?.status), (e, t, i) => td(i?.status));
+let tu = createDisplayNodeSinglePropertyRenderTreatment(() => getI18nString("dev_handoff.status"), () => getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => {
   let n = i?.entries?.length ?? 0;
   return getI18nString("dev_handoff.status_updates", {
     number: n.toString()
@@ -1126,7 +1126,7 @@ function tg(e, t) {
   var a;
   var s;
   if (th.has(e)) return th.get(e);
-  let o = e === FO.LEGO;
+  let o = e === ProjectDevelopmentPhases.LEGO;
   let l = o ? eJ(t) : eQ;
   let d = o ? eh : eg;
   let c = o ? eC(getI18nString("collaboration.branching_node_treatments.property.variables"), t) : null;
@@ -1140,7 +1140,7 @@ function tg(e, t) {
     description: ep(() => getI18nString("collaboration.branching_node_treatments.property.description")),
     symbolDescription: null,
     symbolLinks: em(() => getI18nString("collaboration.branching_node_treatments.property.symbol_links")),
-    type: (i = () => getI18nString("collaboration.branching_node_treatments.property.type"), r = e => tp[e](), wR(i, (e, t, i) => t ? r(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? r(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"))),
+    type: (i = () => getI18nString("collaboration.branching_node_treatments.property.type"), r = e => tp[e](), createSinglePropertyRenderTreatment(i, (e, t, i) => t ? r(t) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? r(i) : getI18nString("collaboration.branching_node_treatments.value.empty_dash"))),
     booleanOperation: em(() => getI18nString("collaboration.branching_node_treatments.property.boolean")),
     horizontalConstraint: eu(() => getI18nString("collaboration.branching_node_treatments.property.horizontal_constraints")),
     verticalConstraint: eu(() => getI18nString("collaboration.branching_node_treatments.property.vertical_constraints")),
@@ -1242,7 +1242,7 @@ function tg(e, t) {
     slideTemplateFileKey: null,
     slideNumber: null,
     slideNumberSeparator: null,
-    componentPropDefs: (a = () => getI18nString("collaboration.branching_node_treatments.property.properties"), wR(a, (e, t, i, r, a) => t ? jsx(L, {
+    componentPropDefs: (a = () => getI18nString("collaboration.branching_node_treatments.property.properties"), createSinglePropertyRenderTreatment(a, (e, t, i, r, a) => t ? jsx(L, {
       oldValue: t,
       newValue: i,
       renderDelta: !1,
@@ -1255,7 +1255,7 @@ function tg(e, t) {
     }) : "-")),
     componentPropRefs: e0,
     componentPropAssignments: null,
-    simplifyInstancePanels: (s = () => getI18nString("collaboration.branching_node_treatments.property.instance_simplification"), wR(s, getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? getI18nString("branching.chunk_details.added") : getI18nString("branching.chunk_details.removed"))),
+    simplifyInstancePanels: (s = () => getI18nString("collaboration.branching_node_treatments.property.instance_simplification"), createSinglePropertyRenderTreatment(s, getI18nString("collaboration.branching_node_treatments.value.empty_dash"), (e, t, i) => i ? getI18nString("branching.chunk_details.added") : getI18nString("branching.chunk_details.removed"))),
     propsAreBubbled: eu(() => getI18nString("collaboration.branching_node_treatments.property.props_are_bubbled")),
     size: ti,
     guid: null,
@@ -1561,22 +1561,22 @@ function tA(e) {
   return "REMOVED" === e.phase;
 }
 function ty(e, t) {
-  return e === FO.TEST_SUITE || (e === FO.LEGO ? yC[t] : b2[t]);
+  return e === ProjectDevelopmentPhases.TEST_SUITE || (e === ProjectDevelopmentPhases.LEGO ? visualAttributes2[t] : visualAttributes[t]);
 }
 function tb({
   basis: e,
   changes: t,
   treatmentsConfig: i,
   chunkViewType: n,
-  compareThumbnailSource: r = FO.BRANCHING,
+  compareThumbnailSource: r = ProjectDevelopmentPhases.BRANCHING,
   chunk: a,
   changedStyles: s,
   isRootNode: o
 }) {
   let d = {};
-  let c = r === FO.LEGO;
+  let c = r === ProjectDevelopmentPhases.LEGO;
   let u = c ? cF : c2;
-  let p = r === FO.TEST_SUITE;
+  let p = r === ProjectDevelopmentPhases.TEST_SUITE;
   if (c && tA(e)) {
     let e = "phase";
     d[e] = {
@@ -1596,7 +1596,7 @@ function tb({
   } else {
     Object.keys(t).forEach(m => {
       let h = i[m];
-      if (h && ty(r, m) && (p || !u(e[m], t[m])) && h.treatmentType === Rv.RENDER_SINGLE_PROPERTY) {
+      if (h && ty(r, m) && (p || !u(e[m], t[m])) && h.treatmentType === RenderStrategy.RENDER_SINGLE_PROPERTY) {
         let i = e.stackMode !== t.stackMode;
         let r = "VERTICAL" === e.stackMode && (!e.stackPrimarySizing || "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" === e.stackPrimarySizing) || "HORIZONTAL" === e.stackMode && "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" === e.stackCounterSizing;
         let l = "HORIZONTAL" === e.stackMode && (!e.stackPrimarySizing || "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" === e.stackPrimarySizing) || "VERTICAL" === e.stackMode && "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE" === e.stackCounterSizing;
@@ -1610,7 +1610,7 @@ function tb({
           newValue: () => u
         });
       }
-      if (h && h.treatmentType === Rv.RENDER_DISPLAY_NODE_SINGLE_PROPERTY && (c || sessionLocalIDToString(t.guid) === sessionLocalIDToString(a.displayNode.guid)) && (p || !u(e[m], t[m]))) {
+      if (h && h.treatmentType === RenderStrategy.RENDER_DISPLAY_NODE_SINGLE_PROPERTY && (c || sessionLocalIDToString(t.guid) === sessionLocalIDToString(a.displayNode.guid)) && (p || !u(e[m], t[m]))) {
         let i = h.renderOldValue(m, e[m], t[m]);
         let n = h.renderNewValue(m, e[m], t[m]);
         d[m] = {
@@ -1624,7 +1624,7 @@ function tb({
     let m = {};
     Object.keys(t).forEach(n => {
       let r = i[n];
-      r && r.treatmentType === Rv.RENDER_MULTI_PROPERTY && (m[r.identifier] = m[r.identifier] || [], m[r.identifier].push({
+      r && r.treatmentType === RenderStrategy.RENDER_MULTI_PROPERTY && (m[r.identifier] = m[r.identifier] || [], m[r.identifier].push({
         treatment: r,
         fieldName: n,
         oldValue: e[n],
@@ -1661,7 +1661,7 @@ function tv({
   isRootNode: s = !1,
   RenderTableDelegate: o
 }) {
-  return n !== FO.LEGO && (t_(t) || tA(e)) ? [] : tb({
+  return n !== ProjectDevelopmentPhases.LEGO && (t_(t) || tA(e)) ? [] : tb({
     basis: e,
     changes: t,
     treatmentsConfig: tg(n, o),
@@ -1799,7 +1799,7 @@ export function $$tS2(e, t, i, n) {
     let a = tv({
       basis: r.basis,
       changes: r.change,
-      chunkViewType: fE.MERGE_REVIEW,
+      chunkViewType: ReviewPhase.MERGE_REVIEW,
       compareThumbnailSource: t,
       chunk: i,
       changedStyles: r.changedStyles,
@@ -1967,7 +1967,7 @@ function tO(e) {
       chunk: r,
       isRootNode: !1
     }) : [];
-  }(chunk.displayNode.styleType, basis, change, fE.MERGE_REVIEW, chunk, compareThumbnailSource);
+  }(chunk.displayNode.styleType, basis, change, ReviewPhase.MERGE_REVIEW, chunk, compareThumbnailSource);
   if (0 === s.length) return null;
   let o = jsx("div", {
     children: s.map(e => jsx("div", {
@@ -1997,7 +1997,7 @@ function tO(e) {
           })
         })]
       })
-    }, _$$g()))
+    }, generateUUIDv4()))
   });
   return jsx(tP, {
     changeDetails: o
@@ -2017,7 +2017,7 @@ function tD(e) {
       } = n;
       let s = Object.keys(change).reduce((e, n) => {
         let s = t[n];
-        s && ty(i, n) && s.treatmentType === Rv.RENDER_MULTI_NODE && (e[s.identifier] = e[s.identifier] || [], e[s.identifier].push({
+        s && ty(i, n) && s.treatmentType === RenderStrategy.RENDER_MULTI_NODE && (e[s.identifier] = e[s.identifier] || [], e[s.identifier].push({
           fieldName: n,
           treatment: s,
           oldValue: basis[n],
@@ -2032,7 +2032,7 @@ function tD(e) {
       return e;
     }, {});
     return Object.values(t).map(e => {
-      if (e?.treatmentType === Rv.RENDER_MULTI_NODE) {
+      if (e?.treatmentType === RenderStrategy.RENDER_MULTI_NODE) {
         let t = n[e.identifier];
         if (t) {
           delete n[e.identifier];
@@ -2053,7 +2053,7 @@ function tD(e) {
     let t = tv({
       basis: e.basis,
       changes: e.change,
-      chunkViewType: fE.MERGE_REVIEW,
+      chunkViewType: ReviewPhase.MERGE_REVIEW,
       compareThumbnailSource,
       chunk,
       changedStyles: e.changedStyles

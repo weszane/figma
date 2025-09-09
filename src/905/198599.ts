@@ -9,7 +9,7 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { hW } from "../figma_app/594947";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { yt, m1, SW, T1 } from "../figma_app/545293";
 import { XE } from "../figma_app/976749";
@@ -79,7 +79,7 @@ export async function $$H1(e, t) {
   let P = atomStoreManager.get(cY("libraryKey"));
   let L = Jh(i.selectedView) ? "figmake" : "input-text" === e.type ? "actions_assets_tab" : "actions_visual_search";
   if (!n || null == d) return;
-  let U = _$$g();
+  let U = generateUUIDv4();
   let G = atomStoreManager.get(dd);
   atomStoreManager.set($$V3, () => ({
     currentSearch: {

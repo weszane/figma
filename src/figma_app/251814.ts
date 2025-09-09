@@ -1,15 +1,15 @@
 import { SceneGraphTsApi, AppStateTsApi, PanelType } from "../figma_app/763686";
-import { Tq } from "../figma_app/243058";
+import { CodeFileIdHandler } from "../figma_app/243058";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { xB, Jl, b5, wh, ZY, UM, qQ, Zr } from "../figma_app/114522";
 export function $$d2(e, t) {
   if (t && !e.isLayerLikeCodeNode) return null;
   let r = e.isCodeFile ? e.guid : e.exportedFromCodeFile?.guid;
   let s = getSingletonSceneGraph();
-  if (!r || !Tq.fromLocalNodeIdStr(r)) return null;
-  let o = Tq.fromLocalNodeIdStr(r);
+  if (!r || !CodeFileIdHandler.fromLocalNodeIdStr(r)) return null;
+  let o = CodeFileIdHandler.fromLocalNodeIdStr(r);
   if (!o) return null;
   let l = t ? SceneGraphTsApi?.getPrimaryCodeInstanceFromLayerLikeCodeFile(s.scene, o) : SceneGraphTsApi?.getPrimaryCodeInstanceFromCodeFile(s.scene, o);
   return l ? s.get(l) : null;
@@ -37,7 +37,7 @@ export function $$u1({
   let d = i.get(e.overrideKey);
   let c = SceneGraphTsApi?.findMainComponentLikeCodeInstance(i.scene, e.guid);
   let u = c ? i.get(c) : null;
-  e.isInstanceSublayer && d ? (atomStoreManager.set(qQ, e.guid), tJ([d.id]), Zr(d)) : u ? (atomStoreManager.set(qQ, e.guid), tJ([u.id]), Zr(u)) : t || Zr(e);
+  e.isInstanceSublayer && d ? (atomStoreManager.set(qQ, e.guid), replaceSelection([d.id]), Zr(d)) : u ? (atomStoreManager.set(qQ, e.guid), replaceSelection([u.id]), Zr(u)) : t || Zr(e);
   AppStateTsApi?.codeSelection().showMainComponent.set(!0);
 }
 export const Pu = $$c0;

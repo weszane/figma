@@ -7,11 +7,11 @@ import { Rs } from "../figma_app/288654";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
-import { s0Z } from "../figma_app/43951";
+import { BlockConnectedFileMove } from "../figma_app/43951";
 import { Yw } from "../905/615608";
 export function $$p0(e) {
   let t = hS(e);
-  let r = Rs(s0Z, {
+  let r = Rs(BlockConnectedFileMove, {
     fileKey: e.fileKey
   });
   let p = r?.data?.file?.project?.name;

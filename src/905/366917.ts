@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { sD, FU } from "../905/937198";
 import { tS } from "../figma_app/516028";
 import { X } from "../905/880040";
@@ -27,7 +27,7 @@ export function $$p0({
     fileKey: t
   });
   useEffect(() => {
-    t !== g() && l.clear();
+    t !== generateUUIDv4() && l.clear();
   }, [t]);
   return useMemo(() => {
     if (null == e) return d;

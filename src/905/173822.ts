@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { registerModal } from "../905/102752";

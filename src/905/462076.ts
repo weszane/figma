@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import a from "../vendor/128080";
 import { trackEventAnalytics } from "../905/449184";
 import { gB } from "../905/723791";

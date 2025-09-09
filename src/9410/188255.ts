@@ -7,7 +7,7 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { q8 } from "../figma_app/459490";
 import { QI } from "../9410/60600";
 import { xo } from "../figma_app/473493";
-import { useSelector, useDispatch, useStore } from "../vendor/514228";
+import { useSelector, useDispatch, useStore } from "react-redux";
 import { b as _$$b } from "../905/985254";
 import { tf as _$$tf, fu, j6 } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
@@ -26,7 +26,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { FQ } from "../9410/571209";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { ni as _$$ni, _X, Z0 } from "../figma_app/62612";
 import { Ib } from "../905/129884";
 import { v as _$$v } from "../figma_app/759243";
@@ -50,8 +50,8 @@ import { FEditorType } from "../figma_app/53721";
 import { A as _$$A3 } from "../905/920142";
 import { mp } from "../figma_app/864723";
 import { f as _$$f } from "../905/940356";
-import { F as _$$F } from "../905/302958";
-import { Rw, zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellType, VisualBellIcon } from "../905/576487";
 import { Cu } from "../figma_app/314264";
 import { d as _$$d } from "../figma_app/444297";
 import { $ as _$$$, N as _$$N3 } from "../figma_app/191390";
@@ -94,7 +94,7 @@ import { i as _$$i } from "../905/559280";
 import { ZH } from "../figma_app/957169";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay as _$$Ay2 } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h2 } from "../905/207101";
 import { A as _$$A5 } from "../1250/487166";
 import { Ay as _$$Ay3 } from "../1250/615231";
@@ -104,7 +104,7 @@ import { En } from "../905/116101";
 import { wg, NZ, pQ, zo, J1, PD } from "../figma_app/101956";
 import { LR } from "../figma_app/120210";
 import { w as _$$w2 } from "../0c62c2fd/912149";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { t as _$$t3 } from "../905/192333";
 import { j as _$$j } from "../figma_app/59886";
 import { zP, Uj, SS, ZQ } from "../figma_app/330088";
@@ -165,7 +165,7 @@ import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { lg, m0, Em } from "../figma_app/976749";
 import { FFileType } from "../figma_app/191312";
-import { KMT, Tej, TNJ } from "../figma_app/43951";
+import { GoogleClassroomIntegrationView, UserForRcs, TeamCanAdmin } from "../figma_app/43951";
 import { w as _$$w5, tX as _$$tX2, l5, aG as _$$aG } from "../figma_app/728657";
 import { b as _$$b4 } from "../905/799737";
 import { i as _$$i2 } from "../905/718764";
@@ -480,8 +480,8 @@ function q({
         disabledTooltip: a,
         "data-testid": "summarize-button",
         onClick: () => {
-          wr();
-          Dh(lastSummarizableSelection);
+          clearSelection();
+          addToSelection(lastSummarizableSelection);
           summarizeCanvasSelection();
           t();
           u && h(!0);
@@ -660,9 +660,9 @@ function ex() {
     let [s, o] = useState(!1);
     let [l, d] = useState(!1);
     let c = useCallback(() => {
-      e(_$$F.enqueue({
-        messageComponentKey: Rw.SLIDE_CONVERSION_VISUAL_BELL,
-        type: Rw.SLIDE_CONVERSION_VISUAL_BELL,
+      e(VisualBellActions.enqueue({
+        messageComponentKey: VisualBellType.SLIDE_CONVERSION_VISUAL_BELL,
+        type: VisualBellType.SLIDE_CONVERSION_VISUAL_BELL,
         timeoutOverride: 1e4,
         onDismiss: () => {
           o(!0);
@@ -673,15 +673,15 @@ function ex() {
             trackingContext: "Slides conversion visual bell entrypoint",
             name: "slides_conversion_visual_bell_entrypoint_dismissed"
           });
-          e(_$$F.enqueue({
+          e(VisualBellActions.enqueue({
             message: getI18nString("slides.visual_bell.we_wont_ask_you_again")
           }));
         }
       }));
     }, [e]);
     useEffect(() => {
-      a.size || e(_$$F.dequeue({
-        matchType: Rw.SLIDE_CONVERSION_VISUAL_BELL
+      a.size || e(VisualBellActions.dequeue({
+        matchType: VisualBellType.SLIDE_CONVERSION_VISUAL_BELL
       }));
     }, [e, a]);
     useEffect(() => {
@@ -1078,7 +1078,7 @@ function tC() {
       onClick: () => {
         trackEventAnalytics("desktop_modal_download_prompt_cta_clicked_v2");
         p();
-        _$$Ay2.redirect(`/download/desktop/${BrowserInfo.mac ? "mac" : "win"}`, "_blank");
+        customHistory.redirect(`/download/desktop/${BrowserInfo.mac ? "mac" : "win"}`, "_blank");
       },
       ctaTrackingDescriptor: _$$c.DESKTOP_APP_DOWNLOAD
     },
@@ -1114,7 +1114,7 @@ function tR(e) {
   return jsx(Fragment, {});
 }
 function tD() {
-  let e = TA();
+  let e = getUserId();
   let t = q5();
   let i = useSelector(e => e.mirror.appModel.currentPage);
   let a = Fk((e, t) => zC(e, t), i);
@@ -1588,7 +1588,7 @@ let iE = "dismissed_local_component_asset_panel_pointer";
 let iT = _$$r2(iE);
 function iw() {
   let e = useDispatch();
-  let t = TA();
+  let t = getUserId();
   let i = useAtomWithSubscription(wg);
   let a = useAtomWithSubscription(iT);
   let o = useAtomWithSubscription(NZ);
@@ -1676,7 +1676,7 @@ function ik() {
     });
     trackEventAnalytics("post_comment_mobile_app_download_prompt_email_me_cta_clicked");
     complete();
-    e(_$$F.enqueue({
+    e(VisualBellActions.enqueue({
       message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
     }));
   };
@@ -1937,7 +1937,7 @@ function ra({
   let i = lg();
   let r = q5();
   let a = useAtomWithSubscription(_$$mp);
-  let o = Rs(KMT, {
+  let o = Rs(GoogleClassroomIntegrationView, {
     currentOrgId: r?.parentOrgId || null
   });
   return useMemo(() => resourceUtils.all([a, o]).transform(r => {
@@ -4331,7 +4331,7 @@ let nn = _$$n2(({
         },
         onSuccess: () => {
           e?.();
-          i(_$$F.dequeue({
+          i(VisualBellActions.dequeue({
             matchType: nt
           }));
           YQ({
@@ -4346,9 +4346,9 @@ let nn = _$$n2(({
         triggeredFrom: "browse-templates-make-something",
         selectTemplateAfterInsertion: !1
       });
-      i(_$$F.enqueue({
+      i(VisualBellActions.enqueue({
         message: getI18nString("figjam_onboarding_make_something.visual_bell.loading_template"),
-        icon: zX.SPINNER,
+        icon: VisualBellIcon.SPINNER,
         type: nt
       }));
     }, [i, e, insertTemplate, t, f, g]),
@@ -5012,7 +5012,7 @@ function nB() {
         ("loaded" === e.status || e.errors) && (a.current = e, n(a.current), r.current = void 0);
       });
     }), r.current) : Promise.resolve(a.current);
-  }(Tej, {});
+  }(UserForRcs, {});
   let c = useAtomWithSubscription(yV);
   let u = Td();
   let m = !nM({
@@ -7122,7 +7122,7 @@ function sa({
 }) {
   let i = useDispatch();
   let a = useAtomWithSubscription(M$);
-  let o = Rs(TNJ, {
+  let o = Rs(TeamCanAdmin, {
     id: e
   });
   let l = _$$e({

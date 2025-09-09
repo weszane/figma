@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Agb } from "../figma_app/822011";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ViewType, SchemaJoinStatus } from "../figma_app/763686";
@@ -13,7 +13,7 @@ import { up, SA, Kz, Ns } from "../905/760074";
 import { Wy, eE } from "../figma_app/952446";
 import { q5 } from "../figma_app/516028";
 import { FProductAccessType, FFileType } from "../figma_app/191312";
-import { QrR, op7 } from "../figma_app/43951";
+import { BranchingPermissionsView, RepoFiles } from "../figma_app/43951";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { FEditorType } from "../figma_app/53721";
 import { TY } from "../figma_app/701001";
@@ -317,7 +317,7 @@ export function $$C0() {
   let m = t?.teamId ?? null;
   let h = t?.sourceFile ?? t;
   let _ = !!(h && h.key);
-  let y = Rs(QrR, {
+  let y = Rs(BranchingPermissionsView, {
     fileKey: h?.key
   }, {
     enabled: _
@@ -333,7 +333,7 @@ export function $$C0() {
     reason: "Not enabled"
   }), [s, i, y, _]);
   let x = t?.sourceFile?.fileRepoId ?? "";
-  let S = Rs(op7, {
+  let S = Rs(RepoFiles, {
     repoId: x
   }, {
     enabled: !!x
@@ -392,7 +392,7 @@ function k(e, t) {
 export function $$R1(e) {
   let t = _$$d();
   let i = e?.key;
-  let r = Rs(QrR, {
+  let r = Rs(BranchingPermissionsView, {
     fileKey: i
   }, {
     enabled: !!i

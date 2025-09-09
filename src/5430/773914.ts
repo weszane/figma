@@ -1,11 +1,11 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hasDesktopAPI } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { reportError } from "../905/11";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { fP, mc, i3 } from "../905/691059";
 import { K as _$$K } from "../905/443068";
 import { hS } from "../905/437088";
@@ -184,10 +184,10 @@ let Z = registerModal(function (e) {
   useEffect(() => {
     if (!shouldUpdateUrl) return;
     let e = () => {
-      let e = Ay.location.pathname + Ay.location.search;
+      let e = customHistory.location.pathname + customHistory.location.search;
       open && e !== Y && (m.current = !0, s(hideModalHandler()), bb(J?.id || "", q || ""));
     };
-    if (open && Y) return Ay.listen(() => {
+    if (open && Y) return customHistory.listen(() => {
       e();
     });
   }, [open, Y, s, J?.id, q, shouldUpdateUrl]);
@@ -288,7 +288,7 @@ export function $$ea2(e, t) {
     });
     return;
   }
-  Ay.redirect(r.href, "_blank");
+  customHistory.redirect(r.href, "_blank");
 }
 export function $$el1(e, t, r) {
   let s = hasDesktopAPI();
@@ -304,7 +304,7 @@ export function $$el1(e, t, r) {
       resourceUrl: t.rdp_url,
       shouldUpdateUrl: o
     }
-  }));else {
+  })); else {
     var a;
     var l;
     a = t.id;
@@ -398,7 +398,7 @@ export function $$ed0(e, t, r, n) {
 function eu(e) {
   let t;
   let r = o_(e);
-  if (r) t = e.libraryKey;else {
+  if (r) t = e.libraryKey; else {
     let r = B2(e);
     t = r?.library_key;
   }
@@ -409,7 +409,7 @@ function eu(e) {
       resourceId: e.id
     });
     let s = _$$H2(FFileType.SLIDES, t);
-    Ay.redirect(s, "_blank");
+    customHistory.redirect(s, "_blank");
   } else {
     let t = r ? void 0 : e.id;
     let s = r ? e.id : void 0;
@@ -461,7 +461,7 @@ function em(e, t) {
 function e_(e) {
   let t;
   let r = o_(e);
-  if (r) t = e.libraryKey;else {
+  if (r) t = e.libraryKey; else {
     let r = B2(e);
     t = r?.library_key;
   }
@@ -472,7 +472,7 @@ function e_(e) {
       resourceId: e.id
     });
     let s = _$$H2(FFileType.COOPER, t);
-    Ay.redirect(s, "_blank");
+    customHistory.redirect(s, "_blank");
   } else {
     let t = r ? void 0 : e.id;
     let s = r ? e.id : void 0;

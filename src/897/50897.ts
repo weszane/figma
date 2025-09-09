@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useId, PureComponent } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { bL, c$ } from "../905/867927";
@@ -11,7 +11,7 @@ import { o as _$$o } from "../905/89370";
 import { W as _$$W } from "../905/592530";
 import { N as _$$N } from "../905/7587";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _r, el } from "../figma_app/451499";
@@ -20,7 +20,7 @@ import { EU } from "../figma_app/740163";
 import { isValidValue, normalizeValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { Um as _$$Um } from "../905/848862";
 import { _P } from "../figma_app/2590";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { W4 } from "../figma_app/178475";
 import { R as _$$R } from "../897/631032";
@@ -267,7 +267,7 @@ export function $$q2({
         transitionDuration: r
       });
       BG.trigger("restartSpringAnimation");
-      n === zk.YES && d(_P({
+      n === yesNoTrackingEnum.YES && d(_P({
         name: "Prototype Spring Animations Set Custom Value",
         params: {
           editedValue: "DURATION",
@@ -314,7 +314,7 @@ export function $$q2({
         $(t) ? BG.trigger("restartSpringAnimation") : $2.trigger("activateBezierAnimation");
       }, 0);
     },
-    recordingKey: Pt(l, "easingDropdown")
+    recordingKey: generateRecordingKey(l, "easingDropdown")
   });
   let er = jsxs(Fragment, {
     children: [Q && jsx(W4, {
@@ -337,7 +337,7 @@ export function $$q2({
           })
         });
       },
-      recordingKey: Pt(l, "durationInput"),
+      recordingKey: generateRecordingKey(l, "durationInput"),
       scrubMultiplier: .004166666666666667,
       tooltipForScreenReadersOnly: !0,
       value: e.duration,
@@ -351,7 +351,7 @@ export function $$q2({
         dispatch: d,
         inputClassName: Gl,
         onValueChange: P,
-        recordingKey: Pt(l, "springDurationInput"),
+        recordingKey: generateRecordingKey(l, "springDurationInput"),
         scrubMultiplier: .004166666666666667,
         tooltipForScreenReadersOnly: !0,
         value: xX(w_(e)),
@@ -408,7 +408,7 @@ export function $$q2({
         }(n)
       });
     },
-    recordingKey: Pt(l, "behaviorDropdown")
+    recordingKey: generateRecordingKey(l, "behaviorDropdown")
   });
   let ep = k ? jsx($$eo3, {
     property: e.direction ? e.direction : null,
@@ -431,7 +431,7 @@ export function $$q2({
         })
       });
     },
-    recordingKey: Pt(l, "directionControl")
+    recordingKey: generateRecordingKey(l, "directionControl")
   }) : null;
   let eu = k ? jsx(Fragment, {
     children: jsx(_$$A2, {
@@ -471,7 +471,7 @@ export function $$q2({
     },
     checked: !0 === e.shouldSmartAnimate,
     mixed: isInvalidValue(e.shouldSmartAnimate),
-    recordingKey: Pt(l, "transition-should-smart-animate"),
+    recordingKey: generateRecordingKey(l, "transition-should-smart-animate"),
     label: jsx(Label, {
       children: renderI18nText("proto.animation_panel.animate_matching_layers")
     })
@@ -488,7 +488,7 @@ export function $$q2({
         easingFunction: e.easingFunction,
         duration: e.duration,
         updateSelectionProperties: _,
-        recordingKey: Pt(l, "easingEditor"),
+        recordingKey: generateRecordingKey(l, "easingEditor"),
         isNarrowPanel: c
       })]
     }), J && jsxs("div", {
@@ -565,11 +565,11 @@ class en extends PureComponent {
       inputClassName: hF,
       onChange: this.props.onChange,
       property: this.props.property,
-      recordingKey: Pt(this.props, "select"),
+      recordingKey: generateRecordingKey(this.props, "select"),
       children: e.map((e, t) => "SELECT_DIVIDER" === e ? jsx(sK, {}, t) : jsx(J, {
         value: e,
         disabled: !W(this.props.interactionType, this.props.navigationType, e),
-        recordingKey: Pt(this.props, e)
+        recordingKey: generateRecordingKey(this.props, e)
       }, e))
     });
   }
@@ -592,11 +592,11 @@ export class $$ea1 extends PureComponent {
       inputClassName: hF,
       onChange: this.props.onChange,
       property: this.props.property,
-      recordingKey: Pt(this.props, "select"),
+      recordingKey: generateRecordingKey(this.props, "select"),
       children: G.map((e, t) => "SELECT_DIVIDER" === e ? jsx(sK, {}, t) : jsx(er, {
         value: e,
         disabled: !1,
-        recordingKey: Pt(this.props, e)
+        recordingKey: generateRecordingKey(this.props, e)
       }, t))
     });
   }

@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Children, cloneElement } from "react";
 import { Uz } from "../905/63728";
-import { uA, o6, cZ } from "../figma_app/806412";
+import { RecordingComponent, RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { Ib } from "../905/129884";
-export class $$l0 extends uA {
+export class $$l0 extends RecordingComponent {
   render() {
     return jsx("div", {
       className: `${this.props.isHorizontal ? "radio--horizontalRadioGroup--YtVoa" : "radio--radioGroup--AnkmY"} ${this.props.className || ""}`,
@@ -17,13 +17,13 @@ export class $$l0 extends uA {
   }
 }
 $$l0.displayName = "RadioGroup";
-export class $$d1 extends o6 {
+export class $$d1 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.documentKeyDown = e => {
       this.props._onChange && (e.keyCode === Uz.SPACE || e.keyCode === Uz.ENTER) && this.props._onChange(this.props.value);
     };
-    this.onClick = cZ(this, "click", () => {
+    this.onClick = handleMouseEvent(this, "click", () => {
       this.props._onChange && !this.props.disabled && this.props._onChange(this.props.value);
     });
   }

@@ -6,8 +6,8 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Mx } from "../905/165290";
-import { Gl } from "../905/612521";
+import { getFontMetadataList } from "../905/165290";
+import { getPreviousSelectedView } from "../905/612521";
 import { w5 } from "../figma_app/749805";
 import { isLocalDevOnCluster } from "../figma_app/169182";
 import { delay } from "../905/236856";
@@ -16,7 +16,7 @@ import { serializeQuery } from "../905/634134";
 import { setSentryTag } from "../905/11";
 import { logError, logInfo, logWarning } from "../905/714362";
 import { SH } from "../figma_app/141320";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { yp } from "../905/138461";
 import { DI } from "../figma_app/687776";
 import { s as _$$s } from "../905/573154";
@@ -41,10 +41,10 @@ import { ZG, GT, mu, yn, $3 } from "../figma_app/840917";
 import { fullscreenValue } from "../figma_app/455680";
 import { UE } from "../905/628874";
 import { ds as _$$ds } from "../905/87821";
-import { NT } from "../figma_app/741237";
+import { setPropertiesPanelTab } from "../figma_app/741237";
 import { M4 } from "../905/713695";
 import { w2, i_ } from "../905/187165";
-import { FEditorType, mapEditorTypeToYF, mapEditorTypeToFileType, isWhiteboardOrDesignOrIllustration, doesEditorTypeMatchFileType, mapFileTypeToEditorType } from "../figma_app/53721";
+import { FEditorType, mapEditorTypeToWorkspaceType, mapEditorTypeToFileType, isWhiteboardOrDesignOrIllustration, doesEditorTypeMatchFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/84999";
 import { j as _$$j } from "../905/694231";
 import { l5 } from "../figma_app/728657";
@@ -117,7 +117,7 @@ export function $$ev9(e) {
   return $$eb11(e, getI18nString("user_facing_error.new_document"));
 }
 export function $$eI10(e, t, i) {
-  let n = JSON.stringify(Gl() || {});
+  let n = JSON.stringify(getPreviousSelectedView() || {});
   let r = "fullscreen" === t.selectedView.view ? t.selectedView.trackingInfo?.source : "";
   ds("File Opened", e.key, t, {
     randomID: _$$ds(),
@@ -221,7 +221,7 @@ export async function $$ew5(e, t, i, n) {
     forceViewOnly: z4.getIsExtension()
   }));
   await fullscreenValue.loadAndStartFullscreenIfNecessary();
-  Fullscreen.setEditorType(mapEditorTypeToYF(i));
+  Fullscreen.setEditorType(mapEditorTypeToWorkspaceType(i));
   Fullscreen.setEditorTheme(r.theme.visibleTheme || "");
   let c = (await (n ? (async () => {
     let e = new b(() => _$$m.getFileMetadata({
@@ -240,7 +240,7 @@ export async function $$ew5(e, t, i, n) {
   _$$b(mapEditorTypeToFileType(i));
   setLastUsedEditorType(i);
   let m = {
-    sharedFontsList: Mx(c.shared_fonts),
+    sharedFontsList: getFontMetadataList(c.shared_fonts),
     localizedToUnlocalized: [],
     renames: {
       family: {},
@@ -335,13 +335,13 @@ export async function $$eC4(e, t, i) {
   }));
   await fullscreenValue.loadAndStartFullscreenIfNecessary();
   ColorStateTsApi && ky.updateColorsInFullscreen(ColorStateTsApi.colorTokensState());
-  NT(DesignWorkspace.DESIGN);
+  setPropertiesPanelTab(DesignWorkspace.DESIGN);
   getFeatureFlags().ce_new_missing_fonts_logging && e8();
   let n = e.getState().theme.visibleTheme;
   fullscreenValue.updateAppModel({
     themePreference: n
   });
-  Fullscreen.openEmptyFile(mapEditorTypeToYF(t));
+  Fullscreen.openEmptyFile(mapEditorTypeToWorkspaceType(t));
 }
 export function $$eT2(e) {
   let t = {};
@@ -566,7 +566,7 @@ export function $$eN8(e, t, i) {
   n.fileCreationStarted(t);
   let o = e.getState().user;
   if (o) {
-    let e = t.localFileKey ?? createLocalFileKey(_$$g);
+    let e = t.localFileKey ?? createLocalFileKey(generateUUIDv4);
     a = mu(e, o.id);
   } else logInfo("Autosave", "Not creating manager for logged out user");
   ek(e, t, s, i, a).catch(e => ({
@@ -631,7 +631,7 @@ export function $$eN8(e, t, i) {
 }
 export function $$eP0(e, t) {
   if (!desktopAPIInstance) return;
-  t.localFileKey || (t.localFileKey = createLocalFileKey(_$$g));
+  t.localFileKey || (t.localFileKey = createLocalFileKey(generateUUIDv4));
   let i = {
     ...$$eT2(t)
   };

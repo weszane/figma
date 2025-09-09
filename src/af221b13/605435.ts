@@ -1,6 +1,6 @@
 import { H as _$$H } from "../af221b13/713104";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { S as _$$S } from "../5430/465757";
 import { lQ } from "../905/934246";
@@ -12,13 +12,13 @@ import { C as _$$C } from "../figma_app/198698";
 import { om, x1, MA } from "../figma_app/465413";
 import { A as _$$A } from "../5724/965092";
 import { Vm } from "../figma_app/427318";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Pg, lT, AC } from "../figma_app/777551";
 import { MK, cN, Wd, RB } from "../figma_app/599979";
 import { U as _$$U, xQ, I0, bD, m3, mr, Uz } from "../figma_app/45218";
 import { useRef, useEffect } from "react";
 import { U as _$$U2 } from "../905/103637";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { g as _$$g } from "../1556/359896";
 import { Jm } from "../figma_app/387599";
 import { U0 } from "../figma_app/471982";
@@ -75,7 +75,7 @@ function h(e) {
   });
 }
 function y(e) {
-  if (!iZ()) return jsx(Fragment, {});
+  if (!selectCurrentUser()) return jsx(Fragment, {});
   let t = "hub_file" === Vm(e.resource) ? getI18nString("community.seller.only_you_can_see_your_file") : "plugin" === Vm(e.resource) ? getI18nString("community.seller.only_you_can_see_your_plugin") : "widget" === Vm(e.resource) ? getI18nString("community.seller.only_you_can_see_your_widget") : jsx(Fragment, {});
   let i = {
     id: om.communityResourceInReviewBanner,
@@ -93,7 +93,7 @@ function y(e) {
   });
 }
 function f(e) {
-  if (!iZ()) return jsx(Fragment, {});
+  if (!selectCurrentUser()) return jsx(Fragment, {});
   let t = "hub_file" === Vm(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.hub_file") : "plugin" === Vm(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.plugin") : "widget" === Vm(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.widget") : jsx(Fragment, {});
   let i = {
     id: om.communityResourceInReviewBanner,
@@ -140,7 +140,7 @@ function V(e) {
   let h = Jm();
   let y = U0(resource);
   let f = _$$U(e.resource) ? e0.COMMUNITY_HUB_FILE : xQ(resource) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
-  let v = iZ();
+  let v = selectCurrentUser();
   let w = _$$U(e.resource);
   let E = I0(e.resource);
   let G = x2(void 0, resource, void 0, k2.RESOURCE_PAGE);
@@ -200,7 +200,7 @@ function V(e) {
           searchSessionId: h,
           has_carousel_media_nudge: y
         });
-        Ay.redirect(`/file/${fileKey}`, "_blank");
+        customHistory.redirect(`/file/${fileKey}`, "_blank");
       }
     }), !Pg(resource)) {
       K.push({

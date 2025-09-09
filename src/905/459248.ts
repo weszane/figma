@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { Checkbox } from "../905/274480";
@@ -23,7 +23,7 @@ import C from "../vendor/523035";
 import { parsePxNumber } from "../figma_app/783094";
 import { U as _$$U } from "../figma_app/901889";
 import { h as _$$h } from "../905/207101";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { bG } from "../905/149328";
@@ -32,8 +32,8 @@ import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { oB, j7 } from "../905/929976";
 import { sx as _$$sx, XE } from "../figma_app/91703";
 import { fu } from "../figma_app/831799";
@@ -67,9 +67,9 @@ import { Bq } from "../figma_app/482142";
 import { b as _$$b } from "../905/985254";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
-import { TNJ } from "../figma_app/43951";
+import { TeamCanAdmin } from "../figma_app/43951";
 import { gg, Rk } from "../905/981217";
 import { UpsellModalType } from "../905/165519";
 import { A as _$$A3 } from "../6828/673039";
@@ -272,7 +272,7 @@ export let $$eZ0 = registerModal(function (e) {
     let [v, I] = useAtomValueAndSetter(QR);
     useEffect(() => () => {
       I(!1);
-      o(_$$F.dequeue({
+      o(VisualBellActions.dequeue({
         matchType: "missing-fonts-load-all-pages"
       }));
     }, [I, o]);
@@ -281,11 +281,11 @@ export let $$eZ0 = registerModal(function (e) {
       getFeatureFlags().desktop_font_reload_on_focus_ux && x(null);
     }, [t]);
     useEffect(() => {
-      g !== PageSelectionType.ALL_PAGES || E || (I(!0), o(_$$F.enqueue({
+      g !== PageSelectionType.ALL_PAGES || E || (I(!0), o(VisualBellActions.enqueue({
         type: "missing-fonts-load-all-pages",
         message: getI18nString("fullscreen.toolbar.missing_fonts_modal.finding_missing_fonts"),
         error: !1,
-        icon: zX.IMAGE_BACKED_SPINNER,
+        icon: VisualBellIcon.IMAGE_BACKED_SPINNER,
         delay: 1500
       })), _$$q(PluginModalType.MISSING_FONTS).then(() => {
         new Promise(e => {
@@ -294,7 +294,7 @@ export let $$eZ0 = registerModal(function (e) {
           let e = FontHelpers.getMissingFontInfoFromAllPages();
           e && e.missingFonts ? x(e) : reportError(_$$e.TEXT_AND_VECTOR, Error("Could not get missing fonts from all pages"));
           I(!1);
-          o(_$$F.dequeue({
+          o(VisualBellActions.dequeue({
             matchType: "missing-fonts-load-all-pages"
           }));
         });
@@ -461,7 +461,7 @@ export let $$eZ0 = registerModal(function (e) {
     let e = _$$f("seen_missing_fonts_org_upsell_banner");
     let t = sZ() ?? null;
     let i = q5()?.team ?? null;
-    let n = iZ();
+    let n = selectCurrentUser();
     let r = cJ();
     let a = Rk({
       enabled: !r,
@@ -469,7 +469,7 @@ export let $$eZ0 = registerModal(function (e) {
       hasCurrentTeam: !!i,
       hasCurrentOrg: !!t
     });
-    let s = Rs(TNJ, {
+    let s = Rs(TeamCanAdmin, {
       id: i?.id
     }, {
       enabled: !!i
@@ -611,7 +611,7 @@ export let $$eZ0 = registerModal(function (e) {
             onClick: onClose,
             children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.close")
           }), e1 && jsxs($n, {
-            recordingKey: Pt(h, "replaceFonts"),
+            recordingKey: generateRecordingKey(h, "replaceFonts"),
             disabled: !e1 || isReplacing || isLoadingMissingFonts,
             onClick: onApply,
             children: [jsx("span", {
@@ -668,7 +668,7 @@ function eX({
         "data-tooltip": N
       },
       "aria-label": N,
-      recordingKey: Pt(t, "selectMissingFontObjects"),
+      recordingKey: generateRecordingKey(t, "selectMissingFontObjects"),
       children: jsx(_$$A, {})
     })
   }), [N, x?.family, m.missingFonts, b, t]);
@@ -727,7 +727,7 @@ function eX({
                 onChange: t => {
                   _(e.index, t, !0);
                 },
-                recordingKey: Pt(t, `${e.family}-${e.index}`),
+                recordingKey: generateRecordingKey(t, `${e.family}-${e.index}`),
                 showPlaceholder: !1,
                 variant: "button",
                 versionsForStyles: A
@@ -745,7 +745,7 @@ function eX({
                 onChange: t => {
                   y(e.index, t);
                 },
-                recordingKey: Pt(t, `${e.family}-${e.style}`),
+                recordingKey: generateRecordingKey(t, `${e.family}-${e.style}`),
                 showMissingIcon: !1,
                 versionsForStyles: A
               })
@@ -761,7 +761,7 @@ function eX({
                   "data-tooltip": a
                 },
                 "aria-label": a,
-                recordingKey: Pt(t, "selectMissingFontObjects"),
+                recordingKey: generateRecordingKey(t, "selectMissingFontObjects"),
                 children: jsx(_$$A, {})
               })
             })]
@@ -807,7 +807,7 @@ function eX({
               onChange: e => {
                 _(x.index, e, !1, () => l(!0));
               },
-              recordingKey: Pt(t, `${x.family}-${x.index}`),
+              recordingKey: generateRecordingKey(t, `${x.family}-${x.index}`),
               showPlaceholder: !1,
               variant: "button",
               versionsForStyles: A

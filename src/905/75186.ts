@@ -5,7 +5,7 @@ import { setupAutofocusHandler } from "../905/128376";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -28,11 +28,11 @@ let $$A0 = registerModal(function (e) {
       return;
     }
     !function (e, t) {
-      let i = new URLSearchParams(Ay.location.search);
+      let i = new URLSearchParams(customHistory.location.search);
       i.set(A7, e);
       t && i.set(EL, t);
-      Ay.replace(`${Ay.location.pathname}?${i.toString()}${Ay.location.hash}`, Ay.location.state);
-      Ay.reload("Reload with new commit SHA");
+      customHistory.replace(`${customHistory.location.pathname}?${i.toString()}${customHistory.location.hash}`, customHistory.location.state);
+      customHistory.reload("Reload with new commit SHA");
     }(e, E(g));
   };
   let S = e => {

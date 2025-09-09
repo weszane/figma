@@ -1,12 +1,12 @@
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { useSprigWithSampling } from "../905/99656";
-import { F } from "../905/302958";
-import { iZ } from "../905/372672";
+import { VisualBellActions } from "../905/302958";
+import { selectCurrentUser } from "../905/372672";
 import { Wh } from "../figma_app/615482";
 import { z } from "../905/931953";
 import { b } from "../905/875374";
@@ -47,7 +47,7 @@ export function $$I2({
 }) {
   let t = Xr($$b3);
   let r = useDispatch();
-  let a = iZ()?.id;
+  let a = selectCurrentUser()?.id;
   let s = Oc();
   return {
     onPublishChanges: useCallback(async n => {
@@ -132,7 +132,7 @@ export function $$v0({
   }, [l]);
   let _ = useCallback(() => {
     Object.values(V7).forEach(e => {
-      u(F.dequeue({
+      u(VisualBellActions.dequeue({
         matchType: e
       }));
     });

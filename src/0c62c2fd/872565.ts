@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useEffect, PureComponent, createRef, useMemo, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/805353";
@@ -37,7 +37,7 @@ import { Wd } from "../figma_app/35887";
 import { e6 as _$$e } from "../905/557142";
 import { VA, gj, CI, jd } from "../figma_app/528509";
 import { z as _$$z2 } from "../905/875422";
-import { Y9I, G0Y, bel } from "../figma_app/43951";
+import { MoveFileCurrentProject, AccessibleFoldersV2, TeamFileCountsByTeamId } from "../figma_app/43951";
 import { K as _$$K } from "../figma_app/193867";
 import { n$, Cz, aW, sK } from "../figma_app/598018";
 import { b as _$$b, A as _$$A } from "../figma_app/965813";
@@ -519,12 +519,12 @@ export function $$e83(e) {
   let u = useSelector(e => e.selectedView);
   let m = $$e57(e);
   let f = _$$R();
-  let h = Rs(Y9I, {
+  let h = Rs(MoveFileCurrentProject, {
     projectId: m
   }, {
     enabled: !!m
   });
-  let x = Rs(G0Y, {
+  let x = Rs(AccessibleFoldersV2, {
     orgId: t
   });
   "errors" === x.status && (console.error("Loading AccessibleFolders from LiveGraph: "), console.error(x.errors));
@@ -1310,7 +1310,7 @@ export function $$e95(e) {
       onMouseOut: a
     }], [e, r, a]);
   })();
-  let l = Rs(bel, {
+  let l = Rs(TeamFileCountsByTeamId, {
     teamId: team?.id ?? ""
   }, {
     enabled: !!team?.id

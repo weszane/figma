@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
-import { PK } from "../figma_app/243058";
+import { useSelector } from "react-redux";
+import { StyleIdHandler } from "../figma_app/243058";
 import { n3 } from "../905/859698";
 import { StylesBindings } from "../figma_app/763686";
 import { isValidSessionLocalID, sessionLocalIDToString, parseSessionLocalID } from "../905/871411";
@@ -64,7 +64,7 @@ export function $$I2(e, t, r) {
       let o = sessionLocalIDToString(s.guid);
       let d = Object.values(e.local.styles).find(e => e.node_id === o);
       if (d) return d.is_soft_deleted ? null : d;
-      let u = PK.fromKiwi(s);
+      let u = StyleIdHandler.fromKiwi(s);
       let p = u ? t.getStyleNode(u) : null;
       if (!p || p.isLocalStyle && p.isSoftDeleted) return null;
       let _ = b({

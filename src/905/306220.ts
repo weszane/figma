@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { ColorSpaceEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { o6, Am, aH, M5, C0 } from "../figma_app/806412";
+import { RecordingPureComponent, handlePointerEvent, SKIP_RECORDING, handleWheelEvent, handleKeyboardEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { n as _$$n } from "../905/734251";
 import { F } from "../905/989956";
@@ -16,7 +16,7 @@ function g(e) {
     uiVersion: "ui3"
   });
 }
-class f extends o6 {
+class f extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.dragging = !1;
@@ -89,7 +89,7 @@ class f extends o6 {
       i -= this.props.handlePadding ? 0 : this.props.handle / 2;
       return new Point(t, i);
     };
-    this.onPointerDown = Am(this, "pointerdown", e => {
+    this.onPointerDown = handlePointerEvent(this, "pointerdown", e => {
       e.stopPropagation();
       this.dragging = !0;
       e.currentTarget.setPointerCapture(e.pointerId);
@@ -112,8 +112,8 @@ class f extends o6 {
         };
       }
     });
-    this.onPointerUp = Am(this, "pointerup", e => {
-      if (!this.dragging) return aH;
+    this.onPointerUp = handlePointerEvent(this, "pointerup", e => {
+      if (!this.dragging) return SKIP_RECORDING;
       this.dragging = !1;
       this.props.mouseCallback(this.mouseToValue(new Point(e.clientX, e.clientY)), !0);
     }, {
@@ -137,7 +137,7 @@ class f extends o6 {
     this.onPointerMove = e => {
       this.dragging && (e.stopPropagation(), e.preventDefault(), this.props.mouseCallback(this.mouseToValue(new Point(e.clientX, e.clientY)), !1));
     };
-    this.onWheel = M5(this, "wheel", e => {
+    this.onWheel = handleWheelEvent(this, "wheel", e => {
       e.stopPropagation();
       let t = e.ctrlKey;
       this.props.wheelCallback?.(new Point(e.deltaX, e.deltaY), e.altKey, t);
@@ -155,7 +155,7 @@ class f extends o6 {
         ctrlKey: e.ctrlKey
       })
     });
-    this.onKeyDown = C0(this, "keydown", e => {
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       e.stopPropagation();
       this.props.keyDownCallback(e);
     });

@@ -4,7 +4,7 @@ import { _ } from "../905/410717";
 import { j } from "../905/519202";
 import o from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { FO } from "../905/869235";
+import { ProjectDevelopmentPhases } from "../905/869235";
 import { xp } from "../905/247367";
 import { Yz, _5 } from "../figma_app/449837";
 var l = o;
@@ -42,9 +42,9 @@ export function $$A4(e) {
     className: "comparison_container--sideBySideContainer--7MUFx",
     children: jsx("div", {
       className: l()("comparison_container--previewImagesFullHeight--FTmoM", {
-        "comparison_container--previewImagesLego--s-Xt3": compareThumbnailSource === FO.LEGO || compareThumbnailSource === FO.COMPARE_CHANGES,
-        "comparison_container--previewImagesLinter--fmdqD": compareThumbnailSource === FO.LINTER,
-        "comparison_container--previewImages--x5Lj5": !compareThumbnailSource || compareThumbnailSource === FO.TEST_SUITE || compareThumbnailSource === FO.BRANCHING
+        "comparison_container--previewImagesLego--s-Xt3": compareThumbnailSource === ProjectDevelopmentPhases.LEGO || compareThumbnailSource === ProjectDevelopmentPhases.COMPARE_CHANGES,
+        "comparison_container--previewImagesLinter--fmdqD": compareThumbnailSource === ProjectDevelopmentPhases.LINTER,
+        "comparison_container--previewImages--x5Lj5": !compareThumbnailSource || compareThumbnailSource === ProjectDevelopmentPhases.TEST_SUITE || compareThumbnailSource === ProjectDevelopmentPhases.BRANCHING
       }),
       children: jsx(Yz, {
         zoomPercentageOptions,

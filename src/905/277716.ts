@@ -7,7 +7,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { wu, EM } from "../905/729783";
 import { f as _$$f } from "../905/896141";
 import { C } from "../905/213457";
-import { throttle } from "../905/915765";
+import { microtaskThrottle } from "../905/915765";
 import { SD, Ap, qR, Bu } from "../figma_app/243213";
 function h(e) {
   let t = SD(e);
@@ -23,7 +23,7 @@ function g(e) {
   } : null;
 }
 function f(e) {
-  return throttle(e);
+  return microtaskThrottle(e);
 }
 function _(e) {
   return !e.hasAttribute("data-non-interactive") && !e.hasAttribute("disabled");

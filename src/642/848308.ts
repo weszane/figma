@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";

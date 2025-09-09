@@ -79,16 +79,16 @@ function updateImportFiles(lines, renameMap, candidateFiles) {
     try {
       content = fs.readFileSync(file, 'utf-8')
       // const res = transformSync(content, {
-      //   presets: ['@babel/preset-typescript'],
       //   sourceType: 'module',
       //   filename: (file),
       //   plugins: [
+      //     '@babel/plugin-transform-typescript',
       //     [transformImport, { lines, renameMap }],
       //   ],
       //   compact: false,
       // })
       // if (res && res.code) {
-      //   // fs.writeFileSync(file, res.code, 'utf-8')
+      //   fs.writeFileSync(file, res.code, 'utf-8')
       //   console.log(`🔄 更新导入: ${getRelativePath(file)}`)
       //   updatedCount++
       // }
@@ -107,35 +107,60 @@ function updateImportFiles(lines, renameMap, candidateFiles) {
     let modified = false
 
     console.log(file, '检查中...')
-    traverse(ast, {
-      ImportDeclaration(p) {
-        const sourceValue = p.node.source.value
-        // 快速路径匹配
-        if (!lines.some(line => line.includes(sourceValue))) {
-          return
-        }
+    try {
+      traverse(ast, {
+        ImportDeclaration(p) {
+          const sourceValue = p.node.source.value
+          // 快速路径匹配
+          if (!lines.some(line => line.includes(sourceValue))) {
+            return
+          }
 
-        p.node.specifiers.forEach((spec) => {
-          if (t.isImportSpecifier(spec)) {
-            const importedName = spec.imported.name
-            for (const [oldName, newName] of renameMap) {
-              if (importedName === oldName) {
-                spec.imported = t.identifier(newName)
+          p.node.specifiers.forEach((spec) => {
+            if (t.isImportSpecifier(spec)) {
+              const importedName = spec.imported.name
+              for (const [oldName, newName] of renameMap) {
+                if (importedName === oldName) {
+                  spec.imported = t.identifier(newName)
 
-                if (t.isIdentifier(spec.local) && spec.local.name !== spec.imported.name) {
-                  p.scope.rename(spec.local.name, newName)
-                }
-                if (spec.local.name === oldName) {
-                  p.scope.rename(oldName, newName)
-                }
-                modified = true
+                  if (t.isIdentifier(spec.local) && spec.local.name !== spec.imported.name) {
+                    p.scope.rename(spec.local.name, newName)
+                    // const binding = p.scope.getBinding(spec.local.name)
+                    // spec.imported.name = newName
+                    // spec.local.name = newName
+                    // if (binding) {
+                    //   binding.referencePaths.forEach((refPath) => {
+                    //     if (t.isIdentifier(refPath.node)) {
+                    //       refPath.node.name = newName
+                    //     }
+                    //   })
+                    // }
+                  }
+                  if (spec.local.name === oldName) {
+                    // const binding = p.scope.getBinding(spec.local.name)
+                    // spec.local.name = newName
+                    // if (binding) {
+                    //   binding.referencePaths.forEach((refPath) => {
+                    //     if (t.isIdentifier(refPath.node)) {
+                    //       refPath.node.name = newName
+                    //     }
+                    //   })
+                    // }
+                    p.scope.rename(oldName, newName)
+                  }
+                  modified = true
                 // fileSet.add(file)
+                }
               }
             }
-          }
-        })
-      },
-    })
+          })
+        },
+      })
+    }
+    catch (error) {
+      console.error('处理文件失败:', file, error)
+      continue
+    }
 
     console.log('modified', modified, file)
     if (modified) {

@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K } from "../905/443068";
 import { $n } from "../905/521428";
@@ -12,7 +12,7 @@ import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { aK } from "../figma_app/401069";
 import { tS } from "../figma_app/516028";
-import { nlH } from "../figma_app/43951";
+import { FileCanExport } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { S } from "../figma_app/787550";
 export function $$b7(e, t) {
@@ -211,7 +211,7 @@ export function $$w1({
   variant: i = "text"
 }) {
   let a = tS() ?? "";
-  let s = Rs(nlH, {
+  let s = Rs(FileCanExport, {
     key: a
   });
   return s.data?.file && "error" !== s.data.file.status && s.data?.file?.data?.hasPermission ? "VIDEO" === e.type && e.video ? jsx(N, {

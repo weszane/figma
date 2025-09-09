@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { MIXED_MARKER } from "../905/216495";
 import { kl } from "../905/275640";
 import { a6 } from "../905/129660";

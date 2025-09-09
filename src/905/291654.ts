@@ -6,7 +6,7 @@ import { FEditorType } from "../figma_app/53721";
 import { If } from "../905/714538";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -18,7 +18,7 @@ import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { pi } from "../figma_app/314264";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { c as _$$c } from "../905/73189";
 var o = s;
@@ -158,7 +158,7 @@ let T = {
 };
 let k = registerModal(function (e) {
   let t = useDispatch();
-  let i = iZ();
+  let i = selectCurrentUser();
   let n = q5();
   let {
     eulaConfig,
@@ -174,7 +174,7 @@ let k = registerModal(function (e) {
   let C = T[eulaConfig.eula];
   if (!C) throw Error(`Unsupported font eula: ${eulaConfig.eula}`);
   !function (e, t, i) {
-    let n = iZ();
+    let n = selectCurrentUser();
     let r = q5();
     _$$h(() => {
       analyticsEventManager.trackDefinedEvent("preset_libraries.apple_font_eula_displayed", {

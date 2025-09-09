@@ -1,9 +1,9 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { sha1HexFromBytes } from "../905/125019";
 import { VideoCppBindings } from "../figma_app/763686";
-import { k as _$$k } from "../905/651849";
+import { logger } from "../905/651849";
 import { ZC } from "../figma_app/39751";
 import { Point } from "../905/736624";
 import { aB, uz } from "../905/284552";
@@ -131,7 +131,7 @@ export function $$$$A0(e) {
       await U(srcWithHLS, !0, n);
     } catch (t) {
       if (!(t instanceof aB)) throw t;
-      _$$k.warn("Reverting to fallback media source");
+      logger.warn("Reverting to fallback media source");
       await B(n);
       let e = await j(downloadHash);
       try {

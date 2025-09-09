@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { UE } from "../figma_app/753501";

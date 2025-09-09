@@ -16,7 +16,7 @@ import { _ as _$$_ } from "../figma_app/496441";
 import { B as _$$B } from "../1250/314515";
 import { T as _$$T } from "../7021/675372";
 import { wo } from "../figma_app/753501";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { CH, g4 } from "../figma_app/770359";
 import { K } from "../905/443068";
 import { X } from "../905/736922";
@@ -24,7 +24,7 @@ import { lW } from "../figma_app/11182";
 import { DP } from "../905/640017";
 import { k as _$$k } from "../905/443820";
 import { g as _$$g } from "../905/125190";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { k as _$$k2 } from "../905/93362";
 import { sy } from "../905/37362";
 import { Cs } from "../figma_app/59509";
@@ -182,7 +182,7 @@ function U({
     expiration: 7776e3,
     scopes: [sy.FILE_CODE_CONNECT_WRITE]
   }).then(e => e.data.meta).catch(() => {
-    m(_$$F.enqueue({
+    m(VisualBellActions.enqueue({
       message: "Failed to generate token, please try again later",
       error: !0
     }));

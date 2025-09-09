@@ -4,7 +4,7 @@ import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import l from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -227,7 +227,7 @@ function j({
       })]
     }), jsx($n, {
       onClick: e,
-      recordingKey: Pt("assetsEmptyState", "exploreLibraries"),
+      recordingKey: generateRecordingKey("assetsEmptyState", "exploreLibraries"),
       ref: setKeyboardNavigationElement,
       children: renderI18nText("design_systems.assets_panel.empty_state_cta_ui3")
     })]

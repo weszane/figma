@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { o as _$$o } from "../905/821217";
 import { LayoutTabType } from "../figma_app/763686";
 import { dI } from "../905/805904";
@@ -26,7 +26,7 @@ import { lQ } from "../905/934246";
 import { E as _$$E2 } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import M from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { So } from "../figma_app/580959";
 import { oE, $$in } from "../figma_app/887835";
 let a = memo(function (e) {
@@ -65,7 +65,7 @@ function O({
     }),
     children: [jsx(D, {
       onClick: p,
-      recordingKey: Pt(o, "chit"),
+      recordingKey: generateRecordingKey(o, "chit"),
       "aria-label": getI18nString("slides.properties_panel.color_picker.open.aria_label"),
       children: a
     }), jsx(So, {
@@ -90,7 +90,7 @@ function O({
       visible: !0
     }), jsx(D, {
       onClick: p,
-      recordingKey: Pt(o, "chevron"),
+      recordingKey: generateRecordingKey(o, "chevron"),
       children: jsx(_$$O, {})
     })]
   });

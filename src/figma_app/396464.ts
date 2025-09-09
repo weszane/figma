@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { bV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 export function $$c7(e, t) {
   return "SLIDE_ROW" === e.type || t && e.isStateGroup;
 }
@@ -36,7 +36,7 @@ export function $$p3() {
 }
 export function $$_0() {
   let e = $$p3();
-  return k9(() => e, [e]);
+  return useMemoStable(() => e, [e]);
 }
 export function $$h4() {
   let e = useSelector(e => e.mirror.sceneGraphSelection);
@@ -53,7 +53,7 @@ export function $$h4() {
 }
 export function $$m6() {
   let e = useSelector(e => e.mirror.sceneGraphSelection);
-  return k9(() => {
+  return useMemoStable(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {
       let r = getSingletonSceneGraph().get(e);
@@ -65,7 +65,7 @@ export function $$m6() {
 }
 export function $$g5() {
   let e = useSelector(e => e.mirror.sceneGraphSelection);
-  return k9(() => {
+  return useMemoStable(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {
       let r = getSingletonSceneGraph().get(e);

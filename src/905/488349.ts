@@ -78,7 +78,7 @@ const stringArrayOptionalPropType = PropTypes.arrayOf(PropTypes.string).isOption
  * @property {string} label
  * @property {string[]} includedLanguages
  */
-const codegenActionPropType = PropTypes.exact({
+export const codegenActionPropType = PropTypes.exact({
   itemType: 'action',
   propertyName: PropTypes.string,
   label: PropTypes.string.isOptional,
@@ -93,7 +93,7 @@ const codegenActionPropType = PropTypes.exact({
  * @property {boolean} default
  * @property {string[]} includedLanguages
  */
-const codegenUnitPropType = PropTypes.exact({
+export const codegenUnitPropType = PropTypes.exact({
   itemType: 'unit',
   scaledUnit: PropTypes.string,
   defaultScaleFactor: PropTypes.float.isOptional,
@@ -107,7 +107,7 @@ const codegenUnitPropType = PropTypes.exact({
  * @property {string} label
  * @property {boolean} isDefault
  */
-const codegenSelectOptionPropType = PropTypes.exact({
+export const codegenSelectOptionPropType = PropTypes.exact({
   value: PropTypes.string,
   label: PropTypes.string,
   isDefault: PropTypes.bool.isOptional,
@@ -121,7 +121,7 @@ const codegenSelectOptionPropType = PropTypes.exact({
  * @property {string[]} includedLanguages
  * @property {CodegenSelectOption[]} options
  */
-const codegenSelectPropType = PropTypes.exact({
+export const codegenSelectPropType = PropTypes.exact({
   itemType: 'select',
   propertyName: PropTypes.string,
   label: PropTypes.string.isOptional,
@@ -132,7 +132,7 @@ const codegenSelectPropType = PropTypes.exact({
 /**
  * @typedef {CodegenAction | CodegenUnit | CodegenSelect} CodegenPreference
  */
-const codegenPreferencesPropType = PropTypes.arrayOf(
+export const codegenPreferencesPropType = PropTypes.arrayOf(
   PropTypes.oneOf([
     codegenActionPropType,
     codegenUnitPropType,
@@ -145,13 +145,13 @@ const codegenPreferencesPropType = PropTypes.arrayOf(
  * @property {string} label
  * @property {string} value
  */
-const codegenLanguagePropType = PropTypes.exact({
+export const codegenLanguagePropType = PropTypes.exact({
   label: PropTypes.string,
   value: PropTypes.string,
 }) // l
 
-const capabilitiesPropType = PropTypes.arrayOf(PropTypes.string).isOptional // $$c3
-const editorTypePropType = PropTypes.arrayOf(PropTypes.string).isOptional // $$d4
+export const capabilitiesPropType = PropTypes.arrayOf(PropTypes.string).isOptional // $$c3
+export const editorTypePropType = PropTypes.arrayOf(PropTypes.string).isOptional // $$d4
 
 /**
  * @typedef {object} NetworkAccess
@@ -159,7 +159,7 @@ const editorTypePropType = PropTypes.arrayOf(PropTypes.string).isOptional // $$d
  * @property {string} reasoning
  * @property {string[]} devAllowedDomains
  */
-const networkAccessPropType = PropTypes.exact({
+export const networkAccessPropType = PropTypes.exact({
   allowedDomains: PropTypes.arrayOf(PropTypes.string),
   reasoning: PropTypes.string.isOptional,
   devAllowedDomains: PropTypes.arrayOf(PropTypes.string).isOptional,
@@ -180,7 +180,7 @@ const networkAccessPropType = PropTypes.exact({
  * @property {NetworkAccess} networkAccess
  * @property {string} documentAccess
  */
-const pluginBasePropType = {
+export const pluginBasePropType = {
   id: PropTypes.string.isOptional,
   name: PropTypes.string,
   api: PropTypes.string,
@@ -211,7 +211,7 @@ const pluginBasePropType = {
  * @property {string[]} relatedLinkDomains
  * @property {string[]} devResourceDomains
  */
-const pluginManifestPropType = PropTypes.exact({
+export const pluginManifestPropType = PropTypes.exact({
   ...pluginBasePropType,
   menu: menuPropType.isOptional,
   relaunchButtons: PropTypes.arrayOf(
@@ -237,7 +237,7 @@ const pluginManifestPropType = PropTypes.exact({
  * @property {string} widgetApi
  * @property {string[]} editorType
  */
-const widgetManifestPropType = PropTypes.exact({
+export const widgetManifestPropType = PropTypes.exact({
   ...pluginBasePropType,
   containsWidget: true,
   widgetApi: PropTypes.string.isOptional,
@@ -249,7 +249,7 @@ const widgetManifestPropType = PropTypes.exact({
  * @property {string} type
  * @property {string} data
  */
-const dragItemPropType = PropTypes.exact({
+export const dragItemPropType = PropTypes.exact({
   type: PropTypes.string,
   data: PropTypes.string,
 }) // h
@@ -262,7 +262,7 @@ const dragItemPropType = PropTypes.exact({
  * @property {any[]} files
  * @property {any} dropMetadata
  */
-const dragEventPropType = PropTypes.exact({
+export const dragEventPropType = PropTypes.exact({
   clientX: PropTypes.float,
   clientY: PropTypes.float,
   items: PropTypes.arrayOf(dragItemPropType).isOptional,

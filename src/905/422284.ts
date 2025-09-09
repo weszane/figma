@@ -6,7 +6,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { parseAndNormalizeQuery } from "../905/634134";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { b as _$$b } from "../905/898378";
 import { Nh } from "../905/560959";
@@ -122,7 +122,7 @@ let $$H = createOptimistThunk((e, t, {
             nodeId: i,
             movedToFile: n
           }
-        })) : e.dispatch(_$$F.enqueue({
+        })) : e.dispatch(VisualBellActions.enqueue({
           message: n ? getI18nString("visual_bell.main_component_moved", {
             movedToFile: n
           }) : getI18nString("visual_bell.main_component_deleted")

@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import a from "classnames";
 import { VZ } from "../figma_app/930338";
 import { Kz } from "../figma_app/637027";
 import { S } from "../figma_app/420927";
 import { s as _$$s } from "../cssbuilder/589278";
-import { A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { c1 } from "../figma_app/357047";
 import { TT, oo } from "../905/114390";
 var s = a;
@@ -50,7 +50,7 @@ export function $$g0({
 }) {
   let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let i = VZ(e);
-  let a = A(i);
+  let a = formatI18nMessage(i);
   let g = c1(t, i);
   let f = TT.includes(e) ? oo[e]?.getDescription() : null;
   return jsxs("div", {

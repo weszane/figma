@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, PureComponent, useContext, useCallback, forwardRef, useState, useMemo, useRef, useEffect, useId, createRef } from "react";
-import { connect, useDispatch, useSelector } from "../vendor/514228";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { t as _$$t } from "../905/150656";
 import { d as _$$d } from "../905/976845";
@@ -14,13 +14,13 @@ import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { localStorageRef } from "../905/657224";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { selectWithShallowEqual } from "../905/103090";
 import { BrowserInfo } from "../figma_app/778880";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { t as _$$t2 } from "../905/331623";
@@ -68,14 +68,14 @@ import { L as _$$L } from "../905/954291";
 import { U as _$$U } from "../905/169553";
 import { r as _$$r } from "../905/11924";
 import eN from "classnames";
-import { mz } from "../905/165290";
+import { OPTICAL_SIZE_AXIS_TAG } from "../905/165290";
 import { Point } from "../905/736624";
 import { P as _$$P2 } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { Ku, sT } from "../figma_app/740163";
 import { pw, zj, tN as _$$tN, wR, kl } from "../905/275640";
 import { f4 } from "../figma_app/722362";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { e as _$$e2 } from "../905/579635";
 import { k as _$$k4 } from "../905/336528";
 import { $6 } from "../905/213527";
@@ -491,7 +491,7 @@ function tA(e) {
         legend: jsx(_$$q, {
           children: renderI18nText("type_settings.decoration.decoration_style")
         }),
-        recordingKey: Pt(e, "textDecorationStyle"),
+        recordingKey: generateRecordingKey(e, "textDecorationStyle"),
         children: [jsx(c$, {
           icon: jsx(_$$W, {}),
           value: "SOLID",
@@ -532,7 +532,7 @@ let ty = e => {
   fullscreenValue.updateSelectionProperties({
     textDecorationSkipInk: t
   }, {
-    shouldCommit: zk.YES
+    shouldCommit: yesNoTrackingEnum.YES
   });
 };
 function tb(e) {
@@ -547,7 +547,7 @@ function tb(e) {
         children: getI18nString("type_settings.decoration.skip_ink")
       }),
       readonly: e.disabled,
-      recordingKey: Pt(e, "textDecorationSkipInk"),
+      recordingKey: generateRecordingKey(e, "textDecorationSkipInk"),
       children: [jsx(c$, {
         value: "FALSE",
         "aria-label": getI18nString("type_settings.decoration.skip_ink_off"),
@@ -589,7 +589,7 @@ let tE = function (e) {
       legend: jsx(_$$q, {
         children: renderI18nText("type_settings.decoration")
       }),
-      recordingKey: Pt(e, "textDecoration"),
+      recordingKey: generateRecordingKey(e, "textDecoration"),
       children: [jsx(c$, {
         icon: jsx(_$$f, {}),
         value: "NONE",
@@ -1042,7 +1042,7 @@ function tQ({
   let h = !isInvalidValue(m) && !m;
   let g = e.$$default ?? 0;
   let f = t[e.tag]?.value ?? e.value ?? g;
-  e.tag !== mz || t[e.tag]?.value !== void 0 || m || (f = l);
+  e.tag !== OPTICAL_SIZE_AXIS_TAG || t[e.tag]?.value !== void 0 || m || (f = l);
   let _ = isInvalidValue(f) ? 0 : f;
   let A = 1;
   let y = 10;
@@ -1081,7 +1081,7 @@ function tQ({
             className: "variation_axis_slider--variationAxisScrubbable--YIgep",
             "data-tooltip": u.format(mI[e.tag] || e.name || e.tag),
             "data-tooltip-type": Ib.TEXT,
-            dataTestId: Pt("VariableFontSection.AxisInput", e.tag),
+            dataTestId: generateRecordingKey("VariableFontSection.AxisInput", e.tag),
             dispatch: p,
             inputClassName: "variation_axis_slider--variationAxisInput--znVac",
             max: e.max,
@@ -1093,7 +1093,7 @@ function tQ({
                 source: "input"
               });
             },
-            recordingKey: Pt("VariableFontSection.AxisInput", e.tag),
+            recordingKey: generateRecordingKey("VariableFontSection.AxisInput", e.tag),
             smallNudgeAmount: 1,
             tooltipForScreenReadersOnly: !0,
             value: f
@@ -1112,18 +1112,18 @@ function tQ({
           onChange: (t, {
             commit: n
           }) => {
-            i(t, e.tag, n ? zk.YES : zk.NO);
+            i(t, e.tag, n ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
             n && o("Variable Font Axis Value Changed", {
               axis: e.tag,
               source: "slider"
             });
           },
           rangeAnchor: e.min,
-          recordingKey: Pt("VariableFontSection.Slider", e.tag),
+          recordingKey: generateRecordingKey("VariableFontSection.Slider", e.tag),
           step: A,
           value: _
         })
-      }), e.tag === mz && jsx("div", {
+      }), e.tag === OPTICAL_SIZE_AXIS_TAG && jsx("div", {
         className: "variation_axis_slider--variationAxisFPLRow---mC10",
         children: jsx(Checkbox, {
           checked: h,
@@ -1167,13 +1167,13 @@ function t2({
   let _ = am();
   let A = useMemo(() => {
     if (isInvalidValue(o)) return o;
-    let t = e.find(e => e.tag === mz);
+    let t = e.find(e => e.tag === OPTICAL_SIZE_AXIS_TAG);
     return t ? Math.max(Math.min(o, t.max), t.min) : o;
   }, [e, o]);
   let y = useCallback(e => {
     let t = {
-      axisTag: cx(mz),
-      axisName: mI[mz],
+      axisTag: cx(OPTICAL_SIZE_AXIS_TAG),
+      axisName: mI[OPTICAL_SIZE_AXIS_TAG],
       value: e || isInvalidValue(A) ? void 0 : A
     };
     fullscreenValue.updateSelectionProperties({
@@ -1252,14 +1252,14 @@ function t3(e) {
               textTruncation: e
             };
             "ENDING" === e && i.current ? t.maxLines = i.current : "DISABLED" === e && l && isValidValue(l) && l > 0 && (i.current = l);
-            h$("TEXT_TRUNCATION", zk.YES);
+            h$("TEXT_TRUNCATION", yesNoTrackingEnum.YES);
             fullscreenValue.updateSelectionProperties(t);
           },
           readonly: e.disabled,
           legend: jsx(_$$q, {
             children: getI18nString("type_settings.truncate_text")
           }),
-          recordingKey: Pt(e, "textTruncation"),
+          recordingKey: generateRecordingKey(e, "textTruncation"),
           children: [jsx(c$, {
             icon: jsx(_$$f, {}),
             value: "DISABLED",
@@ -1300,7 +1300,7 @@ function t3(e) {
             shouldCommit: t
           }), h$("MAX_LINES", t));
         },
-        recordingKey: Pt(e, "maxLines"),
+        recordingKey: generateRecordingKey(e, "maxLines"),
         scrubMultiplier: .25,
         smallNudgeAmount,
         value: l || AUTO_MARKER
@@ -1394,7 +1394,7 @@ function t6(e) {
     fullscreenValue.updateSelectionProperties({
       leadingTrim: e
     }, {
-      shouldCommit: zk.YES,
+      shouldCommit: yesNoTrackingEnum.YES,
       overwrite: VisibilityCondition.ONLY_WHEN_NOT_DISABLED
     });
     "NONE" !== e && h$(e);
@@ -1403,7 +1403,7 @@ function t6(e) {
     fullscreenValue.updateSelectionProperties({
       hangingPunctuation: e
     }, {
-      shouldCommit: zk.YES
+      shouldCommit: yesNoTrackingEnum.YES
     });
     e && h$("HANGING_QUOTE");
   };
@@ -1411,7 +1411,7 @@ function t6(e) {
     fullscreenValue.updateSelectionProperties({
       hangingList: e
     }, {
-      shouldCommit: zk.YES
+      shouldCommit: yesNoTrackingEnum.YES
     });
     e && h$("HANGING_LIST");
   };
@@ -1432,12 +1432,12 @@ function t6(e) {
       T ? fullscreenValue.updateSelectionProperties({
         toggledOffOTFeatures: i
       }, {
-        shouldCommit: zk.YES
+        shouldCommit: yesNoTrackingEnum.YES
       }) : fullscreenValue.updateSelectionProperties({
         toggledOffOTFeaturesForSelection: i,
         mixedStateOTFeaturesForSelection: n
       }, {
-        shouldCommit: zk.YES
+        shouldCommit: yesNoTrackingEnum.YES
       });
     } else {
       let i = w.on.filter(t => t !== e);
@@ -1447,12 +1447,12 @@ function t6(e) {
       T ? fullscreenValue.updateSelectionProperties({
         toggledOnOTFeatures: i
       }, {
-        shouldCommit: zk.YES
+        shouldCommit: yesNoTrackingEnum.YES
       }) : fullscreenValue.updateSelectionProperties({
         toggledOnOTFeaturesForSelection: i,
         mixedStateOTFeaturesForSelection: n
       }, {
-        shouldCommit: zk.YES
+        shouldCommit: yesNoTrackingEnum.YES
       });
     }
     trackEventAnalytics("OpenType Feature Change", {
@@ -1529,7 +1529,7 @@ function t6(e) {
         children: jsx(IK, {
           variant: "secondary",
           onClick: e4,
-          recordingKey: Pt(e, "upgrade-text-user-layout-version-bidi"),
+          recordingKey: generateRecordingKey(e, "upgrade-text-user-layout-version-bidi"),
           children: renderI18nText("type_settings.update")
         })
       })]
@@ -1557,7 +1557,7 @@ function t6(e) {
       children: jsx(IK, {
         variant: "secondary",
         onClick: e5,
-        recordingKey: Pt(e, "upgrade-text-user-layout-version"),
+        recordingKey: generateRecordingKey(e, "upgrade-text-user-layout-version"),
         children: renderI18nText("type_settings.update")
       })
     })]
@@ -1582,7 +1582,7 @@ function t6(e) {
       children: jsx($n, {
         variant: "link",
         onClick: e6,
-        recordingKey: Pt(e, "downgrade-text-user-layout-version"),
+        recordingKey: generateRecordingKey(e, "downgrade-text-user-layout-version"),
         children: renderI18nText("type_settings.revert")
       })
     })]
@@ -1610,7 +1610,7 @@ function t6(e) {
         onClick: () => {
           e3(!0);
         },
-        recordingKey: Pt(e, "upgrade-text-explicit-user-layout-version"),
+        recordingKey: generateRecordingKey(e, "upgrade-text-explicit-user-layout-version"),
         children: renderI18nText("type_settings.update")
       })
     })]
@@ -1744,7 +1744,7 @@ function t6(e) {
                 entryPoint: "drill_in_button"
               });
             },
-            recordingKey: Pt(e, "textDecorationDrillInButton"),
+            recordingKey: generateRecordingKey(e, "textDecorationDrillInButton"),
             children: jsx(_$$k3, {})
           })
         })]
@@ -1766,14 +1766,14 @@ function t6(e) {
           activeInputClassName: eP()(tp, Hn),
           currentFieldValue: isInvalidValue(e.paragraphSpacing) ? void 0 : e.paragraphSpacing,
           rowElementRef: O,
-          recordingKey: Pt(e.recordingKey, "paragraphSpacing.variableControl"),
+          recordingKey: generateRecordingKey(e.recordingKey, "paragraphSpacing.variableControl"),
           children: jsx(t8, {
             ref: D,
             onValueChange: $,
             value: e.paragraphSpacing,
             disabled: k,
             dataTooltip: getI18nString("type_settings.decoration.paragraph_spacing"),
-            recordingKey: Pt(e, "paragraphSpacing"),
+            recordingKey: generateRecordingKey(e, "paragraphSpacing"),
             noBorderOnHover: !0,
             hasVariablesEntrypoint: !0
           })
@@ -1794,7 +1794,7 @@ function t6(e) {
           textLineType: e.textLineType,
           eventSource: "settings",
           disabled: k,
-          recordingKey: Pt(e, "listStyle"),
+          recordingKey: generateRecordingKey(e, "listStyle"),
           mouseHoverHandler: (e, t) => {
             if (Y(t), "ENTER" === t) {
               let t;
@@ -1824,7 +1824,7 @@ function t6(e) {
           value: e.listSpacing,
           disabled: k,
           dataTooltip: getI18nString("type_settings.decoration.list_spacing"),
-          recordingKey: Pt(e, "listSpacing")
+          recordingKey: generateRecordingKey(e, "listSpacing")
         })
       })]
     });
@@ -1849,7 +1849,7 @@ function t6(e) {
             legend: jsx(_$$q, {
               children: renderI18nText("type_settings.leading_trim")
             }),
-            recordingKey: Pt(e, "leadingTrim"),
+            recordingKey: generateRecordingKey(e, "leadingTrim"),
             children: [jsx(c$, {
               icon: jsx(ef, {}),
               value: "NONE",
@@ -1879,7 +1879,7 @@ function t6(e) {
       segmentedControlClassName: tr,
       label: getI18nString("type_settings.hanging_punctuation"),
       labelInactive: !e.isHangingPunctuationApplicableToSelection,
-      recordingKey: Pt(e, "hangingPunctuation"),
+      recordingKey: generateRecordingKey(e, "hangingPunctuation"),
       property: e.hangingPunctuation,
       disabled: k,
       onChange: e => {
@@ -1898,7 +1898,7 @@ function t6(e) {
         segmentedControlClassName: tr,
         label: getI18nString("type_settings.hanging_lists"),
         labelInactive: !t,
-        recordingKey: Pt(e, "hangingList"),
+        recordingKey: generateRecordingKey(e, "hangingList"),
         property: e.hangingList,
         disabled: k,
         onChange: e => {
@@ -1931,14 +1931,14 @@ function t6(e) {
           activeInputClassName: eP()(tp, Hn),
           currentFieldValue: isInvalidValue(e.paragraphIndent) ? void 0 : e.paragraphIndent,
           rowElementRef: L,
-          recordingKey: Pt(e.recordingKey, "paragraphIndent"),
+          recordingKey: generateRecordingKey(e.recordingKey, "paragraphIndent"),
           children: jsx(t8, {
             ref: M,
             onValueChange: q,
             value: e.paragraphIndent,
             disabled: k,
             dataTooltip: getI18nString("type_settings.decoration.paragraph_indent"),
-            recordingKey: Pt(e.recordingKey, "paragraphIndent"),
+            recordingKey: generateRecordingKey(e.recordingKey, "paragraphIndent"),
             noBorderOnHover: !0,
             hasVariablesEntrypoint: !0
           })
@@ -1984,7 +1984,7 @@ function t6(e) {
         }), jsx(tE, {
           decorationHoverHandler: tN,
           disabled: k,
-          recordingKey: Pt(e, "textUnderlineDrillInMenu"),
+          recordingKey: generateRecordingKey(e, "textUnderlineDrillInMenu"),
           textDecoration: e.textDecoration,
           drillInChevronShowing: !1
         })]
@@ -1999,7 +1999,7 @@ function t6(e) {
             "ENTER" === t && ("DOTTED" === e ? d(TypographySettings.DECORATION_STYLE_DOTTED) : "WAVY" === e ? d(TypographySettings.DECORATION_STYLE_WAVY) : "SOLID" === e && d(TypographySettings.DECORATION_STYLE_SOLID), u(null), m(!1));
           },
           disabled: _,
-          recordingKey: Pt(e, "textUnderlineDrillInMenu"),
+          recordingKey: generateRecordingKey(e, "textUnderlineDrillInMenu"),
           textDecorationStyle: e.textDecorationStyle
         })]
       }), jsxs(fI, {
@@ -2017,7 +2017,7 @@ function t6(e) {
           formatter: p,
           onValueChange: ee,
           placeholder: `${isInvalidValue(c) ? "" : c.value}%`,
-          recordingKey: Pt(e, "underlineThickness"),
+          recordingKey: generateRecordingKey(e, "underlineThickness"),
           shouldClearOnFocus: !isInvalidValue(h) && "RAW" === h.units,
           smallNudgeAmount,
           value: _ ? {
@@ -2043,7 +2043,7 @@ function t6(e) {
             ee({
               value: t,
               units: "RAW" === n ? "PERCENT" : n
-            }, i ? zk.YES : zk.NO);
+            }, i ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
           },
           rangeAnchor: g.min
         })
@@ -2062,7 +2062,7 @@ function t6(e) {
           formatter: s,
           onValueChange: J,
           placeholder: `${isInvalidValue(a) ? "" : a.value}%`,
-          recordingKey: Pt(e, "underlineOffset"),
+          recordingKey: generateRecordingKey(e, "underlineOffset"),
           shouldClearOnFocus: !isInvalidValue(o) && "RAW" === o.units,
           smallNudgeAmount,
           value: _ ? {
@@ -2088,7 +2088,7 @@ function t6(e) {
             J({
               value: t,
               units: "RAW" === n ? "PERCENT" : n
-            }, i ? zk.YES : zk.NO);
+            }, i ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
           },
           rangeAnchor: l.min
         })
@@ -2102,7 +2102,7 @@ function t6(e) {
             Y(t);
             "ENTER" === t && (d(!0 === e ? TypographySettings.DECORATION_SKIP_INK_ON : TypographySettings.DECORATION_SKIP_INK_OFF), u(null), m(!1));
           },
-          recordingKey: Pt(e, "textUnderlineDrillInMenu"),
+          recordingKey: generateRecordingKey(e, "textUnderlineDrillInMenu"),
           skipInk: e.textDecorationSkipInk,
           disabled: _
         })]
@@ -2112,7 +2112,7 @@ function t6(e) {
         textDecoration: e.textDecoration,
         isEditingStyle: "Style" === tx,
         selectionContainsUnderline: v,
-        recordingKey: Pt(e, "textDecorationColor"),
+        recordingKey: generateRecordingKey(e, "textDecorationColor"),
         shouldUseSelectedStyleProperties: e.shouldUseSelectedStyleProperties
       })]
     });
@@ -2194,7 +2194,7 @@ function t6(e) {
             legend: jsx(_$$q, {
               children: renderI18nText("type_settings.case")
             }),
-            recordingKey: Pt(e, "textCase"),
+            recordingKey: generateRecordingKey(e, "textCase"),
             children: [jsx(c$, {
               value: "ORIGINAL",
               icon: jsx(_$$f, {}),
@@ -2283,8 +2283,8 @@ function t6(e) {
         let s = [];
         let o = {};
         n.forEach(n => {
-          if (i !== mz && n.tag === mz && !e.detachOpticalSize) return;
-          i !== mz || e.detachOpticalSize || (o.detachOpticalSizeFromFontSize = !0);
+          if (i !== OPTICAL_SIZE_AXIS_TAG && n.tag === OPTICAL_SIZE_AXIS_TAG && !e.detachOpticalSize) return;
+          i !== OPTICAL_SIZE_AXIS_TAG || e.detachOpticalSize || (o.detachOpticalSizeFromFontSize = !0);
           let r = i === n.tag ? t : a[n.tag]?.value ?? n.value;
           isValidValue(r) && s.push({
             axisTag: cx(n.tag),
@@ -2373,7 +2373,7 @@ function t6(e) {
           legend: jsx(_$$q, {
             children: o
           }),
-          recordingKey: Pt(e, l),
+          recordingKey: generateRecordingKey(e, l),
           children: [jsx(c$, {
             value: "OFF",
             icon: jsx(_$$f, {}),
@@ -2415,7 +2415,7 @@ function t6(e) {
           legend: jsx(_$$q, {
             children: renderI18nText("type_settings.position")
           }),
-          recordingKey: Pt(e, "numericPosition"),
+          recordingKey: generateRecordingKey(e, "numericPosition"),
           children: [jsx(c$, {
             value: "SUB",
             icon: jsx(ex, {}),
@@ -2594,7 +2594,7 @@ function t6(e) {
             legend: jsx(_$$q, {
               children: renderI18nText("type_settings.numeric.style")
             }),
-            recordingKey: Pt(e, "numericStyle"),
+            recordingKey: generateRecordingKey(e, "numericStyle"),
             children: t
           })
         })]
@@ -2868,7 +2868,7 @@ class ip extends PureComponent {
       className: gb,
       children: jsx(K0, {
         onClick: this.onClick,
-        recordingKey: Pt(this.props, "bidiSwitcher"),
+        recordingKey: generateRecordingKey(this.props, "bidiSwitcher"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("fullscreen.type_panel.switch_text_direction"),
         children: e
@@ -2907,7 +2907,7 @@ class iS extends PureComponent {
     this.context = null;
     this.versionsForStyles = {};
     this.showFontAgentCTA = Kk() && !desktopAPIInstance && (BrowserInfo.mac || BrowserInfo.windows) && !BrowserInfo.isMobileBrowser;
-    this.getTickAxisValues = xx(e => isInvalidValue(e) ? {} : MK(e, this.props.fonts[e], this.versionsForStyles[e]));
+    this.getTickAxisValues = memoizeByArgs(e => isInvalidValue(e) ? {} : MK(e, this.props.fonts[e], this.versionsForStyles[e]));
     this.stopPropagation = e => e.stopPropagation();
     this.onMouseDown = e => {
       fullscreenValue.deselectProperty();
@@ -3056,7 +3056,7 @@ class iS extends PureComponent {
         paragraphIndent: this.props.paragraphIndent,
         paragraphSpacing: this.props.paragraphSpacing,
         picker: t,
-        recordingKey: Pt(this.props, "typeSettings"),
+        recordingKey: generateRecordingKey(this.props, "typeSettings"),
         setActiveTab: e => this.setActiveTab(e),
         shouldUseSelectedStyleProperties: this.props.shouldUseSelectedStyleProperties,
         tabManager: this.props.tabManager,
@@ -3091,7 +3091,7 @@ class iS extends PureComponent {
         } = {
           onClick: t ? this.toggleSettingsFromLineHeightRow : this.toggleSettingsFromParagraphRow,
           onMouseDown: this.stopPropagation,
-          recordingKey: Pt(this.props, e + "settings"),
+          recordingKey: generateRecordingKey(this.props, e + "settings"),
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip": getI18nString("fullscreen.type_panel.type_details")
         };
@@ -3119,7 +3119,7 @@ class iS extends PureComponent {
               children: jsx(EI, {
                 elementRef: e,
                 dataTestId: "text-variable-binding-button",
-                recordingKey: Pt(this.props.recordingKey, "variablePickerButton")
+                recordingKey: generateRecordingKey(this.props.recordingKey, "variablePickerButton")
               })
             })
           }));
@@ -3132,7 +3132,7 @@ class iS extends PureComponent {
         } = {
           onClick: this.toggleSettingsFromAlignmentRow,
           onMouseDown: this.stopPropagation,
-          recordingKey: Pt(this.props, "settings"),
+          recordingKey: generateRecordingKey(this.props, "settings"),
           "data-onboarding-key": "type-panel-settings",
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip": getI18nString("fullscreen.type_panel.type_settings"),
@@ -3165,7 +3165,7 @@ class iS extends PureComponent {
         children: jsx(_$$d, {
           "aria-expanded": !1,
           "aria-label": getI18nString("fullscreen.type_panel.text_on_a_path_flip"),
-          recordingKey: Pt(this.props, "flipTextPathButton"),
+          recordingKey: generateRecordingKey(this.props, "flipTextPathButton"),
           onClick: () => {
             getFeatureFlags().ce_properties_panel_tracking && trackEventAnalytics("editor_type_panel_change", {
               key: "textPathStart",
@@ -3531,7 +3531,7 @@ function iw(e) {
       fonts: e.fonts,
       id: t + "font-style-select",
       onChange: e.onFontStyleChange,
-      recordingKey: Pt(e, "fontStyle"),
+      recordingKey: generateRecordingKey(e, "fontStyle"),
       showMissingIcon: "ui3" !== e.version,
       versionsForStyles: e.versionsForStyles
     })
@@ -3543,7 +3543,7 @@ function iw(e) {
       rowElementRef: e.stylePickerRowRef,
       fontSize: e.fontSize,
       disabled: o,
-      recordingKey: Pt(e, "fontSize"),
+      recordingKey: generateRecordingKey(e, "fontSize"),
       editingStyleGuid: a
     })
   });
@@ -3555,7 +3555,7 @@ function iw(e) {
       rowElementRef: e.lineHeightRowRef,
       disabled: o || f,
       disableVariables: o || f,
-      recordingKey: Pt(e, "lineHeight"),
+      recordingKey: generateRecordingKey(e, "lineHeight"),
       editingStyleGuid: a
     })
   });
@@ -3568,7 +3568,7 @@ function iw(e) {
       letterSpacing: e.letterSpacing,
       disabled: o,
       dispatch: e.dispatch,
-      recordingKey: Pt(e, "letterSpacing"),
+      recordingKey: generateRecordingKey(e, "letterSpacing"),
       rowElementRef: e.lineHeightRowRef,
       editingStyleGuid: a
     })
@@ -3582,7 +3582,7 @@ function iw(e) {
       bigNudgeAmount: e.bigNudgeAmount,
       rowElementRef: e.paragraphRowRef,
       editingStyleGuid: a,
-      recordingKey: Pt(e.recordingKey, "paragraphSpacing"),
+      recordingKey: generateRecordingKey(e.recordingKey, "paragraphSpacing"),
       onChange: e.onChangeParagraphSpacing
     })
   });
@@ -3597,7 +3597,7 @@ function iw(e) {
       dispatch: e.dispatch,
       inputClassName: KY,
       onValueChange: e.onChangeListSpacing,
-      recordingKey: Pt(e, "listSpacing"),
+      recordingKey: generateRecordingKey(e, "listSpacing"),
       smallNudgeAmount: e.smallNudgeAmount,
       value: e.listSpacing,
       children: jsx(_$$t2, {
@@ -3616,7 +3616,7 @@ function iw(e) {
       id: t + "font-family-combo-box",
       onChange: e.onFontFamilyChange,
       onDetachVariableClick: c,
-      recordingKey: Pt(e, "fontFamily"),
+      recordingKey: generateRecordingKey(e, "fontFamily"),
       useLegacyFontPickerDropdown: !1,
       versionsForStyles: e.versionsForStyles
     }), jsx(fn, {
@@ -3652,7 +3652,7 @@ function iw(e) {
       id: t + "font-family-combo-box",
       onChange: e.onFontFamilyChange,
       onDetachVariableClick: c,
-      recordingKey: Pt(e, "fontFamily"),
+      recordingKey: generateRecordingKey(e, "fontFamily"),
       useLegacyFontPickerDropdown: !1,
       versionsForStyles: e.versionsForStyles
     }), jsxs(fI, {

@@ -18,7 +18,7 @@ import { Kj } from "../1156/201513";
 import { h5 } from "../1156/717481";
 import { ZH, AW, oT } from "../1156/250784";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";

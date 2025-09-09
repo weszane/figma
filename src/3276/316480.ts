@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/223926";
 import l from "../vendor/239910";

@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import a from "classnames";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { G } from "../figma_app/361869";

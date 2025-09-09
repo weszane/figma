@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import s from "../vendor/239910";
 import { je } from "../figma_app/155728";

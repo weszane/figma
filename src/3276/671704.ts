@@ -1,7 +1,7 @@
 import { useCallback, createElement } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/58247";
 import { Ag } from "../905/235578";
 import { C } from "../figma_app/959385";
@@ -21,7 +21,7 @@ export function $$c0({
     }));
   }, [t, e]);
   return useCallback(() => {
-    n(F.enqueue({
+    n(VisualBellActions.enqueue({
       message: e ? getI18nString("community.buyer.paid_widgets_cannot_be_added_to_the_canvas_before_purchase") : getI18nString("community.buyer.paid_plugins_cannot_be_run_before_purchase"),
       error: !0,
       button: {

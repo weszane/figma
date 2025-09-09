@@ -1,16 +1,16 @@
 import { useMemo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Rs } from "../figma_app/288654";
 import { Be } from "../figma_app/844435";
 import { xp, aQ } from "../figma_app/86989";
 import { _i } from "../figma_app/120210";
-import { BB3 } from "../figma_app/43951";
+import { InstalledPlugins } from "../figma_app/43951";
 import { vt } from "../figma_app/45218";
 export function $$u2({
   extensionId: e
 }) {
   let t = useSelector(e => e.currentUserOrgId);
-  let r = Rs(BB3, {
+  let r = Rs(InstalledPlugins, {
     orgId: t
   });
   return useMemo(() => r.data?.currentUser?.installedPlugins.find(t => t.pluginId === e)?.id, [r.data?.currentUser?.installedPlugins, e]);

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, createContext, useContext, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { isNotNullish, assertNotNullish } from "../figma_app/95419";
 import { t as _$$t } from "../905/150656";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -15,7 +15,7 @@ import { ZT, cW } from "../figma_app/844435";
 import { qp } from "../905/977779";
 import { q5, tS } from "../figma_app/516028";
 import { sZ } from "../905/845253";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { a6 } from "../figma_app/198840";
 import { Sc } from "../905/18797";
 import { n as _$$n } from "../905/79930";
@@ -57,7 +57,7 @@ export function $$k4() {
     loadingState: e.loadingState,
     library: e.library
   }));
-  let d = TA() || "";
+  let d = getUserId() || "";
   useEffect(() => {
     e(cr({
       shouldSearchDefaultLibraries: !0

@@ -8,7 +8,7 @@ import { getFeatureFlags } from '../905/601108';
 import { X$ } from '../905/612685';
 import { getSingletonSceneGraph } from '../905/700578';
 import { M4 } from '../905/713695';
-import { g as _$$g } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { ei, Ur, zK } from '../1156/71049';
 import { eM, oL, Pd, qE, rH } from '../1156/418246';
 import { O as _$$O2 } from '../1156/531541';
@@ -476,7 +476,7 @@ export async function $$en0({
   let b;
   let j = n.chatMessages;
   rH(s, j.length, a, o, x || '');
-  isDevEnvironment() && (b = _$$g());
+  isDevEnvironment() && (b = generateUUIDv4());
   let v = await et({
     featureType: s,
     chatMessagesNode: n,

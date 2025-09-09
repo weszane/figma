@@ -22,7 +22,7 @@ var N = /^\[object .+?Constructor\]$/;
 var E = /^(?:0|[1-9]\d*)$/;
 var w = {};
 w["[object Float32Array]"] = w["[object Float64Array]"] = w["[object Int8Array]"] = w["[object Int16Array]"] = w["[object Int32Array]"] = w["[object Uint8Array]"] = w["[object Uint8ClampedArray]"] = w["[object Uint16Array]"] = w["[object Uint32Array]"] = !0;
-w[l] = w[o] = w[A] = w[a] = w[x] = w[c] = w[u] = w[h] = w[d] = w[f] = w[p] = w[m] = w[b] = w[y] = w[v] = !1;
+w[l] = w[o] = w[A] = w[a] = w[x] = w[c] = w[ExpiringCache] = w[h] = w[d] = w[f] = w[p] = w[m] = w[b] = w[y] = w[v] = !1;
 var k = "object" == typeof require.g && require.g && require.g.Object === Object && require.g;
 var q = "object" == typeof self && self && self.Object === Object && self;
 var _ = k || q || Function("return this")();
@@ -33,7 +33,7 @@ var T = S && k.process;
 var j = function () {
   try {
     return T && T.binding && T.binding("util");
-  } catch (t) {}
+  } catch (t) { }
 }();
 var C = j && j.isTypedArray;
 function R(t) {
@@ -134,7 +134,7 @@ function tv(t) {
     try {
       t[X] = void 0;
       var i = !0;
-    } catch (t) {}
+    } catch (t) { }
     var n = $.call(t);
     i && (e ? t[X] = r : delete t[X]);
     return n;
@@ -369,10 +369,10 @@ function t_(t) {
   if (null != t) {
     try {
       return P.call(t);
-    } catch (t) {}
+    } catch (t) { }
     try {
       return t + "";
-    } catch (t) {}
+    } catch (t) { }
   }
   return "";
 }
@@ -458,7 +458,7 @@ module.exports = function (t, e) {
             case c:
             case f:
               return tL(+t, +e);
-            case u:
+            case ExpiringCache:
               return t.name == e.name && t.message == e.message;
             case m:
             case y:

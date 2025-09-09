@@ -5,7 +5,7 @@ import { Mz } from "../vendor/925040";
 import { trackEventAnalytics } from "../905/449184";
 import { im } from "../figma_app/828186";
 import { fullscreenValue } from "../figma_app/455680";
-import { i as _$$i } from "../figma_app/741237";
+import { renameNode } from "../figma_app/741237";
 import { MIXED_MARKER } from "../905/216495";
 import { sS, XJ } from "../figma_app/516028";
 import { i_ } from "../figma_app/646357";
@@ -110,7 +110,7 @@ export function $$v12(e, t, r, n) {
     let n = r.stateInfo.propertyValues;
     n && (n = {
       ...n
-    })[e] && (n[t] = n[e], delete n[e], _$$i(r.symbol.node_id, $$m16(n, a)));
+    })[e] && (n[t] = n[e], delete n[e], renameNode(r.symbol.node_id, $$m16(n, a)));
   }), Fullscreen);
   fullscreenValue.commit();
 }
@@ -123,7 +123,7 @@ export function $$$$A6(e, t, r, n) {
     }, e)) n[t] && delete n[t];
     let i = $$m16(n, r);
     "" === i && (i = "Property 1=Default");
-    _$$i(t.symbol.node_id, i);
+    renameNode(t.symbol.node_id, i);
   }), Fullscreen), fullscreenValue.commit());
 }
 export function $$x8(e, t, r, n) {

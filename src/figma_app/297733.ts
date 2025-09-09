@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { LayoutTabType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { Yx } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/810168";
 import { xM, lU } from "../figma_app/539925";
 import { fullscreenValue } from "../figma_app/455680";
@@ -50,7 +50,7 @@ export function $$b3(e) {
     0 === t && !0 === A.current ? e = getI18nString("fullscreen.accessibility.selection_cleared") : t > 1 && (e = getI18nString("fullscreen.accessibility.multi_select", {
       n: t
     }));
-    h && e && v(F.enqueue({
+    h && e && v(VisualBellActions.enqueue({
       type: `${xM}-${lU}`,
       message: e,
       role: "status",

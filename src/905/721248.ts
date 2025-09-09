@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, memo, useState, useEffect, Component, useRef, useCallback, cloneElement, createContext, Suspense, useLayoutEffect, Fragment as _$$Fragment, useContext, createRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import o, { lQ } from "../905/934246";
 import { hS } from "../905/437088";
@@ -11,7 +11,7 @@ import { IK, $n } from "../905/521428";
 import { LibraryUpdateStatus, VariablesBindings, GitReferenceType, PropertyScope, FileAndBranchTipType, SceneGraphHelpers, PreviewStage, ViewType, SchemaJoinStatus, DocumentMode } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { getSupportEmail } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
@@ -20,7 +20,7 @@ import { logInfo, logError } from "../905/714362";
 import { Hb, tH as _$$tH } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Q as _$$Q } from "../905/463586";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { sf } from "../905/929976";
 import { ov, S2 } from "../905/300250";
 import { fu } from "../figma_app/831799";
@@ -33,8 +33,8 @@ import { F4 } from "../figma_app/527873";
 import { w as _$$w } from "../905/346794";
 import { Z_ } from "../figma_app/793953";
 import { tB as _$$tB } from "../figma_app/516028";
-import { iZ as _$$iZ } from "../905/372672";
-import { Ej3, Xw7, dDF, _iU } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { BranchingSourceViewSidebarView, RepoReviewerSuggestions, FileCanEdit, BranchOpenMergeRequest } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { FEditorType } from "../figma_app/53721";
 import { Kn, Wo, PW } from "../905/535806";
@@ -55,7 +55,7 @@ import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { zX } from "../905/576487";
+import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { $2, s$, KZ, cs, rB, Xp, MY, C_, ju, on, PE, FD, Mt, Oh, uA, yi, Y1, Rw, Oi, WE } from "../905/432493";
@@ -67,7 +67,7 @@ import { ec as _$$ec, Yz, _5 } from "../figma_app/449837";
 import { x as _$$x } from "../905/211326";
 import { DP } from "../905/640017";
 import { B8 } from "../905/993733";
-import { FO } from "../905/869235";
+import { ProjectDevelopmentPhases } from "../905/869235";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { Ib } from "../905/129884";
 import { A as _$$A } from "../3850/839808";
@@ -108,7 +108,7 @@ import { r as _$$r } from "../905/571562";
 import { R as _$$R2 } from "../905/621802";
 import { G as _$$G2 } from "../905/750789";
 import { TI } from "../905/713722";
-import { gK } from "../figma_app/198712";
+import { getPropertyScopes } from "../figma_app/198712";
 import { J as _$$J2 } from "../905/225412";
 import { tq as _$$tq, SR, lo } from "../905/386270";
 import { m as _$$m } from "../905/871166";
@@ -170,7 +170,7 @@ createOptimistThunk(async (e, t) => {
       }
     }, e);
   } catch (i) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: t.closed ? getI18nString("collaboration.branching.error_converting_merge_request_to_draft") : getI18nString("collaboration.branching.error_submitting_merge_request"),
       type: "merge-request-close",
       error: !0
@@ -179,8 +179,8 @@ createOptimistThunk(async (e, t) => {
 });
 let ed = createOptimistThunk(async (e, t) => {
   let i = t.approved ? "merge-request-approve" : t.changesRequested ? "merge-request-changes-requested" : "";
-  i && e.dispatch(_$$F.enqueue({
-    icon: zX.SPINNER,
+  i && e.dispatch(VisualBellActions.enqueue({
+    icon: VisualBellIcon.SPINNER,
     message: getI18nString("collaboration.branching.submitting_review"),
     type: i
   }));
@@ -212,13 +212,13 @@ let ed = createOptimistThunk(async (e, t) => {
       }
     }, n);
     let r = t.approved ? getI18nString("collaboration.branching.approved_review") : t.changesRequested ? getI18nString("collaboration.branching.suggested_changes_on_review") : "";
-    r && i && e.dispatch(_$$F.enqueue({
-      icon: zX.CHECK,
+    r && i && e.dispatch(VisualBellActions.enqueue({
+      icon: VisualBellIcon.CHECK,
       message: r,
       type: i
     }));
   } catch (t) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.error_leaving_review"),
       type: i,
       error: !0
@@ -238,7 +238,7 @@ let ec = createOptimistThunk(async (e, t) => {
       }
     }, e);
   } catch (t) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.error_updating_reviewer_comment"),
       type: "merge-request-update-notes",
       error: !0
@@ -256,7 +256,7 @@ let eu = createOptimistThunk(async (e, t) => {
       }
     }, e);
   } catch (i) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: t.isApprove ? getI18nString("collaboration.branching.error_approving") : getI18nString("collaboration.branching.error_removing_approval"),
       type: "merge-request-approve",
       error: !0
@@ -278,13 +278,13 @@ let ep = createOptimistThunk(async (e, t) => {
         }
       }
     }, i);
-    e.dispatch(_$$F.enqueue({
-      icon: zX.CHECK,
+    e.dispatch(VisualBellActions.enqueue({
+      icon: VisualBellIcon.CHECK,
       message: getI18nString("collaboration.branching.review_requested"),
       type: "merge-re-request"
     }));
   } catch (t) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.error_re_sending_merge_request"),
       type: "merge-request-resend",
       error: !0
@@ -306,7 +306,7 @@ let em = createOptimistThunk(async (e, t) => {
       }
     }, e);
   } catch (t) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.error_updating_merge_request"),
       type: "merge-request-update",
       error: !0
@@ -315,8 +315,8 @@ let em = createOptimistThunk(async (e, t) => {
 });
 let eh = createOptimistThunk(async (e, t) => {
   let i = e.getState();
-  e.dispatch(_$$F.enqueue({
-    icon: zX.SPINNER,
+  e.dispatch(VisualBellActions.enqueue({
+    icon: VisualBellIcon.SPINNER,
     message: getI18nString("collaboration.branching.submitting_request"),
     type: "merge-request-submit"
   }));
@@ -324,13 +324,13 @@ let eh = createOptimistThunk(async (e, t) => {
     let {
       wasCreated
     } = await eg(t, i.openFile.key);
-    e.dispatch(_$$F.enqueue({
-      icon: wasCreated ? zX.CHECK : void 0,
+    e.dispatch(VisualBellActions.enqueue({
+      icon: wasCreated ? VisualBellIcon.CHECK : void 0,
       message: wasCreated ? getI18nString("collaboration.branching.request_submitted") : getI18nString("collaboration.branching.a_merge_request_is_already_open_for_this_branch"),
       type: "merge-request-submit"
     }));
   } catch (i) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: t.title ? getI18nString("collaboration.branching.error_submitting_merge_request") : getI18nString("collaboration.branching.title_missing_from_merge_request"),
       type: "merge-request-submit",
       error: !0
@@ -1916,7 +1916,7 @@ function iE({
       children: l && jsxs("div", {
         className: "variables_diff--dropdownContent--1LjZZ",
         children: [jsx(iA, {
-          scopes: next.variableScopes ? gK(next.variableScopes) : [PropertyScope.ALL_SCOPES]
+          scopes: next.variableScopes ? getPropertyScopes(next.variableScopes) : [PropertyScope.ALL_SCOPES]
         }), jsx("div", {
           className: il
         }), jsx(iy, {
@@ -2524,7 +2524,7 @@ function nh(e) {
   });
 }
 function ng(e) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let i = t && t.id === e.user.id;
   let [a, s] = useState(!1);
   let {
@@ -2710,7 +2710,7 @@ function nA(e) {
     })().then(t => {
       e || (h(!1), t ? l(t.mentions) : l([]));
     }).catch(() => {
-      g(_$$F.enqueue({
+      g(VisualBellActions.enqueue({
         message: getI18nString("collaboration.branching_to_source.an_error_occurred_fetching_your_contacts"),
         error: !0
       }));
@@ -2828,15 +2828,15 @@ function ny(e) {
     readOnly
   } = e;
   let l = new Set(e.reviewers.map(e => e.user.id));
-  let d = Rs(Ej3, {
+  let d = Rs(BranchingSourceViewSidebarView, {
     branchKey: e.branchKey
   });
   let c = useMemo(() => d.transform(e => e.file ? fileEntityDataMapper.toSinatra(e.file) : null).data, [d]);
   let u = useMemo(() => d.transform(e => e.file?.repo ? _$$H.toSinatra(e.file.repo) : null).data, [d]);
   let p = useRef(null);
-  let m = _$$iZ();
+  let m = selectCurrentUser();
   let h = function (e, t, i = 3) {
-    return Rs(Xw7, {
+    return Rs(RepoReviewerSuggestions, {
       repoId: e || ""
     }, {
       enabled: !!e
@@ -2857,7 +2857,7 @@ function ny(e) {
       return a;
     });
   }(u?.id || null, m).data || new Map();
-  let g = _$$l(dDF, c?.key ?? "").unwrapOr(!1) && !readOnly;
+  let g = _$$l(FileCanEdit, c?.key ?? "").unwrapOr(!1) && !readOnly;
   let f = "enabled" === _$$$n().mergeBranch.status;
   let [_, A] = useState(!1);
   let b = new Map(Array.from(h).filter(([e]) => !l.has(e)));
@@ -2976,7 +2976,7 @@ function nb(e) {
 }
 function nv(e) {
   let [t, i] = useState(!1);
-  let a = _$$iZ();
+  let a = selectCurrentUser();
   let s = a && a.id === e.mergeRequest?.owner?.id && !e.isBranchArchived;
   let {
     manager,
@@ -3232,8 +3232,8 @@ let nw = memo(function (e) {
     }))
   } : null, [mergeRequest]);
   let x = I?.review_number;
-  let S = _$$iZ();
-  let C = _$$l(dDF, branch.key).unwrapOr(!1);
+  let S = selectCurrentUser();
+  let C = _$$l(FileCanEdit, branch.key).unwrapOr(!1);
   let O = I?.owner?.id === S?.id;
   let D = !!branch.trashed_at;
   let L = !D && (!I && C || !!I && O);
@@ -3764,7 +3764,7 @@ let nw = memo(function (e) {
                     showOptions: e.mainChunk.phase !== LibraryUpdateStatus.CREATED && e.mainChunk.phase !== LibraryUpdateStatus.REMOVED,
                     displayChunk: e,
                     chunkDetail: eO,
-                    compareThumbnailSource: FO.BRANCHING
+                    compareThumbnailSource: ProjectDevelopmentPhases.BRANCHING
                   }), i.view === tN.VARIANT_SUMMARY && jsx(tU, {
                     displayGroup: i.displayGroup,
                     onChunkClick: e => {
@@ -4208,8 +4208,8 @@ function n2({
   let p = nZ()(u, e => sessionLocalIDToString(e.id));
   let m = u.map(e => i?.displayNode.variableDataValues?.entries?.find(t => areSessionLocalIDsEqual(t.modeID, e.id))).filter(isNotNullish);
   let h = lp(c, m, e => sessionLocalIDToString(e.modeID));
-  let g = gK(e?.displayNode.variableScopes ?? []);
-  let f = gK(i?.displayNode.variableScopes ?? []);
+  let g = getPropertyScopes(e?.displayNode.variableScopes ?? []);
+  let f = getPropertyScopes(i?.displayNode.variableScopes ?? []);
   let _ = e?.displayNode.codeSyntax && e?.displayNode.codeSyntax.entries ? e?.displayNode.codeSyntax.entries : void 0;
   let A = i?.displayNode.codeSyntax && i?.displayNode.codeSyntax.entries ? i?.displayNode.codeSyntax.entries : void 0;
   function y({
@@ -5655,7 +5655,7 @@ function rD(e) {
           className: kd,
           children: jsx($n, {
             variant: "primary",
-            onClick: () => Ay.reload("cannot parse diff"),
+            onClick: () => customHistory.reload("cannot parse diff"),
             children: renderI18nText("collaboration.branching_merge_modal.refresh_required_action")
           })
         })]
@@ -5705,7 +5705,7 @@ function rF(e) {
         u(!1);
       } catch (e) {
         cb(e);
-        s(_$$F.enqueue({
+        s(VisualBellActions.enqueue({
           message: "An error occurred while calculating conflicts",
           error: !0
         }));
@@ -5745,9 +5745,9 @@ function rM(e) {
   let [g, f] = useState(!1);
   let A = useSelector(_$$tB);
   let I = A?.key || null;
-  let S = _$$iZ();
+  let S = selectCurrentUser();
   let D = useSelector(e => e.roles);
-  let L = Rs(_iU, {
+  let L = Rs(BranchOpenMergeRequest, {
     branchFileKey: e.branchKey
   });
   let F = "loaded" === L.status ? L.data.file?.openMergeRequest ?? null : null;

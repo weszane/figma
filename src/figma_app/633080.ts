@@ -1,5 +1,5 @@
-import { gr } from "../figma_app/243058";
-import { Po, ii, F7, q, Rf, n3, IA, SG, nK, ey, Vt, yG } from "../905/859698";
+import { VariableSetIdCompatHandler } from "../figma_app/243058";
+import { Po, ii, F7, q, Rf, n3, VariableStyleId, SG, nK, ey, Vt, yG } from "../905/859698";
 import { l as _$$l } from "../905/716947";
 import { z, Ip } from "../905/239603";
 import { getI18nString } from "../905/303541";
@@ -101,8 +101,8 @@ let $$P23 = y.extend({
   style_type: z.string().transform(e => e),
   sort_position: z.string().optional(),
   is_soft_deleted: z.boolean().optional(),
-  content_hash: z.string().transform(e => IA(e)).optional(),
-  userFacingVersion: z.string().transform(e => IA(e)),
+  content_hash: z.string().transform(e => VariableStyleId(e)).optional(),
+  userFacingVersion: z.string().transform(e => VariableStyleId(e)),
   destination_key: z.string().nullish().transform(e => n3(e ?? void 0))
 });
 let $$D11 = L.extend({
@@ -245,7 +245,7 @@ export function $$ei4(e) {
     ...t,
     backingVariableSetId: e.backingVariableSetId,
     rootVariableSetKey: e.rootVariableSetKey ?? yG.INVALID,
-    rootVariableSetId: e.rootVariableSetId ?? gr.INVALID,
+    rootVariableSetId: e.rootVariableSetId ?? VariableSetIdCompatHandler.INVALID,
     variableSetExtensionChain: e.variableSetExtensionChain,
     isExtension: !0
   } : {
@@ -272,7 +272,7 @@ export function $$ea19(e) {
   return e.backingVariableSetId ? {
     ...t,
     backingVariableSetId: e.backingVariableSetId,
-    rootVariableSetId: e.rootVariableSetId ?? gr.INVALID,
+    rootVariableSetId: e.rootVariableSetId ?? VariableSetIdCompatHandler.INVALID,
     rootVariableSetKey: e.rootVariableSetKey ?? yG.INVALID,
     isExtension: !0,
     variableSetExtensionChain: e.variableSetExtensionChain
@@ -290,7 +290,7 @@ export function $$es38(e) {
     name: e.name,
     isLocal: e.isLocalStyle,
     content_hash: e.styleVersionHash ?? void 0,
-    userFacingVersion: IA(e.userFacingVersion),
+    userFacingVersion: VariableStyleId(e.userFacingVersion),
     library_key: e.sourceLibraryKey
   } : null;
 }

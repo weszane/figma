@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { useSelector, shallowEqual, useDispatch } from "../vendor/514228";
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { p as _$$p, Rs } from "../figma_app/288654";
 import { s as _$$s } from "../905/573154";
@@ -7,18 +7,18 @@ import { getI18nString } from "../905/303541";
 import { a as _$$a } from "../905/999566";
 import { showModalHandler } from "../905/156213";
 import { nb } from "../figma_app/543100";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { Au } from "../figma_app/518077";
-import { PG0, rSB } from "../figma_app/43951";
+import { FileWorkspacePinActionsView, WorkspacePinnedFileKeysView } from "../figma_app/43951";
 export let $$m0 = "workspace";
 export function $$g3(e, t = {}) {
-  let r = TA();
+  let r = getUserId();
   let o = useSelector(e => e.currentUserOrgId);
   let l = useMemo(() => e.map(e => ({
     fileKey: e,
     orgId: o
   })), [e, o]);
-  let d = _$$p(PG0, l, t);
+  let d = _$$p(FileWorkspacePinActionsView, l, t);
   let c = Au(o);
   let u = resourceUtils.all([c, ...d.map(e => e.result)]);
   return resourceUtils.useTransform(u, ([t, ...n]) => {
@@ -86,7 +86,7 @@ export function $$y6(e, t) {
   let r = function (e, {
     enabled: t = !0
   } = {}) {
-    let r = Rs(rSB, {
+    let r = Rs(WorkspacePinnedFileKeysView, {
       workspaceId: e
     }, {
       enabled: t

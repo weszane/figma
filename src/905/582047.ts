@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { s_ } from "../905/17223";
 import { Us, M7, vd } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
@@ -71,7 +71,7 @@ let $$A0 = registerModal(function (e) {
                 onClick: () => {
                   t();
                   let i = `/pricing${"whiteboard" === e.editorType ? "/#figjam" : ""}`;
-                  Ay.redirect(i, "_blank");
+                  customHistory.redirect(i, "_blank");
                 },
                 trusted: !0,
                 children: renderI18nText("payments.file_limit_paywall_cta_check_out_paid_plans")

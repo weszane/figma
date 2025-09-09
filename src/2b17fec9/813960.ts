@@ -6,7 +6,7 @@ import { Fullscreen, AlignmentPosition, Command } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { W6 } from "../905/125333";
 import { B } from "../905/714743";
 import { S as _$$S } from "../figma_app/552746";
@@ -53,7 +53,7 @@ export function $$N0({
     });
     Ac(c, M);
   }, [k, R, M, e, c]);
-  let P = rf(m, "dblclick", t => {
+  let P = useHandleMouseEvent(m, "dblclick", t => {
     if (!t) return;
     let i = Jc.get(e);
     i && Zt(i, a);

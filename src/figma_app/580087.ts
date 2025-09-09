@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { CB } from "../figma_app/442259";
 import { UM, zW } from "../figma_app/391056";

@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import s, { k as _$$k } from "../905/443820";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
@@ -8,7 +8,7 @@ import { Rs } from "../figma_app/288654";
 import { b as _$$b } from "../figma_app/246400";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { B as _$$B } from "../905/261906";
 import { JT, tI } from "../figma_app/847597";
@@ -28,7 +28,7 @@ import { F2 } from "../905/389382";
 import { O as _$$O } from "../figma_app/710329";
 import { P as _$$P } from "../905/842406";
 import { FProductAccessType, FOrganizationLevelType } from "../figma_app/191312";
-import { oe } from "../figma_app/43951";
+import { ModifyPlanUserSeatModalView } from "../figma_app/43951";
 import { vr } from "../figma_app/514043";
 import { Ef } from "../figma_app/428858";
 import { E as _$$E } from "../figma_app/126651";
@@ -139,7 +139,7 @@ function q(e) {
   } = s;
   let p = e.confirmedRole.user_id;
   let m = e.planKey.type === FOrganizationLevelType.ORG ? e.confirmedRole.org_user?.id : e.confirmedRole.team_user?.id;
-  let h = Rs(oe, {
+  let h = Rs(ModifyPlanUserSeatModalView, {
     planType: planKey.type,
     targetPlanUserId: m || "",
     targetUserId: p
@@ -312,7 +312,7 @@ function Z({
   });
 }
 function X(e, t) {
-  e(_$$F.enqueue({
+  e(VisualBellActions.enqueue({
     message: getI18nString("file_permissions_modal.update_seat_tab.seat_assigned", {
       seatType: _$$O(t)
     }),
@@ -320,7 +320,7 @@ function X(e, t) {
   }));
 }
 function Q(e) {
-  e(_$$F.enqueue({
+  e(VisualBellActions.enqueue({
     message: getI18nString("file_permissions_modal.update_seat_tab.seat_update_error"),
     error: !0,
     type: "update-seat-error"

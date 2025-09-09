@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { vD, Sh, a$ } from "../figma_app/889655";
 import { jY } from "../figma_app/151869";
 export function $$s5() {

@@ -1,15 +1,15 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
 import { K } from "../905/443068";
 import { i as _$$i } from "../905/22844";
-import { n3, IA } from "../905/859698";
+import { n3, VariableStyleId } from "../905/859698";
 import { Fullscreen } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { Point } from "../905/736624";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -47,7 +47,7 @@ export function $$w1() {
   }, D);
   if (!stylePreviewShown.isShown || stylePreviewShown.isCreating || !selectedStyleProperties && !inheritTextStyleKey && !styleIdForText && !D) return null;
   let M = () => {
-    Fullscreen?.selectStyle(n3.INVALID, IA.INVALID);
+    Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID);
     e(sw());
   };
   let F = Zv(IW(stylePreviewShown), selectedStyleProperties, k);
@@ -76,7 +76,7 @@ export function $$w1() {
                 },
                 "aria-label": getI18nString("slides.properties_panel.text_style.delete_style"),
                 onClick: j,
-                recordingKey: Pt(w, "deleteStyle"),
+                recordingKey: generateRecordingKey(w, "deleteStyle"),
                 children: jsx(_$$i, {})
               })
             })]
@@ -89,7 +89,7 @@ export function $$w1() {
               selectedStyleProperties,
               isInspectPanel: !1,
               styleName: F,
-              recordingKey: Pt(w, "editTextStyle")
+              recordingKey: generateRecordingKey(w, "editTextStyle")
             }, "style-preview-panel")
           })]
         })

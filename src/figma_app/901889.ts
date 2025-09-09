@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useStore } from "../vendor/514228";
+import { useStore } from "react-redux";
 import { A } from "../vendor/90566";
 import { ds, GS, Fr } from "../figma_app/314264";
 export function $$o2() {

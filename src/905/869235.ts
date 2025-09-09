@@ -1,8 +1,20 @@
-import { getFeatureFlags } from "../905/601108";
-import { g } from "../905/880308";
-var $$a3 = (e => (e.RENDER_SINGLE_PROPERTY = "RENDER_SINGLE_PROPERTY", e.RENDER_MULTI_PROPERTY = "RENDER_MULTI_PROPERTY", e.RENDER_MULTI_NODE = "RENDER_MULTI_NODE", e.RENDER_DISPLAY_NODE_SINGLE_PROPERTY = "RENDER_DISPLAY_NODE_SINGLE_PROPERTY", e))($$a3 || {});
-var $$s7 = (e => (e[e.MERGE_REVIEW = 0] = "MERGE_REVIEW", e[e.CONFLICT_REVIEW = 1] = "CONFLICT_REVIEW", e))($$s7 || {});
-let $$o4 = {
+import { getFeatureFlags } from '../905/601108'
+import { generateUUIDv4 } from '../905/871474'
+
+enum RenderStrategy {
+  RENDER_SINGLE_PROPERTY = 'RENDER_SINGLE_PROPERTY',
+  RENDER_MULTI_PROPERTY = 'RENDER_MULTI_PROPERTY',
+  RENDER_MULTI_NODE = 'RENDER_MULTI_NODE',
+  RENDER_DISPLAY_NODE_SINGLE_PROPERTY = 'RENDER_DISPLAY_NODE_SINGLE_PROPERTY',
+
+}
+
+enum ReviewPhase {
+  MERGE_REVIEW = 0,
+  CONFLICT_REVIEW = 1,
+}
+
+let visualAttributes = {
   derivedTextData: !1,
   name: !0,
   visible: !0,
@@ -405,15 +417,15 @@ let $$o4 = {
   isEntrypointCodeFile: !1,
   backingNodeId: !1,
   componentOrStateGroupKey: !1,
-  componentOrStateGroupVersion: !1
-};
-let $$l0 = new Map(Object.entries({
-  styleIdForText: ["fontName", "fontSize", "textCase", "textDecoration", "textDecorationFillPaints", "letterSpacing", "fontVariations", "fontVariantCommonLigatures", "fontVariantContextualLigatures", "fontVariantDiscretionaryLigatures", "fontVariantHistoricalLigatures", "fontVariantOrdinal", "fontVariantSlashedZero", "fontVariantNumericFigure", "fontVariantNumericSpacing", "fontVariantNumericFraction", "fontVariantCaps", "fontVariantPosition"],
-  styleIdForFill: ["fillPaints"],
-  styleIdForStrokeFill: ["strokePaints"],
-  styleIdForEffect: ["effects"]
-}));
-let $$d10 = {
+  componentOrStateGroupVersion: !1,
+}
+let styleIdMapping = new Map(Object.entries({
+  styleIdForText: ['fontName', 'fontSize', 'textCase', 'textDecoration', 'textDecorationFillPaints', 'letterSpacing', 'fontVariations', 'fontVariantCommonLigatures', 'fontVariantContextualLigatures', 'fontVariantDiscretionaryLigatures', 'fontVariantHistoricalLigatures', 'fontVariantOrdinal', 'fontVariantSlashedZero', 'fontVariantNumericFigure', 'fontVariantNumericSpacing', 'fontVariantNumericFraction', 'fontVariantCaps', 'fontVariantPosition'],
+  styleIdForFill: ['fillPaints'],
+  styleIdForStrokeFill: ['strokePaints'],
+  styleIdForEffect: ['effects'],
+}))
+let visualAttributes2 = {
   derivedTextData: !1,
   name: !1,
   visible: !0,
@@ -816,56 +828,105 @@ let $$d10 = {
   isEntrypointCodeFile: !1,
   backingNodeId: !1,
   componentOrStateGroupKey: !1,
-  componentOrStateGroupVersion: !1
-};
-let $$c5 = Object.keys($$d10).filter(e => $$d10[e]);
-export var $$u2 = (e => (e[e.LEGO = 0] = "LEGO", e[e.BRANCHING = 1] = "BRANCHING", e[e.COMPARE_CHANGES = 2] = "COMPARE_CHANGES", e[e.TEST_SUITE = 3] = "TEST_SUITE", e[e.LINTER = 4] = "LINTER", e))($$u2 || {});
-export function $$p11(e) {
-  return e.toLowerCase().replace("_", " ");
+  componentOrStateGroupVersion: !1,
 }
-export function $$m9(e, t, i) {
+let activeVisualAttributes = Object.keys(visualAttributes2).filter(e => visualAttributes2[e])
+
+enum ProjectDevelopmentPhases {
+  LEGO = 0,
+  BRANCHING = 1,
+  COMPARE_CHANGES = 2,
+  TEST_SUITE = 3,
+  LINTER = 4,
+}
+/**
+ * Converts a string to lowercase and replaces underscores with spaces.
+ * Original name: $$p11
+ * @param value - The string to format.
+ * @returns The formatted string.
+ */
+export function formatRenderName(value: string): string {
+  return value.toLowerCase().replace('_', ' ')
+}
+
+/**
+ * Creates a render treatment object for a single property.
+ * Original name: $$m9
+ * @param renderName - The name to render.
+ * @param oldValue - The old value.
+ * @param newValue - The new value.
+ * @returns The treatment object.
+ */
+export function createSinglePropertyRenderTreatment(renderName: string, oldValue: string | (() => any), newValue: string | (() => any)) {
   return {
-    treatmentType: "RENDER_SINGLE_PROPERTY",
-    renderName: e,
-    renderOldValue: "string" == typeof t ? () => $$p11(t) : t,
-    renderNewValue: "string" == typeof i ? () => $$p11(i) : i
-  };
+    treatmentType: RenderStrategy.RENDER_SINGLE_PROPERTY,
+    renderName,
+    renderOldValue: typeof oldValue === 'string' ? () => formatRenderName(oldValue) : oldValue,
+    renderNewValue: typeof newValue === 'string' ? () => formatRenderName(newValue) : newValue,
+  }
 }
-export function $$h1(e, t, i) {
+
+/**
+ * Creates a render treatment object for multiple nodes.
+ * Original name: $$h1
+ * @param renderName - The name to render.
+ * @param oldValue - The old value.
+ * @param newValue - The new value.
+ * @returns The treatment object.
+ */
+export function createMultiNodeRenderTreatment(renderName: string, oldValue: string | (() => any), newValue: string | (() => any)) {
   return {
-    identifier: g(),
-    treatmentType: "RENDER_MULTI_NODE",
-    renderName: e,
-    renderOldValue: "string" == typeof t ? () => t : t,
-    renderNewValue: "string" == typeof i ? () => i : i
-  };
+    identifier: generateUUIDv4(),
+    treatmentType: RenderStrategy.RENDER_MULTI_NODE,
+    renderName,
+    renderOldValue: typeof oldValue === 'string' ? () => oldValue : oldValue,
+    renderNewValue: typeof newValue === 'string' ? () => newValue : newValue,
+  }
 }
-export function $$g6(e, t, i) {
+
+/**
+ * Creates a render treatment object for multiple properties.
+ * Original name: $$g6
+ * @param renderName - The name to render.
+ * @param oldValue - The old value.
+ * @param newValue - The new value.
+ * @returns The treatment object.
+ */
+export function createMultiPropertyRenderTreatment(renderName: string, oldValue: string | (() => any), newValue: string | (() => any)) {
   return {
-    identifier: g(),
-    treatmentType: "RENDER_MULTI_PROPERTY",
-    renderName: e,
-    renderOldValue: "string" == typeof t ? () => t : t,
-    renderNewValue: "string" == typeof i ? () => i : i
-  };
+    identifier: generateUUIDv4(),
+    treatmentType: RenderStrategy.RENDER_MULTI_PROPERTY,
+    renderName,
+    renderOldValue: typeof oldValue === 'string' ? () => oldValue : oldValue,
+    renderNewValue: typeof newValue === 'string' ? () => newValue : newValue,
+  }
 }
-export function $$f8(e, t, i) {
+
+/**
+ * Creates a render treatment object for display node single property.
+ * Original name: $$f8
+ * @param renderName - The name to render.
+ * @param oldValue - The old value.
+ * @param newValue - The new value.
+ * @returns The treatment object.
+ */
+export function createDisplayNodeSinglePropertyRenderTreatment(renderName: string, oldValue: string | (() => any), newValue: string | (() => any)) {
   return {
-    treatmentType: "RENDER_DISPLAY_NODE_SINGLE_PROPERTY",
-    renderName: e,
-    renderOldValue: "string" == typeof t ? () => t : t,
-    renderNewValue: "string" == typeof i ? () => i : i
-  };
+    treatmentType: RenderStrategy.RENDER_DISPLAY_NODE_SINGLE_PROPERTY,
+    renderName,
+    renderOldValue: typeof oldValue === 'string' ? () => oldValue : oldValue,
+    renderNewValue: typeof newValue === 'string' ? () => newValue : newValue,
+  }
 }
-export const AW = $$l0;
-export const EY = $$h1;
-export const FO = $$u2;
-export const Rv = $$a3;
-export const b2 = $$o4;
-export const cs = $$c5;
-export const de = $$g6;
-export const fE = $$s7;
-export const oZ = $$f8;
-export const wR = $$m9;
-export const yC = $$d10;
-export const zX = $$p11;
+export const AW = styleIdMapping
+export const EY = createMultiNodeRenderTreatment
+export const FO = ProjectDevelopmentPhases
+export const Rv = RenderStrategy
+export const b2 = visualAttributes
+export const cs = activeVisualAttributes
+export const de = createMultiPropertyRenderTreatment
+export const fE = ReviewPhase
+export const oZ = createDisplayNodeSinglePropertyRenderTreatment
+export const wR = createSinglePropertyRenderTreatment
+export const yC = visualAttributes2
+export const zX = formatRenderName

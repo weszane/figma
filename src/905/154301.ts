@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { Uz } from "../905/63728";
 import { nR, qM } from "../figma_app/637027";

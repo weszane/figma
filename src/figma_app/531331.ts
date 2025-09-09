@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { d6 } from "../figma_app/687776";
@@ -14,9 +14,9 @@ import { hr } from "../905/352022";
 import { fullscreenValue } from "../figma_app/455680";
 import { xp } from "../905/87821";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
-import { iY3, oGE } from "../figma_app/43951";
+import { FileNameViewDropdown, ProjectTilePermissions } from "../figma_app/43951";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { F9 } from "../figma_app/803787";
 import { UpsellModalType } from "../905/165519";
@@ -31,7 +31,7 @@ import { i as _$$i } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
 export function $$D0() {
   let e = useSelector(e => e.plans);
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = t?.external_restricted_org_id;
   return e.filter(e => e.has_drafts).map(e => ({
     workspaceName: e.plan_name,
@@ -53,7 +53,7 @@ export function $$k1() {
   let t = useDispatch();
   let r = useSelector(e => getPermissionsStateMemoized(e));
   let y = useSelector(F9);
-  let N = Rs(iY3, {
+  let N = Rs(FileNameViewDropdown, {
     branchFileKey: e?.key || ""
   }, {
     enabled: !!e
@@ -76,7 +76,7 @@ export function $$k1() {
   let W = !!(e && z && Kz(e));
   let K = H ? W ? getI18nString("fullscreen.filename_view.duplicate-as-new") : getI18nString("fullscreen.filename_view.duplicate") : getI18nString("fullscreen.filename_view.duplicate-to-drafts");
   let Y = e?.currentPlanUser?.draftsFolderId;
-  let $ = Rs(oGE, {
+  let $ = Rs(ProjectTilePermissions, {
     projectId: Y || ""
   }, {
     enabled: !!Y && getFeatureFlags().filter_pro_plus_sites_make_web

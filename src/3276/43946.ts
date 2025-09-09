@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useContext, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { f as _$$f } from "../905/809171";
 import { J as _$$J } from "../905/614223";
@@ -8,7 +8,7 @@ import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atom } from "../figma_app/27355";
 import { A as _$$A } from "../905/920142";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { XHR } from "../905/910117";
 import { WN } from "../figma_app/638601";
@@ -16,7 +16,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { nt, d6 } from "../figma_app/687776";
 import { $z, Me, lR } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { N as _$$N } from "../905/438674";
 import { hh } from "../figma_app/42945";
 import { u as _$$u } from "../figma_app/365543";
@@ -34,7 +34,7 @@ import { ck as _$$ck } from "../905/87821";
 import { NE } from "../3276/373312";
 import { w as _$$w } from "../0c62c2fd/912149";
 import { MY, q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { jN } from "../905/612685";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
@@ -78,7 +78,7 @@ function el(e) {
   });
 }
 function ed(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let n = MY();
   let a = useDispatch();
   let s = _$$w();
@@ -264,7 +264,7 @@ let eg = [{
         XHR.post("/api/send_mobile_download_email", {
           type: "prototype"
         });
-        e(_$$F.enqueue({
+        e(VisualBellActions.enqueue({
           message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
         }));
         e(_$$b({
@@ -301,7 +301,7 @@ let eg = [{
         XHR.post("/api/send_mobile_download_email", {
           type: "comment"
         });
-        e(_$$F.enqueue({
+        e(VisualBellActions.enqueue({
           message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
         }));
         e(_$$b({
@@ -450,7 +450,7 @@ let eg = [{
         children: jsx(lR, {
           variant: "primary",
           onClick: () => {
-            t && Ay.redirect(jN({
+            t && customHistory.redirect(jN({
               file: {
                 key: t
               },
@@ -490,7 +490,7 @@ export function $$ex0(e) {
   let h = l?.figjamDisabledAt || null;
   let f = useSelector(e => e.userFlags);
   let g = useAtomWithSubscription(ev);
-  let x = iZ();
+  let x = selectCurrentUser();
   let y = useSelector(e => e.userAnalyticsData);
   let C = useSelector(e => e.selectedView);
   let w = x?.created_at;
@@ -523,7 +523,7 @@ export function $$ex0(e) {
       children: getI18nString("auth.sign_up")
     })]
   });
-  if (n === FFileType.WHITEBOARD || n === FFileType.SLIDES || "fullscreen" !== C.view || null != h || j || "Comments" === e.panelName && "fullscreen" === C.view && n === FFileType.DESIGN && f.claimed_invite_with_pending_user_mention && !f.has_closed_comment && Ay.location.hash) return null;
+  if (n === FFileType.WHITEBOARD || n === FFileType.SLIDES || "fullscreen" !== C.view || null != h || j || "Comments" === e.panelName && "fullscreen" === C.view && n === FFileType.DESIGN && f.claimed_invite_with_pending_user_mention && !f.has_closed_comment && customHistory.location.hash) return null;
   let G = Date.now() - 2592e5;
   if (eg.some(e => {
     let t = f[e.userFlagName];

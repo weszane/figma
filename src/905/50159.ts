@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { mc, vk, N7, QV } from "../905/508367";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { oJ } from "../905/63728";
 import { h1, Ak } from "../905/986103";
 import { $E, w4 } from "../905/445814";
@@ -146,7 +146,7 @@ export function $$P0(e) {
           let t = `/file/${e.file.key}`;
           t = mc(t, s);
           t = vk(t, i, r, o);
-          Ay.redirect(t, "_blank");
+          customHistory.redirect(t, "_blank");
         } else N7(i, e.file.parent_org_id, r, e.file.team_id) ? (p(UN({
           fileKey: e.file.key,
           entrypoint: "standalone file tile",

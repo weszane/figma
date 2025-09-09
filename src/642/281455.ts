@@ -29,10 +29,10 @@ import { M as _$$M } from '../figma_app/339170';
 import { fullscreenValue } from '../figma_app/455680';
 import { y7 } from '../figma_app/580959';
 import { fI, JU, Zk } from '../figma_app/626177';
-import { o6, Pt, Z7 } from '../figma_app/806412';
+import { RecordingPureComponent, generateRecordingKey, handleChangeEvent } from '../figma_app/878298';
 import { Ad, DE } from '../figma_app/811257';
 import { sw } from '../figma_app/914957';
-import { shallowEqual, useDispatch } from '../vendor/514228';
+import { shallowEqual, useDispatch } from 'react-redux';
 let N = 'mixed_checkbox--mixed--xYUsQ';
 class I extends PureComponent {
   constructor(e) {
@@ -106,10 +106,10 @@ class I extends PureComponent {
   }
 }
 I.displayName = 'MixedCheckbox';
-class E extends o6 {
+class E extends RecordingPureComponent {
   constructor(e) {
     super(e);
-    this.onChange = Z7(this, 'change', e => {
+    this.onChange = handleChangeEvent(this, 'change', e => {
       this.props.onChange?.(e.target.checked);
     });
   }
@@ -209,7 +209,7 @@ export function $$G0(e) {
     children: jsx(_$$B, {
       visible: backgroundEnabled,
       onChange: G,
-      recordingKey: Pt(e, 'visibleToggle')
+      recordingKey: generateRecordingKey(e, 'visibleToggle')
     })
   });
   return jsx(_$$k2, {
@@ -242,7 +242,7 @@ export function $$G0(e) {
           mixed: exportBackgroundDisabled === MIXED_MARKER,
           checked: !1 === exportBackgroundDisabled,
           onChange: V,
-          recordingKey: Pt(e, 'exportDisableCheckbox'),
+          recordingKey: generateRecordingKey(e, 'exportDisableCheckbox'),
           label: jsx(Label, {
             htmlAttributes: {
               'data-tooltip': getI18nString('fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports'),
@@ -262,7 +262,7 @@ export function $$G0(e) {
           id: 'export-background-disabled',
           property: exportBackgroundDisabled === MIXED_MARKER ? MIXED_MARKER : !exportBackgroundDisabled,
           onChange: V,
-          recordingKey: Pt(e, 'exportDisableCheckbox')
+          recordingKey: generateRecordingKey(e, 'exportDisableCheckbox')
         }), jsx(JU, {
           'className': 'background_panel--checkboxLabel--ITthj',
           'htmlFor': 'export-background-disabled',
@@ -291,7 +291,7 @@ export function $$G0(e) {
             shouldCommit: t
           });
         },
-        recordingKey: Pt(e, 'colorPicker')
+        recordingKey: generateRecordingKey(e, 'colorPicker')
       }), jsx(wu, {
         showExplicitOnly: !0,
         recordingKey: 'backgroundPanel-variableModeEntries'

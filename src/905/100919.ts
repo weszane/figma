@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { Xr } from "../figma_app/27355";
@@ -16,7 +16,7 @@ import { Nw } from "../figma_app/78808";
 import { NN } from "../905/466026";
 import { b_, oE } from "../figma_app/840917";
 import { Y6, nb, Tf } from "../figma_app/543100";
-import { dDF } from "../figma_app/43951";
+import { FileCanEdit } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { Cu, ol } from "../figma_app/603826";
 import { A as _$$A } from "../5724/663128";
@@ -25,7 +25,7 @@ export function $$S0(e) {
   let m = useDispatch();
   let x = gY(b_);
   let S = Xr(Y6);
-  let C = Rs(dDF, {
+  let C = Rs(FileCanEdit, {
     key: e.tile.type === nb.FILE ? e.tile.file.key : ""
   }, {
     enabled: e.tile.type === nb.FILE

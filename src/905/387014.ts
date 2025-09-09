@@ -1,4 +1,4 @@
-import { eJ, YB } from "../figma_app/243058";
+import { CodeLibraryIdHandler, CanvasNodeIdHandler } from "../figma_app/243058";
 import { PW } from "../905/497152";
 import { oz, nV } from "../905/808701";
 export function $$s1(e) {
@@ -25,8 +25,8 @@ function l(e) {
     belongsToCodeLibraryId,
     canvasNodeId
   } = e.codeFileFields;
-  let r = eJ.fromString(belongsToCodeLibraryId);
-  let a = canvasNodeId ? YB.fromString(canvasNodeId) : null;
+  let r = CodeLibraryIdHandler.fromString(belongsToCodeLibraryId);
+  let a = canvasNodeId ? CanvasNodeIdHandler.fromString(canvasNodeId) : null;
   return r ? {
     belongsToCodeLibraryId: r,
     canvasNodeId: a

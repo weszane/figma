@@ -15,7 +15,7 @@ import A from "classnames";
 import { hC } from "../figma_app/901889";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
@@ -23,7 +23,7 @@ import { z5, TI } from "../905/713722";
 import { e } from "../905/621515";
 import { dq } from "../905/845253";
 import { ol } from "../figma_app/598018";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { N as _$$N } from "../figma_app/268271";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
@@ -286,7 +286,7 @@ export function $$Q2({
     !standardMet && autoCorrectCandidate && (a("color_contrast.auto_correct_compliance", {
       orgId: u,
       teamId: p
-    }), t(autoCorrectCandidate, zk.YES));
+    }), t(autoCorrectCandidate, yesNoTrackingEnum.YES));
   }, [autoCorrectCandidate, t, u, standardMet, p, a]);
   let eh = useCallback(() => {
     a("color_contrast.click_swatch", {
@@ -395,7 +395,7 @@ export function $$Q2({
         "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.color_contrast_info.view_colors"),
         "data-tooltip-show-above": !0
       },
-      recordingKey: Pt(e, "colorsFlyoutButton"),
+      recordingKey: generateRecordingKey(e, "colorsFlyoutButton"),
       children: [jsx(J, {
         foregroundColor,
         backgroundColor
@@ -424,7 +424,7 @@ export function $$Q2({
           "color_contrast_info--hovered--D7Ab4": Q
         }),
         onClick: em,
-        recordingKey: Pt(e, "color_contrast_autocorrect_button"),
+        recordingKey: generateRecordingKey(e, "color_contrast_autocorrect_button"),
         children: [standardMet ? jsx(_$$l, {}) : jsx(X, {}), jsx("span", {
           className: "color_contrast_info--standardLabel--8O68Q",
           "data-testid": "contrast-standard-selected",
@@ -441,13 +441,13 @@ export function $$Q2({
             "data-tooltip-type": Ib.TEXT,
             "data-tooltip-show-above": !0
           },
-          recordingKey: Pt(e, "color_contrast_settings_button"),
+          recordingKey: generateRecordingKey(e, "color_contrast_settings_button"),
           children: jsx(_$$A, {})
         })
       }), jsx(Dropdown, {
         items: ec,
         showPoint: !1,
-        recordingKey: Pt(e, "color_contrast_settings")
+        recordingKey: generateRecordingKey(e, "color_contrast_settings")
       })]
     })]
   });

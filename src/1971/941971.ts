@@ -1,16 +1,16 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { $n } from "../905/521428";
 import { SceneGraphHelpers, ComponentPropsAiCPPBindings, FirstDraftHelpers, LayoutSizingMode, DraftState } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { logError, logWarning } from "../905/714362";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { qV, nY, oT, xF } from "../figma_app/566517";
@@ -70,7 +70,7 @@ function H(e, t, a) {
         if (!l) return;
         let i = e.data?.file?.comments.find(e => e.clientMeta?.nodeId === t.guid && e.clientMeta?.nodeOffset?.x === 0 && e.clientMeta?.nodeOffset?.y === 0);
         let n = getSingletonSceneGraph().getCurrentPage().guid;
-        let s = _$$g();
+        let s = generateUUIDv4();
         i ? e.api.writeAPI?.reply({
           messageMeta: [{
             t: a
@@ -108,7 +108,7 @@ Symbol Version: ${version}
   });
 }
 async function Q(e, t, a) {
-  "FRAME" === e.type && "HORIZONTAL" === e.stackMode && e.childCount && "FRAME" === e.childrenNodes[0].type && "VERTICAL" === e.childrenNodes[0].stackMode || t(_$$F.enqueue({
+  "FRAME" === e.type && "HORIZONTAL" === e.stackMode && e.childCount && "FRAME" === e.childrenNodes[0].type && "VERTICAL" === e.childrenNodes[0].stackMode || t(VisualBellActions.enqueue({
     message: "Please select eval output/eval output not in the correct format",
     error: !0
   }));
@@ -143,7 +143,7 @@ function et(e, t, a) {
   return async () => {
     let l = getSingletonSceneGraph().getCurrentPage();
     if (!ee.includes(l.name)) {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: "Can only run this action on a kit page",
         error: !0
       }));
@@ -151,7 +151,7 @@ function et(e, t, a) {
     }
     let i = l.childrenNodes.find(t => t.name === e);
     if (!i) {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: 'No "Building Blocks" section found',
         error: !0
       }));
@@ -199,7 +199,7 @@ function et(e, t, a) {
 }
 let ea = "FIRST_DRAFT_IP_CONFLICT";
 async function el(e, t) {
-  t(_$$F.enqueue({
+  t(VisualBellActions.enqueue({
     message: `Running IP Conflict eval on ${e.length} nodes`,
     type: ea,
     error: !1
@@ -209,7 +209,7 @@ async function el(e, t) {
     let l = G()(e, 30);
     let i = 0;
     for (let n of l) {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: `Running IP conflict eval on ${e.length} nodes: batch ${i + 1}/${l.length}`,
         type: ea,
         error: !1
@@ -241,14 +241,14 @@ async function el(e, t) {
       a = a.concat(r);
     }
   } catch (e) {
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       message: `IP Conflict eval failed: ${e.message}`,
       type: ea,
       error: !0
     }));
     return e;
   }
-  t(_$$F.enqueue({
+  t(VisualBellActions.enqueue({
     message: "IP Conflict eval completed",
     type: ea,
     error: !1
@@ -269,7 +269,7 @@ function ei() {
     function: async () => {
       let a = getSingletonSceneGraph().getCurrentPage().directlySelectedNodes;
       if (!a.length) {
-        e(_$$F.enqueue({
+        e(VisualBellActions.enqueue({
           message: "Please select some nodes",
           error: !0
         }));
@@ -285,7 +285,7 @@ function ei() {
     function: async () => {
       let a = getSingletonSceneGraph().getCurrentPage().directlySelectedNodes;
       if (!a.length || "FRAME" !== a[0].type) {
-        e(_$$F.enqueue({
+        e(VisualBellActions.enqueue({
           message: "Please select a single parent node of all the generation outputs",
           error: !0
         }));
@@ -421,7 +421,7 @@ function ec({
   }, [x]);
   let M = useCallback(() => e ? G && K ? Ol(e.kit) ?? e.kit : e.kit : null, [e, G, K]);
   let U = useCallback(e => {
-    a(_$$F.enqueue({
+    a(VisualBellActions.enqueue({
       type: "FIRST_DRAFT_EVAL",
       message: e,
       error: !0
@@ -443,7 +443,7 @@ function ec({
     try {
       $(!0);
       let i = l ? `Running evals with ${l.length} custom prompts...` : `Running evals for ${E}...`;
-      a(_$$F.enqueue({
+      a(VisualBellActions.enqueue({
         type: "FIRST_DRAFT_EVAL",
         timeoutOverride: 1 / 0,
         message: i
@@ -473,7 +473,7 @@ function ec({
       logError("first-draft", "Error running evals", {
         error: e
       });
-      a(_$$F.enqueue({
+      a(VisualBellActions.enqueue({
         type: "FIRST_DRAFT_EVAL",
         message: "Eval failed. Please check the console for more information.",
         error: !0
@@ -624,7 +624,7 @@ async function ep({
   clientLifecycleId: i
 }) {
   try {
-    debugState.dispatch(_$$F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: "FIRST_DRAFT_EVAL",
       timeoutOverride: 1 / 0,
       message: "Inserting evals..."
@@ -786,7 +786,7 @@ async function ep({
     }, null);
     if (!insertNodeIds.length) return;
     let m = insertNodeIds[0];
-    debugState.dispatch(_$$F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: "FIRST_DRAFT_EVAL",
       timeoutOverride: 1 / 0,
       message: "Populating icons & images..."
@@ -849,7 +849,7 @@ async function ep({
     l && (await oT(t.dsKitKey, m, DraftState.CURRENT, {
       detachVariables: !0
     }));
-    debugState.dispatch(_$$F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: "FIRST_DRAFT_EVAL",
       message: "Eval Completed"
     }));
@@ -858,7 +858,7 @@ async function ep({
     logError("first-draft", "Error running evals", {
       error: e
     });
-    debugState.dispatch(_$$F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: "FIRST_DRAFT_EVAL",
       message: "Eval failed. Please check the console for more information.",
       error: !0
@@ -981,7 +981,7 @@ function eS({
           });
           d(t);
         } catch (e) {
-          t(_$$F.enqueue({
+          t(VisualBellActions.enqueue({
             type: "FIRST_DRAFT_EXAMPLES_DEBUG",
             message: "Fetching examples failed. Please make sure you're using a published kit with examples.",
             error: !0
@@ -1024,7 +1024,7 @@ export function $$eb0() {
     selectedKitOption,
     setSelectedKitOption
   } = sI(!0);
-  let s = useRef(_$$g()).current;
+  let s = useRef(generateUUIDv4()).current;
   let r = selectedKitOption?.type === "KIT";
   let o = useMemo(() => {
     let e = allUsableKitEntries.filter(e => "1P_LIBRARY" === e.dsKitKey.type);
@@ -1214,7 +1214,7 @@ function eI({
         variant: "secondary",
         onClick: async () => {
           await N();
-          a(_$$F.enqueue({
+          a(VisualBellActions.enqueue({
             message: "Finished insert"
           }));
         },
@@ -1223,7 +1223,7 @@ function eI({
         variant: "secondary",
         onClick: async () => {
           await T(m);
-          a(_$$F.enqueue({
+          a(VisualBellActions.enqueue({
             message: "Finished insert"
           }));
         },
@@ -1233,12 +1233,12 @@ function eI({
         onClick: async () => {
           for (let e of c) {
             let t = await au("mobile", e.guid);
-            t?.jsxWithProps ? await T(t.jsxWithProps) : a(_$$F.enqueue({
+            t?.jsxWithProps ? await T(t.jsxWithProps) : a(VisualBellActions.enqueue({
               error: !0,
               message: `Failed to serialize ${e.guid}`
             }));
           }
-          a(_$$F.enqueue({
+          a(VisualBellActions.enqueue({
             message: `Inserted ${c.length} nodes`
           }));
         },

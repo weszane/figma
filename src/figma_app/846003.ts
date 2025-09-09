@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { Oe } from "../905/34809";
 import { $T } from "../figma_app/422062";
@@ -38,7 +38,7 @@ let $$P0 = e => t => function (r) {
   let P = e.getState();
   if (Qv.matches(r)) {
     let t = P.selectedView;
-    if (t === o0 && (t = getInitialOptions().selected_view || vU(P, _$$Ay.location.pathname, _$$Ay.location.search, _$$Ay.location.hash)), "fullscreen" === t.view && t.fileKey) {
+    if (t === o0 && (t = getInitialOptions().selected_view || vU(P, customHistory.location.pathname, customHistory.location.search, customHistory.location.hash)), "fullscreen" === t.view && t.fileKey) {
       let {
         fileKey
       } = t;
@@ -69,14 +69,14 @@ let $$P0 = e => t => function (r) {
       editorType: r.payload.fullscreenEditorType
     };
     let t = Np(P, e);
-    _$$Ay.replace(t, {
+    customHistory.replace(t, {
       ...e,
       jsCommitHash: Qr()
     });
   } else if (sf.matches(r)) {
     if ("prototype" !== o.view && "prototype" === r.payload.view && q()) {
       let e = Np(P, r.payload);
-      _$$Ay.redirect(e);
+      customHistory.redirect(e);
     }
     "fullscreen" === r.payload.view && ("fullscreen" !== o.view || r.payload.editorType !== o.editorType) && B8(r.payload.editorType);
     let {
@@ -84,22 +84,22 @@ let $$P0 = e => t => function (r) {
     } = e.getState();
     if (!("inlinePreview" in selectedView && selectedView.inlinePreview) && !r.payload.fromPopstate) {
       let t = Np(P, r.payload);
-      _$$Ay.location.pathname + _$$Ay.location.search !== t ? (("fullscreen" !== r.payload.view || r.payload.fileKey !== getInitialOptions().editing_file?.key) && !YH && w() && _X("fileBrowserHistory middleware selectView").then(t => {
+      customHistory.location.pathname + customHistory.location.search !== t ? (("fullscreen" !== r.payload.view || r.payload.fileKey !== getInitialOptions().editing_file?.key) && !YH && w() && _X("fileBrowserHistory middleware selectView").then(t => {
         e.dispatch(Qv(t.data.meta));
-      }), !r.payload.forceReplaceState && (_$$Ay.location.state || Mo(o)) && $$w1(o, r.payload) ? _$$Ay.push(t, {
+      }), !r.payload.forceReplaceState && (customHistory.location.state || Mo(o)) && $$w1(o, r.payload) ? customHistory.push(t, {
         ...r.payload,
         previousSelectedView: o,
         jsCommitHash: Qr()
-      }) : _$$Ay.replace(t, {
+      }) : customHistory.replace(t, {
         ...r.payload,
         previousSelectedView: o,
         jsCommitHash: Qr()
-      })) : null == _$$Ay.location.state && _$$Ay.replace(t, {
+      })) : null == customHistory.location.state && customHistory.replace(t, {
         ...r.payload,
         previousSelectedView: o,
         jsCommitHash: Qr()
       });
-      e.getState()?.user?.appData?.loggedOut && "fullscreen" !== r.payload.view && _$$Ay.reload("User Logged out");
+      e.getState()?.user?.appData?.loggedOut && "fullscreen" !== r.payload.view && customHistory.reload("User Logged out");
     }
     if ("searchAndBrowse" === r.payload.subView) {
       let e = r.payload.data;
@@ -114,9 +114,9 @@ let $$P0 = e => t => function (r) {
     let n = r.payload.publishedPlugins;
     let a = t && "communityHub" === t.view && "plugin" === t.subView && t.publishedPluginId;
     if (a && n && n.some(e => e.id === a)) {
-      if (_$$Ay) {
+      if (customHistory) {
         let e = Np(P, t);
-        _$$Ay.replace(e);
+        customHistory.replace(e);
       }
       OR(P, t);
     }
@@ -130,7 +130,7 @@ let $$P0 = e => t => function (r) {
     if ("folder" === t.view && t.folderId === r.payload.id) {
       getFeatureFlags().folder_page_fix_tab_titles || OR(P, t);
       let e = Np(P, t);
-      _$$Ay.replace(e, {
+      customHistory.replace(e, {
         ...t,
         jsCommitHash: Qr()
       });
@@ -144,7 +144,7 @@ let $$P0 = e => t => function (r) {
         if (n && n.id === r.payload.repo.id) {
           OR(P, t);
           let e = Np(P, t);
-          _$$Ay && _$$Ay.replace(e, {
+          customHistory && customHistory.replace(e, {
             ...t,
             jsCommitHash: Qr()
           });
@@ -156,14 +156,14 @@ let $$P0 = e => t => function (r) {
     if ("fullscreen" === t.view && r.payload.file.key === t.fileKey || "prototype" === t.view && r.payload.file.key === t.file.key) {
       OR(P, t);
       let e = Np(P, t);
-      _$$Ay && _$$Ay.replace(e, {
+      customHistory && customHistory.replace(e, {
         ...t,
         jsCommitHash: Qr()
       });
     }
   } else if (Rz.matches(r)) {
     let t = e.getState().selectedView;
-    t?.view === "search" && (_$$Ay.replace(Np(P, t), {
+    t?.view === "search" && (customHistory.replace(Np(P, t), {
       ...t,
       jsCommitHash: Qr()
     }), OR(P, t));

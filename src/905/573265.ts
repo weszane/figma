@@ -1,14 +1,14 @@
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getSupportEmail } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { M$ } from "../figma_app/633080";
 import { EH } from "../905/514666";
 import { MZ } from "../905/470594";
 var $$u2 = (e => (e.Offline = "Offline", e.NonS3PresignedPost = "NonS3PresignedPost", e.GenericError = "GenericError", e.PartialPublish = "PartialPublish", e.Timeout = "Timeout", e.ErrorCode = "ErrorCode", e.ErrorReason = "ErrorReason", e.NoItemsToPublish = "NoItemsToPublish", e.NoFile = "NoFile", e))($$u2 || {});
 function p(e) {
-  e(F.dequeue({
+  e(VisualBellActions.dequeue({
     matchType: "library-publish"
   }));
   e(EH());
@@ -18,10 +18,10 @@ export function $$m1(e) {
     publishType,
     dispatch
   } = e;
-  dispatch(F.enqueue({
+  dispatch(VisualBellActions.enqueue({
     type: "library-publish",
     message: publishType === M$.UNPUBLISH ? getI18nString("design_systems.publish_actions.unpublish_success") : getI18nString("design_systems.publish_actions.publish_success"),
-    icon: zX.CHECK
+    icon: VisualBellIcon.CHECK
   }));
 }
 export function $$h0(e) {
@@ -29,7 +29,7 @@ export function $$h0(e) {
     publishType,
     dispatch
   } = e;
-  dispatch(F.enqueue({
+  dispatch(VisualBellActions.enqueue({
     type: "library-publish",
     message: publishType === M$.UNPUBLISH ? getI18nString("design_systems.publish_actions.unpublishing_library") : getI18nString("design_systems.publish_actions.publishing_library"),
     icon: e.icon,
@@ -48,9 +48,9 @@ export function $$g3(e) {
   let m = publishType === M$.UNPUBLISH;
   switch (error) {
     case "Offline":
-      dispatch(F.enqueue({
+      dispatch(VisualBellActions.enqueue({
         type: "library-publish",
-        icon: zX.EXCLAMATION,
+        icon: VisualBellIcon.EXCLAMATION,
         error: !0,
         message: m ? getI18nString("design_systems.publish_actions.cant_unpublish") : getI18nString("design_systems.publish_actions.cant_publish"),
         button: {
@@ -63,9 +63,9 @@ export function $$g3(e) {
       MZ(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
       break;
     case "GenericError":
-      F.enqueue({
+      VisualBellActions.enqueue({
         type: "library-publish",
-        icon: zX.EXCLAMATION,
+        icon: VisualBellIcon.EXCLAMATION,
         error: !0,
         message: getI18nString("design_systems.publish_error.generic"),
         button: {
@@ -82,9 +82,9 @@ export function $$g3(e) {
         }) : getI18nString("design_systems.publish_actions.publish_error", {
           numSkipped: e.numPublishSkippedDueToError
         });
-        dispatch(F.enqueue({
+        dispatch(VisualBellActions.enqueue({
           type: "library-publish",
-          icon: zX.EXCLAMATION,
+          icon: VisualBellIcon.EXCLAMATION,
           error: !0,
           message: t,
           button: {
@@ -96,21 +96,21 @@ export function $$g3(e) {
       }
     case "Timeout":
       dispatch(EH(e.itemsToPublish, !0));
-      dispatch(F.dequeue({
+      dispatch(VisualBellActions.dequeue({
         matchType: "library-publish"
       }));
       break;
     case "ErrorCode":
       {
         if (424 === e.errorCode) {
-          dispatch(F.enqueue({
+          dispatch(VisualBellActions.enqueue({
             message: getI18nString("design_systems.publish_actions.validations_failed"),
             type: "library-publish",
             error: !0,
             button: {
               text: getI18nString("design_systems.publish_actions.validations_contact"),
               action: () => {
-                Ay.unsafeRedirect(`mailto:${getSupportEmail()}`, "_blank");
+                customHistory.unsafeRedirect(`mailto:${getSupportEmail()}`, "_blank");
               }
             }
           }));
@@ -123,7 +123,7 @@ export function $$g3(e) {
         }) : getI18nString("design_systems.publish_actions.publish_failed", {
           reason: t
         });
-        dispatch(F.enqueue({
+        dispatch(VisualBellActions.enqueue({
           type: "library-publish",
           error: !0,
           message: i
@@ -131,7 +131,7 @@ export function $$g3(e) {
         break;
       }
     case "ErrorReason":
-      dispatch(F.enqueue({
+      dispatch(VisualBellActions.enqueue({
         type: "library-publish",
         error: !0,
         message: m ? getI18nString("design_systems.publish_actions.unpublish_failed", {

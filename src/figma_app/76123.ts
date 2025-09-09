@@ -7,7 +7,7 @@ import { debugState } from "../905/407919";
 import { logError } from "../905/714362";
 import { YQ } from "../905/502364";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { ds } from "../figma_app/314264";
 import { z } from "../905/207214";
 import { N7, cx, sg, vk } from "../905/664512";
@@ -89,7 +89,7 @@ class N {
         return r;
       }(u);
       let y = (r = await N7(u, n, t)) ? v([r]) : 0;
-      if (o = y - h, debugState.dispatch(F.enqueue({
+      if (o = y - h, debugState.dispatch(VisualBellActions.enqueue({
         type: "msal-frames-created",
         message: getI18nString("fullscreen.properties_panel.stack_panel.msal_crated_frames_count", {
           count: o
@@ -164,13 +164,13 @@ class N {
       "GraphResolutionError" === r.name ? (ds("msal_error_try_again", debugState.getState().openFile?.key, debugState.getState(), {
         error: r,
         nodeIds: e
-      }), t(F.enqueue({
+      }), t(VisualBellActions.enqueue({
         type: "msal-failure-graph-resolution",
         message: getI18nString("fullscreen.visual_bell.try_again_msal")
       }))) : (n.commitUndo(), n.triggerUndo(), ds("msal_error_couldnt_suggest_auto_layout", debugState.getState().openFile?.key, debugState.getState(), {
         error: r,
         nodeIds: e
-      }), t(F.enqueue({
+      }), t(VisualBellActions.enqueue({
         type: "msal-failure-other",
         message: getI18nString("fullscreen.visual_bell.could_not_suggest_auto_layout")
       })));
@@ -207,7 +207,7 @@ class N {
     let i = r > 0 ? getI18nString("fullscreen_actions.destroy-all-auto-layout-result-visual-bell-toast", {
       numAutoLayoutsRemoved: r
     }) : getI18nString("fullscreen_actions.destroy-all-auto-layout-result-visual-bell-toast-zero");
-    n(F.enqueue({
+    n(VisualBellActions.enqueue({
       message: i
     }));
     trackEventAnalytics("action_destroy_all_auto_layout", {

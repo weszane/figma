@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
-import { useDispatch, useStore, useSelector } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { S as _$$S } from "../905/989967";
 import { S as _$$S2 } from "../905/711470";
@@ -53,7 +53,7 @@ import { $3, op as _$$op } from "../figma_app/487970";
 import { I as _$$I } from "../5430/750114";
 import { mG } from "../figma_app/15924";
 import { ej as _$$ej, EO, lt, gn, Zk } from "../figma_app/86989";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { I4, QW, hI, JL } from "../figma_app/522242";
 import { A as _$$A2 } from "../5724/267849";
 import { I as _$$I2 } from "../5430/292815";
@@ -121,8 +121,8 @@ import { h as _$$h2 } from "../905/632544";
 import { q as _$$q } from "../figma_app/277543";
 import { M4 } from "../905/713695";
 import { z as _$$z, a as _$$a2 } from "../figma_app/601188";
-import { xx } from "../figma_app/815945";
-import { k9 } from "../905/19536";
+import { memoizeByArgs } from "../figma_app/815945";
+import { useMemoStable } from "../905/19536";
 import { k as _$$k3 } from "../905/22009";
 import { Ef } from "../905/81982";
 let r;
@@ -182,7 +182,7 @@ function ec({
   resource: e
 }) {
   let t = useSelector(e => e.authedActiveCommunityProfile);
-  let s = iZ();
+  let s = selectCurrentUser();
   let r = _$$ej(e);
   return jsxs("div", {
     className: I4,
@@ -1208,11 +1208,11 @@ function t1(e) {
   let t = Be();
   let s = t.widgets;
   let r = Object.values(t.plugins).sort(YW).filter(e => "user" === e.installed_by);
-  let a = xx(() => r);
+  let a = memoizeByArgs(() => r);
   let i = Ol(a());
   let l = (i = bT(i)).map(e => e.plugin_id);
   let o = Object.values(s).sort(YW).filter(e => "user" === e.installed_by);
-  let d = xx(() => o);
+  let d = memoizeByArgs(() => o);
   let c = Ol(d()).map(e => e.plugin_id);
   return useMemo(() => e ? c : l, [l, c, e]);
 }
@@ -1396,7 +1396,7 @@ function st(e) {
   let en = U6();
   let ei = cW();
   let el = ZT();
-  let eo = k9(() => Object.keys(r ? en : ea).map(e => getPluginVersion((r ? el : ei)[e])), [ea, el, ei, en, r]);
+  let eo = useMemoStable(() => Object.keys(r ? en : ea).map(e => getPluginVersion((r ? el : ei)[e])), [ea, el, ei, en, r]);
   useEffect(() => {
     t6.set(Object.values(r ? ee : J));
   }, [J, ee, r]);

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { E as _$$E } from "../905/984674";

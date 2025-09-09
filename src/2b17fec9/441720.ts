@@ -13,7 +13,7 @@ import { P as _$$P } from "../figma_app/178683";
 import { t as _$$t } from "../figma_app/700609";
 import { V } from "../905/291719";
 import { DesignGraphElements } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { N } from "../figma_app/176280";
 import { I as _$$I } from "../figma_app/131348";
 import { getI18nString } from "../905/303541";
@@ -135,7 +135,7 @@ export function $$A2({
     tooltipText: getText(r),
     tooltipShortcut: f(toolId),
     onboardingKey,
-    recordingKey: Pt(I1, recordingKey),
+    recordingKey: generateRecordingKey(I1, recordingKey),
     disabled: a,
     onActivateTool: e => {
       e === _$$y2 ? handleToolAction({
@@ -205,7 +205,7 @@ export function $$k3({
     },
     onboardingKey,
     overlayId,
-    recordingKey: Pt(I1, recordingKey),
+    recordingKey: generateRecordingKey(I1, recordingKey),
     tooltipText: getTooltipText()
   });
 }

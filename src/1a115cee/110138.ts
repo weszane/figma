@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -10,7 +10,7 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { hS } from "../905/437088";
 import x from "../vendor/656470";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { reportError } from "../905/11";
 import { logInfo, logError } from "../905/714362";
 import { h1 } from "../905/986103";
@@ -26,7 +26,7 @@ import { Gg, go, ZW, bD } from "../figma_app/840917";
 import { cu, Zt } from "../905/25189";
 import { y8 } from "../905/327522";
 import { hp, a as _$$a } from "../905/725909";
-import { iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { r1 } from "../905/612685";
 import { fileEntityDataMapper } from "../905/943101";
 import { U as _$$U } from "../905/18613";
@@ -72,7 +72,7 @@ async function G(e, a) {
 let P = (e, a) => debounce(() => {
   let s = new URL(r1(fileEntityDataMapper.toLiveGraph(e), !0));
   s.searchParams.append("fuid", a);
-  Ay.redirect(s.toString(), "_blank");
+  customHistory.redirect(s.toString(), "_blank");
 });
 let K = (e, a) => debounce(() => e(NA({
   file: a,
@@ -250,7 +250,7 @@ export function $$X1(e) {
   } = Gg();
   let i = useSelector(e => e.modalShown);
   let o = useSelector(e => e.autosave.nextGarbageCollectionTimestamp);
-  let r = iZ();
+  let r = selectCurrentUser();
   let d = r?.id;
   return i && d && r ? jsx(V, {
     modalManager: a,
@@ -428,7 +428,7 @@ export function $$J0(e) {
     }, [a, e]);
     return s;
   }(e.users);
-  return TA() ? jsx(z, {
+  return getUserId() ? jsx(z, {
     ...e,
     loaded,
     nextGarbageCollectionTimestamp: multiUserGarbageCollectionTimestamp,

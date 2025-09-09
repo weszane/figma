@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { TemplateType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { createRemovableAtomFamily, atom, useAtomWithSubscription } from "../figma_app/27355";
-import { wm } from "../905/19536";
+import { useMemoShallow } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import { ResourceStatus } from "../905/957591";
 import { logInfo } from "../905/714362";
@@ -11,20 +11,20 @@ import { J4 } from "../figma_app/349248";
 import { arraysEqual } from "../figma_app/656233";
 import { x8 } from "../905/888985";
 import { _f } from "../905/760682";
-import { u6n, zkh } from "../figma_app/43951";
+import { LibraryModuleData, LibraryModuleDataByLibraryKey } from "../figma_app/43951";
 let f = createRemovableAtomFamily(e => x8({
   fileKey: e
 }));
 createRemovableAtomFamily(e => atom(t => {
   let r = {};
-  for (let n of e) r[n] = t(u6n.Query({
+  for (let n of e) r[n] = t(LibraryModuleData.Query({
     fileKey: n
   }));
   return r;
 }), arraysEqual);
 let E = createRemovableAtomFamily(e => atom(t => {
   let r = {};
-  for (let n of e) r[n] = t(zkh.Query({
+  for (let n of e) r[n] = t(LibraryModuleDataByLibraryKey.Query({
     libraryKey: n
   }));
   return r;
@@ -33,7 +33,7 @@ let y = "all_sources";
 export function $$b1(e, t) {
   let r = E(e);
   let n = useAtomWithSubscription(r);
-  return wm(() => {
+  return useMemoShallow(() => {
     let e = resourceUtils.all(Object.values(n));
     return "loaded" !== e.status ? e.transform(() => ({})) : resourceUtils.loaded(Object.fromEntries(Object.entries(n).map(([e, r]) => [e, function (e, t = y) {
       if (e?.status !== "loaded") {

@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -22,8 +22,8 @@ import { i as _$$i } from "../905/186077";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { V as _$$V } from "../905/355181";
 import { B as _$$B } from "../905/261906";
@@ -61,10 +61,10 @@ import { Zx, AG } from "../figma_app/217457";
 import { d as _$$d } from "../figma_app/603561";
 import { q as _$$q } from "../4452/876838";
 import { QL, EM } from "../905/609392";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { MX, EQ } from "../figma_app/684446";
 import { FUserRoleType } from "../figma_app/191312";
-import { EEx, HpJ } from "../figma_app/43951";
+import { AdminRequestDashboardView, AdminRequestDashOrgInfo } from "../figma_app/43951";
 import { Sm } from "../figma_app/482728";
 import { Ib } from "../905/129884";
 import { w as _$$w } from "../905/281010";
@@ -314,7 +314,7 @@ export function $$e$0({
   let [to, td] = useState(ti);
   let [tc, tu] = useState(null);
   let tm = MX();
-  let t_ = TA();
+  let t_ = getUserId();
   let tp = V === ps.ORG;
   let tg = useMemo(() => tp ? EQ(tm, t_, !1).groupsUserIsAdminOf : [], [tm, t_, tp]);
   let th = useMemo(() => tg ? tg.map(e => e.id) : [], [tg]);
@@ -343,7 +343,7 @@ export function $$e$0({
   let tb = useMemo(() => JSON.stringify({
     billing_group_ids: tx
   }), [tx]);
-  let ty = Rs(EEx({
+  let ty = Rs(AdminRequestDashboardView({
     planType: V,
     planId: $,
     sortOrder: eP === i5.NEWEST_FIRST ? "desc" : "asc",
@@ -365,7 +365,7 @@ export function $$e$0({
     }),
     processedRequestIds: e7
   });
-  let tE = Rs(HpJ({
+  let tE = Rs(AdminRequestDashOrgInfo({
     orgId: $
   }), {
     enabled: tp
@@ -592,13 +592,13 @@ export function $$e$0({
   }) => {
     eQ(ez.current);
     eW(a ? "approving_all" : e ? "approving" : "declining");
-    a && tL && eS(_$$F.enqueue({
+    a && tL && eS(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.selected_count_approving", {
         numSelected: tL
       }),
       type: eG,
       timeoutOverride: 1 / 0,
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       preventDismissal: !0,
       role: "status"
     }));
@@ -659,7 +659,7 @@ export function $$e$0({
     }).catch(() => {
       dispatchGenericError();
     }).$$finally(() => {
-      a && eS(_$$F.dequeue({
+      a && eS(VisualBellActions.dequeue({
         matchType: eG
       }));
       u();

@@ -9,7 +9,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { ah } from "../figma_app/637328";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { mr } from "../905/760074";
@@ -30,7 +30,7 @@ let $$x22 = createOptimistThunk((e, t) => {
     ordered_favorited_resource_ids: orderedFavoriteIds,
     name
   }).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: `${t.data.message}`
     }));
   });
@@ -50,7 +50,7 @@ let $$x22 = createOptimistThunk((e, t) => {
 });
 let $$N11 = createOptimistThunk((e, t) => {
   let r = XHR.del(`/api/user_sidebar_sections/${t.sidebarSectionId}`).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: `${t.msg}`
     }));
   });
@@ -68,7 +68,7 @@ let $$C3 = createOptimistThunk((e, t) => {
   };
   Dr(t.favoriteIds, t.teamId);
   XHR.put("/api/planless_favorited_resource_plan_id", r).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: `${t.data.message}`
     }));
   });
@@ -79,7 +79,7 @@ let $$w7 = createOptimistThunk((e, t) => {
     ordered_favorite_ids: t.orderedFavoriteIds
   };
   let n = XHR.put(`/api/favorited_resources/${t.favoriteId}`, r).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: `${t.data.message}`
     }));
   });
@@ -142,7 +142,7 @@ let $$O24 = createOptimistThunk((e, t) => {
       movingResource: void 0
     }));
   }).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: `${t.msg}`
     }));
   });
@@ -181,7 +181,7 @@ let $$R9 = createOptimistThunk((e, t) => {
   let i = XHR.post("/api/user_sidebar_sections", n).then(e => {
     SX(e?.data.meta, t.name);
   }).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: `${t.msg}`
     }));
   });
@@ -255,7 +255,7 @@ let $$L5 = createOptimistAction("BULK_RESOURCE_SET_FAVORITE", (e, t, {
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(r));
     try {
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: t.message
       }));
     } catch (t) {
@@ -608,13 +608,13 @@ let K = (e, t, r, n, i) => XHR.put("/api/favorited_resources", {
 }).then(() => {
   let t = i ? getI18nString("tile.favoriting.file_removed_from_sidebar") : getI18nString("tile.favoriting.file_removed_from_favorites");
   let n = i ? getI18nString("tile.favoriting.file_added_to_sidebar") : getI18nString("tile.favoriting.file_added_to_favorites");
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     message: r ? n : t
   }));
 }).catch(t => {
   let r = J(t);
   if (r) try {
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: r
     }));
   } catch (t) {
@@ -630,7 +630,7 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
 }).then(() => {
   if (a && e(createOptimistCommitAction(a)), l || t !== FEntityType.FILE) {
     let t = r ? getI18nString("sidebar.item_added_bell_message") : getI18nString("sidebar.item_removed_bell_message");
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: t
     }));
   }
@@ -639,7 +639,7 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
   if (n) {
     a && e(createOptimistRevertAction(a));
     try {
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         message: n
       }));
     } catch (n) {
@@ -653,7 +653,7 @@ let $$X23 = createOptimistThunk((e, t) => {
   $({
     favorited_resource_ids: t.favoriteIds
   }).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: `${t.data.message}`
     }));
   });

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useId, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { wv, hE, g8, ZP, Q$, MJ, q7, b as _$$b, bL, mc } from "../figma_app/860955";
 import { q7 as _$$q } from "../905/465888";
 import { HiddenLabel } from "../905/270045";

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { PropertyScope } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";

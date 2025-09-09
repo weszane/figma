@@ -1,10 +1,10 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, Children, useEffect, useCallback, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { SupportedLocales } from "../905/631683";
 import { clamp } from "../figma_app/492908";
 import { AppStateTsApi, DesignWorkspace, ViewType, Fullscreen, SelfDesignType, DesignGraphElements, Command } from "../figma_app/763686";
-import { n3, IA } from "../905/859698";
+import { n3, VariableStyleId } from "../905/859698";
 import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -42,11 +42,11 @@ import { P as _$$P } from "../905/347284";
 import { B7 } from "../figma_app/144692";
 import { iP } from "../figma_app/803054";
 import { s4 } from "../figma_app/276332";
-import { of, Pt, rf } from "../figma_app/806412";
+import { useHandleFocusEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { eE as _$$eE } from "../905/709171";
-import { aY, NT } from "../figma_app/741237";
+import { getPropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
 import { IW, Gj } from "../figma_app/646357";
 import { VF } from "../figma_app/679183";
 import { $n } from "../905/521428";
@@ -126,7 +126,7 @@ function ef({
     },
     shouldUseEyedropperStyleCreationFlow: !1
   });
-  let w = of(d, "submit", () => {
+  let w = useHandleFocusEvent(d, "submit", () => {
     let e = createStyle();
     j && AppStateTsApi.slideThemeLibBindings().addStyleToLocalTheme(e || "", b);
     c(XE());
@@ -188,7 +188,7 @@ function ef({
       children: [f.current && jsx($n, {
         variant: "link",
         onClick: () => y(!x),
-        recordingKey: Pt("createStyleModal", "moreOptions"),
+        recordingKey: generateRecordingKey("createStyleModal", "moreOptions"),
         children: x ? renderI18nText("design_systems.create_style.hide_options") : renderI18nText("design_systems.create_style.show_more_options")
       }), getFeatureFlags().ce_tv_fpl_create_style_modal ? jsx($n, {
         onClick: w,
@@ -214,7 +214,7 @@ function ef({
       width: tA,
       defaultPosition: e,
       draggable: "header",
-      recordingKey: Pt("createStyleModal"),
+      recordingKey: generateRecordingKey("createStyleModal"),
       children: jsxs(vo, {
         children: [jsx(Y9, {
           children: jsx(hE, {
@@ -236,7 +236,7 @@ function ef({
       onClose: () => {
         c(sw());
       },
-      recordingKey: Pt("createStyleModal"),
+      recordingKey: generateRecordingKey("createStyleModal"),
       dragHeaderOnly: !0,
       children: I
     })
@@ -310,7 +310,7 @@ function eS({
   recordingKey: t
 }) {
   let s = q5();
-  let n = getObservableValue(aY(), DesignWorkspace.DESIGN);
+  let n = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let l = p8("topLevelMode");
   let a = useSelector(e => e.library);
   let d = useSelector(e => e.stylePreviewShown);
@@ -373,14 +373,14 @@ function eS({
       initialWidth: tA,
       initialPosition: h,
       onClose: e,
-      recordingKey: Pt(t, "modal"),
+      recordingKey: generateRecordingKey(t, "modal"),
       dragHeaderOnly: !0,
       children: jsxs("div", {
         className: FY,
         children: [jsx(VF, {
           isVisible: !0,
           children: () => jsx(e_, {
-            recordingKey: Pt(t, "stylePreviewPanel"),
+            recordingKey: generateRecordingKey(t, "stylePreviewPanel"),
             canEdit: y,
             isInspectPanel: n === DesignWorkspace.INSPECT,
             isRenaming: a.isRenamingSelectedStyle,
@@ -443,7 +443,7 @@ function eK({
   let [x, y] = useAtomValueAndSetter(_$$j);
   let _ = cJ();
   let b = !!(m || f?.modal);
-  let C = rf(l, "mousedown", () => {
+  let C = useHandleMouseEvent(l, "mousedown", () => {
     fullscreenValue.deselectProperty();
     c(XE());
     c(vq());
@@ -606,7 +606,7 @@ function eJ({
         S(!0);
         return;
       }
-      e === DesignWorkspace.DAKOTA && NT(DesignWorkspace.SITE);
+      e === DesignWorkspace.DAKOTA && setPropertiesPanelTab(DesignWorkspace.SITE);
       S(!1);
     }
   }, [f, _, b, e]);
@@ -660,7 +660,7 @@ function eZ({
   let n = WN();
   let l = e.reduce((e, t) => (e[t.tab] = !0, e), {});
   let a = e.find(e => e.active);
-  let [d,, c] = _$$t3.useManagedTabs(l, a?.tab.toString() ?? "", e => {
+  let [d, , c] = _$$t3.useManagedTabs(l, a?.tab.toString() ?? "", e => {
     let t = parseInt(e);
     let r = eq(t, u).analyticsName;
     if (trackEventAnalytics("properties-panel-select-tab", {
@@ -669,10 +669,10 @@ function eZ({
       n(Command.ENTER_INSPECT_MODE);
       return;
     }
-    NT(t);
+    setPropertiesPanelTab(t);
     h === ViewType.PREVIEW && (t === DesignWorkspace.COMMENT ? fullscreenValue.triggerAction("set-tool-comments") : fullscreenValue.triggerAction("set-tool-default"));
   }, {
-    recordingKey: Pt(t, "tabs")
+    recordingKey: generateRecordingKey(t, "tabs")
   });
   let u = cJ();
   let p = dH();
@@ -691,7 +691,7 @@ function eZ({
     }), jsx("div", {
       className: wR,
       children: jsx(_$$H, {
-        recordingKey: Pt(t, "zoomMenu")
+        recordingKey: generateRecordingKey(t, "zoomMenu")
       })
     }), jsx("div", {
       "data-onboarding-key": D9,
@@ -713,13 +713,13 @@ export function $$e20({
   let f = _$$b("guid");
   let _ = isValidSessionLocalID(normalizeValue(f));
   let b = useCallback(e => {
-    _ && (e.event.keyCode === Uz.ESCAPE ? (e.accept(), Fullscreen?.selectStyle(n3.INVALID, IA.INVALID)) : e.event.keyCode === Uz.F && Fullscreen?.selectStyle(n3.INVALID, IA.INVALID));
+    _ && (e.event.keyCode === Uz.ESCAPE ? (e.accept(), Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID)) : e.event.keyCode === Uz.F && Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID));
   }, [_]);
   let C = useSelector(e => e.loadingState);
   let j = VP(C, "edit_button_upgrading_to_edit");
   let v = g || j;
   let S = useCallback(() => {
-    Fullscreen?.selectStyle(n3.INVALID, IA.INVALID);
+    Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID);
     m(sw());
     m(_$$B());
   }, [m]);

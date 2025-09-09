@@ -4,7 +4,7 @@ import { o as _$$o } from "../905/821217";
 import { O } from "../905/969533";
 import { cZ } from "../figma_app/272902";
 import l from "classnames";
-import { uA, cZ as _$$cZ } from "../figma_app/806412";
+import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
 import { B } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { wH, Sn, r9, Pf, Qq, q3, VI, FH, cN, Ot, sc } from "../905/99033";
@@ -20,7 +20,7 @@ let $$g1 = forwardRef((e, t) => jsxs(_$$o, {
     forwardedRef: t
   }), e.children]
 }));
-export class $$f0 extends uA {
+export class $$f0 extends RecordingComponent {
   constructor() {
     super(...arguments);
     this.wrapperRef = createRef();
@@ -29,7 +29,7 @@ export class $$f0 extends uA {
       cZ(this.buttonRef, e);
       cZ(this.props.forwardedRef, e);
     };
-    this.onClick = _$$cZ(this, "click", e => {
+    this.onClick = handleMouseEvent(this, "click", e => {
       this.props.onClick?.(e);
     });
     this.onKeyDown = e => {

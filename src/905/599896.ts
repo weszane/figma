@@ -3,7 +3,7 @@ import { forwardRef, useCallback } from "react";
 import { lQ } from "../905/934246";
 import s from "classnames";
 import { Uz } from "../905/63728";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { j } from "../905/91142";
 import { In } from "../905/672640";
 import { E as _$$E } from "../905/984674";
@@ -29,9 +29,9 @@ export let $$h0 = forwardRef(function ({
   dataTestId: S,
   ariaLabel: w
 }, C) {
-  let T = rf(g, "click", i || lQ);
+  let T = useHandleMouseEvent(g, "click", i || lQ);
   let k = g ? T : i;
-  let R = rf(g, "mousedown", s || lQ);
+  let R = useHandleMouseEvent(g, "mousedown", s || lQ);
   let N = g ? R : s;
   let P = useCallback(e => {
     j?.(e) || (m?.(e), e.keyCode === Uz.ESCAPE && e.currentTarget.blur());

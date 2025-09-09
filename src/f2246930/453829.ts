@@ -15,8 +15,8 @@ import { Te } from "../vendor/813803";
 import { T6 } from "../vendor/279343";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { pj, el, bF, AY } from "../f2246930/170322";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -48,10 +48,10 @@ export function $$b0({
   }, []);
   let b = useCallback(() => {
     navigator.clipboard.writeText(JSON.stringify(t));
-    debugState.dispatch(F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       message: "[INTERNAL] Copied to clipboard",
       type: "figmake-scope-copy-success",
-      icon: zX.CHECK,
+      icon: VisualBellIcon.CHECK,
       timeoutOverride: 3e3
     }));
   }, [t]);

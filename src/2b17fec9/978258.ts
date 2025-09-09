@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { UserActionState, AppStateTsApi, Positioning, Fullscreen } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";

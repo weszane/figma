@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { Rs } from "../figma_app/288654";
 import { _, S } from "../figma_app/490799";
 import { renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
-import { wVD } from "../figma_app/43951";
+import { SharingGroupsByLibraryKey } from "../figma_app/43951";
 import { S2, px, Um } from "../figma_app/465071";
 import { J7, SN } from "../figma_app/650409";
 import { DashboardSections, MemberSections } from "../905/548208";
@@ -14,7 +14,7 @@ export function $$g1(e, t) {
   let i = S2().unwrapOr(null);
   let n = px();
   let r = Um(n).unwrapOr(!1);
-  let a = Rs(wVD, {
+  let a = Rs(SharingGroupsByLibraryKey, {
     libraryKey: e
   });
   let o = a.data?.libraryKeyToFile?.file?.fileSharingGroups;

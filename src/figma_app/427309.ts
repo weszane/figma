@@ -22,7 +22,7 @@ import { EE, lB } from '../figma_app/731583';
 import { d as _$$d } from '../figma_app/844319';
 import { generateRecordingKey } from '../figma_app/878298';
 import { am } from '../figma_app/901889';
-import { useSelector } from '../vendor/514228';
+import { useSelector } from 'react-redux';
 import { flushSync } from '../vendor/944059';
 let f = g;
 let $$O3 = 430;

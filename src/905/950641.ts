@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { g as _$$g } from "../905/125190";
 import { getFeatureFlags } from "../905/601108";

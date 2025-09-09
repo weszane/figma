@@ -4,8 +4,8 @@ import { mc, r1, Q$, ME, Ov, rm, b as _$$b, bL } from "../figma_app/860955";
 import { Jo, rN } from "../905/872033";
 import { h as _$$h } from "../905/207101";
 import { PD } from "../figma_app/39751";
-import { Pt, y6, nS } from "../figma_app/806412";
-import { useDispatch } from "../vendor/514228";
+import { generateRecordingKey, addInteractionPath, removeInteractionPath } from "../figma_app/878298";
+import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { z6, CU } from "../905/963340";
 import { r } from "../905/571562";
@@ -59,7 +59,7 @@ function $$I(e) {
     "aria-disabled": N,
     "aria-hidden": N,
     "aria-pressed": isSelected,
-    recordingKey: Pt(recordingKey, "chevron"),
+    recordingKey: generateRecordingKey(recordingKey, "chevron"),
     ...S,
     children: jsx("span", {
       "aria-hidden": !0,
@@ -87,7 +87,7 @@ function S(e) {
         onSelect(e);
         Yq(t);
       },
-      recordingKey: Pt(recordingKey, "menu"),
+      recordingKey: generateRecordingKey(recordingKey, "menu"),
       children: items.map(e => jsxs(CU, {
         value: e.text,
         disabled: e.disabled,
@@ -135,13 +135,13 @@ function x(e) {
   let T = PD(E, y);
   _$$h(() => {
     let e = () => y.current = void 0;
-    y6(e);
-    return () => nS(e);
+    addInteractionPath(e);
+    return () => removeInteractionPath(e);
   });
   let A = E || wK(items, T) && T || initialToolId || OT(items).toolId;
   let x = Tp(items, A);
   let N = A === activeToolId;
-  let C = Pt(recordingKey, `default.${x.recordingKey}`);
+  let C = generateRecordingKey(recordingKey, `default.${x.recordingKey}`);
   let {
     getTriggerProps,
     manager

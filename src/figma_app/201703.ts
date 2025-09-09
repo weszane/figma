@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, createContext, useContext } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/95419";
 import { K } from "../905/443068";
 import { A } from "../905/251970";

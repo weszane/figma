@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { t as _$$t } from "../905/331623";
 import { lg } from "../figma_app/976749";
 import { Ro } from "../figma_app/805373";

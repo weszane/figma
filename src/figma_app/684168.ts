@@ -2,7 +2,7 @@ import { tT } from "../905/663269";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { c } from "../905/587163";
-import { M9I, iJD } from "../figma_app/43951";
+import { AllowlistPluginsSectionView, CurrentWorkspaceView } from "../figma_app/43951";
 import { q5 } from "../figma_app/516028";
 function d(e, t, r) {
   let i = [];
@@ -25,7 +25,7 @@ function d(e, t, r) {
 }
 export function $$c6(e, t, r = !0) {
   let n = $$g3();
-  let a = Rs(M9I, {
+  let a = Rs(AllowlistPluginsSectionView, {
     orgId: e
   }, {
     enabled: r
@@ -92,7 +92,7 @@ export function $$m0({
 export function $$g3() {
   let e = q5();
   let t = !!e;
-  let r = Rs(iJD, {
+  let r = Rs(CurrentWorkspaceView, {
     fileKey: e?.key ?? ""
   }, {
     enabled: t

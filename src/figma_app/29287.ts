@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";

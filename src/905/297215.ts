@@ -1,5 +1,5 @@
 import { jsx, Fragment } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { h } from "../figma_app/198885";
 import { K } from "../905/770444";
 import { K as _$$K, h as _$$h } from "../905/275787";

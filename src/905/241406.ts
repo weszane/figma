@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, Component } from "react";
-import { useSelector, connect } from "../vendor/514228";
+import { useSelector, connect } from "react-redux";
 import { s_ } from "../905/17223";
 import { nR, $$, CY } from "../figma_app/637027";
 import { B } from "../905/714743";

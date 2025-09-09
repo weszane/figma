@@ -1,3 +1,4 @@
+import type { Fn } from '../../types/global'
 import { ResourceStatus } from '../905/957591'
 
 /**
@@ -6,7 +7,7 @@ import { ResourceStatus } from '../905/957591'
  * @originalName $$r6
  */
 export function createDeferredPromise<T>(): [Promise<T>, (value: T) => void, (reason?: any) => void] {
-  let resolve: (value: T) => void
+  let resolve: (value: T | PromiseLike<T>) => void
   let reject: (reason?: any) => void
   const promise = new Promise<T>((res, rej) => {
     resolve = res
@@ -134,8 +135,8 @@ const ONCE_SYMBOL = Symbol('once')
  * Ensures a function can only be called once.
  * @originalName $$h2
  */
-export function once(fn: Fn & {[ONCE_SYMBOL]: boolean}): () => void {
-  if ((fn )[ONCE_SYMBOL])
+export function once(fn: Fn & { [ONCE_SYMBOL]: boolean }): () => void {
+  if ((fn)[ONCE_SYMBOL])
     return fn
   let called = false
   const wrapper = () => {

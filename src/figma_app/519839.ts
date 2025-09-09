@@ -17,8 +17,8 @@ import { YQ } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { I0 } from "../905/879323";
 import { hideModal } from "../905/156213";
@@ -313,20 +313,20 @@ let $$es7 = createOptimistThunk(async (e, t = {}) => {
     logWarning("first_draft", "No file key found for publishing");
     return;
   }
-  let a = _$$F.enqueue({
+  let a = VisualBellActions.enqueue({
     type: "first-draft-publish",
     message: "Publishing changes...",
-    icon: zX.SPINNER
+    icon: VisualBellIcon.SPINNER
   });
-  let s = _$$F.enqueue({
+  let s = VisualBellActions.enqueue({
     type: "first-draft-publish",
     message: "Changes published",
-    icon: zX.CHECK
+    icon: VisualBellIcon.CHECK
   });
-  let o = _$$F.enqueue({
+  let o = VisualBellActions.enqueue({
     type: "first-draft-publish",
     message: "Failed to publish changes",
-    icon: zX.EXCLAMATION,
+    icon: VisualBellIcon.EXCLAMATION,
     error: !0
   });
   e.dispatch(hideModal());
@@ -779,7 +779,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
       o({
         publishType: d,
         dispatch: e.dispatch,
-        icon: zX.SPINNER
+        icon: VisualBellIcon.SPINNER
       });
     }(e, ei, I, r, failedThumbnailNodeIds.length, uploadDurationMs, ep, G);
   } catch (e) {

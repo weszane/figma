@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import o from "classnames";
 import { Oy, EF, t9, FJ } from "../905/504768";
 import { BK } from "../905/848862";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { _ as _$$_ } from "../figma_app/433187";
 import { Kb, ny } from "../905/552753";
 import { KD, $S, D5, HL, Qi } from "../7037/166178";
@@ -13,7 +13,7 @@ var $$p1 = (e => (e[e.FULL = 0] = "FULL", e[e.ADD_ONLY = 1] = "ADD_ONLY", e))($$
 var $$g4 = (e => (e[e.TILE_CONTENT = 0] = "TILE_CONTENT", e[e.TILE_POST = 1] = "TILE_POST", e[e.DETAIL_POST = 2] = "DETAIL_POST", e[e.DETAIL_COMMENT_NO_REACTION = 3] = "DETAIL_COMMENT_NO_REACTION", e[e.DETAIL_COMMENT_WITH_REACTION = 4] = "DETAIL_COMMENT_WITH_REACTION", e[e.FILE_POPOVER = 5] = "FILE_POPOVER", e))($$g4 || {});
 export function $$f0(e) {
   let t = useDispatch();
-  let n = iZ();
+  let n = selectCurrentUser();
   let {
     existingReactionIdForCurrentUser
   } = y(e.feedReactions, n);
@@ -47,7 +47,7 @@ export function $$f0(e) {
 }
 export function $$h3(e) {
   let t = useDispatch();
-  let n = iZ();
+  let n = selectCurrentUser();
   let {
     existingReactionIdForCurrentUser
   } = y(e.feedReactions, n);
@@ -80,7 +80,7 @@ export function $$h3(e) {
   });
 }
 function b(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let {
     toggleReaction
   } = e;

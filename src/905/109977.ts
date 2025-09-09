@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { Q_ } from "../905/570707";
 import { IT } from "../905/713695";
@@ -10,7 +10,7 @@ import { c as _$$c } from "../905/511370";
 import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { Rs } from "../figma_app/288654";
-import { Lbw } from "../figma_app/43951";
+import { LibraryModalVariablesDataByLibraryKey } from "../figma_app/43951";
 import { RV } from "../figma_app/214643";
 function p(e, t) {
   let i = t && Nf(t) && t?.team_id;
@@ -21,7 +21,7 @@ function A({
   publishedLibrary: e,
   searchResults: t
 }) {
-  let i = Rs(Lbw, {
+  let i = Rs(LibraryModalVariablesDataByLibraryKey, {
     libraryKey: e?.library_key ?? ""
   }, {
     enabled: !!e?.library_key

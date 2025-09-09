@@ -5,8 +5,8 @@ import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27
 import { analyticsEventManager } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { debugState } from "../905/407919";
-import { g as _$$g } from "../905/880308";
-import { F } from "../905/302958";
+import { generateUUIDv4 } from "../905/871474";
+import { VisualBellActions } from "../905/302958";
 import { q4 } from "../905/294085";
 import { j7, oB } from "../905/929976";
 import { JV } from "../figma_app/976749";
@@ -64,7 +64,7 @@ export function $$M0({
     if (atomStoreManager.set(Bu, !0), atomStoreManager.set(oh, {
       type: "close",
       source: Yg.ToolSelected
-    }), atomStoreManager.get(dd) || (atomStoreManager.set(dd, _$$g()), atomStoreManager.set(q4)), atomStoreManager.set(P, null), t) {
+    }), atomStoreManager.get(dd) || (atomStoreManager.set(dd, generateUUIDv4()), atomStoreManager.set(q4)), atomStoreManager.set(P, null), t) {
       if (t.beforeModuleOpen) {
         let e = $$k6();
         t.beforeModuleOpen(e);
@@ -75,7 +75,7 @@ export function $$M0({
       }, ...e]);
     }
     InteractionCpp.setDefaultTool();
-    r(F.dequeue({
+    r(VisualBellActions.dequeue({
       matchTimeout: "ephemeral"
     }));
   } else r(j7({
@@ -128,7 +128,7 @@ export function $$G3(e) {
   return !!(!noDataLoaded && withinMeter);
 }
 export function $$V11(e, t = {}, r) {
-  !atomStoreManager.get(Bu) && (!(!U(e) || W7()) || atomStoreManager.get(D).has(e) || (atomStoreManager.get(dd) || atomStoreManager.set(dd, _$$g()), atomStoreManager.set(P, {
+  !atomStoreManager.get(Bu) && (!(!U(e) || W7()) || atomStoreManager.get(D).has(e) || (atomStoreManager.get(dd) || atomStoreManager.set(dd, generateUUIDv4()), atomStoreManager.set(P, {
     action: e,
     payload: t,
     guid: r

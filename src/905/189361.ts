@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { $n } from "../905/521428";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { TH } from "../figma_app/171177";
 import { f7 } from "../905/783179";
 export function $$l0({
@@ -30,7 +30,7 @@ export function $$l0({
     }),
     disabled: d,
     iconPrefix: h,
-    recordingKey: Pt(m, "actionButton"),
+    recordingKey: generateRecordingKey(m, "actionButton"),
     ref: c,
     htmlAttributes: {
       "data-testid": "actionButton"

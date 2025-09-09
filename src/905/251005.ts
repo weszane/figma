@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createRef, Children, cloneElement, PureComponent } from "react";
 import a from "classnames";
 import { Uz } from "../905/63728";
-import { o6, Ht, C0, Pt } from "../figma_app/806412";
+import { RecordingPureComponent, handleGenericEvent, handleKeyboardEvent, generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { t as _$$t } from "../905/331623";
 import { normalizeValue } from "../905/216495";
@@ -10,7 +10,7 @@ import { Ib } from "../905/129884";
 import { En } from "../figma_app/613182";
 var s = a;
 let h = "segmented_control--ui3FullWidth--PX8yl";
-class g extends o6 {
+class g extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.hiddenInputRef = createRef();
@@ -33,10 +33,10 @@ class g extends o6 {
       t = -1 !== n ? ((t = n + e) + i.length) % i.length : e > 0 ? 0 : i.length - 1;
       this.onChange(i[t], !1);
     };
-    this.onFocus = Ht(this, "focus", e => {
+    this.onFocus = handleGenericEvent(this, "focus", e => {
       this.props.onFocus?.(e);
     });
-    this.onKeyDown = C0(this, "keydown", e => {
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       if (!this.props.disabled) switch (e.keyCode) {
         case Uz.ENTER:
         case Uz.RIGHT_ARROW:
@@ -62,7 +62,7 @@ class g extends o6 {
       if (!1 === e || null === e) return null;
       let t = this.props.property === e.props.value;
       let i = this.props.disabled ? null : null != this.props.unselectValue && t ? this.onUnselect : this.onSelect.bind(this, e.props.value, e.props.altValue);
-      let n = e.props.recordingKey || Pt(this.props, `${e.props.value}`);
+      let n = e.props.recordingKey || generateRecordingKey(this.props, `${e.props.value}`);
       return cloneElement(e, {
         selected: t,
         onMouseDown: i,

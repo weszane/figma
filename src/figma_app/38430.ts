@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { c$ } from "../figma_app/236327";
 import { renderI18nText, getI18nString } from "../905/303541";

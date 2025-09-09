@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component, useMemo, useCallback, useRef, useEffect } from "react";
-import { connect, useSelector, useDispatch } from "../vendor/514228";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { BrowserInfo } from "../figma_app/778880";
@@ -18,7 +18,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../905/799228";
 import { p as _$$p } from "../figma_app/837956";
 import { D6 } from "../figma_app/863319";
-import { N63 } from "../figma_app/43951";
+import { SearchFilterWorkspaceView } from "../figma_app/43951";
 import { vj } from "../905/574958";
 import { Q0 } from "../905/994947";
 import { Of } from "../905/378567";
@@ -217,7 +217,7 @@ export function $$G6(e) {
   } = e;
   let s = useSelector(e => e.currentUserOrgId);
   let o = "NON_ORG_TEAMS" !== e.activePlan && e.activePlan || s;
-  let l = Rs(N63, {
+  let l = Rs(SearchFilterWorkspaceView, {
     orgId: o ?? null
   });
   let d = useMemo(() => "loaded" === l.status ? l.data?.org?.workspaces : [], [l]);

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import a from "classnames";
 import { a as _$$a } from "../905/925868";
@@ -386,7 +386,7 @@ export function $$ea0({
     }
   }(e);
   let ef = "";
-  if (ex) ef = ex.thumbnail_url;else {
+  if (ex) ef = ex.thumbnail_url; else {
     let t = N6(e);
     ef = t?.length > 0 ? _$$P(t[0])[0] : e.thumbnail_url || "";
   }

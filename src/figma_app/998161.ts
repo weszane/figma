@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
 import { Y9, hE, jk, vo, nB } from "../figma_app/272243";
@@ -13,7 +13,7 @@ import { GradientToolApi, VariablesBindings, NodePropertyCategory, LayoutTabType
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { C as _$$C } from "../905/108595";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
 import { L as _$$L } from "../905/408237";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -27,7 +27,7 @@ import { tZ } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { dH, p8 } from "../figma_app/722362";
 import { rh } from "../905/309735";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { vL } from "../905/826900";
 import { qo, S7, sX } from "../figma_app/259578";
@@ -182,14 +182,14 @@ export function $$J0({
               resolvedType: VariableResolvedDataType.COLOR,
               disabledVariableIds: L,
               pickerType: "color-picker",
-              recordingKey: Pt("slidesCustomColorPicker", "libraryColors"),
+              recordingKey: generateRecordingKey("slidesCustomColorPicker", "libraryColors"),
               onVariableSelected: m,
               onStyleSelected: f,
               onClose: lQ,
               variableScopes: O
             })
           }), jsx(ee, {
-            recordingKey: Pt(D, "rename")
+            recordingKey: generateRecordingKey(D, "rename")
           })]
         })]
       })
@@ -217,7 +217,7 @@ function Z({
   let I = p8("currentSelectedGradientStop");
   let N = iC(b || T || $$W2, I);
   let C = r => {
-    e.type !== r && t(Tm.initPaint(r, $$W2.color, e, "slides-custom-color-picker"), !bn(e.type) && bn(r) ? zk.NO : zk.YES);
+    e.type !== r && t(Tm.initPaint(r, $$W2.color, e, "slides-custom-color-picker"), !bn(e.type) && bn(r) ? yesNoTrackingEnum.NO : yesNoTrackingEnum.YES);
   };
   return jsxs(Fragment, {
     children: [!o && r && jsx(Q, {
@@ -289,7 +289,7 @@ function Q({
       }) => jsx(_$$E, {
         className: e === i ? wH : void 0,
         onClick: () => t(i),
-        recordingKey: Pt(r, s),
+        recordingKey: generateRecordingKey(r, s),
         children: a
       }, i))
     })

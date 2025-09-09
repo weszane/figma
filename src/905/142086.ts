@@ -2,7 +2,7 @@ import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useState, useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { i as _$$i } from "../905/718764";
 import { $y } from "../figma_app/59509";
@@ -23,7 +23,7 @@ import { qc, kt } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { In } from "../905/672640";
 import { E as _$$E } from "../905/984674";
 import { k as _$$k2 } from "../figma_app/618031";
@@ -42,7 +42,7 @@ import { F2 } from "../905/389382";
 import { sb, t$, ds, TF } from "../figma_app/863319";
 import { VA } from "../figma_app/528509";
 import { FAccessLevelType, FProductAccessType, FFileType, FOrganizationLevelType, FPermissionDenialReason } from "../figma_app/191312";
-import { vtM, tWm, gk5, Y9I, o6H } from "../figma_app/43951";
+import { OrgUserDraftFolder, DestinationProjectsForTeam, MoveFileDestination, MoveFileCurrentProject, ProjectNameForFile } from "../figma_app/43951";
 import { jB, xd, LU } from "../figma_app/722141";
 import { fm, Y9 } from "../figma_app/680166";
 import { UpsellModalType } from "../905/165519";
@@ -105,7 +105,7 @@ function eA(e) {
     planId,
     currentFolderId
   } = e;
-  let c = Rs(vtM, {
+  let c = Rs(OrgUserDraftFolder, {
     orgId: planId ?? ""
   }, {
     enabled: isOrgContext && !!planId
@@ -149,7 +149,7 @@ function eA(e) {
       }, `all-team-${e.id}}`))]
     })
   });
-  let g = Rs(tWm, {
+  let g = Rs(DestinationProjectsForTeam, {
     teamId: selectedTeam ? selectedTeam.id : ""
   }, {
     enabled: !!selectedTeam
@@ -293,7 +293,7 @@ function eb(e) {
     setSelectedTeam: e.setSelectedTeam
   }, `section-${t.id}`));
   let o = !!(e.selectedTeam && e.isOrgContext);
-  let l = Rs(tWm, {
+  let l = Rs(DestinationProjectsForTeam, {
     teamId: e.selectedTeam ? e.selectedTeam.id : ""
   }, {
     enabled: o
@@ -654,13 +654,13 @@ let eR = registerModal(function (e) {
     isSelected: eP === e
   }, e)));
   let tm = !e5 && ta.length > 1;
-  let th = Rs(gk5, {
+  let th = Rs(MoveFileDestination, {
     projectId: eS?.id
   }, {
     enabled: !!eS?.id
   });
   let tg = th?.status === "loaded" ? th.data.project : null;
-  let tf = Rs(Y9I, {
+  let tf = Rs(MoveFileCurrentProject, {
     projectId: eS?.id
   }, {
     enabled: !!eS?.id
@@ -701,7 +701,7 @@ let eR = registerModal(function (e) {
       }));
     };
     eY(!1);
-    eI ? t(_$$F.enqueue({
+    eI ? t(VisualBellActions.enqueue({
       message: getI18nString("visual_bell.files_restored_to_folder", {
         fileCount: i
       }),
@@ -711,7 +711,7 @@ let eR = registerModal(function (e) {
         }),
         action: r
       }
-    })) : (t(_$$F.enqueue({
+    })) : (t(VisualBellActions.enqueue({
       message: getI18nString("visual_bell.files_moved_to_folder", {
         fileCount: i,
         folderName: e
@@ -723,7 +723,7 @@ let eR = registerModal(function (e) {
   let tN = vb();
   let tP = useCallback(() => {
     if (!tg || tg.id !== eS?.id) {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("visual_bell.error_finding_destination_folder"),
         error: !0
       }));
@@ -1114,7 +1114,7 @@ let eU = registerModal(function (e) {
   let i = useCallback(() => {
     t(hideModal());
   }, [t]);
-  let n = Rs(o6H, {
+  let n = Rs(ProjectNameForFile, {
     fileKey: e.fileKey
   });
   if ("loading" === n.status) return jsx(qc, {});

@@ -1,13 +1,13 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { K } from "../905/443068";
 import { y as _$$y } from "../905/37128";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { of, Pt } from "../figma_app/806412";
+import { useHandleFocusEvent, generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler, hideModal } from "../905/156213";
@@ -51,7 +51,7 @@ let T = registerModal(function (e) {
       feedback: l
     }), additionalFeedbackCallback && additionalFeedbackCallback(EM.FREE_TEXT, l), onClose(), onSubmitted());
   }, [aiTrackingContext, additionalFeedbackCallback, onClose, onSubmitted, l]);
-  let p = of(e.recordingKey, "submit", e => {
+  let p = useHandleFocusEvent(e.recordingKey, "submit", e => {
     e.preventDefault();
     u();
   });
@@ -64,7 +64,7 @@ let T = registerModal(function (e) {
     dragHeaderOnly: !0,
     onClose,
     ref: c,
-    recordingKey: Pt(e.recordingKey, "modal"),
+    recordingKey: generateRecordingKey(e.recordingKey, "modal"),
     initialPosition: new Point(window.innerWidth / 2 - 20, window.innerHeight / 2 - 10),
     zIndex: aiTrackingContext.action === JT.CODE_CHAT ? 10 : void 0,
     children: jsxs("form", {
@@ -79,7 +79,7 @@ let T = registerModal(function (e) {
         type: "textarea",
         autoFocus: !0,
         value: l,
-        recordingKey: Pt(e.recordingKey, "textArea"),
+        recordingKey: generateRecordingKey(e.recordingKey, "textArea"),
         onChange: e => d(e.target.value),
         onKeyDown: h,
         maxLength: 1e3
@@ -174,7 +174,7 @@ export function $$L0({
                 type: T,
                 data: {
                   aiTrackingContext: e,
-                  recordingKey: Pt(P, "additionalFeedback"),
+                  recordingKey: generateRecordingKey(P, "additionalFeedback"),
                   onClose: () => {
                     F(hideModal());
                     M && M.current?.focus();
@@ -189,7 +189,7 @@ export function $$L0({
                 }
               }));
             },
-            recordingKey: Pt(P, "additionalFeedback"),
+            recordingKey: generateRecordingKey(P, "additionalFeedback"),
             disabled: B,
             children: renderI18nText("qa.additional_feedback")
           })
@@ -204,7 +204,7 @@ export function $$L0({
           children: [jsx("div", {
             className: R,
             children: jsx(K, {
-              recordingKey: Pt(P, "thumbsUp"),
+              recordingKey: generateRecordingKey(P, "thumbsUp"),
               "aria-label": x ?? getI18nString("qa.thumbs_up"),
               onClick: () => j("positive"),
               children: jsx(_$$y, {
@@ -214,7 +214,7 @@ export function $$L0({
           }), jsx("div", {
             className: R,
             children: jsx(K, {
-              recordingKey: Pt(P, "thumbsDown"),
+              recordingKey: generateRecordingKey(P, "thumbsDown"),
               "aria-label": S ?? getI18nString("qa.thumbs_down"),
               onClick: () => j("negative"),
               children: jsx(d, {

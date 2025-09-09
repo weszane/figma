@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { sortByWithOptions } from "../figma_app/656233";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { P } from "../905/347284";
@@ -12,7 +12,7 @@ import { fu } from "../figma_app/831799";
 import { TA } from "../figma_app/217457";
 import { Pe } from "../4452/207203";
 import { W } from "../4452/143028";
-import { DLq } from "../figma_app/43951";
+import { EditAccessModalView } from "../figma_app/43951";
 import { e6 } from "../905/557142";
 import { OJ } from "../905/519092";
 let v = "edit_access_modal--column--MYvAz";
@@ -34,7 +34,7 @@ let T = (e, t) => {
     };
   }
 };
-let E = xx((e, t) => {
+let E = memoizeByArgs((e, t) => {
   let r = {
     privateResourceCount: 0,
     editableResources: []
@@ -52,7 +52,7 @@ let I = e => ({
 export function $$N0(e) {
   let t = useDispatch();
   let r = function (e, t) {
-    let r = Rs(DLq, {
+    let r = Rs(EditAccessModalView, {
       teamId: e,
       userId: t
     });

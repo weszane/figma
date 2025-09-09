@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, Children, cloneElement, Component } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { a as _$$a } from "../905/339331";
 import { r as _$$r } from "../905/571562";
 import { cZ } from "../figma_app/272902";
 import d from "classnames";
-import { v_ } from "../figma_app/806412";
+import { useHandleKeyboardEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { ms, gw, OR } from "../figma_app/236327";
 import { P } from "../905/347284";
@@ -228,7 +228,7 @@ export function $$I3(e) {
     onKeyDown,
     onFocus
   } = OR(e);
-  let o = v_(e.recordingKey, "keydown", e => onKeyDown(e));
+  let o = useHandleKeyboardEvent(e.recordingKey, "keydown", e => onKeyDown(e));
   return jsx($$v1, {
     "aria-labelledby": e["aria-labelledby"],
     arrowOffsetFromRectLeft: e.arrowOffsetFromRectLeft,

@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Uz } from "../905/63728";
 import { reportError } from "../905/11";
 import { jN } from "../905/612685";
@@ -40,17 +40,17 @@ export function $$p6(e, t, i) {
   return s.startsWith(fakePath) ? s.substr(fakePath.length) : s;
 }
 export function $$m12() {
-  return Ay.location.pathname + Ay.location.search;
+  return customHistory.location.pathname + customHistory.location.search;
 }
 export function $$h11(e) {
   var t = e.url;
   if (null != t) {
     if (t.startsWith("mailto:")) {
-      Ay.unsafeRedirect(t, e.openInNewWindow ? "_blank" : "");
+      customHistory.unsafeRedirect(t, e.openInNewWindow ? "_blank" : "");
       return;
     }
     t.startsWith("http://") || t.startsWith("https://") || (t = "http://" + t);
-    Ay.postRedirect(`/exit?url=${encodeURIComponent(t)}`, e.openInNewWindow ? "_blank" : "");
+    customHistory.postRedirect(`/exit?url=${encodeURIComponent(t)}`, e.openInNewWindow ? "_blank" : "");
   }
 }
 export function $$g5(e, t, i, n) {
@@ -76,7 +76,7 @@ export function $$f7(e, {
       urlType: n
     });
   })(e.file.key, t, i, s);
-  Ay.redirect(c);
+  customHistory.redirect(c);
 }
 export function $$_0(e, t, i = "file") {
   trackEventAnalytics("file_browser_fresh_external_file_load", {

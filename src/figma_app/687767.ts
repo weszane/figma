@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { nearlyEqual } from "../figma_app/492908";
 import { isNotNullish } from "../figma_app/95419";
-import { gr } from "../figma_app/243058";
+import { VariableSetIdCompatHandler } from "../figma_app/243058";
 import { oB } from "../figma_app/273493";
 import { VariablesBindings, AppStateTsApi, VariableResolvedDataType, VariableDataType, VariableUIContext } from "../figma_app/763686";
 import { parseSessionLocalID } from "../905/871411";
@@ -57,7 +57,7 @@ export function $$v0(e) {
     data
   } = useAtomWithSubscription(t);
   let i = data?.variableSetID || "";
-  return useMemo(() => gr.isValid(i) ? VariablesBindings?.getVariableSetDefaultMode(i) ?? "" : "", [i]);
+  return useMemo(() => VariableSetIdCompatHandler.isValid(i) ? VariablesBindings?.getVariableSetDefaultMode(i) ?? "" : "", [i]);
 }
 function A(e, t) {
   if (!e.color || !t.color) return 0;

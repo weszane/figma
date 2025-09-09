@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, createContext, useContext, useRef, useEffect, useState, useCallback, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";

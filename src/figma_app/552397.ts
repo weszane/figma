@@ -2,9 +2,9 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useContext } from "react";
 import a from "classnames";
 import { Uz } from "../905/63728";
-import { aH } from "../figma_app/806412";
+import { SKIP_RECORDING } from "../figma_app/878298";
 import { D8 } from "../905/511649";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { nS } from "../figma_app/274383";
 import { hv } from "../figma_app/544744";
 import { W } from "../905/866915";
@@ -80,7 +80,7 @@ let $$f1 = forwardRef(({
         type: "cancel drag"
       })) : dispatch({
         type: "start click"
-      }), !_$$T.RECORD_DETAILED_EVENTS) return aH;
+      }), !_$$T.RECORD_DETAILED_EVENTS) return SKIP_RECORDING;
     },
     onTouchEnd: L,
     onTouchStart: R,
@@ -98,7 +98,7 @@ let $$f1 = forwardRef(({
       "aria-hidden": !v,
       "aria-label": G && v ? function (e) {
         try {
-          return _$$A(e) || e;
+          return formatI18nMessage(e) || e;
         } catch (t) {
           return e;
         }

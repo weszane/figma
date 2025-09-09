@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";

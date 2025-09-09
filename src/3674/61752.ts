@@ -1,13 +1,13 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { U as _$$U } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { V as _$$V } from "../905/223767";
 import { _I } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
@@ -74,15 +74,15 @@ export function $$z0({
           C(Ts({
             origin: "dev_mode",
             formState: qB.JOIN_ORG,
-            redirectUrl: Ay.location.pathname
+            redirectUrl: customHistory.location.pathname
           }));
           C(showModalHandler({
             type: _$$x,
             data: {}
           }));
-        } else if (x) C(_$$F.enqueue({
+        } else if (x) C(VisualBellActions.enqueue({
           message: "No team user"
-        }));else {
+        })); else {
           y("Dev Mode Paywall clicked", {
             type: "Starter Tier Upgrade",
             entryPoint: n
@@ -106,7 +106,7 @@ export function $$z0({
         }
       } catch (e) {
         L && O(_$$c2.DEFAULT);
-        C(_$$F.enqueue({
+        C(VisualBellActions.enqueue({
           message: e.message || e.data.message
         }));
       }
@@ -186,7 +186,7 @@ export function $$z0({
   };
 }
 function V() {
-  Ay.unsafeRedirect(z, "_blank");
+  customHistory.unsafeRedirect(z, "_blank");
 }
 export function $$H2() {
   let {

@@ -7,8 +7,8 @@ import { logError } from "../905/714362";
 import { getFalseValue } from "../figma_app/897289";
 import { my, u8 } from "../figma_app/976749";
 import { N } from "../905/482239";
-import { TA } from "../905/372672";
-import { Fr3 } from "../figma_app/43951";
+import { getUserId } from "../905/372672";
+import { FrecencyHistoryView } from "../figma_app/43951";
 import { I as _$$I } from "../905/454965";
 import { h8 } from "../figma_app/144974";
 import { l as _$$l } from "../905/131889";
@@ -23,7 +23,7 @@ let b = createLocalStorageAtom("frecencyHistory", {
 }, {
   debounceTime: 1e3
 });
-let T = atom(e => e(Fr3.Query({})));
+let T = atom(e => e(FrecencyHistoryView.Query({})));
 class I {
   constructor({
     json: e,
@@ -171,7 +171,7 @@ function S(e, t) {
 }
 export function $$v1() {
   let [e, t] = useAtomValueAndSetter(b);
-  let r = TA();
+  let r = getUserId();
   let i = my();
   let s = useMemo(() => new I({
     json: e,

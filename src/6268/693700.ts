@@ -12,8 +12,8 @@ import { oW } from "../905/675859";
 import { getI18nString } from "../905/303541";
 import { a as _$$a2 } from "../6658/303587";
 import { k1 } from "../1250/428971";
-import { useDispatch } from "../vendor/514228";
-import { F as _$$F } from "../905/302958";
+import { useDispatch } from "react-redux";
+import { VisualBellActions } from "../905/302958";
 import { I as _$$I } from "../6658/358099";
 import { s as _$$s } from "../6658/286262";
 import { b as _$$b } from "../905/217163";
@@ -39,12 +39,12 @@ function w({
   let c = useDispatch();
   useEffect(() => {
     if (0 === e) {
-      c(_$$F.dequeue({
+      c(VisualBellActions.dequeue({
         matchType: x
       }));
       return;
     }
-    c(_$$F.enqueue({
+    c(VisualBellActions.enqueue({
       type: x,
       message: getI18nString("dev_handoff.component_browser.bulk_mapping.selected_components_bell.description", {
         count: e
@@ -431,7 +431,7 @@ function B({
     if ("connected" === e.code_connect_info.v1.state) try {
       let o = JSON.parse(e.code_connect_info.v1.figmadoc ?? "");
       n = Array.isArray(o) ? o[0] : o;
-    } catch (e) {}
+    } catch (e) { }
     let o = k && _$$I(e) === _$$I(k);
     let t = null;
     let s = null;
@@ -752,7 +752,7 @@ export function $$W0({
     }), jsx(w, {
       selectedCount: (A ?? new Set()).size,
       onBulkConnectComponents: () => {
-        (K ?? (() => {}))({
+        (K ?? (() => { }))({
           selectedComponents: n.filter(e => (A ?? new Set()).has(e.component.node_id)),
           bulkSuggestions: D,
           trackingProps: {
@@ -765,7 +765,7 @@ export function $$W0({
         F?.(new Set());
       },
       onBulkIgnoreComponents: () => {
-        (K ?? (() => {}))({
+        (K ?? (() => { }))({
           selectedComponents: n.filter(e => (A ?? new Set()).has(e.component.node_id)),
           bulkSuggestions: D,
           trackingProps: {

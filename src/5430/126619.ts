@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { bL, mc, q7, YJ, b as _$$b } from "../figma_app/860955";
 import { A as _$$A } from "../905/351112";
@@ -26,7 +26,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { F } from "../905/171275";
 import { J } from "../905/341359";
 import { hasDesktopAPI } from "../figma_app/876459";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { DV, lW } from "../figma_app/471982";
 import { FM, RL, Gq, xb as _$$xb } from "../5430/773914";
 import { LP, L_ } from "../7222/418961";
@@ -199,7 +199,7 @@ function M({
   }, [resource, sharedRouteParams]);
   let _ = useCallback(() => {
     lW(c);
-    r(_$$F.enqueue({
+    r(VisualBellActions.enqueue({
       message: getI18nString("copy_to_clipboard.link_copied_to_clipboard"),
       type: "success"
     }));
@@ -316,7 +316,7 @@ export function $$F0({
   return jsxs(Fragment, {
     children: [jsx(_$$A, {
       getAriaLabel: t ? () => "" : e => k(e) ?? "",
-      handleOpenItem: t ? () => {} : (e, t) => S(e, t),
+      handleOpenItem: t ? () => { } : (e, t) => S(e, t),
       items: t ? A : e,
       multiselectDisabled: !0,
       viewType: XU.GRID,

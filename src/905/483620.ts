@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback } from "react";
 import { lQ } from "../905/934246";
-import { AF, v_, iQ } from "../figma_app/806412";
+import { useHandleChangeEvent, useHandleKeyboardEvent, useHandleGenericEvent } from "../figma_app/878298";
 import { L as _$$L } from "../905/408237";
 import { useSyncedRef } from "../905/633914";
 import { v as _$$v } from "../905/318279";
@@ -34,7 +34,7 @@ export function $$p0({
     R(_);
   }, [_, R]);
   let N = useRef(!1);
-  let P = AF(y, "change", useCallback(e => {
+  let P = useHandleChangeEvent(y, "change", useCallback(e => {
     let t = e.target.value;
     R(t);
     C.current = !1;
@@ -56,7 +56,7 @@ export function $$p0({
     T.current ? (C.current = !0, g?.(T.current) || O(e)) : I && g?.("") || O(e);
     e?.currentTarget?.blur();
   }, [T, _, I, O, g]);
-  let L = v_(y, "keydown", useCallback(e => {
+  let L = useHandleKeyboardEvent(y, "keydown", useCallback(e => {
     switch (e.key) {
       case "Enter":
         e.preventDefault();
@@ -68,7 +68,7 @@ export function $$p0({
         O(e);
     }
   }, [O, D]));
-  let F = iQ(y, "blur", useCallback(e => {
+  let F = useHandleGenericEvent(y, "blur", useCallback(e => {
     if (N.current) return;
     let t = e.target?.value;
     null != t && (R(t), D(null));

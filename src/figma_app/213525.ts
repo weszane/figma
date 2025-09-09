@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { _G } from "../figma_app/516028";
 import { Mb, El } from "../figma_app/646357";
 import { D2 } from "../905/18797";

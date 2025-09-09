@@ -6,7 +6,7 @@ import { h as _$$h } from '../905/34040';
 import { A2, bv } from '../905/49095';
 import { kz } from '../905/77776';
 import { B as _$$B } from '../905/113996';
-import { D6 } from '../905/117560';
+import { toMatrix2x3 } from '../905/117560';
 import { F as _$$F } from '../905/136718';
 import { BL, fw, J3, KH, qn, u_, XQ } from '../905/139004';
 import { ServiceCategories as _$$e } from '../905/165054';
@@ -17,11 +17,11 @@ import { B as _$$B2 } from '../905/248554';
 import { E as _$$E, u as _$$u } from '../905/363827';
 import { c2 } from '../905/382883';
 import { debugState } from '../905/407919';
-import { gJ, NN } from '../905/409381';
+import { getLinearGradientPoints, getRadialGradientPoints } from '../905/409381';
 import { tK as _$$tK, Hw, hX, KY, nk, vy } from '../905/432392';
 import { createPluginInstance } from '../905/472793';
 import { S as _$$S } from '../905/491708';
-import { P as _$$P2 } from '../905/545265';
+import { PluginApiMetrics } from '../905/545265';
 import { pS } from '../905/588985';
 import { getFeatureFlags } from '../905/601108';
 import { L as _$$L } from '../905/687364';
@@ -3429,7 +3429,7 @@ function tj(e) {
 }
 class tU {
   static fromGradientPaint(e, t) {
-    let i = gJ(D6(e.gradientTransform));
+    let i = getLinearGradientPoints(toMatrix2x3(e.gradientTransform));
     let {
       x,
       y
@@ -3464,7 +3464,7 @@ class tB {
     let [{
       x: i,
       y: n
-    }] = NN(D6(e.gradientTransform));
+    }] = getRadialGradientPoints(toMatrix2x3(e.gradientTransform));
     this.centerX = i;
     this.centerY = n;
     this.colorStops = e.gradientStops.map(i => {
@@ -3490,7 +3490,7 @@ class tV {
     }, {
       x: r,
       y: a
-    }] = NN(D6(e.gradientTransform));
+    }] = getRadialGradientPoints(toMatrix2x3(e.gradientTransform));
     this.centerX = i;
     this.centerY = n;
     this.angle = 180 * Math.atan2(a - n, r - i) / Math.PI;
@@ -4531,7 +4531,7 @@ class ic {
       noOpVm
     } = _$$e2();
     createPluginInstance(noOpVm, {
-      stats: new _$$P2(),
+      stats: new PluginApiMetrics(),
       pluginVersionID: '',
       name: 'First Party',
       command: '',

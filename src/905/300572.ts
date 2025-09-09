@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { Wv } from "../figma_app/633080";
 import { o as _$$o } from "../905/451156";
@@ -15,21 +15,21 @@ export function $$u0({
   return jsxs("div", {
     className: vR,
     children: [e.includes(Wv.LIBRARIES) && jsx($$c, {
-      recordingKey: Pt(fA, "libraryTab"),
+      recordingKey: generateRecordingKey(fA, "libraryTab"),
       onClick: i,
       tab: Wv.LIBRARIES,
       selectedTab: t,
       disabled: o,
       children: renderI18nText("design_systems.libraries_modal.libraries")
     }), e.includes(Wv.FONTS) && jsx($$c, {
-      recordingKey: Pt(fA, "fontsTab"),
+      recordingKey: generateRecordingKey(fA, "fontsTab"),
       onClick: i,
       tab: Wv.FONTS,
       selectedTab: t,
       disabled: o,
       children: renderI18nText("design_systems.libraries_modal.shared_fonts")
     }), e.includes(Wv.UPDATES) && jsx($$c, {
-      recordingKey: Pt(fA, "updatesTab"),
+      recordingKey: generateRecordingKey(fA, "updatesTab"),
       onClick: i,
       tab: Wv.UPDATES,
       selectedTab: t,

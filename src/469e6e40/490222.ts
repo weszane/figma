@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { N as _$$N } from "../905/572042";
@@ -16,7 +16,7 @@ import { K } from "../905/628118";
 import { L as _$$L } from "../905/16143";
 import { sf } from "../905/929976";
 import { fu } from "../figma_app/831799";
-import { t6F } from "../figma_app/43951";
+import { PaginatedAbandonedDraftsView } from "../figma_app/43951";
 import { O as _$$O } from "../figma_app/809387";
 import { J7, SN } from "../figma_app/650409";
 import { O as _$$O2 } from "../905/833838";
@@ -128,7 +128,7 @@ export function $$U0(e) {
       isReversed: O(t, e)
     }));
   }, [N]);
-  let F = Rs(t6F, {
+  let F = Rs(PaginatedAbandonedDraftsView, {
     firstPageSize: 30,
     sortOrder: a.isReversed ? "desc" : "asc",
     cursorColumn: a.columnName,

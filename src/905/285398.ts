@@ -1,118 +1,275 @@
-import { FontSourceType } from "../figma_app/763686";
-import { qO } from "../905/165290";
-import { H } from "../905/240327";
-import { debugState } from "../905/407919";
-import { getFalseValue } from "../figma_app/897289";
-export let $$l0 = new Set(["fontName", "fontSize", "textCase", "textDecoration", "letterSpacing", "lineHeight", "hyperlink", "fills", "listOptions", "indentation"]);
-export function $$d1({
-  vNode: e,
-  options: t,
-  Span: i,
-  fontProps: n
+import { DEFAULT_OPTICAL_SIZE } from '../905/165290'
+import { hasFontFamily } from '../905/240327'
+import { debugState } from '../905/407919'
+import { FontSourceType } from '../figma_app/763686'
+import { getFalseValue } from '../figma_app/897289'
+
+/**
+ * Set of supported text style properties.
+ * (Original: $$l0)
+ */
+export const TEXT_STYLE_KEYS = new Set([
+  'fontName',
+  'fontSize',
+  'textCase',
+  'textDecoration',
+  'letterSpacing',
+  'lineHeight',
+  'hyperlink',
+  'fills',
+  'listOptions',
+  'indentation',
+])
+
+/**
+ * Extracts text style ranges and characters from a vNode.
+ * (Original: $$d1)
+ * @param params - vNode, options, Span, fontProps
+ */
+export function extractTextRanges({
+  vNode,
+  options,
+  Span,
+  fontProps,
+}: {
+  vNode: any
+  options: any
+  Span: any
+  fontProps: any
 }) {
-  if (e?.type !== "text" && e?.type !== "input") return null;
-  let r = "";
-  let a = [];
-  let s = (e, n) => {
-    if (null != e && !1 !== e) {
-      if ("string" == typeof e || "number" == typeof e) {
-        r += String(e);
-        return;
+  if (vNode?.type !== 'text' && vNode?.type !== 'input')
+    return null
+
+  let characters = ''
+  let ranges: Array<{ start: number, end: number, style: any }> = []
+
+  /**
+   * Recursively processes children to build character string and style ranges.
+   * (Original: s)
+   */
+  function processNode(node: any, inheritedProps: any) {
+    if (node != null && node !== false) {
+      if (typeof node === 'string' || typeof node === 'number') {
+        characters += String(node)
+        return
       }
-      if (Array.isArray(e)) {
-        e.forEach(e => s(e, n));
-        return;
+      if (Array.isArray(node)) {
+        node.forEach(child => processNode(child, inheritedProps))
+        return
       }
-      if ("Span" === e.type) {
-        let o = r.length;
-        let l = {
-          ...n,
-          ...$$h2(e.props)
-        };
-        let {
-          textStyle: _textStyle
-        } = $$c4(i({
-          ...e.props,
-          font: $$p3(l)
-        }, t).props);
-        Array.isArray(e.props?.children) ? e.props?.children.forEach(e => s(e, l)) : s(e.children, l);
-        let u = r.length;
-        a.push({
-          start: o,
-          end: u,
-          style: _textStyle
-        });
+      if (node.type === 'Span') {
+        const start = characters.length
+        const mergedProps = {
+          ...inheritedProps,
+          ...extractFontProps(node.props),
+        }
+        const { textStyle } = splitTextStyle(
+          Span({
+            ...node.props,
+            font: resolveFont(mergedProps),
+          }, options).props,
+        )
+        if (Array.isArray(node.props?.children)) {
+          node.props.children.forEach(child => processNode(child, mergedProps))
+        }
+        else {
+          processNode(node.children, mergedProps)
+        }
+        const end = characters.length
+        ranges.push({
+          start,
+          end,
+          style: textStyle,
+        })
       }
     }
-  };
-  s(e.renderMetaData.children, n);
-  a.reverse();
-  let {
-    textStyle
-  } = $$c4(e.props);
+  }
+
+  processNode(vNode.renderMetaData.children, fontProps)
+  ranges.reverse()
+  const { textStyle } = splitTextStyle(vNode.props)
   return {
     style: textStyle,
-    ranges: a,
-    characters: r
-  };
+    ranges,
+    characters,
+  }
 }
-export function $$c4(e) {
-  let t = {};
-  let i = {};
-  for (let n in e) $$l0.has(n) ? t[n] = e[n] : i[n] = e[n];
-  return {
-    textStyle: t,
-    otherProps: i
-  };
+
+/**
+ * Maps font weight names and numbers to numeric values.
+ * (Original: m)
+ */
+export const FONT_WEIGHT_MAP = new Map<
+  number | string,
+  number
+>([
+  [100, 100],
+  [200, 200],
+  [300, 300],
+  [400, 400],
+  [500, 500],
+  [600, 600],
+  [700, 700],
+  [800, 800],
+  [900, 900],
+  ['thin', 100],
+  ['extra-light', 200],
+  ['light', 300],
+  ['normal', 400],
+  ['medium', 500],
+  ['semi-bold', 600],
+  ['bold', 700],
+  ['extra-bold', 800],
+  ['black', 900],
+])
+
+/**
+ * Splits props into textStyle and otherProps based on TEXT_STYLE_KEYS.
+ * (Original: $$c4)
+ * @param props - The props object to split.
+ */
+export function splitTextStyle(props: Record<string, any>) {
+  const textStyle: Record<string, any> = {}
+  const otherProps: Record<string, any> = {}
+  for (const key in props) {
+    if (TEXT_STYLE_KEYS.has(key)) {
+      textStyle[key] = props[key]
+    }
+    else {
+      otherProps[key] = props[key]
+    }
+  }
+  return { textStyle, otherProps }
 }
-let u = "Regular";
-export function $$p3(e) {
-  let {
+
+const DEFAULT_FONT_STYLE = 'Regular'
+
+/**
+ * Resolves font family and style from props.
+ * (Original: $$p3)
+ * @param props - Font properties.
+ */
+export function resolveFont(props: {
+  font?: any
+  italic?: boolean
+  fontWeight?: number | string
+  fontFamily?: string
+}) {
+  const {
     font,
-    italic = !1,
+    italic = false,
     fontWeight = 400,
-    fontFamily = "Inter"
-  } = e;
-  return font || null != e.italic || null != e.fontWeight || null != e.fontFamily ? font || ("Roboto" === fontFamily || "Inter" === fontFamily || H(fontFamily) || (getFalseValue() || console.error(`Use of non-supported font '${fontFamily}'. Use Roboto, Inter, or another Google font.`), d = "Inter"), {
-    family: fontFamily,
-    style: function ({
-      fontFamily: e,
-      fontWeight: t,
-      italic: i
-    }) {
-      let a = (debugState.getState().fonts || {})[e] || [];
-      for (let s in a) {
-        let l = a[s].styles;
-        a[s].source === FontSourceType.GOOGLE || getFalseValue() || console.warn(`Font '${e}' is not loaded from Google fonts. The font may be a shared font or installed locally.`);
-        let d = Object.keys(l).filter(e => l[e].italic === i && l[e].weight === t).sort((e, t) => Math.abs(l[e].stretch || qO - qO) - Math.abs(l[t].stretch || qO - qO)).pop();
-        if (d) return d;
+    fontFamily = 'Inter',
+  } = props
+
+  if (
+    font
+    || props.italic != null
+    || props.fontWeight != null
+    || props.fontFamily != null
+  ) {
+    let resolvedFamily
+      = fontFamily === 'Roboto'
+        || fontFamily === 'Inter'
+        || hasFontFamily(fontFamily)
+        ? fontFamily
+        : (getFalseValue() || console.error(
+            `Use of non-supported font '${fontFamily}'. Use Roboto, Inter, or another Google font.`,
+          ),
+          'Inter')
+
+    return (
+      font || {
+        family: resolvedFamily,
+        style: resolveFontStyle({
+          fontFamily: resolvedFamily,
+          fontWeight: FONT_WEIGHT_MAP.get(fontWeight) || 400,
+          italic,
+        }),
       }
-      console.error(`Unable to resolve font for fontFamily=${e}, fontWeight=${t}, italic=${i} - falling back to ${u}.`);
-      return u;
-    }({
-      fontFamily,
-      fontWeight: m.get(fontWeight) || 400,
-      italic
-    })
-  }) : {
-    family: "Inter",
-    style: "Medium"
-  };
+    )
+  }
+  else {
+    return {
+      family: 'Inter',
+      style: 'Medium',
+    }
+  }
 }
-let m = new Map([[100, 100], [200, 200], [300, 300], [400, 400], [500, 500], [600, 600], [700, 700], [800, 800], [900, 900], ["thin", 100], ["extra-light", 200], ["light", 300], ["normal", 400], ["medium", 500], ["semi-bold", 600], ["bold", 700], ["extra-bold", 800], ["black", 900]]);
-export function $$h2(e) {
-  return e ? function (e) {
-    for (let t in e) void 0 === e[t] && delete e[t];
-    return e;
-  }({
-    font: e.font,
-    italic: e.italic,
-    fontWeight: e.fontWeight,
-    fontFamily: e.fontFamily
-  }) : {};
+
+/**
+ * Resolves the font style string for a given font family, weight, and italic.
+ * (Original: anonymous function inside $$p3)
+ * @param params - fontFamily, fontWeight, italic
+ */
+function resolveFontStyle({
+  fontFamily,
+  fontWeight,
+  italic,
+}: {
+  fontFamily: string
+  fontWeight: number
+  italic: boolean
+}) {
+  const fonts = (debugState.getState().fonts || {})[fontFamily] || []
+  for (const font of fonts) {
+    const styles = font.styles
+    if (
+      font.source === FontSourceType.GOOGLE
+      || getFalseValue()
+      || console.warn(
+        `Font '${fontFamily}' is not loaded from Google fonts. The font may be a shared font or installed locally.`,
+      )
+    ) {
+      ;
+    }
+    const styleKey = Object.keys(styles)
+      .filter(
+        key =>
+          styles[key].italic === italic
+          && styles[key].weight === fontWeight,
+      )
+      .sort(
+        (a, b) =>
+          Math.abs(styles[a].stretch || DEFAULT_OPTICAL_SIZE - DEFAULT_OPTICAL_SIZE)
+          - Math.abs(styles[b].stretch || DEFAULT_OPTICAL_SIZE - DEFAULT_OPTICAL_SIZE),
+      )
+      .pop()
+    if (styleKey)
+      return styleKey
+  }
+  console.error(
+    `Unable to resolve font for fontFamily=${fontFamily}, fontWeight=${fontWeight}, italic=${italic} - falling back to ${DEFAULT_FONT_STYLE}.`,
+  )
+  return DEFAULT_FONT_STYLE
 }
-export const $U = $$l0;
-export const ZW = $$d1;
-export const _u = $$h2;
-export const c8 = $$p3;
-export const hH = $$c4;
+
+
+
+/**
+ * Extracts font-related props, removing undefined values.
+ * (Original: $$h2)
+ * @param props - The props object.
+ */
+export function extractFontProps(props: any) {
+  if (!props)
+    return {}
+  const fontProps = {
+    font: props.font,
+    italic: props.italic,
+    fontWeight: props.fontWeight,
+    fontFamily: props.fontFamily,
+  }
+  for (const key in fontProps) {
+    if (fontProps[key] === undefined)
+      delete fontProps[key]
+  }
+  return fontProps
+}
+
+// Export refactored names for compatibility
+export const $U = TEXT_STYLE_KEYS
+export const ZW = extractTextRanges
+export const _u = extractFontProps
+export const c8 = resolveFont
+export const hH = splitTextStyle

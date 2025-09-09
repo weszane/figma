@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
-import { useSelector, useStore } from "../vendor/514228";
+import { useSelector, useStore } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
@@ -12,7 +12,7 @@ import { ye, Gi as _$$Gi } from "../figma_app/528509";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { FOrganizationLevelType, FPlanNameType, FFileType } from "../figma_app/191312";
-import { Z45, Sqp, hjj, z8m, bSj } from "../figma_app/43951";
+import { PaginatedTemplatesByOrgWorkspace, PaginatedTemplatesByOrg, PaginatedTemplatesByTeam, BrowseTemplatesView, PaginatedTemplatesSearch } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { G7 } from "../figma_app/336853";
 import { D6, T5, X$ } from "../figma_app/465071";
@@ -305,7 +305,7 @@ export function $$W11({
 }) {
   let u = getFeatureFlags().pro_templates_lg && !!e && c;
   let _ = !!e && t;
-  let [h] = IT(Z45({
+  let [h] = IT(PaginatedTemplatesByOrgWorkspace({
     orgId: e,
     editorType: r,
     filterByWorkspaceIds: l,
@@ -316,7 +316,7 @@ export function $$W11({
     enabled: u && _,
     revalidateOnMount: s
   });
-  let [m] = IT(Sqp({
+  let [m] = IT(PaginatedTemplatesByOrg({
     orgId: e,
     editorType: r,
     filterByTeamIds: l,
@@ -453,7 +453,7 @@ export function $$$14({
   let [{
     status: i,
     data: a
-  }] = IT(hjj({
+  }] = IT(PaginatedTemplatesByTeam({
     teamId: e,
     editorType: t,
     firstPageSize: r
@@ -488,7 +488,7 @@ export function $$$14({
 }
 let X = e => {
   let t = G7(e);
-  let r = Rs(z8m, {
+  let r = Rs(BrowseTemplatesView, {
     currentOrgId: e?.id || ""
   }, {
     enabled: !!e
@@ -602,7 +602,7 @@ export function $$ee9() {
 }
 export function $$et17(e, t, r = 10, n = !1, i = !0) {
   let a = $$P2();
-  let s = Rs(bSj, {
+  let s = Rs(PaginatedTemplatesSearch, {
     teamId: a?.type === "team" ? a.entity.id : null,
     orgId: a?.type === "org" ? a.entity.id : null,
     query: e,

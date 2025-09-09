@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
-import { useSelector, useDispatch, shallowEqual } from "../vendor/514228";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { c2 } from "../905/382883";
-import { Op } from "../905/19536";
+import { useMemoArrayCustom } from "../905/19536";
 import { ZC } from "../figma_app/39751";
 import { NS, Pp, a6 } from "../905/989765";
 import { R9 } from "../905/977824";
 import { _i } from "../figma_app/578768";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { h as _$$h } from "../figma_app/275739";
 import { Lk } from "../figma_app/122682";
 function h() {
@@ -16,12 +16,12 @@ function h() {
     return e.sessionID === t.sessionID && e.sawMouse === t.sawMouse && e.deviceName === t.deviceName && e.name === t.name && e.imageURL === t.imageURL;
   }
   return {
-    multiplayerUsersInVoiceCall: Op(() => e.filter(e => t[e.sessionID]?.connectedCallId), [e, t], r),
-    multiplayerUsersNotInVoiceCall: Op(() => e.filter(e => !t[e.sessionID]?.connectedCallId), [e, t], r)
+    multiplayerUsersInVoiceCall: useMemoArrayCustom(() => e.filter(e => t[e.sessionID]?.connectedCallId), [e, t], r),
+    multiplayerUsersNotInVoiceCall: useMemoArrayCustom(() => e.filter(e => !t[e.sessionID]?.connectedCallId), [e, t], r)
   };
 }
 export function $$m1(e, t) {
-  let r = iZ();
+  let r = selectCurrentUser();
   let a = useSelector(e => e.multiplayer.deviceNameFilter);
   let s = useSelector(t => e && t.voice.activeCall[e]);
   let {

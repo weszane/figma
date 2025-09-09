@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { $n } from "../905/521428";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { VP } from "../905/18797";
@@ -28,7 +28,7 @@ export function $$_0({
       }) : jsx($n, {
         onClick: e,
         variant: "link",
-        recordingKey: Pt(t, "preferredValues", "tryAgain"),
+        recordingKey: generateRecordingKey(t, "preferredValues", "tryAgain"),
         children: getI18nString("design_systems.component_properties.try_again")
       })]
     })

@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useEffect, useCallback, useMemo } from "react";
 import { Ay } from "../figma_app/272902";
 import { ZC } from "../figma_app/39751";
-import { qP, AF, iQ, v_ } from "../figma_app/806412";
+import { useSetupPlayback, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { Q } from "../905/249555";
 export let $$d0 = forwardRef(function (e, t) {
   let i = e.recordingKey || "";
@@ -16,7 +16,7 @@ export let $$d0 = forwardRef(function (e, t) {
     submit,
     cancel
   } = e;
-  let m = qP(i, "submit", e => {
+  let m = useSetupPlayback(i, "submit", e => {
     d.current && submit(e, d.current);
   });
   let h = useCallback(() => {
@@ -28,12 +28,12 @@ export let $$d0 = forwardRef(function (e, t) {
     }
     cancel(d.current);
   }, [d, cancel, m]);
-  let g = AF(e.recordingKey || "", "change", e => {});
+  let g = useHandleChangeEvent(e.recordingKey || "", "change", e => {});
   let f = useCallback(() => {
     d.current && (d.current.value !== e.placeholderValue ? h() : cancel(d.current));
   }, [cancel, e.placeholderValue, h]);
-  let _ = iQ(i, "blur", f);
-  let A = v_(i, "keydown", t => {
+  let _ = useHandleGenericEvent(i, "blur", f);
+  let A = useHandleKeyboardEvent(i, "keydown", t => {
     if (d.current) switch (t.keyCode) {
       case 13:
         t.stopPropagation();

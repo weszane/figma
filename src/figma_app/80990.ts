@@ -3,8 +3,8 @@ import { Thumbnail, LibraryPubSub, SceneIdentifier, Confirmation } from "../figm
 import { permissionScopeHandler } from "../905/189185";
 import { Hc } from "../905/805904";
 import { Hc as _$$Hc, sH, dI } from "../905/537777";
-import { q as _$$q } from "../905/196201";
-import { xx } from "../figma_app/815945";
+import { LRUCache } from "../905/196201";
+import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
 import { H0, X9 } from "../figma_app/191804";
 import { w } from "../905/5147";
@@ -104,7 +104,7 @@ export function $$M25(e) {
   return t;
 }
 let $$F11 = _$$n(e => e === E8.CURRENT || e === E8.CHANGED || e === E8.DELETED);
-let $$j16 = xx(e => {
+let $$j16 = memoizeByArgs(e => {
   let t = {};
   Object.keys(e).forEach(r => {
     t[r] = $$U4(e[r] ?? {});
@@ -121,7 +121,7 @@ export function $$U4(e) {
   }
   return t;
 }
-export let $$B9 = xx(e => {
+export let $$B9 = memoizeByArgs(e => {
   let t = $$U4(e.local.components);
   for (let r in e.local.stateGroups) t[r] = e.local.stateGroups[r];
   return t;
@@ -428,7 +428,7 @@ let en = class e {
   constructor() {
     this.canvasCache = Object.create(null);
     this.canvasRequestsInFlight = Object.create(null);
-    this.thumbnailCache = new _$$q(e.MAX_VARIABLE_SET_THUMBNAILS);
+    this.thumbnailCache = new LRUCache(e.MAX_VARIABLE_SET_THUMBNAILS);
     this.thumbnailRequestsInFlight = Object.create(null);
     this.getCanvas = async ({
       canvas_url: e

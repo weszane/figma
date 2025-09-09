@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { createLocalStorageAtom, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
 import { uQ } from "../figma_app/311375";

@@ -14,7 +14,7 @@ import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import p from "classnames";
 import { O8 } from "../figma_app/88484";
 import { U as _$$U } from "../figma_app/901889";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { ks } from "../figma_app/637027";
 import { f as _$$f } from "../figma_app/109947";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -178,26 +178,26 @@ function F({
         onSelected: () => n(() => fullscreenValue.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "POLL"
         })),
-        recordingKey: Pt(a, "poll")
+        recordingKey: generateRecordingKey(a, "poll")
       }), jsx(B, {
         thumbnail: _require2,
         title: getI18nString("slides.flapp.embed.widget_stamps"),
         onSelected: () => n(() => fullscreenValue.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "FACEPILE"
         })),
-        recordingKey: Pt(a, "facepile")
+        recordingKey: generateRecordingKey(a, "facepile")
       }), jsx(B, {
         thumbnail: _require3,
         title: getI18nString("slides.flapp.embed.widget_alignment"),
         onSelected: () => n(() => fullscreenValue.triggerActionInUserEditScope("insert-interactive-element-into-active-slide", {
           type: "ALIGNMENT"
         })),
-        recordingKey: Pt(a, "alignment")
+        recordingKey: generateRecordingKey(a, "alignment")
       }), jsx(B, {
         thumbnail: _require4,
         title: getI18nString("slides.flapp.embed.widget_prototype"),
         onSelected: t,
-        recordingKey: Pt(a, "prototype")
+        recordingKey: generateRecordingKey(a, "prototype")
       })]
     })]
   });

@@ -3,7 +3,7 @@ import { Rs } from "../figma_app/288654";
 import { getI18nString } from "../905/303541";
 import { HH } from "../figma_app/828186";
 import { FFileType } from "../figma_app/191312";
-import { zCd } from "../figma_app/43951";
+import { FileCreationPermissionsView } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { Az, No } from "../figma_app/465071";
 import { aI } from "../figma_app/552876";
@@ -36,7 +36,7 @@ export function $$g4(e, t) {
 export async function $$f3(e, t) {
   let {
     project
-  } = await M4.fetch(zCd.Query({
+  } = await M4.fetch(FileCreationPermissionsView.Query({
     projectId: e
   }));
   return !!project && $$g4(project, t);
@@ -45,7 +45,7 @@ export function $$E5(e) {
   return Object.values($$m2(e)).some(e => !!e && e.result);
 }
 export function $$y6(e) {
-  let t = Rs(zCd, {
+  let t = Rs(FileCreationPermissionsView, {
     projectId: e
   }, {
     enabled: !!e

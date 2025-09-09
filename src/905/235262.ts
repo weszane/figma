@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, createContext, useCallback, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useUndoRedoAtom, atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { sf } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
 import { _6 } from "../figma_app/386952";
@@ -75,7 +75,7 @@ function S({
     fullscreenValue.setFigmascopeSelectedGuidCallback(A);
   }, [A]);
   let y = p ? l.getNodeById(p) : null;
-  let b = k9(() => y ? w(y) : null, [y]);
+  let b = useMemoStable(() => y ? w(y) : null, [y]);
   useEffect(() => {
     let e = t?.guids.includes(p);
     if (t !== g.current || c !== _.current) {

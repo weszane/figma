@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { bytesToHex } from "../905/125019";
 import { E as _$$E } from "../905/632989";
 import s from "classnames";
-import { o6, C0, cZ } from "../figma_app/806412";
+import { RecordingPureComponent, handleKeyboardEvent, handleMouseEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -116,25 +116,25 @@ export function $$$$D1(e) {
     ...e
   });
 }
-class L extends o6 {
+class L extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.getPaint = () => "paint" in this.props ? normalizeValue(this.props.paint) : null;
     this.getColor = () => "color" in this.props ? normalizeValue(this.props.color) : null;
     this.getOpacity = () => "color" in this.props ? normalizeValue(this.props.opacity) : null;
     this.getStyle = () => "fillStyle" in this.props ? this.props.fillStyle : null;
-    this.onKeyDown = C0(this, "keydown", e => {
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       13 === e.keyCode && (this.props.onMouseDown && this.props.onMouseDown(e), this.props.onClick && this.props.onClick(e));
       27 === e.keyCode && (this.props.isInFPLGrid || e.currentTarget.blur());
     });
-    this.onClick = this.props.onClick && cZ(this, "click", e => {
+    this.onClick = this.props.onClick && handleMouseEvent(this, "click", e => {
       this.props.onClick(e);
     });
-    this.onMouseDown = this.props.onMouseDown && cZ(this, "mousedown", e => {
+    this.onMouseDown = this.props.onMouseDown && handleMouseEvent(this, "mousedown", e => {
       this.props.allowMouseDownPropagation || e.stopPropagation();
       this.props.onMouseDown(e);
     });
-    this.onMouseUp = cZ(this, "mouseup", e => {
+    this.onMouseUp = handleMouseEvent(this, "mouseup", e => {
       e.stopPropagation();
       e.currentTarget.blur();
     });
@@ -232,7 +232,7 @@ class L extends o6 {
   }
 }
 L.displayName = "Chit";
-class F extends o6 {
+class F extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.imageManager = Jr();

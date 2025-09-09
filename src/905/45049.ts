@@ -1,5 +1,5 @@
 import { useCallback, useRef, useEffect, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -32,7 +32,7 @@ import { kz, s3 } from "../figma_app/171177";
 import { p as _$$p } from "../905/133304";
 import { I as _$$I } from "../905/341245";
 import { DH } from "../905/508893";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { X } from "../905/123783";
 import { O as _$$O } from "../905/947996";
 import { Gt } from "../905/175194";
@@ -68,7 +68,7 @@ function B(e) {
       default:
         throwTypeError(n);
     }
-    Ay.redirect(n.url, "_blank");
+    customHistory.redirect(n.url, "_blank");
   }, [e, c, d, l, r, t, i]);
 }
 function V({

@@ -1,13 +1,13 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useRef, useContext } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { K } from "../905/443068";
 import { r as _$$r } from "../905/784543";
 import { StateHierarchy } from "../figma_app/763686";
 import d from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { s } from "../figma_app/874592";
 import { Dr, Ct } from "../figma_app/803787";
 import { Ib } from "../905/129884";
@@ -73,10 +73,10 @@ function A(e) {
     return g0(e);
   }();
   return t && ("SYMBOL" === t.type && !t.isState || t.isStateGroup) ? jsx(K, {
-    recordingKey: Pt(e.recordingKey, "goToParent"),
+    recordingKey: generateRecordingKey(e.recordingKey, "goToParent"),
     "aria-label": getI18nString("design_systems.component_panel.select_component"),
     onClick: () => {
-      tJ([t.guid]);
+      replaceSelection([t.guid]);
     },
     htmlAttributes: {
       "data-tooltip": getI18nString("design_systems.component_panel.select_component"),

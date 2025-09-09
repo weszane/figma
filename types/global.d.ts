@@ -128,7 +128,7 @@ export interface InitialOptions {
   feature_flag_rules: FeatureFlagRules
   i18n_desktop_version_support: I18NDesktopVersionSupport
   dynamic_configs: DynamicConfigs
-  livegraph_preload_views: FeatureFlagRules
+  livegraph_preload_views: LivegraphPreloadViews
   plan_key: string
   statsig_bootstrap_values: StatsigBootstrapValues
   admin_self_upgrades_enabled: boolean
@@ -1327,6 +1327,16 @@ export interface DaysAllowedToSeeNux {
 }
 
 export interface FeatureFlagRules {
+  
+}
+export interface LivegraphPreloadViews {
+  [key: string]: {
+    hash: string
+    args: {
+      currentOrgId: string | null
+      currentTeamId: string | null
+    }
+  }
 }
 
 export interface DtMCPEligibleForNewUIDate {

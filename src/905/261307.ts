@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -12,7 +12,7 @@ import { $z } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { RR } from "../figma_app/307841";
 import { k as _$$k2 } from "../figma_app/618031";
@@ -92,7 +92,7 @@ export let $$O0 = registerModal(function ({
       area: _$$e.MONETIZATION_EXPANSION
     },
     onError: () => {
-      U(_$$F.enqueue({
+      U(VisualBellActions.enqueue({
         message: getI18nString("admin_auto_upgrade_confirmation_modal.error"),
         error: !0
       }));

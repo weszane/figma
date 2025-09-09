@@ -1,6 +1,6 @@
 import { dR } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { isAnyMobile } from "../figma_app/778880";
 import { XHR } from "../905/910117";
 import { FEditorType } from "../figma_app/53721";
@@ -57,6 +57,6 @@ export async function $$c0(e, t, i, o) {
   e.tryPluginEditorType && (p["try-plugin-editor-type"] = e.tryPluginEditorType);
   desktopAPIInstance && (p["time-opened"] = Date.now().toString());
   let m = dR(u, p);
-  Ay.redirect(m, isAnyMobile ? void 0 : "_blank");
+  customHistory.redirect(m, isAnyMobile ? void 0 : "_blank");
 }
 export const j = $$c0;

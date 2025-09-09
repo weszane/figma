@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { k as _$$k } from "../905/443820";
 import { isMobileUA } from "../figma_app/778880";
 import { Ts } from "../905/194276";

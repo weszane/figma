@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { trackEventAnalytics } from "../905/449184";
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { getInitialOptions, buildStaticUrl } from "../figma_app/169182";
 import { reportError, normalizeError } from "../905/11";
 import { XHR } from "../905/910117";
@@ -680,7 +680,7 @@ function w({
     l = r;
   } else {
     if (null == e && void 0 !== e) return `https://${window.location.host}/team/validate_payment_method?${_.toString()}`;
-    k.error("No valid ID was passed");
+    logger.error("No valid ID was passed");
   }
   return `https://${window.location.host}/${d}/${l}/set_payment_method?${_.toString()}`;
 }

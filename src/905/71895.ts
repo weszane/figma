@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { g as _$$g } from "../905/749786";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -17,8 +17,8 @@ import { showModalHandler } from "../905/156213";
 import { N$, qk } from "../905/355291";
 import { rH, nm, uN } from "../905/264101";
 import { Z } from "../905/854480";
-import { pS, iZ } from "../905/372672";
-import { Yh6 } from "../figma_app/43951";
+import { hasPasswordOrSSO, selectCurrentUser } from "../905/372672";
+import { CurrentUserIsMfaRequiredByMembershipOrgView } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { _ as _$$_ } from "../905/799322";
@@ -36,7 +36,7 @@ function R({
 }) {
   let i = useDispatch();
   let r = k();
-  let s = Rs(Yh6, {});
+  let s = Rs(CurrentUserIsMfaRequiredByMembershipOrgView, {});
   let d = oA(s.data?.currentUser?.isMfaRequiredByMembershipOrg) && !t.two_factor_app_enabled;
   return jsxs(vo, {
     children: [jsx(Y9, {
@@ -224,7 +224,7 @@ function O({
   }) : jsx(bL, {
     width: "lg",
     manager: t,
-    children: pS(e) ? e.phone_number ? jsx(R, {
+    children: hasPasswordOrSSO(e) ? e.phone_number ? jsx(R, {
       setConfirm: l,
       user: e
     }) : e.phone_token ? jsx(N, {
@@ -242,7 +242,7 @@ function O({
   });
 }
 export let $$D0 = registerModal(function (e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = hS(e);
   return t ? jsx(O, {
     user: t,

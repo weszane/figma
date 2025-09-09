@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { WhiteboardStarterKitCppBindings, WhiteboardSectionPresetPickerCppBindings } from "../figma_app/763686";
 import { useAtomWithSubscription, Rq } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";

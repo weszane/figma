@@ -1,7 +1,7 @@
 import { createContext, useState, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { zN } from "../905/19536";
+import { useStableMemo } from "../905/19536";
 import { ZC } from "../figma_app/39751";
 import { qp } from "../905/977779";
 import { B8 } from "../figma_app/255679";
@@ -54,7 +54,7 @@ let $$I1 = D(() => {
       });
     });
   }, [I, C, e, S, w, g, E, x, T, k, R]);
-  return zN(t);
+  return useStableMemo(t);
 });
 export const r = $$v0;
 export const F = $$I1;

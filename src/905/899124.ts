@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
 import { Rs } from "../figma_app/288654";
@@ -11,7 +11,7 @@ import { a_ } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Pf, nl } from "../905/590952";
 import { U as _$$U } from "../905/566881";
 import { Cy } from "../905/844322";
@@ -21,7 +21,7 @@ import { z as _$$z } from "../905/373223";
 import { mE } from "../905/561087";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FUserRoleType, FPlanRestrictionType } from "../figma_app/191312";
-import { G0Y } from "../figma_app/43951";
+import { AccessibleFoldersV2 } from "../figma_app/43951";
 import { kA } from "../figma_app/336853";
 import { XX, oc } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
@@ -190,7 +190,7 @@ export let $$en0 = registerModal(function (e) {
   let ed = useRef(null);
   let ec = useRef(null);
   let eu = useSelector(e => getPermissionsStateMemoized(e));
-  let ep = Rs(G0Y, {
+  let ep = Rs(AccessibleFoldersV2, {
     orgId: null
   });
   let em = useDispatch();
@@ -253,9 +253,9 @@ export let $$en0 = registerModal(function (e) {
   }) : getI18nString("file_browser.draft_move_modal.header_single_file_move", {
     fileName: e_[0]
   });
-  let ey = e => _$$k.migrateAllPersonalDrafts(e).then(() => em(_$$F.enqueue({
+  let ey = e => _$$k.migrateAllPersonalDrafts(e).then(() => em(VisualBellActions.enqueue({
     message: getI18nString("file_browser.draft_move_modal.async_draft_move_scheduled")
-  }))).catch(() => em(_$$F.enqueue({
+  }))).catch(() => em(VisualBellActions.enqueue({
     message: getI18nString("file_browser.draft_move_modal.async_draft_move_scheduling_error")
   })));
   let eb = (e, t) => {

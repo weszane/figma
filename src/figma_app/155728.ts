@@ -5,7 +5,7 @@ import { assertNotNullish, isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import u from "../vendor/260986";
 import { Rs, ap } from "../figma_app/288654";
 import { gB, oA } from "../905/723791";
@@ -14,7 +14,7 @@ import { yy } from "../figma_app/543529";
 import { n1 } from "../figma_app/657017";
 import { LP } from "../905/760074";
 import { q5 } from "../figma_app/516028";
-import { fy7, DtB, juk, hVJ, qSj } from "../figma_app/43951";
+import { LibraryPresetSubscriptionsV2, SubscribedLibrariesForFile, SubscribedLibrariesForFigJamFile, SubscribedLibrariesForSlidesFile, SubscribedLibrariesForBuzzFile } from "../figma_app/43951";
 import { Nn } from "../figma_app/177636";
 import { f as _$$f } from "../figma_app/252485";
 import { M } from "../figma_app/155411";
@@ -37,7 +37,7 @@ export function $$w6() {
 }
 export function $$O8() {
   let e = $$w6();
-  return k9(() => {
+  return useMemoStable(() => {
     let t = new Set();
     e.data?.forEach(e => t.add(e.fileKey));
     return t;
@@ -45,7 +45,7 @@ export function $$O8() {
 }
 export function $$R9() {
   let e = $$w6();
-  return k9(() => {
+  return useMemoStable(() => {
     let t = new Set();
     e.data?.forEach(e => t.add(e.libraryKey));
     return t;
@@ -98,7 +98,7 @@ export function $$D0({
   let t = q5();
   let r = !!t?.teamId;
   let a = T9(t?.project);
-  useAtomWithSubscription(fy7.Query({
+  useAtomWithSubscription(LibraryPresetSubscriptionsV2.Query({
     group: M()
   }));
   Nn();
@@ -117,16 +117,16 @@ export function $$D0({
     orgId: m || null,
     group: M() ?? null
   }), [c, u, p, m]);
-  let R = Rs(DtB, O, {
+  let R = Rs(SubscribedLibrariesForFile, O, {
     enabled: !!t && s && "design" === w
   });
-  let L = Rs(juk, O, {
+  let L = Rs(SubscribedLibrariesForFigJamFile, O, {
     enabled: !!t && s && "whiteboard" === w
   });
-  let P = Rs(hVJ, O, {
+  let P = Rs(SubscribedLibrariesForSlidesFile, O, {
     enabled: !!t && s && "slides" === w
   });
-  let D = Rs(qSj, O, {
+  let D = Rs(SubscribedLibrariesForBuzzFile, O, {
     enabled: !!t && s && "cooper" === w
   });
   let F = useMemo(() => {

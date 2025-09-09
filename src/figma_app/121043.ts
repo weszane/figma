@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { f as _$$f } from "../905/167712";
 import { K as _$$K } from "../905/443068";
@@ -14,14 +14,14 @@ import { m as _$$m2 } from "../905/270214";
 import { Multiplayer, SaveConnectionIssues, SchemaJoinStatus, DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import E from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { U as _$$U } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { Ym, Dj } from "../figma_app/288654";
 import { parseQuery } from "../905/634134";
-import { o6, cZ, Pt } from "../figma_app/806412";
+import { RecordingPureComponent, handleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { WN } from "../figma_app/638601";
@@ -36,7 +36,7 @@ import { getI18nString } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { n6 } from "../905/234821";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { $D } from "../figma_app/789";
 import { k as _$$k } from "../figma_app/564183";
 import { ZG } from "../figma_app/840917";
@@ -118,10 +118,10 @@ function eN(e) {
     ui3Icon: jsx(_$$V, {})
   } : e.type === ZU.TOOL ? LW(e.tool) : e.type === ZU.ACTION || e.type === ZU.TEXT_BUTTON ? bs(e.action) : (console.error(`Couldn't find icon for item ${e}`), null);
 }
-export class $$eC6 extends o6 {
+export class $$eC6 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
-    this.onClick = cZ(this, "click", VU.get(this.props.action, "toolbar"));
+    this.onClick = handleMouseEvent(this, "click", VU.get(this.props.action, "toolbar"));
   }
   render() {
     let {
@@ -173,7 +173,7 @@ export function $$ew0(e) {
     } : null;
     m = jsx(_$$f, {
       recordingKey,
-      "aria-label": e?.["data-tooltip"] || _$$A(h["data-tooltip"]),
+      "aria-label": e?.["data-tooltip"] || formatI18nMessage(h["data-tooltip"]),
       checked: isActive,
       onIcon: u,
       offIcon: u,
@@ -187,7 +187,7 @@ export function $$ew0(e) {
     }, item.reactKey && `action-toggle-${item.reactKey}`);
   } else m = jsx(_$$K, {
     recordingKey,
-    "aria-label": _$$A(item.action),
+    "aria-label": formatI18nMessage(item.action),
     onClick: g,
     htmlAttributes: {
       ...h
@@ -347,7 +347,7 @@ let $$eD3 = memo(function ({
     children: tooltipIconComponent
   }) : null;
 });
-let ek = e => e === _$$ec ? getI18nString("fullscreen.accessibility.view_comments") : _$$A(e.action);
+let ek = e => e === _$$ec ? getI18nString("fullscreen.accessibility.view_comments") : formatI18nMessage(e.action);
 let $$eM2 = "fullscreen_menu_visible";
 let $$eF1 = "fullscreen_menu_hidden";
 export function $$ej5(e) {
@@ -401,7 +401,7 @@ export function $$ej5(e) {
 let $$eU7 = memo(function (e) {
   let t = useRef(null);
   let r = useDispatch();
-  let s = useMemo(() => _$$g(), []);
+  let s = useMemo(() => generateUUIDv4(), []);
   let {
     dropdownShown,
     modalShown,
@@ -452,7 +452,7 @@ let $$eU7 = memo(function (e) {
           if ("fullscreen" === selectedView.view && selectedView.editorType === FEditorType.Whiteboard) {
             r(Ts({
               origin: "logged_out_main_menu_toolbar",
-              redirectUrl: Ay.location.pathname,
+              redirectUrl: customHistory.location.pathname,
               signedUpFromOpenSession: u
             }));
             r(showModalHandler({
@@ -527,11 +527,11 @@ let $$eB8 = memo(function (e) {
         "fullscreen" === selectedView.view && "DUPLICATE" === selectedView.landingState ? e = t ? getI18nString("fullscreen.toolbar.log_in_or_create_an_account_to_get_a_copy_of", {
           file: t.name
         }) : getI18nString("fullscreen.toolbar.log_in_or_create_an_account") : i && (e = getI18nString("fullscreen.toolbar.log_in_to_do_more_with_figjam"));
-        let n = parseQuery(Ay.location.search)["node-id"];
+        let n = parseQuery(customHistory.location.search)["node-id"];
         s(Ts({
           origin: "logged_out_footer",
           formState: qB.SIGN_IN,
-          redirectUrl: n ? `${Ay.location.pathname}?node-id=${encodeURIComponent(EO(n))}` : Ay.location.pathname
+          redirectUrl: n ? `${customHistory.location.pathname}?node-id=${encodeURIComponent(EO(n))}` : customHistory.location.pathname
         }));
         s(showModalHandler({
           type: _$$x,
@@ -563,7 +563,7 @@ memo(function (e) {
       t("missing_fonts_button_clicked");
       Fullscreen.findMissingFontsAndShowPopover();
     },
-    recordingKey: Pt(e, "missingFontsButton"),
+    recordingKey: generateRecordingKey(e, "missingFontsButton"),
     "data-tooltip-type": Ib.TEXT,
     "data-tooltip": getI18nString("fullscreen.toolbar.missing_fonts")
   }, "missing-fonts-button");

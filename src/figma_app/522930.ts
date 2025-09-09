@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { localStorageRef } from "../905/657224";
 import { s as _$$s } from "../cssbuilder/589278";
 import { pW } from "../905/160095";

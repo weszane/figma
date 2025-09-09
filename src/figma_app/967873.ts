@@ -3,7 +3,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { WB } from "../905/761735";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { v } from "../figma_app/314838";
 let $$c2 = atom(-1);
 let $$u11 = atom([]);
@@ -15,9 +15,9 @@ export function $$m5(e, t) {
     ColorPalette: {
       [e]: null
     }
-  }, v.deleteColorPalette(e)).then(() => t(F.enqueue({
+  }, v.deleteColorPalette(e)).then(() => t(VisualBellActions.enqueue({
     message: getI18nString("fullscreen.color_palette.delete_success")
-  }))).catch(() => t(F.enqueue({
+  }))).catch(() => t(VisualBellActions.enqueue({
     message: getI18nString("fullscreen.color_palette.delete_failure")
   })));
 }
@@ -30,11 +30,11 @@ export function $$g8(e, t, r) {
       [uuid]: e
     }
   }, v.createColorPalette(e)).then(() => {
-    t(F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("fullscreen.color_palette.saved_success")
     }));
   }).catch(() => {
-    t(F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("fullscreen.color_palette.saved_failure")
     }));
     r();
@@ -48,10 +48,10 @@ export function $$f3(e, t, r) {
     ColorPalette: {
       [uuid]: e
     }
-  }, v.updateColorPalette(e)).then(() => t(F.enqueue({
+  }, v.updateColorPalette(e)).then(() => t(VisualBellActions.enqueue({
     message: getI18nString("fullscreen.color_palette.saved_success")
   }))).catch(() => {
-    t(F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("fullscreen.color_palette.saved_failure")
     }));
     r();
@@ -65,7 +65,7 @@ export function $$E10(e, t, r) {
       }
     }
   }, v.setTeamDefaultPalette(e, t)).catch(() => {
-    r(F.enqueue({
+    r(VisualBellActions.enqueue({
       message: getI18nString("whiteboard.color_palettes.visual_bell.failed_to_set_team_default")
     }));
   });
@@ -78,7 +78,7 @@ export function $$y1(e, t) {
       }
     }
   }, v.clearTeamDefaultPalette(e)).catch(() => {
-    t(F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("whiteboard.color_palettes.visual_bell.failed_to_clear_team_default")
     }));
   });

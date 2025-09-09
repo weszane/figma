@@ -44,7 +44,7 @@ function w(e) {
               case c:
               case m:
               case g:
-              case u:
+              case ExpiringCache:
                 return e;
               default:
                 return n;
@@ -61,7 +61,7 @@ function k(e) {
 exports.AsyncMode = d;
 exports.ConcurrentMode = s;
 exports.ContextConsumer = l;
-exports.ContextProvider = u;
+exports.ContextProvider = ExpiringCache;
 exports.Element = t;
 exports.ForwardRef = c;
 exports.Fragment = r;
@@ -79,7 +79,7 @@ exports.isContextConsumer = function (e) {
   return w(e) === l;
 };
 exports.isContextProvider = function (e) {
-  return w(e) === u;
+  return w(e) === ExpiringCache;
 };
 exports.isElement = function (e) {
   return "object" == typeof e && null !== e && e.$$typeof === t;
@@ -109,6 +109,6 @@ exports.isSuspense = function (e) {
   return w(e) === h;
 };
 exports.isValidElementType = function (e) {
-  return "string" == typeof e || "function" == typeof e || e === r || e === s || e === o || e === a || e === h || e === p || "object" == typeof e && null !== e && (e.$$typeof === m || e.$$typeof === g || e.$$typeof === u || e.$$typeof === l || e.$$typeof === c || e.$$typeof === b || e.$$typeof === y || e.$$typeof === v || e.$$typeof === _);
+  return "string" == typeof e || "function" == typeof e || e === r || e === s || e === o || e === a || e === h || e === p || "object" == typeof e && null !== e && (e.$$typeof === m || e.$$typeof === g || e.$$typeof === ExpiringCache || e.$$typeof === l || e.$$typeof === c || e.$$typeof === b || e.$$typeof === y || e.$$typeof === v || e.$$typeof === _);
 };
 exports.typeOf = w;

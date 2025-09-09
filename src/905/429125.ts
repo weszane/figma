@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ComponentPropType, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -87,7 +87,7 @@ export function $$I0({
         name: e.name,
         isApplied: i,
         hideCheck: !defReferencedBySelection,
-        recordingKey: Pt("applyProp", e.name)
+        recordingKey: generateRecordingKey("applyProp", e.name)
       }, `apply-prop-${e.explicitDefID}`);
     }), !containingComponentDefs.length && getFeatureFlags().dse_slots && jsx(a1, {
       text: D,
@@ -126,7 +126,7 @@ function x({
     hideCheck: u,
     isChecked: d,
     onClick: m,
-    recordingKey: Pt(p, t, "propDropdown")
+    recordingKey: generateRecordingKey(p, t, "propDropdown")
   }, e);
 }
 export const Xn = $$I0;

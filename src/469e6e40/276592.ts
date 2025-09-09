@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { CY } from "../figma_app/637027";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";

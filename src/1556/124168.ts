@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 export function $$l1(e) {
   return !e?.profile?.job_title || !e?.profile?.images;
 }

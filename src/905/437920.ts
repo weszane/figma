@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import r from "classnames";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { A as _$$A } from "../905/794518";
 import { wk, r9, aK } from "../905/599844";
 var a = r;
@@ -10,7 +10,7 @@ export function $$c0(e) {
     resource,
     disabled
   } = e;
-  let r = Pc();
+  let r = selectUser();
   let c = resource?.creator || r;
   let u = r.id === c.id ? renderI18nText("community.publishing.payee_name_annotation_for_current_owner") : renderI18nText("community.publishing.payee_name_annotation");
   return jsx(_$$A, {

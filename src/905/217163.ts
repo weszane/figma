@@ -1,7 +1,7 @@
 import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { jN, X$ } from "../905/612685";
-import { iAs } from "../figma_app/43951";
+import { LibraryKeyToFileLink } from "../figma_app/43951";
 export function $$o0({
   libraryKey: e,
   disabled: t,
@@ -16,7 +16,7 @@ export function $$o0({
   isDevModeComponentBrowser: h,
   componentKey: g
 }) {
-  let f = Rs(iAs({
+  let f = Rs(LibraryKeyToFileLink({
     libraryKey: e ?? ""
   }), {
     enabled: !t && !!e

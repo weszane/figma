@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { IK } from "../905/521428";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { o6, cZ } from "../figma_app/806412";
+import { RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { Kz } from "../905/760074";
@@ -11,7 +11,7 @@ import { Qx, M$ } from "../figma_app/633080";
 import { bj, E4, m3 } from "../905/66449";
 import { dD } from "../905/519113";
 import { $3 } from "../905/946937";
-class f extends o6 {
+class f extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.showPublishModal = () => {
@@ -34,7 +34,7 @@ class f extends o6 {
         }
       }));
     };
-    this.showModal = cZ(this, "click", () => {
+    this.showModal = handleMouseEvent(this, "click", () => {
       this.props.canPublishComponents ? this.showPublishModal() : this.showUpsellModal();
     });
     this.stopPropagation = e => e.stopPropagation();

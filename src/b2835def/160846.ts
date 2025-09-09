@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useRef, useCallback, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { VariableResolvedDataType, DistributionType, VisibilityCondition, NodePropertyCategory, ItemType, DesignWorkspace, ViewType, AppStateTsApi, DesignGraphElements, UIVisibilitySetting } from "../figma_app/763686";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AV, Gb } from "../figma_app/933328";
@@ -58,7 +58,7 @@ import { Em, rC } from "../figma_app/385874";
 import { Gt, A5, kl, fC, pw, DQ } from "../905/275640";
 import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { VF } from "../figma_app/679183";
 import { BS } from "../642/202922";
 import { Q as _$$Q } from "../9314/475980";
@@ -91,7 +91,7 @@ import { dP, m9 } from "../figma_app/947348";
 import { _ as _$$_3 } from "../642/896644";
 import { N as _$$N2 } from "../905/720559";
 import { RR } from "../figma_app/338442";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { L as _$$L2 } from "../figma_app/884735";
 import { sA } from "../figma_app/841644";
 import { ei as _$$ei } from "../642/384859";
@@ -128,7 +128,7 @@ import { a as _$$a2 } from "../905/612746";
 import { n as _$$n2 } from "../905/540741";
 import { defaultSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { W3 } from "../905/232641";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { i as _$$i3 } from "../905/382332";
 import { eN as _$$eN } from "../905/331848";
 import { K as _$$K5 } from "../905/532723";
@@ -240,7 +240,7 @@ let e9 = memo(function (e) {
         hideIcon: !0,
         inputRef: opacityInputRef,
         noBorder: !0,
-        recordingKey: Pt(e, "layerOpacityInputWrapper"),
+        recordingKey: generateRecordingKey(e, "layerOpacityInputWrapper"),
         resolvedType: VariableResolvedDataType.FLOAT,
         children: jsx(AS, {
           ariaLabel: getI18nString("fullscreen.properties_panel.section_appearance.label_opacity"),
@@ -272,12 +272,12 @@ let e9 = memo(function (e) {
       label: renderI18nText("fullscreen.properties_panel.section_vector.label_mirroring"),
       input: jsx(Cs, {
         handleMirroring,
-        recordingKey: Pt(e, "mirroring")
+        recordingKey: generateRecordingKey(e, "mirroring")
       }),
       icon: null
     }), independentCornerControlEnabled && jsx(_$$j2, {
       hideVariableIcon: !0,
-      recordingKey: Pt(e, "independentCornerRadius")
+      recordingKey: generateRecordingKey(e, "independentCornerRadius")
     }), jsx(_$$r, {
       id: Rv,
       blendModeSelectId: ZJ,
@@ -301,7 +301,7 @@ let e9 = memo(function (e) {
     }), jsx(_$$m3, {}), cornerSmoothingPicker.showing && jsx(_$$K3, {
       defaultPosition: cornerSmoothingPicker.initialPosition,
       onClose: hideCornerSmoothing,
-      recordingKey: Pt(e, "advanced")
+      recordingKey: generateRecordingKey(e, "advanced")
     })]
   });
 });
@@ -334,11 +334,11 @@ function tS(e) {
         brushList: t,
         onChange: (e, t) => {
           let i = parseSessionLocalID(e.guid);
-          i && (e.type === DistributionType.SCATTER && o(e.settings, zk.NO), s(i, t));
+          i && (e.type === DistributionType.SCATTER && o(e.settings, yesNoTrackingEnum.NO), s(i, t));
         },
         value: n ?? defaultSessionLocalID,
         brushInputClassName: "illustration_stroke_panel--brushInputButton--r86UG",
-        recordingKey: Pt(e.recordingKey, "brushDropdown"),
+        recordingKey: generateRecordingKey(e.recordingKey, "brushDropdown"),
         positioningProps: {
           positionRelativeTo: e.strokePanelRef,
           align: {
@@ -353,7 +353,7 @@ function tS(e) {
       }) : null
     }), d === DistributionType.SCATTER && jsx(tC, {
       defaultStyleAtom: e.defaultStyleAtom,
-      recordingKey: Pt(e.recordingKey, "scatterBrushSettings")
+      recordingKey: generateRecordingKey(e.recordingKey, "scatterBrushSettings")
     })]
   });
 }
@@ -410,20 +410,20 @@ function tC(e) {
       icon: jsx(_$$Y, {}),
       SliderComponent: AS,
       isQuadratic: !0,
-      recordingKey: Pt(e, "gap")
+      recordingKey: generateRecordingKey(e, "gap")
     }), jsx(tE, {
       config: Vb("sizeJitter", e.defaultStyleAtom),
       label: getI18nString("fullscreen.properties_panel.size_jitter"),
       icon: jsx(_$$a2, {}),
       SliderComponent: AS,
       isQuadratic: !0,
-      recordingKey: Pt(e, "sizeJitter")
+      recordingKey: generateRecordingKey(e, "sizeJitter")
     }), jsx(tE, {
       config: Vb("angularJitter", e.defaultStyleAtom),
       label: getI18nString("fullscreen.properties_panel.angular_jitter"),
       icon: jsx(_$$n2, {}),
       SliderComponent: n4,
-      recordingKey: Pt(e, "angularJitter")
+      recordingKey: generateRecordingKey(e, "angularJitter")
     })]
   });
 }
@@ -491,7 +491,7 @@ function tR(e) {
         min,
         mixedMathHandler: new xI("interval"),
         onValueChange: setValue,
-        recordingKey: Pt(e, "frequency"),
+        recordingKey: generateRecordingKey(e, "frequency"),
         sliderMax,
         sliderValueTransform: v,
         value
@@ -508,7 +508,7 @@ function tR(e) {
         min: _min,
         mixedMathHandler: new xI("wiggle"),
         onValueChange: _setValue,
-        recordingKey: Pt(e, "wiggle"),
+        recordingKey: generateRecordingKey(e, "wiggle"),
         sliderMax: _sliderMax,
         sliderValueTransform: y,
         value: _value
@@ -525,7 +525,7 @@ function tR(e) {
         min: _min2,
         mixedMathHandler: new xI("smoothen"),
         onValueChange: _setValue2,
-        recordingKey: Pt(e, "smoothen"),
+        recordingKey: generateRecordingKey(e, "smoothen"),
         sliderMax: _sliderMax2,
         sliderValueTransform: b,
         value: _value2
@@ -608,7 +608,7 @@ function tM(e) {
             });
           },
           pickerInStyleCreationShown: b,
-          recordingKey: Pt(e, "paintList"),
+          recordingKey: generateRecordingKey(e, "paintList"),
           selectedPropertyType: NodePropertyCategory.STROKE,
           variableScopes: z1,
           ...I,
@@ -629,7 +629,7 @@ function tM(e) {
           strokePanelRef: T
         }), C && "Dynamic" === k && jsx(tR, {
           defaultStyleAtom: GI,
-          recordingKey: Pt(e, "dynamicStrokeControls")
+          recordingKey: generateRecordingKey(e, "dynamicStrokeControls")
         })]
       })
     })
@@ -639,7 +639,7 @@ function tP({
   scrollContainer: e
 }) {
   let t = useDispatch();
-  let i = iZ();
+  let i = selectCurrentUser();
   let n = Dj(i);
   let a = useAtomWithSubscription(_$$b2);
   let o = _$$qh();

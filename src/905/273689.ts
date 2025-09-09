@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { clamp } from "../figma_app/492908";
 import { w_, Ih } from "../figma_app/273493";
 import { Uz } from "../905/63728";
-import { o6 } from "../figma_app/806412";
+import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { F } from "../905/989956";
 import { Eh } from "../figma_app/837840";
@@ -10,7 +10,7 @@ import { Ep } from "../figma_app/504823";
 import { VG } from "../figma_app/622881";
 import { MX, Kf } from "../905/306220";
 import { W } from "../905/979098";
-let g = class e extends o6 {
+let g = class e extends RecordingPureComponent {
   constructor(t) {
     super(t);
     this.offset = new Point(0, 0);

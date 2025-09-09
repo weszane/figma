@@ -4,14 +4,14 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { P } from "../905/724705";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { vv } from "../905/890368";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { q0 } from "../figma_app/976345";
 import { U2 } from "../figma_app/545293";
 import { os } from "../905/929976";
@@ -53,7 +53,7 @@ let $$x2 = createOptimistThunk(async e => {
 });
 let N = createOptimistThunk(e => {
   if (desktopAPIInstance) {
-    Ay.redirect("/logout");
+    customHistory.redirect("/logout");
     return;
   }
   let t = d9(e.getState().selectedView);
@@ -61,10 +61,10 @@ let N = createOptimistThunk(e => {
     Pg();
     U2.clear();
     new P().sendToAllTabs(_$$y, J);
-    Ay.redirect(`${t ? "/community" : ""}/?fuid=`);
+    customHistory.redirect(`${t ? "/community" : ""}/?fuid=`);
   }).catch(t => {
     let r = t.data?.message || getI18nString("file_browser.file_browser_actions.logout_error_without_email");
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: r
     }));
@@ -104,7 +104,7 @@ let O = createOptimistThunk((e, t) => {
     e.dispatch(q0(r.data.meta));
     r.data?.meta?.users?.length === 0 && (Pg(), U2.clear());
     let n = r.data?.meta?.redirect_url;
-    n ? Ay.redirect(n) : e.dispatch(F.enqueue({
+    n ? customHistory.redirect(n) : e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.file_browser_actions.successfully_logged_out", {
         emailAddress: t.user.email
       })
@@ -113,7 +113,7 @@ let O = createOptimistThunk((e, t) => {
     let n = r.data?.message || getI18nString("file_browser.file_browser_actions.logout_error_with_email", {
       emailAddress: t.user.email
     });
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: n
     }));

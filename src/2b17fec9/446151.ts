@@ -27,12 +27,12 @@ import { A as _$$A } from "../svg/741686";
 import { A as _$$A2 } from "../svg/776856";
 import { A as _$$A3 } from "../svg/488178";
 import { s as _$$s } from "../figma_app/30255";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import { d as _$$d } from "../vendor/456530";
 import { P as _$$P } from "../vendor/348225";
-import { Pt, rf } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { jD } from "../905/765855";
 import { Pl } from "../figma_app/62612";
@@ -205,7 +205,7 @@ let ec = memo(function ({
         buttonStyle: {
           borderRadius: "12px 4px 4px 4px"
         },
-        recordingKey: Pt(e, "ELBOWED")
+        recordingKey: generateRecordingKey(e, "ELBOWED")
       }, "ELBOWED"), getFeatureFlags().ad_curved_connectors && jsx(K0, {
         svg: _$$A4,
         tooltip: getI18nString("whiteboard.shapes_sidebar.curved_connector"),
@@ -216,7 +216,7 @@ let ec = memo(function ({
           borderRadius: "4px",
           marginRight: "2px"
         },
-        recordingKey: Pt(e, "CURVED")
+        recordingKey: generateRecordingKey(e, "CURVED")
       }, "CURVED"), jsx(K0, {
         svg: _$$A6,
         tooltip: getI18nString("whiteboard.delightful_toolbar.connector"),
@@ -227,7 +227,7 @@ let ec = memo(function ({
           borderRadius: "4px",
           marginRight: "2px"
         },
-        recordingKey: Pt(e, "STRAIGHT")
+        recordingKey: generateRecordingKey(e, "STRAIGHT")
       }, "STRAIGHT"), jsx(ZE, {
         ariaLabel: getI18nString("whiteboard.inline_menu.color_list_box"),
         buttonBackground: "light",
@@ -251,13 +251,13 @@ let ec = memo(function ({
                 isColorPalettePickerOpen: y
               },
               paletteType: "base",
-              recordingKey: Pt(e || "color-palettes", "shape") || "shape",
+              recordingKey: generateRecordingKey(e || "color-palettes", "shape") || "shape",
               isInDltSubmenu: !1
             })]
           });
         },
         paletteType: "base",
-        recordingKey: Pt(e, `shape-color-${j}`),
+        recordingKey: generateRecordingKey(e, `shape-color-${j}`),
         setIsColorPopoverOpen: S,
         shouldDisableDataTooltip: !f,
         value: l
@@ -283,7 +283,7 @@ let ec = memo(function ({
           color: l,
           strokeStyleType: h,
           onChange: _,
-          recordingKey: Pt(e, t),
+          recordingKey: generateRecordingKey(e, t),
           isTopRight: !1
         }, t)
       });
@@ -294,7 +294,7 @@ let ec = memo(function ({
       children: jsx(_$$E, {
         onClick: () => L(),
         className: _$$s2.flex.b0.noWrap.gap0.flexRow.hFull.px8.itemsCenter.$,
-        recordingKey: Pt(e, "MORESHAPES"),
+        recordingKey: generateRecordingKey(e, "MORESHAPES"),
         htmlAttributes: {
           "data-onboarding-key": W2
         },
@@ -324,7 +324,7 @@ function eu({
       color: e,
       strokeStyleType: t,
       onChange: i,
-      recordingKey: Pt(r, a),
+      recordingKey: generateRecordingKey(r, a),
       isTopRight: !1
     }, `BASIC-${a}`))
   });
@@ -365,7 +365,7 @@ function ep({
   });
   let w = Yt();
   let I = (w ? lx.get(w) : null) === e;
-  let L = rf(l, "click", () => {
+  let L = useHandleMouseEvent(l, "click", () => {
     o(e);
   });
   let N = Jc.get(e);

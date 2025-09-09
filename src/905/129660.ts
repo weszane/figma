@@ -1,4 +1,4 @@
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { getI18nString } from "../905/303541";
 import { isValidValue, MIXED_MARKER, normalizeValue } from "../905/216495";
 var s = (e => (e[e.OLD = 0] = "OLD", e[e.FEB19 = 1] = "FEB19", e))(s || {});
@@ -13,7 +13,7 @@ class o {
     return new o(this.textUserLayoutVersion, this.intrinsicLineHeight, this.fontSize, e);
   }
 }
-export let $$l4 = xx(e => new o(null != e.textUserLayoutVersion && isValidValue(e.textUserLayoutVersion) ? 0 === e.textUserLayoutVersion ? 0 : 1 : MIXED_MARKER, e.intrinsicLineHeight ?? null, e.fontSize, e.lineHeight));
+export let $$l4 = memoizeByArgs(e => new o(null != e.textUserLayoutVersion && isValidValue(e.textUserLayoutVersion) ? 0 === e.textUserLayoutVersion ? 0 : 1 : MIXED_MARKER, e.intrinsicLineHeight ?? null, e.fontSize, e.lineHeight));
 export function $$d0(e) {
   let {
     intrinsicLineHeight,

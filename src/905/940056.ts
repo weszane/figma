@@ -1,5 +1,5 @@
 import { colorToHex } from "../905/436288";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { C } from "../905/887158";
 import { p } from "../figma_app/979374";
 export class $$o0 {
@@ -13,7 +13,7 @@ export class $$o0 {
     this.guid = t;
     this.detectionContext = i;
     this.nodeType = n;
-    this.violationId = g();
+    this.violationId = generateUUIDv4();
   }
   get groupKey() {
     if (!this.detectionContext) return this.ruleId;

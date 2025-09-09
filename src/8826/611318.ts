@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useMemo, useEffect, useCallback, useId, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n, IK } from "../905/521428";
 import { Axis, Fullscreen, VariableResolvedDataType, SceneGraphHelpers, StackBindingsCpp, SpacingConstants, SnapMode, documentStateTsApi, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt, rf, v_ } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { B as _$$B } from "../905/714743";
@@ -26,7 +26,7 @@ import { u as _$$u } from "../figma_app/6978";
 import { O as _$$O } from "../905/587457";
 import { normalizeValue, isInvalidValue, isValidValue, MIXED_MARKER, getCommonValue } from "../905/216495";
 import { F as _$$F } from "../905/258517";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { gq } from "../figma_app/178475";
 import { fn, DE } from "../figma_app/811257";
 import { Xs, Df } from "../figma_app/98483";
@@ -51,7 +51,7 @@ import { Wv } from "../figma_app/711157";
 import { W7, iZ } from "../figma_app/473914";
 import { W as _$$W2 } from "../figma_app/605682";
 import { N as _$$N } from "../905/438674";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Gc, Uz, Fo } from "../905/63728";
 import { ex as _$$ex } from "../905/524523";
 import { clamp } from "../figma_app/492908";
@@ -177,7 +177,7 @@ function B(e) {
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "list-spacing-x",
     inputClassName: hF,
-    recordingKey: Pt(e, "listSpacingX"),
+    recordingKey: generateRecordingKey(e, "listSpacingX"),
     tooltipForScreenReadersOnly: !0,
     children: jsx(A, {
       className: QK
@@ -201,7 +201,7 @@ function B(e) {
     "data-tooltip-type": Ib.TEXT,
     dataTestId: "list-spacing-y",
     inputClassName: hF,
-    recordingKey: Pt(e, "listSpacingY"),
+    recordingKey: generateRecordingKey(e, "listSpacingY"),
     tooltipForScreenReadersOnly: !0,
     children: jsx(E, {
       className: QK
@@ -249,7 +249,7 @@ class G {
         ...e,
         spacings: l
       }, this.axis);
-      n !== zk.NO && Fullscreen.triggerAction("commit", {});
+      n !== yesNoTrackingEnum.NO && Fullscreen.triggerAction("commit", {});
     });
   }
 }
@@ -470,7 +470,7 @@ function es(e) {
   let w = f.map(t => {
     let n = isInvalidValue(s);
     return jsx(c$, {
-      recordingKey: Pt(e.recordingKey, "select", t),
+      recordingKey: generateRecordingKey(e.recordingKey, "select", t),
       value: t,
       disabled: !!a || t === vC && n
     }, t);
@@ -499,9 +499,9 @@ function es(e) {
   let {
     clearVariableConsumption
   } = _$$O2(C, VariableResolvedDataType.FLOAT);
-  let N = useCallback((e, t = zk.YES) => {
-    if (clearVariableConsumption(zk.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, zk.NO);else if (e === Bn) {
-      minMaxApi.set(null, zk.NO);
+  let N = useCallback((e, t = yesNoTrackingEnum.YES) => {
+    if (clearVariableConsumption(yesNoTrackingEnum.NO), e === vC) "number" == typeof s && minMaxApi.set(s || null, yesNoTrackingEnum.NO); else if (e === Bn) {
+      minMaxApi.set(null, yesNoTrackingEnum.NO);
       let e = {
         [minMaxApi.widthOrHeight]: {
           ...m[minMaxApi.widthOrHeight],
@@ -513,8 +513,8 @@ function es(e) {
         ...e
       });
       g(null);
-    } else ("number" == typeof e || null == e) && minMaxApi.set(e, zk.NO, u.current);
-    t === zk.YES && fullscreenValue.triggerAction("commit");
+    } else ("number" == typeof e || null == e) && minMaxApi.set(e, yesNoTrackingEnum.NO, u.current);
+    t === yesNoTrackingEnum.YES && fullscreenValue.triggerAction("commit");
   }, [clearVariableConsumption, s, minMaxApi, m, x, g]);
   class I extends _$$M {
     getValueForNode(e) {
@@ -613,7 +613,7 @@ let ev = _$$ex("autolayout_v3_migration_info", function (e) {
   } = e;
   let n = Gc(e => {
     e.stopPropagation();
-    Ay.unsafeRedirect("https://help.figma.com/hc/articles/360040451373#Updates_to_Auto_Layout", "_blank");
+    customHistory.unsafeRedirect("https://help.figma.com/hc/articles/360040451373#Updates_to_Auto_Layout", "_blank");
   });
   return jsxs("div", {
     className: "autolayout_v3_migration_info_tooltip--autolayoutMigration--OQ8zC",
@@ -925,11 +925,11 @@ function ez({
     _(l);
     v(i);
   }, [n, N, b, _, v, j]);
-  let A = rf(t, "click", useCallback(e => {
+  let A = useHandleMouseEvent(t, "click", useCallback(e => {
     let t = m;
     let n = x;
     e && e.__interactionTest && (t = e.primaryAlignItems, n = e.counterAlignItems);
-    t && n && (b || c(t, zk.NO), g(n), C("Autolayout alignment grid used", {
+    t && n && (b || c(t, yesNoTrackingEnum.NO), g(n), C("Autolayout alignment grid used", {
       nodeIds: S
     }));
   }, [m, x, b, g, C, c, S]), {
@@ -946,17 +946,17 @@ function ez({
     clearVariableConsumption
   } = _$$O2("STACK_SPACING", VariableResolvedDataType.FLOAT);
   let L = useCallback((e, t) => {
-    w(void 0 === t || t, e, zk.NO);
+    w(void 0 === t || t, e, yesNoTrackingEnum.NO);
     clearVariableConsumption();
   }, [w, clearVariableConsumption]);
   let T = useCallback((e, t) => {
     if (b) {
-      w(!1, "alignment double click", zk.NO);
+      w(!1, "alignment double click", yesNoTrackingEnum.NO);
       let l = eG(e, t, n, !1, j);
       let i = eK(e, t, n, N);
       _(l);
       v(i);
-      c(l, zk.NO);
+      c(l, yesNoTrackingEnum.NO);
       g(i);
       C("Autolayout spacing mode changed", {
         mode: l,
@@ -973,7 +973,7 @@ function ez({
       source: "alignment grid"
     });
   }, [g, C]);
-  let M = v_(t, "keydown", useCallback(e => {
+  let M = useHandleKeyboardEvent(t, "keydown", useCallback(e => {
     function t(e) {
       c4(normalizeValue(n)) ? c(e) : g(e);
     }
@@ -1300,7 +1300,7 @@ function tu(e) {
       });
       permissionScopeHandler.user("set-stack-mode", () => StackBindingsCpp?.setStackModeAndFlipPrimaryAndCounterAxisValues(e));
     },
-    recordingKey: Pt(e, "stackWrap")
+    recordingKey: generateRecordingKey(e, "stackWrap")
   });
 }
 let tp = _$$ex("grid_beta_special_tooltip", function ({
@@ -1351,7 +1351,7 @@ function t_({
     "aria-expanded": t,
     actionOnPointerDown: !0,
     "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.independent_paddings"),
-    recordingKey: Pt(e, "showAllPaddingControls"),
+    recordingKey: generateRecordingKey(e, "showAllPaddingControls"),
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.stack_panel.independent_paddings"),
       "data-tooltip-type": Ib.TEXT,
@@ -1456,7 +1456,7 @@ function tv({
     onScrubEnd: () => d(t, !1),
     outerClassName: e,
     paddingSelection: t,
-    recordingKey: Pt(n, "stackPadding", mx[t]),
+    recordingKey: generateRecordingKey(n, "stackPadding", mx[t]),
     setShowSinglePaddingControl: c,
     source: "panel"
   });
@@ -1485,7 +1485,7 @@ function tw(e) {
     offIcon: jsx(ty, {}),
     onChange: c,
     disabled: !o,
-    recordingKey: Pt(e.recordingKey, propertiesPanelShouldShowRemoveAutoLayout ? "removeButton" : "addButton"),
+    recordingKey: generateRecordingKey(e.recordingKey, propertiesPanelShouldShowRemoveAutoLayout ? "removeButton" : "addButton"),
     htmlAttributes: {
       "data-tooltip": n,
       "data-tooltip-type": Ib.TEXT,
@@ -1532,7 +1532,7 @@ function tN({
     children: [jsxs(Wv, {
       titleTx: o,
       children: [h && jsx(hw, {
-        recordingKey: Pt(i, "frameFitButton")
+        recordingKey: generateRecordingKey(i, "frameFitButton")
       }), !n && d && jsx(tw, {
         recordingKey: i
       })]
@@ -1605,7 +1605,7 @@ let tI = memo(function ({
     children: [O, b, L, E && jsx(iZ, {
       leftLabel: renderI18nText("fullscreen.properties_panel.section_autoLayout.label_alignment"),
       leftInput: jsx(ez, {
-        recordingKey: Pt(n, "alignment")
+        recordingKey: generateRecordingKey(n, "alignment")
       }),
       rightLabel: renderI18nText("fullscreen.properties_panel.section_autoLayout.label_gap"),
       topRightInput: jsx(tR, {
@@ -1615,7 +1615,7 @@ let tI = memo(function ({
         recordingKey: n
       }),
       topIcon: e && jsx(_$$o, {
-        recordingKey: Pt(n, "stackLayoutDetails")
+        recordingKey: generateRecordingKey(n, "stackLayoutDetails")
       }),
       bottomIcon: null
     }), "NONE" !== u && jsx(t_, {
@@ -1718,7 +1718,7 @@ function tR(e) {
       onScrubBegin: () => t(SpacingConstants.SPACING, !0),
       onScrubEnd: () => t(SpacingConstants.SPACING, !1),
       onboardingKey: "stack-spacing-input",
-      recordingKey: Pt(e, "stackSpacing"),
+      recordingKey: generateRecordingKey(e, "stackSpacing"),
       source: "panel"
     })
   });
@@ -1737,7 +1737,7 @@ function tL(e) {
       onNudge: () => Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION),
       onScrubBegin: () => t(SpacingConstants.COUNTER_SPACING, !0),
       onScrubEnd: () => t(SpacingConstants.COUNTER_SPACING, !1),
-      recordingKey: Pt(e, "stackCounterSpacing"),
+      recordingKey: generateRecordingKey(e, "stackCounterSpacing"),
       source: "panel"
     })
   });

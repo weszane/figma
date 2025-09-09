@@ -1,12 +1,12 @@
 import _require from "../0c62c2fd/632200";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { p as _$$p } from "../905/636263";
 import { e as _$$e } from "../905/295932";
 import { a as _$$a } from "../905/676930";
 import { A as _$$A } from "../905/920142";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { i0 } from "../905/17223";
@@ -20,7 +20,7 @@ import { createModalConfig, registerLegacyModal, registerModal } from "../905/10
 import { hideModal, showModalHandler } from "../905/156213";
 import { E9 } from "../figma_app/297957";
 import { L0, fu } from "../figma_app/831799";
-import { hj8 } from "../figma_app/43951";
+import { ChurnFrictionPersonalizedModalView } from "../figma_app/43951";
 import { WW, Wf } from "../figma_app/345997";
 import { e0 } from "../905/696396";
 import { W as _$$W } from "../905/244810";
@@ -330,7 +330,7 @@ function G({
 export let $$z0 = registerModal(function ({
   teamId: e
 }) {
-  let t = Rs(hj8, {
+  let t = Rs(ChurnFrictionPersonalizedModalView, {
     teamId: e
   });
   let i = E9();
@@ -408,7 +408,7 @@ export let $$z0 = registerModal(function ({
       graphic: i
     }) => jsx(G, {
       title: e,
-      onSubtitleClick: () => Ay.unsafeRedirect(t, "_blank"),
+      onSubtitleClick: () => customHistory.unsafeRedirect(t, "_blank"),
       subtitle: getI18nString("churn_friction.modal.learn_more"),
       graphic: i
     }, t))]

@@ -9,7 +9,7 @@ import { widgetErrorTracker } from "../905/250412";
 import { getFullscreenViewEditorType } from "../figma_app/300692";
 import { InternalError } from "../905/845428";
 import { MI, _L, BM, $T } from "../905/757052";
-import { $U } from "../905/285398";
+import { TEXT_STYLE_KEYS } from "../905/285398";
 let c = new class {
   constructor() {
     this._pluginID = null;
@@ -37,7 +37,7 @@ let c = new class {
   }
 }();
 function f(e, t) {
-  for (let i of $U) e.hasOwnProperty(i) && t(i, e[i]);
+  for (let i of TEXT_STYLE_KEYS) e.hasOwnProperty(i) && t(i, e[i]);
 }
 let _ = ["layoutMode", "wrap", "componentId", "componentProps", "nestedInstancesVisibility"];
 let A = new Set(_);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
 import { gw, rr, wv, ru } from "../figma_app/236327";
 import { V } from "../figma_app/312987";

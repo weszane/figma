@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useCallback, useMemo, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { N as _$$N } from "../905/438674";
 import { _ as _$$_ } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";

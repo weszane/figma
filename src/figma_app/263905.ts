@@ -7,7 +7,7 @@ import { permissionScopeHandler } from '../905/189185';
 import { g as _$$g3 } from '../905/252386';
 import { f as _$$f, v as _$$v } from '../905/257689';
 import { Z } from '../905/279476';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { debugState } from '../905/407919';
 import { U5 } from '../905/414242';
@@ -19,7 +19,7 @@ import { globalPerfTimer } from '../905/542194';
 import { X as _$$X } from '../905/578754';
 import { getFeatureFlags } from '../905/601108';
 import { getSingletonSceneGraph } from '../905/700578';
-import { g as _$$g } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { J as _$$J } from '../905/916681';
 import { z as _$$z } from '../905/931953';
 import { s as _$$s } from '../cssbuilder/589278';
@@ -120,7 +120,7 @@ ${r.errors.map(e => `
 Node: ${e.nodeId}
 Error: ${e.message}`).join('\n')}`;
                 navigator.clipboard.writeText(n).then(() => {
-                  t(_$$F.enqueue({
+                  t(VisualBellActions.enqueue({
                     message: getI18nString('sites.lint.errors.copied_visual_bell')
                   }));
                 });
@@ -142,7 +142,7 @@ export function $$Z4() {
 }
 export let $$Q3 = Wh(() => atom(function () {
   if (document.baseURI.startsWith('http://localhost:9000/')) return 'http://localhost:8045/preview_page_v1.html';
-  let e = `${_$$g()}-figmaiframepreview`;
+  let e = `${generateUUIDv4()}-figmaiframepreview`;
   return `https://${e}.${nC()}/preview_page.html`;
 }()));
 export class $$ee0 {

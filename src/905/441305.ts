@@ -5,8 +5,8 @@ import { renderI18nText } from '../905/303541'
 import { hS } from '../905/437088'
 import { $n } from '../905/521428'
 import { hE, jk, nB, wi, Y9 } from '../figma_app/272243'
-import { qP } from '../figma_app/806412'
 import { kt } from '../figma_app/858013'
+import { useSetupPlayback } from '../figma_app/878298'
 
 export function $$p0({
   open: e,
@@ -16,11 +16,11 @@ export function $$p0({
   ...m
 }) {
   let h = m.autofocusConfirm ?? !m.destructive
-  let g = qP(m.recordingKey, 'confirm', (e) => {
+  let g = useSetupPlayback(m.recordingKey, 'confirm', (e) => {
     m.onConfirm(e)
     e.defaultPrevented || m.onClose()
   })
-  let f = qP(m.recordingKey, 'cancel', () => {
+  let f = useSetupPlayback(m.recordingKey, 'cancel', () => {
     m.onCancel?.()
     m.onClose()
   })

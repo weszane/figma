@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { FOrganizationLevelType, FStudentTeamStatusType } from "../figma_app/191312";
 import { oc, XX } from "../figma_app/345997";
 import { T5, EV } from "../figma_app/465071";

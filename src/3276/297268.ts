@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useContext, useRef, useState, useEffect, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { DesignGraphElements, AppStateTsApi, LayoutTabType, UserActionState } from "../figma_app/763686";
@@ -25,7 +25,7 @@ import { sT } from "../figma_app/740163";
 import { Z as _$$Z } from "../905/104740";
 import { PD, Z0, HD, ni, D6 } from "../figma_app/62612";
 import { BI } from "../figma_app/546509";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { o3, nt } from "../905/226610";
 import { getObservableValue } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
@@ -107,7 +107,7 @@ let es = (e, t, n, o, a, i) => {
 "customElements" in window && customElements.define(Zb.desiredElementName, Zb);
 let er = memo(function (e) {
   let t = !!e.activeThread || e.threads.length > 0;
-  let n = iZ();
+  let n = selectCurrentUser();
   let c = _$$s();
   let m = Z5();
   let P = useDispatch();

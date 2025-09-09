@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { GZ } from "../905/508367";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { vd } from "../figma_app/637027";
 import { u as _$$u } from "../905/684425";
@@ -31,7 +31,7 @@ let $$y0 = registerModal(function () {
       className: f,
       type: "submit",
       onClick: () => {
-        Ay.redirect("/");
+        customHistory.redirect("/");
       },
       children: renderI18nText("link_expired.go_back_to_figma")
     })

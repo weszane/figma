@@ -7,12 +7,12 @@ import { O as _$$O } from "../905/487602";
 import { TransformModifierBindingsCpp, Axis, NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { Q as _$$Q } from "../figma_app/67145";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { getI18nString } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
@@ -23,7 +23,7 @@ import { valueOrFallback } from "../905/216495";
 import { kl } from "../905/275640";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
 import { a2 } from "../figma_app/762558";
@@ -90,7 +90,7 @@ let Z = "ui3_transform_modifiers_settings_picker--controlTwoSegments--eKMVM";
 function X(e) {
   return jsxs(bL, {
     value: e.currentUnits,
-    onChange: t => e.onUnitsChange(t, zk.YES),
+    onChange: t => e.onUnitsChange(t, yesNoTrackingEnum.YES),
     children: [jsx(l9, {
       width: "fill",
       label: jsx(HiddenLabel, {
@@ -188,7 +188,7 @@ function ee(e) {
             children: getI18nString("properties_panel.transform_modifiers.repeat.type")
           }),
           value: e.transformModifier.repeatType,
-          onChange: e => t(e, zk.YES),
+          onChange: e => t(e, yesNoTrackingEnum.YES),
           readonly: e.disabled,
           children: [jsx(RT, {
             label: getI18nString("fullscreen.properties_panel.radial"),
@@ -210,7 +210,7 @@ function ee(e) {
               children: getI18nString("properties_panel.transform_modifiers.repeat.direction")
             }),
             value: e.transformModifier.axis,
-            onChange: e => i(e, zk.YES),
+            onChange: e => i(e, yesNoTrackingEnum.YES),
             readonly: e.disabled,
             children: [jsx(_$$c$2, {
               icon: jsx(K, {}),
@@ -279,7 +279,7 @@ function ei(e) {
     tooltipForScreenReadersOnly: !0,
     autoFocus: e.autoFocus,
     dispatch: e.dispatch,
-    recordingKey: Pt(e, `skewAngle${e.axis.toUpperCase()}`)
+    recordingKey: generateRecordingKey(e, `skewAngle${e.axis.toUpperCase()}`)
   });
   return jsx(cS, {
     label: "x" === e.axis ? getI18nString("properties_panel.transform_modifiers.x") : getI18nString("properties_panel.transform_modifiers.y"),
@@ -340,7 +340,7 @@ function er(e) {
       e.dispatch(XE());
       fullscreenValue.deselectProperty();
     },
-    recordingKey: Pt(e, "modal"),
+    recordingKey: generateRecordingKey(e, "modal"),
     children: function (e, t) {
       switch (t) {
         case "SYMMETRY":
@@ -465,7 +465,7 @@ let eO = _$$b();
 export class $$eD0 extends PureComponent {
   constructor() {
     super(...arguments);
-    this.transformModifiersList = xx(e => valueOrFallback(e, []).map(e_));
+    this.transformModifiersList = memoizeByArgs(e => valueOrFallback(e, []).map(e_));
     this.onTransformModifiersChange = (e, t) => {
       fullscreenValue.updateSelectionProperties({
         transformModifiers: e
@@ -496,7 +496,7 @@ export class $$eD0 extends PureComponent {
           openFile: this.props.openFile,
           pickerShown: this.props.pickerShown,
           propertyList: e,
-          recordingKey: Pt(this.props, "transformModifiersList"),
+          recordingKey: generateRecordingKey(this.props, "transformModifiersList"),
           selectedPropertyType: NodePropertyCategory.TRANSFORM_MODIFIER,
           smallNudgeAmount: this.props.smallNudgeAmount
         })
@@ -551,7 +551,7 @@ function eL(e) {
   let {
     useLargePreviewRows
   } = useContext(_$$Q2);
-  let F = Pt(e);
+  let F = generateRecordingKey(e);
   let M = useCallback((e, r, a, l, d, u, h, g, y) => jsx(eB, {
     allowedTransformModifiers,
     bigNudgeAmount,
@@ -575,7 +575,7 @@ function eL(e) {
     onRemoveTransformModifier: () => P(r),
     pickerShown,
     productType: T,
-    recordingKey: Pt(F, r),
+    recordingKey: generateRecordingKey(F, r),
     selected: a,
     singletonRow: valueOrFallback(propertyList, []).length <= 1,
     smallNudgeAmount,
@@ -640,7 +640,7 @@ function eB(e) {
     useLargePreviewRows
   } = e;
   let Y = kl("isInstanceSublayerSelected");
-  let q = Pt(e);
+  let q = generateRecordingKey(e);
   let $ = `transformModifiers-flyout-${id}`;
   let Z = pickerShown && pickerShown.id === id && pickerShown.data?.type === 0 ? pickerShown : null;
   let {
@@ -657,7 +657,7 @@ function eB(e) {
       productType
     });
   }, [onChange, transformModifier.type, productType]);
-  let en = useCallback((e, t = zk.YES) => {
+  let en = useCallback((e, t = yesNoTrackingEnum.YES) => {
     let i = transformModifier.type;
     onChange({
       ...function (e) {
@@ -709,7 +709,7 @@ function eB(e) {
     onChange({
       ...transformModifier,
       visible: e
-    }, zk.YES);
+    }, yesNoTrackingEnum.YES);
   }, [onChange, transformModifier]);
   let ec = useCallback(e => {
     if (e && e.stopPropagation(), Z) {
@@ -741,7 +741,7 @@ function eB(e) {
   let eh = useCallback(e => e.map((e, t) => jsx(eM, {
     value: e,
     disabled: !em(e),
-    recordingKey: Pt(q, "select", e)
+    recordingKey: generateRecordingKey(q, "select", e)
   }, t)), [q, em]);
   let eg = useCallback(e => {
     void 0 === e ? ee(void 0) : ee(Math.max(e, 144));
@@ -757,7 +757,7 @@ function eB(e) {
     let t = selected && !hasFocus;
     let r = jsx(_$$d, {
       onClick: ec,
-      recordingKey: Pt(q, "toggleSettings"),
+      recordingKey: generateRecordingKey(q, "toggleSettings"),
       "aria-expanded": !!Z,
       "aria-label": getI18nString("properties_panel.transform_modifiers.transform_modifier_settings"),
       children: jsx("span", {
@@ -768,14 +768,14 @@ function eB(e) {
     let d = jsx(_$$B, {
       visible: transformModifier.visible,
       onChange: ed,
-      recordingKey: Pt(q, "visibleToggle"),
+      recordingKey: generateRecordingKey(q, "visibleToggle"),
       selected: e,
       disabled: !!Y
     });
     let m = Y ? void 0 : jsx(_$$T, {
       selected: e,
       children: jsx(_$$K, {
-        recordingKey: Pt(q, "removeButton"),
+        recordingKey: generateRecordingKey(q, "removeButton"),
         onClick: onRemoveTransformModifier,
         "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
         htmlAttributes: {
@@ -801,7 +801,7 @@ function eB(e) {
         onChange: en,
         onMouseDown: et,
         property: transformModifier.type ?? "REPEAT",
-        recordingKey: Pt(q, "select"),
+        recordingKey: generateRecordingKey(q, "select"),
         children: eh(eN)
       }), e_]
     });
@@ -861,7 +861,7 @@ function eB(e) {
         onChange: ei,
         options: eh(eN),
         pickerId: $,
-        recordingKey: Pt(q, "settings"),
+        recordingKey: generateRecordingKey(q, "settings"),
         smallNudgeAmount,
         transformModifier,
         transformModifierIndex: index
@@ -884,7 +884,7 @@ function eB(e) {
         className: transformModifier.visible ? "transform_modifiers_panel--transformModifierIcon--84WYT" : "transform_modifiers_panel--transformModifierIconInvisible--THQlm transform_modifiers_panel--transformModifierIcon--84WYT",
         onMouseDown: ec,
         onMouseUp: et,
-        recordingKey: Pt(q, "toggleSettings"),
+        recordingKey: generateRecordingKey(q, "toggleSettings"),
         selected: !!Z,
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("properties_panel.transform_modifiers.transform_modifier_settings")
@@ -902,16 +902,16 @@ function eB(e) {
           onChange: en,
           onMouseDown: et,
           property: transformModifier.type ?? "REPEAT",
-          recordingKey: Pt(q, "select"),
+          recordingKey: generateRecordingKey(q, "select"),
           children: eh(eN)
         }), e_]
       }), jsxs($4, {
         children: [jsx(_$$B, {
           visible: transformModifier.visible,
           onChange: ed,
-          recordingKey: Pt(q, "visibleToggle")
+          recordingKey: generateRecordingKey(q, "visibleToggle")
         }), jsx(_$$K, {
-          recordingKey: Pt(q, "removeButton"),
+          recordingKey: generateRecordingKey(q, "removeButton"),
           onClick: onRemoveTransformModifier,
           "aria-label": getI18nString("properties_panel.transform_modifiers.remove_transform_modifier"),
           htmlAttributes: {

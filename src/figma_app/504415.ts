@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
@@ -10,7 +10,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { ViewType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
-import { uA, P_, Pt } from "../figma_app/806412";
+import { RecordingComponent, handleFocusEvent, generateRecordingKey } from "../figma_app/878298";
 import { logError } from "../905/714362";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fk } from "../figma_app/618433";
@@ -21,7 +21,7 @@ import { _b } from "../figma_app/841351";
 import { registerModal } from "../905/102752";
 import { B } from "../905/867899";
 import { u as _$$u, R } from "../905/375517";
-let x = class e extends uA {
+let x = class e extends RecordingComponent {
   constructor(t) {
     super(t);
     this.onConfirmSavepointModal = (e, t) => {
@@ -50,7 +50,7 @@ let x = class e extends uA {
     this.hideModal = () => {
       this.props.dispatch(popModalStack());
     };
-    this.onSubmit = P_(this, "submit", () => {
+    this.onSubmit = handleFocusEvent(this, "submit", () => {
       this.onConfirmSavepointModal(this.state.label, this.state.description);
     });
     this.onCancel = () => {
@@ -130,7 +130,7 @@ let x = class e extends uA {
             },
             placeholder: getI18nString("fullscreen.savepoint_modal.title"),
             "aria-label": getI18nString("fullscreen.savepoint_modal.title_label"),
-            recordingKey: Pt(this.props, "title"),
+            recordingKey: generateRecordingKey(this.props, "title"),
             value: this.state.label
           })]
         }), jsxs("div", {
@@ -147,7 +147,7 @@ let x = class e extends uA {
             htmlAttributes: {
               onBlur: this.onDescriptionBlur
             },
-            recordingKey: Pt(this.props, "description")
+            recordingKey: generateRecordingKey(this.props, "description")
           })]
         }), this.props.hasCMSData && jsx("div", {
           className: _$$u,

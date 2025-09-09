@@ -11,7 +11,7 @@ import { l as _$$l } from '../905/716947';
 import { atom, createRemovableAtomFamily } from '../figma_app/27355';
 import { Mk } from '../figma_app/31188';
 import { conditionalFeatureFlag } from '../figma_app/169182';
-import { gr } from '../figma_app/243058';
+import { VariableSetIdCompatHandler } from '../figma_app/243058';
 import { w5 } from '../figma_app/345997';
 import { Wn, XR } from '../figma_app/396464';
 import { isEmptyObject } from '../figma_app/493477';
@@ -214,8 +214,8 @@ let $$ep20 = P8([e => {
     r.isExtension ? h[t] = {
       ...r,
       ...n,
-      rootVariableSetId: gr.INVALID,
-      backingVariableSetId: gr.INVALID
+      rootVariableSetId: VariableSetIdCompatHandler.INVALID,
+      backingVariableSetId: VariableSetIdCompatHandler.INVALID
     } : h[t] = {
       ...r,
       ...n

@@ -7,7 +7,7 @@ import l from "classnames";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { dh, nn, rE } from "../figma_app/186343";
 import { uF } from "../9410/398228";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { l7 } from "../figma_app/88239";
 import { jo } from "../figma_app/753501";
 import { m0 } from "../figma_app/976749";
@@ -17,11 +17,11 @@ import { t as _$$t2 } from "../9410/254335";
 import { W as _$$W } from "../9410/94839";
 import { V as _$$V } from "../905/506207";
 import { P as _$$P } from "../905/347284";
-import { Uc } from "../figma_app/741237";
+import { updateHoveredNode } from "../figma_app/741237";
 import { _Z } from "../figma_app/623300";
 import { o3, nt } from "../905/226610";
 import { wV } from "../figma_app/779965";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { F as _$$F } from "../905/680873";
 import { Us } from "../figma_app/637027";
 import { V as _$$V2 } from "../905/223767";
@@ -80,7 +80,7 @@ function C({
           htmlAttributes: {
             onContextMenu: k
           },
-          recordingKey: Pt(p, "collapsedRow"),
+          recordingKey: generateRecordingKey(p, "collapsedRow"),
           children: jsx("span", {
             className: _$$W,
             "data-onboarding-key": "pages-panel-toggle",
@@ -97,14 +97,14 @@ function C({
         htmlAttributes: {
           onContextMenu: k
         },
-        recordingKey: Pt(p, "collapsedRow"),
+        recordingKey: generateRecordingKey(p, "collapsedRow"),
         children: C
       }), !e && jsx(X0, {
         children: j ? jsx(_$$t2, {
           recordingKey: p
         }) : jsx(_$$i, {
           onClick: l,
-          recordingKey: Pt(p, "newPage"),
+          recordingKey: generateRecordingKey(p, "newPage"),
           tooltipText: v
         })
       })]
@@ -268,7 +268,7 @@ function Z({
       defaultSize: defaultHeight,
       onResize: e => {
         setHeight(e);
-        Uc("");
+        updateHoveredNode("");
       },
       side: "bottom",
       className: f ? aY : l$,

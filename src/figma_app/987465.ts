@@ -4,7 +4,7 @@ import { Rs } from "../figma_app/288654";
 import { g } from "../905/370185";
 import { sD } from "../905/937198";
 import { tS } from "../figma_app/516028";
-import { UQe } from "../figma_app/43951";
+import { ListItemsView } from "../figma_app/43951";
 import { k } from "../905/366917";
 import { J } from "../905/458135";
 export function $$p0({
@@ -17,7 +17,7 @@ export function $$p0({
     collectionStableId: e
   });
   let p = (collectionDatabaseId ?? "") !== "" && null != t;
-  let _ = Rs(UQe, {
+  let _ = Rs(ListItemsView, {
     fileKey: t ?? "",
     collectionId: collectionDatabaseId ?? ""
   }, {

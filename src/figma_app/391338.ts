@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { noop } from "../figma_app/465776";
 import { PerfPriority } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { DD, k9 } from "../905/19536";
+import { useMemoCustom, useMemoStable } from "../905/19536";
 import d from "../vendor/529640";
 import { analyticsEventManager } from "../905/449184";
 import { Tf } from "../905/280919";
@@ -169,8 +169,8 @@ export function $$A3({
   comparisonConfig: r,
   ...n
 }) {
-  let i = DD(() => e, [e], v);
-  let a = DD(() => t, [t], v);
+  let i = useMemoCustom(() => e, [e], v);
+  let a = useMemoCustom(() => t, [t], v);
   let s = "loaded" === i.status;
   let o = "loaded" === a.status;
   let d = $$k1(r);
@@ -313,7 +313,7 @@ function O(e, t) {
     openFileKey: e.openFile?.key ?? null,
     selectedView: e.selectedView?.view ?? null
   })) : null;
-  return k9(() => ({
+  return useMemoStable(() => ({
     ...r,
     ...t
   }), [r, t]);

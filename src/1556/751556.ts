@@ -3,7 +3,7 @@ import { BrowserInfo, isAndroidOrIphoneNotFigmaMobile } from "../figma_app/77888
 import { s as _$$s } from "../cssbuilder/589278";
 import { UP, kc, s_, cs, gc, Tm, cJ } from "../figma_app/740025";
 import { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { q7, Q$, ME, g8, MJ, ZP, r1, hE, YJ, b as _$$b, bL, mc } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
@@ -17,7 +17,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { E as _$$E2 } from "../905/984674";
 import { YW } from "../figma_app/350203";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { E as _$$E3 } from "../1556/957507";
 import { w as _$$w } from "../figma_app/883622";
 import { g as _$$g2 } from "../1556/689749";
@@ -39,7 +39,7 @@ import { A as _$$A2 } from "../af221b13/388839";
 import { J as _$$J2 } from "../1556/905117";
 import { x as _$$x2 } from "../905/149501";
 import { getFeatureFlags } from "../905/601108";
-import { Ay as _$$Ay2 } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { reportError } from "../905/11";
 import { _l, rq } from "../figma_app/976345";
 import { e as _$$e2 } from "../905/579755";
@@ -84,7 +84,7 @@ import { iX } from "../905/415545";
 import { ue } from "../af221b13/476940";
 import { Rs } from "../figma_app/288654";
 import { tT, oA } from "../905/723791";
-import { fju, JgS } from "../figma_app/43951";
+import { CommunityNotificationBellView, PersistentUserNotificationBellData } from "../figma_app/43951";
 import { M as _$$M } from "../1556/569109";
 import { h as _$$h } from "../1556/255035";
 import { In } from "../905/672640";
@@ -544,7 +544,7 @@ function eX() {
   let e = function () {
     let e = useDispatch();
     let t = useSelector(e => e.authedUsers);
-    let n = Pc();
+    let n = selectUser();
     let o = am();
     let a = useSelector(e => e.authedProfilesById);
     let d = useSelector(e => gc(e), c2);
@@ -661,7 +661,7 @@ function eX() {
         let e = getI18nString("navbar.settings_dropdown.desktop_app_cta");
         let t = "download";
         let n = () => {
-          _$$Ay2.redirect(`/download/desktop/${BrowserInfo.mac ? "mac" : "win"}`, "_blank");
+          customHistory.redirect(`/download/desktop/${BrowserInfo.mac ? "mac" : "win"}`, "_blank");
         };
         return {
           element: jsxs(q7, {
@@ -772,7 +772,7 @@ function eX() {
         let a = () => {
           e >= 10 ? n(showModalHandler({
             type: ed
-          })) : t ? n(rq()) : _$$Ay2.redirect("/login?cont=", "_blank");
+          })) : t ? n(rq()) : customHistory.redirect("/login?cont=", "_blank");
         };
         return {
           element: jsxs(q7, {
@@ -867,7 +867,7 @@ function eX() {
     }];
   }();
   let t = UP();
-  let n = Pc();
+  let n = selectUser();
   let a = kc();
   let d = t && !!a;
   let u = s_();
@@ -1050,7 +1050,7 @@ function ta(e) {
 }
 function tr(e) {
   let t = useDispatch();
-  let n = Rs(fju, {});
+  let n = Rs(CommunityNotificationBellView, {});
   useEffect(() => {
     if ("loaded" === n.status && n.data.currentUser.communityProfileNotificationBell.status === tT.Loaded) {
       let e = oA(n.data.currentUser.communityProfileNotificationBell);
@@ -1088,7 +1088,7 @@ export function $$th1() {
   let u = !!d;
   let h = kc();
   let m = function () {
-    let e = Rs(JgS, {});
+    let e = Rs(PersistentUserNotificationBellData, {});
     if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return {};
     let t = oA(e.data.persistentUserNotificationBells);
     let n = {};
@@ -1106,7 +1106,7 @@ export function $$th1() {
     return n;
   }();
   let x = function () {
-    let e = Rs(JgS, {});
+    let e = Rs(PersistentUserNotificationBellData, {});
     if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return td;
     let t = oA(e.data.persistentUserNotificationBells);
     let n = t?.find(e => e.notificationSpaceId === _$$td);
@@ -1115,7 +1115,7 @@ export function $$th1() {
       fileKeyWithoutBadge: n.fileKeyWithoutBadge
     } : td;
   }();
-  let p = Pc();
+  let p = selectUser();
   let f = useSelector(e => e.userNotifications);
   let g = "Web";
   if (desktopAPIInstance ? g = "Desktop" : u && (g = "Web Editor"), n) e = !!h && !!f.communityProfileBellStates[h.id];else if (d) {

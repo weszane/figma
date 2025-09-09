@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
-import { dW } from "../905/515076";
+import { applyCodeExtensionPreferences } from "../905/515076";
 import { Pq } from "../figma_app/12796";
 import { o5, Cu, f$ } from "../figma_app/603466";
 import { R } from "../figma_app/612938";
@@ -16,7 +16,7 @@ let m = class {
     canRunCodegenArgs: n
   }) {
     let c = i.pluginLanguage;
-    if (dW(e, c ? findCodegenLanguage(e, c) : null), !Pq(n)) throw Error("Not allowed to run codegen");
+    if (applyCodeExtensionPreferences(e, c ? findCodegenLanguage(e, c) : null), !Pq(n)) throw Error("Not allowed to run codegen");
     return (await R.instance.enqueue({
       runPluginArgs: {
         plugin: e,

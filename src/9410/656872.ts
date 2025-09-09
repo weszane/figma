@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Q } from "../1250/220026";
 import { TransactionCommand } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";

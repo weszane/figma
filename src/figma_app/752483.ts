@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { l as _$$l } from "../905/296640";
 import { debugState } from "../905/407919";
@@ -9,7 +9,7 @@ import { s_ } from "../905/17223";
 import { $$, ks, nR, CY } from "../figma_app/637027";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { QF } from "../figma_app/696043";
 import { Qi } from "../figma_app/559491";
 import { s as _$$s } from "../905/58247";
@@ -213,7 +213,7 @@ export let $$W0 = registerModal(function ({
     template: n
   }) => {
     if ("" === ee()) {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("community.plugin_development.please_add_some_alphanumeric_text_to_your_resource_name"),
         error: !0
       }));
@@ -239,7 +239,7 @@ export let $$W0 = registerModal(function ({
     } catch (e) {
       console.error(e);
     }
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("community.plugin_development.unable_to_write_resource_to_disk"),
       error: !0
     }));
@@ -260,7 +260,7 @@ export let $$W0 = registerModal(function ({
       W("hidden");
       r = n.id;
     } catch (e) {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("community.plugin_development.unable_to_generate_resource_id"),
         error: !0
       }));

@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useContext, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
@@ -12,7 +12,7 @@ import { kl } from "../905/275640";
 import { _X, Z0 } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
-import { fV } from "../figma_app/198712";
+import { symbolUsageEnum } from "../figma_app/198712";
 import { p as _$$p } from "../figma_app/372802";
 import { y9S } from "../figma_app/27776";
 var d = l;
@@ -36,7 +36,7 @@ export function $$E0() {
           x: s.x,
           y: s.y
         },
-        regionType: t.isPrimaryInstance || t.isInstanceSublayer || t.isComponentish || t.isSymbolSublayer ? fV.SYMBOLS_ONLY : fV.MIXED_OR_NO_SYMBOLS
+        regionType: t.isPrimaryInstance || t.isInstanceSublayer || t.isComponentish || t.isSymbolSublayer ? symbolUsageEnum.SYMBOLS_ONLY : symbolUsageEnum.MIXED_OR_NO_SYMBOLS
       }];
     }
   }
@@ -193,8 +193,8 @@ function w({
         marginTop: S ? C - 1.5 : 0
       },
       className: d()({
-        [_]: o === fV.MIXED_OR_NO_SYMBOLS,
-        [T]: o === fV.SYMBOLS_ONLY
+        [_]: o === symbolUsageEnum.MIXED_OR_NO_SYMBOLS,
+        [T]: o === symbolUsageEnum.SYMBOLS_ONLY
       })
     }), (w || N) && jsx("div", {
       style: {
@@ -205,8 +205,8 @@ function w({
         marginLeft: N ? I - 1.5 : 0
       },
       className: d()({
-        [_]: o === fV.MIXED_OR_NO_SYMBOLS,
-        [T]: o === fV.SYMBOLS_ONLY
+        [_]: o === symbolUsageEnum.MIXED_OR_NO_SYMBOLS,
+        [T]: o === symbolUsageEnum.SYMBOLS_ONLY
       })
     })]
   });

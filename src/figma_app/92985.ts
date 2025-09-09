@@ -1,7 +1,7 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { IT } from "../figma_app/566371";
 import { isInvalidValue } from "../905/216495";
-import { Eb } from "../figma_app/43951";
+import { LibraryInfo } from "../figma_app/43951";
 import { dT } from "../figma_app/889655";
 import { $ } from "../905/330495";
 export function $$d0() {
@@ -15,7 +15,7 @@ export function $$d0() {
     isBackingStateGroupShared
   } = $(e);
   let _ = singleBackingSymbol?.sourceLibraryKey ?? singleBackingStateGroup?.sourceLibraryKey ?? "";
-  let [h] = IT(Eb({
+  let [h] = IT(LibraryInfo({
     libraryKey: _
   }));
   return null != backingSymbolGUID && !isInvalidValue(backingSymbolGUID) && isBackingSymbolShared || null != backingStateGroupGUID && !isInvalidValue(singleBackingStateGroup) && isBackingStateGroupShared ? h : null;

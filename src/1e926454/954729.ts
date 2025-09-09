@@ -11,7 +11,7 @@ import { j6, fu } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
 import { S2 } from "../figma_app/465071";
 import { N as _$$N } from "../905/809096";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { $z } from "../figma_app/617427";
@@ -45,12 +45,12 @@ import { AG, _w } from "../figma_app/217457";
 import { t as _$$t2 } from "../905/150656";
 import { oY } from "../905/485103";
 import { T as _$$T } from "../figma_app/257703";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { LN, Kq } from "../905/941249";
 import { u as _$$u } from "../1e926454/858319";
 import { S as _$$S } from "../1e926454/283343";
 import { dr, eb as _$$eb, oU } from "../4452/405965";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { C1 } from "../figma_app/12796";
 import { e0 } from "../figma_app/428858";
 import { rq } from "../905/351260";
@@ -428,7 +428,7 @@ function eb({
   onClose: s
 }) {
   let l = useDispatch();
-  let p = Pc();
+  let p = selectUser();
   let u = useSelector(e => e.autocomplete);
   let m = useSelector(e => e.contacts);
   let h = useSelector(e => e.dropdownShown);
@@ -512,7 +512,7 @@ function eb({
       onSuccess: e => {
         s();
         let n = e.invites.length;
-        n > 0 && l(_$$F.enqueue({
+        n > 0 && l(VisualBellActions.enqueue({
           message: getI18nString("plan_invite_modal.invites_sent", {
             count: n
           })

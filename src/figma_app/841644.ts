@@ -6,7 +6,7 @@ import { m as _$$m } from "../905/886380";
 import { o as _$$o } from "../905/949628";
 import { Ay } from "../figma_app/272902";
 import c from "classnames";
-import { Pt, rf } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -40,7 +40,7 @@ let x = forwardRef(function ({
 }, y) {
   return jsxs(D8, {
     forwardedRef: y,
-    recordingKey: Pt(E, "comboInputControl", "container"),
+    recordingKey: generateRecordingKey(E, "comboInputControl", "container"),
     className: u()(a, {
       [mc]: !0,
       [vu]: s,
@@ -109,8 +109,8 @@ let $$N2 = forwardRef(function ({
     hide();
     v?.();
   }, [hide, P, v]);
-  let V = rf(Pt(a, "detachIcon"), "click", G);
-  let H = rf(a, "mousedown", e => {
+  let V = useHandleMouseEvent(generateRecordingKey(a, "detachIcon"), "click", G);
+  let H = useHandleMouseEvent(a, "mousedown", e => {
     if (e && !g && e.shiftKey) {
       B();
       e.preventDefault();
@@ -118,7 +118,7 @@ let $$N2 = forwardRef(function ({
       return;
     }
   });
-  let z = rf(a, "contextmenu", e => {
+  let z = useHandleMouseEvent(a, "contextmenu", e => {
     e && !g && b && t?.current && (show({
       data: {
         position: {
@@ -130,7 +130,7 @@ let $$N2 = forwardRef(function ({
   });
   let W = [C && jsx(O, {
     handleClearOverride: C,
-    recordingKey: Pt(a, "clearOverrideButton")
+    recordingKey: generateRecordingKey(a, "clearOverrideButton")
   }, "clearOverrideButton"), !(l || g) && jsx(R, {
     boundVariableId: D,
     handleUnbind: V,
@@ -163,7 +163,7 @@ let $$N2 = forwardRef(function ({
       onClose: hide,
       onOpenVariablePicker: B,
       onUnbindVariable: V,
-      recordingKey: Pt(a, "contextMenu"),
+      recordingKey: generateRecordingKey(a, "contextMenu"),
       top: data.position.top
     })]
   });
@@ -229,7 +229,7 @@ let $$w0 = forwardRef(function ({
       currentFieldValue: e
     });
   }, [e, o, f]);
-  let I = rf(a, "mousedown", e => {
+  let I = useHandleMouseEvent(a, "mousedown", e => {
     if (e && !t) {
       if (c) {
         if (_$$i(e)) {
@@ -251,7 +251,7 @@ let $$w0 = forwardRef(function ({
       }
     }
   });
-  let S = rf(a, "contextmenu", e => {
+  let S = useHandleMouseEvent(a, "contextmenu", e => {
     e && !t && (b(), e.preventDefault(), e.stopPropagation());
   });
   return jsx("div", {
@@ -304,12 +304,12 @@ function R({
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": getI18nString("fullscreen.properties_panel.apply_variable"),
-      "data-test-id": Pt("variable-control-icon", i ?? ""),
+      "data-test-id": generateRecordingKey("variable-control-icon", i ?? ""),
       tabIndex: -1
     },
     "aria-label": getI18nString("fullscreen.properties_panel.apply_variable"),
     onClick: r,
-    recordingKey: Pt(i, "comboBoxButton"),
+    recordingKey: generateRecordingKey(i, "comboBoxButton"),
     children: jsx(B, {
       svg: $$default
     })

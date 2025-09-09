@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { H } from "../905/474029";
 import { EX, dy } from "../figma_app/909778";
 import { jm } from "../905/697795";

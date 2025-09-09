@@ -1,10 +1,20 @@
-import { NC } from "../905/17179";
-var $$n0;
-(e => {
-  e.update = NC("VISUAL_BELL_UPDATE");
-  e.enqueue = NC("VISUAL_BELL_ENQUEUE");
-  e.dequeue = NC("VISUAL_BELL_DEQUEUE");
-  e.clearAll = NC("VISUAL_BELL_CLEAR_ALL");
-  e.clearAllExcept = NC("VISUAL_BELL_CLEAR_ALL_EXCEPT");
-})($$n0 || ($$n0 = {}));
-export const F = $$n0;
+import { createActionCreator } from '../905/73481'
+/**
+ * VisualBellActions - Action creators for visual bell operations.
+ * Original variable: $$n0
+ */
+export const VisualBellActions = {
+  /** Action to update the visual bell. (VISUAL_BELL_UPDATE) */
+  update: createActionCreator('VISUAL_BELL_UPDATE'),
+  /** Action to enqueue a visual bell. (VISUAL_BELL_ENQUEUE) */
+  enqueue: createActionCreator('VISUAL_BELL_ENQUEUE'),
+  /** Action to dequeue a visual bell. (VISUAL_BELL_DEQUEUE) */
+  dequeue: createActionCreator('VISUAL_BELL_DEQUEUE'),
+  /** Action to clear all visual bells. (VISUAL_BELL_CLEAR_ALL) */
+  clearAll: createActionCreator('VISUAL_BELL_CLEAR_ALL'),
+  /** Action to clear all except specified visual bells. (VISUAL_BELL_CLEAR_ALL_EXCEPT) */
+  clearAllExcept: createActionCreator('VISUAL_BELL_CLEAR_ALL_EXCEPT'),
+}
+
+/** Exported as F in original code */
+export const F = VisualBellActions

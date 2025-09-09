@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { DesignToBuzzHelpers, Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription, Xr, Ut } from "../figma_app/27355";
@@ -8,8 +8,8 @@ import { H } from "../905/620380";
 import { R } from "../905/165069";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { zE } from "../905/738636";
 import { Uf, $K } from "../figma_app/223206";
 import { J3, JU } from "../figma_app/622574";
@@ -77,15 +77,15 @@ export function $$k0() {
     openCooperPublishFlow
   } = _$$t2();
   R(() => {
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: getI18nString("buzz.send_from_design.copying"),
       type: "send-to-buzz-from-design-loading",
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       timeoutOverride: 3e5
     }));
   }, [e], () => l);
   let E = H(useCallback(() => {
-    C ? e(F.enqueue({
+    C ? e(VisualBellActions.enqueue({
       message: getI18nString("buzz.send_from_design.imported_x_assets_and_maybe_publish", {
         numAssets: t.sourceNodeIds.length
       }),
@@ -100,7 +100,7 @@ export function $$k0() {
           });
         }
       }
-    })) : e(F.enqueue({
+    })) : e(VisualBellActions.enqueue({
       message: getI18nString("buzz.send_from_design.imported_x_assets", {
         numAssets: t.sourceNodeIds.length
       }),
@@ -116,7 +116,7 @@ export function $$k0() {
       }), t.fileKey, t.sourceNodeIds, !1);
       f(Ut);
       AppStateTsApi?.cooperFocusView().exitFocusedNodeView();
-      e(F.dequeue({
+      e(VisualBellActions.dequeue({
         matchType: "send-to-buzz-from-design-loading"
       }));
       E.current();

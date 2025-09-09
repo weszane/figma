@@ -1,4 +1,4 @@
-import { n3, IA } from "../905/859698";
+import { n3, VariableStyleId } from "../905/859698";
 var $$n7;
 export function $$a8(e) {
   switch (e) {
@@ -68,7 +68,7 @@ export function $$p5(e) {
   let t = e.substring(2).split(",");
   if (!t || 2 !== t.length) return null;
   let r = n3(t[0]);
-  let n = IA(t[1]);
+  let n = VariableStyleId(t[1]);
   return r === n3.INVALID ? null : {
     key: r,
     version: n

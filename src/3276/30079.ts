@@ -2,14 +2,14 @@ import { jsx } from "react/jsx-runtime";
 import a from "classnames";
 import { Rs } from "../figma_app/288654";
 import { fu } from "../figma_app/831799";
-import { OCJ } from "../figma_app/43951";
+import { FileEditRequestExistence } from "../figma_app/43951";
 var i = a;
 export function $$d0({
   fileKey: e,
   isLegacyPosition: t
 }) {
   let n = 0;
-  let a = Rs(OCJ, {
+  let a = Rs(FileEditRequestExistence, {
     fileKey: e
   });
   if (a && "loaded" === a.status && a.data.file?.fileRoleRequests && (n = a.data.file.fileRoleRequests.length), 0 === n) return null;

@@ -1,18 +1,18 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Wn } from "../figma_app/88484";
 import { IT } from "../figma_app/566371";
 import { renderI18nText } from "../905/303541";
 import { S as _$$S } from "../905/417453";
 import { Q0, kq } from "../905/994947";
-import { MAl } from "../figma_app/43951";
+import { FacetedSearchPreviewRecentFilesView } from "../figma_app/43951";
 import { YN } from "../figma_app/349248";
 import { uH, Or, MU } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { B } from "../905/714743";
 import { In } from "../905/672640";
 import { Q8, sC, R9 } from "../905/61477";
@@ -40,7 +40,7 @@ function T({
   let k = useCallback(e => {
     if (e.preventDefault(), e.metaKey) {
       let e = XW(s.query, h, p ?? uH.FILES);
-      Ay.redirect(e, "_blank");
+      customHistory.redirect(e, "_blank");
     } else {
       o(Dy({
         entryPoint: "file_browser"
@@ -93,7 +93,7 @@ export function $$k0({
   let _ = f.searches.slice(0, Or);
   let A = MU - _.length;
   let y = function () {
-    let [e] = IT(MAl({}));
+    let [e] = IT(FacetedSearchPreviewRecentFilesView({}));
     let t = useMemo(() => e.transform(e => YN(e.currentUser.recentFiles)), [e]);
     useEffect(() => {
       "loaded" === t.status && Wn(t.data);

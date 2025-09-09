@@ -1,13 +1,56 @@
-function n(e, t) {
-  return e === t ? 0 !== e || 0 !== t || 1 / e == 1 / t : e != e && t != t;
+/**
+ * Checks if two values are the same value, handling edge cases like NaN and signed zero.
+ * @param a - First value to compare (original: n, parameter: e)
+ * @param b - Second value to compare (original: n, parameter: t)
+ * @returns True if values are the same, false otherwise.
+ */
+function isSameValue(a: any, b: any): boolean {
+  // Original function: n
+  if (a === b) {
+    // Handles signed zero
+    return a !== 0 || b !== 0 || 1 / a === 1 / b
+  }
+  // Handles NaN
+  return a !== a && b !== b
 }
-export function $$r0(e, t) {
-  if (n(e, t)) return !0;
-  if ("object" != typeof e || null === e || "object" != typeof t || null === t) return !1;
-  let i = Object.keys(e);
-  let r = Object.keys(t);
-  if (i.length !== r.length) return !1;
-  for (let r = 0; r < i.length; r++) if (!Object.prototype.hasOwnProperty.call(t, i[r]) || !n(e[i[r]], t[i[r]])) return !1;
-  return !0;
+
+/**
+ * Performs a shallow equality check between two objects or values.
+ * @param objA - First object or value to compare (original: $$r0, parameter: e)
+ * @param objB - Second object or value to compare (original: $$r0, parameter: t)
+ * @returns True if objects/values are shallowly equal, false otherwise.
+ */
+export function shallowEqual(objA: any, objB: any): boolean {
+  // Original function: $$r0
+  if (isSameValue(objA, objB))
+    return true
+
+  if (
+    typeof objA !== 'object'
+    || objA === null
+    || typeof objB !== 'object'
+    || objB === null
+  ) {
+    return false
+  }
+
+  const keysA = Object.keys(objA)
+  const keysB = Object.keys(objB)
+
+  if (keysA.length !== keysB.length)
+    return false
+
+  for (let i = 0; i < keysA.length; i++) {
+    if (
+      !Object.prototype.hasOwnProperty.call(objB, keysA[i])
+      || !isSameValue(objA[keysA[i]], objB[keysA[i]])
+    ) {
+      return false
+    }
+  }
+
+  return true
 }
-export const A = $$r0;
+
+/** Alias for shallowEqual (original export: A) */
+export const A = shallowEqual

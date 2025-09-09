@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
-import { zN } from "../905/19536";
+import { useDispatch } from "react-redux";
+import { useStableMemo } from "../905/19536";
 import { showModalConditional } from "../905/156213";
 export function $$o1(e) {
-  let t = zN(e);
+  let t = useStableMemo(e);
   let i = useDispatch();
   return useCallback(() => {
     i(showModalConditional(t));

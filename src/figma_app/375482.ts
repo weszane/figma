@@ -1,15 +1,15 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { VariableResolvedDataType, LayoutSizingMode } from "../figma_app/763686";
 import o from "classnames";
 import { M as _$$M } from "../figma_app/648761";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { sT } from "../figma_app/740163";
 import { kl } from "../905/275640";
 import { SG } from "../figma_app/852050";
 import { Um } from "../905/848862";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { fl } from "../figma_app/178475";
 import { JV } from "../figma_app/260445";
@@ -106,10 +106,10 @@ export function $$C0({
     showBindingUI,
     consumedVariable
   } = $$N1(b, VariableResolvedDataType.FLOAT);
-  let eb = useCallback((e, t = zk.YES) => {
+  let eb = useCallback((e, t = yesNoTrackingEnum.YES) => {
     e === y8 ? showBindingUI(em.current) : C(e, t);
   }, [C, showBindingUI, em]);
-  let eT = rf(Pt(X, "scrub"), "click", () => {
+  let eT = useHandleMouseEvent(generateRecordingKey(X, "scrub"), "click", () => {
     z?.();
   });
   let eI = function (e, t, r) {

@@ -1,13 +1,13 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getI18nString } from "../905/303541";
 import { AC, Pg } from "../figma_app/777551";
 import { JZ } from "../figma_app/696043";
 import { r as _$$r } from "../figma_app/896657";
 import { showModalHandler } from "../905/156213";
-import { A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { LR } from "../figma_app/120210";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { M } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory } from "../figma_app/300692";
 import { m3 } from "../figma_app/45218";
@@ -20,7 +20,7 @@ import { K } from "../figma_app/364226";
 export function $$I1(e) {
   let t;
   let r = useDispatch();
-  let i = TA();
+  let i = getUserId();
   if (!e || i !== e.creator.id) return null;
   if (AC(e)) t = getI18nString("community.plugins.cancel_review");else if (m3(e)) {
     if (Pg(e)) return null;
@@ -118,7 +118,7 @@ export function $$A5(e, t, r, i = k2.EDITOR) {
 export function $$x4(e) {
   let t = M();
   return e ? {
-    displayText: A(getPluginsMenuOpenDirectory()),
+    displayText: formatI18nMessage(getPluginsMenuOpenDirectory()),
     callback: () => {
       t && t.openExtensionDirectory(e.localFileId);
     }

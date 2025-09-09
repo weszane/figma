@@ -6,7 +6,7 @@ import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
 import { reportError } from "../905/11";
 import { Zr } from "../figma_app/930338";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { ds } from "../figma_app/314264";
 import { Cs } from "../905/420347";
@@ -244,7 +244,7 @@ export async function $$C2({
   i && i();
   WB()?.optimisticallyCreate({
     DeveloperRelatedLink: {
-      [`optimistic-link-${_$$g()}`]: {
+      [`optimistic-link-${generateUUIDv4()}`]: {
         nodeId: t ?? "",
         fileKey: r ?? "",
         linkName: h,

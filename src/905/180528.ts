@@ -1,12 +1,12 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { N as _$$N } from "../905/438674";
 import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { h as _$$h } from "../905/207101";
 import { Uz } from "../905/63728";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { ph } from "../figma_app/709893";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -78,7 +78,7 @@ export function $$O1({
   let V = _$$b({
     libraryKey: i
   });
-  let G = rf("subscriptionFileViewHeader.backCaret", "mousedown", d);
+  let G = useHandleMouseEvent("subscriptionFileViewHeader.backCaret", "mousedown", d);
   p(d);
   let z = null;
   T ? z = jsx(_$$B2, {

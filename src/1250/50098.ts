@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
@@ -17,7 +17,7 @@ import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { Cu } from "../figma_app/314264";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { M as _$$M } from "../905/152487";
@@ -39,7 +39,7 @@ export function $$F0({
   let t = function () {
     let e = X$("useIsEligibleForJobTitleReprompt");
     let t = YY(e).unwrapOr(!1);
-    let n = Pc();
+    let n = selectUser();
     let a = sZ();
     let i = n.profile.job_title;
     let o = HB(i);
@@ -47,7 +47,7 @@ export function $$F0({
   }();
   let n = Xr(bk);
   let i = Xr(Q7);
-  let o = Pc().name;
+  let o = selectUser().name;
   let s = !!_$$f("submitted_job_title_prompt_overlay");
   let {
     show,
@@ -81,7 +81,7 @@ function B({
   overlaySource: n
 }) {
   let u = useDispatch();
-  let m = Pc();
+  let m = selectUser();
   let y = m.id;
   let T = m.profile.job_title;
   let [j, k] = useAtomValueAndSetter(ZE);

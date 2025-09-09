@@ -14,7 +14,7 @@ import { n6 } from '../905/234821';
 import { Label } from '../905/270045';
 import { kl, lJ } from '../905/275640';
 import { E as _$$E } from '../905/277716';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { K as _$$K } from '../905/443068';
 import { z as _$$z } from '../905/454433';
@@ -76,7 +76,7 @@ import { qw } from '../figma_app/740163';
 import { dG } from '../figma_app/753501';
 import { AppStateTsApi, CmsRepeaterHelpers, ItemType, ViewType, LayoutTabType, InteractionCpp, Command, InsertSourceType, ChildRelationshipStatus } from '../figma_app/763686';
 import { bw, gc, jw, Xl } from '../figma_app/781981';
-import { Pt } from '../figma_app/806412';
+import { generateRecordingKey } from '../figma_app/878298';
 import { to } from '../figma_app/828186';
 import { t as _$$t2 } from '../figma_app/856638';
 import { b as _$$b, bL, mc, YJ } from '../figma_app/860955';
@@ -92,7 +92,7 @@ import { Em, ow, vn } from '../figma_app/976749';
 import { Wg, ZU } from '../figma_app/986347';
 import { kk, OU } from '../figma_app/986594';
 import { f$, LF } from '../figma_app/998062';
-import { useDispatch, useSelector } from '../vendor/514228';
+import { useDispatch, useSelector } from 'react-redux';
 let p = u;
 let M = 'cmsCollectionSubmenu';
 function F() {
@@ -112,7 +112,7 @@ function F() {
     e && (t && t.type === 'RESPONSIVE_SET' ? permissionScopeHandler.user('dakota-set-text-binding', () => {
       t.setDakotaSelectorCollection(e, InsertSourceType.CMS_PROPERTIES_PANEL);
     }) : f(e, () => {
-      o(_$$F.enqueue({
+      o(VisualBellActions.enqueue({
         button: {
           text: getI18nString('dakota.fullscreen_actions.visual_bell.go_to_component'),
           action: () => {
@@ -120,7 +120,7 @@ function F() {
           }
         },
         message: getI18nString('dakota.fullscreen_actions.visual_bell.repeater_created'),
-        onDismiss: () => {}
+        onDismiss: () => { }
       }));
     }));
   }, [t, f, o]);
@@ -140,7 +140,7 @@ function F() {
     type: ZU.CUSTOM_ACTION,
     onClick: () => E(e.id),
     getTitle: () => e.name,
-    recordingKey: getFeatureFlags().cms_bindings_ux_improvements && !r ? e.name : Pt(M, e.name) ?? '',
+    recordingKey: getFeatureFlags().cms_bindings_ux_improvements && !r ? e.name : generateRecordingKey(M, e.name) ?? '',
     customActionType: Wg.STANDARD_BUTTON,
     icon: getFeatureFlags().cms_bindings_ux_improvements ? void 0 : jsx(_$$T, {}),
     preventHoisting: !0
@@ -725,7 +725,7 @@ function tr({
     name: 'layer_overflow_menu_button',
     children: jsx(_$$S, {
       enabledToolbarItems: ef,
-      recordingKey: Pt(T, 'UI3ToolbarOverflowMenu')
+      recordingKey: generateRecordingKey(T, 'UI3ToolbarOverflowMenu')
     })
   });
   let eO = node && !!node.getDakotaSelector()?.collectionId;
@@ -767,7 +767,7 @@ function tr({
             }),
             children: jsx(_$$F2, {
               flyoutConfig: e,
-              recordingKey: Pt($$e90, e.flyoutRecordingKey)
+              recordingKey: generateRecordingKey($$e90, e.flyoutRecordingKey)
             })
           }, e.dropdownKey) : e.type === ZU.ACTION ? jsx(_$$E, {
             name: 'layer_header_button',
@@ -927,7 +927,7 @@ export function $$to1({
     }) : jsx(_$$K, {
       'aria-label': e.getTitle(),
       'onClick': e.onClick,
-      'recordingKey': Pt($$e90, e.recordingKey),
+      'recordingKey': generateRecordingKey($$e90, e.recordingKey),
       'htmlAttributes': {
         'data-tooltip': e.getTitle(),
         'data-tooltip-type': Ib.TEXT,

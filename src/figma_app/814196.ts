@@ -1,10 +1,10 @@
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription, atom } from "../figma_app/27355";
 import { sessionStorageRef, localStorageRef } from "../905/657224";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { b as _$$b } from "../905/985254";
 import { FFileType } from "../figma_app/191312";
-import { imP } from "../figma_app/43951";
+import { UserPreferences } from "../figma_app/43951";
 import { YP } from "../figma_app/193867";
 import { e as _$$e } from "../905/859735";
 import { GZ } from "../905/508367";
@@ -15,15 +15,15 @@ let g = (() => {
   if (sessionStorageRef) {
     let e = "initialPathName";
     if (sessionStorageRef[e]) return sessionStorageRef[e];
-    sessionStorageRef[e] = Ay.location.pathname;
+    sessionStorageRef[e] = customHistory.location.pathname;
   }
-  return Ay.location.pathname;
+  return customHistory.location.pathname;
 })();
 export function $$f2() {
   return !GZ() && !desktopAPIInstance && !!((getInitialOptions().editing_file || getInitialOptions().link_password_input) && E(y) || E(b));
 }
 function E(e) {
-  return e(g) && e(Ay.location.pathname);
+  return e(g) && e(customHistory.location.pathname);
 }
 function y(e) {
   return ["/file/", ...Object.values({
@@ -63,7 +63,7 @@ export function $$N4() {
   return useAtomWithSubscription(C);
 }
 let C = atom(e => {
-  let t = e(imP.Query({}));
+  let t = e(UserPreferences.Query({}));
   let r = getInitialOptions().user_data?.auto_open_in_desktop;
   "loaded" === t.status && t.data?.currentUser?.userPreferences?.status === "loaded" && (r = t.data.currentUser.userPreferences.data?.preferences.auto_open_in_desktop);
   return r;

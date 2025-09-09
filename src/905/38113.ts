@@ -1,13 +1,13 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { sha1HexFromBytes } from "../905/125019";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/920165";
 import { p as _$$p } from "../905/951634";
 import { K as _$$K } from "../905/851274";
 import u from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { f0 } from "../figma_app/975811";
 import { RU } from "../figma_app/740163";
@@ -66,7 +66,7 @@ export function $$E0(e) {
         onVideoTimeChange(e);
         F("input_time");
       },
-      recordingKey: Pt(e, "videoTimestampInput"),
+      recordingKey: generateRecordingKey(e, "videoTimestampInput"),
       scrubMultiplier: k / 1e3,
       tooltipForScreenReadersOnly: !0,
       value: currentTime,
@@ -90,7 +90,7 @@ export function $$E0(e) {
       F("pause");
     },
     "aria-label": getI18nString("fullscreen.properties_panel.pause"),
-    recordingKey: Pt(e, "pauseVideo"),
+    recordingKey: generateRecordingKey(e, "pauseVideo"),
     children: jsx(_$$p, {})
   }) : jsx(K, {
     disabled,
@@ -98,7 +98,7 @@ export function $$E0(e) {
       t && (setPlaying(!0), F("play"));
     },
     "aria-label": getI18nString("fullscreen.properties_panel.play"),
-    recordingKey: Pt(e, "playVideo"),
+    recordingKey: generateRecordingKey(e, "playVideo"),
     children: jsx(_$$K, {})
   });
   let U = jsx(_$$A, {
@@ -114,7 +114,7 @@ export function $$E0(e) {
       onVideoTimeChange(e);
       t && !D && (L(!0), F("scrub"));
     },
-    recordingKey: Pt(e, "videoFramePicker"),
+    recordingKey: generateRecordingKey(e, "videoFramePicker"),
     step: .01,
     value: currentTime
   });

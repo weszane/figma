@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import l from "classnames";
@@ -15,7 +15,7 @@ import { kc } from "../figma_app/740025";
 import { j as _$$j } from "../draftjs_composer/390258";
 import { wT } from "../figma_app/188152";
 import { tS, q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { CM } from "../figma_app/45218";
 import { wV } from "../figma_app/585209";
 import { _B } from "../905/852370";
@@ -87,7 +87,7 @@ function S({
   });
 }
 export function $$D1(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let n = useDispatch();
   let r = _B();
   let l = mz();
@@ -182,7 +182,7 @@ export function $$D1(e) {
   });
 }
 export function $$B0(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let [n, a] = useState("");
   let [s, r] = useState([]);
   let [l, c] = useState(!!e.focusOnMount);

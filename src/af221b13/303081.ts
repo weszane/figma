@@ -6,13 +6,13 @@ import { i } from "../af221b13/853561";
 import { i as _$$i } from "../af221b13/100282";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useRef, useState, useCallback, useLayoutEffect, useMemo, forwardRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { reportError } from "../905/11";
 import { hideModal, showModalHandler, hideModalHandler } from "../905/156213";
-import { iZ as _$$iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { N as _$$N } from "../figma_app/469468";
 import { LA, Yo } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -186,7 +186,7 @@ import { t as _$$t2 } from "../905/150656";
 import { J as _$$J3 } from "../905/341359";
 import { ZC } from "../figma_app/39751";
 import { C as _$$C3 } from "../905/237873";
-import { g as _$$g4 } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { a as _$$a5 } from "../905/925868";
 import { Qi } from "../905/172918";
 import { K2 } from "../figma_app/777551";
@@ -514,7 +514,7 @@ let $ = registerModal(function (e) {
     });
     d();
     i(t(n));
-    new URLSearchParams(Ay.location.search).has(_O) && i(sf({
+    new URLSearchParams(customHistory.location.search).has(_O) && i(sf({
       ...c,
       triggerFreemiumPreview: void 0
     }));
@@ -1518,15 +1518,15 @@ function tN() {
       } catch {
         return !1;
       }
-    }(Ay.location.href)
+    }(customHistory.location.href)
   }));
   return (useLayoutEffect(() => {
     let t = ey[urlSlug];
-    _$$N2(t, LJ) && Ay.replace(new $E({
+    _$$N2(t, LJ) && customHistory.replace(new $E({
       categorySlug: t
     }).href);
     let i = ef[urlSlug];
-    i && Ay.replace(`/community/collections/${i}`);
+    i && customHistory.replace(`/community/collections/${i}`);
   }, [urlSlug]), "loading" === i) ? null : t ? (document.title = t.meta_title || "Collection | Figma", jsxs(Fragment, {
     children: [jsx(tS, {
       collection: t
@@ -1578,19 +1578,19 @@ function tS({
 function tA() {
   let e = Jm();
   let [t, i] = useState();
-  useEffect(() => Ay.listen(() => {
+  useEffect(() => customHistory.listen(() => {
     i(e);
   }), [e]);
   useEffect(() => {
-    t && !Ay.location.state?.searchSessionId && Ay.replace(null, {
-      ...Ay.location.state,
+    t && !customHistory.location.state?.searchSessionId && customHistory.replace(null, {
+      ...customHistory.location.state,
       searchSessionId: t
     });
   }, [t]);
   return null;
 }
 function tR() {
-  useEffect(() => Ay.listen(e => {
+  useEffect(() => customHistory.listen(e => {
     "PUSH" === e && window.scrollTo(0, 0);
   }), []);
   return null;
@@ -1734,7 +1734,7 @@ function t7({
               },
               svgClassName: _$$s.w32.h32.$,
               onClick: () => {
-                Ay.push("/community");
+                customHistory.push("/community");
                 t();
               }
             }), jsx(_$$B, {
@@ -2053,7 +2053,7 @@ function ih(e) {
     trackingProperties: {
       url
     },
-    onClick: () => Ay.push(url),
+    onClick: () => customHistory.push(url),
     children: [jsxs("div", {
       className: "nav_dropdown_card--titleAndSubtitle--gq1Eu",
       children: [jsxs("div", {
@@ -2960,7 +2960,7 @@ function iB({
       c(void 0);
     },
     onClick: () => {
-      u && d && Ay.push(u);
+      u && d && customHistory.push(u);
     },
     role: "button",
     tabIndex: 0,
@@ -3013,7 +3013,7 @@ function iM() {
       }).href : new _$$n({}, {
         query: i
       }).href;
-      i.length ? Ay.push(n) : t && Ay.push("/community");
+      i.length ? customHistory.push(n) : t && customHistory.push("/community");
     },
     inSearchPath: t
   };
@@ -3033,16 +3033,16 @@ function iW({
 }) {
   let t = useRef(window.history.length - 1);
   let [i, n] = useState(t.current);
-  useEffect(() => Ay.listen(e => {
+  useEffect(() => customHistory.listen(e => {
     "PUSH" === e && n(e => e + 1);
   }), []);
   return jsx(_$$f, {
     onLeftClick: () => {
-      Ay.back();
+      customHistory.back();
       n(e => e - 1);
     },
     onRightClick: () => {
-      Ay.forward();
+      customHistory.forward();
       n(e => e + 1);
     },
     isLeftEnabled: i > t.current,
@@ -3266,7 +3266,7 @@ function i7({
   return jsxs(jm, {
     className: "buzz_sites_promo_banner--card--fBm7j",
     ref: r,
-    onClick: () => Ay.push(m.href),
+    onClick: () => customHistory.push(m.href),
     children: [jsxs("div", {
       className: "buzz_sites_promo_banner--leftColumn--EAgWg",
       children: [jsx(_$$J2, {
@@ -4906,7 +4906,7 @@ function aa() {
   let x = useRef(null);
   let _ = !d && m && "loaded" === g.status && 0 === g.totalResources.length && getFeatureFlags().cmty_redirect_empty_buzz_sites_editor_filter;
   return (useEffect(() => {
-    _ && (u(!0), Ay.replace(new $E({
+    _ && (u(!0), customHistory.replace(new $E({
       categorySlug,
       tagSlug
     }, {
@@ -4930,7 +4930,7 @@ function aa() {
         onUpdate: e => {
           let n = handleFilterUpdate(e);
           o.editor_types[0] && (n.editorType = o.editor_types[0]);
-          Ay.replace(new $E({
+          customHistory.replace(new $E({
             categorySlug,
             tagSlug
           }, {
@@ -5971,7 +5971,7 @@ function a2({
 let se = r1(Xt);
 function st() {
   let e = useAtomWithSubscription(se);
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let i = useSelector(e => e.authedActiveCommunityProfile);
   let n = _$$N(`(max-width: ${YW - 1}px)`);
   let {
@@ -6107,7 +6107,7 @@ function so() {
   let n = useDispatch();
   let o = _$$N(`(max-width: ${YW - 1}px)`);
   useEffect(() => {
-    let e = Ay.listen(() => {
+    let e = customHistory.listen(() => {
       let [e, t] = _$$eD2();
       _$$S4.hasOwnProperty(e) && (i(i => i.apiResourceType === e && i.resourceId === t ? i : {
         apiResourceType: e,
@@ -6158,7 +6158,7 @@ function so() {
     m && _$$S5(n, m);
   }, [n, m]), !u || !m) return jsx(Fragment, {});
   let f = _$$Ay7(m);
-  let b = _$$g4();
+  let b = generateUUIDv4();
   return jsx("div", {
     className: "resource_page--resourcePage--n6Aio text--fontPos14--OL9Hp text--_fontBase--QdLsd",
     children: jsxs(fu, {
@@ -6212,7 +6212,7 @@ function sl() {
     });
   }, []);
   (function () {
-    let e = null === TA();
+    let e = null === getUserId();
     let {
       getDynamicConfig
     } = Fj("community_localization");
@@ -6220,10 +6220,10 @@ function sl() {
     if (!e) return;
     let n = document.documentElement.getAttribute("data-product-locale");
     if (!n || !i[n]) return;
-    let a = po(Ay.location.pathname + Ay.location.search + Ay.location.hash);
+    let a = po(customHistory.location.pathname + customHistory.location.search + customHistory.location.hash);
     if (!a.locale || a.locale === n) return;
     let s = communityPagePaths[n];
-    s && Ay.replace(`${s}${a.remainingPath}`);
+    s && customHistory.replace(`${s}${a.remainingPath}`);
   })();
   let e = _$$iY();
   return jsxs("div", {
@@ -6266,13 +6266,13 @@ function sl() {
 }
 function sc() {
   useLayoutEffect(() => {
-    Ay.reload("Community needs to reload due to locale change");
+    customHistory.reload("Community needs to reload due to locale change");
   }, []);
   return null;
 }
 export function $$sd0() {
   let e = useDispatch();
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let i = useSelector(e => e.userFlags);
   return (_$$h(() => (function (e, t) {
     let i = t.figjam_editor_onboarded || _q(t) || t.editor_community_duplicate_onboarded || t.orgs_onboarded || t.welcome_onboarded;
@@ -6308,7 +6308,7 @@ export function $$sd0() {
   }, []), t) ? jsx("div", {
     className: "community_logged_in_view--communityPageViewContainer--nn-QY",
     children: jsx(sl, {})
-  }) : (Ay.reload("Logged-out Community Hub"), null);
+  }) : (customHistory.reload("Logged-out Community Hub"), null);
 }
 performanceMetricsTracker.domContentLoadedMs = Math.round(window.performance.now());
 export const CommunityLoggedInView = $$sd0;

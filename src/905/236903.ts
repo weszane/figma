@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { t7 } from "../905/989765";
 import { WO } from "../figma_app/122682";

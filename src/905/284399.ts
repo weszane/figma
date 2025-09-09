@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
-import { wm } from "../905/19536";
+import { useDispatch } from "react-redux";
+import { useMemoShallow } from "../905/19536";
 import { getI18nString } from "../905/303541";
 import { q3 } from "../figma_app/450829";
 import { i } from "../905/559280";
@@ -16,7 +16,7 @@ export function $$c0(e) {
     userFlagOnShow,
     ...g
   } = e;
-  let f = wm(() => function (e) {
+  let f = useMemoShallow(() => function (e) {
     if (e.modalType === q3.DRAGGABLE) {
       let {
         currentStepIndex,

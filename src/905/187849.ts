@@ -1,107 +1,157 @@
-import { hasTypeProperty } from "../905/957591";
-import { Gz } from "../905/19248";
-import { QueryDef } from "../905/8928";
-import { parseFilterDefinition } from "../905/824218";
-import { hasCursorProperties, isNotCursorColumnSet } from "../905/552287";
-import { transformExpression, resolvePropertyWithParent, resolveBasicProperty } from "../905/415342";
-import { ComputedFieldQuery } from "../905/329793";
-class s {
-  fields;
-  filter;
-  limit;
-  orderBy;
+import { QueryDef } from '../905/8928';
+import { collectRightPropertiesWithType } from '../905/19248';
+import { ComputedFieldQuery } from '../905/329793';
+import { resolveBasicProperty, resolvePropertyWithParent, transformExpression } from '../905/415342';
+import { hasCursorProperties, isNotCursorColumnSet } from '../905/552287';
+import { parseFilterDefinition } from '../905/824218';
+import { hasTypeProperty } from '../905/957591';
+
+/**
+ * Represents a substituted query with fields, filter, limit, and orderBy.
+ * Original class name: s
+ */
+export interface SubstitutedQueryOptions {
+  fields: any;
+  filter?: any;
+  limit?: number;
+  orderBy?: any;
+}
+
+/**
+ * SubstitutedQuery encapsulates query parameters for filtering and matching.
+ * Original class name: s
+ */
+export class SubstitutedQuery {
+  fields: any;
+  filter: any;
+  limit: number | undefined;
+  orderBy: any;
   constructor({
-    fields: e,
-    filter: t,
-    limit: i,
-    orderBy: n
-  }) {
-    this.fields = e;
-    this.limit = i;
-    this.filter = t;
-    this.orderBy = n;
+    fields,
+    filter,
+    limit,
+    orderBy
+  }: SubstitutedQueryOptions) {
+    this.fields = fields;
+    this.limit = limit;
+    this.filter = filter;
+    this.orderBy = orderBy;
   }
-  matches(e) {
-    if (!this.filter) return !0;
-    let t = i => {
-      switch (i.type) {
-        case "binary":
-          let n = e[i.left];
-          let r = i.right;
-          switch (i.op) {
-            case "=":
-              return n === r;
-            case "<>":
-              return n !== r;
+
+  /**
+   * Checks if the provided object matches the filter.
+   * Original method name: matches
+   */
+  matches(obj: Record<string, any>): boolean {
+    if (!this.filter) return true;
+    const matchExpr = (expr: any): boolean => {
+      switch (expr.type) {
+        case 'binary':
+          {
+            const leftVal = obj[expr.left];
+            const rightVal = expr.right;
+            switch (expr.op) {
+              case '=':
+                return leftVal === rightVal;
+              case '<>':
+                return leftVal !== rightVal;
+            }
+            if (leftVal === null || rightVal === null) return false;
+            switch (expr.op) {
+              case '>':
+                return leftVal > rightVal;
+              case '>=':
+                return leftVal >= rightVal;
+              case '<':
+                return leftVal < rightVal;
+              case '<=':
+                return leftVal <= rightVal;
+            }
+            break;
           }
-          if (null === n || null === r) return !1;
-          switch (i.op) {
-            case ">":
-              return n > r;
-            case ">=":
-              return n >= r;
-            case "<":
-              return n < r;
-            case "<=":
-              return n <= r;
-          }
-        case "in":
-          let a = e[i.left];
-          return i.right.some(e => e === a);
-        case "or":
-          return i.expressions.some(t);
-        case "and":
-          return i.expressions.every(t);
+        case 'in':
+          return expr.right.includes(obj[expr.left]);
+        case 'or':
+          return expr.expressions.some(matchExpr);
+        case 'and':
+          return expr.expressions.every(matchExpr);
       }
+      return false;
     };
-    return t(this.filter);
+    return matchExpr(this.filter);
   }
-  singleMatchingId() {
-    if (this.filter && "binary" === this.filter.type) {
-      let {
+
+  /**
+   * Returns the single matching id if filter is a binary id comparison.
+   * Original method name: singleMatchingId
+   */
+  singleMatchingId(): string | null {
+    if (this.filter && this.filter.type === 'binary') {
+      const {
         left,
         right
       } = this.filter;
-      if ("id" === left && "string" == typeof right) return right;
+      if (left === 'id' && typeof right === 'string') return right;
     }
     return null;
   }
 }
-export class $$u0 {
-  constructor(e, t, i, a) {
-    this.queryDef = e;
-    this.context = t;
-    this.parent = i;
-    this.paginationArgs = a;
-    let s = [];
-    for (let e of this.queryDef.objectFieldDef.args) {
-      let t = this.queryDef.fieldArgs[e.name];
-      hasTypeProperty(t) ? "session" === t.type ? s.push(this.context.sessionArgs[t.ref]) : s.push(this.context.viewArgs[t.ref]) : s.push(t);
+
+/**
+ * QueryContext encapsulates logic for query resolution, pagination, and resolver config.
+ * Original class name: $$u0
+ */
+export class QueryContext {
+  queryDef: any;
+  context: any;
+  parent: any;
+  paginationArgs: any;
+  queryId: string;
+  usedResolverValues: any[];
+  span: any;
+  constructor(queryDef: any, context: any, parent: any, paginationArgs?: any) {
+    this.queryDef = queryDef;
+    this.context = context;
+    this.parent = parent;
+    this.paginationArgs = paginationArgs;
+
+    // Prepare resolver values
+    const argValues = [];
+    for (const arg of this.queryDef.objectFieldDef.args) {
+      const fieldArg = this.queryDef.fieldArgs[arg.name];
+      if (hasTypeProperty(fieldArg)) {
+        argValues.push(fieldArg.type === 'session' ? this.context.sessionArgs[fieldArg.ref] : this.context.viewArgs[fieldArg.ref]);
+      } else {
+        argValues.push(fieldArg);
+      }
     }
-    this.usedResolverValues = Gz(this.filter).filter(({
-      type: e
-    }) => "parent" === e).map(({
-      ref: e
-    }) => i[e]);
+    this.usedResolverValues = collectRightPropertiesWithType(this.filter).filter(({
+      type
+    }: any) => type === 'parent').map(({
+      ref
+    }: any) => parent[ref]);
     this.usedResolverValues.push(...this.getUsedHttpResolverValues());
     this.usedResolverValues.push(...this.getUsedRedisResolverValues());
     this.usedResolverValues.push(...this.getUsedStatsigResolverValues());
-    let o = [s, this.usedResolverValues];
-    this.isStaticHttpQuery() && t.viewArgs.__requestId && o.push(t.viewArgs.__requestId);
-    this.isPaginationQuery() && o.push(a);
-    this.queryId = function (e, t) {
-      let i = p(e);
-      return e.isComputedFieldDependency && "root" === i && "root" === e.objectFieldDef.name ? JSON.stringify(["computed", "root", e.objectDef.name, ...t]) : JSON.stringify([i, e.objectFieldDef.name, ...t]);
-    }(this.queryDef, o);
+    const queryIdArgs = [argValues, this.usedResolverValues];
+    if (this.isStaticHttpQuery() && context.viewArgs.__requestId) {
+      queryIdArgs.push(context.viewArgs.__requestId);
+    }
+    if (this.isPaginationQuery()) {
+      queryIdArgs.push(paginationArgs);
+    }
+    this.queryId = getQueryId(this.queryDef, queryIdArgs);
   }
-  queryId;
-  usedResolverValues;
-  span;
+
+  /**
+   * Returns query info for tracing.
+   * Original method name: queryInfo
+   */
   queryInfo() {
     return {
       objectName: this.queryDef.objectDef.name,
       parent: {
-        objectName: p(this.queryDef),
+        objectName: getParentObjectName(this.queryDef),
         fieldName: this.queryDef.objectFieldDef.name
       }
     };
@@ -118,229 +168,386 @@ export class $$u0 {
   get limit() {
     return this.queryDef.objectFieldDef.expectedMaxCount ?? 200;
   }
-  substituted() {
-    return new s({
+
+  /**
+   * Returns a substituted query with resolved filter and order.
+   * Original method name: substituted
+   */
+  substituted(): SubstitutedQuery {
+    return new SubstitutedQuery({
       fields: this.queryDef.objectDef.queriedFields,
       filter: transformExpression(this.context.sessionArgs, this.context.viewArgs, this.filter, this.queryDef.fieldArgs, this.parent) || null,
       limit: this.limit,
       orderBy: this.orderBy || null
     });
   }
-  getResolvedHttpResolverConfig() {
-    let e = this.queryDef.objectFieldDef.resolver;
-    if (e?.type !== "HTTP") return null;
-    let t = {};
-    for (let [i, n] of Object.entries(e.queryParams)) {
-      let e = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, n, this.queryDef.fieldArgs, this.parent);
-      t[i] = e;
+
+  /**
+   * Resolves HTTP resolver config with substituted query params.
+   * Original method name: getResolvedHttpResolverConfig
+   */
+  getResolvedHttpResolverConfig(): any | null {
+    const resolver = this.queryDef.objectFieldDef.resolver;
+    if (resolver?.type !== 'HTTP') return null;
+    const queryParams: Record<string, any> = {};
+    for (const [key, val] of Object.entries(resolver.queryParams)) {
+      queryParams[key] = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, val, this.queryDef.fieldArgs, this.parent);
     }
-    let i = [];
-    if ("RedisPubsub" === e.realtimePolicy.type) for (let t of e.realtimePolicy.channelPostfix) {
-      let e = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, t, this.queryDef.fieldArgs, this.parent);
-      i.push(e);
-    }
-    return {
-      ...e,
-      queryParams: t,
-      realtimePolicy: "RedisPubsub" === e.realtimePolicy.type ? {
-        ...e.realtimePolicy,
-        channelPostfix: i
-      } : e.realtimePolicy
-    };
-  }
-  getUsedHttpResolverValues() {
-    let e = this.queryDef.objectFieldDef.resolver;
-    if (e?.type !== "HTTP") return [];
-    let t = [];
-    for (let i of Object.keys(e.queryParams).sort()) {
-      let r = e.queryParams[i];
-      if (!hasTypeProperty(r) || "parent" !== r.type) continue;
-      let a = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, r, this.queryDef.fieldArgs, this.parent);
-      t.push(a);
-    }
-    if ("RedisPubsub" === e.realtimePolicy.type) for (let i of e.realtimePolicy.channelPostfix) {
-      if (!hasTypeProperty(i) || "parent" !== i.type) continue;
-      let e = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, i, this.queryDef.fieldArgs, this.parent);
-      t.push(e);
-    }
-    return t;
-  }
-  getResolvedRedisResolverConfig() {
-    let e = this.queryDef.objectFieldDef.resolver;
-    if (e?.type !== "Redis") return null;
-    let t = [];
-    for (let i of e.keyPostfix) {
-      let e = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, i, this.queryDef.fieldArgs, this.parent);
-      t.push(e);
+    let channelPostfix: any[] = [];
+    if (resolver.realtimePolicy.type === 'RedisPubsub') {
+      for (const postfix of resolver.realtimePolicy.channelPostfix) {
+        channelPostfix.push(resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, postfix, this.queryDef.fieldArgs, this.parent));
+      }
     }
     return {
-      ...e,
-      keyPostfix: t
+      ...resolver,
+      queryParams,
+      realtimePolicy: resolver.realtimePolicy.type === 'RedisPubsub' ? {
+        ...resolver.realtimePolicy,
+        channelPostfix
+      } : resolver.realtimePolicy
     };
   }
-  getUsedRedisResolverValues() {
-    let e = this.queryDef.objectFieldDef.resolver;
-    if (e?.type !== "Redis") return [];
-    let t = [];
-    for (let i of e.keyPostfix) {
-      if (!hasTypeProperty(i) || "parent" !== i.type) continue;
-      let e = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, i, this.queryDef.fieldArgs, this.parent);
-      t.push(e);
+
+  /**
+   * Returns used HTTP resolver values from parent references.
+   * Original method name: getUsedHttpResolverValues
+   */
+  getUsedHttpResolverValues(): any[] {
+    const resolver = this.queryDef.objectFieldDef.resolver;
+    if (resolver?.type !== 'HTTP') return [];
+    const values: any[] = [];
+    for (const key of Object.keys(resolver.queryParams).sort()) {
+      const param = resolver.queryParams[key];
+      if (!hasTypeProperty(param) || param.type !== 'parent') continue;
+      values.push(resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, param, this.queryDef.fieldArgs, this.parent));
     }
-    return t;
+    if (resolver.realtimePolicy.type === 'RedisPubsub') {
+      for (const postfix of resolver.realtimePolicy.channelPostfix) {
+        if (!hasTypeProperty(postfix) || postfix.type !== 'parent') continue;
+        values.push(resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, postfix, this.queryDef.fieldArgs, this.parent));
+      }
+    }
+    return values;
   }
-  getResolvedStatsigResolverValues() {
-    let e = this.queryDef.objectFieldDef.resolver;
-    if (e?.type !== "Statsig") throw Error("Resolver type is not correct. Expected a Statsig resolver got: " + e?.type);
-    let t = {
-      userID: (this.context.sessionArgs.userId || "null").toString(),
+
+  /**
+   * Resolves Redis resolver config with substituted key postfix.
+   * Original method name: getResolvedRedisResolverConfig
+   */
+  getResolvedRedisResolverConfig(): any | null {
+    const resolver = this.queryDef.objectFieldDef.resolver;
+    if (resolver?.type !== 'Redis') return null;
+    const keyPostfix: any[] = [];
+    for (const postfix of resolver.keyPostfix) {
+      keyPostfix.push(resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, postfix, this.queryDef.fieldArgs, this.parent));
+    }
+    return {
+      ...resolver,
+      keyPostfix
+    };
+  }
+
+  /**
+   * Returns used Redis resolver values from parent references.
+   * Original method name: getUsedRedisResolverValues
+   */
+  getUsedRedisResolverValues(): any[] {
+    const resolver = this.queryDef.objectFieldDef.resolver;
+    if (resolver?.type !== 'Redis') return [];
+    const values: any[] = [];
+    for (const postfix of resolver.keyPostfix) {
+      if (!hasTypeProperty(postfix) || postfix.type !== 'parent') continue;
+      values.push(resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, postfix, this.queryDef.fieldArgs, this.parent));
+    }
+    return values;
+  }
+
+  /**
+   * Resolves Statsig resolver values for user and custom IDs.
+   * Original method name: getResolvedStatsigResolverValues
+   */
+  getResolvedStatsigResolverValues(): any {
+    const resolver = this.queryDef.objectFieldDef.resolver;
+    if (resolver?.type !== 'Statsig') throw new Error(`Resolver type is not correct. Expected a Statsig resolver got: ${resolver?.type}`);
+    const statsigUser = {
+      userID: (this.context.sessionArgs.userId || 'null').toString(),
       customIDs: {},
       custom: {}
     };
-    if (e.statsigUser.customIDs) for (let [i, n] of Object.entries(e.statsigUser.customIDs)) {
-      let e = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, n, this.queryDef.fieldArgs, this.parent);
-      if ("string" == typeof e) t.customIDs[i] = e;else if (null !== e) throw Error(`Statsig user customID: ${i} was not a string type. Received: ${typeof e}. Value: ${e}`);
+    if (resolver.statsigUser.customIDs) {
+      for (const [key, val] of Object.entries(resolver.statsigUser.customIDs)) {
+        const resolved = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, val, this.queryDef.fieldArgs, this.parent);
+        if (typeof resolved === 'string') {
+          statsigUser.customIDs[key] = resolved;
+        } else if (resolved !== null) {
+          throw new Error(`Statsig user customID: ${key} was not a string type. Received: ${typeof resolved}. Value: ${resolved}`);
+        }
+      }
     }
-    if (e.statsigUser.custom) for (let [i, n] of Object.entries(e.statsigUser.custom)) {
-      let e = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, n, this.queryDef.fieldArgs, this.parent);
-      "string" == typeof e ? t.custom[i] = e : e instanceof Date && (t.custom[i] = e.getTime());
+    if (resolver.statsigUser.custom) {
+      for (const [key, val] of Object.entries(resolver.statsigUser.custom)) {
+        const resolved = resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, val, this.queryDef.fieldArgs, this.parent);
+        if (typeof resolved === 'string') {
+          statsigUser.custom[key] = resolved;
+        } else if (resolved instanceof Date) {
+          statsigUser.custom[key] = resolved.getTime();
+        }
+      }
     }
-    return t;
+    return statsigUser;
   }
-  getUsedStatsigResolverValues() {
-    let e = this.queryDef.objectFieldDef.resolver;
-    if (e?.type !== "Statsig") return [];
-    let t = [];
-    let i = (this.context.sessionArgs.userId || "null").toString();
-    for (let [r, a] of (t.push(i), Object.entries(e.statsigUser.customIDs ?? {}))) hasTypeProperty(a) && "parent" === a.type && t.push(resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, a, this.queryDef.fieldArgs, this.parent));
-    return t;
+
+  /**
+   * Returns used Statsig resolver values from parent references.
+   * Original method name: getUsedStatsigResolverValues
+   */
+  getUsedStatsigResolverValues(): any[] {
+    const resolver = this.queryDef.objectFieldDef.resolver;
+    if (resolver?.type !== 'Statsig') return [];
+    const values: any[] = [];
+    const userId = (this.context.sessionArgs.userId || 'null').toString();
+    values.push(userId);
+    for (const [_, val] of Object.entries(resolver.statsigUser.customIDs ?? {})) {
+      if (hasTypeProperty(val) && val.type === 'parent') {
+        values.push(resolvePropertyWithParent(this.context.sessionArgs, this.context.viewArgs, val, this.queryDef.fieldArgs, this.parent));
+      }
+    }
+    return values;
   }
-  isContextStale(e) {
-    return Gz(this.filter).filter(({
-      type: e
-    }) => "parent" === e).some(({
-      ref: t
-    }, i) => this.usedResolverValues[i] !== e[t]);
+
+  /**
+   * Checks if the context is stale compared to used resolver values.
+   * Original method name: isContextStale
+   */
+  isContextStale(ctx: any): boolean {
+    return collectRightPropertiesWithType(this.filter).filter(({
+      type
+    }: any) => type === 'parent').some(({
+      ref
+    }: any, idx: number) => this.usedResolverValues[idx] !== ctx[ref]);
   }
-  isPaginationQuery() {
-    return void 0 !== this.paginationArgs;
+
+  /**
+   * Checks if query is a pagination query.
+   * Original method name: isPaginationQuery
+   */
+  isPaginationQuery(): boolean {
+    return this.paginationArgs !== undefined;
   }
-  isPaginationViaLiveQuery() {
-    return !!hasCursorProperties(this.queryDef.objectFieldDef.pagination) && !this.queryDef.objectFieldDef.resolver && !!this.queryDef.objectFieldDef.filter && !!this.queryDef.objectFieldDef.pagination.cursorColumnSet;
+
+  /**
+   * Checks if pagination is via live query.
+   * Original method name: isPaginationViaLiveQuery
+   */
+  isPaginationViaLiveQuery(): boolean {
+    const fieldDef = this.queryDef.objectFieldDef;
+    return !!hasCursorProperties(fieldDef.pagination) && !fieldDef.resolver && !!fieldDef.filter && !!fieldDef.pagination.cursorColumnSet;
   }
-  isPaginationViaSinatra() {
-    return this.queryDef.objectFieldDef.resolver?.type === "HTTP" && isNotCursorColumnSet(this.queryDef.objectFieldDef.pagination);
+
+  /**
+   * Checks if pagination is via Sinatra (HTTP).
+   * Original method name: isPaginationViaSinatra
+   */
+  isPaginationViaSinatra(): boolean {
+    const fieldDef = this.queryDef.objectFieldDef;
+    return fieldDef.resolver?.type === 'HTTP' && isNotCursorColumnSet(fieldDef.pagination);
   }
-  get paginationResolverType() {
-    return this.isPaginationViaLiveQuery() ? "native" : this.isPaginationViaSinatra() ? "sinatra" : "unknown";
+
+  /**
+   * Returns pagination resolver type.
+   * Original method name: paginationResolverType
+   */
+  get paginationResolverType(): 'native' | 'sinatra' | 'unknown' {
+    if (this.isPaginationViaLiveQuery()) return 'native';
+    if (this.isPaginationViaSinatra()) return 'sinatra';
+    return 'unknown';
   }
-  isStaticHttpQuery() {
-    return this.queryDef.objectFieldDef.resolver?.type === "HTTP" && this.queryDef.objectFieldDef.resolver?.realtimePolicy.type === "Static";
+
+  /**
+   * Checks if query is a static HTTP query.
+   * Original method name: isStaticHttpQuery
+   */
+  isStaticHttpQuery(): boolean {
+    const resolver = this.queryDef.objectFieldDef.resolver;
+    return resolver?.type === 'HTTP' && resolver?.realtimePolicy.type === 'Static';
   }
-  getFirstPageSizeOrDefault(e) {
-    let t = this.queryDef.objectFieldDef.pagination?.firstPageSize;
-    if (!t) return e;
-    let i = resolveBasicProperty(this.context.sessionArgs, this.context.viewArgs, t);
-    return "number" == typeof i ? i : e;
+
+  /**
+   * Gets first page size or default.
+   * Original method name: getFirstPageSizeOrDefault
+   */
+  getFirstPageSizeOrDefault(defaultSize: number): number {
+    const firstPageSize = this.queryDef.objectFieldDef.pagination?.firstPageSize;
+    if (!firstPageSize) return defaultSize;
+    const resolved = resolveBasicProperty(this.context.sessionArgs, this.context.viewArgs, firstPageSize);
+    return typeof resolved === 'number' ? resolved : defaultSize;
   }
-  getSelectedCursorColumns() {
-    if (!hasCursorProperties(this.queryDef.objectFieldDef.pagination)) return null;
-    let e = this.queryDef.objectFieldDef.pagination.selectedCursorColumn;
-    if (!e) return null;
-    let t = resolveBasicProperty(this.context.sessionArgs, this.context.viewArgs, e);
-    let i = this.queryDef.objectFieldDef.pagination?.cursorColumnSet;
-    return "string" == typeof t && i && i[t] || null;
+
+  /**
+   * Gets selected cursor columns for pagination.
+   * Original method name: getSelectedCursorColumns
+   */
+  getSelectedCursorColumns(): string[] | null {
+    const pagination = this.queryDef.objectFieldDef.pagination;
+    if (!hasCursorProperties(pagination)) return null;
+    const selected = pagination.selectedCursorColumn;
+    if (!selected) return null;
+    const resolved = resolveBasicProperty(this.context.sessionArgs, this.context.viewArgs, selected);
+    const cursorSet = pagination?.cursorColumnSet;
+    return typeof resolved === 'string' && cursorSet && cursorSet[resolved] || null;
   }
-  getPaginationSortOrder() {
-    if (!hasCursorProperties(this.queryDef.objectFieldDef.pagination)) return null;
-    let e = this.queryDef.objectFieldDef.pagination.sortOrder;
-    if (!e) return null;
-    let t = resolveBasicProperty(this.context.sessionArgs, this.context.viewArgs, e);
-    return "ASC" === t || "DESC" === t ? t : null;
+
+  /**
+   * Gets pagination sort order.
+   * Original method name: getPaginationSortOrder
+   */
+  getPaginationSortOrder(): 'ASC' | 'DESC' | null {
+    const pagination = this.queryDef.objectFieldDef.pagination;
+    if (!hasCursorProperties(pagination)) return null;
+    const sortOrder = pagination.sortOrder;
+    if (!sortOrder) return null;
+    const resolved = resolveBasicProperty(this.context.sessionArgs, this.context.viewArgs, sortOrder);
+    return resolved === 'ASC' || resolved === 'DESC' ? resolved : null;
   }
-  getPaginationIdColumn() {
-    return hasCursorProperties(this.queryDef.objectFieldDef.pagination) ? this.queryDef.objectFieldDef.pagination.idColumn ?? "id" : "id";
+
+  /**
+   * Gets pagination id column.
+   * Original method name: getPaginationIdColumn
+   */
+  getPaginationIdColumn(): string {
+    const pagination = this.queryDef.objectFieldDef.pagination;
+    return hasCursorProperties(pagination) ? pagination.idColumn ?? 'id' : 'id';
   }
-  order(e) {
-    let t = this.orderBy;
-    if ("Unordered" === t) return null;
+
+  /**
+   * Returns a comparator function for ordering.
+   * Original method name: order
+   */
+  order(mapper?: (col: string) => string): ((a: any, b: any) => number) | null {
+    let orderBy = this.orderBy;
+    if (orderBy === 'Unordered') return null;
     if (this.isPaginationViaLiveQuery()) {
-      let i = this.getPaginationSortOrder();
-      let n = this.getSelectedCursorColumns();
-      if (!i || !n) return null;
-      t = n.map(t => [e ? e(t) : t, i]);
+      const sortOrder = this.getPaginationSortOrder();
+      const cursorCols = this.getSelectedCursorColumns();
+      if (!sortOrder || !cursorCols) return null;
+      orderBy = cursorCols.map(col => [mapper ? mapper(col) : col, sortOrder]);
     }
-    return (e, i) => {
-      for (let [n, r] of [...(t || []), ["id", "ASC"]]) {
-        let t = e[n];
-        let a = i[n];
-        if (null !== t || null !== a) {
-          if (null === t) return "ASC" === r ? 1 : -1;
-          if (null === a || t < a) return "ASC" === r ? -1 : 1;
-          if (t > a) return "ASC" === r ? 1 : -1;
+    return (a: any, b: any): number => {
+      for (const [col, dir] of [...(orderBy || []), ['id', 'ASC']]) {
+        const valA = a[col];
+        const valB = b[col];
+        if (valA !== null || valB !== null) {
+          if (valA === null) return dir === 'ASC' ? 1 : -1;
+          if (valB === null || valA < valB) return dir === 'ASC' ? -1 : 1;
+          if (valA > valB) return dir === 'ASC' ? 1 : -1;
         }
       }
       return 0;
     };
   }
-  isFirstPaginationPage() {
+
+  /**
+   * Checks if this is the first pagination page.
+   * Original method name: isFirstPaginationPage
+   */
+  isFirstPaginationPage(): boolean {
     return !this.paginationArgs?.before && !this.paginationArgs?.after;
   }
-  getNextPageSize() {
+
+  /**
+   * Gets next page size for pagination.
+   * Original method name: getNextPageSize
+   */
+  getNextPageSize(): number {
     return this.isFirstPaginationPage() ? this.getFirstPageSizeOrDefault(200) : this.paginationArgs?.count ?? 200;
   }
-  getPaginationSubstitutedQuery(e, t) {
-    let i;
-    if (!this.isPaginationQuery()) throw Error(`[Pagination] Query ${this.queryId} is not a pagination query while accessing getPaginationSubstitutedQuery()`);
-    let n = this.getSelectedCursorColumns();
-    if (!n) throw Error(`[Pagination] Query ${this.queryId} with invalid selectedCursorColumnSet = ${n}`);
-    let r = this.getPaginationSortOrder();
-    if (!r) throw Error(`[Pagination] Query ${this.queryId} with invalid orderBy = ${r} while accessing getPaginationSubstitutedQuery()`);
-    let a = n.map(e => [e, r]);
-    if (this.isFirstPaginationPage()) return new s({
-      fields: this.queryDef.objectDef.queriedFields,
-      filter: transformExpression(this.context.sessionArgs, this.context.viewArgs, this.filter, this.queryDef.fieldArgs, this.parent) || null,
-      limit: this.getNextPageSize(),
-      orderBy: a
-    });
-    if (!this.paginationArgs?.after) throw Error(`[Pagination] Query ${this.queryId} doesn't have paginationArgs.after ${this.paginationArgs} while accessing getPaginationSubstitutedQuery()`);
+
+  /**
+   * Returns a substituted query for pagination.
+   * Original method name: getPaginationSubstitutedQuery
+   */
+  getPaginationSubstitutedQuery(mapper: (col: string) => string, encodeCursor?: (cursor: any) => string): SubstitutedQuery {
+    if (!this.isPaginationQuery()) throw new Error(`[Pagination] Query ${this.queryId} is not a pagination query while accessing getPaginationSubstitutedQuery()`);
+    const cursorCols = this.getSelectedCursorColumns();
+    if (!cursorCols) throw new Error(`[Pagination] Query ${this.queryId} with invalid selectedCursorColumnSet = ${cursorCols}`);
+    const sortOrder = this.getPaginationSortOrder();
+    if (!sortOrder) throw new Error(`[Pagination] Query ${this.queryId} with invalid orderBy = ${sortOrder} while accessing getPaginationSubstitutedQuery()`);
+    const orderArr = cursorCols.map(col => [col, sortOrder]);
+    if (this.isFirstPaginationPage()) {
+      return new SubstitutedQuery({
+        fields: this.queryDef.objectDef.queriedFields,
+        filter: transformExpression(this.context.sessionArgs, this.context.viewArgs, this.filter, this.queryDef.fieldArgs, this.parent) || null,
+        limit: this.getNextPageSize(),
+        orderBy: orderArr
+      });
+    }
+    if (!this.paginationArgs?.after) throw new Error(`[Pagination] Query ${this.queryId} doesn't have paginationArgs.after ${this.paginationArgs} while accessing getPaginationSubstitutedQuery()`);
+    let decodedCursor: any;
     try {
-      i = JSON.parse(t ? t(this.paginationArgs.after) : this.paginationArgs.after);
-    } catch (e) {
-      throw Error(`[Pagination] Query ${this.queryId} has invalid paginationArgs format ${this.paginationArgs.after} while accessing getPaginationSubstitutedQuery()`);
+      decodedCursor = JSON.parse(encodeCursor ? encodeCursor(this.paginationArgs.after) : this.paginationArgs.after);
+    } catch {
+      throw new Error(`[Pagination] Query ${this.queryId} has invalid paginationArgs format ${this.paginationArgs.after} while accessing getPaginationSubstitutedQuery()`);
     }
-    let l = this.getPaginationIdColumn();
-    let c = i[l];
-    if (!c) throw Error(`[Pagination] Query ${this.queryId} has invalid idColumn = ${l} with value = ${c} and endCursor = ${JSON.stringify(i)}`);
-    let u = "ASC" === r ? ">" : "<";
-    let p = "ASC" === r ? ">=" : "<=";
-    let m = [];
-    let h = [[l, u, c]];
-    for (let t of n) {
-      let n = i[t];
-      if (void 0 === n) throw Error(`[Pagination] Query ${this.queryId} has invalid cursor column ${t} with value ${n} and endCursor ${i}`);
-      let r = e(t);
-      m.push([r, p, n]);
-      t !== l && h.push([r, u, n]);
+    const idColumn = this.getPaginationIdColumn();
+    const idValue = decodedCursor[idColumn];
+    if (!idValue) throw new Error(`[Pagination] Query ${this.queryId} has invalid idColumn = ${idColumn} with value = ${idValue} and endCursor = ${JSON.stringify(decodedCursor)}`);
+    const op = sortOrder === 'ASC' ? '>' : '<';
+    const opEq = sortOrder === 'ASC' ? '>=' : '<=';
+    const andConditions: any[] = [];
+    const orConditions: any[] = [[idColumn, op, idValue]];
+    for (const col of cursorCols) {
+      const colValue = decodedCursor[col];
+      if (colValue === undefined) throw new Error(`[Pagination] Query ${this.queryId} has invalid cursor column ${col} with value ${colValue} and endCursor ${decodedCursor}`);
+      const mappedCol = mapper(col);
+      andConditions.push([mappedCol, opEq, colValue]);
+      if (col !== idColumn) {
+        orConditions.push([mappedCol, op, colValue]);
+      }
     }
-    let g = {
-      and: [...m, {
-        or: [...h]
+    const paginationFilter = {
+      and: [...andConditions, {
+        or: [...orConditions]
       }]
     };
-    if (!this.queryDef.objectFieldDef.filterDef) throw Error(`[Pagination] Query ${this.queryId} doesn't have a filterDef`);
-    let f = parseFilterDefinition({
-      and: [this.queryDef.objectFieldDef.filterDef, g]
+    if (!this.queryDef.objectFieldDef.filterDef) throw new Error(`[Pagination] Query ${this.queryId} doesn't have a filterDef`);
+    const combinedFilter = parseFilterDefinition({
+      and: [this.queryDef.objectFieldDef.filterDef, paginationFilter]
     });
-    return new s({
+    return new SubstitutedQuery({
       fields: this.queryDef.objectDef.queriedFields,
-      filter: transformExpression(this.context.sessionArgs, this.context.viewArgs, f, this.queryDef.fieldArgs, this.parent) || null,
+      filter: transformExpression(this.context.sessionArgs, this.context.viewArgs, combinedFilter, this.queryDef.fieldArgs, this.parent) || null,
       limit: this.getNextPageSize(),
-      orderBy: a
+      orderBy: orderArr
     });
   }
 }
-function p(e) {
-  return e.parent instanceof QueryDef ? e.parent.objectDef.name : e.parent instanceof ComputedFieldQuery && ("object" === e.parent.def.type.kind || "objects" === e.parent.def.type.kind) ? e.parent.def.type.name : null;
+
+/**
+ * Returns the parent object name for a query definition.
+ * Original function name: p
+ */
+function getParentObjectName(queryDef: any): string | null {
+  if (queryDef.parent instanceof QueryDef) {
+    return queryDef.parent.objectDef.name;
+  }
+  if (queryDef.parent instanceof ComputedFieldQuery && (queryDef.parent.def.type.kind === 'object' || queryDef.parent.def.type.kind === 'objects')) {
+    return queryDef.parent.def.type.name;
+  }
+  return null;
 }
-export const aV = $$u0;
+
+/**
+ * Returns a unique query id for the query definition and arguments.
+ * Original logic from constructor
+ */
+function getQueryId(queryDef: any, args: any[]): string {
+  const parentName = getParentObjectName(queryDef);
+  if (queryDef.isComputedFieldDependency && parentName === 'root' && queryDef.objectFieldDef.name === 'root') {
+    return JSON.stringify(['computed', 'root', queryDef.objectDef.name, ...args]);
+  }
+  return JSON.stringify([parentName, queryDef.objectFieldDef.name, ...args]);
+}
+
+// Export refactored names
+export const aV = QueryContext;

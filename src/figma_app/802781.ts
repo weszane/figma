@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { bL, mc as _$$mc, c$ } from "../905/493196";
 import { v as _$$v } from "../905/213481";

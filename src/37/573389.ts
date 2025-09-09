@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useState } from "react";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
 import { B } from "../905/714743";
@@ -21,7 +21,7 @@ export function $$x0({
     hide
   } = BK("expression-builder-create-variable");
   let f = useRef(null);
-  let x = rf(Pt(t, "createVariableDropdown"), "click", useCallback(() => {
+  let x = useHandleMouseEvent(generateRecordingKey(t, "createVariableDropdown"), "click", useCallback(() => {
     1 === e.length ? b(e[0]) : toggle();
   }, [e, toggle]));
   let [O, h] = useState(!1);
@@ -71,7 +71,7 @@ function g({
   recordingKey: l
 }) {
   let a = F(e);
-  let u = rf(Pt(l, "createVariableOption", a.name), "click", useCallback(() => {
+  let u = useHandleMouseEvent(generateRecordingKey(l, "createVariableOption", a.name), "click", useCallback(() => {
     r(e);
     t();
   }, [t, e, r]));

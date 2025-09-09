@@ -1,13 +1,13 @@
 import { ex as _$$ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useCallback, PureComponent, useId, useMemo, Fragment as _$$Fragment, memo, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { AppStateTsApi, PrototypingTsApi, VariableResolvedDataType, ExportScope, StateHierarchy, VariablesBindings } from "../figma_app/763686";
 import { sessionLocalIDToString, defaultSessionLocalIDString, parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
 import s from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { d as _$$d } from "../figma_app/429226";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Cr, cP, js, Z6, Od } from "../figma_app/451499";
@@ -23,7 +23,7 @@ import { Label } from "../905/270045";
 import { permissionScopeHandler } from "../905/189185";
 import { Point } from "../905/736624";
 import { TI } from "../905/713722";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { cn } from "../905/959568";
 import { Pd, gq, qd, dE } from "../figma_app/178475";
 import { J as _$$J3 } from "../905/225412";
@@ -54,7 +54,7 @@ import { Ql, X4, H_ } from "../figma_app/387100";
 import eg from "../vendor/223926";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { to as _$$to } from "../figma_app/828186";
-import { Uc } from "../figma_app/741237";
+import { updateHoveredNode } from "../figma_app/741237";
 import { tS, _G } from "../figma_app/516028";
 import { Sh, dK } from "../figma_app/889655";
 import { D as _$$D } from "../figma_app/335489";
@@ -136,7 +136,7 @@ function K({
     p(!1);
   }, [p]);
   let B = useCallback(() => {
-    if (d) V();else {
+    if (d) V(); else {
       p(!0);
       let e = D.current;
       x(cn(e));
@@ -173,15 +173,15 @@ function K({
     a: .25
   }), [destinationOverlayBackgroundColor]);
   let z = useCallback((e, t) => {
-    t !== zk.NO && permissionScopeHandler.user("overlay-background-color-edit-scope", () => {
+    t !== yesNoTrackingEnum.NO && permissionScopeHandler.user("overlay-background-color-edit-scope", () => {
       PrototypingTsApi.setOverlayBackgroundColor(sessionLocalIDToString(s), e);
     });
   }, [s]);
   R(e => {
-    z(e.value, zk.YES);
+    z(e.value, yesNoTrackingEnum.YES);
   });
   let W = useCallback((e, t) => {
-    z(e, zk.YES);
+    z(e, yesNoTrackingEnum.YES);
   }, [z]);
   let G = useCallback((e, t) => {
     let n = $();
@@ -211,10 +211,10 @@ function K({
   let et = jsxs("div", {
     className: "overlay_panel--colorValueContainer--gJtb9 paint_panels--colorValueContainer--DGeSP raw_components--borderFocusWithin--BaipZ paint_panels--_baseColorValueContainer--t-UIV raw_components--base--T7G0z raw_components--singleRowHeight--dKM4t",
     children: [jsx(_$$J3, {
-      onClick: ee ? B : () => {},
+      onClick: ee ? B : () => { },
       color: q,
       opacity: X,
-      recordingKey: Pt(t, "chit"),
+      recordingKey: generateRecordingKey(t, "chit"),
       className: "overlay_panel--chit--Zn66r paint_panels--chit--twQEy"
     }), jsx(AN, {
       className: "overlay_panel--colorInputUI3--ozOrK paint_panels--colorInput--nSz13",
@@ -223,7 +223,7 @@ function K({
       property: q,
       disabled: !ee,
       onChange: W,
-      recordingKey: Pt(t, "colorInput"),
+      recordingKey: generateRecordingKey(t, "colorInput"),
       noBorderOnFocus: !0
     }), jsx(Pd, {
       className: "overlay_panel--opacity--vrrjV paint_panels--opacityInputContainer--oqlsk",
@@ -232,7 +232,7 @@ function K({
       dispatch: g,
       disabled: !ee,
       noBorderOnFocus: !0,
-      recordingKey: Pt(t, "opacity")
+      recordingKey: generateRecordingKey(t, "opacity")
     })]
   });
   return jsxs(Zk, {
@@ -246,7 +246,7 @@ function K({
         label: jsx(Label, {
           children: renderI18nText("proto.close_when_clicking_outside")
         }),
-        recordingKey: Pt(t, "closeOnClickOutside"),
+        recordingKey: generateRecordingKey(t, "closeOnClickOutside"),
         onChange: K,
         checked: Q
       })
@@ -255,7 +255,7 @@ function K({
         label: jsx(Label, {
           children: renderI18nText("proto.overlay_panel.background")
         }),
-        recordingKey: Pt(t, "addBackgroundBehindOverlay"),
+        recordingKey: generateRecordingKey(t, "addBackgroundBehindOverlay"),
         onChange: H,
         checked: ee
       })
@@ -270,7 +270,7 @@ function K({
       boundVariable: null,
       onChange: z,
       onClose: V,
-      recordingKey: Pt(t, "colorPicker")
+      recordingKey: generateRecordingKey(t, "colorPicker")
     })]
   });
 }
@@ -282,7 +282,7 @@ class W extends PureComponent {
     this.titleFormatter = new Cr();
     this.renderOverlayPositionOption = (e, t) => jsx(z, {
       value: e,
-      recordingKey: Pt(this.props, e)
+      recordingKey: generateRecordingKey(this.props, e)
     }, t);
   }
   render() {
@@ -299,7 +299,7 @@ class W extends PureComponent {
       inputClassName: "overlay_panel--input--tGHHB",
       onChange: this.props.onChange,
       property: this.props.property,
-      recordingKey: Pt(this.props, "select"),
+      recordingKey: generateRecordingKey(this.props, "select"),
       children: [e, jsx(sK, {}), this.renderOverlayPositionOption("MANUAL", 10)]
     });
   }
@@ -319,7 +319,7 @@ function Z({
     dispatch: a,
     dropdownShown: l,
     onChange: t,
-    recordingKey: Pt(n, "overlayPositionDropdown")
+    recordingKey: generateRecordingKey(n, "overlayPositionDropdown")
   });
   return jsx(_$$A, {
     label: getI18nString("proto.overlay_panel.position"),
@@ -360,7 +360,7 @@ function ep({
     className: "prototype_conditional_controls--addButton--vlYLn",
     children: jsx(_$$t2, {
       addButtonPressed: l,
-      recordingKey: Pt(p.recordingKey, "addActionToIfButton"),
+      recordingKey: generateRecordingKey(p.recordingKey, "addActionToIfButton"),
       renderButton: !0,
       isNestedInConditional: !0
     })
@@ -376,7 +376,7 @@ function ep({
       className: "prototype_conditional_controls--addButtonForElse--ogBWu prototype_conditional_controls--addButton--vlYLn",
       children: jsx(_$$t2, {
         addButtonPressed: l,
-        recordingKey: Pt(p.recordingKey, "addActionToElseButton"),
+        recordingKey: generateRecordingKey(p.recordingKey, "addActionToElseButton"),
         renderButton: !y,
         isNestedInConditional: !0
       })
@@ -428,7 +428,7 @@ function ep({
       onDrop: p.onDrop,
       onExpand: p.onExpand,
       onSelect: p.onSelect,
-      recordingKey: Pt(p.recordingKey, "conditional-action-row", r),
+      recordingKey: generateRecordingKey(p.recordingKey, "conditional-action-row", r),
       selectedActionIndex: p.selectedActionIndex,
       selectedInteractions: p.selectedInteractions,
       stateManagementVersion: p.stateManagementVersion,
@@ -447,7 +447,7 @@ function ep({
       onDrop: p.onDrop,
       onExpand: p.onExpand,
       onSelect: p.onSelect,
-      recordingKey: Pt(p.recordingKey, "conditional-action-row", 0),
+      recordingKey: generateRecordingKey(p.recordingKey, "conditional-action-row", 0),
       selectedActionIndex: p.selectedActionIndex,
       selectedInteractions: p.selectedInteractions,
       stateManagementVersion: p.stateManagementVersion,
@@ -538,7 +538,7 @@ function eh({
     }));
   };
   let k = e => function (t) {
-    if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypingConditionalActionsModal();else {
+    if (shouldShowAdvancedPrototypingPaywall) showAdvancedPrototypingConditionalActionsModal(); else {
       var n = [...S];
       let o = S[e];
       let i = [];
@@ -597,7 +597,7 @@ function eh({
         onDrop: e,
         onExpand: n,
         onSelect: t,
-        recordingKey: Pt(d, "conditional-block", 0),
+        recordingKey: generateRecordingKey(d, "conditional-block", 0),
         selectedActionIndex: x,
         selectedInteractions: p,
         stateManagementVersion: c,
@@ -623,7 +623,7 @@ function eh({
         onDrop: e,
         onExpand: n,
         onSelect: t,
-        recordingKey: Pt(d, "conditional-block", 1),
+        recordingKey: generateRecordingKey(d, "conditional-block", 1),
         selectedActionIndex: x,
         selectedInteractions: p,
         stateManagementVersion: c,
@@ -700,7 +700,7 @@ function ew(e) {
   let m = `prototype-destination-select-${e.recordingKey}`;
   let g = "SCROLL_TO" !== e.action ? h.filter(e => t.hasNameForNode(e)).map((t, n) => jsx(eS, {
     value: t,
-    recordingKey: Pt(e, `viable-option-${n}`),
+    recordingKey: generateRecordingKey(e, `viable-option-${n}`),
     disabled: !1
   }, `enabled-${t}`)) : ((n, i) => {
     let r = ey()(n.filter(e => t.hasNameForNode(e)), t => t === i && isValidValue(i) ? Ql(e.scene, t)?.guid : e.scene.get(t)?.parentGuid);
@@ -713,19 +713,19 @@ function ew(e) {
     tlfId && index && (a.splice(index, 1), a = [tlfId, ...a]);
     return a.reduce((t, n, i) => (0 !== i && t.push(jsx(sK, {}, i)), t.push(jsx(eS, {
       value: n + " ",
-      recordingKey: Pt(e, `disabled-option-${n}`),
+      recordingKey: generateRecordingKey(e, `disabled-option-${n}`),
       disabled: !0
     }, `disabled-${n}`)), r[n].forEach((n, i) => {
       t.push(jsx(eS, {
         value: n,
-        recordingKey: Pt(e, `viable-option-${i}`),
+        recordingKey: generateRecordingKey(e, `viable-option-${i}`),
         disabled: !1
       }, `enabled-${n + i}`));
     }), t), []);
   })(h, p);
   let y = s.filter(e => t.hasNameForNode(e)).map((t, n) => jsx(eS, {
     value: t,
-    recordingKey: Pt(e, `disabled-option-${n}`),
+    recordingKey: generateRecordingKey(e, `disabled-option-${n}`),
     disabled: !0
   }, `disabled-${t}`));
   let _ = e.isUI3 ? _$$Fragment : fI;
@@ -744,10 +744,10 @@ function ew(e) {
       inputClassName: "prototype_destination_dropdown--input--rzglN",
       onChange: e.onChange,
       onOptionFocus: e => {
-        Uc(e ?? "");
+        updateHoveredNode(e ?? "");
       },
       property: p,
-      recordingKey: Pt(e, "select"),
+      recordingKey: generateRecordingKey(e, "select"),
       willShowDropdown: () => {
         let t = ExportScope.ALL;
         "SCROLL_TO" === e.action ? t = ExportScope.SCROLL_TO : "SWAP_STATE_TO" === e.action ? t = ExportScope.STATES : "NAVIGATE_TO" === e.action && c && (t = ExportScope.RESPONSIVE_SETS);
@@ -895,7 +895,7 @@ function eX({
   let O = "nodeFieldAlias" in t ? aA(t.nodeFieldAlias.stablePathToNode, t.nodeFieldAlias.indexOrKey) : void 0;
   let D = O ? Xx(O.varValue.resolvedType) : null;
   let M = null;
-  if (isInvalidValue(t)) M = null;else if (C?.resolvedType === VariableResolvedDataType.COLOR) M = isInvalidValue(e) ? jsx("div", {
+  if (isInvalidValue(t)) M = null; else if (C?.resolvedType === VariableResolvedDataType.COLOR) M = isInvalidValue(e) ? jsx("div", {
     className: "prototype_set_variable_controls--targetVariableDataMixedContainer--H6uGu",
     children: getI18nString("fullscreen.mixed")
   }) : jsx(Fragment, {
@@ -906,11 +906,11 @@ function eX({
           targetVariableData: e
         });
       },
-      recordingKey: Pt(c.recordingKey, "variableValueInput"),
+      recordingKey: generateRecordingKey(c.recordingKey, "variableValueInput"),
       setVariableAction: !0,
       innerContainerClassName: "prototype_set_variable_controls--variableColorInputContainer--NaOmp"
     })
-  });else {
+  }); else {
     let t = VariableResolvedDataType.BOOLEAN;
     _ ? t = _.resolvedType : O && (t = O.varValue.resolvedType === VariableResolvedDataType.TEXT_DATA ? VariableResolvedDataType.STRING : O.varValue.resolvedType);
     M = jsx("div", {
@@ -935,7 +935,7 @@ function eX({
   });
   let B = useSelector(ZM) ? getI18nString("proto.select_variable_unified") : getI18nString("proto.select_variable.short");
   let H = jsx(D8, {
-    recordingKey: Pt(c.recordingKey, "selectTargetVariable"),
+    recordingKey: generateRecordingKey(c.recordingKey, "selectTargetVariable"),
     onClick: E,
     children: jsx("div", {
       ref: p,
@@ -1000,14 +1000,14 @@ function eX({
           onSearchInputChange: I,
           onVariableSelected: A,
           pickerType: "set-variable",
-          recordingKey: Pt(c.recordingKey, "variablePickerForSelection"),
+          recordingKey: generateRecordingKey(c.recordingKey, "variablePickerForSelection"),
           renderSetControls: () => jsx(_$$Z, {
             currentView: k,
             subscribedLibraries: [],
             setControlRightButtons: jsx(_$$f, {
               resolvedTypes: [VariableResolvedDataType.BOOLEAN, VariableResolvedDataType.STRING, VariableResolvedDataType.FLOAT, VariableResolvedDataType.COLOR]
             }),
-            recordingKey: Pt(c.recordingKey, "variablePickerForSelection")
+            recordingKey: generateRecordingKey(c.recordingKey, "variablePickerForSelection")
           }),
           searchInputRef: P,
           searchQuery: v,
@@ -1092,7 +1092,7 @@ function te({
     },
     checked: !0 === e.preserveScroll,
     mixed: isInvalidValue(e.preserveScroll),
-    recordingKey: Pt(n, "preserve-scroll-check"),
+    recordingKey: generateRecordingKey(n, "preserve-scroll-check"),
     label: jsx(Label, {
       children: renderI18nText("proto.animation_panel.preserve_scroll_position")
     })
@@ -1122,7 +1122,7 @@ function te({
     },
     checked: !0 === e.resetScrollPosition,
     mixed: isInvalidValue(e.resetScrollPosition),
-    recordingKey: Pt(n, "reset-scroll-position-check"),
+    recordingKey: generateRecordingKey(n, "reset-scroll-position-check"),
     label: jsx(Label, {
       children: renderI18nText("proto.animation_panel.reset_scroll_position")
     })
@@ -1175,7 +1175,7 @@ function te({
     },
     checked: !0 === e.resetInteractiveComponents,
     mixed: isInvalidValue(e.resetInteractiveComponents),
-    recordingKey: Pt(n, "reset-component-state-check"),
+    recordingKey: generateRecordingKey(n, "reset-component-state-check"),
     label: jsx(Label, {
       children: renderI18nText("proto.animation_panel.reset_component_state")
     })
@@ -1204,7 +1204,7 @@ function te({
     },
     checked: !0 === e.resetVideoPosition,
     mixed: isInvalidValue(e.resetVideoPosition),
-    recordingKey: Pt(n, "reset-video-position-check"),
+    recordingKey: generateRecordingKey(n, "reset-video-position-check"),
     label: jsx(Label, {
       children: LH(c) ? renderI18nText("proto.state_management.reset_video_state") : renderI18nText("proto.animation_panel.reset_video_state")
     })
@@ -1231,7 +1231,7 @@ function te({
       defaultOpen: !1,
       children: [jsx(Y9, {
         children: jsx(JU, {
-          recordingKey: Pt(n, "expand-caret"),
+          recordingKey: generateRecordingKey(n, "expand-caret"),
           actionOnPointerDown: !0,
           children: renderI18nText("proto.state")
         }, "expand-caret")
@@ -1283,17 +1283,17 @@ function tr(e) {
     inputClassName: "prototype_target_video_dropdown--input--infAK",
     onChange,
     onOptionFocus: e => {
-      Uc(e ?? "");
+      updateHoveredNode(e ?? "");
     },
     property: isInvalidValue(targetVideoNodeID) ? targetVideoNodeID : sessionLocalIDToString(targetVideoNodeID),
-    recordingKey: Pt(e, "select"),
+    recordingKey: generateRecordingKey(e, "select"),
     children: [viableSameFrameVideoIds.filter(e => g.hasNameForNode(e)).map((t, n) => jsx(tt, {
       value: t,
-      recordingKey: Pt(e, `viable-option-${n}`),
+      recordingKey: generateRecordingKey(e, `viable-option-${n}`),
       disabled: !1
     }, `enabled-${n}`)), _ && jsx(sK, {}), disabledSameFrameVideoIds.filter(e => g.hasNameForNode(e)).map((t, n) => jsx(tt, {
       value: t,
-      recordingKey: Pt(e, `viable-option-${n}`),
+      recordingKey: generateRecordingKey(e, `viable-option-${n}`),
       disabled: !0
     }, `disabled-${n}`))]
   });
@@ -1315,7 +1315,7 @@ function tl({
     placeholder: getI18nString("proto.interaction.example_com"),
     value: isInvalidValue(e.connectionURL) ? getI18nString("fullscreen.mixed") : valueOrFallback(e.connectionURL, ""),
     onChange: n,
-    recordingKey: Pt(t, "urlTextInput"),
+    recordingKey: generateRecordingKey(t, "urlTextInput"),
     autoFocus: !1
   });
   let a = jsx(Checkbox, {
@@ -1323,7 +1323,7 @@ function tl({
       children: renderI18nText("proto.action_open_url_in_new_tab")
     }),
     onChange: i,
-    recordingKey: Pt(t, "open-url-in-new-tab-check"),
+    recordingKey: generateRecordingKey(t, "open-url-in-new-tab-check"),
     checked: void 0 === e.openUrlInNewTab || !0 === e.openUrlInNewTab
   });
   return jsxs(Fragment, {
@@ -1381,7 +1381,7 @@ function tc({
     dispatch: c,
     inputClassName: oM,
     onValueChange: p(h, "y"),
-    recordingKey: Pt(a, "extraScrollOffsetY"),
+    recordingKey: generateRecordingKey(a, "extraScrollOffsetY"),
     scrubMultiplier: smallNudgeAmount,
     smallNudgeAmount,
     tooltipForScreenReadersOnly: !1,
@@ -1399,7 +1399,7 @@ function tc({
     dispatch: c,
     inputClassName: oM,
     onValueChange: p(h, "x"),
-    recordingKey: Pt(a, "extraScrollOffsetX"),
+    recordingKey: generateRecordingKey(a, "extraScrollOffsetX"),
     scrubMultiplier: smallNudgeAmount,
     smallNudgeAmount,
     tooltipForScreenReadersOnly: !1,
@@ -1468,18 +1468,18 @@ function tf({
     inputClassName: th,
     onChange: t,
     property: s,
-    recordingKey: Pt(l, "select"),
+    recordingKey: generateRecordingKey(l, "select"),
     children: [jsx(tm, {
       value: "UPDATE_MEDIA_TOGGLE_PLAY_PAUSE",
-      recordingKey: Pt(l, "toggle-play-pause-option"),
+      recordingKey: generateRecordingKey(l, "toggle-play-pause-option"),
       disabled: !1
     }, "UPDATE_MEDIA_TOGGLE_PLAY_PAUSE"), jsx(tm, {
       value: "UPDATE_MEDIA_PLAY",
-      recordingKey: Pt(l, "play-option"),
+      recordingKey: generateRecordingKey(l, "play-option"),
       disabled: !1
     }, "UPDATE_MEDIA_PLAY"), jsx(tm, {
       value: "UPDATE_MEDIA_PAUSE",
-      recordingKey: Pt(l, "pause-option"),
+      recordingKey: generateRecordingKey(l, "pause-option"),
       disabled: !1
     }, "UPDATE_MEDIA_PAUSE")]
   });
@@ -1496,18 +1496,18 @@ function tf({
     inputClassName: th,
     onChange: t,
     property: s,
-    recordingKey: Pt(l, "select"),
+    recordingKey: generateRecordingKey(l, "select"),
     children: [jsx(tm, {
       value: "UPDATE_MEDIA_TOGGLE_MUTE_UNMUTE",
-      recordingKey: Pt(l, "toggle-mute-unmute-option"),
+      recordingKey: generateRecordingKey(l, "toggle-mute-unmute-option"),
       disabled: !1
     }, "UPDATE_MEDIA_TOGGLE_MUTE_UNMUTE"), jsx(tm, {
       value: "UPDATE_MEDIA_MUTE",
-      recordingKey: Pt(l, "mute-option"),
+      recordingKey: generateRecordingKey(l, "mute-option"),
       disabled: !1
     }, "UPDATE_MEDIA_MUTE"), jsx(tm, {
       value: "UPDATE_MEDIA_UNMUTE",
-      recordingKey: Pt(l, "unmute-option"),
+      recordingKey: generateRecordingKey(l, "unmute-option"),
       disabled: !1
     }, "UPDATE_MEDIA_UNMUTE")]
   });
@@ -1525,14 +1525,14 @@ function tf({
     inputClassName: th,
     onChange: t,
     property: s,
-    recordingKey: Pt(l, "select"),
+    recordingKey: generateRecordingKey(l, "select"),
     children: [jsx(tm, {
       value: "UPDATE_MEDIA_SKIP_FORWARD",
-      recordingKey: Pt(l, "skip-forward-option"),
+      recordingKey: generateRecordingKey(l, "skip-forward-option"),
       disabled: !1
     }, "UPDATE_MEDIA_SKIP_FORWARD"), jsx(tm, {
       value: "UPDATE_MEDIA_SKIP_BACKWARD",
-      recordingKey: Pt(l, "skip-backward-option"),
+      recordingKey: generateRecordingKey(l, "skip-backward-option"),
       disabled: !1
     }, "UPDATE_MEDIA_SKIP_BACKWARD")]
   });
@@ -1546,7 +1546,7 @@ function tf({
     inputClassName: "prototype_video_action_options--timestamp--luOrs",
     max: 3600,
     onValueChange: I,
-    recordingKey: Pt(l, "mediaSkipToTimeInput"),
+    recordingKey: generateRecordingKey(l, "mediaSkipToTimeInput"),
     scrubMultiplier: v / 1e3,
     tooltipForScreenReadersOnly: !0,
     value: e.mediaSkipToTime || 0,
@@ -1572,7 +1572,7 @@ function tf({
         }
       }));
     },
-    recordingKey: Pt(l, "mediaSkipByAmountInput"),
+    recordingKey: generateRecordingKey(l, "mediaSkipByAmountInput"),
     scrubMultiplier: v / 1e3,
     tooltipForScreenReadersOnly: !0,
     value: e.mediaSkipByAmount || 5,
@@ -1747,7 +1747,7 @@ export function $$tv0({
       dropdownShown: A,
       scene,
       targetVideoNodeID: e.transitionNodeID || defaultSessionLocalID,
-      recordingKey: Pt(t, "targetVideoDropdown"),
+      recordingKey: generateRecordingKey(t, "targetVideoDropdown"),
       viableSameFrameVideoIds: Z,
       disabledSameFrameVideoIds: Y,
       isVideoSelected: z,
@@ -1768,7 +1768,7 @@ export function $$tv0({
         isNestedInConditional: T.isNestedInConditional,
         nodeId: e.transitionNodeID || defaultSessionLocalID,
         onChange: ec,
-        recordingKey: Pt(t, "setVariableControls"),
+        recordingKey: generateRecordingKey(t, "setVariableControls"),
         targetVariable: e.targetVariable || {
           id: ""
         },
@@ -1782,11 +1782,11 @@ export function $$tv0({
         targetVariableModeID: e.targetVariableModeID,
         deprecatedTargetVariableSetKey: e.targetVariableSetKey,
         updateSelectionProperties: y,
-        recordingKey: Pt(t, "setVariableControls"),
+        recordingKey: generateRecordingKey(t, "setVariableControls"),
         actionIndexPath: T.actionIndexPath.join(",")
       })
     }), B && (R ? jsx(em, {
-      recordingKey: Pt(t, "conditionalActionSection", "conditional-block", 0),
+      recordingKey: generateRecordingKey(t, "conditionalActionSection", "conditional-block", 0),
       autoOpenExpressionBuilder: j,
       setAutoOpenExpressionBuilder: N,
       updateSelectionProperties: y,
@@ -1802,7 +1802,7 @@ export function $$tv0({
       onExpand: T.onExpand,
       onNewActionAdded: T.onNewActionAdded,
       onSelect: T.onSelect,
-      recordingKey: Pt(t, "conditionalActionSection"),
+      recordingKey: generateRecordingKey(t, "conditionalActionSection"),
       selectedActionIndex: T.selectedActionIndex,
       selectedInteractions: T.selectedInteractions,
       stateManagementVersion: C,
@@ -1813,7 +1813,7 @@ export function $$tv0({
       children: jsx(ek, {
         onChange: ep,
         nodeId: e.transitionNodeID || defaultSessionLocalID,
-        recordingKey: Pt(t, "consumption"),
+        recordingKey: generateRecordingKey(t, "consumption"),
         actionIndexPath: T.actionIndexPath
       })
     }), J && jsxs(Fragment, {
@@ -1823,7 +1823,7 @@ export function $$tv0({
         transition: en,
         interactionType: n,
         navigationType: e.navigationType,
-        recordingKey: Pt(t, "animationPanel"),
+        recordingKey: generateRecordingKey(t, "animationPanel"),
         updateSelectionProperties: y,
         isNarrowPanel: T.isNestedInConditional || T.isNarrowPanel,
         stateManagementVersion: C
@@ -1834,7 +1834,7 @@ export function $$tv0({
       }), jsx(te, {
         connectionType: e.connectionType,
         navigationType: e.navigationType,
-        recordingKey: Pt(t, "stateManagementPanel"),
+        recordingKey: generateRecordingKey(t, "stateManagementPanel"),
         selectedInteractions: T.selectedInteractions,
         showPreserveScrollPosition: eo,
         showResetInteractiveComponentState: !!er,
@@ -1901,7 +1901,7 @@ export function $$tI1({
     isUI3: !0,
     nodeId: e.transitionNodeID || defaultSessionLocalID,
     onChange: e => O(e, P),
-    recordingKey: Pt(s, "destinationDropdown"),
+    recordingKey: generateRecordingKey(s, "destinationDropdown"),
     scene
   });
   let R = jsx(tc, {
@@ -1909,13 +1909,13 @@ export function $$tI1({
     showScrollToOptions: "SCROLL_TO" === C,
     extraScrollOffset: e.extraScrollOffset,
     updateSelectionProperties: n || fullscreenValue.updateSelectionProperties,
-    recordingKey: Pt(s, "scrollOptionsPanel"),
+    recordingKey: generateRecordingKey(s, "scrollOptionsPanel"),
     setPropertiesForAnchorLink: d
   });
   let M = a ? jsx(K, {
     interactionType: t,
     updateSelectionProperties: n || fullscreenValue.updateSelectionProperties,
-    recordingKey: Pt(s, "overlaySettings"),
+    recordingKey: generateRecordingKey(s, "overlaySettings"),
     actionIndexPath: a,
     nodeId: e.transitionNodeID || defaultSessionLocalID
   }) : null;

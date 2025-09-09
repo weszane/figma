@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -10,7 +10,7 @@ import { getFeatureFlags } from "../905/601108";
 import { tH, H4 } from "../905/751457";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y } from "../905/830372";
 import { RR } from "../figma_app/307841";
 import { u as _$$u } from "../905/16237";
@@ -75,7 +75,7 @@ export let $$N0 = registerModal(function ({
       area: _$$e.MONETIZATION_EXPANSION
     },
     onError: () => {
-      F(_$$F.enqueue({
+      F(VisualBellActions.enqueue({
         message: getI18nString("request_upgrade.modal.error"),
         error: !0
       }));

@@ -18,7 +18,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Jr, UD } from "../figma_app/624361";
 import { Mo } from "../905/913055";
 import { Tm } from "../figma_app/385874";
-import { kS$ } from "../figma_app/43951";
+import { AiMeterUsageView } from "../figma_app/43951";
 import { qy } from "../figma_app/862289";
 import { A as _$$A } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
@@ -108,7 +108,7 @@ let F = async ({
   let n = debugState.getState();
   let r = n.openFile?.key;
   i && r && (await new Promise((n, a) => {
-    let s = i.subscribe(kS$, {
+    let s = i.subscribe(AiMeterUsageView, {
       fileKey: r
     }, i => {
       if ("loaded" === i.status) {

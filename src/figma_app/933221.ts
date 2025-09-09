@@ -1,27 +1,27 @@
 import { useMemo } from "react";
 import { Rs } from "../figma_app/288654";
-import { ftA, iL6, bUF, EW } from "../figma_app/43951";
+import { ComponentAttribution, StateGroupAttribution, StyleAttribution, VariableCollectionAttribution } from "../figma_app/43951";
 import { PW } from "../figma_app/633080";
 export function $$o2({
   assetKey: e,
   type: t
 }) {
-  let r = Rs(ftA, {
+  let r = Rs(ComponentAttribution, {
     key: e ?? ""
   }, {
     enabled: t === PW.COMPONENT && !!e
   });
-  let o = Rs(iL6, {
+  let o = Rs(StateGroupAttribution, {
     key: e ?? ""
   }, {
     enabled: t === PW.STATE_GROUP && !!e
   });
-  let l = Rs(bUF, {
+  let l = Rs(StyleAttribution, {
     key: e ?? ""
   }, {
     enabled: t === PW.STYLE && !!e
   });
-  let d = Rs(EW, {
+  let d = Rs(VariableCollectionAttribution, {
     key: e ?? ""
   }, {
     enabled: t === PW.VARIABLE_SET && !!e

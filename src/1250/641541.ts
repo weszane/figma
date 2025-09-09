@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { b as _$$b, bL, mc, YJ, hE, Q$, Ov, q7 } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
 import { z6, CU } from "../905/963340";

@@ -3,7 +3,7 @@ import { O4, By } from "../905/777187";
 import { getI18nString } from "../905/303541";
 import { LS } from "../figma_app/975811";
 import { isInvalidValue, valueOrFallback } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 export class $$d0 extends K {
   constructor(e = {}) {
     super(e);
@@ -37,7 +37,7 @@ export class $$d0 extends K {
           return (i, {
             commit: n
           }) => {
-            mixedMathHandler.onChange(e, i, n ? zk.YES : zk.NO);
+            mixedMathHandler.onChange(e, i, n ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
           };
         }
         this.opts.mixedMathCallback && this.opts.mixedMathCallback(e);

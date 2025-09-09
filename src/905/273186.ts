@@ -1,9 +1,9 @@
 import { debugState } from "../905/407919";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { ds } from "../figma_app/314264";
 let s = class e {
   constructor(e, t) {
-    this.sessionId = g();
+    this.sessionId = generateUUIDv4();
     this.hasErrors = !1;
     this.hasUserEdited = !1;
     this.hasSystemEdited = !1;

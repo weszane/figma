@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { z8, bb } from "../figma_app/399472";
 import { cs } from "../figma_app/740025";
 import { MK, ot } from "../figma_app/599979";
@@ -25,7 +25,7 @@ export function $$h0({
       widget_id: xQ(x) ? x.id : void 0,
       plugin_id: I0(x) ? x.id : void 0
     }));
-    h(F.enqueue({
+    h(VisualBellActions.enqueue({
       message: getI18nString("community.detail_view.accepted_creator_invite")
     }));
   }, [h, x]);
@@ -35,7 +35,7 @@ export function $$h0({
       widget_id: xQ(x) ? x.id : void 0,
       plugin_id: I0(x) ? x.id : void 0
     }));
-    h(F.enqueue({
+    h(VisualBellActions.enqueue({
       message: getI18nString("community.detail_view.declined_creator_invite")
     }));
   }, [h, x]);

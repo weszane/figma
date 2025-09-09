@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -139,7 +139,7 @@ export function $$C0() {
       if (v.isInTeam) F && t.push({
         displayText: getI18nString("team_view.toolbar.leave_team"),
         onClick: w
-      });else if (C.org_id) {
+      }); else if (C.org_id) {
         let i = YP(C, r[C.id], e, M);
         null != i && i !== gO.CLICK_JOIN && t.push({
           displayText: RI({

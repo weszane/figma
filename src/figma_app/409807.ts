@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { z as _$$z } from "../905/639107";
 import { M as _$$M } from "../905/702374";
@@ -14,7 +14,7 @@ import { M as _$$M2 } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { createAtomWithEquality, atom, useAtomValueAndSetter, Xr } from "../figma_app/27355";
-import { zN } from "../905/19536";
+import { useStableMemo } from "../905/19536";
 import { A as _$$A } from "../vendor/90566";
 import { am } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
@@ -30,7 +30,7 @@ import { o as _$$o } from "../905/237202";
 import { F as _$$F } from "../905/258517";
 import { Fk } from "../figma_app/167249";
 import { Sh } from "../figma_app/889655";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { A as _$$A2 } from "../2854/975852";
 import { A as _$$A3 } from "../2854/549639";
 import { A as _$$A4 } from "../2854/181039";
@@ -179,7 +179,7 @@ export function $$Q4(e) {
     }(e, t.mirror.selectionProperties);
     return arrayOrMixed(r);
   });
-  return [zN(r), useCallback((r, n, i) => {
+  return [useStableMemo(r), useCallback((r, n, i) => {
     n && i && t(e, i);
     let a = J(r, e);
     fullscreenValue.updateSelectionProperties(a, {
@@ -193,7 +193,7 @@ export function $$ee36(e, t) {
   }) : e === SpacingMode.PACKED && t !== SpacingMode.PACKED && fullscreenValue.updateSelectionProperties({
     stackPrimaryAlignItems: "MIN"
   }, {
-    shouldCommit: zk.NO
+    shouldCommit: yesNoTrackingEnum.NO
   });
 }
 class et extends _$$M3 {
@@ -691,7 +691,7 @@ export function $$eH16() {
   }, [e]);
 }
 export function $$ez9(e, t, ...r) {
-  let i = zN(r);
+  let i = useStableMemo(r);
   useEffect(() => {
     if (!e) return;
     let r = e => {

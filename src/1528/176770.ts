@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { c2 } from "../905/382883";
 import { Fullscreen } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
 import { UK } from "../figma_app/740163";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -32,7 +32,7 @@ export function $$p0({
       onChange: e => {
         e !== Mo && e !== Yn && (c2(t.explicitMode, e) || (e === Ws || e === UE ? Fullscreen.setVariableModeForPlayground(t.setKey, e, null) : (Fullscreen.setVariableModeForPlayground(t.setKey, e.guid, null), p?.(t, e.guid))));
       },
-      recordingKey: Pt(n, `mode-${t.setKey}`),
+      recordingKey: generateRecordingKey(n, `mode-${t.setKey}`),
       showExplicitOnly: !1,
       showInheritedModeOption: !0,
       variableSetKey: t.setKey,

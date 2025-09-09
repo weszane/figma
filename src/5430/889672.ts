@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../905/573154";
@@ -9,7 +9,7 @@ import { j as _$$j } from "../5430/272190";
 import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FEditorType } from "../figma_app/53721";
 import { P5 } from "../figma_app/175992";
 import { WE, BY, Q7 } from "../figma_app/625596";
@@ -49,7 +49,7 @@ export function $$E0(e) {
   let [v, w] = useState(!1);
   let E = useDispatch();
   let S = useSelector(e => e.userFlags);
-  let R = iZ();
+  let R = selectCurrentUser();
   let k = _6();
   let [A, P] = useState(!1);
   let M = v || e.isFirstTimeLoading;

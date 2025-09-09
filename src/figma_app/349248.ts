@@ -1,5 +1,5 @@
 import { throwError } from "../figma_app/465776";
-import { mW, Pg, ii, F7, q, Rf, IA, n3, ey, nK, yG, Vt } from "../905/859698";
+import { mW, Pg, ii, F7, q, Rf, VariableStyleId, n3, ey, nK, yG, Vt } from "../905/859698";
 import { VariableResolvedDataType, TemplateType } from "../figma_app/763686";
 import { parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
 import { l as _$$l } from "../905/716947";
@@ -11,7 +11,7 @@ import { _5, sy } from "../figma_app/930338";
 import { P } from "../905/412913";
 import { FPermissionLevelType, FViewPermissionType, FPlanFeatureType, FResourceCategoryType } from "../figma_app/191312";
 import { PW } from "../figma_app/633080";
-import { gK } from "../figma_app/198712";
+import { getPropertyScopes } from "../figma_app/198712";
 import { zB } from "../figma_app/482728";
 import { Z } from "../905/190310";
 import { iX } from "../905/405710";
@@ -282,8 +282,8 @@ export function $$U3(e, t) {
     node_id: e.nodeId,
     canvas_url: `/style/${e.key}/canvas?ver=${e.checkpoint.key}`,
     checkpoint_id: e.checkpoint?.key,
-    content_hash: IA(e.contentHash),
-    userFacingVersion: IA(e.userFacingVersion) === IA.INVALID ? IA(e.contentHash) : IA(e.userFacingVersion),
+    content_hash: VariableStyleId(e.contentHash),
+    userFacingVersion: VariableStyleId(e.userFacingVersion) === VariableStyleId.INVALID ? VariableStyleId(e.contentHash) : VariableStyleId(e.userFacingVersion),
     key: n3(e.key),
     meta: e.meta ? iX(e.meta) : void 0,
     sort_position: e.sortPosition ?? "",
@@ -294,8 +294,8 @@ export function $$U3(e, t) {
 export function $$B26(e) {
   return e.movedByFigma ? {
     key: n3(e.key),
-    version: IA(e.contentHash),
-    userFacingVersion: e.userFacingVersion === IA.INVALID ? IA(e.contentHash) : IA(e.userFacingVersion)
+    version: VariableStyleId(e.contentHash),
+    userFacingVersion: e.userFacingVersion === VariableStyleId.INVALID ? VariableStyleId(e.contentHash) : VariableStyleId(e.userFacingVersion)
   } : void 0;
 }
 export function $$G22(e) {
@@ -341,7 +341,7 @@ export function $$H1(e, t, r) {
     userFacingVersion: nK(e.userFacingVersion) === nK.INVALID ? nK(e.version) : nK(e.userFacingVersion),
     sortPosition: e.sortPosition,
     key: ey(e.key),
-    scopes: gK(e.scopes),
+    scopes: getPropertyScopes(e.scopes),
     canvas_url: V(e.variableCollection.key, e.variableCollection.checkpoint.key)
   };
 }

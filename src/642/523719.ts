@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O } from "../905/487602";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { dG } from "../figma_app/753501";
 import { MIXED_MARKER } from "../905/216495";
@@ -33,7 +33,7 @@ export function $$g0({
   let N = !T && !s;
   null == _ && (_ = !0 === s ? "-" : "+");
   let I = "+" === _ ? jsx(K, {
-    recordingKey: Pt(x, "addButton"),
+    recordingKey: generateRecordingKey(x, "addButton"),
     onClick: e,
     disabled: f,
     "aria-label": S ?? getI18nString("fullscreen.properties_panel.add"),
@@ -45,7 +45,7 @@ export function $$g0({
     },
     children: jsx(_$$e, {})
   }) : jsx(K, {
-    recordingKey: Pt(x, "removeButton"),
+    recordingKey: generateRecordingKey(x, "removeButton"),
     onClick: y,
     disabled: g,
     "aria-label": k ?? getI18nString("fullscreen.properties_panel.remove"),

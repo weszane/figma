@@ -1,124 +1,94 @@
 /**
- * Utility functions for function timing control - debouncing and throttling
- */
-
-/**
- * Debounced function type with additional control methods
- */
-interface DebouncedFunction<T extends (...args: any[]) => any> {
-  (...args: Parameters<T>): void;
-  cancel: () => void;
-  flush: () => void;
-}
-
-/**
- * Throttled function type with additional control methods
- */
-interface ThrottledFunction<T extends (...args: any[]) => any> {
-  (...args: Parameters<T>): void;
-  cancel: () => void;
-  flush: () => void;
-}
-
-/**
- * Creates a debounced version of the provided function that delays execution
- * until after the specified delay has elapsed since the last time it was invoked.
+ * Debounce function with optional immediate execution.
+ * Original name: $$n1
  *
- * @param callback - The function to debounce
- * @param delay - The delay in milliseconds (default: 0)
- * @returns A debounced version of the callback with cancel and flush methods
+ * @param fn - Function to debounce
+ * @param delay - Delay in milliseconds
+ * @param immediate - If true, execute immediately on first call
+ * @returns Debounced function with cancel and flush methods
  */
-export function debounce<T extends (...args: any[]) => any>(
-  callback: T,
-  delay: number = 0,
-): DebouncedFunction<T> {
-  let timeoutId: number | null = null;
-  let lastArgs: Parameters<T> | null = null;
+export function debounce(fn: (...args: any[]) => void, delay: number = 200, immediate: boolean = false) {
+  let timeoutId: ReturnType<typeof setTimeout> | 0 = 0
+  let pendingArgs: any[] | null = null
 
-  const executeCallback = function () {
-    timeoutId = null;
-    if (!lastArgs) {
-      return;
+  /** Flushes the pending function call */
+  const flush = () => {
+    clearTimeout(timeoutId)
+    timeoutId = 0
+    if (!pendingArgs)
+      return
+    const args = pendingArgs
+    pendingArgs = null
+    fn(...args)
+  }
+
+  /** Debounced function */
+  const debounced = (...args: any[]) => {
+    if (immediate && !timeoutId) {
+      immediate = false
+      fn(...args)
+      immediate = true
     }
-    const argsToExecute = lastArgs;
-    lastArgs = null;
-    callback(...argsToExecute);
-  };
-
-  const debouncedFunction = function (...args: Parameters<T>) {
-    lastArgs = args;
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
+    else {
+      pendingArgs = args
     }
-    timeoutId = window.setTimeout(executeCallback, delay);
-  } as DebouncedFunction<T>;
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(flush, delay)
+  }
 
-  debouncedFunction.cancel = () => {
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
-    }
-    lastArgs = null;
-  };
+  /** Cancels any pending execution */
+  debounced.cancel = () => {
+    clearTimeout(timeoutId)
+    pendingArgs = null
+    timeoutId = 0
+  }
 
-  debouncedFunction.flush = () => {
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
-    }
-    executeCallback();
-  };
+  debounced.flush = flush
 
-  return debouncedFunction;
+  return debounced
 }
 
 /**
- * Creates a throttled version of the provided function that limits execution
- * to at most once per specified delay period.
+ * Microtask-based throttle function.
+ * Original name: $$r0
  *
- * @param callback - The function to throttle
- * @param delay - The delay in milliseconds (default: 200ms)
- * @param leading - Whether to execute on the leading edge (default: false)
- * @returns A throttled version of the callback with cancel and flush methods
+ * @param fn - Function to throttle
+ * @returns Throttled function with cancel and flush methods
  */
-export function throttle<T extends (...args: any[]) => any>(
-  callback: T,
-  delay: number = 200,
-  leading: boolean = false,
-): ThrottledFunction<T> {
-  let timerId: NodeJS.Timeout | number = 0;
-  let lastArgs: Parameters<T> | null = null;
+export function microtaskThrottle(fn: (...args: any[]) => void) {
+  let scheduled = false
+  let pendingArgs: any[] | null = null
 
-  const executeCallback = function () {
-    clearTimeout(timerId);
-    timerId = 0;
-    if (!lastArgs) {
-      return;
+  /** Flushes the pending function call */
+  const flush = () => {
+    scheduled = false
+    if (!pendingArgs)
+      return
+    const args = pendingArgs
+    pendingArgs = null
+    fn(...args)
+  }
+
+  /** Throttled function */
+  const throttled = (...args: any[]) => {
+    pendingArgs = args
+    if (!scheduled) {
+      scheduled = true
+      queueMicrotask(flush)
     }
-    const argsToExecute = lastArgs;
-    lastArgs = null;
-    callback(argsToExecute);
-  };
+  }
 
-  const throttledFunction = function (...args: Parameters<T>) {
-    if (leading && !timerId) {
-      leading = false;
-      callback(args);
-      leading = true;
-    } else {
-      lastArgs = args;
-    }
-    clearTimeout(timerId);
-    timerId = setTimeout(executeCallback, delay);
-  } as ThrottledFunction<T>;
+  /** Cancels any pending execution */
+  throttled.cancel = () => {
+    scheduled = false
+    pendingArgs = null
+  }
 
-  throttledFunction.cancel = () => {
-    clearTimeout(timerId);
-    lastArgs = null;
-    timerId = 0;
-  };
+  throttled.flush = flush
 
-  throttledFunction.flush = executeCallback;
-
-  return throttledFunction;
+  return throttled
 }
+
+// Export aliases for backward compatibility
+export const throttle = microtaskThrottle
+export const s = debounce

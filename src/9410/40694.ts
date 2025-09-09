@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { createPortal } from "../vendor/944059";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { SourceType } from "../figma_app/763686";
 import d from "classnames";
@@ -12,7 +12,7 @@ import { getI18nString } from "../905/303541";
 import { F9 } from "../figma_app/147952";
 import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../3276/966473";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { $A, vt } from "../905/862883";
 import { Ib } from "../905/129884";
 import { $L, us } from "../figma_app/136698";
@@ -50,7 +50,7 @@ export function $$j0({
   let c = `${d}?c=1`;
   let p = $L(e.id, us);
   let m = LL(c, e.name || e.handle || "", p);
-  let b = TA();
+  let b = getUserId();
   let T = _$$b();
   let j = useDispatch();
   let O = useCallback(() => {

@@ -1,17 +1,17 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useId, useMemo, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E } from "../905/53857";
 import { Label } from "../905/270045";
 import { b as _$$b, bL, mc, q7 } from "../figma_app/860955";
 import { MeasurementUnit } from "../figma_app/763686";
-import { Pt, rf } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { v4, AC, P0, QN } from "../figma_app/655139";
 import { c as _$$c } from "../469e6e40/927162";
 import { NH } from "../figma_app/755395";
-import { zq } from "../905/515076";
+import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { YE, Em, Bs, RH, wQ, SF } from "../figma_app/120227";
 import { BK } from "../905/848862";
 import { AF } from "../figma_app/212807";
@@ -141,7 +141,7 @@ export function $$P2({
       disabled: n,
       children: d
     }), jsx(mc, {
-      children: zq.map(n => jsx(q7, {
+      children: CODEGEN_MEASUREMENT_UNITS.map(n => jsx(q7, {
         onClick: () => t(n),
         "aria-checked": n === e,
         children: s.format(n)
@@ -164,7 +164,7 @@ function R(e) {
   return 0 === t.length ? null : jsx(Fragment, {
     children: t.map(t => jsx(D, {
       item: t,
-      recordingKey: Pt(e, `${t.name}`)
+      recordingKey: generateRecordingKey(e, `${t.name}`)
     }, t.name))
   });
 }
@@ -196,7 +196,7 @@ export function $$O1({
   let d = useRef(null);
   let u = e.name === data?.name && showing;
   let p = e.children?.find(e => e.isChecked)?.displayText ?? "";
-  let h = rf(Pt(t, "select"), "click", () => toggle({
+  let h = useHandleMouseEvent(generateRecordingKey(t, "select"), "click", () => toggle({
     data: {
       name: e.name ?? ""
     }
@@ -223,7 +223,7 @@ export function $$O1({
         e.callback?.("", null, r);
       },
       parentRect: d.current.getBoundingClientRect(),
-      recordingKey: Pt(t, "dropdown"),
+      recordingKey: generateRecordingKey(t, "dropdown"),
       showPoint: !1
     })]
   });

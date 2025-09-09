@@ -1,5 +1,5 @@
 import { useContext, useRef, useCallback, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription, createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";

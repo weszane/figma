@@ -8,9 +8,9 @@ import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { Q } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { wr } from "../figma_app/741237";
+import { clearSelection } from "../figma_app/741237";
 import { Qs, iN, sx as _$$sx } from "../905/992395";
 import { of, Cx, x2 } from "../figma_app/714946";
 let $$E11 = NC("UNSET_HOVERED_IN_MODAL_VOTE_PIN");
@@ -33,7 +33,7 @@ let $$S6 = createOptimistThunk(async (e, {
     e.dispatch(of({
       key: s
     }));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: o,
       message: getI18nString("voting.visual_bell.end_voting_session_failed")
     }));
@@ -41,7 +41,7 @@ let $$S6 = createOptimistThunk(async (e, {
   e.dispatch(Cx({
     key: s
   }));
-  e.dispatch(F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: o
   }));
   await XHR.put(`/api/file/${fileKey}/voting_sessions/${a}`, {
@@ -76,7 +76,7 @@ let $$A14 = createOptimistThunk((e, {
     e.dispatch(of({
       key: o
     }));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "start-voting-session-failed",
       message: getI18nString("voting.visual_bell.start_voting_session_failed")
     }));
@@ -84,7 +84,7 @@ let $$A14 = createOptimistThunk((e, {
   e.dispatch(Cx({
     key: o
   }));
-  e.dispatch(F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: "start-voting-session-failed"
   }));
   XHR.post(`/api/file/${fileKey}/voting_sessions`, n).then(n => {
@@ -117,7 +117,7 @@ let $$N1 = createOptimistThunk((e, {
     promise: n,
     fallbackError: getI18nString("voting.modal.delete_voting_session_error")
   }));
-  e.dispatch(F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     message: getI18nString("voting.modal.delete_voting_session_visual_bell")
   }));
   handleOptimistTransaction(n, e.dispatch, L({
@@ -159,7 +159,7 @@ let $$w4 = createOptimistThunk((e, t) => {
   } else r = l?.find(e => e.inProgress);
   if (!r) return;
   let d = oA(r.pageNodeId);
-  d && (WhiteboardVotingCppBindings.setVotingSessionInfo(r.id, i, r.userVoteLimit, d), i === SessionStatus.JOINED && (e.dispatch($$O7()), a.mirror.selectionProperties.whiteboardNumSelectedByType?.STAMP && wr()));
+  d && (WhiteboardVotingCppBindings.setVotingSessionInfo(r.id, i, r.userVoteLimit, d), i === SessionStatus.JOINED && (e.dispatch($$O7()), a.mirror.selectionProperties.whiteboardNumSelectedByType?.STAMP && clearSelection()));
 });
 let $$O7 = NC("DISMISS_JOIN_CONFIRMATION");
 let $$R9 = NC("HIDE_JOIN_VOTING_SESSION_MODAL");

@@ -9,10 +9,10 @@ import { dl } from "../figma_app/307841";
 import { CT } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
 import { FBillingModelType } from "../figma_app/191312";
-import { WF4 } from "../figma_app/43951";
+import { OrgProductTermsEligibleInfo } from "../figma_app/43951";
 let m = createRemovableAtomFamily(({
   orgId: e
-}) => atom(l => e ? l(WF4.Query({
+}) => atom(l => e ? l(OrgProductTermsEligibleInfo.Query({
   orgId: e
 })).transform(({
   org: e

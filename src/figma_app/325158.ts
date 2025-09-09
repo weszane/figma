@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { A as _$$A } from "../905/920165";
 import { b as _$$b, bL, mc, r1, Ov, ME, wv } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
@@ -16,11 +16,11 @@ import { trackEventAnalytics } from "../905/449184";
 import { wv as _$$wv, c$ } from "../figma_app/236327";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { V } from "../figma_app/144634";
 import { j as _$$j } from "../figma_app/628249";
 import { K0, $n, wv as _$$wv2, W1 } from "../figma_app/439493";
@@ -240,7 +240,7 @@ function Y({
   }, [r, l, u]);
   let h = () => {
     fullscreenValue.triggerActionInUserEditScope("rotate-image-90-clockwise");
-    c(_$$F.enqueue({
+    c(VisualBellActions.enqueue({
       type: "image-rotated-feedback",
       message: getI18nString("whiteboard.inline_menu.image_rotated_feedback"),
       role: "status",
@@ -257,7 +257,7 @@ function Y({
     t({
       ...e,
       transform: i
-    }, n ? zk.YES : zk.NO);
+    }, n ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
   };
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(J, {
     mode: "dark",
@@ -386,7 +386,7 @@ export function $$Q11() {
         imageAspectRatio: e,
         cornerRadius: "Circle" === r ? 65536 : 0
       }, {
-        shouldCommit: zk.YES
+        shouldCommit: yesNoTrackingEnum.YES
       });
     }
   };

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { N } from "../905/438674";
 import { E as _$$E } from "../905/632989";
@@ -9,7 +9,7 @@ import { l as _$$l } from "../905/479687";
 import { N as _$$N } from "../905/670143";
 import { g as _$$g } from "../905/125190";
 import { r as _$$r } from "../905/857502";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg, Xu, Uo } from "../figma_app/354658";
 import { S as _$$S } from "../figma_app/11182";
@@ -57,7 +57,7 @@ export function $$I0() {
   return jsx($n, {
     variant: "secondary",
     onClick: () => {
-      Ay.reload("Resource updated on community hub");
+      customHistory.reload("Resource updated on community hub");
     },
     children: getI18nString("community.publishing.go_to_community")
   });

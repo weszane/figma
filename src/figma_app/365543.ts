@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { $n } from "../905/521428";
 import { N } from "../905/438674";
 import { A } from "../905/251970";
 import l from "classnames";
-import { o6, Pt } from "../figma_app/806412";
+import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
 import { Kz } from "../figma_app/637027";
 import { t as _$$t } from "../905/331623";
 import { Me } from "../figma_app/617427";
@@ -16,7 +16,7 @@ import { Q } from "../905/346809";
 import { nV, fI, hl } from "../figma_app/626177";
 import { $E, Cj, FQ, L4, Q as _$$Q, zD, hq, Ms, z_, eO } from "../905/553729";
 var d = l;
-class T extends o6 {
+class T extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.onDismiss = () => {
@@ -33,7 +33,7 @@ class T extends o6 {
       this.props.hintLinkText && (this.props.hintLinkOnClick ? t = jsx($n, {
         variant: "secondary",
         onClick: this.props.hintLinkOnClick,
-        recordingKey: Pt(this.props.recordingKey, "link"),
+        recordingKey: generateRecordingKey(this.props.recordingKey, "link"),
         children: this.props.hintLinkText
       }) : this.props.hintLinkUrl && (t = jsx(N, {
         href: this.props.hintLinkUrl,
@@ -71,7 +71,7 @@ class T extends o6 {
             children: jsx(Me, {
               onClick: this.onDismiss,
               "aria-label": getI18nString("fullscreen.properties_panel.hint_panel.close"),
-              recordingKey: Pt(this.props.recordingKey, "x"),
+              recordingKey: generateRecordingKey(this.props.recordingKey, "x"),
               trackingProperties: {
                 trackingDescriptor: _$$c.CLOSE_BUTTON,
                 ...e

@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useId, memo, useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { r } from "../905/12476";
 import { isValidValue } from "../905/216495";
 import { Ib } from "../905/129884";
@@ -62,7 +62,7 @@ function y(e) {
             onChange: e => {
               onSelectProperty(property, t.toggleTokenPair[e ? 0 : 1]);
             },
-            recordingKey: Pt(e, `toggle-${property}`)
+            recordingKey: generateRecordingKey(e, `toggle-${property}`)
           })
         }) : jsx(l6, {
           ariaLabelledBy: N,
@@ -75,11 +75,11 @@ function y(e) {
           },
           onMouseDown: () => dispatch(r),
           property: A,
-          recordingKey: Pt(e, `select-${property}`),
+          recordingKey: generateRecordingKey(e, `select-${property}`),
           children: [...x].map(t => jsx(c$, {
             value: t,
             truncateInMiddle: !0,
-            recordingKey: Pt(e, `select-${property}-option-${t}`)
+            recordingKey: generateRecordingKey(e, `select-${property}-option-${t}`)
           }, t))
         });
         return jsx(cS, {

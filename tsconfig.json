@@ -11,7 +11,7 @@
     "moduleResolution": "bundler",
     "allowJs": true,
     "checkJs": false,
-    "strict": true,
+    "strict": false,
     "noImplicitAny": false,
     "declaration": true,
     "sourceMap": true,

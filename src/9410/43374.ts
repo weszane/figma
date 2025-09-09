@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, forwardRef, useImperativeHandle } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { DiagramElementType, InteractionCpp, HideMode, Positioning } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";

@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { J } from "../905/614223";
 import { trackEventAnalytics } from "../905/449184";
 import { BrowserInfo } from "../figma_app/778880";
@@ -20,7 +20,7 @@ import { Yo } from "../figma_app/543529";
 import { ll, U6 } from "../figma_app/844435";
 import { kc } from "../figma_app/740025";
 import { k as _$$k2 } from "../905/882646";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { U3 } from "../figma_app/412189";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { T5, D6, j_ } from "../figma_app/465071";
@@ -37,7 +37,7 @@ export function $$M0({
 }) {
   let j;
   let S = useDispatch();
-  let R = TA();
+  let R = getUserId();
   let M = T5("PluginTryButton").unwrapOr(null);
   let B = M?.widgetsWhitelistEnforced || null;
   let D = M?.pluginsWhitelistEnforced || null;

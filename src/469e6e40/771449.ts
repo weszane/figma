@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Xf } from "../figma_app/153916";
 import { renderI18nText } from "../905/303541";
@@ -21,7 +21,7 @@ import { GroupType } from "../905/441038";
 import { J0, oU } from "../figma_app/967319";
 import { o0 } from "../905/844131";
 import { nF, lF } from "../469e6e40/68843";
-if (443 == require.j) {}
+if (443 == require.j) { }
 export function $$C0(e) {
   let {
     selectedTab,

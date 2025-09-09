@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
@@ -16,7 +16,7 @@ import { q5 } from "../figma_app/516028";
 import { E as _$$E } from "../905/128063";
 import { qU, bj } from "../905/420347";
 import { LH } from "../905/872904";
-import { g0U } from "../figma_app/43951";
+import { SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { w5 } from "../figma_app/345997";
 import { je } from "../figma_app/155728";
@@ -149,7 +149,7 @@ export function $$B1(e, t, i) {
 }
 let $$V9 = _$$n(e => {
   let t = _$$c();
-  let i = Rs(g0U, {
+  let i = Rs(SharingGroupsByResourceConnection, {
     resourceConnectionId: t?.id ?? ""
   }, {
     enabled: !!t
@@ -164,7 +164,7 @@ let $$V9 = _$$n(e => {
 });
 let $$G0 = _$$n(e => {
   let t = _$$c();
-  let i = Rs(g0U, {
+  let i = Rs(SharingGroupsByResourceConnection, {
     resourceConnectionId: t?.id ?? ""
   }, {
     enabled: !!t

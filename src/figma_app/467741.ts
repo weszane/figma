@@ -1,9 +1,9 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { qR } from "../figma_app/696043";
 import { RH, gU, Kq, lD } from "../figma_app/147952";
 import { _i } from "../figma_app/120210";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { U_ } from "../figma_app/190980";
 import { vt } from "../figma_app/45218";
 import { manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
@@ -19,7 +19,7 @@ export function $$g0(e) {
     } = E(e);
     let r = useDispatch();
     let a = U_();
-    let o = TA();
+    let o = getUserId();
     if (!e.types.has(Ag.USER_SAVED) && !JT(e)) return {
       displayText: getI18nString("community.saves.save"),
       callback: () => {

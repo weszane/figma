@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef, useCallback, Suspense } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { k as _$$k } from "../905/443820";
 import { VideoCppBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";

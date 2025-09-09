@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Pw } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
@@ -11,8 +11,8 @@ import { u as _$$u } from "../905/684425";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { TA } from "../905/372672";
-import { M9q, NSA } from "../figma_app/43951";
+import { getUserId } from "../905/372672";
+import { OrgUserIsMfaRestrictedView, FileByKey } from "../figma_app/43951";
 import { CT } from "../figma_app/736948";
 import { Ro } from "../figma_app/805373";
 import { J } from "../905/71895";
@@ -23,16 +23,16 @@ export function $$I0({
   switchAccountsSection: i,
   fileKey: I
 }) {
-  let E = TA();
+  let E = getUserId();
   let x = useDispatch();
-  let S = Rs(M9q, {
+  let S = Rs(OrgUserIsMfaRestrictedView, {
     orgId: t.id
   });
   let w = "loaded" === S.status;
   let C = w ? S.data.currentUser.baseOrgUser?.isMfaRestricted : void 0;
   let T = !0 === oA(C);
   let k = w && (S.data.currentUser.baseOrgUser?.org?.mfaRequired === CT.GUESTS || S.data.currentUser.baseOrgUser?.org?.mfaRequired === CT.ALL_USERS);
-  let R = Rs(NSA, {
+  let R = Rs(FileByKey, {
     fileKey: I ?? ""
   }, {
     enabled: !!I
@@ -64,7 +64,7 @@ export function $$I0({
         variant: "primary",
         type: "submit",
         onClick: () => {
-          Ay.reload("User set up MFA. Reloading to reflect changes.");
+          customHistory.reload("User set up MFA. Reloading to reflect changes.");
         },
         children: renderI18nText("mfa_required_modal.mfa_enabled.reload")
       })

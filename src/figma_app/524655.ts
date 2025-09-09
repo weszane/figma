@@ -1,11 +1,11 @@
 import { useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { AppStateTsApi, SceneGraphHelpers, SlideConstantsCppBindings } from "../figma_app/763686";
 import { Y } from "../905/912236";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { NX } from "../figma_app/456871";
 import { getObservableValue } from "../figma_app/84367";
 import { Fk, wA as _$$wA } from "../figma_app/167249";
@@ -22,8 +22,8 @@ export function $$y11(e) {
   return e.reduce((e, t) => e.concat(t), []);
 }
 export let $$b5 = {
-  reorder: e => {},
-  onMouseDown: e => {}
+  reorder: e => { },
+  onMouseDown: e => { }
 };
 export function $$T8(e) {
   let t = [e, ...e.children].reduce(function (e, t) {
@@ -107,15 +107,15 @@ export function $$x0() {
   let a = Xm();
   let s = useAtomWithSubscription(y6(a)).productComponents.modified.erroneous;
   return useCallback(n => {
-    0 === numTotalSlides ? e(F.enqueue({
+    0 === numTotalSlides ? e(VisualBellActions.enqueue({
       message: getI18nString("file_permissions_modal.share_as.publish_template_slides_error_no_slides"),
-      onDismiss: () => {}
-    })) : numSkippedSlides > 0 ? e(F.enqueue({
+      onDismiss: () => { }
+    })) : numSkippedSlides > 0 ? e(VisualBellActions.enqueue({
       message: getI18nString("file_permissions_modal.share_as.publish_template_slides_error_skipped_slides"),
-      onDismiss: () => {}
-    })) : s.length > 0 ? e(F.enqueue({
+      onDismiss: () => { }
+    })) : s.length > 0 ? e(VisualBellActions.enqueue({
       message: getI18nString("file_permissions_modal.share_as.publish_template_variant_error_slides"),
-      onDismiss: () => {}
+      onDismiss: () => { }
     })) : n();
   }, [e, s.length, numSkippedSlides, numTotalSlides]);
 }

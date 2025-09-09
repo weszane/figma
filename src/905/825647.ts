@@ -1,4 +1,4 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { kD, J3, kN, JU } from "../figma_app/622574";
 import { q5 } from "../figma_app/516028";
 import { x } from "../905/619833";

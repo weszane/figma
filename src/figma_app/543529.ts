@@ -1,9 +1,9 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { IT, mI } from "../figma_app/566371";
 import { sZ, dq } from "../905/845253";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
-import { Nm8 } from "../figma_app/43951";
+import { OrgHasSeatsManagedViaScimView } from "../figma_app/43951";
 import { X$ } from "../figma_app/465071";
 import { zp } from "../figma_app/740025";
 export function $$u0() {
@@ -24,7 +24,7 @@ export function $$_4() {
 export function $$h3() {
   let e = dq();
   let t = X$("useSuspendOrgManagesSeatsViaScim");
-  let [r, n] = IT(Nm8({
+  let [r, n] = IT(OrgHasSeatsManagedViaScimView({
     orgId: e
   }), {
     enabled: !!e

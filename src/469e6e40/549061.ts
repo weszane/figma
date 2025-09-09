@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useEffect, useCallback, Suspense } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
@@ -20,7 +20,7 @@ import { m$ } from "../figma_app/240735";
 import { fu } from "../figma_app/831799";
 import { d as _$$d } from "../figma_app/603561";
 import { FOrganizationLevelType, FUserRoleType } from "../figma_app/191312";
-import { EEx, HpJ, sMZ } from "../figma_app/43951";
+import { AdminRequestDashboardView, AdminRequestDashOrgInfo, UserFlagByName } from "../figma_app/43951";
 import { px, S2, Um } from "../figma_app/465071";
 import { J7, G_, SN } from "../figma_app/650409";
 import { DashboardSections, MemberSections } from "../905/548208";
@@ -57,8 +57,8 @@ import { useSprigWithSampling } from "../905/99656";
 import { CY } from "../figma_app/637027";
 import { _ as _$$_2, S as _$$S } from "../figma_app/490799";
 import { kt } from "../figma_app/858013";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { k as _$$k4 } from "../figma_app/618031";
 import { aN, V4, Td, uH, A$, Z4, x9 } from "../4452/846771";
 import { ps, z7, ZY, Xv, V7 } from "../figma_app/845611";
@@ -86,7 +86,7 @@ import { N_ } from "../905/332483";
 import { Zx } from "../figma_app/217457";
 import { q as _$$q } from "../4452/876838";
 import { QL, EM } from "../905/609392";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { FRequestsStr } from "../905/384551";
 import { O as _$$O } from "../905/833838";
 import { Sm } from "../figma_app/482728";
@@ -761,7 +761,7 @@ function tu({
   let X = e?.key.type === "team" ? ps.TEAM : ps.ORG;
   let Q = e.key.parentId ?? "";
   let Z = MX();
-  let ee = TA();
+  let ee = getUserId();
   let et = X === ps.ORG;
   let ea = useMemo(() => et ? EQ(Z, ee, !1).groupsUserIsAdminOf : [], [Z, ee, et]);
   let en = useMemo(() => ea ? ea.map(e => e.id) : [], [ea]);
@@ -773,7 +773,7 @@ function tu({
   let er = useMemo(() => JSON.stringify({
     billing_group_ids: es
   }), [es]);
-  let ed = Rs(EEx, {
+  let ed = Rs(AdminRequestDashboardView, {
     planType: X,
     planId: Q,
     sortOrder: null,
@@ -804,7 +804,7 @@ function tu({
     }),
     processedRequestIds: B
   });
-  let eS = Rs(HpJ, {
+  let eS = Rs(AdminRequestDashOrgInfo, {
     orgId: Q
   }, {
     enabled: et
@@ -1107,13 +1107,13 @@ function tu({
     entryPoint: n = N
   }) => {
     E(a ? "approving_all" : e ? "approving" : "declining");
-    a && e5 && p(_$$F.enqueue({
+    a && e5 && p(VisualBellActions.enqueue({
       message: getI18nString("admin_dashboard.requests.selected_count_approving", {
         numSelected: e5
       }),
       type: tl,
       timeoutOverride: 1 / 0,
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       preventDismissal: !0,
       role: "status"
     }));
@@ -1172,7 +1172,7 @@ function tu({
     }).catch(() => {
       dispatchGenericError();
     }).$$finally(() => {
-      a && p(_$$F.dequeue({
+      a && p(VisualBellActions.dequeue({
         matchType: tl
       }));
       c();
@@ -1402,7 +1402,7 @@ export function $$tg0({
   let P = S2();
   let F = "loading" === P.status;
   let q = P.data;
-  let $ = Rs(sMZ, {
+  let $ = Rs(UserFlagByName, {
     name: "seen_connected_project_in_admin_dashboard_banner"
   });
   let B = useMemo(() => "loaded" !== $.status || !!$.data?.currentUser?.userFlagByName, [$]);

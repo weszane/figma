@@ -3,7 +3,7 @@ import { SceneGraphUnavailableError } from "../figma_app/518682";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { serializeQuery } from "../905/634134";
 import { gN } from "../905/760074";
 import { EO } from "../905/691205";
@@ -19,7 +19,7 @@ export function $$m8(e, t) {
   "1" === e["is-playground-file"] && (t.isPlaygroundFile = !0);
 }
 export function $$h7(e = !1) {
-  return e ? `/test/eval/view${Ay.location.search}` : `/test/interactions${Ay.location.search}`;
+  return e ? `/test/eval/view${customHistory.location.search}` : `/test/interactions${customHistory.location.search}`;
 }
 export function $$g3(e, t, i, n, r, a = !1) {
   if (n) return gN(n, r || null, e);

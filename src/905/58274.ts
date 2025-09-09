@@ -3,8 +3,8 @@ import { AppStateTsApi } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { jO } from "../905/573265";
 import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
@@ -23,10 +23,10 @@ export function $$y3(e, t) {
       atomStoreManager.set(UM, {
         state: F4.PUBLISH_TEMPLATE_COMPLETED
       });
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         type: $$A0,
         message: t.isPublishedTemplate ? getI18nString("slides.templates.publish_actions.toast.update_success") : getI18nString("slides.templates.publish_actions.toast.publish_success"),
-        icon: zX.CHECK
+        icon: VisualBellIcon.CHECK
       }));
       e(hideModal());
     },
@@ -43,7 +43,7 @@ export function $$y3(e, t) {
       atomStoreManager.set(UM, {
         state: F4.PUBLISH_TEMPLATE_ERRORED
       });
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         type: $$A0,
         message: getI18nString("slides.templates.publish_actions.toast.publish_error"),
         error: !0
@@ -62,7 +62,7 @@ function b(e) {
       atomStoreManager.set(UM, {
         state: F4.PUBLISH_HUB_FILE_COMPLETED
       });
-      dispatch(F.dequeue({
+      dispatch(VisualBellActions.dequeue({
         matchType: $$A0
       }));
       break;
@@ -83,7 +83,7 @@ function v(e) {
     dispatch
   } = e;
   let n = atomStoreManager.get(_g);
-  [F4.PUBLISH_TEMPLATE_INITIATED, F4.PUBLISH_HUB_FILE_INITIATED].includes(n) && dispatch(F.enqueue({
+  [F4.PUBLISH_TEMPLATE_INITIATED, F4.PUBLISH_HUB_FILE_INITIATED].includes(n) && dispatch(VisualBellActions.enqueue({
     type: $$A0,
     message: publishType === M$.UNPUBLISH ? getI18nString("slides.templates.publish_actions.unpublishing") : getI18nString("slides.templates.publish_actions.publishing"),
     icon: e.icon,
@@ -123,9 +123,9 @@ function I(e) {
   }
   switch (error) {
     case jO.Offline:
-      dispatch(F.enqueue({
+      dispatch(VisualBellActions.enqueue({
         type: $$A0,
-        icon: zX.EXCLAMATION,
+        icon: VisualBellIcon.EXCLAMATION,
         error: !0,
         message: getI18nString("slides.templates.publish_actions.toast.offline_error")
       }));
@@ -134,26 +134,26 @@ function I(e) {
       MZ(dispatch, getI18nString("check_network_compatibility.error_bell.library_publish.message"));
       break;
     case jO.NoItemsToPublish:
-      dispatch(F.enqueue({
+      dispatch(VisualBellActions.enqueue({
         type: $$A0,
-        icon: zX.EXCLAMATION,
+        icon: VisualBellIcon.EXCLAMATION,
         error: !0,
         message: getI18nString("slides.templates.publish_actions.toast.no_items_error")
       }));
       break;
     case jO.ErrorCode:
-      dispatch(413 === e.errorCode ? F.enqueue({
+      dispatch(413 === e.errorCode ? VisualBellActions.enqueue({
         type: $$A0,
         error: !0,
         message: getI18nString("slides.templates.publish_actions.toast.long_name_error")
-      }) : F.enqueue({
+      }) : VisualBellActions.enqueue({
         type: $$A0,
         error: !0,
         message: getI18nString("slides.templates.publish_actions.toasts.publish_error.generic")
       }));
       break;
     default:
-      dispatch(F.enqueue({
+      dispatch(VisualBellActions.enqueue({
         type: $$A0,
         error: !0,
         message: getI18nString("slides.templates.publish_actions.toasts.publish_error.generic")
@@ -161,9 +161,9 @@ function I(e) {
   }
 }
 export function $$E1(e) {
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     type: $$A0,
-    icon: zX.EXCLAMATION,
+    icon: VisualBellIcon.EXCLAMATION,
     error: !0,
     message: getI18nString("slides.templates.publish_actions.toast.no_items_error")
   }));

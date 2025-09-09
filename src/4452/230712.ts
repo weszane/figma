@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -11,7 +11,7 @@ import { oW } from "../905/675859";
 import { qc } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { b as _$$b, A as _$$A } from "../905/723768";
 import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -39,24 +39,24 @@ export let $$A0 = registerModal(function (e) {
     _$$c.approveResourceConnectionInvite(e.resourceConnectionInvite.id).then(() => {
       N(!1);
       a();
-      t(F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("resource_connection.visual_bell.connection_request_approved")
       }));
     }).catch(e => {
       N(!1);
       a();
-      "Connecting plan has reached active connection and outgoing invite limit" === e.message ? t(F.enqueue({
+      "Connecting plan has reached active connection and outgoing invite limit" === e.message ? t(VisualBellActions.enqueue({
         message: S?.key.type === FOrganizationLevelType.TEAM ? getI18nString("resource_connection.visual_bell.org_at_limit") : getI18nString("resource_connection.visual_bell.team_at_limit"),
         error: !0
-      })) : "Connecting plan cannot have external collaboration controls enabled" === e.message ? t(F.enqueue({
+      })) : "Connecting plan cannot have external collaboration controls enabled" === e.message ? t(VisualBellActions.enqueue({
         message: getI18nString("resource_connection.visual_bell.org_must_disable_ecc"),
         error: !0
-      })) : "Host settings" === e.message ? t(F.enqueue({
+      })) : "Host settings" === e.message ? t(VisualBellActions.enqueue({
         message: getI18nString("resource_connection.visual_bell.host_settings", {
           hostPlanName: R.name
         }),
         error: !0
-      })) : t(F.enqueue({
+      })) : t(VisualBellActions.enqueue({
         message: getI18nString("resource_connection.visual_bell.generic_error"),
         error: !0
       }));
@@ -177,13 +177,13 @@ export let $$A0 = registerModal(function (e) {
                   _$$c.denyResourceConnectionInvite(e.resourceConnectionInvite.id).then(() => {
                     N(!1);
                     a();
-                    t(F.enqueue({
+                    t(VisualBellActions.enqueue({
                       message: getI18nString("resource_connection.visual_bell.connection_request_denied")
                     }));
                   }).catch(e => {
                     N(!1);
                     console.error("Error denying resource connection invite", e);
-                    t(F.enqueue({
+                    t(VisualBellActions.enqueue({
                       message: getI18nString("resource_connection.visual_bell.generic_error"),
                       error: !0
                     }));

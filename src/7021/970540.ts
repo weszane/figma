@@ -1,7 +1,7 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { OC } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { Q7 } from "../905/98947";
@@ -72,7 +72,7 @@ export function $$m2(e, t) {
 }
 export function $$_0() {
   let e = useAtomWithSubscription(Q7);
-  let t = iZ();
+  let t = selectCurrentUser();
   return e || t?.email?.split("@")[0];
 }
 export const K2 = $$_0;

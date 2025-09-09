@@ -23,4 +23,5 @@ var b = p(function (e, r) {
   for (var b = r.length; b--;) o(n, r[b]);
   return n;
 });
+// lodash omit
 module.exports = b;

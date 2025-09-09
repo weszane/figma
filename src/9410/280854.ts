@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { UserActionState } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
 import { p8 } from "../figma_app/722362";

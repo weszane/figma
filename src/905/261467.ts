@@ -5,10 +5,10 @@ import type { Fn } from '../../types/global';
 import { R as _$$R } from '../905/22352';
 import { z4 } from '../905/37051';
 import { d as _$$d } from '../905/68441';
-import { F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { debugState } from '../905/407919';
-import { pN, WW, Ym } from '../905/571565';
-import { zX } from '../905/576487';
+import { dequeuePluginStatus, formatPluginName, notifyPluginStatus } from '../905/571565';
+import { VisualBellIcon } from '../905/576487';
 import { getLocalStorage } from '../905/657224';
 import { Y } from '../905/696438';
 import { Point } from '../905/736624';
@@ -192,7 +192,7 @@ export class PluginUIManager {
     atomStoreManager.set(_$$d, {
       titleIconURL: this.titleIconURL,
       titleIconSvgSrc: this.titleIconURL ? undefined : _$$A,
-      title: this.iframeTitle || WW(this.title, this.vmType)
+      title: this.iframeTitle || formatPluginName(this.title, this.vmType)
     });
     if (this.iframeId === PluginIframeMode.MODAL) {
       atomStoreManager.set(_$$D, {
@@ -570,10 +570,10 @@ export class PluginUIManager {
       error: options.error
     };
     if (this.titleIconURL) {
-      notification.icon = zX.FROM_URL;
+      notification.icon = VisualBellIcon.FROM_URL;
       notification.iconURL = this.titleIconURL;
     }
-    fullscreenValue.dispatch(F.enqueue(notification));
+    fullscreenValue.dispatch(VisualBellActions.enqueue(notification));
     if (!this.showingInnerIframe) this.showProgress();
     this.lastNotificationTimeout = Math.max(this.lastNotificationTimeout, Date.now()) + options.timeout;
   }
@@ -583,7 +583,7 @@ export class PluginUIManager {
    * (Original: cancelPluginVisualBell)
    */
   cancelPluginVisualBell(type: string): void {
-    fullscreenValue.dispatch(F.dequeue({
+    fullscreenValue.dispatch(VisualBellActions.dequeue({
       matchType: type
     }));
   }
@@ -593,7 +593,7 @@ export class PluginUIManager {
    * (Original: cancelNonErrorPersistentVisualBells)
    */
   cancelNonErrorPersistentVisualBells(): void {
-    fullscreenValue.dispatch(F.dequeue({
+    fullscreenValue.dispatch(VisualBellActions.dequeue({
       shouldDequeueFunc: (e: any) => e.type !== 'plugins-runtime-error' && _$$R(e) === Infinity
     }));
   }
@@ -603,7 +603,7 @@ export class PluginUIManager {
    * (Original: cancelAllCustomNotifyVisualBells)
    */
   cancelAllCustomNotifyVisualBells(): void {
-    fullscreenValue.dispatch(F.dequeue({
+    fullscreenValue.dispatch(VisualBellActions.dequeue({
       shouldDequeueFunc: (e: any) => {
         const re = /message-from-plugin-*/;
         const isMatch = !!e.type && re.test(e.type);
@@ -618,7 +618,7 @@ export class PluginUIManager {
    * (Original: hideProgress)
    */
   hideProgress(): void {
-    pN({
+    dequeuePluginStatus({
       shouldShowVisualBell: this.shouldShowVisualBell
     });
   }
@@ -634,7 +634,7 @@ export class PluginUIManager {
   } = {}): void {
     if (this.triggeredFrom !== 'codegen' && (this.terminateInspectPluginIfNoIframe(), fullscreenValue && fullscreenValue.isReady() && this.shouldShowVisualBell && !this.hideVisibleUI)) {
       const delay = isBackground ? 50 : this.isPanelIframe() ? 4000 : undefined;
-      Ym({
+      notifyPluginStatus({
         name: this.title,
         isInsert: this.getIsInsert(),
         cancelCallback: this.cancelCallback,

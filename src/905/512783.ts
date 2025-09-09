@@ -12,9 +12,8 @@ import { LX } from '../figma_app/70421';
 import { isNullish } from '../figma_app/95419';
 import { buildStaticUrl } from '../figma_app/169182';
 import { U6 } from '../figma_app/591738';
-import { cZ } from '../figma_app/806412';
 import { sP } from '../figma_app/819288';
-import { deregisterRecording, registerRecording } from '../figma_app/878298';
+import { deregisterRecording, handleMouseEvent, registerRecording } from '../figma_app/878298';
 import d from '../vendor/128080';
 import o from '../vendor/197638';
 let E = e => e.ctrlKey || e.altKey || e.shiftKey || e.metaKey;
@@ -230,7 +229,7 @@ let T = class e extends HTMLElement {
       </div>
     </div>
     `);
-    this.onClick = cZ(this, 'click', e => {
+    this.onClick = handleMouseEvent(this, 'click', e => {
       this.onPinClick && (globalPerfTimer.start('view_comment_thread'), this.onPinClick(this.id, e));
     });
     this.pendingTimeout = null;

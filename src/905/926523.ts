@@ -2,7 +2,7 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { L_, Nr, HZ as _$$HZ } from "../905/890368";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { hm } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
@@ -24,7 +24,7 @@ let $$h1 = createOptimistThunk((e, {
     data: i
   }) => {
     e.dispatch($$u3(i.meta));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       error: !1,
       type: "profile-merge-update",
       message: getI18nString("community.actions.your_profile_s_primary_email_was_set_to_email", {
@@ -33,7 +33,7 @@ let $$h1 = createOptimistThunk((e, {
     }));
   }).catch(t => {
     let i = J(t);
-    i && e.dispatch(F.enqueue({
+    i && e.dispatch(VisualBellActions.enqueue({
       error: !0,
       type: "profile-merge-update",
       message: i
@@ -57,7 +57,7 @@ let $$g0 = createOptimistThunk((e, {
     data: i
   }) => {
     e.dispatch($$u3(i.meta));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       error: !1,
       type: "profile-merge-update",
       message: getI18nString("community.actions.email_was_removed_from_your_profile", {
@@ -67,7 +67,7 @@ let $$g0 = createOptimistThunk((e, {
     e.dispatch(hm());
   }).catch(t => {
     let i = J(t);
-    i && e.dispatch(F.enqueue({
+    i && e.dispatch(VisualBellActions.enqueue({
       error: !0,
       type: "profile-merge-update",
       message: i
@@ -91,14 +91,14 @@ let $$f5 = createOptimistThunk((e, {
     data: t
   }) => {
     e.dispatch($$u3(t.meta));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "profile-merge-update",
       message: getI18nString("community.actions.new_profile_connection_added")
     }));
     e.dispatch(hm());
   }).catch(t => {
     let i = J(t);
-    i && e.dispatch(F.enqueue({
+    i && e.dispatch(VisualBellActions.enqueue({
       error: !0,
       type: "profile-merge-update",
       message: getI18nString("community.actions.failed_to_merge_msg", {

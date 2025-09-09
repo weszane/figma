@@ -6,7 +6,7 @@ import { Z as _$$Z } from "../905/515860";
 import { canAdminTeam } from "../figma_app/642025";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { hS } from "../905/437088";
 import { setupAutofocusHandler } from "../905/128376";
 import { bL } from "../905/38914";
@@ -19,14 +19,14 @@ import { Rs } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
 import { XHR } from "../905/910117";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { sf } from "../905/929976";
 import { yJ, bE } from "../figma_app/78808";
 import { bE as _$$bE } from "../905/466026";
-import { dDF } from "../figma_app/43951";
+import { FileCanEdit } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
 import { registerModal } from "../905/102752";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Us } from "../figma_app/637027";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -45,7 +45,7 @@ function N(e) {
   let [i, r] = useState("");
   let [s, o] = useState(!1);
   let l = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.nodeId : void 0);
-  let R = Rs(dDF, {
+  let R = Rs(FileCanEdit, {
     key: e.sourceFileKey
   });
   let N = r => {
@@ -88,7 +88,7 @@ function N(e) {
     }).catch(e => {
       o(!1);
       let i = e?.data?.message || "an error occurred";
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: `Unable to create branch: ${i}`,
         error: !0
       }));
@@ -494,7 +494,7 @@ let X = registerModal(function ({
       n(hideModal());
     },
     onClickSecondaryCta: t ? () => {
-      _$$Ay.unsafeRedirect($, "_blank");
+      customHistory.unsafeRedirect($, "_blank");
       hideModal();
     } : void 0,
     primaryCtaText: renderI18nText(t ? "oss_exposure_branching_upsell_modal.primary_cta" : "oss_exposure_branching_upsell_modal.nonadmin.cta"),

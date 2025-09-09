@@ -8,7 +8,7 @@ import { e as _$$e } from "../905/621515";
 import { d9, $5 } from "../3276/240191";
 import { PD } from "../figma_app/101956";
 import { r1 } from "../figma_app/545877";
-import { J$ } from "../905/372672";
+import { getUserCreatedAt } from "../905/372672";
 import { M8 } from "../figma_app/915202";
 import { N } from "../figma_app/268271";
 import { h as _$$h2 } from "../905/284399";
@@ -86,7 +86,7 @@ export function $$M0() {
   let t = useAtomWithSubscription(PD);
   let n = useAtomWithSubscription($5);
   let u = useAtomWithSubscription(T);
-  let x = J$();
+  let x = getUserCreatedAt();
   let b = A().subtract(7, "day").isBefore(A(x));
   let y = _$$e({
     overlay: aI5,

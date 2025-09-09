@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Pw } from "../905/521428";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { GG } from "../905/511649";
 import { Point } from "../905/736624";
 import { renderI18nText } from "../905/303541";
@@ -419,7 +419,7 @@ export let $$E0 = registerModal(function (e) {
         variant: "primary",
         children: x
       }), jsx(GG, {
-        recordingKey: Pt("freemiumApiPreCheckoutModal", "cancel"),
+        recordingKey: generateRecordingKey("freemiumApiPreCheckoutModal", "cancel"),
         onClick: f,
         className: "freemium_api_pre_checkout_modal--link--SCOub text--fontPos13--xW8hS text--_fontBase--QdLsd",
         children: renderI18nText("community.buyer.maybe_later")

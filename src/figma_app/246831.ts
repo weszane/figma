@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useEffect, useContext, useCallback, useMemo, useState, useId } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { _m } from "../vendor/891888";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { assertNotNullish, isNullish } from "../figma_app/95419";
@@ -23,7 +23,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { ms, c$ } from "../figma_app/236327";
 import { M3, dP } from "../figma_app/119475";
@@ -193,7 +193,7 @@ let eD = memo(function ({
             children: P$(e.meta?.style_thumbnail)
           }), X && jsx(K0, {
             className: zm,
-            recordingKey: Pt(t, "clearTextStyleOverridesButton"),
+            recordingKey: generateRecordingKey(t, "clearTextStyleOverridesButton"),
             "data-tooltip": getI18nString("design_systems.styles.clear_overrides_over_text_style"),
             "data-tooltip-type": Ib.TEXT,
             svg: _$$A3,
@@ -202,7 +202,7 @@ let eD = memo(function ({
         }), g && jsx("div", {
           className: "x6s0dn4 x78zum5 x3psx0u x5yr21d xl56j7k xugbqxq xctkrei x10l6tqk x3m8u43 x13vifvy x17dzmu4 x7r3dqx",
           children: jsx(_$$d, {
-            recordingKey: Pt(t, "editStyleButton"),
+            recordingKey: generateRecordingKey(t, "editStyleButton"),
             "data-tooltip": getI18nString("design_systems.styles.edit_style"),
             "data-tooltip-type": Ib.TEXT,
             onClick: j,
@@ -233,7 +233,7 @@ let eD = memo(function ({
         children: P$(e.meta?.style_thumbnail)
       }), X && jsx(K0, {
         className: zm,
-        recordingKey: Pt(t, "clearTextStyleOverridesButton"),
+        recordingKey: generateRecordingKey(t, "clearTextStyleOverridesButton"),
         "data-tooltip": getI18nString("design_systems.styles.clear_overrides_over_text_style"),
         "data-tooltip-type": Ib.TEXT,
         svg: _$$A3,
@@ -241,7 +241,7 @@ let eD = memo(function ({
         onMouseDown: e => e.stopPropagation()
       }), g && jsx(YW, {
         className: em()(q, Z),
-        recordingKey: Pt(t, "editStyleButton"),
+        recordingKey: generateRecordingKey(t, "editStyleButton"),
         "data-tooltip": getI18nString("design_systems.styles.edit_style"),
         "data-tooltip-type": Ib.TEXT,
         svg: _$$A2,
@@ -335,7 +335,7 @@ function ek({
               initialFocusRef: l,
               isEditable: d,
               isSelected: o,
-              recordingKey: Pt(i, "styleGrid", e.isLocal ? "localStyleSection" : p, e.name),
+              recordingKey: generateRecordingKey(i, "styleGrid", e.isLocal ? "localStyleSection" : p, e.name),
               searchQuery: r,
               styleIndex: c
             })
@@ -468,12 +468,12 @@ export function $$eF1({
       inputProps: en.getInputProps({
         value: w,
         onChange: O,
-        recordingKey: Pt(t, "styleSearchBar")
+        recordingKey: generateRecordingKey(t, "styleSearchBar")
       }),
       setQuery: O,
       setKeyboardNavigationItem: ea,
       scrollToTop: x,
-      recordingKey: Pt(t, "styleSearchBar"),
+      recordingKey: generateRecordingKey(t, "styleSearchBar"),
       onClose: eo
     }), "loaded" === D.status && !e_ && jsx($$ej4, {
       recordingKey: t,
@@ -539,7 +539,7 @@ function eU({
         className: "style_picker--browseLibrariesButton--KtnxN",
         children: jsx($n, {
           onClick: i,
-          recordingKey: Pt(e, "browseLibraries"),
+          recordingKey: generateRecordingKey(e, "browseLibraries"),
           variant: "secondary",
           iconPrefix: jsx(_$$l, {}),
           "aria-label": getI18nString("design_systems.styles.buttons.browse"),
@@ -661,7 +661,7 @@ function eG({
         t.modal && n();
       },
       showStyleDetails(e, t, n) {
-        if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && EF(stylePreviewShown.style, e)) i();else {
+        if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && EF(stylePreviewShown.style, e)) i(); else {
           debug(null != e.content_hash, "style does not have a hash");
           let i = e.isLocal ? e.node_id : StylesBindings.getStyleNodeId(e.key, e.content_hash);
           isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : Eo.getCanvas(e).then(e => {
@@ -736,7 +736,7 @@ function eG({
             onClick: eE,
             onClose: ef,
             onDragEnd: ey,
-            recordingKey: Pt(e, "draggableModal"),
+            recordingKey: generateRecordingKey(e, "draggableModal"),
             title: jsxs("div", {
               className: "style_picker--pickerTitleRow--Eoe-0",
               children: [jsx("div", {
@@ -753,7 +753,7 @@ function eG({
                 "aria-label": getI18nString("design_systems.styles.tooltips.library")
               }), ("FILL" === r || "STROKE" === r) && N && jsx(_$$K, {
                 "aria-label": S ? getI18nString("design_systems.styles.tooltips.show_as_grid") : getI18nString("design_systems.styles.tooltips.show_as_list"),
-                recordingKey: Pt(e, "toggleStylePickerListLayout"),
+                recordingKey: generateRecordingKey(e, "toggleStylePickerListLayout"),
                 onClick: N,
                 disabled: l,
                 htmlAttributes: {
@@ -765,7 +765,7 @@ function eG({
                 className: "style_picker--createStyleButton--UcGo9",
                 children: jsx(_$$K, {
                   "aria-label": getI18nString("design_systems.styles.tooltips.create"),
-                  recordingKey: Pt(e, "addStyleButton"),
+                  recordingKey: generateRecordingKey(e, "addStyleButton"),
                   disabled: !L || eb && !eT,
                   onClick: () => L?.(eh?.left ?? Z.x, eh?.top ?? Z.y),
                   htmlAttributes: {

@@ -5,7 +5,7 @@ import { yJ, bE, sF } from "../figma_app/78808";
 import { OB, M3, ST } from "../figma_app/91703";
 import { MV, lX, Xk, zU, q0, N, hh } from "../figma_app/107215";
 import { ge } from "../figma_app/349248";
-import { K } from "../905/301652";
+import { generateAnonymouseName } from "../905/301652";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
 export let $$p1 = {
   view: "recentsAndSharing"
@@ -52,7 +52,7 @@ export function $$m0(e = $$p1, t) {
   };else if (lX.matches(t) && "fullscreen" === e.view) {
     let i = e.workshopUserNames || {};
     let r = !!t.payload && t.payload.id;
-    let a = !!r && localStorage.getItem(K(r));
+    let a = !!r && localStorage.getItem(generateAnonymouseName(r));
     r && a && (i[r] = a);
     let s = !!getStorage().get(Xk);
     return {

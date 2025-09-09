@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, Suspense } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
@@ -16,8 +16,8 @@ import { h1 } from "../905/986103";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Y as _$$Y } from "../905/830372";
 import { E as _$$E } from "../905/984674";
 import { j as _$$j } from "../905/584270";
@@ -35,7 +35,7 @@ import { Gu, ud } from "../905/513035";
 import { Ye, N_ } from "../905/332483";
 import { I as _$$I } from "../905/343211";
 import { d as _$$d } from "../figma_app/603561";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FOrganizationLevelType, FBillingPeriodType, FSeatAssignmentReasonType, FUpgradeReasonType, FApprovalMethodType } from "../figma_app/191312";
 import { vr } from "../figma_app/514043";
 import { T5 } from "../figma_app/465071";
@@ -268,10 +268,10 @@ function ee({
       userName: p
     });
     t();
-    v(_$$F.enqueue({
+    v(VisualBellActions.enqueue({
       message: e,
       type: "plan-user-seat-change",
-      icon: zX.CHECK_WITH_CIRCLE
+      icon: VisualBellIcon.CHECK_WITH_CIRCLE
     }));
   }, [v, t, p, _, m]);
   let O = _$$N({
@@ -288,7 +288,7 @@ function ee({
     onSuccess: C,
     onFailure: N
   });
-  let L = iZ();
+  let L = selectCurrentUser();
   let P = _$$u();
   return jsx(wi, {
     children: jsxs(jk, {

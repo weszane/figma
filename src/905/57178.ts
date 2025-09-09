@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/632989";
 import { Multiplayer } from "../figma_app/763686";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Gc } from "../905/63728";
 import { tu, oJ } from "../figma_app/385215";
 import { hk } from "../figma_app/632319";
@@ -153,7 +153,7 @@ let L = {
   "view-profile": function (e) {
     let t = Gc(t => {
       t.stopPropagation();
-      Ay.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
+      customHistory.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
     });
     return jsx(P, {
       actionText: renderI18nText("avatar.tooltip.view_profile"),
@@ -215,7 +215,7 @@ let L = {
     }, [e.userSessionID, d, t]);
     let f = Gc(t => {
       t.stopPropagation();
-      Ay.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
+      customHistory.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
     });
     let _ = i && !!e.sitesViewState && _$$a(e.sitesViewState);
     return s ? jsx(O, {

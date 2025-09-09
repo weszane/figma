@@ -2,7 +2,7 @@ import { handleOptimistTransaction } from "../905/842794";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { Q, s as _$$s } from "../905/573154";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { h as _$$h } from "../905/142086";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
@@ -203,14 +203,14 @@ let z = createOptimistThunk((e, {
     })), m && u && p) {
       let i = t.user.email;
       "handle" in t.user && (i = t.user.handle);
-      e.dispatch(_$$F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         type: "file-moved",
         message: `${i} can now edit '${u.name}' in ${CI(p)}`
       }));
     }
     l?.();
   }).catch(i => {
-    m && u && p && e.dispatch(_$$F.enqueue({
+    m && u && p && e.dispatch(VisualBellActions.enqueue({
       type: "file-moved",
       message: `Moved '${u.name}' to ${CI(p)}`
     }));
@@ -267,12 +267,12 @@ let H = createOptimistThunk((e, {
     level: s
   });
   _.then(() => {
-    g && p && m && e.dispatch(_$$F.enqueue({
+    g && p && m && e.dispatch(VisualBellActions.enqueue({
       type: "file-moved",
       message: `${f} can now edit '${p.name}' in ${CI(m)}`
     }));
   }).catch(t => {
-    g && p && m && e.dispatch(_$$F.enqueue({
+    g && p && m && e.dispatch(VisualBellActions.enqueue({
       type: "file-moved",
       message: `Moved '${p.name}' to ${CI(m)}`
     }));

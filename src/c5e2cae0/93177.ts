@@ -1,11 +1,11 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { xf } from "../figma_app/416935";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { ZC } from "../figma_app/39751";
 import { getPaymentFlowData, clearPaymentFlowData } from "../figma_app/169182";
@@ -57,7 +57,7 @@ import { kt, pI, Al, lX, dT } from "../9420/394825";
 import { KQ } from "../figma_app/475472";
 import { y4 } from "../figma_app/298277";
 import { FC } from "../figma_app/212807";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { LM, z4 } from "../figma_app/518077";
 import { M4 } from "../905/713695";
 import { LN, ub } from "../figma_app/514043";
@@ -468,7 +468,7 @@ let eJ = M4.Query({
 });
 function eY(e) {
   let t;
-  let a = iZ();
+  let a = selectCurrentUser();
   let l = a?.id;
   let n = getPaymentFlowData();
   let x = useSelector(e => e.payment);
@@ -685,7 +685,7 @@ function eY(e) {
     }));
   }, [to, e.selectedView.isEduTeam, tE]);
   useEffect(() => {
-    e.selectedView.teamFlowType === SC.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) && (Ay.redirect("/"), to(_$$s2.error(getI18nString("team_creation.missing_team_creation_controls"))));
+    e.selectedView.teamFlowType === SC.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) && (customHistory.redirect("/"), to(_$$s2.error(getI18nString("team_creation.missing_team_creation_controls"))));
   }, [e.selectedView.teamFlowType, tb, cannotCreateTeamReason, to]);
   let tA = x.currencyToSwitch;
   useEffect(() => {

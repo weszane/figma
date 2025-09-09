@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ei } from "../figma_app/9054";
 import { i as _$$i } from "../figma_app/553327";
 import { dU } from "../9410/461336";

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback, Component } from "react";
-import { connect, useDispatch } from "../vendor/514228";
+import { connect, useDispatch } from "react-redux";
 import { isMobileUA, BrowserInfo } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
 import { d9 } from "../figma_app/740025";

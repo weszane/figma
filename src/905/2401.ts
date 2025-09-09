@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useContext } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { o as _$$o } from "../905/347208";
 import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { isInvalidValue } from "../905/216495";
@@ -111,7 +111,7 @@ function E({
     inputClassName: e,
     currentFieldValue: t,
     isActive: d?.isShowingBindingUI ?? !1,
-    recordingKey: Pt(s, "variableControl"),
+    recordingKey: generateRecordingKey(s, "variableControl"),
     onPickerOpen: u,
     children: o
   });

@@ -1,12 +1,12 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { sortByPropertyWithOptions, MAX_LENGTH } from "../figma_app/656233";
 import { E as _$$E } from "../905/632989";
 import { g as _$$g } from "../905/687265";
 import { l as _$$l } from "../905/716947";
 import { Ay } from "@stylexjs/stylex";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import m from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
@@ -317,7 +317,7 @@ export function $$eo1({
   });
   let ex = useMemo(() => Ow(V.results.normalizedSearchResults), [V.results.normalizedSearchResults]);
   let eh = useSelector(MH);
-  let ef = k9(() => Object.values(eh), [eh]);
+  let ef = useMemoStable(() => Object.values(eh), [eh]);
   return V.query && e ? V.isLoading ? jsx(ZA, {}) : jsx(fu, {
     name: "stickers",
     properties: {

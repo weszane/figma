@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { arraysEqual } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
 import { sha1HexFromBytes } from "../905/125019";
@@ -26,7 +26,7 @@ import { aV, dH } from "../figma_app/722362";
 import { Ef, se, HS, yx } from "../figma_app/546509";
 import { WC, T$, wi } from "../figma_app/792783";
 import { getObservableValue } from "../figma_app/84367";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { t as _$$t } from "../905/192333";
 import { Yh } from "../figma_app/357047";
 import { b as _$$b } from "../905/635568";
@@ -1496,7 +1496,7 @@ export function $$em6() {
       if (n) {
         let t = setTimeout(() => {
           window.FigmaMobile.nativeToolbarSupportedVersions = void 0;
-          n._native_toolbar_confirm_configuration = () => {};
+          n._native_toolbar_confirm_configuration = () => { };
           reportError(_$$e.FIGJAM, Error(`Native toolbar did not confirm configuration before timeout, version ${e}`));
         }, 2e3);
         n._native_toolbar_confirm_configuration = () => {
@@ -1551,7 +1551,7 @@ export function $$em6() {
           onChange({
             ...paint,
             transform: a
-          }, zk.NO);
+          }, yesNoTrackingEnum.NO);
           break;
         default:
           console.error(`_native_toolbar_set_slider_value: tool ${t} not recognized`);
@@ -1794,7 +1794,7 @@ export function $$eE0() {
     return "REACTING_OR_CHATTING" === t.type && !!t.imageUrl;
   });
   let Z = useCallback(e => {
-    if (q) CB.closeWheel();else {
+    if (q) CB.closeWheel(); else {
       let {
         viewportX,
         viewportY

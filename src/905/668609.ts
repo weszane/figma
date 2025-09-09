@@ -23,13 +23,13 @@ import { t as _$$t2 } from "../905/398894";
 import { DesignGraphElements } from "../figma_app/763686";
 import { defaultSessionLocalID } from "../905/871411";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { rM } from "../figma_app/241541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { A5, lJ } from "../905/275640";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { u as _$$u2 } from "../figma_app/110635";
 import { T6 } from "../figma_app/156285";
 import { lF, Y4 } from "../figma_app/384713";
@@ -384,27 +384,27 @@ let $$em4 = ed(function ({
     Basic: () => {
       E();
       e?.();
-      p(defaultSessionLocalID, zk.NO);
-      m(lF, zk.YES);
+      p(defaultSessionLocalID, yesNoTrackingEnum.NO);
+      m(lF, yesNoTrackingEnum.YES);
     },
     Dynamic: () => {
-      if (E(), e?.(), p(defaultSessionLocalID, zk.NO), b("CENTER", zk.NO), I("MITER", zk.NO), h && isValidValue(h) && h.length > 0) {
-        g([], zk.NO);
+      if (E(), e?.(), p(defaultSessionLocalID, yesNoTrackingEnum.NO), b("CENTER", yesNoTrackingEnum.NO), I("MITER", yesNoTrackingEnum.NO), h && isValidValue(h) && h.length > 0) {
+        g([], yesNoTrackingEnum.NO);
         let e = getI18nString("visual_bell.dynamic_stroke_vector_network_warning");
         fullscreenValue.showVisualBellWithUndo("dynamic-stroke-vector-network-warning", e, !1);
       }
-      m(Y4, zk.YES);
+      m(Y4, yesNoTrackingEnum.YES);
       activeToolId === DesignGraphElements.VECTOR_VAR_WIDTH_POINT && activateTool(DesignGraphElements.SELECT);
       Sprig("setAttribute", "is_assets_visual_style_user", !0);
     },
     Brush: () => {
       E();
       e?.();
-      I("ROUND", zk.NO);
-      v("NONE", zk.NO);
-      b("CENTER", zk.NO);
-      m(lF, zk.NO);
-      p(s ?? defaultSessionLocalID, zk.YES);
+      I("ROUND", yesNoTrackingEnum.NO);
+      v("NONE", yesNoTrackingEnum.NO);
+      b("CENTER", yesNoTrackingEnum.NO);
+      m(lF, yesNoTrackingEnum.NO);
+      p(s ?? defaultSessionLocalID, yesNoTrackingEnum.YES);
       Sprig("setAttribute", "is_assets_visual_style_user", !0);
     }
   }), [s, p, m, g, h, b, v, I, e, E, Sprig, activeToolId, activateTool]);
@@ -413,7 +413,7 @@ let $$em4 = ed(function ({
     children: [jsx(k, {
       "aria-label": getI18nString("fullscreen.properties_panel.add"),
       ...getTriggerProps(),
-      recordingKey: Pt(i, "triggerButton"),
+      recordingKey: generateRecordingKey(i, "triggerButton"),
       children: jsx(_$$O, {})
     }), jsx(mc, {
       children: Object.keys(el).map(e => {
@@ -427,7 +427,7 @@ let $$em4 = ed(function ({
           getLabel,
           isSelected: x === e,
           callback: T[e],
-          recordingKey: Pt(i, "menuOption", e)
+          recordingKey: generateRecordingKey(i, "menuOption", e)
         });
       })
     })]

@@ -4,7 +4,7 @@ import { atom } from "../figma_app/27355";
 import { oA } from "../905/723791";
 import { Z } from "../905/296690";
 import { yV } from "../figma_app/516028";
-import { gDr, bEy } from "../figma_app/43951";
+import { ApprovedLibrariesForWorkspaceView, ApprovedLibrariesForOrgViewV2 } from "../figma_app/43951";
 import { LM } from "../figma_app/951233";
 import { Oe } from "../figma_app/336853";
 import { Me } from "../figma_app/598018";
@@ -21,7 +21,7 @@ let $$m4 = atom(e => {
     if (Oe(t)) return n?.workspace_id;
   })();
   if (!t) return;
-  let i = e(gDr.Query({
+  let i = e(ApprovedLibrariesForWorkspaceView.Query({
     workspaceId: t
   }));
   return i.data?.workspace ?? void 0;
@@ -33,7 +33,7 @@ let $$h3 = atom(e => {
 let $$g2 = atom(e => {
   let t = e(Z);
   if (!t || !Oe(t)) return new Set([]);
-  let i = e(bEy.Query({
+  let i = e(ApprovedLibrariesForOrgViewV2.Query({
     orgId: t.id
   }));
   return A(i.data?.org?.approvedLibraries ?? []);
@@ -43,7 +43,7 @@ let $$f0 = atom(e => {
     let t = e(Z);
     let i = e(LM);
     if (!i || !Oe(t)) return;
-    let n = e(gDr.Query({
+    let n = e(ApprovedLibrariesForWorkspaceView.Query({
       workspaceId: i
     }));
     return n.data?.workspace ?? void 0;

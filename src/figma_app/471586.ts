@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
@@ -40,7 +40,7 @@ export function $$y0(e) {
     type: "button",
     onClick: () => {
       complete();
-      Ay.redirect("/files/drafts-to-move");
+      customHistory.redirect("/files/drafts-to-move");
     },
     ctaTrackingDescriptor: _$$c.DONE
   } : b;

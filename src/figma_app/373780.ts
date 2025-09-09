@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, createContext, useMemo, useRef, useContext, useCallback, memo, useSyncExternalStore, useLayoutEffect, useId, Children } from "react";
-import { useSelector, useStore, useDispatch, shallowEqual } from "../vendor/514228";
+import { useSelector, useStore, useDispatch, shallowEqual } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { mergeRefs } from "../figma_app/706870";
@@ -11,7 +11,7 @@ import { isAnyMobile } from "../figma_app/778880";
 import { Yx } from "../figma_app/930338";
 import { tH } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { mC } from "../905/193529";
 import { e as _$$e } from "../905/810168";
 import { k4 } from "../figma_app/290668";
@@ -48,13 +48,13 @@ import { x as _$$x2 } from "../905/520155";
 import { j7 } from "../905/929976";
 import { K9 } from "../figma_app/8833";
 import { fullscreenValue } from "../figma_app/455680";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { B5, tp, cU, cH, Z3 } from "../figma_app/80462";
 import { s as _$$s2, w as _$$w } from "../figma_app/154255";
 import { rp, d2, Dm } from "../905/845277";
 import { l7, hA } from "../figma_app/88239";
 import { of, Gl } from "../figma_app/297733";
-import { k as _$$k2 } from "../905/651849";
+import { logger } from "../905/651849";
 import { E3 } from "../figma_app/976749";
 import { IM } from "../905/687477";
 import { kL, Qg } from "../figma_app/404319";
@@ -121,7 +121,7 @@ function z({
     let i = new Set(t.filter(e => !(e in d)));
     let a = new Set(e.filter(e => !(e in p.current)));
     let o = 1 === r ? $$G : V;
-    if (1 === r && 1 !== n) for (let e of Object.keys(d)) e in p.current && s.trigger(`selection-changed-${e}`, [o]);else if (1 === n && 1 !== r) for (let e of Object.keys(p.current)) e in d && s.trigger(`selection-changed-${e}`, [o]);
+    if (1 === r && 1 !== n) for (let e of Object.keys(d)) e in p.current && s.trigger(`selection-changed-${e}`, [o]); else if (1 === n && 1 !== r) for (let e of Object.keys(p.current)) e in d && s.trigger(`selection-changed-${e}`, [o]);
     for (let e of i) s.trigger(`selection-changed-${e}`, [void 0]);
     for (let e of a) s.trigger(`selection-changed-${e}`, [o]);
     p.current = d;
@@ -168,7 +168,7 @@ function W(e, t) {
       l(e => c2(e, t) ? e : t);
     };
     for (let n of (t([dK(debugState.getState())]), e)) r.on(`node-changed-${n}`, t);
-    return () => {};
+    return () => { };
   }, [s, r, e]);
   return o;
 }
@@ -444,7 +444,7 @@ function eE({
   let d = useRef(null);
   let c = _$$s2();
   let u = useCallback(t => {
-    t.target !== t.currentTarget || t.relatedTarget === t.currentTarget || n || (tJ([e]), fullscreenValue.commit(), l(QZ({
+    t.target !== t.currentTarget || t.relatedTarget === t.currentTarget || n || (replaceSelection([e]), fullscreenValue.commit(), l(QZ({
       nodeId: e,
       ...B5
     }), tp));
@@ -1268,7 +1268,7 @@ function e8() {
   let s = useDispatch();
   let o = useSelector(e => !!e.modalShown);
   useEffect(() => {
-    r && isAnyMobile && (o || s(_$$F.enqueue({
+    r && isAnyMobile && (o || s(VisualBellActions.enqueue({
       message: getI18nString("fullscreen.accessibility.platform_error"),
       role: "alert",
       type: "accessibility-dom-react-error"
@@ -1301,7 +1301,7 @@ function e8() {
     } = d;
     return jsx(tH, {
       onError: () => {
-        o || s(_$$F.enqueue({
+        o || s(VisualBellActions.enqueue({
           message: getI18nString("fullscreen.accessibility.dom_error"),
           role: "alert",
           type: "accessibility-dom-react-error"
@@ -1394,7 +1394,7 @@ function e6({
       n && (n instanceof HTMLTextAreaElement ? (null !== e && (n.value = e), void 0 !== t && void 0 !== r && (n.selectionStart = t, n.selectionEnd = r)) : n && n instanceof HTMLElement && (null !== e && (n.textContent = e), void 0 !== t && void 0 !== r && document.getSelection()?.setBaseAndExtent(n.firstChild ?? n, t, n.firstChild ?? n, r)));
     }, []);
     useEffect(() => void c(textValue, selectionStart ?? void 0, selectionEnd ?? void 0), [c, textValue, selectionStart, selectionEnd]);
-    useEffect(() => (eY && _$$k2.error("Input mirror hook registered multiple times"), eY = !0, () => void (eY = !1)), []);
+    useEffect(() => (eY && logger.error("Input mirror hook registered multiple times"), eY = !0, () => void (eY = !1)), []);
     useEffect(() => {
       let e = IM.customFocusElementReadWrite;
       if (e) {

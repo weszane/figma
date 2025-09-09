@@ -2,7 +2,7 @@ import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { Sc } from "../905/18797";
 import { N } from "../905/696711";
@@ -46,7 +46,7 @@ let $$m0 = createOptimistThunk((e, {
         default:
           t = getI18nString("team_user.actions.team_members_request_to_upgrade_succeeded");
       }
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: t,
         type: "pro-upgrade-request-sent"
       }));

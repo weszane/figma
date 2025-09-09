@@ -1,9 +1,9 @@
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { eU, tW } from "../figma_app/863319";
-import { qjT } from "../figma_app/43951";
+import { FavoritesByResourceId } from "../figma_app/43951";
 export function $$o0(e, t, i = null, l = null) {
-  let d = Rs(qjT, {
+  let d = Rs(FavoritesByResourceId, {
     resourceId: e,
     resourceType: t,
     orgId: i,

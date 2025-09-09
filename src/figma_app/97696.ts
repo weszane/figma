@@ -1,7 +1,7 @@
 import { H5 } from "../figma_app/617606";
 import { ChatMessageType } from "../figma_app/763686";
 import a from "../vendor/260986";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 var s = a;
 export function $$l2(e) {
   let t = e?.filter(e => e.type !== ChatMessageType.TOOL_MESSAGE);
@@ -29,7 +29,7 @@ export function $$c0(e) {
   return t ? t.id : null;
 }
 export function $$u1(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   return t ? e.filter(e => "user" === e.type && e.user.id === t.id).length : 0;
 }
 export const EY = $$c0;

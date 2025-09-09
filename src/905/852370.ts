@@ -1,11 +1,11 @@
 import { useState, useCallback, useMemo, useRef, useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { AppStateTsApi } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { WJ } from "../figma_app/379850";
 import { hA } from "../figma_app/88239";
 import { UU, At, _B as _$$_B } from "../figma_app/770088";
@@ -191,7 +191,7 @@ export function $$D0(e, t) {
       console.error("Calling submitNewComment with no write API");
       return;
     }
-    let n = _$$g();
+    let n = generateUUIDv4();
     globalPerfTimer.start(`comment_creation_${n}`);
     trackEventAnalytics("New comment Creating UUID", {
       uuid: n

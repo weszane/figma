@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { GT } from "../905/711212";
 import { EF } from "../905/709171";

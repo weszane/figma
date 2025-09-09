@@ -1,13 +1,13 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { NodePropertyCategory, DesignGraphElements, DrawingElementType } from "../figma_app/763686";
 import { ri, nc } from "../figma_app/15927";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { GI } from "../905/125333";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1, Y as _$$Y } from "../figma_app/91703";
@@ -109,7 +109,7 @@ function B(e) {
   let Z = jsx(v9, {
     strokeWeight: n.strokeWeight || wv,
     onChange: K,
-    recordingKey: Pt(e, "weight")
+    recordingKey: generateRecordingKey(e, "weight")
   });
   let q = jsx("span", {
     children: jsx(_$$o, {
@@ -119,7 +119,7 @@ function B(e) {
           strokeCap: e
         });
       },
-      recordingKey: Pt(e, "dashCap"),
+      recordingKey: generateRecordingKey(e, "dashCap"),
       label: getI18nString("fullscreen.properties_panel.stroke_settings.end_points"),
       kind: "endCap"
     })
@@ -128,7 +128,7 @@ function B(e) {
     className: "pencil_tool_panel--advancedStroke--1497y",
     children: jsx(_$$d, {
       onClick: () => {
-        if (e.pickerShown?.id === t) w(XE());else {
+        if (e.pickerShown?.id === t) w(XE()); else {
           if (!z) return;
           let e = cn(z.current);
           w(u1({
@@ -140,7 +140,7 @@ function B(e) {
       },
       "aria-expanded": W,
       "aria-label": getI18nString("fullscreen.pencil_tool.advanced_stroke_settings"),
-      recordingKey: Pt(e, "more"),
+      recordingKey: generateRecordingKey(e, "more"),
       htmlAttributes: {
         onMouseDown: e => e.stopPropagation(),
         "data-tooltip-type": Ib.TEXT,
@@ -208,7 +208,7 @@ function B(e) {
             paint: t,
             pickerInStyleCreationShown: e.pickerInStyleCreationShown,
             pickerShown: e.pickerShown,
-            recordingKey: Pt(e, n),
+            recordingKey: generateRecordingKey(e, n),
             sceneGraphSelection: e.sceneGraphSelection,
             selected: e.stylePickerShown.isShown ? e.pickerShown?.id === g : i,
             selectedPropertyType: NodePropertyCategory.STROKE_PRESET,
@@ -248,7 +248,7 @@ function B(e) {
       maxStrokeWeight: n.strokeWeight || wv,
       onChange: K,
       pickerShown: e.pickerShown,
-      recordingKey: Pt(e, "advanced"),
+      recordingKey: generateRecordingKey(e, "advanced"),
       strokeBrushGuid: $,
       strokeCap: n.strokeCap || "ROUND",
       strokeJoin: "ROUND",

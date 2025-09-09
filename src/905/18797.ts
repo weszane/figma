@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { r as _$$r } from "../905/520829";
 import { n as _$$n } from "../905/347702";
 let $$s4 = _$$n((e, t) => e[t] === _$$r.LOADING);

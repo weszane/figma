@@ -1,12 +1,12 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { y as _$$y } from "../905/582657";
 import { r as _$$r } from "../905/571562";
 import d from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Zl } from "../905/211621";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -79,7 +79,7 @@ export function $$k1(e) {
       className: c()($, _$$s.alignLeft.$),
       ref: H,
       onClick: q,
-      recordingKey: Pt("instanceSwapToggle", pickerID),
+      recordingKey: generateRecordingKey("instanceSwapToggle", pickerID),
       htmlAttributes: {
         id: $$w0,
         onMouseDown: dG,
@@ -111,7 +111,7 @@ export function $$k1(e) {
       pickerType: Zl.INSTANCE_SWAP_PICKER,
       preferredItems,
       preferredValuesErrorComponent,
-      recordingKey: Pt("instanceSwapPicker", pickerID),
+      recordingKey: generateRecordingKey("instanceSwapPicker", pickerID),
       selectedItems: Z,
       shouldPerformSwapOnClick,
       title

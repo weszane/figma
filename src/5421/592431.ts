@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { uN } from "../figma_app/338442";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { OE, O2 } from "../figma_app/164212";
@@ -41,7 +41,7 @@ export function $$x0({
       hideBindingButton: n,
       hideIcon: n,
       instanceSwapPickerIdPrefix: "code-editor" === d ? "code-editor-instance-swap-prop-assignment-picker-" : void 0,
-      recordingKey: Pt(t, "propDefs", uN.TYPED),
+      recordingKey: generateRecordingKey(t, "propDefs", uN.TYPED),
       sceneGraph: getSingletonSceneGraph(),
       typedPropDefs: typedPropDefsExcludingHidden,
       viewOnly: g

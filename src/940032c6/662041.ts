@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../5430/872214";
 import { W, B } from "../905/841666";

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { F7 } from "../905/859698";
 import { SceneGraphHelpers } from "../figma_app/763686";
 import { At } from "../905/973142";

@@ -1,6 +1,6 @@
 import { hV, PA } from "../figma_app/387100";
 import { fullscreenValue } from "../figma_app/455680";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { e as _$$e } from "../905/986107";
 import { QZ } from "../figma_app/62612";
 var $$l4 = (e => (e[e.FORWARD = 0] = "FORWARD", e[e.BACKWARD = 1] = "BACKWARD", e))($$l4 || {});
@@ -97,13 +97,13 @@ export async function $$y9({
   guidToFocus: t,
   guidToSelect: r
 }) {
-  wr();
+  clearSelection();
   await e(QZ({
     nodeId: t || r,
     alwaysPan: !1,
     minSizePx: t ? 200 : 32
   }));
-  Dh([r]);
+  addToSelection([r]);
   fullscreenValue.commit();
 }
 export const Qf = $$h0;

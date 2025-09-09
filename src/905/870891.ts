@@ -1,257 +1,435 @@
-import { Ay } from "../905/795642";
-import { aV } from "../905/187849";
-export class $$a0 {
-  constructor(e, t, i, a) {
-    this.parent = e;
-    this.queryDef = t;
-    this.observable = i;
-    this.context = a;
-    this.query = new aV(t, a, e.instance);
-    this.isPaginatedNodeFetching = !0;
-    this.clientIsFetching = !0;
-    let s = Ay.DEFAULT_INITIAL_COUNT;
-    this.children.push(new Ay(this, this.queryDef, this.observable, this.context, {
+import { QueryContext } from '../905/187849';
+import { QueryNode } from '../905/795642';
+
+/**
+ * Represents a paginated query node for managing pagination state and results.
+ */
+export class PaginatedQueryNode {
+  parent: any;
+  queryDef: any;
+  observable: any;
+  context: any;
+  children: QueryNode[] = [];
+  _status: {
+    type: string;
+    error?: any;
+  } = {
+    type: 'loading'
+  };
+  _result: any;
+  query: QueryContext;
+  _isLoaded = false;
+  nextCursor: {
+    start: any;
+    end: any;
+  } = {
+    start: null,
+    end: null
+  };
+  previousPageCountsForReconnection: number[] | null = null;
+  isPaginatedNodeFetching = false;
+  clientIsFetching = false;
+
+  /**
+   * Creates a new PaginatedQueryNode.
+   * @param parent Parent node
+   * @param queryDef Query definition
+   * @param observable Observable instance
+   * @param context Query context
+   */
+  constructor(parent: any, queryDef: any, observable: any, context: any) {
+    this.parent = parent;
+    this.queryDef = queryDef;
+    this.observable = observable;
+    this.context = context;
+    this.query = new QueryContext(queryDef, context, parent.instance);
+    this.isPaginatedNodeFetching = true;
+    this.clientIsFetching = true;
+    const initialCount = QueryNode.DEFAULT_INITIAL_COUNT;
+    this.children.push(new QueryNode(this, this.queryDef, this.observable, this.context, {
       before: this.nextCursor.start,
       after: this.nextCursor.end,
-      count: s,
+      count: initialCount,
       pageNumber: 1,
       startTime: performance.now()
     }));
     this.context.options?.paginationQueryNodeMap?.set(this.query.queryId, this);
   }
-  children = [];
-  _status = {
-    type: "loading"
-  };
-  _result;
-  query;
-  _isLoaded = !1;
-  nextCursor = {
-    start: null,
-    end: null
-  };
-  previousPageCountsForReconnection = null;
-  isPaginatedNodeFetching = !1;
-  clientIsFetching = !1;
-  get fieldName() {
+
+  /**
+   * Gets the field name for the query node.
+   */
+  get fieldName(): string {
     return this.queryDef.objectFieldDef.name;
   }
-  get path() {
-    return [...this.parent.path, "pagination-" + this.fieldName];
+
+  /**
+   * Gets the path for the query node.
+   */
+  get path(): string[] {
+    return [...this.parent.path, `pagination-${this.fieldName}`];
   }
-  result() {
-    if ("loading" === this._status.type) return {
-      status: "loading",
-      data: null,
-      errors: null
-    };
-    if ("failed" === this._status.type) {
-      let e = this._status.error.code;
+
+  /**
+   * Returns the result of the paginated query node.
+   * Handles loading, error, and loaded states.
+   */
+  result(): any {
+    if (this._status.type === 'loading') {
+      return {
+        status: 'loading',
+        data: null,
+        errors: null
+      };
+    }
+    if (this._status.type === 'failed') {
+      const code = this._status.error.code;
       this._result = {
-        status: "errors",
+        status: 'errors',
         data: null,
         errors: [{
-          code: e,
+          code,
           path: [this.fieldName],
-          error: Error(this._status.error.message),
+          error: new Error(this._status.error.message),
           retriable: this._status.error.retriable
         }]
       };
       return this._result;
     }
     if (this._result) return this._result;
-    let e = [];
-    let t = [];
-    let i = !0;
-    for (let n of this.children) {
-      let r = n.result();
-      switch (r.status) {
-        case "loading":
-          this._result = r;
+    let data: any[] = [];
+    let errors: any[] = [];
+    let allLoaded = true;
+    for (const child of this.children) {
+      const childResult = child.result();
+      switch (childResult.status) {
+        case 'loading':
+          this._result = childResult;
           return this._result;
-        case "errors":
-          for (let e of (i = !1, r.errors)) t.push({
-            ...e,
-            path: [this.fieldName, ...e.path]
-          });
+        case 'errors':
+          allLoaded = false;
+          for (const err of childResult.errors) {
+            errors.push({
+              ...err,
+              path: [this.fieldName, ...err.path]
+            });
+          }
           break;
-        case "loaded":
-          for (let e of r.errors) t.push({
-            ...e,
-            path: [this.fieldName, ...e.path]
-          });
-          Array.isArray(r.data) ? e.push(...r.data) : r.data && e.push(r.data);
+        case 'loaded':
+          for (const err of childResult.errors) {
+            errors.push({
+              ...err,
+              path: [this.fieldName, ...err.path]
+            });
+          }
+          if (Array.isArray(childResult.data)) {
+            data.push(...childResult.data);
+          } else if (childResult.data) {
+            data.push(childResult.data);
+          }
+          break;
       }
     }
-    if (!i) {
+    if (!allLoaded) {
       this._result = {
-        status: "errors",
+        status: 'errors',
         data: null,
-        errors: t
+        errors
       };
-      this.clientIsFetching = !1;
+      this.clientIsFetching = false;
       return this._result;
     }
-    this.query.isPaginationViaLiveQuery() && (e = this.sortAndDedupResults(e));
-    let n = Object.assign(e, {
-      loadNext: e => {
-        this._result?.data && (this._result = {
-          ...this._result
-        }, this._result.data?.isLoadingNextPage !== void 0 && (this._result.data.isLoadingNextPage = !0), this.parent.resetResult(), this.parent.resultsUpdated(), this.loadNextPage(e));
+    if (this.query.isPaginationViaLiveQuery()) {
+      data = this.sortAndDedupResults(data);
+    }
+    const paginatedData = Object.assign(data, {
+      loadNext: (count: number) => {
+        if (this._result?.data) {
+          this._result = {
+            ...this._result
+          };
+          if (this._result.data?.isLoadingNextPage !== undefined) {
+            this._result.data.isLoadingNextPage = true;
+          }
+          this.parent.resetResult();
+          this.parent.resultsUpdated();
+          this.loadNextPage(count);
+        }
       },
       hasNextPage: () => this.hasNextPage(),
-      isLoadingNextPage: !1
+      isLoadingNextPage: false
     });
     this._result = {
-      status: "loaded",
-      errors: t,
-      data: n
+      status: 'loaded',
+      errors,
+      data: paginatedData
     };
-    this.clientIsFetching = !1;
+    this.clientIsFetching = false;
     return this._result;
   }
-  sortAndDedupResults(e) {
-    let t = new Set();
-    let i = [];
-    for (let n of e) {
-      let e = n[this.query.getPaginationIdColumn()];
-      t.has(e) || (t.add(e), i.push(n));
+
+  /**
+   * Sorts and deduplicates results based on pagination id column and order.
+   * @param results Array of results
+   */
+  sortAndDedupResults(results: any[]): any[] {
+    const seen = new Set();
+    const deduped: any[] = [];
+    for (const item of results) {
+      const id = item[this.query.getPaginationIdColumn()];
+      if (!seen.has(id)) {
+        seen.add(id);
+        deduped.push(item);
+      }
     }
-    let n = this.query.order();
-    n && i.sort((e, t) => n(e, t));
-    return i;
+    const orderFn = this.query.order();
+    if (orderFn) {
+      deduped.sort((a, b) => orderFn(a, b));
+    }
+    return deduped;
   }
-  resultsUpdated() {
-    this.children.every(e => e.isLoaded()) && (this._status.type = "loaded");
-    "loading" !== this._status.type && this.parent.resultsUpdated();
+
+  /**
+   * Updates the status when results are updated.
+   */
+  resultsUpdated(): void {
+    if (this.children.every(child => child.isLoaded())) {
+      this._status.type = 'loaded';
+    }
+    if (this._status.type !== 'loading') {
+      this.parent.resultsUpdated();
+    }
   }
-  resetResult() {
-    this._result = void 0;
-    this._isLoaded = !1;
+
+  /**
+   * Resets the result state.
+   */
+  resetResult(): void {
+    this._result = undefined;
+    this._isLoaded = false;
     this.parent.resetResult();
   }
-  onError(e, t, i) {
-    let n = performance.now() - t;
+
+  /**
+   * Handles error state for pagination.
+   * @param error Error object
+   * @param startTime Start time for latency calculation
+   * @param pageNumber Page number
+   */
+  onError(error: any, startTime: number, pageNumber: number): void {
+    const latency = performance.now() - startTime;
     this.context.options?.emitter?.emit({
-      type: "PAGINATION_LATENCY",
+      type: 'PAGINATION_LATENCY',
       resolver: this.query.paginationResolverType,
       viewName: this.getLiveView().viewDef.name,
-      pageNumber: i,
-      latency: n,
-      status: "failed"
+      pageNumber,
+      latency,
+      status: 'failed'
     });
     this.resetResult();
     this._status = {
-      type: "failed",
-      error: e
+      type: 'failed',
+      error
     };
     this.parent.resultsUpdated();
-    this.isPaginatedNodeFetching = !1;
+    this.isPaginatedNodeFetching = false;
   }
-  hasNextPage() {
+
+  /**
+   * Checks if there is a next page available.
+   */
+  hasNextPage(): boolean {
     return !!this.nextCursor.end;
   }
-  isLoadingNextPage() {
+
+  /**
+   * Checks if the next page is currently loading.
+   */
+  isLoadingNextPage(): boolean {
     return this.clientIsFetching;
   }
-  loadNextPage(e) {
+
+  /**
+   * Loads the next page of results.
+   * @param count Number of items to load
+   */
+  loadNextPage(count: number): void {
     if (this.isPaginatedNodeFetching) {
-      this.context.options?.logger?.error(Error(`Trying to fetch next page for query ${this.query.queryId} when there is an ongoing fetch more request.`));
+      this.context.options?.logger?.error(new Error(`Trying to fetch next page for query ${this.query.queryId} when there is an ongoing fetch more request.`));
       return;
     }
-    if (this.isPaginatedNodeFetching = !0, this.clientIsFetching = !0, !this.hasNextPage()) {
-      this.context.options?.logger?.error(Error(`Trying to fetch next page for query ${this.query.queryId} when there are no more pages left`));
+    this.isPaginatedNodeFetching = true;
+    this.clientIsFetching = true;
+    if (!this.hasNextPage()) {
+      this.context.options?.logger?.error(new Error(`Trying to fetch next page for query ${this.query.queryId} when there are no more pages left`));
       return;
     }
-    let t = {
+    const paginationArgs = {
       before: this.nextCursor.start,
       after: this.nextCursor.end,
-      count: e,
+      count,
       pageNumber: this.children.length + 1,
       startTime: performance.now()
     };
-    this.children.push(new Ay(this, this.queryDef, this.observable, this.context, t));
-    this.observable.requestPaginationChange(this.getLiveView().key, this.query, t);
+    this.children.push(new QueryNode(this, this.queryDef, this.observable, this.context, paginationArgs));
+    this.observable.requestPaginationChange(this.getLiveView().key, this.query, paginationArgs);
   }
-  destroy() {
-    for (let e of this.children) e.destroy();
+
+  /**
+   * Destroys the paginated query node and its children.
+   */
+  destroy(): void {
+    for (const child of this.children) {
+      child.destroy();
+    }
     this.context.options?.paginationQueryNodeMap?.delete(this.query.queryId);
   }
-  recreateIfStale(e, t) {
+
+  /**
+   * Recreates child nodes if they are stale.
+   * @param arg1 First argument
+   * @param arg2 Second argument
+   */
+  recreateIfStale(arg1: any, arg2: any): void {
     for (let i = 0; i < this.children.length; i++) {
-      let n = this.children[i];
-      let r = n.recreateIfStale(e, t);
-      r && (n.destroy(), this.children[i] = r);
+      const child = this.children[i];
+      const recreated = child.recreateIfStale(arg1, arg2);
+      if (recreated) {
+        child.destroy();
+        this.children[i] = recreated;
+      }
     }
   }
-  onPaginationResults(e, t, i) {
-    let n = performance.now() - t;
-    if (this.context.options?.emitter?.emit({
-      type: "PAGINATION_LATENCY",
-      latency: n,
+
+  /**
+   * Handles pagination results.
+   * @param nextCursor Next cursor object
+   * @param startTime Start time for latency calculation
+   * @param pageNumber Page number
+   */
+  onPaginationResults(nextCursor: any, startTime: number, pageNumber: number): void {
+    const latency = performance.now() - startTime;
+    this.context.options?.emitter?.emit({
+      type: 'PAGINATION_LATENCY',
+      latency,
       resolver: this.query.paginationResolverType,
-      pageNumber: i,
+      pageNumber,
       viewName: this.getLiveView().viewDef.name,
-      status: "success"
-    }), this.isPaginatedNodeFetching = !1, this.nextCursor = e, this.previousPageCountsForReconnection) {
+      status: 'success'
+    });
+    this.isPaginatedNodeFetching = false;
+    this.nextCursor = nextCursor;
+    if (this.previousPageCountsForReconnection) {
       if (this.previousPageCountsForReconnection.length && this.nextCursor.end) {
-        let e = this.previousPageCountsForReconnection.shift();
-        this.loadNextPage(e);
-      } else this.previousPageCountsForReconnection = null;
+        const count = this.previousPageCountsForReconnection.shift();
+        this.loadNextPage(count);
+      } else {
+        this.previousPageCountsForReconnection = null;
+      }
     }
   }
-  isLoaded() {
-    if ("loading" === this._status.type) return !1;
-    if (this._isLoaded) return !0;
-    for (let e of this.children.values()) if (!e.isLoaded()) return !1;
-    this._isLoaded = !0;
+
+  /**
+   * Checks if the node is fully loaded.
+   */
+  isLoaded(): boolean {
+    if (this._status.type === 'loading') return false;
+    if (this._isLoaded) return true;
+    for (const child of this.children.values()) {
+      if (!child.isLoaded()) return false;
+    }
+    this._isLoaded = true;
     return this._isLoaded;
   }
-  startReconnectionState() {
-    for (let e of (this.previousPageCountsForReconnection = this.children.map(e => e.paginationArgs.count), this.children)) e.destroy();
+
+  /**
+   * Starts reconnection state for pagination.
+   */
+  startReconnectionState(): void {
+    this.previousPageCountsForReconnection = this.children.map(child => child.paginationArgs.count);
+    for (const child of this.children) {
+      child.destroy();
+    }
     this.children = [];
     this.nextCursor = {
       start: null,
       end: null
     };
-    let e = this.previousPageCountsForReconnection.shift();
-    this.children.push(new Ay(this, this.queryDef, this.observable, this.context, {
+    const count = this.previousPageCountsForReconnection.shift();
+    this.children.push(new QueryNode(this, this.queryDef, this.observable, this.context, {
       before: this.nextCursor.start,
       after: this.nextCursor.end,
-      count: e,
+      count,
       pageNumber: this.children.length + 1,
       startTime: performance.now()
     }));
-    this.isPaginatedNodeFetching = !0;
-    this.clientIsFetching = !0;
+    this.isPaginatedNodeFetching = true;
+    this.clientIsFetching = true;
   }
-  getLoadingPathsForDebugging() {
-    let e = [];
-    for (let t of ("loading" === this._status.type && e.push(this.fieldName), this.children.values())) e.push(...t.getLoadingPathsForDebugging());
-    return e;
+
+  /**
+   * Gets loading paths for debugging.
+   */
+  getLoadingPathsForDebugging(): string[] {
+    const paths: string[] = [];
+    if (this._status.type === 'loading') {
+      paths.push(this.fieldName);
+    }
+    for (const child of this.children.values()) {
+      paths.push(...child.getLoadingPathsForDebugging());
+    }
+    return paths;
   }
-  getOptionalErrorPathsForDebugging() {
-    let e = [];
-    for (let t of this.children.values()) e.push(...t.getOptionalErrorPathsForDebugging());
-    return e;
+
+  /**
+   * Gets optional error paths for debugging.
+   */
+  getOptionalErrorPathsForDebugging(): string[] {
+    const paths: string[] = [];
+    for (const child of this.children.values()) {
+      paths.push(...child.getOptionalErrorPathsForDebugging());
+    }
+    return paths;
   }
-  getQueryIds() {
-    let e = [this.query.queryId];
-    for (let t of this.children) e.push(...t.getQueryIds());
-    return e;
+
+  /**
+   * Gets all query IDs for this node and its children.
+   */
+  getQueryIds(): string[] {
+    const ids = [this.query.queryId];
+    for (const child of this.children) {
+      ids.push(...child.getQueryIds());
+    }
+    return ids;
   }
-  getLiveView() {
+
+  /**
+   * Gets the live view for this node.
+   */
+  getLiveView(): any {
     return this.parent.getLiveView();
   }
-  debugState(e) {
+
+  /**
+   * Returns debug state for this node.
+   * @param fn Debug function
+   */
+  debugState(fn: (node: any) => any): any {
     return {
-      _: e(this),
-      children: this.children.map(t => t.debugState(e))
+      _: fn(this),
+      children: this.children.map(child => child.debugState(fn))
     };
   }
 }
-export function $$s1(e) {
-  return e instanceof $$a0;
+
+/**
+ * Checks if the given object is a PaginatedQueryNode.
+ * @param obj Object to check
+ */
+export function isPaginatedQueryNode(obj: any): obj is PaginatedQueryNode {
+  return obj instanceof PaginatedQueryNode;
 }
-export const A = $$a0;
-export const c = $$s1;
+
+// Refactored exports
+export const A = PaginatedQueryNode;
+export const c = isPaginatedQueryNode;

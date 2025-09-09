@@ -3,7 +3,7 @@ import { useRef, useCallback } from "react";
 import { bL, Q6, zi } from "../905/55068";
 import s from "classnames";
 import { isInvalidValue } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Uq, Fr, Z, hb } from "../905/633462";
 import { Dq } from "../905/331848";
 import { xJ, zr, cI, y1, FF, WY, r9, Ij, rd, _V } from "../905/77569";
@@ -86,9 +86,9 @@ function h(e) {
     let n = sliderValueTransform.toTransformed(e);
     if (isInvalidValue(value)) {
       if (!mixedMathHandler) return;
-      mixedMathHandler.onChange(mixedMathHandler.getValue(), () => min, zk.NO);
+      mixedMathHandler.onChange(mixedMathHandler.getValue(), () => min, yesNoTrackingEnum.NO);
     }
-    onValueChange(n, t ? zk.YES : zk.NO);
+    onValueChange(n, t ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO);
   }, [onValueChange, sliderValueTransform, mixedMathHandler, value, min]);
   let M = sliderValueTransform.fromTransformed(isInvalidValue(value) ? 0 : value);
   let F = useCallback(() => {

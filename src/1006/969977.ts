@@ -1,15 +1,15 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { scopeAwareFunction } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { UJ } from "../figma_app/815945";
+import { memoizeLRU } from "../figma_app/815945";
 import { generateRecordingKey } from "../figma_app/878298";
 import s from "classnames";
 import { colorToHex } from "../905/436288";
 import { A as _$$A } from "../vendor/90566";
-import { k as _$$k2 } from "../905/651849";
+import { logger } from "../905/651849";
 import { selectWithShallowEqual } from "../905/103090";
 import { N as _$$N } from "../905/551536";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -28,7 +28,7 @@ import { kL, ai, Lt, hF } from "../1006/823759";
 var d = s;
 let B = "widget_controls--label--YWqiO text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L";
 let L = "widget_controls--img--bNdQj";
-let A = UJ(e => e.includes("xmlns") ? "data:image/svg+xml;utf8," + encodeURIComponent(e.trim()) : (_$$k2.warn("Your widget must include the xmlns property on any SVGs used in the property menu. See https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg for more info"), null), 1e3);
+let A = memoizeLRU(e => e.includes("xmlns") ? "data:image/svg+xml;utf8," + encodeURIComponent(e.trim()) : (logger.warn("Your widget must include the xmlns property on any SVGs used in the property menu. See https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg for more info"), null), 1e3);
 function M(e) {
   let t = E3();
   let n = e.icon ? A(e.icon) : null;
@@ -119,7 +119,7 @@ function S({
     d[e] = t;
     f[colorToHex(t)] = e;
   } catch (t) {
-    _$$k2.warn(`Cannot render widget color selector. ${e} is an invalid color.`);
+    logger.warn(`Cannot render widget color selector. ${e} is an invalid color.`);
     return jsx("div", {
       "data-testid": "emptyColorSelector"
     });

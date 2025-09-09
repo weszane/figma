@@ -14,7 +14,7 @@ import { Cu } from "../figma_app/314264";
 import { registerModal } from "../905/102752";
 import { F as _$$F } from "../905/759613";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { J } from "../905/341359";
 import { ZC } from "../figma_app/39751";
 import { popModalStack, showModal } from "../905/156213";

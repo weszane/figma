@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { b as _$$b } from "../905/985254";
@@ -13,7 +13,7 @@ import { mW, jj } from "../figma_app/797994";
 import { jd } from "../figma_app/528509";
 import { yV, XO } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { RIo } from "../figma_app/43951";
+import { MoveDraftsTeamData } from "../figma_app/43951";
 import { jO } from "../figma_app/242339";
 import { N } from "../figma_app/268271";
 import { qo } from "../905/696396";
@@ -35,7 +35,7 @@ export function $$C0() {
   let P = useAtomWithSubscription(d2);
   let D = useAtomWithSubscription(qG);
   let k = useAtomWithSubscription($);
-  let M = useAtomWithSubscription(RIo.Query({
+  let M = useAtomWithSubscription(MoveDraftsTeamData.Query({
     orgId: null
   }));
   let F = useDispatch();

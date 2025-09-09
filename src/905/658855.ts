@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { T as _$$T } from "../905/256551";
 import { x as _$$x } from "../905/587214";
@@ -12,7 +12,7 @@ import { kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { I as _$$I } from "../905/343721";
 import { DM, en } from "../905/759470";
 import { WX } from "../figma_app/350203";
@@ -29,7 +29,7 @@ let k = "publish_resource_card_preview--mediaHeroImageUI3--Pq0Mp publish_resourc
 function N(e, t) {
   let i = {};
   let n = e.filter(e => !i[e.sha1] && (i[e.sha1] = !0, !0));
-  n.length !== e.length && t(_$$F.enqueue({
+  n.length !== e.length && t(VisualBellActions.enqueue({
     message: getI18nString("community.publishing.some_media_was_deduplicated"),
     error: !1
   }));
@@ -40,12 +40,12 @@ function P(e, t, i) {
     let i = 0;
     let n = !1;
     for (let t = 0; t < e.length; t++) "video" === e[t].type && ++i > DM && (n = !0, e.splice(t, 1), t--, i--);
-    n && t(_$$F.enqueue({
+    n && t(VisualBellActions.enqueue({
       message: getI18nString("community.publishing.you_can_only_upload_three_videos"),
       error: !0
     }));
   }
-  e.length > en && (t(_$$F.enqueue({
+  e.length > en && (t(VisualBellActions.enqueue({
     message: i ? getI18nString("community.publishing.you_can_only_upload_ten_images_and_videos") : getI18nString("community.publishing.you_can_only_upload_ten_images"),
     error: !1
   })), e = e.slice(0, 10));
@@ -59,7 +59,7 @@ async function O(e, t, i, n, r, a, s, o, l, d) {
   try {
     u = await N8(c, r);
   } catch (e) {
-    n(_$$F.enqueue({
+    n(VisualBellActions.enqueue({
       message: e.message,
       error: !0
     }));
@@ -111,7 +111,7 @@ function D({
     try {
       i = await Gp(t.dataTransfer?.files, e);
     } catch (e) {
-      V(_$$F.enqueue({
+      V(VisualBellActions.enqueue({
         message: e.message,
         error: !0
       }));
@@ -138,7 +138,7 @@ function D({
     try {
       i = await Gp(t.clipboardData?.files, e);
     } catch (e) {
-      V(_$$F.enqueue({
+      V(VisualBellActions.enqueue({
         message: e.message,
         error: !0
       }));

@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { ComponentPropType, SceneGraphHelpers } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { dK } from "../figma_app/889655";
 import { Yg, OE, Yi, k4, wd, ZH, aO, m5 } from "../figma_app/164212";
@@ -18,13 +18,13 @@ export function $$m1(e, t, r) {
   let m = useSelector(t => a(t, e));
   let g = r ? p : d;
   let I = $$f0(e, t);
-  let S = k9(() => g && I ? E(I, e, g) : [], [g, e, I]);
-  let v = k9(() => g ? y(S, e.filter(e => {
+  let S = useMemoStable(() => g && I ? E(I, e, g) : [], [g, e, I]);
+  let v = useMemoStable(() => g ? y(S, e.filter(e => {
     let t = o.get(e);
     return t?.isInstanceOrCodeInstance;
   }), o, g) : {}, [e, o, g, S]);
-  let A = k9(() => I && g ? b(I, g, o) : [], [I, g, o]);
-  let x = k9(() => {
+  let A = useMemoStable(() => I && g ? b(I, g, o) : [], [I, g, o]);
+  let x = useMemoStable(() => {
     let t = e.reduce((e, t) => {
       let r = o.get(t);
       let n = r?.symbolId;
@@ -33,7 +33,7 @@ export function $$m1(e, t, r) {
     }, new Set());
     return A.filter(e => t.has(e.guid));
   }, [A, e, o]);
-  let N = k9(() => I && g ? T(I, e, g) : {}, [I, e, g]);
+  let N = useMemoStable(() => I && g ? T(I, e, g) : {}, [I, e, g]);
   return useMemo(() => ({
     typedPropDefsExcludingHidden: S,
     variantPropDefs: m,
@@ -46,11 +46,11 @@ export function $$m1(e, t, r) {
 }
 export function $$g2(e, t, r, i) {
   let a;
-  let s = k9(() => r ? E(r, [e], t) : [], [e, r, t]);
-  let o = k9(() => r ? Jm(r, t) : [], [r, t]);
-  let d = k9(() => y(s, [e], i, t), [e, t, i, s]);
-  let c = k9(() => r && i.get(r)?.isStateGroup ? b(r, t, i) : [], [r, t, i]);
-  let u = k9(() => r ? T(r, [e], t) : {}, [e, r, t]);
+  let s = useMemoStable(() => r ? E(r, [e], t) : [], [e, r, t]);
+  let o = useMemoStable(() => r ? Jm(r, t) : [], [r, t]);
+  let d = useMemoStable(() => y(s, [e], i, t), [e, t, i, s]);
+  let c = useMemoStable(() => r && i.get(r)?.isStateGroup ? b(r, t, i) : [], [r, t, i]);
+  let u = useMemoStable(() => r ? T(r, [e], t) : {}, [e, r, t]);
   let p = i.get(e)?.symbolId;
   p && i.get(p)?.isState || (a = []);
   a = c.filter(e => p === e.guid);

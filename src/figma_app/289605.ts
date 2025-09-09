@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
@@ -19,7 +19,7 @@ import { tH, H4 } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { c as _$$c } from "../905/241436";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/99316";
 import { J as _$$J } from "../905/45438";
 import { Nh } from "../905/560959";
@@ -132,7 +132,7 @@ function ei({
   }, [r, _, e, m, h]);
   let E = et(p);
   useEffect(() => {
-    E || (d(_$$F.enqueue({
+    E || (d(VisualBellActions.enqueue({
       message: "Variable details could not be loaded"
     })), t());
   }, [E, d, t]);

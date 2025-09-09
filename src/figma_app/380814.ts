@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useCallback, useRef, useState, useMemo, useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { bL } from "../905/911410";
@@ -11,13 +11,13 @@ import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import { U as _$$U } from "../905/708285";
 import { VariablesBindings, VariableCollectionContext, VariableUIContext, VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { WI } from "../905/929949";
+import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import { useLocalStorageSync } from "../905/657224";
 import y from "../vendor/239910";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
-import { Pt, of } from "../figma_app/806412";
+import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { logError } from "../905/714362";
 import { L as _$$L } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -118,7 +118,7 @@ function K({
         children: jsx($$J0, {
           resolvedType: i,
           initialValue: t,
-          recordingKey: Pt(a, "createVariableForm"),
+          recordingKey: generateRecordingKey(a, "createVariableForm"),
           onSubmit: s
         })
       })]
@@ -166,7 +166,7 @@ export function $$q5(e, t, r) {
     if (i) {
       let e = await n(Oe(i));
       r(y$(t, e));
-    } else e.type === VariableDataType.ALIAS && r(WI(t));
+    } else e.type === VariableDataType.ALIAS && r(resolveVariableValue(t));
   }, [n, e, t, r]);
 }
 export function $$J0({
@@ -179,11 +179,11 @@ export function $$J0({
   $$X6(s);
   let [o, l] = useState({
     varName: "",
-    varValue: t ?? WI(e),
+    varValue: t ?? resolveVariableValue(e),
     varSetID: null
   });
   let d = useMemo(() => VariablesBindings.isValidVariableName(o.varName ?? "", o.varSetID ?? null), [o]);
-  let u = of(r, "submit", () => {
+  let u = useHandleFocusEvent(r, "submit", () => {
     d && a({
       varName: o.varName,
       varValue: o.varValue,
@@ -220,7 +220,7 @@ export function $$J0({
       children: jsx($n, {
         type: "submit",
         disabled: !d,
-        recordingKey: Pt(r, "createButton"),
+        recordingKey: generateRecordingKey(r, "createButton"),
         htmlAttributes: {
           "data-tooltip": getI18nString("variables.create_modal.invalid_variable_name"),
           "data-tooltip-type": d ? void 0 : Ib.TEXT
@@ -259,7 +259,7 @@ export function $$Z1({
   }
   _$$h(() => {
     f.current?.select();
-    y(Wc(m, r), t ?? WI(r), p?.node_id ?? null);
+    y(Wc(m, r), t ?? resolveVariableValue(r), p?.node_id ?? null);
   });
   let T = $$Y4(s.varValue);
   let v = $$q5(s.varValue, r, b);
@@ -290,7 +290,7 @@ export function $$Z1({
           y(e.target.value, s.varValue, s.varSetID);
         },
         ref: f,
-        recordingKey: Pt(e, "variableNameInput"),
+        recordingKey: generateRecordingKey(e, "variableNameInput"),
         delay: 50,
         "data-1p-ignore": !0,
         autoFocus: !0
@@ -308,12 +308,12 @@ export function $$Z1({
             variableValue: s.varValue,
             contextType: $.FORM,
             onChange: e => b(e),
-            recordingKey: Pt(e, "variableValueInput")
+            recordingKey: generateRecordingKey(e, "variableValueInput")
           }), T && jsx(_$$K, {
             type: "button",
             "aria-label": getI18nString("variables.authoring_modal.table.detach_alias"),
             onClick: () => b(T),
-            recordingKey: Pt(e, "detachVariableButton"),
+            recordingKey: generateRecordingKey(e, "detachVariableButton"),
             htmlAttributes: {
               "data-tooltip-type": Ib.TEXT,
               "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")

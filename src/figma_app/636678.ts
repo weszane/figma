@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { u as _$$u } from "../905/911813";
 import { A as _$$A } from "../905/891805";
 import { _ as _$$_ } from "../905/607842";

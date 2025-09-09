@@ -69,7 +69,7 @@ function c() {
     verticalAlignItems: "start"
   };
 }
-function u(e = !1) {
+function ExpiringCache(e = !1) {
   return {
     fontFamily: "Roboto",
     letterSpacing: 0,
@@ -102,7 +102,7 @@ exports.sizeDefaults = o;
 exports.autoLayoutSizeDefaults = l;
 exports.transformDefaults = d;
 exports.autoLayoutDefaults = c;
-exports.textStyleDefaults = u;
+exports.textStyleDefaults = ExpiringCache;
 exports.paintDefaults = p;
 exports.imagePaintDefaults = function () {
   return Object.assign(Object.assign({}, p()), {
@@ -145,7 +145,7 @@ exports.getDefaultSvgProps = function () {
   return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, n()), r()), o()), d()), a());
 };
 exports.getDefaultTextProps = function () {
-  return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, n()), l()), d()), u(!1)), {
+  return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, n()), l()), d()), ExpiringCache(!1)), {
     paragraphSpacing: 0,
     paragraphIndent: 0,
     horizontalAlignText: "left",
@@ -154,5 +154,5 @@ exports.getDefaultTextProps = function () {
   });
 };
 exports.getDefaultSpanProps = function () {
-  return Object.assign(Object.assign(Object.assign(Object.assign({}, n()), l()), d()), u(!0));
+  return Object.assign(Object.assign(Object.assign(Object.assign({}, n()), l()), d()), ExpiringCache(!0));
 };

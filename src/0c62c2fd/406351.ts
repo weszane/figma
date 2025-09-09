@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
@@ -12,7 +12,7 @@ import { E } from "../905/984674";
 import { popModalStack } from "../905/156213";
 import { E9 } from "../figma_app/314264";
 import { fileEntityDataMapper } from "../905/943101";
-import { wtK } from "../figma_app/43951";
+import { AddWorkspacePinnedFileView } from "../figma_app/43951";
 import { p as _$$p } from "../0c62c2fd/698840";
 import { p as _$$p2, N as _$$N } from "../0c62c2fd/687448";
 import { AH } from "../figma_app/147337";
@@ -24,7 +24,7 @@ export function $$y0({
 }) {
   let _ = useDispatch();
   let y = _$$p2(getI18nString("file_browser.pinning.pin_modal.confirmation_bell"), "file-browser-workspace-add-pin");
-  let j = Rs(wtK, {
+  let j = Rs(AddWorkspacePinnedFileView, {
     fileKey: e
   });
   let T = function (e) {

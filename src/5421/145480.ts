@@ -1,5 +1,5 @@
 import { useRef, useCallback, useState, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { MO, hq, UQ } from "../2824/40443";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler, zk } from "../905/189185";
@@ -8,11 +8,11 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { Xt } from "../figma_app/623293";
 import { XHRError } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Ze } from "../figma_app/540726";
 import { UD, Jr } from "../figma_app/624361";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
 import { createNoOpValidator } from "../figma_app/181241";
 import { f3 } from "../figma_app/690664";
@@ -50,10 +50,10 @@ let N = () => {
   let t = useRef(null);
   let n = useCallback(n => {
     t.current = window.setTimeout(() => {
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         type: j,
         message: getI18nString("figmake.m2d.converting_make_to_design"),
-        icon: zX.SPINNER,
+        icon: VisualBellIcon.SPINNER,
         timeoutOverride: 1 / 0,
         button: {
           text: getI18nString("general.cancel"),
@@ -63,32 +63,32 @@ let N = () => {
     }, 300);
   }, [e]);
   let r = useCallback(t => {
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       type: "copied-to-clipboard",
       message: "clipboard" === t ? getI18nString("figmake.m2d.copied_to_clipboard") : getI18nString("figmake.m2d.pasted_to_canvas"),
-      icon: zX.CHECK
+      icon: VisualBellIcon.CHECK
     }));
   }, [e]);
   return {
     showProcessing: n,
     showSuccess: r,
     showError: useCallback(() => {
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         type: "error",
         message: getI18nString("figmake.m2d.failed_to_copy"),
-        icon: zX.EXCLAMATION
+        icon: VisualBellIcon.EXCLAMATION
       }));
     }, [e]),
     showHtmlSizeError: useCallback(() => {
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         type: "html-too-large",
         message: getI18nString("figmake.m2d.html_too_large"),
-        icon: zX.EXCLAMATION
+        icon: VisualBellIcon.EXCLAMATION
       }));
     }, [e]),
     cleanup: useCallback(() => {
       t.current && (clearTimeout(t.current), t.current = null);
-      e(F.dequeue({
+      e(VisualBellActions.dequeue({
         matchType: j
       }));
     }, [e])
@@ -161,7 +161,7 @@ export function $$S1() {
               e.stackCounterSizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE";
               let i = getSingletonSceneGraph();
               let r = i.getInternalCanvas();
-              if (r) r.appendChild(e);else throw Error("Internal canvas not found");
+              if (r) r.appendChild(e); else throw Error("Internal canvas not found");
               if (!Fullscreen?.directlyPasteSuggestion(o, e.parentGuid ?? "", null, e.guid)) {
                 e.removeSelfAndChildren();
                 return Error("Failed to paste buffer to canvas");
@@ -189,10 +189,10 @@ export function $$S1() {
           await new Promise(e => requestAnimationFrame(() => requestAnimationFrame(e)));
           await Jr().imageUploadPromise();
           permissionScopeHandler(zk.SYSTEM, "copy-frame-to-clipboard", () => {
-            wr();
-            Dh([n.guid]);
+            clearSelection();
+            addToSelection([n.guid]);
             Fullscreen?.copyActiveCanvasSelectionToClipboard();
-            wr();
+            clearSelection();
             Fullscreen?.deleteNode(n.guid);
           });
         }

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { BrowserInfo } from "../figma_app/778880";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";

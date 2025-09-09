@@ -4,9 +4,9 @@ import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
-import { jmg } from "../figma_app/43951";
+import { DeviceTryFileView } from "../figma_app/43951";
 import { N } from "../905/696711";
 import { Uy } from "../figma_app/685921";
 import { L } from "../905/92291";
@@ -16,7 +16,7 @@ let $$f0 = createOptimistThunk(async (e, l, {
 }) => {
   let s = !1;
   try {
-    s = !!oA((await subscribeAndAwaitData(jmg, {
+    s = !!oA((await subscribeAndAwaitData(DeviceTryFileView, {
       fileKey: l.file_key
     })).deviceTryFile);
   } catch (e) {
@@ -59,7 +59,7 @@ let $$f0 = createOptimistThunk(async (e, l, {
         view: selectedView
       }));
     }
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: v
     }));
   } catch (l) {

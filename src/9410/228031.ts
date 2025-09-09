@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useEffect, useMemo, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/730894";
 import { M as _$$M } from "../905/763508";
 import { I as _$$I } from "../figma_app/304633";
@@ -11,7 +11,7 @@ import { N as _$$N } from "../905/201779";
 import { LayoutTabType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VC, uE } from "../figma_app/565242";
 import { G as _$$G } from "../905/707993";
@@ -128,8 +128,8 @@ function F({
     })]
   });
 }
-class U extends a3 {}
-class G extends c$ {}
+class U extends a3 { }
+class G extends c$ { }
 function K({
   OriginalComponent: e,
   ...t
@@ -210,7 +210,7 @@ export function $$q0({
               id: e.guid
             },
             dataTestId: `sites.link_combo_box.cms_repeater_to_item_page_link.${e.name}`,
-            recordingKey: Pt(n, "option.cms_repeater_to_item_page_link", e.guid)
+            recordingKey: generateRecordingKey(n, "option.cms_repeater_to_item_page_link", e.guid)
           }, e.guid)));
         }
         t && qs(s, t) && o.push(...i.map(e => jsx(G, {
@@ -221,7 +221,7 @@ export function $$q0({
             fieldName: e.name
           },
           dataTestId: `sites.link_combo_box.cms_link_field_link.${e.name}`,
-          recordingKey: Pt(n, "option.cms_link_field_link", e.name)
+          recordingKey: generateRecordingKey(n, "option.cms_link_field_link", e.name)
         }, e.id)));
         return o;
       }({
@@ -252,7 +252,7 @@ export function $$q0({
             itemId: t.itemId,
             fieldSchemaId: t.slugFieldId
           },
-          recordingKey: Pt(i, "option.cms_item_page_link", e)
+          recordingKey: generateRecordingKey(i, "option.cms_item_page_link", e)
         }, e));
       }({
         cmsItemPages: u,
@@ -272,13 +272,13 @@ export function $$q0({
     value: {
       type: "back"
     },
-    recordingKey: Pt(N, "option.back"),
+    recordingKey: generateRecordingKey(N, "option.back"),
     icon: jsx(_$$E, {})
   }, "back-link-preset"), jsx(G, {
     value: {
       type: "anchor_link"
     },
-    recordingKey: Pt(N, "option.anchor_link"),
+    recordingKey: generateRecordingKey(N, "option.anchor_link"),
     icon: jsx(_$$M, {})
   }, "anchor-link-preset")] : [];
   let V = useDispatch();
@@ -362,12 +362,12 @@ export function $$q0({
           type: "header",
           name: collectionName ?? getI18nString("sites.panel.link_panel.cms_header")
         },
-        recordingKey: Pt(N, "option.cms_header")
+        recordingKey: generateRecordingKey(N, "option.cms_header")
       }, "cms-header"), ...cmsLinkOptions, jsx(sK, {}, "cms-webpages-divider"), jsx(G, {
         isHeader: !0,
         disabled: !0,
         dataTestId: "sites.link_combo_box.webpages_header",
-        recordingKey: Pt(N, "option.webpages_header"),
+        recordingKey: generateRecordingKey(N, "option.webpages_header"),
         value: {
           type: "header",
           name: getI18nString("sites.panel.link_panel.webpages_header")
@@ -379,7 +379,7 @@ export function $$q0({
           type: "internal",
           id: e.guid
         },
-        recordingKey: Pt(N, "option", e.name)
+        recordingKey: generateRecordingKey(N, "option", e.name)
       }, e.guid)), ...cmsItemPageLinkOptions, z.length > 0 && [jsx(sK, {}, "link-preset-divider"), ...z]]
     }), t && !isInvalidValue(t) && "internal_cms_item_page_item" === t.type && jsx(F, {
       targetNodeId: t.id,

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { N_ } from "../vendor/956898";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
@@ -17,7 +17,7 @@ import { Lj } from "../figma_app/835219";
 import { qD, _t, ZD } from "../figma_app/471982";
 import { Mc, qd } from "../figma_app/640564";
 import { PerfTimer } from "../905/609396";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { $W } from "../905/144933";
 import { e as _$$e2 } from "../figma_app/324237";
 import { PF } from "../figma_app/930386";
@@ -347,7 +347,7 @@ let J = function (e, t) {
         forwardToDatadog: !0
       });
       return r;
-    }).catch(e => (t(_$$F.enqueue({
+    }).catch(e => (t(VisualBellActions.enqueue({
       message: e.message || getI18nString("community.error.search_request_failed"),
       error: !0,
       type: "community-search-error",
@@ -428,7 +428,7 @@ export function $$K0(e) {
         widgets: l.length,
         profiles: i.data.meta.results.length
       });
-    }).catch(() => {});
+    }).catch(() => { });
   }, [query, v, j, context, setResources, setSelectedIdx, w]);
   let L = useCallback(e => {
     trackEventAnalytics("search_result_clicked", {

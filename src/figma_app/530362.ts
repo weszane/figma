@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useRef, useLayoutEffect, useMemo, useEffect, useContext } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { clamp } from "../figma_app/492908";
@@ -11,12 +11,12 @@ import { U as _$$U } from "../905/708285";
 import { uN } from "../figma_app/338442";
 import { Fullscreen, ComponentPropType, AppStateTsApi, VariableResolvedDataType, VariableDataType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { WI } from "../905/929949";
+import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import { C as _$$C } from "../figma_app/974443";
 import { X as _$$X } from "../905/606795";
 import { Uz, Fo } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { u2 } from "../905/511649";
 import { Point } from "../905/736624";
 import { TQ, Zl } from "../905/211621";
@@ -27,7 +27,7 @@ import { u1, XE } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { uP, Oe } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
-import { wr, Dh, i as _$$i } from "../figma_app/741237";
+import { clearSelection, addToSelection, renameNode } from "../figma_app/741237";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { eY } from "../figma_app/722362";
@@ -140,7 +140,7 @@ export function $$eE1({
     headerSize: "small",
     onClose: U,
     onClick: o ? () => l(vq()) : void 0,
-    recordingKey: Pt("editComponentPropDefPicker", e.kind === uN.VARIANT ? e.name : e.explicitDefID),
+    recordingKey: generateRecordingKey("editComponentPropDefPicker", e.kind === uN.VARIANT ? e.name : e.explicitDefID),
     children: [jsxs("div", {
       className: ep,
       children: [jsx("p", {
@@ -229,15 +229,15 @@ function ey({
     return r;
   }, [t, e]);
   let v = useCallback(e => {
-    wr();
-    Dh(S[e] ?? []);
+    clearSelection();
+    addToSelection(S[e] ?? []);
     AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]);
   }, [S]);
   let x = useCallback((r, n) => {
     t && s && "" !== (n = QV(n)) && (permissionScopeHandler.user("rename-variant-prop-value", () => {
       t.forEach(t => {
         let i = t.stateInfo.propertyValues;
-        i && i[e.name] === r && _$$i(t.symbol.node_id, zh({
+        i && i[e.name] === r && renameNode(t.symbol.node_id, zh({
           ...i,
           [e.name]: n
         }, s));
@@ -330,7 +330,7 @@ function ey({
               selected: i,
               appendedClassName: "edit_component_prop_picker--ui3GridRow--YZMDO",
               singletonRow: 1 === e.values.length,
-              recordingKey: Pt("variantPropertyValueRow", t),
+              recordingKey: generateRecordingKey("variantPropertyValueRow", t),
               input: jsx(eb, {
                 value: t,
                 index: r,
@@ -354,7 +354,7 @@ function ey({
               onMouseLeave: b,
               onMouseMove: o,
               onMouseUp: l,
-              recordingKey: Pt("variantPropertyValueRow", t),
+              recordingKey: generateRecordingKey("variantPropertyValueRow", t),
               selected: i,
               singletonRow: 1 === e.values.length,
               children: jsx(oO, {
@@ -406,7 +406,7 @@ function eb({
         l(e, t.currentTarget.value);
         useGrid && s(null);
       },
-      recordingKey: Pt("editVariantPropertyValue", t),
+      recordingKey: generateRecordingKey("editVariantPropertyValue", t),
       defaultValue: e,
       onFocus: e => {
         useGrid && e.stopPropagation();
@@ -421,7 +421,7 @@ function eb({
         s(t);
         o([t]);
       },
-      recordingKey: Pt("variantValueName", t),
+      recordingKey: generateRecordingKey("variantValueName", t),
       tabIndex: 0,
       children: e
     })
@@ -440,7 +440,7 @@ function eT({
     disabled: !t,
     onClick: () => r(e),
     "aria-label": a,
-    recordingKey: Pt("editComponentPropDefPicker", i, "targetButton"),
+    recordingKey: generateRecordingKey("editComponentPropDefPicker", i, "targetButton"),
     htmlAttributes: {
       onMouseDown: e => e.stopPropagation(),
       "data-tooltip": a,
@@ -462,11 +462,11 @@ function eI({
   return jsx("div", {
     className: eu,
     children: r ? jsx(gJ, {
-      variableValue: s ?? WI(VariableResolvedDataType.BOOLEAN, dl(ComponentPropType.BOOL, e.defaultValue)),
+      variableValue: s ?? resolveVariableValue(VariableResolvedDataType.BOOLEAN, dl(ComponentPropType.BOOL, e.defaultValue)),
       onChange: e => {
         l(e.value);
       },
-      recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type)),
+      recordingKey: generateRecordingKey("editComponentPropDefaultValue", throwTypeError(e.type)),
       innerContainerClassName: "edit_component_prop_picker--booleanCellOverride--F9fS2"
     }) : jsxs(l6, {
       ariaLabel: getI18nString("design_systems.component_properties.default_value"),
@@ -477,7 +477,7 @@ function eI({
       formatter: X9,
       dropdownShown: t,
       inputClassName: e_,
-      recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type)),
+      recordingKey: generateRecordingKey("editComponentPropDefaultValue", throwTypeError(e.type)),
       children: [jsx(c$, {
         value: !0
       }), jsx(c$, {
@@ -502,7 +502,7 @@ function eS({
       condition: t,
       wrapper: e => jsx(sJ, {
         noBorder: !0,
-        recordingKey: Pt("componentPropDefTextInput", "variableInputControl"),
+        recordingKey: generateRecordingKey("componentPropDefTextInput", "variableInputControl"),
         children: e
       }),
       children: jsx(_$$v, {
@@ -515,7 +515,7 @@ function eS({
         },
         value: r,
         onFocus: e => e.currentTarget?.select(),
-        recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type))
+        recordingKey: generateRecordingKey("editComponentPropDefaultValue", throwTypeError(e.type))
       })
     })
   });
@@ -537,7 +537,7 @@ function ev({
       condition: t,
       wrapper: e => jsx(sJ, {
         noBorder: !0,
-        recordingKey: Pt("componentPropDefNumberInput", "variableInputControl"),
+        recordingKey: generateRecordingKey("componentPropDefNumberInput", "variableInputControl"),
         children: e
       }),
       children: jsx(_$$v, {
@@ -550,7 +550,7 @@ function ev({
         },
         value: lg(r),
         onFocus: e => e.currentTarget?.select(),
-        recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type))
+        recordingKey: generateRecordingKey("editComponentPropDefaultValue", throwTypeError(e.type))
       })
     })
   });
@@ -620,7 +620,7 @@ function ex({
         "data-tooltip": getI18nString("design_systems.component_properties.detach_property"),
         "data-tooltip-type": Ib.TEXT
       },
-      recordingKey: Pt("componentPropDef", "detachVariableButton"),
+      recordingKey: generateRecordingKey("componentPropDef", "detachVariableButton"),
       "aria-label": getI18nString("design_systems.component_properties.detach_property"),
       children: jsx(_$$U, {
         className: "edit_component_prop_picker--detachButton--mHZfV"

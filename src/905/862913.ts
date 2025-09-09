@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { fileEntityDataMapper } from "../905/943101";
 import { FPermissionLevelType, FViewPermissionType } from "../figma_app/191312";
 import { PS } from "../figma_app/598018";

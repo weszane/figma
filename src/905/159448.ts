@@ -1,6 +1,6 @@
 import { rw } from "../905/54367";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { K } from "../905/443068";
 import { f } from "../905/54715";
 import { H } from "../905/222445";

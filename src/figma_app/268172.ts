@@ -3,19 +3,19 @@ import { Fullscreen, Command } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { O } from "../905/195092";
 export let $$n1;
 let h = "text-suggestions-dismiss-count";
 class m {
   generateRequestId() {
-    return _$$g();
+    return generateUUIDv4();
   }
   generateSessionId() {
-    return _$$g();
+    return generateUUIDv4();
   }
   async getSuggestion(e, t, r, n) {
     let a;
@@ -37,10 +37,10 @@ class m {
       localStorage.setItem(h, t.toString());
       return;
     }
-    debugState.dispatch(F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: "text-suggestion-nudge",
       message: getI18nString("fullscreen.text_suggestion_nudge_message"),
-      icon: zX.SPARKLE,
+      icon: VisualBellIcon.SPARKLE,
       button: {
         text: getI18nString("fullscreen.text_suggestion_nudge_turn_off"),
         action: () => {

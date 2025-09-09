@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { logError } from "../905/714362";
-import { dZ } from "../figma_app/741237";
+import { normalizeTrackingEnum } from "../figma_app/741237";
 import { a as _$$a } from "../5421/59825";
 import { $v } from "../figma_app/259678";
 import { t8, L_, Lh } from "../figma_app/504321";
@@ -15,7 +15,7 @@ export class $$u0 {
   }
   async addClassesToInspectedElements(e, t, n) {
     this.editor.addLocalComputedStyleEditToSelectedNodes(e);
-    let o = dZ(t);
+    let o = normalizeTrackingEnum(t);
     let i = await this.editor.getCachedOrFetchCodeSnippets(!o);
     if (null === i) {
       logError("direct_manipulation", "No snippets found for addClassToInspectedElements", {}, {

@@ -1,75 +1,149 @@
-import { ViewDefinition } from '../905/119879'
-import d from '../905/419236'
-import a from '../905/552287'
-import { S } from '../905/578699'
-import { INTERNAL_SYMBOL } from '../905/957591'
-import { Ay } from '../figma_app/28817'
+import { ViewDefinition } from '../905/119879';
+import { SchemaHandler } from '../905/578699';
+import { INTERNAL_SYMBOL } from '../905/957591';
+import { FigmaAppClient } from '../figma_app/28817';
 
-export class $$l0 {
-  constructor(e, t) {
-    for (let i of (this.viewDefs = e, this.schema = t, Object.keys(e))) this.views.set(i, void 0)
+/**
+ * Registry for view definitions.
+ * Original class name: $$l0
+ */
+export class ViewRegistry {
+  /**
+   * Map of view names to their definitions.
+   */
+  views: Map<string, ViewDefinition | undefined> = new Map();
+
+  /**
+   * @param viewDefs - Object containing view definitions.
+   * @param schema - Schema object.
+   */
+  constructor(public viewDefs: Record<string, any>, public schema: any) {
+    // Initialize views map with keys from viewDefs, values as undefined
+    Object.keys(viewDefs).forEach(key => {
+      this.views.set(key, undefined);
+    });
   }
 
-  views = new Map()
-  createViewDef(e) {
-    return new ViewDefinition(e, this.viewDefs[e], this.schema.objects.get('root'), this.schema, {
-      shouldValidateDeprecated: !0,
-      shouldUseMissingFields: !1,
-    })
+  /**
+   * Creates a ViewDefinition for the given view name.
+   * @param name - View name.
+   */
+  createViewDef(name: string): ViewDefinition {
+    return new ViewDefinition(name, this.viewDefs[name], this.schema.objects.get('root'), this.schema, {
+      shouldValidateDeprecated: true,
+      shouldUseMissingFields: false
+    });
   }
 
-  set(e, t) {
-    if (this.views.has(e))
-      throw new Error(`View ${e} already exists in the registry.`)
-    this.views.set(e, t)
+  /**
+   * Sets a view definition in the registry.
+   * Throws if the view already exists.
+   * @param name - View name.
+   * @param def - View definition.
+   */
+  set(name: string, def: ViewDefinition): void {
+    if (this.views.has(name)) {
+      throw new Error(`View ${name} already exists in the registry.`);
+    }
+    this.views.set(name, def);
   }
 
-  get(e) {
-    this.views.has(e) && void 0 === this.views.get(e) && this.views.set(e, this.createViewDef(e))
-    return this.views.get(e) || null
+  /**
+   * Gets a view definition, creating it if necessary.
+   * @param name - View name.
+   */
+  get(name: string): ViewDefinition | null {
+    if (this.views.has(name) && this.views.get(name) === undefined) {
+      this.views.set(name, this.createViewDef(name));
+    }
+    return this.views.get(name) ?? null;
   }
 
-  entries() {
-    for (let e of this.views.keys()) void 0 === this.views.get(e) && this.views.set(e, this.createViewDef(e))
-    return this.views.entries()
+  /**
+   * Returns an iterator of [name, viewDef] entries.
+   * Ensures all undefined entries are created.
+   */
+  entries(): IterableIterator<[string, ViewDefinition | undefined]> {
+    for (const name of this.views.keys()) {
+      if (this.views.get(name) === undefined) {
+        this.views.set(name, this.createViewDef(name));
+      }
+    }
+    return this.views.entries();
   }
 }
-export function $$c5(e) {
-  return !!e && typeof e == 'object' && e.hasOwnProperty(INTERNAL_SYMBOL)
+
+/**
+ * Checks if an object has the INTERNAL_SYMBOL property.
+ * Original function name: $$c5
+ * @param obj - Object to check.
+ */
+export function hasInternalSymbol(obj: any): boolean {
+  return !!obj && typeof obj === 'object' && Object.prototype.hasOwnProperty.call(obj, INTERNAL_SYMBOL);
 }
-export class $$u1 extends Ay {
-  optimisticallyCreate(e, t) {
-    return this.applyMutations(e, t, 'create')
+
+/**
+ * Handles optimistic mutations.
+ * Original class name: $$u1
+ */
+export class OptimisticMutationHandler extends FigmaAppClient {
+  /**
+   * Applies a 'create' mutation optimistically.
+   */
+  optimisticallyCreate(entity: any, mutations: any): any {
+    return this.applyMutations(entity, mutations, 'create');
   }
 
-  optimisticallyUpdate(e, t) {
-    return this.applyMutations(e, t, 'update')
+  /**
+   * Applies an 'update' mutation optimistically.
+   */
+  optimisticallyUpdate(entity: any, mutations: any): any {
+    return this.applyMutations(entity, mutations, 'update');
   }
 
-  optimisticallyDelete(e, t) {
-    return this.applyMutations(e, t, 'delete')
+  /**
+   * Applies a 'delete' mutation optimistically.
+   */
+  optimisticallyDelete(entity: any, mutations: any): any {
+    return this.applyMutations(entity, mutations, 'delete');
   }
 
-  optimisticallyCreateWithUUID(e, t) {
-    return this.applyMutationsWithUUID(e, t, 'create')
+  /**
+   * Applies a 'create' mutation with UUID optimistically.
+   */
+  optimisticallyCreateWithUUID(entity: any, mutations: any): any {
+    return this.applyMutationsWithUUID(entity, mutations, 'create');
   }
 
-  optimisticallyUpdateWithUUID(e, t) {
-    return this.applyMutationsWithUUID(e, t, 'update')
+  /**
+   * Applies an 'update' mutation with UUID optimistically.
+   */
+  optimisticallyUpdateWithUUID(entity: any, mutations: any): any {
+    return this.applyMutationsWithUUID(entity, mutations, 'update');
   }
 
-  optimisticallyDeleteWithUUID(e, t) {
-    return this.applyMutationsWithUUID(e, t, 'delete')
+  /**
+   * Applies a 'delete' mutation with UUID optimistically.
+   */
+  optimisticallyDeleteWithUUID(entity: any, mutations: any): any {
+    return this.applyMutationsWithUUID(entity, mutations, 'delete');
   }
 
-  getIdFromUuid(e, t) {
-    return super.getIdFromUuid(e, t)
+  /**
+   * Gets an ID from a UUID.
+   */
+  getIdFromUuid(uuid: any, type: any): any {
+    return super.getIdFromUuid(uuid, type);
   }
 }
-export { getResourceDataOrFallback as oA } from '../905/419236'
-export { dZ } from '../905/552287'
-export { lw, tT } from '../905/957591'
-export const iO = $$l0
-export const Oh = $$u1
-export const Sj = S
-export const bu = $$c5
+
+// Re-exported modules and variables with updated names
+export { getResourceDataOrFallback as oA } from '../905/419236';
+export { dZ } from '../905/552287';
+export { lw, tT } from '../905/957591';
+
+// Refactored exports
+export const YJ = ViewRegistry; // $$l0 -> ViewRegistry -> YJ
+export const Oh = OptimisticMutationHandler; // $$u1 -> OptimisticMutationHandler -> Oh
+export const Sj = SchemaHandler; // S -> Sj
+export const bu = hasInternalSymbol; // $$c5 -> hasInternalSymbol -> bu

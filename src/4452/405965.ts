@@ -1,18 +1,18 @@
 import { useMemo, useCallback, useState, useEffect } from "react";
 import { IT } from "../figma_app/566371";
-import { GyZ, H1b } from "../figma_app/43951";
+import { TeamPermissions, TeamRoles } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { w5 } from "../figma_app/345997";
 import { X, SN } from "../905/915142";
 import { e6 } from "../905/557142";
 export function $$c0(e) {
-  let [t] = IT(GyZ({
+  let [t] = IT(TeamPermissions({
     teamId: e
   }));
   return useMemo(() => t.transform(e => X(e)), [t]);
 }
 export function $$u1(e) {
-  let [t] = IT(H1b({
+  let [t] = IT(TeamRoles({
     teamId: e
   }));
   return useMemo(() => t.transform(e => SN(e) ?? []), [t]);

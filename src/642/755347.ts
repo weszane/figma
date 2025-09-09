@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback, memo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N as _$$N } from "../905/720559";
 import { RR } from "../figma_app/338442";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue } from "../905/216495";
@@ -42,7 +42,6 @@ import { K as _$$K2 } from "../905/443068";
 import { o as _$$o } from "../905/821217";
 import { bL, mc } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
-import { generateRecordingKey } from "../figma_app/878298";
 import { trackEventAnalytics } from "../905/449184";
 import { SU } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
@@ -73,14 +72,14 @@ function K(e) {
   let f = _$$u2(m);
   let x = !!consumedVariable && !!f || visibilityIsBoundToComponentProp || isDefReferencedBySelection;
   let _ = useCallback(() => h(o.current), [h]);
-  let b = rf(Pt(e, "visibilityVariableBindingControl"), "mousedown", e => {
+  let b = useHandleMouseEvent(generateRecordingKey(e, "visibilityVariableBindingControl"), "mousedown", e => {
     e && !x && 1 & e.buttons && (_(), e.preventDefault(), e.stopPropagation());
   });
   return jsx("div", {
     className: RK,
     children: jsx(_$$d, {
       ref: o,
-      recordingKey: Pt(e, "visibilityVariableBindingControl"),
+      recordingKey: generateRecordingKey(e, "visibilityVariableBindingControl"),
       "aria-expanded": p,
       "aria-label": getI18nString("proto.apply_assignment_property"),
       disabled: x,
@@ -95,7 +94,7 @@ function K(e) {
   });
 }
 let el = new SU();
-class ea extends c$ {}
+class ea extends c$ { }
 function eo(e) {
   return jsx(l6, {
     ...e,
@@ -120,7 +119,7 @@ function eo(e) {
 }
 function ed(e) {
   return getFeatureFlags().eu_fpl_migration_menu ? jsx(eh, {
-    recordingKey: Pt(e.recordingKey, "blendMode"),
+    recordingKey: generateRecordingKey(e.recordingKey, "blendMode"),
     id: e.id
   }) : jsx(ec, {
     ...e
@@ -141,7 +140,7 @@ function ec({
     return "SELECT_DIVIDER" === e ? jsx(sK, {}, t) : jsx(ea, {
       value: e,
       disabled: n,
-      recordingKey: Pt(s, "blendMode", e)
+      recordingKey: generateRecordingKey(s, "blendMode", e)
     }, t);
   });
   return p && o?.type !== t || o?.type === _$$J(e) ? jsx(_$$d, {
@@ -172,7 +171,7 @@ function ec({
     onChange: l,
     onMouseDown: dG,
     property: n,
-    recordingKey: Pt(s, "blendMode"),
+    recordingKey: generateRecordingKey(s, "blendMode"),
     willShowDropdown: () => (trackEventAnalytics("editor-blend-mode-dropdown-show"), Promise.resolve()),
     children: h
   });
@@ -318,7 +317,7 @@ let $$e_0 = memo(function (e) {
   let W = useDispatch();
   let $ = handleMirroring && isVectorEditMode && jsx(Cs, {
     handleMirroring,
-    recordingKey: Pt(e, "mirroring")
+    recordingKey: generateRecordingKey(e, "mirroring")
   });
   return jsxs(Zk, {
     "data-testid": "appearance-panel",
@@ -343,7 +342,7 @@ let $$e_0 = memo(function (e) {
     }), jsx(fn, {
       ref: t,
       leftInput: jsx(sA, {
-        recordingKey: Pt(e, "layerOpacityInputWrapper"),
+        recordingKey: generateRecordingKey(e, "layerOpacityInputWrapper"),
         fields: $$ex3,
         disabled: !1,
         resolvedType: VariableResolvedDataType.FLOAT,
@@ -358,7 +357,7 @@ let $$e_0 = memo(function (e) {
           mixedMathHandler: eb,
           noBorderOnHover: !0,
           onValueChange: onOpacityChange,
-          recordingKey: Pt(e, "opacity"),
+          recordingKey: generateRecordingKey(e, "opacity"),
           ui3RightJustifyPercentSign: !1,
           value: opacity,
           children: jsx("div", {
@@ -379,7 +378,7 @@ let $$e_0 = memo(function (e) {
       input: $,
       icon: null
     }), independentCornerControlEnabled && jsx(_$$j, {
-      recordingKey: Pt(e, "independentCornerRadius")
+      recordingKey: generateRecordingKey(e, "independentCornerRadius")
     }), (shown.count || shown.starInnerScale) && jsx(cU, {
       countShown: shown.count,
       countDisabled: !enabled.count,
@@ -402,7 +401,7 @@ let $$e_0 = memo(function (e) {
     }), jsx(_$$m, {}), cornerSmoothingPicker.showing && jsx(_$$K, {
       defaultPosition: cornerSmoothingPicker.initialPosition,
       onClose: hideCornerSmoothing,
-      recordingKey: Pt(e, "advanced")
+      recordingKey: generateRecordingKey(e, "advanced")
     })]
   });
 });

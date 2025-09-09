@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useEffect, useState } from "react";
-import { useSelector, useDispatch, useStore } from "../vendor/514228";
+import { useSelector, useDispatch, useStore } from "react-redux";
 import { K } from "../905/443068";
 import { LayoutTabType, FullscreenPerfMetrics, AppStateTsApi, CorePerfInfo } from "../figma_app/763686";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { F } from "../905/680873";
 import { B } from "../905/714743";
 import { Ih } from "../figma_app/617427";
@@ -131,7 +131,7 @@ export function $$P1(e) {
       e ? t(hideModal()) : t(showModalHandler({
         type: gG,
         data: {
-          markModalClosed: () => {}
+          markModalClosed: () => { }
         }
       }));
     }, [t, e]);
@@ -266,7 +266,7 @@ function D(e) {
       fileKey: e.fileKey
     });
     e.dispatch(sf(n));
-    Ay.reload("Memory warning panel");
+    customHistory.reload("Memory warning panel");
   };
   let {
     warningLevel,

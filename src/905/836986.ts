@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { PK, sD, Kw, gr, _H, eJ, Tq, YB } from "../figma_app/243058";
+import { StyleIdHandler, VariableIdHandler, VariableOverrideIdHandler, VariableSetIdCompatHandler, CodeComponentIdHandler, CodeLibraryIdHandler, CodeFileIdHandler, CanvasNodeIdHandler } from "../figma_app/243058";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import s from "classnames";
 import { Dk } from "../figma_app/623293";
@@ -42,8 +42,8 @@ export function $$A9({
   return jsx(P, {
     target: i,
     errorIfMissing: t.isComplete,
-    text: r4(e, PK),
-    fullText: PK.toString(e)
+    text: r4(e, StyleIdHandler),
+    fullText: StyleIdHandler.toString(e)
   });
 }
 export function $$y11({
@@ -54,8 +54,8 @@ export function $$y11({
   return jsx(P, {
     target: i,
     errorIfMissing: t.isComplete,
-    text: r4(e, sD),
-    fullText: sD.toString(e)
+    text: r4(e, VariableIdHandler),
+    fullText: VariableIdHandler.toString(e)
   });
 }
 export function $$b12({
@@ -66,8 +66,8 @@ export function $$b12({
   return jsx(P, {
     target: i,
     errorIfMissing: t.isComplete,
-    text: r4(e, Kw),
-    fullText: Kw.toString(e)
+    text: r4(e, VariableOverrideIdHandler),
+    fullText: VariableOverrideIdHandler.toString(e)
   });
 }
 export function $$v10({
@@ -78,8 +78,8 @@ export function $$v10({
   return jsx(P, {
     target: i,
     errorIfMissing: t.isComplete,
-    text: r4(e, gr),
-    fullText: gr.toString(e)
+    text: r4(e, VariableSetIdCompatHandler),
+    fullText: VariableSetIdCompatHandler.toString(e)
   });
 }
 export function $$I1({
@@ -90,8 +90,8 @@ export function $$I1({
   return jsx(P, {
     target: i,
     errorIfMissing: t.isComplete,
-    text: r4(e, _H),
-    fullText: _H.toString(e)
+    text: r4(e, CodeComponentIdHandler),
+    fullText: CodeComponentIdHandler.toString(e)
   });
 }
 export function $$E3({
@@ -102,8 +102,8 @@ export function $$E3({
   return jsx(P, {
     target: i,
     errorIfMissing: t.isComplete,
-    text: r4(e, eJ),
-    fullText: eJ.toString(e)
+    text: r4(e, CodeLibraryIdHandler),
+    fullText: CodeLibraryIdHandler.toString(e)
   });
 }
 export function $$x2({
@@ -114,21 +114,21 @@ export function $$x2({
   return jsx(P, {
     target: i,
     errorIfMissing: t.isComplete,
-    text: r4(e, Tq),
-    fullText: Tq.toString(e)
+    text: r4(e, CodeFileIdHandler),
+    fullText: CodeFileIdHandler.toString(e)
   });
 }
 export function $$S0({
   canvasNodeId: e,
   scene: t
 }) {
-  let i = YB.toGuidStrIfLocal(e);
+  let i = CanvasNodeIdHandler.toGuidStrIfLocal(e);
   let a = i ? t.getNodeByGuid(i) : null;
   return jsx(P, {
     target: a,
     errorIfMissing: t.isComplete,
-    text: r4(e, YB),
-    fullText: YB.toString(e)
+    text: r4(e, CanvasNodeIdHandler),
+    fullText: CanvasNodeIdHandler.toString(e)
   });
 }
 export function $$w6({

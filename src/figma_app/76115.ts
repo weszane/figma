@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { sortByPropertyWithOptions, sortByWithOptions } from "../figma_app/656233";
 import { af } from "../905/934246";
 import { l as _$$l } from "../905/716947";

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, createRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { N as _$$N } from "../figma_app/469468";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { lQ } from "../905/934246";
@@ -16,7 +16,7 @@ import { _ as _$$_ } from "../905/456042";
 import { A as _$$A } from "../5132/237216";
 import { hideModal, showModalHandler } from "../905/156213";
 import { X } from "../905/853613";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ey } from "../figma_app/918700";
 import { sw, tW } from "../905/427932";
@@ -45,7 +45,7 @@ let E = registerModal(function ({
   inResourceHub: t
 }) {
   let r = useDispatch();
-  let o = iZ();
+  let o = selectCurrentUser();
   let j = _$$A(e, !1, !1, t);
   _$$h(() => {
     analyticsEventManager.trackDefinedEvent("preset_libraries.preset_options_modal_displayed", {

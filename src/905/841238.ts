@@ -1,22 +1,22 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { i } from "../905/718764";
 import { $n } from "../905/521428";
 import { ComponentPropType, Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
-import { WI } from "../905/929949";
+import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import { X as _$$X } from "../905/606795";
 import { Uz } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { u2 } from "../905/511649";
 import { Point } from "../905/736624";
 import { Jn } from "../905/17223";
 import { TQ, Zl } from "../905/211621";
 import { L as _$$L } from "../905/408237";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { XE } from "../figma_app/91703";
 import { vq } from "../905/8732";
 import { uP } from "../figma_app/933328";
@@ -153,7 +153,7 @@ function K({
       children: jsx($n, {
         type: "submit",
         disabled: !p,
-        recordingKey: Pt(s, "createButton"),
+        recordingKey: generateRecordingKey(s, "createButton"),
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.component_properties.slot_create_modal.invalid_property_name"),
           "data-tooltip-type": p ? void 0 : Ib.TEXT
@@ -244,9 +244,9 @@ let $$X0 = registerModal(function (e) {
     preferredProductComponents: es
   });
   let em = useCallback(e => {
-    Fullscreen.wouldCreateCycleUnderParent(singleSelectedNode?.guid || "", e) ? (U(_$$F.enqueue({
+    Fullscreen.wouldCreateCycleUnderParent(singleSelectedNode?.guid || "", e) ? (U(VisualBellActions.enqueue({
       message: getI18nString("design_systems.component_properties.choose_default_instance_value_cycle")
-    })), ea("")) : (U(_$$F.clearAll()), ea(e));
+    })), ea("")) : (U(VisualBellActions.clearAll()), ea(e));
   }, [U, singleSelectedNode?.guid]);
   let eh = bq(eo);
   let eg = _$$dl(eo);
@@ -262,7 +262,7 @@ let $$X0 = registerModal(function (e) {
     let e = ef.variableType;
     return jsx(NO, {
       initialPosition: ey,
-      initialVariableValue: WI(e, er),
+      initialVariableValue: resolveVariableValue(e, er),
       resolvedType: e === VariableResolvedDataType.TEXT_DATA ? VariableResolvedDataType.STRING : e,
       onCreateVariable: lQ,
       onClose: () => {
@@ -331,7 +331,7 @@ let $$X0 = registerModal(function (e) {
           onMouseLeave,
           onMouseUp,
           placeholder: propType === ComponentPropType.VARIANT ? "Property" : "",
-          recordingKey: Pt("componentPropName", xb(propType)),
+          recordingKey: generateRecordingKey("componentPropName", xb(propType)),
           value: K
         })]
       }), jsxs("div", {
@@ -365,7 +365,7 @@ let $$X0 = registerModal(function (e) {
           id: "create-component-prop-variant-input",
           onChange: e => ea(e.currentTarget.value),
           onKeyDown: ec,
-          recordingKey: Pt("componentPropDefaultValue", xb(propType)),
+          recordingKey: generateRecordingKey("componentPropDefaultValue", xb(propType)),
           defaultValue: er || "",
           autoCorrect: "off"
         })]

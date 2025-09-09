@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { aq } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { $ } from "../905/692618";
@@ -9,7 +9,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { f as _$$f } from "../figma_app/258006";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { b } from "../905/985254";
-import { ax } from "../figma_app/741237";
+import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { LS } from "../905/782918";
 let g = "hint_panels--icon--EMIdH";
 let f = buildUploadUrl("aae0db2814117595e45cc509d52e79e7cc31333c");
@@ -24,7 +24,7 @@ export function $$b1() {
     }));
   }, [t]);
   let c = useCallback(() => {
-    ax(IAssertResource.PLUGIN);
+    setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
     r();
   }, [r]);
   return e ? jsx("div", {

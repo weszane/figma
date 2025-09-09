@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, createRef } from "react";
 import { analyticsEventManager } from "../905/449184";
-import { uA } from "../figma_app/806412";
+import { RecordingComponent } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { N0, We, GY, zq, oz, wI } from "../figma_app/782261";
 import { P } from "../905/347284";
@@ -137,7 +137,7 @@ function y({
     renderedElement: o
   }) : null;
 }
-export class $$b0 extends uA {
+export class $$b0 extends RecordingComponent {
   constructor(e) {
     super(e);
     this.elementsCache = {

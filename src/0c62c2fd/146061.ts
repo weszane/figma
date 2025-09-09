@@ -1,8 +1,8 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, Fragment as _$$Fragment } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import n from "classnames";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { nR, vd } from "../figma_app/637027";
@@ -16,7 +16,7 @@ import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { Nr } from "../figma_app/199513";
 import { FC } from "../figma_app/212807";
-import { AbW } from "../figma_app/43951";
+import { FolderMoveModalView } from "../figma_app/43951";
 import { Bp } from "../figma_app/349248";
 import { UpsellModalType } from "../905/165519";
 import { bL } from "../figma_app/630077";
@@ -40,7 +40,7 @@ export function $$M0(e) {
   let o = _$$s();
   let g = useSelector(e => e.currentUserOrgId);
   let A = useSelector(e => null != g ? e.orgById[g] : null);
-  let P = Rs(AbW, {
+  let P = Rs(FolderMoveModalView, {
     currentOrgId: g,
     currentTeamId: null,
     folderId: e.folderId
@@ -82,7 +82,7 @@ export function $$M0(e) {
   let X = useCallback(() => {
     if (M && !$) {
       let e = bL(M?.id, M.orgId);
-      Ay.redirect(e, "_blank");
+      customHistory.redirect(e, "_blank");
     }
   }, [M, $]);
   let Q = useCallback(e => {

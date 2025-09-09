@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
 import { ZC } from "../figma_app/39751";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { iT } from "../figma_app/74165";
-import { JvY } from "../figma_app/43951";
+import { FileRecentViewers } from "../figma_app/43951";
 import { q5 } from "../figma_app/516028";
 let $$_0 = 8;
 let $$h6 = 22;
@@ -109,7 +109,7 @@ export function $$b7(e, t, r, s, l) {
 export function $$T8() {
   let e = q5();
   let t = e?.key;
-  let r = Rs(JvY, {
+  let r = Rs(FileRecentViewers, {
     fileKey: t ?? ""
   }, {
     enabled: !!t

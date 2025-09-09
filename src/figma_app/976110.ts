@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { arraysEqual } from "../figma_app/656233";
 import { c2 } from "../905/382883";
 import { SceneGraphHelpers } from "../figma_app/763686";
@@ -9,7 +9,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { MIXED_MARKER, isInvalidValue, valueOrFallback, isValidValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
 import { Xt } from "../figma_app/889655";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { J, j } from "../905/980942";
 function g(e) {
   if (!e || !e.interactionType) return "NONE";
@@ -204,7 +204,7 @@ export function $$T0(e, t) {
       e === J.NORMAL ? I = [...I, ...i] : e === J.INHERITED_INTERNAL && (I = [...r, ...I]);
       changes.prototypeInteractions = I;
       fullscreenValue.updateSelectionProperties(changes, {
-        shouldCommit: d?.shouldCommit || zk.YES,
+        shouldCommit: d?.shouldCommit || yesNoTrackingEnum.YES,
         overwrite: d?.overwrite
       });
     };

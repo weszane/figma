@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { sortByWithOptions } from "../figma_app/656233";
 import { VariableResolvedDataType, Fullscreen } from "../figma_app/763686";
 import { resourceUtils } from "../905/989992";

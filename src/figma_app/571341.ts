@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -25,7 +25,7 @@ import { t as _$$t } from "../905/241707";
 import { lW } from "../figma_app/11182";
 import { tS, q5 } from "../figma_app/516028";
 import { FEventType } from "../figma_app/191312";
-import { WND } from "../figma_app/43951";
+import { DevModeActivity } from "../figma_app/43951";
 import { IT } from "../905/713695";
 import { cn, tP, kT } from "../figma_app/841351";
 import { mg } from "../905/535806";
@@ -83,7 +83,7 @@ let W = atom("");
 export function $$K1(e) {
   let t = q5();
   let r = t?.key;
-  let n = Rs(WND, {
+  let n = Rs(DevModeActivity, {
     nodeId: e,
     fileKey: r ?? ""
   }, {

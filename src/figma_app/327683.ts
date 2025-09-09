@@ -1,5 +1,5 @@
 import { VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
-import { sD } from "../figma_app/243058";
+import { VariableIdHandler } from "../figma_app/243058";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
@@ -10,7 +10,7 @@ import { C } from "../905/887158";
 import { TW, sB, d$ } from "../905/958097";
 import { debugState } from "../905/407919";
 import { w0 } from "../figma_app/594947";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Oe } from "../figma_app/933328";
 import { Vg, gU, Hf } from "../figma_app/407414";
 import { Ef } from "../905/107436";
@@ -144,7 +144,7 @@ async function w({
   };
   let p = A(u).slice(0, l);
   if (0 === p.length && (u.maxColorDistance = 2 * d, 0 === (p = A(u)).length)) return null;
-  let _ = _$$g();
+  let _ = generateUUIDv4();
   if (1 === p.length) return {
     fixes: p.map(e => ({
       variableId: e.variable.node_id,
@@ -265,7 +265,7 @@ async function O({
     contrastData: l
   });
   let w = [...popularVariables, ...similarVariables.slice(0, _)];
-  let O = _$$g();
+  let O = generateUUIDv4();
   let R = atomStoreManager.get(Vg) ?? "";
   let L = await _$$i(e, w, t, O, R, Array.from(i.libraryKeys), a);
   return L && 0 !== L.length ? {
@@ -279,7 +279,7 @@ async function O({
           resolvedValue: t.resolvedValue
         } : null;
       }).filter(e => null !== e),
-      suggestionId: _$$g()
+      suggestionId: generateUUIDv4()
     },
     queryId: O
   } : null;
@@ -349,11 +349,11 @@ export async function $$L5(e, t, r, n, s, o, l) {
   if (!variableId) return !1;
   let y = r.availableVariables[variableId];
   if (!y?.node_id) return !1;
-  let b = sD.fromString(y.node_id);
+  let b = VariableIdHandler.fromString(y.node_id);
   if (!b) return !1;
   let T = debugState.dispatch;
   if (!(await T(Oe(y)))) return Promise.resolve(!1);
-  let I = sD.toKiwi(b);
+  let I = VariableIdHandler.toKiwi(b);
   let {
     index,
     paint
@@ -410,7 +410,7 @@ export function $$P1(e) {
 }
 export function $$D7(e, t, r) {
   if (!e || !e.colorVar || "ALIAS" !== e.colorVar.dataType) return null;
-  let n = sD.fromString(MH(e.colorVar) ?? "") ?? "";
+  let n = VariableIdHandler.fromString(MH(e.colorVar) ?? "") ?? "";
   let a = t[n];
   return !a || !("library_key" in a) || r.has(a.library_key) ? null : {
     variableId: n.toString(),

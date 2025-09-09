@@ -1,4 +1,4 @@
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { oA } from "../905/663269";
@@ -6,7 +6,7 @@ import { analyticsEventManager } from "../905/449184";
 import { Z } from "../905/515860";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { IiJ, N8H, nXJ, qn8 } from "../figma_app/43951";
+import { OrgByIdForPlanView, TeamByIdForPlanView, OrgByIdForPlanUserView, TeamByIdForPlanUserView } from "../figma_app/43951";
 import { QB, bN as _$$bN } from "../figma_app/707808";
 import { HT } from "../figma_app/428858";
 let h = createReduxSubscriptionAtomWithState(e => Z(e));
@@ -26,7 +26,7 @@ function y(e) {
 }
 function b(e, t, i) {
   if (t) {
-    let i = e(IiJ.Query({
+    let i = e(OrgByIdForPlanView.Query({
       orgId: t
     }));
     "errors" === i.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
@@ -55,7 +55,7 @@ function b(e, t, i) {
     }
   } else {
     if (!i) return y("No plan found, no org or team id");
-    let t = e(N8H.Query({
+    let t = e(TeamByIdForPlanView.Query({
       teamId: i
     }));
     "errors" === t.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
@@ -86,7 +86,7 @@ function b(e, t, i) {
 }
 function v(e, t, i) {
   if (t) {
-    let i = e(IiJ.Query({
+    let i = e(OrgByIdForPlanView.Query({
       orgId: t
     }));
     "errors" === i.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
@@ -114,7 +114,7 @@ function v(e, t, i) {
     }
   } else {
     if (!i) return y("No plan public info found, no org or team id");
-    let t = e(N8H.Query({
+    let t = e(TeamByIdForPlanView.Query({
       teamId: i
     }));
     "errors" === t.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_view_error", {
@@ -144,7 +144,7 @@ function v(e, t, i) {
 }
 function I(e, t, i) {
   if (t) {
-    let i = e(nXJ.Query({
+    let i = e(OrgByIdForPlanUserView.Query({
       orgId: t
     }));
     "errors" === i.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_user_view_error", {
@@ -172,7 +172,7 @@ function I(e, t, i) {
     }
   } else {
     if (!i) return y("No plan user found, no org or team id");
-    let t = e(qn8.Query({
+    let t = e(TeamByIdForPlanUserView.Query({
       teamId: i
     }));
     "errors" === t.status && analyticsEventManager.trackDefinedEvent("plans.current_plan_user_view_error", {

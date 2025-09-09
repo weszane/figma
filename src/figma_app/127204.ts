@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { b, bL } from "../figma_app/860955";
 import { e as _$$e } from "../905/428849";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { n6 } from "../905/234821";
 import { l as _$$l } from "../figma_app/856638";
 import { QE } from "../figma_app/914216";
@@ -18,7 +18,7 @@ export function $$u0(e) {
   let h = jsx(QE, {
     item: t,
     numUnreadComments: r,
-    recordingKey: Pt(e.recordingKey, "default")
+    recordingKey: generateRecordingKey(e.recordingKey, "default")
   }, t.recordingKey);
   return 1 === e.flyoutConfig.actions.length ? h : jsxs(bL, {
     manager,
@@ -27,11 +27,11 @@ export function $$u0(e) {
       children: [h, jsx(_$$e.Trigger, {
         ...getTriggerProps(),
         "aria-label": e.flyoutConfig.getTooltip(),
-        recordingKey: Pt(e.recordingKey, "chevron")
+        recordingKey: generateRecordingKey(e.recordingKey, "chevron")
       })]
     }), jsx(_$$l, {
       enabledToolbarItems: _,
-      recordingKey: Pt(e.recordingKey, "flyout")
+      recordingKey: generateRecordingKey(e.recordingKey, "flyout")
     })]
   });
 }

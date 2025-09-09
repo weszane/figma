@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useId, useMemo, forwardRef, useCallback, useState, useEffect, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -46,7 +46,7 @@ import { nN, SR } from "../figma_app/852050";
 import { _G, q5, Cq } from "../figma_app/516028";
 import { nn, zE, vu, lg, RQ, HF, Hb, ad, Cj, Fl } from "../figma_app/646357";
 import { FFileType, FContainerType, FAccessLevelType } from "../figma_app/191312";
-import { FWW } from "../figma_app/43951";
+import { PublishingModalView } from "../figma_app/43951";
 import { X$, H3 } from "../figma_app/465071";
 import { Wz, MW, ju, cM, MH, dM, fA, y6, x$ as _$$x$, oB as _$$oB, JI, Dc, Iy, Mh, Pd } from "../figma_app/803787";
 import { O as _$$O3 } from "../905/566074";
@@ -90,7 +90,7 @@ import { ms, MM, c$ as _$$c$ } from "../figma_app/236327";
 import { kt } from "../figma_app/858013";
 import { G as _$$G } from "../905/750789";
 import { p as _$$p } from "../905/927118";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { wA as _$$wA } from "../figma_app/167249";
 import { Nz } from "../figma_app/915774";
 import { _ as _$$_ } from "../figma_app/496441";
@@ -103,14 +103,14 @@ import { K as _$$K } from "../905/443068";
 import { A as _$$A2 } from "../905/24328";
 import { Z as _$$Z } from "../905/279476";
 import { e as _$$e2 } from "../905/916195";
-import { cd } from "../figma_app/243058";
+import { ResponsiveSetIdHandler } from "../figma_app/243058";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
 import td from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { qp } from "../905/977779";
-import { G9, iT, wr, Dh } from "../figma_app/741237";
+import { setNodeSymbolPublishable, setNodePublishable, clearSelection, addToSelection } from "../figma_app/741237";
 import { Um } from "../905/848862";
 import { M as _$$M2 } from "../905/771870";
 import { L as _$$L } from "../905/332753";
@@ -769,7 +769,7 @@ function tF({
   let j = useCallback(t => {
     permissionScopeHandler.user("set-is-publishable", () => {
       let t = !e.isPublishable;
-      e.type === PW.COMPONENT ? G9(e.node_id, t) : e.type === PW.VARIABLE_SET ? VariablesBindings.setVariableSetIsPublishable(e.node_id, t) : iT(e.node_id, t);
+      e.type === PW.COMPONENT ? setNodeSymbolPublishable(e.node_id, t) : e.type === PW.VARIABLE_SET ? VariablesBindings.setVariableSetIsPublishable(e.node_id, t) : setNodePublishable(e.node_id, t);
     });
     R();
   }, [R, e.isPublishable, e.node_id, e.type]);
@@ -791,9 +791,9 @@ function tF({
     }));
   }, [U, x, m]);
   let G = useCallback(async () => {
-    wr();
+    clearSelection();
     await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e.node_id);
-    Dh([e.node_id]);
+    addToSelection([e.node_id]);
     Fullscreen.triggerActionInUserEditScope("zoom-to-selection", void 0);
     x(hideModal());
   }, [x, e.node_id]);
@@ -831,7 +831,7 @@ function tF({
       });
       break;
     case PW.RESPONSIVE_SET:
-      let z = cd.fromLocalNodeIdStr(e.node_id);
+      let z = ResponsiveSetIdHandler.fromLocalNodeIdStr(e.node_id);
       if (z) {
         let e = {
           assetId: z,
@@ -1347,7 +1347,7 @@ function tJ(e) {
     eG(e);
     h(oB());
   }, [h]);
-  let eH = Rs(FWW({
+  let eH = Rs(PublishingModalView({
     fileKey: ef
   }), {
     enabled: !!ef
@@ -1543,7 +1543,7 @@ function tJ(e) {
       publishedHubFileStateGroups: n,
       publishingMode: s
     });
-    o = k9(() => [...e.map(e => e.node_id), ...t.map(e => e.node_id)], [e, t]);
+    o = useMemoStable(() => [...e.map(e => e.node_id), ...t.map(e => e.node_id)], [e, t]);
     let d = _$$wA(e => new Set(o.filter(t => {
       let i = e.get(t);
       return i?.hasCodeInstanceDescendant;

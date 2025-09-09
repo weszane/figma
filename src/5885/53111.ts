@@ -1,11 +1,11 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { hideModal } from "../905/156213";
 import { bE } from "../figma_app/375098";
 import { c as _$$c } from "../905/370443";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { S } from "../5885/332447";
 import { registerModal } from "../905/102752";
 import { xx } from "../figma_app/995208";
@@ -46,7 +46,7 @@ function v() {
 export let $$b0 = registerModal(function ({
   teamId: e
 }) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = useSelector(t => t.teams[e]);
   let m = useDispatch();
   let u = useSelector(e => e.userTeamFlags);

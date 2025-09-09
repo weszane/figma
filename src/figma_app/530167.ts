@@ -8,7 +8,7 @@ import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
 import { cR as _$$cR } from "../905/890368";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { HD, Co } from "../figma_app/471982";
 import { Gu } from "../figma_app/640564";
@@ -50,7 +50,7 @@ let $$M3 = createOptimistThunk((e, t) => {
     data: Gu()
   };
   if (!m) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.profile_not_found"),
       type: "COMMUNITY_PROFILE_ERROR"
     }));
@@ -142,7 +142,7 @@ let $$X10 = createOptimistThunk((e, {
     n && n();
   }).catch(t => {
     let r = J(t);
-    r && e.dispatch(F.enqueue({
+    r && e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.couldnt_restrict_profile_error", {
         error: r
       }),
@@ -168,7 +168,7 @@ let $$J16 = createOptimistThunk((e, {
     n && n();
   }).catch(t => {
     let r = J(t);
-    r && e.dispatch(F.enqueue({
+    r && e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.couldnt_unrestrict_profile_error", {
         error: r
       }),
@@ -321,7 +321,7 @@ let $$er12 = createOptimistThunk((e, t, {
   let b = twitter?.trim();
   let I = instagram?.trim();
   if (b && E?.twitter !== b && !HD.test(b)) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.your_twitter_handle_is_not_valid", {
         handle: b
       }),
@@ -330,7 +330,7 @@ let $$er12 = createOptimistThunk((e, t, {
     return;
   }
   if (I && E?.instagram !== I && !Co.test(I)) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.your_instagram_handle_is_not_valid", {
         handle: I
       }),
@@ -369,17 +369,17 @@ let $$er12 = createOptimistThunk((e, t, {
         subView: "handle",
         handle: profileHandle
       }));
-      r.meta.primary_user_id ? e.dispatch(F.enqueue({
+      r.meta.primary_user_id ? e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("community.actions.your_profile_handle_was_set_to_profile_handle", {
           profileHandle
         }),
         type: "profile-handle"
-      })) : r.meta.team_id ? e.dispatch(F.enqueue({
+      })) : r.meta.team_id ? e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("community.actions.your_team_s_handle_was_set_to_profile_handle", {
           profileHandle
         }),
         type: "team-handle"
-      })) : r.meta.org_id && e.dispatch(F.enqueue({
+      })) : r.meta.org_id && e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("community.actions.your_organization_s_handle_was_set_to_profile_handle", {
           profileHandle
         }),
@@ -395,7 +395,7 @@ let $$er12 = createOptimistThunk((e, t, {
           website: getI18nString("community.actions.your_website_url_was_updated"),
           description: getI18nString("community.actions.your_description_was_updated")
         };
-        e.dispatch(F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           message: t[n],
           type: "profile-updated"
         }));
@@ -428,7 +428,7 @@ let $$en23 = createOptimistThunk((e, t, {
       community_profile_handle: void 0,
       community_profile_id: void 0
     }));
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.profile_deleted")
     }));
   }).catch(() => {
@@ -495,7 +495,7 @@ let $$eo18 = createOptimistThunk(async (e, t, {
     e.getState().user?.community_profile_id && (e.dispatch($$F6({
       followedProfileId: t,
       currentUserProfileId: e.getState().user?.community_profile_id
-    })), e.dispatch(F.enqueue({
+    })), e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.followed_profile_name", {
         profileName: r.meta.followed_profile.name
       }),
@@ -503,7 +503,7 @@ let $$eo18 = createOptimistThunk(async (e, t, {
     })));
   }).catch(t => {
     let r = J(t);
-    r && e.dispatch(F.enqueue({
+    r && e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_follow_this_profile_profile_name", {
         profileName: r
       }),
@@ -525,13 +525,13 @@ let $$ed8 = createOptimistThunk((e, t, {
     e.getState().user?.community_profile_id && (e.dispatch($$j7({
       followedProfileId: t,
       currentUserProfileId: e.getState().user?.community_profile_id
-    })), e.dispatch(F.enqueue({
+    })), e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unfollowed_profile"),
       type: "COMMUNITY_HUB_UNFOLLOW"
     })));
   }).catch(t => {
     let r = J(t);
-    r && e.dispatch(F.enqueue({
+    r && e.dispatch(VisualBellActions.enqueue({
       message: `Unable to unfollow this profile: ${r}`,
       type: "COMMUNITY_HUB_UNFOLLOW_FAILED",
       error: !0
@@ -566,7 +566,7 @@ createOptimistThunk(async (e, t) => {
       }
     }));
   }).catch(t => {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: resolved ? getI18nString("community.actions.failed_to_resolve_comment") : getI18nString("community.actions.failed_to_unresolve_comment")
     }));

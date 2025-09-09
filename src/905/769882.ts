@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { ColorSpaceEnum, ColorProfileEnum } from "../figma_app/763686";
 import { FEditorType } from "../figma_app/53721";
 import { tK, Av } from "../figma_app/622881";
@@ -9,7 +9,7 @@ let d = ({
   userColorProfile: t,
   editorType: i
 }) => {
-  if (i === FEditorType.Whiteboard) ;else if (t === M.DISPLAY_P3 && tK(e)) return ColorSpaceEnum.DISPLAY_P3;
+  if (i === FEditorType.Whiteboard); else if (t === M.DISPLAY_P3 && tK(e)) return ColorSpaceEnum.DISPLAY_P3;
   return ColorSpaceEnum.SRGB;
 };
 export function $$c0(e) {

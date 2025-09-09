@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { U1 } from "../figma_app/343967";
 import { cZ } from "../figma_app/272902";
 import o from "classnames";

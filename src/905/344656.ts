@@ -6,7 +6,7 @@ import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { Hh } from "../figma_app/553184";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { wZ } from "../figma_app/701982";
 import { ds } from "../figma_app/314264";
 import { G } from "../905/674940";
@@ -38,8 +38,8 @@ let b = createOptimistThunk((e, t) => {
   let i = e.getState();
   let n = i.openFile;
   n && (i.saveStatus && !i.saveStatus.hasUnsavedChanges && t.hasUnsavedChanges ? G.start(() => {
-    getInitialOptions().e2e_traffic && e.dispatch(F.clearAll());
-    getFeatureFlags().remove_unsaved_changes_bell || e.dispatch(F.enqueue({
+    getInitialOptions().e2e_traffic && e.dispatch(VisualBellActions.clearAll());
+    getFeatureFlags().remove_unsaved_changes_bell || e.dispatch(VisualBellActions.enqueue({
       type: "unsaved_changes",
       message: getI18nString("save_status.unsaved_changes"),
       button: {
@@ -52,16 +52,16 @@ let b = createOptimistThunk((e, t) => {
         }
       },
       onDismiss: () => {
-        e.dispatch(F.dequeue({
+        e.dispatch(VisualBellActions.dequeue({
           matchType: "unsaved_changes"
         }));
       },
       timeoutOverride: 1 / 0
     }));
     y(n.key);
-  }, getInitialOptions().e2e_traffic ? 10 : void 0) : i.saveStatus && i.saveStatus.hasUnsavedChanges && !t.hasUnsavedChanges && (e.dispatch(F.dequeue({
+  }, getInitialOptions().e2e_traffic ? 10 : void 0) : i.saveStatus && i.saveStatus.hasUnsavedChanges && !t.hasUnsavedChanges && (e.dispatch(VisualBellActions.dequeue({
     matchType: "unsaved_changes"
-  })), G.clear() && navigator.onLine && e.dispatch(F.enqueue({
+  })), G.clear() && navigator.onLine && e.dispatch(VisualBellActions.enqueue({
     message: getI18nString("save_status.changes_saved")
   }))));
 });

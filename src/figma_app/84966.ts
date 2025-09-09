@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
@@ -16,7 +16,7 @@ import { k as _$$k2 } from "../figma_app/618031";
 import { hY } from "../figma_app/80683";
 import { Y$, Ln, SG, Tc } from "../905/84777";
 import { FOrganizationLevelType, FOrganizationEntityType } from "../figma_app/191312";
-import { JRW } from "../figma_app/43951";
+import { PendingConfirmedRenewalSeatCountsView } from "../figma_app/43951";
 import { vr } from "../figma_app/514043";
 import { mt } from "../figma_app/345997";
 import { IX } from "../905/712921";
@@ -124,7 +124,7 @@ function G(e, t) {
 function V(e, t, r = {
   enabled: !0
 }) {
-  let [i] = IT(JRW({
+  let [i] = IT(PendingConfirmedRenewalSeatCountsView({
     planParentId: e.parentId,
     planParentType: e.type === FOrganizationLevelType.ORG ? FOrganizationEntityType.ORG : FOrganizationEntityType.TEAM,
     billingInterval: BillingCycle.YEAR
@@ -147,7 +147,7 @@ export function $$z7(e) {
   let t = !!e;
   let r = e?.nextRenewalDate;
   let i = r && $$W16(r, e.renewalWindow || 30);
-  let a = Rs(JRW, {
+  let a = Rs(PendingConfirmedRenewalSeatCountsView, {
     planParentId: e?.planKey.parentId ?? "",
     planParentType: e?.planKey.type === FOrganizationLevelType.ORG ? FOrganizationEntityType.ORG : FOrganizationEntityType.TEAM,
     billingInterval: BillingCycle.YEAR

@@ -1,7 +1,7 @@
 import { s as _$$s } from "../905/583953";
 import { M } from "../905/512402";
-import { NN } from "../905/409381";
-import { D6 } from "../905/117560";
+import { getRadialGradientPoints } from "../905/409381";
+import { toMatrix2x3 } from "../905/117560";
 import { Point } from "../905/736624";
 import { EG } from "../905/721592";
 function d(e) {
@@ -146,7 +146,7 @@ export class $$h0 {
     }, {
       x: l,
       y: d
-    }] = NN(D6(e.gradientTransform));
+    }] = getRadialGradientPoints(toMatrix2x3(e.gradientTransform));
     this.centerX = i;
     this.centerY = n;
     this.width = Math.sqrt((l - i) * (l - i) + (d - n) * (d - n));
@@ -168,7 +168,7 @@ export class $$g3 {
     }, {
       x: r,
       y: o
-    }] = NN(D6(e.gradientTransform));
+    }] = getRadialGradientPoints(toMatrix2x3(e.gradientTransform));
     this.centerX = i;
     this.centerY = n;
     this.angle = 180 * Math.atan2(o - n, r - i) / Math.PI + 90;

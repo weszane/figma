@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useContext, useState, useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { oB } from "../figma_app/273493";
 import { Fullscreen, TransactionCommand, BorderStyle } from "../figma_app/763686";
@@ -8,7 +8,7 @@ import d from "classnames";
 import { d as _$$d } from "../vendor/456530";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
-import { aH } from "../figma_app/806412";
+import { SKIP_RECORDING } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { jD } from "../905/765855";
 import { F as _$$F } from "../905/989956";
@@ -115,10 +115,10 @@ export let $$x0 = memo(function ({
       [bj]: k
     }),
     onPointerDown: () => {
-      if (W(!0), !_$$T.RECORD_DETAILED_EVENTS) return aH;
+      if (W(!0), !_$$T.RECORD_DETAILED_EVENTS) return SKIP_RECORDING;
     },
     onPointerUp: () => {
-      if (W(!1), !_$$T.RECORD_DETAILED_EVENTS) return aH;
+      if (W(!1), !_$$T.RECORD_DETAILED_EVENTS) return SKIP_RECORDING;
     },
     onTouchStart: e => {
       e.preventDefault();

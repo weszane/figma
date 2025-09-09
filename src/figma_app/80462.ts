@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createElement, memo, useEffect, useLayoutEffect } from "react";
-import { useSelector, shallowEqual, useStore } from "../vendor/514228";
+import { useSelector, shallowEqual, useStore } from "react-redux";
 import { c2 } from "../905/382883";
 import { clamp } from "../figma_app/492908";
 import { LayoutTabType, Fullscreen, SceneGraphHelpers, CustomFocusHelpers } from "../figma_app/763686";
@@ -13,7 +13,7 @@ import { j7 } from "../905/929976";
 import { K9 } from "../figma_app/8833";
 import { E3 } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { QZ } from "../figma_app/62612";
 import { W } from "../905/898204";
 import { f as _$$f } from "../905/299537";
@@ -233,7 +233,7 @@ export function $$j2({
     editorType: ei
   });
   let es = !J;
-  if (getFeatureFlags().a11y_design_dom_mirror) Z = es ? EO(X, q) : EO(X, q, J.dimensions, J.absoluteTransform);else {
+  if (getFeatureFlags().a11y_design_dom_mirror) Z = es ? EO(X, q) : EO(X, q, J.dimensions, J.absoluteTransform); else {
     let e = es ? "canvas" : J.transformProperties;
     Z = l0(u, e);
   }
@@ -324,7 +324,7 @@ export function $$j2({
         e.preventDefault();
       },
       onFocus: e => {
-        e.target !== e.currentTarget || e.relatedTarget === e.currentTarget || eu || (wr(), Dh([k]), fullscreenValue.commit(), F(QZ({
+        e.target !== e.currentTarget || e.relatedTarget === e.currentTarget || eu || (clearSelection(), addToSelection([k]), fullscreenValue.commit(), F(QZ({
           nodeId: k,
           ...$$R0
         }), $$L4));

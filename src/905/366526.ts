@@ -55,7 +55,7 @@ import { showModal, popPrevModal, updateModal, popModalStack, showModalHandler, 
 import { lM as _$$lM, Dx } from '../905/158740';
 import { mO as _$$mO, Y5 as _$$Y3, kI } from '../905/163189';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { RG, vq } from '../905/165290';
+import { createFontMetadata, getFontOwner } from '../905/165290';
 import { c as _$$c3 } from '../905/167005';
 import { a as _$$a2 } from '../905/173279';
 import { C as _$$C, Y as _$$Y } from '../905/180528';
@@ -92,13 +92,13 @@ import { hS as _$$hS, oy as _$$oy } from '../905/276025';
 import { A as _$$A } from '../905/289770';
 import { L as _$$L } from '../905/293182';
 import { Q8, R9 } from '../905/294085';
-import { m as _$$m3, z as _$$z2 } from '../905/298920';
+import { sendMessageToParent, initializeIntegrationEnvironment } from '../905/298920';
 import { setLastUsedEditorType } from '../905/298923';
 import { E as _$$E3, ie as _$$ie, nM as _$$nM, Nu, SL } from '../905/300250';
 import { F as _$$F5 } from '../905/300562';
 import { p as _$$p2 } from '../905/300815';
 import { r as _$$r } from '../905/302698';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText, loadI18nState } from '../905/303541';
 import { T as _$$T3, v as _$$v4 } from '../905/309844';
 import { sR as _$$sR } from '../905/309846';
@@ -111,7 +111,7 @@ import { P as _$$P4 } from '../905/347284';
 import { createOptimistThunk } from '../905/350402';
 import { E as _$$E8 } from '../905/355220';
 import { l as _$$l5 } from '../905/362016';
-import { iZ as _$$iZ2 } from '../905/372672';
+import { selectCurrentUser } from '../905/372672';
 import { S as _$$S3 } from '../905/373189';
 import { y as _$$y3 } from '../905/375507';
 import { T as _$$T4 } from '../905/378189';
@@ -133,7 +133,7 @@ import { performanceMetricsTracker } from '../905/414972';
 import { v as _$$v3 } from '../905/417890';
 import { getResourceDataOrFallback } from '../905/419236';
 import { H as _$$H5 } from '../905/422284';
-import { oD as _$$oD } from '../905/436043';
+import { LivegraphProvider } from '../905/436043';
 import { hS as _$$hS2 } from '../905/437088';
 import { N as _$$N2 } from '../905/438674';
 import { _O, vf, Y7, z$ } from '../905/438864';
@@ -146,7 +146,7 @@ import { N as _$$N4 } from '../905/465068';
 import { bE as _$$bE5, CN as _$$CN, iC as _$$iC, iE as _$$iE3, nF as _$$nF, nK as _$$nK, nX as _$$nX, uo as _$$uo7, yJ as _$$yJ7, ER, kE } from '../905/466026';
 import { id as _$$id2, lk as _$$lk, nq as _$$nq, Qh as _$$Qh, Xc as _$$Xc, FY, Kb, wG } from '../905/469533';
 import { O as _$$O2 } from '../905/480562';
-import { A as _$$A3 } from '../905/482208';
+import { formatI18nMessage } from '../905/482208';
 import { R as _$$R } from '../905/483499';
 import { Rh } from '../905/485103';
 import { $ as _$$$2 } from '../905/489647';
@@ -195,7 +195,7 @@ import { getFeatureFlags } from '../905/601108';
 import { Im } from '../905/608145';
 import { TH } from '../905/609392';
 import { PerfTimer } from '../905/609396';
-import { Ay as _$$Ay, Ix } from '../905/612521';
+import { customHistory, CustomRouter } from '../905/612521';
 import { uW as _$$uW, yJ as _$$yJ9, Z as _$$Z3 } from '../905/618921';
 import { _G, Pv } from '../905/619652';
 import { e as _$$e5 } from '../905/621515';
@@ -206,7 +206,7 @@ import { A as _$$A0, y as _$$y6 } from '../905/638715';
 import { F as _$$F7, h as _$$h4 } from '../905/642505';
 import { k as _$$k3 } from '../905/644504';
 import { i as _$$i } from '../905/651613';
-import { k as _$$k4 } from '../905/651849';
+import { logger } from '../905/651849';
 import { getStorage, getLocalStorage, useLocalStorageSync, localStorageRef } from '../905/657224';
 import { $T, KJ as _$$KJ, Vx as _$$Vx, V0 } from '../905/657710';
 import { oA as _$$oA, tT as _$$tT } from '../905/663269';
@@ -289,7 +289,7 @@ import { hM as _$$hM } from '../905/851937';
 import { D as _$$D2 } from '../905/852057';
 import { n0 as _$$n4, oI as _$$oI3, QA as _$$QA2, uQ as _$$uQ, Lh, Mc, Xp } from '../905/854717';
 import { T as _$$T5 } from '../905/858738';
-import { n3 as _$$n2, IA, Rf } from '../905/859698';
+import { n3 as _$$n2, VariableStyleId, Rf } from '../905/859698';
 import { cc as _$$cc, zl as _$$zl, By, qB, RE, vR } from '../905/862321';
 import { RD } from '../905/862913';
 import { w as _$$w2 } from '../905/863010';
@@ -297,7 +297,7 @@ import { xH as _$$xH2 } from '../905/869282';
 import { areSessionLocalIDsEqual, defaultSessionLocalIDString } from '../905/871411';
 import { createDeferredPromise } from '../905/874553';
 import { $I as _$$$I, ay as _$$ay, cr as _$$cr, dC as _$$dC, iE as _$$iE2, lx as _$$lx, ow as _$$ow, ru as _$$ru, uo as _$$uo3, yH as _$$yH2, B2, Bn, Cp, gP, Ho, HV, I0, JV, KQ, ku, Ty, U$, UA, WE, xI, Y1 } from '../905/879323';
-import { g as _$$g3 } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { P6, VK, YF, YK } from '../905/880488';
 import { D as _$$D4 } from '../905/882262';
 import { updateEnvironmentInfo } from '../905/883621';
@@ -351,10 +351,10 @@ import { hZ as _$$hZ6, w4, yo } from '../figma_app/28323';
 import { ec as _$$ec } from '../figma_app/29089';
 import { Wd } from '../figma_app/35887';
 import { ZC } from '../figma_app/39751';
-import { abL, B_E, c2_, CrP, ehp, EmG, EZU, G9Z, H2R, hbX, HSg, IiJ, ISl, JS_, k$m, M7X, N8H, nXJ, o8f, P0r, qn8, qYc, Ra2, T0, Thl, V15, vvS, wj_, WKb, X$D, XKS, zz3 } from '../figma_app/43951';
+import { BlockingUserState, StateGroupUpdatesForTeam, StateGroupUpdatesForFile, ComponentUpdatesForProject, OpenEditorFileData, ReposForProject, OrgByIdForRealtimeShim, WhitelistedPluginsForOrg, EduGracePeriodsForUser, StatsigTeamsOrderView, PluginUpdatesForOrg, OrgByIdForPlanView, WidgetUpdatesForOrg, UserTeamRoleRequestView, FontFileForOrgView, CommunityPaymentsForRealtimeShim, TeamByIdForPlanView, OrgByIdForPlanUserView, OrgUsersForRealtimeShim, ComponentUpdatesForFile, TeamByIdForPlanUserView, RepoByIdForRealtimeShim, UserForRealtimeShim, RoleUpdatesForUser, FontFileForTeamView, ReposForFile, UserTeamFlagsForRealtimeShim, ComponentUpdatesForTeam, ReposForTeam, StateGroupUpdatesForProject, TeamByIdForRealtimeShim, RoleUpdatesForTeam } from '../figma_app/43951';
 import { Qv as _$$Qv, vt as _$$vt } from '../figma_app/45218';
 import { eq as _$$eq, FO as _$$FO, Ri as _$$Ri, D3, L1, QA, Sb, wO, yh } from '../figma_app/49598';
-import { FEditorType, mapEditorTypeToStringWithObfuscated, mapFileTypeToEditorType, mapEditorTypeToYF, mapEditorTypeToString } from '../figma_app/53721';
+import { FEditorType, mapEditorTypeToStringWithObfuscated, mapFileTypeToEditorType, mapEditorTypeToWorkspaceType, mapEditorTypeToString } from '../figma_app/53721';
 import { o as _$$o6 } from '../figma_app/54816';
 import { c3 as _$$c, S as _$$S, sF as _$$sF, uo as _$$uo, bE, jO, Lk, Nw, PB, PF, U2, yJ, Yp } from '../figma_app/78808';
 import { Eo, qv } from '../figma_app/80990';
@@ -480,7 +480,7 @@ import { ZG } from '../figma_app/736948';
 import { F as _$$F9 } from '../figma_app/738753';
 import { ax as _$$ax, d9 as _$$d3, oH as _$$oH, ou as _$$ou, T9 as _$$T, CR, HR } from '../figma_app/740025';
 import { LQ } from '../figma_app/741211';
-import { NT, XP } from '../figma_app/741237';
+import { setPropertiesPanelTab, consumeFullscreenEventState } from '../figma_app/741237';
 import { WJ as _$$WJ } from '../figma_app/745458';
 import { R_ } from '../figma_app/749805';
 import { cT as _$$cT2, rJ as _$$rJ, t2 as _$$t7, ue as _$$ue, C0, Jh, XU } from '../figma_app/756995';
@@ -538,7 +538,7 @@ import uW from '../vendor/223926';
 import { n_ as _$$n_ } from '../vendor/235095';
 import ag from '../vendor/239910';
 import uy from '../vendor/241899';
-import { useSelector, Provider, useDispatch } from '../vendor/514228';
+import { useSelector, Provider, useDispatch } from 'react-redux';
 import eW from '../vendor/625526';
 import mI from '../vendor/643300';
 import { A as _$$A4 } from '../vendor/718327';
@@ -705,7 +705,7 @@ class G {
     } : null;
   }
   getLabel(e, t) {
-    let i = t.displayText ?? _$$A3(e, t.args);
+    let i = t.displayText ?? formatI18nMessage(e, t.args);
     return this.options.isEnLocale ? function (e) {
       let t = e.split(' ');
       for (let e = 1; e < t.length - 1; e++) {
@@ -1206,7 +1206,7 @@ function e1({
   !function (e, t, i) {
     let n = Xr(_$$oo);
     let r = function (e, t, i) {
-      let n = Rs(hbX, {
+      let n = Rs(StatsigTeamsOrderView, {
         currentOrgId: t
       });
       return useMemo(() => {
@@ -1375,7 +1375,7 @@ let t_ = e => t => async function (i) {
         data: t
       }) => {
         if (e.getState().communityHub?.pageState?.view === 'communityHub' && getCookieOrStorage().set('community_signup_redirect', {
-          location: _$$Ay.location.pathname,
+          location: customHistory.location.pathname,
           action: null
         }), _$$p2('sign_up_user_pass'), _$$g2('sign_up_success', n.auth.origin, {
           mailingListOptIn: e.getState().auth.optInEmail,
@@ -1652,7 +1652,7 @@ let t8 = {
   },
   navigateToFile(e, t, i) {
     $R(e, t);
-    _$$Ay.redirect(i);
+    customHistory.redirect(i);
   },
   selectView(e, t) {
     xK.start('editorPreloaded');
@@ -1873,7 +1873,7 @@ let iz = e => t => function (i) {
           fileKeys: Object.keys(i.payload.fileKeys),
           repoIds: i.payload.repoIds || []
         }));
-        e.dispatch(_$$F.dequeue({}));
+        e.dispatch(VisualBellActions.dequeue({}));
       };
       if (o.then(o => {
         if (assert(P6.matches(i) || YK.matches(i)), desktopAPIInstance) {
@@ -1903,17 +1903,17 @@ let iz = e => t => function (i) {
             e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_delete_error')));
           }
         } else {
-          l ? n ? e.dispatch(_$$F.enqueue({
+          l ? n ? e.dispatch(VisualBellActions.enqueue({
             type: 'file_deleted',
             message: getI18nString('file_browser.file_browser_actions.branch_archived'),
             button: {
               text: getI18nString('general.undo'),
               action: d
             }
-          })) : e.dispatch(_$$F.enqueue({
+          })) : e.dispatch(VisualBellActions.enqueue({
             type: 'file_deleted',
             message: getI18nString('file_browser.file_browser_actions.branch_deleted')
-          })) : r || (n ? e.dispatch(_$$F.enqueue({
+          })) : r || (n ? e.dispatch(VisualBellActions.enqueue({
             type: 'file_deleted',
             message: getI18nString('file_browser.file_browser_actions.files_trashed', {
               numFiles: s.length
@@ -1922,7 +1922,7 @@ let iz = e => t => function (i) {
               text: getI18nString('general.undo'),
               action: d
             }
-          })) : e.dispatch(_$$F.enqueue({
+          })) : e.dispatch(VisualBellActions.enqueue({
             type: 'file_deleted',
             message: getI18nString('file_browser.file_browser_actions.files_deleted_forever', {
               numFiles: s.length
@@ -2001,7 +2001,7 @@ let iz = e => t => function (i) {
       let o = Ns(s, s.key);
       o && WB().optimisticallyUpdate(o, n);
       let l = e.getState();
-      l.selectedView.view === 'fullscreen' && l.openFile && o && subscribeAndGetStatus(ehp, {
+      l.selectedView.view === 'fullscreen' && l.openFile && o && subscribeAndGetStatus(OpenEditorFileData, {
         fileKey: s.key
       }).then(t => {
         if (t === 'loading') {
@@ -2025,7 +2025,7 @@ let iz = e => t => function (i) {
       versionId
     } = i.payload;
     let a = XHR.post(`/api/multiplayer/${fileKey}/restore?version_id=${encodeURIComponent(versionId)}`).then(() => {
-      _$$Ay.reload('File restored', {
+      customHistory.reload('File restored', {
         key: fileKey
       });
     });
@@ -2250,7 +2250,7 @@ let i6 = e => t => function (i) {
           break;
         }
       }
-      _$$k4.error('Failed to update flags', JSON.stringify(i.payload), t);
+      logger.error('Failed to update flags', JSON.stringify(i.payload), t);
     });
   } else if (_$$bE3.matches(i)) {
     let n = XHR.post('/api/user/user_team_flags', i.payload);
@@ -2384,7 +2384,7 @@ let nS = e => t => function (i) {
     let r = Np(n, n.selectedView);
     let a = Np(n, i.payload);
     if (_$$cm(r) !== _$$cm(a)) {
-      _$$Ay.unsafeRedirectWithLocationHref(a);
+      customHistory.unsafeRedirectWithLocationHref(a);
       return;
     }
   }
@@ -2402,7 +2402,7 @@ let nS = e => t => function (i) {
         thumbnail: _$$pf(e)
       });
     }
-    let a = vU(n, new URL(_$$Ay.location.href).pathname);
+    let a = vU(n, new URL(customHistory.location.href).pathname);
     if (r.view === 'communityHub' && a.view !== 'communityHub') {
       desktopAPIInstance.openCommunity(Np(n, r), n.user?.id ?? '');
       return;
@@ -2459,14 +2459,14 @@ let nS = e => t => function (i) {
         let i = e.getState().user?.id;
         i && (t = NQ(t, 'fuid', i));
         r.view === 'fullscreen' && (t = NQ(t, 'editor_type', mapEditorTypeToStringWithObfuscated(r.editorType)));
-        _$$Ay.unsafeRedirectWithLocationHref(t);
+        customHistory.unsafeRedirectWithLocationHref(t);
         return;
       }
     }
     if (!desktopAPIInstance.isFileBrowserTab() && r.view !== 'communityHub') {
       if (!r || r.view !== 'fullscreen' && r.view !== 'prototype' && r.view !== 'desktopNewTab') {
         let e = Np(n, r);
-        e && _$$Ay.unsafeRedirectWithLocationHref(e);
+        e && customHistory.unsafeRedirectWithLocationHref(e);
         return;
       }
       r.view === 'prototype' && desktopAPIInstance.setLoading(!1);
@@ -2725,7 +2725,7 @@ let nQ = e => t => function (i) {
       } else if (r.editorType !== a.editorType) {
         let t = e.getState().mirror.appModel.currentTool === _$$ec.tool;
         if (_$$L(), setLastUsedEditorType(a.editorType), fullscreenValue.isReady()) {
-          Fullscreen?.setEditorType(mapEditorTypeToYF(a.editorType));
+          Fullscreen?.setEditorType(mapEditorTypeToWorkspaceType(a.editorType));
           let e = n.theme.visibleTheme;
           Fullscreen?.setEditorTheme(e || '');
         }
@@ -2736,10 +2736,10 @@ let nQ = e => t => function (i) {
           let r = AppStateTsApi?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? DesignWorkspace.DESIGN;
           let a = n ? [DesignWorkspace.DESIGN, DesignWorkspace.PROTOTYPE] : [DesignWorkspace.INSPECT, DesignWorkspace.EXPORT];
           if (t) {
-            NT(DesignWorkspace.COMMENT);
+            setPropertiesPanelTab(DesignWorkspace.COMMENT);
           } else if (!a.includes(r)) {
             let e = n ? DesignWorkspace.DESIGN : DesignWorkspace.INSPECT;
-            NT(e);
+            setPropertiesPanelTab(e);
           }
         }));
       } else {
@@ -2763,14 +2763,14 @@ let nQ = e => t => function (i) {
           view: 'fullscreen',
           fileKey: n.default_file_key,
           editorType: FEditorType.Design
-        })) : desktopAPIInstance ? i.payload.userInitiated || _$$Ay.reload('File deleted', {
+        })) : desktopAPIInstance ? i.payload.userInitiated || customHistory.reload('File deleted', {
           key: t.openFile?.key || null
         }) : atomStoreManager.get(_$$_) || e.dispatch(_$$sf({
           view: 'recentsAndSharing'
         }));
       }
     } else {
-      _$$Ay.reload('File deleted', {
+      customHistory.reload('File deleted', {
         key: t.openFile?.key || null
       });
     }
@@ -3590,7 +3590,7 @@ async function av(e) {
 let aT = new _$$H6({
   name: 'CommunityResourcePaymentShim',
   ..._$$uu,
-  livegraphView: M7X,
+  livegraphView: CommunityPaymentsForRealtimeShim,
   livegraphArgs: () => ({}),
   convertLivegraphMessage: (e, t, {}, i) => function (e, t) {
     let i = [];
@@ -3721,7 +3721,7 @@ function aM(e) {
 let aj = new _$$H6({
   name: 'TeamChannelComponentsShim',
   ...fJ,
-  livegraphView: wj_,
+  livegraphView: ComponentUpdatesForTeam,
   livegraphArgs: e => ({
     teamId: e
   }),
@@ -3765,7 +3765,7 @@ let aj = new _$$H6({
 let aU = new _$$H6({
   name: 'ProjectChannelComponentsShim',
   ..._$$aj,
-  livegraphView: CrP,
+  livegraphView: ComponentUpdatesForProject,
   livegraphArgs: e => ({
     projectId: e
   }),
@@ -3810,7 +3810,7 @@ let aU = new _$$H6({
 let aB = new _$$H6({
   name: 'FileChannelComponentsShim',
   ...w7,
-  livegraphView: P0r,
+  livegraphView: ComponentUpdatesForFile,
   livegraphArgs: e => ({
     fileKey: e
   }),
@@ -3936,7 +3936,7 @@ function aG(e) {
 let az = new _$$H6({
   name: 'TeamChannelStateGroupShim',
   ...fJ,
-  livegraphView: B_E,
+  livegraphView: StateGroupUpdatesForTeam,
   livegraphArgs: e => ({
     teamId: e
   }),
@@ -3980,7 +3980,7 @@ let az = new _$$H6({
 let aH = new _$$H6({
   name: 'ProjectChannelStateGroupShim',
   ..._$$aj,
-  livegraphView: X$D,
+  livegraphView: StateGroupUpdatesForProject,
   livegraphArgs: e => ({
     projectId: e
   }),
@@ -4025,7 +4025,7 @@ let aH = new _$$H6({
 let aW = new _$$H6({
   name: 'FileChannelStateGroupShim',
   ...w7,
-  livegraphView: c2_,
+  livegraphView: StateGroupUpdatesForFile,
   livegraphArgs: e => ({
     fileKey: e
   }),
@@ -4081,7 +4081,7 @@ function aZ(e, t) {
       case 'post':
       case 'put':
         fullscreenValue.isReady() && Fonts && Fonts.addToFontList({
-          list: [RG(t.font_file)],
+          list: [createFontMetadata(t.font_file)],
           localizedToUnlocalized: [],
           renames: {
             family: {},
@@ -4089,12 +4089,12 @@ function aZ(e, t) {
           }
         });
         e.dispatch(_$$X3.put({
-          font: RG(t.font_file)
+          font: createFontMetadata(t.font_file)
         }));
         break;
       case 'delete':
         e.dispatch(_$$X3.del({
-          font: RG(t.font_file)
+          font: createFontMetadata(t.font_file)
         }));
     }
   }
@@ -4140,7 +4140,7 @@ function aX(e, t) {
 let aQ = new _$$H6({
   name: 'FontFileForTeamShim',
   ...fJ,
-  livegraphView: Thl,
+  livegraphView: FontFileForTeamView,
   livegraphArgs: (e, t) => ({
     teamId: e ?? null,
     updatedAtTimestamp: t
@@ -4157,7 +4157,7 @@ let aQ = new _$$H6({
 let aJ = new _$$H6({
   name: 'FontFileForOrgShim',
   ..._$$uf,
-  livegraphView: k$m,
+  livegraphView: FontFileForOrgView,
   livegraphArgs: (e, t) => ({
     orgId: e ?? null,
     updatedAtTimestamp: t
@@ -4174,7 +4174,7 @@ let aJ = new _$$H6({
 let a1 = new _$$H6({
   name: 'OrgShim',
   ..._$$uf,
-  livegraphView: EZU,
+  livegraphView: OrgByIdForRealtimeShim,
   livegraphArgs: e => ({
     orgId: e
   }),
@@ -4197,7 +4197,7 @@ let a1 = new _$$H6({
 let a2 = new _$$H6({
   name: 'OrgUserShim',
   ..._$$uu,
-  livegraphView: o8f,
+  livegraphView: OrgUsersForRealtimeShim,
   livegraphArgs: e => ({}),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (e.getState().user?.id !== t.currentUser.id) return [];
@@ -4268,7 +4268,7 @@ function a3(e, t) {
 let a6 = new _$$H6({
   name: 'PluginShim',
   ..._$$uf,
-  livegraphView: HSg,
+  livegraphView: PluginUpdatesForOrg,
   livegraphArgs: (e, t) => ({
     orgId: e ?? null,
     updatedAtTimestamp: t
@@ -4444,7 +4444,7 @@ function st(e, t) {
 let si = new _$$H6({
   name: 'FileRepoChannelRepoShim',
   ...Ut,
-  livegraphView: qYc,
+  livegraphView: RepoByIdForRealtimeShim,
   livegraphArgs: e => ({
     repoId: e
   }),
@@ -4472,7 +4472,7 @@ let si = new _$$H6({
 let sn = new _$$H6({
   name: 'FileChannelRepoShim',
   ...w7,
-  livegraphView: V15,
+  livegraphView: ReposForFile,
   livegraphArgs: e => ({
     fileKey: e
   }),
@@ -4500,7 +4500,7 @@ let sn = new _$$H6({
 let sr = new _$$H6({
   name: 'TeamChannelRepoShim',
   ...fJ,
-  livegraphView: WKb,
+  livegraphView: ReposForTeam,
   livegraphArgs: (e, t) => ({
     teamId: e,
     updatedAtTimestamp: t
@@ -4529,7 +4529,7 @@ let sr = new _$$H6({
 let sa = new _$$H6({
   name: 'FolderChannelRepoShim',
   ..._$$aj,
-  livegraphView: EmG,
+  livegraphView: ReposForProject,
   livegraphArgs: (e, t) => ({
     folderId: e,
     updatedAtTimestamp: t
@@ -4667,7 +4667,7 @@ function su(e, t) {
 let sm = new _$$H6({
   name: 'TeamsShim',
   ...fJ,
-  livegraphView: XKS,
+  livegraphView: TeamByIdForRealtimeShim,
   livegraphArgs: e => ({
     teamId: e
   }),
@@ -4752,7 +4752,7 @@ function sg(e) {
 let sf = new _$$H6({
   name: 'MeChannelRolesShim',
   ..._$$uu,
-  livegraphView: T0,
+  livegraphView: RoleUpdatesForUser,
   livegraphArgs: (e, t) => ({
     updatedAtTimestamp: t
   }),
@@ -4869,7 +4869,7 @@ let sf = new _$$H6({
 let s_ = new _$$H6({
   name: 'TeamChannelRolesShim',
   ...fJ,
-  livegraphView: zz3,
+  livegraphView: RoleUpdatesForTeam,
   livegraphArgs: (e, t) => ({
     teamId: e,
     updatedAtTimestamp: t
@@ -5095,7 +5095,7 @@ class sI {
 let sS = new _$$H6({
   name: 'TeamRoleRequestShim',
   ..._$$uu,
-  livegraphView: JS_,
+  livegraphView: UserTeamRoleRequestView,
   livegraphArgs: (e, t) => ({
     updatedAtTimestamp: t
   }),
@@ -5153,7 +5153,7 @@ let sT = e => ({
 let sk = new _$$H6({
   name: 'UserEduGracePeriodShim',
   ..._$$uu,
-  livegraphView: H2R,
+  livegraphView: EduGracePeriodsForUser,
   livegraphArgs: (e, t, i) => ({
     updatedAtTimestamp: t
   }),
@@ -5179,7 +5179,7 @@ let sN = '';
 let sP = new _$$H6({
   name: 'UserShim',
   ..._$$uu,
-  livegraphView: Ra2,
+  livegraphView: UserForRealtimeShim,
   livegraphArgs: e => ({}),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i;
@@ -5260,7 +5260,7 @@ let sP = new _$$H6({
 let sO = new _$$H6({
   name: 'UserTeamFlagShim',
   ..._$$uu,
-  livegraphView: vvS,
+  livegraphView: UserTeamFlagsForRealtimeShim,
   livegraphArgs: e => ({}),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.currentUser || !t.currentUser.userTeamFlags) return [];
@@ -5309,7 +5309,7 @@ let sL = new Map();
 let sF = new _$$H6({
   name: 'WhitelistedPluginShim',
   ..._$$uf,
-  livegraphView: G9Z,
+  livegraphView: WhitelistedPluginsForOrg,
   livegraphArgs: e => ({
     orgId: e
   }),
@@ -5361,7 +5361,7 @@ let sF = new _$$H6({
 let sM = new _$$H6({
   name: 'WidgetShim',
   ..._$$uf,
-  livegraphView: ISl,
+  livegraphView: WidgetUpdatesForOrg,
   livegraphArgs: (e, t) => ({
     orgId: e ?? null,
     updatedAtTimestamp: t
@@ -6354,7 +6354,7 @@ let oo = e => t => function (i) {
         searchModelType,
         searchScope,
         fileFilter
-      } = jr(_$$Ay.location.search, t, i.payload);
+      } = jr(customHistory.location.search, t, i.payload);
       fileFilter && e.dispatch(Rz({
         fileTypeFilter: fileFilter
       }));
@@ -6413,7 +6413,7 @@ let oo = e => t => function (i) {
 var ol = (e => (e.NOTIFICATION = 'notification', e.SUBSCRIPTION = 'subscription', e.LINK_UNFURL = 'link-unfurl', e))(ol || {});
 let od = e => e => function (t) {
   if (_$$sf.matches(t)) {
-    let e = new URLSearchParams(_$$Ay.location.search);
+    let e = new URLSearchParams(customHistory.location.search);
     let i = e.get('utm_source');
     if (i === 'notification') {
       let t = e.get('utm_medium');
@@ -10367,7 +10367,7 @@ function c7(e = {
 }, t) {
   if (_$$Dc.matches(t)) {
     let t = Date.now();
-    let i = _$$g3();
+    let i = generateUUIDv4();
     let n = e.startTime === null ? e.waitTime : e.waitTime + (t - e.startTime);
     return {
       count: e.count + 1,
@@ -11252,10 +11252,10 @@ let pg = {
     return e;
   },
   visualBell(e = [], t) {
-    if (_$$F.enqueue.matches(t)) {
+    if (VisualBellActions.enqueue.matches(t)) {
       let i = {
         ...t.payload,
-        id: _$$g3()
+        id: generateUUIDv4()
       };
       let n = [...e];
       if (i.type && e.length > 0 && e[e.length - 1].type === i.type) {
@@ -11276,19 +11276,19 @@ let pg = {
       }
       return n;
     }
-    if (_$$F.dequeue.matches(t)) {
+    if (VisualBellActions.dequeue.matches(t)) {
       return e.length === 0 ? e : t.payload.matchType || t.payload.matchTimeout || t.payload.shouldDequeueFunc ? e.filter(e => {
         if (e.type === t.payload.matchType) return !1;
         let i = _$$R4(e);
         return (t.payload.matchTimeout !== 'persistent' || i !== 1 / 0) && (t.payload.matchTimeout !== 'ephemeral' || i === 1 / 0) && (!t.payload.shouldDequeueFunc || !t.payload.shouldDequeueFunc(e));
       }) : e.slice(1);
     }
-    if (_$$F.clearAll.matches(t)) return [];
-    if (_$$F.clearAllExcept.matches(t)) {
+    if (VisualBellActions.clearAll.matches(t)) return [];
+    if (VisualBellActions.clearAllExcept.matches(t)) {
       let i = t.payload;
       return e.filter(e => !!e.type && i.includes(e.type));
     }
-    if (_$$F.update.matches(t)) {
+    if (VisualBellActions.update.matches(t)) {
       let i = e.findIndex(e => e.id === t.payload.id);
       if (i !== -1) {
         let n = [...e];
@@ -11841,7 +11841,7 @@ let pg = {
       };
       i.fontsByResourceId = {};
       t.payload.forEach(e => {
-        let t = vq(e);
+        let t = getFontOwner(e);
         i.fontsByResourceId[t] || (i.fontsByResourceId[t] = {});
         i.fontsByResourceId[t][e.family] || (i.fontsByResourceId[t][e.family] = {});
         i.fontsByResourceId[t][e.family][e.style] = e;
@@ -11851,7 +11851,7 @@ let pg = {
       let i = {
         ...e
       };
-      let n = vq(t.payload.font);
+      let n = getFontOwner(t.payload.font);
       let {
         family,
         style
@@ -11875,7 +11875,7 @@ let pg = {
       i.fontsByResourceId = {
         ...i.fontsByResourceId
       };
-      let n = vq(t.payload.font);
+      let n = getFontOwner(t.payload.font);
       let {
         family,
         style
@@ -13340,7 +13340,7 @@ let mm = createOptimistThunk((e, t) => {
     let t = r.pickerShown;
     t ? o && o[ItemType.TYPE_ITEM] && (t.id === J6 || t.id === AB || t.id === h2) || t.id === _$$o$ || t.id === _$$aN || t.id === vu || e.dispatch(XE()) : r.stylePickerShown.isShown && r.stylePickerShown.modal && e.dispatch(_$$Uv());
     r.instanceSwapPickerShown.isShown && e.dispatch(_$$vq());
-    r.stylePreviewShown.isShown && (e.dispatch(_$$sw()), Fullscreen.selectStyle(_$$n2.INVALID, IA.INVALID));
+    r.stylePreviewShown.isShown && (e.dispatch(_$$sw()), Fullscreen.selectStyle(_$$n2.INVALID, VariableStyleId.INVALID));
     Tm.clearCache();
   } else {
     r.stylePickerShown.isShown && (o && o[ItemType.FILL_ITEM] || e.dispatch(_$$Uv()));
@@ -13358,7 +13358,7 @@ let mm = createOptimistThunk((e, t) => {
           ...i
         }, e);
         if (!(!l || t.activeCanvasEditModeType === LayoutTabType.DEV_HANDOFF && r === 'hideMultiplayerCursors') && !n?.[r]) {
-          e.dispatch(_$$F.enqueue({
+          e.dispatch(VisualBellActions.enqueue({
             type: 'settings_changed',
             ...l
           }));
@@ -13409,7 +13409,7 @@ let mf = new Map([['hideMultiplayerCursors', e => ({
     text: getI18nString('visual_bell.show_frame_grids_hide_button'),
     action: e => {
       e.stopPropagation();
-      i.dispatch(_$$F.dequeue({}));
+      i.dispatch(VisualBellActions.dequeue({}));
       AppStateTsApi.editorPreferences().showFrameGrids.set(!1);
     }
   }
@@ -13506,22 +13506,22 @@ let mw = mE()(() => new mS());
 function mR(e) {
   let t = useSelector(e => _$$Z5(e));
   let i = useSelector(e => e.currentUserOrgId);
-  Rs(IiJ, {
+  Rs(OrgByIdForPlanView, {
     orgId: i ?? ''
   }, {
     enabled: !!i
   });
-  Rs(nXJ, {
+  Rs(OrgByIdForPlanUserView, {
     orgId: i ?? ''
   }, {
     enabled: !!i
   });
-  Rs(N8H, {
+  Rs(TeamByIdForPlanView, {
     teamId: t ?? ''
   }, {
     enabled: !i && !!t
   });
-  Rs(qn8, {
+  Rs(TeamByIdForPlanUserView, {
     teamId: t ?? ''
   }, {
     enabled: !i && !!t
@@ -13551,11 +13551,11 @@ function mF(e) {
   let i = useCallback(async () => await new Promise(e => {
     t.show({
       onBlocked: t => {
-        _$$k4.debug(`[Sprigma] Showing of survey blocked by overlay ${t}`);
+        logger.debug(`[Sprigma] Showing of survey blocked by overlay ${t}`);
         e(!1);
       },
       onLoadFailed: t => {
-        _$$k4.warn('[Sprigma] Showing of survey blocked by errors:', t);
+        logger.warn('[Sprigma] Showing of survey blocked by errors:', t);
         e(!1);
       },
       onShow: () => {
@@ -13733,7 +13733,7 @@ function mJ() {
   } = useSprigWithSampling();
   let t = _$$aV2();
   let i = q5();
-  let n = _$$iZ2();
+  let n = selectCurrentUser();
   useEffect(() => {
     if (t || i?.editorType !== FFileType.WHITEBOARD || !n || n.id !== i.creatorId) return;
     let r = Date.now() - i.createdAt.getTime();
@@ -13745,7 +13745,7 @@ function m5() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = _$$iZ2();
+  let t = selectCurrentUser();
   let i = t && !_$$cn(t);
   let n = z3() === 'teamUpgrade';
   let r = _$$f4('entered_pro_cart_flow');
@@ -13765,7 +13765,7 @@ function m3() {
   } = useSprigWithSampling();
   let t = _$$aV2();
   let i = q5();
-  let n = _$$iZ2();
+  let n = selectCurrentUser();
   let r = _$$f4(_$$at);
   useEffect(() => {
     if (t || i?.editorType !== FFileType.SITES || !r || !n || n.id !== i.creatorId) return;
@@ -13800,7 +13800,7 @@ let hc = e => t => function (i) {
 };
 let hm = _$$ck4();
 let hh = e => e => hm ? function (t) {
-  return showModal.matches(t) && t.payload.type === _$$x4 ? window.self.origin !== window.parent.origin ? e(t) : void _$$m3({
+  return showModal.matches(t) && t.payload.type === _$$x4 ? window.self.origin !== window.parent.origin ? e(t) : void sendMessageToParent({
     action: 'showAuthModal',
     payload: {
       type: 'auth'
@@ -13815,9 +13815,9 @@ function hE() {
   getCookieOrStorage().$$delete(H_, {
     includeDotDomainPrefix: !0
   });
-  let e = new URLSearchParams(_$$Ay.location.search);
-  (e.has(A7) || e.has(EL)) && (e.$$delete(A7), e.$$delete(EL), _$$Ay.replace(`${_$$Ay.location.pathname}?${e.toString()}${_$$Ay.location.hash}`, _$$Ay.location.state));
-  _$$Ay.reload('Cleared frontend commit preview cookie');
+  let e = new URLSearchParams(customHistory.location.search);
+  (e.has(A7) || e.has(EL)) && (e.$$delete(A7), e.$$delete(EL), customHistory.replace(`${customHistory.location.pathname}?${e.toString()}${customHistory.location.hash}`, customHistory.location.state));
+  customHistory.reload('Cleared frontend commit preview cookie');
 }
 let hx = _$$ex('frontend_commit_preview_indicator', ({
   desiredCommitSha: e,
@@ -13840,11 +13840,11 @@ let hx = _$$ex('frontend_commit_preview_indicator', ({
       [e]: n.toString()
     };
     let s = Object.keys(a).map(e => `${e}=${a[e]}`).join(',');
-    let o = new URL(_$$Ay.location.href);
+    let o = new URL(customHistory.location.href);
     o.searchParams.set(EL, s);
     o.searchParams.set(A7, sha);
-    _$$Ay.replace(o.toString(), _$$Ay.location.state);
-    _$$Ay.reload(`Changing feature flag override ${e} to ${n}`);
+    customHistory.replace(o.toString(), customHistory.location.state);
+    customHistory.reload(`Changing feature flag override ${e} to ${n}`);
   };
   let o = e => {
     i(_$$lW2({
@@ -14128,11 +14128,11 @@ export async function $$hz0(e, t, d = {
       _$$a();
       return;
     }
-    TH(_$$Ay.location.search);
+    TH(customHistory.location.search);
     registerDeferredCallback(ib);
     performanceMetricsTracker.domContentLoadedMs = Math.round(window.performance.now());
     xK.start('createStoreStart');
-    let c = !!new URLSearchParams(_$$Ay.location.search).get('reduxDebug');
+    let c = !!new URLSearchParams(customHistory.location.search).get('reduxDebug');
     let u = _$$A2.withExtraArgument({
       liveStore: M4
     });
@@ -14290,7 +14290,7 @@ export async function $$hz0(e, t, d = {
     }
     await hH();
     let T = null;
-    let k = vU(b.getState(), _$$Ay.location.pathname).view;
+    let k = vU(b.getState(), customHistory.location.pathname).view;
     let R = window.sessionStateXHR;
     let P = window.userStateXHR;
     !function (e, t) {
@@ -14311,7 +14311,7 @@ export async function $$hz0(e, t, d = {
         }
         e(_$$A6(r));
       }
-      WB().subscribe(abL, {}, i => {
+      WB().subscribe(BlockingUserState, {}, i => {
         if (i.status === 'loaded') {
           let n = {};
           for (let e of i.data.currentUser.userFlags) {
@@ -14396,7 +14396,7 @@ export async function $$hz0(e, t, d = {
               let e = b.getState().authedUsers.orderedIds;
               bellFeedAPIInstance.loggedOut(e);
             } else {
-              _$$Ay.redirect('/?fuid=');
+              customHistory.redirect('/?fuid=');
             }
           }
         });
@@ -14500,7 +14500,7 @@ export async function $$hz0(e, t, d = {
             let d = n && l && l !== e.currentTeamId;
             if (a || o || d) {
               b.dispatch(qj());
-              _$$Ay.redirect(`${t.path}${t.params}`);
+              customHistory.redirect(`${t.path}${t.params}`);
               return;
             }
             let c = vU(e, t.path, t.params);
@@ -14566,7 +14566,7 @@ export async function $$hz0(e, t, d = {
               getFeatureFlags().desktop_server_error_pages && desktopAPIInstance?.finishAppAuth(null);
             }).catch(e => {
               console.error(e);
-              b.dispatch(_$$F.enqueue({
+              b.dispatch(VisualBellActions.enqueue({
                 message: getI18nString('desktop_bindings.visual_bell.redeem_app_auth_error'),
                 error: !0
               }));
@@ -14578,7 +14578,7 @@ export async function $$hz0(e, t, d = {
             let t = '';
             if (desktopAPIInstance.isFileBrowserTab() || wl()) {
               t = getI18nString('desktop_bindings.interstitial.page_link_copied');
-              Dk(e).then(() => b.dispatch(_$$F.enqueue({
+              Dk(e).then(() => b.dispatch(VisualBellActions.enqueue({
                 message: t
               })));
             } else {
@@ -14587,13 +14587,13 @@ export async function $$hz0(e, t, d = {
               if (!n) return;
               let r = i.selectedView.view === 'prototype';
               if (!$A(i.selectedView) && !r) {
-                let t = parseQuery(_$$Ay.location.search);
+                let t = parseQuery(customHistory.location.search);
                 delete t.t;
                 delete t.viewport;
                 let n = _$$b2(i.sharingAttributionContextKey, _$$d4.DESKTOP_KEYBOARD_SHORTCUT);
                 n && (t.t = n);
                 let r = tT()(t) ? '' : `?${serializeQuery(t)}`;
-                e = `${window.location.origin}${_$$Ay.location.pathname}${r}`;
+                e = `${window.location.origin}${customHistory.location.pathname}${r}`;
               }
               let a = Object.keys(i.mirror.sceneGraphSelection);
               let s = a.length === 1 ? i.mirror.sceneGraph.get(a[0])?.type : null;
@@ -14608,11 +14608,11 @@ export async function $$hz0(e, t, d = {
                 t = getI18nString('desktop_bindings.interstitial.page_link_copied');
               } else if (_$$P3(i.selectedView)) {
                 if (o) {
-                  let t = parseQuery(_$$Ay.location.search);
+                  let t = parseQuery(customHistory.location.search);
                   delete t.viewport;
                   t['node-id'] = EO(o.guid);
                   let i = tT()(t) ? '' : `?${serializeQuery(t)}`;
-                  e = `${window.location.origin}${_$$Ay.location.pathname}${i}`;
+                  e = `${window.location.origin}${customHistory.location.pathname}${i}`;
                 }
                 t = o ? getI18nString('copy_to_clipboard.slides.link_to_slide_copied_to_clipboard', {
                   name: o.name
@@ -15158,7 +15158,7 @@ export async function $$hz0(e, t, d = {
           let o = XHR.post(`/api/files/${t}/related_links`, s);
           await WB()?.optimisticallyCreate({
             DeveloperRelatedLink: {
-              [`optimistic-link-${_$$g3()}`]: {
+              [`optimistic-link-${generateUUIDv4()}`]: {
                 nodeId: r,
                 fileKey: t,
                 linkName: a,
@@ -15200,7 +15200,7 @@ export async function $$hz0(e, t, d = {
           }));
         }
       })(b);
-      _$$z2();
+      initializeIntegrationEnvironment();
       wH(b);
       (function (e) {
         Rh('session_start', {});
@@ -15262,7 +15262,7 @@ export async function $$hz0(e, t, d = {
         }(() => {
           let t = jsx(Provider, {
             store: b,
-            children: jsx(_$$oD, {
+            children: jsx(LivegraphProvider, {
               userId: getInitialOptions().user_data?.id || null,
               children: jsx(AtomProvider, {
                 children: jsx(m, {
@@ -15275,7 +15275,7 @@ export async function $$hz0(e, t, d = {
                           children: jsx(mR, {
                             children: jsxs(_$$Q, {
                               backend: eb,
-                              children: [jsx(mz, {}), jsx(mW, {}), jsx(mB, {}), jsx(mH, {}), jsx(mJ, {}), jsx(m3, {}), jsx(mZ, {}), jsx(_$$A11, {}), jsx(m5, {}), jsx(Ix, {
+                              children: [jsx(mz, {}), jsx(mW, {}), jsx(mB, {}), jsx(mH, {}), jsx(mJ, {}), jsx(m3, {}), jsx(mZ, {}), jsx(_$$A11, {}), jsx(m5, {}), jsx(CustomRouter, {
                                 children: jsx(e, {})
                               })]
                             })
@@ -15327,7 +15327,7 @@ let hH = async () => {
 };
 function hW() {
   reactTimerGroup.start('react-render');
-  let e = XP();
+  let e = consumeFullscreenEventState();
   Object.keys(e).length > 0 && debugState.dispatch(mp(e));
   executeDeferredCallbacks();
   (function () {

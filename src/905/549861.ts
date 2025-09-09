@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { o as _$$o } from "../905/821217";
 import { E } from "../905/632989";
 import o from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { oO, Ad, Y9 } from "../figma_app/811257";
 import { SN, zC, _f, nr, HQ, ez, tv, dO, S5, fH, RO, LV, x4, ox, Ap, zD, zX, Y1, UC, kI } from "../905/982943";
 var l = o;
@@ -24,7 +24,7 @@ export let $$p0 = forwardRef((e, t) => {
         [nr]: e.selected && !e.hasFocus,
         [HQ]: e.selected && e.hasFocus
       }),
-      recordingKey: Pt(e.recordingKey, "rowPropertyInput"),
+      recordingKey: generateRecordingKey(e.recordingKey, "rowPropertyInput"),
       onClick: e.onPreviewClick,
       actionOnPointerDown: !0,
       children: [jsx("div", {

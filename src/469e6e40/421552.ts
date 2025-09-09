@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, useState, useMemo, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { sortByPropertyWithOptions, sortBySelectors } from "../figma_app/656233";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
@@ -15,7 +15,7 @@ import { F as _$$F, y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { F as _$$F2 } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { In } from "../905/672640";
 import { E as _$$E } from "../905/984674";
@@ -30,7 +30,7 @@ import { E as _$$E2 } from "../905/511388";
 import { dq, sZ } from "../905/845253";
 import { NJ } from "../figma_app/518077";
 import { E as _$$E3 } from "../905/128063";
-import { efs, X2v, R1$, sNP, eci, IhX, EE2 } from "../figma_app/43951";
+import { LibraryModalVariablesData, CommunityLibraryModalVariablesData, LibraryManagementData, LibraryManagementCommunityData, FileByKeyThumbnailUrl, LibrarySubscriptionView, WorkspaceAdminLibrariesSectionView } from "../figma_app/43951";
 import { Oe } from "../figma_app/336853";
 import { Ef } from "../905/81982";
 import { Nf, xA } from "../figma_app/633080";
@@ -55,12 +55,12 @@ import { B as _$$B } from "../905/714743";
 import { $ as _$$$ } from "../905/383708";
 import { fu } from "../figma_app/831799";
 import { wJ } from "../figma_app/630951";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Y as _$$Y2 } from "../905/465068";
 import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { X as _$$X, U as _$$U } from "../905/77000";
-import { Y as _$$Y3 } from "../905/806400";
+import { EntityType } from "../905/806400";
 import { l as _$$l2 } from "../905/716947";
 import { h1 } from "../905/986103";
 import { jN } from "../905/612685";
@@ -85,7 +85,7 @@ import { s as _$$s2 } from "../905/573154";
 import { XF, wZ, CA } from "../figma_app/777207";
 import { M4, gY } from "../905/713695";
 import { WB } from "../905/761735";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { tgj } from "../figma_app/27776";
 import { A as _$$A3 } from "../b2835def/491732";
@@ -286,8 +286,8 @@ let ey = function ({
   let m = No().unwrapOr(null);
   let p = m?.tier === FPlanNameType.ENTERPRISE;
   let v = H3(m);
-  let f = p && !!u && _.some(e => e.resourceType === _$$Y3.Workspace && e.resourceId === u);
-  let y = p && v && _.some(e => e.resourceType === _$$Y3.Org && e.resourceId === v);
+  let f = p && !!u && _.some(e => e.resourceType === EntityType.Workspace && e.resourceId === u);
+  let y = p && v && _.some(e => e.resourceType === EntityType.Org && e.resourceId === v);
   let k = t.workspaces?.find(e => e.id === u)?.name;
   let E = useAtomWithSubscription(qq);
   let C = useMemo(() => "community" === e.type && E.has(_$$l2(e.hubFileId)), [e, E]);
@@ -382,7 +382,7 @@ function eG({
   resourceId: n,
   resourceType: s
 }) {
-  let i = `optimistic-approved-library-create-${_$$g()}`;
+  let i = `optimistic-approved-library-create-${generateUUIDv4()}`;
   return WB()?.optimisticallyCreate({
     ApprovedLibrary: {
       [i]: {
@@ -419,7 +419,7 @@ let eV = new class {
       fileKey: t,
       libraryKey: a,
       resourceId: e,
-      resourceType: _$$Y3.Workspace
+      resourceType: EntityType.Workspace
     });
     this.deleteWorkspaceApprovedLibrary = ({
       approvedLibraryId: e,
@@ -446,7 +446,7 @@ let eV = new class {
       fileKey: t,
       libraryKey: a,
       resourceId: e,
-      resourceType: _$$Y3.Org
+      resourceType: EntityType.Org
     });
     this.deleteOrgApprovedLibrary = ({
       approvedLibraryId: e,
@@ -516,7 +516,7 @@ function eY({
             fileKey: e.fileKey,
             onfulfilled: () => {
               d(!1);
-              a(_$$F2.enqueue({
+              a(VisualBellActions.enqueue({
                 message: getI18nString("resources_tab.approved_libraries_toggle.unmark_as_approved_success", h)
               }));
             },
@@ -534,7 +534,7 @@ function eY({
             libraryKey: e.libraryKey,
             onfulfilled: () => {
               d(!1);
-              a(_$$F2.enqueue({
+              a(VisualBellActions.enqueue({
                 message: getI18nString("resources_tab.approved_libraries_toggle.mark_as_approved_success", h)
               }));
             },
@@ -616,7 +616,7 @@ function eX({
             fileKey: e.fileKey,
             onfulfilled: () => {
               p(!1);
-              r(_$$F2.enqueue({
+              r(VisualBellActions.enqueue({
                 message: getI18nString("resources_tab.approved_libraries_toggle.unmark_as_approved_success", S)
               }));
             },
@@ -634,7 +634,7 @@ function eX({
             libraryKey: e.libraryKey,
             onfulfilled: () => {
               p(!1);
-              r(_$$F2.enqueue({
+              r(VisualBellActions.enqueue({
                 message: getI18nString("resources_tab.approved_libraries_toggle.mark_as_approved_success", S)
               }));
             },
@@ -706,21 +706,21 @@ function e9({
   let o = useMemo(() => {
     if (!a) return {
       ...t,
-      type: _$$Y3.Org
+      type: EntityType.Org
     };
     let e = t.workspaces?.find(e => e.id === a);
     return e && {
       ...e,
-      type: _$$Y3.Workspace
+      type: EntityType.Workspace
     };
   }, [t, a]);
   let d = Xs(e);
-  let c = Rs(efs, {
+  let c = Rs(LibraryModalVariablesData, {
     fileKey: d
   }, {
     enabled: "file" === e.type
   });
-  let m = Rs(X2v, {
+  let m = Rs(CommunityLibraryModalVariablesData, {
     hubFileId: d
   }, {
     enabled: "community" === e.type
@@ -740,7 +740,7 @@ function e9({
     let l = Oe(t);
     let o = Ho(n.libraryKey);
     return useCallback(t => {
-      if ("file" !== n.type || e?.type !== _$$Y3.Workspace || !l || !o || r || t.design && t.figjam && t.slides && t.buzz) return !1;
+      if ("file" !== n.type || e?.type !== EntityType.Workspace || !l || !o || r || t.design && t.figjam && t.slides && t.buzz) return !1;
       let s = a.librarySubscription;
       if (!s || null === s.isSubscribed && null === s.figJamSubscribed && null === s.slidesSubscribed && null === s.buzzSubscribed) return !1;
       let i = {
@@ -1156,17 +1156,17 @@ let td = registerModal(function ({
   libraryResourceId: e
 }) {
   let t = useDispatch();
-  let a = iZ();
+  let a = selectCurrentUser();
   let r = useSelector(e => e.currentUserOrgId);
   let l = _$$l();
   let o = wJ(e);
-  let d = Rs(R1$, {
+  let d = Rs(LibraryManagementData, {
     fileKey: e,
     orgId: r
   }, {
     enabled: !o
   });
-  let c = Rs(sNP, {
+  let c = Rs(LibraryManagementCommunityData, {
     hubFileId: e,
     orgId: r
   }, {
@@ -1177,7 +1177,7 @@ let td = registerModal(function ({
   let p = u.data?.org;
   let g = useCallback(() => t(popModalStack()), [t]);
   useEffect(() => {
-    "errors" !== u.status && ("loaded" !== u.status || m && p) || (t(_$$F2.enqueue({
+    "errors" !== u.status && ("loaded" !== u.status || m && p) || (t(VisualBellActions.enqueue({
       error: !0,
       message: getI18nString("resources_tab.libraries.couldnt_load_library_information")
     })), g());
@@ -1267,7 +1267,7 @@ function tg({
   onClick: s
 }) {
   let i = Nf(e) ? e.library_file_key : e.hub_file_id;
-  let r = Rs(eci, {
+  let r = Rs(FileByKeyThumbnailUrl, {
     fileKey: i
   }, {
     enabled: !!i
@@ -1357,13 +1357,13 @@ export function $$tx1(e) {
   let [K, Q] = useState("");
   let Z = useAtomWithSubscription(TG);
   let ee = NJ(org.id);
-  let et = Rs(IhX, {
+  let et = Rs(LibrarySubscriptionView, {
     orgId: org.id
   });
   let ea = sZ();
   let en = Oe(ea);
   let es = useAtomWithSubscription(S0);
-  let ei = Rs(EE2, {
+  let ei = Rs(WorkspaceAdminLibrariesSectionView, {
     workspaceId
   }, {
     enabled: !!workspaceId && en
@@ -1375,7 +1375,7 @@ export function $$tx1(e) {
     Q("");
   }, [workspaceId]);
   useEffect(() => {
-    ("errors" === et.status || "errors" === ee.status || "loaded" === et.status && null === et.data.org) && H(_$$F2.enqueue({
+    ("errors" === et.status || "errors" === ee.status || "loaded" === et.status && null === et.data.org) && H(VisualBellActions.enqueue({
       error: !0,
       message: getI18nString("resources_tab.libraries.couldnt_load_library_information")
     }));

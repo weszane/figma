@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -11,7 +11,7 @@ import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/985254";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { N as _$$N } from "../905/73189";
 import { r as _$$r } from "../905/393328";
@@ -24,10 +24,10 @@ export function $$b1({
   ...T
 }) {
   let I = useDispatch();
-  let S = iZ();
+  let S = selectCurrentUser();
   let v = q5();
   !function () {
-    let e = iZ();
+    let e = selectCurrentUser();
     let t = q5();
     _$$h(() => {
       analyticsEventManager.trackDefinedEvent("preset_libraries.apple_eula_displayed", {

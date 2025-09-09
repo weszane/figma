@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { am } from "../figma_app/430563";
 import { q5 } from "../figma_app/516028";

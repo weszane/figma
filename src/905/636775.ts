@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { B } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { r as _$$r } from "../905/534055";
@@ -15,7 +15,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { cx } from "../figma_app/558929";
 import { showModalHandler } from "../905/156213";
 import { k as _$$k } from "../905/882646";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { xQ } from "../figma_app/45218";
 import { ManifestEditorType } from "../figma_app/155287";
 import { WW } from "../figma_app/764679";
@@ -29,7 +29,7 @@ import { m_, hz } from "../905/540198";
 import { A as _$$A2 } from "../1617/579393";
 function T(e) {
   let t = useDispatch();
-  let i = iZ();
+  let i = selectCurrentUser();
   let {
     dropdownIsShown,
     toggleSwitchEditorDropdown,

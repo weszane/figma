@@ -4,20 +4,20 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { delay } from "../905/236856";
 import { trackEventAnalytics } from "../905/449184";
-import { k as _$$k2 } from "../905/651849";
+import { logger } from "../905/651849";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { isE2ETraffic, isDevEnvironment } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { RH, gU } from "../figma_app/147952";
 import { B as _$$B } from "../905/808775";
 import { fullscreenValue } from "../figma_app/455680";
-import { ax } from "../figma_app/741237";
+import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { T as _$$T } from "../905/858738";
 import { Eh, cb } from "../figma_app/12796";
 import { F as _$$F2 } from "../905/827944";
@@ -32,9 +32,9 @@ import { I as _$$I, o8, r_ } from "../905/622391";
 import { createDefaultPluginOptions, createPluginInstance } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import { gH, Yx, Ew } from "../figma_app/985200";
-import { j as _$$j } from "../905/535481";
-import { pN } from "../905/571565";
-import { P as _$$P } from "../905/545265";
+import { getPluginApiDebugCopy } from "../905/535481";
+import { dequeuePluginStatus } from "../905/571565";
+import { PluginApiMetrics } from "../905/545265";
 import { JX } from "../905/104019";
 import { n as _$$n } from "../905/347702";
 import { yA } from "../905/642684";
@@ -364,7 +364,7 @@ async function ei(e) {
     },
     showLaunchErrors: !1,
     showRuntimeErrors: !1,
-    stats: new _$$P(),
+    stats: new PluginApiMetrics(),
     titleIconURL: "",
     triggeredFrom: void 0,
     userID: "",
@@ -475,7 +475,7 @@ export function $$es1({
 export let $$eo4 = _$$n(async e => {
   let t = mv();
   iu.currentPluginRunID = t;
-  let i = new _$$P();
+  let i = new PluginApiMetrics();
   iu.stats = i;
   let n = e.plugin;
   trackEventAnalytics("Plugin Start Initiated", {
@@ -505,7 +505,7 @@ export let $$eo4 = _$$n(async e => {
     if (isValidForCooper(e.triggeredFrom)) {
       if (!isDevModeWithInspectPanel(e.plugin)) throw Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.');
       atomStoreManager.set(d4, "LOADING");
-      ax(IAssertResource.PLUGIN);
+      setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
     }
     if (isValidForCooperSelectedView(e.triggeredFrom)) {
       if (!isBuzzPlugin(e.plugin)) throw Error('Plugin not compatible to run in buzz panel. Make sure you have "buzz" as an editorType in your manifest.json.');
@@ -640,11 +640,11 @@ function el(e, t) {
 async function ed(e, t, i) {
   let n = hasLocalFileId(i);
   try {
-    fullscreenValue.dispatch(_$$F.enqueue({
+    fullscreenValue.dispatch(VisualBellActions.enqueue({
       message: getI18nString("plugins.loading_plugin", {
         pluginName: i.name
       }),
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       type: "loading-plugin",
       delay: 200,
       timeoutOverride: 1 / 0
@@ -666,7 +666,7 @@ async function ed(e, t, i) {
     }
     return a;
   } finally {
-    fullscreenValue.dispatch(_$$F.dequeue({
+    fullscreenValue.dispatch(VisualBellActions.dequeue({
       matchType: "loading-plugin"
     }));
   }
@@ -752,7 +752,7 @@ async function ec({
     await $$ep5(o);
   } catch (t) {
     yA(t);
-    pN({
+    dequeuePluginStatus({
       shouldShowVisualBell: !0
     });
     let e = (t instanceof er ? t?.message : void 0) ?? (isWidget ? getI18nString("plugins.error_occured_while_running_widget") : getI18nString("plugins.error_occured_while_running_plugin"));
@@ -772,7 +772,7 @@ export let $$eu3 = _$$n(({
 });
 export function $$ep5(e) {
   if (iu.currentPluginRunID !== e.pluginRunID) return Promise.resolve();
-  _$$j() && _$$k2.debug("[Plugin API]", `Plugin run ${e.pluginRunID} started`, e);
+  getPluginApiDebugCopy() && logger.debug("[Plugin API]", `Plugin run ${e.pluginRunID} started`, e);
   let t = e.stats;
   t.markTime("timeToRunPluginCodeStartMs");
   let i = e.isWidget ? "widget" : "plugin";
@@ -821,7 +821,7 @@ export function $$ep5(e) {
         });
         r = closePlugin;
         let e = await runResult;
-        e && fullscreenValue.dispatch(_$$F.enqueue({
+        e && fullscreenValue.dispatch(VisualBellActions.enqueue({
           type: "plugins-supplied-message",
           message: e
         }));
@@ -867,7 +867,7 @@ export function $$ep5(e) {
       sharedPluginDataTotalSetSize: t.sharedPluginDataTotalSetSize(),
       pluginDataMaximumKeyCountExceeded: t.pluginDataMaximumKeyCountExceeded()
     };
-    _$$j() && _$$k2.debug("[Plugin API]", `Plugin run ${e.pluginRunID} finished`, {
+    getPluginApiDebugCopy() && logger.debug("[Plugin API]", `Plugin run ${e.pluginRunID} finished`, {
       pluginEndEventData: n,
       setPluginDataStats: r
     });

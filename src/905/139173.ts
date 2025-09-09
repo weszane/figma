@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { createPortal } from "../vendor/944059";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
 import { wY, cU } from "../figma_app/708845";
 import { A as _$$A } from "../905/638715";

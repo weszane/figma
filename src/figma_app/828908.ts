@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { b } from "../905/985254";
 import { f } from "../905/940356";

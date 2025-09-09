@@ -1,120 +1,304 @@
-import { c2 } from "../905/382883";
-import { getFeatureFlags } from "../905/601108";
-import { createRemovableAtomFamily, atom, atomStoreManager, setupAtomWithMount, t_ } from "../figma_app/27355";
-import { resourceUtils } from "../905/989992";
-import { W } from "../905/491061";
-import { serializeJSON } from "../905/251556";
-import { observableState } from "../905/441145";
-import { Xm } from "../905/723791";
-import { lQ } from "../905/934246";
-class u {
-  constructor(e, t = 5e3) {
-    this.cacheScheduler = e;
-    this.cacheTTL = t;
+import type { ResourceView } from '../figma_app/43951';
+import { serializeJSON } from '../905/251556';
+import { c2 } from '../905/382883';
+import { observableState } from '../905/441145';
+import { RetainedPromiseManager } from '../905/491061';
+import { getFeatureFlags } from '../905/601108';
+import { lQ } from '../905/934246';
+import { createLoadingState } from '../905/957591';
+import { resourceUtils } from '../905/989992';
+import { atom, atomStoreManager, atomWithDefault, createRemovableAtomFamily, setupAtomWithMount } from '../figma_app/27355';
+
+/**
+ * Type for cache values stored in ExpiringCache (class u)
+ */
+
+/**
+ * Scheduler interface for cache expiration
+ */
+/**
+ * Type for cache values stored in ExpiringCache (class ExpiringCache)
+ */
+interface ExpiringCacheEntry<T> {
+  value: T;
+  expiresAt: number;
+}
+
+/**
+ * Scheduler interface for cache expiration (original: defaultCacheScheduler)
+ */
+export interface CacheScheduler {
+  expireIn: (fn: () => void, ms: number) => any;
+  now: () => number;
+  clearExpireIn: (id: any) => void;
+}
+
+/**
+ * ExpiringCache (original class u)
+ * Stores key-value pairs with expiration logic.
+ */
+export class ExpiringCache<T = any> {
+  private cacheScheduler: CacheScheduler;
+  private cacheTTL: number;
+  private values: Map<string, ExpiringCacheEntry<T>>;
+  private nextCheckAt: number | null;
+  private pendingCleanUp: any | null;
+
+  /**
+   * Create a new ExpiringCache.
+   * @param cacheScheduler Scheduler for expiration.
+   * @param cacheTTL Default time-to-live in ms.
+   */
+  constructor(cacheScheduler: CacheScheduler, cacheTTL: number = 5000) {
+    this.cacheScheduler = cacheScheduler;
+    this.cacheTTL = cacheTTL;
     this.values = new Map();
     this.nextCheckAt = null;
     this.pendingCleanUp = null;
-    this.get = e => this.values.get(e)?.value;
-    this.cleanUp = () => {
-      this.pendingCleanUp = null;
-      let e = null;
-      for (let [t, i] of this.values) {
-        let n = this.cacheScheduler.now();
-        if (i.expiresAt > n) {
-          e = !e || e > i.expiresAt ? i.expiresAt : e;
-          continue;
-        }
-        this.values.$$delete(t);
+  }
+
+  /**
+   * Get value by key (original: get)
+   * @param key Cache key
+   */
+  get(key: string): T | undefined {
+    return this.values.get(key)?.value;
+  }
+
+  /**
+   * Clean up expired entries (original: cleanUp)
+   */
+  cleanUp(): void {
+    this.pendingCleanUp = null;
+    let earliestExpiry: number | null = null;
+    const now = this.cacheScheduler.now();
+    for (const [key, entry] of this.values) {
+      if (entry.expiresAt > now) {
+        earliestExpiry = earliestExpiry === null || earliestExpiry > entry.expiresAt ? entry.expiresAt : earliestExpiry;
+        continue;
       }
-      e && (this.pendingCleanUp = this.cacheScheduler.expireIn(this.cleanUp, Math.max(e - this.cacheScheduler.now(), 0)));
-    };
-    this.set = (e, t, i = this.cacheTTL) => {
-      let n = this.cacheScheduler.now() + i;
-      this.values.set(e, {
-        value: t,
-        expiresAt: n
-      });
-      (null === this.nextCheckAt || this.nextCheckAt > n) && (this.pendingCleanUp && this.cacheScheduler.clearExpireIn(this.pendingCleanUp), this.nextCheckAt = n, this.pendingCleanUp = this.cacheScheduler.expireIn(this.cleanUp, i));
-    };
-    this.clear = () => {
-      this.values = new Map();
-      this.pendingCleanUp && this.cacheScheduler.clearExpireIn(this.pendingCleanUp);
-      this.nextCheckAt = null;
-      this.pendingCleanUp = null;
-    };
+      this.values.delete(key);
+    }
+    if (earliestExpiry !== null) {
+      this.pendingCleanUp = this.cacheScheduler.expireIn(() => this.cleanUp(), Math.max(earliestExpiry - this.cacheScheduler.now(), 0));
+    }
+  }
+
+  /**
+   * Set value with expiration (original: set)
+   * @param key Cache key
+   * @param value Value to store
+   * @param ttl Time-to-live in ms
+   */
+  set(key: string, value: T, ttl: number = this.cacheTTL): void {
+    const expiresAt = this.cacheScheduler.now() + ttl;
+    this.values.set(key, {
+      value,
+      expiresAt
+    });
+    if (this.nextCheckAt === null || this.nextCheckAt > expiresAt) {
+      if (this.pendingCleanUp) this.cacheScheduler.clearExpireIn(this.pendingCleanUp);
+      this.nextCheckAt = expiresAt;
+      this.pendingCleanUp = this.cacheScheduler.expireIn(() => this.cleanUp(), ttl);
+    }
+  }
+
+  /**
+   * Clear all cache entries (original: clear)
+   */
+  clear(): void {
+    this.values = new Map();
+    if (this.pendingCleanUp) this.cacheScheduler.clearExpireIn(this.pendingCleanUp);
+    this.nextCheckAt = null;
+    this.pendingCleanUp = null;
   }
 }
-let m = {
-  expireIn: (e, t) => setTimeout(e, t),
+
+/**
+ * Default cache scheduler (original: defaultCacheScheduler)
+ */
+export const defaultCacheScheduler: CacheScheduler = {
+  expireIn: (fn, ms) => setTimeout(fn, ms),
   now: Date.now,
-  clearExpireIn: e => clearTimeout(e)
+  clearExpireIn: id => clearTimeout(id)
 };
-let h = createRemovableAtomFamily(e => atom(() => $$f0(e)));
-export function $$g1(e) {
-  let t = h(e);
-  return atomStoreManager.get(t);
+function sanitizeCacheData(data: any): any {
+  if (typeof data !== 'object' || data === null || data instanceof Date) {
+    return data;
+  }
+  if (Array.isArray(data) && 'hasNextPage' in data) {
+    const result: any = [];
+    for (const key in data) {
+      const value = typeof data[key] === 'function' ? lQ : data[key];
+      result[key] = value;
+    }
+    return result;
+  }
+  const result = Array.isArray(data) ? [] : {};
+  let isUnchanged = true;
+  for (const key in data) {
+    const originalValue = data[key];
+    const sanitizedValue = sanitizeCacheData(originalValue);
+    result[key] = sanitizedValue;
+    if (originalValue !== sanitizedValue) {
+      isUnchanged = false;
+    }
+  }
+  return isUnchanged ? data : result;
 }
-export let $$f0 = function (e, t, i = new u(m, t)) {
-  return t => function (e, t, i) {
-    let d = createRemovableAtomFamily(n => {
-      let u = new W(() => atomStoreManager.sub(_, () => {}));
-      if (null === n) return atom(resourceUtils.disabledSuspendable(u));
-      let m = serializeJSON(n);
-      let h = `${e._name}:${m}`;
-      let g = null;
-      let f = setupAtomWithMount(t_(() => i.get(h) || Xm()), ({
-        setSelf: a
+
+/**
+ * Creates a subscription promise for loading data.
+ * Original: part of the inner function
+ * @param store - The store instance
+ * @param atom - The atom
+ * @param key - The key
+ * @returns Promise that resolves on load or rejects on error
+ */
+function createSubscriptionPromise(store: any, atom: any, key: any): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const subscription = store.subscribe(atom, key, (update: any) => {
+      if (update.status === 'loaded') {
+        resolve();
+        setTimeout(() => subscription?.(), 0);
+      } else if (update.errors) {
+        reject(update.errors);
+        setTimeout(() => subscription?.(), 0);
+      }
+    });
+  });
+}
+
+/**
+ * Main function to create an atom family with caching and subscription logic.
+ * Original: the entire $$f0 IIFE
+ * @param getStore - Function to get the store
+ * @param cacheTTL - Cache time-to-live in milliseconds
+ * @param cache - Optional cache instance (defaults to new u(m, cacheTTL))
+ * @returns Function to create atom family
+ */
+/**
+ * Creates an atom family with caching and subscription logic.
+ * Refactored from: createAtomFamily
+ * @param getStore - Function to get the store instance
+ * @param cacheTTL - Cache time-to-live in milliseconds
+ * @param cache - Optional ExpiringCache instance
+ * @returns Function to create atom family
+ */
+export function createAtomFamilyAlias(getStore: () => any, cacheTTL: number, cache: ExpiringCache = new ExpiringCache(defaultCacheScheduler, cacheTTL)) {
+  /**
+   * Factory to create atom family for resources.
+   * @param storeFactory - Factory function for store options
+   */
+  function atomFamilyFactory(storeFactory: ResourceView) {
+    /**
+     * Atom family for resource keys.
+     * Refactored from: atomFamily
+     */
+    const atomFamily = createRemovableAtomFamily((key: any) => {
+      // Suspense handler for promise management (original: suspenseHandler)
+      const suspenseHandler = new RetainedPromiseManager(() => atomStoreManager.sub(atomFamily, () => {}));
+      // Handle null key case
+      if (key === null) {
+        return atom(resourceUtils.disabledSuspendable(suspenseHandler));
+      }
+
+      // Serialize key for cache
+      const serializedKey = serializeJSON(key);
+      const cacheKey = `${storeFactory._name}:${serializedKey}`;
+      let lastUpdate: any = null;
+
+      /**
+       * Atom selector for resource state (original: atomSelector)
+       */
+      const atomSelector = setupAtomWithMount(atomWithDefault(() => cache.get(cacheKey) || createLoadingState()), ({
+        setSelf
       }) => {
-        let s = t().subscribe(e, n, e => {
-          a(t => "loading" !== t.status && "loading" === e.status ? t : (g = e, e));
+        // Subscribe to store updates
+        const subscription = getStore().subscribe(storeFactory, key, (update: any) => {
+          setSelf((prev: any) => prev.status !== 'loading' && update.status === 'loading' ? prev : (lastUpdate = update, update));
         });
+
+        // Cleanup logic on unmount
         return () => {
-          d.setShouldRemove((e, t) => t === n);
-          d.setShouldRemove(null);
-          g && (getFeatureFlags().livestore_sanitize_cache ? i.set(h, {
-            ...g,
-            data: function e(t) {
-              if ("object" != typeof t || null === t || t instanceof Date) return t;
-              if (Array.isArray(t) && "hasNextPage" in t) {
-                let e = [];
-                for (let i in t) {
-                  let n = "function" == typeof t[i] ? lQ : t[i];
-                  Object.assign(e, {
-                    [i]: n
-                  });
-                }
-                return e;
-              }
-              let i = Array.isArray(t) ? [] : {};
-              let n = !0;
-              for (let r in t) {
-                let a = t[r];
-                let s = e(a);
-                i[r] = s;
-                a !== s && (n = !1);
-              }
-              return n ? t : i;
-            }(g.data)
-          }) : i.set(h, g));
-          s();
+          atomFamily.setShouldRemove((_: any, k: any) => k === key);
+          atomFamily.setShouldRemove(null);
+          if (lastUpdate) {
+            if (getFeatureFlags().livestore_sanitize_cache) {
+              cache.set(cacheKey, {
+                ...lastUpdate,
+                data: sanitizeCacheData(lastUpdate.data)
+              });
+            } else {
+              cache.set(cacheKey, lastUpdate);
+            }
+          }
+          subscription();
         };
       });
-      let _ = atom(i => resourceUtils.suspendableFrom(i(f), () => {
-        var i;
-        i = t();
-        return new Promise((t, r) => {
-          let a = i.subscribe(e, n, e => {
-            "loaded" === e.status ? (t(), setTimeout(() => a?.())) : e.errors && (r(e.errors), setTimeout(() => a?.()));
-          });
-        });
-      }, u));
-      _.debugLabel = performance.now().toString();
-      return _;
+
+      /**
+       * Atom for suspendable resource (original: suspendableAtom)
+       */
+      const suspendableAtom = atom((get: any) => resourceUtils.suspendableFrom(get(atomSelector), () => createSubscriptionPromise(getStore(), storeFactory, key), suspenseHandler));
+      suspendableAtom.debugLabel = performance.now().toString();
+      return suspendableAtom;
     }, c2);
-    return Object.assign(e => d(e), {
-      _atomFamily: d
+
+    /**
+     * Expose atom family and getter (original: Object.assign)
+     */
+    const getResource = (key: any) => atomFamily(key);
+    Object.assign(getResource, {
+      _atomFamily: atomFamily
     });
-  }(t, e, i);
-}(() => observableState.get(), 3e5);
-export const he = $$f0;
-export const gc = $$g1;
+    return getResource;
+  }
+  return atomFamilyFactory;
+}
+export const createAtomFamily = createAtomFamilyAlias(() => observableState.get(), 300000);
+
+/**
+ * Atom family for resource state (original: resourceAtomFamily)
+ */
+export const resourceAtomFamily = createRemovableAtomFamily((resourceKey: any) => atom(() => createAtomFamily(resourceKey)));
+
+/**
+ * Get atom store for resource (original: getResourceAtomStore)
+ * @param key Resource key
+ */
+export function getResourceAtomStore<T = any>(key: any): T {
+  const atomInstance = resourceAtomFamily(key);
+  return atomStoreManager.get(atomInstance) as T;
+}
+
+/**
+ * Sanitize resource data for cache (original: sanitizeResourceData)
+ * @param data Resource data
+ */
+export function sanitizeResourceData(data: any): any {
+  if (typeof data !== 'object' || data === null || data instanceof Date) return data;
+  if (Array.isArray(data) && 'hasNextPage' in data) {
+    const sanitized: any[] = [];
+    for (const i in data) {
+      const value = typeof data[i] === 'function' ? lQ : data[i];
+      Object.assign(sanitized, {
+        [i]: value
+      });
+    }
+    return sanitized;
+  }
+  const result: any = Array.isArray(data) ? [] : {};
+  let unchanged = true;
+  for (const key in data) {
+    const value = data[key];
+    const sanitizedValue = sanitizeResourceData(value);
+    result[key] = sanitizedValue;
+    if (value !== sanitizedValue) unchanged = false;
+  }
+  return unchanged ? data : result;
+}
+
+// Exported names refactored for clarity
+export const he = createAtomFamily;
+export const gc = getResourceAtomStore;

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen, DataLoadStatus } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -61,7 +61,7 @@ export function $$_0(e) {
         r += 1;
         n = e[r];
       }
-      if (n) J(() => $P(n.nodeId, t, E, C, Fy(e, n.nodeId) === DataLoadStatus.LOADED, T));else {
+      if (n) J(() => $P(n.nodeId, t, E, C, Fy(e, n.nodeId) === DataLoadStatus.LOADED, T)); else {
         let r = i - 1;
         let n = e[r];
         for (; n && n.isDivider;) {

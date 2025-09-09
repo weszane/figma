@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { B } from "../figma_app/539422";
@@ -33,7 +33,7 @@ export function $$c0(e) {
       items: e.dropdownItems,
       showPoint: !0,
       lean: e.lean,
-      recordingKey: Pt(e.recordingKey, "dropdown")
+      recordingKey: generateRecordingKey(e.recordingKey, "dropdown")
     })]
   });
 }

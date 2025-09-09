@@ -1,29 +1,29 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { zRx } from "../figma_app/822011";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import { oA } from "../905/663269";
 import p from "../vendor/626715";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rs, p as _$$p } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { tc, i$, PE } from "../905/15667";
 import { ud } from "../905/513035";
 import { wR } from "../figma_app/765689";
 import { F2 } from "../905/389382";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType, FUserRoleType, FPlanNameType, FMemberRoleType, FOrganizationLevelType, FFileType } from "../figma_app/191312";
-import { hCR, t8B, aRw, kdQ, dxg } from "../figma_app/43951";
+import { UpgradeEligibilityView, UpgradeEligibilityFolderView, IdpUserView, ConfiguredUpgradeRequestModalView, UserLicensesForFile } from "../figma_app/43951";
 import { b as _$$b } from "../905/376877";
 import { Sm } from "../figma_app/482728";
 import { J as _$$J, q as _$$q } from "../905/202542";
@@ -38,7 +38,7 @@ var _ = p;
 export function $$B5(e) {
   let t = q5();
   let r = useDispatch();
-  let a = iZ();
+  let a = selectCurrentUser();
   let c = null;
   let p = null;
   if (!e?.isDraftsMove) {
@@ -48,7 +48,7 @@ export function $$B5(e) {
   }
   let h = e?.folderId ?? null;
   let f = e?.plan;
-  let E = Rs(hCR({
+  let E = Rs(UpgradeEligibilityView({
     projectId: h,
     fileKey: c,
     planParentId: f?.id ?? null,
@@ -63,10 +63,10 @@ export function $$B5(e) {
         licenseType: t.toString()
       }
     }));
-    let n = _$$p(t8B, r, {
+    let n = _$$p(UpgradeEligibilityFolderView, r, {
       enabled: t && !!e
     });
-    return k9(() => {
+    return useMemoStable(() => {
       let e = {};
       return (n.forEach((t, r) => {
         let n = Z[r];
@@ -149,8 +149,8 @@ export function $$B5(e) {
     licenseTypeToPlanAndPlanUser: A,
     loaded: "loaded" === E.status || "disabled" === E.status
   });
-  let P = k9(() => O.provisionalAccessEligibility, [O.provisionalAccessEligibility]);
-  let D = k9(() => Object.fromEntries(Object.entries(A).map(([e, t]) => {
+  let P = useMemoStable(() => O.provisionalAccessEligibility, [O.provisionalAccessEligibility]);
+  let D = useMemoStable(() => Object.fromEntries(Object.entries(A).map(([e, t]) => {
     let r = t.planUser?.provisionalLicenseTypes ?? [];
     let n = t.planUser?.seatTypeLicenseTypes ?? [];
     return [e, r.filter(e => !n.includes(e))];
@@ -162,7 +162,7 @@ export function $$B5(e) {
     let r = _()(Object.values(e).map(e => e.plan?.key.parentId).filter(e => !!e)).map(e => ({
       orgId: e
     }));
-    let n = _$$p(aRw, r, {
+    let n = _$$p(IdpUserView, r, {
       enabled: t
     });
     let i = n.every(e => "loaded" === e.result.status && e.result.data?.currentUser.idpUsersInOrg.status === "loaded");
@@ -185,7 +185,7 @@ export function $$B5(e) {
     licenseTypeToPlanAndPlanUser: A,
     loaded: "loaded" === E.status || "disabled" === E.status
   });
-  let M = k9(() => k, [k]);
+  let M = useMemoStable(() => k, [k]);
   let F = function ({
     licenseTypeToPlanAndPlanUser: e,
     loaded: t
@@ -194,7 +194,7 @@ export function $$B5(e) {
       orgId: e.plan?.key.parentId || "",
       permission: e.planUser?.permission || ""
     })));
-    let n = _$$p(kdQ, r, {
+    let n = _$$p(ConfiguredUpgradeRequestModalView, r, {
       enabled: t
     });
     let i = n.every(e => "loaded" === e.result.status);
@@ -219,7 +219,7 @@ export function $$B5(e) {
     licenseTypeToPlanAndPlanUser: A,
     loaded: "loaded" === E.status || "disabled" === E.status
   });
-  let j = k9(() => F, [F]);
+  let j = useMemoStable(() => F, [F]);
   let U = useCallback(({
     afterUpgradeCallback: e,
     licenseType: t,
@@ -268,7 +268,7 @@ export function $$B5(e) {
             upgradePathway: m
           }
         });
-        return () => r(_$$F.enqueue({
+        return () => r(VisualBellActions.enqueue({
           message: "Error fetching plan"
         }));
       }
@@ -599,7 +599,7 @@ export function $$z2({
         extraErrorContext: _ ?? null
       }
     });
-    return () => t(_$$F.enqueue({
+    return () => t(VisualBellActions.enqueue({
       message: "Encountered an error"
     }));
   }
@@ -617,7 +617,7 @@ export function $$z2({
         extraErrorContext: _ ?? null
       }
     });
-    return () => t(_$$F.enqueue({
+    return () => t(VisualBellActions.enqueue({
       message: "Error fetching plan"
     }));
   }
@@ -631,11 +631,11 @@ export function $$z2({
     e.message.includes("Org access needed") ? (t(Ts({
       origin: "edit_button_click",
       formState: qB.JOIN_ORG,
-      redirectUrl: Ay.location.pathname
+      redirectUrl: customHistory.location.pathname
     })), t(showModalHandler({
       type: _$$x,
       data: {}
-    }))) : l ? l(e) : t(_$$F.enqueue({
+    }))) : l ? l(e) : t(VisualBellActions.enqueue({
       message: e.data?.message || "Encountered an error",
       error: !0
     }));
@@ -755,7 +755,7 @@ export function $$Y3({
         entryPoint: r
       }
     });
-    return () => t(_$$F.enqueue({
+    return () => t(VisualBellActions.enqueue({
       message: "Encountered an error"
     }));
   }
@@ -783,7 +783,7 @@ export function $$Y3({
         requestId: r
       });
     } catch (e) {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: "Error fetching plan"
       }));
     }
@@ -823,7 +823,7 @@ export function $$Y3({
         getIsEligibleForProvisionalAccess: d
       }
     }));
-  } : () => t(_$$F.enqueue({
+  } : () => t(VisualBellActions.enqueue({
     message: "Encountered an error"
   })) : (reportError(_$$e.MONETIZATION_EXPANSION, Error("Error fetching plan in handleUpgradeManualPathway"), {
     extra: {
@@ -831,7 +831,7 @@ export function $$Y3({
       fileKey: a,
       folderId: l
     }
-  }), () => t(_$$F.enqueue({
+  }), () => t(VisualBellActions.enqueue({
     message: "Error fetching plan"
   })));
 }
@@ -843,7 +843,7 @@ function $(e, t, r) {
   return t?.[e]?.includes(n) ?? !1;
 }
 export function $$X1(e) {
-  let t = Rs(dxg({
+  let t = Rs(UserLicensesForFile({
     fileKey: e.fileKey,
     userId: e.userId
   }), {

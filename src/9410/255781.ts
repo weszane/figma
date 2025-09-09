@@ -5,7 +5,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { zE } from "../905/738636";
 import { $ } from "../905/922405";
 import { DM } from "../figma_app/223206";
@@ -67,7 +67,7 @@ function E(e, t, i) {
     error: t,
     exceedsMakePasteThreshold: !1
   });
-  e(F.enqueue({
+  e(VisualBellActions.enqueue({
     message: t === C.EXCEEDS_MAKE_PASTE_THRESHOLD ? getI18nString("figmake.send_to_make_from_design.error.exceeds-make-paste-threshold") : getI18nString("figmake.send_to_make_from_design.error.something-went-wrong"),
     type: "send-to-make-from-design-error",
     error: !0

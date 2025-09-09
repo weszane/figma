@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { AppStateTsApi, ColorProfileEnum, ColorSpaceEnum, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -43,10 +43,10 @@ import { ck } from "../905/87821";
 import { SR } from "../figma_app/852050";
 import { BI, m0 } from "../figma_app/546509";
 import { q5, Cq } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
-import { dTR, iY3 } from "../figma_app/43951";
+import { FileManagePermission, FileNameViewDropdown } from "../figma_app/43951";
 import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { fA, p9, F9 } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
@@ -102,7 +102,7 @@ export function $$eO1({
   let eG = useSelector(e => e.teams);
   let eV = useSelector(e => e.currentUserOrgId);
   let eH = useSelector(e => e.currentTeamId);
-  let ez = !!iZ();
+  let ez = !!selectCurrentUser();
   let eW = useSelector(e => e.plans);
   let eK = _$$Q({
     currentOrgId: eV,
@@ -119,7 +119,7 @@ export function $$eO1({
   let e1 = ju("filename_menu");
   let e2 = BI();
   let e5 = m0();
-  let e3 = Rs(dTR({
+  let e3 = Rs(FileManagePermission({
     fileKey: eM?.key || ""
   }), {
     enabled: !!eM?.key
@@ -127,7 +127,7 @@ export function $$eO1({
   let e4 = useSelector(fA);
   let e8 = useAtomWithSubscription(p9);
   SR();
-  let e6 = Rs(iY3({
+  let e6 = Rs(FileNameViewDropdown({
     branchFileKey: eM?.key || ""
   }), {
     enabled: !!eM

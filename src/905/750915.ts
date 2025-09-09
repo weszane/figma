@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -79,7 +79,7 @@ function w(e) {
       id: e.resource.monetized_resource_metadata.id
     }).then(e => {
       p(e.data.meta);
-    }).catch(() => {});
+    }).catch(() => { });
   });
   let A = useMemo(() => G({
     authedActiveCommunityProfile: t,

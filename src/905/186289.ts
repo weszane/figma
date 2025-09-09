@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { connect } from "../vendor/514228";
+import { connect } from "react-redux";
 import { S } from "../905/539306";
 import { jr, vj } from "../905/574958";
 let $$l1 = "search_file_browser_full_results";

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useMemo, useState, useCallback, useRef, PureComponent } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { clamp } from "../figma_app/492908";
 import { i as _$$i } from "../905/97346";
 import { SceneGraphHelpers, PluginHelpers, figmaScopeBindings } from "../figma_app/763686";
@@ -17,7 +17,7 @@ import { lg } from "../figma_app/976749";
 import { Z } from "../905/224161";
 import { dB } from "../905/640017";
 import { UK } from "../figma_app/740163";
-import { hq, wr } from "../figma_app/741237";
+import { expandNodeToRoot, clearSelection } from "../figma_app/741237";
 import { tS } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -76,7 +76,7 @@ function F({
   let l = useSelector(J);
   let a = useCallback(e => {
     let l = e.guids[0];
-    l && ("canvas" === e.selectionType && SceneGraphHelpers && SceneGraphHelpers.setSelectedNodeAndCanvas(l, !1) && (hq(l), PluginHelpers && PluginHelpers.scrollAndZoomIntoView(e.guids)), "local_style" === e.selectionType && (wr(), t(Bn({
+    l && ("canvas" === e.selectionType && SceneGraphHelpers && SceneGraphHelpers.setSelectedNodeAndCanvas(l, !1) && (expandNodeToRoot(l), PluginHelpers && PluginHelpers.scrollAndZoomIntoView(e.guids)), "local_style" === e.selectionType && (clearSelection(), t(Bn({
       type: e.styleType,
       styleIds: new Set(e.guids),
       folderNames: new Set()

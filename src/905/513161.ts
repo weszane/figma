@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { hE } from "../figma_app/272243";
@@ -9,8 +9,8 @@ import { N } from "../905/438674";
 import { s_ } from "../905/17223";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
-import { XU } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { BellId } from "../905/576487";
 import { h as _$$h } from "../905/142086";
 import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
@@ -26,10 +26,10 @@ export let $$b0 = registerModal(function ({
   let I = useSelector(e => e.repos);
   let E = q5();
   let x = useCallback(e => {
-    v(F.enqueue({
+    v(VisualBellActions.enqueue({
       type: "file-moved",
       i18n: {
-        id: XU.FILE_MOVE_FOLDER_BELL_ID,
+        id: BellId.FILE_MOVE_FOLDER_BELL_ID,
         params: {
           text: e
         }

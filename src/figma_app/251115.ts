@@ -9,7 +9,7 @@ import { BF, dZ } from "../figma_app/459490";
 import { lg, u8 } from "../figma_app/976749";
 import { sZ } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
-import { YTs, GIl, GkZ } from "../figma_app/43951";
+import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFigmaAi, FileCanUseFigmakeAi } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
 import { n as _$$n } from "../905/347702";
 import { $7 } from "../905/509613";
@@ -19,7 +19,7 @@ export function $$b1(e, t) {
   let r;
   r = !1;
   !isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic && t && "enabled_for_gated_users" === BF(t) && getFeatureFlags().ai_user_use_llama && (r = !0);
-  let u = Rs(r ? YTs : GIl, {
+  let u = Rs(r ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmaAi, {
     key: e
   }, {
     enabled: !!e
@@ -40,7 +40,7 @@ export function $$v3(e) {
   let r = e?.key ?? "";
   let i = Xr(y);
   let s = sZ();
-  let d = Rs(dZ(s) ? YTs : GkZ, {
+  let d = Rs(dZ(s) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmakeAi, {
     key: r
   }, {
     enabled: !!r && t

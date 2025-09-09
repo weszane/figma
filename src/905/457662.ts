@@ -3,7 +3,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/128080";
 import $$l from "../vendor/241899";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 var o = s;
 var d = $$l;
 function u(e, t, i, n, a) {
@@ -59,7 +59,7 @@ export class $$p1 {
       });
       u(a, i, r, this.isDisaggregated, this.aggregatedValue);
     });
-    i !== zk.NO && r.current && Fullscreen && Fullscreen.triggerAction("commit", {});
+    i !== yesNoTrackingEnum.NO && r.current && Fullscreen && Fullscreen.triggerAction("commit", {});
   }
 }
 export class $$m0 {
@@ -101,7 +101,7 @@ export class $$m0 {
         [this.key]: a
       }, i, r, this.isDisaggregated, this.aggregatedValue);
     });
-    i !== zk.NO && r.current && Fullscreen && Fullscreen.triggerAction("commit", {});
+    i !== yesNoTrackingEnum.NO && r.current && Fullscreen && Fullscreen.triggerAction("commit", {});
   }
 }
 export const l = $$m0;

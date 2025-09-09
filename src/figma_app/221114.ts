@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useEffect, createRef, useRef, useCallback, useState } from "react";
-import { connect, useDispatch } from "../vendor/514228";
+import { connect, useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
@@ -27,7 +27,7 @@ import { Uz } from "../905/63728";
 import { PAGINATION_NEXT, hasMorePages } from "../figma_app/661371";
 import { BrowserInfo } from "../figma_app/778880";
 import { $J } from "../905/491152";
-import { uA, cZ, Pt, C0 } from "../figma_app/806412";
+import { RecordingComponent, handleMouseEvent, generateRecordingKey, handleKeyboardEvent } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { Ph } from "../figma_app/637027";
@@ -36,7 +36,7 @@ import { kt } from "../figma_app/858013";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { E as _$$E2 } from "../905/984674";
 import { V as _$$V } from "../905/223767";
 import { D0 } from "../figma_app/867292";
@@ -127,12 +127,12 @@ export function $$eO1(e) {
     children: r
   });
 }
-export class $$eR4 extends uA {
+export class $$eR4 extends RecordingComponent {
   constructor(e) {
     super(e);
     this.versionRowDiv = null;
     this.descriptionRef = createRef();
-    this._onClick = cZ(this, "click", e => {
+    this._onClick = handleMouseEvent(this, "click", e => {
       if (2 === e.detail) {
         if (this.props.disabled && this.props.isStarterTeam) return;
         this.onDoubleClick();
@@ -145,7 +145,7 @@ export class $$eR4 extends uA {
       this.props.onClick ? this.props.onClick() : this.props.isAllowedToChangeVersion() && !this.props.isActive && this.props.onSelect && this.props.onSelect(this.props.versionId);
     });
     this.onClick = N()(e => this._onClick(e), 300);
-    this.disabledOnClickHandler = cZ(this, "click", () => {
+    this.disabledOnClickHandler = handleMouseEvent(this, "click", () => {
       if (trackEventAnalytics("CTA Clicked", {
         name: "Disabled Version History",
         teamId: this.props.team?.id
@@ -177,10 +177,10 @@ export class $$eR4 extends uA {
         hovered: !1
       });
     };
-    this.onDoubleClick = cZ(this, "dblclick", () => {
+    this.onDoubleClick = handleMouseEvent(this, "dblclick", () => {
       this.props.onCreateSavepoint ? this.props.onCreateSavepoint() : this.props.onEditSavepoint && this.props.onEditSavepoint(this.props.versionId);
     });
-    this.onBranchClick = cZ(this, "click", e => {
+    this.onBranchClick = handleMouseEvent(this, "click", e => {
       e.stopPropagation();
       this.props.dispatch(sf({
         view: "fullscreen",
@@ -188,13 +188,13 @@ export class $$eR4 extends uA {
         editorType: FEditorType.Design
       }));
     });
-    this.onCompareClick = cZ(this, "click", e => {
+    this.onCompareClick = handleMouseEvent(this, "click", e => {
       e.stopPropagation();
       setTimeout(() => {
         this.props.onCompareChanges && this.props.isAllowedToChangeVersion() && this.props.isCurrentVersionActive && !this.props.isComparing && this.props.onCompareChanges(this.props.versionId);
       }, 300);
     });
-    this.onCompareCurrentClick = cZ(this, "click", e => {
+    this.onCompareCurrentClick = handleMouseEvent(this, "click", e => {
       e.stopPropagation();
       setTimeout(() => {
         this.props.onCompareChangesFromCurrent && this.props.isAllowedToChangeVersion() && !this.props.isComparing && this.props.onCompareChangesFromCurrent();
@@ -572,7 +572,7 @@ function eP({
       "aria-label": getI18nString("collaboration.feedback.more_options"),
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": getI18nString("collaboration.feedback.more_options"),
-      recordingKey: Pt(e, "versonContext"),
+      recordingKey: generateRecordingKey(e, "versonContext"),
       "data-test-id": "dots-menu-icon-button",
       ...getTriggerProps(),
       children: jsx(_$$J, {})
@@ -642,7 +642,7 @@ function ek() {
   });
 }
 $$eR4.displayName = "VersionRow";
-class eM extends uA {
+class eM extends RecordingComponent {
   constructor(e) {
     super(e);
     this.label = "";
@@ -718,14 +718,14 @@ class eM extends uA {
           let e;
           if (null != t.label && t.label.length > 0) e = getI18nString("collaboration.feedback.viewing_version", {
             label: t.label
-          });else {
+          }); else {
             let r = xX(t.touched_at);
             e = getI18nString("collaboration.feedback.viewing_version", {
               label: r
             });
           }
           e.length > 34 && (e = e.substring(0, 34) + "\u2026");
-          this.props.dispatch(_$$F.enqueue({
+          this.props.dispatch(VisualBellActions.enqueue({
             type: "versions",
             message: e
           }));
@@ -756,9 +756,9 @@ class eM extends uA {
       }));
     };
     this.isAllowedToChangeVersion = () => null === this.props.modalShown && !hM();
-    this.onKeyDown = C0(this, "keydown", e => {
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       if (!this.props.dropdownShown && !this.props.modalShown && !this.props.versionHistory.compareId) {
-        if (e.keyCode === Uz.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(Eg());else if (e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.DOWN_ARROW) {
+        if (e.keyCode === Uz.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(Eg()); else if (e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.DOWN_ARROW) {
           if (!this.isAllowedToChangeVersion()) return;
           let t = this.props.versionHistory.versions.length;
           this.setState({
@@ -766,7 +766,7 @@ class eM extends uA {
           });
           this.autoExpandGroupId = "";
           let r = -1;
-          if (this.props.versionHistory.activeId === V_) e.keyCode === Uz.DOWN_ARROW && (r = 0);else {
+          if (this.props.versionHistory.activeId === V_) e.keyCode === Uz.DOWN_ARROW && (r = 0); else {
             let t = this.props.versionHistory.versions.findIndex(e => e.id === this.props.versionHistory.activeId);
             -1 !== t && (r = e.keyCode === Uz.UP_ARROW ? t - 1 : t + 1);
           }
@@ -801,8 +801,8 @@ class eM extends uA {
           SceneGraphHelpers.clearSelection();
           let e = getI18nString("collaboration.feedback.no_visible_changes");
           e.length > 56 && (e = e.substring(0, 56) + "\u2026");
-          this.props.dispatch(_$$F.dequeue({}));
-          this.props.dispatch(_$$F.enqueue({
+          this.props.dispatch(VisualBellActions.dequeue({}));
+          this.props.dispatch(VisualBellActions.enqueue({
             type: "comparing",
             message: e
           }));
@@ -812,8 +812,8 @@ class eM extends uA {
             fromVersionLabel: e
           });
           r.length > 56 && (r = r.substring(0, 56) + "\u2026");
-          this.props.dispatch(_$$F.dequeue({}));
-          this.props.dispatch(_$$F.enqueue({
+          this.props.dispatch(VisualBellActions.dequeue({}));
+          this.props.dispatch(VisualBellActions.enqueue({
             type: "comparing",
             message: r
           }));
@@ -909,14 +909,14 @@ class eM extends uA {
       let r = t.versions.find(t => t.id === e);
       return t.linkedVersion?.id === e ? t.linkedVersion : r;
     };
-    this.onDoneComparingClick = cZ(this, "click", e => {
+    this.onDoneComparingClick = handleMouseEvent(this, "click", e => {
       e.stopPropagation();
       setTimeout(() => {
         this.isAllowedToChangeVersion() && this.props.versionHistory.compareId && (this.props.dispatch(Nb({
           id: V_
-        })), SceneGraphHelpers.clearSelection(), this.props.dispatch(_$$F.dequeue({
+        })), SceneGraphHelpers.clearSelection(), this.props.dispatch(VisualBellActions.dequeue({
           matchType: "comparing"
-        })), this.props.dispatch(_$$F.dequeue({
+        })), this.props.dispatch(VisualBellActions.dequeue({
           matchType: "view_changes"
         })));
       }, 300);
@@ -952,7 +952,7 @@ class eM extends uA {
         onEditSavepoint: this.editSavepoint,
         onSelect: this.loadVersionById,
         participatingImagesDict: e.participating_images_dict,
-        recordingKey: Pt(this.props, "version", e.id),
+        recordingKey: generateRecordingKey(this.props, "version", e.id),
         showAutosaves: this.state.showAutosaves,
         showCompareChanges: this.showCompareChanges(),
         team: a.teamId ? this.props.teams?.[a.teamId] : void 0,
@@ -998,7 +998,7 @@ class eM extends uA {
     let h = !0;
     if (1 === _ && (p = !0, h = !1), c = s && (1 === _ || !p) ? a ? y5 : p8 : a ? pi : N5, h && o && e.push(jsx("li", {
       children: jsx(_$$E, {
-        recordingKey: Pt(this.props, `autoVersionBatch.${r}`),
+        recordingKey: generateRecordingKey(this.props, `autoVersionBatch.${r}`),
         className: u.disabled ? Ao : QQ,
         onClick: this.toggleAutoItemById.bind(this, u.id),
         "aria-expanded": p,
@@ -1109,7 +1109,7 @@ class eM extends uA {
               })
             },
             isViewOnly: E,
-            recordingKey: Pt(this.props, "toolbar")
+            recordingKey: generateRecordingKey(this.props, "toolbar")
           }), this.props.fileHasCMSData && jsx(_$$K2, {}), jsxs("div", {
             "data-not-draggable": !0,
             children: [!this.hasLabeled && !E && !g && jsx("div", {
@@ -1171,7 +1171,7 @@ class eM extends uA {
                 onCreateSavepoint: this.addSavepoint,
                 onDoneComparingClick: this.onDoneComparingClick,
                 onSelect: this.loadVersionById,
-                recordingKey: Pt(this.props, "currentVersion"),
+                recordingKey: generateRecordingKey(this.props, "currentVersion"),
                 showAutosaves: this.state.showAutosaves,
                 showCompareChanges: this.showCompareChanges(),
                 userUrl: this.props.user.img_url,
@@ -1220,7 +1220,7 @@ export function $$ej5(e) {
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("collaboration.feedback.add_to_version_history_tooltip"),
         "data-testid": "versions-add-savepoint",
-        recordingKey: Pt(e, "plusVersion"),
+        recordingKey: generateRecordingKey(e, "plusVersion"),
         ref: l,
         children: jsx(_$$x, {})
       }), jsx(_$$K, {
@@ -1228,7 +1228,7 @@ export function $$ej5(e) {
         "aria-label": getI18nString("collaboration.feedback.close_tooltip"),
         "data-tooltip-type": Ib.TEXT,
         "data-tooltip": getI18nString("collaboration.feedback.close_tooltip"),
-        recordingKey: Pt(e, "button-close"),
+        recordingKey: generateRecordingKey(e, "button-close"),
         ref: l,
         children: jsx(_$$L, {})
       })]

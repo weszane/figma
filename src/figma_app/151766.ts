@@ -13,8 +13,8 @@ import { XHR } from "../905/910117";
 import { v as _$$v } from "../905/479136";
 import { n as _$$n } from "../figma_app/339971";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { VQ, Dc as _$$Dc, hf, Mt } from "../905/445022";
 import { Jr } from "../figma_app/624361";
@@ -176,16 +176,16 @@ async function P(e, t, r) {
   let M = _$$q(PluginModalType.SAVE_LOCAL_COPY);
   M.catch(() => {
     reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("saveAs: waitForAllPagesPromise rejected"));
-    h(_$$F.dequeue({
+    h(VisualBellActions.dequeue({
       matchType: "save-as-progress"
     }));
-    h(_$$F.enqueue({
+    h(VisualBellActions.enqueue({
       error: !0,
       message: getI18nString("visual_bell.save_as_error")
     }));
   });
   await Promise.race([M, A, N]);
-  h(_$$F.dequeue({
+  h(VisualBellActions.dequeue({
     matchType: "save-as-progress"
   }));
   let F = documentStateTsApi.getMutableActiveDocument();
@@ -198,10 +198,10 @@ async function P(e, t, r) {
   }
   let G = new Set(ImageCppBindings.findAllVideos());
   if (R = j.length, P = G.size, I) return;
-  h(_$$F.enqueue({
+  h(VisualBellActions.enqueue({
     type: "save-as-actual",
     message: getI18nString("visual_bell.saving"),
-    icon: zX.SPINNER
+    icon: VisualBellIcon.SPINNER
   }));
   await new Promise(e => setTimeout(e, 0));
   let V = Fullscreen.attemptActiveDocumentSave(t);
@@ -228,7 +228,7 @@ async function P(e, t, r) {
       });
     }
   }
-  h(_$$F.dequeue({
+  h(VisualBellActions.dequeue({
     matchType: "save-as-actual"
   }));
   f || L(_$$h.SaveLocalFile, C, k);
@@ -246,13 +246,13 @@ async function P(e, t, r) {
     fileKey: e.key,
     fileId: e.id,
     orgId: e.parentOrgId
-  }), h(_$$F.dequeue({
+  }), h(VisualBellActions.dequeue({
     matchType: "save-as-progress"
   })), I) return;
-  h(_$$F.enqueue({
+  h(VisualBellActions.enqueue({
     type: "save-as-actual",
     message: getI18nString("visual_bell.saving"),
-    icon: zX.SPINNER
+    icon: VisualBellIcon.SPINNER
   }));
   await K.zipPromise;
   let Y = await z.close();
@@ -294,7 +294,7 @@ async function P(e, t, r) {
     orgId: e.parentOrgId,
     userId: m.user?.id
   });
-  h(_$$F.dequeue({
+  h(VisualBellActions.dequeue({
     matchType: "save-as-actual"
   }));
 }
@@ -404,10 +404,10 @@ let M = createOptimistThunk((e, t) => {
     message: function (e, t) {
       return e ? t ? getI18nString("save_as_actions.downloading_images") : getI18nString("save_as_actions.downloading_content") : t ? getI18nString("save_as_actions.cannot_download_images") : getI18nString("save_as_actions.cannot_download_content");
     }(navigator.onLine, t.pagesAllLoaded),
-    icon: zX.PROGRESS,
+    icon: VisualBellIcon.PROGRESS,
     button: r
   };
-  e.dispatch(_$$F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     ...a,
     button: i ? {
       primary: r,
@@ -419,7 +419,7 @@ let F = createOptimistThunk((e, t) => {
   let r = e.getState();
   if (!r.visualBell.find(e => "save-as-progress" === e.type) || !r.saveAsState?.startTime) return;
   let n = (r.saveAsState.waitTime || 0) + Date.now() - r.saveAsState.startTime;
-  (!navigator.onLine || n > t.showSkipAfterWaitingMs) && (e.dispatch(_$$F.clearAllExcept(["plugins-status"])), e.dispatch(M({
+  (!navigator.onLine || n > t.showSkipAfterWaitingMs) && (e.dispatch(VisualBellActions.clearAllExcept(["plugins-status"])), e.dispatch(M({
     mode: t.mode,
     pagesAllLoaded: t.pagesAllLoaded,
     showSkipButton: !0,
@@ -428,7 +428,7 @@ let F = createOptimistThunk((e, t) => {
   })));
 });
 let j = createOptimistThunk((e, t) => {
-  e.dispatch(_$$F.clearAllExcept(["plugins-status"]));
+  e.dispatch(VisualBellActions.clearAllExcept(["plugins-status"]));
   let r = e.getState().saveAsState;
   e.dispatch(_$$n.set({
     message: function (e) {

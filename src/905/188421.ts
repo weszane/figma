@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent, Children } from "react";
 import a from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { j7, oB } from "../905/929976";
 import { normalizeValue } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { b } from "../905/181535";
 import { p_ } from "../905/203369";
 import { c$, sK, l6 } from "../905/794875";
@@ -149,7 +149,7 @@ export class $$b1 extends PureComponent {
         originalComponent: l6,
         overrideKey: "select",
         property: e,
-        recordingKey: Pt(this.props, "select"),
+        recordingKey: generateRecordingKey(this.props, "select"),
         targetDomNode: this.props.targetDomNode,
         willShowDropdown: this.props.willShowDropdown,
         children: [t, this.props.children]
@@ -177,7 +177,7 @@ export class $$b1 extends PureComponent {
           noBorderOnFocus: !0,
           noPlaceholderLine: this.props.noPlaceholderLine,
           onBlur: this.onBlur,
-          onChange: (e, t = zk.YES) => {
+          onChange: (e, t = yesNoTrackingEnum.YES) => {
             this.props.onChange(e, t, 1);
           },
           onFocus: this.onFocus,
@@ -187,7 +187,7 @@ export class $$b1 extends PureComponent {
           overrideKey: "inputComponent",
           placeholder: this.props.placeholder && (this.props.forceInputPlaceholder || !this.props.property) ? this.props.placeholder : void 0,
           property: this.props.forceInputPlaceholder && this.props.placeholder ? "" : this.props.property,
-          recordingKey: this.props.unNamespacedInputRecordingKey ? this.props.recordingKey : Pt(this.props, "input"),
+          recordingKey: this.props.unNamespacedInputRecordingKey ? this.props.recordingKey : generateRecordingKey(this.props, "input"),
           shouldUseHoveringFormatterIfCombobox: this.state.isMouseOverScrubbableControl || this.state.isFocused
         })
       }) : jsx(OverridableComponent, {
@@ -201,7 +201,7 @@ export class $$b1 extends PureComponent {
         forwardedRef: this.props.forwardedRef,
         id: this.props.id,
         onBlur: this.onBlur,
-        onChange: (e, t = zk.YES) => {
+        onChange: (e, t = yesNoTrackingEnum.YES) => {
           this.props.onChange(e, t, 1);
         },
         onFocus: this.onFocus,
@@ -211,7 +211,7 @@ export class $$b1 extends PureComponent {
         overrideKey: "inputComponent",
         placeholder: this.props.forceInputPlaceholder && this.props.placeholder ? this.props.placeholder : void 0,
         property: this.props.forceInputPlaceholder && this.props.placeholder ? "" : this.props.property,
-        recordingKey: this.props.unNamespacedInputRecordingKey ? this.props.recordingKey : Pt(this.props, "input")
+        recordingKey: this.props.unNamespacedInputRecordingKey ? this.props.recordingKey : generateRecordingKey(this.props, "input")
       })]
     });
   }

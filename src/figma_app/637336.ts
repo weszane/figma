@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Multiplayer } from "../figma_app/763686";
 import { b } from "../905/985254";
 import { h } from "../figma_app/275739";

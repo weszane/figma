@@ -4,18 +4,18 @@ import { getResourceDataOrFallback } from '../905/419236';
 import { l as _$$l } from '../905/716947';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { qd } from '../figma_app/39751';
-import { fy7 } from '../figma_app/43951';
+import { LibraryPresetSubscriptionsV2 } from '../figma_app/43951';
 import { M } from '../figma_app/155411';
 import { je } from '../figma_app/155728';
 import { n1 } from '../figma_app/657017';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useSelector, useDispatch } from 'react-redux';
 export function $$m0() {
   let e = useDispatch();
   let t = useRef(!1);
   let s = useSelector(e => e.loadingState);
   let m = n1();
   let g = qd(m);
-  let f = useAtomWithSubscription(fy7.Query({
+  let f = useAtomWithSubscription(LibraryPresetSubscriptionsV2.Query({
     group: M()
   }));
   let x = je();

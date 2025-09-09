@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useState, useId, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { $n } from "../905/521428";
@@ -31,7 +31,7 @@ import P from "classnames";
 import D from "../vendor/239910";
 import { selectWithShallowEqual } from "../905/103090";
 import { p as _$$p } from "../figma_app/288654";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { NG } from "../figma_app/709893";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
@@ -42,7 +42,7 @@ import { fd } from "../figma_app/255679";
 import { T9 } from "../figma_app/528509";
 import { q5 } from "../figma_app/516028";
 import { B as _$$B2 } from "../905/506188";
-import { uXs } from "../figma_app/43951";
+import { LibraryFileSelect } from "../figma_app/43951";
 import { je } from "../figma_app/155728";
 import { PW, Yu } from "../figma_app/633080";
 import { Ib } from "../905/129884";
@@ -107,7 +107,7 @@ function ec({
       projectId: e
     }));
   }, [p]);
-  let y = _$$p(uXs, A);
+  let y = _$$p(LibraryFileSelect, A);
   let b = useMemo(() => {
     let e = {};
     y.forEach(t => {
@@ -212,7 +212,7 @@ function ec({
   }, [i, e]);
   let [R, N] = useState({});
   let P = d && d.type === s;
-  let O = rf("replace_libraries_modal.toggleDropdown", "mousedown", e => {
+  let O = useHandleMouseEvent("replace_libraries_modal.toggleDropdown", "mousedown", e => {
     N(e.currentTarget.getBoundingClientRect());
     P ? l(oB()) : l(j7({
       type: s

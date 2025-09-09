@@ -1,10 +1,10 @@
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 let a = class e {
   static initialize() {
     let t = getInitialOptions().user_data?.email;
     if (t && (-1 !== t.indexOf("@figma)") || -1 !== t.indexOf("@test.figma"))) {
-      let t = new URLSearchParams(Ay.location.search).get("safeModeRenderLimitMs");
+      let t = new URLSearchParams(customHistory.location.search).get("safeModeRenderLimitMs");
       t && (e.getForcedRenderTimeMsValue = parseInt(t));
     }
   }

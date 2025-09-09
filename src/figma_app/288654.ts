@@ -1,44 +1,44 @@
-import { useContext, useState, useEffect, useMemo, useCallback, useRef, useLayoutEffect } from "react";
-import { zN } from "../905/19536";
-import { resourceUtils } from "../905/989992";
-import { W } from "../905/491061";
-import { lw, bu } from "../905/663269";
-import { SubscriptionManager } from "../905/417830";
-import { Dj } from "../figma_app/28817";
-import { F4 } from "../905/795642";
-import { M } from "../905/609813";
-import { DEFAULT_LOADING_STATE } from "../905/957591";
-import { trackEventAnalytics } from "../905/449184";
-import { ZC } from "../figma_app/39751";
-import { g as _$$g } from "../905/880308";
-import { ob } from "../905/436043";
+import { useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useStableMemo } from '../905/19536';
+import { SubscriptionManager } from '../905/417830';
+import { LivegraphContext } from '../905/436043';
+import { trackEventAnalytics } from '../905/449184';
+import { RetainedPromiseManager } from '../905/491061';
+import { TimerHandler } from '../905/609813';
+import { bu, lw } from '../905/663269';
+import { DEFAULT_DISABLED_STATE } from '../905/795642';
+import { generateUUIDv4 } from '../905/871474';
+import { DEFAULT_LOADING_STATE } from '../905/957591';
+import { resourceUtils } from '../905/989992';
+import { ConnectionState } from '../figma_app/28817';
+import { ZC } from '../figma_app/39751';
 function f() {
-  let e = useContext(ob);
-  if (!e) throw Error("Tried to use useSubscription outside a LiveGraph context provider");
+  let e = useContext(LivegraphContext);
+  if (!e) throw new Error('Tried to use useSubscription outside a LiveGraph context provider');
   return e;
 }
 export function $$E4() {
   return f().client;
 }
 function y(e) {
-  return !e.hasOwnProperty("enabled") || !!e.enabled;
+  return !e.hasOwnProperty('enabled') || !!e.enabled;
 }
 export function $$b2(...e) {
   let t = T(e) ? e[0].view : e[0];
   let r = T(e) ? e[0].args : e[1];
   let i = (T(e) ? e[1] : e[2]) ?? {};
   let s = y(i);
-  let [l, d] = useState(s && r ? DEFAULT_LOADING_STATE : F4);
+  let [l, d] = useState(s && r ? DEFAULT_LOADING_STATE : DEFAULT_DISABLED_STATE);
   let u = f();
   let [_, h] = useState(r);
   let m = i.traceId;
   let g = l;
   u.mock && r && (g = u.mock.useSubscription(t, r));
-  r && !lw(r, _) && (h(r), d(g = s ? DEFAULT_LOADING_STATE : F4));
+  r && !lw(r, _) && (h(r), d(g = s ? DEFAULT_LOADING_STATE : DEFAULT_DISABLED_STATE));
   useEffect(() => {
     if (u.mock) return;
     if (!1 === s) {
-      d(F4);
+      d(DEFAULT_DISABLED_STATE);
       return;
     }
     if (!_) return;
@@ -52,13 +52,13 @@ export function $$b2(...e) {
   return useMemo(() => resourceUtils.from(g), [g]);
 }
 function T(e) {
-  return Array.isArray(e) && (1 === e.length || 2 === e.length) && bu(e[0]);
+  return Array.isArray(e) && (e.length === 1 || e.length === 2) && bu(e[0]);
 }
 export function $$I0(...e) {
   let t = T(e) ? e[0].view : e[0];
   let r = T(e) ? e[0].args : e[1];
   let l = (T(e) ? e[1] : e[2]) ?? {};
-  let d = zN(r, lw);
+  let d = useStableMemo(r, lw);
   let u = y(l);
   let _ = function () {
     let [e, t] = useState(0);
@@ -67,26 +67,26 @@ export function $$I0(...e) {
   let g = f();
   let E = l.traceId;
   let b = function (e, t) {
-    let r = useRef(_$$g());
+    let r = useRef(generateUUIDv4());
     let i = ZC(e);
     let a = ZC(t);
-    void 0 === i || void 0 === a || i === e && lw(t, a) || (r.current = _$$g());
+    void 0 === i || void 0 === a || i === e && lw(t, a) || (r.current = generateUUIDv4());
     return r.current;
   }(t, d);
   let S = useMemo(() => g.client?.viewHasStaticQueries(t) ? {
     ...d,
     __requestId: b
   } : d, [d, b, t, g.client]);
-  let v = u && S ? g.mock ? g.mock.useSubscription(t, S) : g.client?.getViewResult(t, S) ?? DEFAULT_LOADING_STATE : F4;
+  let v = u && S ? g.mock ? g.mock.useSubscription(t, S) : g.client?.getViewResult(t, S) ?? DEFAULT_LOADING_STATE : DEFAULT_DISABLED_STATE;
   useEffect(() => {
     if (!g.mock && !1 !== u && S) return g.client?.subscribe(t, S, _, E);
   }, [u, g.client, g.mock, t, E, S, _]);
-  let A = useMemo(() => new W(() => () => {}), []);
+  let A = useMemo(() => new RetainedPromiseManager(() => () => {}), []);
   return useMemo(() => {
     let e = g.client;
-    return null == e ? resourceUtils.disabled() : resourceUtils.suspendableFrom(v, () => new Promise((r, n) => {
+    return e == null ? resourceUtils.disabled() : resourceUtils.suspendableFrom(v, () => new Promise((r, n) => {
       let i = e.subscribe(t, d, e => {
-        "loaded" === e.status ? (r(), setTimeout(() => i?.())) : e.errors && (n(e.errors), setTimeout(() => i?.()));
+        e.status === 'loaded' ? (r(), setTimeout(() => i?.())) : e.errors && (n(e.errors), setTimeout(() => i?.()));
       });
     }), A);
   }, [d, g.client, v, A, t]);
@@ -107,20 +107,20 @@ export function $$S7(e, t, r = {}) {
 }
 export function $$v3() {
   let e = f();
-  let [t, r] = useState(e.client ? e.client.getHealthStatus() : Dj.DISCONNECTED);
+  let [t, r] = useState(e.client ? e.client.getHealthStatus() : ConnectionState.DISCONNECTED);
   let i = e => r(e);
   useEffect(() => {
-    if (null !== e.client) return e.client.addHealthListener(i);
+    if (e.client !== null) return e.client.addHealthListener(i);
   }, [e]);
   return t;
 }
 class A {
   constructor(e, t, r) {
     this.viewArgs = e;
-    this.traceId = _$$g();
+    this.traceId = generateUUIDv4();
     this.errors = null;
     this._isLoading = !0;
-    this.timer = new M({
+    this.timer = new TimerHandler({
       onTimeout: () => t(this),
       timeoutMs: r
     });
@@ -151,26 +151,26 @@ export function $$x6(e, t, r) {
   let s = r.subscriptionLogger;
   let l = useRef(t);
   let d = i.current;
-  !i.current && a && (i.current = new A(t, e => s.onEvent("stuck", u, e), s.stuckMs));
+  !i.current && a && (i.current = new A(t, e => s.onEvent('stuck', u, e), s.stuckMs));
   let c = a ? i.current.traceId : void 0;
   let u = $$b2(e, t, {
     enabled: a,
     traceId: c
   });
-  if (null === d && a && s.onEvent("initiated", u, i.current), !lw(t, l.current)) {
-    let e = new A(t, e => s.onEvent("stuck", u, e), s.stuckMs);
-    i.current?.isLoading && (i.current.finish(), s.onEvent("canceled", u, i.current, {
+  if (d === null && a && s.onEvent('initiated', u, i.current), !lw(t, l.current)) {
+    let e = new A(t, e => s.onEvent('stuck', u, e), s.stuckMs);
+    i.current?.isLoading && (i.current.finish(), s.onEvent('canceled', u, i.current, {
       nextTraceId: e.traceId
     }));
     i.current = e;
-    s.onEvent("initiated", u, i.current);
+    s.onEvent('initiated', u, i.current);
     l.current = t;
   }
   useEffect(() => {
-    "loaded" === u.status ? i.current?.isLoading && (i.current.finish(), s.onEvent("loaded", u, i.current)) : "errors" === u.status && i.current?.isLoading && (i.current.finish(), i.current.errors = u.errors, s.onEvent("error", u, i.current));
+    u.status === 'loaded' ? i.current?.isLoading && (i.current.finish(), s.onEvent('loaded', u, i.current)) : u.status === 'errors' && i.current?.isLoading && (i.current.finish(), i.current.errors = u.errors, s.onEvent('error', u, i.current));
   }, [u, u.errors, u.status, s]);
   useEffect(() => () => {
-    i.current?.isLoading && (i.current.finish(), s.onEvent("canceled", u, i.current));
+    i.current?.isLoading && (i.current.finish(), s.onEvent('canceled', u, i.current));
   }, []);
   return u;
 }
@@ -178,7 +178,7 @@ export function $$N5(e, t, r = {}) {
   let i = useRef(window.performance.now());
   let a = useRef(!1);
   useEffect(() => {
-    if (!a.current && "loading" !== e.status && "disabled" !== e.status) {
+    if (!a.current && e.status !== 'loading' && e.status !== 'disabled') {
       let n = window.performance.now();
       trackEventAnalytics(t, {
         ...r,
@@ -189,7 +189,7 @@ export function $$N5(e, t, r = {}) {
     }
   }, [r, t, e.status]);
 }
-export { Dj } from "../figma_app/28817";
+export { Dj } from '../figma_app/28817';
 export const Bh = $$I0;
 export const Rs = $$b2;
 export const Ym = $$v3;

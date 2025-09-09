@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import o from "classnames";
 import { Y } from "../905/506207";
@@ -24,7 +24,7 @@ import { rB } from "../figma_app/236178";
 import { q5 } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
 import { o as _$$o, n as _$$n } from "../figma_app/264395";
-import { jJU, a8q, ehp } from "../figma_app/43951";
+import { DeveloperRelatedLinks, FileWorkshopMode, OpenEditorFileData } from "../figma_app/43951";
 import { X_ } from "../figma_app/197432";
 import { d as _$$d } from "../figma_app/550089";
 import { j6 } from "../9410/793186";
@@ -47,7 +47,7 @@ function L(e) {
     orgId
   } = e;
   let m = null != i && !!l[i]?.is_favorited;
-  let L = Rs(jJU, {
+  let L = Rs(DeveloperRelatedLinks, {
     fileKey: i || ""
   }, {
     enabled: !!i
@@ -68,7 +68,7 @@ function L(e) {
   }, [L]);
   let R = useRef(!1);
   let D = Xr(Kc);
-  let M = Rs(a8q, {
+  let M = Rs(FileWorkshopMode, {
     fileKey: i || ""
   }, {
     enabled: !!i
@@ -90,7 +90,7 @@ function L(e) {
   let F = useRef(!1);
   let B = useRef(null);
   let U = useRef(null);
-  let G = Rs(ehp, {
+  let G = Rs(OpenEditorFileData, {
     fileKey: i || ""
   }, {
     enabled: !!i

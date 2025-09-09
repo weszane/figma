@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useEffect, memo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -11,7 +11,7 @@ import { fG } from "../figma_app/973927";
 import { IntegrationUtils } from "../figma_app/469876";
 import { XM } from "../905/486443";
 import { sZ } from "../905/845253";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { oh } from "../905/18797";
 import { $A } from "../905/862883";
 import { Ib } from "../905/129884";
@@ -206,7 +206,7 @@ export function $$K1(e, t) {
 function H({
   toolbarIconScale: e
 }) {
-  let t = TA();
+  let t = getUserId();
   let [i, o] = useState(!1);
   let l = useDispatch();
   let d = NT();

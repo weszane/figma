@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { zK } from "../figma_app/913823";
 import { q5 } from "../figma_app/516028";
 import { Sc, mC } from "../905/18797";

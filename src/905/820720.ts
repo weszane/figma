@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { IAssertResource } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import l from "../vendor/128080";
@@ -9,9 +9,9 @@ import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../905/477505";
 import { HT, RB } from "../figma_app/69680";
 import { SupportedPlatforms, WEB, IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML } from "../905/359509";
-import { K6, $n } from "../905/515076";
+import { findUnitSchema, getCodegenLanguagePreference } from "../905/515076";
 import { $1, j8, _P } from "../figma_app/844435";
-import { ax } from "../figma_app/741237";
+import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { sZ } from "../905/845253";
 import { isDevModeWithCodegen } from "../figma_app/300692";
 import { hasLocalFileId, isPluginAllowListed } from "../figma_app/155287";
@@ -22,7 +22,7 @@ function E(e, t, i, r = {}) {
   let a = [];
   e.forEach(e => {
     if (!isDevModeWithCodegen(e)) return;
-    let s = getCodegenLanguages(e).filter(t => !r.shouldHideLanguagesWithNoAltUnitSupport || !!K6(e, t));
+    let s = getCodegenLanguages(e).filter(t => !r.shouldHideLanguagesWithNoAltUnitSupport || !!findUnitSchema(e, t));
     if (0 === s.length) return;
     let o = hasLocalFileId(e) ? void 0 : jsx("div", {
       className: _$$s.mr4.$,
@@ -31,7 +31,7 @@ function E(e, t, i, r = {}) {
       })
     });
     if (1 === s.length) {
-      let n = $n(e, s[0]);
+      let n = getCodegenLanguagePreference(e, s[0]);
       a.push({
         name: e.name,
         displayText: e.name,
@@ -41,7 +41,7 @@ function E(e, t, i, r = {}) {
       });
     } else {
       let n = s.map(n => {
-        let r = $n(e, n);
+        let r = getCodegenLanguagePreference(e, n);
         return {
           name: n.label,
           displayText: n.label,
@@ -129,7 +129,7 @@ export function $$x0({
       name: getI18nString("dev_handoff.code_language.browse"),
       displayText: getI18nString("dev_handoff.code_language.browse"),
       callback: () => {
-        ax(IAssertResource.PLUGIN);
+        setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
         atomStoreManager.set(HT, "recents_and_saved");
         atomStoreManager.set(RB, !0);
       }

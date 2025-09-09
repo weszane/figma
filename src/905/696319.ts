@@ -17,9 +17,9 @@ import { N as _$$N } from "../905/427996";
 import { l as _$$l } from "../905/490996";
 import { C as _$$C } from "../905/294086";
 import { Ib } from "../905/129884";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 let p = "data-alt-scrub-target";
 let m = null;
 let h = 0;
@@ -27,7 +27,7 @@ let g = {
   current: null
 };
 let f = null;
-let _ = () => {};
+let _ = () => { };
 function A() {
   m && (m.setAttribute(p, ""), g.current && (_ = function (e, t) {
     let i = function (e) {
@@ -114,9 +114,9 @@ function A() {
   }(m, g)));
 }
 function y() {
-  m && (m.removeAttribute(p), _(), _ = () => {});
+  m && (m.removeAttribute(p), _(), _ = () => { });
 }
-let b = () => {};
+let b = () => { };
 let x = _$$A && !!document.documentElement.requestPointerLock && !isSafari;
 async function S(e) {
   let t = e.requestPointerLock();
@@ -439,7 +439,7 @@ let H = forwardRef(({
           }), addEventlistenerWithCleanup(window, "blur", y));
           b = () => {
             e();
-            b = () => {};
+            b = () => { };
           };
         }(), ++h, () => {
           0 == --h && b();
@@ -495,7 +495,7 @@ let H = forwardRef(({
         let d = e => P(i, e, o, O, t.shiftKey);
         if (j.current) j.current(e => d(e).value, {
           commit: !1
-        });else {
+        }); else {
           let n = d(N.current);
           Fi(i, n.value, e) || (l(n.value, Object.assign(t, {
             commit: !1
@@ -510,11 +510,11 @@ let H = forwardRef(({
         if (j.current = null, t.cancelled) n ? n(e => e, {
           commit: !0,
           cancelled: !0
-        }) : _(N.current, t);else {
+        }) : _(N.current, t); else {
           let r = e => P(i, e, 0, O, t.shiftKey).value;
           if (n) n(r, {
             commit: !0
-          });else {
+          }); else {
             let n = r(N.current);
             (F.current || !Fi(i, n, e)) && l(n, Object.assign(t, {
               commit: !0
@@ -622,7 +622,7 @@ export function $$X0({
     let e = useDispatch();
     return useCallback((t, i) => {
       let n = i <= -8 ? "1/8" : i <= -4 ? "1/4" : i <= -2 ? "1/2" : i >= 8 ? "8x" : i >= 4 ? "4x" : i >= 2 ? "2x" : "1x";
-      e(_$$F.enqueue({
+      e(VisualBellActions.enqueue({
         message: getI18nString("common.scrubScale", {
           value: n
         }),

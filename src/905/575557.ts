@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, useContext } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { roundToMultiple } from "../figma_app/492908";
 import { assertNotNullish } from "../figma_app/95419";
 import { e as _$$e } from "../905/478588";
@@ -15,7 +15,7 @@ import { sT } from "../figma_app/740163";
 import { isInvalidValue, normalizeValue, isValidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { oZ, LS, TK, F6, UH } from "../905/129660";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { e as _$$e2 } from "../905/579635";
 import { Jl } from "../figma_app/178475";
@@ -46,7 +46,7 @@ export function $$N0({
   let M = !!LS(t.lineHeight);
   let j = useRef(null);
   let U = useCallback((e, i) => {
-    if (x?.(), i === zk.YES && null != t && (e = TK(t, e)), void 0 !== T) {
+    if (x?.(), i === yesNoTrackingEnum.YES && null != t && (e = TK(t, e)), void 0 !== T) {
       if (!s) throw Error("Expected editingStyleGuid to be set when responsiveTextStyleVariantIndex is set");
       let t = {
         value: e.value,

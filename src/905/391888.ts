@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { useDispatch, useStore } from "../vendor/514228";
+import { useDispatch, useStore } from "react-redux";
 import { OpenTarget } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Fo } from "../905/63728";
 import { gN } from "../figma_app/976345";
 import { oB } from "../905/929976";
@@ -18,7 +18,7 @@ export function $$u0() {
       let e = gN(i);
       let r = t.getState();
       let a = xS(r, e.payload);
-      Ay.redirect(a, "_blank");
+      customHistory.redirect(a, "_blank");
       return;
     }
     n.preventDefault();

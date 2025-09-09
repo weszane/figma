@@ -5,7 +5,7 @@ import { ColorSpaceEnum, NoneColor, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { Uz } from "../905/63728";
-import { o6, cZ, Pt } from "../figma_app/806412";
+import { RecordingPureComponent, handleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { j7 } from "../905/929976";
 import { Vl } from "../figma_app/8833";
@@ -15,7 +15,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { dM, Eh } from "../figma_app/837840";
 import { VG } from "../figma_app/622881";
 import { f7 } from "../figma_app/896988";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { qo, cn } from "../905/959568";
 import { J } from "../905/225412";
 import { L } from "../905/173490";
@@ -35,7 +35,7 @@ export function $$T0({
     gradientUIv2: i
   });
 }
-class k extends o6 {
+class k extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.isNewUI = this.props.gradientUIv2;
@@ -155,7 +155,7 @@ class k extends o6 {
       for (let [i, n] of e.entries()) n.position = t * i;
       let i = 0 === this.props.paint.stopsVar.length ? this.props.paint.stops.map(Ug) : this.props.paint.stopsVar.slice();
       if (e.length === i.length) for (let [e, n] of i.entries()) n.position = t * e;
-      this.updateStops(e, i, zk.YES);
+      this.updateStops(e, i, yesNoTrackingEnum.YES);
     };
     this.mouseEventRecordedEventHandler = {
       recordMetadata: e => {
@@ -173,7 +173,7 @@ class k extends o6 {
         };
       }
     };
-    this.onMouseDown = cZ(this, "mousedown", e => {
+    this.onMouseDown = handleMouseEvent(this, "mousedown", e => {
       e.stopPropagation();
       let t = this.clientXToStopPosition(e.clientX, e.shiftKey, !1);
       if (t > 1 || t < 0) return;
@@ -226,15 +226,15 @@ class k extends o6 {
         Zb(u);
       }
       i && (n = [...n.slice(0, r), ...n.slice(r + 1)], u = [...u.slice(0, r), ...u.slice(r + 1)], d = clamp(d, 0, n.length - 1));
-      this.updateStops(n, u, zk.YES);
+      this.updateStops(n, u, yesNoTrackingEnum.YES);
       this.updateCurrentSelectedStop(d);
     };
     this.onMouseMove = e => {
-      this.onMouseMoveHelper(e, zk.NO);
+      this.onMouseMoveHelper(e, yesNoTrackingEnum.NO);
     };
-    this.onMouseUp = cZ(this, "mouseup", e => {
+    this.onMouseUp = handleMouseEvent(this, "mouseup", e => {
       this.state.isNormalClick && this.contextMenuEnabled && this.props.contextMenu?.onColorPickerToggle(this.currentSelectedStopIndex(), cn(this.panelRef.current));
-      this.onMouseMoveHelper(e, zk.YES);
+      this.onMouseMoveHelper(e, yesNoTrackingEnum.YES);
       this.setState({
         isDragging: !1,
         isNormalClick: !1
@@ -294,7 +294,7 @@ class k extends o6 {
     };
   }
   recordingKey() {
-    return Pt(this.props, "gradientControl");
+    return generateRecordingKey(this.props, "gradientControl");
   }
   get trackHeight() {
     return "ui3" === this.props.uiVersion ? this.isNewUI ? this.HEIGHT_UI3_NEWUI : this.HEIGHT_UI3 : this.HEIGHT;
@@ -397,7 +397,7 @@ class k extends o6 {
           onMouseDown: this.onStopMouseDown.bind(this, t),
           onMouseEnter: this.onStopMouseEnter,
           onMouseLeave: this.onStopMouseLeave,
-          recordingKey: Pt(this.props, "stop", t),
+          recordingKey: generateRecordingKey(this.props, "stop", t),
           selected: t === this.currentSelectedStopIndex()
         })
       }, t)), e, jsxs("div", {

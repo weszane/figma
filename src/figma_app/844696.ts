@@ -8,7 +8,7 @@ import { N as _$$N } from "../905/852320";
 import { l as _$$l } from "../905/803103";
 import { getFeatureFlags } from "../905/601108";
 import { Q } from "../figma_app/67145";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { ro } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
@@ -81,7 +81,7 @@ let R = memo(function (e) {
     return "SELECT_DIVIDER" === r ? jsx(sK, {}, i) : jsx(x, {
       value: r,
       disabled: a,
-      recordingKey: Pt(e, r)
+      recordingKey: generateRecordingKey(e, r)
     }, i);
   });
   let a = 130;

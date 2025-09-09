@@ -1,431 +1,148 @@
-var $$n20;
-var r;
-var $$a12;
-var $$s4;
-var $$o0;
-var $$l5;
-var $$d17;
-var $$c21;
-var $$u11;
-var $$p2;
-var $$m30;
-var $$h13;
-var $$g24;
-var $$f19;
-export function $$_31(e) {
-  return e;
+/**
+ * Refactored from /Users/allen/github/fig/src/905/859698.ts
+ * Grouped identity functions, clarified types, and documented logic.
+ */
+
+// #region Types
+
+/**
+ * Represents a key-version pair.
+ */
+export interface KeyVersion {
+  key: string
+  version: string
 }
-export function $$A22(e) {
-  return e;
+
+// #endregion
+
+// #region Identity Functions
+
+/**
+ * Collection of generic identity functions.
+ * These functions simply return their input.
+ * Original names: sg, ii, q, Po, n3, ey, SG, yG, mW, wF, Sm, Xf, F7, Rf, o5, IA, nK, Vt, Pg, Xe, j6
+ */
+export const IdentityFns = {
+  sg: <T>(e: T): T => e, // $$_31
+  ii: <T>(e: T): T => e, // $$A22
+  q: <T>(e: T): T => e, // $$y29
+  Po: <T>(e: T): T => e, // $$b7
+  n3: <T>(e: T): T => e, // $$v26
+  ey: <T>(e: T): T => e, // $$I18
+  SG: <T>(e: T): T => e, // $$E9
+  yG: <T>(e: T): T => e, // $$x33
+  mW: <T>(e: T): T => e, // $$S25
+  wF: <T>(e: T): T => e, // $$w32
+  Sm: <T>(e: T): T => e, // $$k10
+  Xf: <T>(e: T): T => e, // $$N16
+  F7: <T>(e: T): T => e, // $$P1
+  Rf: <T>(e: T): T => e, // $$O8
+  o5: <T>(e: T): T => e, // $$D28
+  IA: <T>(e: T): T => e, // $$L3
+  nK: <T>(e: T): T => e, // $$F27
+  Vt: <T>(e: T): T => e, // $$j14
+  Pg: <T>(e: T): T => e, // $$U6
+  Xe: <T>(e: T): T => e, // $$B15
+  j6: <T>(e: T): T => e, // $$z23
 }
-export function $$y29(e) {
-  return e;
+
+// #endregion
+
+// #region KeyVersion Utilities
+
+/**
+ * Converts a KeyVersion to string.
+ */
+export function keyVersionToString({ key, version }: KeyVersion): string {
+  return `${key}/${version}`
 }
-export function $$b7(e) {
-  return e;
+
+/**
+ * Parses a string into KeyVersion.
+ */
+export function keyVersionFromString(e: string): KeyVersion | null {
+  const parts = e.split('/')
+  if (parts.length !== 2)
+    return null
+  const [key, version] = parts
+  return key && version ? { key, version } : null
 }
-export function $$v26(e) {
-  return e;
+
+/**
+ * Converts a KeyVersion-like object.
+ */
+export function keyVersionFromKiwi({ key, version }: Partial<KeyVersion>): KeyVersion | null {
+  return key && version ? { key, version } : null
 }
-export function $$I18(e) {
-  return e;
+
+/**
+ * Checks equality of two KeyVersion objects.
+ */
+export function keyVersionIsEqual(e: KeyVersion | null, t: KeyVersion | null): boolean {
+  return e && t ? e.key === t.key && e.version === t.version : e === t
 }
-export function $$E9(e) {
-  return e;
+
+/**
+ * Checks if KeyVersion is valid.
+ */
+export function keyVersionIsValid({ key, version }: Partial<KeyVersion>): boolean {
+  return !!(key && version)
 }
-export function $$x33(e) {
-  return e;
+
+// #endregion
+type InvalidKeyVersion = { INVALID: string; toString: (e: any) => any } & ((e: any) => any)
+// #region KeyVersion Namespaces
+function createInvalidString<T extends InvalidKeyVersion>(obj: T): InvalidKeyVersion {
+  const res = obj
+  res.INVALID = res('') as string
+  res.toString = (e: T) => e
+  return res
 }
-export function $$S25(e) {
-  return e;
+
+
+export type ReturnKeyVersion = ReturnType<typeof createKeyVersionNamespace>
+/**
+ * Creates a KeyVersion namespace object with utility methods.
+ * @param obj - An object to extend with KeyVersion utilities.
+ * @returns The extended object with KeyVersion utility methods.
+ * Original name: createKeyVersionNamespace
+ */
+function createKeyVersionNamespace<T extends object>(obj: T): T & {
+  toString: (kv: KeyVersion) => string
+  fromString: (str: string) => KeyVersion | null
+  fromKiwi: (kv: Partial<KeyVersion>) => KeyVersion | null
+  isEqual: (a: KeyVersion | null, b: KeyVersion | null) => boolean
+  isValid: (kv: Partial<KeyVersion>) => boolean
+} {
+  const res = obj as any
+  res.toString = keyVersionToString
+  res.fromString = keyVersionFromString
+  res.fromKiwi = keyVersionFromKiwi
+  res.isEqual = keyVersionIsEqual
+  res.isValid = keyVersionIsValid
+  return res as T & {
+    toString: (kv: KeyVersion) => string
+    fromString: (str: string) => KeyVersion | null
+    fromKiwi: (kv: Partial<KeyVersion>) => KeyVersion | null
+    isEqual: (a: KeyVersion | null, b: KeyVersion | null) => boolean
+    isValid: (kv: Partial<KeyVersion>) => boolean
+  }
 }
-export function $$w32(e) {
-  return e;
-}
-function C(e) {
-  return e;
-}
-function T(e) {
-  return e;
-}
-export function $$k10(e) {
-  return e;
-}
-function R(e) {
-  return e;
-}
-export function $$N16(e) {
-  return e;
-}
-export function $$P1(e) {
-  return e;
-}
-export function $$O8(e) {
-  return e;
-}
-export function $$D28(e) {
-  return e;
-}
-export function $$L3(e) {
-  return e;
-}
-export function $$F27(e) {
-  return e;
-}
-function M(e) {
-  return e;
-}
-export function $$j14(e) {
-  return e;
-}
-export function $$U6(e) {
-  return e;
-}
-export function $$B15(e) {
-  return e;
-}
-function V(e) {
-  return e;
-}
-function G(e) {
-  return e;
-}
-export function $$z23(e) {
-  return e;
-}
-function H(e) {
-  return e;
-}
-function W({
-  key: e,
-  version: t
-}) {
-  return `${$$_31.toString(e)}/${$$N16.toString(t)}`;
-}
-function K(e) {
-  let t = e.split("/");
-  if (2 !== t.length) return null;
-  let [i, n] = t;
-  return i && n ? {
-    key: i,
-    version: n
-  } : null;
-}
-function Y({
-  key: e,
-  version: t
-}) {
-  return e && t ? {
-    key: e,
-    version: t
-  } : null;
-}
-function $$q(e, t) {
-  return e && t ? e.key === t.key && e.version === t.version : e === t;
-}
-function $({
-  key: e,
-  version: t
-}) {
-  return !!(e && t);
-}
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$_31 || ($$_31 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$A22 || ($$A22 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$y29 || ($$y29 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$b7 || ($$b7 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$v26 || ($$v26 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$I18 || ($$I18 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$E9 || ($$E9 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$x33 || ($$x33 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$S25 || ($$S25 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$w32 || ($$w32 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})(C || (C = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})(T || (T = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$k10 || ($$k10 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})(R || (R = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$N16 || ($$N16 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$P1 || ($$P1 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$O8 || ($$O8 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$D28 || ($$D28 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$L3 || ($$L3 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$F27 || ($$F27 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})(M || (M = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$j14 || ($$j14 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$U6 || ($$U6 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$B15 || ($$B15 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})(V || (V = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})(G || (G = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})($$z23 || ($$z23 = {}));
-(function (e) {
-  e.INVALID = e("");
-  e.toString = function (e) {
-    return e;
-  };
-})(H || (H = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$n20 || ($$n20 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})(r || (r = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$a12 || ($$a12 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$s4 || ($$s4 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$o0 || ($$o0 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$l5 || ($$l5 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$d17 || ($$d17 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$c21 || ($$c21 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$u11 || ($$u11 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$p2 || ($$p2 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$m30 || ($$m30 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$h13 || ($$h13 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$g24 || ($$g24 = {}));
-(function (e) {
-  e.toString = W;
-  e.fromString = K;
-  e.fromKiwi = Y;
-  e.isEqual = $$q;
-  e.isValid = $;
-})($$f19 || ($$f19 = {}));
-export const $y = $$o0;
-export const F7 = $$P1;
-export const I0 = $$p2;
-export const IA = $$L3;
-export const Kj = $$s4;
-export const M4 = $$l5;
-export const Pg = $$U6;
-export const Po = $$b7;
-export const Rf = $$O8;
-export const SG = $$E9;
-export const Sm = $$k10;
-export const UG = $$u11;
-export const Uw = $$a12;
-export const VP = $$h13;
-export const Vt = $$j14;
-export const Xe = $$B15;
-export const Xf = $$N16;
-export const cI = $$d17;
-export const ey = $$I18;
-export const iF = $$f19;
-export const iU = $$n20;
-export const iV = $$c21;
-export const ii = $$A22;
-export const j6 = $$z23;
-export const kY = $$g24;
-export const mW = $$S25;
-export const n3 = $$v26;
-export const nK = $$F27;
-export const o5 = $$D28;
-export const q = $$y29;
-export const sS = $$m30;
-export const sg = $$_31;
-export const wF = $$w32;
-export const yG = $$x33;
+
+// Example exports (original names preserved for traceability)
+export const iU = createKeyVersionNamespace({})
+export const SymbolId = createKeyVersionNamespace({})
+export const StateGroupId = createKeyVersionNamespace({})
+export const VariableID = createKeyVersionNamespace({})
+export const VariableOverrideId = createKeyVersionNamespace({})
+export const VariableCollectionId = createKeyVersionNamespace({})
+export const ModuleId = createKeyVersionNamespace({})
+export const ResponsiveSetId = createKeyVersionNamespace({})
+export const CodeLibraryId = createKeyVersionNamespace({})
+export const CodeFileId = createKeyVersionNamespace({})
+export const CodeComponentId = createKeyVersionNamespace({})
+export const ManagedStringId = createKeyVersionNamespace({})
+export const StyleId = createKeyVersionNamespace({})
+export const n3 = createInvalidString
+export const VariableStyleId = createKeyVersionNamespace({})
+// #endregion

@@ -3,7 +3,7 @@ import { useMemo, createElement } from "react";
 import { d as _$$d } from "../905/976845";
 import { l as _$$l } from "../905/509505";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { tf } from "../figma_app/831799";
 import { u as _$$u } from "../905/389684";
@@ -74,7 +74,7 @@ export function $$S0({
       "aria-label": label,
       "aria-expanded": expanded,
       ref: t,
-      recordingKey: Pt(e, "teamLibrary"),
+      recordingKey: generateRecordingKey(e, "teamLibrary"),
       onClick,
       htmlAttributes: {
         "data-onboarding-key": D
@@ -94,7 +94,7 @@ export function $$S0({
       fallbackSvg: _$$A2,
       innerText: "Team Library",
       onClick,
-      recordingKey: Pt(e, "teamLibrary"),
+      recordingKey: generateRecordingKey(e, "teamLibrary"),
       selected: expanded,
       svg: _$$A
     })

@@ -3,7 +3,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import s from "../vendor/805353";
 import { TW } from "../905/958097";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
 import { rb, Ov, uw, aW, iO, rg, jV, Ue } from "../figma_app/965653";
 import { jD } from "../figma_app/407414";
@@ -53,11 +53,11 @@ export function $$g0({
       });
     }
     return i.length > 0 ? [{
-      id: g(),
+      id: generateUUIDv4(),
       type: "LIST_HIERARCHY_PATH",
       label: getI18nString("design_linter.preview.suggested")
     }, ...i, {
-      id: g(),
+      id: generateUUIDv4(),
       type: "LIST_SEPARATOR"
     }] : i;
   }({
@@ -160,11 +160,11 @@ export function $$f6({
     }
     return {
       listItems: [{
-        id: g(),
+        id: generateUUIDv4(),
         type: "LIST_HIERARCHY_PATH",
         label: getI18nString("design_linter.preview.suggested")
       }, ...a, {
-        id: g(),
+        id: generateUUIDv4(),
         type: "LIST_SEPARATOR"
       }, ...listItems],
       allStyles: 0 === e.length ? allStyles : [...e, ...allStyles],

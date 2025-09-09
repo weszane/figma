@@ -599,3 +599,5 @@ export function validateAndCollectErrors(value: any, schema: any, property: stri
   }
   return errors
 }
+
+export const c0 = validateAndCollectErrors

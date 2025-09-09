@@ -3,7 +3,7 @@ import { Rs } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { X } from "../905/859195";
 import { yJ } from "../figma_app/78808";
 import { showModalHandler, hideModal } from "../905/156213";
@@ -12,7 +12,7 @@ import { fu } from "../figma_app/831799";
 import { q5 } from "../figma_app/516028";
 import { dq } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
-import { cBJ } from "../figma_app/43951";
+import { FileTemplateView } from "../figma_app/43951";
 import { cD } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
@@ -63,7 +63,7 @@ let x = registerModal(function ({
   let i = q5();
   let s = dq();
   let y = cD();
-  let b = Rs(cBJ, {
+  let b = Rs(FileTemplateView, {
     fileKey: t
   }, {
     enabled: !i
@@ -82,7 +82,7 @@ let x = registerModal(function ({
     try {
       await XHR.del(`/api/templates/file/${C.fileKey}`);
     } catch (t) {
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         message: getI18nString("templates.unpublishing.bell.failure"),
         type: "template-unpublish-error",
         error: !0
@@ -90,7 +90,7 @@ let x = registerModal(function ({
       return;
     }
     e(hideModal());
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: getI18nString("templates.unpublishing.bell.success"),
       type: "template-unpublish-success"
     }));

@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { zq, We } from "../figma_app/782261";
 import { q5 } from "../figma_app/516028";

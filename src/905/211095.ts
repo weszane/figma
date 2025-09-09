@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ComponentPropType, Fullscreen, ComponentType, DesignSystemsTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -9,7 +9,7 @@ import { Point } from "../905/736624";
 import { vq } from "../905/8732";
 import { hideModal } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
-import { i as _$$i } from "../figma_app/741237";
+import { renameNode } from "../figma_app/741237";
 import { sS } from "../figma_app/516028";
 import { CG } from "../figma_app/646357";
 import { AF } from "../figma_app/889655";
@@ -77,7 +77,7 @@ export function $$C0({
     "" !== (e = QV(e)) && (permissionScopeHandler.user("add-variant-property", () => {
       Fullscreen && Po(() => allStates?.forEach(n => {
         let r = n.stateInfo.propertyValues;
-        r && _$$i(n.symbol.node_id, zh({
+        r && renameNode(n.symbol.node_id, zh({
           ...r,
           [e]: t
         }, [...i, e]));

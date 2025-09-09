@@ -61,13 +61,13 @@ import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { O as _$$O5 } from '../905/273186';
 import { tN as _$$tN, Gt, pw } from '../905/275640';
 import { h as _$$h2 } from '../905/284399';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { v as _$$v } from '../905/318279';
 import { X as _$$X2 } from '../905/319582';
 import { n as _$$n2 } from '../905/347702';
 import { c as _$$c2 } from '../905/370443';
-import { iZ as _$$iZ, TA } from '../905/372672';
+import { selectCurrentUser, getUserId } from '../905/372672';
 import { _ as _$$_ } from '../905/381235';
 import { c2 } from '../905/382883';
 import { e as _$$e3 } from '../905/383776';
@@ -97,12 +97,12 @@ import { r6 as _$$r4 } from '../905/542608';
 import { cJ } from '../905/561485';
 import { W as _$$W3 } from '../905/569454';
 import { dG, Zk } from '../905/571648';
-import { zX } from '../905/576487';
+import { VisualBellIcon } from '../905/576487';
 import { s as _$$s3 } from '../905/583953';
 import { O as _$$O3 } from '../905/599243';
 import { getFeatureFlags } from '../905/601108';
 import { QL } from '../905/609392';
-import { Ay as _$$Ay2 } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { jN } from '../905/612685';
 import { J as _$$J2 } from '../905/614223';
 import { Pv } from '../905/619652';
@@ -133,8 +133,8 @@ import { e as _$$e4 } from '../905/845623';
 import { F_ } from '../905/858282';
 import { T as _$$T2 } from '../905/858738';
 import { bL as _$$bL3 } from '../905/867927';
-import { FO } from '../905/869235';
-import { g as _$$g4 } from '../905/880308';
+import { ProjectDevelopmentPhases } from '../905/869235';
+import { generateUUIDv4 } from '../905/871474';
 import { C as _$$C3 } from '../905/887158';
 import { ManuallyLabeledCheckbox } from '../905/909715';
 import { XHR } from '../905/910117';
@@ -219,7 +219,7 @@ import { u24 } from '../figma_app/27776';
 import { GQ, Ye } from '../figma_app/32128';
 import { ZC } from '../figma_app/39751';
 import { pO } from '../figma_app/42945';
-import { ErZ } from '../figma_app/43951';
+import { FileCanAccessFullDevMode } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
 import { $ as _$$$ } from '../figma_app/61705';
 import { _X, MG, Pl, QZ, TZ, Yb } from '../figma_app/62612';
@@ -330,7 +330,7 @@ import { X as _$$X3, y0 } from '../figma_app/718307';
 import { aV as _$$aV, ax as _$$ax, eY as _$$eY, dH, p8 } from '../figma_app/722362';
 import { lB as _$$lB, EE } from '../figma_app/731583';
 import { Ku, qw, UK } from '../figma_app/740163';
-import { aY as _$$aY, NT as _$$NT } from '../figma_app/741237';
+import { getPropertiesPanelTab, setPropertiesPanelTab } from '../figma_app/741237';
 import { M as _$$M2 } from '../figma_app/749682';
 import { nE as _$$nE, fY, g7, hx, Iy, jq, m7, qL, qp, qZ, u2, ui, Ut, v4, VG, W0 } from '../figma_app/761118';
 import { SceneGraphHelpers, AppStateTsApi, DesignWorkspace, CustomPosition, ItemType, FileSourceType, ViewType, LinterCppBindings, MakeBindings, DesignGraphElements, UIVisibilitySetting, UserActionState, VariableResolvedDataType, UserInterfaceElements, NodeType, VariableDataType, SourceType } from '../figma_app/763686';
@@ -339,7 +339,7 @@ import { zA } from '../figma_app/791586';
 import { Fj } from '../figma_app/793429';
 import { iP as _$$iP, Dj } from '../figma_app/803054';
 import { $c, qN } from '../figma_app/803787';
-import { Pt } from '../figma_app/806412';
+import { generateRecordingKey } from '../figma_app/878298';
 import { eBU } from '../figma_app/822011';
 import { dL as _$$dL } from '../figma_app/825489';
 import { oV as _$$oV, FR, xp } from '../figma_app/827216';
@@ -367,7 +367,7 @@ import { P as _$$P3 } from '../figma_app/979374';
 import { qh } from '../figma_app/990334';
 import { BE } from '../figma_app/991591';
 import nc from '../vendor/128080';
-import { d4, wA } from '../vendor/514228';
+import { d4, wA } from 'react-redux';
 import { Zk as _$$Zk, TW, YZ } from '../vendor/677121';
 import io from '../vendor/805353';
 import { Te } from '../vendor/813803';
@@ -877,7 +877,7 @@ function e_({
     }), i && jsx(Nv, {}), jsx(CommentsSubmitButton, {
       disabled: t,
       onClick: e,
-      recordingKey: Pt(l, 'generate')
+      recordingKey: generateRecordingKey(l, 'generate')
     })]
   });
 }
@@ -1419,7 +1419,7 @@ function tk() {
   let e = X0();
   let t = _$$tS();
   let l = _$$U2('upsell');
-  let i = Rs(ErZ, {
+  let i = Rs(FileCanAccessFullDevMode, {
     key: t || ''
   }, {
     enabled: !!t
@@ -1546,7 +1546,7 @@ function tW() {
       name: 'DevModeDemoFileEntryPoint',
       children: jsx(tq, {
         onClick: () => {
-          d && _$$Ay2.redirect(jN({
+          d && customHistory.redirect(jN({
             file: {
               key: d
             },
@@ -2039,7 +2039,7 @@ function lL() {
   let d = Fk((e, t) => zC(e, t), o);
   let u = QL(pt.KEY) === pt.VALUE;
   let c = q5();
-  let x = TA();
+  let x = getUserId();
   let p = c?.creatorId === x;
   let h = useAtomWithSubscription(Fy);
   let m = useAtomWithSubscription(UQ);
@@ -2095,7 +2095,7 @@ function lV() {
   let a = wA();
   let d = _$$aV();
   let u = q5();
-  let c = _$$iZ();
+  let c = selectCurrentUser();
   let p = _$$te();
   let h = !!_$$f(bo);
   let m = _$$zl(l$).currentState === 'ui3_onboarding_was_shown_in_current_session';
@@ -2945,7 +2945,7 @@ function ne({
   isButtonDisabled: r
 }) {
   return jsx($n, {
-    'recordingKey': Pt(l6, 'continue-button'),
+    'recordingKey': generateRecordingKey(l6, 'continue-button'),
     'data-testid': `${l6}-continue-button`,
     'onClick': e,
     'htmlAttributes': {
@@ -3484,7 +3484,7 @@ function nK({
           i(t);
           s && o && o(e, s);
         },
-        recordingKey: Pt('design-linter-library-list', t)
+        recordingKey: generateRecordingKey('design-linter-library-list', t)
       })
     })]
   });
@@ -3681,7 +3681,7 @@ function nQ() {
             onClick: r,
             children: renderI18nText('general.cancel')
           }), jsx($n, {
-            'recordingKey': Pt(e, 'continue-button'),
+            'recordingKey': generateRecordingKey(e, 'continue-button'),
             'data-testid': `${e}-continue-button`,
             'disabled': S,
             'onClick': R,
@@ -4028,7 +4028,7 @@ function iS({
                 'style' in i && f(i.style.node_id);
                 m();
               },
-              recordingKey: Pt(o, `${'variable' in i ? i.variable.id : index}`)
+              recordingKey: generateRecordingKey(o, `${'variable' in i ? i.variable.id : index}`)
             })
           }, e.key);
         })
@@ -5045,7 +5045,7 @@ let rs = memo(({
   }, [e, r, l, o, s]);
   let c = _$$ac(e);
   return c ? createElement(_$$E5, {
-    'recordingKey': Pt('design-linter-all-groups-view', `item-${t.index}`),
+    'recordingKey': generateRecordingKey('design-linter-all-groups-view', `item-${t.index}`),
     'data-testid': `design-linter-group-item-${t.index}`,
     'className': 'xf7z5ut x78zum5 xl56j7k xb3r6kr xkzqb9i x19y5rnk x7z60cl x1exxlbk xdd8jsf',
     'onClick': u,
@@ -6224,7 +6224,7 @@ function r0({
         zoomOnMousePointer: !0,
         canFitZoomExceed100: !0,
         resetStateOnChangeValue: e,
-        compareThumbnailSource: FO.LINTER,
+        compareThumbnailSource: ProjectDevelopmentPhases.LINTER,
         children: [jsx(rH, {
           value: current,
           children: jsx(r3, {
@@ -6698,7 +6698,7 @@ function sb(e) {
         } catch {
           Lt({
             message: getI18nString('design_linter.penalty_box.fix_failed_bell'),
-            icon: zX.EXCLAMATION,
+            icon: VisualBellIcon.EXCLAMATION,
             type: 'fix error'
           });
           _$$av();
@@ -7003,7 +7003,7 @@ function sI({
           } catch {
             Lt({
               message: getI18nString('design_linter.penalty_box.fix_failed_bell'),
-              icon: zX.EXCLAMATION,
+              icon: VisualBellIcon.EXCLAMATION,
               type: 'fix error'
             });
             Yu(l);
@@ -7178,7 +7178,7 @@ function sF({
       });
     },
     children: jsx(_$$K, {
-      'recordingKey': Pt(o, `ignore-${a}`),
+      'recordingKey': generateRecordingKey(o, `ignore-${a}`),
       'onClick': r,
       'data-tooltip': getI18nString('design_linter.suggestion_block.ignore_tooltip', {
         section: e.toLowerCase()
@@ -7198,7 +7198,7 @@ function sF({
       });
     },
     children: jsx(_$$K, {
-      'recordingKey': Pt(o, `apply-${a}`),
+      'recordingKey': generateRecordingKey(o, `apply-${a}`),
       'onClick': i,
       'data-tooltip': getI18nString('design_linter.suggestion_block.apply_tooltip', {
         section: e.toLowerCase()
@@ -8025,7 +8025,7 @@ function s7({
     let n = {
       ...fixContext,
       fixes: {
-        suggestionId: _$$g4(),
+        suggestionId: generateUUIDv4(),
         fixes: [l]
       }
     };
@@ -8144,7 +8144,7 @@ function s8({
     let i = {
       ...fixContext,
       fixes: {
-        suggestionId: _$$g4(),
+        suggestionId: generateUUIDv4(),
         fixes: [{
           variableId: t,
           resolvedValue: n
@@ -8279,7 +8279,7 @@ function s6({
     let i = {
       ...fixContext,
       fixes: {
-        suggestionId: _$$g4(),
+        suggestionId: generateUUIDv4(),
         fixes: [{
           variableId: t,
           resolvedValue: n
@@ -10006,7 +10006,7 @@ function oG() {
     let l = d4(e => e.mirror.sceneGraphSelection);
     let n = Object.keys(l).length === 1 ? Object.keys(l)[0] : null;
     useEffect(() => {
-      t && (n && n === t || (e(_$$F.dequeue({
+      t && (n && n === t || (e(VisualBellActions.dequeue({
         matchType: xp
       })), atomStoreManager.set(ui, null)));
     }, [t, n, e]);
@@ -10223,7 +10223,7 @@ let a_ = memo(() => {
   let D = _$$k4();
   let H = VP(l, 'edit_button_upgrading_to_edit');
   let G = t || H;
-  let U = getObservableValue(_$$aY(), DesignWorkspace.DESIGN);
+  let U = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let q = getObservableOrFallback(AppStateTsApi.propertiesPanelState().shownPropertiesPanels);
   let W = Ku();
   let K = qw();
@@ -10241,7 +10241,7 @@ let a_ = memo(() => {
   let el = _$$q2();
   let en = useMemo(() => D ? DesignWorkspace.COMMENT : U, [U, D]);
   useEffect(() => {
-    en !== U && _$$aY()?.set(en);
+    en !== U && getPropertiesPanelTab()?.set(en);
   }, [en, U]);
   return jsxs(_$$o5, {
     boundaryKey: 'PropertiesPanel',
@@ -10365,7 +10365,7 @@ function az(e) {
         variant: 'primary',
         onClick: () => {
           trackEventAnalytics('sidebar_announcement_mobile_app_download_prompt_learn_more_cta_clicked');
-          _$$Ay2.unsafeRedirect('https://help.figma.com/hc/articles/1500007537281-Guide-to-the-Figma-mobile-app#download', '_blank');
+          customHistory.unsafeRedirect('https://help.figma.com/hc/articles/1500007537281-Guide-to-the-Figma-mobile-app#download', '_blank');
         },
         iconPrefix: jsx(_$$b5, {}),
         children: getI18nString('rcs.rcs_shared.learn_more')
@@ -10379,7 +10379,7 @@ function dc({
   previewState: l,
   isResizingPanel: r
 }) {
-  let s = _$$iZ();
+  let s = selectCurrentUser();
   let d = _$$tS();
   zA();
   _$$m5();
@@ -10859,7 +10859,7 @@ let dA = memo(() => {
     teamFilesOnly: !0
   });
   useEffect(() => {
-    t && e === ViewType.PREVIEW && l !== DesignGraphElements.COMMENTS && _$$NT(DesignWorkspace.INSPECT);
+    t && e === ViewType.PREVIEW && l !== DesignGraphElements.COMMENTS && setPropertiesPanelTab(DesignWorkspace.INSPECT);
   }, [t, e, l]);
   return jsxs(Fragment, {
     children: [jsx(a_, {}), jsx(dM, {})]

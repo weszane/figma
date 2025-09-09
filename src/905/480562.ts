@@ -1,7 +1,7 @@
 import { ex as _$$ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, PureComponent, useState, useId, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { B as _$$B } from "../905/950875";
 import { L as _$$L } from "../905/704296";
@@ -39,7 +39,7 @@ import { t as _$$t2 } from "../905/150656";
 import { Label } from "../905/270045";
 import { bL, DZ, mc, zW, c$ } from "../905/493196";
 import { analyticsEventManager } from "../905/449184";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { X as _$$X } from "../905/27228";
 import { Dd, $G, Yu, Gy, vA } from "../905/193404";
 import { FO } from "../905/682977";
@@ -1200,7 +1200,7 @@ function e$({
   onScrollTo: o,
   libraryFile: l
 }) {
-  let d = iZ();
+  let d = selectCurrentUser();
   let c = _$$X();
   let m = i.length > 1;
   let [h, g] = useState();

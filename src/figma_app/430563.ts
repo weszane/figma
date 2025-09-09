@@ -4,7 +4,7 @@ import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { yH } from "../figma_app/714946";
 import { d1 } from "../905/766303";
@@ -113,7 +113,7 @@ let $$S3 = createOptimistThunk(async (e, t) => {
   try {
     await E;
   } catch (t) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
@@ -167,7 +167,7 @@ let $$v4 = createOptimistThunk(async (e, t) => {
       outcome: "success"
     });
   } catch (t) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
@@ -232,7 +232,7 @@ let $$A5 = createOptimistThunk(async (e, t) => {
       outcome: "success"
     });
   } catch (t) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
@@ -295,14 +295,14 @@ let $$x1 = createOptimistThunk(async (e, t) => {
   }, u);
   try {
     await u;
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("design_systems.subscriptions.settings_updated_for", {
         libraryName,
         orgOrWorkspaceName: workspaceName
       })
     }));
   } catch (t) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: t?.message ?? getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
@@ -329,14 +329,14 @@ let $$N6 = createOptimistThunk(async (e, t) => {
   }, c);
   try {
     await c;
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("design_systems.subscriptions.settings_updated_for", {
         libraryName,
         orgOrWorkspaceName: workspaceName
       })
     }));
   } catch (t) {
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: t?.message ?? getI18nString("design_systems.subscriptions.unable_to_change_setting"),
       error: !0
     }));
@@ -382,7 +382,7 @@ let $$C2 = createOptimistThunk(async (e, t) => {
         subscriptions,
         orgId
       });
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("design_systems.subscriptions.settings_updated_for", {
           libraryName: t.libraryName,
           orgOrWorkspaceName: t.orgName
@@ -397,7 +397,7 @@ let $$C2 = createOptimistThunk(async (e, t) => {
         outcome: "success"
       });
     } catch (t) {
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("design_systems.subscriptions.unable_to_change_setting"),
         error: !0
       }));

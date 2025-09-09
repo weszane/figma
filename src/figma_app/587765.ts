@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { oA } from "../905/663269";
 export function $$s0() {
   let e = $$o2();

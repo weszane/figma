@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useState, useCallback, forwardRef, useEffect, useContext, useMemo, memo, useId, useRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
@@ -16,9 +16,9 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h2, $ as _$$$ } from "../905/455748";
 import { h as _$$h3 } from "../905/207101";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { I7, hW } from "../figma_app/594947";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { renderI18nText } from "../905/303541";
@@ -367,7 +367,7 @@ let el = memo(function (e) {
     height
   } : ed(width);
   let $ = useId();
-  let Z = rf(`${e.recordingKey}${multiselect ? "" : "__UNUSED"}`, "click", e => {
+  let Z = useHandleMouseEvent(`${e.recordingKey}${multiselect ? "" : "__UNUSED"}`, "click", e => {
     B(e);
   });
   let eo = useCallback((e, {
@@ -687,7 +687,7 @@ function eI(e) {
   } = I7("exp_asset_search_refactor", void 0, !0);
   let eW = _$$A(async e => {
     if (!onSearch) return;
-    queryId.current = _$$g();
+    queryId.current = generateUUIDv4();
     let t = await onSearch(e, sessionId, queryId.current);
     let i = eG.current?.();
     if (e_ && (null === sessionId && trackEventAnalytics("asset_search.missing_session_id", {
@@ -840,7 +840,7 @@ function eI(e) {
     return useMemo(() => n && e.some(e => "LEAF" === e.type) ? l ? jsx(Checkbox, {
       checked: c.checked,
       mixed: c.mixed,
-      recordingKey: Pt(s, "drilldownItem-parentSubpath-checkbox", o),
+      recordingKey: generateRecordingKey(s, "drilldownItem-parentSubpath-checkbox", o),
       onChange: h,
       label: jsx(HiddenLabel, {
         children: renderI18nText("design_systems.instance_swap_picker.select_all_instances")
@@ -853,7 +853,7 @@ function eI(e) {
         id: d,
         checked: c.checked,
         mixed: c.mixed,
-        recordingKey: Pt(s, "drilldownItem-parentSubpath-checkbox", o),
+        recordingKey: generateRecordingKey(s, "drilldownItem-parentSubpath-checkbox", o),
         onChange: h
       })]
     }) : null, [e, l, n, c.checked, c.mixed, h, o, d, s]);
@@ -901,7 +901,7 @@ function eI(e) {
     onSubpathDrilldown: e2,
     parent,
     pickerType,
-    recordingKey: Pt(e, drilldownItemsRecordingKey),
+    recordingKey: generateRecordingKey(e, drilldownItemsRecordingKey),
     renderLeafItemNames,
     scrollContainerHeight: te,
     searchBarFocused: e4
@@ -1177,7 +1177,7 @@ let eS = memo(function (e) {
       displayText: parent.displayText,
       indexOfParent: indexOfParent ?? -1,
       onClick: onDrillup,
-      recordingKey: Pt(e, "drilldownItem-parentSubpath", parent.id),
+      recordingKey: generateRecordingKey(e, "drilldownItem-parentSubpath", parent.id),
       shouldForwardKeyDownToFullscreen: multiselect,
       tabIndex: Q,
       visible: isCurrentlyVisible
@@ -1217,7 +1217,7 @@ let eS = memo(function (e) {
                 numCols: j.numCols,
                 onClick: (e, t) => onLeafItemDrilldown(e, t, a),
                 onLeafItemContextMenu,
-                recordingKey: Pt(e, ...(getLeafItemRecordingKey ? getLeafItemRecordingKey(t.item) : [])),
+                recordingKey: generateRecordingKey(e, ...(getLeafItemRecordingKey ? getLeafItemRecordingKey(t.item) : [])),
                 renderName: renderLeafItemNames,
                 selected: g,
                 tabIndex: Q,
@@ -1234,7 +1234,7 @@ let eS = memo(function (e) {
                   gridLayoutMode: T || null,
                   i: a - ei,
                   onClick: onSubpathDrilldown,
-                  recordingKey: Pt(e, "drilldownItem-subpath", t.id),
+                  recordingKey: generateRecordingKey(e, "drilldownItem-subpath", t.id),
                   tabIndex: Q,
                   top,
                   visible: isCurrentlyVisible

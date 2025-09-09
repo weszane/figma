@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/632989";
 import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";

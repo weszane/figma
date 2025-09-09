@@ -6,7 +6,7 @@ import { analyticsEventManager } from "../905/449184";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { w0 } from "../figma_app/594947";
 import { N as _$$N } from "../905/972754";
-import { Lom, bsh, yFE, vsj } from "../figma_app/43951";
+import { VariableByKey, VariableCollectionByKey, StyleByKey, CommunityLibraryComponentsAndStateGroups } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { TG, qq } from "../905/72677";
 import { QN, r9 } from "../905/991973";
@@ -60,7 +60,7 @@ let x = {
   StyleByKey: null,
   CommunityLibraryComponentsAndStateGroups: null
 };
-let N = [Lom, bsh, yFE, vsj];
+let N = [VariableByKey, VariableCollectionByKey, StyleByKey, CommunityLibraryComponentsAndStateGroups];
 let C = e => N.some(t => t._name === e);
 let w = e => C(e) ? e : void 0;
 let O = e => M4.Query({
@@ -78,10 +78,10 @@ let O = e => M4.Query({
     return await r;
   }
 });
-let $$R12 = O(Lom);
-let $$L10 = O(bsh);
-let $$P14 = O(yFE);
-let $$D3 = O(vsj);
+let $$R12 = O(VariableByKey);
+let $$L10 = O(VariableCollectionByKey);
+let $$P14 = O(StyleByKey);
+let $$D3 = O(CommunityLibraryComponentsAndStateGroups);
 export function $$k8(e, t, r) {
   let n = r($$T7);
   let i = r($$I13);

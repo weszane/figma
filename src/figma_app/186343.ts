@@ -1,11 +1,11 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { Multiplayer, AutosaveEventType, FullscreenPerfMetrics, AppStateTsApi, Fullscreen, SceneGraphHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { _$ } from "../figma_app/379850";
 import { showModalHandler } from "../905/156213";
 import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_PAGE_LOADING } from "../905/784363";
@@ -13,7 +13,7 @@ import { Fr } from "../figma_app/297957";
 import { J } from "../905/445197";
 import { F as _$$F } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
-import { i as _$$i } from "../figma_app/741237";
+import { renameNode } from "../figma_app/741237";
 import { IL } from "../figma_app/582924";
 import { QZ } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
@@ -110,7 +110,7 @@ export async function $$U2({
     pageName: r
   });
   a && r !== n && permissionScopeHandler.system("set-is-page-divider", () => a.isPageDivider = s);
-  permissionScopeHandler.user("set-page-name", () => _$$i(t, r));
+  permissionScopeHandler.user("set-page-name", () => renameNode(t, r));
   fullscreenValue.commit();
   r !== n && i();
 }
@@ -151,7 +151,7 @@ export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
           eventType: "INCREMENTALLY_LOAD_NEW_PAGE"
         }))), h && o && p) {
           let t = Fullscreen.navigateToFirstVisibleOrClosestChangeForPage(e);
-          t === defaultSessionLocalIDString ? n(F.dequeue({
+          t === defaultSessionLocalIDString ? n(VisualBellActions.dequeue({
             matchType: "view_changes"
           })) : (SceneGraphHelpers.setSelectedNodeAndCanvas(t, !0), o(QZ({
             nodeId: t,

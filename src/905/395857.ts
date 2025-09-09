@@ -1,4 +1,4 @@
-import { cd, _H } from "../figma_app/243058";
+import { ResponsiveSetIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { wF, Xe, Sm, j6 } from "../905/859698";
 import { z } from "../905/239603";
 import { oA } from "../905/663269";
@@ -19,11 +19,11 @@ export function $$m1(e, t) {
     key: i,
     version: a,
     userFacingVersion: Xe(t.userFacingVersion),
-    assetId: cd.fromRef({
+    assetId: ResponsiveSetIdHandler.fromRef({
       key: i,
       version: a
     }),
-    sourceAssetId: cd.fromLocalNodeIdStr(t.nodeId),
+    sourceAssetId: ResponsiveSetIdHandler.fromLocalNodeIdStr(t.nodeId),
     sourceAssetGuid: t.nodeId,
     subscriptionStatus: "LIBRARY",
     mainThumbnailInfo: {
@@ -49,11 +49,11 @@ export function $$g0(e, t) {
     key: i,
     version: a,
     userFacingVersion: j6(t.userFacingVersion),
-    assetId: _H.fromRef({
+    assetId: CodeComponentIdHandler.fromRef({
       key: i,
       version: a
     }),
-    sourceAssetId: _H.fromLocalNodeIdStr(t.nodeId),
+    sourceAssetId: CodeComponentIdHandler.fromLocalNodeIdStr(t.nodeId),
     sourceAssetGuid: t.nodeId,
     subscriptionStatus: "LIBRARY",
     mainThumbnailInfo: {

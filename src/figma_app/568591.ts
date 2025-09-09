@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect, useState, useRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { c2 } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
 import { cs, Rc } from "../figma_app/819288";
 import { ZC } from "../figma_app/39751";
@@ -13,7 +13,7 @@ import { gB, Xm } from "../905/723791";
 import { setSentryTag } from "../905/11";
 import { Zv } from "../905/760682";
 import { logError, logInfo } from "../905/714362";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { pI } from "../figma_app/770088";
 import { pf } from "../905/201151";
@@ -22,8 +22,8 @@ import { Mu, QG } from "../905/901964";
 import { gj } from "../figma_app/12220";
 import { W9, gu, Hu } from "../figma_app/936061";
 import { N as _$$N } from "../figma_app/261650";
-import { iZ } from "../905/372672";
-import { ZBn, qRE, gkf } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { ResolvedComments, FeedPostsByFileKey, FileCanvasMentionsByFileKey } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
 import { i as _$$i } from "../905/637293";
 import { $J, kR } from "../905/234821";
@@ -487,7 +487,7 @@ class U {
     return await r;
   }
 }
-let B = xx(e => {
+let B = memoizeByArgs(e => {
   let t = e => (e.hasOwnProperty("transform") || Object.defineProperty(e, "transform", {
     get: function () {
       return {
@@ -518,7 +518,7 @@ function G(e, t, r) {
 }
 export function $$V1(e) {
   let t = ZA();
-  let r = iZ();
+  let r = selectCurrentUser();
   let {
     args,
     subscription
@@ -564,18 +564,18 @@ export function $$H0(e) {
   let N = useMemo(() => ({
     fileKey: S ?? ""
   }), [S]);
-  let P = useMemo(() => _$$g(), [N]);
+  let P = useMemo(() => generateUUIDv4(), [N]);
   let D = Rs($J, N, {
     enabled: v,
     traceId: P
   });
-  let M = Rs(ZBn, N, {
+  let M = Rs(ResolvedComments, N, {
     enabled: v
   });
-  let F = Rs(qRE, N, {
+  let F = Rs(FeedPostsByFileKey, N, {
     enabled: y && v
   });
-  let j = Rs(gkf, N, {
+  let j = Rs(FileCanvasMentionsByFileKey, N, {
     enabled: f && v
   });
   let U = useSelector(e => e.comments.lgPendingUuidToServerIdMap);

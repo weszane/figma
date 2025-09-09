@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { Fo, Uz as _$$Uz } from "../905/63728";
 import { fullscreenValue } from "../figma_app/455680";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { dh } from "../figma_app/186343";
 import { Pe } from "../figma_app/32128";
 import { cE } from "../figma_app/932601";
@@ -54,7 +54,7 @@ export function $$f1(e) {
   }, [i]);
   let u = useCallback((r, n) => {
     let l = p(n);
-    switch (l && (tJ([]), fullscreenValue.commit()), l) {
+    switch (l && (replaceSelection([]), fullscreenValue.commit()), l) {
       case "individual":
         i(t.includes(r) ? t.filter(e => e !== r) : 0 === t.length && a !== r ? [a, r] : [...t, r]);
         return !0;

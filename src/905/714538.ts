@@ -1,5 +1,5 @@
 import { FontSourceType } from "../figma_app/763686";
-import { n as _$$n } from "../905/240327";
+import { addFontFamily } from "../905/240327";
 import { Ts } from "../905/929976";
 import { nN } from "../figma_app/91703";
 import { X } from "../905/784599";
@@ -104,7 +104,7 @@ export function $$f2(e = {}, t) {
       ...i[e]
     }, delete i[e][t], 0 === Object.keys(i[e]).length && delete i[e]);
     for (let e of [t.payload.localFontsList, t.payload.indexFontsList, t.payload.indexFakeFontsList, t.payload.sharedFontsList]) if (void 0 !== e) for (let t of e) {
-      _$$n(t);
+      addFontFamily(t);
       g(i, t);
     }
     return i;

@@ -3,7 +3,7 @@ import { Rs } from "../figma_app/288654";
 import { g } from "../905/370185";
 import { sD } from "../905/937198";
 import { tS } from "../figma_app/516028";
-import { YsX } from "../figma_app/43951";
+import { OneCollectionView } from "../figma_app/43951";
 import { k } from "../905/366917";
 import { D } from "../905/148729";
 export function $$u0({
@@ -16,7 +16,7 @@ export function $$u0({
     collectionStableId: e
   });
   let u = (collectionDatabaseId ?? "") !== "" && null != t;
-  let p = Rs(YsX, {
+  let p = Rs(OneCollectionView, {
     fileKey: t ?? "",
     collectionId: collectionDatabaseId ?? ""
   }, {

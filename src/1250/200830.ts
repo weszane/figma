@@ -19,7 +19,7 @@ import { tH as _$$tH, mp, Ot, d2, Vm, Fy, Qm, zN } from "../figma_app/579169";
 import { f as _$$f } from "../1250/46310";
 import { xZ } from "../1250/927871";
 import { useEffect, useState, useCallback, useMemo, createElement, useRef, memo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { getStorage } from "../905/657224";
 import { ZC } from "../figma_app/39751";
@@ -66,7 +66,7 @@ import { reportError } from "../905/11";
 import { Z1 } from "../905/401885";
 import { g as _$$g } from "../1250/695038";
 import { sZ, dq } from "../905/845253";
-import { saW, bel } from "../figma_app/43951";
+import { WorkspaceSelectorView, TeamFileCountsByTeamId } from "../figma_app/43951";
 import { D6 as _$$D2, S2 } from "../figma_app/465071";
 import { G as _$$G } from "../figma_app/124713";
 import { trackEventAnalytics } from "../905/449184";
@@ -85,7 +85,7 @@ import { d as _$$d } from "../905/647058";
 import { O as _$$O } from "../905/833838";
 import { WZ } from "../905/893645";
 import { EL, F_ as _$$F_ } from "../905/858282";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { E as _$$E2 } from "../905/984674";
 import { rq } from "../905/425180";
 import { xX, j9 } from "../figma_app/211146";
@@ -868,7 +868,7 @@ function to({
 }
 let ts = "workspace_selector_seen";
 let tl = _$$g(ts);
-let td = createRemovableAtomFamily(e => Z1(saW.Query({
+let td = createRemovableAtomFamily(e => Z1(WorkspaceSelectorView.Query({
   orgId: e
 }), e => {
   if (!e.org?.workspaces) return null;
@@ -978,7 +978,7 @@ let tC = memo(({
   hasOnlyOneStarterPlan: s
 }) => {
   let l = useCallback(() => {
-    _$$Ay.unsafeRedirect("https://www.figma.com/blog/updates-to-how-drafts-work/", "_blank");
+    customHistory.unsafeRedirect("https://www.figma.com/blog/updates-to-how-drafts-work/", "_blank");
   }, []);
   return jsxs("div", {
     className: "plan_spaces_launch_modal_components--container--rGlQs",
@@ -2178,7 +2178,7 @@ function nA({
   let l = useMemo(() => o.map(e => ({
     teamId: e.id
   })), [o]);
-  return (_$$p(bel, l).forEach(e => {
+  return (_$$p(TeamFileCountsByTeamId, l).forEach(e => {
     s.push(e.result.data?.team?.teamFileCounts?.designFileCount ?? 0);
   }), _$$h(() => {
     lc();
@@ -2249,7 +2249,7 @@ function nL() {
       label: renderI18nText("community.resource_hub.promotion.show_me_more"),
       type: "button",
       onClick: () => {
-        _$$Ay.push(new au({
+        customHistory.push(new au({
           ...l,
           tab: _
         }, d).href);

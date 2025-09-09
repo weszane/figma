@@ -1,6 +1,6 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -27,7 +27,7 @@ export function $$y1(e) {
   let w = dk(e.getState().openFile);
   x && S && w ? (e.dispatch(Ts({
     origin: "open_session_video_upload",
-    redirectUrl: Ay.location.pathname,
+    redirectUrl: customHistory.location.pathname,
     signedUpFromOpenSession: !0
   })), e.dispatch(showModalHandler({
     type: _$$x,

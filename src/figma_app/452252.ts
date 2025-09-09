@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef, useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { _ as _$$_ } from "../figma_app/496441";
@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import p from "classnames";
 import { gY } from "../figma_app/566371";
-import { o6, cZ, Pt, rf } from "../figma_app/806412";
+import { RecordingPureComponent, handleMouseEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { _C } from "../figma_app/709893";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -24,7 +24,7 @@ import { oj } from "../905/760074";
 import { hL } from "../905/697795";
 import { hx } from "../figma_app/290668";
 import { q5, tB, l3 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { o3 as _$$o, nt } from "../905/226610";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
@@ -62,10 +62,10 @@ function S({
 }
 let $$H1 = "FULLSCREEN_FILENAME_CHEVRON";
 let $$z2 = "FULLSCREEN_FILENAME_DROPDOWN";
-class W extends o6 {
+class W extends RecordingPureComponent {
   constructor(e) {
     super(e);
-    this.startRenaming = cZ(this, "click", () => {
+    this.startRenaming = handleMouseEvent(this, "click", () => {
       this.props.canRename && this.props.user && this.props.dispatch(vg());
     });
     this.submitFileName = e => {
@@ -110,7 +110,7 @@ class W extends o6 {
       placeholderValue: this.props.name,
       submit: this.submitFileName,
       cancel: this.cancelFileName,
-      recordingKey: Pt(this.props, "input"),
+      recordingKey: generateRecordingKey(this.props, "input"),
       maxLength: this.props.maxLength,
       inputId: "filename",
       hiddenLabelText: getI18nString("fullscreen.filename_view.file_input_title")
@@ -132,7 +132,7 @@ export function $$K5(e) {
 }
 export function $$Y3(e) {
   let t = useDispatch();
-  let r = iZ();
+  let r = selectCurrentUser();
   let n = q5();
   let a = useSelector(e => e.isRenaming);
   let o = useAtomWithSubscription(lu);
@@ -222,7 +222,7 @@ export function $$q4({
       projectUrl: o
     })]
   });
-  let T = rf("folder-name-link", "click", e => {
+  let T = useHandleMouseEvent("folder-name-link", "click", e => {
     l && (e?.preventDefault(), p(e => !e));
   });
   return jsxs("span", {

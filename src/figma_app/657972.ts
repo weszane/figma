@@ -7,8 +7,8 @@ import { R } from "../905/165069";
 import { logError } from "../905/714362";
 import { YQ } from "../905/502364";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { zE } from "../905/738636";
 import { u2, $K } from "../figma_app/223206";
 import { Kl } from "../905/766303";
@@ -92,10 +92,10 @@ export function $$C1() {
     debug(!!r, "slideCreationData is undefined. This should never happen");
     AppStateTsApi?.slideThemeLibBindings().insertDefaultLocalTheme(ThemeMode.LIGHT, "Template style");
     AppStateTsApi?.uiState().leftPanelCollapsedUI3.set(!0);
-    debugState.dispatch(F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       message: getI18nString("slides.general.copying_slides_over"),
       type: "design-to-slides-load",
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       timeoutOverride: 3e5
     }));
     N({
@@ -104,13 +104,13 @@ export function $$C1() {
     }).then(() => {
       d(Ut);
       AppStateTsApi?.uiState().leftPanelCollapsedUI3.set(!1);
-      debugState.dispatch(F.dequeue({
+      debugState.dispatch(VisualBellActions.dequeue({
         matchType: "design-to-slides-load"
       }));
-      debugState.dispatch(F.enqueue({
+      debugState.dispatch(VisualBellActions.enqueue({
         message: getI18nString("slides.present_summary.visual_bells.complete"),
         type: "design-to-slides-complete",
-        icon: zX.CHECK,
+        icon: VisualBellIcon.CHECK,
         timeoutOverride: 3e3
       }));
       YQ({

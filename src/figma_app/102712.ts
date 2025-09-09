@@ -6,7 +6,7 @@ import { C } from "../905/520159";
 import { e as _$$e } from "../905/916195";
 import { H } from "../905/999677";
 import { isMobileUA } from "../figma_app/778880";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { K5, t$, lE } from "../figma_app/29814";
 let h = null;
@@ -56,7 +56,7 @@ export function $$g0(e) {
   }(e);
   let d = jsx(K, {
     onClick: e.navigateBackward,
-    recordingKey: Pt(e, "backButton"),
+    recordingKey: generateRecordingKey(e, "backButton"),
     "aria-label": getI18nString("viewer.footer.previous_frame"),
     disabled: !e.navigateBackwardEnabled,
     htmlAttributes: {
@@ -70,7 +70,7 @@ export function $$g0(e) {
   });
   let m = jsx(K, {
     onClick: e.navigateForward,
-    recordingKey: Pt(e, "nextButton"),
+    recordingKey: generateRecordingKey(e, "nextButton"),
     "aria-label": getI18nString("viewer.footer.next_frame"),
     disabled: !e.navigateForwardEnabled,
     htmlAttributes: {

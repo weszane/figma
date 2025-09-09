@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createElement } from "react";
 import a from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { K0 } from "../figma_app/778125";
 var s = a;
 export function $$d0(e) {
@@ -21,7 +21,7 @@ export function $$d0(e) {
         className: s()("segmented_button--button--HF0rV", {
           "segmented_button--disabled--Iawr-": d.disabled
         }),
-        recordingKey: Pt(e, d.recordingKey || "")
+        recordingKey: generateRecordingKey(e, d.recordingKey || "")
       }, jsx("span", {
         children
       }));

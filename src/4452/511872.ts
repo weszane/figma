@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { T } from "../905/880327";
 import { am, ut } from "../4452/575555";
 import { showModalHandler } from "../905/156213";
-if (443 == require.j) {}
+if (443 == require.j) { }
 export function $$o0(e, t, a, o, d, c) {
   let u = useDispatch();
   return useCallback(() => {

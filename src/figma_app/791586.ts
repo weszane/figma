@@ -4,7 +4,7 @@ import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
 import { tS } from "../figma_app/516028";
 import { dq } from "../905/845253";
-import { wIb } from "../figma_app/43951";
+import { UserAvatarView } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { ol } from "../figma_app/598018";
 import { rK } from "../figma_app/72338";
@@ -156,7 +156,7 @@ export function $$x4() {
   let {
     projectOwnerId
   } = $$f10();
-  let t = Rs(wIb, {
+  let t = Rs(UserAvatarView, {
     userId: projectOwnerId
   }, {
     enabled: !!projectOwnerId

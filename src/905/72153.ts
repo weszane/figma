@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { Rs } from "../figma_app/288654";
-import { FqP } from "../figma_app/43951";
+import { PluginSecurityFormResponse } from "../figma_app/43951";
 import { E3 } from "../905/744076";
 export function $$o0(e, t) {
-  let i = Rs(FqP, {
+  let i = Rs(PluginSecurityFormResponse, {
     pluginId: e
   }, {
     enabled: t

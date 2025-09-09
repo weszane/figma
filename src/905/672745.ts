@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { Yfd, g0U, Jwp } from "../figma_app/43951";
+import { ResourceConnectedUsers, SharingGroupsByResourceConnection, ProjectActiveResourceConnections } from "../figma_app/43951";
 import { Rs } from "../figma_app/288654";
 export function $$s1(e, t, i = !0) {
-  let o = Rs(Yfd, {
+  let o = Rs(ResourceConnectedUsers, {
     id: e,
     isHostPlanAdmin: t
   }, {
@@ -31,7 +31,7 @@ export function $$s1(e, t, i = !0) {
   }), [o]);
 }
 export function $$o2(e) {
-  let t = Rs(g0U, {
+  let t = Rs(SharingGroupsByResourceConnection, {
     resourceConnectionId: e ?? ""
   }, {
     enabled: !!e
@@ -42,7 +42,7 @@ export function $$o2(e) {
   }), [t]);
 }
 export function $$l0(e, t = !0) {
-  let i = Rs(Jwp, {
+  let i = Rs(ProjectActiveResourceConnections, {
     projectId: e ?? ""
   }, {
     enabled: !!e && t

@@ -1,7 +1,7 @@
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 let o = "image_loading";
 let $$l0 = new class {
   constructor() {
@@ -16,16 +16,16 @@ let $$l0 = new class {
     0 === this.pendingImageCount && this.dequeueBell();
   }
   dequeueBell() {
-    debugState.dispatch(F.dequeue({
+    debugState.dispatch(VisualBellActions.dequeue({
       matchType: o
     }));
   }
   queueBell(e, t = 1e3) {
-    debugState.dispatch(F.enqueue({
+    debugState.dispatch(VisualBellActions.enqueue({
       type: o,
       message: e,
       delay: t,
-      icon: zX.SPINNER
+      icon: VisualBellIcon.SPINNER
     }));
   }
 }();

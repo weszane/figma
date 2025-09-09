@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import i from "../vendor/128080";
 import { Rs } from "../figma_app/288654";
 import { Kz } from "../905/760074";
-import { ZzU, L1I } from "../figma_app/43951";
+import { FileExpirationView, FilePermissionsV2 } from "../figma_app/43951";
 import { d4 } from "../905/759412";
 var a = i;
 export function $$c1(e) {
-  let t = Rs(ZzU, {
+  let t = Rs(FileExpirationView, {
     figFileKey: null != e ? Kz(e) ? e.sourceFileKey : e.key : ""
   }, {
     enabled: null != e
@@ -26,7 +26,7 @@ export function $$c1(e) {
   }, [t]);
 }
 export function $$u0(e, t) {
-  let r = Rs(L1I, {
+  let r = Rs(FilePermissionsV2, {
     fileKey: e.key,
     teamId: e.teamId,
     projectId: e.folderId,

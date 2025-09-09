@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, forwardRef, useLayoutEffect, Fragment as _$$Fragment, memo, useMemo } from "react";
-import { useStore, useSelector, useDispatch } from "../vendor/514228";
+import { useStore, useSelector, useDispatch } from "react-redux";
 import { mc, fP } from "../905/691059";
 import { i as _$$i } from "../905/718764";
 import { D as _$$D } from "../905/555681";
@@ -14,7 +14,7 @@ import f from "classnames";
 import { A as _$$A } from "../vendor/90566";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { am } from "../figma_app/901889";
 import { Gc } from "../905/63728";
 import { Vi, B4, tu, oJ } from "../figma_app/385215";
@@ -160,7 +160,7 @@ export function $$ew1(e, t, i, r, n, a, s) {
   let o = e.sessionID;
   let l = o === t;
   let d = a && a.sessionID === t;
-  if (l && d) s();else if (r) {
+  if (l && d) s(); else if (r) {
     let t = n.observingSessionID === o || n.sessionID === o ? -1 : e.sessionID;
     let r = -1 !== n.observingSessionID;
     let a = n.observingSessionID !== o && n.sessionID !== o;
@@ -202,7 +202,7 @@ function eS(e) {
   let l = useRef(!1);
   let d = l.current;
   let c = useCallback(async e => {
-    if ("" === e) a(usersToSearch);else {
+    if ("" === e) a(usersToSearch); else {
       s.current = !1;
       let t = await _$$n(e, usersToSearch);
       s.current || (a(t.map(e => e.item)), d || (o("Multiplayer Tools User Search", {
@@ -508,7 +508,7 @@ function ek({
   let ey = (e, t) => {
     let i = Gc(() => {
       let t = `/files${g}/user/${e.userID}`;
-      _$$Ay.redirect(t, desktopAPIInstance ? void 0 : "_blank");
+      customHistory.redirect(t, desktopAPIInstance ? void 0 : "_blank");
     });
     let n = [];
     let a = f.sessionNominatedByCurrentUser === e.sessionID;
@@ -701,7 +701,7 @@ let $$eO0 = memo(function (e) {
     }) {
       let n = Gc(() => {
         let t = `/files${ef}/user/${e.userID}`;
-        _$$Ay.redirect(t, desktopAPIInstance ? void 0 : "_blank");
+        customHistory.redirect(t, desktopAPIInstance ? void 0 : "_blank");
       });
       let a = [];
       let s = multiplayer.sessionNominatedByCurrentUser === e.sessionID;
@@ -861,7 +861,7 @@ let $$eO0 = memo(function (e) {
         }) {
           let i = Gc(() => {
             let t = `/files${ef}/user/${e.userID}`;
-            _$$Ay.redirect(t, desktopAPIInstance ? void 0 : "_blank");
+            customHistory.redirect(t, desktopAPIInstance ? void 0 : "_blank");
           });
           let n = [{
             text: renderI18nText("avatar.tooltip.view_profile"),

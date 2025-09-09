@@ -1,6 +1,6 @@
 import { Hg } from "../figma_app/304955";
 import { Xr } from "../figma_app/27355";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { tS } from "../figma_app/516028";
 import { M4 } from "../905/713695";
 import { R } from "../905/943003";
@@ -66,7 +66,7 @@ export function $$f0() {
       showVisualBells && rq();
       wH(t);
       let e = {
-        id: _$$g(),
+        id: generateUUIDv4(),
         event_message: `Error while deploying: ${t instanceof Error ? t.message : String(t)}`,
         timestamp: Date.now().toString(),
         level: "error"

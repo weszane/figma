@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from '../905/165054';
 import { tT } from '../905/663269';
 import { M4 } from '../905/713695';
 import { R } from '../905/943003';
-import { SK$ } from '../figma_app/43951';
+import { SupabaseAuthView } from '../figma_app/43951';
 import { Rs } from '../figma_app/288654';
 import { p3 } from '../figma_app/588582';
 export let $$u6 = M4.Query({
@@ -41,7 +41,7 @@ export let $$u6 = M4.Query({
 });
 export function $$p4(e) {
   let t = p3();
-  let r = Rs(SK$, {
+  let r = Rs(SupabaseAuthView, {
     fileKey: e
   }, {
     enabled: !!e && t

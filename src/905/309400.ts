@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N9 } from "../figma_app/389091";
 import { kL } from "../figma_app/624600";
 export function $$l0(e) {

@@ -1,9 +1,9 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, memo, useCallback, useRef, useMemo, PureComponent, Component } from "react";
-import { useSelector, useDispatch, connect } from "../vendor/514228";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import p from "classnames";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { oJ, Gc } from "../905/63728";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { $J } from "../905/491152";
@@ -14,7 +14,7 @@ import { C as _$$C } from "../905/196436";
 import { B as _$$B } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Xy } from "../figma_app/578832";
 import { Mr } from "../figma_app/795938";
 import { ae } from "../figma_app/808294";
@@ -29,7 +29,7 @@ import { tf } from "../figma_app/831799";
 import { cs, zp } from "../figma_app/740025";
 import { Cn } from "../905/862913";
 import { Ni } from "../figma_app/188152";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { a6 } from "../figma_app/198840";
 import { getPluginVersion, getPluginMetadata } from "../figma_app/300692";
 import { vt, xQ } from "../figma_app/45218";
@@ -350,7 +350,7 @@ export function $$eb5({
   let p = cs(u);
   let _ = eT(e, s);
   let h = s ?? !!e.roles.is_public;
-  let m = iZ();
+  let m = selectCurrentUser();
   let f = useDispatch();
   let y = e.publisher || e.creator;
   let T = jsx("div", {
@@ -365,7 +365,7 @@ export function $$eb5({
       id: e.id,
       resourceType: vt.PLUGIN,
       source: uR.COMMUNITY_HUB
-    })), f(_$$F.enqueue({
+    })), f(VisualBellActions.enqueue({
       message: getI18nString("community.profiles.removed_from_saved_plugins"),
       type: "plugin-installed",
       button: {
@@ -645,7 +645,7 @@ function eT(e, t) {
       super(...arguments);
       this.onClick = e => {
         if (oJ(e)) {
-          Ay.redirect(ho(this.props.plugin?.id), "_blank");
+          customHistory.redirect(ho(this.props.plugin?.id), "_blank");
           return;
         }
         this.props.onClick();
@@ -819,7 +819,7 @@ $$ev7.defaultProps = {
         if (oJ(e)) {
           let e = this.props.publicProfile;
           if (!e) return;
-          Ay.redirect(bL(e.profile_handle) || "", "_blank");
+          customHistory.redirect(bL(e.profile_handle) || "", "_blank");
           return;
         }
         this.props.onPublicProfileClick();

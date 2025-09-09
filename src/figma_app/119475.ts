@@ -1,9 +1,9 @@
 import { createContext, forwardRef, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { jsx } from 'react/jsx-runtime';
-import { zN } from '../905/19536';
+import { useStableMemo } from '../905/19536';
 import { vN, xH } from '../905/63728';
 import { D8 } from '../905/511649';
-import { k as _$$k } from '../905/651849';
+import { logger } from '../905/651849';
 import { lQ } from '../905/934246';
 import { assertNotNullish, isNullish } from '../figma_app/95419';
 import { throwTypeError } from '../figma_app/465776';
@@ -50,12 +50,12 @@ class g {
       try {
         r = P(e, path, !0);
       } catch (e) {
-        _$$k.warn('Failed to add item to KeyboardNavigationProvider tree: ', t);
+        logger.warn('Failed to add item to KeyboardNavigationProvider tree: ', t);
         return;
       }
       let a = column ?? 0;
       let s = r.items[a]?.element;
-      s && s !== t.element && _$$k.warn('Overwriting item in KeyboardNavigationProvider tree. Existing item: ', r.items[a], ' New item: ', t);
+      s && s !== t.element && logger.warn('Overwriting item in KeyboardNavigationProvider tree. Existing item: ', r.items[a], ' New item: ', t);
       r.items[a] = t;
     })(e, this);
     t && this.id && t.set(this.id, this);
@@ -71,15 +71,15 @@ class g {
       try {
         r = (n = P(e, path)).items[column || 0] ?? null;
       } catch (e) {
-        _$$k.warn('Item not found in KeyboardNavigationProvider tree: ', t);
+        logger.warn('Item not found in KeyboardNavigationProvider tree: ', t);
         return;
       }
       if (!r) {
-        _$$k.warn('Item not found in KeyboardNavigationProvider tree: ', t);
+        logger.warn('Item not found in KeyboardNavigationProvider tree: ', t);
         return;
       }
       if (r.element !== t.element) {
-        _$$k.warn('Item found in KeyboardNavigationProvider tree, but it does not match the expected item: ', r, t);
+        logger.warn('Item found in KeyboardNavigationProvider tree, but it does not match the expected item: ', r, t);
         return;
       }
       if (n.items[column || 0] = void 0, n.items.every(isNullish)) {
@@ -276,9 +276,9 @@ export function $$y0({
   disabled: _,
   navigationOptions: h
 }) {
-  let m = zN(e);
-  let E = zN(n);
-  let y = zN(h);
+  let m = useStableMemo(e);
+  let E = useStableMemo(n);
+  let y = useStableMemo(h);
   if (m.length === 0) throw new Error('Path must be non-empty');
   if (m.some(e => e < 0)) throw new Error('All path indices must be non-negative');
   if (t != null && t < 0) throw new Error('Column must be non-negative');

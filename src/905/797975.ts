@@ -27,7 +27,7 @@ import { O as _$$O } from "../905/587457";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { r as _$$r2 } from "../905/571838";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { E as _$$E2 } from "../905/53857";
 import { k as _$$k } from "../905/443820";
 import { V as _$$V } from "../905/291719";

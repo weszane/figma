@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { K } from "../905/443068";
 import { f as _$$f } from "../905/335032";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { J, N } from "../642/436925";
@@ -34,7 +34,7 @@ export function $$f0({
       isUI3: !0,
       onChange: _,
       property: y,
-      recordingKey: Pt(s, "blendMode"),
+      recordingKey: generateRecordingKey(s, "blendMode"),
       willShowDropdown: () => (trackEventAnalytics("editor-blend-mode-dropdown-show"), Promise.resolve())
     }),
     icon: f && qg(y, "PASS_THROUGH") ? null : jsx(K, {

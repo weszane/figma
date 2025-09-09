@@ -1,13 +1,13 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { hideModal, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { c as _$$c } from "../905/32166";
@@ -57,12 +57,12 @@ export let $$g0 = registerModal(function (e) {
               onClick: () => {
                 _$$c.revokeResourceConnectionInvite(e.resourceConnectionInvite.id).then(() => {
                   g();
-                  t(F.enqueue({
+                  t(VisualBellActions.enqueue({
                     message: getI18nString("resource_connection.visual_bell.connection_request_revoked")
                   }));
                 }).catch(e => {
                   g();
-                  t(F.enqueue({
+                  t(VisualBellActions.enqueue({
                     message: getI18nString("resource_connection.visual_bell.generic_error"),
                     error: !0
                   }));

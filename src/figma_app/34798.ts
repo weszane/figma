@@ -2,15 +2,15 @@ import { useMemo, useEffect } from "react";
 import { LayoutTabType, HandoffBindingsCpp, AppStateTsApi, DesignGraphElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
-import { Kv } from "../figma_app/544649";
+import { isDevModeFocusViewActive } from "../figma_app/544649";
 import { m0 } from "../figma_app/976749";
 import { p8, dH } from "../figma_app/722362";
 import { tS } from "../figma_app/516028";
-import { SQ7, Znl, XDd } from "../figma_app/43951";
+import { FileCanViewAnnotations, FileCanEditAnnotations, FileCanViewAnnotationsMegadot } from "../figma_app/43951";
 import { getObservableValue } from "../figma_app/84367";
 export function $$_2() {
   let e = tS();
-  let t = Rs(SQ7, {
+  let t = Rs(FileCanViewAnnotations, {
     key: e || ""
   }, {
     enabled: !!e
@@ -19,7 +19,7 @@ export function $$_2() {
 }
 export function $$h1() {
   let e = tS();
-  let t = Rs(Znl, {
+  let t = Rs(FileCanEditAnnotations, {
     key: e || ""
   }, {
     enabled: !!e
@@ -30,7 +30,7 @@ export function $$m4() {
   let e = p8("isReadOnly");
   let t = p8("activeCanvasEditModeType");
   let r = $$h1();
-  let a = Kv();
+  let a = isDevModeFocusViewActive();
   return useMemo(() => r && (!e || t === LayoutTabType.DEV_HANDOFF) && !a, [e, t, r, a]);
 }
 export function $$g0() {
@@ -38,7 +38,7 @@ export function $$g0() {
   let t = $$m4();
   let r = function () {
     let e = tS();
-    let t = Rs(XDd, {
+    let t = Rs(FileCanViewAnnotationsMegadot, {
       key: e || ""
     }, {
       enabled: !!e

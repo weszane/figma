@@ -1,6 +1,6 @@
 import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 export class $$s0 {
   getValue() {
     let e = new Map();
@@ -17,11 +17,11 @@ export class $$s0 {
       let i = e.get(n.guid);
       if (null != i) try {
         let e = t(i);
-        this.setValueForNode(n, e, r === zk.NO);
+        this.setValueForNode(n, e, r === yesNoTrackingEnum.NO);
         s = !0;
       } catch (e) {}
     }
-    r !== zk.NO && s && Fullscreen?.triggerAction("commit", {});
+    r !== yesNoTrackingEnum.NO && s && Fullscreen?.triggerAction("commit", {});
   }
 }
 export const M = $$s0;

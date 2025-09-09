@@ -1,13 +1,13 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, memo, useMemo, useCallback, Fragment as _$$Fragment } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { YJ, hE, Ov, rm, g8, MJ, r1, mc, b as _$$b, bL } from "../figma_app/860955";
 import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/969533";
 import { getFeatureFlags } from "../905/601108";
 import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { WN } from "../figma_app/638601";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { k as _$$k2 } from "../figma_app/564183";
@@ -17,7 +17,7 @@ import { c as _$$c } from "../figma_app/740884";
 import { eg as _$$eg, O0 } from "../figma_app/452252";
 import { i as _$$i } from "../figma_app/825649";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { Ui, FR } from "../figma_app/564528";
+import { collaborationHostNameAtom, handleCollaborationHostNameMessage } from "../figma_app/564528";
 import { s as _$$s } from "../cssbuilder/589278";
 import { OA } from "../figma_app/419216";
 import { lQ } from "../905/934246";
@@ -44,8 +44,8 @@ import { ck } from "../905/87821";
 import { SR } from "../figma_app/852050";
 import { BI, m0 as _$$m2 } from "../figma_app/546509";
 import { q5, vu } from "../figma_app/516028";
-import { iZ } from "../905/372672";
-import { dTR, iY3 } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { FileManagePermission, FileNameViewDropdown } from "../figma_app/43951";
 import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { p9, fA, F9 } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
@@ -58,7 +58,7 @@ import { AM, pT } from "../905/467351";
 import { Z5, R5 } from "../figma_app/861982";
 import { Ah } from "../figma_app/221114";
 import { k$, gN, id, _o, Dz, TV } from "../figma_app/847915";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { UN } from "../905/525678";
 import { Pu, Qq, MJ as _$$MJ, Oo } from "../figma_app/4616";
 import { jT } from "../figma_app/277330";
@@ -107,10 +107,10 @@ function S(e) {
     targetKey
   } = e;
   let [i, a] = useState(!1);
-  let [s, o] = useAtomValueAndSetter(Ui);
+  let [s, o] = useAtomValueAndSetter(collaborationHostNameAtom);
   let l = isZoomIntegration() && null !== s && !i;
-  useEffect(() => (window.addEventListener("message", FR), () => {
-    window.removeEventListener("message", FR);
+  useEffect(() => (window.addEventListener("message", handleCollaborationHostNameMessage), () => {
+    window.removeEventListener("message", handleCollaborationHostNameMessage);
   }), []);
   let d = s ? renderI18nText("fullscreen.filename_view.zoom-integration-popup-header-with-name", {
     hostName: s
@@ -168,7 +168,7 @@ function ef(e, t) {
   return _o(e) ? jsxs(Pu, {
     onClick: () => e.callback?.(e.action, {}, t.dispatch),
     recordingKey: e.recordingKey || e.action || e.name,
-    children: [(TV(e) || _o(e)) && e.displayText || _$$A(n, e.args), e.rightIcon && jsx(Ov, {
+    children: [(TV(e) || _o(e)) && e.displayText || formatI18nMessage(n, e.args), e.rightIcon && jsx(Ov, {
       children: e.rightIcon
     }), e.rightText && jsx(Ov, {
       children: e.rightText
@@ -240,7 +240,7 @@ function e2() {
 }
 function e3() {
   let e = q5();
-  let t = Rs(dTR({
+  let t = Rs(FileManagePermission({
     fileKey: e?.key || ""
   }), {
     enabled: !!e?.key
@@ -267,7 +267,7 @@ let e6 = memo(function () {
     currentOrgId: e,
     currentTeamId: t
   });
-  let o = !!iZ();
+  let o = !!selectCurrentUser();
   let l = function () {
     let e = useSelector(vu);
     let t = useSelector(e => e.currentUserOrgId);
@@ -281,7 +281,7 @@ let e6 = memo(function () {
     }, [e, r]);
   }();
   let d = !!l;
-  let c = iZ();
+  let c = selectCurrentUser();
   let u = q5();
   let p = te();
   let h = "loaded" === i.status && gV(i.data, e);
@@ -431,7 +431,7 @@ let ti = memo(function ({
   let c = q5();
   let u = useSelector(e => e.fileVersion);
   let m = useSelector(e => e.repos);
-  let g = !!iZ();
+  let g = !!selectCurrentUser();
   let _ = useDispatch();
   SR();
   let {
@@ -614,7 +614,7 @@ let ti = memo(function ({
   let eW = ju("filename_menu");
   let eq = useSelector(F9);
   let eQ = jT(c, eq).unwrapOr(!1);
-  let e$ = Rs(iY3, {
+  let e$ = Rs(FileNameViewDropdown, {
     branchFileKey: c?.key || ""
   }, {
     enabled: !!c
@@ -649,7 +649,7 @@ let ti = memo(function ({
     } = e3();
     let s = q5();
     let o = RR();
-    let l = Rs(dTR({
+    let l = Rs(FileManagePermission({
       fileKey: s?.key || ""
     }), {
       enabled: !!s?.key
@@ -694,7 +694,7 @@ let ti = memo(function ({
   let tv = eq && eV;
   let tE = jsx(Pu, {
     disabled: !publish,
-    recordingKey: Pt(e, "publishVersion"),
+    recordingKey: generateRecordingKey(e, "publishVersion"),
     onClick: publish ? () => {
       closeSelectMenu();
       publish();
@@ -702,12 +702,12 @@ let ti = memo(function ({
     children: getI18nString("fullscreen.filename_view.publish-styles-and-components")
   });
   let tT = eV && jsx(Pu, {
-    recordingKey: Pt(e, "codeConnect"),
+    recordingKey: generateRecordingKey(e, "codeConnect"),
     onClick: eW,
     children: getI18nString("dev_handoff.component_browser.menu_item")
   });
   let tw = !!eQ && jsx(Pu, {
-    recordingKey: Pt(e, "viewFileAnalytics"),
+    recordingKey: generateRecordingKey(e, "viewFileAnalytics"),
     onClick: openFileAnalytics,
     children: getI18nString("fullscreen.filename_view.file_analytics")
   });
@@ -751,7 +751,7 @@ let ti = memo(function ({
           children: e
         }, `branching-${t}`)), g && !tt && !tS && !ew && jsx(Pu, {
           disabled: !Yh(t, "enter-history-mode"),
-          recordingKey: Pt(e, "toggleVersionHistory"),
+          recordingKey: generateRecordingKey(e, "toggleVersionHistory"),
           onClick: toggleVersionHistory,
           children: Ah(t.activeCanvasEditModeType) ? getI18nString("fullscreen.filename_view.version-history-hide") : getI18nString("fullscreen.filename_view.version-history-show")
         }), jsxs(YJ, {
@@ -784,7 +784,7 @@ let ti = memo(function ({
             })
           }), tN && !ep && !ej && !ef && !tS && !ew && jsxs(Pu, {
             disabled: !eK,
-            recordingKey: Pt(e, "exportSelectedExportables"),
+            recordingKey: generateRecordingKey(e, "exportSelectedExportables"),
             onClick: () => {
               Fullscreen && Fullscreen.triggerAction("export-selected-exportables", {
                 source: "toolbar"
@@ -804,7 +804,7 @@ let ti = memo(function ({
                 PF(_, e);
               });
             },
-            recordingKey: Pt(e, "copyToFigmaSlides"),
+            recordingKey: generateRecordingKey(e, "copyToFigmaSlides"),
             disabled: !eK,
             children: getI18nString("slides.general.copy_current_page_to_figma_slides")
           })]
@@ -815,12 +815,12 @@ let ti = memo(function ({
         }), tB && jsx(eI, {}), jsxs(YJ, {
           children: [g && !tt && !tP && (!getFeatureFlags().filter_pro_plus_sites_make_web || tb.canDuplicate) && jsx(Pu, {
             disabled: !l || tk,
-            recordingKey: Pt(e, "duplicate"),
+            recordingKey: generateRecordingKey(e, "duplicate"),
             onClick: tb.duplicateFile,
             children: tb.duplicateDisplayText
           }), g && !tD && jsx(Pu, {
             disabled: !e1,
-            recordingKey: Pt(e, "rename"),
+            recordingKey: generateRecordingKey(e, "rename"),
             onClick: () => {
               closeSelectMenu();
               rename();
@@ -828,7 +828,7 @@ let ti = memo(function ({
             children: tA ? getI18nString("fullscreen.filename_view.rename-branch") : getI18nString("fullscreen.filename_view.rename")
           }), g && !tt && tM && jsx(Pu, {
             disabled: !tR,
-            recordingKey: Pt(e, "restore"),
+            recordingKey: generateRecordingKey(e, "restore"),
             onClick: restoreBranch,
             children: getI18nString("fullscreen.filename_view.restore")
           }), g && !tt && projectUrl && "" !== projectUrl && jsx(Oo, {
@@ -839,14 +839,14 @@ let ti = memo(function ({
           }), g && !tt && !tA && jsxs(Pu, {
             disabled: tc,
             "data-onboarding-key": "FILENAME_VIEW_MOVE_TO_PROJECT",
-            recordingKey: Pt(e, "moveToProject"),
+            recordingKey: generateRecordingKey(e, "moveToProject"),
             onClick: RG(_, c, m, tn),
             children: [getI18nString("fullscreen.filename_view.move_file"), ts && jsx(Ov, {
               children: zS(ti, tc, tr)
             })]
           }), g && !tt && !tD && !tP && userCanTrashFile && jsx(Pu, {
             disabled: !te,
-            recordingKey: Pt(e, "delete"),
+            recordingKey: generateRecordingKey(e, "delete"),
             onClick: tA ? archiveBranch : deleteFile,
             children: tA ? getI18nString("fullscreen.filename_view.archive-branch") : getI18nString("fullscreen.filename_view.move_to_trash")
           }), g && !tt && tD && jsx(Pu, {
@@ -856,7 +856,7 @@ let ti = memo(function ({
           })]
         }), !!tF && jsx(YJ, {
           children: jsx(Pu, {
-            recordingKey: Pt(e, "resetFileThumbnail"),
+            recordingKey: generateRecordingKey(e, "resetFileThumbnail"),
             onClick: resetFileThumbnail,
             children: getFeatureFlags().dse_library_pg_thumbnails ? getI18nString("fullscreen.filename_view.restore_default_file_thumbnail") : getI18nString("fullscreen.filename_view.restore_default_thumbnail")
           })
@@ -898,7 +898,7 @@ export function $$tr0(e) {
         manager,
         children: [jsx(_$$K, {
           ...k,
-          recordingKey: Pt(e.recordingKey, "chevron"),
+          recordingKey: generateRecordingKey(e.recordingKey, "chevron"),
           "aria-label": getI18nString("fullscreen.filename_view.edit_file_menu"),
           children: jsx(_$$O, {})
         }), jsx(ti, {

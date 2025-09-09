@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Rs } from "../figma_app/288654";
 import { sz } from "../figma_app/216696";
-import { U2Y } from "../figma_app/43951";
+import { CommunityProfileView } from "../figma_app/43951";
 import { oh, mC } from "../905/18797";
 export function $$c0(e) {
   let t = useDispatch();
@@ -24,7 +24,7 @@ export function $$c0(e) {
   };
 }
 export function $$$$d1(e) {
-  let t = Rs(U2Y, {
+  let t = Rs(CommunityProfileView, {
     profileId: e
   });
   if ("loaded" === t.status) {

@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import { ComponentPropType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { gw, c$ } from "../figma_app/236327";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { P as _$$P } from "../905/347284";
@@ -85,7 +85,7 @@ function M({
   let u = useMemo(() => l ? J0(e) : void 0, [e, l]);
   return jsxs(D8, {
     className: "preferred_values_list_view--listItemContainer--HQ71E preferred_values_instance_picker--listItemContainer--a4t-g",
-    recordingKey: Pt(...fN([i, ...j(e)])),
+    recordingKey: generateRecordingKey(...fN([i, ...j(e)])),
     children: [jsx("div", {
       className: "preferred_values_list_view--thumbnailList--L5c6i preferred_values_instance_picker--thumbnailList--nGJE1 drilldown_item--_thumbnailContainer--kDsBt preferred_values_instance_picker--thumbnailListBase--KpYBM preferred_values_instance_picker--_thumbnailBase--eAxDp",
       children: lL(e, null)
@@ -97,7 +97,7 @@ function M({
       className: "preferred_values_list_view--warningIconList--ivdml preferred_values_instance_picker--warningIconList--aDgpb preferred_values_instance_picker--warningIcon--2TXXz",
       svg: _$$A2
     }), jsx(K0, {
-      recordingKey: Pt(...fN([i, ...j(e), "removeButton"])),
+      recordingKey: generateRecordingKey(...fN([i, ...j(e), "removeButton"])),
       className: "preferred_values_list_view--listItemRemoveButton--QevDg preferred_values_instance_picker--listItemRemoveButton--HO05L",
       svg: _$$A,
       "data-tooltip-type": Ib.TEXT,
@@ -174,7 +174,7 @@ function Y(e) {
           "data-tooltip": getI18nString("design_systems.component_properties.select_preferred_values"),
           onKeyDown: b
         },
-        recordingKey: Pt("instanceSwapToggle", pickerID),
+        recordingKey: generateRecordingKey("instanceSwapToggle", pickerID),
         children: jsx(_$$x, {})
       }), h.isShown && h.id === pickerID && jsx(_$$T, {
         entrypointForLogging: e.entrypointForLogging,
@@ -185,7 +185,7 @@ function Y(e) {
         overrideDefaultItem,
         pickerToggleRef: _,
         pickerType: Zl.PREFERRED_VALUES_PICKER,
-        recordingKey: Pt("instanceSwapPicker", pickerID),
+        recordingKey: generateRecordingKey("instanceSwapPicker", pickerID),
         selectedItems: preferredValues,
         shouldPerformSwapOnClick,
         title
@@ -222,7 +222,7 @@ function J({
     style: i.data.position,
     dispatch: r,
     children: jsx($, {
-      recordingKey: Pt(...t, "remove"),
+      recordingKey: generateRecordingKey(...t, "remove"),
       onClick: () => {
         e(i.data.component);
         r(oB());
@@ -352,14 +352,14 @@ export function $$ei0({
             }) : s.map(e => jsx(X, {
               component: e,
               onContextMenu: R,
-              recordingKey: Pt(...fN([_, ...Z(e)]))
+              recordingKey: generateRecordingKey(...fN([_, ...Z(e)]))
             }, e.node_id)), B && jsx(et, {
               isList: C
             })]
           })
         }), j.size > 0 && jsx(ee, {
           guids: s.map(e => e.node_id),
-          recordingKey: Pt(...fN([_, "publishValuesFromWarning"]))
+          recordingKey: generateRecordingKey(...fN([_, "publishValuesFromWarning"]))
         })]
       })]
     }), jsx(J, {

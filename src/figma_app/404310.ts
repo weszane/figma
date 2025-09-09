@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { tf } from "../figma_app/831799";
 import { d as _$$d } from "../905/86829";

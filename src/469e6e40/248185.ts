@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Y, M } from "../905/830372";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";

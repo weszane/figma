@@ -9,7 +9,7 @@ import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { toArray, MIXED_MARKER, isInvalidValue } from "../905/216495";
 import { Gt } from "../905/275640";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { iM, SA } from "../figma_app/405546";
 import { lN, lF, QE, F2, Ge, dg, Y4 } from "../figma_app/384713";
 let f = e => !!e && e !== sessionLocalIDToString(lN.strokeBrushGuid);
@@ -141,7 +141,7 @@ class R {
       let i = t(n);
       this.setValueToNode(r, i);
     });
-    r !== zk.NO && fullscreenValue.commit();
+    r !== yesNoTrackingEnum.NO && fullscreenValue.commit();
   }
 }
 export class $$L7 extends R {

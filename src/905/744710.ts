@@ -8,10 +8,10 @@ import { bL, Rq } from "../905/38914";
 import p, { getFeatureFlags } from "../905/601108";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { iZ as _$$iZ, pS, TA } from "../905/372672";
+import { selectCurrentUser, hasPasswordOrSSO, getUserId } from "../905/372672";
 import { po } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground, registerLegacyModal } from "../905/102752";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
 import I from "classnames";
 import { h as _$$h } from "../905/207101";
@@ -29,7 +29,7 @@ import { FDomainVerificationStatusType, FOrganizationLevelType, FMemberRoleType,
 import { C as _$$C2 } from "../905/283236";
 import { x as _$$x } from "../905/233240";
 import { logError } from "../905/714362";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { yX, d_ } from "../figma_app/918700";
 import { X as _$$X } from "../905/33014";
 import { A as _$$A } from "../905/289352";
@@ -98,7 +98,7 @@ import { Rs, p as _$$p2 } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { G as _$$G } from "../905/750789";
 import { sx as _$$sx } from "../905/941192";
-import { Yh6, YN5, sMZ, P4, kQI } from "../figma_app/43951";
+import { CurrentUserIsMfaRequiredByMembershipOrgView, UserSettingsPlanRow, UserFlagByName, CurrentUserInStudentPlusPlanView, TeamCanEdit } from "../figma_app/43951";
 import { kA, yK } from "../figma_app/336853";
 import { H as _$$H } from "../905/202181";
 import { setupAutofocusHandler } from "../905/128376";
@@ -243,13 +243,13 @@ let z = registerModal(function (e) {
         user_id: e.userId
       };
       d(!0);
-      t(_$$F.clearAll());
+      t(VisualBellActions.clearAll());
       _$$C.updateBillingDetails(n).then(({
         data: i
       }) => {
         let n = i.meta.vat_gst_id;
         d(!1);
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           message: getI18nString("community.community_account_settings.address_details_success"),
           error: !1
         }));
@@ -261,7 +261,7 @@ let z = registerModal(function (e) {
         logError("Error updating user billing details", e, n, {
           reportAsSentryError: !0
         });
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           type: "update-billing-details-error",
           message: e.message || getI18nString("community.community_account_settings.address_details_error"),
           error: !0
@@ -370,7 +370,7 @@ let et = "account_settings_modal--spaceRight--IejW6";
 let ei = "account_settings_modal--scrollContainer--Yf5uK";
 function en(e) {
   var t;
-  let i = _$$iZ();
+  let i = selectCurrentUser();
   let n = useSelector(e => e.avatarEditorState);
   let a = useDispatch();
   switch (e.avatarType) {
@@ -774,7 +774,7 @@ let eN = function (e) {
 };
 var eB = (e => (e.OTP_REFUNDABLE = "otp_refundable", e.SUBSCRIPTION = "subscription", e))(eB || {});
 function eV(e) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   return t ? jsx(eG, {
     ...e,
     user: t
@@ -1671,7 +1671,7 @@ function tO() {
   });
 }
 function tD() {
-  let e = _$$iZ();
+  let e = selectCurrentUser();
   let t = q5();
   let i = _$$w();
   let n = dq();
@@ -1786,14 +1786,14 @@ let tJ = registerModal(function (e) {
   });
 }, "CHANGE_PASSWORD_MODAL", ModalSupportsBackground.YES);
 let t4 = registerModal(function (e) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let i = _$$Z();
   let n = useDispatch();
   let a = hS(e);
-  return t ? pS(t) ? jsx(_$$R2, {
+  return t ? hasPasswordOrSSO(t) ? jsx(_$$R2, {
     title: jsx(zd, {}),
     onConfirm: () => {
-      pS(t) && n(_$$eu({
+      hasPasswordOrSSO(t) && n(_$$eu({
         token: t.password_token
       }));
     },
@@ -1847,7 +1847,7 @@ let ip = createOptimistThunk(async (e, t) => {
   } catch (i) {
     let t = "Could not add personal access token";
     i instanceof XHRError && i.status >= 400 && i.status < 500 ? reportError(_$$e2.EXTENSIBILITY, i) : t = `Could not add personal access token: ${i.message}`;
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: t,
       error: !0
     }));
@@ -2356,17 +2356,17 @@ function iF({
   let [i, n] = useState(!1);
   let s = useDispatch();
   let o = useCallback(e => {
-    s(_$$F.clearAll());
+    s(VisualBellActions.clearAll());
     n(!0);
     _$$H.deleteSession(e).then(() => {
-      s(_$$F.enqueue({
+      s(VisualBellActions.enqueue({
         message: getI18nString("sessions.bell.success"),
         timeoutOverride: 5e3
       }));
       t(e);
     }).catch(() => {
       n(!1);
-      s(_$$F.enqueue({
+      s(VisualBellActions.enqueue({
         message: getI18nString("sessions.bell.fail"),
         timeoutOverride: 5e3,
         error: !0
@@ -2439,7 +2439,7 @@ function iM({
   user: e
 }) {
   let t = useDispatch();
-  let i = Rs(Yh6({}));
+  let i = Rs(CurrentUserIsMfaRequiredByMembershipOrgView({}));
   let n = oA(i.data?.currentUser?.isMfaRequiredByMembershipOrg);
   let a = e.two_factor_app_enabled;
   let s = e.phone_number;
@@ -2622,17 +2622,17 @@ function iH({
   let [i, n] = useState(!1);
   let s = useDispatch();
   let o = useCallback(e => {
-    s(_$$F.clearAll());
+    s(VisualBellActions.clearAll());
     n(!0);
     _$$H.deleteSession(e).then(() => {
-      s(_$$F.enqueue({
+      s(VisualBellActions.enqueue({
         message: getI18nString("sessions.bell.success"),
         timeoutOverride: 5e3
       }));
       t(e);
     }).catch(() => {
       n(!1);
-      s(_$$F.enqueue({
+      s(VisualBellActions.enqueue({
         message: getI18nString("sessions.bell.fail"),
         timeoutOverride: 5e3,
         error: !0
@@ -3567,7 +3567,7 @@ class n8 extends PureComponent {
 n8.displayName = "DeleteUserAccountModal";
 let rt = registerModal(function (e) {
   let t = hS(e);
-  let i = TA();
+  let i = getUserId();
   let [n, o] = useState(e.fileViewHistoryDisabled.toString());
   let d = useMemo(() => n !== e.fileViewHistoryDisabled.toString(), [n, e.fileViewHistoryDisabled]);
   return jsx(fu, {
@@ -3901,7 +3901,7 @@ function rO(e) {
     planParentId: e.plan_id,
     planType: "org" === e.plan_type ? FOrganizationLevelType.ORG : FOrganizationLevelType.TEAM
   }));
-  let s = _$$p2(YN5, n);
+  let s = _$$p2(UserSettingsPlanRow, n);
   let [o, l] = useState(s.length <= 3);
   return jsxs(_$$Y, {
     direction: "vertical",
@@ -4122,7 +4122,7 @@ function rD(e) {
                   upgradeReason: _$$i.USER_SETTINGS,
                   entryPoint: _$$tc.USER_SETTINGS,
                   afterUpgradeCallback: () => {
-                    t(_$$F.enqueue({
+                    t(VisualBellActions.enqueue({
                       message: getI18nString("user_settings.plan_sections.auto_pathway_success_toast")
                     }));
                   }
@@ -4187,16 +4187,16 @@ function rF({
     orgDomains: e.orgDomains,
     currentOrgDisabledPresetsAndTemplates: yK(e)
   }));
-  let s = Rs(sMZ({
+  let s = Rs(UserFlagByName({
     name: "disable_file_view_history"
   }));
   let o = !!s?.data?.currentUser?.userFlagByName;
-  let l = Rs(P4({}));
+  let l = Rs(CurrentUserInStudentPlusPlanView({}));
   let d = T5("SettingsViewInner").unwrapOr(null);
   let c = d && d.key.type === FOrganizationLevelType.TEAM ? d.key.parentId : null;
   let u = _$$oA(l.data?.currentUser?.inStudentPlusPlan);
   let g = c && d && d.tier === FPlanNameType.STARTER;
-  let f = Rs(kQI({
+  let f = Rs(TeamCanEdit({
     id: c || ""
   }), {
     enabled: !!c
@@ -4576,7 +4576,7 @@ registerLegacyModal(rN, e => jsx(rP, {
 export var $$rM1 = (e => (e.ACCOUNT = "ACCOUNT", e.COMMUNITY = "COMMUNITY", e.NOTIFICATIONS = "NOTIFICATIONS", e.SESSIONS = "SESSIONS", e.SECURITY = "SECURITY", e))($$rM1 || {});
 let rj = {
   ACCOUNT: function () {
-    let e = _$$iZ();
+    let e = selectCurrentUser();
     return jsx(eo, {
       avatarType: es.ACCOUNT,
       children: e ? jsx(rF, {
@@ -4585,7 +4585,7 @@ let rj = {
     });
   },
   COMMUNITY: function () {
-    let e = _$$iZ();
+    let e = selectCurrentUser();
     let t = useSelector(e => e.user && sD(e.user, e.authedProfilesById));
     return e ? jsx(eJ, {
       user: e,
@@ -4593,10 +4593,10 @@ let rj = {
     }) : null;
   },
   NOTIFICATIONS: function () {
-    return _$$iZ() ? jsx(tD, {}) : null;
+    return selectCurrentUser() ? jsx(tD, {}) : null;
   },
   SESSIONS: function () {
-    let e = _$$iZ();
+    let e = selectCurrentUser();
     let [t, i] = useState([]);
     let [n, s] = useState(!0);
     let [o, l] = useState(!1);
@@ -4665,7 +4665,7 @@ let rj = {
     });
   },
   SECURITY: function () {
-    let e = _$$iZ();
+    let e = selectCurrentUser();
     let t = selectWithShallowEqual(e => ({
       orgById: e.orgById,
       teams: e.teams,

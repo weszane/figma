@@ -24,7 +24,7 @@ import { isInvalidValue, isValidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { il, X7 } from "../figma_app/789050";
 import { g as _$$g } from "../905/412697";
@@ -200,7 +200,7 @@ export function $$G1(e) {
   } = _$$g({
     id: "width-profile-dropdown",
     property: _,
-    onChange: (t, i = zk.YES) => {
+    onChange: (t, i = yesNoTrackingEnum.YES) => {
       if ("EDIT" === t) {
         getFeatureFlags().ce_il_vws_custom_preview && z && (Fullscreen?.triggerActionEnumInUserEditScope(Command.REQUEST_EDIT_MODE_VIA_TOOLBAR, {}), Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_VAR_WIDTH_POINT, {}));
         return;
@@ -208,7 +208,7 @@ export function $$G1(e) {
       if (!t || "CUSTOM" === t || "MIXED" === t) return;
       let n = Dc(debugState.getState().selectedView.editorType);
       let r = U[t];
-      (i === zk.YES || i === zk.YES_FORCE_TRACKING_AS_EDIT) && analyticsEventManager.trackDefinedEvent("illustration.web_variable_width_stroke_profile_changed", {
+      (i === yesNoTrackingEnum.YES || i === yesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT) && analyticsEventManager.trackDefinedEvent("illustration.web_variable_width_stroke_profile_changed", {
         source: e.source,
         controlPointCount: r.controlPoints.length,
         productType: n,

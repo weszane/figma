@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { range } from "../figma_app/492908";
 import { lQ } from "../905/934246";
@@ -7,7 +7,7 @@ import { k as _$$k } from "../905/443820";
 import { N as _$$N } from "../905/438674";
 import c from "classnames";
 import { Y1 } from "../905/143116";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rs } from "../figma_app/288654";
 import { ms, c$ } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -19,7 +19,7 @@ import { fG } from "../figma_app/973927";
 import { Cn } from "../905/862913";
 import { Um } from "../905/848862";
 import { Ve } from "../figma_app/198840";
-import { sMs } from "../figma_app/43951";
+import { FileCanView } from "../figma_app/43951";
 import { n as _$$n } from "../905/79930";
 import { zq, FK, zx, Wf } from "../figma_app/961422";
 import { Td } from "../905/595131";
@@ -57,7 +57,7 @@ function k({
     primaryKey
   } = fG()(e);
   let d = e.type === _$$n.TeamTemplate;
-  let c = Rs(sMs, {
+  let c = Rs(FileCanView, {
     key: primaryKey
   }, {
     enabled: d
@@ -78,7 +78,7 @@ function k({
     }), viewSourceFileUrl && d && jsx(c$, {
       onClick: () => {
         r(oB());
-        Ay.redirect(viewSourceFileUrl, "_blank");
+        customHistory.redirect(viewSourceFileUrl, "_blank");
       },
       disabled: "loading" === c.status || "disabled" === c.status || !c.data?.file?.hasPermission,
       children: jsxs(Y1, {

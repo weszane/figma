@@ -6,7 +6,7 @@ import { ViewType, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import m from "../vendor/674128";
 import { A } from "../vendor/850789";
 import { trackEventAnalytics } from "../905/449184";
@@ -28,7 +28,7 @@ export function $$w0() {
   });
   let t = p8("isReadOnly");
   let i = p8("topLevelMode") === ViewType.HISTORY;
-  let r = k9(() => e, [e]);
+  let r = useMemoStable(() => e, [e]);
   let o = document.getElementById("fullscreen-root");
   if (!o) return null;
   let l = o.querySelectorAll(".view.container-view");
@@ -63,7 +63,7 @@ function T({
   let u = getObservableValue(AppStateTsApi?.singleSlideView().focusedNodeId, "");
   let m = AppStateTsApi?.singleSlideView().isFocusedNodeViewFocused() ?? !1;
   let p = dh();
-  let f = k9(() => Object.values(l).filter(e => e.pageId === p && (!m || m && e.slideId === u)), [l, m, u, p]);
+  let f = useMemoStable(() => Object.values(l).filter(e => e.pageId === p && (!m || m && e.slideId === u)), [l, m, u, p]);
   return wj(JT.BOARD_TO_DECK).state === qy.RUNNING ? null : jsx(Fragment, {
     children: f.map(r => jsx(R, {
       element: r,

@@ -4,7 +4,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y } from "../figma_app/887000";
 import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
@@ -94,7 +94,7 @@ let $$x22 = createOptimistThunk((e, {
     e.dispatch(yJ({
       org: t.data.meta
     }));
-    r && e.dispatch(F.enqueue({
+    r && e.dispatch(VisualBellActions.enqueue({
       message: r,
       type: "orgs.update",
       error: !1
@@ -304,7 +304,7 @@ let $$F9 = createOptimistThunk((e, t) => {
     autogen_password_controls: n
   });
   c.then(() => {
-    r && e.dispatch(F.enqueue({
+    r && e.dispatch(VisualBellActions.enqueue({
       message: r,
       type: "orgs.update",
       error: !1

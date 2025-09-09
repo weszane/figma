@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { Rs, oS } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { MF, A5 } from "../figma_app/391338";
-import { $kt } from "../figma_app/43951";
+import { FileBrowserSidebarData } from "../figma_app/43951";
 function c(e) {
   let {
     oldValue,
@@ -20,7 +20,7 @@ function c(e) {
   });
 }
 export function $$u0(e, t) {
-  let r = Rs($kt, e, t);
+  let r = Rs(FileBrowserSidebarData, e, t);
   c(r);
   return r;
 }
@@ -45,7 +45,7 @@ export function $$p1(e, t) {
       }));
     }
   }), [e.currentOrgId, e.currentTeamId]);
-  let o = oS($kt, e, {
+  let o = oS(FileBrowserSidebarData, e, {
     ...t,
     subscriptionLogger: r
   });

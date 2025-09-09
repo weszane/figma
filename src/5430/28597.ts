@@ -69,7 +69,7 @@ import { A as _$$A4 } from "../svg/638213";
 import { z as _$$z } from "../5430/158228";
 import { UH, G as _$$G2, Ev, tx as _$$tx2, Rc, D9, OC, $h, tJ, hV } from "../5430/920085";
 import { A as _$$A5 } from "../5724/663128";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { C as _$$C } from "../905/222694";
 import { trackEventAnalytics } from "../905/449184";
 import { o as _$$o2 } from "../figma_app/70618";

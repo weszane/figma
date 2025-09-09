@@ -1,12 +1,12 @@
 import { useState, useCallback, useLayoutEffect, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { MeasurementUnit } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { v4, AC, Pt } from "../figma_app/655139";
 import { SupportedPlatforms, WEB } from "../905/359509";
-import { ZA, zq } from "../905/515076";
+import { isCodegenSupported, CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { $h, OQ } from "../905/191741";
 import { Z } from "../905/820720";
 import { aq, wA } from "../figma_app/120227";
@@ -18,7 +18,7 @@ export function $$g0() {
     ...g
   });
   let A = aq(f);
-  let y = ZA(f, A);
+  let y = isCodegenSupported(f, A);
   let b = useCallback(e => {
     i(e);
     trackEventAnalytics("dev_mode.compare_changes.change_inspection_mode", {
@@ -41,7 +41,7 @@ export function $$g0() {
     e.push({
       displayText: getI18nString("dev_handoff.alternative_units.dimension_unit"),
       header: !0
-    }, ...zq.map(e => {
+    }, ...CODEGEN_MEASUREMENT_UNITS.map(e => {
       let i = e === MeasurementUnit.PIXEL ? getI18nString("dev_handoff.alternative_units.pixel_unit") : x;
       return {
         name: e.toString(),

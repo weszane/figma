@@ -2,12 +2,12 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useState } from "react";
 import { E as _$$E } from "../905/465157";
 import { getFeatureFlags } from "../905/601108";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
 import { isInvalidValue, getCommonFromArray, isValidValue } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { om, ui } from "../figma_app/395097";
 import { Ms, Er } from "../905/873331";
 import { M as _$$M } from "../905/983212";
@@ -22,7 +22,7 @@ import { EX } from "../figma_app/709323";
 import { eN } from "../905/331848";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { AppStateTsApi, DrawingElementType } from "../figma_app/763686";
 import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
@@ -137,7 +137,7 @@ function $(e) {
     numSelectedByType: i.numSelectedByType,
     onChange: r,
     pickerShown: s,
-    recordingKey: Pt(e, "advanced"),
+    recordingKey: generateRecordingKey(e, "advanced"),
     strokeBrushGuid: c,
     strokeCap: i.strokeCap,
     strokeJoin: i.strokeJoin,
@@ -152,7 +152,7 @@ function X(e) {
     let t = useDispatch();
     let r = U();
     return useCallback(() => {
-      if (r) t(XE());else {
+      if (r) t(XE()); else {
         if (!e || !e.current) return;
         let r = cn(e.current);
         t(u1({
@@ -172,7 +172,7 @@ function X(e) {
       "aria-expanded": r,
       onClick: t,
       disabled: e.disabled,
-      recordingKey: Pt(e, "more"),
+      recordingKey: generateRecordingKey(e, "more"),
       "aria-label": getI18nString("fullscreen.properties_panel.fill.advanced_stroke_settings"),
       htmlAttributes: {
         onMouseDown: e => e.stopPropagation(),
@@ -232,16 +232,16 @@ export function $$J0(e) {
       terminalCap: e
     }),
     label: getI18nString("fullscreen.properties_panel.section_stroke.label_end_cap"),
-    recordingKey: Pt(e, "endCap"),
+    recordingKey: generateRecordingKey(e, "endCap"),
     disabled: !k,
     kind: "endCap"
   });
   let J = jsx(D7, {
     source: "properties_panel",
-    recordingKey: Pt(e.recordingKey, "widthProfile")
+    recordingKey: generateRecordingKey(e.recordingKey, "widthProfile")
   });
   let Z = jsx(iI, {
-    recordingKey: Pt(e.recordingKey, "flipWidthProfile")
+    recordingKey: generateRecordingKey(e.recordingKey, "flipWidthProfile")
   });
   return jsxs(Fragment, {
     children: [jsx(DE, {
@@ -261,7 +261,7 @@ export function $$J0(e) {
             [ui(t)]: e
           }, r);
         },
-        recordingKey: Pt(e.recordingKey, "weight"),
+        recordingKey: generateRecordingKey(e.recordingKey, "weight"),
         sliderMax: $$q1,
         sliderValueTransform: K,
         step: smallNudgeAmount,
@@ -274,10 +274,10 @@ export function $$J0(e) {
           if (r(e), e === om.CUSTOM) return;
           let t = e6(e);
           fullscreenValue.updateSelectionProperties(t, {
-            shouldCommit: zk.YES
+            shouldCommit: yesNoTrackingEnum.YES
           });
         },
-        recordingKey: Pt(e, "borderSide")
+        recordingKey: generateRecordingKey(e, "borderSide")
       }) : null
     }), j && t === om.CUSTOM && jsx(Er, {
       onChange: x

@@ -1,5 +1,5 @@
 import { CustomPosition } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { lg } from "../figma_app/976749";
 import { Fz } from "../figma_app/106207";
 import { fG } from "../figma_app/973927";
@@ -42,7 +42,7 @@ export function $$u0(e) {
     insertAction: f,
     dragPreviewPointerPosition: N.RELATIVE,
     getDragPreviewSrc: () => imageUrl || "",
-    recordingKey: Pt("template", primaryKey)
+    recordingKey: generateRecordingKey("template", primaryKey)
   });
 }
 export const B = $$u0;

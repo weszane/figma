@@ -2,11 +2,11 @@ import _require from "../469e6e40/127004";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
-import { RG, p8 } from "../905/165290";
+import { createFontMetadata, removeFontOwnerPrefix } from "../905/165290";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { A as _$$A } from "../905/662580";
 import { registerModal, createModalConfig } from "../905/102752";
 import { showModalHandler } from "../905/156213";
@@ -21,10 +21,10 @@ export function $$b0() {
 }
 let v = NC("START_UPLOAD_FONTS");
 let I = createOptimistThunk((e, t) => {
-  for (let i in e.dispatch(_$$F.enqueue({
+  for (let i in e.dispatch(VisualBellActions.enqueue({
     type: "shared-fonts",
     message: getI18nString("shared_fonts.importing_font_files"),
-    icon: zX.SPINNER
+    icon: VisualBellIcon.SPINNER
   })), t.overwrite ? trackEventAnalytics("shared_fonts_overwrite_collision") : trackEventAnalytics("shared_fonts_upload", {
     count: Object.values(t.fonts).length
   }), e.dispatch(v(t)), t.fonts) {
@@ -57,14 +57,14 @@ let I = createOptimistThunk((e, t) => {
       }
     }).then(r => {
       let a = JSON.parse(r.data).meta;
-      let l = RG(a);
+      let l = createFontMetadata(a);
       if ("org" === t.resourceType) {
         let i = {};
         let n = e.getState();
         let {
           fontsByResourceId
         } = n.sharedFonts;
-        for (let a in Object.keys(fontsByResourceId).map(e => p8(e)).filter(e => n.teams[e] && n.teams[e].org_id === t.resourceId).forEach(e => {
+        for (let a in Object.keys(fontsByResourceId).map(e => removeFontOwnerPrefix(e)).filter(e => n.teams[e] && n.teams[e].org_id === t.resourceId).forEach(e => {
           let t = fontsByResourceId[`team-${e}`]?.[l.family];
           let n = new Set(Object.keys(t ?? {}));
           let a = new Set(l.variationInstances?.map(e => e.name) ?? [l.style]);
@@ -93,7 +93,7 @@ let I = createOptimistThunk((e, t) => {
       if (t.data) try {
         let e = JSON.parse(t.data).meta;
         r = e ? {
-          existing: e.collision.existing ? RG(e.collision.existing) : void 0,
+          existing: e.collision.existing ? createFontMetadata(e.collision.existing) : void 0,
           uploaded: e.collision.uploaded,
           overwritten_fonts: e.collision.overwritten_fonts
         } : void 0;
@@ -137,38 +137,38 @@ function E(e, t) {
     warnings
   } = e.sharedFonts;
   if (Object.keys(uploadsRemaining).length > 0) {
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       type: "shared-fonts",
       message: getI18nString("shared_fonts.uploads_remaining", {
         totalFileCount: uploadsLaunched,
         processedFileCount: successfulUploads.length + unsuccessfulUploads.length
       }),
-      icon: zX.SPINNER
+      icon: VisualBellIcon.SPINNER
     }));
     return;
   }
   if (0 === unsuccessfulUploads.length && 0 === collisions.length && 0 === warnings.length && t(_$$o()), 0 === unsuccessfulUploads.length) {
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       type: "shared-fonts",
       message: getI18nString("shared_fonts.import_complete_with_no_errors"),
-      icon: zX.CHECK
+      icon: VisualBellIcon.CHECK
     }));
     return;
   }
   let y = e.modalShown;
-  y && (y.type === EJ || y.type === _$$C) ? t(_$$F.enqueue({
+  y && (y.type === EJ || y.type === _$$C) ? t(VisualBellActions.enqueue({
     type: "shared-fonts",
     message: getI18nString("shared_fonts.import_complete_with_errors", {
       unsuccessfulUploadCount: unsuccessfulUploads.length
     }),
-    icon: zX.EXCLAMATION,
+    icon: VisualBellIcon.EXCLAMATION,
     error: !0
-  })) : t(_$$F.enqueue({
+  })) : t(VisualBellActions.enqueue({
     type: "shared-fonts",
     message: getI18nString("shared_fonts.import_complete_with_errors", {
       unsuccessfulUploadCount: unsuccessfulUploads.length
     }),
-    icon: zX.EXCLAMATION,
+    icon: VisualBellIcon.EXCLAMATION,
     error: !0,
     button: {
       text: getI18nString("shared_fonts.review_font_upload_errors"),
@@ -225,20 +225,20 @@ let N = createOptimistThunk(e => {
     } = e.getState().sharedFonts;
     let r = unsuccessfulDeletes.length;
     let a = unsuccessfulDeletes.length + successfulDeletes.length;
-    r > 0 ? e.dispatch(_$$F.enqueue({
+    r > 0 ? e.dispatch(VisualBellActions.enqueue({
       type: "font_deleted",
       message: getI18nString("shared_fonts.unsuccessful_deletes", {
         numUnsuccessfulDeletes: r,
         totalDeletes: a
       }),
-      icon: zX.EXCLAMATION,
+      icon: VisualBellIcon.EXCLAMATION,
       error: !0
-    })) : e.dispatch(_$$F.enqueue({
+    })) : e.dispatch(VisualBellActions.enqueue({
       type: "font_deleted",
       message: getI18nString("shared_fonts.successful_deletes", {
         totalDeletes: a
       }),
-      icon: zX.CHECK
+      icon: VisualBellIcon.CHECK
     }));
   };
 });

@@ -2,7 +2,7 @@ import { A as _$$A } from "../905/801769";
 import { then } from "../181e8476/626372";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import i, { useState, useCallback, useMemo, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
@@ -42,12 +42,12 @@ import { findComponentGuidOrPublishId } from "../figma_app/854115";
 import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { T as _$$T } from "../905/858738";
 import { Um } from "../905/848862";
 import { eY as _$$eY, T3 } from "../figma_app/722362";
 import { q5, tS, _S } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f as _$$f2 } from "../905/940356";
 import { Wh } from "../figma_app/615482";
 import { bj } from "../905/420347";
@@ -971,7 +971,7 @@ function eK({
   onInstancePillClick: l,
   copyButtonContainer: d
 }) {
-  let c = iZ();
+  let c = selectCurrentUser();
   let u = q5();
   let p = uQ();
   let _ = _$$eY();
@@ -1148,7 +1148,7 @@ function eY({
     className: "figmadocs--goToParentButtonWrapper--ZAPci",
     children: jsx(WW, {
       variant: "secondary",
-      onClick: () => tJ([e.guid ?? ""]),
+      onClick: () => replaceSelection([e.guid ?? ""]),
       iconPrefix: jsx(r, {}),
       children: renderI18nText("dev_handoff.code_connect.go_to_parent_button", {
         name: e.name || ""

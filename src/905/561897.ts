@@ -9,7 +9,7 @@ import { M } from "../figma_app/155411";
 import { h0 } from "../905/845253";
 import { DQ } from "../905/872904";
 import { FPlanNameType } from "../figma_app/191312";
-import { fy7, AXx, X9s, sBU, f19, Lew } from "../figma_app/43951";
+import { LibraryPresetSubscriptionsV2, LibraryOrgSubscriptions, WorkspaceSubscribedLibrariesForTeam, LibrarySubscriptionsForTeam, LibraryTeamSubscriptions, LibraryUserSubscriptions } from "../figma_app/43951";
 import { zl } from "../905/276025";
 import { Me, jv } from "../figma_app/598018";
 let _ = atom(e => {
@@ -18,7 +18,7 @@ let _ = atom(e => {
   let n = e(zl(!0)).data?.tier !== FPlanNameType.STARTER;
   let {
     data
-  } = null != i ? e(fy7.Query({
+  } = null != i ? e(LibraryPresetSubscriptionsV2.Query({
     group: i
   })) : gB({
     libraryPresetSubscriptionsV2: []
@@ -27,7 +27,7 @@ let _ = atom(e => {
 });
 let $$A0 = atom(e => {
   let t = e(DQ);
-  let i = t ? e(AXx.Query({
+  let i = t ? e(LibraryOrgSubscriptions.Query({
     orgId: t
   })) : gB({
     orgLibrarySubscriptions: []
@@ -45,7 +45,7 @@ let $$y4 = createRemovableAtomFamily(e => atom(t => {
   let i = t(h0);
   let n = !!e && !!i;
   let r = t(JB);
-  let a = n ? t(X9s.Query({
+  let a = n ? t(WorkspaceSubscribedLibrariesForTeam.Query({
     teamId: e
   })) : gB({
     team: null
@@ -62,13 +62,13 @@ let $$b1 = createRemovableAtomFamily(e => atom(t => {
   let i;
   if (getFeatureFlags().dse_library_subscriptions_for_team) {
     if (!e) return gB({});
-    let n = t(sBU.Query({
+    let n = t(LibrarySubscriptionsForTeam.Query({
       teamId: e
     }));
     if ("loaded" !== n.status) return n;
     i = n.data.team?.libraryTeamSubscriptionOverrides;
   } else {
-    let n = t(f19.Query({}));
+    let n = t(LibraryTeamSubscriptions.Query({}));
     if ("loaded" !== n.status) return n;
     i = n.data.allTeamRoles?.find(t => t?.team?.id === e)?.team?.libraryTeamSubscriptionOverrides;
   }
@@ -79,7 +79,7 @@ let $$b1 = createRemovableAtomFamily(e => atom(t => {
   return gB(n);
 }));
 let v = atom(e => {
-  let t = e(f19.Query({}));
+  let t = e(LibraryTeamSubscriptions.Query({}));
   let i = e(JB);
   let n = e(DQ);
   let r = e(Me);
@@ -113,7 +113,7 @@ let $$I3 = atom(e => {
   return gB(n);
 });
 let $$E6 = atom(e => {
-  let t = e(Lew.Query({}));
+  let t = e(LibraryUserSubscriptions.Query({}));
   let i = e(JB);
   if ("loaded" !== t.status) return t;
   let n = t.data.currentUser.libraryUserSubscriptions;

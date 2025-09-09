@@ -1,11 +1,11 @@
 import { ss } from "../figma_app/479760";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { RI, We } from "../figma_app/770088";
 import { mz } from "../figma_app/12220";
 import { _X } from "../figma_app/62612";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { _ as _$$_ } from "../figma_app/433187";
 import { NS, Cs } from "../905/603628";
 import { j } from "../905/214564";
@@ -82,7 +82,7 @@ export function $$E1(e) {
   useEffect(() => {
     S && y();
   }, [S, y]);
-  let v = iZ();
+  let v = selectCurrentUser();
   let A = !!(r && r.visible || o);
   let {
     onClear

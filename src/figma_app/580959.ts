@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, PureComponent, createRef, useContext, useMemo, forwardRef, useEffect, Fragment as _$$Fragment, useState, useRef } from "react";
-import { useSelector, useDispatch, connect } from "../vendor/514228";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { debounce } from "../905/915765";
 import { nearlyEqual } from "../figma_app/492908";
 import { Checkbox } from "../905/274480";
@@ -15,18 +15,18 @@ import { O as _$$O } from "../905/487602";
 import { A as _$$A } from "../905/24328";
 import { y as _$$y } from "../905/661502";
 import { PropertyScope, VisibilityCondition, VariableResolvedDataType, NodePropertyCategory, DrawingElementType, StyleVariableOperation, CopyPasteType, Fullscreen, Command, SelectionPaintHelpers, AppStateTsApi } from "../figma_app/763686";
-import { n3, IA } from "../905/859698";
+import { n3, VariableStyleId } from "../905/859698";
 import { permissionScopeHandler } from "../905/189185";
 import { GP } from "../figma_app/15927";
 import { dI } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import C from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { M as _$$M } from "../figma_app/648761";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt, rf } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { td as _$$td } from "../figma_app/930338";
 import { k as _$$k2 } from "../905/582200";
 import { Y as _$$Y } from "../905/506207";
@@ -42,7 +42,7 @@ import { D as _$$D, w as _$$w } from "../905/295712";
 import { oI, Xp } from "../905/854717";
 import { sw } from "../figma_app/914957";
 import { yJ, F7 } from "../figma_app/8833";
-import { A as _$$A2 } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { C1, rC } from "../905/713722";
 import { ZB } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
@@ -64,7 +64,7 @@ import { Lh, D8 } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
 import { b as _$$b2 } from "../figma_app/882253";
 import { AT } from "../figma_app/633080";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { K as _$$K2 } from "../905/733706";
 import { Ib } from "../905/129884";
 import { cn } from "../905/959568";
@@ -183,7 +183,7 @@ let $$ti6 = memo(function (e) {
                 onChange: tn,
                 onPickerShown: h,
                 pickerInStyleCreationShown: e.pickerInStyleCreationShown,
-                recordingKey: Pt(e, "paintList"),
+                recordingKey: generateRecordingKey(e, "paintList"),
                 selectedPropertyType: NodePropertyCategory.FILL,
                 shouldUseSelectedStyleProperties: e.shouldUseSelectedStyleProperties,
                 variableScopes: e.variableScopes,
@@ -201,7 +201,7 @@ let $$ti6 = memo(function (e) {
                   mixed: e.exportBackgroundDisabled === MIXED_MARKER,
                   checked: !1 === e.exportBackgroundDisabled,
                   onChange: tr,
-                  recordingKey: Pt(e, "exportDisableCheckbox"),
+                  recordingKey: generateRecordingKey(e, "exportDisableCheckbox"),
                   label: jsx(Label, {
                     htmlAttributes: {
                       "data-tooltip": getI18nString("fullscreen.properties_panel.fill.include_the_canvas_or_group_background_in_exports"),
@@ -287,7 +287,7 @@ class to extends PureComponent {
       });
       a2("strokePaints");
     };
-    this.onNonPaintsChange = (e, t = zk.YES) => w8(this.props.strokePaints, e, t);
+    this.onNonPaintsChange = (e, t = yesNoTrackingEnum.YES) => w8(this.props.strokePaints, e, t);
     this.onApplyStyle = (e, {
       fromSearch: t
     } = {}) => {
@@ -297,7 +297,7 @@ class to extends PureComponent {
         fromSearch: t
       }));
     };
-    this.bordersAlignmentOnChange = (e, t = zk.YES) => {
+    this.bordersAlignmentOnChange = (e, t = yesNoTrackingEnum.YES) => {
       if (this.state.individualBorderOption !== om.ALL) {
         let {
           strokeAlign
@@ -380,7 +380,7 @@ class to extends PureComponent {
           onChange: this.onPaintsChange,
           onPickerShown: ts,
           pickerInStyleCreationShown: this.props.pickerInStyleCreationShown,
-          recordingKey: Pt(this.props, "paintList"),
+          recordingKey: generateRecordingKey(this.props, "paintList"),
           selectedPropertyType: NodePropertyCategory.STROKE,
           variableScopes: $$tt9,
           ...Rz(this.props),
@@ -562,7 +562,7 @@ let $$tc5 = memo(function ({
         paint: r,
         paintId: OS(m),
         pickerShown: e,
-        recordingKey: Pt(C, "paintPicker"),
+        recordingKey: generateRecordingKey(C, "paintPicker"),
         selectedStyle: H,
         supportedViews: ["library"],
         variableScopes: Q
@@ -665,7 +665,7 @@ export function $$tu7(e) {
       onRemovePaint: () => v(r),
       paint: t,
       pickerInStyleCreationShown,
-      recordingKey: Pt(recordingKey, r),
+      recordingKey: generateRecordingKey(recordingKey, r),
       sceneGraphSelection: e.sceneGraphSelection,
       selected: stylePickerShown.isShown ? pickerShown?.id === b : n,
       selectedPropertyType,
@@ -726,7 +726,7 @@ export function $$tu7(e) {
             addPaint: () => u({}, {
               preventAutoToggle: !0
             }),
-            recordingKey: Pt(e, "strokeEntrypointMenu")
+            recordingKey: generateRecordingKey(e, "strokeEntrypointMenu")
           });
       }
       return null;
@@ -831,7 +831,7 @@ export class $$tp1 extends PureComponent {
     this.onDetachVariableClick = () => {
       _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
         let e = _$$$(this.props.paint);
-        this.onPaintPickerChange(e, zk.YES);
+        this.onPaintPickerChange(e, yesNoTrackingEnum.YES);
       });
     };
   }
@@ -869,7 +869,7 @@ export class $$tp1 extends PureComponent {
       button: jsx(_$$B2, {
         visible: this.props.paint.visible,
         onChange: this.onVisibleChange,
-        recordingKey: Pt(this.props, "visibleToggle"),
+        recordingKey: generateRecordingKey(this.props, "visibleToggle"),
         selected: t
       }),
       opensPicker: !1,
@@ -883,7 +883,7 @@ export class $$tp1 extends PureComponent {
           children: jsx(_$$K, {
             "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
             onClick: this.onDetachVariableClick,
-            recordingKey: Pt(this.props, "paint", "detachVariableButton"),
+            recordingKey: generateRecordingKey(this.props, "paint", "detachVariableButton"),
             htmlAttributes: {
               onMouseDown: dG,
               "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
@@ -901,7 +901,7 @@ export class $$tp1 extends PureComponent {
       button: jsx(_$$T, {
         selected: t,
         children: jsx(_$$K, {
-          recordingKey: Pt(this.props, "removeButton"),
+          recordingKey: generateRecordingKey(this.props, "removeButton"),
           onClick: r ? () => {
             fullscreenValue.triggerActionEnumInUserEditScope(Command.UNBIND_SELECTION, {
               fieldSchemaId: r,
@@ -935,7 +935,7 @@ export class $$tp1 extends PureComponent {
         onTargetDragEnter: this.onDragEnter,
         onTargetDragLeave: this.onDragLeave,
         onTargetDrop: this.onDrop,
-        recordingKey: Pt(this.props, "dropTarget"),
+        recordingKey: generateRecordingKey(this.props, "dropTarget"),
         children: jsx("div", {
           children: jsx($$t_2, {
             ref: this.row,
@@ -977,7 +977,7 @@ export class $$tp1 extends PureComponent {
         paint: this.props.paint,
         paintId: this.props.id,
         pickerShown: this.pickerShown(),
-        recordingKey: Pt(this.props, "paintPicker"),
+        recordingKey: generateRecordingKey(this.props, "paintPicker"),
         selectedStyle: null,
         updateStillImageAndSelectionPropertiesForGIF: this.updateStillImageAndSelectionPropertiesForGIF,
         variableScopes: this.props.variableScopes
@@ -1005,7 +1005,7 @@ export let $$t_2 = forwardRef((e, t) => {
     _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
       let t = _$$$(e.paint);
       t.visible = !0;
-      e.onChange(t, zk.YES);
+      e.onChange(t, yesNoTrackingEnum.YES);
     });
   };
   useEffect(() => () => {
@@ -1228,7 +1228,7 @@ export function $$th8(e) {
       children: jsx(_$$D2, {
         ...d,
         onMouseDown: t,
-        recordingKey: Pt(e, "chit"),
+        recordingKey: generateRecordingKey(e, "chit"),
         className: x7,
         isInFPLGrid: useGrid
       })
@@ -1247,7 +1247,7 @@ export function $$th8(e) {
         nearlyEqual(t.a, e.paint.opacity ?? 1) || (n.opacity = t.a, n.visible = !0);
         r(n);
       },
-      recordingKey: Pt(e, "value"),
+      recordingKey: generateRecordingKey(e, "value"),
       noBorderOnFocus: !0
     }), (!e.allowAutoAndMixed || !isAutoMarker(e.paint.color) && !isInvalidValue(e.paint.color)) && jsx(Pd, {
       className: n1,
@@ -1267,7 +1267,7 @@ export function $$th8(e) {
           visible: !0
         }, r);
       },
-      recordingKey: Pt(e, "opacity"),
+      recordingKey: generateRecordingKey(e, "opacity"),
       value: e.paint.opacity
     })]
   });
@@ -1290,7 +1290,7 @@ export function $$tg3(e) {
     ...e.paint.color,
     a: e.paint.opacity ?? 1
   }, [e.allowAutoAndMixed, e.paint]);
-  let s = rf(e.recordingKey, "mousedown", t => {
+  let s = useHandleMouseEvent(e.recordingKey, "mousedown", t => {
     e.onMouseDown?.(t);
     e.onTypeMouseDown?.(t);
   });
@@ -1309,7 +1309,7 @@ export function $$tg3(e) {
     onKeyDown: o,
     onMouseDown: e.onMouseDown,
     property: n,
-    recordingKey: Pt(e, "colorInput"),
+    recordingKey: generateRecordingKey(e, "colorInput"),
     squareRightBorder: !1
   }) : jsx(_$$E, {
     className: e.visible ? cD : GI,
@@ -1395,7 +1395,7 @@ function tf({
   let X = useCallback(e => {
     e.stopPropagation();
     permissionScopeHandler.user("detach-style", () => SelectionPaintHelpers.detachStyle(n));
-    Fullscreen.selectStyle(n3.INVALID, IA.INVALID);
+    Fullscreen.selectStyle(n3.INVALID, VariableStyleId.INVALID);
   }, [n]);
   let q = useCallback(() => {
     SelectionPaintHelpers.selectOnlySameStyle(n);
@@ -1421,7 +1421,7 @@ function tf({
     children: jsx(_$$K, {
       actionOnPointerDown: !0,
       "aria-label": `Select ${_$$td(r, "item")} using this style`,
-      recordingKey: Pt(d, "selectSameStyleButton"),
+      recordingKey: generateRecordingKey(d, "selectSameStyleButton"),
       onClick: q,
       htmlAttributes: {
         "data-tooltip": `Select ${_$$td(r, "item")} using this style`,
@@ -1432,7 +1432,7 @@ function tf({
   });
   let et = jsx(_$$K, {
     actionOnPointerDown: !0,
-    recordingKey: Pt(d, "detachButton"),
+    recordingKey: generateRecordingKey(d, "detachButton"),
     "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_style"),
     onClick: X,
     htmlAttributes: {
@@ -1449,7 +1449,7 @@ function tf({
       }),
       ref: C,
       input: jsx(_$$s2, {
-        recordingKey: Pt(d, "row"),
+        recordingKey: generateRecordingKey(d, "row"),
         onClick: z,
         styleIcon: Q,
         styleName: M,
@@ -1486,7 +1486,7 @@ function tf({
       },
       paintId: A,
       pickerShown: x,
-      recordingKey: Pt(d, "paintPicker"),
+      recordingKey: generateRecordingKey(d, "paintPicker"),
       selectedStyle: F?.data ?? (k && k.kind !== AT.SUBSCRIBED_WITHOUT_LIBRARY ? k.value : null),
       variableScopes: l
     }) : null]
@@ -1607,7 +1607,7 @@ $$t_2.displayName = "Paint";
         });
       });
       this.onChangeForPaint = (e, t) => {
-        let r = t == zk.YES;
+        let r = t == yesNoTrackingEnum.YES;
         let n = U2(e) || e.colorVar ? SelectionPaintHelpers.resolvePaintWithVariable(GP(this.props.paint), GP(e)) : "";
         let i = e;
         if (n) {
@@ -1632,7 +1632,7 @@ $$t_2.displayName = "Paint";
       this.onDetachVariableClick = () => {
         _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
           let e = _$$$(this.props.paint);
-          this.onChangeForPaint(e, zk.YES);
+          this.onChangeForPaint(e, yesNoTrackingEnum.YES);
         });
       };
       this.currentPaintValue = () => this.props.paintValueFromEyeDropper ? this.props.paintValueFromEyeDropper : this.state.paintValueInPicker ? this.state.paintValueInPicker : this.props.paint;
@@ -1703,7 +1703,7 @@ $$t_2.displayName = "Paint";
           onScrubEnd: this.props.onScrubEnd,
           paint: this.currentPaintValue(),
           preventDragging: !0,
-          recordingKey: Pt(this.props, "paint"),
+          recordingKey: generateRecordingKey(this.props, "paint"),
           secondIconButton: r.length > 1 ? r[1] : null,
           selected: this.pickerShown() || this.pickerShownIsStylePicker(),
           shownPickerMatchesThisPaint: this.pickerShown(),
@@ -1735,7 +1735,7 @@ $$t_2.displayName = "Paint";
           paintId: this.props.id,
           paintNodeIds: this.props.uniqueNodeIds,
           pickerShown: this.props.pickerShown,
-          recordingKey: Pt(this.props, "paintPicker"),
+          recordingKey: generateRecordingKey(this.props, "paintPicker"),
           selectedStyle: null,
           variableScopes: this.props.variableScopes
         })), this.state.hasEverHovered && jsx(MM, {
@@ -1746,7 +1746,7 @@ $$t_2.displayName = "Paint";
           picker: e,
           onCreateStyle: this.onCreateStyle,
           onApplyStyle: this.onApplyStyle,
-          recordingKey: Pt(this.props, "stylePicker"),
+          recordingKey: generateRecordingKey(this.props, "stylePicker"),
           styleType: "FILL",
           onToggleListLayout: this.toggleListLayout,
           stylePickerListLayout: this.props.stylePickerListLayout,
@@ -1763,7 +1763,7 @@ $$t_2.displayName = "Paint";
           children: jsx(_$$K, {
             "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
             onClick: this.onDetachVariableClick,
-            recordingKey: Pt(this.props, "paint", "detachVariableButton"),
+            recordingKey: generateRecordingKey(this.props, "paint", "detachVariableButton"),
             htmlAttributes: {
               onMouseDown: dG,
               "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
@@ -1780,9 +1780,9 @@ $$t_2.displayName = "Paint";
           button: jsx("span", {
             className: zm,
             children: jsx(_$$K, {
-              "aria-label": t ? getI18nString("slides.properties_panel.color_picker.theme_colors") : _$$A2("style"),
+              "aria-label": t ? getI18nString("slides.properties_panel.color_picker.theme_colors") : formatI18nMessage("style"),
               onClick: this.onStyleClick,
-              recordingKey: Pt(this.props, "paint", "styleButton"),
+              recordingKey: generateRecordingKey(this.props, "paint", "styleButton"),
               htmlAttributes: {
                 "data-tooltip": t ? getI18nString("slides.properties_panel.color_picker.theme_colors") : "style",
                 "data-tooltip-type": t ? Ib.TEXT : Ib.LOOKUP
@@ -1802,7 +1802,7 @@ $$t_2.displayName = "Paint";
             "aria-label": getI18nString("fullscreen.properties_panel.select_item_using_this_color", {
               numItems: this.props.uniqueNodesCount
             }),
-            recordingKey: Pt(this.props, "paint", "selectSamePaintButton"),
+            recordingKey: generateRecordingKey(this.props, "paint", "selectSamePaintButton"),
             htmlAttributes: {
               "data-tooltip": getI18nString("fullscreen.properties_panel.select_item_using_this_color", {
                 numItems: this.props.uniqueNodesCount
@@ -1877,7 +1877,7 @@ export function $$tb4(e) {
   let [R, L] = useState(!1);
   let [D, M] = useState(!1);
   let F = useRef(u.forceUpdateForUndo);
-  let B = useMemo(() => xx((e, t) => {
+  let B = useMemo(() => memoizeByArgs((e, t) => {
     if (Object.keys(e).length !== Object.keys(t).length) return !1;
     for (let r in e) if (e[r] !== t[r]) return !1;
     return !0;
@@ -1930,7 +1930,7 @@ export function $$tb4(e) {
           SelectionPaintHelpers.ignoreLimitWhenCollectingPaints();
         },
         "aria-label": getI18nString("fullscreen.properties_panel.fill.show_selection_colors"),
-        recordingKey: Pt(e, "limitExceeded"),
+        recordingKey: generateRecordingKey(e, "limitExceeded"),
         variant: "secondary",
         children: renderI18nText("fullscreen.properties_panel.fill.show_selection_colors")
       })
@@ -1980,7 +1980,7 @@ export function $$tb4(e) {
     }) : void 0;
     er = jsx(Tu, {
       isPanelBodyCollapsedAtom: l,
-      recordingKey: Pt(e, "collapseExpandToggleArea"),
+      recordingKey: generateRecordingKey(e, "collapseExpandToggleArea"),
       children: jsx(mS, {
         titleTx: renderI18nText("fullscreen.properties_panel.fill.selection_colors"),
         isPanelBodyCollapsedAtom: l,
@@ -2001,7 +2001,7 @@ export function $$tb4(e) {
         children: jsx("span", {
           className: g2,
           children: jsx(IK, {
-            recordingKey: Pt(e, "paintOverflow"),
+            recordingKey: generateRecordingKey(e, "paintOverflow"),
             actionOnPointerDown: !0,
             onClick: en ? t => {
               t.stopPropagation();
@@ -2048,7 +2048,7 @@ export function $$tb4(e) {
       count: t.count,
       id: `${t.styleKey}/${t.version}`,
       openPickerOnInitialRender: r === p,
-      recordingKey: Pt(e, "style", r),
+      recordingKey: generateRecordingKey(e, "style", r),
       rowRef: n,
       styleGUIDs: t.styleGUIDs,
       styleKey: t.styleKey,
@@ -2088,7 +2088,7 @@ export function $$tb4(e) {
         openPickerOnInitialRender: a === p,
         paint: t.paint,
         pickerShown: e.pickerShown,
-        recordingKey: Pt(e, "paint", a),
+        recordingKey: generateRecordingKey(e, "paint", a),
         uniqueNodeIds: t.uniqueNodeIds ?? [],
         uniqueNodesCount: t.uniqueNodesCount ?? 0,
         variableScopes: t.variableScopes

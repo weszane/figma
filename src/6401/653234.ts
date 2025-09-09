@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useContext, useCallback, useMemo, useRef, useState, useEffect, createRef } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Fk, x3 } from "../figma_app/167249";
 import { E as _$$E } from "../905/632989";
 import { l as _$$l } from "../905/103989";
@@ -15,13 +15,13 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Qx, Uu } from "../figma_app/8833";
 import { p as _$$p } from "../905/167135";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { c as _$$c } from "../905/784033";
 import { aF } from "../441/443466";
 import { A as _$$A } from "../b2835def/807151";
 import { gD, wL, lu, DR, E$ } from "../441/430710";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { isMobilePlatformNotFigmaMobile } from "../figma_app/778880";
 import { hk } from "../figma_app/632319";
 import { Y as _$$Y } from "../905/246212";
@@ -30,7 +30,7 @@ import { A as _$$A2 } from "../b2835def/363895";
 import { WW } from "../905/521428";
 import { _ as _$$_ } from "../905/410717";
 import { j as _$$j } from "../905/519202";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { g as _$$g } from "../905/125190";
 import { e as _$$e } from "../905/149844";
 import { s as _$$s2 } from "../905/573154";
@@ -172,7 +172,7 @@ function m(e) {
   };
 }
 function f(e, t) {
-  return (t ? Pt("flapp", e, t) : Pt("flapp", e)) || `flapp.${e}`;
+  return (t ? generateRecordingKey("flapp", e, t) : generateRecordingKey("flapp", e)) || `flapp.${e}`;
 }
 var b = j;
 let E = "alignment_scale--prompt--D-cNA";
@@ -216,7 +216,7 @@ function B({
   let {
     participantData
   } = d();
-  let c = iZ();
+  let c = selectCurrentUser();
   let u = t && c ? (e, l) => {
     t({
       name: c.name,
@@ -235,7 +235,7 @@ function B({
         let s = JSON.parse(a);
         s.userId === l && (e = s);
         t.push(s);
-      } catch (e) { }
+      } catch (e) {}
       return t;
     }, []).sort((e, t) => e.timestamp - t.timestamp), e] : [[], void 0];
   }, [participantData, l]);
@@ -473,7 +473,7 @@ function H({
       isViewer: !0,
       nodeId: t,
       onClick: () => {
-        e.url && l && Ay.redirect(e.url, isMobilePlatformNotFigmaMobile ? void 0 : "_blank");
+        e.url && l && customHistory.redirect(e.url, isMobilePlatformNotFigmaMobile ? void 0 : "_blank");
       }
     })
   });
@@ -530,7 +530,7 @@ function ea({
   let {
     participantData
   } = d();
-  let i = iZ();
+  let i = selectCurrentUser();
   let r = function (e, t) {
     if (!e || 0 === Object.keys(e).length) return {
       stamps: [],
@@ -543,7 +543,7 @@ function ea({
           let s = JSON.parse(a);
           s.userId === t && (l = !0);
           e.push(s);
-        } catch (e) { }
+        } catch (e) {}
         return e;
       }, []).sort((e, l) => e.userId === t ? -1 : l.userId === t ? 1 : e.timestamp - l.timestamp),
       currentUserStamped: l
@@ -767,7 +767,7 @@ function ek({
     setParticipantData
   } = d();
   let c = useDispatch();
-  let u = iZ();
+  let u = selectCurrentUser();
   let m = scopeAwareFunction.system("slides-update-poll-votes", e => {
     if (!u) {
       c(_$$s2.error(getI18nString("slides.flapp.poll.vote_failure")));
@@ -909,7 +909,7 @@ function eU({
     children: jsx(_$$E, {
       className: eN,
       onClick: t,
-      recordingKey: Pt(e, "addOption"),
+      recordingKey: generateRecordingKey(e, "addOption"),
       "aria-label": getI18nString("slides.flapp.poll.add_option"),
       children: jsx(_$$e, {})
     })
@@ -973,7 +973,7 @@ function eL({
   let {
     participantData
   } = d();
-  let u = iZ();
+  let u = selectCurrentUser();
   let m = eE(configData);
   let h = "true" === configData.resultsShown;
   let [g, x] = useState(!1);
@@ -1027,7 +1027,7 @@ function eL({
         s.userId === e && (n = s.selectedOption);
         a = a && a.timestamp > s.timestamp || !a ? s : a;
         t.push(s);
-      } catch (e) { }
+      } catch (e) {}
       return t;
     }, []).sort((e, t) => e.timestamp - t.timestamp);
     let r = 0;
@@ -1242,7 +1242,7 @@ let eY = {
               a.insertImageInFillPaint(l);
             });
           });
-        } catch (e) { }
+        } catch (e) {}
       });
     }, [configData.url, configData.srcUrl, nodeId, setConfigData, isReadOnly]), configData.url && !configData.srcUrl) ? jsx("div", {
       className: _$$s.absolute.w48.h48.$,

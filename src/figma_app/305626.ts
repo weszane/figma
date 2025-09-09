@@ -5,7 +5,7 @@ import { StateHierarchy, StateGroupErrorType } from "../figma_app/763686";
 import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText } from "../905/303541";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { ow, _f, Hf, i$ } from "../figma_app/150804";
 import { pg, A } from "../figma_app/264776";
 import { pV, jO, lG, Z7, t as _$$t, Qb, Vf, Ii } from "../figma_app/689119";
@@ -28,8 +28,8 @@ export function $$m1({
     if (stateGroupSelectionMode === StateHierarchy.STATE_GROUP) {
       let t = () => {
         let t = pg(allStates, stateGroupError).map(e => e.symbol.node_id);
-        wr();
-        Dh(t);
+        clearSelection();
+        addToSelection(t);
       };
       switch (stateGroupError) {
         case StateGroupErrorType.PARSE_ERROR:

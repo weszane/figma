@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -14,7 +14,7 @@ import { kt } from "../figma_app/858013";
 import { e as _$$e } from "../905/457828";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { l as _$$l } from "../905/767868";
 import { C as _$$C } from "../905/226458";
 import { sf } from "../905/929976";
@@ -261,7 +261,7 @@ export function $$W1(e, t) {
         }));
       }
     });
-    r(_$$F.enqueue({
+    r(VisualBellActions.enqueue({
       type: t,
       message: e,
       button: i

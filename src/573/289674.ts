@@ -11,8 +11,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { g as _$$g } from "../905/871474";
-import { k as _$$k2 } from "../905/651849";
+import { generateUUIDv4 } from "../905/871474";
+import { logger } from "../905/651849";
 import { hC } from "../figma_app/901889";
 import { F as _$$F } from "../905/422355";
 import { lQ } from "../905/934246";
@@ -24,7 +24,7 @@ import { Ay } from "../figma_app/432652";
 import { sF } from "../figma_app/193952";
 import { r as _$$r } from "../905/955316";
 import { Td } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { No } from "../figma_app/465071";
 import { JT } from "../figma_app/632248";
 import { nR } from "../9410/40486";
@@ -560,7 +560,7 @@ export function $$J1(e) {
 export function $$X0() {
   let e = getFeatureFlags().ai_assistant_server_side_chat ?? !1;
   let t = Xr(mC("0:1"));
-  let s = iZ();
+  let s = selectCurrentUser();
   let n = Td();
   let o = lg();
   let l = hC();
@@ -588,7 +588,7 @@ export function $$X0() {
     appendPersistedMessages
   } = function (e) {
     let [t, s] = useState([]);
-    let n = iZ();
+    let n = selectCurrentUser();
     let r = _$$r(() => function (e, t) {
       if (null == Fullscreen) throw Error("Fullscreen not loaded");
       let s = e.getInternalCanvas();
@@ -652,7 +652,7 @@ export function $$X0() {
     es(null);
     let a = persistedMessages.length;
     let d = new AbortController();
-    let c = _$$g();
+    let c = generateUUIDv4();
     atomStoreManager.set(_$$J, e.selectedNodeIds ?? r);
     let u = {
       role: "user",
@@ -728,7 +728,7 @@ export function $$X0() {
           }), appendPersistedMessages(e), ee([]), es(null));
         },
         logForServerSideChat: (e, ...t) => {
-          getFeatureFlags().ai_assistant_server_side_chat && _$$k2.log(`[server-side-chat] ${e}`, ...t);
+          getFeatureFlags().ai_assistant_server_side_chat && logger.log(`[server-side-chat] ${e}`, ...t);
         }
       }
     });

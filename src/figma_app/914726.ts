@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import s from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { m0 } from "../figma_app/976749";

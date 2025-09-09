@@ -8,7 +8,7 @@ import { createOptimistCommitAction, createOptimistRevertAction } from "../905/6
 import { NC } from "../905/17179";
 import { trackEventAnalytics } from "../905/449184";
 import { dR } from "../905/508367";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { x as _$$x } from "../figma_app/256637";
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
@@ -21,7 +21,7 @@ import { Ts } from "../905/194276";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J as _$$J } from "../905/231762";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { wr } from "../figma_app/387599";
 import { Sb } from "../905/359847";
 import { m as _$$m } from "../905/909123";
@@ -122,10 +122,10 @@ let $$eb16 = createOptimistThunk((e, t, {
       [pt.KEY]: pt.VALUE,
       fuid: t.workspace.userId
     });
-    Ay.redirect(a, isMobileUA ? void 0 : "_blank");
+    customHistory.redirect(a, isMobileUA ? void 0 : "_blank");
     e.dispatch(oB());
   }).catch(t => {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: getI18nString("community.actions.failed_to_duplicate_file_error", {
         error: _$$J(t, getI18nString("community.actions.try_again_or_contact_support_figma_com"))
@@ -195,7 +195,7 @@ let $$eT18 = createOptimistThunk((e, t) => {
       allowDefaulting: !1
     });
     let s = _$$to(i, a);
-    Ay.redirect(s, t.openInNewTab && !isMobileUA ? "_blank" : void 0);
+    customHistory.redirect(s, t.openInNewTab && !isMobileUA ? "_blank" : void 0);
   }).catch(n => {
     let i = {
       error: !0,
@@ -210,7 +210,7 @@ let $$eT18 = createOptimistThunk((e, t) => {
         canRetry: !1
       }))
     });
-    e.dispatch(_$$F.enqueue(i));
+    e.dispatch(VisualBellActions.enqueue(i));
   });
 });
 let $$eI20 = createOptimistThunk(async (e, {
@@ -386,7 +386,7 @@ let $$ew13 = createOptimistThunk((e, t) => {
     n && atomStoreManager.set(UM, {
       state: F4.PUBLISH_HUB_FILE_ERRORED
     });
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: r.message,
       type: "hub-file-created-error",
       error: !0
@@ -507,7 +507,7 @@ let $$eR4 = createOptimistThunk(async (e, {
     i = await R1(thumbnailBuffer, carouselMedia || [], void 0, hubFileId);
   } catch (t) {
     reportError(_$$e.COMMUNITY, t);
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.error_uploading_images_publish_update_from_editor"),
       type: "hub-file-updated-error",
       error: !0
@@ -587,7 +587,7 @@ let $$eP10 = createOptimistThunk((e, {
     }));
     return r;
   }).then(eL).then(() => {
-    r && Ay.redirect(r);
+    r && customHistory.redirect(r);
     i?.();
   }).catch(e => {
     reportError(_$$e.COMMUNITY, e);
@@ -610,7 +610,7 @@ let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
     s = dR(s, {
       [pt.KEY]: pt.VALUE
     });
-    Ay.redirect(s, isMobileUA ? void 0 : "_blank");
+    customHistory.redirect(s, isMobileUA ? void 0 : "_blank");
     trackEventAnalytics(M5.HUB_FILE_DUPLICATED, {
       hubFileId: t,
       figFileKey: a.key,
@@ -619,7 +619,7 @@ let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
     });
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(n));
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_duplicate", {
         error: _$$J(t, t.data.message)
       }),
@@ -650,7 +650,7 @@ let $$eM24 = createOptimistThunk((e, {
   });
   _$$N2(n, e, r);
   n.catch(t => {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_like_this_file_error", {
         error: _$$J(t, t.data?.message)
       }),
@@ -698,7 +698,7 @@ let $$ej6 = createOptimistThunk((e, {
   });
   _$$N2(i, e, n);
   i.catch(t => {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_unlike_this_file_error", {
         error: _$$J(t, t.data.message)
       }),

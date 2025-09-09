@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { buildUploadUrl } from "../figma_app/169182";
 import { F } from "../figma_app/954027";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { lg } from "../figma_app/976749";
 import { p as _$$p } from "../905/42189";
@@ -54,7 +54,7 @@ export function $$g2(e) {
     insertAction: n,
     dragPreviewPointerPosition: N.CENTERED,
     getDragPreviewSrc: e.icon ? () => "data:image/svg+xml;utf8," + F(e.icon) : () => $$m0(e.resource),
-    recordingKey: Pt(e.triggeredFrom, "whiteboardResource", r)
+    recordingKey: generateRecordingKey(e.triggeredFrom, "whiteboardResource", r)
   });
 }
 export const AE = $$m0;

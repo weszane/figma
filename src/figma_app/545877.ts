@@ -1,8 +1,8 @@
 import { createRemovableAtomFamily } from "../figma_app/27355";
-import { Tej } from "../figma_app/43951";
+import { UserForRcs } from "../figma_app/43951";
 import { V5 } from "../figma_app/625596";
 import { Z1 } from "../905/401885";
-let $$o4 = Z1(Tej.Query({}), e => {
+let $$o4 = Z1(UserForRcs.Query({}), e => {
   let t = e.currentUser.userFlags;
   let r = {};
   t.forEach(e => r[e.name] = e);

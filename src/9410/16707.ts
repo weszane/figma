@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, createElement, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
 import { Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";

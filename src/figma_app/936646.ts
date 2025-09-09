@@ -1,11 +1,11 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createContext, useContext, useEffect, useState, useCallback, useMemo, useLayoutEffect, memo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { assertNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { cm } from "../figma_app/815945";
+import { memoizeWeak } from "../figma_app/815945";
 import u from "../vendor/983401";
 import _ from "../vendor/239910";
 import m from "../vendor/626715";
@@ -16,7 +16,7 @@ import { Nf } from "../figma_app/864378";
 import { n1 } from "../figma_app/657017";
 import { tS } from "../figma_app/516028";
 import { eM } from "../figma_app/646357";
-import { Acj, tIY, s5n } from "../figma_app/43951";
+import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../figma_app/43951";
 import { KC, Qp, SS as _$$SS } from "../figma_app/349248";
 import { jz } from "../figma_app/825489";
 import { Ns } from "../figma_app/409131";
@@ -228,7 +228,7 @@ let j = memo(function ({
     args,
     options
   } = n ? {
-    view: Acj,
+    view: CommunityLibraryStyleData,
     args: {
       hubFileId: e
     },
@@ -236,7 +236,7 @@ let j = memo(function ({
       enabled: a
     }
   } : {
-    view: r ? tIY : s5n,
+    view: r ? LibraryStyleData : LibraryData,
     args: {
       fileKey: e
     },
@@ -248,7 +248,7 @@ let j = memo(function ({
   }, [t, e, d]);
   return null;
 });
-let U = cm(function (e) {
+let U = memoizeWeak(function (e) {
   if ("loaded" !== e.status) return e;
   let t = e.data;
   if ("communityLibraryByHubFileId" in t) {

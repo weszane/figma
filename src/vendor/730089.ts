@@ -36,7 +36,7 @@ function f(e) {
       var u = e[o];
       var l = o + 1;
       var d = e[l];
-      if (0 > r(u, i)) l < f && 0 > r(d, u) ? (e[t] = d, e[l] = i, t = l) : (e[t] = u, e[o] = i, t = o);else if (l < f && 0 > r(d, i)) {
+      if (0 > r(u, i)) l < f && 0 > r(d, u) ? (e[t] = d, e[l] = i, t = l) : (e[t] = u, e[o] = i, t = o); else if (l < f && 0 > r(d, i)) {
         e[t] = d;
         e[l] = i;
         t = l;
@@ -57,9 +57,9 @@ if ("object" == typeof performance && "function" == typeof performance.now) {
   };
 } else {
   var u = Date;
-  var l = u.now();
+  var l = ExpiringCache.now();
   exports.unstable_now = function () {
-    return u.now() - l;
+    return ExpiringCache.now() - l;
   };
 }
 var d = [];
@@ -75,7 +75,7 @@ var y = "function" == typeof clearTimeout ? clearTimeout : null;
 var v = "undefined" != typeof setImmediate ? setImmediate : null;
 function w(e) {
   for (var n = t(s); null !== n;) {
-    if (null === n.callback) f(s);else if (n.startTime <= e) {
+    if (null === n.callback) f(s); else if (n.startTime <= e) {
       f(s);
       n.sortIndex = n.expirationTime;
       i(d, n);
@@ -112,7 +112,7 @@ function S(e, i) {
       } else f(d);
       h = t(d);
     }
-    if (null !== h) var u = !0;else {
+    if (null !== h) var u = !0; else {
       var l = t(s);
       null !== l && R(k, l.startTime - i);
       u = !1;
@@ -147,7 +147,7 @@ function N() {
 }
 if ("function" == typeof v) a = function () {
   v(N);
-};else if ("undefined" != typeof MessageChannel) {
+}; else if ("undefined" != typeof MessageChannel) {
   var O = new MessageChannel();
   var A = O.port2;
   O.port1.onmessage = N;
@@ -205,8 +205,8 @@ exports.unstable_next = function (e) {
     p = i;
   }
 };
-exports.unstable_pauseExecution = function () {};
-exports.unstable_requestPaint = function () {};
+exports.unstable_pauseExecution = function () { };
+exports.unstable_requestPaint = function () { };
 exports.unstable_runWithPriority = function (e, n) {
   switch (e) {
     case 1:

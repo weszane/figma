@@ -5,7 +5,7 @@ import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { v as _$$v } from "../905/556792";
 import { createOptimistThunk } from "../905/350402";
 import { Cy } from "../905/844322";
@@ -15,7 +15,7 @@ import { F as _$$F2 } from "../905/224";
 import { mE } from "../905/561087";
 import { ye, jd, VA } from "../figma_app/528509";
 import { FPermissionDenialReason, FFileType } from "../figma_app/191312";
-import { sdp, vnC, n8_ } from "../figma_app/43951";
+import { RepoCanMove, RepoCanMoveWithReasons, FileCanMoveWithReasons } from "../figma_app/43951";
 import { Y9, fm } from "../figma_app/680166";
 import { Bi, vL } from "../905/652992";
 import { o1 } from "../figma_app/10554";
@@ -179,7 +179,7 @@ let $$z = async (e, t, i, n, r, a) => {
       },
       onError: () => {
         t.dispatch(popModalStack());
-        t.dispatch(_$$F.enqueue({
+        t.dispatch(VisualBellActions.enqueue({
           message: "Encountered an error. Please try again.",
           error: !0
         }));
@@ -245,10 +245,10 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     T || (T = t);
   }
   if (repos && repos.length > 0) {
-    let t = await subscribeMultipleAndAwaitAll(sdp, repos.map(e => ({
+    let t = await subscribeMultipleAndAwaitAll(RepoCanMove, repos.map(e => ({
       id: e.id
     })));
-    let i = await subscribeMultipleAndAwaitAll(vnC, repos.map(e => ({
+    let i = await subscribeMultipleAndAwaitAll(RepoCanMoveWithReasons, repos.map(e => ({
       id: e.id
     })));
     for (let t = 0; t < repos.length; t++) {
@@ -271,7 +271,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     }
   }
   if (files.length > 0) {
-    let t = await subscribeMultipleAndAwaitAll(n8_, files.map(e => ({
+    let t = await subscribeMultipleAndAwaitAll(FileCanMoveWithReasons, files.map(e => ({
       key: e.key
     })));
     for (let n = 0; n < files.length; n++) {
@@ -374,7 +374,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     return;
   }
   if (t.draftsMoveData?.cannotUpgradeDisableAction) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: "Can't upgrade",
       error: !0
     }));
@@ -395,7 +395,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
       },
       onError: () => {
         e.dispatch(popModalStack());
-        e.dispatch(_$$F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           message: "Encountered an error. Please try again.",
           error: !0
         }));
@@ -413,7 +413,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
   }
   if (t.draftsMoveData?.licenseType && t.draftsMoveData?.requiresManualUpgrade) {
     if (t.draftsMoveData?.upgradeRequested) {
-      e.dispatch(_$$F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("upgrades.drafts_move.request_sent_bell")
       }));
       return;

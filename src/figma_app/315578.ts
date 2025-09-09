@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { J } from "../905/125993";
 import { D } from "../905/716990";
 import { Fullscreen } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { tH } from "../905/751457";
 import { getI18nString } from "../905/303541";
@@ -166,7 +166,7 @@ export function $$L1({
           if (_$$T()) n(sf({
             ...o,
             variableIdForDetailsPanel: t
-          }));else {
+          })); else {
             l && n(hideModalHandler());
             let i = cn(e?.current, iB + wR);
             n(showModal({
@@ -252,7 +252,7 @@ export function $$L1({
               styleNodeId: A,
               styleType: style_type ?? n
             }
-          }));else {
+          })); else {
             u && o(hideModalHandler());
             let r = cn(e.current, b6 + wR);
             o(showModal({
@@ -278,7 +278,7 @@ export function $$L1({
     children: jsx(x, {
       onClick: toggleDetailModal,
       toggled: isDetailModalShownForRow,
-      recordingKey: Pt(h, `details_entry.${e}`)
+      recordingKey: generateRecordingKey(h, `details_entry.${e}`)
     })
   });
   if (s && o && (_ || isStyleDetailModalShownForRow || isInteractionPathCheck())) return jsx("div", {
@@ -286,7 +286,7 @@ export function $$L1({
     children: jsx(C, {
       onClick: toggleStyleDetailModal,
       toggled: isStyleDetailModalShownForRow,
-      recordingKey: Pt(h, `styleDetails_entry.${s}`)
+      recordingKey: generateRecordingKey(h, `styleDetails_entry.${s}`)
     })
   });
   let k = !!t && t.ids.length > 0;
@@ -296,7 +296,7 @@ export function $$L1({
       onClick: toggleMatchingVarsModal,
       matchingVars: t,
       toggled: isMatchingVarsModalShownForRow,
-      recordingKey: Pt(h, `suggestions_entry.${t?.rawValue.value.toString()}`)
+      recordingKey: generateRecordingKey(h, `suggestions_entry.${t?.rawValue.value.toString()}`)
     })
   }) : jsx(O, {});
 }

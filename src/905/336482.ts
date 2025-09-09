@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useState, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Jj, bY } from "../figma_app/2023";
@@ -74,7 +74,7 @@ import { $$in, WX } from "../figma_app/350203";
 import { j6, fu } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
 import { sZ } from "../905/845253";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { xw } from "../figma_app/951233";
 import { vt, U as _$$U } from "../figma_app/45218";
 import { o as _$$o3 } from "../figma_app/633080";
@@ -787,7 +787,7 @@ function ej(e) {
     figFile,
     existingHubFile
   } = e;
-  let s = Pc();
+  let s = selectUser();
   let o = useSelector(e => xw(e) ?? void 0, c2);
   let l = sZ();
   let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
@@ -1770,7 +1770,7 @@ function tc(e) {
     figFile,
     existingHubFile
   } = e;
-  let s = Pc();
+  let s = selectUser();
   let o = _$$h4(figFile);
   let l = useSelector(e => xw(e) ?? void 0, c2);
   let d = sZ();

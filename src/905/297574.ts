@@ -1,5 +1,5 @@
 import { useMemo, useContext } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { atomStoreManager } from "../figma_app/27355";
 import { qp } from "../905/977779";
 import { aV } from "../905/405710";

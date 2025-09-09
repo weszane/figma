@@ -9,7 +9,7 @@ import { FFileType } from "../figma_app/191312";
 import { TE } from "../7021/724859";
 import { E as _$$E } from "../9864/653721";
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { bk, T$, Nz, ZE, VQ, $l, YH, VN, Q7, aV, uN, PG } from "../905/98947";
 import { pu } from "../7037/430062";
 import { K2, R6, q2, pV } from "../7021/970540";
@@ -17,7 +17,7 @@ import { languageCodes, defaultLanguage } from "../905/816253";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { getI18nState } from "../figma_app/363242";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Pf } from "../905/590952";
@@ -527,7 +527,7 @@ function R(e) {
   let [n] = useAtomWithSubscription(ZE);
   let a = function (e) {
     let r = R6();
-    let t = iZ();
+    let t = selectCurrentUser();
     let i = useAtomWithSubscription(bk);
     let [s] = useAtomWithSubscription(VQ);
     let l = useAtomWithSubscription($l);
@@ -756,7 +756,7 @@ function et({
   hasFigJamIntent: r
 }) {
   let t = useAtomWithSubscription(Q7);
-  let s = iZ();
+  let s = selectCurrentUser();
   let l = useAtomWithSubscription(aV);
   let n = useAtomWithSubscription(uN);
   let [d] = useAtomWithSubscription(PG);
@@ -815,7 +815,7 @@ function et({
 }
 function ei() {
   let e = useAtomWithSubscription(Q7);
-  let r = iZ();
+  let r = selectCurrentUser();
   let t = e || r?.email?.split("@")[0];
   let s = r ? r.id : "";
   let l = t && t.length < 20 ? getI18nString("new_user_experience.file_username", {

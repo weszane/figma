@@ -1,8 +1,8 @@
 import { um, atomStoreManager, atom } from "../figma_app/27355";
 import { FJ } from "../905/508367";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { Wh } from "../figma_app/615482";
 var d = (e => (e[e.DISPATCH_WINDOW_OPEN = 0] = "DISPATCH_WINDOW_OPEN", e[e.SET_READY_FOR_MESSAGES = 1] = "SET_READY_FOR_MESSAGES", e[e.CLOSE_WINDOW = 2] = "CLOSE_WINDOW", e[e.REFRESH_WINDOW = 3] = "REFRESH_WINDOW", e))(d || {});
 function c(e) {
@@ -23,14 +23,14 @@ let u = um({
         c(e.avWindow);
         let r = function (e, t, r) {
           if ("" === t) {
-            e(F.enqueue({
+            e(VisualBellActions.enqueue({
               message: getI18nString("slides.presenter_view.unknown_error"),
               error: !0
             }));
             return;
           }
           if (!r) {
-            e(F.enqueue({
+            e(VisualBellActions.enqueue({
               message: getI18nString("slides.presenter_view.network_error"),
               error: !0
             }));
@@ -53,7 +53,7 @@ let u = um({
                 });
               }
             };
-            e(F.enqueue({
+            e(VisualBellActions.enqueue({
               message: getI18nString("slides.presenter_view.pop_up_error"),
               error: !0,
               button: i
@@ -61,8 +61,8 @@ let u = um({
             atomStoreManager.set(u, {
               type: 2
             });
-          } else e(F.enqueue({
-            icon: zX.NOTES_ON_RECTANGLE,
+          } else e(VisualBellActions.enqueue({
+            icon: VisualBellIcon.NOTES_ON_RECTANGLE,
             message: getI18nString("slides.presenter_view.visual_bells.opened_audience_view_in_separate_window")
           }));
           return p;

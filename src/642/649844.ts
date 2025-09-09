@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Et } from "../figma_app/397267";
 import { W as _$$W } from "../figma_app/462192";
 import { VariableResolvedDataType, Fullscreen, SnapMode } from "../figma_app/763686";
@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { sT } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker, isValidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { Se } from "../figma_app/178475";
 import { sA } from "../figma_app/841644";
@@ -52,7 +52,7 @@ export function $$M0({
     consumedVariable
   } = _$$O(I, VariableResolvedDataType.FLOAT);
   useEffect(() => {
-    boundVariable && "SPACE_BETWEEN" === D && F("AUTO", zk.NO);
+    boundVariable && "SPACE_BETWEEN" === D && F("AUTO", yesNoTrackingEnum.NO);
   }, [boundVariable, D, F]);
   let {
     clearVariableConsumption
@@ -69,7 +69,7 @@ export function $$M0({
       input: K.current ? "scrub" : "textfield",
       value: isAutoMarker(e) ? "Auto" : e
     }), Fullscreen.temporarilyHideOverlay(SnapMode.SELECTION));
-    "number" == typeof e || null === e ? (F("AUTO", zk.NO), R(e, s)) : (clearVariableConsumption(), F("SPACE_BETWEEN", s));
+    "number" == typeof e || null === e ? (F("AUTO", yesNoTrackingEnum.NO), R(e, s)) : (clearVariableConsumption(), F("SPACE_BETWEEN", s));
   };
   let Y = getI18nString("fullscreen.properties_panel.stack_panel.gap_rows_vertical");
   let X = "spacing-rows-vertical-icon";

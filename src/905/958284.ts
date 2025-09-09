@@ -1,6 +1,6 @@
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 export function $$r0(e) {
-  return `${e}__${g()}`;
+  return `${e}__${generateUUIDv4()}`;
 }
 let a = /__[0-9A-Za-z\-]+$/;
 export function $$s1(e) {

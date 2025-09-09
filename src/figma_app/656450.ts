@@ -1,11 +1,11 @@
 import { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { selectWithShallowEqual } from "../905/103090";
 import { F } from "../905/422355";
 import { getFalseValue } from "../figma_app/897289";
 import { Cx, yH, of } from "../figma_app/714946";
 import { yJ, uW, Z } from "../905/618921";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { VP, aF } from "../905/18797";
 import { k } from "../905/93362";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
@@ -52,7 +52,7 @@ export function $$b2(e) {
     let a = useSelector(e => e.loadingState);
     let s = useSelector(m(e));
     let o = function (e) {
-      let t = !!iZ();
+      let t = !!selectCurrentUser();
       return !!e && !$$v0(e) && t;
     }(e);
     let p = !!s;

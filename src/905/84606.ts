@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { j7 } from "../905/929976";
 import { Gq } from "../figma_app/361662";
 import { K } from "../905/770444";

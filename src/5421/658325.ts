@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
@@ -12,7 +12,7 @@ import { defaultSessionLocalID, sessionLocalIDToString, parseSessionLocalID } fr
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { U as _$$U } from "../figma_app/901889";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VC } from "../figma_app/565242";
 import { X } from "../905/190511";
@@ -144,10 +144,10 @@ export function $$z0({
   let C = () => {
     try {
       T();
-    } catch {}
+    } catch { }
     try {
       S();
-    } catch {}
+    } catch { }
   };
   let T = () => {
     let e = N(a, j);
@@ -307,7 +307,7 @@ function W({
   let C = o => {
     if (t && (FD() || nh()) && t(), null === o) e({
       connectionType: "NONE"
-    });else if ("url" === o.type) {
+    }); else if ("url" === o.type) {
       e({
         connectionType: "URL",
         connectionURL: xT(o.url),
@@ -424,7 +424,7 @@ function Z({
       });
     },
     onLinkChange: e => {
-      if (e?.type === "internal_cms_item_page") i(e.collectionId, e.id);else if (e?.type === "cms_link_field_alias") {
+      if (e?.type === "internal_cms_item_page") i(e.collectionId, e.id); else if (e?.type === "cms_link_field_alias") {
         if (!e.collectionId) return;
         permissionScopeHandler.user("dakota-set-link-binding", () => {
           let t = {
@@ -526,7 +526,7 @@ function G({
           children: renderI18nText("proto.action_open_url_in_new_tab")
         }),
         onChange: h,
-        recordingKey: Pt(C, "open-url-in-new-tab-check"),
+        recordingKey: generateRecordingKey(C, "open-url-in-new-tab-check"),
         checked: e.openInNewTab,
         disabled: g
       })

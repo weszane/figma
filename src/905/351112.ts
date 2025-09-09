@@ -1,10 +1,10 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useLayoutEffect, useState, useCallback, useEffect } from "react";
 import { H } from "react-dom";
-import { shallowEqual, useStore, Provider } from "../vendor/514228";
+import { shallowEqual, useStore, Provider } from "react-redux";
 import { AtomProvider } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
-import { oD } from "../905/436043";
+import { LivegraphProvider } from "../905/436043";
 import { s as _$$s } from "../cssbuilder/589278";
 import { le } from "../905/904854";
 import { XU } from "../figma_app/756995";
@@ -471,7 +471,7 @@ export function $$O0(e) {
     g.className = _$$s.absolute.zIndexMinus1.$;
     g.style.left = "-9999px";
     m.currentTarget.appendChild(g);
-    H(g).render(jsx(oD, {
+    H(g).render(jsx(LivegraphProvider, {
       userId: getInitialOptions().user_data?.id || null,
       children: jsx(AtomProvider, {
         children: jsx(Provider, {

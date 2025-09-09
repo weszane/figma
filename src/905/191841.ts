@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { dr } from "../figma_app/643789";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { oJ } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
@@ -98,7 +98,7 @@ export function $$P0(e) {
       viewMode: "grid"
     }), oJ(r)) {
       let e = bL(n.id, t);
-      Ay.redirect(e, "_blank");
+      customHistory.redirect(e, "_blank");
       r.stopPropagation();
       return;
     }

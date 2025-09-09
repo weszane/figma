@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, forwardRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { LayoutTabType } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { VU } from "../905/625959";

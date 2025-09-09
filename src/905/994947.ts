@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { PureComponent, createContext } from "react";
-import { useDispatch, useStore, useSelector } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "react-redux";
 import { sN } from "../905/63728";
 import { j7, sf, oB } from "../905/929976";
 import { fileEntityDataMapper } from "../905/943101";
@@ -21,16 +21,16 @@ import { F as _$$F2 } from "../905/915030";
 import { a as _$$a } from "../905/870666";
 import { g_ } from "../905/646788";
 import { trackEventAnalytics } from "../905/449184";
-import { Xr } from "../905/612521";
+import { getViewState } from "../905/612521";
 import { V3, UN } from "../figma_app/976345";
 import { k1 } from "../figma_app/314264";
 import { xS } from "../figma_app/193867";
 import { W as _$$W } from "../905/25249";
-import { F as _$$F3 } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { p7 } from "../figma_app/49598";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Rs } from "../figma_app/288654";
-import { yQw } from "../figma_app/43951";
+import { TeamById } from "../figma_app/43951";
 import { p as _$$p } from "../905/195198";
 import { o as _$$o } from "../905/895626";
 var n;
@@ -114,7 +114,7 @@ function x(e) {
       id: "open_view",
       text: getI18nString("general.open"),
       onClick: () => {
-        let e = Xr();
+        let e = getViewState();
         "fullscreen" === n.view && n.fileKey && e && (trackEventAnalytics("Open File Click", {
           fileKey: n.fileKey,
           uiSelectedView: JSON.stringify(e.view)
@@ -178,7 +178,7 @@ function x(e) {
       id: "open_view_in_new_tab",
       text: getI18nString("file_browser.open_in_new_tab"),
       onClick: () => {
-        let e = Xr();
+        let e = getViewState();
         "fullscreen" === r.view && r.fileKey && e && (trackEventAnalytics("Open File in New Tab Click", {
           fileKey: r.fileKey,
           uiSelectedView: JSON.stringify(e.view)
@@ -345,7 +345,7 @@ let Y = e => ({
   e.CopyLink = n.Creators.CopyViewLink(Y);
   e.Duplicate = e => {
     let t = useDispatch();
-    let i = iZ();
+    let i = selectCurrentUser();
     return {
       id: "duplicate_hub_file",
       text: "Duplicate",
@@ -356,7 +356,7 @@ let Y = e => ({
             userId: i.id,
             orgId: null
           }
-        })) : t(_$$F3.enqueue({
+        })) : t(VisualBellActions.enqueue({
           message: "Must be signed in to duplicate a file",
           error: !0
         }));
@@ -387,7 +387,7 @@ let $ = e => ({
   e.CopyLink = n.Creators.CopyViewLink($);
 })(l || (l = {}));
 let J = e => {
-  let t = Rs(yQw, {
+  let t = Rs(TeamById, {
     teamId: e.id
   }).transform(({
     team: e

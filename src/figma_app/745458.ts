@@ -1,4 +1,4 @@
-import { PK } from "../figma_app/243058";
+import { StyleIdHandler } from "../figma_app/243058";
 import { Xf, sg, ey, yG } from "../905/859698";
 import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -509,7 +509,7 @@ let $$em5 = createReduxSubscriptionAtomWithState(e => e.library.libraryUpdatesBa
 export function $$eg16(e, t) {
   let r = dK(e);
   let i = normalizeValue(t);
-  let a = i ? PK.fromKiwi(i) : null;
+  let a = i ? StyleIdHandler.fromKiwi(i) : null;
   let s = a ? r.getStyleNode(a) : null;
   if (!s) return null;
   let o = s.guid;

@@ -1,4 +1,4 @@
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { logInfo } from "../905/714362";
 import { getI18nString } from "../905/303541";
 export function $$s0(e, t, i) {
@@ -26,7 +26,7 @@ export function $$l1(e, t, i, n) {
   e.user?.id !== "-1" && logInfo("planSpaces", "User with Plan Spaces enabled saw External Teams.");
   return getI18nString("navbar.profile_switcher.your_teams");
 }
-xx($$s0);
+memoizeByArgs($$s0);
 export const vp = $$s0;
 export const HE = $$l1;
 export const O_ = $$o2;

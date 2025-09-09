@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
-import { SKIP_RECORDING_CONSTANT } from "../figma_app/878298";
+import { SKIP_RECORDING } from "../figma_app/878298";
 import { h as _$$h } from "../905/207101";
 import { dP } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -25,7 +25,7 @@ export function $$m0({
   let b = useCallback(() => {
     if (!y) {
       f(e => e + 1);
-      return SKIP_RECORDING_CONSTANT;
+      return SKIP_RECORDING;
     }
   }, [y]);
   useEffect(() => {

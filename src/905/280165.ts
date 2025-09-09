@@ -5,7 +5,7 @@ import { K } from "../905/443068";
 import { N } from "../905/301843";
 import { E } from "../905/235326";
 import { Fullscreen } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/217163";
 import { isInvalidValue } from "../905/216495";
@@ -70,7 +70,7 @@ export function $$f0(e) {
     "aria-label": dataTooltip,
     disabled,
     actionOnPointerDown: !0,
-    recordingKey: Pt(e, "findComponentButton", backingSymbolGUID),
+    recordingKey: generateRecordingKey(e, "findComponentButton", backingSymbolGUID),
     htmlAttributes: {
       "data-tooltip-type": Ib.TEXT,
       "data-tooltip": dataTooltip

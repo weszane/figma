@@ -1,8 +1,8 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Multiplayer } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { HW } from "../figma_app/976749";
 import { T as _$$T, N } from "../905/847283";
 import { trackEventAnalytics } from "../905/449184";
@@ -58,7 +58,7 @@ export function $$f0() {
   let t = useDispatch();
   return useCallback(r => {
     e ? v(r, hk()) : v(r, null);
-    t(F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("collaboration.spotlight.bell.stopped_following"),
       role: "status"
     }));
@@ -77,7 +77,7 @@ function y(e, t, r, n) {
     let e = getI18nString("collaboration.spotlight.visual_bell.nominated_user_to_spotlight", {
       userName: i.name
     });
-    n(F.enqueue({
+    n(VisualBellActions.enqueue({
       message: e,
       type: "nominated_presenter"
     }));
@@ -95,7 +95,7 @@ function T(e, t, r, n) {
   $$b6(e, r);
   let i = t.allUsers.find(t => t.sessionID === e);
   let a = getI18nString("collaboration.spotlight.visual_bell.stopped_nominating_user_to_spotlight");
-  n(F.enqueue({
+  n(VisualBellActions.enqueue({
     message: a,
     type: "nominated_presenter"
   }));

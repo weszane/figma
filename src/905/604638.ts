@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { atomStoreManager } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
 import { BrowserInfo } from "../figma_app/778880";
-import { uA, aH, cZ } from "../figma_app/806412";
+import { RecordingComponent, SKIP_RECORDING, handleMouseEvent } from "../figma_app/878298";
 import { S } from "../figma_app/552746";
 import { x } from "../figma_app/859253";
 import { oB } from "../905/929976";
@@ -18,7 +18,7 @@ import { aT } from "../figma_app/613182";
 import { a8 } from "../figma_app/467440";
 import { h0 } from "../figma_app/61403";
 import { yA, Qs } from "../figma_app/581520";
-class E extends uA {
+class E extends RecordingComponent {
   constructor(e) {
     super(e);
     this.dontHideOnClick = !1;
@@ -32,7 +32,7 @@ class E extends uA {
       this.props.reduxState && this.dropdownShowing() && atomStoreManager.get(a8) !== h0.PLAYING && this.dropdownShowing()?.type !== x && this.props.dispatch(oB());
     };
     this.hideDropdownsIfShowing = e => {
-      if (this.hideTooltips(e), !this.dropdownShowing()) return aH;
+      if (this.hideTooltips(e), !this.dropdownShowing()) return SKIP_RECORDING;
       this.hideDropdown();
     };
     this.hideDropdownsIfShowingForPointerEvent = e => {
@@ -41,7 +41,7 @@ class E extends uA {
         t instanceof Element && !UE(t) && this.hideDropdownsIfShowing(e);
       }
     };
-    this.onClick = cZ(this, "click", e => {
+    this.onClick = handleMouseEvent(this, "click", e => {
       if (this.dontHideOnClick) {
         this.dontHideOnClick = !1;
         return;

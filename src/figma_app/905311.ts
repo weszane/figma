@@ -4,7 +4,7 @@ import { bL } from "../905/246123";
 import { hh } from "../905/720338";
 import o from "classnames";
 import { C } from "../figma_app/974443";
-import { uA, aH, cZ, dp } from "../figma_app/806412";
+import { RecordingComponent, SKIP_RECORDING, handleMouseEvent, setupPlayback } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { B } from "../905/714743";
 import { S } from "../figma_app/552746";
@@ -66,7 +66,7 @@ export function $$y1(e) {
     useGrid
   });
 }
-class b extends uA {
+class b extends RecordingComponent {
   constructor(e) {
     super(e);
     this.draggedIndex = null;
@@ -104,7 +104,7 @@ class b extends uA {
     };
     this.onListItemMouseMove = (e, t) => {
       if (!this.props.isDragDisabled) {
-        if (!this.state.isDraggingSelection || !this.mouseDownPosition) return aH;
+        if (!this.state.isDraggingSelection || !this.mouseDownPosition) return SKIP_RECORDING;
         {
           this.mouseDownPosition.distanceTo({
             x: t.clientX,
@@ -122,7 +122,7 @@ class b extends uA {
               indexToInsertSelectionBefore: null
             });
           } else {
-            if (i = this.props.reversed ? t.pageY > n ? e : e + 1 : t.pageY < n ? e : e + 1, !this.canDragLastItemToEnd && null !== this.draggedIndex && this.draggedIndex === this.props.listItems.length - 1 && i > this.draggedIndex && (i = this.draggedIndex), this.props.canInsertSelectionBeforeIndex && !this.props.canInsertSelectionBeforeIndex(i)) return aH;
+            if (i = this.props.reversed ? t.pageY > n ? e : e + 1 : t.pageY < n ? e : e + 1, !this.canDragLastItemToEnd && null !== this.draggedIndex && this.draggedIndex === this.props.listItems.length - 1 && i > this.draggedIndex && (i = this.draggedIndex), this.props.canInsertSelectionBeforeIndex && !this.props.canInsertSelectionBeforeIndex(i)) return SKIP_RECORDING;
             this.setState({
               indexToInsertSelectionIn: null,
               indexToInsertSelectionBefore: i
@@ -158,8 +158,8 @@ class b extends uA {
         void 0 !== t && (this.lastIndexSelected = t);
       }
     };
-    this.onDocumentMouseUp = cZ(this, "mouseup", () => {
-      if (!this.props.updateSelection) return aH;
+    this.onDocumentMouseUp = handleMouseEvent(this, "mouseup", () => {
+      if (!this.props.updateSelection) return SKIP_RECORDING;
       let e = !1;
       if (null != this.state.indexToInsertSelectionBefore) {
         if (e = !0, this.props.onInsertItemsBetweenValues) {
@@ -198,10 +198,10 @@ class b extends uA {
       }), e = !0), (null !== this.state.indexToInsertSelectionIn || null !== this.state.indexToInsertSelectionBefore) && (this.setState({
         indexToInsertSelectionIn: null,
         indexToInsertSelectionBefore: null
-      }), e = !0), !e) return aH;
+      }), e = !0), !e) return SKIP_RECORDING;
     });
     this._cachedListItems = [];
-    this.onReorderRow = dp(this, "reorderRows", e => {
+    this.onReorderRow = setupPlayback(this, "reorderRows", e => {
       let t = this.props.listItems.length;
       let r = this.props.reversed ? e.map(e => this.props.listItems[t - e - 1]).reverse() : e.map(e => this.props.listItems[e]);
       this.listItemKeys = e.map(e => this.listItemKeys[e]);
@@ -224,7 +224,7 @@ class b extends uA {
         indexToInsertSelectionBefore: null
       });
     });
-    this.onDragOver = dp(this, "dragOver", ({
+    this.onDragOver = setupPlayback(this, "dragOver", ({
       draggingOverRowIndex: e,
       position: t
     }) => {

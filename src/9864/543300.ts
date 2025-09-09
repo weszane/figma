@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useState, forwardRef, useRef, createRef } from "react";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { Xr, useAtomValueAndSetter, useAtomWithSubscription, atom } from "../figma_app/27355";
 import a from "classnames";
 import { Rs } from "../figma_app/288654";
@@ -9,7 +9,7 @@ import { cn } from "../figma_app/141320";
 import { MS } from "../figma_app/797994";
 import { _X, Pw } from "../figma_app/121751";
 import { FFileType, FResourceCategoryType, FProductAccessType } from "../figma_app/191312";
-import { Aqu, toW, yQw } from "../figma_app/43951";
+import { TeamFileLimitsInfo, FileCanEditIgnorePaidStatus, TeamById } from "../figma_app/43951";
 import { aW, sK, cD, FQ } from "../figma_app/598018";
 import { i as _$$i } from "../905/718764";
 import { ZC } from "../figma_app/39751";
@@ -32,7 +32,7 @@ import { _6 } from "../figma_app/386952";
 import { Aj } from "../figma_app/336853";
 import { U2 } from "../figma_app/193867";
 import { h as _$$h2 } from "../905/772711";
-import { TA, iZ } from "../905/372672";
+import { getUserId, selectCurrentUser } from "../905/372672";
 import { k as _$$k } from "../905/93362";
 import { shuffle } from "../figma_app/656233";
 import { getI18nString, renderI18nText, getLocalizedPath, loadI18nLocale } from "../905/303541";
@@ -46,13 +46,13 @@ import { languageCodes, defaultLanguage } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance, hasDesktopAPI } from "../figma_app/876459";
 import { xf } from "../figma_app/416935";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { isGovCluster, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { oJ } from "../905/63728";
 import { Wz } from "../figma_app/211694";
 import { e6 as _$$e2, c as _$$c } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { u as _$$u } from "../905/16237";
 import { tc as _$$tc } from "../905/15667";
 import { yJ } from "../figma_app/24841";
@@ -319,7 +319,7 @@ function Q({
   return e ? r : t;
 }
 function J() {
-  let e = TA();
+  let e = getUserId();
   let r = useAtomWithSubscription(_$$r);
   let t = useAtomWithSubscription(ZE);
   let i = useAtomWithSubscription(qV);
@@ -417,7 +417,7 @@ function ey() {
       teamId: r.id
     }));else {
       let e = `/files/team/${r.id}/edu-review/${r.id}`;
-      Ay.redirect(e, "_blank");
+      customHistory.redirect(e, "_blank");
     }
   };
   return ({
@@ -428,7 +428,7 @@ function ey() {
   };
 }
 async function eq(e, r) {
-  let t = e ? await subscribeAndAwaitData(Aqu, {
+  let t = e ? await subscribeAndAwaitData(TeamFileLimitsInfo, {
     teamId: e
   }) : null;
   let i = t?.team ?? null;
@@ -608,7 +608,7 @@ function eX({
 }
 function eJ(e) {
   let r = useDispatch();
-  let t = TA();
+  let t = getUserId();
   let i = !!_$$f("not_gen_0");
   let a = useAtomWithSubscription(S0);
   let d = useAtomWithSubscription($l);
@@ -711,7 +711,7 @@ function eJ(e) {
       folderId: t?.folderId || null,
       entryPoint: _$$tc.NUX
     });
-    let s = Rs(toW({
+    let s = Rs(FileCanEditIgnorePaidStatus({
       key: t?.key ?? ""
     }), {
       enabled: !!t?.key
@@ -730,10 +730,10 @@ function eJ(e) {
               requestId: i.requestId,
               seatType: r
             });
-            let e = new URLSearchParams(Ay.location.search);
+            let e = new URLSearchParams(customHistory.location.search);
             e.set("perms-refresh", "1");
-            Ay.replace(`${Ay.location.pathname}?${e.toString()}`, Ay.location.state);
-            Ay.reload("NUX seat choice refresh");
+            customHistory.replace(`${customHistory.location.pathname}?${e.toString()}`, customHistory.location.state);
+            customHistory.reload("NUX seat choice refresh");
           }
         },
         licenseType: TI[r],
@@ -907,7 +907,7 @@ function eJ(e) {
         level: _$$e3.EDITOR,
         teamId: e.team.id,
         onSuccess: () => {
-          r(_$$F.enqueue({
+          r(VisualBellActions.enqueue({
             message: getI18nString("rcs.team_welcome.invite_sent", {
               numInvites: i.length
             })
@@ -989,7 +989,7 @@ function eJ(e) {
     if (Y()) {
       t || e.dismissModal();
       let i = oJ(r);
-      R && (hasDesktopAPI() || i || e.currentQuestion !== pu.CHOOSE_PRODUCT) && Ay.reload("NUX completion refresh");
+      R && (hasDesktopAPI() || i || e.currentQuestion !== pu.CHOOSE_PRODUCT) && customHistory.reload("NUX completion refresh");
     } else e.onNextQuestion();
   };
   return I ? jsx(_$$c, {
@@ -3099,7 +3099,7 @@ function tR(e) {
 function tI() {
   let e = useRef(null);
   let [r, t] = useAtomValueAndSetter(Q7);
-  let i = iZ();
+  let i = selectCurrentUser();
   let l = i ? i.email.split("@")[0] : "";
   let a = ti();
   let d = useAtomWithSubscription($B);
@@ -3159,7 +3159,7 @@ function tM({
 }) {
   let t = useRef(null);
   let [i, l] = useAtomValueAndSetter(Q7);
-  let a = iZ();
+  let a = selectCurrentUser();
   let d = a ? a.email.split("@")[0] : "";
   return jsxs("div", {
     className: "x78zum5 xdt5ytf",
@@ -3464,7 +3464,7 @@ function tW(e) {
       a();
       e.currentQuestion === pu.NAME_SELF && i("");
       l() && e.formatAndSubmitSignalCollectionResponses();
-      e.currentQuestion === pu.CHOOSE_PRODUCT && (e.dismissModal(), "default" !== o && Ay.reload("NUX completion refresh"));
+      e.currentQuestion === pu.CHOOSE_PRODUCT && (e.dismissModal(), "default" !== o && customHistory.reload("NUX completion refresh"));
       e.onNextQuestion();
     },
     trackingProperties: {
@@ -3747,8 +3747,8 @@ function t7({
     initialPosition: "right-end"
   });
   let d = Xr(ni);
-  let c = TA();
-  let u = iZ();
+  let c = getUserId();
+  let u = selectCurrentUser();
   let x = !_$$f("not_gen_0");
   let h = getInitialOptions().dictionary_url_by_locale || {};
   let _ = [languageCodes.EN, ...Object.keys(h)];
@@ -4600,7 +4600,7 @@ export function $$ij0(e) {
   let i = getIsAndroidOrIphoneNotFigmaMobile();
   let a = useSelector(e => MS(e.userFlags));
   let m = useSelector(e => e.currentTeamId);
-  let E = Rs(yQw(_X(Pw.GROUP_7) && m ? {
+  let E = Rs(TeamById(_X(Pw.GROUP_7) && m ? {
     teamId: m
   } : null));
   let b = useMemo(() => E.transform(({

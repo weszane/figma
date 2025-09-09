@@ -4,7 +4,7 @@ import { ChatMessageType } from "../figma_app/763686";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { ly } from "../905/138461";
 import { tS } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Xu } from "../figma_app/588582";
 import { $W } from "../figma_app/325537";
 import { o0, Nm } from "../figma_app/202307";
@@ -30,7 +30,7 @@ export function $$f0({
   let E = _$$E(e);
   let j = useAtomWithSubscription(Xl);
   let N = useAtomWithSubscription(p7);
-  let T = iZ();
+  let T = selectCurrentUser();
   let S = tS();
   let A = useMemo(() => E ? EY(E) : null, [E]);
   let [w, k] = useState(new Map());

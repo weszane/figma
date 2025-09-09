@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { n as _$$n } from "../figma_app/630671";
 import { m as _$$m } from "../905/118468";
 import { o as _$$o } from "../figma_app/628776";
@@ -64,7 +64,7 @@ import { VA } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
 import { aV } from "../figma_app/722362";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
 import { wH } from "../figma_app/680166";
@@ -386,7 +386,7 @@ function e3(e) {
       y: e.top - oH - 16
     };
   }, []);
-  let N = !!iZ();
+  let N = !!selectCurrentUser();
   let w = _$$k4();
   let R = e => jsx(_$$N2, {
     toolId: DesignGraphElements.TYPE,

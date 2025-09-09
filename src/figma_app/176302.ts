@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr, Ut } from "../figma_app/27355";
@@ -9,11 +9,11 @@ import { R as _$$R } from "../905/165069";
 import { getAppVisibilityState, subscribeToAppVisibility } from "../figma_app/925651";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { DM, $K } from "../figma_app/223206";
 import { tS } from "../figma_app/516028";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { R as _$$R2 } from "../figma_app/53049";
 import { EI } from "../figma_app/21029";
 let T = atom({
@@ -92,24 +92,24 @@ export function $$O0({
     });
   }, [u]);
   let E = useCallback(() => {
-    a(F.dequeue({
+    a(VisualBellActions.dequeue({
       matchType: "send-to-make-from-design-load"
     }));
-    a(F.enqueue({
+    a(VisualBellActions.enqueue({
       message: getI18nString("figmake.send_to_make_from_design.visual_bell.complete"),
       type: "send-to-make-from-design-complete",
-      icon: zX.CHECK,
+      icon: VisualBellIcon.CHECK,
       timeoutOverride: 3e3
     }));
   }, [a]);
   let y = useCallback(() => {
-    a(F.dequeue({
+    a(VisualBellActions.dequeue({
       matchType: "send-to-make-from-design-load"
     }));
-    a(F.enqueue({
+    a(VisualBellActions.enqueue({
       message: getI18nString("figmake.send_to_make_from_design.error.something-went-wrong"),
       type: "send-to-make-from-design-failed",
-      icon: zX.EXCLAMATION,
+      icon: VisualBellIcon.EXCLAMATION,
       error: !0,
       timeoutOverride: 3e3
     }));
@@ -155,17 +155,17 @@ export function $$R4() {
   let v = AppStateTsApi?.figmakeState();
   let A = Xr(T);
   let x = Xr(N);
-  let C = TA();
+  let C = getUserId();
   let [O, R] = useState(() => "visible" === getAppVisibilityState());
   _$$h(() => subscribeToAppVisibility(e => {
     R("visible" === e);
   }));
   return _$$R(() => {
     debug(!!y, "makeCreationData is undefined. This should never happen");
-    e(F.enqueue({
+    e(VisualBellActions.enqueue({
       message: y.exceedsMakePasteThreshold ? getI18nString("figmake.send_to_make_from_design.visual_bell.copying_complex_frames") : getI18nString("figmake.send_to_make_from_design.visual_bell.copying_frames"),
       type: "send-to-make-from-design-load",
-      icon: zX.SPINNER,
+      icon: VisualBellIcon.SPINNER,
       preventDismissal: !0,
       timeoutOverride: 3e5
     }));
@@ -206,13 +206,13 @@ export function $$R4() {
       });
       A(I.error(r));
       x(null);
-      e(F.dequeue({
+      e(VisualBellActions.dequeue({
         matchType: "send-to-make-from-design-load"
       }));
-      e(F.enqueue({
+      e(VisualBellActions.enqueue({
         message: getI18nString("figmake.send_to_make_from_design.error.something-went-wrong"),
         type: "send-to-make-from-design-failed",
-        icon: zX.EXCLAMATION,
+        icon: VisualBellIcon.EXCLAMATION,
         error: !0,
         timeoutOverride: 3e3
       }));

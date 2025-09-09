@@ -2,10 +2,10 @@ import { VariablesBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { fullscreenValue } from "../figma_app/455680";
 import { YE } from "../figma_app/552876";
 export let $$n0;
@@ -28,13 +28,13 @@ class h {
         numUnpublished: m.size
       }), getFeatureFlags().variables_paste_remap_popup) {
         if (YE()) return;
-        debugState.dispatch(F.dequeue({
+        debugState.dispatch(VisualBellActions.dequeue({
           matchType: "localize_unpublished_variables"
         }));
-        debugState.dispatch(F.dequeue({
+        debugState.dispatch(VisualBellActions.dequeue({
           matchType: "unpublished_variables_localized"
         }));
-        debugState.dispatch(F.enqueue({
+        debugState.dispatch(VisualBellActions.enqueue({
           message: getI18nString("proto.paste_unpublished_variable_localize"),
           type: "localize_unpublished_variables",
           button: {
@@ -43,7 +43,7 @@ class h {
               let e = VariablesBindings.performVariableLocalizationFromPopup(m, t, r);
               if (fullscreenValue.commit(), Object.keys(e).includes("numberOfNewVariables")) {
                 let t = e.numberOfNewVariables;
-                t > 0 && debugState.dispatch(F.enqueue({
+                t > 0 && debugState.dispatch(VisualBellActions.enqueue({
                   message: getI18nString("proto.unpublished_variables_localized", {
                     numberOfVariables: t
                   }),
@@ -53,12 +53,12 @@ class h {
             }
           }
         }));
-      } else debugState.dispatch(F.enqueue({
+      } else debugState.dispatch(VisualBellActions.enqueue({
         message: getI18nString("proto.paste_unpublished_variable"),
         button: {
           text: getI18nString("proto.paste_unpublished_variable_cta"),
           action: () => {
-            Ay.unsafeRedirect("https://help.figma.com/hc/articles/14506821864087#copy_paste", "_blank");
+            customHistory.unsafeRedirect("https://help.figma.com/hc/articles/14506821864087#copy_paste", "_blank");
           }
         }
       }));

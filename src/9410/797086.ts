@@ -4,7 +4,7 @@ import { i } from "../9410/157320";
 import { getFeatureFlags } from "../905/601108";
 import { createLocalStorageAtom, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Ml } from "../905/971098";
@@ -95,7 +95,7 @@ export function $$b0({
     displayAboveTarget: !0,
     lean: "right",
     items: e,
-    recordingKey: Pt(a, "kitPicker"),
+    recordingKey: generateRecordingKey(a, "kitPicker"),
     disabled: !t
   });
 }

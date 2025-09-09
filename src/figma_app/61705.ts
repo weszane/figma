@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Xr } from "../figma_app/27355";
 import { oJ } from "../905/63728";
 import { Cu } from "../figma_app/314264";
 import { B } from "../905/524020";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { ai } from "../figma_app/915202";
 import { P4 } from "../figma_app/911880";
@@ -18,7 +18,7 @@ export function $$h1({
 }) {
   let g = B();
   let f = useDispatch();
-  let E = TA();
+  let E = getUserId();
   let y = Xr(P4);
   let b = useSelector(e => {
     let t = r ?? e.user?.drafts_folder_id;

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { DesignGraphElements, SessionStatus } from "../figma_app/763686";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -192,9 +192,9 @@ function P({
       easing: "cubic-bezier(0.37, 0, 0.48, 1.33)"
     }));
     n.play();
-    n.finished.then(() => r.play()).catch(() => {});
-    r.finished.then(() => a.play()).catch(() => {});
-    a.finished.then(() => s.play()).catch(() => {});
+    n.finished.then(() => r.play()).catch(() => { });
+    r.finished.then(() => a.play()).catch(() => { });
+    a.finished.then(() => s.play()).catch(() => { });
     return () => {
       n.cancel();
       a.cancel();

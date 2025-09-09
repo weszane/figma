@@ -3,9 +3,9 @@ import { assertNotNullish } from "../figma_app/465776";
 import { VariableResolvedDataType, VariableDataType, OperationType } from "../figma_app/763686";
 import { parseSessionLocalID } from "../905/871411";
 import { sH as _$$sH } from "../905/805904";
-import { WI } from "../905/929949";
+import { resolveVariableValue } from "../905/929949";
 function d(e, t, r) {
-  let n = WI(t, r);
+  let n = resolveVariableValue(t, r);
   let i = function (e) {
     switch (e) {
       case VariableResolvedDataType.BOOLEAN:

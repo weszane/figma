@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { StylesBindings, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { j7, oB } from "../905/929976";
@@ -56,7 +56,7 @@ export function $$I1() {
         dsStyle: n,
         position: a
       }) {
-        if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && EF(i.style, n)) r();else {
+        if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && EF(i.style, n)) r(); else {
           debug(null != n.content_hash, "style does not have a hash");
           let i = Oo(n, t) ? n.node_id : StylesBindings.getStyleNodeId(n.key, n.content_hash);
           isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : Eo.getCanvas(n).then(e => {
@@ -104,14 +104,14 @@ export function $$E2({
     },
     children: f ? jsxs(Fragment, {
       children: [jsx(c$, {
-        recordingKey: Pt(i, "editStyle"),
+        recordingKey: generateRecordingKey(i, "editStyle"),
         onClick: () => showStyleDetails({
           dsStyle: e,
           position: t
         }),
         children: renderI18nText("design_systems.styles.edit_style")
       }), jsx(c$, {
-        recordingKey: Pt(i, "deleteStyle"),
+        recordingKey: generateRecordingKey(i, "deleteStyle"),
         onClick: () => permissionScopeHandler.user("delete-style", () => deleteStyle(e)),
         children: renderI18nText("design_systems.styles.delete_styles", {
           numStyles: 1
@@ -120,7 +120,7 @@ export function $$E2({
     }) : jsx(c$, {
       href: h,
       target: "_blank",
-      recordingKey: Pt(i, "goToStyleDefinition"),
+      recordingKey: generateRecordingKey(i, "goToStyleDefinition"),
       children: renderI18nText("design_systems.styles.go_to_style_definition")
     })
   }) : null;

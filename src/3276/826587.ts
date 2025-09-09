@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { CV, KJ } from "../figma_app/916560";
 import { Cg } from "../905/195479";
 import { buildUploadUrl } from "../figma_app/169182";

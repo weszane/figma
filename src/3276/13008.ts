@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { oA } from "../905/663269";
 import { h as _$$h } from "../905/142086";
 import { showModalHandler } from "../905/156213";
 import { QL, EM } from "../905/609392";
 import { nk } from "../figma_app/2023";
 import { aV } from "../figma_app/722362";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { e6 } from "../905/557142";
 import { IZ, wR } from "../905/452667";
@@ -23,7 +23,7 @@ export function $$x0(e) {
   let C = e.editorType === FFileType.SITES && e.org?.isSitesDisabled;
   let w = e.editorType === FFileType.COOPER && e.org?.isCooperDisabled;
   let j = aV();
-  let k = iZ();
+  let k = selectCurrentUser();
   useEffect(() => {
     let o = QL(g);
     let a = "true" === QL(v);

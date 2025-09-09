@@ -5,8 +5,8 @@ import { isMobileUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { Ts } from "../905/194276";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { t as _$$t2 } from "../905/706346";
 import { _ as _$$_ } from "../905/456042";
 import { wr, Ux } from "../figma_app/387599";
@@ -35,24 +35,24 @@ import { A as _$$A } from "../6828/903761";
 import { A as _$$A2 } from "../6828/529628";
 let j = () => async e => {
   let t = "org-admin-team-creation";
-  e(_$$F.enqueue({
+  e(VisualBellActions.enqueue({
     message: getI18nString("resources_tab.create_team_modal.team_creation_loading"),
     type: t,
-    icon: zX.SPINNER
+    icon: VisualBellIcon.SPINNER
   }));
   try {
     let r = (await _$$G.createStarterTeam()).data.meta;
-    e(_$$F.dequeue({
+    e(VisualBellActions.dequeue({
       matchType: t
     }));
     e(popModalStack());
     return r;
   } catch (r) {
-    e(_$$F.dequeue({
+    e(VisualBellActions.dequeue({
       matchType: t
     }));
     e(popModalStack());
-    e(_$$F.enqueue({
+    e(VisualBellActions.enqueue({
       message: getI18nString("general.an_error_occurred"),
       error: !0
     }));
@@ -294,7 +294,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
     m = _$$F2(r, t.resource, g);
   } catch (r) {
     let t = r?.data?.message || getI18nString("file_browser.error_try_again");
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: t,
       type: "error"
     }));
@@ -343,7 +343,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
     v.fuid = t.userId ?? user.id;
     let n = r.orgById[t.orgId];
     if (n && !(await hb(t.resource, n))) {
-      e.dispatch(_$$F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("community.resource.you_do_not_have_permissions_to_use_this_resource"),
         error: !0
       }));
@@ -365,7 +365,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
     _$$j(v, n.orgId, n.teamId ?? null, n.userId);
   } else {
     reportError(_$$e.COMMUNITY, Error("No workspaces found"));
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.error_try_again"),
       error: !0
     }));

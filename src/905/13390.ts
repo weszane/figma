@@ -16,13 +16,13 @@ import { Fh, Mw, U1 } from '../905/191601';
 import { J as _$$J, q as _$$q } from '../905/202542';
 import { F as _$$F } from '../905/300562';
 import { getI18nString } from '../905/303541';
-import { TA } from '../905/372672';
+import { getUserId } from '../905/372672';
 import { iC } from '../905/466026';
 import { NQ } from '../905/508367';
 import { I as _$$I } from '../905/531560';
 import { l as _$$l3 } from '../905/572910';
 import { s as _$$s } from '../905/573154';
-import { Ay } from '../905/612521';
+import { customHistory } from '../905/612521';
 import { jN, Kw, rl } from '../905/612685';
 import { j as _$$j, l as _$$l2 } from '../905/618243';
 import { g_ } from '../905/646788';
@@ -74,7 +74,7 @@ import { desktopAPIInstance } from '../figma_app/876459';
 import { Fb, iN, qP, X7 } from '../figma_app/909778';
 import { ai } from '../figma_app/915202';
 import { g4 as _$$g, b4, n_ } from '../figma_app/937413';
-import { useDispatch } from '../vendor/514228';
+import { useDispatch } from 'react-redux';
 function v({
   children: e,
   portalTarget: t,
@@ -153,7 +153,7 @@ export function $$ek0(e) {
     attributionContextKey: e.sharingAttributionContextKey
   }));
   let eU = e.tile;
-  let eB = TA();
+  let eB = getUserId();
   let [eV] = IT(OL({
     userId: eB
   }));
@@ -185,7 +185,7 @@ export function $$ek0(e) {
       } else {
         let t = e.file.parentOrgId ? `/files/${e.file.parentOrgId}/project/${e.file.folderId}` : `/files/project/${e.file.folderId}`;
         t = user ? NQ(t, 'fuid', user.id) : t;
-        Ay.redirect(t);
+        customHistory.redirect(t);
       }
     }
   };
@@ -215,7 +215,7 @@ export function $$ek0(e) {
         break;
       case nb.REPO:
         let r = mr(t.repo, t.branches, selectedBranchKeyByRepoId);
-        Ay.redirect(CE(r, t.repo, 'file'), '_blank');
+        customHistory.redirect(CE(r, t.repo, 'file'), '_blank');
         break;
       case nb.OFFLINE_FILE:
         i(NA({

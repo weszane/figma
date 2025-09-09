@@ -21,7 +21,7 @@ import { A as _$$A } from "../vendor/648136";
 import { Y1 } from "../vendor/891888";
 import { mergeSorted } from "../figma_app/656233";
 import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
-import { zN, k9 } from "../905/19536";
+import { useStableMemo, useMemoStable } from "../905/19536";
 import F from "../vendor/73823";
 import { s as _$$s } from "../cssbuilder/589278";
 import { M as _$$M, Y as _$$Y } from "../905/830372";
@@ -393,7 +393,7 @@ function ej({
   index: l
 }) {
   let a = t[l];
-  let o = zN(e);
+  let o = useStableMemo(e);
   return jsx(em, {
     ...a,
     ...i,
@@ -409,7 +409,7 @@ function ey({
 }) {
   let t = useAtomWithSubscription(ev);
   let [r, i] = useAtomValueAndSetter(AJ);
-  let a = k9(() => e?.guids ?? eb, [e?.guids]);
+  let a = useMemoStable(() => e?.guids ?? eb, [e?.guids]);
   let [o, c] = useState(null);
   let d = useRef(null);
   useEffect(() => {

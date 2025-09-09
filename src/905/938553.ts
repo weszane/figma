@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useId, useCallback, useMemo, forwardRef, Component, createRef } from "react";
-import { useDispatch, connect } from "../vendor/514228";
+import { useDispatch, connect } from "react-redux";
 import { debounce } from "../905/915765";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
@@ -11,7 +11,7 @@ import { Label } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { buildUploadUrl } from "../figma_app/169182";
 import { ZB } from "../905/491152";
 import { reportError } from "../905/11";
@@ -23,8 +23,8 @@ import { kt } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { YQ } from "../905/502364";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { rk, nF } from "../figma_app/471982";
 import { zt, Yp, mZ, F8 } from "../figma_app/808294";
 import { Ul, AC } from "../figma_app/777551";
@@ -44,7 +44,7 @@ import { o0, Ro, jY } from "../figma_app/564095";
 import { j4, UU, of, f7, kN, Dd, $W, oB as _$$oB, xw } from "../figma_app/599979";
 import { D as _$$D2 } from "../905/274925";
 import { Ni } from "../figma_app/188152";
-import { TA, Pc } from "../905/372672";
+import { getUserId, selectUser } from "../905/372672";
 import { M4, IT } from "../905/713695";
 import { eE as _$$eE, Ts, wA as _$$wA } from "../figma_app/336853";
 import { getPermissionsState, canMemberOrg, canAdminOrg } from "../figma_app/642025";
@@ -357,7 +357,7 @@ function eZ(e) {
       children: [jsx(c$, {
         onClick: () => {
           let e = n?.url;
-          e && Ay.redirect(e, "_blank");
+          e && customHistory.redirect(e, "_blank");
         },
         children: renderI18nText("community.publishing.playground_file.dropdown.open_file")
       }), jsx(c$, {
@@ -392,7 +392,7 @@ function e2({
   revertVersionCallback: d,
   removeFileCallback: c
 }) {
-  let u = TA() ?? void 0;
+  let u = getUserId() ?? void 0;
   let [p] = IT(e1(s?.key || ""));
   let m = p.data;
   let g = s?.editor_type ? rk(s.editor_type) : null;
@@ -547,7 +547,7 @@ let e9 = function ({
   let d = useRef(null);
   let c = useRef(null);
   let [u, p] = useState(!c.current?.value);
-  let m = TA();
+  let m = getUserId();
   let h = (i, n, r) => {
     l(fy({
       id: e,
@@ -1162,7 +1162,7 @@ function tM({
             src: "PluginPublishModalPermissionsTabContents.onSubmit"
           }));
         }).catch(e => {
-          A(_$$F.enqueue({
+          A(VisualBellActions.enqueue({
             message: _$$J4(e, e.message),
             error: !0
           }));
@@ -1990,7 +1990,7 @@ class iW extends Component {
           scrollDevelopmentSectionIntoView: "figjam" === i,
           source: "extension-publish-modal"
         });
-        t && Ay.reload("Published plugin updated");
+        t && customHistory.reload("Published plugin updated");
       };
       let n = this.state.localSecurityFormResponse;
       let r = this.props.existingSecurityFormResponse;
@@ -2399,9 +2399,9 @@ class iW extends Component {
         categoryId: e.categoryId,
         isPublic: r.is_public,
         onSuccess: () => {
-          this.props.dispatch(_$$F.enqueue({
+          this.props.dispatch(VisualBellActions.enqueue({
             message: this.hasChangedSubscriptionPrice() && !AC(this.props.publishedPlugin) ? getI18nString("community.publishing.new_price_will_appear_within_an_hour_on_Community") : getI18nString("community.publishing.changes_saved"),
-            icon: zX.CHECK
+            icon: VisualBellIcon.CHECK
           }));
         },
         hasFreemiumCode: e.hasPaymentsApi,
@@ -3495,7 +3495,7 @@ let $$iq0 = registerModal(function (e) {
 }, "PluginPublishModal", ModalSupportsBackground.YES);
 (n || (n = {})).PublishModalPostFormFlow = function (e) {
   let t = useDispatch();
-  let i = Pc();
+  let i = selectUser();
   let {
     addCommunityProfileUser,
     takeStep,
@@ -3550,7 +3550,7 @@ let $$iq0 = registerModal(function (e) {
   }) : step === _$$D2.Step.CONNECT_PROFILES ? jsx(_$$$, {
     onSubmit: r => {
       if (!r || !e.publisher) {
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           type: "profile-merge-error",
           message: getI18nString("community.publishing.unable_to_connect_profiles"),
           error: !0

@@ -3,12 +3,12 @@ import { useId } from "react";
 import { debounce } from "../905/915765";
 import { bL, l9, mc, c$, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Q } from "../905/346809";
 import { Zk, fI } from "../figma_app/626177";
 import { g as _$$g } from "../905/412697";
@@ -36,7 +36,7 @@ export function $$y0(e) {
     })
   });
 }
-function _(e, t = zk.YES) {
+function _(e, t = yesNoTrackingEnum.YES) {
   fullscreenValue.updateSelectionProperties({
     maskType: e
   }, {
@@ -112,7 +112,7 @@ function j({
     onOpenChange: e => {
       valueBeforePreview && !e && clearPreview();
     },
-    recordingKey: Pt(t, "maskType"),
+    recordingKey: generateRecordingKey(t, "maskType"),
     children: [jsx(l9, {
       width: "fill",
       label: jsx(HiddenLabel, {

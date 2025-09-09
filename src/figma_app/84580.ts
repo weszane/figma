@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { VideoCppBindings, StateManagementCPPBindings, PrototypingTsApi, Fullscreen } from "../figma_app/763686";
 import { defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
@@ -33,7 +33,7 @@ export function $$P14(e, t, r, n, i, a, s, o, l, d) {
     behavior: function (e) {
       if (e) {
         if (!isValidValue(e)) return MIXED_MARKER;
-        if ("INSTANT_TRANSITION" === e) ;else if ("DISSOLVE" === e) return "DISSOLVE";else if ("FADE" === e) return "FADE";else if (e.startsWith("SLIDE_OUT")) return "SLIDE_OUT";else if (e.startsWith("SLIDE")) return "SLIDE";else if (e.startsWith("PUSH")) return "PUSH";else if (e.startsWith("MOVE_OUT")) return "MOVE_OUT";else if (e.startsWith("MOVE")) return "MOVE";else if ("SMART_ANIMATE" === e || "MAGIC_MOVE" === e) return "SMART_ANIMATE";else if ("SCROLL_ANIMATE" === e) return "SCROLL_ANIMATE";
+        if ("INSTANT_TRANSITION" === e); else if ("DISSOLVE" === e) return "DISSOLVE"; else if ("FADE" === e) return "FADE"; else if (e.startsWith("SLIDE_OUT")) return "SLIDE_OUT"; else if (e.startsWith("SLIDE")) return "SLIDE"; else if (e.startsWith("PUSH")) return "PUSH"; else if (e.startsWith("MOVE_OUT")) return "MOVE_OUT"; else if (e.startsWith("MOVE")) return "MOVE"; else if ("SMART_ANIMATE" === e || "MAGIC_MOVE" === e) return "SMART_ANIMATE"; else if ("SCROLL_ANIMATE" === e) return "SCROLL_ANIMATE";
       }
       return "INSTANT";
     }(e),
@@ -47,7 +47,7 @@ export function $$P14(e, t, r, n, i, a, s, o, l, d) {
       if (e) {
         if (!isValidValue(e)) return MIXED_MARKER;
         if ("IN_CUBIC" === e) return "EASE_IN";
-        if ("OUT_CUBIC" === e) ;else if ("INOUT_CUBIC" === e) return "EASE_IN_AND_OUT";else if ("LINEAR" === e) return "LINEAR";else if ("IN_BACK_CUBIC" === e) return "EASE_IN_BACK";else if ("OUT_BACK_CUBIC" === e) return "EASE_OUT_BACK";else if ("INOUT_BACK_CUBIC" === e) return "EASE_IN_AND_OUT_BACK";else if ("CUSTOM_CUBIC" === e) return "CUSTOM_BEZIER";else if ("GENTLE_SPRING" === e) return "GENTLE";else if ("SPRING_PRESET_ONE" === e) return "QUICK";else if ("SPRING_PRESET_TWO" === e) return "BOUNCY";else if ("SPRING_PRESET_THREE" === e) return "SLOW";else if ("CUSTOM_SPRING" === e) return "CUSTOM_SPRING";
+        if ("OUT_CUBIC" === e); else if ("INOUT_CUBIC" === e) return "EASE_IN_AND_OUT"; else if ("LINEAR" === e) return "LINEAR"; else if ("IN_BACK_CUBIC" === e) return "EASE_IN_BACK"; else if ("OUT_BACK_CUBIC" === e) return "EASE_OUT_BACK"; else if ("INOUT_BACK_CUBIC" === e) return "EASE_IN_AND_OUT_BACK"; else if ("CUSTOM_CUBIC" === e) return "CUSTOM_BEZIER"; else if ("GENTLE_SPRING" === e) return "GENTLE"; else if ("SPRING_PRESET_ONE" === e) return "QUICK"; else if ("SPRING_PRESET_TWO" === e) return "BOUNCY"; else if ("SPRING_PRESET_THREE" === e) return "SLOW"; else if ("CUSTOM_SPRING" === e) return "CUSTOM_SPRING";
       }
       return "EASE_OUT";
     }(t),

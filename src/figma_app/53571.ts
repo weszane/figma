@@ -11,7 +11,7 @@ import { subscribeMultipleAndAwaitAll } from '../905/553831';
 import { n as _$$n } from '../905/917104';
 import { b as _$$b } from '../905/985254';
 import { atomStoreManager } from '../figma_app/27355';
-import { WND } from '../figma_app/43951';
+import { DevModeActivity } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
 import { j } from '../figma_app/172303';
 import { FEventType } from '../figma_app/191312';
@@ -19,7 +19,7 @@ import { ds } from '../figma_app/314264';
 import { S7 } from '../figma_app/379850';
 import { fullscreenValue } from '../figma_app/455680';
 import { tn } from '../figma_app/473493';
-import { np } from '../figma_app/544649';
+import { isDevModeFocusViewCopyActive } from '../figma_app/544649';
 import { d as _$$d, cR, hv, pc } from '../figma_app/715641';
 import { Multiplayer, SessionOrigin, HandoffBindingsCpp, BuildStatus } from '../figma_app/763686';
 import { zi } from '../figma_app/867292';
@@ -114,7 +114,7 @@ async function $$L(e, t) {
     nodeId: e
   } : null).filter(isNotNullish);
   if (r.length === 0) return {};
-  let i = await subscribeMultipleAndAwaitAll(WND, r);
+  let i = await subscribeMultipleAndAwaitAll(DevModeActivity, r);
   let a = {};
   i.forEach(({
     result: e
@@ -134,7 +134,7 @@ export async function $$P0({
   description: r,
   sourceForLogging: n,
   editScopeType: i
-}: any) {
+}) {
   let d = debugState.getState();
   let c = d.mirror.sceneGraph;
   let E = d.openFile?.key ?? '';
@@ -185,7 +185,7 @@ export async function $$P0({
       });
     }
   }
-  let M = np();
+  let M = isDevModeFocusViewCopyActive();
   if (v || M) {
     let s = d.openFile;
     let o = {

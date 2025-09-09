@@ -1,9 +1,9 @@
-import { k } from "../905/651849";
+import { logger } from "../905/651849";
 import { N } from "../905/55273";
 import { p8, uS, n4 } from "../905/259345";
 import { Oc, aJ, Rm } from "../905/449579";
 function s(e) {
-  N.LOG_RESPONSIVE && k.log(e);
+  N.LOG_RESPONSIVE && logger.log(e);
 }
 async function o(e, t) {
   if (!("children" in e)) return !0;
@@ -11,12 +11,12 @@ async function o(e, t) {
     types: ["TEXT"]
   });
   let r = [];
-  for (let e of i) if (e.hasMissingFont) k.log("Missing font on node: ", e.name, e.id, ", fontName: ", e.fontName);else if (e.fontName !== t.mixed) r.push(JSON.stringify(e.fontName));else for (let t of e.getRangeAllFontNames(0, e.characters.length)) r.push(JSON.stringify(t));
+  for (let e of i) if (e.hasMissingFont) logger.log("Missing font on node: ", e.name, e.id, ", fontName: ", e.fontName);else if (e.fontName !== t.mixed) r.push(JSON.stringify(e.fontName));else for (let t of e.getRangeAllFontNames(0, e.characters.length)) r.push(JSON.stringify(t));
   let a = [...new Set(r)].map(e => JSON.parse(e));
   try {
     await Promise.all(a.map(e => t.loadFontAsync(e)));
   } catch (e) {
-    k.log("Error loading font: ", e);
+    logger.log("Error loading font: ", e);
     return !1;
   }
   return !0;
@@ -40,7 +40,7 @@ function c(e, t) {
   if ("TEXT" === e.type) try {
     e.textAlignHorizontal = t;
   } catch (e) {
-    k.log("Failed to set text align horizontal", e);
+    logger.log("Failed to set text align horizontal", e);
   }
 }
 function u(e) {
@@ -117,7 +117,7 @@ function f(e) {
   return !1;
 }
 async function _(e, t, i) {
-  N.LOG_RESPONSIVE && k.clear();
+  N.LOG_RESPONSIVE && logger.clear();
   (await o(e, t)) ? (function e(t, i) {
     if ("children" in t && t.children.length > 0 && ("FRAME" === t.type || "COMPONENT" === t.type)) for (let n of t.children.filter(d)) -1 === i.indexOf(t.id) && e(n, i);
     if (s(t.name), s(t), !("parent" in t) || !t.parent || !("layoutMode" in t.parent) || "NONE" === t.parent.layoutMode) {
@@ -281,11 +281,11 @@ async function _(e, t, i) {
       let e = t.height;
       "HUG" !== t.layoutSizingHorizontal && (t.layoutSizingVertical = "HUG", t.height < e && t.resize(t.width, e));
     }
-  }(e, i)) : k.log("Not all fonts loaded in subtree, aborting responsive heuristics.");
+  }(e, i)) : logger.log("Not all fonts loaded in subtree, aborting responsive heuristics.");
 }
 async function y(e, t, i, r) {
   if (0 === e.length) {
-    k.log("No nodes to segment.");
+    logger.log("No nodes to segment.");
     return;
   }
   1 === e.length && "GROUP" === e[0].type && (e = [function (e, t) {
@@ -342,7 +342,7 @@ async function b(e, t, i) {
       t.width <= e.width && (e.textAutoResize = "WIDTH_AND_HEIGHT");
       t.remove();
     } catch (e) {
-      k.log("error loading font or changing text node", e);
+      logger.log("error loading font or changing text node", e);
     }
     return 0;
   }
@@ -502,7 +502,7 @@ export function $$x4(e, t) {
         return !0;
       }
     } catch (e) {
-      k.info("failed on checking shouldTidySelectionSingleDimension with error: ", e);
+      logger.info("failed on checking shouldTidySelectionSingleDimension with error: ", e);
     }
     Rm("shouldTidySelectionSingleDimension", "fallthrough, return false", 3);
     return !1;

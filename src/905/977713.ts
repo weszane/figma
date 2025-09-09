@@ -25,7 +25,7 @@ import { $P, $t, Aw, b6, Hg, ij, L0, Lz, Pe, qf, Ri, ve, w4, yh, Z9 } from '../f
 import { BrowserInfo } from '../figma_app/778880'
 import { b as _$$b, bL, mc, ME, Ov, q7, YJ } from '../figma_app/860955'
 import { isInteractionPathCheck } from '../figma_app/897289'
-import { useDispatch } from '../vendor/514228'
+import { useDispatch } from 'react-redux'
 
 var C = (e => (e.MATCH_CASE = 'MATCH_CASE', e.USE_REGEX = 'USE_REGEX', e.MATCH_WHOLE_WORDS = 'MATCH_WHOLE_WORDS', e))(C || {})
 function T(e) {
@@ -259,19 +259,19 @@ function R({
     className: 'x78zum5 x1q0g3np x1yjdb4r x1jnr06f xk80jj8 x1a02dak',
     children: Y.map(e => e.isChecked
       ? jsx('div', {
-          children: jsx(_$$v, {
-            size: 'md',
-            onClose: () => {
-              let t = T(e.name)
-              P(e => ({
-                ...e,
-                [t]: !e[t],
-              }))
-            },
-            hasCloseButton: !0,
-            children: e.displayText,
-          }),
-        }, e.name)
+        children: jsx(_$$v, {
+          size: 'md',
+          onClose: () => {
+            let t = T(e.name)
+            P(e => ({
+              ...e,
+              [t]: !e[t],
+            }))
+          },
+          hasCloseButton: !0,
+          children: e.displayText,
+        }),
+      }, e.name)
       : null),
   })
   let ee = j === 0 || l === ''
@@ -460,21 +460,21 @@ export function $$M0({
     },
     '&.cm-editor': p
       ? {
-          height: '100%',
-        }
+        height: '100%',
+      }
       : {},
     '& .cm-scroller': p
       ? {
-          overflow: 'auto',
-        }
+        overflow: 'auto',
+      }
       : {
-          height: '100% !important',
-        },
+        height: '100% !important',
+      },
     '.cm-gutters': x
       ? {}
       : {
-          display: 'none',
-        },
+        display: 'none',
+      },
   }), [m, h, g, p, x, S])
   let K = useMemo(() => w4.of([{
     key: 'Mod-f',
@@ -497,8 +497,8 @@ export function $$M0({
     let o = n.length
     let l = o
       ? getI18nString('sites.code_component.editor_statistics_selected_length', {
-          length: o,
-        })
+        length: o,
+      })
       : ''
     k(`${getI18nString('sites.code_component.editor_statistics_line_column', {
       line: i,
@@ -510,8 +510,8 @@ export function $$M0({
   }), [])
   let Z = useMemo(() => y
     ? Lz.updateListener.of((e) => {
-        e.docChanged && !e.transactions.some(e => e.annotation(ij)) && y(e.state.doc.toString(), e)
-      })
+      e.docChanged && !e.transactions.some(e => e.annotation(ij)) && y(e.state.doc.toString(), e)
+    })
     : null, [y])
   let X = useMemo(() => {
     if (!b)
@@ -536,52 +536,52 @@ export function $$M0({
   let en = useMemo(() => b ? LI(e) : [], [b, e])
   let er = useMemo(() => i
     ? (function (e, t) {
-        let i
-        if (!e || !t)
-          return []
-        i = e || null
-        let n = `${i || 'null'}:${t}`
-        return Z9.fromClass(class {
-          constructor(e) {
-            this.view = e
-            let t = F.get(n)
-            t && t.selection.anchor <= e.state.doc.length && t.selection.head <= e.state.doc.length && setTimeout(() => {
-              this.view.dispatch({
-                selection: {
-                  anchor: t.selection.anchor,
-                  head: t.selection.head,
-                },
-              })
-              this.view.scrollDOM.scrollTop = t.scroll.top
-              this.view.scrollDOM.scrollLeft = t.scroll.left
-              t.wasFocused && this.view.focus()
-            }, 0)
-          }
-
-          saveState() {
-            let e = this.view.state.selection.main
-            F.set(n, {
+      let i
+      if (!e || !t)
+        return []
+      i = e || null
+      let n = `${i || 'null'}:${t}`
+      return Z9.fromClass(class {
+        constructor(e) {
+          this.view = e
+          let t = F.get(n)
+          t && t.selection.anchor <= e.state.doc.length && t.selection.head <= e.state.doc.length && setTimeout(() => {
+            this.view.dispatch({
               selection: {
-                anchor: e.anchor,
-                head: e.head,
+                anchor: t.selection.anchor,
+                head: t.selection.head,
               },
-              scroll: {
-                top: this.view.scrollDOM.scrollTop,
-                left: this.view.scrollDOM.scrollLeft,
-              },
-              wasFocused: this.view.hasFocus,
             })
-          }
+            this.view.scrollDOM.scrollTop = t.scroll.top
+            this.view.scrollDOM.scrollLeft = t.scroll.left
+            t.wasFocused && this.view.focus()
+          }, 0)
+        }
 
-          update() {
-            this.saveState()
-          }
+        saveState() {
+          let e = this.view.state.selection.main
+          F.set(n, {
+            selection: {
+              anchor: e.anchor,
+              head: e.head,
+            },
+            scroll: {
+              top: this.view.scrollDOM.scrollTop,
+              left: this.view.scrollDOM.scrollLeft,
+            },
+            wasFocused: this.view.hasFocus,
+          })
+        }
 
-          destroy() {
-            this.saveState()
-          }
-        })
-      }(H, t))
+        update() {
+          this.saveState()
+        }
+
+        destroy() {
+          this.saveState()
+        }
+      })
+    }(H, t))
     : [], [i, H, t])
   let ea = useMemo(() => _Z(e), [e])
   let es = useMemo(() => qf(I), [I])
@@ -596,13 +596,13 @@ export function $$M0({
     let t = (t) => {
       t.type === 'DEPENDENCY_TYPES_STATUS'
         ? (C(t), t.status === 'finished' && V.current
-            ? (V.current.dispatch({
-                effects: [Yt.of(t)],
-              }), e = setTimeout(() => {
-                e = null
-                C(e => e?.status === 'finished' ? null : e)
-              }, 2e3))
-            : e && (clearTimeout(e), e = null))
+          ? (V.current.dispatch({
+            effects: [Yt.of(t)],
+          }), e = setTimeout(() => {
+            e = null
+            C(e => e?.status === 'finished' ? null : e)
+          }, 2e3))
+          : e && (clearTimeout(e), e = null))
         : throwTypeError(t.type)
     }
     Nx(t)
@@ -618,9 +618,9 @@ export function $$M0({
       : w.status === 'finished'
         ? getI18nString('sites.code_component.dependency_types_status_finished')
         : getI18nString('sites.code_component.dependency_types_status_progress', {
-            downloaded: w.downloaded ?? 0,
-            total: w.total ?? 0,
-          })
+          downloaded: w.downloaded ?? 0,
+          total: w.total ?? 0,
+        })
   let ec = useRef(null)
   let eu = useCallback((e) => {
     ec.current && ec.current !== e && V.current && (V.current.destroy(), V.current = void 0)
@@ -656,8 +656,8 @@ export function $$M0({
       onPointerDown: el,
       style: p
         ? {
-            height: E ? 'calc(100% - 24px)' : '100%',
-          }
+          height: E ? 'calc(100% - 24px)' : '100%',
+        }
         : void 0,
       ...getContextMenuTriggerProps(),
       children: j && V.current && jsx(R, {

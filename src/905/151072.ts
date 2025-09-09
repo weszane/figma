@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { roundToMultiple, clamp } from "../figma_app/492908";
 import { l as _$$l } from "../905/556594";
 import { O4 } from "../905/777187";
-import { c1 } from "../figma_app/806412";
+import { createRecordingCallback } from "../figma_app/878298";
 import { q, v as _$$v } from "../905/476456";
 import { LS } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { a3, ow, G7 } from "../905/188421";
 import { fI } from "../figma_app/626177";
@@ -18,8 +18,8 @@ import { t as _$$t } from "../905/1946";
 import { sH, sI, Yq } from "../figma_app/183248";
 import { QK } from "../figma_app/100987";
 let I = [.25, .5, .75, 1, 2, 3, 4, 5, 10];
-class E extends a3 {}
-class x extends c$ {}
+class E extends a3 { }
+class x extends c$ { }
 let S = new class {
   constructor() {
     this.MAX_SCALE = sH;
@@ -75,7 +75,7 @@ let $$w0 = forwardRef((e, t) => {
   } = e;
   let u = useDispatch();
   let f = useSelector(e => e.dropdownShown);
-  let w = c1(recordingKey);
+  let w = createRecordingCallback(recordingKey);
   let C = I.map((e, t) => jsx(x, {
     value: {
       value: e
@@ -127,7 +127,7 @@ let $$w0 = forwardRef((e, t) => {
         iconClassName: QK,
         id: "scale-input-fullscreen.scale_panel.scale",
         onChange: (e, t, i) => {
-          onScaleChange(e.value, i === G7.Input ? Yq.Input : Yq.Select, t ?? zk.NO, e.anchorPoint);
+          onScaleChange(e.value, i === G7.Input ? Yq.Input : Yq.Select, t ?? yesNoTrackingEnum.NO, e.anchorPoint);
           t && fullscreenValue.commit();
         },
         onKeyDown: onInputKeyDown,

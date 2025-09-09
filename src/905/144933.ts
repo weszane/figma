@@ -1,7 +1,7 @@
 import { Vt, yG, nK, ey } from "../905/859698";
 import { VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { getTrackingSessionId } from "../905/471229";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { e as _$$e } from "../figma_app/324237";
@@ -93,7 +93,7 @@ export let $$v0 = new class {
     this.CodeSuggestionsBulkResultSchemaValidator = createNoOpValidator();
     this.argsWithQueryIdAndSessionId = e => ({
       ...e,
-      queryId: _$$g(),
+      queryId: generateUUIDv4(),
       sessionId: getTrackingSessionId()
     });
     this.getCodeSuggestions = e => this.CodeSuggestionsResultSchemaValidator.validate(async ({

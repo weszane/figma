@@ -5,7 +5,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { sf, Qv } from "../905/929976";
@@ -103,7 +103,7 @@ export function $$C2(e, t, r) {
     }));
     let s = t.getState().currentUserOrgId && !ignoreCurrentPlan;
     if (r.dontRedirect) {
-      t.dispatch(F.enqueue({
+      t.dispatch(VisualBellActions.enqueue({
         type: "new_team_created",
         message: getI18nString("team_creation.you_have_created_a_new_team")
       }));
@@ -120,7 +120,7 @@ export function $$C2(e, t, r) {
         view: "team",
         teamId: e.id
       }));
-      t.dispatch(F.enqueue({
+      t.dispatch(VisualBellActions.enqueue({
         type: "new_team_created",
         message: getI18nString("team_creation.you_have_created_a_new_team")
       }));
@@ -160,7 +160,7 @@ let $$w0 = createOptimistThunk((e, t) => {
   }).then(({
     data: r
   }) => {
-    t.skipVisualBell || e.dispatch(F.enqueue({
+    t.skipVisualBell || e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("change_team_name_visual_bell.text", {
         oldTeamName: o,
         newTeamName: d

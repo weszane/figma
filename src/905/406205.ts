@@ -1,7 +1,7 @@
 import { ex } from "../905/524523";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { _ as _$$_ } from "../figma_app/496441";
 import { resourceUtils } from "../905/989992";
@@ -46,9 +46,9 @@ import { x as _$$x2 } from "../905/98916";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
 import { B as _$$B3 } from "../905/524020";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { FEntityType, FFileType } from "../figma_app/191312";
-import { qjT } from "../figma_app/43951";
+import { FavoritesByResourceId } from "../figma_app/43951";
 import { Bp } from "../figma_app/349248";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { f6, ai } from "../figma_app/915202";
@@ -97,11 +97,11 @@ function em(e) {
   let o = _6();
   let d = useSelector(e => e.currentUserOrgId);
   let u = useSelector(e => e.currentTeamId);
-  let g = TA();
+  let g = getUserId();
   let f = "recentsAndSharing" === o.view && "shared-projects" === o.tab ? e.folder.parent_org?.id ?? null : d;
   let y = "recentsAndSharing" === o.view && "shared-projects" === o.tab ? e.folder.parent_team?.id ?? null : u;
   let b = Um();
-  let v = Rs(qjT, {
+  let v = Rs(FavoritesByResourceId, {
     resourceId: e.folder.id,
     resourceType: FEntityType.FOLDER,
     orgId: f,

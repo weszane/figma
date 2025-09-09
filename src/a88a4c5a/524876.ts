@@ -9,10 +9,10 @@ import { Ib } from '../905/129884';
 import { fP, mr, o1, OX, q9, Sg, U0, xu } from '../905/149906';
 import { showModalHandler } from '../905/156213';
 import { h as _$$h } from '../905/207101';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { l } from '../905/348437';
-import { iZ } from '../905/372672';
+import { selectCurrentUser } from '../905/372672';
 import { K as _$$K } from '../905/443068';
 import { trackEventAnalytics } from '../905/449184';
 import { MZ } from '../905/470594';
@@ -48,7 +48,7 @@ import { q5 } from '../figma_app/516028';
 import { k as _$$k2 } from '../figma_app/564183';
 import { i4, RI, uz, We } from '../figma_app/770088';
 import { BrowserInfo } from '../figma_app/778880';
-import { Pt, qP } from '../figma_app/806412';
+import { generateRecordingKey, useSetupPlayback } from '../figma_app/878298';
 import { I as _$$I, q as _$$q } from '../figma_app/819288';
 import { HW, lg } from '../figma_app/976749';
 import { dN } from '../vendor/291472';
@@ -107,7 +107,7 @@ let es = [];
 export function $$eo0(e) {
   let t = getI18nString('comments.submit');
   return jsx(_$$K, {
-    'recordingKey': Pt(e, 'submit'),
+    'recordingKey': generateRecordingKey(e, 'submit'),
     'disabled': e.disabled,
     'onClick': e.onClick,
     'data-tooltip-type': Ib.TEXT,
@@ -142,7 +142,7 @@ export function $$ed1(e) {
   let [s, d] = useState(!1);
   let g = useRef(null);
   let K = useRef(null);
-  let X = iZ();
+  let X = selectCurrentUser();
   let Z = _$$f('has_opened_comments_modal');
   let {
     threadPosition,
@@ -230,7 +230,7 @@ export function $$ed1(e) {
   useEffect(() => {
     getFeatureFlags().autofocus_edit_comment && e.editingExistingComment && ez();
   }, [ez, e.editingExistingComment]);
-  let eV = qP(e.recordingKey, 'update', ([t, l]) => {
+  let eV = useSetupPlayback(e.recordingKey, 'update', ([t, l]) => {
     if (!l) {
       e.updateMessage(t);
       return;
@@ -240,7 +240,7 @@ export function $$ed1(e) {
     i !== n && i !== l.getCurrentContent().getKeyBefore(n) || e7(e.messageMeta) || eP(100);
     e.updateMessage(t);
   });
-  let eD = qP(e.recordingKey, 'emojiPick', t => {
+  let eD = useSetupPlayback(e.recordingKey, 'emojiPick', t => {
     if (e.editorRef && e.editorRef.current) {
       let l = dN.get(t.id);
       l && e.editorRef.current.insertEmoji(l);
@@ -281,7 +281,7 @@ export function $$ed1(e) {
       MZ(dispatch, getI18nString('check_network_compatibility.error_bell.comment_attachments.message'));
       return;
     }
-    dispatch(_$$F.enqueue({
+    dispatch(VisualBellActions.enqueue({
       message: ea(e)
     }));
     t && e0(t);
@@ -493,7 +493,7 @@ export function $$ed1(e) {
           variant: 'primary',
           onClick: eF,
           disabled: e8,
-          recordingKey: Pt(e, 'editSave'),
+          recordingKey: generateRecordingKey(e, 'editSave'),
           children: e.submitText
         })]
       }) : jsx($$eo0, {

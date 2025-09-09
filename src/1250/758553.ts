@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { Y9 } from "../905/504768";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { D6, j_ } from "../figma_app/465071";
 import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
@@ -34,7 +34,7 @@ let h = registerModal(function (e) {
 }, "PostConfirmDeleteModal");
 export var $$b0 = (e => (e.USER = "user_post_context_menu", e.SYSTEM = "system_post_context_menu", e))($$b0 || {});
 let x = e => {
-  let t = iZ();
+  let t = selectCurrentUser();
   let n = (t && t.id === e.creator.id) ?? !1;
   let a = D6("useUserPostPermissions");
   return {

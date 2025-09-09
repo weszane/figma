@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useContext, useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import s from "classnames";
 import { h4, Nz } from "../905/417232";
 import { d as _$$d } from "../figma_app/429226";
-import { Pt, rf } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { S as _$$S } from "../figma_app/552746";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { js, Z6, cP, _X } from "../figma_app/451499";
@@ -104,7 +104,7 @@ function w(e) {
     children: jsxs(bL, {
       onChange: e.onChange,
       value: e.action,
-      recordingKey: Pt(e, "select"),
+      recordingKey: generateRecordingKey(e, "select"),
       children: [jsx(l9, {
         "data-testid": "action-select",
         disabled: c,
@@ -536,10 +536,10 @@ export function $$en0({
     return n;
   }, [position, B, dragItem, I.isNestedInConditional, O, ea]);
   let ec = position && L && !W && position === Nz.INSIDE && "CONDITIONAL" !== dragItem.connectionType;
-  let ep = rf(I.recordingKey, "click", e => {
+  let ep = useHandleMouseEvent(I.recordingKey, "click", e => {
     I.onSelect(I.actionIndexPath, !0);
   });
-  let eu = rf(I.recordingKey, "mousedown", e => {
+  let eu = useHandleMouseEvent(I.recordingKey, "mousedown", e => {
     qQ(I.action) || I.onSelect(I.actionIndexPath, !0);
   });
   let eh = e => {
@@ -706,7 +706,7 @@ export function $$en0({
       ref: ei,
       children: jsx(_$$t2, {
         addButtonPressed: I.onAddAction,
-        recordingKey: Pt(I.recordingKey, "addAction"),
+        recordingKey: generateRecordingKey(I.recordingKey, "addAction"),
         isNestedInConditional: !0
       })
     })]
@@ -742,7 +742,7 @@ export function $$en0({
     dropdownShown: T,
     onChange: eh,
     action: ey,
-    recordingKey: Pt(I.recordingKey, "actionDropdown"),
+    recordingKey: generateRecordingKey(I.recordingKey, "actionDropdown"),
     showVideoActions: S,
     isNestedInConditional: I.isNestedInConditional
   });

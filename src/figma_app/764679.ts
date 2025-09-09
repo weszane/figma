@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
@@ -91,7 +91,7 @@ export function $$B0(e) {
   let r = jsx(dn, {
     editorType: [e.editorType]
   });
-  if (e.fileName) t = e.fileName;else if (e.playgroundFile) t = getI18nString("community.using.playground_file");else switch (e.editorType) {
+  if (e.fileName) t = e.fileName; else if (e.playgroundFile) t = getI18nString("community.using.playground_file"); else switch (e.editorType) {
     case ManifestEditorType.FIGMA:
       t = getI18nString("community.duplicate.open_in_figma");
       break;
@@ -354,7 +354,7 @@ export function $$H1(e, t, r) {
           resource: e,
           editorTypes: k
         })
-      });else if (!j && B.length > 1) return H;
+      }); else if (!j && B.length > 1) return H;
       j ? t.push(W) : t.push(z);
       return t;
     })();

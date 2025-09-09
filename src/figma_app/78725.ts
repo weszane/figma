@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
@@ -7,9 +7,9 @@ import { popModalStack, showModalHandler } from "../905/156213";
 import { m0 } from "../figma_app/976749";
 import { mf, YN } from "../figma_app/844435";
 import { tS } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FInheritanceType, FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
-import { Sc8 } from "../figma_app/43951";
+import { AutoRunPluginsView } from "../figma_app/43951";
 import { T5, H3, X$ } from "../figma_app/465071";
 import { isDevModeWithInspectPanel } from "../figma_app/300692";
 import { R } from "../figma_app/612938";
@@ -278,7 +278,7 @@ function L() {
   let t = D();
   let r = T5("usePluginToAutoRun").unwrapOr(null);
   let n = H3(r);
-  let i = iZ()?.id;
+  let i = selectCurrentUser()?.id;
   if (!(e.loaded && t.loaded)) return {
     loaded: !1,
     plugin: null
@@ -302,8 +302,8 @@ function L() {
   };
 }
 function P() {
-  let e = iZ();
-  return k(Rs(Sc8, {
+  let e = selectCurrentUser();
+  return k(Rs(AutoRunPluginsView, {
     targetOrgId: null,
     targetUserId: e?.id ?? ""
   }, {
@@ -316,7 +316,7 @@ function D(e) {
     id: H3(t),
     isEnterprise: t?.tier === FPlanNameType.ENTERPRISE
   };
-  let n = Rs(Sc8, {
+  let n = Rs(AutoRunPluginsView, {
     targetOrgId: r?.id ?? "",
     targetUserId: null
   }, {

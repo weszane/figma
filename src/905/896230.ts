@@ -8,7 +8,7 @@ import { iw } from "../figma_app/582563";
 import { captureException } from "../905/11";
 import { logCustom } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Iu } from "../figma_app/141088";
 import { EventEmitter } from "../905/690073";
 import { y as _$$y } from "../905/913008";
@@ -251,7 +251,7 @@ class H extends f {
 }
 class W extends Q {
   allocationFailed(e, t, i, n, r, a) {
-    this._receivedFailedAllocation || (this._receivedFailedAllocation = !0, _$$r2.reportOOM(a), debugState?.dispatch(_$$F.enqueue({
+    this._receivedFailedAllocation || (this._receivedFailedAllocation = !0, _$$r2.reportOOM(a), debugState?.dispatch(VisualBellActions.enqueue({
       get message() {
         return getI18nString("proto.lib.device_low_memory");
       }

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useMemo, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { arraysEqual } from "../figma_app/656233";
 import { K as _$$K } from "../905/443068";
 import { d as _$$d } from "../905/976845";
@@ -17,7 +17,7 @@ import { defaultSessionLocalIDString, sessionLocalIDToString } from "../905/8714
 import { useMemoizedAtomValue } from "../figma_app/27355";
 import v from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
-import { Pt, rf, uA, _3 } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent, RecordingComponent, handleInputEvent } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, Uv, bS } from "../figma_app/91703";
 import { AV } from "../figma_app/933328";
@@ -25,7 +25,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { fG, C4, yH, l7 as _$$l2 } from "../figma_app/540726";
 import { valueOrFallback, isValidValue, isInvalidValue, normalizeValue, MIXED_MARKER } from "../905/216495";
 import { zy } from "../figma_app/915202";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { vL } from "../905/826900";
 import { f as _$$f3 } from "../905/135117";
@@ -78,7 +78,7 @@ function $(e) {
   let p = q();
   let m = Number(isValidValue(propertyList) && valueOrFallback(propertyList, []).length);
   return jsx(_$$K, {
-    recordingKey: Pt(e, "removeButton"),
+    recordingKey: generateRecordingKey(e, "removeButton"),
     disabled: 0 === m,
     "aria-label": getI18nString("fullscreen.draggable_list.remove"),
     onClick: u,
@@ -103,7 +103,7 @@ function Z(e) {
   let o = q();
   return e.toggleShowingStyles ? jsx(_$$d, {
     "aria-label": getI18nString("fullscreen.properties_panel.style"),
-    recordingKey: Pt(e, "stylesButton"),
+    recordingKey: generateRecordingKey(e, "stylesButton"),
     "aria-expanded": e.isStylesPickerShown,
     onClick: s,
     htmlAttributes: {
@@ -116,7 +116,7 @@ function Z(e) {
 }
 function X(e) {
   return jsx(_$$K, {
-    recordingKey: Pt(e, "resetInteractionsButton"),
+    recordingKey: generateRecordingKey(e, "resetInteractionsButton"),
     "aria-label": getI18nString("proto.prototype_panel.reset_interactions"),
     onClick: e.onResetInteractions,
     htmlAttributes: {
@@ -131,7 +131,7 @@ function Q(e) {
     className: c9,
     children: jsx(_$$K, {
       actionOnPointerDown: !0,
-      recordingKey: Pt(e, "addButton"),
+      recordingKey: generateRecordingKey(e, "addButton"),
       "aria-label": e.overrideAddPropertyTooltip ?? getI18nString("fullscreen.draggable_list.add"),
       onClick: e.addProperty,
       htmlAttributes: {
@@ -149,7 +149,7 @@ function J(e) {
   return jsx("span", {
     className: kG,
     children: jsx(_$$K, {
-      recordingKey: Pt(e, "scrollBehaviorButton"),
+      recordingKey: generateRecordingKey(e, "scrollBehaviorButton"),
       "aria-label": getI18nString("fullscreen.draggable_list.scroll_behavior"),
       onClick: e.toggleScrollBehaviorPicker,
       htmlAttributes: {
@@ -165,7 +165,7 @@ function J(e) {
 function ee(e) {
   return jsx(_$$f, {
     "aria-label": getI18nString("fullscreen.toolbar.prototyping-visibility"),
-    recordingKey: Pt(e, "addButton"),
+    recordingKey: generateRecordingKey(e, "addButton"),
     checked: !!e.checked,
     onIcon: jsx(_$$l, {}),
     offIcon: jsx(_$$f2, {}),
@@ -268,7 +268,7 @@ function en(e) {
     onHeaderClick && onHeaderClick(e);
     headerClickTriggersAddProperty && isValidValue(propertyList) && 0 === valueOrFallback(propertyList, []).length && !hideAddButton && addProperty(e);
   }, [addProperty, propertyList, hideAddButton, onHeaderClick, headerClickTriggersAddProperty]);
-  let d = rf(Pt(e, "panelTitle"), "click", l);
+  let d = useHandleMouseEvent(generateRecordingKey(e, "panelTitle"), "click", l);
   let c = useRef(null);
   let u = useMemoizedAtomValue(!1, e.isPanelBodyCollapsedAtom);
   if (!e.title) return null;
@@ -314,14 +314,14 @@ function en(e) {
     })
   });
 }
-class er extends uA {
+class er extends RecordingComponent {
   constructor(e) {
     super(e);
     this.focusChange = () => this.forceUpdate();
     this.keyboardReceiverRef = e => {
       e && (this.keyboardReceiver = e);
     };
-    this.onKeyDown = _3(this, "keydown", e => {
+    this.onKeyDown = handleInputEvent(this, "keydown", e => {
       if (this.props.shouldIgnoreKeyboardEvents) return;
       let t = e.event;
       switch (t.keyCode) {
@@ -525,7 +525,7 @@ export function $$ea0(e) {
   });
 }
 er.displayName = "DraggablePropertyList";
-export class $$es2 extends uA {
+export class $$es2 extends RecordingComponent {
   constructor() {
     super(...arguments);
     this.state = {
@@ -550,7 +550,7 @@ export class $$es2 extends uA {
           Fullscreen?.applyStyleToSelection(this.props.inheritStyleKeyField, defaultSessionLocalIDString, !1);
         });
       });
-      this.props.onChange([], zk.YES);
+      this.props.onChange([], yesNoTrackingEnum.YES);
     };
     this.toggleShowingStyles = e => {
       if (this.props.onPickerIconClick) {
@@ -562,7 +562,7 @@ export class $$es2 extends uA {
         });
         return;
       }
-      if (zb(this.props)) this.props.dispatch(Uv());else {
+      if (zb(this.props)) this.props.dispatch(Uv()); else {
         let t = e.left + (e.width - N2) / 2;
         let i = e.top + e.height;
         this.props.dispatch(bS({

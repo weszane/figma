@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useRef, useContext, useId, useEffect } from "react";
 import { flushSync } from "../vendor/944059";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
@@ -12,7 +12,7 @@ import _ from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { Uz } from "../905/63728";
-import { Pt, of, v_, aH } from "../figma_app/806412";
+import { generateRecordingKey, useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Y } from "../905/830372";
@@ -84,10 +84,10 @@ export function $$Y0({
           themeId: c,
           setThemeId: p,
           viewOnly: !!o,
-          recordingKey: Pt(l, "slideTheme")
+          recordingKey: generateRecordingKey(l, "slideTheme")
         })]
       }), _ && (s ? jsx(_$$t2, {
-        recordingKey: Pt(l, "inspectionPanel")
+        recordingKey: generateRecordingKey(l, "inspectionPanel")
       }) : jsx($$q2, {
         recordingKey: l
       })), g && jsx(_$$v, {})]
@@ -172,7 +172,7 @@ function X({
   let L = e.styleType;
   let P = useRef(null);
   let D = useContext(zK);
-  let k = of(Pt(p, "styleName"), "submit", () => {
+  let k = useHandleFocusEvent(generateRecordingKey(p, "styleName"), "submit", () => {
     if ("" === g) return;
     let r = t ? In(t) : void 0;
     let n = r ? r + "/" + g : g;
@@ -188,14 +188,14 @@ function X({
       isRenaming: !1
     }));
   };
-  let U = v_(p, "keydown", e => {
-    if (e.keyCode === Uz.TAB) k();else if (e.keyCode === Uz.ENTER) {
+  let U = useHandleKeyboardEvent(p, "keydown", e => {
+    if (e.keyCode === Uz.TAB) k(); else if (e.keyCode === Uz.ENTER) {
       k();
       D === zM.EDIT_STYLE && "" === g || h?.();
       e.preventDefault();
       e.stopPropagation();
     } else {
-      if (e.keyCode !== Uz.ESCAPE) return aH;
+      if (e.keyCode !== Uz.ESCAPE) return SKIP_RECORDING;
       flushSync(() => {
         y(t ? kH(t) : "");
       });
@@ -247,10 +247,10 @@ function X({
         },
         onFocus: () => (C(ay({
           isRenaming: !0
-        })), y(g), aH),
+        })), y(g), SKIP_RECORDING),
         onKeyDown: U,
         placeholder: $$J1(L),
-        recordingKey: Pt(p, "styleName"),
+        recordingKey: generateRecordingKey(p, "styleName"),
         value: g
       })]
     }), (u || !_) && jsxs(Y, {
@@ -282,7 +282,7 @@ function X({
           v(e.target.value);
         },
         placeholder: getI18nString("design_systems.create_style.placeholder_description"),
-        recordingKey: Pt(p, "styleDescription"),
+        recordingKey: generateRecordingKey(p, "styleDescription"),
         spellCheck: !1,
         submit: G,
         value: S
@@ -374,7 +374,7 @@ function Z({
         recordingKey: a,
         children: c.map(e => jsx(c$, {
           value: e,
-          recordingKey: Pt(a, e)
+          recordingKey: generateRecordingKey(a, e)
         }, e))
       })
     })]

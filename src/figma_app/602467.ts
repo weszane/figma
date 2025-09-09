@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useEffect, useContext, useRef, useMemo, memo, useState } from "react";
-import { useSelector, useDispatch, shallowEqual } from "../vendor/514228";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { U1 } from "../figma_app/343967";
 import { K as _$$K } from "../905/443068";
 import { bL } from "../905/911410";
@@ -11,7 +11,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription, AY } from "../figma_app/27355";
 import h from "classnames";
 import { ZC } from "../figma_app/39751";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { Us } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
@@ -481,7 +481,7 @@ function eo({
         source: "preset",
         preset: trackingText
       }),
-      recordingKey: Pt(e, "presets", trackingText),
+      recordingKey: generateRecordingKey(e, "presets", trackingText),
       children: localizedText
     });
   };

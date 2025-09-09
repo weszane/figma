@@ -2,7 +2,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { nE, W0, Ut, v4, qp } from "../figma_app/761118";
 import { FR } from "../figma_app/827216";
 import { debugState } from "../905/407919";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { uk } from "../figma_app/216057";
 export function $$d2({
   button: e,
@@ -12,7 +12,7 @@ export function $$d2({
   timeUntilDequeueMs: i = 3e3,
   onDequeue: a = () => {}
 }) {
-  debugState.dispatch(F.enqueue({
+  debugState.dispatch(VisualBellActions.enqueue({
     button: e,
     message: t,
     type: n,

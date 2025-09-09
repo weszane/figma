@@ -1,19 +1,19 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
 import { SchemaJoinStatus } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
-import { k as _$$k } from "../905/651849";
-import { Ay } from "../905/612521";
+import { logger } from "../905/651849";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { Point } from "../905/736624";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { sf } from "../905/929976";
 import { Cp } from "../905/292918";
 import { Nu, ie, ov, E as _$$E } from "../905/300250";
@@ -30,22 +30,22 @@ import { ss } from "../905/746499";
 var $$P1 = (e => (e[e.TIMED_OUT = 0] = "TIMED_OUT", e[e.COULD_NOT_START = 1] = "COULD_NOT_START", e[e.BRANCH_ARCHIVED = 2] = "BRANCH_ARCHIVED", e[e.STALE_BRANCH_POINT = 3] = "STALE_BRANCH_POINT", e[e.COULD_NOT_COMPLETE = 4] = "COULD_NOT_COMPLETE", e))($$P1 || {});
 let O = async (e, t, i) => {
   e.dispatch(Nu({}));
-  e.dispatch(_$$F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     message: t,
-    icon: zX.SPINNER,
+    icon: VisualBellIcon.SPINNER,
     type: "file-merge-submit"
   }));
   await XHR.put(`/api/file_merge/${e.failureInfo.file_merge_id}`, {
     closed: !0
   }).catch(t => {
-    400 === t.status && (_$$k.warn(t), HJ(Error(t?.data?.message || "Unknown error"), PW.ON_MERGE, e.mergeParams.direction, {
+    400 === t.status && (logger.warn(t), HJ(Error(t?.data?.message || "Unknown error"), PW.ON_MERGE, e.mergeParams.direction, {
       file_merge_id: e.failureInfo.file_merge_id
     }));
   });
   await oJ(SchemaJoinStatus.JOINED).then(() => {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: i,
-      icon: zX.CHECK,
+      icon: VisualBellIcon.CHECK,
       type: "file-merge-submit"
     }));
     e.dispatch(ie({}));
@@ -53,16 +53,16 @@ let O = async (e, t, i) => {
 };
 let D = async (e, t, i) => {
   e.dispatch(Nu({}));
-  e.dispatch(_$$F.enqueue({
+  e.dispatch(VisualBellActions.enqueue({
     message: t,
-    icon: zX.SPINNER,
+    icon: VisualBellIcon.SPINNER,
     type: "file-merge-submit"
   }));
   await XHR.del(`/api/file_merge/${e.failureInfo.file_merge_id}`);
   await oJ(SchemaJoinStatus.JOINED).then(() => {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: i,
-      icon: zX.CHECK,
+      icon: VisualBellIcon.CHECK,
       type: "file-merge-submit"
     }));
     e.dispatch(ie({}));
@@ -130,7 +130,7 @@ let F = (e, t, i) => {
         title: renderI18nText(`collaboration.branching.merge_error.could_not_start_${s}`),
         description: n = renderI18nText("collaboration.branching.merge_error.branch_archived_description"),
         primaryButtonText: renderI18nText("base_notifications.dismiss"),
-        primaryAction: () => {}
+        primaryAction: () => { }
       };
     case 3:
       return {
@@ -138,7 +138,7 @@ let F = (e, t, i) => {
         description: n = renderI18nText("collaboration.branching.merge_error.branch_already_updated_description"),
         primaryButtonText: renderI18nText("collaboration.branching.merge_error.reload"),
         primaryAction: () => {
-          Ay.reload("Branch point changed");
+          customHistory.reload("Branch point changed");
         }
       };
     case 4:

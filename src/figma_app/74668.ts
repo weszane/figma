@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useLayoutEffect, forwardRef, useRef, useImperativeHandle, useMemo, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { d as _$$d } from "../905/976845";
@@ -15,7 +15,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { Ay } from "../figma_app/272902";
 import E from "classnames";
 import { conditionalFeatureFlag } from "../figma_app/169182";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { M3 } from "../figma_app/119475";
 import { B as _$$B } from "../905/714743";
@@ -180,7 +180,7 @@ function ea({
           onItemMouseLeave: _,
           onItemSelect: u,
           pickerType: l,
-          recordingKey: i ? Pt(d, i) : void 0,
+          recordingKey: i ? generateRecordingKey(d, i) : void 0,
           variable: t,
           variableSet: e.variableSet
         });
@@ -202,7 +202,7 @@ function ea({
             onItemHighlight: c,
             onItemMouseLeave: _,
             onItemSelect: u,
-            recordingKey: i ? Pt(d, i) : void 0
+            recordingKey: i ? generateRecordingKey(d, i) : void 0
           })
         });
       }
@@ -211,7 +211,7 @@ function ea({
         expression: e.expressionItem,
         isHighlighted: e.expressionItem.name === o,
         keyboardNavigationPath: h,
-        recordingKey: Pt(d, e.expressionItem.name),
+        recordingKey: generateRecordingKey(d, e.expressionItem.name),
         onItemHighlight: c,
         onItemSelect: u,
         onItemMouseLeave: _
@@ -224,7 +224,7 @@ function ea({
           componentPropItem: t,
           isHighlighted: r === o,
           keyboardNavigationPath: h,
-          recordingKey: Pt(d, r),
+          recordingKey: generateRecordingKey(d, r),
           onItemHighlight: c,
           onItemSelect: u,
           onItemMouseLeave: _
@@ -240,7 +240,7 @@ function ea({
           isDisabled: e.disabled,
           tooltip: e.tooltip,
           isHighlighted: r === o,
-          recordingKey: Pt(d, i),
+          recordingKey: generateRecordingKey(d, i),
           keyboardNavigationPath: h,
           onItemHighlight: c,
           onItemSelect: u,
@@ -613,7 +613,7 @@ export function $$eh0({
       className: Em,
       children: jsx(_$$d, {
         "aria-label": getI18nString("design_systems.styles.edit_style"),
-        recordingKey: Pt(d, "editStyleButton"),
+        recordingKey: generateRecordingKey(d, "editStyleButton"),
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.styles.edit_style"),
           "data-tooltip-type": Ib.TEXT,
@@ -941,7 +941,7 @@ function ey({
             onItemHighlight: l,
             onItemMouseLeave: c,
             onItemSelect: d,
-            recordingKey: s ? Pt(o, s) : void 0,
+            recordingKey: s ? generateRecordingKey(o, s) : void 0,
             variable: t,
             variableSet: e.variableSet
           }, tx(t));
@@ -964,7 +964,7 @@ function ey({
               onItemHighlight: l,
               onItemMouseLeave: c,
               onItemSelect: d,
-              recordingKey: i ? Pt(o, i) : void 0
+              recordingKey: i ? generateRecordingKey(o, i) : void 0
             })
           }, e.key);
         })

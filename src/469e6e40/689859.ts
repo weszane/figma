@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { V } from "../figma_app/312987";
 import { $$ } from "../figma_app/637027";

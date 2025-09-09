@@ -1,12 +1,12 @@
 import { useMemo, useLayoutEffect, useEffect, useRef } from "react";
 import { useAtomValueAndSetter, atom, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { wm } from "../905/19536";
+import { useMemoShallow } from "../905/19536";
 import { resourceUtils } from "../905/989992";
 import { logErrorAndReturn } from "../905/607410";
 import { bu } from "../905/663269";
 import { k } from "../905/745286";
 import { GC, ff } from "../905/80725";
-import { gc } from "../905/157003";
+import { getResourceAtomStore } from "../905/157003";
 import { uf, Kh } from "../905/16369";
 export function $$_2(e, t = {}) {
   return uf(e) ? function (e, t) {
@@ -30,7 +30,7 @@ export function $$_2(e, t = {}) {
       t.revalidateOnMount && l.refetch();
     }, [t.revalidateOnMount, l]);
     return useMemo(() => [r, l], [r, l]);
-  }(e, t) : bu(e) ? m(gc(e.view)(e.args), t) : m(e, t);
+  }(e, t) : bu(e) ? m(getResourceAtomStore(e.view)(e.args), t) : m(e, t);
 }
 let h = atom([null, null]);
 function m(e, t) {
@@ -40,7 +40,7 @@ function m(e, t) {
 }
 export function $$g1(e, t = {}) {
   let r = k(t);
-  let o = wm(() => e, [e]);
+  let o = useMemoShallow(() => e, [e]);
   let l = useMemo(() => r ? atom(e => o.map(t => e(t))) : atom(() => o.map(() => resourceUtils.disabled())), [o, r]);
   useEffect(() => {
     let e = atomStoreManager.sub(l, () => {});

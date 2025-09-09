@@ -1,4 +1,4 @@
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Qw } from "../figma_app/618433";
 import { Tj, _Z } from "../figma_app/649254";
 import { X } from "../905/145028";
@@ -69,7 +69,7 @@ export function $$p2() {
   return async t => {
     if (!e) return;
     let i = t.fieldSchemas.map(e => ({
-      id: g(),
+      id: generateUUIDv4(),
       name: e.name,
       fieldType: e.fieldType,
       required: !!e.required,

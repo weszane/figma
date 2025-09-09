@@ -1,8 +1,8 @@
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FEditorType } from "../figma_app/53721";
 import { my } from "../figma_app/976749";
 export function $$s1() {
-  let e = !iZ();
+  let e = !selectCurrentUser();
   let t = my();
   let r = t === FEditorType.Design;
   let s = t === FEditorType.Slides;
@@ -12,7 +12,7 @@ export function $$s1() {
   return e && (r || s || o || l || d);
 }
 export function $$o0() {
-  let e = !iZ();
+  let e = !selectCurrentUser();
   let t = my() === FEditorType.Design;
   return e && t;
 }

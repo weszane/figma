@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { trackEventAnalytics } from "../905/449184";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getPaymentFlowData } from "../figma_app/169182";
 import { _H } from "../figma_app/598111";
 import { reportError } from "../905/11";
@@ -268,7 +268,7 @@ let $$D3 = createOptimistThunk((e, {
     F.payment.promo && (_H(), e.dispatch(_$$Ay2({
       promo: null
     })));
-    let l = new URLSearchParams(Ay.location.search);
+    let l = new URLSearchParams(customHistory.location.search);
     if (H) {
       if (l.get("onCompleteRedirectFileKey")) {
         let t = decodeURIComponent(l.get("onCompleteRedirectFileKey"));
@@ -308,7 +308,7 @@ let $$D3 = createOptimistThunk((e, {
     D && D();
   }).catch(t => {
     let i = (t, i = {}) => {
-      let a = new URLSearchParams(Ay.location.search);
+      let a = new URLSearchParams(customHistory.location.search);
       let r = a.get("onCompleteRedirectFileKey");
       let o = a.get("onCompleteRedirectNodeId");
       e.dispatch(sf({

@@ -7,7 +7,7 @@ import { reportError } from "../905/11";
 import { D } from "../905/417423";
 import { h as _$$h } from "../905/706725";
 import { tS } from "../figma_app/516028";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { kK } from "../figma_app/144974";
 let h = "recent_fragments";
 let $$g0 = new class {
@@ -90,7 +90,7 @@ async function f(e, t, i) {
 }
 export function $$_1(e = !1) {
   let [t, i] = useAtomValueAndSetter(_$$h.recentFragmentsAtom);
-  let r = TA();
+  let r = getUserId();
   let a = tS();
   let l = useCallback(() => {
     r && a && !e && f(r, a, i);

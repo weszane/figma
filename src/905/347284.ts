@@ -1,15 +1,15 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { cZ } from "../figma_app/272902";
 import s from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { BrowserInfo } from "../figma_app/778880";
-import { uA, cZ as _$$cZ } from "../figma_app/806412";
+import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
 import { ZR, s4 } from "../figma_app/8833";
 import { scrollBarXHeight, trackPadding, scrollBarYWidth } from "../figma_app/786175";
 var o = s;
 var m = (e => (e.VERTICAL = "vertical", e.HORIZONTAL = "horizontal", e))(m || {});
-export class $$h0 extends uA {
+export class $$h0 extends RecordingComponent {
   constructor() {
     super(...arguments);
     this.scrollingTimeout = null;
@@ -66,8 +66,8 @@ export class $$h0 extends uA {
     this.getClipContainer = () => this.clipContainer;
     this.getScrollHeight = () => this.scrollHeight;
     this.getScrollWidth = () => this.scrollWidth;
-    this.getScrollContainerTop = xx(() => this.scrollContainer.getBoundingClientRect().top);
-    this.getScrollContainerBottom = xx(() => this.scrollContainer.getBoundingClientRect().bottom);
+    this.getScrollContainerTop = memoizeByArgs(() => this.scrollContainer.getBoundingClientRect().top);
+    this.getScrollContainerBottom = memoizeByArgs(() => this.scrollContainer.getBoundingClientRect().bottom);
     this.getTrackHeight = () => this.trackHeight;
     this.setClipContainer = e => {
       e && (this.clipContainer = e);
@@ -264,7 +264,7 @@ export class $$h0 extends uA {
         startDragX: void 0
       });
     };
-    this.onMouseDown = _$$cZ(this, "mousedown", e => {
+    this.onMouseDown = handleMouseEvent(this, "mousedown", e => {
       this.props.onMouseDown(e);
     });
   }

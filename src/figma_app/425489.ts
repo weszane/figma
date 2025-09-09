@@ -4,7 +4,7 @@ import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { um, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { fullscreenValue } from "../figma_app/455680";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { yw } from "../figma_app/617727";
 import { Zh } from "../figma_app/2590";
 import { s as _$$s } from "../905/291518";
@@ -195,7 +195,7 @@ let $$S1 = um(T, (e, t) => {
         break;
       }
     case "UPDATE_PRESENTED_NODE":
-      e.targetFrameFollowingEnabled && t.payload.nodeId !== e.currentPresentedNode && (E(), tJ([t.payload.nodeId], !1), assert(!!e.targetFrameFollowingScrollToNode, "Scroll callback should have been set already through SET_SCROLL_CALLBACK."), e.targetFrameFollowingScrollToNode(t.payload.nodeId));
+      e.targetFrameFollowingEnabled && t.payload.nodeId !== e.currentPresentedNode && (E(), replaceSelection([t.payload.nodeId], !1), assert(!!e.targetFrameFollowingScrollToNode, "Scroll callback should have been set already through SET_SCROLL_CALLBACK."), e.targetFrameFollowingScrollToNode(t.payload.nodeId));
       o = {
         ...e,
         currentPresentedNode: t.payload.nodeId

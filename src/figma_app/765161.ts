@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { BrowserInfo } from "../figma_app/778880";
 import { Tc } from "../905/797478";
 import { CB } from "../figma_app/442259";

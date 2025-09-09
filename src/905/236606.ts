@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, createContext, useContext, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { Fullscreen } from "../figma_app/763686";
@@ -339,7 +339,7 @@ function ee({
       if (_$$T()) d(sf({
         ...m,
         variableIdForDetailsPanel: t
-      }));else {
+      })); else {
         let e = cn(ref.current, iB + wR);
         d(showModal({
           type: B.type,
@@ -421,7 +421,7 @@ function et({
           styleNodeId: S,
           styleType: style_type
         }
-      }));else {
+      })); else {
         A && f(hideModalHandler());
         let e = cn(ref.current, b6 + wR);
         f(showModal({

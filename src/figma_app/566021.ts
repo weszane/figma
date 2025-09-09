@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { Fullscreen, StateHierarchy, SceneGraphHelpers } from "../figma_app/763686";
-import { c1, Pt } from "../figma_app/806412";
+import { createRecordingCallback, generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg } from "../figma_app/967154";
 import { i$ } from "../figma_app/150804";
@@ -146,7 +146,7 @@ function R(e) {
       a(null);
     }
   }, [onSubmitLinks, i, a]);
-  let y = c1(e);
+  let y = createRecordingCallback(e);
   let b = useId();
   let T = i;
   return jsxs(Fragment, {
@@ -277,7 +277,7 @@ function G(e) {
         description,
         isViewOnly: _,
         onSubmitDescription: g,
-        recordingKey: Pt(e, "componentDescriptionText")
+        recordingKey: generateRecordingKey(e, "componentDescriptionText")
       }, menuType), pickerShown.id === Wv ? jsx(R, {
         links,
         onSubmitLinks: T
@@ -355,7 +355,7 @@ function er({
   recordingKey: l
 }) {
   var d;
-  let [c,, u] = _$$t2.useTabs(ee, {
+  let [c, , u] = _$$t2.useTabs(ee, {
     defaultActive: (d = t ?? [], !o || isInvalidValue(e) || e.length > 0 || d.length > 0 ? "selected_variant" : "component_set"),
     recordingKey: l ?? "variantDocumentationMenu"
   });
@@ -376,7 +376,7 @@ function er({
       menuType: "selected_variant" === u.activeTab ? "selection" : "state-group",
       description: "selected_variant" === u.activeTab ? e : r ?? "",
       links: "selected_variant" === u.activeTab ? t : a,
-      recordingKey: Pt(l, "componentControlsMenu")
+      recordingKey: generateRecordingKey(l, "componentControlsMenu")
     })]
   }) : null;
 }
@@ -396,7 +396,7 @@ export function $$en0(e) {
       containingStateGroupDescription,
       containingStateGroupLinks,
       isViewOnly: p.id === uA,
-      recordingKey: Pt(e, "variantDocumentationMenu")
+      recordingKey: generateRecordingKey(e, "variantDocumentationMenu")
     }) : jsx(G, {
       description,
       links: _,
@@ -412,7 +412,7 @@ export function $$en0(e) {
       }) : void 0,
       menuType: "selection",
       pickerShown: p,
-      recordingKey: Pt(e, "componentControlsMenu")
+      recordingKey: generateRecordingKey(e, "componentControlsMenu")
     })
   }) : null;
 }

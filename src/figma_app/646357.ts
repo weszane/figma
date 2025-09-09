@@ -1,15 +1,15 @@
 import { createContext, useMemo, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { n3, F7, Rf, Pg, IA } from "../905/859698";
+import { n3, F7, Rf, Pg, VariableStyleId } from "../905/859698";
 import { StateGroupErrorType, VariableSetErrorType, Fullscreen, VariableErrorType, SceneGraphHelpers } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import m from "../vendor/260986";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -782,7 +782,7 @@ export async function $$tn62(e, t = [], r, n, i, a, s) {
         thumbnail_url: $$ti(t, r.styleVersionHash),
         canvas_url: $$ti(t, r.styleVersionHash),
         content_hash: r.styleVersionHash || void 0,
-        userFacingVersion: IA(r.userFacingVersion),
+        userFacingVersion: VariableStyleId(r.userFacingVersion),
         node_id: r.guid,
         isLocal: !1,
         style_type: r.styleType,
@@ -942,7 +942,7 @@ export function $$tu94(e, t) {
   let n = atomStoreManager.get(e3).has(t);
   return !!r || !!n;
 }
-let tp = xx(e => {
+let tp = memoizeByArgs(e => {
   let t = {};
   let r = e.local.styles;
   for (let e in r) {

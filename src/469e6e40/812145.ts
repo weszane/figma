@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import i from "classnames";
 import { A as _$$A } from "../905/920142";
 import { zN } from "../figma_app/416935";
@@ -25,9 +25,9 @@ import { OL } from "../figma_app/421473";
 import { Od } from "../figma_app/967319";
 import { A as _$$A2 } from "../3850/566892";
 var r = i;
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
 function T(e) {
   return Ay(zN(e ?? "") ?? "");
 }

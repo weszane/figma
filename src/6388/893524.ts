@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { A } from "../905/920165";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E } from "../905/277716";
 import { isInvalidValue, isValidValue } from "../905/216495";
 export function $$a0({
@@ -31,7 +31,7 @@ export function $$a0({
           mixed: isInvalidValue(e),
           onChange: u,
           rangeAnchor: t,
-          recordingKey: Pt(g, "slider"),
+          recordingKey: generateRecordingKey(g, "slider"),
           step: a,
           value: isValidValue(e) ? e : 0
         })

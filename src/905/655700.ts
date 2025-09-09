@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { Z } from "../905/515860";
 import { tB } from "../figma_app/516028";
 import { td } from "../905/845253";

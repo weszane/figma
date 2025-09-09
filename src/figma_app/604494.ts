@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { tx, atom, createRemovableAtomFamily, AY } from "../figma_app/27355";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { Jc } from "../905/946805";
 let $$o1 = tx({});
 let $$l10 = tx(null);
 let $$d8 = tx("");
-let $$c9 = atom(g());
+let $$c9 = atom(generateUUIDv4());
 let $$u7 = atom({
   loaded: !1,
   extensions: []

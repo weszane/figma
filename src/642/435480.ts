@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { U1 } from "../figma_app/343967";
 import { NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import o from "classnames";
 import { getI18nString } from "../905/303541";
 import { CA } from "../figma_app/327588";
@@ -47,7 +47,7 @@ export function $$b1({
 }
 export function $$C2() {
   let e = Gt("numSelectedByType");
-  return k9(() => function (e) {
+  return useMemoStable(() => function (e) {
     if (e) return aZ(NodePropertyCategory.FILL, e);
   }(e), [e]);
 }

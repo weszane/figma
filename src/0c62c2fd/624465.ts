@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
@@ -26,8 +26,8 @@ import { A as _$$A } from "../figma_app/965813";
 import { DV } from "../905/739964";
 import { E as _$$E } from "../figma_app/999099";
 import { HZ as _$$HZ, $t } from "../figma_app/29287";
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
 export let $$R1 = atom(!1);
 export function $$A0({
   clientX: e,

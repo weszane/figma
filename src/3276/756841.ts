@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, memo, useMemo, useCallback, useState, useContext, useEffect, forwardRef } from "react";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { T as _$$T } from "../905/745591";
 import { U1 } from "../figma_app/343967";
@@ -32,7 +32,7 @@ import { yZ } from "../905/407352";
 import { F as _$$F } from "../905/241044";
 import { WN } from "../figma_app/638601";
 import { tS, q5, sS } from "../figma_app/516028";
-import { TA, iZ } from "../905/372672";
+import { getUserId, selectCurrentUser } from "../905/372672";
 import { MV, m as _$$m, kT, Vk } from "../905/380385";
 import { E as _$$E } from "../905/632989";
 import { q7, mc, b as _$$b, bL as _$$bL, Ov, ME, rm, wv, hE, r1 } from "../figma_app/860955";
@@ -69,7 +69,7 @@ import { defaultSessionLocalIDArrayString } from "../905/871411";
 import { waitForAnimationFrame } from "../905/236856";
 import { globalPerfTimer } from "../905/542194";
 import { Point } from "../905/736624";
-import { F as _$$F2 } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { S as _$$S } from "../figma_app/11182";
 import { oB } from "../905/929976";
 import { Z as _$$Z } from "../905/104740";
@@ -294,7 +294,7 @@ function ex(e) {
   let m = fr();
   let h = useDispatch();
   let f = tS();
-  let _ = TA();
+  let _ = getUserId();
   let g = useCallback(() => {
     commentReceipts && (isUnread ? h(AY({
       receiptsAPI: commentReceipts,
@@ -605,7 +605,7 @@ let e0 = memo(function (e) {
   let v = useRef(null);
   let x = ZC(element.isActive);
   let b = useRef(!1);
-  let w = iZ();
+  let w = selectCurrentUser();
   let j = q5();
   let k = yZ();
   let P = eJ(element);
@@ -665,9 +665,9 @@ let e0 = memo(function (e) {
         }));
       }
     }, [o, e.nodeId, T]);
-    let A = useCallback(() => _ || v ? (o(_$$F2.dequeue({
+    let A = useCallback(() => _ || v ? (o(VisualBellActions.dequeue({
       matchType: "offline-comment-navigation"
-    })), !1) : (o(_$$F2.enqueue({
+    })), !1) : (o(VisualBellActions.enqueue({
       type: "offline-comment-navigation",
       message: getI18nString("comments.unavailable_offline")
     })), !0), [_, v, o]);
@@ -1082,7 +1082,7 @@ let tl = createOptimistThunk((e, t) => {
 var tc = (e => (e.ALL = "all", e.PARTICIPATING = "participating", e.NONE = "none", e))(tc || {});
 function tp() {
   let e = useSelector(sS);
-  let t = iZ();
+  let t = selectCurrentUser();
   let n = jp();
   let s = I_();
   let r = fr();

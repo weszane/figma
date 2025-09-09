@@ -1,5 +1,5 @@
 import { useMemo, useLayoutEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { DP } from "../905/158740";
 import { aH, R0 } from "../figma_app/273493";
 import { WhiteboardTsApi, AppStateTsApi } from "../figma_app/763686";

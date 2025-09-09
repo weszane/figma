@@ -1,11 +1,11 @@
 import { useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { S } from "../905/539306";
 import { mv, AR } from "../905/182534";
 import { ky } from "../905/977218";
 import { dq } from "../905/845253";
 import { _6 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { ol } from "../figma_app/598018";
 import { vj } from "../905/574958";
 function m(e, t, i, n, r, a, o) {
@@ -35,7 +35,7 @@ export function $$h0(e, t, i) {
 }
 export function $$g1() {
   let e = useDispatch();
-  let t = iZ();
+  let t = selectCurrentUser();
   let i = dq();
   let p = ol()?.id;
   let h = useSelector(e => e.search);

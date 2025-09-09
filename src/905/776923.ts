@@ -1,5 +1,5 @@
 import { isNotNullish } from "../figma_app/95419";
-import { PK, gr, sD, _H, Tq, YB, eJ } from "../figma_app/243058";
+import { StyleIdHandler, VariableSetIdCompatHandler, VariableIdHandler, CodeComponentIdHandler, CodeFileIdHandler, CanvasNodeIdHandler, CodeLibraryIdHandler } from "../figma_app/243058";
 import { qO } from "../figma_app/766708";
 import { M_, Lm, kf, Kg, SE, _o, WX, ar, r4, Ox, rP, wA, hd, FE, W_, aP, hV, OA, yp, qx, aY, Rt } from "../905/71";
 import { c1 } from "../905/589717";
@@ -72,7 +72,7 @@ export class $$d0 {
         value: t
       };
       if (ar(e)) {
-        let e = PK.fromKiwi(t);
+        let e = StyleIdHandler.fromKiwi(t);
         if (e) return {
           type: "styleId",
           value: e,
@@ -80,7 +80,7 @@ export class $$d0 {
         };
       }
       if (r4(e)) {
-        let e = gr.fromKiwi(t);
+        let e = VariableSetIdCompatHandler.fromKiwi(t);
         if (e) return {
           type: "variableCollectionId",
           value: e,
@@ -88,7 +88,7 @@ export class $$d0 {
         };
       }
       if (Ox(e)) {
-        let e = sD.fromKiwi(t);
+        let e = VariableIdHandler.fromKiwi(t);
         if (e) return {
           type: "variableId",
           value: e,
@@ -96,7 +96,7 @@ export class $$d0 {
         };
       }
       if (rP(e)) {
-        let e = _H.fromKiwi(t);
+        let e = CodeComponentIdHandler.fromKiwi(t);
         if (e) return {
           type: "codeComponentId",
           value: e,
@@ -104,7 +104,7 @@ export class $$d0 {
         };
       }
       if (wA(e)) {
-        let e = Tq.fromKiwi(t);
+        let e = CodeFileIdHandler.fromKiwi(t);
         if (e) return {
           type: "codeFileId",
           value: e,
@@ -113,11 +113,11 @@ export class $$d0 {
       }
       if (hd(e)) return {
         type: "canvasNodeId",
-        value: YB.fromKiwi(t),
+        value: CanvasNodeIdHandler.fromKiwi(t),
         scene: this
       };
       if (FE(e)) {
-        let e = eJ.fromKiwi(t);
+        let e = CodeLibraryIdHandler.fromKiwi(t);
         if (e) return {
           type: "codeLibraryId",
           value: e,

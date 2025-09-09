@@ -1,6 +1,6 @@
 import { MeasurementUnit } from "../figma_app/763686";
 import { WEB, IOS, IOS_UIKIT, ANDROID, ANDROID_XML } from "../905/359509";
-import { K6 } from "../905/515076";
+import { findUnitSchema } from "../905/515076";
 import { debugState } from "../905/407919";
 import { filterEntriesByEditorType, filterEntriesByPluginVersionEditorType, getPluginByFileId } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
@@ -47,7 +47,7 @@ export function $$m1(e, t, i) {
   } = e;
   if ("first-party" !== type && t) {
     let e = findCodegenLanguage(t, pluginLanguage);
-    let i = K6(t, e);
+    let i = findUnitSchema(t, e);
     if (i) return i.scaledUnit;
   }
   switch (id) {

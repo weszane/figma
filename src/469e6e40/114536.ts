@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, forwardRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
@@ -12,7 +12,7 @@ import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Y as _$$Y } from "../905/830372";
-import { lOi, E5L, Jwi } from "../figma_app/43951";
+import { UnclaimedDomainUserView, DomainOrgAdminsToRemove, OrgDomainManagementPage } from "../figma_app/43951";
 import { z as _$$z } from "../469e6e40/221397";
 import { hK } from "../figma_app/211706";
 import { b as _$$b } from "../905/946806";
@@ -22,21 +22,21 @@ import { ny } from "../figma_app/819458";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { showModalHandler } from "../905/156213";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Eh } from "../figma_app/617654";
 import { registerModal } from "../905/102752";
 import { l as _$$l } from "../469e6e40/774192";
 import { J as _$$J } from "../905/129695";
 import { a as _$$a2 } from "../905/5627";
 import { Dk } from "../figma_app/623293";
-import { zX } from "../905/576487";
+import { VisualBellIcon } from "../905/576487";
 import { d as _$$d } from "../905/44199";
 import { e as _$$e2 } from "../905/393279";
 import { wv } from "../figma_app/860955";
@@ -89,26 +89,26 @@ let F = registerModal(function (e) {
       await Eh.setDomainCapture({
         org_id: e.orgId
       });
-      a(_$$F.enqueue({
+      a(VisualBellActions.enqueue({
         message: getI18nString("domain_management.domain_capture_modal.success_message")
       }));
       e.onClose();
     } catch (e) {
-      e.data?.reason && 422 === e.status ? "domains_unverified" === e.data.reason ? a(_$$F.enqueue({
+      e.data?.reason && 422 === e.status ? "domains_unverified" === e.data.reason ? a(VisualBellActions.enqueue({
         message: getI18nString("domain_management.domain_capture.some_domains_unverified"),
         error: !0,
         onDismiss: lQ
-      })) : "domain_in_use" === e.data.reason ? a(_$$F.enqueue({
+      })) : "domain_in_use" === e.data.reason ? a(VisualBellActions.enqueue({
         message: getI18nString("domain_management.domain_capture.domain_in_use", {
           orgName: u || ""
         }),
         error: !0,
         onDismiss: lQ
-      })) : a(_$$F.enqueue({
+      })) : a(VisualBellActions.enqueue({
         message: getI18nString("domain_management.domain_capture.error_enabling"),
         error: !0,
         onDismiss: lQ
-      })) : a(_$$F.enqueue({
+      })) : a(VisualBellActions.enqueue({
         message: getI18nString("domain_management.domain_capture.error_enabling"),
         error: !0,
         onDismiss: lQ
@@ -180,7 +180,7 @@ let q = "org_domain_management_page_view--domainList--RqkFA";
 function $(e) {
   let t = !e.enabled && !e.allDomainsVerified;
   let a = useDispatch();
-  let s = Pc();
+  let s = selectUser();
   let r = !e.enabled && e.allDomainsVerified ? "button" : "div";
   return jsx(r, {
     onClick: "button" === r ? () => {
@@ -315,7 +315,7 @@ function V(e) {
               a.current = null;
             }, 2e3));
           }).catch(() => {
-            t(_$$F.enqueue({
+            t(VisualBellActions.enqueue({
               type: "copy-dns-token-failed",
               message: getI18nString("domain_management.dns_token.failed_to_copy"),
               error: !0,
@@ -420,7 +420,7 @@ function J(e, t, a, n) {
     let i = a ? "VERIFY" : "ADD";
     let r = t.length;
     let l = t.join(",");
-    0 !== r && (s(_$$F.enqueue({
+    0 !== r && (s(VisualBellActions.enqueue({
       message: a ? getI18nString("domain_management.verifying_domains", {
         domainCount: r
       }) : getI18nString("domain_management.adding_domains", {
@@ -428,12 +428,12 @@ function J(e, t, a, n) {
       }),
       type: "self-serve-domain-management",
       timeoutOverride: 1 / 0,
-      icon: zX.SPINNER
+      icon: VisualBellIcon.SPINNER
     })), n({
       org_id: e,
       domains: l
     }).then(e => {
-      s(_$$F.dequeue({
+      s(VisualBellActions.dequeue({
         matchType: "self-serve-domain-management"
       }));
       let {
@@ -447,7 +447,7 @@ function J(e, t, a, n) {
         }
       } = e;
       let o = invalid_domains.concat(unverified_domains).concat(resource_connected_domains || []).sort();
-      0 === o.length ? s(_$$F.enqueue({
+      0 === o.length ? s(VisualBellActions.enqueue({
         message: a ? getI18nString("domain_management.successfully_verified_domains", {
           domainCount: r
         }) : getI18nString("domain_management.successfully_added_domains", {
@@ -479,7 +479,7 @@ function J(e, t, a, n) {
         }
       }));
     }).catch(() => {
-      s(_$$F.dequeue({
+      s(VisualBellActions.dequeue({
         matchType: "self-serve-domain-management"
       }));
       s(showModalHandler({
@@ -673,7 +673,7 @@ function ek({
   let [r, l] = useState("");
   let [o, d] = useState(new Set());
   let c = useDispatch();
-  let _ = Rs(lOi, {
+  let _ = Rs(UnclaimedDomainUserView, {
     domainId: e,
     orgId: t,
     searchQuery: r,
@@ -748,7 +748,7 @@ function ek({
         let a = e.map(e => e.id);
         let s = () => {
           d(new Set([...o, ...a]));
-          c(_$$F.enqueue({
+          c(VisualBellActions.enqueue({
             message: getI18nString("domain_insights.unclaimed_users.adding_users", {
               userCount: a.length
             }),
@@ -937,18 +937,18 @@ let eO = registerModal(function (e) {
         org_id: e.orgId,
         domain_ids: e.domainIds
       });
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("domain_management.remove_domain_modal.confirmation_message", {
           domainCount: e.domainIds.length
         })
       }));
       e.onClose();
     } catch (e) {
-      400 === e.status ? t(_$$F.enqueue({
+      400 === e.status ? t(VisualBellActions.enqueue({
         message: getI18nString("domain_management.remove_domain_modal.attempted_domain_removal"),
         error: !0,
         onDismiss: lQ
-      })) : t(_$$F.enqueue({
+      })) : t(VisualBellActions.enqueue({
         message: getI18nString("domain_management.remove_domain_modal.error_removing_domain"),
         error: !0,
         onDismiss: lQ
@@ -956,7 +956,7 @@ let eO = registerModal(function (e) {
       r(!1);
     }
   };
-  let d = Rs(E5L, {
+  let d = Rs(DomainOrgAdminsToRemove, {
     orgId: e.orgId,
     domainIds: e.domainIds
   });
@@ -1248,14 +1248,14 @@ function eq({
   }, [l, t.id, e, a]);
   let d = useCallback(() => {
     Dk(t.domain).then(() => {
-      l(_$$F.enqueue({
+      l(VisualBellActions.enqueue({
         type: "copy-org-domain",
         message: getI18nString("domain_management.copy_domains.success", {
           domainCount: 1
         })
       }));
     }).catch(() => {
-      l(_$$F.enqueue({
+      l(VisualBellActions.enqueue({
         type: "copy-org-domain-failed",
         message: getI18nString("domain_management.copy_domains.failed_to_copy"),
         error: !0,
@@ -1426,14 +1426,14 @@ function e$(e) {
             Dk(e.map(({
               domain: e
             }) => e).join("; ")).then(() => {
-              s(_$$F.enqueue({
+              s(VisualBellActions.enqueue({
                 type: "copy-org-domain",
                 message: getI18nString("domain_management.copy_domains.success", {
                   domainCount: e.length
                 })
               }));
             }).catch(() => {
-              s(_$$F.enqueue({
+              s(VisualBellActions.enqueue({
                 type: "copy-org-domain-failed",
                 message: getI18nString("domain_management.copy_domains.failed_to_copy"),
                 error: !0,
@@ -1501,7 +1501,7 @@ function e$(e) {
 function eB(e) {
   var t;
   var a;
-  let i = Rs(Jwi, {
+  let i = Rs(OrgDomainManagementPage, {
     orgId: e.orgId
   });
   let [r, l] = useState("");

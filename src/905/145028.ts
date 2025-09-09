@@ -1,6 +1,6 @@
 import { subscribeAndAwaitData } from "../905/553831";
 import { sD } from "../905/937198";
-import { YsX } from "../figma_app/43951";
+import { OneCollectionView } from "../figma_app/43951";
 import { YR } from "../905/622391";
 import { H } from "../905/250919";
 import { D } from "../905/148729";
@@ -19,7 +19,7 @@ export async function $$d0(e) {
     });
     return null;
   }
-  let o = await subscribeAndAwaitData(YsX, {
+  let o = await subscribeAndAwaitData(OneCollectionView, {
     fileKey: t,
     collectionId: i
   });

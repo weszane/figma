@@ -14,10 +14,10 @@ import { N as _$$N } from '../905/670143';
 import { getSingletonSceneGraph } from '../905/700578';
 import { G as _$$G } from '../905/707993';
 import { I as _$$I } from '../905/783004';
-import { g as _$$g } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { sD } from '../905/937198';
 import { hl, lf } from '../figma_app/11329';
-import { zk } from '../figma_app/198712';
+import { yesNoTrackingEnum } from '../figma_app/198712';
 import { p as _$$p } from '../figma_app/304289';
 import { fullscreenValue } from '../figma_app/455680';
 import { SceneGraphHelpers, VariableResolvedDataType, VariableDataType } from '../figma_app/763686';
@@ -121,7 +121,7 @@ function M(e, t, r, n = {}) {
     ...s,
     dateType: ap.PLAIN_DATE
   });
-  let o = _$$g();
+  let o = generateUUIDv4();
   return {
     id: o,
     stableId: o,
@@ -144,8 +144,8 @@ export function $$F0(e) {
   useEffect(() => {
     if (!t) {
       n(function () {
-        let e = _$$g();
-        let t = _$$g();
+        let e = generateUUIDv4();
+        let t = generateUUIDv4();
         return [{
           name: rU.Title,
           type: 'string',
@@ -371,7 +371,7 @@ export function $$U1(e, t) {
     fullscreenValue.updateSelectionProperties({
       fillPaints: a
     }, {
-      shouldCommit: zk.YES
+      shouldCommit: yesNoTrackingEnum.YES
     });
     SceneGraphHelpers?.replaceSelection(n?.map(e => e.guid) ?? [], !1);
   });

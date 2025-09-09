@@ -1,13 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo, useEffect, forwardRef, memo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
 import { U as _$$U } from "../figma_app/901889";
 import { h4, Nz, hh } from "../905/417232";
 import { ZC } from "../figma_app/39751";
-import { Pt, rf, iQ as _$$iQ, fo } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent, useHandleGenericEvent, useHandleInputEvent } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { UK } from "../figma_app/740163";
 import { wX, lC, yp, G6, EP, pN, lO, L5, rN, U6, x9, mm } from "../figma_app/852050";
@@ -115,7 +115,7 @@ import { v6, Ar, N0, GC as _$$GC, uM, Mz, $4, SS } from "../905/984793";
 import { X as _$$X } from "../905/456000";
 import { l2, Ks, U3, SG, iw as _$$iw, NE, gZ, Cg } from "../905/101482";
 import { Te } from "../vendor/813803";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { O4, Hf, zg, Vm, Kh, OM, Hk } from "../905/471795";
 import { j$ } from "../figma_app/238665";
 import { O as _$$O4 } from "../905/301080";
@@ -160,7 +160,7 @@ function K({
     }) {
       return jsx(c$, {
         disabled: t.hasOwnProperty(e),
-        recordingKey: Pt(i, PlatformType[e].toLowerCase()),
+        recordingKey: generateRecordingKey(i, PlatformType[e].toLowerCase()),
         onClick: () => r(e),
         children: lo(e)
       }, e);
@@ -319,7 +319,7 @@ function J({
         "aria-expanded": s,
         disabled: Object.keys(e).length >= _$$tq.length,
         onClick: l,
-        recordingKey: Pt(o, "createToken"),
+        recordingKey: generateRecordingKey(o, "createToken"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip": getI18nString("variables.edit_modal.add_code_syntax")
@@ -334,7 +334,7 @@ function J({
         initialValue: e[r] ?? i,
         resolvedType: a,
         autoFocus: t === r,
-        recordingKey: Pt(o, PlatformType[r].toLowerCase()),
+        recordingKey: generateRecordingKey(o, PlatformType[r].toLowerCase()),
         onUpdateToken: c,
         onRemoveTokenClick: u ? () => u(r) : null
       }, r) : null;
@@ -343,7 +343,7 @@ function J({
     })), s && m.current && d && jsx(K, {
       targetRect: m.current.getBoundingClientRect(),
       codeSyntaxMap: e,
-      recordingKey: Pt(o, "createTokenDropdown"),
+      recordingKey: generateRecordingKey(o, "createTokenDropdown"),
       onClick: d
     })]
   });
@@ -410,7 +410,7 @@ function ee({
           value: u,
           disabled: !g,
           autoFocus: a,
-          recordingKey: Pt(s, "input"),
+          recordingKey: generateRecordingKey(s, "input"),
           onChange: h,
           onBlur: () => {
             g?.();
@@ -418,7 +418,7 @@ function ee({
         }), _ && jsx(_$$K, {
           type: "button",
           "aria-label": getI18nString("variables.edit_modal.remove_code_syntax"),
-          recordingKey: Pt(s, "removeButton"),
+          recordingKey: generateRecordingKey(s, "removeButton"),
           onClick: _,
           htmlAttributes: {
             "data-tooltip-type": Ib.TEXT,
@@ -505,8 +505,8 @@ function ed(e) {
     modeID,
     onContextMenu
   } = e;
-  let o = Pt(e.recordingKey, `modeId=${e.modeID}`);
-  let d = rf(o, "contextmenu", e => {
+  let o = generateRecordingKey(e.recordingKey, `modeId=${e.modeID}`);
+  let d = useHandleMouseEvent(o, "contextmenu", e => {
     onContextMenu(variable.node_id, modeID, e, A);
     e.stopPropagation();
   });
@@ -559,7 +559,7 @@ function ed(e) {
         "aria-label": getI18nString("variables.authoring_modal.table.clear_override"),
         actionOnPointerDown: !0,
         onClick: e.clearVariableOverride,
-        recordingKey: Pt(e.recordingKey, "clearOverrideButton"),
+        recordingKey: generateRecordingKey(e.recordingKey, "clearOverrideButton"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip": getI18nString("variables.authoring_modal.table.clear_override")
@@ -571,7 +571,7 @@ function ed(e) {
         onClick: () => {
           e.detachAlias && e.detachAlias(e.variable.node_id, e.modeID, e.variableSetId);
         },
-        recordingKey: Pt(e.recordingKey, "detachVariableButton"),
+        recordingKey: generateRecordingKey(e.recordingKey, "detachVariableButton"),
         htmlAttributes: {
           "data-tooltip-type": Ib.TEXT,
           "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")
@@ -662,11 +662,11 @@ function ep(e) {
           manager: y,
           children: [jsx(t.Tab, {
             ..._.details,
-            recordingKey: Pt(e.recordingKey, "tabs", "details"),
+            recordingKey: generateRecordingKey(e.recordingKey, "tabs", "details"),
             children: renderI18nText("variables.edit_modal.tabs.details")
           }), jsx(t.Tab, {
             ..._.scoping,
-            recordingKey: Pt(e.recordingKey, "tabs", "scoping"),
+            recordingKey: generateRecordingKey(e.recordingKey, "tabs", "scoping"),
             children: renderI18nText("variables.edit_modal.tabs.scoping")
           })]
         })]
@@ -710,7 +710,7 @@ function ep(e) {
                 children: jsx(ef, {
                   variables,
                   setVariableScope,
-                  recordingKey: Pt(e.recordingKey, "scopesPanel")
+                  recordingKey: generateRecordingKey(e.recordingKey, "scopesPanel")
                 })
               })]
             })
@@ -752,7 +752,7 @@ function em(e) {
             onFinish: lQ,
             originalValue: variable.name,
             placeholder: getI18nString("variables.edit_modal.input_placeholder.name"),
-            recordingKey: Pt(e.recordingKey, "nameInput")
+            recordingKey: generateRecordingKey(e.recordingKey, "nameInput")
           })
         })]
       }), jsxs("div", {
@@ -772,7 +772,7 @@ function em(e) {
             onSubmit: e => setVariableDescription?.(variable, e) ?? !1,
             originalValue: variable.description ?? "",
             placeholder: getI18nString("variables.edit_modal.input_label.description_placeholder"),
-            recordingKey: Pt(e.recordingKey, "descriptionInput"),
+            recordingKey: generateRecordingKey(e.recordingKey, "descriptionInput"),
             type: _$$$.FORM
           })
         })]
@@ -786,7 +786,7 @@ function em(e) {
     }), !hideScopes && jsx(ef, {
       variables: [variable],
       setVariableScope,
-      recordingKey: Pt(e.recordingKey, "scopesPanel")
+      recordingKey: generateRecordingKey(e.recordingKey, "scopesPanel")
     }), jsx("div", {
       className: "edit_variable_modal--sectionSmall--DlWKe edit_variable_modal--section--Oxbp-",
       children: jsx(et, {
@@ -794,7 +794,7 @@ function em(e) {
         codeSyntaxMap: variable.codeSyntax ?? {},
         initialValue: variable.name,
         resolvedType: variable.resolvedType,
-        recordingKey: Pt(e.recordingKey, "codeSyntax"),
+        recordingKey: generateRecordingKey(e.recordingKey, "codeSyntax"),
         ...(updateCodeSyntaxToken && removeCodeSyntaxToken ? {
           updateCodeSyntaxToken,
           removeCodeSyntaxToken
@@ -811,7 +811,7 @@ function em(e) {
         onChange: () => {
           setVariableIsPublishable?.([variable], !variable.isPublishable);
         },
-        recordingKey: Pt(e.recordingKey, "hideFromPublishing.checkBox"),
+        recordingKey: generateRecordingKey(e.recordingKey, "hideFromPublishing.checkBox"),
         label: jsx(Label, {
           children: getI18nString("variables.edit_modal.hide_from_publishing")
         })
@@ -835,7 +835,7 @@ function eh({
     children: [!t && jsx(ef, {
       variables: e,
       setVariableScope: a,
-      recordingKey: Pt(s, "scopesPanel")
+      recordingKey: generateRecordingKey(s, "scopesPanel")
     }), jsx("div", {
       className: Z,
       children: jsx(Checkbox, {
@@ -843,7 +843,7 @@ function eh({
         checked: !o,
         mixed: null === o,
         onChange: () => i?.(e, !(o ?? !0)),
-        recordingKey: Pt(s, "hideFromPublishing.checkBox"),
+        recordingKey: generateRecordingKey(s, "hideFromPublishing.checkBox"),
         label: jsx(Label, {
           children: getI18nString("variables.edit_modal.hide_from_publishing")
         })
@@ -881,7 +881,7 @@ function eg(e) {
           }),
           children: jsx(ed, {
             type: _$$$.FORM,
-            recordingKey: Pt(e.recordingKey, "modeValueInput"),
+            recordingKey: generateRecordingKey(e.recordingKey, "modeValueInput"),
             variable,
             variableSetId,
             modeID: r.id,
@@ -913,7 +913,7 @@ function ef({
       variables: r,
       variableType: i,
       setVariableScope: e,
-      recordingKey: Pt(t, VariableResolvedDataType[i])
+      recordingKey: generateRecordingKey(t, VariableResolvedDataType[i])
     }, i));
   }
   return jsx(Fragment, {
@@ -978,7 +978,7 @@ function e_(e) {
                   onChange: () => {
                     setVariableScope?.(variables, e, u || !c);
                   },
-                  recordingKey: Pt(recordingKey, PropertyScope[e]),
+                  recordingKey: generateRecordingKey(recordingKey, PropertyScope[e]),
                   label: jsx(HiddenLabel, {
                     children: i
                   })
@@ -1171,15 +1171,15 @@ function eZ(e) {
   let b = jsxs(Fragment, {
     children: [f && jsx(c$, {
       onClick: f,
-      recordingKey: Pt(e.recordingKey, "ungroupOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "ungroupOption"),
       children: getI18nString("variables.authoring_modal.group_context_menu.ungroup")
     }), g && !A() && jsx(c$, {
       onClick: g,
-      recordingKey: Pt(e.recordingKey, "duplicateGroupOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "duplicateGroupOption"),
       children: e.contextMenuData.groupNames.length > 1 ? getI18nString("variables.authoring_modal.group_context_menu.duplicate_groups") : getI18nString("variables.authoring_modal.group_context_menu.duplicate_group")
     }), _ && jsx(c$, {
       onClick: _,
-      recordingKey: Pt(e.recordingKey, "deleteGroupOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "deleteGroupOption"),
       children: e.contextMenuData.groupNames.length > 1 ? getI18nString("variables.authoring_modal.group_context_menu.delete_groups") : getI18nString("variables.authoring_modal.group_context_menu.delete_group")
     })]
   });
@@ -1198,42 +1198,42 @@ function eZ(e) {
     }), u && jsx(c$, {
       "data-testid": "copy-variables-menuopt",
       onClick: u,
-      recordingKey: Pt(e.recordingKey, "copyVariablesOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "copyVariablesOption"),
       children: getI18nString("fullscreen_actions.copy")
     }), m && jsx(c$, {
       "data-testid": "paste-variables-menuopt",
       onClick: m,
-      recordingKey: Pt(e.recordingKey, "pasteVariablesOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "pasteVariablesOption"),
       children: getI18nString("fullscreen_actions.paste")
     }), u || m ? jsx(wv, {}) : null, s && jsx(c$, {
       onClick: s,
-      recordingKey: Pt(e.recordingKey, "createGroupOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "createGroupOption"),
       children: getI18nString("variables.authoring_modal.context_menu.create_group")
     }), d && (1 === e.contextMenuData.selectedVariableRows.length && jsx(c$, {
       "data-testid": "edit-variable-menuopt",
       onClick: d,
-      recordingKey: Pt(e.recordingKey, "editVariableOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "editVariableOption"),
       children: getI18nString("variables.authoring_modal.context_menu.edit", {
         count: e.contextMenuData.selectedVariableRows.length
       })
     }) || e.contextMenuData.selectedVariableRows.length > 1 && jsx(c$, {
       "data-testid": "edit-variables-menuopt",
       onClick: d,
-      recordingKey: Pt(e.recordingKey, "editVariablesOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "editVariablesOption"),
       children: getI18nString("variables.authoring_modal.context_menu.edit", {
         count: e.contextMenuData.selectedVariableRows.length
       })
     })), c && jsx(c$, {
       "data-testid": "duplicate-variables-menuopt",
       onClick: c,
-      recordingKey: Pt(e.recordingKey, "duplicateVariablesOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "duplicateVariablesOption"),
       children: getI18nString("variables.authoring_modal.context_menu.duplicate", {
         count: e.contextMenuData.selectedVariableRows.length
       })
     }), h && jsxs(Fragment, {
       children: [jsx(wv, {}), jsx(c$, {
         onClick: h,
-        recordingKey: Pt(e.recordingKey, "deleteVariableOption"),
+        recordingKey: generateRecordingKey(e.recordingKey, "deleteVariableOption"),
         children: e.contextMenuData.selectedVariableRows.length > 1 ? getI18nString("variables.authoring_modal.context_menu.delete_multiple") : getI18nString("variables.authoring_modal.context_menu.delete")
       })]
     })]
@@ -1270,17 +1270,17 @@ function eX(e) {
   }, [e]);
   return jsx(Fragment, {
     children: o && e.detachAlias ? jsx(c$, {
-      recordingKey: Pt(e.recordingKey, "clearAliasOption"),
+      recordingKey: generateRecordingKey(e.recordingKey, "clearAliasOption"),
       onClick: h,
       children: getI18nString("variables.authoring_modal.context_menu.clear_alias")
     }) : jsxs(Fragment, {
       children: [jsx(c$, {
         onClick: u,
-        recordingKey: Pt(e.recordingKey, "createAliasOption"),
+        recordingKey: generateRecordingKey(e.recordingKey, "createAliasOption"),
         children: getI18nString("variables.authoring_modal.context_menu.create_alias")
       }), getFeatureFlags().ds_reactive_variables && jsx(c$, {
         onClick: m,
-        recordingKey: Pt(e.recordingKey, "createExpressionOption"),
+        recordingKey: generateRecordingKey(e.recordingKey, "createExpressionOption"),
         children: getI18nString("variables.authoring_modal.context_menu.create_expression")
       })]
     })
@@ -1326,7 +1326,7 @@ function tp({
   onSidebarToggle: t
 }) {
   return jsx(_$$f, {
-    recordingKey: Pt("variablesModal", "toggleSidebar"),
+    recordingKey: generateRecordingKey("variablesModal", "toggleSidebar"),
     "aria-label": getI18nString("variables.authoring_modal.toggle_sidebar"),
     onIcon: jsx(_$$C, {}),
     offIcon: jsx(_$$O3, {}),
@@ -1464,7 +1464,7 @@ function tT({
         onSubmit: A,
         onFinish: () => y(!1),
         onCancel: () => y(!1),
-        recordingKey: Pt(u, "renameInput")
+        recordingKey: generateRecordingKey(u, "renameInput")
       })
     }) : jsx(tP, {
       variableSet: d,
@@ -1472,12 +1472,12 @@ function tT({
       isShowingGuids: c,
       onChangeVariableSet: i,
       onRenameVariableSet: s,
-      recordingKey: Pt(u, "variableSetSwitcher")
+      recordingKey: generateRecordingKey(u, "variableSetSwitcher")
     }), getFeatureFlags().ds_variables_modal_improvements_sidebar && jsx(tp, {
       isSidebarOpen: !0,
       onSidebarToggle: o
     }), jsx(tk, {
-      recordingKey: Pt(u, "variableSetOptions"),
+      recordingKey: generateRecordingKey(u, "variableSetOptions"),
       variableSet: d,
       onCreateVariableSet: e,
       onCreateVariableSetExtension: t,
@@ -1509,10 +1509,10 @@ function tk({
     hide
   } = BK("variable-modal-set-options");
   let h = yp();
-  let _ = _$$rN(rf(Pt(d, "createVariableSet"), "click", () => {
+  let _ = _$$rN(useHandleMouseEvent(generateRecordingKey(d, "createVariableSet"), "click", () => {
     a && t && (o(a()), t(!0), hide());
   }), !!a);
-  let A = _$$rN(rf(Pt(d, "createVariableSetExtension"), "click", async () => {
+  let A = _$$rN(useHandleMouseEvent(generateRecordingKey(d, "createVariableSetExtension"), "click", async () => {
     s && t && (o(await s(e.node_id)), t(!0), hide());
   }), !!s);
   let y = _$$rN(useCallback(() => {
@@ -1528,7 +1528,7 @@ function tk({
       collection_id: e.node_id
     });
   }, [i, hide, v, b, e.node_id]), !!i);
-  let E = _$$rN(rf(Pt(d, "deleteVariableSet"), "click", () => {
+  let E = _$$rN(useHandleMouseEvent(generateRecordingKey(d, "deleteVariableSet"), "click", () => {
     l?.(e.node_id);
     hide();
   }), !!l);
@@ -1563,7 +1563,7 @@ function tk({
           "data-tooltip": getI18nString("variables.authoring_modal.more_variable_set_options_tooltip"),
           "data-tooltip-type": Ib.TEXT
         },
-        recordingKey: Pt(d, "moreOptionsButton"),
+        recordingKey: generateRecordingKey(d, "moreOptionsButton"),
         onClick: () => {
           toggle();
           GS("reorder_collections.ds_variable_collection_dropdown_opened", v ?? "", b, {
@@ -1626,7 +1626,7 @@ function tP({
       targetDomNode: document.body,
       children: d.map(e => jsx(tN, {
         value: e,
-        recordingKey: Pt(s, "switcherOption")
+        recordingKey: generateRecordingKey(s, "switcherOption")
       }, e.node_id))
     }) : jsx("div", {
       className: "variables_modal_set_header--pickerText--JlLOM",
@@ -1798,13 +1798,13 @@ let t$ = forwardRef(function ({
   let {
     modeLimit
   } = _$$z("authoring");
-  let B = rf(e, "mousedown", e => {
+  let B = useHandleMouseEvent(e, "mousedown", e => {
     d(A.index, e);
   });
-  let V = rf(e, "contextmenu", e => {
+  let V = useHandleMouseEvent(e, "contextmenu", e => {
     u?.(g.node_id, void 0, e);
   });
-  let z = _$$iQ(e, "focus", () => {
+  let z = useHandleGenericEvent(e, "focus", () => {
     t || d(A.index);
   });
   let H = useSelector(e => e.modalShown);
@@ -1833,7 +1833,7 @@ let t$ = forwardRef(function ({
       onContextMenu: V,
       onFocus: z,
       children: [jsx(tZ, {
-        recordingKey: Pt(e, "name"),
+        recordingKey: generateRecordingKey(e, "name"),
         variable: g,
         onRenameVariable: o,
         renamingVariableID: m,
@@ -1853,7 +1853,7 @@ let t$ = forwardRef(function ({
             u?.(e, i < modeLimit ? t : void 0, n, r);
           },
           onSubmit: r,
-          recordingKey: Pt(e, "modeValue"),
+          recordingKey: generateRecordingKey(e, "modeValue"),
           variable: g,
           variableOverride: _,
           variableSetId: f.node_id
@@ -1872,12 +1872,12 @@ let t$ = forwardRef(function ({
               Y();
             },
             "aria-expanded": K,
-            recordingKey: Pt(e, "editVariableModalIcon"),
+            recordingKey: generateRecordingKey(e, "editVariableModalIcon"),
             ref: W,
             htmlAttributes: {
               "data-tooltip": getI18nString("variables.authoring_modal.edit_variable_button_tooltip"),
               "data-tooltip-type": Ib.TEXT,
-              "data-test-id": Pt(e, "editVariableModalIcon")
+              "data-test-id": generateRecordingKey(e, "editVariableModalIcon")
             },
             children: jsx(_$$P4, {})
           })
@@ -1897,7 +1897,7 @@ function tZ({
   let o = B9(e.name);
   let l = Pf(e.name);
   let d = i === e.node_id;
-  let c = _$$rN(rf(s, "dblclick", () => {
+  let c = _$$rN(useHandleMouseEvent(s, "dblclick", () => {
     r?.(e.node_id);
   }), !!r);
   return jsxs(Ar, {
@@ -1910,7 +1910,7 @@ function tZ({
         })
       }), jsx(_$$b, {
         type: _$$$.CELL,
-        recordingKey: Pt(s, "renameInput"),
+        recordingKey: generateRecordingKey(s, "renameInput"),
         autoFocus: !0,
         onCancel: () => r?.(null),
         onSubmit: i => t(e.node_id, rh(l + i)),
@@ -2040,7 +2040,7 @@ function t1({
           onDeleteVariableSet: d,
           onRenameVariableSet: f,
           onSidebarToggle: t,
-          recordingKey: Pt(_, "variableSetHeader"),
+          recordingKey: generateRecordingKey(_, "variableSetHeader"),
           variableSet: v
         })
       }), jsx("div", {
@@ -2064,7 +2064,7 @@ function t1({
               onDropVariable: R,
               onRenameGroup: g,
               onSelect: e => k(t, e),
-              recordingKey: Pt(_, "group", i)
+              recordingKey: generateRecordingKey(_, "group", i)
             }, i);
           })]
         })
@@ -2103,7 +2103,7 @@ function t2({
     canDrop: !!o && !!d,
     dropPositionThreshold: 1 / 3,
     onDrop(t) {
-      if (t.dragType === tq) d?.(e.name);else if (t.dragType === tJ && (!_ || t.position === Nz.INSIDE)) {
+      if (t.dragType === tq) d?.(e.name); else if (t.dragType === tJ && (!_ || t.position === Nz.INSIDE)) {
         if (!OI(t)) return;
         o?.(t);
       }
@@ -2116,7 +2116,7 @@ function t2({
   return jsxs(D8, {
     forwardedRef: g,
     id: t3(e.name),
-    recordingKey: Pt(h, "nameValue"),
+    recordingKey: generateRecordingKey(h, "nameValue"),
     className: R()({
       "variables_modal_sidebar--group--Tgizc": !0,
       "variables_modal_sidebar--allVariables--bCHIw": _ && !getFeatureFlags().ds_variables_modal_improvements_sidebar,
@@ -2139,7 +2139,7 @@ function t2({
       children: [!_ && e.subgroups.length > 0 && jsx(_$$E, {
         className: "variables_modal_sidebar--caret--SgjnT",
         onClick: a,
-        recordingKey: Pt(h, "groupCaret"),
+        recordingKey: generateRecordingKey(h, "groupCaret"),
         ref: f,
         "aria-label": t ? getI18nString("variables.visual_bell.expand_variable_group") : getI18nString("variables.visual_bell.collapse_variable_group"),
         "aria-controls": e.subgroups.map(e => t3(e.name)).join(","),
@@ -2149,7 +2149,7 @@ function t2({
         className: "variables_modal_sidebar--renameInputWrapper--6cOyB",
         children: jsx(_$$b, {
           type: _$$$.CELL,
-          recordingKey: Pt(h, "renameInput"),
+          recordingKey: generateRecordingKey(h, "renameInput"),
           autoFocus: !0,
           onCancel: () => E(!1),
           onSubmit: t => u(e.name, ZR(e.name, rh(t))),
@@ -2223,7 +2223,7 @@ let t8 = forwardRef(function ({
         children: jsx(_$$b, {
           type: _$$$.CELL,
           autoFocus: !0,
-          recordingKey: Pt(i, e, "renameInput"),
+          recordingKey: generateRecordingKey(i, e, "renameInput"),
           onSubmit: t => {
             let i = !1;
             t && (i = a(e, ZR(e, rh(t))));
@@ -2238,7 +2238,7 @@ let t8 = forwardRef(function ({
         htmlAttributes: {
           onDoubleClick: () => d?.(!0)
         },
-        recordingKey: Pt(i, e, "nameValue"),
+        recordingKey: generateRecordingKey(i, e, "nameValue"),
         children: jsx("span", {
           className: "variables_modal_table_group_name--leafGroupName--5i9Nf",
           children: m
@@ -2372,7 +2372,7 @@ function ie({
     h?.(i);
     hide();
   }, [hide, h, i]), !!h);
-  let es = _$$rN(rf(Pt(b, "name"), "dblclick", () => h?.(i)), !!h);
+  let es = _$$rN(useHandleMouseEvent(generateRecordingKey(b, "name"), "dblclick", () => h?.(i)), !!h);
   let eo = _$$rN(useCallback(() => {
     y?.(i);
     R(i);
@@ -2384,33 +2384,33 @@ function ie({
   data && !data.onlyAllowDeletion && (Q && ec.push(jsx(c$, {
     onClick: Q,
     disabled: v && !E,
-    recordingKey: Pt(b, "duplicate"),
+    recordingKey: generateRecordingKey(b, "duplicate"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.duplicate_mode")
   }, "duplicate")), !e && el && eo && ec.push(jsx(c$, {
     onClick: eo,
-    recordingKey: Pt(b, "setAsDefault"),
+    recordingKey: generateRecordingKey(b, "setAsDefault"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.set_as_default")
   }, "setAsDefault")), !e && et && w.indexOf(i) > 0 && ec.push(jsx(c$, {
     onClick: et,
-    recordingKey: Pt(b, "moveLeft"),
+    recordingKey: generateRecordingKey(b, "moveLeft"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.move_left")
   }, "moveLeft")), !e && en && -1 !== w.indexOf(i) && w.indexOf(i) < w.length - 1 && ec.push(jsx(c$, {
     onClick: en,
-    recordingKey: Pt(b, "moveRight"),
+    recordingKey: generateRecordingKey(b, "moveRight"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.move_right")
   }, "moveRight")), !d && ea && ec.push(jsx(c$, {
     onClick: ea,
-    recordingKey: Pt(b, "startRenaming"),
+    recordingKey: generateRecordingKey(b, "startRenaming"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.rename_mode")
   }, "rename")));
   t && ee && (ec.length > 0 && ec.push(jsx(wv, {}, "separator1")), ec.push(jsx(c$, {
     onClick: ee,
-    recordingKey: Pt(b, "delete"),
+    recordingKey: generateRecordingKey(b, "delete"),
     children: getI18nString("variables.authoring_modal.mode_context_menu.delete_mode")
   })));
   let eu = debugState.getState();
   let ep = eu.openFile?.key;
-  let em = _$$rN(rf(b, "contextmenu", useCallback(t => {
+  let em = _$$rN(useHandleMouseEvent(b, "contextmenu", useCallback(t => {
     t.preventDefault();
     show({
       data: {
@@ -2458,7 +2458,7 @@ function ie({
           onFinish: () => h?.(null),
           originalValue: ed,
           maxLength: o,
-          recordingKey: Pt(b, "rename"),
+          recordingKey: generateRecordingKey(b, "rename"),
           noBorderOnFocus: !0
         })
       }) : jsxs(Fragment, {
@@ -2561,7 +2561,7 @@ function it({
   let X = useRef(w);
   let Q = useDispatch();
   useEffect(() => {
-    X.current.node_id === w.node_id && X.current.defaultModeID !== w.defaultModeID && (Q(_$$F.enqueue({
+    X.current.node_id === w.node_id && X.current.defaultModeID !== w.defaultModeID && (Q(VisualBellActions.enqueue({
       type: "default-mode-changed",
       message: getI18nString("variables.authoring_modal.default_mode_changed")
     })), X.current = w);
@@ -2599,7 +2599,7 @@ function it({
       S(n);
     } else S(zg(O, [e]));
   }, [es, O, I, S]);
-  let el = rf(Pt(y, "variablesModalTable"), "mousedown", e => {
+  let el = useHandleMouseEvent(generateRecordingKey(y, "variablesModalTable"), "mousedown", e => {
     let t = e.target;
     (t === F.current || t.closest(".variablesModalTableHeader")) && eo(-1, e);
   }, {
@@ -2704,7 +2704,7 @@ function it({
           onDuplicateMode: d,
           onRenameMode: h,
           onSetModeAsDefault: g,
-          recordingKey: Pt(y, "modeHeader", t),
+          recordingKey: generateRecordingKey(y, "modeHeader", t),
           renamingModeGUID: b,
           selectedModeID: q,
           setDraggingModeID: Y,
@@ -2760,7 +2760,7 @@ function it({
               onClick: () => {
                 ei ? canShowCTA(w.modes.length) && showCTA() : i();
               },
-              recordingKey: Pt(y, "createMode"),
+              recordingKey: generateRecordingKey(y, "createMode"),
               htmlAttributes: {
                 "data-tooltip": en ? getI18nString("variables.authoring_modal.reached_hard_mode_limit", {
                   modeLimit
@@ -2801,7 +2801,7 @@ function it({
           onRenameVariable: f,
           onSelect: eo,
           onVariableContextMenu: A,
-          recordingKey: Pt(y, "listItemRow", r.variable.node_id),
+          recordingKey: generateRecordingKey(y, "listItemRow", r.variable.node_id),
           renamingVariableID: v,
           selectedModeID: q,
           selectedVariableIDs: I,
@@ -3342,7 +3342,7 @@ function iU({
       }), jsx("div", {
         className: "xet2fuk xl010v5",
         children: jsx(_$$f, {
-          recordingKey: Pt("variablesModal", "expandModal"),
+          recordingKey: generateRecordingKey("variablesModal", "expandModal"),
           "aria-label": x ? getI18nString("variables.authoring_modal.toggle_fullscreen_mode_minimize") : getI18nString("variables.authoring_modal.toggle_fullscreen_mode_expand"),
           onIcon: jsx(_$$O4, {}),
           offIcon: jsx(_$$p, {}),
@@ -4114,7 +4114,7 @@ export let $$i50 = registerModal(function () {
                 setVariableScope: g,
                 updateCodeSyntaxToken: h,
                 removeCodeSyntaxToken: d,
-                recordingKey: Pt("editVariableModal", n.length > 1 ? n.join("-") : n[0])
+                recordingKey: generateRecordingKey("editVariableModal", n.length > 1 ? n.join("-") : n[0])
               };
               t(showModalHandler({
                 type: eu,
@@ -4216,7 +4216,7 @@ export let $$i50 = registerModal(function () {
       ...N
     }), e.accept(), e.shouldPropagate = !1);
   }, [actions, H, N]);
-  let K = fo("variablesModal", "keydown", e => {
+  let K = useHandleInputEvent("variablesModal", "keydown", e => {
     z(e.event) && (e.accept(), z(e));
   });
   let Y = _$$P();
@@ -4306,7 +4306,7 @@ export let $$i50 = registerModal(function () {
         modeLimit,
         onCreateMode: actions.createMode,
         onSidebarToggle: e => actions.setIsSidebarOpen(e),
-        recordingKey: Pt("variablesModal", "title"),
+        recordingKey: generateRecordingKey("variablesModal", "title"),
         selectedGroup: selectedGroupNames[0] ?? null,
         selectedVariableIDs,
         setCollectionFilter,
@@ -4419,7 +4419,7 @@ export let $$i50 = registerModal(function () {
         onPasteVariables: ei,
         onSetAllVariablesSelected: lQ,
         onUngroup: actions.ungroup,
-        recordingKey: Pt("variablesModal", "contextMenuDropdown"),
+        recordingKey: generateRecordingKey("variablesModal", "contextMenuDropdown"),
         toggleEditVariableModal: actions.toggleEditVariableModal
       }), jsx(Q8, {})]
     })

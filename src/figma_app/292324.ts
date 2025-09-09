@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { atom } from "../figma_app/27355";
 import { O5 } from "../figma_app/632319";
 import { mt } from "../figma_app/102712";
@@ -17,7 +17,7 @@ function _(e, t, r) {
     }
   })));
 }
-export function $$h8() {}
+export function $$h8() { }
 export function $$m6(e, t = !1) {
   let [r, i] = useState(0);
   let [a, o] = useState(0);

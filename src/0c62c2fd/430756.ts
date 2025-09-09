@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk, Wk } from "../figma_app/272243";
@@ -22,9 +22,9 @@ import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { b as _$$b2 } from "../905/388233";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FTeamAccessPermissionType, FPlanNameType, FPermissionLevelType, FResourceCategoryType } from "../figma_app/191312";
-import { mCn, sMZ } from "../figma_app/43951";
+import { FolderCreation, UserFlagByName } from "../figma_app/43951";
 import { vy } from "../figma_app/349248";
 import { H_ } from "../figma_app/336853";
 import { C1 } from "../figma_app/12796";
@@ -99,11 +99,11 @@ export function $$er0(e) {
   let K = useSelector(e => e.contacts);
   let Y = useSelector(e => e.dropdownShown);
   let J = useSelector(e => e.autocomplete);
-  let er = iZ();
-  let ea = Rs(mCn, {
+  let er = selectCurrentUser();
+  let ea = Rs(FolderCreation, {
     teamId: e.teamId
   });
-  let es = Rs(sMZ, {
+  let es = Rs(UserFlagByName, {
     name: "seen_connected_project_in_project_creation_onboarding"
   });
   let ei = !!es.data?.currentUser?.userFlagByName;

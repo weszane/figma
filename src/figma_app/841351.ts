@@ -3,25 +3,25 @@ import { PluginModalType, Fullscreen, UIVisibilitySetting, ViewType, LayoutTabTy
 import { zeroSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
-import { q as _$$q } from "../905/196201";
+import { LRUCache } from "../905/196201";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { debugState } from "../905/407919";
 import { fetchPaginatedData, PAGINATION_PREV } from "../figma_app/661371";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { Y6 } from "../figma_app/91703";
 import { VERSION_HISTORY_PAGE_LOADING, UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_LOADING, VERSION_HISTORY_APPEND, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_LINKED_VERSION, VERSION_HISTORY_COMPARE_CHANGES } from "../905/784363";
 import { C2 } from "../905/760074";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { FEditorType, mapEditorTypeToStringWithError } from "../figma_app/53721";
 import { NK } from "../figma_app/111825";
 import { lE } from "../905/218608";
@@ -36,7 +36,7 @@ import { C as _$$C } from "../905/703182";
 import { M4 } from "../905/713695";
 import { U2 } from "../figma_app/193867";
 let $$B5 = "current_version";
-let $$G2 = new _$$q(40);
+let $$G2 = new LRUCache(40);
 let $$V14 = atom("");
 let $$H12 = M4.Query({
   fetch: async e => {
@@ -244,7 +244,7 @@ let $$ee4 = createOptimistThunk(async (e, t) => {
     if (_$$A(r.created_at) > _$$A(t.created_at) && r.user_id !== n.id && !r.participating_users_array?.includes(n.handle)) {
       let n = {
         fileKey: openFileKey,
-        eventId: _$$g(),
+        eventId: generateUUIDv4(),
         lastEdited: o.toISOString(),
         lastViewed: l.toISOString(),
         lastSeenVersion: t.id,
@@ -311,7 +311,7 @@ function en(e, t, r, n, s, l) {
           })), t.dispatch(VERSION_HISTORY_PAGE_LOADING({
             isLoadingPage: !1
           })), d());
-          f.nodeId && f.nodeId !== n && tJ([f.nodeId]);
+          f.nodeId && f.nodeId !== n && replaceSelection([f.nodeId]);
           f.devModeFocusId && HandoffBindingsCpp.focusOnNode(f.devModeFocusId, !1);
           t.dispatch(Y6({
             mode: UIVisibilitySetting.OFF
@@ -402,7 +402,7 @@ let $$eo6 = createOptimistThunk((e, t) => {
 });
 let $$el0 = createOptimistThunk(e => {
   e.dispatch($$ed9());
-  e.dispatch(_$$F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: "versions"
   }));
   Fullscreen.exitVersionHistoryMode(e.getState().openFile?.canEdit ?? !1);
@@ -415,10 +415,10 @@ let $$ed9 = createOptimistThunk(e => {
     fromVersionId: void 0
   }));
   SceneGraphHelpers.clearSelection();
-  e.dispatch(_$$F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: "comparing"
   }));
-  e.dispatch(_$$F.dequeue({
+  e.dispatch(VisualBellActions.dequeue({
     matchType: "view_changes"
   }));
   e.dispatch(Y6({

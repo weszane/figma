@@ -3,7 +3,7 @@ import { N_ } from "../vendor/956898";
 import a from "classnames";
 import { $M } from "../figma_app/930338";
 import { B } from "../905/714743";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { bV, QQ } from "../figma_app/808294";
 import { cs } from "../figma_app/740025";

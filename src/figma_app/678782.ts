@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { selectWithShallowEqual } from "../905/103090";
 import { Yh } from "../figma_app/357047";
 export function $$s1(e) {

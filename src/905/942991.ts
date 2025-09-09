@@ -1,4 +1,4 @@
-import { q } from "../905/196201";
+import { LRUCache } from "../905/196201";
 import { Ax } from "../figma_app/616261";
 import { dU } from "../905/660732";
 import { BB } from "../figma_app/98578";
@@ -36,7 +36,7 @@ class l {
     };
   }
 }
-let d = new q(1e3);
+let d = new LRUCache(1e3);
 function c(e, t, i) {
   let n = t.fullscreenMenuAction.stringMatchedAgainst;
   let a = t.fullscreenMenuAction.stringMatchScore;

@@ -2,7 +2,7 @@ import { atom } from "../figma_app/27355";
 import { fh } from "../figma_app/98072";
 import { Nc } from "../905/617744";
 import { _S } from "../figma_app/516028";
-import { WIM } from "../figma_app/43951";
+import { LibraryAssetByKey } from "../figma_app/43951";
 import { Gd } from "../figma_app/600968";
 import { sC } from "../905/395857";
 import { PW } from "../905/497152";
@@ -16,7 +16,7 @@ let $$u0 = {
       let u = t(Nc) ?? c;
       for (let [e, r] of Object.entries(l)) {
         if (r.sourceLibraryKey === u || t(p).has(e)) continue;
-        let a = t(WIM.Query({
+        let a = t(LibraryAssetByKey.Query({
           libraryKey: r.sourceLibraryKey,
           key: e
         }));

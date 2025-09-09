@@ -1,6 +1,6 @@
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { hf } from "../figma_app/210234";
 import { eU } from "../figma_app/908460";
 import { VG, VA } from "../figma_app/761118";
@@ -138,7 +138,7 @@ export class $$u0 {
         violation: e,
         resolve: t,
         reject: i,
-        id: g()
+        id: generateUUIDv4()
       };
       this._fixRequestStack.push(n);
       this.startProcessingInterval();

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { WB } from "../905/761735";
 import { Ez, e6, TZ } from "../figma_app/766708";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { J } from "../905/539754";
 import { H } from "../905/748658";
 import { w } from "../figma_app/987465";
@@ -60,7 +60,7 @@ export async function $$f10(e) {
   });
 }
 export function $$E4(e, t, r, n) {
-  t ??= g();
+  t ??= generateUUIDv4();
   WB().optimisticallyCreate({
     CollectionItemV2: {
       [t]: {
@@ -120,7 +120,7 @@ export async function $$b7({
     fieldSchema: t,
     newValue: n,
     assetsForPublish: a
-  })).then(e => e.data.meta) : (e = g(), await WB().optimisticallyCreate({
+  })).then(e => e.data.meta) : (e = generateUUIDv4(), await WB().optimisticallyCreate({
     CollectionItemField: {
       [e]: (o = r.databaseId, {
         itemId: o,

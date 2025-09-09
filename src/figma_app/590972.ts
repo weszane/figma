@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { c2 } from "../905/382883";
 import { t as _$$t } from "../905/150656";
 import { N as _$$N } from "../905/438674";
@@ -63,7 +63,7 @@ import { Yw, Of } from "../905/201596";
 import { Rv, mN } from "../figma_app/599979";
 import { eY } from "../figma_app/722362";
 import { sZ } from "../905/845253";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { xw } from "../figma_app/951233";
 import { vt } from "../figma_app/45218";
 import { e0 } from "../905/696396";
@@ -537,7 +537,7 @@ function eR(e) {
     figFile,
     existingHubFile
   } = e;
-  let n = Pc();
+  let n = selectUser();
   let o = useSelector(e => xw(e) ?? void 0, c2);
   let l = sZ();
   let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);

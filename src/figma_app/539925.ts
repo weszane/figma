@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { f as _$$f } from "../905/24905";
 import { Yx } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { XE } from "../figma_app/976749";
 import { FEditorType } from "../figma_app/53721";
 import { rs } from "../figma_app/440994";
@@ -335,7 +335,7 @@ class T {
   }
   announceInner(e) {
     let t = e.buildString(e.value);
-    t && this.store.dispatch(F.enqueue({
+    t && this.store.dispatch(VisualBellActions.enqueue({
       message: t,
       role: "status",
       timeoutOverride: 500
@@ -344,7 +344,7 @@ class T {
   showKeyboardSelectionModeChangedToast(e) {
     let t = e === SelectionMode.BOX ? getI18nString("fullscreen.accessibility.keyboard_box_selection_activated") : getI18nString("fullscreen.accessibility.keyboard_pick_selection_activated");
     let r = e === SelectionMode.BOX ? getI18nString("fullscreen.accessibility.keyboard_box_selection.context") : getI18nString("fullscreen.accessibility.keyboard_pick_selection.context");
-    this.store.dispatch(F.enqueue({
+    this.store.dispatch(VisualBellActions.enqueue({
       type: `${$$E3}-keyboard-selection-mode-changed`,
       message: t,
       nonVisualMessage: r

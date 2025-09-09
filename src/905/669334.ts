@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { t as _$$t } from "../905/150656";
 import { E as _$$E } from "../905/632989";
 import { r as _$$r } from "../905/571562";
@@ -9,7 +9,7 @@ import { analyticsEventManager } from "../905/449184";
 import { c$, ms } from "../figma_app/236327";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { jg } from "../figma_app/633080";
 import { n as _$$n } from "../905/402643";
 import { R as _$$R } from "../905/697254";
@@ -49,7 +49,7 @@ let $$k0 = memo(({
 }) => {
   let O = useDispatch();
   let D = useSelector(e => e.dropdownShown);
-  let L = iZ();
+  let L = selectCurrentUser();
   let F = X();
   let M = D?.type === v;
   let j = D?.type === I;

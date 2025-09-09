@@ -5,7 +5,7 @@ import s from "classnames";
 import { e as _$$e } from "../905/280005";
 import { Uz } from "../905/63728";
 import { d as _$$d } from "../905/884707";
-import { uA, cZ, Am } from "../figma_app/806412";
+import { RecordingComponent, handleMouseEvent, handlePointerEvent } from "../figma_app/878298";
 import { L } from "../905/408237";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -26,16 +26,16 @@ export function $$S17(e) {
     children: e.children
   });
 }
-export class $$v30 extends uA {
+export class $$v30 extends RecordingComponent {
   constructor() {
     super(...arguments);
     this.onKeyDown = e => {
       T?.(e) || (this.props.onKeyDown?.(e), e.keyCode === Uz.ESCAPE && e.target.blur());
     };
-    this.onClick = cZ(this, "click", e => {
+    this.onClick = handleMouseEvent(this, "click", e => {
       this.props.onClick?.(e);
     });
-    this.onPointerDown = Am(this, "pointerdown", e => {
+    this.onPointerDown = handlePointerEvent(this, "pointerdown", e => {
       this.props.onPointerDown?.(e);
     });
   }

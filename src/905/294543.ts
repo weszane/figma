@@ -1,12 +1,12 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { U } from "../figma_app/901889";
 import { createOptimistThunk } from "../905/350402";
 import { gU } from "../figma_app/147952";
 import { cW } from "../figma_app/844435";
 import { ds } from "../figma_app/314264";
-import { bw } from "../figma_app/741237";
-import { TA } from "../905/372672";
+import { updateDevHandoffCodeLanguage } from "../figma_app/741237";
+import { getUserId } from "../905/372672";
 import { s as _$$s } from "../905/506024";
 import { getPluginByFileId } from "../figma_app/300692";
 import { hasLocalFileId } from "../figma_app/155287";
@@ -14,7 +14,7 @@ import { $A } from "../905/862883";
 import { XP } from "../figma_app/655139";
 function _(e) {
   let t = XP(e);
-  bw(t);
+  updateDevHandoffCodeLanguage(t);
   return t;
 }
 export let $$A0 = createOptimistThunk((e, t) => {
@@ -40,7 +40,7 @@ export function $$y1() {
   let e = U();
   let t = cW();
   let i = useDispatch();
-  let s = TA() ?? void 0;
+  let s = getUserId() ?? void 0;
   return useCallback(n => {
     let r = _(n);
     if ("published-plugin" === r.type) {

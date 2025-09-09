@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Xr } from "../figma_app/27355";
 import { B4 } from "../figma_app/385215";
 import { $ } from "../905/532878";

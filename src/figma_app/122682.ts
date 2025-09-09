@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { ZC } from "../figma_app/39751";
 import { isIpadDevice, getIsMobile } from "../figma_app/778880";

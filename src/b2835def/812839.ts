@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useContext } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { rW } from "../figma_app/591738";
 import { Zr } from "../figma_app/678782";
 import { aV } from "../figma_app/722362";
@@ -16,7 +16,7 @@ import { X$ } from "../905/612685";
 import { FUserVerificationStatusType, FPublicationStatusType } from "../figma_app/191312";
 import { Ib } from "../905/129884";
 import { _ as _$$_ } from "../figma_app/496441";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Gc } from "../905/63728";
 import { ex } from "../905/524523";
 import { n8, xG } from "../figma_app/121043";
@@ -39,7 +39,7 @@ let C = ex("hub_file_in_review", function (e) {
   } = e;
   let i = Gc(e => {
     e.preventDefault();
-    Ay.redirect(url, "_blank");
+    customHistory.redirect(url, "_blank");
   });
   return jsxs(_$$_, {
     newTab: !0,
@@ -67,7 +67,7 @@ let A = ex("hub_file_info", function (e) {
   } = e;
   let n = Gc(e => {
     e.preventDefault();
-    Ay.redirect(url, "_blank");
+    customHistory.redirect(url, "_blank");
   });
   return jsxs(_$$_, {
     newTab: !0,

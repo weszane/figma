@@ -6,7 +6,7 @@ import o from "classnames";
 import { ZC } from "../figma_app/39751";
 import { M } from "../figma_app/648761";
 import { Uz } from "../905/63728";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { S as _$$S } from "../figma_app/552746";
 import { getI18nString } from "../905/303541";
@@ -118,7 +118,7 @@ export function $$v0(e) {
       }
     },
     className: l()(kL, e.outerClassName),
-    recordingKey: Pt(e.recordingKey, "tokenizableInput"),
+    recordingKey: generateRecordingKey(e.recordingKey, "tokenizableInput"),
     children: [jsx("div", {
       className: l()(Bv, e.pillsContainerClassName),
       children: v.map((t, i) => {
@@ -130,7 +130,7 @@ export function $$v0(e) {
           isDeleted: !1,
           isStandalone: !0,
           onClick: e.disabled ? void 0 : e => D(e, i),
-          recordingKey: Pt(e.recordingKey, "tokens", i),
+          recordingKey: generateRecordingKey(e.recordingKey, "tokens", i),
           tooltipOverride: t.invalidReason,
           value: t.value,
           variableId: t.variableId

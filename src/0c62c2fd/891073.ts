@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { S } from "../4452/747039";
@@ -26,11 +26,11 @@ export function $$f0(e) {
     S.deleteAssetTransferRequest({
       id: x
     }).then(() => {
-      g(F.enqueue({
+      g(VisualBellActions.enqueue({
         message: getI18nString("revoke_transfer_modal.visual_bell.transfer_revoked")
       }));
     }, e => {
-      g(F.enqueue({
+      g(VisualBellActions.enqueue({
         message: getI18nString("revoke_transfer_modal.visual_bell.something_went_wrong"),
         error: !0
       }));

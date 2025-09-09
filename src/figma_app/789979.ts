@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { parsePxNumber } from "../figma_app/783094";
-import { rf, aH, v_, Pt, o6, cZ } from "../figma_app/806412";
+import { useHandleMouseEvent, SKIP_RECORDING, useHandleKeyboardEvent, generateRecordingKey, RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { OP, uF } from "../figma_app/792958";
 import { LdP } from "../figma_app/27776";
 import { In, Mo, Wg, N2, Mq, pg, my, Do } from "../905/178043";
@@ -75,9 +75,9 @@ export function $$u1({
   useEffect(() => () => {
     r && S.current();
   }, [r]);
-  let v = rf(u, "mouseup", T);
-  let A = rf(u, "mousemove", useCallback((e) => {
-    if (p) return aH;
+  let v = useHandleMouseEvent(u, "mouseup", T);
+  let A = useHandleMouseEvent(u, "mousemove", useCallback(e => {
+    if (p) return SKIP_RECORDING;
     e.stopPropagation();
     e.preventDefault();
     let t = {
@@ -86,26 +86,26 @@ export function $$u1({
     };
     if (m.current = t, r) I(t, e.shiftKey, e.buttons);else {
       let e = Object.create(null);
-      f.current.forEach((t) => {
+      f.current.forEach(t => {
         e[t] = !0;
       });
       a(f.current);
       n(e);
     }
   }, [p, r, I, n, a]), {
-    recordMetadata: (e) => ({
+    recordMetadata: e => ({
       clientX: e.clientX,
       clientY: e.clientY
     }),
-    playbackMetadata: (e) => ({
+    playbackMetadata: e => ({
       clientX: e.clientX,
       clientY: e.clientY
     })
   });
-  let x = v_(u, "keydown", useCallback((e) => {
+  let x = useHandleKeyboardEvent(u, "keydown", useCallback(e => {
     e.shiftKey && m.current && I(m.current, !0);
   }, [I]));
-  let N = v_(u, "keyup", useCallback((e) => {
+  let N = useHandleKeyboardEvent(u, "keyup", useCallback(e => {
     m.current && I(m.current, e.shiftKey);
   }, [I]));
   useEffect(() => {
@@ -173,19 +173,19 @@ export function $$p0({
       directions: [r],
       startResizing,
       onDoubleClick: t,
-      recordingKey: Pt(m, r)
-    }, i) : null), [OP.TOP, OP.BOTTOM].map((r) => [OP.LEFT, OP.RIGHT].map((i, a) => e.includes(r) && e.includes(i) ? jsx(_, {
+      recordingKey: generateRecordingKey(m, r)
+    }, i) : null), [OP.TOP, OP.BOTTOM].map(r => [OP.LEFT, OP.RIGHT].map((i, a) => e.includes(r) && e.includes(i) ? jsx(_, {
       directions: [r, i],
       startResizing,
       onDoubleClick: t,
-      recordingKey: Pt(m, r, i)
+      recordingKey: generateRecordingKey(m, r, i)
     }, a) : null))]
   });
 }
-class _ extends o6 {
+class _ extends RecordingPureComponent {
   constructor() {
     super(...arguments);
-    this.onMouseDown = (e) => cZ(this, "mousedown", (t) => {
+    this.onMouseDown = e => handleMouseEvent(this, "mousedown", t => {
       t.stopPropagation();
       t.preventDefault();
       this.props.startResizing(e, {
@@ -193,11 +193,11 @@ class _ extends o6 {
         y: t.clientY
       });
     });
-    this.onDoubleClick = cZ(this, "dblclick", () => {
-      if (!this.props.onDoubleClick) return aH;
+    this.onDoubleClick = handleMouseEvent(this, "dblclick", () => {
+      if (!this.props.onDoubleClick) return SKIP_RECORDING;
       this.props.onDoubleClick?.();
     });
-    this.directionsToStyle = (e) => {
+    this.directionsToStyle = e => {
       if (1 === e.length) switch (e[0]) {
         case OP.TOP:
           return In;

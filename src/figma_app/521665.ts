@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { parsePxNumber } from "../figma_app/783094";
 import { kl } from "../905/275640";
 import { h as _$$h } from "../figma_app/648675";

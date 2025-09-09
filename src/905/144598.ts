@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N } from "../905/7587";
 import { A as _$$A } from "../905/410311";
 import o from "classnames";

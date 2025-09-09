@@ -5,7 +5,7 @@ import { _ as _$$_ } from "../905/410717";
 import { j as _$$j } from "../905/519202";
 import { RR } from "../figma_app/338442";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
@@ -54,7 +54,7 @@ export function $$S0(e) {
       isActive: E,
       disabled: e.disabled || !O,
       onPickerOpen: () => M(I.current),
-      recordingKey: Pt(e, "visibilityVariableControl"),
+      recordingKey: generateRecordingKey(e, "visibilityVariableControl"),
       dataTestId: "visibility-variable-control",
       openOnRightClick: !0,
       children: jsx(_$$f, {
@@ -70,7 +70,7 @@ export function $$S0(e) {
         offIcon: jsx(_$$_, {}),
         onChange: () => t(T === MIXED_MARKER || !T),
         onIcon: jsx(_$$j, {}),
-        recordingKey: Pt(e, "visibleToggle"),
+        recordingKey: generateRecordingKey(e, "visibleToggle"),
         variant: "highlighted"
       })
     })

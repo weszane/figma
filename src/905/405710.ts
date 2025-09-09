@@ -1,6 +1,6 @@
 import { assert } from "../figma_app/465776";
 import { c2 } from "../905/382883";
-import { cd, _H } from "../figma_app/243058";
+import { ResponsiveSetIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { Fullscreen, Thumbnail } from "../figma_app/763686";
 import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { hp } from "../vendor/162266";
@@ -78,10 +78,10 @@ let E = e => {
   let t = null;
   switch (e.type) {
     case PW.RESPONSIVE_SET:
-      t = cd.toGuidStrIfLocal(e.assetId);
+      t = ResponsiveSetIdHandler.toGuidStrIfLocal(e.assetId);
       break;
     case PW.CODE_COMPONENT:
-      t = _H.toGuidStrIfLocal(e.assetId);
+      t = CodeComponentIdHandler.toGuidStrIfLocal(e.assetId);
   }
   return t || (logError("thumbnails", "Could not parse nodeId for thumbnail generation", {
     assetId: e.assetId,

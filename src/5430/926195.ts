@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { gE } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
 import { Jm } from "../figma_app/387599";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { HI } from "../figma_app/173838";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { x as _$$x } from "../figma_app/856733";
 export let $$p0 = registerModal(function ({
@@ -18,7 +18,7 @@ export let $$p0 = registerModal(function ({
   let p = HI(e);
   let h = Jm();
   let x = useDispatch();
-  let f = iZ();
+  let f = selectCurrentUser();
   return p ? jsx(_$$x, {
     onAgree: () => {
       if (r) {

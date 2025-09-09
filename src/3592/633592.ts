@@ -26,7 +26,7 @@ import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { uQ } from "../figma_app/311375";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
 import { wV } from "../figma_app/779965";
@@ -832,7 +832,7 @@ function eb({
       })
     });
   }(e);
-  let o = iZ();
+  let o = selectCurrentUser();
   let i = function () {
     let {
       chat: _chat

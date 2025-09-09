@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -14,7 +14,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
 import { popModalStack } from "../905/156213";
 import { aJ, kN, QC } from "../figma_app/494261";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { e6 } from "../905/557142";
 export let $$b0 = registerModal(function (e) {
   let {
@@ -26,7 +26,7 @@ export let $$b0 = registerModal(function (e) {
   let g = () => {
     u(popModalStack());
   };
-  let b = Pc();
+  let b = selectUser();
   let I = void 0 === requesterCurrentLevel || requesterCurrentLevel < e6.VIEWER;
   let [E, x] = useState(I ? e6.VIEWER : e6.EDITOR);
   let [S, w] = useState("");

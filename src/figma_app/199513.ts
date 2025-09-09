@@ -1,4 +1,4 @@
-import { unstable_batchedUpdates } from "../vendor/514228";
+import { unstable_batchedUpdates } from "react-redux";
 import { lQ } from "../905/934246";
 import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
@@ -9,7 +9,7 @@ import { Jl } from "../figma_app/566371";
 import { getRequest, XHR } from "../905/910117";
 import { Q, s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { sf } from "../905/34809";
 import { p as _$$p } from "../905/282607";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
@@ -24,7 +24,7 @@ import { F as _$$F2 } from "../905/224";
 import { SS } from "../figma_app/528509";
 import { Ws } from "../905/628874";
 import { FFolderType } from "../figma_app/191312";
-import { m0h, hYX } from "../figma_app/43951";
+import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951";
 import { M4, IT } from "../905/713695";
 import { rR, sK } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
@@ -101,7 +101,7 @@ let $ = M4.Query({
     livegraphClient: r
   }) => {
     let n = new Date(new Date().setHours(0, 0, 0, 0));
-    return r.subscribe(m0h, {
+    return r.subscribe(FilesForProject, {
       projectId: e,
       updatedAtTimestamp: n
     }, r => {
@@ -208,7 +208,7 @@ let $$J0 = M4.PaginatedQuery({
     livegraphClient: r
   }) => {
     let n = new Date(new Date().setHours(0, 0, 0, 0));
-    return r.subscribe(m0h, {
+    return r.subscribe(FilesForProject, {
       projectId: e,
       updatedAtTimestamp: n
     }, r => {
@@ -293,7 +293,7 @@ let $$Q8 = M4.Query({
   }) => {
     if (!e || !getFeatureFlags().team_page_folder_creation_live_updates) return lQ;
     let n = new Date(new Date().setHours(0, 0, 0, 0));
-    return r.subscribe(hYX, {
+    return r.subscribe(TeamFoldersQuerySyncView, {
       teamId: e,
       updatedAtTimestamp: n
     }, r => {
@@ -316,7 +316,7 @@ let $$ee5 = M4.Mutation((e, {
 }) => _$$W.permanentlyDelete({
   folderId: e.folderId
 }).then(() => {
-  t.dispatch(_$$F.enqueue({
+  t.dispatch(VisualBellActions.enqueue({
     message: getI18nString("file_browser.file_browser_actions.folder_deleted_forever")
   }));
 }));
@@ -332,7 +332,7 @@ let $$et1 = M4.Mutation(({
     t.Folder.update(e, e => {
       e.trashed_at = Date.now().toString();
     });
-    r.dispatch(_$$F.enqueue({
+    r.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.file_browser_actions.folder_trashed")
     }));
   });
@@ -361,7 +361,7 @@ let $$er11 = M4.Mutation(({
     r.Folder.update(e, e => {
       e.trashed_at = null;
     });
-    n.dispatch(_$$F.enqueue({
+    n.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.file_browser_actions.folder_restored"),
       button: {
         text: getI18nString("visual_bell.show_in_toast", {
@@ -559,7 +559,7 @@ let ed = M4.Mutation((e, {
     folder_id: folder.id,
     team_id: team.id
   }).then(() => {
-    n.dispatch(_$$F.enqueue({
+    n.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.folder_move.project_moved_toast", {
         folderName: folder.path,
         teamName: team.name

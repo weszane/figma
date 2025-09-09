@@ -9,7 +9,7 @@ import { Z as _$$Z } from "../905/498136";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { j } from "../905/918929";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { wJ } from "../figma_app/630951";
 import { FX } from "../figma_app/12491";
@@ -166,7 +166,7 @@ export function $$O0({
     children: [s ? jsx(T, {
       currentView: t,
       subscribedLibraries: i,
-      recordingKey: Pt(e, "setSelector"),
+      recordingKey: generateRecordingKey(e, "setSelector"),
       onSetSelect: s
     }) : jsx("div", {
       className: b8,
@@ -177,7 +177,7 @@ export function $$O0({
         currentView: t,
         resolvedType: a,
         onToggleLayoutIconClick: o,
-        recordingKey: Pt(e, "toggleLayout"),
+        recordingKey: generateRecordingKey(e, "toggleLayout"),
         disabledReason: l
       }), r]
     })]

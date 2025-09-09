@@ -8,7 +8,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { x, l as _$$l } from "../905/457662";
 var $$m1 = (e => (e[e.TOP_LEFT = 0] = "TOP_LEFT", e[e.BOTTOM_LEFT = 1] = "BOTTOM_LEFT", e[e.TOP_RIGHT = 2] = "TOP_RIGHT", e[e.BOTTOM_RIGHT = 3] = "BOTTOM_RIGHT", e))($$m1 || {});
 let g = {
@@ -100,7 +100,7 @@ export function $$S0() {
     let i = r[n % 4];
     return {
       value: i.value,
-      setter: (e, t = zk.YES) => {
+      setter: (e, t = yesNoTrackingEnum.YES) => {
         fullscreenValue.updateSelectionProperties({
           [i.key]: e
         }, {

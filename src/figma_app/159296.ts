@@ -2,18 +2,18 @@ import { useSetAtom } from 'jotai/react';
 import { useEffect, useMemo, useRef } from 'react';
 import { normalizeValue } from '../905/216495';
 import { kl } from '../905/275640';
-import { iZ } from '../905/372672';
+import { selectCurrentUser } from '../905/372672';
 import { getObservableValue } from '../figma_app/84367';
 import { Fk } from '../figma_app/167249';
 import { b } from '../figma_app/203891';
 import { GR } from '../figma_app/229710';
 import { p8 } from '../figma_app/722362';
-import { aY } from '../figma_app/741237';
+import { getPropertiesPanelTab } from '../figma_app/741237';
 import { AppStateTsApi } from '../figma_app/763686';
 export function $$m0() {
   let e = p8('showUi');
   let t = p8('isReadOnly');
-  return !!iZ() && e && t;
+  return !!selectCurrentUser() && e && t;
 }
 export function $$g1() {
   return getObservableValue(AppStateTsApi?.propertiesPanelState().shownPropertiesPanels, []);
@@ -43,10 +43,10 @@ export function $$E2({
   defaultTab: e,
   getActiveTab: t
 }) {
-  let r = getObservableValue(aY(), e);
+  let r = getObservableValue(getPropertiesPanelTab(), e);
   let i = useMemo(() => t(r), [t, r]);
   useEffect(() => {
-    i !== r && aY()?.set(i);
+    i !== r && getPropertiesPanelTab()?.set(i);
   }, [i, r]);
   return i;
 }

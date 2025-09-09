@@ -3,9 +3,9 @@ import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 let u = "hardware_acceleration_disabled_warning_shown";
 var p = (e => (e[e.UNKNOWN = 0] = "UNKNOWN", e[e.DISABLED = 1] = "DISABLED", e[e.ENABLED = 2] = "ENABLED", e))(p || {});
 export function $$_0() {
@@ -24,14 +24,14 @@ export function $$h1(e, t) {
         localStorageRef.setItem(u, "1");
       };
       trackEventAnalytics("Hardware Acceleration Warning Bell");
-      t(F.enqueue({
+      t(VisualBellActions.enqueue({
         type: "hardware_acceleration_disabled_warning",
         message: getI18nString("hardware_acceleration_detector.message"),
         button: {
           text: getI18nString("hardware_acceleration_detector.learn_more"),
           action: () => {
-            Ay.unsafeRedirect("https://help.figma.com/hc/articles/360039828614-Configure-your-browser-for-Figma#Advanced", "_blank");
-            t(F.dequeue({}));
+            customHistory.unsafeRedirect("https://help.figma.com/hc/articles/360039828614-Configure-your-browser-for-Figma#Advanced", "_blank");
+            t(VisualBellActions.dequeue({}));
             e();
             trackEventAnalytics("Hardware Acceleration Warning Clicked", {
               dismissed: !1

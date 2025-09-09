@@ -13,7 +13,7 @@ import { r as _$$r } from "../figma_app/821179";
 import { GS } from "../figma_app/314264";
 import { sS, XJ, tS } from "../figma_app/516028";
 import { Q } from "../905/618914";
-import { Opb, J_J } from "../figma_app/43951";
+import { PreloadCodeConnectLk, FileCanAccessFullCodeConnect } from "../figma_app/43951";
 import { mZ } from "../905/276025";
 import { $W } from "../905/144933";
 import { HX, ad, Xe, kN } from "../figma_app/97042";
@@ -98,7 +98,7 @@ async function x(e) {
   for (let [e, t] of nodesByLibraryKey) for (let i = 0; i < t.length; i += 20) {
     let a = t.slice(i, i + 20);
     try {
-      let t = await subscribeAndAwaitData(Opb, {
+      let t = await subscribeAndAwaitData(PreloadCodeConnectLk, {
         nodes: Array.from(new Set(a.map(t => `${e},${t.backingNodeId}`).concat(a.map(e => e.instanceList).flat()))),
         openFileKey: fileKey
       });
@@ -186,13 +186,13 @@ async function N(e, t) {
 }
 export function $$C0() {
   let e = tS();
-  let [t] = IT(J_J({
+  let [t] = IT(FileCanAccessFullCodeConnect({
     key: e ?? ""
   }));
   return "loaded" === t.status && "loaded" === t.data.file.status && t.data.file.data?.hasPermission === !0;
 }
 export async function $$w1(e) {
-  let t = await subscribeAndAwaitData(J_J, {
+  let t = await subscribeAndAwaitData(FileCanAccessFullCodeConnect, {
     key: e
   });
   return "loaded" === t.file.status && t.file.data?.hasPermission === !0;

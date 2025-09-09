@@ -1,9 +1,9 @@
 import { D } from "../905/347702";
 import { Cq } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f } from "../905/940356";
 export function $$o0(e) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = Cq({
     useSinatraType: !0
   });

@@ -1,4 +1,4 @@
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { nt } from "../figma_app/687776";
 import { h } from "../figma_app/334471";
 import { p as _$$p, u as _$$u } from "../1250/964548";

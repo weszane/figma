@@ -1,13 +1,13 @@
 import _require from "../svg/764361";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useContext, useRef } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Fullscreen, VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
@@ -31,7 +31,7 @@ import { u3, y$ } from "../figma_app/152690";
 import { MH } from "../figma_app/394327";
 import { k as _$$k2 } from "../905/67286";
 import { Ej, hE } from "../905/71683";
-class L extends c$ {}
+class L extends c$ { }
 let F = [10, 11, 12, 13, 14, 15, 16, 20, 24, 32, 36, 40, 48, 64, 96, 128];
 export function $$M0({
   id: e,
@@ -140,7 +140,7 @@ function j({
   let $ = [];
   $.push(F.map(e => jsx(L, {
     value: e,
-    recordingKey: Pt(k, `${e}`),
+    recordingKey: generateRecordingKey(k, `${e}`),
     children: e
   }, `font-size-${e}`)));
   M || $.push(jsx(sK, {}, "divider"), jsx(L, {

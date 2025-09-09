@@ -1,6 +1,6 @@
 import { createEmptyMixin } from '../905/112832';
 import { SceneNodeCpp } from '../figma_app/13528';
-import { gr, sD } from '../figma_app/243058';
+import { VariableSetIdCompatHandler, VariableIdHandler } from '../figma_app/243058';
 
 /**
  * Mixin for variable-related node functionality.
@@ -19,7 +19,7 @@ export function setupVariableMixin<T extends new (...args: any[]) => any>(Base: 
      */
     get variableID(): ReturnType<typeof sD.fromString> {
       this.setGlobalNodeID();
-      const id = sD.fromString(this.bindings.NodeTsApi.getVariableID(this.sceneGraph.nodeContext));
+      const id = VariableIdHandler.fromString(this.bindings.NodeTsApi.getVariableID(this.sceneGraph.nodeContext));
       if (!id) throw new Error('Invalid variable id');
       return id;
     }
@@ -38,7 +38,7 @@ export function setupVariableMixin<T extends new (...args: any[]) => any>(Base: 
      */
     get variableCollectionId(): ReturnType<typeof gr.fromString> {
       this.setGlobalNodeID();
-      const id = gr.fromString(this.bindings.NodeTsApi.getVariableSetID(this.sceneGraph.nodeContext));
+      const id = VariableSetIdCompatHandler.fromString(this.bindings.NodeTsApi.getVariableSetID(this.sceneGraph.nodeContext));
       if (!id) throw new Error('Invalid variable collection id');
       return id;
     }
@@ -131,7 +131,9 @@ export function setupVariableMixin<T extends new (...args: any[]) => any>(Base: 
      */
     setBoundVariable(variable: any, value: any): void {
       this.setGlobalNodeID();
-      const { errorMsg } = this.bindings.NodeTsApi.setBoundVariable(variable, value, this.sceneGraph.nodeContext);
+      const {
+        errorMsg
+      } = this.bindings.NodeTsApi.setBoundVariable(variable, value, this.sceneGraph.nodeContext);
       if (errorMsg) throw new Error(errorMsg);
     }
 
@@ -176,7 +178,9 @@ export function setupVariableMixin<T extends new (...args: any[]) => any>(Base: 
      */
     setRangeBoundVariable(a: any, b: any, c: any, d: any): void {
       this.setGlobalNodeID();
-      const { errorMsg } = SceneNodeCpp.setRangeBoundVariable(a, b, c, d, this.sceneGraph.nodeContext);
+      const {
+        errorMsg
+      } = SceneNodeCpp.setRangeBoundVariable(a, b, c, d, this.sceneGraph.nodeContext);
       if (errorMsg) throw new Error(errorMsg);
     }
   }
@@ -189,7 +193,9 @@ export function setupVariableMixin<T extends new (...args: any[]) => any>(Base: 
  * @returns True if node type is 'VARIABLE', else false.
  * (Original: $$o1)
  */
-export const isVariableNode = (node: { type: string }): boolean => node.type === 'VARIABLE';
+export const isVariableNode = (node: {
+  type: string;
+}): boolean => node.type === 'VARIABLE';
 
 // Export refactored names
 export const B = setupVariableMixin;

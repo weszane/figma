@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { DesignGraphElements } from "../figma_app/763686";
 import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { z5 } from "../905/713722";
 import { S7, sX } from "../figma_app/259578";
 import { nm, Gu } from "../figma_app/90441";
@@ -51,7 +51,7 @@ export function $$f1({
       hideOpacity: !u,
       onColorChange: t,
       onOpacityChange: o,
-      recordingKey: Pt(h, "colorControls"),
+      recordingKey: generateRecordingKey(h, "colorControls"),
       theme: r
     })
   });

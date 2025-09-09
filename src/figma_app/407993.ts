@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, createContext, useState, useRef, useMemo, useContext, useCallback, useEffect, useLayoutEffect, Fragment as _$$Fragment } from "react";
 import { createPortal } from "../vendor/944059";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { r as _$$r } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
@@ -14,7 +14,7 @@ import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { P as _$$P } from "../vendor/348225";
 import { fU } from "../905/492004";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Ho, wE, sp } from "../figma_app/308685";
@@ -63,10 +63,10 @@ let H = createContext({
   finishedAnimating: !1,
   draggedStamp: null,
   shouldDragCancel: !1,
-  setFinishedAnimating: e => {},
-  onDrag: e => {},
-  onDragStart: e => {},
-  onDragEnd: () => {},
+  setFinishedAnimating: e => { },
+  onDrag: e => { },
+  onDragStart: e => { },
+  onDragEnd: () => { },
   wheelContainerRef: {
     current: null
   },
@@ -137,7 +137,7 @@ function ep(e) {
     onMouseEnter,
     onMouseLeave
   } = e;
-  let o = rf(`emojiWheel.wedge.${name}`, "mousedown", e.onClick);
+  let o = useHandleMouseEvent(`emojiWheel.wedge.${name}`, "mousedown", e.onClick);
   let l = _$$S();
   let d = {
     transform: `scaleX(-1) rotate(${(position - 1) * 45 + 22.5}deg)`
@@ -507,7 +507,7 @@ function ef({
         active: o.current === r,
         type: s,
         onMouseEnter: r => {
-          if (o.current = r, null == e) t(r.position);else {
+          if (o.current = r, null == e) t(r.position); else {
             let n = (r.position - e) % 8;
             n < -4 && (n += 8);
             n > 4 && (n -= 8);
@@ -714,7 +714,7 @@ function eb(e) {
   let v = Pl({
     subscribeToUpdates_expensive: I
   });
-  let A = rf(`emojiWheel.draggableStamp.${stamp.name}`, "mousedown", e.onClick);
+  let A = useHandleMouseEvent(`emojiWheel.draggableStamp.${stamp.name}`, "mousedown", e.onClick);
   return _ && url && d.current ? createPortal(jsx(_$$P.div, {
     ref: p,
     animate: I ? S ? "whileDragCancel" : "whileDrag" : "initial",

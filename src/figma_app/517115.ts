@@ -1,9 +1,9 @@
 import { rt } from "../figma_app/615482";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 let a = rt(void 0);
 export function $$s1() {
-  atomStoreManager.get(a) || atomStoreManager.set(a, g());
+  atomStoreManager.get(a) || atomStoreManager.set(a, generateUUIDv4());
 }
 export function $$o2() {
   return atomStoreManager.get(a);

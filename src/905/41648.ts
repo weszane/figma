@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -8,7 +8,7 @@ import { $n } from "../905/521428";
 import { qc } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { XHR } from "../905/910117";
@@ -147,7 +147,7 @@ let $$v0 = registerModal(function (e) {
                       projectTeamId: e.projectTeamId,
                       connectedPlanName: e.connectedPlan.name
                     }
-                  })) : t(F.enqueue({
+                  })) : t(VisualBellActions.enqueue({
                     message: getI18nString("resource_connection.visual_bell.project_successfully_disconnected", {
                       projectName: e.projectName
                     })
@@ -155,7 +155,7 @@ let $$v0 = registerModal(function (e) {
                 }).catch(e => {
                   A(!1);
                   console.error("Error disconnecting project", e);
-                  t(F.enqueue({
+                  t(VisualBellActions.enqueue({
                     message: getI18nString("resource_connection.visual_bell.generic_error"),
                     error: !0
                   }));

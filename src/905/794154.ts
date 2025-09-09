@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { Um } from "../905/848862";
 import { jD } from "../figma_app/322845";

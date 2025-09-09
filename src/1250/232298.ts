@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
@@ -9,7 +9,7 @@ import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
 import { r1 } from "../figma_app/545877";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
@@ -20,7 +20,7 @@ let v = "seen_japanese_launch_announcement";
 let w = r1(v);
 export function $$T0() {
   let e = useDispatch();
-  let t = TA();
+  let t = getUserId();
   let n = useAtomWithSubscription(mp);
   let m = useAtomWithSubscription(w);
   let x = _$$e({

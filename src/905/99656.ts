@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext } from 'react';
 import { YZ } from '../905/62762';
 import { getAnonymousId } from '../905/449184';
-import { k } from '../905/651849';
+import { logger } from '../905/651849';
 import { An } from '../905/931912';
 import { getInitialOptions } from '../figma_app/169182';
 import { G } from '../figma_app/714966';
@@ -76,7 +76,7 @@ const samplingStrategies = {
     if (anonymousId !== undefined) {
       return shouldSample(YZ(`${samplingKey}${anonymousId}`), samplingRate);
     }
-    k.warn('[Sprigma] Tried to sample an event tracking call by user, but neither user ID nor anonymous ID are available. Skipping tracking attempt');
+    logger.warn('[Sprigma] Tried to sample an event tracking call by user, but neither user ID nor anonymous ID are available. Skipping tracking attempt');
     return false;
   },
   [SamplingMethod.EVENT]: (eventName: string, samplingRate: SamplingRate): boolean => {
@@ -87,7 +87,7 @@ const samplingStrategies = {
  * Logs a warning when Sprig is not properly set up
  */
 function logSprigNotSetupWarning(): void {
-  k.warn('[Sprigma] Detected attempt to use Sprig where it hasn\'t been setup. This is a no-op');
+  logger.warn('[Sprigma] Detected attempt to use Sprig where it hasn\'t been setup. This is a no-op');
 }
 
 /**
@@ -153,7 +153,7 @@ export function useSprigWithSampling() {
           samplingRateDenominator
         } = options;
         const samplingRate = new SamplingRate(samplingRateNumerator, samplingRateDenominator);
-        k.debug('[Sprigma] Attempted to track event with sampling:', {
+        logger.debug('[Sprigma] Attempted to track event with sampling:', {
           eventName,
           method,
           samplingRate: samplingRate.toString(),
@@ -166,11 +166,11 @@ export function useSprigWithSampling() {
           const samplingKey = generateSamplingKey(eventName, method, samplingRate);
           trackEvent('track', samplingKey, ...extraArgs);
         } else {
-          k.debug('[Sprigma] Skipped tracking event due to sampling:', eventName);
+          logger.debug('[Sprigma] Skipped tracking event due to sampling:', eventName);
         }
       } catch (error) {
         if (error instanceof SamplingConfigurationError) {
-          k.error('[Sprigma] Call to `sprigTrackWithSampling` with invalid sampling rate, tracking attempt skipped', {
+          logger.error('[Sprigma] Call to `sprigTrackWithSampling` with invalid sampling rate, tracking attempt skipped', {
             eventName,
             options,
             extraArgs,

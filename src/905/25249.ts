@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useLayoutEffect, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
@@ -29,9 +29,9 @@ import { fu } from "../figma_app/831799";
 import { xT, Q3 } from "../figma_app/199513";
 import { sZ } from "../905/845253";
 import { FC } from "../figma_app/212807";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FTeamAccessPermissionType, FResourceCategoryType, FPlanNameType } from "../figma_app/191312";
-import { P8Q } from "../figma_app/43951";
+import { FolderPermissions } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { H_ } from "../figma_app/336853";
 import { C1 } from "../figma_app/12796";
@@ -397,7 +397,7 @@ export let $$eK0 = registerModal(function (e) {
   let {
     folderId
   } = e;
-  let q = Pc();
+  let q = selectUser();
   let Q = useSelector(e => e.autocomplete);
   let J = useSelector(e => e.contacts);
   let ee = useSelector(e => e.dropdownShown);
@@ -410,7 +410,7 @@ export let $$eK0 = registerModal(function (e) {
   let [el, ed] = useState(0);
   let [ec, eu] = useState(!1);
   let ep = useDispatch();
-  let em = Rs(P8Q, {
+  let em = Rs(FolderPermissions, {
     projectId: folderId,
     currentOrgId: ea?.id || null
   }, {

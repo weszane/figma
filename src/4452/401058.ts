@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
 import { $n } from "../905/521428";
 import { e as _$$e } from "../905/149844";
@@ -11,10 +11,10 @@ import { Y } from "../905/830372";
 import { B } from "../905/900597";
 import { showModalHandler } from "../905/156213";
 import { px, Um } from "../figma_app/465071";
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
 export function $$h0(e) {
   let t = useDispatch();
   let a = px();

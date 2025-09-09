@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { analyticsEventManager } from "../905/449184";
 import { Rs } from "../figma_app/288654";
@@ -8,7 +8,7 @@ import { b } from "../905/723768";
 import { showModalHandler } from "../905/156213";
 import { F } from "../905/224";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
-import { VTr } from "../figma_app/43951";
+import { PlanCanConnectView } from "../figma_app/43951";
 import { T5 } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
@@ -42,7 +42,7 @@ export function $$E1(e, t) {
 }
 export function $$y0(e, t, r) {
   let u = useDispatch();
-  let h = Rs(VTr, {
+  let h = Rs(PlanCanConnectView, {
     planParentId: e?.parentId || "",
     planType: e?.type || FOrganizationLevelType.TEAM
   }, {

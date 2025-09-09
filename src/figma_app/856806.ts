@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
@@ -9,7 +9,7 @@ import { Xh, M7 } from "../figma_app/933328";
 import { eY } from "../figma_app/722362";
 import { _S, tS } from "../figma_app/516028";
 import { bj } from "../905/420347";
-import { Opb } from "../figma_app/43951";
+import { PreloadCodeConnectLk } from "../figma_app/43951";
 import { M4, IT } from "../905/713695";
 import { MH } from "../figma_app/803787";
 import { Th, WH } from "../figma_app/645694";
@@ -173,7 +173,7 @@ export function $$C4() {
   useEffect(() => {
     atomStoreManager.set(zV, null);
   }, [e]);
-  let a = Rs(Opb, {
+  let a = Rs(PreloadCodeConnectLk, {
     nodes: Array.from(r),
     openFileKey: t ?? ""
   }, {
@@ -192,7 +192,7 @@ export function $$C4() {
 }
 export function $$w0(e, t = !0) {
   let r = tS();
-  let n = Rs(Opb, {
+  let n = Rs(PreloadCodeConnectLk, {
     nodes: e,
     openFileKey: r ?? ""
   }, {

@@ -1,52 +1,108 @@
-import { createDeferredPromise } from "../905/874553";
-export class $$r0 {
-  retainFn;
-  deferred;
-  unsub;
-  constructor(e) {
-    this.retainFn = e;
-    this.unsub = null;
-    this.createDeferred = () => {
-      let e = createDeferredPromise();
-      e.promise = e.promise.catch(() => { });
-      return e;
-    };
-    this.getPromise = () => this.deferred.promise;
-    this.resolve = () => {
-      this.deferred?.resolve();
-      this.deferred = this.createDeferred();
-    };
-    this.reject = e => {
-      this.deferred?.reject(e);
-      this.deferred = this.createDeferred();
-    };
-    this.registerPromise = e => {
-      e.then(() => {
-        this.resolve();
-        this.deferred = this.createDeferred();
-      }).catch(e => {
-        this.reject(e);
-        this.deferred = this.createDeferred();
-      });
-    };
-    this.retain = () => {
-      this.unsub || (this.unsub = this.retainFn());
-      this.deferred.promise.$$finally(() => {
-        setTimeout(() => this.release(), 6e3);
-      });
-    };
-    this.release = () => {
-      this.unsub?.();
-      this.unsub = null;
-    };
-    this.deferred = this.createDeferred();
+import { createDeferredPromise } from '../905/874553'
+
+/**
+ * Manages a retained resource and its associated promise lifecycle.
+ * Original class name: $$r0
+ */
+export class RetainedPromiseManager {
+  /** Function to retain the resource. Original: retainFn */
+  private retainFn: () => (() => void) | void
+  /** Deferred promise object. Original: deferred */
+  private deferred: ReturnType<typeof createDeferredPromise>
+  /** Unsubscribe/release function. Original: unsub */
+  private unsub: (() => void) | null
+
+  /**
+   * @param retainFn Function that retains the resource and returns a release function.
+   */
+  constructor(retainFn: () => (() => void) | void) {
+    this.retainFn = retainFn
+    this.unsub = null
+    this.deferred = this.createDeferred()
+
+    // Ensure promise errors are caught to avoid unhandled rejections.
+    this.deferred.promise = this.deferred.promise.catch(() => {})
   }
-  createDeferred;
-  getPromise;
-  resolve;
-  reject;
-  registerPromise;
-  retain;
-  release;
+
+  /**
+   * Creates a new deferred promise.
+   * Original: createDeferred
+   */
+  private createDeferred() {
+    const deferred = createDeferredPromise()
+    deferred.promise = deferred.promise.catch(() => {})
+    return deferred
+  }
+
+  /**
+   * Returns the current deferred promise.
+   * Original: getPromise
+   */
+  getPromise() {
+    return this.deferred.promise
+  }
+
+  /**
+   * Resolves the current deferred promise and creates a new one.
+   * Original: resolve
+   */
+  resolve() {
+    this.deferred?.resolve()
+    this.deferred = this.createDeferred()
+  }
+
+  /**
+   * Rejects the current deferred promise and creates a new one.
+   * Original: reject
+   * @param error Error to reject with.
+   */
+  reject(error: unknown) {
+    this.deferred?.reject(error)
+    this.deferred = this.createDeferred()
+  }
+
+  /**
+   * Registers an external promise and resolves/rejects accordingly.
+   * Original: registerPromise
+   * @param promise Promise to register.
+   */
+  registerPromise(promise: Promise<unknown>) {
+    promise
+      .then(() => {
+        this.resolve()
+      })
+      .catch((error) => {
+        this.reject(error)
+      })
+    this.deferred = this.createDeferred()
+  }
+
+  /**
+   * Retains the resource and sets up release after promise settles.
+   * Original: retain
+   */
+  retain() {
+    if (!this.unsub) {
+      const unsub = this.retainFn()
+      if (typeof unsub === 'function') {
+        this.unsub = unsub
+      }
+    }
+    // Use finally to release after promise settles.
+    this.deferred.promise.finally(() => {
+      setTimeout(() => this.release(), 6000)
+    })
+  }
+
+  /**
+   * Releases the retained resource.
+   * Original: release
+   */
+  release() {
+    this.unsub?.()
+    this.unsub = null
+  }
 }
-export const W = $$r0; 
+
+// Refactored export name
+export const W = RetainedPromiseManager

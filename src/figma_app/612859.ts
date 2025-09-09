@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { sD } from "../figma_app/243058";
+import { VariableIdHandler } from "../figma_app/243058";
 import { FileSourceType, VariableDataType, FirstDraftHelpers, SceneGraphTsApi, FacetType, Thumbnail, DraftState } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { loadPluginFont } from "../905/426868";
@@ -170,7 +170,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
     };
     let o = t === bq.Website ? $$T3 : $$I0;
     n.variableIds.forEach(e => {
-      let t = SceneGraphTsApi.getGUIDForAssetId(r.scene, sD.fromString(e) ?? sD.INVALID, FacetType.VARIABLE);
+      let t = SceneGraphTsApi.getGUIDForAssetId(r.scene, VariableIdHandler.fromString(e) ?? VariableIdHandler.INVALID, FacetType.VARIABLE);
       if (!t) return null;
       let n = r.get(t);
       n && Object.entries(o).forEach(([t, r]) => {
@@ -189,7 +189,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
     let d = function (e, t) {
       let r = {};
       t.variableIds.forEach(t => {
-        let n = e.getVariableNode(sD.fromString(t) ?? sD.INVALID);
+        let n = e.getVariableNode(VariableIdHandler.fromString(t) ?? VariableIdHandler.INVALID);
         if (!n) return null;
         r[n.name] = {
           id: t,
@@ -200,7 +200,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
       return r;
     }(n, s);
     for (let t in e) {
-      let n = SceneGraphTsApi.getGUIDForAssetId(r.scene, sD.fromString(t) ?? sD.INVALID, FacetType.VARIABLE);
+      let n = SceneGraphTsApi.getGUIDForAssetId(r.scene, VariableIdHandler.fromString(t) ?? VariableIdHandler.INVALID, FacetType.VARIABLE);
       if (!n) continue;
       let s = r.get(n);
       s && d[s.name] && (o[d[s.name].id] = e[t]);

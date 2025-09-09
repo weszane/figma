@@ -38,7 +38,7 @@ import { Jn } from '../905/17223';
 import { H as _$$H6 } from '../905/17478';
 import { U as _$$U6 } from '../905/18613';
 import { mC as _$$mC, oh as _$$oh, D2, VP } from '../905/18797';
-import { k9 } from '../905/19536';
+import { useMemoStable } from '../905/19536';
 import { k as _$$k4 } from '../905/22009';
 import { W as _$$W5 } from '../905/25249';
 import { a as _$$a13 } from '../905/29104';
@@ -112,7 +112,7 @@ import { G as _$$G3 } from '../905/289770';
 import { $ as _$$$5 } from '../905/293658';
 import { e as _$$e6 } from '../905/295932';
 import { $ as _$$$8 } from '../905/302575';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText, getTranslatedDynamicContent } from '../905/303541';
 import { R as _$$R0 } from '../905/304671';
 import { T as _$$T2, v as _$$v2 } from '../905/309844';
@@ -137,7 +137,7 @@ import { LogLevelStr } from '../905/361972';
 import { Yg } from '../905/362959';
 import { Q as _$$Q2 } from '../905/363675';
 import { c as _$$c3 } from '../905/370443';
-import { iZ as _$$iZ, Pc, TA } from '../905/372672';
+import { selectCurrentUser, selectUser, getUserId } from '../905/372672';
 import { S as _$$S1 } from '../905/373189';
 import { $ as _$$$4 } from '../905/379902';
 import { FRequestsStr } from '../905/384551';
@@ -207,7 +207,7 @@ import { g as _$$g5 } from '../905/607862';
 import { EM, QL } from '../905/609392';
 import { Timer } from '../905/609396';
 import { i as _$$i4 } from '../905/610691';
-import { Ay, Gl } from '../905/612521';
+import { customHistory, getPreviousSelectedView } from '../905/612521';
 import { r1 as _$$r3, jN } from '../905/612685';
 import { J as _$$J2 } from '../905/614223';
 import { e as _$$e3 } from '../905/621515';
@@ -270,7 +270,7 @@ import { w as _$$w4 } from '../905/863010';
 import { h as _$$h3 } from '../905/864281';
 import { u as _$$u5 } from '../905/866761';
 import { S as _$$S5 } from '../905/872825';
-import { g as _$$g6 } from '../905/880308';
+import { generateUUIDv4 } from '../905/871474';
 import { VK, YK } from '../905/880488';
 import { E as _$$E1 } from '../905/881732';
 import { k as _$$k2 } from '../905/888808';
@@ -430,7 +430,7 @@ import { Jt } from '../figma_app/28323';
 import { o as _$$o7, s as _$$s3 } from '../figma_app/29593';
 import { R as _$$R9 } from '../figma_app/32680';
 import { ZC } from '../figma_app/39751';
-import { ox as _$$ox2, __y, _aE, aON, bUn, CH9, Cit, F8N, GyZ, hqi, ifD, Imb, Jzf, kei, KhA, kQI, L8O, LKQ, m28, nD$, nYs, oFF, QJZ, qOl, R89, RRC, sMZ, TNJ, Udv, UpR, vXh, wtK, yQw, yU5, Ywy, yY6, z07 } from '../figma_app/43951';
+import { SharedWithYouResources, AssetTransferReloadView, FileBrowserDraftsViewBarView, WorkspacePageView, WorkspacesDirectoryView, PinnedFiles, TeamUserStatusAndRequests, UserProfilePageView, TeamPermissions, ActiveFileUsersForFileView, PlanConnectedProjectsForPlanUser, AddWorkspacePinSearchFilesView, FilesInProjectHighLimit, NonEnterpriseOrgMetaContentView, PaginatedFigFeed, TeamCanEdit, FolderPageView, TeamUpgradeBannerView, WorkspaceSuggestedPinsView, WorkspacePageMembersView, EnterpriseOrgMetaContentView, FileBrowserProjectPageTitleView, FileBrowserWorkspacePageTeamsView, TeamRoleRequestView, TrashedFilesPageView, LimitedSpaceSharedProjectsView, UserFlagByName, TeamCanAdmin, FolderCanView, EduOffboardingData, DraftsToMoveFoldersByUserId, AddWorkspacePinnedFileView, TeamById, TeamFileLimitsInfoByProject, FolderBannerView, TeamUpgradePermissions, AddWorkspacePinSuggestedFilesView } from '../figma_app/43951';
 import { cS as _$$cS, I0 as _$$I4, iF as _$$iF } from '../figma_app/45218';
 import { b as _$$b6 } from '../figma_app/47801';
 import { rL as _$$rL } from '../figma_app/49598';
@@ -609,7 +609,7 @@ import { R as _$$R10 } from '../figma_app/787018';
 import { gY as _$$gY2 } from '../figma_app/797994';
 import { az as _$$az, md as _$$md2, rE as _$$rE, Ro, z6 } from '../figma_app/805373';
 import { pj as _$$pj, Dv } from '../figma_app/805898';
-import { xx as _$$xx } from '../figma_app/815945';
+import { memoizeByArgs } from '../figma_app/815945';
 import { _Z as _$$_Z, sP as _$$sP } from '../figma_app/819288';
 import { Agb } from '../figma_app/822011';
 import { UpgradeSteps, BillingCycle, UpsellSourceType } from '../figma_app/831101';
@@ -667,7 +667,7 @@ import { A as _$$A12 } from '../vendor/90566';
 import { dO as _$$dO, rd as _$$rd, qh } from '../vendor/130505';
 import gr from '../vendor/223926';
 import { eJ as _$$eJ } from '../vendor/352483';
-import { useSelector, connect, useStore, useDispatch } from '../vendor/514228';
+import { useSelector, connect, useStore, useDispatch } from 'react-redux';
 import { A as _$$A1 } from '../vendor/850789';
 import oc from '../vendor/879378';
 import { createPortal } from '../vendor/944059';
@@ -722,7 +722,7 @@ function ej() {
 function eN({
   project: e
 }) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let r = _$$dq();
   let a = useSelector(e => e.currentTeamId);
   let s = e === 'drafts' ? r : e.team?.org?.id;
@@ -796,7 +796,7 @@ let e1 = 'go_to_admin_row--goToAdminRow--OPVDe';
 function e4(e) {
   let t = useDispatch();
   let r = _$$T('GoToAdminRow').unwrapOr(null);
-  let n = Rs(sMZ, {
+  let n = Rs(UserFlagByName, {
     name: 'initiated_first_resource_connection'
   });
   let l = useMemo(() => n.status === 'loaded' && !!n.data?.currentUser?.userFlagByName, [n]) && getFeatureFlags().fc_initial_onboarding_enabled && (r?.tier === FPlanNameType.PRO || r?.tier === FPlanNameType.ORG || r?.tier === FPlanNameType.ENTERPRISE);
@@ -977,7 +977,7 @@ function tc(e, t, r, a, s, i) {
     e && (n = e.files, o = e.repos);
   }
   if (n.some(e => e.editor_type === FFileType.FIGMAKE) && !i) {
-    e(_$$F.enqueue({
+    e(VisualBellActions.enqueue({
       message: getI18nString('file_browser.file_move.paywall_team_tooltip'),
       error: !0
     }));
@@ -1057,7 +1057,7 @@ function tv(e) {
       isDraftsToMovePlan,
       dtmMigrationCompleted
     } = _$$V(_$$oA2(e.data) || void 0);
-    let a = Rs(sMZ({
+    let a = Rs(UserFlagByName({
       name: 'switched_to_new_plan_from_dtm_deprecation_onboarding'
     }));
     let s = !!a?.data?.currentUser?.userFlagByName && getFeatureFlags().dtm_deprecation_post_migration_onboarding && isDraftsToMovePlan;
@@ -1467,7 +1467,7 @@ function rj(e) {
   let c = useCallback((e, r) => {
     LP(r.team?.id, FEntityType.TEAM, r.sidebarSectionId ?? void 0, _$$vg);
     let a = bL(r.resourceId, r.orgId);
-    _$$oJ(e) ? (Ay.redirect(a, '_blank'), e.stopPropagation()) : (t(_$$dm(r.resourceId)), e.preventDefault());
+    _$$oJ(e) ? (customHistory.redirect(a, '_blank'), e.stopPropagation()) : (t(_$$dm(r.resourceId)), e.preventDefault());
   }, [t]);
   let m = useCallback(e => {
     e.stopPropagation();
@@ -1606,7 +1606,7 @@ function rR(e) {
       fileKey: r.file?.key ?? '',
       entrypoint: _$$vg
     })), e.stopPropagation()) : e.preventDefault();
-    r.file && (Ay.redirect(x, '_blank'), t(UN({
+    r.file && (customHistory.redirect(x, '_blank'), t(UN({
       fileKey: r.file.key,
       entrypoint: _$$vg
     })));
@@ -1842,7 +1842,7 @@ function r$(e) {
       return;
     }
     e.preventDefault();
-    Ay.redirect(m, '_blank');
+    customHistory.redirect(m, '_blank');
   };
   let p = (r, a) => {
     r || t(X7({
@@ -2412,7 +2412,7 @@ function rq(e) {
     let m = i.length + d.length + c.length;
     let _ = kK(n);
     if (m + o.length > _) {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString('tile.favoriting.max_favorites', {
           maxFavorites: _
         })
@@ -2727,7 +2727,7 @@ let at = registerModal(e => {
   let [t, r] = useState(null);
   let n = useDispatch();
   let o = Gs();
-  let l = TA();
+  let l = getUserId();
   let d = useSelector(e => e.teamUserByTeamId);
   let c = useSelector(e => l ? e.authedUsers.byId[l]?.plans?.filter(e => !e.is_org) : null);
   let u = getI18nString('file_browser.planless_favorites.add_favorites_to_modal_title');
@@ -2831,7 +2831,7 @@ let as = 'favorited_drafts_to_move';
 function ai(e) {
   let t = useDispatch();
   let [r, o] = useState(!0);
-  let l = TA();
+  let l = getUserId();
   let d = useSelector(e => e.favorites.collapsedCustomSections);
   let c = e.teamUser?.planlessFavoritedFiles?.filter(t => !e.dataDriftCorrectedTeamResources?.favoritedFilesKeySet.has(t.resourceId));
   let u = e.teamUser?.planlessFavoritedPrototypes?.filter(t => !e.dataDriftCorrectedTeamResources?.favoritedPrototypesIdSet.has(t.resourceId));
@@ -3236,7 +3236,7 @@ function aH({
     }));
   };
   let n = jsx(_$$eM, {
-    onClick: () => Ay.redirect('/education/apply', BrowserInfo.isIpadNative ? void 0 : '_blank'),
+    onClick: () => customHistory.redirect('/education/apply', BrowserInfo.isIpadNative ? void 0 : '_blank'),
     children: renderI18nText('edu.sidebar_section.verify_your_education_status')
   });
   return e > 0 ? jsx(a$, {
@@ -3265,10 +3265,10 @@ let aq = 'dismissed_limited_team_space_uub';
 function aX(e) {
   let t = useDispatch();
   let [r, n] = useState(!1);
-  let o = Rs(qOl, {
+  let o = Rs(TeamRoleRequestView, {
     teamId: e.team.id
   });
-  let l = _$$iZ();
+  let l = selectCurrentUser();
   let d = o.status === 'loaded' && _$$oA2(o.data?.teamRoleRequest);
   let c = !!d && d.status === 'pending';
   let u = !!d && d.status === 'approved';
@@ -3283,7 +3283,7 @@ function aX(e) {
       await _$$$3.requestTeamRole({
         teamId: e.team.id
       });
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString('view_permissions.request_sent'),
         type: 'request-team-membership'
       }));
@@ -3643,10 +3643,10 @@ function sj() {
     })), d) : null;
   }();
   let t = function () {
-    let e = _$$iZ();
+    let e = selectCurrentUser();
     let t = _$$ol();
     let r = FC();
-    let a = Rs(UpR, {});
+    let a = Rs(EduOffboardingData, {});
     let s = a.data?.currentUser?.eduPeriodEnd;
     let n = useSelector(e => e.userFlags);
     let o = _$$D('useEduUpgradeSectionProps');
@@ -3675,12 +3675,12 @@ function sj() {
     return null;
   }();
   let r = function () {
-    let e = _$$iZ();
+    let e = selectCurrentUser();
     let t = useSelector(e => e.teams);
     let r = _$$ol();
     let a = useAtomWithSubscription(sb);
     let s = useAtomWithSubscription(_$$Lm);
-    let n = Rs(kQI, {
+    let n = Rs(TeamCanEdit, {
       id: r?.id ?? ''
     }, {
       enabled: !!r
@@ -3706,7 +3706,7 @@ function sj() {
         teams: e.teams,
         currentTeamId: e.currentTeamId
       }));
-      let r = Rs(yQw(t.currentTeamId ? {
+      let r = Rs(TeamById(t.currentTeamId ? {
         teamId: t.currentTeamId
       } : null));
       return t.currentTeamId ? r.transform(({
@@ -3723,12 +3723,12 @@ function sj() {
     });
   }();
   let s = function () {
-    let e = _$$iZ();
+    let e = selectCurrentUser();
     let t = useSelector(e => e.teams);
     let r = _$$ol();
     let a = useAtomWithSubscription(_$$Lm);
     let s = useSelector(e => e.userTeamFlags);
-    let n = Rs(kQI, {
+    let n = Rs(TeamCanEdit, {
       id: r?.id ?? ''
     }, {
       enabled: !!r
@@ -3743,7 +3743,7 @@ function sj() {
     };
   }();
   let n = function () {
-    let e = _$$iZ();
+    let e = selectCurrentUser();
     let t = _$$ol();
     let r = _$$d2();
     let a = useSelector(e => e.userTeamFlags);
@@ -3850,7 +3850,7 @@ function sL() {
           'aria-label': getI18nString('community.resource_hub.take_me_there'),
           ..._$$xk(sD.button),
           'onClick': () => {
-            Ay.push(new _$$au({
+            customHistory.push(new _$$au({
               ...r,
               tab: N$.COMMUNITY
             }, s).href);
@@ -4269,7 +4269,7 @@ function sZ(e) {
   });
 }
 function s0(e) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let r = _$$dq();
   let n = _$$d2();
   let o = useSelector(e => e.currentTeamId);
@@ -4284,7 +4284,7 @@ function s0(e) {
     markName: 'Sidebar',
     isLoaded: !u
   });
-  let m = TA();
+  let m = getUserId();
   let _ = useSelector(e => m ? e.authedUsers.byId[m]?.plans : null);
   let [{
     status: p,
@@ -4992,7 +4992,7 @@ let np = registerModal(({
     onRename: a => r({
       workspaceId: e.id,
       description: a
-    }).then(() => t(_$$F.enqueue({
+    }).then(() => t(VisualBellActions.enqueue({
       message: getI18nString('workspace_view.description_update_updated')
     })), () => {
       let e = getI18nString('workspace_view.description_update_error');
@@ -5003,7 +5003,7 @@ let np = registerModal(({
 }, 'UpdateWorkspaceDescriptionModal');
 function nf() {
   let e = useDispatch();
-  let t = TA();
+  let t = getUserId();
   return useCallback(r => {
     let a = r.workspace.admins.some(e => e.baseOrgUser?.user.id === t);
     let s = [];
@@ -5189,7 +5189,7 @@ function nT({
           n({
             workspaceId: e.id,
             colors: ix(f) ? [colorToHex(f)] : [],
-            onfulfilled: () => r(_$$F.enqueue({
+            onfulfilled: () => r(VisualBellActions.enqueue({
               message: getI18nString('workspace_view.toolbar.workspace_color_updated')
             })),
             onrejected: () => {
@@ -5851,7 +5851,7 @@ let n2 = registerModal(({
   let _ = useCallback(e => {
     m(e);
   }, []);
-  Rs(wtK, {
+  Rs(AddWorkspacePinnedFileView, {
     fileKey: u ?? ''
   }, {
     enabled: !!u
@@ -5860,7 +5860,7 @@ let n2 = registerModal(({
     searchQuery: e,
     workspaceId: t
   }) {
-    let r = resourceUtils.useTransformShallowEqual(Rs(z07, {}), e => {
+    let r = resourceUtils.useTransformShallowEqual(Rs(AddWorkspacePinSuggestedFilesView, {}), e => {
       if (!e.currentUser.recentFiles2) return [];
       let t = [];
       for (let {
@@ -5874,7 +5874,7 @@ let n2 = registerModal(({
     }) {
       let r = _$$dq();
       assert(!!r, 'currentUserOrgId must be defined in useSearchWorkspaceFilesQuery');
-      let a = Rs(Imb, {
+      let a = Rs(AddWorkspacePinSearchFilesView, {
         query: e,
         workspaceId: t,
         orgId: r,
@@ -5985,7 +5985,7 @@ function os({
     data
   } = _$$L2();
   let c = useCallback((e, t) => {
-    Ay.redirect(_$$r3(e));
+    customHistory.redirect(_$$r3(e));
     k1(e.key, {
       selectedViewName: r.view,
       entrypoint: 'suggested_files_empty_state'
@@ -6120,7 +6120,7 @@ function oo({
 }) {
   let t;
   let r = function (e) {
-    let t = resourceUtils.useTransform(Rs(m28, {}), e => {
+    let t = resourceUtils.useTransform(Rs(WorkspaceSuggestedPinsView, {}), e => {
       if (!e.currentUser.recentFiles2) return [];
       let t = [];
       for (let {
@@ -6349,7 +6349,7 @@ function oE({
 }) {
   let t = useDispatch();
   let r = _$$_();
-  let n = TA();
+  let n = getUserId();
   let {
     showing,
     show,
@@ -6563,16 +6563,16 @@ function oR({
   workspaceId: e
 }) {
   let t = _$$sZ();
-  let r = Rs(aON, {
+  let r = Rs(WorkspacePageView, {
     orgId: t.id,
     workspaceId: e
   });
-  let i = Rs(nD$, {
+  let i = Rs(WorkspacePageMembersView, {
     workspaceId: e
   }).transform(e => e.workspace?.members ?? null);
   let n = function (e) {
     let t = !!getFeatureFlags().fb_paginated_workspace_teams_shadow_reads;
-    let [r] = IT(QJZ(t ? {
+    let [r] = IT(FileBrowserWorkspacePageTeamsView(t ? {
       workspaceId: e,
       firstPageSize: 50
     } : null));
@@ -6839,7 +6839,7 @@ function lo({
         children: e.map((e, t) => jsx(q7, {
           onClick: () => {
             _$$pt(e?.href ?? '');
-            Ay.push(e?.href ?? '');
+            customHistory.push(e?.href ?? '');
           },
           children: jsx('div', {
             style: {
@@ -7172,7 +7172,7 @@ function lg() {
     'aria-label': e,
     'className': U()(_$$x4, Mg, _$$pU),
     'onClick': () => {
-      Ay.push(t.href);
+      customHistory.push(t.href);
     },
     'children': jsxs('span', {
       className: IO,
@@ -7192,7 +7192,7 @@ function lx() {
     'className': U()(_$$x4, Mg, _$$pU),
     'onClick': () => {
       let e = new _$$e11(t, r);
-      Ay.push(e.href);
+      customHistory.push(e.href);
       YM();
     },
     'children': jsxs('span', {
@@ -7519,7 +7519,7 @@ function l$({
     'aria-label': getI18nString('community.resource_hub.see_more'),
     'onClick': () => {
       CA(t.pathname);
-      Ay.push(t.href);
+      customHistory.push(t.href);
     },
     'className': 'x78zum5 x8rdmch x6s0dn4 x19y5rnk x1d4akdp',
     'children': [jsx('h3', {
@@ -7773,7 +7773,7 @@ function lH({
       'aria-label': t,
       ..._$$xk(lK.card, o ? lK.cardBrandBorder : lK.cardStrongBorder, e === 'large' ? lK.largeCard : lK.smallCard),
       'onClick': () => {
-        l && (_$$rC(d, l.href), Ay.push(l.href));
+        l && (_$$rC(d, l.href), customHistory.push(l.href));
       },
       'htmlAttributes': {
         onMouseEnter: () => m(!0),
@@ -8761,7 +8761,7 @@ function db({
         resourceTypeSlug: e
       }, r);
       _$$ng(e);
-      Ay.push(a.href);
+      customHistory.push(a.href);
     },
     'children': jsxs('span', {
       className: IO,
@@ -9258,7 +9258,7 @@ function dD({
   if (useEffect(() => {
     flushAndResetImpressions();
   }, [resourceTypeSlug, flushAndResetImpressions]), !resourceTypeSlug) {
-    Ay.redirect(i.href);
+    customHistory.redirect(i.href);
     return null;
   }
   let f = W6(resourceTypeSlug).filter(e => l || e !== _$$vt2.COOPER_TEMPLATE_FILE);
@@ -9441,10 +9441,10 @@ function dJ({
                 tagSlug: void 0
               }).href;
               _$$uo3(t.href, e);
-              Ay.push(e);
+              customHistory.push(e);
             } else {
               _$$uo3(t.href, e);
-              Ay.push(e);
+              customHistory.push(e);
             }
           },
           isSelected: c
@@ -9662,7 +9662,7 @@ function d8({
       [w3]: !0
     }));
     _$$_K(e);
-    Ay.push(n.copyWith({
+    customHistory.push(n.copyWith({
       tab: e
     }).href);
   };
@@ -9732,7 +9732,7 @@ function cs({
               editor_type: r.search.editor_type,
               resource_type: r.search.resource_type
             });
-            Ay.push(e.href);
+            customHistory.push(e.href);
           }
         },
         children: [jsx(_$$l5, {
@@ -9775,13 +9775,13 @@ function ci() {
           ...d,
           query: e
         }).href, e.length) {
-          Ay.push(t);
+          customHistory.push(t);
         } else if (o) {
           let e = new _$$au({
             ...l,
             tab: r
           }, d).href;
-          Ay.push(e);
+          customHistory.push(e);
         }
       },
       setSelectedDropdownTab: a
@@ -10006,7 +10006,7 @@ let cy = {
   }
 };
 function cw() {
-  let e = TA() ?? void 0;
+  let e = getUserId() ?? void 0;
   let t = _$$a8(_$$e11);
   let r = _$$X4();
   let {
@@ -10230,7 +10230,7 @@ function cO({
       ...n,
       resource_type: t
     }).href;
-    Ay.push(r);
+    customHistory.push(r);
     trackEventAnalytics('resource_type_filter_changed', {
       resource_type: t,
       from: e
@@ -10356,7 +10356,7 @@ function cL({
   let v = useCallback(() => {
     JO(h, x, b);
     let e = new bP(i.params, n).href;
-    Ay.push(e);
+    customHistory.push(e);
   }, [i.params, n, b, h, x]);
   let y = r && !g && loadedStatusByType[o] && b <= 10;
   let w = y && b > 0;
@@ -10676,7 +10676,7 @@ function cB({
     children: [...m.map((e, t) => jsx(J5, {
       text: e.text,
       onClick: () => {
-        e.to && Ay.push(e.to);
+        e.to && customHistory.push(e.to);
         e.trackingProperties && Ox(e.trackingProperties);
       },
       hasTrailingDivider: t < m.length - 1,
@@ -11033,7 +11033,7 @@ function ui(e) {
 function un(e) {
   let t = useDispatch();
   let r = useRef(null);
-  let n = _$$iZ();
+  let n = selectCurrentUser();
   let o = useSelector(e => e.teamFeedRefreshNonce);
   let [l, d] = useState(null);
   let c = _$$_();
@@ -11048,7 +11048,7 @@ function un(e) {
       has_visited_feed: !0
     })));
   }, [e.currentOrgId, o, t, u]);
-  let f = Rs(KhA, {
+  let f = Rs(PaginatedFigFeed, {
     orgId: e.currentOrgId,
     firstPageSize: 50,
     feedFilter: JSON.stringify({
@@ -11059,7 +11059,7 @@ function un(e) {
   let g = ZC(o);
   g && g !== o && r.current && (r.current.scrollTop = 0);
   useEffect(() => {
-    f.status === 'errors' && t(_$$F.enqueue({
+    f.status === 'errors' && t(VisualBellActions.enqueue({
       message: getI18nString('general.an_error_occurred'),
       error: !0
     }));
@@ -11291,7 +11291,7 @@ let ux = e => ({
   sortKeys: [C0.TRASHED_AT, C0.NAME]
 });
 let ub = (e, t, r) => {
-  let s = _$$xx(uh)(t);
+  let s = memoizeByArgs(uh)(t);
   return [jsx(_$$gr, {
     dispatch: e,
     options: s,
@@ -11319,7 +11319,7 @@ let ub = (e, t, r) => {
   }, 3)];
 };
 let uv = (e, t, r) => {
-  let s = _$$xx(ux)(t);
+  let s = memoizeByArgs(ux)(t);
   return [jsx(KH, {
     dispatch: e,
     options: s,
@@ -11515,7 +11515,7 @@ function uO({
   canEditTeam: r
 }) {
   let s = E9();
-  let i = Rs(yU5({
+  let i = Rs(TeamFileLimitsInfoByProject({
     projectId: e
   }));
   let n = _$$h3.useTrackingContext({
@@ -11758,7 +11758,7 @@ function me({
   tileActions: b,
   tiles: v
 }) {
-  let y = _$$iZ();
+  let y = selectCurrentUser();
   let w = _$$_();
   let j = w.view === 'folder' ? w.folderId : null;
   let T = M4.Folder.useValue(j).data;
@@ -11771,7 +11771,7 @@ function me({
   let A = FC();
   let O = _$$ol();
   let F = T?.team_id || O?.id;
-  let P = Rs(yQw(_$$_X(Pw.GROUP_7) && F ? {
+  let P = Rs(TeamById(_$$_X(Pw.GROUP_7) && F ? {
     teamId: F
   } : null));
   let L = useMemo(() => P.transform(({
@@ -12009,7 +12009,7 @@ function me({
         }
         if (t instanceof KeyboardEvent) {
           let r = _$$Tf.getUrl(e, i);
-          Ay.redirect(r, '_blank');
+          customHistory.redirect(r, '_blank');
           t.preventDefault();
           t.stopPropagation();
         }
@@ -12175,7 +12175,7 @@ function me({
   if (Cm(eo), !function (e) {
     let t = _$$_();
     let r = useDispatch();
-    let a = k9(() => {
+    let a = useMemoStable(() => {
       if (t.view === 'deletedFiles') return [];
       let r = [];
       e.forEach(e => {
@@ -12194,7 +12194,7 @@ function me({
       });
       return r;
     }, [t.view, e]);
-    let n = _$$p(hqi, a);
+    let n = _$$p(ActiveFileUsersForFileView, a);
     useEffect(() => {
       for (let {
         result,
@@ -12370,7 +12370,7 @@ function ma() {
   let r = useSelector(e => e.tileSortFilterStateByView);
   let n = vt();
   let o = _$$R3(t);
-  let l = _$$xx(e => ({
+  let l = memoizeByArgs(e => ({
     tileSortFilterConfig: e,
     sortKeys: [C0.TRASHED_AT, C0.NAME, C0.CREATED_AT, C0.TOUCHED_AT]
   }))(r.deletedFiles);
@@ -12434,7 +12434,7 @@ function ma() {
     fetchNextPage,
     isFetchingNextPage
   } = function (e) {
-    let t = Rs(R89, {
+    let t = Rs(TrashedFilesPageView, {
       ...e,
       firstPageSize: 55
     });
@@ -12998,12 +12998,12 @@ function mv(e) {
 function my() {
   let e = useSelector(e => e.currentUserOrgId);
   let t = _$$ol();
-  let r = Rs(kQI, {
+  let r = Rs(TeamCanEdit, {
     id: t ? t.id : ''
   }, {
     enabled: !!t?.id
   });
-  let s = Rs(TNJ, {
+  let s = Rs(TeamCanAdmin, {
     id: t ? t.id : ''
   }, {
     enabled: !!t?.id
@@ -13250,7 +13250,7 @@ function m9(e, t, r, i, n, l) {
   let c = MF({
     oldValue: resourceUtils.useMemoizedLoaded(d),
     newValue: function (e) {
-      let t = Rs(yQw(_$$_X(Pw.GROUP_7) && e ? {
+      let t = Rs(TeamById(_$$_X(Pw.GROUP_7) && e ? {
         teamId: e
       } : null));
       return useMemo(() => t.status === 'disabled' ? resourceUtils.loaded({
@@ -13317,7 +13317,7 @@ function m9(e, t, r, i, n, l) {
       teamId: l.id,
       selectedView: s.selectedView
     }));
-    let L = () => Ay.redirect('/education/apply', BrowserInfo.isIpadNative ? void 0 : '_blank');
+    let L = () => customHistory.redirect('/education/apply', BrowserInfo.isIpadNative ? void 0 : '_blank');
     let D = () => i?.(_$$WX({
       teamId: l.id,
       openInNewTab: !1,
@@ -13897,14 +13897,14 @@ let _i = connect(e => ({
   ...getPermissionsState(e)
 }))(e => {
   let t;
-  let r = Rs(UpR, {});
+  let r = Rs(EduOffboardingData, {});
   let n = e.folderId ? e.folders[e.folderId] : null;
   let o = n ? n.team_id : null;
   let l = e.dispatch;
   let d = o ? e.teams[o] : null;
   let c = !!d?.org_id;
   let u = !!d?.subscription;
-  let m = Rs(Ywy(o ? {
+  let m = Rs(FolderBannerView(o ? {
     teamId: o
   } : null));
   let _ = useMemo(() => m.transform(({
@@ -13943,7 +13943,7 @@ let _i = connect(e => ({
 let _n = () => {
   let e = useSelector(e => e.currentUserOrgId);
   let t = useSelector(e => e.currentTeamId);
-  let r = Rs(_aE({
+  let r = Rs(FileBrowserDraftsViewBarView({
     currentOrgId: e,
     currentTeamId: t
   }));
@@ -13963,7 +13963,7 @@ function _o() {
       viewbarActions: []
     });
   }
-  let d = l.view === 'deletedFiles' ? _$$xx(uh)(o) : _$$xx(_$$ZN)(e.id, o);
+  let d = l.view === 'deletedFiles' ? memoizeByArgs(uh)(o) : memoizeByArgs(_$$ZN)(e.id, o);
   let c = [jsx(ye, {
     config: d.tileSortFilterConfig
   }, 0), jsx(_$$mc, {
@@ -14001,7 +14001,7 @@ let _l = {
   createBranch: !0,
   moveFile: !0
 };
-let _d = _$$xx(_$$ZN);
+let _d = memoizeByArgs(_$$ZN);
 function _c(e) {
   let {
     sortFilterOptions,
@@ -14144,9 +14144,9 @@ let _b = registerModal(e => {
       userInitiated: !0
     })));
   };
-  let v = () => _$$k6.deleteAllPersonalDrafts().then(() => n(_$$F.enqueue({
+  let v = () => _$$k6.deleteAllPersonalDrafts().then(() => n(VisualBellActions.enqueue({
     message: getI18nString('file_browser.draft_delete_modal.async_delete_drafts_scheduled')
-  }))).catch(() => n(_$$F.enqueue({
+  }))).catch(() => n(VisualBellActions.enqueue({
     message: getI18nString('file_browser.draft_delete_modal.async_delete_drafts_scheduled_error')
   })));
   let y = () => {
@@ -14461,8 +14461,8 @@ function _M() {
   let {
     windowInnerWidth
   } = _$$l4();
-  let E = Rs(vXh({}));
-  let C = Rs(Jzf({
+  let E = Rs(DraftsToMoveFoldersByUserId({}));
+  let C = Rs(FilesInProjectHighLimit({
     projectId: t ?? ''
   }), {
     enabled: !!t
@@ -14546,7 +14546,7 @@ function _M() {
     O(!1);
   };
   let ef = (t, r) => {
-    e(_$$F.enqueue({
+    e(VisualBellActions.enqueue({
       message: getI18nString('visual_bell.files_moved_to_folder', {
         fileCount: r,
         folderName: t
@@ -14920,7 +14920,7 @@ function _V({
 function _z({
   folderId: e
 }) {
-  let t = Rs(L8O, {
+  let t = Rs(FolderPageView, {
     projectId: e
   });
   let r = t.data?.project || null;
@@ -15027,7 +15027,7 @@ function _X(e) {
     ...getPermissionsState(e)
   }));
   let u = useDispatch();
-  let m = Rs(UpR, {});
+  let m = Rs(EduOffboardingData, {});
   let {
     teamId,
     selectedTab
@@ -15035,7 +15035,7 @@ function _X(e) {
   let g = c.teams[teamId] ?? null;
   let h = !!g?.org_id;
   let x = !!g?.subscription;
-  let b = Rs(LKQ(teamId ? {
+  let b = Rs(TeamUpgradeBannerView(teamId ? {
     teamId
   } : null));
   let v = useMemo(() => b.transform(({
@@ -15086,7 +15086,7 @@ function _Z({
 }) {
   let n = useDispatch();
   let o = _$$_();
-  let l = TA();
+  let l = getUserId();
   let {
     showing,
     show,
@@ -15256,7 +15256,7 @@ let pl = [FFileType.WHITEBOARD, FFileType.SLIDES];
 let pd = atom(!1);
 function pc(e) {
   let t = useDispatch();
-  let r = pa(_$$iZ());
+  let r = pa(selectCurrentUser());
   let n = pr(!1, r);
   let o = _$$oh(n);
   let l = _$$mC(n);
@@ -15564,7 +15564,7 @@ function pI(e) {
       licenseType: FProductAccessType.DESIGN,
       upgradeReason: _$$i5.CREATE_FILE,
       entryPoint: _$$tc.CREATE_FILE_EMPTY_CONNECTED_PROJECT
-    })) : t === _$$q5.CANNOT_UPGRADE ? () => o(_$$F.enqueue({
+    })) : t === _$$q5.CANNOT_UPGRADE ? () => o(VisualBellActions.enqueue({
       message: 'Can\'t upgrade',
       error: !0
     })) : e;
@@ -15680,7 +15680,7 @@ let pC = {
 };
 function pS(e) {
   let t = useDispatch();
-  let r = Rs(CH9, {
+  let r = Rs(PinnedFiles, {
     folderId: e.folderId
   });
   let n = useMemo(() => r.status === 'loaded' ? (r.data.project?.pinnedFiles || []).filter(e => !!e.file) : [], [r]);
@@ -15721,7 +15721,7 @@ function pk({
   activeProjectConnection: u,
   infiniteScrollOptions: m
 }) {
-  let _ = Pc();
+  let _ = selectUser();
   let p = _$$R3(c?.id);
   let f = jn();
   let g = useSelector(e => pR(r, e.tileSortFilterStateByView));
@@ -15740,7 +15740,7 @@ function pk({
     additionalVisibilityRequirements: a = !0
   }) {
     let n = useDispatch();
-    let o = TA();
+    let o = getUserId();
     let {
       data
     } = _$$nt(e);
@@ -15807,7 +15807,7 @@ function pk({
     })
   });
 }
-let pR = _$$xx(_$$ZN);
+let pR = memoizeByArgs(_$$ZN);
 let pP = 'CONNECTED_PROJECTS_PROJECT_PAGE_ONBOARDING_KEY';
 function pL({
   resourceConnection: e
@@ -16184,11 +16184,11 @@ function p5({
 function p8({
   folderId: e
 }) {
-  let t = Rs(L8O, {
+  let t = Rs(FolderPageView, {
     projectId: e
   });
   !function (e) {
-    let [t] = IT(oFF({
+    let [t] = IT(FileBrowserProjectPageTitleView({
       projectId: e
     }), {
       enabled: !!getFeatureFlags().folder_page_fix_tab_titles
@@ -16214,7 +16214,7 @@ function p8({
   let d = n.data?.folder;
   let c = t.data?.project || null;
   let u = useDispatch();
-  let m = Rs(Udv, {
+  let m = Rs(FolderCanView, {
     id: e
   });
   let _ = _$$_();
@@ -16262,7 +16262,7 @@ function p8({
     shadowReadLabel: A5.FolderPageView.hasBanner
   }).unwrapOr(!1) && w;
   let T = _$$dq();
-  let E = _$$xx(_$$ZN);
+  let E = memoizeByArgs(_$$ZN);
   let N = useSelector(t => E(e, t.tileSortFilterStateByView));
   let C = !d || !c || n.status !== 'loaded' || t.status !== 'loaded';
   if (kF('Folder'), WX({
@@ -16352,7 +16352,7 @@ function p6() {
   let e;
   let t = useSelector(e => e.currentTeamId);
   let r = _$$_();
-  let s = Rs(RRC, {
+  let s = Rs(LimitedSpaceSharedProjectsView, {
     teamId: t ?? ''
   }, {
     enabled: !!t
@@ -16502,7 +16502,7 @@ function fn() {
   let e = _$$T('OrgConnectedProjectsContent');
   let t = e.unwrapOr(null);
   let r = t?.connectionCount ?? 0;
-  let i = Rs(ifD, {
+  let i = Rs(PlanConnectedProjectsForPlanUser, {
     planType: t?.key.type ?? null,
     planId: t?.key.parentId ?? ''
   }, {
@@ -16639,7 +16639,7 @@ function f_({
 function fp({
   org: e
 }) {
-  let t = Rs(nYs, {
+  let t = Rs(EnterpriseOrgMetaContentView, {
     orgId: e.id
   });
   return jsx(f_, {
@@ -16650,7 +16650,7 @@ function fp({
 function ff({
   org: e
 }) {
-  let t = Rs(kei, {
+  let t = Rs(NonEnterpriseOrgMetaContentView, {
     orgId: e.id
   });
   return jsx(f_, {
@@ -16975,7 +16975,7 @@ function fR() {
       unassignedTeams: e.filter(e => e.workspace_id === null || void 0 === e.workspace_id)
     };
   }, [t, c]);
-  let _ = Rs(bUn, {
+  let _ = Rs(WorkspacesDirectoryView, {
     orgId: r
   });
   let f = c.status !== 'loaded';
@@ -17227,7 +17227,7 @@ function fL() {
 }
 function fD() {
   let e = useDispatch();
-  let t = Pc();
+  let t = selectUser();
   return jsx(_$$K3, {
     action: {
       kind: _$$A9.BUTTON,
@@ -17796,7 +17796,7 @@ function gb() {
     'onClick': a => {
       q5();
       a.preventDefault();
-      r ? Ay.push(r) : reportError(_$$e.COMMUNITY, new Error('NavigationTile: communityTabLink is empty'), {
+      r ? customHistory.push(r) : reportError(_$$e.COMMUNITY, new Error('NavigationTile: communityTabLink is empty'), {
         extra: {
           sharedRouteParams: e,
           sharedSearchParams: t
@@ -18058,7 +18058,7 @@ function gT() {
     boundaryKey: 'RecommendedResourcesShelf',
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
     onError: () => {
-      e(_$$F.enqueue({
+      e(VisualBellActions.enqueue({
         message: getI18nString('general.root_error_boundary_title'),
         type: 'react-error'
       }));
@@ -18512,7 +18512,7 @@ function gU() {
   });
 }
 function gV(e) {
-  let t = Rs(_$$ox2, {
+  let t = Rs(SharedWithYouResources, {
     resourceTypes: e.resourceTypes,
     firstPageSize: 30,
     sortOrder: e.sortOrder,
@@ -18722,12 +18722,12 @@ function gz(e) {
 function gH(e) {
   let t = _$$_();
   let r = _$$ol();
-  let n = Rs(kQI, {
+  let n = Rs(TeamCanEdit, {
     id: r?.id || ''
   }, {
     enabled: !!r
   });
-  let o = Rs(TNJ, {
+  let o = Rs(TeamCanAdmin, {
     id: r?.id || ''
   }, {
     enabled: !!r
@@ -18848,7 +18848,7 @@ let gZ = e => jsx('span', {
 });
 let g0 = registerModal(e => {
   let t = useDispatch();
-  let r = _$$iZ();
+  let r = selectCurrentUser();
   return r ? jsxs(_$$u9, {
     tintedModalBackground: !0,
     headerText: getI18nString('interstitial.unsubscribe_success_header'),
@@ -19103,7 +19103,7 @@ function ha(e) {
     return t;
   }(d);
   let u = function () {
-    let e = TA();
+    let e = getUserId();
     let t = useSelector(e => e.authedUsers);
     let r = useSelector(e => e.plans);
     let a = useSelector(e => e.orgById);
@@ -19298,7 +19298,7 @@ function hi(e) {
           tab: hs(bb.NOTIFICATIONS)
         }
       }));
-      t(_$$F.dequeue({}));
+      t(VisualBellActions.dequeue({}));
     }), t(_$$sf({
       view: 'recentsAndSharing'
     })));
@@ -19335,7 +19335,7 @@ function hi(e) {
 function ho({
   teamId: e
 }) {
-  let t = Rs(GyZ, {
+  let t = Rs(TeamPermissions, {
     teamId: e
   });
   let r = t.data?.team || null;
@@ -19384,7 +19384,7 @@ function hp({
   team: e
 }) {
   let t = useDispatch();
-  let r = Rs(kQI, {
+  let r = Rs(TeamCanEdit, {
     id: e.id
   });
   let s = !!r.data?.team?.hasPermission;
@@ -19531,7 +19531,7 @@ let hk = registerModal(({
   };
   let d = r ? jsx(_$$V6, {
     onClick: () => {
-      Ay.redirect('/pricing', '_blank');
+      customHistory.redirect('/pricing', '_blank');
     },
     children: getI18nString('pro_onboarding.pro_feature_modal.compare_plans')
   }) : null;
@@ -19554,7 +19554,7 @@ let hA = e => ({
   sortKeys: [C0.NAME, C0.TOUCHED_AT]
 });
 let hO = (e, t, r) => {
-  let s = _$$xx(hA)(t);
+  let s = memoizeByArgs(hA)(t);
   return [jsx(_$$mc, {
     dispatch: e,
     options: s,
@@ -19688,7 +19688,7 @@ function hD({
     o && b();
   }, [o, b]);
   let v = _$$Sh(e).transform(e => e.tier === FPlanNameType.PRO || e.tier === FPlanNameType.STUDENT).unwrapOr(!1);
-  Rs(yQw, {
+  Rs(TeamById, {
     teamId: e
   });
   let y = _$$dr(e);
@@ -19706,7 +19706,7 @@ function hD({
     let e = QL('team_role_redemption');
     if (e && parseInt(e) in _$$e16) {
       let e = VE();
-      e && _(_$$F.enqueue({
+      e && _(VisualBellActions.enqueue({
         message: e
       }));
       EM('team_role_redemption');
@@ -19769,8 +19769,8 @@ function hD({
       }));
     }
   }, [_, t, u, l, c, v, T.canAdminTeam]);
-  let E = Pc();
-  let I = Rs(Cit, {
+  let E = selectUser();
+  let I = Rs(TeamUserStatusAndRequests, {
     teamId: e
   });
   let C = I.data?.team?.currentTeamUser;
@@ -20219,7 +20219,7 @@ function hq(e, t = {}) {
 let h0 = 'org_user_meta_content--teamsHeader--1p4jT org_user_meta_content--sectionHeader--snmkw text--fontPos13--xW8hS text--_fontBase--QdLsd';
 function h1(e) {
   let t = useDispatch();
-  let r = _$$iZ();
+  let r = selectCurrentUser();
   let s = _$$w7(e.user);
   let n = useSelector(t => t.currentUserOrgId === e.orgId);
   let o = () => {
@@ -20287,7 +20287,7 @@ function h1(e) {
   });
 }
 function h4(e) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let r = useDispatch();
   return jsx(h1, {
     submitDescription: t => {
@@ -20311,7 +20311,7 @@ function h4(e) {
 }
 function h2(e) {
   let t = useDispatch();
-  let r = _$$iZ();
+  let r = selectCurrentUser();
   return jsx(h1, {
     isLoading: !e.user || !e.orgUser || !e.org,
     isReadOnly: !r || r.id !== e.userId,
@@ -20589,7 +20589,7 @@ let xr = e => {
   let [A, O] = useState(0);
   let F = useCallback(e => {
     S(e);
-    r(_$$F.enqueue({
+    r(VisualBellActions.enqueue({
       message: getI18nString('internal_profile.an_error_occurred'),
       error: !0
     }));
@@ -20615,7 +20615,7 @@ let xr = e => {
     data,
     status,
     errors
-  } = Rs(F8N, {
+  } = Rs(UserProfilePageView, {
     action: 'edit',
     userId: t,
     firstPageSize: 55,
@@ -20901,12 +20901,12 @@ function xl(e) {
 }
 function xd(e) {
   let t = useDispatch();
-  let r = _$$iZ();
+  let r = selectCurrentUser();
   let s = e.orgId;
   let o = useSelector(e => e.currentUserOrgId);
   let l = void 0 === s ? o : s;
   let d = _$$T('UserPageView').unwrapOr(null);
-  let c = _$$J8(() => Promise.all([xi(r, t, e.userId), xn(t, e.userId, l)]).then(([r, a]) => (l && !a && t(_$$F.enqueue({
+  let c = _$$J8(() => Promise.all([xi(r, t, e.userId), xn(t, e.userId, l)]).then(([r, a]) => (l && !a && t(VisualBellActions.enqueue({
     type: 'org_user_not_found',
     message: d?.name ? getI18nString('org_user_actions.org_user_not_found', {
       userHandle: r.handle,
@@ -20930,7 +20930,7 @@ function xd(e) {
         userViewTab: _$$o9.INTERNAL_PROFILE
       }));
     } : () => {
-      Ay.redirect('/404');
+      customHistory.redirect('/404');
     }
   })), [t, r, l, e.userId, d]);
   let {
@@ -21015,7 +21015,7 @@ function x_({
   }, [t]);
   let r = function () {
     let e = useDispatch();
-    let t = Pc();
+    let t = selectUser();
     let r = _$$dq();
     let n = _$$_();
     let o = _$$cD();
@@ -21603,7 +21603,7 @@ function xP(e) {
       forwardToDatadog: !0
     }));
   }, [t, e.unsyncedFiles, e.localUnsyncedFiles, n, r]);
-  let l = _$$iZ();
+  let l = selectCurrentUser();
   let d = [...e.unsyncedFiles, ...e.localUnsyncedFiles];
   if (d.length === 0 || !l) return jsx(Fragment, {});
   let c = d.length > 1;
@@ -21631,7 +21631,7 @@ function xP(e) {
         onClick: () => {
           c ? t(showModalHandler({
             type: EO
-          })) : y8(m) ? Ay.redirect(_$$r3(fileEntityDataMapper.toLiveGraph(m.file), !0), '_blank') : t(NA({
+          })) : y8(m) ? customHistory.redirect(_$$r3(fileEntityDataMapper.toLiveGraph(m.file), !0), '_blank') : t(NA({
             file: m,
             openNewFileIn: _$$ai.NEW_TAB,
             source: _$$U6.AUTOSAVE_NOTIFICATION
@@ -21739,14 +21739,14 @@ function xU({
       orgAccess: f,
       dontRedirect: !!n.onSubmitReturnToPrevView,
       ignoreCurrentPlan: h
-    })), n.onSubmitReturnToPrevView && m(_$$sf(Gl() || {
+    })), n.onSubmitReturnToPrevView && m(_$$sf(getPreviousSelectedView() || {
       view: 'recentsAndSharing'
     }))) : m(_$$s2.error(getI18nString('team_creation.your_team_name_cannot_be_empty')));
   };
   let w = !(t && !h) && !n.onSubmitReturnToPrevView;
   let j = b ? null : jsx(_$$X7, {
     onClick: () => {
-      m(_$$sf(Gl() || {
+      m(_$$sf(getPreviousSelectedView() || {
         view: 'recentsAndSharing'
       }));
     },
@@ -21837,11 +21837,11 @@ function xW({
   let t = useDispatch();
   let r = _$$dq();
   let s = useSelector(e => e.orgById);
-  let n = _$$iZ();
+  let n = selectCurrentUser();
   let o = useSelector(e => e.currentTeamId);
   let l = Um();
   let d = useSelector(e => e.teamCreation);
-  return R$(n, r) ? (Ay.redirect('/'), t(_$$s2.error(getI18nString('team_creation.missing_team_creation_controls'))), null) : jsx(xU, {
+  return R$(n, r) ? (customHistory.redirect('/'), t(_$$s2.error(getI18nString('team_creation.missing_team_creation_controls'))), null) : jsx(xU, {
     currentTeamId: o,
     currentUserOrgId: r,
     user: n,
@@ -21962,7 +21962,7 @@ function xz({
   });
 }
 function xq(e) {
-  let t = _$$iZ();
+  let t = selectCurrentUser();
   let [r, n] = useState(() => _$$LN());
   let o = UpsellModalType.UPGRADE_NEW_TEAM;
   let l = useDispatch();
@@ -22160,7 +22160,7 @@ function x6(e) {
     dispatch(e);
   }, [dispatch]);
   let i = useCallback((e, t) => () => {
-    Ay.unsafeRedirect(e, '_blank');
+    customHistory.unsafeRedirect(e, '_blank');
     a(t);
   }, [a]);
   let n = useCallback(e => getI18nString('downtime_banner.ongoing.figma_will_be_entering_a_maintenance_period', {
@@ -22296,7 +22296,7 @@ export function $$bo0() {
   let e = useDispatch();
   let t = _$$dq();
   let r = Um();
-  let E = _$$iZ();
+  let E = selectCurrentUser();
   let I = _$$_();
   let C = q_.useIsLoading();
   let S = useSelector(e => e.payment);
@@ -22306,8 +22306,8 @@ export function $$bo0() {
   let O = useSelector(e => e.notifications);
   !function () {
     let e = useStore();
-    let t = useMemo(() => _$$g6(), []);
-    let r = Rs(__y, {
+    let t = useMemo(() => generateUUIDv4(), []);
+    let r = Rs(AssetTransferReloadView, {
       cacheNonce: t
     });
     useEffect(() => {
@@ -22338,7 +22338,7 @@ export function $$bo0() {
           let a = t.folderId ? c : u;
           if (d) {
             let s = t.folderId ? getI18nString('realtime.asset_reload.project_has_been_transferred_redirecting') : getI18nString('realtime.asset_reload.team_has_been_transferred_redirecting');
-            e.dispatch(_$$F.enqueue({
+            e.dispatch(VisualBellActions.enqueue({
               message: s
             }));
             setTimeout(() => {
@@ -22407,10 +22407,10 @@ export function $$bo0() {
   if (!function () {
     let e = _$$_();
     let t = useDispatch();
-    let r = TA();
+    let r = getUserId();
     let a = null;
     (e.view === 'teamUpgrade' || e.view === 'promoReview' || e.view === 'eduReview') && (a = e.teamId);
-    let n = Rs(yY6(a ? {
+    let n = Rs(TeamUpgradePermissions(a ? {
       teamId: a
     } : null));
     let o = useMemo(() => n.transform(({
@@ -22501,6 +22501,6 @@ export function $$bo0() {
         showingFileBrowserLoader: C
       })]
     })]
-  }) : (console.error('No current organization or team plan set for user. Redirecting to /files'), Ay.redirect('/files'), null) : (console.error(`Signed out page: unrecognized route ${Ay.location.pathname}, redirecting to /`), Ay.redirect('/'), null);
+  }) : (console.error('No current organization or team plan set for user. Redirecting to /files'), customHistory.redirect('/files'), null) : (console.error(`Signed out page: unrecognized route ${customHistory.location.pathname}, redirecting to /`), customHistory.redirect('/'), null);
 }
 export const FileBrowserView = $$bo0;

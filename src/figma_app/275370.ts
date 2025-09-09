@@ -1,6 +1,6 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { createNoOpValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { ze, _S } from "../figma_app/516028";
@@ -32,8 +32,8 @@ export async function $$u1() {
     subscribed_library_keys: [t],
     source: "figma_make",
     open_file_key: e,
-    query_id: g(),
-    session_id: g()
+    query_id: generateUUIDv4(),
+    session_id: generateUUIDv4()
   })).data.meta.components;
 }
 export function $$p2(e) {

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { i } from "../905/969773";
 import { Z as _$$Z } from "../905/124614";
 import { Z as _$$Z2 } from "../905/279476";

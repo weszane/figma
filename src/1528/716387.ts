@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useMemo, useContext, useState, useRef, useLayoutEffect, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
 import { lQ } from "../905/934246";
 import { i as _$$i } from "../905/718764";
@@ -21,7 +21,7 @@ import { $ as _$$$ } from "../905/455748";
 import { Fo, Uz, vN, xH, Te } from "../905/63728";
 import { yZ } from "../905/407352";
 import { BrowserInfo } from "../figma_app/778880";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { D8, GG } from "../905/511649";
 import { w as _$$w } from "../905/835474";
 import { jN } from "../figma_app/930338";
@@ -32,14 +32,14 @@ import { dW } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { to } from "../figma_app/828186";
 import { V2, DI } from "../figma_app/712525";
 import { fullscreenValue } from "../figma_app/455680";
 import { r as _$$r } from "../figma_app/860474";
 import { gk } from "../figma_app/540726";
 import { Z as _$$Z } from "../905/104740";
-import { Uc } from "../figma_app/741237";
+import { updateHoveredNode } from "../figma_app/741237";
 import { p8, eY } from "../figma_app/722362";
 import { lH, Fy } from "../figma_app/623300";
 import { _Y } from "../figma_app/162807";
@@ -163,7 +163,7 @@ function eh({
     "aria-label": getI18nString("canvas_search.filter.remove_filter", {
       filter: p9(e)
     }),
-    recordingKey: Pt(n, kM[e], "remove"),
+    recordingKey: generateRecordingKey(n, kM[e], "remove"),
     children: p9(e)
   }, `filter-chip-${e}`) : null), [s, d, t, n]);
   return c.length ? jsx("div", {
@@ -243,7 +243,7 @@ function eg({
       onClick: t,
       "aria-label": getI18nString("canvas_search.filter.remove"),
       "aria-describedby": p9(e),
-      recordingKey: Pt(n, kM[e], "remove"),
+      recordingKey: generateRecordingKey(n, kM[e], "remove"),
       children: jsx(_$$f, {})
     })]
   });
@@ -1073,7 +1073,7 @@ function eG({
       e.preventDefault();
     },
     onClick: t => {
-      R ? D(_$$F.enqueue({
+      R ? D(VisualBellActions.enqueue({
         type: "offline-page-switch",
         message: getI18nString("fullscreen.pages_panel.unavailable_offline")
       })) : (l.current?.focus(), p || !i || (BrowserInfo.mac ? t.metaKey : t.ctrlKey) || e.textMatch.matchType === MatchCriteria.PAGE_MATCH ? c(t) : m || CanvasSearchHelpers.setOverlayVisible(!0));
@@ -1089,14 +1089,14 @@ function eG({
         matchIndex: e.matchIndex,
         isPurple: e.isPurple
       });
-      v ? CanvasSearchHelpers.setHoveredResult(e.resultGuid, e.matchIndex) : e.textMatch.matchType === MatchCriteria.LAYER_MATCH && Uc(e.resultGuid);
+      v ? CanvasSearchHelpers.setHoveredResult(e.resultGuid, e.matchIndex) : e.textMatch.matchType === MatchCriteria.LAYER_MATCH && updateHoveredNode(e.resultGuid);
     },
     onMouseLeave: () => {
-      Uc("");
+      updateHoveredNode("");
       _(null);
       CanvasSearchHelpers.setHoveredResult(defaultSessionLocalIDString, -1);
     },
-    recordingKey: Pt("figma_design_search", "result", e.pageId, e.index),
+    recordingKey: generateRecordingKey("figma_design_search", "result", e.pageId, e.index),
     children: [jsx("div", {
       className: _P,
       children: j

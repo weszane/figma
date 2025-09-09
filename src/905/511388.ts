@@ -6,13 +6,13 @@ import { N as _$$N } from "../905/301843";
 import { c as _$$c } from "../905/486270";
 import { atomStoreManager } from "../figma_app/27355";
 import u from "classnames";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { Rs } from "../figma_app/288654";
 import { s as _$$s } from "../cssbuilder/589278";
 import { lW } from "../figma_app/850075";
 import { to } from "../figma_app/828186";
 import { FAuthProviderType } from "../figma_app/191312";
-import { fy7 } from "../figma_app/43951";
+import { LibraryPresetSubscriptionsV2 } from "../figma_app/43951";
 import { Ib } from "../905/129884";
 import { Rs as _$$Rs } from "../905/991973";
 import { N as _$$N2 } from "../905/438674";
@@ -168,7 +168,7 @@ export function $$L0({
     let l = to();
     let d = lW(l);
     let u = e && d[e];
-    let p = Rs(fy7, {
+    let p = Rs(LibraryPresetSubscriptionsV2, {
       group: s
     }, {
       enabled: null != s
@@ -247,7 +247,7 @@ export function $$L0({
   let j = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
-    M?.data?.link && Ay.redirect(M?.data?.link, "_blank");
+    M?.data?.link && customHistory.redirect(M?.data?.link, "_blank");
   }, [M]);
   let U = useCallback(e => {
     e.preventDefault();

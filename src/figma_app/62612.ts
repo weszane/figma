@@ -1,7 +1,7 @@
 import { useRef, useEffect, useContext, useMemo } from "react";
 import { flushSync } from "../vendor/944059";
 import { Fullscreen } from "../figma_app/763686";
-import { xx } from "../figma_app/815945";
+import { memoizeByArgs } from "../figma_app/815945";
 import { parsePxNumber } from "../figma_app/783094";
 import { logError } from "../905/714362";
 import { Point } from "../905/736624";
@@ -87,7 +87,7 @@ export function $$x4(e, t) {
   };
 }
 export function $$N25(e) {
-  return xx((e, t, r, n) => ({
+  return memoizeByArgs((e, t, r, n) => ({
     x: e,
     y: t,
     height: r,

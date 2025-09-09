@@ -2,7 +2,7 @@ import _require2 from "../0c62c2fd/586544";
 import _require from "../0c62c2fd/322783";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
@@ -27,7 +27,7 @@ import { E as _$$E } from "../905/984674";
 import { k as _$$k2 } from "../469e6e40/952112";
 import { sf, oB } from "../905/929976";
 import { jm, fu, kp } from "../figma_app/831799";
-import { sMZ, yQw, ZY7 } from "../figma_app/43951";
+import { UserFlagByName, TeamById, TeamAdminSettingsPage } from "../figma_app/43951";
 import { S2, No, YQ, px, W8 } from "../figma_app/465071";
 import { ck } from "../905/952832";
 import { DashboardSections, MemberSections, BillingSections } from "../905/548208";
@@ -38,7 +38,7 @@ import { Te } from "../figma_app/765689";
 import { resourceUtils } from "../905/989992";
 import z from "../vendor/529640";
 import { A as _$$A } from "../905/920142";
-import { F as _$$F2 } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { b_, sH, Ji } from "../figma_app/149367";
 import { tb as _$$tb } from "../905/848667";
 import { If, wv } from "../figma_app/121751";
@@ -137,7 +137,7 @@ import { _ as _$$_, Y as _$$Y2 } from "../469e6e40/781142";
 import { S as _$$S3 } from "../4452/606725";
 import { r as _$$r2 } from "../905/398386";
 import { bE } from "../figma_app/375098";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { M4, IT } from "../905/713695";
 import { VP, D2 } from "../905/18797";
 import { OL as _$$OL } from "../figma_app/12796";
@@ -192,7 +192,7 @@ function B({
   let t = useDispatch();
   let a = useSelector(e => e.avatarEditorState);
   let n = S2().unwrapOr(null);
-  let s = Rs(sMZ, {
+  let s = Rs(UserFlagByName, {
     name: "seen_connected_project_in_admin_dashboard_banner"
   });
   let o = !useMemo(() => "loaded" !== s.status || !!s.data?.currentUser?.userFlagByName, [s]) && n?.tier === Agb.PRO && getFeatureFlags().fc_initial_onboarding_enabled;
@@ -354,7 +354,7 @@ let e0 = createOptimistThunk((e, {
             team_id: id
           }
         }));
-        e.dispatch(_$$F2.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           type: "team-editors-downgraded",
           message: getI18nString("downgrade_member_visual_bell.text", {
             numMembers: t.id ? 1 : 0,
@@ -469,7 +469,7 @@ let e5 = kp(function (e) {
           let t = 1 === e.length ? e[0].name || e[0].email : getI18nString("team_view.upgrade.members_length_users", {
             memberLength: e.length
           });
-          dispatch(_$$F2.enqueue({
+          dispatch(VisualBellActions.enqueue({
             type: "team-users-removed",
             message: getI18nString("team_view.upgrade.members_removed_text_removed_from_this_props_team_name", {
               membersRemovedText: t,
@@ -937,7 +937,7 @@ function e8(e) {
   });
   var u = {};
   if ("loading" === _.status) return jsx(kt, {});
-  "errors" === _.status ? e.dispatch(_$$F2.enqueue({
+  "errors" === _.status ? e.dispatch(VisualBellActions.enqueue({
     message: getI18nString("file_browser.file_browser_actions.team_member_fetch_error"),
     error: !0
   })) : u = _.data || {};
@@ -2147,7 +2147,7 @@ let a$ = M4.Query({
 });
 export function $$aB1(e, t) {
   let a = useSelector(t => t.teams[e]);
-  let n = iZ();
+  let n = selectCurrentUser();
   let s = useSelector(t => t.teamMembersByTeamId[e]);
   return useMemo(() => t.transform(e => {
     if (!n || !a || !s) return {};
@@ -2189,8 +2189,8 @@ export function $$aG0(e) {
     }));
   }, [C, a, N]);
   _$$w(s?.id);
-  let I = iZ();
-  let T = Rs(yQw, {
+  let I = selectCurrentUser();
+  let T = Rs(TeamById, {
     teamId: e.teamId
   });
   let R = useMemo(() => T.transform(e => ({
@@ -2295,7 +2295,7 @@ export function $$aG0(e) {
       }
     }
   }, [a, e.selectedTab, D, s, G, $, V]);
-  let H = Rs(ZY7, {
+  let H = Rs(TeamAdminSettingsPage, {
     teamId: e.teamId
   }, {
     enabled: e.selectedTab === DashboardSections.SETTINGS

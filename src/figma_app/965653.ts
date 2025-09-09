@@ -2,7 +2,7 @@ import { PropertyScope } from "../figma_app/763686";
 import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import a from "../vendor/128080";
 import { v4, qp, mn, jq } from "../figma_app/761118";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { _S } from "../figma_app/516028";
 import { Wh } from "../figma_app/615482";
 import { uJ } from "../figma_app/646357";
@@ -69,20 +69,20 @@ let $$v5 = createRemovableAtomFamily(e => atom(t => {
           break;
         case Yc.SEPARATOR:
           e.push({
-            id: _$$g(),
+            id: generateUUIDv4(),
             type: "LIST_SEPARATOR"
           });
           break;
         case Yc.FILE_NAME:
           e.push({
-            id: _$$g(),
+            id: generateUUIDv4(),
             type: "LIST_SECTION_HEADER",
             name: t.name
           });
           break;
         case Yc.SECTION_HEADER:
           e.push({
-            id: _$$g(),
+            id: generateUUIDv4(),
             type: "LIST_SECTION_HEADER",
             name: t.name,
             fileName: t.fileName,
@@ -91,7 +91,7 @@ let $$v5 = createRemovableAtomFamily(e => atom(t => {
           break;
         case Yc.HIERARCHY_PATH:
           e.push({
-            id: _$$g(),
+            id: generateUUIDv4(),
             type: "LIST_HIERARCHY_PATH",
             label: t.name
           });
@@ -148,20 +148,20 @@ let $$A0 = atom(e => {
             }
           case b.Separator:
             e.push({
-              id: _$$g(),
+              id: generateUUIDv4(),
               type: "LIST_SEPARATOR"
             });
             break;
           case b.LibraryName:
             e.push({
-              id: _$$g(),
+              id: generateUUIDv4(),
               type: "LIST_SECTION_HEADER",
               name: r.name
             });
             break;
           case b.HierarchyPathName:
             e.push({
-              id: _$$g(),
+              id: generateUUIDv4(),
               type: "LIST_HIERARCHY_PATH",
               label: r.name
             });

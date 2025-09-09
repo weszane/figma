@@ -1,21 +1,21 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { R as _$$R } from "../905/57445";
 import { RR } from "../figma_app/338442";
 import { AppStateTsApi } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import u from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { TQ, Zl } from "../905/211621";
 import { B as _$$B } from "../905/714743";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
 import { zE } from "../905/8732";
-import { tJ } from "../figma_app/741237";
+import { replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { B9 } from "../figma_app/722362";
 import { kH } from "../905/309735";
@@ -156,7 +156,7 @@ export function $$J2({
     onlyInstanceSublayers
   } = _$$p(instanceAndSublayerGUIDs);
   let eg = useSelector(e => e.library);
-  let [ef, eE] = k9(() => {
+  let [ef, eE] = useMemoStable(() => {
     let e = backingStateGroupGUID ?? backingSymbolGUID;
     if (!e || isInvalidValue(e)) return [[], null];
     let {
@@ -166,10 +166,10 @@ export function $$J2({
     return [selectedItem ? [selectedItem] : [], selectedLibraryKey];
   }, [backingStateGroupGUID, backingSymbolGUID, eg, ee]);
   let ey = useMemo(() => !!onlyInstanceSublayers && !!backingSymbolOrStateGroupOfContainingInstances && backingSymbolOrStateGroupOfContainingInstances !== MIXED_MARKER, [onlyInstanceSublayers, backingSymbolOrStateGroupOfContainingInstances]);
-  let eb = rf(Pt(V.recordingKey, "instanceName", instanceAndSublayerGUIDs.join("-")), "mouseenter", () => {
+  let eb = useHandleMouseEvent(generateRecordingKey(V.recordingKey, "instanceName", instanceAndSublayerGUIDs.join("-")), "mouseenter", () => {
     highlightNodesOnHover && AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set(instanceAndSublayerGUIDs);
   });
-  let eT = rf(Pt(V.recordingKey, "instanceName", instanceAndSublayerGUIDs.join("-")), "mouseleave", () => {
+  let eT = useHandleMouseEvent(generateRecordingKey(V.recordingKey, "instanceName", instanceAndSublayerGUIDs.join("-")), "mouseleave", () => {
     highlightNodesOnHover && AppStateTsApi.canvasViewState().temporarilyHoveredNodes.set([]);
   });
   let eI = "";
@@ -200,7 +200,7 @@ export function $$J2({
     }));
   }, [shouldHideButtons, e, modalWidth, el, Q, eA]);
   let eN = useCallback(() => {
-    ey && tJ(containingInstancesOfSublayers.map(e => e.guid));
+    ey && replaceSelection(containingInstancesOfSublayers.map(e => e.guid));
   }, [ey, containingInstancesOfSublayers]);
   let eC = "";
   onlyInstances ? eC = instanceSwapPickerShown.isShown && instanceSwapPickerShown.id === Q ? sK : shouldHideButtons ? qw : vS : onlyInstanceSublayers && (eC = ey ? EA : me);
@@ -229,7 +229,7 @@ export function $$J2({
       })
     }) : jsxs(_$$x, {
       className: p()(eC, t),
-      recordingKey: Pt(V, "panelTitle", instanceAndSublayerGUIDs.join("-")),
+      recordingKey: generateRecordingKey(V, "panelTitle", instanceAndSublayerGUIDs.join("-")),
       onClick: onlyInstanceSublayers ? eN : ex,
       onMouseDown: $,
       doNotReserveSpaceForChevron: u,
@@ -260,7 +260,7 @@ export function $$J2({
       selectedLibraryKey: eE,
       title: getI18nString("design_systems.instance_panel.swap_instance"),
       itemsToSwap: instanceAndSublayerGUIDs,
-      recordingKey: Pt(V, "instanceSwapPicker"),
+      recordingKey: generateRecordingKey(V, "instanceSwapPicker"),
       pickerType: Zl.INSTANCE_SWAP_PICKER,
       preferredItems: preferredValues,
       preferredValuesErrorComponent: eo,

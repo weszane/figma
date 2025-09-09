@@ -1,4 +1,4 @@
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { SessionStatus } from "../figma_app/763686";
 export function $$a2(e) {
   return e.mirror.appModel.votingSessionInfo.votingStage === SessionStatus.JOINED;

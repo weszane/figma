@@ -1,4 +1,4 @@
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
@@ -14,7 +14,7 @@ export async function $$d0(e, t) {
     t.message.includes("Org access needed") && (e(Ts({
       origin: "ask_to_edit_button_click",
       formState: qB.JOIN_ORG,
-      redirectUrl: Ay.location.pathname
+      redirectUrl: customHistory.location.pathname
     })), e(showModalHandler({
       type: x,
       data: {}

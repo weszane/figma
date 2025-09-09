@@ -1,13 +1,13 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { NC } from "../905/17179";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { hG } from "../905/890368";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistAction, createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
 import { tc, PE } from "../905/15667";
@@ -91,7 +91,7 @@ let $$S0 = createOptimistThunk(async (e, t) => {
       default:
         r = getI18nString("org_user_actions.upgrade_request_sent");
     }
-    t.suppressVisualBell || e.dispatch(F.enqueue({
+    t.suppressVisualBell || e.dispatch(VisualBellActions.enqueue({
       message: r,
       type: "upgrade-request-sent"
     }));
@@ -100,7 +100,7 @@ let $$S0 = createOptimistThunk(async (e, t) => {
     r.message.includes("Org access needed") ? (e.dispatch(Ts({
       origin: "edit_button_click",
       formState: qB.JOIN_ORG,
-      redirectUrl: Ay.location.pathname
+      redirectUrl: customHistory.location.pathname
     })), e.dispatch(showModalHandler({
       type: x,
       data: {}
@@ -111,7 +111,7 @@ let $$S0 = createOptimistThunk(async (e, t) => {
 let $$v1 = createOptimistThunk(async (e, t) => {
   try {
     await XHR.del(`/api/org_user/${t.orgId}`);
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       type: "org_guest_leave",
       message: getI18nString("org_user_actions.you_successfully_left_organization", {
         orgName: t.orgName

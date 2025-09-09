@@ -1,35 +1,76 @@
-import { hasTypeProperty } from "../905/957591";
-export function $$r1(e) {
-  let t = new Set();
-  let i = e => {
-    switch (e.type) {
-      case "binary":
-      case "in":
-        t.add(e.left);
-        break;
-      case "or":
-      case "and":
-        e.expressions.forEach(i);
+import { hasTypeProperty } from '../905/957591'
+
+/**
+ * Traverses an expression tree and collects all 'left' properties from nodes of type 'binary' or 'in'.
+ * @param expr - The root expression node to traverse.
+ * @returns A Set containing all collected 'left' properties.
+ * (Original function: $$r1)
+ */
+export function collectLeftProperties(expr: any): Set<any> {
+  const leftSet = new Set()
+
+  /**
+   * Recursively traverses the expression tree.
+   * @param node - The current expression node.
+   */
+  const traverse = (node: any): void => {
+    switch (node.type) {
+      case 'binary':
+      case 'in':
+        leftSet.add(node.left)
+        break
+      case 'or':
+      case 'and':
+        node.expressions.forEach(traverse)
+        break
+      default:
+        // No action for other types
+        break
     }
-  };
-  e && i(e);
-  return t;
+  }
+
+  if (expr)
+    traverse(expr)
+  return leftSet
 }
-export function $$a0(e) {
-  let t = [];
-  let i = e => {
-    switch (e.type) {
-      case "binary":
-      case "in":
-        hasTypeProperty(e.right) && t.push(e.right);
-        break;
-      case "or":
-      case "and":
-        e.expressions.forEach(i);
+
+/**
+ * Traverses an expression tree and collects all 'right' properties from nodes of type 'binary' or 'in'
+ * where the 'right' property has a 'type' property.
+ * @param expr - The root expression node to traverse.
+ * @returns An array containing all collected 'right' properties.
+ * (Original function: $$a0)
+ */
+export function collectRightPropertiesWithType(expr: any): any[] {
+  const rightList: any[] = []
+
+  /**
+   * Recursively traverses the expression tree.
+   * @param node - The current expression node.
+   */
+  const traverse = (node: any): void => {
+    switch (node.type) {
+      case 'binary':
+      case 'in':
+        if (hasTypeProperty(node.right)) {
+          rightList.push(node.right)
+        }
+        break
+      case 'or':
+      case 'and':
+        node.expressions.forEach(traverse)
+        break
+      default:
+        // No action for other types
+        break
     }
-  };
-  e && i(e);
-  return t;
+  }
+
+  if (expr)
+    traverse(expr)
+  return rightList
 }
-export const Gz = $$a0;
-export const az = $$r1;
+
+// Export aliases for backward compatibility
+export const Gz = collectRightPropertiesWithType
+export const az = collectLeftProperties

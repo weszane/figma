@@ -1,13 +1,13 @@
 import { useRef, useContext, useCallback } from "react";
-import { useStore, useDispatch } from "../vendor/514228";
+import { useStore, useDispatch } from "react-redux";
 import { h as _$$h } from "../905/207101";
 import { BrowserInfo } from "../figma_app/778880";
-import { BV, Pt } from "../figma_app/806412";
+import { useHandlePointerEvent, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { jD } from "../905/765855";
 import { O1, KD } from "../figma_app/317394";
 import { fullscreenValue } from "../figma_app/455680";
-import { wr } from "../figma_app/741237";
+import { clearSelection } from "../figma_app/741237";
 import { $$, Z0 } from "../figma_app/62612";
 import { L as _$$L } from "../figma_app/608876";
 import { T } from "../905/645480";
@@ -69,12 +69,12 @@ export function $$b0(e, t) {
     }
   });
   let N = useRef(!1);
-  let P = BV(Pt("insertableResource", t.recordingKey || ""), "pointerdown", e => {
+  let P = useHandlePointerEvent(generateRecordingKey("insertableResource", t.recordingKey || ""), "pointerdown", e => {
     2 === e.button || e.ctrlKey || (e.stopPropagation(), BrowserInfo.isMeetDevice && dispatch({
       type: "start click"
     }), x.current = M(), document.addEventListener("pointerup", D), N.current = !0, BrowserInfo.isMeetDevice && document.addEventListener("touchend", D), I.current = !0, R(e));
   });
-  let O = useCallback(BV(Pt("insertableResource", t.recordingKey || ""), "pointermove", t => {
+  let O = useCallback(useHandlePointerEvent(generateRecordingKey("insertableResource", t.recordingKey || ""), "pointermove", t => {
     let n = i.getState().mirror.sceneGraphSelection;
     let r = S.current;
     if (!r) return;
@@ -86,7 +86,7 @@ export function $$b0(e, t) {
       dragPosition: a,
       isDraggingOverCanvas: s
     };
-    I.current && r.dragPosition && E.current && E.current.distanceTo(a) > Nq && (n && o && (wr(), fullscreenValue.commit(), b(jD())), e.onDragStart?.(), I.current = !1);
+    I.current && r.dragPosition && E.current && E.current.distanceTo(a) > Nq && (n && o && (clearSelection(), fullscreenValue.commit(), b(jD())), e.onDragStart?.(), I.current = !1);
     C(e => ({
       ...e,
       ...c
@@ -116,7 +116,7 @@ export function $$b0(e, t) {
       };
     }
   }), [i, S, C, e.onDragStart, e.isDraggingDisabled]);
-  let D = useCallback(BV(Pt("insertableResource", t.recordingKey || ""), "pointerup", i => {
+  let D = useCallback(useHandlePointerEvent(generateRecordingKey("insertableResource", t.recordingKey || ""), "pointerup", i => {
     let n = S.current;
     let r = e.recomputeCancelRectsOnPointerUp && n?.dragPosition ? Y(n?.dragPosition, M()) : n?.isDraggingOverCanvas;
     let a = n?.dragPosition;

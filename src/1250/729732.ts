@@ -1,8 +1,8 @@
 import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
-import { X39, Fvs } from "../figma_app/43951";
+import { PlanUserByFileKey, PlanByTeamId } from "../figma_app/43951";
 export function $$o1(e) {
-  let t = Rs(X39, {
+  let t = Rs(PlanUserByFileKey, {
     fileKey: e
   }, {
     enabled: !!e
@@ -19,7 +19,7 @@ export function $$o1(e) {
   return t.transform(e => e.file?.currentPlanUser);
 }
 export function $$s0(e) {
-  let t = Rs(Fvs, {
+  let t = Rs(PlanByTeamId, {
     teamId: e
   }, {
     enabled: !!e

@@ -1,8 +1,8 @@
-import { shallowEqual } from "../vendor/514228";
+import { shallowEqual } from "react-redux";
 import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
 import { PresetType, RotationType } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { L_ } from "../figma_app/349969";
 import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType } from "../figma_app/53721";
@@ -223,7 +223,7 @@ export function $$C6(e, t, r, n) {
 }
 export function $$w4(e, t, r) {
   let n = fullscreenValue.getViewportInfo();
-  e.x > .9 * n.width && t(F.enqueue({
+  e.x > .9 * n.width && t(VisualBellActions.enqueue({
     type: "inline-preview-resize-to-actual-size",
     message: getI18nString("inline_preview.resize_to_actual_size_visual_bell"),
     button: {

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
@@ -18,7 +18,7 @@ import { E as _$$E } from "../905/984674";
 import { WO } from "../469e6e40/418374";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { yo } from "../figma_app/494261";
-import { lgH } from "../figma_app/43951";
+import { AllowlistSettingsModalView } from "../figma_app/43951";
 import { registerModal } from "../905/102752";
 var E = (e => (e.ALLOWLIST = "allowlist", e.PUBLIC = "public", e))(E || {});
 class C {
@@ -130,7 +130,7 @@ export let $$I0 = registerModal(function (e) {
     hasBackButton
   } = e;
   let l = hS(e);
-  let o = Rs(lgH, {
+  let o = Rs(AllowlistSettingsModalView, {
     orgId
   });
   let d = o.data?.org;

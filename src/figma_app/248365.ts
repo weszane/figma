@@ -4,7 +4,7 @@ import { fW } from "../figma_app/103728";
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { DT } from "../figma_app/320164";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { qB } from "../905/862321";
 import { tl } from "../figma_app/781453";
 import { zq } from "../figma_app/598412";
@@ -19,7 +19,7 @@ let f = atom({
 });
 let E = atom(!1);
 export function $$y1(e = qB.SIGN_IN, t = {}) {
-  if (t.preventDefaultRedirect && (t.authOptions ??= {}, t.authOptions.redirect_url = _$$Ay.location.pathname + _$$Ay.location.search), atomStoreManager.get(E)) !function (e) {
+  if (t.preventDefaultRedirect && (t.authOptions ??= {}, t.authOptions.redirect_url = customHistory.location.pathname + customHistory.location.search), atomStoreManager.get(E)) !function (e) {
     let t = document.querySelector("iframe#figma-auth-iframe");
     t?.contentWindow?.postMessage(e, location.origin);
   }({

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { j7 } from "../905/929976";
 import { SA, d2 } from "../figma_app/8833";

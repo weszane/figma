@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { Fullscreen } from "../figma_app/763686";
-import { uA } from "../figma_app/806412";
+import { RecordingComponent } from "../figma_app/878298";
 import { k } from "../905/582200";
 import { renderI18nText } from "../905/303541";
 import { Zk, fI, nV } from "../figma_app/626177";
 import { u } from "../642/523719";
-export class $$c0 extends uA {
+export class $$c0 extends RecordingComponent {
   constructor() {
     super(...arguments);
     this.noop = () => {};

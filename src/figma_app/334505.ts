@@ -1,11 +1,11 @@
 import { useMemo, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { LayoutTabType } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { Mz } from "../vendor/925040";
 import { ZC } from "../figma_app/39751";
 import { LU, jw } from "../figma_app/327588";
@@ -63,7 +63,7 @@ export function $$w1() {
 }
 export function $$O14() {
   let e = KH();
-  return k9(() => {
+  return useMemoStable(() => {
     let t = getSingletonSceneGraph();
     let r = new Set();
     Object.keys(e).forEach(e => {
@@ -100,14 +100,14 @@ export function $$D6(e) {
     let r = e.get(t);
     return r ? v(r, $$A10).map(e => e.guid) : [];
   }).flat(), e);
-  return k9(() => t, [t]);
+  return useMemoStable(() => t, [t]);
 }
 export function $$k9(e) {
   let t = Fk((e, t) => t.map(t => {
     let r = e.get(t);
     return r ? $$x11(r).map(e => e.guid) : [];
   }).flat(), e);
-  return k9(() => t, [t]);
+  return useMemoStable(() => t, [t]);
 }
 export let $$M12 = Mz([C1], e => {
   if (!e) return [];

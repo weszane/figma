@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { E } from "../905/632989";
 import s from "classnames";
 import { Q } from "../905/911623";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { w } from "../905/768636";
 var o = s;
 export function $$u0({
@@ -24,7 +24,7 @@ export function $$u0({
       t.preventDefault();
       0 === t.button && e();
     }, [e]);
-    return rf(t, "mousedown", i);
+    return useHandleMouseEvent(t, "mousedown", i);
   }(h, g);
   let {
     onMouseDown,

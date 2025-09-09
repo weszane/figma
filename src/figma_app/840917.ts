@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { isLocalFileKey } from "../905/657242";
 import { filterNotNullish } from "../figma_app/656233";
 import { isNotNullish } from "../figma_app/95419";
@@ -30,7 +30,7 @@ import { kS } from "../figma_app/864723";
 import { Ff, Xl } from "../figma_app/582924";
 import { awaitSync } from "../905/412815";
 import { xK } from "../905/125218";
-import { dDF } from "../figma_app/43951";
+import { FileCanEdit } from "../figma_app/43951";
 import { M4 as _$$M } from "../905/713695";
 import { maybeCreateSavepoint } from "../905/294113";
 import { B as _$$B } from "../905/18613";
@@ -1267,13 +1267,13 @@ export function $$eF7() {
 }
 export function $$ej4(e) {
   let t = useSelector(t => !!t.autosave.unclaimedFilesWithChangesInIDB.find(t => t.fileKey === e));
-  let r = _$$l(dDF, t ? e : "");
+  let r = _$$l(FileCanEdit, t ? e : "");
   return t ? r : resourceUtils.loaded(!1);
 }
 export function $$eU3() {
   let e = useSelector(e => e.autosave.unclaimedFilesWithChangesInIDB);
   let t = useSelector(e => e.autosave.unclaimedFilesCreatedOffline);
-  let r = _$$p(dDF, useMemo(() => e.map(({
+  let r = _$$p(FileCanEdit, useMemo(() => e.map(({
     fileKey: e
   }) => ({
     key: e

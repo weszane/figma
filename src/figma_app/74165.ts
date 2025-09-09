@@ -1,9 +1,9 @@
 import { useRef, useEffect, useCallback } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { AppStateTsApi, DesignGraphElements, UserActionState } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
 import { L3 } from "../figma_app/385215";
-import { wr } from "../figma_app/741237";
+import { clearSelection } from "../figma_app/741237";
 import { aV, ax, dH } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { Ye } from "../figma_app/32128";
@@ -29,7 +29,7 @@ export function $$h1() {
             setPropertiesPanelCollapsed(e);
             h.current = e;
           } else {
-            wr();
+            clearSelection();
             isPropertiesPanelCollapsed ? h.current = !1 : (togglePropertiesPanelCollapsed(), h.current = !0);
           }
         } else h.current && isPropertiesPanelCollapsed && togglePropertiesPanelCollapsed();

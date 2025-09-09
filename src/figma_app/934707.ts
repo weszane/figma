@@ -5,7 +5,7 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { d1 } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
@@ -40,7 +40,7 @@ let $$E0 = createOptimistThunk((e, t) => {
     };
     f(t.userId, t.fileKey, t.experimentName, "manage");
     let n = "all" === t.preference ? getI18nString("comments.you_will_be_notified_about_file_comments") : getI18nString("comments.you_will_be_notified_about_replies_and_at_mentions");
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: n,
       type: "comments-opted-in",
       button: r,
@@ -71,7 +71,7 @@ let $$b3 = createOptimistThunk((e, t) => {
     };
     f(t.userId, t.fileKey, t.experimentName, t.toastType);
     setTimeout(() => {
-      e.dispatch(F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("comments.get_notified_about_all_comments_prompt"),
         type: "get_notified_about_all_comments_prompt",
         button: n,
@@ -108,7 +108,7 @@ let $$I4 = createOptimistThunk((e, t) => {
       action: () => g(e)
     };
     let r = getI18nString("dev_mode.you_will_be_notified_about_status_changes");
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: r,
       type: "dev-mode-opted-in",
       button: t,

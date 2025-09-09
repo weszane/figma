@@ -3,7 +3,7 @@ import { getFalseValue } from "../figma_app/897289";
 import { c3 } from "../figma_app/78808";
 import { yJ, bE, HA, yH } from "../figma_app/598926";
 import { ru } from "../905/879323";
-import { pFu, dq_ } from "../figma_app/43951";
+import { ProjectsForTeam, ProjectByIdForRealtimeShim } from "../figma_app/43951";
 import { H } from "../905/715533";
 import { fJ, aj } from "../905/25169";
 export function $$u2(e, t, i = !1) {
@@ -39,7 +39,7 @@ export function $$u2(e, t, i = !1) {
 let $$p3 = new H({
   name: "TeamChannelFoldersShim",
   ...fJ,
-  livegraphView: pFu,
+  livegraphView: ProjectsForTeam,
   livegraphArgs: (e, t) => ({
     teamId: e,
     updatedAtTimestamp: t
@@ -76,7 +76,7 @@ let m = getFalseValue() ? new Date("1970-01-01T00:00:00.000Z") : new Date();
 let $$h1 = new H({
   name: "FolderChannelFoldersShim",
   ...aj,
-  livegraphView: dq_,
+  livegraphView: ProjectByIdForRealtimeShim,
   livegraphArgs: e => ({
     projectId: e
   }),

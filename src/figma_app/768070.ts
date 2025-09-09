@@ -1,4 +1,4 @@
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { parseQuery } from "../905/634134";
 let a = new URL(window.location.href);
 let s = (a.searchParams.get("mode") || "interaction").toLowerCase().split(",");
@@ -37,7 +37,7 @@ d.reportV2;
 d.updateScreenshots;
 d.bisectDecisions;
 d.asan;
-let p = parseQuery(Ay.location.hash);
+let p = parseQuery(customHistory.location.hash);
 let _ = d.initialOptions || p.initialOptions;
 _ && JSON.parse(decodeURIComponent(_));
 (() => {

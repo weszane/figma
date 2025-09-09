@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useState, useCallback, useEffect, useLayoutEffect, forwardRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { wY } from "../figma_app/708845";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k } from "../905/582200";
 import { getI18nString } from "../905/303541";
-import { A as _$$A } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { vm, yU, Zr } from "../figma_app/678782";
@@ -183,7 +183,7 @@ export function $$Y0(e) {
           });
         },
         disabled: e.disabled || !1,
-        recordingKey: Pt(e, "distributeDropdown"),
+        recordingKey: generateRecordingKey(e, "distributeDropdown"),
         htmlAttributes: {
           "data-tooltip": a,
           "data-tooltip-type": Ib.TEXT
@@ -210,7 +210,7 @@ function $(e) {
   let r = Zr(action);
   let i = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   return jsx(a1, {
-    text: _$$A(action),
+    text: formatI18nMessage(action),
     isEnabled: r,
     hideCheck: !0,
     isChecked: !1,
@@ -220,7 +220,7 @@ function $(e) {
       } : null);
     },
     shortcut: c1(i, action),
-    recordingKey: Pt(e, "distributeDropdown", action),
+    recordingKey: generateRecordingKey(e, "distributeDropdown", action),
     children: jsx(X, {
       action
     })
@@ -251,7 +251,7 @@ function J(e) {
       onClick: () => {
         fullscreenValue.triggerActionInUserEditScope(e.action);
       },
-      recordingKey: Pt(e, "alignButton", e.action),
+      recordingKey: generateRecordingKey(e, "alignButton", e.action),
       "aria-label": e.action,
       htmlAttributes: {
         onMouseDown: e => {

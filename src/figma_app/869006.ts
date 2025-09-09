@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useRef, useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
@@ -12,9 +12,9 @@ import { m0 } from "../figma_app/976749";
 import { wR } from "../figma_app/765689";
 import { BI } from "../figma_app/546509";
 import { l3, q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType, FFileType, FOrganizationLevelType } from "../figma_app/191312";
-import { ehp, OiG } from "../figma_app/43951";
+import { OpenEditorFileData, EditButtonView } from "../figma_app/43951";
 import { Pe } from "../figma_app/12796";
 import { wH } from "../figma_app/680166";
 import { Gv } from "../figma_app/736948";
@@ -75,8 +75,8 @@ function R({
 }) {
   let l = useDispatch();
   let [d, p] = useState(!1);
-  let _ = iZ();
-  let h = Rs(ehp, {
+  let _ = selectCurrentUser();
+  let h = Rs(OpenEditorFileData, {
     fileKey: e
   }).data?.file;
   let m = _$$u();
@@ -298,7 +298,7 @@ export let $$Q0 = "edit_button_upgrading_to_edit";
 export var $$ee2 = (e => (e.EDIT_BUTTON_LOADING = "editButtonLoading", e.PLAN_REQUEST_UPGRADE = "planRequestUpgrade", e.PENDING_UPGRADE_REQUEST = "pendingUpgradeRequest", e.REQUEST_EDIT_VIEW = "requestEditView", e.PENDING_EDIT_ROLE_REQUEST = "pendingEditRoleRequest", e.VIEW_ONLY = "viewOnly", e))($$ee2 || {});
 export function $$et3(e) {
   let t = e.file;
-  let r = iZ();
+  let r = selectCurrentUser();
   let n = useMemo(() => !!t && Pe(t), [t]);
   let d = useSelector(({
     openFile: e
@@ -319,7 +319,7 @@ export function $$et3(e) {
     getIsUpgradeHandlerLoading,
     getHasProvisionalAccess
   } = wH();
-  let F = Rs(OiG, {
+  let F = Rs(EditButtonView, {
     fileKey: t.key,
     orgId: t.parentOrgId
   });

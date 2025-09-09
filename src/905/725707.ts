@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N } from "../905/720559";
 import { xk } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";

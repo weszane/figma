@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Fullscreen, ImageExportType } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
@@ -141,7 +141,7 @@ export function $$T1({
       return;
     }
     let a = Date.now();
-    if (D(null), t.isLocal) n = null;else try {
+    if (D(null), t.isLocal) n = null; else try {
       let e = Eo.getCanvas({
         canvas_url: t.canvas_url
       });

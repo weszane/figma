@@ -8,8 +8,8 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { ZC } from "../figma_app/39751";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { _0, PI } from "../figma_app/948389";
 import { JT } from "../figma_app/632248";
 import { pP, qy, cT } from "../figma_app/862289";
@@ -123,8 +123,8 @@ export function $$w4(e, t) {
         return !0;
     }
   }(e);
-  debugState.dispatch(F.enqueue({
-    icon: zX.CLOSE_FILLED,
+  debugState.dispatch(VisualBellActions.enqueue({
+    icon: VisualBellIcon.CLOSE_FILLED,
     message: i,
     type: "speaker-notes-visual-bell",
     button: r && t ? {

@@ -1,167 +1,171 @@
-import type { INoOpVm } from '../905/700654';
-import type { Fn } from '../../types/global';
-import type { TSSceneGraph } from '../figma_app/518682';
-import type { FontInfo, PluginOptions, PluginRuntimeOptions } from './types';
-import md5 from 'md5';
+import type { INoOpVm } from '../905/700654'
+import type { Fn } from '../../types/global'
+import type { TSSceneGraph } from '../figma_app/518682'
+import type { FontInfo, PluginOptions, PluginRuntimeOptions } from './types'
+import md5 from 'md5'
 // Import type definitions
-import { useState } from 'react';
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { z as _$$z } from 'zod';
-import { reportError } from '../905/11';
-import { WidgetManager } from '../905/2122';
-import { codeSuggestionAPIHandler } from '../905/70843';
-import { ModalSupportsBackground, registerModal } from '../905/102752';
-import { bytesToHex } from '../905/125019';
-import { FigmaSchema } from '../905/125137';
-import { hideSpecificModal, showModalHandler } from '../905/156213';
-import { ServiceCategories as _$$e } from '../905/165054';
-import { permissionScopeHandler } from '../905/189185';
-import { h as _$$h } from '../905/193918';
-import { isInvalidValue, isValidValue } from '../905/216495';
-import { isPluginConfigMatching } from '../905/240440';
-import { widgetErrorTracker } from '../905/250412';
-import { DummyUIManager, PluginUIManager } from '../905/261467';
-import { resolveDeferredPromise } from '../905/263346';
-import { Label } from '../905/270045';
-import { Checkbox } from '../905/274480';
-import { getPluginIframeMode } from '../905/282455';
-import { deepClone } from '../905/284190';
-import { maybeCreateSavepoint } from '../905/294113';
-import { K as _$$K } from '../905/301652';
-import { getI18nString, renderI18nText } from '../905/303541';
-import { getDebugPluginParams, isValidPluginId } from '../905/327571';
-import { debugState } from '../905/407919';
-import { designTypeToIndex, indexToDesignType } from '../905/413743';
-import { loadPluginFont } from '../905/426868';
-import { R as _$$R } from '../905/441305';
-import { trackEventAnalytics } from '../905/449184';
-import { deleteWidgetSyncedMapEntry, getSyncedMapEntry, getSyncedState, setInitialWidgetSyncedState, setWidgetSyncedMapEntry } from '../905/486749';
-import { dragEventPropType } from '../905/488349';
-import { n_ as _$$n_ } from '../905/515076';
-import { cd as _$$cd, HB, P5 } from '../905/531105';
-import { P as _$$P2 } from '../905/545265';
-import { decodeBase64, encodeBase64, isValidBase64 } from '../905/561685';
-import { pN } from '../905/571565';
-import { getFunctionHandle, memoizedHandle } from '../905/572400';
-import { pS } from '../905/588985';
-import { getFeatureFlags } from '../905/601108';
-import { Ay } from '../905/612521';
-import { I as _$$I, np as _$$np, o8 } from '../905/622391';
-import { k as _$$k2 } from '../905/651849';
-import { e9 as _$$e2, jE } from '../905/656545';
-import { findCodegenLanguage } from '../905/661977';
-import { createPluginContext, NoOpVm, ScopedNoOpVm } from '../905/700654';
-import { Oo } from '../905/709171';
-import { getFilteredFeatureFlags } from '../905/717445';
-import { Mi } from '../905/736624';
-import { MI } from '../905/757052';
-import { ZY } from '../905/764747';
-import { d1 } from '../905/766303';
-import { checkIncrementalUnsafeMember, DocumentAccessState, ensurePluginPageLoaded, loadInternalCanvasMemoized, markPageLoaded } from '../905/816197';
-import { validateWithZSchema, c0, mergeDefaults } from '../905/816730';
-import { getSceneGraphInstance } from '../905/830071';
-import { Y as _$$Y } from '../905/830372';
-import { _b } from '../905/835985';
-import { P as _$$P3, V as _$$V } from '../905/837980';
-import { InternalError, RequestError } from '../905/845428';
-import { T as _$$T } from '../905/858738';
-import { n3 as _$$n, IA } from '../905/859698';
-import { qg, xF } from '../905/866640';
-import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411';
-import { nB as _$$nB } from '../905/902840';
-import { XHR } from '../905/910117';
-import { E as _$$E } from '../905/916933';
-import { e1 as _$$e3, tO as _$$tO, cz, fx, h2, J6, lm, Ut, vs } from '../905/933084';
-import { c as _$$c } from '../905/949750';
-import { E as _$$E2 } from '../905/984674';
-import { y as _$$y } from '../905/994901';
-import { atomStoreManager } from '../figma_app/27355';
-import { m3 } from '../figma_app/45218';
-import { DEV_MODE_STRING, FEditorType, SLACK_STRING } from '../figma_app/53721';
-import { $$ } from '../figma_app/62612';
-import { FE, PB } from '../figma_app/78808';
-import { getObservableOrFallback } from '../figma_app/84367';
+import { useState } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { z as _$$z } from 'zod'
+import { reportError } from '../905/11'
+import { WidgetManager } from '../905/2122'
+import { codeSuggestionAPIHandler } from '../905/70843'
+import { ModalSupportsBackground, registerModal } from '../905/102752'
+import { bytesToHex } from '../905/125019'
+import { FigmaSchema } from '../905/125137'
+import { hideSpecificModal, showModalHandler } from '../905/156213'
+import { ServiceCategories as _$$e } from '../905/165054'
+import { permissionScopeHandler } from '../905/189185'
+import { h as _$$h } from '../905/193918'
+import { isInvalidValue, isValidValue } from '../905/216495'
+import { isPluginConfigMatching } from '../905/240440'
+import { widgetErrorTracker } from '../905/250412'
+import { DummyUIManager, PluginUIManager } from '../905/261467'
+import { resolveDeferredPromise } from '../905/263346'
+import { Label } from '../905/270045'
+import { Checkbox } from '../905/274480'
+import { getPluginIframeMode } from '../905/282455'
+import { deepClone } from '../905/284190'
+import { maybeCreateSavepoint } from '../905/294113'
+import { generateAnonymouseName } from '../905/301652'
+import { getI18nString, renderI18nText } from '../905/303541'
+import { getDebugPluginParams, isValidPluginId } from '../905/327571'
+import { debugState } from '../905/407919'
+import { designTypeToIndex, indexToDesignType } from '../905/413743'
+import { loadPluginFont } from '../905/426868'
+import { R as _$$R } from '../905/441305'
+import { trackEventAnalytics } from '../905/449184'
+import { deleteWidgetSyncedMapEntry, getSyncedMapEntry, getSyncedState, setInitialWidgetSyncedState, setWidgetSyncedMapEntry } from '../905/486749'
+import { dragEventPropType } from '../905/488349'
+import { computeCodeExtensionPreferences } from '../905/515076'
+import { instanceComponentMap, layoutComponentCollection, mapNodeToComponent } from '../905/531105'
+import { PluginApiMetrics } from '../905/545265'
+import { decodeBase64, encodeBase64, isValidBase64 } from '../905/561685'
+import { dequeuePluginStatus } from '../905/571565'
+import { getFunctionHandle, memoizedHandle } from '../905/572400'
+import { getFeatureFlags } from '../905/601108'
+import { customHistory } from '../905/612521'
+import { I as _$$I, np as _$$np, o8 } from '../905/622391'
+import { logger } from '../905/651849'
+import { e9 as _$$e2, jE } from '../905/656545'
+import { findCodegenLanguage } from '../905/661977'
+import { createPluginContext, NoOpVm, ScopedNoOpVm } from '../905/700654'
+import { Oo } from '../905/709171'
+import { getFilteredFeatureFlags } from '../905/717445'
+import { Mi } from '../905/736624'
+import { MI } from '../905/757052'
+import { ZY } from '../905/764747'
+import { d1 } from '../905/766303'
+import { checkIncrementalUnsafeMember, DocumentAccessState, ensurePluginPageLoaded, loadInternalCanvasMemoized, markPageLoaded } from '../905/816197'
+import { mergeDefaults, validateAndCollectErrors, validateWithZSchema } from '../905/816730'
+import { getSceneGraphInstance } from '../905/830071'
+import { Y as _$$Y } from '../905/830372'
+import { _b } from '../905/835985'
+import { P as _$$P3, V as _$$V } from '../905/837980'
+import { InternalError, RequestError } from '../905/845428'
+import { T as _$$T } from '../905/858738'
+import { n3 as _$$n, VariableStyleId } from '../905/859698'
+import { qg, xF } from '../905/866640'
+import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411'
+import { nB as _$$nB } from '../905/902840'
+import { XHR } from '../905/910117'
+import { E as _$$E } from '../905/916933'
+import { e1 as _$$e3, tO as _$$tO, cz, fx, h2, J6, lm, Ut, vs } from '../905/933084'
+import { c as _$$c } from '../905/949750'
+import { E as _$$E2 } from '../905/984674'
+import { y as _$$y } from '../905/994901'
+import { atomStoreManager } from '../figma_app/27355'
+import { m3 } from '../figma_app/45218'
+import { DEV_MODE_STRING, FEditorType, SLACK_STRING } from '../figma_app/53721'
+import { $$ } from '../figma_app/62612'
+import { FE, PB } from '../figma_app/78808'
+import { getObservableOrFallback } from '../figma_app/84367'
 // Import Data Structures and Collections Management - Phase 16
-import { kA, Qj, vl, vT, y1, zH } from '../figma_app/86989';
-import { P$ } from '../figma_app/152368';
-import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287';
-import { getInitialOptions } from '../figma_app/169182';
-import { zg } from '../figma_app/193867';
-import { gr, sD } from '../figma_app/243058';
-import { nM as _$$nM, M7 } from '../figma_app/276332';
-import { PluginPermissions } from '../figma_app/300692';
-import { eG as _$$eG, oJ } from '../figma_app/334505';
-import { J9 } from '../figma_app/345997';
-import { J3 } from '../figma_app/360163';
-import { _1, ne as _$$ne, Qv, Vk, VV } from '../figma_app/389091';
-import { Qn } from '../figma_app/415217';
-import { Ay as _$$Ay2 } from '../figma_app/432652';
-import { getOpenExternalPluginIds } from '../figma_app/455620';
-import { fullscreenValue } from '../figma_app/455680';
-import { assert, throwTypeError } from '../figma_app/465776';
-import { $f as _$$$f, rp as _$$rp } from '../figma_app/474636';
-import { tB as _$$tB } from '../figma_app/516028';
-import { $y, i1 as _$$i, iP as _$$iP, nf as _$$nf, po as _$$po, _C, B_, b_, Bs, BT, cI, dG, dM, f2, fd, G1, H4, jG, jS, KB, LL, ME, Mw, OD, oZ, Q4, q$, Ql, Rp, sd, Sf, Sx, Ty, Vb, VM, W5, wk, Xx } from '../figma_app/603466';
-import { Qb, yh } from '../figma_app/646357';
-import { arraysEqual } from '../figma_app/656233';
-import * as _require from '../figma_app/664063';
-import { WJ } from '../figma_app/671547';
-import { UK } from '../figma_app/740163';
-import { Br } from '../figma_app/741237';
-import { OU } from '../figma_app/757723';
-import { PluginModalType, LibraryPubSub, SceneGraphHelpers, AppStateTsApi, LogicalOperation, CooperTemplateTypesTsBindings, Fullscreen, TrackType, SceneChangeType, CooperHelpers, SlideViewType, PluginHelpers, SelectionPaintHelpers, DraftState, VariableResolvedDataType, MeasurementUnit, ResourceLocation, FirstDraftHelpers, SocialMediaFormats, SceneIdentifier, Confirmation } from '../figma_app/763686';
-import { AC } from '../figma_app/777551';
-import { desktopAPIInstance } from '../figma_app/876459';
-import { isInteractionPathCheck } from '../figma_app/897289';
+import { kA, Qj, vl, vT, y1, zH } from '../figma_app/86989'
+import { P$ } from '../figma_app/152368'
+import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287'
+import { getInitialOptions } from '../figma_app/169182'
+import { zg } from '../figma_app/193867'
+import { VariableIdHandler, VariableSetIdCompatHandler } from '../figma_app/243058'
+import { nM as _$$nM, M7 } from '../figma_app/276332'
+import { PluginPermissions } from '../figma_app/300692'
+import { eG as _$$eG, oJ } from '../figma_app/334505'
+import { J9 } from '../figma_app/345997'
+import { J3 } from '../figma_app/360163'
+import { _1, ne as _$$ne, Qv, Vk, VV } from '../figma_app/389091'
+import { Qn } from '../figma_app/415217'
+import { Ay as _$$Ay2 } from '../figma_app/432652'
+import { getOpenExternalPluginIds } from '../figma_app/455620'
+import { fullscreenValue } from '../figma_app/455680'
+import { assert, throwTypeError } from '../figma_app/465776'
+import { $f as _$$$f, rp as _$$rp } from '../figma_app/474636'
+import { tB as _$$tB } from '../figma_app/516028'
+import { $y, i1 as _$$i, iP as _$$iP, nf as _$$nf, po as _$$po, _C, B_, b_, Bs, BT, cI, dG, dM, f2, fd, G1, H4, jG, jS, KB, LL, ME, Mw, OD, oZ, Q4, q$, Ql, Rp, sd, Sf, Sx, Ty, Vb, VM, W5, wk, Xx } from '../figma_app/603466'
+import { Qb, yh } from '../figma_app/646357'
+import { arraysEqual } from '../figma_app/656233'
+import * as _require from '../figma_app/664063'
+import { WJ } from '../figma_app/671547'
+import { UK } from '../figma_app/740163'
+import { updateActiveTextReviewPlugin } from '../figma_app/741237'
+import { OU } from '../figma_app/757723'
+import { AppStateTsApi, Confirmation, CooperHelpers, CooperTemplateTypesTsBindings, DraftState, FirstDraftHelpers, Fullscreen, LibraryPubSub, LogicalOperation, MeasurementUnit, PluginHelpers, PluginModalType, ResourceLocation, SceneChangeType, SceneGraphHelpers, SceneIdentifier, SelectionPaintHelpers, SlideViewType, SocialMediaFormats, TrackType, VariableResolvedDataType } from '../figma_app/763686'
+import { AC } from '../figma_app/777551'
+import { desktopAPIInstance } from '../figma_app/876459'
+import { isInteractionPathCheck } from '../figma_app/897289'
 // Import UI Components and Controls Library - Phase 14
-import { KJ } from '../figma_app/916560';
-import { Ky, u7, zn } from '../figma_app/933328';
-import { gH, IN } from '../figma_app/985200';
-import { AnnotationCategoryFactory } from './core/annotation';
-import { an, convertGridLayoutConfig, createImageProcessor, createNodeHash, eG, ez, generateJsxFromNode, getAllStorageKeysWithPrefix, getNodeById, getNodeGuid, getRowColumn, getStorageValueByKey, i5, isInImmutableContext, isVMPromiseLike, loadFontsForTextNode, parseColorInput, processEffect, processEffectWithValidation, processGridLayout, renameSelectedLayers, setStorageEntry, timerAndStateEvents, variableDefinitions, wrapVmPromise } from './core/helper';
-import { ImageStore } from './core/image-store';
-import { IncLoadingErrorLogger } from './core/incLoadingErrorLogger';
-import { ApplicationError, convertPaintArrayData, mapPaintConfigurations, NodeAPI, processPaint, tB, validateAndExtractCollectionId } from './core/node-api';
-import { NodeFactory } from './core/node-factory';
-import { PluginRuntimeBridge } from './core/plugin-runtime-bridge';
-import { StyleFactory } from './core/style-factory';
-import { StyleManager } from './core/style-manager';
-import { VariableFactory } from './core/variable-api';
-import { VariableCollectionFactory } from './core/variable-collection-factory';
-import { VideoStore } from './core/video-store';
-import { convertInternalPaintToExternal } from './modules';
+import { KJ } from '../figma_app/916560'
+import { Ky, u7, zn } from '../figma_app/933328'
+import { gH, IN } from '../figma_app/985200'
+import { AnnotationCategoryFactory } from './core/annotation'
+import { an, convertGridLayoutConfig, createImageProcessor, createNodeHash, eG, ez, generateJsxFromNode, getAllStorageKeysWithPrefix, getNodeById, getNodeGuid, getRowColumn, getStorageValueByKey, i5, isInImmutableContext, isVMPromiseLike, loadFontsForTextNode, parseColorInput, processEffect, processEffectWithValidation, processGridLayout, renameSelectedLayers, setStorageEntry, timerAndStateEvents, variableDefinitions, wrapVmPromise } from './core/helper'
+import { ImageStore } from './core/image-store'
+import { IncLoadingErrorLogger } from './core/incLoadingErrorLogger'
+import { ApplicationError, convertPaintArrayData, mapPaintConfigurations, NodeAPI, processPaint, tB, validateAndExtractCollectionId } from './core/node-api'
+import { NodeFactory } from './core/node-factory'
+import { PluginRuntimeBridge } from './core/plugin-runtime-bridge'
+import { StyleFactory } from './core/style-factory'
+import { StyleManager } from './core/style-manager'
+import { VariableFactory } from './core/variable-api'
+import { VariableCollectionFactory } from './core/variable-collection-factory'
+import { VideoStore } from './core/video-store'
+import { convertInternalPaintToExternal } from './modules'
+
 let rp = registerModal(({
   resolve: e,
   reject: t,
   pluginName: i,
   ...n
 }) => {
-  let [r, a] = useState(!1);
-  let s = getObservableOrFallback(UK().spellCheckPreference);
+  let [r, a] = useState(!1)
+  let s = getObservableOrFallback(UK().spellCheckPreference)
   let o = () => {
-    n.onClose();
-    t();
-  };
+    n.onClose()
+    t()
+  }
   return jsx(_$$R, {
     recordingKey: 'textReviewRequestModal',
     title: jsx(_$$E2, {
       color: 'default',
       fontWeight: 'semi-bold',
       fontSize: 11,
-      children: i.length > 50 ? renderI18nText('textreview.use_plugin_name_title_default', {}) : renderI18nText('textreview.use_plugin_name_title', {
-        pluginName: i
-      })
+      children: i.length > 50
+        ? renderI18nText('textreview.use_plugin_name_title_default', {})
+        : renderI18nText('textreview.use_plugin_name_title', {
+            pluginName: i,
+          }),
     }),
-    confirmText: i.length > 20 ? getI18nString('textreview.use_plugin_name_confirm_default', {}) : getI18nString('textreview.use_plugin_name_confirm', {
-      pluginName: i
-    }),
+    confirmText: i.length > 20
+      ? getI18nString('textreview.use_plugin_name_confirm_default', {})
+      : getI18nString('textreview.use_plugin_name_confirm', {
+          pluginName: i,
+        }),
     onCancel: o,
     onClose: o,
     onConfirm: () => {
-      n.onClose();
+      n.onClose()
       e({
-        turnOffSpellCheck: r
-      });
+        turnOffSpellCheck: r,
+      })
     },
     open: n.open,
     children: jsxs(_$$Y, {
@@ -173,39 +177,39 @@ let rp = registerModal(({
           children: renderI18nText('textreview.as_you_type_plugin_name_will_review_your_text_and_provide_suggestions', {
             pluginName: jsx(_$$E2, {
               fontWeight: 'semi-bold',
-              children: i
-            })
-          })
-        })
+              children: i,
+            }),
+          }),
+        }),
       }), s && jsx(Checkbox, {
         label: jsx(Label, {
-          children: renderI18nText('textreview.also_turn_off_figma_spell_check', {})
+          children: renderI18nText('textreview.also_turn_off_figma_spell_check', {}),
         }),
         checked: r,
-        onChange: a
-      })]
-    })
-  });
-}, 'TEXT_REVIEW_REQUEST_MODAL', ModalSupportsBackground.NO);
+        onChange: a,
+      })],
+    }),
+  })
+}, 'TEXT_REVIEW_REQUEST_MODAL', ModalSupportsBackground.NO)
 export function isPromiseLike(vm: NoOpVm, obj: INoOpVm<any>) {
   // r1 - Check if an object is a promise-like object with then/catch methods
   if (!vm.isObject(obj)) {
-    return false;
+    return false
   }
-  const thenMethod = vm.getProp(obj, 'then');
-  const catchMethod = vm.getProp(obj, 'catch');
+  const thenMethod = vm.getProp(obj, 'then')
+  const catchMethod = vm.getProp(obj, 'catch')
 
   // Return true if both then and catch are functions (promise-like)
-  return !!(vm.isFunction(thenMethod) && vm.isFunction(catchMethod));
+  return !!(vm.isFunction(thenMethod) && vm.isFunction(catchMethod))
 }
 let widgetTerminationWarning = `Your widget was terminated before figma.showUI could finish running. Return a promise in your event handler to keep your widget running while your iframe is open.
 
 For more information, see: https://www.figma.com/widget-docs/handling-user-events/
-`;
+`
 export function r5(widgetState, uiManager) {
   // r5 - Show widget termination warning if no promises are tracked
   if (widgetState.numTrackedPromises === 0 && uiManager.isInnerIframeActive()) {
-    console.error(widgetTerminationWarning);
+    console.error(widgetTerminationWarning)
   }
 }
 /**
@@ -232,35 +236,35 @@ async function processWidgetEventHandlers({
   runtime: widgetRuntime,
   uiHandle: uiManager,
   widgetManager: widgetController,
-  editScopeLabel: editScope
+  editScopeLabel: editScope,
 }) {
   // Validate supported event types
   if (!isValidWidgetEventType(eventCommand.name)) {
-    return false;
+    return false
   }
 
   // Get and validate widget node
-  const widgetNode = getWidgetNodeById(eventCommand.widgetNodeID);
+  const widgetNode = getWidgetNodeById(eventCommand.widgetNodeID)
   if (!widgetNode) {
-    return false;
+    return false
   }
 
   // Extract event handlers and create promise queue
-  const eventHandlers = extractWidgetEventHandlers(virtualNode, widgetNode, eventCommand, widgetRuntime);
-  const promiseQueue: any[] = [];
+  const eventHandlers = extractWidgetEventHandlers(virtualNode, widgetNode, eventCommand, widgetRuntime)
+  const promiseQueue: any[] = []
 
   // Process each event handler
   for (const currentHandler of eventHandlers) {
-    const eventData = createEventDataObject(NoOpVm, currentHandler, eventCommand);
-    const functionResult = executeEventHandler(NoOpVm, currentHandler, eventData, eventCommand, editScope);
+    const eventData = createEventDataObject(NoOpVm, currentHandler, eventCommand)
+    const functionResult = executeEventHandler(NoOpVm, currentHandler, eventData, eventCommand, editScope)
     if (isPromiseLike(NoOpVm, functionResult)) {
-      promiseQueue.push(trackEventHandlerPromise(NoOpVm, functionResult, widgetController));
+      promiseQueue.push(trackEventHandlerPromise(NoOpVm, functionResult, widgetController))
     }
   }
 
   // Handle promise completion and widget lifecycle
-  await processPromiseQueue(promiseQueue, widgetController, uiManager);
-  return true;
+  await processPromiseQueue(promiseQueue, widgetController, uiManager)
+  return true
 }
 
 // Helper functions for processWidgetEventHandlers
@@ -269,23 +273,23 @@ async function processWidgetEventHandlers({
  * isValidWidgetEventType - Check if event type is supported
  */
 export function isValidWidgetEventType(eventName) {
-  const validTypes = ['click', 'textEditEnd'];
-  const isValid = validTypes.includes(eventName);
+  const validTypes = ['click', 'textEditEnd']
+  const isValid = validTypes.includes(eventName)
   if (!isValid) {
-    assert(false, `unsupported event type: ${eventName}`);
+    assert(false, `unsupported event type: ${eventName}`)
   }
-  return isValid;
+  return isValid
 }
 
 /**
  * getWidgetNodeById - Get widget node by ID and validate type
  */
 export function getWidgetNodeById(widgetNodeID) {
-  const widgetNode = getSceneGraphInstance().get(widgetNodeID);
+  const widgetNode = getSceneGraphInstance().get(widgetNodeID)
   if (!widgetNode || widgetNode.type !== 'WIDGET') {
-    return null;
+    return null
   }
-  return widgetNode;
+  return widgetNode
 }
 
 /**
@@ -296,25 +300,25 @@ export function createEventDataObject(NoOpVm, handler, _eventCommand) {
     offsetX: handler.bubbleInfo.offsetX,
     offsetY: handler.bubbleInfo.offsetY,
     canvasX: handler.bubbleInfo.canvasX,
-    canvasY: handler.bubbleInfo.canvasY
-  });
+    canvasY: handler.bubbleInfo.canvasY,
+  })
 }
 
 /**
  * executeEventHandler - Execute event handler function with proper error handling
  */
 export function executeEventHandler(NoOpVm, handler, eventData, eventCommand, editScope) {
-  return permissionScopeHandler.plugin(editScope, () => NoOpVm.callFunction(getFunctionHandle(handler.handle), NoOpVm.undefined, eventCommand.name === 'textEditEnd' ? NoOpVm.deepWrap(eventCommand.event) : eventData));
+  return permissionScopeHandler.plugin(editScope, () => NoOpVm.callFunction(getFunctionHandle(handler.handle), NoOpVm.undefined, eventCommand.name === 'textEditEnd' ? NoOpVm.deepWrap(eventCommand.event) : eventData))
 }
 
 /**
  * trackEventHandlerPromise - Track promise for widget lifecycle management
  */
 export function trackEventHandlerPromise(NoOpVm, functionResult, widgetController) {
-  widgetController.trackPromise();
+  widgetController.trackPromise()
   return NoOpVm.unwrapPromise(functionResult).finally(() => {
-    widgetController.untrackPromise();
-  });
+    widgetController.untrackPromise()
+  })
 }
 
 /**
@@ -322,64 +326,66 @@ export function trackEventHandlerPromise(NoOpVm, functionResult, widgetControlle
  */
 async function processPromiseQueue(promiseQueue, widgetController, uiManager) {
   if (promiseQueue.length === 0) {
-    r5(widgetController, uiManager);
-    return;
+    r5(widgetController, uiManager)
+    return
   }
   try {
-    await Promise.all(promiseQueue);
-  } catch (error) {
+    await Promise.all(promiseQueue)
+  }
+  catch (error) {
     // Log error but don't throw to prevent widget termination
-    console.error('Widget event handler error:', error);
+    console.error('Widget event handler error:', error)
   }
 }
 
 // Helper function to extract widget event handlers
 export function extractWidgetEventHandlers(vNode, widgetNode, command, runtime) {
   const {
-    bubbledNodes
-  } = command;
-  const [rootNode, ...childNodes] = bubbledNodes.slice(0).reverse();
+    bubbledNodes,
+  } = command
+  const [rootNode, ...childNodes] = bubbledNodes.slice(0).reverse()
   if (rootNode?.id !== widgetNode.guid) {
-    throw new Error('Rendering a widget to the wrong node');
+    throw new Error('Rendering a widget to the wrong node')
   }
-  const handlers: any[] = [];
-  let currentVNode = vNode;
-  let currentNode = runtime.getNodeById(widgetNode.reversedChildrenGuids[widgetNode.reversedChildrenGuids.length - 1]);
+  const handlers: any[] = []
+  let currentVNode = vNode
+  let currentNode = runtime.getNodeById(widgetNode.reversedChildrenGuids[widgetNode.reversedChildrenGuids.length - 1])
   if (!currentNode) {
-    return [];
+    return []
   }
-  let currentBubbleNode = childNodes.shift();
+  let currentBubbleNode = childNodes.shift()
 
   // Helper to add event handler if it exists
   const addEventHandler = (vNode, bubbleInfo) => {
-    const eventName = command.name === 'click' ? 'onClick' : 'onTextEditEnd';
+    const eventName = command.name === 'click' ? 'onClick' : 'onTextEditEnd'
     if (vNode && vNode?.renderMetaData?.[eventName]) {
       handlers.push({
         bubbleInfo,
-        handle: vNode.renderMetaData[eventName]
-      });
+        handle: vNode.renderMetaData[eventName],
+      })
     }
-  };
+  }
 
   // Process root node
-  addEventHandler(currentVNode, currentBubbleNode);
+  addEventHandler(currentVNode, currentBubbleNode)
 
   // Process child nodes in hierarchy
   while (childNodes.length && currentNode.type === 'FRAME') {
-    currentBubbleNode = childNodes.shift();
+    currentBubbleNode = childNodes.shift()
     if (currentVNode && currentVNode.renderMetaData.children?.length) {
-      const childIndex = currentNode.children.findIndex(child => child.id === currentBubbleNode?.id);
+      const childIndex = currentNode.children.findIndex(child => child.id === currentBubbleNode?.id)
       if (childIndex === -1) {
-        break;
+        break
       }
-      currentVNode = MI(currentVNode.renderMetaData.children)[childIndex];
-      currentNode = currentNode.children[childIndex];
-      addEventHandler(currentVNode, currentBubbleNode);
-    } else {
-      break;
+      currentVNode = MI(currentVNode.renderMetaData.children)[childIndex]
+      currentNode = currentNode.children[childIndex]
+      addEventHandler(currentVNode, currentBubbleNode)
+    }
+    else {
+      break
     }
   }
-  return handlers.reverse();
+  return handlers.reverse()
 }
 async function updateWidgetProperties({
   vm,
@@ -388,109 +394,111 @@ async function updateWidgetProperties({
   propertyName,
   propertyValue,
   widgetManager,
-  editScopeLabel
+  editScopeLabel,
 }) {
   // r3 - Execute property change callback for widgets when properties are updated
 
   // Execute the callback function with the property change data
   const callbackResult = permissionScopeHandler.plugin(editScopeLabel, () => vm.callFunction(callbackHandle, vm.undefined, vm.deepWrap({
     propertyName,
-    propertyValue
-  })));
+    propertyValue,
+  })))
 
   // Handle execution failure
   if (callbackResult.type === 'FAILURE') {
-    throw new InternalError(callbackResult.error);
+    throw new InternalError(callbackResult.error)
   }
 
   // Show warning if callback doesn't return a promise
   if (!isPromiseLike(vm, callbackResult.handle)) {
-    r5(widgetManager, uiHandle);
+    r5(widgetManager, uiHandle)
   }
 
   // Wait for callback completion
   await wrapVmPromise({
     vm,
     promiseHandle: callbackResult.handle,
-    shouldRetainResult: false
-  });
+    shouldRetainResult: false,
+  })
 }
 async function handleStuckStatusChange({
   vm: NoOpVm,
   handler: stuckStatusHandler,
-  event: stuckEvent
+  event: stuckEvent,
 }) {
   // r6 - Handle stuck status changed event for widget nodes
 
   // Validate event type
   if (stuckEvent.name !== 'stuckStatusChanged') {
-    throw new Error('runStuckStatusChanged called with event that is not stuckStatusChanged');
+    throw new Error('runStuckStatusChanged called with event that is not stuckStatusChanged')
   }
 
   // Execute handler with event data
   const handlerResult = NoOpVm.callFunction(stuckStatusHandler, NoOpVm.undefined, NoOpVm.deepWrap({
     newHostId: stuckEvent.newHost,
-    oldHostId: stuckEvent.oldHost
-  }));
+    oldHostId: stuckEvent.oldHost,
+  }))
 
   // Handle execution failure
   if (handlerResult.type === 'FAILURE') {
-    throw new InternalError(handlerResult.error);
+    throw new InternalError(handlerResult.error)
   }
 
   // Wait for handler completion
   await wrapVmPromise({
     vm: NoOpVm,
     promiseHandle: handlerResult.handle,
-    shouldRetainResult: false
-  });
+    shouldRetainResult: false,
+  })
 }
 async function handleAttachedStickablesChange({
   vm: NoOpVm,
   handler: stickablesHandler,
-  event: stickablesEvent
+  event: stickablesEvent,
 }) {
   // r7 - Handle attached stickables changed event for widget nodes
 
   // Validate event type
   if (stickablesEvent.name !== 'attachedStickablesChanged') {
-    throw new Error('attachedStickablesChanged called with event that is not attachedStickablesChanged');
+    throw new Error('attachedStickablesChanged called with event that is not attachedStickablesChanged')
   }
 
   // Execute handler with stickables data
   const handlerResult = NoOpVm.callFunction(stickablesHandler, NoOpVm.undefined, NoOpVm.deepWrap({
     stuckNodeIds: stickablesEvent.addedNodes,
-    unstuckNodeIds: stickablesEvent.removedNodes
-  }));
+    unstuckNodeIds: stickablesEvent.removedNodes,
+  }))
 
   // Handle execution failure
   if (handlerResult.type === 'FAILURE') {
-    throw new InternalError(handlerResult.error);
+    throw new InternalError(handlerResult.error)
   }
 
   // Wait for handler completion
   await wrapVmPromise({
     vm: NoOpVm,
     promiseHandle: handlerResult.handle,
-    shouldRetainResult: false
-  });
+    shouldRetainResult: false,
+  })
 }
 export function defineAlertFunction(e: NoOpVm, _t: any, i: any) {
   // Only define alert if it doesn't exist or is undefined
   if (e.isEqual(e.undefined, e.getProp(e.global, 'alert'))) {
-    e.defineFunction(e.global, 'alert', 'alert', t => {
-      const message = e.toString(t);
+    e.defineFunction(e.global, 'alert', 'alert', (t) => {
+      const message = e.toString(t)
 
       // Format message with plugin context
-      const formattedMessage = i !== '' ? `From the plugin "${i}":
+      const formattedMessage = i !== ''
+        ? `From the plugin "${i}":
 
-${message}` : `From the current plugin:
+${message}`
+        : `From the current plugin:
 
-${message}`;
+${message}`
       // eslint-disable-next-line no-alert
-      alert(formattedMessage);
-      return e.undefined;
-    });
+      alert(formattedMessage)
+      return e.undefined
+    })
   }
 }
 
@@ -518,22 +526,22 @@ export function processNodeArrayForHierarchyOperation({
   parentArg: parentHandle,
   indexArg: indexHandle,
   getNode: nodeGetter,
-  enableResponsiveSetHierarchyMutations: allowResponsiveOperations
+  enableResponsiveSetHierarchyMutations: allowResponsiveOperations,
 }) {
   // Validate input array
-  validateNodeArray(nodeArray, operationName, NoOpVm);
+  validateNodeArray(nodeArray, operationName, NoOpVm)
 
   // Extract and validate nodes
-  const nodeIds = extractAndValidateNodes(nodeArray, operationName, NoOpVm, nodeGetter, allowResponsiveOperations);
+  const nodeIds = extractAndValidateNodes(nodeArray, operationName, NoOpVm, nodeGetter, allowResponsiveOperations)
 
   // Process parent and index parameters
-  const parentNode = processParentParameter(parentHandle, NoOpVm, nodeGetter);
-  const insertionIndex = processIndexParameter(indexHandle, operationName, NoOpVm);
+  const parentNode = processParentParameter(parentHandle, NoOpVm, nodeGetter)
+  const insertionIndex = processIndexParameter(indexHandle, operationName, NoOpVm)
   return {
     nodeIds,
     parent: parentNode,
-    index: insertionIndex
-  };
+    index: insertionIndex,
+  }
 }
 
 /**
@@ -541,11 +549,11 @@ export function processNodeArrayForHierarchyOperation({
  */
 export function validateNodeArray(nodeArray, operationName, NoOpVm) {
   if (!NoOpVm.isArray(nodeArray)) {
-    throw new TypeError(`First argument to ${operationName}() must be an array`);
+    throw new TypeError(`First argument to ${operationName}() must be an array`)
   }
-  const arrayLength = NoOpVm.getNumberProp(nodeArray, 'length');
+  const arrayLength = NoOpVm.getNumberProp(nodeArray, 'length')
   if (arrayLength < 1) {
-    throw new Error(`First argument to ${operationName}() must be an array of at least one node`);
+    throw new Error(`First argument to ${operationName}() must be an array of at least one node`)
   }
 }
 
@@ -553,26 +561,26 @@ export function validateNodeArray(nodeArray, operationName, NoOpVm) {
  * extractAndValidateNodes - Extract node GUIDs and validate responsive set constraints
  */
 export function extractAndValidateNodes(nodeArray, operationName, NoOpVm, nodeGetter, allowResponsiveOperations) {
-  const arrayLength = NoOpVm.getNumberProp(nodeArray, 'length');
-  const nodeIds: string[] = [];
+  const arrayLength = NoOpVm.getNumberProp(nodeArray, 'length')
+  const nodeIds: string[] = []
   for (let nodeIndex = 0; nodeIndex < arrayLength; nodeIndex++) {
-    const nodeHandle = NoOpVm.getProp(nodeArray, nodeIndex.toString());
-    const targetNode = nodeGetter(nodeHandle);
+    const nodeHandle = NoOpVm.getProp(nodeArray, nodeIndex.toString())
+    const targetNode = nodeGetter(nodeHandle)
 
     // Validate responsive set constraints
     if (targetNode.isOrInResponsiveSet && !allowResponsiveOperations) {
-      throw new Error(`Cannot ${operationName} nodes in a webpage`);
+      throw new Error(`Cannot ${operationName} nodes in a webpage`)
     }
-    nodeIds.push(targetNode.guid);
+    nodeIds.push(targetNode.guid)
   }
-  return nodeIds;
+  return nodeIds
 }
 
 /**
  * processParentParameter - Process optional parent node parameter
  */
 export function processParentParameter(parentHandle, NoOpVm, nodeGetter) {
-  return NoOpVm.isUndefined(parentHandle) ? undefined : nodeGetter(parentHandle);
+  return NoOpVm.isUndefined(parentHandle) ? undefined : nodeGetter(parentHandle)
 }
 
 /**
@@ -580,70 +588,70 @@ export function processParentParameter(parentHandle, NoOpVm, nodeGetter) {
  */
 export function processIndexParameter(indexHandle, operationName, NoOpVm) {
   if (NoOpVm.isUndefined(indexHandle)) {
-    return -1;
+    return -1
   }
   return validateWithZSchema({
     vm: NoOpVm,
     handle: indexHandle,
     zSchema: FigmaSchema.PositiveInteger,
-    property: `${operationName} index`
-  });
+    property: `${operationName} index`,
+  })
 }
 export const RESTRICTED_TRIGGERS = {
   NO_UI: new Set(['codegen', 'related-link-preview', 'textreview']),
-  NO_CHECKOUT: new Set(['codegen', 'linkpreview', 'textreview'])
-};
-let ar = new Set(['codegen', 'linkpreview', 'textreview']);
-let as = ['close', 'selectionchange', 'currentpagechange', 'drop', 'run', 'documentchange', 'textreview', 'slidesviewchange'].concat(['timerstart', 'timerstop', 'timerpause', 'timerresume', 'timerdone', 'timeradjust']);
-let ao = [];
-let al = ['message'];
-let ad = ['input'];
-let ac = [FEditorType.Design, FEditorType.Whiteboard, FEditorType.DevHandoff, FEditorType.Slides, FEditorType.Sites, FEditorType.Illustration, FEditorType.Cooper];
+  NO_CHECKOUT: new Set(['codegen', 'linkpreview', 'textreview']),
+}
+let ar = new Set(['codegen', 'linkpreview', 'textreview'])
+let as = ['close', 'selectionchange', 'currentpagechange', 'drop', 'run', 'documentchange', 'textreview', 'slidesviewchange'].concat(['timerstart', 'timerstop', 'timerpause', 'timerresume', 'timerdone', 'timeradjust'])
+let ao = []
+let al = ['message']
+let ad = ['input']
+let ac = [FEditorType.Design, FEditorType.Whiteboard, FEditorType.DevHandoff, FEditorType.Slides, FEditorType.Sites, FEditorType.Illustration, FEditorType.Cooper]
 class PluginRuntime {
-  vm: NoOpVm;
-  options: PluginOptions;
-  visualBellCounter: number;
-  eventHandlers: Map<string, any[]>;
-  eventHandlerTimeouts: Map<string, any>;
-  scheduledEvents: Map<string, Fn>;
-  runningSyncEvent: string | null;
-  runningCloseEventHandler: boolean;
-  previousSelection: string[];
-  previousSelectedTextRangeJson: string;
-  onMessageCallback?: Fn;
-  queryMode: boolean;
-  checkoutRequested: boolean;
-  widgetManager: WidgetManager | undefined;
-  skipInvisibleInstanceChildren: boolean;
-  textReviewRequestRejects: number;
-  isTextReviewRequestModalOpen: boolean;
-  isWidget: boolean;
-  privateSceneGraph: TSSceneGraph;
-  styleManager: StyleManager;
-  imageStore: ImageStore;
-  videoStore: VideoStore;
-  documentAccessState: DocumentAccessState;
-  _hasRegisteredWidgetFunction: boolean;
-  fullscreenEditorType: any;
-  mixedSentinel: any;
-  runtimeOptions: PluginRuntimeOptions;
-  nodeFactory: NodeFactory;
-  styleFactory: StyleFactory;
-  variableFactory: VariableFactory;
-  variableCollectionFactory: any;
-  annotationCategoryFactory: any;
-  uiHandle: PluginUIManager | DummyUIManager;
+  vm: NoOpVm
+  options: PluginOptions
+  visualBellCounter: number
+  eventHandlers: Map<string, any[]>
+  eventHandlerTimeouts: Map<string, any>
+  scheduledEvents: Map<string, Fn>
+  runningSyncEvent: string | null
+  runningCloseEventHandler: boolean
+  previousSelection: string[]
+  previousSelectedTextRangeJson: string
+  onMessageCallback?: Fn
+  queryMode: boolean
+  checkoutRequested: boolean
+  widgetManager: WidgetManager | undefined
+  skipInvisibleInstanceChildren: boolean
+  textReviewRequestRejects: number
+  isTextReviewRequestModalOpen: boolean
+  isWidget: boolean
+  privateSceneGraph: TSSceneGraph
+  styleManager: StyleManager
+  imageStore: ImageStore
+  videoStore: VideoStore
+  documentAccessState: DocumentAccessState
+  _hasRegisteredWidgetFunction: boolean
+  fullscreenEditorType: any
+  mixedSentinel: any
+  runtimeOptions: PluginRuntimeOptions
+  nodeFactory: NodeFactory
+  styleFactory: StyleFactory
+  variableFactory: VariableFactory
+  variableCollectionFactory: any
+  annotationCategoryFactory: any
+  uiHandle: PluginUIManager | DummyUIManager
   authCallback = this.createPromiseCallback({
-    makeInputEvent: e => {
-      let t = this.vm.newObject();
-      this.vm.setProp(t, 'links', this.vm.deepWrap(e));
-      return t;
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      this.vm.setProp(t, 'links', this.vm.deepWrap(e))
+      return t
     },
     eventName: 'auth',
     zResultSchema: FigmaSchema.AuthResultSchema,
     rejectMessage: 'Promise returned from \'auth\' event rejected. Unable to authenticate.',
-    defaultResult: null
-  });
+    defaultResult: null,
+  })
 
   /**
    * getNode - Retrieve a node, style, variable, or variable collection by VM handle.
@@ -652,63 +660,63 @@ class PluginRuntime {
    * @throws ApplicationError or TypeError if not found or invalid.
    */
   getNode = (handle: INoOpVm<any>): any => {
-    const vm = this.vm;
-    const sceneGraph = this.privateSceneGraph;
+    const vm = this.vm
+    const sceneGraph = this.privateSceneGraph
     if (!vm.isObject(handle)) {
-      throw new TypeError(`Expected node, got ${vm.isNull(handle) ? 'null' : vm.typeof(handle)}`);
+      throw new TypeError(`Expected node, got ${vm.isNull(handle) ? 'null' : vm.typeof(handle)}`)
     }
-    const idHandle = vm.getProp(handle, 'id');
+    const idHandle = vm.getProp(handle, 'id')
     if (!vm.isString(idHandle)) {
-      throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`);
+      throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`)
     }
-    const id = vm.toString(idHandle);
+    const id = vm.toString(idHandle)
 
     // Style node
     if (M7(id)) {
-      const style = this.styleManager.get(id);
+      const style = this.styleManager.get(id)
       if (!style) {
-        throw new ApplicationError(`The style with id ${JSON.stringify(id)} does not exist`);
+        throw new ApplicationError(`The style with id ${JSON.stringify(id)} does not exist`)
       }
-      return style;
+      return style
     }
 
     // Variable node
-    const variableId = sD.fromString(id);
+    const variableId = VariableIdHandler.fromString(id)
     if (variableId) {
-      const variable = sceneGraph.getVariableNode(variableId);
+      const variable = sceneGraph.getVariableNode(variableId)
       if (variable === undefined) {
-        throw new ApplicationError(`The variable with id ${JSON.stringify(id)} does not exist`);
+        throw new ApplicationError(`The variable with id ${JSON.stringify(id)} does not exist`)
       }
-      return variable;
+      return variable
     }
 
     // Variable collection node
-    const collectionId = gr.fromString(id);
+    const collectionId = VariableSetIdCompatHandler.fromString(id)
     if (collectionId) {
-      const collection = sceneGraph.getVariableCollectionNode(collectionId);
+      const collection = sceneGraph.getVariableCollectionNode(collectionId)
       if (collection === undefined) {
-        throw new ApplicationError(`The variable collection with id ${JSON.stringify(id)} does not exist`);
+        throw new ApplicationError(`The variable collection with id ${JSON.stringify(id)} does not exist`)
       }
-      return collection;
+      return collection
     }
 
     // Regular node by GUID path
     if (sceneGraph.isDeveloperFriendlyIdAGuidPath(id)) {
-      const guid = sceneGraph.guidFromDeveloperFriendlyId(id);
-      const node = guid ? sceneGraph.get(guid) : undefined;
+      const guid = sceneGraph.guidFromDeveloperFriendlyId(id)
+      const node = guid ? sceneGraph.get(guid) : undefined
       if (!node) {
-        throw new ApplicationError(`The node (instance sublayer or table cell) with id ${JSON.stringify(id)} does not exist`);
+        throw new ApplicationError(`The node (instance sublayer or table cell) with id ${JSON.stringify(id)} does not exist`)
       }
-      return node;
+      return node
     }
 
     // Fallback: get node by ID
-    const node = getNodeById(id, sceneGraph);
+    const node = getNodeById(id, sceneGraph)
     if (node.isInWidget && !(getFeatureFlags().widgets_children_trait_for_test || vm.vmType === 'scopednoopvm')) {
-      throw new ApplicationError(`The node (instance sublayer) with id ${JSON.stringify(id)} does not exist`);
+      throw new ApplicationError(`The node (instance sublayer) with id ${JSON.stringify(id)} does not exist`)
     }
-    return node;
-  };
+    return node
+  }
 
   /**
    * getVariableNode - Retrieve a variable node by VM handle.
@@ -717,26 +725,26 @@ class PluginRuntime {
    * @throws ApplicationError or TypeError if not found or invalid.
    */
   getVariableNode = (handle: INoOpVm<any>): any => {
-    const vm = this.vm;
-    const sceneGraph = this.privateSceneGraph;
+    const vm = this.vm
+    const sceneGraph = this.privateSceneGraph
     if (!vm.isObject(handle)) {
-      throw new TypeError(`Expected node, got ${vm.isNull(handle) ? 'null' : vm.typeof(handle)}`);
+      throw new TypeError(`Expected node, got ${vm.isNull(handle) ? 'null' : vm.typeof(handle)}`)
     }
-    const idHandle = vm.getProp(handle, 'id');
+    const idHandle = vm.getProp(handle, 'id')
     if (!vm.isString(idHandle)) {
-      throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`);
+      throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`)
     }
-    const id = vm.toString(idHandle);
-    const variableId = sD.fromString(id);
+    const id = vm.toString(idHandle)
+    const variableId = VariableIdHandler.fromString(id)
     if (!variableId) {
-      throw new Error(`The variable id ${JSON.stringify(id)} is not valid`);
+      throw new Error(`The variable id ${JSON.stringify(id)} is not valid`)
     }
-    const variable = sceneGraph.getVariableNode(variableId);
+    const variable = sceneGraph.getVariableNode(variableId)
     if (variable === undefined) {
-      throw new ApplicationError(`The variable with id ${JSON.stringify(id)} does not exist`);
+      throw new ApplicationError(`The variable with id ${JSON.stringify(id)} does not exist`)
     }
-    return variable;
-  };
+    return variable
+  }
 
   /**
    * getVariableCollectionNode - Retrieve a variable collection node by VM handle.
@@ -745,26 +753,26 @@ class PluginRuntime {
    * @throws ApplicationError or TypeError if not found or invalid.
    */
   getVariableCollectionNode = (handle: INoOpVm<any>): any => {
-    const vm = this.vm;
-    const sceneGraph = this.privateSceneGraph;
+    const vm = this.vm
+    const sceneGraph = this.privateSceneGraph
     if (!vm.isObject(handle)) {
-      throw new TypeError(`Expected node, got ${vm.isNull(handle) ? 'null' : vm.typeof(handle)}`);
+      throw new TypeError(`Expected node, got ${vm.isNull(handle) ? 'null' : vm.typeof(handle)}`)
     }
-    const idHandle = vm.getProp(handle, 'id');
+    const idHandle = vm.getProp(handle, 'id')
     if (!vm.isString(idHandle)) {
-      throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`);
+      throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`)
     }
-    const id = vm.toString(idHandle);
-    const collectionId = gr.fromString(id);
+    const id = vm.toString(idHandle)
+    const collectionId = VariableSetIdCompatHandler.fromString(id)
     if (!collectionId) {
-      throw new Error(`The variable collection id ${JSON.stringify(id)} is not valid`);
+      throw new Error(`The variable collection id ${JSON.stringify(id)} is not valid`)
     }
-    const collection = sceneGraph.getVariableCollectionNode(collectionId);
+    const collection = sceneGraph.getVariableCollectionNode(collectionId)
     if (collection === undefined) {
-      throw new ApplicationError(`The variable collection with id ${JSON.stringify(id)} does not exist`);
+      throw new ApplicationError(`The variable collection with id ${JSON.stringify(id)} does not exist`)
     }
-    return collection;
-  };
+    return collection
+  }
 
   /**
    * getAnnotationCategory - Retrieve an annotation category by VM handle.
@@ -773,141 +781,149 @@ class PluginRuntime {
    * @throws Error or TypeError if not found or invalid.
    */
   getAnnotationCategory = (handle: INoOpVm<any>): any => {
-    const vm = this.vm;
-    const sceneGraph = this.privateSceneGraph;
+    const vm = this.vm
+    const sceneGraph = this.privateSceneGraph
     if (!vm.isObject(handle)) {
-      throw new TypeError(`Expected node, got ${vm.isNull(handle) ? 'null' : vm.typeof(handle)}`);
+      throw new TypeError(`Expected node, got ${vm.isNull(handle) ? 'null' : vm.typeof(handle)}`)
     }
-    const idHandle = vm.getProp(handle, 'id');
+    const idHandle = vm.getProp(handle, 'id')
     if (!vm.isString(idHandle)) {
-      throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`);
+      throw new TypeError(`Expected node id to be a string, got ${vm.typeof(idHandle)}`)
     }
-    const id = vm.toString(idHandle);
+    const id = vm.toString(idHandle)
     if (!isValidSessionLocalID(parseSessionLocalID(id))) {
-      throw new Error(`The annotation category id ${JSON.stringify(id)} is not valid`);
+      throw new Error(`The annotation category id ${JSON.stringify(id)} is not valid`)
     }
-    const categories = sceneGraph.getRoot().annotationCategories;
+    const categories = sceneGraph.getRoot().annotationCategories
     if (categories === null) {
-      throw new Error('Annotation categories have not been initialized');
+      throw new Error('Annotation categories have not been initialized')
     }
-    const category = categories.find(cat => cat.id === id);
+    const category = categories.find(cat => cat.id === id)
     if (category === undefined) {
-      throw new Error(`The annotation category with id ${JSON.stringify(id)} does not exist`);
+      throw new Error(`The annotation category with id ${JSON.stringify(id)} does not exist`)
     }
-    return category;
-  };
+    return category
+  }
+
   spellCheckCallback = this.createPromiseCallback({
-    makeInputEvent: e => {
-      let t = this.vm.newObject();
-      this.vm.setProp(t, 'text', this.vm.newString(e));
-      return t;
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      this.vm.setProp(t, 'text', this.vm.newString(e))
+      return t
     },
     eventName: 'textreview',
     zResultSchema: FigmaSchema.TextReviewResultSchema,
     defaultResult: [],
-    rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.'
-  });
+    rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.',
+  })
+
   legacyCodegenCallback = this.createPromiseCallback({
-    makeInputEvent: e => {
-      let t = this.vm.newObject();
-      let i = this.nodeFactory.createNode(e, 'codegen');
-      this.vm.setProp(t, 'node', i);
-      return t;
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      let i = this.nodeFactory.createNode(e, 'codegen')
+      this.vm.setProp(t, 'node', i)
+      return t
     },
     eventName: 'codegen',
     zResultSchema: FigmaSchema.CodegenResultSchema,
     defaultResult: [],
-    rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.'
-  });
+    rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.',
+  })
+
   codegenCallback = this.createPromiseCallback({
-    makeInputEvent: e => {
-      let t = this.vm.newObject();
-      let i = this.nodeFactory.createNode(e, 'generate');
-      this.vm.setProp(t, 'node', i);
-      this.vm.setProp(t, 'language', this.vm.newString(this.getCodegenLanguage()));
-      return t;
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      let i = this.nodeFactory.createNode(e, 'generate')
+      this.vm.setProp(t, 'node', i)
+      this.vm.setProp(t, 'language', this.vm.newString(this.getCodegenLanguage()))
+      return t
     },
     eventName: 'generate',
     zResultSchema: FigmaSchema.CodegenResultSchema,
     defaultResult: [],
-    rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.'
-  });
+    rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.',
+  })
+
   linkPreviewCallback = this.createPromiseCallback({
-    makeInputEvent: e => {
-      let t = this.vm.newObject();
-      this.vm.setProp(t, 'link', this.vm.deepWrap(e));
-      return t;
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      this.vm.setProp(t, 'link', this.vm.deepWrap(e))
+      return t
     },
     eventName: 'linkpreview',
     zResultSchema: FigmaSchema.LinkPreviewResultSchema,
     defaultResult: null,
-    rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.'
-  });
+    rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.',
+  })
+
   constructor(vm: NoOpVm, options: PluginOptions) {
-    this.vm = vm;
-    this.options = options;
-    this.visualBellCounter = 0;
-    this.eventHandlers = new Map();
-    this.eventHandlerTimeouts = new Map();
-    this.scheduledEvents = new Map();
-    this.runningSyncEvent = null;
-    this.runningCloseEventHandler = false;
-    this.previousSelection = [];
-    this.previousSelectedTextRangeJson = 'null';
-    this.onMessageCallback = undefined;
-    this.queryMode = false;
-    this.checkoutRequested = false;
-    this.widgetManager = undefined;
-    this.skipInvisibleInstanceChildren = false;
-    this.textReviewRequestRejects = 0;
-    this.isTextReviewRequestModalOpen = false;
-    this.isWidget = this.options.apiMode?.type === 'WIDGET';
-    this.privateSceneGraph = options.sceneGraph ?? getSceneGraphInstance();
-    this.styleManager = new StyleManager(this.privateSceneGraph);
-    this.imageStore = new ImageStore();
-    this.videoStore = new VideoStore();
+    this.vm = vm
+    this.options = options
+    this.visualBellCounter = 0
+    this.eventHandlers = new Map()
+    this.eventHandlerTimeouts = new Map()
+    this.scheduledEvents = new Map()
+    this.runningSyncEvent = null
+    this.runningCloseEventHandler = false
+    this.previousSelection = []
+    this.previousSelectedTextRangeJson = 'null'
+    this.onMessageCallback = undefined
+    this.queryMode = false
+    this.checkoutRequested = false
+    this.widgetManager = undefined
+    this.skipInvisibleInstanceChildren = false
+    this.textReviewRequestRejects = 0
+    this.isTextReviewRequestModalOpen = false
+    this.isWidget = this.options.apiMode?.type === 'WIDGET'
+    this.privateSceneGraph = options.sceneGraph ?? getSceneGraphInstance()
+    this.styleManager = new StyleManager(this.privateSceneGraph)
+    this.imageStore = new ImageStore()
+    this.videoStore = new VideoStore()
     this.documentAccessState = new DocumentAccessState({
       incrementalMode: this.options.incrementalSafeApi || false,
       stats: options.stats,
-      allowIncrementalUnsafeApiCalls: !!options.allowIncrementalUnsafeApiCalls
-    });
-    W5(this.pluginPageLoaded);
-    Ql(this.getAccessiblePages);
-    this._hasRegisteredWidgetFunction = false;
+      allowIncrementalUnsafeApiCalls: !!options.allowIncrementalUnsafeApiCalls,
+    })
+    W5(this.pluginPageLoaded)
+    Ql(this.getAccessiblePages)
+    this._hasRegisteredWidgetFunction = false
     if (this.isWidget) {
       const {
         runtimeBridge,
-        shutdownCallback
-      } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(options.pluginID, vm);
-      this.widgetManager = new WidgetManager(vm, options.pluginID, runtimeBridge);
+        shutdownCallback,
+      } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(options.pluginID, vm)
+      this.widgetManager = new WidgetManager(vm, options.pluginID, runtimeBridge)
       if (shutdownCallback) {
-        this.widgetManager.addShutdownAction(shutdownCallback);
+        this.widgetManager.addShutdownAction(shutdownCallback)
       }
     }
-    let selectedView = debugState.getState().selectedView;
+    let selectedView = debugState.getState().selectedView
     if (ac.includes(selectedView.editorType) || vm.vmType === 'scopednoopvm') {
-      this.fullscreenEditorType = selectedView.editorType;
-    } else {
-      throw new Error(`Unsupported editor type: ${selectedView.editorType}`);
+      this.fullscreenEditorType = selectedView.editorType
     }
-    this.fullscreenEditorType = selectedView.editorType;
-    this.mixedSentinel = vm.newSymbol('figma.mixed');
-    this.setSkipInvisibleInstanceChildren(this.fullscreenEditorType === FEditorType.DevHandoff || options.apiMode.type === 'WIDGET_RECONCILER');
-    vm.retainHandle(this.mixedSentinel);
-    this.runtimeOptions = getInitialOptions().ext_lego_plugins_runmode ? {
-      allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
-      iframeId: getPluginIframeMode({
-        runMode: this.getRunMode()
-      }),
-      allowInitiateCheckout: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode())
-    } : {
-      allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(options.triggeredFrom),
-      iframeId: getPluginIframeMode({
-        triggeredFrom: options.triggeredFrom
-      }),
-      allowInitiateCheckout: !options.triggeredFrom || !RESTRICTED_TRIGGERS.NO_UI.has(options.triggeredFrom)
-    };
-    vm.retainHandle(this.mixedSentinel);
+    else {
+      throw new Error(`Unsupported editor type: ${selectedView.editorType}`)
+    }
+    this.fullscreenEditorType = selectedView.editorType
+    this.mixedSentinel = vm.newSymbol('figma.mixed')
+    this.setSkipInvisibleInstanceChildren(this.fullscreenEditorType === FEditorType.DevHandoff || options.apiMode.type === 'WIDGET_RECONCILER')
+    vm.retainHandle(this.mixedSentinel)
+    this.runtimeOptions = getInitialOptions().ext_lego_plugins_runmode
+      ? {
+          allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
+          iframeId: getPluginIframeMode({
+            runMode: this.getRunMode(),
+          }),
+          allowInitiateCheckout: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
+        }
+      : {
+          allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(options.triggeredFrom),
+          iframeId: getPluginIframeMode({
+            triggeredFrom: options.triggeredFrom,
+          }),
+          allowInitiateCheckout: !options.triggeredFrom || !RESTRICTED_TRIGGERS.NO_UI.has(options.triggeredFrom),
+        }
+    vm.retainHandle(this.mixedSentinel)
     this.nodeFactory = new NodeFactory(vm, {
       pluginID: options.pluginID,
       pluginVersionID: options.pluginVersionID,
@@ -930,7 +946,7 @@ class PluginRuntime {
       addEventHandlersTo: this.addEventHandlersTo,
       incLoadingErrorLogger: new IncLoadingErrorLogger({
         pluginID: options.pluginID,
-        pluginVersionID: options.pluginVersionID
+        pluginVersionID: options.pluginVersionID,
       }),
       openFileKey: options.openFileKey,
       apiMode: options.apiMode,
@@ -943,9 +959,9 @@ class PluginRuntime {
       allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
       styleManager: this.styleManager,
       isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
-      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations
-    });
-    Q4(this.getAllAccessedGuids);
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
+    Q4(this.getAllAccessedGuids)
     this.styleFactory = new StyleFactory({
       vm,
       stats: this.options.stats,
@@ -978,8 +994,8 @@ class PluginRuntime {
       allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
       styleManager: this.styleManager,
       isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
-      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations
-    });
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
     this.variableFactory = new VariableFactory({
       vm,
       stats: this.options.stats,
@@ -1013,8 +1029,8 @@ class PluginRuntime {
       allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
       styleManager: this.styleManager,
       isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
-      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations
-    });
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
     this.variableCollectionFactory = new VariableCollectionFactory({
       vm,
       stats: options.stats,
@@ -1048,8 +1064,8 @@ class PluginRuntime {
       allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
       styleManager: this.styleManager,
       isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
-      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations
-    });
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
     this.annotationCategoryFactory = new AnnotationCategoryFactory({
       vm,
       stats: this.options.stats,
@@ -1083,44 +1099,47 @@ class PluginRuntime {
       allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
       styleManager: this.styleManager,
       isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
-      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations
-    });
-    let n = this.options.apiMode;
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
+    let n = this.options.apiMode
     const getUI = function (e: PluginOptions['apiMode']) {
       switch (e.type) {
         case 'GLOBAL_API':
         case 'CONSOLE_SHIM':
         case 'SECURITY_CHECK':
-          return !1;
+          return !1
         case 'WIDGET_RECONCILER':
-          return !0;
+          return !0
         case 'WIDGET':
         case 'PLUGIN':
-          return e.noOpUI;
+          return e.noOpUI
       }
-    };
+    }
     if (n.type === 'CONSOLE_SHIM') {
-      this.uiHandle = n.uiHandle;
-    } else if (getUI(n)) {
-      this.uiHandle = new DummyUIManager();
-    } else {
-      let t = n.type !== 'GLOBAL_API' && n.type !== 'SECURITY_CHECK';
-      this.uiHandle = new PluginUIManager(vm.vmType, this.options.pluginID, this.options.titleIconURL, this.options.name, this.options.validatedPermissions.permissions, this.isWidget, this.isWidget ? JSON.parse(this.options.command || '{}') : {}, t, this.uiCancelCallback, this.iframeMessageHandler, this.options.allowedDomains, this.options.isLocal, this.options.triggeredFrom, this.options.capabilities);
+      this.uiHandle = n.uiHandle
+    }
+    else if (getUI(n)) {
+      this.uiHandle = new DummyUIManager()
+    }
+    else {
+      let t = n.type !== 'GLOBAL_API' && n.type !== 'SECURITY_CHECK'
+      this.uiHandle = new PluginUIManager(vm.vmType, this.options.pluginID, this.options.titleIconURL, this.options.name, this.options.validatedPermissions.permissions, this.isWidget, this.isWidget ? JSON.parse(this.options.command || '{}') : {}, t, this.uiCancelCallback, this.iframeMessageHandler, this.options.allowedDomains, this.options.isLocal, this.options.triggeredFrom, this.options.capabilities)
     }
     if (this.vm instanceof NoOpVm || this.vm as any instanceof ScopedNoOpVm) {
       // No additional event callbacks needed for NoOp VMs
-    } else {
-      LL(this.selectionCallback);
-      Xx(this.pageCallback);
-      Sf(this.timerCallback);
-      KB(this.dropCallback);
-      _$$i(this.codegenPreferencesChangeCallback);
-      _C(this.slidesViewChangeCallback);
     }
-    this.options.addShutdownAction(e => this.tearDown(e));
-    this.previousSelection = this.privateSceneGraph.getDirectlySelectedNodes().map(e => e.guid);
-    PluginHelpers.resetSelectionCouldBeDirty();
-    this.createAPI();
+    else {
+      LL(this.selectionCallback)
+      Xx(this.pageCallback)
+      Sf(this.timerCallback)
+      KB(this.dropCallback)
+      _$$i(this.codegenPreferencesChangeCallback)
+      _C(this.slidesViewChangeCallback)
+    }
+    this.options.addShutdownAction(e => this.tearDown(e))
+    this.previousSelection = this.privateSceneGraph.getDirectlySelectedNodes().map(e => e.guid)
+    PluginHelpers.resetSelectionCouldBeDirty()
+    this.createAPI()
   }
 
   /**
@@ -1172,7 +1191,7 @@ class PluginRuntime {
     incrementalSafeApi,
     allowIncrementalUnsafeApiCalls,
     isAllowedInWidgetRender = true,
-    hasEditScope = true
+    hasEditScope = true,
   }) {
     // Define main property with getter/setter
     this.defineMainProperty({
@@ -1191,8 +1210,8 @@ class PluginRuntime {
       incrementalSafeApiSetMetricsKey,
       allowIncrementalUnsafeApiCalls,
       isAllowedInWidgetRender,
-      hasEditScope
-    });
+      hasEditScope,
+    })
 
     // Define incremental-safe getter if configured
     if (incrementalSafeApiKey && incrementalSafeApiMetricsKey) {
@@ -1205,8 +1224,8 @@ class PluginRuntime {
         resolveValue,
         resolveValueIncremental,
         isAllowedInWidgetRender,
-        hasEditScope
-      });
+        hasEditScope,
+      })
     }
 
     // Define incremental-safe setter if configured
@@ -1221,8 +1240,8 @@ class PluginRuntime {
         setValueIncremental,
         canWriteInReadOnly,
         isAllowedInWidgetRender,
-        hasEditScope
-      });
+        hasEditScope,
+      })
     }
   }
 
@@ -1245,9 +1264,9 @@ class PluginRuntime {
     incrementalSafeApiSetMetricsKey,
     allowIncrementalUnsafeApiCalls,
     isAllowedInWidgetRender,
-    hasEditScope
+    hasEditScope,
   }) {
-    const self = this;
+    const self = this
     this.defineVmProp({
       handle,
       key,
@@ -1256,21 +1275,23 @@ class PluginRuntime {
         enumerable,
         get() {
           if (incrementalSafeApi && incrementalSafeApiMetricsKey && !retainGetter) {
-            checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey);
+            checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
           }
-          return resolveValue(parseThis(this));
+          return resolveValue(parseThis(this))
         },
-        set: setValue ? function (value) {
-          if (incrementalSafeApi && setValueIncremental) {
-            checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, `${metricsKey} =`, incrementalSafeApiSetMetricsKey);
+        set: setValue
+          ? function (value) {
+            if (incrementalSafeApi && setValueIncremental) {
+              checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, `${metricsKey} =`, incrementalSafeApiSetMetricsKey)
+            }
+            return setValue(parseThis(self), value)
           }
-          return setValue(parseThis(self), value);
-        } : undefined
+          : undefined,
       },
       canWriteInReadOnly,
       isAllowedInWidgetRender,
-      hasEditScope
-    });
+      hasEditScope,
+    })
   }
 
   /**
@@ -1285,32 +1306,32 @@ class PluginRuntime {
     resolveValue,
     resolveValueIncremental,
     isAllowedInWidgetRender,
-    hasEditScope
+    hasEditScope,
   }) {
-    const vm = this.vm;
+    const vm = this.vm
     this.defineVmFunction({
       handle,
       key,
       metricsKey,
       cb() {
-        const element = parseThis(this);
+        const element = parseThis(this)
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
+          reject,
+        } = vm.newPromise()
         vm.registerPromise(prepareDocument(element)).then(() => {
-          const result = resolveValueIncremental ? resolveValueIncremental(element) : resolveValue(element);
-          resolve(result);
-        }).catch(error => {
-          reject(vm.newString(error.message));
-        });
-        return promise;
+          const result = resolveValueIncremental ? resolveValueIncremental(element) : resolveValue(element)
+          resolve(result)
+        }).catch((error) => {
+          reject(vm.newString(error.message))
+        })
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender,
-      hasEditScope
-    });
+      hasEditScope,
+    })
   }
 
   /**
@@ -1326,35 +1347,35 @@ class PluginRuntime {
     setValueIncremental,
     canWriteInReadOnly,
     isAllowedInWidgetRender,
-    hasEditScope
+    hasEditScope,
   }) {
-    const vm = this.vm;
+    const vm = this.vm
     this.defineVmFunction({
       handle,
       key,
       metricsKey,
       cb(value) {
-        const element = parseThis(this);
-        const parsedValue = parseIncrementalValueArg(value);
+        const element = parseThis(this)
+        const parsedValue = parseIncrementalValueArg(value)
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
+          reject,
+        } = vm.newPromise()
         vm.registerPromise(prepareDocument(element)).then(() => {
           permissionScopeHandler.plugin(key, () => {
-            setValueIncremental(element, parsedValue);
-            resolve(vm.undefined);
-          });
-        }).catch(error => {
-          reject(vm.newString(error.message));
-        });
-        return promise;
+            setValueIncremental(element, parsedValue)
+            resolve(vm.undefined)
+          })
+        }).catch((error) => {
+          reject(vm.newString(error.message))
+        })
+        return promise
       },
       isAllowedInReadOnly: canWriteInReadOnly,
       isAllowedInWidgetRender,
-      hasEditScope
-    });
+      hasEditScope,
+    })
   }
 
   /**
@@ -1380,29 +1401,29 @@ class PluginRuntime {
     isAllowedInReadOnly,
     isAllowedInWidgetRender = true,
     isAllowedInFocusViewInteractiveInspection = true,
-    hasEditScope = true
+    hasEditScope = true,
   }) => {
-    const self = this;
+    const self = this
     this.vm.defineFunction(handle, key, metricsKey, (...args) => {
       // Widget rendering restriction
       if (self.widgetManager?.isRunningWidgetFunction() && self.shouldLockDownPluginApiForWidgets() && !isAllowedInWidgetRender) {
-        return self.handleLockDownPluginApiError(`Widget Rendering Error: Cannot use "${key}" during widget rendering.`);
+        return self.handleLockDownPluginApiError(`Widget Rendering Error: Cannot use "${key}" during widget rendering.`)
       }
 
       // Read-only restriction
       if (self.isReadOnlyMode() && !isAllowedInReadOnly) {
-        throw new Error(`Can't call "${key}" in read-only mode`);
+        throw new Error(`Can't call "${key}" in read-only mode`)
       }
 
       // Focus view restriction
       if (!isAllowedInFocusViewInteractiveInspection && _$$np()) {
-        throw new Error(`Cannot call "${key}" in focus view with changes. Reset changes and try again.`);
+        throw new Error(`Cannot call "${key}" in focus view with changes. Reset changes and try again.`)
       }
 
       // Edit scope
-      return self.conditionalEditScope(hasEditScope, `plugin-${key}`, () => cb(args));
-    });
-  };
+      return self.conditionalEditScope(hasEditScope, `plugin-${key}`, () => cb(args))
+    })
+  }
 
   /**
    * defineVmIncrementalFunction - Define incremental VM function with safe API support
@@ -1437,48 +1458,48 @@ class PluginRuntime {
     incrementalSafeApi,
     allowIncrementalUnsafeApiCalls,
     isAllowedInWidgetRender = true,
-    hasEditScope = true
+    hasEditScope = true,
   }) => {
     // Main function
     this.defineVmFunction({
       handle,
       key,
       metricsKey,
-      cb: arg => {
+      cb: (arg) => {
         if (incrementalSafeApi && incrementalSafeApiMetricsKey) {
-          checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey);
+          checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
         }
-        return resolveValue(parseArg(arg));
+        return resolveValue(parseArg(arg))
       },
       isAllowedInReadOnly,
       isAllowedInWidgetRender,
-      hasEditScope
-    });
+      hasEditScope,
+    })
 
     // Incremental-safe variant
     this.defineVmFunction({
       handle,
       key: incrementalSafeApiKey,
       metricsKey: incrementalSafeApiMetricsKey,
-      cb: arg => {
-        const parsedArg = parseArg(arg);
+      cb: (arg) => {
+        const parsedArg = parseArg(arg)
         const {
           promise,
           resolve,
-          reject
-        } = this.vm.newPromise();
+          reject,
+        } = this.vm.newPromise()
         this.vm.registerPromise(prepareDocument(parsedArg)).then(() => {
-          resolve(resolveValue(parsedArg));
-        }).catch(error => {
-          reject(this.vm.newString(error.message));
-        });
-        return promise;
+          resolve(resolveValue(parsedArg))
+        }).catch((error) => {
+          reject(this.vm.newString(error.message))
+        })
+        return promise
       },
       isAllowedInReadOnly,
       isAllowedInWidgetRender,
-      hasEditScope
-    });
-  };
+      hasEditScope,
+    })
+  }
 
   /**
    * defineVmIncrementalMethod - Define incremental VM method with advanced argument handling
@@ -1515,9 +1536,9 @@ class PluginRuntime {
     incrementalSafeApi,
     allowIncrementalUnsafeApiCalls,
     isAllowedInWidgetRender = true,
-    hasEditScope = true
+    hasEditScope = true,
   }) => {
-    const vm = this.vm;
+    const vm = this.vm
 
     // Main method
     this.defineVmFunction({
@@ -1526,16 +1547,16 @@ class PluginRuntime {
       metricsKey,
       cb(...args) {
         if (incrementalSafeApi) {
-          checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey);
+          checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
         }
-        const thisContext = parseThis(this);
-        const parsedArgs = parseArg(thisContext, ...args);
-        return resolveValue(thisContext, parsedArgs);
+        const thisContext = parseThis(this)
+        const parsedArgs = parseArg(thisContext, ...args)
+        return resolveValue(thisContext, parsedArgs)
       },
       isAllowedInReadOnly,
       isAllowedInWidgetRender,
-      hasEditScope
-    });
+      hasEditScope,
+    })
 
     // Incremental-safe variant
     this.defineVmFunction({
@@ -1543,25 +1564,25 @@ class PluginRuntime {
       key: incrementalSafeApiKey,
       metricsKey: incrementalSafeApiMetricsKey,
       cb(...args) {
-        const thisContext = parseThis(this);
-        const parsedArgs = parseArg(thisContext, ...args);
+        const thisContext = parseThis(this)
+        const parsedArgs = parseArg(thisContext, ...args)
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
+          reject,
+        } = vm.newPromise()
         vm.registerPromise(prepareDocument(thisContext, parsedArgs)).then(() => {
-          resolve(permissionScopeHandler.plugin(incrementalSafeApiKey, () => resolveValue(thisContext, parsedArgs)));
-        }).catch(error => {
-          reject(vm.newString(error.message));
-        });
-        return promise;
+          resolve(permissionScopeHandler.plugin(incrementalSafeApiKey, () => resolveValue(thisContext, parsedArgs)))
+        }).catch((error) => {
+          reject(vm.newString(error.message))
+        })
+        return promise
       },
       isAllowedInReadOnly,
       isAllowedInWidgetRender,
-      hasEditScope
-    });
-  };
+      hasEditScope,
+    })
+  }
 
   /**
    * defineVmProp - Define a VM property with security and permission checks
@@ -1584,41 +1605,41 @@ class PluginRuntime {
     canWriteInReadOnly,
     isAllowedInFocusViewInteractiveInspection = true,
     isAllowedInWidgetRender = true,
-    hasEditScope = true
+    hasEditScope = true,
   }) => {
-    const self = this;
+    const self = this
     const desc = {
-      ...options
-    };
+      ...options,
+    }
     if (options.get) {
       desc.get = function () {
         // Widget rendering restriction
         if (self.widgetManager?.isRunningWidgetFunction() && self.shouldLockDownPluginApiForWidgets() && !isAllowedInWidgetRender) {
-          self.handleLockDownPluginApiError(`Widget Rendering Error: Cannot use "${key}" during widget rendering.`);
+          self.handleLockDownPluginApiError(`Widget Rendering Error: Cannot use "${key}" during widget rendering.`)
         }
-        return options.get.call(this);
-      };
+        return options.get.call(this)
+      }
     }
     if (options.set) {
       desc.set = function (value) {
         // Widget rendering restriction
         if (self.widgetManager?.isRunningWidgetFunction() && self.shouldLockDownPluginApiForWidgets() && !isAllowedInWidgetRender) {
-          self.handleLockDownPluginApiError(`Widget Rendering Error: Cannot use "${key}" during widget rendering.`);
+          self.handleLockDownPluginApiError(`Widget Rendering Error: Cannot use "${key}" during widget rendering.`)
         }
         // Read-only restriction
         if (self.isReadOnlyMode() && !canWriteInReadOnly) {
-          throw new Error(`Can't set "${key}" in read-only mode`);
+          throw new Error(`Can't set "${key}" in read-only mode`)
         }
         // Focus view restriction
         if (!isAllowedInFocusViewInteractiveInspection && _$$np()) {
-          throw new Error(`Cannot set "${key}" in focus view with changes. Reset changes and try again.`);
+          throw new Error(`Cannot set "${key}" in focus view with changes. Reset changes and try again.`)
         }
         // Edit scope
-        return self.conditionalEditScope(hasEditScope, `plugin-${key}`, () => options.set.call(this, value));
-      };
+        return self.conditionalEditScope(hasEditScope, `plugin-${key}`, () => options.set.call(this, value))
+      }
     }
-    this.vm.defineProp(handle, key, desc);
-  };
+    this.vm.defineProp(handle, key, desc)
+  }
 
   /**
    * addEventHandler - Add event handler with validation and setup
@@ -1634,32 +1655,32 @@ class PluginRuntime {
    */
   addEventHandler = (nodeHandle, eventType, handlerFunction, isOnceOnly, statsCategory) => {
     // Track event handler registration stats
-    this.options.stats.increment(isOnceOnly ? `${statsCategory}.once.${eventType}` : `${statsCategory}.on.${eventType}`);
+    this.options.stats.increment(isOnceOnly ? `${statsCategory}.once.${eventType}` : `${statsCategory}.on.${eventType}`)
 
     // Validate handler function
-    this.validateEventHandler(handlerFunction, eventType);
+    this.validateEventHandler(handlerFunction, eventType)
 
     // Get or create event handler list
-    const existingHandlers = this.eventHandlers.get(eventType) || [];
-    const isFirstHandler = existingHandlers.length === 0;
+    const existingHandlers = this.eventHandlers.get(eventType) || []
+    const isFirstHandler = existingHandlers.length === 0
 
     // Setup event-specific initialization
-    let pageGuid;
+    let pageGuid
     if (isFirstHandler) {
-      pageGuid = this.setupEventSpecificInitialization(eventType, nodeHandle);
+      pageGuid = this.setupEventSpecificInitialization(eventType, nodeHandle)
     }
 
     // Register the handler
-    this.registerEventHandler(eventType, handlerFunction, isOnceOnly, pageGuid);
+    this.registerEventHandler(eventType, handlerFunction, isOnceOnly, pageGuid)
 
     // Setup system callbacks for first handler
     if (isFirstHandler) {
-      this.setupSystemCallbacks(eventType);
+      this.setupSystemCallbacks(eventType)
     }
 
     // Process any scheduled events
-    this.processScheduledEvents(eventType);
-  };
+    this.processScheduledEvents(eventType)
+  }
 
   /**
    * validateEventHandler - Validate event handler function
@@ -1669,7 +1690,7 @@ class PluginRuntime {
    */
   validateEventHandler(handlerFunction, eventType) {
     if (!this.vm.isFunction(handlerFunction)) {
-      throw new TypeError(`${eventType} handler must be a function`);
+      throw new TypeError(`${eventType} handler must be a function`)
     }
   }
 
@@ -1683,13 +1704,13 @@ class PluginRuntime {
   setupEventSpecificInitialization(eventType, nodeHandle) {
     switch (eventType) {
       case 'documentchange':
-        return this.setupDocumentChangeEvent();
+        return this.setupDocumentChangeEvent()
       case 'stylechange':
-        return this.setupStyleChangeEvent();
+        return this.setupStyleChangeEvent()
       case 'nodechange':
-        return this.setupNodeChangeEvent(nodeHandle);
+        return this.setupNodeChangeEvent(nodeHandle)
       default:
-        return undefined;
+        return undefined
     }
   }
 
@@ -1701,13 +1722,14 @@ class PluginRuntime {
   setupDocumentChangeEvent() {
     if (this.options.incrementalSafeApi && this.documentAccessState.getIsIncrementalMode()) {
       if (this.options.allowIncrementalUnsafeApiCalls) {
-        console.warn('To ensure consistent results for documentchange handler, call `await figma.loadAllPagesAsync()` first.');
-      } else {
-        throw new Error('Cannot register documentchange handler in incremental mode without calling figma.loadAllPagesAsync first.');
+        console.warn('To ensure consistent results for documentchange handler, call `await figma.loadAllPagesAsync()` first.')
+      }
+      else {
+        throw new Error('Cannot register documentchange handler in incremental mode without calling figma.loadAllPagesAsync first.')
       }
     }
-    Mw(this.documentChangeCallback);
-    return undefined;
+    Mw(this.documentChangeCallback)
+    return undefined
   }
 
   /**
@@ -1717,11 +1739,11 @@ class PluginRuntime {
    */
   setupStyleChangeEvent() {
     this.vm.registerPromise(loadInternalCanvasMemoized(this.documentAccessState)).then(() => {
-      _$$iP(this.styleChangeCallback);
-    }).catch(error => {
-      throw new Error(`Cannot register stylechange handler: ${error.message}`);
-    });
-    return undefined;
+      _$$iP(this.styleChangeCallback)
+    }).catch((error) => {
+      throw new Error(`Cannot register stylechange handler: ${error.message}`)
+    })
+    return undefined
   }
 
   /**
@@ -1731,12 +1753,12 @@ class PluginRuntime {
    * @returns Page GUID for the node
    */
   setupNodeChangeEvent(nodeHandle) {
-    const targetNode = this.getNode(nodeHandle);
+    const targetNode = this.getNode(nodeHandle)
     if (targetNode.type !== 'CANVAS') {
-      throw new Error('Cannot register nodechange handler on non-page node');
+      throw new Error('Cannot register nodechange handler on non-page node')
     }
-    BT(this.nodeChangeCallback);
-    return targetNode.guid;
+    BT(this.nodeChangeCallback)
+    return targetNode.guid
   }
 
   /**
@@ -1748,14 +1770,14 @@ class PluginRuntime {
    * @param pageGuid - Optional page GUID for page-specific events
    */
   registerEventHandler(eventType, handlerFunction, isOnceOnly, pageGuid) {
-    const existingHandlers = this.eventHandlers.get(eventType) || [];
+    const existingHandlers = this.eventHandlers.get(eventType) || []
     existingHandlers.push({
       handler: handlerFunction,
       once: isOnceOnly,
-      pageGuid
-    });
-    this.eventHandlers.set(eventType, existingHandlers);
-    this.vm.retainHandle(handlerFunction);
+      pageGuid,
+    })
+    this.eventHandlers.set(eventType, existingHandlers)
+    this.vm.retainHandle(handlerFunction)
   }
 
   /**
@@ -1767,35 +1789,35 @@ class PluginRuntime {
     const callbackSetup = {
       textreview: () => {
         if (this.options.command === 'textreview') {
-          Sx(this.spellCheckCallback);
+          Sx(this.spellCheckCallback)
         }
       },
       generate: () => {
-        oZ(this.codegenCallback);
+        oZ(this.codegenCallback)
       },
       codegen: () => {
         if (!this.options.isLocal) {
-          oZ(this.legacyCodegenCallback);
+          oZ(this.legacyCodegenCallback)
         }
       },
       linkpreview: () => {
-        OD(this.linkPreviewCallback);
+        OD(this.linkPreviewCallback)
       },
       auth: () => {
-        ME(this.authCallback);
+        ME(this.authCallback)
       },
       open: () => {
-        B_(this.devResourceOpenCallback);
+        B_(this.devResourceOpenCallback)
       },
       close: () => {
         if (getFeatureFlags().plugins_async_on_close_handler) {
-          Bs(this.onCloseCallback);
+          Bs(this.onCloseCallback)
         }
-      }
-    };
-    const setupFunction = callbackSetup[eventType];
+      },
+    }
+    const setupFunction = callbackSetup[eventType]
     if (setupFunction) {
-      setupFunction();
+      setupFunction()
     }
   }
 
@@ -1805,36 +1827,39 @@ class PluginRuntime {
    * @param eventType - Type of event to process
    */
   processScheduledEvents(eventType) {
-    const scheduledEvent = this.scheduledEvents.get(eventType);
+    const scheduledEvent = this.scheduledEvents.get(eventType)
     if (scheduledEvent) {
-      scheduledEvent();
+      scheduledEvent()
     }
   }
+
   removeEventHandler = (e, t, i) => {
-    let n = this.eventHandlers.get(t);
+    let n = this.eventHandlers.get(t)
     if (n) {
       for (let r = n.length - 1; r >= 0; r--) {
         if (this.vm.isEqual(n[r].handler, i)) {
           if (t === 'nodechange') {
-            let t = this.getNode(e);
-            if (n[r].pageGuid !== t.guid) continue;
+            let t = this.getNode(e)
+            if (n[r].pageGuid !== t.guid)
+              continue
           }
-          n.splice(r, 1);
-          this.vm.releaseHandle(i);
-          n.length || t !== 'nodechange' || q$(this.nodeChangeCallback);
-          n.length || t !== 'stylechange' || fd(this.styleChangeCallback);
-          n.length || t !== 'documentchange' || b_(this.documentChangeCallback);
-          n.length || t !== 'slidesviewchange' || _$$nf(this.slidesViewChangeCallback);
-          getFeatureFlags().plugins_async_on_close_handler && !n.length && t === 'close' && Vb(this.onCloseCallback);
-          return;
+          n.splice(r, 1)
+          this.vm.releaseHandle(i)
+          n.length || t !== 'nodechange' || q$(this.nodeChangeCallback)
+          n.length || t !== 'stylechange' || fd(this.styleChangeCallback)
+          n.length || t !== 'documentchange' || b_(this.documentChangeCallback)
+          n.length || t !== 'slidesviewchange' || _$$nf(this.slidesViewChangeCallback)
+          getFeatureFlags().plugins_async_on_close_handler && !n.length && t === 'close' && Vb(this.onCloseCallback)
+          return
         }
       }
     }
-  };
+  }
+
   addEventHandlersTo = (e, t, i, n) => {
-    let r = this.vm;
-    let a = this.addEventHandler;
-    let s = this.removeEventHandler;
+    let r = this.vm
+    let a = this.addEventHandler
+    let s = this.removeEventHandler
     this.defineVmFunction({
       handle: e,
       key: 'on',
@@ -1844,16 +1869,16 @@ class PluginRuntime {
           vm: r,
           handle: e,
           zSchema: timerAndStateEvents.refine(e => t.includes(e)),
-          property: 'eventName'
-        });
-        a(this, o, s, !1, i);
-        n && n(o);
-        return r.undefined;
+          property: 'eventName',
+        })
+        a(this, o, s, !1, i)
+        n && n(o)
+        return r.undefined
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: e,
       key: 'once',
@@ -1863,16 +1888,16 @@ class PluginRuntime {
           vm: r,
           handle: e,
           zSchema: timerAndStateEvents.refine(e => t.includes(e)),
-          property: 'eventName'
-        });
-        a(this, o, s, !0, i);
-        n && n(o);
-        return r.undefined;
+          property: 'eventName',
+        })
+        a(this, o, s, !0, i)
+        n && n(o)
+        return r.undefined
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: e,
       key: 'off',
@@ -1882,92 +1907,104 @@ class PluginRuntime {
           vm: r,
           handle: e,
           zSchema: timerAndStateEvents.refine(e => t.includes(e)),
-          property: 'eventName'
-        }), i);
-        return r.undefined;
+          property: 'eventName',
+        }), i)
+        return r.undefined
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
-  };
+      hasEditScope: !1,
+    })
+  }
+
   selectionCallback = () => {
     this.fireDebouncedEventAsync('selectionchange', () => {
-      let e = this.privateSceneGraph.getDirectlySelectedNodes().map(e => e.guid);
-      let t = this.currentSelectedTextRangeJson();
-      arraysEqual(this.previousSelection, e) && this.previousSelectedTextRangeJson === t || this.fireEventSync('selectionchange', []);
-      this.previousSelection = e;
-      this.previousSelectedTextRangeJson = t;
-      PluginHelpers.resetSelectionCouldBeDirty();
-    });
-  };
+      let e = this.privateSceneGraph.getDirectlySelectedNodes().map(e => e.guid)
+      let t = this.currentSelectedTextRangeJson()
+      arraysEqual(this.previousSelection, e) && this.previousSelectedTextRangeJson === t || this.fireEventSync('selectionchange', [])
+      this.previousSelection = e
+      this.previousSelectedTextRangeJson = t
+      PluginHelpers.resetSelectionCouldBeDirty()
+    })
+  }
+
   pageCallback = () => {
     this.fireDebouncedEventAsync('currentpagechange', () => {
-      this.fireEventSync('currentpagechange', []);
-    });
-  };
-  codegenPreferencesChangeCallback = e => {
+      this.fireEventSync('currentpagechange', [])
+    })
+  }
+
+  codegenPreferencesChangeCallback = (e) => {
     this.fireDebouncedEventAsync('preferenceschange', () => {
       this.overrideRuntimeOptions({
         allowVisibleIframe: !0,
         defaultIframePosition: 'codegen-default',
         iframeId: getPluginIframeMode({
-          triggeredFrom: 'codegen'
+          triggeredFrom: 'codegen',
         }),
-        allowInitiateCheckout: !0
+        allowInitiateCheckout: !0,
       }, () => {
-        let t = this.vm.newObject();
-        this.vm.setStringProp(t, 'propertyName', e.propertyName);
-        this.fireEventSync('preferenceschange', [t]);
-      });
-    });
-  };
-  devResourceOpenCallback = e => {
-    this.fireEventSync('open', [this.vm.deepWrap(e)]);
-  };
-  pluginPageLoaded = e => {
-    this.documentAccessState.addLoadedPageIds([e]);
-  };
-  getAllAccessedGuids = () => this.nodeFactory.nodeIds();
-  getAccessiblePages = () => this.documentAccessState.getLoadedPages();
-  dropCallback = e => {
-    if (!e.dataTransfer) return !0;
-    let t: any[] = [];
+        let t = this.vm.newObject()
+        this.vm.setStringProp(t, 'propertyName', e.propertyName)
+        this.fireEventSync('preferenceschange', [t])
+      })
+    })
+  }
+
+  devResourceOpenCallback = (e) => {
+    this.fireEventSync('open', [this.vm.deepWrap(e)])
+  }
+
+  pluginPageLoaded = (e) => {
+    this.documentAccessState.addLoadedPageIds([e])
+  }
+
+  getAllAccessedGuids = () => this.nodeFactory.nodeIds()
+  getAccessiblePages = () => this.documentAccessState.getLoadedPages()
+  dropCallback = (e) => {
+    if (!e.dataTransfer)
+      return !0
+    let t: any[] = []
     for (let i = 0; i < e.dataTransfer.items.length; i++) {
-      let n = e.dataTransfer.items[i];
+      let n = e.dataTransfer.items[i]
       n.kind === 'string' && t.push({
         type: n.type,
-        data: e.dataTransfer.getData(n.type)
-      });
+        data: e.dataTransfer.getData(n.type),
+      })
     }
     let i = this.createDropEvent({
       x: e.clientX,
-      y: e.clientY
-    }, t, e.dataTransfer.files);
-    return this.fireEventSyncWithReturn('drop', [i]);
-  };
+      y: e.clientY,
+    }, t, e.dataTransfer.files)
+    return this.fireEventSyncWithReturn('drop', [i])
+  }
+
   onCloseCallback = () => {
-    let e = this.vm;
-    let t = this.vm.undefined;
-    let i = Promise.all((this.eventHandlers.get('close') || []).map(i => {
+    let e = this.vm
+    let t = this.vm.undefined
+    let i = Promise.all((this.eventHandlers.get('close') || []).map((i) => {
       let n = this.overrideRuntimeOptions({
-        activePromiseCallback: 'close'
-      }, () => e.callFunction(i.handler, this.vm.undefined, t));
-      return n.type === 'SUCCESS' ? isVMPromiseLike(e, n.handle) ? wrapVmPromise({
-        vm: e,
-        promiseHandle: n.handle,
-        shouldRetainResult: !0
-      }) : (e.retainHandle(n.handle), Promise.resolve(n.handle)) : Promise.reject(new Error('Handler did not return success'));
-    }));
-    return e.registerPromise(i).then(t => {
-      for (let i of t) e.releaseHandle(i);
-    }).catch(e => {
-      console.error(e);
-      let t = 'Promise returned from close event rejected.';
-      typeof e == 'object' && 'message' in e && (t += `\nError: ${e.message}`);
-      console.warn(t);
-    });
-  };
+        activePromiseCallback: 'close',
+      }, () => e.callFunction(i.handler, this.vm.undefined, t))
+      return n.type === 'SUCCESS'
+        ? isVMPromiseLike(e, n.handle)
+          ? wrapVmPromise({
+              vm: e,
+              promiseHandle: n.handle,
+              shouldRetainResult: !0,
+            })
+          : (e.retainHandle(n.handle), Promise.resolve(n.handle))
+        : Promise.reject(new Error('Handler did not return success'))
+    }))
+    return e.registerPromise(i).then((t) => {
+      for (let i of t) e.releaseHandle(i)
+    }).catch((e) => {
+      console.error(e)
+      let t = 'Promise returned from close event rejected.'
+      typeof e == 'object' && 'message' in e && (t += `\nError: ${e.message}`)
+      console.warn(t)
+    })
+  }
 
   /**
    * getChangeCallbackHandle - Create callback handle array for document changes with proper VM object mapping
@@ -1982,74 +2019,75 @@ class PluginRuntime {
    * @returns VM array containing mapped change record objects
    */
   getChangeCallbackHandle = (eventContext, documentChanges) => {
-    const changesArray = this.vm.newArray();
+    const changesArray = this.vm.newArray()
     for (const [changeIndex, changeData] of documentChanges.entries()) {
-      const changeRecord = this.createChangeRecord(changeData, eventContext);
-      this.vm.setProp(changesArray, String(changeIndex), changeRecord);
+      const changeRecord = this.createChangeRecord(changeData, eventContext)
+      this.vm.setProp(changesArray, String(changeIndex), changeRecord)
     }
-    return changesArray;
-  };
+    return changesArray
+  }
 
   /**
    * createChangeRecord - Create a single change record object from change data
    */
   createChangeRecord(changeData, eventContext) {
-    const changeRecord = this.vm.newObject();
+    const changeRecord = this.vm.newObject()
 
     // Set change ID based on type
-    this.setChangeRecordId(changeRecord, changeData);
+    this.setChangeRecordId(changeRecord, changeData)
 
     // Set basic change information
-    this.setBasicChangeInfo(changeRecord, changeData);
+    this.setBasicChangeInfo(changeRecord, changeData)
 
     // Handle specific change types
-    this.handleSpecificChangeTypes(changeRecord, changeData, eventContext);
-    return changeRecord;
+    this.handleSpecificChangeTypes(changeRecord, changeData, eventContext)
+    return changeRecord
   }
 
   /**
    * setChangeRecordId - Set the ID field based on change type
    */
   setChangeRecordId(changeRecord, changeData) {
-    const isStyleChange = this.isStyleRelatedChange(changeData.type);
-    const idValue = isStyleChange ? changeData.styleKey : changeData.devFriendlyId;
-    this.vm.setProp(changeRecord, 'id', this.vm.newString(idValue));
+    const isStyleChange = this.isStyleRelatedChange(changeData.type)
+    const idValue = isStyleChange ? changeData.styleKey : changeData.devFriendlyId
+    this.vm.setProp(changeRecord, 'id', this.vm.newString(idValue))
   }
 
   /**
    * isStyleRelatedChange - Check if change type is style-related
    */
   isStyleRelatedChange(changeType) {
-    return changeType === SceneChangeType.STYLE_PROPERTY_CHANGE || changeType === SceneChangeType.STYLE_CREATE || changeType === SceneChangeType.STYLE_DELETE;
+    return changeType === SceneChangeType.STYLE_PROPERTY_CHANGE || changeType === SceneChangeType.STYLE_CREATE || changeType === SceneChangeType.STYLE_DELETE
   }
 
   /**
    * setBasicChangeInfo - Set basic change information (origin and type)
    */
   setBasicChangeInfo(changeRecord, changeData) {
-    const changeTypeString = this.documentChangeTypeToString(changeData.type);
-    const originString = this.documentChangeOriginToString(changeData.origin);
-    this.vm.setProp(changeRecord, 'origin', this.vm.newString(originString));
-    this.vm.setProp(changeRecord, 'type', this.vm.newString(changeTypeString));
+    const changeTypeString = this.documentChangeTypeToString(changeData.type)
+    const originString = this.documentChangeOriginToString(changeData.origin)
+    this.vm.setProp(changeRecord, 'origin', this.vm.newString(originString))
+    this.vm.setProp(changeRecord, 'type', this.vm.newString(changeTypeString))
   }
 
   /**
    * handleSpecificChangeTypes - Handle specific change types with appropriate data
    */
   handleSpecificChangeTypes(changeRecord, changeData, eventContext) {
-    const changeTypeString = this.documentChangeTypeToString(changeData.type);
+    const changeTypeString = this.documentChangeTypeToString(changeData.type)
 
     // Handle property changes
     if (changeTypeString && this.isPropertyChange(changeTypeString)) {
-      this.addPropertiesArray(changeRecord, changeData);
+      this.addPropertiesArray(changeRecord, changeData)
     }
 
     // Handle style changes
     if (this.isStyleRelatedChange(changeData.type)) {
-      this.handleStyleChanges(changeRecord, changeData);
-    } else {
+      this.handleStyleChanges(changeRecord, changeData)
+    }
+    else {
       // Handle node changes
-      this.handleNodeChanges(changeRecord, changeData, eventContext);
+      this.handleNodeChanges(changeRecord, changeData, eventContext)
     }
   }
 
@@ -2057,21 +2095,21 @@ class PluginRuntime {
    * isPropertyChange - Check if change involves property modifications
    */
   isPropertyChange(changeTypeString) {
-    return changeTypeString === 'PROPERTY_CHANGE' || changeTypeString === 'STYLE_PROPERTY_CHANGE';
+    return changeTypeString === 'PROPERTY_CHANGE' || changeTypeString === 'STYLE_PROPERTY_CHANGE'
   }
 
   /**
    * addPropertiesArray - Add properties array to change record
    */
   addPropertiesArray(changeRecord, changeData) {
-    const propertiesArray = this.vm.newArray();
-    const propertyNames = Array.from(changeData.properties);
+    const propertiesArray = this.vm.newArray()
+    const propertyNames = Array.from(changeData.properties)
     for (const [propIndex, propertyName] of propertyNames.entries()) {
       // Handle legacy typo fix for strokeTopWeight
-      const correctedPropertyName = propertyName === 'strokeTopWeight' ? 'stokeTopWeight' : propertyName;
-      this.vm.setProp(propertiesArray, String(propIndex), this.vm.newString(correctedPropertyName));
+      const correctedPropertyName = propertyName === 'strokeTopWeight' ? 'stokeTopWeight' : propertyName
+      this.vm.setProp(propertiesArray, String(propIndex), this.vm.newString(correctedPropertyName))
     }
-    this.vm.setProp(changeRecord, 'properties', propertiesArray);
+    this.vm.setProp(changeRecord, 'properties', propertiesArray)
   }
 
   /**
@@ -2079,11 +2117,12 @@ class PluginRuntime {
    */
   handleStyleChanges(changeRecord, changeData) {
     if (changeData.type === SceneChangeType.STYLE_DELETE) {
-      this.vm.setProp(changeRecord, 'style', this.vm.$$null);
-    } else {
+      this.vm.setProp(changeRecord, 'style', this.vm.$$null)
+    }
+    else {
       // Handle STYLE_PROPERTY_CHANGE and STYLE_CREATE
-      const styleObject = this.styleFactory.createStyle(changeData.styleKey);
-      this.vm.setProp(changeRecord, 'style', styleObject);
+      const styleObject = this.styleFactory.createStyle(changeData.styleKey)
+      this.vm.setProp(changeRecord, 'style', styleObject)
     }
   }
 
@@ -2091,15 +2130,16 @@ class PluginRuntime {
    * handleNodeChanges - Handle node creation, modification, and deletion
    */
   handleNodeChanges(changeRecord, changeData, eventContext) {
-    const nodeExists = !!this.privateSceneGraph.get(changeData.id);
+    const nodeExists = !!this.privateSceneGraph.get(changeData.id)
     if (nodeExists) {
       // Node still exists, create full node object
-      const nodeObject = this.nodeFactory.createNode(changeData.id, eventContext);
-      this.vm.setProp(changeRecord, 'node', nodeObject);
-    } else {
+      const nodeObject = this.nodeFactory.createNode(changeData.id, eventContext)
+      this.vm.setProp(changeRecord, 'node', nodeObject)
+    }
+    else {
       // Node was removed, create minimal removed node object
-      const removedNodeObject = this.createRemovedNodeObject(changeData);
-      this.vm.setProp(changeRecord, 'node', removedNodeObject);
+      const removedNodeObject = this.createRemovedNodeObject(changeData)
+      this.vm.setProp(changeRecord, 'node', removedNodeObject)
     }
   }
 
@@ -2107,60 +2147,70 @@ class PluginRuntime {
    * createRemovedNodeObject - Create object representing a removed node
    */
   createRemovedNodeObject(changeData) {
-    const nodeObject = this.vm.newObject();
-    this.vm.setProp(nodeObject, 'id', this.vm.newString(changeData.devFriendlyId));
-    this.vm.setProp(nodeObject, 'type', this.vm.newString(changeData.nodeType));
-    this.vm.setProp(nodeObject, 'removed', this.vm.newBoolean(true));
-    this.vm.shallowFreezeObject(nodeObject);
-    return nodeObject;
+    const nodeObject = this.vm.newObject()
+    this.vm.setProp(nodeObject, 'id', this.vm.newString(changeData.devFriendlyId))
+    this.vm.setProp(nodeObject, 'type', this.vm.newString(changeData.nodeType))
+    this.vm.setProp(nodeObject, 'removed', this.vm.newBoolean(true))
+    this.vm.shallowFreezeObject(nodeObject)
+    return nodeObject
   }
-  slidesViewChangeCallback = e => {
-    let t = this.vm.newObject();
-    this.vm.setProp(t, 'view', this.vm.newString(this.slidesViewChangeToString(e.view)));
+
+  slidesViewChangeCallback = (e) => {
+    let t = this.vm.newObject()
+    this.vm.setProp(t, 'view', this.vm.newString(this.slidesViewChangeToString(e.view)))
     try {
-      PluginHelpers.prepareToRunDocumentChangeCallback();
-      this.fireEventSync('slidesviewchange', [t]);
-    } finally {
-      PluginHelpers.finishedRunningDocumentChangeCallback();
+      PluginHelpers.prepareToRunDocumentChangeCallback()
+      this.fireEventSync('slidesviewchange', [t])
     }
-  };
-  documentChangeCallback = e => {
-    let t = this.getChangeCallbackHandle('documentchange', e);
-    let i = this.vm.newObject();
-    this.vm.setProp(i, 'documentChanges', t);
+    finally {
+      PluginHelpers.finishedRunningDocumentChangeCallback()
+    }
+  }
+
+  documentChangeCallback = (e) => {
+    let t = this.getChangeCallbackHandle('documentchange', e)
+    let i = this.vm.newObject()
+    this.vm.setProp(i, 'documentChanges', t)
     try {
-      PluginHelpers.prepareToRunDocumentChangeCallback();
-      this.fireEventSync('documentchange', [i]);
-    } finally {
-      PluginHelpers.finishedRunningDocumentChangeCallback();
+      PluginHelpers.prepareToRunDocumentChangeCallback()
+      this.fireEventSync('documentchange', [i])
     }
-  };
-  styleChangeCallback = e => {
-    if (e.length === 0) return;
-    let t = this.getChangeCallbackHandle('stylechange', e);
-    let i = this.vm.newObject();
-    this.vm.setProp(i, 'styleChanges', t);
+    finally {
+      PluginHelpers.finishedRunningDocumentChangeCallback()
+    }
+  }
+
+  styleChangeCallback = (e) => {
+    if (e.length === 0)
+      return
+    let t = this.getChangeCallbackHandle('stylechange', e)
+    let i = this.vm.newObject()
+    this.vm.setProp(i, 'styleChanges', t)
     try {
-      PluginHelpers.prepareToRunDocumentChangeCallback();
-      this.fireEventSync('stylechange', [i]);
-    } finally {
-      PluginHelpers.finishedRunningDocumentChangeCallback();
+      PluginHelpers.prepareToRunDocumentChangeCallback()
+      this.fireEventSync('stylechange', [i])
     }
-  };
-  nodeChangeCallback = e => {
+    finally {
+      PluginHelpers.finishedRunningDocumentChangeCallback()
+    }
+  }
+
+  nodeChangeCallback = (e) => {
     for (let [t, i] of this.eventsByPageGuid(e)) {
-      if (i.length === 0) continue;
-      let e = this.getChangeCallbackHandle('nodechange', i);
-      let n = this.vm.newObject();
-      this.vm.setProp(n, 'nodeChanges', e);
+      if (i.length === 0)
+        continue
+      let e = this.getChangeCallbackHandle('nodechange', i)
+      let n = this.vm.newObject()
+      this.vm.setProp(n, 'nodeChanges', e)
       try {
-        PluginHelpers.prepareToRunDocumentChangeCallback();
-        this.fireEventSyncForPage('nodechange', t, [n]);
-      } finally {
-        PluginHelpers.finishedRunningDocumentChangeCallback();
+        PluginHelpers.prepareToRunDocumentChangeCallback()
+        this.fireEventSyncForPage('nodechange', t, [n])
+      }
+      finally {
+        PluginHelpers.finishedRunningDocumentChangeCallback()
       }
     }
-  };
+  }
 
   /**
    * triggerParameterInputEvent - Trigger parameter input event with suggestion handling
@@ -2171,18 +2221,18 @@ class PluginRuntime {
    *
    * @param inputData - The parameter input data to process
    */
-  triggerParameterInputEvent = inputData => {
-    const vm = this.vm;
+  triggerParameterInputEvent = (inputData) => {
+    const vm = this.vm
     this.fireAsyncEventOrSchedule('input', () => {
-      let hasCalledSetSuggestions = false;
-      const resultObject = vm.newObject();
+      let hasCalledSetSuggestions = false
+      const resultObject = vm.newObject()
 
       // Setup setSuggestions function with validation
-      vm.defineFunction(resultObject, 'setSuggestions', 'result.setSuggestions', suggestionsHandle => {
-        this.validateSingleCall(hasCalledSetSuggestions, 'setSuggestions or setError');
-        hasCalledSetSuggestions = true;
-        const suggestions = this.processSuggestions(vm, suggestionsHandle);
-        this.validateSuggestions(suggestions);
+      vm.defineFunction(resultObject, 'setSuggestions', 'result.setSuggestions', (suggestionsHandle) => {
+        this.validateSingleCall(hasCalledSetSuggestions, 'setSuggestions or setError')
+        hasCalledSetSuggestions = true
+        const suggestions = this.processSuggestions(vm, suggestionsHandle)
+        this.validateSuggestions(suggestions)
 
         // Process suggestions and fire event
         // TODO: Fix callback handling
@@ -2193,15 +2243,15 @@ class PluginRuntime {
         //     onErrorHandler: this.triggerParameterInputEvent,
         //   })
         // }
-      });
+      })
 
       // Setup setError function
-      this.setupSetErrorFunction(resultObject, vm, hasCalledSetSuggestions, inputData);
+      this.setupSetErrorFunction(resultObject, vm, hasCalledSetSuggestions, inputData)
 
       // Fire parameter input event
-      this.fireEventSyncForPage('parameterinput', inputData, [resultObject]);
-    });
-  };
+      this.fireEventSyncForPage('parameterinput', inputData, [resultObject])
+    })
+  }
 
   /**
    * validateSingleCall - Validate that a function is only called once
@@ -2214,7 +2264,7 @@ class PluginRuntime {
    */
   validateSingleCall(hasBeenCalled, functionDescription) {
     if (hasBeenCalled) {
-      throw new Error(`${functionDescription} called multiple times on the same result object`);
+      throw new Error(`${functionDescription} called multiple times on the same result object`)
     }
   }
 
@@ -2234,12 +2284,14 @@ class PluginRuntime {
       vm,
       handle: suggestionsHandle,
       zSchema: FigmaSchema.ParameterValues,
-      property: 'setSuggestions'
-    });
-    return rawSuggestions.map(suggestion => typeof suggestion === 'string' ? {
-      name: suggestion,
-      data: undefined
-    } : suggestion);
+      property: 'setSuggestions',
+    })
+    return rawSuggestions.map(suggestion => typeof suggestion === 'string'
+      ? {
+          name: suggestion,
+          data: undefined,
+        }
+      : suggestion)
   }
 
   /**
@@ -2252,19 +2304,19 @@ class PluginRuntime {
    * @param suggestions - Array of suggestion objects to validate
    */
   validateSuggestions(suggestions) {
-    suggestions.forEach(suggestion => {
+    suggestions.forEach((suggestion) => {
       // Validate JSON serialization
-      this.validateSuggestionSerialization(suggestion);
+      this.validateSuggestionSerialization(suggestion)
 
       // Validate icon constraints
-      this.validateSuggestionIcons(suggestion);
+      this.validateSuggestionIcons(suggestion)
 
       // Validate size limits
-      this.validateSuggestionSize(suggestion);
+      this.validateSuggestionSize(suggestion)
 
       // Validate and normalize URL if present
-      this.validateAndNormalizeSuggestionUrl(suggestion);
-    });
+      this.validateAndNormalizeSuggestionUrl(suggestion)
+    })
   }
 
   /**
@@ -2278,9 +2330,10 @@ class PluginRuntime {
   validateSuggestionSerialization(suggestion) {
     if (suggestion.data !== undefined) {
       try {
-        this.deepValidateSerializable(suggestion.data, JSON.parse(JSON.stringify(suggestion.data)));
-      } catch {
-        throw new Error(`Contains value which could not be serialized to JSON: ${suggestion.data}`);
+        this.deepValidateSerializable(suggestion.data, JSON.parse(JSON.stringify(suggestion.data)))
+      }
+      catch {
+        throw new Error(`Contains value which could not be serialized to JSON: ${suggestion.data}`)
       }
     }
   }
@@ -2298,17 +2351,17 @@ class PluginRuntime {
     if (original !== serialized) {
       if (Array.isArray(original) && Array.isArray(serialized) && original.length === serialized.length) {
         for (let i = 0; i < original.length; i++) {
-          this.deepValidateSerializable(original[i], serialized[i]);
+          this.deepValidateSerializable(original[i], serialized[i])
         }
-        return;
+        return
       }
       if (Object.prototype.toString.call(original) === '[object Object]' && Object.prototype.toString.call(serialized) === '[object Object]') {
         for (const key in original) {
-          this.deepValidateSerializable(original[key], key in serialized ? serialized[key] : Symbol('missing property'));
+          this.deepValidateSerializable(original[key], key in serialized ? serialized[key] : Symbol('missing property'))
         }
-        return;
+        return
       }
-      throw new Error(`Contains value which could not be serialized to JSON: ${original}`);
+      throw new Error(`Contains value which could not be serialized to JSON: ${original}`)
     }
   }
 
@@ -2322,7 +2375,7 @@ class PluginRuntime {
    */
   validateSuggestionIcons(suggestion) {
     if (suggestion.icon && suggestion.iconUrl) {
-      throw new Error('Only icon or iconUrl may be provided. Not both.');
+      throw new Error('Only icon or iconUrl may be provided. Not both.')
     }
   }
 
@@ -2335,11 +2388,11 @@ class PluginRuntime {
    * @param suggestion - Suggestion object to validate
    */
   validateSuggestionSize(suggestion) {
-    const dataSize = JSON.stringify(suggestion.data)?.length || 0;
-    const iconSize = suggestion.icon?.length || 0;
-    const totalSize = dataSize + iconSize;
+    const dataSize = JSON.stringify(suggestion.data)?.length || 0
+    const iconSize = suggestion.icon?.length || 0
+    const totalSize = dataSize + iconSize
     if (totalSize > 20480) {
-      throw new Error('Total size of suggestion must be no greater than 20KB');
+      throw new Error('Total size of suggestion must be no greater than 20KB')
     }
   }
 
@@ -2353,20 +2406,20 @@ class PluginRuntime {
    */
   validateAndNormalizeSuggestionUrl(suggestion) {
     if (suggestion.iconUrl) {
-      const url = new URL(suggestion.iconUrl);
+      const url = new URL(suggestion.iconUrl)
 
       // Validate protocol
       if (!['https:', 'http:'].includes(url.protocol)) {
-        throw new Error('Must be https or http URL');
+        throw new Error('Must be https or http URL')
       }
 
       // Validate against figma.com domains for security
       if (this.isFigmaDomain(url.hostname)) {
-        throw new Error('figma.com URLs not supported');
+        throw new Error('figma.com URLs not supported')
       }
 
       // Normalize URL
-      suggestion.iconUrl = url.href;
+      suggestion.iconUrl = url.href
     }
   }
 
@@ -2380,7 +2433,7 @@ class PluginRuntime {
    * @returns true if hostname is a figma.com domain
    */
   isFigmaDomain(hostname) {
-    return hostname.endsWith('.figma.com') || hostname.endsWith('.figma.com.') || hostname === 'figma.com' || hostname === 'figma.com.' || hostname === window.location.hostname;
+    return hostname.endsWith('.figma.com') || hostname.endsWith('.figma.com.') || hostname === 'figma.com' || hostname === 'figma.com.' || hostname === window.location.hostname
   }
 
   /**
@@ -2395,122 +2448,130 @@ class PluginRuntime {
    * @param inputData - The parameter input data for validation
    */
   setupSetErrorFunction(resultObject, vm, hasCalledSetSuggestions, inputData) {
-    vm.defineFunction(resultObject, 'setError', 'result.setError', errorHandle => {
-      this.validateSingleCall(hasCalledSetSuggestions, 'setSuggestions or setError');
+    vm.defineFunction(resultObject, 'setError', 'result.setError', (errorHandle) => {
+      this.validateSingleCall(hasCalledSetSuggestions, 'setSuggestions or setError')
       if (inputData.currentParameter.allowFreeform) {
-        throw new Error('setError not supported on allowFreeform parameters');
+        throw new Error('setError not supported on allowFreeform parameters')
       }
       const errorMessage = validateWithZSchema({
         vm,
         handle: errorHandle,
         zSchema: _$$z.string(),
-        property: 'message'
-      });
+        property: 'message',
+      })
       inputData.onSuggestions({
         type: 'ERROR',
-        message: errorMessage
-      });
-      hasCalledSetSuggestions = true;
-      return vm.undefined;
-    });
+        message: errorMessage,
+      })
+      hasCalledSetSuggestions = true
+      return vm.undefined
+    })
 
     // Setup loading message function
-    vm.defineFunction(resultObject, 'setLoadingMessage', 'result.setLoadingMessage', loadingHandle => {
+    vm.defineFunction(resultObject, 'setLoadingMessage', 'result.setLoadingMessage', (loadingHandle) => {
       const loadingMessage = validateWithZSchema({
         vm,
         handle: loadingHandle,
         zSchema: _$$z.string(),
-        property: 'message'
-      });
+        property: 'message',
+      })
       inputData.onSuggestions({
         type: 'LOADING',
-        message: loadingMessage
-      });
-      return vm.undefined;
-    });
+        message: loadingMessage,
+      })
+      return vm.undefined
+    })
 
     // Fire parameter input event
-    this.fireEventSyncForPage('parameterinput', inputData, [resultObject]);
+    this.fireEventSyncForPage('parameterinput', inputData, [resultObject])
   }
-  triggerRunEvent = e => {
-    this.setQueryMode(!1);
-    this.triggerOrScheduleRunEvent(e);
-  };
-  triggerOrScheduleRunEvent = e => {
-    this.options.stats.setRunParameters(e);
+
+  triggerRunEvent = (e) => {
+    this.setQueryMode(!1)
+    this.triggerOrScheduleRunEvent(e)
+  }
+
+  triggerOrScheduleRunEvent = (e) => {
+    this.options.stats.setRunParameters(e)
     this.fireAsyncEventOrSchedule('run', () => {
-      let t = this.vm;
-      let i = this.options.command;
+      let t = this.vm
+      let i = this.options.command
       this.fireDebouncedEventAsync('run', () => {
-        let n = t.newObject();
-        t.setProp(n, 'command', t.newString(i));
-        e.command === 'parameters' ? e.parameters ? t.setProp(n, 'parameters', t.deepWrap(transformParameterValues(e.parameters))) : isValidPluginId(this.options.pluginID) && t.setProp(n, 'parameters', t.deepWrap(getDebugPluginParams(this.options.pluginID))) : (e.command === 'open-related-link' || e.command === 'open-dev-resource') && t.setProp(n, 'link', t.deepWrap(e.link));
-        t.shallowFreezeObject(n);
-        this.fireEventSync('run', [n]);
-      });
-    });
-  };
+        let n = t.newObject()
+        t.setProp(n, 'command', t.newString(i))
+        e.command === 'parameters' ? e.parameters ? t.setProp(n, 'parameters', t.deepWrap(transformParameterValues(e.parameters))) : isValidPluginId(this.options.pluginID) && t.setProp(n, 'parameters', t.deepWrap(getDebugPluginParams(this.options.pluginID))) : (e.command === 'open-related-link' || e.command === 'open-dev-resource') && t.setProp(n, 'link', t.deepWrap(e.link))
+        t.shallowFreezeObject(n)
+        this.fireEventSync('run', [n])
+      })
+    })
+  }
+
   requestCheckoutCallback = async () => {
     try {
-      await this.initiateCheckoutAsyncImpl({});
-      let e = this.getPublishedExtension(this.options.pluginID);
-      return this.userPaymentStatusType(e) === zH.PAID;
-    } catch (e) {
-      _$$k2.error(e);
+      await this.initiateCheckoutAsyncImpl({})
+      let e = this.getPublishedExtension(this.options.pluginID)
+      return this.userPaymentStatusType(e) === zH.PAID
     }
-    return !1;
-  };
-  timerCallback = e => {
-    this.fireEventSync(e, []);
-  };
-  uiCancelCallback = e => {
-    this.closePlugin(e);
-  };
+    catch (e) {
+      logger.error(e)
+    }
+    return !1
+  }
+
+  timerCallback = (e) => {
+    this.fireEventSync(e, [])
+  }
+
+  uiCancelCallback = (e) => {
+    this.closePlugin(e)
+  }
 
   /**
    * Handle messages from plugin UI iframe with proper validation and routing
    * Processes different message types: getPluginId, pluginMessage, and pluginDrop
    * @param messageEvent - The message event from the iframe
    */
-  iframeMessageHandler = messageEvent => {
-    const vmHandle = this.vm;
+  iframeMessageHandler = (messageEvent) => {
+    const vmHandle = this.vm
 
     // Handle special keyboard trigger message
     if (messageEvent.data === IN) {
       fullscreenValue.triggerAction('plugins-run-last', {
-        source: 'keyboard'
-      });
-      return;
+        source: 'keyboard',
+      })
+      return
     }
 
     // Validate message structure
     if (!this.isValidMessageStructure(messageEvent.data)) {
-      _$$k2.warn('Message from UI to plugin ignored because it\'s not an object. The message must be an object with a "pluginMessage" property containing the actual message.');
-      return;
+      logger.warn('Message from UI to plugin ignored because it\'s not an object. The message must be an object with a "pluginMessage" property containing the actual message.')
+      return
     }
-    const currentPluginId = this.options.pluginID;
-    const messageOrigin = this.normalizeMessageOrigin(messageEvent.origin);
+    const currentPluginId = this.options.pluginID
+    const messageOrigin = this.normalizeMessageOrigin(messageEvent.origin)
 
     // Handle plugin ID request
     if (this.isPluginIdRequest(messageEvent.data)) {
-      this.handlePluginIdRequest(messageEvent, currentPluginId);
-      return;
+      this.handlePluginIdRequest(messageEvent, currentPluginId)
+      return
     }
 
     // Validate plugin ID authorization
     if (!this.isAuthorizedMessage(messageEvent.data, currentPluginId, messageEvent.origin)) {
-      return;
+      return
     }
 
     // Route message based on type
     if (this.isPluginMessage(messageEvent.data)) {
-      this.handlePluginMessage(messageEvent.data, messageOrigin, vmHandle);
-    } else if (this.isPluginDropMessage(messageEvent.data)) {
-      this.handlePluginDropMessage(messageEvent.data, vmHandle);
-    } else {
-      _$$k2.warn('Ignoring postMessage from plugin UI iframe due to missing "pluginMessage" or "pluginDrop"');
+      this.handlePluginMessage(messageEvent.data, messageOrigin, vmHandle)
     }
-  };
+    else if (this.isPluginDropMessage(messageEvent.data)) {
+      this.handlePluginDropMessage(messageEvent.data, vmHandle)
+    }
+    else {
+      logger.warn('Ignoring postMessage from plugin UI iframe due to missing "pluginMessage" or "pluginDrop"')
+    }
+  }
 
   /**
    * Validate that message data has proper structure
@@ -2518,7 +2579,7 @@ class PluginRuntime {
    * @returns True if message structure is valid
    */
   isValidMessageStructure(messageData) {
-    return messageData instanceof Object;
+    return messageData instanceof Object
   }
 
   /**
@@ -2527,13 +2588,13 @@ class PluginRuntime {
    * @returns Normalized origin string
    */
   normalizeMessageOrigin(origin) {
-    let normalizedOrigin = `${origin}`;
+    let normalizedOrigin = `${origin}`
 
     // Handle encoded origins
     if (/^https?:\/\/%7b[a-f0-9.-]+%7d$/.test(normalizedOrigin)) {
-      normalizedOrigin = 'null';
+      normalizedOrigin = 'null'
     }
-    return normalizedOrigin;
+    return normalizedOrigin
   }
 
   /**
@@ -2542,7 +2603,7 @@ class PluginRuntime {
    * @returns True if this is a plugin ID request
    */
   isPluginIdRequest(messageData) {
-    return 'getPluginId' in messageData;
+    return 'getPluginId' in messageData
   }
 
   /**
@@ -2551,13 +2612,13 @@ class PluginRuntime {
    * @param pluginId - Current plugin ID
    */
   handlePluginIdRequest(messageEvent, pluginId) {
-    const responseOrigin = messageEvent.origin !== 'null' ? messageEvent.origin : '*';
+    const responseOrigin = messageEvent.origin !== 'null' ? messageEvent.origin : '*'
     this.uiHandle.postMessageToIframe({
-      pluginId
+      pluginId,
     }, {
       origin: responseOrigin,
-      skipQueue: !0
-    });
+      skipQueue: !0,
+    })
   }
 
   /**
@@ -2570,21 +2631,22 @@ class PluginRuntime {
   isAuthorizedMessage(messageData, currentPluginId, messageOrigin) {
     // Skip authorization for wildcard messages from null origin
     if (messageData.pluginId === '*' && (!('pluginId' in messageData) || messageOrigin === 'null')) {
-      return true;
+      return true
     }
 
     // Check plugin ID match
     if (currentPluginId && this.isPluginIdMatch(messageData.pluginId, currentPluginId)) {
-      return true;
+      return true
     }
 
     // Handle authorization failures
     if ('pluginId' in messageData) {
-      _$$k2.warn('Provided pluginId does not match id of currently running plugin');
-      return false;
-    } else {
-      _$$k2.warn('Message from UI to plugin ignored due to missing pluginId in message. Please specify the pluginId that you wish to deliver the message to when using postMessage. You can also use \'*\' if it is safe to deliver the message to any plugin.\n\nExample: `parent.postMessage({pluginMessage: /*your message*/, pluginId: /*your plugin id*/}, \'*\')`.');
-      return false;
+      logger.warn('Provided pluginId does not match id of currently running plugin')
+      return false
+    }
+    else {
+      logger.warn('Message from UI to plugin ignored due to missing pluginId in message. Please specify the pluginId that you wish to deliver the message to when using postMessage. You can also use \'*\' if it is safe to deliver the message to any plugin.\n\nExample: `parent.postMessage({pluginMessage: /*your message*/, pluginId: /*your plugin id*/}, \'*\')`.')
+      return false
     }
   }
 
@@ -2596,12 +2658,12 @@ class PluginRuntime {
    */
   isPluginIdMatch(messagePluginId, currentPluginId) {
     if (messagePluginId === currentPluginId) {
-      return true;
+      return true
     }
     if (Array.isArray(messagePluginId) && messagePluginId.includes(currentPluginId)) {
-      return true;
+      return true
     }
-    return false;
+    return false
   }
 
   /**
@@ -2610,7 +2672,7 @@ class PluginRuntime {
    * @returns True if this is a plugin message
    */
   isPluginMessage(messageData) {
-    return 'pluginMessage' in messageData;
+    return 'pluginMessage' in messageData
   }
 
   /**
@@ -2620,21 +2682,21 @@ class PluginRuntime {
    * @param vmHandle - VM handle for object creation
    */
   handlePluginMessage(messageData, messageOrigin, vmHandle) {
-    const messageHandlers = this.eventHandlers.get('message');
+    const messageHandlers = this.eventHandlers.get('message')
     if ((!messageHandlers || !messageHandlers.length) && !this.onMessageCallback) {
-      _$$k2.warn('Message from UI to plugin dropped due to no message handler installed');
-      return;
+      logger.warn('Message from UI to plugin dropped due to no message handler installed')
+      return
     }
     const messageArguments = [vmHandle.deepWrap(messageData.pluginMessage), vmHandle.deepWrap({
-      origin: messageOrigin
-    })];
+      origin: messageOrigin,
+    })]
 
     // Fire event to registered handlers
-    this.fireEventSync('message', messageArguments);
+    this.fireEventSync('message', messageArguments)
 
     // Call direct callback if available
     if (this.onMessageCallback) {
-      vmHandle.callFunction(this.onMessageCallback, vmHandle.undefined, ...messageArguments);
+      vmHandle.callFunction(this.onMessageCallback, vmHandle.undefined, ...messageArguments)
     }
   }
 
@@ -2644,7 +2706,7 @@ class PluginRuntime {
    * @returns True if this is a plugin drop message
    */
   isPluginDropMessage(messageData) {
-    return 'pluginDrop' in messageData;
+    return 'pluginDrop' in messageData
   }
 
   /**
@@ -2653,26 +2715,26 @@ class PluginRuntime {
    * @param vmHandle - VM handle for object creation
    */
   handlePluginDropMessage(messageData, vmHandle) {
-    const dropData = messageData.pluginDrop;
+    const dropData = messageData.pluginDrop
 
     // Validate drop data structure
     if (!this.isValidDropData(dropData)) {
-      _$$k2.warn(`"pluginDrop" object must have "clientX" and "clientY" properties,
-          as well as either "items" or "files" properties`);
-      return;
+      logger.warn(`"pluginDrop" object must have "clientX" and "clientY" properties,
+          as well as either "items" or "files" properties`)
+      return
     }
 
     // Create drop event object
     const dropEvent = this.createDropEvent({
       x: dropData.clientX,
-      y: dropData.clientY
-    }, dropData.items ?? [], dropData.files ?? []);
+      y: dropData.clientY,
+    }, dropData.items ?? [], dropData.files ?? [])
 
     // Add drop metadata if provided
-    vmHandle.setProp(dropEvent, 'dropMetadata', 'dropMetadata' in dropData ? vmHandle.deepWrap(dropData.dropMetadata) : vmHandle.$$null);
+    vmHandle.setProp(dropEvent, 'dropMetadata', 'dropMetadata' in dropData ? vmHandle.deepWrap(dropData.dropMetadata) : vmHandle.$$null)
 
     // Fire drop event
-    this.fireEventSync('drop', [dropEvent]);
+    this.fireEventSync('drop', [dropEvent])
   }
 
   /**
@@ -2682,21 +2744,21 @@ class PluginRuntime {
    */
   isValidDropData(dropData) {
     // Check for validation errors
-    const validationErrors = c0(dropData, dragEventPropType, 'pluginDrop');
+    const validationErrors = validateAndCollectErrors(dropData, dragEventPropType, 'pluginDrop')
     if (validationErrors.length > 0) {
-      return false;
+      return false
     }
 
     // Check required properties
     if (dropData.items === undefined && dropData.files === undefined) {
-      return false;
+      return false
     }
 
     // Validate file types
     if ('files' in dropData && dropData.files.some(file => !(file instanceof File))) {
-      return false;
+      return false
     }
-    return true;
+    return true
   }
 
   /**
@@ -2704,16 +2766,16 @@ class PluginRuntime {
    */
   createSpellCheckCallback() {
     return this.createPromiseCallback({
-      makeInputEvent: textContent => {
-        const inputEvent = this.vm.newObject();
-        this.vm.setProp(inputEvent, 'text', this.vm.newString(textContent));
-        return inputEvent;
+      makeInputEvent: (textContent) => {
+        const inputEvent = this.vm.newObject()
+        this.vm.setProp(inputEvent, 'text', this.vm.newString(textContent))
+        return inputEvent
       },
       eventName: 'textreview',
       zResultSchema: FigmaSchema.TextReviewResultSchema,
       defaultResult: [],
-      rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.'
-    });
+      rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.',
+    })
   }
 
   /**
@@ -2721,17 +2783,17 @@ class PluginRuntime {
    */
   createLegacyCodegenCallback() {
     return this.createPromiseCallback({
-      makeInputEvent: nodeId => {
-        const inputEvent = this.vm.newObject();
-        const nodeObject = this.nodeFactory.createNode(nodeId, 'codegen');
-        this.vm.setProp(inputEvent, 'node', nodeObject);
-        return inputEvent;
+      makeInputEvent: (nodeId) => {
+        const inputEvent = this.vm.newObject()
+        const nodeObject = this.nodeFactory.createNode(nodeId, 'codegen')
+        this.vm.setProp(inputEvent, 'node', nodeObject)
+        return inputEvent
       },
       eventName: 'codegen',
       zResultSchema: FigmaSchema.CodegenResultSchema,
       defaultResult: [],
-      rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.'
-    });
+      rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.',
+    })
   }
 
   /**
@@ -2739,18 +2801,18 @@ class PluginRuntime {
    */
   createCodegenCallback() {
     return this.createPromiseCallback({
-      makeInputEvent: nodeId => {
-        const inputEvent = this.vm.newObject();
-        const nodeObject = this.nodeFactory.createNode(nodeId, 'generate');
-        this.vm.setProp(inputEvent, 'node', nodeObject);
-        this.vm.setProp(inputEvent, 'language', this.vm.newString(this.getCodegenLanguage()));
-        return inputEvent;
+      makeInputEvent: (nodeId) => {
+        const inputEvent = this.vm.newObject()
+        const nodeObject = this.nodeFactory.createNode(nodeId, 'generate')
+        this.vm.setProp(inputEvent, 'node', nodeObject)
+        this.vm.setProp(inputEvent, 'language', this.vm.newString(this.getCodegenLanguage()))
+        return inputEvent
       },
       eventName: 'generate',
       zResultSchema: FigmaSchema.CodegenResultSchema,
       defaultResult: [],
-      rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.'
-    });
+      rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.',
+    })
   }
 
   /**
@@ -2758,45 +2820,46 @@ class PluginRuntime {
    */
   createLinkPreviewCallback() {
     return this.createPromiseCallback({
-      makeInputEvent: linkData => {
-        const inputEvent = this.vm.newObject();
-        this.vm.setProp(inputEvent, 'link', this.vm.deepWrap(linkData));
-        return inputEvent;
+      makeInputEvent: (linkData) => {
+        const inputEvent = this.vm.newObject()
+        this.vm.setProp(inputEvent, 'link', this.vm.deepWrap(linkData))
+        return inputEvent
       },
       eventName: 'linkpreview',
       zResultSchema: FigmaSchema.LinkPreviewResultSchema,
       defaultResult: null,
-      rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.'
-    });
+      rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.',
+    })
   }
+
   createAuthCallback() {
     return this.createPromiseCallback({
-      makeInputEvent: linkArray => {
-        const inputEvent = this.vm.newObject();
-        this.vm.setProp(inputEvent, 'links', this.vm.deepWrap(linkArray));
-        return inputEvent;
+      makeInputEvent: (linkArray) => {
+        const inputEvent = this.vm.newObject()
+        this.vm.setProp(inputEvent, 'links', this.vm.deepWrap(linkArray))
+        return inputEvent
       },
       eventName: 'auth',
       zResultSchema: FigmaSchema.AuthResultSchema,
       rejectMessage: 'Promise returned from \'auth\' event rejected. Unable to authenticate.',
-      defaultResult: null
-    });
+      defaultResult: null,
+    })
   }
 
   /**
    * setupWidgetManager - Set up widget management if in widget mode
    */
   setupWidgetManager() {
-    W5(this.pluginPageLoaded);
-    Ql(this.getAccessiblePages);
+    W5(this.pluginPageLoaded)
+    Ql(this.getAccessiblePages)
     if (this.isWidget) {
       const {
         runtimeBridge,
-        shutdownCallback
-      } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm);
-      this.widgetManager = new WidgetManager(this.vm, this.options.pluginID, runtimeBridge);
+        shutdownCallback,
+      } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm)
+      this.widgetManager = new WidgetManager(this.vm, this.options.pluginID, runtimeBridge)
       if (shutdownCallback) {
-        this.widgetManager.addShutdownAction(shutdownCallback);
+        this.widgetManager.addShutdownAction(shutdownCallback)
       }
     }
   }
@@ -2805,11 +2868,12 @@ class PluginRuntime {
    * setupEditorType - Set up fullscreen editor type based on current view
    */
   setupEditorType() {
-    const currentView = debugState.getState().selectedView;
+    const currentView = debugState.getState().selectedView
     if (ac.includes(currentView.editorType) || this.vm.vmType === 'scopednoopvm') {
-      this.fullscreenEditorType = currentView.editorType;
-    } else {
-      throw new Error(`Unsupported editor type: ${currentView.editorType}`);
+      this.fullscreenEditorType = currentView.editorType
+    }
+    else {
+      throw new Error(`Unsupported editor type: ${currentView.editorType}`)
     }
   }
 
@@ -2817,46 +2881,46 @@ class PluginRuntime {
    * setupMixedSentinel - Set up mixed value sentinel symbol
    */
   setupMixedSentinel() {
-    this.mixedSentinel = this.vm.newSymbol('figma.mixed');
-    this.vm.retainHandle(this.mixedSentinel);
-    const shouldSkipInvisibleChildren = this.fullscreenEditorType === FEditorType.DevHandoff || this.options.apiMode.type === 'WIDGET_RECONCILER';
-    this.setSkipInvisibleInstanceChildren(shouldSkipInvisibleChildren);
+    this.mixedSentinel = this.vm.newSymbol('figma.mixed')
+    this.vm.retainHandle(this.mixedSentinel)
+    const shouldSkipInvisibleChildren = this.fullscreenEditorType === FEditorType.DevHandoff || this.options.apiMode.type === 'WIDGET_RECONCILER'
+    this.setSkipInvisibleInstanceChildren(shouldSkipInvisibleChildren)
   }
 
   /**
    * setupRuntimeOptions - Configure runtime options based on feature flags and mode
    */
   setupRuntimeOptions() {
-    const featureFlags = getFeatureFlags();
-    this.runtimeOptions = featureFlags.ext_lego_plugins_runmode ? this.createFeatureFlagRuntimeOptions() : this.createLegacyRuntimeOptions();
+    const featureFlags = getFeatureFlags()
+    this.runtimeOptions = featureFlags.ext_lego_plugins_runmode ? this.createFeatureFlagRuntimeOptions() : this.createLegacyRuntimeOptions()
   }
 
   /**
    * createFeatureFlagRuntimeOptions - Create runtime options using feature flag mode
    */
   createFeatureFlagRuntimeOptions() {
-    const runMode = this.getRunMode();
+    const runMode = this.getRunMode()
     return {
       allowVisibleIframe: !ar.has(runMode),
       iframeId: getPluginIframeMode({
-        runMode
+        runMode,
       }),
-      allowInitiateCheckout: !ar.has(runMode)
-    };
+      allowInitiateCheckout: !ar.has(runMode),
+    }
   }
 
   /**
    * createLegacyRuntimeOptions - Create runtime options using legacy triggered mode
    */
   createLegacyRuntimeOptions() {
-    const triggeredFrom = this.options.triggeredFrom;
+    const triggeredFrom = this.options.triggeredFrom
     return {
       allowVisibleIframe: !triggeredFrom || !an.has(triggeredFrom),
       iframeId: getPluginIframeMode({
-        triggeredFrom
+        triggeredFrom,
       }),
-      allowInitiateCheckout: !triggeredFrom || !an.has(triggeredFrom)
-    };
+      allowInitiateCheckout: !triggeredFrom || !an.has(triggeredFrom),
+    }
   }
 
   /**
@@ -2867,14 +2931,14 @@ class PluginRuntime {
       case 'GLOBAL_API':
       case 'CONSOLE_SHIM':
       case 'SECURITY_CHECK':
-        return false;
+        return false
       case 'WIDGET_RECONCILER':
-        return true;
+        return true
       case 'WIDGET':
       case 'PLUGIN':
-        return apiMode.noOpUI;
+        return apiMode.noOpUI
       default:
-        return false;
+        return false
     }
   }
 
@@ -2882,54 +2946,61 @@ class PluginRuntime {
    * setupEventCallbacks - Set up event callbacks for VM instances
    */
   setupEventCallbacks() {
-    LL(this.selectionCallback);
-    Xx(this.pageCallback);
-    Sf(this.timerCallback);
-    KB(this.dropCallback);
-    _$$i(this.codegenPreferencesChangeCallback);
-    _C(this.slidesViewChangeCallback);
+    LL(this.selectionCallback)
+    Xx(this.pageCallback)
+    Sf(this.timerCallback)
+    KB(this.dropCallback)
+    _$$i(this.codegenPreferencesChangeCallback)
+    _C(this.slidesViewChangeCallback)
   }
 
   /**
    * finalizeInitialization - Complete the final initialization steps
    */
   finalizeInitialization() {
-    this.options.addShutdownAction(reason => this.tearDown(reason));
-    this.previousSelection = this.privateSceneGraph.getDirectlySelectedNodes().map(node => node.guid);
-    PluginHelpers.resetSelectionCouldBeDirty();
-    this.createAPI();
+    this.options.addShutdownAction(reason => this.tearDown(reason))
+    this.previousSelection = this.privateSceneGraph.getDirectlySelectedNodes().map(node => node.guid)
+    PluginHelpers.resetSelectionCouldBeDirty()
+    this.createAPI()
   }
+
   hasRegisteredWidget() {
-    return this._hasRegisteredWidgetFunction;
+    return this._hasRegisteredWidgetFunction
   }
+
   shouldLockDownPluginApiForWidgets() {
-    return this.isWidget;
+    return this.isWidget
   }
+
   overrideRuntimeOptions(e, t) {
     // overrideRuntimeOptions - Temporarily override runtime options for a callback execution
-    const originalOptions = this.runtimeOptions;
+    const originalOptions = this.runtimeOptions
 
     // Apply new options
     this.runtimeOptions = {
       ...originalOptions,
-      ...e
-    };
+      ...e,
+    }
     try {
-      return t();
-    } finally {
+      return t()
+    }
+    finally {
       // Always restore original options
-      this.runtimeOptions = originalOptions;
+      this.runtimeOptions = originalOptions
     }
   }
+
   validateMakeIframeOptionsOrThrow(e, t) {
     if (this.options.isLocal && (this.runtimeOptions?.activePromiseCallback === 'generate' || this.runtimeOptions?.activePromiseCallback === 'codegen')) {
       throw new Error(`Cannot call figma.showUI inside the codegen generate callback.
 
-Move figma.showUI outside the callback and use figma.ui.postMessage within the callback instead to ensure that your plugin handles concurrent "generate" events correctly.`);
+Move figma.showUI outside the callback and use figma.ui.postMessage within the callback instead to ensure that your plugin handles concurrent "generate" events correctly.`)
     }
-    let i = t.position ?? this.runtimeOptions?.defaultIframePosition ?? 'last';
-    if (t.visible && this.queryMode) throw new Error('Cannot show UI in queryMode.');
-    if (t.visible && !this.runtimeOptions?.allowVisibleIframe) throw new Error('Cannot show UI');
+    let i = t.position ?? this.runtimeOptions?.defaultIframePosition ?? 'last'
+    if (t.visible && this.queryMode)
+      throw new Error('Cannot show UI in queryMode.')
+    if (t.visible && !this.runtimeOptions?.allowVisibleIframe)
+      throw new Error('Cannot show UI')
     return {
       html: e,
       title: t.title,
@@ -2937,64 +3008,78 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       height: t.height,
       iframeId: this.runtimeOptions.iframeId,
       position: i,
-      includeThemeColors: t.themeColors
-    };
-  }
-  inDesignOrDevHandoffOrIllustration() {
-    return this.fullscreenEditorType === FEditorType.Design || this.fullscreenEditorType === FEditorType.DevHandoff || this.fullscreenEditorType === FEditorType.Illustration;
-  }
-  inFigjam() {
-    return this.fullscreenEditorType === FEditorType.Whiteboard;
-  }
-  inSlides() {
-    return this.fullscreenEditorType === FEditorType.Slides;
-  }
-  inBuzz() {
-    return this.fullscreenEditorType === FEditorType.Cooper;
-  }
-  inSites() {
-    return this.fullscreenEditorType === FEditorType.Sites;
-  }
-  isReadOnlyMode() {
-    let e = debugState.getState();
-    let t = e.selectedView.editorType === FEditorType.DevHandoff;
-    return e.mirror.appModel.isReadOnly || t;
-  }
-  hasFileReachedPageLimit() {
-    let e = debugState.getState().openFile;
-    let t = this.privateSceneGraph.get('0:0');
-    if (!t) throw new Error('Root node not found. This should never happen.');
-    let i = t.childrenNodes.reduce((e, t) => t.type !== 'CANVAS' || t.isInternalOnlyNode ? e : e + 1, 0);
-    return !!(e && J9({
-      openFile: e,
-      pageCount: i
-    }));
-  }
-  handleLockDownPluginApiError(e) {
-    if (this.options.isLocal) throw new Error(e);
-    {
-      let t = this.widgetManager?.getCurrentWidgetNodeId();
-      t && widgetErrorTracker.trackLockDownApiError(new Error(e), this.getWidgetContext(t));
+      includeThemeColors: t.themeColors,
     }
   }
-  getRunMode() {
-    return atomStoreManager.get<string>(_$$$f) ?? 'default';
+
+  inDesignOrDevHandoffOrIllustration() {
+    return this.fullscreenEditorType === FEditorType.Design || this.fullscreenEditorType === FEditorType.DevHandoff || this.fullscreenEditorType === FEditorType.Illustration
   }
+
+  inFigjam() {
+    return this.fullscreenEditorType === FEditorType.Whiteboard
+  }
+
+  inSlides() {
+    return this.fullscreenEditorType === FEditorType.Slides
+  }
+
+  inBuzz() {
+    return this.fullscreenEditorType === FEditorType.Cooper
+  }
+
+  inSites() {
+    return this.fullscreenEditorType === FEditorType.Sites
+  }
+
+  isReadOnlyMode() {
+    let e = debugState.getState()
+    let t = e.selectedView.editorType === FEditorType.DevHandoff
+    return e.mirror.appModel.isReadOnly || t
+  }
+
+  hasFileReachedPageLimit() {
+    let e = debugState.getState().openFile
+    let t = this.privateSceneGraph.get('0:0')
+    if (!t)
+      throw new Error('Root node not found. This should never happen.')
+    let i = t.childrenNodes.reduce((e, t) => t.type !== 'CANVAS' || t.isInternalOnlyNode ? e : e + 1, 0)
+    return !!(e && J9({
+      openFile: e,
+      pageCount: i,
+    }))
+  }
+
+  handleLockDownPluginApiError(e) {
+    if (this.options.isLocal)
+      throw new Error(e)
+    {
+      let t = this.widgetManager?.getCurrentWidgetNodeId()
+      t && widgetErrorTracker.trackLockDownApiError(new Error(e), this.getWidgetContext(t))
+    }
+  }
+
+  getRunMode() {
+    return atomStoreManager.get<string>(_$$$f) ?? 'default'
+  }
+
   getWidgetContext(e) {
-    let t = this.privateSceneGraph.get(e);
+    let t = this.privateSceneGraph.get(e)
     return {
       widgetNodeID: e,
       pluginID: t.widgetId,
       widgetVersionID: t.widgetVersionId,
       isLocalWidget: !t.widgetVersionId,
-      widgetName: t.name
-    };
+      widgetName: t.name,
+    }
   }
+
   editScope(e, t) {
-    return permissionScopeHandler.plugin(`plugin-${e}`, t);
+    return permissionScopeHandler.plugin(`plugin-${e}`, t)
   }
+
   conditionalEditScope(e, t, i) {
-    return e ? this.editScope(t, i) : i();
+    return e ? this.editScope(t, i) : i()
   }
 
   /**
@@ -3009,24 +3094,25 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   async tearDown(shutdownReason) {
     try {
       // Unregister all callbacks and observers
-      await this.unregisterAllCallbacks();
+      await this.unregisterAllCallbacks()
 
       // Handle close events and UI teardown
-      await this.handleCloseEventsAndUiTeardown(shutdownReason);
+      await this.handleCloseEventsAndUiTeardown(shutdownReason)
 
       // Cleanup stores and resources
-      this.cleanupStoresAndResources();
+      this.cleanupStoresAndResources()
 
       // Release all event handlers
-      this.releaseAllEventHandlers();
+      this.releaseAllEventHandlers()
 
       // Clear remaining state
-      this.clearRemainingState();
+      this.clearRemainingState()
 
       // Handle widget-specific cleanup
-      await this.handleWidgetCleanup();
-    } catch (error) {
-      console.error('Error during tearDown:', error);
+      await this.handleWidgetCleanup()
+    }
+    catch (error) {
+      console.error('Error during tearDown:', error)
     }
   }
 
@@ -3034,23 +3120,23 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * unregisterAllCallbacks - Unregister all callbacks and observers
    */
   async unregisterAllCallbacks() {
-    _$$po(this.timerCallback);
-    wk(this.selectionCallback);
-    cI(this.pageCallback);
-    Ty(this.dropCallback);
-    sd(this.spellCheckCallback);
-    G1(this.codegenCallback);
-    G1(this.legacyCodegenCallback);
-    Rp(this.pluginPageLoaded);
-    VM(this.getAllAccessedGuids);
-    jS(this.getAccessiblePages);
-    dG();
-    b_(this.documentChangeCallback);
-    fd(this.styleChangeCallback);
-    q$(this.nodeChangeCallback);
-    $y(this.codegenPreferencesChangeCallback);
-    _$$nf(this.slidesViewChangeCallback);
-    H4(this.devResourceOpenCallback);
+    _$$po(this.timerCallback)
+    wk(this.selectionCallback)
+    cI(this.pageCallback)
+    Ty(this.dropCallback)
+    sd(this.spellCheckCallback)
+    G1(this.codegenCallback)
+    G1(this.legacyCodegenCallback)
+    Rp(this.pluginPageLoaded)
+    VM(this.getAllAccessedGuids)
+    jS(this.getAccessiblePages)
+    dG()
+    b_(this.documentChangeCallback)
+    fd(this.styleChangeCallback)
+    q$(this.nodeChangeCallback)
+    $y(this.codegenPreferencesChangeCallback)
+    _$$nf(this.slidesViewChangeCallback)
+    H4(this.devResourceOpenCallback)
   }
 
   /**
@@ -3059,12 +3145,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   async handleCloseEventsAndUiTeardown(shutdownReason) {
     if (getFeatureFlags().plugins_async_on_close_handler) {
       // New async close handling
-      this.uiHandle.tearDown(shutdownReason);
-      await this.fireCloseEventAsync();
-    } else {
+      this.uiHandle.tearDown(shutdownReason)
+      await this.fireCloseEventAsync()
+    }
+    else {
       // Legacy sync close handling
-      this.fireEventSync('close', []);
-      this.uiHandle.tearDown(shutdownReason);
+      this.fireEventSync('close', [])
+      this.uiHandle.tearDown(shutdownReason)
     }
   }
 
@@ -3072,8 +3159,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * cleanupStoresAndResources - Clean up image and video stores
    */
   cleanupStoresAndResources() {
-    this.imageStore.tearDown();
-    this.videoStore.tearDown();
+    this.imageStore.tearDown()
+    this.videoStore.tearDown()
   }
 
   /**
@@ -3082,7 +3169,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   releaseAllEventHandlers() {
     for (const [, handlers] of this.eventHandlers.entries()) {
       for (const handler of handlers) {
-        this.vm.releaseHandle(handler.handler);
+        this.vm.releaseHandle(handler.handler)
       }
     }
   }
@@ -3091,12 +3178,12 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * clearRemainingState - Clear remaining state variables and cleanup
    */
   clearRemainingState() {
-    this.eventHandlers.clear();
-    this.eventHandlerTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
-    this.eventHandlerTimeouts.clear();
-    this.scheduledEvents.clear();
-    this.onMessageCallback = undefined;
-    this.setSkipInvisibleInstanceChildren(false);
+    this.eventHandlers.clear()
+    this.eventHandlerTimeouts.forEach(timeoutId => clearTimeout(timeoutId))
+    this.eventHandlerTimeouts.clear()
+    this.scheduledEvents.clear()
+    this.onMessageCallback = undefined
+    this.setSkipInvisibleInstanceChildren(false)
   }
 
   /**
@@ -3105,20 +3192,21 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   async handleWidgetCleanup() {
     if (this.isWidget) {
       // Small delay for widget cleanup
-      await new Promise(resolve => setTimeout(resolve));
+      await new Promise(resolve => setTimeout(resolve))
 
       // Wait for widget operations to finish
       await this.widgetManager?.waitForFinish({
-        fromClosePlugin: true
-      });
+        fromClosePlugin: true,
+      })
 
       // Clear widget manager
-      this.widgetManager?.clear();
+      this.widgetManager?.clear()
     }
   }
+
   currentSelectedTextRangeJson() {
-    let e = this.privateSceneGraph.getCurrentPage();
-    return JSON.stringify(e?.getSelectedTextRange() || null);
+    let e = this.privateSceneGraph.getCurrentPage()
+    return JSON.stringify(e?.getSelectedTextRange() || null)
   }
 
   /**
@@ -3135,17 +3223,17 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   makeGroupingOperationFunction(operationName, operationType) {
     return (nodesHandle, parentHandle, indexHandle) => {
       // Process and validate node array parameters
-      const processedNodes = this.processNodesForGroupingOperation(operationName, nodesHandle, parentHandle, indexHandle);
+      const processedNodes = this.processNodesForGroupingOperation(operationName, nodesHandle, parentHandle, indexHandle)
 
       // Validate parent node requirement
-      this.validateParentNodeForGrouping(operationName, processedNodes.parent);
+      this.validateParentNodeForGrouping(operationName, processedNodes.parent)
 
       // Execute the grouping operation
-      const resultNodeId = this.executeGroupingOperation(operationType, processedNodes, operationName);
+      const resultNodeId = this.executeGroupingOperation(operationType, processedNodes, operationName)
 
       // Return wrapped node result
-      return this.nodeFactory.createNode(resultNodeId, operationName);
-    };
+      return this.nodeFactory.createNode(resultNodeId, operationName)
+    }
   }
 
   /**
@@ -3159,8 +3247,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       parentArg: parentHandle,
       indexArg: indexHandle,
       getNode: this.getNode,
-      enableResponsiveSetHierarchyMutations: this.options.enableResponsiveSetHierarchyMutations
-    });
+      enableResponsiveSetHierarchyMutations: this.options.enableResponsiveSetHierarchyMutations,
+    })
   }
 
   /**
@@ -3168,7 +3256,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   validateParentNodeForGrouping(operationName, parentNode) {
     if (!parentNode) {
-      throw new Error(`Second argument to ${operationName}() must be provided`);
+      throw new Error(`Second argument to ${operationName}() must be provided`)
     }
   }
 
@@ -3176,7 +3264,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * executeGroupingOperation - Execute the actual grouping operation
    */
   executeGroupingOperation(operationType, processedNodes, _operationName) {
-    return PluginHelpers.groupNodes(operationType, processedNodes.nodeIds, processedNodes.parent.sessionID, processedNodes.parent.localID, processedNodes.index, this.privateSceneGraph.scene);
+    return PluginHelpers.groupNodes(operationType, processedNodes.nodeIds, processedNodes.parent.sessionID, processedNodes.parent.localID, processedNodes.index, this.privateSceneGraph.scene)
   }
 
   /**
@@ -3190,13 +3278,14 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @param eventCallback - Function to execute when event should fire
    */
   fireAsyncEventOrSchedule(eventName, eventCallback) {
-    const eventHandlers = this.eventHandlers.get(eventName);
+    const eventHandlers = this.eventHandlers.get(eventName)
     if (eventHandlers && eventHandlers.length !== 0) {
       // Handlers exist, fire immediately
-      this.fireEventAsync(eventCallback);
-    } else {
+      this.fireEventAsync(eventCallback)
+    }
+    else {
       // No handlers yet, schedule for later
-      this.scheduleEventForLater(eventName, eventCallback);
+      this.scheduleEventForLater(eventName, eventCallback)
     }
   }
 
@@ -3205,9 +3294,9 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   scheduleEventForLater(eventName, eventCallback) {
     this.scheduledEvents.set(eventName, () => {
-      this.scheduledEvents.delete(eventName);
-      this.fireEventAsync(eventCallback);
-    });
+      this.scheduledEvents.delete(eventName)
+      this.fireEventAsync(eventCallback)
+    })
   }
 
   /**
@@ -3219,7 +3308,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @param eventCallback - Function to execute asynchronously
    */
   fireEventAsync(eventCallback) {
-    Promise.resolve().then(eventCallback);
+    Promise.resolve().then(eventCallback)
   }
 
   /**
@@ -3233,10 +3322,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   fireDebouncedEventAsync(eventName, eventCallback) {
     // Cancel existing timeout if present
-    this.cancelExistingEventTimeout(eventName);
+    this.cancelExistingEventTimeout(eventName)
 
     // Set new debounced timeout
-    this.setDebouncedEventTimeout(eventName, eventCallback);
+    this.setDebouncedEventTimeout(eventName, eventCallback)
   }
 
   /**
@@ -3244,7 +3333,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   cancelExistingEventTimeout(eventName) {
     if (this.eventHandlerTimeouts.has(eventName)) {
-      clearTimeout(this.eventHandlerTimeouts.get(eventName));
+      clearTimeout(this.eventHandlerTimeouts.get(eventName))
     }
   }
 
@@ -3253,10 +3342,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   setDebouncedEventTimeout(eventName, eventCallback) {
     const timeoutId = setTimeout(() => {
-      this.eventHandlerTimeouts.delete(eventName);
-      eventCallback();
-    }, 0);
-    this.eventHandlerTimeouts.set(eventName, timeoutId);
+      this.eventHandlerTimeouts.delete(eventName)
+      eventCallback()
+    }, 0)
+    this.eventHandlerTimeouts.set(eventName, timeoutId)
   }
 
   /**
@@ -3270,32 +3359,33 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   fireEventSync(eventName, eventArgs) {
     // Set running event tracking
-    this.runningSyncEvent = eventName;
+    this.runningSyncEvent = eventName
 
     // Get and process handlers
-    const handlers = this.getAndProcessEventHandlers(eventName);
+    const handlers = this.getAndProcessEventHandlers(eventName)
 
     // Execute all handlers
-    this.executeEventHandlers(handlers, eventArgs);
+    this.executeEventHandlers(handlers, eventArgs)
 
     // Clear running event tracking
-    this.runningSyncEvent = null;
+    this.runningSyncEvent = null
   }
 
   /**
    * getAndProcessEventHandlers - Get handlers and filter out "once" handlers after execution
    */
   getAndProcessEventHandlers(eventName) {
-    let handlers = this.eventHandlers.get(eventName);
+    let handlers = this.eventHandlers.get(eventName)
     if (handlers) {
       // Filter out "once" handlers after this execution
       this.eventHandlers.set(eventName, handlers.filter(({
-        once
-      }) => !once));
-    } else {
-      handlers = [];
+        once,
+      }) => !once))
     }
-    return handlers;
+    else {
+      handlers = []
+    }
+    return handlers
   }
 
   /**
@@ -3303,35 +3393,41 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   executeEventHandlers(handlers, eventArgs) {
     for (const handler of handlers) {
-      this.vm.callFunction(handler.handler, this.vm.undefined, ...eventArgs);
+      this.vm.callFunction(handler.handler, this.vm.undefined, ...eventArgs)
     }
   }
+
   fireEventSyncForPage(e, t, i) {
-    this.runningSyncEvent = e;
-    let n = this.eventHandlers.get(e);
-    let r = n ? n.filter(e => e.pageGuid === t) : [];
+    this.runningSyncEvent = e
+    let n = this.eventHandlers.get(e)
+    let r = n ? n.filter(e => e.pageGuid === t) : []
     for (let a of (n && r.length > 0 && this.eventHandlers.set(e, n.filter(({
       once: e,
-      pageGuid: i
-    }) => !(e && i === t))), r)) this.vm.callFunction(a.handler, this.vm.undefined, ...i);
-    this.runningSyncEvent = null;
+      pageGuid: i,
+    }) => !(e && i === t))), r)) this.vm.callFunction(a.handler, this.vm.undefined, ...i)
+    this.runningSyncEvent = null
   }
+
   fireEventSyncWithReturn(e, t) {
-    let i = this.vm;
-    let n = this.eventHandlers.get(e);
-    for (let r of (n ? this.eventHandlers.set(e, n.filter(({
-      once: e
-    }) => !e)) : n = [], n)) {
-      let e = i.callFunction(r.handler, this.vm.undefined, ...t);
-      if (e.type === 'SUCCESS' && !1 === i.deepUnwrap(e.handle)) return !1;
+    let i = this.vm
+    let n = this.eventHandlers.get(e)
+    for (let r of (n
+      ? this.eventHandlers.set(e, n.filter(({
+          once: e,
+        }) => !e))
+      : n = [], n)) {
+      let e = i.callFunction(r.handler, this.vm.undefined, ...t)
+      if (e.type === 'SUCCESS' && !1 === i.deepUnwrap(e.handle))
+        return !1
     }
-    return !0;
+    return !0
   }
+
   windowToCanvasPosition(e) {
-    let t = fullscreenValue.getViewportInfo();
-    let i = new Mi(t.x, t.y);
-    let n = new Mi(e.x, e.y).subtract(i);
-    return $$(t, n);
+    let t = fullscreenValue.getViewportInfo()
+    let i = new Mi(t.x, t.y)
+    let n = new Mi(e.x, e.y).subtract(i)
+    return $$(t, n)
   }
 
   /**
@@ -3347,31 +3443,32 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with file properties and async read methods
    */
   wrapFile(file) {
-    const vm = this.vm;
-    const vmObject = vm.newObject();
+    const vm = this.vm
+    const vmObject = vm.newObject()
 
     // Set file properties
-    vm.setProp(vmObject, 'name', vm.newString(file.name));
-    vm.setProp(vmObject, 'type', vm.newString(file.type));
+    vm.setProp(vmObject, 'name', vm.newString(file.name))
+    vm.setProp(vmObject, 'type', vm.newString(file.type))
 
     // Define getBytesAsync method using helper
     vm.defineFunction(vmObject, 'getBytesAsync', 'file.getBytesAsync', () => {
-      return this.createFileReaderPromise(file, 'arrayBuffer', result => {
+      return this.createFileReaderPromise(file, 'arrayBuffer', (result) => {
         if (result instanceof ArrayBuffer) {
-          return vm.deepWrap(new Uint8Array(result));
-        } else {
-          throw new TypeError('Failed to read file');
+          return vm.deepWrap(new Uint8Array(result))
         }
-      });
-    });
+        else {
+          throw new TypeError('Failed to read file')
+        }
+      })
+    })
 
     // Define getTextAsync method using helper
     vm.defineFunction(vmObject, 'getTextAsync', 'file.getTextAsync', () => {
-      return this.createFileReaderPromise(file, 'text', result => {
-        return vm.newString(result);
-      });
-    });
-    return vmObject;
+      return this.createFileReaderPromise(file, 'text', (result) => {
+        return vm.newString(result)
+      })
+    })
+    return vmObject
   }
 
   /**
@@ -3388,36 +3485,40 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns Promise that resolves with the processed result
    */
   createFileReaderPromise(file, readMethod, processResult) {
-    const vm = this.vm;
+    const vm = this.vm
     const {
       promise,
       resolve,
-      reject
-    } = vm.newPromise();
-    const reader = new FileReader();
-    reader.onload = _event => {
+      reject,
+    } = vm.newPromise()
+    const reader = new FileReader()
+    reader.onload = (_event) => {
       // Early return if VM is destroyed
-      if (vm.isDestroyed()) return;
+      if (vm.isDestroyed())
+        return
       try {
-        const result = processResult(reader.result);
-        resolve(result);
-      } catch (error) {
-        reject(vm.deepWrap(error));
+        const result = processResult(reader.result)
+        resolve(result)
       }
-    };
-    reader.onerror = _event => {
+      catch (error) {
+        reject(vm.deepWrap(error))
+      }
+    }
+    reader.onerror = (_event) => {
       // Early return if VM is destroyed
-      if (vm.isDestroyed()) return;
-      reject(vm.deepWrap(reader.error));
-    };
+      if (vm.isDestroyed())
+        return
+      reject(vm.deepWrap(reader.error))
+    }
 
     // Execute the appropriate read method
     if (readMethod === 'arrayBuffer') {
-      reader.readAsArrayBuffer(file);
-    } else if (readMethod === 'text') {
-      reader.readAsText(file);
+      reader.readAsArrayBuffer(file)
     }
-    return promise;
+    else if (readMethod === 'text') {
+      reader.readAsText(file)
+    }
+    return promise
   }
 
   /**
@@ -3434,12 +3535,12 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object representing the drop event
    */
   createDropEvent(dropPosition, items, files) {
-    const vm = this.vm;
-    const canvasPosition = this.windowToCanvasPosition(dropPosition);
+    const vm = this.vm
+    const canvasPosition = this.windowToCanvasPosition(dropPosition)
     const {
       parentId,
-      relativeTransform
-    } = PluginHelpers.pickInsertionLocation(canvasPosition.x, canvasPosition.y);
+      relativeTransform,
+    } = PluginHelpers.pickInsertionLocation(canvasPosition.x, canvasPosition.y)
 
     // Create drop event data object
     const dropEventData = {
@@ -3447,22 +3548,22 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       y: relativeTransform.m12,
       absoluteX: canvasPosition.x,
       absoluteY: canvasPosition.y,
-      items
-    };
-    const dropEvent = vm.deepWrap(dropEventData);
+      items,
+    }
+    const dropEvent = vm.deepWrap(dropEventData)
 
     // Set parent node if valid
-    const parentNode = this.privateSceneGraph.get(parentId);
-    const isValidParent = parentNode && !parentNode.isInImmutableFrame && !parentNode.isInWidget;
-    vm.setProp(dropEvent, 'node', isValidParent ? this.nodeFactory.createNode(parentId, 'drop') : vm.$$null);
+    const parentNode = this.privateSceneGraph.get(parentId)
+    const isValidParent = parentNode && !parentNode.isInImmutableFrame && !parentNode.isInWidget
+    vm.setProp(dropEvent, 'node', isValidParent ? this.nodeFactory.createNode(parentId, 'drop') : vm.$$null)
 
     // Wrap and set files array
-    const filesArray = vm.newArray();
+    const filesArray = vm.newArray()
     for (let i = 0; i < files.length; i++) {
-      vm.setProp(filesArray, i.toString(), this.wrapFile(files[i]));
+      vm.setProp(filesArray, i.toString(), this.wrapFile(files[i]))
     }
-    vm.setProp(dropEvent, 'files', filesArray);
-    return dropEvent;
+    vm.setProp(dropEvent, 'files', filesArray)
+    return dropEvent
   }
 
   /**
@@ -3478,44 +3579,46 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns Promise callback function
    */
   createPromiseCallback(config) {
-    return eventData => {
-      const vm = this.vm;
-      const inputEvent = config.makeInputEvent(eventData);
-      const eventHandlers = this.eventHandlers.get(config.eventName) || [];
+    return (eventData) => {
+      const vm = this.vm
+      const inputEvent = config.makeInputEvent(eventData)
+      const eventHandlers = this.eventHandlers.get(config.eventName) || []
 
       // Filter out 'once' handlers after execution
       this.eventHandlers.set(config.eventName, eventHandlers.filter(({
-        once
-      }) => !once));
+        once,
+      }) => !once))
       for (const handler of eventHandlers) {
         const result = this.overrideRuntimeOptions({
-          activePromiseCallback: config.eventName
-        }, () => vm.callFunction(handler.handler, vm.undefined, inputEvent));
+          activePromiseCallback: config.eventName,
+        }, () => vm.callFunction(handler.handler, vm.undefined, inputEvent))
         if (result.type === 'SUCCESS') {
-          const promise = isVMPromiseLike(vm, result.handle) ? wrapVmPromise({
-            vm,
-            promiseHandle: result.handle,
-            shouldRetainResult: true
-          }) : (vm.retainHandle(result.handle), Promise.resolve(result.handle));
-          return vm.registerPromise(promise).then(handle => {
+          const promise = isVMPromiseLike(vm, result.handle)
+            ? wrapVmPromise({
+                vm,
+                promiseHandle: result.handle,
+                shouldRetainResult: true,
+              })
+            : (vm.retainHandle(result.handle), Promise.resolve(result.handle))
+          return vm.registerPromise(promise).then((handle) => {
             const validatedResult = validateWithZSchema({
               vm,
               handle,
               zSchema: config.zResultSchema,
-              property: `${config.eventName} Result`
-            });
-            vm.releaseHandle(handle);
-            return validatedResult;
-          }).catch(error => {
-            console.error(error);
-            const errorMessage = config.rejectMessage + (typeof error === 'object' && 'message' in error ? `\nError: ${error.message}` : '');
-            console.warn(errorMessage);
-            return config.defaultResult;
-          });
+              property: `${config.eventName} Result`,
+            })
+            vm.releaseHandle(handle)
+            return validatedResult
+          }).catch((error) => {
+            console.error(error)
+            const errorMessage = config.rejectMessage + (typeof error === 'object' && 'message' in error ? `\nError: ${error.message}` : '')
+            console.warn(errorMessage)
+            return config.defaultResult
+          })
         }
       }
-      return Promise.reject();
-    };
+      return Promise.reject()
+    }
   }
 
   /**
@@ -3528,57 +3631,63 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * the specified timeout period.
    */
   async fireCloseEventAsync() {
-    if (!dM()) return;
-    this.runningCloseEventHandler = true;
+    if (!dM())
+      return
+    this.runningCloseEventHandler = true
     try {
-      await f2(5000); // 5 second timeout
-    } finally {
-      Vb(this.onCloseCallback);
-      this.runningCloseEventHandler = false;
+      await f2(5000) // 5 second timeout
+    }
+    finally {
+      Vb(this.onCloseCallback)
+      this.runningCloseEventHandler = false
     }
   }
+
   documentChangeTypeToString(e) {
     switch (e) {
       case SceneChangeType.CREATE:
-        return 'CREATE';
+        return 'CREATE'
       case SceneChangeType.DELETE:
-        return 'DELETE';
+        return 'DELETE'
       case SceneChangeType.PROPERTY_CHANGE:
-        return 'PROPERTY_CHANGE';
+        return 'PROPERTY_CHANGE'
       case SceneChangeType.STYLE_PROPERTY_CHANGE:
-        return 'STYLE_PROPERTY_CHANGE';
+        return 'STYLE_PROPERTY_CHANGE'
       case SceneChangeType.STYLE_CREATE:
-        return 'STYLE_CREATE';
+        return 'STYLE_CREATE'
       case SceneChangeType.STYLE_DELETE:
-        return 'STYLE_DELETE';
+        return 'STYLE_DELETE'
     }
   }
+
   documentChangeOriginToString(e) {
     switch (e) {
       case ResourceLocation.LOCAL:
-        return 'LOCAL';
+        return 'LOCAL'
       case ResourceLocation.REMOTE:
-        return 'REMOTE';
+        return 'REMOTE'
     }
   }
+
   slidesViewChangeToString(e) {
     switch (e) {
       case SlideViewType.GRID:
-        return 'GRID';
+        return 'GRID'
       case SlideViewType.SINGLE_SLIDE:
-        return 'SINGLE_SLIDE';
+        return 'SINGLE_SLIDE'
     }
   }
+
   eventsByPageGuid(e) {
-    let t = new Map();
+    let t = new Map()
     for (let i of e) {
       let {
-        containingCanvas
-      } = i;
-      t.has(containingCanvas) || t.set(containingCanvas, []);
-      t.get(containingCanvas).push(i);
+        containingCanvas,
+      } = i
+      t.has(containingCanvas) || t.set(containingCanvas, [])
+      t.get(containingCanvas).push(i)
     }
-    return t;
+    return t
   }
 
   /**
@@ -3591,16 +3700,16 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with timer properties and methods
    */
   createTimerApi() {
-    const vm = this.vm;
-    const timerObject = vm.newObject();
+    const vm = this.vm
+    const timerObject = vm.newObject()
 
     // Set up timer properties
-    this.setupTimerProperties(timerObject, vm);
+    this.setupTimerProperties(timerObject, vm)
 
     // Set up timer control methods
-    this.setupTimerMethods(timerObject, vm);
-    vm.shallowFreezeObject(timerObject);
-    return timerObject;
+    this.setupTimerMethods(timerObject, vm)
+    vm.shallowFreezeObject(timerObject)
+    return timerObject
   }
 
   /**
@@ -3612,33 +3721,33 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       enumerable: false,
       metricsKey: 'timer.remaining',
       get: () => {
-        const timerState = this.getTimerState();
-        const remainingMs = Math.max(0, P$(timerState.time));
-        return vm.newNumber(remainingMs / 1000);
-      }
-    });
+        const timerState = this.getTimerState()
+        const remainingMs = Math.max(0, P$(timerState.time))
+        return vm.newNumber(remainingMs / 1000)
+      },
+    })
 
     // Add total time property
     vm.defineProp(timerObject, 'total', {
       enumerable: false,
       metricsKey: 'timer.total',
       get: () => {
-        const timerState = this.getTimerState();
-        const totalMs = timerState.time?.totalTimeMs || 0;
-        return vm.newNumber(totalMs / 1000);
-      }
-    });
+        const timerState = this.getTimerState()
+        const totalMs = timerState.time?.totalTimeMs || 0
+        return vm.newNumber(totalMs / 1000)
+      },
+    })
 
     // Add state property
     vm.defineProp(timerObject, 'state', {
       enumerable: false,
       metricsKey: 'timer.state',
       get: () => {
-        const timerState = this.getTimerState();
-        const stateString = this.getTimerStateString(timerState.time);
-        return vm.newString(stateString);
-      }
-    });
+        const timerState = this.getTimerState()
+        const stateString = this.getTimerStateString(timerState.time)
+        return vm.newString(stateString)
+      },
+    })
   }
 
   /**
@@ -3647,35 +3756,35 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   setupTimerMethods(timerObject, vm) {
     // Add pause method
     vm.defineFunction(timerObject, 'pause', 'timer.pause', () => {
-      this.pauseTimer();
-      return vm.undefined;
-    });
+      this.pauseTimer()
+      return vm.undefined
+    })
 
     // Add resume method
     vm.defineFunction(timerObject, 'resume', 'timer.resume', () => {
-      this.resumeTimer();
-      return vm.undefined;
-    });
+      this.resumeTimer()
+      return vm.undefined
+    })
 
     // Add start method
-    vm.defineFunction(timerObject, 'start', 'timer.start', durationHandle => {
-      const durationSeconds = vm.getNumber(durationHandle);
-      this.startTimer(durationSeconds);
-      return vm.undefined;
-    });
+    vm.defineFunction(timerObject, 'start', 'timer.start', (durationHandle) => {
+      const durationSeconds = vm.getNumber(durationHandle)
+      this.startTimer(durationSeconds)
+      return vm.undefined
+    })
 
     // Add stop method
     vm.defineFunction(timerObject, 'stop', 'timer.stop', () => {
-      this.stopTimer();
-      return vm.undefined;
-    });
+      this.stopTimer()
+      return vm.undefined
+    })
   }
 
   /**
    * getTimerState - Get current timer state from debug state
    */
   getTimerState() {
-    return debugState.getState().timer;
+    return debugState.getState().timer
   }
 
   /**
@@ -3683,18 +3792,18 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   getTimerStateString(timerTime) {
     if (P$(timerTime) <= 0) {
-      return 'STOPPED';
+      return 'STOPPED'
     }
-    return timerTime?.isPaused ? 'PAUSED' : 'RUNNING';
+    return timerTime?.isPaused ? 'PAUSED' : 'RUNNING'
   }
 
   /**
    * pauseTimer - Pause the current timer if running
    */
   pauseTimer() {
-    const timerState = this.getTimerState();
+    const timerState = this.getTimerState()
     if (P$(timerState.time) > 0) {
-      debugState.dispatch(_1(timerState.time));
+      debugState.dispatch(_1(timerState.time))
     }
   }
 
@@ -3702,9 +3811,9 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * resumeTimer - Resume the timer if paused
    */
   resumeTimer() {
-    const timerState = this.getTimerState();
+    const timerState = this.getTimerState()
     if (P$(timerState.time) > 0 && timerState.time.isPaused) {
-      debugState.dispatch(_$$ne(timerState.time));
+      debugState.dispatch(_$$ne(timerState.time))
     }
   }
 
@@ -3712,15 +3821,16 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * startTimer - Start timer with specified duration
    */
   startTimer(durationSeconds) {
-    const timerState = this.getTimerState();
-    const currentRemainingMs = Math.max(0, P$(timerState.time));
-    const targetDurationMs = durationSeconds * 1000;
+    const timerState = this.getTimerState()
+    const currentRemainingMs = Math.max(0, P$(timerState.time))
+    const targetDurationMs = durationSeconds * 1000
     if (this.getTimerStateString(timerState?.time) === 'STOPPED') {
       // Start new timer
-      this.startNewTimer(targetDurationMs);
-    } else {
+      this.startNewTimer(targetDurationMs)
+    }
+    else {
       // Adjust existing timer
-      this.adjustExistingTimer(timerState, targetDurationMs, currentRemainingMs);
+      this.adjustExistingTimer(timerState, targetDurationMs, currentRemainingMs)
     }
   }
 
@@ -3729,23 +3839,23 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   startNewTimer(totalTimeMs) {
     debugState.dispatch(Qv({
-      totalTimeMs
-    }));
+      totalTimeMs,
+    }))
   }
 
   /**
    * adjustExistingTimer - Adjust the duration of an existing timer
    */
   adjustExistingTimer(timerState, targetDurationMs, currentRemainingMs) {
-    const deltaMs = targetDurationMs - currentRemainingMs;
+    const deltaMs = targetDurationMs - currentRemainingMs
     debugState.dispatch(VV({
       timer: timerState.time,
-      deltaMs
-    }));
+      deltaMs,
+    }))
 
     // Resume if currently paused
     if (timerState.time?.isPaused) {
-      debugState.dispatch(_$$ne(this.getTimerState().time));
+      debugState.dispatch(_$$ne(this.getTimerState().time))
     }
   }
 
@@ -3753,9 +3863,9 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * stopTimer - Stop the current timer
    */
   stopTimer() {
-    const timerState = this.getTimerState();
+    const timerState = this.getTimerState()
     if (P$(timerState.time) > 0) {
-      debugState.dispatch(Vk(timerState.time));
+      debugState.dispatch(Vk(timerState.time))
     }
   }
 
@@ -3769,32 +3879,32 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM array containing user information objects
    */
   createActiveUsersApi() {
-    const vm = this.vm;
-    const allUsers = PluginHelpers.getAllUsers();
-    const usersArray = vm.newArray();
+    const vm = this.vm
+    const allUsers = PluginHelpers.getAllUsers()
+    const usersArray = vm.newArray()
 
     // Get user info lookup for efficient access
-    const userInfoLookup = this.getMultiplayerUserInfoBySessionId();
+    const userInfoLookup = this.getMultiplayerUserInfoBySessionId()
 
     // Process users and build array
-    this.processAndAddUsers(usersArray, allUsers, userInfoLookup, vm);
-    return usersArray;
+    this.processAndAddUsers(usersArray, allUsers, userInfoLookup, vm)
+    return usersArray
   }
 
   /**
    * processAndAddUsers - Process all users and add them to the users array
    */
   processAndAddUsers(usersArray, allUsers, userInfoLookup, vm) {
-    let nextUserIndex = 1; // Reserve index 0 for current user
+    let nextUserIndex = 1 // Reserve index 0 for current user
 
     for (const user of allUsers) {
-      const userInfo = this.getMultiplayerUserInfo(user.sessionId, userInfoLookup);
-      const arrayIndex = this.determineUserArrayIndex(userInfo.isCurrentUser, nextUserIndex);
+      const userInfo = this.getMultiplayerUserInfo(user.sessionId, userInfoLookup)
+      const arrayIndex = this.determineUserArrayIndex(userInfo.isCurrentUser, nextUserIndex)
       if (!userInfo.isCurrentUser) {
-        nextUserIndex++;
+        nextUserIndex++
       }
-      const userObject = this.createUserObject(user, userInfo, vm);
-      vm.setProp(usersArray, arrayIndex.toString(), vm.deepWrap(userObject));
+      const userObject = this.createUserObject(user, userInfo, vm)
+      vm.setProp(usersArray, arrayIndex.toString(), vm.deepWrap(userObject))
     }
   }
 
@@ -3802,7 +3912,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * determineUserArrayIndex - Determine array index for user (current user gets index 0)
    */
   determineUserArrayIndex(isCurrentUser, nextUserIndex) {
-    return isCurrentUser ? 0 : nextUserIndex;
+    return isCurrentUser ? 0 : nextUserIndex
   }
 
   /**
@@ -3817,9 +3927,9 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       color: userInfo.color,
       selection: user.selection,
       position: this.processUserPosition(user.position),
-      viewport: this.processUserViewport(user.viewport)
-    };
-    return userObject;
+      viewport: this.processUserViewport(user.viewport),
+    }
+    return userObject
   }
 
   /**
@@ -3827,9 +3937,9 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   processUserPosition(position) {
     if (position?.x === null || position?.y === null) {
-      return null;
+      return null
     }
-    return position;
+    return position
   }
 
   /**
@@ -3837,9 +3947,9 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   processUserViewport(viewport) {
     if (viewport?.x === null || viewport?.y === null || viewport?.height === null || viewport?.width === null) {
-      return null;
+      return null
     }
-    return viewport;
+    return viewport
   }
 
   /**
@@ -3854,23 +3964,23 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns Complete user information object
    */
   getMultiplayerUserInfo(sessionId, userLookup) {
-    const multiplayerState = debugState.getState().multiplayer;
-    const isCurrentUser = multiplayerState.sessionID === sessionId;
-    const userData = userLookup[sessionId];
+    const multiplayerState = debugState.getState().multiplayer
+    const isCurrentUser = multiplayerState.sessionID === sessionId
+    const userData = userLookup[sessionId]
 
     // Get user information based on whether it's current user or remote user
-    const userInfo = this.getUserBasicInfo(isCurrentUser, userData);
+    const userInfo = this.getUserBasicInfo(isCurrentUser, userData)
 
     // Process photo URL if available
-    const photoUrl = this.processUserPhotoUrl(userInfo.photoUrl);
+    const photoUrl = this.processUserPhotoUrl(userInfo.photoUrl)
     return {
       sessionId,
       name: userInfo.name,
       userId: userInfo.userId,
       color: userData?.color || null,
       photoUrl: photoUrl ? photoUrl.toString() : null,
-      isCurrentUser: multiplayerState.sessionID === sessionId
-    };
+      isCurrentUser: multiplayerState.sessionID === sessionId,
+    }
   }
 
   /**
@@ -3878,9 +3988,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   getUserBasicInfo(isCurrentUser, userData) {
     if (isCurrentUser && !userData) {
-      return this.getCurrentUserInfo();
-    } else {
-      return this.getRemoteUserInfo(userData);
+      return this.getCurrentUserInfo()
+    }
+    else {
+      return this.getRemoteUserInfo(userData)
     }
   }
 
@@ -3888,27 +3999,28 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * getCurrentUserInfo - Get current user information from various sources
    */
   getCurrentUserInfo() {
-    const userState = debugState.getState().user;
-    const selectedView = debugState.getState().selectedView;
-    const isWorkshopMode = zg(selectedView);
-    const isFullscreenWorkshop = selectedView.view === 'fullscreen' && selectedView.workshopModeInfo;
-    let name: string | null = null;
-    let photoUrl = null;
-    let userId = null;
+    const userState = debugState.getState().user
+    const selectedView = debugState.getState().selectedView
+    const isWorkshopMode = zg(selectedView)
+    const isFullscreenWorkshop = selectedView.view === 'fullscreen' && selectedView.workshopModeInfo
+    let name: string | null = null
+    let photoUrl = null
+    let userId = null
     if (userState) {
-      name = userState.name;
-      photoUrl = userState.img_url;
-    } else if (isWorkshopMode) {
-      name = isFullscreenWorkshop ? localStorage.getItem(_$$K(selectedView.workshopModeInfo.id)) : null;
+      name = userState.name
+      photoUrl = userState.img_url
+    }
+    else if (isWorkshopMode) {
+      name = isFullscreenWorkshop ? localStorage.getItem(generateAnonymouseName(selectedView.workshopModeInfo.id)) : null
     }
 
     // Get user ID for current user
-    userId = o8() ?? null;
+    userId = o8() ?? null
     return {
       name,
       photoUrl,
-      userId
-    };
+      userId,
+    }
   }
 
   /**
@@ -3918,19 +4030,21 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     return {
       name: userData?.name ?? null,
       photoUrl: userData?.imageURL ?? null,
-      userId: userData?.userID ?? null
-    };
+      userId: userData?.userID ?? null,
+    }
   }
 
   /**
    * processUserPhotoUrl - Process and validate user photo URL
    */
   processUserPhotoUrl(photoUrl) {
-    if (!photoUrl) return null;
+    if (!photoUrl)
+      return null
     try {
-      return tB(new URL(photoUrl));
-    } catch {
-      return null;
+      return tB(new URL(photoUrl))
+    }
+    catch {
+      return null
     }
   }
 
@@ -3943,12 +4057,12 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns Lookup object with session ID as key and user data as value
    */
   getMultiplayerUserInfoBySessionId() {
-    const multiplayerState = debugState.getState().multiplayer;
-    const userLookup = {};
-    multiplayerState.allUsers.forEach(user => {
-      userLookup[user.sessionID] = user;
-    });
-    return userLookup;
+    const multiplayerState = debugState.getState().multiplayer
+    const userLookup = {}
+    multiplayerState.allUsers.forEach((user) => {
+      userLookup[user.sessionID] = user
+    })
+    return userLookup
   }
 
   /**
@@ -3961,37 +4075,37 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with user properties or null
    */
   createUserApi() {
-    const vm = this.vm;
-    const userState = debugState.getState().user;
-    const selectedView = debugState.getState().selectedView;
-    const isWorkshopMode = zg(selectedView);
+    const vm = this.vm
+    const userState = debugState.getState().user
+    const selectedView = debugState.getState().selectedView
+    const isWorkshopMode = zg(selectedView)
 
     // Return null if no user and not in workshop mode
     if (userState === null && !isWorkshopMode) {
-      return vm.$$null;
+      return vm.$$null
     }
-    const userObject = vm.newObject();
-    const userId = o8();
-    const multiplayerState = debugState.getState().multiplayer;
+    const userObject = vm.newObject()
+    const userId = o8()
+    const multiplayerState = debugState.getState().multiplayer
 
     // Get user info from multiplayer context
-    const userInfo = this.getMultiplayerUserInfo(multiplayerState.sessionID, this.getMultiplayerUserInfoBySessionId());
+    const userInfo = this.getMultiplayerUserInfo(multiplayerState.sessionID, this.getMultiplayerUserInfoBySessionId())
 
     // Set user properties
-    this.setUserApiProperties(userObject, userId, userInfo, vm);
-    vm.shallowFreezeObject(userObject);
-    return userObject;
+    this.setUserApiProperties(userObject, userId, userInfo, vm)
+    vm.shallowFreezeObject(userObject)
+    return userObject
   }
 
   /**
    * setUserApiProperties - Set all user API properties on the user object
    */
   setUserApiProperties(userObject, userId, userInfo, vm) {
-    vm.setProp(userObject, 'id', userId ? vm.newString(userId) : vm.$$null);
-    vm.setProp(userObject, 'photoUrl', userInfo.photoUrl ? vm.newString(userInfo.photoUrl.toString()) : vm.$$null);
-    vm.setProp(userObject, 'name', userInfo.name ? vm.newString(userInfo.name) : vm.$$null);
-    vm.setProp(userObject, 'color', userInfo.color ? vm.newString(userInfo.color) : vm.$$null);
-    vm.setProp(userObject, 'sessionId', vm.newNumber(userInfo.sessionId));
+    vm.setProp(userObject, 'id', userId ? vm.newString(userId) : vm.$$null)
+    vm.setProp(userObject, 'photoUrl', userInfo.photoUrl ? vm.newString(userInfo.photoUrl.toString()) : vm.$$null)
+    vm.setProp(userObject, 'name', userInfo.name ? vm.newString(userInfo.name) : vm.$$null)
+    vm.setProp(userObject, 'color', userInfo.color ? vm.newString(userInfo.color) : vm.$$null)
+    vm.setProp(userObject, 'sessionId', vm.newNumber(userInfo.sessionId))
   }
 
   /**
@@ -4004,35 +4118,35 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with viewport API methods and properties
    */
   createViewportApi() {
-    const vm = this.vm;
-    const viewportApi = vm.newObject();
+    const vm = this.vm
+    const viewportApi = vm.newObject()
 
     // Helper function to check if in query mode
-    const isQueryMode = () => this.queryMode;
+    const isQueryMode = () => this.queryMode
 
     // Setup viewport center property
-    this.setupViewportCenterProperty(viewportApi, vm, isQueryMode);
+    this.setupViewportCenterProperty(viewportApi, vm, isQueryMode)
 
     // Setup viewport bounds property
-    this.setupViewportBoundsProperty(viewportApi, vm);
+    this.setupViewportBoundsProperty(viewportApi, vm)
 
     // Setup viewport zoom property
-    this.setupViewportZoomProperty(viewportApi, vm, isQueryMode);
+    this.setupViewportZoomProperty(viewportApi, vm, isQueryMode)
 
     // Setup scroll and zoom into view function
-    this.setupScrollAndZoomFunction(viewportApi, vm, isQueryMode);
+    this.setupScrollAndZoomFunction(viewportApi, vm, isQueryMode)
 
     // Setup slides view property if in slides mode
     if (this.inSlides()) {
-      this.setupSlidesViewProperty(viewportApi, vm);
+      this.setupSlidesViewProperty(viewportApi, vm)
     }
 
     // Setup canvas view property if in buzz or slides mode
     if (this.inBuzz() || this.inSlides()) {
-      this.setupCanvasViewProperty(viewportApi, vm);
+      this.setupCanvasViewProperty(viewportApi, vm)
     }
-    vm.shallowFreezeObject(viewportApi);
-    return viewportApi;
+    vm.shallowFreezeObject(viewportApi)
+    return viewportApi
   }
 
   /**
@@ -4050,37 +4164,37 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: false,
         metricsKey: 'viewport.center',
         get: () => {
-          const viewportBounds = PluginHelpers.getViewportBounds();
-          const centerObject = vm.newObject();
-          vm.setProp(centerObject, 'x', vm.newNumber(viewportBounds.x + viewportBounds.width / 2));
-          vm.setProp(centerObject, 'y', vm.newNumber(viewportBounds.y + viewportBounds.height / 2));
-          vm.shallowFreezeObject(centerObject);
-          return centerObject;
+          const viewportBounds = PluginHelpers.getViewportBounds()
+          const centerObject = vm.newObject()
+          vm.setProp(centerObject, 'x', vm.newNumber(viewportBounds.x + viewportBounds.width / 2))
+          vm.setProp(centerObject, 'y', vm.newNumber(viewportBounds.y + viewportBounds.height / 2))
+          vm.shallowFreezeObject(centerObject)
+          return centerObject
         },
-        set: valueHandle => {
+        set: (valueHandle) => {
           if (isQueryMode()) {
-            throw new Error('Cannot modify viewport in queryMode');
+            throw new Error('Cannot modify viewport in queryMode')
           }
           const {
             x,
-            y
+            y,
           } = validateWithZSchema({
             vm,
             handle: valueHandle,
             zSchema: FigmaSchema.Vector,
-            property: 'viewport.center'
-          });
+            property: 'viewport.center',
+          })
           PluginHelpers.setViewportCenter({
             x,
-            y
-          });
-          return vm.undefined;
-        }
+            y,
+          })
+          return vm.undefined
+        },
       },
       canWriteInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4097,20 +4211,20 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: false,
         metricsKey: 'viewport.bounds',
         get: () => {
-          const viewportBounds = PluginHelpers.getViewportBounds();
-          const boundsObject = vm.newObject();
-          vm.setProp(boundsObject, 'x', vm.newNumber(viewportBounds.x));
-          vm.setProp(boundsObject, 'y', vm.newNumber(viewportBounds.y));
-          vm.setProp(boundsObject, 'width', vm.newNumber(viewportBounds.width));
-          vm.setProp(boundsObject, 'height', vm.newNumber(viewportBounds.height));
-          vm.shallowFreezeObject(boundsObject);
-          return boundsObject;
-        }
+          const viewportBounds = PluginHelpers.getViewportBounds()
+          const boundsObject = vm.newObject()
+          vm.setProp(boundsObject, 'x', vm.newNumber(viewportBounds.x))
+          vm.setProp(boundsObject, 'y', vm.newNumber(viewportBounds.y))
+          vm.setProp(boundsObject, 'width', vm.newNumber(viewportBounds.width))
+          vm.setProp(boundsObject, 'height', vm.newNumber(viewportBounds.height))
+          vm.shallowFreezeObject(boundsObject)
+          return boundsObject
+        },
       },
       canWriteInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4128,30 +4242,30 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: false,
         metricsKey: 'viewport.zoom',
         get: () => {
-          const zoomScale = PluginHelpers.getViewportZoomScale();
-          return vm.newNumber(zoomScale);
+          const zoomScale = PluginHelpers.getViewportZoomScale()
+          return vm.newNumber(zoomScale)
         },
-        set: valueHandle => {
+        set: (valueHandle) => {
           if (isQueryMode()) {
-            throw new Error('Cannot modify viewport in queryMode');
+            throw new Error('Cannot modify viewport in queryMode')
           }
           const zoomValue = validateWithZSchema({
             vm,
             handle: valueHandle,
             zSchema: FigmaSchema.PositiveFloat,
-            property: 'viewport.zoom'
-          });
+            property: 'viewport.zoom',
+          })
           if (!(zoomValue > 0)) {
-            throw new Error('viewport.zoom expects a positive number');
+            throw new Error('viewport.zoom expects a positive number')
           }
-          PluginHelpers.setViewportZoomScale(zoomValue);
-          return vm.undefined;
-        }
+          PluginHelpers.setViewportZoomScale(zoomValue)
+          return vm.undefined
+        },
       },
       canWriteInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4166,27 +4280,27 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: viewportApi,
       key: 'scrollAndZoomIntoView',
       metricsKey: 'viewport.scrollAndZoomIntoView',
-      cb: nodesHandle => {
+      cb: (nodesHandle) => {
         if (isQueryMode()) {
-          throw new Error('Cannot modify viewport in queryMode');
+          throw new Error('Cannot modify viewport in queryMode')
         }
         if (!vm.isArray(nodesHandle)) {
-          throw new TypeError('Call to scrollAndZoomIntoView expected an array');
+          throw new TypeError('Call to scrollAndZoomIntoView expected an array')
         }
-        const nodeIds: string[] = [];
-        const arrayLength = vm.getNumberProp(nodesHandle, 'length');
+        const nodeIds: string[] = []
+        const arrayLength = vm.getNumberProp(nodesHandle, 'length')
         for (let i = 0; i < arrayLength; i++) {
-          const nodeHandle = vm.getProp(nodesHandle, i.toString());
-          const nodeId = vm.getString(vm.getProp(nodeHandle, 'id'));
-          nodeIds.push(nodeId);
+          const nodeHandle = vm.getProp(nodesHandle, i.toString())
+          const nodeId = vm.getString(vm.getProp(nodeHandle, 'id'))
+          nodeIds.push(nodeId)
         }
-        PluginHelpers.scrollAndZoomIntoView(nodeIds);
-        return vm.undefined;
+        PluginHelpers.scrollAndZoomIntoView(nodeIds)
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4203,28 +4317,29 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: true,
         metricsKey: 'viewport.slidesView',
         get: () => {
-          const isInFocusedNodeView = AppStateTsApi.singleSlideView().isInFocusedNodeView.getCopy();
-          return vm.newString(isInFocusedNodeView ? 'single-slide' : 'grid');
+          const isInFocusedNodeView = AppStateTsApi.singleSlideView().isInFocusedNodeView.getCopy()
+          return vm.newString(isInFocusedNodeView ? 'single-slide' : 'grid')
         },
-        set: valueHandle => {
+        set: (valueHandle) => {
           const viewType = validateWithZSchema({
             vm,
             handle: valueHandle,
             zSchema: _$$z.union([_$$z.literal('grid'), _$$z.literal('single-slide')]),
-            property: 'grid or single-slide'
-          });
-          const isInFocusedNodeView = AppStateTsApi.singleSlideView().isInFocusedNodeView.getCopy();
+            property: 'grid or single-slide',
+          })
+          const isInFocusedNodeView = AppStateTsApi.singleSlideView().isInFocusedNodeView.getCopy()
           if (viewType === 'grid' && isInFocusedNodeView) {
-            AppStateTsApi.singleSlideView().exitFocusedNodeView();
-          } else if (viewType === 'single-slide' && !isInFocusedNodeView) {
-            fullscreenValue.triggerAction('enter-single-slide-view');
+            AppStateTsApi.singleSlideView().exitFocusedNodeView()
           }
-        }
+          else if (viewType === 'single-slide' && !isInFocusedNodeView) {
+            fullscreenValue.triggerAction('enter-single-slide-view')
+          }
+        },
       },
       canWriteInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4241,52 +4356,54 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: true,
         metricsKey: 'viewport.canvasView',
         get: () => {
-          let isInFocusedNodeView = false;
+          let isInFocusedNodeView = false
           switch (this.fullscreenEditorType) {
             case FEditorType.Cooper:
-              isInFocusedNodeView = AppStateTsApi?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false;
-              break;
+              isInFocusedNodeView = AppStateTsApi?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false
+              break
             case FEditorType.Slides:
-              isInFocusedNodeView = AppStateTsApi?.singleSlideView().isInFocusedNodeView.getCopy() ?? false;
-              break;
+              isInFocusedNodeView = AppStateTsApi?.singleSlideView().isInFocusedNodeView.getCopy() ?? false
+              break
           }
-          return vm.newString(isInFocusedNodeView ? 'single-asset' : 'grid');
+          return vm.newString(isInFocusedNodeView ? 'single-asset' : 'grid')
         },
-        set: valueHandle => {
+        set: (valueHandle) => {
           const viewType = validateWithZSchema({
             vm,
             handle: valueHandle,
             zSchema: _$$z.union([_$$z.literal('grid'), _$$z.literal('single-asset')]),
-            property: 'grid or single-asset'
-          });
+            property: 'grid or single-asset',
+          })
           switch (this.fullscreenEditorType) {
             case FEditorType.Cooper:
-              {
-                const isInFocusedNodeView = AppStateTsApi?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false;
-                if (viewType === 'grid' && isInFocusedNodeView) {
-                  AppStateTsApi?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen();
-                } else if (viewType === 'single-asset' && !isInFocusedNodeView) {
-                  AppStateTsApi?.cooperFocusView().enterFocusedNodeView();
-                }
-                break;
+            {
+              const isInFocusedNodeView = AppStateTsApi?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false
+              if (viewType === 'grid' && isInFocusedNodeView) {
+                AppStateTsApi?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen()
               }
+              else if (viewType === 'single-asset' && !isInFocusedNodeView) {
+                AppStateTsApi?.cooperFocusView().enterFocusedNodeView()
+              }
+              break
+            }
             case FEditorType.Slides:
-              {
-                const isInFocusedNodeView = AppStateTsApi?.singleSlideView().isInFocusedNodeView.getCopy() ?? false;
-                if (viewType === 'grid' && isInFocusedNodeView) {
-                  AppStateTsApi?.singleSlideView().exitFocusedNodeView();
-                } else if (viewType === 'single-asset' && !isInFocusedNodeView) {
-                  AppStateTsApi?.singleSlideView().enterFocusedNodeView();
-                }
-                break;
+            {
+              const isInFocusedNodeView = AppStateTsApi?.singleSlideView().isInFocusedNodeView.getCopy() ?? false
+              if (viewType === 'grid' && isInFocusedNodeView) {
+                AppStateTsApi?.singleSlideView().exitFocusedNodeView()
               }
+              else if (viewType === 'single-asset' && !isInFocusedNodeView) {
+                AppStateTsApi?.singleSlideView().enterFocusedNodeView()
+              }
+              break
+            }
           }
-        }
+        },
       },
       canWriteInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4298,25 +4415,25 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with parameters API event handlers
    */
   createParametersApi() {
-    const vm = this.vm;
-    const parametersApi = vm.newObject();
+    const vm = this.vm
+    const parametersApi = vm.newObject()
 
     // Add event handlers for parameters
-    this.addEventHandlersTo(parametersApi, ad, 'figma.parameters', _eventType => {
+    this.addEventHandlersTo(parametersApi, ad, 'figma.parameters', (_eventType) => {
       if (this.options.apiMode.type !== 'PLUGIN') {
-        throw new Error('Cannot use "parameters.on(input)" from the developer tools console');
+        throw new Error('Cannot use "parameters.on(input)" from the developer tools console')
       }
-    });
-    vm.shallowFreezeObject(parametersApi);
+    })
+    vm.shallowFreezeObject(parametersApi)
 
     // Setup parameter input event triggers if in plugin mode
     if (this.options.apiMode.type === 'PLUGIN') {
       resolveDeferredPromise({
         triggerParameterInputEvent: this.triggerParameterInputEvent,
-        triggerRunEvent: this.triggerRunEvent
-      });
+        triggerRunEvent: this.triggerRunEvent,
+      })
     }
-    return parametersApi;
+    return parametersApi
   }
 
   /**
@@ -4329,14 +4446,14 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @throws Error if codegen capability is not specified
    */
   createCodegenApi() {
-    const vm = this.vm;
+    const vm = this.vm
 
     // Validate codegen capability
     if (!this.options.capabilities?.includes('codegen')) {
-      const capabilityName = 'codegen';
-      throw new Error(`"${capabilityName}" capability is not specified in manifest.json. Add the following to your manifest.json: "capabilities": ["${capabilityName}"]. See https://www.figma.com/plugin-docs/manifest/#capabilities for more details.`);
+      const capabilityName = 'codegen'
+      throw new Error(`"${capabilityName}" capability is not specified in manifest.json. Add the following to your manifest.json: "capabilities": ["${capabilityName}"]. See https://www.figma.com/plugin-docs/manifest/#capabilities for more details.`)
     }
-    const codegenApi = vm.newObject();
+    const codegenApi = vm.newObject()
 
     // Setup preferences property
     this.defineVmProp({
@@ -4346,12 +4463,12 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         metricsKey: 'codegen.preferences',
         enumerable: true,
         configurable: false,
-        get: () => vm.deepWrap(this.getCodegenPreferences())
+        get: () => vm.deepWrap(this.getCodegenPreferences()),
       },
       canWriteInReadOnly: false,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Setup refresh function
     this.defineVmFunction({
@@ -4359,17 +4476,17 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'refresh',
       metricsKey: 'codegen.refresh',
       cb: () => {
-        _$$c();
-        return vm.undefined;
+        _$$c()
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Add event handlers for codegen events
-    this.addEventHandlersTo(codegenApi, ['generate', 'preferenceschange'], 'figma.codegen', null);
-    return codegenApi;
+    this.addEventHandlersTo(codegenApi, ['generate', 'preferenceschange'], 'figma.codegen', null)
+    return codegenApi
   }
 
   /**
@@ -4381,39 +4498,41 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with dev resources API event handlers
    */
   createDevResourcesApi() {
-    const vm = this.vm;
-    const devResourcesApi = vm.newObject();
+    const vm = this.vm
+    const devResourcesApi = vm.newObject()
     const {
       apiMode,
       pluginID,
-      pluginVersionID
-    } = this.options;
+      pluginVersionID,
+    } = this.options
 
     // Check if dev resources are available
     const isDevResourcesAvailable = (() => {
-      const hasPlugin = getOpenExternalPluginIds().has(pluginID);
-      const isLocalWithFlag = (apiMode.type === 'CONSOLE_SHIM' || !pluginVersionID) && getFeatureFlags().plugins_related_links_local;
-      return hasPlugin || isLocalWithFlag;
-    })();
+      const hasPlugin = getOpenExternalPluginIds().has(pluginID)
+      const isLocalWithFlag = (apiMode.type === 'CONSOLE_SHIM' || !pluginVersionID) && getFeatureFlags().plugins_related_links_local
+      return hasPlugin || isLocalWithFlag
+    })()
     if (isDevResourcesAvailable) {
-      let eventTypes = ['open'];
+      let eventTypes = ['open']
       if (this.options.capabilities?.includes('linkpreview')) {
-        eventTypes = eventTypes.concat(['linkpreview', 'auth']);
+        eventTypes = eventTypes.concat(['linkpreview', 'auth'])
       }
-      this.addEventHandlersTo(devResourcesApi, eventTypes, 'figma.devResources', null);
+      this.addEventHandlersTo(devResourcesApi, eventTypes, 'figma.devResources', null)
     }
-    return devResourcesApi;
+    return devResourcesApi
   }
+
   createVsCodeApi() {
-    let e = this.vm;
-    return _$$T() ? e.newObject() : e.undefined;
+    let e = this.vm
+    return _$$T() ? e.newObject() : e.undefined
   }
+
   isTextReviewPluginEnabled() {
     let {
-      activeTextReviewPlugin
-    } = debugState.getState().mirror.appModel;
-    let t = this.getPlugin();
-    return !!activeTextReviewPlugin && !!t && isPluginConfigMatching(activeTextReviewPlugin, t);
+      activeTextReviewPlugin,
+    } = debugState.getState().mirror.appModel
+    let t = this.getPlugin()
+    return !!activeTextReviewPlugin && !!t && isPluginConfigMatching(activeTextReviewPlugin, t)
   }
 
   /**
@@ -4426,8 +4545,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with text review API methods
    */
   createTextReviewApi() {
-    const vm = this.vm;
-    const textReviewObject = vm.newObject();
+    const vm = this.vm
+    const textReviewObject = vm.newObject()
     this.defineVmFunction({
       handle: textReviewObject,
       key: 'requestToBeEnabledAsync',
@@ -4436,52 +4555,52 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
+          reject,
+        } = vm.newPromise()
 
         // Handle various validation states
         if (this.queryMode) {
-          reject(vm.newString('Cannot enable text review plugin in query mode.'));
-          return promise;
+          reject(vm.newString('Cannot enable text review plugin in query mode.'))
+          return promise
         }
         if (this.isTextReviewPluginEnabled()) {
-          resolve(vm.undefined);
-          return promise;
+          resolve(vm.undefined)
+          return promise
         }
         if (this.shouldRejectTextReviewRequest()) {
-          reject(vm.newString('The user rejected your request to enable text review plugin too many times.'));
-          return promise;
+          reject(vm.newString('The user rejected your request to enable text review plugin too many times.'))
+          return promise
         }
 
         // Process the text review request
-        this.processTextReviewRequest(vm, resolve, reject);
-        return promise;
+        this.processTextReviewRequest(vm, resolve, reject)
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
-    return textReviewObject;
+      hasEditScope: false,
+    })
+    return textReviewObject
   }
 
   /**
    * shouldRejectTextReviewRequest - Check if text review request should be rejected
    */
   shouldRejectTextReviewRequest() {
-    return this.textReviewRequestRejects >= 2 || this.isTextReviewRequestModalOpen;
+    return this.textReviewRequestRejects >= 2 || this.isTextReviewRequestModalOpen
   }
 
   /**
    * processTextReviewRequest - Process text review enablement request
    */
   processTextReviewRequest(vm, resolve, reject) {
-    this.isTextReviewRequestModalOpen = true;
-    const plugin = this.getPlugin();
-    const pluginName = plugin?.name || 'Plugin';
-    const enablementPromise = this.createTextReviewEnablementPromise(pluginName);
+    this.isTextReviewRequestModalOpen = true
+    const plugin = this.getPlugin()
+    const pluginName = plugin?.name || 'Plugin'
+    const enablementPromise = this.createTextReviewEnablementPromise(pluginName)
     vm.registerPromise(enablementPromise).then(result => this.handleTextReviewSuccess(result, vm, resolve), () => this.handleTextReviewRejection(vm, reject)).finally(() => {
-      this.isTextReviewRequestModalOpen = false;
-    });
+      this.isTextReviewRequestModalOpen = false
+    })
   }
 
   /**
@@ -4494,10 +4613,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         data: {
           reject,
           resolve,
-          pluginName
-        }
-      }));
-    });
+          pluginName,
+        },
+      }))
+    })
   }
 
   /**
@@ -4505,35 +4624,37 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   handleTextReviewSuccess(result, vm, resolve) {
     const {
-      turnOffSpellCheck
-    } = result;
+      turnOffSpellCheck,
+    } = result
 
     // Handle spell check preference
     if (turnOffSpellCheck && UK().spellCheckPreference.getCopy()) {
-      fullscreenValue.triggerAction('toggle-spell-check');
+      fullscreenValue.triggerAction('toggle-spell-check')
     }
 
     // Enable the plugin
-    const plugin = this.getPlugin();
+    const plugin = this.getPlugin()
     if (plugin) {
-      const pluginConfig = hasLocalFileId(plugin) ? {
-        type: 'local',
-        localFileId: plugin.localFileId
-      } : {
-        type: 'published',
-        pluginId: plugin.plugin_id
-      };
-      Br(pluginConfig);
+      const pluginConfig = hasLocalFileId(plugin)
+        ? {
+            type: 'local',
+            localFileId: plugin.localFileId,
+          }
+        : {
+            type: 'published',
+            pluginId: plugin.plugin_id,
+          }
+      updateActiveTextReviewPlugin(pluginConfig)
     }
-    requestAnimationFrame(() => resolve(vm.undefined));
+    requestAnimationFrame(() => resolve(vm.undefined))
   }
 
   /**
    * handleTextReviewRejection - Handle text review request rejection
    */
   handleTextReviewRejection(vm, reject) {
-    this.textReviewRequestRejects++;
-    reject(vm.newString('The user declined to enable your plugin for text review.'));
+    this.textReviewRequestRejects++
+    reject(vm.newString('The user declined to enable your plugin for text review.'))
   }
 
   /**
@@ -4548,29 +4669,31 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
+          reject,
+        } = vm.newPromise()
         if (this.queryMode) {
-          reject(vm.newString('Cannot disable text review plugin in query mode.'));
-          return promise;
+          reject(vm.newString('Cannot disable text review plugin in query mode.'))
+          return promise
         }
         const {
-          activeTextReviewPlugin
-        } = debugState.getState().mirror.appModel;
+          activeTextReviewPlugin,
+        } = debugState.getState().mirror.appModel
         if (this.isTextReviewPluginEnabled()) {
-          Br(null);
-          requestAnimationFrame(() => resolve(vm.undefined));
-        } else if (activeTextReviewPlugin == null) {
-          resolve(vm.undefined);
-        } else {
-          reject(vm.newString('The user currently has a text review plugin enabled that isn\'t yours. Did you mean to call figma.textreview.requestToBeEnabledAsync?'));
+          updateActiveTextReviewPlugin(null)
+          requestAnimationFrame(() => resolve(vm.undefined))
         }
-        return promise;
+        else if (activeTextReviewPlugin == null) {
+          resolve(vm.undefined)
+        }
+        else {
+          reject(vm.newString('The user currently has a text review plugin enabled that isn\'t yours. Did you mean to call figma.textreview.requestToBeEnabledAsync?'))
+        }
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4583,43 +4706,45 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       options: {
         enumerable: true,
         metricsKey: 'textreview.isEnabled',
-        get: () => vm.deepWrap(this.isTextReviewPluginEnabled())
+        get: () => vm.deepWrap(this.isTextReviewPluginEnabled()),
       },
       canWriteInReadOnly: false,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Setup additional text review functions
-    this.setupTextReviewDisableFunction(textReviewObject, vm);
-    this.setupTextReviewEnabledProperty(textReviewObject, vm);
-    return textReviewObject;
+    this.setupTextReviewDisableFunction(textReviewObject, vm)
+    this.setupTextReviewEnabledProperty(textReviewObject, vm)
+    return textReviewObject
   }
+
   getCodegenLanguage() {
     let {
-      devHandoffCodeLanguage
-    } = debugState.getState().mirror.appModel;
-    return devHandoffCodeLanguage?.pluginLanguage ?? '';
+      devHandoffCodeLanguage,
+    } = debugState.getState().mirror.appModel
+    return devHandoffCodeLanguage?.pluginLanguage ?? ''
   }
+
   getCodegenPreferences() {
-    let e = this.getPlugin();
+    let e = this.getPlugin()
     if (!e) {
       return {
         unit: 'PIXEL',
         scaleFactor: 1,
-        customSettings: {}
-      };
+        customSettings: {},
+      }
     }
-    let t = this.getCodegenLanguage();
-    let i = findCodegenLanguage(e, t);
+    let t = this.getCodegenLanguage()
+    let i = findCodegenLanguage(e, t)
     let {
-      preferences
-    } = _$$n_(e, i);
+      preferences,
+    } = computeCodeExtensionPreferences(e, i)
     return {
       ...preferences,
       unit: preferences.unit === MeasurementUnit.PIXEL ? 'PIXEL' : 'SCALED',
-      scaleFactor: preferences.scaleFactor || 1
-    };
+      scaleFactor: preferences.scaleFactor || 1,
+    }
   }
 
   /**
@@ -4632,22 +4757,22 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with UI API methods and properties
    */
   createUiApi() {
-    const vm = this.vm;
-    const uiObject = vm.newObject();
+    const vm = this.vm
+    const uiObject = vm.newObject()
 
     // Setup core UI control functions
-    this.setupUiControlFunctions(uiObject, vm);
+    this.setupUiControlFunctions(uiObject, vm)
 
     // Setup position and dimension functions
-    this.setupUiPositionFunctions(uiObject, vm);
+    this.setupUiPositionFunctions(uiObject, vm)
 
     // Setup message handling
-    this.setupUiMessageHandling(uiObject, vm);
+    this.setupUiMessageHandling(uiObject, vm)
 
     // Add event handlers
-    this.addEventHandlersTo(uiObject, al, 'figma.ui', null);
-    vm.shallowFreezeObject(uiObject);
-    return uiObject;
+    this.addEventHandlersTo(uiObject, al, 'figma.ui', null)
+    vm.shallowFreezeObject(uiObject)
+    return uiObject
   }
 
   /**
@@ -4661,18 +4786,18 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'ui.show',
       cb: () => {
         if (this.queryMode) {
-          throw new Error('Cannot show UI in queryMode.');
+          throw new Error('Cannot show UI in queryMode.')
         }
         if (!this.runtimeOptions?.allowVisibleIframe) {
-          throw new Error('Cannot show UI');
+          throw new Error('Cannot show UI')
         }
-        this.uiHandle.showIframe();
-        return vm.undefined;
+        this.uiHandle.showIframe()
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Hide UI function
     this.defineVmFunction({
@@ -4680,13 +4805,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'hide',
       metricsKey: 'ui.hide',
       cb: () => {
-        this.uiHandle.hideIframe();
-        return vm.undefined;
+        this.uiHandle.hideIframe()
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Close UI function
     this.defineVmFunction({
@@ -4694,13 +4819,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'close',
       metricsKey: 'ui.close',
       cb: () => {
-        this.uiHandle.destroyIframe();
-        return vm.undefined;
+        this.uiHandle.destroyIframe()
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4717,21 +4842,21 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           vm,
           handle: widthHandle,
           zSchema: FigmaSchema.PositiveInteger,
-          property: 'resize width'
-        });
+          property: 'resize width',
+        })
         const height = validateWithZSchema({
           vm,
           handle: heightHandle,
           zSchema: FigmaSchema.PositiveInteger,
-          property: 'resize height'
-        });
-        this.uiHandle.setIframeSize(width, height);
-        return vm.undefined;
+          property: 'resize height',
+        })
+        this.uiHandle.setIframeSize(width, height)
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Get position function
     this.defineVmFunction({
@@ -4741,14 +4866,14 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       cb: () => {
         const {
           windowSpace,
-          canvasSpace
-        } = this.uiHandle.getIframePosition();
-        return this.createPositionObject(windowSpace, canvasSpace, vm);
+          canvasSpace,
+        } = this.uiHandle.getIframePosition()
+        return this.createPositionObject(windowSpace, canvasSpace, vm)
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Reposition function
     this.defineVmFunction({
@@ -4760,37 +4885,37 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           vm,
           handle: xHandle,
           zSchema: FigmaSchema.FiniteNumber,
-          property: 'x'
-        });
+          property: 'x',
+        })
         const y = validateWithZSchema({
           vm,
           handle: yHandle,
           zSchema: FigmaSchema.FiniteNumber,
-          property: 'y'
-        });
-        this.uiHandle.setIframePosition(x, y);
-        return vm.undefined;
+          property: 'y',
+        })
+        this.uiHandle.setIframePosition(x, y)
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
    * createPositionObject - Create position object with window and canvas space coordinates
    */
   createPositionObject(windowSpace, canvasSpace, vm) {
-    const positionObject = vm.newObject();
-    const windowSpaceObject = vm.newObject();
-    vm.setProp(windowSpaceObject, 'x', vm.newNumber(windowSpace.x));
-    vm.setProp(windowSpaceObject, 'y', vm.newNumber(windowSpace.y));
-    const canvasSpaceObject = vm.newObject();
-    vm.setProp(canvasSpaceObject, 'x', vm.newNumber(canvasSpace.x));
-    vm.setProp(canvasSpaceObject, 'y', vm.newNumber(canvasSpace.y));
-    vm.setProp(positionObject, 'windowSpace', windowSpaceObject);
-    vm.setProp(positionObject, 'canvasSpace', canvasSpaceObject);
-    return positionObject;
+    const positionObject = vm.newObject()
+    const windowSpaceObject = vm.newObject()
+    vm.setProp(windowSpaceObject, 'x', vm.newNumber(windowSpace.x))
+    vm.setProp(windowSpaceObject, 'y', vm.newNumber(windowSpace.y))
+    const canvasSpaceObject = vm.newObject()
+    vm.setProp(canvasSpaceObject, 'x', vm.newNumber(canvasSpace.x))
+    vm.setProp(canvasSpaceObject, 'y', vm.newNumber(canvasSpace.y))
+    vm.setProp(positionObject, 'windowSpace', windowSpaceObject)
+    vm.setProp(positionObject, 'canvasSpace', canvasSpaceObject)
+    return positionObject
   }
 
   /**
@@ -4806,22 +4931,22 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         metricsKey: 'ui.onmessage',
         get: () => {
           if (this.options.apiMode.type === 'CONSOLE_SHIM') {
-            throw new Error('Cannot use "onmessage" from the developer tools console');
+            throw new Error('Cannot use "onmessage" from the developer tools console')
           }
-          return this.onMessageCallback ? this.onMessageCallback : vm.undefined;
+          return this.onMessageCallback ? this.onMessageCallback : vm.undefined
         },
-        set: callbackHandle => {
+        set: (callbackHandle) => {
           if (this.options.apiMode.type === 'CONSOLE_SHIM') {
-            throw new Error('Cannot use "onmessage" from the developer tools console');
+            throw new Error('Cannot use "onmessage" from the developer tools console')
           }
-          this.setMessageCallback(callbackHandle, vm);
-          return vm.undefined;
-        }
+          this.setMessageCallback(callbackHandle, vm)
+          return vm.undefined
+        },
       },
       canWriteInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // postMessage function
     this.defineVmFunction({
@@ -4833,48 +4958,50 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           vm,
           handle: optionsHandle,
           zSchema: _$$z.object({
-            origin: _$$z.string().optional()
+            origin: _$$z.string().optional(),
           }).optional(),
-          property: 'postMessage options'
+          property: 'postMessage options',
         }) || {}, {
-          origin: '*'
-        });
+          origin: '*',
+        })
         this.uiHandle.postMessageToIframe({
           pluginMessage: vm.deepUnwrap(messageHandle),
-          pluginId: this.options.pluginID
+          pluginId: this.options.pluginID,
         }, {
-          origin: options.origin
-        });
-        return vm.undefined;
+          origin: options.origin,
+        })
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
    * setMessageCallback - Set the message callback with proper handle management
    */
   setMessageCallback(callbackHandle, vm) {
-    let newCallback;
+    let newCallback
     if (vm.isNull(callbackHandle) || vm.isUndefined(callbackHandle)) {
-      newCallback = undefined;
-    } else if (vm.isFunction(callbackHandle)) {
-      newCallback = callbackHandle;
-    } else {
-      throw new TypeError('onmessage must be a function');
+      newCallback = undefined
+    }
+    else if (vm.isFunction(callbackHandle)) {
+      newCallback = callbackHandle
+    }
+    else {
+      throw new TypeError('onmessage must be a function')
     }
 
     // Release old callback handle
     if (this.onMessageCallback) {
-      vm.releaseHandle(this.onMessageCallback);
+      vm.releaseHandle(this.onMessageCallback)
     }
 
     // Set new callback and retain handle
-    this.onMessageCallback = newCallback;
+    this.onMessageCallback = newCallback
     if (this.onMessageCallback) {
-      vm.retainHandle(this.onMessageCallback);
+      vm.retainHandle(this.onMessageCallback)
     }
   }
 
@@ -4888,20 +5015,20 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with client storage API methods
    */
   createClientStorageApi() {
-    const vm = this.vm;
+    const vm = this.vm
     const {
       userID,
-      pluginID
-    } = this.options;
-    const storageObject = vm.newObject();
+      pluginID,
+    } = this.options
+    const storageObject = vm.newObject()
 
     // Setup all storage operation functions
-    this.setupStorageGetFunction(storageObject, vm, userID, pluginID);
-    this.setupStorageSetFunction(storageObject, vm, userID, pluginID);
-    this.setupStorageDeleteFunction(storageObject, vm, userID, pluginID);
-    this.setupStorageKeysFunction(storageObject, vm, userID, pluginID);
-    vm.shallowFreezeObject(storageObject);
-    return storageObject;
+    this.setupStorageGetFunction(storageObject, vm, userID, pluginID)
+    this.setupStorageSetFunction(storageObject, vm, userID, pluginID)
+    this.setupStorageDeleteFunction(storageObject, vm, userID, pluginID)
+    this.setupStorageKeysFunction(storageObject, vm, userID, pluginID)
+    vm.shallowFreezeObject(storageObject)
+    return storageObject
   }
 
   /**
@@ -4912,29 +5039,29 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: storageObject,
       key: 'getAsync',
       metricsKey: 'clientStorage.getAsync',
-      cb: keyHandle => {
+      cb: (keyHandle) => {
         const key = validateWithZSchema({
           vm,
           handle: keyHandle,
           zSchema: _$$z.string(),
-          property: 'key'
-        });
+          property: 'key',
+        })
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
+          reject,
+        } = vm.newPromise()
         vm.registerPromise(getStorageValueByKey({
           userID,
           pluginID,
-          name: key
-        })).then(value => resolve(vm.deepWrap(value)), error => this.handleStorageError(reject, vm, 'get', key, error));
-        return promise;
+          name: key,
+        })).then(value => resolve(vm.deepWrap(value)), error => this.handleStorageError(reject, vm, 'get', key, error))
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4950,15 +5077,15 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           vm,
           handle: keyHandle,
           zSchema: _$$z.string(),
-          property: 'key'
-        });
-        const value = vm.deepUnwrap(valueHandle);
+          property: 'key',
+        })
+        const value = vm.deepUnwrap(valueHandle)
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
-        const stats = vm.getStats();
+          reject,
+        } = vm.newPromise()
+        const stats = vm.getStats()
         const requestParams = {
           userID,
           pluginID,
@@ -4966,17 +5093,19 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           // Added missing key property
           name: key,
           value,
-          ...(stats ? {
-            stats
-          } : {})
-        };
-        vm.registerPromise(setStorageEntry(requestParams)).then(() => resolve(vm.undefined), error => this.handleStorageError(reject, vm, 'set', key, error));
-        return promise;
+          ...(stats
+            ? {
+                stats,
+              }
+            : {}),
+        }
+        vm.registerPromise(setStorageEntry(requestParams)).then(() => resolve(vm.undefined), error => this.handleStorageError(reject, vm, 'set', key, error))
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -4987,36 +5116,38 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: storageObject,
       key: 'deleteAsync',
       metricsKey: 'clientStorage.deleteAsync',
-      cb: keyHandle => {
+      cb: (keyHandle) => {
         const key = validateWithZSchema({
           vm,
           handle: keyHandle,
           zSchema: _$$z.string(),
-          property: 'key'
-        });
+          property: 'key',
+        })
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
+          reject,
+        } = vm.newPromise()
         vm.registerPromise(setStorageEntry({
           userID,
           pluginID,
-          name: key
+          name: key,
           // remove: true, // Commented out: not supported in StorageEntry type
           // delete: true, // Alternative property for removal - also not supported
         })).then(
         // Type assertion to bypass interface restrictions
-        () => resolve(vm.undefined), error => {
-          const keyStr = JSON.stringify(key);
-          reject(vm.newString(`Failed to delete client storage key ${keyStr}: ${error}`));
-        });
-        return promise;
+          () => resolve(vm.undefined),
+          (error) => {
+            const keyStr = JSON.stringify(key)
+            reject(vm.newString(`Failed to delete client storage key ${keyStr}: ${error}`))
+          },
+        )
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -5031,69 +5162,75 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
+          reject,
+        } = vm.newPromise()
         vm.registerPromise(getAllStorageKeysWithPrefix({
           userID,
           pluginID,
-          name: 'keysAsync' // Added missing name property
-        })).then(keys => resolve(vm.deepWrap(keys)), error => {
-          reject(vm.newString(`Failed to get client storage keys: ${error}`));
-        });
-        return promise;
+          name: 'keysAsync', // Added missing name property
+        })).then(keys => resolve(vm.deepWrap(keys)), (error) => {
+          reject(vm.newString(`Failed to get client storage keys: ${error}`))
+        })
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
    * handleStorageError - Handle storage operation errors with proper logging
    */
   handleStorageError(reject, vm, operation, key, error) {
-    const keyStr = JSON.stringify(key);
-    reject(vm.newString(`Failed to ${operation} client storage key ${keyStr}: ${error}`));
-    reportError(_$$e.EXTENSIBILITY, error instanceof Error ? error : new Error(`figma.clientStorageAsync.${operation}Async failed: ${error}.`));
+    const keyStr = JSON.stringify(key)
+    reject(vm.newString(`Failed to ${operation} client storage key ${keyStr}: ${error}`))
+    reportError(_$$e.EXTENSIBILITY, error instanceof Error ? error : new Error(`figma.clientStorageAsync.${operation}Async failed: ${error}.`))
   }
+
   getPublishedExtension(e) {
     let {
       publishedPlugins,
-      publishedWidgets
-    } = debugState.getState();
-    return publishedPlugins[e] ?? publishedWidgets[e];
+      publishedWidgets,
+    } = debugState.getState()
+    return publishedPlugins[e] ?? publishedWidgets[e]
   }
+
   getOnCanvasPublishedWidgetVersion(e, t) {
     let {
-      publishedCanvasWidgetVersions
-    } = debugState.getState();
-    return publishedCanvasWidgetVersions[e]?.[t];
+      publishedCanvasWidgetVersions,
+    } = debugState.getState()
+    return publishedCanvasWidgetVersions[e]?.[t]
   }
+
   getLocalPlugin(e) {
     let {
-      localPlugins
-    } = debugState.getState();
-    return Object.values(localPlugins).find((t: any) => t.plugin_id === e);
+      localPlugins,
+    } = debugState.getState()
+    return Object.values(localPlugins).find((t: any) => t.plugin_id === e)
   }
+
   getPlugin() {
-    return this.options.isLocal ? this.getLocalPlugin(this.options.pluginID) : this.getPublishedExtension(this.options.pluginID)?.versions[this.options.pluginVersionID];
+    return this.options.isLocal ? this.getLocalPlugin(this.options.pluginID) : this.getPublishedExtension(this.options.pluginID)?.versions[this.options.pluginVersionID]
   }
+
   inReviewByCommunityAdmin(e) {
-    return !!(getFeatureFlags().community_hub_admin && e && AC(e));
+    return !!(getFeatureFlags().community_hub_admin && e && AC(e))
   }
+
   userPaymentStatusType(e) {
     if (this.options.isLocal || this.inReviewByCommunityAdmin(e)) {
-      let e = y1();
-      return e?.type || zH.UNPAID;
+      let e = y1()
+      return e?.type || zH.UNPAID
     }
     if (e && m3(e)) {
       let {
         communityPayments,
-        user
-      } = debugState.getState();
-      return user ? vl(e, user) ? zH.PAID : vT(e, communityPayments) ? zH.PAID : zH.UNPAID : zH.NOT_SUPPORTED;
+        user,
+      } = debugState.getState()
+      return user ? vl(e, user) ? zH.PAID : vT(e, communityPayments) ? zH.PAID : zH.UNPAID : zH.NOT_SUPPORTED
     }
-    return zH.NOT_SUPPORTED;
+    return zH.NOT_SUPPORTED
   }
 
   /**
@@ -5106,25 +5243,25 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with payments API methods and properties
    */
   createPaymentsApi() {
-    const vm = this.vm;
-    const paymentsObject = vm.newObject();
+    const vm = this.vm
+    const paymentsObject = vm.newObject()
 
     // Setup payment tracking functions
-    this.setupPaymentTrackingFunctions(paymentsObject, vm);
+    this.setupPaymentTrackingFunctions(paymentsObject, vm)
 
     // Setup payment status property
-    this.setupPaymentStatusProperty(paymentsObject, vm);
+    this.setupPaymentStatusProperty(paymentsObject, vm)
 
     // Setup development payment functions
-    this.setupDevelopmentPaymentFunctions(paymentsObject, vm);
+    this.setupDevelopmentPaymentFunctions(paymentsObject, vm)
 
     // Setup checkout functions
-    this.setupCheckoutFunctions(paymentsObject, vm);
+    this.setupCheckoutFunctions(paymentsObject, vm)
 
     // Setup payment token function
-    this.setupPaymentTokenFunction(paymentsObject, vm);
-    vm.shallowFreezeObject(paymentsObject);
-    return paymentsObject;
+    this.setupPaymentTokenFunction(paymentsObject, vm)
+    vm.shallowFreezeObject(paymentsObject)
+    return paymentsObject
   }
 
   /**
@@ -5137,20 +5274,20 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'figma.payments.getUserFirstRanSecondsAgo',
       cb: () => {
         const {
-          pluginID
-        } = this.options;
-        const extension = this.getPublishedExtension(pluginID);
+          pluginID,
+        } = this.options
+        const extension = this.getPublishedExtension(pluginID)
         if (extension?.current_user_first_ran_at) {
-          const firstRanDate = new Date(extension.current_user_first_ran_at);
-          const secondsAgo = Math.floor((Date.now() - firstRanDate.getTime()) / 1000);
-          return vm.newNumber(secondsAgo);
+          const firstRanDate = new Date(extension.current_user_first_ran_at)
+          const secondsAgo = Math.floor((Date.now() - firstRanDate.getTime()) / 1000)
+          return vm.newNumber(secondsAgo)
         }
-        return vm.newNumber(0);
+        return vm.newNumber(0)
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -5165,19 +5302,19 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         metricsKey: 'figma.payments.status',
         get: () => {
           const {
-            pluginID
-          } = this.options;
-          const extension = this.getPublishedExtension(pluginID);
-          const statusObject = vm.newObject();
-          vm.setProp(statusObject, 'type', vm.newString(this.userPaymentStatusType(extension)));
-          vm.shallowFreezeObject(statusObject);
-          return statusObject;
-        }
+            pluginID,
+          } = this.options
+          const extension = this.getPublishedExtension(pluginID)
+          const statusObject = vm.newObject()
+          vm.setProp(statusObject, 'type', vm.newString(this.userPaymentStatusType(extension)))
+          vm.shallowFreezeObject(statusObject)
+          return statusObject
+        },
       },
       canWriteInReadOnly: false,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -5188,31 +5325,31 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: paymentsObject,
       key: 'setPaymentStatusInDevelopment',
       metricsKey: 'figma.payments.setPaymentStatusInDevelopment',
-      cb: statusHandle => {
+      cb: (statusHandle) => {
         const {
-          pluginID
-        } = this.options;
-        const extension = this.getPublishedExtension(pluginID);
+          pluginID,
+        } = this.options
+        const extension = this.getPublishedExtension(pluginID)
 
         // Only allow in local development or community admin review
         if (!this.options.isLocal && !this.inReviewByCommunityAdmin(extension)) {
-          return vm.undefined;
+          return vm.undefined
         }
         const paymentStatus = validateWithZSchema({
           vm,
           handle: statusHandle,
           zSchema: _$$z.strictObject({
-            type: _$$z.nativeEnum(zH)
+            type: _$$z.nativeEnum(zH),
           }),
-          property: 'setPaymentStatusInDevelopment'
-        });
-        Qj(paymentStatus);
-        return vm.undefined;
+          property: 'setPaymentStatusInDevelopment',
+        })
+        Qj(paymentStatus)
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -5226,37 +5363,37 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'figma.payments.requestCheckout',
       cb: () => {
         if (!this.checkoutRequested) {
-          this.checkoutRequested = true;
-          jG(this.requestCheckoutCallback);
+          this.checkoutRequested = true
+          jG(this.requestCheckoutCallback)
         }
-        return vm.undefined;
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Initiate checkout async function
     this.defineVmFunction({
       handle: paymentsObject,
       key: 'initiateCheckoutAsync',
       metricsKey: 'figma.payments.initiateCheckoutAsync',
-      cb: optionsHandle => {
+      cb: (optionsHandle) => {
         if (this.queryMode || !this.runtimeOptions.allowInitiateCheckout) {
-          throw new Error('Unexpected call to figma.payments.initiateCheckoutAsync');
+          throw new Error('Unexpected call to figma.payments.initiateCheckoutAsync')
         }
         const {
           promise,
-          resolve
-        } = vm.newPromise();
-        const checkoutOptions = this.parseCheckoutOptions(optionsHandle, vm);
-        vm.registerPromise(this.initiateCheckoutAsyncImpl(checkoutOptions)).then(() => resolve(vm.undefined));
-        return promise;
+          resolve,
+        } = vm.newPromise()
+        const checkoutOptions = this.parseCheckoutOptions(optionsHandle, vm)
+        vm.registerPromise(this.initiateCheckoutAsyncImpl(checkoutOptions)).then(() => resolve(vm.undefined))
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -5264,23 +5401,23 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   parseCheckoutOptions(optionsHandle, vm) {
     const defaultOptions = {
-      interstitial: _$$P3.PAID_FEATURE
-    };
+      interstitial: _$$P3.PAID_FEATURE,
+    }
     if (vm.isUndefined(optionsHandle)) {
-      return defaultOptions;
+      return defaultOptions
     }
     const userOptions = validateWithZSchema({
       vm,
       handle: optionsHandle,
       zSchema: _$$z.object({
-        interstitial: _$$z.nativeEnum(_$$P3)
+        interstitial: _$$z.nativeEnum(_$$P3),
       }).partial(),
-      property: 'initiateCheckoutAsync'
-    });
+      property: 'initiateCheckoutAsync',
+    })
     return {
       ...defaultOptions,
-      ...userOptions
-    };
+      ...userOptions,
+    }
   }
 
   /**
@@ -5295,17 +5432,17 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
-        vm.registerPromise(this.getPluginPaymentTokenAsyncImpl()).then(token => resolve(vm.newString(token))).catch(error => {
-          reject(vm.newString(`Failed to generate plugin payment token with error: ${error.message}`));
-        });
-        return promise;
+          reject,
+        } = vm.newPromise()
+        vm.registerPromise(this.getPluginPaymentTokenAsyncImpl()).then(token => resolve(vm.newString(token))).catch((error) => {
+          reject(vm.newString(`Failed to generate plugin payment token with error: ${error.message}`))
+        })
+        return promise
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -5319,26 +5456,26 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns Promise that resolves when checkout process is complete
    */
   initiateCheckoutAsyncImpl(options) {
-    const user = debugState.getState().user;
+    const user = debugState.getState().user
     const {
       pluginID,
       pluginVersionID,
-      isLocal
-    } = this.options;
+      isLocal,
+    } = this.options
 
     // Get plugin/widget information
-    const publishedExtension = this.getPublishedExtension(pluginID);
-    const localPlugin = isLocal ? this.getLocalPlugin(pluginID) : undefined;
-    const canvasWidget = this.getOnCanvasPublishedWidgetVersion(pluginID, pluginVersionID);
+    const publishedExtension = this.getPublishedExtension(pluginID)
+    const localPlugin = isLocal ? this.getLocalPlugin(pluginID) : undefined
+    const canvasWidget = this.getOnCanvasPublishedWidgetVersion(pluginID, pluginVersionID)
 
     // Validate checkout requirements
-    this.validateCheckoutRequirements(publishedExtension, localPlugin, isLocal);
+    this.validateCheckoutRequirements(publishedExtension, localPlugin, isLocal)
 
     // Setup UI bell notification
-    pN({
-      shouldShowVisualBell: true
-    });
-    return this.executeCheckoutFlow(user, publishedExtension, localPlugin, canvasWidget, options);
+    dequeuePluginStatus({
+      shouldShowVisualBell: true,
+    })
+    return this.executeCheckoutFlow(user, publishedExtension, localPlugin, canvasWidget, options)
   }
 
   /**
@@ -5348,15 +5485,15 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     if (publishedExtension) {
       // Check if plugin is monetized
       if (!m3(publishedExtension) && !localPlugin) {
-        throw new Error('Resource must be monetized to initiate checkout');
+        throw new Error('Resource must be monetized to initiate checkout')
       }
 
       // Check payment status - only allow checkout for unpaid users
       if (this.userPaymentStatusType(publishedExtension) !== zH.UNPAID) {
         if (isLocal) {
-          throw new Error('Cannot initiate checkout, user\'s payment status type is not UNPAID');
+          throw new Error('Cannot initiate checkout, user\'s payment status type is not UNPAID')
         }
-        return Promise.resolve();
+        return Promise.resolve()
       }
     }
   }
@@ -5365,24 +5502,24 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * executeCheckoutFlow - Execute the main checkout flow with proper cleanup
    */
   executeCheckoutFlow(user, publishedExtension, localPlugin, canvasWidget, options) {
-    return new Promise(async resolve => {
-      let isActive = true;
+    return new Promise(async (resolve) => {
+      let isActive = true
 
       // Setup cleanup action for shutdown
       this.options.addShutdownAction(() => {
         if (isActive) {
-          fullscreenValue.dispatch(hideSpecificModal(_$$V));
-          fullscreenValue.dispatch(hideSpecificModal(_$$h));
+          fullscreenValue.dispatch(hideSpecificModal(_$$V))
+          fullscreenValue.dispatch(hideSpecificModal(_$$h))
         }
-      });
+      })
 
       // Execute the checkout process
-      await kA(debugState.dispatch, user, publishedExtension, localPlugin, canvasWidget, options?.interstitial);
+      await kA(debugState.dispatch, user, publishedExtension, localPlugin, canvasWidget, options?.interstitial)
 
       // Mark as complete and resolve
-      isActive = false;
-      resolve(undefined);
-    });
+      isActive = false
+      resolve(undefined)
+    })
   }
 
   /**
@@ -5397,21 +5534,21 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   getPluginPaymentTokenAsyncImpl() {
     const {
       pluginID,
-      isLocal
-    } = this.options;
+      isLocal,
+    } = this.options
 
     // Get plugin information
-    const publishedExtension = this.getPublishedExtension(pluginID);
-    const localPlugin = isLocal ? this.getLocalPlugin(pluginID) : undefined;
+    const publishedExtension = this.getPublishedExtension(pluginID)
+    const localPlugin = isLocal ? this.getLocalPlugin(pluginID) : undefined
 
     // Validate plugin and monetization requirements
-    this.validateTokenRequirements(pluginID, publishedExtension, localPlugin);
+    this.validateTokenRequirements(pluginID, publishedExtension, localPlugin)
 
     // Determine API endpoint type
-    const apiType = this.determineApiType(publishedExtension, localPlugin);
+    const apiType = this.determineApiType(publishedExtension, localPlugin)
 
     // Generate and return token
-    return this.generatePaymentToken(apiType, pluginID);
+    return this.generatePaymentToken(apiType, pluginID)
   }
 
   /**
@@ -5419,10 +5556,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   validateTokenRequirements(pluginID, publishedExtension, localPlugin) {
     if (!pluginID || !publishedExtension && !localPlugin) {
-      throw new Error('Cannot generate plugin payment token, plugin is not found');
+      throw new Error('Cannot generate plugin payment token, plugin is not found')
     }
     if (!m3(publishedExtension) && !localPlugin) {
-      throw new Error('Resource must be monetized to generate a plugin payment token');
+      throw new Error('Resource must be monetized to generate a plugin payment token')
     }
   }
 
@@ -5430,8 +5567,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * determineApiType - Determine API endpoint type (plugins vs widgets)
    */
   determineApiType(publishedExtension, localPlugin) {
-    const isWidget = publishedExtension?.is_widget || localPlugin?.cachedContainsWidget;
-    return isWidget ? 'widgets' : 'plugins';
+    const isWidget = publishedExtension?.is_widget || localPlugin?.cachedContainsWidget
+    return isWidget ? 'widgets' : 'plugins'
   }
 
   /**
@@ -5442,8 +5579,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     // const httpClient = createAdvancedHTTPClientManager('/api')
     // return httpClient.put(`/${apiType}/${pluginID}/id_token`).then(response => response.data.meta.token)
     return XHR.put(`/api/${apiType}/${pluginID}/id_token`).then(({
-      data
-    }) => Promise.resolve(data.meta.token)).catch(error => Promise.reject(error));
+      data,
+    }) => Promise.resolve(data.meta.token)).catch(error => Promise.reject(error))
   }
 
   /**
@@ -5456,18 +5593,18 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with utility API methods
    */
   createUtilApi() {
-    const vm = this.vm;
-    const utilObject = vm.newObject();
+    const vm = this.vm
+    const utilObject = vm.newObject()
 
     // Setup color utility functions
-    this.setupColorUtilityFunctions(utilObject, vm);
+    this.setupColorUtilityFunctions(utilObject, vm)
 
     // Setup paint utility functions
-    this.setupPaintUtilityFunctions(utilObject, vm);
+    this.setupPaintUtilityFunctions(utilObject, vm)
 
     // Setup text utility functions
-    this.setupTextUtilityFunctions(utilObject, vm);
-    return utilObject;
+    this.setupTextUtilityFunctions(utilObject, vm)
+    return utilObject
   }
 
   /**
@@ -5479,44 +5616,44 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: utilObject,
       key: 'rgba',
       metricsKey: 'figma.util.rgba',
-      cb: colorHandle => {
+      cb: (colorHandle) => {
         const colorInput = validateWithZSchema({
           vm,
           handle: colorHandle,
           zSchema: FigmaSchema.ColorInput,
-          property: 'color'
-        });
-        return vm.deepWrap(parseColorInput(colorInput));
+          property: 'color',
+        })
+        return vm.deepWrap(parseColorInput(colorInput))
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: true,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // RGB color function (without alpha)
     this.defineVmFunction({
       handle: utilObject,
       key: 'rgb',
       metricsKey: 'figma.util.rgb',
-      cb: colorHandle => {
+      cb: (colorHandle) => {
         const colorInput = validateWithZSchema({
           vm,
           handle: colorHandle,
           zSchema: FigmaSchema.ColorInput,
-          property: 'color'
-        });
-        const rgbaColor = parseColorInput(colorInput);
+          property: 'color',
+        })
+        const rgbaColor = parseColorInput(colorInput)
         const rgbColor = {
           r: rgbaColor.r,
           g: rgbaColor.g,
-          b: rgbaColor.b
-        };
-        return vm.deepWrap(rgbColor);
+          b: rgbaColor.b,
+        }
+        return vm.deepWrap(rgbColor)
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: true,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -5532,26 +5669,26 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           vm,
           handle: colorHandle,
           zSchema: FigmaSchema.ColorInput,
-          property: 'color'
-        });
+          property: 'color',
+        })
         const partialPaintOptions = validateWithZSchema({
           vm,
           handle: paintOptionsHandle,
           zSchema: FigmaSchema.PartialSolidPaint,
-          property: 'SolidPaint'
-        });
+          property: 'SolidPaint',
+        })
 
         // Clean up undefined properties
-        const cleanedOptions = this.cleanPaintOptions(partialPaintOptions);
+        const cleanedOptions = this.cleanPaintOptions(partialPaintOptions)
 
         // Create solid paint object
-        const solidPaint = this.createSolidPaintObject(colorInput, cleanedOptions);
-        return vm.deepWrap(solidPaint);
+        const solidPaint = this.createSolidPaintObject(colorInput, cleanedOptions)
+        return vm.deepWrap(solidPaint)
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: true,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -5559,34 +5696,34 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   cleanPaintOptions(partialPaintOptions) {
     if (partialPaintOptions === undefined) {
-      return undefined;
+      return undefined
     }
     const cleaned = {
-      ...partialPaintOptions
-    };
+      ...partialPaintOptions,
+    }
     for (const key in cleaned) {
       if (cleaned[key] === undefined) {
-        delete cleaned[key];
+        delete cleaned[key]
       }
     }
-    return cleaned;
+    return cleaned
   }
 
   /**
    * createSolidPaintObject - Create solid paint object from color and options
    */
   createSolidPaintObject(colorInput, paintOptions) {
-    const normalizedColor = parseColorInput(colorInput);
+    const normalizedColor = parseColorInput(colorInput)
     return {
       ...deepClone(paintOptions),
       type: 'SOLID',
       color: {
         r: normalizedColor.r,
         g: normalizedColor.g,
-        b: normalizedColor.b
+        b: normalizedColor.b,
       },
-      opacity: normalizedColor.a
-    };
+      opacity: normalizedColor.a,
+    }
   }
 
   /**
@@ -5597,30 +5734,32 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: utilObject,
       key: 'normalizeMarkdown',
       metricsKey: 'figma.util.normalizeMarkdown',
-      cb: markdownHandle => {
+      cb: (markdownHandle) => {
         const markdownText = validateWithZSchema({
           vm,
           handle: markdownHandle,
           zSchema: _$$z.string(),
-          property: 'markdown'
-        });
-        const normalizedMarkdown = _$$nB(markdownText);
-        return vm.newString(normalizedMarkdown);
+          property: 'markdown',
+        })
+        const normalizedMarkdown = _$$nB(markdownText)
+        return vm.newString(normalizedMarkdown)
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: true,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
+
   createInternalApi() {
-    let e = this.vm;
-    let t = e.newObject();
-    e.shallowFreezeObject(t);
-    return t;
+    let e = this.vm
+    let t = e.newObject()
+    e.shallowFreezeObject(t)
+    return t
   }
+
   createConstantsApi() {
-    let e = this.vm;
-    let t = e.newObject();
+    let e = this.vm
+    let t = e.newObject()
     this.defineVmProp({
       handle: t,
       key: 'colors',
@@ -5628,27 +5767,27 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: !1,
         metricsKey: 'constants.colors',
         get: () => {
-          let t = e.newObject();
-          let i = e.newObject();
+          let t = e.newObject()
+          let i = e.newObject()
           for (let t in ez) {
-            let n = e.newString(ez[t]);
-            e.setProp(i, t, n);
+            let n = e.newString(ez[t])
+            e.setProp(i, t, n)
           }
-          let n = e.newObject();
+          let n = e.newObject()
           for (let t in eG) {
-            let i = e.newString(eG[t]);
-            e.setProp(n, t, i);
+            let i = e.newString(eG[t])
+            e.setProp(n, t, i)
           }
-          e.setProp(t, 'figJamBase', n);
-          e.setProp(t, 'figJamBaseLight', i);
-          return t;
-        }
+          e.setProp(t, 'figJamBase', n)
+          e.setProp(t, 'figJamBaseLight', i)
+          return t
+        },
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !0,
-      hasEditScope: !1
-    });
-    return t;
+      hasEditScope: !1,
+    })
+    return t
   }
 
   /**
@@ -5661,25 +5800,26 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @param apiObject The main API object to define widget property on
    */
   defineWidgetApi(apiObject) {
-    if (!this.isWidget) return;
-    const widgetManager = this.widgetManager;
+    if (!this.isWidget)
+      return
+    const widgetManager = this.widgetManager
     if (!widgetManager) {
-      throw new Error('WidgetManager not defined');
+      throw new Error('WidgetManager not defined')
     }
-    const vm = this.vm;
-    const widgetApiObject = vm.newObject();
+    const vm = this.vm
+    const widgetApiObject = vm.newObject()
 
     // Define widget property on main API
     vm.defineProp(apiObject, 'widget', {
       enumerable: false,
-      value: widgetApiObject
-    });
+      value: widgetApiObject,
+    })
 
     // Setup core widget functions
-    this.setupWidgetCoreFunctions(widgetApiObject, vm, widgetManager);
+    this.setupWidgetCoreFunctions(widgetApiObject, vm, widgetManager)
 
     // Setup widget utility functions
-    this.setupWidgetUtilityFunctions(widgetApiObject, vm);
+    this.setupWidgetUtilityFunctions(widgetApiObject, vm)
   }
 
   /**
@@ -5687,23 +5827,23 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   setupWidgetCoreFunctions(widgetApiObject, vm, widgetManager) {
     // Widget registration function
-    vm.defineFunction(widgetApiObject, 'register', 'widget.register', widgetFunctionHandle => {
-      this._hasRegisteredWidgetFunction = true;
-      return this.executeWidgetRegistration(widgetFunctionHandle, widgetManager, vm);
-    });
+    vm.defineFunction(widgetApiObject, 'register', 'widget.register', (widgetFunctionHandle) => {
+      this._hasRegisteredWidgetFunction = true
+      return this.executeWidgetRegistration(widgetFunctionHandle, widgetManager, vm)
+    })
 
     // Wait for task function
-    vm.defineFunction(widgetApiObject, 'waitForTask', 'widget.waitForTask', promiseHandle => {
+    vm.defineFunction(widgetApiObject, 'waitForTask', 'widget.waitForTask', (promiseHandle) => {
       if (widgetManager.isRunningWidgetFunction()) {
-        throw new Error('waitForTask can only be called in useEffect or an event handler');
+        throw new Error('waitForTask can only be called in useEffect or an event handler')
       }
       widgetManager.trackPromise(wrapVmPromise({
         vm,
         promiseHandle,
-        shouldRetainResult: false
-      }));
-      return vm.undefined;
-    });
+        shouldRetainResult: false,
+      }))
+      return vm.undefined
+    })
   }
 
   /**
@@ -5711,69 +5851,71 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   executeWidgetRegistration(widgetFunctionHandle, widgetManager: WidgetManager, _vm) {
     return (async () => {
-      widgetManager.registerWidgetFunction(widgetFunctionHandle);
+      widgetManager.registerWidgetFunction(widgetFunctionHandle)
       try {
-        const widgetEvent = this.parseWidgetEvent();
-        widgetManager.setLifecycleCommand(widgetEvent);
-        const widgetNode = this.getWidgetNode(widgetEvent.widgetNodeID);
+        const widgetEvent = this.parseWidgetEvent()
+        widgetManager.setLifecycleCommand(widgetEvent)
+        const widgetNode = this.getWidgetNode(widgetEvent.widgetNodeID)
         if (!widgetNode) {
-          this.closePlugin(undefined);
-          return;
+          this.closePlugin(undefined)
+          return
         }
-        const pluginDataHash = await this.handlePluginDataUpdate(widgetNode);
-        await this.processWidgetEvent(widgetEvent, widgetManager, pluginDataHash);
-      } catch (error) {
-        this.handleWidgetError(error);
-      } finally {
-        await this.closePlugin(undefined);
+        const pluginDataHash = await this.handlePluginDataUpdate(widgetNode)
+        await this.processWidgetEvent(widgetEvent, widgetManager, pluginDataHash)
       }
-      await widgetManager.waitForFinish();
-    })();
+      catch (error) {
+        this.handleWidgetError(error)
+      }
+      finally {
+        await this.closePlugin(undefined)
+      }
+      await widgetManager.waitForFinish()
+    })()
   }
 
   /**
    * parseWidgetEvent - Parse and validate widget event from command
    */
   parseWidgetEvent() {
-    const widgetEvent = JSON.parse(this.options.command);
+    const widgetEvent = JSON.parse(this.options.command)
     if (typeof widgetEvent !== 'object') {
-      throw new TypeError('Invalid widget event');
+      throw new TypeError('Invalid widget event')
     }
-    return widgetEvent;
+    return widgetEvent
   }
 
   /**
    * getWidgetNode - Get widget node from scene graph
    */
   getWidgetNode(widgetNodeId) {
-    return this.privateSceneGraph.get(widgetNodeId);
+    return this.privateSceneGraph.get(widgetNodeId)
   }
 
   /**
    * handlePluginDataUpdate - Handle local plugin data updates if needed
    */
   async handlePluginDataUpdate(widgetNode) {
-    let pluginDataHash = null;
+    let pluginDataHash = null
     if (this.options.isLocal && this.options.code && !ZY(this.options.pluginID)) {
-      const existingData = widgetNode.getPluginData(this.options.pluginID, cz);
-      const newCodeHash = md5(this.options.code);
+      const existingData = widgetNode.getPluginData(this.options.pluginID, cz)
+      const newCodeHash = md5(this.options.code)
       if (existingData !== newCodeHash) {
-        pluginDataHash = newCodeHash;
+        pluginDataHash = newCodeHash
       }
     }
-    return pluginDataHash;
+    return pluginDataHash
   }
 
   /**
    * processWidgetEvent - Process different types of widget events
    */
   async processWidgetEvent(widgetEvent, widgetManager, pluginDataHash) {
-    const interactiveEvents = ['click', 'propertymenu', 'rerender', 'textEditEnd', 'attachedStickablesChanged', 'stuckStatusChanged'];
+    const interactiveEvents = ['click', 'propertymenu', 'rerender', 'textEditEnd', 'attachedStickablesChanged', 'stuckStatusChanged']
     if (interactiveEvents.includes(widgetEvent.name)) {
-      await this.handleInteractiveEvent(widgetEvent, widgetManager, pluginDataHash);
+      await this.handleInteractiveEvent(widgetEvent, widgetManager, pluginDataHash)
     }
     if (widgetEvent.name === 'mount' || widgetEvent.name === 'rerender' || pluginDataHash) {
-      await this.handleMountOrRerenderEvent(widgetEvent, widgetManager, pluginDataHash);
+      await this.handleMountOrRerenderEvent(widgetEvent, widgetManager, pluginDataHash)
     }
   }
 
@@ -5781,35 +5923,35 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * handleInteractiveEvent - Handle interactive widget events that require rendering
    */
   async handleInteractiveEvent(widgetEvent, widgetManager, pluginDataHash) {
-    const widgetNodeId = widgetEvent.widgetNodeID;
-    widgetManager.initializeRenderingState(widgetNodeId);
-    const renderedTree = widgetManager.renderWidgetTree(widgetNodeId, 'previous');
+    const widgetNodeId = widgetEvent.widgetNodeID
+    widgetManager.initializeRenderingState(widgetNodeId)
+    const renderedTree = widgetManager.renderWidgetTree(widgetNodeId, 'previous')
     if (pluginDataHash) {
-      widgetManager.setOldVRoot(widgetNodeId, renderedTree);
+      widgetManager.setOldVRoot(widgetNodeId, renderedTree)
     }
-    widgetManager.maybeRunEffects(widgetNodeId);
-    await this.handleSpecificEventType(widgetEvent, widgetManager, renderedTree);
+    widgetManager.maybeRunEffects(widgetNodeId)
+    await this.handleSpecificEventType(widgetEvent, widgetManager, renderedTree)
   }
 
   /**
    * handleSpecificEventType - Handle specific types of widget events
    */
   async handleSpecificEventType(widgetEvent, widgetManager, renderedTree) {
-    const widgetNodeId = widgetEvent.widgetNodeID;
+    const widgetNodeId = widgetEvent.widgetNodeID
     switch (widgetEvent.name) {
       case 'textEditEnd':
       case 'click':
-        await this.handleClickOrTextEditEvent(widgetEvent, widgetManager, renderedTree);
-        break;
+        await this.handleClickOrTextEditEvent(widgetEvent, widgetManager, renderedTree)
+        break
       case 'propertymenu':
-        await this.handlePropertyMenuEvent(widgetEvent, widgetManager, widgetNodeId);
-        break;
+        await this.handlePropertyMenuEvent(widgetEvent, widgetManager, widgetNodeId)
+        break
       case 'stuckStatusChanged':
-        await this.handleStuckStatusChangedEvent(widgetEvent, widgetManager, widgetNodeId);
-        break;
+        await this.handleStuckStatusChangedEvent(widgetEvent, widgetManager, widgetNodeId)
+        break
       case 'attachedStickablesChanged':
-        await this.handleAttachedStickablesChangedEvent(widgetEvent, widgetManager, widgetNodeId);
-        break;
+        await this.handleAttachedStickablesChangedEvent(widgetEvent, widgetManager, widgetNodeId)
+        break
     }
   }
 
@@ -5824,16 +5966,16 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       vNode: renderedTree.rootNode,
       command: widgetEvent,
       widgetManager,
-      editScopeLabel: `widget-${widgetEvent.name}`
-    }));
-    widgetManager.scheduleRender(widgetEvent.widgetNodeID);
+      editScopeLabel: `widget-${widgetEvent.name}`,
+    }))
+    widgetManager.scheduleRender(widgetEvent.widgetNodeID)
   }
 
   /**
    * handlePropertyMenuEvent - Handle property menu events
    */
   async handlePropertyMenuEvent(widgetEvent, widgetManager, widgetNodeId) {
-    const propertyMenuCallback = widgetManager.getPropertyMenuCallbackHandle(widgetNodeId);
+    const propertyMenuCallback = widgetManager.getPropertyMenuCallbackHandle(widgetNodeId)
     if (propertyMenuCallback) {
       await widgetManager.trackPromise(updateWidgetProperties({
         vm: this.vm,
@@ -5842,8 +5984,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         callbackHandle: propertyMenuCallback,
         propertyName: widgetEvent.propertyName,
         propertyValue: widgetEvent.propertyValue,
-        editScopeLabel: 'widget-property-menu'
-      }));
+        editScopeLabel: 'widget-property-menu',
+      }))
     }
   }
 
@@ -5851,14 +5993,14 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * handleStuckStatusChangedEvent - Handle stuck status changed events
    */
   async handleStuckStatusChangedEvent(widgetEvent, widgetManager, widgetNodeId) {
-    const renderingState = widgetManager.getRenderingState(widgetNodeId);
-    const stuckStatusHandler = renderingState.stickableState.stuckStatusChangedHandle;
+    const renderingState = widgetManager.getRenderingState(widgetNodeId)
+    const stuckStatusHandler = renderingState.stickableState.stuckStatusChangedHandle
     if (stuckStatusHandler) {
       await widgetManager.trackPromise(handleStuckStatusChange({
         vm: this.vm,
         handler: stuckStatusHandler,
-        event: widgetEvent
-      }));
+        event: widgetEvent,
+      }))
     }
   }
 
@@ -5866,14 +6008,14 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * handleAttachedStickablesChangedEvent - Handle attached stickables changed events
    */
   async handleAttachedStickablesChangedEvent(widgetEvent, widgetManager, widgetNodeId) {
-    const renderingState = widgetManager.getRenderingState(widgetNodeId);
-    const attachedStickablesHandler = renderingState.stickableState.attachedStickablesChangedHandle;
+    const renderingState = widgetManager.getRenderingState(widgetNodeId)
+    const attachedStickablesHandler = renderingState.stickableState.attachedStickablesChangedHandle
     if (attachedStickablesHandler) {
       await widgetManager.trackPromise(handleAttachedStickablesChange({
         vm: this.vm,
         handler: attachedStickablesHandler,
-        event: widgetEvent
-      }));
+        event: widgetEvent,
+      }))
     }
   }
 
@@ -5881,14 +6023,14 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * handleMountOrRerenderEvent - Handle mount, rerender, or code change events
    */
   async handleMountOrRerenderEvent(widgetEvent, widgetManager, pluginDataHash) {
-    const widgetNodeId = widgetEvent.widgetNodeID;
+    const widgetNodeId = widgetEvent.widgetNodeID
     if (pluginDataHash) {
-      const widgetNode = this.getWidgetNode(widgetNodeId);
+      const widgetNode = this.getWidgetNode(widgetNodeId)
       permissionScopeHandler.plugin('widget-code-change-setPluginData', () => {
-        widgetNode.setPluginData(this.options.pluginID, cz, pluginDataHash);
-      });
+        widgetNode.setPluginData(this.options.pluginID, cz, pluginDataHash)
+      })
     }
-    widgetManager.scheduleRender(widgetNodeId);
+    widgetManager.scheduleRender(widgetNodeId)
   }
 
   /**
@@ -5896,11 +6038,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   handleWidgetError(error) {
     if (error instanceof InternalError) {
-      _$$k2.error(error);
-    } else if (error instanceof RequestError) {
+      logger.error(error)
+    }
+    else if (error instanceof RequestError) {
       // Handle specific error type silently
-    } else {
-      throw error;
+    }
+    else {
+      throw error
     }
   }
 
@@ -5908,41 +6052,42 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * setupWidgetUtilityFunctions - Setup widget utility and hook functions
    */
   setupWidgetUtilityFunctions(widgetApiObject, vm) {
-    const widgetManager = this.widgetManager;
+    const widgetManager = this.widgetManager
 
     // Color map to options utility
-    vm.defineFunction(widgetApiObject, 'colorMapToOptions', 'widget.colorMapToOptions', colorMapHandle => {
-      const optionsArray = vm.newArray();
-      const colorMap = vm.deepUnwrap(colorMapHandle);
+    vm.defineFunction(widgetApiObject, 'colorMapToOptions', 'widget.colorMapToOptions', (colorMapHandle) => {
+      const optionsArray = vm.newArray()
+      const colorMap = vm.deepUnwrap(colorMapHandle)
       Object.keys(colorMap).forEach((key, index) => {
-        const optionObject = vm.newObject();
-        vm.setProp(optionObject, 'option', vm.newString(colorMap[key]));
+        const optionObject = vm.newObject()
+        vm.setProp(optionObject, 'option', vm.newString(colorMap[key]))
         if (key === '') {
-          vm.setProp(optionObject, 'tooltip', vm.newString(''));
-        } else {
-          const tooltip = key.replace(/([A-Z])/g, ' $1').trim().split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
-          vm.setProp(optionObject, 'tooltip', vm.newString(tooltip));
+          vm.setProp(optionObject, 'tooltip', vm.newString(''))
         }
-        vm.setProp(optionsArray, String(index), optionObject);
-      });
-      return optionsArray;
-    });
+        else {
+          const tooltip = key.replace(/([A-Z])/g, ' $1').trim().split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
+          vm.setProp(optionObject, 'tooltip', vm.newString(tooltip))
+        }
+        vm.setProp(optionsArray, String(index), optionObject)
+      })
+      return optionsArray
+    })
 
     // Widget ID hook functions
-    const getWidgetId = () => vm.newString(widgetManager!.getCurrentWidgetNodeId());
-    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useWidgetId', getWidgetId);
-    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useWidgetNodeId', getWidgetId);
+    const getWidgetId = () => vm.newString(widgetManager!.getCurrentWidgetNodeId())
+    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useWidgetId', getWidgetId)
+    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useWidgetNodeId', getWidgetId)
 
     // Effect hook
-    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useEffect', effectCallback => {
-      widgetManager!.addEffect(effectCallback);
-      return vm.undefined;
-    });
+    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useEffect', (effectCallback) => {
+      widgetManager!.addEffect(effectCallback)
+      return vm.undefined
+    })
 
     // Synced state hook
     this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useSyncedState', (stateKey, defaultValueFunction) => {
-      return this.handleUseSyncedState(stateKey, defaultValueFunction, vm, widgetManager);
-    });
+      return this.handleUseSyncedState(stateKey, defaultValueFunction, vm, widgetManager)
+    })
   }
 
   /**
@@ -5951,163 +6096,165 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   defineWidgetHookFunction(widgetApiObject, vm, widgetManager, hookName, hookImplementation) {
     vm.defineFunction(widgetApiObject, hookName, `widget.${hookName}`, (hookContext, hookData, hookOptions) => {
       if (!widgetManager.isRunningWidgetFunction()) {
-        throw new Error(`Cannot use ${hookName} hook outside of widget rendering.`);
+        throw new Error(`Cannot use ${hookName} hook outside of widget rendering.`)
       }
-      return hookImplementation(hookContext, hookData, hookOptions);
-    });
+      return hookImplementation(hookContext, hookData, hookOptions)
+    })
   }
 
   /**
    * handleUseSyncedState - Handle the useSyncedState hook implementation
    */
   handleUseSyncedState(stateKey, defaultValueFunction, vm, widgetManager) {
-    const currentWidgetNodeId = widgetManager.getCurrentWidgetNodeId();
+    const currentWidgetNodeId = widgetManager.getCurrentWidgetNodeId()
     const validatedStateKey = validateWithZSchema({
       vm,
       handle: stateKey,
       zSchema: _$$z.string(),
-      property: 'key'
-    });
+      property: 'key',
+    })
     const getDefaultValue = () => {
       if (vm.isFunction(defaultValueFunction)) {
-        let defaultValue = vm.undefined;
+        let defaultValue = vm.undefined
         widgetManager.runSyncedStateDefaultValueFunction(() => {
-          const functionResult = vm.callFunction(defaultValueFunction, vm.undefined);
+          const functionResult = vm.callFunction(defaultValueFunction, vm.undefined)
           if (functionResult.type === 'FAILURE') {
-            throw new InternalError(`Error in useSyncedState default value function: ${functionResult.error}`);
+            throw new InternalError(`Error in useSyncedState default value function: ${functionResult.error}`)
           }
           if (vm.isUndefined(functionResult.handle)) {
-            throw new InternalError('Cannot return undefined from default value function in useSyncedState');
+            throw new InternalError('Cannot return undefined from default value function in useSyncedState')
           }
-          defaultValue = functionResult.handle;
-        });
-        return defaultValue;
+          defaultValue = functionResult.handle
+        })
+        return defaultValue
       }
-      return defaultValueFunction;
-    };
-    const widgetNode = this.privateSceneGraph.get(currentWidgetNodeId);
+      return defaultValueFunction
+    }
+    const widgetNode = this.privateSceneGraph.get(currentWidgetNodeId)
     if (!widgetNode) {
-      const stateArray = vm.newArray();
-      vm.setProp(stateArray, '0', getDefaultValue());
+      const stateArray = vm.newArray()
+      vm.setProp(stateArray, '0', getDefaultValue())
       vm.setProp(stateArray, '1', vm.newFunction('setSyncedState', () => {
         if (widgetManager.isRunningWidgetFunction()) {
-          throw new Error('Cannot call setSyncedState while widget is rendering.');
+          throw new Error('Cannot call setSyncedState while widget is rendering.')
         }
-        throw new Error(`Invalid widgetID=${currentWidgetNodeId}`);
-      }));
-      return stateArray;
+        throw new Error(`Invalid widgetID=${currentWidgetNodeId}`)
+      }))
+      return stateArray
     }
     const getCurrentState = () => {
-      const renderMode = widgetManager.getRenderMode(widgetNode.guid);
-      const syncedData = getSyncedState(renderMode, widgetNode);
-      const defaultValue = getDefaultValue();
+      const renderMode = widgetManager.getRenderMode(widgetNode.guid)
+      const syncedData = getSyncedState(renderMode, widgetNode)
+      const defaultValue = getDefaultValue()
       if (renderMode === 'current' && !vm.isUndefined(defaultValue) && !Object.prototype.hasOwnProperty.call(syncedData, validatedStateKey)) {
-        const unwrappedDefault = vm.deepUnwrap(defaultValue);
-        setInitialWidgetSyncedState(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, unwrappedDefault);
+        const unwrappedDefault = vm.deepUnwrap(defaultValue)
+        setInitialWidgetSyncedState(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, unwrappedDefault)
       }
-      return Object.prototype.hasOwnProperty.call(syncedData, validatedStateKey) ? vm.deepWrap(syncedData[validatedStateKey]) : defaultValue;
-    };
-    const setSyncedState = vm.newFunction('setSyncedState', newValue => {
+      return Object.prototype.hasOwnProperty.call(syncedData, validatedStateKey) ? vm.deepWrap(syncedData[validatedStateKey]) : defaultValue
+    }
+    const setSyncedState = vm.newFunction('setSyncedState', (newValue) => {
       if (widgetManager.isRunningWidgetFunction()) {
-        throw new Error('Cannot call setSyncedState while widget is rendering.');
+        throw new Error('Cannot call setSyncedState while widget is rendering.')
       }
       const processedValue = vm.deepUnwrap((() => {
         if (vm.isFunction(newValue)) {
-          const result = vm.callFunction(newValue, vm.undefined, getCurrentState());
+          const result = vm.callFunction(newValue, vm.undefined, getCurrentState())
           if (result.type === 'FAILURE') {
-            throw new InternalError(`Error in setSyncedState: ${result.error}`);
+            throw new InternalError(`Error in setSyncedState: ${result.error}`)
           }
-          return result.handle;
+          return result.handle
         }
-        return newValue;
-      })());
+        return newValue
+      })())
 
       // Set the synced state value
-      setInitialWidgetSyncedState(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, processedValue);
-      return vm.undefined;
-    });
-    const stateArray = vm.newArray();
-    vm.setProp(stateArray, '0', getCurrentState());
-    vm.setProp(stateArray, '1', setSyncedState);
-    return stateArray;
+      setInitialWidgetSyncedState(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, processedValue)
+      return vm.undefined
+    })
+    const stateArray = vm.newArray()
+    vm.setProp(stateArray, '0', getCurrentState())
+    vm.setProp(stateArray, '1', setSyncedState)
+    return stateArray
   }
 
   /**
    * handleUseSyncedMap - Handle the useSyncedMap hook implementation
    */
   handleUseSyncedMap(mapKey, vm, widgetManager) {
-    const currentWidgetNodeId = widgetManager.getCurrentWidgetNodeId();
+    const currentWidgetNodeId = widgetManager.getCurrentWidgetNodeId()
     const validatedMapKey = validateWithZSchema({
       vm,
       handle: mapKey,
       zSchema: _$$z.string(),
-      property: 'mapKey'
-    });
+      property: 'mapKey',
+    })
     const getCurrentMapData = () => {
-      const widgetNode = this.privateSceneGraph.get(currentWidgetNodeId);
-      return getSyncedMapEntry(widgetManager.getRenderMode(widgetNode?.guid ?? '-1:-1'), widgetNode, validatedMapKey);
-    };
-    const mapObject = vm.newObject();
+      const widgetNode = this.privateSceneGraph.get(currentWidgetNodeId)
+      return getSyncedMapEntry(widgetManager.getRenderMode(widgetNode?.guid ?? '-1:-1'), widgetNode, validatedMapKey)
+    }
+    const mapObject = vm.newObject()
     vm.defineFunction(mapObject, 'set', 'map.set', (key, value) => {
-      if (widgetManager.isRunningWidgetFunction()) throw new Error('Cannot call map.set while widget is rendering.');
+      if (widgetManager.isRunningWidgetFunction())
+        throw new Error('Cannot call map.set while widget is rendering.')
       const validatedKey = validateWithZSchema({
         vm,
         handle: key,
         zSchema: _$$z.string(),
-        property: 'map.key'
-      });
-      const unwrappedValue = vm.deepUnwrap(value);
-      permissionScopeHandler.plugin('widget-set-synced-map-key', () => setWidgetSyncedMapEntry(this.privateSceneGraph.get(currentWidgetNodeId), validatedMapKey, validatedKey, unwrappedValue));
-      widgetManager.scheduleRender(currentWidgetNodeId);
-      return vm.undefined;
-    });
-    vm.defineFunction(mapObject, 'get', 'map.get', key => {
+        property: 'map.key',
+      })
+      const unwrappedValue = vm.deepUnwrap(value)
+      permissionScopeHandler.plugin('widget-set-synced-map-key', () => setWidgetSyncedMapEntry(this.privateSceneGraph.get(currentWidgetNodeId), validatedMapKey, validatedKey, unwrappedValue))
+      widgetManager.scheduleRender(currentWidgetNodeId)
+      return vm.undefined
+    })
+    vm.defineFunction(mapObject, 'get', 'map.get', (key) => {
       const validatedKey = validateWithZSchema({
         vm,
         handle: key,
         zSchema: _$$z.string(),
-        property: 'map.key'
-      });
-      return vm.deepWrap(getCurrentMapData()[validatedKey]);
-    });
-    vm.defineFunction(mapObject, 'has', 'map.has', key => {
+        property: 'map.key',
+      })
+      return vm.deepWrap(getCurrentMapData()[validatedKey])
+    })
+    vm.defineFunction(mapObject, 'has', 'map.has', (key) => {
       const validatedKey = validateWithZSchema({
         vm,
         handle: key,
         zSchema: _$$z.string(),
-        property: 'map.key'
-      });
-      return vm.newBoolean(Object.prototype.hasOwnProperty.call(getCurrentMapData(), validatedKey));
-    });
-    vm.defineFunction(mapObject, 'delete', 'map.delete', key => {
-      if (widgetManager.isRunningWidgetFunction()) throw new Error('Cannot call map.delete while widget is rendering.');
+        property: 'map.key',
+      })
+      return vm.newBoolean(Object.prototype.hasOwnProperty.call(getCurrentMapData(), validatedKey))
+    })
+    vm.defineFunction(mapObject, 'delete', 'map.delete', (key) => {
+      if (widgetManager.isRunningWidgetFunction())
+        throw new Error('Cannot call map.delete while widget is rendering.')
       let a = validateWithZSchema({
         vm,
         handle: key,
         zSchema: _$$z.string(),
-        property: 'map.key'
-      });
-      deleteWidgetSyncedMapEntry(this.privateSceneGraph.get(variableDefinitions), NodeAPI, a);
-      widgetManager.scheduleRender(variableDefinitions);
-      return vm.undefined;
-    });
-    vm.defineFunction(mapObject, 'keys', 'map.keys', () => vm.deepWrap(Object.keys(getCurrentMapData())));
+        property: 'map.key',
+      })
+      deleteWidgetSyncedMapEntry(this.privateSceneGraph.get(variableDefinitions), NodeAPI, a)
+      widgetManager.scheduleRender(variableDefinitions)
+      return vm.undefined
+    })
+    vm.defineFunction(mapObject, 'keys', 'map.keys', () => vm.deepWrap(Object.keys(getCurrentMapData())))
     vm.defineProp(mapObject, 'length', {
       enumerable: false,
       metricsKey: 'map.length',
       get: () => {
-        _$$k2.warn('map.length is deprecated. please use map.size instead.');
-        return vm.newNumber(Object.keys(getCurrentMapData()).length);
-      }
-    });
+        logger.warn('map.length is deprecated. please use map.size instead.')
+        return vm.newNumber(Object.keys(getCurrentMapData()).length)
+      },
+    })
     vm.defineProp(mapObject, 'size', {
       enumerable: false,
       metricsKey: 'map.size',
-      get: () => vm.newNumber(Object.keys(getCurrentMapData()).length)
-    });
-    vm.defineFunction(mapObject, 'values', 'map.values', () => vm.deepWrap(Object.values(getCurrentMapData())));
-    vm.defineFunction(mapObject, 'entries', 'map.entries', () => vm.deepWrap(Object.entries(getCurrentMapData())));
-    return mapObject;
+      get: () => vm.newNumber(Object.keys(getCurrentMapData()).length),
+    })
+    vm.defineFunction(mapObject, 'values', 'map.values', () => vm.deepWrap(Object.values(getCurrentMapData())))
+    vm.defineFunction(mapObject, 'entries', 'map.entries', () => vm.deepWrap(Object.entries(getCurrentMapData())))
+    return mapObject
   }
 
   /**
@@ -6118,61 +6265,61 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'usePropertyMenu', (propertyMenuDefinition, propertyMenuCallback) => {
       widgetManager.setPropertyMenu({
         propertyMenuDefinitionHandle: propertyMenuDefinition,
-        propertyMenuCallbackHandle: propertyMenuCallback
-      });
-      return vm.undefined;
-    });
+        propertyMenuCallbackHandle: propertyMenuCallback,
+      })
+      return vm.undefined
+    })
 
     // Stickable hooks
-    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useStickable', isStickable => {
-      widgetManager.setIsStickable(isStickable);
-      return vm.undefined;
-    });
-    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useStickableHost', isStickableHost => {
-      widgetManager.setIsStickableHost(isStickableHost);
-      return vm.undefined;
-    });
+    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useStickable', (isStickable) => {
+      widgetManager.setIsStickable(isStickable)
+      return vm.undefined
+    })
+    this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useStickableHost', (isStickableHost) => {
+      widgetManager.setIsStickableHost(isStickableHost)
+      return vm.undefined
+    })
 
     // Hide cursors hook (permission-based)
     if (this.options.validatedPermissions.permissions.includes('hidecursors')) {
-      this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useHideCursors', shouldHideCursors => {
-        widgetManager.setShouldHideCursors(shouldHideCursors);
-        return vm.undefined;
-      });
+      this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useHideCursors', (shouldHideCursors) => {
+        widgetManager.setShouldHideCursors(shouldHideCursors)
+        return vm.undefined
+      })
     }
 
     // Add component names to object
-    this.addComponentNamesToObject(widgetApiObject);
+    this.addComponentNamesToObject(widgetApiObject)
 
     // Define JSX renderer
     vm.defineProp(widgetApiObject, 'h', {
       enumerable: false,
       value: vm.newJsxRenderer(Object.keys({
-        ...HB,
-        ..._$$cd
-      }))
-    });
-    vm.shallowFreezeObject(widgetApiObject);
+        ...layoutComponentCollection,
+        ...instanceComponentMap,
+      })),
+    })
+    vm.shallowFreezeObject(widgetApiObject)
   }
 
   /**
    * defineWidgetLiteApi - Define widget lite API functionality
    */
   defineWidgetLiteApi(e) {
-    let t = this.vm.newObject();
+    let t = this.vm.newObject()
     this.vm.defineProp(e, 'widget', {
       value: t,
-      enumerable: !1
-    });
-    this.addComponentNamesToObject(t);
+      enumerable: !1,
+    })
+    this.addComponentNamesToObject(t)
     this.vm.defineProp(t, 'h', {
       enumerable: !1,
       value: this.vm.newJsxRenderer(Object.keys({
-        ...HB,
-        ..._$$cd
-      }))
-    });
-    this.vm.shallowFreezeObject(t);
+        ...layoutComponentCollection,
+        ...instanceComponentMap,
+      })),
+    })
+    this.vm.shallowFreezeObject(t)
   }
 
   /**
@@ -6180,13 +6327,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   addComponentNamesToObject(e) {
     for (let t of Object.keys({
-      ...HB,
-      ..._$$cd
+      ...layoutComponentCollection,
+      ...instanceComponentMap,
     })) {
       this.vm.defineProp(e, t, {
         enumerable: !0,
-        value: this.vm.newString(t)
-      });
+        value: this.vm.newString(t),
+      })
     }
   }
 
@@ -6203,23 +6350,23 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     const internalApis = [{
       permission: 'analytics',
       key: 'analytics',
-      factory: () => this.createAnalyticsApi()
+      factory: () => this.createAnalyticsApi(),
     }, {
       permission: 'cortex',
       key: 'cortex',
-      factory: () => this.createCortexApi()
+      factory: () => this.createCortexApi(),
     }, {
       permission: 'firstdraft',
       key: 'firstDraft',
-      factory: () => this.createFirstDraftApi()
+      factory: () => this.createFirstDraftApi(),
     }, {
       permission: 'debug',
       key: 'debug',
-      factory: () => this.createDebugNodesApi()
-    }];
-    internalApis.forEach(api => {
-      this.defineInternalApiIfPermitted(apiObject, api.permission, api.key, api.factory);
-    });
+      factory: () => this.createDebugNodesApi(),
+    }]
+    internalApis.forEach((api) => {
+      this.defineInternalApiIfPermitted(apiObject, api.permission, api.key, api.factory)
+    })
   }
 
   /**
@@ -6232,12 +6379,12 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         key: apiKey,
         options: {
           enumerable: false,
-          value: apiFactory()
+          value: apiFactory(),
         },
         canWriteInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: false
-      });
+        hasEditScope: false,
+      })
     }
   }
 
@@ -6245,32 +6392,33 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * createDebugNodesApi - Create debug nodes API for development
    */
   createDebugNodesApi() {
-    let e = this.vm;
-    let t = e.newObject();
+    let e = this.vm
+    let t = e.newObject()
     this.defineVmFunction({
       handle: t,
       key: 'matchNodes',
       metricsKey: 'debugNodes.matchNodes',
-      cb: t => {
-        if (!e.isArray(t)) throw new Error('Not an array');
-        let i = e.getNumberProp(t, 'length');
+      cb: (t) => {
+        if (!e.isArray(t))
+          throw new Error('Not an array')
+        let i = e.getNumberProp(t, 'length')
         if (i < 1) {
-          throw new Error('First argument to matchNodes must be an array of at least one node');
+          throw new Error('First argument to matchNodes must be an array of at least one node')
         }
-        let n: any[] = [];
+        let n: any[] = []
         for (let r = 0; r < i; r++) {
-          let i = e.getStringProp(t, r.toString());
-          n.push(i);
+          let i = e.getStringProp(t, r.toString())
+          n.push(i)
         }
-        let r = PluginHelpers.matchNodes(n);
-        return e.deepWrap(r);
+        let r = PluginHelpers.matchNodes(n)
+        return e.deepWrap(r)
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
-    e.shallowFreezeObject(t);
-    return t;
+      hasEditScope: !1,
+    })
+    e.shallowFreezeObject(t)
+    return t
   }
 
   /**
@@ -6284,28 +6432,28 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with First Draft API methods
    */
   createFirstDraftApi() {
-    const vm = this.vm;
-    const firstDraftObject = vm.newObject();
+    const vm = this.vm
+    const firstDraftObject = vm.newObject()
 
     // Setup component serialization functions
-    this.setupComponentSerializationFunctions(firstDraftObject, vm);
+    this.setupComponentSerializationFunctions(firstDraftObject, vm)
 
     // Setup page and navigation functions
-    this.setupPageNavigationFunctions(firstDraftObject, vm);
+    this.setupPageNavigationFunctions(firstDraftObject, vm)
 
     // Setup component management functions
-    this.setupComponentManagementFunctions(firstDraftObject, vm);
+    this.setupComponentManagementFunctions(firstDraftObject, vm)
 
     // Setup variable and text functions
-    this.setupVariableAndTextFunctions(firstDraftObject, vm);
+    this.setupVariableAndTextFunctions(firstDraftObject, vm)
 
     // Setup async component functions
-    this.setupAsyncComponentFunctions(firstDraftObject, vm);
+    this.setupAsyncComponentFunctions(firstDraftObject, vm)
 
     // Setup layer and override functions
-    this.setupLayerAndOverrideFunctions(firstDraftObject, vm);
-    vm.shallowFreezeObject(firstDraftObject);
-    return firstDraftObject;
+    this.setupLayerAndOverrideFunctions(firstDraftObject, vm)
+    vm.shallowFreezeObject(firstDraftObject)
+    return firstDraftObject
   }
 
   /**
@@ -6317,22 +6465,22 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: firstDraftObject,
       key: 'serializeProductComponentForPublish',
       metricsKey: 'firstDraft.serializeProductComponentForPublish',
-      cb: nodeHandle => {
-        const node = this.getNode(nodeHandle);
+      cb: (nodeHandle) => {
+        const node = this.getNode(nodeHandle)
         if (node.isLooseComponent || node.isStateGroup) {
-          const [serializedData, buffer] = PluginHelpers.serializeProductComponentForPublish(node.guid);
+          const [serializedData, buffer] = PluginHelpers.serializeProductComponentForPublish(node.guid)
           if (serializedData && buffer) {
-            const wrappedData = vm.deepWrap(serializedData);
-            vm.setProp(wrappedData, 'buffer', vm.deepWrap(new Uint8Array(buffer)));
-            return wrappedData;
+            const wrappedData = vm.deepWrap(serializedData)
+            vm.setProp(wrappedData, 'buffer', vm.deepWrap(new Uint8Array(buffer)))
+            return wrappedData
           }
         }
-        return vm.$$null;
+        return vm.$$null
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Deserialize component from buffer
     this.defineVmFunction({
@@ -6341,22 +6489,22 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'firstDraft.deserializeProductComponentFromBuffer',
       cb: (idHandle, bufferHandle) => {
         if (!vm.isString(idHandle)) {
-          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`);
+          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`)
         }
-        const id = vm.toString(idHandle);
+        const id = vm.toString(idHandle)
         const buffer = validateWithZSchema({
           vm,
           handle: bufferHandle,
           zSchema: FigmaSchema.UInt8Array,
-          property: 'buffer'
-        });
-        const result = PluginHelpers.deserializeProductComponentFromBuffer(id, buffer);
-        return vm.newString(result);
+          property: 'buffer',
+        })
+        const result = PluginHelpers.deserializeProductComponentFromBuffer(id, buffer)
+        return vm.newString(result)
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: true
-    });
+      hasEditScope: true,
+    })
   }
 
   /**
@@ -6368,20 +6516,20 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'getInternalPageId',
       metricsKey: 'firstDraft.getInternalPageId',
       cb: () => {
-        const rootNode = getSceneGraphInstance().get('0:0');
+        const rootNode = getSceneGraphInstance().get('0:0')
         if (rootNode) {
           for (const childNode of rootNode.childrenNodes) {
             if (childNode.type === 'CANVAS' && childNode.isInternalOnlyNode) {
-              return vm.newString(childNode.guid);
+              return vm.newString(childNode.guid)
             }
           }
         }
-        return vm.$$null;
+        return vm.$$null
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -6393,49 +6541,49 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: firstDraftObject,
       key: 'getComponentVersion',
       metricsKey: 'firstDraft.getComponentVersion',
-      cb: idHandle => {
+      cb: (idHandle) => {
         if (!vm.isString(idHandle)) {
-          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`);
+          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`)
         }
-        const id = vm.toString(idHandle);
+        const id = vm.toString(idHandle)
         if (!isValidSessionLocalID(parseSessionLocalID(id))) {
-          return vm.$$null;
+          return vm.$$null
         }
-        const node = this.privateSceneGraph.get(id);
+        const node = this.privateSceneGraph.get(id)
         if (!node) {
-          return vm.$$null;
+          return vm.$$null
         }
-        return this.getNodeComponentVersion(node, vm);
+        return this.getNodeComponentVersion(node, vm)
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Get override key for GUID
     this.defineVmFunction({
       handle: firstDraftObject,
       key: 'getOverrideKeyForGuidOrNull',
       metricsKey: 'firstDraft.getOverrideKeyForGuidOrNull',
-      cb: idHandle => {
+      cb: (idHandle) => {
         if (!vm.isString(idHandle)) {
-          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`);
+          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`)
         }
-        const id = vm.toString(idHandle);
+        const id = vm.toString(idHandle)
         if (!isValidSessionLocalID(parseSessionLocalID(id))) {
-          return vm.$$null;
+          return vm.$$null
         }
-        const node = this.privateSceneGraph.get(id);
+        const node = this.privateSceneGraph.get(id)
         if (!node) {
-          return vm.$$null;
+          return vm.$$null
         }
-        const overrideKey = node.overrideKey;
-        return overrideKey ? vm.newString(overrideKey) : vm.$$null;
+        const overrideKey = node.overrideKey
+        return overrideKey ? vm.newString(overrideKey) : vm.$$null
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
   }
 
   /**
@@ -6443,14 +6591,14 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   getNodeComponentVersion(node, vm) {
     if (node.isStateGroup) {
-      const version = node.sharedStateGroupVersion;
-      return version ? vm.newString(version) : vm.$$null;
+      const version = node.sharedStateGroupVersion
+      return version ? vm.newString(version) : vm.$$null
     }
     if (node.isLooseComponent) {
-      const version = node.sharedSymbolVersion;
-      return version ? vm.newString(version) : vm.$$null;
+      const version = node.sharedSymbolVersion
+      return version ? vm.newString(version) : vm.$$null
     }
-    return vm.$$null;
+    return vm.$$null
   }
 
   /**
@@ -6462,58 +6610,58 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: firstDraftObject,
       key: 'localizeSubtree',
       metricsKey: 'firstDraft.localizeSubtree',
-      cb: nodeHandle => {
-        const node = this.getNode(nodeHandle);
+      cb: (nodeHandle) => {
+        const node = this.getNode(nodeHandle)
         if (!node) {
-          return vm.newBoolean(false);
+          return vm.newBoolean(false)
         }
-        const success = FirstDraftHelpers.detachGeneratedDesign(node.guid, DraftState.CURRENT);
-        return vm.newBoolean(success);
+        const success = FirstDraftHelpers.detachGeneratedDesign(node.guid, DraftState.CURRENT)
+        return vm.newBoolean(success)
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Get consumed variable collection IDs
     this.defineVmFunction({
       handle: firstDraftObject,
       key: 'consumedVariableCollectionIds',
       metricsKey: 'firstDraft.consumedVariableCollectionIds',
-      cb: nodeHandle => {
-        const node = this.getNode(nodeHandle);
+      cb: (nodeHandle) => {
+        const node = this.getNode(nodeHandle)
         if (!node) {
-          return vm.newBoolean(false);
+          return vm.newBoolean(false)
         }
-        const collectionIds = FirstDraftHelpers.consumedVariableCollectionIds(node.guid);
-        const resultArray = vm.newArray();
+        const collectionIds = FirstDraftHelpers.consumedVariableCollectionIds(node.guid)
+        const resultArray = vm.newArray()
         for (let i = 0; i < collectionIds.length; i++) {
-          vm.setProp(resultArray, String(i), vm.newString(collectionIds[i]));
+          vm.setProp(resultArray, String(i), vm.newString(collectionIds[i]))
         }
-        return resultArray;
+        return resultArray
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
+      hasEditScope: false,
+    })
 
     // Detach font family variable
     this.defineVmFunction({
       handle: firstDraftObject,
       key: 'detachFontFamilyVariable',
       metricsKey: 'firstDraft.detachFontFamilyVariable',
-      cb: nodeHandle => {
-        const node = this.getNode(nodeHandle);
+      cb: (nodeHandle) => {
+        const node = this.getNode(nodeHandle)
         if (node && node.type === 'TEXT') {
-          node.inheritedTextStyle = null;
-          node.setBoundVariable('fontFamily', null);
+          node.inheritedTextStyle = null
+          node.setBoundVariable('fontFamily', null)
         }
-        return vm.$$null;
+        return vm.$$null
       },
       isAllowedInReadOnly: false,
       isAllowedInWidgetRender: false,
-      hasEditScope: true
-    });
+      hasEditScope: true,
+    })
   }
 
   /**
@@ -6524,28 +6672,28 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       handle: firstDraftObject,
       key: 'getComponentInfoByIdAsync',
       metricsKey: 'firstDraft.getComponentInfoByIdAsync',
-      cb: idHandle => {
+      cb: (idHandle) => {
         if (!vm.isString(idHandle)) {
-          return vm.$$null;
+          return vm.$$null
         }
         const {
           promise,
-          resolve
-        } = vm.newPromise();
+          resolve,
+        } = vm.newPromise()
         vm.registerPromise((async () => {
-          const componentModule = await Promise.resolve().then(() => _require); // Fix Promise chain
-          const id = vm.toString(idHandle);
+          const componentModule = await Promise.resolve().then(() => _require) // Fix Promise chain
+          const id = vm.toString(idHandle)
           const componentInfo = componentModule?.getComponentInfoByIdUncached?.(id, {
-            enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays
-          });
-          resolve(componentInfo ? vm.deepWrap(componentInfo) : vm.$$null);
-        })());
-        return promise;
+            enableTsArrays: !!getFeatureFlags().first_draft_ts_arrays,
+          })
+          resolve(componentInfo ? vm.deepWrap(componentInfo) : vm.$$null)
+        })())
+        return promise
       },
       isAllowedInReadOnly: false,
       isAllowedInWidgetRender: false,
-      hasEditScope: true
-    });
+      hasEditScope: true,
+    })
   }
 
   /**
@@ -6561,15 +6709,15 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         const {
           promise,
           resolve,
-          reject
-        } = vm.newPromise();
-        vm.registerPromise(renameSelectedLayers()).then(() => resolve(vm.undefined)).catch(error => reject(this.wrapError(error)));
-        return promise;
+          reject,
+        } = vm.newPromise()
+        vm.registerPromise(renameSelectedLayers()).then(() => resolve(vm.undefined)).catch(error => reject(this.wrapError(error)))
+        return promise
       },
       isAllowedInReadOnly: false,
       isAllowedInWidgetRender: false,
-      hasEditScope: true
-    });
+      hasEditScope: true,
+    })
 
     // Apply overrides to instance to match node
     this.defineVmFunction({
@@ -6577,15 +6725,15 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       key: 'applyOverridesToInstanceToMatchNode',
       metricsKey: 'firstDraft.applyOverridesToInstanceToMatchNode',
       cb: (instanceHandle, targetHandle) => {
-        const instanceNode = this.getNode(instanceHandle);
-        const targetNode = this.getNode(targetHandle);
-        FirstDraftHelpers.applyOverridesToInstanceToMatchNode(instanceNode.guid, targetNode.guid);
-        return vm.$$null;
+        const instanceNode = this.getNode(instanceHandle)
+        const targetNode = this.getNode(targetHandle)
+        FirstDraftHelpers.applyOverridesToInstanceToMatchNode(instanceNode.guid, targetNode.guid)
+        return vm.$$null
       },
       isAllowedInReadOnly: false,
       isAllowedInWidgetRender: false,
-      hasEditScope: true
-    });
+      hasEditScope: true,
+    })
   }
 
   /**
@@ -6597,8 +6745,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * @returns VM object with analytics API methods
    */
   createAnalyticsApi() {
-    const vm = this.vm;
-    const analyticsApi = vm.newObject();
+    const vm = this.vm
+    const analyticsApi = vm.newObject()
 
     /**
      * track - Sends an analytics event with the specified name and properties.
@@ -6614,101 +6762,101 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           vm,
           handle: nameHandle,
           zSchema: _$$z.string(),
-          property: 'analytics.track name'
-        });
+          property: 'analytics.track name',
+        })
         const eventProperties = validateWithZSchema({
           vm,
           handle: propertiesHandle,
           zSchema: _$$z.record(_$$z.any()),
-          property: 'analytics.track properties'
-        });
-        trackEventAnalytics(eventName, eventProperties);
-        return vm.undefined;
+          property: 'analytics.track properties',
+        })
+        trackEventAnalytics(eventName, eventProperties)
+        return vm.undefined
       },
       isAllowedInReadOnly: true,
       isAllowedInWidgetRender: false,
-      hasEditScope: false
-    });
-    vm.shallowFreezeObject(analyticsApi);
-    return analyticsApi;
+      hasEditScope: false,
+    })
+    vm.shallowFreezeObject(analyticsApi)
+    return analyticsApi
   }
 
   /**
    * wrapPromise - Wrap a promise for VM context
    */
   wrapPromise(e) {
-    let t = this.vm;
+    let t = this.vm
     let {
       promise,
       resolve,
-      reject
-    } = t.newPromise();
-    t.registerPromise(e).then(e => resolve(t.deepWrap(e))).catch(e => reject(this.wrapError(e)));
-    return promise;
+      reject,
+    } = t.newPromise()
+    t.registerPromise(e).then(e => resolve(t.deepWrap(e))).catch(e => reject(this.wrapError(e)))
+    return promise
   }
 
   /**
    * wrapError - Wrap an error for VM context
    */
   wrapError(e) {
-    let t = this.vm;
-    let i = t.newObject();
+    let t = this.vm
+    let i = t.newObject()
     t.defineProp(i, 'message', {
       enumerable: !0,
-      value: t.newString(e.message)
-    });
-    t.shallowFreezeObject(i);
-    return i;
+      value: t.newString(e.message),
+    })
+    t.shallowFreezeObject(i)
+    return i
   }
 
   /**
    * createCortexKiwiApi - Create Cortex Kiwi API for internal operations
    */
   createCortexKiwiApi() {
-    let e = this;
-    let t = this.vm;
-    let i = t.newObject();
+    let e = this
+    let t = this.vm
+    let i = t.newObject()
     this.defineVmFunction({
       handle: i,
       key: 'getSceneForNode',
       metricsKey: 'cortex.internal.kiwi.getSceneForNode',
-      cb: i => {
-        let n = e.getNode(i);
-        let r = Fullscreen.generateClipboardScene(n.guid);
-        return t.newUint8Array(r);
+      cb: (i) => {
+        let n = e.getNode(i)
+        let r = Fullscreen.generateClipboardScene(n.guid)
+        return t.newUint8Array(r)
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: i,
       key: 'applyScene',
       metricsKey: 'cortex.internal.kiwi.applyScene',
-      cb: e => {
+      cb: (e) => {
         let i = validateWithZSchema({
           vm: t,
           handle: e,
           zSchema: FigmaSchema.UInt8Array,
-          property: 'applyScene'
-        });
-        Fullscreen.applyFileToCurrentScene(i);
-        return t.undefined;
+          property: 'applyScene',
+        })
+        Fullscreen.applyFileToCurrentScene(i)
+        return t.undefined
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
-    t.shallowFreezeObject(i);
-    return i;
+      hasEditScope: !0,
+    })
+    t.shallowFreezeObject(i)
+    return i
   }
 
   /**
    * createCortexApi - Create Cortex API for plugin operations
    */
   createCortexApi() {
-    let e = this.vm;
-    let t = e.newObject();
+    let e = this.vm
+    let t = e.newObject()
     this.defineVmProp({
       handle: t,
       key: 'kiwi',
@@ -6716,78 +6864,78 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         enumerable: !1,
         writable: !1,
         metricsKey: 'figma.kiwi',
-        value: this.createCortexKiwiApi()
+        value: this.createCortexKiwiApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     let i = (t, i) => validateWithZSchema({
       vm: e,
       handle: i,
       zSchema: _$$z.record(_$$z.any()),
-      property: t
-    });
+      property: t,
+    })
     let n = (e, n, r) => {
       this.defineVmFunction({
         handle: t,
         key: e,
         metricsKey: n,
-        cb: e => {
-          let t = i(`${n} input`, e);
-          let a = debugState.getState();
-          let s = OU(a);
-          return this.wrapPromise(r(t, s));
+        cb: (e) => {
+          let t = i(`${n} input`, e)
+          let a = debugState.getState()
+          let s = OU(a)
+          return this.wrapPromise(r(t, s))
         },
         isAllowedInReadOnly: !0,
         isAllowedInWidgetRender: !1,
-        hasEditScope: !1
-      });
-    };
+        hasEditScope: !1,
+      })
+    }
     let r = (e, n, r) => {
-      let a = this.vm;
+      let a = this.vm
       this.defineVmFunction({
         handle: t,
         key: e,
         metricsKey: n,
-        cb: e => {
-          let t = i(`${n} input`, e);
-          let s = debugState.getState();
-          let o = OU(s);
+        cb: (e) => {
+          let t = i(`${n} input`, e)
+          let s = debugState.getState()
+          let o = OU(s)
           let {
             promise,
             resolve,
-            reject
-          } = a.newPromise();
-          a.registerPromise(r(t, o)).then(e => resolve(this.wrapReadableStream(e))).catch(e => reject(this.wrapError(e)));
-          return promise;
+            reject,
+          } = a.newPromise()
+          a.registerPromise(r(t, o)).then(e => resolve(this.wrapReadableStream(e))).catch(e => reject(this.wrapError(e)))
+          return promise
         },
         isAllowedInReadOnly: !0,
         isAllowedInWidgetRender: !1,
-        hasEditScope: !1
-      });
-    };
-    n('completeChat', 'cortex.internal.openai.completeChat', _$$Ay2.openai.completeChat);
-    r('streamChat', 'cortex.internal.openai.streamChat', _$$Ay2.openai.streamChat);
-    n('computeEmbeddings', 'cortex.internal.openai.embeddings', _$$Ay2.openai.computeEmbeddings);
-    n('getTextImageEmbeds', 'cortex.internal.clip.embeddings', _$$Ay2.design.getTextImageEmbeds);
-    r('streamText', 'cortex.internal.streamText', _$$Ay2.internal.streamText);
-    n('generateImages', 'cortex.internal.design.generateImages', _$$Ay2.design.generateImages);
-    n('jamGPT', 'cortex.internal.figjam.jamGPT', _$$Ay2.figjam.jamGPT);
-    r('createTemplate', 'cortex.internal.figjam.createTemplate', _$$Ay2.figjam.createTemplate);
-    n('createVisual', 'cortex.internal.figjam.createVisual', _$$Ay2.figjam.createVisual);
-    e.shallowFreezeObject(t);
-    return t;
+        hasEditScope: !1,
+      })
+    }
+    n('completeChat', 'cortex.internal.openai.completeChat', _$$Ay2.openai.completeChat)
+    r('streamChat', 'cortex.internal.openai.streamChat', _$$Ay2.openai.streamChat)
+    n('computeEmbeddings', 'cortex.internal.openai.embeddings', _$$Ay2.openai.computeEmbeddings)
+    n('getTextImageEmbeds', 'cortex.internal.clip.embeddings', _$$Ay2.design.getTextImageEmbeds)
+    r('streamText', 'cortex.internal.streamText', _$$Ay2.internal.streamText)
+    n('generateImages', 'cortex.internal.design.generateImages', _$$Ay2.design.generateImages)
+    n('jamGPT', 'cortex.internal.figjam.jamGPT', _$$Ay2.figjam.jamGPT)
+    r('createTemplate', 'cortex.internal.figjam.createTemplate', _$$Ay2.figjam.createTemplate)
+    n('createVisual', 'cortex.internal.figjam.createVisual', _$$Ay2.figjam.createVisual)
+    e.shallowFreezeObject(t)
+    return t
   }
 
   /**
    * wrapReadableStream - Wrap a ReadableStream for VM context
    */
   wrapReadableStream(stream) {
-    const vm = this.vm;
-    const ReadableStreamCtor = vm.getProp(vm.global, 'ReadableStream');
+    const vm = this.vm
+    const ReadableStreamCtor = vm.getProp(vm.global, 'ReadableStream')
     if (!ReadableStreamCtor) {
-      _$$k2.error(`
+      logger.error(`
 Import a polyfill to use this plugin API, eg:
 \`\`\`
 import { ReadableStream } from "web-streams-polyfill/es6";
@@ -6796,168 +6944,175 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
 }
 // Now it's safe to use APIs that return ReadableStreams
 \`\`\`
-`);
-      return new Error('ReadableStream not available on the VM global object.');
+`)
+      return new Error('ReadableStream not available on the VM global object.')
     }
-    const underlyingSource = vm.newObject();
-    const reader = stream.getReader();
+    const underlyingSource = vm.newObject()
+    const reader = stream.getReader()
     const callController = (controller, method, ...args) => {
-      const fn = vm.getProp(controller, method);
-      return !!vm.isFunction(fn) && (vm.callFunction(fn, controller, ...args).type !== 'FAILURE' || void _$$k2.error(`Error calling controller.${method}(\u2026)`));
-    };
-    vm.defineFunction(underlyingSource, 'pull', 'underlyingSource.pull', controller => {
-      vm.retainHandle(controller);
+      const fn = vm.getProp(controller, method)
+      return !!vm.isFunction(fn) && (vm.callFunction(fn, controller, ...args).type !== 'FAILURE' || void logger.error(`Error calling controller.${method}(\u2026)`))
+    }
+    vm.defineFunction(underlyingSource, 'pull', 'underlyingSource.pull', (controller) => {
+      vm.retainHandle(controller)
       return this.wrapPromise((async () => {
         try {
           const {
             done,
-            value
-          } = await reader.read();
+            value,
+          } = await reader.read()
           if (vm.isDestroyed()) {
-            reader.cancel();
-            return;
+            reader.cancel()
+            return
           }
-          done ? callController(controller, 'close', vm.undefined) : callController(controller, 'enqueue', vm.deepWrap(value));
-        } catch (err) {
-          _$$k2.error('ReadableStream: Error reading from stream passing to plugin vm', err);
-          callController(controller, 'error', this.wrapError(err));
-        } finally {
-          vm.releaseHandle(controller);
+          done ? callController(controller, 'close', vm.undefined) : callController(controller, 'enqueue', vm.deepWrap(value))
         }
-      })());
-    });
-    vm.defineFunction(underlyingSource, 'cancel', 'underlyingSource.cancel', () => this.wrapPromise(reader.cancel()));
-    vm.shallowFreezeObject(underlyingSource);
-    const result = vm.callConstructor(ReadableStreamCtor, underlyingSource);
+        catch (err) {
+          logger.error('ReadableStream: Error reading from stream passing to plugin vm', err)
+          callController(controller, 'error', this.wrapError(err))
+        }
+        finally {
+          vm.releaseHandle(controller)
+        }
+      })())
+    })
+    vm.defineFunction(underlyingSource, 'cancel', 'underlyingSource.cancel', () => this.wrapPromise(reader.cancel()))
+    vm.shallowFreezeObject(underlyingSource)
+    const result = vm.callConstructor(ReadableStreamCtor, underlyingSource)
     if (result.type === 'FAILURE') {
-      _$$k2.error(`Error creating ReadableStream: ${result.error}`);
-      return new Error(`Error creating ReadableStream: ${result.error}`);
+      logger.error(`Error creating ReadableStream: ${result.error}`)
+      return new Error(`Error creating ReadableStream: ${result.error}`)
     }
-    return result.handle;
+    return result.handle
   }
+
   setQueryMode(e) {
-    this.queryMode = e;
-    PluginHelpers.runInQueryMode(this.queryMode);
-    this.uiHandle.setHideVisibleUI(this.queryMode);
+    this.queryMode = e
+    PluginHelpers.runInQueryMode(this.queryMode)
+    this.uiHandle.setHideVisibleUI(this.queryMode)
   }
 
   /**
    * setSkipInvisibleInstanceChildren - Set whether to skip invisible instance children
    */
   setSkipInvisibleInstanceChildren(e) {
-    this.skipInvisibleInstanceChildren = e;
-    PluginHelpers.skipInvisibleInstanceChildren(e);
+    this.skipInvisibleInstanceChildren = e
+    PluginHelpers.skipInvisibleInstanceChildren(e)
   }
 
   /**
    * createCodebaseSuggestionsApi - Create codebase suggestions API
    */
   createCodebaseSuggestionsApi() {
-    let e = this.vm.newObject();
+    let e = this.vm.newObject()
     this.defineVmFunction({
       handle: e,
       key: 'getSuggestionsUrl',
       metricsKey: 'codebase_suggestions.getSuggestionsUrl',
       cb: () => {
-        let e = _$$I();
-        if (!e) throw new Error('No org id found');
-        let t = codeSuggestionAPIHandler.getZipUrl(e).then(e => e.data.meta.url);
-        return this.wrapPromise(t);
+        let e = _$$I()
+        if (!e)
+          throw new Error('No org id found')
+        let t = codeSuggestionAPIHandler.getZipUrl(e).then(e => e.data.meta.url)
+        return this.wrapPromise(t)
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: e,
       key: 'getSuggestions',
       metricsKey: 'codebase_suggestions.getSuggestions',
       cb: () => {
-        let e = _$$I();
-        if (!e) throw new Error('No org id found');
-        let t = codeSuggestionAPIHandler.getZipUrl(e).then(e => {
-          let t = e.data.meta.url;
-          if (!t) throw new Error('No url found');
+        let e = _$$I()
+        if (!e)
+          throw new Error('No org id found')
+        let t = codeSuggestionAPIHandler.getZipUrl(e).then((e) => {
+          let t = e.data.meta.url
+          if (!t)
+            throw new Error('No url found')
           // TODO: Phase 18 Refactoring - Replace with:
           // const httpClient = createAdvancedHTTPClientManager()
           // return httpClient.get(t, { responseType: 'arrayBuffer' }).then(response => response.data)
-          return fetch(t);
-        }).then(e => e.arrayBuffer());
-        return this.wrapPromise(t);
+          return fetch(t)
+        }).then(e => e.arrayBuffer())
+        return this.wrapPromise(t)
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
-    return e;
+      hasEditScope: !1,
+    })
+    return e
   }
 
   /**
    * createJsxApi - Create JSX API for React-like components
    */
   createJsxApi() {
-    let e = this.vm;
-    let t = e.newObject();
+    let e = this.vm
+    let t = e.newObject()
     this.defineVmFunction({
       handle: t,
       key: 'serialize',
       metricsKey: 'jsx.serialize',
       cb: (t, i) => {
-        let n = this.getNode(t);
+        let n = this.getNode(t)
         let r = validateWithZSchema({
           vm: e,
           handle: i,
           zSchema: J3.optional(),
-          property: 'options'
-        });
-        return this.wrapPromise(generateJsxFromNode(n, r));
+          property: 'options',
+        })
+        return this.wrapPromise(generateJsxFromNode(n, r))
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: t,
       key: 'deserialize',
       metricsKey: 'jsx.deserialize',
       cb: (t, i) => {
-        if (!e.isString(t)) throw new Error('jsx not a string');
-        let n = e.toString(t);
+        if (!e.isString(t))
+          throw new Error('jsx not a string')
+        let n = e.toString(t)
         let r = validateWithZSchema({
           vm: e,
           handle: i,
           zSchema: J3.optional(),
-          property: 'options'
-        });
+          property: 'options',
+        })
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
-        e.registerPromise(getNodeGuid(n, r)).then(t => {
-          t ? resolve(this.nodeFactory.createNode(t, 'figma.jsx.deserialize')) : resolve(e.$$null);
-        }).catch(t => reject(e.newString(t.message)));
-        return promise;
+          reject,
+        } = e.newPromise()
+        e.registerPromise(getNodeGuid(n, r)).then((t) => {
+          t ? resolve(this.nodeFactory.createNode(t, 'figma.jsx.deserialize')) : resolve(e.$$null)
+        }).catch(t => reject(e.newString(t.message)))
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
-    return t;
+      hasEditScope: !1,
+    })
+    return t
   }
 
   /**
    * getUiHandle - Get the UI handle for the plugin
    */
   getUiHandle() {
-    return this.uiHandle;
+    return this.uiHandle
   }
 
   /**
    * createAPI - Create the main plugin API
    */
   createAPI() {
-    let e = this.vm;
+    let e = this.vm
     let {
       command,
       queryMode,
@@ -6967,11 +7122,11 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       openFileKey,
       stats,
       incrementalSafeApi,
-      allowIncrementalUnsafeApiCalls
-    } = this.options;
-    let u = 0;
-    let y = e.newObject();
-    e.setProp(e.global, 'figma', y);
+      allowIncrementalUnsafeApiCalls,
+    } = this.options
+    let u = 0
+    let y = e.newObject()
+    e.setProp(e.global, 'figma', y)
     this.defineVmProp({
       handle: y,
       key: 'apiVersion',
@@ -6979,19 +7134,19 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         enumerable: !1,
         writable: !1,
         metricsKey: 'figma.apiVersion',
-        value: e.newString(apiVersion)
+        value: e.newString(apiVersion),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'getHTMLString',
       metricsKey: 'figma.getHTMLString',
       cb: () => this.vm.newString(this.options.html ?? ''),
       isAllowedInReadOnly: !0,
-      hasEditScope: !1
+      hasEditScope: !1,
     });
     (enablePrivatePluginApi || this.options.validatedPermissions.permissions.includes('filekey')) && this.defineVmProp({
       handle: y,
@@ -7000,12 +7155,12 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         enumerable: !1,
         writable: !1,
         metricsKey: 'figma.fileKey',
-        value: e.newString(openFileKey)
+        value: e.newString(openFileKey),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     // =====================
     // REFACTORED: Modular Buzz API Extension
     // =====================
@@ -7020,8 +7175,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         nodeFactory: this.nodeFactory,
         documentAccessState: this.documentAccessState,
         imageStore: this.imageStore,
-        videoStore: this.videoStore
-      };
+        videoStore: this.videoStore,
+      }
       buzzApiConfig.defineVmProp({
         handle: buzzApiConfig.figmaApi,
         key: 'buzz',
@@ -7029,7 +7184,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           enumerable: false,
           metricsKey: 'figma.buzz',
           get: memoizedHandle(buzzApiConfig.vm, () => {
-            const buzzObj = buzzApiConfig.vm.newObject();
+            const buzzObj = buzzApiConfig.vm.newObject()
 
             // createFrame
             buzzApiConfig.defineVmFunction({
@@ -7041,32 +7196,35 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   vm: buzzApiConfig.vm,
                   handle: rowHandle,
                   zSchema: _$$z.number().finite().min(0).int().optional(),
-                  property: 'canvasRow'
-                });
+                  property: 'canvasRow',
+                })
                 const col = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: colHandle,
                   zSchema: _$$z.number().finite().min(0).int().optional(),
-                  property: 'canvasColumn'
-                });
-                const assetType = designTypeToIndex.get('CUSTOM');
-                if (assetType === undefined) throw new Error('Invalid asset type');
-                const size = CooperTemplateTypesTsBindings?.getCooperTemplateTypeSize(assetType);
-                if (!size) throw new Error('Failed fetching size for asset type');
+                  property: 'canvasColumn',
+                })
+                const assetType = designTypeToIndex.get('CUSTOM')
+                if (assetType === undefined)
+                  throw new Error('Invalid asset type')
+                const size = CooperTemplateTypesTsBindings?.getCooperTemplateTypeSize(assetType)
+                if (!size)
+                  throw new Error('Failed fetching size for asset type')
                 const {
                   row: r,
-                  col: c
-                } = getRowColumn(row, col);
-                const guid = CooperHelpers?.createBlankChildAtCoord(r, c, size, 'plugin_buzz_create_frame', true, assetType);
-                if (!guid) throw new Error('Failed to create frame');
-                markPageLoaded(guid, buzzApiConfig.documentAccessState);
-                AppStateTsApi?.canvasGrid().recomputeGrid();
-                return buzzApiConfig.nodeFactory.createNode(guid, 'figma.buzz.createFrame');
+                  col: c,
+                } = getRowColumn(row, col)
+                const guid = CooperHelpers?.createBlankChildAtCoord(r, c, size, 'plugin_buzz_create_frame', true, assetType)
+                if (!guid)
+                  throw new Error('Failed to create frame')
+                markPageLoaded(guid, buzzApiConfig.documentAccessState)
+                AppStateTsApi?.canvasGrid().recomputeGrid()
+                return buzzApiConfig.nodeFactory.createNode(guid, 'figma.buzz.createFrame')
               },
               isAllowedInReadOnly: true,
               isAllowedInWidgetRender: false,
-              hasEditScope: true
-            });
+              hasEditScope: true,
+            })
 
             // createInstance
             buzzApiConfig.defineVmFunction({
@@ -7078,54 +7236,55 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   vm: buzzApiConfig.vm,
                   handle: rowHandle,
                   zSchema: FigmaSchema.PositiveInteger.optional(),
-                  property: 'canvasRow'
-                });
+                  property: 'canvasRow',
+                })
                 const col = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: colHandle,
                   zSchema: FigmaSchema.PositiveInteger.optional(),
-                  property: 'canvasColumn'
-                });
-                const targetNode = buzzApiConfig.getNode(nodeHandle);
-                if (targetNode.type !== 'SYMBOL') throw new Error('Node is not a component');
-                const instanceGuid = targetNode.createInstance()?.guid || '';
-                const nodeObj = buzzApiConfig.nodeFactory.createNode(instanceGuid, 'node.createInstance');
+                  property: 'canvasColumn',
+                })
+                const targetNode = buzzApiConfig.getNode(nodeHandle)
+                if (targetNode.type !== 'SYMBOL')
+                  throw new Error('Node is not a component')
+                const instanceGuid = targetNode.createInstance()?.guid || ''
+                const nodeObj = buzzApiConfig.nodeFactory.createNode(instanceGuid, 'node.createInstance')
                 const {
                   row: r,
-                  col: c
-                } = getRowColumn(row, col);
+                  col: c,
+                } = getRowColumn(row, col)
                 AppStateTsApi?.canvasGrid().moveChildrenToCoord([instanceGuid], {
                   row: r,
-                  col: c
-                });
-                markPageLoaded(instanceGuid, buzzApiConfig.documentAccessState);
-                AppStateTsApi?.canvasGrid().recomputeGrid();
-                return nodeObj;
+                  col: c,
+                })
+                markPageLoaded(instanceGuid, buzzApiConfig.documentAccessState)
+                AppStateTsApi?.canvasGrid().recomputeGrid()
+                return nodeObj
               },
               isAllowedInReadOnly: false,
-              hasEditScope: true
-            });
+              hasEditScope: true,
+            })
 
             // getBuzzAssetTypeForNode
             buzzApiConfig.defineVmFunction({
               handle: buzzObj,
               key: 'getBuzzAssetTypeForNode',
               metricsKey: 'figma.buzz.getBuzzAssetTypeForNode',
-              cb: nodeHandle => {
-                const node = buzzApiConfig.getNode(nodeHandle);
+              cb: (nodeHandle) => {
+                const node = buzzApiConfig.getNode(nodeHandle)
                 if (node && CooperTemplateTypesTsBindings) {
-                  const type = CooperTemplateTypesTsBindings.getCooperTemplateType(node.guid);
+                  const type = CooperTemplateTypesTsBindings.getCooperTemplateType(node.guid)
                   if (type != null) {
-                    const label = indexToDesignType.get(type);
-                    return label ? buzzApiConfig.vm.newString(label.toString()) : buzzApiConfig.vm.$$null;
+                    const label = indexToDesignType.get(type)
+                    return label ? buzzApiConfig.vm.newString(label.toString()) : buzzApiConfig.vm.$$null
                   }
                 }
-                return buzzApiConfig.vm.$$null;
+                return buzzApiConfig.vm.$$null
               },
               isAllowedInReadOnly: true,
               isAllowedInWidgetRender: false,
-              hasEditScope: false
-            });
+              hasEditScope: false,
+            })
 
             // setBuzzAssetTypeForNode
             buzzApiConfig.defineVmFunction({
@@ -7133,59 +7292,61 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'setBuzzAssetTypeForNode',
               metricsKey: 'figma.buzz.setBuzzAssetTypeForNode',
               cb: (nodeHandle, typeHandle) => {
-                const node = buzzApiConfig.getNode(nodeHandle);
-                if (!node.isCooperFrame) throw new Error('Can only set asset type on Buzz Asset Node');
+                const node = buzzApiConfig.getNode(nodeHandle)
+                if (!node.isCooperFrame)
+                  throw new Error('Can only set asset type on Buzz Asset Node')
                 if (node.isInstance) {
-                  throw new Error('Cannot set asset type on Locked Buzz Asset Node');
+                  throw new Error('Cannot set asset type on Locked Buzz Asset Node')
                 }
                 const assetType = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: typeHandle,
                   zSchema: FigmaSchema.BuzzAssetType,
-                  property: 'buzzAssetType'
-                });
-                const typeValue = designTypeToIndex.get(assetType);
-                if (CooperTemplateTypesTsBindings && typeValue) CooperTemplateTypesTsBindings.setCooperTemplateType(node.guid, typeValue);
-                return buzzApiConfig.vm.undefined;
+                  property: 'buzzAssetType',
+                })
+                const typeValue = designTypeToIndex.get(assetType)
+                if (CooperTemplateTypesTsBindings && typeValue)
+                  CooperTemplateTypesTsBindings.setCooperTemplateType(node.guid, typeValue)
+                return buzzApiConfig.vm.undefined
               },
               isAllowedInReadOnly: false,
               isAllowedInWidgetRender: false,
-              hasEditScope: true
-            });
+              hasEditScope: true,
+            })
 
             // getTextContent
             buzzApiConfig.defineVmFunction({
               handle: buzzObj,
               key: 'getTextContent',
               metricsKey: 'figma.buzz.getTextContent',
-              cb: nodeHandle => {
-                const node = buzzApiConfig.getNode(nodeHandle);
+              cb: (nodeHandle) => {
+                const node = buzzApiConfig.getNode(nodeHandle)
                 if (!node.isCooperFrame) {
-                  throw new Error('Can only get Buzz Text Content on Buzz Asset Node');
+                  throw new Error('Can only get Buzz Text Content on Buzz Asset Node')
                 }
-                return createBuzzTextContentArray(node, buzzApiConfig.vm, buzzApiConfig.sceneGraph);
+                return createBuzzTextContentArray(node, buzzApiConfig.vm, buzzApiConfig.sceneGraph)
               },
               isAllowedInReadOnly: false,
               isAllowedInWidgetRender: false,
-              hasEditScope: true
-            });
+              hasEditScope: true,
+            })
 
             // getMediaContent
             buzzApiConfig.defineVmFunction({
               handle: buzzObj,
               key: 'getMediaContent',
               metricsKey: 'figma.buzz.getMediaContent',
-              cb: nodeHandle => {
-                const node = buzzApiConfig.getNode(nodeHandle);
+              cb: (nodeHandle) => {
+                const node = buzzApiConfig.getNode(nodeHandle)
                 if (!node.isCooperFrame) {
-                  throw new Error('Can only get Buzz Media Content on Buzz Asset Node');
+                  throw new Error('Can only get Buzz Media Content on Buzz Asset Node')
                 }
-                return createBuzzMediaContentArray(node, buzzApiConfig.vm, buzzApiConfig.imageStore, buzzApiConfig.videoStore, buzzApiConfig.nodeFactory);
+                return createBuzzMediaContentArray(node, buzzApiConfig.vm, buzzApiConfig.imageStore, buzzApiConfig.videoStore, buzzApiConfig.nodeFactory)
               },
               isAllowedInReadOnly: false,
               isAllowedInWidgetRender: false,
-              hasEditScope: true
-            });
+              hasEditScope: true,
+            })
 
             // smartResize
             buzzApiConfig.defineVmFunction({
@@ -7193,35 +7354,35 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               key: 'smartResize',
               metricsKey: 'figma.buzz.smartResize',
               cb: (nodeHandle, widthHandle, heightHandle) => {
-                const node = buzzApiConfig.getNode(nodeHandle);
+                const node = buzzApiConfig.getNode(nodeHandle)
                 if (!node.isCooperFrame) {
-                  throw new Error('Can only get Buzz Media Content on Buzz Asset Node');
+                  throw new Error('Can only get Buzz Media Content on Buzz Asset Node')
                 }
                 if (node.isInstance) {
-                  throw new Error('Cannot smart resize Locked Buzz Asset Nodes');
+                  throw new Error('Cannot smart resize Locked Buzz Asset Nodes')
                 }
                 const width = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: widthHandle,
                   zSchema: FigmaSchema.PositiveFloat,
-                  property: 'width'
-                });
+                  property: 'width',
+                })
                 const height = validateWithZSchema({
                   vm: buzzApiConfig.vm,
                   handle: heightHandle,
                   zSchema: FigmaSchema.PositiveFloat,
-                  property: 'height'
-                });
+                  property: 'height',
+                })
                 if (CooperTemplateTypesTsBindings) {
-                  CooperTemplateTypesTsBindings.setCooperTemplateType(node.guid, SocialMediaFormats.CUSTOM);
-                  CooperTemplateTypesTsBindings.resizeNode(node.guid, width, height);
+                  CooperTemplateTypesTsBindings.setCooperTemplateType(node.guid, SocialMediaFormats.CUSTOM)
+                  CooperTemplateTypesTsBindings.resizeNode(node.guid, width, height)
                 }
-                return buzzApiConfig.vm.undefined;
+                return buzzApiConfig.vm.undefined
               },
               isAllowedInReadOnly: false,
               isAllowedInWidgetRender: false,
-              hasEditScope: true
-            });
+              hasEditScope: true,
+            })
 
             // --- Helper Functions for Buzz API ---
 
@@ -7230,51 +7391,54 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
              * Each object has isComponentProp, value, and setValueAsync.
              */
             function createBuzzTextContentArray(targetNode, vm, nodeMap) {
-              const arr = vm.newArray();
+              const arr = vm.newArray()
               targetNode.getBuzzTextFields().forEach((field, idx) => {
-                const obj = vm.newObject();
+                const obj = vm.newObject()
                 vm.defineProp(obj, 'isComponentProp', {
                   enumerable: false,
-                  get: () => vm.newBoolean(field.type === 'TEXT_PROP_DEF')
-                });
+                  get: () => vm.newBoolean(field.type === 'TEXT_PROP_DEF'),
+                })
                 vm.defineProp(obj, 'value', {
                   enumerable: false,
                   get: () => {
-                    const guid = field.guids[0];
+                    const guid = field.guids[0]
                     if (guid) {
-                      const textNode = nodeMap.get(guid);
-                      if (textNode) return vm.newString(textNode.characters);
+                      const textNode = nodeMap.get(guid)
+                      if (textNode)
+                        return vm.newString(textNode.characters)
                     }
-                    return vm.$$null;
-                  }
-                });
-                vm.defineFunction(obj, 'setValueAsync', 'buzz.textContent.setValueAsync', newValueHandle => {
+                    return vm.$$null
+                  },
+                })
+                vm.defineFunction(obj, 'setValueAsync', 'buzz.textContent.setValueAsync', (newValueHandle) => {
                   const newValue = validateWithZSchema({
                     vm,
                     handle: newValueHandle,
                     zSchema: _$$z.string(),
-                    property: 'newBuzzTextFieldValue'
-                  });
+                    property: 'newBuzzTextFieldValue',
+                  })
                   const {
                     promise,
-                    resolve
-                  } = vm.newPromise();
+                    resolve,
+                  } = vm.newPromise()
                   vm.registerPromise((async () => {
                     for (let guid of field.guids) {
-                      if (!guid) continue;
-                      const textNode = nodeMap.get(guid);
-                      if (textNode) await loadFontsForTextNode(textNode);
+                      if (!guid)
+                        continue
+                      const textNode = nodeMap.get(guid)
+                      if (textNode)
+                        await loadFontsForTextNode(textNode)
                     }
                     permissionScopeHandler.plugin('plugin-buzz-set-textfield-value', () => {
-                      field.setValue(newValue);
-                    });
-                    resolve(vm.$$null);
-                  })());
-                  return promise;
-                });
-                vm.setProp(arr, idx.toString(), obj);
-              });
-              return arr;
+                      field.setValue(newValue)
+                    })
+                    resolve(vm.$$null)
+                  })())
+                  return promise
+                })
+                vm.setProp(arr, idx.toString(), obj)
+              })
+              return arr
             }
 
             /**
@@ -7282,127 +7446,137 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
              * Each object has type, hash, node, getMedia, setMedia.
              */
             function createBuzzMediaContentArray(targetNode, vm, imageStore, videoStore, nodeFactory) {
-              const arr = vm.newArray();
-              const fields = oJ(targetNode);
+              const arr = vm.newArray()
+              const fields = oJ(targetNode)
               fields.forEach((field, idx) => {
-                const obj = createMediaFieldObject(field, vm, imageStore, videoStore, nodeFactory);
-                if (obj) vm.setProp(arr, idx.toString(), obj);
-              });
-              return arr;
+                const obj = createMediaFieldObject(field, vm, imageStore, videoStore, nodeFactory)
+                if (obj)
+                  vm.setProp(arr, idx.toString(), obj)
+              })
+              return arr
             }
             function createMediaFieldObject(field, vm, imageStore, videoStore, nodeFactory) {
               const {
                 mediaPaint,
-                mediaPaintIndex
-              } = _$$eG(field);
+                mediaPaintIndex,
+              } = _$$eG(field)
               if (!mediaPaint || mediaPaintIndex == null || isInvalidValue(mediaPaint) || mediaPaint.image?.hash === undefined) {
-                return null;
+                return null
               }
-              const obj = vm.newObject();
+              const obj = vm.newObject()
               // type
               vm.defineProp(obj, 'type', {
                 enumerable: false,
-                get: () => mediaPaint && isValidValue(mediaPaint) ? vm.newString(mediaPaint.type) : vm.$$null
-              });
+                get: () => mediaPaint && isValidValue(mediaPaint) ? vm.newString(mediaPaint.type) : vm.$$null,
+              })
               // hash
               vm.defineProp(obj, 'hash', {
                 enumerable: false,
                 get: () => {
-                  if (!mediaPaint || isInvalidValue(mediaPaint)) return vm.$$null;
-                  let hash = null;
+                  if (!mediaPaint || isInvalidValue(mediaPaint))
+                    return vm.$$null
+                  let hash = null
                   switch (mediaPaint.type) {
                     case 'IMAGE':
-                      hash = mediaPaint.image?.hash;
-                      break;
+                      hash = mediaPaint.image?.hash
+                      break
                     case 'VIDEO':
-                      hash = mediaPaint.video?.hash;
-                      break;
+                      hash = mediaPaint.video?.hash
+                      break
                   }
-                  return hash ? vm.newString(bytesToHex(hash)) : vm.$$null;
-                }
-              });
+                  return hash ? vm.newString(bytesToHex(hash)) : vm.$$null
+                },
+              })
               // node
               vm.defineProp(obj, 'node', {
                 enumerable: false,
-                get: () => nodeFactory.createNode(field.guid, 'BuzzMediaField.node.get')
-              });
+                get: () => nodeFactory.createNode(field.guid, 'BuzzMediaField.node.get'),
+              })
               // getMedia
               vm.defineFunction(obj, 'getMedia', 'buzz.mediaContent.getMedia', () => {
-                if (!mediaPaint || mediaPaintIndex == null) throw new Error('No media paint found');
-                if (isInvalidValue(mediaPaint)) throw new Error('Mixed media paint not supported');
+                if (!mediaPaint || mediaPaintIndex == null)
+                  throw new Error('No media paint found')
+                if (isInvalidValue(mediaPaint))
+                  throw new Error('Mixed media paint not supported')
                 switch (mediaPaint.type) {
                   case 'IMAGE':
-                    {
-                      const hash = mediaPaint.image?.hash;
-                      if (hash === undefined) throw new Error('Invalid Image paint - no hash found');
-                      const img = imageStore.getImageFromSHA1(bytesToHex(hash));
-                      if (img === null) throw new Error('Could not retrieve image');
-                      return createImageProcessor(vm, img);
-                    }
+                  {
+                    const hash = mediaPaint.image?.hash
+                    if (hash === undefined)
+                      throw new Error('Invalid Image paint - no hash found')
+                    const img = imageStore.getImageFromSHA1(bytesToHex(hash))
+                    if (img === null)
+                      throw new Error('Could not retrieve image')
+                    return createImageProcessor(vm, img)
+                  }
                   case 'VIDEO':
-                    {
-                      const hash = mediaPaint.video?.hash;
-                      if (hash === undefined) throw new Error('Invalid Video paint - no hash found');
-                      try {
-                        const vid = videoStore.getPrivateVideoOrThrow(bytesToHex(hash));
-                        return createNodeHash(vm, vid);
-                      } catch {
-                        throw new Error('getMedia is not currently supported for videos not directly created through plugins');
-                      }
+                  {
+                    const hash = mediaPaint.video?.hash
+                    if (hash === undefined)
+                      throw new Error('Invalid Video paint - no hash found')
+                    try {
+                      const vid = videoStore.getPrivateVideoOrThrow(bytesToHex(hash))
+                      return createNodeHash(vm, vid)
                     }
+                    catch {
+                      throw new Error('getMedia is not currently supported for videos not directly created through plugins')
+                    }
+                  }
                   default:
-                    throwTypeError(mediaPaint.type, 'Unknown media type');
+                    throwTypeError(mediaPaint.type, 'Unknown media type')
                 }
-              });
+              })
               // setMedia
               vm.defineFunction(obj, 'setMedia', 'buzz.mediaContent.setMedia', (hashHandle, typeHandle) => {
                 const hash = validateWithZSchema({
                   vm,
                   handle: hashHandle,
                   zSchema: _$$z.string(),
-                  property: 'mediaHash'
-                });
+                  property: 'mediaHash',
+                })
                 const type = validateWithZSchema({
                   vm,
                   handle: typeHandle,
                   zSchema: _$$z.enum(['IMAGE', 'VIDEO']),
-                  property: 'mediaType'
-                });
-                const paint = type === 'IMAGE' ? processPaint(imageStore, videoStore, {
-                  type: 'IMAGE',
-                  imageHash: hash,
-                  scaleMode: 'FILL'
-                }, []) : processPaint(imageStore, videoStore, {
-                  type: 'VIDEO',
-                  videoHash: hash,
-                  scaleMode: 'FILL'
-                }, []);
+                  property: 'mediaType',
+                })
+                const paint = type === 'IMAGE'
+                  ? processPaint(imageStore, videoStore, {
+                      type: 'IMAGE',
+                      imageHash: hash,
+                      scaleMode: 'FILL',
+                    }, [])
+                  : processPaint(imageStore, videoStore, {
+                      type: 'VIDEO',
+                      videoHash: hash,
+                      scaleMode: 'FILL',
+                    }, [])
                 const {
                   promise,
-                  resolve
-                } = vm.newPromise();
+                  resolve,
+                } = vm.newPromise()
                 const {
-                  mediaPaintIndex
-                } = _$$eG(field);
+                  mediaPaintIndex,
+                } = _$$eG(field)
                 vm.registerPromise((async () => {
-                  const fills = field.fills.slice();
+                  const fills = field.fills.slice()
                   if (mediaPaintIndex !== null && fills[mediaPaintIndex]) {
-                    fills[mediaPaintIndex] = paint;
-                    field.fills = fills;
+                    fills[mediaPaintIndex] = paint
+                    field.fills = fills
                   }
-                  resolve(vm.$$null);
-                })());
-                return promise;
-              });
-              return obj;
+                  resolve(vm.$$null)
+                })())
+                return promise
+              })
+              return obj
             }
-            return buzzObj;
-          })
+            return buzzObj
+          }),
         },
         canWriteInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: false
-      });
+        hasEditScope: false,
+      })
     }
     // =====================
     // REFACTORED: Modular API Extensions for Styles, Variables, Team Library, and Annotations
@@ -7423,8 +7597,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         getNode: this.getNode,
         styleManager: this.styleManager,
         documentAccessState: this.documentAccessState,
-        allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls
-      };
+        allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
+      }
 
       // Register style API methods for each style type
       for (const {
@@ -7433,7 +7607,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         moveFolderMethod,
         createMethod,
         getMethod,
-        getMethodAsync
+        getMethodAsync,
       } of Ut) {
         // getStyleById (and async variant)
         styleApiConfig.defineVmIncrementalFunction({
@@ -7444,14 +7618,14 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           incrementalSafeApiMetricsKey: 'figma.getStyleByIdAsync',
           parseArg: t => styleApiConfig.vm.toString(t),
           prepareDocument: async () => {
-            await loadInternalCanvasMemoized(styleApiConfig.documentAccessState);
+            await loadInternalCanvasMemoized(styleApiConfig.documentAccessState)
           },
           resolveValue: id => styleApiConfig.styleFactory.createStyle(id),
           incrementalSafeApi: styleApiConfig.incrementalSafeApi,
           allowIncrementalUnsafeApiCalls: styleApiConfig.allowIncrementalUnsafeApiCalls,
           isAllowedInReadOnly: true,
-          hasEditScope: false
-        });
+          hasEditScope: false,
+        })
 
         // moveStyle
         styleApiConfig.defineVmFunction({
@@ -7459,22 +7633,24 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           key: moveMethod,
           metricsKey: `figma.${moveMethod}`,
           cb: (targetHandle, refHandle) => {
-            const target = styleApiConfig.getNode(targetHandle);
-            const ref = styleApiConfig.vm.isNull(refHandle) ? null : styleApiConfig.getNode(refHandle);
+            const target = styleApiConfig.getNode(targetHandle)
+            const ref = styleApiConfig.vm.isNull(refHandle) ? null : styleApiConfig.getNode(refHandle)
             if (target.styleType !== styleType) {
-              throw new Error(`Target node is a ${target.styleType} node, instead of ${styleType}`);
+              throw new Error(`Target node is a ${target.styleType} node, instead of ${styleType}`)
             }
             if (ref !== null && ref.styleType !== styleType) {
-              throw new Error(`Reference node is a ${ref.styleType} node, instead of ${styleType}`);
+              throw new Error(`Reference node is a ${ref.styleType} node, instead of ${styleType}`)
             }
-            if (ref !== null && target.guid === ref.guid) throw new Error('Target node and reference node cannot be equal');
-            const err = styleApiConfig.styleManager.moveStyle(target, ref, styleType);
-            if (err !== '') throw new Error(err);
-            return styleApiConfig.vm.undefined;
+            if (ref !== null && target.guid === ref.guid)
+              throw new Error('Target node and reference node cannot be equal')
+            const err = styleApiConfig.styleManager.moveStyle(target, ref, styleType)
+            if (err !== '')
+              throw new Error(err)
+            return styleApiConfig.vm.undefined
           },
           isAllowedInReadOnly: false,
-          hasEditScope: true
-        });
+          hasEditScope: true,
+        })
 
         // moveFolder
         styleApiConfig.defineVmFunction({
@@ -7482,15 +7658,16 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           key: moveFolderMethod,
           metricsKey: `figma.${moveFolderMethod}`,
           cb: (folderIdHandle, refFolderIdHandle) => {
-            const folderId = styleApiConfig.vm.toString(folderIdHandle);
-            const refFolderId = styleApiConfig.vm.isNull(refFolderIdHandle) ? null : styleApiConfig.vm.toString(refFolderIdHandle);
-            const err = styleApiConfig.styleManager.moveFolder(folderId, refFolderId, styleType);
-            if (err !== '') throw new Error(err);
-            return styleApiConfig.vm.undefined;
+            const folderId = styleApiConfig.vm.toString(folderIdHandle)
+            const refFolderId = styleApiConfig.vm.isNull(refFolderIdHandle) ? null : styleApiConfig.vm.toString(refFolderIdHandle)
+            const err = styleApiConfig.styleManager.moveFolder(folderId, refFolderId, styleType)
+            if (err !== '')
+              throw new Error(err)
+            return styleApiConfig.vm.undefined
           },
           isAllowedInReadOnly: false,
-          hasEditScope: true
-        });
+          hasEditScope: true,
+        })
 
         // createStyle
         styleApiConfig.defineVmFunction({
@@ -7498,13 +7675,14 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           key: createMethod,
           metricsKey: `figma.${createMethod}`,
           cb: () => {
-            const style = styleApiConfig.styleManager.createStyle(styleType);
-            if (!style) throw new Error(`Could not create ${styleType} style`);
-            return styleApiConfig.styleFactory.createStyle(style);
+            const style = styleApiConfig.styleManager.createStyle(styleType)
+            if (!style)
+              throw new Error(`Could not create ${styleType} style`)
+            return styleApiConfig.styleFactory.createStyle(style)
           },
           isAllowedInReadOnly: false,
-          hasEditScope: true
-        });
+          hasEditScope: true,
+        })
 
         // getAllLocalStyles (and async variant)
         styleApiConfig.defineVmIncrementalFunction({
@@ -7516,23 +7694,23 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           parseArg: () => {},
           prepareDocument: async () => {},
           resolveValue: () => {
-            const styles = styleApiConfig.styleManager.getAllLocalStyles(styleType).map(_$$nM);
-            const arr = styleApiConfig.vm.newArray();
-            let idx = 0;
+            const styles = styleApiConfig.styleManager.getAllLocalStyles(styleType).map(_$$nM)
+            const arr = styleApiConfig.vm.newArray()
+            let idx = 0
             for (const style of styles) {
-              const styleObj = styleApiConfig.styleFactory.createStyle(style);
+              const styleObj = styleApiConfig.styleFactory.createStyle(style)
               if (!styleApiConfig.vm.isNull(styleObj)) {
-                styleApiConfig.vm.setProp(arr, idx.toString(), styleObj);
-                idx++;
+                styleApiConfig.vm.setProp(arr, idx.toString(), styleObj)
+                idx++
               }
             }
-            return arr;
+            return arr
           },
           incrementalSafeApi: styleApiConfig.incrementalSafeApi,
           allowIncrementalUnsafeApiCalls: styleApiConfig.allowIncrementalUnsafeApiCalls,
           isAllowedInReadOnly: true,
-          hasEditScope: false
-        });
+          hasEditScope: false,
+        })
       }
     }
 
@@ -7560,8 +7738,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         getVariableNode: this.getVariableNode,
         getVariableCollectionNode: this.getVariableCollectionNode,
         allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
-        sceneGraph: this.privateSceneGraph
-      };
+        sceneGraph: this.privateSceneGraph,
+      }
       variableApiConfig.defineVmProp({
         handle: variableApiConfig.figmaApi,
         key: 'variables',
@@ -7569,7 +7747,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           enumerable: false,
           metricsKey: 'figma.variables',
           get: memoizedHandle(variableApiConfig.vm, () => {
-            const r = variableApiConfig.vm.newObject();
+            const r = variableApiConfig.vm.newObject()
             // getVariableById (and async)
             variableApiConfig.defineVmIncrementalFunction({
               handle: r,
@@ -7580,13 +7758,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               incrementalSafeApiMetricsKey: 'figma.variables.getVariableByIdAsync',
               parseArg: t => variableApiConfig.vm.toString(t),
               prepareDocument: async () => {
-                await loadInternalCanvasMemoized(variableApiConfig.documentAccessState);
+                await loadInternalCanvasMemoized(variableApiConfig.documentAccessState)
               },
               resolveValue: id => variableApiConfig.variableFactory.createVariableHandle(id, variableApiConfig.sceneGraph),
               isAllowedInReadOnly: true,
               incrementalSafeApi: variableApiConfig.incrementalSafeApi,
-              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls
-            });
+              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+            })
             // getLocalVariables (and async)
             variableApiConfig.defineVmIncrementalFunction({
               handle: r,
@@ -7599,31 +7777,31 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 vm: variableApiConfig.vm,
                 handle: t,
                 zSchema: variableDefinitions.PublicVariableResolvedType.optional(),
-                property: 'resolvedType'
+                property: 'resolvedType',
               }) ?? null,
               prepareDocument: async () => {},
               resolveValue: resolvedType => variableApiConfig.variableFactory.getLocalVariables(resolvedType),
               isAllowedInReadOnly: true,
               incrementalSafeApi: variableApiConfig.incrementalSafeApi,
-              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls
-            });
+              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+            })
             // getSubscribedVariables
             variableApiConfig.defineVmFunction({
               handle: r,
               key: 'getSubscribedVariables',
               hasEditScope: false,
               metricsKey: 'figma.variables.getSubscribedVariables',
-              cb: t => {
+              cb: (t) => {
                 const resolvedType = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: variableDefinitions.PublicVariableResolvedType.optional(),
-                  property: 'resolvedType'
-                }) ?? null;
-                return variableApiConfig.variableFactory.getSubscribedVariables(resolvedType);
+                  property: 'resolvedType',
+                }) ?? null
+                return variableApiConfig.variableFactory.getSubscribedVariables(resolvedType)
               },
-              isAllowedInReadOnly: true
-            });
+              isAllowedInReadOnly: true,
+            })
             // getVariableCollectionById (and async)
             variableApiConfig.defineVmIncrementalFunction({
               handle: r,
@@ -7634,13 +7812,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               incrementalSafeApiMetricsKey: 'figma.variables.getVariableCollectionByIdAsync',
               parseArg: t => variableApiConfig.vm.toString(t),
               prepareDocument: async () => {
-                await loadInternalCanvasMemoized(variableApiConfig.documentAccessState);
+                await loadInternalCanvasMemoized(variableApiConfig.documentAccessState)
               },
               resolveValue: id => variableApiConfig.variableCollectionFactory.createVariableCollectionHandle(id, variableApiConfig.sceneGraph),
               incrementalSafeApi: variableApiConfig.incrementalSafeApi,
               isAllowedInReadOnly: true,
-              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls
-            });
+              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+            })
             // getLocalVariableCollections (and async)
             variableApiConfig.defineVmIncrementalFunction({
               handle: r,
@@ -7654,26 +7832,26 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               resolveValue: () => variableApiConfig.variableCollectionFactory.getLocalVariableCollections(),
               isAllowedInReadOnly: true,
               incrementalSafeApi: variableApiConfig.incrementalSafeApi,
-              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls
-            });
+              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+            })
             // createVariableCollection
             variableApiConfig.defineVmFunction({
               handle: r,
               key: 'createVariableCollection',
               hasEditScope: true,
               metricsKey: 'figma.variables.createVariableCollection',
-              cb: t => {
+              cb: (t) => {
                 const name = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
-                  property: 'name'
-                });
-                const collection = variableApiConfig.variableCollectionFactory.createNewVariableCollection(name);
-                return variableApiConfig.variableCollectionFactory.createVariableCollectionHandle(collection, variableApiConfig.sceneGraph);
+                  property: 'name',
+                })
+                const collection = variableApiConfig.variableCollectionFactory.createNewVariableCollection(name)
+                return variableApiConfig.variableCollectionFactory.createVariableCollectionHandle(collection, variableApiConfig.sceneGraph)
               },
-              isAllowedInReadOnly: false
-            });
+              isAllowedInReadOnly: false,
+            })
             // createVariable
             variableApiConfig.defineVmFunction({
               handle: r,
@@ -7685,93 +7863,94 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   vm: variableApiConfig.vm,
                   handle: nameHandle,
                   zSchema: _$$z.string(),
-                  property: 'name'
-                });
+                  property: 'name',
+                })
                 const collectionId = validateAndExtractCollectionId({
                   callerName: 'createVariable',
-                  consoleLogger: _$$k2,
+                  consoleLogger: logger,
                   getNode: variableApiConfig.getNode,
                   incrementalSafeApi: variableApiConfig.incrementalSafeApi,
                   pluginVersionID: variableApiConfig.pluginVersionID,
                   vm: variableApiConfig.vm,
                   vmHandle: collectionHandle,
-                  allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls
-                });
+                  allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+                })
                 const resolvedType = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: typeHandle,
                   zSchema: variableDefinitions.PublicVariableResolvedType,
-                  property: 'resolvedType'
-                });
-                const variable = variableApiConfig.variableFactory.createNewVariable(name, collectionId, resolvedType);
-                return variableApiConfig.variableFactory.createVariableHandle(variable, variableApiConfig.sceneGraph);
+                  property: 'resolvedType',
+                })
+                const variable = variableApiConfig.variableFactory.createNewVariable(name, collectionId, resolvedType)
+                return variableApiConfig.variableFactory.createVariableHandle(variable, variableApiConfig.sceneGraph)
               },
-              isAllowedInReadOnly: false
-            });
+              isAllowedInReadOnly: false,
+            })
             // createVariableAlias
             variableApiConfig.defineVmFunction({
               handle: r,
               key: 'createVariableAlias',
               hasEditScope: true,
               metricsKey: 'figma.variables.createVariableAlias',
-              cb: t => {
+              cb: (t) => {
                 if (variableApiConfig.getNode(t).type !== 'VARIABLE') {
-                  throw new Error('Can only construct variable aliases from variables');
+                  throw new Error('Can only construct variable aliases from variables')
                 }
-                const id = variableApiConfig.vm.getStringProp(t, 'id');
+                const id = variableApiConfig.vm.getStringProp(t, 'id')
                 return variableApiConfig.vm.deepWrap({
                   type: 'VARIABLE_ALIAS',
-                  id
-                });
+                  id,
+                })
               },
-              isAllowedInReadOnly: true
-            });
+              isAllowedInReadOnly: true,
+            })
             // createVariableAliasByIdAsync
             variableApiConfig.defineVmFunction({
               handle: r,
               key: 'createVariableAliasByIdAsync',
               metricsKey: 'figma.variables.createVariableAliasByIdAsync',
-              cb: t => {
+              cb: (t) => {
                 const id = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
-                  property: 'variableId'
-                });
-                if (!sD.fromString(id)) throw new Error('Invalid variable id');
+                  property: 'variableId',
+                })
+                if (!VariableIdHandler.fromString(id))
+                  throw new Error('Invalid variable id')
                 const {
                   promise,
                   resolve,
-                  reject
-                } = variableApiConfig.vm.newPromise();
+                  reject,
+                } = variableApiConfig.vm.newPromise()
                 variableApiConfig.vm.registerPromise(loadInternalCanvasMemoized(variableApiConfig.documentAccessState)).then(() => {
                   resolve(variableApiConfig.vm.deepWrap({
                     type: 'VARIABLE_ALIAS',
-                    id
-                  }));
-                }).catch(err => reject(variableApiConfig.vm.newString(err.message)));
-                return promise;
+                    id,
+                  }))
+                }).catch(err => reject(variableApiConfig.vm.newString(err.message)))
+                return promise
               },
               isAllowedInReadOnly: true,
-              hasEditScope: false
-            });
+              hasEditScope: false,
+            })
             // importVariableByKeyAsync
             variableApiConfig.defineVmFunction({
               handle: r,
               key: 'importVariableByKeyAsync',
               metricsKey: 'figma.variables.importVariableByKeyAsync',
-              cb: t => {
+              cb: (t) => {
                 const key = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
-                  property: 'variableKey'
-                });
-                return variableApiConfig.variableFactory.importByKeyAsync(key);
+                  property: 'variableKey',
+                })
+                return variableApiConfig.variableFactory.importByKeyAsync(key)
               },
               isAllowedInReadOnly: false,
-              hasEditScope: false
-            });
+              hasEditScope: false,
+            })
             // extendLibraryCollectionByKeyAsync (feature flag)
             if (getFeatureFlags().ds_extended_collections) {
               variableApiConfig.defineVmFunction({
@@ -7783,27 +7962,27 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                     vm: variableApiConfig.vm,
                     handle: collectionKeyHandle,
                     zSchema: _$$z.string(),
-                    property: 'collectionKey'
-                  });
+                    property: 'collectionKey',
+                  })
                   const name = validateWithZSchema({
                     vm: variableApiConfig.vm,
                     handle: nameHandle,
                     zSchema: _$$z.string(),
-                    property: 'name'
-                  });
+                    property: 'name',
+                  })
                   const {
                     promise,
                     resolve,
-                    reject
-                  } = variableApiConfig.vm.newPromise();
-                  variableApiConfig.vm.registerPromise(af(collectionKey, name, variableApiConfig.variableCollectionFactory)).then(result => {
-                    resolve(variableApiConfig.variableCollectionFactory.createExtendedVariableCollectionHandle(result));
-                  }).catch(err => reject(variableApiConfig.vm.newString(err.message)));
-                  return promise;
+                    reject,
+                  } = variableApiConfig.vm.newPromise()
+                  variableApiConfig.vm.registerPromise(af(collectionKey, name, variableApiConfig.variableCollectionFactory)).then((result) => {
+                    resolve(variableApiConfig.variableCollectionFactory.createExtendedVariableCollectionHandle(result))
+                  }).catch(err => reject(variableApiConfig.vm.newString(err.message)))
+                  return promise
                 },
                 isAllowedInReadOnly: false,
-                hasEditScope: true
-              });
+                hasEditScope: true,
+              })
             }
             // setBoundVariableForPaint
             variableApiConfig.defineVmFunction({
@@ -7815,37 +7994,38 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   vm: variableApiConfig.vm,
                   handle: paintHandle,
                   zSchema: FigmaSchema.Paint,
-                  property: 'paintCopy'
-                });
+                  property: 'paintCopy',
+                })
                 const field = validateWithZSchema({
                   vm: variableApiConfig.vm,
                   handle: fieldHandle,
                   zSchema: variableDefinitions.VariableBindablePaintField,
-                  property: 'field'
-                });
+                  property: 'field',
+                })
                 if (variableApiConfig.vm.isNull(variableHandle) || variableApiConfig.vm.isUndefined(variableHandle)) {
-                  const n = processPaint(variableApiConfig.imageStore, variableApiConfig.videoStore, paint, []);
-                  n.colorVar = void 0;
-                  return variableApiConfig.vm.deepWrap(convertInternalPaintToExternal(n));
+                  const n = processPaint(variableApiConfig.imageStore, variableApiConfig.videoStore, paint, [])
+                  n.colorVar = void 0
+                  return variableApiConfig.vm.deepWrap(convertInternalPaintToExternal(n))
                 }
-                const variable = variableApiConfig.getVariableNode(variableHandle);
+                const variable = variableApiConfig.getVariableNode(variableHandle)
                 if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== VariableResolvedDataType.COLOR) {
-                  throw new Error(`can only bind color variables to ${field}`);
+                  throw new Error(`can only bind color variables to ${field}`)
                 }
-                const n = processPaint(variableApiConfig.imageStore, variableApiConfig.videoStore, paint, []);
-                if (n.type !== 'SOLID') throw new Error('can only bind variables to solid paints');
+                const n = processPaint(variableApiConfig.imageStore, variableApiConfig.videoStore, paint, [])
+                if (n.type !== 'SOLID')
+                  throw new Error('can only bind variables to solid paints')
                 n.colorVar = {
                   value: {
-                    alias: sD.toKiwi(variable.id)
+                    alias: VariableIdHandler.toKiwi(variable.id),
                   },
                   dataType: 'ALIAS',
-                  resolvedDataType: 'COLOR'
-                };
-                return variableApiConfig.vm.deepWrap(convertInternalPaintToExternal(n));
+                  resolvedDataType: 'COLOR',
+                }
+                return variableApiConfig.vm.deepWrap(convertInternalPaintToExternal(n))
               },
               isAllowedInReadOnly: true,
-              hasEditScope: false
-            });
+              hasEditScope: false,
+            })
             // setBoundVariableForEffect
             variableApiConfig.defineVmFunction({
               handle: r,
@@ -7856,22 +8036,23 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   vm: variableApiConfig.vm,
                   handle: effectHandle,
                   zSchema: getFilteredFeatureFlags()?.ce_il_root ? FigmaSchema.EffectIncludingDrawMode : FigmaSchema.Effect,
-                  property: 'effectCopy'
-                });
+                  property: 'effectCopy',
+                })
                 if (variableApiConfig.vm.isNull(variableHandle) || variableApiConfig.vm.isUndefined(variableHandle)) {
-                  return this.unbindAllEffectVariables(effectCopy);
+                  return this.unbindAllEffectVariables(effectCopy)
                 }
-                const variableObject = variableApiConfig.getVariableNode(variableHandle);
-                const mutableEffect = processEffectWithValidation(effectCopy, undefined);
+                const variableObject = variableApiConfig.getVariableNode(variableHandle)
+                const mutableEffect = processEffectWithValidation(effectCopy, undefined)
                 if (this.isShadowEffect(mutableEffect)) {
-                  return this.bindShadowEffectVariable(mutableEffect, fieldHandle, variableObject);
-                } else {
-                  return this.bindBlurEffectVariable(mutableEffect, fieldHandle, variableObject);
+                  return this.bindShadowEffectVariable(mutableEffect, fieldHandle, variableObject)
+                }
+                else {
+                  return this.bindBlurEffectVariable(mutableEffect, fieldHandle, variableObject)
                 }
               },
               isAllowedInReadOnly: true,
-              hasEditScope: false
-            });
+              hasEditScope: false,
+            })
             // setBoundVariableForLayoutGrid
             variableApiConfig.defineVmFunction({
               handle: r,
@@ -7882,40 +8063,41 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   vm: variableApiConfig.vm,
                   handle: layoutGridHandle,
                   zSchema: FigmaSchema.LayoutGrid,
-                  property: 'layoutGridCopy'
-                });
+                  property: 'layoutGridCopy',
+                })
                 if (variableApiConfig.vm.isNull(variableHandle) || variableApiConfig.vm.isUndefined(variableHandle)) {
-                  const t = convertGridLayoutConfig(layoutGrid);
-                  t.offsetVar = void 0;
-                  t.gutterSizeVar = void 0;
-                  t.numSectionsVar = void 0;
-                  t.sectionSizeVar = void 0;
-                  return variableApiConfig.vm.deepWrap(processGridLayout(t));
+                  const t = convertGridLayoutConfig(layoutGrid)
+                  t.offsetVar = void 0
+                  t.gutterSizeVar = void 0
+                  t.numSectionsVar = void 0
+                  t.sectionSizeVar = void 0
+                  return variableApiConfig.vm.deepWrap(processGridLayout(t))
                 }
-                const variable = variableApiConfig.getVariableNode(variableHandle);
+                const variable = variableApiConfig.getVariableNode(variableHandle)
                 if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== VariableResolvedDataType.FLOAT) {
-                  throw new Error('can only bind float variables to layoutGrids');
+                  throw new Error('can only bind float variables to layoutGrids')
                 }
-                const grid = convertGridLayoutConfig(layoutGrid);
+                const grid = convertGridLayoutConfig(layoutGrid)
                 if (grid.pattern === 'GRID') {
                   const field = validateWithZSchema({
                     vm: variableApiConfig.vm,
                     handle: fieldHandle,
                     zSchema: variableDefinitions.VariableBindableGridLayoutField,
-                    property: 'field'
-                  });
+                    property: 'field',
+                  })
                   if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== VariableResolvedDataType.FLOAT) {
-                    throw new Error(`can only bind float variables to ${field}`);
+                    throw new Error(`can only bind float variables to ${field}`)
                   }
                   grid.sectionSizeVar = {
                     value: {
-                      alias: sD.toKiwi(variable.id)
+                      alias: VariableIdHandler.toKiwi(variable.id),
                     },
                     dataType: 'ALIAS',
-                    resolvedDataType: 'FLOAT'
-                  };
-                } else {
-                  let field;
+                    resolvedDataType: 'FLOAT',
+                  }
+                }
+                else {
+                  let field
                   switch (grid.type) {
                     case 'MIN':
                     case 'MAX':
@@ -7923,78 +8105,78 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                         vm: variableApiConfig.vm,
                         handle: fieldHandle,
                         zSchema: variableDefinitions.VariableBindableMinMaxLayoutField,
-                        property: 'field'
-                      });
-                      break;
+                        property: 'field',
+                      })
+                      break
                     case 'CENTER':
                       field = validateWithZSchema({
                         vm: variableApiConfig.vm,
                         handle: fieldHandle,
                         zSchema: variableDefinitions.VariableBindableCenterLayoutField,
-                        property: 'field'
-                      });
-                      break;
+                        property: 'field',
+                      })
+                      break
                     case 'STRETCH':
                       field = validateWithZSchema({
                         vm: variableApiConfig.vm,
                         handle: fieldHandle,
                         zSchema: variableDefinitions.VariableBindableStretchLayoutField,
-                        property: 'field'
-                      });
-                      break;
+                        property: 'field',
+                      })
+                      break
                   }
                   switch (field) {
                     case 'sectionSize':
                       grid.sectionSizeVar = {
                         value: {
-                          alias: sD.toKiwi(variable.id)
+                          alias: VariableIdHandler.toKiwi(variable.id),
                         },
                         dataType: 'ALIAS',
-                        resolvedDataType: 'COLOR'
-                      };
-                      break;
+                        resolvedDataType: 'COLOR',
+                      }
+                      break
                     case 'offset':
                       grid.offsetVar = {
                         value: {
-                          alias: sD.toKiwi(variable.id)
+                          alias: VariableIdHandler.toKiwi(variable.id),
                         },
                         dataType: 'ALIAS',
-                        resolvedDataType: 'FLOAT'
-                      };
-                      break;
+                        resolvedDataType: 'FLOAT',
+                      }
+                      break
                     case 'count':
                       grid.numSectionsVar = {
                         value: {
-                          alias: sD.toKiwi(variable.id)
+                          alias: VariableIdHandler.toKiwi(variable.id),
                         },
                         dataType: 'ALIAS',
-                        resolvedDataType: 'FLOAT'
-                      };
-                      break;
+                        resolvedDataType: 'FLOAT',
+                      }
+                      break
                     case 'gutterSize':
                       grid.gutterSizeVar = {
                         value: {
-                          alias: sD.toKiwi(variable.id)
+                          alias: VariableIdHandler.toKiwi(variable.id),
                         },
                         dataType: 'ALIAS',
-                        resolvedDataType: 'FLOAT'
-                      };
-                      break;
+                        resolvedDataType: 'FLOAT',
+                      }
+                      break
                   }
                 }
-                return variableApiConfig.vm.deepWrap(processGridLayout(grid));
+                return variableApiConfig.vm.deepWrap(processGridLayout(grid))
               },
               isAllowedInReadOnly: true,
-              hasEditScope: false
-            });
-            variableApiConfig.vm.shallowFreezeObject(r);
-            return r;
-          })
+              hasEditScope: false,
+            })
+            variableApiConfig.vm.shallowFreezeObject(r)
+            return r
+          }),
         },
         canWriteInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: false
-      });
+        hasEditScope: false,
+      })
     }
 
     /**
@@ -8010,8 +8192,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         variableFactory: this.variableFactory,
         variableCollectionFactory: this.variableCollectionFactory,
         defineVmFunction: this.defineVmFunction,
-        defineVmProp: this.defineVmProp
-      };
+        defineVmProp: this.defineVmProp,
+      }
       teamLibraryApiConfig.defineVmProp({
         handle: teamLibraryApiConfig.figmaApi,
         key: 'teamLibrary',
@@ -8020,40 +8202,40 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           metricsKey: 'figma.teamLibrary',
           get: memoizedHandle(teamLibraryApiConfig.vm, () => {
             if (!teamLibraryApiConfig.validatedPermissions.permissions.includes('teamlibrary')) {
-              throw new Error('"teamlibrary" permission not specified in manifest.json.');
+              throw new Error('"teamlibrary" permission not specified in manifest.json.')
             }
-            const t = teamLibraryApiConfig.vm.newObject();
+            const t = teamLibraryApiConfig.vm.newObject()
             teamLibraryApiConfig.defineVmFunction({
               handle: t,
               key: 'getAvailableLibraryVariableCollectionsAsync',
               metricsKey: 'figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync',
               cb: () => teamLibraryApiConfig.variableCollectionFactory.getLibraryVariableCollectionsAsync(),
               isAllowedInReadOnly: true,
-              hasEditScope: false
-            });
+              hasEditScope: false,
+            })
             teamLibraryApiConfig.defineVmFunction({
               handle: t,
               key: 'getVariablesInLibraryCollectionAsync',
               metricsKey: 'figma.teamLibrary.getVariablesInLibraryCollectionAsync',
-              cb: variableCollectionKeyHandle => {
+              cb: (variableCollectionKeyHandle) => {
                 const key = validateWithZSchema({
                   vm: teamLibraryApiConfig.vm,
                   handle: variableCollectionKeyHandle,
                   zSchema: _$$z.string(),
-                  property: 'variableCollectionKey'
-                });
-                return teamLibraryApiConfig.variableFactory.getVariablesInLibraryCollectionAsync(key);
+                  property: 'variableCollectionKey',
+                })
+                return teamLibraryApiConfig.variableFactory.getVariablesInLibraryCollectionAsync(key)
               },
               isAllowedInReadOnly: true,
-              hasEditScope: false
-            });
-            return t;
-          })
+              hasEditScope: false,
+            })
+            return t
+          }),
         },
         canWriteInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: false
-      });
+        hasEditScope: false,
+      })
     }
 
     /**
@@ -8067,8 +8249,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         editorType: this.fullscreenEditorType,
         annotationCategoryFactory: this.annotationCategoryFactory,
         defineVmFunction: this.defineVmFunction,
-        defineVmProp: this.defineVmProp
-      };
+        defineVmProp: this.defineVmProp,
+      }
       annotationApiConfig.defineVmProp({
         handle: annotationApiConfig.figmaApi,
         key: 'annotations',
@@ -8076,57 +8258,57 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           enumerable: false,
           metricsKey: 'figma.annotations',
           get: memoizedHandle(annotationApiConfig.vm, () => {
-            const t = annotationApiConfig.vm.newObject();
+            const t = annotationApiConfig.vm.newObject()
             annotationApiConfig.defineVmFunction({
               handle: t,
               key: 'getAnnotationCategoriesAsync',
               metricsKey: 'figma.annotations.getAnnotationCategoriesAsync',
               cb: () => annotationApiConfig.annotationCategoryFactory.getLocalAnnotationCategoriesAsync(),
               hasEditScope: true,
-              isAllowedInReadOnly: true
-            });
+              isAllowedInReadOnly: true,
+            })
             annotationApiConfig.defineVmFunction({
               handle: t,
               key: 'getAnnotationCategoryByIdAsync',
               metricsKey: 'figma.annotations.getAnnotationCategoryByIdAsync',
-              cb: idHandle => {
+              cb: (idHandle) => {
                 const id = validateWithZSchema({
                   vm: annotationApiConfig.vm,
                   handle: idHandle,
                   zSchema: _$$z.string(),
-                  property: 'annotationCategoryId'
-                });
-                return annotationApiConfig.annotationCategoryFactory.getLocalAnnotationCategoryByIdAsync(id);
+                  property: 'annotationCategoryId',
+                })
+                return annotationApiConfig.annotationCategoryFactory.getLocalAnnotationCategoryByIdAsync(id)
               },
               hasEditScope: true,
-              isAllowedInReadOnly: true
-            });
+              isAllowedInReadOnly: true,
+            })
             annotationApiConfig.defineVmFunction({
               handle: t,
               key: 'addAnnotationCategoryAsync',
               metricsKey: 'figma.annotations.addAnnotationCategoryAsync',
-              cb: categoryInputHandle => {
+              cb: (categoryInputHandle) => {
                 if (annotationApiConfig.editorType !== FEditorType.DevHandoff && annotationApiConfig.editorType !== FEditorType.Design && annotationApiConfig.editorType !== FEditorType.Illustration) {
-                  throw new Error('Annotations can only be written in Dev Mode and Design Mode');
+                  throw new Error('Annotations can only be written in Dev Mode and Design Mode')
                 }
                 const input = validateWithZSchema({
                   vm: annotationApiConfig.vm,
                   handle: categoryInputHandle,
                   zSchema: i5,
-                  property: 'categoryInput'
-                });
-                return annotationApiConfig.annotationCategoryFactory.createAnnotationCategoryAsync(input.label, input.color);
+                  property: 'categoryInput',
+                })
+                return annotationApiConfig.annotationCategoryFactory.createAnnotationCategoryAsync(input.label, input.color)
               },
               hasEditScope: true,
-              isAllowedInReadOnly: true
-            });
-            return t;
-          })
+              isAllowedInReadOnly: true,
+            })
+            return t
+          }),
         },
         canWriteInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: false
-      });
+        hasEditScope: false,
+      })
     }
     this.defineVmProp({
       handle: y,
@@ -8134,12 +8316,12 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       options: {
         enumerable: !1,
         metricsKey: 'figma.root',
-        get: () => this.nodeFactory.createNode('0:0', 'root')
+        get: () => this.nodeFactory.createNode('0:0', 'root'),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmProp({
       handle: y,
       key: 'mode',
@@ -8148,67 +8330,67 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         enumerable: !1,
         get: () => {
           if (getFeatureFlags().ext_lego_plugins_runmode) {
-            let t = this.getRunMode();
-            t !== 'inspect' || this.options.capabilities.includes('inspect') || (t = 'panel');
-            return e.newString(t);
+            let t = this.getRunMode()
+            t !== 'inspect' || this.options.capabilities.includes('inspect') || (t = 'panel')
+            return e.newString(t)
           }
-          let t = this.options.triggeredFrom === 'codegen';
-          let i = this.options.triggeredFrom === 'related-link-preview';
-          let n = this.options.triggeredFrom === 'related-link-auth';
-          let r = this.fullscreenEditorType === FEditorType.DevHandoff && !t;
-          let a = this.options.command === 'textreview';
-          let s = 'default';
-          t ? s = 'codegen' : i ? s = 'linkpreview' : n ? s = 'auth' : r ? s = this.options.capabilities.includes('inspect') ? 'inspect' : 'panel' : a && (s = 'textreview');
-          return e.newString(s);
-        }
+          let t = this.options.triggeredFrom === 'codegen'
+          let i = this.options.triggeredFrom === 'related-link-preview'
+          let n = this.options.triggeredFrom === 'related-link-auth'
+          let r = this.fullscreenEditorType === FEditorType.DevHandoff && !t
+          let a = this.options.command === 'textreview'
+          let s = 'default'
+          t ? s = 'codegen' : i ? s = 'linkpreview' : n ? s = 'auth' : r ? s = this.options.capabilities.includes('inspect') ? 'inspect' : 'panel' : a && (s = 'textreview')
+          return e.newString(s)
+        },
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmProp({
       handle: y,
       key: 'editorType',
       options: {
         get: () => {
-          let t = 'figjam';
+          let t = 'figjam'
           switch (this.fullscreenEditorType) {
             case FEditorType.Design:
             case FEditorType.Illustration:
-              t = 'figma';
-              break;
+              t = 'figma'
+              break
             case FEditorType.DevHandoff:
-              t = this.options.editorType?.includes(ManifestEditorType.DEV) ? 'dev' : 'inspect';
-              break;
+              t = this.options.editorType?.includes(ManifestEditorType.DEV) ? 'dev' : 'inspect'
+              break
             case FEditorType.Whiteboard:
-              t = 'figjam';
-              break;
+              t = 'figjam'
+              break
             case FEditorType.Slides:
-              t = 'slides';
-              break;
+              t = 'slides'
+              break
             case FEditorType.Sites:
-              t = 'sites';
-              break;
+              t = 'sites'
+              break
             case FEditorType.Figmake:
-              t = SLACK_STRING;
-              break;
+              t = SLACK_STRING
+              break
             case FEditorType.Cooper:
-              t = DEV_MODE_STRING;
-              break;
+              t = DEV_MODE_STRING
+              break
             default:
-              throwTypeError(this.fullscreenEditorType, undefined);
+              throwTypeError(this.fullscreenEditorType, undefined)
             // Add missing second argument
           }
-          return e.newString(t);
+          return e.newString(t)
         },
         metricsKey: 'figma.editorType',
-        enumerable: !1
+        enumerable: !1,
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
-    let v = this;
+      hasEditScope: !0,
+    })
+    let v = this
     this.defineVmProp({
       handle: y,
       key: 'currentPage',
@@ -8216,45 +8398,47 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         enumerable: !1,
         metricsKey: 'figma.currentPage',
         get: () => {
-          let t = v.privateSceneGraph.getCurrentPage();
-          return t === null ? e.$$null : (markPageLoaded(t.guid, this.documentAccessState), this.nodeFactory.createNode(t.guid, 'currentPage'));
+          let t = v.privateSceneGraph.getCurrentPage()
+          return t === null ? e.$$null : (markPageLoaded(t.guid, this.documentAccessState), this.nodeFactory.createNode(t.guid, 'currentPage'))
         },
         set(t) {
-          incrementalSafeApi && checkIncrementalUnsafeMember(!!allowIncrementalUnsafeApiCalls, 'figma.currentPage =', 'figma.setCurrentPageAsync');
-          let i = v.getNode(t);
-          if (i.type !== 'CANVAS') throw new Error('figma.currentPage expects a PageNode');
-          v.privateSceneGraph.setCurrentPage_DEPRECATED(i.guid);
-          return e.$$null;
-        }
+          incrementalSafeApi && checkIncrementalUnsafeMember(!!allowIncrementalUnsafeApiCalls, 'figma.currentPage =', 'figma.setCurrentPageAsync')
+          let i = v.getNode(t)
+          if (i.type !== 'CANVAS')
+            throw new Error('figma.currentPage expects a PageNode')
+          v.privateSceneGraph.setCurrentPage_DEPRECATED(i.guid)
+          return e.$$null
+        },
       },
       canWriteInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'setCurrentPageAsync',
       metricsKey: 'figma.setCurrentPageAsync',
-      cb: t => {
-        let i = this.getNode(t);
+      cb: (t) => {
+        let i = this.getNode(t)
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
-        atomStoreManager.set(_$$rp, !0);
+          reject,
+        } = e.newPromise()
+        atomStoreManager.set(_$$rp, !0)
         e.registerPromise(ensurePluginPageLoaded(i.guid, this.documentAccessState)).then(() => {
-          if (i.type !== 'CANVAS') throw new Error('figma.setCurrentPageAsync expects a PageNode');
-          return this.privateSceneGraph.setCurrentPageAsync(i.guid);
+          if (i.type !== 'CANVAS')
+            throw new Error('figma.setCurrentPageAsync expects a PageNode')
+          return this.privateSceneGraph.setCurrentPageAsync(i.guid)
         }).then(() => resolve(e.$$null)).catch(t => reject(e.newString(t.message))).finally(() => {
-          atomStoreManager.set(_$$rp, !1);
-        });
-        return promise;
+          atomStoreManager.set(_$$rp, !1)
+        })
+        return promise
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'currentUser',
@@ -8264,16 +8448,16 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         get: () => {
           if (!this.options.validatedPermissions.permissions.includes('currentuser')) {
             throw new Error(aS('currentuser', {
-              isWidget: this.isWidget
-            }));
+              isWidget: this.isWidget,
+            }))
           }
-          return this.createUserApi();
-        }
+          return this.createUserApi()
+        },
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'activeUsers',
@@ -8283,57 +8467,59 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         get: () => {
           if (!this.options.validatedPermissions.permissions.includes('activeusers')) {
             throw new Error(aS('activeusers', {
-              isWidget: this.isWidget
-            }));
+              isWidget: this.isWidget,
+            }))
           }
-          return this.createActiveUsersApi();
-        }
+          return this.createActiveUsersApi()
+        },
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
-    this.isWidget ? this.defineVmProp({
-      handle: y,
-      key: 'widgetId',
-      options: {
-        enumerable: !1,
-        metricsKey: 'figma.widgetId',
-        get: () => e.newString(this.options.pluginID)
-      },
-      canWriteInReadOnly: !1,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    }) : this.defineVmProp({
-      handle: y,
-      key: 'pluginId',
-      options: {
-        enumerable: !1,
-        metricsKey: 'figma.pluginId',
-        get: () => e.newString(this.options.pluginID)
-      },
-      canWriteInReadOnly: !1,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
+    this.isWidget
+      ? this.defineVmProp({
+          handle: y,
+          key: 'widgetId',
+          options: {
+            enumerable: !1,
+            metricsKey: 'figma.widgetId',
+            get: () => e.newString(this.options.pluginID),
+          },
+          canWriteInReadOnly: !1,
+          isAllowedInWidgetRender: !1,
+          hasEditScope: !1,
+        })
+      : this.defineVmProp({
+          handle: y,
+          key: 'pluginId',
+          options: {
+            enumerable: !1,
+            metricsKey: 'figma.pluginId',
+            get: () => e.newString(this.options.pluginID),
+          },
+          canWriteInReadOnly: !1,
+          isAllowedInWidgetRender: !1,
+          hasEditScope: !1,
+        })
     this.defineVmProp({
       handle: y,
       key: 'command',
       options: {
         enumerable: !1,
         metricsKey: 'figma.command',
-        get: () => this.isWidget ? e.undefined : e.newString(command)
+        get: () => this.isWidget ? e.undefined : e.newString(command),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
-    this.setQueryMode(queryMode);
+      hasEditScope: !1,
+    })
+    this.setQueryMode(queryMode)
     e.defineProp(y, 'mixed', {
       enumerable: !1,
       metricsKey: 'figma.mixed',
-      get: () => this.mixedSentinel
-    });
+      get: () => this.mixedSentinel,
+    })
     this.defineVmProp({
       handle: y,
       key: 'skipInvisibleInstanceChildren',
@@ -8341,42 +8527,42 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         enumerable: !1,
         metricsKey: 'figma.skipInvisibleInstanceChildren',
         get: () => e.newBoolean(this.skipInvisibleInstanceChildren),
-        set: t => {
+        set: (t) => {
           let i = validateWithZSchema({
             vm: e,
             handle: t,
             zSchema: _$$z.boolean(),
-            property: 'skipInvisibleInstanceChildren'
-          });
-          this.setSkipInvisibleInstanceChildren(i);
-        }
+            property: 'skipInvisibleInstanceChildren',
+          })
+          this.setSkipInvisibleInstanceChildren(i)
+        },
       },
       canWriteInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
+      hasEditScope: !1,
     });
     (getFeatureFlags().jsx_debugging || getFeatureFlags().internal_only_debug_tools) && this.defineVmProp({
       handle: y,
       key: 'jsx',
       options: {
         enumerable: !1,
-        value: this.createJsxApi()
+        value: this.createJsxApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     getFeatureFlags().codebase_suggestions && this.defineVmProp({
       handle: y,
       key: 'codebaseSuggestions',
       options: {
         enumerable: !1,
-        value: this.createCodebaseSuggestionsApi()
+        value: this.createCodebaseSuggestionsApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'payments',
@@ -8385,20 +8571,20 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         metricsKey: 'figma.payments',
         get: memoizedHandle(e, () => {
           if (!this.options.validatedPermissions.permissions.includes('payments')) {
-            throw new Error('"payments" permission not specified in manifest.json.');
+            throw new Error('"payments" permission not specified in manifest.json.')
           }
-          return this.createPaymentsApi();
-        })
+          return this.createPaymentsApi()
+        }),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
-    let I = this.inDesignOrDevHandoffOrIllustration();
-    let C = this.inFigjam();
-    let R = this.inSlides();
-    let D = this.inBuzz();
-    let M = this.inSites();
+      hasEditScope: !1,
+    })
+    let I = this.inDesignOrDevHandoffOrIllustration()
+    let C = this.inFigjam()
+    let R = this.inSlides()
+    let D = this.inBuzz()
+    let M = this.inSites()
     /**
      * Register node creation methods for supported node types.
      * Handles special cases for TABLE, SLIDE, and SLIDE_ROW node types.
@@ -8406,11 +8592,12 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
      */
     for (const {
       nodeType,
-      createMethod
+      createMethod,
     } of h2) {
       // Determine if node type is allowed in the current editor context
-      const isAllowed = C && fx.includes(nodeType) || I && _$$tO.includes(nodeType) || R && J6.includes(nodeType) || M && lm.includes(nodeType) || D && _$$e3.includes(nodeType);
-      if (isAllowed) continue;
+      const isAllowed = C && fx.includes(nodeType) || I && _$$tO.includes(nodeType) || R && J6.includes(nodeType) || M && lm.includes(nodeType) || D && _$$e3.includes(nodeType)
+      if (isAllowed)
+        continue
 
       // Special handling for TABLE node type
       if (nodeType === 'TABLE') {
@@ -8428,32 +8615,32 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               vm: e,
               handle: n,
               zSchema: FigmaSchema.FiniteNumber.int().min(1).optional(),
-              property: 'options'
-            });
+              property: 'options',
+            })
             const numCols = validateWithZSchema({
               vm: e,
               handle: r,
               zSchema: FigmaSchema.FiniteNumber.int().min(1).optional(),
-              property: 'options'
-            });
+              property: 'options',
+            })
             const options = {
               tracking: TrackType.TRACK,
               ...(numRows && {
-                tableNumRows: numRows
+                tableNumRows: numRows,
               }),
               ...(numCols && {
-                tableNumColumns: numCols
-              })
-            };
-            const node = this.privateSceneGraph.createNode(nodeType, options);
-            markPageLoaded(node.guid, this.documentAccessState);
-            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`);
+                tableNumColumns: numCols,
+              }),
+            }
+            const node = this.privateSceneGraph.createNode(nodeType, options)
+            markPageLoaded(node.guid, this.documentAccessState)
+            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
           },
           isAllowedInReadOnly: false,
           isAllowedInWidgetRender: false,
-          hasEditScope: true
-        });
-        continue;
+          hasEditScope: true,
+        })
+        continue
       }
 
       // Special handling for SLIDE node type
@@ -8472,32 +8659,32 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               vm: this.vm,
               handle: e,
               zSchema: _$$z.number().finite().min(0).int().optional(),
-              property: 'slideRow'
-            });
+              property: 'slideRow',
+            })
             const slideCol = validateWithZSchema({
               vm: this.vm,
               handle: n,
               zSchema: _$$z.number().finite().min(0).int().optional(),
-              property: 'slideCol'
-            });
+              property: 'slideCol',
+            })
             const options = {
               tracking: TrackType.TRACK,
               ...(typeof slideRow === 'number' && {
-                slideRow
+                slideRow,
               }),
               ...(typeof slideCol === 'number' && {
-                slideCol
-              })
-            };
-            const node = this.privateSceneGraph.createNode(nodeType, options);
-            markPageLoaded(node.guid, this.documentAccessState);
-            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`);
+                slideCol,
+              }),
+            }
+            const node = this.privateSceneGraph.createNode(nodeType, options)
+            markPageLoaded(node.guid, this.documentAccessState)
+            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
           },
           isAllowedInReadOnly: false,
           isAllowedInWidgetRender: false,
-          hasEditScope: true
-        });
-        continue;
+          hasEditScope: true,
+        })
+        continue
       }
 
       // Special handling for SLIDE_ROW node type
@@ -8510,28 +8697,28 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           handle: y,
           key: createMethod,
           metricsKey: `figma.${createMethod}`,
-          cb: e => {
+          cb: (e) => {
             const slideRow = validateWithZSchema({
               vm: this.vm,
               handle: e,
               zSchema: _$$z.number().finite().min(0).int().optional(),
-              property: 'slideRow'
-            });
+              property: 'slideRow',
+            })
             const options = {
               tracking: TrackType.TRACK,
               ...(typeof slideRow === 'number' && {
-                slideRow
-              })
-            };
-            const node = this.privateSceneGraph.createNode(nodeType, options);
-            markPageLoaded(node.guid, this.documentAccessState);
-            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`);
+                slideRow,
+              }),
+            }
+            const node = this.privateSceneGraph.createNode(nodeType, options)
+            markPageLoaded(node.guid, this.documentAccessState)
+            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
           },
           isAllowedInReadOnly: false,
           isAllowedInWidgetRender: false,
-          hasEditScope: true
-        });
-        continue;
+          hasEditScope: true,
+        })
+        continue
       }
 
       // Generic node creation for other node types
@@ -8545,18 +8732,18 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         metricsKey: `figma.${createMethod}`,
         cb: () => {
           if (nodeType === 'CANVAS' && createMethod === 'createPage' && this.hasFileReachedPageLimit()) {
-            throw new Error('The Starter plan only comes with 3 pages. Upgrade to Professional for unlimited pages.');
+            throw new Error('The Starter plan only comes with 3 pages. Upgrade to Professional for unlimited pages.')
           }
-          const node = this.privateSceneGraph.createNode(nodeType);
+          const node = this.privateSceneGraph.createNode(nodeType)
           markPageLoaded(node.guid, this.documentAccessState, {
-            ignoreReduxState: nodeType === 'CANVAS'
-          });
-          return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`);
+            ignoreReduxState: nodeType === 'CANVAS',
+          })
+          return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
         },
         isAllowedInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: true
-      });
+        hasEditScope: true,
+      })
     }
     this.defineVmFunction({
       handle: y,
@@ -8566,7 +8753,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let {
           nodeIds,
           parent,
-          index
+          index,
         } = processNodeArrayForHierarchyOperation({
           vm: e,
           callerName: 'flatten',
@@ -8574,35 +8761,36 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           parentArg: i,
           indexArg: n,
           getNode: this.getNode,
-          enableResponsiveSetHierarchyMutations: this.options.enableResponsiveSetHierarchyMutations
-        });
-        let o = PluginHelpers.flattenNodes(nodeIds, parent ? parent.sessionID : -1, parent ? parent.localID : -1, index, this.privateSceneGraph.scene);
-        return this.nodeFactory.createNode(o, 'figma.flatten');
+          enableResponsiveSetHierarchyMutations: this.options.enableResponsiveSetHierarchyMutations,
+        })
+        let o = PluginHelpers.flattenNodes(nodeIds, parent ? parent.sessionID : -1, parent ? parent.localID : -1, index, this.privateSceneGraph.scene)
+        return this.nodeFactory.createNode(o, 'figma.flatten')
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'createPageDivider',
       metricsKey: 'figma.createPageDivider',
       cb: () => {
-        if (this.inSites() || this.inBuzz() || this.inSlides()) throw new Error('Cannot add page dividers in this editor.');
+        if (this.inSites() || this.inBuzz() || this.inSlides())
+          throw new Error('Cannot add page dividers in this editor.')
         if (this.hasFileReachedPageLimit()) {
-          throw new Error('The Starter plan only comes with 3 pages. Upgrade to Professional for unlimited pages.');
+          throw new Error('The Starter plan only comes with 3 pages. Upgrade to Professional for unlimited pages.')
         }
-        let e = this.privateSceneGraph.createNode('CANVAS');
-        e.name = '---';
-        e.isPageDivider = !0;
+        let e = this.privateSceneGraph.createNode('CANVAS')
+        e.name = '---'
+        e.isPageDivider = !0
         markPageLoaded(e.guid, this.documentAccessState, {
-          ignoreReduxState: !0
-        });
-        return this.nodeFactory.createNode(e.guid, 'figma.createPageDivider');
+          ignoreReduxState: !0,
+        })
+        return this.nodeFactory.createNode(e.guid, 'figma.createPageDivider')
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
+      hasEditScope: !0,
     });
     (I || M) && this.defineVmFunction({
       handle: y,
@@ -8611,8 +8799,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: this.makeGroupingOperationFunction('combineAsVariants', LogicalOperation.STATE_GROUP),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'group',
@@ -8620,8 +8808,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: this.makeGroupingOperationFunction('group', LogicalOperation.GROUP),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'union',
@@ -8629,8 +8817,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: this.makeGroupingOperationFunction('union', LogicalOperation.UNION),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'subtract',
@@ -8638,8 +8826,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: this.makeGroupingOperationFunction('subtract', LogicalOperation.SUBTRACT),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'intersect',
@@ -8647,8 +8835,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: this.makeGroupingOperationFunction('intersect', LogicalOperation.INTERSECT),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'exclude',
@@ -8656,163 +8844,164 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: this.makeGroupingOperationFunction('exclude', LogicalOperation.XOR),
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'ungroup',
       metricsKey: 'figma.ungroup',
-      cb: t => {
-        let i = this.getNode(t);
-        if (!i) throw new Error('Parent must be provided to ungroup()');
+      cb: (t) => {
+        let i = this.getNode(t)
+        if (!i)
+          throw new Error('Parent must be provided to ungroup()')
         if (i.isOrInResponsiveSet && !this.options.enableResponsiveSetHierarchyMutations) {
-          throw new Error('Cannot ungroup nodes inside a webpage');
+          throw new Error('Cannot ungroup nodes inside a webpage')
         }
-        let n = PluginHelpers.ungroupNode(i.guid, this.privateSceneGraph.scene);
-        let r = e.newArray();
+        let n = PluginHelpers.ungroupNode(i.guid, this.privateSceneGraph.scene)
+        let r = e.newArray()
         n.forEach((t, i) => {
-          let n = this.nodeFactory.createNode(t, 'figma.ungroup');
-          e.setProp(r, i.toString(), n);
-        });
-        return r;
+          let n = this.nodeFactory.createNode(t, 'figma.ungroup')
+          e.setProp(r, i.toString(), n)
+        })
+        return r
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'commitUndo',
       metricsKey: 'figma.commitUndo',
-      cb: _t => {
-        fullscreenValue.triggerAction('commit');
-        return e.undefined;
+      cb: (_t) => {
+        fullscreenValue.triggerAction('commit')
+        return e.undefined
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'triggerUndo',
       metricsKey: 'figma.triggerUndo',
-      cb: _t => {
-        fullscreenValue.triggerAction('undo');
-        return e.undefined;
+      cb: (_t) => {
+        fullscreenValue.triggerAction('undo')
+        return e.undefined
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'createImage',
       metricsKey: 'figma.createImage',
-      cb: t => {
+      cb: (t) => {
         let i = this.imageStore.createImage(validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: FigmaSchema.UInt8Array,
-          property: 'createImage'
-        }));
-        return createImageProcessor(e, i);
+          property: 'createImage',
+        }))
+        return createImageProcessor(e, i)
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'createImageAsync',
       metricsKey: 'figma.createImageAsync',
-      cb: t => {
+      cb: (t) => {
         let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
-          property: 'createImageAsync'
-        });
+          property: 'createImageAsync',
+        })
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
-        let s = xF(i, this.options.allowedDomains);
-        e.registerPromise(s).then(t => {
-          resolve(createImageProcessor(e, this.imageStore.createImage(t)));
-        }).catch(t => reject(e.newString(t.message)));
-        return promise;
+          reject,
+        } = e.newPromise()
+        let s = xF(i, this.options.allowedDomains)
+        e.registerPromise(s).then((t) => {
+          resolve(createImageProcessor(e, this.imageStore.createImage(t)))
+        }).catch(t => reject(e.newString(t.message)))
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'getImageByHash',
       metricsKey: 'figma.getImageByHash',
-      cb: t => {
+      cb: (t) => {
         let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
-          property: 'getImageByHash'
-        });
-        let n = this.imageStore.getImageFromSHA1(i);
-        return n === null ? e.$$null : createImageProcessor(e, n);
+          property: 'getImageByHash',
+        })
+        let n = this.imageStore.getImageFromSHA1(i)
+        return n === null ? e.$$null : createImageProcessor(e, n)
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'createVideo',
       metricsKey: 'figma.createVideo',
-      cb: t => {
+      cb: (t) => {
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
+          reject,
+        } = e.newPromise()
         e.registerPromise(this.videoStore.createVideoAsync(validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: FigmaSchema.UInt8Array,
-          property: 'createVideo'
-        }))).then(t => {
-          resolve(createNodeHash(e, t));
-        }, t => reject(e.newString(`Failed create video. Error: ${t.message}`)));
-        return promise;
+          property: 'createVideo',
+        }))).then((t) => {
+          resolve(createNodeHash(e, t))
+        }, t => reject(e.newString(`Failed create video. Error: ${t.message}`)))
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'createVideoAsync',
       metricsKey: 'figma.createVideoAsync',
-      cb: t => {
+      cb: (t) => {
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
+          reject,
+        } = e.newPromise()
         e.registerPromise(this.videoStore.createVideoAsync(validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: FigmaSchema.UInt8Array,
-          property: 'createVideoAsync'
-        }))).then(t => {
-          resolve(createNodeHash(e, t));
-        }, t => reject(e.newString(`Failed create video. Error: ${t.message}`)));
-        return promise;
+          property: 'createVideoAsync',
+        }))).then((t) => {
+          resolve(createNodeHash(e, t))
+        }, t => reject(e.newString(`Failed create video. Error: ${t.message}`)))
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'listAvailableFontsAsync',
@@ -8821,80 +9010,81 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
-        e.registerPromise(listAllFonts()).then(t => resolve(e.deepWrap(t)), t => {
-          reject(e.newString('Internal error'));
-          reportError(_$$e.EXTENSIBILITY, t);
-        });
-        return promise;
+          reject,
+        } = e.newPromise()
+        e.registerPromise(listAllFonts()).then(t => resolve(e.deepWrap(t)), (t) => {
+          reject(e.newString('Internal error'))
+          reportError(_$$e.EXTENSIBILITY, t)
+        })
+        return promise
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'loadAllPagesAsync',
       metricsKey: 'figma.loadAllPagesAsync',
       cb: () => {
-        if (this.options.command === 'textreview' || this.queryMode) throw new Error('Unexpected call to figma.loadAllPagesAsync');
+        if (this.options.command === 'textreview' || this.queryMode)
+          throw new Error('Unexpected call to figma.loadAllPagesAsync')
         let {
           promise,
-          resolve
-        } = e.newPromise();
-        e.registerPromise(_$$E(null, null, PluginModalType.DYNAMIC_PLUGIN_LOAD_ALL)).then(t => resolve(e.deepWrap(t)));
-        this.documentAccessState.loadedAllPages();
-        return promise;
+          resolve,
+        } = e.newPromise()
+        e.registerPromise(_$$E(null, null, PluginModalType.DYNAMIC_PLUGIN_LOAD_ALL)).then(t => resolve(e.deepWrap(t)))
+        this.documentAccessState.loadedAllPages()
+        return promise
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'loadFontAsync',
       metricsKey: 'figma.loadFontAsync',
-      cb: t => {
+      cb: (t) => {
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
+          reject,
+        } = e.newPromise()
         let a = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: FigmaSchema.FontName,
-          property: 'loadFontAsync'
-        });
-        u += 1;
+          property: 'loadFontAsync',
+        })
+        u += 1
         setTimeout(() => {
           e.registerPromise(loadPluginFont(a)).then(() => {
-            u -= 1;
-            resolve(e.undefined);
+            u -= 1
+            resolve(e.undefined)
           }, () => {
-            u -= 1;
-            reject(e.newString(`The font "${a.family} ${a.style}" could not be loaded`));
-          });
-        });
-        return promise;
+            u -= 1
+            reject(e.newString(`The font "${a.family} ${a.style}" could not be loaded`))
+          })
+        })
+        return promise
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'hasMissingFont',
       options: {
         enumerable: !1,
         metricsKey: 'hasMissingFont',
-        get: () => e.newBoolean(PluginHelpers.documentHasMissingFont())
+        get: () => e.newBoolean(PluginHelpers.documentHasMissingFont()),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmIncrementalFunction({
       handle: y,
       key: 'getNodeById',
@@ -8903,196 +9093,207 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       incrementalSafeApiKey: 'getNodeByIdAsync',
       incrementalSafeApiMetricsKey: 'figma.getNodeByIdAsync',
       parseArg: t => e.toString(t),
-      prepareDocument: async e => {
-        await ensurePluginPageLoaded(e, this.documentAccessState);
+      prepareDocument: async (e) => {
+        await ensurePluginPageLoaded(e, this.documentAccessState)
       },
-      resolveValue: t => function ({
+      resolveValue: t => (function ({
         nodeID: e,
         vm: t,
         nodeFactory: i,
         method: n,
-        sceneGraph: r
+        sceneGraph: r,
       }) {
-        if (!vs.test(e)) return t.$$null;
-        let a = r.guidFromDeveloperFriendlyId(e);
-        if (!a) return t.$$null;
-        let s = r.get(a);
-        return !s || s && isInImmutableContext(t, s) ? t.$$null : i.createNode(a, n);
+        if (!vs.test(e))
+          return t.$$null
+        let a = r.guidFromDeveloperFriendlyId(e)
+        if (!a)
+          return t.$$null
+        let s = r.get(a)
+        return !s || s && isInImmutableContext(t, s) ? t.$$null : i.createNode(a, n)
       }({
         nodeID: t,
         vm: e,
         nodeFactory: this.nodeFactory,
         sceneGraph: this.privateSceneGraph,
-        method: 'figma.getNodeById'
-      }),
+        method: 'figma.getNodeById',
+      })),
       incrementalSafeApi: this.options.incrementalSafeApi,
       allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
       isAllowedInReadOnly: !0,
-      isAllowedInWidgetRender: !1
-    });
+      isAllowedInWidgetRender: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'getSelectionColors',
       metricsKey: 'figma.getSelectionColors',
       isAllowedInReadOnly: !0,
       cb: () => {
-        SelectionPaintHelpers.collectPaintsAndSendToWeb();
+        SelectionPaintHelpers.collectPaintsAndSendToWeb()
         let {
-          selectionPaints
-        } = debugState.getState().mirror;
-        if (selectionPaints.emptyDueToLimitExceeded) return e.$$null;
-        let i = e.newObject();
-        let n = (selectionPaints.paints.length ? selectionPaints.paints : selectionPaints.paintsDirectlyOnSingleNode).map(e => convertPaintArrayData([e.paint])[0]);
-        let r = (selectionPaints.styles.length ? selectionPaints.styles : selectionPaints.stylesDirectlyOnSingleNode).map(t => {
+          selectionPaints,
+        } = debugState.getState().mirror
+        if (selectionPaints.emptyDueToLimitExceeded)
+          return e.$$null
+        let i = e.newObject()
+        let n = (selectionPaints.paints.length ? selectionPaints.paints : selectionPaints.paintsDirectlyOnSingleNode).map(e => convertPaintArrayData([e.paint])[0])
+        let r = (selectionPaints.styles.length ? selectionPaints.styles : selectionPaints.stylesDirectlyOnSingleNode).map((t) => {
           let i = this.styleFactory.createStyle(_$$nM({
             key: t.styleKey,
-            version: IA(t.version)
-          }));
-          if (i !== e.$$null) return i;
-          let n = this.privateSceneGraph.get(t.styleGUIDs[0]);
-          if (!n) return null;
-          let r = n?.styleVersionHash;
-          let a = n?.styleKeyForPublish;
-          return r && a ? this.styleFactory.createStyle(_$$nM({
-            key: a,
-            version: r
-          })) : null;
-        }).filter(e => e != null);
-        let a = e.newArray();
-        for (let t = 0; t < r.length; t++) e.setProp(a, String(t), r[t]);
-        e.setProp(i, 'paints', e.deepWrap(n));
-        e.setProp(i, 'styles', a);
-        return i;
+            version: VariableStyleId(t.version),
+          }))
+          if (i !== e.$$null)
+            return i
+          let n = this.privateSceneGraph.get(t.styleGUIDs[0])
+          if (!n)
+            return null
+          let r = n?.styleVersionHash
+          let a = n?.styleKeyForPublish
+          return r && a
+            ? this.styleFactory.createStyle(_$$nM({
+                key: a,
+                version: r,
+              }))
+            : null
+        }).filter(e => e != null)
+        let a = e.newArray()
+        for (let t = 0; t < r.length; t++) e.setProp(a, String(t), r[t])
+        e.setProp(i, 'paints', e.deepWrap(n))
+        e.setProp(i, 'styles', a)
+        return i
       },
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'createNodeFromSvg',
       metricsKey: 'figma.createNodeFromSvg',
-      cb: t => {
-        let i = e.toString(t);
+      cb: (t) => {
+        let i = e.toString(t)
         try {
           let e = this.privateSceneGraph.createNodeFromSVG(i, {
-            tracking: TrackType.TRACK
-          });
-          return this.nodeFactory.createNode(e.guid, 'figma.createNodeFromSvg');
-        } catch (e) {
-          console.error(e);
-          return new Error('Failed to convert SVG file');
+            tracking: TrackType.TRACK,
+          })
+          return this.nodeFactory.createNode(e.guid, 'figma.createNodeFromSvg')
+        }
+        catch (e) {
+          console.error(e)
+          return new Error('Failed to convert SVG file')
         }
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'importStyleByKeyAsync',
       metricsKey: 'figma.importStyleByKeyAsync',
-      cb: t => {
+      cb: (t) => {
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
+          reject,
+        } = e.newPromise()
         let a = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
-          property: 'key'
-        });
+          property: 'key',
+        })
         e.registerPromise(a_(e, a, this.options.openFileKey || 'default')).then(({
           key: t,
-          version: i
+          version: i,
         }) => {
           let r = this.styleFactory.createStyle(_$$nM({
             key: t,
-            version: i
-          }));
-          if (e.isNull(r)) throw new Error('Unable to create style');
-          resolve(r);
-        }, _t => {
-          reject(e.newString(`Failed to import style by key "${a}"`));
-        });
-        return promise;
+            version: i,
+          }))
+          if (e.isNull(r))
+            throw new Error('Unable to create style')
+          resolve(r)
+        }, (_t) => {
+          reject(e.newString(`Failed to import style by key "${a}"`))
+        })
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'importComponentByKeyAsync',
       metricsKey: 'figma.importComponentByKeyAsync',
-      cb: t => {
+      cb: (t) => {
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
+          reject,
+        } = e.newPromise()
         let a = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
-          property: 'key'
-        });
-        e.registerPromise($$ab4(a)).then(e => resolve(this.nodeFactory.createNode(e, 'figma.importComponentByKeyAsync'))).catch(t => {
-          reject(e.newString(t.message));
-        });
-        return promise;
+          property: 'key',
+        })
+        e.registerPromise($$ab4(a)).then(e => resolve(this.nodeFactory.createNode(e, 'figma.importComponentByKeyAsync'))).catch((t) => {
+          reject(e.newString(t.message))
+        })
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'importComponentSetByKeyAsync',
       metricsKey: 'figma.importComponentSetByKeyAsync',
-      cb: t => {
+      cb: (t) => {
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
+          reject,
+        } = e.newPromise()
         let a = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
-          property: 'key'
-        });
-        e.registerPromise($$av5(a)).then(e => resolve(this.nodeFactory.createNode(e, 'figma.importComponentSetByKeyAsync'))).catch(_t => {
-          reject(e.newString(`Failed to import component set by key "${a}"`));
-        });
-        return promise;
+          property: 'key',
+        })
+        e.registerPromise($$av5(a)).then(e => resolve(this.nodeFactory.createNode(e, 'figma.importComponentSetByKeyAsync'))).catch((_t) => {
+          reject(e.newString(`Failed to import component set by key "${a}"`))
+        })
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'closePlugin',
       metricsKey: 'figma.closePlugin',
-      cb: t => {
+      cb: (t) => {
         let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string().optional(),
-          property: 'closePlugin message'
-        });
-        u > 0 && _$$k2.warn('There are still font loads in progress. Please ensure `closePlugin` is not called until after the font loading has resolved.');
-        i ? this.closePlugin({
-          message: i,
-          isError: !1
-        }) : this.closePlugin(undefined);
-        return e.undefined;
+          property: 'closePlugin message',
+        })
+        u > 0 && logger.warn('There are still font loads in progress. Please ensure `closePlugin` is not called until after the font loading has resolved.')
+        i
+          ? this.closePlugin({
+              message: i,
+              isError: !1,
+            })
+          : this.closePlugin(undefined)
+        return e.undefined
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'notify',
@@ -9100,28 +9301,28 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       cb: (messageHandle, optionsHandle) => {
         // Validate notification can be shown
         if (this.queryMode) {
-          throw new Error('Cannot notify in queryMode.');
+          throw new Error('Cannot notify in queryMode.')
         }
 
         // Extract and validate message and options
-        const notificationData = extractNotificationData(messageHandle, optionsHandle, e);
-        const notificationOptions = processNotificationOptions(notificationData.options);
+        const notificationData = extractNotificationData(messageHandle, optionsHandle, e)
+        const notificationOptions = processNotificationOptions(notificationData.options)
 
         // Set up action and dequeue handlers
-        const handlerData = setupNotificationHandlers(notificationOptions, e);
+        const handlerData = setupNotificationHandlers(notificationOptions, e)
 
         // Create and show notification
-        const notificationId = createNotificationId(this.visualBellCounter);
-        this.uiHandle.showPluginVisualBell(notificationData.message, notificationId, handlerData.processedOptions, createDequeueCallback(handlerData, e));
-        this.visualBellCounter++;
+        const notificationId = createNotificationId(this.visualBellCounter)
+        this.uiHandle.showPluginVisualBell(notificationData.message, notificationId, handlerData.processedOptions, createDequeueCallback(handlerData, e))
+        this.visualBellCounter++
 
         // Return notification controller object
-        return createNotificationController(e, this.uiHandle, notificationId);
+        return createNotificationController(e, this.uiHandle, notificationId)
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
 
     // Helper functions for notification handling
 
@@ -9133,18 +9334,18 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         vm,
         handle: messageHandle,
         zSchema: _$$z.string(),
-        property: 'notify message'
-      });
+        property: 'notify message',
+      })
       const options = optionsHandle && validateWithZSchema({
         vm,
         handle: optionsHandle,
         zSchema: FigmaSchema.ShowVisualBellOptions.optional(),
-        property: 'notify options'
-      }) || {};
+        property: 'notify options',
+      }) || {}
       return {
         message,
-        options
-      };
+        options,
+      }
     }
 
     /**
@@ -9154,41 +9355,41 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       const processedOptions = mergeDefaults(options, {
         timeout: null,
         error: false,
-        button: undefined
-      });
+        button: undefined,
+      })
 
       // Set timeout defaults
       if (processedOptions.timeout == null) {
-        processedOptions.timeout = processedOptions.error ? Infinity : 3000;
+        processedOptions.timeout = processedOptions.error ? Infinity : 3000
       }
-      processedOptions.timeout = Math.max(processedOptions.timeout, 100);
-      return processedOptions;
+      processedOptions.timeout = Math.max(processedOptions.timeout, 100)
+      return processedOptions
     }
 
     /**
      * setupNotificationHandlers - Set up action button and dequeue handlers
      */
     function setupNotificationHandlers(options, vm) {
-      let actionHandler = null;
-      let dequeueHandler = null;
+      let actionHandler = null
+      let dequeueHandler = null
 
       // Set up button action handler
       if (options.button) {
-        actionHandler = getFunctionHandle(options.button.action);
-        vm.retainHandle(actionHandler);
-        options.button.action = createActionCallback(actionHandler, vm);
+        actionHandler = getFunctionHandle(options.button.action)
+        vm.retainHandle(actionHandler)
+        options.button.action = createActionCallback(actionHandler, vm)
       }
 
       // Set up dequeue handler
       if (options.onDequeue) {
-        dequeueHandler = getFunctionHandle(options.onDequeue);
-        vm.retainHandle(dequeueHandler);
+        dequeueHandler = getFunctionHandle(options.onDequeue)
+        vm.retainHandle(dequeueHandler)
       }
       return {
         actionHandler,
         dequeueHandler,
-        processedOptions: options
-      };
+        processedOptions: options,
+      }
     }
 
     /**
@@ -9197,22 +9398,22 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
     function createActionCallback(actionHandler, vm) {
       return () => {
         if (!vm.isDestroyed()) {
-          const result = vm.callFunction(actionHandler, vm.undefined);
+          const result = vm.callFunction(actionHandler, vm.undefined)
           if (result.type === 'SUCCESS') {
-            const unwrappedResult = vm.deepUnwrap(result.handle);
+            const unwrappedResult = vm.deepUnwrap(result.handle)
             if (typeof unwrappedResult === 'boolean') {
-              return unwrappedResult;
+              return unwrappedResult
             }
           }
         }
-      };
+      }
     }
 
     /**
      * createNotificationId - Generate unique notification identifier
      */
     function createNotificationId(counter) {
-      return `message-from-plugin-${counter}`;
+      return `message-from-plugin-${counter}`
     }
 
     /**
@@ -9220,66 +9421,69 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
      */
     function createDequeueCallback({
       actionHandler,
-      dequeueHandler
+      dequeueHandler,
     }, vm) {
-      return reason => {
+      return (reason) => {
         if (!vm.isDestroyed()) {
           // Handle dequeue callback
           if (dequeueHandler) {
             try {
-              vm.callFunction(dequeueHandler, vm.undefined, vm.newString(reason));
-              vm.releaseHandle(dequeueHandler);
-            } catch (error) {
-              console.error('onDequeueHandle error: ', error);
+              vm.callFunction(dequeueHandler, vm.undefined, vm.newString(reason))
+              vm.releaseHandle(dequeueHandler)
+            }
+            catch (error) {
+              console.error('onDequeueHandle error: ', error)
             }
           }
 
           // Clean up action handler
           if (actionHandler) {
             try {
-              vm.releaseHandle(actionHandler);
-            } catch (error) {
-              console.error('actionHandle error: ', error);
+              vm.releaseHandle(actionHandler)
+            }
+            catch (error) {
+              console.error('actionHandle error: ', error)
             }
           }
         }
-      };
+      }
     }
 
     /**
      * createNotificationController - Create notification controller object with cancel method
      */
     function createNotificationController(vm, uiHandle, notificationId) {
-      const controller = vm.newObject();
+      const controller = vm.newObject()
       vm.defineFunction(controller, 'cancel', 'visualBellHandler.cancel', () => {
-        uiHandle.cancelPluginVisualBell(notificationId);
-        return vm.undefined;
-      });
-      return controller;
+        uiHandle.cancelPluginVisualBell(notificationId)
+        return vm.undefined
+      })
+      return controller
     }
-    let j = as;
+    let j = as
     // Add additional event handlers and API methods to the main figma API object (y)
     if (enableProposedApi) {
-      j = j.concat(ao);
+      j = j.concat(ao)
     }
     if (!this.options.isLocal) {
-      j = j.concat(['codegen']);
+      j = j.concat(['codegen'])
     }
-    j = j.concat(['stylechange']);
+    j = j.concat(['stylechange'])
 
     // Register event handlers for all supported events
-    this.addEventHandlersTo(y, j, 'figma', null);
+    this.addEventHandlersTo(y, j, 'figma', null)
 
     // Trigger run event for parameters if provided, otherwise defer or trigger default run event
     if (this.options.parameterValues) {
       this.triggerOrScheduleRunEvent({
         command: 'parameters',
-        parameters: this.options.parameterValues
-      });
-    } else if (!this.options.deferRunEvent) {
+        parameters: this.options.parameterValues,
+      })
+    }
+    else if (!this.options.deferRunEvent) {
       this.triggerOrScheduleRunEvent({
-        command: 'parameters'
-      });
+        command: 'parameters',
+      })
     }
 
     // Add closePluginWithFailure for supported environments
@@ -9288,23 +9492,24 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         handle: y,
         key: 'closePluginWithFailure',
         metricsKey: 'figma.closePluginWithFailure',
-        cb: t => {
-          let i;
+        cb: (t) => {
+          let i
           try {
-            i = e.toString(t);
-          } catch {
-            i = 'The plugin called "closePluginWithFailure"';
+            i = e.toString(t)
+          }
+          catch {
+            i = 'The plugin called "closePluginWithFailure"'
           }
           this.closePlugin({
             message: i,
-            isError: !0
-          });
-          return e.undefined;
+            isError: !0,
+          })
+          return e.undefined
         },
         isAllowedInReadOnly: !0,
         isAllowedInWidgetRender: !1,
-        hasEditScope: !1
-      });
+        hasEditScope: !1,
+      })
     }
 
     // showUI method for displaying plugin UI iframe
@@ -9320,45 +9525,47 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           height: FigmaSchema.FiniteNumber.min(0).int(),
           position: _$$z.strictObject({
             x: FigmaSchema.FiniteNumber,
-            y: FigmaSchema.FiniteNumber
+            y: FigmaSchema.FiniteNumber,
           }),
-          themeColors: _$$z.boolean()
-        }).partial().optional();
-        let r = e.isObject(t) && e.getBooleanProp(t, '__html__') && this.options.html ? this.options.html : validateWithZSchema({
-          vm: e,
-          handle: t,
-          zSchema: _$$z.string(),
-          property: 'showUI'
-        });
+          themeColors: _$$z.boolean(),
+        }).partial().optional()
+        let r = e.isObject(t) && e.getBooleanProp(t, '__html__') && this.options.html
+          ? this.options.html
+          : validateWithZSchema({
+              vm: e,
+              handle: t,
+              zSchema: _$$z.string(),
+              property: 'showUI',
+            })
         let a = validateWithZSchema({
           vm: e,
           handle: i,
           zSchema: n,
-          property: 'showUI options'
-        });
+          property: 'showUI options',
+        })
         let s = mergeDefaults(a || {}, {
           visible: !0,
-          themeColors: !1
-        });
+          themeColors: !1,
+        })
         let o = this.validateMakeIframeOptionsOrThrow(r, {
           visible: s.visible,
           title: s.title,
           width: s.width,
           height: s.height,
           position: s.position,
-          themeColors: s.themeColors
-        });
-        stats.increment(`showUI.${s.visible ? 'visible' : 'invisible'}`);
-        s.themeColors && stats.increment('showUI.themeColors');
-        this.uiHandle.makeIframe(o);
-        s.visible && this.uiHandle.showIframe();
-        stats.markTime('timeToShowUIMs');
-        return e.undefined;
+          themeColors: s.themeColors,
+        })
+        stats.increment(`showUI.${s.visible ? 'visible' : 'invisible'}`)
+        s.themeColors && stats.increment('showUI.themeColors')
+        this.uiHandle.makeIframe(o)
+        s.visible && this.uiHandle.showIframe()
+        stats.markTime('timeToShowUIMs')
+        return e.undefined
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
 
     // saveVersionHistoryAsync method for saving file version history
     this.defineVmFunction({
@@ -9370,68 +9577,69 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
-          property: 'saveVersionHistoryAsync'
-        });
+          property: 'saveVersionHistoryAsync',
+        })
         let r = validateWithZSchema({
           vm: e,
           handle: i,
           zSchema: _$$z.string().optional(),
-          property: 'saveVersionHistoryAsync'
-        }) || '';
+          property: 'saveVersionHistoryAsync',
+        }) || ''
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
-        e.registerPromise(createVersionSavepoint(n, r)).then(t => {
-          let i = e.newObject();
-          e.setProp(i, 'id', e.newString(t.id));
-          e.shallowFreezeObject(i);
-          resolve(i);
-        }, t => reject(e.newString(`Failed to save version history. Error: ${t.message}`)));
-        return promise;
+          reject,
+        } = e.newPromise()
+        e.registerPromise(createVersionSavepoint(n, r)).then((t) => {
+          let i = e.newObject()
+          e.setProp(i, 'id', e.newString(t.id))
+          e.shallowFreezeObject(i)
+          resolve(i)
+        }, t => reject(e.newString(`Failed to save version history. Error: ${t.message}`)))
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
 
     // Utility functions for base64 encoding/decoding
     this.defineVmFunction({
       handle: y,
       key: 'base64Encode',
       metricsKey: 'figma.base64Encode',
-      cb: t => {
+      cb: (t) => {
         let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: FigmaSchema.UInt8Array,
-          property: 'base64Encode'
-        });
-        return e.deepWrap(encodeBase64(i));
+          property: 'base64Encode',
+        })
+        return e.deepWrap(encodeBase64(i))
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'base64Decode',
       metricsKey: 'figma.base64Decode',
-      cb: t => {
+      cb: (t) => {
         let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
-          property: 'base64Decode'
-        });
-        if (!isValidBase64(i)) throw new Error('Invalid base64 string');
-        return e.deepWrap(decodeBase64(i));
+          property: 'base64Decode',
+        })
+        if (!isValidBase64(i))
+          throw new Error('Invalid base64 string')
+        return e.deepWrap(decodeBase64(i))
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
 
     // getFileThumbnailNode and setFileThumbnailNodeAsync for file thumbnail management
     this.defineVmIncrementalFunction({
@@ -9440,55 +9648,57 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       metricsKey: 'figma.getFileThumbnailNode',
       incrementalSafeApiKey: 'getFileThumbnailNodeAsync',
       incrementalSafeApiMetricsKey: 'figma.getFileThumbnailNodeAsync',
-      prepareDocument: async e => {
-        e && (await ensurePluginPageLoaded(e, this.documentAccessState));
+      prepareDocument: async (e) => {
+        e && (await ensurePluginPageLoaded(e, this.documentAccessState))
       },
-      parseArg: _e => {
-        let t = debugState.getState();
-        let i = _$$tB(t);
-        return i ? i?.thumbnailGuid : null;
+      parseArg: (_e) => {
+        let t = debugState.getState()
+        let i = _$$tB(t)
+        return i ? i?.thumbnailGuid : null
       },
       resolveValue: t => t && this.privateSceneGraph.get(t) ? this.nodeFactory.createNode(t, 'getFileThumbnailNode') : e.$$null,
       incrementalSafeApi: this.options.incrementalSafeApi,
       allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
       isAllowedInReadOnly: !0,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     if (!(R || D)) {
       this.defineVmFunction({
         handle: y,
         key: 'setFileThumbnailNodeAsync',
         metricsKey: 'figma.setFileThumbnailNodeAsync',
-        cb: t => {
-          let i;
-          let n = debugState.getState();
-          let r = n.openFile?.key;
-          if (r == null) throw new Error('File must be open for editing');
+        cb: (t) => {
+          let i
+          let n = debugState.getState()
+          let r = n.openFile?.key
+          if (r == null)
+            throw new Error('File must be open for editing')
           if (e.isNull(t)) {
-            i = null;
-          } else {
-            let e = this.getNode(t);
+            i = null
+          }
+          else {
+            let e = this.getNode(t)
             if (!((e.type === 'FRAME' || e.type === 'SYMBOL' || e.type === 'SECTION') && !e.resizeToFit)) {
-              throw new Error('Thumbnail node must be a FrameNode, ComponentNode, ComponentSetNode, or SectionNode');
+              throw new Error('Thumbnail node must be a FrameNode, ComponentNode, ComponentSetNode, or SectionNode')
             }
-            i = e.guid;
+            i = e.guid
           }
           let {
             promise,
             resolve,
-            reject
-          } = e.newPromise();
+            reject,
+          } = e.newPromise()
           e.registerPromise(FE(r, i)).then(() => {
-            resolve(e.undefined);
-          }).catch(t => {
-            reject(e.newString(`Failed to set thumbnail guid. Error: ${t.message}`));
-          });
-          return promise;
+            resolve(e.undefined)
+          }).catch((t) => {
+            reject(e.newString(`Failed to set thumbnail guid. Error: ${t.message}`))
+          })
+          return promise
         },
         isAllowedInReadOnly: !1,
         isAllowedInWidgetRender: !1,
-        hasEditScope: !0
-      });
+        hasEditScope: !0,
+      })
     }
 
     // Register parameters, codegen, relatedLinks, devResources, vscode, ui, viewport, clientStorage, constants, and internal APIs
@@ -9497,23 +9707,23 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'parameters',
       options: {
         enumerable: !1,
-        value: this.createParametersApi()
+        value: this.createParametersApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'codegen',
       options: {
         enumerable: !1,
-        get: memoizedHandle(e, () => this.createCodegenApi())
+        get: memoizedHandle(e, () => this.createCodegenApi()),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'relatedLinks',
@@ -9521,213 +9731,215 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         enumerable: !1,
         get: memoizedHandle(e, () => {
           if (this.options.isLocal) {
-            throw new Error('relatedLinks API is not available for local plugins. Please use the figma.devResources API instead.');
+            throw new Error('relatedLinks API is not available for local plugins. Please use the figma.devResources API instead.')
           }
-          return this.createDevResourcesApi();
-        })
+          return this.createDevResourcesApi()
+        }),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'devResources',
       options: {
         enumerable: !1,
-        get: () => this.createDevResourcesApi()
+        get: () => this.createDevResourcesApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'vscode',
       options: {
         enumerable: !1,
-        value: this.createVsCodeApi()
+        value: this.createVsCodeApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'ui',
       options: {
         enumerable: !1,
-        value: this.createUiApi()
+        value: this.createUiApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'viewport',
       options: {
         enumerable: !1,
-        value: this.createViewportApi()
+        value: this.createViewportApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'clientStorage',
       options: {
         enumerable: !1,
-        value: this.createClientStorageApi()
+        value: this.createClientStorageApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmProp({
       handle: y,
       key: 'constants',
       options: {
         enumerable: !1,
-        value: this.createConstantsApi()
+        value: this.createConstantsApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !0,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     if (getFeatureFlags().internal_only_debug_tools) {
       this.defineVmProp({
         handle: y,
         key: 'internal',
         options: {
           enumerable: !1,
-          value: this.createInternalApi()
+          value: this.createInternalApi(),
         },
         canWriteInReadOnly: !1,
         isAllowedInWidgetRender: !1,
-        hasEditScope: !1
-      });
+        hasEditScope: !1,
+      })
     }
 
     // createLinkPreviewAsync for FigJam (C)
     if (C) {
-      const t = 'createLinkPreviewAsync';
-      const i = this;
+      const t = 'createLinkPreviewAsync'
+      const i = this
       this.defineVmFunction({
         handle: y,
         key: t,
         metricsKey: 'figma.createLinkPreviewAsync',
-        cb: n => {
+        cb: (n) => {
           let r = validateWithZSchema({
             vm: e,
             handle: n,
             zSchema: _$$z.string(),
-            property: t
-          });
+            property: t,
+          })
           let {
             promise,
             resolve,
-            reject
-          } = e.newPromise();
-          e.registerPromise(ag(this.privateSceneGraph, r)).then(e => {
-            markPageLoaded(e, this.documentAccessState);
-            i.editScope(t, () => resolve(this.nodeFactory.createNode(e, 'figma.createLinkPreviewAsync')));
-          }, t => reject(e.newString(`Failed to create an embed. Error: ${t.message}`)));
-          return promise;
+            reject,
+          } = e.newPromise()
+          e.registerPromise(ag(this.privateSceneGraph, r)).then((e) => {
+            markPageLoaded(e, this.documentAccessState)
+            i.editScope(t, () => resolve(this.nodeFactory.createNode(e, 'figma.createLinkPreviewAsync')))
+          }, t => reject(e.newString(`Failed to create an embed. Error: ${t.message}`)))
+          return promise
         },
         isAllowedInReadOnly: !1,
         isAllowedInWidgetRender: !1,
-        hasEditScope: !1
-      });
+        hasEditScope: !1,
+      })
     }
     function U(e, t, i) {
-      let n = t.deepUnwrap(e, !0);
-      return P5(n, {
+      let n = t.deepUnwrap(e, !0)
+      return mapNodeToComponent(n, {
         isLocalWidget: !1,
         widgetNodeID: '',
         pluginID: i.pluginID,
         widgetVersionID: i.pluginVersionID,
         widgetName: '',
         widgetApiVersion: '1.0.0',
-        enableFullJsx: !0
-      });
+        enableFullJsx: !0,
+      })
     }
     (C || R || isInteractionPathCheck()) && this.defineVmFunction({
       handle: y,
       key: 'createGif',
       metricsKey: 'figma.createGif',
-      cb: t => {
+      cb: (t) => {
         let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: _$$z.string(),
-          property: 'createGif'
-        });
-        let n = Fullscreen.createRichMediaGifNode(i);
-        if (!n) throw new Error('Failed to create GIF');
-        let r = [];
+          property: 'createGif',
+        })
+        let n = Fullscreen.createRichMediaGifNode(i)
+        if (!n)
+          throw new Error('Failed to create GIF')
+        let r = []
         let a = {
           data: mapPaintConfigurations(this.imageStore, this.videoStore, [{
             type: 'IMAGE',
             scaleMode: 'FILL',
-            imageHash: i
+            imageHash: i,
           }], r),
-          blobs: r
-        };
-        let s = this.privateSceneGraph.get(n);
-        if (s == null) throw new Error('Failed to create GIF');
-        s.fillPaintsForPluginOnly = a;
-        markPageLoaded(n, this.documentAccessState);
-        return this.nodeFactory.createNode(n, 'figma.createGif');
+          blobs: r,
+        }
+        let s = this.privateSceneGraph.get(n)
+        if (s == null)
+          throw new Error('Failed to create GIF')
+        s.fillPaintsForPluginOnly = a
+        markPageLoaded(n, this.documentAccessState)
+        return this.nodeFactory.createNode(n, 'figma.createGif')
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
+      hasEditScope: !0,
     });
     (I || M) && this.defineVmFunction({
       handle: y,
       key: 'createComponentFromNode',
       metricsKey: 'figma.createComponentFromNode',
-      cb: e => {
-        let t = this.privateSceneGraph.createComponentFromNode(this.getNode(e).guid);
-        return this.nodeFactory.createNode(t.guid, 'figma.createComponentFromNode');
+      cb: (e) => {
+        let t = this.privateSceneGraph.createComponentFromNode(this.getNode(e).guid)
+        return this.nodeFactory.createNode(t.guid, 'figma.createComponentFromNode')
       },
       isAllowedInReadOnly: !1,
-      hasEditScope: !0
-    });
-    this.isWidget ? this.defineWidgetApi(y) : this.defineWidgetLiteApi(y);
+      hasEditScope: !0,
+    })
+    this.isWidget ? this.defineWidgetApi(y) : this.defineWidgetLiteApi(y)
     if (this.options.enableNativeJsx) {
       this.defineVmFunction({
         handle: y,
         key: 'reconcileNodeFromJSXAsync',
         metricsKey: 'figma.reconcileNodeFromJSXAsync',
         cb: (t, i, n) => {
-          let r = e.deepUnwrap(t, !0);
-          let a = U(i, e, this.options);
-          let s = U(n, e, this.options);
+          let r = e.deepUnwrap(t, !0)
+          let a = U(i, e, this.options)
+          let s = U(n, e, this.options)
           let {
             runtimeBridge,
-            shutdownCallback
-          } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm);
-          shutdownCallback && this.options.addShutdownAction(shutdownCallback);
+            shutdownCallback,
+          } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm)
+          shutdownCallback && this.options.addShutdownAction(shutdownCallback)
           let d = qg(() => ({
             rootNode: a,
-            syncedState: {}
-          }), runtimeBridge, this.options.allowedDomains);
+            syncedState: {},
+          }), runtimeBridge, this.options.allowedDomains)
           let c = qg(() => ({
             rootNode: s,
-            syncedState: {}
-          }), runtimeBridge, this.options.allowedDomains);
+            syncedState: {},
+          }), runtimeBridge, this.options.allowedDomains)
           let {
             promise,
             resolve,
-            reject
-          } = e.newPromise();
+            reject,
+          } = e.newPromise()
           e.registerPromise((async () => {
             try {
-              let [e, t] = await Promise.all([d, c]);
-              let i = this.privateSceneGraph.getCurrentPage();
+              let [e, t] = await Promise.all([d, c])
+              let i = this.privateSceneGraph.getCurrentPage()
               let n = _b({
                 vNode: t.vRoot.rootNode,
                 oldVNode: e.vRoot.rootNode,
@@ -9735,46 +9947,47 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 runtime: runtimeBridge,
                 parentId: i.guid,
                 currentNodeId: r.id,
-                editScopeLabel: 'reconcile-node-from-jsx'
-              });
-              let a = this.nodeFactory.createNode(n.getID(), 'figma.reconcileNodeFromJSXAsync');
-              resolve(a);
-            } catch (t: any) {
-              reject(e.newString(t.message));
+                editScopeLabel: 'reconcile-node-from-jsx',
+              })
+              let a = this.nodeFactory.createNode(n.getID(), 'figma.reconcileNodeFromJSXAsync')
+              resolve(a)
             }
-          })());
-          return promise;
+            catch (t: any) {
+              reject(e.newString(t.message))
+            }
+          })())
+          return promise
         },
         isAllowedInReadOnly: !1,
         isAllowedInWidgetRender: !1,
-        hasEditScope: !0
-      });
+        hasEditScope: !0,
+      })
     }
     this.defineVmFunction({
       handle: y,
       key: 'createNodeFromJSXAsync',
       metricsKey: 'figma.createNodeFromJSXAsync',
-      cb: t => {
-        let i = this.vm.deepUnwrap(t, !0);
-        let n = P5(i, {
+      cb: (t) => {
+        let i = this.vm.deepUnwrap(t, !0)
+        let n = mapNodeToComponent(i, {
           isLocalWidget: !1,
           widgetNodeID: '',
           pluginID: this.options.pluginID,
           widgetVersionID: this.options.pluginVersionID,
           widgetName: '',
           widgetApiVersion: '1.0.0',
-          enableFullJsx: this.options.enableNativeJsx ?? !1
-        });
+          enableFullJsx: this.options.enableNativeJsx ?? !1,
+        })
         let {
           runtimeBridge,
-          shutdownCallback
-        } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm);
-        shutdownCallback && this.options.addShutdownAction(shutdownCallback);
+          shutdownCallback,
+        } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm)
+        shutdownCallback && this.options.addShutdownAction(shutdownCallback)
         let s = qg(() => ({
           rootNode: n,
-          syncedState: {}
-        }), runtimeBridge, this.options.allowedDomains).then(e => {
-          let t = this.privateSceneGraph.getCurrentPage();
+          syncedState: {},
+        }), runtimeBridge, this.options.allowedDomains).then((e) => {
+          let t = this.privateSceneGraph.getCurrentPage()
           return _b({
             vNode: e.vRoot.rootNode,
             imgInfoMap: e.imgInfoMap,
@@ -9783,111 +9996,111 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
             editScopeLabel: 'create-node-from-jsx',
             currentNodeId: null,
             // Added missing property
-            oldVNode: null // Added missing property
-          }).getID();
-        });
+            oldVNode: null, // Added missing property
+          }).getID()
+        })
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
-        e.registerPromise(s).then(e => {
-          resolve(this.nodeFactory.createNode(e, 'figma.createNodeFromJSXAsync'));
-        }).catch(t => reject(e.newString(t.message)));
-        return promise;
+          reject,
+        } = e.newPromise()
+        e.registerPromise(s).then((e) => {
+          resolve(this.nodeFactory.createNode(e, 'figma.createNodeFromJSXAsync'))
+        }).catch(t => reject(e.newString(t.message)))
+        return promise
       },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !0
-    });
+      hasEditScope: !0,
+    })
     this.defineVmProp({
       handle: y,
       key: 'util',
       options: {
         enumerable: !1,
         metricsKey: 'figma.util',
-        value: this.createUtilApi()
+        value: this.createUtilApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !0,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.options.capabilities.includes('textreview') && this.defineVmProp({
       handle: y,
       key: 'textreview',
       options: {
         enumerable: !1,
-        value: this.createTextReviewApi()
+        value: this.createTextReviewApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineInternalApis(y);
     (C || isInteractionPathCheck()) && this.defineVmProp({
       handle: y,
       key: 'timer',
       options: {
         enumerable: !1,
-        value: this.createTimerApi()
+        value: this.createTimerApi(),
       },
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.options.validatedPermissions.permissions.includes('displaycapture') && this.defineVmFunction({
       handle: y,
       key: 'getDisplayMetadataAsync',
       metricsKey: 'figma.getDisplayMetadataAsync',
-      cb: t => {
+      cb: (t) => {
         if (!desktopAPIInstance) {
           let {
             promise,
-            resolve
-          } = e.newPromise();
-          resolve(e.$$null);
-          return promise;
+            resolve,
+          } = e.newPromise()
+          resolve(e.$$null)
+          return promise
         }
         let i = validateWithZSchema({
           vm: e,
           handle: t,
           zSchema: FigmaSchema.Size.optional(),
-          property: 'thumbnailSize'
+          property: 'thumbnailSize',
         }) ?? {
           width: 150,
-          height: 150
-        };
-        let n = desktopAPIInstance.getDisplayMetadata(i);
+          height: 150,
+        }
+        let n = desktopAPIInstance.getDisplayMetadata(i)
         let {
           promise,
           resolve,
-          reject
-        } = e.newPromise();
-        e.registerPromise(n).then(t => resolve(e.deepWrap(t)), _t => reject(e.newString('Failed to get display metadata')));
-        return promise;
+          reject,
+        } = e.newPromise()
+        e.registerPromise(n).then(t => resolve(e.deepWrap(t)), _t => reject(e.newString('Failed to get display metadata')))
+        return promise
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     this.defineVmFunction({
       handle: y,
       key: 'openExternal',
       metricsKey: 'figma.openExternal',
-      cb: e => {
+      cb: (e) => {
         let t = validateWithZSchema({
           vm: this.vm,
           handle: e,
           zSchema: _$$z.string(),
-          property: 'url'
-        });
-        _$$T() ? Qn(t) : Ay.unsafeRedirect(t, '_blank', undefined);
-        return this.vm.undefined;
+          property: 'url',
+        })
+        _$$T() ? Qn(t) : customHistory.unsafeRedirect(t, '_blank', undefined)
+        return this.vm.undefined
       },
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
-      hasEditScope: !1
-    });
+      hasEditScope: !1,
+    })
     // ============================================================================
     // REFACTORED: Slide Grid and Canvas Grid API Methods for Slides and Buzz Editors
     // ============================================================================
@@ -9903,23 +10116,23 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         key: 'getSlideGrid',
         metricsKey: 'figma.getSlideGrid',
         cb: () => {
-          const vm = e;
-          const slideGrid = this.privateSceneGraph.getSlideGrid();
-          const gridArray = vm.newArray();
+          const vm = e
+          const slideGrid = this.privateSceneGraph.getSlideGrid()
+          const gridArray = vm.newArray()
           slideGrid.forEach((row, rowIndex) => {
-            const rowArray = vm.newArray();
+            const rowArray = vm.newArray()
             row.forEach((node, colIndex) => {
-              vm.setProp(rowArray, colIndex.toString(), this.nodeFactory.createNode(node.guid, 'figma.getSlideGrid'));
-            });
-            vm.setProp(gridArray, rowIndex.toString(), rowArray);
-          });
-          vm.shallowFreezeObject(gridArray);
-          return gridArray;
+              vm.setProp(rowArray, colIndex.toString(), this.nodeFactory.createNode(node.guid, 'figma.getSlideGrid'))
+            })
+            vm.setProp(gridArray, rowIndex.toString(), rowArray)
+          })
+          vm.shallowFreezeObject(gridArray)
+          return gridArray
         },
         isAllowedInReadOnly: true,
         isAllowedInWidgetRender: false,
-        hasEditScope: false
-      });
+        hasEditScope: false,
+      })
 
       /**
        * setSlideGrid - Sets the slide grid using a 2D array of node objects with id properties.
@@ -9929,24 +10142,24 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         handle: y,
         key: 'setSlideGrid',
         metricsKey: 'figma.setSlideGrid',
-        cb: nextSlideGridHandle => {
+        cb: (nextSlideGridHandle) => {
           const nextSlideGrid = validateWithZSchema({
             vm: this.vm,
             handle: nextSlideGridHandle,
             zSchema: _$$z.array(_$$z.array(_$$z.object({
-              id: _$$z.string()
+              id: _$$z.string(),
             }))),
-            property: 'nextSlideGrid'
-          });
+            property: 'nextSlideGrid',
+          })
           this.privateSceneGraph.setSlideGrid(nextSlideGrid.map(row => row.map(cell => ({
-            guid: cell.id
-          }))));
-          return e.$$null;
+            guid: cell.id,
+          }))))
+          return e.$$null
         },
         isAllowedInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: true
-      });
+        hasEditScope: true,
+      })
     }
 
     // --- Canvas Grid API (Buzz and Slides Editors) ---
@@ -9960,23 +10173,23 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         key: 'getCanvasGrid',
         metricsKey: 'figma.getCanvasGrid',
         cb: () => {
-          const vm = e;
-          const canvasGrid = this.privateSceneGraph.getSlideGrid();
-          const gridArray = vm.newArray();
+          const vm = e
+          const canvasGrid = this.privateSceneGraph.getSlideGrid()
+          const gridArray = vm.newArray()
           canvasGrid.forEach((row, rowIndex) => {
-            const rowArray = vm.newArray();
+            const rowArray = vm.newArray()
             row.forEach((node, colIndex) => {
-              vm.setProp(rowArray, colIndex.toString(), this.nodeFactory.createNode(node.guid, 'figma.getCanvasGrid'));
-            });
-            vm.setProp(gridArray, rowIndex.toString(), rowArray);
-          });
-          vm.shallowFreezeObject(gridArray);
-          return gridArray;
+              vm.setProp(rowArray, colIndex.toString(), this.nodeFactory.createNode(node.guid, 'figma.getCanvasGrid'))
+            })
+            vm.setProp(gridArray, rowIndex.toString(), rowArray)
+          })
+          vm.shallowFreezeObject(gridArray)
+          return gridArray
         },
         isAllowedInReadOnly: true,
         isAllowedInWidgetRender: false,
-        hasEditScope: false
-      });
+        hasEditScope: false,
+      })
 
       /**
        * setCanvasGrid - Sets the canvas grid using a 2D array of node objects with id properties.
@@ -9986,22 +10199,22 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         handle: y,
         key: 'setCanvasGrid',
         metricsKey: 'figma.setCanvasGrid',
-        cb: nextCanvasGridHandle => {
+        cb: (nextCanvasGridHandle) => {
           const nextCanvasGrid = validateWithZSchema({
             vm: this.vm,
             handle: nextCanvasGridHandle,
             zSchema: FigmaSchema.CanvasGrid,
-            property: 'nextCanvasGrid'
-          });
+            property: 'nextCanvasGrid',
+          })
           this.privateSceneGraph.setSlideGrid(nextCanvasGrid.map(row => row.map(cell => ({
-            guid: cell.id
-          }))));
-          return e.$$null;
+            guid: cell.id,
+          }))))
+          return e.$$null
         },
         isAllowedInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: true
-      });
+        hasEditScope: true,
+      })
 
       /**
        * createCanvasRow - Creates a new row in the canvas grid at the specified index.
@@ -10011,28 +10224,28 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         handle: y,
         key: 'createCanvasRow',
         metricsKey: 'figma.createCanvasRow',
-        cb: canvasGridRowIndexHandle => {
+        cb: (canvasGridRowIndexHandle) => {
           const rowIndex = validateWithZSchema({
             vm: e,
             handle: canvasGridRowIndexHandle,
             zSchema: FigmaSchema.PositiveInteger.optional(),
-            property: 'canvasGridRowIndex'
-          });
-          const canvasGridManager = AppStateTsApi?.canvasGrid();
+            property: 'canvasGridRowIndex',
+          })
+          const canvasGridManager = AppStateTsApi?.canvasGrid()
           if (!canvasGridManager) {
-            throw new Error('Could not find canvas grid');
+            throw new Error('Could not find canvas grid')
           }
-          const insertIndex = rowIndex ?? canvasGridManager.canvasGridArray.getCopy().length;
-          const newRowGuid = canvasGridManager.createRow(insertIndex);
-          return this.nodeFactory.createNode(newRowGuid, 'figma.createCanvasRow');
+          const insertIndex = rowIndex ?? canvasGridManager.canvasGridArray.getCopy().length
+          const newRowGuid = canvasGridManager.createRow(insertIndex)
+          return this.nodeFactory.createNode(newRowGuid, 'figma.createCanvasRow')
         },
         isAllowedInReadOnly: false,
         isAllowedInWidgetRender: false,
-        hasEditScope: true
-      });
+        hasEditScope: true,
+      })
     }
-    e.shallowFreezeObject(y);
-    return y;
+    e.shallowFreezeObject(y)
+    return y
   }
 
   /**
@@ -10047,12 +10260,12 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
   async closePlugin(closeOptions) {
     // Prevent duplicate close events
     if (this.runningSyncEvent === 'close' || this.runningCloseEventHandler) {
-      return;
+      return
     }
-    await this.options.closePlugin(closeOptions);
+    await this.options.closePlugin(closeOptions)
     // Special handling for codegen-triggered plugins: schedule codegen refresh
     if (this.options.triggeredFrom === 'codegen') {
-      setTimeout(() => _$$c(), 0);
+      setTimeout(() => _$$c(), 0)
     }
   }
 
@@ -10062,13 +10275,13 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
    * @returns VM wrapped effect object with all variables unbound
    */
   unbindAllEffectVariables(effectCopy) {
-    const mutableEffect = processEffectWithValidation(effectCopy, undefined);
-    mutableEffect.colorVar = void 0;
-    mutableEffect.radiusVar = void 0;
-    mutableEffect.spreadVar = void 0;
-    mutableEffect.xVar = void 0;
-    mutableEffect.yVar = void 0;
-    return this.vm.deepWrap(processEffect(mutableEffect));
+    const mutableEffect = processEffectWithValidation(effectCopy, undefined)
+    mutableEffect.colorVar = void 0
+    mutableEffect.radiusVar = void 0
+    mutableEffect.spreadVar = void 0
+    mutableEffect.xVar = void 0
+    mutableEffect.yVar = void 0
+    return this.vm.deepWrap(processEffect(mutableEffect))
   }
 
   /**
@@ -10077,7 +10290,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
    * @returns True if effect is shadow type
    */
   isShadowEffect(effect) {
-    return effect.type === 'INNER_SHADOW' || effect.type === 'DROP_SHADOW';
+    return effect.type === 'INNER_SHADOW' || effect.type === 'DROP_SHADOW'
   }
 
   /**
@@ -10092,34 +10305,34 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       vm: this.vm,
       handle: fieldHandle,
       zSchema: variableDefinitions.VariableBindableShadowEffectField,
-      property: 'field'
-    });
+      property: 'field',
+    })
 
     // Validate variable type for field
-    this.validateShadowEffectVariable(variableObject, fieldName);
+    this.validateShadowEffectVariable(variableObject, fieldName)
 
     // Create variable binding based on field type
-    const variableBinding = this.createVariableBinding(variableObject);
+    const variableBinding = this.createVariableBinding(variableObject)
 
     // Apply binding to appropriate field
     switch (fieldName) {
       case 'color':
-        mutableEffect.colorVar = variableBinding;
-        break;
+        mutableEffect.colorVar = variableBinding
+        break
       case 'radius':
-        mutableEffect.radiusVar = variableBinding;
-        break;
+        mutableEffect.radiusVar = variableBinding
+        break
       case 'spread':
-        mutableEffect.spreadVar = variableBinding;
-        break;
+        mutableEffect.spreadVar = variableBinding
+        break
       case 'offsetX':
-        mutableEffect.xVar = variableBinding;
-        break;
+        mutableEffect.xVar = variableBinding
+        break
       case 'offsetY':
-        mutableEffect.yVar = variableBinding;
-        break;
+        mutableEffect.yVar = variableBinding
+        break
     }
-    return this.vm.deepWrap(processEffect(mutableEffect));
+    return this.vm.deepWrap(processEffect(mutableEffect))
   }
 
   /**
@@ -10134,17 +10347,17 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       vm: this.vm,
       handle: fieldHandle,
       zSchema: variableDefinitions.VariableBindableBlurEffectField,
-      property: 'field'
-    });
+      property: 'field',
+    })
 
     // Validate variable type
     if (!variableObject || variableObject.type !== 'VARIABLE' || variableObject.variableResolvedType !== VariableResolvedDataType.FLOAT) {
-      throw new Error(`can only bind float variables to ${fieldName}`);
+      throw new Error(`can only bind float variables to ${fieldName}`)
     }
 
     // Create and apply variable binding
-    mutableEffect.radiusVar = this.createVariableBinding(variableObject);
-    return this.vm.deepWrap(processEffect(mutableEffect));
+    mutableEffect.radiusVar = this.createVariableBinding(variableObject)
+    return this.vm.deepWrap(processEffect(mutableEffect))
   }
 
   /**
@@ -10155,17 +10368,17 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
    */
   validateShadowEffectVariable(variableObject, fieldName) {
     if (!variableObject || variableObject.type !== 'VARIABLE') {
-      throw new Error(`can only bind variables to ${fieldName}`);
+      throw new Error(`can only bind variables to ${fieldName}`)
     }
 
     // Validate color field requires color variable
     if (fieldName === 'color' && variableObject.variableResolvedType !== VariableResolvedDataType.COLOR) {
-      throw new Error(`can only bind color variables to ${fieldName}`);
+      throw new Error(`can only bind color variables to ${fieldName}`)
     }
 
     // Validate non-color fields require float variables
     if (fieldName !== 'color' && variableObject.variableResolvedType !== VariableResolvedDataType.FLOAT) {
-      throw new Error(`can only bind float variables to ${fieldName}`);
+      throw new Error(`can only bind float variables to ${fieldName}`)
     }
   }
 
@@ -10175,70 +10388,71 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
    * @returns Variable binding object with proper structure
    */
   createVariableBinding(variableObject) {
-    const resolvedDataType = variableObject.variableResolvedType === VariableResolvedDataType.COLOR ? 'COLOR' : 'FLOAT';
+    const resolvedDataType = variableObject.variableResolvedType === VariableResolvedDataType.COLOR ? 'COLOR' : 'FLOAT'
     return {
       value: {
-        alias: sD.toKiwi(variableObject.id)
+        alias: VariableIdHandler.toKiwi(variableObject.id),
       },
       dataType: 'ALIAS',
-      resolvedDataType
-    };
+      resolvedDataType,
+    }
   }
+
   static createRuntimeBridgeForWidgetReconciler(e, t) {
     if (t instanceof ScopedNoOpVm) {
       return {
         runtimeBridge: new PluginRuntimeBridge(e, t),
-        shutdownCallback: void 0
-      };
+        shutdownCallback: void 0,
+      }
     }
     let {
       vm,
-      api
+      api,
     } = createScopedPluginInstance({
       apiMode: {
-        type: 'WIDGET_RECONCILER'
+        type: 'WIDGET_RECONCILER',
       },
       pluginID: e,
       enableNativeJsx: !1,
       enableResponsiveSetHierarchyMutations: !1,
-      sceneGraph: null // Added missing required property
-    });
+      sceneGraph: null, // Added missing required property
+    })
     return {
       runtimeBridge: new PluginRuntimeBridge(e, vm),
-      shutdownCallback: () => api.closePlugin(undefined)
-    };
+      shutdownCallback: () => api.closePlugin(undefined),
+    }
   }
 }
 export function createPluginInstance(vmConfig: NoOpVm, contextOptions: PluginOptions) {
   // $$ap1 - Create new plugin instance (au class factory function)
-  return new PluginRuntime(vmConfig, contextOptions);
+  return new PluginRuntime(vmConfig, contextOptions)
 }
 async function listAllFonts() {
   // am - Get all available fonts from debug state with style information
 
-  const fonts = debugState.getState().fonts;
-  const fontList: FontInfo[] = [];
+  const fonts = debugState.getState().fonts
+  const fontList: FontInfo[] = []
 
   // Iterate through font families
   for (const familyName in fonts) {
-    const styleSet = new Set();
-    const fontFamily = fonts[familyName];
+    const styleSet = new Set()
+    const fontFamily = fonts[familyName]
 
     // Iterate through font weights
     for (const weight in fontFamily) {
-      const fontWeight = fontFamily[weight];
+      const fontWeight = fontFamily[weight]
 
       // Iterate through font styles
       for (const styleName in fontWeight.styles) {
         // Avoid duplicate styles
         if (!styleSet.has(styleName)) {
-          styleSet.add(styleName);
+          styleSet.add(styleName)
           fontList.push({
             fontName: {
               family: familyName,
-              style: styleName
-            }
-          });
+              style: styleName,
+            },
+          })
         }
       }
     }
@@ -10246,154 +10460,161 @@ async function listAllFonts() {
 
   // Sort fonts by family name first, then by style name
   fontList.sort((fontA, fontB) => {
-    if (fontA.fontName.family > fontB.fontName.family) return 1;
-    if (fontA.fontName.family < fontB.fontName.family) return -1;
-    if (fontA.fontName.style > fontB.fontName.style) return 1;
-    if (fontA.fontName.style < fontB.fontName.style) return -1;
-    return 0;
-  });
-  return fontList;
+    if (fontA.fontName.family > fontB.fontName.family)
+      return 1
+    if (fontA.fontName.family < fontB.fontName.family)
+      return -1
+    if (fontA.fontName.style > fontB.fontName.style)
+      return 1
+    if (fontA.fontName.style < fontB.fontName.style)
+      return -1
+    return 0
+  })
+  return fontList
 }
 async function createVersionSavepoint(versionTitle, versionDescription) {
   // ah - Create a version savepoint for the current file with title and optional description
 
-  const fileKey = await fullscreenValue.openFileKeyPromise();
+  const fileKey = await fullscreenValue.openFileKeyPromise()
   if (!fileKey) {
-    throw new Error('File must be open for editing');
+    throw new Error('File must be open for editing')
   }
   if (!versionTitle) {
-    throw new Error('Version title must be non-empty');
+    throw new Error('Version title must be non-empty')
   }
-  const savepoint = await maybeCreateSavepoint(fileKey, versionTitle, versionDescription, debugState.dispatch);
+  const savepoint = await maybeCreateSavepoint(fileKey, versionTitle, versionDescription, debugState.dispatch)
   if (savepoint === null) {
-    throw new Error('createSavepoint() returned null');
+    throw new Error('createSavepoint() returned null')
   }
-  return savepoint;
+  return savepoint
 }
 async function ag(nodeMap, urlText) {
   // ag - Create link preview node from URL text and return the node ID
 
-  const urlInfo = KJ(urlText);
+  const urlInfo = KJ(urlText)
   if (!urlInfo || urlInfo.isFromIFrame) {
-    throw new Error('The provided text was not a URL');
+    throw new Error('The provided text was not a URL')
   }
-  const linkPreviewResult = await _$$y(urlText, urlInfo.url, urlInfo.isFromIFrame, WJ.PLUGIN, debugState.getState());
+  const linkPreviewResult = await _$$y(urlText, urlInfo.url, urlInfo.isFromIFrame, WJ.PLUGIN, debugState.getState())
   if (linkPreviewResult.status === 'error') {
-    throw new Error(linkPreviewResult.error);
+    throw new Error(linkPreviewResult.error)
   }
   if (linkPreviewResult.nodeID && nodeMap.get(linkPreviewResult.nodeID)) {
-    return linkPreviewResult.nodeID;
+    return linkPreviewResult.nodeID
   }
-  throw new Error('Could not find the created link preview in the document');
+  throw new Error('Could not find the created link preview in the document')
 }
 async function af(collectionName, modeNames, context) {
   // af - Create or update variable collection with specified modes
 
-  const variableCollection = await context.getOrUpsertVariableCollectionAsync(collectionName);
-  return context.createNewExtendedVariableCollection(variableCollection, modeNames);
+  const variableCollection = await context.getOrUpsertVariableCollectionAsync(collectionName)
+  return context.createNewExtendedVariableCollection(variableCollection, modeNames)
 }
 async function a_(_componentKey, styleKey, permissions) {
   // a_ - Import and upsert shared style from library with proper error handling
 
-  let downloadedStyle;
-  const debugStateInstance = debugState;
-  const currentState = debugStateInstance.getState();
+  let downloadedStyle
+  const debugStateInstance = debugState
+  const currentState = debugStateInstance.getState()
 
   // Find published style in used libraries or fetch it
-  const publishedStyle = yh(styleKey, currentState.library.used__LIVEGRAPH.styles, currentState.library.openFilePublished__LIVEGRAPH.styles) || (await Ky(debugStateInstance, styleKey));
+  const publishedStyle = yh(styleKey, currentState.library.used__LIVEGRAPH.styles, currentState.library.openFilePublished__LIVEGRAPH.styles) || (await Ky(debugStateInstance, styleKey))
   if (!publishedStyle) {
-    throw new Error(`Could not find a published style with the key "${styleKey}"`);
+    throw new Error(`Could not find a published style with the key "${styleKey}"`)
   }
 
   // Check if style is already available locally
   if (Oo(publishedStyle, permissions)) {
     return {
       key: _$$n(publishedStyle.key),
-      version: IA(publishedStyle.content_hash) ?? 'INVALID'
-    };
+      version: VariableStyleId(publishedStyle.content_hash) ?? 'INVALID',
+    }
   }
 
   // Download the style from library
   try {
-    downloadedStyle = await _$$e2(debugStateInstance.dispatch, publishedStyle, publishedStyle.library_key, jE.PLUGIN_INSERT_STYLE, currentState.userFlags, currentState.fonts);
-  } catch {
-    throw new Error(`Failed to download the style with the key "${styleKey}"`);
+    downloadedStyle = await _$$e2(debugStateInstance.dispatch, publishedStyle, publishedStyle.library_key, jE.PLUGIN_INSERT_STYLE, currentState.userFlags, currentState.fonts)
+  }
+  catch {
+    throw new Error(`Failed to download the style with the key "${styleKey}"`)
   }
 
   // Upsert the style in the current scene
-  const upsertResult = permissionScopeHandler.system('upsert-shared-style-plugin', () => LibraryPubSub.getOrCreateSubscribedStyleNodeId(publishedStyle.key, publishedStyle.content_hash ?? 'INVALID', publishedStyle.library_key, downloadedStyle, SceneIdentifier.ACTIVE_SCENE));
+  const upsertResult = permissionScopeHandler.system('upsert-shared-style-plugin', () => LibraryPubSub.getOrCreateSubscribedStyleNodeId(publishedStyle.key, publishedStyle.content_hash ?? 'INVALID', publishedStyle.library_key, downloadedStyle, SceneIdentifier.ACTIVE_SCENE))
   if (upsertResult?.fileUpdateRequired) {
-    throw new Error('Can\'t insert style of a different file version');
+    throw new Error('Can\'t insert style of a different file version')
   }
 
   // Update library state
   debugStateInstance.dispatch(PB({
-    libraryKeys: [publishedStyle.library_key]
-  }));
+    libraryKeys: [publishedStyle.library_key],
+  }))
   return {
     key: _$$n(upsertResult.key),
-    version: IA(upsertResult.version)
-  };
+    version: VariableStyleId(upsertResult.version),
+  }
 }
 async function aA(componentData, permissions) {
   // aA - Import and upsert shared component from library
 
-  const debugStateInstance = debugState;
-  const currentState = debugStateInstance.getState();
-  let localNodeId = componentData.node_id;
+  const debugStateInstance = debugState
+  const currentState = debugStateInstance.getState()
+  let localNodeId = componentData.node_id
 
   // Check if component is already available locally
   if (!Oo(componentData, permissions)) {
-    let downloadedComponent;
+    let downloadedComponent
 
     // Download the component from library
     try {
-      downloadedComponent = await _$$e2(debugStateInstance.dispatch, componentData, componentData.library_key, jE.PLUGIN_INSERT_COMPONENT, currentState.userFlags, currentState.fonts);
-    } catch {
-      throw new Error(`Failed to download the component with the key "${componentData.component_key}"`);
+      downloadedComponent = await _$$e2(debugStateInstance.dispatch, componentData, componentData.library_key, jE.PLUGIN_INSERT_COMPONENT, currentState.userFlags, currentState.fonts)
+    }
+    catch {
+      throw new Error(`Failed to download the component with the key "${componentData.component_key}"`)
     }
 
     // Upsert the component in the current scene
-    const upsertResult = permissionScopeHandler.system('upsert-shared-symbol-plugin', () => LibraryPubSub.upsertSharedSymbol(componentData.component_key ?? 'INVALID', componentData.content_hash ?? 'INVALID', componentData.library_key, Confirmation.NO, downloadedComponent, SceneIdentifier.ACTIVE_SCENE));
+    const upsertResult = permissionScopeHandler.system('upsert-shared-symbol-plugin', () => LibraryPubSub.upsertSharedSymbol(componentData.component_key ?? 'INVALID', componentData.content_hash ?? 'INVALID', componentData.library_key, Confirmation.NO, downloadedComponent, SceneIdentifier.ACTIVE_SCENE))
     if (!upsertResult) {
-      throw new Error('Couldn\'t insert component');
+      throw new Error('Couldn\'t insert component')
     }
     if (upsertResult.fileUpdateRequired) {
-      throw new Error('Can\'t insert component of a different file version');
+      throw new Error('Can\'t insert component of a different file version')
     }
-    localNodeId = upsertResult.localGUID;
+    localNodeId = upsertResult.localGUID
   }
-  return localNodeId;
+  return localNodeId
 }
 async function ay(stateGroupData, permissions) {
   // ay - Import and upsert shared state group from library
 
-  const debugStateInstance = debugState;
-  const currentState = debugStateInstance.getState();
-  let localNodeId = stateGroupData.node_id;
+  const debugStateInstance = debugState
+  const currentState = debugStateInstance.getState()
+  let localNodeId = stateGroupData.node_id
 
   // Check if state group is already available locally
   if (!Oo(stateGroupData, permissions)) {
-    let downloadedStateGroup;
+    let downloadedStateGroup
 
     // Download the state group from library
     try {
-      downloadedStateGroup = await _$$e2(debugStateInstance.dispatch, stateGroupData, stateGroupData.library_key, jE.PLUGIN_INSERT_STATE_GROUP, currentState.userFlags, currentState.fonts);
-    } catch {
-      throw new Error(`Failed to download the component set with the key "${stateGroupData.key}"`);
+      downloadedStateGroup = await _$$e2(debugStateInstance.dispatch, stateGroupData, stateGroupData.library_key, jE.PLUGIN_INSERT_STATE_GROUP, currentState.userFlags, currentState.fonts)
+    }
+    catch {
+      throw new Error(`Failed to download the component set with the key "${stateGroupData.key}"`)
     }
 
     // Upsert the state group in the current scene
-    const upsertResult = permissionScopeHandler.system('upsert-shared-state-group-plugin', () => LibraryPubSub.upsertSharedStateGroup(stateGroupData.key, stateGroupData.version, stateGroupData.library_key, Confirmation.NO, downloadedStateGroup, SceneIdentifier.ACTIVE_SCENE));
+    const upsertResult = permissionScopeHandler.system('upsert-shared-state-group-plugin', () => LibraryPubSub.upsertSharedStateGroup(stateGroupData.key, stateGroupData.version, stateGroupData.library_key, Confirmation.NO, downloadedStateGroup, SceneIdentifier.ACTIVE_SCENE))
     if (!upsertResult) {
-      throw new Error('Couldn\'t insert state group');
+      throw new Error('Couldn\'t insert state group')
     }
     if (upsertResult.fileUpdateRequired) {
-      throw new Error('Can\'t insert state group of a different file version');
+      throw new Error('Can\'t insert state group of a different file version')
     }
-    localNodeId = upsertResult.localGUID;
+    localNodeId = upsertResult.localGUID
   }
-  return localNodeId;
+  return localNodeId
 }
 /**
  * Import component by key with comprehensive state group and library handling
@@ -10404,46 +10625,46 @@ async function ay(stateGroupData, permissions) {
  * @throws Error if component cannot be found or imported
  */
 export async function $$ab4(componentKey, sceneGraphInstance = getSceneGraphInstance()) {
-  const debugStateInstance = debugState;
-  const currentState = debugStateInstance.getState();
-  const currentFile = d1(currentState);
+  const debugStateInstance = debugState
+  const currentState = debugStateInstance.getState()
+  const currentFile = d1(currentState)
   if (!currentFile) {
-    throw new Error('Missing a current file');
+    throw new Error('Missing a current file')
   }
 
   // Resolve component key (handle moved library items)
-  const resolvedComponentKey = currentState.library.movedLibraryItems.subscribed[componentKey] || componentKey;
+  const resolvedComponentKey = currentState.library.movedLibraryItems.subscribed[componentKey] || componentKey
 
   // Search for published component and its parent state group
-  const componentSearchResult = await searchForPublishedComponent(currentState, resolvedComponentKey);
+  const componentSearchResult = await searchForPublishedComponent(currentState, resolvedComponentKey)
 
   // Handle unpublished component validation
   if (getFeatureFlags().ds_block_unpublished_symbol_reqs && !componentSearchResult.component) {
-    validateUnpublishedComponent(currentState, componentKey);
+    validateUnpublishedComponent(currentState, componentKey)
   }
 
   // Attempt to fetch component if not found locally
-  let finalComponent: any = componentSearchResult.component;
-  let parentStateGroup = componentSearchResult.parentStateGroup;
+  let finalComponent: any = componentSearchResult.component
+  let parentStateGroup = componentSearchResult.parentStateGroup
   if (!finalComponent) {
-    const fetchResult = await u7(debugStateInstance, resolvedComponentKey, 'importComponentByKeyAsync');
-    finalComponent = fetchResult.component;
-    parentStateGroup = fetchResult.parentStateGroup;
+    const fetchResult = await u7(debugStateInstance, resolvedComponentKey, 'importComponentByKeyAsync')
+    finalComponent = fetchResult.component
+    parentStateGroup = fetchResult.parentStateGroup
     if (!finalComponent) {
-      throw new Error(`Could not find a published component with the key "${componentKey}"`);
+      throw new Error(`Could not find a published component with the key "${componentKey}"`)
     }
   }
 
   // Handle direct component import (no state group)
   if (!isComponentInStateGroup(finalComponent, parentStateGroup)) {
     debugStateInstance.dispatch(PB({
-      libraryKeys: [finalComponent?.library_key || 'unknown'] // Safe property access
-    }));
-    return await aA(finalComponent, currentFile.key);
+      libraryKeys: [finalComponent?.library_key || 'unknown'], // Safe property access
+    }))
+    return await aA(finalComponent, currentFile.key)
   }
 
   // Handle component within state group
-  return await importComponentFromStateGroup(parentStateGroup, finalComponent, sceneGraphInstance, componentKey);
+  return await importComponentFromStateGroup(parentStateGroup, finalComponent, sceneGraphInstance, componentKey)
 }
 
 /**
@@ -10453,23 +10674,23 @@ export async function $$ab4(componentKey, sceneGraphInstance = getSceneGraphInst
  * @returns Object containing found component and parent state group
  */
 export function searchForPublishedComponent(currentState, componentKey) {
-  let foundComponent = null;
-  let parentStateGroup = null;
+  let foundComponent = null
+  let parentStateGroup = null
   Qb(currentState.library.publishedByLibraryKey.components, (libraryKey, version, _componentId, componentData) => {
     if (componentData.component_key === componentKey) {
-      foundComponent = componentData;
+      foundComponent = componentData
 
       // Check for containing state group
-      const stateGroupNodeId = componentData?.containing_frame?.containingStateGroup?.nodeId;
+      const stateGroupNodeId = componentData?.containing_frame?.containingStateGroup?.nodeId
       if (stateGroupNodeId) {
-        parentStateGroup = currentState.library.publishedByLibraryKey.stateGroups[libraryKey]?.[version]?.[stateGroupNodeId] ?? null;
+        parentStateGroup = currentState.library.publishedByLibraryKey.stateGroups[libraryKey]?.[version]?.[stateGroupNodeId] ?? null
       }
     }
-  });
+  })
   return {
     component: foundComponent,
-    parentStateGroup
-  };
+    parentStateGroup,
+  }
 }
 
 /**
@@ -10480,9 +10701,9 @@ export function searchForPublishedComponent(currentState, componentKey) {
  */
 export function validateUnpublishedComponent(currentState, componentKey) {
   for (const localComponent of Object.values(currentState.library.local.components)) {
-    const component = localComponent as unknown as any; // Type assertion for unknown component
+    const component = localComponent as unknown as any // Type assertion for unknown component
     if (!component?.component_key && SceneGraphHelpers.getAssetKeyForPublish(component?.node_id) === componentKey) {
-      throw new Error(`Cannot import component with key "${componentKey}" since it is unpublished`);
+      throw new Error(`Cannot import component with key "${componentKey}" since it is unpublished`)
     }
   }
 }
@@ -10494,7 +10715,7 @@ export function validateUnpublishedComponent(currentState, componentKey) {
  * @returns True if component is in a state group
  */
 export function isComponentInStateGroup(component, stateGroup) {
-  return !!(component.containing_frame?.containingStateGroup?.nodeId && stateGroup?.key);
+  return !!(component.containing_frame?.containingStateGroup?.nodeId && stateGroup?.key)
 }
 
 /**
@@ -10507,20 +10728,20 @@ export function isComponentInStateGroup(component, stateGroup) {
  * @throws Error if component cannot be found in state group
  */
 async function importComponentFromStateGroup(stateGroup, component, sceneGraphInstance, originalComponentKey) {
-  const stateGroupGuid = await $$av5(stateGroup.key);
-  const stateGroupNode = sceneGraphInstance.get(stateGroupGuid);
+  const stateGroupGuid = await $$av5(stateGroup.key)
+  const stateGroupNode = sceneGraphInstance.get(stateGroupGuid)
 
   // Search for component within state group children
   for (const childGuid of stateGroupNode?.reversedChildrenGuids || []) {
-    const childNode = sceneGraphInstance.get(childGuid);
+    const childNode = sceneGraphInstance.get(childGuid)
     if (childNode) {
-      const childComponentKey = childNode.componentKey ?? SceneGraphHelpers.getAssetKeyForPublish(childNode.guid);
+      const childComponentKey = childNode.componentKey ?? SceneGraphHelpers.getAssetKeyForPublish(childNode.guid)
       if (childComponentKey === component.component_key) {
-        return childNode.guid;
+        return childNode.guid
       }
     }
   }
-  throw new Error(`Could not find a published component set with the key "${originalComponentKey}"`);
+  throw new Error(`Could not find a published component set with the key "${originalComponentKey}"`)
 }
 /**
  * Import component set by key with comprehensive state group handling
@@ -10530,33 +10751,33 @@ async function importComponentFromStateGroup(stateGroup, component, sceneGraphIn
  * @throws Error if component set cannot be found or imported
  */
 export async function $$av5(componentSetKey) {
-  const currentState = debugState.getState();
-  const currentFile = d1(currentState);
+  const currentState = debugState.getState()
+  const currentFile = d1(currentState)
   if (!currentFile) {
-    throw new Error('Missing a current file');
+    throw new Error('Missing a current file')
   }
 
   // Resolve component set key (handle moved library items)
-  const resolvedComponentSetKey = currentState.library.movedLibraryItems.subscribed[componentSetKey] || componentSetKey;
+  const resolvedComponentSetKey = currentState.library.movedLibraryItems.subscribed[componentSetKey] || componentSetKey
 
   // Search for published state group in library
-  let foundStateGroup: any = searchForPublishedStateGroup(currentState, resolvedComponentSetKey);
+  let foundStateGroup: any = searchForPublishedStateGroup(currentState, resolvedComponentSetKey)
 
   // Attempt to fetch state group if not found locally
   if (!foundStateGroup) {
-    foundStateGroup = await zn(debugState, resolvedComponentSetKey);
+    foundStateGroup = await zn(debugState, resolvedComponentSetKey)
     if (!foundStateGroup) {
-      throw new Error(`Could not find a published component set with the key "${componentSetKey}"`);
+      throw new Error(`Could not find a published component set with the key "${componentSetKey}"`)
     }
   }
 
   // Dispatch library loading action
   debugState.dispatch(PB({
-    libraryKeys: [foundStateGroup.library_key]
-  }));
+    libraryKeys: [foundStateGroup.library_key],
+  }))
 
   // Import the state group
-  return await ay(foundStateGroup, currentFile.key);
+  return await ay(foundStateGroup, currentFile.key)
 }
 
 /**
@@ -10566,13 +10787,13 @@ export async function $$av5(componentSetKey) {
  * @returns Found state group data or null
  */
 export function searchForPublishedStateGroup(currentState, stateGroupKey) {
-  let foundStateGroup = null;
+  let foundStateGroup = null
   Qb(currentState.library.publishedByLibraryKey.stateGroups, (_libraryKey, _version, _stateGroupId, stateGroupData) => {
     if (stateGroupData.key === stateGroupKey) {
-      foundStateGroup = stateGroupData;
+      foundStateGroup = stateGroupData
     }
-  });
-  return foundStateGroup;
+  })
+  return foundStateGroup
 }
 /**
  * aI - Transform parameter values object to plain key-value mapping
@@ -10580,18 +10801,18 @@ export function searchForPublishedStateGroup(currentState, stateGroupKey) {
  * @returns Object mapping keys to data or name
  */
 export function transformParameterValues(sourceObject: Record<string, {
-  name?: string;
-  data?: any;
+  name?: string
+  data?: any
 }>): Record<string, any> {
-  const transformedObject: Record<string, any> = {};
+  const transformedObject: Record<string, any> = {}
   for (const propertyKey in sourceObject) {
-    const propertyValue = sourceObject[propertyKey];
+    const propertyValue = sourceObject[propertyKey]
     if (propertyValue) {
       // Use data property if available, otherwise fallback to name property
-      transformedObject[propertyKey] = propertyValue.data !== undefined ? propertyValue.data : propertyValue.name;
+      transformedObject[propertyKey] = propertyValue.data !== undefined ? propertyValue.data : propertyValue.name
     }
   }
-  return transformedObject;
+  return transformedObject
 }
 
 /**
@@ -10599,9 +10820,9 @@ export function transformParameterValues(sourceObject: Record<string, {
  * Original: $$aE2
  */
 export function createDefaultPluginOptions() {
-  const state = debugState.getState();
+  const state = debugState.getState()
   return {
-    stats: new _$$P2(),
+    stats: new PluginApiMetrics(),
     name: '',
     command: '',
     pluginID: '',
@@ -10610,9 +10831,9 @@ export function createDefaultPluginOptions() {
     userID: state.user?.id || '',
     titleIconURL: '',
     openFileKey: state.openFile?.key || '',
-    apiVersion: pS,
+    apiVersion: '1.0.0',
     apiMode: {
-      type: 'GLOBAL_API'
+      type: 'GLOBAL_API',
     },
     enableProposedApi: true,
     enablePrivatePluginApi: true,
@@ -10626,8 +10847,8 @@ export function createDefaultPluginOptions() {
     incrementalSafeApi: false,
     enableNativeJsx: false,
     enableResponsiveSetHierarchyMutations: false,
-    isPluginExemptFromPluginDataLimits: false
-  };
+    isPluginExemptFromPluginDataLimits: false,
+  }
 }
 
 /**
@@ -10639,19 +10860,19 @@ export function createScopedPluginInstance({
   pluginID,
   enableNativeJsx,
   enableResponsiveSetHierarchyMutations,
-  sceneGraph
+  sceneGraph,
 }: {
-  apiMode: any;
-  pluginID: string;
-  enableNativeJsx?: boolean;
-  enableResponsiveSetHierarchyMutations?: boolean;
-  sceneGraph?: TSSceneGraph;
+  apiMode: any
+  pluginID: string
+  enableNativeJsx?: boolean
+  enableResponsiveSetHierarchyMutations?: boolean
+  sceneGraph?: TSSceneGraph
 }) {
   const {
     addShutdownAction,
     closePlugin,
-    noOpVm
-  } = createPluginContext();
+    noOpVm,
+  } = createPluginContext()
   const pluginInstance = createPluginInstance(noOpVm, {
     ...createDefaultPluginOptions(),
     apiMode,
@@ -10660,22 +10881,22 @@ export function createScopedPluginInstance({
     addShutdownAction,
     enableNativeJsx: enableNativeJsx ?? false,
     enableResponsiveSetHierarchyMutations: enableResponsiveSetHierarchyMutations ?? false,
-    sceneGraph
-  });
+    sceneGraph,
+  })
   return {
     vm: noOpVm,
-    api: pluginInstance
-  };
+    api: pluginInstance,
+  }
 }
 export function aS(permissionName, options: any = {}) {
   // aS - Generate permission error message with appropriate documentation link
 
-  const documentationUrl = options?.isWidget ? 'https://www.figma.com/widget-docs/widget-manifest/#permissions' : 'https://www.figma.com/plugin-docs/manifest/#permissions';
-  return `"${permissionName}" permission not specified in manifest.json. Add the following to your manifest.json: "permissions": ["${permissionName}"]. See ${documentationUrl} for more details.`;
+  const documentationUrl = options?.isWidget ? 'https://www.figma.com/widget-docs/widget-manifest/#permissions' : 'https://www.figma.com/plugin-docs/manifest/#permissions'
+  return `"${permissionName}" permission not specified in manifest.json. Add the following to your manifest.json: "permissions": ["${permissionName}"]. See ${documentationUrl} for more details.`
 }
-export const _T = defineAlertFunction;
-export const K2 = createPluginInstance;
-export const _$ = createDefaultPluginOptions;
-export const eR = createScopedPluginInstance;
-export const $C = $$ab4;
-export const $f = $$av5;
+export const _T = defineAlertFunction
+export const K2 = createPluginInstance
+export const _$ = createDefaultPluginOptions
+export const eR = createScopedPluginInstance
+export const $C = $$ab4
+export const $f = $$av5

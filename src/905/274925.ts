@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { n7 } from "../905/926523";
 import { GH, VP } from "../905/18797";
 import { aP } from "../figma_app/10554";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 var $$n0;
 (e => {
   (e => {
@@ -19,7 +19,7 @@ var $$n0;
     let t = useDispatch();
     let i = useSelector(e => e.authedProfilesById);
     let n = useSelector(e => e.loadingState);
-    let c = iZ();
+    let c = selectCurrentUser();
     let [u, p] = useState(() => 0 === e.initialStep ? Object.values(i).some(e => e.associated_users?.every(e => e.user_id !== c?.id)) ? 3 : 2 : 1 === e.initialStep ? e.publisher?.profile_created ? 4 : 6 : e.initialStep);
     let [m, h] = useState();
     let [g, f] = useState();

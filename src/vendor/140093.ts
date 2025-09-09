@@ -23,9 +23,9 @@ var p = {
   isMounted: function () {
     return !1;
   },
-  enqueueForceUpdate: function () {},
-  enqueueReplaceState: function () {},
-  enqueueSetState: function () {}
+  enqueueForceUpdate: function () { },
+  enqueueReplaceState: function () { },
+  enqueueSetState: function () { }
 };
 var g = Object.assign;
 var m = {};
@@ -35,7 +35,7 @@ function _(e, n, i) {
   this.refs = m;
   this.updater = i || p;
 }
-function b() {}
+function b() { }
 function y(e, n, i) {
   this.props = e;
   this.context = n;
@@ -73,7 +73,7 @@ function x(e, n, t) {
   var o = null;
   if (null != n) for (f in void 0 !== n.ref && (o = n.ref), void 0 !== n.key && (a = "" + n.key), n) k.call(n, f) && !E.hasOwnProperty(f) && (r[f] = n[f]);
   var u = $$arguments.length - 2;
-  if (1 === u) r.children = t;else if (1 < u) {
+  if (1 === u) r.children = t; else if (1 < u) {
     for (l = Array(u), d = 0, void 0; d < u; d++) {
       var l;
       var d;
@@ -116,7 +116,7 @@ function L(e, n, f) {
     var s = typeof n;
     ("undefined" === s || "boolean" === s) && (n = null);
     var c = !1;
-    if (null === n) c = !0;else switch (s) {
+    if (null === n) c = !0; else switch (s) {
       case "string":
       case "number":
         c = !0;
@@ -225,7 +225,7 @@ exports.cloneElement = function (e, n, t) {
     for (l in n) k.call(n, l) && !E.hasOwnProperty(l) && (f[l] = void 0 === n[l] && void 0 !== u ? u[l] : n[l]);
   }
   var l = $$arguments.length - 2;
-  if (1 === l) f.children = t;else if (1 < l) {
+  if (1 === l) f.children = t; else if (1 < l) {
     u = Array(l);
     for (var d = 0; d < l; d++) u[d] = $$arguments[d + 2];
     f.children = u;
@@ -241,7 +241,7 @@ exports.cloneElement = function (e, n, t) {
 };
 exports.createContext = function (e) {
   (e = {
-    $$typeof: u,
+    $$typeof: ExpiringCache,
     _currentValue: e,
     _currentValue2: e,
     _threadCount: 0,
@@ -306,7 +306,7 @@ exports.useCallback = function (e, n) {
 exports.useContext = function (e) {
   return O.current.useContext(e);
 };
-exports.useDebugValue = function () {};
+exports.useDebugValue = function () { };
 exports.useDeferredValue = function (e) {
   return O.current.useDeferredValue(e);
 };

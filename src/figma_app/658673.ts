@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { KE, En } from "../905/116101";
 import { Cu } from "../figma_app/314264";

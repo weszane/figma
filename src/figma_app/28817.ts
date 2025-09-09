@@ -1,573 +1,929 @@
-import { ConnectionAttemptTypes, PriorityLevels, CodedError, DEFAULT_PRIORITY } from "../905/957591";
-import { A } from "../905/604870";
-import { throwAsyncIf, delayedTryCatch, delay, ExponentialBackoff } from "../905/419236";
-import { b } from "../905/205893";
-import { A as _$$A } from "../905/47662";
-import { A as _$$A2 } from "../vendor/682394";
-import { J } from "../905/679168";
-import { Q } from "../905/141913";
-import { Ay as _$$Ay } from "../905/795642";
-var $$p1 = (e => (e[e.CONNECTED = 0] = "CONNECTED", e[e.DISCONNECTED = 1] = "DISCONNECTED", e[e.RECONNECTING = 2] = "RECONNECTING", e))($$p1 || {});
-var _ = (e => (e.SHED_LOAD = "shed-load", e.VIEW_ERRORS = "view-errors", e))(_ || {});
-export class $$h2 extends Error {}
-export class $$m0 {
-  constructor(e, t, r, n, a = {}, s, l, d, c) {
-    this.viewRegistry = t;
-    this.uriParams = r;
-    this.clientOptions = a;
-    this.allowedPreloadedViews = d;
+import type { ViewRegistry } from '../905/663269'
+import type { Fn } from '../../types/global'
+import { v4 as uuidv4 } from 'uuid'
+import { ClientConnection } from '../905/47662'
+import { SyncTransaction } from '../905/141913'
+import { EventEmitter } from '../905/205893'
+import { delay, delayedTryCatch, ExponentialBackoff, throwAsyncIf } from '../905/419236'
+import { MainSessionStore } from '../905/604870'
+import { serializeArgs } from '../905/679168'
+import { QueryNode } from '../905/795642'
+import { CodedError, ConnectionAttemptTypes, DEFAULT_PRIORITY, PriorityLevels } from '../905/957591'
+
+/**
+ * ConnectionState enum (Dj)
+ */
+export enum ConnectionState {
+  CONNECTED = 0,
+  DISCONNECTED = 1,
+  RECONNECTING = 2,
+}
+
+/**
+ * SubscriptionErrorType enum (_)
+ */
+export enum SubscriptionErrorType {
+  SHED_LOAD = 'shed-load',
+  VIEW_ERRORS = 'view-errors',
+}
+
+/**
+ * Custom error for optimistic mutation failures (nn)
+ */
+export class OptimisticMutationError extends Error {}
+
+/**
+ * FigmaAppClient (Ay)
+ * Handles view subscriptions, optimistic mutations, and connection management.
+ */
+export class FigmaAppClient {
+  /** Authentication arguments */
+  authArgs: { userId: string, anonymousUserId?: string, sessionId?: string, anonUserId?: string } = { userId: '', anonymousUserId: '' }
+  /** Transaction id counter */
+  transactionId = 1
+  /** Debugging delay for sync */
+  syncDelayForDebugging = 0
+  /** Map of sync requests */
+  syncRequests = new Map<number, SyncTransaction>()
+  /** Set of pending global optimistic updates */
+  pendingGlobalOptimisticUpdates = new Set<number>()
+  /** Callbacks for optimistic update resolution */
+  globalOptimisticUpdateResolutionCallbacks: Array<() => void> = []
+  /** Main session store */
+  session: MainSessionStore
+  /** Client connection */
+  connection: ClientConnection
+  /** Event emitter */
+  emitter = new EventEmitter()
+  /** Set of health listeners */
+  healthListeners = new Set<Fn>()
+  /** List of pending optimistic mutations */
+  pendingOptimisticMutationList: any[] = []
+  /** List of pending mutations */
+  pendingMutationList: {[key:string]: any}[] = []
+  /** Last close event */
+  lastCloseEvent: any = void 0
+  /** Last close timestamp */
+  lastCloseTs: number | undefined = void 0
+  /** Preloaded views */
+  preloadedViews: any[] = []
+  /** Arguments for preloaded views */
+  preloadedViewArgs: any[] = []
+  /** Keys for preloaded views */
+  preloadViewKeys = new Set<string>()
+  /** Messages for mismatched preloads */
+  mismatchedPreloadMsgs: any[] = []
+  /** Subscription retries */
+  subscriptionRetries = new Map<string, { backoff: ExponentialBackoff, retryTimer?: NodeJS.Timeout | number | null }>()
+  /** Resubscribe timeouts */
+  resubscribeTimeouts = new Map<string, NodeJS.Timeout | number>()
+  viewRegistry: ViewRegistry
+  uriParams: {
+    preloadedViews: Record<string, { hash: string, args: Record<string, any> }>
+  }
+
+  clientOptions: any
+  allowedPreloadedViews: any[] | undefined
+  /**
+   * Constructor for FigmaAppClient (original: $$m0)
+   */
+  constructor(
+    e: any,
+    viewRegistry: any,
+    uriParams: any,
+    n: any,
+    clientOptions: any = {},
+    s?: any,
+    l?: any,
+    allowedPreloadedViews?: any,
+    c?: any,
+  ) {
+    this.viewRegistry = viewRegistry
+    this.uriParams = uriParams
+    this.clientOptions = clientOptions
+    this.allowedPreloadedViews = allowedPreloadedViews
     this.authArgs = {
-      userId: r.userId,
-      anonymousUserId: r.anonUserId
-    };
-    this.connection = new _$$A(r, n, this.authArgs, this.emitter, a, s, l);
-    this.connection.addObserver(this);
-    this.session = new A(this.authArgs, e, t, this.emitter, (e, t, r) => {
-      this.requestPaginationChange(e, t, r);
-    }, () => this.connection.isInitial(), e => {
-      this.clientOptions.retryErroredViewSubscriptions && this.retrySubscription(e, "view-errors");
-    }, e => {
-      let t = this.subscriptionRetries.get(e);
-      return t ? (clearTimeout(t.retryTimer), this.subscriptionRetries.$$delete(e), t.backoff.attemptsSoFar()) : 0;
-    }, c, a.shouldBubbleUpNonNullableResultErrors, a.errorsLoggedForAnalyticsFraction, a.useUnitTestObjectStore);
-    this.addEventListener(this.healthListener.bind(this));
-    this.registerPreloadedViews();
+      userId: uriParams.userId,
+      anonymousUserId: uriParams.anonUserId,
+    }
+    this.connection = new ClientConnection(uriParams, n, this.authArgs, this.emitter, clientOptions, s, l)
+    this.connection.addObserver(this)
+    this.session = new MainSessionStore(
+      this.authArgs,
+      e,
+      viewRegistry,
+      this.emitter,
+      (e: any, t: any, r: any) => this.requestPaginationChange(e, t, r),
+      () => this.connection.isInitial(),
+      (e: any) => {
+        this.clientOptions.retryErroredViewSubscriptions && this.retrySubscription(e, SubscriptionErrorType.VIEW_ERRORS)
+      },
+      (e: any) => {
+        let t = this.subscriptionRetries.get(e)
+        return t ? (clearTimeout(t.retryTimer!), this.subscriptionRetries.delete(e), t.backoff.attemptsSoFar()) : 0
+      },
+      c,
+      clientOptions.shouldBubbleUpNonNullableResultErrors,
+      clientOptions.errorsLoggedForAnalyticsFraction,
+      clientOptions.useUnitTestObjectStore,
+    )
+    this.addEventListener(this.healthListener.bind(this))
+    this.registerPreloadedViews()
   }
-  authArgs;
-  transactionId = 1;
-  syncDelayForDebugging = 0;
-  syncRequests = new Map();
-  pendingGlobalOptimisticUpdates = new Set();
-  globalOptimisticUpdateResolutionCallbacks = [];
-  session;
-  connection;
-  emitter = new b();
-  healthListeners = new Set();
-  pendingOptimisticMutationList = [];
-  pendingMutationList = [];
-  lastCloseEvent = void 0;
-  lastCloseTs = void 0;
-  preloadedViews = [];
-  preloadedViewArgs = [];
-  preloadViewKeys = new Set();
-  mismatchedPreloadMsgs = [];
-  subscriptionRetries = new Map();
-  resubscribeTimeouts = new Map();
+
+  /** Add event listener */
+  addEventListener(listener: Fn) {
+    return this.emitter.addListener(listener)
+  }
+
+  /** Remove event listener */
+  removeEventListener(listener: Fn) {
+    return this.emitter.removeListener(listener)
+  }
+
+  /** Add health listener */
+  addHealthListener(listener: Fn) {
+    this.healthListeners.add(listener)
+    return () => this.removeHealthListener(listener)
+  }
+
+  /** Remove health listener */
+  removeHealthListener(listener: Fn) {
+    this.healthListeners.delete(listener)
+  }
+
+  /** Cleanup resources */
   cleanup() {
-    this.connection.cleanup();
+    this.connection.cleanup()
   }
+
+  /** Connect to server */
   async connect() {
-    await this.connection.connect();
+    await this.connection.connect()
   }
+
+  /** Close connection */
   async close() {
-    await this.connection.closeWithoutReconnecting();
+    await this.connection.closeWithoutReconnecting()
   }
+
+  /** Get user id */
   get userId() {
-    return this.authArgs.userId;
+    return this.authArgs.userId
   }
-  addEventListener(e) {
-    return this.emitter.addListener(e);
+
+  /** Set optional missing for view */
+  setOptionalMissingForView(view: any, value: any) {
+    this.session.setOptionalMissingForView(view, value)
   }
-  removeEventListener(e) {
-    return this.emitter.removeListener(e);
+
+  /** Unset optional missing for view */
+  unsetOptionalMissingForView(view: any) {
+    this.session.unsetOptionalMissingForView(view)
   }
-  setOptionalMissingForView(e, t) {
-    this.session.setOptionalMissingForView(e, t);
-  }
-  unsetOptionalMissingForView(e) {
-    this.session.unsetOptionalMissingForView(e);
-  }
-  healthListener(e) {
-    if ("CONNECTION_STATE" === e.type) {
-      let t = this.getHealthStatusForConnectionState(e.state);
-      for (let e of this.healthListeners) e(t);
+
+  /** Health listener callback */
+  healthListener(event: any) {
+    if (event.type === 'CONNECTION_STATE') {
+      let status = this.getHealthStatusForConnectionState(event.state)
+      for (let listener of this.healthListeners) listener(status)
     }
   }
+
+  /** Get health status */
   getHealthStatus() {
-    return this.getHealthStatusForConnectionState(this.connection.getState());
+    return this.getHealthStatusForConnectionState(this.connection.getState())
   }
-  getHealthStatusForConnectionState(e) {
-    return "connected" === e.type ? 0 : "connecting" === e.type ? 2 : 1;
+
+  /** Get health status for connection state */
+  getHealthStatusForConnectionState(state: any) {
+    return state.type === 'connected' ? 0 : state.type === 'connecting' ? 2 : 1
   }
-  addHealthListener(e) {
-    this.healthListeners.add(e);
-    return () => this.removeHealthListener(e);
-  }
-  removeHealthListener(e) {
-    this.healthListeners.$$delete(e);
-  }
+
+  /** Register preloaded views */
   registerPreloadedViews() {
-    for (let [e, t] of Object.entries(this.uriParams.preloadedViews)) {
-      if (!this.viewRegistry.get(e)) continue;
-      let r = this.allowedPreloadedViews?.find(t => t._name === e);
-      r && (t.hash === r._hash || "development" === t.hash) ? (this.preloadedViews.push(r), this.preloadedViewArgs.push(t.args), this.session.subscribe(r, t.args, () => {}), this.preloadViewKeys.add(J(e, t.args))) : this.mismatchedPreloadMsgs.push({
-        messageType: "unsubscribe",
-        viewName: e,
-        args: t.args
-      });
-    }
-  }
-  emitInitialEvents() {
-    for (let e = 0; e < this.preloadedViews.length; e++) {
-      let t = this.preloadedViews[e];
-      let r = this.preloadedViewArgs[e];
-      let i = this.getViewPriority(t, ConnectionAttemptTypes.Initial);
-      this.emitter.emit({
-        type: "SUBSCRIBE_VIEW_CLIENT",
-        view: t,
-        args: r,
-        priority: i,
-        loadType: ConnectionAttemptTypes.Initial
-      });
-      this.emitter.emit({
-        type: "SUBSCRIBE_VIEW_SERVER",
-        view: t,
-        args: r,
-        priority: i,
-        loadType: ConnectionAttemptTypes.Initial
-      });
-    }
-  }
-  sendExistingSubscriptions() {
-    for (let [e, t] of this.resubscribeTimeouts) clearTimeout(t);
-    if (this.resubscribeTimeouts.clear(), this.connection.isInitial()) for (let e of this.mismatchedPreloadMsgs) this.connection.send(e);
-    for (let {
-      viewRef,
-      args,
-      traceId,
-      status,
-      viewDef
-    } of (this.session.startReconnectionStateForPaginationQueries(), this.session.uniqueSubscriptions())) {
-      let s = J(viewDef.name, args);
-      if (this.connection.isInitial() && this.preloadViewKeys.has(s)) continue;
-      let o = this.session.getViewLoadType(s);
-      if (this.clientOptions.shouldSplayLoadedViews && !this.connection.isInitial() && this.lastCloseTs && performance.now() - this.lastCloseTs < 3e4) {
-        let s = J(viewDef.name, args);
-        let l = () => {
-          if (!this.connection.isConnected() || !this.session.hasActiveSubscriptions(viewDef.name, args)) return;
-          let n = this.subscriptionRetries.get(s);
-          n?.retryTimer || this.requestSubscription(viewRef, args, o, traceId);
-        };
-        if ("loaded" !== status) l();else {
-          let e = function (e) {
-            switch (e) {
-              case PriorityLevels.P0:
-                return 0;
-              case PriorityLevels.P1:
-                return 5e3 * Math.random();
-              case PriorityLevels.P2:
-                return 2e4 * Math.random() + 1e3;
-              default:
-                return 6e4 * Math.random() + 1e3;
-            }
-          }(viewDef.getPriority(ConnectionAttemptTypes.Initial));
-          0 === e ? l() : this.resubscribeTimeouts.set(s, setTimeout(l, e));
-        }
-      } else this.requestSubscription(viewRef, args, o, traceId);
-    }
-  }
-  handleMessage(e) {
-    switch (e.messageType) {
-      case "authSuccess":
-        if (this.authArgs.sessionId = e.sessionId, this.authArgs.anonymousUserId = e.anonymousUserId, !this.connection.isAuthenticated()) {
-          throwAsyncIf(!1, "Expected connection to be in authenticated state");
-          break;
-        }
-        for (let e of this.syncRequests.values()) this.requestSync(e);
-        break;
-      case "pendingMutations":
-        this.hasUnresolvedGlobalOptimisticUpdates() ? (this.globalOptimisticUpdateResolutionCallbacks.push(() => {
-          this.session.applyMutations(e.mutations);
-        }), this.pendingMutationList.push(e.mutations), this.session.resolvePendingServerIdList(e.mutations)) : this.session.applyMutations(e.mutations);
-        break;
-      case "syncFail":
-        let t = this.syncRequests.get(e.transactionId);
-        if (t) {
-          let r = t?.getRetryAfterMs();
-          if (!r) {
-            this.handleAfterOptimisticUpdateResolved(e.transactionId);
-            return;
-          }
-          throwAsyncIf(!t.retryTimeout, "Already scheduled retry for sync request.");
-          t.retryNumber++;
-          t.retryTimeout = setTimeout(() => {
-            t.retryTimeout = null;
-            this.requestSync(t);
-          }, r);
-        } else {
-          throwAsyncIf(!1, "Received syncFail for unknown sync request");
-          this.handleAfterOptimisticUpdateResolved(e.transactionId);
-        }
-        break;
-      case "synced":
-        let r = this.syncRequests.get(e.transactionId);
-        r && (r.successCallback(), throwAsyncIf(!r.retryTimeout, "Sync request completed successfully while having a retry scheduled. This should never happen."));
-        break;
-      case "viewLoaded":
-        let i = this.getViewResultByViewNameAndArgs(e.viewName, e.args);
-        this.emitEvent({
-          type: "DONE",
-          viewName: e.viewName,
-          args: e.args,
-          clientStatus: i?.status
-        });
-        break;
-      case "viewSubscriptionFailed":
-        "shed-load" === e.errorCode ? (this.subscriptionRetries.has(e.liveViewKey) || this.reportSubscriptionError(e.liveViewKey, e.errorCode), this.retrySubscription(e.liveViewKey, "shed-load")) : (this.emitter.emit({
-          type: "ERROR",
-          error: new CodedError(e.errorCode)
-        }), this.reportSubscriptionError(e.liveViewKey, e.errorCode), this.session.cleanupFailedSubscription(e.liveViewKey));
-    }
-  }
-  onConnectionOpen() {
-    this.sendExistingSubscriptions();
-  }
-  onConnectionClose(e) {
-    this.lastCloseEvent = e;
-    this.lastCloseTs = performance.now();
-    this.clearSubscriptionRetries();
-  }
-  requestSubscription(e, t, r, n) {
-    let i = {
-      messageType: "subscribe",
-      viewName: e._name,
-      viewHash: e._hash,
-      loadType: r,
-      args: t,
-      traceId: n
-    };
-    let a = this.getViewPriority(e, r);
-    this.connection.isConnected() && (this.connection.send(i), this.emitter.emit({
-      type: "SUBSCRIBE_VIEW_SERVER",
-      view: e,
-      args: t,
-      priority: a,
-      loadType: r,
-      traceId: n
-    }));
-  }
-  requestPaginationChange(e, t, r) {
-    let n = {
-      messageType: "paginationChangeMessage",
-      operationType: "LoadNext",
-      queryId: t,
-      count: r.count,
-      paginationArgs: r,
-      viewKey: e
-    };
-    this.connection.isConnected() && this.connection.send(n);
-  }
-  subscribeBase(e, t, r, i) {
-    let a = this.session.hasActiveSubscriptions(e._name, t);
-    let s = this.session.subscribe(e, t, r, i);
-    a || (this.emitter.emit({
-      type: "SUBSCRIBE_VIEW_CLIENT",
-      view: e,
-      priority: this.getViewPriority(e, ConnectionAttemptTypes.Initial),
-      args: t,
-      traceId: i,
-      loadType: ConnectionAttemptTypes.Initial
-    }), this.requestSubscription(e, t, ConnectionAttemptTypes.Initial, i));
-    return s;
-  }
-  getUnsubscribeFunction(e) {
-    return () => {
-      e.clientUnsubscribed = !0;
-      delayedTryCatch(() => {
-        if (e.unsubscribe(), !this.session.hasActiveSubscriptions(e.view._name, e.args) && this.connection.isConnected()) {
-          this.connection.send({
-            messageType: "unsubscribe",
-            viewName: e.view._name,
-            args: e.args
-          });
-          this.emitter.emit({
-            type: "UNSUBSCRIBE_VIEW_SERVER",
-            view: e.view,
-            args: e.args
-          });
-          let t = J(e.view._name, e.args);
-          clearTimeout(this.subscriptionRetries.get(t)?.retryTimer);
-          this.subscriptionRetries.$$delete(t);
-          this.resubscribeTimeouts.has(t) && (clearTimeout(this.resubscribeTimeouts.get(t)), this.resubscribeTimeouts.$$delete(t));
-        }
-      }, 2e3);
-    };
-  }
-  getViewResult(e, t) {
-    return this.session.getViewResult(e, t);
-  }
-  getViewResultByViewNameAndArgs(e, t) {
-    return this.session.getViewResultByViewNameAndArgs(e, t);
-  }
-  viewHasStaticQueries(e) {
-    return !!this.viewRegistry.get(e._name)?.hasStaticQueries();
-  }
-  getViewPriority(e, t) {
-    return this.viewRegistry.get(e._name)?.getPriority(t) ?? DEFAULT_PRIORITY;
-  }
-  subscribe(e, t, r, n) {
-    let i = t;
-    this.viewHasStaticQueries(e) && !t.__requestId && (i = {
-      ...t,
-      __requestId: _$$A2()
-    });
-    let a = this.subscribeBase(e, i, r, n);
-    return this.getUnsubscribeFunction(a);
-  }
-  hasUnresolvedGlobalOptimisticUpdates() {
-    return this.pendingGlobalOptimisticUpdates.size > 0;
-  }
-  handleBeforeOptimisticUpdateApplied(e) {
-    this.pendingGlobalOptimisticUpdates.add(e);
-  }
-  handleAfterOptimisticUpdateResolved(e) {
-    if (this.pendingGlobalOptimisticUpdates.$$delete(e), !this.hasUnresolvedGlobalOptimisticUpdates()) {
-      let e = this.globalOptimisticUpdateResolutionCallbacks;
-      this.globalOptimisticUpdateResolutionCallbacks = [];
-      this.emitter.emit({
-        type: "MUTATIONS_BLOCKED_ON_OPTIMISTIC_UPDATE",
-        count: e.length
-      });
-      this.session.batchMutations(() => {
-        for (let t of e) t();
-      });
-      this.pendingOptimisticMutationList = [];
-      this.pendingMutationList = [];
-    }
-  }
-  checkPotentiallyMissingMutations(e, t) {
-    if (this.clientOptions.checkPotentiallyMissingOptimisticMutations) {
-      if ("create" === e || "update" === e) for (let [r, n] of Object.entries(t)) for (let i in n) {
-        let a = n[i];
-        if ("create" === e && !a.uuid) continue;
-        let s = !1;
-        for (let e of this.pendingMutationList) for (let [t, n] of Object.entries(e)) if (r === t) for (let e of Object.values(n.instances)) e.uuid && a.uuid && e.uuid === a.uuid ? s = !0 : e.id === i && (s = !0);
-        if (!s && "update" === e) {
-          let e = a.uuid ? this.session.stores[r]?.queries.instanceStatesByUuid.get(a.uuid) : this.session.stores[r]?.queries.instanceStates.get(i);
-          e && (s = Object.keys(a).every(t => JSON.stringify(a[t]) === JSON.stringify(e.serverFields[t])));
-        }
-        this.emitter.emit({
-          type: "PENDING_MUTATION_EXISTENCE",
-          exist: s,
-          objectName: r,
-          optimisticInstance: a,
-          operationType: e,
-          optimisticMutations: t,
-          pendingServerMutations: this.pendingMutationList
-        });
-      } else if ("delete" === e) for (let [r, n] of Object.entries(t)) for (let i of Object.keys(n)) {
-        let n = !1;
-        for (let e of this.pendingMutationList) for (let [t, a] of Object.entries(e)) if (r === t) for (let e of Object.values(a.queries)) "error" in e || !1 !== e.results[i] || (n = !0);
-        this.emitter.emit({
-          type: "PENDING_MUTATION_EXISTENCE",
-          exist: n,
-          objectName: r,
-          optimisticInstance: null,
-          operationType: e,
-          optimisticMutations: t,
-          pendingServerMutations: this.pendingMutationList
-        });
+    for (let [viewName, preload] of Object.entries(this.uriParams.preloadedViews)) {
+      if (!this.viewRegistry.get(viewName))
+        continue
+      let allowedView = this.allowedPreloadedViews?.find((v: any) => v._name === viewName)
+      if (
+        allowedView
+        && (preload.hash === allowedView._hash || preload.hash === 'development')
+      ) {
+        this.preloadedViews.push(allowedView)
+        this.preloadedViewArgs.push(preload.args)
+        this.session.subscribe(allowedView, preload.args, () => {})
+        this.preloadViewKeys.add(serializeArgs(viewName, preload.args))
+      }
+      else {
+        this.mismatchedPreloadMsgs.push({
+          messageType: 'unsubscribe',
+          viewName,
+          args: preload.args,
+        })
       }
     }
   }
-  async applyMutations(e, t, r) {
-    let n;
-    let i = this.transactionId;
-    this.transactionId++;
-    let [s, o, l] = this.session.applyShadowMutations(i, e, r);
-    let d = new Set();
-    for (let e of l) e instanceof _$$Ay ? d.add(e.context.viewKey) : throwAsyncIf(!1, "Expected observer to be a ClientLiveViewQueryNode");
-    this.handleBeforeOptimisticUpdateApplied(i);
-    try {
-      n = await t;
-    } catch (t) {
-      this.session.removeShadowMutations(i, e, !1);
-      this.handleAfterOptimisticUpdateResolved(i);
-      return t;
-    }
-    let c = !1;
-    try {
+
+  /** Emit initial events for preloaded views */
+  emitInitialEvents() {
+    for (let i = 0; i < this.preloadedViews.length; i++) {
+      let view = this.preloadedViews[i]
+      let args = this.preloadedViewArgs[i]
+      let priority = this.getViewPriority(view, ConnectionAttemptTypes.Initial)
       this.emitter.emit({
-        type: "OPTIMISTIC_MUTATION_CREATED",
-        transactionId: i
-      });
-      await this.sync(i, s, o, d);
+        type: 'SUBSCRIBE_VIEW_CLIENT',
+        view,
+        args,
+        priority,
+        loadType: ConnectionAttemptTypes.Initial,
+      })
       this.emitter.emit({
-        type: "OPTIMISTIC_MUTATION_COMPLETED",
-        transactionId: i,
-        mutationType: r
-      });
-      c = !0;
-    } catch (e) {
-      if (!(e instanceof $$h2)) throw e;
-    } finally {
-      this.pendingOptimisticMutationList.push(e);
-      this.clientOptions.shouldChangeOptimisticMutationRevertOrder ? this.globalOptimisticUpdateResolutionCallbacks.unshift(() => {
-        this.session.removeShadowMutations(i, e, c);
-      }) : this.globalOptimisticUpdateResolutionCallbacks.push(() => {
-        this.session.removeShadowMutations(i, e, c);
-      });
-      c && "create" !== r && this.globalOptimisticUpdateResolutionCallbacks.push(() => {
-        this.checkPotentiallyMissingMutations(r, e);
-      });
-      this.handleAfterOptimisticUpdateResolved(i);
+        type: 'SUBSCRIBE_VIEW_SERVER',
+        view,
+        args,
+        priority,
+        loadType: ConnectionAttemptTypes.Initial,
+      })
     }
-    return n;
   }
-  waitForServerSideObjectsWithUUIDs(e) {
-    let t = [];
-    for (let [r, n] of Object.entries(e)) for (let e of Object.keys(n)) t.push(this.getIdFromUuid(r, e));
-    return Promise.all(t);
-  }
-  async applyMutationsWithUUID(e, t, r) {
-    let n;
-    let i = this.transactionId;
-    this.transactionId++;
-    let [s, o, l] = this.session.applyShadowMutationsWithUUID(i, e, r);
-    this.handleBeforeOptimisticUpdateApplied(i);
-    let d = new Set();
-    for (let e of l) e instanceof _$$Ay ? d.add(e.context.viewKey) : throwAsyncIf(!1, "Expected observer to be a ClientLiveViewQueryNode");
-    try {
-      n = await t;
-    } catch (t) {
-      this.session.removeShadowMutationsWithUUID(i, e, !1);
-      this.handleAfterOptimisticUpdateResolved(i);
-      return t;
+
+  /** Send existing subscriptions */
+  sendExistingSubscriptions() {
+    for (let [, timeout] of this.resubscribeTimeouts) clearTimeout(timeout)
+    this.resubscribeTimeouts.clear()
+    if (this.connection.isInitial()) {
+      for (let msg of this.mismatchedPreloadMsgs) this.connection.send(msg)
     }
-    let c = !1;
-    try {
-      "create" === r && 0 === Object.keys(o).length ? (this.emitter.emit({
-        type: "WAIT_SERVER_OBJECTS_STARTED",
-        mutations: e
-      }), await this.waitForServerSideObjectsWithUUIDs(e), await delay(this.syncDelayForDebugging), this.emitter.emit({
-        type: "WAIT_SERVER_OBJECTS_ENDED",
-        mutations: e
-      })) : (this.emitter.emit({
-        type: "OPTIMISTIC_MUTATION_CREATED",
-        transactionId: i
-      }), await this.sync(i, s, o, d), this.emitter.emit({
-        type: "OPTIMISTIC_MUTATION_COMPLETED",
-        transactionId: i,
-        mutationType: "update" === r ? "uuid_update" : "delete" === r ? "uuid_delete" : "uuid_computed_create"
-      }));
-      c = !0;
-    } catch (e) {
-      if (!(e instanceof $$h2)) throw e;
-    } finally {
-      this.pendingOptimisticMutationList.push(e);
-      this.globalOptimisticUpdateResolutionCallbacks.unshift(() => {
-        this.session.removeShadowMutationsWithUUID(i, e, c);
-      });
-      c && this.globalOptimisticUpdateResolutionCallbacks.push(() => this.checkPotentiallyMissingMutations(r, e));
-      this.handleAfterOptimisticUpdateResolved(i);
+    this.session.startReconnectionStateForPaginationQueries()
+    for (let sub of this.session.uniqueSubscriptions()) {
+      let key = serializeArgs(sub.viewDef.name, sub.args)
+      if (this.connection.isInitial() && this.preloadViewKeys.has(key))
+        continue
+      let loadType = this.session.getViewLoadType(key)
+      if (
+        this.clientOptions.shouldSplayLoadedViews
+        && !this.connection.isInitial()
+        && this.lastCloseTs
+        && performance.now() - this.lastCloseTs < 30000
+      ) {
+        let sKey = serializeArgs(sub.viewDef.name, sub.args)
+        let subscribeFn = () => {
+          if (
+            !this.connection.isConnected()
+            || !this.session.hasActiveSubscriptions(sub.viewDef.name, sub.args)
+          ) {
+            return
+          }
+          let retry = this.subscriptionRetries.get(sKey)
+          if (!retry?.retryTimer)
+            this.requestSubscription(sub.viewRef, sub.args, loadType, sub.traceId)
+        }
+        if (sub.status !== 'loaded') {
+          subscribeFn()
+        }
+        else {
+          let delayMs = (() => {
+            switch (sub.viewDef.getPriority(ConnectionAttemptTypes.Initial)) {
+              case PriorityLevels.P0:
+                return 0
+              case PriorityLevels.P1:
+                return 5000 * Math.random()
+              case PriorityLevels.P2:
+                return 20000 * Math.random() + 1000
+              default:
+                return 60000 * Math.random() + 1000
+            }
+          })()
+          delayMs === 0 ? subscribeFn() : this.resubscribeTimeouts.set(sKey, setTimeout(subscribeFn, delayMs))
+        }
+      }
+      else {
+        this.requestSubscription(sub.viewRef, sub.args, loadType, sub.traceId)
+      }
     }
-    return n;
   }
-  getIdFromUuid(e, t) {
-    return this.session.getIdFromUuid(e, t);
-  }
-  requestSync(e) {
-    this.connection.isConnected() && (this.connection.send(e.toPayload()), this.emitter.emit({
-      type: "SYNC_STARTED",
-      transactionId: e.transactionId,
-      mutatedObjects: e.objectNameToQueryIds ? [...e.objectNameToQueryIds.keys()] : []
-    }));
-  }
-  async sync(e = this.transactionId++, t, r, n) {
-    let i = new Q(e, t, r, n, this.clientOptions.syncTimeoutMs, (e, t) => {
-      this.globalOptimisticUpdateResolutionCallbacks.push(() => {
-        this.emitter.emit({
-          type: "SYNC_TIMEOUT",
-          backgrounded: e,
-          wasOffline: t
-        });
-      });
-    });
-    this.syncRequests.set(e, i);
-    this.requestSync(i);
-    await i.waitForSync();
-    this.syncDelayForDebugging && (await delay(this.syncDelayForDebugging));
-    this.syncRequests.$$delete(e);
-    this.emitter.emit({
-      type: "SYNC_COMPLETED",
-      transactionId: e
-    });
-  }
-  retrySubscription(e, t) {
-    let r = this.session.getActiveSubscription(e);
-    if (!r) return;
-    this.subscriptionRetries.has(e) || this.subscriptionRetries.set(e, {
-      backoff: this.getBackoff(this.getViewPriority(r.viewRef, ConnectionAttemptTypes.Initial))
-    });
-    let i = this.subscriptionRetries.get(e);
-    if (!i.retryTimer) {
-      if (i.backoff.shouldAttempt()) {
-        let r = i.backoff.nextBackoffMs();
-        i.retryTimer = setTimeout(() => {
-          i.retryTimer = void 0;
-          let r = this.session.getActiveSubscription(e);
-          if (!r) return;
-          "view-errors" === t && this.connection.send({
-            messageType: "unsubscribe",
-            viewName: r.viewRef._name,
-            args: r.args
-          });
-          let a = "view-errors" === t ? PriorityLevels.P3 : this.getViewPriority(r.viewRef, ConnectionAttemptTypes.Retry);
+
+  /** Handle incoming message */
+  handleMessage(msg: any) {
+    switch (msg.messageType) {
+      case 'authSuccess':
+        this.authArgs.sessionId = msg.sessionId
+        this.authArgs.anonymousUserId = msg.anonymousUserId
+        if (!this.connection.isAuthenticated()) {
+          throwAsyncIf(false, 'Expected connection to be in authenticated state')
+          break
+        }
+        for (let req of this.syncRequests.values()) this.requestSync(req)
+        break
+      case 'pendingMutations':
+        if (this.hasUnresolvedGlobalOptimisticUpdates()) {
+          this.globalOptimisticUpdateResolutionCallbacks.push(() => {
+            this.session.applyMutations(msg.mutations)
+          })
+          this.pendingMutationList.push(msg.mutations)
+          this.session.resolvePendingServerIdList(msg.mutations)
+        }
+        else {
+          this.session.applyMutations(msg.mutations)
+        }
+        break
+      case 'syncFail':
+        {
+          let req = this.syncRequests.get(msg.transactionId)
+          if (req) {
+            let retryMs = req.getRetryAfterMs()
+            if (!retryMs) {
+              this.handleAfterOptimisticUpdateResolved(msg.transactionId)
+              return
+            }
+            throwAsyncIf(!req.retryTimeout, 'Already scheduled retry for sync request.')
+            req.retryNumber++
+            req.retryTimeout = setTimeout(() => {
+              req.retryTimeout = null
+              this.requestSync(req)
+            }, retryMs)
+          }
+          else {
+            throwAsyncIf(false, 'Received syncFail for unknown sync request')
+            this.handleAfterOptimisticUpdateResolved(msg.transactionId)
+          }
+        }
+        break
+      case 'synced':
+        {
+          let req = this.syncRequests.get(msg.transactionId)
+          if (req) {
+            req.successCallback()
+            throwAsyncIf(!req.retryTimeout, 'Sync request completed successfully while having a retry scheduled. This should never happen.')
+          }
+        }
+        break
+      case 'viewLoaded':
+        {
+          let result = this.getViewResultByViewNameAndArgs(msg.viewName, msg.args)
+          this.emitEvent({
+            type: 'DONE',
+            viewName: msg.viewName,
+            args: msg.args,
+            clientStatus: result?.status,
+          })
+        }
+        break
+      case 'viewSubscriptionFailed':
+        if (msg.errorCode === SubscriptionErrorType.SHED_LOAD) {
+          if (!this.subscriptionRetries.has(msg.liveViewKey))
+            this.reportSubscriptionError(msg.liveViewKey, msg.errorCode)
+          this.retrySubscription(msg.liveViewKey, SubscriptionErrorType.SHED_LOAD)
+        }
+        else {
           this.emitter.emit({
-            type: "SUBSCRIBE_VIEW_CLIENT",
-            view: r.viewRef,
-            priority: a,
-            loadType: ConnectionAttemptTypes.Retry,
-            args: r.args,
-            traceId: r.traceId
-          });
-          this.requestSubscription(r.viewRef, r.args, ConnectionAttemptTypes.Retry, r.traceId);
-        }, r);
-      } else this.subscriptionRetries.$$delete(e);
+            type: 'ERROR',
+            error: new CodedError(msg.errorCode),
+          })
+          this.reportSubscriptionError(msg.liveViewKey, msg.errorCode)
+          this.session.cleanupFailedSubscription(msg.liveViewKey)
+        }
+        break
     }
   }
-  getBackoff(e) {
-    let t;
-    let r = this.clientOptions.subscriptionRetryBackoffConfigByPriority;
-    t = r[e] ? r[e] : r.$$default;
-    return new ExponentialBackoff(t);
+
+  /** On connection open */
+  onConnectionOpen() {
+    this.sendExistingSubscriptions()
   }
-  clearSubscriptionRetries() {
-    for (let e of this.subscriptionRetries.values()) clearTimeout(e.retryTimer);
-    this.subscriptionRetries.clear();
+
+  /** On connection close */
+  onConnectionClose(event: any) {
+    this.lastCloseEvent = event
+    this.lastCloseTs = performance.now()
+    this.clearSubscriptionRetries()
   }
-  reportSubscriptionError(e, t) {
+
+  /** Request subscription */
+  requestSubscription(view: any, args: any, loadType: any, traceId?: any) {
+    const payload = {
+      messageType: 'subscribe',
+      viewName: view._name,
+      viewHash: view._hash,
+      loadType,
+      args,
+      traceId,
+    }
+    const priority = this.getViewPriority(view, loadType)
+    if (this.connection.isConnected()) {
+      this.connection.send(payload)
+      this.emitter.emit({
+        type: 'SUBSCRIBE_VIEW_SERVER',
+        view,
+        args,
+        priority,
+        loadType,
+        traceId,
+      })
+    }
+  }
+
+  /** Request pagination change */
+  requestPaginationChange(viewKey: any, queryId: any, paginationArgs: any) {
+    const payload = {
+      messageType: 'paginationChangeMessage',
+      operationType: 'LoadNext',
+      queryId,
+      count: paginationArgs.count,
+      paginationArgs,
+      viewKey,
+    }
+    if (this.connection.isConnected())
+      this.connection.send(payload)
+  }
+
+  /** Subscribe base */
+  subscribeBase(view: any, args: any, callback: Fn, traceId?: any) {
+    const alreadySubscribed = this.session.hasActiveSubscriptions(view._name, args)
+    const subscription = this.session.subscribe(view, args, callback, traceId)
+    if (!alreadySubscribed) {
+      this.emitter.emit({
+        type: 'SUBSCRIBE_VIEW_CLIENT',
+        view,
+        priority: this.getViewPriority(view, ConnectionAttemptTypes.Initial),
+        args,
+        traceId,
+        loadType: ConnectionAttemptTypes.Initial,
+      })
+      this.requestSubscription(view, args, ConnectionAttemptTypes.Initial, traceId)
+    }
+    return subscription
+  }
+
+  /** Get unsubscribe Fn */
+  getUnsubscribeFn(subscription: any) {
+    return () => {
+      subscription.clientUnsubscribed = true
+      delayedTryCatch(() => {
+        subscription.unsubscribe()
+        if (
+          !this.session.hasActiveSubscriptions(subscription.view._name, subscription.args)
+          && this.connection.isConnected()
+        ) {
+          this.connection.send({
+            messageType: 'unsubscribe',
+            viewName: subscription.view._name,
+            args: subscription.args,
+          })
+          this.emitter.emit({
+            type: 'UNSUBSCRIBE_VIEW_SERVER',
+            view: subscription.view,
+            args: subscription.args,
+          })
+          const key = serializeArgs(subscription.view._name, subscription.args)
+          clearTimeout(this.subscriptionRetries.get(key)?.retryTimer)
+          this.subscriptionRetries.delete(key)
+          if (this.resubscribeTimeouts.has(key)) {
+            clearTimeout(this.resubscribeTimeouts.get(key))
+            this.resubscribeTimeouts.delete(key)
+          }
+        }
+      }, 2000)
+    }
+  }
+
+  /** Get view result */
+  getViewResult(view: any, args: any) {
+    return this.session.getViewResult(view, args)
+  }
+
+  /** Get view result by name and args */
+  getViewResultByViewNameAndArgs(viewName: string, args: any) {
+    return this.session.getViewResultByViewNameAndArgs(viewName, args)
+  }
+
+  /** Check if view has static queries */
+  viewHasStaticQueries(view: any) {
+    return !!this.viewRegistry.get(view._name)?.hasStaticQueries()
+  }
+
+  /** Get view priority */
+  getViewPriority(view: any, loadType: any) {
+    return this.viewRegistry.get(view._name)?.getPriority(loadType) ?? DEFAULT_PRIORITY
+  }
+
+  /** Subscribe to a view */
+  subscribe(view: any, args: any, callback: Fn, traceId?: any) {
+    let actualArgs = args
+    if (this.viewHasStaticQueries(view) && !args.__requestId) {
+      actualArgs = { ...args, __requestId: uuidv4() }
+    }
+    const subscription = this.subscribeBase(view, actualArgs, callback, traceId)
+    return this.getUnsubscribeFn(subscription)
+  }
+
+  /** Check for unresolved global optimistic updates */
+  hasUnresolvedGlobalOptimisticUpdates() {
+    return this.pendingGlobalOptimisticUpdates.size > 0
+  }
+
+  /** Handle before optimistic update applied */
+  handleBeforeOptimisticUpdateApplied(transactionId: number) {
+    this.pendingGlobalOptimisticUpdates.add(transactionId)
+  }
+
+  /** Handle after optimistic update resolved */
+  handleAfterOptimisticUpdateResolved(transactionId: number) {
+    this.pendingGlobalOptimisticUpdates.delete(transactionId)
+    if (!this.hasUnresolvedGlobalOptimisticUpdates()) {
+      const callbacks = this.globalOptimisticUpdateResolutionCallbacks
+      this.globalOptimisticUpdateResolutionCallbacks = []
+      this.emitter.emit({
+        type: 'MUTATIONS_BLOCKED_ON_OPTIMISTIC_UPDATE',
+        count: callbacks.length,
+      })
+      this.session.batchMutations(() => {
+        for (let cb of callbacks) cb()
+      })
+      this.pendingOptimisticMutationList = []
+      this.pendingMutationList = []
+    }
+  }
+
+  /** Check potentially missing mutations */
+  checkPotentiallyMissingMutations(operationType: string, optimisticMutations: any) {
+    if (this.clientOptions.checkPotentiallyMissingOptimisticMutations) {
+      if (operationType === 'create' || operationType === 'update') {
+        for (let [objectName, instances] of Object.entries(optimisticMutations)) {
+          for (let id in instances) {
+            const instance = instances[id]
+            if (operationType === 'create' && !instance.uuid)
+              continue
+            let exists = false
+            for (let pending of this.pendingMutationList) {
+              for (let [pendingName, pendingInstances] of Object.entries(pending)) {
+                if (objectName === pendingName) {
+                  for (let e of Object.values(pendingInstances.instances)) {
+                    if (e.uuid && instance.uuid && e.uuid === instance.uuid)
+                      exists = true
+                    else if (e.id === id)
+                      exists = true
+                  }
+                }
+              }
+            }
+            if (!exists && operationType === 'update') {
+              const state = instance.uuid
+                ? this.session.stores[objectName]?.queries.instanceStatesByUuid.get(instance.uuid)
+                : this.session.stores[objectName]?.queries.instanceStates.get(id)
+              if (state) {
+                exists = Object.keys(instance).every(
+                  key => JSON.stringify(instance[key]) === JSON.stringify(state.serverFields[key]),
+                )
+              }
+            }
+            this.emitter.emit({
+              type: 'PENDING_MUTATION_EXISTENCE',
+              exist: exists,
+              objectName,
+              optimisticInstance: instance,
+              operationType,
+              optimisticMutations,
+              pendingServerMutations: this.pendingMutationList,
+            })
+          }
+        }
+      }
+      else if (operationType === 'delete') {
+        for (let [objectName, instances] of Object.entries(optimisticMutations)) {
+          for (let id of Object.keys(instances)) {
+            let exists = false
+            for (let pending of this.pendingMutationList) {
+              for (let [pendingName, pendingQueries] of Object.entries(pending)) {
+                if (objectName === pendingName) {
+                  for (let e of Object.values(pendingQueries.queries)) {
+                    if (!('error' in e) && e.results[id] !== false)
+                      exists = true
+                  }
+                }
+              }
+            }
+            this.emitter.emit({
+              type: 'PENDING_MUTATION_EXISTENCE',
+              exist: exists,
+              objectName,
+              optimisticInstance: null,
+              operationType,
+              optimisticMutations,
+              pendingServerMutations: this.pendingMutationList,
+            })
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Apply optimistic mutations (original: applyMutations)
+   * @param mutations
+   * @param promise
+   * @param mutationType
+   */
+  async applyMutations(mutations: any, promise: Promise<any>, mutationType: string) {
+    let result
+    const transactionId = this.transactionId++
+    const [shadowMutations, serverMutations, observers] = this.session.applyShadowMutations(transactionId, mutations, mutationType)
+    const affectedViews = new Set<string>()
+    for (let observer of observers) {
+      if (observer instanceof QueryNode)
+        affectedViews.add(observer.context.viewKey)
+      else throwAsyncIf(false, 'Expected observer to be a ClientLiveViewQueryNode')
+    }
+    this.handleBeforeOptimisticUpdateApplied(transactionId)
+    try {
+      result = await promise
+    }
+    catch (err) {
+      this.session.removeShadowMutations(transactionId, mutations, false)
+      this.handleAfterOptimisticUpdateResolved(transactionId)
+      return err
+    }
+    let success = false
+    try {
+      this.emitter.emit({
+        type: 'OPTIMISTIC_MUTATION_CREATED',
+        transactionId,
+      })
+      await this.sync(transactionId, shadowMutations, serverMutations, affectedViews)
+      this.emitter.emit({
+        type: 'OPTIMISTIC_MUTATION_COMPLETED',
+        transactionId,
+        mutationType,
+      })
+      success = true
+    }
+    catch (err) {
+      if (!(err instanceof OptimisticMutationError))
+        throw err
+    }
+    finally {
+      this.pendingOptimisticMutationList.push(mutations)
+      if (this.clientOptions.shouldChangeOptimisticMutationRevertOrder) {
+        this.globalOptimisticUpdateResolutionCallbacks.unshift(() => {
+          this.session.removeShadowMutations(transactionId, mutations, success)
+        })
+      }
+      else {
+        this.globalOptimisticUpdateResolutionCallbacks.push(() => {
+          this.session.removeShadowMutations(transactionId, mutations, success)
+        })
+      }
+      if (success && mutationType !== 'create') {
+        this.globalOptimisticUpdateResolutionCallbacks.push(() => {
+          this.checkPotentiallyMissingMutations(mutationType, mutations)
+        })
+      }
+      this.handleAfterOptimisticUpdateResolved(transactionId)
+    }
+    return result
+  }
+
+  /** Wait for server-side objects with UUIDs */
+  waitForServerSideObjectsWithUUIDs(mutations: any) {
+    const promises: Promise<any>[] = []
+    for (let [objectName, instances] of Object.entries(mutations)) {
+      for (let uuid of Object.keys(instances)) {
+        promises.push(this.getIdFromUuid(objectName, uuid))
+      }
+    }
+    return Promise.all(promises)
+  }
+
+  /**
+   * Apply mutations with UUID (original: applyMutationsWithUUID)
+   */
+  async applyMutationsWithUUID(mutations: any, promise: Promise<any>, mutationType: string) {
+    let result
+    const transactionId = this.transactionId++
+    const [shadowMutations, serverMutations, observers] = this.session.applyShadowMutationsWithUUID(transactionId, mutations, mutationType)
+    this.handleBeforeOptimisticUpdateApplied(transactionId)
+    const affectedViews = new Set<string>()
+    for (let observer of observers) {
+      if (observer instanceof QueryNode)
+        affectedViews.add(observer.context.viewKey)
+      else throwAsyncIf(false, 'Expected observer to be a ClientLiveViewQueryNode')
+    }
+    try {
+      result = await promise
+    }
+    catch (err) {
+      this.session.removeShadowMutationsWithUUID(transactionId, mutations, false)
+      this.handleAfterOptimisticUpdateResolved(transactionId)
+      return err
+    }
+    let success = false
+    try {
+      if (mutationType === 'create' && Object.keys(serverMutations).length === 0) {
+        this.emitter.emit({
+          type: 'WAIT_SERVER_OBJECTS_STARTED',
+          mutations,
+        })
+        await this.waitForServerSideObjectsWithUUIDs(mutations)
+        await delay(this.syncDelayForDebugging)
+        this.emitter.emit({
+          type: 'WAIT_SERVER_OBJECTS_ENDED',
+          mutations,
+        })
+      }
+      else {
+        this.emitter.emit({
+          type: 'OPTIMISTIC_MUTATION_CREATED',
+          transactionId,
+        })
+        await this.sync(transactionId, shadowMutations, serverMutations, affectedViews)
+        this.emitter.emit({
+          type: 'OPTIMISTIC_MUTATION_COMPLETED',
+          transactionId,
+          mutationType:
+            mutationType === 'update'
+              ? 'uuid_update'
+              : mutationType === 'delete'
+                ? 'uuid_delete'
+                : 'uuid_computed_create',
+        })
+      }
+      success = true
+    }
+    catch (err) {
+      if (!(err instanceof OptimisticMutationError))
+        throw err
+    }
+    finally {
+      this.pendingOptimisticMutationList.push(mutations)
+      this.globalOptimisticUpdateResolutionCallbacks.unshift(() => {
+        this.session.removeShadowMutationsWithUUID(transactionId, mutations, success)
+      })
+      if (success) {
+        this.globalOptimisticUpdateResolutionCallbacks.push(() =>
+          this.checkPotentiallyMissingMutations(mutationType, mutations),
+        )
+      }
+      this.handleAfterOptimisticUpdateResolved(transactionId)
+    }
+    return result
+  }
+
+  /** Get id from uuid */
+  getIdFromUuid(objectName: string, uuid: string) {
+    return this.session.getIdFromUuid(objectName, uuid)
+  }
+
+  /** Request sync */
+  requestSync(syncTransaction: SyncTransaction) {
+    if (this.connection.isConnected()) {
+      this.connection.send(syncTransaction.toPayload())
+      this.emitter.emit({
+        type: 'SYNC_STARTED',
+        transactionId: syncTransaction.transactionId,
+        mutatedObjects: syncTransaction.objectNameToQueryIds ? [...syncTransaction.objectNameToQueryIds.keys()] : [],
+      })
+    }
+  }
+
+  /**
+   * Sync mutations (original: sync)
+   */
+  async sync(
+    transactionId: number = this.transactionId++,
+    shadowMutations: any,
+    serverMutations: any,
+    affectedViews: Set<string>,
+  ) {
+    const syncTransaction = new SyncTransaction(
+      transactionId,
+      shadowMutations,
+      serverMutations,
+      affectedViews,
+      this.clientOptions.syncTimeoutMs,
+      (backgrounded: boolean, wasOffline: boolean) => {
+        this.globalOptimisticUpdateResolutionCallbacks.push(() => {
+          this.emitter.emit({
+            type: 'SYNC_TIMEOUT',
+            backgrounded,
+            wasOffline,
+          })
+        })
+      },
+    )
+    this.syncRequests.set(transactionId, syncTransaction)
+    this.requestSync(syncTransaction)
+    await syncTransaction.waitForSync()
+    if (this.syncDelayForDebugging)
+      await delay(this.syncDelayForDebugging)
+    this.syncRequests.delete(transactionId)
     this.emitter.emit({
-      type: "SUBSCRIPTION_ERROR",
-      errorCode: t,
-      liveViewKey: e
-    });
+      type: 'SYNC_COMPLETED',
+      transactionId,
+    })
   }
-  emitEvent(e) {
-    this.emitter.emit(e);
+
+  /** Retry subscription */
+  retrySubscription(liveViewKey: string, errorType: SubscriptionErrorType) {
+    const activeSub = this.session.getActiveSubscription(liveViewKey)
+    if (!activeSub)
+      return
+    if (!this.subscriptionRetries.has(liveViewKey)) {
+      this.subscriptionRetries.set(liveViewKey, {
+        backoff: this.getBackoff(this.getViewPriority(activeSub.viewRef, ConnectionAttemptTypes.Initial)),
+      })
+    }
+    const retryObj = this.subscriptionRetries.get(liveViewKey)!
+    if (!retryObj.retryTimer) {
+      if (retryObj.backoff.shouldAttempt()) {
+        const delayMs = retryObj.backoff.nextBackoffMs()
+        retryObj.retryTimer = setTimeout(() => {
+          retryObj.retryTimer = undefined
+          const sub = this.session.getActiveSubscription(liveViewKey)
+          if (!sub)
+            return
+          if (errorType === SubscriptionErrorType.VIEW_ERRORS) {
+            this.connection.send({
+              messageType: 'unsubscribe',
+              viewName: sub.viewRef._name,
+              args: sub.args,
+            })
+          }
+          const priority
+            = errorType === SubscriptionErrorType.VIEW_ERRORS
+              ? PriorityLevels.P3
+              : this.getViewPriority(sub.viewRef, ConnectionAttemptTypes.Retry)
+          this.emitter.emit({
+            type: 'SUBSCRIBE_VIEW_CLIENT',
+            view: sub.viewRef,
+            priority,
+            loadType: ConnectionAttemptTypes.Retry,
+            args: sub.args,
+            traceId: sub.traceId,
+          })
+          this.requestSubscription(sub.viewRef, sub.args, ConnectionAttemptTypes.Retry, sub.traceId)
+        }, delayMs)
+      }
+      else {
+        this.subscriptionRetries.delete(liveViewKey)
+      }
+    }
   }
+
+  /** Get backoff for priority */
+  getBackoff(priority: any) {
+    const config = this.clientOptions.subscriptionRetryBackoffConfigByPriority
+    const backoffConfig = config[priority] ? config[priority] : config.$$default
+    return new ExponentialBackoff(backoffConfig)
+  }
+
+  /** Clear subscription retries */
+  clearSubscriptionRetries() {
+    for (let retry of this.subscriptionRetries.values()) clearTimeout(retry.retryTimer!)
+    this.subscriptionRetries.clear()
+  }
+
+  /** Report subscription error */
+  reportSubscriptionError(liveViewKey: string, errorCode: string) {
+    this.emitter.emit({
+      type: 'SUBSCRIPTION_ERROR',
+      errorCode,
+      liveViewKey,
+    })
+  }
+
+  /** Emit event */
+  emitEvent(event: any) {
+    this.emitter.emit(event)
+  }
+
+  /** Debug info */
   get debug() {
-    let e = this.session.getViewSubscriptionsForDebugging();
-    let t = {};
-    let r = {};
-    for (let [n, i] of Object.entries(e)) {
-      "loading" === i.status && (t[n] = i);
-      "errors" === i.status && (r[n] = i);
+    const subscriptions = this.session.getViewSubscriptionsForDebugging()
+    const loadingSubscriptions: Record<string, any> = {}
+    const failedSubscriptions: Record<string, any> = {}
+    for (let [key, sub] of Object.entries(subscriptions)) {
+      if (sub.status === 'loading')
+        loadingSubscriptions[key] = sub
+      if (sub.status === 'errors')
+        failedSubscriptions[key] = sub
     }
     return {
-      subscriptions: e,
-      loadingSubscriptions: t,
-      failedSubscriptions: r,
-      prettyPrintLiveViewTree: e => this.session.prettyPrintLiveViewTree(e),
-      setOptimisticUpdateResolutionDelay: e => this.syncDelayForDebugging = e,
-      setOptionalMissingForView: (e, t) => this.setOptionalMissingForView(e, t),
-      unsetOptionalMissingForView: e => this.unsetOptionalMissingForView(e),
+      subscriptions,
+      loadingSubscriptions,
+      failedSubscriptions,
+      prettyPrintLiveViewTree: (e: any) => this.session.prettyPrintLiveViewTree(e),
+      setOptimisticUpdateResolutionDelay: (e: number) => (this.syncDelayForDebugging = e),
+      setOptionalMissingForView: (view: any, value: any) => this.setOptionalMissingForView(view, value),
+      unsetOptionalMissingForView: (view: any) => this.unsetOptionalMissingForView(view),
       setViewResultForDebugging: this.session.setViewResultForDebugging.bind(this.session),
       unsetViewResultForDebugging: this.session.unsetViewResultForDebugging.bind(this.session),
-      ...this.connection.debug
-    };
+      ...this.connection.debug,
+    }
   }
 }
-export const Ay = $$m0;
-export const Dj = $$p1;
-export const nn = $$h2;
+
+// Export refactored names
+export const Ay = FigmaAppClient
+export const Dj = ConnectionState
+export const nn = OptimisticMutationError

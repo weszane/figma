@@ -1,7 +1,7 @@
 import { qg } from "../vendor/149334";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { Vny } from "../figma_app/43951";
+import { SiteMount } from "../figma_app/43951";
 let o = "dns_verification";
 export function $$l0(e) {
   return e.hasCustomDomain && null != e.verifiedAt ? e.customDomain : e.domain;
@@ -51,7 +51,7 @@ export function $$h2(e) {
   });
 }
 export function $$m3(e) {
-  let t = Rs(Vny, {
+  let t = Rs(SiteMount, {
     fileKey: e
   });
   if ("loaded" !== t.status) return null;

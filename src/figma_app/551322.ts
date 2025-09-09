@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
@@ -16,8 +16,8 @@ import { z as _$$z } from "../905/284530";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { XU } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { BellId } from "../905/576487";
 import { H8, Pf, nl } from "../905/590952";
 import { U as _$$U } from "../905/566881";
 import { j7, oB } from "../905/929976";
@@ -29,7 +29,7 @@ import { F as _$$F2 } from "../905/224";
 import { Um } from "../905/848862";
 import { q5 } from "../figma_app/516028";
 import { FFileType, FPlanLimitationType } from "../figma_app/191312";
-import { RIo, ii$, $8L } from "../figma_app/43951";
+import { MoveDraftsTeamData, MoveDraftsNudgeV2OverlayRecentFilesView, MoveDraftsNudgeV2OverlayRecentFilesLegacyView } from "../figma_app/43951";
 import { YN } from "../figma_app/349248";
 import { vL, Bi } from "../905/652992";
 import { ZN } from "../figma_app/630077";
@@ -155,7 +155,7 @@ export function $$ee2({
   useEffect(() => {
     u?.type === eg && e();
   }, [u?.type, e]);
-  let B = Rs(RIo, {
+  let B = Rs(MoveDraftsTeamData, {
     orgId: null
   });
   if ("loaded" !== B.status || 0 === B.data.currentUser.teamEditRoles.length) return null;
@@ -198,10 +198,10 @@ export function $$ee2({
     team_id: h.teamId
   };
   let Y = e => {
-    d(_$$F.enqueue({
+    d(VisualBellActions.enqueue({
       type: "file-moved",
       i18n: {
-        id: XU.FILE_MOVE_FOLDER_BELL_ID,
+        id: BellId.FILE_MOVE_FOLDER_BELL_ID,
         params: {
           text: e || ""
         }
@@ -366,14 +366,14 @@ export function $$ee2({
   });
 }
 let et = getFeatureFlags().move_drafts_nudge_v2_recent_files_slim ? function () {
-  let [e] = IT(ii$({}));
+  let [e] = IT(MoveDraftsNudgeV2OverlayRecentFilesView({}));
   return useMemo(() => e.transform(e => {
     let t = [];
     for (let r of e.currentUser.recentFiles2 ?? []) r.file && t.push(r.file);
     return t;
   }), [e]);
 } : function () {
-  let [e] = IT($8L({}));
+  let [e] = IT(MoveDraftsNudgeV2OverlayRecentFilesLegacyView({}));
   let t = useMemo(() => e.transform(e => YN(e.currentUser.recentFiles2)), [e]);
   useEffect(() => {
     "loaded" === t.status && Wn(t.data);

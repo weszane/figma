@@ -1,5 +1,5 @@
 import { useMemo, useCallback, createElement } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { b as _$$b } from "../figma_app/124186";
 import { n as _$$n } from "../5132/715664";

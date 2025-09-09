@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Label } from "../905/270045";
 import { K } from "../905/443068";
 import { v as _$$v } from "../905/442517";
@@ -9,7 +9,7 @@ import { B } from "../905/950875";
 import { FullscreenPerfMetrics, AppStateTsApi } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -43,7 +43,7 @@ function C(e) {
     title: getI18nString("manage_memory_modal.manage_memory_modal_title"),
     initialWidth: 320,
     minTopMargin: 40,
-    recordingKey: Pt("ManageMemoryModal", "modal"),
+    recordingKey: generateRecordingKey("ManageMemoryModal", "modal"),
     dragHeaderOnly: !0,
     onClose: () => {
       t(hideModal());

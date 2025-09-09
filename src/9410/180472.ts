@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, memo, useRef, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { A } from "../905/251970";
 import { WhiteboardVotingCppBindings, SessionStatus } from "../figma_app/763686";
@@ -8,7 +8,7 @@ import { x as _$$x } from "../vendor/194682";
 import { P as _$$P } from "../vendor/348225";
 import { N as _$$N } from "../vendor/930821";
 import { fU } from "../905/492004";
-import { rf } from "../figma_app/806412";
+import { useHandleMouseEvent } from "../figma_app/878298";
 import { P as _$$P2 } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -299,7 +299,7 @@ let F = memo(function ({
       className: UD,
       onMouseEnter: () => a(!0),
       onMouseLeave: () => a(!1),
-      onClick: rf(b, "click", l),
+      onClick: useHandleMouseEvent(b, "click", l),
       ref: C,
       style: {
         transform: `translateX(${10 - E}px)`

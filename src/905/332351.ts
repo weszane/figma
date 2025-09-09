@@ -3,7 +3,7 @@ import { SelectionPaintHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { GP } from "../figma_app/15927";
 import { trackEventAnalytics } from "../905/449184";
-import { uA, dp, Pt } from "../figma_app/806412";
+import { RecordingComponent, setupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { s_ } from "../905/17223";
 import { ks, nR, $$ } from "../figma_app/637027";
 import { B } from "../905/714743";
@@ -24,7 +24,7 @@ registerLegacyModal($$b0, e => jsx(v, {
   type: e.modalShown.data.type,
   ...e
 }));
-class v extends uA {
+class v extends RecordingComponent {
   constructor(e) {
     super(e);
     this.previewUrl = Array(this.props.paintDataNodesInPaint.length).fill("");
@@ -41,7 +41,7 @@ class v extends uA {
       e.preventDefault();
       this.props.dispatch(hideModal());
     };
-    this.onSubmit = dp(this, "submit", e => {
+    this.onSubmit = setupPlayback(this, "submit", e => {
       let t;
       e.preventDefault();
       this.state.error && this.setState({
@@ -151,7 +151,7 @@ class v extends uA {
             type: "button",
             className: `${Lu} style_modal--selectButton--t8zHP`,
             onClick: this.onSelectSamePaintClick,
-            recordingKey: Pt(this.props, "showMe"),
+            recordingKey: generateRecordingKey(this.props, "showMe"),
             children: [jsx(B, {
               className: "style_modal--targetIcon--x4NAU",
               svg: _$$A

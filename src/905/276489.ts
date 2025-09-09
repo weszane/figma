@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { e as _$$e } from "../905/58247";
 import { Ag } from "../905/235578";
 import { C } from "../figma_app/959385";
@@ -44,7 +44,7 @@ export const q = function e(t, i) {
                 var i;
                 e = !!t.isWidget;
                 i = t.pluginId;
-                return void debugState.dispatch(F.enqueue({
+                return void debugState.dispatch(VisualBellActions.enqueue({
                   message: e ? getI18nString("community.buyer.paid_widgets_cannot_be_added_to_the_canvas_before_purchase") : getI18nString("community.buyer.paid_plugins_cannot_be_run_before_purchase"),
                   error: !0,
                   button: {

@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, Component } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { zN, qe } from "../figma_app/416935";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { mI } from "../figma_app/566371";
 import { reportError } from "../905/11";
@@ -85,7 +85,7 @@ function C({
   t.forEach(t => {
     e[t].eligibleUsers.forEach(e => {
       if (!r[e]) {
-        if (s[e]) r[e] = s[e];else {
+        if (s[e]) r[e] = s[e]; else {
           let s = a[e];
           i[e] || (i[e] = []);
           i[e].push(s.recommendedSeatTypeByTeamId[t]);
@@ -313,7 +313,7 @@ let eI = ({
             throw Error("sent error");
         }
       }(t, e));
-    } catch (e) {}
+    } catch (e) { }
   }, []);
   return {
     changeUserSeatType: useCallback((e, t) => {
@@ -586,7 +586,7 @@ export class $$eM2 extends Component {
     };
     this.onFileBrowserClick = () => {
       this.props.newTeamProps && Al(this.props.user.id);
-      Ay.redirect("/files/recent");
+      customHistory.redirect("/files/recent");
     };
     this.updateAdditionalEmptySeats = e => {
       this.setState({
@@ -744,7 +744,7 @@ export class $$eM2 extends Component {
     });
   }
   componentDidUpdate(e, t) {
-    zN(e.user.email) !== zN(this.props.user.email) && Ay.redirect("/purchase-organization");
+    zN(e.user.email) !== zN(this.props.user.email) && customHistory.redirect("/purchase-organization");
   }
   getSubtotal() {
     let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || N_.dict(e => 0);
@@ -783,7 +783,7 @@ export class $$eM2 extends Component {
     }
     if (this.setState({
       apiPending: !0
-    }), a && !(await _$$V(a, e.country, () => {}, this.onVatValidationFail))) return;
+    }), a && !(await _$$V(a, e.country, () => { }, this.onVatValidationFail))) return;
     if (this.props.canSeeBillingAddressExp && !this.state.nameOnPaymentMethod) {
       let e = getI18nString("org_self_serve.payment_step.name_on_payment_method_is_required");
       this.trackError(e);
@@ -793,7 +793,7 @@ export class $$eM2 extends Component {
       });
       return;
     }
-    if (s && !(await _$$V(s, e.country, () => {}, this.onVatValidationFail, e.region))) return;
+    if (s && !(await _$$V(s, e.country, () => { }, this.onVatValidationFail, e.region))) return;
     let r = this.props.canSeeBillingAddressExp ? {
       name: this.state.nameOnPaymentMethod,
       address_line1: e.line1,

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { oB, j7 } from "../905/929976";
 export function $$l1({
   activeToolIdAtom: e,
@@ -60,7 +60,7 @@ export function $$d0() {
         recordingKey: t.recordingKey
       }
     }));
-    e(F.clearAll());
+    e(VisualBellActions.clearAll());
   }, [e]);
 }
 export const XZ = $$d0;

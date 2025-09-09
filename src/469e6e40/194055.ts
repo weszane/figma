@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useEffect, useRef, useLayoutEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
@@ -8,14 +8,14 @@ import { CY, u4 } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { $ as _$$$ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { XB } from "../figma_app/481749";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { A as _$$A2 } from "../905/72153";
-import { WIy, czu } from "../figma_app/43951";
+import { ExtensionActivityLogHistoryView, PluginAllowlistManagementModalView } from "../figma_app/43951";
 import { No, T5, px } from "../figma_app/465071";
 import { X as _$$X } from "../5430/785696";
 import { J as _$$J } from "../905/403084";
@@ -43,7 +43,7 @@ import { Ro } from "../figma_app/805373";
 import { DV } from "../905/739964";
 import { A as _$$A4 } from "../6828/154709";
 import { h1 } from "../905/986103";
-import { TA, iZ } from "../905/372672";
+import { getUserId, selectCurrentUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { A as _$$A5 } from "../5724/933949";
 import { $J } from "../905/491152";
@@ -215,7 +215,7 @@ function q({
       o(popModalStack());
       d();
     } catch {
-      o(_$$F.enqueue({
+      o(VisualBellActions.enqueue({
         error: !0,
         message: getI18nString("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
       }));
@@ -315,7 +315,7 @@ function q({
           variant: "primary",
           onClick: () => {
             let e = () => {
-              o(_$$F.enqueue({
+              o(VisualBellActions.enqueue({
                 error: !0,
                 message: getI18nString("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
               }));
@@ -715,14 +715,14 @@ function ed({
       try {
         await navigator.clipboard.writeText(e);
       } catch (e) {
-        o(_$$F.enqueue({
+        o(VisualBellActions.enqueue({
           message: `Could not copy email: ${e.message}`,
           error: !0
         }));
         return e;
       }
     })(t).then(() => {
-      o(_$$F.enqueue({
+      o(VisualBellActions.enqueue({
         message: `Copied ${t}`
       }));
     }).catch(() => {});
@@ -815,8 +815,8 @@ function ec(e) {
     orgId,
     extensionId
   } = e;
-  let s = Rs(WIy, {
-    userId: TA(),
+  let s = Rs(ExtensionActivityLogHistoryView, {
+    userId: getUserId(),
     actedOnIdOrKey: extensionId,
     orgId
   });
@@ -1215,7 +1215,7 @@ function eq(e) {
     };
   }(extension, orgId, mode, resource, source);
   let b = useRef(null);
-  let v = iZ();
+  let v = selectCurrentUser();
   let f = T5("UniversalEditorPluginTryButton").unwrapOr(null);
   let y = f?.name;
   let w = nx(v);
@@ -1268,7 +1268,7 @@ function e$(e) {
       fullscreenEditorType: m
     }));
   };
-  let x = iZ();
+  let x = selectCurrentUser();
   let b = nx(x);
   let v = T5("SingleEditorPluginTryButton").unwrapOr(null);
   let f = v?.name;
@@ -1350,7 +1350,7 @@ function eG(e) {
     variant: "primary",
     onClick: () => {
       let e = () => {
-        d(_$$F.enqueue({
+        d(VisualBellActions.enqueue({
           error: !0,
           message: getI18nString("resources_tab.approved_plugins.modal.failed_to_update_plugin_approval")
         }));
@@ -1370,7 +1370,7 @@ function eG(e) {
             orgId: org.id,
             userId: _
           });
-          d(_$$F.enqueue({
+          d(VisualBellActions.enqueue({
             message: "plugin" === extensionType ? getI18nString("resources_tab.approved_plugins.modal.plugin_approved_for", {
               orgName: org.name
             }) : getI18nString("resources_tab.approved_plugins.modal.widget_approved_for", {
@@ -1416,7 +1416,7 @@ function ez(e) {
         extensionId,
         extensionType
       }).then(() => {
-        d(_$$F.enqueue({
+        d(VisualBellActions.enqueue({
           message: "plugin" === extensionType ? getI18nString("resources_tab.approved_plugins.modal.plugin_approval_removed_for", {
             orgName: org.name
           }) : getI18nString("resources_tab.approved_plugins.modal.widget_approval_removed_for", {
@@ -1449,7 +1449,7 @@ export function $$eV0({
 }) {
   let C = useDispatch();
   let S = _$$A2(t, !0);
-  let N = Rs(czu, {
+  let N = Rs(PluginAllowlistManagementModalView, {
     pluginId: t,
     orgId: e
   });

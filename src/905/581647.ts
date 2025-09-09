@@ -1,6 +1,6 @@
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
 import { N } from "../905/696711";
@@ -23,7 +23,7 @@ export let $$c0 = createOptimistThunk((e, t, {
     logError("community", "Failed to get buyer portal", {
       reason: t
     });
-    e.dispatch(F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.an_error_occured_while_trying_to_purchase_please_contact_support"),
       error: !0
     }));

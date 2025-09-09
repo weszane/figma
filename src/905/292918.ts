@@ -2,8 +2,8 @@ import { GitReferenceType, ViewType, SchemaJoinStatus } from "../figma_app/76368
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { subscribeAndAwaitData } from "../905/553831";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { yJ } from "../figma_app/78808";
@@ -11,7 +11,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { d1 } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
 import { oJ } from "../905/346794";
-import f, { Stx, dDF } from "../figma_app/43951";
+import f, { FileVersions, FileCanEdit } from "../figma_app/43951";
 import { wY } from "../905/753206";
 import A, { maybeCreateSavepoint } from "../905/294113";
 import { FEditorType } from "../figma_app/53721";
@@ -20,7 +20,7 @@ import { e0 } from "../905/696396";
 import { S as _$$S } from "../figma_app/787550";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useEffect } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { K as _$$K } from "../905/807535";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
@@ -34,7 +34,7 @@ import { rY } from "../905/985490";
 import { zZ, n6 } from "../905/585030";
 import { cb } from "../905/760074";
 import { nX } from "../905/617744";
-import { Pc } from "../905/372672";
+import { selectUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ue, tF } from "../905/61300";
 import { G as _$$G } from "../905/702115";
@@ -77,7 +77,7 @@ let $ = registerModal(function (e) {
   _$$h(() => (c(e.direction), () => c(null)));
   let p = useSelector(e => e.fileVersion);
   let m = useSelector(e => e.currentUserOrgId);
-  let h = Pc();
+  let h = selectUser();
   let g = useContext(ss);
   let {
     diffInfo,
@@ -105,7 +105,7 @@ let $ = registerModal(function (e) {
         I(!1);
       } catch (e) {
         cb(e);
-        r(_$$F.enqueue({
+        r(VisualBellActions.enqueue({
           message: "An error occurred while calculating conflicts",
           error: !0
         }));
@@ -134,7 +134,7 @@ let $ = registerModal(function (e) {
       reason: "force_merge_modal_closed"
     }));
   };
-  G && (cb(G), console.error(G), r(_$$F.enqueue({
+  G && (cb(G), console.error(G), r(VisualBellActions.enqueue({
     message: getI18nString("collaboration.branching.error_generic"),
     error: !0
   })), r(ov({
@@ -262,7 +262,7 @@ let el = registerModal(function ({
   onCheckpointSelected: i
 }) {
   let n = useDispatch();
-  let r = Rs(Stx, {
+  let r = Rs(FileVersions, {
     fileKey: e
   });
   let [a, o] = useState(void 0);
@@ -414,7 +414,7 @@ let $$eu2 = createOptimistThunk(async (e, t) => {
   }
   let d = i.openFileMerge;
   if (null != d) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.waiting_for_previous_merge")
     }));
     analyticsEventManager.trackDefinedEvent("scenegraph_and_sync.branching.merge_modal_blocked", {
@@ -424,9 +424,9 @@ let $$eu2 = createOptimistThunk(async (e, t) => {
     return;
   }
   await wY();
-  let [c, u] = await Promise.all([subscribeAndAwaitData(dDF, {
+  let [c, u] = await Promise.all([subscribeAndAwaitData(FileCanEdit, {
     key: t.branchKey
-  }), subscribeAndAwaitData(dDF, {
+  }), subscribeAndAwaitData(FileCanEdit, {
     key: t.sourceKey
   })]);
   let p = [];
@@ -439,21 +439,21 @@ let $$eu2 = createOptimistThunk(async (e, t) => {
     p.push(maybeCreateSavepoint(t.sourceKey, "", "", e.dispatch, i));
   }
   if (p.length > 0) {
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.saving_file"),
       type: "file-merge-save",
-      icon: zX.SPINNER
+      icon: VisualBellIcon.SPINNER
     }));
     try {
       await Promise.all(p);
-      e.dispatch(_$$F.dequeue({
+      e.dispatch(VisualBellActions.dequeue({
         matchType: "file-merge-save"
       }));
     } catch {
-      e.dispatch(_$$F.dequeue({
+      e.dispatch(VisualBellActions.dequeue({
         matchType: "file-merge-save"
       }));
-      e.dispatch(_$$F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("collaboration.branching.error_saving_file"),
         error: !0
       }));

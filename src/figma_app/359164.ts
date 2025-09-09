@@ -7,7 +7,7 @@ import { valueOrFallback, MIXED_MARKER, isInvalidValue } from "../905/216495";
 import { zj, Gt } from "../905/275640";
 import { KH } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { a2 } from "../figma_app/762558";
 import { om } from "../figma_app/395097";
 import { A8 } from "../figma_app/836943";
@@ -78,7 +78,7 @@ export function $$b5() {
   } = $$g13();
   return $$y0(numSelectedByType, strokePaints, inheritStyleKey);
 }
-export function $$T11(e, t, r = zk.YES) {
+export function $$T11(e, t, r = yesNoTrackingEnum.YES) {
   let n = valueOrFallback(e, []);
   if (n.length > 0 && !n.find(e => e.visible)) {
     let e = n.map(e => ({
@@ -88,7 +88,7 @@ export function $$T11(e, t, r = zk.YES) {
     fullscreenValue.updateSelectionProperties({
       strokePaints: e
     }, {
-      shouldCommit: zk.NO,
+      shouldCommit: yesNoTrackingEnum.NO,
       overwrite: VisibilityCondition.ONLY_WHEN_NOT_EMPTY
     });
   }
@@ -101,7 +101,7 @@ export function $$I6() {
   let {
     strokePaints
   } = $$g13();
-  return useCallback((t, r = zk.YES) => $$T11(strokePaints, t, r), [strokePaints]);
+  return useCallback((t, r = yesNoTrackingEnum.YES) => $$T11(strokePaints, t, r), [strokePaints]);
 }
 export function $$S3() {
   let {

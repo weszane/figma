@@ -1,20 +1,20 @@
 import { Rs } from "../figma_app/288654";
 import { q5 } from "../figma_app/516028";
-import { iZ } from "../905/372672";
-import { OiG } from "../figma_app/43951";
+import { selectCurrentUser } from "../905/372672";
+import { EditButtonView } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
 import { Gv } from "../figma_app/736948";
 import { q } from "../905/202542";
 var $$c1 = (e => (e[e.REQUEST_NEEDED = 0] = "REQUEST_NEEDED", e[e.REQUEST_EXISTS = 1] = "REQUEST_EXISTS", e[e.NO_REQUEST_NEEDED = 2] = "NO_REQUEST_NEEDED", e[e.DATA_LOADING = 3] = "DATA_LOADING", e))($$c1 || {});
 export function $$u0() {
   let e = q5();
-  let t = iZ();
+  let t = selectCurrentUser();
   let {
     getUpgradeEligibility,
     getPendingRequest,
     getIsUpgradeHandlerLoading
   } = wH();
-  let p = Rs(OiG, {
+  let p = Rs(EditButtonView, {
     fileKey: e?.key ?? "",
     orgId: e?.parentOrgId ?? null
   }, {

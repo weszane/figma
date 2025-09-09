@@ -6,7 +6,7 @@ import { logInfo } from '../905/714362';
 import { Wc } from '../905/839044';
 import { Po } from '../905/859698';
 import { atomStoreManager } from '../figma_app/27355';
-import { k_1 } from '../figma_app/43951';
+import { Plugin } from '../figma_app/43951';
 import { Ay } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
 import { WhiteboardAiTemplatePreviewCppBindings } from '../figma_app/763686';
@@ -88,7 +88,7 @@ export async function $$_0({
             if (e.node.pluginId) {
               let t;
               try {
-                t = await subscribeAndAwaitData(k_1, {
+                t = await subscribeAndAwaitData(Plugin, {
                   pluginId: e.node.pluginId,
                   orgId: _
                 });

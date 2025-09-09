@@ -1,5 +1,5 @@
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
 import { uo } from "../figma_app/990058";
 import { FUserRoleType } from "../figma_app/191312";
@@ -57,7 +57,7 @@ export function $$u3(e, t, a, i, l, o) {
     lastUpdateTimestampOverride: o,
     params: d,
     successCallback: () => {
-      i(F.enqueue({
+      i(VisualBellActions.enqueue({
         message: getI18nString("confirm_workspace_change.success_message", {
           numUsers: e.length
         }),
@@ -75,7 +75,7 @@ export function $$m2(e, t, a) {
       permission: e.permission
     },
     successCallback: () => {
-      t(F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("members_table.change_member_permission.success"),
         type: "member-permission-changed"
       }));

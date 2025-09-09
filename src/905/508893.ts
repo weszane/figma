@@ -13,7 +13,7 @@ import { DP } from "../905/640017";
 import { Z as _$$Z } from "../905/823863";
 import { o as _$$o } from "../905/237202";
 import { p as _$$p } from "../figma_app/378458";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { r as _$$r } from "../figma_app/67145";
 import { Dm } from "../figma_app/8833";
 import { Um, BK } from "../905/848862";
@@ -26,7 +26,7 @@ import { D9, oO, ZS } from "../figma_app/639798";
 import { lQ } from "../905/934246";
 import { o as _$$o2 } from "../905/821217";
 import { _ as _$$_ } from "../905/569825";
-import { rf, Pt } from "../figma_app/806412";
+import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { L as _$$L } from "../figma_app/942671";
 import { q as _$$q } from "../figma_app/57000";
 import { p as _$$p2 } from "../905/927118";
@@ -247,7 +247,7 @@ function J({
       hasOwnEscKeyHandler: !1
     });
   }, [o, u]);
-  let m = rf(Pt(e, "zoomButton"), "click", p);
+  let m = useHandleMouseEvent(generateRecordingKey(e, "zoomButton"), "click", p);
   let g = o.showing && d && jsx(i, {
     targetRect: d,
     showingZoomDropdown: o.showing,
@@ -265,7 +265,7 @@ function J({
       children: jsxs("div", {
         className: VH,
         children: [jsx(K0, {
-          recordingKey: Pt(e, "zoomOutButton"),
+          recordingKey: generateRecordingKey(e, "zoomOutButton"),
           className: l()({
             [QO]: !0,
             [Sn]: _
@@ -300,7 +300,7 @@ function J({
             })
           })]
         }), g, jsx(K0, {
-          recordingKey: Pt(e, "zoomInButton"),
+          recordingKey: generateRecordingKey(e, "zoomInButton"),
           className: l()({
             [sy]: !0,
             [Sn]: f

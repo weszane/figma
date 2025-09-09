@@ -3,7 +3,7 @@ import _require2 from "../f2246930/661721";
 import _require from "../f2246930/661721";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useCallback, memo, useMemo, useContext, useId, PureComponent, Component, useLayoutEffect, createRef, Children, createElement } from "react";
-import { useSelector, useDispatch, connect, useStore } from "../vendor/514228";
+import { useSelector, useDispatch, connect, useStore } from "react-redux";
 import { lQ } from "../905/934246";
 import { ColorSpaceEnum, colorManagementStateJs, ColorProfileEnum, LogToConsoleMode, AppStateTsApi, AutoLayoutInsertMode, ActionType, Fullscreen, VariableDataType, VariableResolvedDataType, EyedropperBindings, DesignGraphElements, VariablesBindings, NodePropertyCategory, ColorFormatEnum, IVariableStyles, NodeType, StateHierarchy, MenuType, PluginHelpers, Axis, MeasurementType, DesignWorkspace, HandoffBindingsCpp, SessionOrigin, CustomFocusHelpers, KeyboardLayout, FullscreenMode, SelfDesignType, Multiplayer, SchemaJoinStatus, UIVisibilitySetting, SessionStatus, StylesBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -16,7 +16,7 @@ import { Z1 } from "../figma_app/253220";
 import { BrowserInfo, isFigmaMobileApp, isMobileUA } from "../figma_app/778880";
 import { tH as _$$tH, H4 as _$$H } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { fk } from "../figma_app/618433";
 import { e as _$$e } from "../905/383776";
 import { f as _$$f } from "../9410/341198";
@@ -32,9 +32,9 @@ import { D as _$$D } from "../905/629114";
 import { dX } from "../figma_app/837840";
 import { T as _$$T } from "../905/858738";
 import { vE, QY } from "../figma_app/139113";
-import { iZ as _$$iZ, TA } from "../905/372672";
+import { selectCurrentUser, getUserId } from "../905/372672";
 import { FFileType, FPermissionLevelType } from "../figma_app/191312";
-import { Jpz } from "../figma_app/43951";
+import { StarterFileEditConfirmation } from "../figma_app/43951";
 import { VP } from "../905/18797";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
@@ -115,7 +115,7 @@ import { y as _$$y4 } from "../figma_app/13082";
 import { Ao } from "../905/748636";
 import { A as _$$A4 } from "../svg/443105";
 import { i as _$$i2 } from "../905/649519";
-import { PK, sD as _$$sD } from "../figma_app/243058";
+import { StyleIdHandler } from "../figma_app/243058";
 import { LO as _$$LO } from "../9410/571209";
 import { ow as _$$ow, E3, Em, m0, lg } from "../figma_app/976749";
 import { _o } from "../figma_app/701001";
@@ -133,8 +133,8 @@ import { useLocalStorageSync } from "../905/657224";
 import { U as _$$U } from "../905/707331";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Dk } from "../figma_app/623293";
-import { fo, o6 as _$$o, cZ, C0, Z7 as _$$Z, Pt, aH as _$$aH, of as _$$of, AF, v_, rf as _$$rf } from "../figma_app/806412";
-import { zX, Rw } from "../905/576487";
+import { useHandleInputEvent, RecordingPureComponent, handleMouseEvent, handleKeyboardEvent, handleChangeEvent, generateRecordingKey, SKIP_RECORDING, useHandleFocusEvent, useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent } from "../figma_app/878298";
+import { VisualBellIcon, VisualBellType } from "../905/576487";
 import { v4, xv } from "../figma_app/655139";
 import { wg } from "../figma_app/101956";
 import { vL } from "../905/826900";
@@ -167,7 +167,7 @@ import { m as _$$m } from "../905/380385";
 import { filterNotNullish } from "../figma_app/656233";
 import { Y as _$$Y2 } from "../905/912236";
 import { l as _$$l3 } from "../905/716947";
-import { k as _$$k2 } from "../905/651849";
+import { logger } from "../905/651849";
 import { A as _$$A6 } from "../905/920142";
 import { qZ, ui } from "../figma_app/761118";
 import { xp } from "../figma_app/827216";
@@ -184,7 +184,7 @@ import { F6 } from "../figma_app/308685";
 import { r as _$$r3 } from "../figma_app/235299";
 import { _o as _$$_o, TV, Dz, Zj, WJ as _$$WJ } from "../figma_app/847915";
 import { P as _$$P2 } from "../905/36308";
-import { A as _$$A7 } from "../905/482208";
+import { formatI18nMessage } from "../905/482208";
 import { _p } from "../figma_app/297957";
 import { qz, dL } from "../905/944871";
 import { Vd } from "../905/964786";
@@ -195,7 +195,7 @@ import { ud } from "../905/862913";
 import { yc } from "../figma_app/671547";
 import { Rm } from "../figma_app/274217";
 import { k as _$$k3 } from "../905/403797";
-import { Uc, aY as _$$aY } from "../figma_app/741237";
+import { updateHoveredNode, getPropertiesPanelTab } from "../figma_app/741237";
 import { Xw } from "../figma_app/506364";
 import { x as _$$x2, A as _$$A8 } from "../905/553642";
 import { gR } from "../905/486443";
@@ -209,7 +209,7 @@ import { O as _$$O2 } from "../figma_app/185954";
 import { SY } from "../figma_app/383828";
 import { bD } from "../figma_app/45218";
 import { f6, ai as _$$ai } from "../figma_app/915202";
-import { zk as _$$zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { ManifestEditorType, hasLocalFileId } from "../figma_app/155287";
 import { $A } from "../905/782918";
 import { s9 as _$$s4 } from "../figma_app/34798";
@@ -327,7 +327,7 @@ import { DP } from "../905/640017";
 import { v9 } from "../figma_app/623300";
 import { $y, dW } from "../figma_app/858013";
 import { throwTypeError } from "../figma_app/465776";
-import { g as _$$g4 } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { ry as _$$ry } from "../9410/534867";
 import { c2 } from "../905/382883";
 import { F as _$$F3 } from "../905/680873";
@@ -353,7 +353,7 @@ import { A as _$$A19 } from "../1617/568132";
 import { A as _$$A20 } from "../1617/377036";
 import { NO } from "../905/498139";
 import { t as _$$t7 } from "../905/150656";
-import { IA } from "../905/859698";
+import { VariableStyleId } from "../905/859698";
 import { sg as _$$sg } from "../figma_app/276332";
 import { zK, zM } from "../905/182453";
 import { useVariableCreateModalActions, CreateVariableForm } from "../figma_app/380814";
@@ -1861,8 +1861,8 @@ function ib({
     if ("" === n) return null;
     let c = null;
     let u = null;
-    if (PK.isValid(n)) {
-      if (c = PK.toGuidStrIfLocal(n)) {
+    if (StyleIdHandler.isValid(n)) {
+      if (c = StyleIdHandler.toGuidStrIfLocal(n)) {
         if (c in t) {
           let e = {
             style: t[c]
@@ -1870,8 +1870,8 @@ function ib({
           s[c] = e;
           return e;
         }
-      } else if (u = PK.toRefIfSubscribed(n)) {
-        c = PK.fromRef(u);
+      } else if (u = StyleIdHandler.toRefIfSubscribed(n)) {
+        c = StyleIdHandler.fromRef(u);
         let e = yh(u.key, r, {});
         let t = null;
         e && (t = {
@@ -1879,8 +1879,8 @@ function ib({
         }, s[c] = t);
         return t;
       }
-    } else if (_$$sD.isValid(n)) {
-      if ((c = _$$sD.toString(n)) in i) {
+    } else if (VariableIdHandler.isValid(n)) {
+      if ((c = VariableIdHandler.toString(n)) in i) {
         let e = {
           variable: i[c],
           variableModeId: l
@@ -2039,12 +2039,12 @@ function ib({
     E && (F ? t = "style name" : B && (t = "variable name"), i = z);
     "" === t && (t = A === ColorFormatEnum.HEX ? "hex" : _$$F2.format(A), i = H);
     Dk(i);
-    u(_$$F.enqueue({
+    u(VisualBellActions.enqueue({
       message: getI18nString("visual_bell.copied_color_to_clipboard_figma_design", {
         colorType: t
       }),
       count: i,
-      icon: zX.EYEDROPPER
+      icon: VisualBellIcon.EYEDROPPER
     }));
     !function (e, t, i, r, n) {
       let a;
@@ -2076,7 +2076,7 @@ function ib({
   let X = useCallback(() => {
     J("apply-global-eyedropper-with-click", !1);
   }, [J]);
-  let Z = fo("stylesAndVariablesEyedropper", "keydown", useCallback(e => {
+  let Z = useHandleInputEvent("stylesAndVariablesEyedropper", "keydown", useCallback(e => {
     let {
       event
     } = e;
@@ -2264,11 +2264,11 @@ function iw({
     name: "dakota-export-collection-internal",
     callback: async () => {
       let e = await d(s);
-      e || o(_$$F.enqueue({
+      e || o(VisualBellActions.enqueue({
         message: "Could not export collection to clipboard"
       }));
       navigator.clipboard.writeText(e ?? "");
-      o(_$$F.enqueue({
+      o(VisualBellActions.enqueue({
         message: "Collection exported to clipboard"
       }));
     }
@@ -2443,7 +2443,7 @@ function iO(e) {
           n.click();
           URL.revokeObjectURL(r);
           trackEventAnalytics("Comment Attachment Download Success", iA(e.attachment));
-          t(_$$F.enqueue({
+          t(VisualBellActions.enqueue({
             message: getI18nString("comments.download_attachment_success"),
             type: "attachment-download"
           }));
@@ -2451,7 +2451,7 @@ function iO(e) {
       } catch (i) {
         trackEventAnalytics("Comment Attachment Download Failure", iA(e.attachment));
         reportError(_$$e3.FEEDBACK, i);
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           message: getI18nString("comments.download_attachment_error"),
           type: "attachment-download",
           error: !0
@@ -2461,10 +2461,10 @@ function iO(e) {
   }, {
     name: "copy-attachment",
     callback: async () => {
-      t(_$$F.enqueue({
+      t(VisualBellActions.enqueue({
         message: getI18nString("comments.copying_attachment"),
         type: "copy-attachment",
-        icon: zX.SPINNER
+        icon: VisualBellIcon.SPINNER
       }));
       try {
         await o(!0).then(async i => {
@@ -2473,7 +2473,7 @@ function iO(e) {
           });
           await navigator.clipboard.write([r]).then(() => {
             trackEventAnalytics("Comment Attachment Copy Success", iA(e.attachment));
-            t(_$$F.enqueue({
+            t(VisualBellActions.enqueue({
               message: getI18nString("comments.copy_attachment_success"),
               type: "copy-attachment"
             }));
@@ -2482,7 +2482,7 @@ function iO(e) {
       } catch (i) {
         trackEventAnalytics("Comment Attachment Copy Failure", iA(e.attachment));
         reportError(_$$e3.FEEDBACK, i);
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           message: getI18nString("comments.copy_attachment_error"),
           type: "copy-attachment",
           error: !0
@@ -2512,7 +2512,7 @@ function iG({
   entryPoint: t
 }) {
   let i = _$$tS();
-  let a = _$$iZ();
+  let a = selectCurrentUser();
   let s = _$$ol();
   let o = _$$O();
   let l = _$$U2();
@@ -2802,7 +2802,7 @@ let ne = {
       }, {
         reportAsSentryError: !0
       });
-      _$$F.enqueue({
+      VisualBellActions.enqueue({
         message: getI18nString("selection_context_menu.error_creating_sites_file"),
         type: "design-to-sites-error",
         error: !0
@@ -3021,10 +3021,10 @@ let ns = class e extends PureComponent {
   constructor(e) {
     super(e);
     this.objectsListMouseEnter = e => {
-      Uc(e);
+      updateHoveredNode(e);
     };
     this.objectsListMouseExit = () => {
-      Uc("");
+      updateHoveredNode("");
     };
     this.getSelectionGuid = () => Object.keys(this.props.sceneGraphSelection)[0];
     this.getObjectsListMenu = (e, t) => {
@@ -3257,7 +3257,7 @@ let ns = class e extends PureComponent {
         let p = (() => {
           if (s) return {
             visualBellTypeOverride: xp,
-            visualBellMessageComponentKeyOverride: Rw.DESIGN_LINTER_COPY_SELECTION,
+            visualBellMessageComponentKeyOverride: VisualBellType.DESIGN_LINTER_COPY_SELECTION,
             visualBellButton: {
               text: getI18nString("fullscreen_actions.quick_actions.detect-violations"),
               action: () => {
@@ -3407,7 +3407,7 @@ let ns = class e extends PureComponent {
           let i = decodeURIComponent(t);
           Dk(i);
           Rm(yc.COPY_LINK, i);
-          e(_$$F.enqueue({
+          e(VisualBellActions.enqueue({
             type: "copy-preview",
             message: getI18nString("visual_bell.copy_hyperlink", {
               hyperlink: ry(i)
@@ -3847,7 +3847,7 @@ let ns = class e extends PureComponent {
             fullscreenValue.updateSelectionProperties({
               accessibleHTMLTag: e.value
             }, {
-              shouldCommit: _$$zk.YES
+              shouldCommit: yesNoTrackingEnum.YES
             });
           }
         };
@@ -4016,7 +4016,7 @@ let ns = class e extends PureComponent {
       flags: ["edit"],
       get displayText() {
         let e = _$$P2();
-        return _$$A7(e);
+        return formatI18nMessage(e);
       }
     }, p ? {
       action: "create-brush-menu",
@@ -4602,7 +4602,7 @@ function nm(e, t) {
           reportAsSentryError: !0
         });
       } catch (e) {
-        e.message.includes("The word provided already exists in your dictionary") || (_$$k2.error(e), logError("spell_check_add_word_error", "spell check add word error", {
+        e.message.includes("The word provided already exists in your dictionary") || (logger.error(e), logError("spell_check_add_word_error", "spell check add word error", {
           err: e
         }, {
           reportAsSentryError: !0
@@ -4613,7 +4613,7 @@ function nm(e, t) {
 }
 let nf = ["design", "whiteboard", "slides", "sites", "cooper"];
 function ng() {
-  return getObservableValue(_$$aY(), DesignWorkspace.DESIGN) === DesignWorkspace.PROTOTYPE;
+  return getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN) === DesignWorkspace.PROTOTYPE;
 }
 function n_(e, t) {
   t && e.forEach(e => {
@@ -5321,7 +5321,7 @@ function n1({
     recordingKey: "moveToThemeColors",
     callback: () => {
       let e = f(n.documentColor);
-      e && s && isValidValue(s) && s.color && DA(s.color, n.documentColor) && l(_$$FW(e), _$$zk.YES);
+      e && s && isValidValue(s) && s.color && DA(s.color, n.documentColor) && l(_$$FW(e), yesNoTrackingEnum.YES);
     }
   }) : (g.push({
     name: "slides-edit-theme-color",
@@ -6277,12 +6277,12 @@ function st(e, t) {
   }).filter(isNotNullish);
   if (0 === i.length) return null;
   if (1 === i.length) {
-    _$$k2.warn("combineShortcuts: Could not find bindings to combine. \nactions: %o", e);
+    logger.warn("combineShortcuts: Could not find bindings to combine. \nactions: %o", e);
     return null;
   }
   let r = i[0].slice(0, -1);
   let n = i.map(e => e.length - 1 === r.length && e.slice(0, -1).filter((e, t) => e === r[t]).length === r.length ? e.slice(-1)[0] : null).filter(isNotNullish);
-  return n.length !== e.length ? (_$$k2.warn("combineShortcuts: Bindings length mismatch. \nactions: %o, shortcuts %s and %s", e, i[0].join(""), i[1].join("")), null) : [[...r, n]];
+  return n.length !== e.length ? (logger.warn("combineShortcuts: Bindings length mismatch. \nactions: %o, shortcuts %s and %s", e, i[0].join(""), i[1].join("")), null) : [[...r, n]];
 }
 let si = class e extends PureComponent {
   constructor() {
@@ -6433,7 +6433,7 @@ let si = class e extends PureComponent {
     let t;
     let i;
     try {
-      t = this.props.customName ? this.props.customName : this.props.displayName ? _$$A7(this.props.displayName) : _$$A7(this.props.shortcutKey);
+      t = this.props.customName ? this.props.customName : this.props.displayName ? formatI18nMessage(this.props.displayName) : formatI18nMessage(this.props.shortcutKey);
     } catch (e) {
       console.error(e);
       t = this.props.shortcutKey;
@@ -7877,7 +7877,7 @@ class sG extends PureComponent {
   render() {
     let e = Children.toArray(this.props.children).filter(e => !!e);
     if (0 === e.length) return null;
-    let t = this.props.caption ? _$$A7(this.props.caption) : null;
+    let t = this.props.caption ? formatI18nMessage(this.props.caption) : null;
     return jsxs("tbody", {
       children: [t && jsx("tr", {
         children: jsx("th", {
@@ -8268,7 +8268,7 @@ function s7() {
   }, [e, p]);
   useEffect(() => {
     if (getFeatureFlags().long_page_change_notif) {
-      if (Multiplayer.isIncrementalSession() && isLoading) isLoading !== g && u && c !== SchemaJoinStatus.JOINED && (f(Date.now()), h(_$$F.enqueue({
+      if (Multiplayer.isIncrementalSession() && isLoading) isLoading !== g && u && c !== SchemaJoinStatus.JOINED && (f(Date.now()), h(VisualBellActions.enqueue({
         message: "Page change may take longer during staging deploy",
         error: !1,
         delay: 3e3,
@@ -8276,10 +8276,10 @@ function s7() {
         timeoutOverride: 1 / 0
       })));else {
         let e = m ? Date.now() - m : 0;
-        e < 3e3 || e > 9e3 ? (h(_$$F.dequeue({
+        e < 3e3 || e > 9e3 ? (h(VisualBellActions.dequeue({
           matchType: "long-page-change"
         })), f(null)) : setTimeout(() => {
-          h(_$$F.dequeue({
+          h(VisualBellActions.dequeue({
             matchType: "long-page-change"
           }));
           f(null);
@@ -8320,13 +8320,13 @@ function s8({
   })) : null;
 }
 let oT = e => Zj(e) && !e.hideCheckForQuickCommand;
-class ow extends _$$o {
+class ow extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.searchInputRef = createRef();
     this.scrollContainerRef = createRef();
-    this.listboxId = _$$g4();
-    this.resultPrefix = _$$g4();
+    this.listboxId = generateUUIDv4();
+    this.resultPrefix = generateUUIDv4();
     this.delayedCloseTimerID = 0;
     this.updateQueryAndResults = e => {
       let t;
@@ -8358,12 +8358,12 @@ class ow extends _$$o {
     this.cancelDelayedClose = () => {
       0 !== this.delayedCloseTimerID && (clearTimeout(this.delayedCloseTimerID), this.delayedCloseTimerID = 0);
     };
-    this.onClick = cZ(this, "click", e => {
+    this.onClick = handleMouseEvent(this, "click", e => {
       e?.button !== 0 || this.state.searchResults.length > 0 || this.setState({
         searchResults: this.searchIndex.list(this.props.appModel)
       });
     });
-    this.onKeyDown = C0(this, "keydown", e => {
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       let t = e => {
         if (this.state.searchResults.length > 0) {
           let t = this.state.activeItemIndex + e;
@@ -8438,7 +8438,7 @@ class ow extends _$$o {
           jr(e, W0.NO);
       }
     });
-    this.onSearchChange = _$$Z(this, "change", e => {
+    this.onSearchChange = handleChangeEvent(this, "change", e => {
       let t = e.currentTarget.value;
       this.updateQueryAndResults(t);
     });
@@ -8494,7 +8494,7 @@ class ow extends _$$o {
           });
         },
         publishedPlugins: this.props.pluginAndWidgetMenuArgs.publishedPlugins,
-        recordingKey: Pt(this.props, e.action || "searchResult"),
+        recordingKey: generateRecordingKey(this.props, e.action || "searchResult"),
         role: "option",
         searchQuery: this.state.searchQuery
       }, e.action || t);
@@ -8639,7 +8639,7 @@ class ow extends _$$o {
           maxLength: 150,
           onChange: this.onSearchChange,
           onClick: this.onClick,
-          placeholder: _$$A7("quick-actions-modal-placeholder"),
+          placeholder: formatI18nMessage("quick-actions-modal-placeholder"),
           role: "combobox",
           spellCheck: !1,
           value: this.state.searchQuery
@@ -8703,11 +8703,11 @@ function oI(e) {
     showQuickCommandRankDebug: t
   });
 }
-class ok extends _$$o {
+class ok extends RecordingPureComponent {
   constructor(e) {
     super(e);
-    this.onClick = cZ(this, "click", e => {
-      if (!this.props.onClick) return _$$aH;
+    this.onClick = handleMouseEvent(this, "click", e => {
+      if (!this.props.onClick) return SKIP_RECORDING;
       this.props.onClick(e);
     });
     this.getDisplayText = () => {
@@ -8806,7 +8806,7 @@ function oN({
   if (useEffect(() => {
     if (s) {
       o(!1);
-      let i = _$$g4();
+      let i = generateUUIDv4();
       l(i);
       t(i);
       e && a({
@@ -8886,7 +8886,7 @@ function oU({
     },
     shouldUseEyedropperStyleCreationFlow: o
   });
-  let m = _$$of(i, "submit", () => {
+  let m = useHandleFocusEvent(i, "submit", () => {
     createStyle();
     s(styleRef);
   });
@@ -8993,7 +8993,7 @@ function o$(e) {
         onMouseDown: t => {
           e.onClickTrash(t);
         },
-        recordingKey: Pt(e.recordingKey, "breakHyperlink")
+        recordingKey: generateRecordingKey(e.recordingKey, "breakHyperlink")
       }), jsx(MO, {
         id: "inline_editor",
         recordingKey: e.recordingKey,
@@ -9025,11 +9025,11 @@ function o1(e) {
   useEffect(() => () => {
     c.current && (p(u.current), trackEventAnalytics("Hyperlink Editor Updated Link On Dismiss"));
   }, [p]);
-  let h = AF(e.recordingKey, "change", e => {
+  let h = useHandleChangeEvent(e.recordingKey, "change", e => {
     d(e.target.value.trim());
   });
-  let m = v_(e.recordingKey, "keydown", i => {
-    if (jr(i, W0.NO)) return _$$aH;
+  let m = useHandleKeyboardEvent(e.recordingKey, "keydown", i => {
+    if (jr(i, W0.NO)) return SKIP_RECORDING;
     if ("Escape" === i.key) {
       i.preventDefault();
       c.current = !1;
@@ -9039,7 +9039,7 @@ function o1(e) {
       if (i.preventDefault(), c.current = !1, p(l)) {
         if ("" === l) {
           trackEventAnalytics("Hyperlink Editor Deleted Link");
-          t(_$$F.enqueue({
+          t(VisualBellActions.enqueue({
             message: getI18nString("hyperlink.link_deleted")
           }));
         } else {
@@ -9056,17 +9056,17 @@ function o1(e) {
         }
       } else {
         trackEventAnalytics("Hyperlink Editor Invalid Link");
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           message: getI18nString("hyperlink.invalid_link_plain")
         }));
       }
       Fullscreen.hideHyperlinkEditor();
     }
   });
-  let f = _$$rf(e.recordingKey, "click", i => {
+  let f = useHandleMouseEvent(e.recordingKey, "click", i => {
     c.current = !1;
     e.hyperlinkLocation && _$$l.user("clear-hyperlink", () => Fullscreen.setHyperlink("", e.hyperlinkLocation.nodeID, e.hyperlinkLocation.rangeStart, e.hyperlinkLocation.rangeEnd, null));
-    t(_$$F.enqueue({
+    t(VisualBellActions.enqueue({
       message: getI18nString("hyperlink.link_deleted")
     }));
     Fullscreen.hideHyperlinkEditor();
@@ -9216,7 +9216,7 @@ let li = {
               thumbnail_url: "",
               canvas_url: "",
               content_hash: i.styleVersionHash ?? void 0,
-              userFacingVersion: IA(i.userFacingVersion),
+              userFacingVersion: VariableStyleId(i.userFacingVersion),
               node_id: i.guid,
               isLocal: !0,
               style_type: i.styleType
@@ -9234,7 +9234,7 @@ let li = {
       createStyle: !p,
       createVariable: !0
     }, {
-      recordingKey: Pt(m, "viewTabs"),
+      recordingKey: generateRecordingKey(m, "viewTabs"),
       defaultActive: () => function (e) {
         let t = ["createVariable", "createStyle"];
         return e && t.includes(e) ? e : t[0];
@@ -9275,7 +9275,7 @@ let li = {
             children: jsx(CreateVariableForm, {
               resolvedType: l,
               initialValue: t,
-              recordingKey: Pt(m, "createVariableForm"),
+              recordingKey: generateRecordingKey(m, "createVariableForm"),
               onSubmit: onCreateVariableSubmit
             })
           })]
@@ -9290,11 +9290,11 @@ export function $$lr0({
 }) {
   let t = selectWithShallowEqual(o9);
   let i = useDispatch();
-  let m = TA();
+  let m = getUserId();
   let T = t.openFile ? t.openFile.key : null;
   let j = getObservableValue(AppStateTsApi?.uiState().shouldShowAutoLayoutHintsIfExist, !1);
   let I = getObservableValue(AppStateTsApi?.uiState().autoLayoutShortcutHints, new Map());
-  let k = Rs(Jpz({
+  let k = Rs(StarterFileEditConfirmation({
     key: T ?? ""
   }), {
     enabled: !!T
@@ -9356,7 +9356,7 @@ export function $$lr0({
           }, "fullscreen-menu"), W && jsx(_$$tH, {
             boundaryKey: "QuickActionsOuter",
             onError: () => {
-              i(_$$F.enqueue({
+              i(VisualBellActions.enqueue({
                 message: "Unable to open quick actions",
                 type: "react-error"
               }));
@@ -9382,7 +9382,7 @@ export function $$lr0({
           }), t.dropdownShown && !Q && !BrowserInfo.isMeetDevice && jsx(_$$tH, {
             boundaryKey: "FullscreenContextMenu",
             onError: () => {
-              i(_$$F.enqueue({
+              i(VisualBellActions.enqueue({
                 message: "Unable to open context menu",
                 type: "react-error"
               }));

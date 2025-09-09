@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useStore } from "../vendor/514228";
-import { throttle } from "../905/915765";
+import { useStore } from "react-redux";
+import { microtaskThrottle } from "../905/915765";
 import { UserActionState, SchemaJoinStatus, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tg } from "../figma_app/933328";
@@ -72,7 +72,7 @@ export function $$V11() {
   let t = useStore();
   useEffect(() => function (e) {
     let t = () => KQ(e);
-    let r = throttle(t);
+    let r = microtaskThrottle(t);
     let n = "normal";
     let i = e.subscribe(() => {
       let {

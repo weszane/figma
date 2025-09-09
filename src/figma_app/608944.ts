@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { atom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import { hideSpecificModal } from "../905/156213";
 let $$o2 = "ComponentFlyoutModal";

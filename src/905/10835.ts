@@ -8,7 +8,7 @@ import { Cu } from '../figma_app/314264';
 import { q5 } from '../figma_app/516028';
 import { fx, PF } from '../figma_app/657972';
 import { fu } from '../figma_app/831799';
-import { useSelector, useDispatch } from '../vendor/514228';
+import { useSelector, useDispatch } from 'react-redux';
 export function $$h1() {
   return renderI18nText('slides.properties_panel.visual_bell.remove_stack', {
     secondaryText: jsx('span', {

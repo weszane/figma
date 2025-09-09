@@ -1,5 +1,5 @@
 import { useCallback, useRef, useEffect } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { tT } from "../905/663269";
@@ -19,9 +19,9 @@ import { h as _$$h } from "../figma_app/496854";
 import { jd } from "../figma_app/528509";
 import { q5 } from "../figma_app/516028";
 import { dq } from "../905/845253";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
-import { RcX, GEO, Nvo, ENi, nYG } from "../figma_app/43951";
+import { OrgSharedSettingView, ExpOneClickAskToEditTeamView, ExpOneClickAskToEditOrgView, ExpSocialProofExpansionTeamView, ExpSocialProofExpansionOrgView } from "../figma_app/43951";
 import { XX } from "../figma_app/345997";
 import { cD } from "../figma_app/598018";
 import { e6 } from "../905/557142";
@@ -141,7 +141,7 @@ export function $$q36() {
   let s = !!a;
   let l = cD();
   let u = !s;
-  let p = Rs(RcX({
+  let p = Rs(OrgSharedSettingView({
     orgId: a
   }), {
     enabled: !!a
@@ -270,10 +270,10 @@ export function $$ei25() {
 }
 export function $$ea19(e) {
   let t = No().unwrapOr(null);
-  let r = iZ();
+  let r = selectCurrentUser();
   let i = q5();
   let a = H3(t) ?? null;
-  let s = Rs(RcX({
+  let s = Rs(OrgSharedSettingView({
     orgId: a
   }), {
     enabled: !!a
@@ -283,12 +283,12 @@ export function $$ea19(e) {
   let p = _$$c();
   let _ = t?.tier === FPlanNameType.PRO;
   let h = t?.tier === FPlanNameType.ORG || t?.tier === FPlanNameType.ENTERPRISE;
-  let f = Rs(GEO({
+  let f = Rs(ExpOneClickAskToEditTeamView({
     teamId: t?.key.parentId || ""
   }), {
     enabled: _ && !u && !p && e
   }).unwrapOr(null);
-  let E = Rs(Nvo({
+  let E = Rs(ExpOneClickAskToEditOrgView({
     orgId: t?.key.parentId || ""
   }), {
     enabled: h && !u && !p && e
@@ -313,17 +313,17 @@ export function $$es23({
   entryPoint: a
 }) {
   let s = i === FProductAccessType.DEV_MODE && "dev-mode-blocking-modal" === a;
-  let c = iZ();
+  let c = selectCurrentUser();
   let u = c?.id;
   let p = _$$c();
   let _ = !s && !p && e === FOrganizationLevelType.TEAM && !!t;
-  let h = Rs(ENi({
+  let h = Rs(ExpSocialProofExpansionTeamView({
     teamId: t
   }), {
     enabled: _
   }).unwrapOr(null);
   let g = !s && !p && !r && e === FOrganizationLevelType.ORG && !!t;
-  let f = Rs(nYG({
+  let f = Rs(ExpSocialProofExpansionOrgView({
     orgId: t
   }), {
     enabled: g

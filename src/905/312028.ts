@@ -1,5 +1,5 @@
 import { pJ } from "../905/787926";
-import { Y } from "../905/806400";
+import { EntityType } from "../905/806400";
 let a = {
   name: "canView",
   type: {
@@ -20,7 +20,7 @@ let s = {
   name: "canViewWithReasons",
   type: {
     kind: "object",
-    name: Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: "userId",
@@ -53,7 +53,7 @@ let l = {
   name: "canAdminWithReasons",
   type: {
     kind: "object",
-    name: Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: "userId",
@@ -86,7 +86,7 @@ let c = {
   name: "canCreateTeamWithReasons",
   type: {
     kind: "object",
-    name: Y.PermissionEvaluationResult
+    name: EntityType.PermissionEvaluationResult
   },
   args: [{
     name: "userId",

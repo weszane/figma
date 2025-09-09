@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useMemo, useCallback, useLayoutEffect } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { E as _$$E } from "../905/632989";
 import { k as _$$k } from "../905/381239";
@@ -12,10 +12,10 @@ import { WorkspaceType, DataLoadStatus, Multiplayer, SchemaJoinStatus, AppStateT
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import g from "classnames";
-import { v_, aH, AF, iQ, Pt, rf } from "../figma_app/806412";
+import { useHandleKeyboardEvent, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Yh } from "../figma_app/888478";
 import { $ as _$$$ } from "../0c62c2fd/637169";
 import { lg } from "../figma_app/976749";
@@ -31,13 +31,13 @@ import { ks } from "../figma_app/626177";
 import { n6, vu, mB, oG, sl, sR, Pl, Dq, As, wH, iB, Nr, VQ, Sp, jE, Nz, YW, KE, q8, hi, VC } from "../0c62c2fd/214758";
 import { A as _$$A2 } from "../6828/255111";
 import { A as _$$A3 } from "../svg/871428";
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
+if (443 == require.j) { }
 var h = g;
 function F({
   value: e,
@@ -50,7 +50,7 @@ function F({
   useEffect(() => {
     o.current?.select();
   }, []);
-  let l = v_(r, "keydown", e => {
+  let l = useHandleKeyboardEvent(r, "keydown", e => {
     if (e.keyCode === Uz.ESCAPE) {
       n(!1);
       e.stopPropagation();
@@ -60,16 +60,16 @@ function F({
     } else {
       if (e.keyCode !== Uz.TAB) {
         jr(e, W0.NO);
-        return aH;
+        return SKIP_RECORDING;
       }
       e.preventDefault();
       n(!0);
     }
   });
-  let d = AF(r, "change", e => {
+  let d = useHandleChangeEvent(r, "change", e => {
     i || t(e.currentTarget.value);
   });
-  let c = iQ(r, "blur", () => {
+  let c = useHandleGenericEvent(r, "blur", () => {
     n(!0);
   });
   return jsx(ks, {
@@ -85,8 +85,8 @@ function F({
     value: e
   });
 }
-if (443 == require.j) {}
-if (443 == require.j) {}
+if (443 == require.j) { }
+if (443 == require.j) { }
 function M({
   editorType: e
 }) {
@@ -160,21 +160,21 @@ export function $$U1({
   let ed = useMemo(() => Fy(X, r) === DataLoadStatus.LOADED, [r, X]);
   let ec = Multiplayer.getSessionState() === SchemaJoinStatus.JOINED;
   let eu = useMemo(() => H && !ec && !ed && Multiplayer.isIncrementalSession(), [H, ed, ec]);
-  let em = Pt("pagesPanel", "row", Q) || "";
-  let e_ = rf(em, "contextmenu", e => {
+  let em = generateRecordingKey("pagesPanel", "row", Q) || "";
+  let e_ = useHandleMouseEvent(em, "contextmenu", e => {
     e.preventDefault();
     !eu && G && G({
       nodeId: r,
       e
     });
   });
-  let ep = rf(em, "dblclick", () => {
+  let ep = useHandleMouseEvent(em, "dblclick", () => {
     eu || l || d(r);
   });
-  let ef = rf(em, "click", e => {
+  let ef = useHandleMouseEvent(em, "click", e => {
     if (!q && !l) {
       if (eu) {
-        et(_$$F.enqueue({
+        et(VisualBellActions.enqueue({
           type: "offline-page-switch",
           message: getI18nString("fullscreen.pages_panel.unavailable_offline")
         }));

@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { ViewType } from "../figma_app/763686";
 import { H } from "../905/620380";
 import { I } from "../figma_app/583780";

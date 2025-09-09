@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { tM, $$, vd, Us } from "../figma_app/637027";

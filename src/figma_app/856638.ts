@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { mc, YJ, hE, g8, ZP, Q$, MJ, q7, Ov, rm } from "../figma_app/860955";
 import { V } from "../905/291719";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { VU } from "../905/625959";
 import { bs } from "../figma_app/553940";
 import { nj } from "../figma_app/889655";
@@ -75,7 +75,7 @@ function E({
   }
   return jsxs(g8, {
     children: [jsxs(ZP, {
-      recordingKey: Pt(t || h, e.recordingKey),
+      recordingKey: generateRecordingKey(t || h, e.recordingKey),
       children: [jsx(Q$, {
         children: e.icon
       }), e.getTitle()]
@@ -96,7 +96,7 @@ function y({
   return jsxs(q7, {
     disabled: !_,
     onClick: VU.get(e.action, "toolbar"),
-    recordingKey: Pt(t || h, e.recordingKey),
+    recordingKey: generateRecordingKey(t || h, e.recordingKey),
     children: [jsx(Q$, {
       children: bs(e.action)?.ui3Icon || jsx(V, {})
     }), Jg(e.getDisplayAction?.() ?? e.action), jsx(Ov, {
@@ -114,7 +114,7 @@ function b({
     onClick: t => {
       e.onClick(t);
     },
-    recordingKey: Pt(t || h, e.recordingKey),
+    recordingKey: generateRecordingKey(t || h, e.recordingKey),
     disabled: e.disabled,
     children: [jsx(Q$, {
       children: e.icon

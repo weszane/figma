@@ -4,15 +4,15 @@ import { d as _$$d } from '../905/44199';
 import { PN } from '../905/54385';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { C8 } from '../905/216495';
-import { F as _$$F } from '../905/302958';
+import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { debugState } from '../905/407919';
 import { pluginManifestPropType, capabilitiesPropType, editorTypePropType, widgetManifestPropType } from '../905/488349';
 import { ZB as _$$ZB } from '../905/491152';
 import { pI } from '../905/544659';
-import { pN } from '../905/571565';
+import { dequeuePluginStatus } from '../905/571565';
 import { getFeatureFlags } from '../905/601108';
-import { k as _$$k2 } from '../905/651849';
+import { logger } from '../905/651849';
 import { logInfo } from '../905/714362';
 import { Qx as _$$Qx, ZY } from '../905/764747';
 import { $A as _$$$A } from '../905/782918';
@@ -1342,7 +1342,7 @@ export function getOrgRole(resource: any, org: any, publisher: any): any {
 export function getPublishingRole(org: any, type: string): any {
   return type === Lu.ORG ? org ? {
     org
-  } : (_$$k2.error('publishing a private plugin without a valid org entity.'), null) : {
+  } : (logger.error('publishing a private plugin without a valid org entity.'), null) : {
     is_public: true
   };
 }
@@ -1885,11 +1885,11 @@ export function getRelaunchablePlugins(pluginsMap: any, publishedPlugins: any, l
  * @param message - Error message.
  */
 export function showVisualBell(message: string): void {
-  pN({
+  dequeuePluginStatus({
     shouldShowVisualBell: true
   });
   const desktopApi = _$$M();
-  Y5.dispatch(_$$F.enqueue({
+  Y5.dispatch(VisualBellActions.enqueue({
     type: 'plugins-runtime-error',
     message,
     button: desktopApi ? {
@@ -1907,7 +1907,7 @@ export function showVisualBell(message: string): void {
  * Original name: $$ta44
  */
 export function clearVisualBell(): void {
-  Y5.dispatch(_$$F.dequeue({
+  Y5.dispatch(VisualBellActions.dequeue({
     matchType: 'plugins-runtime-error'
   }));
 }

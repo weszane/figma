@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { x6 } from "../905/403166";
@@ -10,7 +10,7 @@ import { M } from "../905/649795";
 import { renderI18nText } from "../905/303541";
 import { RK } from "../figma_app/815170";
 import { z3 } from "../figma_app/386952";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { q } from "../905/495564";
 import { MW, Ib } from "../905/129884";
 import { N as _$$N } from "../905/984200";
@@ -70,7 +70,7 @@ let $$v0 = memo(e => {
   });
 });
 let A = memo(function (e) {
-  let t = iZ()?.community_profile_id;
+  let t = selectCurrentUser()?.community_profile_id;
   let {
     handle,
     commentId,

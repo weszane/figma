@@ -1,160 +1,334 @@
-import { ResourceStatus } from "../905/957591";
-import { compareFields, compareFieldInfoArrays, deepEqual } from "../905/419236";
-import { A as _$$A } from "../905/679168";
-import { A as _$$A2, N } from "../905/42339";
-import { A as _$$A3, Y } from "../905/113115";
-import { A as _$$A4, c } from "../905/870891";
-import { Ay, Y2 } from "../905/795642";
-export class $$c0 {
-  constructor(e, t, i, n, r) {
-    for (let [a, s] of (this.parent = e, this.context = t, this.instance = i, this.queryDef = n, this.missingOptionalFields = r, n.queries.entries())) this.missingOptionalFields.some(e => a === e.fieldName) || (s.objectFieldDef.pagination ? this.children.push(new _$$A4(this, s, e.observable, t)) : this.children.push(new Ay(this, s, e.observable, t)));
-    for (let [r, a] of n.computations.entries()) this.missingOptionalFields.some(e => r === e.fieldName) || (a.computedFieldDef.isComputedObject() ? this.children.push(new _$$A3(this, a, e.observable, t, i)) : this.children.push(new _$$A2(this, a, e.observable, t, i)));
+import { ComputationHandler, isComputationHandler } from '../905/42339'
+import { ComputationObjectNode, isComputationObjectNode } from '../905/113115'
+import { compareFieldInfoArrays, compareFields, deepEqual } from '../905/419236'
+import { LiveViewNode } from '../905/679168'
+import { isQueryNode, QueryNode } from '../905/795642'
+import { isPaginatedQueryNode, PaginatedQueryNode } from '../905/870891'
+import { ResourceStatus } from '../905/957591'
+
+/**
+ * Represents a node for handling queries, computations, and pagination for an instance.
+ * Original class name: $$c0
+ */
+export class QueryInstanceNode {
+  parent: any
+  context: any
+  instance: any
+  queryDef: any
+  missingOptionalFields: any[]
+  children: any[] = []
+  _result: any
+  _isLoaded: boolean = false
+
+  /**
+   * Constructs a QueryInstanceNode.
+   * @param parent - Parent node
+   * @param context - Context object
+   * @param instance - Instance data
+   * @param queryDef - Query definition
+   * @param missingOptionalFields - Array of missing optional fields
+   */
+  constructor(parent: any, context: any, instance: any, queryDef: any, missingOptionalFields: any[]) {
+    this.parent = parent
+    this.context = context
+    this.instance = instance
+    this.queryDef = queryDef
+    this.missingOptionalFields = missingOptionalFields
+
+    // Add query children
+    for (const [fieldKey, queryInfo] of queryDef.queries.entries()) {
+      if (this.missingOptionalFields.some(f => fieldKey === f.fieldName))
+        continue
+      if (queryInfo.objectFieldDef.pagination) {
+        this.children.push(new PaginatedQueryNode(this, queryInfo, parent.observable, context))
+      }
+      else {
+        this.children.push(new QueryNode(this, queryInfo, parent.observable, context))
+      }
+    }
+
+    // Add computation children
+    for (const [fieldKey, compInfo] of queryDef.computations.entries()) {
+      if (this.missingOptionalFields.some(f => fieldKey === f.fieldName))
+        continue
+      if (compInfo.computedFieldDef.isComputedObject()) {
+        this.children.push(new ComputationObjectNode(this, compInfo, parent.observable, context, instance))
+      }
+      else {
+        this.children.push(new ComputationHandler(this, compInfo, parent.observable, context, instance))
+      }
+    }
   }
-  children = [];
-  _result;
-  _isLoaded = !1;
+
+  /**
+   * Returns debug information about fields.
+   * Original getter: debugFields
+   */
   get debugFields() {
     return {
       object: this.queryDef.name,
       parent: this.parent.path,
-      instanceFields: JSON.stringify(Array.from(Object.getOwnPropertyNames(this.instance))),
+      instanceFields: JSON.stringify(Object.getOwnPropertyNames(this.instance)),
       queryFields: JSON.stringify(Array.from(this.queryDef.queries.keys())),
-      projectedBaseFields: JSON.stringify(Array.from(this.queryDef.projectedFields.keys()))
-    };
+      projectedBaseFields: JSON.stringify(Array.from(this.queryDef.projectedFields.keys())),
+    }
   }
+
+  /**
+   * Returns the path of this node.
+   * Original getter: path
+   */
   get path() {
-    return [...this.parent.path, this.instance.id || "root"];
+    return [...this.parent.path, this.instance.id || 'root']
   }
+
+  /**
+   * Returns children that are query nodes.
+   * Original getter: queriedChildren
+   */
   get queriedChildren() {
-    return this.children.filter(Y2);
+    return this.children.filter(isQueryNode)
   }
+
+  /**
+   * Returns children that are paginated query nodes.
+   * Original getter: paginatedChildren
+   */
   get paginatedChildren() {
-    return this.children.filter(c);
+    return this.children.filter(isPaginatedQueryNode)
   }
+
+  /**
+   * Returns children that are computed field nodes.
+   * Original getter: computedChildren
+   */
   get computedChildren() {
-    return this.children.filter(N);
+    return this.children.filter(isComputationHandler)
   }
+
+  /**
+   * Returns children that are computation object nodes.
+   * Original getter: computedObjectChildren
+   */
   get computedObjectChildren() {
-    return this.children.filter(Y);
+    return this.children.filter(isComputationObjectNode)
   }
+
+  /**
+   * Destroys all child nodes.
+   * Original method: destroy
+   */
   destroy() {
-    for (let e of this.children) e.destroy();
+    for (const child of this.children) child.destroy()
   }
+
+  /**
+   * Notifies parent that results have updated.
+   * Original method: resultsUpdated
+   */
   resultsUpdated() {
-    this.parent.resultsUpdated();
+    this.parent.resultsUpdated()
   }
-  onUpdateResult(e, t) {
-    let i = compareFields(e, this.instance, this.queryDef.projectedFields) && compareFieldInfoArrays(this.missingOptionalFields, t);
-    let n = this.instance;
-    this.instance = e;
-    for (let t = 0; t < this.children.length; t++) {
-      let a = this.children[t];
-      a instanceof _$$A2 && a.fieldName in this.instance && n[a.fieldName] !== e[a.fieldName] && (i = !1);
-      a instanceof _$$A3 && a.fieldName in this.instance && !deepEqual(n[a.fieldName], e[a.fieldName]) && (i = !1);
-      let l = a.recreateIfStale(n, e);
-      l && (a.destroy(), this.children[t] = l);
+
+  /**
+   * Handles update of result and checks for changes.
+   * Original method: onUpdateResult
+   */
+  onUpdateResult(newInstance: any, newMissingFields: any[]) {
+    let unchanged = compareFields(newInstance, this.instance, this.queryDef.projectedFields) && compareFieldInfoArrays(this.missingOptionalFields, newMissingFields)
+    const prevInstance = this.instance
+    this.instance = newInstance
+    for (let i = 0; i < this.children.length; i++) {
+      const child = this.children[i]
+      if (child instanceof ComputationHandler && child.fieldName in this.instance && prevInstance[child.fieldName] !== newInstance[child.fieldName]) {
+        unchanged = false
+      }
+      if (child instanceof ComputationObjectNode && child.fieldName in this.instance && !deepEqual(prevInstance[child.fieldName], newInstance[child.fieldName])) {
+        unchanged = false
+      }
+      const replacement = child.recreateIfStale(prevInstance, newInstance)
+      if (replacement) {
+        child.destroy()
+        this.children[i] = replacement
+      }
     }
-    return !i && (this.missingOptionalFields = t, this.resetResult(), !0);
-  }
-  getLoadingPathsForDebugging() {
-    let e = [];
-    for (let t of this.children) {
-      let i = t.getLoadingPathsForDebugging();
-      e.push.apply(e, i);
+    if (!unchanged) {
+      this.missingOptionalFields = newMissingFields
+      this.resetResult()
+      return true
     }
-    return e;
+    return false
   }
-  getOptionalErrorPathsForDebugging() {
-    let e = [];
-    for (let t of (this._result?.status === "loaded" && Object.entries(this._result.data).forEach(([t, i]) => {
-      this.queryDef.optionalFields.has(t) && i instanceof Object && "status" in i && i.status === ResourceStatus.Error && e.push(t);
-    }), this.children)) {
-      let i = t.getOptionalErrorPathsForDebugging();
-      e.push.apply(e, i);
+
+  /**
+   * Returns loading paths for debugging.
+   * Original method: getLoadingPathsForDebugging
+   */
+  getLoadingPathsForDebugging(): string[] {
+    const paths: string[] = []
+    for (const child of this.children) {
+      paths.push(...child.getLoadingPathsForDebugging())
     }
-    return e;
+    return paths
   }
+
+  /**
+   * Returns optional error paths for debugging.
+   * Original method: getOptionalErrorPathsForDebugging
+   */
+  getOptionalErrorPathsForDebugging(): string[] {
+    const errorPaths: string[] = []
+    if (this._result?.status === 'loaded') {
+      Object.entries(this._result.data).forEach(([field, value]) => {
+        if (this.queryDef.optionalFields.has(field) && value instanceof Object && 'status' in value && value.status === ResourceStatus.Error) {
+          errorPaths.push(field)
+        }
+      })
+    }
+    for (const child of this.children) {
+      errorPaths.push(...child.getOptionalErrorPathsForDebugging())
+    }
+    return errorPaths
+  }
+
+  /**
+   * Computes and returns the result for this node.
+   * Original method: result
+   */
   result() {
-    if (this._result && !this.context.options?.bustViewCache) return this._result;
-    let e = [];
-    let t = this.queryDef.projectInstance(this.instance);
-    let i = !0;
-    for (let r of this.children) {
-      let a = r.result();
-      switch (a.status) {
-        case "loading":
-          if (this.queryDef.optionalFields.has(r.fieldName)) {
-            t[this.queryDef.dealias(r.fieldName)] = {
+    if (this._result && !this.context.options?.bustViewCache) {
+      return this._result
+    }
+    const errors: any[] = []
+    const projected = this.queryDef.projectInstance(this.instance)
+    let allLoaded = true
+    for (const child of this.children) {
+      const childResult = child.result()
+      switch (childResult.status) {
+        case 'loading':
+          if (this.queryDef.optionalFields.has(child.fieldName)) {
+            projected[this.queryDef.dealias(child.fieldName)] = {
               status: ResourceStatus.Error,
-              error: `'root.${r.fieldName}' is missing, marked optional. Check server logs for more details.`
-            };
-            continue;
+              error: `'root.${child.fieldName}' is missing, marked optional. Check server logs for more details.`,
+            }
+            continue
           }
-          this._result = a;
-          return this._result;
-        case "errors":
-          i = !1;
-          e.push.apply(e, a.errors);
-          break;
-        case "loaded":
-          r.fieldName in this.instance && r instanceof _$$A2 ? t[this.queryDef.dealias(r.fieldName)] = this.instance[r.fieldName] : r.fieldName in this.instance && r instanceof _$$A3 ? t[this.queryDef.dealias(r.fieldName)] = this.instance[r.fieldName] : (e.push.apply(e, a.errors), t[this.queryDef.dealias(r.fieldName)] = a.data);
-          this.queryDef.optionalFields.has(r.fieldName) && (t[this.queryDef.dealias(r.fieldName)] = {
-            status: ResourceStatus.Loaded,
-            data: a.data
-          });
+          this._result = childResult
+          return this._result
+        case 'errors':
+          allLoaded = false
+          errors.push(...childResult.errors)
+          break
+        case 'loaded':
+          if (child.fieldName in this.instance && child instanceof ComputationHandler) {
+            projected[this.queryDef.dealias(child.fieldName)] = this.instance[child.fieldName]
+          }
+          else if (child.fieldName in this.instance && child instanceof ComputationObjectNode) {
+            projected[this.queryDef.dealias(child.fieldName)] = this.instance[child.fieldName]
+          }
+          else {
+            errors.push(...childResult.errors)
+            projected[this.queryDef.dealias(child.fieldName)] = childResult.data
+          }
+          if (this.queryDef.optionalFields.has(child.fieldName)) {
+            projected[this.queryDef.dealias(child.fieldName)] = {
+              status: ResourceStatus.Loaded,
+              data: childResult.data,
+            }
+          }
+          break
       }
     }
-    for (let e of this.missingOptionalFields) t[this.queryDef.dealias(e.fieldName)] = {
-      status: ResourceStatus.Error,
-      error: e.info || ""
-    };
+    for (const missing of this.missingOptionalFields) {
+      projected[this.queryDef.dealias(missing.fieldName)] = {
+        status: ResourceStatus.Error,
+        error: missing.info || '',
+      }
+    }
     if (this.context.options?.forceMissingOptionals?.length) {
-      let e = this.queryDef.path.slice(1).join(".");
-      for (let i of this.context.options?.forceMissingOptionals) if (i.slice(0, i.length - 1).join(".") === e) {
-        let e = i[i.length - 1];
-        this.queryDef.optionalFields.has(e) && (t[this.queryDef.dealias(e)] = {
-          status: ResourceStatus.Error,
-          error: `Client configuration forced this field to go missing, path was ${JSON.stringify(i)}`
-        });
+      const parentPath = this.queryDef.path.slice(1).join('.')
+      for (const forced of this.context.options.forceMissingOptionals) {
+        if (forced.slice(0, forced.length - 1).join('.') === parentPath) {
+          const forcedField = forced[forced.length - 1]
+          if (this.queryDef.optionalFields.has(forcedField)) {
+            projected[this.queryDef.dealias(forcedField)] = {
+              status: ResourceStatus.Error,
+              error: `Client configuration forced this field to go missing, path was ${JSON.stringify(forced)}`,
+            }
+          }
+        }
       }
     }
-    i ? this._result = {
-      status: "loaded",
-      errors: e,
-      data: t
-    } : this._result = {
-      status: "errors",
-      data: null,
-      errors: e
-    };
-    return this._result;
+    this._result = allLoaded
+      ? {
+          status: 'loaded',
+          errors,
+          data: projected,
+        }
+      : {
+          status: 'errors',
+          data: null,
+          errors,
+        }
+    return this._result
   }
+
+  /**
+   * Resets the result and notifies parent.
+   * Original method: resetResult
+   */
   resetResult() {
-    this._result = void 0;
-    this._isLoaded = !1;
-    this.parent.resetResult();
+    this._result = undefined
+    this._isLoaded = false
+    this.parent.resetResult()
   }
-  isLoaded() {
-    if (this._isLoaded) return !0;
-    for (let e of this.children) if (!e.isLoaded()) return !1;
-    this._isLoaded = !0;
-    return this._isLoaded;
+
+  /**
+   * Checks if all children are loaded.
+   * Original method: isLoaded
+   */
+  isLoaded(): boolean {
+    if (this._isLoaded)
+      return true
+    for (const child of this.children) {
+      if (!child.isLoaded())
+        return false
+    }
+    this._isLoaded = true
+    return true
   }
-  getQueryIds() {
-    let e = [];
-    for (let t of this.queriedChildren) e.push(...t.getQueryIds());
-    for (let t of this.paginatedChildren) e.push(...t.getQueryIds());
-    for (let t of this.computedObjectChildren) e.push(...t.getQueryIds());
-    return e;
+
+  /**
+   * Returns all query IDs from children.
+   * Original method: getQueryIds
+   */
+  getQueryIds(): any[] {
+    const ids: any[] = []
+    for (const child of this.queriedChildren) ids.push(...child.getQueryIds())
+    for (const child of this.paginatedChildren) ids.push(...child.getQueryIds())
+    for (const child of this.computedObjectChildren) ids.push(...child.getQueryIds())
+    return ids
   }
+
+  /**
+   * Returns the live view node.
+   * Original method: getLiveView
+   */
   getLiveView() {
-    return this.parent instanceof _$$A ? this.parent : this.parent.getLiveView();
+    return this.parent instanceof LiveViewNode ? this.parent : this.parent.getLiveView()
   }
-  debugState(e) {
+
+  /**
+   * Returns debug state for this node and its children.
+   * Original method: debugState
+   */
+  debugState(fn: (node: any) => any) {
     return {
-      _: e(this),
-      children: this.children.map(t => t.debugState(e))
-    };
+      _: fn(this),
+      children: this.children.map(child => child.debugState(fn)),
+    }
   }
 }
-export const A = $$c0;
+
+// Export with original variable name for compatibility
+export const A = QueryInstanceNode

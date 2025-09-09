@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { lV, MK } from "../figma_app/617606";
 import { J } from "../figma_app/710077";
 import { RM, F$, es } from "../figma_app/304955";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Fullscreen, ChangesStagerBindings, UserExperienceMode, PanelType, AppStateTsApi, ChatMessageType, SceneGraphTsApi } from "../figma_app/763686";
-import { Tq, _H } from "../figma_app/243058";
+import { CodeFileIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
@@ -16,7 +16,7 @@ import { Mk } from "../figma_app/31188";
 import { R9 } from "../905/977824";
 import { f9 } from "../figma_app/722362";
 import { KP } from "../figma_app/440875";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { Wh } from "../figma_app/615482";
 import { getObservableOrFallback, subscribeObservable } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
@@ -49,14 +49,14 @@ export function $$B13() {
 }
 export function $$G4(e) {
   let t = useAtomWithSubscription(Mk[PW.CODE_COMPONENT].local);
-  return e?.isCodeFile ? Object.values(t).filter(t => t.exportedFromCodeFileId === Tq.fromLocalNodeIdObj(e)).sort((e, t) => "default" === e.codeExportName ? -1 : "default" === t.codeExportName ? 1 : e.name.localeCompare(t.name)) : [];
+  return e?.isCodeFile ? Object.values(t).filter(t => t.exportedFromCodeFileId === CodeFileIdHandler.fromLocalNodeIdObj(e)).sort((e, t) => "default" === e.codeExportName ? -1 : "default" === t.codeExportName ? 1 : e.name.localeCompare(t.name)) : [];
 }
 export function $$V19() {
   let e = KP();
   let t = R9.useInfoBySessionId({
     updateSynchronously: !1
   });
-  let r = iZ();
+  let r = selectCurrentUser();
   return function (e, t, r, n) {
     if (!e || !r || !n) return !1;
     for (let r of t) if (r.userID !== e.id && r.activeCodeComponentId === n.guid) return !0;
@@ -186,7 +186,7 @@ export function $$J18() {
   useEffect(() => {
     if (e.length > 0 && AppStateTsApi?.codeSelection().fullscreenCodeNodeIds.getCopy().length === 0) {
       let t = e[0]?.assetId;
-      t && AppStateTsApi.codeSelection().fullscreenCodeNodeIds.set([Tq.toGuidStrIfLocal(t)]);
+      t && AppStateTsApi.codeSelection().fullscreenCodeNodeIds.set([CodeFileIdHandler.toGuidStrIfLocal(t)]);
     }
   }, [e]);
 }
@@ -279,8 +279,8 @@ export function $$ei11(e, t) {
     let t = $$G4($$en5(e));
     if (e?.isCodeComponent) return e;
     let r = t[0];
-    let n = r && _H.fromString(r.assetId);
-    let i = n && _H.toGuidStrIfLocal(n);
+    let n = r && CodeComponentIdHandler.fromString(r.assetId);
+    let i = n && CodeComponentIdHandler.toGuidStrIfLocal(n);
     return i ? getSingletonSceneGraph().get(i) : null;
   }(e);
   let o = useAtomWithSubscription(TJ);

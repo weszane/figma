@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useMemo, useCallback } from "react";
 import { createPortal } from "../vendor/944059";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";

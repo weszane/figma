@@ -15,7 +15,7 @@ import { Ay as _$$Ay } from "../figma_app/272902";
 import g from "classnames";
 import { _ as _$$_2 } from "../vendor/853977";
 import { selectWithShallowEqual } from "../905/103090";
-import { AF, v_, Pt } from "../figma_app/806412";
+import { useHandleChangeEvent, useHandleKeyboardEvent, generateRecordingKey } from "../figma_app/878298";
 import { GG } from "../905/511649";
 import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -28,7 +28,7 @@ import { ic } from "../figma_app/688398";
 import { x as _$$x } from "../9410/705473";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { B as _$$B } from "../905/714743";
 import { fullscreenValue } from "../figma_app/455680";
@@ -42,7 +42,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { Fo } from "../905/63728";
 import { b as _$$b } from "../1528/127188";
 import { f7 } from "../figma_app/896988";
-import { i as _$$i, tJ } from "../figma_app/741237";
+import { renameNode, replaceSelection } from "../figma_app/741237";
 import { p8 } from "../figma_app/722362";
 import { w as _$$w } from "../1528/606183";
 let s = memo(function (e) {
@@ -204,11 +204,11 @@ function et({
     g(i || "");
     C || g("");
   }, [i, C]);
-  let T = AF("onCanvasGridRowRename", "change", e => {
+  let T = useHandleChangeEvent("onCanvasGridRowRename", "change", e => {
     g(e.target.value);
     I(!0);
   });
-  let L = v_("onCanvasGridRowRename", "keydown", e => {
+  let L = useHandleKeyboardEvent("onCanvasGridRowRename", "keydown", e => {
     if (!y) switch (e.key) {
       case "Escape":
       case "Enter":
@@ -226,7 +226,7 @@ function et({
   });
   let R = useSelector(e => e.mirror.selectionProperties.name);
   let O = e => {
-    R && permissionScopeHandler.user("rename-row", () => _$$i(o, e));
+    R && permissionScopeHandler.user("rename-row", () => renameNode(o, e));
   };
   let j = "dark" === DP();
   return jsxs(_$$b, {
@@ -238,12 +238,12 @@ function et({
       "row_title--rowTitleSelectedStateGroupDarkMode--G7mLN": c && u && j
     }),
     onClick: () => {
-      tJ([o]);
+      replaceSelection([o]);
     },
     onDoubleClick: () => {
       p || E(!0);
     },
-    recordingKey: Pt(n, "rowTitle"),
+    recordingKey: generateRecordingKey(n, "rowTitle"),
     children: [e ? jsx(_$$E, {
       onClick: e => {
         e.preventDefault();
@@ -259,7 +259,7 @@ function et({
         backgroundColor: "transparent",
         marginLeft: "4px"
       },
-      recordingKey: Pt(n, "caret"),
+      recordingKey: generateRecordingKey(n, "caret"),
       children: jsx(_$$O2, {
         style: {
           "--color-icon": "var(--color-icon-secondary)"
@@ -581,7 +581,7 @@ let $$el0 = forwardRef(function ({
           top: "28px",
           left: "0"
         },
-        recordingKey: Pt(M, "caret"),
+        recordingKey: generateRecordingKey(M, "caret"),
         children: jsx(_$$k, {
           style: {
             "--color-icon": ez

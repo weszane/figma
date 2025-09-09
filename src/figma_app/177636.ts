@@ -14,7 +14,7 @@ import { u8 } from "../figma_app/976749";
 import { U } from "../905/506188";
 import { kH } from "../905/309735";
 import { FComponentType } from "../figma_app/191312";
-import { Bu2, iQA } from "../figma_app/43951";
+import { LibraryAssetDataOfType, LibraryComponentDataByLibraryKey } from "../figma_app/43951";
 import { Qp } from "../figma_app/349248";
 import { NR } from "../905/722604";
 import { FEditorType } from "../figma_app/53721";
@@ -78,7 +78,7 @@ let $$D2 = _$$n(() => {
     libraryKeys,
     enabled
   } = useAtomWithSubscription($$P0);
-  let r = libraryKeys.map(e => Bu2.Query({
+  let r = libraryKeys.map(e => LibraryAssetDataOfType.Query({
     libraryKey: e,
     assetType: FComponentType.RESPONSIVE_SET
   }));
@@ -138,7 +138,7 @@ export function $$F6() {
     let n = t?.libraryKey ?? "";
     n && r.push(n);
   }
-  let s = r.map(e => iQA.Query({
+  let s = r.map(e => LibraryComponentDataByLibraryKey.Query({
     libraryKey: e
   }));
   let o = En(s, {

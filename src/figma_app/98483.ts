@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { LayoutTabType, SceneGraphHelpers, Axis, DiagramElementType, Fullscreen, LayoutSizingMode, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
@@ -54,7 +54,7 @@ export function $$I3(e) {
               SceneGraphHelpers.setNodeTransformProperties(t.guid, {
                 [e]: r
               });
-            } catch {}
+            } catch { }
           });
         }
       }

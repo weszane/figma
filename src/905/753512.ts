@@ -7,10 +7,10 @@ import { A as _$$A } from "../vendor/850789";
 import { ZC } from "../figma_app/39751";
 import { Rs } from "../figma_app/288654";
 import { Xm, gB } from "../905/723791";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { n1 } from "../figma_app/657017";
 import { LH } from "../905/872904";
-import { saW } from "../figma_app/43951";
+import { WorkspaceSelectorView } from "../figma_app/43951";
 import { Wv } from "../figma_app/633080";
 import { F as _$$F, r as _$$r } from "../905/336143";
 import { l as _$$l } from "../905/716947";
@@ -51,7 +51,7 @@ export function $$N0({
     hasOrgAccess
   } = mG();
   let F = n1();
-  let [M] = useState(() => f ?? _$$g());
+  let [M] = useState(() => f ?? generateUUIDv4());
   let [j, U, B] = _$$t.useTabs({
     thisFile: !0,
     updates: !0,
@@ -164,7 +164,7 @@ export function $$N0({
         let c = ol()?.id;
         let u = LH() ?? void 0;
         useEffect(function () {
-          t ? (s(_$$g()), l(!1)) : (s(void 0), l(!0));
+          t ? (s(generateUUIDv4()), l(!1)) : (s(void 0), l(!0));
         }, [t]);
         let m = "loaded" === e.status;
         useEffect(function () {
@@ -188,7 +188,7 @@ export function $$N0({
     }(k, i, c);
     let P = ZC(t.activeTab);
     useEffect(function () {
-      "search" === P && "search" !== t.activeTab ? u(void 0) : "search" !== P && "search" === t.activeTab && u(_$$g());
+      "search" === P && "search" !== t.activeTab ? u(void 0) : "search" !== P && "search" === t.activeTab && u(generateUUIDv4());
     }, [P, t.activeTab]);
     return [n, k, g, f, _, results, c, queryId];
   }(V, B, M);
@@ -197,7 +197,7 @@ export function $$N0({
     let {
       hasEntAccess
     } = mG();
-    let i = Rs(saW, {
+    let i = Rs(WorkspaceSelectorView, {
       orgId: e
     }, {
       enabled: hasEntAccess

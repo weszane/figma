@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useEffect, useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { b as _$$b, bL, mc, YJ, q7, Q$, Ov, N_, g8, ZP, MJ } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
@@ -9,9 +9,9 @@ import { t as _$$t } from "../905/947268";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import m from "classnames";
-import { Ay } from "../905/612521";
-import { g as _$$g } from "../905/880308";
-import { Lf } from "../figma_app/564528";
+import { customHistory } from "../905/612521";
+import { generateUUIDv4 } from "../905/871474";
+import { sendUrlToParent } from "../figma_app/564528";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -91,7 +91,7 @@ export function $$Y1() {
   let e = Yh();
   let t = e.filter(e => !e?.disabled && !e?.isInClusterSubmenu);
   let i = e.filter(e => e?.disabled && !e?.isInClusterSubmenu);
-  let s = _$$g();
+  let s = generateUUIDv4();
   let u = PX();
   let [m, f] = useAtomValueAndSetter(Y);
   let g = Wb();
@@ -486,7 +486,7 @@ let Q = tf(function ({
                 "organize_actions_control--aiBetaBadge--F1z9L": !o
               }),
               onPointerUp: () => {
-                Lf($$H0) || Ay.unsafeRedirect($$H0, "_blank");
+                sendUrlToParent($$H0) || customHistory.unsafeRedirect($$H0, "_blank");
               }
             })
           }), m && jsx("span", {

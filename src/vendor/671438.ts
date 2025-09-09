@@ -77,7 +77,7 @@ exports.relative = function (e, t) {
   return Array(n + 1).join("../") + t.substr(e.length + 1);
 };
 var l = !("__proto__" in Object.create(null));
-function u(e) {
+function ExpiringCache(e) {
   return e;
 }
 function c(e) {
@@ -90,10 +90,10 @@ function c(e) {
 function d(e, t) {
   return e === t ? 0 : null === e ? 1 : null === t ? -1 : e > t ? 1 : -1;
 }
-exports.toSetString = l ? u : function (e) {
+exports.toSetString = l ? ExpiringCache : function (e) {
   return c(e) ? "$" + e : e;
 };
-exports.fromSetString = l ? u : function (e) {
+exports.fromSetString = l ? ExpiringCache : function (e) {
   return c(e) ? e.slice(1) : e;
 };
 exports.compareByOriginalPositions = function (e, t, n) {

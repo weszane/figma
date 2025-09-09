@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { I7 } from "../figma_app/594947";
 import { _Y } from "../figma_app/919079";
@@ -38,7 +38,7 @@ import { Y as _$$Y } from "../905/830372";
 import { E9 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { h as _$$h } from "../905/864281";
-import { bel } from "../figma_app/43951";
+import { TeamFileCountsByTeamId } from "../figma_app/43951";
 import { EL } from "../905/748636";
 import { CR, uv } from "../figma_app/419216";
 import { E as _$$E } from "../905/984674";
@@ -159,7 +159,7 @@ function ee(e) {
     topPadding,
     pointerPaddingOffset
   } = e;
-  let o = Rs(bel, {
+  let o = Rs(TeamFileCountsByTeamId, {
     teamId
   });
   let l = q5();

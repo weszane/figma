@@ -1,6 +1,6 @@
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { useMemo } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { Point } from "../905/736624";
 import { XE, u1 } from "../figma_app/91703";

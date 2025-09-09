@@ -6,7 +6,7 @@ import { sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import u from "../vendor/241899";
-import { v_, aH, Pt } from "../figma_app/806412";
+import { useHandleKeyboardEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -32,7 +32,7 @@ import { A as _$$A } from "../vendor/90566";
 import { parsePxNumber } from "../figma_app/783094";
 import { P as _$$P } from "../905/347284";
 import { fullscreenValue } from "../figma_app/455680";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { b as _$$b, bL as _$$bL, mc, q7 } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A2 } from "../905/215698";
@@ -97,9 +97,9 @@ function $(e) {
     stopRenaming();
     s !== brush.name && "" !== s && (permissionScopeHandler.user("rename-brush", () => Fullscreen.renameNode(brush.guid, s)), fullscreenValue.triggerAction("commit"));
   }, [brush.guid, brush.name, s, stopRenaming]);
-  let d = v_(e.recordingKey, "keydown", e => {
+  let d = useHandleKeyboardEvent(e.recordingKey, "keydown", e => {
     if ("Tab" === e.key || "Enter" === e.key) l();else {
-      if ("Escape" !== e.key) return aH;
+      if ("Escape" !== e.key) return SKIP_RECORDING;
       stopRenaming();
       e.stopPropagation();
       e.preventDefault();
@@ -119,9 +119,9 @@ function $(e) {
       onChange: e => {
         o(e.target.value);
       },
-      onFocus: e => (e.stopPropagation(), e.target.select(), o(e.target.value), aH),
+      onFocus: e => (e.stopPropagation(), e.target.select(), o(e.target.value), SKIP_RECORDING),
       onKeyDown: d,
-      recordingKey: Pt(e.recordingKey, "brushName"),
+      recordingKey: generateRecordingKey(e.recordingKey, "brushName"),
       spellCheck: !1,
       value: s
     }), !isRenaming && jsx("div", {
@@ -205,7 +205,7 @@ function X(e) {
           children: selected && jsx(_$$l, {})
         }), jsx($, {
           brush,
-          recordingKey: Pt(e.recordingKey, "rename"),
+          recordingKey: generateRecordingKey(e.recordingKey, "rename"),
           stopRenaming: e.stopRenaming,
           startRenaming: e.startRenaming,
           isRenaming: e.isRenaming
@@ -246,20 +246,20 @@ function ee(e) {
     onChange(e, t);
   }, [onChange]);
   let E = _$$A(t => {
-    previewEnabled && t.guid !== e.selectedBrush?.guid && I(t, zk.NO);
+    previewEnabled && t.guid !== e.selectedBrush?.guid && I(t, yesNoTrackingEnum.NO);
   }, 100);
   let x = useCallback(() => {
-    previewEnabled && (E.cancel(), I(g, zk.NO));
+    previewEnabled && (E.cancel(), I(g, yesNoTrackingEnum.NO));
   }, [previewEnabled, E, g, I]);
   let S = useCallback(e => {
     x();
     y(e);
-    I(e, zk.YES);
+    I(e, yesNoTrackingEnum.YES);
   }, [x, y, I]);
   let w = useCallback(e => {
     permissionScopeHandler.user("delete-brush", () => {
       let t = getSingletonSceneGraph().get(e.guid);
-      t && (x(), t.guid === g.guid ? S(Lk) : t.guid === selectedBrush.guid && I(g, zk.NO), t.removeSelfAndChildren(), fullscreenValue.commit());
+      t && (x(), t.guid === g.guid ? S(Lk) : t.guid === selectedBrush.guid && I(g, yesNoTrackingEnum.NO), t.removeSelfAndChildren(), fullscreenValue.commit());
     });
   }, [g, x, I, selectedBrush, S]);
   let [C, T] = useState(null);
@@ -273,7 +273,7 @@ function ee(e) {
     },
     onDeleteBrush: () => w(e),
     onPreview: E,
-    recordingKey: Pt(recordingKey, "brushRow", e.name),
+    recordingKey: generateRecordingKey(recordingKey, "brushRow", e.name),
     selected: g.guid === e.guid,
     startRenaming: () => {
       x();
@@ -396,7 +396,7 @@ export function $$et0(e) {
       onClose: () => E(!1),
       selectedBrush: A,
       previewEnabled: f && isValidValue(value),
-      recordingKey: Pt(e.recordingKey, "brushList")
+      recordingKey: generateRecordingKey(e.recordingKey, "brushList")
     })]
   });
 }

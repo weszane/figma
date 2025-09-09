@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { j } from "../905/253683";
 import { N as _$$N } from "../905/430294";
 import { getFeatureFlags } from "../905/601108";

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { Fullscreen, StylesBindings, CooperHelpers } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
@@ -8,7 +8,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { NQ } from "../905/508367";
 import { getInitialOptions } from "../figma_app/169182";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { Point } from "../905/736624";
 import { b$, FU, Bs, jR, a9, D6 } from "../figma_app/933328";
@@ -81,7 +81,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    }));else if (V.type === PW.COMPONENT) i(FU({
+    })); else if (V.type === PW.COMPONENT) i(FU({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -94,7 +94,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    }));else if (V.type === PW.MODULE) i(Bs({
+    })); else if (V.type === PW.MODULE) i(Bs({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -107,7 +107,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    }));else if (V.type === PW.RESPONSIVE_SET && Do(V)) {
+    })); else if (V.type === PW.RESPONSIVE_SET && Do(V)) {
       getFeatureFlags().sts_sprig_targeted_feedback && Sprig("track", "sites_blocks_insert");
       i(jR({
         item: V,
@@ -230,7 +230,7 @@ export function $$$$j0(e) {
       e.onPointerUp?.();
     },
     onPointerUpWithoutInsert: e.onPointerUpWithoutInsert,
-    recordingKey: Pt("component", G ? V.assetId : V.node_id),
+    recordingKey: generateRecordingKey("component", G ? V.assetId : V.node_id),
     preloadThumbnail: e.preloadThumbnail
   });
   return useMemo(() => ({

@@ -11,7 +11,7 @@ import _ from "../vendor/239910";
 import m from "lodash-es/mapValues";
 import f from "../vendor/149674";
 import { BV, eS, a5, Ew } from "../905/888985";
-import { he } from "../905/157003";
+import { createAtomFamily } from "../905/157003";
 import { Ez } from "../figma_app/766708";
 import { logError } from "../905/714362";
 import { JB as _$$JB } from "../figma_app/657017";
@@ -21,7 +21,7 @@ import { Vr, _n, j2, uE, RW, Lk, xb, kL } from "../figma_app/345195";
 import { Wh } from "../figma_app/615482";
 import { SG } from "../905/508457";
 import { createAtomWithReduxWithState, attachReducerWrapper, setupReduxAtomWithState } from "../905/270322";
-import { o9k, BbB, eHy, cmY, Ipg, jXq } from "../figma_app/43951";
+import { LibraryVariableCollectionData, LibraryVariableCollectionDataByLibraryKey, CommunityLibraryVariableCollectionDataWithVariables, VariablesByVariableCollectionKey, LibraryVariableCollectionDataByLibraryKeyWithVariables, LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
 import { Rn, Dt, kz, ZI, GI, Vk, Hr } from "../figma_app/633080";
 import { TG } from "../905/72677";
 var p = u;
@@ -173,42 +173,42 @@ createRemovableAtomFamily(e => BV(t => r => r(t({
 }))));
 let $$K7 = createRemovableAtomFamily(e => atom(t => {
   let r = {};
-  for (let n of e) r[n] = t(o9k.Query({
+  for (let n of e) r[n] = t(LibraryVariableCollectionData.Query({
     fileKey: n
   }));
   return r;
 }), arraysEqual);
-let $$Y28 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(BbB.Query({
+let $$Y28 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(LibraryVariableCollectionDataByLibraryKey.Query({
   libraryKey: e
 })))), arraysEqual);
 let $$$22 = createRemovableAtomFamily(e => eS(t => r => r(t({
   fileKey: e
 }))));
 export function $$X14(e) {
-  return eHy.Query(e ? {
+  return CommunityLibraryVariableCollectionDataWithVariables.Query(e ? {
     hubFileId: e
   } : null);
 }
 let $$q13 = createRemovableAtomFamily(e => atom(t => {
   let r = {};
-  for (let n of e) r[n] = t(he(cmY)({
+  for (let n of e) r[n] = t(createAtomFamily(VariablesByVariableCollectionKey)({
     variableCollectionKey: n
   }));
   return r;
 }), arraysEqual);
-let $$J8 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(Ipg.Query({
+let $$J8 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(LibraryVariableCollectionDataByLibraryKeyWithVariables.Query({
   libraryKey: e
 })))), arraysEqual);
 let $$Z18 = createRemovableAtomFamily(e => atom(t => {
   let r = {};
-  for (let n of e) r[n] = t(jXq.Query({
+  for (let n of e) r[n] = t(LibraryVariableCollectionDataWithVariables.Query({
     fileKey: n
   }));
   return r;
 }), arraysEqual);
 let $$Q24 = createRemovableAtomFamily(e => atom(t => {
   let r = {};
-  for (let n of e) r[n] = t(eHy.Query({
+  for (let n of e) r[n] = t(CommunityLibraryVariableCollectionDataWithVariables.Query({
     hubFileId: n
   }));
   return r;

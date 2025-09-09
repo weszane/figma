@@ -1,13 +1,13 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { E as _$$E } from "../905/701278";
 import { K } from "../905/799615";
 import { A as _$$A } from "../905/251970";
 import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX, Rw } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon, VisualBellType } from "../905/576487";
 import { fullscreenValue } from "../figma_app/455680";
 import { kl, Gt } from "../905/275640";
 import { getObservableValue } from "../figma_app/84367";
@@ -55,7 +55,7 @@ function N({
       },
       openSubmenuToTheLeft: !0,
       parentRect: a.current?.getBoundingClientRect(),
-      recordingKey: Pt(t, "menu"),
+      recordingKey: generateRecordingKey(t, "menu"),
       shouldUsePortal: !0,
       showPoint: !1
     })]
@@ -68,7 +68,7 @@ export function $$w2(e, t) {
   let s = sd();
   return a && s ? jsx(N, {
     rowRef: e,
-    recordingKey: Pt(t, "moreButton")
+    recordingKey: generateRecordingKey(t, "moreButton")
   }) : null;
 }
 export function $$O0({
@@ -99,11 +99,11 @@ export function $$R1() {
     customActionType: Wg.DIALOG_TRIGGER_BUTTON,
     onClick: () => {
       fullscreenValue.triggerActionInUserEditScope("ungroup-selection");
-      e(F.enqueue({
-        icon: zX.STACK_SELECTION,
+      e(VisualBellActions.enqueue({
+        icon: VisualBellIcon.STACK_SELECTION,
         type: "slides_remove_auto_layout_via_ungroup",
-        messageComponentKey: Rw.SLIDES_REMOVE_AUTO_LAYOUT,
-        onDismiss: () => {}
+        messageComponentKey: VisualBellType.SLIDES_REMOVE_AUTO_LAYOUT,
+        onDismiss: () => { }
       }));
     },
     icon: jsx(_$$A, {}),

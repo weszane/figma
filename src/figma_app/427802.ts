@@ -3,7 +3,7 @@ import { E } from "../905/632989";
 import { C } from "../905/520159";
 import { e as _$$e } from "../905/916195";
 import { Ay } from "@stylexjs/stylex";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { a as _$$a } from "../905/847494";
 import { X } from "../905/350405";
 import { G } from "../905/350935";
@@ -20,7 +20,7 @@ export function $$_0(e) {
       disabled: !t,
       tooltipText: getI18nString("viewer.footer.previous_frame"),
       ariaLabel: getI18nString("viewer.footer.previous_frame"),
-      recordingKey: Pt(e, "backButton"),
+      recordingKey: generateRecordingKey(e, "backButton"),
       icon: jsx(C, {})
     }), jsx(X, {}), e.shouldShowFrameCounter && jsxs(Fragment, {
       children: [jsx(G, {
@@ -34,7 +34,7 @@ export function $$_0(e) {
       disabled: !r,
       tooltipText: getI18nString("viewer.footer.next_frame"),
       ariaLabel: getI18nString("viewer.footer.next_frame"),
-      recordingKey: Pt(e, "nextButton"),
+      recordingKey: generateRecordingKey(e, "nextButton"),
       icon: jsx(_$$e, {})
     }), e.children && jsxs(Fragment, {
       children: [!i && jsx(X, {}), e.children]

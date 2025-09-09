@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useRef, useEffect, useState, useCallback, useContext, useLayoutEffect, Fragment as _$$Fragment, PureComponent, createRef, forwardRef } from "react";
-import { useDispatch, useSelector, useStore } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
@@ -8,7 +8,7 @@ import { am } from "../figma_app/901889";
 import c, { Point, expandRect } from "../905/736624";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { YQ } from "../905/502364";
-import p, { Kv } from "../figma_app/544649";
+import p, { isDevModeFocusViewActive } from "../figma_app/544649";
 import { wg, RP, k7, QD, q4, UU, pD, vV, Z5, nb as _$$nb, a$, hY, CX, RI, dB, lV, C as _$$C, _v, hx } from "../figma_app/770088";
 import { ST } from "../figma_app/91703";
 import { GH, I_, Le, wq } from "../905/234821";
@@ -19,7 +19,7 @@ import { BI, Yi, sc } from "../figma_app/546509";
 import { d0, $P } from "../figma_app/478866";
 import { yV, tS as _$$tS, q5 } from "../figma_app/516028";
 import { t as _$$t } from "../905/656351";
-import { iZ, Pc, TA } from "../905/372672";
+import { selectCurrentUser, selectUser, getUserId } from "../905/372672";
 import { zW, Qt } from "../905/162414";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { hm, kT, Dw, Eq, EB, m as _$$m } from "../905/380385";
@@ -56,7 +56,7 @@ import { H as _$$H, K_, my as _$$my, el as _$$el, e7 as _$$e2, dQ, u_ as _$$u_, 
 import e_ from "../vendor/197638";
 import { globalPerfTimer } from "../905/542194";
 import { sP, I as _$$I, Kx, pV } from "../figma_app/819288";
-import { rf, BV, v_ } from "../figma_app/806412";
+import { useHandleMouseEvent, useHandlePointerEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { JD } from "../905/986103";
 import { getI18nString, getI18nStringAlias, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
@@ -68,14 +68,14 @@ import { j as _$$j } from "../draftjs_composer/390258";
 import { O1, KD } from "../figma_app/317394";
 import { z3, _6 } from "../figma_app/386952";
 import { t0 as _$$t3 } from "../figma_app/198840";
-import { dDF } from "../figma_app/43951";
+import { FileCanEdit } from "../figma_app/43951";
 import { throwTypeError } from "../figma_app/465776";
 import { clamp } from "../figma_app/492908";
 import { k as _$$k3 } from "../905/443820";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
-import { g as _$$g2 } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { P as _$$P } from "../905/347284";
 import { Kq } from "../figma_app/936061";
 import { kc } from "../figma_app/740025";
@@ -126,7 +126,7 @@ import { yo, k3, U6 } from "../figma_app/591738";
 import { Z as _$$Z2 } from "../905/104740";
 import { K as _$$K3 } from "../905/443068";
 import { J as _$$J2 } from "../905/231762";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { b as _$$b2 } from "../905/985254";
 import { kJ } from "../905/723870";
 import { fu } from "../figma_app/831799";
@@ -511,7 +511,7 @@ let eN = memo(function ({
   let p = useRef(null);
   let [h, f] = useState(!1);
   let [_, g] = useState(!1);
-  let v = rf(m, "click", useCallback(() => {
+  let v = useHandleMouseEvent(m, "click", useCallback(() => {
     globalPerfTimer.start("view_comment_thread");
     n(e.id);
   }, [n, e.id]));
@@ -624,7 +624,7 @@ let eN = memo(function ({
       }
     }
   }, [d]);
-  let y = BV(m, "pointerover", () => {
+  let y = useHandlePointerEvent(m, "pointerover", () => {
     f(!0);
   });
   return jsxs(Fragment, {
@@ -900,7 +900,7 @@ function eB(e) {
 }
 let eU = memo(function (e) {
   let t = !!e.activeThread || e.threads.length > 0;
-  let n = iZ();
+  let n = selectCurrentUser();
   let s = _$$s();
   let r = _$$Z();
   let m = useDispatch();
@@ -1421,10 +1421,10 @@ function t6(e) {
       s ? await pinApi?.removePin(e.id, e.commentPin.id) : await pinApi?.setPin(e.id);
     } catch (e) {
       if (!e || e?.data?.status === 422) return;
-      e?.data?.i18n ? a(_$$F.enqueue({
+      e?.data?.i18n ? a(VisualBellActions.enqueue({
         message: _$$J2(e, e.data.message),
         error: !0
-      })) : a(_$$F.enqueue({
+      })) : a(VisualBellActions.enqueue({
         message: getI18nStringAlias("comments.pinning.err.fallback"),
         error: !0
       }));
@@ -1684,7 +1684,7 @@ function nr(e) {
   let ei = thread.id;
   let es = thread.uuid;
   let er = useCallback(() => {
-    let e = _$$g2();
+    let e = generateUUIDv4();
     globalPerfTimer.start(`comment_reply_creation_${e}`);
     submitReply({
       threadId: ei,
@@ -2066,7 +2066,7 @@ let nm = {
 };
 function nu(e) {
   let t = useSelector(e => e.selectedView);
-  let n = iZ();
+  let n = selectCurrentUser();
   let s = useContext(viewportNavigatorContext);
   let r = "communityHub" !== t.view || e.thread.comments[0]?.user_id === n?.id;
   let l = useDispatch();
@@ -2225,7 +2225,7 @@ function np(e) {
     let o = Z0(t.current, e);
     return rN(o, n);
   }, [s, t]);
-  let d = iZ();
+  let d = selectCurrentUser();
   let m = kc();
   let u = "communityHub" === useSelector(e => e.selectedView).view ? m : d;
   return jsx(nu, {
@@ -2713,7 +2713,7 @@ function nD(e, t, n, o, a) {
   return new Point(r.x, r.y);
 }
 function nL(e) {
-  let t = Pc();
+  let t = selectUser();
   let n = useDispatch();
   let a = useSelector(e => e.comments.typeahead);
   return jsx(nI, {
@@ -2837,14 +2837,14 @@ function nO(e) {
     }
   }, [t, l, u, D]);
   let R = "communityHub" === d.view;
-  let F = TA();
-  let B = Pc();
+  let F = getUserId();
+  let B = selectUser();
   let U = useSelector(e => e.comments);
   let H = "communityHub" === d.view;
   let V = useMemo(() => "communityHub" === d.view && "hubFile" === d.subView && _$$t3(d.fullscreenState), [d]);
   let q = null;
   u ? q = A.selectionBoxAnchor : l.comments[0].client_meta?.selection_box_anchor && (l.comments[0].client_meta?.in_frame, q = l.selectionAnchorCanvasPosition ?? l.boundingBoxAnchorCanvasPosition ?? null);
-  let z = !!Rs(dDF(u ? null : {
+  let z = !!Rs(FileCanEdit(u ? null : {
     key: e.thread.key
   })).unwrapOr(!1);
   let Z = F === l.comments[0]?.user_id;
@@ -3210,7 +3210,7 @@ function nG(e) {
       return;
     }
   }, [p, m, e.activeId, u, x]);
-  let C = v_(e.recordingKey, "keydown", y);
+  let C = useHandleKeyboardEvent(e.recordingKey, "keydown", y);
   let w = useCallback(e => {
     C(e.event);
   }, [C]);
@@ -3305,7 +3305,7 @@ function n0(e) {
   } = e;
   let s = useContext(viewportNavigatorContext);
   let l = useSelector(e => "communityHub" === e.selectedView.view);
-  let d = iZ();
+  let d = selectCurrentUser();
   let m = q5();
   let u = useSelector(e => e.selectedView.commentThreadId);
   let p = useDispatch();
@@ -3477,7 +3477,7 @@ function n2(e) {
   let A = useCallback(e => {
     s(hx(e));
   }, [s]);
-  if (Kv() || k && (I || isLoading) || null === M || j) return null;
+  if (isDevModeFocusViewActive() || k && (I || isLoading) || null === M || j) return null;
   let L = !k && !!S?.requestToSelectCommentPin && !!S?.requestToDeselectCommentPin && !!S?.requestToAddDraftCommentPin;
   return jsx(n0, {
     activeId: e.activeId,

@@ -1,6 +1,6 @@
 import { u as _$$u } from "../905/700827";
 import { jsx } from "react/jsx-runtime";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { gV, wl } from "../figma_app/640564";
 import { p as _$$p } from "../905/428660";
 import { M } from "../905/722875";
@@ -40,7 +40,7 @@ export function $$p0({
         return t.reactRouterHandled && i.reactRouterHandled;
       }(e)) {
         n.preventDefault();
-        Ay.push(e);
+        customHistory.push(e);
         return;
       }
       M() && function (e, t) {

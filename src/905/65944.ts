@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, createContext, useState, useMemo, useContext, useEffect, useRef, memo, createRef, forwardRef, useId } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Y9, r1, qj, jk, vo, nB } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
@@ -17,7 +17,7 @@ import { C as _$$C } from "../905/108595";
 import { ZC } from "../figma_app/39751";
 import { M as _$$M } from "../figma_app/648761";
 import { getFilteredFeatureFlags } from "../905/717445";
-import { Pt, rf, qP } from "../figma_app/806412";
+import { generateRecordingKey, useHandleMouseEvent, useSetupPlayback } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { tH as _$$tH } from "../905/751457";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -97,7 +97,7 @@ import { L as _$$L3 } from "../905/210923";
 import { Oe } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { u as _$$u } from "../figma_app/852050";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { f as _$$f } from "../905/135117";
 import { p as _$$p2 } from "../905/725707";
 import { ZB } from "../figma_app/451499";
@@ -131,7 +131,7 @@ import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useSprigWithSampling } from "../905/99656";
 import { EV } from "../figma_app/975811";
-import { wr, Dh } from "../figma_app/741237";
+import { clearSelection, addToSelection } from "../figma_app/741237";
 import { Bf } from "../figma_app/249941";
 import { V as _$$V } from "../905/823363";
 import { WC } from "../figma_app/973219";
@@ -272,7 +272,7 @@ function eC({
       value: e,
       onChange: s,
       className: eb,
-      recordingKey: Pt(a, "paintTypeGroupTabs"),
+      recordingKey: generateRecordingKey(a, "paintTypeGroupTabs"),
       children: Object.values(eE).filter(e => {
         switch (e) {
           case "SOLID":
@@ -321,21 +321,21 @@ function eT({
       isSelected: sb(e),
       onChange: t,
       paintType: "SOLID",
-      recordingKey: Pt(s, "solid"),
+      recordingKey: generateRecordingKey(s, "solid"),
       icon: jsx(_$$H, {}),
       tooltip: getI18nString("fullscreen.properties_panel.solid")
     }), jsx(ek, {
       isSelected: bn(e),
       onChange: t,
       paintType: "GRADIENT_LINEAR",
-      recordingKey: Pt(s, "gradientLinear"),
+      recordingKey: generateRecordingKey(s, "gradientLinear"),
       icon: jsx(_$$z, {}),
       tooltip: getI18nString("fullscreen.properties_panel.gradient")
     }), o && jsx(ek, {
       isSelected: "PATTERN" === e,
       onChange: t,
       paintType: "PATTERN",
-      recordingKey: Pt(s, "pattern"),
+      recordingKey: generateRecordingKey(s, "pattern"),
       icon: jsx(_$$L, {}),
       tooltip: getI18nString("fullscreen.properties_panel.pattern"),
       disabled: r && "PATTERN" !== e
@@ -343,14 +343,14 @@ function eT({
       isSelected: "IMAGE" === e,
       onChange: t,
       paintType: "IMAGE",
-      recordingKey: Pt(s, "image"),
+      recordingKey: generateRecordingKey(s, "image"),
       icon: jsx(_$$Z, {}),
       tooltip: getI18nString("fullscreen.properties_panel.image")
     }), !i && jsx(ek, {
       isSelected: "VIDEO" === e,
       onChange: t,
       paintType: "VIDEO",
-      recordingKey: Pt(s, "video"),
+      recordingKey: generateRecordingKey(s, "video"),
       icon: jsx(_$$k3, {}),
       tooltip: getI18nString("fullscreen.properties_panel.video"),
       onboardingKey: eg
@@ -455,20 +455,20 @@ function eZ({
     case "paint":
       return jsx(eX, {
         paint: e.stylePaint.paint,
-        recordingKey: Pt(t, "chit", i),
+        recordingKey: generateRecordingKey(t, "chit", i),
         onClick: r
       });
     case "style":
       return jsx(eQ, {
         dsStyle: e.style,
         onClick: a,
-        recordingKey: Pt(t, "chit", i)
+        recordingKey: generateRecordingKey(t, "chit", i)
       });
     case "variable":
       return jsx(eJ, {
         variable: e.variable,
         variableCollection: e.variableCollection,
-        recordingKey: Pt(t, "chit", i),
+        recordingKey: generateRecordingKey(t, "chit", i),
         onClick: r
       });
   }
@@ -587,7 +587,7 @@ function e6({
       children: u.format(e)
     }, e) : jsx(_$$c$2, {
       value: e,
-      recordingKey: Pt(s, t)
+      recordingKey: generateRecordingKey(s, t)
     }, e);
   }, [u, s, c]);
   let g = useMemo(() => e.filter(_U).map(m), [m, e]);
@@ -645,7 +645,7 @@ function e7({
     } else Eo.getCanvas(t).then(t => {
       let i = SharedStyle.getColorForSharedFillStyle(t);
       i && e(i);
-    }).catch(() => {});
+    }).catch(() => { });
   }, [e, o]);
   let g = useCallback(t => {
     null != t.color && null != t.opacity && e({
@@ -743,7 +743,7 @@ function e9({
           transform: `translate(${(a - t) * 24}px, ${24 * e.index}px)`
         },
         children: p ? jsx(eV, {}) : jsx(eZ, {
-          recordingKey: Pt(o, "swatch"),
+          recordingKey: generateRecordingKey(o, "swatch"),
           index: a,
           asset: r,
           onPaintChitClick: d,
@@ -772,7 +772,7 @@ function e9({
         selectedSwatchSetId: t,
         subscribedLibraries: a,
         onChange: l,
-        recordingKey: Pt(o, "swatchSetSelect")
+        recordingKey: generateRecordingKey(o, "swatchSetSelect")
       })
     }), jsx(_$$P, {
       className: _()("library_color_swatch--swatchScrollContainer--im6kP", {
@@ -813,7 +813,7 @@ function ty(e) {
     recordingKey: e.recordingKey,
     children: e.paintTypeOptions.map((t, i) => jsx(tA, {
       value: t,
-      recordingKey: Pt(e, t)
+      recordingKey: generateRecordingKey(e, t)
     }, i))
   });
 }
@@ -888,7 +888,7 @@ let tk = memo(function ({
       onColorPickerToggle: e,
       onDelete: t,
       onSelect: g,
-      recordingKey: Pt(s, "gradientStop", r),
+      recordingKey: generateRecordingKey(s, "gradientStop", r),
       setDeleteButtonFocused: m,
       setPercentInputFocused: u,
       stop: i,
@@ -928,13 +928,13 @@ function tR({
   let R = useCallback(() => {
     l?.(e);
   }, [e, l]);
-  let N = rf(Pt(c, "row"), "mousedown", R);
+  let N = useHandleMouseEvent(generateRecordingKey(c, "row"), "mousedown", R);
   let P = useCallback((t, n) => {
     i(e, t, u.position, void 0, n);
   }, [e, i, u]);
   let O = useCallback(() => {
     _$$f(StyleVariableOperation.VARIABLE_DETACH, CopyPasteType.DIRECT, () => {
-      i(e, u.color, u.position, void 0, zk.YES);
+      i(e, u.color, u.position, void 0, yesNoTrackingEnum.YES);
     });
   }, [e, i, u]);
   let D = useCallback(t => {
@@ -1053,7 +1053,7 @@ function tN({
     R({
       stops: t,
       stopsVar: i
-    }, zk.YES);
+    }, yesNoTrackingEnum.YES);
   };
   let O = k.stopsVar[S]?.colorVar;
   let F = _$$u(MH(O) || void 0);
@@ -1126,7 +1126,7 @@ function tN({
       R({
         stops: k.stops,
         stopsVar: r
-      }, zk.YES);
+      }, yesNoTrackingEnum.YES);
     });
   };
   let G = useCallback((e, t) => {
@@ -1144,7 +1144,7 @@ function tN({
     paintTypeOptions: ["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"],
     onChange: o,
     dropdownShown: g,
-    recordingKey: Pt(c, "gradientTypeSelect")
+    recordingKey: generateRecordingKey(c, "gradientTypeSelect")
   });
   let Y = jsx(_$$K, {
     actionOnPointerDown: !0,
@@ -1200,7 +1200,7 @@ function tN({
           currentSelectedGradientStop: t,
           hasFocus: (x.current && x.current.hasFocus()) ?? !1,
           dispatch: A,
-          recordingKey: Pt(c, "gradient")
+          recordingKey: generateRecordingKey(c, "gradient")
         }), jsxs(fI, {
           className: _()("gradient_editor--stopsHeaderRow--pxKWt", {
             "gradient_editor--stopsHeaderRowNewUI--OtVTB": W
@@ -1228,7 +1228,7 @@ function tN({
           onDeleteStop: P,
           onSelectedStopIndexChange: C,
           onStopsChange: R,
-          recordingKey: Pt(c, "gradientStops"),
+          recordingKey: generateRecordingKey(c, "gradientStops"),
           selectedStopIndex: S,
           stops: k.stops,
           stopsVar: k.stopsVar
@@ -1245,7 +1245,7 @@ function tN({
       onChange: j,
       onClose: z,
       onVariableChange: B,
-      recordingKey: Pt(c, "colorPicker"),
+      recordingKey: generateRecordingKey(c, "colorPicker"),
       variableScopes: h
     }, S)]
   });
@@ -1507,7 +1507,7 @@ function t9(e) {
     u && aT(u) ? A(!0) : A(!1);
   }, [u]);
   let y = useCallback(async () => {
-    u && (wr(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(u.guid), Dh([u.guid]), fullscreenValue.triggerActionInUserEditScope("zoom-to-selection", void 0), s === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default", null));
+    u && (clearSelection(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(u.guid), addToSelection([u.guid]), fullscreenValue.triggerActionInUserEditScope("zoom-to-selection", void 0), s === DesignGraphElements.PATTERN_SOURCE_SELECTOR && fullscreenValue.triggerAction("set-tool-default", null));
   }, [u, s]);
   return jsxs(Id, {
     children: [jsxs("div", {
@@ -1534,7 +1534,7 @@ function t9(e) {
             },
             iconPrefix: jsx(_$$o, {}),
             variant: s === DesignGraphElements.PATTERN_SOURCE_SELECTOR ? "primary" : "secondary",
-            recordingKey: Pt(e.recordingKey, "selectSource"),
+            recordingKey: generateRecordingKey(e.recordingKey, "selectSource"),
             children: renderI18nText("properties_panel.pattern.select_source")
           })
         })
@@ -1620,7 +1620,7 @@ function t9(e) {
             scale: t
           });
         },
-        recordingKey: Pt(e, "scale"),
+        recordingKey: generateRecordingKey(e, "scale"),
         smallNudgeAmount: 1,
         tooltipForScreenReadersOnly: !0,
         value: e.paint.scale,
@@ -1648,7 +1648,7 @@ function t9(e) {
             spacing: 0
           });
         },
-        recordingKey: Pt(e, "spacing"),
+        recordingKey: generateRecordingKey(e, "spacing"),
         smallNudgeAmount: 1,
         tooltipForScreenReadersOnly: !0,
         value: e.paint.patternSpacing.x,
@@ -1747,15 +1747,15 @@ function it({
       manager: i,
       children: [jsx(_$$t.Tab, {
         ...r.custom_color,
-        recordingKey: Pt(t, "viewTabs.customColor"),
+        recordingKey: generateRecordingKey(t, "viewTabs.customColor"),
         children: renderI18nText("fullscreen.properties_panel.color_picker.custom")
       }), jsx(_$$t.Tab, {
         ...r.library,
-        recordingKey: Pt(t, "viewTabs.library"),
+        recordingKey: generateRecordingKey(t, "viewTabs.library"),
         children: renderI18nText("fullscreen.properties_panel.color_picker.libraries")
       }), r.cms && jsx(_$$t.Tab, {
         ...r.cms,
-        recordingKey: Pt(t, "viewTabs.dakota"),
+        recordingKey: generateRecordingKey(t, "viewTabs.dakota"),
         children: renderI18nText("variables.binding_ui.variable_dakota_tab_name")
       })]
     }), e && jsx(jk, {
@@ -1886,7 +1886,7 @@ export let $$ii1 = forwardRef(function ({
     recordingKey: O,
     rightButtons: !J && jsx(_$$K, {
       "aria-label": getI18nString("variables.binding_ui.create_style_or_variable_button_tooltip"),
-      recordingKey: Pt(O, "createVariable"),
+      recordingKey: generateRecordingKey(O, "createVariable"),
       onClick: ew,
       htmlAttributes: {
         "data-tooltip": getI18nString("variables.binding_ui.create_style_or_variable_button_tooltip"),
@@ -1934,7 +1934,7 @@ export let $$ii1 = forwardRef(function ({
       children: jsx(is, {
         disabledVariableIds: new Set(),
         selectedItem: i || _$$L2(e),
-        recordingKey: Pt(O, "libraryColors"),
+        recordingKey: generateRecordingKey(O, "libraryColors"),
         onVariableSelected: H,
         onStyleSelected: W ? ey : void 0,
         onClose: K,
@@ -1964,7 +1964,7 @@ export let $$ii1 = forwardRef(function ({
           ...eo,
           modalWidth: 240
         }) : y,
-        recordingKey: Pt(O, "modal"),
+        recordingKey: generateRecordingKey(O, "modal"),
         htmlAttributes: {
           "data-testid": J ? "paint-picker-v2-style-modal" : "paint-picker-v2-modal"
         },
@@ -2093,7 +2093,7 @@ function ia({
           disableImagePaints: C,
           disablePatternPaints: T,
           hidePatternPaints: k,
-          recordingKey: getFeatureFlags().eu_fpl_colors_tab ? d : Pt(d, "paintTypeGroupTabs")
+          recordingKey: getFeatureFlags().eu_fpl_colors_tab ? d : generateRecordingKey(d, "paintTypeGroupTabs")
         }), jsxs("div", {
           className: "color_picker_v2--rightButtons--d-dbS",
           children: [jsx(Rk, {
@@ -2101,12 +2101,12 @@ function ia({
             onBlendModeChange: b,
             dispatch: F,
             dropdownShown: c,
-            recordingKey: Pt(d, "blendModeSelection"),
+            recordingKey: generateRecordingKey(d, "blendModeSelection"),
             disabled: R
           }, `color-picker-blend-mode-selection-${t}`), ea && jsx(O1, {
             toggled: er.settings.contrastInfoShown,
             setToggled: er.settings.setIsColorContrastInfoShown,
-            recordingKey: Pt(d, "colorContrastButton"),
+            recordingKey: generateRecordingKey(d, "colorContrastButton"),
             panelID: eo
           })]
         })]
@@ -2138,7 +2138,7 @@ function ia({
             },
             paintPickerSessionId: i,
             preventAutoFocus: !0,
-            recordingKey: Pt(d, "colorControls")
+            recordingKey: generateRecordingKey(d, "colorControls")
           })
         }), jsx(e7, {
           recordingKey: d,
@@ -2153,7 +2153,7 @@ function ia({
       onKeyDown: m,
       onPaintTypeChange: v,
       paint: Q,
-      recordingKey: Pt(d, "gradientEditor"),
+      recordingKey: generateRecordingKey(d, "gradientEditor"),
       variableScopes: x
     }) : null), ei ? jsx(SY, {
       dispatch: F,
@@ -2163,13 +2163,13 @@ function ia({
       onClose: L,
       paint: J,
       paintId: t,
-      recordingKey: Pt(d, "imageSettings"),
+      recordingKey: generateRecordingKey(d, "imageSettings"),
       updateStillImageAndSelectionPropertiesForGIF: w
     }) : null, getFilteredFeatureFlags().ce_il_pattern && ee && jsx(t9, {
       paint: ee,
       dispatch: F,
       onChange: g,
-      recordingKey: Pt(d, "patternSettings")
+      recordingKey: generateRecordingKey(d, "patternSettings")
     }), getFilteredFeatureFlags().ce_il_noise && et && jsx(tz, {
       paint: et,
       dispatch: F,
@@ -2254,7 +2254,7 @@ export function $$io0({
     G.current = t;
     V(!0);
   }
-  let Y = qP(h || "color_picker", "close", useCallback(() => {
+  let Y = useSetupPlayback(h || "color_picker", "close", useCallback(() => {
     EyedropperBindings?.toggleOffEyedropper();
     _ ? _() : v(XE());
   }, [_, v]));
@@ -2271,14 +2271,14 @@ export function $$io0({
       }) => {
         "outside" === e && t && t.closest("#fullscreen-root") || Y();
       },
-      recordingKey: Pt(h, "modal"),
+      recordingKey: generateRecordingKey(h, "modal"),
       children: jsxs(vo, {
         allowOverflow: !0,
         children: [jsx(it, {
           rightButtons: function () {
             if (b) return jsx(_$$K, {
               "aria-label": getI18nString("variables.binding_ui.create_variable_button_tooltip"),
-              recordingKey: Pt(h, "createVariable"),
+              recordingKey: generateRecordingKey(h, "createVariable"),
               onClick: K,
               htmlAttributes: {
                 "data-tooltip": getI18nString("variables.binding_ui.create_variable_button_tooltip"),
@@ -2304,7 +2304,7 @@ export function $$io0({
               dropdownShown: I,
               onColorChange: g,
               preventAutoFocus: !0,
-              recordingKey: Pt(h, "colorControls")
+              recordingKey: generateRecordingKey(h, "colorControls")
             }), !A && jsx(e7, {
               onChange: g,
               recordingKey: h
@@ -2314,7 +2314,7 @@ export function $$io0({
             children: jsx(is, {
               selectedItem: t,
               disabledVariableIds: i,
-              recordingKey: Pt(h, "libraryColors"),
+              recordingKey: generateRecordingKey(h, "libraryColors"),
               onVariableSelected: f,
               variableScopes: y,
               onClose: Y

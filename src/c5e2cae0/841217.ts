@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch, useSelector } from "../vendor/514228";
-import { Ay } from "../905/612521";
+import { useDispatch, useSelector } from "react-redux";
+import { customHistory } from "../905/612521";
 import { Ph, Kz, vd } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -161,7 +161,7 @@ export function $$E0(e) {
   let D = estimatedDesignCost(x.numDesignEditors, x.billingPeriod);
   let B = estimatedWhiteboardCost(O, x.billingPeriod);
   let L = I ? 0 : x.taxes?.total || D + B;
-  let V = new URLSearchParams(Ay.location.search);
+  let V = new URLSearchParams(customHistory.location.search);
   let $ = V.get("onCompleteRedirectFileKey");
   let U = V.get("onCompleteRedirectNodeId");
   let {

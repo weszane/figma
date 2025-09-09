@@ -2,12 +2,12 @@ import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
 import a from "../vendor/805353";
 import o from "../vendor/232260";
-import { k as _$$k } from "../905/651849";
+import { logger } from "../905/651849";
 import { entrypointVariant } from "../905/709735";
 import { datadogRum, y as _$$y } from "../905/270963";
 import { Ng, jm } from "../figma_app/416935";
 import { debugState } from "../905/407919";
-import { Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 import { getStaticDomain, getInitialOptions } from "../figma_app/169182";
 import { normalizeUrl } from "../3973/348894";
 import { getUserPlan } from "../905/912096";
@@ -61,7 +61,7 @@ export function $$k1({
   } = getInitialOptions();
   let F = getInitialOptions().datadog_rum_site;
   if (!datadog_rum_application_id || !datadog_rum_client_token || !F) {
-    _$$k.debug("Missing Datadog RUM application ID, client token, or site. RUM client disabled");
+    logger.debug("Missing Datadog RUM application ID, client token, or site. RUM client disabled");
     return;
   }
   let M = R(user_data?.email);
@@ -76,7 +76,7 @@ export function $$k1({
   }(M);
   let U = isDebugFlowActive();
   if (!(a = a || U) && (!user_data || T(R(user_data.email)) && 100 !== j.rolloutPercent && murmurHash(user_data.id, 7) % 100 >= j.rolloutPercent)) return;
-  let B = U || !(Ay.location.pathname.startsWith("/design") || Ay.location.pathname.startsWith("/file/") || Ay.location.pathname.startsWith("/proto") || Ay.location.pathname.startsWith("/deck") || Ay.location.pathname.startsWith("/mirror") || Ay.location.pathname.startsWith("/desktop_new_tab") || Ay.location.pathname.startsWith("/board") || Ay.location.pathname.startsWith("/slides") || Ay.location.pathname.startsWith("/site")) || datadog_rum_fullscreen;
+  let B = U || !(customHistory.location.pathname.startsWith("/design") || customHistory.location.pathname.startsWith("/file/") || customHistory.location.pathname.startsWith("/proto") || customHistory.location.pathname.startsWith("/deck") || customHistory.location.pathname.startsWith("/mirror") || customHistory.location.pathname.startsWith("/desktop_new_tab") || customHistory.location.pathname.startsWith("/board") || customHistory.location.pathname.startsWith("/slides") || customHistory.location.pathname.startsWith("/site")) || datadog_rum_fullscreen;
   let V = U ? 100 : function (e, t, i) {
     let {
       datadog_rum_record_all
@@ -97,7 +97,7 @@ export function $$k1({
     try {
       K.push(new RegExp(e));
     } catch (t) {
-      _$$k.warn(`Invalid regex pattern for Datadog RUM trace URL: ${e}`);
+      logger.warn(`Invalid regex pattern for Datadog RUM trace URL: ${e}`);
     }
   });
   $$D0.configure({

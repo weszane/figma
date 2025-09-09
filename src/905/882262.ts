@@ -1,5 +1,5 @@
 import { n as _$$n } from "../905/347702";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { tB } from "../figma_app/516028";
 export let $$a1 = _$$n(e => {
   let t = tB({

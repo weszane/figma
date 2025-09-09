@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { StateHierarchy } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
 import { oB } from "../905/929976";

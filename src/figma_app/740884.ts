@@ -4,7 +4,7 @@ import { o as _$$o } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { O } from "../905/969533";
 import l from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { YQ } from "../905/502364";
 import { hx } from "../figma_app/290668";
 import { BK } from "../905/848862";
@@ -61,7 +61,7 @@ export function $$g0({
           }
         }));
       },
-      recordingKey: Pt(I, "chevron"),
+      recordingKey: generateRecordingKey(I, "chevron"),
       children: jsx(O, {})
     })
   });

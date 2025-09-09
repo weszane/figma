@@ -18,7 +18,7 @@ import { A as _$$A } from "../vendor/850789";
 import { getFeatureFlagRulesExport, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { ks } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { k as _$$k2 } from "../905/443820";
@@ -27,9 +27,9 @@ import { Z } from "../905/279476";
 import { x as _$$x } from "../905/149501";
 import { g as _$$g } from "../905/125190";
 import { F as _$$F } from "../905/422355";
-import { F as _$$F2 } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Ib } from "../905/129884";
-import { Ay as _$$Ay } from "../905/612521";
+import { customHistory } from "../905/612521";
 let D = memo(function (e) {
   let t = useDispatch();
   let i = getFeatureFlags()[e.flagName] ?? !1;
@@ -59,7 +59,7 @@ let D = memo(function (e) {
               className: _$$s.cursorPointer.$,
               onClick: () => {
                 navigator.clipboard.writeText(e.flagName);
-                t(_$$F2.enqueue({
+                t(VisualBellActions.enqueue({
                   type: "feature-flag-copy-to-clipboard",
                   message: getI18nString("feature_flag_overrides.copied_to_clipboard", {
                     flagName: e.flagName
@@ -261,7 +261,7 @@ function V(e) {
     }
   }, [m]);
   useEffect(() => {
-    0 === h && _$$Ay.reload("feature flag override refresh");
+    0 === h && customHistory.reload("feature flag override refresh");
   }, [h]);
   return jsxs(Fragment, {
     children: [jsx(nB, {

@@ -5,7 +5,7 @@ import { Ro } from "../figma_app/564095";
 import { Dd } from "../figma_app/599979";
 import { FP, Y8 } from "../figma_app/86989";
 import { sZ } from "../905/845253";
-import { TA } from "../905/372672";
+import { getUserId } from "../905/372672";
 import { isPluginVersionPublished } from "../figma_app/300692";
 import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget } from "../figma_app/155287";
 import { BY } from "../905/946805";
@@ -131,7 +131,7 @@ export function $$b3(e) {
   return e.types.has(Ag.COMMUNITY);
 }
 export function $$T8(e) {
-  let t = TA();
+  let t = getUserId();
   switch (e) {
     case BY.ALL:
       return () => !0;

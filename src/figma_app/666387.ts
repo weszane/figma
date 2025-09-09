@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { G as _$$G } from "../905/865520";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
@@ -10,7 +10,7 @@ import { DQ, Pw } from "../figma_app/121751";
 import { A as _$$A } from "../905/654645";
 import { u8 } from "../figma_app/391338";
 import { q5 } from "../figma_app/516028";
-import { iP2 } from "../figma_app/43951";
+import { ColorPalettesForTeam } from "../figma_app/43951";
 import { zQ } from "../figma_app/465071";
 import { cD } from "../figma_app/598018";
 import { Ib, Ui, Zj } from "../905/129884";
@@ -214,7 +214,7 @@ export function $$K0(e) {
       isOpenFileLoadedFromLiveGraph: c
     }
   });
-  let [y] = IT(iP2({
+  let [y] = IT(ColorPalettesForTeam({
     teamId: t
   }), {
     enabled: !!t

@@ -15,7 +15,7 @@ import { XHR } from "../905/910117";
 import { s as _$$s, Q } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { J } from "../905/231762";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { O as _$$O } from "../905/963222";
@@ -262,7 +262,7 @@ let $$Y34 = createOptimistThunk((e, {
         }));
       }
     };
-    e.dispatch(_$$F.enqueue({
+    e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("comments.comment_resolved"),
       type: "comment-resolved",
       button: i,
@@ -398,7 +398,7 @@ let $$q27 = createOptimistThunk((e, t) => {
   }).then(({
     data: t
   }) => {
-    t.message?.warning_message && 0 !== t.message.warning_message.length && e.dispatch(_$$F.enqueue({
+    t.message?.warning_message && 0 !== t.message.warning_message.length && e.dispatch(VisualBellActions.enqueue({
       type: "at-mention-error",
       message: t.message.warning_message
     }));
@@ -561,7 +561,7 @@ let $$er40 = createOptimistThunk((e, t) => {
     let {
       data
     } = t;
-    if (data.message?.warning_message && 0 !== data.message.warning_message.length && e.dispatch(_$$F.enqueue({
+    if (data.message?.warning_message && 0 !== data.message.warning_message.length && e.dispatch(VisualBellActions.enqueue({
       type: "at-mention-error",
       message: data.message.warning_message
     })), data.message && data.message.is_new_file_follower) {
@@ -577,7 +577,7 @@ let $$er40 = createOptimistThunk((e, t) => {
           });
         }
       } : void 0;
-      e.dispatch(_$$F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("comments.you_will_be_notified_about_replies"),
         type: "comments-opted-in",
         button: t,
@@ -694,7 +694,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
           action(t, r) {
             if (e.getState().comments.activeThread?.id === hm && e.getState().comments.newComment.messageMeta.length > 0) {
               e.dispatch(eA());
-              e.dispatch(_$$F.update({
+              e.dispatch(VisualBellActions.update({
                 id: r,
                 message: getI18nString("comments.finish_or_clear_your_active_comment_then_hit_view")
               }));
@@ -704,7 +704,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
             e.dispatch($$eo5());
           }
         };
-        e.dispatch(_$$F.enqueue({
+        e.dispatch(VisualBellActions.enqueue({
           type: `comment-creation-failure: ${S}`,
           error: !1,
           message: getI18nString("comments.oops_one_of_your_comments_never_posted"),
@@ -731,7 +731,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
       data
     } = p;
     if (U2(e.getState().selectedView) !== i) return;
-    if (data.message?.warning_message && 0 !== data.message.warning_message.length && e.dispatch(_$$F.enqueue({
+    if (data.message?.warning_message && 0 !== data.message.warning_message.length && e.dispatch(VisualBellActions.enqueue({
       type: "at-mention-error",
       message: data.message.warning_message
     })), data.message && data.message.is_new_file_follower) {
@@ -749,7 +749,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
           });
         }
       } : void 0;
-      e.dispatch(_$$F.enqueue({
+      e.dispatch(VisualBellActions.enqueue({
         message: getI18nString("comments.you_will_be_notified_about_replies"),
         type: "comments-opted-in",
         button: r,
@@ -787,7 +787,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
   }).catch(r => {
     if (e.dispatch($$ew1({
       resetStatusOnly: !0
-    })), !(r?.data?.status >= 400 && r?.data?.status < 500 && r?.data?.message)) return e.dispatch(_$$F.enqueue({
+    })), !(r?.data?.status >= 400 && r?.data?.status < 500 && r?.data?.message)) return e.dispatch(VisualBellActions.enqueue({
       type: `comment-creation-failure: ${S}`,
       message: getI18nString("comments.couldn_t_post_your_comment"),
       error: !0,
@@ -806,7 +806,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
     }));
     {
       let t = J(r);
-      if (t) return e.dispatch(_$$F.enqueue({
+      if (t) return e.dispatch(VisualBellActions.enqueue({
         type: `comment-creation-failure: ${S}`,
         message: t,
         error: !0

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef, createRef } from "react";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
-import { o6, aQ } from "../figma_app/806412";
+import { RecordingPureComponent, handleDragEvent } from "../figma_app/878298";
 let l = () => !0;
 let d = {
   left: !1,
@@ -21,7 +21,7 @@ let $$c0 = forwardRef(function (e, t) {
     onTargetDrop: lQ
   });
 });
-export class $$u1 extends o6 {
+export class $$u1 extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.firstDragEnter = !1;
@@ -42,7 +42,7 @@ export class $$u1 extends o6 {
       };
       this.targetContainerBounds = null;
     };
-    this.getDragQuadrant = (e) => {
+    this.getDragQuadrant = e => {
       let t = this.targetContainerBounds;
       if (!this.targetContainerBounds && this.targetContainer.current && (t = this.targetContainerBounds = this.targetContainer.current.getBoundingClientRect()), !t) return null;
       let i = e.clientX < t.left + t.width / 2;
@@ -57,20 +57,20 @@ export class $$u1 extends o6 {
         middleVerticalHalf: !r && !a
       };
     };
-    this.updateDragQuadrant = (e) => {
+    this.updateDragQuadrant = e => {
       if (!this.props.onTargetDragQuadrantUpdate) return;
       let t = this.getDragQuadrant(e);
       t && (!this.dragQuadrant || t.left !== this.dragQuadrant.left || t.upper !== this.dragQuadrant.upper || t.upperQuarter !== this.dragQuadrant.upperQuarter || t.lowerQuarter !== this.dragQuadrant.lowerQuarter || t.middleVerticalHalf !== this.dragQuadrant.middleVerticalHalf) && (this.props.onTargetDragQuadrantUpdate(t), this.dragQuadrant = t);
     };
-    this.acceptDrag = (e) => (this.updateDragQuadrant(e), !!(e.dataTransfer && this.props.isDragTarget(e.dataTransfer, this.dragQuadrant)) && (e.preventDefault(), e.stopPropagation(), !0));
-    this.onDragEnter = (e) => {
+    this.acceptDrag = e => (this.updateDragQuadrant(e), !!(e.dataTransfer && this.props.isDragTarget(e.dataTransfer, this.dragQuadrant)) && (e.preventDefault(), e.stopPropagation(), !0));
+    this.onDragEnter = e => {
       this.firstDragEnter ? this.secondDragEnter = !0 : (this.firstDragEnter = !0, this.acceptDrag(e) && this.props.onTargetDragEnter?.(e.dataTransfer, this.dragQuadrant));
     };
-    this.onDragLeave = (e) => {
+    this.onDragLeave = e => {
       this.secondDragEnter ? this.secondDragEnter = !1 : this.firstDragEnter && (this.firstDragEnter = !1);
       !this.firstDragEnter && !this.secondDragEnter && this.acceptDrag(e) && this.props.onTargetDragLeave?.(e.dataTransfer);
     };
-    this.onDrop = aQ(this, "drop", (e) => {
+    this.onDrop = handleDragEvent(this, "drop", e => {
       this.acceptDrag(e) && (this.props.onTargetDrop?.(e.dataTransfer, this.dragQuadrant), this.onDragEndOrDrop());
     });
     this.targetContainer = this.props.forwardedRef ?? createRef();

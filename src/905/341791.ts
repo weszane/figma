@@ -5,7 +5,7 @@ import { debugState } from "../905/407919";
 import { J } from "../905/931050";
 import { r as _$$r } from "../905/520829";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { p as _$$p } from "../905/896627";
 import { A as _$$A } from "../905/17894";
 import { Zc, Lz } from "../905/497882";
@@ -52,7 +52,7 @@ function A({
           ...t,
           allMedia: o()(t.allMedia, ...a)
         });
-        debugState.dispatch(F.enqueue({
+        debugState.dispatch(VisualBellActions.enqueue({
           message: getI18nString("community.publishing.some_media_was_deduplicated"),
           error: !1
         }));
@@ -172,7 +172,7 @@ export function $$b0(e, t) {
         if (0 === i.length) return;
         s(i[0]);
       } catch (e) {
-        e instanceof Error && debugState.dispatch(F.enqueue({
+        e instanceof Error && debugState.dispatch(VisualBellActions.enqueue({
           message: e.message,
           error: !0
         }));
@@ -195,7 +195,7 @@ export function $$b0(e, t) {
           allMedia: [...currentValue.allMedia, ...r]
         });
       } catch (e) {
-        e instanceof Error && debugState.dispatch(F.enqueue({
+        e instanceof Error && debugState.dispatch(VisualBellActions.enqueue({
           message: e.message,
           error: !0
         }));

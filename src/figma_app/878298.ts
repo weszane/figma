@@ -14,8 +14,6 @@ import { isDebugMode, isInteractionPathCheck } from '../figma_app/897289'
  */
 const interactionPaths = new Set()
 
-
-
 /**
  * Default event object with no-op methods.
  * Original: x
@@ -24,7 +22,6 @@ const DEFAULT_EVENT = {
   preventDefault() {},
   stopPropagation() {},
 }
-
 
 /**
  * Adds an interaction path if interaction path check is enabled.
@@ -185,8 +182,8 @@ export function useRecordingKey(key: any) {
  * Constant for skipping recording.
  * Original: $$b11
  */
-const SKIP_RECORDING_CONSTANT = SKIP_RECORDING
-
+export const SKIP_RECORDING_CONSTANT = SKIP_RECORDING
+export { SKIP_RECORDING }
 /**
  * Set of properties to exclude from recording.
  * Original: T

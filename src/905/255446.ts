@@ -1,10 +1,10 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
-import { o5, IA } from "../905/859698";
+import { useSelector, useDispatch } from "react-redux";
+import { o5, VariableStyleId } from "../905/859698";
 import { Fullscreen, Thumbnail, LibraryPubSub, SceneIdentifier } from "../figma_app/763686";
 import { v as _$$v } from "../905/439972";
 import { getSingletonSceneGraph } from "../905/700578";
-import { q } from "../905/196201";
+import { LRUCache } from "../905/196201";
 import { useHandleInputEvent } from "../figma_app/878298";
 import { Ok, ux, NY, uW, xj } from "../figma_app/851625";
 import { Bx } from "../figma_app/191804";
@@ -156,7 +156,7 @@ export function $$M8(e, t, i, a, o) {
   let l = eY();
   let c = useMemo(() => !!t && V(a, Fullscreen.getBackingAssetRef(t.instanceId)), [a, t, l]);
   let p = useMemo(() => !!o && o.instanceIdsToUpdate.map(Fullscreen.getBackingAssetRef).every(e => V(a, e)), [a, o, l]);
-  let m = useRef(new q(100));
+  let m = useRef(new LRUCache(100));
   let h = function (e) {
     let t = useDispatch();
     let [i, a] = useState(Ok());
@@ -253,7 +253,7 @@ export function $$j2(e) {
       beforeImage: b,
       afterImage: useMemo(() => {
         if (v.status !== _$$r.SUCCESS) return v;
-        let t = y ? e.node_id : LibraryPubSub.getOrCreateSubscribedStyleNodeId(e.key, e.content_hash ?? IA.INVALID, e.library_key, v.value, SceneIdentifier.ACTIVE_SCENE)?.localGUID ?? "";
+        let t = y ? e.node_id : LibraryPubSub.getOrCreateSubscribedStyleNodeId(e.key, e.content_hash ?? VariableStyleId.INVALID, e.library_key, v.value, SceneIdentifier.ACTIVE_SCENE)?.localGUID ?? "";
         let [i, n] = Thumbnail.generateThumbnailForNode(t, 0, 0, 2, {
           type: "UNCOMPRESSED",
           clearColor: c,

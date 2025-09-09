@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -11,9 +11,9 @@ import { Rs } from "../figma_app/288654";
 import { zE } from "../905/64735";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { E as _$$E } from "../905/984674";
-import { M9I, KiY } from "../figma_app/43951";
+import { AllowlistPluginsSectionView, PluginRequests } from "../figma_app/43951";
 import { J } from "../905/403084";
 import { registerModal } from "../905/102752";
 import { P } from "../905/994270";
@@ -29,7 +29,7 @@ function w(e) {
     isWidget,
     workspaceId
   } = e;
-  let s = Rs(M9I, {
+  let s = Rs(AllowlistPluginsSectionView, {
     orgId
   });
   let o = s.data?.org;
@@ -145,7 +145,7 @@ export let $$k0 = registerModal(function ({
     fullscreenEditorType: I
   });
   P(!0);
-  let k = Rs(KiY, {
+  let k = Rs(PluginRequests, {
     orgId: i
   });
   let R = k?.data?.org?.pluginRequests.reduce((t, i) => i.pluginId === e.pluginId && "rejected" === i.status && (!t || i.updatedAt > t.updatedAt) ? i : t, null);
@@ -235,12 +235,12 @@ export let $$k0 = registerModal(function ({
             onClick: () => {
               (t ? J.requestWidget : J.requestPlugin)(i, pluginId, D, F).then(() => {
                 let e = t ? getI18nString("extension_request_modal.widget_approval_requested") : getI18nString("extension_request_modal.plugin_approval_requested");
-                M(_$$F.enqueue({
+                M(VisualBellActions.enqueue({
                   message: e
                 }));
               }).catch(e => {
                 let t = e.message ?? getI18nString("extension_request_modal.error_requesting_approval");
-                M(_$$F.enqueue({
+                M(VisualBellActions.enqueue({
                   message: t
                 }));
               });

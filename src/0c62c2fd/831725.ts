@@ -3,7 +3,7 @@ import { useState } from "react";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { renderI18nText } from "../905/303541";
 import { X } from "../0c62c2fd/409644";
-import { useDispatch, useSelector } from "../vendor/514228";
+import { useDispatch, useSelector } from "react-redux";
 import { kg } from "../figma_app/976345";
 import { m3 } from "../905/315794";
 import { a as _$$a } from "../905/332662";

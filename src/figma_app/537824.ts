@@ -8,8 +8,8 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { w0 } from "../figma_app/594947";
 import { getI18nString } from "../905/303541";
-import { F } from "../905/302958";
-import { zX } from "../905/576487";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
 import { fullscreenValue } from "../figma_app/455680";
 import { jf, Vs, qc, QH, pc, LU, Rg } from "../figma_app/407414";
 import { d7 } from "../figma_app/99772";
@@ -218,7 +218,7 @@ class L {
       abortSignal: e
     }))) return !e.aborted && (this.teardownLinter(), Lt({
       message: getI18nString("design_linter.library_selector.loading_failed_bell"),
-      icon: zX.CLOSE_FILLED,
+      icon: VisualBellIcon.CLOSE_FILLED,
       type: "libraries loading error",
       timeUntilDequeueMs: 1 / 0
     }), !1);
@@ -569,7 +569,7 @@ class L {
     return this.designLinterStateManager.getStatus();
   }
   clearLinterVisualBells() {
-    debugState.dispatch(F.dequeue({
+    debugState.dispatch(VisualBellActions.dequeue({
       matchType: R
     }));
   }

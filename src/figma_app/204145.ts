@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { useDispatch } from "../vendor/514228";
+import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { V3 } from "../figma_app/976345";
 import { K } from "../905/621769";

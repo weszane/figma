@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import a from "classnames";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { Un } from "../figma_app/591738";
 import { isInvalidValue } from "../905/216495";
 import { wv, uM, g5, Iz } from "../905/888175";
@@ -10,10 +10,10 @@ var s = a;
 let $$p2 = 1500;
 let $$_3 = "delightfulToolbarDrawingSubmenu";
 export function $$h5(e) {
-  return Pt("delightfulToolbar", e);
+  return generateRecordingKey("delightfulToolbar", e);
 }
 export function $$m0(e) {
-  return Pt($$_3, e);
+  return generateRecordingKey($$_3, e);
 }
 export function $$g1(e, t) {
   if (isInvalidValue(e)) return e;

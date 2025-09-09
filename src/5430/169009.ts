@@ -3,11 +3,11 @@ import _require3 from "../draftjs_composer/144893";
 import _require2 from "../draftjs_composer/577988";
 import _require from "../draftjs_composer/577988";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useDispatch, useSelector, connect } from "../vendor/514228";
+import { useDispatch, useSelector, connect } from "react-redux";
 import { cs, e5, cV, LI } from "../figma_app/740025";
 import { PR, MK, Cw } from "../figma_app/599979";
 import { nI, ej as _$$ej, Ng as _$$Ng, Ni } from "../figma_app/188152";
-import { iZ } from "../905/372672";
+import { selectCurrentUser } from "../905/372672";
 import { useRef, useEffect, useState, useCallback, cloneElement, useMemo } from "react";
 import { $n } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
@@ -44,7 +44,7 @@ import { Ib } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { HH } from "../figma_app/841415";
 import { ky } from "../figma_app/99826";
-import { F as _$$F } from "../905/302958";
+import { VisualBellActions } from "../905/302958";
 import { Xu } from "../figma_app/354658";
 import { lW } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
@@ -281,7 +281,7 @@ function ex(e) {
 }
 function ef(e) {
   let t = useDispatch();
-  let r = iZ();
+  let r = selectCurrentUser();
   let n = Zl[e.resourceType];
   let o = e.resourceId;
   let c = () => {
@@ -319,7 +319,7 @@ function ef(e) {
             await new Promise(e => setTimeout(e, ee.ANIMATION_LENGTH));
           }
         }));
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           message: getI18nString("community.comments.restricted_this_user_s_comments"),
           type: "profile-restricted-change"
         }));
@@ -337,7 +337,7 @@ function ef(e) {
       blockedProfileId: s,
       profileId: r,
       onSuccess: () => {
-        t(_$$F.enqueue({
+        t(VisualBellActions.enqueue({
           message: getI18nString("community.comments.unrestricted_this_user_s_comments"),
           type: "profile-restricted-change",
           button: {
@@ -463,7 +463,7 @@ function ev(e) {
 }
 function eb(e) {
   var t;
-  let r = iZ();
+  let r = selectCurrentUser();
   let o = useSelector(e => e.authedActiveCommunityProfile);
   let c = useSelector(t => t.communityHub.comments.commentsById[e.comment.id]);
   let d = useSelector(e => e.communityHub.comments.authorsById[c.author.id]);
@@ -879,7 +879,7 @@ let ek = !1;
 function eA(e) {
   let t;
   let r = useDispatch();
-  let o = iZ();
+  let o = selectCurrentUser();
   let [a, _] = useState(!1);
   let [p, I] = useState(!1);
   let N = _$$T();
@@ -1045,7 +1045,7 @@ function eA(e) {
 export function $$eP0({
   resource: e
 }) {
-  let t = iZ();
+  let t = selectCurrentUser();
   let r = useSelector(t => MK(t, e)) >= Cw.ADMIN && (cV(e)?.id || t?.community_profile_id) || null;
   let c = useSelector(e => e.authedActiveCommunityProfile);
   return jsx(eA, {

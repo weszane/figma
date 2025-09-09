@@ -3,10 +3,10 @@ import { VariableResolvedDataType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { k9 } from "../905/19536";
+import { useMemoStable } from "../905/19536";
 import { analyticsEventManager } from "../905/449184";
 import { w0 } from "../figma_app/594947";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { qd } from "../figma_app/852050";
 import { XN } from "../figma_app/633080";
 import { D } from "../905/442915";
@@ -40,7 +40,7 @@ export function $$S2(e) {
   }, [e]);
 }
 export function $$v0(e, t, r, i, a) {
-  let s = useRef(_$$g());
+  let s = useRef(generateUUIDv4());
   let o = Px();
   return useMemo(() => ({
     suggestionType: r,
@@ -99,9 +99,9 @@ export function $$A1({
     }, [r, a, e, t]);
     return i;
   }(f, A);
-  let N = k9(() => A ? t.map(e => e) : [], [t, A]);
-  let C = k9(() => A ? e.map(e => e) : [], [e, A]);
-  let w = k9(() => A ? r.map(e => e.libraryKey) : [], [r, A]);
+  let N = useMemoStable(() => A ? t.map(e => e) : [], [t, A]);
+  let C = useMemoStable(() => A ? e.map(e => e) : [], [e, A]);
+  let w = useMemoStable(() => A ? r.map(e => e.libraryKey) : [], [r, A]);
   !function (e, t, r) {
     let [i, a] = useAtomValueAndSetter(T);
     let l = useMemo(() => _$$UN(e), [e]);
@@ -233,7 +233,7 @@ export function $$A1({
       if (!d || !getFeatureFlags().aip_flower_garden_shadow_reranker || e.suggestionType === VariableResolvedDataType.FLOAT && !getFeatureFlags().aip_flower_garden_shadow_number_reranker) return;
       let n = _e(e?.suggestionType);
       if (!r || !n || "loaded" !== t.status || !e.sessionId || !e.modeContext || !e.entryPoint || !e.currentColor && void 0 === e.currentFloat) return;
-      let c = _$$g();
+      let c = generateUUIDv4();
       let p = {
         org_id: l ? Number(l) : void 0,
         entry_point: e.entryPoint,

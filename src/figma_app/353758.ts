@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, createElement } from "react";
-import { Tq } from "../figma_app/243058";
+import { CodeFileIdHandler } from "../figma_app/243058";
 import { UserInterfaceElements, SnapshotStatus, InsertErrorType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -437,7 +437,7 @@ export let $$eu0 = new class {
                 }(e, t);
                 if (!r) return null;
                 let n = getSingletonSceneGraph().getInternalCanvas()?.childrenNodes.find(e => e.isCodeFile && !e.isSubscribedAsset && iD(ed(e.codeFileFullPathWithoutScheme), r));
-                return n ? Tq.fromLocalNodeIdStr(n.guid) : null;
+                return n ? CodeFileIdHandler.fromLocalNodeIdStr(n.guid) : null;
               }(e, i.path);
               t && r.push(t);
               break;

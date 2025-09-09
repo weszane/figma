@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSelector } from "../vendor/514228";
+import { useSelector } from "react-redux";
 import { nb, Tf } from "../figma_app/543100";
 import { F } from "../905/915030";
 import { IT } from "../905/864644";
@@ -19,7 +19,7 @@ export function $$c0(e, t = !0) {
       prototypeIds: []
     };
     e.forEach(e => {
-      if (e.type === nb.FILE) t.fileKeys.push(Tf.getId(e));else if (e.type === nb.REPO) t.repoIds.push(Tf.getId(e));else if (e.type === nb.PROTOTYPE) {
+      if (e.type === nb.FILE) t.fileKeys.push(Tf.getId(e)); else if (e.type === nb.REPO) t.repoIds.push(Tf.getId(e)); else if (e.type === nb.PROTOTYPE) {
         let i = e.prototype.id;
         t.prototypeIds.push(i);
       }

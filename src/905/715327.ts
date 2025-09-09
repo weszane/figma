@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect, useState, Fragment as _$$Fragment, useRef, useContext } from "react";
-import { useSelector, useDispatch } from "../vendor/514228";
+import { useSelector, useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
@@ -14,7 +14,7 @@ import { fu } from "../figma_app/831799";
 import { MF, A5 } from "../figma_app/391338";
 import { FC } from "../figma_app/212807";
 import { LH } from "../905/872904";
-import { dDF, ohc, TNJ, g0U } from "../figma_app/43951";
+import { FileCanEdit, LibraryIsBranch, TeamCanAdmin, SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { hasAdminRoleAccessOnTeam } from "../figma_app/642025";
 import { Yu, Tb, bK, wg } from "../figma_app/633080";
 import { e0 as _$$e } from "../905/696396";
@@ -90,7 +90,7 @@ import { m as _$$m } from "../905/760316";
 import { Bj, eR as _$$eR, h5, yz } from "../905/42209";
 import { Q as _$$Q } from "../905/711770";
 import { oA } from "../905/723791";
-import { Pt } from "../figma_app/806412";
+import { generateRecordingKey } from "../figma_app/878298";
 import { KP, L1 } from "../figma_app/12491";
 import { E as _$$E2 } from "../905/511388";
 import { i as _$$i3 } from "../905/651613";
@@ -270,7 +270,7 @@ function e4({
   let v = getFeatureFlags().cmty_lib_admin_publish ? y && !_ : y;
   let {
     data
-  } = Rs(dDF, {
+  } = Rs(FileCanEdit, {
     key: e.key
   });
   let E = _$$Q({
@@ -388,7 +388,7 @@ function te({
   let _ = "community" === t.library_type;
   let A = fV(f.libraryKey);
   let y = function (e) {
-    let t = Rs(ohc, {
+    let t = Rs(LibraryIsBranch, {
       libraryKey: e
     });
     return oA(t?.data?.libraryKeyToFile?.file?.isBranch) ?? !1;
@@ -447,7 +447,7 @@ function te({
       showingDefaultSubscriptionsForUser: !1,
       showingDefaultSubscriptionsForTeamId: null,
       disabled: !i,
-      recordingKey: Pt(c, "fileRowSubscriptionToggle"),
+      recordingKey: generateRecordingKey(c, "fileRowSubscriptionToggle"),
       buttonStyleType: d_.SECONDARY
     })
   });
@@ -1346,7 +1346,7 @@ export function $$tM0({
     onSearchQueryChange
   } = TW(K.files);
   let ea = Y.result.some(e => e.library_key === M);
-  let es = Rs(TNJ, {
+  let es = Rs(TeamCanAdmin, {
     id: e ?? ""
   }, {
     enabled: !!e
@@ -1366,7 +1366,7 @@ export function $$tM0({
     }
   });
   T = e ? !!el.data : t ? !!user : !!openFile?.canEdit;
-  let ed = Rs(g0U, {
+  let ed = Rs(SharingGroupsByResourceConnection, {
     resourceConnectionId: i
   }, {
     enabled: !!i

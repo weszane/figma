@@ -13,11 +13,11 @@ import { trackEventAnalytics } from "../905/449184";
 import { Uz } from "../905/63728";
 import { V as _$$V } from "../905/418494";
 import { BrowserInfo } from "../figma_app/778880";
-import { o6, cZ as _$$cZ, C0, aH, Ht, Pt } from "../figma_app/806412";
+import { RecordingPureComponent, handleMouseEvent, handleKeyboardEvent, SKIP_RECORDING, handleGenericEvent, generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { bG } from "../905/149328";
-import { g as _$$g } from "../905/880308";
+import { generateUUIDv4 } from "../905/871474";
 import { R as _$$R } from "../905/307199";
 import { gw, wv } from "../figma_app/236327";
 import { B as _$$B } from "../905/714743";
@@ -29,7 +29,7 @@ import { dG } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { jr } from "../figma_app/896988";
 import { isValidValue, MIXED_MARKER, normalizeValue, isAutoMarker } from "../905/216495";
-import { zk } from "../figma_app/198712";
+import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { D as _$$D } from "../905/225412";
 import { dD } from "../figma_app/941824";
@@ -169,7 +169,7 @@ export function $$ee2({
     targetDomNode: void 0 !== e ? e : i ? document.body : void 0
   });
 }
-class et extends o6 {
+class et extends RecordingPureComponent {
   constructor(e) {
     super(e);
     this.keyRecycler = new _$$V();
@@ -191,7 +191,7 @@ class et extends o6 {
     this.focus = () => {
       this.hiddenInput?.focus();
     };
-    this.dropdownListboxId = _$$g();
+    this.dropdownListboxId = generateUUIDv4();
     this.isDropdownShown = e => e.dropdownShown?.type === this.props.id;
     this.dropdownShown = () => this.isDropdownShown(this.props);
     this.formattedSelectedValue = () => {
@@ -231,7 +231,7 @@ class et extends o6 {
       t += 8;
       this.dropdownContentHeight = t;
     };
-    this.onMouseDown = _$$cZ(this, "mousedown", e => {
+    this.onMouseDown = handleMouseEvent(this, "mousedown", e => {
       if (this.props.onMouseDown || e.stopPropagation(), this.dropdownShown()) {
         this.hideDropdown();
         return;
@@ -369,7 +369,7 @@ class et extends o6 {
     };
     this.submitValue = e => {
       this.clearPreview();
-      this.props.onChange(e, this.startValue !== e ? zk.YES_FORCE_TRACKING_AS_EDIT : void 0);
+      this.props.onChange(e, this.startValue !== e ? yesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT : void 0);
       this.props.keepDropdownOpenOnSubmit || this.hideDropdown(!0);
     };
     this.clearPreview = () => {
@@ -395,7 +395,7 @@ class et extends o6 {
         this.props.onPreview?.(this.props.property);
       }
       let r = performance.now();
-      this.props.onChange(e, n ? zk.YES_WITHOUT_TRACKING_AS_EDIT : zk.NO);
+      this.props.onChange(e, n ? yesNoTrackingEnum.YES_WITHOUT_TRACKING_AS_EDIT : yesNoTrackingEnum.NO);
       getFeatureFlags().ee_canvas_previews_logging && trackEventAnalytics("on_canvas_preview", {
         timeMs: performance.now() - r,
         directlySelectedNodesCount: i,
@@ -443,8 +443,8 @@ class et extends o6 {
       }
       this.ignoreMouseMove = !0;
     };
-    this.onKeyDown = C0(this, "keydown", e => {
-      if (jr(e)) return aH;
+    this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
+      if (jr(e)) return SKIP_RECORDING;
       if (this.dropdownShown()) {
         let t = null == this.state.focusedOptionValue ? "" : this.props.formatter.format(this.state.focusedOptionValue);
         let i = this.optionIndexByFormattedValue[t];
@@ -487,11 +487,11 @@ class et extends o6 {
         })) : this.addInputChar(e.keyCode);
       }
     });
-    this.onFocus = Ht(this, "focus", () => {
+    this.onFocus = handleGenericEvent(this, "focus", () => {
       let e = normalizeValue(this.props.property);
       null != e && this.props.onOptionFocus?.(e, "input");
     });
-    this.onBlur = Ht(this, "blur", () => {
+    this.onBlur = handleGenericEvent(this, "blur", () => {
       this.dropdownShown() || this.props.onOptionFocus?.(void 0, "input");
     });
     this.userInput = "";
@@ -567,7 +567,7 @@ class et extends o6 {
           ...(e.props.style || {}),
           top: l
         },
-        recordingKey: e.props.recordingKey || Pt(this.props, `${_}`)
+        recordingKey: e.props.recordingKey || generateRecordingKey(this.props, `${_}`)
       });
     };
     this.state = {
@@ -863,15 +863,15 @@ et.propTypes = {
     return a;
   }
 };
-export class $$en1 extends o6 {
+export class $$en1 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
-    this.onMouseUp = _$$cZ(this, "mouseup", e => {
-      if (!this.props.onMouseUp) return aH;
+    this.onMouseUp = handleMouseEvent(this, "mouseup", e => {
+      if (!this.props.onMouseUp) return SKIP_RECORDING;
       this.props.onMouseUp(e);
     });
-    this.onMouseMove = _$$cZ(this, "mousemove", e => {
-      if (!this.props.onMouseMove) return aH;
+    this.onMouseMove = handleMouseEvent(this, "mousemove", e => {
+      if (!this.props.onMouseMove) return SKIP_RECORDING;
       this.props.onMouseMove(e);
     });
   }

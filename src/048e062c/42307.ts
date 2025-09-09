@@ -11,7 +11,7 @@ import { applyFieldSerializersToDeclarativeNode, createSerializerContext, fieldS
 import { getObservableValue } from '../figma_app/84367';
 import { Fk } from '../figma_app/167249';
 import { TrackType, SceneGraphTsApi } from '../figma_app/763686';
-import { ZC } from '../figma_app/922077';
+import { useLatestRef } from '../figma_app/922077';
 import { A as _$$A6 } from '../vendor/55270';
 import { A as _$$A5 } from '../vendor/255778';
 import { A as _$$A2 } from '../vendor/308491';
@@ -485,7 +485,7 @@ function L({
   let c = Fk((e, t) => e.get(t)?.size.y || 0, e);
   let [u] = _$$A(s, 100);
   let [h] = _$$A(c, 100);
-  let m = ZC(a);
+  let m = useLatestRef(a);
   let [g, y] = useState(0);
   useEffect(() => {
     !0 === m && !1 === a && y(e => e + 1);
