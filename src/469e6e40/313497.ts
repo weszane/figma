@@ -18,7 +18,7 @@ import { A as _$$A } from "../905/920142";
 import { rb, $z, c as _$$c } from "../figma_app/617427";
 import { Ph, o as _$$o } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { J as _$$J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { c as _$$c2 } from "../905/370443";
@@ -555,7 +555,7 @@ function z(e) {
         });
       } catch (e) {
         s(VisualBellActions.enqueue({
-          message: _$$J(e, getI18nString("org_admin_settings.schedule_cancellation_modal.generic_error")),
+          message: resolveMessage(e, getI18nString("org_admin_settings.schedule_cancellation_modal.generic_error")),
           error: !0
         }));
         a(!1);
@@ -677,7 +677,7 @@ function W(e) {
         });
       } catch (e) {
         a(VisualBellActions.enqueue({
-          message: _$$J(e, getI18nString("org_admin_settings.unschedule_cancellation_modal.generic_error")),
+          message: resolveMessage(e, getI18nString("org_admin_settings.unschedule_cancellation_modal.generic_error")),
           error: !0
         }));
         s(!1);

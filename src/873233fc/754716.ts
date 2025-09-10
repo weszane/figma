@@ -26,7 +26,7 @@ import { e as _$$e } from "../905/383776";
 import { l7, ZO } from "../figma_app/88239";
 import { Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { aV, p8 } from "../figma_app/722362";
 import { W as _$$W } from "../441/503702";
 import { Lk } from "../figma_app/122682";
@@ -820,7 +820,7 @@ let eX = memo(({
           commentsDetailContainerRef: f
         }), jsx(Nz, {}), jsx("div", {
           ref: f
-        }), !_$$T() && !p && jsx(tH, {
+        }), !isVsCodeEnvironment() && !p && jsx(tH, {
           boundaryKey: "DevModeLeftPanel",
           fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
           sentryTags: {

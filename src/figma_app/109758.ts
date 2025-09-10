@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { UD } from "../figma_app/624361";
 import { $, b as _$$b } from "../905/776478";
 import { D } from "../905/629114";
-import { xF } from "../905/866640";
+import { fetchImageAsByteArray } from "../905/866640";
 import { A as _$$A } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 import { sF } from "../figma_app/193952";
@@ -36,7 +36,7 @@ async function g({
   shouldContinueStream: o
 }) {
   if (!e.isAlive) return;
-  let d = await xF(t, ["*"]);
+  let d = await fetchImageAsByteArray(t, ["*"]);
   let c = await UD(d, "image/png", r);
   if (!e.isAlive || !o()) return;
   let p = [...e.fills];

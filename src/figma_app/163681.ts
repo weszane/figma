@@ -15,7 +15,7 @@ import { WD4 } from "../figma_app/6204";
 import { renderI18nText } from "../905/303541";
 import { uM } from "../905/738636";
 import { c as _$$c } from "../905/370443";
-import { xA } from "../905/766303";
+import { getNewFileConfig } from "../905/766303";
 import { oe, RJ, I7 } from "../figma_app/630951";
 import { aV } from "../figma_app/722362";
 import { FFileType } from "../figma_app/191312";
@@ -178,7 +178,7 @@ function j({
     }
   }) : jsx(_$$J, {
     onPrimaryCtaClick: () => {
-      let e = xA({
+      let e = getNewFileConfig({
         state: r.getState(),
         openNewFileIn: ai.NEW_TAB,
         folderOverride: "drafts",

@@ -95,7 +95,7 @@ import { K as _$$K3 } from '../905/770444';
 import { R as _$$R } from '../905/782411';
 import { o as _$$o2 } from '../905/821217';
 import { vL } from '../905/826900';
-import { Y as _$$Y } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { Um } from '../905/848862';
 import { t as _$$t4 } from '../905/851577';
 import { X as _$$X2 } from '../905/853613';
@@ -175,7 +175,7 @@ import { $z } from '../figma_app/297733';
 import { KD, O1 } from '../figma_app/317394';
 import { Ko, Nv, P5 } from '../figma_app/318590';
 import { $I } from '../figma_app/322845';
-import { w5 } from '../figma_app/345997';
+import { hasTeamPaidAccess } from '../figma_app/345997';
 import { p as _$$p } from '../figma_app/353099';
 import { ce as _$$ce2, Wy as _$$Wy } from '../figma_app/357202';
 import { tM as _$$tM4, Ew, Gq } from '../figma_app/361662';
@@ -699,7 +699,7 @@ function e2({
           'aria-hidden': !0
         })
       })]
-    }), F && !!t && jsxs(_$$Y, {
+    }), F && !!t && jsxs(AutoLayout, {
       spacing: 0,
       direction: 'horizontal',
       height: 'hug-contents',
@@ -3171,7 +3171,7 @@ function r4() {
   let d = Fl();
   let c = useAtomWithSubscription(_$$lj);
   let u = useMemo(() => s?.teamId ? a[s.teamId] : null, [s?.teamId, a]);
-  let p = useMemo(() => !!u && w5(u), [u]);
+  let p = useMemo(() => !!u && hasTeamPaidAccess(u), [u]);
   let m = useMemo(() => Sg(i, l), [i, l]);
   let f = $1({
     library: r,
@@ -8182,7 +8182,7 @@ function an({
     let c = s?.canEdit ?? !1;
     let u = d.data?.team?.hasPermission ?? !1;
     let p = e.numComponents > 0 || e.numTemplates > 0;
-    return useMemo(() => !i && l && (!o || !w5(o) && u) && c && r && p && Hz(t?.id), [i, l, o, u, c, r, p, t]);
+    return useMemo(() => !i && l && (!o || !hasTeamPaidAccess(o) && u) && c && r && p && Hz(t?.id), [i, l, o, u, c, r, p, t]);
   }(t.localAssets);
   let i = je().status === 'loading';
   let l = useRef(null);

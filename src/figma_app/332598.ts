@@ -13,7 +13,7 @@ import { Z } from "../905/189618";
 import { d as _$$d } from "../905/86829";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
-import { M as _$$M } from "../905/830372";
+import { Spacer } from "../905/470281";
 import { k as _$$k } from "../905/963262";
 import { v4 } from "../figma_app/655139";
 import { Z4, M$, NT, Q6 } from "../905/77776";
@@ -270,7 +270,7 @@ export function $$G4(e) {
             rowRef: ep,
             muted: section.isTextSegment,
             actions: jsxs(Fragment, {
-              children: [additionalHeaderActions || jsx(_$$M, {}), copyActionEnabled && jsx(e_, {})]
+              children: [additionalHeaderActions || jsx(Spacer, {}), copyActionEnabled && jsx(e_, {})]
             }),
             title: ec,
             leftActions: leftHeaderActions,

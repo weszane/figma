@@ -91,7 +91,7 @@ import { p8, aV } from "../figma_app/722362";
 import { FC } from "../figma_app/212807";
 import { f as _$$f } from "../905/940356";
 import { q as _$$q } from "../905/236878";
-import { oc, n0, f4 } from "../figma_app/345997";
+import { isTeamLocked, hasValidSubscription, hasFolderOrTeamRestrictions } from "../figma_app/345997";
 import { isExternalRestricted } from "../figma_app/12796";
 import { canAdminTeam, canEditTeam } from "../figma_app/642025";
 import { lg as _$$lg, ng as _$$ng } from "../figma_app/205827";
@@ -693,7 +693,7 @@ let tH = {
     });
     if (!i || !n) return null;
     let u = canEditTeam(i.id, o);
-    let m = oc(i.id, o);
+    let m = isTeamLocked(i.id, o);
     if (_$$ng.canSeeExpiredProTrialBanner(l, i, o) && (m || u && !_)) {
       let a;
       let r;
@@ -785,7 +785,7 @@ let tK = {
     let _ = useStore();
     let u = selectCurrentFile()?.canEdit;
     let m = n && canEditTeam(n, i);
-    let p = r && !n0(r) && !r.student_team && oc(r.id, i);
+    let p = r && !hasValidSubscription(r) && !r.student_team && isTeamLocked(r.id, i);
     if (p) {
       let a = r.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_CURRENT || r.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_EXPIRED;
       let i = !!n && p && !a;
@@ -978,7 +978,7 @@ let tZ = {
     let i = dq();
     let o = useDispatch();
     let d = FC();
-    if (!(i && t?.project && n3(t.project)) && !r && t && f4(t.folderId, t.teamId, d)) {
+    if (!(i && t?.project && n3(t.project)) && !r && t && hasFolderOrTeamRestrictions(t.folderId, t.teamId, d)) {
       let t = {
         bannerType: x1.WARN,
         icon: _$$A6,

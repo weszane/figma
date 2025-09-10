@@ -12,7 +12,7 @@ import { useSubscription } from "../figma_app/288654";
 import { Xm, gB, oA } from "../905/723791";
 import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { d as _$$d } from "../469e6e40/744116";
 import { y3 } from "../figma_app/307841";
 import { R as _$$R } from "../905/304671";
@@ -71,7 +71,7 @@ import { _E, yJ, tk as _$$tk, m$ } from "../figma_app/240735";
 import { z as _$$z } from "../905/595507";
 import { C3, vt } from "../figma_app/297957";
 import { z as _$$z2 } from "../figma_app/369596";
-import { n0, WQ, mt } from "../figma_app/345997";
+import { hasValidSubscription, isTeamInGracePeriod, getFutureDateOrNull } from "../figma_app/345997";
 import { $S } from "../905/351260";
 import { yN } from "../905/727738";
 import { ol, Rq, pe } from "../figma_app/598018";
@@ -240,7 +240,7 @@ function B({
       }
     }), jsx("div", {
       className: _$$s.mb16.$
-    }), e.pro_team && jsx(_$$Y, {
+    }), e.pro_team && jsx(AutoLayout, {
       spacing: 16,
       direction: "vertical",
       children: jsx("div", {
@@ -495,7 +495,7 @@ let e5 = kp(function (e) {
       className: Mc,
       getSortValue: e => e.member.name || e.member.email,
       cellComponent: M
-    }, ...(t.canAdmin && n0(t) ? Js({
+    }, ...(t.canAdmin && hasValidSubscription(t) ? Js({
       columnClassName: nM,
       selectorOuterClassName: Gb,
       selectorInnerClassName: r2,
@@ -834,7 +834,7 @@ let e5 = kp(function (e) {
       render: (t, a, n) => jsx(Cj, {
         actionBar: q,
         columns: y(),
-        emptyContent: jsx(_$$Y, {
+        emptyContent: jsx(AutoLayout, {
           height: 200,
           verticalAlignItems: "center",
           horizontalAlignItems: "center",
@@ -1213,7 +1213,7 @@ function tG(e) {
   };
   let j = getFeatureFlags().ai_ga;
   let y = [];
-  j ? settingsData.aiFeaturesDisabledAt && y.push(jsx(_$$Y, {
+  j ? settingsData.aiFeaturesDisabledAt && y.push(jsx(AutoLayout, {
     padding: {
       top: 8
     },
@@ -1355,7 +1355,7 @@ let tz = ({
   } = e;
   let c = a.id;
   let _ = [];
-  let u = WQ(a);
+  let u = isTeamInGracePeriod(a);
   let m = Ti({
     planId: c,
     planType: FOrganizationLevelType.TEAM
@@ -1768,7 +1768,7 @@ function ah({
     children: [jsx(_$$K, {
       title: e === DashboardSections.MEMBERS ? renderI18nText("team_admin.members_tab.header") : pe(e),
       rightActions: jsxs(Fragment, {
-        children: [e === DashboardSections.MEMBERS && jsxs(_$$Y, {
+        children: [e === DashboardSections.MEMBERS && jsxs(AutoLayout, {
           width: "hug-contents",
           direction: "horizontal",
           spacing: 8,
@@ -1850,7 +1850,7 @@ function aA(e) {
   let s = C3();
   let o = vt();
   let d = e.billingSummary.annual_subscription;
-  let c = e.billingSummary.annual_subscription?.trial_end ? mt(e.billingSummary.annual_subscription.trial_end) : null;
+  let c = e.billingSummary.annual_subscription?.trial_end ? getFutureDateOrNull(e.billingSummary.annual_subscription.trial_end) : null;
   let _ = _$$v2(e.billingSummary);
   let u = n && _ && o();
   let m = hY(e.team.id, FOrganizationLevelType.TEAM);
@@ -2232,10 +2232,10 @@ export function $$aG0(e) {
         teamId: e,
         source: "team_admin_dangling_team_user_backfill_banner"
       },
-      children: jsx(_$$Y, {
+      children: jsx(AutoLayout, {
         horizontalAlignItems: "end",
         width: "fill-parent",
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           horizontalAlignItems: "start",
           children: [jsx(_$$b, {}), jsx("span", {
             children: renderI18nText("team_admin.members_tab.fixed_issue_members_list")

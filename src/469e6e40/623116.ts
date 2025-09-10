@@ -30,7 +30,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { p as _$$p } from "../905/597320";
 import { q as _$$q } from "../905/749058";
@@ -320,7 +320,7 @@ let eV = registerModal(function ({
     className: "add_unassigned_teams_modal--nameColumn--H2d4L members_table--avatarColumn--SoUiA members_table--column--e-buT admin_settings_page--membersColumn--E3seT table--column--974RA",
     sorting_key: Kq.NAME,
     getSortValue: e => e.name,
-    cellComponent: e => jsxs(_$$Y, {
+    cellComponent: e => jsxs(AutoLayout, {
       direction: "horizontal",
       spacing: 8,
       children: [jsx(CH, {
@@ -328,7 +328,7 @@ let eV = registerModal(function ({
         size: 22
       }), jsxs("div", {
         className: _$$s.flex.flexColumn.minW0.$,
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           spacing: "2px",
           children: [jsx(_$$E, {
             truncate: !0,
@@ -350,7 +350,7 @@ let eV = registerModal(function ({
         })]
       })]
     }),
-    loadingComponent: jsxs(_$$Y, {
+    loadingComponent: jsxs(AutoLayout, {
       direction: "horizontal",
       height: "hug-contents",
       children: [jsx("div", {
@@ -362,7 +362,7 @@ let eV = registerModal(function ({
           className: _$$s.wFull.hFull.$,
           animationType: JR.NO_SHIMMER
         })
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: "vertical",
         height: "hug-contents",
         spacing: 4,
@@ -390,7 +390,7 @@ let eV = registerModal(function ({
     className: "add_unassigned_teams_modal--ownerColumn--jLx2z",
     sorting_key: Kq.OWNER,
     getSortValue: e => e.owner?.handle ? `a${e.owner.handle}` : `z${e.name}`,
-    cellComponent: e => jsx(_$$Y, {
+    cellComponent: e => jsx(AutoLayout, {
       width: "fill-parent",
       children: jsx(_$$E, {
         truncate: !0,
@@ -466,7 +466,7 @@ let eV = registerModal(function ({
       containerClassName: "add_unassigned_teams_modal--unassignedTab--My2Tq",
       innerContainerClassName: _$$s.hFull.flex.flexColumn.$,
       fixedTop: !0,
-      children: [jsx(_$$Y, {
+      children: [jsx(AutoLayout, {
         height: "hug-contents",
         padding: 16,
         children: jsx(_$$E, {
@@ -474,7 +474,7 @@ let eV = registerModal(function ({
             workspaceName: U
           })
         })
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         height: "hug-contents",
         padding: {
           horizontal: 16,
@@ -491,7 +491,7 @@ let eV = registerModal(function ({
           clearSearch: () => h(""),
           placeholder: getI18nString("add_unassigned_teams_modal.search_for_teams")
         })
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         height: "hug-contents",
         padding: 8,
         children: jsx(Checkbox, {
@@ -503,7 +503,7 @@ let eV = registerModal(function ({
         })
       }), jsx(Cj, {
         columns: F,
-        emptyContent: jsx(_$$Y, {
+        emptyContent: jsx(AutoLayout, {
           padding: 38,
           children: jsx(_$$E, {
             color: "secondary",
@@ -511,10 +511,10 @@ let eV = registerModal(function ({
           })
         }),
         footer: function (e) {
-          return jsxs(_$$Y, {
+          return jsxs(AutoLayout, {
             height: "hug-contents",
             padding: 16,
-            children: [jsx(_$$M, {}), jsx($, {
+            children: [jsx(Spacer, {}), jsx($, {
               selectedTeams: e
             })]
           });
@@ -1477,7 +1477,7 @@ function tL(e) {
       className: "paginated_teams_table--teamNameColumn--TacEL paginated_teams_table--column--egVf3 table--column--974RA",
       sorting_key: Kq.NAME,
       getSortValue: e => e.name,
-      cellComponent: e => jsxs(_$$Y, {
+      cellComponent: e => jsxs(AutoLayout, {
         children: [jsx(rE, {
           entity: e,
           size: 22,
@@ -1601,7 +1601,7 @@ function tL(e) {
       }]
     }]
   }];
-  let ti = eJ || eH ? jsxs(_$$Y, {
+  let ti = eJ || eH ? jsxs(AutoLayout, {
     width: "hug-contents",
     children: [jsx($n, {
       iconPrefix: jsx(_$$e2, {}),
@@ -1628,7 +1628,7 @@ function tL(e) {
       },
       children: jsx(_$$v, {})
     })]
-  }) : jsxs(_$$Y, {
+  }) : jsxs(AutoLayout, {
     width: "hug-contents",
     children: [jsx($n, {
       iconPrefix: jsx(_$$e2, {}),

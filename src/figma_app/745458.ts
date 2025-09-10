@@ -9,7 +9,7 @@ import { conditionalFeatureFlag } from "../figma_app/169182";
 import { P8 } from "../905/270781";
 import { logWarning } from "../905/714362";
 import { getFileKey } from "../905/412913";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { matchesSourceKey } from "../905/760074";
 import { z } from "../905/915227";
 import { normalizeValue } from "../905/216495";
@@ -133,7 +133,7 @@ function B({
   }
   return s;
 }
-let G = Mz([wi, L, d1, uB, tp, J8, tY, tX], (e, t, r, n, i, a, s, o) => {
+let G = Mz([wi, L, getSelectedFile, uB, tp, J8, tY, tX], (e, t, r, n, i, a, s, o) => {
   let l = !1;
   let d = [];
   let c = !1;
@@ -187,7 +187,7 @@ let $$H14 = Mz([V, m3, S_, dK], (e, t, r, n) => {
   }
   return i;
 });
-let $$z10 = Mz([Ls, ZA, P, d1, uB, tp, _$$aD, BA], (e, t, r, n, i, a, s, o) => {
+let $$z10 = Mz([Ls, ZA, P, getSelectedFile, uB, tp, _$$aD, BA], (e, t, r, n, i, a, s, o) => {
   let l = !1;
   let d = !1;
   let c = new Set(s.map(e => e.key));
@@ -258,7 +258,7 @@ let $$z10 = Mz([Ls, ZA, P, d1, uB, tp, _$$aD, BA], (e, t, r, n, i, a, s, o) => {
   };
 });
 let W = getFileKey();
-let K = P8([a3, gJ, d1, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, r, n, o, l, d, c) => {
+let K = P8([a3, gJ, getSelectedFile, M, D, F, k, e => e.mirror.appModel.currentPage], (e, t, r, n, o, l, d, c) => {
   let u = {};
   let p = new Set();
   let _ = Fullscreen?.getInternalCanvasNodeId();

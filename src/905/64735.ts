@@ -5,7 +5,7 @@ import { E } from "../905/632989";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { A as _$$A } from "../svg/545021";
 let m = {
@@ -31,7 +31,7 @@ export function $$h0({
 }) {
   switch (a) {
     case "horizontal":
-      return jsxs(Y, {
+      return jsxs(AutoLayout, {
         padding: 8,
         spacing: 4,
         direction: "horizontal",
@@ -72,7 +72,7 @@ export function $$h0({
         })]
       });
     case "vertical":
-      return jsxs(Y, {
+      return jsxs(AutoLayout, {
         padding: 8,
         spacing: 4,
         direction: "horizontal",
@@ -83,13 +83,13 @@ export function $$h0({
         dataTestId: A,
         children: [jsx(g, {
           svg: e
-        }), jsxs(Y, {
+        }), jsxs(AutoLayout, {
           direction: "vertical",
           padding: {
             vertical: 4
           },
           spacing: 4,
-          children: [jsxs(Y, {
+          children: [jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
             children: [s && jsx(_$$E, {

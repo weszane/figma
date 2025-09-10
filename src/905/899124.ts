@@ -23,7 +23,7 @@ import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FUserRoleType, FPlanRestrictionType } from "../figma_app/191312";
 import { AccessibleFoldersV2 } from "../figma_app/43951";
 import { kA } from "../figma_app/336853";
-import { XX, oc } from "../figma_app/345997";
+import { hasTeamStatePaidAccess, isTeamLocked } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { AccessLevelEnum } from "../905/557142";
 import { k as _$$k } from "../905/93362";
@@ -200,7 +200,7 @@ export let $$en0 = registerModal(function (e) {
     eh();
   }, [eh, onClose]);
   let ef = useMemo(() => {
-    let e = e => e ? XX(e) ? e.studentTeamAt ? "Edu" : "Pro" : oc(e.id, eu) ? "Locked" : "Free" : "Free";
+    let e = e => e ? hasTeamStatePaidAccess(e) ? e.studentTeamAt ? "Edu" : "Pro" : isTeamLocked(e.id, eu) ? "Locked" : "Free" : "Free";
     let t = ({
       orgId: e,
       orgPermission: t,

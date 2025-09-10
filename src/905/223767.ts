@@ -22,7 +22,7 @@ import { vp } from "../905/967587";
 import { FC } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
 import { LN } from "../figma_app/514043";
-import { PS } from "../figma_app/345997";
+import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { N as _$$N } from "../905/809096";
 import { ey } from "../figma_app/918700";
@@ -34,7 +34,7 @@ function O(e) {
   let [n, h] = useState(LN());
   let g = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let O = useRef(null);
-  let D = PS(FC());
+  let D = getEditableTeamsWithoutPaidAccess(FC());
   let L = _$$h.useTrackingContext({
     trigger: e.upsellSource,
     upgradePoint: _$$h.MonetizationUpgradePoint.PLAN_COMPARISON_MODAL

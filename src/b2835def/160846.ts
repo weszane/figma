@@ -5,7 +5,7 @@ import { VariableResolvedDataType, DistributionType, VisibilityCondition, NodePr
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { s6, KH, p8 } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
 import { W as _$$W } from "../441/503702";
@@ -977,7 +977,7 @@ let tz = memo(({
           commentsDetailContainerRef: U
         }), jsx(_$$Z, {}), jsx(_$$X, {}), jsx(_$$J, {}), jsx(Nz, {}), jsx("div", {
           ref: U
-        }), !_$$T() && W, jsx(_$$G, {
+        }), !isVsCodeEnvironment() && W, jsx(_$$G, {
           children: jsxs(Fragment, {
             children: [jsx(tV, {}), !!Q?.shouldOptimizeForIpadApp && jsx(_$$K6, {}), !!Q?.shouldOptimizeForIpadApp && jsx(_$$t2, {})]
           })

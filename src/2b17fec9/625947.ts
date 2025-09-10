@@ -10,7 +10,7 @@ import { q8 } from "../figma_app/459490";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { VisualBellActions } from "../905/302958";
 import { uO as _$$uO, Gb } from "../figma_app/933328";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { aV as _$$aV, p8 as _$$p, eY as _$$eY, KH, dH as _$$dH } from "../figma_app/722362";
 import { Kx, BI, rN as _$$rN, kM, yx as _$$yx, F4 } from "../figma_app/546509";
 import { IT } from "../905/713695";
@@ -258,7 +258,7 @@ import { ts as _$$ts2 } from "../1291/62942";
 import { A as _$$A9 } from "../6828/625002";
 import { a as _$$a5 } from "../905/964520";
 import { n as _$$n6 } from "../905/913636";
-import { Y as _$$Y2 } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { fG as _$$fG2, gp as _$$gp } from "../figma_app/973927";
 import { Cn as _$$Cn } from "../905/862913";
 import { S as _$$S } from "../3276/591174";
@@ -646,7 +646,7 @@ import { P$, y0 as _$$y6, PF, cu as _$$cu2, YI, CM, RE, G8 as _$$G5, IQ, $V, AC,
 import { $ as _$$$5, jo as _$$jo, Ld } from "../figma_app/629335";
 import { getStorage } from "../905/657224";
 import { F as _$$F8 } from "../905/680873";
-import { d1 as _$$d9 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { getRepoById } from "../905/760074";
 import { d1 as _$$d0 } from "../figma_app/603466";
 import { wQ, PK, H1, $c, hL as _$$hL, D6 as _$$D8, vt as _$$vt2, $l, gA as _$$gA, Vw, w9, Ev, U6 as _$$U4, rT as _$$rT2 } from "../figma_app/124493";
@@ -4945,7 +4945,7 @@ function sv({
         orgName: e.name
       })
     }),
-    children: jsx(_$$Y2, {
+    children: jsx(AutoLayout, {
       spacing: 32,
       horizontalAlignItems: "center",
       children: teamTemplates.map(e => jsx(s_, {
@@ -5557,7 +5557,7 @@ function ob() {
       pluginId: e.id,
       view: _$$p2.PLUGINS,
       pluginVersion: getPluginVersion(e)
-    }, e.id)), jsx(_$$Y2, {
+    }, e.id)), jsx(AutoLayout, {
       padding: {
         horizontal: 24
       },
@@ -6390,7 +6390,7 @@ function lh() {
     name: "invited",
     children: jsx("div", {
       className: _$$s.mt16.$,
-      children: jsxs(_$$Y2, {
+      children: jsxs(AutoLayout, {
         width: "fill-parent",
         verticalAlignItems: "center",
         padding: {
@@ -6419,7 +6419,7 @@ function lm({
   let {
     tabManager
   } = _$$cX();
-  return jsxs(_$$Y2, {
+  return jsxs(AutoLayout, {
     children: [jsxs("div", {
       className: _$$s.relative.$,
       children: [jsx("div", {
@@ -19892,7 +19892,7 @@ function jU() {
 }
 function jF() {
   let e = useSelector(e => e.timer);
-  let t = useSelector(e => _$$d9(e));
+  let t = useSelector(e => getSelectedFile(e));
   let i = useSelector(e => t ? getRepoById(t, e.repos) : null);
   let n = Math.ceil(P$(e.time) / 1e3);
   n > 0 ? _$$rF(t, i, n) : _$$rF(t, i);
@@ -24301,7 +24301,7 @@ let vW = memo(({
           commentsDetailContainerRef: s
         }), jsx(vK, {}), jsx("div", {
           ref: s
-        }), !_$$T() && jsx(nc, {}), jsxs(_$$G, {
+        }), !isVsCodeEnvironment() && jsx(nc, {}), jsxs(_$$G, {
           children: [jsx(vs, {}), !!L?.shouldOptimizeForIpadApp && jsx(_$$K3, {}), !!L?.shouldOptimizeForIpadApp && jsx(_$$t5, {})]
         }), e && jsx(X5, {})]
       }), jsx(_$$A, {

@@ -1,6 +1,6 @@
 import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
-import { e9 } from "../905/766303";
+import { getSelectedFolder } from "../905/766303";
 import { F } from "../905/224";
 import { F as _$$F } from "../905/642505";
 import { rR, sK } from "../figma_app/598018";
@@ -14,7 +14,7 @@ import { u as _$$u } from "../905/997541";
 let $$g0 = createOptimistThunk(e => {
   if (!_$$F) return;
   let t = e.getState();
-  let r = e9(t);
+  let r = getSelectedFolder(t);
   let n = r && r.team_id && t.teams[r.team_id];
   n && Mk.every(e => !rR(n, {
     type: sK.ADD_FILE,

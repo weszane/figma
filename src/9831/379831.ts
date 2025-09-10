@@ -24,7 +24,7 @@ import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { useStableMemo, useMemoStable } from "../905/19536";
 import F from "../vendor/73823";
 import { s as _$$s } from "../cssbuilder/589278";
-import { M as _$$M, Y as _$$Y } from "../905/830372";
+import { Spacer, AutoLayout } from "../905/470281";
 import { X9, nE, IO } from "../905/721983";
 import { debounce } from "../905/915765";
 import { isNotNullish } from "../figma_app/95419";
@@ -371,7 +371,7 @@ let em = memo(function ({
       title: g,
       className: _$$s.ellipsis.noWrap.overflowHidden.$,
       children: g
-    }), jsx(_$$M, {}), jsx(IV, {
+    }), jsx(Spacer, {}), jsx(IV, {
       badges: f
     }), x && jsx(IV, {
       badges: x
@@ -751,7 +751,7 @@ function eU({
     ref: setKeyboardNavigationElement,
     className: eD()(_$$s.block.wFull.px4.py8.colorText.flex.itemsCenter.alignLeft.$, "search_bar--searchResult--0iOvc", isFauxFocused && "search_bar--fauxFocus--BYHwu"),
     onClick: r,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       spacing: 4,
       children: [jsx(IV, {
         badges: displayProperties.leftBadges
@@ -760,12 +760,12 @@ function eU({
       }), jsx(_$$R2, {
         className: _$$s.overflowHidden.$,
         text: displayProperties.name
-      }), jsx(_$$M, {}), matches.filter(({
+      }), jsx(Spacer, {}), matches.filter(({
         property: e
       }) => !["id", "guid", "name", "type", "phase"].includes(e)).map(({
         property: e,
         value: t
-      }, r) => jsxs(_$$Y, {
+      }, r) => jsxs(AutoLayout, {
         spacing: 4,
         width: "hug-contents",
         children: [jsxs("div", {
@@ -782,7 +782,7 @@ function ez({
 }) {
   return jsx("div", {
     className: _$$s.colorBorder.px8.py4.bb1.bSolid.$,
-    children: jsx(_$$Y, {
+    children: jsx(AutoLayout, {
       children: e
     })
   });
@@ -911,7 +911,7 @@ function eZ({
       object: e
     }) : t ? jsx(e0, {
       object: t
-    }) : jsx(_$$M, {}), s && jsx(e3, {}), jsx(eB, {
+    }) : jsx(Spacer, {}), s && jsx(e3, {}), jsx(eB, {
       label: "Help",
       href: _$$e,
       svg: _$$A4
@@ -959,7 +959,7 @@ function e1({
       })]
     }), r && jsx("div", {
       className: _$$s.colorTextSecondary.mt8.$,
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         spacing: 8,
         width: "hug-contents",
         height: "hug-contents",
@@ -1007,7 +1007,7 @@ function e4({
 }) {
   return jsx("div", {
     className: _$$s.hFull.$,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       width: "fill-parent",
       height: "fill-parent",
@@ -1022,7 +1022,7 @@ function e5() {
     name,
     metadata
   } = useAtomWithSubscription(Cc);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     width: "fill-parent",
     height: 32,

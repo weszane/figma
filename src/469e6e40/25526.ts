@@ -41,7 +41,7 @@ import { M as _$$M } from "../469e6e40/490222";
 import { Yy } from "../figma_app/59509";
 import { Q as _$$Q2 } from "../905/363675";
 import { k as _$$k3 } from "../905/443820";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { b as _$$b } from "../905/168239";
 import { K as _$$K2 } from "../905/628118";
 import { fu } from "../figma_app/831799";
@@ -101,7 +101,7 @@ import { V as _$$V } from "../figma_app/312987";
 import { $$, ks, nR as _$$nR, CY, TA, vd, Ph, tM as _$$tM, qM } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
-import { J as _$$J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { q as _$$q } from "../905/749058";
@@ -402,7 +402,7 @@ function eo(e) {
         selectedSecondaryTab: SN.FILE_LIST_BETA
       })]
     }), t ? jsx("div", {
-      children: jsx(_$$Y, {
+      children: jsx(AutoLayout, {
         padding: {
           top: 8
         },
@@ -468,7 +468,7 @@ function ed(e) {
         selectedSecondaryTab: SN.ACCESS_INSIGHT
       })]
     }), t ? jsx("div", {
-      children: jsx(_$$Y, {
+      children: jsx(AutoLayout, {
         padding: {
           top: 8
         },
@@ -1359,7 +1359,7 @@ class tZ extends PureComponent {
       }));
     }, e => {
       this.props.dispatch(VisualBellActions.enqueue({
-        message: _$$J(e, e.data?.message) || getI18nString("activity_log.table.csv_requested_error"),
+        message: resolveMessage(e, e.data?.message) || getI18nString("activity_log.table.csv_requested_error"),
         type: "orgRoster.exportCSV",
         icon: VisualBellIcon.EXCLAMATION,
         error: !0
@@ -1855,7 +1855,7 @@ let aw = registerModal(function (e) {
             })
           })
         }), jsxs(_$$nB, {
-          children: [jsxs(_$$Y, {
+          children: [jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 16,
             children: [jsx("h3", {
@@ -1918,11 +1918,11 @@ function aC({
     title: c ? getI18nString("billing_groups_table.edit_billing_group_title") : getI18nString("billing_groups_table.create_billing_group_title"),
     onClose: l,
     minWidth: 500,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 16,
       padding: 16,
-      children: [!c && jsxs(_$$Y, {
+      children: [!c && jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 0,
         children: [jsx(_$$E, {
@@ -1937,7 +1937,7 @@ function aC({
         })]
       }), jsx("label", {
         className: _$$s.wFull.$,
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           width: "fill-parent",
           direction: "vertical",
           spacing: 8,
@@ -2223,7 +2223,7 @@ function aU(e) {
     cellComponent: e => e.id ? jsx("div", {
       "data-onboarding-key": Bq,
       children: e.name
-    }) : jsxs(_$$Y, {
+    }) : jsxs(AutoLayout, {
       spacing: 4,
       padding: 0,
       children: [jsx(_$$E, {
@@ -2359,7 +2359,7 @@ function aU(e) {
       stickyContent: jsxs(Fragment, {
         children: [!isMobileUA && !a && c.length > 0 && jsx(_$$p, {
           children: jsx(aa, {})
-        }), e.stickyContent, jsxs(_$$Y, {
+        }), e.stickyContent, jsxs(AutoLayout, {
           strokeColor: "default",
           strokeWidth: {
             top: 1,
@@ -2377,7 +2377,7 @@ function aU(e) {
           }), e.invoices && hX(e.invoices) && jsx(_$$S, {
             checked: o,
             onChange: () => d(e => !e),
-            label: jsxs(_$$Y, {
+            label: jsxs(AutoLayout, {
               direction: "horizontal",
               width: "hug-contents",
               spacing: "4px",
@@ -2420,7 +2420,7 @@ function a$(e) {
 function aB({
   isFullPage: e
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     padding: 8,
     direction: "vertical",
     verticalAlignItems: "center",
@@ -3365,11 +3365,11 @@ function nq({
   title: t,
   subtitle: a
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 8,
     horizontalAlignItems: "center",
-    children: [e, jsxs(_$$Y, {
+    children: [e, jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 4,
       horizontalAlignItems: "center",
@@ -3406,7 +3406,7 @@ function n$() {
     }), jsx(_$$b, {
       tab: J7.CONTENT,
       selectedSecondaryTab: SN.WORKSPACES
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       width: "fill-parent",
       height: "fill-parent",
       direction: "vertical",
@@ -3435,7 +3435,7 @@ function n$() {
         iconPrefix: jsx(_$$e5, {}),
         onClick: t,
         children: renderI18nText("workspace_table.workspace")
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         direction: "horizontal",
         horizontalAlignItems: "center",
         height: "hug-contents",
@@ -3444,7 +3444,7 @@ function n$() {
         },
         children: jsx("div", {
           className: "x1wmrhtn",
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: "horizontal",
             width: "fill-parent",
             verticalAlignItems: "start",
@@ -3510,7 +3510,7 @@ function nz(e) {
       orgAdminOriginTab: J7.CONTENT
     }));
   }, [t]);
-  let g = useCallback(e => e.id ? jsxs(_$$Y, {
+  let g = useCallback(e => e.id ? jsxs(AutoLayout, {
     children: [jsx(z6, {
       entity: e,
       size: 22
@@ -3528,7 +3528,7 @@ function nz(e) {
         icon: "lock-16"
       })
     })]
-  }) : jsxs(_$$Y, {
+  }) : jsxs(AutoLayout, {
     spacing: 4,
     padding: 0,
     children: [jsx(_$$E, {
@@ -3566,7 +3566,7 @@ function nz(e) {
       }
       let i = _$$e4(a);
       return jsx(Fragment, {
-        children: a.length > 1 ? jsxs(_$$Y, {
+        children: a.length > 1 ? jsxs(AutoLayout, {
           children: [jsx(_$$f2, {
             className: _$$s.flexShrink0.$,
             textColor: "onselected",
@@ -3687,7 +3687,7 @@ function nz(e) {
         cellComponent: h
       }, VU],
       sortState: b,
-      stickyContent: jsx(_$$Y, {
+      stickyContent: jsx(AutoLayout, {
         strokeColor: "default",
         strokeWidth: {
           top: 1,
@@ -3997,7 +3997,7 @@ function so(e) {
     children: renderI18nText("resources_tab.approved_widgets.no_widgets.text")
   });
   let i = "plugin" === extensionType ? renderI18nText("resources_tab.approved_plugins.no_plugins.add_plugins_button") : renderI18nText("resources_tab.approved_widgets.no_widgets.add_widgets_button");
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     spacing: 4,
     dataTestId: "allowlist-no-extensions-banner",
     children: [n, jsx(_$$N3, {

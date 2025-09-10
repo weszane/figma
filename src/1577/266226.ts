@@ -11,7 +11,7 @@ import { i as _$$i } from "../905/22844";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { showModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { z5 } from "../905/713722";
@@ -78,11 +78,11 @@ function L({
   let o = useDispatch();
   let r = e.uuid === fJ;
   let l = e.name || getI18nString("whiteboard.color_palettes.unnamed_palette");
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     width: "fill-parent",
     direction: "vertical",
     spacing: "4px",
-    children: [jsxs(Y, {
+    children: [jsxs(AutoLayout, {
       direction: "horizontal",
       spacing: "8px",
       children: [jsx("h3", {
@@ -91,11 +91,11 @@ function L({
         variant: "brandOutline",
         children: getI18nString("whiteboard.color_palettes.manage_modal.default")
       })]
-    }), jsxs(Y, {
+    }), jsxs(AutoLayout, {
       direction: "horizontal",
       width: "fill-parent",
       horizontalAlignItems: "space-between",
-      children: [jsx(Y, {
+      children: [jsx(AutoLayout, {
         direction: "horizontal",
         width: "hug-contents",
         spacing: "0px",
@@ -108,7 +108,7 @@ function L({
             hex: e
           })
         }, e))
-      }), jsxs(Y, {
+      }), jsxs(AutoLayout, {
         direction: "horizontal",
         width: "hug-contents",
         spacing: "8px",

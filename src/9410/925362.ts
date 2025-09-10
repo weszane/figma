@@ -9,7 +9,7 @@ import { getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { ds } from "../figma_app/314264";
 import { dh } from "../figma_app/186343";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { QU } from "../1250/559338";
 import { n0, _4 } from "../figma_app/32128";
@@ -92,7 +92,7 @@ export function $$j0() {
     showAll: devHandoffShowAllPages,
     setShowAll: setDevHandoffShowAllPages
   });
-  let U = !_$$T();
+  let U = !isVsCodeEnvironment();
   let G = uF + 72 + 32;
   let K = _4();
   let H = useDispatch();

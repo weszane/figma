@@ -17,7 +17,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { J as _$$J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { sx as _$$sx } from "../905/941192";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { Up, O$, s$, GL, vm, VB } from "../figma_app/361035";
@@ -875,7 +875,7 @@ export class $$eM2 extends Component {
     this.setState({
       apiPending: !0
     });
-    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(_$$s2.error(_$$J(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
+    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(_$$s2.error(resolveMessage(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
       extra: {
         eligibleTeamsByTeamId: this.state.eligibleTeamsByTeamId,
         eligibleUsersByUserId: this.state.eligibleUsersByUserId,

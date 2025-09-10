@@ -8,7 +8,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { b as _$$b } from "../905/217163";
 import { ud } from "../905/862913";
 import { Fk } from "../figma_app/167249";
@@ -32,7 +32,7 @@ let $$E1 = memo(({
   } = JA();
   let E = useSelector(e => e.library.defaultPublished.libraryKeys);
   let S = ud();
-  let w = useMemo(() => d1({
+  let w = useMemo(() => getSelectedFile({
     fileByKey: S,
     selectedView: c
   }), [S, c]);

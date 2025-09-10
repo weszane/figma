@@ -1,12 +1,12 @@
 import { ZB, Bt } from "../vendor/425002";
 import { fG, I2, nY, pT, ff, gu, vJ } from "../vendor/408361";
 let A = new Set(["http:", "https:", "mailto:", "sms:", "tel:"]);
-export class $$o0 extends fG {
+export class LinkNode extends fG {
   static getType() {
     return "link";
   }
   static clone(e) {
-    return new $$o0(e.__url, {
+    return new LinkNode(e.__url, {
       rel: e.__rel,
       target: e.__target,
       title: e.__title
@@ -156,12 +156,12 @@ function s(e) {
   };
 }
 export function $$a5(e, t) {
-  return pT(new $$o0(e, t));
+  return pT(new LinkNode(e, t));
 }
 export function $$l1(e) {
-  return e instanceof $$o0;
+  return e instanceof LinkNode;
 }
-export class $$u3 extends $$o0 {
+export class $$u3 extends LinkNode {
   constructor(e, t = {}, n) {
     super(e, t, n);
     this.__isUnlinked = void 0 !== t.isUnlinked && null !== t.isUnlinked && t.isUnlinked;
@@ -291,7 +291,7 @@ export function $$f2(e, t = {}) {
     });
   }
 }
-export const Db = $$o0;
+export const Db = LinkNode;
 export const FJ = $$l1;
 export const hx = $$f2;
 export const k_ = $$u3;

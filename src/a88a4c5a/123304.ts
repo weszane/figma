@@ -131,7 +131,7 @@ import { o as _$$o3 } from '../905/821217';
 import { sZ as _$$sZ } from '../905/845253';
 import { e as _$$e4 } from '../905/845623';
 import { F_ } from '../905/858282';
-import { T as _$$T2 } from '../905/858738';
+import { isVsCodeEnvironment } from '../905/858738';
 import { bL as _$$bL3 } from '../905/867927';
 import { ProjectDevelopmentPhases } from '../905/869235';
 import { generateUUIDv4 } from '../905/871474';
@@ -10831,7 +10831,7 @@ let dN = memo(({
           commentsDetailContainerRef: m
         }), jsx(_$$Z3, {}), getFeatureFlags().cursor_bot && y && jsx(_$$S2, {}), jsx(_$$X4, {}), jsx(_$$J6, {}), jsx(Nz, {}), jsx('div', {
           ref: m
-        }), !_$$T2() && R, !t && jsx(_$$E8, {}), jsx(_$$G3, {
+        }), !isVsCodeEnvironment() && R, !t && jsx(_$$E8, {}), jsx(_$$G3, {
           children: k ? null : jsxs(Fragment, {
             children: [jsx(dA, {}), !!j?.shouldOptimizeForIpadApp && jsx(_$$K3, {}), !!j?.shouldOptimizeForIpadApp && jsx(_$$t5, {})]
           })

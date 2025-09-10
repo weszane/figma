@@ -1,7 +1,7 @@
 import { qe } from "../figma_app/416935";
 import { b } from "../905/985254";
 import { w } from "../905/863010";
-import { n0, WQ } from "../figma_app/345997";
+import { hasValidSubscription, isTeamInGracePeriod } from "../figma_app/345997";
 import { canAdminTeam } from "../figma_app/642025";
 import { Yj } from "../figma_app/951233";
 let d = {
@@ -54,8 +54,8 @@ export function $$g3(e, t, r) {
   let d = !!e.user?.email_validated_at;
   if (!i || qe(i) || !d || function (e, t = 2592e6) {
     return _(e.userFlags, "completed_pro_cart_flow", t);
-  }(e) || r && (!n0(r) || WQ(w.toSinatra(r)) || r.isStudentTeam || r.deletedAt || r.orgId || !r.canAdmin)) return 0;
-  let c = Object.values(e.teams).filter(e => n0(e) && !WQ(e) && !e.student_team && !e.deleted_at && !e.org_id && canAdminTeam(e.id, t)).length;
+  }(e) || r && (!hasValidSubscription(r) || isTeamInGracePeriod(w.toSinatra(r)) || r.isStudentTeam || r.deletedAt || r.orgId || !r.canAdmin)) return 0;
+  let c = Object.values(e.teams).filter(e => hasValidSubscription(e) && !isTeamInGracePeriod(e) && !e.student_team && !e.deleted_at && !e.org_id && canAdminTeam(e.id, t)).length;
   return c > 1 ? 2 : 1 === c ? 1 : 0;
 }
 export function $$f1(e) {

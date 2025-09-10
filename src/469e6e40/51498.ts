@@ -14,7 +14,7 @@ import { J as _$$J } from "../905/129695";
 import { xk } from "@stylexjs/stylex";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { p as _$$p } from "../469e6e40/619494";
 import { showModalHandler, hideModal, popModalStack } from "../905/156213";
@@ -78,7 +78,7 @@ function E(e) {
   }, [t, e.org, e.orgDomains]);
   return jsx("div", {
     className: "xh8yej3 x1kgkb76 xwxc41k",
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       horizontalAlignItems: "space-between",
       verticalAlignItems: "center",
       direction: "horizontal",
@@ -408,7 +408,7 @@ function eo(e) {
   let [i, r] = useState("");
   let l = useMemo(() => idpData.domains.filter(e => e.domain.toLowerCase().includes(i.toLowerCase())), [idpData.domains, i]);
   return 0 === idpData.domains.length ? jsx(Fragment, {
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       height: 720,
       verticalAlignItems: "center",
       horizontalAlignItems: "center",
@@ -936,7 +936,7 @@ function ex(e) {
       })
     }), 0 === e.items.length && !e.isLoading && jsx("div", {
       className: "x1bpp3o7 x1gcgh60 xbdeg4j x9f619",
-      children: jsx(_$$Y, {
+      children: jsx(AutoLayout, {
         height: 200,
         verticalAlignItems: "center",
         horizontalAlignItems: "center",

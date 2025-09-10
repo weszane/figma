@@ -3,7 +3,7 @@ import { K } from "../905/443068";
 import { L } from "../905/704296";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { H8 } from "../905/590952";
 import { E } from "../905/984674";
 import { o1 } from "../figma_app/10554";
@@ -19,12 +19,12 @@ export function $$p0({
     name,
     entity_type
   } = e;
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     spacing: 8,
     horizontalAlignItems: "space-between",
     dataTestId: p,
-    children: [jsxs(Y, {
+    children: [jsxs(AutoLayout, {
       children: [jsx("div", {
         className: _$$s.$$with({
           opacity0_5: isPending
@@ -35,7 +35,7 @@ export function $$p0({
             name
           }
         })
-      }), jsxs(Y, {
+      }), jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 0,
         verticalAlignItems: "center",

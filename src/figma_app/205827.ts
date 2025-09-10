@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { A } from "../905/920142";
 import { wN } from "../figma_app/591738";
 import { FTrialType } from "../figma_app/191312";
-import { Rx, w5 } from "../figma_app/345997";
+import { hasEditableLockedTeams, hasTeamPaidAccess } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { a as _$$a } from "../905/692930";
 import { w } from "../905/863010";
@@ -59,13 +59,13 @@ let $$T2 = "dismissed_pro_trials_v3_unlocked_expiry_banner";
     };
   };
   e.getEligibleProTrialTeams = function (t, r, n, i) {
-    let a = Rx(n);
+    let a = hasEditableLockedTeams(n);
     let s = Object.values(n.teams).filter(s => e.canStartProTrial(t, r, a, s, n, i));
     s.sort((e, t) => (t.editors ?? 0) - (e.editors ?? 0));
     return s;
   };
   e.canStartProTrial = function (t, r, n, i, a, o) {
-    return !(!t || !e.entryEnabled() || w5(i) || i.stripe_customer_id || !r || n || !canEditTeam(i.id, a) || 30 > A().utc().diff(A(t.created_at).utc(), "days", !0) || A().utc().diff(A(t.created_at).utc(), "days", !0) > 90 || e.getProTrialStatus(i) || Object.keys(o).some(e => !!o[e][$$f4])) && !!e.isUserInVariant(t.id);
+    return !(!t || !e.entryEnabled() || hasTeamPaidAccess(i) || i.stripe_customer_id || !r || n || !canEditTeam(i.id, a) || 30 > A().utc().diff(A(t.created_at).utc(), "days", !0) || A().utc().diff(A(t.created_at).utc(), "days", !0) > 90 || e.getProTrialStatus(i) || Object.keys(o).some(e => !!o[e][$$f4])) && !!e.isUserInVariant(t.id);
   };
   let t = e => Math.max(Math.ceil(A(e).diff(A(), "days", !0)), 0);
   function r(t) {

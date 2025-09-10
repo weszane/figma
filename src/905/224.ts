@@ -17,7 +17,7 @@ import { VG } from "../905/389382";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { TeamCanEdit } from "../figma_app/43951";
-import { WW, Wf, LF } from "../figma_app/345997";
+import { STANDARD_LIMIT, PRIMARY_LIMIT, FILE_TYPE_PAGE_LIMITS } from "../figma_app/345997";
 import { vL, Bi, Pj } from "../905/652992";
 import { mapUpsellModalTypeToSource, UpsellSourceType } from "../figma_app/831101";
 import { fileActionEnum } from "../figma_app/630077";
@@ -97,11 +97,11 @@ var $$n0;
   let t = (e, t) => {
     switch (e) {
       case vL.FILE:
-        return WW;
+        return STANDARD_LIMIT;
       case vL.FOLDER:
-        return Wf;
+        return PRIMARY_LIMIT;
       case vL.PAGE:
-        return t ? LF[t] : LF[FFileType.DESIGN];
+        return t ? FILE_TYPE_PAGE_LIMITS[t] : FILE_TYPE_PAGE_LIMITS[FFileType.DESIGN];
     }
   };
   function i(t, i, r) {

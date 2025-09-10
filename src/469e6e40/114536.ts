@@ -11,7 +11,7 @@ import { o0 } from "../905/844131";
 import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { UnclaimedDomainUserView, DomainOrgAdminsToRemove, OrgDomainManagementPage } from "../figma_app/43951";
 import { z as _$$z } from "../469e6e40/221397";
 import { hK } from "../figma_app/211706";
@@ -129,15 +129,15 @@ let F = registerModal(function (e) {
       }), jsxs(nB, {
         children: [jsx(hK, {
           height: 8
-        }), jsx(_$$Y, {
+        }), jsx(AutoLayout, {
           verticalAlignItems: "center",
           horizontalAlignItems: "start",
           direction: "vertical",
           spacing: 16,
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: "horizontal",
             spacing: 16,
-            children: [jsxs(_$$Y, {
+            children: [jsxs(AutoLayout, {
               direction: "vertical",
               children: [jsx(_$$E, {
                 fontWeight: "bold",
@@ -193,15 +193,15 @@ function $(e) {
       }));
     } : void 0,
     className: _$$s.b1.bRadius8.colorBorder.p16.wFull.borderBox.bgTransparent.$,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: "horizontal",
       verticalAlignItems: "center",
       horizontalAlignItems: "space-between",
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         direction: "vertical",
         horizontalAlignItems: "start",
         spacing: 0,
-        children: [e.enabled ? jsxs(_$$Y, {
+        children: [e.enabled ? jsxs(AutoLayout, {
           direction: "horizontal",
           verticalAlignItems: "center",
           horizontalAlignItems: "start",
@@ -262,7 +262,7 @@ function $(e) {
           trusted: !0,
           children: renderI18nText("settings_tab.contact_support")
         })
-      }), !e.enabled && jsxs(_$$Y, {
+      }), !e.enabled && jsxs(AutoLayout, {
         direction: "horizontal",
         verticalAlignItems: "center",
         horizontalAlignItems: "end",
@@ -296,7 +296,7 @@ function V(e) {
   }, []);
   return jsx("div", {
     className: _$$s.colorBgHover.minH32.wFull.$,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       cornerRadius: 2,
       padding: 8,
       direction: "vertical",
@@ -324,7 +324,7 @@ function V(e) {
           });
         },
         variant: "link",
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           spacing: 0,
           direction: "horizontal",
           children: [jsx(_$$a2, {
@@ -368,7 +368,7 @@ let Y = registerModal(function (e) {
       }), jsxs(nB, {
         children: [jsx(hK, {
           height: 8
-        }), jsxs(_$$Y, {
+        }), jsxs(AutoLayout, {
           verticalAlignItems: "center",
           horizontalAlignItems: "start",
           direction: "vertical",
@@ -525,7 +525,7 @@ let Q = registerModal(function (e) {
       }), jsxs(nB, {
         children: [jsx(hK, {
           height: 8
-        }), jsxs(_$$Y, {
+        }), jsxs(AutoLayout, {
           verticalAlignItems: "center",
           horizontalAlignItems: "start",
           direction: "vertical",
@@ -600,10 +600,10 @@ function ee(e) {
   });
 }
 function et(e) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 16,
-    children: [jsxs(_$$Y, {
+    children: [jsxs(AutoLayout, {
       direction: "vertical",
       children: [jsx(_$$E, {
         fontWeight: "bold",
@@ -615,7 +615,7 @@ function et(e) {
       })]
     }), jsx(V, {
       dnsToken: e.dnsToken
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       direction: "vertical",
       children: [jsx(_$$E, {
         fontWeight: "bold",
@@ -642,7 +642,7 @@ function ea(e) {
   }, [t, e.domainCaptureEnabled, e.orgId, e.dnsToken, e.currentDomains, e.domainsRequireVerification]);
   return jsx("div", {
     className: _$$s.bSolid.colorBorder.bb1.px32.mb16.pb24.$,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       horizontalAlignItems: "space-between",
       verticalAlignItems: "center",
       direction: "horizontal",
@@ -772,7 +772,7 @@ function ek({
         });
       },
       columns: f,
-      emptyContent: jsx(_$$Y, {
+      emptyContent: jsx(AutoLayout, {
         height: 200,
         verticalAlignItems: "center",
         horizontalAlignItems: "center",
@@ -844,7 +844,7 @@ function eC({
       })
     }), !a && jsxs("div", {
       className: _$$s.bRadius4.colorBgBrandTertiary.pb12.pt8.pl8.ml16.mr16.$,
-      children: [s && jsxs(_$$Y, {
+      children: [s && jsxs(AutoLayout, {
         direction: "horizontal",
         verticalAlignItems: "start",
         children: [jsx("span", {
@@ -862,10 +862,10 @@ function eC({
             })
           })
         })]
-      }), !s && jsxs(_$$Y, {
+      }), !s && jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 0,
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           direction: "horizontal",
           verticalAlignItems: "center",
           spacing: "5px",
@@ -978,7 +978,7 @@ let eO = registerModal(function (e) {
       }), jsxs(nB, {
         children: [jsx(hK, {
           height: 8
-        }), jsx(_$$Y, {
+        }), jsx(AutoLayout, {
           verticalAlignItems: "center",
           horizontalAlignItems: "start",
           direction: "vertical",
@@ -998,7 +998,7 @@ let eO = registerModal(function (e) {
           })
         }), jsx(hK, {
           height: 8
-        }), jsx(_$$Y, {
+        }), jsx(AutoLayout, {
           verticalAlignItems: "center",
           horizontalAlignItems: "start",
           direction: "vertical",
@@ -1055,12 +1055,12 @@ let eL = registerModal(function (e) {
       }), jsxs(nB, {
         children: [jsx(hK, {
           height: 8
-        }), jsxs(_$$Y, {
+        }), jsxs(AutoLayout, {
           verticalAlignItems: "center",
           horizontalAlignItems: "start",
           direction: "vertical",
           spacing: 16,
-          children: [jsxs(_$$Y, {
+          children: [jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
             children: [jsx(_$$E, {
@@ -1071,7 +1071,7 @@ let eL = registerModal(function (e) {
             })]
           }), jsx(V, {
             dnsToken: e.dnsToken
-          }), e.domains.length > 1 && jsxs(_$$Y, {
+          }), e.domains.length > 1 && jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 8,
             children: [jsx(_$$E, {
@@ -1134,7 +1134,7 @@ function eP(e) {
     onClear: _$$b2(eM)
   });
   return jsxs(Fragment, {
-    children: [jsx(_$$Y, {
+    children: [jsx(AutoLayout, {
       verticalAlignItems: "center",
       horizontalAlignItems: "center",
       children: function (e) {
@@ -1191,7 +1191,7 @@ function eP(e) {
   });
 }
 function eU() {
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     height: 200,
     verticalAlignItems: "center",
     horizontalAlignItems: "center",
@@ -1317,7 +1317,7 @@ function e$(e) {
         },
         children: renderI18nText("domain_management.domain_unverified")
       });
-      return jsxs(_$$Y, {
+      return jsxs(AutoLayout, {
         direction: "horizontal",
         verticalAlignItems: "center",
         spacing: 4,
@@ -1335,7 +1335,7 @@ function e$(e) {
         color: "default",
         children: getI18nString("domain_management.column_header.unclaimed_users")
       });
-      return jsxs(_$$Y, {
+      return jsxs(AutoLayout, {
         direction: "horizontal",
         verticalAlignItems: "center",
         spacing: 4,
@@ -1462,7 +1462,7 @@ function e$(e) {
   return jsx(Cj, {
     actionBar: o(),
     columns: t,
-    emptyContent: jsx(_$$Y, {
+    emptyContent: jsx(AutoLayout, {
       height: 200,
       verticalAlignItems: "center",
       horizontalAlignItems: "center",
@@ -1543,7 +1543,7 @@ function eB(e) {
       }) => e)
     }), jsx("div", {
       className: _$$s.px32.$,
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         spacing: 0,
         direction: "vertical",
         children: [jsx($, {

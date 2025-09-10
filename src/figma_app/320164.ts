@@ -17,7 +17,7 @@ import { a as _$$a } from "../905/105502";
 import { p as _$$p } from "../905/300815";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/347702";
 import { iE } from "../figma_app/416935";
@@ -140,7 +140,7 @@ export async function $$F3(e, {
     let {
       data
     } = u;
-    let n = J({
+    let n = resolveMessage({
       data
     }, data?.message);
     let s = getI18nString("auth.google-sso.unable-to-auth");

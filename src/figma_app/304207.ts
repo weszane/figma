@@ -5,7 +5,7 @@ import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { b6, Qi } from "../figma_app/559491";
@@ -106,9 +106,9 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
     e.dispatch(createOptimistRevertAction(S));
     403 === t.data.status ? e.dispatch(VisualBellActions.enqueue({
       message: r === vt.PLUGIN ? getI18nString("community.actions.unable_to_save_plugin_error", {
-        error: J(t, t.data?.message)
+        error: resolveMessage(t, t.data?.message)
       }) : getI18nString("community.actions.unable_to_save_widget_error", {
-        error: J(t, t.data?.message)
+        error: resolveMessage(t, t.data?.message)
       }),
       type: "PLUGIN_INSTALL_FAILED",
       error: !0
@@ -225,9 +225,9 @@ let N = createOptimistThunk((e, t) => {
     e.dispatch(VisualBellActions.enqueue({
       type: "plugin-save-error",
       message: t.resourceType === vt.PLUGIN ? getI18nString("community.actions.unable_to_save_plugin_error", {
-        error: J(r, r.data.message || "unknown error")
+        error: resolveMessage(r, r.data.message || "unknown error")
       }) : getI18nString("community.actions.unable_to_save_widget_error", {
-        error: J(r, r.data.message || "unknown error")
+        error: resolveMessage(r, r.data.message || "unknown error")
       }),
       error: !0
     }));

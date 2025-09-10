@@ -10,7 +10,7 @@ import { zE } from "../905/738636";
 import { $ } from "../905/922405";
 import { DM } from "../figma_app/223206";
 import { Cu } from "../figma_app/314264";
-import { Kl } from "../905/766303";
+import { getPermissionsAndView } from "../905/766303";
 import { FFileType } from "../figma_app/191312";
 import { ai, f6 } from "../figma_app/915202";
 import { i0 } from "../figma_app/632248";
@@ -168,7 +168,7 @@ let S = (e, t) => ({
           exceedsMakePasteThreshold: e.exceedsMakePasteThreshold
         });
         let n = debugState.getState();
-        let a = Kl(n);
+        let a = getPermissionsAndView(n);
         i(zE({
           state: a,
           from: t,

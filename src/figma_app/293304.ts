@@ -12,7 +12,7 @@ import { generateRecordingKey, useHandleFocusEvent, useHandleKeyboardEvent, SKIP
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { ay } from "../905/879323";
 import { splitAndJoinPath } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
@@ -34,7 +34,7 @@ export function $$C1({
   showStylePreview: l = !1,
   onEnterPressed: d
 }) {
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 0,
     height: "hug-contents",
@@ -110,7 +110,7 @@ function w({
     children: [jsx(JU, {
       disabled: I,
       children: renderI18nText("design_systems.create_style.name")
-    }), I ? jsx(Y, {
+    }), I ? jsx(AutoLayout, {
       padding: {
         vertical: parsePxInt(dGl)
       },

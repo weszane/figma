@@ -64,7 +64,7 @@ import { n6 } from "../905/234821";
 import { k as _$$k3 } from "../figma_app/564183";
 import { wg } from "../figma_app/101956";
 import { fullscreenValue } from "../figma_app/455680";
-import { T as _$$T2 } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { Ij, _D } from "../figma_app/433401";
 import { K as _$$K2 } from "../figma_app/398376";
 import { L4 } from "../figma_app/34798";
@@ -732,7 +732,7 @@ export function $$e00(e) {
         }), jsx(eq, {}), jsx(_$$X2, {
           extended: !0
         })]
-      }), h && F(eQ.DROPPER), _ && !O && j(B), _ && O && F(eQ.FRAME), _ && j(G), _ && !g && j(V, {}), _ && z(), h && y && !m && !(_$$T2() && getFeatureFlags().dt_vscode_ready_for_dev) && jsxs(Fragment, {
+      }), h && F(eQ.DROPPER), _ && !O && j(B), _ && O && F(eQ.FRAME), _ && j(G), _ && !g && j(V, {}), _ && z(), h && y && !m && !(isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev) && jsxs(Fragment, {
         children: [F(eQ.MEASURE, {
           disabled: eR,
           isInteractiveFocus: eR

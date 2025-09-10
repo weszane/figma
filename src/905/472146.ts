@@ -1,7 +1,7 @@
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { FPlanNameType } from "../figma_app/191312";
-import { WW, Wf } from "../figma_app/345997";
+import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { jsx } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -400,8 +400,8 @@ let C = {
 let $$T9 = {
   [FPlanNameType.STARTER]: {
     "usage-limits": () => getI18nString("plan_comparison.chart.usage_limits_limited_pages.starter", {
-      maxFreeFiles: WW,
-      maxFreeProjects: Wf
+      maxFreeFiles: STANDARD_LIMIT,
+      maxFreeProjects: PRIMARY_LIMIT
     }),
     "usage-limits-v2": !1,
     "version-history": () => getI18nString("plan_comparison.chart.version_history.starter"),

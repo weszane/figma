@@ -5,7 +5,7 @@ import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import o from "classnames";
 import { Y } from "../905/506207";
 import { co } from "../figma_app/958735";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { dq } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
 import { G } from "../1250/269770";
@@ -167,7 +167,7 @@ export function $$F0({
   isDragTarget: o = !1
 }) {
   let c = useSelector(e => e.modalShown);
-  let f = _$$T();
+  let f = isVsCodeEnvironment();
   let g = getObservableValue(AppStateTsApi?.devHandoffState()?.focusMode, !1);
   let _ = dq();
   let x = useRef(!1);

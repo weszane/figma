@@ -10,7 +10,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { processLocalComponents } from "../figma_app/80990";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { cM, MH, dM } from "../figma_app/803787";
 import { Ib } from "../905/129884";
 import { ND } from "../figma_app/76115";
@@ -177,7 +177,7 @@ export function $$W0(e) {
     var D;
     let r = S.numUpdates;
     let a = e.editingFile.team_id && teams[e.editingFile.team_id] || null;
-    w5(a) && (r += w.numUpdates + C.numUpdates);
+    hasTeamPaidAccess(a) && (r += w.numUpdates + C.numUpdates);
     let l = (D = r) > 0 ? renderI18nText("design_systems.libraries_modal.current_file_has_x_changes", {
       numChangesText: jsx("div", {
         className: _$$s.fontSemiBold.$,

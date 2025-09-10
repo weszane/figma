@@ -11,7 +11,7 @@ import { WX } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
 import { T8, fu } from "../figma_app/831799";
 import { F } from "../905/224";
-import { Ht, WW, Wf } from "../figma_app/345997";
+import { SECONDARY_LIMIT, STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { Bi } from "../905/652992";
 import { DashboardSections } from "../905/548208";
 import { projectPermissionEnum, fileActionEnum } from "../figma_app/630077";
@@ -162,7 +162,7 @@ let k = class e extends PureComponent {
     }) : jsxs("div", {
       children: [renderI18nText("payments_modal.you_ve_reached_your_plan_s_m_a_x_f_r_e_e_editors_editor_limit_user_text_you_ve_invited_will_be_granted_view_access_but_they_won_t_be_able_to_edit.seat_rename", {
         userText: r,
-        maxFreeEditors: Ht
+        maxFreeEditors: SECONDARY_LIMIT
       }), jsx("br", {}), jsx("br", {}), renderI18nText("payments_modal.you_may_give_them_edit_access_later_if_you_upgrade_to_the_professional_plan_or_downgrade_other_editors_on_your_team_to_viewers.seat_rename")]
     });
     return T8(jsx(T, {
@@ -203,8 +203,8 @@ registerModal(function (e) {
     })(),
     resourceName: e.action === fileActionEnum.MOVE_FOLDER ? getI18nString("payments_modal.this_project") : e.action === fileActionEnum.IMPORT_FILES ? getI18nString("payments_modal.more_files") : e.numFiles && e.numFiles > 1 ? getI18nString("payments_modal.these_files") : getI18nString("payments_modal.this_file")
   }), i = renderI18nText("payments_modal.on_the_starter_plan_your_team_is_limited", {
-    maxFreeFiles: WW,
-    maxFreeFolders: Wf
+    maxFreeFiles: STANDARD_LIMIT,
+    maxFreeFolders: PRIMARY_LIMIT
   }));
   return jsx(fu, {
     name: "SimpleFileLimitUpsellModal",

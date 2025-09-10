@@ -9,7 +9,7 @@ import { getI18nString } from '../905/303541';
 import { debugState } from '../905/407919';
 import { pluginManifestPropType, capabilitiesPropType, editorTypePropType, widgetManifestPropType } from '../905/488349';
 import { ZB as _$$ZB } from '../905/491152';
-import { pI } from '../905/544659';
+import { validateNetworkAccess } from '../905/544659';
 import { dequeuePluginStatus } from '../905/571565';
 import { getFeatureFlags } from '../905/601108';
 import { logger } from '../905/651849';
@@ -17,7 +17,7 @@ import { logInfo } from '../905/714362';
 import { getArrayLength, hasKey } from '../905/764747';
 import { $A as _$$$A } from '../905/782918';
 import { validateWithNoOpVm } from '../905/816730';
-import { T as _$$T } from '../905/858738';
+import { isVsCodeEnvironment } from '../905/858738';
 import { $A } from '../905/862883';
 import { J as _$$J } from '../905/896954';
 import { XHR } from '../905/910117';
@@ -750,7 +750,7 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
                 if (!Pe(manifest.editorType)) throw new ManifestValidationError(`Capability "${cap}" requires "editorType" to include "dev"`, manifest);
                 if (manifest.containsWidget) throw new ManifestValidationError(`Capability "${cap}" is not supported for widgets`, manifest);
               }
-              if (_$$T() && !manifest.capabilities.includes('vscode')) throw new ManifestValidationError('Manifest must include "vscode" capability to run in Figma for VS Code Extension', manifest);
+              if (isVsCodeEnvironment() && !manifest.capabilities.includes('vscode')) throw new ManifestValidationError('Manifest must include "vscode" capability to run in Figma for VS Code Extension', manifest);
             }
           }
         })(manifest);
@@ -799,7 +799,7 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
 
         // Network access validation
         if (manifest.networkAccess) {
-          const result = pI(manifest.networkAccess);
+          const result = validateNetworkAccess(manifest.networkAccess);
           if (!result.isValid) throw new ManifestValidationError(result.validationErr!, manifest);
         }
 
@@ -1931,7 +1931,7 @@ export function isSamePlugin(a: any, b: any): boolean {
  * @returns True if devmode.
  */
 export function isDevModePlugin(plugin: any, options?: any): boolean {
-  return !!(!_$$T() || plugin.manifest.capabilities?.includes('vscode') || options?.allowNonVsCodePluginsInVsCode) && Pe(plugin.manifest.editorType) && !k0(plugin);
+  return !!(!isVsCodeEnvironment() || plugin.manifest.capabilities?.includes('vscode') || options?.allowNonVsCodePluginsInVsCode) && Pe(plugin.manifest.editorType) && !k0(plugin);
 }
 
 /**
@@ -2206,7 +2206,7 @@ export function isValidForFullscreenView(params: any): boolean {
  * @returns Directory string.
  */
 export function getPluginsMenuOpenDirectory(): string {
-  return _$$T() ? 'plugins-menu-open-directory-vscode' : BrowserInfo.mac ? 'plugins-menu-open-directory-mac' : 'plugins-menu-open-directory-win';
+  return isVsCodeEnvironment() ? 'plugins-menu-open-directory-vscode' : BrowserInfo.mac ? 'plugins-menu-open-directory-mac' : 'plugins-menu-open-directory-win';
 }
 
 // Exported names mapping (refactored as per instructions)

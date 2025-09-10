@@ -3,7 +3,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/223926";
 import { lg, Hb, zE, X7 } from "../figma_app/646357";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { O } from "../905/566074";
 import { PublishStatusEnum, PrimaryWorkflowEnum, StagingStatusEnum } from "../figma_app/633080";
 var o = s;
@@ -62,7 +62,7 @@ class m {
       };
       if (!h) return A;
       let y = e => Object.values(e).filter(e => O(e.type) && p(e, _?.itemsToPublish));
-      let b = _?.overridePublishPermissions || w5(h.team_id ? f[h.team_id] : null);
+      let b = _?.overridePublishPermissions || hasTeamPaidAccess(h.team_id ? f[h.team_id] : null);
       let v = y(b ? t : {});
       let I = y(b ? e : {});
       let E = y(i);

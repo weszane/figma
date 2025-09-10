@@ -10,7 +10,7 @@ import { DQ, Pw } from "../figma_app/121751";
 import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
 import { FPlanLimitationType, FFileType, FPaymentHealthStatusType } from "../figma_app/191312";
 import { TeamFileLimitsInfo, TeamFileLimitsInfoByProject } from "../figma_app/43951";
-import { XX, WW } from "../figma_app/345997";
+import { hasTeamStatePaidAccess, STANDARD_LIMIT } from "../figma_app/345997";
 import { canAdminTeam } from "../figma_app/642025";
 import { t as _$$t2 } from "../905/504360";
 import { AccessLevelEnum } from "../905/557142";
@@ -152,7 +152,7 @@ function k(e) {
 }
 export function $$M14(e, t) {
   if (!e || e.restrictionsList?.includes(FPlanLimitationType.LOCKED)) return !1;
-  if (XX(e)) return !0;
+  if (hasTeamStatePaidAccess(e)) return !0;
   switch (t.type) {
     case 0:
       return !e.restrictionsList?.includes(FPlanLimitationType.PROJECTS_LIMITED) && !e.restrictionsList?.includes(FPlanLimitationType.PROJECTS_LIMITED_LEGACY);
@@ -168,10 +168,10 @@ export function $$M14(e, t) {
             return !0;
           case "fileCountLimit":
             if (t.isDestinationTeamDrafts) return !0;
-            if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (oA(t.teamFileCounts.totalFileCount) ?? 0) >= WW) return !1;
+            if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (oA(t.teamFileCounts.totalFileCount) ?? 0) >= STANDARD_LIMIT) return !1;
             if (t.teamFileCounts) {
               let e = Number(t.teamFileCounts[r.teamFileCountsKey]);
-              if (getFeatureFlags().sites_design_starter_combined_file_limit && (t.editorType === FFileType.DESIGN ? e += Number(t.teamFileCounts.sitesFileCount ?? 0) : t.editorType === FFileType.SITES && (e += Number(t.teamFileCounts.designFileCount ?? 0))), e >= WW) return !1;
+              if (getFeatureFlags().sites_design_starter_combined_file_limit && (t.editorType === FFileType.DESIGN ? e += Number(t.teamFileCounts.sitesFileCount ?? 0) : t.editorType === FFileType.SITES && (e += Number(t.teamFileCounts.designFileCount ?? 0))), e >= STANDARD_LIMIT) return !1;
             }
             return !0;
           default:
@@ -189,9 +189,9 @@ export function $$M14(e, t) {
           case "fileCountLimit":
             {
               if (0 === t.nNonDraftFilesToAdd) return !0;
-              if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (oA(t.teamFileCounts.totalFileCount) ?? 0) >= WW) return !1;
+              if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (oA(t.teamFileCounts.totalFileCount) ?? 0) >= STANDARD_LIMIT) return !1;
               let n = Number(t.teamFileCounts[r.teamFileCountsKey]);
-              if (getFeatureFlags().sites_design_starter_combined_file_limit && (t.editorType === FFileType.DESIGN ? n += Number(t.teamFileCounts.sitesFileCount ?? 0) : t.editorType === FFileType.SITES && (n += Number(t.teamFileCounts.designFileCount ?? 0))), n + t.nNonDraftFilesToAdd > WW) return !1;
+              if (getFeatureFlags().sites_design_starter_combined_file_limit && (t.editorType === FFileType.DESIGN ? n += Number(t.teamFileCounts.sitesFileCount ?? 0) : t.editorType === FFileType.SITES && (n += Number(t.teamFileCounts.designFileCount ?? 0))), n + t.nNonDraftFilesToAdd > STANDARD_LIMIT) return !1;
               return !0;
             }
           default:

@@ -25,7 +25,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { $ as _$$$, V as _$$V2 } from "../905/355181";
 import { In } from "../905/672640";
 import { E as _$$E } from "../905/984674";
@@ -158,7 +158,7 @@ let ev = registerModal(function ({
     title: "",
     size: 360,
     padding: 0,
-    children: [jsxs(_$$Y, {
+    children: [jsxs(AutoLayout, {
       padding: {
         left: 16,
         right: 8,
@@ -169,7 +169,7 @@ let ev = registerModal(function ({
       children: [jsx("div", {
         className: _$$s2.fontSemiBold.lh16.colorText.$,
         children: d
-      }), jsx(_$$M, {}), jsx(Jn, {
+      }), jsx(Spacer, {}), jsx(Jn, {
         onClick: r
       })]
     }), jsx("div", {
@@ -177,7 +177,7 @@ let ev = registerModal(function ({
       children: jsx(_$$E, {
         children: o
       })
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       direction: "horizontal",
       padding: {
         left: 16,
@@ -240,7 +240,7 @@ function eS({
   label: e,
   contents: t
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     spacing: 16,
     verticalAlignItems: "start",
@@ -335,7 +335,7 @@ let eI = registerModal(function ({
       title: "",
       size: 400,
       padding: 0,
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         padding: {
           left: 16,
           right: 4,
@@ -345,13 +345,13 @@ let eI = registerModal(function ({
         children: [jsx("div", {
           className: _$$s2.fontSemiBold.lh16.colorText.$,
           children: renderI18nText("admin_dashboard.requests.details.title")
-        }), jsx(_$$M, {}), jsx(Jn, {
+        }), jsx(Spacer, {}), jsx(Jn, {
           onClick: y,
           innerText: "X"
         })]
       }), e.hasBeenNudged && !!e.name && jsx(eN, {
         requesterName: e.name
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: "vertical",
         padding: {
           left: 16,
@@ -402,7 +402,7 @@ let eI = registerModal(function ({
             children: `\u201C${e.message}\u201D`
           }) : null
         })]
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: "horizontal",
         padding: 16,
         horizontalAlignItems: "end",
@@ -669,7 +669,7 @@ export function $$eD0({
   let tN = eK === V7.ALL_ORG_REQUESTS && e2.length > 0;
   let tI = eK === V7.ALL_MANAGED_REQUESTS && (e3.length > 0 && $ || !$ && e3.length > 1);
   let tT = (t_ || tu) && (tN || tI);
-  let tA = jsxs(_$$Y, {
+  let tA = jsxs(AutoLayout, {
     padding: {
       vertical: 8
     },
@@ -684,7 +684,7 @@ export function $$eD0({
       clearSearch: () => J(""),
       placeholder: getI18nString("admin_dashboard.requests.search.placeholder"),
       maxInputLength: MI
-    }), jsx(_$$M, {}), e.length > 1 && jsx(bv, {
+    }), jsx(Spacer, {}), e.length > 1 && jsx(bv, {
       label: getI18nString("admin_dashboard.requests.filter.type"),
       dispatch: z,
       dropdownShown: V,
@@ -1045,7 +1045,7 @@ export function $$eD0({
     cellComponent: e => {
       let t = !!ex || eM.has(e.id);
       let a = c()(_$$s2.mr8.bgTransparent.$, e.hasBeenNudged ? "" : "upgrade_requests_table--rowDetailButton--lCxCS");
-      return jsxs(_$$Y, {
+      return jsxs(AutoLayout, {
         spacing: 8,
         children: [jsx(ef, {
           text: e.message ?? Lv,
@@ -1054,7 +1054,7 @@ export function $$eD0({
           onClickLink: () => {
             tB(e);
           }
-        }), jsx(_$$M, {}), 0 === ej.current && "approving_all_button" !== ex && jsxs(Fragment, {
+        }), jsx(Spacer, {}), 0 === ej.current && "approving_all_button" !== ex && jsxs(Fragment, {
           children: [jsx(_$$V2, {
             variant: "secondary",
             disabled: t,
@@ -1106,9 +1106,9 @@ export function $$eD0({
         hasBillingGroups: !!e2.length,
         orgName: "loaded" === ts.status ? ts.data?.org?.name ?? "org" : "org"
       })
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       spacing: 0,
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         spacing: 0,
         width: t_ && e2.length > 0 ? 150 : "hug-contents",
         children: [jsx("div", {
@@ -1170,7 +1170,7 @@ export function $$eD0({
         showAllOrgRequests: t_ ?? !1,
         showBillingGroupAdminRequests: tu,
         viewableBillingGroupIds: $ ? [null, ...e8] : e8
-      }), jsx(_$$M, {}), q && jsx(CY, {
+      }), jsx(Spacer, {}), q && jsx(CY, {
         trusted: !0,
         onClick: q,
         className: _$$s2.fontMedium.$,
@@ -1249,7 +1249,7 @@ export function $$eD0({
             })
           }) : jsx("div", {
             className: "upgrade_requests_table--actionBarButtons--TsqDX",
-            children: jsxs(_$$Y, {
+            children: jsxs(AutoLayout, {
               spacing: 8,
               children: [jsx(_$$V2, {
                 variant: "toolbar-secondary",
@@ -1311,7 +1311,7 @@ export function $$eD0({
                 children: renderI18nText("admin_dashboard.requests.empty.reset_filters")
               })
             })
-          }), jsx(_$$Y, {
+          }), jsx(AutoLayout, {
             direction: "vertical",
             spacing: 8,
             padding: {

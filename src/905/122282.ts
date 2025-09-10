@@ -57,7 +57,7 @@ import { J as _$$J } from "../905/341359";
 import { A as _$$A4 } from "../vendor/90566";
 import { H as _$$H } from "../905/620380";
 import { useSprigWithSampling } from "../905/99656";
-import { J as _$$J2 } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { I as _$$I } from "../905/293573";
 import { o as _$$o2 } from "../905/785255";
 import { r as _$$r2 } from "../905/290294";
@@ -732,7 +732,7 @@ function ta({
       let e = _.errors.find(e => "validation" === e.type);
       if (e) return ts(e);
       let t = _.errors.find(e => "submission" === e.type)?.data.rawError;
-      return t && _$$J2(t) ? _$$J2(t) : getI18nString("community.publishing.an_error_occurred_please_try_again");
+      return t && resolveMessage(t) ? resolveMessage(t) : getI18nString("community.publishing.an_error_occurred_please_try_again");
     })();
   }, [_, draftSubmissionResult?.result, N]);
   useEffect(() => {

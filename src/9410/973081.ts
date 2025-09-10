@@ -30,7 +30,7 @@ import { ap as _$$ap } from "../figma_app/149304";
 import { EC } from "../figma_app/291892";
 import { D as _$$D } from "../905/629114";
 import { dX } from "../figma_app/837840";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { vE, QY } from "../figma_app/139113";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { FFileType, FPermissionLevelType } from "../figma_app/191312";
@@ -230,7 +230,7 @@ import { ih as _$$ih2 } from "../figma_app/509285";
 import { we } from "../figma_app/861982";
 import { zE } from "../905/738636";
 import { me } from "../figma_app/223206";
-import { Kl } from "../905/766303";
+import { getPermissionsAndView } from "../905/766303";
 import { y as _$$y5 } from "../905/461685";
 import { Vr } from "../figma_app/151869";
 import { j as _$$j } from "../9410/853982";
@@ -293,7 +293,7 @@ import { FJ } from "../905/508367";
 import { L3, Uc as _$$Uc, C4 } from "../figma_app/968444";
 import { Ex, zE as _$$zE } from "../figma_app/919079";
 import { sx as _$$sx2 } from "../905/941192";
-import { Y as _$$Y3, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { E as _$$E3 } from "../905/984674";
 import { Gm, t4 as _$$t6 } from "../figma_app/675605";
 import { v7, GP, As, rd as _$$rd } from "../figma_app/475303";
@@ -2815,7 +2815,7 @@ let ne = {
       pageGuid: l,
       selectedNodeId: a
     });
-    let u = Kl(r);
+    let u = getPermissionsAndView(r);
     r9(l, a);
     i(zE({
       state: u,
@@ -6210,10 +6210,10 @@ function aZ(e) {
   return jsx("div", {
     style: _$$sx2.colorText.px14.$,
     className: e.isSelected ? "action_autocomplete_input--rowSelected--62Uvp autocomplete_permissions--contactRowSelected--xYJKX autocomplete_permissions--contactRow--DRMiv" : "action_autocomplete_input--row--HRsbZ autocomplete_permissions--contactRow--DRMiv",
-    children: jsxs(_$$Y3, {
+    children: jsxs(AutoLayout, {
       children: [jsx(_$$E3, {
         children: EG(e.searchResult)
-      }), jsx(_$$M, {}), jsx(_$$E3, {
+      }), jsx(Spacer, {}), jsx(_$$E3, {
         children: e.searchResult.shortcutText ?? c1(t, Dz(e.searchResult))
       })]
     })
@@ -6634,7 +6634,7 @@ function sn() {
     className: a3,
     children: [jsx("div", {
       className: a5,
-      children: jsxs(_$$Y3, {
+      children: jsxs(AutoLayout, {
         direction: "vertical",
         height: "fill-parent",
         padding: {
@@ -6653,7 +6653,7 @@ function sn() {
           children: jsx(_$$E3, {
             children: renderI18nText("keyboard_settings.custom_keyboard_shortcuts.add")
           })
-        }), jsx(_$$M, {}), jsx(Ex, {
+        }), jsx(Spacer, {}), jsx(Ex, {
           className: _$$s3.mt4.$,
           text: "Internal only - #feat-custom-keyboard-shortcuts",
           color: _$$zE.WARNING,
@@ -6668,7 +6668,7 @@ function sn() {
       children: [Object.values(_$$Uc()).map(({
         action: e,
         type: t
-      }) => jsxs(_$$Y3, {
+      }) => jsxs(AutoLayout, {
         width: "fill-parent",
         height: "hug-contents",
         children: [jsx(sr, {
@@ -6702,13 +6702,13 @@ function sn() {
             });
           }
         })
-      }), "ADDING_WAITING_FOR_KEY_REGISTRATION" === e.step && jsxs(_$$Y3, {
+      }), "ADDING_WAITING_FOR_KEY_REGISTRATION" === e.step && jsxs(AutoLayout, {
         height: "hug-contents",
         verticalAlignItems: "center",
         children: [jsx(_$$E3, {
           color: "menu",
           children: EG(e.menuItem)
-        }), jsx(_$$M, {}), jsx("div", {
+        }), jsx(Spacer, {}), jsx("div", {
           className: _$$s3.py4.$,
           children: jsx("div", {
             className: el()(a4, a6),
@@ -8899,7 +8899,7 @@ function oU({
       selectedStyleProperties: l,
       showProperties: !0,
       onEnterPressed: m
-    }), jsx(_$$Y3, {
+    }), jsx(AutoLayout, {
       horizontalAlignItems: "end",
       verticalAlignItems: "center",
       padding: 16,
@@ -9349,7 +9349,7 @@ export function $$lr0({
             ref: ei,
             onMouseEnter: () => z(!0),
             onMouseLeave: () => z(!1)
-          }, "fullscreen-container"), jsx(s7, {}), jsx(_$$T2, {}), _$$T() && getFeatureFlags().dt_vscode_ready_for_dev && jsx(_$$f, {
+          }, "fullscreen-container"), jsx(s7, {}), jsx(_$$T2, {}), isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev && jsx(_$$f, {
             isOnReadyForDevPage: !1
           }), !t.fileIsLoading && jsx($, {}), V && jsx(_$$e2, {
             dropdown: t.dropdownShown

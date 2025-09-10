@@ -17,7 +17,7 @@ import { UD, Jm, zr } from "../3674/371829";
 import { W as _$$W } from "../905/200727";
 import { renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Pf, H8 } from "../905/590952";
 import { Wi, JR } from "../figma_app/162641";
 import { useState, useEffect } from "react";
@@ -284,7 +284,7 @@ function C({
   let o = _$$DP();
   let l = e.slice(0, n);
   let s = i ? "avatarTooltipBorder" : "dark" === o ? "avatarBorderDark" : "avatarBorderLight";
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     verticalAlignItems: "center",
     spacing: "-8px",
     horizontalAlignItems: "start",
@@ -303,7 +303,7 @@ function C({
 }
 let S = "dev_mode_social_proof_skeletons--avatarSkeleton--EFbYe";
 function P() {
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     verticalAlignItems: "center",
     spacing: "-8px",
     horizontalAlignItems: "start",

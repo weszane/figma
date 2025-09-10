@@ -10,7 +10,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { wv as _$$wv, rr, gw } from "../figma_app/236327";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { oB, j7 } from "../905/929976";
 import { jm, j6 } from "../figma_app/831799";
@@ -101,7 +101,7 @@ export function $$O1({
           },
           children: [!!t.icon && jsx(Fragment, {
             children: t.icon
-          }), jsxs(Y, {
+          }), jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 4,
             height: d,

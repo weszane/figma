@@ -48,12 +48,12 @@ import { Dm } from "../figma_app/8833";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
-import { l$ } from "../905/766303";
+import { removeOptimist } from "../905/766303";
 import { F as _$$F2 } from "../905/224";
 import { ud } from "../905/862913";
 import { fullscreenValue } from "../figma_app/455680";
 import { FPlanNameType } from "../figma_app/191312";
-import { cW } from "../figma_app/345997";
+import { MAX_USERS } from "../figma_app/345997";
 import { hM } from "../905/851937";
 import { UpsellModalType } from "../905/165519";
 import { V_, Nb, Eg, vF, _h } from "../figma_app/841351";
@@ -718,7 +718,7 @@ class eM extends RecordingComponent {
           let e;
           if (null != t.label && t.label.length > 0) e = getI18nString("collaboration.feedback.viewing_version", {
             label: t.label
-          }); else {
+          });else {
             let r = xX(t.touched_at);
             e = getI18nString("collaboration.feedback.viewing_version", {
               label: r
@@ -758,7 +758,7 @@ class eM extends RecordingComponent {
     this.isAllowedToChangeVersion = () => null === this.props.modalShown && !hM();
     this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       if (!this.props.dropdownShown && !this.props.modalShown && !this.props.versionHistory.compareId) {
-        if (e.keyCode === Uz.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(Eg()); else if (e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.DOWN_ARROW) {
+        if (e.keyCode === Uz.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(Eg());else if (e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.DOWN_ARROW) {
           if (!this.isAllowedToChangeVersion()) return;
           let t = this.props.versionHistory.versions.length;
           this.setState({
@@ -766,7 +766,7 @@ class eM extends RecordingComponent {
           });
           this.autoExpandGroupId = "";
           let r = -1;
-          if (this.props.versionHistory.activeId === V_) e.keyCode === Uz.DOWN_ARROW && (r = 0); else {
+          if (this.props.versionHistory.activeId === V_) e.keyCode === Uz.DOWN_ARROW && (r = 0);else {
             let t = this.props.versionHistory.versions.findIndex(e => e.id === this.props.versionHistory.activeId);
             -1 !== t && (r = e.keyCode === Uz.UP_ARROW ? t - 1 : t + 1);
           }
@@ -1055,7 +1055,7 @@ class eM extends RecordingComponent {
     let t = e.team;
     let r = this.props.versionHistory.versions.filter(e => !this.state.showOnlyUserVersionHistory || this.props.user?.handle && (e.participating_users_array?.includes(this.props.user?.handle) || e.user.handle === this.props.user?.handle));
     let i = r.filter(e => !e.disabled);
-    let a = r.filter(e => e.disabled).slice(0, cW);
+    let a = r.filter(e => e.disabled).slice(0, MAX_USERS);
     this.hasLabeled = this.hasLabeledVersions(i) || this.hasLabeledVersions(a);
     let s = null;
     let o = hasMorePages(this.props.versionHistory);
@@ -1186,7 +1186,7 @@ class eM extends RecordingComponent {
   }
 }
 eM.displayName = "VersionHistoryView";
-export let $$eF7 = connect(l$)(eM);
+export let $$eF7 = connect(removeOptimist)(eM);
 export function $$ej5(e) {
   let {
     onClose,

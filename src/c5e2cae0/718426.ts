@@ -5,7 +5,7 @@ import { P } from "../905/347284";
 import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { jm } from "../figma_app/831799";
-import { WW } from "../figma_app/345997";
+import { STANDARD_LIMIT } from "../figma_app/345997";
 import { Ro } from "../figma_app/805373";
 import { jG, o8, kz, nW, wv, cr, J1 } from "../c5e2cae0/62130";
 export function $$u0({
@@ -63,7 +63,7 @@ export function $$u0({
                 editors: t.editors
               }), j && u && renderI18nText("universal_upgrade.select_team.files_per_team_figma_files_used", {
                 numFilesUsed: u[r],
-                numFreeFilesAllowed: WW
+                numFreeFilesAllowed: STANDARD_LIMIT
               })]
             })]
           })]

@@ -1,7 +1,7 @@
 import { trackEventAnalytics } from "../905/449184";
 import { createOptimistThunk } from "../905/350402";
 import { hideModal, showModalHandler } from "../905/156213";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { resolveTeamId } from "../905/515860";
 import { canAdminTeam } from "../figma_app/642025";
 import { jsx, jsxs } from "react/jsx-runtime";
@@ -30,10 +30,10 @@ import { customHistory } from "../905/612521";
 import { Us } from "../figma_app/637027";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { V as _$$V } from "../905/223767";
 import { FPlanNameType } from "../figma_app/191312";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { RO, Q1, zS, xp, Xj } from "../905/472146";
 import { lQ } from "../905/934246";
@@ -394,7 +394,7 @@ function Y({
       },
       children: [jsx("div", {
         className: _$$s.lh24.font13.pt24.pr0.pb32.pl0.$,
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           spacing: 24,
           children: [jsx("div", {
             children: o
@@ -449,21 +449,21 @@ let X = registerModal(function ({
     buttonsHelperComponent: o,
     dispatch: n,
     hideSecondaryCta: !t,
-    leftPane: jsxs(_$$Y, {
+    leftPane: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: "12px",
       children: [jsx("p", {
         children: s
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 8,
         children: [jsx("p", {
           className: _$$s.fontSemiBold.$,
           children: renderI18nText("oss_exposure_branching_upsell_modal.body2")
-        }), jsx(_$$Y, {
+        }), jsx(AutoLayout, {
           direction: "vertical",
           spacing: 8,
-          children: Z.map(e => jsxs(_$$Y, {
+          children: Z.map(e => jsxs(AutoLayout, {
             spacing: 8,
             horizontalAlignItems: "start",
             children: [jsx("p", {
@@ -476,7 +476,7 @@ let X = registerModal(function ({
       })]
     }),
     onClickPrimaryCta: t ? () => {
-      let t = w5(e);
+      let t = hasTeamPaidAccess(e);
       let i = t ? RO : Q1;
       n(showModalHandler({
         type: _$$V,
@@ -526,7 +526,7 @@ let $$J0 = createOptimistThunk(async (e, t, {
 }) => {
   let r;
   let o = e.getState();
-  if (!(r = t.sourceFileKey ? await i.fetchFile(t.sourceFileKey) : d1(o))) return;
+  if (!(r = t.sourceFileKey ? await i.fetchFile(t.sourceFileKey) : getSelectedFile(o))) return;
   let l = r.source_file_key || r.key;
   e.dispatch(showModalHandler({
     type: P,

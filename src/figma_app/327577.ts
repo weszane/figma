@@ -7,7 +7,7 @@ import { customHistory } from "../905/612521";
 import { S as _$$S } from "../905/539306";
 import { sf } from "../905/929976";
 import { uM } from "../905/738636";
-import { xA } from "../905/766303";
+import { getNewFileConfig } from "../905/766303";
 import { ZG } from "../figma_app/840917";
 import { FFileType } from "../figma_app/191312";
 import { ge } from "../figma_app/349248";
@@ -115,7 +115,7 @@ let $$D10 = createOptimistThunk((e, t) => {
   let r = e.getState();
   if (!r.desktopNewTab.isCreatingFile) {
     let n = ce() ? ai.SAME_TAB : ai.NEW_TAB;
-    let i = xA({
+    let i = getNewFileConfig({
       state: e.getState(),
       openNewFileIn: n,
       folderOverride: t.projectId ? {

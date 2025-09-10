@@ -24,7 +24,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { V as _$$V } from "../905/355181";
 import { B as _$$B } from "../905/261906";
 import { RR } from "../figma_app/307841";
@@ -882,16 +882,16 @@ export function $$e$0({
   });
   let at = jsx("div", {
     className: _$$s2.h32.cursorDefault.selectNone.$,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       spacing: 0,
-      children: [jsx(_$$Y, {
+      children: [jsx(AutoLayout, {
         spacing: 0,
         children: [!0, !1].map(e => t9(e))
-      }), jsx(_$$M, {}), ae]
+      }), jsx(Spacer, {}), ae]
     })
   });
   let aa = jsxs(Fragment, {
-    children: [!!tR && tm.length > 0 && at, jsxs(_$$Y, {
+    children: [!!tR && tm.length > 0 && at, jsxs(AutoLayout, {
       padding: {
         top: 4,
         bottom: 8
@@ -906,7 +906,7 @@ export function $$e$0({
         clearSearch: () => ek(""),
         placeholder: getI18nString("admin_dashboard.requests.search_requests.placeholder"),
         maxInputLength: MI
-      }), jsx(_$$M, {}), (tR || tk) && jsx(eB, {
+      }), jsx(Spacer, {}), (tR || tk) && jsx(eB, {
         type: L8,
         dataTestId: "user-type-filter",
         isDefaultFilter: null === tc,
@@ -1015,7 +1015,7 @@ export function $$e$0({
           })
         }) : jsx("div", {
           className: $h,
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             spacing: 8,
             children: [jsx(_$$V, {
               variant: "toolbar-secondary",
@@ -1095,7 +1095,7 @@ export function $$e$0({
               children: renderI18nText("admin_dashboard.requests.empty.reset_filters")
             })
           })
-        }), jsx(_$$Y, {
+        }), jsx(AutoLayout, {
           direction: "vertical",
           spacing: 8,
           padding: {

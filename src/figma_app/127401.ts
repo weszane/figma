@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { J } from "../905/614223";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { j } from "../905/261906";
 import { FProductAccessType } from "../figma_app/191312";
 import { HD, YT } from "../figma_app/217457";
@@ -17,7 +17,7 @@ function u({
     size: "16",
     colorStyle: t
   });
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     spacing: r,
     children: [e === FProductAccessType.FIGMAKE && d ? jsx(J, {

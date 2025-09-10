@@ -29,7 +29,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { a as _$$a } from "../figma_app/289605";
 import { ZGX } from "../figma_app/27776";
 import { sf } from "../905/929976";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { _6 } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
@@ -336,10 +336,10 @@ function ee({
   let h = useRef(null);
   let g = useCallback(() => {
     if (ref?.current && h?.current && "fullscreen" === m.view) {
-      if (_$$T()) d(sf({
+      if (isVsCodeEnvironment()) d(sf({
         ...m,
         variableIdForDetailsPanel: t
-      })); else {
+      }));else {
         let e = cn(ref.current, iB + wR);
         d(showModal({
           type: B.type,
@@ -358,7 +358,7 @@ function ee({
   if (u) return jsx(Fragment, {
     children: e
   });
-  let _ = _$$T() ? t === m.variableIdForDetailsPanel : f?.type === B.type && f.data?.variableId === t && f.data?.rowRef === h;
+  let _ = isVsCodeEnvironment() ? t === m.variableIdForDetailsPanel : f?.type === B.type && f.data?.variableId === t && f.data?.rowRef === h;
   let A = i?.subscriptionStatus === "LOCAL" && i.isSoftDeleted;
   return jsx(tH, {
     boundaryKey: "varDetails_codeEntry",
@@ -394,7 +394,7 @@ function et({
   let f = useDispatch();
   let _ = useSelector(e => e.modalShown);
   let A = !!_ && _.type === vl;
-  let y = _$$T() ? t === h.styleForDetailsPanel?.styleId : A && _.data?.rowRef && _.data.rowRef.current === m?.current;
+  let y = isVsCodeEnvironment() ? t === h.styleForDetailsPanel?.styleId : A && _.data?.rowRef && _.data.rowRef.current === m?.current;
   let {
     key,
     content_hash,
@@ -408,20 +408,20 @@ function et({
   let w = useCallback(e => {
     if (e.stopPropagation(), m?.current && t && S && ref?.current) {
       if (y) {
-        _$$T() ? f(sf({
+        isVsCodeEnvironment() ? f(sf({
           ...h,
           styleForDetailsPanel: void 0
         })) : f(hideModalHandler());
         return;
       }
-      if (Fullscreen?.selectStyleByGuid(S), _$$T()) f(sf({
+      if (Fullscreen?.selectStyleByGuid(S), isVsCodeEnvironment()) f(sf({
         ...h,
         styleForDetailsPanel: {
           styleId: t,
           styleNodeId: S,
           styleType: style_type
         }
-      })); else {
+      }));else {
         A && f(hideModalHandler());
         let e = cn(ref.current, b6 + wR);
         f(showModal({
@@ -438,10 +438,10 @@ function et({
       }
     }
   }, [f, A, y, m, ref, h, t, S, style_type]);
-  if (u || _$$T() || !i) return jsx(Fragment, {
+  if (u || isVsCodeEnvironment() || !i) return jsx(Fragment, {
     children: e
   });
-  let C = _$$T() ? t === h.styleForDetailsPanel?.styleId : _?.type === vl && _.data?.styleNodeId === S && _.data?.rowRef === m;
+  let C = isVsCodeEnvironment() ? t === h.styleForDetailsPanel?.styleId : _?.type === vl && _.data?.styleNodeId === S && _.data?.rowRef === m;
   return jsx(tH, {
     boundaryKey: "styleDetails_codeEntry",
     fallback: jsx(Fragment, {
@@ -488,7 +488,7 @@ function ei({
   let h = useSelector(e => e.modalShown);
   let g = _$$P();
   let f = t.ids.length;
-  if (_$$T() || g || f < 1) return jsx(Fragment, {
+  if (isVsCodeEnvironment() || g || f < 1) return jsx(Fragment, {
     children: e
   });
   let _ = h?.type === L.type && h.data?.vars?.rawValue === t.rawValue && h.data?.rowRef === d;

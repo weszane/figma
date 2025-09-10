@@ -5,7 +5,7 @@ import r from "classnames";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { I } from "../figma_app/638694";
 import { fu } from "../figma_app/831799";
 import { z1, wL, tD, D9, wv, bW, EM, vK, Rk, Nt, _9, zK, LD, Up, G } from "../469e6e40/878707";
@@ -25,7 +25,7 @@ function h(e) {
   }[e];
 }
 function x(e) {
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     horizontalAlignItems: "start",
     children: [e.icon, jsx("span", {
       children: e.title
@@ -36,7 +36,7 @@ function x(e) {
   });
 }
 export function $$b0(e) {
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     horizontalAlignItems: "end",
     width: "fill-parent",
     children: [jsx(x, {

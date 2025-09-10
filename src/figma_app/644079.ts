@@ -12,7 +12,7 @@ import { hA } from "../figma_app/88239";
 import { ow, m0 } from "../figma_app/976749";
 import { UX } from "../figma_app/740163";
 import { TZ } from "../figma_app/62612";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { kd } from "../figma_app/546509";
 import { getObservableValue } from "../figma_app/84367";
 import { O as _$$O } from "../905/51985";
@@ -53,7 +53,7 @@ export function $$P0() {
   T += (n ? g : 0) + r;
   e && (T += t, p && (T -= parsePxNumber(ea4)));
   E && (T += 2 * parsePxNumber(M$q) - parsePxNumber(j4N));
-  _$$T() && getFeatureFlags().dt_vscode_ready_for_dev && (T += d);
+  isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev && (T += d);
   return T;
 }
 export function $$D3() {

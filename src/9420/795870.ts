@@ -6,7 +6,7 @@ import { getInitialOptions, buildStaticUrl } from "../figma_app/169182";
 import { reportError, normalizeError } from "../905/11";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { J as _$$J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { createEmptyAddress, isAddressEmpty } from "../figma_app/831101";
 import { lX, dT } from "../9420/394825";
 import { LN, bu, ub, B9 } from "../figma_app/514043";
@@ -30,7 +30,7 @@ function m({
         address: t
       });
     } catch (e) {
-      return _$$J(e) || e.message;
+      return resolveMessage(e) || e.message;
     }
     return null;
   };
@@ -334,7 +334,7 @@ let $$P3 = _$$D(e => {
     } catch (e) {
       P({
         code: "address-validation-error",
-        message: _$$J(e) || e.message
+        message: resolveMessage(e) || e.message
       });
       return !0;
     } else {

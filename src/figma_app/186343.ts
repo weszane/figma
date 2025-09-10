@@ -20,7 +20,7 @@ import { p8 } from "../figma_app/722362";
 import { P3 } from "../figma_app/952446";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { KI, J9, LF } from "../figma_app/345997";
+import { hasPageLimitations, hasReachedPageLimit, FILE_TYPE_PAGE_LIMITS } from "../figma_app/345997";
 import { F as _$$F2 } from "../905/258517";
 import { Fk } from "../figma_app/167249";
 import { UpsellModalType } from "../905/165519";
@@ -37,14 +37,14 @@ export function $$k9({
   loadedPageNode: t,
   pageName: r
 }) {
-  return !(!t || !e || KI(e)) && !!$$D5(t, r) && t?.childCount === 0;
+  return !(!t || !e || hasPageLimitations(e)) && !!$$D5(t, r) && t?.childCount === 0;
 }
 export async function $$M11({
   openFile: e,
   pageNode: t,
   pageName: r
 }) {
-  return !(!t || !e || KI(e)) && !!$$D5(t, r) && (Multiplayer.isIncrementalSession() && (await IL(t.guid, AutosaveEventType.PAGE_DIVIDER_CHECK)), t?.childCount === 0);
+  return !(!t || !e || hasPageLimitations(e)) && !!$$D5(t, r) && (Multiplayer.isIncrementalSession() && (await IL(t.guid, AutosaveEventType.PAGE_DIVIDER_CHECK)), t?.childCount === 0);
 }
 export function $$F7() {
   let e = selectCurrentFile();
@@ -52,7 +52,7 @@ export function $$F7() {
     let e = selectCurrentFile();
     let t = p8("pagesList").length;
     let r = $$j3();
-    return !!(e && (J9({
+    return !!(e && (hasReachedPageLimit({
       openFile: e,
       pageCount: t
     }) || r({
@@ -94,7 +94,7 @@ export function $$j3() {
   return useCallback(({
     openFile: t,
     pageCount: r
-  }) => t.editorType === FFileType.DESIGN && r >= LF[FFileType.DESIGN] && e(t), [e]);
+  }) => t.editorType === FFileType.DESIGN && r >= FILE_TYPE_PAGE_LIMITS[FFileType.DESIGN] && e(t), [e]);
 }
 export async function $$U2({
   openFile: e,

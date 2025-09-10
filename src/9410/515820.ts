@@ -36,7 +36,7 @@ import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
-import { XX, Lj, LF } from "../figma_app/345997";
+import { hasTeamStatePaidAccess, getMaxPagesAllowed, FILE_TYPE_PAGE_LIMITS } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { UpsellModalType } from "../905/165519";
 import { bU } from "../1250/506456";
@@ -130,7 +130,7 @@ function W({
   let m = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
   let f = i?.team;
   let _ = i?.plan;
-  let x = f && canEditTeam(f.id, a) && !XX(f);
+  let x = f && canEditTeam(f.id, a) && !hasTeamStatePaidAccess(f);
   let y = f && _ && f.canEdit && _.tier === FPlanNameType.STARTER;
   let b = useShadowRead({
     oldValue: x,
@@ -144,7 +144,7 @@ function W({
     }
   });
   if (s <= 0 || !i || o || !b) return null;
-  let C = Lj(i);
+  let C = getMaxPagesAllowed(i);
   if ((C <= 1 || C >= 1 / 0) && !l(i)) return null;
   let v = () => {
     let e = UpsellModalType.PAGE_TRACKER_UPSELL;
@@ -169,7 +169,7 @@ function W({
     "data-testid": "page_tracker_upsell_link",
     children: renderI18nText("fullscreen.pages_panel.get_unlimited_pages_and_more")
   });
-  let w = s / LF[i.editorType ?? FFileType.DESIGN];
+  let w = s / FILE_TYPE_PAGE_LIMITS[i.editorType ?? FFileType.DESIGN];
   let S = d()({
     "page_tracker_upsell--progressPartial--guOiP": w < 1,
     "page_tracker_upsell--progressCompleteWarning--06IlO page_tracker_upsell--progressComplete--ilmev": 1 === w,
@@ -202,7 +202,7 @@ function W({
         }), jsx("p", {
           className: "page_tracker_upsell--upsellText--Ng-u0",
           children: (() => {
-            let e = LF[i.editorType ?? FFileType.DESIGN] - s;
+            let e = FILE_TYPE_PAGE_LIMITS[i.editorType ?? FFileType.DESIGN] - s;
             return e >= 2 ? jsxs(Fragment, {
               children: [renderI18nText("fullscreen.pages_panel.n_free_pages_left", {
                 numPagesRemaining: e
@@ -213,7 +213,7 @@ function W({
               }), jsx("br", {}), T]
             }) : 0 === e ? jsxs(Fragment, {
               children: [renderI18nText("fullscreen.pages_panel.all_n_free_pages_used", {
-                maxFreePages: LF[i.editorType ?? FFileType.DESIGN]
+                maxFreePages: FILE_TYPE_PAGE_LIMITS[i.editorType ?? FFileType.DESIGN]
               }), jsx("br", {}), T]
             }) : jsxs(Fragment, {
               children: [renderI18nText("fullscreen.pages_panel.all_free_pages_used"), jsx("br", {}), T]

@@ -75,7 +75,7 @@ import { L as _$$L, I as _$$I } from "../1577/16430";
 import { N as _$$N2 } from "../905/872825";
 import { LJ, HP, OE, PF } from "../figma_app/930386";
 import { $E, IE, pj, m5 } from "../figma_app/805898";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { In } from "../905/672640";
 import { Wt, Hb } from "../5430/873109";
 import { q as _$$q } from "../5430/229559";
@@ -1282,7 +1282,7 @@ function tr({
   children: i
 }) {
   let [n, r] = useState(!1);
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     verticalAlignItems: "start",
     width: "fill-parent",
     height: "hug-contents",
@@ -1297,9 +1297,9 @@ function tr({
         className: e9()("faq_accordion--accordionButtonContent--lHulm text--fontPos13--xW8hS text--_fontBase--QdLsd", {
           "faq_accordion--divider--VdCtu": t
         }),
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           direction: "vertical",
-          children: [jsxs(_$$Y, {
+          children: [jsxs(AutoLayout, {
             horizontalAlignItems: "space-between",
             verticalAlignItems: "center",
             children: [jsx("div", {
@@ -1323,11 +1323,11 @@ function to({
 }) {
   return jsx("div", {
     className: "faqs_section--sectionContainer--NWPTP",
-    children: jsx(_$$Y, {
+    children: jsx(AutoLayout, {
       horizontalAlignItems: "center",
       children: jsx("div", {
         className: "faqs_section--section--5Tey9",
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           width: "fill-parent",
           height: "hug-contents",
           direction: "vertical",
@@ -1411,7 +1411,7 @@ function tx({
       })
     }) : jsx("div", {
       className: "hero_section--section--xyS5J",
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         width: "100%",
         direction: "horizontal",
         height: "hug-contents",

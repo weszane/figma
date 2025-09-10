@@ -13,7 +13,7 @@ import { B as _$$B } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { S as _$$S } from "../905/339549";
 import { E as _$$E } from "../905/984674";
 import { mx } from "../figma_app/681712";
@@ -386,7 +386,7 @@ function J({
   children: t
 }) {
   let a = "footer" === e ? ["55%", "15%", "15%", "15%"] : ["35%", "20%", "15%", "15%", "15%"];
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     dataTestId: "seat-table-row",
     verticalAlignItems: "center",
     horizontalAlignItems: "start",
@@ -398,7 +398,7 @@ function J({
     },
     backgroundColor: "header" === e ? "hover" : "default",
     spacing: 0,
-    children: t.map((e, t) => jsx(_$$Y, {
+    children: t.map((e, t) => jsx(AutoLayout, {
       width: a[t],
       horizontalAlignItems: "start",
       verticalAlignItems: "center",
@@ -439,7 +439,7 @@ function Z({
       color: "default",
       children: renderI18nText("all_carts.editor_table.multiple_teams")
     })
-  }) : jsxs(_$$Y, {
+  }) : jsxs(AutoLayout, {
     spacing: 8,
     verticalAlignItems: "center",
     horizontalAlignItems: "start",
@@ -530,7 +530,7 @@ registerModal(function ({
           color: "default",
           fontWeight: "medium",
           children: renderI18nText("all_carts.editor_table.Teams")
-        }), jsxs(_$$Y, {
+        }), jsxs(AutoLayout, {
           direction: "vertical",
           spacing: 0,
           horizontalAlignItems: "start",
@@ -587,7 +587,7 @@ registerModal(function ({
         })
       }), jsx(Y, {}), jsxs(J, {
         rowType: "footer",
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           spacing: 0,
           direction: "vertical",
           horizontalAlignItems: "start",

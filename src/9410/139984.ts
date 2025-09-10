@@ -6,7 +6,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import { uM } from "../905/738636";
 import { b as _$$b } from "../905/985254";
 import { e } from "../905/621515";
-import { xA } from "../905/766303";
+import { getNewFileConfig } from "../905/766303";
 import { useOpenFileObjectWithSinatraType, selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
@@ -615,7 +615,7 @@ export function $$eo1() {
   };
   if (K === q.YoureAllSet) return jsx(_$$J, {
     onPrimaryCtaClick: () => {
-      let e = xA({
+      let e = getNewFileConfig({
         state: L.getState(),
         openNewFileIn: ai.NEW_TAB,
         folderOverride: "drafts",

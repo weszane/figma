@@ -9,7 +9,7 @@ import { _l, V3 } from "../figma_app/976345";
 import { sf } from "../905/929976";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { UE } from "../figma_app/345997";
+import { handleErrorWithToast } from "../figma_app/345997";
 import { Np } from "../figma_app/193867";
 import { SubscriptionType, mapUpsellModalTypeToSource, UpgradeSteps } from "../figma_app/831101";
 import { UpgradeAction, TeamType } from "../figma_app/707808";
@@ -69,7 +69,7 @@ let $$L11 = createOptimistThunk((e, t) => {
     }));
     t.onCloseOrComplete?.();
   }).catch(t => {
-    UE(t, e.dispatch);
+    handleErrorWithToast(t, e.dispatch);
     e.dispatch($$M5({
       submitPending: !1
     }));
@@ -87,7 +87,7 @@ let $$P18 = createOptimistThunk((e, {
       teamId: t
     }));
     e.dispatch(_$$s.flash(getI18nString("flash.successfully_downgraded_to_a_starter_team")));
-  }).catch(t => UE(t, e.dispatch)) : XHR.del(`/api/subscriptions-2018-11-08/team/${t}`).then(({
+  }).catch(t => handleErrorWithToast(t, e.dispatch)) : XHR.del(`/api/subscriptions-2018-11-08/team/${t}`).then(({
     data: n
   }) => {
     let a = n.meta && n.meta.team;
@@ -115,7 +115,7 @@ let $$P18 = createOptimistThunk((e, {
     }) : getI18nString("flash.team_will_be_downgraded_at_the_end_of_the_current_subscription_period", {
       teamName: r.name
     }), 8e3));
-  }).catch(t => UE(t, e.dispatch));
+  }).catch(t => handleErrorWithToast(t, e.dispatch));
 });
 let $$D13 = NC("PAYMENT_SHOW_ERROR");
 let $$k25 = NC("PAYMENT_SET_COMPANY_DETAILS");

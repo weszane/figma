@@ -1,6 +1,6 @@
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { L_, Nr, HZ as _$$HZ } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { hm } from "../figma_app/976345";
@@ -32,7 +32,7 @@ let $$h1 = createOptimistThunk((e, {
       })
     }));
   }).catch(t => {
-    let i = J(t);
+    let i = resolveMessage(t);
     i && e.dispatch(VisualBellActions.enqueue({
       error: !0,
       type: "profile-merge-update",
@@ -66,7 +66,7 @@ let $$g0 = createOptimistThunk((e, {
     }));
     e.dispatch(hm());
   }).catch(t => {
-    let i = J(t);
+    let i = resolveMessage(t);
     i && e.dispatch(VisualBellActions.enqueue({
       error: !0,
       type: "profile-merge-update",
@@ -97,7 +97,7 @@ let $$f5 = createOptimistThunk((e, {
     }));
     e.dispatch(hm());
   }).catch(t => {
-    let i = J(t);
+    let i = resolveMessage(t);
     i && e.dispatch(VisualBellActions.enqueue({
       error: !0,
       type: "profile-merge-update",

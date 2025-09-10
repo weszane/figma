@@ -16,7 +16,7 @@ import { h as _$$h } from "../905/207101";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { tH as _$$tH } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { J as _$$J2 } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { b as _$$b } from "../905/403202";
 import { I as _$$I } from "../905/293573";
 import { r as _$$r } from "../905/334940";
@@ -3288,7 +3288,7 @@ function iM({
         if (i) return iB(i);
         let n = e.errors.find(e => "submission" === e.type);
         let r = n?.data.rawError;
-        return n?.key === "ERROR_FILE_TOO_LARGE" ? getI18nString("community.actions.file_too_large") : (r && (t = _$$J2(r)), t ?? getI18nString("community.publishing.an_error_occurred_please_try_again"));
+        return n?.key === "ERROR_FILE_TOO_LARGE" ? getI18nString("community.actions.file_too_large") : (r && (t = resolveMessage(r)), t ?? getI18nString("community.publishing.an_error_occurred_please_try_again"));
       }
     }
   }, [e, draftSubmissionResult?.result, eA, stepWithErrors, J.activeTab]);

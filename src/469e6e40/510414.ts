@@ -10,7 +10,7 @@ import { s as _$$s2 } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { R as _$$R } from "../c5e2cae0/276031";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { Be } from "../figma_app/920435";
 import { E as _$$E } from "../905/712094";
 import { createEmptyAddress, isAddressEmpty } from "../figma_app/831101";
@@ -65,7 +65,7 @@ let y = memo(function ({
           O();
         }
       } catch (t) {
-        j ? E(_$$s2.error(J(t) || t.message || (e ? getI18nString("update_company_details_modal.update_legal_name_and_shipping_address.error") : getI18nString("update_company_details_modal.update_team_name.error")))) : y && E(_$$s2.error(J(t) || t.message || getI18nString("update_company_details_modal.updateshipping_address.error")));
+        j ? E(_$$s2.error(resolveMessage(t) || t.message || (e ? getI18nString("update_company_details_modal.update_legal_name_and_shipping_address.error") : getI18nString("update_company_details_modal.update_team_name.error")))) : y && E(_$$s2.error(resolveMessage(t) || t.message || getI18nString("update_company_details_modal.updateshipping_address.error")));
       }
     });
   };

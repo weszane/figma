@@ -8,7 +8,7 @@ import { cn } from "../figma_app/141320";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { H as _$$H } from "../5885/54359";
 import { VB } from "../figma_app/361035";
 import { _l } from "../figma_app/976345";
@@ -17,7 +17,7 @@ import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { _J } from "../figma_app/314264";
 import { P8 } from "../figma_app/475472";
-import { fD, Rq, ne } from "../figma_app/345997";
+import { getAnnualValue, getMonthlyValue, getBillingCycleFromSubscriptionType } from "../figma_app/345997";
 import { R_ } from "../5885/399780";
 import { FEditorType } from "../figma_app/53721";
 import { SubscriptionType, UpgradeSteps } from "../figma_app/831101";
@@ -116,10 +116,10 @@ let $$D3 = createOptimistThunk((e, {
   let F = e.getState();
   let z = F.user?.id;
   let M = (e, t) => ({
-    annual_quantity: fD(e, t),
-    monthly_quantity: Rq(e, t)
+    annual_quantity: getAnnualValue(e, t),
+    monthly_quantity: getMonthlyValue(e, t)
   });
-  let B = ne(F.payment.billingPeriod);
+  let B = getBillingCycleFromSubscriptionType(F.payment.billingPeriod);
   if (!B) {
     e.dispatch(_$$s.error(getI18nString("payments.invalid_billing_interval_error")));
     return;
@@ -346,7 +346,7 @@ let $$D3 = createOptimistThunk((e, {
       }
     });
     ((t, a) => {
-      let r = J(t);
+      let r = resolveMessage(t);
       r && ("PROMO_CODE" === t.data.reason ? (e.dispatch(_$$Ay2({
         promo: null
       })), i(a, {}), e.dispatch(Qg({

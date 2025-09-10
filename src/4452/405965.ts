@@ -2,7 +2,7 @@ import { useMemo, useCallback, useState, useEffect } from "react";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { TeamPermissions, TeamRoles } from "../figma_app/43951";
 import { M4 } from "../905/713695";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { X, SN } from "../905/915142";
 import { AccessLevelEnum } from "../905/557142";
 export function $$c0(e) {
@@ -23,7 +23,7 @@ export function $$m2({
   initialValue: a
 }) {
   let n = M4.Team.useValue(e).data;
-  let r = useCallback(e => a || (!w5(n) && e ? AccessLevelEnum.EDITOR : AccessLevelEnum.VIEWER), [a, n]);
+  let r = useCallback(e => a || (!hasTeamPaidAccess(n) && e ? AccessLevelEnum.EDITOR : AccessLevelEnum.VIEWER), [a, n]);
   let [o, c] = useState(() => r(!!t?.canEdit));
   useEffect(() => {
     c(r(!!t?.canEdit));

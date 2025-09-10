@@ -12,7 +12,7 @@ import _ from "../vendor/241899";
 import { A as _$$A } from "../vendor/90566";
 import { H as _$$H } from "../905/620380";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { J as _$$J2 } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { b as _$$b } from "../905/403202";
 import { L as _$$L } from "../905/884941";
 import { h as _$$h } from "../905/706336";
@@ -471,7 +471,7 @@ function eO({
         let t;
         let r = e.errors.find(e => "submission" === e.type);
         let n = r?.data.rawError;
-        (t = _$$l2(r)) || !n || (t = _$$J2(n));
+        (t = _$$l2(r)) || !n || (t = resolveMessage(n));
         return t ?? getI18nString("community.publishing.an_error_occurred_please_try_again");
       }
     }
@@ -648,7 +648,7 @@ function eP({
       if (s) return Yw(s);
       let r = "error" === e.status ? e.errors.find(e => "submission" === e.type) : void 0;
       let n = r?.data.rawError;
-      (t = _$$l2(r)) || !n || (t = _$$J2(n));
+      (t = _$$l2(r)) || !n || (t = resolveMessage(n));
       return t ?? getI18nString("community.publishing.an_error_occurred_please_try_again");
     }
   }, [e, h?.result, v, s]);

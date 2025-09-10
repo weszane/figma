@@ -10,7 +10,7 @@ import { z as _$$z } from "../905/284530";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { $ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { showModalHandler } from "../905/156213";
@@ -454,7 +454,7 @@ function G({
       },
       disabled: optedOutOfSecurityForm,
       children: renderI18nText("community.publishing.security_form.opt_out_button")
-    }), jsxs(Y, {
+    }), jsxs(AutoLayout, {
       width: "fill-parent",
       horizontalAlignItems: "end",
       children: [jsx($, {

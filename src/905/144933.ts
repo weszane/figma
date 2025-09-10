@@ -8,7 +8,7 @@ import { e as _$$e } from "../figma_app/324237";
 import { h as _$$h } from "../905/632544";
 import { L } from "../905/178090";
 import { to } from "../figma_app/701107";
-import { T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { j9 } from "../figma_app/162807";
 export let $$f1 = {
@@ -254,7 +254,7 @@ export let $$v0 = new class {
   getCommunityPlugins(e, t, i, n, r, a) {
     let s = r ? {
       is_inspect: `${r}`,
-      capability_type: T() ? _$$h.VSCODE : null
+      capability_type: isVsCodeEnvironment() ? _$$h.VSCODE : null
     } : {
       editor_type: n
     };

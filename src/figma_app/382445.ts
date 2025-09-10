@@ -1,7 +1,7 @@
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { n as _$$n, sD } from "../figma_app/740025";
@@ -20,9 +20,9 @@ let $$p1 = createOptimistThunk((e, {
   p.catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: r === vt.PLUGIN ? getI18nString("community.actions.unable_to_like_this_plugin_error", {
-        error: J(t, t.data.message)
+        error: resolveMessage(t, t.data.message)
       }) : getI18nString("community.actions.unable_to_like_this_widget_error", {
-        error: J(t, t.data.message)
+        error: resolveMessage(t, t.data.message)
       }),
       type: `${r.toUpperCase()}_LIKE_FAILED`,
       error: !0

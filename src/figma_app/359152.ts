@@ -10,7 +10,7 @@ import { a as _$$a } from "../905/925868";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { qI, GR, L_ } from "../figma_app/622574";
 import { gp } from "../figma_app/973927";
 import { sZ } from "../905/845253";
@@ -165,7 +165,7 @@ export function $$L0({
       }, e.id || e.name);
     }));
   }
-  return x.length ? jsxs(Y, {
+  return x.length ? jsxs(AutoLayout, {
     spacing: 0,
     width: "hug-contents",
     children: [jsx("span", {
@@ -314,7 +314,7 @@ export function $$k3(e) {
   let K = B ? teamTemplates : templatesByTeam;
   return jsxs("div", {
     className: _$$s.wFull.$,
-    children: [jsxs(Y, {
+    children: [jsxs(AutoLayout, {
       horizontalAlignItems: "space-between",
       height: _$$k,
       padding: {

@@ -194,11 +194,11 @@ import { K as _$$K5 } from '../905/799615';
 import { f as _$$f } from '../905/809171';
 import { z as _$$z6 } from '../905/821223';
 import { vL } from '../905/826900';
-import { M as _$$M, Y as _$$Y } from '../905/830372';
+import { Spacer, AutoLayout } from '../905/470281';
 import { q as _$$q } from '../905/838985';
 import { dq as _$$dq, sZ as _$$sZ } from '../905/845253';
 import { Um } from '../905/848862';
-import { T as _$$T5 } from '../905/858738';
+import { isVsCodeEnvironment } from '../905/858738';
 import { $A } from '../905/862883';
 import { u as _$$u8 } from '../905/866761';
 import { bL as _$$bL4, RT } from '../905/867927';
@@ -375,7 +375,7 @@ import { Ci, jw, kG, LU, W5 } from '../figma_app/327588';
 import { nL as _$$nL, uM as _$$uM, B2, bE, Cl, DW, hn, Pn, qr, z7 } from '../figma_app/334505';
 import { jH, Tj, Vq } from '../figma_app/342207';
 import { U1 } from '../figma_app/343967';
-import { n0 as _$$n4 } from '../figma_app/345997';
+import { hasValidSubscription } from '../figma_app/345997';
 import { p as _$$p4 } from '../figma_app/353099';
 import { c1 as _$$c5, Yh } from '../figma_app/357047';
 import { HW, VD } from '../figma_app/357367';
@@ -5386,7 +5386,7 @@ let oO = memo(({
   let ef = () => {
     if (!U) return;
     let t = W.status === 'loaded' && !!W.data.team?.hasPermission;
-    let n = t ? void 0 : jsxs(_$$Y, {
+    let n = t ? void 0 : jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 24,
       padding: {
@@ -5394,7 +5394,7 @@ let oO = memo(({
       },
       children: [jsx('div', {
         className: _$$s.wFull.h2.colorBgTertiary.$
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         spacing: 8,
         verticalAlignItems: 'center',
         children: [jsx(_$$B, {
@@ -5402,7 +5402,7 @@ let oO = memo(({
           svg: _$$A11
         }), jsx('div', {
           children: renderI18nText('fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.text')
-        }), jsx(_$$M, {}), jsx($z, {
+        }), jsx(Spacer, {}), jsx($z, {
           variant: 'primary',
           onClick: () => e(popModalStack()),
           children: renderI18nText('fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.cta')
@@ -5415,7 +5415,7 @@ let oO = memo(({
         team: U,
         resource: Bi.SHARED_FONTS,
         editorType: FFileType.DESIGN,
-        currentPlan: _$$n4(convertTeamToRaw(U)) ? _$$F4.Plan.PRO : _$$F4.Plan.STARTER,
+        currentPlan: hasValidSubscription(convertTeamToRaw(U)) ? _$$F4.Plan.PRO : _$$F4.Plan.STARTER,
         upsellPlan: _$$F4.Plan.ORG,
         upsellSource: UpsellModalType.FONT_PICKER_UPSELL,
         hideUpsellPlanCta: !t,
@@ -5527,7 +5527,7 @@ let oO = memo(({
           children: renderI18nText('fullscreen.properties_panel.font_picker.org_upsell.cta')
         });
         let r = X ? l : n;
-        return jsxs(_$$Y, {
+        return jsxs(AutoLayout, {
           direction: 'vertical',
           horizontalAlignItems: 'center',
           padding: {
@@ -11501,7 +11501,7 @@ function uK() {
     closeModal: () => {},
     pinModal: () => {}
   }), [n, setCurrentView, currentPluginView]);
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     direction: 'vertical',
     spacing: 0,
     height: 'fill-parent',
@@ -11547,7 +11547,7 @@ function uH({
 }
 function uX() {
   let e = useAtomWithSubscription(be);
-  return e ? jsxs(_$$Y, {
+  return e ? jsxs(AutoLayout, {
     direction: 'vertical',
     verticalAlignItems: 'center',
     horizontalAlignItems: 'center',
@@ -14647,7 +14647,7 @@ let mw = memo(({
           commentsDetailContainerRef: f
         }), jsx(Nz, {}), jsx(_$$J7, {}), jsx(dU, {}), jsx('div', {
           ref: f
-        }), !_$$T5() && j && jsx(_$$m, {
+        }), !isVsCodeEnvironment() && j && jsx(_$$m, {
           'role': 'region',
           'aria-label': getI18nString('buzz.left_panel_label'),
           'children': jsx(px, {})

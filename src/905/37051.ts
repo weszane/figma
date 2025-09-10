@@ -14,9 +14,9 @@ import { j7, sf } from "../905/929976";
 import { WJ, AM, XX } from "../figma_app/8833";
 import { pY } from "../figma_app/415217";
 import { FEditorType } from "../figma_app/53721";
-import { T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 export let $$b2 = {
-  getIsExtension: () => T(),
+  getIsExtension: () => isVsCodeEnvironment(),
   setNodesReady(e, t, i) {
     throw Error("Fullscreen not initialized");
   },
@@ -95,7 +95,7 @@ export class $$v0 {
 }
 export function $$I1() {
   $$b2 = {
-    getIsExtension: () => T(),
+    getIsExtension: () => isVsCodeEnvironment(),
     setNodesReady(e, t, i, n) {
       let a = e ? BuildStatus.BUILD : BuildStatus.NONE;
       L({

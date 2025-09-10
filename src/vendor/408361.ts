@@ -1205,7 +1205,7 @@ function np(e, t, n) {
         } else if ("element" === n.type && !f) {
           let e = n.getNode();
           a.style = "";
-          e instanceof rV && 0 === e.getChildrenSize() ? (a.format = e.getTextFormat(), a.style = e.getTextStyle()) : a.format = 0;
+          e instanceof ParagraphNode && 0 === e.getChildrenSize() ? (a.format = e.getTextFormat(), a.style = e.getTextStyle()) : a.format = 0;
         }
       } else {
         let e = n.key;
@@ -1321,7 +1321,7 @@ function nQ(e, t, n) {
   n || $$tp16(i) || i.canBeEmpty() || !i.isEmpty() || nQ(i, t);
   t && $$rK60(i) && i.isEmpty() && i.selectEnd();
 }
-class nD {
+class LexicalNode {
   static getType() {
     eI(64, this.name);
   }
@@ -1735,12 +1735,12 @@ class nD {
     this.getWritable();
   }
 }
-class nw extends nD {
+class LineBreakNode extends LexicalNode {
   static getType() {
     return "linebreak";
   }
   static clone(e) {
-    return new nw(e.__key);
+    return new LineBreakNode(e.__key);
   }
   constructor(e) {
     super(e);
@@ -1797,10 +1797,10 @@ function nb(e) {
   };
 }
 export function $$nv37() {
-  return $$tC75(new nw());
+  return $$tC75(new LineBreakNode());
 }
 export function $$nk88(e) {
-  return e instanceof nw;
+  return e instanceof LineBreakNode;
 }
 function nx(e) {
   return 3 === e.nodeType && /^( |\t|\r?\n)+$/.test(e.textContent || "");
@@ -1863,12 +1863,12 @@ function nR(e, t) {
   n.appendChild(e);
   return n;
 }
-export class $$nM10 extends nD {
+export class TextNode extends LexicalNode {
   static getType() {
     return "text";
   }
   static clone(e) {
-    return new $$nM10(e.__text, e.__key);
+    return new TextNode(e.__text, e.__key);
   }
   afterCloneFrom(e) {
     super.afterCloneFrom(e);
@@ -2343,10 +2343,10 @@ function nz(e) {
   };
 }
 export function $$nH78(e = "") {
-  return $$tC75(new $$nM10(e));
+  return $$tC75(new TextNode(e));
 }
 export function $$nK67(e) {
-  return e instanceof $$nM10;
+  return e instanceof TextNode;
 }
 function nj(e, t) {
   let n = e.fontWeight;
@@ -2358,12 +2358,12 @@ function nj(e, t) {
   let a = e.verticalAlign;
   return e => ($$nK67(e) && (i && !e.hasFormat("bold") && e.toggleFormat("bold"), A && !e.hasFormat("strikethrough") && e.toggleFormat("strikethrough"), o && !e.hasFormat("italic") && e.toggleFormat("italic"), s && !e.hasFormat("underline") && e.toggleFormat("underline"), "sub" !== a || e.hasFormat("subscript") || e.toggleFormat("subscript"), "super" !== a || e.hasFormat("superscript") || e.toggleFormat("superscript"), t && !e.hasFormat(t) && e.toggleFormat(t)), e);
 }
-class $$nY extends $$nM10 {
+class TabNode extends TextNode {
   static getType() {
     return "tab";
   }
   static clone(e) {
-    return new $$nY(e.__key);
+    return new TabNode(e.__key);
   }
   afterCloneFrom(e) {
     super.afterCloneFrom(e);
@@ -2406,10 +2406,10 @@ class $$nY extends $$nM10 {
   }
 }
 export function $$nW54() {
-  return $$tC75(new $$nY());
+  return $$tC75(new TabNode());
 }
 export function $$nV23(e) {
-  return e instanceof $$nY;
+  return e instanceof TabNode;
 }
 class nZ {
   constructor(e, t, n) {
@@ -4193,7 +4193,7 @@ function rO(e, t, n) {
 function rG(e, t, n) {
   e._updating ? e._updates.push([t, n]) : rO(e, t, n);
 }
-export class $$rP55 extends nD {
+export class ElementNode extends LexicalNode {
   constructor(e) {
     super(e);
     this.__first = null;
@@ -4547,7 +4547,7 @@ export class $$rP55 extends nD {
   }
 }
 export function $$rU57(e) {
-  return e instanceof $$rP55;
+  return e instanceof ElementNode;
 }
 function rq(e, t, n) {
   let r = e.getNode();
@@ -4558,7 +4558,7 @@ function rq(e, t, n) {
   }
   return !1;
 }
-export class $$rJ21 extends nD {
+export class DecoratorNode extends LexicalNode {
   constructor(e) {
     super(e);
   }
@@ -4576,14 +4576,14 @@ export class $$rJ21 extends nD {
   }
 }
 export function $$rz9(e) {
-  return e instanceof $$rJ21;
+  return e instanceof DecoratorNode;
 }
-class rH extends $$rP55 {
+class RootNode extends ElementNode {
   static getType() {
     return "root";
   }
   static clone() {
-    return new rH();
+    return new RootNode();
   }
   constructor() {
     super("root");
@@ -4640,10 +4640,10 @@ class rH extends $$rP55 {
   }
 }
 export function $$rK60(e) {
-  return e instanceof rH;
+  return e instanceof RootNode;
 }
 function rj() {
-  return new rY(new Map([["root", new rH()]]));
+  return new rY(new Map([["root", new RootNode()]]));
 }
 class rY {
   constructor(e, t) {
@@ -4682,7 +4682,7 @@ class rY {
     }));
   }
 }
-export class $$rW2 extends $$rP55 {
+export class ArtificialNode__DO_NOT_USE extends ElementNode {
   static getType() {
     return "artificial";
   }
@@ -4690,7 +4690,7 @@ export class $$rW2 extends $$rP55 {
     return document.createElement("div");
   }
 }
-class rV extends $$rP55 {
+class ParagraphNode extends ElementNode {
   constructor(e) {
     super(e);
     this.__textFormat = 0;
@@ -4723,7 +4723,7 @@ class rV extends $$rP55 {
     return t;
   }
   static clone(e) {
-    return new rV(e.__key);
+    return new ParagraphNode(e.__key);
   }
   afterCloneFrom(e) {
     super.afterCloneFrom(e);
@@ -4821,10 +4821,10 @@ function rZ(e) {
   };
 }
 export function $$r$68() {
-  return $$tC75(new rV());
+  return $$tC75(new ParagraphNode());
 }
 export function $$rX48(e) {
-  return e instanceof rV;
+  return e instanceof ParagraphNode;
 }
 let $$r066 = 0;
 let $$r14 = 1;
@@ -4860,7 +4860,7 @@ export function $$r563(e) {
   let s = rj();
   let a = n.namespace || (null !== A ? A._config.namespace : e3());
   let l = n.editorState;
-  let u = [rH, $$nM10, nw, $$nY, rV, $$rW2, ...(n.nodes || [])];
+  let u = [RootNode, TextNode, LineBreakNode, TabNode, ParagraphNode, ArtificialNode__DO_NOT_USE, ...(n.nodes || [])];
   let {
     onError,
     html
@@ -5277,7 +5277,7 @@ class r9 {
 r9.version = "0.18.0+prod.esm";
 export const $7 = $$K0;
 export const $e = $$c1;
-export const A7 = $$rW2;
+export const A7 = ArtificialNode__DO_NOT_USE;
 export const AX = $$m3;
 export const Ac = $$r14;
 export const B$ = $$tl5;
@@ -5285,7 +5285,7 @@ export const BE = $$tN6;
 export const C = $$ex7;
 export const Ck = $$n98;
 export const Cy = $$rz9;
-export const Ey = $$nM10;
+export const Ey = TextNode;
 export const FE = $$a11;
 export const GM = $$rS12;
 export const H2 = $$rd13;
@@ -5296,7 +5296,7 @@ export const JM = $$E17;
 export const Jj = $$r218;
 export const K8 = $$tQ19;
 export const Kf = $$H20;
-export const Kp = $$rJ21;
+export const Kp = DecoratorNode;
 export const LY = $$eL22;
 export const MK = $$nV23;
 export const Mv = $$i24;
@@ -5330,7 +5330,7 @@ export const d = $$r651;
 export const d8 = $$o52;
 export const e1 = $$ti53;
 export const ev = $$nW54;
-export const fG = $$rP55;
+export const fG = ElementNode;
 export const fU = $$L56;
 export const ff = $$rU57;
 export const gC = $$b58;

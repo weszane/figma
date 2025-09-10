@@ -1,7 +1,7 @@
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { Sb } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { Qi } from "../figma_app/559491";
@@ -19,7 +19,7 @@ let $$f7 = createOptimistThunk((e, t) => {
     let r = T(t.meta);
     r && e.dispatch(r);
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     e.dispatch(_$$s.error(getI18nString("community.actions.an_error_occurred_accepting_invite_please_refresh_and_try_again")));
     return Error(`Error updating resource ${r}`);
   });
@@ -63,7 +63,7 @@ let $$E5 = createOptimistThunk((e, t) => {
       source: `extension-publisher-invite-${src}`
     });
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     e.dispatch(_$$s.error(getI18nString("community.actions.an_error_occurred_accepting_invite_please_refresh_and_try_again")));
     return Error(`Error updating resource ${r}`);
   });
@@ -75,7 +75,7 @@ let $$y4 = createOptimistThunk((e, t) => {
     let r = T(t.meta);
     r && e.dispatch(r);
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     e.dispatch(_$$s.error(getI18nString("community.actions.an_error_occurred_while_removing_publisher_please_refresh_and_try_again")));
     return Error(`Error updating resource ${r}`);
   });
@@ -111,7 +111,7 @@ let $$b0 = createOptimistThunk((e, t) => {
       isWidget: !!t.widget_id
     });
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     e.dispatch(_$$s.error(getI18nString("community.actions.an_error_occurred_while_removing_publisher_please_refresh_and_try_again")));
     return Error(`Error updating resource ${r}`);
   });

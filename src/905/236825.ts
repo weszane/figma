@@ -4,7 +4,7 @@ import { K } from "../905/443068";
 import { L } from "../905/704296";
 import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { B } from "../905/222272";
 function u({
   children: e
@@ -50,7 +50,7 @@ export let $$p0 = forwardRef(function ({
     ref: y,
     tabIndex: -1,
     children: [jsx(u, {
-      children: jsxs(Y, {
+      children: jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 8,
         children: [jsxs(B, {

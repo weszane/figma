@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Xf } from "../figma_app/153916";
 import { renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { KX } from "../469e6e40/623537";
 import { g as _$$g } from "../figma_app/638694";
@@ -83,7 +83,7 @@ export function $$C0(e) {
     let t = I.orgAdminMembersTabSort || oU;
     W = jsx(KX, {
       currency: R?.data?.currency || void 0,
-      customEmptyState: jsxs(Y, {
+      customEmptyState: jsxs(AutoLayout, {
         direction: "vertical",
         width: "fill-parent",
         height: "hug-contents",

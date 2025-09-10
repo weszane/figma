@@ -10,7 +10,7 @@ import { hA } from "../figma_app/88239";
 import { m0, vn, E3 } from "../figma_app/976749";
 import { k as _$$k } from "../figma_app/564183";
 import { setPropertiesPanelTab } from "../figma_app/741237";
-import { T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { p8 } from "../figma_app/722362";
 import { w4, Fj, go } from "../figma_app/927140";
 import { N as _$$N, Q } from "../figma_app/287368";
@@ -37,7 +37,7 @@ export function $$A3() {
   let e = _$$k();
   let t = useCanAccessFullDevMode();
   let r = !!hA() && t;
-  return !e && (r || T() && getFeatureFlags().dt_vscode_ready_for_dev);
+  return !e && (r || isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev);
 }
 export function $$x4() {
   let e = m0();

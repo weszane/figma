@@ -4,7 +4,7 @@ import { XHR } from "../905/910117";
 import { cT } from "../905/997533";
 import { s as _$$s } from "../905/573154";
 import { getI18nString, getI18nStringAlias } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
 import { popModalStack, hideModal } from "../905/156213";
 import { z3, sp, r1, Yu } from "../905/355291";
@@ -23,7 +23,7 @@ export let $$f5 = createOptimistThunk((e, t) => {
   }) => {
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(J(t, t.message)));
+      e.dispatch(_$$s.error(resolveMessage(t, t.message)));
     } catch (t) {
       e.dispatch(_$$s.error(t));
     }
@@ -32,7 +32,7 @@ export let $$f5 = createOptimistThunk((e, t) => {
 function _(e, t, i) {
   try {
     let i = t.data;
-    "bad_token" === i.reason ? (e(WJ()), e(z3(getI18nString("api_user.error.too-long-since-password-checked")))) : e(z3(J(t, i.message || "unknown error")));
+    "bad_token" === i.reason ? (e(WJ()), e(z3(getI18nString("api_user.error.too-long-since-password-checked")))) : e(z3(resolveMessage(t, i.message || "unknown error")));
   } catch (t) {
     e(z3(i));
   }

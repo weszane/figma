@@ -16,7 +16,7 @@ import { uE } from "../figma_app/314264";
 import { getRepoById } from "../905/760074";
 import { Qr, hL, OR } from "../905/697795";
 import { B8 } from "../figma_app/682945";
-import { WQ } from "../figma_app/345997";
+import { isTeamInGracePeriod } from "../figma_app/345997";
 import { $Z, vU, Np, Mo } from "../figma_app/193867";
 import { w } from "../figma_app/119601";
 import { YH, _X } from "../figma_app/502247";
@@ -50,7 +50,7 @@ let $$P0 = e => t => function (r) {
       resourceType: $$R2(t)
     }), "teamUpgrade" === t.view && t.teamId) {
       let e = P.teams[t.teamId];
-      e && e.pro_team && !WQ(e) && (t = {
+      e && e.pro_team && !isTeamInGracePeriod(e) && (t = {
         view: "team",
         teamId: t.teamId,
         teamViewTab: NavigationRoutes.SETTINGS

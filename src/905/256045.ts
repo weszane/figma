@@ -5,7 +5,7 @@ import { RK } from "../figma_app/815170";
 import { LI, ci, ic, ZT, Ff, _E, H5, jD, HG, tW, K4, $9, Rr, jU, dK, j3, k$, k1, vK, g$, RN, Ao } from "../905/676397";
 import { getFeatureFlags } from "../905/601108";
 import { ds } from "../figma_app/314264";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { vO, Ci, yc } from "../figma_app/671547";
 import { L as _$$L } from "../905/694400";
 import { H } from "../905/88863";
@@ -99,7 +99,7 @@ function $$g({
     }
   };
   let M = e => {
-    let t = d1(debugState.getState())?.key ?? "";
+    let t = getSelectedFile(debugState.getState())?.key ?? "";
     ds(e, t, debugState.getState(), {
       domain: null != x ? vO(x) : k,
       linkRenderType: Ci.EMBED,
@@ -408,7 +408,7 @@ export function $$_1({
             }, t);
           };
           let z = e => {
-            let t = d1(debugState.getState())?.key ?? "";
+            let t = getSelectedFile(debugState.getState())?.key ?? "";
             ds(e, t, debugState.getState(), {
               domain: null != C ? vO(C) : P,
               linkRenderType: Ci.EMBED,

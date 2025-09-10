@@ -17,7 +17,7 @@ import { t as _$$t } from "../905/331623";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Ex } from "../905/69098";
 import { QP, op, $3 } from "../figma_app/487970";
 import { L as _$$L } from "../3591/956338";
@@ -63,12 +63,12 @@ import { A as _$$A2 } from "../svg/957897";
 import { A as _$$A3 } from "../svg/465311";
 import { A as _$$A4 } from "../svg/586486";
 import { A as _$$A5 } from "../1617/579393";
-if (443 == require.j) { }
+if (443 == require.j) {}
 var p = g;
-if (443 == require.j) { }
-if (443 == require.j) { }
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
+if (443 == require.j) {}
+if (443 == require.j) {}
 export var $$eI2 = (e => (e.COMMUNITY = "community", e.RECENT = "recent", e.DEVELOPMENT = "development", e.DEVELOPMENT_MISSING_LOCAL = "development_missing_local", e.ORG_PRIVATE = "org_private", e.SAVED = "saved", e.INVITED = "invited", e))($$eI2 || {});
 function em(e) {
   let i = useSelector(e => e.orgById);
@@ -463,7 +463,7 @@ function eN(e) {
   } = ew();
   let g = u?.type === lD && u?.data.localFileId === e.localFileId && u?.data.pluginId === d;
   let p = useCallback(t => {
-    if (t.stopPropagation(), g) i(oB()); else {
+    if (t.stopPropagation(), g) i(oB());else {
       let n = t.currentTarget.getBoundingClientRect();
       i(j7({
         type: lD,
@@ -622,7 +622,7 @@ function eP(e) {
   let K = e.metadataOverrideNode ?? jsxs(Fragment, {
     children: [jsxs("div", {
       className: FV,
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         spacing: 4,
         children: [jsx("div", {
           className: p()(_$$B2, {
@@ -669,7 +669,7 @@ function eP(e) {
     })]
   });
   let Q = function (e, i) {
-    if (m0()); else if (e && i) return !0;
+    if (m0()) ;else if (e && i) return !0;
     return !1;
   }(e.showEditorTypeIcon, r);
   let X = m0();
@@ -775,7 +775,7 @@ function eA(e) {
   } = Ys(e.widgetId);
   let _ = useCallback(t => {
     if (j) {
-      if (t.preventDefault(), t.stopPropagation(), f) i(oB()); else {
+      if (t.preventDefault(), t.stopPropagation(), f) i(oB());else {
         let n = t.currentTarget.getBoundingClientRect();
         i(j7({
           type: cH,
@@ -875,7 +875,7 @@ function eS(e) {
   } = ej();
   let v = g?.type === jZ.DEVELOPMENT_WIDGET_DROPDOWN && g?.data.isRecentTile === e.isRecentTile && g?.data.localFileId === e.localFileId && g?.data.pluginId === a && g?.data.targetRect;
   let I = useCallback(t => {
-    if (t.stopPropagation(), v) i(oB()); else {
+    if (t.stopPropagation(), v) i(oB());else {
       let n = t.currentTarget.getBoundingClientRect();
       i(j7({
         type: jZ.DEVELOPMENT_WIDGET_DROPDOWN,
@@ -1045,7 +1045,7 @@ let eM = memo(function (e) {
       className: QF,
       children: [jsx("div", {
         className: JW,
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           spacing: 4,
           verticalAlignItems: "center",
           children: [jsx("div", {
@@ -1229,7 +1229,7 @@ export function $$eH1(e) {
   let p = useRef(null);
   let I = useCallback(t => {
     if (o) {
-      if (t.preventDefault(), t.stopPropagation(), g) i(oB()); else {
+      if (t.preventDefault(), t.stopPropagation(), g) i(oB());else {
         let n = t.currentTarget.getBoundingClientRect();
         i(j7({
           type: cH,

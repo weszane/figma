@@ -66,7 +66,7 @@ import { af, Qi } from "../figma_app/559491";
 import { S as _$$S3 } from "../figma_app/11182";
 import { y as _$$y } from "../905/850671";
 import { XV, Cs } from "../figma_app/684168";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { E as _$$E } from "../469e6e40/167556";
 import { P as _$$P2 } from "../469e6e40/160324";
 import { getPluginVersion, canAssociatedUserPurchaseResource, isValidForSelectedViewAndWhitelist, filterResourcesByOrgId, filterPublishedResources } from "../figma_app/300692";
@@ -82,7 +82,7 @@ import { s as _$$s2, Y as _$$Y } from "../figma_app/504088";
 import { s as _$$s3 } from "../2b17fec9/254940";
 import { tO as _$$tO, GJ, ff as _$$ff, R7 } from "../7492/487492";
 import { A as _$$A6 } from "../svg/55550";
-import { Y as _$$Y2 } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { N as _$$N2 } from "../905/438674";
 import { $n } from "../905/521428";
 import { e as _$$e } from "../905/149844";
@@ -404,7 +404,7 @@ function eG(e) {
   let d = useIsSelectedViewFullscreenCooper();
   let c = _$$x();
   let u = Um();
-  let m = NF(_$$T() ? gC + 64 : gC);
+  let m = NF(isVsCodeEnvironment() ? gC + 64 : gC);
   let x = useSelector(e => e.authedUsers);
   let p = EO(resource);
   let g = lt(resource);
@@ -484,11 +484,11 @@ function eG(e) {
       children: [jsx("div", {
         className: "detail_view--contentContainer--nSBG8",
         children: jsxs("div", {
-          className: _$$T() ? "detail_view--contentContainerVsCode--QO3Ls" : void 0,
+          className: isVsCodeEnvironment() ? "detail_view--contentContainerVsCode--QO3Ls" : void 0,
           children: [jsxs("div", {
-            className: _$$T() ? "detail_view--coverImageContainerVsCode--4UADZ detail_view--coverImageContainer--2AZZG detail_view--coverImageContainer--2AZZG" : "detail_view--coverImageContainer--2AZZG",
+            className: isVsCodeEnvironment() ? "detail_view--coverImageContainerVsCode--4UADZ detail_view--coverImageContainer--2AZZG detail_view--coverImageContainer--2AZZG" : "detail_view--coverImageContainer--2AZZG",
             children: [jsx("img", {
-              className: _()(_$$T() ? "detail_view--coverImageVsCode--ZtGDB" : r ? "detail_view--coverImageNotDraggable--5PzSB detail_view--coverImage---G-H1" : "detail_view--coverImage---G-H1", _$$s.$$if(_$$T(), _$$s.bRadius5).$),
+              className: _()(isVsCodeEnvironment() ? "detail_view--coverImageVsCode--ZtGDB" : r ? "detail_view--coverImageNotDraggable--5PzSB detail_view--coverImage---G-H1" : "detail_view--coverImage---G-H1", _$$s.$$if(isVsCodeEnvironment(), _$$s.bRadius5).$),
               src: W.redirect_cover_image_url || "",
               alt: `${W.name}`,
               onPointerDown: e => !r && onInsertableResourcePointerDown(e)
@@ -498,7 +498,7 @@ function eG(e) {
           }), v && jsx(cu, {}), G && !v && !j && jsx(ec, {
             resource
           }), jsxs("div", {
-            className: _$$T() ? "detail_view--infoContainerVsCode--g6DeF detail_view--infoContainer--deaxz text--fontPos11--2LvXf text--_fontBase--QdLsd" : "detail_view--infoContainer--deaxz text--fontPos11--2LvXf text--_fontBase--QdLsd",
+            className: isVsCodeEnvironment() ? "detail_view--infoContainerVsCode--g6DeF detail_view--infoContainer--deaxz text--fontPos11--2LvXf text--_fontBase--QdLsd" : "detail_view--infoContainer--deaxz text--fontPos11--2LvXf text--_fontBase--QdLsd",
             children: [jsxs("div", {
               className: "detail_view--metadataContainer--GSTfB",
               children: [jsxs("div", {
@@ -646,7 +646,7 @@ function e4({
       svg: _$$A7,
       className: _$$s.colorIconSecondary.pb24.$,
       autosize: !0,
-      height: _$$T() ? "64px" : void 0
+      height: isVsCodeEnvironment() ? "64px" : void 0
     }), jsx(e5, {
       isDesktop: e
     })]
@@ -745,9 +745,9 @@ function e7() {
       type: R7.DEVELOPMENT_MISSING_LOCAL,
       keyboardNavigationPath: [B6, Object.keys(l).length + t]
     }, e.id))]
-  }) : t ? jsx(_$$Y2, {
+  }) : t ? jsx(AutoLayout, {
     horizontalAlignItems: "center",
-    verticalAlignItems: _$$T() ? "start" : "center",
+    verticalAlignItems: isVsCodeEnvironment() ? "start" : "center",
     children: jsx(e4, {
       isDesktop: !!o
     })

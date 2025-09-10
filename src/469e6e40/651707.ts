@@ -11,7 +11,7 @@ import { a as _$$a } from "../905/462280";
 import { C } from "../905/520159";
 import { xk } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E } from "../905/984674";
 import { d as _$$d } from "../905/44199";
 import { registerModal } from "../905/102752";
@@ -51,7 +51,7 @@ let $$j0 = registerModal(function (e) {
           top: "1rem",
           bottom: "1rem"
         },
-        children: jsxs(Y, {
+        children: jsxs(AutoLayout, {
           direction: "vertical",
           spacing: 16,
           verticalAlignItems: "start",

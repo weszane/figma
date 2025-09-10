@@ -23,11 +23,11 @@ import { b as _$$b } from "../figma_app/246400";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { J as _$$J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { sx as _$$sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
 import { E as _$$E2 } from "../905/984674";
 import { T as _$$T } from "../905/292816";
@@ -114,7 +114,7 @@ function ea(e) {
       }).catch(e => {
         n(VisualBellActions.enqueue({
           type: "update-org-renewal-counts",
-          message: _$$J(e, getI18nString("general.an_error_occurred")),
+          message: resolveMessage(e, getI18nString("general.an_error_occurred")),
           error: !0
         }));
         i();
@@ -194,7 +194,7 @@ function ea(e) {
             right: 24,
             bottom: 24
           },
-          children: [jsxs(_$$Y, {
+          children: [jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 8,
             padding: {

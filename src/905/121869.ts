@@ -8,7 +8,7 @@ import { A as _$$A } from "../905/920142";
 import { NY, rb } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
 import { renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
@@ -36,7 +36,7 @@ export function $$x0(e) {
     manager: T,
     width: 320,
     children: jsx(vo, {
-      children: jsx(Y, {
+      children: jsx(AutoLayout, {
         direction: "vertical",
         width: "100%",
         horizontalAlignItems: "center",
@@ -86,7 +86,7 @@ export function $$x0(e) {
             })
           })
         }), jsx(nB, {
-          children: jsx(Y, {
+          children: jsx(AutoLayout, {
             direction: "vertical",
             spacing: 16,
             width: "100%",

@@ -8,7 +8,7 @@ import { APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { ah } from "../figma_app/637328";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
@@ -612,7 +612,7 @@ let K = (e, t, r, n, i) => XHR.put("/api/favorited_resources", {
     message: r ? n : t
   }));
 }).catch(t => {
-  let r = J(t);
+  let r = resolveMessage(t);
   if (r) try {
     e(VisualBellActions.enqueue({
       message: r
@@ -635,7 +635,7 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
     }));
   }
 }).catch(t => {
-  let n = J(t);
+  let n = resolveMessage(t);
   if (n) {
     a && e(createOptimistRevertAction(a));
     try {

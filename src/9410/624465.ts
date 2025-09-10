@@ -14,7 +14,7 @@ import { HZ } from "../figma_app/186343";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
-import { J9 } from "../figma_app/345997";
+import { hasReachedPageLimit } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
 import { fileActionEnum } from "../figma_app/630077";
@@ -106,7 +106,7 @@ export function $$O0({
         }, s, e);
       }
     }) : null;
-    let L = n ? (g = w ? getI18nString("fullscreen_actions.divider-duplicate") : getI18nString("fullscreen_actions.page-duplicate"), t && (J9({
+    let L = n ? (g = w ? getI18nString("fullscreen_actions.divider-duplicate") : getI18nString("fullscreen_actions.page-duplicate"), t && (hasReachedPageLimit({
       openFile: t,
       pageCount: _
     }) || a({

@@ -30,7 +30,7 @@ import { logError } from "../905/714362";
 import { Point } from "../905/736624";
 import { P as _$$P2 } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { JU, ks } from "../figma_app/626177";
 import { d as _$$d } from "../905/976845";
 import { K as _$$K } from "../905/443068";
@@ -676,7 +676,7 @@ function ep(e) {
         children: jsx(_$$P2, {
           className: "edit_variable_modal--scrollContents--1vjun",
           enableOverscroll: !0,
-          children: jsx(_$$Y, {
+          children: jsx(AutoLayout, {
             direction: "vertical",
             spacing: 0,
             horizontalAlignItems: "stretch",

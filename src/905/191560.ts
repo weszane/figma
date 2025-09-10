@@ -23,7 +23,7 @@ import { A as _$$A2 } from "../5724/643251";
 import { A as _$$A3 } from "../5724/332367";
 import { Us } from "../figma_app/637027";
 import { getI18nString, renderI18nText, getLocalizedPath, getI18nStringAlias } from "../905/303541";
-import { J as _$$J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { ZD } from "../905/519092";
 import { N as _$$N } from "../905/438674";
 import { q_, f1, Ng, Iu } from "../905/997533";
@@ -321,7 +321,7 @@ function j(e) {
           formState: e.auth.prevForm
         }));
         t(Qg({
-          message: _$$J(i, n)
+          message: resolveMessage(i, n)
         }));
       }
     }, _)]
@@ -360,7 +360,7 @@ function H(e) {
         customHistory.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
-        let n = _$$J(e, i?.message || getI18nString("auth.default-error"));
+        let n = resolveMessage(e, i?.message || getI18nString("auth.default-error"));
         "invalid_session" === i.reason ? customHistory.redirect("/") : t(Qg({
           message: n,
           invalidInput: RE.TOTP_KEY
@@ -1625,7 +1625,7 @@ function e2(e) {
         customHistory.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
-        let n = _$$J(e, i?.message || getI18nString("auth.default-error"));
+        let n = resolveMessage(e, i?.message || getI18nString("auth.default-error"));
         "invalid_session" === i.reason ? customHistory.redirect("/") : t(Qg({
           message: n,
           invalidInput: RE.VERIFICATION_CODE
@@ -1686,7 +1686,7 @@ function e2(e) {
               t(_$$s2.flash(getI18nString("auth.validate-code.code-resent-check-email")));
             }).catch(e => {
               let i = e.data;
-              let n = _$$J(e, i?.message || getI18nString("auth.validate-code.code-resend-error"));
+              let n = resolveMessage(e, i?.message || getI18nString("auth.validate-code.code-resend-error"));
               "invalid_session" === i.reason && customHistory.redirect("/");
               t(_$$s2.error(n));
             });
@@ -2036,10 +2036,10 @@ function ts() {
     _$$g("send_validation_email_attempt", s);
     _$$H.sendValidationEmail().then(t => {
       _$$g("send_validation_email_success", s);
-      let i = _$$J(t);
+      let i = resolveMessage(t);
       if (i) return e(_$$s2.flash(i));
     }).catch(t => {
-      let i = _$$J(t, getI18nString("auth.sign-up.confirmation-email-error"));
+      let i = resolveMessage(t, getI18nString("auth.sign-up.confirmation-email-error"));
       return e(_$$s2.error(i));
     });
     e(kL());

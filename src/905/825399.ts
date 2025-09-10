@@ -18,7 +18,7 @@ import { qU, bj } from "../905/420347";
 import { LH } from "../905/872904";
 import { SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { M4 } from "../905/713695";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { je } from "../figma_app/155728";
 import { ol } from "../figma_app/598018";
 import { isTeamLibrary, isPublishedLibraryWithAssets } from "../figma_app/633080";
@@ -28,7 +28,7 @@ export function $$k10() {
   let e = ol();
   let t = yy();
   return {
-    hasProAccess: w5(e) || !!t,
+    hasProAccess: hasTeamPaidAccess(e) || !!t,
     hasOrgAccess: !!t,
     hasEntAccess: !!t && !!t.bigma_enabled
   };

@@ -33,7 +33,7 @@ import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { cJ, Em } from "../figma_app/976749";
 import { Yk } from "../figma_app/644079";
 import { DP } from "../905/640017";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { D as _$$D } from "../figma_app/740163";
 import { z4 } from "../905/37051";
 import { _6 } from "../figma_app/386952";
@@ -250,7 +250,7 @@ let $$eh0 = memo(function () {
 export function $$em2() {
   return selectWithShallowEqual(e => ({
     keyboardShortcuts: e.mirror.appModel.keyboardShortcuts,
-    isEditingFile: !!d1(e),
+    isEditingFile: !!getSelectedFile(e),
     isDevHandoff: $A(e.selectedView),
     modalShown: e.modalShown,
     orgUser: Yj(e),

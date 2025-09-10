@@ -1,7 +1,7 @@
 import { reportError } from '../905/11';
 import { sha1BytesFromHex, sha1Hex } from '../905/125019';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { J } from '../905/231762';
+import { resolveMessage } from '../905/231762';
 import { c as _$$c } from '../905/289751';
 import { getI18nString } from '../905/303541';
 import { debugState } from '../905/407919';
@@ -501,7 +501,7 @@ export function $$eI20(e, t) {
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);
       return new Error(getI18nString('community.actions.error_uploading_carousel_image_error', {
-        error: J(e, e.data?.message || 'unknown error')
+        error: resolveMessage(e, e.data?.message || 'unknown error')
       }));
     }
     return !0;
@@ -537,7 +537,7 @@ export async function $$ev18(e, t, r, n) {
     })).data.meta;
   } catch (e) {
     reportError(_$$e.COMMUNITY, e);
-    return new Error(J(e, getI18nString('community.actions.could_not_connect_to_the_server')));
+    return new Error(resolveMessage(e, getI18nString('community.actions.could_not_connect_to_the_server')));
   }
   let l = [];
   for (let e of i.carousel_images) {
@@ -562,7 +562,7 @@ export async function $$ev18(e, t, r, n) {
     };
   } catch (e) {
     reportError(_$$e.COMMUNITY, e);
-    return new Error(J(e, getI18nString('community.actions.error_connecting_to_server_to_upload_file_images')));
+    return new Error(resolveMessage(e, getI18nString('community.actions.error_connecting_to_server_to_upload_file_images')));
   }
 }
 export function $$eA27(e, t) {
@@ -703,7 +703,7 @@ export async function $$eD7(e, t, r, n, s) {
     signedCloudfrontUrl: videoThumbnail.signedCloudfrontUrl
   }, p, n).catch(e => {
     throw new Error(getI18nString('community.actions.error_uploading_plugin_video_thumbnail_error', {
-      error: J(e, e.data?.message || 'unknown error')
+      error: resolveMessage(e, e.data?.message || 'unknown error')
     }));
   });
   let [f] = await Promise.all([c, g]);

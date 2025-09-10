@@ -145,7 +145,7 @@ import { K as _$$K } from '../905/799615';
 import _require from '../905/802325';
 import { j as _$$j2 } from '../905/813868';
 import { Z as _$$Z3 } from '../905/829242';
-import { Y as _$$Y } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { sZ as _$$sZ, dq } from '../905/845253';
 import { Um } from '../905/848862';
 import { V as _$$V3 } from '../905/849455';
@@ -5625,7 +5625,7 @@ function sw({
           content: selectedKit?.dsKitKey.type === 'USER_LIBRARY' ? null : (() => {
             let e = [];
             let t = el();
-            return (t && e.push(t), e.length === 0) ? null : jsx(_$$Y, {
+            return (t && e.push(t), e.length === 0) ? null : jsx(AutoLayout, {
               direction: 'vertical',
               spacing: 8,
               children: e
@@ -6860,7 +6860,7 @@ let oi = [{
                   opacity: l.enabled ? 1 : 0.5,
                   width: '100%'
                 },
-                children: jsxs(_$$Y, {
+                children: jsxs(AutoLayout, {
                   direction: 'vertical',
                   spacing: 8,
                   children: [jsx(_$$E, {
@@ -6914,7 +6914,7 @@ let oi = [{
           },
           children: jsx(aK, {})
         }) : jsx('div', {
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: 'vertical',
             spacing: 'auto',
             padding: 8,
@@ -6922,7 +6922,7 @@ let oi = [{
               fontSize: 14,
               fontWeight: 'medium',
               children: 'Make First Draft Kit (Debug)'
-            }), jsxs(_$$Y, {
+            }), jsxs(AutoLayout, {
               direction: 'vertical',
               padding: 8,
               width: 'fill-parent',

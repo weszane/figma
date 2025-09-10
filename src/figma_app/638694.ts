@@ -6,7 +6,7 @@ import { H } from "../905/222445";
 import l from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { _I, PY } from "../905/34809";
 import { E as _$$E, J } from "../figma_app/953812";
 import { A5, J5 } from "../figma_app/623414";
@@ -196,7 +196,7 @@ function k(e) {
     dispatch: e.dispatch,
     selectedView: e.selectedView
   }));
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     padding: {
       left: e.showNavigationChevrons ? 20 : 32
@@ -228,7 +228,7 @@ export function $$F0() {
   let a = useIsOrgAdminUser(r).unwrapOr(!1);
   let s = _$$E();
   let o = N(t, a);
-  let l = jsxs(Y, {
+  let l = jsxs(AutoLayout, {
     direction: "horizontal",
     spacing: 0,
     padding: {

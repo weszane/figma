@@ -4,7 +4,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { s as _$$s } from "../905/58247";
 import { gU, RH } from "../figma_app/147952";
-import { T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { M } from "../figma_app/170366";
 import { loadPluginManifest, getFullscreenViewEditorType, mapToFileType, resolveFrameworkType, loadLocalPluginManifest } from "../figma_app/300692";
 import { bD } from "../figma_app/45218";
@@ -48,7 +48,7 @@ let $$y0 = createOptimistThunk(async (e, {
       version: s.api,
       isWidget: "widget" === t,
       productType: c ? mapToFileType(c) : null,
-      isVsCode: T()
+      isVsCode: isVsCodeEnvironment()
     }), e.dispatch($$b1({
       localFileId: f,
       resourceType: t

@@ -53,7 +53,7 @@ import { b as _$$b } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { $$, ZN } from "../figma_app/781852";
 import { pB } from "../905/395919";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { ud } from "../905/862913";
 import { D2 } from "../905/18797";
 import { m0, No } from "../figma_app/141508";
@@ -751,7 +751,7 @@ export function $$t80({
   XS();
   (function () {
     let e = useStore();
-    let t = useSelector(d1);
+    let t = useSelector(getSelectedFile);
     let i = useSelector(m0);
     let r = useSelector(No);
     let s = useSelector(e => e.library.publishedByLibraryKey);

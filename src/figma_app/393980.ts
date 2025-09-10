@@ -15,7 +15,7 @@ import { Uz } from "../905/63728";
 import { generateRecordingKey, useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { ay } from "../905/879323";
 import { DP } from "../905/640017";
 import { A as _$$A } from "../905/639174";
@@ -59,7 +59,7 @@ export function $$Y0({
   type: m
 }) {
   let g = useIsFullscreenSitesView() && getFeatureFlags().sites_responsive_text_styles && "TEXT" === m;
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 0,
     height: "hug-contents",
@@ -128,7 +128,7 @@ export function $$$3({
     let e = {};
     if (e.backgroundImage = `url('${_$$A()}')`, !o) return l ? r ? e : void 0 : e;
   }, [r, o, l]);
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     spacing: 0,
     height: "hug-contents",
     padding: {
@@ -214,10 +214,10 @@ function X({
       guid: sessionLocalIDToString(w)
     });
   };
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     height: "hug-contents",
-    children: [jsxs(Y, {
+    children: [jsxs(AutoLayout, {
       spacing: 0,
       horizontalAlignItems: "space-between",
       height: "hug-contents",
@@ -253,7 +253,7 @@ function X({
         recordingKey: generateRecordingKey(p, "styleName"),
         value: g
       })]
-    }), (u || !_) && jsxs(Y, {
+    }), (u || !_) && jsxs(AutoLayout, {
       spacing: 16,
       horizontalAlignItems: "space-between",
       height: "hug-contents",
@@ -338,7 +338,7 @@ function Z({
   let _ = useId();
   return (useEffect(() => {
     !c.includes(e) && c.length > 0 && t(c[0]);
-  }, [e, c, t]), o && e && 0 !== c.length) ? jsxs(Y, {
+  }, [e, c, t]), o && e && 0 !== c.length) ? jsxs(AutoLayout, {
     horizontalAlignItems: "space-between",
     height: "hug-contents",
     padding: {
@@ -351,7 +351,7 @@ function Z({
       id: _,
       disabled: r,
       children: renderI18nText("slides.properties_panel.theme.panel_title")
-    }), r ? jsx(Y, {
+    }), r ? jsx(AutoLayout, {
       padding: {
         vertical: parsePxInt(dGl)
       },

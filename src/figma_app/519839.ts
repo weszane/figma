@@ -23,7 +23,7 @@ import { createOptimistThunk } from "../905/350402";
 import { I0 } from "../905/879323";
 import { hideModal } from "../905/156213";
 import { b as _$$b } from "../905/985254";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { z as _$$z } from "../905/853613";
 import { Hj } from "../figma_app/412398";
 import { tf } from "../905/295427";
@@ -307,7 +307,7 @@ let ea = async e => {
 };
 let $$es7 = createOptimistThunk(async (e, t = {}) => {
   let r = e.getState();
-  let n = d1(r);
+  let n = getSelectedFile(r);
   let i = n?.key;
   if (!i) {
     logWarning("first_draft", "No file key found for publishing");
@@ -371,7 +371,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     e.dispatch($$q2());
     return;
   }
-  let X = d1(A);
+  let X = getSelectedFile(A);
   if (!X) {
     console.error("library publishChanges: file is null");
     V({

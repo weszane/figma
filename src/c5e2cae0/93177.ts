@@ -61,7 +61,7 @@ import { selectCurrentUser } from "../905/372672";
 import { LM, z4 } from "../figma_app/518077";
 import { M4 } from "../905/713695";
 import { LN, ub } from "../figma_app/514043";
-import { PS, ne, JV } from "../figma_app/345997";
+import { getEditableTeamsWithoutPaidAccess, getBillingCycleFromSubscriptionType, getSubscriptionTypeFromBillingCycle } from "../figma_app/345997";
 import { Ud, OI } from "../c5e2cae0/2942";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { useCurrentPlanUser } from "../figma_app/465071";
@@ -479,7 +479,7 @@ function eY(e) {
   let L = B.data?.permission === FMemberRoleType.ADMIN;
   let [V, $] = useState(n?.team_name ?? "");
   let [z, G] = useState(kt);
-  let ee = PS(FC());
+  let ee = getEditableTeamsWithoutPaidAccess(FC());
   let ed = e5({
     userId: l,
     teams: Object.values(j),
@@ -513,7 +513,7 @@ function eY(e) {
   let eD = void 0 === x.cartSelections;
   let eB = useLatestRef(eD);
   let eL = N_.dict(e => x.cartSelections?.countBySeatType?.[e] || 0);
-  let e$ = eA && ne(eA) || BillingCycle.YEAR;
+  let e$ = eA && getBillingCycleFromSubscriptionType(eA) || BillingCycle.YEAR;
   let eU = jv({
     billableProductKeys: N_,
     baseQuery: {
@@ -1058,7 +1058,7 @@ function eY(e) {
                 renewalTerm: e
               });
               to(Lo({
-                billingPeriod: JV(e)
+                billingPeriod: getSubscriptionTypeFromBillingCycle(e)
               }));
             },
             onSwitchCurrency: eE,
@@ -1134,7 +1134,7 @@ function eZ({
       className: _$$s.colorTextSecondary.font13.mt8.$,
       children: renderI18nText("checkout.confirm_your_plan_seats_and_payment_details_then_you_re_all_set")
     }), UR() && jsx(_$$W, {
-      billingPeriod: JV(a) ?? void 0,
+      billingPeriod: getSubscriptionTypeFromBillingCycle(a) ?? void 0,
       isCampfireCart: !0
     })]
   });

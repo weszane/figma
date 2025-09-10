@@ -40,7 +40,7 @@ import { bE } from "../905/466026";
 import { yJ as _$$yJ2 } from "../905/584989";
 import { ky } from "../figma_app/214121";
 import { LQ } from "../figma_app/741211";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { nk } from "../figma_app/2023";
 import { fullscreenValue } from "../figma_app/455680";
 import { setPropertiesPanelTab } from "../figma_app/741237";
@@ -57,7 +57,7 @@ import { R as _$$R } from "../figma_app/941983";
 import { zR, DH, BL } from "../905/327855";
 import { Bz } from "../figma_app/298277";
 import { OpenEditorFileData } from "../figma_app/43951";
-import { S$ } from "../figma_app/345997";
+import { hasProjectRestrictions } from "../figma_app/345997";
 import { xN } from "../905/672897";
 import { w2, i_ } from "../905/187165";
 import { Ob } from "../figma_app/111825";
@@ -124,7 +124,7 @@ async function ea(e, t, i) {
     team: m,
     userInitiated: !1
   }));
-  let h = d1(n);
+  let h = getSelectedFile(n);
   let g = !1;
   let _ = null;
   let A = null;
@@ -216,7 +216,7 @@ class ek extends PureComponent {
     };
     this.accept = () => {
       this.props.dispatch(hideModal());
-      let e = d1(this.props);
+      let e = getSelectedFile(this.props);
       let {
         selectedView
       } = this.props;
@@ -227,7 +227,7 @@ class ek extends PureComponent {
     };
   }
   render() {
-    let e = d1(this.props);
+    let e = getSelectedFile(this.props);
     return e?.license?.toLowerCase() === "apple" ? jsxs(d_, {
       size: 560,
       className: `${Dm} license_agreement--modal--EN2ao`,
@@ -625,7 +625,7 @@ export async function $$eW1(e, t, i, n, r) {
       viewOnlyAt: null,
       isEditingLockedForUser: !1
     };
-    s.isEditingLockedForUser = S$(s, a, i) || !1;
+    s.isEditingLockedForUser = hasProjectRestrictions(s, a, i) || !1;
     await n.dispatch(_$$z({
       files: [r],
       folder: s,

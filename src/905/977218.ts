@@ -5,7 +5,7 @@ import { NC } from "../905/17179";
 import { PerfTimer } from "../905/609396";
 import { XHR, XHRError } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { W0 as _$$W, Dy as _$$Dy, ky as _$$ky, NR as _$$NR, Pj as _$$Pj, r0 as _$$r, Je as _$$Je, pY as _$$pY } from "../figma_app/925970";
 import { createOptimistThunk } from "../905/350402";
 import { FE } from "../figma_app/314264";
@@ -289,7 +289,7 @@ let $$L0 = createOptimistThunk((e, t) => {
   }
   let m = Ei();
   let h = e => {
-    if (e.data && e.data.i18n) return J(e);
+    if (e.data && e.data.i18n) return resolveMessage(e);
   };
   if (u) {
     let t = P(sessionId, n.facetFilters && n.facetFilters.searchModelType ? n.facetFilters.searchModelType : uH.FILES, n, p, e, m);

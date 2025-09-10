@@ -38,7 +38,7 @@ import { P as _$$P } from '../905/143421';
 import { Ey, To } from '../905/148137';
 import { showModalHandler, hideModal, popModalStack } from '../905/156213';
 import { p as _$$p2 } from '../905/185998';
-import { J as _$$J } from '../905/231762';
+import { resolveMessage } from '../905/231762';
 import { Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
 import { z as _$$z2 } from '../905/284530';
@@ -90,7 +90,7 @@ import { tH as _$$tH } from '../905/751457';
 import { s as _$$s4 } from '../905/761565';
 import { u as _$$u2 } from '../905/774364';
 import { N as _$$N2 } from '../905/809096';
-import { Y as _$$Y } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { sZ } from '../905/845253';
 import { Um } from '../905/848862';
 import { n as _$$n } from '../905/861286';
@@ -138,7 +138,7 @@ import { t4 as _$$t2 } from '../figma_app/297957';
 import { isSingleDevWithCodegen, isDevModePlugin, isDevModeWithCodegen } from '../figma_app/300692';
 import { V as _$$V3 } from '../figma_app/312987';
 import { ag as _$$ag, nn as _$$nn, s as _$$s3, _g, cg, du, kA, mU, oB, OW, W3, ZY } from '../figma_app/336853';
-import { UE } from '../figma_app/345997';
+import { handleErrorWithToast } from '../figma_app/345997';
 import { getParentOrgIdIfOrgLevel, useTeamPlanFeatures } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { Jt } from '../figma_app/481749';
@@ -863,7 +863,7 @@ function ty({
         className: 'x1j6dyjg x1d3mw78 x1n0bwc9',
         children: i
       })]
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 8,
       children: [jsx(tk, {
@@ -874,7 +874,7 @@ function ty({
       }), jsx('div', {
         ...xk(tE.customWorkspaceContainer, t === 'loaded' && tE.loaded),
         children: o.map(e => jsx('div', {
-          children: jsx(_$$Y, {
+          children: jsx(AutoLayout, {
             direction: 'horizontal',
             spacing: 8,
             children: jsx(tw, {
@@ -907,7 +907,7 @@ function tw(e) {
       'children': e.avatar
     }), jsx('div', {
       className: 'x1mzt3pk xeaf4i8 x13faqbe x98rzlu xeuugli',
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         direction: 'vertical',
         verticalAlignItems: 'center',
         spacing: 0,
@@ -3486,7 +3486,7 @@ let nC = registerModal(e => {
     maxWidth: 288,
     minWidth: 288,
     fixedTop: !0,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: 'vertical',
       horizontalAlignItems: 'center',
       padding: 16,
@@ -3519,7 +3519,7 @@ let nC = registerModal(e => {
         }), o === ng.CONFIGURED && jsxs('div', {
           'data-testid': 'dropdown-group',
           'className': _$$s.mlAuto.$,
-          'children': [jsxs(_$$Y, {
+          'children': [jsxs(AutoLayout, {
             direction: 'horizontal',
             horizontalAlignItems: 'end',
             spacing: 8,
@@ -3566,7 +3566,7 @@ let nC = registerModal(e => {
       }), o === ng.CONFIGURED && x && jsx('div', {
         className: _$$s.bRadius4.px12.py8.colorBgInfo.$,
         children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.warning_description')
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: 'horizontal',
         horizontalAlignItems: 'end',
         spacing: 8,
@@ -4231,7 +4231,7 @@ function n6({
         paymentMethod: i
       });
     } catch (e) {
-      UE(e, s);
+      handleErrorWithToast(e, s);
       return !1;
     }
     s(VisualBellActions.enqueue({
@@ -4676,7 +4676,7 @@ export function $$sr0(e) {
     tag: 'a_something_else',
     label: getI18nString('settings_tab.discovery.label'),
     contactSupportCopy: org.discovery_enabled ? getI18nString('settings_tab.contact_support_to_disable') : getI18nString('settings_tab.contact_support_to_enable'),
-    description: jsxs(_$$Y, {
+    description: jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 8,
       children: [jsx(_$$E, {
@@ -4700,7 +4700,7 @@ export function $$sr0(e) {
   isGovCluster() || eE.settings.push(jsx(Ke, {
     user: B,
     label: getI18nString('settings_tab.data_storage'),
-    description: jsxs(_$$Y, {
+    description: jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 8,
       children: [jsx(_$$E, {
@@ -5299,7 +5299,7 @@ export function $$sr0(e) {
         successMessage: t
       }));
     }
-  }, 'ai_opt_out')) : org.ai_features_disabled && t_.settings.push(jsx(_$$Y, {
+  }, 'ai_opt_out')) : org.ai_features_disabled && t_.settings.push(jsx(AutoLayout, {
     padding: {
       top: 8
     },
@@ -5529,7 +5529,7 @@ let sl = createOptimistThunk((e, t, {
   } = t;
   let r = a.getMutation(I2);
   let l = e => {
-    n(_$$s2.error(_$$J(e, getI18nString('payments.change_billing_contact_error')), 5e3));
+    n(_$$s2.error(resolveMessage(e, getI18nString('payments.change_billing_contact_error')), 5e3));
   };
   let o = async t => {
     await r({

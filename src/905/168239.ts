@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { t as _$$t } from "../905/150656";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/116389";
-import { Y, M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { q } from "../905/749058";
 import { s as _$$s } from "../905/645504";
 import { h as _$$h } from "../905/207101";
@@ -128,14 +128,14 @@ export function $$O0({
         }, t);
       })
     });
-    return jsxs(Y, {
+    return jsxs(AutoLayout, {
       padding: {
         horizontal: 32,
         vertical: 16
       },
       height: "hug-contents",
       dataTestId: "org-admin-settings-secondary-tabs",
-      children: [t, jsx(M, {}), i]
+      children: [t, jsx(Spacer, {}), i]
     });
   }
 }
@@ -151,7 +151,7 @@ function D({
     [t]: !0
   }), {}), [t]);
   let [d, u, m] = _$$t.useManagedTabs(l, i, a);
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     padding: {
       horizontal: 32,
       vertical: 16
@@ -175,7 +175,7 @@ function D({
           })]
         }, t) : null;
       })
-    }), jsx(M, {}), o]
+    }), jsx(Spacer, {}), o]
   });
 }
 export const b = $$O0;

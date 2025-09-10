@@ -3,7 +3,7 @@ import { isNullish, isNotNullish } from "../figma_app/95419";
 import { b } from "../figma_app/246400";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { U1 } from "../figma_app/681712";
 import { B } from "../905/261906";
 import { tI } from "../figma_app/599327";
@@ -43,21 +43,21 @@ function _(e) {
       percentDiff: U1(u, c)
     };
   }(e);
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     children: [jsx("div", {
       style: sx.textBodyMedium.colorTextTooltip.$,
       children: O(e.seatType)
     }), null !== t && jsxs("div", {
       style: sx.textBodyMedium.colorTextTooltipSecondary.wFull.$,
-      children: [jsxs(Y, {
+      children: [jsxs(AutoLayout, {
         horizontalAlignItems: "space-between",
         children: [jsx("div", {
           children: getI18nString("billing_modals.seat_type_popover.monthly_rate")
         }), jsx("div", {
           children: t.monthlyPrice
         })]
-      }), jsxs(Y, {
+      }), jsxs(AutoLayout, {
         horizontalAlignItems: "space-between",
         children: [jsx("div", {
           children: renderI18nText("billing_modals.seat_type_popover.annual_rate_percent_off", {
@@ -89,7 +89,7 @@ function A({
   } = As(e, t);
   let d = prices?.[i];
   let c = prices && localizeCurrency && isNotNullish(d) ? f(d.amount, localizeCurrency) : null;
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     horizontalAlignItems: "space-between",
     children: [jsx("div", {
@@ -107,10 +107,10 @@ function y({
   seatType: i,
   showMonthlyAnnualPriceComparison: r
 }) {
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     direction: "vertical",
     dataTestId: "seat-type-popover",
-    children: jsxs(Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 8,
       children: [r ? jsx(_, {
@@ -123,7 +123,7 @@ function y({
         seatType: i
       }), jsx("div", {
         style: sx.py4.$,
-        children: jsx(Y, {
+        children: jsx(AutoLayout, {
           direction: "vertical",
           spacing: 8,
           children: jsx(_$$i, {
@@ -138,7 +138,7 @@ function y({
 }
 export function $$b0(e) {
   let t = e.planKey.type === FOrganizationLevelType.TEAM && e.showMonthlyAnnualPriceComparison;
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     spacing: 4,
     children: [jsx(B, {

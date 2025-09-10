@@ -26,7 +26,7 @@ import { jd } from "../figma_app/528509";
 import { FC } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
 import { FPlanLimitationType, FPlanNameType, FFileType } from "../figma_app/191312";
-import { WW, XX } from "../figma_app/345997";
+import { STANDARD_LIMIT, hasTeamStatePaidAccess } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { ng } from "../figma_app/205827";
 import { jn } from "../figma_app/522082";
@@ -34,7 +34,7 @@ import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { vd } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E9 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { h as _$$h } from "../905/864281";
@@ -180,14 +180,14 @@ function ee(e) {
       t = parseInt(o.data.team?.teamFileCounts?.slideFileCount ?? "0");
   }
   if (void 0 === t || 0 === t) return null;
-  let m = t < WW ? renderI18nText("fullscreen.file_tracker_modal.num_files_of_max_free_files_created", {
+  let m = t < STANDARD_LIMIT ? renderI18nText("fullscreen.file_tracker_modal.num_files_of_max_free_files_created", {
     numFiles: t,
-    maxFreeFiles: WW
+    maxFreeFiles: STANDARD_LIMIT
   }) : renderI18nText("fullscreen.file_tracker_modal.this_is_your_last_free_file");
-  let f = t < WW ? renderI18nText("fullscreen.file_tracker_modal.starter_plans_are_free_but_they_limit_you_to_just_max_free_files", {
-    maxFreeFiles: WW
+  let f = t < STANDARD_LIMIT ? renderI18nText("fullscreen.file_tracker_modal.starter_plans_are_free_but_they_limit_you_to_just_max_free_files", {
+    maxFreeFiles: STANDARD_LIMIT
   }) : renderI18nText("fullscreen.file_tracker_modal.max_free_files_already_you_are_becoming_a_pro", {
-    maxFreeFiles: WW
+    maxFreeFiles: STANDARD_LIMIT
   });
   let x = [getI18nString("fullscreen.file_tracker_modal.unlimited_files_pages"), getI18nString("fullscreen.file_tracker_modal.audio_conversations_in_files"), getI18nString("fullscreen.file_tracker_modal.unlimited_version_history_and_more")];
   let y = {
@@ -217,16 +217,16 @@ function ee(e) {
           className: "file_tracker_upsell_modal--progressBar--IPGgx",
           children: [jsx("div", {
             className: b()(Q, {
-              [$]: t >= WW
+              [$]: t >= STANDARD_LIMIT
             })
           }), jsx("div", {
             className: b()(Z, {
               [Q]: t > 1,
-              [$]: t >= WW
+              [$]: t >= STANDARD_LIMIT
             })
           }), jsx("div", {
             className: b()(Z, {
-              [$]: t >= WW
+              [$]: t >= STANDARD_LIMIT
             })
           })]
         }), jsx("h1", {
@@ -237,10 +237,10 @@ function ee(e) {
           children: f
         }), jsx("div", {
           className: _$$s.font11.colorText.lh16.fontMedium.mb24.pr24.$,
-          children: jsx(_$$Y, {
+          children: jsx(AutoLayout, {
             direction: "vertical",
             spacing: 16,
-            children: x.map((e, t) => jsxs(_$$Y, {
+            children: x.map((e, t) => jsxs(AutoLayout, {
               direction: "horizontal",
               verticalAlignItems: "start",
               spacing: 8,
@@ -332,7 +332,7 @@ function ea({
   let s = t.restrictionsList?.includes(FPlanLimitationType.LOCKED);
   let o = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
   let l = useFullscreenViewFile().errors;
-  let d = !XX(t) && canEditTeam(t.id, i);
+  let d = !hasTeamStatePaidAccess(t) && canEditTeam(t.id, i);
   let c = t.canEdit && e.plan?.tier === FPlanNameType.STARTER;
   let u = useShadowRead({
     oldValue: d,

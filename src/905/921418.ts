@@ -12,7 +12,7 @@ import { xI, Y1 } from "../905/879323";
 import { eK, w2 } from "../905/977218";
 import { XE } from "../figma_app/976749";
 import { pi } from "../figma_app/314264";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { Oo } from "../905/709171";
 import { memoizedProcessLocalComponents, processLocalComponents } from "../figma_app/80990";
 import { V as _$$V } from "../figma_app/473391";
@@ -101,7 +101,7 @@ let $$G0 = new class extends M {
     this.expSearchUnpublishedAssetsEnabled = void 0;
     this.initSources = e => {
       let t = e.getState();
-      let i = d1(t);
+      let i = getSelectedFile(t);
       i && ((e, n) => {
         let r = [];
         let a = new Set();

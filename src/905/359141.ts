@@ -84,7 +84,7 @@ import { _w, Ir, mq } from '../905/789781';
 import { i as _$$i } from '../905/797975';
 import { q as _$$q } from '../905/807667';
 import { _5, eS as _$$eS2, W as _$$W, b1, mG, Pq, Px, Qj, ry } from '../905/825399';
-import { Y as _$$Y } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { V as _$$V } from '../905/843013';
 import { sZ } from '../905/845253';
 import { Um } from '../905/848862';
@@ -2840,7 +2840,7 @@ function np({
       })
     }) : o), jsx('div', {
       className: 'updates_list_item--updateButtonContainer--6wy8I',
-      children: jsx(_$$Y, {
+      children: jsx(AutoLayout, {
         spacing: 16,
         horizontalAlignItems: 'center',
         children: jsx($n, {

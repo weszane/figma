@@ -33,7 +33,7 @@ import { TS, ZS, iA } from "../figma_app/519839";
 import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { processLocalComponents } from "../figma_app/80990";
 import { i6, v2, x$ } from "../905/188715";
 import { C as _$$C, O as _$$O2 } from "../905/696698";
@@ -77,7 +77,7 @@ import { fo, og, UJ, Xm } from "../905/935570";
 import { R as _$$R } from "../905/256203";
 import { k as _$$k3 } from "../905/700890";
 import { $z } from "../figma_app/617427";
-import { Y as _$$Y2, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { isBranch } from "../905/760074";
 import { M4 } from "../905/713695";
@@ -343,7 +343,7 @@ function eW(e) {
   };
   let E = [FContainerType.ORG, ...(hasWorkspace ? [FContainerType.WORKSPACE] : []), FContainerType.TEAM];
   let x = I(publishScope);
-  let S = isLoading ? jsx(_$$Y2, {
+  let S = isLoading ? jsx(AutoLayout, {
     padding: {
       vertical: 0,
       horizontal: 8
@@ -386,7 +386,7 @@ function eW(e) {
   });
   return jsx("div", {
     className: "publish_scope_dropdown--root--6MzUS",
-    children: getFeatureFlags().dse_fpl_wave_2 ? jsxs(_$$Y2, {
+    children: getFeatureFlags().dse_fpl_wave_2 ? jsxs(AutoLayout, {
       children: [jsx(Label, {
         htmlFor: _,
         children: renderI18nText("design_systems.publishing_modal.publish_to_label")
@@ -474,7 +474,7 @@ function eq({
   }));
   return jsx("div", {
     className: "publishing_modal_footer--warningBannerForFPL--UaaMA",
-    children: jsxs(_$$Y2, {
+    children: jsxs(AutoLayout, {
       backgroundColor: "warning-tertiary",
       padding: 8,
       spacing: 8,
@@ -520,7 +520,7 @@ function e$({
       org: l,
       editingFile: i,
       publishScope: h
-    }), jsxs(_$$Y2, {
+    }), jsxs(AutoLayout, {
       padding: {
         vertical: 12,
         horizontal: 0
@@ -535,7 +535,7 @@ function e$({
       }), x && jsx(eY, {
         state: u.state,
         progress: u.progress
-      }), jsx(_$$M, {}), jsxs(Fragment, {
+      }), jsx(Spacer, {}), jsxs(Fragment, {
         children: [jsx($n, {
           onClick: t,
           variant: "secondary",
@@ -1303,7 +1303,7 @@ function tJ(e) {
   let [el, ed] = useState(!1);
   let [ec, eu] = useState(null);
   let ep = selectCurrentFile();
-  let em = useSelector(d1);
+  let em = useSelector(getSelectedFile);
   let eh = useSelector(e => e.library);
   let eg = useOpenFileObjectWithSinatraType({
     useSinatraType: !0

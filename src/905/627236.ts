@@ -23,7 +23,7 @@ import { tH, H4 } from "../905/751457";
 import { z as _$$z } from "../905/284530";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
 import { E as _$$E2 } from "../905/984674";
 import { g as _$$g } from "../905/119656";
@@ -220,7 +220,7 @@ function X(e) {
           right: 24,
           bottom: 24
         },
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           direction: "vertical",
           spacing: 8,
           padding: {

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 export function $$a0(e) {
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     height: 200,
     verticalAlignItems: "center",
     horizontalAlignItems: "center",

@@ -14,7 +14,7 @@ import { zE } from "../905/738636";
 import { Uf, $K } from "../figma_app/223206";
 import { J3, JU } from "../figma_app/622574";
 import { Cu } from "../figma_app/314264";
-import { Kl } from "../905/766303";
+import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { Me } from "../figma_app/598018";
@@ -25,7 +25,7 @@ import { EI } from "../figma_app/21029";
 export function $$j2(e, t, i) {
   let r = atomStoreManager.get(Me);
   let n = debugState.getState();
-  let a = Kl(n);
+  let a = getPermissionsAndView(n);
   e(zE({
     state: a,
     from: i,

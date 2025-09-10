@@ -1,7 +1,7 @@
 import { A } from "../905/920142";
 import { Zy, vn, Ph } from "../figma_app/109538";
 import { showModalHandler } from "../905/156213";
-import { mt } from "../figma_app/345997";
+import { getFutureDateOrNull } from "../figma_app/345997";
 if (443 == require.j) {}
 var $$$$l1 = (e => (e.ADD_ANNUAL_PLAN = "add_annual_plan", e.ADJUST_COTERM_SEATS = "adjust_coterm_seats", e.ADJUST_RENEWAL_SEATS = "adjust_renewal_seats", e.TRIAL_READ_ONLY = "trial_read_only", e))($$$$l1 || {});
 export function $$o0(e) {
@@ -17,7 +17,7 @@ export function $$o0(e) {
       }));
     }
   };
-  let a = t?.trial_end ? mt(t.trial_end, e.currentDate) : null;
+  let a = t?.trial_end ? getFutureDateOrNull(t.trial_end, e.currentDate) : null;
   return a ? {
     id: "trial_read_only",
     trialEnd: a

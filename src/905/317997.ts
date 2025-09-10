@@ -8,7 +8,7 @@ import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { X, U as _$$U } from "../905/77000";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { Lk } from "../figma_app/646357";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
 import { ev } from "../905/909811";
@@ -37,7 +37,7 @@ export function $$w1(e) {
   let N = useDispatch();
   let P = useSelector(e => e.dropdownShown);
   let O = useSelector(e => e.selectedView);
-  let D = useSelector(e => d1(e));
+  let D = useSelector(e => getSelectedFile(e));
   let L = useSelector(e => {
     if (orgId) return e.orgById[orgId]?.bigma_enabled;
     if (!teamId) return !1;

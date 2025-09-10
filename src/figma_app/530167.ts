@@ -6,7 +6,7 @@ import { hasMorePages, fetchPaginatedData, DEFAULT_PAGE_SIZE, PAGINATION_NEXT } 
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { cR as _$$cR } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
@@ -141,7 +141,7 @@ let $$X10 = createOptimistThunk((e, {
   }).then(() => {
     n && n();
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     r && e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.couldnt_restrict_profile_error", {
         error: r
@@ -167,7 +167,7 @@ let $$J16 = createOptimistThunk((e, {
   }).then(() => {
     n && n();
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     r && e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.couldnt_unrestrict_profile_error", {
         error: r
@@ -283,7 +283,7 @@ let $$ee28 = createOptimistThunk((e, t, {
     }
     onSuccess && onSuccess(e);
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     r && e.dispatch(_$$s.error(r));
   });
 }, ({
@@ -403,7 +403,7 @@ let $$er12 = createOptimistThunk((e, t, {
     });
     onSuccess && onSuccess(e);
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     r && e.dispatch(_$$s.error(r));
   });
 }, ({
@@ -502,7 +502,7 @@ let $$eo18 = createOptimistThunk(async (e, t, {
       type: "COMMUNITY_HUB_FOLLOW"
     })));
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     r && e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_follow_this_profile_profile_name", {
         profileName: r
@@ -530,7 +530,7 @@ let $$ed8 = createOptimistThunk((e, t, {
       type: "COMMUNITY_HUB_UNFOLLOW"
     })));
   }).catch(t => {
-    let r = J(t);
+    let r = resolveMessage(t);
     r && e.dispatch(VisualBellActions.enqueue({
       message: `Unable to unfollow this profile: ${r}`,
       type: "COMMUNITY_HUB_UNFOLLOW_FAILED",

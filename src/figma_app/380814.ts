@@ -21,7 +21,7 @@ import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { logError } from "../905/714362";
 import { L as _$$L } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Oe } from "../figma_app/933328";
 import { BQ, yp, rW } from "../figma_app/852050";
 import { Um } from "../905/848862";
@@ -135,7 +135,7 @@ export function $$$3({
   labelId: r,
   input: i
 }) {
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     spacing: 0,
     horizontalAlignItems: "space-between",
     height: "hug-contents",
@@ -193,12 +193,12 @@ export function $$J0({
   return jsxs("form", {
     onSubmit: u,
     autoComplete: "no",
-    children: [jsx(Y, {
+    children: [jsx(AutoLayout, {
       direction: "vertical",
       spacing: 0,
       height: "hug-contents",
       ref: s,
-      children: jsx(Y, {
+      children: jsx(AutoLayout, {
         direction: "vertical",
         spacing: `${parsePxNumber(dGl)}px`,
         padding: {
@@ -213,7 +213,7 @@ export function $$J0({
           variableFormSubmitData: o
         })
       })
-    }), jsx(Y, {
+    }), jsx(AutoLayout, {
       horizontalAlignItems: "end",
       verticalAlignItems: "center",
       padding: 16,

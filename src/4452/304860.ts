@@ -27,7 +27,7 @@ import { e0 } from '../905/696396';
 import { IX } from '../905/712921';
 import { H4, tH } from '../905/751457';
 import { N as _$$N2 } from '../905/809096';
-import { Y as _$$Y } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { sx as _$$sx } from '../905/941192';
 import { s as _$$s } from '../cssbuilder/589278';
 import { isNullish, isNotNullish } from '../figma_app/95419';
@@ -80,7 +80,7 @@ function ee({
         id: `${e}_${t}`,
         onClick: () => n(e, t),
         disabled: !!u,
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           direction: 'horizontal',
           horizontalAlignItems: 'start',
           verticalAlignItems: 'center',
@@ -94,7 +94,7 @@ function ee({
             style: _$$sx.add({
               '--color-icon': 'var(--color-icon-onbrand)'
             }).$$if(a, _$$sx.visible, _$$sx.invisible).$
-          }), jsxs(_$$Y, {
+          }), jsxs(AutoLayout, {
             direction: 'vertical',
             spacing: 0,
             children: [jsx('div', {
@@ -132,18 +132,18 @@ function ea({
     isProrationBillingEnabled: o,
     isProvisionalAccessEnabled: d
   }, `${t}_${e}`)), [t, i, a, r, o, d]);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: 'vertical',
     spacing: 8,
     dataTestId: `auto-approval-settings-selector-${t}`,
-    children: [jsx(_$$Y, {
+    children: [jsx(AutoLayout, {
       direction: 'horizontal',
       horizontalAlignItems: 'space-between',
       verticalAlignItems: 'start',
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         direction: 'horizontal',
         horizontalAlignItems: 'space-between',
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           direction: 'horizontal',
           children: [jsx(_$$B, {
             type: t,
@@ -400,7 +400,7 @@ function el() {
       dataTestId: 'scim-info-badge',
       color: _$$S.INFORMATION,
       padding: 8,
-      text: jsxs(_$$Y, {
+      text: jsxs(AutoLayout, {
         direction: 'vertical',
         spacing: 4,
         children: [jsx('p', {
@@ -420,7 +420,7 @@ function eo() {
       dataTestId: 'curf-member-only-info-badge',
       color: _$$S.INFORMATION,
       padding: 8,
-      text: jsxs(_$$Y, {
+      text: jsxs(AutoLayout, {
         direction: 'vertical',
         spacing: 4,
         children: [jsx('p', {

@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { logError } from "../905/714362";
 import { tH, H4 } from "../905/751457";
 import { popModalStack } from "../905/156213";
-import { l$ } from "../905/766303";
-import { dN } from "../figma_app/345997";
+import { removeOptimist } from "../905/766303";
+import { isOrgSuspendedOrDeactivated } from "../figma_app/345997";
 import { H4 as _$$H, Ud } from "../figma_app/679183";
 import { getModal } from "../905/102752";
 import { Lu } from "../figma_app/453508";
@@ -65,7 +65,7 @@ class f extends Component {
     }
   }
   render() {
-    if (this.props.currentUserOrgId && dN(this.props.currentUserOrgId, this.props)) return jsx(g, {
+    if (this.props.currentUserOrgId && isOrgSuspendedOrDeactivated(this.props.currentUserOrgId, this.props)) return jsx(g, {
       currentOrgId: this.props.currentUserOrgId
     });
     let e = this.props.modalShown;
@@ -107,7 +107,7 @@ class f extends Component {
     let i = this.modalStack.length - 1;
     for (; i >= 0;) {
       let e = this.modalStack[i];
-      if (i === this.modalStack.length - 1) t.add(i); else if (e.registeredModal?.supportsBackgroundVisible) t.add(i); else break;
+      if (i === this.modalStack.length - 1) t.add(i);else if (e.registeredModal?.supportsBackgroundVisible) t.add(i);else break;
       if (!e.modal.showModalsBeneath) break;
       i--;
     }
@@ -128,6 +128,6 @@ class f extends Component {
   }
 }
 f.displayName = "AppModal";
-let $$_0 = connect(l$)(f);
+let $$_0 = connect(removeOptimist)(f);
 let A = new Set();
 export const V = $$_0;

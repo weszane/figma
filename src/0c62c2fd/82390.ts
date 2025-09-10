@@ -256,7 +256,7 @@ import { x as _$$x3 } from '../905/796251';
 import { H as _$$H4 } from '../905/799228';
 import { g as _$$g } from '../905/817247';
 import { z as _$$z4 } from '../905/821223';
-import { Y as _$$Y7 } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { O as _$$O2 } from '../905/833838';
 import { u as _$$u0 } from '../905/834238';
 import { $ as _$$$3 } from '../905/834575';
@@ -498,7 +498,7 @@ import { Jt as _$$Jt2, GR, HD } from '../figma_app/330108';
 import { h as _$$h7 } from '../figma_app/334471';
 import { LM as _$$LM, wA as _$$wA, yK } from '../figma_app/336853';
 import { Il, Tj } from '../figma_app/342207';
-import { _b as _$$_b, a5 as _$$a6, n0 as _$$n2, oc as _$$oc, WW as _$$WW, Kg, w5, Wf, wn, WQ, ZZ } from '../figma_app/345997';
+import { isGracePeriodEndingSoon, isTeamSubscribed, hasValidSubscription, isTeamLocked, STANDARD_LIMIT, getEditableUnpaidTeams, hasTeamPaidAccess, PRIMARY_LIMIT, isOrgDelinquent, isTeamInGracePeriod, hasFolderRestrictions } from '../figma_app/345997';
 import { ce as _$$ce, lH as _$$lH, Bb } from '../figma_app/347146';
 import { toggleFigmentDebugger } from '../figma_app/347406';
 import { aO as _$$aO } from '../figma_app/348887';
@@ -3654,7 +3654,7 @@ function sj() {
     if (!e || a.status !== 'loaded') return null;
     let d = _$$x$(s, _$$cn(e));
     let c = d > 0 && d !== 1 / 0 && _$$cn(e) && t?.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_CURRENT;
-    let u = d === 0 && t?.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_EXPIRED && _$$oc(t.id, r);
+    let u = d === 0 && t?.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_EXPIRED && isTeamLocked(t.id, r);
     if (c || u) {
       return {
         type: so.EDU_EXPIRY,
@@ -3664,7 +3664,7 @@ function sj() {
       };
     }
     if (!n.dismissed_edu_sidebar && _$$cn(e) && !l) {
-      let e = Kg(r).length > 0;
+      let e = getEditableUnpaidTeams(r).length > 0;
       return {
         type: so.EDU_UPGRADE,
         props: {
@@ -3687,7 +3687,7 @@ function sj() {
     });
     let o = vt();
     let l = jn();
-    return e && r && n.status === 'loaded' && n.data.team?.hasPermission && s.status === 'loaded' && s.data ? !r || _$$cn(e) || w5(t[r.id]) || o || l ? null : {
+    return e && r && n.status === 'loaded' && n.data.team?.hasPermission && s.status === 'loaded' && s.data ? !r || _$$cn(e) || hasTeamPaidAccess(t[r.id]) || o || l ? null : {
       type: so.UNIVERSAL,
       props: {
         onTeam: Object.keys(t).length > 0,
@@ -3734,7 +3734,7 @@ function sj() {
       enabled: !!r
     });
     let o = Mi();
-    return !e || !r || a.status !== 'loaded' || a.data || _$$cn(e) || w5(t[r.id]) || n.status !== 'loaded' || !n.data.team?.hasPermission || !o() ? null : _$$gY2(s, a5, r.id, 7776e6) ? null : {
+    return !e || !r || a.status !== 'loaded' || a.data || _$$cn(e) || hasTeamPaidAccess(t[r.id]) || n.status !== 'loaded' || !n.data.team?.hasPermission || !o() ? null : _$$gY2(s, a5, r.id, 7776e6) ? null : {
       type: so.PAID_FREE_SPACE,
       props: {
         team: r
@@ -11387,21 +11387,21 @@ function uC({
   currentProgress: e,
   totalAllowed: t
 }) {
-  return jsxs(_$$Y7, {
+  return jsxs(AutoLayout, {
     spacing: 'auto',
     children: [jsxs('div', {
       className: _$$s.relative.wFull.$,
       className: 'x1b68738 x1n2onr6',
       children: [jsx('div', {
         className: _$$s.absolute.wFull.$,
-        children: jsx(_$$Y7, {
+        children: jsx(AutoLayout, {
           cornerRadius: 5,
           height: 6,
           backgroundColor: 'secondary'
         })
       }), jsx('div', {
         className: _$$s.absolute.wFull.flex.itemsCenter.$,
-        children: jsx(_$$Y7, {
+        children: jsx(AutoLayout, {
           cornerRadius: 5,
           height: 6,
           width: `${Math.min(e / t * 100, 100)}%`,
@@ -11423,13 +11423,13 @@ function uS({
   currentProgress: r,
   totalProgress: s
 }) {
-  return jsxs(_$$Y7, {
+  return jsxs(AutoLayout, {
     direction: 'vertical',
     height: 'hug-contents',
     spacing: '7px',
-    children: [jsxs(_$$Y7, {
+    children: [jsxs(AutoLayout, {
       horizontalAlignItems: 'space-between',
-      children: [jsxs(_$$Y7, {
+      children: [jsxs(AutoLayout, {
         spacing: 4,
         children: [jsx(_$$E, {
           fontSize: 13,
@@ -11456,14 +11456,14 @@ function uS({
       className: _$$s.relative.wFull.$,
       children: [jsx('div', {
         className: _$$s.absolute.wFull.$,
-        children: jsx(_$$Y7, {
+        children: jsx(AutoLayout, {
           cornerRadius: 5,
           height: 5,
           backgroundColor: 'disabled'
         })
       }), jsx('div', {
         className: _$$s.absolute.wFull.$,
-        children: jsx(_$$Y7, {
+        children: jsx(AutoLayout, {
           cornerRadius: 5,
           height: 5,
           width: `${Math.min(r / s * 100, 100)}%`,
@@ -11495,7 +11495,7 @@ function uA({
   let r = useDispatch();
   let s = _$$ol();
   let n = _$$_();
-  return t || !s || w5(s) || n.view !== 'folder' ? null : jsx(uO, {
+  return t || !s || hasTeamPaidAccess(s) || n.view !== 'folder' ? null : jsx(uO, {
     folderId: n.folderId,
     showPlanComparisonModal: () => {
       r(showModalHandler({
@@ -11528,7 +11528,7 @@ function uO({
   let c = i.data.project?.team?.teamFileCounts?.slideFileCount;
   let u = c ? parseInt(c, 10) : 0;
   let m = _$$oA(i.data.project?.team?.teamFileCounts?.totalFileCount) ?? 0;
-  let _ = s ? m >= _$$WW : l >= _$$WW || d >= _$$WW;
+  let _ = s ? m >= STANDARD_LIMIT : l >= STANDARD_LIMIT || d >= STANDARD_LIMIT;
   return jsx(_$$fu, {
     name: 'Starter Limit Overview',
     properties: n,
@@ -11539,7 +11539,7 @@ function uO({
         top: '128px',
         maxWidth: s ? '280px' : '300px'
       }).$,
-      children: jsxs(_$$Y7, {
+      children: jsxs(AutoLayout, {
         direction: 'vertical',
         padding: s ? 16 : 32,
         spacing: s ? 'auto' : 24,
@@ -11561,7 +11561,7 @@ function uO({
           numSlidesFilesUsed: u,
           totalFilesUsed: m,
           isStarterGlobalFileLimitOn: s
-        }), r ? jsxs(_$$Y7, {
+        }), r ? jsxs(AutoLayout, {
           direction: 'vertical',
           spacing: '12px',
           children: [s ? jsx('div', {
@@ -11594,34 +11594,34 @@ function uF({
   totalFilesUsed: i,
   isStarterGlobalFileLimitOn: n
 }) {
-  return jsxs(_$$Y7, {
+  return jsxs(AutoLayout, {
     direction: 'vertical',
     spacing: 24,
     width: n ? '100%' : 234,
     children: [n && jsx(uC, {
       currentProgress: i,
-      totalAllowed: _$$WW
+      totalAllowed: STANDARD_LIMIT
     }), !n && jsxs(Fragment, {
       children: [jsx(uS, {
         text: getI18nString('file_browser.starter_limit.projects'),
         tooltipText: getI18nString('file_browser.starter_limit.projects.tooltip'),
         currentProgress: e,
-        totalProgress: Wf
+        totalProgress: PRIMARY_LIMIT
       }), jsx(uS, {
         text: getI18nString('file_browser.starter_limit.design_files'),
         tooltipText: getI18nString('file_browser.starter_limit.design_files.tooltip'),
         currentProgress: t,
-        totalProgress: _$$WW
+        totalProgress: STANDARD_LIMIT
       }), jsx(uS, {
         text: getI18nString('file_browser.starter_limit.figjam_boards'),
         tooltipText: getI18nString('file_browser.starter_limit.figjam_boards.tooltip'),
         currentProgress: r,
-        totalProgress: _$$WW
+        totalProgress: STANDARD_LIMIT
       }), jsx(uS, {
         text: getI18nString('file_browser.starter_limit.slides'),
         tooltipText: getI18nString('file_browser.starter_limit.slides.tooltip'),
         currentProgress: s,
-        totalProgress: _$$WW
+        totalProgress: STANDARD_LIMIT
       })]
     })]
   });
@@ -11638,7 +11638,7 @@ function uJ(e) {
     'data-tooltip': getI18nString('billing.open_invoice_reminder.button_tooltip'),
     'data-tooltip-show-immediately': !0
   };
-  return jsxs(_$$Y7, {
+  return jsxs(AutoLayout, {
     direction: 'vertical',
     padding: e.noPaddingOrBorder ? 0 : 20,
     spacing: 24,
@@ -12619,7 +12619,7 @@ function mc({
           style: _$$sx2.absolute.topHalf.leftHalf.add({
             transform: 'translate(-50%, -50%)'
           }).$,
-          children: jsx(_$$Y7, {
+          children: jsx(AutoLayout, {
             cornerRadius: 20,
             backgroundColor: 'brand',
             height: 40,
@@ -12630,7 +12630,7 @@ function mc({
             })
           })
         })]
-      }), jsxs(_$$Y7, {
+      }), jsxs(AutoLayout, {
         direction: 'vertical',
         padding: {
           top: 16
@@ -12667,7 +12667,7 @@ function mm({
     trigger: UpsellModalType.FOLDER_UPSELL_CARD
   });
   let o = I7('exp_fbg_project_limit_upsell');
-  if (!r || !e || w5(r) || s === 'recentsAndSharing' || s === 'trashedFolders' || !o.getConfig().getValue('show_upsell', !1)) return null;
+  if (!r || !e || hasTeamPaidAccess(r) || s === 'recentsAndSharing' || s === 'trashedFolders' || !o.getConfig().getValue('show_upsell', !1)) return null;
   let l = jsx(Us, {
     className: _$$s.noWrap.cursorDefault.$,
     onClick: e => {
@@ -12721,7 +12721,7 @@ function mm({
             style: _$$sx2.absolute.topHalf.leftHalf.add({
               transform: 'translate(-50%, -50%)'
             }).$,
-            children: jsx(_$$Y7, {
+            children: jsx(AutoLayout, {
               cornerRadius: 12,
               backgroundColor: 'brand',
               height: 24,
@@ -12733,32 +12733,32 @@ function mm({
                 fill: 'onbrand'
               })
             })
-          }), jsxs(_$$Y7, {
+          }), jsxs(AutoLayout, {
             direction: 'vertical',
             spacing: 4,
-            children: [jsxs(_$$Y7, {
+            children: [jsxs(AutoLayout, {
               direction: 'horizontal',
               spacing: 4,
-              children: [jsx(_$$Y7, {
+              children: [jsx(AutoLayout, {
                 cornerRadius: 2,
                 backgroundColor: 'default'
-              }), jsx(_$$Y7, {
+              }), jsx(AutoLayout, {
                 cornerRadius: 2,
                 backgroundColor: 'default'
               })]
-            }), jsxs(_$$Y7, {
+            }), jsxs(AutoLayout, {
               direction: 'horizontal',
               spacing: 4,
-              children: [jsx(_$$Y7, {
+              children: [jsx(AutoLayout, {
                 cornerRadius: 2,
                 backgroundColor: 'default'
-              }), jsx(_$$Y7, {
+              }), jsx(AutoLayout, {
                 cornerRadius: 2,
                 backgroundColor: 'default'
               })]
             })]
           })]
-        }), jsxs(_$$Y7, {
+        }), jsxs(AutoLayout, {
           direction: 'vertical',
           spacing: 0,
           children: [jsx(_$$E, {
@@ -13191,7 +13191,7 @@ function m3(e, t, r) {
     canMember: s
   }) => function (e, t, r, s) {
     let i;
-    if (!e.currentUserOrgId || !wn(e.currentUserOrgId, e)) return null;
+    if (!e.currentUserOrgId || !isOrgDelinquent(e.currentUserOrgId, e)) return null;
     let n = e.orgById[e.currentUserOrgId];
     if (!n) return null;
     let o = n.past_due_at && _$$A3(n.past_due_at).add(2, 'weeks') > _$$A3(new Date());
@@ -13292,7 +13292,7 @@ function m9(e, t, r, i, n, l) {
     let v = n.canOwn;
     let y = n.canAdmin;
     let w = n.canEdit;
-    let j = l && _$$oc(l.id, s);
+    let j = l && isTeamLocked(l.id, s);
     let T = e === 'folder' ? t : null;
     let E = 0;
     let I = {
@@ -13308,11 +13308,11 @@ function m9(e, t, r, i, n, l) {
       let o = s.userEduGracePeriods;
       C ? d && _$$hP(s.user.id, s.roles.byTeamId, s.teams[d]) && (I = _$$df(o, i), E = _$$Me(o)) : r && a && (I = GU(o, i, r, !!s.teams[r].student_team), E = qS(o, r));
     }
-    let k = l && !_$$n2(l) && !l.student_team && T && !Gi(T);
+    let k = l && !hasValidSubscription(l) && !l.student_team && T && !Gi(T);
     let R = k && T.is_invite_only;
     let A = k && T.is_view_only;
     let O = T && _$$sp(T);
-    let F = !O && !l && T && ZZ(T, s);
+    let F = !O && !l && T && hasFolderRestrictions(T, s);
     let P = () => i?.(_$$WX({
       teamId: l.id,
       selectedView: s.selectedView
@@ -13332,8 +13332,8 @@ function m9(e, t, r, i, n, l) {
         upsellSource: UpsellModalType.BANNER
       }
     }));
-    let B = _$$_b(l);
-    let U = l && l.subscription_raw !== FPaymentHealthStatusType.OK && WQ(l) && y && _$$ng2.getProTrialStatus(l) !== _$$a10.IN_TRIAL && B;
+    let B = isGracePeriodEndingSoon(l);
+    let U = l && l.subscription_raw !== FPaymentHealthStatusType.OK && isTeamInGracePeriod(l) && y && _$$ng2.getProTrialStatus(l) !== _$$a10.IN_TRIAL && B;
     let W = ['team', 'folder'].includes(e) && w && _$$cU(l);
     let $ = w && function (e, t) {
       let r = e && t[e.id]?.dismissed_legacy_team_upgrade_notice_banner;
@@ -13587,13 +13587,13 @@ function m9(e, t, r, i, n, l) {
       };
     } else if ($) {
       let e = getI18nString('payments.file_limit_unified', {
-        figmaFiles: _$$WW,
-        figjamFiles: _$$WW
+        figmaFiles: STANDARD_LIMIT,
+        figjamFiles: STANDARD_LIMIT
       });
       W ? $ || (e = getI18nString('payments.file_limit_figjam', {
-        figjamFiles: _$$WW
+        figjamFiles: STANDARD_LIMIT
       })) : e = getI18nString('payments.file_limit_figma', {
-        figmaFiles: _$$WW
+        figmaFiles: STANDARD_LIMIT
       });
       let t = () => jsx('button', {
         type: 'button',
@@ -14856,7 +14856,7 @@ function _B({
 function _W({
   planEntity: e
 }) {
-  return jsxs(_$$Y7, {
+  return jsxs(AutoLayout, {
     spacing: 4,
     children: [jsx(_$$H5, {
       entityId: e.id,
@@ -19395,7 +19395,7 @@ function hp({
   }));
   let o = (n || []).filter(e => e.name !== '').length;
   let l = I7('exp_fbg_project_limit_upsell');
-  if (!(!e.subscription && !e.org_id && s && o >= Wf) || l.getConfig().getValue('show_upsell', !1)) return null;
+  if (!(!e.subscription && !e.org_id && s && o >= PRIMARY_LIMIT) || l.getConfig().getValue('show_upsell', !1)) return null;
   let d = jsx(Us, {
     'onClick': () => {
       t(showModalHandler({
@@ -19421,8 +19421,8 @@ function hp({
       'children': jsxs('div', {
         className: U()(_$$s.flex.flexColumn.itemsCenter.lh24.$, 'starter_team_upsell_footer--contentWrapper--H-soB'),
         children: [jsx('strong', {
-          children: o === Wf ? renderI18nText('file_browser.starter_team.project_limit_warning', {
-            maxProjects: Wf
+          children: o === PRIMARY_LIMIT ? renderI18nText('file_browser.starter_team.project_limit_warning', {
+            maxProjects: PRIMARY_LIMIT
           }) : renderI18nText('file_browser.starter_team.project_limit_warning_over_max_projects')
         }), jsx('p', {
           className: _$$s.alignCenter.$,
@@ -20024,7 +20024,7 @@ function hM({
     })
   } : void 0;
   let q = e.pro_team;
-  let X = e.student_team ? jsx(h_, {}) : w5(e) ? void 0 : jsx(hp, {
+  let X = e.student_team ? jsx(h_, {}) : hasTeamPaidAccess(e) ? void 0 : jsx(hp, {
     team: e
   });
   return jsx(_$$r4, {
@@ -20149,7 +20149,7 @@ function hM({
       }, B, !!y && w || T),
       rightSideOfTitleAction: J,
       pageHeaderIcon: void 0,
-      badge: jsxs(_$$Y7, {
+      badge: jsxs(AutoLayout, {
         direction: 'horizontal',
         children: [O ? jsx('div', {
           'className': _$$s.ml4.mr4.$,
@@ -22417,7 +22417,7 @@ export function $$bo0() {
       team: e
     }) => {
       if (!e) return !1;
-      let t = !_$$a6(e) || _$$ng2.getProTrialStatusLG(e) === _$$a10.IN_TRIAL;
+      let t = !isTeamSubscribed(e) || _$$ng2.getProTrialStatusLG(e) === _$$a10.IN_TRIAL;
       return e.canAdmin || e.canEdit && t;
     }), [n]);
     useEffect(() => {

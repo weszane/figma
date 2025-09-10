@@ -4,7 +4,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { vh } from "../figma_app/99826";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { k } from "../905/22009";
 import { LJ } from "../figma_app/930386";
 import { $E } from "../figma_app/805898";
@@ -206,7 +206,7 @@ export function $$f0() {
     "data-testid": "community-footer",
     children: [jsx("div", {
       className: "footer--sectionsContainer--BR5as",
-      children: e.map(e => jsxs(Y, {
+      children: e.map(e => jsxs(AutoLayout, {
         direction: "vertical",
         padding: {
           right: 16
@@ -219,7 +219,7 @@ export function $$f0() {
           children: e.label
         }, e.url))]
       }, e.title))
-    }), jsxs(Y, {
+    }), jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 16,
       children: [jsx(t, {

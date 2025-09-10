@@ -16,7 +16,7 @@ import { Point } from "../905/736624";
 import { c2, Nt, yn, lv } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { vq } from "../905/8732";
 import { FU, b$, Bs } from "../figma_app/933328";
 import { T1 } from "../905/711212";
@@ -61,7 +61,7 @@ import { b as _$$b } from "../905/217163";
 import { E as _$$E } from "../905/511388";
 import { fd } from "../figma_app/255679";
 import { sZ } from "../905/845253";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { ol } from "../figma_app/598018";
 import { fO } from "../figma_app/329496";
 import { X as _$$X2 } from "../905/257331";
@@ -155,7 +155,7 @@ function e_({
 }) {
   let s = ol();
   let l = sZ();
-  let a = !!l || w5(s);
+  let a = !!l || hasTeamPaidAccess(s);
   let o = l?.id;
   let {
     fileContext,
@@ -852,7 +852,7 @@ export function $$tu1({
     className: _$$s.minW0.flex1.$,
     children: [jsx("h1", {
       children: getI18nString("design_systems.assets_panel.details")
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       spacing: 0,
       direction: "horizontal",
       children: [e && jsx(e_, {

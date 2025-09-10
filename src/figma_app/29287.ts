@@ -7,7 +7,7 @@ import { y8 } from "../figma_app/459490";
 import { u4 } from "../figma_app/991591";
 import { zE } from "../905/738636";
 import { s5 } from "../figma_app/223206";
-import { Kl } from "../905/766303";
+import { getPermissionsAndView } from "../905/766303";
 import { dh } from "../figma_app/186343";
 import { openFileKeyAtom, openFileAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
@@ -19,7 +19,7 @@ export function $$b3() {
   let e = useAtomWithSubscription(openFileKeyAtom);
   let t = useDispatch();
   let r = debugState.getState();
-  let l = Kl(r);
+  let l = getPermissionsAndView(r);
   let d = dh();
   let c = ol() ?? void 0;
   return useCallback(() => {
@@ -51,7 +51,7 @@ export function $$T0({
       figjamFileKey: r || i,
       pageGuids: t
     },
-    newFileState: Kl(l),
+    newFileState: getPermissionsAndView(l),
     dispatch: e,
     currentTeam: a,
     source: n,

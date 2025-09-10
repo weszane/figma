@@ -3,7 +3,7 @@ import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
 import { qB } from "../905/862321";
@@ -83,7 +83,7 @@ let $$W34 = createOptimistThunk((e, {
     if (e && e.meta) return $$$25(e.meta.redirect_target);
   }).catch(t => {
     console.error(t);
-    let i = J(t, getI18nString("auth.team_join_link.error_on_redeem"));
+    let i = resolveMessage(t, getI18nString("auth.team_join_link.error_on_redeem"));
     return e.dispatch(_$$s.error(i));
   });
 });

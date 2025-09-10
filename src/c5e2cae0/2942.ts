@@ -19,7 +19,7 @@ import { D } from "../905/347702";
 import { lX, nt } from "../9420/394825";
 import { selectCurrentUser } from "../905/372672";
 import { GH } from "../905/18797";
-import { BR, Ky, fD, Rq } from "../figma_app/345997";
+import { buildUserRecordsWithPlanStatus, countUsersWithPaidAccess, getAnnualValue, getMonthlyValue } from "../figma_app/345997";
 let $$b2 = D(({
   teamId: e,
   canSeeBillingAddressExp: t
@@ -72,7 +72,7 @@ let $$b2 = D(({
       A(!1);
     }
     if (void 0 === I || I === e || w || ($$E0(a), A(!0)), (!e || M) && w) {
-      let n = BR(x, b);
+      let n = buildUserRecordsWithPlanStatus(x, b);
       let d = Object.entries(n).map(([e, t]) => {
         if (nD(t.email || "")) return e;
       }).filter(e => !!e);
@@ -85,8 +85,8 @@ let $$b2 = D(({
       });
       if (o) {
         o.editorStatusChanges = nt(o.editorStatusChanges, n);
-        let l = Ky(n, o.editorStatusChanges, FFileType.DESIGN);
-        let c = Ky(n, o.editorStatusChanges, FFileType.WHITEBOARD);
+        let l = countUsersWithPaidAccess(n, o.editorStatusChanges, FFileType.DESIGN);
+        let c = countUsersWithPaidAccess(n, o.editorStatusChanges, FFileType.WHITEBOARD);
         let m = l + o.numEmptyDesignSeats;
         let _ = c + o.numEmptyWhiteboardSeats;
         if (O({
@@ -122,10 +122,10 @@ let $$b2 = D(({
             editor_status_changes: o.editorStatusChanges,
             figma_email_team_users: d,
             selected_currency: R.currency,
-            annual_quantity: fD(e, m),
-            monthly_quantity: Rq(e, m),
-            annual_whiteboard_quantity: fD(e, _),
-            monthly_whiteboard_quantity: Rq(e, _),
+            annual_quantity: getAnnualValue(e, m),
+            monthly_quantity: getMonthlyValue(e, m),
+            annual_whiteboard_quantity: getAnnualValue(e, _),
+            monthly_whiteboard_quantity: getMonthlyValue(e, _),
             vat_gst_id: R.vat_gst_id,
             regional_vat_gst_id: R.regional_vat_gst_id,
             ...i

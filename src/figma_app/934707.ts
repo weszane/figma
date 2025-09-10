@@ -7,7 +7,7 @@ import { _ as _$$_ } from "../905/170564";
 import { Q } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
 import { h as _$$h } from "../905/438683";
 import { UU } from "../figma_app/770088";
@@ -32,7 +32,7 @@ let f = (e, t, r, n) => {
 };
 let $$E0 = createOptimistThunk((e, t) => {
   let r = e.getState();
-  let n = d1(r);
+  let n = getSelectedFile(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
     let r = {
       text: getI18nString("comments.manage"),
@@ -60,7 +60,7 @@ let y = (e, t) => {
 };
 let $$b3 = createOptimistThunk((e, t) => {
   let r = e.getState();
-  let n = d1(r);
+  let n = getSelectedFile(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
     let r = y(t.fileKey, t.experimentName);
     let n = {
@@ -83,7 +83,7 @@ let $$b3 = createOptimistThunk((e, t) => {
 });
 let $$T2 = createOptimistThunk((e, t) => {
   let r = e.getState();
-  let n = d1(r);
+  let n = getSelectedFile(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
     let r = y(t.fileKey, t.experimentName);
     f(t.userId, t.fileKey, t.experimentName, t.toastType);
@@ -101,7 +101,7 @@ let $$T2 = createOptimistThunk((e, t) => {
 });
 let $$I4 = createOptimistThunk((e, t) => {
   let r = e.getState();
-  let n = d1(r);
+  let n = getSelectedFile(r);
   if (n && t.fileKey === n.key && r?.user?.id === t.userId) {
     let t = {
       text: getI18nString("comments.manage"),

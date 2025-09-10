@@ -1,7 +1,7 @@
 import { NC } from "../905/17179";
 import { logger } from "../905/651849";
 import { XHR } from "../905/910117";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { nM as _$$nM, pj as _$$pj, Hx as _$$Hx } from "../905/321397";
 import { createOptimistThunk } from "../905/350402";
 import { Qi } from "../figma_app/559491";
@@ -101,7 +101,7 @@ let G = (e, t, r, n, o, l, d) => {
       userFirstRanAt: t.meta.created_at
     }));
   }).catch(e => {
-    logger.error(J(e));
+    logger.error(resolveMessage(e));
   });
 };
 let $$V16 = (e, t) => r => {

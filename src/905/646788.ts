@@ -11,7 +11,7 @@ import { Ir, nk as _$$nk, m1 } from "../figma_app/2023";
 import { selectCurrentUser, selectUser } from "../905/372672";
 import { FPublicationStatusType, FFileType, FPlanNameType, FOrganizationLevelType, FTeamAccessPermissionType, FPermissionLevelType, FViewPermissionType, FResourceCategoryType, FContainerType, FTemplateCategoryType, FUserVerificationStatusType, FProductAccessType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
-import { w5, n0 as _$$n } from "../figma_app/345997";
+import { hasTeamPaidAccess, hasValidSubscription } from "../figma_app/345997";
 import { wH, fm, KI } from "../figma_app/680166";
 import { FEditorType, mapFileTypeToEditorType, isSlidesOrWhiteboardOrDesignOrIllustration, mapEditorTypeToFileType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { ShareAction } from "../figma_app/707808";
@@ -147,7 +147,7 @@ import { b as _$$b3 } from "../905/966382";
 import { U as _$$U } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { ks, nR as _$$nR, $$, tM as _$$tM, vd, s6, Ph as _$$Ph, qM } from "../figma_app/637027";
-import { Y as _$$Y2 } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E3 } from "../905/984674";
 import { lW } from "../figma_app/11182";
 import { Oi, QZ } from "../905/862913";
@@ -709,7 +709,7 @@ function eJ({
   let d = !!t.has_file_link_password;
   let c = getWorkshopModeStatus(l);
   let u = () => {
-    let i = e ? w5(e) : !!t.parent_org_id;
+    let i = e ? hasTeamPaidAccess(e) : !!t.parent_org_id;
     if (Cu({
       name: `Jam Session Button ${c.enabled ? "Stop" : "Start"}`,
       fileKey: l,
@@ -1462,7 +1462,7 @@ function is({
     let g = Hz({
       figFileKey: e.key
     });
-    let _ = !i && w5(t) && DU(e.editor_type ?? void 0);
+    let _ = !i && hasTeamPaidAccess(t) && DU(e.editor_type ?? void 0);
     let A = (() => {
       switch (e.editor_type) {
         case FFileType.SLIDES:
@@ -1721,7 +1721,7 @@ function is({
   let et = function (e) {
     let t = useDispatch();
     let i = cD();
-    return e.file.isDraftFileLG && e.file.canMove && (e.org || i && w5(e.team)) ? jsx(tf, {
+    return e.file.isDraftFileLG && e.file.canMove && (e.org || i && hasTeamPaidAccess(e.team)) ? jsx(tf, {
       onClick: () => {
         _$$h(e.file, e.repo, t);
         trackEventAnalytics("nudge_to_move_clicked", {
@@ -2044,7 +2044,7 @@ function iU({
   team: i
 }) {
   let n = "design" === e.editor_type;
-  let r = !!t || w5(i);
+  let r = !!t || hasTeamPaidAccess(i);
   return n && !r && !e.isDraftFileLG;
 }
 function iG({
@@ -2196,10 +2196,10 @@ function i7(e) {
           orgName: e.org?.name
         })
       })
-    }), jsxs(_$$Y2, {
+    }), jsxs(AutoLayout, {
       dataTestId: "custom-expiration",
       direction: m ? "vertical" : "horizontal",
-      children: [jsxs(_$$Y2, {
+      children: [jsxs(AutoLayout, {
         width: "fill-parent",
         horizontalAlignItems: "stretch",
         padding: e.isSharingClarity ? void 0 : {
@@ -2251,7 +2251,7 @@ function i7(e) {
         children: jsx("span", {
           children: e.errorMessage
         })
-      }), !e.isSharingClarity && jsxs(_$$Y2, {
+      }), !e.isSharingClarity && jsxs(AutoLayout, {
         horizontalAlignItems: "end",
         spacing: 8,
         width: m ? "fill-parent" : "hug-contents",
@@ -2303,11 +2303,11 @@ function i8(e) {
     });
     return t;
   }(e.orgMaxExpirationInHrs);
-  return jsxs(_$$Y2, {
+  return jsxs(AutoLayout, {
     dataTestId: "custom-expiration-org-24-hr",
     horizontalAlignItems: "start",
     direction: a ? "vertical" : "horizontal",
-    children: [jsx(_$$Y2, {
+    children: [jsx(AutoLayout, {
       width: "fill-parent",
       horizontalAlignItems: "stretch",
       padding: e.isSharingClarity ? void 0 : {
@@ -2327,7 +2327,7 @@ function i8(e) {
           value: t
         })
       })
-    }), !e.isSharingClarity && jsxs(_$$Y2, {
+    }), !e.isSharingClarity && jsxs(AutoLayout, {
       horizontalAlignItems: "end",
       spacing: 8,
       width: a ? "fill-parent" : "hug-contents",
@@ -2354,7 +2354,7 @@ function i9(e) {
   let i = e.orgMaxExpirationInHrs && e.orgMaxExpirationInHrs > 24 && e.settingCustomExpiration;
   return jsx("div", {
     className: i && !e.isSharingClarity ? _$$A3 : gY,
-    children: jsx(_$$Y2, {
+    children: jsx(AutoLayout, {
       direction: "vertical",
       children: t ? jsx(i8, {
         ...e,
@@ -2383,7 +2383,7 @@ function nt(e) {
   let m = !!(e.orgMaxExpirationInHrs && e.orgMaxExpirationInHrs <= 24);
   let h = !!(e.orgMaxExpirationInHrs && e.orgMaxExpirationInHrs <= 168);
   return jsx(Fragment, {
-    children: jsxs(_$$Y2, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       children: [jsxs(l6, {
         ariaLabel: getI18nString("permissions_modal.link_expirations_select.aria_label"),
@@ -2523,7 +2523,7 @@ function na({
   let x = t ? t.canEdit : e.hasEditRole;
   let S = !!(i && i.bigma_enabled);
   let w = isBranch(e);
-  let C = w5(o);
+  let C = hasTeamPaidAccess(o);
   let T = iU({
     file: e,
     org: i,
@@ -2953,7 +2953,7 @@ function ns(e) {
     }) : r && (t = e.workspace?.canView ? renderI18nText("file_permissions_modal.library_warning_banner.everyone_at_workspace", {
       workspaceName: e.workspace?.name
     }) : renderI18nText("file_permissions_modal.library_warning_banner.everyone_at_this_file_s_workspace"));
-    return jsxs(_$$Y2, {
+    return jsxs(AutoLayout, {
       padding: {
         left: 4,
         right: 8,
@@ -3063,7 +3063,7 @@ function nk({
 }) {
   return 0 === e.length ? null : jsxs("div", {
     className: "x78zum5 x1q0g3np x6s0dn4 x167g77z",
-    children: [jsx(_$$Y2, {
+    children: [jsx(AutoLayout, {
       verticalAlignItems: "center",
       spacing: "-4px",
       horizontalAlignItems: "start",
@@ -4125,7 +4125,7 @@ function rg({
         isCustomThumbnailSet: !!(t && t.thumbnailGuid)
       }), jsx("div", {
         className: "publish_tab--publishedTemplateSeparator--Xgc4F"
-      }), jsxs(_$$Y2, {
+      }), jsxs(AutoLayout, {
         direction: "horizontal",
         horizontalAlignItems: "space-between",
         children: [jsx("div", {
@@ -5181,7 +5181,7 @@ function ab({
     return e.isAbandonedDraftFile ? t ? {
       planName: t.name,
       planType: _$$O2.ORG
-    } : i && _$$n(i) ? {
+    } : i && hasValidSubscription(i) ? {
       planName: i.name,
       planType: _$$O2.TEAM
     } : null : null;
@@ -6284,7 +6284,7 @@ function su({
     }) {
       if (0 === e.length) return AccessLevelEnum.NONE;
       if (1 === e.length) return e[0];
-      let a = r ? AccessLevelEnum.VIEWER : "whiteboard" === t.editor_type ? AccessLevelEnum.EDITOR : t.team_id && w5(i) ? AccessLevelEnum.VIEWER : n ? AccessLevelEnum.EDITOR : AccessLevelEnum.VIEWER;
+      let a = r ? AccessLevelEnum.VIEWER : "whiteboard" === t.editor_type ? AccessLevelEnum.EDITOR : t.team_id && hasTeamPaidAccess(i) ? AccessLevelEnum.VIEWER : n ? AccessLevelEnum.EDITOR : AccessLevelEnum.VIEWER;
       return e.includes(a) ? a : e[0];
     }({
       inviteLevelOptions: p,
@@ -6468,7 +6468,7 @@ function sp({
       fileTeamId: file.team_id,
       productType: mapEditorTypeToStringWithObfuscated(editorType),
       modalSource: o,
-      canUserAccessProFeature: w5(team)
+      canUserAccessProFeature: hasTeamPaidAccess(team)
     },
     children: jsx(sc, {
       file,

@@ -22,7 +22,7 @@ import { fu, $z } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { TN } from "../figma_app/211146";
 import { TeamById } from "../figma_app/43951";
-import { w5, oc } from "../figma_app/345997";
+import { hasTeamPaidAccess, isTeamLocked } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { UpsellModalType } from "../905/165519";
 import { AccessLevelEnum } from "../905/557142";
@@ -74,7 +74,7 @@ function R(e) {
   let _ = useSelector(e => e.teams)[e.teamId];
   let u = useSelector(e => getPermissionsStateMemoized(e));
   let p = useShadowRead({
-    oldValue: w5(_),
+    oldValue: hasTeamPaidAccess(_),
     newValue: e.planTier === FPlanNameType.PRO || e.planTier === FPlanNameType.STUDENT,
     label: adminPermissionConfig.PlanSwitcherTeamBadges.isProOrStudentTeam,
     enableFullRead: DQ(Pw.GROUP_7)
@@ -122,7 +122,7 @@ function R(e) {
       text: getI18nString("navbar.navbar.edu"),
       className: _$$s.ml4.mr0.noWrap.flex.$
     });
-  } else if (oc(_.id, u)) {
+  } else if (isTeamLocked(_.id, u)) {
     if (_.student_team_at) return null;
     let t = ng.canSeeProTrialExpiryUx(P);
     let s = (e, t = !1) => jsx(Ex, {

@@ -15,7 +15,7 @@ import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import v, { Y } from "../905/830372";
+import v, { AutoLayout } from "../905/470281";
 import { fu } from "../figma_app/831799";
 import { K } from "../905/135526";
 import { iA, Hj } from "../905/682977";
@@ -486,7 +486,7 @@ function L({
   areDropdownsDisabled: i,
   itemMetadata: r
 }) {
-  return t && r ? jsx(Y, {
+  return t && r ? jsx(AutoLayout, {
     width: "hug-contents",
     padding: {
       right: 8
@@ -498,7 +498,7 @@ function L({
       "data-testid": "multi-select-list-right-action-column",
       children: e.cellComponent(t, r)
     }, e.name))
-  }) : jsx(Y, {
+  }) : jsx(AutoLayout, {
     width: "hug-contents",
     padding: {
       right: 8
@@ -959,7 +959,7 @@ function V({
   areDropdownsDisabled: i,
   itemMetadata: r
 }) {
-  return t && r ? jsx(Y, {
+  return t && r ? jsx(AutoLayout, {
     width: "hug-contents",
     padding: {
       right: 8
@@ -971,7 +971,7 @@ function V({
       "data-testid": "multi-select-list-right-action-column",
       children: e.cellComponent(t, r)
     }, e.name))
-  }) : jsx(Y, {
+  }) : jsx(AutoLayout, {
     width: "hug-contents",
     padding: {
       right: 8

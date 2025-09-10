@@ -4,7 +4,7 @@ import { $ } from "../905/383708";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { FU } from "../figma_app/933328";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
 import { $$ } from "../figma_app/62612";
 import { HK } from "../figma_app/646357";
@@ -48,7 +48,7 @@ let $$f0 = createOptimistThunk(async (e, t) => {
     canvasY
   } = t;
   let m = e.getState();
-  let g = d1(m);
+  let g = getSelectedFile(m);
   let f = null;
   if (g && g.key === fileKey) f = m.library.local.components[nodeId] ?? null;else {
     m.fileByKey[fileKey] || (await e.dispatch(_$$n({

@@ -14,7 +14,7 @@ import { b as _$$b } from "../figma_app/246400";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { B as _$$B } from "../905/261906";
 import { JT, tI } from "../figma_app/847597";
@@ -42,7 +42,7 @@ export function $$M1({
   canSetCurrentSeatType: o,
   tier: l
 }) {
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 16,
     children: [Ye.sort(AG).map(s => jsx(j, {
@@ -113,7 +113,7 @@ function U({
   let c = e === ViewAccessTypeEnum.VIEW ? renderI18nText("checkout.free") : renderI18nText("general.price_per_month", {
     priceString: G(d)
   });
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     verticalAlignItems: "start",
     padding: 16,
@@ -235,7 +235,7 @@ export function $$V0({
       planId: f.key.parentId ?? void 0,
       planKey: f.id ?? void 0
     });
-  }, [p, f]), t !== ViewAccessTypeEnum.VIEW && isNullish(R) || i !== ViewAccessTypeEnum.VIEW && isNullish(N)) ? null : jsxs(Y, {
+  }, [p, f]), t !== ViewAccessTypeEnum.VIEW && isNullish(R) || i !== ViewAccessTypeEnum.VIEW && isNullish(N)) ? null : jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 8,
     children: [jsxs("div", {

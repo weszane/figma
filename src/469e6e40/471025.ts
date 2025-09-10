@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { useState } from "react";
 import { fP, mc, i3 } from "../905/691059";
 import { E as _$$E } from "../905/632989";
@@ -115,7 +115,7 @@ function S(e) {
     style: sx.py8.px12.fpl__textBodyMediumFontWeight.add({
       minWidth: "185px"
     }).$,
-    children: jsxs(Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 0,
       children: [jsx(_$$E2, {
@@ -185,7 +185,7 @@ function I({
       children: `${s}: ${a.toLocaleString()}`
     }), jsx("span", {
       "aria-hidden": !0,
-      children: jsxs(Y, {
+      children: jsxs(AutoLayout, {
         direction: "horizontal",
         spacing: 4,
         children: [jsx(t, {
@@ -233,7 +233,7 @@ function M(e) {
   if (e.seatCountsByBillingInterval?.status === "loading" || "loading" === e.seatCounts.status) return jsx(kt, {});
   if (e.seatCountsByBillingInterval?.status === "loaded" && "loaded" === e.seatCounts.status) {
     let a = II(e.seatCountsByBillingInterval.data, e.seatCounts.data);
-    return jsx(Y, {
+    return jsx(AutoLayout, {
       direction: "horizontal",
       spacing: 16,
       children: Ye.map(s => jsx(C, {
@@ -254,7 +254,7 @@ function M(e) {
     children: renderI18nText("shared_fonts.upload_error_modal.error")
   });
   let a = e.seatCounts.data;
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     direction: "horizontal",
     spacing: 16,
     children: Ye.map(s => jsx(C, {

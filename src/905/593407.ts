@@ -25,7 +25,7 @@ import { _ as _$$_ } from "../figma_app/496441";
 import { g as _$$g } from "../905/687265";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { V } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { c as _$$c } from "../905/370443";
@@ -50,7 +50,7 @@ function L({
   let r = hS({
     preventUserClose: !0,
     open: !0,
-    onClose: () => { }
+    onClose: () => {}
   });
   let a = useCallback(() => {
     if (!t) {
@@ -86,7 +86,7 @@ function L({
             children: renderI18nText("tos_agreement.tos_link_text")
           })
         })
-      }), jsx(Y, {
+      }), jsx(AutoLayout, {
         direction: "horizontal",
         horizontalAlignItems: "end",
         verticalAlignItems: "center",

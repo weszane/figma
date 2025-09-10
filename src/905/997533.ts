@@ -17,7 +17,7 @@ import { g as _$$g } from "../905/248178";
 import { p as _$$p } from "../905/300815";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
 import { e0 } from "../905/696396";
 import { createNoOpValidator } from "../figma_app/181241";
@@ -66,7 +66,7 @@ let $$k5 = createOptimistThunk((e, {
       return;
     }
   }
-  let s = J(t, a?.message || getI18nString("auth.default-error"));
+  let s = resolveMessage(t, a?.message || getI18nString("auth.default-error"));
   if (a?.reason === "account_unverified") {
     e.dispatch(_$$E({
       formState: qB.VALIDATE_EMAIL

@@ -9,7 +9,7 @@ import { useSubscription } from "../figma_app/288654";
 import { h1 } from "../905/986103";
 import { y2 } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { p as _$$p } from "../905/597320";
 import { b as _$$b } from "../905/168239";
 import { K } from "../905/628118";
@@ -199,7 +199,7 @@ export function $$U0(e) {
         getSortValue: e => (e.abandonedDraftUserRemovedAt || e.createdAt).toDateString()
       }],
       emptyContent: jsx(_$$p, {
-        children: jsx(Y, {
+        children: jsx(AutoLayout, {
           direction: "vertical",
           horizontalAlignItems: "center",
           verticalAlignItems: "center",
@@ -236,7 +236,7 @@ export function $$U0(e) {
       selectAllDisabled: !0,
       sortState: a,
       stickyContent: jsxs("div", {
-        children: [jsx(Y, {
+        children: [jsx(AutoLayout, {
           strokeColor: "default",
           strokeWidth: {
             top: 1,
@@ -259,7 +259,7 @@ export function $$U0(e) {
           });
           let a = e.planType === _$$O2.ORG ? renderI18nText("abandoned_drafts_table.banner_message") : renderI18nText("abandoned_drafts_table.banner_message_teams");
           let s = getFeatureFlags().delete_empty_abandoned_draft_folders ? renderI18nText("abandoned_drafts_table.banner_message_on_cleanup") : null;
-          return jsx(Y, {
+          return jsx(AutoLayout, {
             padding: {
               top: 8
             },

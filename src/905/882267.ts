@@ -26,7 +26,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { S as _$$S2 } from "../figma_app/552746";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { XE, u1 } from "../figma_app/91703";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B2 } from "../905/330741";
@@ -46,7 +46,7 @@ import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { TeamCanAdmin } from "../figma_app/43951";
 import { Rk, gg } from "../905/981217";
-import { n0 } from "../figma_app/345997";
+import { hasValidSubscription } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -460,7 +460,7 @@ function eL({
           team: t,
           resource: Bi.SHARED_FONTS,
           editorType: FFileType.DESIGN,
-          currentPlan: n0(convertTeamToRaw(t)) ? _$$F.Plan.PRO : _$$F.Plan.STARTER,
+          currentPlan: hasValidSubscription(convertTeamToRaw(t)) ? _$$F.Plan.PRO : _$$F.Plan.STARTER,
           upsellPlan: _$$F.Plan.ORG,
           upsellSource: UpsellModalType.FONT_PICKER_UPSELL,
           hideUpsellPlanCta: !r,
@@ -848,7 +848,7 @@ function eG({
     onClick: i,
     children: getI18nString("fullscreen.properties_panel.font_picker.org_upsell.cta")
   });
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     horizontalAlignItems: "center",
     padding: {
@@ -869,7 +869,7 @@ function eG({
 function ez({
   onClick: e
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 24,
     padding: {
@@ -877,7 +877,7 @@ function ez({
     },
     children: [jsx("div", {
       className: _$$s.wFull.h2.colorBgTertiary.$
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       spacing: 8,
       verticalAlignItems: "center",
       children: [jsx(_$$B, {
@@ -885,7 +885,7 @@ function ez({
         svg: _$$A6
       }), jsx("div", {
         children: renderI18nText("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.text")
-      }), jsx(_$$M, {}), jsx($z, {
+      }), jsx(Spacer, {}), jsx($z, {
         variant: "primary",
         onClick: e,
         children: renderI18nText("fullscreen.properties_panel.font_picker.org_consumption_modal.non_admin.cta")

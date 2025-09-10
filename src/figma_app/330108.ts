@@ -6,7 +6,7 @@ import { NC } from "../905/17179";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
 import { yJ } from "../figma_app/240735";
 import { UM, vr } from "../figma_app/475472";
@@ -26,7 +26,7 @@ createOptimistThunk(async (e, t) => {
       teams: [n]
     }));
   } catch (t) {
-    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_changing_team_s_org_access"))));
+    e.dispatch(_$$s.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_changing_team_s_org_access"))));
   }
 });
 let $$T7 = createOptimistThunk(async (e, t) => {
@@ -50,7 +50,7 @@ let $$T7 = createOptimistThunk(async (e, t) => {
       numTeams: i.length
     })));
   } catch (t) {
-    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_unassigning_team_s_from_a_workspace"))));
+    e.dispatch(_$$s.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_unassigning_team_s_from_a_workspace"))));
   }
 });
 let $$I10 = createOptimistThunk(async (e, t) => {
@@ -68,7 +68,7 @@ let $$I10 = createOptimistThunk(async (e, t) => {
       workspaceName: t.workspaceName
     })));
   } catch (t) {
-    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_assigning_team_s_to_a_workspace"))));
+    e.dispatch(_$$s.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_assigning_team_s_to_a_workspace"))));
   }
 });
 createOptimistThunk(async (e, t) => {
@@ -84,7 +84,7 @@ createOptimistThunk(async (e, t) => {
     }));
     e.dispatch($$C4("loaded"));
   } catch (t) {
-    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_fetching_teams"))));
+    e.dispatch(_$$s.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_fetching_teams"))));
     e.dispatch($$C4("errors"));
   }
 });
@@ -105,7 +105,7 @@ let $$S6 = createOptimistThunk((e, t) => {
       level: t.level
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_joining_teams"))));
+    e.dispatch(_$$s.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_joining_teams"))));
     e.dispatch(of({
       key: a
     }));
@@ -128,7 +128,7 @@ let v = createOptimistThunk((e, t) => {
       level: t.level
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_joining"))));
+    e.dispatch(_$$s.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_joining"))));
     e.dispatch(of({
       key: a
     }));
@@ -154,7 +154,7 @@ let $$A2 = createOptimistThunk((e, t, {
       userInitiated: !1
     }));
   }).catch(t => {
-    disableFlashError || e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_trying_to_fetch_this_team"))));
+    disableFlashError || e.dispatch(_$$s.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_trying_to_fetch_this_team"))));
   });
 }, ({
   teamId: e
@@ -180,7 +180,7 @@ let $$N3 = createOptimistThunk((e, t) => {
       teams: r
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(J(t, getI18nString("org_team_actions.an_error_occurred_while_trying_to_fetch_teams_within_the_organization"))));
+    e.dispatch(_$$s.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_trying_to_fetch_teams_within_the_organization"))));
   });
   e.dispatch($$x0(t));
 });

@@ -181,7 +181,7 @@ import { Z as _$$Z } from '../905/757420';
 import { d as _$$d2, X as _$$X2 } from '../905/758967';
 import { isBranchAlt } from '../905/760074';
 import { getValueAtIndex, hasKey } from '../905/764747';
-import { d1 } from '../905/766303';
+import { getSelectedFile } from '../905/766303';
 import { M as _$$M2 } from '../905/771870';
 import { b as _$$b2, eM as _$$eM, gg, LQ, M9, Nz, PE, yF } from '../905/777093';
 import { O4 } from '../905/777187';
@@ -316,7 +316,7 @@ import { wA as _$$wA } from '../figma_app/336853';
 import { n as _$$n2 } from '../figma_app/339971';
 import { Kx } from '../figma_app/342355';
 import { xQ } from '../figma_app/345195';
-import { w5 } from '../figma_app/345997';
+import { hasTeamPaidAccess } from '../figma_app/345997';
 import { Qy, v$ } from '../figma_app/347120';
 import { ln as _$$ln, BG } from '../figma_app/349969';
 import { KE as _$$KE } from '../figma_app/351862';
@@ -5735,7 +5735,7 @@ let lX = class e extends sP(sN(sR)) {
     return this._store.getState();
   }
   isInDrafts() {
-    let e = d1(this._state);
+    let e = getSelectedFile(this._state);
     return !!(e?.folder_id && _$$D2(this._state.folders, e.folder_id));
   }
   showUI() {
@@ -6574,7 +6574,7 @@ let lX = class e extends sP(sN(sR)) {
     let r = e.symbolToStateGroup;
     let a = e.movableStyles;
     let s = Object.keys(a).length;
-    !(!(s || Object.keys(i).length || Object.keys(n).length) || !t || isBranchAlt(t)) && (s || w5(t.teamId ? this._state.teams[t.teamId] : void 0)) && (this.dispatch(_$$Q.dequeue({
+    !(!(s || Object.keys(i).length || Object.keys(n).length) || !t || isBranchAlt(t)) && (s || hasTeamPaidAccess(t.teamId ? this._state.teams[t.teamId] : void 0)) && (this.dispatch(_$$Q.dequeue({
       type: _$$_.MOVE_COMPONENTS_PROMPT
     })), XHR.post('/api/design_systems/move_validity', {
       style_moves: a,
@@ -7404,7 +7404,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   forcePublishStateGroup(e) {
     let t = this._state.openFile;
-    this._state.user != null && t != null && t.canEdit && w5(t.teamId ? this._state.teams[t.teamId] : void 0) && this.dispatch(ZS({
+    this._state.user != null && t != null && t.canEdit && hasTeamPaidAccess(t.teamId ? this._state.teams[t.teamId] : void 0) && this.dispatch(ZS({
       itemsToPublish: new Set(e),
       forcePublish: !0
     }));
@@ -7421,7 +7421,7 @@ let lX = class e extends sP(sN(sR)) {
     };
     let i = this._state.openFile?.teamId;
     let n = i ? this._state.teams[i] : void 0;
-    this.isInDrafts() || !w5(n) ? this.dispatch(showModalHandler({
+    this.isInDrafts() || !hasTeamPaidAccess(n) ? this.dispatch(showModalHandler({
       type: $3,
       data: {
         team: n || null,

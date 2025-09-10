@@ -12,7 +12,7 @@ import { oA } from "../905/723791";
 import { i0 } from "../905/17223";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { $z } from "../905/599896";
 import { I as _$$I } from "../905/343721";
 import { A as _$$A2 } from "../905/658244";
@@ -21,7 +21,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { E9 } from "../figma_app/297957";
 import { L0, fu } from "../figma_app/831799";
 import { ChurnFrictionPersonalizedModalView } from "../figma_app/43951";
-import { WW, Wf } from "../figma_app/345997";
+import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { e0 } from "../905/696396";
 import { W as _$$W } from "../905/244810";
 import { d_ } from "../figma_app/918700";
@@ -278,7 +278,7 @@ function V({
   title: t,
   subtitle: i
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     horizontalAlignItems: "center",
     cornerRadius: 8,
@@ -306,13 +306,13 @@ function G({
   onSubtitleClick: i,
   graphic: r
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     horizontalAlignItems: "start",
     spacing: 8,
     cornerRadius: 8,
     strokeColor: "default",
     strokeWidth: 1,
-    children: [r, jsxs(_$$Y, {
+    children: [r, jsxs(AutoLayout, {
       direction: "vertical",
       verticalAlignItems: "center",
       spacing: 0,
@@ -347,10 +347,10 @@ export let $$z0 = registerModal(function ({
   let O = t.data?.team?.teamFileCounts?.designFileCount ?? 0;
   let z = oA(t.data?.team?.teamFileCounts?.totalFileCount) ?? 0;
   let H = i ? {
-    show: z > WW,
+    show: z > STANDARD_LIMIT,
     count: z
   } : {
-    show: O > WW,
+    show: O > STANDARD_LIMIT,
     count: O
   };
   let W = t.data?.team?.projectsCount ?? 0;
@@ -369,7 +369,7 @@ export let $$z0 = registerModal(function ({
     }),
     subtitle: getI18nString("churn_friction.modal.design_file_subtitle")
   }, "files-stat-box"));
-  W > Wf && q.push(jsx(V, {
+  W > PRIMARY_LIMIT && q.push(jsx(V, {
     image: jsx(_$$e, {}),
     title: getI18nString("churn_friction.modal.project_count", {
       projectCount: W
@@ -396,7 +396,7 @@ export let $$z0 = registerModal(function ({
   }, "editors-stat-box"));
   let $ = q.length < 2 || I;
   let Z = B() ? [L, U, M, j] : [L, F, M, j];
-  let X = jsxs(_$$Y, {
+  let X = jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 16,
     children: [jsx("p", {
@@ -414,7 +414,7 @@ export let $$z0 = registerModal(function ({
     }, t))]
   });
   let Q = jsxs(Fragment, {
-    children: [jsxs(_$$Y, {
+    children: [jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 16,
       children: [jsx("p", {
@@ -422,13 +422,13 @@ export let $$z0 = registerModal(function ({
         children: B() && y ? renderI18nText("churn_friction.modal.view_only_on_date", {
           date: y
         }) : renderI18nText("churn_friction.modal.converted_to_view_only")
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         spacing: 16,
         verticalAlignItems: "stretch",
         height: "fill-parent",
         children: q
       })]
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 16,
       children: [jsx("p", {
@@ -456,10 +456,10 @@ export let $$z0 = registerModal(function ({
       }), jsx("p", {
         className: _$$s.font20.colorText.fontSemiBold.lh32.$,
         children: renderI18nText("churn_friction.modal.title")
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 24,
-        children: [$ ? X : Q, jsxs(_$$Y, {
+        children: [$ ? X : Q, jsxs(AutoLayout, {
           horizontalAlignItems: "end",
           padding: {
             top: 24
@@ -475,7 +475,7 @@ export let $$z0 = registerModal(function ({
             children: jsx(_$$I, {
               icon: "navigate-back-32"
             })
-          }), jsx(_$$M, {}), jsx("button", {
+          }), jsx(Spacer, {}), jsx("button", {
             className: _$$s.mx12.my8.underline.cursorPointer.fontMedium.lh16.$,
             onClick: P,
             children: renderI18nText("churn_friction.modal.cta.keep_plan")

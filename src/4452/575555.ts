@@ -41,7 +41,7 @@ import { oA as _$$oA } from '../905/723791';
 import { yN } from '../905/727738';
 import { Qq } from '../905/736956';
 import { p as _$$p } from '../905/763242';
-import { Y as _$$Y2 } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { $ as _$$$ } from '../905/834575';
 import { P as _$$P } from '../905/842406';
 import { Um } from '../905/848862';
@@ -72,7 +72,7 @@ import { J as _$$J } from '../figma_app/179602';
 import { FAccessLevelType, FMemberRoleType, FOrganizationLevelType, FPermissionLevelType, FPlanNameType, FResourceCategoryType, FUserTypeClassification } from '../figma_app/191312';
 import { c$, MM, ms, wv } from '../figma_app/236327';
 import { useSubscription } from '../figma_app/288654';
-import { n0 } from '../figma_app/345997';
+import { hasValidSubscription } from '../figma_app/345997';
 import { useLatencyLogger, useShadowRead } from '../figma_app/391338';
 import { Lg, Lq } from '../figma_app/392626';
 import { checkOrgUserPermission, isOrgOrEnterprisePlan } from '../figma_app/465071';
@@ -640,7 +640,7 @@ function eI(e) {
 }
 function eN(e) {
   let t = useSelector(e => e.roles || {});
-  return n0(e.team) && e.canAdmin ? jsx('div', {
+  return hasValidSubscription(e.team) && e.canAdmin ? jsx('div', {
     className: _$$s.font12.lh16.pt8.pr32.pb16.pl4.colorText.$,
     children: renderI18nText('file_browser.team_settings_modal.paid_status_explanation_no_link')
   }) : jsx('div', {
@@ -699,17 +699,17 @@ let tr = registerModal(() => {
     }
   };
   let g = null;
-  u ? o && (g = jsx(_$$Y2, {
+  u ? o && (g = jsx(AutoLayout, {
     children: jsx(_$$p2, {
       onEnable: () => m(!0),
       planId: t,
       planType: FOrganizationLevelType.TEAM,
       testId: tn.aiEnabledButton
     })
-  })) : g = jsxs(_$$Y2, {
+  })) : g = jsxs(AutoLayout, {
     horizontalAlignItems: 'space-between',
     verticalAlignItems: 'start',
-    children: [jsxs(_$$Y2, {
+    children: [jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 4,
       children: [jsx(_$$E, {
@@ -738,7 +738,7 @@ let tr = registerModal(() => {
     })]
   });
   return jsx(OJ, {
-    title: jsxs(_$$Y2, {
+    title: jsxs(AutoLayout, {
       width: 'hug-contents',
       padding: {
         left: 8
@@ -755,12 +755,12 @@ let tr = registerModal(() => {
       e(popModalStack());
     },
     fixedTop: !0,
-    children: i ? jsx(_$$Y2, {
+    children: i ? jsx(AutoLayout, {
       padding: 64,
       children: jsx(qc, {
         testId: tn.spinner
       })
-    }) : jsxs(_$$Y2, {
+    }) : jsxs(AutoLayout, {
       direction: 'vertical',
       padding: {
         top: 20,
@@ -769,10 +769,10 @@ let tr = registerModal(() => {
         bottom: 16
       },
       spacing: 16,
-      children: [g, jsxs(_$$Y2, {
+      children: [g, jsxs(AutoLayout, {
         horizontalAlignItems: 'space-between',
         verticalAlignItems: 'start',
-        children: [jsxs(_$$Y2, {
+        children: [jsxs(AutoLayout, {
           direction: 'vertical',
           spacing: 4,
           children: [jsx(_$$E, {

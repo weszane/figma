@@ -6,7 +6,7 @@ import { j as _$$j } from "../905/206476";
 import { P } from "../905/697522";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { V } from "../905/355181";
 import { S as _$$S } from "../905/339549";
 import { E as _$$E } from "../905/984674";
@@ -42,10 +42,10 @@ function N(e) {
       disableHeaderBottomBorder: !0,
       onClose: l,
       maxWidth: 380,
-      children: [jsxs(Y, {
+      children: [jsxs(AutoLayout, {
         direction: "vertical",
         horizontalAlignItems: "stretch",
-        children: [e.invoiceDetails, jsx(Y, {
+        children: [e.invoiceDetails, jsx(AutoLayout, {
           padding: {
             bottom: I
           },
@@ -55,7 +55,7 @@ function N(e) {
             onChange: () => r(!a)
           })
         })]
-      }), jsxs(Y, {
+      }), jsxs(AutoLayout, {
         direction: "horizontal",
         horizontalAlignItems: "end",
         children: [jsx(V, {
@@ -76,12 +76,12 @@ let I = 16;
 function T({
   invoiceType: e
 }) {
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     direction: "horizontal",
     padding: {
       bottom: I
     },
-    children: jsxs(Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 0,
       children: [jsx(_$$E, {

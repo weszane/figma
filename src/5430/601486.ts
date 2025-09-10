@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { a as _$$a } from "../905/925868";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { T } from "../5132/203178";
 import { Gm } from "../5430/873109";
 import { X } from "../5430/512075";
@@ -12,7 +12,7 @@ export function $$u0({
 }) {
   let [r, c] = useState(!1);
   let u = T();
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     width: "100%",
     direction: "vertical",
     height: "hug-contents",

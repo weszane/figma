@@ -27,7 +27,7 @@ import { s as _$$s2 } from "../cssbuilder/589278";
 import { s as _$$s3 } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E2 } from "../905/984674";
 import { JT, Qi, mb } from "../figma_app/599327";
 import { R as _$$R } from "../905/304671";
@@ -61,7 +61,7 @@ import { mm, a3 } from "../figma_app/684446";
 import { MemberFlyoutInfoView } from "../figma_app/43951";
 import { k_, XO, PR, w6 } from "../figma_app/609194";
 import { QS, bC, Ad } from "../figma_app/951233";
-import { n0 } from "../figma_app/345997";
+import { hasValidSubscription } from "../figma_app/345997";
 import { getOrgLevelData } from "../figma_app/428858";
 import { k_ as _$$k_ } from "../1881/866163";
 import { L7 } from "../figma_app/329496";
@@ -211,7 +211,7 @@ function eN() {
   return jsx("div", {
     className: _$$s2.flex.flexColumn.mx24.py24.$,
     "data-testid": "member-flyout-skeleton",
-    children: jsx(_$$Y, {
+    children: jsx(AutoLayout, {
       direction: "vertical",
       horizontalAlignItems: "stretch",
       spacing: 24,
@@ -497,10 +497,10 @@ function eq(e) {
     }) : getI18nString("members_table.role_idp_tooltip.seat_rename"),
     "data-tooltip-type": Ib.TEXT
   } : null;
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     spacing: 8,
     direction: "vertical",
-    children: [jsxs(_$$Y, {
+    children: [jsxs(AutoLayout, {
       spacing: 8,
       direction: "horizontal",
       children: [jsx("div", {
@@ -770,7 +770,7 @@ function eV(e) {
   return jsx("div", {
     "data-testid": "migrated-user-upgrade-info",
     className: "x1o7y6m2",
-    children: jsx(_$$Y, {
+    children: jsx(AutoLayout, {
       direction: "vertical",
       spacing: 8,
       children: t.map(e => jsx(_$$Fragment, {
@@ -1018,7 +1018,7 @@ function eZ(e) {
     });
   }, [l]);
   l = e.planType === FOrganizationLevelType.TEAM && !e.member.team_role?.pending && !e.member.team_user;
-  let o = e.planType === FOrganizationLevelType.TEAM && n0(e.team) || XO(t);
+  let o = e.planType === FOrganizationLevelType.TEAM && hasValidSubscription(e.team) || XO(t);
   let d = _$$v(a?.summary);
   let c = e.planType === FOrganizationLevelType.TEAM && r(d);
   let _ = !l;
@@ -1026,7 +1026,7 @@ function eZ(e) {
   let m = e.planType === FOrganizationLevelType.ORG && e.workspacesCanMoveTo.length > 0 && w6(t);
   return jsxs("div", {
     className: _$$s2.flex.flexColumn.$,
-    children: [jsxs(_$$Y, {
+    children: [jsxs(AutoLayout, {
       direction: "vertical",
       horizontalAlignItems: "stretch",
       spacing: 24,

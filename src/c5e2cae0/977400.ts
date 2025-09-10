@@ -15,7 +15,7 @@ import { fu } from "../figma_app/831799";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
 import { LN } from "../figma_app/514043";
-import { PS } from "../figma_app/345997";
+import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
 import { UpgradeSteps } from "../figma_app/831101";
 import { UpgradeAction, TeamType } from "../figma_app/707808";
 import { ey } from "../figma_app/918700";
@@ -177,14 +177,14 @@ export function $$z0(e) {
     I();
   };
   let P = () => {
-    0 === PS(C).length ? (N(Dw({
+    0 === getEditableTeamsWithoutPaidAccess(C).length ? (N(Dw({
       openInNewTab: !desktopAPIInstance
     })), a("createTeam")) : a("selectTeam");
   };
   return (_$$h(() => {
     e.plan === _$$I2.PRO && P();
   }), "selectTeam" === t) ? (() => {
-    let t = PS(C);
+    let t = getEditableTeamsWithoutPaidAccess(C);
     return jsx(fu, {
       name: "Upgrade Select Team Modal",
       children: jsxs(ey, {

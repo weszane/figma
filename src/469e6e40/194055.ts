@@ -9,7 +9,7 @@ import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { $ as _$$$ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { XB } from "../figma_app/481749";
@@ -1496,7 +1496,7 @@ export function $$eV0({
               mode: m,
               securityFormResponse: S.data
             })
-          }), jsx(_$$Y, {
+          }), jsx(AutoLayout, {
             direction: "horizontal",
             width: 240,
             children: jsx(em, {

@@ -76,7 +76,7 @@ import { P as _$$P } from '../905/697522';
 import { IX } from '../905/712921';
 import { oA as _$$oA } from '../905/723791';
 import { u as _$$u } from '../905/774364';
-import { M as _$$M, Y as _$$Y } from '../905/830372';
+import { Spacer, AutoLayout } from '../905/470281';
 import { O as _$$O3 } from '../905/833838';
 import { EY } from '../905/838445';
 import { sZ } from '../905/845253';
@@ -305,7 +305,7 @@ function ti(e) {
       'data-testid': `figjam-file-icon-${e.orgUser.id}`
     })
   }, `figjam-file-icon-${e.orgUser.id}`));
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     spacing: 4,
     children: t
   });
@@ -552,7 +552,7 @@ function tb({
   let m = new Set(u);
   let p = u;
   if (i && r === null) {
-    return jsx(_$$Y, {
+    return jsx(AutoLayout, {
       children: jsx(Wi, {
         className: _$$s3.h12.w150.$,
         animationType: JR.SHIMMER,
@@ -562,7 +562,7 @@ function tb({
   }
   let g = !1;
   if (i && r !== null && (g = t || a), g && s) {
-    return jsx(_$$Y, {
+    return jsx(AutoLayout, {
       children: jsx(Wi, {
         className: _$$s3.h12.w150.$,
         animationType: JR.SHIMMER,
@@ -613,7 +613,7 @@ function tb({
     });
     c = h(e[0], e[1]);
   }
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     spacing: 8,
     children: [c, jsx(_$$E, {
       children: d
@@ -692,7 +692,7 @@ function tv({
     return null;
   }
   if (!j && eA()(C, o) && V.length === 0 && !q) {
-    return jsxs(_$$Y, {
+    return jsxs(AutoLayout, {
       direction: 'vertical',
       horizontalAlignItems: 'center',
       verticalAlignItems: 'center',
@@ -830,7 +830,7 @@ function tv({
           }));
         };
         return jsx('div', {
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             padding: 16,
             children: [jsx(tb, {
               selectedItems: a,
@@ -841,7 +841,7 @@ function tv({
               totalSelectableOrgUsers: totalSelectable,
               rowItems: V,
               selectableOrgUsers: users
-            }), jsx(_$$M, {}), jsx(_$$$, {
+            }), jsx(Spacer, {}), jsx(_$$$, {
               variant: 'primary',
               disabled: !a.length,
               onClick: () => {
@@ -914,7 +914,7 @@ let tf = registerModal(({
         let a = e => {
           _(e.view);
         };
-        return jsxs(_$$Y, {
+        return jsxs(AutoLayout, {
           children: [t.map(e => jsx(_$$o, {
             onClick: () => a(e),
             tab: e.view,
@@ -923,7 +923,7 @@ let tf = registerModal(({
               fontSize: 11,
               children: e.name
             })
-          }, e.view)), jsx(_$$M, {}), e]
+          }, e.view)), jsx(Spacer, {}), e]
         });
       },
       maxWidth: 480,
@@ -1088,13 +1088,13 @@ function tT(e) {
       }));
     },
     className: _$$s3.cursorPointer.mt24.$,
-    children: jsx(_$$Y, {
+    children: jsx(AutoLayout, {
       height: 'hug-contents',
       padding: {
         left: 32,
         right: 32
       },
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         verticalAlignItems: 'center',
         horizontalAlignItems: 'center',
         padding: {
@@ -1106,11 +1106,11 @@ function tT(e) {
         cornerRadius: 8,
         backgroundColor: 'selected',
         width: 'fill-parent',
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           spacing: 0,
           direction: 'vertical',
           height: 'hug-contents',
-          children: [jsxs(_$$Y, {
+          children: [jsxs(AutoLayout, {
             direction: 'horizontal',
             spacing: 4,
             padding: 0,
@@ -1135,7 +1135,7 @@ function tT(e) {
               children: renderI18nText('billing_group_admin.upgrade_request_banner.subtitle')
             })
           })]
-        }), jsx(_$$M, {}), jsx('div', {
+        }), jsx(Spacer, {}), jsx('div', {
           className: _$$s3.mr16.$,
           children: jsx(In, {
             icon: 'chevron-right-32'
@@ -2191,7 +2191,7 @@ let aZ = kp(e => {
     teams
   } = e.resources;
   let i = files.length + folders.length + teams.length > 0;
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: 'vertical',
     spacing: 16,
     children: [jsx(aV, {
@@ -2811,7 +2811,7 @@ function nn(e) {
   });
   let eT = e.selectedView.view === 'orgAdminSettings';
   let eA = e.selectedView.view === 'licenseGroup' && e.selectedView.licenseGroupId;
-  let eR = jsxs(_$$Y, {
+  let eR = jsxs(AutoLayout, {
     spacing: 8,
     width: 'hug-contents',
     children: [eT && !getFeatureFlags().user_groups && jsxs(Fragment, {
@@ -2921,7 +2921,7 @@ function nn(e) {
       children: jsx(tJ, {
         targetOrgUserId: eD?.orgUser.id ?? null
       })
-    }), eL ? jsxs(_$$Y, {
+    }), eL ? jsxs(AutoLayout, {
       direction: 'vertical',
       height: 'hug-contents',
       padding: {

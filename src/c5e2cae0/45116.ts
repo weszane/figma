@@ -24,7 +24,7 @@ import { $n, IK } from "../905/521428";
 import { A as _$$A } from "../905/891805";
 import { s as _$$s2, K as _$$K2 } from "../c5e2cae0/341232";
 import { $z } from "../figma_app/617427";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { showModalHandler } from "../905/156213";
 import { AG } from "../figma_app/217457";
 import { registerModal } from "../905/102752";
@@ -74,7 +74,7 @@ let R = registerModal(function (e) {
           children: jsx("p", {
             children: renderI18nText("checkout.additional_seats.pre_purchase_seats_for_your_team_to_help_you_budget_and_save_time_later_on")
           })
-        }), jsx(_$$Y, {
+        }), jsx(AutoLayout, {
           direction: "vertical",
           spacing: 16,
           padding: {
@@ -187,7 +187,7 @@ let H = registerModal(function (e) {
       },
       children: jsx(vo, {
         children: jsx(nB, {
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
             padding: {

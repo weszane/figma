@@ -10,7 +10,7 @@ import { hideModal } from "../905/156213";
 import { Vm } from "../figma_app/482142";
 import { fu } from "../figma_app/831799";
 import { FC } from "../figma_app/212807";
-import { Kg } from "../figma_app/345997";
+import { getEditableUnpaidTeams } from "../figma_app/345997";
 import { OJ } from "../905/519092";
 function h({
   handleClose: e
@@ -42,7 +42,7 @@ export function $$x0() {
       teamId: e.id
     }));
   }, [t, x]);
-  let v = useMemo(() => Kg(e), [e]);
+  let v = useMemo(() => getEditableUnpaidTeams(e), [e]);
   useLayoutEffect(() => {
     0 !== v.length || r || (x(), t(Dw({
       isEduTeam: !0

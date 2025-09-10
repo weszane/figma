@@ -2,7 +2,7 @@ import { createOptimistAction } from "../905/350402";
 import { createOptimistRevertAction, createOptimistCommitAction } from "../905/676456";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 export let $$l0 = createOptimistAction("REPO_RESTORE", (e, {
   reposById: t,
@@ -26,7 +26,7 @@ export let $$l0 = createOptimistAction("REPO_RESTORE", (e, {
           userInitiated: !1
         }));
         e.dispatch(VisualBellActions.enqueue({
-          message: J(i, i.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_restoring_these_files")),
+          message: resolveMessage(i, i.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_restoring_these_files")),
           error: !0
         }));
       } catch (t) {
@@ -45,7 +45,7 @@ export let $$l0 = createOptimistAction("REPO_RESTORE", (e, {
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(d));
     e.dispatch(VisualBellActions.enqueue({
-      message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_restoring_these_files")),
+      message: resolveMessage(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_restoring_these_files")),
       error: !0
     }));
   });

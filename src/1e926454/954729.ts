@@ -36,7 +36,7 @@ import { un } from "../figma_app/457899";
 import { IX } from "../905/712921";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import { E as _$$E } from "../905/53857";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { B as _$$B } from "../905/261906";
 import { zz } from "../figma_app/80683";
 import { Cu } from "../figma_app/314264";
@@ -180,13 +180,13 @@ function U({
   return jsx(c$, {
     value: e,
     "data-testid": `seat-type-option-${e}`,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 4,
       padding: {
         vertical: 4
       },
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         direction: "horizontal",
         spacing: 8,
         children: [jsx("div", {
@@ -197,7 +197,7 @@ function U({
           children: getI18nString("plan_invite_modal.available_seats", {
             count: r
           })
-        }), jsx(_$$M, {}), t && jsx("div", {
+        }), jsx(Spacer, {}), t && jsx("div", {
           ...xk(Z.optionSeatSecondaryText),
           children: s && getI18nString("general.price_per_month", {
             priceString: s

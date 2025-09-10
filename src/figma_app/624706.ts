@@ -49,7 +49,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { UserWithTeams } from "../figma_app/43951";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { mapFileTypeToEditorTypeNullable, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { Ib } from "../905/129884";
@@ -91,7 +91,7 @@ import { SubscriptionType } from "../figma_app/831101";
 import { hK } from "../5132/334833";
 import { Jn } from "../905/17223";
 import { sx as _$$sx } from "../905/941192";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { E as _$$E3 } from "../905/984674";
 import { NJ } from "../figma_app/419216";
 import { e as _$$e2 } from "../905/916195";
@@ -614,14 +614,14 @@ function te({
           duration: 1
         }
       },
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         verticalAlignItems: "center",
         padding: 12,
         children: [jsx(_$$E3, {
           fontWeight: "medium",
           fontSize: 13,
           children: r
-        }), jsx(_$$M, {}), jsx(Jn, {
+        }), jsx(Spacer, {}), jsx(Jn, {
           onClick: e
         })]
       }), jsx(Suspense, {
@@ -639,7 +639,7 @@ function te({
           fontSize: 11,
           children: t
         })
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         horizontalAlignItems: "end",
         spacing: 8,
         padding: 16,
@@ -712,7 +712,7 @@ function ti({
       targetKey: e,
       dismissModal: t,
       shouldNotWrapInParagraphTag: !0,
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         direction: "vertical",
         children: [jsx(_$$E3, {
           fontWeight: "semi-bold",
@@ -2881,7 +2881,7 @@ let t7 = class e extends RecordingPureComponent {
       this.closeDropdownAndLogEvent("help_widget_get_help");
       $() ? this.setState({
         showSupportChat: !0
-      }) : 0 === this.props.unsortedTeams.filter(e => w5(e)).length ? this.zendeskRef.current?.open({
+      }) : 0 === this.props.unsortedTeams.filter(e => hasTeamPaidAccess(e)).length ? this.zendeskRef.current?.open({
         ticketForms: Fb.FREE,
         locale: this.props.user?.locale
       }) : this.zendeskRef.current?.open({

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { R as _$$R } from "../905/304671";
 import { i as _$$i } from "../469e6e40/549061";
@@ -116,7 +116,7 @@ export function $$D0({
           })
         })]
       })
-    }), jsx(Y, {
+    }), jsx(AutoLayout, {
       spacing: 16,
       direction: "vertical",
       children: jsx("div", {

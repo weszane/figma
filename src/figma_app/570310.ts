@@ -29,7 +29,7 @@ import { Ex, zE } from "../figma_app/919079";
 import { z as _$$z } from "../905/284530";
 import { f as _$$f, v as _$$v } from "../figma_app/258006";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { M as _$$M } from "../905/830372";
+import { Spacer } from "../905/470281";
 import { A as _$$A3 } from "../905/963262";
 import { Ur } from "../figma_app/451396";
 import { rZ, yT, zM } from "../figma_app/332598";
@@ -43,7 +43,7 @@ import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { replaceSelection } from "../figma_app/741237";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { Um } from "../905/848862";
 import { eY as _$$eY, T3 } from "../figma_app/722362";
 import { selectCurrentFile, useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
@@ -1326,7 +1326,7 @@ export function $$eQ0({
           view: "none"
         };
       } else if (l) {
-        if (_$$T()) return {
+        if (isVsCodeEnvironment()) return {
           view: "none"
         };
         if (r || !n && a) return {
@@ -1448,7 +1448,7 @@ export function $$eQ0({
           instanceFigmadocs,
           onInstancePillClick: t,
           additionalHeaderActions: jsxs(Fragment, {
-            children: [jsx(_$$M, {}), jsx(l6, {
+            children: [jsx(Spacer, {}), jsx(l6, {
               ariaLabel: getI18nString("dev_handoff.code.language"),
               className: eL,
               dispatch: x,

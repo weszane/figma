@@ -4,7 +4,7 @@ import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { wR } from "../905/346715";
 import { b as _$$b } from "../905/168239";
 import { K as _$$K } from "../905/628118";
@@ -1060,7 +1060,7 @@ export function $$eq0(e) {
         tab: J7.CONTENT,
         selectedSecondaryTab: SN.CONNECTED_PROJECTS
       })]
-    }), I && jsx(_$$Y, {
+    }), I && jsx(AutoLayout, {
       width: "fill-parent",
       height: "fill-parent",
       direction: "vertical",

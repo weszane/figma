@@ -23,7 +23,7 @@ import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { O as _$$O } from "../905/833838";
 import { P as _$$P } from "../905/200237";
 import { f as _$$f } from "../figma_app/252485";
-import { yt } from "../905/766303";
+import { getFullscreenFile } from "../905/766303";
 import { GT } from "../figma_app/840917";
 import { AE, Nn } from "../905/225144";
 import { getUserId } from "../905/372672";
@@ -98,7 +98,7 @@ export function $$M2(e, t) {
     let e = GT();
     e?.name ? i = e.name : t?.localFileName && (i = t.localFileName);
   }
-  let n = yt(e);
+  let n = getFullscreenFile(e);
   if (n && isBranch(n)) {
     L(`\u2325 ${i}`, `${i}`);
     return;

@@ -27,7 +27,7 @@ import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType, FFileType, FProductAccessType, FPlanAccessType } from "../figma_app/191312";
 import { PublishUpsellTeamPlan, PublishUpsellTeamRoles } from "../figma_app/43951";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
@@ -46,7 +46,7 @@ export let $$V0 = registerModal(function (e) {
   let o = FC();
   let l = selectCurrentUser();
   let d = !!team && canEditTeam(team?.id, o);
-  let p = w5(team);
+  let p = hasTeamPaidAccess(team);
   let m = useSubscription(PublishUpsellTeamPlan(team ? {
     teamId: team.id
   } : null));
@@ -116,7 +116,7 @@ function G(e) {
   } = e;
   let h = useSubscription(PublishUpsellTeamRoles, {});
   let g = selectCurrentFile();
-  let _ = w5(e.team);
+  let _ = hasTeamPaidAccess(e.team);
   let A = useMemo(() => h.transform(e => e.currentUser.teamEditRoles.some(e => {
     let i = e.team;
     let n = i?.currentPlanUser;

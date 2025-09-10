@@ -1,6 +1,6 @@
 import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { Ul } from "../figma_app/777551";
 import { p4 } from "../905/448740";
@@ -79,7 +79,7 @@ export let $$x0 = createOptimistThunk(async (e, {
       }
     } catch (t) {
       e.dispatch(VisualBellActions.enqueue({
-        message: J(t) || t.message,
+        message: resolveMessage(t) || t.message,
         error: !0
       }));
       return;
@@ -98,7 +98,7 @@ export let $$x0 = createOptimistThunk(async (e, {
       }));
     } catch (t) {
       e.dispatch(VisualBellActions.enqueue({
-        message: J(t) || t.message,
+        message: resolveMessage(t) || t.message,
         error: !0
       }));
       return;
@@ -118,7 +118,7 @@ export let $$x0 = createOptimistThunk(async (e, {
     }));
   } catch (t) {
     e.dispatch(VisualBellActions.enqueue({
-      message: J(t) || t.message,
+      message: resolveMessage(t) || t.message,
       error: !0
     }));
     return;

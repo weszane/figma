@@ -38,7 +38,7 @@ import { ResourceStatus, getResourceDataOrFallback } from '../905/663269';
 import { $ as _$$$ } from '../905/692618';
 import { e0 as _$$e2 } from '../905/696396';
 import { G as _$$G } from '../905/750789';
-import { Y as _$$Y } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { O as _$$O } from '../905/833838';
 import { sZ } from '../905/845253';
 import { sf } from '../905/929976';
@@ -126,7 +126,7 @@ function U({
   let s = useSelector(e => e.avatarEditorState);
   return e ? jsx(Wi, {
     className: _$$s.h32.w400.$
-  }) : jsxs(_$$Y, {
+  }) : jsxs(AutoLayout, {
     height: 'hug-contents',
     spacing: 16,
     children: [jsx(ER, {

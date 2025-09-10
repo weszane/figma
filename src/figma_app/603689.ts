@@ -208,7 +208,7 @@ import { $ as _$$$ } from '../905/819786';
 import { o as _$$o5 } from '../905/821217';
 import { m as _$$m4 } from '../905/822676';
 import { F2 } from '../905/826900';
-import { Y as _$$Y2 } from '../905/830372';
+import { AutoLayout } from '../905/470281';
 import { K as _$$K4 } from '../905/833668';
 import { l as _$$l7 } from '../905/840533';
 import { o0 as _$$o3 } from '../905/844131';
@@ -216,7 +216,7 @@ import { d2 as _$$d5, rp as _$$rp } from '../905/845277';
 import { a as _$$a0 } from '../905/847494';
 import { $ as _$$$5 } from '../905/851662';
 import { V as _$$V3 } from '../905/856857';
-import { T as _$$T } from '../905/858738';
+import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n3, sg as _$$sg } from '../905/859698';
 import { qB } from '../905/862321';
 import { ud as _$$ud } from '../905/862913';
@@ -4584,11 +4584,11 @@ function oO({
     'disableClickOutsideToHide': !0,
     'disableKeyboardEventPropagation': !0,
     'data-testid': 'org_trial_expired_modal',
-    'children': [jsx(_$$Y2, {
+    'children': [jsx(AutoLayout, {
       children: jsx(_$$E4, {
         children: renderI18nText('payments_modal.org_trial_expired.description')
       })
-    }), jsx(_$$Y2, {
+    }), jsx(AutoLayout, {
       padding: {
         top: 24
       },
@@ -4675,7 +4675,7 @@ function oj(e) {
     'disableClickOutsideToHide': !0,
     'disableKeyboardEventPropagation': !0,
     'data-testid': 'org_trial_pending_modal',
-    'children': [d ? jsxs(_$$Y2, {
+    'children': [d ? jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 16,
       padding: {
@@ -4724,7 +4724,7 @@ function oj(e) {
           planText: c
         })
       })
-    }), jsxs(_$$Y2, {
+    }), jsxs(AutoLayout, {
       direction: 'horizontal',
       horizontalAlignItems: 'space-between',
       verticalAlignItems: 'center',
@@ -4760,7 +4760,7 @@ function oj(e) {
   });
 }
 function oU(e) {
-  return jsxs(_$$Y2, {
+  return jsxs(AutoLayout, {
     direction: 'horizontal',
     spacing: 8,
     verticalAlignItems: 'start',
@@ -4872,7 +4872,7 @@ function oZ({
           })
         })
       }), jsx(_$$nB, {
-        children: jsxs(_$$Y2, {
+        children: jsxs(AutoLayout, {
           direction: 'vertical',
           spacing: 16,
           padding: {
@@ -4919,7 +4919,7 @@ function oZ({
           })]
         })
       }), jsx(wi, {
-        children: jsxs(_$$Y2, {
+        children: jsxs(AutoLayout, {
           direction: 'horizontal',
           horizontalAlignItems: 'space-between',
           verticalAlignItems: 'center',
@@ -4944,7 +4944,7 @@ function oZ({
   });
 }
 function oQ(e) {
-  return jsxs(_$$Y2, {
+  return jsxs(AutoLayout, {
     direction: 'horizontal',
     spacing: 8,
     verticalAlignItems: 'start',
@@ -8147,7 +8147,7 @@ function pY() {
   let r = !!hA() && e;
   let n = UX();
   let i = xn();
-  let a = r && !(_$$T() && getFeatureFlags().dt_vscode_ready_for_dev) ? n : 0;
+  let a = r && !(isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev) ? n : 0;
   let s = useAtomWithSubscription(_$$P2);
   return jsx('div', {
     className: j()(_$$z4, {

@@ -9,7 +9,7 @@ import { $n } from "../905/521428";
 import { a as _$$a } from "../905/5627";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { lW } from "../figma_app/11182";
 import { popModalStack } from "../905/156213";
@@ -42,12 +42,12 @@ export let $$y0 = registerModal(function (e) {
           children: getI18nString("universal_insert.manifest_error_title")
         })
       }), jsx(nB, {
-        children: jsxs(Y, {
+        children: jsxs(AutoLayout, {
           direction: "horizontal",
           horizontalAlignItems: "space-between",
           width: "fill-parent",
           verticalAlignItems: "start",
-          children: [jsx(Y, {
+          children: [jsx(AutoLayout, {
             backgroundColor: "secondary",
             padding: 4,
             width: "fill-parent",

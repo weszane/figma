@@ -5,7 +5,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { a as _$$a } from "../905/925868";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { li } from "../figma_app/622574";
 import { FFileType } from "../figma_app/191312";
 import { n as _$$n } from "../905/79930";
@@ -29,7 +29,7 @@ export function $$f0({
   });
   return templatesByTeam ? jsxs("div", {
     className: _$$s.wFull.$,
-    children: [jsxs(Y, {
+    children: [jsxs(AutoLayout, {
       horizontalAlignItems: "start",
       height: k,
       strokeWidth: {

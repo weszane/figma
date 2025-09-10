@@ -7,7 +7,7 @@ import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { UD } from "../figma_app/624361";
 import { b, $ } from "../905/776478";
-import { xF } from "../905/866640";
+import { fetchImageAsByteArray } from "../905/866640";
 import { k4 } from "../figma_app/878113";
 import { A } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
@@ -93,7 +93,7 @@ async function E({
   backgroundFill: i,
   abortController: o
 }) {
-  let l = await xF(r, ["*"]);
+  let l = await fetchImageAsByteArray(r, ["*"]);
   let d = await UD(l, "image/png", t);
   !o.signal.aborted && e.isAlive && permissionScopeHandler.ai("editor-ai-fill-image", () => {
     let r = R(e);

@@ -11,8 +11,8 @@ import { ph } from "../figma_app/709893";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y as _$$Y } from "../905/830372";
-import { d1 } from "../905/766303";
+import { AutoLayout } from "../905/470281";
+import { getSelectedFile } from "../905/766303";
 import { fV } from "../figma_app/236178";
 import { L1, KP } from "../figma_app/12491";
 import { b as _$$b } from "../905/217163";
@@ -68,7 +68,7 @@ export function $$O1({
   sharingGroupData: T
 }) {
   let N = _$$B(i);
-  let P = useSelector(e => d1(e));
+  let P = useSelector(e => getSelectedFile(e));
   let O = useSelector(e => e.user);
   let [L, F] = useState(!1);
   let M = P?.library_key === i;
@@ -144,7 +144,7 @@ export function $$O1({
       })
     }), jsxs("div", {
       className: "subscription_file_view_header--componentOrFileName--YhI3C text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         verticalAlignItems: "center",
         direction: "horizontal",
         spacing: 0,

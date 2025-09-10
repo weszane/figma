@@ -2,7 +2,7 @@ import { atom } from "../figma_app/27355";
 import { T } from "../905/868547";
 import { openFileAtom } from "../figma_app/516028";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { M_ } from "../905/32091";
 import { a as _$$a } from "../905/692930";
@@ -56,7 +56,7 @@ let $$I2 = atom(e => {
   let {
     team
   } = t;
-  return null != team && null == team.orgId && !w5({
+  return null != team && null == team.orgId && !hasTeamPaidAccess({
     subscription: team.subscription,
     student_team: null != team.studentTeamAt,
     grace_period_end: team.gracePeriodEnd?.toISOString() ?? null

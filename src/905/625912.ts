@@ -10,7 +10,7 @@ import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { useLatestRef } from "../figma_app/922077";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { Ru } from "../905/251509";
 import { Thumbnail } from "../figma_app/763686";
 import { c1 } from "../905/589717";
@@ -239,7 +239,7 @@ function K({
 function Y({
   value: e
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     width: "hug-contents",
     children: [jsx("span", {
       className: B.$,
@@ -254,7 +254,7 @@ function q({
   value: e
 }) {
   let t = _$$F.format(e);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     width: "hug-contents",
     children: [jsx("span", {
       className: _$$s.inlineBlock.w12.h12.bRadius2.$,
@@ -354,7 +354,7 @@ function et({
 function ei({
   value: e
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     width: "hug-contents",
     children: [jsx("span", {
       className: V.$,
@@ -493,7 +493,7 @@ let em = memo(function ({
   diffValue: e,
   value: t
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     width: "hug-contents",
     children: [null != e && jsx(j, {
       value: e
@@ -565,7 +565,7 @@ let eh = memo(function ({
           value: m
         })
       })]
-    }), jsx(_$$M, {})]
+    }), jsx(Spacer, {})]
   });
 });
 let eg = (e, t) => {

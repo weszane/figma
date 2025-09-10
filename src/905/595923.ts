@@ -9,7 +9,7 @@ import { b as _$$b } from "../figma_app/246400";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { B as _$$B } from "../905/261906";
 import { JT, tI } from "../figma_app/847597";
 import { k as _$$k2 } from "../figma_app/618031";
@@ -274,12 +274,12 @@ function Z({
 }) {
   return jsx("div", {
     className: "x1bamp8i x19y5rnk",
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: "horizontal",
       verticalAlignItems: "center",
       padding: 16,
       spacing: "auto",
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         direction: "horizontal",
         spacing: 8,
         children: [jsx(_$$B, {

@@ -116,7 +116,7 @@ import { L as _$$L } from "../905/704296";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { A as _$$A6 } from "../905/920142";
 import { XHRError, XHR } from "../905/910117";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E2 } from "../905/984674";
 import { lW } from "../figma_app/11182";
 import { reportError } from "../905/11";
@@ -1860,11 +1860,11 @@ function ib({
   onAccessLevelChange: i
 }) {
   let n = qq(e);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     horizontalAlignItems: "space-between",
     verticalAlignItems: "start",
-    children: [jsxs(_$$Y, {
+    children: [jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 4,
       children: [jsx(_$$E2, {
@@ -1873,7 +1873,7 @@ function ib({
         color: "secondary",
         children: n.description
       })]
-    }), jsx(_$$Y, {
+    }), jsx(AutoLayout, {
       width: 128,
       horizontalAlignItems: "end",
       children: jsx(b8, {
@@ -1935,7 +1935,7 @@ let iv = registerModal(function (e) {
           children: getI18nString("tokens.settings.generate_new_token")
         })
       }), jsx(_$$nB, {
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           direction: "vertical",
           spacing: 16,
           padding: 16,
@@ -1950,7 +1950,7 @@ let iv = registerModal(function (e) {
             },
             autoFocus: !0,
             autoComplete: "off"
-          }), jsxs(_$$Y, {
+          }), jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 8,
             children: [jsx(_$$E2, {
@@ -1976,12 +1976,12 @@ let iv = registerModal(function (e) {
                 }, "0")]
               })]
             })]
-          }), jsxs(_$$Y, {
+          }), jsxs(AutoLayout, {
             direction: "vertical",
             children: [jsx(_$$E2, {
               fontSize: 13,
               children: renderI18nText("tokens.settings.dev_token_modal.scopes_header")
-            }), jsxs(_$$Y, {
+            }), jsxs(AutoLayout, {
               direction: "vertical",
               spacing: 16,
               children: [getFeatureFlags().dt_figmadoc && org && jsx(ib, {
@@ -2125,12 +2125,12 @@ function iw(e) {
     })]
   }) : renderI18nText("tokens.settings.never_expires");
   let g = token.expires_at || "revoked" !== nonExpPatRevocationStage ? renderI18nText("tokens.settings.revoke_access") : renderI18nText("tokens.settings.remove_revoked");
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     horizontalAlignItems: "space-between",
     padding: {
       vertical: 8
     },
-    children: [jsxs(_$$Y, {
+    children: [jsxs(AutoLayout, {
       verticalAlignItems: "start",
       children: [jsx("div", {
         "data-tooltip-type": Ib.TEXT,
@@ -2138,7 +2138,7 @@ function iw(e) {
         "data-tooltip-text-left": !0,
         className: _$$s.colorIcon.$,
         children: jsx(_$$m, {})
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 4,
         children: [jsx("div", {
@@ -2151,7 +2151,7 @@ function iw(e) {
           children: p
         })]
       })]
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 4,
       horizontalAlignItems: "end",
@@ -2173,18 +2173,18 @@ function iw(e) {
 function iC(e) {
   let t = e.token;
   let i = useDispatch();
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     padding: 12,
     backgroundColor: "warning-tertiary",
     cornerRadius: 4,
     verticalAlignItems: "start",
-    children: [jsx(_$$m, {}), jsxs(_$$Y, {
+    children: [jsx(_$$m, {}), jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 8,
       children: [jsx(_$$E2, {
         fontWeight: "semi-bold",
         children: t.description
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         padding: 8,
         strokeColor: "default",
         strokeWidth: 1,
@@ -3903,7 +3903,7 @@ function rO(e) {
   }));
   let s = useMultiSubscription(UserSettingsPlanRow, n);
   let [o, l] = useState(s.length <= 3);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 24,
     children: [jsx("h3", {
@@ -3939,7 +3939,7 @@ function rO(e) {
           user
         }, planParentId), " "]
       });
-    }), o ? jsx(_$$Y, {
+    }), o ? jsx(AutoLayout, {
       direction: "horizontal",
       children: jsx(_$$E2, {
         fontWeight: "medium",
@@ -4013,7 +4013,7 @@ function rD(e) {
     }));
   };
   let m = planUser.permission === FMemberRoleType.GUEST && parentId && type === FOrganizationLevelType.ORG;
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     spacing: 16,
     verticalAlignItems: "start",
@@ -4022,18 +4022,18 @@ function rD(e) {
       userId: user.id,
       orgId: type === FOrganizationLevelType.ORG ? parentId : null,
       teamId: type === FOrganizationLevelType.TEAM ? parentId : null
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 4,
       verticalAlignItems: "start",
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 0,
         children: [jsx(_$$E2, {
           fontSize: 11,
           truncate: !0,
           children: plan.name
-        }), jsxs(_$$Y, {
+        }), jsxs(AutoLayout, {
           direction: "horizontal",
           spacing: 4,
           children: [jsx(_$$E2, {
@@ -4067,10 +4067,10 @@ function rD(e) {
             })]
           }) : null]
         })]
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 0,
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           direction: "horizontal",
           spacing: "2px",
           children: [jsx(_$$E2, {
@@ -4084,7 +4084,7 @@ function rD(e) {
               color: "secondary",
               truncate: !0,
               children: ["\xb7", " "]
-            }), jsxs(_$$Y, {
+            }), jsxs(AutoLayout, {
               direction: "horizontal",
               spacing: 4,
               width: "auto",
@@ -4104,7 +4104,7 @@ function rD(e) {
               })]
             })]
           }) : null]
-        }), l.length > 0 ? jsxs(_$$Y, {
+        }), l.length > 0 ? jsxs(AutoLayout, {
           direction: "horizontal",
           height: 16,
           spacing: 4,

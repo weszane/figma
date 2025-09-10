@@ -4,7 +4,7 @@ import { isDevEnvironment } from "../figma_app/169182";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { WW, yT, TP } from "../figma_app/349248";
@@ -56,7 +56,7 @@ let $$_12 = createOptimistAction("REPO_PUT", async (e, {
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(r));
     e.dispatch(VisualBellActions.enqueue({
-      message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file")),
+      message: resolveMessage(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file")),
       error: !0
     }));
   }));

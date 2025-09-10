@@ -27,7 +27,7 @@ import T, { N as _$$N } from "../905/551536";
 import { y2, Lp } from "../figma_app/563413";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { $ as _$$$ } from "../905/355181";
 import { p as _$$p } from "../905/597320";
 import { b as _$$b } from "../905/168239";
@@ -238,7 +238,7 @@ function H(e) {
             className: _$$s.ml4.$,
             children: renderI18nText("resources_tab.shared_fonts_table.embedded_upload_fonts_link")
           })
-        }) : jsxs(_$$Y, {
+        }) : jsxs(AutoLayout, {
           spacing: 4,
           children: [jsx("span", {
             children: renderI18nText("resources_tab.shared_fonts_table.no_shared_fonts_yet")

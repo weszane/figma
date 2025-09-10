@@ -8,7 +8,7 @@ import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { yJ } from "../figma_app/78808";
 import { hideModal, showModalHandler } from "../905/156213";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
 import { oJ } from "../905/346794";
 import f, { FileVersions, FileCanEdit } from "../figma_app/43951";
@@ -482,7 +482,7 @@ let $$ep3 = createOptimistThunk((e, {
   unreadCommentCount: s
 }) => {
   let o = e.getState();
-  let l = d1(o);
+  let l = getSelectedFile(o);
   l && l.source_file_key && (e.dispatch($$eu2({
     branchKey: l.key,
     sourceKey: l.source_file_key,
@@ -537,7 +537,7 @@ let $$eg6 = createOptimistThunk((e, {
   trackingContextName: t
 }) => {
   let i = e.getState();
-  let n = d1(i);
+  let n = getSelectedFile(i);
   n && (e.dispatch(showModalHandler({
     type: jS
   })), trackEventAnalytics("View Branches Clicked", {

@@ -11,7 +11,7 @@ import { tH, H4 } from "../905/751457";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { RR } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
@@ -98,7 +98,7 @@ export let $$N0 = registerModal(function ({
               padding: 0,
               children: [jsx(_$$T, {
                 licenseType: e
-              }), jsx(Y, {
+              }), jsx(AutoLayout, {
                 padding: {
                   top: 8,
                   bottom: 8,

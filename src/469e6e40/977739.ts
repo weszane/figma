@@ -13,12 +13,12 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { s as _$$s2 } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
-import { UE } from "../figma_app/345997";
+import { handleErrorWithToast } from "../figma_app/345997";
 import { Rs } from "../figma_app/761870";
 import { fm, X4, Cn, by, UI } from "../c5e2cae0/453906";
 import { registerModal } from "../905/102752";
@@ -117,7 +117,7 @@ function $$q(e) {
       },
       SearchResultComponent: U,
       TokenComponent: F
-    }), 0 === autocomplete.tokens.length ? jsx(_$$Y, {
+    }), 0 === autocomplete.tokens.length ? jsx(AutoLayout, {
       direction: "vertical",
       padding: {
         top: 2
@@ -225,7 +225,7 @@ let $$z0 = registerModal(function ({
   let J = "loaded" !== T.status ? jsx(kt, {
     className: _$$s.mlAuto.mrAuto.mt32.$
   }) : jsxs(Fragment, {
-    children: [jsx(_$$Y, {
+    children: [jsx(AutoLayout, {
       direction: "vertical",
       spacing: 0,
       children: jsx(_$$E, {
@@ -233,7 +233,7 @@ let $$z0 = registerModal(function ({
         fontSize: 11,
         children: renderI18nText("new_editor_notifications_modal.how_often_would_you_like_receive_emails")
       })
-    }), jsx(_$$Y, {
+    }), jsx(AutoLayout, {
       direction: "vertical",
       children: I.map(e => jsx(Checkbox, {
         disabled: V || "loaded" !== T.status,
@@ -253,7 +253,7 @@ let $$z0 = registerModal(function ({
         children: $(e).description
       }, e))
     }), 0 === M.size ? null : jsxs(Fragment, {
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 0,
         children: [jsx(_$$E, {
@@ -273,12 +273,12 @@ let $$z0 = registerModal(function ({
         onChange: e => {
           D(e);
         },
-        children: jsx(_$$Y, {
+        children: jsx(AutoLayout, {
           direction: "vertical",
           padding: {
             vertical: 2
           },
-          children: [UI.ALL_ADMINS, UI.SPECIFIC_ADMINS].map(a => jsx(_$$Y, {
+          children: [UI.ALL_ADMINS, UI.SPECIFIC_ADMINS].map(a => jsx(AutoLayout, {
             direction: "vertical",
             padding: {
               left: 8
@@ -290,7 +290,7 @@ let $$z0 = registerModal(function ({
               _onChange: e => {
                 D(e);
               },
-              children: jsxs(_$$Y, {
+              children: jsxs(AutoLayout, {
                 direction: "vertical",
                 width: "100%",
                 height: "hug-contents",
@@ -359,7 +359,7 @@ let $$z0 = registerModal(function ({
             a.onClose();
           } catch {
             W(!1);
-            UE("An error has occured. Please try again.", N);
+            handleErrorWithToast("An error has occured. Please try again.", N);
           }
         },
         children: [jsx(Y9, {
@@ -367,7 +367,7 @@ let $$z0 = registerModal(function ({
             children: getI18nString("new_editor_notifications_modal.header")
           })
         }), jsx(nB, {
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 16,
             padding: {

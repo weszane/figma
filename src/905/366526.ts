@@ -77,7 +77,7 @@ import { h as _$$h } from '../905/207101';
 import { x as _$$x3 } from '../905/209285';
 import { createMixedArray, MIXED_MARKER } from '../905/216495';
 import { w as _$$w } from '../905/230422';
-import { J as _$$J } from '../905/231762';
+import { resolveMessage } from '../905/231762';
 import { y as _$$y } from '../905/235145';
 import { delay } from '../905/236856';
 import { N as _$$N5 } from '../905/239398';
@@ -259,7 +259,7 @@ import { getRepoByIdAlt, isBranchAlt, getRepoById, isBranch } from '../905/76007
 import { m as _$$m } from '../905/760316';
 import { MV, WB } from '../905/761735';
 import { pP as _$$pP, fW } from '../905/765855';
-import { d1 as _$$d2, xA } from '../905/766303';
+import { getSelectedFile, getNewFileConfig } from '../905/766303';
 import { handlePropertyState } from '../905/770460';
 import { gD } from '../905/775298';
 import { pw as _$$pw, q5 as _$$q3 } from '../905/776312';
@@ -289,7 +289,7 @@ import { c as _$$c6 } from '../905/850166';
 import { hM as _$$hM } from '../905/851937';
 import { D as _$$D2 } from '../905/852057';
 import { n0 as _$$n4, oI as _$$oI3, QA as _$$QA2, uQ as _$$uQ, Lh, Mc, Xp } from '../905/854717';
-import { T as _$$T5 } from '../905/858738';
+import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
 import { cc as _$$cc, zl as _$$zl, By, qB, RE, vR } from '../905/862321';
 import { RD } from '../905/862913';
@@ -1351,7 +1351,7 @@ let t_ = e => t => async function (i) {
       }, t => (e.dispatch(_$$E({
         formState: qB.SIGN_UP
       })), e.dispatch(Qg({
-        message: _$$J(t, t?.data?.message)
+        message: resolveMessage(t, t?.data?.message)
       }))));
     } else {
       _$$g2('sign_up_attempt', n.auth.origin);
@@ -1451,7 +1451,7 @@ let t_ = e => t => async function (i) {
     }, t => (e.dispatch(_$$E({
       formState: qB.SIGN_UP
     })), e.dispatch(Qg({
-      message: _$$J(t, t?.data?.message)
+      message: resolveMessage(t, t?.data?.message)
     }))));
     return t(i);
   }
@@ -1472,7 +1472,7 @@ let t_ = e => t => async function (i) {
         data: t
       }));
     }).catch(t => {
-      _$$J(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'login', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'login', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         _$$g2('magic_link_request_success', n.auth.origin, {
@@ -1528,7 +1528,7 @@ let t_ = e => t => async function (i) {
         cont: n.auth.redirectUrl
       });
     }).catch(t => {
-      _$$J(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (_$$g2('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (_$$g2('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         _$$g2('magic_link_request_success', n.auth.origin, {
@@ -1580,7 +1580,7 @@ let t_ = e => t => async function (i) {
         formState: qB.SSO_GATE
       }));
     }).catch(t => {
-      _$$J(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
         _$$g2('magic_link_request_success', n.auth.origin, {
@@ -5907,7 +5907,7 @@ let sq = e => t => function (i) {
     let r;
     t(i);
     let a = e.getState();
-    let s = _$$d2(a);
+    let s = getSelectedFile(a);
     if (s && (n = a.user, r = i.payload, n && r.view === 'fullscreen')) {
       let t = !!s.team_id && canViewTeam(s.team_id, a);
       YO(s, e, {
@@ -14456,7 +14456,7 @@ export async function $$hz0(e, t, d = {
           let i = t.source && typeof t.source == 'string' ? {
             from: t.source
           } : void 0;
-          let n = xA({
+          let n = getNewFileConfig({
             state: b.getState(),
             openNewFileIn: _$$ai.NEW_TAB,
             folderOverride: 'drafts',
@@ -14767,7 +14767,7 @@ export async function $$hz0(e, t, d = {
           });
           t && w(t);
         }
-        _$$T5() && (window.addEventListener('message', t => {
+        isVsCodeEnvironment() && (window.addEventListener('message', t => {
           (t.data.source === 'figma-vscode' || t.data.source === 'figma-vscode-index') && function (t) {
             switch (t.type) {
               case 'REGISTER_UI_CHANGE_OBSERVER':

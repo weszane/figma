@@ -23,7 +23,7 @@ import { G3 } from "../905/272080";
 import { isMigratingPlugin, manifestContainsWidget } from "../figma_app/155287";
 import { x as _$$x } from "../905/749159";
 import { h as _$$h } from "../905/193918";
-import { P as _$$P, V } from "../905/837980";
+import { ModalType, FreemiumApiPreCheckoutModal } from "../905/837980";
 import { I as _$$I2 } from "../905/750915";
 import { n as _$$n } from "../905/347702";
 import { selectCurrentUser } from "../905/372672";
@@ -91,10 +91,10 @@ export let $$D12 = _$$n((e, t, r, n, i, s) => {
         return;
       }
     };
-    s === _$$P.SKIP ? d() : e(showModal({
-      type: V.type,
+    s === ModalType.SKIP ? d() : e(showModal({
+      type: FreemiumApiPreCheckoutModal.type,
       data: {
-        type: t ? s || _$$P.PAID_FEATURE : _$$P.LOGGED_OUT,
+        type: t ? s || ModalType.PAID_FEATURE : ModalType.LOGGED_OUT,
         onContinue: d,
         onClose: a,
         plugin: r && getPluginVersion(r) || n || i,

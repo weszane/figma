@@ -44,7 +44,7 @@ import { Op } from "../figma_app/405038";
 import { YT, Oz, zt, LH, kM, uU, hU, oc, GB, Fp } from "../figma_app/84580";
 import { Ad } from "../figma_app/811257";
 import { B as _$$B } from "../905/714743";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { P as _$$P } from "../5421/146016";
 import { t as _$$t2 } from "../5421/711842";
 import { A as _$$A2 } from "../svg/609746";
@@ -393,18 +393,18 @@ function ep({
   return jsxs(Fragment, {
     children: [p.ifStatement && jsx("div", {
       className: _,
-      children: !y && jsxs(_$$Y, {
+      children: !y && jsxs(AutoLayout, {
         direction: "horizontal",
         spacing: 4,
         children: [jsx("span", {
           className: y ? "prototype_conditional_controls--conditionalRowConditionUI3--M2mOx" : "prototype_conditional_controls--conditionalRowCondition--kn-f7",
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: "horizontal",
             spacing: 0,
             children: [jsx(_$$B, {
               className: el,
               svg: _$$A3
-            }), jsx(_$$Y, {
+            }), jsx(AutoLayout, {
               direction: "horizontal",
               spacing: 0,
               children: isValidValue(g) && b
@@ -939,7 +939,7 @@ function eX({
     onClick: E,
     children: jsx("div", {
       ref: p,
-      children: jsx(_$$Y, {
+      children: jsx(AutoLayout, {
         children: jsx("div", {
           className: V,
           children: jsx("div", {
@@ -1214,7 +1214,7 @@ function te({
   });
   let L = jsxs(Zk, {
     className: `prototype_state_management_panel--stateManagementPanel--sYaaj ${kM(c) && "prototype_state_management_panel--stateManagementPanelWithVersion--AovOP"}`,
-    children: [uU(c) && a && N, l && uU(c) && O, I && A, I && s && k, I && l && O, isInvalidValue(c) && jsx(_$$Y, {
+    children: [uU(c) && a && N, l && uU(c) && O, I && A, I && s && k, I && l && O, isInvalidValue(c) && jsx(AutoLayout, {
       direction: "horizontal",
       padding: {
         horizontal: 12,

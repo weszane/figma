@@ -14,7 +14,7 @@ import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
 import { s as _$$s, Q } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
@@ -104,7 +104,7 @@ let $$V16 = createOptimistThunk((e, t) => {
     let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_unread");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(J(t, r)));
+      e.dispatch(_$$s.error(resolveMessage(t, r)));
     } catch (t) {
       e.dispatch(_$$s.error(r));
     }
@@ -119,7 +119,7 @@ let $$H2 = createOptimistThunk((e, t) => {
     let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_read");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(J(t, r)));
+      e.dispatch(_$$s.error(resolveMessage(t, r)));
     } catch (t) {
       e.dispatch(_$$s.error(r));
     }
@@ -134,7 +134,7 @@ let $$z21 = createOptimistThunk((e, t) => {
     let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_read");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(J(t, r)));
+      e.dispatch(_$$s.error(resolveMessage(t, r)));
     } catch (t) {
       e.dispatch(_$$s.error(r));
     }
@@ -143,7 +143,7 @@ let $$z21 = createOptimistThunk((e, t) => {
     let r = getI18nString("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_read");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(J(t, r)));
+      e.dispatch(_$$s.error(resolveMessage(t, r)));
     } catch (t) {
       e.dispatch(_$$s.error(r));
     }
@@ -605,7 +605,7 @@ let $$er40 = createOptimistThunk((e, t) => {
   }).catch(r => {
     let n = r.data?.reason?.failure_info;
     if (r.data?.reason?.reason !== "comment_validation_failure" || void 0 === n || !t.onCommentValidationFailure || t.forceMention || t.forceWithInvite) {
-      let n = J(r, getI18nString("comments.an_error_occurred"));
+      let n = resolveMessage(r, getI18nString("comments.an_error_occurred"));
       e.dispatch(_$$s.error(n));
       e.dispatch($$eO47({
         threadId: t.threadId,
@@ -805,7 +805,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
       }
     }));
     {
-      let t = J(r);
+      let t = resolveMessage(r);
       if (t) return e.dispatch(VisualBellActions.enqueue({
         type: `comment-creation-failure: ${S}`,
         message: t,

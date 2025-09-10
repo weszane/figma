@@ -46,7 +46,7 @@ import { DD, P_, u1 as _$$u } from "../3674/371829";
 import { J as _$$J3 } from "../figma_app/261874";
 import { BC, w_, Gu } from "../3674/61752";
 import { FProductAccessType, FOrganizationLevelType, FBuildStatusType, FFileType } from "../figma_app/191312";
-import { oc as _$$oc } from "../figma_app/345997";
+import { isTeamLocked } from "../figma_app/345997";
 import { H7 } from "../figma_app/598018";
 import { wH } from "../figma_app/680166";
 import { J as _$$J4 } from "../905/202542";
@@ -229,7 +229,7 @@ import { GI } from "../figma_app/387100";
 import { dU as _$$dU, xY, Xn } from "../9410/461336";
 import { x as _$$x } from "../905/587214";
 import { y as _$$y3 } from "../figma_app/404310";
-import { Y as _$$Y2 } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E4 } from "../905/984674";
 import { Gw, FB } from "../vendor/149334";
 import { capitalize } from "../figma_app/930338";
@@ -447,7 +447,7 @@ import { O as _$$O7 } from "../905/487602";
 import { e as _$$e8 } from "../905/149844";
 import { d as _$$d0 } from "../905/758967";
 import { Zr as _$$Zr } from "../figma_app/678782";
-import { T as _$$T2 } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { NB, pq as _$$pq } from "../figma_app/973219";
 import { A as _$$A21 } from "../6828/364616";
 import { g as _$$g4 } from "../figma_app/777171";
@@ -729,7 +729,7 @@ function e_() {
   let e = useAtomWithSubscription(_$$t);
   let t = useCurrentFileKey() ?? "";
   let n = _$$J3();
-  let l = useSelector(e => _$$oc(H7(e)?.id ?? "", e));
+  let l = useSelector(e => isTeamLocked(H7(e)?.id ?? "", e));
   let s = useSubscription(FileAccountTypeRequest, {
     key: t
   });
@@ -5186,7 +5186,7 @@ function o6({
   isHovering: n,
   showExternalIcon: i
 }) {
-  return jsxs(_$$Y2, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     spacing: 4,
     padding: {
@@ -6502,7 +6502,7 @@ function sb({
       }
     }
   }
-  return o && 0 !== o.length ? jsx(_$$Y2, {
+  return o && 0 !== o.length ? jsx(AutoLayout, {
     spacing: 4,
     direction: "vertical",
     width: "fill-parent",
@@ -8091,7 +8091,7 @@ function rX() {
     closeModal: () => {},
     pinModal: () => {}
   }), [n, setCurrentView, currentPluginView]);
-  return jsx(_$$Y2, {
+  return jsx(AutoLayout, {
     direction: "vertical",
     spacing: 0,
     height: "fill-parent",
@@ -8149,7 +8149,7 @@ let rQ = memo(function (e) {
 });
 function rq() {
   let e = useAtomWithSubscription(be);
-  return e ? jsx(_$$Y2, {
+  return e ? jsx(AutoLayout, {
     direction: "vertical",
     verticalAlignItems: "center",
     horizontalAlignItems: "center",
@@ -8211,7 +8211,7 @@ function r4({
 }) {
   let t = useAtomWithSubscription(vT);
   return jsx("div", {
-    children: jsxs(_$$Y2, {
+    children: jsxs(AutoLayout, {
       width: "fill-parent",
       horizontalAlignItems: "space-between",
       verticalAlignItems: "center",
@@ -8223,7 +8223,7 @@ function r4({
       },
       children: [jsx("div", {
         className: _$$s.minW0.$,
-        children: jsxs(_$$Y2, {
+        children: jsxs(AutoLayout, {
           direction: "horizontal",
           verticalAlignItems: "center",
           spacing: 8,
@@ -8446,7 +8446,7 @@ function df({
   return e ? jsx(VZ, {
     noPadding: !0,
     recordingKey: "pluginProgressPanel",
-    children: jsxs(_$$Y2, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       horizontalAlignItems: "center",
       padding: {
@@ -8457,7 +8457,7 @@ function df({
       },
       spacing: 8,
       width: "fill-parent",
-      children: [jsxs(_$$Y2, {
+      children: [jsxs(AutoLayout, {
         direction: "horizontal",
         verticalAlignItems: "start",
         horizontalAlignItems: "center",
@@ -8666,7 +8666,7 @@ function dN({
     })
   }) : null : L ? jsx("div", {
     className: ek()(dy, c && db, u && dj),
-    children: jsx(_$$Y2, {
+    children: jsx(AutoLayout, {
       verticalAlignItems: "center",
       horizontalAlignItems: "center",
       padding: {
@@ -11848,7 +11848,7 @@ function p0() {
   return jsxs("div", {
     className: "dev_handoff_index_view_zoom_control--container--oBEBg",
     ref: dropdownTargetRef,
-    style: _$$T2() && getFeatureFlags().dt_vscode_ready_for_dev ? {
+    style: isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev ? {
       height: "32px",
       paddingLeft: "10px",
       paddingRight: "10px"
@@ -13104,7 +13104,7 @@ function ff() {
   let C = p.activeId && p.activeId !== V_;
   return jsxs("div", {
     className: ek()("focus_canvas_ui--container--YwKdJ", fc),
-    style: _$$T2() && getFeatureFlags().dt_vscode_ready_for_dev ? {
+    style: isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev ? {
       paddingTop: "0px",
       paddingBottom: "0px"
     } : {
@@ -13114,7 +13114,7 @@ function ff() {
       className: "focus_canvas_ui--background--jKiDi"
     }), jsxs("div", {
       className: ek()("focus_canvas_ui--header--gxex-", fc),
-      style: _$$T2() && getFeatureFlags().dt_vscode_ready_for_dev ? {
+      style: isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev ? {
         margin: "0px",
         border: "none"
       } : void 0,
@@ -13172,10 +13172,10 @@ function ff() {
       })]
     }), jsx("div", {
       className: ek()("focus_canvas_ui--viewportContainer--E-aVJ", fc),
-      style: _$$T2() && getFeatureFlags().dt_vscode_ready_for_dev ? {
+      style: isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev ? {
         margin: "0px"
       } : void 0
-    }), !_$$T2() && jsx(h9, {}), !_$$T2() && !j && jsx(dH, {})]
+    }), !isVsCodeEnvironment() && jsx(h9, {}), !isVsCodeEnvironment() && !j && jsx(dH, {})]
   });
 }
 export function $$fg0() {

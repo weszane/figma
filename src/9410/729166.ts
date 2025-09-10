@@ -66,12 +66,12 @@ import { Point } from '../905/736624';
 import { od } from '../905/748636';
 import { G as _$$G2 } from '../905/750789';
 import { tH as _$$tH, H4 } from '../905/751457';
-import { d1 } from '../905/766303';
+import { getSelectedFile } from '../905/766303';
 import { nm } from '../905/782020';
 import { q as _$$q2 } from '../905/820062';
 import { j as _$$j } from '../905/834956';
 import { BK, Um } from '../905/848862';
-import { T as _$$T } from '../905/858738';
+import { isVsCodeEnvironment } from '../905/858738';
 import { e as _$$e4, y as _$$y } from '../905/871724';
 import { D as _$$D2 } from '../905/882262';
 import { A as _$$A9 } from '../905/891805';
@@ -1335,7 +1335,7 @@ function tm(e) {
 }
 function t9() {
   let e = useDispatch();
-  return _$$f4('dismissed_dev_mode_overview_banner') || _$$T() ? null : jsx(fu, {
+  return _$$f4('dismissed_dev_mode_overview_banner') || isVsCodeEnvironment() ? null : jsx(fu, {
     name: 'Dev Mode Overview Banner',
     properties: {
       severity: _$$c.EVENT
@@ -1713,7 +1713,7 @@ function iQ() {
   let e = useCanAccessFullDevMode();
   let t = selectCurrentFile()?.key;
   let i = dP();
-  _$$T() && getFeatureFlags().dt_vscode_ready_for_dev && (i = 0);
+  isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev && (i = 0);
   let s = _$$U();
   let o = function () {
     let [e, t] = useAtomValueAndSetter(iD);
@@ -1967,13 +1967,13 @@ function iQ() {
   let $ = {
     left: i
   };
-  _$$T() && getFeatureFlags().dt_vscode_ready_for_dev && ($.margin = '0px');
+  isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev && ($.margin = '0px');
   return jsx('div', {
     className: iu,
     children: jsxs('div', {
       className: P()(ip, ih),
       style: $,
-      children: [getFeatureFlags().dt_vscode_ready_for_dev && _$$T() ? jsx(_$$f3, {
+      children: [getFeatureFlags().dt_vscode_ready_for_dev && isVsCodeEnvironment() ? jsx(_$$f3, {
         isOnReadyForDevPage: !0,
         children: e && jsx(i0, {
           value: searchString,
@@ -3288,7 +3288,7 @@ function r5() {
   let t = useCurrentFileKey();
   let i = useSelector(e => e.progressBarState.mode);
   let r = useSelector(e => pi({
-    editorType: d1(e)?.editor_type
+    editorType: getSelectedFile(e)?.editor_type
   }));
   let o = i !== UIVisibilitySetting.HIDE_UI && i !== UIVisibilitySetting.ON_AND_LOCKED;
   let p = selectCurrentFile();
@@ -3415,7 +3415,7 @@ function r5() {
     let a = useCanUseDevModeDemoFile();
     let s = _$$D2();
     let o = _$$U2('permission', !0);
-    let d = e && !r && !i && !_$$T();
+    let d = e && !r && !i && !isVsCodeEnvironment();
     useEffect(() => {
       t || (HandoffBindingsCpp.setCanAccessDevMode(r), HandoffBindingsCpp.setCanEnterDevMode(i), HandoffBindingsCpp.setShowWorkflowsControls(s), HandoffBindingsCpp.setIsUsingDevModeDemoFile(a));
     }, [r, i, s, t, a]);

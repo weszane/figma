@@ -125,7 +125,7 @@ import { Jn } from "../905/17223";
 import { yo, k3, U6 } from "../figma_app/591738";
 import { Z as _$$Z2 } from "../905/104740";
 import { K as _$$K3 } from "../905/443068";
-import { J as _$$J2 } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { b as _$$b2 } from "../905/985254";
 import { kJ } from "../905/723870";
@@ -1422,7 +1422,7 @@ function t6(e) {
     } catch (e) {
       if (!e || e?.data?.status === 422) return;
       e?.data?.i18n ? a(VisualBellActions.enqueue({
-        message: _$$J2(e, e.data.message),
+        message: resolveMessage(e, e.data.message),
         error: !0
       })) : a(VisualBellActions.enqueue({
         message: getI18nStringAlias("comments.pinning.err.fallback"),

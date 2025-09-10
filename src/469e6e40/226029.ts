@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { useMemo, useCallback, useState, memo, useRef, useEffect } from "react";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -703,7 +703,7 @@ function eU() {
   });
 }
 export function $$eF0() {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 0,
     children: [jsx(eU, {}), jsx(eM, {}), jsx(g, {})]

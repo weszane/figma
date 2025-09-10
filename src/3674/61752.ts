@@ -18,7 +18,7 @@ import { i$ } from "../905/15667";
 import { c as _$$c } from "../905/370443";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
-import { w5, oc } from "../figma_app/345997";
+import { hasTeamPaidAccess, isTeamLocked } from "../figma_app/345997";
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { FUserTypeClassification } from "../figma_app/421473";
 import { ol, H7 } from "../figma_app/598018";
@@ -47,7 +47,7 @@ export function $$z0({
     let r = n?.key.type === FUserTypeClassification.TEAM_USER && n?.planKey.parentId === t?.teamId;
     let u = n?.key.type === FUserTypeClassification.ORG_USER && n?.planKey.parentId === t?.parentOrgId;
     let g = ol();
-    let x = w5(g) && !g?.org_id;
+    let x = hasTeamPaidAccess(g) && !g?.org_id;
     let y = _$$U();
     let C = useDispatch();
     let L = _$$J2();
@@ -117,7 +117,7 @@ export function $$z0({
   } = wH();
   let W = [_$$J.AUTO_PATHWAY, _$$J.ADMIN_AUTO_PATHWAY].includes(getUpgradePathway(FProductAccessType.DEV_MODE));
   let G = _$$n();
-  let U = useSelector(e => oc(H7(e)?.id ?? "", e));
+  let U = useSelector(e => isTeamLocked(H7(e)?.id ?? "", e));
   let K = _$$J2();
   let X = useCallback(() => {
     t?.();

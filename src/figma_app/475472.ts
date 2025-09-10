@@ -4,7 +4,7 @@ import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
@@ -60,7 +60,7 @@ export let $$N1 = createOptimistThunk((e, t) => {
     t.onSuccessNoRedirect && t.onSuccessNoRedirect(n);
     $$C2(n, e, t);
   }).catch(t => {
-    let r = J(t, t?.response?.message || getI18nString("team_creation.an_error_occurred_while_creating_this_team"));
+    let r = resolveMessage(t, t?.response?.message || getI18nString("team_creation.an_error_occurred_while_creating_this_team"));
     e.dispatch(_$$s.error(r));
     e.dispatch(r1({
       loading: !1

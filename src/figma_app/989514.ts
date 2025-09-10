@@ -4,7 +4,7 @@ import { A } from "../905/251970";
 import s from "classnames";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y, M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { Ai } from "../figma_app/242339";
@@ -49,11 +49,11 @@ function y(e) {
       children: e.children
     }), jsx("div", {
       className: qr,
-      children: jsxs(Y, {
+      children: jsxs(AutoLayout, {
         verticalAlignItems: "center",
         direction: "horizontal",
         spacing: 8,
-        children: [e.lowerLeftText, jsx(M, {}), e.onSecondaryCtaClick && jsx($z, {
+        children: [e.lowerLeftText, jsx(Spacer, {}), e.onSecondaryCtaClick && jsx($z, {
           onClick: e.onSecondaryCtaClick,
           trackingProperties: {
             ctaTrackingDescriptor: e.secondaryCtaProps?.ctaTrackingDescriptor || _$$c.BACK

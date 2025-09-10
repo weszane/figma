@@ -17,7 +17,7 @@ import { e5, Mk } from "../figma_app/297957";
 import { uE, k1 } from "../figma_app/314264";
 import { d9 } from "../figma_app/740025";
 import { isIntegrationContext } from "../figma_app/469876";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { M4 } from "../905/713695";
 import { N as _$$N } from "../905/696711";
 import { Np, xS } from "../figma_app/193867";
@@ -150,7 +150,7 @@ let $$H16 = createOptimistThunk((e, t) => {
   r?.type === t.type ? e.dispatch(oB()) : e.dispatch(j7(t));
 });
 let $$z9 = createOptimistThunk((e, t) => {
-  _$$T() ? Qn(t.url) : customHistory.redirect(t.url, "_blank");
+  isVsCodeEnvironment() ? Qn(t.url) : customHistory.redirect(t.url, "_blank");
 });
 export function $$W15(e, t = {}) {
   return sf({

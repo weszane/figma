@@ -5,7 +5,7 @@ import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E } from "../905/984674";
 import { lW } from "../figma_app/11182";
 var o = s;
@@ -16,7 +16,7 @@ export function $$h0({
 }) {
   let s = useDispatch();
   let [h, g] = useState(!1);
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 0,
     height: "hug-contents",

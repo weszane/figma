@@ -21,7 +21,7 @@ import { Ih } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Jh } from "../figma_app/441925";
 import { sx as _$$sx } from "../figma_app/307841";
 import { BC } from "../figma_app/149367";
@@ -453,7 +453,7 @@ function eo({
         className: _$$s.flex.flexColumn.$,
         children: [jsxs("div", {
           className: g ? _$$s.textHeadingLarge.flex.itemsCenter.$ : "consumption_paywall_modals--planName--ma-56 text--fontPos18--rYXJb text--_fontBase--QdLsd",
-          children: [_, e === d && jsx(_$$Y, {
+          children: [_, e === d && jsx(AutoLayout, {
             verticalAlignItems: "center",
             padding: {
               left: 8

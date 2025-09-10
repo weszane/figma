@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { ds } from "../figma_app/314264";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { vO, yc } from "../figma_app/671547";
 import { K } from "../905/694400";
 import { E } from "../905/695476";
@@ -25,7 +25,7 @@ export async function $$h1(e, t, i, s, o) {
     }));
   }
   if (!navigator.onLine) return g("Could not paste an embed because the browser was offline");
-  let f = d1(o)?.key ?? "";
+  let f = getSelectedFile(o)?.key ?? "";
   let _ = vO(t);
   try {
     h = Fullscreen.insertLoadingEmbedInCanvas(encodeURIComponent(t), encodeURIComponent(e));
@@ -94,7 +94,7 @@ export let $$g0 = createOptimistThunk(async (e, {
 }) => {
   if ("error" === (await $$h1(t, i, r, a, e.getState())).status) {
     Fullscreen.tryPastingTextFromClipboardAsTextNode(t);
-    let i = d1(e.getState())?.key ?? "";
+    let i = getSelectedFile(e.getState())?.key ?? "";
     ds(yc.ERROR, i, e.getState(), {
       entrypoint: a,
       domain: vO(t),

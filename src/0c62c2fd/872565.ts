@@ -56,7 +56,7 @@ import { X0 } from "../905/784221";
 import { debounce } from "../905/915765";
 import { getFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
 import { createOptimistThunk } from "../905/350402";
-import { S$, XX } from "../figma_app/345997";
+import { hasProjectRestrictions, hasTeamStatePaidAccess } from "../figma_app/345997";
 import { KH } from "../905/81982";
 import { NU } from "../905/163189";
 import { getDraftsSidebarString } from "../figma_app/633080";
@@ -191,8 +191,8 @@ let ev = new KH({
   threshold: .3,
   tokenize: !0
 });
-let ey = (e, t, r, a, s) => !(e.orgId !== s && t?.orgId !== s || !e.canEdit || t && S$(e, t, r) && !VA(e)) && (!a || !!XX(t));
-let ew = (e, t, r) => !r || !!XX(e);
+let ey = (e, t, r, a, s) => !(e.orgId !== s && t?.orgId !== s || !e.canEdit || t && hasProjectRestrictions(e, t, r) && !VA(e)) && (!a || !!hasTeamStatePaidAccess(t));
+let ew = (e, t, r) => !r || !!hasTeamStatePaidAccess(e);
 let ej = (e, t = !1) => {
   let r = [];
   Object.keys(e.folders).forEach(a => {

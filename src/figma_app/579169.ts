@@ -3,7 +3,7 @@ import { jm, qe } from "../figma_app/416935";
 import { HB } from "../3973/538504";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { UserForRcs, EduOffboardingData } from "../figma_app/43951";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { bW } from "../905/587414";
 import { qo } from "../905/696396";
 import { J9, Z1 } from "../905/401885";
@@ -28,7 +28,7 @@ let $$E6 = Z1(EduOffboardingData.Query({}), e => e.currentUser.eduPeriodEnd);
 let $$y8 = Z1(UserForRcs.Query({}), e => e.currentUser.teamRoles);
 let $$b7 = Z1($$y8, e => e?.map(e => e.team).filter(e => null != e));
 let T = createReduxSubscriptionAtomWithState(e => e.isFreeUser);
-let I = J9([rg, $$b7], ([e, t]) => (!e?.length || !(e.length > 0)) && (null == t || !t.some(e => e.canEdit && w5({
+let I = J9([rg, $$b7], ([e, t]) => (!e?.length || !(e.length > 0)) && (null == t || !t.some(e => e.canEdit && hasTeamPaidAccess({
   subscription: e.subscription,
   student_team: !!e.studentTeamAt,
   grace_period_end: e.gracePeriodEnd ? e.gracePeriodEnd.toISOString() : null

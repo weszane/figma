@@ -7,7 +7,7 @@ import { toTitleCase } from "../figma_app/930338";
 import { bv } from "../figma_app/421401";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { B as _$$B } from "../905/261906";
 import { JT, mb } from "../figma_app/847597";
@@ -229,7 +229,7 @@ function M({
       eccDomain: L
     }) : getI18nString("members_table.role_idp_tooltip.seat_rename");
     return jsx("div", {
-      children: jsxs(Y, {
+      children: jsxs(AutoLayout, {
         direction: "horizontal",
         verticalAlignItems: "center",
         children: [jsx("div", {

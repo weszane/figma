@@ -2,7 +2,7 @@ import { getI18nString } from "../905/303541";
 import { pS, hl, fN, Bt, MQ, Ah, Pg, kE, hW, rK } from "../905/588985";
 import { Gs, VZ, TH, Gw, rA, Bt as _$$Bt, Ib, o1 } from "../905/481915";
 import { ManifestEditorType } from "../figma_app/155287";
-import { T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { M } from "../figma_app/170366";
 import { wL, Pl, Z8 } from "../905/341409";
 let c = `# Node
@@ -56,7 +56,7 @@ function m({
   p.networkAccess = {
     allowedDomains: ["none"]
   };
-  T() && p.capabilities?.push("vscode");
+  isVsCodeEnvironment() && p.capabilities?.push("vscode");
   return JSON.stringify(p, void 0, 2);
 }
 let h = e => e.replace(/\s/g, "-").replace(/[^a-zA-Z0-9-_]/g, "");

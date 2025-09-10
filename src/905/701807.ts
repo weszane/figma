@@ -4,7 +4,7 @@ import { NC } from "../905/17179";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { $ } from "../905/489647";
 import { sf } from "../905/929976";
 import { Z, kq } from "../905/292918";
@@ -42,7 +42,7 @@ let $$S0 = createOptimistThunk(e => {
   }).catch(t => {
     e.dispatch(_b());
     let i = "missing_authentication" === t.data.reason ? getI18nString("collaboration.feedback.version_history_authentication_error") : getI18nString("collaboration.feedback.version_history_error");
-    e.dispatch(_$$s.error(J(t, i)));
+    e.dispatch(_$$s.error(resolveMessage(t, i)));
     e.dispatch(Y6({
       mode: UIVisibilitySetting.OFF
     }));

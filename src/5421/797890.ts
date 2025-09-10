@@ -36,7 +36,7 @@ import { globalPerfTimer } from "../905/542194";
 import { h as _$$h } from "../905/207101";
 import { YT, Oz, Qe, dJ, eG as _$$eG, uU, n6, iC, zt } from "../figma_app/84580";
 import { hh } from "../905/417232";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { rp, Zk, fI, U8, JU, nV } from "../figma_app/626177";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -524,7 +524,7 @@ function eM(e) {
             }), jsx("div", {
               className: "prototype_interaction_edit_modal--dividerHorizontalUI3--HMCeE"
             })]
-          }) : jsx(_$$Y, {
+          }) : jsx(AutoLayout, {
             direction: "horizontal",
             padding: {
               horizontal: 16,
@@ -533,7 +533,7 @@ function eM(e) {
             children: jsx(JU, {
               children: renderI18nText("fullscreen.mixed")
             })
-          })), differentLengthActions && jsx(_$$Y, {
+          })), differentLengthActions && jsx(AutoLayout, {
             direction: "horizontal",
             padding: {
               horizontal: 16,

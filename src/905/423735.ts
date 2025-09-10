@@ -11,7 +11,7 @@ import { P as _$$P } from "../905/347284";
 import { renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { n1 } from "../figma_app/657017";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { Fl } from "../figma_app/236178";
 import { LibraryModalAssetsDataByLibraryKey } from "../figma_app/43951";
 import { fi } from "../figma_app/155728";
@@ -56,7 +56,7 @@ export function $$F0({
   let H = useDispatch();
   let W = useSelector(e => e.dropdownShown);
   let K = useSelector(e => e.selectedView);
-  let Y = useSelector(e => d1(e));
+  let Y = useSelector(e => getSelectedFile(e));
   let q = _$$W2();
   let $ = ol();
   let Z = !l && !F;

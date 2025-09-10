@@ -1,53 +1,126 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, forwardRef, useContext, useRef, useImperativeHandle, useLayoutEffect } from "react";
-import { isNullish } from "../figma_app/95419";
-import { Uw, K } from "../905/499018";
-let a = {
-  cornerRadius: 0
-};
-let s = {
-  strokeColor: "transparent",
-  strokeWidth: 0
-};
-let o = {
-  width: "fill-parent",
-  height: "fill-parent"
-};
-function c(e) {
-  switch (e) {
-    case "center":
-      return "center";
-    case "end":
-      return "flex-end";
-    case "start":
-      return "flex-start";
-    case "baseline":
-      return "baseline";
-    case "space-between":
-      return "space-between";
-    case "stretch":
-      return "stretch";
+import type { ReactNode } from 'react'
+import { createContext, forwardRef, useContext, useImperativeHandle, useLayoutEffect, useRef } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { K as getBackgroundColor, Uw as getBorderColor } from '../905/499018'
+import { isNullish } from '../figma_app/95419'
+
+// Default style constants
+const DEFAULT_CORNER_RADIUS = {
+  cornerRadius: 0,
+}
+
+const DEFAULT_STROKE = {
+  strokeColor: 'transparent',
+  strokeWidth: 0,
+}
+
+const DEFAULT_SIZE = {
+  width: 'fill-parent',
+  height: 'fill-parent',
+}
+/**
+ * Maps alignment values to CSS flex alignment properties
+ */
+type AlignmentValue = 'center' | 'end' | 'start' | 'baseline' | 'space-between' | 'stretch'
+type CssAlignmentValue = 'center' | 'flex-end' | 'flex-start' | 'baseline' | 'space-between' | 'stretch'
+
+function mapAlignmentToFlexValue(alignment: AlignmentValue): CssAlignmentValue {
+  switch (alignment) {
+    case 'center':
+      return 'center'
+    case 'end':
+      return 'flex-end'
+    case 'start':
+      return 'flex-start'
+    case 'baseline':
+      return 'baseline'
+    case 'space-between':
+      return 'space-between'
+    case 'stretch':
+      return 'stretch'
   }
 }
-let u = "autolayout--ignoreSpacing--Qyi-n";
-let p = createContext(0);
-let $$m0 = forwardRef(function (e, t) {
-  let i = useContext(p);
-  let {
+// CSS class for elements that should ignore spacing
+const IGNORE_SPACING_CLASS = 'autolayout--ignoreSpacing--Qyi-n'
+
+// Context to track nesting level for alternating styles
+const NestingLevelContext = createContext(0)
+/**
+ * Props for the AutoLayout component
+ */
+type Padding = number | {
+  top?: number
+  right?: number
+  bottom?: number
+  left?: number
+  vertical?: number
+  horizontal?: number
+}
+
+type StrokeWidth = number | {
+  top?: number
+  right?: number
+  bottom?: number
+  left?: number
+}
+
+type CornerRadius = number | {
+  topLeft?: number
+  topRight?: number
+  bottomRight?: number
+  bottomLeft?: number
+}
+
+type Direction = 'horizontal' | 'vertical'
+type SizeValue = number | 'fill-parent' | 'hug-contents' | string
+type SpacingValue = number | 'auto' | string
+
+interface AutoLayoutProps {
+  direction?: Direction
+  padding?: Padding
+  spacing?: SpacingValue
+  width?: SizeValue
+  height?: SizeValue
+  cornerRadius?: CornerRadius
+  strokeColor?: string
+  strokeWidth?: StrokeWidth
+  backgroundColor?: string
+  horizontalAlignItems?: AlignmentValue
+  verticalAlignItems?: AlignmentValue
+  dataTestId?: string
+  children?: ReactNode
+}
+
+/**
+ * AutoLayout component that provides flexbox-based layout with Figma-like API
+ */
+export const AutoLayout = forwardRef<HTMLDivElement, AutoLayoutProps>((props, ref) => {
+  const nestingLevel = useContext(NestingLevelContext)
+  const {
     dataTestId,
     children,
-    ...g
-  } = e;
-  let f = useRef(null);
-  useImperativeHandle(t, () => f.current);
+    ...restProps
+  } = props
+  const containerRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => containerRef.current)
+  // Add ignore spacing class to absolutely positioned children
   useLayoutEffect(() => {
-    for (let e of f.current.children) "absolute" === window.getComputedStyle(e).position && e.classList.add(u);
-  }, []);
-  let {
+    if (!containerRef.current)
+      return
+
+    // Convert HTMLCollection to Array to make it iterable
+    Array.from(containerRef.current.children).forEach((child) => {
+      if (window.getComputedStyle(child).position === 'absolute') {
+        child.classList.add(IGNORE_SPACING_CLASS)
+      }
+    })
+  }, [])
+  // Calculate styles based on props and nesting level
+  const {
     usesSpacing,
-    style
-  } = function (e, t) {
-    let {
+    style,
+  } = (function (props, nestingLevel) {
+    const {
       cornerRadius,
       padding,
       width,
@@ -56,138 +129,272 @@ let $$m0 = forwardRef(function (e, t) {
       spacing,
       verticalAlignItems,
       horizontalAlignItems,
-      backgroundColor
-    } = e;
-    let m = {};
-    Object.assign(m, function (e) {
-      let {
+      backgroundColor,
+    } = props
+
+    const computedStyle: Record<string, any> = {}
+    // Apply stroke styles if needed
+    Object.assign(computedStyle, (function (props) {
+      const {
         strokeColor,
-        strokeWidth
-      } = e;
-      let n = {};
-      (0 !== strokeWidth.top || 0 !== strokeWidth.right || 0 !== strokeWidth.bottom || 0 !== strokeWidth.left) && (n.borderWidth = `${strokeWidth.top}px ${strokeWidth.right}px ${strokeWidth.bottom}px ${strokeWidth.left}px`, n.borderStyle = "solid", n.borderColor = Uw(strokeColor));
-      return n;
-    }(e));
-    m.boxSizing = "border-box";
-    cornerRadius.some(e => 0 !== e) && (m.borderRadius = cornerRadius.map(e => `${e}px`).join(" "));
-    (0 !== padding.top || 0 !== padding.right || 0 !== padding.bottom || 0 !== padding.left) && (m.padding = `${padding.top}px ${padding.right}px ${padding.bottom}px ${padding.left}px`);
-    "number" == typeof width ? (m.width = width, m.minWidth = width) : "fill-parent" === width ? m.width = "100%" : "hug-contents" === width ? m.width = "max-content" : width.endsWith("%") && (m.width = width);
-    "number" == typeof height ? (m.height = height, m.minHeight = height) : "fill-parent" === height ? m.height = "100%" : "hug-contents" === height ? m.height = "max-content" : height.endsWith("%") && (m.height = height);
-    backgroundColor && (m.backgroundColor = K(backgroundColor));
-    m.display = "flex";
-    m.flexDirection = "vertical" === direction ? "column" : "row";
-    "horizontal" === direction ? (m.justifyContent = c(horizontalAlignItems), m.alignItems = c(verticalAlignItems)) : "vertical" === direction && (m.justifyContent = c(verticalAlignItems), m.alignItems = c(horizontalAlignItems));
-    let h = !1;
-    let g = "0px";
-    let f = "0px";
-    if ("auto" === spacing) m.justifyContent = "space-between";else {
-      let e;
-      h = !0;
-      e = "number" == typeof spacing ? `${spacing}px` : spacing;
-      "horizontal" === direction ? g = e : f = e;
-      t % 2 == 0 ? (m["--autolayout-spacing-horizontal-even"] = g, m["--autolayout-spacing-vertical-even"] = f) : (m["--autolayout-spacing-horizontal-odd"] = g, m["--autolayout-spacing-vertical-odd"] = f);
+        strokeWidth,
+      } = props
+      const strokeStyles: Record<string, any> = {}
+      const hasStroke = strokeWidth.top !== 0 || strokeWidth.right !== 0 || strokeWidth.bottom !== 0 || strokeWidth.left !== 0
+
+      if (hasStroke) {
+        strokeStyles.borderWidth = `${strokeWidth.top}px ${strokeWidth.right}px ${strokeWidth.bottom}px ${strokeWidth.left}px`
+        strokeStyles.borderStyle = 'solid'
+        strokeStyles.borderColor = getBorderColor(strokeColor)
+      }
+      return strokeStyles
+    }(props)))
+
+    // Set box sizing
+    computedStyle.boxSizing = 'border-box'
+    // Apply border radius if any corner has a non-zero value
+    if (cornerRadius.some(radius => radius !== 0)) {
+      computedStyle.borderRadius = cornerRadius.map(radius => `${radius}px`).join(' ')
+    }
+    // Apply padding if any side has a non-zero value
+    const hasPadding = padding.top !== 0 || padding.right !== 0 || padding.bottom !== 0 || padding.left !== 0
+    if (hasPadding) {
+      computedStyle.padding = `${padding.top}px ${padding.right}px ${padding.bottom}px ${padding.left}px`
+    }
+    // Apply width based on type
+    if (typeof width === 'number') {
+      computedStyle.width = width
+      computedStyle.minWidth = width
+    }
+    else if (width === 'fill-parent') {
+      computedStyle.width = '100%'
+    }
+    else if (width === 'hug-contents') {
+      computedStyle.width = 'max-content'
+    }
+    else if (typeof width === 'string' && width.endsWith('%')) {
+      computedStyle.width = width
+    }
+    // Apply height based on type
+    if (typeof height === 'number') {
+      computedStyle.height = height
+      computedStyle.minHeight = height
+    }
+    else if (height === 'fill-parent') {
+      computedStyle.height = '100%'
+    }
+    else if (height === 'hug-contents') {
+      computedStyle.height = 'max-content'
+    }
+    else if (typeof height === 'string' && height.endsWith('%')) {
+      computedStyle.height = height
+    }
+    // Apply background color if specified
+    if (backgroundColor) {
+      computedStyle.backgroundColor = getBackgroundColor(backgroundColor)
+    }
+    // Set flex display properties
+    computedStyle.display = 'flex'
+    computedStyle.flexDirection = direction === 'vertical' ? 'column' : 'row'
+    // Set alignment based on direction
+    if (direction === 'horizontal') {
+      computedStyle.justifyContent = mapAlignmentToFlexValue(horizontalAlignItems)
+      computedStyle.alignItems = mapAlignmentToFlexValue(verticalAlignItems)
+    }
+    else if (direction === 'vertical') {
+      computedStyle.justifyContent = mapAlignmentToFlexValue(verticalAlignItems)
+      computedStyle.alignItems = mapAlignmentToFlexValue(horizontalAlignItems)
+    }
+    // Handle spacing between items
+    let usesCustomSpacing = false
+    let horizontalSpacing = '0px'
+    let verticalSpacing = '0px'
+    if (spacing === 'auto') {
+      // Auto spacing uses space-between
+      computedStyle.justifyContent = 'space-between'
+    }
+    else {
+      // Custom spacing
+      let spacingValue
+      usesCustomSpacing = true
+
+      // Convert spacing to CSS value
+      spacingValue = typeof spacing === 'number' ? `${spacing}px` : spacing
+
+      // Apply spacing based on direction
+      if (direction === 'horizontal') {
+        horizontalSpacing = spacingValue
+      }
+      else {
+        verticalSpacing = spacingValue
+      }
+
+      // Apply CSS variables based on nesting level (even/odd)
+      if (nestingLevel % 2 === 0) {
+        computedStyle['--autolayout-spacing-horizontal-even'] = horizontalSpacing
+        computedStyle['--autolayout-spacing-vertical-even'] = verticalSpacing
+      }
+      else {
+        computedStyle['--autolayout-spacing-horizontal-odd'] = horizontalSpacing
+        computedStyle['--autolayout-spacing-vertical-odd'] = verticalSpacing
+      }
     }
     return {
-      usesSpacing: h,
-      style: m
-    };
-  }(function (e) {
-    var t;
-    var i;
-    var n;
-    let r = {};
-    for (let a in e) switch (a) {
-      case "padding":
-        r.padding = (n = e.padding, isNullish(n) ? {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
-        } : "number" == typeof n ? {
-          top: n,
-          right: n,
-          bottom: n,
-          left: n
-        } : "vertical" in n || "horizontal" in n ? {
-          top: n.vertical ?? 0,
-          bottom: n.vertical ?? 0,
-          right: n.horizontal ?? 0,
-          left: n.horizontal ?? 0
-        } : {
-          top: n.top ?? 0,
-          right: n.right ?? 0,
-          bottom: n.bottom ?? 0,
-          left: n.left ?? 0
-        });
-        break;
-      case "strokeWidth":
-        r.strokeWidth = (t = e.strokeWidth, isNullish(t) ? {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
-        } : "number" == typeof t ? {
-          top: t,
-          right: t,
-          bottom: t,
-          left: t
-        } : {
-          top: t.top ?? 0,
-          right: t.right ?? 0,
-          bottom: t.bottom ?? 0,
-          left: t.left ?? 0
-        });
-        break;
-      case "cornerRadius":
-        r.cornerRadius = (i = e.cornerRadius, isNullish(i) ? [0, 0, 0, 0] : "number" == typeof i ? [i, i, i, i] : [i.topLeft ?? 0, i.topRight ?? 0, i.bottomRight ?? 0, i.bottomLeft ?? 0]);
-        break;
-      default:
-        r[a] = e[a];
+      usesSpacing: usesCustomSpacing,
+      style: computedStyle,
     }
-    return r;
+  }((function normalizeProps(props) {
+    let normalizedStrokeWidth
+    let normalizedCornerRadius
+    let normalizedPadding
+    const normalizedProps: Record<string, any> = {}
+    // Process each prop and normalize complex values
+    for (const key in props) {
+      switch (key) {
+        case 'padding':
+          // Normalize padding to object with top, right, bottom, left
+          normalizedPadding = props.padding
+          normalizedProps.padding = isNullish(normalizedPadding)
+            ? {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+            }
+            : typeof normalizedPadding === 'number'
+              ? {
+                top: normalizedPadding,
+                right: normalizedPadding,
+                bottom: normalizedPadding,
+                left: normalizedPadding,
+              }
+              : 'vertical' in normalizedPadding || 'horizontal' in normalizedPadding
+                ? {
+                  top: normalizedPadding.vertical ?? 0,
+                  bottom: normalizedPadding.vertical ?? 0,
+                  right: normalizedPadding.horizontal ?? 0,
+                  left: normalizedPadding.horizontal ?? 0,
+                }
+                : {
+                  top: normalizedPadding.top ?? 0,
+                  right: normalizedPadding.right ?? 0,
+                  bottom: normalizedPadding.bottom ?? 0,
+                  left: normalizedPadding.left ?? 0,
+                }
+          break
+        case 'strokeWidth':
+          // Normalize strokeWidth to object with top, right, bottom, left
+          normalizedStrokeWidth = props.strokeWidth
+          normalizedProps.strokeWidth = isNullish(normalizedStrokeWidth)
+            ? {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+            }
+            : typeof normalizedStrokeWidth === 'number'
+              ? {
+                top: normalizedStrokeWidth,
+                right: normalizedStrokeWidth,
+                bottom: normalizedStrokeWidth,
+                left: normalizedStrokeWidth,
+              }
+              : {
+                top: normalizedStrokeWidth.top ?? 0,
+                right: normalizedStrokeWidth.right ?? 0,
+                bottom: normalizedStrokeWidth.bottom ?? 0,
+                left: normalizedStrokeWidth.left ?? 0,
+              }
+          break
+        case 'cornerRadius':
+          // Normalize cornerRadius to array [topLeft, topRight, bottomRight, bottomLeft]
+          normalizedCornerRadius = props.cornerRadius
+          normalizedProps.cornerRadius = isNullish(normalizedCornerRadius)
+            ? [0, 0, 0, 0]
+            : typeof normalizedCornerRadius === 'number'
+              ? [normalizedCornerRadius, normalizedCornerRadius, normalizedCornerRadius, normalizedCornerRadius]
+              : [
+                normalizedCornerRadius.topLeft ?? 0,
+                normalizedCornerRadius.topRight ?? 0,
+                normalizedCornerRadius.bottomRight ?? 0,
+                normalizedCornerRadius.bottomLeft ?? 0,
+              ]
+          break
+        default:
+          // Pass through other props unchanged
+          normalizedProps[key] = props[key]
+      }
+    }
+
+    return normalizedProps
   }({
+    // Merge default props with user props
     ...{
-      ...a,
-      ...s,
-      ...o,
-      ...function (e) {
-        let t = e.direction ?? "horizontal";
+      ...DEFAULT_CORNER_RADIUS,
+      ...DEFAULT_STROKE,
+      ...DEFAULT_SIZE,
+      ...(function getDefaultLayoutProps(props) {
+        // Determine default direction
+        const direction = props.direction ?? 'horizontal'
+
         return {
-          direction: t,
+          direction,
           spacing: 8,
           padding: 0,
-          horizontalAlignItems: "start",
-          verticalAlignItems: "horizontal" === t ? "center" : "start"
-        };
-      }(g),
-      backgroundColor: "transparent",
-      dataTestId: ""
+          horizontalAlignItems: 'start',
+          verticalAlignItems: direction === 'horizontal' ? 'center' : 'start',
+        }
+      }(restProps)),
+      backgroundColor: 'transparent',
+      dataTestId: '',
     },
-    ...g
-  }), i);
-  return jsx(p.Provider, {
-    value: i + 1,
-    children: jsx("div", {
-      ref: f,
-      className: usesSpacing ? i % 2 == 0 ? "autolayout--containerEven--6FZdS" : "autolayout--containerOdd--Rpg-5" : void 0,
+    ...restProps,
+  })), nestingLevel))
+  // Determine container class based on nesting level and spacing
+  const containerClass = usesSpacing
+    ? nestingLevel % 2 === 0
+      ? 'autolayout--containerEven--6FZdS'
+      : 'autolayout--containerOdd--Rpg-5'
+    : undefined
+
+  return jsx(NestingLevelContext.Provider, {
+    value: nestingLevel + 1,
+    children: jsx('div', {
+      'ref': containerRef,
+      'className': containerClass,
       style,
       children,
-      "data-testid": dataTestId
-    })
-  });
-});
-export function $$h1({
-  minSize: e = 0
-}) {
-  return jsx("div", {
-    "aria-hidden": "true",
-    className: u,
-    style: {
+      'data-testid': dataTestId,
+    }),
+  })
+})
+/**
+ * Props for the Spacer component
+ */
+interface SpacerProps {
+  minSize?: number
+}
+
+/**
+ * Spacer component that creates flexible space in an AutoLayout container
+ */
+export function Spacer({
+  minSize = 0,
+}: SpacerProps) {
+  return jsx('div', {
+    'aria-hidden': 'true',
+    'className': IGNORE_SPACING_CLASS,
+    'style': {
       flexGrow: 1,
       flexShrink: 0,
-      flexBasis: e
-    }
-  });
+      flexBasis: minSize,
+    },
+  })
 }
-export const Y = $$m0;
-export const M = $$h1;
+// Legacy exports
+export const $$m0 = AutoLayout
+export const $$h1 = Spacer
+
+// Named exports
+export const Y = AutoLayout
+export const M = Spacer

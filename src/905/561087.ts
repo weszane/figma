@@ -4,7 +4,7 @@ import { NC } from "../905/17179";
 import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
@@ -55,7 +55,7 @@ let $$_5 = createOptimistThunk(async (e, {
     }));
   }).catch(t => {
     e.dispatch(VisualBellActions.enqueue({
-      message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file")),
+      message: resolveMessage(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_updating_this_file")),
       error: !0
     }));
   });
@@ -83,7 +83,7 @@ let A = (e, t, i, r, a, s = []) => {
   }).catch(t => {
     e.dispatch(createOptimistRevertAction(r));
     e.dispatch(VisualBellActions.enqueue({
-      message: J(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_deleting_these_files")),
+      message: resolveMessage(t, t.data?.message || getI18nString("collaboration.branching.an_error_occurred_while_deleting_these_files")),
       error: !0
     }));
   });

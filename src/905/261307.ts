@@ -13,7 +13,7 @@ import { o as _$$o } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { RR } from "../figma_app/307841";
 import { k as _$$k2 } from "../figma_app/618031";
 import { getRumLoggingConfig } from "../905/16237";
@@ -115,7 +115,7 @@ export let $$O0 = registerModal(function ({
               padding: 0,
               children: [jsx(_$$T, {
                 licenseType: e
-              }), jsx(_$$Y, {
+              }), jsx(AutoLayout, {
                 padding: {
                   top: 8,
                   bottom: 8,

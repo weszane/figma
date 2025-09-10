@@ -16,7 +16,7 @@ import { vQ, jE } from "../905/656545";
 import { am } from "../figma_app/430563";
 import { hideModal } from "../905/156213";
 import { J as _$$J2 } from "../905/445197";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { q as _$$q } from "../905/807667";
 import { gy, fc } from "../figma_app/646357";
 import { T as _$$T } from "../905/486858";
@@ -476,7 +476,7 @@ export function $$ef0({
       });
     });
   });
-  let T = useSelector(e => d1(e));
+  let T = useSelector(e => getSelectedFile(e));
   let k = useSelector(Co);
   let R = Kw(e);
   let N = lh();

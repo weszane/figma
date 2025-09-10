@@ -10,7 +10,7 @@ import { analyticsEventManager } from "../905/449184";
 import { Wi, JR } from "../figma_app/162641";
 import { e6, hH } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { e as _$$e } from "../figma_app/522702";
 import { v as _$$v } from "../905/213481";
@@ -53,7 +53,7 @@ function y(e) {
     let s = j(a, n);
     e.onApply(s);
   };
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     spacing: 8,
     width: "hug-contents",
@@ -287,7 +287,7 @@ let M = {
 function P(e) {
   return jsx("div", {
     className: "x14lv1n5 x23rxs8 x197cmgg",
-    children: jsxs(Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 8,
       children: [jsx("h2", {
@@ -448,7 +448,7 @@ function $(e) {
     }]));
     e.onApply(s);
   };
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     verticalAlignItems: "center",
     direction: "vertical",
     width: "hug-contents",
@@ -462,7 +462,7 @@ function $(e) {
         suggestedFilterType: e.type,
         suggestedFilterValue: e.value
       },
-      children: jsxs(Y, {
+      children: jsxs(AutoLayout, {
         direction: "horizontal",
         spacing: 0,
         children: [jsx(_$$s, {
@@ -621,7 +621,7 @@ function G({
     u();
   }, [e, filterValues, u, o]);
   let E = Object.values(filterValues).every(e => e.current === e.$$default);
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     dataTestId: "table-filter-popover",
     direction: "vertical",
     children: [jsxs("div", {

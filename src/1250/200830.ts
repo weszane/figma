@@ -49,7 +49,7 @@ import { U as _$$U2 } from "../1250/501209";
 import { Gv, ak, iy, GV } from "../figma_app/532170";
 import { debugState } from "../905/407919";
 import { uM } from "../905/738636";
-import { xA } from "../905/766303";
+import { getNewFileConfig } from "../905/766303";
 import { ai as _$$ai } from "../figma_app/915202";
 import { c4, Au } from "../figma_app/518077";
 import { K as _$$K } from "../1250/166809";
@@ -92,13 +92,13 @@ import { xX, j9 } from "../figma_app/211146";
 import { _6 } from "../figma_app/386952";
 import { f as _$$f2 } from "../905/940356";
 import { ng as _$$ng, u_, $g, Jy, v$ } from "../figma_app/205827";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { In } from "../905/672640";
 import { B as _$$B } from "../905/714743";
 import { A as _$$A2 } from "../svg/831814";
 import { hideModal, showModalHandler } from "../905/156213";
 import { bE } from "../figma_app/375098";
-import { WW, Wf, w5 } from "../figma_app/345997";
+import { STANDARD_LIMIT, PRIMARY_LIMIT, hasTeamPaidAccess } from "../figma_app/345997";
 import { Mm, iX, bo, h3, $Q, TB, PG, NN } from "../5885/399780";
 import { registerModal } from "../905/102752";
 import { A as _$$A3 } from "../svg/219958";
@@ -469,7 +469,7 @@ function eE(e) {
       e.onClickPrimaryCta();
       (function () {
         let e = debugState.getState();
-        debugState.dispatch(uM(xA({
+        debugState.dispatch(uM(getNewFileConfig({
           state: e,
           openNewFileIn: _$$ai.SAME_TAB
         })));
@@ -1172,11 +1172,11 @@ function tW({
   useEffect(() => {
     void 0 !== n && s(n);
   }, [n]);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     verticalAlignItems: "start",
     width: "100%",
     height: "hug-contents",
-    children: [t, jsxs(_$$Y, {
+    children: [t, jsxs(AutoLayout, {
       direction: "vertical",
       children: [jsx("div", {
         tabIndex: 0,
@@ -1186,7 +1186,7 @@ function tW({
           r && r(o);
           s(e => !e);
         },
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           horizontalAlignItems: "space-between",
           verticalAlignItems: "center",
           children: [jsx("div", {
@@ -1282,14 +1282,14 @@ function t0() {
   let n = useMemo(() => [{
     title: jsx(_$$E2, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.title", {
-        maxNumOfFiles: WW,
-        maxNumOfProjects: Wf
+        maxNumOfFiles: STANDARD_LIMIT,
+        maxNumOfProjects: PRIMARY_LIMIT
       })
     }),
     children: jsx(_$$E2, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.description")
     }),
-    leftComponent: jsx(_$$Y, {
+    leftComponent: jsx(AutoLayout, {
       width: "hug-contents",
       height: "hug-contents",
       padding: {
@@ -1307,7 +1307,7 @@ function t0() {
     children: jsx(_$$E2, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.description")
     }),
-    leftComponent: jsx(_$$Y, {
+    leftComponent: jsx(AutoLayout, {
       width: "hug-contents",
       height: "hug-contents",
       padding: {
@@ -1325,7 +1325,7 @@ function t0() {
     children: jsx(_$$E2, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.other.description")
     }),
-    leftComponent: jsx(_$$Y, {
+    leftComponent: jsx(AutoLayout, {
       width: "hug-contents",
       height: "hug-contents",
       padding: {
@@ -1337,7 +1337,7 @@ function t0() {
       })
     })
   }], []);
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     width: "100%",
     direction: "vertical",
     spacing: 24,
@@ -1348,7 +1348,7 @@ function t0() {
       title: n,
       children: r,
       leftComponent: i
-    }, o) => jsx(_$$Y, {
+    }, o) => jsx(AutoLayout, {
       height: "hug-contents",
       strokeColor: "default",
       strokeWidth: {
@@ -1484,12 +1484,12 @@ function t6(e) {
     role: "button",
     className: isSelected ? "pro_trial_form_modal--proTrialFeatureContainerSelected--t69-D pro_trial_form_modal--proTrialFeatureContainer--RI3Vx" : "pro_trial_form_modal--proTrialFeatureContainer--RI3Vx",
     onClick,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: "horizontal",
       horizontalAlignItems: "start",
       verticalAlignItems: "center",
       spacing: "12px",
-      children: [jsx(_$$Y, {
+      children: [jsx(AutoLayout, {
         direction: "horizontal",
         horizontalAlignItems: "center",
         verticalAlignItems: "center",
@@ -1523,7 +1523,7 @@ function t8(e) {
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.not_being_nosy")
       }),
       hideModal,
-      middleContent: jsx(_$$Y, {
+      middleContent: jsx(AutoLayout, {
         direction: "horizontal",
         horizontalAlignItems: "center",
         verticalAlignItems: "center",
@@ -1575,7 +1575,7 @@ function t9(e) {
     role: "button",
     className: isSelected ? "pro_trial_form_modal--teamTypeCardContainerSelected--kq22n pro_trial_form_modal--teamTypeCardContainer--HEdI4" : "pro_trial_form_modal--teamTypeCardContainer--HEdI4",
     onClick,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       horizontalAlignItems: "center",
       verticalAlignItems: "start",
@@ -2060,7 +2060,7 @@ let nb = atom(() => {
   return !1;
 });
 let nx = createReduxSubscriptionAtomWithState(e => null != e.payment.promo);
-let ny = Z1(Vm, e => (e ?? []).some(e => null != e && !w5({
+let ny = Z1(Vm, e => (e ?? []).some(e => null != e && !hasTeamPaidAccess({
   subscription: e.subscription,
   student_team: !!e.studentTeamAt,
   grace_period_end: e.gracePeriodEnd ? e.gracePeriodEnd.toISOString() : null
@@ -2173,7 +2173,7 @@ function nA({
   }) => e);
   let r = useSelector(e => e.teams);
   let i = FC();
-  let o = useMemo(() => Object.values(r).filter(e => !w5(e) && canEditTeam(e.id, i)), [r, i]);
+  let o = useMemo(() => Object.values(r).filter(e => !hasTeamPaidAccess(e) && canEditTeam(e.id, i)), [r, i]);
   let s = [];
   let l = useMemo(() => o.map(e => ({
     teamId: e.id

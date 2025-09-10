@@ -45,7 +45,7 @@ import { V as _$$V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { g7, Ev } from "../905/939482";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { getRepoById, isBranch, getDisplayNameAlt } from "../905/760074";
 import { hT, GS } from "../figma_app/630951";
 import { t as _$$t2 } from "../figma_app/579169";
@@ -1153,7 +1153,7 @@ function tk({
   viewMissingFiles: u
 }) {
   let p = useContext(_$$r);
-  let m = useSelector(d1);
+  let m = useSelector(getSelectedFile);
   let [h, g] = useState(new Set());
   let f = Fl();
   let _ = useAtomWithSubscription(qq);

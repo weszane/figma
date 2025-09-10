@@ -217,7 +217,7 @@ import { L as _$$L } from "../905/453756";
 import { KX } from "../figma_app/89917";
 import { HS } from "../figma_app/416935";
 import { nN as _$$nN, wj } from "../figma_app/323326";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { lk } from "../figma_app/109538";
 import { B as _$$B3 } from "../905/380801";
 import { Bq } from "../figma_app/482142";
@@ -7068,23 +7068,23 @@ let sr = registerModal(function ({
     titleClass: "oss_sales_upsell_modal--title--wpaS5",
     children: [jsx("div", {
       className: _$$s.lh24.font13.pt24.pr0.pb32.pl0.$,
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         spacing: "40px",
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           direction: "vertical",
           spacing: "12px",
           children: [jsx("p", {
             children: renderI18nText("oss_sales_upsell_overlay.body1")
-          }), jsxs(_$$Y, {
+          }), jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 8,
             children: [jsx("p", {
               className: _$$s.fontSemiBold.$,
               children: renderI18nText("oss_sales_upsell_overlay.body2")
-            }), jsx(_$$Y, {
+            }), jsx(AutoLayout, {
               direction: "vertical",
               spacing: 8,
-              children: si.map(e => jsxs(_$$Y, {
+              children: si.map(e => jsxs(AutoLayout, {
                 spacing: 8,
                 horizontalAlignItems: "start",
                 children: [jsx("p", {

@@ -109,7 +109,7 @@ import { N2 } from '../905/213527';
 import { isInvalidValue, isValidValue, MIXED_MARKER, toArray, valueOrFallback } from '../905/216495';
 import { b as _$$b14 } from '../905/217163';
 import { y as _$$y } from '../905/225297';
-import { J as _$$J9 } from '../905/231762';
+import { resolveMessage } from '../905/231762';
 import { n6 as _$$n3 } from '../905/234821';
 import { E as _$$E10 } from '../905/235326';
 import { o as _$$o0 } from '../905/237202';
@@ -280,7 +280,7 @@ import { sZ as _$$sZ } from '../905/845253';
 import { BK, Um } from '../905/848862';
 import { K as _$$K3 } from '../905/851274';
 import { EL, F_ } from '../905/858282';
-import { T as _$$T } from '../905/858738';
+import { isVsCodeEnvironment } from '../905/858738';
 import { qB } from '../905/862321';
 import { h as _$$h7 } from '../905/864281';
 import { Ay as _$$Ay7 } from '../905/865071';
@@ -6471,7 +6471,7 @@ async function oh(e, t, i) {
             error: 1
           };
         }
-      } catch { }
+      } catch {}
       return {
         success: !1,
         error: 3
@@ -7467,7 +7467,7 @@ function oY({
         });
       } catch (e) {
         h({
-          message: _$$J9(e, e.message),
+          message: resolveMessage(e, e.message),
           type: 'warning'
         });
         f(!1);
@@ -9936,7 +9936,7 @@ function cm({
       return n;
     }
   }, [s.faviconID]);
-  useEffect(() => { }, [s.faviconID]);
+  useEffect(() => {}, [s.faviconID]);
   return jsx('div', {
     className: 'x1dc814f x1ff1495',
     children: jsx(d8, {
@@ -13174,7 +13174,7 @@ async function xw(e, t, i) {
       });
       await navigator.clipboard.write([i]);
       a();
-    } catch (e) { }
+    } catch (e) {}
   }
 }
 async function xS(e, t) {
@@ -13621,7 +13621,7 @@ let xE = memo(({
       });
     }
   }, [e]);
-  let E = useCallback(e => { }, []);
+  let E = useCallback(e => {}, []);
   useEffect(() => {
     S(i.current?.api, u);
   }, [u, S]);
@@ -14789,7 +14789,7 @@ function mv({
           ...Object.fromEntries(Object.entries(e).filter(([e]) => !n[e])),
           ...l
         }));
-      } catch (e) { } finally {
+      } catch (e) {} finally {
         b.current = !1;
       }
     }, _), b.current = !0) : (k(n), m(l)));
@@ -16180,7 +16180,7 @@ let hd = registerModal(e => {
                 }));
               }
             }) : jsx(ho, {
-              onImportFailure: () => { },
+              onImportFailure: () => {},
               onImportSuccess: e => {
                 r(e);
                 d(e.name);
@@ -16723,7 +16723,7 @@ function hb() {
       g(l);
       f(e => new Set(e).add(l));
       let a = (await hg(t)).getReader();
-      for (h(!1); ;) {
+      for (h(!1);;) {
         let {
           done,
           value
@@ -17253,7 +17253,7 @@ function h0(e) {
         deleteItem: () => {
           _$$l.user('delete-code-component', () => {
             let t = getSingletonSceneGraph().get(e);
-            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e); else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid); else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid); else throw new Error(`Invalid node type for deletion: ${t?.type}`);
+            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
             fullscreenValue.triggerAction('commit');
           });
         },
@@ -20900,8 +20900,8 @@ async function _T({
   ignoreKnown: e = !1,
   widths: t
 } = {
-    ignoreKnown: !1
-  }) {
+  ignoreKnown: !1
+}) {
   _S();
   let i = _C();
   if (!i.length) throw new Error('No breakpoint frames in selection');
@@ -21361,7 +21361,7 @@ let _q = e => {
   for (let t of e.directlySelectedNodes) {
     for (; t;) {
       if (t.isBreakpointFrame || t.isResponsiveSet) return t;
-      if (t.parentNode) t = t.parentNode; else break;
+      if (t.parentNode) t = t.parentNode;else break;
     }
   }
 };
@@ -23237,7 +23237,7 @@ function ve({
     })
   });
 }
-class vt extends _$$c$6 { }
+class vt extends _$$c$6 {}
 function vs({
   directManipulationEditor: e,
   classNameEditingController: t,
@@ -23503,12 +23503,12 @@ let vu = memo(e => {
       message: t,
       error: !0,
       button: {
-        action: () => { },
+        action: () => {},
         text: getI18nString('figmake.refresh')
       }
     }));
   }, [n]);
-  let o = useMemo(() => new _$$q0(t, e => { }, r), [t, r]);
+  let o = useMemo(() => new _$$q0(t, e => {}, r), [t, r]);
   let d = _$$lj(t);
   return jsxs(Fragment, {
     children: [jsx(yZ, {
@@ -30989,7 +30989,7 @@ let T2 = memo(({
           commentsDetailContainerRef: g
         }), jsx(_$$X, {}), jsx(_$$J2, {}), jsx(Nz, {}), jsx('div', {
           ref: g
-        }), !_$$T() && !c && jsx(g9, {}), !_$$T() && c && jsx(px, {}), !h && jsx(_$$E, {
+        }), !isVsCodeEnvironment() && !c && jsx(g9, {}), !isVsCodeEnvironment() && c && jsx(px, {}), !h && jsx(_$$E, {
           filterOutNoneActions: !0
         }), jsx(_$$G, {
           children: z

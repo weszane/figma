@@ -9,12 +9,12 @@ import { reportError } from "../905/11";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { VisualBellActions } from "../905/302958";
 import { fullscreenValue } from "../figma_app/455680";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { p as _$$p, H } from "../905/216429";
 import { INTERNAL_RERUN_PLUGIN_IDENTIFIER, PARENT_WINDOW_REFERENCE, PLUGIN_TIMEOUT_MS, PLUGIN_RETRY_DELAY_MS } from "../905/968269";
-import { of } from "../905/544659";
+import { applyContentSecurityPolicy } from "../905/544659";
 import { Y } from "../905/696438";
-let y = !!desktopAPIInstance || _$$T();
+let y = !!desktopAPIInstance || isVsCodeEnvironment();
 let b = `
  document.close();
  document.addEventListener('keydown', (e) => {
@@ -35,11 +35,11 @@ let b = `
          } else {
            document.execCommand('undo')
          }
-       } else if ((e.key === 'x' || e.key === 'X') && ${JSON.stringify(_$$T())}) {
+       } else if ((e.key === 'x' || e.key === 'X') && ${JSON.stringify(isVsCodeEnvironment())}) {
          document.execCommand('cut')
-       } else if ((e.key === 'c' || e.key === 'C') && ${JSON.stringify(_$$T())}) {
+       } else if ((e.key === 'c' || e.key === 'C') && ${JSON.stringify(isVsCodeEnvironment())}) {
          document.execCommand('copy')
-       } else if ((e.key === 'v' || e.key === 'V') && ${JSON.stringify(_$$T())}) {
+       } else if ((e.key === 'v' || e.key === 'V') && ${JSON.stringify(isVsCodeEnvironment())}) {
          document.execCommand('paste')
        }
      }
@@ -172,7 +172,7 @@ class I {
       let e = this.networkIframeElement.contentDocument.body;
       e.style.margin = "0";
       e.style.padding = "0";
-      of(this.networkIframeElement, allowedDomains);
+      applyContentSecurityPolicy(this.networkIframeElement, allowedDomains);
       e.appendChild(this.innerIframeElement);
       this.networkIframeElement.contentWindow.addEventListener("message", this.iframeMessageEventListener);
     };

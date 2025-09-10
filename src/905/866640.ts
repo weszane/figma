@@ -1,123 +1,289 @@
-import { deepEqual } from "../905/382883";
-import { logError } from "../905/714362";
-import { p as _$$p } from "../905/167135";
-import { n as _$$n } from "../905/347702";
-import { pT } from "../905/544659";
-import { processChildren } from "../905/757052";
-export async function $$d0(e, t, i) {
-  let a = {
+import { p as normalizeUrl } from '../905/167135'
+import { deepEqual } from '../905/382883'
+import { isUrlAllowed } from '../905/544659'
+import { logError } from '../905/714362'
+import { processChildren } from '../905/757052'
+
+interface ResourceState {
+  fonts: Record<string, FontResource>
+  images: Record<string, ImageResource>
+}
+
+interface FontResource {
+  fontName: { family: string, style: string }
+  hasLoaded: boolean
+}
+
+interface ImageResource {
+  hasLoaded: boolean
+}
+
+interface ImageInfo {
+  hash: string
+  width: number
+  height: number
+}
+
+interface VirtualRoot {
+  rootNode: any
+  syncedState: any
+}
+
+/**
+ * Main function for loading and reconciling resources
+ * @param getVirtualRoot - Function to get the virtual root
+ * @param canvasContext - Canvas context for loading resources
+ * @param manifest - Manifest configuration
+ * @returns Object containing image info map and virtual root
+ */
+export async function loadAndReconcileResources(
+  getVirtualRoot: () => VirtualRoot,
+  canvasContext: any,
+  manifest: any,
+): Promise<{ imgInfoMap: Map<string, ImageInfo>, vRoot: VirtualRoot }> {
+  const resourceState: ResourceState = {
     fonts: {},
-    images: {}
-  };
-  let s = new Map();
-  let o = null;
-  let d = e();
-  for (let c = 0; c < 20 && (function (e, t) {
-    let i = e => {
-      if (!e) return;
-      let {
-        children,
-        fillSrc,
-        textStyle
-      } = e.renderMetaData;
-      if (textStyle && (p(t, textStyle.style), textStyle.ranges.forEach(e => p(t, e.style))), fillSrc && !t.images.hasOwnProperty(fillSrc) && (t.images[fillSrc] = {
-        hasLoaded: !1
-      }), children) for (let e of processChildren(children)) i(e);
-    };
-    i(e);
-  }(d.rootNode, a), (Object.values(a.fonts).some(({
-    hasLoaded: e
-  }) => !e) || Object.values(a.images).some(({
-    hasLoaded: e
-  }) => !e)) && (await m(a, s, t, i)), o = d, d = e(), !deepEqual(o?.syncedState, d.syncedState)); c++) 19 === c && logError("resources", "Loading reconciliation resources reached max iterations");
-  return {
-    imgInfoMap: s,
-    vRoot: d
-  };
-}
-async function c(e, t, i) {
-  try {
-    let n = await $$u2(e, i);
-    let r = t.createImage(n).hash;
-    let {
-      width,
-      height
-    } = (await Promise.all([$$g1(n)]))[0];
-    return {
-      hash: r,
-      width,
-      height
-    };
-  } catch (e) {
-    t.logWarning("Unable to load image. See the warning below for more info.");
-    t.logWarning(e);
+    images: {},
   }
-  return null;
-}
-export let $$u2 = _$$n(async (e, t) => {
-  if (function (e) {
-    try {
-      let t = new URL(e);
-      return "http:" === t.protocol || "https:" === t.protocol;
-    } catch (e) {
-      return !1;
+
+  const imageInfoMap = new Map<string, ImageInfo>()
+  let previousRoot: VirtualRoot | null = null
+  let currentRoot = getVirtualRoot()
+
+  // Maximum iterations to prevent infinite loops
+  const MAX_ITERATIONS = 20
+
+  for (let iteration = 0; iteration < MAX_ITERATIONS; iteration++) {
+    // Extract resources from the virtual root
+    extractResourcesFromRoot(currentRoot.rootNode, resourceState)
+
+    // Load pending resources if any exist
+    const hasPendingResources
+      = Object.values(resourceState.fonts).some(font => !font.hasLoaded)
+        || Object.values(resourceState.images).some(image => !image.hasLoaded)
+
+    if (hasPendingResources) {
+      await loadPendingResources(resourceState, imageInfoMap, canvasContext, manifest)
     }
-  }(e)) {
-    if (!pT(e, t)) throw Error(`Image URL ${e} does not satisfy the allowedDomains specified in the manifest.json`);
-    e = _$$p(e);
+
+    // Check for changes and continue if needed
+    previousRoot = currentRoot
+    currentRoot = getVirtualRoot()
+
+    const statesAreEqual = deepEqual(previousRoot?.syncedState, currentRoot.syncedState)
+    if (statesAreEqual) {
+      break
+    }
+
+    // Log error if maximum iterations reached
+    if (iteration === MAX_ITERATIONS - 1) {
+      logError('resources', 'Loading reconciliation resources reached max iterations')
+    }
   }
-  let i = await fetch(e);
-  if (!i.ok) throw Error(`Unable to fetch image. Response status: ${i.status}`);
-  return new Uint8Array(await i.arrayBuffer());
-});
-function p(e, t) {
-  let {
-    fontName
-  } = t;
-  if (!fontName) return;
-  let n = `${fontName.family} ${fontName.style}`;
-  e.fonts.hasOwnProperty(n) || (e.fonts[n] = {
-    fontName,
-    hasLoaded: !1
-  });
+
+  return {
+    imgInfoMap: imageInfoMap,
+    vRoot: currentRoot,
+  }
 }
-async function m(e, t, i, n) {
-  let r = async e => {
-    let r = await c(e, i, n);
-    r && t.set(e, r);
-  };
-  let a = Object.values(e.fonts).filter(({
-    hasLoaded: e
-  }) => !e).map(async e => {
-    await i.loadFontAsync(e.fontName);
-    e.hasLoaded = !0;
-  });
-  let s = Object.entries(e.images).filter(([, {
-    hasLoaded: e
-  }]) => !e).map(async ([e, t]) => {
-    await r(e);
-    t.hasLoaded = !0;
-  });
-  await Promise.all([...a, ...s]);
+
+/**
+ * Extracts font and image resources from a virtual root node
+ * @param node - The node to extract resources from
+ * @param resourceState - The resource state to populate
+ */
+function extractResourcesFromRoot(node: any, resourceState: ResourceState): void {
+  const traverseNode = (currentNode: any): void => {
+    if (!currentNode)
+      return
+
+    const { children, fillSrc, textStyle } = currentNode.renderMetaData
+
+    // Process text styles for fonts
+    if (textStyle) {
+      collectFontResource(resourceState, textStyle.style)
+      textStyle.ranges.forEach(range => collectFontResource(resourceState, range.style))
+    }
+
+    // Process image sources
+    if (fillSrc && !Object.prototype.hasOwnProperty.call(resourceState.images, fillSrc)) {
+      resourceState.images[fillSrc] = {
+        hasLoaded: false,
+      }
+    }
+
+    // Process children recursively
+    if (children) {
+      for (const child of processChildren(children)) {
+        traverseNode(child)
+      }
+    }
+  }
+
+  traverseNode(node)
 }
-let h = e => {
-  let t = "";
-  [].slice.call(new Uint8Array(e)).forEach(e => t += String.fromCharCode(e));
-  return window.btoa(t);
-};
-export function $$g1(e) {
-  return new Promise(t => {
-    let i = new Image();
-    i.onload = () => {
-      t({
-        width: i.width,
-        height: i.height
-      });
-    };
-    let n = h(e);
-    i.src = "data:image;base64," + n;
-  });
+
+/**
+ * Collects font resource information
+ * @param resourceState - The resource state to update
+ * @param style - The style object containing font information
+ */
+function collectFontResource(resourceState: ResourceState, style: any): void {
+  const { fontName } = style
+  if (!fontName)
+    return
+
+  const fontKey = `${fontName.family} ${fontName.style}`
+  if (!Object.prototype.hasOwnProperty.call(resourceState.fonts, fontKey)) {
+    resourceState.fonts[fontKey] = {
+      fontName,
+      hasLoaded: false,
+    }
+  }
 }
-export const qg = $$d0;
-export const vX = $$g1;
-export const xF = $$u2;
+
+/**
+ * Loads an image and returns its information
+ * @param imageUrl - URL of the image to load
+ * @param canvasContext - Canvas context for creating images
+ * @param manifest - Manifest configuration
+ * @returns Image information or null if loading failed
+ */
+async function loadImageResource(
+  imageUrl: string,
+  canvasContext: any,
+  manifest: any,
+): Promise<ImageInfo | null> {
+  try {
+    const imageData = await fetchImageAsByteArray(imageUrl, manifest)
+    const imageHash = canvasContext.createImage(imageData).hash
+
+    const [imageDimensions] = await Promise.all([getImageDimensions(imageData)])
+
+    return {
+      hash: imageHash,
+      width: imageDimensions.width,
+      height: imageDimensions.height,
+    }
+  }
+  catch (error) {
+    canvasContext.logWarning('Unable to load image. See the warning below for more info.')
+    canvasContext.logWarning(error)
+    return null
+  }
+}
+
+/**
+ * Fetches an image as a byte array
+ * @param url - URL of the image
+ * @param manifest - Manifest configuration
+ * @returns Image data as Uint8Array
+ */
+export async function fetchImageAsByteArray(url: string, manifest: any): Promise<Uint8Array> {
+  // Check if URL is HTTP/HTTPS
+  const isHttpUrl = (() => {
+    try {
+      const urlObj = new URL(url)
+      return urlObj.protocol === 'http:' || urlObj.protocol === 'https:'
+    }
+    catch {
+      return false
+    }
+  })()
+
+  let normalizedUrl = url
+  if (isHttpUrl) {
+    if (!isUrlAllowed(url, manifest)) {
+      throw new Error(`Image URL ${url} does not satisfy the allowedDomains specified in the manifest.json`)
+    }
+    normalizedUrl = normalizeUrl(url)
+  }
+
+  const response = await fetch(normalizedUrl)
+  if (!response.ok) {
+    throw new Error(`Unable to fetch image. Response status: ${response.status}`)
+  }
+
+  return new Uint8Array(await response.arrayBuffer())
+}
+
+/**
+ * Loads all pending resources (fonts and images)
+ * @param resourceState - Current resource state
+ * @param imageInfoMap - Map to store loaded image information
+ * @param canvasContext - Canvas context for loading resources
+ * @param manifest - Manifest configuration
+ */
+async function loadPendingResources(
+  resourceState: ResourceState,
+  imageInfoMap: Map<string, ImageInfo>,
+  canvasContext: any,
+  manifest: any,
+): Promise<void> {
+  // Load pending fonts
+  const pendingFontPromises = Object.values(resourceState.fonts)
+    .filter(font => !font.hasLoaded)
+    .map(async (fontResource) => {
+      await canvasContext.loadFontAsync(fontResource.fontName)
+      fontResource.hasLoaded = true
+    })
+
+  // Load pending images
+  const loadSingleImage = async (imageUrl: string, imageResource: ImageResource): Promise<void> => {
+    const imageInfo = await loadImageResource(imageUrl, canvasContext, manifest)
+    if (imageInfo) {
+      imageInfoMap.set(imageUrl, imageInfo)
+    }
+    imageResource.hasLoaded = true
+  }
+
+  const pendingImagePromises = Object.entries(resourceState.images)
+    .filter(([, imageResource]) => !imageResource.hasLoaded)
+    .map(async ([imageUrl, imageResource]) => {
+      await loadSingleImage(imageUrl, imageResource)
+    })
+
+  await Promise.all([...pendingFontPromises, ...pendingImagePromises])
+}
+
+/**
+ * Converts byte array to base64 string
+ * @param byteArray - Byte array to convert
+ * @returns Base64 encoded string
+ */
+function byteArrayToBase64(byteArray: Uint8Array): string {
+  let binaryString = ''
+  const uint8Array = new Uint8Array(byteArray)
+
+  for (const byte of uint8Array) {
+    binaryString += String.fromCharCode(byte)
+  }
+
+  return window.btoa(binaryString)
+}
+
+/**
+ * Gets image dimensions from image data
+ * @param imageData - Image data as byte array
+ * @returns Promise resolving to image dimensions
+ */
+export function getImageDimensions(imageData: Uint8Array): Promise<{ width: number, height: number }> {
+  return new Promise((resolve) => {
+    const imageElement = new Image()
+
+    imageElement.onload = () => {
+      resolve({
+        width: imageElement.width,
+        height: imageElement.height,
+      })
+    }
+
+    const base64Data = byteArrayToBase64(imageData)
+    imageElement.src = `data:image;base64,${base64Data}`
+  })
+}
+
+// Export aliases for backward compatibility
+export const qg = loadAndReconcileResources
+export const vX = getImageDimensions
+export const xF = fetchImageAsByteArray

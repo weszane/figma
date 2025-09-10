@@ -4,7 +4,7 @@ import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import s from "classnames";
 import { Dk } from "../figma_app/623293";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { c1, r4, dB } from "../905/589717";
 import { Cc, lX } from "../905/545842";
 import { AJ } from "../905/235262";
@@ -183,7 +183,7 @@ function P({
     role: "button",
     className: o()(_$$s.inlineBlock.$, "badge_display--guidLink--3Avjv"),
     onClick: () => s(e.id),
-    children: jsxs(Y, {
+    children: jsxs(AutoLayout, {
       spacing: 4,
       children: [jsx(IV, {
         badges: e.displayProperties.leftBadges

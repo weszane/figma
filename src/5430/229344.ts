@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { a as _$$a } from "../905/925868";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { C } from "../figma_app/514836";
 import { T } from "../5132/203178";
 import { Gm } from "../5430/873109";
@@ -18,7 +18,7 @@ export function $$p1({
   let h = T();
   return jsx("div", {
     className: fG,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       width: "100%",
       direction: "horizontal",
       height: "hug-contents",

@@ -6,7 +6,7 @@ import { i as _$$i } from "../905/97346";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { dP } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
-import { M } from "../905/830372";
+import { Spacer } from "../905/470281";
 import { IV } from "../905/154591";
 import { nK } from "../905/836986";
 import { P } from "../905/625912";
@@ -90,7 +90,7 @@ let S = memo(function ({
       title: r,
       className: _$$s.ellipsis.noWrap.overflowHidden.$,
       children: r
-    }), jsx(M, {})]
+    }), jsx(Spacer, {})]
   });
 });
 function v({

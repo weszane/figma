@@ -47,7 +47,7 @@ import { A as _$$A } from "../vendor/737188";
 import { oW } from "../905/675859";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { $ as _$$$ } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { e as _$$e2 } from "../905/579755";
@@ -209,7 +209,7 @@ function eh(e) {
         className: "request_upgrade_modal--imgPositioning---Y2Z-"
       }), jsx("div", {
         className: "request_upgrade_modal--avatarPositioning--aK7ex",
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           horizontalAlignItems: "center",
           verticalAlignItems: "center",
           width: "hug-contents",

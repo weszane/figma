@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Y, M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { throwTypeError } from "../figma_app/465776";
@@ -28,7 +28,7 @@ export function $$$$m0({
   if (null === p) return jsx(Fragment, {});
   let x = rj;
   let b = e || x[0];
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     padding: {
       vertical: 16,
       horizontal: 32
@@ -55,7 +55,7 @@ export function $$$$m0({
           }
         }(e)
       }, e))
-    }), jsx(M, {}), t]
+    }), jsx(Spacer, {}), t]
   });
 }
 export const m = $$$$m0;

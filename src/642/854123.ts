@@ -24,7 +24,7 @@ import { Fb } from "../figma_app/819458";
 import { F as _$$F } from "../5132/756360";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { selectCurrentFile } from "../figma_app/516028";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { mapFileTypeToEditorTypeNullable } from "../figma_app/53721";
 import { DF } from "../figma_app/861252";
 import { K as _$$K } from "../905/443068";
@@ -83,7 +83,7 @@ function P() {
           FJ("mailto:support-figgov@figma.com", "_blank", "noopener");
           return;
         }
-        let e = 0 === unsortedTeams.filter(w5).length;
+        let e = 0 === unsortedTeams.filter(hasTeamPaidAccess).length;
         o.current?.open({
           ticketForms: e ? Fb.FREE : Fb.PAID,
           locale: t?.locale

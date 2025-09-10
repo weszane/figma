@@ -21,7 +21,7 @@ import { fu } from "../figma_app/831799";
 import { vp } from "../905/967587";
 import { FPlanNameType } from "../figma_app/191312";
 import { LN } from "../figma_app/514043";
-import { zZ } from "../figma_app/345997";
+import { PRICING_URL } from "../figma_app/345997";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { UpsellSourceType } from "../figma_app/831101";
 import { hK } from "../figma_app/211706";
@@ -163,7 +163,7 @@ function k() {
         }),
         learnMoreLink: jsx(Us, {
           className: _$$s.textHeadingMedium.fontNormal.$,
-          href: zZ,
+          href: PRICING_URL,
           target: "_blank",
           trusted: !0,
           children: renderI18nText("plan_comparison.campfire.description.learn_more")

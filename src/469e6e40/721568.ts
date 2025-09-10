@@ -7,7 +7,7 @@ import { r as _$$r } from "../905/571562";
 import d from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
-import { M } from "../905/830372";
+import { Spacer } from "../905/470281";
 import { E } from "../905/984674";
 var c = d;
 let g = "highlight--container--2-8sY";
@@ -23,7 +23,7 @@ export function $$x0(e) {
     children: [e.children, jsx("div", {
       className: h
     }), !e.hideChevron && jsxs(Fragment, {
-      children: [jsx(M, {}), jsx(k, {
+      children: [jsx(Spacer, {}), jsx(k, {
         className: c()("highlight--chevron--vUd7C", _$$s.ml8.$)
       })]
     })]

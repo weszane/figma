@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { WB } from "../905/761735";
 import { getAtomMutate } from "../figma_app/566371";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { Jm } from "../figma_app/387599";
 import { KH, A7 } from "../figma_app/471982";
@@ -112,7 +112,7 @@ export function $$k0(e, t, i, p) {
       i.catch(e => {
         x(VisualBellActions.enqueue({
           message: getI18nString("community.actions.unable_to_like_this_resource_error", {
-            error: J(e, e.data?.message)
+            error: resolveMessage(e, e.data?.message)
           }),
           type: "RESOURCE_LIKE_FAILED",
           error: !0
@@ -154,7 +154,7 @@ export function $$k0(e, t, i, p) {
       a.catch(e => {
         x(VisualBellActions.enqueue({
           message: getI18nString("community.actions.unable_to_unlike_this_resource_error", {
-            error: J(e, e.data.message)
+            error: resolveMessage(e, e.data.message)
           }),
           type: "RESOURCE_UNLIKE_FAILED",
           error: !0

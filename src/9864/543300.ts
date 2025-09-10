@@ -74,7 +74,7 @@ import { V3 } from "../figma_app/976345";
 import { zE, uM } from "../905/738636";
 import { XZ } from "../figma_app/176973";
 import { Cu } from "../figma_app/314264";
-import { xA } from "../905/766303";
+import { getNewFileConfig } from "../905/766303";
 import { dq } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { M4 } from "../905/713695";
@@ -122,7 +122,7 @@ import { NJ } from "../figma_app/419216";
 import { L as _$$L } from "../9864/861465";
 import { f as _$$f4 } from "../905/931050";
 import { F0 } from "../905/178707";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { jx, wZ } from "../figma_app/869776";
 import { r as _$$r2 } from "../905/520829";
 import { LN as _$$LN, Kq } from "../905/941249";
@@ -764,7 +764,7 @@ function eJ(e) {
       let l;
       let a = async () => {
         let e = (await eq(i, FFileType.DESIGN))?.id ?? null;
-        let t = xA({
+        let t = getNewFileConfig({
           state: {
             ...s,
             selectedView: n
@@ -2775,7 +2775,7 @@ function tE(e) {
   let [r, t] = useState([""]);
   let [i, l] = useAtomValueAndSetter($l);
   let a = getIsAndroidOrIphoneNotFigmaMobile();
-  let c = w5(e.team) ? AccessLevelEnum.VIEWER : AccessLevelEnum.EDITOR;
+  let c = hasTeamPaidAccess(e.team) ? AccessLevelEnum.VIEWER : AccessLevelEnum.EDITOR;
   let x = _$$f4(() => e.team ? wZ(e.team.id, c) : Promise.resolve(null), [e.team, c]);
   let h = (e, t) => {
     let s = [...i];

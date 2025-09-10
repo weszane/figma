@@ -6,7 +6,7 @@ import { zN } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
 import { B } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { B as _$$B } from "../905/261906";
 import { JT } from "../figma_app/847597";
 import { Ib } from "../905/129884";
@@ -46,7 +46,7 @@ export function $$x1({
   seatType: e,
   isScimSeat: t
 }) {
-  let a = useMemo(() => jsxs(Y, {
+  let a = useMemo(() => jsxs(AutoLayout, {
     direction: "horizontal",
     children: [jsx(_$$B, {
       type: e,

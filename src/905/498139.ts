@@ -8,7 +8,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
 import { Sh } from "../figma_app/889655";
@@ -235,12 +235,12 @@ function U({
     children: jsxs("form", {
       onSubmit: q,
       autoComplete: "no",
-      children: [jsx(_$$Y, {
+      children: [jsx(AutoLayout, {
         direction: "vertical",
         spacing: 0,
         height: "hug-contents",
         ref: k,
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           direction: "vertical",
           spacing: `${parsePxNumber(dGl)}px`,
           padding: {
@@ -271,7 +271,7 @@ function U({
             variableFormSubmitData: W
           })]
         })
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         horizontalAlignItems: "end",
         verticalAlignItems: "center",
         padding: 16,

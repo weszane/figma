@@ -20,7 +20,7 @@ import { XHR } from "../905/910117";
 import { Ts } from "../905/194276";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J as _$$J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { wr } from "../figma_app/387599";
 import { Sb } from "../905/359847";
@@ -128,7 +128,7 @@ let $$eb16 = createOptimistThunk((e, t, {
     e.dispatch(VisualBellActions.enqueue({
       error: !0,
       message: getI18nString("community.actions.failed_to_duplicate_file_error", {
-        error: _$$J(t, getI18nString("community.actions.try_again_or_contact_support_figma_com"))
+        error: resolveMessage(t, getI18nString("community.actions.try_again_or_contact_support_figma_com"))
       })
     }));
   });
@@ -473,7 +473,7 @@ async function eO(e, t) {
     };
   } catch (e) {
     reportError(_$$e.COMMUNITY, e);
-    return Error(_$$J(e, getI18nString("community.actions.could_not_publish_hub_file", {
+    return Error(resolveMessage(e, getI18nString("community.actions.could_not_publish_hub_file", {
       error: e.message
     })));
   }
@@ -550,7 +550,7 @@ let $$eR4 = createOptimistThunk(async (e, {
     });
     r?.(t);
   } catch (r) {
-    let t = _$$J(r, getI18nString("community.actions.an_error_occurred_while_updating_please_refresh_and_try_again"));
+    let t = resolveMessage(r, getI18nString("community.actions.an_error_occurred_while_updating_please_refresh_and_try_again"));
     e.dispatch(_$$s.error(t));
     reportError(_$$e.COMMUNITY, r);
     return Error(`Error updating file ${r}`);
@@ -621,7 +621,7 @@ let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
     e.dispatch(createOptimistRevertAction(n));
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_duplicate", {
-        error: _$$J(t, t.data.message)
+        error: resolveMessage(t, t.data.message)
       }),
       type: "HUB_FILE_DUPLICATE_FAILED",
       error: !0
@@ -652,7 +652,7 @@ let $$eM24 = createOptimistThunk((e, {
   n.catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_like_this_file_error", {
-        error: _$$J(t, t.data?.message)
+        error: resolveMessage(t, t.data?.message)
       }),
       type: "HUB_FILE_LIKE_FAILED",
       error: !0
@@ -700,7 +700,7 @@ let $$ej6 = createOptimistThunk((e, {
   i.catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_unlike_this_file_error", {
-        error: _$$J(t, t.data.message)
+        error: resolveMessage(t, t.data.message)
       }),
       type: "HUB_FILE_UNLIKE_FAILED",
       error: !0

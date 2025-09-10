@@ -27,7 +27,7 @@ import { m0 } from "../figma_app/546509";
 import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { TeamCanEdit } from "../figma_app/43951";
-import { XX } from "../figma_app/345997";
+import { hasTeamStatePaidAccess } from "../figma_app/345997";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { wH, KI } from "../figma_app/680166";
 import { FEditorType } from "../figma_app/53721";
@@ -71,7 +71,7 @@ export function $$et0({
   let et = l === FEditorType.Sites && !!e.org?.isSitesDisabled;
   let er = l === FEditorType.Cooper && !!e.org?.isCooperDisabled;
   let en = _$$e();
-  let es = !!e.org || XX(e.team);
+  let es = !!e.org || hasTeamStatePaidAccess(e.team);
   let eo = e.isTryFile;
   let el = aV();
   let ed = useDispatch();

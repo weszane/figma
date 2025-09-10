@@ -10,7 +10,7 @@ import { propertyMenuItemProps, validatePropertyMenuOptions } from '../905/82842
 import { getSceneGraphInstance } from '../905/830071';
 import { Lb } from '../905/835985';
 import { AuthError, InternalError, RequestError } from '../905/845428';
-import { qg } from '../905/866640';
+import { loadAndReconcileResources } from '../905/866640';
 import { isDevEnvironment } from '../figma_app/169182';
 import { getWidgetVersionData } from '../figma_app/300692';
 import { Vi } from '../figma_app/364284';
@@ -545,7 +545,7 @@ export class WidgetManager {
             const {
               imgInfoMap,
               vRoot
-            } = await qg(() => {
+            } = await loadAndReconcileResources(() => {
               if (!getSceneGraphInstance().get(widgetId)) throw new AuthError('Could not find widget node in renderWidgetTree');
               if (!renderResult || !deepEqual(renderResult.syncedState, node.getWidgetSyncedState())) {
                 renderResult = this.renderWidgetTree(widgetId, 'current') as {

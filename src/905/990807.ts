@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { xk } from "@stylexjs/stylex";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Pf, H8 } from "../905/590952";
 import { DP } from "../905/640017";
 import { FProductAccessType } from "../figma_app/191312";
@@ -267,7 +267,7 @@ export function $$u0({
 }) {
   let h = DP();
   let g = e.slice(0, p);
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     verticalAlignItems: "center",
     spacing: "-12px",
     horizontalAlignItems: "start",

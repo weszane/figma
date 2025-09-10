@@ -32,7 +32,7 @@ import { uo } from "../figma_app/78808";
 import { I0 } from "../905/879323";
 import { xp, rb } from "../905/711212";
 import { yH } from "../figma_app/714946";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { teamLibraryCache, revokeThumbnailUrl, isValidThumbnail, generateNodeThumbnail, getDefaultPlaceholderThumbnail, generateThumbnailFromStyleMaster } from "../figma_app/80990";
 import { getDirname } from "../905/309735";
 import { isFullyTransparentFill } from "../905/405710";
@@ -479,7 +479,7 @@ export function $$e$89(e, t, r, n, i, a, s, o, l, d) {
 export function $$eX24(e) {
   let t = e.getState();
   if (t.versionHistory.activeId && t.versionHistory.activeId !== V_ || !t.mirror?.sceneGraph) return;
-  let r = d1(t);
+  let r = getSelectedFile(t);
   let n = r ? r.key : "";
   let i = r?.library_key ? _$$l(r.library_key) : _$$l("");
   let a = new Set();

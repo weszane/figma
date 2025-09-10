@@ -102,8 +102,8 @@ import { jE } from "../figma_app/639088";
 import { A as _$$A9 } from "../5724/965092";
 import { A as _$$A0 } from "../905/562488";
 import { xf } from "../figma_app/416935";
-import { J as _$$J4 } from "../905/231762";
-import { Y as _$$Y } from "../905/830372";
+import { resolveMessage } from "../905/231762";
+import { AutoLayout } from "../905/470281";
 import { um } from "../905/14223";
 import { FPublicationStatusType, FRequestStatusType } from "../figma_app/191312";
 import { Ef } from "../905/81982";
@@ -900,7 +900,7 @@ function tP({
   isPending: t,
   isCurrentUser: i
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     children: [jsx("div", {
       className: _$$s4.$$with({
         opacity0_5: t
@@ -936,7 +936,7 @@ function tO({
     key: kM.NONE,
     text: getI18nString("confirm_remove_role.remove")
   }));
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     padding: {
       vertical: 4,
       horizontal: 0
@@ -991,7 +991,7 @@ function tD({
   gotoCreatedBySection: e,
   owner: t
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     horizontalAlignItems: "stretch",
     padding: {
@@ -1010,7 +1010,7 @@ function tD({
           children: renderI18nText("community.publishing.publish_this_resource")
         })
       })
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       width: "fill-parent",
       horizontalAlignItems: "space-between",
       children: [jsx(tP, {
@@ -1080,7 +1080,7 @@ function tM({
   }, [A, d.id, d.is_widget, m]);
   let b = !!d.roles.org && !d.roles.is_public && d.publishing_status === FPublicationStatusType.ORG_PRIVATE;
   let v = (t.id === d.creator.id || c) && b;
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     horizontalAlignItems: "stretch",
     padding: {
@@ -1163,7 +1163,7 @@ function tM({
           }));
         }).catch(e => {
           A(VisualBellActions.enqueue({
-            message: _$$J4(e, e.message),
+            message: resolveMessage(e, e.message),
             error: !0
           }));
         }).$$finally(() => {
@@ -1182,7 +1182,7 @@ function tM({
       validateToken: y
     }), jsx(_$$P, {
       className: _$$s4.maxH300.$,
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 8,
         children: [jsx(tO, {
@@ -1281,7 +1281,7 @@ function tW({
 }) {
   return jsx(_$$A6, {
     label: getI18nString("community.publishing.publish_to"),
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 16,
       children: [jsx(tK, {
@@ -1551,7 +1551,7 @@ function is({
   creators: e,
   removeCreator: t
 }) {
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     direction: "vertical",
     children: e.map(e => jsx(_$$A19, {
       profile: e,
@@ -1733,13 +1733,13 @@ function iE({
         })
       })]
     }) : jsx(ix, {
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         width: "fill-parent",
         horizontalAlignItems: "space-between",
         children: [jsx(iS, {
           text: getI18nString("community.publishing.data_security.details_are_missing"),
           onClick: n
-        }), jsx(_$$Y, {
+        }), jsx(AutoLayout, {
           width: "hug-contents",
           direction: "horizontal",
           backgroundColor: "danger-tertiary",
@@ -1808,7 +1808,7 @@ function iE({
 function ix({
   children: e
 }) {
-  return jsx(_$$Y, {
+  return jsx(AutoLayout, {
     width: "fill-parent",
     height: "fill-parent",
     verticalAlignItems: "center",

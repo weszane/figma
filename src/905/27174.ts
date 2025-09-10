@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useCallback } from "react";
 import a from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { M3, yn, lv } from "../figma_app/119475";
-import { Y } from "../905/470281";
+import { AutoLayout } from "../905/470281";
 import { gp } from "../905/154591";
 import { G } from "../905/153787";
 var s = a;
@@ -68,7 +68,7 @@ export function $$m0({
     onMouseEnter: w,
     onMouseLeave: C,
     style: b,
-    children: jsxs(Y, {
+    children: jsxs(AutoLayout, {
       children: [jsx(h, {
         indent: y,
         isLeaf: a,

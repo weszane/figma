@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { Fj } from "../figma_app/793429";
 import { sf } from "../905/929976";
 import { hideModalHandler, showModal } from "../905/156213";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { _6 } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
@@ -157,16 +157,16 @@ export function $$L1({
       toggleDetailModal: useCallback(i => {
         if (i.stopPropagation(), e?.current && t && "fullscreen" === o.view) {
           if (d) {
-            _$$T() ? n(sf({
+            isVsCodeEnvironment() ? n(sf({
               ...o,
               variableIdForDetailsPanel: void 0
             })) : n(hideModalHandler());
             return;
           }
-          if (_$$T()) n(sf({
+          if (isVsCodeEnvironment()) n(sf({
             ...o,
             variableIdForDetailsPanel: t
-          })); else {
+          }));else {
             l && n(hideModalHandler());
             let i = cn(e?.current, iB + wR);
             n(showModal({
@@ -239,20 +239,20 @@ export function $$L1({
       toggleStyleDetailModal: useCallback(r => {
         if (r.stopPropagation(), e?.current && t && A && n) {
           if (p) {
-            _$$T() ? o(sf({
+            isVsCodeEnvironment() ? o(sf({
               ...d,
               styleForDetailsPanel: void 0
             })) : o(hideModalHandler());
             return;
           }
-          if (Fullscreen?.selectStyleByGuid(A), _$$T()) o(sf({
+          if (Fullscreen?.selectStyleByGuid(A), isVsCodeEnvironment()) o(sf({
             ...d,
             styleForDetailsPanel: {
               styleId: t,
               styleNodeId: A,
               styleType: style_type ?? n
             }
-          })); else {
+          }));else {
             u && o(hideModalHandler());
             let r = cn(e.current, b6 + wR);
             o(showModal({
@@ -290,7 +290,7 @@ export function $$L1({
     })
   });
   let k = !!t && t.ids.length > 0;
-  return !_$$T() && !e && k && (_ || isMatchingVarsModalShownForRow || isInteractionPathCheck()) ? jsx("div", {
+  return !isVsCodeEnvironment() && !e && k && (_ || isMatchingVarsModalShownForRow || isInteractionPathCheck()) ? jsx("div", {
     className: _o,
     children: jsx(N, {
       onClick: toggleMatchingVarsModal,

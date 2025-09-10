@@ -22,7 +22,7 @@ import { ec } from "../figma_app/449837";
 import { dW } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { hideModal } from "../905/156213";
 import { eS, aD } from "../figma_app/646357";
 import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
@@ -274,9 +274,9 @@ function q({
         ref: i,
         children: jsx(_$$C, {})
       })
-    }), e && t && jsxs(_$$Y, {
+    }), e && t && jsxs(AutoLayout, {
       width: "hug-contents",
-      children: [d && jsx(_$$m, {}), jsxs(_$$Y, {
+      children: [d && jsx(_$$m, {}), jsxs(AutoLayout, {
         width: "hug-contents",
         spacing: 4,
         children: [jsx("div", {
@@ -343,9 +343,9 @@ function Z({
     propagateKeyboardFocus: !0,
     children: jsx("div", {
       className: "review_updates_modal--footer--ZOqbd",
-      children: jsxs(_$$Y, {
-        children: [p && jsx(_$$Y, {
-          children: numCurrentAssetInstances > 1 ? jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
+        children: [p && jsx(AutoLayout, {
+          children: numCurrentAssetInstances > 1 ? jsxs(AutoLayout, {
             horizontalAlignItems: "center",
             spacing: 4,
             width: "hug-contents",
@@ -384,7 +384,7 @@ function Z({
             onClick: navigateToCurrentInstance ?? void 0,
             children: [jsx(_$$A, {}), renderI18nText("design_systems.updates.go_to_current_instance")]
           })
-        }), jsx(_$$M, {}), jsx(_$$Y, {
+        }), jsx(Spacer, {}), jsx(AutoLayout, {
           horizontalAlignItems: "end",
           children: t
         })]

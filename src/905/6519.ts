@@ -12,7 +12,7 @@ import { fu } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
 import { vr, _Z, B9, LN } from "../figma_app/514043";
 import { Hw } from "../figma_app/698052";
-import { zZ } from "../figma_app/345997";
+import { PRICING_URL } from "../figma_app/345997";
 import { PlanType, SubscriptionType } from "../figma_app/831101";
 import { DA, $$ as _$$$$, Qw, RO, X9, Q1, SO, Zy, zS, UJ, qT, Lh } from "../905/472146";
 import { Ib } from "../905/129884";
@@ -714,7 +714,7 @@ function eg({
 function ef(e) {
   return jsx(Us, {
     className: "comparison_chart--allFeaturesLink--XNOLR",
-    href: zZ,
+    href: PRICING_URL,
     target: "_blank",
     trusted: !0,
     "data-testid": "comparison-chart-see-all-features-link",

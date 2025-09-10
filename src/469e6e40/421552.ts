@@ -16,7 +16,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { In } from "../905/672640";
 import { E as _$$E } from "../905/984674";
 import { p as _$$p } from "../905/597320";
@@ -120,11 +120,11 @@ function X(e) {
       variant: "secondary",
       iconPrefix: jsx(_$$S2, {}),
       ...getTriggerProps(),
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         horizontalAlignItems: "space-between",
         children: [jsx(_$$E, {
           children: renderI18nText("resources_tab.libraries.filters")
-        }), enabledFilterIds.size > 0 && jsx(_$$Y, {
+        }), enabledFilterIds.size > 0 && jsx(AutoLayout, {
           backgroundColor: "selected",
           cornerRadius: 2,
           padding: {
@@ -153,12 +153,12 @@ function X(e) {
           lineHeight: "var(--text-body-medium-line-height, 16px)"
         }
       }),
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         direction: "vertical",
         backgroundColor: "default",
         cornerRadius: 2,
         spacing: 0,
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           horizontalAlignItems: "space-between",
           strokeWidth: {
             bottom: 1
@@ -192,10 +192,10 @@ function X(e) {
           })]
         }), jsx(_$$P, {
           className: "xh8yej3 x6bct43",
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
-            children: [addToConnectedProjectsFilter && jsxs(_$$Y, {
+            children: [addToConnectedProjectsFilter && jsxs(AutoLayout, {
               direction: "vertical",
               spacing: 8,
               padding: {
@@ -223,7 +223,7 @@ function X(e) {
                   onChange: e => p($$tp0, e)
                 }, $$tp0)
               })]
-            }), jsxs(_$$Y, {
+            }), jsxs(AutoLayout, {
               direction: "vertical",
               spacing: 8,
               padding: {
@@ -262,7 +262,7 @@ function ej({
   label: e,
   children: t
 }) {
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     height: "hug-contents",
     spacing: 0,
@@ -291,11 +291,11 @@ let ey = function ({
   let k = t.workspaces?.find(e => e.id === u)?.name;
   let E = useAtomWithSubscription(qq);
   let C = useMemo(() => "community" === e.type && E.has(_$$l2(e.hubFileId)), [e, E]);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     width: 180,
     spacing: 16,
-    children: [jsx(_$$Y, {
+    children: [jsx(AutoLayout, {
       height: 120,
       children: jsx(_$$V, {
         thumbnailUrl: e.thumbnailUrl,
@@ -362,7 +362,7 @@ let ey = function ({
         }
       }),
       target: "_blank",
-      children: jsxs(_$$Y, {
+      children: jsxs(AutoLayout, {
         spacing: 4,
         children: [jsx(_$$E, {
           children: renderI18nText("resources_tab.libraries.open_library_file")
@@ -487,7 +487,7 @@ function eY({
     libraryName: e.name,
     resourceName: t.name
   };
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     width: "fill-parent",
     height: "hug-contents",
@@ -497,7 +497,7 @@ function eY({
     },
     children: [jsx("div", {
       className: _$$s.minW0.wFull.fontMedium.$,
-      children: jsx(_$$Y, {
+      children: jsx(AutoLayout, {
         direction: "vertical",
         height: "hug-contents",
         width: "fill-parent",
@@ -587,7 +587,7 @@ function eX({
     libraryName: e.name,
     resourceName: a
   };
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     width: "fill-parent",
     height: "hug-contents",
@@ -597,7 +597,7 @@ function eX({
     },
     children: [jsx("div", {
       className: _$$s.minW0.wFull.fontMedium.$,
-      children: jsx(_$$Y, {
+      children: jsx(AutoLayout, {
         direction: "vertical",
         height: "hug-contents",
         width: "fill-parent",
@@ -823,7 +823,7 @@ function e9({
       }
     }));
   };
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     padding: 16,
     children: [!O && jsx(_$$E, {
@@ -861,7 +861,7 @@ function e9({
         },
         targetKey: N,
         libraryKey: e.libraryKey
-      }), jsxs(_$$Y, {
+      }), jsxs(AutoLayout, {
         direction: "horizontal",
         width: "fill-parent",
         height: "hug-contents",
@@ -871,7 +871,7 @@ function e9({
         },
         children: [jsx("div", {
           className: _$$s.minW0.wFull.$,
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: "vertical",
             height: "hug-contents",
             width: "fill-parent",
@@ -990,7 +990,7 @@ function e9({
         truncate: "line-clamp",
         lineClamp: 2,
         children: renderI18nText("resources_tab.libraries.default_modes")
-      }), f ? p?.map(t => t.modes && t.modes.length > 1 && a && jsxs(_$$Y, {
+      }), f ? p?.map(t => t.modes && t.modes.length > 1 && a && jsxs(AutoLayout, {
         width: "fill-parent",
         height: "hug-contents",
         spacing: 16,
@@ -1057,13 +1057,13 @@ function tn({
     className: eE()(tt.borderBox.$, a ? _$$s.colorBgSelected.$ : "library_subscription_settings--rowHover--VPDsJ"),
     role: "link",
     tabIndex: 0,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       width: "fill-parent",
       spacing: 0,
       children: [jsx(_$$E, {
         truncate: !0,
         children: e
-      }), jsx(_$$M, {
+      }), jsx(Spacer, {
         minSize: 4
       }), t && jsx(_$$E, {
         color: "success",
@@ -1101,7 +1101,7 @@ let tr = function ({
   }), [a, g]);
   return jsx("div", {
     className: _$$s.b1.bRadius4.colorBorder.wFull.hFull.minW0.$,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       spacing: 0,
       height: "fill-parent",
       children: [jsxs(_$$P, {
@@ -1117,7 +1117,7 @@ let tr = function ({
               i(null);
             }
           })]
-        }), p && jsx(_$$Y, {
+        }), p && jsx(AutoLayout, {
           padding: {
             left: 16,
             right: 16,
@@ -1126,7 +1126,7 @@ let tr = function ({
           children: jsx("div", {
             className: _$$s.bt1.bSolid.colorBorder.wFull.h1.$
           })
-        }), u && jsxs(_$$Y, {
+        }), u && jsxs(AutoLayout, {
           direction: "vertical",
           spacing: 0,
           children: [jsx(ta, {
@@ -1223,10 +1223,10 @@ let td = registerModal(function ({
       }), k && y.data && jsx(_$$U, {
         connectedProjects: y.data,
         onRedirect: g
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         direction: "vertical",
         spacing: 0,
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           spacing: 16,
           padding: 16,
           verticalAlignItems: "start",
@@ -1276,15 +1276,15 @@ function tg({
     useAdminTableStyles: !0,
     className: "libraries_section--tableRowBody--VJ-We libraries_section--tableRow--Y2bLC",
     onClick: s,
-    children: jsxs(_$$Y, {
+    children: jsxs(AutoLayout, {
       spacing: 0,
-      children: [jsxs(_$$Y, {
+      children: [jsxs(AutoLayout, {
         width: "40%",
         padding: {
           right: 16
         },
         spacing: 16,
-        children: [jsx(_$$Y, {
+        children: [jsx(AutoLayout, {
           width: 80,
           children: jsx(_$$V, {
             thumbnailUrl: isCommunityLibrary(e) ? e.thumbnail_url : "loaded" === r.status ? getResourceDataOrFallback(r.data?.file)?.thumbnailUrl : null,
@@ -1299,25 +1299,25 @@ function tg({
             children: e.library_name
           }), a]
         })]
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         width: "30%",
         padding: {
           right: 16
         },
         children: t(i)
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         width: "10%",
         horizontalAlignItems: "end",
         children: jsx(_$$E, {
           children: e.num_components
         })
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         width: "10%",
         horizontalAlignItems: "end",
         children: jsx(_$$E, {
           children: e.num_styles
         })
-      }), jsx(_$$Y, {
+      }), jsx(AutoLayout, {
         width: "10%",
         horizontalAlignItems: "end",
         children: jsx(In, {
@@ -1554,7 +1554,7 @@ export function $$tx1(e) {
       }), jsx(Hj, {
         header: !0,
         useAdminTableStyles: !0,
-        children: jsxs(_$$Y, {
+        children: jsxs(AutoLayout, {
           spacing: 0,
           children: [jsx(A3, {
             style: sx.add({
@@ -1675,7 +1675,7 @@ export function $$tx1(e) {
           Q("");
           J(new Set([]));
         },
-        children: jsx(_$$Y, {
+        children: jsx(AutoLayout, {
           horizontalAlignItems: "center",
           children: jsx(_$$E, {
             color: "brand",

@@ -12,7 +12,7 @@ import { logWarning } from "../905/714362";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Ay } from "../figma_app/432652";
 import { JT } from "../figma_app/632248";
 import { RL, qy } from "../figma_app/862289";
@@ -76,7 +76,7 @@ export async function $$E1(e) {
   });
   let a = "";
   let n = r.getReader();
-  for (; ;) {
+  for (;;) {
     let {
       done,
       value
@@ -135,7 +135,7 @@ export function $$y0() {
         jsx: r.jsx,
         clientLifecycleId: l,
         nodeHandlerManager: t,
-        transformCustomJSX: r1 ?? (() => { })
+        transformCustomJSX: r1 ?? (() => {})
       });
       e(VisualBellActions.enqueue({
         type: "FIRST_DRAFT_FINE_TUNE_JSX",
@@ -160,7 +160,7 @@ export function $$y0() {
           value: w,
           onChange: E,
           refocusToInput: !1
-        }), jsx(Y, {
+        }), jsx(AutoLayout, {
           horizontalAlignItems: "end",
           children: jsx(r, {
             shortcuts: [{

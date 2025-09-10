@@ -4,13 +4,13 @@ import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
 import { ds } from "../figma_app/314264";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { vO, Ci, yc } from "../figma_app/671547";
 import { l as _$$l } from "../905/448778";
 import { H as _$$H } from "../905/88863";
 import { De, Vm } from "../figma_app/728075";
 export function $$h2(e, t) {
-  let r = d1(debugState.getState())?.key ?? "";
+  let r = getSelectedFile(debugState.getState())?.key ?? "";
   ds(e, r, debugState.getState(), {
     domain: null != t ? vO(t) : "",
     linkRenderType: Ci.LINK_PREVIEW,

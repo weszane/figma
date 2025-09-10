@@ -47,7 +47,7 @@ import { N2 } from '../905/709171';
 import { IT, M4 } from '../905/713695';
 import { logError } from '../905/714362';
 import { l as _$$l } from '../905/716947';
-import { d1 } from '../905/766303';
+import { getSelectedFile } from '../905/766303';
 import { V as _$$V } from '../905/810505';
 import { X as _$$X } from '../905/853613';
 import { An, fe, sh, Sp } from '../905/854258';
@@ -132,7 +132,7 @@ let $$eH49 = createOptimistThunk((e, t) => {
     alwaysFetch,
     targetUpsertScene = SceneIdentifier.ACTIVE_SCENE
   } = t;
-  let c = d1(e.getState());
+  let c = getSelectedFile(e.getState());
   if (c) {
     if (!N2(item, c) || alwaysFetch) {
       let t = async () => {
@@ -175,7 +175,7 @@ let $$eW48 = createOptimistThunk((e, t) => {
     item,
     userId: p
   }));
-  let _ = d1(c);
+  let _ = getSelectedFile(c);
   if (!_) {
     e.dispatch(of({
       key: l
@@ -261,7 +261,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
       item,
       userId: t
     }));
-    let f = d1(I);
+    let f = getSelectedFile(I);
     if (!f) return;
     let v = (t, r) => {
       let a = Dl();
@@ -424,7 +424,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
       item,
       userId: t
     }));
-    let m = d1(I);
+    let m = getSelectedFile(I);
     if (!m) return;
     let v = (t, a, s) => {
       let l = Dl();
@@ -574,7 +574,7 @@ let $$eJ4 = createOptimistThunk(async (e, t) => {
     fullscreenValue.triggerAction('set-tool-default');
     return s;
   };
-  let T = d1(E);
+  let T = getSelectedFile(E);
   if (N2(item, T)) {
     b(item.node_id, insertLogArgsOverride);
     e.dispatch(tX());
@@ -803,7 +803,7 @@ let $$e41 = createOptimistThunk((e, t) => {
     omitFullscreenCommit = !1
   } = t;
   let p = e.getState();
-  let _ = d1(p);
+  let _ = getSelectedFile(p);
   let h = _ && !N2(style, _);
   let m = p.openFile;
   let g = ZR(cO(style, h ?? !1), m);
@@ -865,7 +865,7 @@ let $$e841 = createOptimistThunk((e, t) => {
     style,
     targetUpsertScene = SceneIdentifier.ACTIVE_SCENE
   } = t;
-  let a = d1(r);
+  let a = getSelectedFile(r);
   if (!a) return;
   let o = !N2(style, a);
   let c = style.style_type === 'GRID' && !AppStateTsApi.editorPreferences().showFrameGrids.getCopy();
@@ -1045,7 +1045,7 @@ let $$tn25 = createOptimistThunk((e, t) => {
     bufferCallback,
     errorCallback
   } = t;
-  if (!d1(e.getState())) {
+  if (!getSelectedFile(e.getState())) {
     errorCallback?.(new Error('editing file not found'));
     return;
   }
@@ -1118,7 +1118,7 @@ let $$to21 = createOptimistThunk((e, t) => {
     bufferCallback,
     errorCallback
   } = t;
-  if (d1(e.getState())) {
+  if (getSelectedFile(e.getState())) {
     if (item.subscriptionStatus === 'LIBRARY') {
       let t = async () => {
         try {

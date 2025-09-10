@@ -8,7 +8,7 @@ import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { J as _$$J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { KH, nF } from "../figma_app/471982";
 import { Qi } from "../905/172918";
@@ -303,7 +303,7 @@ async function Z(e, t, r) {
   let E = t.iconBlob;
   void 0 !== E && (f = _$$c(E).then(e => Ac(g.iconUploadUrl, E, e)).then(() => !0).catch(t => {
     reportError(_$$e.COMMUNITY, t);
-    let r = _$$J(t, getI18nString("community.actions.could_not_connect_to_the_server"));
+    let r = resolveMessage(t, getI18nString("community.actions.could_not_connect_to_the_server"));
     throw Error(xQ(e) ? getI18nString("community.actions.error_uploading_widget_icon_error", {
       error: r
     }) : getI18nString("community.actions.error_uploading_plugin_icon_error", {
@@ -315,9 +315,9 @@ async function Z(e, t, r) {
   void 0 !== b && (y = _$$c(b).then(e => Ac(g.coverImageUploadUrl, b, e)).then(() => !0).catch(t => {
     reportError(_$$e.COMMUNITY, t);
     return Error(xQ(e) ? getI18nString("community.actions.error_uploading_widget_artwork_image_error", {
-      error: _$$J(t, t.data?.message || "unknown error")
+      error: resolveMessage(t, t.data?.message || "unknown error")
     }) : getI18nString("community.actions.error_uploading_plugin_artwork_image_error", {
-      error: _$$J(t, t.data?.message || "unknown error")
+      error: resolveMessage(t, t.data?.message || "unknown error")
     }));
   }));
   let {
@@ -330,7 +330,7 @@ async function Z(e, t, r) {
   }).then(() => !0).catch(e => {
     reportError(_$$e.COMMUNITY, e);
     return Error(getI18nString("community.actions.error_uploading_widget_snapshot_image_error", {
-      error: _$$J(e, e.data?.message || "unknown error")
+      error: resolveMessage(e, e.data?.message || "unknown error")
     }));
   }));
   let A = Rd(g.carouselImages, o);
@@ -350,7 +350,7 @@ async function Z(e, t, r) {
   }).then(() => !0).catch(e => {
     reportError(_$$e.COMMUNITY, e);
     return Error(getI18nString("community.actions.error_uploading_plugin_video_error", {
-      error: _$$J(e, e.data?.message || "unknown error")
+      error: resolveMessage(e, e.data?.message || "unknown error")
     }));
   }));
   await Promise.all(L);
@@ -376,7 +376,7 @@ async function Z(e, t, r) {
   }).catch(e => {
     reportError(_$$e.COMMUNITY, e);
     return Error(getI18nString("community.actions.error_finalizing_plugin_error", {
-      error: _$$J(e, e.data?.message || "unknown error")
+      error: resolveMessage(e, e.data?.message || "unknown error")
     }));
   });
   let D = data.meta;
@@ -427,7 +427,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
     E = await _$$w.postPluginUpload(L, e, g);
   } catch (e) {
     reportError(_$$e.COMMUNITY, e);
-    return Error(_$$J(e, getI18nString("community.actions.could_not_connect_to_the_server")));
+    return Error(resolveMessage(e, getI18nString("community.actions.could_not_connect_to_the_server")));
   }
   let {
     codeUploadUrl,
@@ -442,7 +442,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   let G = Promise.resolve(!1);
   b && (G = $$ep30(codeUploadUrl, b).then(() => !0).catch(e => {
     reportError(_$$e.COMMUNITY, e);
-    let t = $$e_25(e) ?? _$$J(e, getI18nString("community.actions.could_not_connect_to_the_server"));
+    let t = $$e_25(e) ?? resolveMessage(e, getI18nString("community.actions.could_not_connect_to_the_server"));
     throw Error(g ? getI18nString("community.actions.error_uploading_widget_code_error", {
       error: t
     }) : getI18nString("community.actions.error_uploading_plugin_code_error", {
@@ -453,7 +453,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   let H = r.iconBlob;
   null != H && (V = _$$c(H).then(e => Ac(iconUploadUrl, H, e)).then(() => !0).catch(e => {
     reportError(_$$e.COMMUNITY, e);
-    let t = $$e_25(e) ?? _$$J(e, e.data?.message || "unknown error");
+    let t = $$e_25(e) ?? resolveMessage(e, e.data?.message || "unknown error");
     throw Error(g ? getI18nString("community.actions.error_uploading_widget_icon_error", {
       error: t
     }) : getI18nString("community.actions.error_uploading_plugin_icon_error", {
@@ -464,7 +464,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   let W = r.coverBlob;
   null != W && (z = _$$c(W).then(e => Ac(coverImageUploadUrl, W, e)).then(() => !0).catch(e => {
     reportError(_$$e.COMMUNITY, e);
-    let t = $$e_25(e) ?? _$$J(e, getI18nString("community.actions.could_not_connect_to_the_server"));
+    let t = $$e_25(e) ?? resolveMessage(e, getI18nString("community.actions.could_not_connect_to_the_server"));
     throw Error(g ? getI18nString("community.actions.error_uploading_widget_artwork_image_error", {
       error: t
     }) : getI18nString("community.actions.error_uploading_plugin_artwork_image_error", {
@@ -478,7 +478,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   null != snapshotBlob && snapshotUploadUrl && (Y = _$$c(snapshotBlob).then(e => Ac(snapshotUploadUrl, snapshotBlob, e)).then(() => !0).catch(e => {
     reportError(_$$e.COMMUNITY, e);
     return Error(getI18nString("community.actions.error_uploading_widget_snapshot_image_error", {
-      error: $$e_25(e) ?? _$$J(e, e.data?.message || "unknown error")
+      error: $$e_25(e) ?? resolveMessage(e, e.data?.message || "unknown error")
     }));
   }));
   let $ = Rd(carouselImages, x);
@@ -499,7 +499,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);
       return Error(getI18nString("community.actions.error_uploading_plugin_video_error", {
-        error: _$$J(e, e.data?.message || "unknown error")
+        error: resolveMessage(e, e.data?.message || "unknown error")
       }));
     }
   });
@@ -525,9 +525,9 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   }).catch(e => {
     reportError(_$$e.COMMUNITY, e);
     return Error(g ? getI18nString("community.actions.error_finalizing_widget_error", {
-      error: _$$J(e, e.data?.message || "")
+      error: resolveMessage(e, e.data?.message || "")
     }) : getI18nString("community.actions.error_finalizing_plugin_error", {
-      error: _$$J(e, e.data?.message || "")
+      error: resolveMessage(e, e.data?.message || "")
     }));
   });
   let et = data.meta;
@@ -605,7 +605,7 @@ let $$ea2 = createOptimistThunk(async (e, t) => {
       }
     }));
     let t = getI18nString("community.actions.could_not_publish_plugin_error", {
-      error: _$$J(r, r.message)
+      error: resolveMessage(r, r.message)
     });
     r instanceof qW ? MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message")) : r.message.includes("invalid word") || e.dispatch(VisualBellActions.enqueue({
       message: t,
@@ -647,7 +647,7 @@ let $$es11 = createOptimistThunk(async (e, t) => {
     }));
     callback();
   } catch (r) {
-    let t = _$$J(r, r.message);
+    let t = resolveMessage(r, r.message);
     r instanceof qW ? MZ(e.dispatch, getI18nString("check_network_compatibility.error_bell.video_upload.message")) : e.dispatch(VisualBellActions.enqueue({
       message: t,
       error: !0
@@ -694,7 +694,7 @@ let $$eo35 = createOptimistThunk(async (e, {
   }).catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.publishing.could_not_publish_plugin_error", {
-        error: _$$J(t, t.data?.message)
+        error: resolveMessage(t, t.data?.message)
       }),
       error: !0
     }));
@@ -742,7 +742,7 @@ let $$el10 = createOptimistThunk(async (e, t) => {
   }).catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.publishing.could_not_publish_plugin_error", {
-        error: _$$J(t, t.data?.message)
+        error: resolveMessage(t, t.data?.message)
       }),
       error: !0
     }));
@@ -769,9 +769,9 @@ let $$ed17 = createOptimistThunk((e, {
   }).catch(r => {
     e.dispatch(VisualBellActions.enqueue({
       message: xQ(t) ? getI18nString("community.actions.could_not_publish_widget_error", {
-        error: _$$J(r, r.data?.message)
+        error: resolveMessage(r, r.data?.message)
       }) : getI18nString("community.actions.could_not_publish_plugin_error", {
-        error: _$$J(r, r.data?.message)
+        error: resolveMessage(r, r.data?.message)
       }),
       error: !0
     }));
@@ -858,7 +858,7 @@ let $$eu34 = createOptimistThunk(async (e, t) => {
     }));
   } catch (t) {
     e.dispatch(VisualBellActions.enqueue({
-      message: _$$J(t, t.message),
+      message: resolveMessage(t, t.message),
       error: !0
     }));
     reportError(_$$e.COMMUNITY, t);

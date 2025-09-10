@@ -21,7 +21,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
 import { In } from "../905/672640";
 import { E as _$$E2 } from "../905/984674";
@@ -177,7 +177,7 @@ function J(e) {
           right: 24,
           bottom: 24
         },
-        children: [jsxs(_$$Y, {
+        children: [jsxs(AutoLayout, {
           direction: "vertical",
           spacing: 8,
           padding: {

@@ -11,7 +11,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { zE } from "../905/738636";
 import { u2, $K } from "../figma_app/223206";
-import { Kl } from "../905/766303";
+import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { Me } from "../figma_app/598018";
@@ -24,7 +24,7 @@ export function $$A0(e, t) {
   !function (e, t) {
     let r = atomStoreManager.get(Me);
     let n = debugState.getState();
-    let i = Kl(n);
+    let i = getPermissionsAndView(n);
     e(zE({
       state: i,
       from: f6.DESIGN_TO_SLIDES_ENTRYPOINT,

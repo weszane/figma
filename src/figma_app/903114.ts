@@ -18,7 +18,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { j as _$$j } from "../905/584270";
 import { l as _$$l, m as _$$m } from "../905/602189";
@@ -117,7 +117,7 @@ function $$Z(e) {
       width: "lg",
       children: jsxs(vo, {
         children: [jsx(nB, {
-          children: jsxs(_$$Y, {
+          children: jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
             padding: {
@@ -367,7 +367,7 @@ function er({
   let d = t && 7 >= _$$A().diff(_$$A(t), "days");
   let c = a ? tb(a.toISOString()) : null;
   let u = l && "other" !== HB(l);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 0,
     className: "x15r87gk",

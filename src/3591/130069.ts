@@ -3,12 +3,12 @@ import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { N } from "../905/438674";
 import { renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E } from "../905/984674";
 import { Nn, dx, MZ } from "../figma_app/399472";
 import { getPluginVersion } from "../figma_app/300692";
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
 function c(e) {
   return {
     ...(e.is_widget ? {
@@ -34,7 +34,7 @@ export function $$m3({
 }) {
   let i = $$g2(e);
   let t = $$h0(e);
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     children: [jsx($n, {
       onClick: e => {
         e.stopPropagation();
@@ -83,7 +83,7 @@ export function $$x4({
 export function $$_1({
   resource: e
 }) {
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     children: [jsx($$x4, {
       resource: e

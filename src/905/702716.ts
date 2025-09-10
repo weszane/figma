@@ -5,7 +5,7 @@ import { z } from "../905/284530";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { AC } from "../figma_app/777551";
 import { Qi } from "../figma_app/559491";
@@ -13,7 +13,7 @@ import { showModalHandler } from "../905/156213";
 import { getPluginVersion, getMissingEditorTypeError, generatePluginId } from "../figma_app/300692";
 import { bD } from "../figma_app/45218";
 import { ManifestErrorType, ManifestEditorType } from "../figma_app/155287";
-import { jl } from "../905/544659";
+import { isNetworkAccessValidationError } from "../905/544659";
 import { A as _$$A } from "../905/552947";
 import { A as _$$A2 } from "../905/794518";
 import { u as _$$u } from "../905/952696";
@@ -52,7 +52,7 @@ export function $$N1({
     label: m,
     children: [u, jsx(O, {})]
   });
-  if (t && t.error && !$$D3(t.error) && !jl(t.error)) return jsxs(_$$A2, {
+  if (t && t.error && !$$D3(t.error) && !isNetworkAccessValidationError(t.error)) return jsxs(_$$A2, {
     label: m,
     children: [u, jsx(L, {
       localPlugin: t
@@ -218,7 +218,7 @@ function M({
 function j({
   editorType: e
 }) {
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     spacing: 16,
     direction: "horizontal",
     horizontalAlignItems: "start",
@@ -261,7 +261,7 @@ function j({
         svgSrc,
         label
       } = t;
-      return jsxs(Y, {
+      return jsxs(AutoLayout, {
         spacing: 8,
         width: "hug-contents",
         direction: "horizontal",

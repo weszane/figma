@@ -26,7 +26,7 @@ import { F as _$$F } from "../905/680873";
 import { $ as _$$$3 } from "../9410/841699";
 import { uE, ds } from "../figma_app/314264";
 import { dh, nn } from "../figma_app/186343";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { o3, nt } from "../905/226610";
 import { p as _$$p } from "../figma_app/353099";
 import { Ay } from "../642/998522";
@@ -65,7 +65,7 @@ import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
 import { TeamCanEdit } from "../figma_app/43951";
 import { jO } from "../figma_app/242339";
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { h as _$$h2 } from "../figma_app/198885";
 import { dK, Xt } from "../figma_app/889655";
 import { selectTeams } from "../905/338617";
@@ -111,7 +111,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { NG } from "../figma_app/709893";
 import { B as _$$B } from "../905/714743";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { jD } from "../905/765855";
 import { fd, o3 as _$$o, Ag } from "../figma_app/255679";
 import { getBasename } from "../905/309735";
@@ -571,7 +571,7 @@ function tS({
         className: OW,
         svg: _$$A3
       })]
-    }), V && !!t && jsxs(_$$Y, {
+    }), V && !!t && jsxs(AutoLayout, {
       spacing: 0,
       direction: "horizontal",
       children: [jsx("div", {
@@ -1153,7 +1153,7 @@ function t9({
       let d = useAtomWithSubscription(qp);
       let c = Fl();
       let u = t?.teamId ? i[t.teamId] : null;
-      let p = !!u && w5(u);
+      let p = !!u && hasTeamPaidAccess(u);
       let y = useMemo(() => Sg(n, a), [n, a]);
       let m = $1({
         library: e,
@@ -1495,7 +1495,7 @@ function t9({
     enabled: !!k?.teamId
   });
   let eL = eM.data?.team?.hasPermission;
-  let eP = !x && v && (!eC || !w5(eC) && eL) && k?.canEdit && eI && Object.keys(p.local.components).length > 0 && Hz(_?.id);
+  let eP = !x && v && (!eC || !hasTeamPaidAccess(eC) && eL) && k?.canEdit && eI && Object.keys(p.local.components).length > 0 && Hz(_?.id);
   return jsxs(_$$U.Provider, {
     value: D,
     children: [jsx(se, {
@@ -1684,7 +1684,7 @@ function sw({
   nn();
   let x = useAtomWithSubscription(l7);
   let v = _$$U2();
-  let _ = _$$T();
+  let _ = isVsCodeEnvironment();
   let {
     isLayersOpen,
     toggleLayersAction

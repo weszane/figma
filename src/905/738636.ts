@@ -11,7 +11,7 @@ import { NONE_SYMBOL } from "../905/992467";
 import { A as _$$A } from "../905/560427";
 import { registerModal } from "../905/102752";
 import { showModalHandler } from "../905/156213";
-import { xA } from "../905/766303";
+import { getNewFileConfig } from "../905/766303";
 import { M as _$$M } from "../905/58217";
 import { F as _$$F } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
@@ -95,7 +95,7 @@ let $$j0 = createOptimistThunk((e, {
   let v = d ? {
     folderId: d
   } : i !== f6.FILE_BROWSER_SIDEBAR_DRAFTS && s ? null : "drafts";
-  let I = xA({
+  let I = getNewFileConfig({
     state: t,
     openNewFileIn: o,
     folderOverride: v,

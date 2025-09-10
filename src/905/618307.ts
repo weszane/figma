@@ -1,7 +1,7 @@
 import { i as _$$i } from "../905/970229";
 import { yr } from "../905/827765";
 import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
+import { resolveMessage } from "../905/231762";
 import { Nw, yJ } from "../figma_app/78808";
 import { q } from "../figma_app/446378";
 import { Yp } from "../figma_app/740025";
@@ -68,7 +68,7 @@ export async function $$u0({
         try {
           await yr(cover_image_upload_url, p);
         } catch (e) {
-          g(J(e, getI18nString("templates.actions.error_connecting_to_server_to_upload_file_thumbnail")));
+          g(resolveMessage(e, getI18nString("templates.actions.error_connecting_to_server_to_upload_file_thumbnail")));
           return;
         }
       }

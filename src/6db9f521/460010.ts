@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Hm, Bs, AV, Gb } from "../figma_app/933328";
 import { ED } from "../figma_app/504823";
-import { T as _$$T } from "../905/858738";
+import { isVsCodeEnvironment } from "../905/858738";
 import { eY as _$$eY, p8, aV as _$$aV, s6 as _$$s, f4 } from "../figma_app/722362";
 import { selectCurrentFile, openFileKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { W as _$$W } from "../441/503702";
@@ -9134,7 +9134,7 @@ let cK = memo(({
           commentsDetailContainerRef: O
         }), jsx(Nz, {}), jsx(_$$J, {}), jsx("div", {
           ref: O
-        }), !_$$T() && jsx(_$$m, {
+        }), !isVsCodeEnvironment() && jsx(_$$m, {
           role: "region",
           "aria-label": getI18nString("fullscreen_actions.left_sidebar_label"),
           children: J ? jsx(_$$K2, {}) : jsx(SG, {})

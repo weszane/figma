@@ -6,7 +6,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { ds } from "../figma_app/314264";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { getRepoById } from "../905/760074";
 import { hL } from "../905/697795";
 import { d1 as _$$d } from "../figma_app/603466";
@@ -287,7 +287,7 @@ let $$ep24 = NC("SET_TIMER");
 let $$e_36 = createOptimistThunk((e, t) => {
   if (0 === t.totalTimeMs) {
     let t = e.getState();
-    let r = d1(t);
+    let r = getSelectedFile(t);
     if (r) {
       let e = getRepoById(r, t.repos);
       $$v43(r, e);

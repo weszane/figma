@@ -6,7 +6,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { FFileType } from "../figma_app/191312";
 import { D } from "../905/347702";
 import { selectCurrentUser } from "../905/372672";
-import { BR, O1, Ky } from "../figma_app/345997";
+import { buildUserRecordsWithPlanStatus, calculatePositiveDifference, countUsersWithPaidAccess } from "../figma_app/345997";
 let u = e => `SAVED_CART::${e}`;
 export function $$m3({
   teamId: e,
@@ -32,9 +32,9 @@ export function $$E5({
   let h = useSelector(e => e.payment.editorStatusChanges);
   let f = useSelector(e => e.payment.cartSelections);
   let S = useLatestRef(e);
-  let R = BR(E, m);
-  let D = O1(T, Ky(R, h, FFileType.DESIGN));
-  let N = O1(y, Ky(R, h, FFileType.WHITEBOARD));
+  let R = buildUserRecordsWithPlanStatus(E, m);
+  let D = calculatePositiveDifference(T, countUsersWithPaidAccess(R, h, FFileType.DESIGN));
+  let N = calculatePositiveDifference(y, countUsersWithPaidAccess(R, h, FFileType.WHITEBOARD));
   let b = useCallback(() => {
     let e = g(m?.id);
     if (!e) return null;

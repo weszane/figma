@@ -21,7 +21,7 @@ import { V as _$$V } from "../figma_app/385855";
 import { y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Y as _$$Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { p as _$$p } from "../905/597320";
 import { V3 } from "../figma_app/976345";
 import { K as _$$K } from "../905/628118";
@@ -315,7 +315,7 @@ function ee(e) {
         })
       }],
       emptyContent: jsx(_$$p, {
-        children: jsx(_$$Y, {
+        children: jsx(AutoLayout, {
           direction: "vertical",
           horizontalAlignItems: "center",
           verticalAlignItems: "center",
@@ -350,7 +350,7 @@ function ee(e) {
       rowHeightOverride: 64,
       selectAllDisabled: !0,
       sortState: a,
-      stickyContent: jsxs(_$$Y, {
+      stickyContent: jsxs(AutoLayout, {
         strokeColor: "default",
         strokeWidth: {
           bottom: 1
@@ -363,7 +363,7 @@ function ee(e) {
           query: l,
           clearSearch: () => o(""),
           placeholder: getI18nString("abandoned_drafts_table.files.search.placeholder")
-        }), jsx(_$$M, {}), jsx(Checkbox, {
+        }), jsx(Spacer, {}), jsx(Checkbox, {
           checked: d,
           onChange: () => {
             _(!d);

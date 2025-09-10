@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { yH } from "../figma_app/714946";
-import { d1 } from "../905/766303";
+import { getSelectedFile } from "../905/766303";
 import { td } from "../figma_app/646357";
 import { J } from "../905/252202";
 import { Qh } from "../figma_app/155728";
@@ -22,7 +22,7 @@ let $$I0 = createOptimistThunk((e, {
   subscriptions: r
 }) => {
   if (!r || td(e.getState().library.defaultPublished, t)) return;
-  let n = d1(e.getState());
+  let n = getSelectedFile(e.getState());
   if (n) {
     let a = n.editor_type ?? "design";
     (!0 === r || "design" === a && r.design || "whiteboard" === a && r.figjam) && (e.getState().leftPanel.activeTab === UserInterfaceElements.ASSETS || e.getState().universalInsertModal.showing ? e.dispatch(_$$n({

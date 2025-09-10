@@ -11,7 +11,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { Y as _$$Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { E as _$$E } from "../905/984674";
 import { qV, nY, oT, xF } from "../figma_app/566517";
 import { tV, au } from "../figma_app/445976";
@@ -296,7 +296,7 @@ function ei() {
     }
   }];
   let [s, r] = useState(a[0]);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     direction: "horizontal",
     children: [jsx("div", {
       className: _$$s.cursorPointer.flex.itemsCenter.wFull.$,
@@ -487,7 +487,7 @@ function ec({
     value: e,
     text: e
   })).concat(er);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     padding: {
       vertical: 12
     },
@@ -511,7 +511,7 @@ function ec({
       value: x,
       placeholder: 'Enter custom eval prompts as JSON array. E.g. ["prompt1", "prompt2"]',
       onChange: e => S(e.target.value)
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       children: [jsx(_$$m, {
         selected: A,
         onSelectedChange: e => R(e),
@@ -541,7 +541,7 @@ function ec({
           });
         }
       })]
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       children: [jsx(Checkbox, {
         checked: p,
         disabled: J,
@@ -951,7 +951,7 @@ function eS({
   let [c, d] = useState([]);
   let u = _$$B2();
   let p = c.length > 0;
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     padding: {
       vertical: 12
     },
@@ -994,7 +994,7 @@ function eS({
         height: "300px",
         overflowY: "scroll"
       },
-      children: c.map((e, t) => jsxs(_$$Y, {
+      children: c.map((e, t) => jsxs(AutoLayout, {
         direction: "horizontal",
         width: "fill-parent",
         children: [jsx("img", {
@@ -1171,7 +1171,7 @@ function eI({
       directGeneration: WX(e.kit)
     });
   }, [submitPromptMocked, e, d]);
-  return jsxs(_$$Y, {
+  return jsxs(AutoLayout, {
     padding: {
       vertical: 12
     },
@@ -1180,7 +1180,7 @@ function eI({
       fontSize: 11,
       fontWeight: "medium",
       children: "Serialize & Insert"
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       children: [jsx(Checkbox, {
         checked: w,
         onChange: () => K(e => !e),
@@ -1201,7 +1201,7 @@ function eI({
       value: m,
       placeholder: "Select an example to serialize it or enter JSX to insert directly",
       onChange: e => I(e.target.value)
-    }), jsx(_$$Y, {
+    }), jsx(AutoLayout, {
       children: jsx(Checkbox, {
         checked: d,
         onChange: () => p(e => !e),
@@ -1209,7 +1209,7 @@ function eI({
           children: "Gen images"
         })
       })
-    }), jsxs(_$$Y, {
+    }), jsxs(AutoLayout, {
       children: [jsx($n, {
         variant: "secondary",
         onClick: async () => {

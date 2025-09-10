@@ -8,7 +8,7 @@ import { fN, PN, Uv } from '../905/54385';
 import { registerModal } from '../905/102752';
 import { Ey, To } from '../905/148137';
 import { hideModal } from '../905/156213';
-import { J as _$$J } from '../905/231762';
+import { resolveMessage } from '../905/231762';
 import { x as _$$x } from '../905/233240';
 import { HiddenLabel, Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
@@ -835,7 +835,7 @@ export let $$eN0 = registerModal(e => {
       }), {
         reportAsSentryError: !(e.data.status === 400 && e.data.reason === 'ADDRESS')
       });
-      ec(_$$J(e));
+      ec(resolveMessage(e));
     }).$$finally(() => {
       el(!0);
     });

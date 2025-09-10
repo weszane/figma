@@ -9,7 +9,7 @@ import { WX } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { pi } from "../figma_app/314264";
-import { WW } from "../figma_app/345997";
+import { STANDARD_LIMIT } from "../figma_app/345997";
 import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 let _ = "file_limit_paywall_modal--textSection--eQg2n";
@@ -38,19 +38,19 @@ let $$A0 = registerModal(function (e) {
           children: jsx("span", {
             children: "whiteboard" === e.editorType ? renderI18nText("payments.file_limit_paywall_header_figjam", {
               teamName: e.teamName,
-              maxFreeFiles: WW
+              maxFreeFiles: STANDARD_LIMIT
             }) : renderI18nText("payments.file_limit_paywall_header_figma", {
               teamName: e.teamName,
-              maxFreeFiles: WW
+              maxFreeFiles: STANDARD_LIMIT
             })
           })
         }), jsx("div", {
           className: _,
           children: jsx("span", {
             children: "whiteboard" === e.editorType ? renderI18nText("payments.file_limit_paywall_text_figjam", {
-              maxFreeFiles: WW
+              maxFreeFiles: STANDARD_LIMIT
             }) : renderI18nText("payments.file_limit_paywall_text_figma", {
-              maxFreeFiles: WW
+              maxFreeFiles: STANDARD_LIMIT
             })
           })
         }), jsx("div", {

@@ -7,7 +7,7 @@ import { Kz } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
-import { Y, M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { f as _$$f } from "../905/940356";
@@ -38,7 +38,7 @@ function A(e) {
       children: e.children
     }), jsx("div", {
       className: qr,
-      children: jsxs(Y, {
+      children: jsxs(AutoLayout, {
         verticalAlignItems: "center",
         direction: "horizontal",
         spacing: 8,
@@ -48,7 +48,7 @@ function A(e) {
             [_$$s.colorTextSecondary.$]: !t
           }),
           children: e.lowerLeftText
-        }), jsx(M, {}), e.onSecondaryCtaClick && jsx(J, {
+        }), jsx(Spacer, {}), e.onSecondaryCtaClick && jsx(J, {
           mode: t ? "dark" : void 0,
           children: jsx("div", {
             ref: r ? void 0 : e.showMeCtaRef,

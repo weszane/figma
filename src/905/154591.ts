@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { x, z } from "../905/407439";
 import { YY, nP } from "../figma_app/722791";
 import { SP, p7, uy } from "../905/252555";
 export function $$d0({
   badges: e
 }) {
-  return jsx(Y, {
+  return jsx(AutoLayout, {
     width: "hug-contents",
     children: e.map((e, t) => jsx(c, {
       badge: e

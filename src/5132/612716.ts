@@ -9,7 +9,7 @@ import { s_ } from "../905/17223";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { Y, M as _$$M } from "../905/830372";
+import { AutoLayout, Spacer } from "../905/470281";
 import { V } from "../905/355181";
 import { E as _$$E } from "../905/984674";
 import { c as _$$c } from "../905/370443";
@@ -30,7 +30,7 @@ function z({
   imgSrc: i,
   loadingColor: r
 }) {
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     direction: "vertical",
     verticalAlignItems: "start",
     strokeColor: "default",
@@ -105,7 +105,7 @@ function E() {
   let r = new vr(e);
   let s = a.data[ProductAccessTypeEnum.DESIGN].amount;
   let c = a.data[ProductAccessTypeEnum.FIGJAM].amount;
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     padding: 14,
     direction: "vertical",
     verticalAlignItems: "end",
@@ -228,11 +228,11 @@ export function $$N0({
             transition: {
               duration: .5
             },
-            children: jsxs(Y, {
+            children: jsxs(AutoLayout, {
               verticalAlignItems: "start",
               height: 604,
               spacing: 0,
-              children: [jsxs(Y, {
+              children: [jsxs(AutoLayout, {
                 direction: "vertical",
                 width: 230,
                 strokeWidth: {
@@ -243,15 +243,15 @@ export function $$N0({
                 strokeColor: "default",
                 height: "fill-parent",
                 verticalAlignItems: "start",
-                children: [jsx(_$$M, {
+                children: [jsx(Spacer, {
                   minSize: 16
-                }), jsxs(Y, {
+                }), jsxs(AutoLayout, {
                   direction: "vertical",
                   height: "fill-parent",
                   spacing: 0,
                   children: [l && W, F]
                 }), j && jsx(E, {})]
-              }), jsxs(Y, {
+              }), jsxs(AutoLayout, {
                 direction: "vertical",
                 height: "fill-parent",
                 spacing: 0,
@@ -276,7 +276,7 @@ export function $$N0({
                   className: _$$s.wFull.hFull.overflowAuto.$,
                   children: jsx("div", {
                     className: _$$s.pl32.pb24.$,
-                    children: jsx(Y, {
+                    children: jsx(AutoLayout, {
                       spacing: 16,
                       verticalAlignItems: "start",
                       direction: "vertical",
@@ -286,7 +286,7 @@ export function $$N0({
                       })
                     })
                   })
-                }), jsxs(Y, {
+                }), jsxs(AutoLayout, {
                   height: 64,
                   padding: 16,
                   horizontalAlignItems: "end",

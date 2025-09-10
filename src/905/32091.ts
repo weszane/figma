@@ -1,4 +1,4 @@
-import { w5 } from "../figma_app/345997";
+import { hasTeamPaidAccess } from "../figma_app/345997";
 import { generateAnonymouseName, generateAnnomousPrefill } from "../905/301652";
 var $$a1 = (e => (e.ORG_DISABLED = "ORG_DISABLED", e.TEAM_NOT_PRO = "TEAM_NOT_PRO", e.CANNOT_EDIT_FILE = "CANNOT_EDIT_FILE", e.ERROR = "ERROR", e))($$a1 || {});
 export function $$s0(e) {
@@ -7,7 +7,7 @@ export function $$s0(e) {
     org,
     team
   } = e;
-  return !!("whiteboard" === editorType && (org && org.workshop_enabled || !org && team && w5(team)));
+  return !!("whiteboard" === editorType && (org && org.workshop_enabled || !org && team && hasTeamPaidAccess(team)));
 }
 export function $$o3(e) {
   let {
@@ -16,7 +16,7 @@ export function $$o3(e) {
     team,
     canEdit
   } = e;
-  if ("whiteboard" !== editorType); else if (org && !1 === org.workshop_enabled) return "ORG_DISABLED"; else if (team && !w5(team)) return "TEAM_NOT_PRO"; else if (!1 === canEdit) return "CANNOT_EDIT_FILE";
+  if ("whiteboard" !== editorType) ;else if (org && !1 === org.workshop_enabled) return "ORG_DISABLED";else if (team && !hasTeamPaidAccess(team)) return "TEAM_NOT_PRO";else if (!1 === canEdit) return "CANNOT_EDIT_FILE";
   return "ERROR";
 }
 export function $$l2(e, t) {

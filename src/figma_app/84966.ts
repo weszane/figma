@@ -18,7 +18,7 @@ import { Y$, Ln, SG, Tc } from "../905/84777";
 import { FOrganizationLevelType, FOrganizationEntityType } from "../figma_app/191312";
 import { PendingConfirmedRenewalSeatCountsView } from "../figma_app/43951";
 import { vr } from "../figma_app/514043";
-import { mt } from "../figma_app/345997";
+import { getFutureDateOrNull } from "../figma_app/345997";
 import { IX } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
 import { ProductAccessTypeEnum, isValidAccessType, ViewAccessTypeEnum } from "../905/513035";
@@ -81,7 +81,7 @@ export function $$F15() {
 }
 export function $$j14(e) {
   let t = e.annual_subscription?.trial_end;
-  return null !== (t ? mt(t) : null);
+  return null !== (t ? getFutureDateOrNull(t) : null);
 }
 export function $$U4(e) {
   return getFeatureFlags().scheduled_cancellation_enabled && e?.scheduled_cancellation?.cancel_at_period_end ? null : k({

@@ -9,7 +9,7 @@ import { I7 } from "../figma_app/594947";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Y } from "../905/830372";
+import { AutoLayout } from "../905/470281";
 import { ProductAccessMap } from "../figma_app/765689";
 import { AdminRequestDashboardRowIds } from "../figma_app/43951";
 let $$f7 = "UPGRADE_REQUESTS_PRODUCT_DROPDOWN";
@@ -48,7 +48,7 @@ export function $$P18({
   licenseType: e
 }) {
   let t = L[e];
-  return jsxs(Y, {
+  return jsxs(AutoLayout, {
     spacing: 8,
     children: [t.icon, jsx("div", {
       children: t.name()
