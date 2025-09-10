@@ -1,6 +1,6 @@
-import { SchemaJoinStatus, Multiplayer, DetachStatus, DetachError, DiffImpl } from "src/figma_app/763686";
-import { awaitSync } from "src/905/412815";
-import { n as _$$n } from "src/905/347702";
+import { SchemaJoinStatus, Multiplayer, DetachStatus, DetachError, DiffImpl } from "../figma_app/763686";
+import { awaitSync } from "../905/412815";
+import { n as _$$n } from "../905/347702";
 let s = null;
 let o = new Map();
 export function $$l3(e, t) {

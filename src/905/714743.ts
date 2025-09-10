@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import classNames from "classnames";
-import { RecordingPureComponent, handleMouseEvent, handlePointerEvent } from "src/figma_app/878298";
+import { RecordingPureComponent, handleMouseEvent, handlePointerEvent } from "../figma_app/878298";
 import { createRef, useRef, useCallback } from "react";
 
 export function $$l1(e) {

@@ -1,10 +1,10 @@
-import { $n, WW, IK, Pw } from "src/905/521428";
-import { E } from "src/905/632989";
-import { u } from "src/905/65923";
-import { d as _$$d } from "src/905/976845";
-import { K } from "src/905/443068";
-import { f } from "src/905/167712";
-import { tf } from "src/figma_app/831799";
+import { $n, WW, IK, Pw } from "../905/521428";
+import { E } from "../905/632989";
+import { u } from "../905/65923";
+import { d as _$$d } from "../905/976845";
+import { K } from "../905/443068";
+import { f } from "../905/167712";
+import { tf } from "../figma_app/831799";
 let $$c0 = tf($n);
 let $$u7 = tf($n.Link);
 let $$p4 = tf(E);

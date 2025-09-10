@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { tW, W5, zy, B6 } from "src/vendor/130505";
-import { customHistory } from "src/905/612521";
-import { serializeQuery } from "src/905/634134";
-import { captureMessage } from "src/905/11";
-import { iY, p_ } from "src/figma_app/598412";
-export function $$d0(e) {}
+import { tW, W5, zy, B6 } from "../vendor/130505";
+import { customHistory } from "../905/612521";
+import { serializeQuery } from "../905/634134";
+import { captureMessage } from "../905/11";
+import { iY, p_ } from "../figma_app/598412";
+export function $$d0(e) { }
 export class $$c8 {
   get params() {
     return this._params;

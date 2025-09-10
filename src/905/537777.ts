@@ -1,4 +1,4 @@
-import { VariableSetIdCompatHandler } from "src/figma_app/243058";
+import { VariableSetIdCompatHandler } from "../figma_app/243058";
 
 /**
  * Represents a Kiwi object with a guid property.

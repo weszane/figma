@@ -22,7 +22,7 @@ import { clearWidgetSyncedState, getSyncedState, getSyncedMap } from "../905/486
 import { fullscreenValue } from "../figma_app/455680";
 import { widgetErrorTracker } from "../905/250412";
 import { j } from "../905/813868";
-import { ZY, Qx as _$$Qx } from "../905/764747";
+import { hasKey, getArrayLength } from "../905/764747";
 import { canPerformAction } from "../figma_app/12796";
 import { m3 } from "../figma_app/45218";
 import { hasLocalFileId, manifestContainsWidget, manifestErrorMessage } from "../figma_app/155287";
@@ -274,7 +274,7 @@ export function $$M1({
     if (r?.widgetVersionId) {
       var l;
       l = r.widgetVersionId;
-      o = ZY(_pluginID) ? _$$Qx(_pluginID) !== l : !t || !t[_pluginID] || getCurrentPluginVersionId(t, _pluginID) !== l;
+      o = hasKey(_pluginID) ? getArrayLength(_pluginID) !== l : !t || !t[_pluginID] || getCurrentPluginVersionId(t, _pluginID) !== l;
     } else o = !1;
   }
   let d = [{

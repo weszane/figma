@@ -1,7 +1,7 @@
-import { throwTypeError } from "src/figma_app/465776";
-import { getFeatureFlags } from "src/905/601108";
-import { getI18nString } from "src/905/303541";
-import { FProductAccessType } from "src/figma_app/191312";
+import { throwTypeError } from "../figma_app/465776";
+import { getFeatureFlags } from "../905/601108";
+import { getI18nString } from "../905/303541";
+import { FProductAccessType } from "../figma_app/191312";
 export function $$o1(e) {
   switch (e) {
     case FProductAccessType.DESIGN:

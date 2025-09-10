@@ -1,5 +1,5 @@
-import { throwTypeError } from "src/figma_app/465776";
-import { FContainerType } from "src/figma_app/191312";
+import { throwTypeError } from "../figma_app/465776";
+import { FContainerType } from "../figma_app/191312";
 export let $$a1 = {
   ORG: "org",
   TEAM: "team"

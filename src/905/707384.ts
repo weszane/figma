@@ -1,6 +1,6 @@
-import { trackEventAnalytics } from "src/905/449184";
-import { debugState } from "src/905/407919";
-import { sendMetric } from "src/905/485103";
+import { trackEventAnalytics } from "../905/449184";
+import { debugState } from "../905/407919";
+import { sendMetric } from "../905/485103";
 let s = !0;
 function o(e) {
   return e < 0x8000000 ? "0mb-to-128mb" : e < 0x10000000 ? "128mb-to-256mb" : e < 0x20000000 ? "256mb-to-512mb" : e < 0x40000000 ? "512mb-to-1gb" : e < 0x80000000 ? "1gb-to-2gb" : e < 0x100000000 ? "2gb-to-4gb" : ">4gb";

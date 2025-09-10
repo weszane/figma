@@ -1,4 +1,4 @@
-import { NC } from "src/905/17179";
+import { NC } from "../905/17179";
 let $$r0 = NC("PLAN_SET_LAST_VISITED_PLAN");
 let $$a1 = NC("PLAN_SET_LAST_VISITED_ID");
 let $$s2 = NC("PLAN_BATCH_PUT");

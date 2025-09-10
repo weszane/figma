@@ -180,7 +180,7 @@ import { L6 } from '../905/755627';
 import { Z as _$$Z } from '../905/757420';
 import { d as _$$d2, X as _$$X2 } from '../905/758967';
 import { isBranchAlt } from '../905/760074';
-import { WL, ZY } from '../905/764747';
+import { getValueAtIndex, hasKey } from '../905/764747';
 import { d1 } from '../905/766303';
 import { M as _$$M2 } from '../905/771870';
 import { b as _$$b2, eM as _$$eM, gg, LQ, M9, Nz, PE, yF } from '../905/777093';
@@ -4358,7 +4358,7 @@ async function lN({
     await showVisualBell(u.message);
     return;
   }
-  if (lj() && ZY(e)) {
+  if (lj() && hasKey(e)) {
     await lO({
       pluginID: e,
       lifecycleCommand: t,
@@ -4453,7 +4453,7 @@ async function lN({
   }
 }
 async function lP(e, t) {
-  return getWidgetVersionData(e) || (!e.widgetId || !e.widgetVersionId || ZY(e.widgetId) ? null : (await $Z(e.widgetId, e.widgetVersionId, t)) ?? null);
+  return getWidgetVersionData(e) || (!e.widgetId || !e.widgetVersionId || hasKey(e.widgetId) ? null : (await $Z(e.widgetId, e.widgetVersionId, t)) ?? null);
 }
 async function lO({
   pluginID: e,
@@ -4461,7 +4461,7 @@ async function lO({
   pluginVersionID: i
 }) {
   if (!lj()) return;
-  let n = WL(e, i);
+  let n = getValueAtIndex(e, i);
   if (!n) return;
   let {
     openFile

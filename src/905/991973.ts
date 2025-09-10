@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { atom, useAtomWithSubscription } from "src/figma_app/27355";
+import { atom, useAtomWithSubscription } from "../figma_app/27355";
 let $$a3 = atom([]);
 let $$s1 = atom([]);
 let $$o4 = atom([]);

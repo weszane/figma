@@ -1,5 +1,5 @@
-import { deepEqual } from "src/905/382883";
-import r from "src/vendor/785047";
+import { deepEqual } from "../905/382883";
+import r from "../vendor/785047";
 var a = r;
 export function $$s0(e, t) {
   if ("object" != typeof e || null == e) return t;

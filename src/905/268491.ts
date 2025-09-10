@@ -1,5 +1,5 @@
-import { px } from "src/905/893109";
-import { n$, qE as _$$qE } from "src/905/875826";
+import { px } from "../905/893109";
+import { n$, qE as _$$qE } from "../905/875826";
 export let $$a13 = {
   x: 0,
   y: 0

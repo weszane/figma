@@ -1,9 +1,9 @@
-import { ServiceCategories as _$$e } from "src/905/165054";
-import { reportError } from "src/905/11";
-import { createNoOpValidator, createPaginatedValidator, APIParameterUtils } from "src/figma_app/181241";
-import { z } from "src/905/239603";
-import { M4 } from "src/905/713695";
-import { nn } from "src/figma_app/45218";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { reportError } from "../905/11";
+import { createNoOpValidator, createPaginatedValidator, APIParameterUtils } from "../figma_app/181241";
+import { z } from "../905/239603";
+import { M4 } from "../905/713695";
+import { nn } from "../figma_app/45218";
 export let $$d0 = new class {
   constructor() {
     this.CommunityShelvesSchemaValidator = createNoOpValidator();

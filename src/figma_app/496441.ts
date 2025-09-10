@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useContext } from "react";
-import { useRecording } from "src/905/959312";
-import { defaultComponentAttribute } from "src/905/577641";
-import { A } from "src/905/268204";
+import { useRecording } from "../905/959312";
+import { defaultComponentAttribute } from "../905/577641";
+import { A } from "../905/268204";
 let l = createContext(void 0);
 let $$d1 = l.Provider;
 let $$c0 = forwardRef(({

@@ -1,8 +1,8 @@
-import { FontSourceType } from "src/figma_app/763686";
-import { addFontFamily } from "src/905/240327";
-import { Ts } from "src/905/929976";
-import { nN } from "src/figma_app/91703";
-import { X } from "src/905/784599";
+import { FontSourceType } from "../figma_app/763686";
+import { addFontFamily } from "../905/240327";
+import { Ts } from "../905/929976";
+import { nN } from "../figma_app/91703";
+import { X } from "../905/784599";
 function l(e) {
   switch (e.source) {
     case FontSourceType.SHARED:

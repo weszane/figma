@@ -1,5 +1,5 @@
-import { throwError } from "src/figma_app/465776";
-import { defaultCornerRadius, modalZ, secondaryModalZ, curatorTertiaryModalZ, topBarZ, templateModalTeamName } from "src/figma_app/786175";
+import { throwError } from "../figma_app/465776";
+import { defaultCornerRadius, modalZ, secondaryModalZ, curatorTertiaryModalZ, topBarZ, templateModalTeamName } from "../figma_app/786175";
 let t = {
   display: [["block", "block"], ["flex", "flex"], ["grid", "grid"], ["hidden", "none"], ["inline", "inline"], ["inlineBlock", "inline-block"], ["inlineFlex", "inline-flex"]],
   alignContent: [["contentCenter", "center"]],

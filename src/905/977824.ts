@@ -1,10 +1,10 @@
-import { deepEqual } from "src/905/382883";
-import { PaintTools, Multiplayer } from "src/figma_app/763686";
-import { trackEventAnalytics } from "src/905/449184";
-import { globalPerfTimer, distributionAnalytics } from "src/905/542194";
-import { debugState } from "src/905/407919";
-import { N, B } from "src/905/284094";
-import { mu } from "src/figma_app/308685";
+import { deepEqual } from "../905/382883";
+import { PaintTools, Multiplayer } from "../figma_app/763686";
+import { trackEventAnalytics } from "../905/449184";
+import { globalPerfTimer, distributionAnalytics } from "../905/542194";
+import { debugState } from "../905/407919";
+import { N, B } from "../905/284094";
+import { mu } from "../figma_app/308685";
 export let $$n0;
 let u = 0;
 class p {

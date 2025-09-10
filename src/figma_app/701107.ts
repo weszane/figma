@@ -1,6 +1,6 @@
-import { z } from "src/905/239603";
-import { KS } from "src/figma_app/45218";
-import { UL } from "src/figma_app/306946";
+import { z } from "../905/239603";
+import { KS } from "../figma_app/45218";
+import { UL } from "../figma_app/306946";
 let $$s3 = -200;
 let $$o0 = 10;
 let $$l4 = 125;

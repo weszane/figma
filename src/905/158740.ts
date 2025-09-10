@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { lQ } from "src/905/266289";
+import { lQ } from "../905/266289";
 let a = createContext(null);
 let s = {
   version: "ui2",

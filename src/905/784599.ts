@@ -1,19 +1,19 @@
-import _require from "src/469e6e40/127004";
-import { getFeatureFlags } from "src/905/601108";
-import { NC } from "src/905/17179";
-import { trackEventAnalytics } from "src/905/449184";
-import { createFontMetadata, removeFontOwnerPrefix } from "src/905/165290";
-import { XHR } from "src/905/910117";
-import { getI18nString } from "src/905/303541";
-import { VisualBellActions } from "src/905/302958";
-import { VisualBellIcon } from "src/905/576487";
-import { A as _$$A } from "src/905/662580";
-import { registerModal, createModalConfig } from "src/905/102752";
-import { showModalHandler } from "src/905/156213";
-import { SHARED_FONTS_MODAL } from "src/figma_app/633080";
-import { C as _$$C } from "src/905/496700";
-import { createOptimistThunk } from "src/905/350402";
-import { o as _$$o } from "src/905/524481";
+import _require from "../469e6e40/127004";
+import { getFeatureFlags } from "../905/601108";
+import { NC } from "../905/17179";
+import { trackEventAnalytics } from "../905/449184";
+import { createFontMetadata, removeFontOwnerPrefix } from "../905/165290";
+import { XHR } from "../905/910117";
+import { getI18nString } from "../905/303541";
+import { VisualBellActions } from "../905/302958";
+import { VisualBellIcon } from "../905/576487";
+import { A as _$$A } from "../905/662580";
+import { registerModal, createModalConfig } from "../905/102752";
+import { showModalHandler } from "../905/156213";
+import { SHARED_FONTS_MODAL } from "../figma_app/633080";
+import { C as _$$C } from "../905/496700";
+import { createOptimistThunk } from "../905/350402";
+import { o as _$$o } from "../905/524481";
 let n;
 let y = 0;
 export function $$b0() {
@@ -97,7 +97,7 @@ let I = createOptimistThunk((e, t) => {
           uploaded: e.collision.uploaded,
           overwritten_fonts: e.collision.overwritten_fonts
         } : void 0;
-      } catch (e) {}
+      } catch (e) { }
       (function (e, t) {
         switch (e) {
           case 403:

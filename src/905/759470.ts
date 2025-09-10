@@ -1,4 +1,4 @@
-import { getI18nString } from "src/905/303541";
+import { getI18nString } from "../905/303541";
 let $$r7 = 1920;
 let $$a10 = 1080;
 let $$s8 = 10;

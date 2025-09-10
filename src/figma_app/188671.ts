@@ -1,7 +1,7 @@
-import { M4 } from "src/905/713695";
-import { cS } from "src/figma_app/45218";
-import { c } from "src/905/734351";
-import { A } from "src/905/665703";
+import { M4 } from "../905/713695";
+import { cS } from "../figma_app/45218";
+import { c } from "../905/734351";
+import { A } from "../905/665703";
 let $$o2 = M4.Query({
   fetch: async e => (await c.getAll({
     editorType: e

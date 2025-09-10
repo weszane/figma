@@ -1,6 +1,6 @@
-import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "src/figma_app/181241";
-import { XHR } from "src/905/910117";
-import { fileEntityModel } from "src/905/806985";
+import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "../figma_app/181241";
+import { XHR } from "../905/910117";
+import { fileEntityModel } from "../905/806985";
 export let $$s0 = new class {
   constructor() {
     this.RelatedLinksSchemaValidator = createNoOpValidator();

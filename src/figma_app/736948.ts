@@ -1,10 +1,10 @@
-import { fc, z } from "src/905/239603";
-import { FCostCenterType, FPlanFeatureType, FDomainVerificationStatusType, FPlanNameType } from "src/figma_app/191312";
-import { z as _$$z } from "src/905/4823";
-import { S as _$$S } from "src/905/962956";
-import { ExperimentAssignmentsSchema } from "src/905/13165";
-import { N4 } from "src/905/158283";
-import { C$ } from "src/figma_app/482728";
+import { fc, z } from "../905/239603";
+import { FCostCenterType, FPlanFeatureType, FDomainVerificationStatusType, FPlanNameType } from "../figma_app/191312";
+import { z as _$$z } from "../905/4823";
+import { S as _$$S } from "../905/962956";
+import { ExperimentAssignmentsSchema } from "../905/13165";
+import { N4 } from "../905/158283";
+import { C$ } from "../figma_app/482728";
 let c = fc(FCostCenterType);
 let u = fc(FPlanFeatureType);
 let p = fc(FDomainVerificationStatusType);

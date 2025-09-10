@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { i } from "src/905/890459";
+import { i } from "../905/890459";
 export function $$a0(e) {
   let {
     currentUserOrgId

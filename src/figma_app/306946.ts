@@ -1,19 +1,19 @@
-import { z, Ip } from "src/905/239603";
-import { M } from "src/figma_app/70618";
-import { FPublicationStatusType, FTemplateCategoryType, FUserVerificationStatusType } from "src/figma_app/191312";
-import { cK } from "src/905/604501";
-import { s as _$$s } from "src/905/875063";
-import { fe } from "src/905/272080";
-import { fileEntityModel } from "src/905/806985";
-import { V_, NS } from "src/905/71785";
-import { xK, I7 } from "src/figma_app/10554";
-import { PrimaryWorkflowEnum } from "src/figma_app/633080";
-import { ii, UC, PN } from "src/905/54385";
-import { PluginMetadataSchema, R2, EditorType, PluginDetailsSchema, PluginInstallStatus, WidgetDetailsSchema } from "src/figma_app/155287";
-import { P1, fE, Fy } from "src/figma_app/809727";
-import { i as _$$i } from "src/905/186961";
-import { q } from "src/figma_app/277543";
-import { i as _$$i2 } from "src/905/878245";
+import { z, Ip } from "../905/239603";
+import { M } from "../figma_app/70618";
+import { FPublicationStatusType, FTemplateCategoryType, FUserVerificationStatusType } from "../figma_app/191312";
+import { cK } from "../905/604501";
+import { s as _$$s } from "../905/875063";
+import { fe } from "../905/272080";
+import { fileEntityModel } from "../905/806985";
+import { V_, NS } from "../905/71785";
+import { xK, I7 } from "../figma_app/10554";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
+import { ii, UC, PN } from "../905/54385";
+import { PluginMetadataSchema, R2, EditorType, PluginDetailsSchema, PluginInstallStatus, WidgetDetailsSchema } from "../figma_app/155287";
+import { P1, fE, Fy } from "../figma_app/809727";
+import { i as _$$i } from "../905/186961";
+import { q } from "../figma_app/277543";
+import { i as _$$i2 } from "../905/878245";
 var $$y10 = (e => (e.DESIGN_TEMPLATE = "design_template", e.FIGJAM_TEMPLATE = "figjam_template", e.PLUGIN = "plugin", e.WIDGET = "widget", e.SLIDE_TEMPLATE = "slide_template", e.UI_KIT = "ui_kit", e.PROTOTYPE = "prototype", e.SITE_TEMPLATE = "site_template", e.COOPER_TEMPLATE_ASSET = "cooper_template_asset", e.COOPER_TEMPLATE_FILE = "cooper_template_file", e.FIGMAKE_TEMPLATE = "figmake_template", e))($$y10 || {});
 let b = z.object({
   id: z.string(),

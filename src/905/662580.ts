@@ -1,4 +1,4 @@
-import { b } from "src/905/275748";
+import { b } from "../905/275748";
 export let $$n0 = new b({
   name: "Admin Settings",
   description: "Components that drive all team and org admin settings pages",

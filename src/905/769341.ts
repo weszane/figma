@@ -1,5 +1,5 @@
 import { nativeEnum, z } from "zod";
-import { FFileActivityType } from "src/figma_app/191312";
+import { FFileActivityType } from "../figma_app/191312";
 /**
  * Zod schema for file activity object validation.
  * Original variable: $$s0

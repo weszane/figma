@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { s } from "src/cssbuilder/589278";
+import { s } from "../cssbuilder/589278";
 export function $$a1(e) {
   let t = e.split(". ");
   if (t.length < 3) return e;

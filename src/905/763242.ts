@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
-import { N } from "src/905/438674";
-import { getFeatureFlags } from "src/905/601108";
-import { renderI18nText } from "src/905/303541";
-import { sx } from "src/905/941192";
+import { N } from "../905/438674";
+import { getFeatureFlags } from "../905/601108";
+import { renderI18nText } from "../905/303541";
+import { sx } from "../905/941192";
 export function $$l1(e) {
   if ("team" !== e.selectedView.view) return !1;
   let t = e.teams[e.selectedView.teamId];

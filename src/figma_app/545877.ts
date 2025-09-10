@@ -1,7 +1,7 @@
-import { createRemovableAtomFamily } from "src/figma_app/27355";
-import { UserForRcs } from "src/figma_app/43951";
-import { V5 } from "src/figma_app/625596";
-import { Z1 } from "src/905/401885";
+import { createRemovableAtomFamily } from "../figma_app/27355";
+import { UserForRcs } from "../figma_app/43951";
+import { V5 } from "../figma_app/625596";
+import { Z1 } from "../905/401885";
 let $$o4 = Z1(UserForRcs.Query({}), e => {
   let t = e.currentUser.userFlags;
   let r = {};

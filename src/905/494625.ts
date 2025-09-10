@@ -1,7 +1,7 @@
 import { createContext, useContext, useRef, useState, useCallback } from "react";
-import { Q } from "src/905/586361";
-import { F } from "src/905/768014";
-import { useRecording } from "src/905/959312";
+import { Q } from "../905/586361";
+import { F } from "../905/768014";
+import { useRecording } from "../905/959312";
 export let $$o1 = createContext(!1);
 export function $$l0({
   onClick: e,
@@ -26,12 +26,12 @@ export function $$l0({
       "aria-disabled": m || h
     }
   } : {
-    suppressClicks: m,
-    outProps: {
-      disabled: m,
-      "aria-disabled": h
-    }
-  };
+      suppressClicks: m,
+      outProps: {
+        disabled: m,
+        "aria-disabled": h
+      }
+    };
   let y = useRef(!1);
   let [b, v] = useState(!1);
   let I = useRecording(t => {

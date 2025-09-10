@@ -1,5 +1,5 @@
-import { FUserRoleType } from "src/figma_app/191312";
-import { xw } from "src/figma_app/951233";
+import { FUserRoleType } from "../figma_app/191312";
+import { xw } from "../figma_app/951233";
 var a = (e => (e[e.NONE = 0] = "NONE", e[e.PENDING = 1] = "PENDING", e[e.ACCEPTED = 2] = "ACCEPTED", e[e.ADMIN = 3] = "ADMIN", e))(a || {});
 export function $$s0(e, t) {
   let {

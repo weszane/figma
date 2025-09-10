@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { T } from "src/905/858738";
-import { Qn } from "src/figma_app/415217";
+import { T } from "../905/858738";
+import { Qn } from "../figma_app/415217";
 export function $$s1(e) {
   let t = useCallback(t => {
     $$o0(e) && t.preventDefault();

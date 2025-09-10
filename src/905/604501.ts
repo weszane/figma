@@ -1,6 +1,6 @@
-import { z } from "src/905/239603";
-import { k } from "src/905/22009";
-import { L } from "src/905/178090";
+import { z } from "../905/239603";
+import { k } from "../905/22009";
+import { L } from "../905/178090";
 let s = z.object({
   id: z.string(),
   text: z.string(),

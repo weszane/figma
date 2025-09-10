@@ -1,14 +1,14 @@
-import { ServiceCategories as _$$e } from "src/905/165054";
-import { getFeatureFlags } from "src/905/601108";
-import a from "src/vendor/197638";
-import { s9 } from "src/905/194389";
-import { getInitialOptions } from "src/figma_app/169182";
-import { BrowserInfo } from "src/figma_app/778880";
-import { reportError } from "src/905/11";
-import { logInfo } from "src/905/714362";
-import { Dm } from "src/figma_app/8833";
-import { D } from "src/905/347702";
-import { isInteractionPathCheck } from "src/figma_app/897289";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { getFeatureFlags } from "../905/601108";
+import a from "../vendor/197638";
+import { s9 } from "../905/194389";
+import { getInitialOptions } from "../figma_app/169182";
+import { BrowserInfo } from "../figma_app/778880";
+import { reportError } from "../905/11";
+import { logInfo } from "../905/714362";
+import { Dm } from "../figma_app/8833";
+import { D } from "../905/347702";
+import { isInteractionPathCheck } from "../figma_app/897289";
 var s = a;
 export class $$m3 extends s9 {
   constructor(e) {
@@ -160,7 +160,7 @@ export async function $$T0(e, t) {
       return navigator.clipboard.writeText(e);
     }(e, t);
     return;
-  } catch {}
+  } catch { }
   return b(e, t);
 }
 function I(e, t) {
@@ -187,7 +187,7 @@ export async function $$S2(e) {
   if (y()) try {
     await I(e);
     return;
-  } catch {}
+  } catch { }
   return new Promise((t, r) => {
     let n = document.createElement("div");
     n.style.cssText = "position: fixed; transform: translateX(-200%)";
@@ -214,7 +214,7 @@ export async function $$v5(e, t) {
   if (y()) try {
     await I(e, t);
     return;
-  } catch {}
+  } catch { }
   return b(t);
 }
 export const Dk = $$T0;

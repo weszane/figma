@@ -1,7 +1,7 @@
-import { assert } from "src/figma_app/465776";
-import { z, kY } from "src/905/239603";
-import { wQ } from "src/905/893701";
-import { livestoreNormalized, livestorePrimaryKey } from "src/905/67898";
+import { assert } from "../figma_app/465776";
+import { z, kY } from "../905/239603";
+import { wQ } from "../905/893701";
+import { livestoreNormalized, livestorePrimaryKey } from "../905/67898";
 export function $$o0(e) {
   if (!("typeName" in e._def)) {
     console.error("no typeName?", e);

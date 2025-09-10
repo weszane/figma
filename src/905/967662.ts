@@ -1,7 +1,7 @@
-import { FullscreenPerfMetrics, CoverageStatus, Fullscreen, AppStateTsApi } from "src/figma_app/763686";
-import { fullscreenValue } from "src/figma_app/455680";
-import { R9 } from "src/905/977824";
-import { debugState } from "src/905/407919";
+import { FullscreenPerfMetrics, CoverageStatus, Fullscreen, AppStateTsApi } from "../figma_app/763686";
+import { fullscreenValue } from "../figma_app/455680";
+import { R9 } from "../905/977824";
+import { debugState } from "../905/407919";
 export class $$o13 {
   constructor() {
     this._zoomScale = 0;
@@ -50,7 +50,7 @@ export class $$d14 {
   }
 }
 export class $$c12 {
-  constructor() {}
+  constructor() { }
   didEventOccur() {
     return (FullscreenPerfMetrics?.getRenderTreeStaleTimeMs() ?? 0) > 0;
   }

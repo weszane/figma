@@ -1,20 +1,20 @@
-import { throwTypeError } from "src/figma_app/465776";
-import { PrototypingTsApi, PresentationValidationStatus } from "src/figma_app/763686";
-import { xf } from "src/figma_app/416935";
-import { customHistory } from "src/905/612521";
-import { Gc } from "src/905/63728";
-import { isValidUrl } from "src/figma_app/930338";
-import { getI18nString } from "src/905/303541";
-import { N6 } from "src/figma_app/471982";
-import { vf, Yp, mZ, F8 } from "src/figma_app/808294";
-import { Tn, gO, Ii, xw, vC } from "src/figma_app/599979";
-import { FTemplateCategoryType, FPublicationStatusType, FFileType } from "src/figma_app/191312";
-import { d as _$$d } from "src/905/44199";
-import { o1 } from "src/figma_app/10554";
-import { PreviewMode } from "src/figma_app/707808";
-import { Rs } from "src/figma_app/761870";
-import { Hc, b as _$$b, Yp as _$$Yp, IZ } from "src/figma_app/740025";
-import { X$ } from "src/905/612685";
+import { throwTypeError } from "../figma_app/465776";
+import { PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
+import { xf } from "../figma_app/416935";
+import { customHistory } from "../905/612521";
+import { Gc } from "../905/63728";
+import { isValidUrl } from "../figma_app/930338";
+import { getI18nString } from "../905/303541";
+import { N6 } from "../figma_app/471982";
+import { vf, Yp, mZ, F8 } from "../figma_app/808294";
+import { Tn, gO, Ii, xw, vC } from "../figma_app/599979";
+import { FTemplateCategoryType, FPublicationStatusType, FFileType } from "../figma_app/191312";
+import { d as _$$d } from "../905/44199";
+import { o1 } from "../figma_app/10554";
+import { PreviewMode } from "../figma_app/707808";
+import { Rs } from "../figma_app/761870";
+import { Hc, b as _$$b, Yp as _$$Yp, IZ } from "../figma_app/740025";
+import { X$ } from "../905/612685";
 let b = {
   id: "",
   hub_file_id: "",

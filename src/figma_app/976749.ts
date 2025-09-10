@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import { createReduxSubscriptionAtomWithState } from "src/905/270322";
-import { FFileType } from "src/figma_app/191312";
-import { mapEditorTypeToFileType, FEditorType } from "src/figma_app/53721";
+import { createReduxSubscriptionAtomWithState } from "../905/270322";
+import { FFileType } from "../figma_app/191312";
+import { mapEditorTypeToFileType, FEditorType } from "../figma_app/53721";
 export function $$o8() {
   return useSelector(e => {
     var t;

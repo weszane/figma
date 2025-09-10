@@ -1,6 +1,6 @@
-import { CodeLibraryIdHandler, CanvasNodeIdHandler } from "src/figma_app/243058";
-import { PrimaryWorkflowEnum } from "src/905/497152";
-import { AssetParams, getLocalAsset, getSubscribedAsset } from "src/905/808701";
+import { CodeLibraryIdHandler, CanvasNodeIdHandler } from "../figma_app/243058";
+import { PrimaryWorkflowEnum } from "../905/497152";
+import { AssetParams, getLocalAsset, getSubscribedAsset } from "../905/808701";
 
 /**
  * Represents the fields required for code file identification.

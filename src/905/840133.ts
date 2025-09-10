@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { _ } from "src/905/302698";
-import { defaultComponentAttribute } from "src/905/577641";
+import { _ } from "../905/302698";
+import { defaultComponentAttribute } from "../905/577641";
 function o({
   children: e,
   manager: t,

@@ -1,15 +1,15 @@
 import { useMemo } from "react";
-import { throwTypeError } from "src/figma_app/465776";
-import { getFeatureFlags } from "src/905/601108";
-import { zN, xf } from "src/figma_app/416935";
-import { isGovCluster, isDevEnvironment } from "src/figma_app/169182";
-import { useSubscription } from "src/figma_app/288654";
-import { Qw } from "src/figma_app/47866";
-import { getI18nString } from "src/905/303541";
-import { FCostCenterType } from "src/figma_app/191312";
-import { Ct, Gv, CT } from "src/figma_app/736948";
-import { OrgWorkspaceCount } from "src/figma_app/43951";
-import { useCurrentPublicPlan, useCurrentPlanUser, useIsOrgOrEnterprisePlan, useIsOrgGuestUser } from "src/figma_app/465071";
+import { throwTypeError } from "../figma_app/465776";
+import { getFeatureFlags } from "../905/601108";
+import { zN, xf } from "../figma_app/416935";
+import { isGovCluster, isDevEnvironment } from "../figma_app/169182";
+import { useSubscription } from "../figma_app/288654";
+import { Qw } from "../figma_app/47866";
+import { getI18nString } from "../905/303541";
+import { FCostCenterType } from "../figma_app/191312";
+import { Ct, Gv, CT } from "../figma_app/736948";
+import { OrgWorkspaceCount } from "../figma_app/43951";
+import { useCurrentPublicPlan, useCurrentPlanUser, useIsOrgOrEnterprisePlan, useIsOrgGuestUser } from "../figma_app/465071";
 export function $$m2(e, t) {
   let r = e.map(e => e.domain.toLowerCase());
   let n = zN(t);

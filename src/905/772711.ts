@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getIsIOS } from "src/figma_app/778880";
+import { getIsIOS } from "../figma_app/778880";
 let a = "use_prevent_scroll_mobile--disableBodyScroll--W-dt5";
 export function $$s0() {
   useEffect(() => {

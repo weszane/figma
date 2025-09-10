@@ -1,9 +1,9 @@
-import { isEmptyObject } from "src/figma_app/493477";
-import { getFeatureFlags } from "src/905/601108";
-import { serializeQuery } from "src/905/634134";
-import { encodeUri } from "src/figma_app/930338";
-import { FFileType } from "src/figma_app/191312";
-import { EO, Ml } from "src/905/691205";
+import { isEmptyObject } from "../figma_app/493477";
+import { getFeatureFlags } from "../905/601108";
+import { serializeQuery } from "../905/634134";
+import { encodeUri } from "../figma_app/930338";
+import { FFileType } from "../figma_app/191312";
+import { EO, Ml } from "../905/691205";
 export function $$d1(e) {
   return `/community/file/${e}`;
 }
@@ -79,7 +79,7 @@ export function $$h0(e) {
     return "proto";
   }(d) : t;
   let u = "";
-  if (e.nodeId && (i["node-id"] = EO(e.nodeId)), e.mainComponent && (i["main-component"] = 1), e.stateGroupId && (i["state-group-id"] = EO(e.stateGroupId)), e.allowDefaulting) "design" === c && (i.m = "auto");else {
+  if (e.nodeId && (i["node-id"] = EO(e.nodeId)), e.mainComponent && (i["main-component"] = 1), e.stateGroupId && (i["state-group-id"] = EO(e.stateGroupId)), e.allowDefaulting) "design" === c && (i.m = "auto"); else {
     let t;
     e.isDevHandoff ? t = "dev" : e.isDrawMode ? t = "draw" : e.isFigJam || (t = "design");
     "design" === c && ("dev" === t || "draw" === t) && (i.m = t);

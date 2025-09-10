@@ -1,4 +1,4 @@
-import { A } from "src/905/268204";
+import { A } from "../905/268204";
 let n;
 export function $$a0() {
   n || (n = A && window.INITIAL_OPTIONS?.feature_flags && "object" == typeof window.INITIAL_OPTIONS.feature_flags ? Object.freeze({

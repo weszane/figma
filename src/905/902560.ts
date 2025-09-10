@@ -1,5 +1,5 @@
-import { parseQuery } from "src/905/634134";
-import { oU, Od, dy, LU } from "src/figma_app/967319";
+import { parseQuery } from "../905/634134";
+import { oU, Od, dy, LU } from "../figma_app/967319";
 export function $$a0(e) {
   if (!e) return oU;
   let t = parseQuery(e);

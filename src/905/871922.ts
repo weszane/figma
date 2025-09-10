@@ -1,5 +1,5 @@
-import { z } from "src/905/239603";
-import { createNoOpValidator } from "src/figma_app/181241";
+import { z } from "../905/239603";
+import { createNoOpValidator } from "../figma_app/181241";
 let a = z.object({
   video: z.object({
     url: z.string(),

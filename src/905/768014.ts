@@ -1,4 +1,4 @@
-import { A } from "src/905/268204";
+import { A } from "../905/268204";
 let r = ["mouse", "touch", "pen"];
 let a = {
   element: A ? document.body : null,

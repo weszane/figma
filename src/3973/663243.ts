@@ -1,13 +1,13 @@
-import { DynamicConfig, EvaluationReason } from "src/vendor/625526";
-import { Statsig } from "src/vendor/735621";
-import { a as _$$a } from "src/905/425366";
-import { getInitialOptions } from "src/figma_app/169182";
-import { isInteractionPathCheck } from "src/figma_app/897289";
-import { measureSyncDuration } from "src/905/670985";
-import { cP, Us, zz, Dr, su, pk } from "src/3973/890507";
-import { Uv } from "src/3973/473379";
-import { ServiceCategories as _$$e } from "src/905/165054";
-import { atomStoreManager } from "src/figma_app/27355";
+import { DynamicConfig, EvaluationReason } from "../vendor/625526";
+import { Statsig } from "../vendor/735621";
+import { a as _$$a } from "../905/425366";
+import { getInitialOptions } from "../figma_app/169182";
+import { isInteractionPathCheck } from "../figma_app/897289";
+import { measureSyncDuration } from "../905/670985";
+import { cP, Us, zz, Dr, su, pk } from "../3973/890507";
+import { Uv } from "../3973/473379";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { atomStoreManager } from "../figma_app/27355";
 export let $$g1 = new DynamicConfig("default", {}, "default", {
   reason: EvaluationReason.Unrecognized,
   time: Date.now()

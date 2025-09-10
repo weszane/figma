@@ -1,5 +1,5 @@
-import { z } from "src/905/239603";
-import { ii } from "src/905/54385";
+import { z } from "../905/239603";
+import { ii } from "../905/54385";
 export let $$a0 = z.object({
   monetized_resource_metadata: ii.optional()
 });

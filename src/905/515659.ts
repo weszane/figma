@@ -1,4 +1,4 @@
-import { inflate } from "src/vendor/323834";
+import { inflate } from "../vendor/323834";
 export function $$r2(e) {
   let t = {};
   for (let i of function (e) {
@@ -102,7 +102,7 @@ export function $$a0(e) {
             let c = e.subarray(d, d + (i - l - 1 - 1));
             return inflate(c);
           }(e, t);
-        } catch (e) {}
+        } catch (e) { }
         break;
       default:
         r && (r.copyWithin(i, t, t + l + 12), i += l + 12);
@@ -121,7 +121,7 @@ export function $$s1(e) {
   function i(i) {
     for (; i < e.length;) {
       let n = e[i++];
-      if (n > 0) i += n;else if (0 === n) break;else {
+      if (n > 0) i += n; else if (0 === n) break; else {
         t = !1;
         break;
       }

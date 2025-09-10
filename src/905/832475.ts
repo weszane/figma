@@ -1,5 +1,5 @@
-import { parseQuerySimple } from "src/905/634134";
-import { getI18nString } from "src/905/303541";
+import { parseQuerySimple } from "../905/634134";
+import { getI18nString } from "../905/303541";
 export class $$a0 {
   pathToSelectedView(e, t, i, r) {
     return 2 === t.length && "report-abuse" === t[1] ? {

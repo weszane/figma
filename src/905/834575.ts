@@ -1,7 +1,7 @@
-import { createNoOpValidator } from "src/figma_app/181241";
-import { XHR } from "src/905/910117";
-import { isAddressEmpty } from "src/figma_app/831101";
-import { AccessLevelEnum } from "src/905/557142";
+import { createNoOpValidator } from "../figma_app/181241";
+import { XHR } from "../905/910117";
+import { isAddressEmpty } from "../figma_app/831101";
+import { AccessLevelEnum } from "../905/557142";
 export let $$o0 = new class {
   constructor() {
     this.MembersSchemaValidator = createNoOpValidator();

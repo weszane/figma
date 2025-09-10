@@ -1,5 +1,5 @@
-import { throwTypeError } from "src/figma_app/465776";
-import { FFileType } from "src/figma_app/191312";
+import { throwTypeError } from "../figma_app/465776";
+import { FFileType } from "../figma_app/191312";
 var $$n0;
 (e => {
   let t;

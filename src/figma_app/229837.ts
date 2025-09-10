@@ -1,8 +1,8 @@
-import { getFeatureFlags } from "src/905/601108";
-import { trackEventAnalytics } from "src/905/449184";
-import { getInitialOptions } from "src/figma_app/169182";
-import { C as _$$C } from "src/905/797765";
-import { isInteractionPathCheck } from "src/figma_app/897289";
+import { getFeatureFlags } from "../905/601108";
+import { trackEventAnalytics } from "../905/449184";
+import { getInitialOptions } from "../figma_app/169182";
+import { C as _$$C } from "../905/797765";
+import { isInteractionPathCheck } from "../figma_app/897289";
 var n;
 let d = !1;
 let c = [];
@@ -236,7 +236,7 @@ export function $$m1() {
     subscribe: function (e, t) {
       let r = M(e);
       let n = r.token || D();
-      if (!n) return () => {};
+      if (!n) return () => { };
       h += 1;
       let i = `${h}:${performance.now()}`;
       let a = O[r.type] || {};

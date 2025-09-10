@@ -1,4 +1,4 @@
-import { throwTypeError } from "src/figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 export function $$r0(e) {
   if ("communityHub" !== e.view) return !1;
   switch (e.subView) {

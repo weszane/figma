@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useCallback, useLayoutEffect } from "react";
-import { A as _$$A } from "src/vendor/763703";
-import { A as _$$A2 } from "src/vendor/723372";
-import { M } from "src/905/749786";
-import { useSelectionProvider } from "src/905/751750";
-import { useRecording } from "src/905/959312";
-import { nK } from "src/905/691059";
-import { defaultComponentAttribute } from "src/905/577641";
-import { EVENT_CAPTURE_CLASS } from "src/905/955878";
-import { v } from "src/905/475481";
+import { A as _$$A } from "../vendor/763703";
+import { A as _$$A2 } from "../vendor/723372";
+import { M } from "../905/749786";
+import { useSelectionProvider } from "../905/751750";
+import { useRecording } from "../905/959312";
+import { nK } from "../905/691059";
+import { defaultComponentAttribute } from "../905/577641";
+import { EVENT_CAPTURE_CLASS } from "../905/955878";
+import { v } from "../905/475481";
 let h = "data-modals-open";
 export function $$g0({
   theme: e = {},

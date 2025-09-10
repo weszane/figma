@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { addEventlistenerWithCleanup } from "src/905/955878";
-import { A } from "src/905/268204";
+import { addEventlistenerWithCleanup } from "../905/955878";
+import { A } from "../905/268204";
 let s = {
   matches: !1,
-  addEventListener: () => {},
-  removeEventListener: () => {}
+  addEventListener: () => { },
+  removeEventListener: () => { }
 };
 export function $$o0(e) {
   return A ? window.matchMedia(e) : s;

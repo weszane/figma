@@ -1,9 +1,9 @@
-import { DocumentMode, CorePerfInfo, performanceEventCounters } from "src/figma_app/763686";
-import { getFeatureFlags } from "src/905/601108";
-import { customHistory } from "src/905/612521";
-import { isDevEnvironment } from "src/figma_app/169182";
-import { logInfo } from "src/905/714362";
-import { fullscreenValue } from "src/figma_app/455680";
+import { DocumentMode, CorePerfInfo, performanceEventCounters } from "../figma_app/763686";
+import { getFeatureFlags } from "../905/601108";
+import { customHistory } from "../905/612521";
+import { isDevEnvironment } from "../figma_app/169182";
+import { logInfo } from "../905/714362";
+import { fullscreenValue } from "../figma_app/455680";
 let $$d7 = 1048576;
 let $$c4 = 0x40000000;
 let u = getFeatureFlags().wasm_4gb && customHistory.location && "1" === new URLSearchParams(customHistory.location.search).get("wasm-4gb");

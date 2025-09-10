@@ -1,15 +1,15 @@
 import { useCallback } from "react";
-import { l as _$$l } from "src/905/716947";
-import { useAtomWithSubscription, atomStoreManager, atom } from "src/figma_app/27355";
-import { getResourceDataOrFallback } from "src/905/663269";
-import { analyticsEventManager } from "src/905/449184";
-import { subscribeMultipleAndAwaitAll } from "src/905/553831";
-import { w0 } from "src/figma_app/594947";
-import { N as _$$N } from "src/905/972754";
-import { VariableByKey, VariableCollectionByKey, StyleByKey, CommunityLibraryComponentsAndStateGroups } from "src/figma_app/43951";
-import { M4 } from "src/905/713695";
-import { TG, qq } from "src/905/72677";
-import { QN, r9 } from "src/905/991973";
+import { l as _$$l } from "../905/716947";
+import { useAtomWithSubscription, atomStoreManager, atom } from "../figma_app/27355";
+import { getResourceDataOrFallback } from "../905/663269";
+import { analyticsEventManager } from "../905/449184";
+import { subscribeMultipleAndAwaitAll } from "../905/553831";
+import { w0 } from "../figma_app/594947";
+import { N as _$$N } from "../905/972754";
+import { VariableByKey, VariableCollectionByKey, StyleByKey, CommunityLibraryComponentsAndStateGroups } from "../figma_app/43951";
+import { M4 } from "../905/713695";
+import { TG, qq } from "../905/72677";
+import { QN, r9 } from "../905/991973";
 export let $$m4 = M4.Query({
   fetch: async e => e ? (await w0("ui_kits_feedback_urls")).get(e, "") : ""
 });

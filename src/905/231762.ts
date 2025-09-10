@@ -1,5 +1,5 @@
-import { z } from "src/905/239603";
-import { getI18nStringAlias } from "src/905/303541";
+import { z } from "../905/239603";
+import { getI18nStringAlias } from "../905/303541";
 export function $$a0(e, t) {
   let i = t;
   let n = s.safeParse(e);

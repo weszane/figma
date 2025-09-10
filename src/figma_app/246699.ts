@@ -1,4 +1,4 @@
-import { w_ } from "src/figma_app/482728";
+import { w_ } from "../figma_app/482728";
 export function $$i3(e) {
   switch (e) {
     case null:

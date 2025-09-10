@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { RecordingContext } from "src/905/959312";
-import { tf } from "src/figma_app/831799";
-import { RecordingPureComponent, handleMouseEvent, SKIP_RECORDING, handlePointerEvent, handleKeyboardEvent, handleGenericEvent, handleChangeEvent, isRecordingEnabled, useRecordingKey, handleEvent } from "src/figma_app/878298";
+import { RecordingContext } from "../905/959312";
+import { tf } from "../figma_app/831799";
+import { RecordingPureComponent, handleMouseEvent, SKIP_RECORDING, handlePointerEvent, handleKeyboardEvent, handleGenericEvent, handleChangeEvent, isRecordingEnabled, useRecordingKey, handleEvent } from "../figma_app/878298";
 class l extends RecordingPureComponent {
   constructor() {
     super(...arguments);

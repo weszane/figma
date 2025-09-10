@@ -1,6 +1,6 @@
-import { z } from "src/905/239603";
-import { n as _$$n } from "src/905/875063";
-import { UserOrgSchema } from "src/figma_app/175992";
+import { z } from "../905/239603";
+import { n as _$$n } from "../905/875063";
+import { UserOrgSchema } from "../figma_app/175992";
 var $$s3 = (e => (e.RESOURCE_PAGE = "resource_page", e.EDITOR = "editor", e.UNIVERSAL_POSTING = "universal_posting", e.ADMIN = "admin", e.SITES_PUBLISH_MODAL = "sites_publish_modal", e))($$s3 || {});
 var $$o1 = (e => (e[e.EDIT = 0] = "EDIT", e[e.UPLOADING = 1] = "UPLOADING", e[e.SUCCESS = 2] = "SUCCESS", e[e.FAILURE = 3] = "FAILURE", e))($$o1 || {});
 let l = z.object({

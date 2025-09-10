@@ -1,4 +1,4 @@
-import { NC } from "src/905/17179";
+import { NC } from "../905/17179";
 let $$r2 = NC("SET_ERROR_MESSAGE");
 let $$a4 = NC("AUTOCOMPLETE_INPUT_CHANGE");
 let $$s0 = NC("AUTOCOMPLETE_ADD_TOKEN");

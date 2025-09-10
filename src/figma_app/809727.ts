@@ -1,5 +1,5 @@
-import { z } from "src/905/239603";
-import { B } from "src/905/458036";
+import { z } from "../905/239603";
+import { B } from "../905/458036";
 var $$a3 = (e => (e[e.CURATED_IMAGE = 0] = "CURATED_IMAGE", e[e.EMBED = 1] = "EMBED", e))($$a3 || {});
 let $$s1 = z.record(z.string().refine(e => Object.keys(B.COMMUNITY_HUB_FILE_THUMBNAIL).includes(e)), z.string().url());
 let o = z.object({

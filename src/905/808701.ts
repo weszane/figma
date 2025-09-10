@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { logError } from "src/905/714362";
-import { FAnimationEffectType, FNodeType, FAnimationTriggerType } from "src/figma_app/191312";
-import { mapFacetTypeToString } from "src/905/497152";
-import { FacetType } from "src/figma_app/175377";
+import { logError } from "../905/714362";
+import { FAnimationEffectType, FNodeType, FAnimationTriggerType } from "../figma_app/191312";
+import { mapFacetTypeToString } from "../905/497152";
+import { FacetType } from "../figma_app/175377";
 
 /**
  * AssetBaseParams type for asset base properties.

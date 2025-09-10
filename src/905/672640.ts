@@ -1,2 +1,2 @@
-import { I } from "src/905/343721";
+import { I } from "../905/343721";
 export const In = I;

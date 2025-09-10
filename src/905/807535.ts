@@ -1,4 +1,4 @@
-import { Et } from "src/figma_app/397267";
+import { Et } from "../figma_app/397267";
 export function $$r0(e, t) {
   for (let i of Object.keys(e)) if (e[i] === t) return e[i];
 }

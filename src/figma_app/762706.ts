@@ -1,5 +1,5 @@
-import { getGlobalThis } from "src/905/841449";
-import { initializeAppBindings } from "src/figma_app/763686";
+import { getGlobalThis } from "../905/841449";
+import { initializeAppBindings } from "../figma_app/763686";
 let a = {};
 export function $$s2() {
   return a;
@@ -25,7 +25,7 @@ export function $$o0({
       name_map: {},
       import_functions: 0
     }),
-    set: () => {}
+    set: () => { }
   });
   try {
     t();

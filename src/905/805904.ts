@@ -1,4 +1,4 @@
-import { VariableIdHandler } from "src/figma_app/243058";
+import { VariableIdHandler } from "../figma_app/243058";
 
 /**
  * Converts a variable ID string to its Kiwi representation.

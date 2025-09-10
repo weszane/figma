@@ -1,5 +1,5 @@
-import { BrowserInfo } from "src/figma_app/778880";
-import { y } from "src/905/409121";
+import { BrowserInfo } from "../figma_app/778880";
+import { y } from "../905/409121";
 export function $$a1(e) {
   if (!e.keyShortcutKey) return "";
   let t = y.isApple();

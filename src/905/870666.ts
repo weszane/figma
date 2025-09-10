@@ -1,33 +1,33 @@
-import { lQ } from "src/905/934246";
-import { SceneGraphUnavailableError } from "src/figma_app/518682";
-import { ViewType, CorePerfInfo } from "src/figma_app/763686";
-import { isValidSessionLocalID, parseSessionLocalID } from "src/905/871411";
-import { getSingletonSceneGraph } from "src/905/700578";
-import { getFeatureFlags } from "src/905/601108";
-import { atomStoreManager } from "src/figma_app/27355";
-import { isAppShellEnabled } from "src/905/561581";
-import { desktopAPIInstance } from "src/figma_app/876459";
-import { debugState } from "src/905/407919";
-import { customHistory } from "src/905/612521";
-import { BrowserInfo } from "src/figma_app/778880";
-import { parseAndNormalizeQuery, parseQuery, serializeQuery } from "src/905/634134";
-import { encodeUri } from "src/figma_app/930338";
-import { isEvalViewPathCheck } from "src/figma_app/897289";
-import { getI18nString } from "src/905/303541";
-import { VisualBellActions } from "src/905/302958";
-import { c5 } from "src/905/93909";
-import { h as _$$h } from "src/905/662353";
-import { getRepoById, buildUrlPath, getDisplayName } from "src/905/760074";
-import { cF } from "src/figma_app/527873";
-import { EO } from "src/905/691205";
-import { Zt } from "src/figma_app/617727";
-import { b as _$$b, d as _$$d } from "src/905/91820";
-import { mapViewTypeToMainfestEditorType, parsePluginParams } from "src/905/327571";
-import { Vv } from "src/905/32091";
-import { FEditorType, mapFileTypeToEditorType } from "src/figma_app/53721";
-import { O as _$$O } from "src/905/833838";
-import { AppView } from "src/figma_app/707808";
-import { eE, Hz } from "src/905/366346";
+import { lQ } from "../905/934246";
+import { SceneGraphUnavailableError } from "../figma_app/518682";
+import { ViewType, CorePerfInfo } from "../figma_app/763686";
+import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
+import { getSingletonSceneGraph } from "../905/700578";
+import { getFeatureFlags } from "../905/601108";
+import { atomStoreManager } from "../figma_app/27355";
+import { isAppShellEnabled } from "../905/561581";
+import { desktopAPIInstance } from "../figma_app/876459";
+import { debugState } from "../905/407919";
+import { customHistory } from "../905/612521";
+import { BrowserInfo } from "../figma_app/778880";
+import { parseAndNormalizeQuery, parseQuery, serializeQuery } from "../905/634134";
+import { encodeUri } from "../figma_app/930338";
+import { isEvalViewPathCheck } from "../figma_app/897289";
+import { getI18nString } from "../905/303541";
+import { VisualBellActions } from "../905/302958";
+import { c5 } from "../905/93909";
+import { h as _$$h } from "../905/662353";
+import { getRepoById, buildUrlPath, getDisplayName } from "../905/760074";
+import { cF } from "../figma_app/527873";
+import { EO } from "../905/691205";
+import { Zt } from "../figma_app/617727";
+import { b as _$$b, d as _$$d } from "../905/91820";
+import { mapViewTypeToMainfestEditorType, parsePluginParams } from "../905/327571";
+import { Vv } from "../905/32091";
+import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
+import { O as _$$O } from "../905/833838";
+import { AppView } from "../figma_app/707808";
+import { eE, Hz } from "../905/366346";
 export function $$O0(e) {
   return "fullscreen" === e.view && e.editorType === FEditorType.Whiteboard;
 }
@@ -38,7 +38,7 @@ export class $$D1 {
     let o = t[1];
     if ("file" === o || "design" === o || "board" === o || "slides" === o || "site" === o || "buzz" === o || "rev" === o || "make" === o) {
       let i = "design";
-      if ("file" === o && s.type) i = s.type;else if ("file" !== o) switch (o) {
+      if ("file" === o && s.type) i = s.type; else if ("file" !== o) switch (o) {
         case "design":
           i = "design";
           break;

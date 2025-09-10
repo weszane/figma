@@ -1,4 +1,4 @@
-import { A } from "src/905/268204";
+import { A } from "../905/268204";
 export let $$n1 = A && CSS.registerProperty;
 export function $$r2(e) {
   return e;

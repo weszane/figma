@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { defaultComponentAttribute } from "src/905/577641";
+import { defaultComponentAttribute } from "../905/577641";
 let a = e => e.stopPropagation();
 export function $$s0({
   display: e = "block",

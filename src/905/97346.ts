@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
-import { A as _$$A } from "src/vendor/723372";
-import { preventEvent, isEventTargetCurrent, stopEventPropagation, EVENT_CAPTURE_CLASS } from "src/905/955878";
-import { l as _$$l } from "src/905/490996";
-import { v as _$$v } from "src/905/475481";
-import { eB, GC } from "src/905/914656";
-import { f2, Re, TX, VO, bl, S8, WQ } from "src/905/268491";
+import { A as _$$A } from "../vendor/723372";
+import { preventEvent, isEventTargetCurrent, stopEventPropagation, EVENT_CAPTURE_CLASS } from "../905/955878";
+import { l as _$$l } from "../905/490996";
+import { v as _$$v } from "../905/475481";
+import { eB, GC } from "../905/914656";
+import { f2, Re, TX, VO, bl, S8, WQ } from "../905/268491";
 let c = {
   mouse: 8,
   pen: 16,
@@ -61,7 +61,7 @@ export function $$h0(e) {
       }
       if (c.current?.removeAttribute("data-pointer-capture"), c.current = null, document.removeEventListener("touchmove", preventEvent), document.body.classList.remove(p), n || window.getSelection()?.empty(), _(!1), i.current = null, n && !t) e.onDragEnd?.({
         cancelled: n
-      });else {
+      }); else {
         let i = b(t);
         e.onDragEnd?.(Object.assign(t, {
           delta: i,

@@ -1,6 +1,6 @@
-import { CodeLibraryIdHandler, CodeFileIdHandler } from "src/figma_app/243058";
-import { PrimaryWorkflowEnum } from "src/905/497152";
-import { getLocalAsset, getSubscribedAsset } from "src/905/808701";
+import { CodeLibraryIdHandler, CodeFileIdHandler } from "../figma_app/243058";
+import { PrimaryWorkflowEnum } from "../905/497152";
+import { getLocalAsset, getSubscribedAsset } from "../905/808701";
 
 /**
  * Extracts code component fields and converts string IDs to handler objects.

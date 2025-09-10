@@ -3,7 +3,7 @@ import { logError } from "../905/714362";
 import { p as _$$p } from "../905/167135";
 import { n as _$$n } from "../905/347702";
 import { pT } from "../905/544659";
-import { MI } from "../905/757052";
+import { processChildren } from "../905/757052";
 export async function $$d0(e, t, i) {
   let a = {
     fonts: {},
@@ -22,7 +22,7 @@ export async function $$d0(e, t, i) {
       } = e.renderMetaData;
       if (textStyle && (p(t, textStyle.style), textStyle.ranges.forEach(e => p(t, e.style))), fillSrc && !t.images.hasOwnProperty(fillSrc) && (t.images[fillSrc] = {
         hasLoaded: !1
-      }), children) for (let e of MI(children)) i(e);
+      }), children) for (let e of processChildren(children)) i(e);
     };
     i(e);
   }(d.rootNode, a), (Object.values(a.fonts).some(({

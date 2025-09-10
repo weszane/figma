@@ -1,19 +1,19 @@
 import { useMemo, useLayoutEffect } from "react";
-import { customHistory } from "src/905/612521";
-import { setupResourceAtomHandler } from "src/figma_app/566371";
-import { parseQuerySimple } from "src/905/634134";
-import { C as _$$C } from "src/905/237873";
-import { S, N } from "src/905/872825";
-import { zq } from "src/figma_app/598412";
-import { pO, nS, Ac, Wk, aV } from "src/figma_app/321395";
-import { H, e as _$$e } from "src/figma_app/324237";
-import { Z } from "src/905/942203";
-import { k } from "src/905/22009";
-import { L as _$$L } from "src/905/178090";
-import { LJ, gT, Tr, zU } from "src/figma_app/930386";
-import { Zp } from "src/figma_app/188671";
-import { VR, FZ, CS, p7 } from "src/figma_app/979714";
-import { zs, OU, _4 } from "src/figma_app/773663";
+import { customHistory } from "../905/612521";
+import { setupResourceAtomHandler } from "../figma_app/566371";
+import { parseQuerySimple } from "../905/634134";
+import { C as _$$C } from "../905/237873";
+import { S, N } from "../905/872825";
+import { zq } from "../figma_app/598412";
+import { pO, nS, Ac, Wk, aV } from "../figma_app/321395";
+import { H, e as _$$e } from "../figma_app/324237";
+import { Z } from "../905/942203";
+import { k } from "../905/22009";
+import { L as _$$L } from "../905/178090";
+import { LJ, gT, Tr, zU } from "../figma_app/930386";
+import { Zp } from "../figma_app/188671";
+import { VR, FZ, CS, p7 } from "../figma_app/979714";
+import { zs, OU, _4 } from "../figma_app/773663";
 var y = Object.getPrototypeOf;
 var b = Reflect.get;
 var T = (e, t, r) => b(y(e), r, t);
@@ -67,7 +67,7 @@ export function $$S4(e) {
     creators: e.creators
   }).href;
 }
-class v extends nS {}
+class v extends nS { }
 v.deserializeParams = e => {
   let t = zq();
   let r = L(e.categorySlug, t);
@@ -88,7 +88,7 @@ v.parseQueryString = e => {
     creators: S(t.creators, Z.Browse)
   };
 };
-let A = class extends v {};
+let A = class extends v { };
 Ac(A);
 A.displayName = "CategoryRoute";
 A.path = "/community/:categorySlug/:tagSlug?";
@@ -106,7 +106,7 @@ export class $$N0 extends Wk($$x2) {
     super(i, t, r);
   }
 }
-let C = class extends v {};
+let C = class extends v { };
 Ac(C);
 C.displayName = "ResourceHubCategoryRoute";
 C.path = aV(VR, $$x2.path);

@@ -1,14 +1,14 @@
-import { decodeBase64 } from "src/905/561685";
-import { ColorSpaceEnum, YesNoEnum } from "src/figma_app/763686";
-import { iL } from "src/figma_app/762706";
-import { f as _$$f, a as _$$a } from "src/905/580661";
-import { BrowserInfo } from "src/figma_app/778880";
-import { logError } from "src/905/714362";
-import { XHR } from "src/905/910117";
-import { Y } from "src/905/270066";
-import { Ll, yy, fB } from "src/905/515659";
-import { o as _$$o } from "src/905/22729";
-import { X, e as _$$e } from "src/905/271299";
+import { decodeBase64 } from "../905/561685";
+import { ColorSpaceEnum, YesNoEnum } from "../figma_app/763686";
+import { iL } from "../figma_app/762706";
+import { f as _$$f, a as _$$a } from "../905/580661";
+import { BrowserInfo } from "../figma_app/778880";
+import { logError } from "../905/714362";
+import { XHR } from "../905/910117";
+import { Y } from "../905/270066";
+import { Ll, yy, fB } from "../905/515659";
+import { o as _$$o } from "../905/22729";
+import { X, e as _$$e } from "../905/271299";
 let n;
 let m = document.createElement("canvas");
 let $$g6 = 4096;
@@ -29,14 +29,14 @@ async function b(e, t, r, n) {
     let t = Ll(e);
     if (e = t.withoutColorSpace, t.iccProfileRawData) try {
       i = Y(t.iccProfileRawData);
-    } catch (e) {}
+    } catch (e) { }
   }
   let s = null;
   if ("image/jpeg" === t) {
     try {
       let t = yy(e);
       t && (i = Y(t) ?? ColorSpaceEnum.SRGB);
-    } catch (e) {}
+    } catch (e) { }
     s = _$$f.getOrientation(e);
     w && (s = null);
   }
@@ -169,7 +169,7 @@ async function A(e, t) {
         e.readPixels(0, 0, i, a, e.RGBA, e.UNSIGNED_BYTE, r);
         255 === r[0] && (s = !0);
       }
-    } catch {}
+    } catch { }
     e.bindFramebuffer(e.FRAMEBUFFER, l);
     e.bindTexture(e.TEXTURE_2D, d);
     e.deleteTexture(u);
@@ -224,7 +224,7 @@ let $$P3 = {
       if (e === YesNoEnum.YES) C = {
         works: !0,
         allowsOptions: !0
-      };else {
+      }; else {
         let e = (n || (n = iL()), n).ctx;
         if (!e) throw Error("Cannot find GL context");
         C = await N(e);

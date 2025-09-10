@@ -1,4 +1,4 @@
-import { throwTypeError } from "src/figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 var $$i0 = (e => (e[e.NAME = 0] = "NAME", e[e.CREATED_AT = 1] = "CREATED_AT", e[e.TOUCHED_AT = 2] = "TOUCHED_AT", e[e.TRASHED_AT = 3] = "TRASHED_AT", e[e.OWNER = 4] = "OWNER", e[e.SEARCH_RELEVANCE = 5] = "SEARCH_RELEVANCE", e[e.PROJECT_NAME = 6] = "PROJECT_NAME", e[e.ACCESSED_AT = 7] = "ACCESSED_AT", e[e.SHARED_AT = 8] = "SHARED_AT", e))($$i0 || {});
 export function $$a6(e) {
   switch (e) {

@@ -1,12 +1,12 @@
-import { getFeatureFlags } from "src/905/601108";
-import { trackEventAnalytics } from "src/905/449184";
+import { getFeatureFlags } from "../905/601108";
+import { trackEventAnalytics } from "../905/449184";
 let a = class e {
   constructor(e, t, i) {
     this.frameNumber = 0;
     this.lastSampledFrame = 0;
     this.forceNextFrameToBeSampled = !1;
-    this.addPerFrameMetricsCallback = () => {};
-    this.clearPerFrameMetricsCallback = () => {};
+    this.addPerFrameMetricsCallback = () => { };
+    this.clearPerFrameMetricsCallback = () => { };
     this.isPrototypingFrameTracker = e;
     this.addPerFrameMetricsCallback = t;
     this.clearPerFrameMetricsCallback = i;

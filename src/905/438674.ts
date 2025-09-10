@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { A } from "src/vendor/723372";
-import { _ } from "src/figma_app/496441";
-import { regularSize, wideSize, largeSize, largeWideSize, button, r as _$$r, hasIcon, buttonText, buttonContent, icon } from "src/905/608793";
-import { n as _$$n } from "src/905/198890";
+import { A } from "../vendor/723372";
+import { _ } from "../figma_app/496441";
+import { regularSize, wideSize, largeSize, largeWideSize, button, r as _$$r, hasIcon, buttonText, buttonContent, icon } from "../905/608793";
+import { n as _$$n } from "../905/198890";
 let l = forwardRef(({
   children: e,
   htmlAttributes: t,

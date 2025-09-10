@@ -1,5 +1,5 @@
-import { assert } from "src/figma_app/465776";
-import { deepEqual } from "src/905/382883";
+import { assert } from "../figma_app/465776";
+import { deepEqual } from "../905/382883";
 export function $$a1(e, t) {
   if (typeof e != typeof t) return !1;
   if ("object" != typeof e) return e === t;

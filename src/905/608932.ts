@@ -1,10 +1,10 @@
-import { sortByDate } from "src/figma_app/656233";
-import { createNoOpValidator, APIParameterUtils } from "src/figma_app/181241";
-import { Qy } from "src/figma_app/471982";
-import { M4 } from "src/905/713695";
-import { H } from "src/905/473998";
-import { pluginAPIService } from "src/905/3209";
-import { U } from "src/905/424668";
+import { sortByDate } from "../figma_app/656233";
+import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
+import { Qy } from "../figma_app/471982";
+import { M4 } from "../905/713695";
+import { H } from "../905/473998";
+import { pluginAPIService } from "../905/3209";
+import { U } from "../905/424668";
 export let $$c0 = new class {
   constructor() {
     this.ProfileSchemaValidator = createNoOpValidator();

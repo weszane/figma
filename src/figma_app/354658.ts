@@ -1,8 +1,8 @@
-import { parseQuerySimple } from "src/905/634134";
-import { processSlug } from "src/figma_app/930338";
-import { nS, Ac, Wk, aV } from "src/figma_app/321395";
-import { PreviewMode } from "src/figma_app/707808";
-import { VR, FZ, CS, p7 } from "src/figma_app/979714";
+import { parseQuerySimple } from "../905/634134";
+import { processSlug } from "../figma_app/930338";
+import { nS, Ac, Wk, aV } from "../figma_app/321395";
+import { PreviewMode } from "../figma_app/707808";
+import { VR, FZ, CS, p7 } from "../figma_app/979714";
 var l = Object.getPrototypeOf;
 var d = Reflect.get;
 var c = (e, t, r) => d(l(e), r, t);
@@ -29,12 +29,12 @@ _.parseQueryString = e => {
     rating: t.rating
   };
 };
-let h = class extends _ {};
+let h = class extends _ { };
 Ac(h);
 h.displayName = "ResourceRoute";
 h.path = "/community/:apiResourceType(file|plugin|widget)/:resourceId/:urlSlug?";
 let $$m3 = Wk(h);
-let g = class extends _ {};
+let g = class extends _ { };
 Ac(g);
 g.displayName = "ResourceHubResourceRoute";
 g.path = aV(VR, h.path);

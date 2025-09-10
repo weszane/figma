@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { throwTypeError } from "src/figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import s from "classnames";
-import { B } from "src/905/714743";
-import { ZN, v, TT, Ww, o9, WH, _W, sM, Dt, JR, uS, Pu, xi, KK, M6, A4, uo, FZ, B4, yZ, C0, KT, zB, ko, Iv, rL, Xo, vg, rJ, vT, Fw, Uu, gL, _X, Sx, t1, aK, rw, W5, eD } from "src/905/937197";
-import { A } from "src/svg/545021";
+import { B } from "../905/714743";
+import { ZN, v, TT, Ww, o9, WH, _W, sM, Dt, JR, uS, Pu, xi, KK, M6, A4, uo, FZ, B4, yZ, C0, KT, zB, ko, Iv, rL, Xo, vg, rJ, vT, Fw, Uu, gL, _X, Sx, t1, aK, rw, W5, eD } from "../905/937197";
+import { A } from "../svg/545021";
 var o = s;
 var $$u3 = (e => (e[e.INVERT = 0] = "INVERT", e[e.DEFAULT = 1] = "DEFAULT", e[e.TOOLBAR = 2] = "TOOLBAR", e[e.TERTIARY = 3] = "TERTIARY", e[e.SUCCESS = 4] = "SUCCESS", e[e.WARNING = 5] = "WARNING", e[e.WARNING_TERTIARY = 6] = "WARNING_TERTIARY", e[e.DANGER = 7] = "DANGER", e[e.DESIGN = 8] = "DESIGN", e[e.COMPONENT = 9] = "COMPONENT", e[e.FIGJAM = 10] = "FIGJAM", e[e.BRAND = 11] = "BRAND", e[e.DISABLED = 12] = "DISABLED", e[e.INFORMATIONAL = 13] = "INFORMATIONAL", e[e.LIGHT = 14] = "LIGHT", e[e.TOOLBAR_SELECTED = 15] = "TOOLBAR_SELECTED", e[e.DEFAULT_TRANSLUCENT = 16] = "DEFAULT_TRANSLUCENT", e[e.LIGHT_TRANSLUCENT = 17] = "LIGHT_TRANSLUCENT", e))($$u3 || {});
 var $$p2 = (e => (e[e.SMALL = 0] = "SMALL", e[e.LARGE = 1] = "LARGE", e[e.EXTRA_LARGE = 2] = "EXTRA_LARGE", e))($$p2 || {});

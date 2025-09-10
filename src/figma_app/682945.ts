@@ -1,21 +1,21 @@
-import { isNotNullish } from "src/figma_app/95419";
-import { flattenObjectToTarget } from "src/figma_app/493477";
-import { AutosaveHelpers, FullscreenPerfMetrics, fullscreenOptimizationExposureLoggingBinding, gpuMetricsLoggingBinding, perfTimerFrameManagerBindings, AppStateTsApi, CoverageStatus } from "src/figma_app/763686";
-import { getFeatureFlags } from "src/905/601108";
-import { atomStoreManager } from "src/figma_app/27355";
-import { trackEventAnalytics } from "src/905/449184";
-import { reactTimerGroup } from "src/905/542194";
-import { jY, AH } from "src/figma_app/725044";
-import { zF, xV, q5, l$, vu, H0 as _$$H, as, nc, Pn, eO, I7, t8, bF, vw, Ti, W, Fy } from "src/905/967662";
-import { getInitialOptions } from "src/figma_app/169182";
-import { q, l as _$$l } from "src/905/190247";
-import { N as _$$N } from "src/905/200059";
-import { s as _$$s } from "src/905/817498";
-import { Dc } from "src/figma_app/314264";
-import { fullscreenValue } from "src/figma_app/455680";
-import { ds } from "src/905/87821";
-import { f as _$$f } from "src/905/70820";
-import { Jr } from "src/figma_app/624361";
+import { isNotNullish } from "../figma_app/95419";
+import { flattenObjectToTarget } from "../figma_app/493477";
+import { AutosaveHelpers, FullscreenPerfMetrics, fullscreenOptimizationExposureLoggingBinding, gpuMetricsLoggingBinding, perfTimerFrameManagerBindings, AppStateTsApi, CoverageStatus } from "../figma_app/763686";
+import { getFeatureFlags } from "../905/601108";
+import { atomStoreManager } from "../figma_app/27355";
+import { trackEventAnalytics } from "../905/449184";
+import { reactTimerGroup } from "../905/542194";
+import { jY, AH } from "../figma_app/725044";
+import { zF, xV, q5, l$, vu, H0 as _$$H, as, nc, Pn, eO, I7, t8, bF, vw, Ti, W, Fy } from "../905/967662";
+import { getInitialOptions } from "../figma_app/169182";
+import { q, l as _$$l } from "../905/190247";
+import { N as _$$N } from "../905/200059";
+import { s as _$$s } from "../905/817498";
+import { Dc } from "../figma_app/314264";
+import { fullscreenValue } from "../figma_app/455680";
+import { ds } from "../905/87821";
+import { f as _$$f } from "../905/70820";
+import { Jr } from "../figma_app/624361";
 let T = {
   "frame.react-render": .1,
   "frame.scene-render": .2,
@@ -179,7 +179,7 @@ function eb(e) {
   w = performance.now();
   O = e.duration;
 }
-function eT(...e) {}
+function eT(...e) { }
 export function $$eI18() {
   if (!fullscreenValue?.isReady()) return;
   let e = {};

@@ -1,5 +1,5 @@
-import { throwTypeError } from "src/figma_app/465776";
-import { k } from "src/905/22009";
+import { throwTypeError } from "../figma_app/465776";
+import { k } from "../905/22009";
 var $$a1 = (e => (e.DESIGN = "design", e.WHITEBOARD = "whiteboard", e.SLIDES = "slides", e.DEV_HANDOFF = "dev_handoff", e.SITES = "sites", e.COOPER = "cooper", e.FIGMAKE = "figmake", e))($$a1 || {});
 export function $$s0(e) {
   switch (e) {

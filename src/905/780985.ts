@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { flushSync } from "src/vendor/944059";
-import { w } from "src/905/937416";
+import { flushSync } from "../vendor/944059";
+import { w } from "../905/937416";
 export function $$s0(e, t, i) {
   let [s, l] = useState(!1);
   w([e, t, i], () => {

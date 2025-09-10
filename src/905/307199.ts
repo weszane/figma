@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useState, useEffect, useLayoutEffect, createElement } from "react";
-import { wY } from "src/figma_app/708845";
+import { wY } from "../figma_app/708845";
 let s = "center_truncated_text--fixedSize--7beVW";
 let $$o0 = memo(function ({
   text: e,

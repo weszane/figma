@@ -1,16 +1,16 @@
 import { useContext, useRef, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { getFeatureFlags } from "src/905/601108";
-import { atomStoreManager, useAtomWithSubscription, createRemovableAtomFamily, atom } from "src/figma_app/27355";
-import { useLatestRef } from "src/figma_app/922077";
-import { b as _$$b } from "src/905/985254";
-import { r1 } from "src/figma_app/545877";
-import { Tq } from "src/3973/663243";
-import { B } from "src/905/749933";
-import { ZJ, u_, gR } from "src/3973/697935";
-import { EvaluationReason, DynamicConfig } from "src/vendor/625526";
-import { w } from "src/905/669698";
-import { B as _$$B } from "src/3973/298076";
+import { getFeatureFlags } from "../905/601108";
+import { atomStoreManager, useAtomWithSubscription, createRemovableAtomFamily, atom } from "../figma_app/27355";
+import { useLatestRef } from "../figma_app/922077";
+import { b as _$$b } from "../905/985254";
+import { r1 } from "../figma_app/545877";
+import { Tq } from "../3973/663243";
+import { B } from "../905/749933";
+import { ZJ, u_, gR } from "../3973/697935";
+import { EvaluationReason, DynamicConfig } from "../vendor/625526";
+import { w } from "../905/669698";
+import { B as _$$B } from "../3973/298076";
 export async function $$E7(e, t, r, n = !1) {
   let i = atomStoreManager.get(ZJ);
   (r || getFeatureFlags().statsig_suspend) && (await i.initCompletedPromise);
@@ -58,8 +58,8 @@ createRemovableAtomFamily(({
   let a = null;
   return () => (null == a && (a = Tq(i, e, "getExperiment", t, r)), a);
 }), (e, t) => e.experimentName === t.experimentName && e.disableExposureLogging === t.disableExposureLogging && e.keepDeviceValue === t.keepDeviceValue);
-export { Fj, gP, w0 } from "src/3973/389215";
-export { aH, sq } from "src/3973/473379";
+export { Fj, gP, w0 } from "../3973/389215";
+export { aH, sq } from "../3973/473379";
 export const Bf = _$$B;
 export const I7 = $$T2;
 export const XV = $$I3;

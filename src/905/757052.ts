@@ -1,99 +1,232 @@
-import { InternalError } from "../905/845428";
-export let $$r3 = e => "frame" === e.type || "inputframe" === e.type || "autolayout" === e.type;
-export function $$a1(e, t, i) {
-  if (!e) return;
-  let n = e.renderMetaData.width;
-  let a = e.renderMetaData.height;
-  if ("number" == typeof n || "number" == typeof a) {
-    $$r3(e) && ("number" == typeof n && ("horizontal" === e.renderMetaData.direction && t.writeProperty("primaryAxisSizingMode", "FIXED"), "vertical" === e.renderMetaData.direction && t.writeProperty("counterAxisSizingMode", "FIXED")), "number" == typeof a && ("horizontal" === e.renderMetaData.direction && t.writeProperty("counterAxisSizingMode", "FIXED"), "vertical" === e.renderMetaData.direction && t.writeProperty("primaryAxisSizingMode", "FIXED")));
-    let i = "line" === e.type ? 0 : .01;
-    t.resize("number" == typeof n ? n : t.getSize().width || .01, "number" == typeof a ? a : t.getSize().height || i);
+import { InternalError } from '../905/845428'
+
+// Check if element is a frame type
+export function isFrameType(element: any): boolean {
+  return ['frame', 'inputframe', 'autolayout'].includes(element.type)
+}
+
+// Handle element sizing and layout properties
+export function handleElementSizing(element: any, target: any, layoutMode: any) {
+  if (!element)
+    return
+
+  const { width, height } = element.renderMetaData
+
+  // Handle numeric dimensions
+  if (typeof width === 'number' || typeof height === 'number') {
+    if (isFrameType(element)) {
+      handleAxisSizing(element, target, width, height)
+    }
+
+    const minHeight = element.type === 'line' ? 0 : 0.01
+    const finalWidth = typeof width === 'number' ? width : target.getSize().width || 0.01
+    const finalHeight = typeof height === 'number' ? height : target.getSize().height || minHeight
+
+    target.resize(finalWidth, finalHeight)
   }
-  try {
-    "fill-parent" === n ? t.writeProperty("layoutSizingHorizontal", "FILL") : "hug-contents" === n && $$r3(e) && t.writeProperty("layoutSizingHorizontal", "HUG");
-  } catch {
-    "fill-parent" === n ? "HORIZONTAL" === i ? t.writeProperty("layoutGrow", 1) : "VERTICAL" === i && (t.writeProperty("layoutAlign", "STRETCH"), $$r3(e) && t.writeProperty("primaryAxisSizingMode", "FIXED")) : "hug-contents" === n && $$r3(e) && ("HORIZONTAL" === e.props.layoutMode ? t.writeProperty("primaryAxisSizingMode", "AUTO") : "VERTICAL" === e.props.layoutMode && t.writeProperty("counterAxisSizingMode", "AUTO"));
+
+  // Handle horizontal layout
+  handleLayoutDimension(element, target, width, 'horizontal', layoutMode)
+
+  // Handle vertical layout
+  handleLayoutDimension(element, target, height, 'vertical', layoutMode)
+}
+
+function handleAxisSizing(element: any, target: any, width: any, height: any) {
+  const { direction } = element.renderMetaData
+
+  if (typeof width === 'number') {
+    if (direction === 'horizontal')
+      target.writeProperty('primaryAxisSizingMode', 'FIXED')
+    if (direction === 'vertical')
+      target.writeProperty('counterAxisSizingMode', 'FIXED')
   }
-  try {
-    "fill-parent" === a ? t.writeProperty("layoutSizingVertical", "FILL") : "hug-contents" === a && $$r3(e) && t.writeProperty("layoutSizingVertical", "HUG");
-  } catch {
-    "fill-parent" === a ? "VERTICAL" === i ? t.writeProperty("layoutGrow", 1) : "HORIZONTAL" === i && (t.writeProperty("layoutAlign", "STRETCH"), $$r3(e) && t.writeProperty("primaryAxisSizingMode", "FIXED")) : "hug-contents" === a && $$r3(e) && ("HORIZONTAL" === e.props.layoutMode ? t.writeProperty("counterAxisSizingMode", "AUTO") : "VERTICAL" === e.props.layoutMode && t.writeProperty("primaryAxisSizingMode", "AUTO"));
+
+  if (typeof height === 'number') {
+    if (direction === 'horizontal')
+      target.writeProperty('counterAxisSizingMode', 'FIXED')
+    if (direction === 'vertical')
+      target.writeProperty('primaryAxisSizingMode', 'FIXED')
   }
 }
-export function $$s0(e, t, i, r = !1) {
-  let a;
-  let o;
-  let l;
-  let d;
-  let c;
-  let u;
-  if (!e) return;
-  let {
-    xConstraint,
-    yConstraint
-  } = e.renderMetaData.constraints ?? {};
-  let h = {
-    horizontal: "MIN",
-    vertical: "MIN"
-  };
-  let g = () => (a || (a = t.getSize()), a);
-  let f = () => (o || (o = i.getSize()), o);
-  if (xConstraint) switch (xConstraint.type) {
-    case "left":
-      "number" == typeof xConstraint.offset && (c = xConstraint.offset);
-      break;
-    case "right":
-      "number" == typeof xConstraint.offset && (h.horizontal = "MAX", c = f().width - xConstraint.offset - g().width);
-      break;
-    case "center":
-      "number" == typeof xConstraint.offset && (h.horizontal = "CENTER", c = f().width / 2 - g().width / 2 + xConstraint.offset);
-      break;
-    case "left-right":
-      "number" == typeof xConstraint.leftOffset && "number" == typeof xConstraint.rightOffset && (h.horizontal = "STRETCH", l = f().width - xConstraint.leftOffset - xConstraint.rightOffset, c = xConstraint.leftOffset);
-      break;
-    case "horizontal-scale":
-      if ("number" == typeof xConstraint.leftOffsetPercent && "number" == typeof xConstraint.rightOffsetPercent) {
-        if (!(0 <= xConstraint.leftOffsetPercent && xConstraint.leftOffsetPercent <= 100 && 0 <= xConstraint.rightOffsetPercent && xConstraint.rightOffsetPercent <= 100 && xConstraint.leftOffsetPercent + xConstraint.rightOffsetPercent <= 100)) throw new InternalError(`Invalid percentages left=${xConstraint.leftOffsetPercent}, right=${xConstraint.rightOffsetPercent}`);
-        h.horizontal = "SCALE";
-        let e = xConstraint.leftOffsetPercent + xConstraint.rightOffsetPercent;
-        l = f().width * ((100 - e) / 100);
-        c = f().width * xConstraint.leftOffsetPercent / 100;
-      }
+
+function handleLayoutDimension(element: any, target: any, size: any, axis: 'horizontal' | 'vertical', layoutMode: any) {
+  const isHorizontal = axis === 'horizontal'
+  const sizingProperty = `layoutSizing${axis.charAt(0).toUpperCase() + axis.slice(1)}`
+
+  try {
+    if (size === 'fill-parent') {
+      target.writeProperty(sizingProperty, 'FILL')
+    }
+    else if (size === 'hug-contents' && isFrameType(element)) {
+      target.writeProperty(sizingProperty, 'HUG')
+    }
   }
-  if (yConstraint) switch (yConstraint.type) {
-    case "top":
-      "number" == typeof yConstraint.offset && (u = yConstraint.offset);
-      break;
-    case "bottom":
-      "number" == typeof yConstraint.offset && (h.vertical = "MAX", u = f().height - yConstraint.offset - g().height);
-      break;
-    case "center":
-      "number" == typeof yConstraint.offset && (h.vertical = "CENTER", u = f().height / 2 - g().height / 2 + yConstraint.offset);
-      break;
-    case "top-bottom":
-      "number" == typeof yConstraint.topOffset && "number" == typeof yConstraint.bottomOffset && (h.vertical = "STRETCH", d = f().height - yConstraint.topOffset - yConstraint.bottomOffset, u = yConstraint.topOffset);
-      break;
-    case "vertical-scale":
-      if ("number" == typeof yConstraint.topOffsetPercent && "number" == typeof yConstraint.bottomOffsetPercent) {
-        if (!(0 <= yConstraint.topOffsetPercent && yConstraint.topOffsetPercent <= 100 && 0 <= yConstraint.bottomOffsetPercent && yConstraint.bottomOffsetPercent <= 100 && yConstraint.topOffsetPercent + yConstraint.bottomOffsetPercent <= 100)) throw new InternalError(`Invalid percentages top=${yConstraint.topOffsetPercent}, bottom=${yConstraint.bottomOffsetPercent}`);
-        h.vertical = "SCALE";
-        let e = yConstraint.topOffsetPercent + yConstraint.bottomOffsetPercent;
-        d = f().height * ((100 - e) / 100);
-        u = f().height * yConstraint.topOffsetPercent / 100;
-      }
+  catch {
+    handleFallbackLayout(element, target, size, isHorizontal, layoutMode)
   }
-  void 0 !== c && t.writeProperty("x", c);
-  void 0 !== u && t.writeProperty("y", u);
-  (l || d) && t.resize(l ?? g().width, d ?? g().height);
-  (r || "MIN" !== h.horizontal || "MIN" !== h.vertical) && t.writeProperty("constraints", h);
 }
-export const $T = $$s0;
-export const BM = $$a1;
-export const MI = function e(t, i = null) {
-  let n = [];
-  t.forEach(t => {
-    t && (Array.isArray(t) ? (t.some(e => e && !Array.isArray(e) && null == e.renderMetaData.key) && i?.logWarning('Widget Warning: Each child in a list should have a unique "key" prop. Please check your widget code.'), n.push(...e(t, i))) : "fragment" === t.type ? n.push(...e(t.renderMetaData.children ?? [], i)) : n.push(t));
-  });
-  return n;
-};
-export const _L = $$r3;
+
+function handleFallbackLayout(element: any, target: any, size: any, isHorizontal: boolean, layoutMode: any) {
+  if (size === 'fill-parent') {
+    if (layoutMode === (isHorizontal ? 'HORIZONTAL' : 'VERTICAL')) {
+      target.writeProperty('layoutGrow', 1)
+    }
+    else {
+      target.writeProperty('layoutAlign', 'STRETCH')
+      isFrameType(element) && target.writeProperty('primaryAxisSizingMode', 'FIXED')
+    }
+  }
+  else if (size === 'hug-contents' && isFrameType(element)) {
+    const mode = element.props.layoutMode
+    if (isHorizontal) {
+      mode === 'HORIZONTAL'
+        ? target.writeProperty('primaryAxisSizingMode', 'AUTO')
+        : mode === 'VERTICAL' && target.writeProperty('counterAxisSizingMode', 'AUTO')
+    }
+    else {
+      mode === 'HORIZONTAL'
+        ? target.writeProperty('counterAxisSizingMode', 'AUTO')
+        : mode === 'VERTICAL' && target.writeProperty('primaryAxisSizingMode', 'AUTO')
+    }
+  }
+}
+
+// Handle constraints
+export function handleConstraints(element: any, target: any, parent: any, forceConstraints = false) {
+  if (!element)
+    return
+
+  const sizes = {
+    target: null as any,
+    parent: null as any,
+  }
+
+  const getTargetSize = () => {
+    if (!sizes.target)
+      sizes.target = target.getSize()
+    return sizes.target
+  }
+
+  const getParentSize = () => {
+    if (!sizes.parent)
+      sizes.parent = parent.getSize()
+    return sizes.parent
+  }
+
+  const { xConstraint, yConstraint } = element.renderMetaData.constraints ?? {}
+  const constraints = { horizontal: 'MIN', vertical: 'MIN' }
+  let width, height, x, y
+
+  if (xConstraint) {
+    ({ width, x } = handleAxisConstraint(xConstraint, constraints, getTargetSize, getParentSize, 'horizontal'))
+  }
+
+  if (yConstraint) {
+    ({ height, y } = handleAxisConstraint(yConstraint, constraints, getTargetSize, getParentSize, 'vertical'))
+  }
+
+  if (x !== undefined)
+    target.writeProperty('x', x)
+  if (y !== undefined)
+    target.writeProperty('y', y)
+  if (width || height)
+    target.resize(width ?? getTargetSize().width, height ?? getTargetSize().height)
+  if (forceConstraints || constraints.horizontal !== 'MIN' || constraints.vertical !== 'MIN') {
+    target.writeProperty('constraints', constraints)
+  }
+}
+
+function handleAxisConstraint(
+  constraint: any,
+  constraints: any,
+  getTargetSize: () => any,
+  getParentSize: () => any,
+  axis: 'horizontal' | 'vertical',
+) {
+  const isHorizontal = axis === 'horizontal'
+  const dimension = isHorizontal ? 'width' : 'height'
+  const result = { [dimension]: undefined, [isHorizontal ? 'x' : 'y']: undefined }
+
+  switch (constraint.type) {
+    case isHorizontal ? 'left' : 'top':
+      if (typeof constraint.offset === 'number') {
+        result[isHorizontal ? 'x' : 'y'] = constraint.offset
+      }
+      break
+
+    case isHorizontal ? 'right' : 'bottom':
+      if (typeof constraint.offset === 'number') {
+        constraints[axis] = 'MAX'
+        result[isHorizontal ? 'x' : 'y'] = getParentSize()[dimension] - constraint.offset - getTargetSize()[dimension]
+      }
+      break
+
+    case 'center':
+      if (typeof constraint.offset === 'number') {
+        constraints[axis] = 'CENTER'
+        result[isHorizontal ? 'x' : 'y'] = getParentSize()[dimension] / 2 - getTargetSize()[dimension] / 2 + constraint.offset
+      }
+      break
+
+    case isHorizontal ? 'left-right' : 'top-bottom':
+      const start = isHorizontal ? 'leftOffset' : 'topOffset'
+      const end = isHorizontal ? 'rightOffset' : 'bottomOffset'
+      if (typeof constraint[start] === 'number' && typeof constraint[end] === 'number') {
+        constraints[axis] = 'STRETCH'
+        result[dimension] = getParentSize()[dimension] - constraint[start] - constraint[end]
+        result[isHorizontal ? 'x' : 'y'] = constraint[start]
+      }
+      break
+
+    case `${axis}-scale`:
+      const startPercent = isHorizontal ? 'leftOffsetPercent' : 'topOffsetPercent'
+      const endPercent = isHorizontal ? 'rightOffsetPercent' : 'bottomOffsetPercent'
+      if (typeof constraint[startPercent] === 'number' && typeof constraint[endPercent] === 'number') {
+        validatePercentages(constraint[startPercent], constraint[endPercent])
+        constraints[axis] = 'SCALE'
+        const totalOffset = constraint[startPercent] + constraint[endPercent]
+        result[dimension] = getParentSize()[dimension] * ((100 - totalOffset) / 100)
+        result[isHorizontal ? 'x' : 'y'] = getParentSize()[dimension] * constraint[startPercent] / 100
+      }
+      break
+  }
+
+  return result
+}
+
+function validatePercentages(start: number, end: number) {
+  if (!(start >= 0 && start <= 100 && end >= 0 && end <= 100 && start + end <= 100)) {
+    throw new InternalError(`Invalid percentages ${start}, ${end}`)
+  }
+}
+
+// Process children elements
+export function processChildren(elements: any[], logger: any = null) {
+  const processed: any[] = []
+
+  elements.forEach((element) => {
+    if (!element)
+      return
+
+    if (Array.isArray(element)) {
+      if (element.some(e => e && !Array.isArray(e) && e.renderMetaData.key == null)) {
+        logger?.logWarning('Widget Warning: Each child in a list should have a unique "key" prop. Please check your widget code.')
+      }
+      processed.push(...processChildren(element, logger))
+    }
+    else if (element.type === 'fragment') {
+      processed.push(...processChildren(element.renderMetaData.children ?? [], logger))
+    }
+    else {
+      processed.push(element)
+    }
+  })
+
+  return processed
+}
+
+export const $T = handleConstraints
+export const BM = handleElementSizing
+export const MI = processChildren
+export const _L = isFrameType

@@ -1,9 +1,9 @@
-import { Fullscreen, DesignGraphElements } from "src/figma_app/763686";
-import { NC } from "src/905/17179";
-import { ds } from "src/figma_app/314264";
-import { R9 } from "src/905/977824";
-import { q } from "src/figma_app/403368";
-import { createOptimistThunk } from "src/905/350402";
+import { Fullscreen, DesignGraphElements } from "../figma_app/763686";
+import { NC } from "../905/17179";
+import { ds } from "../figma_app/314264";
+import { R9 } from "../905/977824";
+import { q } from "../figma_app/403368";
+import { createOptimistThunk } from "../905/350402";
 let $$d6 = NC("MULTIPLAYER_EMOJI_UPDATE_EMOJI_WHEEL_POSITION");
 let $$c2 = NC("MULTIPLAYER_EMOJI_CLEAR_STATE");
 let $$u1 = createOptimistThunk(e => {

@@ -1,6 +1,6 @@
-import { noop } from "src/figma_app/465776";
-import r from "src/vendor/128080";
-import { parseQuerySimple } from "src/905/634134";
+import { noop } from "../figma_app/465776";
+import r from "../vendor/128080";
+import { parseQuerySimple } from "../905/634134";
 var a = r;
 export class $$o1 {
   pathToSelectedView(e, t, i) {

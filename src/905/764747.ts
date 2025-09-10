@@ -1,13 +1,29 @@
-let n = new Map();
-export function $$r2(e) {
-  return n.has(e);
+// Store for key-array mappings
+const store = new Map<any, any[]>();
+
+/**
+ * Checks if a key exists in the store
+ */
+export function hasKey(key: any): boolean {
+  return store.has(key);
 }
-export function $$a1(e, t) {
-  return (n.get(e) ?? [])[+t] ?? "";
+
+/**
+ * Gets value at index from array associated with key
+ */
+export function getValueAtIndex(key: unknown, index: number | string): string {
+  const arr = store.get(key) ?? [];
+  return arr[+index] ?? "";
 }
-export function $$s0(e) {
-  return String((n.get(e) ?? []).length - 1);
+
+/**
+ * Gets length of array associated with key minus 1
+ */
+export function getArrayLength(key: unknown): string {
+  return String((store.get(key) ?? []).length - 1);
 }
-export const Qx = $$s0;
-export const WL = $$a1;
-export const ZY = $$r2;
+
+// Export aliases for backward compatibility
+export const Qx = getArrayLength;
+export const WL = getValueAtIndex;
+export const ZY = hasKey;

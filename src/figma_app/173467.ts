@@ -1,8 +1,8 @@
-import { throwTypeError } from "src/figma_app/465776";
-import { K } from "src/905/807535";
-import { getI18nString } from "src/905/303541";
-import { GroupType } from "src/905/441038";
-import { J7 } from "src/figma_app/650409";
+import { throwTypeError } from "../figma_app/465776";
+import { K } from "../905/807535";
+import { getI18nString } from "../905/303541";
+import { GroupType } from "../905/441038";
+import { J7 } from "../figma_app/650409";
 export function $$l0(e) {
   if (e === GroupType.MEMBERS) return getI18nString("license_group_admin_tab.members");
   throwTypeError(e);

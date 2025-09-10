@@ -1,5 +1,5 @@
-import { PrimaryWorkflowEnum } from "src/905/497152";
-import { AssetParams, getLocalAsset, getSubscribedAsset } from "src/905/808701";
+import { PrimaryWorkflowEnum } from "../905/497152";
+import { AssetParams, getLocalAsset, getSubscribedAsset } from "../905/808701";
 
 /**
  * Constant for full page block identifier.

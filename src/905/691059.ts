@@ -1,16 +1,16 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useRef, useId, useState, useCallback, forwardRef, useContext } from "react";
-import { we, kp, s9, Mk, iB, bv, SV, ie, XF, zR, s3 } from "src/vendor/516565";
-import { UE, cY, UU } from "src/vendor/343575";
-import { ll } from "src/vendor/542280";
-import { DP } from "src/905/158740";
-import { J } from "src/905/341359";
-import { A as _$$A } from "src/vendor/723372";
-import { o as _$$o } from "src/905/821217";
-import { useSelectionProvider } from "src/905/751750";
-import { EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS } from "src/905/955878";
-import { Q } from "src/905/586361";
-import { P } from "src/905/536340";
+import { we, kp, s9, Mk, iB, bv, SV, ie, XF, zR, s3 } from "../vendor/516565";
+import { UE, cY, UU } from "../vendor/343575";
+import { ll } from "../vendor/542280";
+import { DP } from "../905/158740";
+import { J } from "../905/341359";
+import { A as _$$A } from "../vendor/723372";
+import { o as _$$o } from "../905/821217";
+import { useSelectionProvider } from "../905/751750";
+import { EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS } from "../905/955878";
+import { Q } from "../905/586361";
+import { P } from "../905/536340";
 export let $$f0 = createContext(void 0);
 export function $$_4({
   children: e

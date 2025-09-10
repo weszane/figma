@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { widgetErrorTracker } from "../905/250412";
 import { getFullscreenViewEditorType } from "../figma_app/300692";
 import { InternalError } from "../905/845428";
-import { MI, _L, BM, $T } from "../905/757052";
+import { processChildren, isFrameType, handleElementSizing, handleConstraints } from "../905/757052";
 import { TEXT_STYLE_KEYS } from "../905/285398";
 let c = new class {
   constructor() {
@@ -116,7 +116,7 @@ export function $$v0({
         };
       }
       if ("frame" === r.type || "autolayout" === r.type) {
-        let n = MI(r.renderMetaData.children ?? [], i).filter(Boolean);
+        let n = processChildren(r.renderMetaData.children ?? [], i).filter(Boolean);
         let a = t.children;
         if (n.length !== a.length) return {
           type: "child_count_mismatch",
@@ -281,7 +281,7 @@ function S({
     n?.remove();
     return null;
   }
-  if (!t && i && (n = O()), !i || ((P = t) && (P.type !== i.type || P?.renderMetaData.key !== i.renderMetaData.key || _L(i) && i.renderMetaData.direction !== P.renderMetaData.direction) && (t = null, n?.remove(), n = O()), n || (n = O()), function (e, t, i) {
+  if (!t && i && (n = O()), !i || ((P = t) && (P.type !== i.type || P?.renderMetaData.key !== i.renderMetaData.key || isFrameType(i) && i.renderMetaData.direction !== P.renderMetaData.direction) && (t = null, n?.remove(), n = O()), n || (n = O()), function (e, t, i) {
     if ("inputframe" !== e.type) return !1;
     let n = t.children;
     if (!n || n.length < 2) return !1;
@@ -392,14 +392,14 @@ function S({
       widgetVersionID: i.widgetVersionId,
       widgetName: i.name
     });
-  }(F.errors, e), (i.renderMetaData.width !== t?.renderMetaData.width || i.renderMetaData.height !== t?.renderMetaData.height || g !== v || i.renderMetaData.direction !== t?.renderMetaData.direction) && BM(i, n, g), ["x", "y"].forEach(e => {
+  }(F.errors, e), (i.renderMetaData.width !== t?.renderMetaData.width || i.renderMetaData.height !== t?.renderMetaData.height || g !== v || i.renderMetaData.direction !== t?.renderMetaData.direction) && handleElementSizing(i, n, g), ["x", "y"].forEach(e => {
     let n = i.renderMetaData?.[e];
     n !== (t ? t.renderMetaData?.[e] : void 0) && M(e, n);
-  }), deepEqual(i.renderMetaData.constraints, t?.renderMetaData.constraints) || $T(i, n, o, !0), y.forEach(e => {
+  }), deepEqual(i.renderMetaData.constraints, t?.renderMetaData.constraints) || handleConstraints(i, n, o, !0), y.forEach(e => {
     i.props[e] !== (t ? t.props[e] : void 0) && M(e, i.props[e]);
   }), "text" === i.type && N.add(n.getID()), !i.renderMetaData.children) return n;
-  let U = t?.renderMetaData?.children ? MI(t?.renderMetaData?.children) : [];
-  let B = MI(i?.renderMetaData?.children, I);
+  let U = t?.renderMetaData?.children ? processChildren(t?.renderMetaData?.children) : [];
+  let B = processChildren(i?.renderMetaData?.children, I);
   let V = n.children;
   for (let r = 0; r < B.length; r++) {
     let a = B[r];

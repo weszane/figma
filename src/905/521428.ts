@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { A } from "src/vendor/723372";
-import { E } from "src/905/632989";
-import { n as _$$n } from "src/905/198890";
-import { icon, shortcut, button, t as _$$t, r as _$$r, buttonText, hasIcon, buttonContent } from "src/905/608793";
+import { A } from "../vendor/723372";
+import { E } from "../905/632989";
+import { n as _$$n } from "../905/198890";
+import { icon, shortcut, button, t as _$$t, r as _$$r, buttonText, hasIcon, buttonContent } from "../905/608793";
 function d({
   children: e
 }) {

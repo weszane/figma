@@ -1,5 +1,5 @@
-import { Wn, VY, yi, xp, id, Vx, PD } from "src/905/966582";
-import { EC } from "src/figma_app/291892";
+import { Wn, VY, yi, xp, id, Vx, PD } from "../905/966582";
+import { EC } from "../figma_app/291892";
 export function $$a0(e, t, i, r, s, o = []) {
   if (e.length > i) {
     s({
@@ -65,7 +65,7 @@ export function $$s1(e) {
     setTimeout(() => {
       i("Video load timeout during thumbnail generation");
     }, 1e4);
-  }).catch(() => function() {
+  }).catch(() => function () {
     let e = document.createElement("canvas");
     e.width = 1600;
     e.height = 900;

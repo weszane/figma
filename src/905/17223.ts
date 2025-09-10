@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
-import { A } from "src/905/251970";
-import { generateRecordingKey } from "src/figma_app/878298";
-import { Uz } from "src/905/63728";
-import { GG } from "src/905/511649";
-import { getI18nString } from "src/905/303541";
-import { popModalStack } from "src/905/156213";
-import { tf } from "src/figma_app/831799";
-import { $ } from "src/905/355607";
-import { Nk, J_ } from "src/905/871493";
+import { A } from "../905/251970";
+import { generateRecordingKey } from "../figma_app/878298";
+import { Uz } from "../905/63728";
+import { GG } from "../905/511649";
+import { getI18nString } from "../905/303541";
+import { popModalStack } from "../905/156213";
+import { tf } from "../figma_app/831799";
+import { $ } from "../905/355607";
+import { Nk, J_ } from "../905/871493";
 export let $$m0 = tf(({
   onMouseDown: e,
   onClick: t,

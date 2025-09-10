@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { DP, Dx } from "src/905/158740";
+import { DP, Dx } from "../905/158740";
 export function $$s0(e) {
   return e.disabled ? jsx(Fragment, {
     children: e.children

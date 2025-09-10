@@ -1,9 +1,9 @@
-import { throwTypeError } from "src/figma_app/465776";
-import { A } from "src/905/920142";
-import { parseQuery } from "src/905/634134";
-import { CC } from "src/figma_app/609194";
-import { s as _$$s } from "src/905/82276";
-import { U9, rk, Oo, GX, J0, cC, e5 } from "src/figma_app/967319";
+import { throwTypeError } from "../figma_app/465776";
+import { A } from "../905/920142";
+import { parseQuery } from "../905/634134";
+import { CC } from "../figma_app/609194";
+import { s as _$$s } from "../905/82276";
+import { U9, rk, Oo, GX, J0, cC, e5 } from "../figma_app/967319";
 let d = (e, t, r) => {
   switch (e) {
     case "seatType":

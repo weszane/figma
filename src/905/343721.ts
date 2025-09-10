@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
-import { B } from "src/905/714743";
-import { TD } from "src/905/499018";
-import { jl, I5 } from "src/905/112861";
+import { B } from "../905/714743";
+import { TD } from "../905/499018";
+import { jl, I5 } from "../905/112861";
 let o = jl;
 export function $$l0({
   icon: e,

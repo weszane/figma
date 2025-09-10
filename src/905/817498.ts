@@ -1,6 +1,6 @@
-import { Fullscreen, FullscreenPerfMetrics, CoverageStatus } from "src/figma_app/763686";
-import { H0, vu } from "src/905/967662";
-import { FPSDistribution } from "src/905/609396";
+import { Fullscreen, FullscreenPerfMetrics, CoverageStatus } from "../figma_app/763686";
+import { H0, vu } from "../905/967662";
+import { FPSDistribution } from "../905/609396";
 let $$s = [1e3, 2e3];
 export class $$o0 {
   constructor() {

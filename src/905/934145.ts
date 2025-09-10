@@ -1,8 +1,8 @@
-import { S } from "src/905/872825";
-import { nS, Ac, aV } from "src/figma_app/321395";
-import { UserProfileTab } from "src/figma_app/707808";
-import { VR, FZ, CS, p7 } from "src/figma_app/979714";
-let o = class extends nS {};
+import { S } from "../905/872825";
+import { nS, Ac, aV } from "../figma_app/321395";
+import { UserProfileTab } from "../figma_app/707808";
+import { VR, FZ, CS, p7 } from "../figma_app/979714";
+let o = class extends nS { };
 Ac(o);
 o.displayName = "ProfileRoute";
 o.path = "/@:profileHandle/:tabView?";
@@ -20,7 +20,7 @@ export function $$d0(e, t, i) {
     tabView: t
   }).href;
 }
-let c = class extends nS {};
+let c = class extends nS { };
 Ac(c);
 c.displayName = "ResourceHubProfileRoute";
 c.path = aV(VR, "/community/@:profileHandle");

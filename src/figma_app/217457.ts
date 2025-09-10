@@ -1,19 +1,19 @@
 import { useMemo, useCallback } from "react";
-import { filterNotNullish } from "src/figma_app/656233";
-import { K } from "src/905/807535";
-import { ServiceCategories as _$$e } from "src/905/165054";
-import { reportError } from "src/905/11";
-import { x } from "src/905/23221";
-import { getI18nString, renderI18nText } from "src/905/303541";
-import { FProductType, FProductAccessType, FPlanNameType } from "src/figma_app/191312";
-import { useCurrentPublicPlan } from "src/figma_app/465071";
-import { TeamType } from "src/905/814802";
-import { isFigmakeSitesEnabled } from "src/figma_app/552876";
-import { ProductAccessTypeEnum, ViewAccessTypeEnum, B6 } from "src/905/513035";
-import { N_ } from "src/905/332483";
-import { a as _$$a } from "src/905/584964";
-import { compareProductAccessOrder, getProductAccessTypeOrDefault } from "src/figma_app/765689";
-import { lG, F2 } from "src/905/389382";
+import { filterNotNullish } from "../figma_app/656233";
+import { K } from "../905/807535";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { reportError } from "../905/11";
+import { x } from "../905/23221";
+import { getI18nString, renderI18nText } from "../905/303541";
+import { FProductType, FProductAccessType, FPlanNameType } from "../figma_app/191312";
+import { useCurrentPublicPlan } from "../figma_app/465071";
+import { TeamType } from "../905/814802";
+import { isFigmakeSitesEnabled } from "../figma_app/552876";
+import { ProductAccessTypeEnum, ViewAccessTypeEnum, B6 } from "../905/513035";
+import { N_ } from "../905/332483";
+import { a as _$$a } from "../905/584964";
+import { compareProductAccessOrder, getProductAccessTypeOrDefault } from "../figma_app/765689";
+import { lG, F2 } from "../905/389382";
 let y = {
   design: ProductAccessTypeEnum.DESIGN,
   whiteboard: ProductAccessTypeEnum.FIGJAM,

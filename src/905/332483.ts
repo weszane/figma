@@ -1,5 +1,5 @@
-import { CollaboratorTypes, ProductAccessTypeEnum, ViewAccessTypeEnum, DesignTypes } from "src/905/513035";
-import { X } from "src/905/596651";
+import { CollaboratorTypes, ProductAccessTypeEnum, ViewAccessTypeEnum, DesignTypes } from "../905/513035";
+import { X } from "../905/596651";
 let $$a0 = new X([...CollaboratorTypes]).excludeUnlessFlag([ProductAccessTypeEnum.CONTENT], "billing_enable_content_seat");
 let $$s2 = new X([...Object.values(ViewAccessTypeEnum), ...CollaboratorTypes]).excludeUnlessFlag([ProductAccessTypeEnum.CONTENT], "billing_enable_content_seat");
 let $$o1 = new X([...DesignTypes]);

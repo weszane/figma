@@ -1,12 +1,12 @@
-import { Multiplayer, AppStateTsApi } from "src/figma_app/763686";
-import { clearAnalyticsStorage, trackEventAnalytics, analyticsEventManager } from "src/905/449184";
-import { NU } from "src/905/11";
-import { logInfo } from "src/905/714362";
-import { FFileType, FResourceCategoryType } from "src/figma_app/191312";
-import { FEditorType } from "src/figma_app/53721";
-import { G } from "src/figma_app/471068";
-import { n as _$$n } from "src/905/347702";
-import { _ } from "src/905/613917";
+import { Multiplayer, AppStateTsApi } from "../figma_app/763686";
+import { clearAnalyticsStorage, trackEventAnalytics, analyticsEventManager } from "../905/449184";
+import { NU } from "../905/11";
+import { logInfo } from "../905/714362";
+import { FFileType, FResourceCategoryType } from "../figma_app/191312";
+import { FEditorType } from "../figma_app/53721";
+import { G } from "../figma_app/471068";
+import { n as _$$n } from "../905/347702";
+import { _ } from "../905/613917";
 export function $$p1(e) {
   switch (e) {
     case FEditorType.Design:

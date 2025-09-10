@@ -14,7 +14,7 @@ import { dequeuePluginStatus } from '../905/571565';
 import { getFeatureFlags } from '../905/601108';
 import { logger } from '../905/651849';
 import { logInfo } from '../905/714362';
-import { Qx as _$$Qx, ZY } from '../905/764747';
+import { getArrayLength, hasKey } from '../905/764747';
 import { $A as _$$$A } from '../905/782918';
 import { validateWithNoOpVm } from '../905/816730';
 import { T as _$$T } from '../905/858738';
@@ -665,7 +665,7 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
     } else if ('manifest' in manifestSource) {
       try {
         isWidget = !!/containsWidget/.test(manifestSource.manifest!);
-      } catch { }
+      } catch {}
     }
   }
 
@@ -674,11 +674,11 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
     try {
       validateWithNoOpVm(manifest.editorType, editorTypePropType, 'manifest.editorType');
       editorType = manifest.editorType;
-    } catch { }
+    } catch {}
     try {
       validateWithNoOpVm(manifest.capabilities, capabilitiesPropType, 'manifest.capabilities');
       capabilities = manifest.capabilities;
-    } catch { }
+    } catch {}
   }
 
   // Update cached widget status
@@ -991,7 +991,7 @@ export function getPluginVersion(publishedPlugin: any): any {
  * @returns Current plugin version ID.
  */
 export function getCurrentPluginVersionId(pluginsMap: any, pluginId: string) {
-  if (ZY(pluginId)) return _$$Qx(pluginId);
+  if (hasKey(pluginId)) return getArrayLength(pluginId);
   const pluginObj = pluginsMap[pluginId] ?? {};
   // eslint-disable-next-line no-unreachable-loop
   for (const key in pluginObj) return pluginObj[key].current_plugin_version_id;
@@ -1574,7 +1574,7 @@ export function validatePublishingDataLengths(data: any): Record<string, any> {
   if (!data) return {};
   const errors: Record<string, any> = {};
   const nameLen = _$$Yp(data.name).length;
-  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long'); else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
+  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long');else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
   if (_$$Yp(data.description).length > 1e4) errors.description = getI18nString('community.publishing.description_must_be_at_most_10000_characters_long');
   if (_$$Yp(data.newVersionReleaseNotes).length > 1e4) errors.newVersionReleaseNotes = getI18nString('community.publishing.release_notes_must_be_at_most_10000_characters_long');
   if (_$$Yp(data.creatorPolicy).length > 1e4) errors.creatorPolicy = getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long');

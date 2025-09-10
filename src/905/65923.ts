@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { E } from "src/905/632989";
+import { E } from "../905/632989";
 export let $$s0 = forwardRef(({
   htmlAttributes: e,
   "aria-expanded": t = !1,

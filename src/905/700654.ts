@@ -1,7 +1,7 @@
 /* eslint-disable no-eval */
 import type { Fn } from "../../../types/global";
-import { PLUGIN_CLOSED_ERROR, PluginError, PluginWrapper } from "src/905/572400";
-import { H } from "src/905/823050";
+import { PLUGIN_CLOSED_ERROR, PluginError, PluginWrapper } from "../905/572400";
+import { H } from "../905/823050";
 
 // Generic type definitions
 export type VmErrorHandler<TError = any> = (error: TError) => void;
@@ -84,7 +84,7 @@ export class NoOpVm extends PluginWrapper {
   constructor() {
     super();
     this.vmType = "noopvm";
-    this.errorHandler = () => {};
+    this.errorHandler = () => { };
     this.executionDepth = 0;
     this[WAS_DESTROYED] = false;
     this._stats = null;
@@ -283,7 +283,7 @@ export class NoOpVm extends PluginWrapper {
   }
 
   newPrototype(name: string): INoOpVm<object> | undefined {
-    if (!this.canEval) return wrapHandle(this, function () {}.prototype);
+    if (!this.canEval) return wrapHandle(this, function () { }.prototype);
     const result = this.evalTrustedCode(`(function ${name}() {}).prototype`);
     if (result.type !== "SUCCESS") throw new Error("Internal eval error");
     return result.handle;
@@ -294,8 +294,8 @@ export class NoOpVm extends PluginWrapper {
   }
 
   newPromise<T = any>(): PromiseHandlers<T> {
-    let resolve: (v: any) => void = () => {};
-    let reject: (e: any) => void = () => {};
+    let resolve: (v: any) => void = () => { };
+    let reject: (e: any) => void = () => { };
     const promise = new Promise<T>((res, rej) => {
       resolve = res;
       reject = rej;
@@ -427,7 +427,7 @@ export class NoOpVm extends PluginWrapper {
     return this.evalTopLevelCode(code);
   }
 
-  setAbortHandler(_handler: VmErrorHandler): void {}
+  setAbortHandler(_handler: VmErrorHandler): void { }
   setErrorHandler(handler: VmErrorHandler): void {
     this.errorHandler = handler;
   }
@@ -448,8 +448,8 @@ export class NoOpVm extends PluginWrapper {
     return this[WAS_DESTROYED];
   }
 
-  retainHandle(_handle: INoOpVm<any>): void {}
-  releaseHandle(_handle: INoOpVm<any>): void {}
+  retainHandle(_handle: INoOpVm<any>): void { }
+  releaseHandle(_handle: INoOpVm<any>): void { }
 }
 
 export class ScopedNoOpVm extends NoOpVm {
