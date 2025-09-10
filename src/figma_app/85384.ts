@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { sessionLocalIDToString, parseSessionLocalID, isValidSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -139,7 +139,7 @@ export function $$y5({
   return "ON_CLICK" === normalizeValue(e) && 1 === t.length && void 0 !== t.find(e => e.connectionURL || "NAVIGATE" === e.navigationType) || getFeatureFlags().sts_links_v2 && t.find(e => $$E4(e));
 }
 export function $$b1(e, t) {
-  return e?.type === t?.type && (e?.type === "cms_link_field_alias" && t?.type === "cms_link_field_alias" ? e.collectionId === t.collectionId && e.fieldId === t.fieldId && e.fieldName === t.fieldName : e?.type === "internal_cms_item_page_item" && t?.type === "internal_cms_item_page_item" ? e.fieldSchemaId === t.fieldSchemaId && e.id === t.id : c2(e, t));
+  return e?.type === t?.type && (e?.type === "cms_link_field_alias" && t?.type === "cms_link_field_alias" ? e.collectionId === t.collectionId && e.fieldId === t.fieldId && e.fieldName === t.fieldName : e?.type === "internal_cms_item_page_item" && t?.type === "internal_cms_item_page_item" ? e.fieldSchemaId === t.fieldSchemaId && e.id === t.id : deepEqual(e, t));
 }
 export const Kd = $$m0;
 export const MR = $$b1;

@@ -1,6 +1,6 @@
-import { memoizeByArgs } from "../figma_app/815945";
-import { logInfo } from "../905/714362";
-import { getI18nString } from "../905/303541";
+import { memoizeByArgs } from "src/figma_app/815945";
+import { logInfo } from "src/905/714362";
+import { getI18nString } from "src/905/303541";
 export function $$s0(e, t, i) {
   return e ? {
     userId: e.id,

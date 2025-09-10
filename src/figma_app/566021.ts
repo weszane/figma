@@ -9,7 +9,7 @@ import { useMemo, useState, useRef, useCallback, useId } from "react";
 import { $n } from "../905/521428";
 import { e as _$$e } from "../figma_app/763473";
 import { At } from "../905/973142";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
 import { permissionScopeHandler } from "../905/189185";
 import { trackEventAnalytics } from "../905/449184";
@@ -259,7 +259,7 @@ function G(e) {
     });
   }, [h]);
   let T = useCallback(e => {
-    for (let t of h) c2(t.symbolLinks, e) || (t.symbolLinks = e);
+    for (let t of h) deepEqual(t.symbolLinks, e) || (t.symbolLinks = e);
     let {
       componentKeys,
       updatedNodeIds
@@ -355,7 +355,7 @@ function er({
   recordingKey: l
 }) {
   var d;
-  let [c, , u] = _$$t2.useTabs(ee, {
+  let [c,, u] = _$$t2.useTabs(ee, {
     defaultActive: (d = t ?? [], !o || isInvalidValue(e) || e.length > 0 || d.length > 0 ? "selected_variant" : "component_set"),
     recordingKey: l ?? "variantDocumentationMenu"
   });

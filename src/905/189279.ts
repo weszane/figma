@@ -1,5 +1,5 @@
-import { getFeatureFlags } from "../905/601108";
-import { desktopAPIInstance } from "../figma_app/876459";
+import { getFeatureFlags } from "src/905/601108";
+import { desktopAPIInstance } from "src/figma_app/876459";
 let $$a0 = {
   getFeatureFlags: () => getFeatureFlags(),
   desktopAppGetAPIVersion: () => desktopAPIInstance ? desktopAPIInstance.getVersion() : 0

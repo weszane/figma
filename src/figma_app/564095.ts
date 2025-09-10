@@ -1,5 +1,5 @@
-import { XHR } from "../905/910117";
-import { KH } from "../figma_app/471982";
+import { XHR } from "src/905/910117";
+import { KH } from "src/figma_app/471982";
 export function $$a1(e, t) {
   return !!e && !!e.plugin_publishers?.pending?.some(e => e.id === t);
 }

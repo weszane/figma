@@ -6,7 +6,7 @@ import { debugState } from "../905/407919";
 import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { M1 } from "../905/777093";
 import { UD } from "../figma_app/624361";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Ct } from "../figma_app/205280";
 import { LE } from "../figma_app/427737";
 import { FF } from "../905/556648";
@@ -249,7 +249,7 @@ class v {
 async function A(e, t) {
   return await LE(Object.entries(t ?? {}).filter(([e, t]) => "-1:-1" !== t).map(([e, t]) => t).concat([e]), !1, !1, !0);
 }
-let x = Wh(() => atom({}));
+let x = setupRemovableAtomFamily(() => atom({}));
 export async function $$N0() {
   let e = FontHelpers?.getLocalTextStyleFontInfo();
   if (!e) return "";

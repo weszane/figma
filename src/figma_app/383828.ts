@@ -4,10 +4,10 @@ import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { uO } from "../figma_app/933328";
-import { Qx, Jl } from "../figma_app/80990";
+import { memoizedProcessComponentsAndStateGroups, processLocalComponents } from "../figma_app/80990";
 import { iP, nJ } from "../figma_app/646357";
-import { kH, ke, In } from "../905/309735";
-import { PW } from "../figma_app/633080";
+import { getBasename, splitPath, getDirname } from "../905/309735";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { D } from "../figma_app/335489";
 import { cP, kz, zb } from "../figma_app/264776";
@@ -34,7 +34,7 @@ export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
       separator: !1,
       recordingKey: e.name,
       isChecked: e.node_id === selectedItem.node_id,
-      displayText: kH(e.name)
+      displayText: getBasename(e.name)
     }));
     sortByWithOptions(o, e => `${e.displayText}-${e.args.componentOrStateGroup?.node_id || ""}`);
     return o;
@@ -99,7 +99,7 @@ export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
   }(g, r, s, d, l, c, "swapVariants"));
   return E;
 }
-let b = e => null == e || e.type === PW.STATE_GROUP ? null : e?.containing_frame?.containingStateGroup?.nodeId || null;
+let b = e => null == e || e.type === PrimaryWorkflowEnum.STATE_GROUP ? null : e?.containing_frame?.containingStateGroup?.nodeId || null;
 export function $$T3(e, t, r) {
   if (!e) return {
     selectedItem: null,
@@ -108,7 +108,7 @@ export function $$T3(e, t, r) {
   };
   let n = QL(e, r);
   if (!n) return function (e, t) {
-    let r = Qx(t);
+    let r = memoizedProcessComponentsAndStateGroups(t);
     let n = t.local.components[e] ?? t.local.stateGroups[e];
     let i = b(n);
     let a = i ? r[i] : n;
@@ -133,7 +133,7 @@ export function $$T3(e, t, r) {
     team_id: o?.team_id ?? null
   });
   let p = {
-    ...Jl(l),
+    ...processLocalComponents(l),
     ...u
   };
   let _ = function (e, t) {
@@ -148,9 +148,9 @@ export function $$T3(e, t, r) {
   };
 }
 function I(e, t) {
-  if (!e || !e.containing_frame?.nodeId && 1 === ke(e.name).length) return [];
-  let r = In(e.name);
-  return t.filter(t => nJ(t.containing_frame, e?.containing_frame) && In(t.name) === r);
+  if (!e || !e.containing_frame?.nodeId && 1 === splitPath(e.name).length) return [];
+  let r = getDirname(e.name);
+  return t.filter(t => nJ(t.containing_frame, e?.containing_frame) && getDirname(t.name) === r);
 }
 export function $$S2(e, t, r, n, i, a, s) {
   $$v4(e, t, r, Object.keys(n), i, a, s);
@@ -158,7 +158,7 @@ export function $$S2(e, t, r, n, i, a, s) {
 export function $$v4(e, t, r, n, a, s, d, c) {
   if (e) {
     if (Oo(e, r)) {
-      if (e.type === PW.COMPONENT) {
+      if (e.type === PrimaryWorkflowEnum.COMPONENT) {
         let t = e.node_id;
         Fullscreen.replaceSymbolBackingInstances({
           [t]: n

@@ -7,47 +7,99 @@ import { canAccessFullDevMode } from '../figma_app/473493'
 import { isDevModeFocusViewCopyActive } from '../figma_app/544649'
 import { isInteractionPathCheck } from '../figma_app/897289'
 
-export function $$p6() {
-  let e = debugState.getState()
-  let t = _$$s(e)
-  t || e.selectedView || logWarning('plugins', 'selectedView is invalid')
-  return t
+/**
+ * Original name: $$p6
+ * Retrieves the selected view from the debug state.
+ * Logs a warning if the selected view is invalid.
+ * @returns The selected view or undefined.
+ */
+export const getSelectedView = (): any => {
+  const state = debugState.getState()
+  const selectedView = _$$s(state)
+  if (!selectedView && !state.selectedView) {
+    logWarning('plugins', 'selectedView is invalid')
+  }
+  return selectedView
 }
-export function $$m3() {
-  let e = debugState.getState()
-  return e.openFile?.key
+
+/**
+ * Original name: $$m3
+ * Retrieves the key of the open file from the debug state.
+ * @returns The file key or undefined.
+ */
+export const getOpenFileKey = (): string | undefined => {
+  const state = debugState.getState()
+  return state.openFile?.key
 }
-export function $$h1() {
-  let e = debugState.getState()
-  return canRunExtensions(e)
+
+/**
+ * Original name: $$h1
+ * Checks if extensions can be run based on the debug state.
+ * @param state The debug state.
+ * @returns True if extensions can be run.
+ */
+export const checkCanRunExtensions = (state: any): boolean => {
+  return canRunExtensions(state)
 }
-export function $$g7() {
-  if (getInitialOptions().e2e_traffic || isInteractionPathCheck())
-    return !0
-  let e = debugState.getState()
-  return canPerformAction(e) && canRunExtensions(e)
+
+/**
+ * Original name: $$g7
+ * Determines if an action can be performed, considering E2E traffic or interaction path.
+ * @returns True if the action can be performed.
+ */
+export const canPerformActionCheck = (): boolean => {
+  if (getInitialOptions().e2e_traffic || isInteractionPathCheck()) {
+    return true
+  }
+  const state = debugState.getState()
+  return canPerformAction(state) && canRunExtensions(state)
 }
-export function $$f2() {
-  return debugState.getState().currentUserOrgId || void 0
+
+/**
+ * Original name: $$f2
+ * Retrieves the current user organization ID from the debug state.
+ * @returns The organization ID or undefined.
+ */
+export const getCurrentUserOrgId = (): string | undefined => {
+  return debugState.getState().currentUserOrgId || undefined
 }
-export function $$_8() {
+
+/**
+ * Original name: $$_8
+ * Determines the plugin development mode based on the debug state.
+ * @returns 'realms' or 'cppvm'.
+ */
+export const getPluginDevMode = (): 'realms' | 'cppvm' => {
   return debugState.getState().mirror.appModel.useRealmsForPluginDev ? 'realms' : 'cppvm'
 }
-export function $$A0() {
-  let e = debugState.getState().openFile
-  return !!e && !isExportRestricted(e)
+
+/**
+ * Original name: $$A0
+ * Checks if the open file can be exported (exists and not restricted).
+ * @returns True if export is allowed.
+ */
+export const canExportFile = (): boolean => {
+  const openFile = debugState.getState().openFile
+  return !!openFile && !isExportRestricted(openFile)
 }
-let $$y4 = () => {
-  let e = debugState.getState()
-  return canAccessFullDevMode(e)
+
+/**
+ * Original name: $$y4
+ * Checks if full dev mode can be accessed based on the debug state.
+ * @returns True if full dev mode is accessible.
+ */
+export const accessFullDevMode = (): boolean => {
+  const state = debugState.getState()
+  return canAccessFullDevMode(state)
 }
-let $$b5 = (isDevModeFocusViewCopyActive)
-export const CQ = $$A0
-export const Fr = $$h1
-export const I = $$f2
-export const YR = $$m3
-export const fb = $$y4
-export const np = $$b5
-export const o8 = $$p6
-export const op = $$g7
-export const r_ = $$_8
+
+export const CQ = canExportFile
+export const Fr = checkCanRunExtensions
+export const I = getCurrentUserOrgId
+export const YR = getOpenFileKey
+export const fb = accessFullDevMode
+export const np = isDevModeFocusViewCopyActive
+export const o8 = getSelectedView
+export const op = canPerformActionCheck
+export const r_ = getPluginDevMode
+export { isDevModeFocusViewCopyActive }

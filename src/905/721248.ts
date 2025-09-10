@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, memo, useState, useEffect, Component, useRef, useCallback, cloneElement, createContext, Suspense, useLayoutEffect, Fragment as _$$Fragment, useContext, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import o, { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -98,7 +98,7 @@ import { R as _$$R } from "../905/307199";
 import { k as _$$k2 } from "../905/443820";
 import { A as _$$A8 } from "../5724/267849";
 import { yG } from "../905/859698";
-import { dI as _$$dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import { Ez } from "../figma_app/766708";
 import { rY as _$$rY } from "../figma_app/394327";
 import { f as _$$f } from "../905/167712";
@@ -1754,7 +1754,7 @@ function tQ({
 function tJ(e, t) {
   for (let i of e) for (let e of i.variableDataValues?.entries ?? []) if (e.variableData?.dataType === "ALIAS") {
     let i = e.variableData.value?.alias;
-    i && e.modeID && t(_$$dI(i), sessionLocalIDToString(e.modeID));
+    i && e.modeID && t(convertKiwiToVariableIdString(i), sessionLocalIDToString(e.modeID));
   }
 }
 function t0(e, t, i, n) {
@@ -2084,7 +2084,7 @@ function iO({
     case "ALIAS":
       assertNotNullish(e.value?.alias);
       return jsx(iD, {
-        variableID: _$$dI(e.value.alias),
+        variableID: convertKiwiToVariableIdString(e.value.alias),
         modeID: sessionLocalIDToString(t),
         aliasCache: i
       });
@@ -4146,7 +4146,7 @@ function nY({
       key: "name-r",
       name: t?.displayNode.name
     })));
-    c2(r, a) || (i.push(l({
+    deepEqual(r, a) || (i.push(l({
       key: "mode-l",
       modes: r
     })), n.push(l({
@@ -5571,7 +5571,7 @@ let rP = (e, t) => {
   if (!i && !n || !e) return !1;
   let r = e.buggedConflictingGUIDs.sort() || [];
   let a = e.identicalChunkGUIDs.sort() || [];
-  let o = c2(r, a);
+  let o = deepEqual(r, a);
   return r.length > 0 && !o;
 };
 function rO({

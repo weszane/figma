@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Xu } from "../figma_app/588582";
 import { gZ } from "../figma_app/952035";
 import { GC } from "../figma_app/791586";
-let $$u0 = Wh(() => atom(""));
-let x = Wh(() => atom([]));
+let $$u0 = setupRemovableAtomFamily(() => atom(""));
+let x = setupRemovableAtomFamily(() => atom([]));
 export function $$m2() {
   atomStoreManager.set(x, []);
 }

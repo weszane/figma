@@ -15,7 +15,7 @@ import { sf } from "../905/929976";
 import { E3 } from "../figma_app/976749";
 import { TY, Ht } from "../figma_app/701001";
 import { Wy, xk, P3, Zz, Tm, Vu, eE, pl, im } from "../figma_app/952446";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { FEditorType } from "../figma_app/53721";
 import { $w } from "../figma_app/453508";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -112,7 +112,7 @@ export function $$R0(e) {
     })]
   });
 }
-let M = Wh(() => atom(Wy.SAFE));
+let M = setupRemovableAtomFamily(() => atom(Wy.SAFE));
 export function $$P1(e) {
   let t = useDispatch();
   let {
@@ -131,7 +131,7 @@ export function $$P1(e) {
       e ? t(hideModal()) : t(showModalHandler({
         type: gG,
         data: {
-          markModalClosed: () => { }
+          markModalClosed: () => {}
         }
       }));
     }, [t, e]);

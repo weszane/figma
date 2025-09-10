@@ -1,64 +1,157 @@
-import { z } from "../905/239603";
-import { logError } from "../905/714362";
-import { FAnimationEffectType, FNodeType, FAnimationTriggerType } from "../figma_app/191312";
-import { Zx } from "../905/497152";
-function o(e, {
-  assetId: t,
-  version: i,
-  type: n,
-  name: a,
-  userFacingVersion: o
-}) {
-  Zx(n) !== e && logError("design-systems", "Expected asset types to match", {
-    actual: Zx(n),
-    expected: e
-  });
+import { z } from "zod";
+import { logError } from "src/905/714362";
+import { FAnimationEffectType, FNodeType, FAnimationTriggerType } from "src/figma_app/191312";
+import { mapFacetTypeToString } from "src/905/497152";
+import { FacetType } from "src/figma_app/175377";
+
+/**
+ * AssetBaseParams type for asset base properties.
+ */
+export type AssetBaseParams = {
+  assetId: string;
+  version: string;
+  type: FacetType;
+  name: string;
+  userFacingVersion: string;
+};
+
+/**
+ * Creates a base asset object and validates type.
+ * @param expectedType - Expected asset type string.
+ * @param params - AssetBaseParams object.
+ * @returns Asset base object.
+ */
+// o
+export function createAssetBase(
+  expectedType: string,
+  params: AssetBaseParams
+) {
+  if (mapFacetTypeToString(params.type) !== expectedType) {
+    logError("design-systems", "Expected asset types to match", {
+      actual: mapFacetTypeToString(params.type),
+      expected: expectedType
+    });
+  }
   return {
-    type: e,
-    assetId: t,
-    name: a,
-    version: i,
-    userFacingVersion: o
+    type: expectedType,
+    assetId: params.assetId,
+    name: params.name,
+    version: params.version,
+    userFacingVersion: params.userFacingVersion
   };
 }
-export function $$l5(e, t) {
-  return t.localFields ? {
-    ...o(e, t),
+
+/**
+ * LocalAssetFields type for local asset fields.
+ */
+export type LocalAssetFields = {
+  keyForPublish: string;
+  isPublishable?: boolean;
+  isSoftDeleted?: boolean;
+  localGuid?: string;
+  containingFrame?: unknown;
+  mainThumbnailInfo?: unknown;
+};
+
+/**
+ * AssetParams type for asset parameters.
+ */
+export type AssetParams = AssetBaseParams & {
+  localFields?: LocalAssetFields;
+  subscribedFields?: { key: string };
+};
+
+/**
+ * Returns local asset object if localFields exist, else logs error.
+ * @param expectedType - Expected asset type string.
+ * @param params - AssetParams object.
+ * @returns Local asset object or null.
+ */
+// $$l5
+export function getLocalAsset(expectedType: string, params: AssetParams) {
+  if (!params.localFields) {
+    logError("design-systems", "Expected localFields on local asset");
+    return null;
+  }
+  return {
+    ...createAssetBase(expectedType, params),
     subscriptionStatus: "LOCAL",
-    keyForPublish: t.localFields.keyForPublish,
-    isPublishable: !!t.localFields.isPublishable,
-    isSoftDeleted: !!t.localFields.isSoftDeleted,
-    localGuid: t.localFields.localGuid,
-    containingFrame: t.localFields.containingFrame,
-    mainThumbnailInfo: t.localFields.mainThumbnailInfo
-  } : (logError("design-systems", "Expected localFields on local asset"), null);
+    keyForPublish: params.localFields.keyForPublish,
+    isPublishable: !!params.localFields.isPublishable,
+    isSoftDeleted: !!params.localFields.isSoftDeleted,
+    localGuid: params.localFields.localGuid,
+    containingFrame: params.localFields.containingFrame,
+    mainThumbnailInfo: params.localFields.mainThumbnailInfo
+  };
 }
-export function $$d4(e, t) {
-  return t.subscribedFields ? {
-    ...o(e, t),
+
+/**
+ * Returns subscribed asset object if subscribedFields exist, else logs error.
+ * @param expectedType - Expected asset type string.
+ * @param params - AssetParams object.
+ * @returns Subscribed asset object or null.
+ */
+// $$d4
+export function getSubscribedAsset(expectedType: string, params: AssetParams) {
+  if (!params.subscribedFields) {
+    logError("design-systems", "Expected subscribedFields on subscribed asset");
+    return null;
+  }
+  return {
+    ...createAssetBase(expectedType, params),
     subscriptionStatus: "SUBSCRIBED",
-    key: t.subscribedFields.key
-  } : (logError("design-systems", "Expected subscribedFields on subscribed asset"), null);
+    key: params.subscribedFields.key
+  };
 }
-export function $$c2(e, t, i) {
-  return `/api/file_proxy/library_asset/${e}/${t}/canvas?ver=${i}`;
+
+/**
+ * Generates canvas URL for library asset.
+ * @param assetType - Asset type string.
+ * @param assetId - Asset ID string.
+ * @param version - Version string.
+ * @returns Canvas URL string.
+ */
+// $$c2
+export function getLibraryAssetCanvasUrl(assetType: string, assetId: string, version: string) {
+  return `/api/file_proxy/library_asset/${assetType}/${assetId}/canvas?ver=${version}`;
 }
-export function $$u1(e, t, i) {
-  return `/library/asset/${e}/${t}/thumbnail?ver=${i}`;
+
+/**
+ * Generates thumbnail URL for library asset.
+ * @param assetType - Asset type string.
+ * @param assetId - Asset ID string.
+ * @param version - Version string.
+ * @returns Thumbnail URL string.
+ */
+// $$u1
+export function getLibraryAssetThumbnailUrl(assetType: string, assetId: string, version: string) {
+  return `/library/asset/${assetType}/${assetId}/thumbnail?ver=${version}`;
 }
-let p = z.object({});
-let m = z.object({
-  backgroundColor: z.string().nullable().$$default(null),
-  pageName: z.string().nullable().$$default(null),
-  pageId: z.string().nullable().$$default(null),
-  name: z.string().nullable().$$default(null),
-  nodeId: z.string().nullable().$$default(null),
-  sortPosition: z.string().nullable().$$default(null),
-  containingStateGroup: p.nullable().$$default(null)
+
+// p
+const emptyObjectSchema = z.object({});
+
+// m
+const containingFrameSchema = z.object({
+  backgroundColor: z.string().nullable().default(null),
+  pageName: z.string().nullable().default(null),
+  pageId: z.string().nullable().default(null),
+  name: z.string().nullable().default(null),
+  nodeId: z.string().nullable().default(null),
+  sortPosition: z.string().nullable().default(null),
+  containingStateGroup: emptyObjectSchema.nullable().default(null)
 });
-export function $$h0(e, t = z.object({})) {
+
+/**
+ * Returns a Zod schema for a library asset.
+ * @param assetType - Asset type string.
+ * @param extraSchema - Additional Zod schema to merge.
+ * @returns Zod schema.
+ */
+// $$h0
+export function getLibraryAssetSchema(assetType: string, extraSchema = z.object({})) {
   return z.object({
-    asset_type: z.literal(e),
+    asset_type: z.literal(assetType),
     name: z.string(),
     version: z.string(),
     user_facing_version: z.string(),
@@ -68,7 +161,7 @@ export function $$h0(e, t = z.object({})) {
     canvas_url: z.string(),
     thumbnail_url: z.string().nullable(),
     checkpoint_id: z.string(),
-    containing_frame: m,
+    containing_frame: containingFrameSchema,
     main_node_width: z.number(),
     main_node_height: z.number(),
     updated_at: z.coerce.date(),
@@ -78,11 +171,19 @@ export function $$h0(e, t = z.object({})) {
       applicable_node_types: z.array(z.nativeEnum(FNodeType)).nullable(),
       category: z.nativeEnum(FAnimationTriggerType).nullable()
     }).nullable()
-  }).merge(t);
+  }).merge(extraSchema);
 }
-export function $$g3(e, t = z.object({})) {
+
+/**
+ * Returns a Zod schema for a subscribed asset.
+ * @param assetType - Asset type string.
+ * @param extraSchema - Additional Zod schema to merge.
+ * @returns Zod schema.
+ */
+// $$g3
+export function getSubscribedAssetSchema(assetType: string, extraSchema = z.object({})) {
   return z.object({
-    asset_type: z.literal(e),
+    asset_type: z.literal(assetType),
     key: z.string(),
     version: z.string(),
     user_facing_version: z.string(),
@@ -92,16 +193,18 @@ export function $$g3(e, t = z.object({})) {
     file_checkpoint_id: z.string(),
     checkpoint_id: z.string(),
     canvas_url: z.string(),
-    containing_frame: m,
+    containing_frame: containingFrameSchema,
     main_node_width: z.number(),
     main_node_height: z.number(),
     updated_at: z.coerce.date(),
     created_at: z.coerce.date()
-  }).merge(t);
+  }).merge(extraSchema);
 }
-export const $B = $$h0;
-export const EU = $$u1;
-export const IV = $$c2;
-export const Jw = $$g3;
-export const nV = $$d4;
-export const oz = $$l5;
+
+// Exported names refactored to match new function names
+export const $B = getLibraryAssetSchema;
+export const EU = getLibraryAssetThumbnailUrl;
+export const IV = getLibraryAssetCanvasUrl;
+export const Jw = getSubscribedAssetSchema;
+export const nV = getSubscribedAsset;
+export const oz = getLocalAsset;

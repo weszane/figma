@@ -11,7 +11,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { LibraryDataByLibraryKey } from "../figma_app/43951";
 import { Qp as _$$Qp, SS, KC } from "../figma_app/349248";
 import { C9, jf } from "../figma_app/141508";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { r as _$$r } from "../905/336143";
 import { VJ, Kw } from "../905/610995";
 import { MV, px, q, VV, $l, RJ } from "../905/131786";
@@ -98,8 +98,8 @@ export function $$S0(e) {
     let b = n[e];
     if (!b) return;
     for (let e of b) {
-      if (e.type === PW.VARIABLE || e.type === PW.VARIABLE_SET || e.type === PW.MODULE || i.has(e.node_id)) continue;
-      if (e.type === PW.STYLE) {
+      if (e.type === PrimaryWorkflowEnum.VARIABLE || e.type === PrimaryWorkflowEnum.VARIABLE_SET || e.type === PrimaryWorkflowEnum.MODULE || i.has(e.node_id)) continue;
+      if (e.type === PrimaryWorkflowEnum.STYLE) {
         let t = styles.find(t => compareIgnoringSpaces(t.name, e.name) && t.style_type === e.style_type);
         if (!t) continue;
         let i = Fullscreen.getNumUsagesOfStyle(e.key, r);
@@ -110,12 +110,12 @@ export function $$S0(e) {
         }))));
         continue;
       }
-      let t = e.type === PW.COMPONENT ? components : stateGroups;
-      let n = e.type === PW.COMPONENT ? stateGroups : components;
+      let t = e.type === PrimaryWorkflowEnum.COMPONENT ? components : stateGroups;
+      let n = e.type === PrimaryWorkflowEnum.COMPONENT ? stateGroups : components;
       let s = t.find(t => compareIgnoringSpaces(t.name, e.name)) ?? n.find(t => compareIgnoringSpaces(t.name, e.name));
       if (!s) continue;
-      let l = e.type === PW.COMPONENT ? e.component_key : e.key;
-      let u = e.type === PW.COMPONENT ? e.content_hash : e.version;
+      let l = e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key;
+      let u = e.type === PrimaryWorkflowEnum.COMPONENT ? e.content_hash : e.version;
       if (!l || !u) continue;
       let b = Fullscreen.getNumInstancesReferencingProductComponent(l);
       0 !== b && (A += b, p.push(RJ(l, s).then(() => o(Kk({

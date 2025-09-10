@@ -17,7 +17,7 @@ import { getObservableValue } from "../figma_app/84367";
 import { useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { fileActionEnum } from "../figma_app/630077";
 import { dF } from "../figma_app/275938";
 import { DV } from "../905/739964";
@@ -90,7 +90,7 @@ export function $$D4(e, t) {
 export function $$M2(e) {
   let t = useAtomWithSubscription(yE);
   if (!useSelector(e => e?.mirror?.appModel?.currentTool === DesignGraphElements.SHAPE_WHITEBOARD_PLATFORM) || !t) return !1;
-  let i = e.type === PW.COMPONENT ? e.component_key : e.key;
+  let i = e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key;
   let r = e.type;
   let l = e.userFacingVersion.toString();
   return e.library_key === t.libraryKey && l === t.assetVersion && i === t.assetKey && r === t.assetType;

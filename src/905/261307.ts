@@ -16,7 +16,7 @@ import { VisualBellActions } from "../905/302958";
 import { Y as _$$Y } from "../905/830372";
 import { RR } from "../figma_app/307841";
 import { k as _$$k2 } from "../figma_app/618031";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
@@ -41,7 +41,7 @@ export let $$O0 = registerModal(function ({
   planDataForSocialProof: j
 }) {
   let U = useDispatch();
-  let B = _$$u();
+  let B = getRumLoggingConfig();
   let V = RR({
     preferOpenFilePlan: !0
   });

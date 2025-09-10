@@ -1,11 +1,11 @@
-import { isEmptyObject } from "../figma_app/493477";
-import { PrototypingTsApi } from "../figma_app/763686";
-import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
-import { getFeatureFlags } from "../905/601108";
-import { customHistory } from "../905/612521";
-import { parseQuery, serializeQuery } from "../905/634134";
-import { EO } from "../905/691205";
-import { FFileType } from "../figma_app/191312";
+import { isEmptyObject } from "src/figma_app/493477";
+import { PrototypingTsApi } from "src/figma_app/763686";
+import { isValidSessionLocalID, parseSessionLocalID } from "src/905/871411";
+import { getFeatureFlags } from "src/905/601108";
+import { customHistory } from "src/905/612521";
+import { parseQuery, serializeQuery } from "src/905/634134";
+import { EO } from "src/905/691205";
+import { FFileType } from "src/figma_app/191312";
 export function $$u3(e, t, r, n, s) {
   let c = {};
   let u = parseQuery(customHistory.location.search);

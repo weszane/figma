@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { memoizeByArgs } from "../figma_app/815945";
-import { cZ } from "../figma_app/272902";
+import { memoizeByArgs } from "src/figma_app/815945";
+import { cZ } from "src/figma_app/272902";
 import s from "classnames";
-import { parsePxNumber } from "../figma_app/783094";
-import { BrowserInfo } from "../figma_app/778880";
-import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
-import { ZR, s4 } from "../figma_app/8833";
-import { scrollBarXHeight, trackPadding, scrollBarYWidth } from "../figma_app/786175";
+import { parsePxNumber } from "src/figma_app/783094";
+import { BrowserInfo } from "src/figma_app/778880";
+import { RecordingComponent, handleMouseEvent } from "src/figma_app/878298";
+import { ZR, s4 } from "src/figma_app/8833";
+import { scrollBarXHeight, trackPadding, scrollBarYWidth } from "src/figma_app/786175";
 var o = s;
 var m = (e => (e.VERTICAL = "vertical", e.HORIZONTAL = "horizontal", e))(m || {});
 export class $$h0 extends RecordingComponent {

@@ -7,7 +7,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
-import { F_ } from "../figma_app/191804";
+import { colorToHexString } from "../figma_app/191804";
 import { generateUUIDv4 } from "../905/871474";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -332,12 +332,12 @@ function $({
       value: r,
       paletteType: i < o ? "base" : "baseLight",
       background: "dark",
-      selectionState: e && F_(e) === F_(r) ? "selected" : "unselected",
+      selectionState: e && colorToHexString(e) === colorToHexString(r) ? "selected" : "unselected",
       onClick: () => {
         t(r);
       },
-      recordingKey: generateRecordingKey("whiteboardStrokeControl", "strokeSelectorOption", F_(r))
-    }, F_(r))), getFeatureFlags().figjam_fixjam_colors ? jsx(_$$v, {
+      recordingKey: generateRecordingKey("whiteboardStrokeControl", "strokeSelectorOption", colorToHexString(r))
+    }, colorToHexString(r))), getFeatureFlags().figjam_fixjam_colors ? jsx(_$$v, {
       isOpen: g,
       onColorChange: t,
       color: e ?? {

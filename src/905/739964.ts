@@ -25,7 +25,7 @@ import { Y as _$$Y } from "../905/830372";
 import { Jh } from "../figma_app/441925";
 import { sx as _$$sx } from "../figma_app/307841";
 import { BC } from "../figma_app/149367";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { fu } from "../figma_app/831799";
 import { cw, Fq, I8, yF, vu, jv, vK } from "../905/84777";
 import { h as _$$h } from "../905/864281";
@@ -601,7 +601,7 @@ function ec(e) {
     let [r] = handleSuspenseRetainRelease(n);
     return e === _$$F2.Plan.STARTER ? LN() : r.data || LN();
   }(currentPlan, Y);
-  let Z = _$$u();
+  let Z = getRumLoggingConfig();
   return jsx(fu, {
     name: j,
     properties: {

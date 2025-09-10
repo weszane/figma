@@ -21,7 +21,7 @@ import { vq } from "../905/8732";
 import { FU, b$, Bs } from "../figma_app/933328";
 import { T1 } from "../905/711212";
 import { pi } from "../figma_app/314264";
-import { zR, r2 } from "../figma_app/80990";
+import { getAssetBackgroundColor, generateNodeThumbnail } from "../figma_app/80990";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
 import { V as _$$V, q as _$$q } from "../figma_app/473391";
@@ -45,7 +45,7 @@ import { useSyncedRef } from "../905/633914";
 import { Av, dx } from "../figma_app/646357";
 import { H as _$$H } from "../905/216861";
 import { e_ as _$$e_ } from "../figma_app/803787";
-import { PW, AT } from "../figma_app/633080";
+import { PrimaryWorkflowEnum, SubscriptionStatusEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { registerModal } from "../905/102752";
 import { CK } from "../figma_app/517115";
@@ -80,7 +80,7 @@ import { B as _$$B } from "../905/714743";
 import { b as _$$b2 } from "../1528/176770";
 import { x as _$$x2 } from "../1528/887790";
 import { T3, q0 } from "../figma_app/722362";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { Ib } from "../905/129884";
 import { O2 } from "../figma_app/164212";
 import { Y as _$$Y2 } from "../905/411989";
@@ -376,7 +376,7 @@ function e4({
   }, [e.asset, a]);
   let p = _$$S(e.asset);
   let h = _$$Y2(e.asset);
-  let m = useMemo(() => kH(e.asset.name ?? ""), [e.asset.name]);
+  let m = useMemo(() => getBasename(e.asset.name ?? ""), [e.asset.name]);
   let g = useRef(null);
   let f = NG({
     text: m,
@@ -554,7 +554,7 @@ function ts({
     sectionDepth: o
   });
   let p = useMemo(() => {
-    let e = zR(t.asset, null);
+    let e = getAssetBackgroundColor(t.asset, null);
     if (null != e) return _$$F.format(e);
   }, [t.asset]);
   let h = tr(t.hasChangesToReset, t.nodeData?.modeData ?? null);
@@ -706,16 +706,16 @@ export function $$tu1({
   useEffect(() => {
     if (!dx(e) || !e.isLocal) return;
     let t = e.node_id ? eh[e.node_id] : null;
-    let s = e.type === PW.COMPONENT ? e.content_hash : e.version;
+    let s = e.type === PrimaryWorkflowEnum.COMPONENT ? e.content_hash : e.version;
     t?.content_hash !== s && requestAnimationFrame(() => {
-      let t = r2(e.node_id);
+      let t = generateNodeThumbnail(e.node_id);
       null != t && ep(T1({
         thumbnails: [{
           nodeId: e.node_id,
           url: t,
           type: e.type
         }],
-        styleKind: AT.LOCAL
+        styleKind: SubscriptionStatusEnum.LOCAL
       }));
     });
   }, [e, ep, eh]);
@@ -742,13 +742,13 @@ export function $$tu1({
       useSmartPositioning: !0,
       fromPlayground: K.data
     };
-    e.type === PW.COMPONENT ? (ep(FU({
+    e.type === PrimaryWorkflowEnum.COMPONENT ? (ep(FU({
       item: e,
       ...n
-    })), ea && eo(!0)) : e.type === PW.STATE_GROUP ? ep(b$({
+    })), ea && eo(!0)) : e.type === PrimaryWorkflowEnum.STATE_GROUP ? ep(b$({
       item: e,
       ...n
-    })) : e.type === PW.MODULE && ep(Bs({
+    })) : e.type === PrimaryWorkflowEnum.MODULE && ep(Bs({
       item: e,
       ...n,
       insertionCallback: () => fullscreenValue.triggerAction("commit")

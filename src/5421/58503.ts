@@ -8,7 +8,7 @@ import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { KD } from "../figma_app/975811";
 import { Um } from "../905/848862";
-import { rt } from "../figma_app/615482";
+import { createTrackedAtom } from "../figma_app/615482";
 import { Q7 } from "../905/203369";
 import { l6, c$ } from "../905/794875";
 var g = (e => (e.ANDROID_COMPACT = "ANDROID_COMPACT", e.ANDROID_MEDIUM = "ANDROID_MEDIUM", e.CUSTOM = "CUSTOM", e.IPHONE_16 = "IPHONE_16", e.IPHONE_16_PRO = "IPHONE_16_PRO", e.IPHONE_16_PRO_MAX = "IPHONE_16_PRO_MAX", e.IPHONE_16_PLUS = "IPHONE_16_PLUS", e.IPHONE_SE = "IPHONE_SE", e))(g || {});
@@ -47,11 +47,11 @@ let $$y2 = {
   }
 };
 let f = "IPHONE_16";
-let $$_8 = rt(!1);
-let b = rt(f);
-let $$v5 = rt($$y2[f].height || 852);
-let $$I10 = rt($$y2[f].width || 393);
-let $$C9 = rt(1);
+let $$_8 = createTrackedAtom(!1);
+let b = createTrackedAtom(f);
+let $$v5 = createTrackedAtom($$y2[f].height || 852);
+let $$I10 = createTrackedAtom($$y2[f].width || 393);
+let $$C9 = createTrackedAtom(1);
 export function $$E0() {
   let e = Xr($$_8);
   let t = Xr(b);

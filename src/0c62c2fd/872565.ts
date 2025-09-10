@@ -59,7 +59,7 @@ import { createOptimistThunk } from "../905/350402";
 import { S$, XX } from "../figma_app/345997";
 import { KH } from "../905/81982";
 import { NU } from "../905/163189";
-import { Tb } from "../figma_app/633080";
+import { getDraftsSidebarString } from "../figma_app/633080";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { s as _$$s3 } from "../905/573154";
 import { Dw } from "../figma_app/976345";
@@ -200,7 +200,7 @@ let ej = (e, t = !1) => {
     let i = s.teamId ? e.teams[s.teamId] : null;
     ey(s, i, e.user, t, e.orgId) && (VA(s) && (s = {
       ...s,
-      path: Tb()
+      path: getDraftsSidebarString()
     }), r.push(s));
   });
   ev.set(r.map(t => {

@@ -4,21 +4,21 @@ import { throwTypeError } from "../figma_app/465776";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { useStableMemo } from "../905/19536";
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { Ui } from "../905/709171";
 import { nR } from "../figma_app/852050";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { SS } from "../figma_app/936646";
 import { je } from "../figma_app/155728";
-import { ub, PW } from "../figma_app/633080";
+import { LibraryItemTypeEnum, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { AH } from "../905/571648";
-let _ = _$$f();
+let _ = getFileKey();
 export function $$$$A0(e, t, i) {
-  let n = useStableMemo(i ?? [ub.VARIABLE, ub.STYLE]);
-  let d = AH(t?.type === PW.STYLE ? t.key : null, t?.type === PW.STYLE ? t : null);
+  let n = useStableMemo(i ?? [LibraryItemTypeEnum.VARIABLE, LibraryItemTypeEnum.STYLE]);
+  let d = AH(t?.type === PrimaryWorkflowEnum.STYLE ? t.key : null, t?.type === PrimaryWorkflowEnum.STYLE ? t : null);
   let m = d?.status === "loaded" ? d.data : null;
   let A = nR();
-  let y = t?.type === PW.VARIABLE && "SUBSCRIBED" === t.subscriptionStatus ? t : null;
+  let y = t?.type === PrimaryWorkflowEnum.VARIABLE && "SUBSCRIBED" === t.subscriptionStatus ? t : null;
   let b = je();
   let v = useCurrentFileKey();
   return useMemo(() => {
@@ -43,8 +43,8 @@ export function $$$$A0(e, t, i) {
           case VariableResolvedDataType.COLOR:
             {
               let e = [];
-              t.some(e => e === ub.STYLE) && e.push("numStylesFill");
-              t.some(e => e === ub.VARIABLE) && e.push("numVariablesColor");
+              t.some(e => e === LibraryItemTypeEnum.STYLE) && e.push("numStylesFill");
+              t.some(e => e === LibraryItemTypeEnum.VARIABLE) && e.push("numVariablesColor");
               return e;
             }
           case VariableResolvedDataType.FLOAT:

@@ -2,22 +2,22 @@ import { Sm, j6 } from "../905/859698";
 import { FacetType, assetConsumptionBindings } from "../figma_app/763686";
 import { atom, setupCustomAtom } from "../figma_app/27355";
 import { fullscreenValue } from "../figma_app/455680";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { e as _$$e } from "../905/566074";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export let $$n0;
 let u = {
-  [PW.CODE_COMPONENT]: {
+  [PrimaryWorkflowEnum.CODE_COMPONENT]: {
     idl: FacetType.CODE_COMPONENT,
     key: Sm(""),
     version: j6("")
   }
 };
 let $$p1 = {
-  [PW.CODE_COMPONENT]: {
+  [PrimaryWorkflowEnum.CODE_COMPONENT]: {
     subscribed: function (e) {
       let t = u[e].idl;
-      let r = Wh(() => atom({}));
+      let r = setupRemovableAtomFamily(() => atom({}));
       let n = setupCustomAtom(r, (t, r) => {
         if ("changed" in r) {
           if (!_$$e(e)) return t;
@@ -67,7 +67,7 @@ let $$p1 = {
         };
       };
       return n;
-    }(PW.CODE_COMPONENT)
+    }(PrimaryWorkflowEnum.CODE_COMPONENT)
   }
 };
 let _ = {

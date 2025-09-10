@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useId, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { K as _$$K } from "../905/443068";
 import { f as _$$f } from "../905/335032";
 import { getFeatureFlags } from "../905/601108";
@@ -17,7 +17,7 @@ import { UK } from "../figma_app/740163";
 import { ol } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Sh } from "../figma_app/889655";
-import { Wv } from "../figma_app/633080";
+import { LibraryTabEnum } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
@@ -107,7 +107,7 @@ function V({
         if (t === Mo) return getI18nString("variables.mode_properties_panel.select.option.auto_with_name", {
           modeName: getI18nString("variables.mode_properties_panel.select.option.mixed")
         });
-        let n = e.find(e => c2(e.modeId, t))?.name;
+        let n = e.find(e => deepEqual(e.modeId, t))?.name;
         return n ? getI18nString("variables.mode_properties_panel.select.option.auto_with_name", {
           modeName: n
         }) : getI18nString("variables.mode_properties_panel.select.option.auto");
@@ -121,11 +121,11 @@ function V({
         }
         if (a === Mo) return getI18nString("variables.mode_properties_panel.select.option.mixed");
         if (a === Yn) return getI18nString("variables.mode_properties_panel.select.option.deleted");
-        let t = e.find(e => c2(e.modeId, a));
+        let t = e.find(e => deepEqual(e.modeId, a));
         return t ? n ? `${t.name} (${t.modeId.guid})` : t.name : (logError("variables", "Option does not exist in modeOptions"), getI18nString("variables.mode_properties_panel.select.option.deleted"));
       }
     },
-    isEqual: (e, t) => c2(e, t)
+    isEqual: (e, t) => deepEqual(e, t)
   };
 }
 export function $$$0({
@@ -190,7 +190,7 @@ export function $$W1(e) {
   let W = useDispatch();
   let Y = useSelector(e => e.dropdownShown);
   let X = ZP();
-  let q = explicitModeID && explicitModeID !== Mo && modeOptions.every(e => !c2(e.modeId, explicitModeID));
+  let q = explicitModeID && explicitModeID !== Mo && modeOptions.every(e => !deepEqual(e.modeId, explicitModeID));
   let Z = Ws;
   q ? Z = Yn : explicitModeID ? Z = explicitModeID : inheritedModeID && (Z = showInheritedModeOption ? UE : inheritedModeID);
   let J = useId();
@@ -264,7 +264,7 @@ export function $$W1(e) {
     isEqual: (e, t) => e === t
   }), [el.collectionsInFamily]);
   let eo = useCallback(e => {
-    if (e === el.activeCollectionKeyInFamily) onChange(Z, Q); else {
+    if (e === el.activeCollectionKeyInFamily) onChange(Z, Q);else {
       let t = modeOptions.find(t => t.modeId.collectionKey === e && t.isCompatible);
       if (!t) return;
       onChange(t.modeId, t.name);
@@ -319,7 +319,7 @@ export function $$W1(e) {
       e === iw.LEARN_MORE ? customHistory.unsafeRedirect(Yc, "_blank") : e === iw.REVIEW_UPDATES ? W(showModalHandler({
         type: _$$T,
         data: {
-          initialTab: Wv.UPDATES,
+          initialTab: LibraryTabEnum.UPDATES,
           entrypoint: r6.VARIABLE_MODE_INCOMPATIBLE_REVIEW_UPDATES_DROPDOWN_OPTION
         }
       })) : en(e, !1, V({

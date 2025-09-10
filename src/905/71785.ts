@@ -1,14 +1,14 @@
-import { z, Ip } from "../905/239603";
-import { M } from "../figma_app/70618";
-import { Ni } from "../figma_app/188152";
-import { FFileType, FTemplateCategoryType, FPublicationStatusType, FUserVerificationStatusType, FPublisherType } from "../figma_app/191312";
-import { xK, o1 } from "../figma_app/10554";
-import { n as _$$n, s as _$$s } from "../905/875063";
-import { q } from "../905/796201";
-import { Y } from "../905/344937";
-import { fe } from "../905/272080";
-import { UC, PN } from "../905/54385";
-import { P1, fE } from "../figma_app/809727";
+import { z, Ip } from "src/905/239603";
+import { M } from "src/figma_app/70618";
+import { Ni } from "src/figma_app/188152";
+import { FFileType, FTemplateCategoryType, FPublicationStatusType, FUserVerificationStatusType, FPublisherType } from "src/figma_app/191312";
+import { xK, o1 } from "src/figma_app/10554";
+import { n as _$$n, s as _$$s } from "src/905/875063";
+import { q } from "src/905/796201";
+import { Y } from "src/905/344937";
+import { fe } from "src/905/272080";
+import { UC, PN } from "src/905/54385";
+import { P1, fE } from "src/figma_app/809727";
 var $$h2 = (e => (e[e.FIGMA = FFileType.DESIGN] = "FIGMA", e[e.FIGJAM = FFileType.WHITEBOARD] = "FIGJAM", e[e.SLIDES = FFileType.SLIDES] = "SLIDES", e[e.SITES = FFileType.SITES] = "SITES", e[e.COOPER = FFileType.COOPER] = "COOPER", e[e.FIGMAKE = FFileType.FIGMAKE] = "FIGMAKE", e))($$h2 || {});
 let $$g5 = z.object({
   id: z.string(),

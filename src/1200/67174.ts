@@ -3,7 +3,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { GD } from "../1250/51387";
 import { rI, Hf, IN } from "../6658/436658";
 import { k } from "../6658/341273";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lR } from "../figma_app/204145";
 import { Tv } from "../figma_app/311375";
 import { hA } from "../figma_app/88239";
@@ -97,12 +97,12 @@ export function $$_1({
     let u = useMemo(() => d.data ? function (e) {
       let n = Object.keys(e.components || {}).map(n => ({
         ...e.components[n],
-        type: PW.COMPONENT,
+        type: PrimaryWorkflowEnum.COMPONENT,
         library_key: n.split(",")[0]
       }));
       let t = Object.keys(e.state_groups || {}).map(n => ({
         ...e.state_groups[n],
-        type: PW.STATE_GROUP,
+        type: PrimaryWorkflowEnum.STATE_GROUP,
         library_key: n.split(",")[0]
       }));
       return rI(n, t);

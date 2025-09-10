@@ -71,7 +71,7 @@ import { t as _$$t3 } from "../905/192333";
 import { AN } from "../figma_app/201703";
 import { rV as _$$rV } from "../figma_app/387100";
 import { viewportNavigatorContext } from "../figma_app/298911";
-import { Bx, H0, UE, DA } from "../figma_app/191804";
+import { getThemeBackgroundColor, parseColor, whiteColor, areColorsEqual } from "../figma_app/191804";
 import { b as _$$b } from "../905/168657";
 import { Vi } from "../figma_app/955650";
 import { W as _$$W } from "../905/80656";
@@ -121,10 +121,10 @@ import { ow as _$$ow, E3, Em, m0, lg } from "../figma_app/976749";
 import { _o } from "../figma_app/701001";
 import { _X, ni as _$$ni, $$, Z0, Qt } from "../figma_app/62612";
 import { yh, td as _$$td } from "../figma_app/646357";
-import { ZI, PW } from "../figma_app/633080";
+import { getSubscribedVariableInfo, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Ye } from "../figma_app/32128";
 import { Cg } from "../figma_app/216057";
-import { oU as _$$oU } from "../figma_app/273493";
+import { rgbToNormalized } from "../figma_app/273493";
 import { permissionScopeHandler as _$$l, zk } from "../905/189185";
 import { l as _$$l2 } from "../905/331642";
 import { J as _$$J2 } from "../905/129695";
@@ -329,7 +329,7 @@ import { $y, dW } from "../figma_app/858013";
 import { throwTypeError } from "../figma_app/465776";
 import { generateUUIDv4 } from "../905/871474";
 import { ry as _$$ry } from "../9410/534867";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { F as _$$F3 } from "../905/680873";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { VU } from "../905/625959";
@@ -867,7 +867,7 @@ function eK({
   let d = useMemo(() => {
     let e = new Map();
     e.set(_$$b.DOCK_STYLE, "dock--dock--A6jIs");
-    e.set(_$$b.ATTACHMENT_MODAL_BACKGROUND_COLOR, Bx("light"));
+    e.set(_$$b.ATTACHMENT_MODAL_BACKGROUND_COLOR, getThemeBackgroundColor("light"));
     return e;
   }, []);
   let c = useMemo(() => {
@@ -1561,13 +1561,13 @@ function tW({
     onClose: l,
     onCreateStyle: function (e) {
       _$$l.system("create-new-style-from-eyedropper", () => {
-        EyedropperBindings.applyPaint(_$$oU(t), null, e.node_id);
+        EyedropperBindings.applyPaint(rgbToNormalized(t), null, e.node_id);
         p();
       });
     },
     onCreateVariable: function (e) {
       let i = Object.values(e.modeValues) ? Object.values(e.modeValues)[0] : null;
-      let r = _$$oU(i?.type === VariableDataType.COLOR ? i.value : t);
+      let r = rgbToNormalized(i?.type === VariableDataType.COLOR ? i.value : t);
       EyedropperBindings?.applyPaint(r, e.node_id, null);
       p();
     },
@@ -1891,7 +1891,7 @@ function ib({
       let e = VariablesBindings.getSubscribedVariableInfo(c);
       if (e) {
         let t = {
-          variable: ZI(e),
+          variable: getSubscribedVariableInfo(e),
           variableModeId: l
         };
         s[c] = t;
@@ -1988,8 +1988,8 @@ function ib({
   let L = tG({
     subscribeToUpdates__EXPENSIVE: y
   });
-  let R = H0(b?.color ?? e.color) ?? UE;
-  let D = H0(e.resolvedVariableColor) ?? UE;
+  let R = parseColor(b?.color ?? e.color) ?? whiteColor;
+  let D = parseColor(e.resolvedVariableColor) ?? whiteColor;
   let M = h === FEditorType.Whiteboard;
   let P = h === FEditorType.DevHandoff;
   let F = c?.style ? c.style : void 0;
@@ -2070,7 +2070,7 @@ function ib({
       return;
     }
     Y() || _$$l.system(e, () => {
-      EyedropperBindings?.applyPaint(_$$oU(R), t ? B?.node_id ?? null : null, t ? F?.node_id ?? null : null);
+      EyedropperBindings?.applyPaint(rgbToNormalized(R), t ? B?.node_id ?? null : null, t ? F?.node_id ?? null : null);
     });
   }, [Y, G, R, W, E, F?.node_id, B?.node_id]);
   let X = useCallback(() => {
@@ -5321,7 +5321,7 @@ function n1({
     recordingKey: "moveToThemeColors",
     callback: () => {
       let e = f(n.documentColor);
-      e && s && isValidValue(s) && s.color && DA(s.color, n.documentColor) && l(_$$FW(e), yesNoTrackingEnum.YES);
+      e && s && isValidValue(s) && s.color && areColorsEqual(s.color, n.documentColor) && l(_$$FW(e), yesNoTrackingEnum.YES);
     }
   }) : (g.push({
     name: "slides-edit-theme-color",
@@ -8510,7 +8510,7 @@ class ow extends RecordingPureComponent {
   }
   componentDidUpdate(e, t) {
     super.componentDidUpdate(e, t);
-    c2(this.props.pluginAndWidgetMenuArgs, e.pluginAndWidgetMenuArgs) || (this.searchIndex = this.createSearchIndex());
+    deepEqual(this.props.pluginAndWidgetMenuArgs, e.pluginAndWidgetMenuArgs) || (this.searchIndex = this.createSearchIndex());
   }
   createSearchIndex() {
     let e = _$$M2({
@@ -9209,7 +9209,7 @@ let li = {
             let t = StylesBindings.getStyleNodeId(e.key, e.version);
             let i = s.get(t);
             return i ? {
-              type: PW.STYLE,
+              type: PrimaryWorkflowEnum.STYLE,
               name: i.name,
               library_key: n ?? _$$l3(""),
               key: i.styleKeyForPublish,

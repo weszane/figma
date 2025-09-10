@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useId, useCallback, useMemo, forwardRef, Component, createRef } from "react";
 import { useDispatch, connect } from "react-redux";
 import { debounce } from "../905/915765";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { b as _$$b } from "../905/618904";
@@ -1994,7 +1994,7 @@ class iW extends Component {
       };
       let n = this.state.localSecurityFormResponse;
       let r = this.props.existingSecurityFormResponse;
-      if (!e && n && !qu(n) && !c2(n, {
+      if (!e && n && !qu(n) && !deepEqual(n, {
         version: r?.formVersion,
         questions: r?.responses
       })) {

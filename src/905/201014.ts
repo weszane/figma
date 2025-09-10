@@ -15,7 +15,7 @@ import { LI as _$$LI, O$ as _$$O$, lS, QE, Qf, RU } from '../905/235413';
 import { a3, bE, DX, Eu, F$, hO, JT, jX, Kp, LI, mJ, nb, nK, oE, oy, pO, vV, ZN, zr } from '../905/246310';
 import { B as _$$B2 } from '../905/248554';
 import { E as _$$E, u as _$$u } from '../905/363827';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { debugState } from '../905/407919';
 import { getLinearGradientPoints, getRadialGradientPoints } from '../905/409381';
 import { tK as _$$tK, Hw, hX, KY, nk, vy } from '../905/432392';
@@ -162,7 +162,7 @@ function F(e, t) {
   };
   let l = Iq(o, (e, t) => e.rawValue > t.rawValue);
   let d = o[l];
-  let c = !c2(d, strokeTopWeight) || !c2(d, strokeBottomWeight) || !c2(d, strokeLeftWeight) || !c2(d, strokeRightWeight);
+  let c = !deepEqual(d, strokeTopWeight) || !deepEqual(d, strokeBottomWeight) || !deepEqual(d, strokeLeftWeight) || !deepEqual(d, strokeRightWeight);
   let p = M(e, t);
   let m = e instanceof _$$a ? e.strokes : e.border.strokes;
   let h = new Set();
@@ -1872,7 +1872,7 @@ function eY(e, t, i = _$$DX) {
       strokeRightWeight
     } = e.border;
     let A = e.border.dashPattern?.length > 0 ? 'dashed' : 'solid';
-    if ([strokeBottomWeight, strokeLeftWeight, strokeRightWeight].every(e => c2(e, strokeTopWeight))) {
+    if ([strokeBottomWeight, strokeLeftWeight, strokeRightWeight].every(e => deepEqual(e, strokeTopWeight))) {
       n.border = p;
       let t = vV(new RU(strokeTopWeight.rawValue), strokeTopWeight, n, 'border', a);
       i.set('border', new eV(oy({
@@ -3719,7 +3719,7 @@ function tW(e, t) {
       constants: Array.from(h)
     };
   }(e, bottomRightRadius, topLeftRadius, topRightRadius, bottomLeftRadius, t);
-  let v = !c2(g, strokeTopWeight) || !c2(g, strokeBottomWeight) || !c2(g, strokeLeftWeight) || !c2(g, strokeRightWeight);
+  let v = !deepEqual(g, strokeTopWeight) || !deepEqual(g, strokeBottomWeight) || !deepEqual(g, strokeLeftWeight) || !deepEqual(g, strokeRightWeight);
   let I = e instanceof _$$a ? e.strokes : e.border.strokes;
   let E = new Set(constants);
   let S = hX(g.rawValue, t);

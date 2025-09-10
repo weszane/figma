@@ -9,10 +9,10 @@ export let sessionStorageRef: Storage | null = null
 export let localStorageRef: Storage | null = null
 try {
   sessionStorageRef = window.sessionStorage
-} catch {}
+} catch { }
 try {
   localStorageRef = window.localStorage
-} catch {}
+} catch { }
 
 /**
  * Returns the localStorage reference.
@@ -37,7 +37,7 @@ export function getSessionStorage(): Storage | null {
  * @param key - The key to search for
  */
 export function getCookieValue(cookieString: string, key: string): string | null {
-  const searchKey = `${key  }=`
+  const searchKey = `${key}=`
   for (const part of cookieString.split(';')) {
     const trimmed = part.trim()
     if (trimmed.slice(0, searchKey.length) === searchKey)

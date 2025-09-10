@@ -1,6 +1,6 @@
 import { e as _$$e } from "../905/198283";
 import { isNotNullish } from "../figma_app/95419";
-import { aH } from "../figma_app/273493";
+import { normalizedToRgb } from "../figma_app/273493";
 import { NodeType, BooleanOperationType, SelectionMode } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { f as _$$f } from "../905/24905";
@@ -313,7 +313,7 @@ class T {
     return matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
   getWCAG2Contrast(e, t) {
-    return _$$f(aH(e), aH(t));
+    return _$$f(normalizedToRgb(e), normalizedToRgb(t));
   }
   getNodeTypeName(e) {
     let t = XE(this.store.getState().selectedView);

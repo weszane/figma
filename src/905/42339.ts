@@ -34,7 +34,7 @@ export class ComputationHandler {
     )
     const fieldName = computationManager.computedFieldDef.name
     if (fieldName in initialResults) {
-      this.unsubscribe = () => {}
+      this.unsubscribe = () => { }
       this.onUpdateResult(initialResults[fieldName])
     }
     else {

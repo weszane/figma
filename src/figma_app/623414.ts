@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { E } from "../905/632989";
 import a from "classnames";
 import { E as _$$E } from "../905/984674";
-import { kx } from "../figma_app/191804";
+import { isColorDarkByLuminance } from "../figma_app/191804";
 var s = a;
 export function $$l0(e) {
   return jsxs(E, {
@@ -26,7 +26,7 @@ export function $$l0(e) {
   });
 }
 export function $$c1(e) {
-  let t = e.parentBackgroundColor ? kx(e.parentBackgroundColor) ? "breadcrumb_item_on_custom_background--breadcrumbTextForDarkBackground--zRqgR" : "breadcrumb_item_on_custom_background--breadcrumbTextForLightBackground--2Oj46" : "breadcrumb_item_on_custom_background--breadcrumbText--Yt7Da";
+  let t = e.parentBackgroundColor ? isColorDarkByLuminance(e.parentBackgroundColor) ? "breadcrumb_item_on_custom_background--breadcrumbTextForDarkBackground--zRqgR" : "breadcrumb_item_on_custom_background--breadcrumbTextForLightBackground--2Oj46" : "breadcrumb_item_on_custom_background--breadcrumbText--Yt7Da";
   return jsx(E, {
     disabled: e.disabled,
     className: s()("breadcrumb_item_on_custom_background--breadcrumbContainer--uofsd", e.disabled ? void 0 : "breadcrumb_item_on_custom_background--hoverable--ErLQF"),

@@ -33,7 +33,7 @@ import { oh } from "../905/18797";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Sh } from "../figma_app/803787";
 import { C as _$$C } from "../905/758411";
-import { Wv } from "../figma_app/633080";
+import { LibraryTabEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { Ib } from "../905/129884";
 import { I as _$$I } from "../figma_app/130633";
@@ -146,7 +146,7 @@ export function $$eR6({
   } = _$$u({
     entrypoint: eJ,
     modalType: "editor",
-    initialTab: Wv.TEAM_LIBRARIES
+    initialTab: LibraryTabEnum.TEAM_LIBRARIES
   });
   let eQ = useCallback(() => {
     close();

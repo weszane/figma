@@ -41,7 +41,7 @@ export function throwTypeError(value: unknown, message?: string): never {
  * No-op function.
  * (Original: $$o4)
  */
-export function noop(_arg?: unknown): void {}
+export function noop(_arg?: unknown): void { }
 
 /**
  * Throws an error with the provided message.
@@ -57,7 +57,7 @@ export function throwError(message: string): never {
  * No-op debug function.
  * (Original: $$d1)
  */
-export function debug(_arg1: unknown, _arg2: unknown, ..._rest: unknown[]): void {}
+export function debug(_arg1: unknown, _arg2: unknown, ..._rest: unknown[]): void { }
 
 /**
  * Returns the second argument.
@@ -75,7 +75,7 @@ export function returnSecond<T>(_arg1: unknown, arg2: T, _arg3?: unknown): T {
  * No-op utility function.
  * (Original: $$u3)
  */
-export function utilityNoop(_arg?: unknown): void {}
+export function utilityNoop(_arg?: unknown): void { }
 
 // Export aliases for backward compatibility with original names
 export const B1 = assertNotNullish

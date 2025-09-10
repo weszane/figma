@@ -7,7 +7,7 @@ import { VisualBellIcon } from "../905/576487";
 import { jO } from "../905/573265";
 import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
-import { o as _$$o, M$ } from "../figma_app/633080";
+import { LibrarySourceEnum, PublishStatusEnum } from "../figma_app/633080";
 import { pz } from "../figma_app/825489";
 import { MZ } from "../905/470594";
 import { _9, VW, UV, Jw, WU } from "../figma_app/755939";
@@ -64,7 +64,7 @@ let b = {
     } = e;
     let i = atomStoreManager.get(UV);
     let n = atomStoreManager.get(WU);
-    switch (atomStoreManager.set(pz, _$$o.LIBRARY), i) {
+    switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), i) {
       case VW.PUBLISH_HUB_FILE_INITIATED:
         atomStoreManager.set(_9, {
           state: VW.PUBLISH_HUB_FILE_COMPLETED
@@ -92,7 +92,7 @@ let b = {
     let n = atomStoreManager.get(UV);
     [VW.PUBLISH_TEMPLATE_INITIATED, VW.PUBLISH_HUB_FILE_INITIATED].includes(n) && dispatch(VisualBellActions.enqueue({
       type: $$_0,
-      message: publishType === M$.UNPUBLISH ? getI18nString("cooper.templates.template_unpublishing") : getI18nString("cooper.templates.template_publishing"),
+      message: publishType === PublishStatusEnum.UNPUBLISH ? getI18nString("cooper.templates.template_unpublishing") : getI18nString("cooper.templates.template_publishing"),
       icon: e.icon,
       progressKey: e.progressKey
     }));
@@ -104,7 +104,7 @@ let b = {
     } = e;
     let c = atomStoreManager.get(UV);
     let u = Jw(c);
-    switch (atomStoreManager.set(pz, _$$o.LIBRARY), logError(_$$e.PROJECT_BUZZ, f, {
+    switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), logError(_$$e.PROJECT_BUZZ, f, {
       publishState: c,
       publishStep: u,
       error

@@ -13,7 +13,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Y } from "../905/830372";
 import { RR } from "../figma_app/307841";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
 import { tc } from "../905/15667";
 import { c as _$$c } from "../905/370443";
@@ -39,7 +39,7 @@ export let $$N0 = registerModal(function ({
 }) {
   let F = useDispatch();
   let [M, j] = useState(!1);
-  let U = _$$u();
+  let U = getRumLoggingConfig();
   let B = () => {
     F(popModalStack());
   };

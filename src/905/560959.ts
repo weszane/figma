@@ -1,5 +1,5 @@
-import { parsePxNumber } from "../figma_app/783094";
-import { ZGX } from "../figma_app/27776";
+import { parsePxNumber } from "src/figma_app/783094";
+import { ZGX } from "src/figma_app/27776";
 let $$a4 = "VariableDetailModal";
 let $$s3 = "MatchingVariablesModal";
 let $$o7 = "StyleDetailModal";

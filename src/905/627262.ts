@@ -3,7 +3,7 @@ import { n3, ey, yG } from "../905/859698";
 import a from "../vendor/923386";
 import { A as _$$A } from "../905/920142";
 import { aX } from "../figma_app/349248";
-import { jg } from "../figma_app/633080";
+import { LibraryAgeEnum } from "../figma_app/633080";
 var s = a;
 export function $$c0(e, t) {
   if (!e) return null;
@@ -85,13 +85,13 @@ export function $$f2(e) {
 }
 function _(e) {
   switch (e) {
-    case jg.THIRTY_DAYS:
+    case LibraryAgeEnum.THIRTY_DAYS:
       return 30;
-    case jg.SIXTY_DAYS:
+    case LibraryAgeEnum.SIXTY_DAYS:
       return 60;
-    case jg.NINETY_DAYS:
+    case LibraryAgeEnum.NINETY_DAYS:
       return 90;
-    case jg.YEAR:
+    case LibraryAgeEnum.YEAR:
       return 365;
     default:
       throwTypeError(e);

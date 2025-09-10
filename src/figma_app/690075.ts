@@ -1,6 +1,6 @@
-import { formatList } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
-import { cV } from "../figma_app/740025";
+import { formatList } from "src/figma_app/930338";
+import { getI18nString } from "src/905/303541";
+import { cV } from "src/figma_app/740025";
 export function $$s2(e, t, r) {
   if (0 === e.length) return "";
   if (1 === e.length) return r(e[0]);

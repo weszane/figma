@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { atom, Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { dP, bh, M3 } from "../figma_app/119475";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { L } from "../905/773253";
 import { MB } from "../figma_app/525558";
 import { zm, er } from "../905/753512";
@@ -163,11 +163,11 @@ export function $$x1(e) {
     e[e.UpdateAllButton = 1] = "UpdateAllButton";
   })(e.UpdatesSectionFooter || (e.UpdatesSectionFooter = {}));
   e.UpdatesListAssetSection = {
-    [PW.COMPONENT]: 0,
-    [PW.STATE_GROUP]: 1,
-    [PW.STYLE]: 2,
-    [PW.VARIABLE_SET]: 3,
-    [PW.CODE_COMPONENT]: 4
+    [PrimaryWorkflowEnum.COMPONENT]: 0,
+    [PrimaryWorkflowEnum.STATE_GROUP]: 1,
+    [PrimaryWorkflowEnum.STYLE]: 2,
+    [PrimaryWorkflowEnum.VARIABLE_SET]: 3,
+    [PrimaryWorkflowEnum.CODE_COMPONENT]: 4
   };
   (e => {
     e[e.SeeMore = 0] = "SeeMore";

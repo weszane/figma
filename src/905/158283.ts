@@ -1,4 +1,4 @@
-import { z } from "../905/239603";
+import { z } from "src/905/239603";
 let r = z.object({
   id: z.string(),
   created_at: z.string(),

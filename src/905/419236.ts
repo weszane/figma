@@ -1,4 +1,4 @@
-import type { Fn } from '../../types/global'
+import type { Fn } from '../../../types/global'
 import { ResourceStatus } from '../905/957591'
 
 /**
@@ -62,7 +62,7 @@ export function throwIf(
  * No-op function.
  * @originalName $$l11
  */
-export function noop(_?: any): void {}
+export function noop(_?: any): void { }
 
 /**
  * Deep compares two objects using JSON.stringify.
@@ -127,7 +127,7 @@ export function compareFieldInfoArrays(
  * No-op function.
  * @originalName $$p8
  */
-export function noop2(): void {}
+export function noop2(): void { }
 
 const ONCE_SYMBOL = Symbol('once')
 
@@ -182,7 +182,7 @@ export function delayedTryCatch(
  * Error thrown when max attempts are exhausted.
  * @originalName _
  */
-class MaxAttemptError extends Error {}
+class MaxAttemptError extends Error { }
 
 /**
  * Exponential backoff utility with jitter.

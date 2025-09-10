@@ -3,7 +3,7 @@ import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
 import { VariableResolvedDataType, Fullscreen, VariableDataType, OperationType, PropertyScope } from "../figma_app/763686";
-import { sH } from "../905/805904";
+import { convertVariableIdToKiwi } from "../905/805904";
 import { Yi, Oe } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
@@ -99,7 +99,7 @@ export function $$E0({
   async function A(e) {
     if (e) {
       let i = await u(Oe(e));
-      assertNotNullish(sH(i));
+      assertNotNullish(convertVariableIdToKiwi(i));
       updateVariableConsumption(y$(VariableResolvedDataType.STRING, i));
       t?.();
     } else clearVariableConsumption(yesNoTrackingEnum.YES);
@@ -130,7 +130,7 @@ function x() {
         return;
       }
       let i = await e(Oe(t));
-      assertNotNullish(sH(i));
+      assertNotNullish(convertVariableIdToKiwi(i));
       t.resolvedType === VariableResolvedDataType.STRING ? updateVariableConsumption({
         type: VariableDataType.FONT_STYLE,
         resolvedType: VariableResolvedDataType.FONT_STYLE,

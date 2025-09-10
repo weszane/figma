@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { N } from "../905/438674";
 import { formatList } from "../figma_app/930338";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -103,7 +103,7 @@ export let $$E0 = registerModal(function (e) {
       });
     });
     return t;
-  }, c2);
+  }, deepEqual);
   let y = a.dict(t => e.invoice.seats_breakdown[t]?.net_quantity ?? 0);
   return jsx(k, {
     orgId: e.orgId,

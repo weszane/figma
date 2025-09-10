@@ -23,12 +23,12 @@ import { isInteractionPathCheck } from '../figma_app/897289'
 export function checkZoomWidgetAccess() {
   return isZoomIntegration() && !getFeatureFlags().integ_zoom_allow_extensions
     ? {
-        canRun: false,
-        message: getI18nString('widgets.no_zoom_widgets_plugins'),
-      }
+      canRun: false,
+      message: getI18nString('widgets.no_zoom_widgets_plugins'),
+    }
     : {
-        canRun: true,
-      };
+      canRun: true,
+    };
 }
 
 // Original code from $$y10 - Checks if copy/export is not restricted
@@ -58,11 +58,11 @@ export function canPerformAction(e) {
     (isFullscreenCooper(e.selectedView) && !getFeatureFlags().buzz_plugins) ||
     isFigmakeFullscreenView(e.selectedView)
   ) &&
-  (!getFeatureFlags().ext_require_appropriate_seat ||
-    !!isInteractionPathCheck() ||
-    !!e.openFile?.teamId ||
-    !!e.openFile?.parentOrgId) &&
-  !e.mirror.appModel.isReadOnly;
+    (!getFeatureFlags().ext_require_appropriate_seat ||
+      !!isInteractionPathCheck() ||
+      !!e.openFile?.teamId ||
+      !!e.openFile?.parentOrgId) &&
+    !e.mirror.appModel.isReadOnly;
 }
 
 // Original code from $$T15 - Checks if extensions can run
@@ -367,10 +367,10 @@ function getCombinedPermissionMessage(e, t, r) {
   return e
     ? getI18nString('permissions.can_still_edit_team_permissions')
     : t
-    ? getI18nString('permissions.can_still_edit_folder_permissions')
-    : r
-    ? getI18nString('permissions.can_still_edit_edit_permissions')
-    : null;
+      ? getI18nString('permissions.can_still_edit_folder_permissions')
+      : r
+        ? getI18nString('permissions.can_still_edit_edit_permissions')
+        : null;
 }
 
 // Original code from $$F8 - Checks if can perform action based on level

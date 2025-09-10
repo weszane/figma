@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { R } from "../905/307199";
-import { P } from "../905/347284";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { hideModal } from "../905/156213";
-import { o as _$$o } from "../905/524481";
-import { g } from "../905/763242";
-import { yX } from "../figma_app/918700";
+import { R } from "src/905/307199";
+import { P } from "src/905/347284";
+import { getI18nString, renderI18nText } from "src/905/303541";
+import { hideModal } from "src/905/156213";
+import { o as _$$o } from "src/905/524481";
+import { g } from "src/905/763242";
+import { yX } from "src/figma_app/918700";
 let u = "shared_fonts_upload_error_modal--errorColumnFile--h0Its";
 let m = "shared_fonts_upload_error_modal--errorColumnMessage--ObLuS";
 export function $$p0() {

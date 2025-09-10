@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { lQ } from "../905/934246";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -55,7 +55,7 @@ export function $$E0({
   let j = JG({
     enabled: "first-party" === t.type
   });
-  let U = useSelector(_$$S, c2);
+  let U = useSelector(_$$S, deepEqual);
   useEffect(() => {
     M.rebuildNodeCache();
   }, [M, D, E, j]);

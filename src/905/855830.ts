@@ -16,7 +16,7 @@ import { Wi } from "../figma_app/162641";
 import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
 import { $V } from "../figma_app/990058";
 import { tc, PE, Q7, i$ } from "../905/15667";
@@ -463,7 +463,7 @@ export function $$eb0(e) {
     });
     er ? ew() : (t(popModalStack()), ex?.());
   };
-  let eR = _$$u();
+  let eR = getRumLoggingConfig();
   let eN = useSubscription(ConfiguredUpgradeRequestModalView, {
     orgId: planParentId,
     permission: planUserPermission

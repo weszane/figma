@@ -9,7 +9,7 @@ import { NG } from "../figma_app/709893";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { Jl } from "../figma_app/80990";
+import { processLocalComponents } from "../figma_app/80990";
 import { w5 } from "../figma_app/345997";
 import { cM, MH, dM } from "../figma_app/803787";
 import { Ib } from "../905/129884";
@@ -22,7 +22,7 @@ import { h as _$$h } from "../905/207101";
 import { sb } from "../figma_app/519839";
 import { JT } from "../figma_app/173838";
 import { selectCurrentFile } from "../figma_app/516028";
-import { o as _$$o } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { registerModal } from "../905/102752";
 import { pz } from "../figma_app/825489";
 import { U as _$$U } from "../905/29665";
@@ -64,7 +64,7 @@ let M = registerModal(function ({
     disableConfirm: l,
     onConfirm: () => t(sb({
       localAssetsWithDenormalizedPublishInfo: s.data ?? {},
-      hubFileId: getFeatureFlags().cmty_lib_admin_publish && r === _$$o.HUBFILE && o ? o.id : void 0
+      hubFileId: getFeatureFlags().cmty_lib_admin_publish && r === LibrarySourceEnum.HUBFILE && o ? o.id : void 0
     })),
     confirmText: getI18nString("design_systems.libraries_modal.remove_library"),
     confirmationTitle: getI18nString("design_systems.libraries_modal.remove_library_modal_title"),
@@ -77,7 +77,7 @@ let M = registerModal(function ({
         label: jsx(Label, {
           children: renderI18nText("design_systems.internal_community_library_unpublish")
         })
-      }), r === _$$o.HUBFILE && jsx(O, {})]
+      }), r === LibrarySourceEnum.HUBFILE && jsx(O, {})]
     }) : jsx("div", {
       className: F,
       children: renderI18nText("design_systems.libraries_modal.this_action_will_remove_all_of_the_components_in_this_file_from_the_library")
@@ -105,7 +105,7 @@ export function $$W0(e) {
   let E = useSelector(e => e.mirror.appModel.isReadOnly);
   let x = !!e.editingFile && e.editingFile.library_key === e.libraryKey;
   let S = useMemo(() => ND(localStyles), [localStyles]);
-  let w = useMemo(() => ND(Jl(localComponents)), [localComponents]);
+  let w = useMemo(() => ND(processLocalComponents(localComponents)), [localComponents]);
   let C = useMemo(() => ND(localStateGroups), [localStateGroups]);
   let T = useDispatch();
   let k = useCallback(() => {

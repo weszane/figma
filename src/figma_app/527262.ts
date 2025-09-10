@@ -12,7 +12,7 @@ import { sx } from "../905/941192";
 import { U as _$$U } from "../905/815805";
 import { dR } from "../figma_app/109538";
 import { I as _$$I } from "../905/641938";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { q } from "../figma_app/712384";
 import { oB } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -72,7 +72,7 @@ export function $$D0({
   let W = useCurrentPublicPlan("PlanComparisonModalContent");
   let K = W.unwrapOr(null)?.tier || null;
   let Y = _$$U(M ?? V);
-  let $ = _$$u();
+  let $ = getRumLoggingConfig();
   let X = K === FPlanNameType.PRO ? "807px" : "945px";
   return jsx(fu, {
     name: QO,

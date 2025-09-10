@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ProductAccessTypeEnum } from "../905/513035";
+import { ProductAccessTypeEnum } from "src/905/513035";
 /**
  * Enum representing different access levels.
  * Original variable: a

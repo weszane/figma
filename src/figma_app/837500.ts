@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ColorOptions } from "../figma_app/763686";
-import { YU } from "../figma_app/191804";
+import { colorToRgbaString } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
 import { Tn, OF, Zv, L5, QE, B8 } from "../figma_app/728075";
 let $$l5 = "TYPESCRIPT";
@@ -63,7 +63,7 @@ export function $$p4(e) {
   }
 }
 export function $$_1(e) {
-  switch (YU(e)) {
+  switch (colorToRgbaString(e)) {
     case B8:
       return "DRACULA";
     case Tn:

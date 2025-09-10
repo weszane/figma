@@ -4,7 +4,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { colorToHex } from "../905/436288";
-import { _W } from "../figma_app/191804";
+import { calculateColorDifference } from "../figma_app/191804";
 import { l as _$$l, i as _$$i } from "../905/283360";
 import { C } from "../905/887158";
 import { TW, sB, d$ } from "../905/958097";
@@ -81,7 +81,7 @@ function A({
     let r = t?.[0];
     if (!r) return;
     let n = r.resolvedValue.value;
-    let i = _W(n, m);
+    let i = calculateColorDifference(n, m);
     if (!(i > o)) {
       if (u) {
         let {
@@ -245,7 +245,7 @@ async function O({
       let a = "LIBRARY" === t.subscriptionStatus ? t.library_key.toString() : "";
       let s = m.get(a);
       s && s.has(a) && f.push(i);
-      i.distance = _W(r.value, g);
+      i.distance = calculateColorDifference(r.value, g);
       i.distance > o || v(y, i);
     });
     return {

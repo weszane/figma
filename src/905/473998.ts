@@ -1,4 +1,4 @@
-import { createNoOpValidator } from "../figma_app/181241";
+import { createNoOpValidator } from "src/figma_app/181241";
 export let $$r0 = new class {
   constructor() {
     this.TemplatesSchemaValidator = createNoOpValidator();

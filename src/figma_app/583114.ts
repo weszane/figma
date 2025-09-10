@@ -4,9 +4,9 @@ import { h as _$$h } from "../vendor/771674";
 import { f as _$$f } from "../905/24905";
 import { z5 } from "../905/713722";
 import { r as _$$r } from "../905/583881";
-import { YR, H0, UE, _W, Uv, HD } from "../figma_app/191804";
+import { isValidColor, parseColor, whiteColor, calculateColorDifference, blackColor, isColorDark } from "../figma_app/191804";
 export function $$c4(e, t, r = "IGNORE", n) {
-  if (!e || !YR(e)) {
+  if (!e || !isValidColor(e)) {
     console.warn("Invalid color passed to calculateColorWithRampValue. Ensure r, g, b, and a are between 0 and 1", e);
     return null;
   }
@@ -29,7 +29,7 @@ export function $$c4(e, t, r = "IGNORE", n) {
   return E(i);
 }
 export function $$u3(e) {
-  if (!e || !YR(e)) {
+  if (!e || !isValidColor(e)) {
     console.warn("Invalid color passed to calculateColorWithRampValue. Ensure r, g, b, and a are between 0 and 1", e);
     return null;
   }
@@ -38,7 +38,7 @@ export function $$u3(e) {
   return Math.floor(100 * v(t.hsluv_l, r));
 }
 export function $$p1(e, t, r = "IGNORE") {
-  if (!e || !YR(e)) {
+  if (!e || !isValidColor(e)) {
     console.warn("Invalid color passed to calculateColorWithRelativeAdjustment. Ensure r, g, b, and a are between 0 and 1", e);
     return null;
   }
@@ -57,7 +57,7 @@ export function $$p1(e, t, r = "IGNORE") {
   return E(n);
 }
 export function $$_5(e, t, r) {
-  let n = y(H0(e));
+  let n = y(parseColor(e));
   O(n, t, r);
   return colorToHex(E(n));
 }
@@ -187,7 +187,7 @@ let b = {
   purple: 1
 };
 function T(e) {
-  if (_$$f(e, UE) <= x) return R(e);
+  if (_$$f(e, whiteColor) <= x) return R(e);
   let t = y(e);
   let r = new _$$h();
   if (r.hsluv_h = t.hsluv_h, t.hsluv_l <= 10) {
@@ -235,7 +235,7 @@ function S(e) {
     i.rgbToHsluv();
     I(i, r, n, 5);
     i.hsluvToRgb();
-    let s = _W(E(e), E(i));
+    let s = calculateColorDifference(E(e), E(i));
     t[n] = s / b[n];
   });
   let n = "yellow";
@@ -252,8 +252,8 @@ function v(e, t) {
 let $$A2 = 4.5;
 let x = 1.31;
 let N = {
-  BLACK: Uv,
-  WHITE: UE
+  BLACK: blackColor,
+  WHITE: whiteColor
 };
 let C = (e, t) => {
   let {
@@ -261,7 +261,7 @@ let C = (e, t) => {
     contrastMinimum
   } = t;
   let i = () => _$$f(o, colorForContrastCheck);
-  let a = HD(colorForContrastCheck) ? .1 : -.1;
+  let a = isColorDark(colorForContrastCheck) ? .1 : -.1;
   let o = E(e);
   for (; i() < contrastMinimum + .02 && (e.hsluv_l += a, !(e.hsluv_l > 100) && !(e.hsluv_l < 0));) o = E(e);
   e.rgbToHsluv();
@@ -278,8 +278,8 @@ export function $$w6(e, t) {
 let O = (e, t, r) => {
   let n;
   let i = E(e);
-  let a = _$$f(UE, i);
-  let o = _$$f(Uv, i);
+  let a = _$$f(whiteColor, i);
+  let o = _$$f(blackColor, i);
   if (t && r) n = o >= a ? "BLACK" : "WHITE";else {
     if (!t && !r) return;
     n = t ? "BLACK" : "WHITE";
@@ -325,10 +325,10 @@ export function $$k0(e) {
   if (e) return {
     base: e,
     widget: e,
-    baseLight: D(e.map(e => $$p1(e, .6, "BLACK_AND_WHITE") || Uv)),
+    baseLight: D(e.map(e => $$p1(e, .6, "BLACK_AND_WHITE") || blackColor)),
     sticky: D(e.map(e => $$c4(e, 400, "BLACK", {
       LESS_THAN: 400
-    }) || Uv)),
+    }) || blackColor)),
     highlight: D(e.map(T)),
     pencilUI3: e,
     codeBlockTheme: e

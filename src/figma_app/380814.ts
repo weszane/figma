@@ -25,7 +25,7 @@ import { Y } from "../905/830372";
 import { Oe } from "../figma_app/933328";
 import { BQ, yp, rW } from "../figma_app/852050";
 import { Um } from "../905/848862";
-import { kz } from "../figma_app/633080";
+import { getLocalVariableInfo } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { JU } from "../figma_app/626177";
 import { l6, c$ as _$$c$ } from "../905/794875";
@@ -88,7 +88,7 @@ export function $$W7({
         let a = VariablesBindings.createVariable(n, t, i, VariableUIContext.VARIABLE_PICKER);
         let o = VariablesBindings.getLocalVariableInfo(a);
         assertNotNullish(o, `variable with id ${a} not found`);
-        e(kz(o));
+        e(getLocalVariableInfo(o));
       });
       t();
     }

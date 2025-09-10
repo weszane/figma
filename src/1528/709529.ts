@@ -1,6 +1,6 @@
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { atom } from "../figma_app/27355";
-export let $$l0 = Wh(() => atom({
+export let $$l0 = setupRemovableAtomFamily(() => atom({
   mp4Configs: [],
   imageConfigs: [],
   pdfConfigs: [],

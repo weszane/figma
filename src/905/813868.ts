@@ -11,7 +11,7 @@ import { $$ } from "../figma_app/62612";
 import { checkZoomWidgetAccess } from "../figma_app/12796";
 import { showVisualBell, getFullscreenViewEditorType } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
-import { o8, Fr, r_ } from "../905/622391";
+import { getSelectedView, checkCanRunExtensions, getPluginDevMode } from "../905/622391";
 import { setSyncedValues } from "../905/486749";
 import { notifyPluginStatus } from "../905/571565";
 import { k as _$$k2 } from "../figma_app/644304";
@@ -31,14 +31,14 @@ export function $$I0({
   indexInParent: k,
   isOnInternalCanvas: R
 }) {
-  if (!o8()) {
+  if (!getSelectedView()) {
     showVisualBell(getI18nString("widgets.cannot_insert_widget_while_logged_out"));
     return {
       widgetNodeID: void 0,
       widgetRunPromise: void 0
     };
   }
-  if (getFeatureFlags().ext_require_appropriate_seat && !Fr()) {
+  if (getFeatureFlags().ext_require_appropriate_seat && !checkCanRunExtensions()) {
     _$$R.instance.handleUpgrade(Q7.RUN_WIDGET);
     return {
       widgetNodeID: void 0,
@@ -60,7 +60,7 @@ export function $$I0({
     name: t,
     isInsert: !0,
     cancelCallback: () => {},
-    vmType: r_()
+    vmType: getPluginDevMode()
   });
   z.startInteraction(e, "insert");
   let P = Fullscreen.createWidget(e, t, i ?? "", w ?? "", k ?? null, R ?? null);

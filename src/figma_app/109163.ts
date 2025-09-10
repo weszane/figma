@@ -7,7 +7,7 @@ import { DesignGraphElements, ToolType, Fullscreen, NodePropertyCategory } from 
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { Uv } from "../figma_app/191804";
+import { blackColor } from "../figma_app/191804";
 import { generateRecordingKey } from "../figma_app/878298";
 import { GI, IZ, SK } from "../905/125333";
 import { getI18nString } from "../905/303541";
@@ -335,7 +335,7 @@ let $$K0 = memo(function ({
           alwaysUseCurrentColorInSwatch: !0,
           recordingKey: r && generateRecordingKey(r, "pencil-color-more")
         }),
-        color: ey || Uv,
+        color: ey || blackColor,
         isOpen: ep && M,
         onColorChange: eS,
         onClose: () => {
@@ -402,7 +402,7 @@ let $$K0 = memo(function ({
               setShowPopover: K,
               recordingKey: r && generateRecordingKey(r, "pencil-color-more")
             }),
-            color: t || Uv,
+            color: t || blackColor,
             isOpen: ep && M,
             onColorChange: eS,
             onClose: () => {

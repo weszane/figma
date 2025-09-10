@@ -23,7 +23,7 @@ import { bD } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, hasLocalFileId, relaunchMixedDescription } from "../figma_app/155287";
 import { Ib } from "../905/129884";
-import { Fr } from "../905/622391";
+import { checkCanRunExtensions } from "../905/622391";
 import { V } from "../905/480825";
 import { VZ } from "../figma_app/727192";
 import { Q as _$$Q2 } from "../905/346809";
@@ -40,7 +40,7 @@ let P = class e extends PureComponent {
     this.onRelaunch = async e => {
       let t = this.props.openFileKey;
       if (!t) return;
-      if (!Fr()) {
+      if (!checkCanRunExtensions()) {
         _$$R.instance.handleUpgrade(Q7.RUN_PLUGIN);
         return;
       }

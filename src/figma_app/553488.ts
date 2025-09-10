@@ -4,7 +4,7 @@ import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { logError } from "../905/714362";
 import { Point } from "../905/736624";
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { k8 } from "../figma_app/49598";
 import { Bs } from "../figma_app/933328";
 import { Hx } from "../figma_app/147952";
@@ -17,7 +17,7 @@ var $$E2 = (e => (e.OVERLAY_MODAL = "OVERLAY_MODAL", e.PICKER = "PICKER", e.BOAR
 function y(e, t) {
   return "OVERLAY_MODAL" === e ? t ? "insert_template_slide_overlay_modal_hub" : "insert_template_slide_overlay_modal_org" : t ? "insert_template_slide_picker_hub" : "insert_template_slide_picker_org";
 }
-let b = _$$f();
+let b = getFileKey();
 export function $$T7(e) {
   permissionScopeHandler.system("setup-document-slide-theme", () => {
     AppStateTsApi && AppStateTsApi.slideThemeLibBindings().setDocumentTemplateLibraryKey(e);

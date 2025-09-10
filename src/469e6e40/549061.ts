@@ -6,7 +6,7 @@ import { l as _$$l } from '../469e6e40/61410';
 import { Q as _$$Q2 } from '../469e6e40/276592';
 import { A as _$$A } from '../469e6e40/634763';
 import { k as _$$k3 } from '../469e6e40/952112';
-import { u as _$$u } from '../905/16237';
+import { getRumLoggingConfig } from '../905/16237';
 import { E as _$$E2 } from '../905/53857';
 import { B as _$$B2 } from '../905/55104';
 import { useSprigWithSampling } from '../905/99656';
@@ -387,7 +387,7 @@ function eu({
     seatCount: o,
     dataTestId: 'view-seats-count'
   }];
-  let g = _$$u();
+  let g = getRumLoggingConfig();
   return jsx(fu, {
     name: _$$e2.SEAT_COUNTS_OVERVIEW_CARD,
     properties: {
@@ -596,7 +596,7 @@ function ti({
 }) {
   let o = useAtomWithSubscription(aN);
   let d = useAtomWithSubscription(V4);
-  let c = _$$u();
+  let c = getRumLoggingConfig();
   return jsxs('div', {
     'className': _$$s.flex.gap8.$,
     'data-testid': 'seat-requests-mini-view-row-cta',
@@ -696,7 +696,7 @@ function t_({
   isOrgAdmin: s
 }) {
   let r = useDispatch();
-  let l = _$$u();
+  let l = getRumLoggingConfig();
   return jsxs(Fragment, {
     children: [jsx($z, {
       variant: 'secondary',
@@ -1204,7 +1204,7 @@ function tu({
   let tf = eC ? eC?.length > 0 : e9.length > 0;
   let tj = !!eR && eR !== Sm.DISABLED;
   let ty = et && !t;
-  let tw = _$$u();
+  let tw = getRumLoggingConfig();
   return jsx(fu, {
     name: _$$e2.SEAT_REQUESTS_MINI_VIEW,
     children: jsxs(_$$B2, {
@@ -1391,7 +1391,7 @@ export function $$tg0({
   teamBilling: t
 }) {
   let a = useDispatch();
-  let l = _$$u();
+  let l = getRumLoggingConfig();
   let d = useRef(null);
   let [A, O] = useState(0);
   let L = !!desktopAPIInstance || ce();

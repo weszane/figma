@@ -21,7 +21,7 @@ export function trackFigmentRequest(requestJsons: any[], networkState: any): voi
       networkState,
     })
   }
-  catch  {
+  catch {
     console.error('[Figment Debugger] Error tracking request')
   }
 }

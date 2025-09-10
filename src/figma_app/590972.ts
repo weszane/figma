@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { t as _$$t } from "../905/150656";
 import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
@@ -538,9 +538,9 @@ function eR(e) {
     existingHubFile
   } = e;
   let n = selectUser();
-  let o = useSelector(e => xw(e) ?? void 0, c2);
+  let o = useSelector(e => xw(e) ?? void 0, deepEqual);
   let l = sZ();
-  let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
+  let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let c = useSelector(e => e.authedProfilesById);
   let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let p = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);

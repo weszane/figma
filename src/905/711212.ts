@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { VariableStyleId } from "../905/859698";
 import { VariableDataType, ImageExportType } from "../figma_app/763686";
 import { hasStyleType } from "../905/311324";
-import { sH, dI } from "../905/537777";
+import { convertStringToKiwi, convertKiwiToString } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
 import { runWithTimeout } from "../905/236856";
 import { NC } from "../905/17179";
@@ -14,10 +14,10 @@ import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { createOptimistThunk } from "../905/350402";
 import { I0 } from "../905/879323";
-import { Eo, oU, UE, u0, r8, aV, qv } from "../figma_app/80990";
+import { teamLibraryCache, generateSerializableStyleThumbnail, hasValidFillColor, LOADING_THUMBNAIL, FAILED_THUMBNAIL, generateThumbnailFromStyleMaster, revokeThumbnailUrl } from "../figma_app/80990";
 import { Jr } from "../figma_app/624361";
-import { Kb, lP } from "../905/405710";
-import { PW, AT, sb } from "../figma_app/633080";
+import { isStyleType, isEffectOrGrid } from "../905/405710";
+import { PrimaryWorkflowEnum, SubscriptionStatusEnum, getStyleInfo } from "../figma_app/633080";
 export function $$E5(e, t) {
   return `/variable_set/${e}/thumbnails?ver=${t}`;
 }
@@ -50,13 +50,13 @@ export let $$S0 = createOptimistThunk((e, t) => {
     modeContext,
     callback
   } = t;
-  let o = sH(variableSet.node_id);
+  let o = convertStringToKiwi(variableSet.node_id);
   if (!o) {
     console.error(`Invalid variableId in loading thumbnails: ${variableSet.id}`);
     return;
   }
   $$w2(variableSet).then(e => {
-    let t = $$x6(dI(o), e.thumbnails, variableId, variableType, modeContext);
+    let t = $$x6(convertKiwiToString(o), e.thumbnails, variableId, variableType, modeContext);
     callback?.(t);
   }).catch(e => {
     console.error(`Variable thumbnail did not load: ${variableId}`);
@@ -65,14 +65,14 @@ export let $$S0 = createOptimistThunk((e, t) => {
 });
 export async function $$w2(e) {
   return {
-    thumbnails: await Eo.getVariableSetThumbnails($$E5(e.key, e.checkpoint_id))
+    thumbnails: await teamLibraryCache.getVariableSetThumbnails($$E5(e.key, e.checkpoint_id))
   };
 }
 function C(e, t) {
   let i = e.style_type;
   let n = e.meta ? e.meta.style_thumbnail : null;
-  if (Kb(i) && (!t || t.content_hash !== e.content_hash || !n)) try {
-    n = oU(e.style_type, e.node_id);
+  if (isStyleType(i) && (!t || t.content_hash !== e.content_hash || !n)) try {
+    n = generateSerializableStyleThumbnail(e.style_type, e.node_id);
   } catch (t) {
     logError("thumbnails", "error generating local style css thumbnail", {
       name: e.name,
@@ -82,14 +82,14 @@ function C(e, t) {
     });
     reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
   }
-  if (n && (lP(e.style_type) || UE(n))) return {
+  if (n && (isEffectOrGrid(e.style_type) || hasValidFillColor(n))) return {
     contentHash: e.content_hash,
     nodeId: e.node_id,
     styleThumbnail: n,
-    type: PW.STYLE,
+    type: PrimaryWorkflowEnum.STYLE,
     url: void 0
   };
-  if (!t || t.content_hash !== e.content_hash || !t.url || t.url === u0 || t.url === r8) {
+  if (!t || t.content_hash !== e.content_hash || !t.url || t.url === LOADING_THUMBNAIL || t.url === FAILED_THUMBNAIL) {
     let t = O.acquire(e.node_id, e.content_hash);
     return t ? ("FILL" !== e.style_type ? Promise.resolve() : runWithTimeout(Jr().loadAllImagesUnder([e.node_id], ImageExportType.NON_ANIMATED_ONLY, "style-thumbnail"), () => {
       logError("thumbnails", "image manager failed to load", {
@@ -97,16 +97,16 @@ function C(e, t) {
         key: e.key,
         libraryKey: e.library_key
       });
-    }, 1e4)).then(() => scheduler.postTask(() => aV(e.node_id, e.style_type), t).catch(t => ("AbortError" !== t.name && (logError("thumbnails", "error generating local style url thumbnail", {
+    }, 1e4)).then(() => scheduler.postTask(() => generateThumbnailFromStyleMaster(e.node_id, e.style_type), t).catch(t => ("AbortError" !== t.name && (logError("thumbnails", "error generating local style url thumbnail", {
       name: e.name,
       type: e.style_type,
       libraryKey: e.library_key,
       key: e.key
-    }), reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t)), r8)).then(t => ({
+    }), reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t)), FAILED_THUMBNAIL)).then(t => ({
       contentHash: e.content_hash,
       nodeId: e.node_id,
       styleThumbnail: n,
-      type: PW.STYLE,
+      type: PrimaryWorkflowEnum.STYLE,
       url: t
     }))) : null;
   }
@@ -131,26 +131,26 @@ let $$R3 = createOptimistThunk((e, t) => {
     type
   } of t.thumbnails) {
     let h;
-    if (type === PW.COMPONENT) h = a; else if (type === PW.STATE_GROUP) h = s; else if (type === PW.STYLE) h = o; else {
-      if (type === PW.VARIABLE || type === PW.VARIABLE_SET || type === PW.VARIABLE_OVERRIDE || type === PW.RESPONSIVE_SET || type === PW.CONSTRAINED_TEMPLATE || type === PW.CODE_LIBRARY || type === PW.CODE_FILE || type === PW.MANAGED_STRING || type === PW.CODE_COMPONENT) continue;
-      type === PW.MODULE ? h = l : throwTypeError(type);
+    if (type === PrimaryWorkflowEnum.COMPONENT) h = a;else if (type === PrimaryWorkflowEnum.STATE_GROUP) h = s;else if (type === PrimaryWorkflowEnum.STYLE) h = o;else {
+      if (type === PrimaryWorkflowEnum.VARIABLE || type === PrimaryWorkflowEnum.VARIABLE_SET || type === PrimaryWorkflowEnum.VARIABLE_OVERRIDE || type === PrimaryWorkflowEnum.RESPONSIVE_SET || type === PrimaryWorkflowEnum.CONSTRAINED_TEMPLATE || type === PrimaryWorkflowEnum.CODE_LIBRARY || type === PrimaryWorkflowEnum.CODE_FILE || type === PrimaryWorkflowEnum.MANAGED_STRING || type === PrimaryWorkflowEnum.CODE_COMPONENT) continue;
+      type === PrimaryWorkflowEnum.MODULE ? h = l : throwTypeError(type);
     }
-    if (t.styleKind === AT.LOCAL && !(nodeId in h)) continue;
+    if (t.styleKind === SubscriptionStatusEnum.LOCAL && !(nodeId in h)) continue;
     let g = r[nodeId] && r[nodeId].url;
-    g && url && qv(g);
-    let f = t.styleKind === AT.LOCAL ? h[nodeId] : t.item;
+    g && url && revokeThumbnailUrl(g);
+    let f = t.styleKind === SubscriptionStatusEnum.LOCAL ? h[nodeId] : t.item;
     let _ = (() => {
       if (null != contentHash) return contentHash;
       if (f) switch (f.type) {
-        case PW.COMPONENT:
-        case PW.STYLE:
+        case PrimaryWorkflowEnum.COMPONENT:
+        case PrimaryWorkflowEnum.STYLE:
           return f.content_hash;
-        case PW.STATE_GROUP:
-        case PW.VARIABLE:
-        case PW.VARIABLE_SET:
-        case PW.MODULE:
-        case PW.RESPONSIVE_SET:
-        case PW.CODE_COMPONENT:
+        case PrimaryWorkflowEnum.STATE_GROUP:
+        case PrimaryWorkflowEnum.VARIABLE:
+        case PrimaryWorkflowEnum.VARIABLE_SET:
+        case PrimaryWorkflowEnum.MODULE:
+        case PrimaryWorkflowEnum.RESPONSIVE_SET:
+        case PrimaryWorkflowEnum.CODE_COMPONENT:
           return f.version;
         default:
           throwTypeError(f, "Unhandled item type");
@@ -164,7 +164,7 @@ let $$R3 = createOptimistThunk((e, t) => {
       url,
       css: styleThumbnail,
       content_hash: _
-    }), type === PW.STYLE && t.styleKind === AT.LOCAL) {
+    }), type === PrimaryWorkflowEnum.STYLE && t.styleKind === SubscriptionStatusEnum.LOCAL) {
       let t = (c || o)[nodeId];
       t && (!t.meta || t.meta.style_thumbnail !== styleThumbnail) && (c || (c = {
         ...o
@@ -180,13 +180,13 @@ let $$R3 = createOptimistThunk((e, t) => {
   d && e.dispatch($$k8({
     thumbnails: d
   }));
-  c && t.styleKind === AT.LOCAL && e.dispatch(I0({
+  c && t.styleKind === SubscriptionStatusEnum.LOCAL && e.dispatch(I0({
     local: c,
-    type: PW.STYLE
+    type: PrimaryWorkflowEnum.STYLE
   }));
 });
 let $$N4 = createOptimistThunk(async (e, t) => {
-  if (t.styleKind === AT.LOCAL) {
+  if (t.styleKind === SubscriptionStatusEnum.LOCAL) {
     let i = e.getState().library.local.styles[t.styleNodeId];
     let n = e.getState().library.local.thumbnails[t.styleNodeId];
     if (i) {
@@ -195,27 +195,27 @@ let $$N4 = createOptimistThunk(async (e, t) => {
       t instanceof Promise && r && O.release(r.nodeId, r.contentHash);
       r && e.dispatch($$R3({
         thumbnails: [r],
-        styleKind: AT.LOCAL
+        styleKind: SubscriptionStatusEnum.LOCAL
       }));
     }
-  } else if (t.styleKind === AT.SUBSCRIBED_WITHOUT_LIBRARY) {
+  } else if (t.styleKind === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY) {
     let i = e.getState().library.local.thumbnails[t.styleNodeId];
     if (i) return;
     if (getFeatureFlags().ds_zombie_styles_fixes) {
       let n = e.getState().mirror.sceneGraph.get(t.styleNodeId);
-      let r = n && hasStyleType(n) ? sb(n) : null;
+      let r = n && hasStyleType(n) ? getStyleInfo(n) : null;
       if (r) {
         let t = C(r, i);
         let n = await t;
         t instanceof Promise && n && O.release(n.nodeId, n.contentHash);
         n && e.dispatch($$R3({
           thumbnails: [n],
-          styleKind: AT.SUBSCRIBED_WITHOUT_LIBRARY,
+          styleKind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
           item: r
         }));
       }
     } else {
-      let i = aV(t.styleNodeId, "FILL");
+      let i = generateThumbnailFromStyleMaster(t.styleNodeId, "FILL");
       e.dispatch($$T7({
         styleID: t.styleNodeId,
         url: i
@@ -237,13 +237,13 @@ let $$P1 = createOptimistThunk(async (e, t) => {
   }
   if (o.length > 0 && e.dispatch($$R3({
     thumbnails: o,
-    styleKind: AT.LOCAL
+    styleKind: SubscriptionStatusEnum.LOCAL
   })), l.length > 0) for (let t = 0; t < l.length; t += 50) {
     let i = (await _7(l.slice(t, t + 50))).map(e => e.resolve).filter(isNotNullish);
     for (let e of i) O.release(e.nodeId, e.contentHash);
     e.dispatch($$R3({
       thumbnails: i,
-      styleKind: AT.LOCAL
+      styleKind: SubscriptionStatusEnum.LOCAL
     }));
   }
 });

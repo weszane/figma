@@ -1,4 +1,4 @@
-import { w } from '../905/5147';
+import { kiwiCodec } from '../905/5147';
 // import { throwTypeError } from "../figma_app/164212";
 import { E as _$$E } from '../905/142894';
 import { m as _$$m } from '../905/168176';
@@ -290,12 +290,12 @@ class I extends X {
     let t = figmaScopeBindings?.getLayerOverrides(A(e), this.sceneType);
     return t ? t.map(e => ({
       ...e,
-      fields: w.decodeMessage(e.fields).nodeChanges[0]
+      fields: kiwiCodec.decodeMessage(e.fields).nodeChanges[0]
     })) : [];
   }
   getDSDOverridesForLayer(e) {
     let t = figmaScopeBindings?.getLayerDSDOverrides(A(e), this.sceneType);
-    if (t && t.length) return w.decodeMessage(t).nodeChanges?.[0];
+    if (t && t.length) return kiwiCodec.decodeMessage(t).nodeChanges?.[0];
   }
   getAllSublayerInfoForImmutableFrame(e) {
     return figmaScopeBindings?.getImmutableFrameSubLayerInfo(A(e), this.sceneType) ?? new Map();
@@ -306,7 +306,7 @@ class I extends X {
       ...e,
       overrides: e.overrides.map(e => ({
         ...e,
-        fields: w.decodeMessage(e.fields).nodeChanges[0]
+        fields: kiwiCodec.decodeMessage(e.fields).nodeChanges[0]
       }))
     })) : [];
   }
@@ -315,7 +315,7 @@ class I extends X {
     let r = figmaScopeBindings?.getTextInsertionStyle(A(e), this.sceneType);
     if (!r || r.length === 0) return null;
     try {
-      t = w.decodeMessage(r).nodeChanges;
+      t = kiwiCodec.decodeMessage(r).nodeChanges;
     } catch (e) {
       console.warn('FigmaScope: error decoding node changes', e);
       return null;
@@ -384,7 +384,7 @@ class I extends X {
   createAndCacheNode(e) {
     let t;
     try {
-      t = w.decodeNodeChange(e.nodeChange);
+      t = kiwiCodec.decodeNodeChange(e.nodeChange);
     } catch (e) {
       console.error('FigmaScope: error decoding node changes', e);
       return null;

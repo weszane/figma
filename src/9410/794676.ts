@@ -43,7 +43,7 @@ import { XS } from "../figma_app/178752";
 import { selectCurrentFile, useFullscreenViewFile } from "../figma_app/516028";
 import { dq, sZ } from "../905/845253";
 import { selectCurrentUser, getUserId } from "../905/372672";
-import { Bc } from "../figma_app/615482";
+import { resetTrackedAtoms } from "../figma_app/615482";
 import { KeyboardLayout, SchemaJoinStatus, Multiplayer, FullscreenPerfInfo, CorePerfInfo, AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { As, CZ, rd, v7 } from "../figma_app/475303";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -1104,7 +1104,7 @@ export function $$t80({
     }, [t, e, i]);
   })();
   _$$i();
-  useEffect(() => Bc, []);
+  useEffect(() => resetTrackedAtoms, []);
   DW();
   useEffect(() => (h === FEditorType.Whiteboard && BrowserInfo.isMeetDevice && "undefined" != typeof document && document.addEventListener("visibilitychange", t7), () => {
     document.removeEventListener("visibilitychange", t7);

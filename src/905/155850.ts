@@ -1,7 +1,7 @@
-import { cZ, OS } from "../905/113138";
-import { fileEntityModel } from "../905/806985";
-import { S } from "../figma_app/787550";
-import { E } from "../905/118283";
+import { cZ, OS } from "src/905/113138";
+import { fileEntityModel } from "src/905/806985";
+import { S } from "src/figma_app/787550";
+import { E } from "src/905/118283";
 let $$o1 = new cZ("FILE").binding;
 let $$l0 = (e, t) => new OS(e, "fileByKey", $$o1, fileEntityModel, async e => (await S.getMeta({
   fileKey: e

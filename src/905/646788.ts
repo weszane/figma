@@ -177,7 +177,7 @@ import { A as _$$A6 } from "../905/563377";
 import { k2 } from "../figma_app/10554";
 import { e0 as _$$e5 } from "../905/696396";
 import { y4I, _YF } from "../figma_app/822011";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { useMemoShallow } from "../905/19536";
 import nA from "../vendor/241899";
 import { t as _$$t5 } from "../905/331623";
@@ -200,7 +200,7 @@ import { Np } from "../figma_app/193867";
 import { qG } from "../figma_app/803787";
 import { vt as _$$vt } from "../figma_app/45218";
 import { Jd } from "../905/71785";
-import { o as _$$o2 } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { n as _$$n4, a as _$$a3 } from "../905/114254";
 import { N as _$$N3 } from "../905/620375";
 import { X$ } from "../figma_app/870683";
@@ -3208,13 +3208,13 @@ let n2 = registerModal(function ({
     onUnpublishHubFileError
   } = useMemo(() => cX(e) ? {
     beforeUnpublishHubFile: async () => {
-      p(_$$o2.HUBFILE);
+      p(LibrarySourceEnum.HUBFILE);
       atomStoreManager.set(UM, {
         state: F4.UNPUBLISH_HUB_FILE_INITIATED
       });
       AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(""));
       await u(ZS({
-        publishingMode: _$$o2.HUBFILE,
+        publishingMode: LibrarySourceEnum.HUBFILE,
         unpublishAll: !0,
         savepointDescription: "slide template unpublish",
         hubFileId: e.id,
@@ -3233,9 +3233,9 @@ let n2 = registerModal(function ({
     }
   } : e.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE && getFeatureFlags().cooper_publish_to_cmty ? {
     beforeUnpublishHubFile: async () => {
-      p(_$$o2.HUBFILE);
+      p(LibrarySourceEnum.HUBFILE);
       await u(ZS({
-        publishingMode: _$$o2.HUBFILE,
+        publishingMode: LibrarySourceEnum.HUBFILE,
         unpublishAll: !0,
         savepointDescription: "cooper hub file unpublish",
         hubFileId: e.id,
@@ -4006,7 +4006,7 @@ function rn(e) {
   let {
     publishableComponentNodeIds,
     localComponents
-  } = useSelector(qG(Pn, _$$o2.HUBFILE), c2);
+  } = useSelector(qG(Pn, LibrarySourceEnum.HUBFILE), deepEqual);
   let _ = (() => {
     if (o?.editorType === _YF.COOPER) {
       let e = PP({

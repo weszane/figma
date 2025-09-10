@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { assertNotNullish } from "../figma_app/465776";
 import { VariableResolvedDataType, VariableDataType, OperationType } from "../figma_app/763686";
 import { parseSessionLocalID } from "../905/871411";
-import { sH as _$$sH } from "../905/805904";
+import { convertVariableIdToKiwi } from "../905/805904";
 import { resolveVariableValue } from "../905/929949";
 function d(e, t, r) {
   let n = resolveVariableValue(t, r);
@@ -51,7 +51,7 @@ function d(e, t, r) {
     var c;
     var u = null;
     if ("string" == typeof r) {
-      let e = _$$sH(r);
+      let e = convertVariableIdToKiwi(r);
       e && (u = {
         guid: {
           sessionID: e?.guid?.sessionID ?? -1,
@@ -135,7 +135,7 @@ export function $$u2(e) {
   for (var r of e) {
     if ("SET_VARIABLE" === r.connectionType) {
       if (r.targetVariable && "id" in r.targetVariable) {
-        let e = _$$sH(r.targetVariable.id);
+        let e = convertVariableIdToKiwi(r.targetVariable.id);
         r.targetVariable.id = {
           guid: {
             sessionID: e?.guid?.sessionID ?? -1,

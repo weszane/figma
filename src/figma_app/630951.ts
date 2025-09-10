@@ -4,7 +4,7 @@ import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { n1 } from "../figma_app/657017";
 import { oA } from "../905/71785";
-import { PP } from "../figma_app/633080";
+import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
 import { TG } from "../905/72677";
 import { D } from "../905/347702";
 import { je, Qh } from "../figma_app/155728";
@@ -24,7 +24,7 @@ export function $$g3(e) {
   return {
     name: t,
     key: id,
-    type: PP,
+    type: COMMUNITY_LIBRARY_FILE,
     thumbnail_url,
     library_key: library_key ?? _$$l(""),
     author_name: publisher.name,
@@ -43,7 +43,7 @@ export function $$f1(e) {
   return {
     name: library_file_name,
     key: library_file_key,
-    type: PP,
+    type: COMMUNITY_LIBRARY_FILE,
     thumbnail_url,
     library_key,
     author_name,

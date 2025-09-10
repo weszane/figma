@@ -10,7 +10,7 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { logWarning, logDebug } from "../905/714362";
 import { XHR } from "../905/910117";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { Ay as _$$Ay } from "../figma_app/432652";
 import { QZ } from "../figma_app/62612";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
@@ -402,7 +402,7 @@ let V = _$$n(async function ({
     return;
   }
   let h = version ? `/component/${key}/canvas?ver=${version}` : `/component/${key}/canvas`;
-  if (!(i = await Eo.getCanvas({
+  if (!(i = await teamLibraryCache.getCanvas({
     canvas_url: h
   }))) return;
   let g = PluginHelpers.deserializeProductComponentFromBuffer(key, i);

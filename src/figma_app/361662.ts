@@ -6,7 +6,7 @@ import { selectCurrentFile, useOpenFileLibraryKey } from "../figma_app/516028";
 import { I as _$$I } from "../905/342732";
 import { Cn, oA, Rn } from "../905/225265";
 import { Ly, He } from "../figma_app/155728";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { U } from "../905/966438";
 import { M as _$$M, k as _$$k } from "../905/540025";
 import { MA } from "../figma_app/134428";
@@ -56,24 +56,24 @@ export function $$m0({
     type: function (e) {
       if ("embed" === e) return "embed";
       switch (e) {
-        case PW.COMPONENT:
+        case PrimaryWorkflowEnum.COMPONENT:
           return "component";
-        case PW.STATE_GROUP:
+        case PrimaryWorkflowEnum.STATE_GROUP:
           return "state_group";
-        case PW.MODULE:
+        case PrimaryWorkflowEnum.MODULE:
           return "module";
-        case PW.RESPONSIVE_SET:
+        case PrimaryWorkflowEnum.RESPONSIVE_SET:
           return "responsive_set";
-        case PW.CODE_COMPONENT:
+        case PrimaryWorkflowEnum.CODE_COMPONENT:
           return "code_component";
-        case PW.CODE_LIBRARY:
-        case PW.CODE_FILE:
-        case PW.STYLE:
-        case PW.VARIABLE:
-        case PW.VARIABLE_OVERRIDE:
-        case PW.VARIABLE_SET:
-        case PW.CONSTRAINED_TEMPLATE:
-        case PW.MANAGED_STRING:
+        case PrimaryWorkflowEnum.CODE_LIBRARY:
+        case PrimaryWorkflowEnum.CODE_FILE:
+        case PrimaryWorkflowEnum.STYLE:
+        case PrimaryWorkflowEnum.VARIABLE:
+        case PrimaryWorkflowEnum.VARIABLE_OVERRIDE:
+        case PrimaryWorkflowEnum.VARIABLE_SET:
+        case PrimaryWorkflowEnum.CONSTRAINED_TEMPLATE:
+        case PrimaryWorkflowEnum.MANAGED_STRING:
           return;
         default:
           throwTypeError(e, "Can't get asset type for logging");

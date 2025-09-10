@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { CSSExportHelpers } from "../figma_app/763686";
-import { dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { v4, xv as _$$xv } from "../figma_app/655139";
@@ -268,7 +268,7 @@ export function $$j12(e) {
   e.useCopyAllShadows = function (e) {
     let t = Ku();
     let r = OE(e, e => e.color);
-    let n = e.flatMap(e => [e.xVar, e.yVar, e.radiusVar, e.spreadVar, e.colorVar]).map(e => e?.value?.alias ? dI(e.value.alias) : void 0);
+    let n = e.flatMap(e => [e.xVar, e.yVar, e.radiusVar, e.spreadVar, e.colorVar]).map(e => e?.value?.alias ? convertKiwiToVariableIdString(e.value.alias) : void 0);
     let a = hg(n ?? []);
     return useCallback(() => r.filter(e => e.color).map((e, r) => E(e.value, [e.color], t, [a?.[5 * r], a?.[5 * r + 1], a?.[5 * r + 2], a?.[5 * r + 3], a?.[5 * r + 4]])).join("\n"), [r, t, a]);
   };

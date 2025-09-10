@@ -42,7 +42,7 @@ export class ComputationObjectNode {
     objectNodes?.[this.computationDef.objectName]?.add(this)
     const computedFieldName = computationDef.computedFieldDef.name
     if (computedFieldName in initialResult) {
-      this.unsubscribe = () => {}
+      this.unsubscribe = () => { }
       this.onUpdateResult(initialResult[computedFieldName])
     }
     else {
@@ -272,7 +272,7 @@ export class ComputationObjectNode {
    * Placeholder for stale recreation logic.
    * Original method name: recreateIfStale
    */
-  recreateIfStale(_e: any, _t: any): void {}
+  recreateIfStale(_e: any, _t: any): void { }
 
   /**
    * Returns optional error paths for debugging.

@@ -11,7 +11,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { Gj } from "../figma_app/646357";
 import { FEditorType } from "../figma_app/53721";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { sp } from "../figma_app/678300";
 import { K, h as _$$h } from "../905/275787";
 import { er } from "../905/753512";
@@ -67,8 +67,8 @@ class C extends PureComponent {
 }
 function T(e) {
   switch (e.type) {
-    case PW.CODE_COMPONENT:
-    case PW.RESPONSIVE_SET:
+    case PrimaryWorkflowEnum.CODE_COMPONENT:
+    case PrimaryWorkflowEnum.RESPONSIVE_SET:
       return e.containingFrame;
     default:
       return e.containing_frame;
@@ -76,8 +76,8 @@ function T(e) {
 }
 function k(e) {
   switch (e.type) {
-    case PW.CODE_COMPONENT:
-    case PW.RESPONSIVE_SET:
+    case PrimaryWorkflowEnum.CODE_COMPONENT:
+    case PrimaryWorkflowEnum.RESPONSIVE_SET:
       return e.assetId;
     default:
       return e.node_id;
@@ -214,7 +214,7 @@ export function $$D1(e) {
   let T = e.ui3Compact ? {
     marginLeft: `-${s}px`
   } : void 0;
-  let R = e.items.map(e => e.type === PW.COMPONENT ? e.component_key : e.key).join(",");
+  let R = e.items.map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key).join(",");
   return jsxs("div", {
     className: `${I} ${e.className ? e.className : ""}`,
     children: [jsx("div", {

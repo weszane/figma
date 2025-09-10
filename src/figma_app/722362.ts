@@ -1,6 +1,6 @@
 import { useMemo, useRef, useEffect, createContext, useContext } from "react";
 import { useStore, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { isEmptyObject } from "../figma_app/493477";
 import { FileSourceType } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
@@ -28,7 +28,7 @@ export function $$f9() {
 export function $$E2() {
   let e = useRef(null);
   let t = $$f9();
-  return c2(t, e.current) ? e.current : (e.current = t, t);
+  return deepEqual(t, e.current) ? e.current : (e.current = t, t);
 }
 export function $$y8(e) {
   let t = p();

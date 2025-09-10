@@ -16,7 +16,7 @@ import { FC } from "../figma_app/212807";
 import { LH } from "../905/872904";
 import { FileCanEdit, LibraryIsBranch, TeamCanAdmin, SharingGroupsByResourceConnection } from "../figma_app/43951";
 import { hasAdminRoleAccessOnTeam } from "../figma_app/642025";
-import { Yu, Tb, bK, wg } from "../figma_app/633080";
+import { NO_TEAM, getDraftsSidebarString, isCommunityLibraryFile, initialLibraryStats } from "../figma_app/633080";
 import { e0 as _$$e } from "../905/696396";
 import { r as _$$r, F as _$$F } from "../905/336143";
 import { I as _$$I } from "../905/423735";
@@ -743,9 +743,9 @@ function th({
     children: [t.map(t => {
       let a = i[t.library_file_key];
       if (!a) return;
-      let s = ("alpha" === h.sortBy || "search" === h.sortBy) && b !== (t.team_id ?? Yu);
-      b = t.team_id ?? Yu;
-      let o = t.team_name || Tb();
+      let s = ("alpha" === h.sortBy || "search" === h.sortBy) && b !== (t.team_id ?? NO_TEAM);
+      b = t.team_id ?? NO_TEAM;
+      let o = t.team_name || getDraftsSidebarString();
       let m = _$$E(t);
       return jsxs(_$$Fragment, {
         children: [s && jsx("div", {
@@ -1172,7 +1172,7 @@ function tk({
     });
     return e;
   }, [h, m, l, f]);
-  let [S, w] = useMemo(() => V()(E, e => bK(e)), [E]);
+  let [S, w] = useMemo(() => V()(E, e => isCommunityLibraryFile(e)), [E]);
   return 0 === E.length && 0 === b.length ? null : jsxs("div", {
     className: tI,
     children: [jsx("div", {
@@ -1313,7 +1313,7 @@ export function $$tM0({
     subscriptionFileKey: openFileKey,
     includeThumbnails: C
   });
-  let K = W?.data || wg;
+  let K = W?.data || initialLibraryStats;
   let Y = ry();
   let q = useMemo(() => d()(K?.files ?? [], e => e.library_key), [K]);
   let $ = useMemo(() => M ? q[M] ?? null : null, [q, M]);

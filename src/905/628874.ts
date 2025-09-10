@@ -330,18 +330,18 @@ export function setupFileObject(
 export function convertTeamToRaw(team: any) {
   return team
     ? {
-        id: team.id,
-        name: team.name,
-        org_id: team.orgId,
-        img_url: team.imgUrl ?? undefined,
-        subscription: team.subscription,
-        restrictions_list: team.restrictionsList,
-        student_team_at: team.studentTeamAt ? team.studentTeamAt.toString() : null,
-        grace_period_end: team.gracePeriodEnd ? team.gracePeriodEnd.toString() : null,
-        deleted_at: team.deletedAt ? team.deletedAt.toString() : null,
-        created_at: team.createdAt.toString(),
-        student_team: !!team.studentTeamAt,
-      }
+      id: team.id,
+      name: team.name,
+      org_id: team.orgId,
+      img_url: team.imgUrl ?? undefined,
+      subscription: team.subscription,
+      restrictions_list: team.restrictionsList,
+      student_team_at: team.studentTeamAt ? team.studentTeamAt.toString() : null,
+      grace_period_end: team.gracePeriodEnd ? team.gracePeriodEnd.toString() : null,
+      deleted_at: team.deletedAt ? team.deletedAt.toString() : null,
+      created_at: team.createdAt.toString(),
+      student_team: !!team.studentTeamAt,
+    }
     : null
 }
 

@@ -50,7 +50,7 @@ import { J as _$$J } from "../figma_app/900567";
 import { Zh, $y, yG, dR, vu, ll, bz, ke, zO, bj, Bx, z6, ac, cq, UJ } from "../figma_app/731560";
 import { useDispatch, useSelector } from "react-redux";
 import { debug, throwTypeError } from "../figma_app/465776";
-import { oB } from "../figma_app/273493";
+import { rgbToHsl } from "../figma_app/273493";
 import { d as _$$d } from "../vendor/456530";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P2 } from "../vendor/348225";
@@ -67,7 +67,7 @@ import { Y as _$$Y } from "../figma_app/916469";
 import { GQ, BG, JE, L as _$$L } from "../figma_app/634288";
 import { g as _$$g2 } from "../9410/385690";
 import { a as _$$a } from "../2b17fec9/927391";
-import { UE, H0, YU, Uv } from "../figma_app/191804";
+import { whiteColor, parseColor, colorToRgbaString, blackColor } from "../figma_app/191804";
 import { a as _$$a2 } from "../905/847494";
 import { W as _$$W2 } from "../2b17fec9/185058";
 import { DP, vz } from "../figma_app/351862";
@@ -416,7 +416,7 @@ let ef = memo(function ({
   let [K, W] = useState();
   let Z = A ? k ? "whileDragShouldCancel" : "whileDrag" : "pencil" === e && i ? "hiddenPencil" : C ? "whileTap" : h && i ? "selectedSubmenuTool" : !j && _ ? "whileHovering" : "initial";
   if ("connector" === e && !A) {
-    let e = oB(_$$F2.parse(t));
+    let e = rgbToHsl(_$$F2.parse(t));
     e.l > .9 && (t = _$$F2.formatHSLA({
       h: e.h,
       s: e.s,
@@ -1101,7 +1101,7 @@ function e2() {
         disableDragging: !0
       }, e)), e_.map(t => jsx(_$$h, {
         shapeType: t,
-        color: UE,
+        color: whiteColor,
         strokeStyleType: e,
         addToRecentsBehavior: ConfirmationLevel.YES,
         toolSetSource: ShapeSidebarMode.NONE,
@@ -1218,7 +1218,7 @@ function ts({
     };
   }(e);
   let m = useCallback(e => {
-    a(H0(e));
+    a(parseColor(e));
   }, [a]);
   let f = useAtomWithSubscription(Qv);
   let _ = !!f;
@@ -1237,7 +1237,7 @@ function ts({
         let r = isCustomPalette ? AF(t, paletteType) : V_(e, paletteType);
         return {
           key: `${i}-${t}`,
-          value: YU(e),
+          value: colorToRgbaString(e),
           isSelected: i === x,
           tooltipText: r,
           disabled: l,
@@ -1271,7 +1271,7 @@ function to({
   recordingKey: o,
   ...l
 }) {
-  let d = t || Uv;
+  let d = t || blackColor;
   let [c, u] = useState(!1);
   return jsx(_$$v, {
     target: jsx(tl, {

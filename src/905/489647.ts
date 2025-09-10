@@ -24,7 +24,7 @@ import { Rt } from "../figma_app/979658";
 import { bD } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { ManifestEditorType } from "../figma_app/155287";
-import { YR } from "../905/622391";
+import { getOpenFileKey } from "../905/622391";
 import { zM } from "../figma_app/89917";
 import { Sn } from "../905/946805";
 import { RM, $I } from "../figma_app/322845";
@@ -85,7 +85,7 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
         command: "",
         queryMode: !1,
         triggeredFrom: "try-plugin-params",
-        openFileKey: fileKey ?? YR() ?? "",
+        openFileKey: fileKey ?? getOpenFileKey() ?? "",
         isWidget: !1,
         runMode: "default"
       },

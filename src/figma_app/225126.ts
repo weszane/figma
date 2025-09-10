@@ -1,8 +1,8 @@
 import { createContext } from "react";
 import { VariableResolvedDataType, LinterCppBindings } from "../figma_app/763686";
-import { sH } from "../905/537777";
+import { convertStringToKiwi } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
-import { _W } from "../figma_app/191804";
+import { calculateColorDifference } from "../figma_app/191804";
 import { w0 } from "../figma_app/594947";
 import { RI } from "../905/711212";
 import { n as _$$n } from "../905/347702";
@@ -124,7 +124,7 @@ let $$x1 = _$$n(async (e, t, r, n, a, c, u, g, f) => {
     if (!r || r?.resolvedType !== u) continue;
     let o = v.get(r.variableSetId);
     if (!o) continue;
-    let d = sH(o.node_id);
+    let d = convertStringToKiwi(o.node_id);
     if (!d) continue;
     let _ = function (e) {
       if (e && "MIXED" !== e) {
@@ -161,7 +161,7 @@ let $$x1 = _$$n(async (e, t, r, n, a, c, u, g, f) => {
     }
     if (y) w.push(f);else {
       let e = function (e, t) {
-        return e.color_value && t.color_value ? _W(e.color_value, t.color_value) : e.number_value && t.number_value ? Math.abs(e.number_value - t.number_value) : m;
+        return e.color_value && t.color_value ? calculateColorDifference(e.color_value, t.color_value) : e.number_value && t.number_value ? Math.abs(e.number_value - t.number_value) : m;
       }(_, g);
       O.push({
         candidate: f,

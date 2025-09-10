@@ -142,7 +142,7 @@ export function useSuspendableSubscription(...args: any[]) {
     }
   }, [enabled, context.client, context.mock, view, traceId, subscriptionArgs, forceUpdate])
 
-  const retainedPromiseManager = useMemo(() => new RetainedPromiseManager(() => () => {}), [])
+  const retainedPromiseManager = useMemo(() => new RetainedPromiseManager(() => () => { }), [])
 
   return useMemo(() => {
     const client = context.client

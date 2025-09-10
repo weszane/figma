@@ -1,4 +1,4 @@
-import { c2, Jj } from "../905/382883";
+import { deepEqual, includesEqual } from "../905/382883";
 import { truncate } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { isCooperFeatureEnabled } from "../figma_app/828186";
@@ -63,7 +63,7 @@ export function $$f3() {
   return e;
 }
 export function $$_0(e) {
-  return c2(e, $$f3());
+  return deepEqual(e, $$f3());
 }
 export function $$A23(e, t) {
   for (let i of t) if (i.type === e) return !0;
@@ -234,14 +234,14 @@ export var $$N8 = (e => (e[e.REMOVE_FROM_GROUP = 0] = "REMOVE_FROM_GROUP", e[e.A
 export function $$P2(e, t, i) {
   let r = i ? i.value : [];
   let a = [];
-  1 !== t || Jj(r, e.value) ? 0 === t && (a = r.filter(t => !c2(t, e.value))) : a = [...r, e.value];
+  1 !== t || includesEqual(r, e.value) ? 0 === t && (a = r.filter(t => !deepEqual(t, e.value))) : a = [...r, e.value];
   return $$T10(a);
 }
 export function $$O20(e, t, i) {
   let r;
   let a = i ? i.value : $$u19;
   let s = a[e.spaceType];
-  1 !== t || Jj(s, e.value) ? 0 === t && (r = s.flatMap(t => c2(t, e.value) ? [] : [t])) : r = [...s, e.value];
+  1 !== t || includesEqual(s, e.value) ? 0 === t && (r = s.flatMap(t => deepEqual(t, e.value) ? [] : [t])) : r = [...s, e.value];
   return $$k1({
     ...a,
     [e.spaceType]: r

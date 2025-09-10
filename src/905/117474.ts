@@ -1,5 +1,5 @@
-import { tp, Kr, AO } from "../vendor/111975";
-import { R } from "../905/987614";
+import { tp, Kr, AO } from "src/vendor/111975";
+import { R } from "src/905/987614";
 export function $$a3(e) {
   return document.activeElement === e;
 }

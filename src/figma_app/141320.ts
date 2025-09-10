@@ -1,5 +1,5 @@
-import { A } from "../905/920142";
-import { AccessLevelEnum } from "../905/557142";
+import { A } from "src/905/920142";
+import { AccessLevelEnum } from "src/905/557142";
 export function $$a4(e) {
   return e && !!e.student_validated_at;
 }

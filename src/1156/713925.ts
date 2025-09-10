@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
-import { Wh } from "../figma_app/615482";
-let a = Wh(() => atom([]));
-let l = Wh(() => atom(new Map()));
+import { setupRemovableAtomFamily } from "../figma_app/615482";
+let a = setupRemovableAtomFamily(() => atom([]));
+let l = setupRemovableAtomFamily(() => atom(new Map()));
 export function $$o3() {
   let e = atomStoreManager.get(l);
   atomStoreManager.set(a, Array.from(e.values()));

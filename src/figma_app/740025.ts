@@ -1,7 +1,7 @@
 import { G } from '../905/11536';
 import { getI18nString, getTranslatedDynamicContent } from '../905/303541';
 import { selectCurrentUser } from '../905/372672';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { trackEventAnalytics } from '../905/449184';
 import { $A } from '../905/862883';
 import { aP } from '../figma_app/10554';
@@ -217,7 +217,7 @@ export function $$el50() {
 }
 export function $$ed51(e) {
   let t = selectCurrentUser();
-  let r = useSelector(e => $$eu39(e), c2);
+  let r = useSelector(e => $$eu39(e), deepEqual);
   let a = useSelector(e => $$ec20(e));
   let s = useSelector(e => 'authedProfilesById' in e ? e.authedProfilesById : {});
   if (!e) return !1;

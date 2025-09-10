@@ -1,5 +1,5 @@
-import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
-import { Hg, oF } from "../905/604501";
+import { createMetaValidator, APIParameterUtils } from "src/figma_app/181241";
+import { Hg, oF } from "src/905/604501";
 export let $$a0 = new class {
   constructor() {
     this.CommunityAllCategoriesSchemaValidator = createMetaValidator("CommunityAllCategoiresSchemaValidator", Hg, "xrv_api_community_categories", !0);

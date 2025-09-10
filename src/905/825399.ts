@@ -21,7 +21,7 @@ import { M4 } from "../905/713695";
 import { w5 } from "../figma_app/345997";
 import { je } from "../figma_app/155728";
 import { ol } from "../figma_app/598018";
-import { Nf, ZA } from "../figma_app/633080";
+import { isTeamLibrary, isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { n as _$$n } from "../905/347702";
 import { c as _$$c } from "../905/606579";
 export function $$k10() {
@@ -104,7 +104,7 @@ export function $$D8() {
 }
 export function $$L3(e) {
   return useMemo(() => function (e) {
-    let t = e.find(Nf);
+    let t = e.find(isTeamLibrary);
     if (t && t.workspace_id && t.workspace_name) return {
       name: t?.workspace_name,
       id: t?.workspace_id
@@ -123,7 +123,7 @@ export function $$F12(e = 0) {
 export function $$M7(e, t) {
   let i = useMemo(() => Array.from(e), [e]);
   let r = bj(i);
-  return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === r.status ? gB(r.data.filter(ZA)) : Xm() : "loading" === t.status ? Xm() : "loaded" !== t.status ? e1([]) : gB($$j2(e, t.result)), [r, e, t]);
+  return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === r.status ? gB(r.data.filter(isPublishedLibraryWithAssets)) : Xm() : "loading" === t.status ? Xm() : "loaded" !== t.status ? e1([]) : gB($$j2(e, t.result)), [r, e, t]);
 }
 export function $$j2(e, t) {
   return Array.from(e).map(e => t.find(t => t.library_key === e)).filter(isNotNullish);
@@ -137,7 +137,7 @@ export function $$U6(e, t) {
     return n ? _$$l(n) : void 0;
   }).filter(isNotNullish), [e, i]);
   let l = bj(r);
-  return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === l.status ? gB(l.data.filter(ZA)) : Xm() : "loaded" !== t.status ? t : gB($$B1(e, t.data, i)), [l, e, t, i]);
+  return useMemo(() => getFeatureFlags().dse_library_modal_recommended_perf ? "loaded" === l.status ? gB(l.data.filter(isPublishedLibraryWithAssets)) : Xm() : "loaded" !== t.status ? t : gB($$B1(e, t.data, i)), [l, e, t, i]);
 }
 export function $$B1(e, t, i) {
   return e.filter(e => !1 !== e.isSubscribed).map(e => {
@@ -157,7 +157,7 @@ let $$V9 = _$$n(e => {
   let r = useMemo(() => (i.data?.resourceConnectionSharingGroups ?? []).map(e => e.libraryKey ? _$$l(e.libraryKey) : null).filter(isNotNullish), [i]);
   let l = bj(r);
   return useMemo(() => {
-    if (getFeatureFlags().dse_library_modal_recommended_perf) return "loaded" === l.status ? gB(l.data.filter(ZA)) : Xm();
+    if (getFeatureFlags().dse_library_modal_recommended_perf) return "loaded" === l.status ? gB(l.data.filter(isPublishedLibraryWithAssets)) : Xm();
     let t = i.data?.resourceConnectionSharingGroups;
     return gB(e.filter(e => t?.some(t => t.libraryKey === e.library_key)));
   }, [e, i, l]);

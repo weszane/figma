@@ -2,7 +2,7 @@ import { atom, setupSubscriptionAtom, createAtomWithEquality, atomStoreManager }
 import r from "../vendor/128080";
 import { Md, z2 } from "../figma_app/187925";
 import { fullscreenReadyAtom } from "../905/924253";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { subscribeObservable, isObservableAlive } from "../figma_app/84367";
 var a = r;
 let c = atom(e => {
@@ -12,7 +12,7 @@ let c = atom(e => {
 });
 export function $$u0(e) {
   let t = "function" == typeof e ? e : () => e;
-  return Wh(() => setupSubscriptionAtom({
+  return setupRemovableAtomFamily(() => setupSubscriptionAtom({
     get: () => t().getCopy(),
     subscribe: e => subscribeObservable(t(), {
       onChangeDeferred: e
@@ -50,11 +50,11 @@ function f(e, {
     case 2:
       return r();
     case 1:
-      return Wh(r, {
+      return setupRemovableAtomFamily(r, {
         preserveValue: !0
       });
     case 0:
-      return Wh(r, {
+      return setupRemovableAtomFamily(r, {
         preserveValue: !1
       });
   }

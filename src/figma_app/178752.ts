@@ -5,7 +5,7 @@ import { useSubscription } from "../figma_app/288654";
 import { eB } from "../figma_app/933328";
 import { LH } from "../905/872904";
 import { WorkspaceSubscribedLibrariesForFile } from "../figma_app/43951";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 export function $$_1(e) {
@@ -14,12 +14,12 @@ export function $$_1(e) {
   let a = useSelector(e => e.recentlyUsed.libraryItems);
   return useMemo(() => {
     let n = [];
-    for (let i of a[e]) if ((null !== r ? i.last_added_at_by_user_id?.[r] : void 0) && (i.type === PW.COMPONENT || i.type === PW.STATE_GROUP)) {
+    for (let i of a[e]) if ((null !== r ? i.last_added_at_by_user_id?.[r] : void 0) && (i.type === PrimaryWorkflowEnum.COMPONENT || i.type === PrimaryWorkflowEnum.STATE_GROUP)) {
       let e = function (e, t) {
         let r = e.library_key;
         let n = e.team_id;
         let i = e.node_id;
-        return e.type === PW.COMPONENT ? t.publishedByLibraryKey.components[n]?.[r]?.[i] || t.defaultPublished.componentsByLibraryKey[r]?.[i] : e.type === PW.STATE_GROUP ? t.publishedByLibraryKey.stateGroups[n]?.[r]?.[i] || t.defaultPublished.stateGroupsByLibraryKey[r]?.[i] : void 0;
+        return e.type === PrimaryWorkflowEnum.COMPONENT ? t.publishedByLibraryKey.components[n]?.[r]?.[i] || t.defaultPublished.componentsByLibraryKey[r]?.[i] : e.type === PrimaryWorkflowEnum.STATE_GROUP ? t.publishedByLibraryKey.stateGroups[n]?.[r]?.[i] || t.defaultPublished.stateGroupsByLibraryKey[r]?.[i] : void 0;
       }(i, t);
       e && n.push(e);
     }

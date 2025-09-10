@@ -1,10 +1,10 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useLayoutEffect, useState, useMemo, useCallback, useEffect } from "react";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { clamp } from "../figma_app/492908";
 import o from "classnames";
 import { A as _$$A } from "../vendor/850789";
-import { YU, H0, Bx } from "../figma_app/191804";
+import { colorToRgbaString, parseColor, getThemeBackgroundColor } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
 import { l as _$$l } from "../905/745972";
 import { kt } from "../figma_app/858013";
@@ -323,7 +323,7 @@ let ee = {
 let $$et0 = 16 / 9;
 let ei = (e, t) => e && t ? _$$o(e.x, t.x) && _$$o(e.y, t.y) && _$$o(e.zoom, t.zoom) : e === t;
 function en(e, t, i) {
-  return ei(e ?? null, t ?? null) && c2(e?.backgroundColor, t?.backgroundColor) && (i?.skipCheckRatio || _$$o(e?.ratio ?? -1, t?.ratio ?? -1)) && e?.preset === t?.preset;
+  return ei(e ?? null, t ?? null) && deepEqual(e?.backgroundColor, t?.backgroundColor) && (i?.skipCheckRatio || _$$o(e?.ratio ?? -1, t?.ratio ?? -1)) && e?.preset === t?.preset;
 }
 function er(e = .02, t = 4) {
   return function (i, n) {
@@ -366,7 +366,7 @@ let el = (e, t, i) => {
   let r = n.getContext("2d");
   n.width = ee.width;
   n.height = ee.height;
-  r.fillStyle = YU(i ?? H0(Bx("light")));
+  r.fillStyle = colorToRgbaString(i ?? parseColor(getThemeBackgroundColor("light")));
   r.fillRect(0, 0, n.width, n.height);
   r.drawImage(n, 0, 0);
   let a = (n.width - t.width) / 2;
@@ -447,7 +447,7 @@ export function $$ec1(e) {
   let $ = useRef(null);
   let [Z, X] = useState(null);
   let Q = DP();
-  let J = e.initialSnapshotState?.backgroundColor ?? e.pageBackgroundColor ?? H0(Bx(Q));
+  let J = e.initialSnapshotState?.backgroundColor ?? e.pageBackgroundColor ?? parseColor(getThemeBackgroundColor(Q));
   let [ee, et] = useState(J);
   let ec = useRef();
   let {
@@ -819,7 +819,7 @@ export function $$ec1(e) {
   return jsxs("div", {
     className: "feed_post_zoom_pan--zoomPanContainer--zUqcL",
     style: {
-      backgroundColor: YU(ee)
+      backgroundColor: colorToRgbaString(ee)
     },
     children: [jsxs("div", {
       className: "feed_post_zoom_pan--guidelineLayer--p6ik- feed_post_zoom_pan--zoomPanInteractionLayer--8w-cl",

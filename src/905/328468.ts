@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { L8, rG } from "../905/124270";
 import { gl, FR, oM } from "../905/171315";
@@ -16,7 +16,7 @@ export function $$h0() {
     children: e.map((e, i) => jsx(g, {
       facet: e,
       index: i,
-      isActive: c2(e, t)
+      isActive: deepEqual(e, t)
     }, `pill-${i}`))
   });
 }

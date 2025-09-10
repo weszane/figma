@@ -1,43 +1,73 @@
-import { CodeLibraryIdHandler, CodeFileIdHandler } from "../figma_app/243058";
-import { PW } from "../905/497152";
-import { oz, nV } from "../905/808701";
-export function $$s1(e) {
-  let t = oz(PW.CODE_COMPONENT, e);
-  if (!t) return null;
-  let i = l(e);
-  return i ? {
-    ...t,
-    ...i
-  } : null;
-}
-export function $$o0(e) {
-  let t = nV(PW.CODE_COMPONENT, e);
-  if (!t) return null;
-  let i = l(e);
-  return i ? {
-    ...t,
-    ...i
-  } : null;
-}
-function l(e) {
-  if (!e.codeComponentFields) return null;
-  let {
+import { CodeLibraryIdHandler, CodeFileIdHandler } from "src/figma_app/243058";
+import { PrimaryWorkflowEnum } from "src/905/497152";
+import { getLocalAsset, getSubscribedAsset } from "src/905/808701";
+
+/**
+ * Extracts code component fields and converts string IDs to handler objects.
+ * @param asset - The asset object containing codeComponentFields.
+ * @returns An object with processed code component fields or null if invalid.
+ * (Original function name: l)
+ */
+function extractCodeComponentFields(asset: any): {
+  belongsToCodeLibraryId: ReturnType<typeof CodeLibraryIdHandler.fromString>,
+  exportedFromCodeFileId: ReturnType<typeof CodeFileIdHandler.fromString>,
+  codeExportName: string,
+  isCodeBehavior: boolean,
+  codeBehaviorData: any
+} | null {
+  if (!asset.codeComponentFields) return null;
+
+  const {
     belongsToCodeLibraryId,
     exportedFromCodeFileId,
     codeExportName,
     isCodeBehavior,
     codeBehaviorData
-  } = e.codeComponentFields;
-  let o = CodeLibraryIdHandler.fromString(belongsToCodeLibraryId);
-  if (!o) return null;
-  let l = CodeFileIdHandler.fromString(exportedFromCodeFileId);
-  return l ? {
-    belongsToCodeLibraryId: o,
-    exportedFromCodeFileId: l,
+  } = asset.codeComponentFields;
+
+  const libraryId = CodeLibraryIdHandler.fromString(belongsToCodeLibraryId);
+  if (!libraryId) return null;
+
+  const fileId = CodeFileIdHandler.fromString(exportedFromCodeFileId);
+  if (!fileId) return null;
+
+  return {
+    belongsToCodeLibraryId: libraryId,
+    exportedFromCodeFileId: fileId,
     codeExportName,
     isCodeBehavior,
     codeBehaviorData
-  } : null;
+  };
 }
-export const I = $$o0;
-export const r = $$s1;
+
+/**
+ * Retrieves and merges local asset and code component fields.
+ * @param asset - The asset identifier.
+ * @returns Merged asset object or null if not found/invalid.
+ * (Original function name: $$s1)
+ */
+export const getLocalCodeComponentAsset = (asset: any) => {
+  const localAsset = getLocalAsset(PrimaryWorkflowEnum.CODE_COMPONENT, asset);
+  if (!localAsset) return null;
+
+  const fields = extractCodeComponentFields(asset);
+  return fields ? { ...localAsset, ...fields } : null;
+};
+
+/**
+ * Retrieves and merges subscribed asset and code component fields.
+ * @param asset - The asset identifier.
+ * @returns Merged asset object or null if not found/invalid.
+ * (Original function name: $$o0)
+ */
+export const getSubscribedCodeComponentAsset = (asset: any) => {
+  const subscribedAsset = getSubscribedAsset(PrimaryWorkflowEnum.CODE_COMPONENT, asset);
+  if (!subscribedAsset) return null;
+
+  const fields = extractCodeComponentFields(asset);
+  return fields ? { ...subscribedAsset, ...fields } : null;
+};
+
+// Export aliases for backward compatibility (Original export names: I, r)
+export const I = getSubscribedCodeComponentAsset;
+export const r = getLocalCodeComponentAsset;

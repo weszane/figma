@@ -11,7 +11,7 @@ import { Rb, yp, kf, u5 } from "../figma_app/852050";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Bh, oz } from "../figma_app/936646";
 import { ti, LX } from "../figma_app/646357";
-import { XV } from "../905/405710";
+import { isValidSolidFill } from "../905/405710";
 import { EU, KV } from "../905/255097";
 var d = l;
 export function $$y2({
@@ -70,7 +70,7 @@ export function $$v3() {
   let c = useMemo(() => {
     let t = [...ti(e.local.styles, "FILL")];
     LX(t);
-    return t.filter(XV).map(e => ({
+    return t.filter(isValidSolidFill).map(e => ({
       type: "style",
       style: e
     }));
@@ -99,7 +99,7 @@ export function $$I1(e) {
       }));
     });
     let n = y.transform(e => {
-      let t = [...e].filter(XV);
+      let t = [...e].filter(isValidSolidFill);
       LX(t);
       return t.map(e => ({
         type: "style",

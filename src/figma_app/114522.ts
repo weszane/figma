@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { AppStateTsApi } from "../figma_app/763686";
 import { atom, createLocalStorageAtom, atomStoreManager } from "../figma_app/27355";
-import { rt } from "../figma_app/615482";
+import { createTrackedAtom } from "../figma_app/615482";
 import { SG, vv, hR, hW } from "../905/508457";
 import { getObservableOrFallback } from "../figma_app/84367";
 let $$d8 = "code-window-back-to-design";
@@ -30,7 +30,7 @@ hR([], {
 });
 let $$w13 = createLocalStorageAtom("scaleLinearly", !0);
 let $$O2 = !1;
-let $$R28 = rt(null);
+let $$R28 = createTrackedAtom(null);
 export function $$L16(e) {
   return useCallback(() => {
     e && e.backingSourceCodeNodeId && (atomStoreManager.get($$u25).includes(e.guid) ? $$D7() : $$P15(e));

@@ -8,7 +8,7 @@ import { w } from "../905/835474";
 import { o as _$$o } from "../905/605383";
 import { getI18nString } from "../905/303541";
 import { LT } from "../figma_app/646357";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Hj, tD } from "../905/682977";
 var d = l;
 let f = "library_item_stats--avatarColumn--do7-S text--fontPos11--2LvXf text--_fontBase--QdLsd";
@@ -79,7 +79,7 @@ export class $$b0 extends PureComponent {
         });
         break;
       case "num_states":
-        sortBy(t, e => e.type === PW.STATE_GROUP ? e.num_states : 0, this.state.isDescending);
+        sortBy(t, e => e.type === PrimaryWorkflowEnum.STATE_GROUP ? e.num_states : 0, this.state.isDescending);
         break;
       case "num_existing_instances":
         sortByProperty(t, "num_existing_instances", this.state.isDescending);
@@ -90,7 +90,7 @@ export class $$b0 extends PureComponent {
       case "num_detachments":
         sortByProperty(t, "num_detachments", this.state.isDescending);
     }
-    let i = this.props.itemStats.map(e => e.type === PW.COMPONENT ? e.component_key : e.key).join(",");
+    let i = this.props.itemStats.map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key).join(",");
     return jsxs("div", {
       className: "library_item_stats--statsTable--ThkjJ",
       children: [jsx("div", {
@@ -120,7 +120,7 @@ export class $$b0 extends PureComponent {
             stat: e,
             viewItem: this.props.viewItem,
             showingStateStats: this.props.showingStateStats
-          }, e.type === PW.COMPONENT ? e.component_key : e.key))
+          }, e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key))
         })
       })]
     });
@@ -165,7 +165,7 @@ class v extends PureComponent {
         })]
       }), !this.props.showingStateStats && jsx("div", {
         className: y,
-        children: e.type === PW.STATE_GROUP ? e.num_states : getI18nString("design_systems.libraries_modal.n_a")
+        children: e.type === PrimaryWorkflowEnum.STATE_GROUP ? e.num_states : getI18nString("design_systems.libraries_modal.n_a")
       }), jsx("div", {
         className: y,
         children: e.num_existing_instances.toLocaleString()

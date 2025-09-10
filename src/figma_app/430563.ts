@@ -11,7 +11,7 @@ import { d1 } from "../905/766303";
 import { td } from "../figma_app/646357";
 import { J } from "../905/252202";
 import { Qh } from "../figma_app/155728";
-import { Nf } from "../figma_app/633080";
+import { isTeamLibrary } from "../figma_app/633080";
 import { A } from "../905/733171";
 import { yD } from "../905/92359";
 import { n as _$$n } from "../905/64411";
@@ -101,7 +101,7 @@ let $$S3 = createOptimistThunk(async (e, t) => {
             thumbnailUrl: publishedLibrary.thumbnail_url,
             thumbnailUrlOverride: null,
             parentOrgId: null,
-            thumbnailGuid: Nf(publishedLibrary) ? publishedLibrary.thumbnail_guid : null
+            thumbnailGuid: isTeamLibrary(publishedLibrary) ? publishedLibrary.thumbnail_guid : null
           },
           hubFileId: T,
           canRead: !0

@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import a from "../vendor/223926";
 import o from "../vendor/149674";
 import { N6, KG } from "../figma_app/471982";
@@ -17,7 +17,7 @@ function m(e, t) {
     if ("video" === e.type) return "video" === t.type && e.url === t.url && e.sha1 === t.sha1 && e.buffer.length === t.buffer.length && e.thumbnail_url === t.thumbnail_url && e.thumbnail_sha1 === t.thumbnail_sha1 && e.thumbnail_buffer.length === t.thumbnail_buffer.length;
     throwTypeError(e);
   }
-  return c2(e, t);
+  return deepEqual(e, t);
 }
 export async function $$h0(e, t) {
   let i = await e;

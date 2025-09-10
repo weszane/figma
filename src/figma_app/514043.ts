@@ -1,7 +1,7 @@
-import { getFeatureFlags } from "../905/601108";
-import { getInitialOptions } from "../figma_app/169182";
-import { captureMessage } from "../905/11";
-import { D } from "../905/347702";
+import { getFeatureFlags } from "src/905/601108";
+import { getInitialOptions } from "src/figma_app/169182";
+import { captureMessage } from "src/905/11";
+import { D } from "src/905/347702";
 let o = ["jpy", "usd", "gbp", "cad", "eur"];
 let $$l1 = D(() => {
   if (navigator) {

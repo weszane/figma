@@ -1,16 +1,16 @@
-import { debug } from "../figma_app/465776";
-import { getFeatureFlags } from "../905/601108";
-import { EvaluationReason } from "../vendor/625526";
-import { trackEventAnalytics } from "../905/449184";
-import { getFeatureFlagRulesExport } from "../figma_app/169182";
-import { F } from "../905/422355";
-import { atomStoreManager } from "../figma_app/27355";
-import { Statsig } from "../vendor/735621";
-import { Tq, sb } from "../3973/663243";
-import { ZJ } from "../3973/697935";
-import { Uv } from "../3973/473379";
-import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { L, K } from "../905/958077";
+import { debug } from "src/figma_app/465776";
+import { getFeatureFlags } from "src/905/601108";
+import { EvaluationReason } from "src/vendor/625526";
+import { trackEventAnalytics } from "src/905/449184";
+import { getFeatureFlagRulesExport } from "src/figma_app/169182";
+import { F } from "src/905/422355";
+import { atomStoreManager } from "src/figma_app/27355";
+import { Statsig } from "src/vendor/735621";
+import { Tq, sb } from "src/3973/663243";
+import { ZJ } from "src/3973/697935";
+import { Uv } from "src/3973/473379";
+import { isInteractionOrEvalMode } from "src/figma_app/897289";
+import { L, K } from "src/905/958077";
 function h(e = atomStoreManager.get(ZJ)) {
   return !!Statsig.initializeCalled() && e.status === Uv.COMPLETED;
 }

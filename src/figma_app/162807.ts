@@ -1,4 +1,4 @@
-import { getI18nString } from "../905/303541";
+import { getI18nString } from "src/905/303541";
 var $$i31 = (e => (e.FILES = "files", e.PROJECTS = "projects", e.TEAMS = "teams", e.USERS = "users", e.HUB_FILES = "hub_files", e.PUBLIC_PLUGINS = "public_plugins", e.PRIVATE_PLUGINS = "private_plugins", e.PUBLIC_PROFILES = "public_profiles", e.PUBLIC_WIDGETS = "public_widgets", e.PRIVATE_WIDGETS = "private_widgets", e))($$i31 || {});
 var $$a9 = (e => (e.RESOURCE = "resource", e.CREATOR = "creator", e.SPACE = "space", e))($$a9 || {});
 var $$s18 = (e => (e.USERS = "users", e.PROJECTS = "projects", e.TEAMS = "teams", e.ORGS = "orgs", e))($$s18 || {});

@@ -107,11 +107,11 @@ let P = d('hasRoleAccess', (e, t) => [e.level, '>=', t])
 let O = d('hasOwnerRoleAccess', e => [e.level, '=', yo])
 d('userInViewTeamUserGroupOnFolder', (e, t, i) => i
   ? {
-      and: [p(t, gR, i), D(e)],
-    }
+    and: [p(t, gR, i), D(e)],
+  }
   : {
-      and: [P(t, gR), D(e)],
-    })
+    and: [P(t, gR), D(e)],
+  })
 d('userInFolderViewAudience', (e, t, i) => ({
   and: [eK(e), eH([ez([k(t), [e.sharing_audience_control, 'in', ['org_view', 'org_edit']]]), ez([T(i, t), [e.sharing_audience_control, 'in', ['workspace_view', 'workspace_edit']]])])],
 }))
@@ -123,11 +123,11 @@ let L = d('folderHasAtLeastEditTeam', e => ({
 }))
 d('userInEditTeamUserGroupOnFolder', (e, t, i) => i
   ? {
-      and: [p(t, zx, i), L(e)],
-    }
+    and: [p(t, zx, i), L(e)],
+  }
   : {
-      and: [P(t, zx), L(e)],
-    })
+    and: [P(t, zx), L(e)],
+  })
 d('userInFolderEditAudience', (e, t, i) => ({
   and: [eK(e), eH([ez([k(t), [e.sharing_audience_control, '=', 'org_edit']]), ez([T(i, t), [e.sharing_audience_control, '=', 'workspace_edit']])])],
 }))

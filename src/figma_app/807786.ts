@@ -3,7 +3,7 @@ import i from "../vendor/946678";
 import { analyticsEventManager } from "../905/449184";
 import { WebLoggerTimer } from "../905/485103";
 import { w0 } from "../figma_app/594947";
-import { PW, Do } from "../figma_app/633080";
+import { PrimaryWorkflowEnum, hasAssetId } from "../figma_app/633080";
 import { I } from "../figma_app/130633";
 import { Ci } from "../figma_app/318590";
 import { KK, AG, dm, ik, hH, Yl } from "../figma_app/707943";
@@ -14,7 +14,7 @@ export function $$m8(e) {
   return e.type === I.ALL || e.type === I.LOCAL || e.type === I.FILE || e.type === I.SITE_KIT;
 }
 export function $$g6(e) {
-  return a()(e, e => e.type === PW.MODULE);
+  return a()(e, e => e.type === PrimaryWorkflowEnum.MODULE);
 }
 export async function $$f2(e, t, r, n, i, a, o, l) {
   let d = $$T0();
@@ -147,12 +147,12 @@ export async function $$I7(e) {
   });
 }
 export function $$S12(e) {
-  if (Do(e)) return "LOCAL" === e.subscriptionStatus ? e.keyForPublish : e.key;
+  if (hasAssetId(e)) return "LOCAL" === e.subscriptionStatus ? e.keyForPublish : e.key;
   switch (e.type) {
-    case PW.COMPONENT:
+    case PrimaryWorkflowEnum.COMPONENT:
       return e.component_key;
-    case PW.STATE_GROUP:
-    case PW.MODULE:
+    case PrimaryWorkflowEnum.STATE_GROUP:
+    case PrimaryWorkflowEnum.MODULE:
       return e.key;
   }
 }

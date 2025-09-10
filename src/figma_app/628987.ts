@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
@@ -63,7 +63,7 @@ class ec extends c$ {}
 export function $$eu1() {
   let e = selectWithShallowEqual(e => Cy(e.mirror));
   let t = useRef(e);
-  e.length > 0 && !c2(t.current, e) && (t.current = e);
+  e.length > 0 && !deepEqual(t.current, e) && (t.current = e);
   return t;
 }
 let ep = atom(void 0);

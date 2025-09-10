@@ -13,7 +13,7 @@ import { kiwiParserCodec } from '../905/294864';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { $ as _$$$ } from '../905/330495';
 import { selectCurrentUser } from '../905/372672';
-import { cF } from '../905/382883';
+import { relaxedEqual } from '../905/382883';
 import { debugState } from '../905/407919';
 import { trackEventAnalytics } from '../905/449184';
 import { L6 } from '../905/498948';
@@ -212,7 +212,7 @@ function eu({
                   });
                 } else if (g && f) {
                   for (let e of ['name', ...d]) {
-                    if (!cF(g[e], f[e])) {
+                    if (!relaxedEqual(g[e], f[e])) {
                       a.set(l, {
                         state: 'changed',
                         previousChange: g,
@@ -227,7 +227,7 @@ function eu({
             return a;
           }(E, x?.change, r, n, i);
           for (let e of activeVisualAttributes) {
-            if (!cF(x.change[e], E[e]) && (e !== 'textData' || x.change[e]?.characters !== E[e]?.characters)) {
+            if (!relaxedEqual(x.change[e], E[e]) && (e !== 'textData' || x.change[e]?.characters !== E[e]?.characters)) {
               if (e === 'transform' && y || d && !es(x.change.guid, n, b) && !es(E.guid, r, b)) {
                 continue;
               }

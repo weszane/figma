@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { getLivegraphClient } from "../figma_app/288654";
 import { y } from "../figma_app/705249";
 import { selectCurrentUser } from "../905/372672";
@@ -44,7 +44,7 @@ export function $$c0(e) {
       m(void 0);
       return;
     }
-    if (!p || !c2(p.args, args)) {
+    if (!p || !deepEqual(p.args, args)) {
       m(new l(args, subscription, i));
       return;
     }

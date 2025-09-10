@@ -1,9 +1,9 @@
 import { useLayoutEffect } from "react";
-import { throwTypeError } from "../figma_app/465776";
-import { getFeatureFlags } from "../905/601108";
-import { customHistory } from "../905/612521";
-import { k as _$$k } from "../905/22009";
-import { L } from "../905/178090";
+import { throwTypeError } from "src/figma_app/465776";
+import { getFeatureFlags } from "src/905/601108";
+import { customHistory } from "src/905/612521";
+import { k as _$$k } from "src/905/22009";
+import { L } from "src/905/178090";
 export function $$d4(e = _$$k.Editors.ALL, t, r) {
   switch (e) {
     case _$$k.Editors.ALL:

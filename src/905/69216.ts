@@ -3,7 +3,7 @@ import { VariableResolvedDataType } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { useStableMemo } from "../905/19536";
 import { useLocalStorageSync } from "../905/657224";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { A as _$$A } from "../905/749030";
 import { B } from "../905/946243";
 export function $$u0({
@@ -11,7 +11,7 @@ export function $$u0({
   resolvedType: t
 }) {
   let i = useContext(B);
-  let u = _$$A(e?.type === PW.VARIABLE ? [e.resolvedType] : null, e);
+  let u = _$$A(e?.type === PrimaryWorkflowEnum.VARIABLE ? [e.resolvedType] : null, e);
   let [p, m] = useLocalStorageSync(i.preferredLayoutLocalStorageKey, i.preferredLayout);
   let [h, g] = useAtomValueAndSetter(i.variablePickerSelectionAtom);
   let [f, _] = useState(function ({

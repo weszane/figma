@@ -12,15 +12,15 @@ import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription,
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { sf } from "../905/929976";
-import { Mk } from "../figma_app/31188";
+import { AssetAtomMap } from "../figma_app/31188";
 import { R9 } from "../905/977824";
 import { f9 } from "../figma_app/722362";
 import { KP } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { getObservableOrFallback, subscribeObservable } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
-import { PW } from "../905/497152";
+import { PrimaryWorkflowEnum } from "../905/497152";
 import { sM, pS } from "../figma_app/346422";
 import { s0 } from "../figma_app/115923";
 import { jT as _$$jT, K8 } from "../figma_app/108909";
@@ -32,7 +32,7 @@ import { VF } from "../figma_app/251814";
 import { cu } from "../figma_app/139865";
 import { wh, UM, Zr, ZY } from "../figma_app/114522";
 var $$M0 = (e => (e.BUILD = "build", e.RUNTIME = "runtime", e))($$M0 || {});
-let F = Wh(() => atom([]));
+let F = setupRemovableAtomFamily(() => atom([]));
 let j = atom(null);
 export function $$U2() {
   atomStoreManager.set(F, []);
@@ -48,7 +48,7 @@ export function $$B13() {
   return [e, t];
 }
 export function $$G4(e) {
-  let t = useAtomWithSubscription(Mk[PW.CODE_COMPONENT].local);
+  let t = useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].local);
   return e?.isCodeFile ? Object.values(t).filter(t => t.exportedFromCodeFileId === CodeFileIdHandler.fromLocalNodeIdObj(e)).sort((e, t) => "default" === e.codeExportName ? -1 : "default" === t.codeExportName ? 1 : e.name.localeCompare(t.name)) : [];
 }
 export function $$V19() {
@@ -182,7 +182,7 @@ export function $$q3() {
   }, [t]);
 }
 export function $$J18() {
-  let e = Object.values(useAtomWithSubscription(Mk[PW.CODE_FILE].local)).filter(e => !e.isSoftDeleted);
+  let e = Object.values(useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_FILE].local)).filter(e => !e.isSoftDeleted);
   useEffect(() => {
     if (e.length > 0 && AppStateTsApi?.codeSelection().fullscreenCodeNodeIds.getCopy().length === 0) {
       let t = e[0]?.assetId;

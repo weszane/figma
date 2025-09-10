@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { c2, he } from "../905/382883";
+import { deepEqual, ignoreUndefinedEqual } from "../905/382883";
 import { getLocalStorage } from "../905/657224";
 import { useLatestRef } from "../figma_app/922077";
 import { FFileType } from "../figma_app/191312";
@@ -48,7 +48,7 @@ export function $$E5({
   useEffect(() => {
     let a = b();
     let n = null !== r || t ? t : a?.newTeamName;
-    let i = null === r && !d || c2(d, $$p2) ? a?.newCollaborators ?? $$p2 : d;
+    let i = null === r && !d || deepEqual(d, $$p2) ? a?.newCollaborators ?? $$p2 : d;
     let c = {
       teamId: r,
       editorStatusChanges: h,
@@ -59,7 +59,7 @@ export function $$E5({
       is3DS: a?.is3DS,
       cartSelections: f
     };
-    !e && m && (he(a, c) || $$I1(m.id, c), S && (s && n !== t && s(n || ""), u && !c2(d, i) && u(i || $$p2)));
+    !e && m && (ignoreUndefinedEqual(a, c) || $$I1(m.id, c), S && (s && n !== t && s(n || ""), u && !deepEqual(d, i) && u(i || $$p2)));
   }, [e, S, m, r, h, D, N, b, t, s, d, u, f]);
 }
 export let $$I1 = D((e, r) => {

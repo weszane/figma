@@ -7,7 +7,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { useSprigWithSampling } from "../905/99656";
 import { VisualBellActions } from "../905/302958";
 import { selectCurrentUser } from "../905/372672";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { z } from "../905/931953";
 import { b } from "../905/875374";
 import { _t } from "../figma_app/171413";
@@ -15,7 +15,7 @@ import { V7, TI, uV } from "../figma_app/359181";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { JW } from "../figma_app/433317";
 import { q } from "../figma_app/216831";
-export let $$b3 = Wh(() => atom({
+export let $$b3 = setupRemovableAtomFamily(() => atom({
   inProgress: !1,
   bundleId: null,
   error: !1

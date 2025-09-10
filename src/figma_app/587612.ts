@@ -1,10 +1,10 @@
 import { useMemo, useContext, useCallback } from "react";
 import { n3, VariableStyleId } from "../905/859698";
-import { oU } from "../figma_app/273493";
+import { rgbToNormalized } from "../figma_app/273493";
 import { Fullscreen, ItemType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalIDString } from "../905/871411";
-import { Uv } from "../figma_app/191804";
+import { blackColor } from "../figma_app/191804";
 import { F } from "../905/989956";
 import { yM } from "../905/640017";
 import { lk } from "../905/182453";
@@ -15,9 +15,9 @@ export function $$m0() {
   return useMemo(() => {
     if (e) {
       let t = F.parse(e);
-      if (t.a > 0) return oU(t);
+      if (t.a > 0) return rgbToNormalized(t);
     }
-    return oU(Uv);
+    return rgbToNormalized(blackColor);
   }, [e]);
 }
 export function $$g1(e) {

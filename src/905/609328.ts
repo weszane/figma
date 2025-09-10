@@ -11,7 +11,7 @@ import { renderI18nText } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { sw, rk } from "../figma_app/914957";
 import { EF, Oo, eE } from "../905/709171";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
@@ -59,7 +59,7 @@ export function $$I1() {
         if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && EF(i.style, n)) r();else {
           debug(null != n.content_hash, "style does not have a hash");
           let i = Oo(n, t) ? n.node_id : StylesBindings.getStyleNodeId(n.key, n.content_hash);
-          isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : Eo.getCanvas(n).then(e => {
+          isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : teamLibraryCache.getCanvas(n).then(e => {
             Fullscreen.selectExternalStyle(e);
           });
           e(rk({

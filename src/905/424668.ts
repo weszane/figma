@@ -1,4 +1,4 @@
-import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
+import { createNoOpValidator, APIParameterUtils } from "src/figma_app/181241";
 export let $$r0 = new class {
   constructor() {
     this.OrgWhitelistSchemaValidator = createNoOpValidator();

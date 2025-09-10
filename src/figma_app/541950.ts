@@ -1,7 +1,7 @@
 import { permissionScopeHandler } from "../905/189185";
 import { loadPluginFont } from "../905/426868";
 import { analyticsEventManager } from "../905/449184";
-import { F_, tK } from "../figma_app/191804";
+import { colorToHexString, parseHex } from "../figma_app/191804";
 import { _ } from "../figma_app/436731";
 import { z } from "../figma_app/153551";
 import { lu, vj } from "../figma_app/846140";
@@ -95,12 +95,12 @@ export async function $$f3(e, t, r) {
   let m = (e, t) => {
     let r = t.role === lg.BG ? colors?.background : t.role === lg.CONTENT ? colors?.text : colors?.border;
     if (!r) return;
-    let n = r[F_({
+    let n = r[colorToHexString({
       ...e,
       a: 1
     })];
     if (n) {
-      let t = tK(n);
+      let t = parseHex(n);
       if (t) return {
         ...t,
         a: e.a

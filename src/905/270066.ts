@@ -1,4 +1,4 @@
-import { ColorSpaceEnum } from "../figma_app/763686";
+import { ColorSpaceEnum } from "src/figma_app/763686";
 export function $$r0(e) {
   function t(e, t) {
     function i(e) {

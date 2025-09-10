@@ -1,4 +1,4 @@
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useContext, useRef, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -240,7 +240,7 @@ function ej({
     }, e))
   });
 }
-let ev = Wh(() => atom({}));
+let ev = setupRemovableAtomFamily(() => atom({}));
 let eS = createRemovableAtomFamily(e => atom(t => t(ev)[e] ?? null, (t, s, r) => {
   let n = t(ev);
   s(ev, {

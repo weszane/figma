@@ -1,4 +1,4 @@
-import { parseQuery } from "../905/634134";
+import { parseQuery } from "src/905/634134";
 let r = {};
 export function $$a2(e) {
   if (!e) {

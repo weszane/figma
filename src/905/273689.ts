@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { clamp } from "../figma_app/492908";
-import { w_, Ih } from "../figma_app/273493";
+import { colorToRgb, desaturateColor } from "../figma_app/273493";
 import { Uz } from "../905/63728";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
@@ -21,7 +21,7 @@ let g = class e extends RecordingPureComponent {
       let i = this.props.colorProfile ? VG(this.props.colorProfile) : "srgb";
       let n = Eh(t, i);
       if (!n) return;
-      n.fillStyle = e.formatter.format(w_(Ih(this.props.color)), i);
+      n.fillStyle = e.formatter.format(colorToRgb(desaturateColor(this.props.color)), i);
       n.fillRect(0, 0, this.props.size, this.props.size);
       let r = n.createLinearGradient(0, 0, this.props.size, 0);
       r.addColorStop(0, e.formatter.format({
@@ -70,7 +70,7 @@ let g = class e extends RecordingPureComponent {
       let i = this.props.colorProfile ? VG(this.props.colorProfile) : "srgb";
       let n = Eh(t, i);
       if (!n) return;
-      n.fillStyle = e.formatter.format(w_(Ih(this.props.color)), i);
+      n.fillStyle = e.formatter.format(colorToRgb(desaturateColor(this.props.color)), i);
       n.fillRect(0, 0, this.props.size, this.props.size);
       let r = n.createLinearGradient(0, 0, this.props.size, 0);
       r.addColorStop(0, e.formatter.format({
@@ -108,7 +108,7 @@ let g = class e extends RecordingPureComponent {
         ...this.valueToColor(e),
         a: 1
       };
-      return w_(t);
+      return colorToRgb(t);
     };
     this.colorToValue = e => new Point(e.s, 1 - ("l" in e ? e.l : e.v));
     this.valueToColor = e => {

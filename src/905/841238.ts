@@ -22,7 +22,7 @@ import { vq } from "../905/8732";
 import { uP } from "../figma_app/933328";
 import { hideModal } from "../905/156213";
 import { eY } from "../figma_app/722362";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { registerModal } from "../905/102752";
 import { S as _$$S } from "../905/459477";
 import { D as _$$D, x as _$$x } from "../905/1253";
@@ -354,7 +354,7 @@ let $$X0 = registerModal(function (e) {
               U(uP({
                 item: e,
                 callback: t => {
-                  em(e.type === PW.STATE_GROUP ? ui(e, t, openFileKey) : t);
+                  em(e.type === PrimaryWorkflowEnum.STATE_GROUP ? ui(e, t, openFileKey) : t);
                 }
               }));
             },

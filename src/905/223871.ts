@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { atomStoreManager } from "../figma_app/27355";
 import { Av, L2 } from "../figma_app/542202";
 import { u2, m7, VA, F9, XC } from "../figma_app/761118";
@@ -212,7 +212,7 @@ export class $$l0 {
         for (let r = 0; r < e.length; r++) {
           if (l.has(r)) continue;
           let a = e[r];
-          if (c2(t.detectionContext, a.detectionContext)) {
+          if (deepEqual(t.detectionContext, a.detectionContext)) {
             d.push(t);
             l.add(r);
             i = !0;

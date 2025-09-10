@@ -29,7 +29,7 @@ import { S as _$$S } from "../figma_app/787550";
 import { W } from "../905/985740";
 import { isFullscreenSitesView } from "../905/561485";
 import { s0 } from "../figma_app/115923";
-import { n as _$$n } from "../905/815475";
+import { loadCanvasData } from "../905/815475";
 import { fullscreenValue } from "../figma_app/455680";
 import { W5 } from "../figma_app/582924";
 import { C as _$$C } from "../905/703182";
@@ -67,7 +67,7 @@ export function $$W8(e, t) {
   if (!n || !t) return null;
   let a = $$z10(n, t, e, NK(r.fileVersion));
   if ($$G2.has(a)) return $$G2.get(a);
-  let s = new Promise((r, s) => _$$n(`${e.canvas_url}&nodes_to_extract=${i.join(",")}`).then(([i, s, o]) => {
+  let s = new Promise((r, s) => loadCanvasData(`${e.canvas_url}&nodes_to_extract=${i.join(",")}`).then(([i, s, o]) => {
     let l = $$z10(n, t, e, o);
     let d = Promise.resolve({
       canvas: i,
@@ -293,7 +293,7 @@ function en(e, t, r, n, s, l) {
     u += `&nodes_to_extract=${h}`;
     let f = t.getState().selectedView;
     _$$C.markVersionHistoryLoadStart(f.fileKey, f.nodeId, l);
-    let E = _$$n(u).then(([e]) => {
+    let E = loadCanvasData(u).then(([e]) => {
       if (E === er) {
         var a;
         er = null;
@@ -506,7 +506,7 @@ let $$ep16 = createOptimistThunk(async (e, t) => {
     if (e.size > 0) {
       let t = Array.from(e).join(",");
       let r = `${n.canvas_url}&nodes_to_extract=${t}`;
-      _$$n(r).then(([e]) => {
+      loadCanvasData(r).then(([e]) => {
         Fullscreen.loadPartialHistoryScene(e);
       });
     }

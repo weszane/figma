@@ -9,7 +9,7 @@ import { tf } from "../figma_app/831799";
 import { u as _$$u } from "../905/389684";
 import { Xh } from "../figma_app/803787";
 import { Lc } from "../figma_app/745458";
-import { Wv } from "../figma_app/633080";
+import { LibraryTabEnum } from "../figma_app/633080";
 import { D } from "../figma_app/268271";
 import { Ib } from "../905/129884";
 import { c as _$$c } from "../905/606579";
@@ -33,7 +33,7 @@ export function $$v1({
   } = _$$u({
     entrypoint: e,
     modalType: "editor",
-    initialTab: s ?? (c ? Wv.RECOMMENDED : i ? Wv.UPDATES : Wv.LIBRARIES)
+    initialTab: s ?? (c ? LibraryTabEnum.RECOMMENDED : i ? LibraryTabEnum.UPDATES : LibraryTabEnum.LIBRARIES)
   });
   let b = useMemo(() => i ? getI18nString("fullscreen.libraries_button.tooltip.updates_to_pull") : o ? getI18nString("fullscreen.libraries_button.tooltip.updates_to_push") : getI18nString("fullscreen.libraries_button.tooltip.no_updates"), [i, o]);
   let C = i || o;

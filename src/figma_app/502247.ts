@@ -31,7 +31,7 @@ let b = new class {
       this.batchedCustomEvents = [];
       try {
         await sendBatchedMetrics(e);
-      } catch (e) {}
+      } catch (e) { }
       this._currentlySendingBatchedEvents = !1;
     };
     document.addEventListener('visibilitychange', this.onVisibilityChange);

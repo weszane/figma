@@ -1,5 +1,5 @@
 import { HandoffBindingsCpp } from "../figma_app/763686";
-import { aH } from "../figma_app/273493";
+import { normalizedToRgb } from "../figma_app/273493";
 import { debugState } from "../905/407919";
 import { Ym } from "../figma_app/806075";
 import { sf } from "../905/929976";
@@ -35,7 +35,7 @@ export function $$h1(e, t, r) {
     return r ? F.format(r) : null;
   }(e, r);
   let s = HandoffBindingsCpp.backgroundColorOverride(t);
-  return s ? F.format(aH(s)) : a;
+  return s ? F.format(normalizedToRgb(s)) : a;
 }
 export const Ep = $$_0;
 export const S7 = $$h1;

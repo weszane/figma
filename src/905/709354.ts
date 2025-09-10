@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from '../905/165054';
 import { kiwiParserCodec } from '../905/294864';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { logMessage } from '../905/954389';
 export function $$l1(e, t) {
@@ -23,7 +23,7 @@ export function $$d2(e, t) {
     [e]: t.data
   });
   let r = kiwiParserCodec.decodeNodeChange(i);
-  return c2(t.data, r[e], !0, !1, !0) ? kiwiParserCodec.encodeMessage({
+  return deepEqual(t.data, r[e], !0, !1, !0) ? kiwiParserCodec.encodeMessage({
     type: 'NODE_CHANGES',
     sessionID: 0,
     ackID: 0,

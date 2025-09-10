@@ -1,6 +1,6 @@
 import { normalizeValue } from '../905/216495';
 import { Z } from '../905/442873';
-import { sH } from '../905/537777';
+import { convertStringToKiwi } from '../905/537777';
 import { C } from '../905/887158';
 import { PropertyScope, LinterCppBindings, VariableResolvedDataType } from '../figma_app/763686';
 export function $$l1({
@@ -91,7 +91,7 @@ export function $$d0({
       if (t.resolvedType !== l) return e;
       let n = i[t.variableSetId];
       if (!n) return e;
-      let a = sH(n.node_id);
+      let a = convertStringToKiwi(n.node_id);
       if (!a) return e;
       let s = Z({
         variable: t,

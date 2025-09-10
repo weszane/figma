@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { W5, zy } from "../vendor/130505";
-import { parseQuerySimple } from "../905/634134";
-import { S } from "../905/872825";
-import { aV, nS, Ac } from "../figma_app/321395";
-import { N$ } from "../figma_app/350203";
+import { W5, zy } from "src/vendor/130505";
+import { parseQuerySimple } from "src/905/634134";
+import { S } from "src/905/872825";
+import { aV, nS, Ac } from "src/figma_app/321395";
+import { N$ } from "src/figma_app/350203";
 let d = "/files/:team(team)?/:id([0-9]+)";
 let $$c3 = aV(d, "/resources");
 export function $$u1(e) {

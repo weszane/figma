@@ -1,8 +1,8 @@
 import { yA as isAndroid, Md as isMac, Uo as isWebDriver } from '../905/881471'
 
-const EVENT_CAPTURE_CLASS = 'js-fullscreen-prevent-event-capture'
-const EVENT_CAPTURE_KEYS_CLASS = 'js-fullscreen-prevent-event-capture-keys'
-const WHEEL_EVENT_CAPTURE_CLASS = 'js-fullscreen-wheel-event-capture'
+export const EVENT_CAPTURE_CLASS = 'js-fullscreen-prevent-event-capture'
+export const EVENT_CAPTURE_KEYS_CLASS = 'js-fullscreen-prevent-event-capture-keys'
+export const WHEEL_EVENT_CAPTURE_CLASS = 'js-fullscreen-wheel-event-capture'
 
 /**
  * Prevents default and stops propagation of an event
@@ -140,13 +140,13 @@ export function isFakeTouchEvent(event: Event): boolean {
 
   // For non-TouchEvents, check the properties directly on the event
   return !isAndroid
-    &&  (nativeEvent as any).width === 0
-    &&  (nativeEvent as any).height === 0
+    && (nativeEvent as any).width === 0
+    && (nativeEvent as any).height === 0
     || ((nativeEvent as any).width === 1
       && (nativeEvent as any).height === 1
-       && (nativeEvent as any).pressure === 0
-       && (nativeEvent as any).detail === 0
-       && (nativeEvent as any).pointerType === 'mouse')
+      && (nativeEvent as any).pressure === 0
+      && (nativeEvent as any).detail === 0
+      && (nativeEvent as any).pointerType === 'mouse')
 }
 const processedEvents = new WeakSet<Event>()
 

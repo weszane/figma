@@ -2,7 +2,7 @@ import { l as _$$l } from "../905/716947";
 import { XW, LE } from "../figma_app/427318";
 import { bj } from "../905/420347";
 import { M4 } from "../905/713695";
-import { ZA } from "../figma_app/633080";
+import { isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { $W } from "../905/144933";
 if (443 == require.j) {}
 export let $$d0 = M4.Query({
@@ -18,7 +18,7 @@ export function $$c1(e) {
   let l = o.data;
   let d = new Map();
   l.forEach(e => {
-    ZA(e) && d.set(_$$l(e.library_key), e);
+    isPublishedLibraryWithAssets(e) && d.set(_$$l(e.library_key), e);
   });
   return {
     isLoading: "loading" === o.status,

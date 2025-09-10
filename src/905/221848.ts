@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { sortByWithOptions, sortByPropertyWithOptions } from "../figma_app/656233";
 import { selectWithShallowEqual } from "../905/103090";
-import { R8, Qx, Jl, O9 } from "../figma_app/80990";
+import { getComponentBreadcrumbs, memoizedProcessComponentsAndStateGroups, processLocalComponents, getFullComponentBreadcrumbs } from "../figma_app/80990";
 import { Nz } from "../figma_app/915774";
 import { X0, th } from "../figma_app/646357";
 import { V } from "../905/726668";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { He } from "../figma_app/155728";
 import { $1, oV } from "../figma_app/76115";
 import { VL } from "../figma_app/112055";
@@ -23,7 +23,7 @@ let _ = (e, t, i) => {
     items: []
   };
   for (let t of e) {
-    let i = R8(t, e);
+    let i = getComponentBreadcrumbs(t, e);
     let r = n;
     for (let e of i) {
       r.subpaths[e] || (r.subpaths[e] = {
@@ -38,7 +38,7 @@ let _ = (e, t, i) => {
     let i = [];
     for (let t of e.items) i.push({
       type: "LEAF",
-      displayText: kH(t.name),
+      displayText: getBasename(t.name),
       item: t,
       id: t.library_key + t.node_id
     });
@@ -93,7 +93,7 @@ function A(e, t, i) {
   return o;
 }
 export function $$y1(e, t, i) {
-  return A(X0(Qx(e)), t, i);
+  return A(X0(memoizedProcessComponentsAndStateGroups(e)), t, i);
 }
 export function $$b6({
   libraryKeyBackingSelectedItems: e,
@@ -135,7 +135,7 @@ export function $$b6({
         let n = th(e.publishedByLibraryKey.stateGroups);
         let r = i[a] ?? {};
         let o = n[a] ?? {};
-        t[a] = [...Object.values(Jl(r)), ...Object.values(o)];
+        t[a] = [...Object.values(processLocalComponents(r)), ...Object.values(o)];
       }
       return t;
     }, [libraryKeyToSubscribedItems, _libraryKeyToSubscribedItems, a, r?.libraryKey, e.publishedByLibraryKey.components, e.publishedByLibraryKey.stateGroups]);
@@ -172,7 +172,7 @@ export function $$v2(e) {
 export var $$I4 = (e => (e.SELECT = "SELECT", e.DESELECT = "DESELECT", e))($$I4 || {});
 export function $$E8(e, t) {
   return {
-    "data-tooltip": t?.hideName ? e.description?.trim() : `${kH(e.name)}
+    "data-tooltip": t?.hideName ? e.description?.trim() : `${getBasename(e.name)}
 
 ${e.description}`.trim(),
     "data-tooltip-text-left": null != e.description,
@@ -183,7 +183,7 @@ export function $$x3(e, t) {
   let i;
   for (let n = 0; n < e.length; n++) {
     let r = e[n];
-    let a = O9(r, t);
+    let a = getFullComponentBreadcrumbs(r, t);
     if (!i) {
       i = a;
       continue;

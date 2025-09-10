@@ -12,11 +12,11 @@ import { Uv } from "../3973/473379";
 import { Lg, isInteractionPathCheck } from "../figma_app/897289";
 import { u8 } from "../figma_app/976749";
 import { U } from "../905/506188";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { FComponentType } from "../figma_app/191312";
 import { LibraryAssetDataOfType, LibraryComponentDataByLibraryKey } from "../figma_app/43951";
 import { Qp } from "../figma_app/349248";
-import { NR } from "../905/722604";
+import { cleanAssetName } from "../905/722604";
 import { FEditorType } from "../figma_app/53721";
 import { G } from "../figma_app/923271";
 import { n as _$$n } from "../905/347702";
@@ -197,8 +197,8 @@ export function $$G1() {
   } = useAtomWithSubscription($$P0);
   return useMemo(() => {
     if (void 0 !== sortedPrefixes && 0 !== sortedPrefixes.length) return (t, r) => {
-      let n = NR(kH(t.name)).toLocaleLowerCase();
-      let i = NR(kH(r.name)).toLocaleLowerCase();
+      let n = cleanAssetName(getBasename(t.name)).toLocaleLowerCase();
+      let i = cleanAssetName(getBasename(r.name)).toLocaleLowerCase();
       let a = sortedPrefixes.findIndex(e => n.startsWith(e));
       let s = sortedPrefixes.findIndex(e => i.startsWith(e));
       return a === s ? n.localeCompare(i) : -1 === a ? 1 : -1 === s ? -1 : a - s;

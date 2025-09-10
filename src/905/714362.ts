@@ -150,14 +150,14 @@ function logWithLevel(
   else {
     const mobile = (window as any).FigmaMobile
     mobile?.logMessageToNative
-    && mobile.logMessageToNative({
-      severity: level,
-      category,
-      message,
-      filePath: opts.filePath,
-      lineNumber: opts.lineNumber,
-      data,
-    })
+      && mobile.logMessageToNative({
+        severity: level,
+        category,
+        message,
+        filePath: opts.filePath,
+        lineNumber: opts.lineNumber,
+        data,
+      })
   }
 
   // Sentry breadcrumb

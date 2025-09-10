@@ -1,8 +1,8 @@
-import { debugState } from "../905/407919";
-import { subscribeAndAwaitData } from "../905/553831";
-import { useSubscription } from "../figma_app/288654";
-import { useCurrentFileKey } from "../figma_app/516028";
-import { FileFeaturesEnabled } from "../figma_app/43951";
+import { debugState } from "src/905/407919";
+import { subscribeAndAwaitData } from "src/905/553831";
+import { useSubscription } from "src/figma_app/288654";
+import { useCurrentFileKey } from "src/figma_app/516028";
+import { FileFeaturesEnabled } from "src/figma_app/43951";
 export function $$l0() {
   let e = useCurrentFileKey();
   let t = useSubscription(FileFeaturesEnabled, {

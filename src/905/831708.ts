@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { B } from "../905/714743";
 import { n as _$$n } from "../figma_app/3731";
@@ -226,7 +226,7 @@ function P({
   let A = _$$n2();
   let y = _$$k();
   let b = useCallback((t, i, n, r) => {
-    l(t, i, n ? r ? e.filter(e => !c2(e, n)) : e.concat(n) : []);
+    l(t, i, n ? r ? e.filter(e => !deepEqual(e, n)) : e.concat(n) : []);
     !r && n ? A(dd(i, n), c) : y(n ? dd(i, n) : {}, jD.SELECTION, uR.DROPDOWN);
   }, [e, l, A, c, y]);
   let v = useMemo(() => {

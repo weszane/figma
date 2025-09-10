@@ -116,14 +116,14 @@ export function validateWithZSchema({
     if (issue.code === 'invalid_union') {
       return `${' '.repeat(indent)}Expected ${issue.path.length > 0 ? `${pathStr} to be ` : ''}one of the following, but none matched:
 ${issue.unionErrors.reduce((acc: string[], unionErr: any) => {
-  const multiple = unionErr.issues.length > 1
-  const details = (multiple
-    ? `${' '.repeat(indent + 2)}Multiple issues${issue.path.length > 0 ? ` at ${pathStr}` : ''}:\n`
-    : '') + unionErr.issues.map((i: any) => formatIssue(i, { ...opts, indent: indent + (multiple ? 4 : 2) })).join(issueSeparator)
-  if (!acc.includes(details))
-    acc.push(details)
-  return acc
-}, []).join(unionSeparator)}`
+        const multiple = unionErr.issues.length > 1
+        const details = (multiple
+          ? `${' '.repeat(indent + 2)}Multiple issues${issue.path.length > 0 ? ` at ${pathStr}` : ''}:\n`
+          : '') + unionErr.issues.map((i: any) => formatIssue(i, { ...opts, indent: indent + (multiple ? 4 : 2) })).join(issueSeparator)
+        if (!acc.includes(details))
+          acc.push(details)
+        return acc
+      }, []).join(unionSeparator)}`
     }
     const msg = ' '.repeat(indent) + (issue.message === 'Required' ? 'Required value missing' : issue.message)
     if (issue.path.length > 0) {
@@ -173,7 +173,7 @@ function validateValue(vm: any, value: any, schema: any, property: string): any 
   const valueType = vm.$$typeof(value)
   function expectedTypeMsg(): string {
     let expected = schema
-    return `Expected "${property}" to have type ${ describeType(expected, 0)} but got ${getActualType(vm, value)} instead`
+    return `Expected "${property}" to have type ${describeType(expected, 0)} but got ${getActualType(vm, value)} instead`
   }
   if (typeof schema === 'string') {
     if (vm.isString(value) && schema === vm.getString(value))

@@ -1,7 +1,7 @@
 import { createContext, useContext, useRef, useState, useCallback } from "react";
-import { Q } from "../905/586361";
-import { F } from "../905/768014";
-import { useRecording } from "../905/959312";
+import { Q } from "src/905/586361";
+import { F } from "src/905/768014";
+import { useRecording } from "src/905/959312";
 export let $$o1 = createContext(!1);
 export function $$l0({
   onClick: e,

@@ -1,4 +1,4 @@
-import { Xs } from "../figma_app/229837";
+import { Xs } from "src/figma_app/229837";
 let i = [];
 let a = 0;
 export function $$s0(e) {

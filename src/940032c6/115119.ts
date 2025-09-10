@@ -43,7 +43,7 @@ import { a as _$$a6 } from '../905/5627';
 import { r as _$$r9 } from '../905/11924';
 import { D as _$$D6 } from '../905/12032';
 import { tc as _$$tc } from '../905/15667';
-import { u as _$$u4 } from '../905/16237';
+import { getRumLoggingConfig } from '../905/16237';
 import { useMemoStable } from '../905/19536';
 import { findContainingResponsiveSet } from '../905/26360';
 import { a as _$$a5 } from '../905/29104';
@@ -150,7 +150,7 @@ import { c as _$$c8 } from '../905/370443';
 import { selectCurrentUser, selectUser } from '../905/372672';
 import { W as _$$W6 } from '../905/378870';
 import { k as _$$k4 } from '../905/381239';
-import { c2 as _$$c6 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { X as _$$X8 } from '../905/399133';
 import { Z as _$$Z } from '../905/404142';
 import { H as _$$H9 } from '../905/404982';
@@ -184,7 +184,7 @@ import { O as _$$O1 } from '../905/487602';
 import { r as _$$r3 } from '../905/490676';
 import { U as _$$U } from '../905/492359';
 import { bL as _$$bL6, c$ as _$$c$5, l9 as _$$l7, mc as _$$mc2, wv as _$$wv2, zW } from '../905/493196';
-import { PW } from '../905/497152';
+import { PrimaryWorkflowEnum } from '../905/497152';
 import { Z as _$$Z4 } from '../905/498136';
 import { eventEmitterAtom, handleAtomEvent } from '../905/502364';
 import { C as _$$C8 } from '../905/504203';
@@ -482,7 +482,7 @@ import { EI } from '../figma_app/21029';
 import { a1 as _$$a } from '../figma_app/23780';
 import { mg as _$$mg, atom, atomStoreManager, createRemovableAtomFamily, useAtomValueAndSetter, useAtomWithSubscription, Ut, Xr } from '../figma_app/27355';
 import { MGP } from '../figma_app/27776';
-import { Mk } from '../figma_app/31188';
+import { AssetAtomMap } from '../figma_app/31188';
 import { bi as _$$bi, cT as _$$cT, g_ as _$$g_, TU as _$$TU, vr as _$$vr, GQ } from '../figma_app/32128';
 import { hM as _$$hM, Sn as _$$Sn } from '../figma_app/32891';
 import { useLatestRef } from '../figma_app/922077';
@@ -685,7 +685,7 @@ import { mU as _$$mU, x7 as _$$x6 } from '../figma_app/600968';
 import { e as _$$e6 } from '../figma_app/601186';
 import { a as _$$a12, z as _$$z10 } from '../figma_app/601188';
 import { Bu } from '../figma_app/604494';
-import { Wh } from '../figma_app/615482';
+import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { $z, c as _$$c9, Ih } from '../figma_app/617427';
 import { lV as _$$lV, AD, H5, MK } from '../figma_app/617606';
 import { c5 as _$$c, c$ as _$$c$, gL as _$$gL, Tx as _$$Tx, Qw } from '../figma_app/618433';
@@ -699,7 +699,7 @@ import { o as _$$o } from '../figma_app/628776';
 import { ay as _$$ay } from '../figma_app/628987';
 import { n as _$$n2 } from '../figma_app/630671';
 import { JT } from '../figma_app/632248';
-import { Wv } from '../figma_app/633080';
+import { LibraryTabEnum } from '../figma_app/633080';
 import { CY as _$$CY, ks as _$$ks, Us } from '../figma_app/637027';
 import { g as _$$g8 } from '../figma_app/638268';
 import { UK } from '../figma_app/638601';
@@ -2154,7 +2154,7 @@ function iD({
       windowInnerWidth: t,
       windowInnerHeight: i
     }] = _$$A4(_$$l4(), 300, {
-      equalityFn: _$$c6
+      equalityFn: deepEqual
     });
     let [n, l] = useAtomValueAndSetter(_$$yq);
     if (n) {
@@ -3060,8 +3060,8 @@ function lG({
     recordingKey: s
   });
 }
-let lZ = Wh(() => atom(null));
-let lQ = Wh(() => atom(!1));
+let lZ = setupRemovableAtomFamily(() => atom(null));
+let lQ = setupRemovableAtomFamily(() => atom(!1));
 let l0 = 'styles-module--selectWebpagesButton--jz-y6';
 var l1 = (e => (e.SECONDARY = 'secondary', e.DANGER = 'danger', e.WARNING = 'warning', e))(l1 || {});
 function l5({
@@ -3876,7 +3876,7 @@ function a8({
   } = M4.useFile(e);
   let i = selectUser();
   let n = function (e) {
-    let t = useSelector(t => Rv(e?.team_id ?? null, t, null, e?.parent_org_id ?? null), _$$c6);
+    let t = useSelector(t => Rv(e?.team_id ?? null, t, null, e?.parent_org_id ?? null), deepEqual);
     let i = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
     return useMemo(() => {
       if (a0()(t)) return null;
@@ -4995,7 +4995,7 @@ function s5({
 }) {
   let a;
   let r = selectCurrentFile();
-  let d = _$$u4();
+  let d = getRumLoggingConfig();
   let c = I4(n);
   let p = useDispatch();
   let [x, m] = useAtomValueAndSetter($C);
@@ -6471,7 +6471,7 @@ async function oh(e, t, i) {
             error: 1
           };
         }
-      } catch {}
+      } catch { }
       return {
         success: !1,
         error: 3
@@ -9936,7 +9936,7 @@ function cm({
       return n;
     }
   }, [s.faviconID]);
-  useEffect(() => {}, [s.faviconID]);
+  useEffect(() => { }, [s.faviconID]);
   return jsx('div', {
     className: 'x1dc814f x1ff1495',
     children: jsx(d8, {
@@ -10549,7 +10549,7 @@ let cN = {
     $$css: !0
   }
 };
-let cL = 'src/assets/';
+let cL = '../assets/';
 function cP(e) {
   return e.replace(/^\/+/, '');
 }
@@ -10623,7 +10623,7 @@ async function cO(e, t, i) {
   }(a.sourceMap ?? '{}', Object.values(d));
   let p = Object.entries(viteAliases).sort().reverse().map(([e, t]) => `        '${e}': ${t}`).join(',\n');
   let x = Object.entries(packageDependencies).sort().map(([e, t]) => `          "${e}": "${t}"`).join(',\n');
-  for (let [e, l] of (n['src/main.tsx'] = `
+  for (let [e, l] of (n['../main.tsx'] = `
   import { createRoot } from "react-dom/client";
   import App from "./App.tsx";
   import "./index.css";
@@ -10664,7 +10664,7 @@ ${p},
       <script type="module" src="/src/main.tsx"></script>
     </body>
   </html>
-  `, n['src/index.css'] = a.css, n['package.json'] = `
+  `, n['../index.css'] = a.css, n['package.json'] = `
   {
       "name": "${t}",
       "version": "0.1.0",
@@ -11409,7 +11409,7 @@ let uw = _$$A12.createLazyComponent(() => Promise.all([]).then(_require2).then(e
   loading: () => null,
   error: () => null
 });
-let uC = Wh(() => atom(!1));
+let uC = setupRemovableAtomFamily(() => atom(!1));
 function uT() {
   let e = Xr(uC);
   return !function () {
@@ -12372,10 +12372,10 @@ let px = memo(() => {
     })
   });
 });
-Wh(() => atom(0));
+setupRemovableAtomFamily(() => atom(0));
 var pf = (e => (e[e.EDIT = 0] = 'EDIT', e[e.CONNECT = 1] = 'CONNECT', e))(pf || {});
-let p_ = Wh(() => atom(0));
-let pb = Wh(() => atom(!1));
+let p_ = setupRemovableAtomFamily(() => atom(0));
+let pb = setupRemovableAtomFamily(() => atom(!1));
 let pv = new _$$b({
   name: 'dakota',
   dependencies: [],
@@ -13174,7 +13174,7 @@ async function xw(e, t, i) {
       });
       await navigator.clipboard.write([i]);
       a();
-    } catch (e) {}
+    } catch (e) { }
   }
 }
 async function xS(e, t) {
@@ -13621,7 +13621,7 @@ let xE = memo(({
       });
     }
   }, [e]);
-  let E = useCallback(e => {}, []);
+  let E = useCallback(e => { }, []);
   useEffect(() => {
     S(i.current?.api, u);
   }, [u, S]);
@@ -14789,7 +14789,7 @@ function mv({
           ...Object.fromEntries(Object.entries(e).filter(([e]) => !n[e])),
           ...l
         }));
-      } catch (e) {} finally {
+      } catch (e) { } finally {
         b.current = !1;
       }
     }, _), b.current = !0) : (k(n), m(l)));
@@ -16180,7 +16180,7 @@ let hd = registerModal(e => {
                 }));
               }
             }) : jsx(ho, {
-              onImportFailure: () => {},
+              onImportFailure: () => { },
               onImportSuccess: e => {
                 r(e);
                 d(e.name);
@@ -16723,7 +16723,7 @@ function hb() {
       g(l);
       f(e => new Set(e).add(l));
       let a = (await hg(t)).getReader();
-      for (h(!1);;) {
+      for (h(!1); ;) {
         let {
           done,
           value
@@ -17123,8 +17123,8 @@ function h0(e) {
     buildCodeLayerRows,
     buildCodeInteractionsRows
   } = function () {
-    let e = useAtomWithSubscription(Mk[PW.CODE_FILE].local);
-    let t = useAtomWithSubscription(Mk[PW.CODE_COMPONENT].local);
+    let e = useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_FILE].local);
+    let t = useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].local);
     let i = _$$wA2((e, t) => Object.values(t).filter(t => {
       let i = e.get(t.localGuid);
       return !!i && !i.isSoftDeleted;
@@ -17253,7 +17253,7 @@ function h0(e) {
         deleteItem: () => {
           _$$l.user('delete-code-component', () => {
             let t = getSingletonSceneGraph().get(e);
-            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
+            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e); else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid); else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid); else throw new Error(`Invalid node type for deletion: ${t?.type}`);
             fullscreenValue.triggerAction('commit');
           });
         },
@@ -17613,7 +17613,7 @@ function h7() {
 function h9() {
   let e = _$$b2();
   let t = Xr(_$$s3);
-  let i = !!Object.values(useAtomWithSubscription(Mk[PW.CODE_FILE].local)).filter(h4).length;
+  let i = !!Object.values(useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_FILE].local)).filter(h4).length;
   let n = function () {
     let e = useAtomWithSubscription(Y3);
     let t = Fk((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
@@ -17684,7 +17684,7 @@ function h9() {
   }) : null;
 }
 let ge = atom(!1);
-let gt = createRemovableAtomFamily(e => Wh(() => atom(!1)));
+let gt = createRemovableAtomFamily(e => setupRemovableAtomFamily(() => atom(!1)));
 function gl() {
   let [e, t] = useAtomValueAndSetter(p_);
   !function () {
@@ -18045,7 +18045,7 @@ function gu(e) {
     })]
   }) : null;
 }
-let gp = Wh(() => atom(null));
+let gp = setupRemovableAtomFamily(() => atom(null));
 let gN = ({
   guid: e,
   prevNodeGuid: t,
@@ -19073,7 +19073,7 @@ function g7() {
     let I = _$$A19({
       entrypoint: _$$r6.LEFT_RAIL_FOOTER,
       hideIfNoUpdates: !0,
-      initialTabOverride: Wv.UPDATES
+      initialTabOverride: LibraryTabEnum.UPDATES
     });
     let E = [w, S, C, T, I];
     O1(() => (!!T.expanded || !!I.expanded || !!C.expanded) && (f(popModalStack()), !0), KD.OVERLAY);
@@ -20616,7 +20616,7 @@ async function _h(e, t, i, n, l) {
           if (_p.has(e) || (!n.node.strokePaints || n.node.strokePaints.length === 0) && e === 'strokeWeight') continue;
           let a = n.node[e];
           let r = l.node[e];
-          _$$c6(a, r) || (t.push({
+          deepEqual(a, r) || (t.push({
             path: i,
             key: e,
             actual: a,
@@ -20900,8 +20900,8 @@ async function _T({
   ignoreKnown: e = !1,
   widths: t
 } = {
-  ignoreKnown: !1
-}) {
+    ignoreKnown: !1
+  }) {
   _S();
   let i = _C();
   if (!i.length) throw new Error('No breakpoint frames in selection');
@@ -21361,7 +21361,7 @@ let _q = e => {
   for (let t of e.directlySelectedNodes) {
     for (; t;) {
       if (t.isBreakpointFrame || t.isResponsiveSet) return t;
-      if (t.parentNode) t = t.parentNode;else break;
+      if (t.parentNode) t = t.parentNode; else break;
     }
   }
 };
@@ -23237,7 +23237,7 @@ function ve({
     })
   });
 }
-class vt extends _$$c$6 {}
+class vt extends _$$c$6 { }
 function vs({
   directManipulationEditor: e,
   classNameEditingController: t,
@@ -23503,12 +23503,12 @@ let vu = memo(e => {
       message: t,
       error: !0,
       button: {
-        action: () => {},
+        action: () => { },
         text: getI18nString('figmake.refresh')
       }
     }));
   }, [n]);
-  let o = useMemo(() => new _$$q0(t, e => {}, r), [t, r]);
+  let o = useMemo(() => new _$$q0(t, e => { }, r), [t, r]);
   let d = _$$lj(t);
   return jsxs(Fragment, {
     children: [jsx(yZ, {
@@ -23656,7 +23656,7 @@ function vW() {
       e.entries?.forEach(e => {
         let n = e.attribute;
         i[n] = n in i ? i[n] + 1 : 1;
-        n in t ? _$$c6(t[n], e.value) || (t[n] = MIXED_MARKER) : t[e.attribute] = e.value;
+        n in t ? deepEqual(t[n], e.value) || (t[n] = MIXED_MARKER) : t[e.attribute] = e.value;
       });
     });
     return Object.keys(t).map(e => ({
@@ -27162,8 +27162,8 @@ function Sh(e, t) {
   return i[e];
 }
 let Sg = createRemovableAtomFamily(e => _$$mg(atom(t => {
-  let i = t(Mk[PW.CODE_COMPONENT].local);
-  let n = t(Mk[PW.CODE_COMPONENT].subscribed);
+  let i = t(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].local);
+  let n = t(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].subscribed);
   let l = CodeComponentIdHandler.fromString(e);
   return l ? i[l] || n[l] : void 0;
 }), e => e));
@@ -29840,7 +29840,7 @@ function TA(e) {
       }));
     }();
     let p = function () {
-      let e = useAtomWithSubscription(Mk[PW.CODE_COMPONENT].local);
+      let e = useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].local);
       return getFeatureFlags().prototype_code_presets_creation ? Object.entries(e).filter(([e, t]) => t.isCodeBehavior).map(([e, t]) => ({
         type: Tj.LOCAL,
         id: e,
@@ -30233,8 +30233,8 @@ function TA(e) {
     }
     return e;
   }, [ee, ec]), useAtomWithSubscription(useMemo(() => atom(e => {
-    let t = e(Mk[PW.CODE_COMPONENT].local);
-    let i = e(Mk[PW.CODE_COMPONENT].subscribed);
+    let t = e(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].local);
+    let i = e(AssetAtomMap[PrimaryWorkflowEnum.CODE_COMPONENT].subscribed);
     return {
       ...t,
       ...i

@@ -40,7 +40,7 @@ import { N as _$$N4 } from '../905/281143';
 import { u as _$$u } from '../905/290607';
 import { e as _$$e4 } from '../905/295932';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { ke, kH } from '../905/309735';
+import { splitPath, getBasename } from '../905/309735';
 import { T as _$$T4 } from '../905/336775';
 import { selectTeams } from '../905/338617';
 import { I as _$$I } from '../905/342732';
@@ -83,7 +83,7 @@ import { L as _$$L } from '../905/704296';
 import { logError } from '../905/714362';
 import { T as _$$T2 } from '../905/714785';
 import { l as _$$l } from '../905/716947';
-import { NR as _$$NR } from '../905/722604';
+import { cleanAssetName } from '../905/722604';
 import { n as _$$n3 } from '../905/734251';
 import { Point } from '../905/736624';
 import { qG } from '../905/742325';
@@ -202,10 +202,10 @@ import { Hz } from '../figma_app/591738';
 import { I7 } from '../figma_app/594947';
 import { y as _$$y } from '../figma_app/598297';
 import { Ev, JA } from '../figma_app/608944';
-import { rt as _$$rt } from '../figma_app/615482';
+import { createTrackedAtom } from '../figma_app/615482';
 import { c$ as _$$c$, gL } from '../figma_app/618433';
 import { RJ } from '../figma_app/630951';
-import { PW, Wv } from '../figma_app/633080';
+import { PrimaryWorkflowEnum, LibraryTabEnum } from '../figma_app/633080';
 import { J as _$$J2 } from '../figma_app/636279';
 import { zl } from '../figma_app/641749';
 import { lM as _$$lM, nE as _$$nE, tM as _$$tM, AZ, c_, gP, JS, Mk, my, o8, ON, Wy, Yv, yW } from '../figma_app/644808';
@@ -616,7 +616,7 @@ function e2({
   let k = _9(e.library_key, 'asset_panel_visual_assets');
   let w = C && (j || v || S);
   let T = useRef(null);
-  let N = kH(e.name);
+  let N = getBasename(e.name);
   let I = NG({
     text: N,
     textRef: T
@@ -993,8 +993,8 @@ function tp({
   });
 }
 function tC(e) {
-  let t = ke(e.name);
-  let s = e.type === PW.RESPONSIVE_SET ? e.containingFrame?.name : e.containing_frame?.name;
+  let t = splitPath(e.name);
+  let s = e.type === PrimaryWorkflowEnum.RESPONSIVE_SET ? e.containingFrame?.name : e.containing_frame?.name;
   return s ? [s, ...t] : t;
 }
 function tj(e, t = '', {
@@ -1259,7 +1259,7 @@ function tT(e) {
   let t = e ? tw(e) : [];
   return t.length > 0 ? t[0] : void 0;
 }
-let tE = createRemovableAtomFamily(() => _$$rt(0));
+let tE = createRemovableAtomFamily(() => createTrackedAtom(0));
 function tM({
   libraryKey: e,
   pageId: t,
@@ -1512,7 +1512,7 @@ function t1({
   hideName: g = !1,
   onDragStart: f
 }) {
-  let x = kH(e.name);
+  let x = getBasename(e.name);
   let {
     currentView,
     folderPath
@@ -1598,7 +1598,7 @@ function t1({
     sourceForTracking: mZ,
     isList: j
   });
-  let L = useMemo(() => _$$NR(x), [x]);
+  let L = useMemo(() => cleanAssetName(x), [x]);
   let {
     listProps
   } = tV();
@@ -1702,7 +1702,7 @@ function t3({
       componentSuggestionSessionId: p
     });
     analyticsEventManager.trackDefinedEvent('assets_panel.site_kit_inserted', {
-      assetName: _$$NR(kH(e.name)),
+      assetName: cleanAssetName(getBasename(e.name)),
       type: 'responsive set',
       group: u(e),
       isFullPage: e.fullPage,
@@ -2122,7 +2122,7 @@ let sj = ({
   }, [h, e]);
 };
 function sv(e) {
-  return e.type === PW.RESPONSIVE_SET;
+  return e.type === PrimaryWorkflowEnum.RESPONSIVE_SET;
 }
 function sS(e, t, s, n, i, l, a, o, d = {}) {
   let c = [];
@@ -2726,7 +2726,7 @@ rC() ? window.mockAutoSuggestConfig = {
     rC() && localStorage.setItem(rb, JSON.stringify(r_));
   }
 } : localStorage.removeItem(rb);
-let rj = _$$rt(new Map());
+let rj = createTrackedAtom(new Map());
 async function rv({
   targetNodeGuid: e
 }) {
@@ -4094,7 +4094,7 @@ function nP() {
     thumbWidth,
     onDragStart
   } = nN();
-  let d = useMemo(() => assets.filter(e => e.type === PW.RESPONSIVE_SET), [assets]);
+  let d = useMemo(() => assets.filter(e => e.type === PrimaryWorkflowEnum.RESPONSIVE_SET), [assets]);
   let c = useCallback(({
     asset: e,
     cmsCollectionMappings: t,
@@ -5807,7 +5807,7 @@ function it() {
   } = _$$u3({
     entrypoint: _$$r6.ASSETS_PANEL_ADD_MORE_LIBRARIES,
     modalType: 'editor',
-    initialTab: Wv.RECOMMENDED
+    initialTab: LibraryTabEnum.RECOMMENDED
   });
   return jsx('div', {
     className: n1,
@@ -6437,7 +6437,7 @@ function iE() {
   let e = _$$ce().data?.assetsByLibraryKey;
   let t = useMemo(() => e ? [...e.values()].flat() : [], [e]);
   let s = useMemo(() => _$$u2(), []);
-  let r = _$$o(PW.RESPONSIVE_SET);
+  let r = _$$o(PrimaryWorkflowEnum.RESPONSIVE_SET);
   let i = useAtomWithSubscription(su);
   let l = getUserId();
   let a = useMemo(() => {

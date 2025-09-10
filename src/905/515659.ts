@@ -1,4 +1,4 @@
-import { inflate } from "../vendor/323834";
+import { inflate } from "src/vendor/323834";
 export function $$r2(e) {
   let t = {};
   for (let i of function (e) {

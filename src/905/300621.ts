@@ -10,7 +10,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { on } from "../905/420347";
 import { IT, M4 } from "../905/713695";
 import { H as _$$H } from "../905/216861";
-import { Yu, Tb, ZA } from "../figma_app/633080";
+import { NO_TEAM, getDraftsSidebarString, isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
@@ -308,7 +308,7 @@ function es(e) {
   let x = fc();
   let S = E.filter(e => s && x(e.library_key) && !l.defaultPublished.libraryKeys.includes(e.library_key));
   let w = s && S.length > 0 && !searchQuery;
-  let C = Yu;
+  let C = NO_TEAM;
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: "figjam_subscriptions_list_view--searchContainer--xaC0P",
@@ -362,8 +362,8 @@ function es(e) {
           let a = t && t[i.library_file_key];
           if (!a || s && i.library_file_key === s.key || i.num_components + i.num_state_groups <= 0 || l.defaultPublished.libraryKeys.includes(i.library_key)) return;
           let o = C !== i.team_id;
-          C = i.team_id ?? Yu;
-          let d = i.team_name || Tb();
+          C = i.team_id ?? NO_TEAM;
+          let d = i.team_name || getDraftsSidebarString();
           return jsxs(_$$Fragment, {
             children: [o && jsx("div", {
               className: ea,
@@ -451,7 +451,7 @@ let $$eu0 = registerModal(function (e) {
               width: v,
               library: t,
               libraryFile: y,
-              publishedLibrary: ZA(b) ? b : null,
+              publishedLibrary: isPublishedLibraryWithAssets(b) ? b : null,
               backToList: () => A(null)
             })
           })]

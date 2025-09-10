@@ -1,4 +1,4 @@
-import { R0 } from "../figma_app/273493";
+import { unpackToNormalizedRgb } from "../figma_app/273493";
 import { InteractionCpp, AppStateTsApi, HorizontalAlignment, VerticalAlignment, TextBoxType, FontWeight } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
@@ -45,7 +45,7 @@ export class $$A0 extends j {
       let o = new M(i.x + i.w / 2, i.y + i.h);
       let c = M.fromVectorD(e.canvasSpaceToViewportSpace(o));
       c = c.plus(f);
-      let u = R0(AppStateTsApi.getCanvasButton());
+      let u = unpackToNormalizedRgb(AppStateTsApi.getCanvasButton());
       this.addButtonUiState.isHovered ? t.fillTextWithBox(c, getI18nString("sites.fullscreen.add-section"), g, u, HorizontalAlignment.CENTER, VerticalAlignment.CENTER, 0, TextBoxType.TEXT, new M(0, 0), FontWeight.MEDIUM, 2) : function (e, t, i, n = 0) {
         let a = t.canvasSpaceToViewportSpace(e);
         a.x += n;

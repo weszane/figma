@@ -1,6 +1,6 @@
-import { describeNormalized } from "../905/67898";
-import { z } from "../905/239603";
-import { createDataMapper, processAdditionalConfig } from "../905/508958";
+import { describeNormalized } from "src/905/67898";
+import { z } from "src/905/239603";
+import { createDataMapper, processAdditionalConfig } from "src/905/508958";
 let r = describeNormalized("TrackTags", z.object({
   default_library_file_treatment_id: z.string().optional().nullable(),
   figma_basics_experiment: z.string().optional().nullable(),

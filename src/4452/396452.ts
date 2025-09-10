@@ -6,7 +6,7 @@ import { kt } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { qf } from "../4452/780544";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { S as _$$S, d as _$$d } from "../4452/304860";
 import { ps } from "../figma_app/845611";
 import { sf } from "../905/929976";
@@ -15,8 +15,8 @@ import { z3 } from "../figma_app/386952";
 import { FVisibilityType } from "../figma_app/191312";
 import { IX } from "../905/712921";
 import { J7 } from "../figma_app/650409";
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
 export function $$b2() {
   let e = useDispatch();
   let t = z3();
@@ -53,7 +53,7 @@ function j() {
   let t = useSelector(e => e.teamBilling);
   let a = t.summary.currency;
   let r = t.summary.monthly_subscription ? IX.MONTH : IX.YEAR;
-  let i = _$$u();
+  let i = getRumLoggingConfig();
   return jsx($z, {
     htmlAttributes: {
       "data-testid": "admin-dashboard-approval-settings-button",
@@ -87,7 +87,7 @@ function I({
     renewalTerm: IX.YEAR,
     isCurfEnabledForMembers: t === FVisibilityType.MEMBERS
   });
-  let p = _$$u();
+  let p = getRumLoggingConfig();
   return jsx($z, {
     htmlAttributes: {
       "data-testid": "admin-dashboard-approval-settings-button",

@@ -8,7 +8,7 @@ import { Hu, GZ } from "../figma_app/361662";
 import { u as _$$u } from "../905/290607";
 import { selectCurrentFile } from "../figma_app/516028";
 import { u2 } from "../figma_app/807786";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { $z } from "../figma_app/297733";
 import { CK } from "../figma_app/517115";
 import { TG } from "../905/72677";
@@ -54,7 +54,7 @@ export function $$C1({
     searchSessionId: D ?? "",
     source: $$w0,
     sourceSection: $$w0,
-    type: e.type === PW.COMPONENT ? "component" : "state_group",
+    type: e.type === PrimaryWorkflowEnum.COMPONENT ? "component" : "state_group",
     subscriptionLevel: O,
     isExample: _$$o(e, R),
     partnerType: X(e.library_key),

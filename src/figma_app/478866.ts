@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { lQ } from "../905/934246";
 import { useLatestRef } from "../figma_app/922077";
 import { At, vV, CX, UU, Z5 } from "../figma_app/770088";
@@ -111,7 +111,7 @@ export function $$y0(e, t, r, s, l) {
   let g = useLatestRef(e);
   let E = useLatestRef(u);
   useEffect(() => {
-    e && u && e === g && E && !c2(u, E) && (e === hm ? d?.updateDraftCommentPinPosition?.(u) : d?.updateCommentPinPosition?.(e, u));
+    e && u && e === g && E && !deepEqual(u, E) && (e === hm ? d?.updateDraftCommentPinPosition?.(u) : d?.updateCommentPinPosition?.(e, u));
   }, [d, e, u, E, g]);
 }
 export const $P = $$y0;

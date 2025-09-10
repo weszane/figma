@@ -58,13 +58,13 @@ export function notifyPluginStatus(params: {
   const button = params.isInsert
     ? undefined
     : {
-        text: params.isBackground
-          ? formatI18nMessage('plugins-stop')
-          : formatI18nMessage('plugins-cancel'),
-        action: () => {
-          params.cancelCallback()
-        },
-      }
+      text: params.isBackground
+        ? formatI18nMessage('plugins-stop')
+        : formatI18nMessage('plugins-cancel'),
+      action: () => {
+        params.cancelCallback()
+      },
+    }
 
   fullscreenValue.dispatch(
     VisualBellActions.enqueue({

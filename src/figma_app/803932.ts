@@ -23,11 +23,11 @@ import { Ku, UK } from "../figma_app/740163";
 import { isInvalidValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
 import { Gp } from "../figma_app/646357";
-import { QH } from "../905/405710";
+import { getStyleThumbnail } from "../905/405710";
 import { Fk } from "../figma_app/167249";
 import { e_ as _$$e_ } from "../figma_app/803787";
 import { $u } from "../figma_app/889655";
-import { AT } from "../figma_app/633080";
+import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { J as _$$J } from "../905/225412";
 import { X as _$$X2 } from "../905/839893";
 import { F as _$$F } from "../figma_app/284426";
@@ -553,13 +553,13 @@ let e_ = () => {
       name: n
     }) => {
       if (!t) return;
-      let i = t.kind === AT.SUBSCRIBED_WITHOUT_LIBRARY ? {
+      let i = t.kind === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY ? {
         ...t.value,
         style_type: "FILL"
       } : t.value;
       let a = e => e.filter($$ec9).map(e => dc(e, l));
-      let s = QH(i);
-      if (s && "FILL" === s.type) r.push(rP(n, t, a(s.fillPaints))); else {
+      let s = getStyleThumbnail(i);
+      if (s && "FILL" === s.type) r.push(rP(n, t, a(s.fillPaints)));else {
         let i = e.get(t.value.node_id);
         i && r.push(rP(n, t, a(i.fills)));
       }
@@ -604,7 +604,7 @@ export function $$eg7(e) {
     p?.();
   }, [p]);
   let m = e.color.dsStyle.value;
-  return (l === AT.SUBSCRIBED_WITHOUT_LIBRARY && (m.style_type = "FILL", m.node_id = d), r) ? jsx(_p, {
+  return (l === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY && (m.style_type = "FILL", m.node_id = d), r) ? jsx(_p, {
     className: h()(VB, vQ),
     styleId: e.color.dsStyle.value.key,
     styleNodeId: e.color.dsStyle.value.node_id,

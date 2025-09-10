@@ -261,15 +261,15 @@ export class QueryInstanceNode {
     }
     this._result = allLoaded
       ? {
-          status: 'loaded',
-          errors,
-          data: projected,
-        }
+        status: 'loaded',
+        errors,
+        data: projected,
+      }
       : {
-          status: 'errors',
-          data: null,
-          errors,
-        }
+        status: 'errors',
+        data: null,
+        errors,
+      }
     return this._result
   }
 

@@ -3,7 +3,7 @@ import { useRef, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { PropertyScope } from "../figma_app/763686";
-import { dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import d from "classnames";
 import { getI18nString } from "../905/303541";
 import { v4 } from "../figma_app/655139";
@@ -34,7 +34,7 @@ function P({
   varData: t
 }) {
   let r = t?.value?.alias;
-  let i = _$$u(r ? dI(r) : void 0);
+  let i = _$$u(r ? convertKiwiToVariableIdString(r) : void 0);
   return i ? jsx("div", {
     className: "value_or_variable_pill--variablePillContainer--198BC",
     children: jsx(wG, {
@@ -124,7 +124,7 @@ export function $$B2(e) {
       })
     }), e.shouldShowVariableInspection && jsxs(Fragment, {
       children: [jsx($Q, {
-        variableId: (t = e.$$var, t?.value?.alias ? dI(t.value.alias) : void 0),
+        variableId: (t = e.$$var, t?.value?.alias ? convertKiwiToVariableIdString(t.value.alias) : void 0),
         matchingVars: e.suggestedVariable?.matchingVars,
         rowRef: e.rowRef,
         rowRefForModalId: r,
@@ -171,7 +171,7 @@ export function $$V3(e) {
     endOffset
   } = e;
   let z = "PROGRESSIVE" === blurOpType;
-  let [W, K, Y, $] = hg([xVar, yVar, radiusVar, spreadVar, colorVar].map(e => e?.value?.alias ? dI(e.value.alias) : void 0));
+  let [W, K, Y, $] = hg([xVar, yVar, radiusVar, spreadVar, colorVar].map(e => e?.value?.alias ? convertKiwiToVariableIdString(e.value.alias) : void 0));
   let X = $$M6(offset?.x, W, getI18nString("inspect_panel.shadows.x"));
   let q = $$M6(offset?.y, K, getI18nString("inspect_panel.shadows.y"));
   let J = Cm(startOffset?.x);

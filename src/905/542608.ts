@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { BrowserInfo } from "../figma_app/778880";
 import { showModalHandler } from "../905/156213";
-import { cX, Wv } from "../figma_app/633080";
+import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { y } from "../905/375507";
 import { fXD, PXO } from "../figma_app/27776";
 export let $$p4 = "libraryPreferencesModal";
@@ -13,7 +13,7 @@ var $$h0 = (e => (e.REVIEW_INSTANCE_UPDATES_MODAL_UPDATE_ALL = "Review instance 
 export function $$g2(e, t) {
   return showModalHandler({
     type: {
-      type: cX
+      type: LIBRARY_PREFERENCES_MODAL
     },
     data: {
       initialTab: e,
@@ -32,11 +32,11 @@ export function $$A1(e, t) {
   let [s, o] = useState(() => t && e.includes(t) ? t : e[0]);
   let l = useCallback(t => {
     e.includes(t) && (t !== s && trackEventAnalytics("Library Preferences Modal Tab Changed", {
-      tab: Wv[t]
+      tab: LibraryTabEnum[t]
     }), o(t));
   }, [s, e]);
   useEffect(() => {
-    s === Wv.FONTS && y.loadSharedFonts(i);
+    s === LibraryTabEnum.FONTS && y.loadSharedFonts(i);
   }, [s, i]);
   return {
     selectedTab: s,

@@ -56,7 +56,7 @@ export class LiveViewNode {
    * Called when results are updated.
    * Original method name: resultsUpdated
    */
-  resultsUpdated(): void {}
+  resultsUpdated(): void { }
 
   /**
    * Destroys the view instance and its root node.
@@ -98,7 +98,7 @@ export class LiveViewNode {
    * Resets the result of the view instance.
    * Original method name: resetResult
    */
-  resetResult(): void {}
+  resetResult(): void { }
 
   /**
    * Checks if the view instance is loaded.

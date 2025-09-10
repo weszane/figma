@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { useMemoCustom } from '../905/19536';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { shallowEqual } from '../905/605584';
 import { ResourceStatus } from '../905/957591';
 import { throwTypeError } from '../figma_app/465776';
@@ -76,7 +76,7 @@ export const resourceUtils = {
   },
   // Original: useTransformDeepEqual function
   useTransformDeepEqual(resource, transformFn) {
-    return this.useTransform(resource, transformFn, c2);
+    return this.useTransform(resource, transformFn, deepEqual);
   },
   // Original: from function
   from(resource) {

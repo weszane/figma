@@ -5,9 +5,9 @@ import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { LibraryAssetByKey } from "../figma_app/43951";
 import { Gd } from "../figma_app/600968";
 import { sC } from "../905/395857";
-import { PW } from "../905/497152";
+import { PrimaryWorkflowEnum } from "../905/497152";
 let $$u0 = {
-  [PW.CODE_COMPONENT]: function (e) {
+  [PrimaryWorkflowEnum.CODE_COMPONENT]: function (e) {
     return atom(t => {
       let i = sC[e];
       let n = {};
@@ -31,7 +31,7 @@ let $$u0 = {
       }
       return n;
     });
-  }(PW.CODE_COMPONENT)
+  }(PrimaryWorkflowEnum.CODE_COMPONENT)
 };
 let p = atom(e => e(Gd));
 export const i = $$u0;

@@ -1,11 +1,11 @@
 import { kiwiParserCodec } from "../905/294864";
 import { debug } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
-import { qN, kE } from "../figma_app/273493";
+import { rgbToHsv, hsvToRgb } from "../figma_app/273493";
 import { AnchorPosition, Fullscreen } from "../figma_app/763686";
 import { s as _$$s } from "../905/583953";
 import d from "../vendor/415955";
-import { FN } from "../figma_app/191804";
+import { whiteColor } from "../figma_app/191804";
 import { debugState } from "../905/407919";
 import { ds } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
@@ -79,7 +79,7 @@ export function $$v19(e) {
     let t = debugState.getState();
     ds("zero_stop_gradient_detected", t.openFile?.key, t);
     e.stops.push({
-      color: FN,
+      color: whiteColor,
       position: 0
     });
   }
@@ -305,9 +305,9 @@ export function $$G12(e, t = !1) {
     a: 0
   };
   if (!t) {
-    let t = qN(e);
+    let t = rgbToHsv(e);
     let n = t.v >= .5 ? t.v - .4 : t.v + .4;
-    r = kE({
+    r = hsvToRgb({
       ...t,
       v: n
     });

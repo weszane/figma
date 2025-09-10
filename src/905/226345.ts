@@ -3,7 +3,7 @@ import { memo, forwardRef, useState, useCallback } from "react";
 import a from "classnames";
 import { Q } from "../905/911623";
 import { GG } from "../905/511649";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { Ib } from "../905/129884";
 import { Z } from "../905/248978";
 import { jl, zi, iL } from "../905/824449";
@@ -104,7 +104,7 @@ let $$g1 = forwardRef(function ({
     }),
     "data-tooltip": m ? Z : void 0,
     "data-tooltip-style-description": t.description,
-    "data-tooltip-style-name": kH(t.name || ""),
+    "data-tooltip-style-name": getBasename(t.name || ""),
     "data-tooltip-type": Ib.SPECIAL,
     forwardedRef: v,
     onClick,

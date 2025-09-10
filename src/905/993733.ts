@@ -16,13 +16,13 @@ import { getObservableOrFallback } from "../figma_app/84367";
 import { Ib } from "../905/129884";
 import { UB } from "../figma_app/249941";
 import { ReviewPhase, formatRenderName, createSinglePropertyRenderTreatment, createMultiPropertyRenderTreatment, createMultiNodeRenderTreatment, createDisplayNodeSinglePropertyRenderTreatment, ProjectDevelopmentPhases, visualAttributes2, visualAttributes, RenderStrategy } from "../905/869235";
-import { cF, c2 } from "../905/382883";
+import { relaxedEqual, deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { formatList } from "../figma_app/930338";
 import { rY } from "../905/985490";
 import { zn, xb } from "../figma_app/164212";
 import { s as _$$s } from "../905/583953";
-import { dI as _$$dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import { TI } from "../905/713722";
 import { LN, wf } from "../figma_app/975811";
 import { useDispatch } from "react-redux";
@@ -414,7 +414,7 @@ function ew(e, t, i) {
   let n = {};
   if (e?.entries) {
     for (let r of e.entries) if (r.variableField && r.variableData?.value?.alias) {
-      let e = _$$dI(r.variableData?.value?.alias);
+      let e = convertKiwiToVariableIdString(r.variableData?.value?.alias);
       i.add(r.variableField);
       n[r.variableField] = VariablesBindings.getVariableName(e, t);
     }
@@ -505,7 +505,7 @@ let eN = (e, t) => createSinglePropertyRenderTreatment(() => e, (e, t, i) => "le
     let a = l[i] ? eE(l[i]) : [];
     let d = [l[i], s[i]].map((e, t) => function (e, t) {
       if (e?.colorVar?.value?.alias) {
-        let i = _$$dI(e.colorVar.value.alias);
+        let i = convertKiwiToVariableIdString(e.colorVar.value.alias);
         return VariablesBindings.getVariableName(i, t);
       }
       return null;
@@ -1575,7 +1575,7 @@ function tb({
 }) {
   let d = {};
   let c = r === ProjectDevelopmentPhases.LEGO;
-  let u = c ? cF : c2;
+  let u = c ? relaxedEqual : deepEqual;
   let p = r === ProjectDevelopmentPhases.TEST_SUITE;
   if (c && tA(e)) {
     let e = "phase";

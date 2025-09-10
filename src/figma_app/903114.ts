@@ -26,7 +26,7 @@ import { JT, Qi, mb } from "../figma_app/847597";
 import { k as _$$k } from "../figma_app/618031";
 import { N as _$$N } from "../figma_app/28806";
 import { Qf } from "../figma_app/80683";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { tb } from "../905/848667";
 import { U2 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
@@ -289,7 +289,7 @@ function ee({
     onFailure: N
   });
   let L = selectCurrentUser();
-  let P = _$$u();
+  let P = getRumLoggingConfig();
   return jsx(wi, {
     children: jsxs(jk, {
       children: [jsx($z, {

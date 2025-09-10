@@ -3,7 +3,7 @@ import { createRef, useContext, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { DesignGraphElements, GradientToolApi, StyleVariableOperation, CopyPasteType, LayoutTabType, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { sH } from "../905/805904";
+import { convertVariableIdToKiwi } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { useMemoShallow } from "../905/19536";
 import { analyticsEventManager } from "../905/449184";
@@ -112,7 +112,7 @@ class M extends RecordingPureComponent {
       this.props.dispatch(Yi({
         item: e,
         callback: e => {
-          let t = sH(e);
+          let t = convertVariableIdToKiwi(e);
           if (!t) return;
           let i = Tm.initPaint("SOLID", this.props.defaultColor, this.props.paint, this.props.paintId);
           Object.entries(i).forEach(([e, t]) => {

@@ -1,5 +1,5 @@
-import { Wn, VY, yi, xp, id, Vx, PD } from "../905/966582";
-import { EC } from "../figma_app/291892";
+import { Wn, VY, yi, xp, id, Vx, PD } from "src/905/966582";
+import { EC } from "src/figma_app/291892";
 export function $$a0(e, t, i, r, s, o = []) {
   if (e.length > i) {
     s({

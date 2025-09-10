@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { ColorFormatEnum } from "../figma_app/763686";
-import { kE, oB } from "../figma_app/273493";
-import { _W, sN } from "../figma_app/191804";
+import { hsvToRgb, rgbToHsl } from "../figma_app/273493";
+import { calculateColorDifference, blendColors } from "../figma_app/191804";
 import { V } from "../905/24905";
 function l(e, t, i) {
   return i ? t * (e + .05) - .05 : (e + .05) / t - .05;
@@ -28,9 +28,9 @@ export function $$c0({
   } = d(e + .05, t, i, r);
   let c = [...(lighterLuminanceColors ?? []), ...(darkerLuminanceColors ?? [])];
   return c.length ? c.reduce((e, t) => {
-    let i = kE(t);
-    return i.r > 1 || i.g > 1 || i.b > 1 ? e : _W(n, i) < _W(n, e) ? i : e;
-  }, kE(c[0])) : null;
+    let i = hsvToRgb(t);
+    return i.r > 1 || i.g > 1 || i.b > 1 ? e : calculateColorDifference(n, i) < calculateColorDifference(n, e) ? i : e;
+  }, hsvToRgb(c[0])) : null;
 }
 export function $$u1(e, t, i, r, a, s, o) {
   let {
@@ -54,7 +54,7 @@ export function $$m2(e, t) {
 function h(e, t, i, n) {
   let s = [];
   e.forEach(e => {
-    let o = n === ColorFormatEnum.HSL ? oB(kE(e)) : e;
+    let o = n === ColorFormatEnum.HSL ? rgbToHsl(hsvToRgb(e)) : e;
     let l = o.s;
     let d = n === ColorFormatEnum.HSL ? o.l : o.v;
     s.push(s.length ? "L" : "M");
@@ -110,7 +110,7 @@ function g(e, t, i, n) {
   return 0 === a.length ? null : a;
 }
 function f(e, t, i, n) {
-  let r = e => V(sN(t, kE(e)));
+  let r = e => V(blendColors(t, hsvToRgb(e)));
   let l = 1;
   let d = e;
   let c = i ? d.v : d.s;

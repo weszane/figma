@@ -1,7 +1,7 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
-import { AW, sN } from "../figma_app/191804";
+import { blendGradientColors, blendColors } from "../figma_app/191804";
 import { hC } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { getFalseValue } from "../figma_app/897289";
@@ -261,9 +261,9 @@ export function $$y1(e) {
             a: e.opacity
           }
         } : e);
-        return AW(t);
+        return blendGradientColors(t);
       }).filter(e => void 0 !== e).reverse();
-      if (0 !== t.length) return sN(...t);
+      if (0 !== t.length) return blendColors(...t);
     }(n)
   };
 }

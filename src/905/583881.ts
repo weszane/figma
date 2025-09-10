@@ -1,6 +1,6 @@
-import { Uv, UE } from "../figma_app/191804";
+import { blackColor, whiteColor } from "../figma_app/191804";
 export let $$$$r0 = {
-  black: Uv,
+  black: blackColor,
   gray: {
     r: .458823529,
     g: .458823529,
@@ -43,6 +43,6 @@ export let $$$$r0 = {
     b: .9607843137254902,
     a: 1
   },
-  white: UE
+  white: whiteColor
 };
 export const r = $$$$r0;

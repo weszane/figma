@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useMemo, useCallback, Fragment as _$$Fragm
 import { throwTypeError } from "../figma_app/465776";
 import a from "classnames";
 import { _ as _$$_ } from "../vendor/853977";
-import { H0 } from "../figma_app/191804";
+import { parseColor } from "../figma_app/191804";
 import { M as _$$M } from "../figma_app/749682";
 import { pz } from "../figma_app/60079";
 import { x as _$$x } from "../905/211326";
@@ -429,7 +429,7 @@ function $(e) {
           imageScale: t ? 1 : void 0,
           imageSrc: n.image_url,
           initialSnapshotState: e.editPreviewOptions?.initialSnapshotStates?.[X(n)],
-          pageBackgroundColor: e.editPreviewOptions?.pageBackgroundColor || n.backgroundColor && H0(n.backgroundColor) || e.pageBackgroundColor && H0(e.pageBackgroundColor) || void 0,
+          pageBackgroundColor: e.editPreviewOptions?.pageBackgroundColor || n.backgroundColor && parseColor(n.backgroundColor) || e.pageBackgroundColor && parseColor(e.pageBackgroundColor) || void 0,
           resetSnapshotState: e.editPreviewOptions?.selectedContentResetSnapshotState,
           setContentPreview: i === e.selectedIdx ? e.editPreviewOptions?.setContentPreview : void 0,
           shouldWheelPan: !0,
@@ -456,7 +456,7 @@ function q(e) {
     imageScale: 1,
     imageSrc: e.imageContent.url,
     initialSnapshotState: e.editPreviewOptions?.initialSnapshotStates?.[X(e.imageContent)],
-    pageBackgroundColor: e.editPreviewOptions?.pageBackgroundColor || e.imageContent.backgroundColor && H0(e.imageContent.backgroundColor) || e.pageBackgroundColor && H0(e.pageBackgroundColor) || void 0,
+    pageBackgroundColor: e.editPreviewOptions?.pageBackgroundColor || e.imageContent.backgroundColor && parseColor(e.imageContent.backgroundColor) || e.pageBackgroundColor && parseColor(e.pageBackgroundColor) || void 0,
     resetSnapshotState: e.editPreviewOptions?.selectedContentResetSnapshotState,
     setContentPreview: e.editPreviewOptions?.setContentPreview,
     shouldWheelPan: !0,
@@ -616,7 +616,7 @@ export function $$ea0(e) {
     feedPostUuid: e.feedPostUuid,
     canAddContent: !1
   }) : null, [n, contentItems, selectedContentIdx, setSelectedContentIdx, e.pageBackgroundColor, e.feedPostUuid]);
-  e.editPreviewOptions && b && "node" === b.type && b.backgroundColor && (e.editPreviewOptions.pageBackgroundColor = H0(b.backgroundColor) ?? void 0);
+  e.editPreviewOptions && b && "node" === b.type && b.backgroundColor && (e.editPreviewOptions.pageBackgroundColor = parseColor(b.backgroundColor) ?? void 0);
   let {
     openEditPreviewModalCallback,
     deleteSelectedItemCallback

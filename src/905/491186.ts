@@ -1,4 +1,4 @@
-import { q42 } from "../figma_app/822011";
+import { q42 } from "src/figma_app/822011";
 export function $$r0(e, t, i) {
   let r = function (e, t, i) {
     if (e.openFile && null !== i) {

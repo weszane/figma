@@ -9,7 +9,7 @@ import { ks, nR, $$ } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
-import { oU, ah } from "../figma_app/80990";
+import { generateSerializableStyleThumbnail, generateThumbnailFromStyleConsumer } from "../figma_app/80990";
 import { registerLegacyModal } from "../905/102752";
 import { zi } from "../905/824449";
 import { d_ } from "../figma_app/918700";
@@ -99,8 +99,8 @@ class v extends RecordingComponent {
       error: !1
     };
     for (let t = 0; t < e.paintDataNodesInPaint.length; t++) {
-      this.previewStyleThumbnail[t] = oU("FILL", e.paintDataNodesInPaint[t].nodeId, e.paintDataNodesInPaint[t].inheritStyleKeyField);
-      ("INVALID" === this.previewStyleThumbnail[t].type || this.previewStyleThumbnail[t].fillPaints.length > 1 || "SOLID" !== this.previewStyleThumbnail[t].fillPaints[0].type) && (this.previewUrl[t] = ah(e.paintDataNodesInPaint[t].nodeId, e.paintDataNodesInPaint[t].inheritStyleKeyField));
+      this.previewStyleThumbnail[t] = generateSerializableStyleThumbnail("FILL", e.paintDataNodesInPaint[t].nodeId, e.paintDataNodesInPaint[t].inheritStyleKeyField);
+      ("INVALID" === this.previewStyleThumbnail[t].type || this.previewStyleThumbnail[t].fillPaints.length > 1 || "SOLID" !== this.previewStyleThumbnail[t].fillPaints[0].type) && (this.previewUrl[t] = generateThumbnailFromStyleConsumer(e.paintDataNodesInPaint[t].nodeId, e.paintDataNodesInPaint[t].inheritStyleKeyField));
     }
   }
   render() {

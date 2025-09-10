@@ -3,7 +3,7 @@ import { ColorSpaceEnum } from "../figma_app/763686";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { NC } from "../905/17179";
 import { debugState } from "../905/407919";
-import { Zx } from "../905/888985";
+import { userColorProfileAtomFamily } from "../905/888985";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { uE } from "../figma_app/314264";
@@ -15,7 +15,7 @@ let h = {
 };
 let $$m2 = NC("USER_UPDATE_COLOR_PROFILE");
 let g = atom(e => {
-  let t = e(Zx({}));
+  let t = e(userColorProfileAtomFamily({}));
   let r = h.colorProfilePreference;
   "loading" === t.status && void 0 !== debugState && debugState?.getState()?.user?.color_profile ? r = debugState.getState().user?.color_profile : t.data?.userColorProfilePreference?.colorProfilePreference && (r = t.data?.userColorProfilePreference?.colorProfilePreference);
   let n = {

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
-import { H0 } from "../figma_app/191804";
+import { parseColor } from "../figma_app/191804";
 import { Point } from "../905/736624";
 import { Jn } from "../905/17223";
 import { i as _$$i, C as _$$C } from "../905/64217";
@@ -88,7 +88,7 @@ export let $$k0 = registerModal(function (e) {
   } = e;
   let [O, D] = useState(e.attachments);
   let L = UR(_$$b.ATTACHMENT_MODAL_BACKGROUND_COLOR);
-  let F = L ? H0(L) : void 0;
+  let F = L ? parseColor(L) : void 0;
   let M = e => {
     if (T.current) {
       let t = T.current?.children[e].firstChild;
@@ -113,7 +113,7 @@ export let $$k0 = registerModal(function (e) {
     });
   };
   let V = e => {
-    if ("ArrowLeft" === e.key) 0 !== i && U(-1); else if ("ArrowRight" === e.key) {
+    if ("ArrowLeft" === e.key) 0 !== i && U(-1);else if ("ArrowRight" === e.key) {
       if (i === O.length - 1) return;
       U(1);
     }

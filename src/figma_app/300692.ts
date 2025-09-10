@@ -21,30 +21,30 @@ import { T as _$$T } from '../905/858738';
 import { $A } from '../905/862883';
 import { J as _$$J } from '../905/896954';
 import { XHR } from '../905/910117';
-import { aP, o1 } from './10554';
-import { Eh } from './12796';
-import { FEditorType } from './53721';
-import { am, Av, bH, Dk, f5, FW, ho, k0, Kd, Lu, MP, Pe, pR, Q7, u8, UX, Wt, xg, XS, Ye, ZQ, ZV } from './155287';
-import { M as _$$M } from './170366';
-import { Ni } from './188152';
-import { FFileType } from './191312';
-import { DK } from './291892';
-import { xf } from './416935';
-import { eZ, HB, xp } from './455620';
-import { Y5 } from './455680';
-import { throwTypeError } from './465776';
-import { N6 } from './471982';
-import { jY, Ro } from './564095';
-import { Dd, En, Ii, l8, vC, Wl, xw } from './599979';
-import { sortByCreatedAt } from './656233';
-import { Lg as _$$Lg, n as _$$n, Yp as _$$Yp, Hc, yO } from './740025';
-import { Rs } from './761870';
-import { AC } from './777551';
-import { BrowserInfo } from './778880';
-import { F8, Mj, mZ, vf, WD, Yp } from './808294';
-import { isInteractionPathCheck, Lg } from './897289';
-import { gU, YH } from './930338';
-import { XE } from './976749';
+import { aP, o1 } from '../figma_app/10554';
+import { Eh } from '../figma_app/12796';
+import { FEditorType } from '../figma_app/53721';
+import { am, Av, bH, Dk, f5, FW, ho, k0, Kd, Lu, MP, Pe, pR, Q7, u8, UX, Wt, xg, XS, Ye, ZQ, ZV } from '../figma_app/155287';
+import { M as _$$M } from '../figma_app/170366';
+import { Ni } from '../figma_app/188152';
+import { FFileType } from '../figma_app/191312';
+import { DK } from '../figma_app/291892';
+import { xf } from '../figma_app/416935';
+import { eZ, HB, xp } from '../figma_app/455620';
+import { Y5 } from '../figma_app/455680';
+import { throwTypeError } from '../figma_app/465776';
+import { N6 } from '../figma_app/471982';
+import { jY, Ro } from '../figma_app/564095';
+import { Dd, En, Ii, l8, vC, Wl, xw } from '../figma_app/599979';
+import { sortByCreatedAt } from '../figma_app/656233';
+import { Lg as _$$Lg, n as _$$n, Yp as _$$Yp, Hc, yO } from '../figma_app/740025';
+import { Rs } from '../figma_app/761870';
+import { AC } from '../figma_app/777551';
+import { BrowserInfo } from '../figma_app/778880';
+import { F8, Mj, mZ, vf, WD, Yp } from '../figma_app/808294';
+import { isInteractionPathCheck, Lg } from '../figma_app/897289';
+import { gU, YH } from '../figma_app/930338';
+import { XE } from '../figma_app/976749';
 
 /**
  * Error types for plugin operations
@@ -665,7 +665,7 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
     } else if ('manifest' in manifestSource) {
       try {
         isWidget = !!/containsWidget/.test(manifestSource.manifest!);
-      } catch {}
+      } catch { }
     }
   }
 
@@ -674,11 +674,11 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
     try {
       validateWithNoOpVm(manifest.editorType, editorTypePropType, 'manifest.editorType');
       editorType = manifest.editorType;
-    } catch {}
+    } catch { }
     try {
       validateWithNoOpVm(manifest.capabilities, capabilitiesPropType, 'manifest.capabilities');
       capabilities = manifest.capabilities;
-    } catch {}
+    } catch { }
   }
 
   // Update cached widget status
@@ -1574,7 +1574,7 @@ export function validatePublishingDataLengths(data: any): Record<string, any> {
   if (!data) return {};
   const errors: Record<string, any> = {};
   const nameLen = _$$Yp(data.name).length;
-  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long');else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
+  if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long'); else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
   if (_$$Yp(data.description).length > 1e4) errors.description = getI18nString('community.publishing.description_must_be_at_most_10000_characters_long');
   if (_$$Yp(data.newVersionReleaseNotes).length > 1e4) errors.newVersionReleaseNotes = getI18nString('community.publishing.release_notes_must_be_at_most_10000_characters_long');
   if (_$$Yp(data.creatorPolicy).length > 1e4) errors.creatorPolicy = getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long');

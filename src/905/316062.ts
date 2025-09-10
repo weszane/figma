@@ -1,6 +1,6 @@
-import { z } from "../905/239603";
-import { describeNormalized, createPrimaryKeySchema } from "../905/67898";
-import { FPermissionDenialReason } from "../figma_app/191312";
+import { z } from "src/905/239603";
+import { describeNormalized, createPrimaryKeySchema } from "src/905/67898";
+import { FPermissionDenialReason } from "src/figma_app/191312";
 var s = (e => (e.EDIT = "EDIT", e.VIEW = "VIEW", e.DISABLE = "DISABLE", e))(s || {});
 let o = z.object({
   team_name: z.string(),

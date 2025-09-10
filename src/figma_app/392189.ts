@@ -13,7 +13,7 @@ import { n1 } from "../figma_app/657017";
 import { u as _$$u } from "../905/389684";
 import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
-import { Wv } from "../figma_app/633080";
+import { LibraryTabEnum } from "../figma_app/633080";
 import { r6 } from "../905/542608";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
@@ -178,7 +178,7 @@ export function $$F1({
   } = _$$u({
     entrypoint: s,
     modalType: "editor",
-    initialTab: Wv.TEAM_LIBRARIES
+    initialTab: LibraryTabEnum.TEAM_LIBRARIES
   });
   let l = useCallback(() => {
     e?.();

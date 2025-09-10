@@ -1,16 +1,16 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { Mo, Yn, UE, Ws } from "../figma_app/152690";
 var $$s1 = (e => (e[e.Standard = 0] = "Standard", e[e.Default = 1] = "Default", e[e.Mixed = 2] = "Mixed", e[e.Inherited = 3] = "Inherited", e[e.Deleted = 4] = "Deleted", e))($$s1 || {});
 export function $$o0(e, t, r, s, o) {
   let l = function (e, t, r) {
     let i = [];
-    let s = t && t !== Mo && e.every(e => !c2(e.modeId, t)) ? Yn : t || (r ? UE : Ws);
+    let s = t && t !== Mo && e.every(e => !deepEqual(e.modeId, t)) ? Yn : t || (r ? UE : Ws);
     if (s === Mo && i.push({
       type: 2,
       isCurrentlyActive: !0
     }), r) {
-      let t = r === Mo ? Mo : e.find(e => c2(e.modeId, r))?.name;
+      let t = r === Mo ? Mo : e.find(e => deepEqual(e.modeId, r))?.name;
       i.push({
         type: 3,
         isCurrentlyActive: s === UE,
@@ -36,7 +36,7 @@ export function $$o0(e, t, r, s, o) {
     let s = [];
     for (let e of t.filter(e => e.modeId.collectionKey === a)) s.push({
       type: 0,
-      isCurrentlyActive: c2(e.modeId, r),
+      isCurrentlyActive: deepEqual(e.modeId, r),
       name: e.name,
       modeId: e.modeId,
       isCompatible: e.isCompatible,

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { VariableUIContext, VariablesBindings, VariableCollectionContext } from "../figma_app/763686";
-import { fn } from "../905/805904";
+import { isValidVariableId } from "../905/805904";
 import { resolveVariableValue } from "../905/929949";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
@@ -13,7 +13,7 @@ export function $$p0() {
     let p = resolveVariableValue(i);
     let m = e ?? VariablesBindings.createVariableSet(getI18nString("variables.authoring_modal.default_collection_name"), VariableCollectionContext.AUTOMATIC_FIRST_COLLECTION);
     let h = VariablesBindings.createVariable(c, m, p, d);
-    return fn(h) ? (fullscreenValue.triggerAction("commit"), h) : null;
+    return isValidVariableId(h) ? (fullscreenValue.triggerAction("commit"), h) : null;
   }, []);
 }
 export function $$m2() {

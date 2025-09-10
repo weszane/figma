@@ -179,9 +179,9 @@ export function createFontMetadata(
       const axesValues = matchedInstances.length ? matchedInstances[0].axes : undefined
       variationAxes = axesValues
         ? font.variation_axes.map(axis => ({
-            ...axis,
-            value: axesValues[axis.tag],
-          }))
+          ...axis,
+          value: axesValues[axis.tag],
+        }))
         : font.variation_axes
       useFontOpticalSize = hasNonDefaultOpticalSize(variationAxes, font.variation_instances)
     }

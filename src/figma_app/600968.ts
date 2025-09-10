@@ -12,7 +12,7 @@ import { Uv } from "../3973/473379";
 import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { z } from "../905/239603";
 import { u8 } from "../figma_app/976749";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { FComponentType } from "../figma_app/191312";
 import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
 import { Zi } from "../905/395857";
@@ -98,7 +98,7 @@ function O(e, t) {
 }
 export async function $$R4() {
   let e = await $$w1();
-  await Promise.all(e.map(e => Eo.getCanvas({
+  await Promise.all(e.map(e => teamLibraryCache.getCanvas({
     canvas_url: e.asset.canvasUrl
   })));
 }

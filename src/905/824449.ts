@@ -16,19 +16,19 @@ import { n as _$$n } from "../905/317686";
 import { ColorSpaceEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import F from "classnames";
-import { UE, x1, FO, tM, AW } from "../figma_app/191804";
+import { whiteColor, borderTranslucent, borderDark, borderLight, blendGradientColors } from "../figma_app/191804";
 import { selectWithShallowEqual } from "../905/103090";
 import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
 import { pw } from "../905/187165";
 import { yM, DP } from "../905/640017";
-import { MJ, OM } from "../figma_app/80990";
+import { getFillColor, isValidThumbnail } from "../figma_app/80990";
 import { dy, rl } from "../905/248569";
 import { Ep } from "../figma_app/504823";
 import { p3 } from "../figma_app/622881";
-import { kH } from "../905/309735";
-import { Kb, QH } from "../905/405710";
+import { getBasename } from "../905/309735";
+import { isStyleType, getStyleThumbnail } from "../905/405710";
 import { Ib } from "../905/129884";
 import { M as _$$M } from "../905/968248";
 import { Z as _$$Z3 } from "../905/248978";
@@ -331,12 +331,12 @@ export function $$ea1({
   itemIndex: d = 0,
   anyNonFrameLikesSelected: c
 }) {
-  let u = useSelector(t => Kb(e.style_type) && (QH(e) || e.node_id && t.library.local.thumbnails[e.node_id]?.css) || null);
+  let u = useSelector(t => isStyleType(e.style_type) && (getStyleThumbnail(e) || e.node_id && t.library.local.thumbnails[e.node_id]?.css) || null);
   let p = $$er3(u, !!c);
   let m = useMemo(() => {
     if (u) {
       if ("FILL" === u.type) {
-        let e = MJ(u);
+        let e = getFillColor(u);
         if (e) return jsx(eo, {
           color: e,
           disableOutline: s
@@ -387,7 +387,7 @@ export function $$ea1({
     } : o ? {} : {
       "data-tooltip-type": Ib.SPECIAL,
       "data-tooltip": _$$Z3,
-      "data-tooltip-style-name": l ? void 0 : kH(e.name || ""),
+      "data-tooltip-style-name": l ? void 0 : getBasename(e.name || ""),
       "data-tooltip-style-description": e.description
     }),
     role: "img",
@@ -406,13 +406,13 @@ function es(e, t) {
     let i = yM();
     let n = DP();
     return pw(i, e, n, t);
-  }(e ?? UE, "colorBg");
+  }(e ?? whiteColor, "colorBg");
   let n = DP();
   if (!e) return null;
   if (!t && i) {
-    if (i === x1) return "dark" === n ? "white" : "black";
-    if (i === FO) return "black";
-    if (i === tM) return "white";
+    if (i === borderTranslucent) return "dark" === n ? "white" : "black";
+    if (i === borderDark) return "black";
+    if (i === borderLight) return "white";
   }
   return null;
 }
@@ -505,9 +505,9 @@ function ec({
   let r = es(selectWithShallowEqual(t => {
     if (!e.node_id) return null;
     let i = t.mirror.sceneGraph.get(e.node_id);
-    return AW(i?.fills);
+    return blendGradientColors(i?.fills);
   }), t);
-  let s = OM(i) && i || OM(e.thumbnail_url) && e.thumbnail_url || void 0;
+  let s = isValidThumbnail(i) && i || isValidThumbnail(e.thumbnail_url) && e.thumbnail_url || void 0;
   if (!s) return jsx(eu, {
     styleType: e.style_type,
     disableOutline: t

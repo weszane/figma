@@ -288,8 +288,8 @@ export async function loadI18nState(fetchDb = false, localeFallbacks: string[] |
       }).then(res => res.duration),
       fetchDb
         ? measureAsyncDuration('fetchI18nDbString', _$$e.GROWTH_PLATFORM, async () => {
-            dbDict = await fetchDictionaryByEnv('db')
-          }).then(res => res.duration)
+          dbDict = await fetchDictionaryByEnv('db')
+        }).then(res => res.duration)
         : 0,
     ])
     if (webMs)

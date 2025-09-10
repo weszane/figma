@@ -16,7 +16,7 @@ import { t as _$$t } from "../905/150656";
 import { getFeatureFlags } from "../905/601108";
 import { s as _$$s } from "../cssbuilder/589278";
 import { vx } from "../905/91038";
-import { jg, PW, wg } from "../figma_app/633080";
+import { LibraryAgeEnum, PrimaryWorkflowEnum, initialLibraryStats } from "../figma_app/633080";
 import { e0 } from "../905/696396";
 import { O as _$$O } from "../905/480562";
 import { l as _$$l } from "../905/362016";
@@ -41,7 +41,7 @@ function D({
 }) {
   let [o, l] = useState(e ?? _$$n.PRODUCT_COMPONENTS);
   let [d, c] = useState(_$$R.OVERVIEW);
-  let [u, m] = useState(jg.THIRTY_DAYS);
+  let [u, m] = useState(LibraryAgeEnum.THIRTY_DAYS);
   let [h, g] = useState(void 0);
   let [D, L] = useState(void 0);
   let [F, M] = useState(void 0);
@@ -62,7 +62,7 @@ function D({
   let W = useCallback((e, t) => {
     z();
     H();
-    t.type === PW.COMPONENT ? g(t) : t.type === PW.STATE_GROUP && L(t);
+    t.type === PrimaryWorkflowEnum.COMPONENT ? g(t) : t.type === PrimaryWorkflowEnum.STATE_GROUP && L(t);
   }, [z, H]);
   let K = useCallback((e, t) => {
     G();
@@ -81,7 +81,7 @@ function D({
   let [Z] = Tn({
     currentOrgId: q
   });
-  let X = Z.data || wg;
+  let X = Z.data || initialLibraryStats;
   let [Q, J, ee] = _$$u({
     overview: !0,
     analytics: !0

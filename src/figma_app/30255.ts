@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { memo, useContext, useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
-import { oB } from "../figma_app/273493";
+import { rgbToHsl } from "../figma_app/273493";
 import { Fullscreen, TransactionCommand, BorderStyle } from "../figma_app/763686";
 import d from "classnames";
 import { d as _$$d } from "../vendor/456530";
@@ -100,7 +100,7 @@ export let $$x0 = memo(function ({
   let [ei, ea] = useState();
   let es = V ? H ? "whileDragShouldCancel" : "whileDrag" : "pencil" === e && r && !j ? "hiddenPencil" : z ? "whileTap" : L && r ? "selectedSubmenuTool" : k ? "whileHovering" : "initial";
   if ("connector" === e && !V) {
-    let e = oB(_$$F.parse(t));
+    let e = rgbToHsl(_$$F.parse(t));
     e.l > .9 && (t = _$$F.formatHSLA({
       h: e.h,
       s: e.s,

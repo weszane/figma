@@ -1,4 +1,4 @@
-import { throwTypeError } from "../figma_app/465776";
+import { throwTypeError } from "src/figma_app/465776";
 let $$r3 = "https://help.figma.com/hc/en-us/articles/32801027692183-Troubleshoot-the-Figma-Font-installer";
 let $$a4 = "https://help.figma.com/hc/en-us/articles/360039956894-Add-a-font-to-Figma-Design#h_01HHJPRGW7HM4KP1G53T9K1G95";
 function s({

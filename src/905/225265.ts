@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { l as _$$l } from "../905/716947";
 import { createRemovableAtomFamily, atom, setupDebounceAtoms, useAtomWithSubscription, atomStoreManager, Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { selectAtom, loadable } from "../vendor/812047";
 import c from "../vendor/946678";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { $ as _$$$ } from "../905/455748";
-import { QO } from "../905/888985";
+import { asyncExecutorSubscription } from "../905/888985";
 import { WebLoggerTimer } from "../905/485103";
 import { yZ } from "../figma_app/476572";
 import { hW } from "../figma_app/594947";
@@ -116,7 +116,7 @@ let es = createReduxSubscriptionAtomWithState(e => {
 let eo = createReduxSubscriptionAtomWithState(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
 let el = createReduxSubscriptionAtomWithState(e => e.search.sessionId);
 let ed = selectAtom(OC, e => XE(e) === FEditorType.Design);
-let ec = selectAtom(openFileAtom, f$, c2);
+let ec = selectAtom(openFileAtom, f$, deepEqual);
 let eu = createRemovableAtomFamily(e => atom(void 0));
 let ep = createRemovableAtomFamily(e => atom(t => {
   let {
@@ -434,7 +434,7 @@ let ew = createRemovableAtomFamily(e => atom(async t => {
 }));
 async function eC(e, t) {
   let i = new WebLoggerTimer();
-  1 === (await t(eg(e))) && (await QO(I1, e => {
+  1 === (await t(eg(e))) && (await asyncExecutorSubscription(I1, e => {
     let t = atomStoreManager.get(I1);
     "loaded" === t.status && e(t);
   }));
@@ -467,7 +467,7 @@ export function $$eT4(e) {
         query: i
       });
     }, [i, e, c, t, r, o]);
-    return useMemo(() => "loading" === t.state && a && a.query === i && c2(a.assetSearchFilter, r) ? {
+    return useMemo(() => "loading" === t.state && a && a.query === i && deepEqual(a.assetSearchFilter, r) ? {
       state: "hasData",
       data: a.results
     } : t, [i, a, t, r]);

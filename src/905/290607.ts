@@ -5,7 +5,7 @@ import { Point } from "../905/736624";
 import { FU, b$, Bs } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { v9 } from "../figma_app/383828";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { r as _$$r } from "../905/632622";
 import { S } from "../905/459477";
@@ -27,7 +27,7 @@ export function $$g0({
   let x = S.useOpenFileProperties();
   return useCallback((n, r, m) => {
     let h = n.altKey;
-    if ((e || h && E) && r.type !== PW.MODULE) {
+    if ((e || h && E) && r.type !== PrimaryWorkflowEnum.MODULE) {
       t && permissionScopeHandler.user("swap-instance", () => v9(r, v, f, g || Object.keys(I), A, !e && h, x, m));
       _?.(r);
     } else {
@@ -43,17 +43,17 @@ export function $$g0({
         storeInRecentsKey: $A.Design,
         useSmartPositioning: !0
       };
-      r.type === PW.COMPONENT ? v(FU({
+      r.type === PrimaryWorkflowEnum.COMPONENT ? v(FU({
         item: r,
         ...t,
         insertionCallback: b,
         insertLogArgsOverride: y
-      })) : r.type === PW.STATE_GROUP ? v(b$({
+      })) : r.type === PrimaryWorkflowEnum.STATE_GROUP ? v(b$({
         item: r,
         ...t,
         insertionCallback: b,
         insertLogArgsOverride: y
-      })) : r.type === PW.MODULE && v(Bs({
+      })) : r.type === PrimaryWorkflowEnum.MODULE && v(Bs({
         item: r,
         ...t,
         insertLogArgsOverride: y,

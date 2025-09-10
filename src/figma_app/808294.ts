@@ -1,10 +1,10 @@
-import { j } from "../905/918929";
-import { getI18nString } from "../905/303541";
-import { D } from "../figma_app/690075";
-import { vr } from "../figma_app/514043";
-import { I0, xQ, m3, zF, U, PM } from "../figma_app/45218";
-import { G3, QK } from "../905/272080";
-import { Uv, bG } from "../905/54385";
+import { j } from "src/905/918929";
+import { getI18nString } from "src/905/303541";
+import { D } from "src/figma_app/690075";
+import { vr } from "src/figma_app/514043";
+import { I0, xQ, m3, zF, U, PM } from "src/figma_app/45218";
+import { G3, QK } from "src/905/272080";
+import { Uv, bG } from "src/905/54385";
 let $$c15 = 2;
 let $$u19 = 1e3;
 export function $$p17(e) {

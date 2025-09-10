@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from '../905/165054';
 import { Tj } from '../905/266529';
 import { n as _$$n } from '../905/347702';
 import { debugState } from '../905/407919';
-import { o8, YR } from '../905/622391';
+import { getSelectedView, getOpenFileKey } from '../905/622391';
 import { atomStoreManager } from '../figma_app/27355';
 import { isInteractionPathCheck } from '../figma_app/897289';
 import { $f, d4, GR, vT } from '../figma_app/474636';
@@ -81,8 +81,8 @@ export let $$C12 = _$$n(async e => {
 });
 export function $$T10() {
   if (Tj(void 0), $$h7.currentWidget = void 0, $$_8(null), $$A11(null), $$y0(null), $$h7.currentPluginRunID = null, $$h7.stats = null, atomStoreManager.set(d4, null), atomStoreManager.set(GR, null), desktopAPIInstance && $$h7.setMediaEnabled && ($$h7.setMediaEnabled = !1), desktopAPIInstance && $$h7.allowedPluginOrigin && (desktopAPIInstance.removeAllowedPluginOrigin($$h7.allowedPluginOrigin), $$h7.allowedPluginOrigin = void 0), debugState) {
-    let t = o8();
-    let i = YR();
+    let t = getSelectedView();
+    let i = getOpenFileKey();
     if (t && i) {
       let e;
       e = {

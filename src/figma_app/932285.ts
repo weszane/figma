@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, createElement, useRef } from "react";
 import { generateRecordingKey } from "../figma_app/878298";
 import s from "classnames";
-import { UE, DA } from "../figma_app/191804";
+import { whiteColor, areColorsEqual } from "../figma_app/191804";
 import { selectWithShallowEqual } from "../905/103090";
 import { GG } from "../905/511649";
 import { generateUUIDv4 } from "../905/871474";
@@ -156,7 +156,7 @@ export function $$R2({
 }) {
   let [W, K] = useState(!1);
   let Y = {
-    ...((Array.isArray(e.option) ? e.option[0] : e.option) ?? UE)
+    ...((Array.isArray(e.option) ? e.option[0] : e.option) ?? whiteColor)
   };
   N && (Y.a = N);
   useEffect(() => {
@@ -338,7 +338,7 @@ function P({
       return !t.find(t => {
         let r = C(t.option);
         let n = C(e.option);
-        return r && n && DA(r, n);
+        return r && n && areColorsEqual(r, n);
       });
     } catch (e) {
       console.error(e);
@@ -402,7 +402,7 @@ function P({
       });
     },
     onToggleMenuOpen: Y,
-    optionEquality: (e, t) => !(Array.isArray(e.option) || Array.isArray(t.option)) && DA(e.option, t.option),
+    optionEquality: (e, t) => !(Array.isArray(e.option) || Array.isArray(t.option)) && areColorsEqual(e.option, t.option),
     options: I,
     positionX: z ?? w[G],
     positionY: W,

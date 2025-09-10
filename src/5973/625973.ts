@@ -7,7 +7,7 @@ import { permissionScopeHandler, zk } from '../905/189185';
 import { _6, dL, fg, M1, uw, y4, zA } from '../905/321541';
 import { bG, rw } from '../905/333600';
 import { Aw, LV, Mn, Ug } from '../905/340677';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { DI, JQ } from '../905/389786';
 import { getGradientTransformMatrix, getLinearGradientPoints, getRadialGradientPoints } from '../905/409381';
 import { $2, loadNonPluginFont, waitForAllFontsLoaded, getClosestFontName } from '../905/426868';
@@ -190,7 +190,7 @@ export function $$P32({
     topOffset: y,
     bottomOffset: -y
   });
-  c2(xConstraint, i?.layoutMetadata?.xConstraint) && c2(yConstraint, i?.layoutMetadata?.yConstraint) || function ({
+  deepEqual(xConstraint, i?.layoutMetadata?.xConstraint) && deepEqual(yConstraint, i?.layoutMetadata?.yConstraint) || function ({
     xConstraint: e,
     yConstraint: t,
     x: i,
@@ -378,12 +378,12 @@ async function M({
   oldTextMetadata: t,
   nodeShim: i
 }) {
-  if (!(!e || c2(t, e)) && (i = i.getTextSublayerOrSelf(), e.style && (await k(e.style, async ({
+  if (!(!e || deepEqual(t, e)) && (i = i.getTextSublayerOrSelf(), e.style && (await k(e.style, async ({
     key: e,
     value: n
   }) => {
     let r = t?.style?.[e];
-    if (!c2(r, n)) {
+    if (!deepEqual(r, n)) {
       switch (e) {
         case 'fills':
         case 'fillStyleId':
@@ -439,7 +439,7 @@ async function M({
     for (let n = 0; n < e.ranges.length; n++) {
       let r = e.ranges[n];
       let o = t?.ranges?.[n];
-      !c2(o, r) && r && (await i.writeTextRange(r));
+      !deepEqual(o, r) && r && (await i.writeTextRange(r));
     }
   }
 }
@@ -1460,18 +1460,18 @@ export function $$Q41({
 }) {
   let r = ['transformMatrix', 'flipHorizontal', 'flipVertical'];
   for (let n of r) {
-    c2(t?.customProperties?.[n], e.customProperties[n]) || i.writeCustomProperty({
+    deepEqual(t?.customProperties?.[n], e.customProperties[n]) || i.writeCustomProperty({
       key: n,
       value: e.customProperties[n]
     });
   }
   for (let [n, o] of Object.entries(e.customProperties).filter(([e]) => !r.includes(e))) {
-    c2(t?.customProperties?.[n], o) || i.writeCustomProperty({
+    deepEqual(t?.customProperties?.[n], o) || i.writeCustomProperty({
       key: n,
       value: o
     });
   }
-  for (let [r, o] of (c2(t?.componentProps, e.componentProps) || (i.type === 'INSTANCE' && n.trackInstanceIdTouched(i.guid), i.writeComponentProps(e.componentProps)), Object.entries(e.props))) c2(t?.props?.[r], o) || i.writeProperty(r, o);
+  for (let [r, o] of (deepEqual(t?.componentProps, e.componentProps) || (i.type === 'INSTANCE' && n.trackInstanceIdTouched(i.guid), i.writeComponentProps(e.componentProps)), Object.entries(e.props))) deepEqual(t?.props?.[r], o) || i.writeProperty(r, o);
 }
 async function ee({
   nodeId: e,
@@ -5479,7 +5479,7 @@ function nt(e, t, i, n, r) {
     generationRequest: r
   }, n);
   let a = {};
-  for (let [e, i] of Object.entries(o)) c2(t[e], i) || (a[e] = i);
+  for (let [e, i] of Object.entries(o)) deepEqual(t[e], i) || (a[e] = i);
   return a;
 }
 function ni(e) {
@@ -7054,7 +7054,7 @@ function n8({
           i[o] && (t.props[o] ? t.props[o] = [t.props[o], i[o]].join(' ') : t.props[o] = i[o]);
         } else {
           if (void 0 !== t.props[o]) throw new Error(`Prop ${o} already set on node ${e.guid}`);
-          if (r && o in r && c2(i[o], r[o])) continue;
+          if (r && o in r && deepEqual(i[o], r[o])) continue;
           t.props[o] = i[o];
         }
       }

@@ -1,11 +1,11 @@
 import { atom } from "../figma_app/27355";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 var $$a23 = (e => (e.ALL = "ALL", e.ORG = "ORG", e.START_FROM_SCRATCH = "START_FROM_SCRATCH", e.NEW_TEMPLATE = "NEW_TEMPLATE", e.TEAM = "TEAM", e.TEMPLATES = "TEMPLATES", e.USE_CASE = "USE_CASE", e.IMPORT_FROM_DESIGN = "IMPORT_FROM_DESIGN", e))($$a23 || {});
-let $$s17 = Wh(() => atom(!1));
+let $$s17 = setupRemovableAtomFamily(() => atom(!1));
 let $$o9 = atom({
   type: "ALL"
 });
-let $$l12 = Wh(() => atom(!0));
+let $$l12 = setupRemovableAtomFamily(() => atom(!0));
 let d = atom({});
 let $$c8 = atom(e => e(d), (e, t, r, n) => {
   t(d, e => ({
@@ -16,20 +16,20 @@ let $$c8 = atom(e => e(d), (e, t, r, n) => {
 let $$u10 = atom(null, (e, t) => {
   t(d, {});
 });
-let $$p4 = Wh(() => atom(null));
-let $$_19 = Wh(() => atom(!1));
-let $$h22 = Wh(() => atom(!1));
+let $$p4 = setupRemovableAtomFamily(() => atom(null));
+let $$_19 = setupRemovableAtomFamily(() => atom(!1));
+let $$h22 = setupRemovableAtomFamily(() => atom(!1));
 let $$m0 = atom(Math.random());
-let $$g14 = Wh(() => atom("COMMUNITY"));
-let $$f20 = Wh(() => atom(""));
-let $$E1 = Wh(() => atom(!0));
-let $$y24 = Wh(() => atom(!0));
-let $$b3 = Wh(() => atom(!0));
+let $$g14 = setupRemovableAtomFamily(() => atom("COMMUNITY"));
+let $$f20 = setupRemovableAtomFamily(() => atom(""));
+let $$E1 = setupRemovableAtomFamily(() => atom(!0));
+let $$y24 = setupRemovableAtomFamily(() => atom(!0));
+let $$b3 = setupRemovableAtomFamily(() => atom(!0));
 export var $$T2 = (e => (e.DEFAULT = "DEFAULT", e.BROWSING_TEMPLATE = "BROWSING_TEMPLATE", e))($$T2 || {});
-let $$I21 = Wh(() => atom({
+let $$I21 = setupRemovableAtomFamily(() => atom({
   type: "DEFAULT"
 }));
-let $$S5 = Wh(() => atom(!1));
+let $$S5 = setupRemovableAtomFamily(() => atom(!1));
 export var $$v15 = (e => (e.PUBLISH_HUB_FILE_INITIATED = "PUBLISH_HUB_FILE_INITIATED", e.PUBLISH_HUB_FILE_COMPLETED = "PUBLISH_HUB_FILE_COMPLETED", e.PUBLISH_HUB_FILE_ERRORED = "PUBLISH_HUB_FILE_ERRORED", e.PUBLISH_TEMPLATE_INITIATED = "PUBLISH_TEMPLATE_INITIATED", e.PUBLISH_TEMPLATE_COMPLETED = "PUBLISH_TEMPLATE_COMPLETED", e.PUBLISH_TEMPLATE_ERRORED = "PUBLISH_TEMPLATE_ERRORED", e.UNPUBLISH_TEMPLATE_INITIATED = "UNPUBLISH_TEMPLATE_INITIATED", e.UNPUBLISH_HUB_FILE_INITIATED = "UNPUBLISH_HUB_FILE_INITIATED", e.UNPUBLISH_COMPLETED = "UNPUBLISH_COMPLETED", e.UNPUBLISH_TEMPLATE_ERRORED = "UNPUBLISH_ERRORED", e.CLEARED = "CLEARED", e))($$v15 || {});
 let A = ["PUBLISH_HUB_FILE_INITIATED", "PUBLISH_TEMPLATE_INITIATED", "UNPUBLISH_TEMPLATE_INITIATED", "UNPUBLISH_HUB_FILE_INITIATED"];
 let x = [...A, "CLEARED"];
@@ -84,7 +84,7 @@ export function $$P6(e) {
 atom(null, (e, t) => t(w, {
   state: "CLEARED"
 }));
-export let $$D7 = Wh(() => atom(!1));
+export let $$D7 = setupRemovableAtomFamily(() => atom(!1));
 export const Co = $$m0;
 export const EC = $$E1;
 export const Ef = $$T2;

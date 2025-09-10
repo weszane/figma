@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { e3 } from "../figma_app/191804";
+import { textOnDarkCanvas } from "../figma_app/191804";
 import { j } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
 import { f as _$$f } from "../905/940356";
@@ -144,7 +144,7 @@ function T() {
       children: [jsx("div", {
         className: iY,
         style: {
-          color: e3
+          color: textOnDarkCanvas
         },
         children: f
       }), jsx("div", {

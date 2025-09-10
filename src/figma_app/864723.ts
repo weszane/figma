@@ -1,5 +1,5 @@
-import { atom } from "../figma_app/27355";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
+import { atom } from "src/figma_app/27355";
+import { createReduxSubscriptionAtomWithState } from "src/905/270322";
 let $$a4 = createReduxSubscriptionAtomWithState(e => e.user);
 let $$s2 = atom(e => e($$a4)?.id);
 let $$o3 = atom(e => e($$a4)?.created_at);

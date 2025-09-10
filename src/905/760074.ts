@@ -197,7 +197,7 @@ function optimizeUrl(e: URL): URL {
     else if (t === 'design')
       e.searchParams.append('m', 'auto')
   }
-  catch {}
+  catch { }
   return e
 }
 
@@ -401,7 +401,7 @@ export function handleError(e: Error, t: CPPEventType, i: string | null, r: any)
  * @param t - The context.
  */
 export function handleModalError(e: Error, t: any): void {
-  const i:any = atomStoreManager.get(currentSelectionAtom)
+  const i: any = atomStoreManager.get(currentSelectionAtom)
   logError('branching', e.message, t)
   reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, e, { tags: createTags(CPPEventType.MODAL, i) })
 }

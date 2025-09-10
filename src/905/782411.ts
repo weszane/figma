@@ -8,7 +8,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { uo, yH } from "../905/879323";
 import { n1 } from "../figma_app/657017";
 import { SS, Qp } from "../figma_app/349248";
-import { Yu, PW } from "../figma_app/633080";
+import { NO_TEAM, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { qq } from "../905/72677";
 let g = atom(e => {
   let t = e(qq);
@@ -35,8 +35,8 @@ export function $$f0() {
         if (!r) continue;
         let a = r.hubFileId;
         let s = _$$l(r.libraryKey);
-        let o = components?.[Yu]?.[s];
-        let d = stateGroups?.[Yu]?.[s];
+        let o = components?.[NO_TEAM]?.[s];
+        let d = stateGroups?.[NO_TEAM]?.[s];
         let u = r.stateGroups.map(e => SS(e, {
           type: "hubFile",
           file: {
@@ -57,11 +57,11 @@ export function $$f0() {
         let A = d ? Object.values(d).filter(e => !f.includes(e.key)) : [];
         e(uo({
           items: u,
-          type: PW.STATE_GROUP
+          type: PrimaryWorkflowEnum.STATE_GROUP
         }));
         e(uo({
           items: h,
-          type: PW.COMPONENT
+          type: PrimaryWorkflowEnum.COMPONENT
         }));
         e(yH({
           nodeIds: _.map(e => e.node_id),
@@ -69,7 +69,7 @@ export function $$f0() {
             key: a,
             library_key: s
           },
-          type: PW.COMPONENT
+          type: PrimaryWorkflowEnum.COMPONENT
         }));
         e(yH({
           nodeIds: A.map(e => e.node_id),
@@ -77,7 +77,7 @@ export function $$f0() {
             key: a,
             library_key: s
           },
-          type: PW.STATE_GROUP
+          type: PrimaryWorkflowEnum.STATE_GROUP
         }));
       }
     }, [e, s, a, components, stateGroups, h]);

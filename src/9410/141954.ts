@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { tK } from "../figma_app/191804";
+import { parseHex } from "../figma_app/191804";
 import { reportError } from "../905/11";
 import { GS, u7 } from "../figma_app/846140";
 import { Xy, Ne } from "../figma_app/702372";
@@ -446,7 +446,7 @@ export function $$p1(e) {
   let i = "true" === e[u7.DARK_MODE];
   for (let [r, a] of Object.entries(e || {})) switch (r.split("/")[0]) {
     case u7.COLOR:
-      let e = tK(a);
+      let e = parseHex(a);
       if (!e) continue;
       t.colorVariableMap[r] = qO(e, i ? lH.DARK : lH.LIGHT);
       break;

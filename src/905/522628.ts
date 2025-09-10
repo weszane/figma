@@ -1,5 +1,5 @@
-import { createMetaValidator, createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { lH } from "../905/316062";
+import { createMetaValidator, createNoOpValidator, APIParameterUtils } from "src/figma_app/181241";
+import { lH } from "src/905/316062";
 export let $$a0 = new class {
   constructor() {
     this.FolderSchemaValidator = createMetaValidator("FolderSchemaValidator", lH, null);

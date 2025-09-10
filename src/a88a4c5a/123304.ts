@@ -69,7 +69,7 @@ import { n as _$$n2 } from '../905/347702';
 import { c as _$$c2 } from '../905/370443';
 import { selectCurrentUser, getUserId } from '../905/372672';
 import { _ as _$$_ } from '../905/381235';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { e as _$$e3 } from '../905/383776';
 import { u as _$$u } from '../905/389684';
 import { J9 } from '../905/401885';
@@ -83,7 +83,7 @@ import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { E as _$$E } from '../905/453826';
 import { l as _$$l7 } from '../905/479687';
 import { X as _$$X } from '../905/482718';
-import { PW } from '../905/497152';
+import { PrimaryWorkflowEnum } from '../905/497152';
 import { L6 } from '../905/498948';
 import { O as _$$O2 } from '../905/501876';
 import { handleAtomEvent } from '../905/502364';
@@ -314,7 +314,7 @@ import { lV as _$$lV } from '../figma_app/617606';
 import { kQ, pZ } from '../figma_app/620124';
 import { o9 as _$$o } from '../figma_app/621201';
 import { JT } from '../figma_app/632248';
-import { P2, Wv } from '../figma_app/633080';
+import { isPublishedTeamLibrary, LibraryTabEnum } from '../figma_app/633080';
 import { zl as _$$zl } from '../figma_app/641749';
 import { getPermissionsState } from '../figma_app/642025';
 import { lz as _$$lz, sf as _$$sf, td as _$$td, bV, Dt, EN, OL } from '../figma_app/646031';
@@ -3166,7 +3166,7 @@ function nb() {
   } = _$$u({
     entrypoint: _$$r4.DESIGN_LINTER,
     modalType: 'editor',
-    initialTab: Wv.LIBRARIES
+    initialTab: LibraryTabEnum.LIBRARIES
   });
   let l = useCallback(() => {
     _$$r2()?.teardownLinter();
@@ -3447,7 +3447,7 @@ function nq({
 function nW({
   library: e
 }) {
-  let t = P2(e);
+  let t = isPublishedTeamLibrary(e);
   let l = !t || e.thumbnail_guid !== null;
   let i = t ? e.team_name : e.community_author_name;
   return jsx(nq, {
@@ -4691,7 +4691,7 @@ function iJ() {
     let s = useAtomWithSubscription(qN);
     let o = useAtomWithSubscription(openFileKeyAtom);
     let a = subscribedLibraries?.data?.map(e => {
-      let t = P2(e);
+      let t = isPublishedTeamLibrary(e);
       let l = !t || e.thumbnail_guid !== null;
       let i = t ? e.team_name : e.community_author_name;
       return {
@@ -7557,7 +7557,7 @@ function sK(e) {
   return !!e && 'resolvedValue' in e && e.resolvedValue.type === VariableDataType.COLOR;
 }
 function sX(e) {
-  return !!e && 'type' in e && e.type === PW.STYLE;
+  return !!e && 'type' in e && e.type === PrimaryWorkflowEnum.STYLE;
 }
 let sZ = 'suggestion_rule_blocks--chit--zCpjn';
 function sY() {
@@ -9773,7 +9773,7 @@ function oB() {
       windowInnerHeight: n,
       windowInnerWidth: r
     }] = _$$A5(_$$l5(), 300, {
-      equalityFn: c2
+      equalityFn: deepEqual
     });
     let s = 915;
     let o = 540;
@@ -10565,7 +10565,7 @@ function dy({
       windowInnerWidth: t,
       windowInnerHeight: l
     }] = _$$A5(_$$l5(), 300, {
-      equalityFn: c2
+      equalityFn: deepEqual
     });
     let [n, r] = useAtomValueAndSetter(yq);
     if (n) {

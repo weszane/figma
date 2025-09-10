@@ -1,14 +1,14 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, useContext, useRef, useMemo, useEffect, PureComponent, forwardRef, Children, Component } from "react";
-import { shallowEqual } from "react-redux";
-import { N_ } from "../vendor/956898";
-import { trackEventAnalytics } from "../905/449184";
-import { logDebug } from "../905/714362";
-import { handleAtomEvent } from "../905/502364";
-import { I18nTextComponent, getI18nString } from "../905/303541";
-import { u as _$$u } from "../905/16237";
-import { K } from "../905/135526";
-import { qD as _$$qD, Cu, fy } from "../figma_app/314264";
+import { Children, Component, createContext, forwardRef, PureComponent, useContext, useEffect, useMemo, useRef } from 'react';
+import { shallowEqual } from 'react-redux';
+import { jsx } from 'react/jsx-runtime';
+import { getRumLoggingConfig } from '../905/16237';
+import { K } from '../905/135526';
+import { getI18nString, I18nTextComponent } from '../905/303541';
+import { trackEventAnalytics } from '../905/449184';
+import { handleAtomEvent } from '../905/502364';
+import { logDebug } from '../905/714362';
+import { qD as _$$qD, Cu, fy } from '../figma_app/314264';
+import { N_ } from '../vendor/956898';
 let h = null;
 function m() {
   h = null;
@@ -58,7 +58,7 @@ export function $$f4({
     if (T.current && T.current.name === e && (u || shallowEqual(T.current.properties, t))) return;
     if (r === K.RCS) {
       let r = {};
-      for (let e of Object.keys(t)) null !== t[e] && void 0 !== t[e] && (r[e] = t[e]);
+      for (let e of Object.keys(t)) t[e] !== null && void 0 !== t[e] && (r[e] = t[e]);
       handleAtomEvent({
         id: e,
         properties: r
@@ -67,12 +67,12 @@ export function $$f4({
     }
     let n = {
       name: e,
-      ...(null != h && {
+      ...(h != null && {
         ctaClickedReferrer: h
       }),
       ...t
     };
-    logDebug("Context Viewed", e, n);
+    logDebug('Context Viewed', e, n);
     _$$qD(n, f);
     T.current = I;
   }, [r, I, s, u, f]);
@@ -82,7 +82,7 @@ export function $$f4({
   });
 }
 export function $$E8(e, t) {
-  var r;
+  let r;
   (r = class extends PureComponent {
     render() {
       return jsx($$f4, {
@@ -105,7 +105,7 @@ export function $$y3(e, t, r = {}, i = !0) {
 }
 export function $$b10(e, t) {
   let r = forwardRef((r, a) => {
-    let s = _$$u();
+    let s = getRumLoggingConfig();
     return jsx($$g2.Consumer, {
       children: o => {
         let l = e => {
@@ -117,7 +117,7 @@ export function $$b10(e, t) {
           o.name && (n.trackingContext = o.name);
           let a = function (e, t) {
             if (t) return t;
-            if (e && "string" == typeof e) return e;
+            if (e && typeof e == 'string') return e;
             {
               let t = Children.map(e, e => {
                 if (e?.type !== I18nTextComponent) return e;
@@ -129,7 +129,7 @@ export function $$b10(e, t) {
                   return getI18nString(id, options);
                 }
               });
-              if (t?.every(e => "string" == typeof e)) return t.join("");
+              if (t?.every(e => typeof e == 'string')) return t.join('');
             }
           }(r.children, r.innerText);
           a && (n.text = a);
@@ -200,14 +200,14 @@ export function $$T5(e) {
 let $$I0 = $$b10(({
   dataTestId: e,
   ...t
-}) => jsx("button", {
+}) => jsx('button', {
   ...t,
-  "data-testid": e
+  'data-testid': e
 }));
-let $$S7 = $$b10(e => jsx("div", {
+let $$S7 = $$b10(e => jsx('div', {
   ...e
 }));
-let $$v1 = $$b10(e => jsx("a", {
+let $$v1 = $$b10(e => jsx('a', {
   ...e,
   children: e.children
 }), !0);
@@ -217,7 +217,7 @@ let $$A9 = $$b10(e => jsx(N_, {
 export function $$x6() {
   return useContext($$g2);
 }
-$$b10(e => jsx("input", {
+$$b10(e => jsx('input', {
   ...e
 }));
 export const $z = $$I0;

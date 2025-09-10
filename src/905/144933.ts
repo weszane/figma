@@ -9,7 +9,7 @@ import { h as _$$h } from "../905/632544";
 import { L } from "../905/178090";
 import { to } from "../figma_app/701107";
 import { T } from "../905/858738";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { j9 } from "../figma_app/162807";
 export let $$f1 = {
   504: XHR.RetryStrategy.NO_RETRY
@@ -20,7 +20,7 @@ function _(e) {
 export function $$A2(e) {
   return {
     ...e,
-    type: PW.VARIABLE_SET,
+    type: PrimaryWorkflowEnum.VARIABLE_SET,
     version: Vt(e.version),
     variableThumbnailsUrl: e.variable_thumbnails_url,
     subscriptionStatus: "LIBRARY",
@@ -30,7 +30,7 @@ export function $$A2(e) {
 export function $$y4(e) {
   return {
     ...e,
-    type: PW.VARIABLE,
+    type: PrimaryWorkflowEnum.VARIABLE,
     version: nK(e.version),
     sortPosition: e.sort_position,
     variableSetId: e.variable_set_id,
@@ -42,7 +42,7 @@ export function $$y4(e) {
   };
 }
 export function $$b3(e) {
-  return e.map(e => e === PW.STATE_GROUP ? "variant" : e);
+  return e.map(e => e === PrimaryWorkflowEnum.STATE_GROUP ? "variant" : e);
 }
 export let $$v0 = new class {
   constructor() {

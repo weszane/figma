@@ -6,7 +6,7 @@ import r from "classnames";
 import { colorToString } from "../905/436288";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
-import { ol, H0, GL } from "../figma_app/191804";
+import { multiplayerColors, parseColor, getTextColorForBackground } from "../figma_app/191804";
 import { Hd } from "../figma_app/583114";
 import { wY } from "../figma_app/708845";
 import { isAnyMobile } from "../figma_app/778880";
@@ -197,7 +197,7 @@ export function $$O0(e) {
   let O = isAnyMobile ? "multiplayer_bell--buttonMobile--Z5j0F multiplayer_bell--button--QWm4n multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--button--QWm4n multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd";
   let B = isAnyMobile ? "multiplayer_bell--messageMobile--Z1sCx multiplayer_bell--message--POM9v multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--message--POM9v multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd";
   let U = isAnyMobile ? "multiplayer_bell--closeButtonMobile--s-kHx multiplayer_bell--closeButton--5Pbdu multiplayer_bell--multiplayerTextMobile--4qVD- multiplayer_bell--multiplayerText--b-7-0 text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos14--OL9Hp text--_fontBase--QdLsd" : "multiplayer_bell--closeButton--5Pbdu";
-  let H = color ?? ol.MULTIPLAYER_GRAY;
+  let H = color ?? multiplayerColors.MULTIPLAYER_GRAY;
   let V = useMemo(() => {
     if ("brand" === color) return {
       "--multiplayerBellBackgroundColor": useSecondaryColor ? "var(--color-bg-brand-hover)" : "var(--color-bg-brand)",
@@ -208,12 +208,12 @@ export function $$O0(e) {
       "--multiplayerBellProgressBackgroundColor": "var(--color-bg-brand-hover)"
     };
     {
-      let e = H0(H);
+      let e = parseColor(H);
       let t = Hd(e, -.15);
       let o = Hd(e, -.55);
       let a = Hd(e, -.8);
-      let i = e && GL(e);
-      let s = o && GL(o);
+      let i = e && getTextColorForBackground(e);
+      let s = o && getTextColorForBackground(o);
       return {
         "--multiplayerBellBackgroundColor": useSecondaryColor && t ? colorToString(t) : H,
         "--multiplayerBellTextColor": i,

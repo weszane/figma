@@ -104,7 +104,7 @@ import { k as _$$k } from "../905/545760";
 import { bL } from "../905/575478";
 import { q as _$$q2 } from "../905/932270";
 import { getFeatureFlags } from "../905/601108";
-import { H0 } from "../figma_app/191804";
+import { parseColor } from "../figma_app/191804";
 import { Yv } from "../figma_app/616107";
 import { Qv } from "../figma_app/967873";
 import { s as _$$s3 } from "../figma_app/666387";
@@ -657,7 +657,7 @@ function tu({
         loadingPaletteCircleCount: b
       }), !y && (getFeatureFlags().figjam_fpl_dlt_sticky_submenu ? jsx(bL, {
         onChange: e => {
-          let t = H0(e);
+          let t = parseColor(e);
           t && (h(t), tp());
         },
         legend: jsx(_$$q2, {

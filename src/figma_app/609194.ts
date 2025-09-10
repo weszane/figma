@@ -1,10 +1,10 @@
-import { throwTypeError } from "../figma_app/465776";
-import { getI18nString } from "../905/303541";
-import { r3 } from "../figma_app/599327";
-import { FUserRoleType } from "../figma_app/191312";
-import { du } from "../figma_app/336853";
-import { s as _$$s } from "../905/82276";
-import { Od, WH } from "../figma_app/967319";
+import { throwTypeError } from "src/figma_app/465776";
+import { getI18nString } from "src/905/303541";
+import { r3 } from "src/figma_app/599327";
+import { FUserRoleType } from "src/figma_app/191312";
+import { du } from "src/figma_app/336853";
+import { s as _$$s } from "src/905/82276";
+import { Od, WH } from "src/figma_app/967319";
 export function $$c5(e, t) {
   switch (e) {
     case Od.NAME:

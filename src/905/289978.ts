@@ -1,11 +1,11 @@
-import { getFilteredFeatureFlags } from "../905/717445";
-import { parseAndNormalizeQuery } from "../905/634134";
-import { encodeUri } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
-import { getRepoById, getDisplayName } from "../905/760074";
-import { Zt } from "../figma_app/617727";
-import { FEditorType } from "../figma_app/53721";
-import { d8, qi, oU, ZH, gR, H_, Wi, sR, qr } from "../905/366346";
+import { getFilteredFeatureFlags } from "src/905/717445";
+import { parseAndNormalizeQuery } from "src/905/634134";
+import { encodeUri } from "src/figma_app/930338";
+import { getI18nString } from "src/905/303541";
+import { getRepoById, getDisplayName } from "src/905/760074";
+import { Zt } from "src/figma_app/617727";
+import { FEditorType } from "src/figma_app/53721";
+import { d8, qi, oU, ZH, gR, H_, Wi, sR, qr } from "src/905/366346";
 function u(e) {
   return !!getFilteredFeatureFlags().ce_il_root && e?.view === "fullscreen" && e?.editorType === FEditorType.Illustration;
 }

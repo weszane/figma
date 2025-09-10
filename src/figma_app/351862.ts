@@ -15,10 +15,10 @@ import { reportError } from "../905/11";
 import { W6 } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { jsxs, jsx } from "react/jsx-runtime";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
 import { getObservableValue } from "../figma_app/84367";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { OD, AT, R0 } from "../figma_app/955650";
 import { Rg, Gn } from "../figma_app/204478";
 import { YV, iJ } from "../figma_app/240545";
@@ -418,7 +418,7 @@ export function $$tz14(e, t) {
 }
 export async function $$tW13(e, t, r) {
   try {
-    let n = await Eo.getCanvas(e);
+    let n = await teamLibraryCache.getCanvas(e);
     WhiteboardTsApi?.setPlatformShapeSelected(n, $$t$2(e), e.type, e.userFacingVersion.toString(), e.library_key, r);
     Fullscreen?.triggerActionEnumInUserEditScope(Command.SET_TOOL_SHAPE_WHITEBOARD_PLATFORM, {});
     atomStoreManager.set(W6, t);
@@ -442,23 +442,23 @@ export function $$tY9(e, t) {
       percentOffsetX: .5,
       percentOffsetY: .5
     };
-    Eo.getCanvas(e).then(r => {
+    teamLibraryCache.getCanvas(e).then(r => {
       let i;
       switch (e.type) {
-        case PW.COMPONENT:
+        case PrimaryWorkflowEnum.COMPONENT:
           i = permissionScopeHandler.system("upsert-shared-symbol", () => LibraryPubSub?.upsertSharedSymbol(e.component_key ?? ii.INVALID, e.content_hash ?? F7.INVALID, e.library_key, Confirmation.NO, r, SceneIdentifier.ACTIVE_SCENE));
           break;
-        case PW.STATE_GROUP:
+        case PrimaryWorkflowEnum.STATE_GROUP:
           i = permissionScopeHandler.system("upsert-shared-state-group", () => LibraryPubSub?.upsertSharedStateGroup(e.key, e.version, e.library_key, Confirmation.NO, r, SceneIdentifier.ACTIVE_SCENE));
       }
       if (!i || i.fileUpdateRequired || !i.localGUID) throw Error("An error occurred while adding an instance of this component.");
       switch (e.type) {
-        case PW.COMPONENT:
+        case PrimaryWorkflowEnum.COMPONENT:
           permissionScopeHandler.user("insert-component", () => {
             Fullscreen?.insertInstance(i.localGUID, n, {}, null, !0, !1, !0);
           });
           break;
-        case PW.STATE_GROUP:
+        case PrimaryWorkflowEnum.STATE_GROUP:
           permissionScopeHandler.user("insert-state-group", () => {
             Fullscreen?.insertStateGroup(i.localGUID, n, {}, null, !0, e.default_state_key, !1);
           });
@@ -466,7 +466,7 @@ export function $$tY9(e, t) {
         default:
           throw Error("An error occurred while adding an instance of this component.");
       }
-      Fullscreen && (Fullscreen.triggerActionEnumInUserEditScope(Command.COMMIT, {}), Fullscreen.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT, {}), (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP) && $$tH1($$t$2(e), t, getInitialOptions().user_data?.id));
+      Fullscreen && (Fullscreen.triggerActionEnumInUserEditScope(Command.COMMIT, {}), Fullscreen.triggerActionEnumInUserEditScope(Command.SET_TOOL_DEFAULT, {}), (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP) && $$tH1($$t$2(e), t, getInitialOptions().user_data?.id));
     }).catch(e => {
       reportError(_$$e.FIGJAM, e);
     });
@@ -475,7 +475,7 @@ export function $$tY9(e, t) {
   }
 }
 export function $$t$2(e) {
-  return e.type === PW.COMPONENT ? e.component_key ?? "" : e.key;
+  return e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key ?? "" : e.key;
 }
 export function $$tX11() {
   AppStateTsApi?.figjamState().isDraggingSidebarItem.set(!1);

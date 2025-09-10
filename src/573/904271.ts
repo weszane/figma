@@ -94,7 +94,7 @@ import { l6, c$, sK } from "../905/794875";
 import { generateRecordingKey } from "../figma_app/878298";
 import { U as _$$U } from "../905/966438";
 import { m as _$$m } from "../642/720139";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Bk, RN, Sg, $1, oV, Mt, mZ } from "../figma_app/76115";
 import { g5 } from "../figma_app/178752";
 import { $A } from "../905/862883";
@@ -114,7 +114,7 @@ import { B as _$$B } from "../905/714743";
 import { Y as _$$Y } from "../905/830372";
 import { jD } from "../905/765855";
 import { fd, o3 as _$$o, Ag } from "../figma_app/255679";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { $z } from "../figma_app/297733";
 import { T as _$$T2 } from "../905/714785";
 import { n as _$$n2 } from "../905/186638";
@@ -431,8 +431,8 @@ function eY({
     disabled: e
   });
 }
-let e0 = Wh(() => atom(0));
-let e1 = Wh(() => atom(Bk.Grid));
+let e0 = setupRemovableAtomFamily(() => atom(0));
+let e1 = setupRemovableAtomFamily(() => atom(Bk.Grid));
 function e5(e, t, s) {
   return null != e && (t[e.type] || e.type === _$$I2.FILE && s[e.libraryKey]) ? e : {
     type: _$$I2.ALL
@@ -472,7 +472,7 @@ function tS({
   let N = fd(e.library_key);
   let I = S && (w || N);
   let C = useRef(null);
-  let j = kH(e.name);
+  let j = getBasename(e.name);
   let M = NG({
     text: j,
     textRef: C

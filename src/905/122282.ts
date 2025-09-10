@@ -38,7 +38,7 @@ import { sZ } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { OpenEditorFileData } from "../figma_app/43951";
 import { l as _$$l, s as _$$s } from "../905/618307";
-import { o as _$$o } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { i as _$$i } from "../905/186961";
 import { e0 as _$$e } from "../905/696396";
 import { N as _$$N2 } from "../905/620375";
@@ -52,7 +52,7 @@ import { z as _$$z } from "../905/284530";
 import { A as _$$A3 } from "../5724/663128";
 import { X0 } from "../905/784221";
 import { throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { J as _$$J } from "../905/341359";
 import { A as _$$A4 } from "../vendor/90566";
 import { H as _$$H } from "../905/620380";
@@ -567,7 +567,7 @@ function tr({
   let {
     publishableComponentNodeIds,
     localComponents
-  } = useSelector(Pn, c2);
+  } = useSelector(Pn, deepEqual);
   return "loading" !== status && data && s ? jsx(fu, {
     name: _$$e.TEAM_TEMPLATE_PUBLISH_MODAL_V2,
     properties: {
@@ -1052,7 +1052,7 @@ function tP({
   let a = t?.editorType === FFileType.SLIDES;
   let [o, l] = useAtomValueAndSetter(pz);
   return (useEffect(() => {
-    a && (l(_$$o.LIBRARY), permissionScopeHandler.system("slides-prepare-modules-for-publish", () => Fullscreen?.createSlideModulesForPublish()));
+    a && (l(LibrarySourceEnum.LIBRARY), permissionScopeHandler.system("slides-prepare-modules-for-publish", () => Fullscreen?.createSlideModulesForPublish()));
   }, [a, l]), t) ? jsx(tO, {
     file: t,
     org: i,

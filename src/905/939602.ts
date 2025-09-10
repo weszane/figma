@@ -1,10 +1,10 @@
 import { z, Ip } from "../905/239603";
 import { createMetaValidator, createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { P } from "../905/412913";
+import { FileKeySourceEnum } from "../905/412913";
 import { fileEntityModel } from "../905/806985";
 import { NS } from "../905/71785";
-import { $L, Ko, XS, Vp, cI } from "../figma_app/633080";
+import { ComponentSchema, StateGroupDetailSchema, createFileKeySchema, StyleSchema, cI } from "../figma_app/633080";
 import { stringSchema } from "../figma_app/198712";
 let u = XHR.requiredHeaders;
 let $$p0 = new class {
@@ -12,28 +12,28 @@ let $$p0 = new class {
     this.LibraryComponentV2DestinationSchemaValidator = createMetaValidator("LibraryComponentV2Destination", z.object({
       node_id: stringSchema,
       file_key: z.string(),
-      component: $L,
-      component_set: Ko.optional()
+      component: ComponentSchema,
+      component_set: StateGroupDetailSchema.optional()
     }), "ds_zod_components", !1, !0);
     this.LibraryPublishedComponentsSchemaValidator = createNoOpValidator();
     this.CommunityLibraryPublishedComponentsSchemaValidator = createNoOpValidator();
     this.LibraryPublishedComponentsV2SchemaValidator = createMetaValidator("LibraryPublishedComponentsV2", z.object({
-      components: z.array(XS(P.REST_API).extend($L.shape)),
-      state_groups: z.array(XS(P.REST_API).extend(Ko.shape)),
+      components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
+      state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
       file: fileEntityModel.nullable(),
       hub_file: Ip.coerce.$$null(NS.nullable())
     }), "ds_zod_components", !1, !0);
     this.LibraryStylesSchemaValidator = createMetaValidator("LibraryStylesSchemaValidator", z.object({
-      styles: z.array(XS(P.REST_API).extend(Vp.shape))
+      styles: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape))
     }), "ds_zod_styles", !1, !0);
     this.LibraryStyleByKeyValidator = createMetaValidator("LibraryStyleByKeyValidator", z.object({
-      style: XS(P.REST_API).extend(Vp.shape),
+      style: createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape),
       file: fileEntityModel
     }), "ds_zod_styles", !1, !0);
     this.LibraryStyleLogByKeyVersionValidator = createNoOpValidator();
     this.LibrarySubscribedComponentsEditorTypeSchemaValidator = createMetaValidator("LibrarySubscribedComponentsEditorType", z.object({
-      components: z.array(XS(P.REST_API).extend($L.shape)),
-      state_groups: z.array(XS(P.REST_API).extend(Ko.shape)),
+      components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
+      state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
       files: fileEntityModel.array(),
       hub_files: NS.array().optional()
     }), "ds_zod_components", !1, !0);
@@ -41,15 +41,15 @@ let $$p0 = new class {
     this.DefaultLibraryAttributionSchemaValidator = createNoOpValidator();
     this.LibraryPublishedComponentsStatsSchemaValidator = createNoOpValidator();
     this.LibraryComponentV2SchemaValidator = createMetaValidator("LibraryComponentV2", z.object({
-      component: XS(P.REST_API).extend($L.shape),
-      component_set: XS(P.REST_API).extend(Ko.shape).nullable(),
-      state_components: z.array(XS(P.REST_API).extend($L.shape)),
+      component: createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape),
+      component_set: createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape).nullable(),
+      state_components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
       file: fileEntityModel.nullable()
     }), "ds_zod_components", !1, !0);
-    this.LibraryStateGroupSchemaValidator = createMetaValidator("LibraryStateGroup", XS(P.REST_API).extend(Ko.shape), "ds_zod_components", !1, !0);
+    this.LibraryStateGroupSchemaValidator = createMetaValidator("LibraryStateGroup", createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape), "ds_zod_components", !1, !0);
     this.LibraryPublishedAndMovedComponentsSchemaValidator = createMetaValidator("LibraryPublishedAndMovedComponents", z.object({
-      components: z.array(XS(P.REST_API).extend($L.shape)),
-      state_groups: z.array(XS(P.REST_API).extend(Ko.shape)),
+      components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
+      state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
       files: z.array(fileEntityModel),
       move_remappings: z.record(cI)
     }), "ds_zod_components", !1, !0);
@@ -58,7 +58,7 @@ let $$p0 = new class {
     this.LibraryPublishSchemaValidator = createNoOpValidator();
     this.UploadPublishParamsSchemaValidator = createNoOpValidator();
     this.UnpublishedStylesSchemaValidator = createMetaValidator("UnpublishedStylesSchemaValidator", z.object({
-      styles: z.array(XS(P.REST_API).extend(Vp.shape))
+      styles: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape))
     }), "ds_zod_styles", !1, !0);
     this.MissingStylesByLibraryKeySchemaValidator = createNoOpValidator();
     this.EverPublishedLibrariesSchemaValidator = createNoOpValidator();

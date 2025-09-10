@@ -1,6 +1,6 @@
-import { languageCodes } from "../905/816253";
-import { communityPagePaths } from "../905/528121";
-import { customHistory } from "../905/612521";
+import { languageCodes } from "src/905/816253";
+import { communityPagePaths } from "src/905/528121";
+import { customHistory } from "src/905/612521";
 export function $$s1(e) {
   let t = e.slice(10);
   return Object.values(communityPagePaths).map(e => `${e}${t}`);

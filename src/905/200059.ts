@@ -1,5 +1,5 @@
-import { getFeatureFlags } from "../905/601108";
-import { trackEventAnalytics } from "../905/449184";
+import { getFeatureFlags } from "src/905/601108";
+import { trackEventAnalytics } from "src/905/449184";
 let a = class e {
   constructor(e, t, i) {
     this.frameNumber = 0;

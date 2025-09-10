@@ -1,4 +1,4 @@
-import type { InitialOptions } from '../../types/global'
+import type { InitialOptions } from '../../../types/global'
 import { getGlobalThis } from '../905/841449'
 
 /**
@@ -51,7 +51,7 @@ export const getInternalFeatureFlags = (() => {
         const isExpired = parsed.expiration && parsed.expiration < Date.now()
         const keysChanged
           = parsed.prevWindowFlags
-            && !haveSameKeys(initialFlags, parsed.prevWindowFlags)
+          && !haveSameKeys(initialFlags, parsed.prevWindowFlags)
 
         if (isExpired || keysChanged) {
           localStorage.removeItem(FEATURE_FLAG_OVERRIDES_KEY)

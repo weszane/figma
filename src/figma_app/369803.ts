@@ -40,8 +40,8 @@ const deprecationSchedule: DeprecationScheduleEntry[] = [
  */
 export type VersionSupportResult
   = | { status: VersionSupportStatus.SUPPORTED }
-    | { status: VersionSupportStatus.DISABLED }
-    | { status: VersionSupportStatus.DEPRECATED, date: Dayjs }
+  | { status: VersionSupportStatus.DISABLED }
+  | { status: VersionSupportStatus.DEPRECATED, date: Dayjs }
 
 /**
  * Checks the support status of a given version.

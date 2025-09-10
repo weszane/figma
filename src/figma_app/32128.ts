@@ -13,7 +13,7 @@ import { useLatestRef } from '../figma_app/922077';
 import { getObservableValue } from '../figma_app/84367';
 import { L3 } from '../figma_app/385215';
 import { fullscreenValue } from '../figma_app/455680';
-import { Wh } from '../figma_app/615482';
+import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { p8 } from '../figma_app/722362';
 import { dP, UK } from '../figma_app/740163';
 import { renameNode, renameSelectedNodes, expandNodeToRoot } from '../figma_app/741237';
@@ -150,7 +150,7 @@ export function $$z2() {
     stopRenamingNode: S
   }), [e, I, S]);
 }
-let W = createRemovableAtomFamily(e => Wh(() => atom(e)));
+let W = createRemovableAtomFamily(e => setupRemovableAtomFamily(() => atom(e)));
 export function $$K15() {
   let [e, t] = useAtomValueAndSetter(W(!0));
   let r = _$$F(e);

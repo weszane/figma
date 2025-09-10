@@ -3,7 +3,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { createContext, useState, useCallback, useEffect, useContext, useMemo, useRef } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { VariableDataType, OperationType, VariableResolvedDataType } from "../figma_app/763686";
-import { sH } from "../905/805904";
+import { convertVariableIdToKiwi } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import u from "../vendor/737647";
@@ -273,7 +273,7 @@ export function $$z2({
             disableHover: A
           }, t);
         }
-        if (sH(e)) return jsx(W, {
+        if (convertVariableIdToKiwi(e)) return jsx(W, {
           variableId: e,
           showVariableThumbnails: d,
           disableHover: A

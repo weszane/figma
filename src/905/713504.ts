@@ -304,7 +304,7 @@ export function validateParseResult(result: ParseResult): void {
       def
       && def.kind === 'STRUCT'
       && (visitState[typeName] === 1 && error(`Recursive nesting of ${quote(typeName)} is not allowed`, def.line, def.column),
-      visitState[typeName] !== 2 && def)
+        visitState[typeName] !== 2 && def)
     ) {
       visitState[typeName] = 1
       for (const field of def.fields) {

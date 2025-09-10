@@ -1,4 +1,4 @@
-import { Jj } from "../905/382883";
+import { includesEqual } from "../905/382883";
 import { atom, createAtomWithEquality, createRemovableAtomFamily, atomStoreManager } from "../figma_app/27355";
 import a from "../vendor/373725";
 import o from "../vendor/128080";
@@ -86,7 +86,7 @@ let $$N9 = createRemovableAtomFamily(e => atom(t => e === WY.RESOURCE ? t(M) : e
       o = P(e, i, r, a);
       s = L(r, i, n, o);
     }
-    i(y, o.filter(e => !Jj(s, e)));
+    i(y, o.filter(e => !includesEqual(s, e)));
     s.forEach(e => {
       if (e.type === WY.RESOURCE) i(M, null);else if (e.type === WY.CREATOR) i(j, null);else if (e.type === WY.SPACE) {
         let n = {
@@ -115,7 +115,7 @@ let P = (e, t, i, r) => {
   }
   let o = [];
   r.forEach(e => {
-    Jj(a, e) && o.push(e);
+    includesEqual(a, e) && o.push(e);
   });
   let d = s()(a, o, l());
   o.push(...d);

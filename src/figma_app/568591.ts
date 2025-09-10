@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
@@ -531,7 +531,7 @@ export function $$V1(e) {
       l(void 0);
       return;
     }
-    if (!o || !c2(o.args, args)) {
+    if (!o || !deepEqual(o.args, args)) {
       l(new _$$I(args, subscription, r));
       return;
     }

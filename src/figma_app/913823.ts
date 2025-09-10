@@ -5,7 +5,7 @@ import { atomStoreManager, atom } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { D3 } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { uo, yJ } from "../figma_app/78808";
@@ -16,12 +16,12 @@ import { qp } from "../905/977779";
 import { LC, Ve, iw, kG } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { YG } from "../905/921418";
-import { aV } from "../905/405710";
+import { withParsedMeta } from "../905/405710";
 import { Sc, D2, VP } from "../905/18797";
 import { zg } from "../figma_app/193867";
 import { kb } from "../figma_app/502247";
 import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
-import { PW, Yu } from "../figma_app/633080";
+import { PrimaryWorkflowEnum, NO_TEAM } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { Z } from "../905/939602";
 import { yD } from "../905/92359";
@@ -85,10 +85,10 @@ async function R(e, t) {
     }));
     if (e.dispatch(_$$uo({
       items: I,
-      type: PW.STATE_GROUP
+      type: PrimaryWorkflowEnum.STATE_GROUP
     })), e.dispatch(_$$uo({
       items: S,
-      type: PW.COMPONENT
+      type: PrimaryWorkflowEnum.COMPONENT
     })), getFeatureFlags().dse_lk_realtime_audit) {
       let e = S.filter(e => !e.library_key);
       let t = I.filter(e => !e.library_key);
@@ -127,10 +127,10 @@ async function L(e) {
       let i = await Z.getDefaultLibraries({
         editorType: mapEditorTypeToStringWithObfuscated(t.editorType)
       });
-      D(e, i.data.meta.components, PW.COMPONENT);
-      D(e, i.data.meta.state_groups, PW.STATE_GROUP);
+      D(e, i.data.meta.components, PrimaryWorkflowEnum.COMPONENT);
+      D(e, i.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP);
       i.data.meta.files.forEach(t => {
-        t.team_id = Yu;
+        t.team_id = NO_TEAM;
         e.dispatch(yJ({
           file: t
         }));
@@ -152,16 +152,16 @@ async function L(e) {
     }
   }
 }
-let P = _$$f();
+let P = getFileKey();
 let D = (e, t, r) => {
   let n = {
-    [Yu]: {}
+    [NO_TEAM]: {}
   };
   let i = {};
   t.forEach(e => {
-    let t = P(e = aV(e));
-    n[Yu][t] = n[Yu][t] || {};
-    n[Yu][t][e.node_id] = e;
+    let t = P(e = withParsedMeta(e));
+    n[NO_TEAM][t] = n[NO_TEAM][t] || {};
+    n[NO_TEAM][t][e.node_id] = e;
     (i[e.library_key] ??= {})[e.node_id] = e;
   });
   e.dispatch(Ho({
@@ -199,7 +199,7 @@ async function j(e, t) {
   let a = new Set();
   for (let e of n.recentlyUsed.libraryItems[t]) {
     let t = e.library_key;
-    e.type === PW.COMPONENT && e.key && !n.library.publishedByLibraryKey.components[e.team_id]?.[t]?.[e.node_id] ? i.add(e.key) : e.type === PW.STATE_GROUP && e.key && !n.library.publishedByLibraryKey.stateGroups[e.team_id]?.[t]?.[e.node_id] && a.add(e.key);
+    e.type === PrimaryWorkflowEnum.COMPONENT && e.key && !n.library.publishedByLibraryKey.components[e.team_id]?.[t]?.[e.node_id] ? i.add(e.key) : e.type === PrimaryWorkflowEnum.STATE_GROUP && e.key && !n.library.publishedByLibraryKey.stateGroups[e.team_id]?.[t]?.[e.node_id] && a.add(e.key);
   }
   if (0 === i.size && 0 === a.size) {
     e.dispatch(x2({
@@ -234,8 +234,8 @@ async function j(e, t) {
     localOldGuidToNewKey: {}
   }));
   let o = atomStoreManager.get(qp);
-  VF(r.data.meta.components, PW.COMPONENT, o, e.dispatch);
-  VF(r.data.meta.state_groups, PW.STATE_GROUP, o, e.dispatch);
+  VF(r.data.meta.components, PrimaryWorkflowEnum.COMPONENT, o, e.dispatch);
+  VF(r.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP, o, e.dispatch);
 }
 export let $$U4 = createOptimistThunk(e => {
   let t = e.getState().openFile;

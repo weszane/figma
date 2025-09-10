@@ -11,7 +11,7 @@ import { renderI18nText } from "../905/303541";
 import { dR } from "../figma_app/109538";
 import { w as _$$w } from "../figma_app/527262";
 import { sx } from "../figma_app/307841";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { oB } from "../905/929976";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { Bq, WX } from "../figma_app/482142";
@@ -39,7 +39,7 @@ function O(e) {
     trigger: e.upsellSource,
     upgradePoint: _$$h.MonetizationUpgradePoint.PLAN_COMPARISON_MODAL
   });
-  let F = _$$u();
+  let F = getRumLoggingConfig();
   let M = () => {
     t(popModalStack());
     e.onDone?.();

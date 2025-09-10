@@ -24,7 +24,7 @@ import { XHR } from "../905/910117";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { $ as _$$$ } from "../905/383708";
-import { P as _$$P } from "../905/412913";
+import { FileKeySourceEnum } from "../905/412913";
 import { $ as _$$$2 } from "../905/851662";
 import { _ as _$$_ } from "../905/170564";
 import { isSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -33,14 +33,14 @@ import { I0 } from "../905/879323";
 import { xp, rb } from "../905/711212";
 import { yH } from "../figma_app/714946";
 import { d1 } from "../905/766303";
-import { Eo, qv, OM, r2, jh, aV } from "../figma_app/80990";
-import { In } from "../905/309735";
-import { fP } from "../905/405710";
-import { E8, PW, Yu, AT, YJ, jg } from "../figma_app/633080";
+import { teamLibraryCache, revokeThumbnailUrl, isValidThumbnail, generateNodeThumbnail, getDefaultPlaceholderThumbnail, generateThumbnailFromStyleMaster } from "../figma_app/80990";
+import { getDirname } from "../905/309735";
+import { isFullyTransparentFill } from "../905/405710";
+import { StagingStatusEnum, PrimaryWorkflowEnum, NO_TEAM, SubscriptionStatusEnum, PRIMARY_WORKFLOW_TYPES, LibraryAgeEnum } from "../figma_app/633080";
 import { wM } from "../figma_app/463500";
 import { e3 } from "../figma_app/275938";
 import { GO, Nn, pD as _$$pD, Lr, zK } from "../905/561897";
-import { P as _$$P2 } from "../905/815475";
+import { generateFileVersionUrl } from "../905/815475";
 import { selectCurrentFile } from "../figma_app/516028";
 import { td as _$$td } from "../905/845253";
 import { ag, LH } from "../905/872904";
@@ -54,41 +54,41 @@ var g = m;
 var $$er57 = (e => (e.CURRENT = "current", e.ALL = "all", e))($$er57 || {});
 export let $$en23 = createContext(null);
 export function $$ei18(e) {
-  return e === E8.CURRENT || e === E8.CHANGED || e === E8.DELETED;
+  return e === StagingStatusEnum.CURRENT || e === StagingStatusEnum.CHANGED || e === StagingStatusEnum.DELETED;
 }
 export function $$ea79(e) {
-  return e === E8.NEW || e === E8.CHANGED || e === E8.DELETED;
+  return e === StagingStatusEnum.NEW || e === StagingStatusEnum.CHANGED || e === StagingStatusEnum.DELETED;
 }
 export function $$es33(e) {
   switch (e.type) {
-    case PW.COMPONENT:
+    case PrimaryWorkflowEnum.COMPONENT:
       return {
         type: e.type,
         key: e.component_key,
         version: e.content_hash
       };
-    case PW.STATE_GROUP:
+    case PrimaryWorkflowEnum.STATE_GROUP:
       return {
         type: e.type,
         key: e.key,
         version: e.version
       };
-    case PW.STYLE:
+    case PrimaryWorkflowEnum.STYLE:
       return {
         type: e.type,
         key: e.key,
         version: e.content_hash
       };
-    case PW.VARIABLE_SET:
-    case PW.VARIABLE:
-    case PW.MODULE:
+    case PrimaryWorkflowEnum.VARIABLE_SET:
+    case PrimaryWorkflowEnum.VARIABLE:
+    case PrimaryWorkflowEnum.MODULE:
       return {
         type: e.type,
         key: e.key,
         version: e.version
       };
-    case PW.RESPONSIVE_SET:
-    case PW.CODE_COMPONENT:
+    case PrimaryWorkflowEnum.RESPONSIVE_SET:
+    case PrimaryWorkflowEnum.CODE_COMPONENT:
       if ("LOCAL" === e.subscriptionStatus) return {
         type: e.type,
         key: e.keyForPublish,
@@ -99,7 +99,7 @@ export function $$es33(e) {
         key: e.key,
         version: e.version
       };
-    case PW.MANAGED_STRING:
+    case PrimaryWorkflowEnum.MANAGED_STRING:
       return {
         type: e.type,
         key: e.keyForPublish,
@@ -120,16 +120,16 @@ export function $$eo3(e) {
 }
 export function $$el46(e) {
   switch (e.type) {
-    case PW.CODE_COMPONENT:
-    case PW.RESPONSIVE_SET:
+    case PrimaryWorkflowEnum.CODE_COMPONENT:
+    case PrimaryWorkflowEnum.RESPONSIVE_SET:
       return "LIBRARY" === e.subscriptionStatus ? e.sourceLibraryKey : null;
-    case PW.COMPONENT:
-    case PW.STATE_GROUP:
-    case PW.STYLE:
-    case PW.VARIABLE:
-    case PW.VARIABLE_SET:
-    case PW.MODULE:
-    case PW.MANAGED_STRING:
+    case PrimaryWorkflowEnum.COMPONENT:
+    case PrimaryWorkflowEnum.STATE_GROUP:
+    case PrimaryWorkflowEnum.STYLE:
+    case PrimaryWorkflowEnum.VARIABLE:
+    case PrimaryWorkflowEnum.VARIABLE_SET:
+    case PrimaryWorkflowEnum.MODULE:
+    case PrimaryWorkflowEnum.MANAGED_STRING:
       return e.library_key;
   }
 }
@@ -151,7 +151,7 @@ export function $$e_73(e, t) {
   let r = Object.create(null);
   if (!t || !t.library_key) return r;
   let n = _$$l(t.library_key);
-  let i = t.team_id || Yu;
+  let i = t.team_id || NO_TEAM;
   let a = e[i]?.[n] ?? Object.create(null);
   for (let e in a) null == a[e].unpublished_at && (r[e] = a[e]);
   return r;
@@ -209,9 +209,9 @@ export function $$eI2(e, t, r, n) {
 }
 let $$eS = new Set();
 export async function $$ev90(e) {
-  let t = new Map((e = e.filter(e => e.canvas_url && !Eo.hasKeyInCache(_$$P2(e.canvas_url).url) && !$$eS.has(e.key))).map(e => [e.key, e.canvas_url]));
+  let t = new Map((e = e.filter(e => e.canvas_url && !teamLibraryCache.hasKeyInCache(generateFileVersionUrl(e.canvas_url).url) && !$$eS.has(e.key))).map(e => [e.key, e.canvas_url]));
   let r = e.map(e => e.key);
-  if (r.forEach(e => $$eS.add(e)), getFeatureFlags().ds_file_proxy_for_style_assets) await Promise.all(r.map(e => Eo.getCanvas({
+  if (r.forEach(e => $$eS.add(e)), getFeatureFlags().ds_file_proxy_for_style_assets) await Promise.all(r.map(e => teamLibraryCache.getCanvas({
     canvas_url: t.get(e)
   })));else {
     if (0 === r.length) return;
@@ -226,8 +226,8 @@ export async function $$ev90(e) {
       }) => {
         let n = t.get(n3(r));
         if (n) {
-          let t = _$$P2(n).url;
-          Eo.putCanvas(t, e);
+          let t = generateFileVersionUrl(n).url;
+          teamLibraryCache.putCanvas(t, e);
         }
         $$eS.$$delete(n3(r));
       }).catch(() => {
@@ -428,7 +428,7 @@ export function $$eW98(e) {
   $$eV30(t);
   return {
     stylesByPrefix: t.reduce((e, t) => {
-      let r = In(t.name);
+      let r = getDirname(t.name);
       e[r] = e[r] || [];
       e[r].push(t);
       return e;
@@ -458,14 +458,14 @@ export function $$e$89(e, t, r, n, i, a, s, o, l, d) {
     a[l] = e2(i[l]);
     c[l] = e(p, r[l], t, s, o, d);
     let _ = c[l];
-    _.status === E8.NEW && _.type === PW.COMPONENT && (u += 1);
+    _.status === StagingStatusEnum.NEW && _.type === PrimaryWorkflowEnum.COMPONENT && (u += 1);
   }), n) if (!(p in c)) {
     let e = i[p];
-    e && e.url && qv(e.url);
+    e && e.url && revokeThumbnailUrl(e.url);
     let t = n[p];
-    if (t.type === PW.COMPONENT || t.type === PW.STATE_GROUP) {
+    if (t.type === PrimaryWorkflowEnum.COMPONENT || t.type === PrimaryWorkflowEnum.STATE_GROUP) {
       t.type;
-      PW.COMPONENT;
+      PrimaryWorkflowEnum.COMPONENT;
       let e = t;
       e.old_key && l.add(e.node_id);
     }
@@ -488,28 +488,28 @@ export function $$eX24(e) {
   let {
     newLocal,
     numNewComponents
-  } = $$e$89((e, t, r, n, i) => $$eZ74(e, t, r, n, i, s), t.library.publishableSymbols, t.library.openFilePublished__LIVEGRAPH.components, t.library.local.components, t.library.local.thumbnails, o, n, i, a, PW.COMPONENT);
+  } = $$e$89((e, t, r, n, i) => $$eZ74(e, t, r, n, i, s), t.library.publishableSymbols, t.library.openFilePublished__LIVEGRAPH.components, t.library.local.components, t.library.local.thumbnails, o, n, i, a, PrimaryWorkflowEnum.COMPONENT);
   let {
     newLocal: _newLocal
-  } = $$e$89($$eQ26, t.library.publishableStateGroups, t.library.openFilePublished__LIVEGRAPH.stateGroups, t.library.local.stateGroups, t.library.local.thumbnails, o, n, i, a, PW.STATE_GROUP);
+  } = $$e$89($$eQ26, t.library.publishableStateGroups, t.library.openFilePublished__LIVEGRAPH.stateGroups, t.library.local.stateGroups, t.library.local.thumbnails, o, n, i, a, PrimaryWorkflowEnum.STATE_GROUP);
   let {
     newLocal: _newLocal2
-  } = $$e$89($$e0104, t.library.publishableStyles, t.library.openFilePublished__LIVEGRAPH.styles, t.library.local.styles, t.library.local.thumbnails, o, n, i, a, PW.STYLE);
+  } = $$e$89($$e0104, t.library.publishableStyles, t.library.openFilePublished__LIVEGRAPH.styles, t.library.local.styles, t.library.local.thumbnails, o, n, i, a, PrimaryWorkflowEnum.STYLE);
   let {
     newLocal: _newLocal3
-  } = $$e$89(e1, t.library.publishableModules, t.library.openFilePublished__LIVEGRAPH.modules, t.library.local.modules, t.library.local.thumbnails, o, n, i, a, PW.MODULE);
+  } = $$e$89(e1, t.library.publishableModules, t.library.openFilePublished__LIVEGRAPH.modules, t.library.local.modules, t.library.local.thumbnails, o, n, i, a, PrimaryWorkflowEnum.MODULE);
   if (eY(t.library.local.components, newLocal) && e.dispatch(I0({
     local: newLocal,
-    type: PW.COMPONENT
+    type: PrimaryWorkflowEnum.COMPONENT
   })), eY(t.library.local.stateGroups, _newLocal) && e.dispatch(I0({
     local: _newLocal,
-    type: PW.STATE_GROUP
+    type: PrimaryWorkflowEnum.STATE_GROUP
   })), eY(t.library.local.styles, _newLocal2) && e.dispatch(I0({
     local: _newLocal2,
-    type: PW.STYLE
+    type: PrimaryWorkflowEnum.STYLE
   })), eY(t.library.local.modules, _newLocal3) && getFeatureFlags().dse_module_publish && e.dispatch(I0({
     local: _newLocal3,
-    type: PW.MODULE
+    type: PrimaryWorkflowEnum.MODULE
   })), function (e, t) {
     if (!e && !t) return !1;
     if (!e || !t || Object.keys(e).length !== Object.keys(t).length) return !0;
@@ -535,15 +535,15 @@ let eJ = (e, t, r, n, i, a) => {
   if (!r) {
     if (t) return {
       ...t,
-      status: E8.DELETED,
+      status: StagingStatusEnum.DELETED,
       deletedFromSceneGraph: !0
     };
     throw Error(eq);
   }
   let o = t && null == t.unpublished_at;
   let l = !!r.isPublishable;
-  let d = E8.NOT_STAGED;
-  o && !l ? d = E8.DELETED : !o && l ? d = E8.NEW : o || l || (d = E8.NOT_STAGED);
+  let d = StagingStatusEnum.NOT_STAGED;
+  o && !l ? d = StagingStatusEnum.DELETED : !o && l ? d = StagingStatusEnum.NEW : o || l || (d = StagingStatusEnum.NOT_STAGED);
   s = r.description;
   let {
     description,
@@ -558,7 +558,7 @@ let eJ = (e, t, r, n, i, a) => {
     description,
     description_rt,
     file_key: n,
-    file_key_source: _$$P.LOCAL_FILE,
+    file_key_source: FileKeySourceEnum.LOCAL_FILE,
     library_key: i,
     isPublishable: l,
     deletedFromSceneGraph: !1,
@@ -571,8 +571,8 @@ let eJ = (e, t, r, n, i, a) => {
 };
 export function $$eZ74(e, t, r, n, i, a) {
   let s = {
-    ...eJ(e, t, r, n, i, PW.COMPONENT),
-    type: PW.COMPONENT,
+    ...eJ(e, t, r, n, i, PrimaryWorkflowEnum.COMPONENT),
+    type: PrimaryWorkflowEnum.COMPONENT,
     height: r?.height,
     width: r?.width,
     x: r?.x,
@@ -591,16 +591,16 @@ export function $$eZ74(e, t, r, n, i, a) {
   let l = !!r?.isPublishable;
   o && l && (t && t.content_hash === s.content_hash && !$$rt40(t.containing_frame, r?.containingFrame, {
     compareSortPositions: a
-  }) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) && (!a || $$re86(t.sort_position, s.sort_position)) ? s.status = E8.CURRENT : s.status = E8.CHANGED);
+  }) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) && (!a || $$re86(t.sort_position, s.sort_position)) ? s.status = StagingStatusEnum.CURRENT : s.status = StagingStatusEnum.CHANGED);
   return s;
 }
 export function $$eQ26(e, t, r, n, i) {
-  let a = eJ(e, t, r, n, i, PW.STATE_GROUP);
+  let a = eJ(e, t, r, n, i, PrimaryWorkflowEnum.STATE_GROUP);
   if (!t) {
     if (!r) throw Error(eq);
     return {
       ...a,
-      type: PW.STATE_GROUP,
+      type: PrimaryWorkflowEnum.STATE_GROUP,
       version: r.versionHash,
       userFacingVersion: r.userFacingVersion,
       containing_frame: r.containingFrame,
@@ -615,7 +615,7 @@ export function $$eQ26(e, t, r, n, i) {
   }
   let s = {
     ...a,
-    type: PW.STATE_GROUP,
+    type: PrimaryWorkflowEnum.STATE_GROUP,
     version: r?.versionHash || t.version,
     userFacingVersion: r?.userFacingVersion || Rf.INVALID,
     containing_frame: r?.containingFrame || t.containing_frame,
@@ -630,17 +630,17 @@ export function $$eQ26(e, t, r, n, i) {
   };
   let o = null == t.unpublished_at;
   let l = !!r?.isPublishable;
-  o && l && (t.version === s.version && !$$rt40(t.containing_frame, r?.containingFrame) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) ? s.status = E8.CURRENT : s.status = E8.CHANGED);
+  o && l && (t.version === s.version && !$$rt40(t.containing_frame, r?.containingFrame) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) ? s.status = StagingStatusEnum.CURRENT : s.status = StagingStatusEnum.CHANGED);
   return s;
 }
 export function $$e0104(e, t, r, n, i) {
-  let a = eJ(e, t, r, n, i, PW.STYLE);
+  let a = eJ(e, t, r, n, i, PrimaryWorkflowEnum.STYLE);
   let s = t && null == t.unpublished_at;
   let o = !!r?.isPublishable;
   let l = !1;
-  if (s && o && (t && t.content_hash === r?.versionHash && $$re86(t.name, r?.name) && $$re86(t.description, a.description) ? $$re86(t.sort_position, r?.sortPosition) ? a.status = E8.CURRENT : (a.status = E8.CHANGED, l = !0) : a.status = E8.CHANGED), r) return {
+  if (s && o && (t && t.content_hash === r?.versionHash && $$re86(t.name, r?.name) && $$re86(t.description, a.description) ? $$re86(t.sort_position, r?.sortPosition) ? a.status = StagingStatusEnum.CURRENT : (a.status = StagingStatusEnum.CHANGED, l = !0) : a.status = StagingStatusEnum.CHANGED), r) return {
     ...a,
-    type: PW.STYLE,
+    type: PrimaryWorkflowEnum.STYLE,
     key: r.styleKey,
     style_type: r.styleType,
     is_soft_deleted: r.isSoftDeleted,
@@ -652,7 +652,7 @@ export function $$e0104(e, t, r, n, i) {
   };
   if (t) return {
     ...a,
-    type: PW.STYLE,
+    type: PrimaryWorkflowEnum.STYLE,
     key: t.key,
     style_type: t.style_type,
     is_soft_deleted: !0,
@@ -664,12 +664,12 @@ export function $$e0104(e, t, r, n, i) {
   throw Error(eq);
 }
 function e1(e, t, r, n, i) {
-  let a = eJ(e, t, r, n, i, PW.MODULE);
+  let a = eJ(e, t, r, n, i, PrimaryWorkflowEnum.MODULE);
   if (!t) {
     if (!r) throw Error(eq);
     return {
       ...a,
-      type: PW.MODULE,
+      type: PrimaryWorkflowEnum.MODULE,
       moduleSource: r.moduleSource,
       height: r.height,
       width: r.width,
@@ -683,7 +683,7 @@ function e1(e, t, r, n, i) {
   }
   let s = {
     ...a,
-    type: PW.MODULE,
+    type: PrimaryWorkflowEnum.MODULE,
     moduleSource: r?.moduleSource || t.moduleSource,
     height: r?.height || t.height,
     width: r?.width || t.width,
@@ -697,7 +697,7 @@ function e1(e, t, r, n, i) {
   };
   let o = t && null == t.unpublished_at;
   let l = !!r?.isPublishable;
-  o && l && (t.version === s.version && !$$rt40(t.containing_frame, r?.containingFrame) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) ? s.status = E8.CURRENT : s.status = E8.CHANGED);
+  o && l && (t.version === s.version && !$$rt40(t.containing_frame, r?.containingFrame) && $$re86(t.name, r?.name) && $$re86(t.description, s.description) ? s.status = StagingStatusEnum.CURRENT : s.status = StagingStatusEnum.CHANGED);
   return s;
 }
 function e2(e) {
@@ -776,7 +776,7 @@ export async function $$tn62(e, t = [], r, n, i, a, s) {
     for (let t of r) {
       let r = o[t] && e.get(o[t]);
       r && i.push({
-        type: PW.STYLE,
+        type: PrimaryWorkflowEnum.STYLE,
         name: r.name,
         key: t,
         thumbnail_url: $$ti(t, r.styleVersionHash),
@@ -858,7 +858,7 @@ export function $$to85(e, t = [], r = [], n, i, a, s = !1) {
     let h = l ? r.sharedStateGroupVersion : r.sharedSymbolVersion;
     let m = l ? r.stateGroupKey : r.componentKey;
     let g = (l ? p[n] ?? {} : u[n] ?? {})[a];
-    if (g?.type === PW.COMPONENT) {
+    if (g?.type === PrimaryWorkflowEnum.COMPONENT) {
       let e = g.containing_frame?.containingStateGroup?.nodeId;
       if (e) {
         let t = p[n];
@@ -875,7 +875,7 @@ export function $$to85(e, t = [], r = [], n, i, a, s = !1) {
       let s = e.get(n);
       let [l, u] = s ? [s.size.x, s.size.y] : [0, 0];
       o[m] = {
-        type: PW.STATE_GROUP,
+        type: PrimaryWorkflowEnum.STATE_GROUP,
         name: r.name,
         library_key: r.sourceLibraryKey,
         key: m,
@@ -893,7 +893,7 @@ export function $$to85(e, t = [], r = [], n, i, a, s = !1) {
     } else {
       if (!m || o[m] || r.isState && !s || null === i) continue;
       o[m] = {
-        type: PW.COMPONENT,
+        type: PrimaryWorkflowEnum.COMPONENT,
         name: r.name,
         library_key: r.sourceLibraryKey,
         component_key: m,
@@ -914,7 +914,7 @@ export function $$to85(e, t = [], r = [], n, i, a, s = !1) {
 export function $$tl9(e, t) {
   return new Set($$to85(e.mirror.sceneGraph, C9(e), jf(e), e.library.publishedByLibraryKey, e.fileVersion, t).map(e => $$eo3(e)));
 }
-let $$td = (e, t, r, n, i, a) => $$to85(e, t, r, n, i, a, !0).reduce((e, t) => (t.type === PW.COMPONENT ? t.component_key && (e[t.component_key] = t) : e[t.key] = t, e), Object.create(null));
+let $$td = (e, t, r, n, i, a) => $$to85(e, t, r, n, i, a, !0).reduce((e, t) => (t.type === PrimaryWorkflowEnum.COMPONENT ? t.component_key && (e[t.component_key] = t) : e[t.key] = t, e), Object.create(null));
 export function $$tc66(e) {
   let t = useDispatch();
   let {
@@ -954,15 +954,15 @@ let tp = memoizeByArgs(e => {
 export function $$t_17(e, t, r) {
   let n = tp(r)[e];
   if (n) return {
-    kind: AT.LOCAL,
+    kind: SubscriptionStatusEnum.LOCAL,
     value: n
   };
   let i = r.used__LIVEGRAPH.styles[e];
   return i?.status === "loaded" ? {
-    kind: AT.SUBSCRIBED_WITH_LIBRARY,
+    kind: SubscriptionStatusEnum.SUBSCRIBED_WITH_LIBRARY,
     value: i.data
   } : t && t.length ? {
-    kind: AT.SUBSCRIBED_WITHOUT_LIBRARY,
+    kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
     value: {
       key: e,
       node_id: t[0]
@@ -974,7 +974,7 @@ export function $$th42(e, t) {
 }
 export function $$tm97(e, t) {
   if (!e) return "";
-  if (e.kind !== AT.SUBSCRIBED_WITHOUT_LIBRARY) return e.value.name;
+  if (e.kind !== SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY) return e.value.name;
   {
     let r = t.get(e.value.node_id);
     return r ? r.name : "";
@@ -1011,7 +1011,7 @@ export function $$ty80(e, t) {
   }(e, t) || getFeatureFlags().dse_module_publish && t.modules[e] && t.modules[e] || null;
 }
 export function $$tb107(e) {
-  let t = e.type === PW.STATE_GROUP && !!(e.stateGroupError && e.stateGroupError !== StateGroupErrorType.TOO_MANY_STATES_ERROR);
+  let t = e.type === PrimaryWorkflowEnum.STATE_GROUP && !!(e.stateGroupError && e.stateGroupError !== StateGroupErrorType.TOO_MANY_STATES_ERROR);
   return !!(e.componentPropDefError && (e.componentPropDefError === VariableSetErrorType.CONFLICTING_NAMES_ERROR || e.componentPropDefError === VariableSetErrorType.CONFLICTING_NAMES_WITH_VARIANT_ERROR || e.componentPropDefError === VariableSetErrorType.UNUSED_DEF_ERROR) || t);
 }
 export function $$tT43(e) {
@@ -1097,23 +1097,23 @@ export function $$tj56(e, t, r) {
   let a = t[i] || {};
   let o = a.url || null;
   switch (e.type) {
-    case PW.COMPONENT:
-    case PW.STYLE:
+    case PrimaryWorkflowEnum.COMPONENT:
+    case PrimaryWorkflowEnum.STYLE:
       n = e.content_hash;
       break;
-    case PW.VARIABLE:
-    case PW.VARIABLE_SET:
-    case PW.STATE_GROUP:
-    case PW.MODULE:
-    case PW.RESPONSIVE_SET:
-    case PW.CODE_COMPONENT:
-    case PW.MANAGED_STRING:
+    case PrimaryWorkflowEnum.VARIABLE:
+    case PrimaryWorkflowEnum.VARIABLE_SET:
+    case PrimaryWorkflowEnum.STATE_GROUP:
+    case PrimaryWorkflowEnum.MODULE:
+    case PrimaryWorkflowEnum.RESPONSIVE_SET:
+    case PrimaryWorkflowEnum.CODE_COMPONENT:
+    case PrimaryWorkflowEnum.MANAGED_STRING:
       n = e.version;
       break;
     default:
       throwTypeError(e);
   }
-  (r || a.content_hash !== n || !OM(o)) && (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP || e.type === PW.MODULE || e.type === PW.RESPONSIVE_SET || e.type === PW.CODE_COMPONENT ? o = r2(i) : e.type === PW.STYLE ? o = fP(e) ? jh() : aV(i, e.style_type) : e.type === PW.VARIABLE || e.type === PW.VARIABLE_SET || e.type === PW.MANAGED_STRING ? o = jh() : throwTypeError(e));
+  (r || a.content_hash !== n || !isValidThumbnail(o)) && (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP || e.type === PrimaryWorkflowEnum.MODULE || e.type === PrimaryWorkflowEnum.RESPONSIVE_SET || e.type === PrimaryWorkflowEnum.CODE_COMPONENT ? o = generateNodeThumbnail(i) : e.type === PrimaryWorkflowEnum.STYLE ? o = isFullyTransparentFill(e) ? getDefaultPlaceholderThumbnail() : generateThumbnailFromStyleMaster(i, e.style_type) : e.type === PrimaryWorkflowEnum.VARIABLE || e.type === PrimaryWorkflowEnum.VARIABLE_SET || e.type === PrimaryWorkflowEnum.MANAGED_STRING ? o = getDefaultPlaceholderThumbnail() : throwTypeError(e));
   return o;
 }
 export function $$tU13({
@@ -1137,11 +1137,11 @@ export function $$tU13({
   let d = filterNotNullish([s, i, o, l]);
   return 0 === d.length ? getI18nString("design_systems.libraries_modal.no_components_styles_variables") : formatList(d, "unit");
 }
-export let $$tB20 = e => e !== E8.DELETED && e !== E8.NOT_STAGED;
+export let $$tB20 = e => e !== StagingStatusEnum.DELETED && e !== StagingStatusEnum.NOT_STAGED;
 export function $$tG47(e, t, r, n) {
   let i = t[e];
   if (!i) return null;
-  let a = $$ef101(r).find(e => e.type === PW.COMPONENT ? e.component_key === i : e.key === i);
+  let a = $$ef101(r).find(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key === i : e.key === i);
   let s = "another file";
   if (!a) return s;
   let o = n[a.library_key];
@@ -1168,7 +1168,7 @@ export function $$tH28(e) {
   return e.isStateGroup || "SYMBOL" === e.type && !e.isState || e.isCodeComponent;
 }
 export function $$tz63(e) {
-  return YJ.includes(e.type);
+  return PRIMARY_WORKFLOW_TYPES.includes(e.type);
 }
 export function $$tW5(e) {
   return e.isLocal ? SceneGraphHelpers.getAssetKeyForPublish(e.node_id) : $$eo3(e);
@@ -1201,13 +1201,13 @@ export function $$tX32(e, t) {
 }
 export function $$tq29(e) {
   switch (e) {
-    case jg.THIRTY_DAYS:
+    case LibraryAgeEnum.THIRTY_DAYS:
       return getI18nString("design_systems.libraries_modal.30_days");
-    case jg.SIXTY_DAYS:
+    case LibraryAgeEnum.SIXTY_DAYS:
       return getI18nString("design_systems.libraries_modal.60_days");
-    case jg.NINETY_DAYS:
+    case LibraryAgeEnum.NINETY_DAYS:
       return getI18nString("design_systems.libraries_modal.90_days");
-    case jg.YEAR:
+    case LibraryAgeEnum.YEAR:
       return getI18nString("design_systems.libraries_modal.year");
     default:
       throwTypeError(e);
@@ -1259,8 +1259,8 @@ export function $$t3102(e) {
 }
 export function $$t416(e) {
   switch (e.type) {
-    case PW.CODE_COMPONENT:
-    case PW.RESPONSIVE_SET:
+    case PrimaryWorkflowEnum.CODE_COMPONENT:
+    case PrimaryWorkflowEnum.RESPONSIVE_SET:
       return "LIBRARY" === e.subscriptionStatus ? `${e.sourceLibraryKey}:${e.assetId}` : `${e.library_key}:${e.node_id}`;
     default:
       return `${e.library_key}:${e.node_id}`;

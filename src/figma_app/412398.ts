@@ -5,7 +5,7 @@ import { ET } from "../905/623179";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { LQ, vg, pX, tV, au } from "../figma_app/445976";
-import { E8 } from "../figma_app/633080";
+import { StagingStatusEnum } from "../figma_app/633080";
 import { Gh } from "../figma_app/707567";
 import { b } from "../905/76245";
 import { tf, Rd, Q6, $5 } from "../905/295427";
@@ -26,7 +26,7 @@ function h(e, t) {
   };
 }
 function m(e) {
-  return e && e !== E8.DELETED && e !== E8.NOT_STAGED;
+  return e && e !== StagingStatusEnum.DELETED && e !== StagingStatusEnum.NOT_STAGED;
 }
 export async function $$g0(e, t, r, n, s) {
   let o = FirstDraftHelpers.getKitKey(e);

@@ -1,4 +1,4 @@
-import { w } from "../905/669698";
+import { w } from "src/905/669698";
 export class $$s0 {
   getDynamicConfigBoolean(e, t, r) {
     return w.getDynamicConfigBoolean(e, t, r);

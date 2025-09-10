@@ -19,7 +19,7 @@ import { b as _$$b } from "../905/985254";
 import { B } from "../figma_app/750676";
 import { T as _$$T, _ as _$$_ } from "../905/793009";
 import { gY } from "../figma_app/973927";
-import { n as _$$n } from "../905/815475";
+import { loadCanvasData } from "../905/815475";
 import { sf } from "../figma_app/12535";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -154,7 +154,7 @@ export async function $$B1({
   let a = e.type === _$$n2.HubFile ? {
     fv: `${r}`
   } : void 0;
-  let s = _$$n(i, (e, t) => XHR.post(e, {
+  let s = loadCanvasData(i, (e, t) => XHR.post(e, {
     fv: `${t}`
   }, {
     responseType: "arraybuffer"

@@ -412,7 +412,7 @@ export class DesktopAPI {
    * @param callback - Optional callback.
    * @returns Promise resolving to result.
    */
-  setEnableMCP(enabled: boolean, port: number, callback: () => void = () => {}): Promise<any> {
+  setEnableMCP(enabled: boolean, port: number, callback: () => void = () => { }): Promise<any> {
     if (this.hasFeature('addCodegenMCPStartupBinding')) {
       if (enabled)
         callback()

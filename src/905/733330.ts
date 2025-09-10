@@ -1,9 +1,9 @@
-import { parseQuery, serializeQuery } from "../905/634134";
-import { getI18nString } from "../905/303541";
-import { UpsellModalType } from "../905/165519";
-import { X1 } from "../figma_app/736948";
-import { UpgradeSteps } from "../figma_app/831101";
-import { UpgradeAction } from "../figma_app/707808";
+import { parseQuery, serializeQuery } from "src/905/634134";
+import { getI18nString } from "src/905/303541";
+import { UpsellModalType } from "src/905/165519";
+import { X1 } from "src/figma_app/736948";
+import { UpgradeSteps } from "src/figma_app/831101";
+import { UpgradeAction } from "src/figma_app/707808";
 export class $$d0 {
   pathToSelectedView(e, t, i) {
     if ("purchase-organization" === t[1]) {

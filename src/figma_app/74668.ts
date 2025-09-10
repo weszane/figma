@@ -32,7 +32,7 @@ import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
 import { E as _$$E2 } from "../905/511388";
 import { sZ } from "../905/845253";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { Oe } from "../figma_app/336853";
 import { e as _$$e2 } from "../figma_app/882253";
 import { Ib } from "../905/129884";
@@ -455,7 +455,7 @@ export function $$ep5({
     variable: t,
     variableCollection: r
   });
-  let g = kH(t.name);
+  let g = getBasename(t.name);
   let f = useCallback(() => {
     u(t);
   }, [u, t]);
@@ -538,7 +538,7 @@ export function $$eh0({
   onItemContextMenu: _,
   onItemMouseLeave: h
 }) {
-  let m = kH(e.name);
+  let m = getBasename(e.name);
   let {
     showStyleDetails,
     hideStyleDetails
@@ -1031,7 +1031,7 @@ function eb({
         [J1]: r
       }),
       htmlAttributes: {
-        "data-tooltip": kH(e.name),
+        "data-tooltip": getBasename(e.name),
         "data-tooltip-type": Ib.TEXT,
         onMouseLeave: T,
         onMouseMove: E
@@ -1116,7 +1116,7 @@ let eI = forwardRef(function ({
     htmlAttributes: {
       "data-tooltip-type": Ib.SPECIAL,
       "data-tooltip": _$$Z,
-      "data-tooltip-style-name": kH(e.name || ""),
+      "data-tooltip-style-name": getBasename(e.name || ""),
       "data-tooltip-style-description": e.description,
       onContextMenu: l,
       onMouseLeave: o,

@@ -5,8 +5,8 @@ import { NX, k9 } from "../figma_app/777207";
 import { gO, dS, Nz } from "../figma_app/915774";
 import { Fl, dx } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
-import { ke } from "../905/309735";
-import { PW } from "../figma_app/633080";
+import { splitPath } from "../905/309735";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { TY } from "../figma_app/76115";
 export function $$_4(e, t) {
   let r = {};
@@ -86,7 +86,7 @@ function f(e, t, r) {
   });
   let n = Object.create(null);
   for (let r of t) {
-    let t = ke(r.name);
+    let t = splitPath(r.name);
     let i = "";
     for (let a = 0; a < t.length; a++) {
       let s;
@@ -113,7 +113,7 @@ function E(e, t, r) {
   let a = [];
   let s = [];
   let o = {};
-  for (let e of t) if (getFeatureFlags().dse_templates_proto && e.type === PW.COMPONENT && Fl(e)) a.push(e);else if (dx(e) && e.containing_frame?.nodeId && "" !== e.containing_frame.name) {
+  for (let e of t) if (getFeatureFlags().dse_templates_proto && e.type === PrimaryWorkflowEnum.COMPONENT && Fl(e)) a.push(e); else if (dx(e) && e.containing_frame?.nodeId && "" !== e.containing_frame.name) {
     let t = e.containing_frame.nodeId;
     n[t] = n[t] || [];
     n[t].push(e);
@@ -161,7 +161,7 @@ function y(e, t, r) {
     itemsByPageId,
     pageNamesByPageId,
     itemsWithoutPage
-  } = $$_4(t, e => e.type === PW.COMPONENT || e.type === PW.STATE_GROUP || e.type === PW.MODULE ? e : null);
+  } = $$_4(t, e => e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP || e.type === PrimaryWorkflowEnum.MODULE ? e : null);
   $$m3(itemsByPageId, pageNamesByPageId, itemsWithoutPage);
   let s = Object.keys(itemsByPageId);
   if (gO(s, {

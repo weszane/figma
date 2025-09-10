@@ -49,7 +49,7 @@ import { maybeCreateSavepoint } from "../905/294113";
 import { AC, x6, jO } from "../figma_app/803787";
 import { rR, sK } from "../figma_app/598018";
 import { aP } from "../figma_app/10554";
-import { o as _$$o } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { $A, vt } from "../905/862883";
 import { PreviewMode } from "../figma_app/707808";
 import { fileActionEnum } from "../figma_app/630077";
@@ -359,7 +359,7 @@ let $$ew13 = createOptimistThunk((e, t) => {
   }) => {
     if (!n || null === ep) return;
     let s = AC(e.getState());
-    let l = Object.values(jO(e.getState(), _$$o.HUBFILE)).map(e => e.node_id);
+    let l = Object.values(jO(e.getState(), LibrarySourceEnum.HUBFILE)).map(e => e.node_id);
     let d = AppStateTsApi.slideThemeLibBindings().renameThemeForTemplatePublish(t.name) ? l : s;
     if (d.length > 0) {
       r.library_key && AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(r.library_key));
@@ -371,7 +371,7 @@ let $$ew13 = createOptimistThunk((e, t) => {
       requestAnimationFrame(() => {
         e.dispatch(ep({
           savepointDescription: "Community slide template publish",
-          publishingMode: _$$o.HUBFILE,
+          publishingMode: LibrarySourceEnum.HUBFILE,
           itemsToPublish: new Set(d),
           hubFileId: r.id,
           onPublishSuccess,

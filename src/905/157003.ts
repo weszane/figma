@@ -1,6 +1,6 @@
 import type { ResourceView } from '../figma_app/43951';
 import { serializeJSON } from '../905/251556';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { observableState } from '../905/441145';
 import { RetainedPromiseManager } from '../905/491061';
 import { getFeatureFlags } from '../905/601108';
@@ -197,7 +197,7 @@ export function createAtomFamilyAlias(getStore: () => any, cacheTTL: number, cac
      */
     const atomFamily = createRemovableAtomFamily((key: any) => {
       // Suspense handler for promise management (original: suspenseHandler)
-      const suspenseHandler = new RetainedPromiseManager(() => atomStoreManager.sub(atomFamily, () => {}));
+      const suspenseHandler = new RetainedPromiseManager(() => atomStoreManager.sub(atomFamily, () => { }));
       // Handle null key case
       if (key === null) {
         return atom(resourceUtils.disabledSuspendable(suspenseHandler));
@@ -243,7 +243,7 @@ export function createAtomFamilyAlias(getStore: () => any, cacheTTL: number, cac
       const suspendableAtom = atom((get: any) => resourceUtils.suspendableFrom(get(atomSelector), () => createSubscriptionPromise(getStore(), storeFactory, key), suspenseHandler));
       suspendableAtom.debugLabel = performance.now().toString();
       return suspendableAtom;
-    }, c2);
+    }, deepEqual);
 
     /**
      * Expose atom family and getter (original: Object.assign)

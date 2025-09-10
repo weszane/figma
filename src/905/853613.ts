@@ -1,5 +1,5 @@
 import { atomStoreManager } from "../figma_app/27355";
-import { o } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { V9 } from "../905/72677";
 export function $$s0(e) {
   if (null == e) return;
@@ -8,9 +8,9 @@ export function $$s0(e) {
 }
 export function $$o1(e) {
   switch (e) {
-    case o.LIBRARY:
+    case LibrarySourceEnum.LIBRARY:
       return "library";
-    case o.HUBFILE:
+    case LibrarySourceEnum.HUBFILE:
       return "hubFile";
   }
 }

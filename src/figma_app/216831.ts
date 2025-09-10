@@ -1,10 +1,10 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { e as _$$e } from "../figma_app/601186";
 import { j } from "../figma_app/64343";
-let d = Wh(() => atom(new Map()));
+let d = setupRemovableAtomFamily(() => atom(new Map()));
 export function $$c0(e) {
   let [t, r] = useState(null);
   let s = j();

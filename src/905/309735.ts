@@ -1,19 +1,48 @@
-export function $$n2(e) {
-  return e.split("/").filter(e => !!e).map(e => e.trim());
+/**
+ * Splits a path into segments, filters out empty segments, and trims each segment.
+ * Original function name: $$n2
+ * @param path - The path string to split.
+ * @returns An array of trimmed path segments.
+ */
+export function splitPath(path: string): string[] {
+  return path.split("/").filter(segment => !!segment).map(segment => segment.trim());
 }
-export function $$r0(e) {
-  let t = $$n2(e);
-  t.pop();
-  return t.join("/");
+
+/**
+ * Gets the directory name by removing the last segment from the path.
+ * Original function name: $$r0
+ * @param path - The path string.
+ * @returns The directory path without the last segment.
+ */
+export function getDirname(path: string): string {
+  const segments = splitPath(path);
+  segments.pop();
+  return segments.join("/");
 }
-export function $$a1(e) {
-  let t = $$n2(e);
-  return t.length ? t[t.length - 1] : "";
+
+/**
+ * Gets the basename (last segment) of the path.
+ * Original function name: $$a1
+ * @param path - The path string.
+ * @returns The last segment of the path, or an empty string if no segments.
+ */
+export function getBasename(path: string): string {
+  const segments = splitPath(path);
+  return segments.length ? segments[segments.length - 1] : "";
 }
-export function $$s3(e) {
-  return e.replace(/(\/)\1+/g, "$1").split("/").map(e => e.trim()).join("/");
+
+/**
+ * Normalizes the path by replacing multiple slashes with a single slash, trimming segments, and joining.
+ * Original function name: $$s3
+ * @param path - The path string to normalize.
+ * @returns The normalized path string.
+ */
+export function normalizePath(path: string): string {
+  return path.replace(/(\/)\1+/g, "$1").split("/").map(segment => segment.trim()).join("/");
 }
-export const In = $$r0;
-export const kH = $$a1;
-export const ke = $$n2;
-export const rh = $$s3;
+
+// Refactored exports to use the new function names
+export const In = getDirname;
+export const kH = getBasename;
+export const ke = splitPath;
+export const rh = normalizePath;

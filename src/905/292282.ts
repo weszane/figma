@@ -1,6 +1,6 @@
 import { atom } from "jotai";
-import { selectAtom } from "../vendor/812047";
-import a from "../vendor/128080";
+import { selectAtom } from "src/vendor/812047";
+import a from "src/vendor/128080";
 export function $$s1(e) {
   return selectAtom(e, e => e, a);
 }

@@ -17,7 +17,7 @@ import { iw, cM, kX, C$, q0 } from "../905/261982";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { U } from "../905/506188";
 import { je } from "../figma_app/155728";
-import { GI, Rn, ZI, Av } from "../figma_app/633080";
+import { isExtension, getSubscribedVariableSetInfo, getSubscribedVariableInfo, getPublishKey } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { eF, Io, CS, cn } from "../figma_app/394327";
 import { iG, AQ } from "../figma_app/481279";
@@ -60,7 +60,7 @@ export function $$j11() {
 export function $$U40() {
   var e;
   e = eE(useAtomWithSubscription(TD));
-  let t = useMemo(() => Ot() ? e : e.filter(e => !GI(e)), [e]);
+  let t = useMemo(() => Ot() ? e : e.filter(e => !isExtension(e)), [e]);
   return iw(t);
 }
 export function $$B9() {
@@ -84,7 +84,7 @@ export function $$W3(e) {
   if (r) return r;
   if (!e) return;
   let i = VariablesBindings.getSubscribedVariableSetInfo(e);
-  if (i) return Rn(i);
+  if (i) return getSubscribedVariableSetInfo(i);
 }
 export function $$K27(e) {
   let t = useMemo(() => JB(e), [e]);
@@ -111,7 +111,7 @@ export function $$J35(e) {
   if (r) return r;
   if (!e) return null;
   let i = VariablesBindings.getSubscribedVariableInfo(e);
-  return i ? ZI(i) : null;
+  return i ? getSubscribedVariableInfo(i) : null;
 }
 export function $$Z18(e, t) {
   let r = useMemoShallow(() => e, [e]);
@@ -121,7 +121,7 @@ export function $$Z18(e, t) {
     if (n) return n;
     if (t) {
       let e = VariablesBindings.getSubscribedVariableInfo(r);
-      if (e) return ZI(e);
+      if (e) return getSubscribedVariableInfo(e);
     }
     return null;
   })), [t, r]);
@@ -411,7 +411,7 @@ export function $$eT2(e) {
   return t ? r?.[t] : void 0;
 }
 export function $$eI6(e) {
-  let t = e && GI(e);
+  let t = e && isExtension(e);
   let r = $$W3(t ? e.rootVariableSetId : void 0);
   return (t ? r : e) ?? null;
 }
@@ -479,7 +479,7 @@ export function $$ev24() {
         });
         return;
       }
-      if (GI(d) && !CS(c, n)) r(n, i, a, s, o, l);else {
+      if (isExtension(d) && !CS(c, n)) r(n, i, a, s, o, l);else {
         if (null === s) {
           logError("variables", "Failed to set variable value for mode. Variable value is null.", {
             variableId: i,
@@ -514,7 +514,7 @@ export function $$ev24() {
         });
         return;
       }
-      if (CS(d, s)) n(t, a);else if (GI(l)) {
+      if (CS(d, s)) n(t, a);else if (isExtension(l)) {
         if (c) {
           i(t, a, s);
           return;
@@ -545,9 +545,9 @@ export function $$eA28() {
       if (!r?.isExtension) continue;
       let n = e[r.backingVariableSetId];
       if (!n) continue;
-      let i = Av(n).toString();
+      let i = getPublishKey(n).toString();
       t[i] || (t[i] = new Set());
-      t[i].add(Av(r).toString());
+      t[i].add(getPublishKey(r).toString());
     }
     return t;
   }, [e]);

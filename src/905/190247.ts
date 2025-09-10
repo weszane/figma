@@ -1,5 +1,5 @@
-import { flattenObjectToTarget } from "../figma_app/493477";
-import { FullscreenPerfMetrics } from "../figma_app/763686";
+import { flattenObjectToTarget } from "src/figma_app/493477";
+import { FullscreenPerfMetrics } from "src/figma_app/763686";
 export function $$a1(e, t) {
   e && flattenObjectToTarget(e, t, "deviceInfo");
 }

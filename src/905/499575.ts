@@ -1,5 +1,5 @@
 import type { TSSceneGraph } from '../figma_app/518682';
-import type { Bindings } from './21872';
+import type { Bindings } from '../905/21872';
 import { ResponsiveSetMixin } from '../905/26360';
 import { createAnnotationsMixin, createArcDataMixin, createBorderCornerMixin, createCanvasGridMixin, createCooperFrameMixin, createCountMixin, createDecorativeImageMixin, createDraftMixin, createEmptyMixin, createEmptyMixin2, createEmptyMixin3, createEmptyMixin4, createEmptyMixin7, createEmptyMixin9, createEmptyMixin10, createEmptyMixin14, createEmptyMixin16, createEmptyMixin17, createEmptyMixin20, createEmptyMixin22, createEmptyMixin23, createEmptyMixin24, createEmptyMixin26, createEmptyMixin27, createEmptyMixin30, createLayoutMixin, createModuleMixin, createOverlayMixin, createPageMixin, createResponsiveMixin, createStateGroupMixin, createTextMixin, createVisualStylingMixin, createWidgetMixin } from '../905/112832';
 import { ServiceCategories as _$$e } from '../905/165054';
@@ -8,7 +8,7 @@ import { Axis } from '../905/229717';
 import { isSpecialNodeType } from '../905/266460';
 import { kiwiParserCodec as _$$w } from '../905/294864';
 import { hasStyleType, withStyleMixin } from '../905/311324';
-import { Mm } from '../905/382883';
+import { approximateEqual } from '../905/382883';
 import { isVariableNode, setupVariableMixin } from '../905/383429';
 import { v as _$$v } from '../905/439972';
 import { _T, E5, jv, k4, Yi } from '../905/531551';
@@ -54,7 +54,7 @@ function createMixinNodes() {
   // Decorative image base (e)
   let DecorativeImageBase = SceneGraphNode;
   // Decorative image (t)
-  class DecorativeImage extends createDecorativeImageMixin(DecorativeImageBase) {}
+  class DecorativeImage extends createDecorativeImageMixin(DecorativeImageBase) { }
   ;
   // Annotation support (i)
   class AnnotatedNode extends createAnnotationsMixin(DecorativeImage) {
@@ -289,7 +289,7 @@ function createMixinNodes() {
   }
   ;
   // Canvas grid node (f)
-  class CanvasGridNode extends createCanvasGridMixin(PageNode) {}
+  class CanvasGridNode extends createCanvasGridMixin(PageNode) { }
   ;
   // State group node (F)
   class StateGroupNode extends createStateGroupMixin(CanvasGridNode) {
@@ -513,7 +513,7 @@ function createMixinNodes() {
         guides: e
       });
       let i = _$$w.decodeNodeChange(t).guides;
-      if (!Mm(e, i)) throw new Error('Invalid format for guides');
+      if (!approximateEqual(e, i)) throw new Error('Invalid format for guides');
       this.setGlobalNodeID();
       let s = this.bindings.NodeTsApi.setGuides(encodeBase64(t), this.sceneGraph.nodeContext);
       if (s) throw new Error(s);
@@ -806,7 +806,7 @@ function createMixinNodes() {
   }
   ;
   // Count node (er)
-  class CountNode extends createCountMixin(PluginDataNode) {}
+  class CountNode extends createCountMixin(PluginDataNode) { }
   ;
   // Overlay node (ea)
   class OverlayNode extends createOverlayMixin(CountNode) {
@@ -867,7 +867,7 @@ function createMixinNodes() {
         prototypeInteractions: e
       });
       let i = _$$w.decodeNodeChange(t).prototypeInteractions;
-      if (!Mm(e, i)) throw new Error('Invalid format for prototypeInteractions');
+      if (!approximateEqual(e, i)) throw new Error('Invalid format for prototypeInteractions');
       this.setGlobalNodeID();
       let r = this.bindings.NodeTsApi.setPrototypeInteractions(t, this.sceneGraph.nodeContext);
       if (r) throw new Error(r);
@@ -882,7 +882,7 @@ function createMixinNodes() {
         objectAnimations: e
       });
       let i = _$$w.decodeNodeChange(t).objectAnimations;
-      if (!Mm(e, i)) throw new Error('Invalid format for objectAnimations');
+      if (!approximateEqual(e, i)) throw new Error('Invalid format for objectAnimations');
       this.setGlobalNodeID();
       let r = this.bindings.NodeTsApi.setObjectAnimations(t, this.sceneGraph.nodeContext);
       if (r) throw new Error(r);
@@ -2394,7 +2394,7 @@ export class SceneNode extends createMixinNodes() {
       exportSettings: e
     });
     let i = _$$w.decodeNodeChange(t).exportSettings;
-    if (!Mm(e, i)) throw new Error('Invalid format for export settings');
+    if (!approximateEqual(e, i)) throw new Error('Invalid format for export settings');
     this.setGlobalNodeID();
     this.bindings.NodeTsApi.setExportSettings(encodeBase64(t), this.sceneGraph.nodeContext);
   }
@@ -2821,7 +2821,7 @@ export class SceneNode extends createMixinNodes() {
       layoutGrids: e
     });
     let i = _$$w.decodeNodeChange(t).layoutGrids;
-    if (!Mm(e, i)) throw new Error('Invalid format for layoutGrids');
+    if (!approximateEqual(e, i)) throw new Error('Invalid format for layoutGrids');
     this.setGlobalNodeID();
     let s = this.bindings.NodeTsApi.setLayoutGrids(encodeBase64(t), this.sceneGraph.nodeContext);
     if (s) throw new Error(s);
@@ -2835,7 +2835,7 @@ export class SceneNode extends createMixinNodes() {
       effects: e
     });
     let i = _$$w.decodeNodeChange(t).effects;
-    if (!Mm(e, i)) throw new Error('Invalid format for effects');
+    if (!approximateEqual(e, i)) throw new Error('Invalid format for effects');
     this.setGlobalNodeID();
     let s = this.bindings.NodeTsApi.setEffects(encodeBase64(t), this.sceneGraph.nodeContext);
     if (s) throw new Error(s);
@@ -2874,7 +2874,7 @@ export class SceneNode extends createMixinNodes() {
       dashPattern: e
     });
     let i = _$$w.decodeNodeChange(t).dashPattern;
-    if (!Mm(e, i)) throw new Error('Invalid format for dashPattern');
+    if (!approximateEqual(e, i)) throw new Error('Invalid format for dashPattern');
     this.setGlobalNodeID();
     let s = this.bindings.NodeTsApi.setDashPattern(encodeBase64(t), this.sceneGraph.nodeContext);
     if (s) throw new Error(s);

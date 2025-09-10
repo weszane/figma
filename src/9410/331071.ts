@@ -110,7 +110,7 @@ import { t as _$$t5 } from '../905/605191';
 import { Z as _$$Z2 } from '../905/606826';
 import { _ as _$$_4 } from '../905/614936';
 import { _G, Pv } from '../905/619652';
-import { o8 as _$$o2 } from '../905/622391';
+import { getSelectedView } from '../905/622391';
 import { VU } from '../905/625959';
 import { T as _$$T3 } from '../905/632137';
 import { E as _$$E6 } from '../905/632989';
@@ -268,7 +268,7 @@ import { APIParameterUtils } from '../figma_app/181241';
 import { $ as _$$$3 } from '../figma_app/183557';
 import { r7 as _$$r5, Kp } from '../figma_app/189990';
 import { FFileType, FMemberRoleType, FPlanAccessType, FPlanNameType, FProductAccessType, FUserTypeClassification } from '../figma_app/191312';
-import { tK as _$$tK, DA, F_, UE } from '../figma_app/191804';
+import { parseHex, areColorsEqual, colorToHexString, whiteColor } from '../figma_app/191804';
 import { sF as _$$sF } from '../figma_app/193952';
 import { t as _$$t7 } from '../figma_app/198180';
 import { h as _$$h4 } from '../figma_app/198885';
@@ -278,7 +278,7 @@ import { GM, PE } from '../figma_app/251115';
 import { lM as _$$lM, q8 as _$$q6, S3, U4, Xq } from '../figma_app/254872';
 import { dt as _$$dt, fC, he, QS, VA } from '../figma_app/259578';
 import { nB as _$$nB, hE, vo, Y9 } from '../figma_app/272243';
-import { oB as _$$oB, qN, w_ } from '../figma_app/273493';
+import { rgbToHsl, rgbToHsv, colorToRgb } from '../figma_app/273493';
 import { q as _$$q5, S as _$$S2 } from '../figma_app/277543';
 import { p as _$$p2 } from '../figma_app/284426';
 import { FX as _$$FX } from '../figma_app/291792';
@@ -756,7 +756,7 @@ async function tx(e) {
 }
 async function ty(e, t) {
   let i = atomStoreManager.get(openFileKeyAtom);
-  let r = _$$o2();
+  let r = getSelectedView();
   if (!r) throw new Error('Cannot run plugin while logged out');
   if (!i) throw new Error('No file key found');
   await wY();
@@ -1992,12 +1992,12 @@ function nY({
   let s = useCallback(() => {
     i(!0);
   }, [i]);
-  let o = useStableMemo(r, DA);
+  let o = useStableMemo(r, areColorsEqual);
   let {
     activeColorIdx,
     activeColorOutline
   } = useMemo(() => ({
-    activeColorIdx: nz.findIndex(e => DA(e.color, o)),
+    activeColorIdx: nz.findIndex(e => areColorsEqual(e.color, o)),
     activeColorOutline: `2px solid ${_$$F4.format(o)}`,
     value: o
   }), [o]);
@@ -2064,7 +2064,7 @@ function n$({
   });
 }
 function n6(e, t) {
-  return t === ColorFormatEnum.HSL ? _$$oB(e) : qN(e);
+  return t === ColorFormatEnum.HSL ? rgbToHsl(e) : rgbToHsv(e);
 }
 function n7({
   brandColor: e,
@@ -2102,7 +2102,7 @@ function n7({
   }, 100);
   let C = useCallback((e, t) => {
     m(e);
-    b(w_(e), t);
+    b(colorToRgb(e), t);
   }, [b]);
   let v = useCallback(e => {
     e.a = 1;
@@ -2150,7 +2150,7 @@ function n7({
             colorFormat: u,
             onColorFormatChange: e => {
               p(e);
-              'l' in h && e !== ColorFormatEnum.HSL ? m(qN(w_(h))) : e !== ColorFormatEnum.HSL || 'l' in h || m(_$$oB(w_(h)));
+              'l' in h && e !== ColorFormatEnum.HSL ? m(rgbToHsv(colorToRgb(h))) : e !== ColorFormatEnum.HSL || 'l' in h || m(rgbToHsl(colorToRgb(h)));
             },
             dispatch: o,
             dropdownShown: l
@@ -2601,7 +2601,7 @@ function au(e, t) {
   }
 }
 let ap = {
-  brandColor: UE,
+  brandColor: whiteColor,
   colorMode: _$$lH.LIGHT,
   spacing: 1,
   radius: 1,
@@ -2619,9 +2619,9 @@ function ah(e, {
     pinnedRanges: t
   });
   let a = Mz(i, r);
-  let s = X6(i) ?? UE;
+  let s = X6(i) ?? whiteColor;
   return {
-    brandColor: _$$tK(_$$tb(s, n.colors)) ?? UE,
+    brandColor: parseHex(_$$tb(s, n.colors)) ?? whiteColor,
     colorMode: _$$P3(i) ?? _$$lH.LIGHT,
     spacing: YB(n.spacingRangesForGuids),
     radius: _$$nd(n.radiusValues),
@@ -2742,14 +2742,14 @@ function af(e) {
                   let t = uP(e, {
                     ignoreOpacity: !0
                   });
-                  let i = X6(e) ?? UE;
+                  let i = X6(e) ?? whiteColor;
                   return _$$tb(i, t.colors);
                 }(r);
                 let o = 'darkMode' in i ? i.darkMode ? _$$lH.DARK : _$$lH.LIGHT : void 0;
                 if (o && a !== o && _$$l2.ai('first-draft-make-changes-theme-switch-mode', () => {
                   _$$t4(r, o, s);
                 }), 'brandColor' in i && i.brandColor) {
-                  let e = _$$tK(i.brandColor);
+                  let e = parseHex(i.brandColor);
                   if (e) {
                     let t = qO(e, o ?? a);
                     _$$l2.ai('first-draft-make-changes-theme-brand-color', () => {
@@ -2926,7 +2926,7 @@ function af(e) {
         let t = uP(e, {
           ignoreOpacity: !0
         });
-        let i = X6(e) ?? UE;
+        let i = X6(e) ?? whiteColor;
         let r = _$$tb(i, t.colors);
         let n = _$$P3(e) ?? _$$lH.LIGHT;
         return {
@@ -3247,7 +3247,7 @@ function ag({
     let e = ah(y?.guid ?? '', {
       pinnedRanges: v.current
     });
-    nearlyEqual(_$$oB(N).h, _$$oB(e.brandColor).h, 0.01) && (e.brandColor = N);
+    nearlyEqual(rgbToHsl(N).h, rgbToHsl(e.brandColor).h, 0.01) && (e.brandColor = N);
     let t = U?.lastEditedAt ?? -1 / 0;
     (t > b.current || b.current - t > 1e3) && x({
       type: 'EDIT_INFO_UPDATED',
@@ -3266,7 +3266,7 @@ function ag({
   }, 5e3);
   let H = useCallback(e => {
     e !== k && (_$$l2.user('first-draft-switch-color-mode', () => {
-      _$$t4(y, e, F_(g.brandColor));
+      _$$t4(y, e, colorToHexString(g.brandColor));
     }), K(k), fullscreenValue.triggerAction('commit'), x({
       type: 'SET_COLOR_MODE',
       payload: e
@@ -3280,7 +3280,7 @@ function ag({
       V.current = [e, W.current];
     } else {
       W.current = e;
-      let i = F_(t);
+      let i = colorToHexString(t);
       _$$l2.user('first-draft-apply-brand-color', () => {
         _$$l3(y, e, k, z, i);
       });
@@ -3294,7 +3294,7 @@ function ag({
     }
   }, [k, z, y]);
   let q = useCallback(e => {
-    K(F_(e));
+    K(colorToHexString(e));
     let t = {
       ...qO(e, k),
       a: 1

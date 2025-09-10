@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useId } from "react";
-import { A as _$$A } from "../vendor/723372";
-import { CheckboxPrimitive } from "../905/549791";
-import { Label } from "../905/270045";
-import { defaultComponentAttribute } from "../905/577641";
-import { s as _$$s } from "../905/536340";
+import { A as _$$A } from "src/vendor/723372";
+import { CheckboxPrimitive } from "src/905/549791";
+import { Label } from "src/905/270045";
+import { defaultComponentAttribute } from "src/905/577641";
+import { s as _$$s } from "src/905/536340";
 var n = {};
 require.d(n, {
   highlighted: () => h,

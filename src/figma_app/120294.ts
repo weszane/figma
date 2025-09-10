@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { useMemoArrayCustom } from "../905/19536";
 import { useLatestRef } from "../figma_app/922077";
 import { NS, Pp, a6 } from "../905/989765";
@@ -88,8 +88,8 @@ export function $$g0(e, t) {
         userID: e.id
       });
     } else i in p ? t.push(p[i]) : n.push(i);
-    c2(E, r) || y(r);
-    c2(g, t) || f(t);
+    deepEqual(E, r) || y(r);
+    deepEqual(g, t) || f(t);
     shallowEqual(_, n) || m(n);
   }, [u, e, d, c, p, _, E, g]);
   useEffect(() => {

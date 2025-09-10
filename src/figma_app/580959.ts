@@ -18,7 +18,7 @@ import { PropertyScope, VisibilityCondition, VariableResolvedDataType, NodePrope
 import { n3, VariableStyleId } from "../905/859698";
 import { permissionScopeHandler } from "../905/189185";
 import { GP } from "../figma_app/15927";
-import { dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { memoizeByArgs } from "../figma_app/815945";
@@ -63,7 +63,7 @@ import { R2, sy, w$ } from "../figma_app/646357";
 import { Lh, D8 } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
 import { b as _$$b2 } from "../figma_app/882253";
-import { AT } from "../figma_app/633080";
+import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { K as _$$K2 } from "../905/733706";
 import { Ib } from "../905/129884";
@@ -1406,7 +1406,7 @@ function tf({
   w$(k);
   let [J, Z] = useState(!1);
   if (!k) return null;
-  let Q = k.kind === AT.SUBSCRIBED_WITHOUT_LIBRARY ? jsx(zi, {
+  let Q = k.kind === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY ? jsx(zi, {
     dsStyle: {
       ...k.value,
       style_type: "FILL"
@@ -1487,7 +1487,7 @@ function tf({
       paintId: A,
       pickerShown: x,
       recordingKey: generateRecordingKey(d, "paintPicker"),
-      selectedStyle: F?.data ?? (k && k.kind !== AT.SUBSCRIBED_WITHOUT_LIBRARY ? k.value : null),
+      selectedStyle: F?.data ?? (k && k.kind !== SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY ? k.value : null),
       variableScopes: l
     }) : null]
   });
@@ -1662,7 +1662,7 @@ $$t_2.displayName = "Paint";
       };
       this.boundColorVariableId = () => {
         let e = this.props.paint.colorVar?.value?.alias;
-        return e ? dI(e) : null;
+        return e ? convertKiwiToVariableIdString(e) : null;
       };
     }
     pickerID() {

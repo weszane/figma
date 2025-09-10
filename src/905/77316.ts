@@ -1,9 +1,9 @@
 import { atom } from "../figma_app/27355";
-import { Wh } from "../figma_app/615482";
-let $$a0 = Wh(() => atom(null));
-let $$s2 = Wh(() => atom(null));
-let $$o1 = Wh(() => atom(null));
-let $$l3 = Wh(() => atom(""));
+import { setupRemovableAtomFamily } from "../figma_app/615482";
+let $$a0 = setupRemovableAtomFamily(() => atom(null));
+let $$s2 = setupRemovableAtomFamily(() => atom(null));
+let $$o1 = setupRemovableAtomFamily(() => atom(null));
+let $$l3 = setupRemovableAtomFamily(() => atom(""));
 export const LQ = $$a0;
 export const MX = $$o1;
 export const h1 = $$s2;

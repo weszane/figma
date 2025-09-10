@@ -15,7 +15,7 @@ import { getI18nString } from "../905/303541";
 import { jN } from "../905/612685";
 import { LT } from "../figma_app/646357";
 import { FFileType } from "../figma_app/191312";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { l as _$$l } from "../905/402643";
 import { zi } from "../905/824449";
 import { i } from "../905/415810";
@@ -123,7 +123,7 @@ function F({
               });
               break;
             case "num_states":
-              sortBy(n, e => e.type === PW.STATE_GROUP ? e.num_states : 0, i);
+              sortBy(n, e => e.type === PrimaryWorkflowEnum.STATE_GROUP ? e.num_states : 0, i);
               break;
             case "num_existing_instances":
               sortByProperty(n, "num_existing_instances", i);
@@ -368,7 +368,7 @@ export function $$B0({
       valueClassName: N,
       valueRenderFn: ({
         stat: e
-      }) => e.type === PW.STATE_GROUP ? e.num_states : getI18nString("design_systems.libraries_modal.n_a")
+      }) => e.type === PrimaryWorkflowEnum.STATE_GROUP ? e.num_states : getI18nString("design_systems.libraries_modal.n_a")
     });
     e.push({
       header: getI18nString("design_systems.libraries_modal.total_instances"),
@@ -403,8 +403,8 @@ export function $$B0({
     });
     return e;
   }, [s, t, o]);
-  let d = useCallback(e => e.map(e => e.type === PW.COMPONENT ? e.component_key : e.key).join(","), []);
-  let c = useCallback(e => (e.type === PW.COMPONENT ? e.component_key : e.key) ?? e.name, []);
+  let d = useCallback(e => e.map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key).join(","), []);
+  let c = useCallback(e => (e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key) ?? e.name, []);
   return jsx(F, {
     columns: l,
     defaultSortBy: "num_existing_instances",

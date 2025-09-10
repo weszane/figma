@@ -1,6 +1,6 @@
 import { VariablesBindings, VariableDataType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
-import { F_ } from "../figma_app/191804";
+import { colorToHexString } from "../figma_app/191804";
 import { xv } from "../figma_app/655139";
 import { Nv } from "../905/713722";
 import { f$ } from "../figma_app/836943";
@@ -48,7 +48,7 @@ export function $$p0(e, t) {
             case VariableDataType.FLOAT:
               return String(e.value);
             case VariableDataType.COLOR:
-              return F_(e.value);
+              return colorToHexString(e.value);
             default:
               return null;
           }

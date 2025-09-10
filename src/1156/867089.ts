@@ -7,12 +7,12 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { N6 } from "../figma_app/275370";
 import { nc } from "../figma_app/570630";
-let g = Wh(() => atom(null));
-let p = Wh(() => atom(null));
-let f = Wh(() => atom(null));
+let g = setupRemovableAtomFamily(() => atom(null));
+let p = setupRemovableAtomFamily(() => atom(null));
+let f = setupRemovableAtomFamily(() => atom(null));
 let y = {
   library_type: "team",
   library_name: "Unknown",

@@ -2,7 +2,7 @@ import { Fullscreen, SchemaJoinStatus, Multiplayer, SyncError, FileLoadEvent } f
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
-import { w as _$$w } from "../905/5147";
+import { kiwiCodec } from "../905/5147";
 import { customHistory } from "../905/612521";
 import { isLocalDevOnCluster } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
@@ -470,7 +470,7 @@ export class $$eu0 {
     }));
   }
   prettyPrintMessage(e) {
-    console.log("[MultiplayerDebugging]", _$$w.decodeMessage(e));
+    console.log("[MultiplayerDebugging]", kiwiCodec.decodeMessage(e));
   }
   reconnectSequenceNumberChanged(e) {
     setTagGlobal("reconnect_sequence_number", e);

@@ -1,4 +1,4 @@
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Thumbnail, ImageExportType } from "../figma_app/763686";
 import { atom, createRemovableAtomFamily, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -6,7 +6,7 @@ import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { fullscreenValue } from "../figma_app/455680";
 import { Jr } from "../figma_app/624361";
 import { wK } from "../figma_app/546509";
-let c = Wh(() => atom({}));
+let c = setupRemovableAtomFamily(() => atom({}));
 let u = createRemovableAtomFamily(e => atom(t => t(c)[e] ?? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALUAAABmCAYAAACN+dAoAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABeSURBVHgB7cAxAQAAAMKg9U9tDQ8oAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4NyDtAAG2m4HvAAAAAElFTkSuQmCC", (t, r, n) => {
   let i = t(c);
   r(c, {

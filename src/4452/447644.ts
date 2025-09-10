@@ -43,7 +43,7 @@ import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
 import { $z, Me } from "../figma_app/617427";
-import { u as _$$u2 } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { hideModal, showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
@@ -98,7 +98,7 @@ let ee = registerModal(function (e) {
   t = !o || e.isELA ? renderI18nText("admin_dashboard.seat_requests.approve_all_modal.body.no_cost", {
     numRequests: e.requestsToApprove.length
   }) : renderI18nText("admin_dashboard.seat_requests.bulk_approve_modal.body");
-  let c = _$$u2();
+  let c = getRumLoggingConfig();
   return jsx(fu, {
     name: e0.BULK_APPROVE_CONFIRMATION_MODAL,
     properties: {
@@ -195,7 +195,7 @@ function eM({
   let u = calculateCostForSeatTypeIncrease();
   let m = !!i || l.has(e.id);
   let _ = "approving" === i && l.has(e.id);
-  let p = _$$u2();
+  let p = getRumLoggingConfig();
   return _ ? jsx("div", {
     className: "x78zum5 x6s0dn4 xe8ttls",
     children: jsx(_$$k3, {
@@ -227,7 +227,7 @@ function eL({
   request: e,
   setHighlightedItemId: t
 }) {
-  let a = _$$u2();
+  let a = getRumLoggingConfig();
   return jsx(Me, {
     "aria-label": getI18nString("admin_dashboard.requests.details.title"),
     onClick: a => {
@@ -277,7 +277,7 @@ export function $$e$0({
   let H = useRef(null);
   let J = _$$k();
   let eI = RR();
-  let eE = _$$u2();
+  let eE = getRumLoggingConfig();
   let eS = useDispatch();
   let {
     seatAvailability

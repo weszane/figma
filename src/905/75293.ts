@@ -9,7 +9,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { StyleVariableOperation, CopyPasteType, VariableResolvedDataType } from "../figma_app/763686";
-import { sH } from "../905/805904";
+import { convertVariableIdToKiwi } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { trackEventAnalytics } from "../905/449184";
@@ -702,7 +702,7 @@ function eb({
   let g = useCallback(async e => {
     if (e) {
       let i = await p(Oe(e));
-      let n = sH(i);
+      let n = convertVariableIdToKiwi(i);
       assertNotNullish(n);
       let r = {
         resolvedDataType: "FLOAT",

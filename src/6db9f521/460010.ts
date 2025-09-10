@@ -379,7 +379,7 @@ import { G as _$$G5, D as _$$D5 } from "../a88a4c5a/237102";
 import { Zp } from "../figma_app/386160";
 import { Xw } from "../figma_app/201694";
 import { wF } from "../figma_app/257798";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { t as _$$t4 } from "../905/398894";
 import { y as _$$y2 } from "../905/225297";
 import { B as _$$B6 } from "../905/714743";
@@ -7725,7 +7725,7 @@ function df({
   });
 }
 function dj(e, t, i) {
-  if (!isInvalidValue(e)) return e && t ? c2(e, i.SOLID.value) ? "SOLID" : c2(e, i.DASHED_BIG.value) ? "DASHED_BIG" : c2(e, i.DASHED_SMALL.value) ? "DASHED_SMALL" : "NONE" : "NONE";
+  if (!isInvalidValue(e)) return e && t ? deepEqual(e, i.SOLID.value) ? "SOLID" : deepEqual(e, i.DASHED_BIG.value) ? "DASHED_BIG" : deepEqual(e, i.DASHED_SMALL.value) ? "DASHED_SMALL" : "NONE" : "NONE";
 }
 function db({
   selectedPreset: e,
@@ -8180,7 +8180,7 @@ function co({
     b: 0,
     a: 1
   }, void 0, "slides-default-image-paint"), []);
-  let F = A && c2(A.image, M.image);
+  let F = A && deepEqual(A.image, M.image);
   return e ? jsxs("div", {
     children: [jsx(_$$Y6, {
       isDragTarget: () => !0,
@@ -8746,7 +8746,7 @@ function cC({
         url: e
       };
     },
-    isEqual: (e, t) => c2(e, t)
+    isEqual: (e, t) => deepEqual(e, t)
   }), [carouselItemsById, x]);
   let m = _$$nc.user("slides-link-change", useCallback(e => {
     if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null);else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null);else if ("url" === e.type) {

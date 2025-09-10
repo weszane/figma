@@ -1,5 +1,5 @@
-import { throwTypeError } from "../figma_app/465776";
-import { z, Ip } from "../905/239603";
+import { throwTypeError } from "src/figma_app/465776";
+import { z, Ip } from "src/905/239603";
 export let $$a7 = "at-mentions-typeahead";
 var $$s3 = (e => (e.prevButton = "prevButton", e.nextButton = "nextButton", e.accessibilityCommentPin = "accessibilityCommentPin", e))($$s3 || {});
 var $$o2 = (e => (e[e.BUSY = 0] = "BUSY", e[e.READY = 1] = "READY", e))($$o2 || {});

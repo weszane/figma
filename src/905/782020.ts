@@ -3,7 +3,7 @@ import { VariablesBindings, VariableDataType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import s from "../vendor/626715";
 import { Ez } from "../figma_app/766708";
-import { rh } from "../905/309735";
+import { normalizePath } from "../905/309735";
 import { g } from "../905/578436";
 import { F } from "../905/604606";
 import { X } from "../905/456000";
@@ -88,14 +88,14 @@ export function $$x8(e, t) {
   return null === t ? [] : e.filter(e => e.name.startsWith(t));
 }
 export function $$S2(e, t, i) {
-  return $$x8(e, t).every(e => VariablesBindings.renameVariable(e.node_id, rh(i + "/" + $$k14(e, t))));
+  return $$x8(e, t).every(e => VariablesBindings.renameVariable(e.node_id, normalizePath(i + "/" + $$k14(e, t))));
 }
 export function $$w6(e) {
   return e.includes("/") ? e.split("/").slice(0, -1).join("/") + "/" : "";
 }
 export function $$C9(e, t) {
   let i = e.split("/");
-  return rh(t + i[i.length - 1]);
+  return normalizePath(t + i[i.length - 1]);
 }
 export function $$T0(e) {
   let t = e.split("/");

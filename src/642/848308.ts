@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { n5, zE, HF } from "../figma_app/646357";
 import { Sh } from "../figma_app/889655";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { dD } from "../905/519113";
 import { RR } from "../905/514666";
 import { z } from "../905/454433";
@@ -17,7 +17,7 @@ function g() {
     let s = new Set();
     for (let r of t) {
       let t = n5(r, e);
-      t && (t.type === PW.COMPONENT || t.type === PW.STATE_GROUP) && !zE(t) ? s.add(t.node_id) : t && t.type === PW.MODULE && s.add(t.node_id);
+      t && (t.type === PrimaryWorkflowEnum.COMPONENT || t.type === PrimaryWorkflowEnum.STATE_GROUP) && !zE(t) ? s.add(t.node_id) : t && t.type === PrimaryWorkflowEnum.MODULE && s.add(t.node_id);
     }
     return s;
   }, [e, t]);

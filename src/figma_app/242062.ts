@@ -6,7 +6,7 @@ import { Multiplayer, PaintTools, SnapshotLevel, AppStateTsApi, DesignGraphEleme
 import { getFeatureFlags } from "../905/601108";
 import c from "classnames";
 import { globalPerfTimer, distributionAnalytics } from "../905/542194";
-import { GL, e3 as _$$e, En, YN } from "../figma_app/191804";
+import { getTextColorForBackground, textOnDarkCanvas, getDarkerShade, textOnLightCanvas } from "../figma_app/191804";
 import { j as _$$j } from "../figma_app/469468";
 import { selectWithShallowEqual } from "../905/103090";
 import { tH, H4 } from "../905/751457";
@@ -838,8 +838,8 @@ function eG(e) {
     }
     x();
   }, [x]);
-  let C = GL(color);
-  let w = C === _$$e ? "chat_input--lightPlaceholder--YGSmc" : "chat_input--darkPlaceholder--BH5Qn";
+  let C = getTextColorForBackground(color);
+  let w = C === textOnDarkCanvas ? "chat_input--lightPlaceholder--YGSmc" : "chat_input--darkPlaceholder--BH5Qn";
   let O = getI18nString("whiteboard.cursor_chat.say_something");
   switch (getI18nState()?.getPrimaryLocale(!1)) {
     case "ja":
@@ -918,7 +918,7 @@ function ez() {
       allUsers: e
     }
   }) => e[0]?.color || w3);
-  let n = getFeatureFlags().fpl_enhanced_contrast_toggle && e.enhancedContrast ? En(r) : r;
+  let n = getFeatureFlags().fpl_enhanced_contrast_toggle && e.enhancedContrast ? getDarkerShade(r) : r;
   let a = Rt;
   return jsx("div", {
     className: a,
@@ -1402,8 +1402,8 @@ let $$tu0 = memo(function ({
 }) {
   let N = _$$G();
   let [C, w] = useState(1);
-  let L = useMemo(() => GL(t), [t]);
-  let P = getFeatureFlags().fpl_enhanced_contrast_toggle && N.enhancedContrast ? En(t) : t;
+  let L = useMemo(() => getTextColorForBackground(t), [t]);
+  let P = getFeatureFlags().fpl_enhanced_contrast_toggle && N.enhancedContrast ? getDarkerShade(t) : t;
   let [D, k] = useState(O.NONE);
   let F = () => k(O.NONE);
   let [j, U] = useState(A);
@@ -1455,14 +1455,14 @@ let $$tu0 = memo(function ({
     children: [jsx("div", {
       className: j ? bu : iY,
       style: {
-        opacity: j ? L === _$$e ? .8 : .5 : 1
+        opacity: j ? L === textOnDarkCanvas ? .8 : .5 : 1
       },
       dir: "auto",
       children: e
     }), j && jsxs("div", {
       className: Lo,
       style: {
-        opacity: L === YN ? .8 * C : C,
+        opacity: L === textOnLightCanvas ? .8 * C : C,
         boxShadow: V ? void 0 : `2px 4px 8px ${P}40`
       },
       dir: "auto",

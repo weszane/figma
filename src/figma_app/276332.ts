@@ -1,4 +1,4 @@
-import { n3, VariableStyleId } from "../905/859698";
+import { n3, VariableStyleId } from "src/905/859698";
 var $$n7;
 export function $$a8(e) {
   switch (e) {

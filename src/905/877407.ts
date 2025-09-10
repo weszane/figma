@@ -1,5 +1,5 @@
 import { AppStateTsApi, Side, StrokeAlignment, SceneGraphHelpers } from "../figma_app/763686";
-import { R0 } from "../figma_app/273493";
+import { unpackToNormalizedRgb } from "../figma_app/273493";
 import { r as _$$r } from "../905/249071";
 import { M as _$$M } from "../905/512402";
 import { defaultSessionLocalIDString } from "../905/871411";
@@ -139,7 +139,7 @@ export function $$_10(e, t, i, o, l, d = 0, c = !1, u = !1, p = !1) {
     origin: c ? new _$$M(m.x + 10, m.y) : m,
     size: h
   };
-  if (p || (i.fillRoundedRect(y, g, o), i.renderDashedLines(f(y), 8, 8, R0(l), 2)), c) {
+  if (p || (i.fillRoundedRect(y, g, o), i.renderDashedLines(f(y), 8, 8, unpackToNormalizedRgb(l), 2)), c) {
     let e = AppStateTsApi.canvasGrid().rowContentBoundsInCanvas(d, !1);
     let r = t.canvasSpaceToViewportSpace(e.origin);
     let o = {

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { A } from "../vendor/723372";
-import { E } from "../905/632989";
+import { A } from "src/vendor/723372";
+import { E } from "src/905/632989";
 let o = {
   ghost: "icon-button__ghost__1ok6j",
   secondary: "icon-button__secondary__-jfOG",

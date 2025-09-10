@@ -25,7 +25,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { Y as _$$Y, M as _$$M } from "../905/830372";
 import { hideModal } from "../905/156213";
 import { eS, aD } from "../figma_app/646357";
-import { PW, Wv } from "../figma_app/633080";
+import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { d as _$$d } from "../figma_app/550089";
@@ -96,13 +96,13 @@ function W(e) {
     updateComponent
   } = se(b, void 0, AX.REVIEW_INSTANCE_UPDATES_MODAL_UPDATE_ALL);
   let E = useCallback(() => {
-    currentAsset.type === PW.STATE_GROUP ? updateStateGroup(currentAsset) : updateComponent(currentAsset);
+    currentAsset.type === PrimaryWorkflowEnum.STATE_GROUP ? updateStateGroup(currentAsset) : updateComponent(currentAsset);
   }, [currentAsset, updateComponent, updateStateGroup]);
   let {
     updateIndividualInstances
   } = TM(b, AX.REVIEW_INSTANCE_UPDATES_MODAL_UPDATE_INSTANCE);
   let S = useCallback(() => {
-    currentInstanceInfo && (currentInstanceInfo.type === PW.COMPONENT ? updateIndividualInstances({
+    currentInstanceInfo && (currentInstanceInfo.type === PrimaryWorkflowEnum.COMPONENT ? updateIndividualInstances({
       [currentInstanceInfo.assetKey]: {
         updateAsset: currentAsset,
         instanceIdsToUpdate: [currentInstanceInfo.instanceId]
@@ -150,10 +150,10 @@ function W(e) {
             children: renderI18nText("design_systems.libraries_modal.next_component")
           })]
         }),
-        assetType: PW.COMPONENT
+        assetType: PrimaryWorkflowEnum.COMPONENT
       }),
       isUpdated: isUpdatedInstance,
-      type: PW.COMPONENT
+      type: PrimaryWorkflowEnum.COMPONENT
     })]
   });
 }
@@ -184,7 +184,7 @@ function K(e) {
   return jsxs(Fragment, {
     children: [jsx(q, {
       assetName: styleUpdateInfo.updateAsset.name,
-      assetType: PW.STYLE,
+      assetType: PrimaryWorkflowEnum.STYLE,
       backButtonRef,
       updatesModalScope
     }), jsx(Q, {
@@ -192,7 +192,7 @@ function K(e) {
       afterImage,
       footer: p,
       isUpdated: isUpdatedStyleVersion || isUpdatedStyle,
-      type: PW.STYLE
+      type: PrimaryWorkflowEnum.STYLE
     })]
   });
 }
@@ -261,7 +261,7 @@ function q({
   updatesModalScope: s
 }) {
   let o = useDispatch();
-  let d = t === PW.COMPONENT || t === PW.STATE_GROUP;
+  let d = t === PrimaryWorkflowEnum.COMPONENT || t === PrimaryWorkflowEnum.STATE_GROUP;
   return jsxs("div", {
     className: "review_updates_modal--headerContainer--jSwdB",
     children: [jsx("div", {
@@ -269,7 +269,7 @@ function q({
       children: jsx(_$$K, {
         "aria-label": getI18nString("design_systems.updates.back_to_all_updates"),
         onClick: () => {
-          o(UX(Wv.UPDATES, s));
+          o(UX(LibraryTabEnum.UPDATES, s));
         },
         ref: i,
         children: jsx(_$$C, {})
@@ -319,7 +319,7 @@ function $({
   return jsx(Z, {
     navigationProps: i,
     buttons: d,
-    assetType: PW.STYLE
+    assetType: PrimaryWorkflowEnum.STYLE
   });
 }
 function Z({
@@ -335,7 +335,7 @@ function Z({
     numCurrentAssetInstances
   } = e;
   let u = gU(previousHandler ?? void 0, nextHandler ?? void 0);
-  let p = i === PW.COMPONENT || i === PW.STATE_GROUP;
+  let p = i === PrimaryWorkflowEnum.COMPONENT || i === PrimaryWorkflowEnum.STATE_GROUP;
   return jsx(vL, {
     handleKeyDown: u,
     name: "review-updates-modal",
@@ -499,7 +499,7 @@ let J = memo(function (e) {
       o(!0);
       return;
     }
-    t.type === PW.COMPONENT && t.component_key ? Mz([t]).then(() => o(!0)) : t.type === PW.STATE_GROUP && t.key ? a7([t]).then(() => o(!0)) : (reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Update asset does not have a key")), o(!0));
+    t.type === PrimaryWorkflowEnum.COMPONENT && t.component_key ? Mz([t]).then(() => o(!0)) : t.type === PrimaryWorkflowEnum.STATE_GROUP && t.key ? a7([t]).then(() => o(!0)) : (reportError(_$$e.DESIGN_SYSTEMS_EDITOR, Error("Update asset does not have a key")), o(!0));
   });
   let l = useRef(null);
   return jsx(_$$d, {

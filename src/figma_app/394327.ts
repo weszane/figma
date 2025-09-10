@@ -1,8 +1,8 @@
 import { assertNotNullish } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { VariableResolvedDataType, VariableDataType, PlatformType, ComponentPropType, OperationType } from "../figma_app/763686";
-import { dI } from "../905/805904";
-import { YU } from "../figma_app/191804";
+import { convertKiwiToVariableIdString } from "../905/805904";
+import { colorToRgbaString } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
 import { normalizeValue } from "../905/216495";
@@ -39,9 +39,9 @@ export function $$p12(e, t) {
     case "COLOR":
       assertNotNullish(e.value.colorValue);
       assertNotNullish(t.value.colorValue);
-      return YU(e.value.colorValue) === YU(t.value.colorValue);
+      return colorToRgbaString(e.value.colorValue) === colorToRgbaString(t.value.colorValue);
     default:
-      return c2(e, t);
+      return deepEqual(e, t);
   }
 }
 export function $$_10(e) {
@@ -169,7 +169,7 @@ export const Ip = $$b3;
 export const MH = function e(t) {
   let r = normalizeValue(t);
   if (r) {
-    if ("dataType" in r && "ALIAS" === r.dataType && r.value?.alias) return dI(r.value?.alias);
+    if ("dataType" in r && "ALIAS" === r.dataType && r.value?.alias) return convertKiwiToVariableIdString(r.value?.alias);
     if ("type" in r) {
       if (r.type === VariableDataType.ALIAS) return r.value;
       if (r.type === VariableDataType.FONT_STYLE) return e(r.value.asFloat ?? r.value.asString ?? null);

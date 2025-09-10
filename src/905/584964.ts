@@ -1,6 +1,6 @@
-import { formatList } from "../figma_app/930338";
-import { compareProductAccessOrder } from "../figma_app/765689";
-import { VG, sC } from "../905/389382";
+import { formatList } from "src/figma_app/930338";
+import { compareProductAccessOrder } from "src/figma_app/765689";
+import { VG, sC } from "src/905/389382";
 export function $$s1(e, t) {
   return t?.hideBeta ? VG(e) : sC(e);
 }

@@ -1,19 +1,19 @@
 import { U } from "../905/807535";
-import { QR } from "../figma_app/273493";
+import { packRgb } from "../figma_app/273493";
 import { Axis, InteractionCpp, LayoutDirection, HideMode } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 var $$l4 = (e => (e[e.NONE = 0] = "NONE", e[e.REORDER = 1] = "REORDER", e[e.ADD = 2] = "ADD", e[e.APPEND = 3] = "APPEND", e[e.RESIZE = 4] = "RESIZE", e))($$l4 || {});
 var $$d0 = (e => (e[e.INACTIVE = 0] = "INACTIVE", e[e.HOVERED = 1] = "HOVERED", e[e.SELECTED = 2] = "SELECTED", e[e.DRAGGED = 3] = "DRAGGED", e))($$d0 || {});
 export function $$c2(e, t, i, n, o) {
-  for (let l of (e.fillRoundedRect(t.expand($$m1.borderStrokeWidth), $$m1.reorderHandleHoveredCornerRadius + 2, QR(1, 1, 1)), e.fillRoundedRect(t, $$m1.reorderHandleHoveredCornerRadius, i), $$m1.equalIconOffsets)) {
+  for (let l of (e.fillRoundedRect(t.expand($$m1.borderStrokeWidth), $$m1.reorderHandleHoveredCornerRadius + 2, packRgb(1, 1, 1)), e.fillRoundedRect(t, $$m1.reorderHandleHoveredCornerRadius, i), $$m1.equalIconOffsets)) {
     let i = new _$$r(l, $$m1.equalIconSize);
     i = o === Axis.X ? i : i.transpose();
     e.fillRoundedRect(i.offsetBy(t.topLeft()), $$m1.equalIconCornerRadius, n);
   }
 }
 export function $$u3(e, t, i) {
-  e.fillRoundedRect(t.expand($$m1.borderStrokeWidth), $$m1.reorderHandleInactiveCornerRadius + 1, QR(1, 1, 1));
+  e.fillRoundedRect(t.expand($$m1.borderStrokeWidth), $$m1.reorderHandleInactiveCornerRadius + 1, packRgb(1, 1, 1));
   e.fillRoundedRect(t, $$m1.reorderHandleInactiveCornerRadius, i);
 }
 let p = class e {
@@ -30,7 +30,7 @@ let p = class e {
     this._hoverColorPrimary = InteractionCpp.getTableNodeColorHoveredPrimary();
     this._hoverColorSecondary = InteractionCpp.getTableNodeColorHoveredSecondary();
     this._selectedColor = InteractionCpp.getTableNodeColorSelected();
-    this._whiteColor = QR(1, 1, 1);
+    this._whiteColor = packRgb(1, 1, 1);
     this.numColumns = i.length;
     this.numRows = n.length;
     this._tableUiHorizontalAxis = this._bounds.origin.y - e.padding - e.reorderHandleInactiveSize.y / 2;
@@ -67,7 +67,7 @@ let p = class e {
       case 2:
         return this._selectedColor;
       default:
-        return QR(1, 0, 0);
+        return packRgb(1, 0, 0);
     }
   }
   _getForegroundColor(e) {
@@ -79,7 +79,7 @@ let p = class e {
       case 2:
         return this._whiteColor;
       default:
-        return QR(1, 0, 0);
+        return packRgb(1, 0, 0);
     }
   }
   _getAppendColumnBounds() {
@@ -332,11 +332,11 @@ let p = class e {
   renderHitTestBoundsForDebugging(e) {
     for (let t = 0; t < Math.max(this.numRows, this.numColumns); ++t) for (let i of [LayoutDirection.ROW, LayoutDirection.COLUMN]) if (t < (i === LayoutDirection.ROW ? this.numRows : this.numColumns)) {
       let n = this.getReorderHandleHitTestBounds(i, t);
-      n && e.fillRoundedRect(n, 0, QR(0, 1, 0));
+      n && e.fillRoundedRect(n, 0, packRgb(0, 1, 0));
     }
     if (this.shouldRenderAddButton()) {
-      for (let t of this._addColumnButtonHitTestBounds.slice(1)) e.fillRoundedRect(t, 0, QR(1, 0, 0));
-      for (let t of this._addRowButtonHitTestBounds.slice(1)) e.fillRoundedRect(t, 0, QR(1, 0, 0));
+      for (let t of this._addColumnButtonHitTestBounds.slice(1)) e.fillRoundedRect(t, 0, packRgb(1, 0, 0));
+      for (let t of this._addRowButtonHitTestBounds.slice(1)) e.fillRoundedRect(t, 0, packRgb(1, 0, 0));
     }
   }
   renderExpandedReorderHandle(e, t, i, n) {

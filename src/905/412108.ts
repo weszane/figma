@@ -1,6 +1,6 @@
-import { z, kY } from "../905/239603";
+import { z, kY } from "src/905/239603";
 import r from "lodash-es/snakeCase";
-import { getFalseValue } from "../figma_app/897289";
+import { getFalseValue } from "src/figma_app/897289";
 var a = r;
 let o = e => {
   if (e instanceof z.ZodLazy) return o(e.schema);

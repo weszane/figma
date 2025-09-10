@@ -10,7 +10,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { UL, iB, O$ } from "../figma_app/361035";
 import { Tj, gS, gu } from "../figma_app/441925";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { Dj } from "../figma_app/297957";
 import { fu } from "../figma_app/831799";
 import { Ju } from "../905/712921";
@@ -135,7 +135,7 @@ function O({
   tier: r
 }) {
   let i = useDispatch();
-  let l = _$$u();
+  let l = getRumLoggingConfig();
   return jsx($z, {
     "aria-label": getI18nString("checkout.additional_seats.add_seats_to_assign_later"),
     htmlAttributes: {
@@ -158,7 +158,7 @@ function O({
   });
 }
 let H = registerModal(function (e) {
-  let t = _$$u();
+  let t = getRumLoggingConfig();
   let {
     user,
     seatTypes,
@@ -323,7 +323,7 @@ export function $$q0({
   tier: S
 }) {
   let T = useRef(null);
-  let N = _$$u();
+  let N = getRumLoggingConfig();
   let b = function ({
     tableContainerRef: e
   }) {

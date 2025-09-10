@@ -10,7 +10,7 @@ import { M } from "../469e6e40/302359";
 import { Ku } from "../figma_app/740163";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { w$ } from "../figma_app/646357";
-import { AT } from "../figma_app/633080";
+import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { Af, Gz, DP } from "../figma_app/803932";
 import { VZ } from "../figma_app/727192";
 import { q } from "../905/296913";
@@ -73,7 +73,7 @@ function b({
   } = e;
   w$(dsStyle);
   let i = dsStyle.value;
-  dsStyle.kind === AT.SUBSCRIBED_WITHOUT_LIBRARY && (i.style_type = "FILL", i.node_id = dsStyle.value.node_id);
+  dsStyle.kind === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY && (i.style_type = "FILL", i.node_id = dsStyle.value.node_id);
   let o = Ku();
   return jsx(Gz, {
     color: e,

@@ -1,4 +1,4 @@
-import { NC } from "../905/17179";
+import { NC } from "src/905/17179";
 let $$r8 = NC("SET_COMMUNITY_AUTHED_ACTIVE_PROFILE");
 let $$a10 = NC("SET_SESSION_STATE");
 let $$s5 = NC("FILE_BROWSER_HYDRATE");

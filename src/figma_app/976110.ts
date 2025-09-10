@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { arraysEqual } from "../figma_app/656233";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { SceneGraphHelpers } from "../figma_app/763686";
 import { sessionLocalIDToString, defaultSessionLocalIDString, parseSessionLocalID, areSessionLocalIDsEqual } from "../905/871411";
 import { trackEventAnalytics } from "../905/449184";
@@ -428,7 +428,7 @@ function S(e, t, r, n) {
           let r = e && 1 === e.length ? n.get(e[0]) : null;
           let i = t && 1 === t.length ? n.get(t[0]) : null;
           if (r && i && r.isState && i.isState && r.containingStateGroupId === i.containingStateGroupId) return SceneGraphHelpers.getExplicitPropDefIDBinding(r.guid, d.nodeFieldAlias.indexOrKey) === SceneGraphHelpers.getExplicitPropDefIDBinding(i.guid, c.nodeFieldAlias.indexOrKey);
-          return c2(d.nodeFieldAlias, c.nodeFieldAlias);
+          return deepEqual(d.nodeFieldAlias, c.nodeFieldAlias);
         }
       }
       return !1;
@@ -453,7 +453,7 @@ function S(e, t, r, n) {
       let y = e[r];
       let b = t[r];
       if (!isValidValue(b)) return !1;
-      if (!(y && b && 2 === y.length && 2 === b.length && y[0]?.condition && b[0]?.condition && y[0]?.actions && b[0]?.actions && y[1]?.actions && b[1]?.actions)) return c2(e[r], t[r]);
+      if (!(y && b && 2 === y.length && 2 === b.length && y[0]?.condition && b[0]?.condition && y[0]?.actions && b[0]?.actions && y[1]?.actions && b[1]?.actions)) return deepEqual(e[r], t[r]);
       {
         let e = j(y[0].condition, b[0].condition, n);
         let t = (e, t) => {

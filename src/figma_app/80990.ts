@@ -1,556 +1,851 @@
-import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { Thumbnail, LibraryPubSub, SceneIdentifier, Confirmation } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { Hc } from "../905/805904";
-import { Hc as _$$Hc, sH, dI } from "../905/537777";
-import { LRUCache } from "../905/196201";
-import { memoizeByArgs } from "../figma_app/815945";
-import { trackEventAnalytics } from "../905/449184";
-import { H0, X9 } from "../figma_app/191804";
-import { w } from "../905/5147";
-import { logWarning } from "../905/714362";
-import { XHR, getRequest } from "../905/910117";
-import { ke } from "../905/309735";
-import { lQ, Kb, No } from "../905/405710";
-import { E8, PW, Do } from "../figma_app/633080";
-import { n as _$$n } from "../905/347702";
-import { P as _$$P, n as _$$n2 } from "../905/815475";
-let b = Object.create(null);
-export function $$T21(e) {
-  return $$O0(lQ(e));
+import type { Color } from '../905/types'
+import { kiwiCodec } from '../905/5147'
+import { permissionScopeHandler } from '../905/189185'
+import { LRUCache } from '../905/196201'
+
+import { splitPath } from '../905/309735'
+import { createStyleThumbnail, generateThumbnail, isStyleType } from '../905/405710'
+import { trackEventAnalytics } from '../905/449184'
+import { convertKiwiToString, convertRefToString, convertStringToKiwi } from '../905/537777'
+import { logWarning } from '../905/714362'
+import { createVariableIdStringFromRef } from '../905/805904'
+import { generateFileVersionUrl, loadCanvasData } from '../905/815475'
+import { getRequest, XHR } from '../905/910117'
+import { parseColor, setAlpha } from '../figma_app/191804'
+import { hasAssetId, PrimaryWorkflowEnum, StagingStatusEnum } from '../figma_app/633080'
+import { sortByPropertyWithOptions } from '../figma_app/656233'
+import { Confirmation, LibraryPubSub, SceneIdentifier, Thumbnail } from '../figma_app/763686'
+import { memoizeByArgs } from '../figma_app/815945'
+
+let thumbnailBlobCache = Object.create(null)
+
+/**
+ * Generate thumbnail for a node
+ * @param node - The node to generate thumbnail for
+ * @returns Thumbnail URL or null
+ */
+export function generateNodeThumbnail(node: any) {
+  return createObjectUrlFromBuffer(generateThumbnail(node))
 }
-let $$I22 = "FAILED_THUMBNAIL";
-let $$S23 = "LOADING_THUMBNAIL";
-export function $$v7(e) {
-  return !(!e || e === $$I22 || e === $$S23 || e.startsWith("blob:") && !b[e]);
+
+let FAILED_THUMBNAIL = 'FAILED_THUMBNAIL'
+let LOADING_THUMBNAIL = 'LOADING_THUMBNAIL'
+
+/**
+ * Check if thumbnail is valid
+ * @param thumbnail - The thumbnail to validate
+ * @returns True if valid, false otherwise
+ */
+export function isValidThumbnail(thumbnail: string | null) {
+  return !(!thumbnail || thumbnail === FAILED_THUMBNAIL || thumbnail === LOADING_THUMBNAIL || thumbnail.startsWith('blob:') && !thumbnailBlobCache[thumbnail])
 }
-export function $$A14(e, t) {
-  let [r, n] = Thumbnail.generateThumbnailFromStyleMaster(e, t, 18, 18, 2);
-  return r && r.status === $$S23 ? $$S23 : $$O0(n) || (console.error(`failed to generate thumbnail for node ${e}`), $$I22);
-}
-export function $$x15(e, t) {
-  let [r, n] = Thumbnail.generateThumbnailFromStyleConsumer(e, t, 18, 18);
-  return $$O0(n) || (console.error(`failed to generate thumbnail for node ${e}`), $$I22);
-}
-export function $$N19(e, t, r) {
-  if (!Kb(e)) return {
-    type: "INVALID"
-  };
-  let n = Thumbnail.generateSerializableThumbnailForStyle(t || "", e, r || "");
-  let a = n.length > 0 ? w.decodeMessage(n) : null;
-  let s = a && a.nodeChanges && a.nodeChanges[0] || null;
-  return s ? No(s, e) : (console.error(`failed to generate serializable thumbnail for node ${t}`), {
-    type: "INVALID"
-  });
-}
-export function $$C12(e) {
-  return !!$$w5(e);
-}
-export function $$w5(e) {
-  if ("FILL" !== e.type) return null;
-  let t = e.fillPaints;
-  if (!t || 1 !== t.length) return null;
-  let r = t[0];
-  return "SOLID" !== r.type || null == r.color || null == r.opacity ? null : {
-    ...r.color,
-    a: r.opacity
-  };
-}
-export function $$O0(e) {
-  if (e.length > 0) {
-    let t = URL.createObjectURL(new Blob([e]));
-    b[t] = e;
-    return t;
+
+/**
+ * Generate thumbnail from style master
+ * @param node - The node to generate thumbnail for
+ * @param style - The style to use
+ * @returns Thumbnail URL or status
+ */
+export function generateThumbnailFromStyleMaster(node: any, style: any) {
+  let [result, buffer] = Thumbnail.generateThumbnailFromStyleMaster(node, style, 18, 18, 2)
+  if (result && result.status === LOADING_THUMBNAIL) {
+    return LOADING_THUMBNAIL
   }
-  return null;
+  const url = createObjectUrlFromBuffer(buffer)
+  if (url) {
+    return url
+  }
+  else {
+    console.error(`failed to generate thumbnail for node ${node}`)
+    return FAILED_THUMBNAIL
+  }
 }
-export function $$R13(e) {
-  let t = b[e];
-  if (!t) throw Error(`No buffer in cache for thumbnail url ${e}`);
-  return t;
+
+/**
+ * Generate thumbnail from style consumer
+ * @param node - The node to generate thumbnail for
+ * @param style - The style to use
+ * @returns Thumbnail URL or status
+ */
+export function generateThumbnailFromStyleConsumer(node: any, style: any) {
+  let [, buffer] = Thumbnail.generateThumbnailFromStyleConsumer(node, style, 18, 18)
+  const url = createObjectUrlFromBuffer(buffer)
+  if (url) {
+    return url
+  }
+  else {
+    console.error(`failed to generate thumbnail for node ${node}`)
+    return FAILED_THUMBNAIL
+  }
 }
-export function $$L20(e) {
-  b[e] && (URL.revokeObjectURL(e), delete b[e]);
+
+/**
+ * Generate serializable thumbnail for style
+ * @param node - The node to generate thumbnail for
+ * @param styleType - The style type
+ * @param styleId - The style ID
+ * @returns Style thumbnail or invalid object
+ */
+export function generateSerializableStyleThumbnail(node: any, styleType: any, styleId: string) {
+  if (!isStyleType(styleType)) {
+    return {
+      type: 'INVALID',
+    }
+  }
+  let serializableThumbnail = Thumbnail.generateSerializableThumbnailForStyle(styleId || '', styleType, node || '')
+  let decodedMessage = serializableThumbnail.length > 0 ? kiwiCodec.decodeMessage(serializableThumbnail) : null
+  let nodeChange = decodedMessage && decodedMessage.nodeChanges && decodedMessage.nodeChanges[0] || null
+  if (nodeChange) {
+    return createStyleThumbnail(nodeChange, styleType)
+  }
+  else {
+    console.error(`failed to generate serializable thumbnail for node ${styleId}`)
+    return {
+      type: 'INVALID',
+    }
+  }
 }
-let P = null;
+
+/**
+ * Check if fill color is valid
+ * @param fill - The fill to check
+ * @returns True if valid, false otherwise
+ */
+export function hasValidFillColor(fill: any) {
+  return !!getFillColor(fill)
+}
+
+/**
+ * Get fill color from fill object
+ * @param fill - The fill object
+ * @returns Color object or null
+ */
+export function getFillColor(fill: any) {
+  if (fill.type !== 'FILL')
+    return null
+  let fillPaints = fill.fillPaints
+  if (!fillPaints || fillPaints.length !== 1)
+    return null
+  let paint = fillPaints[0]
+  return paint.type !== 'SOLID' || paint.color == null || paint.opacity == null
+    ? null
+    : {
+      ...paint.color,
+      a: paint.opacity,
+    }
+}
+
+/**
+ * Create object URL from buffer
+ * @param buffer - The buffer to create URL from
+ * @returns Object URL or null
+ */
+export function createObjectUrlFromBuffer(buffer: Uint8Array<any>) {
+  if (buffer.length > 0) {
+    let url = URL.createObjectURL(new Blob([buffer]))
+    thumbnailBlobCache[url] = buffer
+    return url
+  }
+  return null
+}
+
+/**
+ * Get buffer from thumbnail URL
+ * @param thumbnailUrl - The thumbnail URL
+ * @returns Buffer data
+ */
+export function getBufferFromThumbnailUrl(thumbnailUrl: string) {
+  let buffer = thumbnailBlobCache[thumbnailUrl]
+  if (!buffer)
+    throw new Error(`No buffer in cache for thumbnail url ${thumbnailUrl}`)
+  return buffer
+}
+
+/**
+ * Revoke thumbnail URL
+ * @param thumbnailUrl - The thumbnail URL to revoke
+ */
+export function revokeThumbnailUrl(thumbnailUrl: string) {
+  if (thumbnailBlobCache[thumbnailUrl]) {
+    URL.revokeObjectURL(thumbnailUrl)
+    delete thumbnailBlobCache[thumbnailUrl]
+  }
+}
+
+let defaultPlaceholderThumbnail = null;
+
 (() => {
-  if (!document) return;
-  let e = document.createElement("canvas");
-  e.width = 1;
-  e.height = 1;
-  e.toBlob && e.toBlob(e => {
-    if (!e) return;
-    let t = new FileReader();
-    t.onload = () => {
-      P = $$O0(new Uint8Array(t.result));
-    };
-    t.readAsArrayBuffer(e);
-  }, "image/png");
-})();
-export let $$D18 = () => P;
-export function $$k8(e) {
-  let t = e => {
-    let t = e.toFixed(1);
-    return "0" === t.slice(-1) ? e.toFixed(0) : t;
-  };
-  if (!(e.metrics && e.metrics.fontSize && e.metrics.lineHeight)) return "";
-  let r = " \xb7 " + t(e.metrics.fontSize);
-  let n = e.metrics.lineHeight;
-  return "PERCENT" === n.units && 100 === n.value ? r + "/Auto" : "RAW" === n.units ? r + "/" + t(100 * n.value) : r + "/" + t(n.value);
-}
-export function $$M25(e) {
-  let t = Object.keys(e).map(t => e[t]).filter(e => !e.unpublished_at);
-  sortByPropertyWithOptions(t, "name");
-  return t;
-}
-let $$F11 = _$$n(e => e === E8.CURRENT || e === E8.CHANGED || e === E8.DELETED);
-let $$j16 = memoizeByArgs(e => {
-  let t = {};
-  Object.keys(e).forEach(r => {
-    t[r] = $$U4(e[r] ?? {});
-  });
-  return t;
-});
-export function $$U4(e) {
-  let t = {};
-  for (let r in e) {
-    let n = e[r];
-    n.containing_frame?.containingStateGroup == null && (t[r] = {
-      ...n
-    });
+  if (!document)
+    return
+  let canvas = document.createElement('canvas')
+  canvas.width = 1
+  canvas.height = 1
+  canvas.toBlob && canvas.toBlob((blob) => {
+    if (!blob)
+      return
+    let reader = new FileReader()
+    reader.onload = () => {
+      defaultPlaceholderThumbnail = createObjectUrlFromBuffer(new Uint8Array(reader.result as ArrayBuffer))
+    }
+    reader.readAsArrayBuffer(blob)
+  }, 'image/png')
+})()
+
+/**
+ * Get default placeholder thumbnail
+ * @returns Default placeholder thumbnail
+ */
+export let getDefaultPlaceholderThumbnail = () => defaultPlaceholderThumbnail
+
+/**
+ * Format font metrics
+ * @param textNode - The text node with metrics
+ * @returns Formatted metrics string
+ */
+export function formatFontMetrics(textNode: any) {
+  let formatNumber = (num: number) => {
+    let formatted = num.toFixed(1)
+    return formatted.slice(-1) === '0' ? num.toFixed(0) : formatted
   }
-  return t;
+  if (!(textNode.metrics && textNode.metrics.fontSize && textNode.metrics.lineHeight))
+    return ''
+  let fontSizePart = ` \xB7 ${formatNumber(textNode.metrics.fontSize)}`
+  let lineHeight = textNode.metrics.lineHeight
+  return lineHeight.units === 'PERCENT' && lineHeight.value === 100 ? `${fontSizePart}/Auto` : lineHeight.units === 'RAW' ? `${fontSizePart}/${formatNumber(100 * lineHeight.value)}` : `${fontSizePart}/${formatNumber(lineHeight.value)}`
 }
-export let $$B9 = memoizeByArgs(e => {
-  let t = $$U4(e.local.components);
-  for (let r in e.local.stateGroups) t[r] = e.local.stateGroups[r];
-  return t;
-});
-export function $$G3(e) {
-  return ke(e).join("/");
+
+/**
+ * Filter and sort published items
+ * @param items - The items to filter and sort
+ * @returns Filtered and sorted items
+ */
+export function filterAndSortPublishedItems(items: any) {
+  let publishedItems = Object.keys(items).map(key => items[key]).filter(item => !item.unpublished_at)
+  sortByPropertyWithOptions(publishedItems, 'name')
+  return publishedItems
 }
-export function $$V10(e, t) {
-  let r = t.some(t => t.containing_frame?.pageId === e.containing_frame?.pageId && t.containing_frame?.nodeId !== e.containing_frame?.nodeId);
-  let n = [];
-  r && e.containing_frame?.name?.trim().length && n.push(e.containing_frame.name);
-  let i = ke(e.name).map(e => e.trim()).filter(e => "" !== e);
-  i.pop();
-  n.push(...i);
-  return n;
-}
-export function $$H6(e, t) {
-  let r = $$V10(e, t);
-  t.some(t => t.containing_frame?.pageName?.trim() !== e.containing_frame?.pageName?.trim()) && e.containing_frame?.pageName?.trim().length && r.unshift(e.containing_frame?.pageName?.trim());
-  return r;
-}
-async function z(e, t) {
-  return await $(e, t, PW.COMPONENT);
-}
-async function W(e, t) {
-  return await $(e, t, PW.STATE_GROUP);
-}
-async function K(e, t) {
-  return await $(e, t, PW.VARIABLE);
-}
-async function Y(e, t) {
-  return await $(e, t, PW.VARIABLE_SET);
-}
-async function $(e, t, r) {
-  let n = "";
-  let i = "";
-  switch (r) {
-    case PW.VARIABLE:
-      n = "/api/variable_log_data";
-      i = "variables";
-      break;
-    case PW.VARIABLE_SET:
-      n = "/api/variable_set_log_data";
-      i = "variable_sets";
-      break;
-    case PW.STATE_GROUP:
-      n = "/api/state_group_log_data";
-      i = "state_groups";
-      break;
-    case PW.COMPONENT:
-      n = "/api/component_log_data";
-      i = "components";
+
+let isCurrentStagingStatus = (status: StagingStatusEnum) => status === StagingStatusEnum.CURRENT || status === StagingStatusEnum.CHANGED || status === StagingStatusEnum.DELETED
+
+let memoizedProcessLocalComponents = memoizeByArgs((components: any) => {
+  let processedComponents: any = {}
+  Object.keys(components).forEach((key) => {
+    processedComponents[key] = processLocalComponents(components[key] ?? {})
+  })
+  return processedComponents
+})
+
+/**
+ * Process local components
+ * @param components - The components to process
+ * @returns Processed components
+ */
+export function processLocalComponents(components: any) {
+  let processedComponents: any = {}
+  for (let key in components) {
+    let component = components[key]
+    component.containing_frame?.containingStateGroup == null && (processedComponents[key] = {
+      ...component,
+    })
   }
-  let a = [];
-  let s = (await XHR.post(n, {
-    [i]: e,
-    fv: t.toString()
-  })).data.meta[i];
-  if (s.length < e.length) for (let t of e) (r === PW.COMPONENT ? s.find(e => e.component_key === t.key && e.content_hash === t.version) : s.find(e => e.key === t.key && e.version === t.version)) || console.error(`Asset data for ${r} key ${t.key} version ${t.version} is missing. Does the user have proper access to the asset?`);
-  for (let e of s) r !== PW.VARIABLE_OVERRIDE && r !== PW.CODE_LIBRARY && r !== PW.CODE_FILE && r !== PW.CODE_COMPONENT && r !== PW.MANAGED_STRING && (e.type = r, e.canvas_url && 0 !== e.canvas_url.length ? a.push(e) : e.type === PW.COMPONENT ? console.error(`Canvas URL missing from ${r} ${e.component_key} version ${e.content_hash}.`) : console.error(`Canvas URL missing from ${r} ${e.key} version ${e.version}.`));
-  return a;
+  return processedComponents
 }
-function X(e) {
-  let t = e && e.status;
-  return Number.isInteger(t) && t >= 0 ? t : -1;
+
+/**
+ * Memoized process components and state groups
+ */
+export let memoizedProcessComponentsAndStateGroups = memoizeByArgs((data: any) => {
+  let processedComponents = processLocalComponents(data.local.components)
+  for (let key in data.local.stateGroups) processedComponents[key] = data.local.stateGroups[key]
+  return processedComponents
+})
+
+/**
+ * Split and join path
+ * @param path - The path to process
+ * @returns Joined path
+ */
+export function splitAndJoinPath(path: string) {
+  return splitPath(path).join('/')
 }
-function q(e) {
-  let t = X(e);
-  return t >= 400 && t < 500;
+
+/**
+ * Get component breadcrumbs
+ * @param component - The component
+ * @param allComponents - All components
+ * @returns Breadcrumb array
+ */
+export function getComponentBreadcrumbs(component: any, allComponents: any[]) {
+  let hasSamePageDifferentFrame = allComponents.some(other => other.containing_frame?.pageId === component.containing_frame?.pageId && other.containing_frame?.nodeId !== component.containing_frame?.nodeId)
+  let breadcrumbs: string[] = []
+  hasSamePageDifferentFrame && component.containing_frame?.name?.trim().length && breadcrumbs.push(component.containing_frame.name)
+  let pathParts = splitPath(component.name).map(part => part.trim()).filter(part => part !== '')
+  pathParts.pop()
+  breadcrumbs.push(...pathParts)
+  return breadcrumbs
 }
-let J = e => {
-  let t = function (e, t) {
-    let r = e && e.data && e.data.message;
-    return "string" == typeof r && r.length > 0 ? r : t;
-  }(e, "please try again later");
-  let r = X(e);
-  r > 0 ? t += ` (status ${e.data.status})` : 0 === r && (t += " (must be online)");
-  return t;
-};
-function Z(e) {
-  switch (e.type) {
-    case PW.COMPONENT:
-      return `component/${e.component_key}/${e.content_hash}`;
-    case PW.STATE_GROUP:
-      return `state_groups/${e.key}/${e.version}`;
-    case PW.VARIABLE:
-    case PW.VARIABLE_SET:
-      return `variable_set/${e.key}/${e.version}`;
+
+/**
+ * Get full component breadcrumbs
+ * @param component - The component
+ * @param allComponents - All components
+ * @returns Full breadcrumb array
+ */
+export function getFullComponentBreadcrumbs(component: any, allComponents: any[]) {
+  let breadcrumbs = getComponentBreadcrumbs(component, allComponents)
+  allComponents.some(other => other.containing_frame?.pageName?.trim() !== component.containing_frame?.pageName?.trim()) && component.containing_frame?.pageName?.trim().length && breadcrumbs.unshift(component.containing_frame?.pageName?.trim())
+  return breadcrumbs
+}
+
+async function fetchComponentLogData(components: any[], fileVersion: number) {
+  return await fetchLogData(components, fileVersion, PrimaryWorkflowEnum.COMPONENT)
+}
+
+async function fetchStateGroupLogData(stateGroups: any[], fileVersion: number) {
+  return await fetchLogData(stateGroups, fileVersion, PrimaryWorkflowEnum.STATE_GROUP)
+}
+
+async function fetchVariableLogData(variables: any[], fileVersion: number) {
+  return await fetchLogData(variables, fileVersion, PrimaryWorkflowEnum.VARIABLE)
+}
+
+async function fetchVariableSetLogData(variableSets: any[], fileVersion: number) {
+  return await fetchLogData(variableSets, fileVersion, PrimaryWorkflowEnum.VARIABLE_SET)
+}
+
+async function fetchLogData(items: any[], fileVersion: number, workflowType: PrimaryWorkflowEnum) {
+  let endpoint = ''
+  let itemType = ''
+  switch (workflowType) {
+    case PrimaryWorkflowEnum.VARIABLE:
+      endpoint = '/api/variable_log_data'
+      itemType = 'variables'
+      break
+    case PrimaryWorkflowEnum.VARIABLE_SET:
+      endpoint = '/api/variable_set_log_data'
+      itemType = 'variable_sets'
+      break
+    case PrimaryWorkflowEnum.STATE_GROUP:
+      endpoint = '/api/state_group_log_data'
+      itemType = 'state_groups'
+      break
+    case PrimaryWorkflowEnum.COMPONENT:
+      endpoint = '/api/component_log_data'
+      itemType = 'components'
+  }
+  let validItems: any[] = []
+  let responseItems = (await XHR.post(endpoint, {
+    [itemType]: items,
+    fv: fileVersion.toString(),
+  })).data.meta[itemType]
+  if (responseItems.length < items.length) {
+    for (let item of items) {
+      const foundItem = workflowType === PrimaryWorkflowEnum.COMPONENT
+        ? responseItems.find((resItem: any) => resItem.component_key === item.key && resItem.content_hash === item.version)
+        : responseItems.find((resItem: any) => resItem.key === item.key && resItem.version === item.version)
+
+      if (!foundItem) {
+        console.error(`Asset data for ${workflowType} key ${item.key} version ${item.version} is missing. Does the user have proper access to the asset?`)
+      }
+    }
+  }
+
+  for (let item of responseItems) {
+    if (workflowType !== PrimaryWorkflowEnum.VARIABLE_OVERRIDE
+      && workflowType !== PrimaryWorkflowEnum.CODE_LIBRARY
+      && workflowType !== PrimaryWorkflowEnum.CODE_FILE
+      && workflowType !== PrimaryWorkflowEnum.CODE_COMPONENT
+      && workflowType !== PrimaryWorkflowEnum.MANAGED_STRING) {
+      item.type = workflowType
+
+      if (item.canvas_url && item.canvas_url.length !== 0) {
+        validItems.push(item)
+      }
+      else {
+        if (item.type === PrimaryWorkflowEnum.COMPONENT) {
+          console.error(`Canvas URL missing from ${workflowType} ${item.component_key} version ${item.content_hash}.`)
+        }
+        else {
+          console.error(`Canvas URL missing from ${workflowType} ${item.key} version ${item.version}.`)
+        }
+      }
+    }
+  }
+  return validItems
+}
+
+function getResponseStatus(response: any) {
+  let status = response && response.status
+  return Number.isInteger(status) && status >= 0 ? status : -1
+}
+
+function isClientError(response: any) {
+  let status = getResponseStatus(response)
+  return status >= 400 && status < 500
+}
+
+let formatErrorMessage = (error: any) => {
+  let message = (function (err: any, defaultMessage: string) {
+    let errorMsg = err && err.data && err.data.message
+    return typeof errorMsg == 'string' && errorMsg.length > 0 ? errorMsg : defaultMessage
+  }(error, 'please try again later'))
+  let status = getResponseStatus(error)
+  status > 0 ? message += ` (status ${error.data.status})` : status === 0 && (message += ' (must be online)')
+  return message
+}
+
+function getItemPath(item: any) {
+  switch (item.type) {
+    case PrimaryWorkflowEnum.COMPONENT:
+      return `component/${item.component_key}/${item.content_hash}`
+    case PrimaryWorkflowEnum.STATE_GROUP:
+      return `state_groups/${item.key}/${item.version}`
+    case PrimaryWorkflowEnum.VARIABLE:
+    case PrimaryWorkflowEnum.VARIABLE_SET:
+      return `variable_set/${item.key}/${item.version}`
   }
 }
-var Q = (e => (e.PERMANENT_ERROR = "permanent-error", e.TRANSIENT_ERROR = "transient-error", e.UPSERT_SHARED_SYMBOL_ERROR = "shared-symbol-error", e.UPSERT_SHARED_STATE_GROUP_ERROR = "shared-state-group-error", e.UPSERT_SHARED_VARIABLE_SET_ERROR = "shared-variable-set-error", e.UPSERT_SHARED_VARIABLE_ERROR = "shared-variable-error", e.UPSERT_SHARED_MODULE_ERROR = "shared-module-error", e.UNCAUGHT_ERROR = "uncaught-error", e.SUCCESS = "success", e))(Q || {});
-async function ee(e, t, r) {
+
+async function processAssetUpsert(asset: any, fileVersion: number, scene: any) {
   try {
-    let n;
+    let buffer
     try {
-      n = await $$ei1.getCanvas({
-        canvas_url: function (e, t) {
-          switch (e.type) {
-            case PW.COMPONENT:
-              return e.canvas_url + "&fv=" + t.toString();
-            case PW.STATE_GROUP:
-              return `/state_group/${e.key}/version/${e.version}/canvas?fv=${t}`;
-            case PW.VARIABLE:
-            case PW.VARIABLE_SET:
-              return e.canvas_url;
+      // eslint-disable-next-line ts/no-use-before-define
+      buffer = await teamLibraryCache.getCanvas({
+        canvas_url: (function (assetItem: any, version: number) {
+          switch (assetItem.type) {
+            case PrimaryWorkflowEnum.COMPONENT:
+              return `${assetItem.canvas_url}&fv=${version.toString()}`
+            case PrimaryWorkflowEnum.STATE_GROUP:
+              return `/state_group/${assetItem.key}/version/${assetItem.version}/canvas?fv=${version}`
+            case PrimaryWorkflowEnum.VARIABLE:
+            case PrimaryWorkflowEnum.VARIABLE_SET:
+              return assetItem.canvas_url
           }
-        }(e, t)
-      });
-    } catch (t) {
-      if (q(t)) {
-        console.warn("Permanent error", t, "status", X(t), "for entry", Z(e));
+        }(asset, fileVersion)),
+      })
+    }
+    catch (error) {
+      if (isClientError(error)) {
+        console.warn('Permanent error', error, 'status', getResponseStatus(error), 'for entry', getItemPath(asset))
         return {
-          resultType: "permanent-error"
-        };
+          resultType: 'permanent-error',
+        }
       }
-      console.warn("Transient error", t, "status", X(t), "for entry", Z(e));
+      console.warn('Transient error', error, 'status', getResponseStatus(error), 'for entry', getItemPath(asset))
       return {
-        resultType: "transient-error",
-        transientError: t
-      };
+        resultType: 'transient-error',
+        transientError: error,
+      }
     }
     return {
-      resultType: permissionScopeHandler.system("upsert-asset-from-log", () => function (e, t, r) {
-        let n;
-        let a;
-        switch (e.type) {
-          case PW.COMPONENT:
-            n = LibraryPubSub.upsertSharedSymbol(e.component_key, e.content_hash, e.library_key, t, r, SceneIdentifier.ACTIVE_SCENE);
-            a = "shared-symbol-error";
-            break;
-          case PW.STATE_GROUP:
-            n = LibraryPubSub.upsertSharedStateGroup(e.key, e.version, e.library_key, t, r, SceneIdentifier.ACTIVE_SCENE);
-            a = "shared-state-group-error";
-            break;
-          case PW.VARIABLE:
-            n = LibraryPubSub.upsertSharedVariable(Hc(e.key, e.version), t, r);
-            a = "shared-variable-error";
-            break;
-          case PW.VARIABLE_SET:
-            n = LibraryPubSub?.upsertSharedRootVariableSet(_$$Hc(e.key, e.version), e.library_key, t, Confirmation.NO, r);
-            a = "shared-variable-set-error";
+      resultType: permissionScopeHandler.system('upsert-asset-from-log', () => (function (assetItem: any, sceneData: any, bufferData: any) {
+        let upsertResult
+        let errorType
+        switch (assetItem.type) {
+          case PrimaryWorkflowEnum.COMPONENT:
+            upsertResult = LibraryPubSub.upsertSharedSymbol(assetItem.component_key, assetItem.content_hash, assetItem.library_key, sceneData, bufferData, SceneIdentifier.ACTIVE_SCENE)
+            errorType = 'shared-symbol-error'
+            break
+          case PrimaryWorkflowEnum.STATE_GROUP:
+            upsertResult = LibraryPubSub.upsertSharedStateGroup(assetItem.key, assetItem.version, assetItem.library_key, sceneData, bufferData, SceneIdentifier.ACTIVE_SCENE)
+            errorType = 'shared-state-group-error'
+            break
+          case PrimaryWorkflowEnum.VARIABLE:
+            upsertResult = LibraryPubSub.upsertSharedVariable(createVariableIdStringFromRef(assetItem.key, assetItem.version), sceneData, bufferData)
+            errorType = 'shared-variable-error'
+            break
+          case PrimaryWorkflowEnum.VARIABLE_SET:
+            upsertResult = LibraryPubSub?.upsertSharedRootVariableSet(convertRefToString(assetItem.key, assetItem.version), assetItem.library_key, sceneData, Confirmation.NO, bufferData)
+            errorType = 'shared-variable-set-error'
         }
-        if (!n || n.fileUpdateRequired) return a;
-        if (!n.localGUID) {
-          if (e.type === PW.COMPONENT) {
-            console.error(`Couldn't upsert shared component in scene for key ${e.component_key} version ${e.content_hash}.`);
-            return a;
+        if (!upsertResult || upsertResult.fileUpdateRequired)
+          return errorType
+        if (!upsertResult.localGUID) {
+          if (assetItem.type === PrimaryWorkflowEnum.COMPONENT) {
+            console.error(`Couldn't upsert shared component in scene for key ${assetItem.component_key} version ${assetItem.content_hash}.`)
+            return errorType
           }
-          if (e.type === PW.STATE_GROUP) {
-            console.error(`Couldn't upsert shared state group in scene for key ${e.key} version ${e.version}.`);
-            return a;
+          if (assetItem.type === PrimaryWorkflowEnum.STATE_GROUP) {
+            console.error(`Couldn't upsert shared state group in scene for key ${assetItem.key} version ${assetItem.version}.`)
+            return errorType
           }
         }
-        return "success";
-      }(e, r, n)),
-      bytesAdded: n.byteLength
-    };
-  } catch (t) {
-    console.error("Uncaught error", t, "during buffer processing of", Z(e));
+        return 'success'
+      }(asset, scene, buffer))),
+      bytesAdded: buffer.byteLength,
+    }
+  }
+  catch (error) {
+    console.error('Uncaught error', error, 'during buffer processing of', getItemPath(asset))
     return {
-      resultType: "uncaught-error"
-    };
+      resultType: 'uncaught-error',
+    }
   }
 }
-export async function $$et2(e, t, r, n) {
+
+/**
+ * Fetch and process component publishing buffers
+ * @param components - Components to process
+ * @param stateGroups - State groups to process
+ * @param scene - Scene data
+ * @param fileVersion - File version
+ * @returns Promise resolving to success status
+ */
+export async function fetchAndProcessComponentPublishingBuffers(components: any[], stateGroups: any[], scene: any, fileVersion: number) {
   try {
-    let i;
-    let a = Date.now();
-    let s = 0;
-    let o = {
-      "permanent-error": 0,
-      "transient-error": 0,
-      "shared-symbol-error": 0,
-      "shared-state-group-error": 0,
-      "uncaught-error": 0,
-      success: 0,
-      "shared-variable-error": 0,
-      "shared-variable-set-error": 0,
-      "shared-module-error": 0
-    };
-    let l = -1;
-    let d = [];
-    if (e.length > 0) try {
-      d = await z(e, n);
-    } catch (e) {
-      q(e) ? o["permanent-error"]++ : (o["transient-error"]++, i = e);
-      l = X(e);
-      d = [];
+    let lastError
+    let startTime = Date.now()
+    let totalBytes = 0
+    let resultCounts = {
+      'permanent-error': 0,
+      'transient-error': 0,
+      'shared-symbol-error': 0,
+      'shared-state-group-error': 0,
+      'uncaught-error': 0,
+      'success': 0,
+      'shared-variable-error': 0,
+      'shared-variable-set-error': 0,
+      'shared-module-error': 0,
     }
-    for (let e of d) {
-      let {
-        resultType,
-        bytesAdded,
-        transientError
-      } = await ee(e, n, r);
-      o[resultType]++;
-      s += bytesAdded ?? 0;
-      transientError && (i = transientError);
-    }
-    let u = [];
-    if (t.length > 0) try {
-      u = await W(t, n);
-    } catch (e) {
-      q(e) ? o["permanent-error"]++ : (o["transient-error"]++, i = e);
-      l = X(e);
-      u = [];
-    }
-    for (let e of u) {
-      let {
-        resultType,
-        bytesAdded,
-        transientError
-      } = await ee(e, n, r);
-      o[resultType]++;
-      s += bytesAdded ?? 0;
-      transientError && (i = transientError);
-    }
-    if (trackEventAnalytics("publishing_buffer_fetch", {
-      latency: Date.now() - a,
-      num_versions_fetched: d.length + u.length,
-      num_success: o.success,
-      total_bytes: s,
-      failed_to_upsert_in_scene: o["shared-symbol-error"] + o["shared-state-group-error"],
-      permanent_errors: o["permanent-error"],
-      transient_errors: o["transient-error"],
-      uncaught_errors: o["uncaught-error"],
-      log_data_error_status: l
-    }), o["transient-error"] > 0) return Promise.reject(Error(J(i)));
-    return Promise.resolve(!0);
-  } catch (e) {
-    return Promise.reject(Error(J(e)));
-  }
-}
-export async function $$er17(e, t, r, n) {
-  try {
-    let i;
-    let a = Date.now();
-    let s = 0;
-    let o = {
-      "permanent-error": 0,
-      "transient-error": 0,
-      "shared-variable-error": 0,
-      "shared-variable-set-error": 0,
-      "uncaught-error": 0,
-      success: 0,
-      "shared-symbol-error": 0,
-      "shared-state-group-error": 0,
-      "shared-module-error": 0
-    };
-    let l = -1;
-    let d = [];
-    if (e.length > 0) try {
-      d = await Y(e, n);
-    } catch (e) {
-      q(e) ? o["permanent-error"]++ : (o["transient-error"]++, i = e);
-      l = X(e);
-      d = [];
-    }
-    for (let e of d) {
-      let {
-        resultType,
-        bytesAdded,
-        transientError
-      } = await ee(e, n, r);
-      o[resultType]++;
-      s += bytesAdded ?? 0;
-      transientError && (i = transientError);
-    }
-    let u = [];
-    if (t.length > 0) try {
-      u = await K(t, n);
-    } catch (e) {
-      q(e) ? o["permanent-error"]++ : (o["transient-error"]++, i = e);
-      l = X(e);
-      u = [];
-    }
-    for (let e of u) {
-      let {
-        resultType,
-        bytesAdded,
-        transientError
-      } = await ee(e, n, r);
-      o[resultType]++;
-      s += bytesAdded ?? 0;
-      transientError && (i = transientError);
-    }
-    if (trackEventAnalytics("variable_publishing_buffer_fetch", {
-      latency: Date.now() - a,
-      num_versions_fetched: d.length + u.length,
-      num_success: o.success,
-      total_bytes: s,
-      failed_to_upsert_in_scene: o["shared-variable-set-error"] + o["shared-variable-error"],
-      permanent_errors: o["permanent-error"],
-      transient_errors: o["transient-error"],
-      uncaught_errors: o["uncaught-error"],
-      log_data_error_status: l
-    }), o["transient-error"] > 0) return Promise.reject(Error(J(i)));
-    return Promise.resolve(!0);
-  } catch (e) {
-    return Promise.reject(Error(J(e)));
-  }
-}
-let en = class e {
-  constructor() {
-    this.canvasCache = Object.create(null);
-    this.canvasRequestsInFlight = Object.create(null);
-    this.thumbnailCache = new LRUCache(e.MAX_VARIABLE_SET_THUMBNAILS);
-    this.thumbnailRequestsInFlight = Object.create(null);
-    this.getCanvas = async ({
-      canvas_url: e
-    }) => {
-      if (!e) throw Error("No canvas URL");
-      let {
-        url
-      } = _$$P(e);
-      let r = this.canvasCache[url];
-      if (r) return r;
-      let n = this.canvasRequestsInFlight[url];
-      if (n) return n.then(([e]) => e);
+    let errorStatus = -1
+    let componentData: any[] = []
+    if (components.length > 0) {
       try {
-        let e = _$$n2(url);
-        this.canvasRequestsInFlight[url] = e;
-        let [r, n] = await e;
-        this.canvasCache[n] = r;
-        return r;
-      } catch (e) {
-        console.warn("Team library cache error on get() with status", X(e), "with error", e);
-        return e;
-      } finally {
-        delete this.canvasRequestsInFlight[url];
+        componentData = await fetchComponentLogData(components, fileVersion)
       }
-    };
-    this.getVariableSetThumbnails = e => {
-      if (!e) return Promise.reject(Error("No canvas URL"));
-      if (this.thumbnailCache.has(e)) return Promise.resolve(this.thumbnailCache.get(e));
-      if (e in this.thumbnailRequestsInFlight) return this.thumbnailRequestsInFlight[e];
-      {
-        let t;
-        let r;
-        let n = getRequest(e, null, {
-          responseType: "arraybuffer"
-        }).then(({
-          data: n,
-          status: i
-        }) => {
-          t = new TextDecoder("utf-8").decode(n);
-          r = i;
-          let a = function (e) {
-            let t = {};
-            for (let r of Object.keys(e)) {
-              let n = sH(r);
-              n ? t[dI(n)] = e[r] : console.error(`Received invalid collection ID in thumbnails response: ${r}`);
-            }
-            return t;
-          }(JSON.parse(t));
-          this.thumbnailCache.set(e, a);
-          return a;
-        }).catch(n => {
-          console.warn("Team library cache error on get() with status", X(n), "with error", n);
-          logWarning("teamLibraryItemSeceneGraphCache", "unable to get variable set thumbnails", {
-            decodedData: t,
-            thumbnailUrl: e,
-            requestStatus: r
-          });
-          return n;
-        }).$$finally(() => {
-          delete this.thumbnailRequestsInFlight[e];
-        });
-        this.thumbnailRequestsInFlight[e] = n;
-        return n;
+      catch (error) {
+        if (isClientError(error)) {
+          resultCounts['permanent-error']++
+        }
+        else {
+          resultCounts['transient-error']++
+          lastError = error
+        }
+        errorStatus = getResponseStatus(error)
+        componentData = []
       }
-    };
-    this.putCanvas = (e, t) => {
-      this.canvasCache[e] = t;
-    };
-    this.hasKeyInCache = e => e in this.canvasCache || this.thumbnailCache.has(e);
-    this.clearCache = () => {
-      this.canvasCache = Object.create(null);
-      this.thumbnailCache.reset();
-      this.canvasRequestsInFlight = Object.create(null);
-      this.thumbnailRequestsInFlight = Object.create(null);
-    };
-    this.getCacheValueOrNull = e => this.thumbnailCache.get(e) ?? null;
-    this.clearCache();
-  }
-};
-en.MAX_VARIABLE_SET_THUMBNAILS = 20;
-export let $$ei1 = new en();
-export function $$ea26(e, t = null) {
-  let r = (Do(e) ? e.containingFrame?.backgroundColor : e.type === PW.COMPONENT && e.containing_frame?.backgroundColor ? e.containing_frame.backgroundColor : e.type === PW.STATE_GROUP && e.fill_color ? e.fill_color : e.type === PW.STATE_GROUP && e.containing_frame?.backgroundColor ? e.containing_frame.backgroundColor : void 0) ?? t;
-  if (!r) return null;
-  let n = H0(r);
-  return n && 0 !== n.a ? X9(n, 1) : null;
-}
-export function $$es24(e) {
-  let t = null;
-  e.every(e => {
-    if (null === t) t = e.library_key;else if (t !== e.library_key) {
-      t = null;
-      return !1;
     }
-    return !0;
-  });
-  return t;
+    for (let item of componentData) {
+      let {
+        resultType,
+        bytesAdded,
+        transientError,
+      } = await processAssetUpsert(item, fileVersion, scene)
+      resultCounts[resultType]++
+      totalBytes += bytesAdded ?? 0
+      transientError && (lastError = transientError)
+    }
+    let stateGroupData: any[] = []
+    if (stateGroups.length > 0) {
+      try {
+        stateGroupData = await fetchStateGroupLogData(stateGroups, fileVersion)
+      }
+      catch (error) {
+        if (isClientError(error)) {
+          resultCounts['permanent-error']++
+        }
+        else {
+          resultCounts['transient-error']++
+          lastError = error
+        }
+        errorStatus = getResponseStatus(error)
+        stateGroupData = []
+      }
+    }
+    for (let item of stateGroupData) {
+      let {
+        resultType,
+        bytesAdded,
+        transientError,
+      } = await processAssetUpsert(item, fileVersion, scene)
+      resultCounts[resultType]++
+      totalBytes += bytesAdded ?? 0
+      transientError && (lastError = transientError)
+    }
+    trackEventAnalytics('publishing_buffer_fetch', {
+      latency: Date.now() - startTime,
+      num_versions_fetched: componentData.length + stateGroupData.length,
+      num_success: resultCounts.success,
+      total_bytes: totalBytes,
+      failed_to_upsert_in_scene: resultCounts['shared-symbol-error'] + resultCounts['shared-state-group-error'],
+      permanent_errors: resultCounts['permanent-error'],
+      transient_errors: resultCounts['transient-error'],
+      uncaught_errors: resultCounts['uncaught-error'],
+      log_data_error_status: errorStatus,
+    })
+    if (resultCounts['transient-error'] > 0) {
+      return Promise.reject(new Error(formatErrorMessage(lastError)))
+    }
+    return Promise.resolve(true)
+  }
+  catch (error) {
+    return Promise.reject(new Error(formatErrorMessage(error)))
+  }
 }
-export const $X = $$O0;
-export const Eo = $$ei1;
-export const F1 = $$et2;
-export const J_ = $$G3;
-export const Jl = $$U4;
-export const MJ = $$w5;
-export const O9 = $$H6;
-export const OM = $$v7;
-export const P$ = $$k8;
-export const Qx = $$B9;
-export const R8 = $$V10;
-export const UB = $$F11;
-export const UE = $$C12;
-export const Vu = $$R13;
-export const aV = $$A14;
-export const ah = $$x15;
-export const cO = $$j16;
-export const g4 = $$er17;
-export const jh = $$D18;
-export const oU = $$N19;
-export const qv = $$L20;
-export const r2 = $$T21;
-export const r8 = $$I22;
-export const u0 = $$S23;
-export const uj = $$es24;
-export const y3 = $$M25;
-export const zR = $$ea26;
+
+/**
+ * Fetch and process variable publishing buffers
+ * @param variableSets - Variable sets to process
+ * @param variables - Variables to process
+ * @param scene - Scene data
+ * @param fileVersion - File version
+ * @returns Promise resolving to success status
+ */
+export async function fetchAndProcessVariablePublishingBuffers(variableSets: any[], variables: any[], scene: any, fileVersion: number) {
+  try {
+    let lastError
+    let startTime = Date.now()
+    let totalBytes = 0
+    let resultCounts = {
+      'permanent-error': 0,
+      'transient-error': 0,
+      'shared-variable-error': 0,
+      'shared-variable-set-error': 0,
+      'uncaught-error': 0,
+      'success': 0,
+      'shared-symbol-error': 0,
+      'shared-state-group-error': 0,
+      'shared-module-error': 0,
+    }
+    let errorStatus = -1
+    let variableSetData: any[] = []
+    if (variableSets.length > 0) {
+      try {
+        variableSetData = await fetchVariableSetLogData(variableSets, fileVersion)
+      }
+      catch (error) {
+        if (isClientError(error)) {
+          resultCounts['permanent-error']++
+        }
+        else {
+          resultCounts['transient-error']++
+          lastError = error
+        }
+        errorStatus = getResponseStatus(error)
+        variableSetData = []
+      }
+    }
+    for (let item of variableSetData) {
+      let {
+        resultType,
+        bytesAdded,
+        transientError,
+      } = await processAssetUpsert(item, fileVersion, scene)
+      resultCounts[resultType]++
+      totalBytes += bytesAdded ?? 0
+      transientError && (lastError = transientError)
+    }
+    let variableData: any[] = []
+    if (variables.length > 0) {
+      try {
+        variableData = await fetchVariableLogData(variables, fileVersion)
+      }
+      catch (error) {
+        if (isClientError(error)) {
+          resultCounts['permanent-error']++
+        }
+        else {
+          resultCounts['transient-error']++
+          lastError = error
+        }
+        errorStatus = getResponseStatus(error)
+        variableData = []
+      }
+    }
+    for (let item of variableData) {
+      let {
+        resultType,
+        bytesAdded,
+        transientError,
+      } = await processAssetUpsert(item, fileVersion, scene)
+      resultCounts[resultType]++
+      totalBytes += bytesAdded ?? 0
+      transientError && (lastError = transientError)
+    }
+    trackEventAnalytics('variable_publishing_buffer_fetch', {
+      latency: Date.now() - startTime,
+      num_versions_fetched: variableSetData.length + variableData.length,
+      num_success: resultCounts.success,
+      total_bytes: totalBytes,
+      failed_to_upsert_in_scene: resultCounts['shared-variable-set-error'] + resultCounts['shared-variable-error'],
+      permanent_errors: resultCounts['permanent-error'],
+      transient_errors: resultCounts['transient-error'],
+      uncaught_errors: resultCounts['uncaught-error'],
+      log_data_error_status: errorStatus,
+    })
+    if (resultCounts['transient-error'] > 0) {
+      return Promise.reject(new Error(formatErrorMessage(lastError)))
+    }
+    return Promise.resolve(true)
+  }
+  catch (error) {
+    return Promise.reject(new Error(formatErrorMessage(error)))
+  }
+}
+
+let TeamLibraryCache = class TeamLibraryCacheClass {
+  static MAX_VARIABLE_SET_THUMBNAILS = 20
+  canvasCache: Record<string, any>
+  canvasRequestsInFlight: Record<string, Promise<[any, string]>>
+  thumbnailCache: LRUCache<any, any>
+  thumbnailRequestsInFlight: Record<string, Promise<any>>
+
+  constructor() {
+    this.canvasCache = Object.create(null)
+    this.canvasRequestsInFlight = Object.create(null)
+    this.thumbnailCache = new LRUCache(TeamLibraryCacheClass.MAX_VARIABLE_SET_THUMBNAILS)
+    this.thumbnailRequestsInFlight = Object.create(null)
+    this.getCanvas = async ({
+      canvas_url: url,
+    }: {
+      canvas_url: string
+    }): Promise<any> => {
+      if (!url)
+        throw new Error('No canvas URL')
+      let {
+        url: processedUrl,
+      } = generateFileVersionUrl(url)
+      let cachedCanvas = this.canvasCache[processedUrl]
+      if (cachedCanvas)
+        return cachedCanvas
+      let inFlightRequest = this.canvasRequestsInFlight[processedUrl]
+      if (inFlightRequest)
+        return inFlightRequest.then((result: [any, string]) => result[0])
+      try {
+        let loadDataPromise: Promise<any> = loadCanvasData(processedUrl)
+        this.canvasRequestsInFlight[processedUrl] = loadDataPromise
+        let [canvasData, finalUrl] = await loadDataPromise as [any, string]
+        this.canvasCache[finalUrl] = canvasData
+        return canvasData
+      }
+      catch (error) {
+        console.warn('Team library cache error on get() with status', getResponseStatus(error), 'with error', error)
+        throw error
+      }
+      finally {
+        delete this.canvasRequestsInFlight[processedUrl]
+      }
+    }
+    this.getVariableSetThumbnails = (thumbnailUrl: string): Promise<any> => {
+      if (!thumbnailUrl)
+        return Promise.reject(new Error('No canvas URL'))
+      if (this.thumbnailCache.has(thumbnailUrl))
+        return Promise.resolve(this.thumbnailCache.get(thumbnailUrl))
+      if (thumbnailUrl in this.thumbnailRequestsInFlight)
+        return this.thumbnailRequestsInFlight[thumbnailUrl]
+      {
+        let decodedData: string | undefined
+        let requestStatus: number | undefined
+        let requestPromise = getRequest(thumbnailUrl, null, {
+          responseType: 'arraybuffer',
+        }).then(({
+          data: responseData,
+          status: responseStatus,
+        }) => {
+          decodedData = new TextDecoder('utf-8').decode(responseData as any)
+          requestStatus = responseStatus
+          let parsedThumbnails = (function (data: any) {
+            let thumbnails: any = {}
+            for (let key of Object.keys(data)) {
+              let convertedKey = convertStringToKiwi(key)
+              convertedKey ? thumbnails[convertKiwiToString(convertedKey as any)] = data[key] : console.error(`Received invalid collection ID in thumbnails response: ${key}`)
+            }
+            return thumbnails
+          }(JSON.parse(decodedData)))
+          this.thumbnailCache.set(thumbnailUrl, parsedThumbnails)
+          return parsedThumbnails
+        }).catch((error) => {
+          console.warn('Team library cache error on get() with status', getResponseStatus(error), 'with error', error)
+          logWarning('teamLibraryItemSeceneGraphCache', 'unable to get variable set thumbnails', {
+            decodedData,
+            thumbnailUrl,
+            requestStatus,
+          })
+          throw error
+        }).finally(() => {
+          delete this.thumbnailRequestsInFlight[thumbnailUrl]
+        })
+        this.thumbnailRequestsInFlight[thumbnailUrl] = requestPromise
+        return requestPromise
+      }
+    }
+    this.putCanvas = (url: string, canvasData: any): void => {
+      this.canvasCache[url] = canvasData
+    }
+    this.hasKeyInCache = (key: string): boolean => key in this.canvasCache || this.thumbnailCache.has(key)
+    this.clearCache = (): void => {
+      this.canvasCache = Object.create(null)
+      this.thumbnailCache.reset()
+      this.canvasRequestsInFlight = Object.create(null)
+      this.thumbnailRequestsInFlight = Object.create(null)
+    }
+    this.getCacheValueOrNull = (key: string): any => this.thumbnailCache.get(key) ?? null
+    this.clearCache()
+  }
+
+  getCanvas: (params: { canvas_url: string }) => Promise<any>
+  getVariableSetThumbnails: (thumbnailUrl: string) => Promise<any>
+  putCanvas: (url: string, canvasData: any) => void
+  hasKeyInCache: (key: string) => boolean
+  clearCache: () => void
+  getCacheValueOrNull: (key: string) => any
+}
+
+export let teamLibraryCache = new TeamLibraryCache()
+
+export function getAssetBackgroundColor(asset: any, defaultColor: string | null = null): Color | null {
+  let backgroundColor = (hasAssetId(asset) ? asset.containingFrame?.backgroundColor : asset.type === PrimaryWorkflowEnum.COMPONENT && asset.containing_frame?.backgroundColor ? asset.containing_frame.backgroundColor : asset.type === PrimaryWorkflowEnum.STATE_GROUP && asset.fill_color ? asset.fill_color : asset.type === PrimaryWorkflowEnum.STATE_GROUP && asset.containing_frame?.backgroundColor ? asset.containing_frame.backgroundColor : void 0) ?? defaultColor
+  if (!backgroundColor)
+    return null
+  let parsedColor = parseColor(backgroundColor)
+  return parsedColor && parsedColor.a !== 0 ? setAlpha(parsedColor, 1) : null
+}
+
+/**
+ * Get common library key
+ * @param assets - Assets to check
+ * @returns Common library key or null
+ */
+export function getCommonLibraryKey(assets: any[]) {
+  let commonKey: string | null = null
+  assets.every((asset) => {
+    if (commonKey === null) {
+      commonKey = asset.library_key
+    }
+    else if (commonKey !== asset.library_key) {
+      commonKey = null
+      return false
+    }
+    return true
+  })
+  return commonKey
+}
+
+export const $X = createObjectUrlFromBuffer
+export const Eo = teamLibraryCache
+export const F1 = fetchAndProcessComponentPublishingBuffers
+export const J_ = splitAndJoinPath
+export const Jl = processLocalComponents
+export const MJ = getFillColor
+export const O9 = getFullComponentBreadcrumbs
+export const OM = isValidThumbnail
+export const P$ = formatFontMetrics
+export const Qx = memoizedProcessComponentsAndStateGroups
+export const R8 = getComponentBreadcrumbs
+export const UB = isCurrentStagingStatus
+export const UE = hasValidFillColor
+export const Vu = getBufferFromThumbnailUrl
+export const aV = generateThumbnailFromStyleMaster
+export const ah = generateThumbnailFromStyleConsumer
+export const cO = memoizedProcessLocalComponents
+export const g4 = fetchAndProcessVariablePublishingBuffers
+export const jh = getDefaultPlaceholderThumbnail
+export const oU = generateSerializableStyleThumbnail
+export const qv = revokeThumbnailUrl
+export const r2 = generateNodeThumbnail
+export const r8 = FAILED_THUMBNAIL
+export const u0 = LOADING_THUMBNAIL
+export const uj = getCommonLibraryKey
+export const y3 = filterAndSortPublishedItems
+export const zR = getAssetBackgroundColor

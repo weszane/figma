@@ -1,6 +1,6 @@
-import { aV } from "../905/405710";
+import { withParsedMeta } from "../905/405710";
 import { M4 } from "../905/713695";
-import { PP } from "../figma_app/633080";
+import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
 import { f } from "../905/292380";
 import { Tf } from "../905/297574";
 let $$l3 = M4.Query({
@@ -35,7 +35,7 @@ let $$d2 = M4.Query({
   })).data.meta.styles ?? [],
   output: ({
     data: e
-  }) => e.map(aV)
+  }) => e.map(withParsedMeta)
 });
 let $$c1 = M4.Query({
   fetch: async () => (await f.getCommunityLibraries()).data.meta,
@@ -52,7 +52,7 @@ let $$u0 = M4.Query({
 function p(e) {
   return {
     ...e,
-    type: PP,
+    type: COMMUNITY_LIBRARY_FILE,
     num_state_groups: 0
   };
 }

@@ -20,7 +20,7 @@ import { A as _$$A2 } from '../469e6e40/557114';
 import { J as _$$J3 } from '../469e6e40/564885';
 import { J as _$$J4 } from '../469e6e40/855786';
 import { Y as _$$Y2 } from '../469e6e40/924996';
-import { u as _$$u2 } from '../905/16237';
+import { getRumLoggingConfig } from '../905/16237';
 import { bL } from '../905/38914';
 import { Ef } from '../905/81982';
 import { s as _$$s2 } from '../905/82276';
@@ -1996,7 +1996,7 @@ let a$ = registerModal(e => {
       }
     }));
   }, [orgId, seatType, onClose, m, queueFilterCountsRefetch, orgUserIds, lastFetchTimestamp, _]);
-  let x = _$$u2();
+  let x = getRumLoggingConfig();
   return jsx(fu, {
     name: 'Confirm Bulk Seat Change Modal',
     properties: {

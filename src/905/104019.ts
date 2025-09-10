@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { isE2ETraffic } from "../figma_app/169182";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { op } from "../905/622391";
+import { canPerformActionCheck } from "../905/622391";
 let n;
 let r;
 let a;
@@ -13,7 +13,7 @@ export function $$p1() {
       if (!function () {
         let e = Error().stack;
         return !!e && (null == a && (a = h("dispnf.fyufotjpo;00")), null == s && (s = h("np{.fyufotjpo;00")), e.includes(a) || e.includes(s));
-      }() && op()) return n;
+      }() && canPerformActionCheck()) return n;
     },
     set: e => {
       n = null != e ? e : void 0;

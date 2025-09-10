@@ -1,9 +1,9 @@
-import { NC } from "../905/17179";
-import { getInitialOptions } from "../figma_app/169182";
-import { getI18nString } from "../905/303541";
-import { J } from "../905/231762";
-import { createOptimistThunk } from "../905/350402";
-import { x } from "../905/962579";
+import { NC } from "src/905/17179";
+import { getInitialOptions } from "src/figma_app/169182";
+import { getI18nString } from "src/905/303541";
+import { J } from "src/905/231762";
+import { createOptimistThunk } from "src/905/350402";
+import { x } from "src/905/962579";
 var $$n1;
 var c = 0;
 function u(e) {

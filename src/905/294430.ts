@@ -41,7 +41,7 @@ import { rf } from "../figma_app/960196";
 import { yw, li, ir, iQ, I6 } from "../905/159279";
 import { useDispatch } from "react-redux";
 import { assertNotNullish } from "../figma_app/465776";
-import { sH, dI } from "../905/805904";
+import { convertVariableIdToKiwi, convertKiwiToVariableIdString } from "../905/805904";
 import $ from "classnames";
 import { Oe as _$$Oe } from "../figma_app/933328";
 import { sJ } from "../figma_app/841644";
@@ -139,7 +139,7 @@ function ed({
   let u = useCallback(async e => {
     if (t && e) {
       let i = await c(_$$Oe(e));
-      let n = sH(i);
+      let n = convertVariableIdToKiwi(i);
       assertNotNullish(n);
       let r = {
         resolvedDataType: "colorVar" === t ? "COLOR" : "FLOAT",
@@ -1118,7 +1118,7 @@ function ta(e) {
   return jsxs("div", {
     className: (() => {
       let t = e.paint.colorVar?.value?.alias;
-      return t ? dI(t) : null;
+      return t ? convertKiwiToVariableIdString(t) : null;
     })() ? BT : wM,
     children: [jsx(_$$D2, {
       paint: e.paint,
@@ -1725,7 +1725,7 @@ function th(e) {
   };
   let m = async t => {
     let i = await e.dispatch(_$$Oe(t));
-    let n = sH(i);
+    let n = convertVariableIdToKiwi(i);
     if (!n) return;
     let r = {
       value: {

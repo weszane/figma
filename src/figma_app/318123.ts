@@ -14,7 +14,7 @@ import { r1 } from "../figma_app/545877";
 import { J } from "../905/915227";
 import { kS } from "../figma_app/864723";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { l5 } from "../figma_app/728657";
 import { fD } from "../figma_app/816671";
@@ -74,7 +74,7 @@ let K = atom(null, (e, t) => {
   t($$Z16, Xi());
   t($$Q10, IPanelType.BASIC);
 });
-let $$Y21 = Wh(() => atom(!1));
+let $$Y21 = setupRemovableAtomFamily(() => atom(!1));
 let $$$1 = atom("");
 let $$X20 = atom(void 0);
 let $$q6 = atom("");
@@ -85,7 +85,7 @@ let $$ee14 = atom({
   status: _$$c.NONE
 });
 let $$et4 = atom(null);
-let $$er18 = Wh(() => atom(!1));
+let $$er18 = setupRemovableAtomFamily(() => atom(!1));
 let $$en8 = atom(null, (e, t, r) => {
   t($$er18, r);
 });

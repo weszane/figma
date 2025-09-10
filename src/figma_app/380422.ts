@@ -16,7 +16,7 @@ import { fi } from "../figma_app/913823";
 import { g5 } from "../figma_app/178752";
 import { selectOpenFile } from "../figma_app/516028";
 import { U as _$$U } from "../905/506188";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { oh } from "../905/18797";
 import { $A } from "../905/862883";
 import { I as _$$I } from "../figma_app/130633";
@@ -316,7 +316,7 @@ export function $$Y1({
         className: _$$s.pt8.flex.flexColumn.gap2.alignLeft.$,
         children: [jsx("span", {
           className: _$$s.textBodyMedium.colorText.truncate.$,
-          children: kH(e.name)
+          children: getBasename(e.name)
         }), jsx("span", {
           className: _$$s.textBodyMedium.colorTextSecondary.truncate.$,
           children: c

@@ -52,14 +52,14 @@ class h {
       let r = this.userAgeInDays()
       return void 0 !== r
         ? {
-            event: e,
-            userAgeInDays: r,
-            ...n,
-          }
+          event: e,
+          userAgeInDays: r,
+          ...n,
+        }
         : {
-            event: e,
-            ...n,
-          }
+          event: e,
+          ...n,
+        }
     }
   }
 
@@ -187,8 +187,8 @@ class E {
     let t = this._storage.get(ANONYMOUS_ID_COOKIE)
     t == null
       ? this._storage.set(ANONYMOUS_ID_COOKIE, this._anonymousId, {
-          sameSite: 'none',
-        })
+        sameSite: 'none',
+      })
       : this._anonymousId = t
   }
 
@@ -260,7 +260,7 @@ class x {
       return this._analytics.user().anonymousId()
   }
 
-  track(e, t = {}, i = {}) {}
+  track(e, t = {}, i = {}) { }
 }
 class S {
   constructor(e) {
@@ -284,8 +284,8 @@ class S {
     return this._anonymousId
   }
 
-  get userId() {}
-  track(e, t = {}, i = {}) {}
+  get userId() { }
+  track(e, t = {}, i = {}) { }
 }
 let w = (() => {
   let e = getInitialOptions().user_data

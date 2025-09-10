@@ -4,12 +4,12 @@ import { P8 } from '../905/270781';
 import { selectTeams } from '../905/338617';
 import { t as _$$t } from '../905/340158';
 import { n as _$$n } from '../905/347702';
-import { P as _$$P } from '../905/412913';
+import { FileKeySourceEnum } from '../905/412913';
 import { O as _$$O } from '../905/566074';
 import { getFeatureFlags } from '../905/601108';
 import { l as _$$l } from '../905/716947';
 import { atom, createRemovableAtomFamily } from '../figma_app/27355';
-import { Mk } from '../figma_app/31188';
+import { AssetAtomMap } from '../figma_app/31188';
 import { conditionalFeatureFlag } from '../figma_app/169182';
 import { VariableSetIdCompatHandler } from '../figma_app/243058';
 import { w5 } from '../figma_app/345997';
@@ -17,7 +17,7 @@ import { Wn, XR } from '../figma_app/396464';
 import { isEmptyObject } from '../figma_app/493477';
 import { selectOpenFileKey, selectOpenFile, selectOpenFileLibraryKey, openFileAtom } from '../figma_app/516028';
 import { jd } from '../figma_app/528509';
-import { o as _$$o, E8, PW } from '../figma_app/633080';
+import { LibrarySourceEnum, StagingStatusEnum, PrimaryWorkflowEnum } from '../figma_app/633080';
 import { c5, qV, ZA } from '../figma_app/645694';
 import { ad, CG, E2, gA, Hb, HF, i_, LB, lg, Lk, MA, pD, Q_, rC, RQ, w8, zE } from '../figma_app/646357';
 import { sortByMultiple } from '../figma_app/656233';
@@ -51,16 +51,16 @@ let Z = e => e.library.openFilePublished__LIVEGRAPH.variableSets;
 let Q = e => e.library.openFilePublished__LIVEGRAPH.modules;
 let $$ee5 = Mz([$, J, Z, Q], (e, t, r, n) => !isEmptyObject(t) || !isEmptyObject(e) || !isEmptyObject(r) || !isEmptyObject(n));
 let et = Mz([e => e.library.local.styles, selectOpenFileKey, $$U8, e => e.library.publishableStyles, H, B, q], (e, t, r, n, i, a, s) => {
-  if (r === _$$o.HUBFILE && a) {
+  if (r === LibrarySourceEnum.HUBFILE && a) {
     let r = _$$l(a.libraryKey);
     let {
       newLocal
-    } = rC(w8, n, i, e, s, {}, t || '', r, new Set(), PW.STYLE);
+    } = rC(w8, n, i, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.STYLE);
     return newLocal;
   }
   return e;
 });
-let er = Mz([J, H, $$U8], (e, t, r) => r === _$$o.HUBFILE ? t : e);
+let er = Mz([J, H, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
 let $$en21 = Mz([et, er], (e, t) => {
   if (!getFeatureFlags().ds_remove_redux_library_status) return e;
   let r = {};
@@ -74,29 +74,29 @@ let $$en21 = Mz([et, er], (e, t) => {
   return r;
 });
 let ei = Mz([e => e.library.local.components, selectOpenFileKey, $$U8, $$G13, B, e => e.library.publishableSymbols, q, isSelectedViewFullscreenCooper], (e, t, r, n, i, a, s, l) => {
-  if (r === _$$o.HUBFILE && i) {
+  if (r === LibrarySourceEnum.HUBFILE && i) {
     let r = _$$l(i.libraryKey);
     let {
       newLocal
-    } = rC((e, t, r, n, i) => i_(e, t, r, n, i, l), a, n, e, s, {}, t || '', r, new Set(), PW.COMPONENT);
+    } = rC((e, t, r, n, i) => i_(e, t, r, n, i, l), a, n, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.COMPONENT);
     return newLocal;
   }
   return e;
 });
-let ea = Mz([$, $$G13, $$U8], (e, t, r) => r === _$$o.HUBFILE ? t : e);
+let ea = Mz([$, $$G13, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
 let es = Mz([function (e) {
   return e.library.local.stateGroups;
 }, selectOpenFileKey, $$U8, $$V14, B, e => e.library.publishableStateGroups, q], (e, t, r, n, i, a, s) => {
-  if (r === _$$o.HUBFILE && i) {
+  if (r === LibrarySourceEnum.HUBFILE && i) {
     let r = _$$l(i.libraryKey);
     let {
       newLocal
-    } = rC(LB, a, n, e, s, {}, t || '', r, new Set(), PW.STATE_GROUP);
+    } = rC(LB, a, n, e, s, {}, t || '', r, new Set(), PrimaryWorkflowEnum.STATE_GROUP);
     return newLocal;
   }
   return e;
 });
-let eo = Mz([X, $$V14, $$U8], (e, t, r) => r === _$$o.HUBFILE ? t : e);
+let eo = Mz([X, $$V14, $$U8], (e, t, r) => r === LibrarySourceEnum.HUBFILE ? t : e);
 let $$el11 = Mz([ei, ea, es, eo, isSelectedViewFullscreenCooper], (e, t, r, n, i) => {
   if (!getFeatureFlags().ds_remove_redux_library_status) return e;
   let a = {};
@@ -146,9 +146,9 @@ let $$ec33 = P8([e => {
   return t;
 }, e => e.library.openFilePublished__LIVEGRAPH.variables, selectOpenFile, $$U8, B, z], (e, t, r, n, i, a) => {
   let s = {};
-  let l = n === _$$o.HUBFILE && i ? a : t;
+  let l = n === LibrarySourceEnum.HUBFILE && i ? a : t;
   let d = r?.key ?? '';
-  let c = n === _$$o.HUBFILE && i ? _$$l(i.libraryKey) : _$$l(r?.libraryKey ?? '');
+  let c = n === LibrarySourceEnum.HUBFILE && i ? _$$l(i.libraryKey) : _$$l(r?.libraryKey ?? '');
   for (let [t, r] of Object.entries(l)) {
     e.hasOwnProperty(t) || (s[t] = {
       ...r,
@@ -156,11 +156,11 @@ let $$ec33 = P8([e => {
       isPublishable: !1,
       modeValues: {},
       keyForPublish: r.key,
-      status: E8.DELETED,
+      status: StagingStatusEnum.DELETED,
       deletedFromSceneGraph: !0,
       isSoftDeleted: !0,
       file_key: d,
-      file_key_source: _$$P.LOCAL_FILE,
+      file_key_source: FileKeySourceEnum.LOCAL_FILE,
       library_key: c,
       hasOnlyBeenReordered: !1
     });
@@ -174,7 +174,7 @@ let $$ec33 = P8([e => {
       ...t,
       status: r,
       file_key: d,
-      file_key_source: _$$P.LOCAL_FILE,
+      file_key_source: FileKeySourceEnum.LOCAL_FILE,
       library_key: c,
       key: e?.key,
       hasOnlyBeenReordered: i
@@ -190,9 +190,9 @@ let $$ep20 = P8([e => {
   });
   return t;
 }, Z, eu, selectOpenFile, $$U8, B, W], (e, t, r, n, i, d, c) => {
-  let u = i === _$$o.HUBFILE && d ? c : t;
+  let u = i === LibrarySourceEnum.HUBFILE && d ? c : t;
   let p = n?.key ?? '';
-  let _ = i === _$$o.HUBFILE && d ? _$$l(d.libraryKey) : _$$l(n?.libraryKey ?? '');
+  let _ = i === LibrarySourceEnum.HUBFILE && d ? _$$l(d.libraryKey) : _$$l(n?.libraryKey ?? '');
   let h = {};
   for (let [t, r] of Object.entries(u)) {
     if (e.hasOwnProperty(t)) continue;
@@ -202,11 +202,11 @@ let $$ep20 = P8([e => {
       defaultModeID: '',
       isPublishable: !1,
       keyForPublish: r.key,
-      status: E8.DELETED,
+      status: StagingStatusEnum.DELETED,
       deletedFromSceneGraph: !0,
       isSoftDeleted: !0,
       file_key: p,
-      file_key_source: _$$P.LOCAL_FILE,
+      file_key_source: FileKeySourceEnum.LOCAL_FILE,
       library_key: _,
       variableSetError: VariableErrorType.NONE,
       hasOnlyBeenReordered: !1
@@ -225,11 +225,11 @@ let $$ep20 = P8([e => {
     let e = u[t.node_id];
     let n = function (e, t, r) {
       let n = eU(e, t, ez);
-      if (n !== E8.CURRENT) return n;
+      if (n !== StagingStatusEnum.CURRENT) return n;
       for (let e of r) {
-        if (e.status !== E8.CURRENT && e.status !== E8.NOT_STAGED) return E8.CHANGED;
+        if (e.status !== StagingStatusEnum.CURRENT && e.status !== StagingStatusEnum.NOT_STAGED) return StagingStatusEnum.CHANGED;
       }
-      return E8.CURRENT;
+      return StagingStatusEnum.CURRENT;
     }(t, e, r[t.node_id] ?? []);
     let i = !!(t && e && t.version == t.version && t.sortPosition !== e.sortPosition);
     getFeatureFlags().ds_user_facing_version_publishing && (i = !!(t && e && t.userFacingVersion === e.userFacingVersion && t.sortPosition !== e.sortPosition));
@@ -237,7 +237,7 @@ let $$ep20 = P8([e => {
       ...t,
       status: n,
       file_key: p,
-      file_key_source: _$$P.LOCAL_FILE,
+      file_key_source: FileKeySourceEnum.LOCAL_FILE,
       library_key: _,
       key: e?.key,
       hasOnlyBeenReordered: i
@@ -267,16 +267,16 @@ function eg(e, t) {
 function ef(e, t, r, n, i) {
   if (!getFeatureFlags().dse_module_publish) return {};
   let a = {};
-  if (i === _$$o.HUBFILE && n) {
+  if (i === LibrarySourceEnum.HUBFILE && n) {
     for (let [t, n] of Object.entries(r)) {
       Object.keys(e).includes(t) || (a[t] = {
         ...n,
-        status: E8.DELETED,
+        status: StagingStatusEnum.DELETED,
         deletedFromSceneGraph: !0
       });
     }
   }
-  let s = i === _$$o.HUBFILE ? r : t;
+  let s = i === LibrarySourceEnum.HUBFILE ? r : t;
   for (let t of Object.values(e)) {
     let e = eU(t, s[t.node_id], eg);
     a[t.node_id] = {
@@ -302,9 +302,9 @@ let eN = Mz([$$en21, $$eb6, $$ep20, $$eE37], (e, t, r, n) => Object.keys(e).leng
 let eC = createReduxSubscriptionAtomWithState(eN);
 let $$ew0 = atom(e => {
   if (e(eC)) return !0;
-  for (let t of Object.keys(Mk)) {
-    if (_$$O(t) && Mk[t].local) {
-      for (let r of Object.values(e(Mk[t].local))) {
+  for (let t of Object.keys(AssetAtomMap)) {
+    if (_$$O(t) && AssetAtomMap[t].local) {
+      for (let r of Object.values(e(AssetAtomMap[t].local))) {
         if (!r.isSoftDeleted) return !0;
       }
     }
@@ -335,7 +335,7 @@ let eU = (e, t, r) => {
   let n = t && t.unpublished_at == null;
   let i = 'isSoftDeleted' in e && e.isSoftDeleted;
   let a = !!e.isPublishable && !i;
-  return n && !a ? E8.DELETED : !n && a ? E8.NEW : n || a ? r(e, t) ? E8.CHANGED : E8.CURRENT : E8.NOT_STAGED;
+  return n && !a ? StagingStatusEnum.DELETED : !n && a ? StagingStatusEnum.NEW : n || a ? r(e, t) ? StagingStatusEnum.CHANGED : StagingStatusEnum.CURRENT : StagingStatusEnum.NOT_STAGED;
 };
 let eB = (e, t) => {
   let r = conditionalFeatureFlag('ds_user_facing_version_publishing', e.userFacingVersion === t.userFacingVersion, e.content_hash === t.content_hash);
@@ -382,8 +382,8 @@ let $$eY38 = createRemovableAtomFamily(e => {
     return {
       ...n,
       libraryAssets: {
-        [PW.RESPONSIVE_SET]: eW(i, _$$O(PW.RESPONSIVE_SET) ? a.filter(e => e.type === PW.RESPONSIVE_SET) : [], () => !1, [gA]),
-        [PW.CODE_COMPONENT]: eW(i, _$$O(PW.CODE_COMPONENT) ? a.filter(e => e.type === PW.CODE_COMPONENT) : [], () => !1, [gA])
+        [PrimaryWorkflowEnum.RESPONSIVE_SET]: eW(i, _$$O(PrimaryWorkflowEnum.RESPONSIVE_SET) ? a.filter(e => e.type === PrimaryWorkflowEnum.RESPONSIVE_SET) : [], () => !1, [gA]),
+        [PrimaryWorkflowEnum.CODE_COMPONENT]: eW(i, _$$O(PrimaryWorkflowEnum.CODE_COMPONENT) ? a.filter(e => e.type === PrimaryWorkflowEnum.CODE_COMPONENT) : [], () => !1, [gA])
       },
       pageThumbnails: tj(s)
     };
@@ -407,7 +407,7 @@ function eq(e, t, r, n, i, a, s, o, l) {
     variableSets: eW(o, Object.values(i), RQ, [MA]),
     variableSetsWithHiddenVariables: eW(o, c, () => !1, [MA]),
     variables: eW(o, Object.values(a), () => !1, [MA]),
-    modules: eW(o, _$$O(PW.MODULE) ? Object.values(s) : [], () => !1, [gA])
+    modules: eW(o, _$$O(PrimaryWorkflowEnum.MODULE) ? Object.values(s) : [], () => !1, [gA])
   };
 }
 let eJ = P8([eu], e => Object.fromEntries(Object.entries(e).map(([e, t]) => [e, eW(new Set(), t, () => !1, [MA])])));
@@ -427,7 +427,7 @@ let e3 = Mz([eK], e => e.productComponents.modified.wellFormed);
 let e4 = Mz([e3], e => e.filter(e => HF(e.status)));
 let e8 = Mz([eK], e => e.variableSets.modified.wellFormed);
 let e6 = Mz([e8], e => e.filter(e => HF(e.status)));
-let e7 = Mz([eK], e => _$$O(PW.MODULE) ? e.modules.modified.wellFormed : []);
+let e7 = Mz([eK], e => _$$O(PrimaryWorkflowEnum.MODULE) ? e.modules.modified.wellFormed : []);
 let e9 = Mz([e7], e => e.filter(e => HF(e.status)));
 let $$te25 = Mz([selectOpenFile, selectTeams], (e, t) => !!(getFeatureFlags().cmty_lib_admin_publish && e?.publishedHubFile) || !jd(e?.project) && !!(e && w5(e.teamId ? t[e.teamId] : null)));
 let $$tt3 = e0;

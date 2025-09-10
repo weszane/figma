@@ -23,7 +23,7 @@ import { w as _$$w } from "../figma_app/883622";
 import { g as _$$g2 } from "../1556/689749";
 import { q as _$$q } from "../1556/198651";
 import { j as _$$j } from "../905/834956";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import E from "../vendor/116389";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { am } from "../905/640017";
@@ -547,7 +547,7 @@ function eX() {
     let n = selectUser();
     let o = am();
     let a = useSelector(e => e.authedProfilesById);
-    let d = useSelector(e => gc(e), c2);
+    let d = useSelector(e => gc(e), deepEqual);
     let u = useSelector(e => Tm(e));
     let h = S()(Object.values(d).map(e => e.community_profile_id && a[e.community_profile_id]));
     let m = S()(Object.values(u).map(e => e.community_profile_id && a[e.community_profile_id]));

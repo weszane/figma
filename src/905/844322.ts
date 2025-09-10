@@ -15,7 +15,7 @@ import { f as _$$f } from "../905/509236";
 import { sR } from "../905/862913";
 import { Ns } from "../figma_app/349248";
 import { M4 } from "../905/713695";
-import { Tb } from "../figma_app/633080";
+import { getDraftsSidebarString } from "../figma_app/633080";
 import { xY } from "../905/70982";
 import { YF, Ip } from "../905/880488";
 let $$E2 = createOptimistThunk((e, t) => {
@@ -72,7 +72,7 @@ let $$E2 = createOptimistThunk((e, t) => {
       if (p && !c) {
         let t = e.getState().selectedView;
         t && "folder" === t.view && t.folderId === o || (s = {
-          text: `Show in ${i.user?.drafts_folder_id === o ? Tb() : "project"}`,
+          text: `Show in ${i.user?.drafts_folder_id === o ? getDraftsSidebarString() : "project"}`,
           action: () => {
             null != o && e.dispatch(sf({
               view: "folder",

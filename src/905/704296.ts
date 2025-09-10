@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
-import { O } from "../905/587457";
+import { O } from "src/905/587457";
 export let $$s0 = memo(function (e) {
   return O() ? jsx("svg", {
     width: "24",

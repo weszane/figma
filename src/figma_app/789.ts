@@ -28,13 +28,13 @@ export function getWorkshopModeStatus(fileKey: string, fallbackEnabled: boolean 
     if (subscription.status !== 'loaded') {
       return fallbackEnabled
         ? {
-            enabled: true,
-            until: new Date(),
-            id: 'fallback',
-          }
+          enabled: true,
+          until: new Date(),
+          id: 'fallback',
+        }
         : {
-            enabled: false,
-          }
+          enabled: false,
+        }
     }
 
     const mode = subscription.data.figFileWorkshopMode

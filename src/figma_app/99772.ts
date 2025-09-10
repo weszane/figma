@@ -2,25 +2,25 @@ import { atom } from "../figma_app/27355";
 import { Iy, m7, VA, Og, VG } from "../figma_app/761118";
 import { C } from "../905/887158";
 import { FR } from "../figma_app/827216";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { ac, rO } from "../figma_app/210234";
-let $$d12 = Wh(() => atom(FR.LANDING_PAGE_WELCOME));
-let $$c15 = Wh(() => atom(null));
-let $$u6 = Wh(() => atom(!0));
-let $$p5 = Wh(() => atom(!1));
+let $$d12 = setupRemovableAtomFamily(() => atom(FR.LANDING_PAGE_WELCOME));
+let $$c15 = setupRemovableAtomFamily(() => atom(null));
+let $$u6 = setupRemovableAtomFamily(() => atom(!0));
+let $$p5 = setupRemovableAtomFamily(() => atom(!1));
 let $$_1 = atom(null);
 let $$h16 = atom(null);
 let $$m10 = atom(null);
-let $$g7 = Wh(() => atom(e => {
+let $$g7 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$m10);
   let r = e(Iy);
   return t ? r.get(t) : null;
 }));
-let $$f17 = Wh(() => atom(e => {
+let $$f17 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$g7);
   return Array.from(t?.rootNodeIdToViolatingNodeIdSet.keys() ?? []);
 }));
-let $$$$E9 = Wh(() => atom(e => {
+let $$$$E9 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$g7);
   let r = e(m7);
   let n = Array.from(t?.violatingNodeIdToRootNodeId.keys() ?? []);
@@ -31,7 +31,7 @@ let $$$$E9 = Wh(() => atom(e => {
     return e;
   }, []);
 }));
-let $$y4 = Wh(() => atom(e => {
+let $$y4 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$$$E9);
   let r = {};
   for (let e of t) {
@@ -44,17 +44,17 @@ let $$y4 = Wh(() => atom(e => {
   }
   return r;
 }));
-let $$b2 = Wh(() => atom(e => Array.from(e(Iy).values()).sort((e, t) => {
+let $$b2 = setupRemovableAtomFamily(() => atom(e => Array.from(e(Iy).values()).sort((e, t) => {
   if (e.type !== t.type) return "SIMILARITY" === e.type ? -1 : 1;
   let r = e.violatingNodeIdToRootNodeId.size;
   let n = t.violatingNodeIdToRootNodeId.size;
   return "SIMILARITY" === e.type ? n - r : r - n;
 })));
-let $$T3 = Wh(() => atom(e => {
+let $$T3 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$g7);
   if (t) return ac(t);
 }));
-let I = Wh(() => atom(e => {
+let I = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$T3);
   let r = e($$g7);
   let n = e(m7);
@@ -68,7 +68,7 @@ let I = Wh(() => atom(e => {
   });
   return s;
 }));
-let $$S8 = Wh(() => atom(e => {
+let $$S8 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$y4);
   let r = e(I);
   let n = Object.values(t).flatMap(e => Object.keys(e));
@@ -83,7 +83,7 @@ let $$S8 = Wh(() => atom(e => {
   });
   return i;
 }));
-let v = Wh(() => atom(null));
+let v = setupRemovableAtomFamily(() => atom(null));
 let $$A13 = atom(null, (e, t) => {
   t(v, null);
 });

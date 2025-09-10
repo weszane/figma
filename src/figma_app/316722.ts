@@ -4,7 +4,7 @@ import { K } from "../905/443068";
 import { t as _$$t } from "../905/117577";
 import { a as _$$a } from "../905/964520";
 import l from "classnames";
-import { kx } from "../figma_app/191804";
+import { isColorDarkByLuminance } from "../figma_app/191804";
 import { BrowserInfo } from "../figma_app/778880";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -21,7 +21,7 @@ export function $$$$f0(e) {
   if (useEffect(() => (window.addEventListener("keydown", t), () => {
     window.removeEventListener("keydown", t);
   })), e.parentBackgroundColor) {
-    let t = kx(e.parentBackgroundColor);
+    let t = isColorDarkByLuminance(e.parentBackgroundColor);
     return jsxs("div", {
       className: _$$s.flex.flexRow.$,
       children: [jsx(K, {

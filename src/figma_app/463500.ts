@@ -2,8 +2,8 @@ import { debug } from "../figma_app/465776";
 import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { Oo } from "../905/709171";
-import { ke, In, kH } from "../905/309735";
-import { PW } from "../figma_app/633080";
+import { splitPath, getDirname, getBasename } from "../905/309735";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$d13(e, t) {
   let r = {
     name: "",
@@ -15,7 +15,7 @@ export function $$d13(e, t) {
   };
   e.forEach(e => {
     let n = r;
-    let i = ke(e.name);
+    let i = splitPath(e.name);
     i.pop();
     i.forEach(e => {
       let r = n.name ? n.name + "/" + e : e;
@@ -75,10 +75,10 @@ export function $$h14(e, t) {
   return n;
 }
 function m(e) {
-  return "STYLE_FOLDER" === e.type ? e.name : In(e.name);
+  return "STYLE_FOLDER" === e.type ? e.name : getDirname(e.name);
 }
 export function $$g8(e) {
-  return $$u12(e).filter(e => e.type === PW.STYLE);
+  return $$u12(e).filter(e => e.type === PrimaryWorkflowEnum.STYLE);
 }
 export function $$f0(e) {
   return $$u12(e).filter(e => "STYLE_FOLDER" === e.type);
@@ -101,7 +101,7 @@ export function $$y4(e, t) {
 }
 export function $$b10(e, t) {
   let r = [];
-  let n = t.map(e => e.type === PW.STYLE ? e.node_id : null);
+  let n = t.map(e => e.type === PrimaryWorkflowEnum.STYLE ? e.node_id : null);
   let i = t.map(e => "STYLE_FOLDER" === e.type ? e.name : null);
   e.styleIds.forEach(e => {
     let t = n.indexOf(e);
@@ -115,7 +115,7 @@ export function $$b10(e, t) {
   return r;
 }
 export function $$T15(e) {
-  return e.type === PW.STYLE ? ke(e.name).length : e.level;
+  return e.type === PrimaryWorkflowEnum.STYLE ? splitPath(e.name).length : e.level;
 }
 export function $$I2(e, t) {
   Oo(e, t) && (Fullscreen.deleteNode(e.node_id), trackEventAnalytics("Style Deleted", {
@@ -125,25 +125,25 @@ export function $$I2(e, t) {
 }
 export function $$S1(e, t, r, n) {
   if (!e && !r || !t) return !1;
-  let i = !n && "" !== n || "STYLE_FOLDER" === t.type && r === t && e?.type === PW.STYLE && $$T15(e) > $$T15(r) && n !== In(t.name);
-  return !(e === t || r === t && (t.type === PW.STYLE || !i) || "STYLE_FOLDER" === t.type && (e?.type === PW.STYLE && r?.type === PW.STYLE || e?.type === "STYLE_FOLDER" && r?.type === PW.STYLE || e && (m(e) + "/").startsWith(t.name + "/") || r && (m(r) + "/").startsWith(t.name + "/") && !i));
+  let i = !n && "" !== n || "STYLE_FOLDER" === t.type && r === t && e?.type === PrimaryWorkflowEnum.STYLE && $$T15(e) > $$T15(r) && n !== getDirname(t.name);
+  return !(e === t || r === t && (t.type === PrimaryWorkflowEnum.STYLE || !i) || "STYLE_FOLDER" === t.type && (e?.type === PrimaryWorkflowEnum.STYLE && r?.type === PrimaryWorkflowEnum.STYLE || e?.type === "STYLE_FOLDER" && r?.type === PrimaryWorkflowEnum.STYLE || e && (m(e) + "/").startsWith(t.name + "/") || r && (m(r) + "/").startsWith(t.name + "/") && !i));
 }
 export function $$v6(e, t, r, a, s, c, p) {
   if (e.forEach(e => {
     (function (e, t) {
-      let r = e.filter(e => e.type === PW.STYLE).map(e => e.node_id);
+      let r = e.filter(e => e.type === PrimaryWorkflowEnum.STYLE).map(e => e.node_id);
       let n = [];
       t.forEach(e => {
         r.indexOf(e.node_id) > -1 && n.push(e);
       });
       let i = e[0];
-      let a = $$u12($$d13(n, i.type === PW.STYLE ? i.style_type : i.styleTypeSection)).filter(e => e.type === PW.STYLE);
+      let a = $$u12($$d13(n, i.type === PrimaryWorkflowEnum.STYLE ? i.style_type : i.styleTypeSection)).filter(e => e.type === PrimaryWorkflowEnum.STYLE);
       for (let e = 0; e < r.length; e++) if (r[e] !== a[e].node_id) return !0;
       return !1;
     })(s = function (e, t) {
       let r = new Set();
       let n = new Set();
-      for (let t of e) (t.type === PW.STYLE ? [t] : function e(t) {
+      for (let t of e) (t.type === PrimaryWorkflowEnum.STYLE ? [t] : function e(t) {
         let r = [];
         t.styles.forEach(e => {
           r.push(e);
@@ -153,20 +153,20 @@ export function $$v6(e, t, r, a, s, c, p) {
           r.push(...e(t));
         });
         return r;
-      }(t).concat([t])).forEach(e => e.type === PW.STYLE ? n.add(e.node_id) : r.add(e.name));
+      }(t).concat([t])).forEach(e => e.type === PrimaryWorkflowEnum.STYLE ? n.add(e.node_id) : r.add(e.name));
       return t.filter(e => "STYLE_FOLDER" === e.type ? !r.has(e.name) : !n.has(e.node_id));
     }([e], s), c) && (c = A(e, s, c));
   }), !s) return;
   let _ = new Set(e.map(e => "STYLE_FOLDER" === e.type || p ? function (e, t, r, i) {
-    if (!e) return i.some(e => e.type === PW.STYLE && "" === In(e.name)) ? null : -1;
+    if (!e) return i.some(e => e.type === PrimaryWorkflowEnum.STYLE && "" === getDirname(e.name)) ? null : -1;
     if (!t) return r.length - 1;
     let a = r.map(e => e.node_id);
-    if (e.type === PW.STYLE && t.type === PW.STYLE || "STYLE_FOLDER" === e.type && t.type === PW.STYLE) return null;
-    if (e.type === PW.STYLE && "STYLE_FOLDER" === t.type && $$T15(e) === $$T15(t)) {
+    if (e.type === PrimaryWorkflowEnum.STYLE && t.type === PrimaryWorkflowEnum.STYLE || "STYLE_FOLDER" === e.type && t.type === PrimaryWorkflowEnum.STYLE) return null;
+    if (e.type === PrimaryWorkflowEnum.STYLE && "STYLE_FOLDER" === t.type && $$T15(e) === $$T15(t)) {
       let r = a.indexOf(e.node_id);
       let n = function (e, t) {
         let r = $$g8(e);
-        let n = new Set(t.filter(e => e.type === PW.STYLE).map(e => e.node_id));
+        let n = new Set(t.filter(e => e.type === PrimaryWorkflowEnum.STYLE).map(e => e.node_id));
         let i = r[0];
         r.forEach(e => {
           e.sort_position && i.sort_position && e.sort_position < i.sort_position && n.has(e.node_id) && (i = e);
@@ -179,7 +179,7 @@ export function $$v6(e, t, r, a, s, c, p) {
     {
       let s = i.indexOf(t);
       if (-1 !== s) {
-        let e = i.slice(s, i.length).find(e => e.type === PW.STYLE);
+        let e = i.slice(s, i.length).find(e => e.type === PrimaryWorkflowEnum.STYLE);
         if (!e) return r.length - 1;
         let t = a.indexOf(e.node_id);
         debug(-1 !== t, "style to insert before does not exist in the stored list");
@@ -187,7 +187,7 @@ export function $$v6(e, t, r, a, s, c, p) {
       }
       {
         let t = i.indexOf(e);
-        let s = i.slice(t + 1).reverse().find(e => e.type === PW.STYLE);
+        let s = i.slice(t + 1).reverse().find(e => e.type === PrimaryWorkflowEnum.STYLE);
         if (!s) return r.length - 1;
         let o = a.indexOf(s.node_id);
         debug(-1 !== o, "style to insert after does not exist in the stored list");
@@ -198,10 +198,10 @@ export function $$v6(e, t, r, a, s, c, p) {
     if (!e) return -1;
     if (!t) return r.length - 1;
     let a = r.map(e => e.node_id);
-    if (e.type === PW.STYLE && "STYLE_FOLDER" === t.type) return a.indexOf(e.node_id);
+    if (e.type === PrimaryWorkflowEnum.STYLE && "STYLE_FOLDER" === t.type) return a.indexOf(e.node_id);
     {
       let e = i.indexOf(t);
-      let s = i.slice(e, i.length).find(e => e.type === PW.STYLE);
+      let s = i.slice(e, i.length).find(e => e.type === PrimaryWorkflowEnum.STYLE);
       if (!s) return r.length - 1;
       let o = a.indexOf(s.node_id);
       debug(-1 !== o, "style to insert before does not exist in the stored list");
@@ -216,7 +216,7 @@ export function $$v6(e, t, r, a, s, c, p) {
   let y = m;
   for (let t of e) {
     let e = t => {
-      t.type === PW.STYLE ? (Fullscreen.insertStyleBetween(t.node_id, y?.node_id || "", f?.node_id || ""), y = t) : (t.styles.forEach(t => {
+      t.type === PrimaryWorkflowEnum.STYLE ? (Fullscreen.insertStyleBetween(t.node_id, y?.node_id || "", f?.node_id || ""), y = t) : (t.styles.forEach(t => {
         e(t);
       }), t.subfolders.forEach(t => {
         e(t);
@@ -224,11 +224,11 @@ export function $$v6(e, t, r, a, s, c, p) {
     };
     e(t);
     let r = "" === a ? [] : a.split("/");
-    let n = [...r, kH(t.name)];
+    let n = [...r, getBasename(t.name)];
     if (n.join("/") !== t.name) {
       let e = (t, r) => {
-        if (t.type === PW.STYLE) {
-          let e = [...r, kH(t.name)].join("/");
+        if (t.type === PrimaryWorkflowEnum.STYLE) {
+          let e = [...r, getBasename(t.name)].join("/");
           E.set(t.node_id, e);
           Fullscreen.renameNode(t.node_id, e);
         } else {
@@ -237,7 +237,7 @@ export function $$v6(e, t, r, a, s, c, p) {
             e(t, r);
           });
           t.subfolders.forEach(t => {
-            let n = [...r, kH(t.name)];
+            let n = [...r, getBasename(t.name)];
             e(t, n);
           });
         }
@@ -248,13 +248,13 @@ export function $$v6(e, t, r, a, s, c, p) {
   return E;
 }
 let A = (e, t, r) => {
-  let n = ke(e.name);
-  e.type === PW.STYLE && n.pop();
-  let a = t.filter(e => e.type === PW.STYLE);
+  let n = splitPath(e.name);
+  e.type === PrimaryWorkflowEnum.STYLE && n.pop();
+  let a = t.filter(e => e.type === PrimaryWorkflowEnum.STYLE);
   let s = [];
   for (; n.length;) {
     let e = n.join("/");
-    if (0 === (s = a.filter(t => In(t.name).startsWith(e))).length) n.pop();else break;
+    if (0 === (s = a.filter(t => getDirname(t.name).startsWith(e))).length) n.pop();else break;
   }
   if (s.length) {
     let t;
@@ -262,7 +262,7 @@ let A = (e, t, r) => {
     s.forEach(e => {
       null != e.sort_position && null != n.sort_position && e.sort_position < n.sort_position && (n = e);
     });
-    t = e.type === PW.STYLE ? e : $$g8(e)[0];
+    t = e.type === PrimaryWorkflowEnum.STYLE ? e : $$g8(e)[0];
     let a = r.indexOf(t);
     let o = r[a - 1];
     let d = r[a + 1];
@@ -292,8 +292,8 @@ export function $$x9({
       display: "none"
     }
   };
-  if (e?.type === PW.STYLE) {
-    let t = In(e.name).split("/");
+  if (e?.type === PrimaryWorkflowEnum.STYLE) {
+    let t = getDirname(e.name).split("/");
     for (let e = 0; e < t.length; e++) {
       let r = t.slice(0, e + 1).join("/");
       if (a.has(r) && -1 === d.indexOf(r)) {
@@ -304,9 +304,9 @@ export function $$x9({
           }
         };
         return {
-          folderNameToNestUnder: In(r),
+          folderNameToNestUnder: getDirname(r),
           dividerStyles: {
-            marginLeft: 24 * Math.min(ke(r).length, 8) - 8
+            marginLeft: 24 * Math.min(splitPath(r).length, 8) - 8
           }
         };
       }
@@ -318,14 +318,14 @@ export function $$x9({
   let m = t ? $$T15(t) : 0;
   if (h <= m) {
     p = m;
-    _ = e ? e.type === PW.STYLE ? In(e.name) : e.name : "";
-  } else if (debug(null != e, "Dragging after an item that doesn't exist"), u.type === PW.STYLE || s >= .5) {
+    _ = e ? e.type === PrimaryWorkflowEnum.STYLE ? getDirname(e.name) : e.name : "";
+  } else if (debug(null != e, "Dragging after an item that doesn't exist"), u.type === PrimaryWorkflowEnum.STYLE || s >= .5) {
     p = h;
-    _ = In(e.name);
+    _ = getDirname(e.name);
   } else {
     let t = Math.floor(s / .5 * $$T15(e));
     t = Math.max(m - 1, t);
-    _ = ke(In(e.name)).slice(0, t).join("/");
+    _ = splitPath(getDirname(e.name)).slice(0, t).join("/");
     p = t + 1;
   }
   let g = {
@@ -344,7 +344,7 @@ export function $$N11(e, t) {
   let n = r ? t.indexOf(r) : -1;
   let i = n;
   let a = n + 1;
-  if (r?.type === PW.STYLE && t[a] && t[a]?.type === PW.STYLE) {
+  if (r?.type === PrimaryWorkflowEnum.STYLE && t[a] && t[a]?.type === PrimaryWorkflowEnum.STYLE) {
     let e = $$T15(r);
     for (let r = n + 1; r < t.length; r++) {
       let n = t[r];

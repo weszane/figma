@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import r, { createContext, useState, useEffect, useContext, useMemo, useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import l from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { ks } from "../figma_app/637027";
@@ -423,7 +423,7 @@ function G({
   currentFormStatus: u,
   extensionId: p
 }) {
-  let m = useMemo(() => !c2(s, i), [s, i]);
+  let m = useMemo(() => !deepEqual(s, i), [s, i]);
   let {
     canShowErrors,
     numberOfErrors,

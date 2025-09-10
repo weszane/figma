@@ -1,5 +1,5 @@
 import { sortByWithOptions } from "../figma_app/656233";
-import { Do, PW } from "../figma_app/633080";
+import { hasAssetId, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lR } from "../figma_app/255679";
 let s = /^Examples *\//;
 export function $$o0(e, {
@@ -8,7 +8,7 @@ export function $$o0(e, {
   return !!t && s.test(e.name);
 }
 export function $$l3(e, t) {
-  if (Do(e) || !(e.type === PW.COMPONENT || e.type === PW.STATE_GROUP)) return !1;
+  if (hasAssetId(e) || !(e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP)) return !1;
   let r = lR(e, t);
   return $$o0(e, {
     isPreset: r

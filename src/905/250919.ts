@@ -1,5 +1,5 @@
 import { sD } from "../905/937198";
-import { YR } from "../905/622391";
+import { getOpenFileKey } from "../905/622391";
 import { isNotNullish } from "../figma_app/95419";
 import { subscribeAndAwaitData } from "../905/553831";
 import { ListCollectionsView } from "../figma_app/43951";
@@ -22,7 +22,7 @@ export async function $$c0({
   collectionStableId: e
 }) {
   if ("" === e) return null;
-  let t = YR();
+  let t = getOpenFileKey();
   if (null == t) {
     sD("fileKey is null", {
       collectionStableId: e

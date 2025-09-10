@@ -1,11 +1,11 @@
-import { throwTypeError } from "../figma_app/465776";
-import { atom } from "../figma_app/27355";
-import { createReduxSubscriptionAtom } from "../905/111321";
-import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { NC, MM } from "../905/17179";
-import { j } from "../905/848904";
-import { ET, F5 } from "../905/284406";
-import { H } from "../905/581820";
+import { throwTypeError } from "src/figma_app/465776";
+import { atom } from "src/figma_app/27355";
+import { createReduxSubscriptionAtom } from "src/905/111321";
+import { createOptimistCommitAction, createOptimistRevertAction } from "src/905/676456";
+import { NC, MM } from "src/905/17179";
+import { j } from "src/905/848904";
+import { ET, F5 } from "src/905/284406";
+import { H } from "src/905/581820";
 export class $$u2 {
   constructor(e) {
     this.binding = new $$p1(e, {}, {

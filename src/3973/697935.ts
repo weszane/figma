@@ -1,5 +1,5 @@
-import { atom, setupCustomAtom } from "../figma_app/27355";
-import { Uv, bT, Uw } from "../3973/473379";
+import { atom, setupCustomAtom } from "src/figma_app/27355";
+import { Uv, bT, Uw } from "src/3973/473379";
 export function $$i4(e) {
   return e.status === Uv.ERRORED && e.cause === bT.TIMEOUT;
 }

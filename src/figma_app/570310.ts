@@ -49,10 +49,10 @@ import { eY as _$$eY, T3 } from "../figma_app/722362";
 import { selectCurrentFile, useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f2 } from "../905/940356";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { bj } from "../905/420347";
 import { M4 } from "../905/713695";
-import { ZA, xA } from "../figma_app/633080";
+import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { Vr } from "../figma_app/151869";
 import { VZ } from "../figma_app/727192";
@@ -896,7 +896,7 @@ function eV() {
 }
 function eH(e) {
   let t = bj([e])?.data?.[0];
-  return !!t && ZA(t) && xA(t);
+  return !!t && isPublishedLibraryWithAssets(t) && isCommunityLibrary(t);
 }
 let ez = (e, t) => {
   let r = useMemo(() => e ? _$$A2(e).fromNow() : void 0, [e]);
@@ -988,7 +988,7 @@ function eK({
   let A = function (e) {
     let t = bj([e]).data[0];
     let r = null;
-    t && (ZA(t) && xA(t) ? r = t.hub_file_id : "library_file_key" in t && (r = t.library_file_key));
+    t && (isPublishedLibraryWithAssets(t) && isCommunityLibrary(t) ? r = t.hub_file_id : "library_file_key" in t && (r = t.library_file_key));
     return r;
   }(S);
   let C = eH(S);
@@ -1157,7 +1157,7 @@ function eY({
   });
 }
 let $$e$2 = atom(!1);
-let eX = Wh(() => atom(!1));
+let eX = setupRemovableAtomFamily(() => atom(!1));
 let eq = "dev_mode_has_dismissed_code_connect_instance_entrypoint";
 function eJ({
   contentType: e

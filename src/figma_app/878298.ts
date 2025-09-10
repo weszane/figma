@@ -1,6 +1,6 @@
 // /Users/allen/sigma-main/src/figma_app/878298.ts
 
-import type { Fn } from '../../types/global'
+import type { Fn } from '../../../types/global'
 import { Component, PureComponent, useCallback, useLayoutEffect, useMemo } from 'react'
 import { decodeBase64, encodeBase64 } from '../905/561685'
 import { getFeatureFlags } from '../905/601108'
@@ -19,8 +19,8 @@ const interactionPaths = new Set()
  * Original: x
  */
 const DEFAULT_EVENT = {
-  preventDefault() {},
-  stopPropagation() {},
+  preventDefault() { },
+  stopPropagation() { },
 }
 
 /**
@@ -39,10 +39,10 @@ export function addInteractionPath(path: any) {
  */
 const DEFAULT_TARGET = {
   value: '',
-  focus() {},
-  blur() {},
-  setPointerCapture() {},
-  releasePointerCapture() {},
+  focus() { },
+  blur() { },
+  setPointerCapture() { },
+  releasePointerCapture() { },
 }
 /**
  * Removes an interaction path if interaction path check is enabled.
@@ -293,7 +293,7 @@ export function setupPlayback(recorder: any, eventType: string, handler: Fn, opt
  * @param options - Additional options.
  * @returns The memoized handler.
  */
-export function useSetupPlayback(key: any, eventType: string, handler: Fn, options: any) {
+export function useSetupPlayback(key: any, eventType: string, handler: Fn, options: any = {}) {
   const recorder = useRecordingKey(key)
   return useMemo(() => setupPlayback(recorder, eventType, handler, options), [recorder, eventType, handler, options])
 }
@@ -359,7 +359,7 @@ function createCurrentTargetProxy(event: any) {
       currentTarget: new Proxy(element, {
         get(target: any, prop: string) {
           if (prop === 'setPointerCapture' || prop === 'releasePointerCapture') {
-            return () => {}
+            return () => { }
           }
           const value = target[prop]
           return typeof value === 'function' ? value.bind(target) : value
@@ -379,7 +379,7 @@ function createCurrentTargetProxy(event: any) {
  * @param options - Additional options.
  * @returns The wrapped handler.
  */
-export function handleMouseEvent(recorder: any, eventType: string, handler: Fn, options: any) {
+export function handleMouseEvent(recorder: any, eventType: string, handler: Fn, options: any = {}) {
   return setupPlayback(recorder, eventType, handler, {
     record(event: any) {
       event = event || {}
@@ -607,7 +607,7 @@ export function handleInputEvent(recorder: any, eventType: string, handler: Fn) 
           ...normalizeModifierKeys(record),
           ...DEFAULT_EVENT,
         },
-        accept: () => {},
+        accept: () => { },
       }
     },
   })
@@ -776,7 +776,7 @@ export function useHandleGenericEvent(key: any, eventType: string, handler: Fn) 
  * @param options - Additional options.
  * @returns The wrapped handler.
  */
-export function handlePointerEvent(recorder: any, eventType: string, handler: Fn, options: any) {
+export function handlePointerEvent(recorder: any, eventType: string, handler: Fn, options: any = {}) {
   return setupPlayback(recorder, eventType, handler, {
     record(event: any) {
       event = event || {}

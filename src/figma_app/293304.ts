@@ -14,9 +14,9 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
 import { ay } from "../905/879323";
-import { J_ } from "../figma_app/80990";
+import { splitAndJoinPath } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
-import { In, kH } from "../905/309735";
+import { getDirname, getBasename } from "../905/309735";
 import { t as _$$t } from "../figma_app/440177";
 import { zK, zM } from "../905/182453";
 import { JU, ks } from "../figma_app/626177";
@@ -78,9 +78,9 @@ function w({
   let k = useContext(zK);
   let M = useHandleFocusEvent(generateRecordingKey(h, "styleName"), "submit", () => {
     if ("" === C) return;
-    let r = t ? In(t) : void 0;
+    let r = t ? getDirname(t) : void 0;
     let n = r ? r + "/" + C : C;
-    permissionScopeHandler.user("rename-style", () => Fullscreen?.renameNode(sessionLocalIDToString(L), J_(n)));
+    permissionScopeHandler.user("rename-style", () => Fullscreen?.renameNode(sessionLocalIDToString(L), splitAndJoinPath(n)));
     fullscreenValue.triggerAction("commit");
     F();
     trackEventAnalytics("Style Renamed", {
@@ -93,13 +93,13 @@ function w({
     }));
   };
   let j = useHandleKeyboardEvent(h, "keydown", e => {
-    if (e.keyCode === Uz.TAB) M(); else if (e.keyCode === Uz.ENTER) {
+    if (e.keyCode === Uz.TAB) M();else if (e.keyCode === Uz.ENTER) {
       M();
       k === zM.EDIT_STYLE && "" === C || N?.();
     } else {
       if (e.keyCode !== Uz.ESCAPE) return SKIP_RECORDING;
       flushSync(() => {
-        w(t ? kH(t) : "");
+        w(t ? getBasename(t) : "");
       });
       F();
       D.current?.blur();
@@ -139,7 +139,7 @@ function w({
   });
 }
 function O(e, t) {
-  return (t ?? "") + (e ? kH(e) : "");
+  return (t ?? "") + (e ? getBasename(e) : "");
 }
 export function $$R2(e, t, r) {
   let n = "";

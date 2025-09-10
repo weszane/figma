@@ -1,4 +1,4 @@
-import { QR } from "../figma_app/273493";
+import { packRgb } from "../figma_app/273493";
 import { AppStateTsApi, DuplicateType, InteractionCpp, DesignGraphElements, Fullscreen, SideType } from "../figma_app/763686";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -65,11 +65,11 @@ function h(e, {
   };
 }
 function g(e, t, i) {
-  let a = QR(1, 1, 1);
+  let a = packRgb(1, 1, 1);
   GJ(e, t, i, a, AppStateTsApi.getCanvasButton());
 }
 function f(e, t, i) {
-  let a = QR(1, 1, 1);
+  let a = packRgb(1, 1, 1);
   kP(e, t, i, AppStateTsApi.getCanvasButton(), a);
 }
 export class $$$$_0 extends j {

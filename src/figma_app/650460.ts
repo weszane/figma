@@ -3,7 +3,7 @@ import { forwardRef, useState, useCallback, useEffect } from "react";
 import { c$ } from "../905/575478";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
-import { YU } from "../figma_app/191804";
+import { colorToRgbaString } from "../figma_app/191804";
 import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
 import { B } from "../905/714743";
@@ -115,7 +115,7 @@ export function $$P1({
     children: jsx("div", {
       className: l()(b, "swatch--radioOptionCircleWrapper--1RS0M"),
       children: jsx(c$, {
-        value: YU(e),
+        value: colorToRgbaString(e),
         "aria-label": c,
         htmlAttributes: {
           "data-tooltip": o,

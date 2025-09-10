@@ -9,10 +9,10 @@ import { logInfo } from "../905/714362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { J4 } from "../figma_app/349248";
 import { arraysEqual } from "../figma_app/656233";
-import { x8 } from "../905/888985";
+import { libraryModuleDataAtomFamily } from "../905/888985";
 import { _f } from "../905/760682";
 import { LibraryModuleData, LibraryModuleDataByLibraryKey } from "../figma_app/43951";
-let f = createRemovableAtomFamily(e => x8({
+let f = createRemovableAtomFamily(e => libraryModuleDataAtomFamily({
   fileKey: e
 }));
 createRemovableAtomFamily(e => atom(t => {

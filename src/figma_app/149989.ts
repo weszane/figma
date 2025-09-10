@@ -25,7 +25,7 @@ import { dH } from "../figma_app/722362";
 import { useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { sZ } from "../905/845253";
 import { Oe } from "../figma_app/336853";
-import { PW, ub } from "../figma_app/633080";
+import { PrimaryWorkflowEnum, LibraryItemTypeEnum } from "../figma_app/633080";
 import { t as _$$t2 } from "../905/62933";
 import { Id, jT } from "../figma_app/626177";
 import { AH, Zk, Je } from "../905/571648";
@@ -174,7 +174,7 @@ function ee({
   let I = y.data ?? [];
   return r === VariableResolvedDataType.COLOR && "color-picker" === i && l ? jsx(et, {
     fileKey: f,
-    selectedStyle: e?.type === PW.STYLE ? e : null,
+    selectedStyle: e?.type === PrimaryWorkflowEnum.STYLE ? e : null,
     render: ({
       isLoading: o,
       dsStyles: f
@@ -362,7 +362,7 @@ function en({
   let O = useMemo(() => [...S, ...(C ?? [])], [S, C]);
   return a === VariableResolvedDataType.COLOR && "color-picker" === s && u ? jsx(es, {
     styleType: s4.FILL,
-    selectedStyle: e?.type === PW.STYLE ? e : null,
+    selectedStyle: e?.type === PrimaryWorkflowEnum.STYLE ? e : null,
     render: ({
       dsStyles: i,
       isLoading: o
@@ -542,7 +542,7 @@ export function $$el3({
     requestedTypes: k,
     resolvedType: u ?? null
   }), [k, u]);
-  let ef = A ? [ub.VARIABLE, ub.STYLE] : [ub.VARIABLE];
+  let ef = A ? [LibraryItemTypeEnum.VARIABLE, LibraryItemTypeEnum.STYLE] : [LibraryItemTypeEnum.VARIABLE];
   let eE = _$$A(eg, l?.type !== "CMS_FIELD" ? l : null, ef);
   let ey = sZ();
   let eb = Fl();
@@ -679,7 +679,7 @@ export function $$el3({
     hideStyleContextMenu
   } = XM();
   let eW = useCallback((e, t) => {
-    e.type === PW.STYLE && showStyleContextMenu({
+    e.type === PrimaryWorkflowEnum.STYLE && showStyleContextMenu({
       dsStyle: e,
       position: t
     });
@@ -696,7 +696,7 @@ export function $$el3({
       getFeatureFlags().dse_collapse_variable_and_style_libraries && e.libraryKey && ex(e.libraryKey);
       return;
     }
-    e.type === PW.VARIABLE ? b(e, eG) : e.type === PW.STYLE ? A?.(e, {
+    e.type === PrimaryWorkflowEnum.VARIABLE ? b(e, eG) : e.type === PrimaryWorkflowEnum.STYLE ? A?.(e, {
       fromSearch: F.length > 0
     }) : "COMPONENT_PROP" === e.type ? Q?.(e) : "CMS_FIELD" === e.type && et?.(e);
     D || N();
@@ -799,7 +799,7 @@ function ed({
     requestedTypes: r,
     resolvedType: t ?? null
   }), [r, t]);
-  let s = n ? [ub.VARIABLE, ub.STYLE] : [ub.VARIABLE];
+  let s = n ? [LibraryItemTypeEnum.VARIABLE, LibraryItemTypeEnum.STYLE] : [LibraryItemTypeEnum.VARIABLE];
   let o = _$$A(a, e?.type !== "CMS_FIELD" ? e : null, s);
   let l = sZ();
   let d = Fl();

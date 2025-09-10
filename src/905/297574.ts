@@ -2,13 +2,13 @@ import { useMemo, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { atomStoreManager } from "../figma_app/27355";
 import { qp } from "../905/977779";
-import { aV } from "../905/405710";
+import { withParsedMeta } from "../905/405710";
 import { M4 } from "../905/713695";
 import { vx } from "../905/91038";
 import { e_ } from "../figma_app/803787";
 import { dK } from "../figma_app/889655";
 import { C9, jf } from "../figma_app/141508";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Z } from "../905/939602";
 import { r as _$$r } from "../905/336143";
 import { TE } from "../905/131786";
@@ -31,7 +31,7 @@ export function $$A2({
     let s = useSelector(vx);
     let o = useSelector(C9);
     let l = useSelector(jf);
-    return useMemo(() => e ? (TE(i, o, l, a.publishedByLibraryKey, s, t)[e] ?? []).map(e => e.type === PW.COMPONENT ? {
+    return useMemo(() => e ? (TE(i, o, l, a.publishedByLibraryKey, s, t)[e] ?? []).map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? {
       ...e,
       num_existing_instances: 0,
       num_insertions: 0,
@@ -67,12 +67,12 @@ export function $$b3(e) {
 let $$v4 = M4.Query({
   fetch: async e => null == e ? [] : ((await Z.getLibraryStyles({
     libraryFileKey: e
-  })).data.meta.styles ?? []).map(aV)
+  })).data.meta.styles ?? []).map(withParsedMeta)
 });
 let $$I5 = M4.Query({
   fetch: async e => null == e ? [] : ((await Z.getLibraryStylesByLibraryKey({
     libraryKey: e
-  })).data.meta.styles ?? []).map(aV)
+  })).data.meta.styles ?? []).map(withParsedMeta)
 });
 export const Go = $$y0;
 export const Tf = $$_1;

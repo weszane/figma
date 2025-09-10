@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/805353";
@@ -777,7 +777,7 @@ function ek(e) {
   l.forEach(e => {
     e && (d[e] = !0);
   });
-  c2(d, n) || r(("plugin" === e ? _$$P : _$$o)(d));
+  deepEqual(d, n) || r(("plugin" === e ? _$$P : _$$o)(d));
   return d;
 }
 export function $$eM39() {

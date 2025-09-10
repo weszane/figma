@@ -86,7 +86,7 @@ import { P as _$$P3 } from '../905/351996';
 import { c as _$$c2 } from '../905/370443';
 import { selectCurrentUser } from '../905/372672';
 import { W as _$$W2 } from '../905/378870';
-import { c2 as _$$c6 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { Q as _$$Q2 } from '../905/384324';
 import { u as _$$u7 } from '../905/389684';
 import { X as _$$X4 } from '../905/399133';
@@ -361,7 +361,7 @@ import { G as _$$G, h as _$$h2 } from '../figma_app/257072';
 import { S7 } from '../figma_app/259578';
 import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
 import { cZ as _$$cZ } from '../figma_app/272902';
-import { oU as _$$oU, bi, Vm } from '../figma_app/273493';
+import { rgbToNormalized, packNormalizedRgb, colorsEqual } from '../figma_app/273493';
 import { D7, fi } from '../figma_app/275462';
 import { s4 as _$$s3 } from '../figma_app/276332';
 import { q as _$$q2 } from '../figma_app/277543';
@@ -421,7 +421,7 @@ import { lX as _$$lX } from '../figma_app/588397';
 import { w as _$$w } from '../figma_app/588564';
 import { Fj } from '../figma_app/594947';
 import { a as _$$a6, z as _$$z3 } from '../figma_app/601188';
-import { Wh } from '../figma_app/615482';
+import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { $z, e6 as _$$e3, Me } from '../figma_app/617427';
 import { i as _$$i4 } from '../figma_app/622160';
 import { li as _$$li, Gi, O$, RD, wv } from '../figma_app/622574';
@@ -431,7 +431,7 @@ import { fI } from '../figma_app/626177';
 import { UG, Wc } from '../figma_app/628987';
 import { JT } from '../figma_app/632248';
 import { CZ } from '../figma_app/632319';
-import { Wv, ZA } from '../figma_app/633080';
+import { LibraryTabEnum, isPublishedLibraryWithAssets } from '../figma_app/633080';
 import { hg as _$$hg } from '../figma_app/635062';
 import { x as _$$x, Lk } from '../figma_app/639711';
 import { xn as _$$xn, Yk } from '../figma_app/644079';
@@ -2669,7 +2669,7 @@ function nX({
     type: mF.ALL
   }));
   let T = d[0];
-  T && !ZA(T) && (T = void 0);
+  T && !isPublishedLibraryWithAssets(T) && (T = void 0);
   return jsxs(Fragment, {
     children: [jsx(tQ, {
       title: g || '',
@@ -4204,7 +4204,7 @@ function lY({
     type: Ef.DEFAULT
   }));
   let g = i[0];
-  g && !ZA(g) && (g = void 0);
+  g && !isPublishedLibraryWithAssets(g) && (g = void 0);
   return jsxs(Fragment, {
     children: [jsx(tQ, {
       title: x || '',
@@ -4896,10 +4896,10 @@ let im = {
 let ih = [ix, ip];
 function ig(e) {
   let t = roundTo2Decimals(e.opacity ?? 0);
-  return !!((Vm(e.color, ix) || Vm(e.color, ip)) && t === 1 || Vm(e.color, ix) && (t === 0 || t === 0.18 || t === 0.1) || Vm(e.color, im) && t === 1);
+  return !!((colorsEqual(e.color, ix) || colorsEqual(e.color, ip)) && t === 1 || colorsEqual(e.color, ix) && (t === 0 || t === 0.18 || t === 0.1) || colorsEqual(e.color, im) && t === 1);
 }
 function ib(e, t) {
-  return !(!e || isInvalidValue(e)) && t.some(t => Vm(e.color, t));
+  return !(!e || isInvalidValue(e)) && t.some(t => colorsEqual(e.color, t));
 }
 let i_ = ['SOLID', 'GRADIENT_LINEAR', 'GRADIENT_ANGULAR', 'GRADIENT_DIAMOND', 'GRADIENT_RADIAL', 'IMAGE', 'VIDEO'];
 function ij() {
@@ -5771,7 +5771,7 @@ function o6({
   } = _$$u7({
     entrypoint: _$$r3.COOPER_LIBRARY_TEXT_PICKER,
     modalType: 'editor',
-    initialTab: Wv.LIBRARIES
+    initialTab: LibraryTabEnum.LIBRARIES
   });
   return jsx(_$$bL, {
     onClose: t,
@@ -7756,7 +7756,7 @@ function sx(e) {
   return e.filter(e => e.color && e.opacity).filter(e => !ig(e)).filter(e => {
     if (!e.color) return !1;
     {
-      let n = bi(_$$oU(e.color));
+      let n = packNormalizedRgb(rgbToNormalized(e.color));
       return !t.has(n) && (t.add(n), !0);
     }
   });
@@ -7773,7 +7773,7 @@ function sh({
   let i = useRef(null);
   let s = e || i;
   let d = sx(sc());
-  let c = sf.filter(e => !d.some(t => Vm(e, t.color)));
+  let c = sf.filter(e => !d.some(t => colorsEqual(e, t.color)));
   let u = function (e, t, n) {
     let l = !ib(e, t.map(e => e?.color).filter(isNotNullish)) && !ib(e, n);
     return useMemo(() => l && e && isValidValue(e) && !ig(e) ? [...t].concat(e) : t, [l, e, t]);
@@ -7801,7 +7801,7 @@ function sh({
             type: 'SOLID'
           }, yesNoTrackingEnum.YES),
           opacity: 1,
-          isSelected: isValidValue(t) && Vm(e, t?.color) && t?.opacity === 1,
+          isSelected: isValidValue(t) && colorsEqual(e, t?.color) && t?.opacity === 1,
           recordingKey: `cooperFloatingPanelColorChit-${l}`
         }, l)
       }, l)), u.map((e, l) => e.color && e.opacity && jsx(sg, {
@@ -7809,7 +7809,7 @@ function sh({
           color: e.color,
           opacity: e.opacity,
           onClick: () => n(e, yesNoTrackingEnum.YES),
-          isSelected: isValidValue(t) && Vm(e.color, t?.color) && e.opacity === t?.opacity
+          isSelected: isValidValue(t) && colorsEqual(e.color, t?.color) && e.opacity === t?.opacity
         }, l)
       }, l))]
     }), jsx('div', {
@@ -7831,7 +7831,7 @@ function sh({
             type: 'SOLID'
           }, yesNoTrackingEnum.YES),
           opacity: 1,
-          isSelected: isValidValue(t) && Vm(e, t?.color) && t?.opacity === 1
+          isSelected: isValidValue(t) && colorsEqual(e, t?.color) && t?.opacity === 1
         }, l)
       }, l))]
     })]
@@ -8046,7 +8046,7 @@ function sj({
   let r = sx(sc()).slice(0, 4);
   let i = r.length;
   let a = Math.max(0, 6 - i - 3);
-  let s = sf.filter(e => !r.some(t => Vm(e, t.color))).slice(0, a);
+  let s = sf.filter(e => !r.some(t => colorsEqual(e, t.color))).slice(0, a);
   return jsxs('div', {
     className: 'color_control_submenu--colorRow--LgET5',
     children: [ih.map((t, n) => jsx(sy, {
@@ -8059,14 +8059,14 @@ function sj({
           type: 'SOLID'
         }, yesNoTrackingEnum.YES),
         opacity: 1,
-        isSelected: !!(e && isValidValue(e) && Vm(t, e?.color) && e.opacity === 1)
+        isSelected: !!(e && isValidValue(e) && colorsEqual(t, e?.color) && e.opacity === 1)
       }, n)
     }, n)), r.map((t, n) => t.color && t.opacity && jsx(sy, {
       children: jsx(sl, {
         color: t.color,
         opacity: t.opacity,
         onClick: () => l(t, yesNoTrackingEnum.YES),
-        isSelected: !!(e && isValidValue(e) && Vm(t.color, e?.color) && e?.opacity === t.opacity)
+        isSelected: !!(e && isValidValue(e) && colorsEqual(t.color, e?.color) && e?.opacity === t.opacity)
       }, n)
     }, n)), i < 4 && jsx(sE, {}), jsx(sy, {
       children: jsx(sr, {
@@ -8090,7 +8090,7 @@ function sj({
           type: 'SOLID'
         }, yesNoTrackingEnum.YES),
         opacity: 1,
-        isSelected: !!(e && isValidValue(e) && Vm(t, e?.color))
+        isSelected: !!(e && isValidValue(e) && colorsEqual(t, e?.color))
       }, n)
     }, n))]
   });
@@ -9505,7 +9505,7 @@ function dw({
   strokePaintPickerOpen: s,
   onStrokePaintClick: d
 }) {
-  let c = useMemo(() => t && i ? isInvalidValue(t) ? MIXED_MARKER : t.length > 1 ? 'DASHED' : _$$c6(t, e.SOLID.dashPattern) ? 'SOLID' : 'NONE' : 'NONE', [t, i, e]);
+  let c = useMemo(() => t && i ? isInvalidValue(t) ? MIXED_MARKER : t.length > 1 ? 'DASHED' : deepEqual(t, e.SOLID.dashPattern) ? 'SOLID' : 'NONE' : 'NONE', [t, i, e]);
   let [u, x, p] = _$$t5.useTabs(Object.keys(e).reduce((e, t) => (e[t] = !0, e), {
     MIXED: !0
   }), {
@@ -10012,12 +10012,12 @@ let dQ = memo(e => {
     })
   });
 });
-let d3 = Wh(() => atom(null));
-let d9 = Wh(() => atom(''));
+let d3 = setupRemovableAtomFamily(() => atom(null));
+let d9 = setupRemovableAtomFamily(() => atom(''));
 var ce = (e => (e.UNSPLASH = 'UNSPLASH', e))(ce || {});
 var ct = (e => (e.LEFT_RAIL = 'LEFT_RAIL', e))(ct || {});
 var cn = (e => (e.SEARCH = 'SEARCH', e.EDITORIAL = 'EDITORIAL', e))(cn || {});
-let cl = Wh(() => atom({
+let cl = setupRemovableAtomFamily(() => atom({
   provider: 'UNSPLASH',
   viewType: 'LEFT_RAIL',
   libraryType: 'EDITORIAL',
@@ -11339,7 +11339,7 @@ function uL({
   }) : null;
 }
 var uO = (e => (e[e.SELECT_FILE = 0] = 'SELECT_FILE', e[e.MAP_DATA = 1] = 'MAP_DATA', e))(uO || {});
-let uM = Wh(() => atom(0));
+let uM = setupRemovableAtomFamily(() => atom(0));
 function uF() {
   let [e, t] = useAtomValueAndSetter(uM);
   let n = Xr(Lk);
@@ -13470,7 +13470,7 @@ function pa() {
   } = _$$A20({
     entrypoint: _$$r3.LEFT_RAIL_FOOTER,
     hideIfNoUpdates: !0,
-    initialTabOverride: Wv.UPDATES
+    initialTabOverride: LibraryTabEnum.UPDATES
   });
   return jsxs(Fragment, {
     children: [jsx(En, {}), jsx(pd, {}), jsx(_$$n7, {
@@ -13510,7 +13510,7 @@ function pd() {
   } = _$$A20({
     entrypoint: _$$r3.LEFT_RAIL_FOOTER,
     hideIfNoUpdates: !0,
-    initialTabOverride: Wv.UPDATES
+    initialTabOverride: LibraryTabEnum.UPDATES
   });
   return shouldShow ? jsx(_$$A16.IconButton, {
     active: expanded,
@@ -13967,7 +13967,7 @@ function pB({
   } = _$$u7({
     entrypoint: _$$r3.COOPER_LIBRARY_COLOR_PICKER,
     modalType: 'editor',
-    initialTab: Wv.LIBRARIES
+    initialTab: LibraryTabEnum.LIBRARIES
   });
   let h = useMemo(() => new Set(), []);
   let g = useMemo(() => {

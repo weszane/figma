@@ -1,14 +1,14 @@
-import { n as _$$n, D } from "../905/347702";
-import { trackEventAnalytics, analyticsEventManager, getAnonymousId } from "../905/449184";
-import { customHistory } from "../905/612521";
-import { getInitialOptions } from "../figma_app/169182";
-import { PerfTimer } from "../905/609396";
-import { isFigmaMirrorAndroidApp, isFigmaMobileIOSApp } from "../figma_app/778880";
-import { normalizePathname } from "../3973/348894";
-import { reportError } from "../905/11";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { bT, ss, PG, MU } from "../3973/473379";
+import { n as _$$n, D } from "src/905/347702";
+import { trackEventAnalytics, analyticsEventManager, getAnonymousId } from "src/905/449184";
+import { customHistory } from "src/905/612521";
+import { getInitialOptions } from "src/figma_app/169182";
+import { PerfTimer } from "src/905/609396";
+import { isFigmaMirrorAndroidApp, isFigmaMobileIOSApp } from "src/figma_app/778880";
+import { normalizePathname } from "src/3973/348894";
+import { reportError } from "src/905/11";
+import { ServiceCategories as _$$e } from "src/905/165054";
+import { isInteractionPathCheck } from "src/figma_app/897289";
+import { bT, ss, PG, MU } from "src/3973/473379";
 export let $$p13 = "exp_aa_test_fullscreen_view";
 export function $$m11(e, t) {
   (getInitialOptions().is_second_page_for_perf_tests || C()) && (void 0 === window.STATSIG_PERF && (window.STATSIG_PERF = {}), window.STATSIG_PERF[e] = t);

@@ -15,7 +15,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { b as _$$b } from "../905/217163";
-import { jg, Tb, PW } from "../figma_app/633080";
+import { LibraryAgeEnum, getDraftsSidebarString, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { e0 } from "../905/696396";
 import { PT } from "../905/669853";
 import { c as _$$c } from "../905/167005";
@@ -109,7 +109,7 @@ let z = "library_item_view--componentViewFooter--QIMIV file_view_styles--compone
 let H = "library_item_view--componentViewFooterText--YLOdY";
 let W = "library_item_view--oneComponentViewFileNameCol--d9Nqk text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let K = "library_item_view--oneComponentViewTeamCol--2iMZ2 text--fontPos11--2LvXf text--_fontBase--QdLsd";
-let Y = jg.THIRTY_DAYS;
+let Y = LibraryAgeEnum.THIRTY_DAYS;
 let $$q1 = memo(function (e) {
   let {
     fileVersion
@@ -373,7 +373,7 @@ class J extends PureComponent {
     super(...arguments);
     this.renderTeamNameField = e => null === e ? jsx("div", {
       className: "library_item_view--oneComponentViewTeamColDrafts--0qRH1 library_item_view--oneComponentViewTeamCol--2iMZ2 text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: Tb()
+      children: getDraftsSidebarString()
     }) : jsx("div", {
       className: K,
       children: e
@@ -419,7 +419,7 @@ class ee extends PureComponent {
     };
   }
   componentDidMount() {
-    this.props.item.type === PW.COMPONENT ? PT.getComponent({
+    this.props.item.type === PrimaryWorkflowEnum.COMPONENT ? PT.getComponent({
       fv: `${this.props.fileVersion || 0}`,
       componentKey: this.props.item.component_key
     }).then(e => {

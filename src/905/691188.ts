@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { g as _$$g } from "../905/125190";
 import { UserInterfaceElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -377,7 +377,7 @@ export function $$V1({
       void 0 !== e.slidesSubscribed && (t.slidesSubscribed = e.slidesSubscribed);
       void 0 !== e.buzzSubscribed && (t.buzzSubscribed = e.buzzSubscribed);
     }
-    c2(e, B.Off) || c2(e, B.AllFiles) ? t = e : e.designSubscribed ? t.designSubscribed = !t.designSubscribed : e.figjamSubscribed ? t.figjamSubscribed = !t.figjamSubscribed : e.slidesSubscribed ? t.slidesSubscribed = !t.slidesSubscribed : e.buzzSubscribed && (t.buzzSubscribed = !t.buzzSubscribed);
+    deepEqual(e, B.Off) || deepEqual(e, B.AllFiles) ? t = e : e.designSubscribed ? t.designSubscribed = !t.designSubscribed : e.figjamSubscribed ? t.figjamSubscribed = !t.figjamSubscribed : e.slidesSubscribed ? t.slidesSubscribed = !t.slidesSubscribed : e.buzzSubscribed && (t.buzzSubscribed = !t.buzzSubscribed);
     D(t) ? (_(t), u(!0)) : O(t);
   }, [D, C, u, O]);
   let U = `subscription-dropdown-container-${e ? "subflow" : "mainflow"}-${i}`;

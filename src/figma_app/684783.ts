@@ -60,7 +60,7 @@ import { A as _$$A2 } from "../6828/154709";
 import { A as _$$A3 } from "../svg/64643";
 import { A as _$$A4 } from "../svg/242499";
 import { perfTimerFrameManagerBindings } from "../figma_app/763686";
-import { w as _$$w } from "../905/5147";
+import { kiwiCodec } from "../905/5147";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
 import { Fe } from "../905/284552";
@@ -927,7 +927,7 @@ function eW(e) {
     stopProfile(e, t) {
       perfTimerFrameManagerBindings?.stopProfile(e, t);
     },
-    kiwiSchema: _$$w
+    kiwiSchema: kiwiCodec
   }, !0);
   useEffect(() => {
     s && s.setShowHotspots(!0);

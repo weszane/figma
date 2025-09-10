@@ -1,16 +1,16 @@
-import { ServiceCategories as _$$e } from "../905/165054";
-import { FullscreenPerfMetrics, AutosaveHelpers, CorePerfInfo } from "../figma_app/763686";
-import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { getEnvironmentInfo } from "../905/883621";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { getInitialOptions } from "../figma_app/169182";
-import { l as _$$l } from "../905/190247";
-import { reportError } from "../905/11";
-import { startPerformanceSpan, endPerformanceSpan } from "../905/670985";
-import { getTrackingSessionId, incrementSessionCounter } from "../905/471229";
-import { ys, QM, Nq } from "../figma_app/314264";
-import { ds } from "../905/87821";
-import { dd, PH } from "../905/550523";
+import { ServiceCategories as _$$e } from "src/905/165054";
+import { FullscreenPerfMetrics, AutosaveHelpers, CorePerfInfo } from "src/figma_app/763686";
+import { trackEventAnalytics, analyticsEventManager } from "src/905/449184";
+import { getEnvironmentInfo } from "src/905/883621";
+import { desktopAPIInstance } from "src/figma_app/876459";
+import { getInitialOptions } from "src/figma_app/169182";
+import { l as _$$l } from "src/905/190247";
+import { reportError } from "src/905/11";
+import { startPerformanceSpan, endPerformanceSpan } from "src/905/670985";
+import { getTrackingSessionId, incrementSessionCounter } from "src/905/471229";
+import { ys, QM, Nq } from "src/figma_app/314264";
+import { ds } from "src/905/87821";
+import { dd, PH } from "src/905/550523";
 class f {
   constructor(e) {
     this.maxHits = e;

@@ -1,7 +1,7 @@
-import { K } from "../905/807535";
-import { getI18nString } from "../905/303541";
-import { j } from "../905/495564";
-import { X } from "../905/698965";
+import { K } from "src/905/807535";
+import { getI18nString } from "src/905/303541";
+import { j } from "src/905/495564";
+import { X } from "src/905/698965";
 export class $$o0 {
   pathToSelectedView(e, t) {
     let {

@@ -45,7 +45,7 @@ import { u as _$$u, BQ } from "../figma_app/852050";
 import { J as _$$J } from "../905/95677";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { qo } from "../905/959568";
@@ -80,7 +80,7 @@ import { K as _$$K4 } from "../905/636142";
 import { c6, zJ, qU, AN, BY, Mj, FG, ID, c1, u8, bq, CS, PQ, ty, aF, n4, K8, Ro, mD, x1, hF, Zj, nt, R4, ru, Of, l1, ZS, R3, mQ, km, dW } from "../figma_app/631970";
 import { Xp, O2, FF, Rq, T1, lg, ui } from "../figma_app/164212";
 import { s as _$$s2 } from "../905/583953";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { fullscreenValue } from "../figma_app/455680";
 import { xP } from "../figma_app/65182";
 import { u as _$$u2 } from "../figma_app/940920";
@@ -190,7 +190,7 @@ new class {
     e?.skipFlush !== !0 && (await this.flushBufferAsync());
     this.calls = [];
   }
-  async flushBufferAsync() {}
+  async flushBufferAsync() { }
   addCall(e) {
     this.calls.push(e);
   }
@@ -198,10 +198,10 @@ new class {
     return void 0 !== this.findCall(e, t);
   }
   findCall(e, t) {
-    return t ? this.calls.find(r => r.event === e && Object.entries(t).every(([e, t]) => c2(r.data.properties[e], t))) : this.calls.find(t => t.event === e);
+    return t ? this.calls.find(r => r.event === e && Object.entries(t).every(([e, t]) => deepEqual(r.data.properties[e], t))) : this.calls.find(t => t.event === e);
   }
   findCalls(e, t) {
-    return t ? this.calls.filter(r => r.event === e && Object.entries(t).every(([e, t]) => c2(r.data.properties[e], t))) : this.calls.filter(t => t.event === e);
+    return t ? this.calls.filter(r => r.event === e && Object.entries(t).every(([e, t]) => deepEqual(r.data.properties[e], t))) : this.calls.filter(t => t.event === e);
   }
 }();
 window.fetch;
@@ -928,7 +928,7 @@ function eq({
           type: VariableDataType.SYMBOL_ID,
           resolvedType: VariableResolvedDataType.SYMBOL_ID,
           value: "SymbolId:" + t
-        }) : permissionScopeHandler.user("set-instance-prop-assignment", () => Fullscreen?.setInstanceComponentPropAssignment(r, s.explicitDefID, t, e.type === PW.STATE_GROUP ? ui(e, t, b) : "", c, 0 === preferredValues.length ? ApprovalStatus.NOT_APPLICABLE : preferredValues.includes(e) ? ApprovalStatus.YES : ApprovalStatus.NO));
+        }) : permissionScopeHandler.user("set-instance-prop-assignment", () => Fullscreen?.setInstanceComponentPropAssignment(r, s.explicitDefID, t, e.type === PrimaryWorkflowEnum.STATE_GROUP ? ui(e, t, b) : "", c, 0 === preferredValues.length ? ApprovalStatus.NOT_APPLICABLE : preferredValues.includes(e) ? ApprovalStatus.YES : ApprovalStatus.NO));
       }
     }));
     setHoveredComponentPropDef({

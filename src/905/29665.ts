@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
 import { Y } from "../905/830372";
-import { o as _$$o } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { pz } from "../figma_app/825489";
 export function $$p1() {
   return getFeatureFlags().cmty_lib_admin_publish ? jsx(Y, {
@@ -32,9 +32,9 @@ export function $$m0({
   let [t, i] = useAtomValueAndSetter(pz);
   return getFeatureFlags().cmty_lib_admin_publish ? jsx(Checkbox, {
     label: e,
-    checked: t === _$$o.HUBFILE,
+    checked: t === LibrarySourceEnum.HUBFILE,
     onChange: e => {
-      i(e ? _$$o.HUBFILE : _$$o.LIBRARY);
+      i(e ? LibrarySourceEnum.HUBFILE : LibrarySourceEnum.LIBRARY);
     }
   }) : null;
 }

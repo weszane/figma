@@ -1,7 +1,7 @@
-import { flatten } from "../figma_app/656233";
-import { RR } from "../figma_app/338442";
-import { Fullscreen, PageSelectionType } from "../figma_app/13528";
-import { ComponentPropType } from "../figma_app/175377";
+import { flatten } from "src/figma_app/656233";
+import { RR } from "src/figma_app/338442";
+import { Fullscreen, PageSelectionType } from "src/figma_app/13528";
+import { ComponentPropType } from "src/figma_app/175377";
 let $$o1 = (e, t) => {
   let i;
   if (e.length) {

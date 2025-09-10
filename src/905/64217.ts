@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Component, createRef } from "react";
 import a from "classnames";
-import { B } from "../905/877503";
-import { s as _$$s } from "../cssbuilder/589278";
+import { B } from "src/905/877503";
+import { s as _$$s } from "src/cssbuilder/589278";
 var s = a;
 var $$d0 = (e => (e.Block = "block", e.DeprecatedFullHeightBlock = "fullHeightBlock", e.Contents = "contents", e))($$d0 || {});
 export class $$c1 extends Component {

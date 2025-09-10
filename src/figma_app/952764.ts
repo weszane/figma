@@ -4,7 +4,7 @@ import { VariableIdHandler } from "../figma_app/243058";
 import { VariableDataType, VariablesBindings, VariableResolvedDataType, AppStateTsApi, LayoutTabType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Uv, AW } from "../figma_app/191804";
+import { blackColor, blendGradientColors } from "../figma_app/191804";
 import { Oe, nh, AV } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, normalizeValue, isInvalidValue, MIXED_MARKER, valueOrFallback } from "../905/216495";
@@ -49,7 +49,7 @@ export function $$A7(e) {
   let r = UZ(t);
   let i = useAtomWithSubscription(E_);
   let a = bL(i?.varId || "", r);
-  return useMemo(() => i && a && a.type === VariableDataType.COLOR ? $$v4(a.value) : isValidValue(e) ? e : $$v4(Uv), [i, a, e]);
+  return useMemo(() => i && a && a.type === VariableDataType.COLOR ? $$v4(a.value) : isValidValue(e) ? e : $$v4(blackColor), [i, a, e]);
 }
 export function $$x0() {
   let [e] = lJ("imageOverlayPaint");
@@ -105,7 +105,7 @@ export function $$R9(e, t) {
       style: n,
       callback: e => {
         let r = s.get(e);
-        let n = AW(r?.fills);
+        let n = blendGradientColors(r?.fills);
         n && t && permissionScopeHandler.user("slides-edit-theme-color", () => t(a.varId || "", a.modeId || "", $$v4(n)));
       }
     })) : r(AV({

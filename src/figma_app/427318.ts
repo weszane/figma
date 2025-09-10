@@ -1,15 +1,15 @@
-import { throwTypeError, returnSecond } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { reportError } from "../905/11";
-import { L } from "../905/178090";
-import { vt } from "../figma_app/306946";
-import { Uo } from "../figma_app/354658";
-import { TX } from "../figma_app/255679";
-import { FTemplateCategoryType, FPublicationStatusType, FFileType } from "../figma_app/191312";
-import { n as _$$n } from "../905/79930";
-import { U, vt as _$$vt, xQ, I0, m3 } from "../figma_app/45218";
-import { LE as _$$LE } from "../905/71785";
-import { l$ } from "../figma_app/275462";
+import { throwTypeError, returnSecond } from "src/figma_app/465776";
+import { ServiceCategories as _$$e } from "src/905/165054";
+import { reportError } from "src/905/11";
+import { L } from "src/905/178090";
+import { vt } from "src/figma_app/306946";
+import { Uo } from "src/figma_app/354658";
+import { TX } from "src/figma_app/255679";
+import { FTemplateCategoryType, FPublicationStatusType, FFileType } from "src/figma_app/191312";
+import { n as _$$n } from "src/905/79930";
+import { U, vt as _$$vt, xQ, I0, m3 } from "src/figma_app/45218";
+import { LE as _$$LE } from "src/905/71785";
+import { l$ } from "src/figma_app/275462";
 export function $$m15(e) {
   return $$L32(e) || $$P4(e) ? e.resource_type : U(e) ? _$$vt.HUB_FILE : xQ(e) ? _$$vt.WIDGET : I0(e) ? _$$vt.PLUGIN : void throwTypeError(e);
 }

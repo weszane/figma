@@ -124,9 +124,9 @@ import { getWAFChallengeType, wafManager } from '../905/394005';
 import { dH as _$$dH, tJ as _$$tJ, uo as _$$uo6, yJ as _$$yJ6, _P, K5 } from '../905/395917';
 import { _ as _$$_ } from '../905/401345';
 import { U as _$$U3 } from '../905/402186';
-import { aV as _$$aV } from '../905/405710';
+import { withParsedMeta } from '../905/405710';
 import { debugState } from '../905/407919';
-import { f as _$$f2, P as _$$P5 } from '../905/412913';
+import { getFileKey, FileKeySourceEnum } from '../905/412913';
 import { getCookieOrStorage } from '../905/414007';
 import { Ok } from '../905/414069';
 import { t as _$$t6 } from '../905/414363';
@@ -357,7 +357,7 @@ import { eq as _$$eq, FO as _$$FO, Ri as _$$Ri, D3, L1, QA, Sb, wO, yh } from '.
 import { FEditorType, mapEditorTypeToString, mapEditorTypeToStringWithObfuscated, mapEditorTypeToWorkspaceType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { o as _$$o6 } from '../figma_app/54816';
 import { c3 as _$$c, S as _$$S, sF as _$$sF, uo as _$$uo, bE, jO, Lk, Nw, PB, PF, U2, yJ, Yp } from '../figma_app/78808';
-import { Eo, qv } from '../figma_app/80990';
+import { teamLibraryCache, revokeThumbnailUrl } from '../figma_app/80990';
 import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
 import { Wl } from '../figma_app/88239';
@@ -459,7 +459,7 @@ import { aZ as _$$aZ2 } from '../figma_app/613182';
 import { a as _$$a } from '../figma_app/620913';
 import { Dk } from '../figma_app/623293';
 import { Fy } from '../figma_app/623300';
-import { cX as _$$cX, AT, jg, M$, PW, Qx, Tb, wg, Yu } from '../figma_app/633080';
+import { LIBRARY_PREFERENCES_MODAL, SubscriptionStatusEnum, LibraryAgeEnum, PublishStatusEnum, PrimaryWorkflowEnum, LibraryPublishStatusEnum, getDraftsSidebarString, initialLibraryStats, NO_TEAM } from '../figma_app/633080';
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
 import { J1 as _$$J3, bd, f2, UB } from '../figma_app/646357';
 import { _d, J7 } from '../figma_app/650409';
@@ -2352,15 +2352,15 @@ let ng = e => t => function (i) {
     (isInFullscreen && !isEnteringFullscreen || currentFileKey && currentFileKey !== newFileKey) && (Object.values(n.library.local.thumbnails).forEach(({
       url: e
     }) => {
-      e && qv(e);
+      e && revokeThumbnailUrl(e);
     }), e.dispatch(HV()), bd(), e.dispatch(_$$Q4.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
       e.dispatch(H1({
         votingStage: SessionStatus.NO_SESSION
       }));
-    }), Eo.clearCache(), _$$e$(), _$$J3(e.dispatch), UB(), e.dispatch(_$$iE2({
-      type: PW.COMPONENT
+    }), teamLibraryCache.clearCache(), _$$e$(), _$$J3(e.dispatch), UB(), e.dispatch(_$$iE2({
+      type: PrimaryWorkflowEnum.COMPONENT
     })), e.dispatch(_$$iE2({
-      type: PW.STATE_GROUP
+      type: PrimaryWorkflowEnum.STATE_GROUP
     })), n.openFile && e.dispatch(Kd({
       openFileKey: n.openFile.key
     })));
@@ -2790,7 +2790,7 @@ function ry({
   shownView: u,
   width: p
 }) {
-  let [m, h] = useState(jg.THIRTY_DAYS);
+  let [m, h] = useState(LibraryAgeEnum.THIRTY_DAYS);
   let [f, _] = useState(() => {
     let e = i.files.find(e => e.file.key === t.key);
     let n = (e?.num_components ?? 0) + (e?.num_state_groups ?? 0);
@@ -2993,9 +2993,9 @@ function rY({
       children: [p.map(e => {
         let i = t[e.library_file_key];
         if (!i) return;
-        let l = (o.sortBy === 'alpha' || o.sortBy === 'search') && h !== (e.team_id ?? Yu);
-        h = e.team_id ?? Yu;
-        let p = e.team_name || Tb();
+        let l = (o.sortBy === 'alpha' || o.sortBy === 'search') && h !== (e.team_id ?? NO_TEAM);
+        h = e.team_id ?? NO_TEAM;
+        let p = e.team_name || getDraftsSidebarString();
         return jsxs(_$$Fragment, {
           children: [l && jsx('div', {
             className: 'dsa_subscription_list_file_rows--teamSectionHeaderBottomBorder--UZTcA library_section_header--teamSectionHeaderBottomBorder--5Sezu library_section_header--_teamSectionHeaderBase--WYP5z library_section_header--sectionHeader--U79xZ',
@@ -3264,7 +3264,7 @@ function r7({
   let r = useSelector(e => e.currentUserOrgId);
   let a = useSelector(vx);
   let o = useSelector(e => e.modalShown);
-  let [l, c] = useState(o?.type === _$$cX && o.data?.fileKey && {
+  let [l, c] = useState(o?.type === LIBRARY_PREFERENCES_MODAL && o.data?.fileKey && {
     fileKey: o.data?.fileKey,
     libraryKey: _$$$3(o.data?.fileKey)
   } || null);
@@ -3305,7 +3305,7 @@ function r7({
   let R = useCallback((e, t) => {
     T();
     k();
-    t.type === PW.COMPONENT ? p(t) : t.type === PW.STATE_GROUP && h(t);
+    t.type === PrimaryWorkflowEnum.COMPONENT ? p(t) : t.type === PrimaryWorkflowEnum.STATE_GROUP && h(t);
   }, [T, k]);
   let N = useCallback((e, t) => {
     C();
@@ -3333,7 +3333,7 @@ function r7({
   }
   if (x.status === 'loaded' && x.data.is_currently_migrating) return jsx(_$$l7, {});
   let L = m != null || u != null || g != null || _ != null;
-  let F = I.data || wg;
+  let F = I.data || initialLibraryStats;
   return jsx(_$$t6, {
     page: _$$e3.DSA_LIBRARY_VIEW,
     children: jsx(_$$r7.Provider, {
@@ -3630,7 +3630,7 @@ let aT = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let aL = _$$f2();
+let aL = getFileKey();
 function aF(e, t) {
   if (t.type === 'file' && t.method === 'delete') {
     t.idForDeletion && e.dispatch(_$$ru({
@@ -3640,7 +3640,7 @@ function aF(e, t) {
   }
   if (!(t.component || t.state_group)) return;
   let i = t.component || t.state_group;
-  let n = t.component ? PW.COMPONENT : PW.STATE_GROUP;
+  let n = t.component ? PrimaryWorkflowEnum.COMPONENT : PrimaryWorkflowEnum.STATE_GROUP;
   let r = e.getState();
   let a = atomStoreManager.get(qp);
   if (i.length === 0) return;
@@ -3657,13 +3657,13 @@ function aF(e, t) {
   }), u) {
     switch (t.method) {
       case 'delete':
-        if ((n === PW.COMPONENT || n === PW.STATE_GROUP) && r.selectedView.view === 'fullscreen' && i[0].destination_key) {
-          n === PW.COMPONENT && _$$tL(i.map(e => e.destination_key).filter(e => !!e), [], e);
-          n === PW.STATE_GROUP && _$$tL([], i.map(e => e.destination_key).filter(e => !!e), e);
+        if ((n === PrimaryWorkflowEnum.COMPONENT || n === PrimaryWorkflowEnum.STATE_GROUP) && r.selectedView.view === 'fullscreen' && i[0].destination_key) {
+          n === PrimaryWorkflowEnum.COMPONENT && _$$tL(i.map(e => e.destination_key).filter(e => !!e), [], e);
+          n === PrimaryWorkflowEnum.STATE_GROUP && _$$tL([], i.map(e => e.destination_key).filter(e => !!e), e);
           let t = {};
           let a = {};
           for (let e of i) {
-            let i = n === PW.COMPONENT ? e.component_key : e.key;
+            let i = n === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key;
             let s = e.destination_key;
             i && s && (r.openFile && _$$eE(e, r.openFile) ? a[e.node_id] = s : t[i] = s);
           }
@@ -3862,11 +3862,11 @@ let aB = new _$$H6({
 });
 function aV(e) {
   return {
-    type: PW.COMPONENT,
+    type: PrimaryWorkflowEnum.COMPONENT,
     node_id: e.component?.nodeId || e.nodeId || '',
     name: e.component?.name || '',
     file_key: e.component?.libraryResourceId || e?.fileKey || '',
-    file_key_source: _$$P5.LIVEGRAPH_DATA,
+    file_key_source: FileKeySourceEnum.LIVEGRAPH_DATA,
     library_key: _$$l6(e.component?.libraryKey ?? e.libraryKey ?? ''),
     checkpoint_id: e.component?.checkpointId || void 0,
     unpublished_at: e.component?.unpublishedAt?.toISOString() || null,
@@ -3901,11 +3901,11 @@ function aV(e) {
 }
 function aG(e) {
   return {
-    type: PW.STATE_GROUP,
+    type: PrimaryWorkflowEnum.STATE_GROUP,
     node_id: e.stateGroup?.nodeId || e.nodeId || '',
     name: e.stateGroup?.name || '',
     file_key: e.stateGroup?.libraryResourceId || e?.fileKey || '',
-    file_key_source: _$$P5.LIVEGRAPH_DATA,
+    file_key_source: FileKeySourceEnum.LIVEGRAPH_DATA,
     checkpoint_id: e.stateGroup?.checkpointId || void 0,
     unpublished_at: e.stateGroup?.unpublishedAt?.toISOString() || null,
     description: e.stateGroup?.description || '',
@@ -7944,7 +7944,7 @@ function lD(e) {
   return (t = Object.create(null), i) => {
     if (_$$$I.matches(i) && i.payload.type === e) {
       let e = i.payload.libraryKey;
-      let n = i.payload.teamId || Yu;
+      let n = i.payload.teamId || NO_TEAM;
       let r = {
         ...t
       };
@@ -7954,7 +7954,7 @@ function lD(e) {
         ...r[n][e]
       }, i.payload.itemsById) {
         let a = i.payload.itemsById[t];
-        r[n][e][t] = _$$aV(a);
+        r[n][e][t] = withParsedMeta(a);
       }
       return r;
     }
@@ -7963,8 +7963,8 @@ function lD(e) {
         ...t
       };
       i.payload.items.forEach(t => {
-        let i = (t = _$$aV(t)).library_key;
-        let n = t.team_id || Yu;
+        let i = (t = withParsedMeta(t)).library_key;
+        let n = t.team_id || NO_TEAM;
         e[n] = e[n] || Object.create(null);
         e[n][i] = e[n][i] || Object.create(null);
         e[n][i][t.node_id] = t;
@@ -7975,7 +7975,7 @@ function lD(e) {
     if (_$$yH2.matches(i) && i.payload.type === e) {
       let e = i.payload.file;
       let n = _$$l6(e.library_key);
-      let r = e.team_id || Yu;
+      let r = e.team_id || NO_TEAM;
       let a = {
         ...t
       };
@@ -8011,7 +8011,7 @@ function lD(e) {
       let e;
       for (let n in i.payload.fileKeys) {
         let r = _$$$3(n);
-        let a = i.payload.fileKeys[n].team_id || Yu;
+        let a = i.payload.fileKeys[n].team_id || NO_TEAM;
         a in t && r in t[a] && (e || (e = {
           ...t
         }), e[a] = {
@@ -8034,35 +8034,35 @@ function lL(e) {
   return (t = Object.create(null), i) => HV.matches(i) ? Object.create(null) : I0.matches(i) && i.payload.type === e ? i.payload.local : t;
 }
 let lF = HY({
-  components: lD(PW.COMPONENT),
-  stateGroups: lD(PW.STATE_GROUP)
+  components: lD(PrimaryWorkflowEnum.COMPONENT),
+  stateGroups: lD(PrimaryWorkflowEnum.STATE_GROUP)
 });
 let lM = HY({
-  componentsByLibraryKey: lO(PW.COMPONENT),
-  stateGroupsByLibraryKey: lO(PW.STATE_GROUP),
+  componentsByLibraryKey: lO(PrimaryWorkflowEnum.COMPONENT),
+  stateGroupsByLibraryKey: lO(PrimaryWorkflowEnum.STATE_GROUP),
   libraryKeys(e = [], t) {
     return _$$lx.matches(t) ? t.payload.libraryKeys : e;
   }
 });
 let lj = HY({
-  components: lL(PW.COMPONENT),
-  styles: lL(PW.STYLE),
-  stateGroups: lL(PW.STATE_GROUP),
-  modules: lL(PW.MODULE),
+  components: lL(PrimaryWorkflowEnum.COMPONENT),
+  styles: lL(PrimaryWorkflowEnum.STYLE),
+  stateGroups: lL(PrimaryWorkflowEnum.STATE_GROUP),
+  modules: lL(PrimaryWorkflowEnum.MODULE),
   thumbnails: (e = {}, t) => {
     if (HV.matches(t)) return {};
     if (xp.matches(t)) {
       let i = t.payload.thumbnails;
       for (let t in e) {
         let n = e[t];
-        n.kind === AT.SUBSCRIBED_WITHOUT_LIBRARY && n.url !== 'FAILED_THUMBNAIL' && (i[t] = n);
+        n.kind === SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY && n.url !== 'FAILED_THUMBNAIL' && (i[t] = n);
       }
       return i;
     }
     return _$$us2.matches(t) ? {
       ...e,
       [t.payload.styleID]: {
-        kind: AT.SUBSCRIBED_WITHOUT_LIBRARY,
+        kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
         url: t.payload.url
       }
     } : e;
@@ -8183,15 +8183,15 @@ let lU = HY({
     } : e;
   },
   publishProgress(e = {
-    state: Qx.NONE
+    state: LibraryPublishStatusEnum.NONE
   }, t) {
     return _$$Sb.matches(t) ? {
-      state: Qx.ASSEMBLING_COMPONENTS,
+      state: LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS,
       progress: 0,
-      publishType: t.payload.unpublishAll ? M$.UNPUBLISH : M$.PUBLISH,
+      publishType: t.payload.unpublishAll ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
       publishStartMs: performance.now()
     } : WM.matches(t) ? {
-      state: Qx.NONE
+      state: LibraryPublishStatusEnum.NONE
     } : _$$df.matches(t) ? t.payload : e;
   },
   isRenamingSelectedStyle(e = !1, t) {

@@ -4,7 +4,7 @@ import { reportError } from "../905/11";
 import { createOptimistThunk } from "../905/350402";
 import { $I } from "../905/879323";
 import { KQ } from "../figma_app/646357";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 let $$c0 = createOptimistThunk(e => {
   KQ(e);
 });
@@ -35,7 +35,7 @@ let $$p1 = createOptimistThunk((e, t) => {
       fileKey: fileKeyOrHubFileId,
       libraryKey,
       teamId: teamId ?? null,
-      type: PW.STATE_GROUP
+      type: PrimaryWorkflowEnum.STATE_GROUP
     }));
   }
   if (0 !== components.length) {
@@ -45,7 +45,7 @@ let $$p1 = createOptimistThunk((e, t) => {
       fileKey: fileKeyOrHubFileId,
       libraryKey,
       teamId: teamId ?? null,
-      type: PW.COMPONENT
+      type: PrimaryWorkflowEnum.COMPONENT
     }));
   }
 });

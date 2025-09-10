@@ -33,18 +33,18 @@ import { i as _$$i } from "../905/22844";
 import { W as _$$W } from "../905/798224";
 import { A as _$$A } from "../905/891805";
 import { e as _$$e } from "../905/149844";
-import { Ad } from "../figma_app/273493";
+import { adjustHue } from "../figma_app/273493";
 import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A2 } from "../vendor/850789";
 import { trackEventAnalytics } from "../905/449184";
-import { UE, J1 } from "../figma_app/191804";
+import { whiteColor, getColorBrightness } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
 import { u1, XE } from "../figma_app/91703";
 import { sw, rk } from "../figma_app/914957";
 import { Yr } from "../figma_app/8833";
 import { F as _$$F } from "../905/989956";
 import { bL as _$$bL2 } from "../figma_app/852050";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Ib } from "../905/129884";
 import { q as _$$q } from "../figma_app/905311";
 import { ks } from "../figma_app/626177";
@@ -67,7 +67,7 @@ import { y8 } from "../905/188169";
 import { R4 } from "../figma_app/835688";
 import { t as _$$t2 } from "../905/100946";
 var g = h;
-let ec = Wh(() => createAtomWithEquality(atom({})));
+let ec = setupRemovableAtomFamily(() => createAtomWithEquality(atom({})));
 let eu = "slides.advancedEditThemeModal";
 function ep({
   themeId: e,
@@ -538,10 +538,10 @@ function ex({
   let P = k1(e);
   let O = useCallback(() => {
     let e = permissionScopeHandler.user("slides-add-theme-color", () => {
-      let e = UE;
+      let e = whiteColor;
       if (i.length > 0) {
         let t = i[i.length - 1]?.paint?.color;
-        e = t ? Ad(t, 31) : e;
+        e = t ? adjustHue(t, 31) : e;
       }
       return P(e);
     });
@@ -938,7 +938,7 @@ let eW = memo(function ({
     let t = b.map(e => o.has(e.variableId) ? null : e.paint.color).filter(e => !!e);
     let i = [];
     let n = b.length;
-    e = e.sort((e, t) => J1(t) - J1(e));
+    e = e.sort((e, t) => getColorBrightness(t) - getColorBrightness(e));
     let r = [];
     let a = new Set();
     for (let t = 0; t < e.length; t++) {
@@ -947,7 +947,7 @@ let eW = memo(function ({
     }
     if ((e = r).length >= 3) return e.slice(0, 3).map(e => _$$F.format(e));
     n > 4 ? t = t.filter(e => !(0 === e.r && 0 === e.g && 0 === e.b) && !eL(e)) : n > 3 && (t = t.filter(e => !eL(e)));
-    t = t.sort((e, t) => J1(t) - J1(e));
+    t = t.sort((e, t) => getColorBrightness(t) - getColorBrightness(e));
     for (let e = 0; e < t.length; e++) {
       let n = _$$F.format(t[e]);
       0 !== e && n === _$$F.format(t[e - 1]) || a.has(n) || i.push(t[e]);

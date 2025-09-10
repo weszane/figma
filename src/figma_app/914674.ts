@@ -4,12 +4,12 @@ import { trackEventAnalytics } from "../905/449184";
 import { PerfTimer } from "../905/609396";
 import { zq, We } from "../figma_app/782261";
 import { selectCurrentFile } from "../figma_app/516028";
-import { rt } from "../figma_app/615482";
+import { createTrackedAtom } from "../figma_app/615482";
 import { D } from "../905/367723";
 let $$u2 = "performance.ds_eco.asset_panel_loading";
 let $$p3 = new PerfTimer($$u2, {});
-let _ = rt(!1);
-let $$h0 = rt(!1);
+let _ = createTrackedAtom(!1);
+let $$h0 = createTrackedAtom(!1);
 export function $$m4() {
   let [e, t] = useAtomValueAndSetter(_);
   return useCallback(() => {

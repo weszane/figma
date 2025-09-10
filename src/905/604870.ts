@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import type { ObjectTypeDefinition } from './644409'
+import type { ObjectTypeDefinition } from '../905/644409'
 import deepmerge from 'deepmerge'
 import { ComputationHandler } from '../905/42339'
 import { ComputedFieldDef, isComputedField } from '../905/52806'
@@ -15,7 +15,7 @@ import { ConnectionAttemptTypes } from '../905/957591'
  * Entry wrapper for Map values (original: class a)
  */
 class MapEntry<K, V> {
-  constructor(public key: K, public value: V) {}
+  constructor(public key: K, public value: V) { }
 
   /**
    * Returns the value (original: orInsert)
@@ -47,7 +47,7 @@ class MapInsertEntry<K, V> {
   /**
    * The map can be any Map<K, V> (original: map)
    */
-  constructor(public key: K, public map: Map<K, V>) {}
+  constructor(public key: K, public map: Map<K, V>) { }
 
   /**
    * Inserts the value if missing (original: orInsert)
@@ -1777,7 +1777,7 @@ export class MainSessionStore {
       query,
     })
     const store = this.getStores(query.objectName)
-    return store ? store.queries.subscribe(query, observer) : () => {}
+    return store ? store.queries.subscribe(query, observer) : () => { }
   }
 
   /**
@@ -1797,7 +1797,7 @@ export class MainSessionStore {
       computation,
     })
     const store = this.getStores(computation.objectName)
-    return store ? store.computations.subscribe(computation, observer) : () => {}
+    return store ? store.computations.subscribe(computation, observer) : () => { }
   }
 
   /**

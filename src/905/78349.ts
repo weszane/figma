@@ -1,4 +1,4 @@
-import { QR } from "../figma_app/273493";
+import { packRgb } from "../figma_app/273493";
 import { AutoLayoutAlignment, YesNo, AbsolutePositionType, ConnectorType, AxisType, UnselectedNodesMode, InteractionCpp, StrokeAlignment, SnapshotLevel } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { M } from "../905/512402";
@@ -385,7 +385,7 @@ export class $$_0 extends j {
   renderUnderEditModeUI(e, t) {}
   renderMagnet(e, t, i) {
     if (!InteractionCpp) return;
-    let a = QR(1, 1, 1);
+    let a = packRgb(1, 1, 1);
     let s = InteractionCpp.getNodeImmutableFrameSelected();
     i.fillAndStrokeCircle(e, 6, t ? s : a, t ? a : s, 2, StrokeAlignment.OUTSIDE);
   }

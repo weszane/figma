@@ -71,7 +71,7 @@ async function g() {
 async function f(e, t, i, n = {}, r) {
   let a;
   if ('write' in i) {
-    let s = e.sub(i, () => {});
+    let s = e.sub(i, () => { });
     let o = n.policy || 'cacheFirst';
     let l = !!r?.enabled;
     o === 'networkOnly' || l ? await t.fetchQuery({
@@ -523,7 +523,7 @@ class z {
         let s = t();
         let o = [++E];
         let d = !e.enabled || e.enabled(a);
-        let c = new RetainedPromiseManager(() => atomStoreManager.sub(w, () => {}));
+        let c = new RetainedPromiseManager(() => atomStoreManager.sub(w, () => { }));
         let m = async () => {
           getFalseValue() || (await waitForVisibility());
           let t = e.fetch(a, s);
@@ -687,7 +687,7 @@ class z {
         let c = [];
         let m = atom(e => {
           let t = e(d).data?.pages || [];
-          let i = t?.map((e, t) => (c[t] || (c[t] = atom(e => e(d).data?.pages[t]?.data, () => {})), c[t]));
+          let i = t?.map((e, t) => (c[t] || (c[t] = atom(e => e(d).data?.pages[t]?.data, () => { })), c[t]));
           c.length > t.length && c.splice(t.length, c.length - t.length);
           return i;
         }, (e, t, n) => {
@@ -825,7 +825,7 @@ class z {
       };
     }(this.extrasProvider, this.getQueryContext);
     this.ObjectQuery = (d = this.getQueryContext, e => createRemovableAtomFamily(t => {
-      if (!t) return atom(resourceUtils.disabled(), () => {});
+      if (!t) return atom(resourceUtils.disabled(), () => { });
       let i = setupAtomWithMount(e.atom(t), () => {
         let i = d();
         i.atomStore.get(e.atom(t)) === F5 && h(i.atomStore, e, t, {

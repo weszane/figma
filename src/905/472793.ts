@@ -45,7 +45,7 @@ import { dequeuePluginStatus } from '../905/571565';
 import { getFunctionHandle, memoizedHandle } from '../905/572400';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
-import { I as _$$I, np as _$$np, o8 } from '../905/622391';
+import { getCurrentUserOrgId, isDevModeFocusViewCopyActive, getSelectedView } from '../905/622391';
 import { logger } from '../905/651849';
 import { e9 as _$$e2, jE } from '../905/656545';
 import { findCodegenLanguage } from '../905/661977';
@@ -1394,7 +1394,7 @@ class PluginRuntime {
       }
 
       // Focus view restriction
-      if (!isAllowedInFocusViewInteractiveInspection && _$$np()) {
+      if (!isAllowedInFocusViewInteractiveInspection && isDevModeFocusViewCopyActive()) {
         throw new Error(`Cannot call "${key}" in focus view with changes. Reset changes and try again.`);
       }
 
@@ -1609,7 +1609,7 @@ class PluginRuntime {
           throw new Error(`Can't set "${key}" in read-only mode`);
         }
         // Focus view restriction
-        if (!isAllowedInFocusViewInteractiveInspection && _$$np()) {
+        if (!isAllowedInFocusViewInteractiveInspection && isDevModeFocusViewCopyActive()) {
           throw new Error(`Cannot set "${key}" in focus view with changes. Reset changes and try again.`);
         }
         // Edit scope
@@ -3902,7 +3902,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     }
 
     // Get user ID for current user
-    userId = o8() ?? null;
+    userId = getSelectedView() ?? null;
     return {
       name,
       photoUrl,
@@ -3970,7 +3970,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       return vm.$$null;
     }
     const userObject = vm.newObject();
-    const userId = o8();
+    const userId = getSelectedView();
     const multiplayerState = debugState.getState().multiplayer;
 
     // Get user info from multiplayer context
@@ -6858,7 +6858,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'getSuggestionsUrl',
       metricsKey: 'codebase_suggestions.getSuggestionsUrl',
       cb: () => {
-        let e = _$$I();
+        let e = getCurrentUserOrgId();
         if (!e) throw new Error('No org id found');
         let t = codeSuggestionAPIHandler.getZipUrl(e).then(e => e.data.meta.url);
         return this.wrapPromise(t);
@@ -6872,7 +6872,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       key: 'getSuggestions',
       metricsKey: 'codebase_suggestions.getSuggestions',
       cb: () => {
-        let e = _$$I();
+        let e = getCurrentUserOrgId();
         if (!e) throw new Error('No org id found');
         let t = codeSuggestionAPIHandler.getZipUrl(e).then(e => {
           let t = e.data.meta.url;

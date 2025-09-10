@@ -1,4 +1,4 @@
-import { Vm } from "../figma_app/273493";
+import { colorsEqual } from "../figma_app/273493";
 import { cy } from "../figma_app/387100";
 let a = "Watermelon";
 let $$s21 = 1440;
@@ -86,7 +86,7 @@ export function $$A11(e, t) {
   }(e) && (void 0 === t || e.childCount === t);
 }
 export function $$O29(e, t) {
-  return !!($$A11(e, t) && 0 === e.cornerRadius && e.strokePaints?.data?.length === 0 && Vm(e.fills[0]?.color, f));
+  return !!($$A11(e, t) && 0 === e.cornerRadius && e.strokePaints?.data?.length === 0 && colorsEqual(e.fills[0]?.color, f));
 }
 export function $$L3(e, t) {
   if (!$$O29(e, t)) return !1;

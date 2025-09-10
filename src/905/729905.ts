@@ -10,7 +10,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { LH } from "../905/872904";
 import { je, fi } from "../figma_app/155728";
 import { ol } from "../figma_app/598018";
-import { P2, Nf, xA } from "../figma_app/633080";
+import { isPublishedTeamLibrary, isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
 import { L } from "../905/773253";
 import { er, sz, zm } from "../905/753512";
 import { S as _$$S } from "../905/612212";
@@ -99,7 +99,7 @@ var d = l;
     let s = n1();
     return useCallback(() => {
       let a = new Set([...workspaceApprovedLibraryKeys, ...orgApprovedLibraryKeys]);
-      let o = PW(a, e.filter(P2));
+      let o = PW(a, e.filter(isPublishedTeamLibrary));
       let l = LI(r.data?.file?.libraryOrgSubscriptions ?? [], e, s);
       let d = LI(r.data?.file?.computedWorkspacePublicInfo?.workspace?.librarySubscriptions ?? [], e, s);
       let c = LI(r.data?.file?.libraryTeamSubscriptions ?? [], e, s);
@@ -139,11 +139,11 @@ var d = l;
         num_variables
       } = e;
       return {
-        library_file_key: Nf(e) && e.library_file_key || void 0,
+        library_file_key: isTeamLibrary(e) && e.library_file_key || void 0,
         library_key: e.library_key,
-        library_workspace_id: Nf(e) ? e.workspace_id ?? void 0 : void 0,
-        library_team_id: Nf(e) ? e.team_id ?? void 0 : void 0,
-        library_org_id: Nf(e) ? l ?? void 0 : void 0,
+        library_workspace_id: isTeamLibrary(e) ? e.workspace_id ?? void 0 : void 0,
+        library_team_id: isTeamLibrary(e) ? e.team_id ?? void 0 : void 0,
+        library_org_id: isTeamLibrary(e) ? l ?? void 0 : void 0,
         added: d,
         approved: a.has(e.library_key),
         default_level: m,
@@ -153,7 +153,7 @@ var d = l;
         n_components: num_components,
         n_styles: num_styles,
         n_variables: num_variables,
-        ui_kit: xA(e)
+        ui_kit: isCommunityLibrary(e)
       };
     }, [d, o, e, orgApprovedLibraryKeys, l, queryId, searchSessionId, t.data?.file, workspaceApprovedLibraryKeys]);
   }
@@ -205,7 +205,7 @@ var d = l;
   e.useFileMetadata = x;
   e.useMetadataForLibraries = S;
   e.useMetadataForTeamsWithLibraries = function (e, t) {
-    let i = S(useMemo(() => e.flatMap(e => e.libraries.slice(0, 3)).concat(t.slice(0, 3)).filter(P2), [t, e]));
+    let i = S(useMemo(() => e.flatMap(e => e.libraries.slice(0, 3)).concat(t.slice(0, 3)).filter(isPublishedTeamLibrary), [t, e]));
     return useCallback(() => ({
       ...i(),
       n_draft_libraries: t.length

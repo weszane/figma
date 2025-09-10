@@ -1,5 +1,5 @@
 import type { ViewRegistry } from '../905/663269'
-import type { Fn } from '../../types/global'
+import type { Fn } from '../../../types/global'
 import { v4 as uuidv4 } from 'uuid'
 import { ClientConnection } from '../905/47662'
 import { SyncTransaction } from '../905/141913'
@@ -30,7 +30,7 @@ export enum SubscriptionErrorType {
 /**
  * Custom error for optimistic mutation failures (nn)
  */
-export class OptimisticMutationError extends Error {}
+export class OptimisticMutationError extends Error { }
 
 /**
  * FigmaAppClient (Ay)
@@ -60,7 +60,7 @@ export class FigmaAppClient {
   /** List of pending optimistic mutations */
   pendingOptimisticMutationList: any[] = []
   /** List of pending mutations */
-  pendingMutationList: {[key:string]: any}[] = []
+  pendingMutationList: { [key: string]: any }[] = []
   /** Last close event */
   lastCloseEvent: any = void 0
   /** Last close timestamp */
@@ -212,7 +212,7 @@ export class FigmaAppClient {
       ) {
         this.preloadedViews.push(allowedView)
         this.preloadedViewArgs.push(preload.args)
-        this.session.subscribe(allowedView, preload.args, () => {})
+        this.session.subscribe(allowedView, preload.args, () => { })
         this.preloadViewKeys.add(serializeArgs(viewName, preload.args))
       }
       else {

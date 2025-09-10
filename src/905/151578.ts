@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { RevisionNumberAccessor } from "../figma_app/763686";
 import a from "../vendor/128080";
 function s(e, t, i) {
@@ -23,7 +23,7 @@ export class $$l1 {
       this.lastSceneInstance = this.scene;
       this.lastArgs = e;
       let t = this.computeValue(this.scene, ...e);
-      this.deepEqual && c2(t, this.lastValue) || (this.lastValue = t);
+      this.deepEqual && deepEqual(t, this.lastValue) || (this.lastValue = t);
       this.lastRevision = a;
     }
   }

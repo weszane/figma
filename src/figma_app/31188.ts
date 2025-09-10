@@ -1,172 +1,214 @@
-import { FacetType, LibraryType, assetBindings } from "../figma_app/763686";
-import { atom, setupCustomAtom } from "../figma_app/27355";
-import s from "../vendor/149674";
-import { logError } from "../905/714362";
-import { fullscreenValue } from "../figma_app/455680";
-import { Wh } from "../figma_app/615482";
-import { r, I } from "../905/475511";
-import { y as _$$y, d as _$$d } from "../905/387014";
-import { V, Q } from "../905/236003";
-import { fA, cx } from "../905/70197";
-import { X1, _t } from "../905/722604";
-import { PW } from "../figma_app/633080";
-export let $$n2;
-var o = s;
-PW.RESPONSIVE_SET;
-FacetType.RESPONSIVE_SET;
-PW.CODE_LIBRARY;
-FacetType.CODE_LIBRARY;
-PW.CODE_FILE;
-FacetType.CODE_FILE;
-PW.CODE_COMPONENT;
-FacetType.CODE_COMPONENT;
-PW.MANAGED_STRING;
-FacetType.MANAGED_STRING;
-let f = {
+import { pickBy } from 'lodash-es'
+import { getLocalManagedStringAsset, getSubscribedManagedStringAsset } from '../905/70197'
+import { getLocalCodeLibraryAsset, getSubscribedCodeLibraryAsset } from '../905/236003'
+import { getLocalCodeFileAsset, getSubscribedCodeFileAsset } from '../905/387014'
+import { getLocalCodeComponentAsset, getSubscribedCodeComponentAsset } from '../905/475511'
+import { logError } from '../905/714362'
+import { getTransformedLocalAsset, getTransformedSubscribedAsset } from '../905/722604'
+import { atom, setupCustomAtom } from '../figma_app/27355'
+import { fullscreenValue } from '../figma_app/455680'
+import { setupRemovableAtomFamily } from '../figma_app/615482'
+import { PrimaryWorkflowEnum } from '../figma_app/633080'
+import { assetBindings, FacetType, LibraryType } from '../figma_app/763686'
+/**
+ * AssetMirrorManager - Refactored from class T
+ * Manages synchronization and cache for asset mirrors.
+ */
+export let assetMirrorInstance: AssetMirrorManager | undefined
+
+/**
+ * AssetParserMap - Refactored from variable f
+ * Maps FacetType and LibraryType to asset parser functions.
+ */
+export const AssetParserMap = {
   [FacetType.RESPONSIVE_SET]: {
-    [LibraryType.LOCAL]: X1,
-    [LibraryType.SUBSCRIBED]: _t
+    [LibraryType.LOCAL]: getTransformedLocalAsset,
+    [LibraryType.SUBSCRIBED]: getTransformedSubscribedAsset,
   },
   [FacetType.CODE_LIBRARY]: {
-    [LibraryType.LOCAL]: V,
-    [LibraryType.SUBSCRIBED]: Q
+    [LibraryType.LOCAL]: getLocalCodeLibraryAsset,
+    [LibraryType.SUBSCRIBED]: getSubscribedCodeLibraryAsset,
   },
   [FacetType.CODE_FILE]: {
-    [LibraryType.LOCAL]: _$$y,
-    [LibraryType.SUBSCRIBED]: _$$d
+    [LibraryType.LOCAL]: getLocalCodeFileAsset,
+    [LibraryType.SUBSCRIBED]: getSubscribedCodeFileAsset,
   },
   [FacetType.CODE_COMPONENT]: {
-    [LibraryType.LOCAL]: r,
-    [LibraryType.SUBSCRIBED]: I
+    [LibraryType.LOCAL]: getLocalCodeComponentAsset,
+    [LibraryType.SUBSCRIBED]: getSubscribedCodeComponentAsset,
   },
   [FacetType.MANAGED_STRING]: {
-    [LibraryType.LOCAL]: fA,
-    [LibraryType.SUBSCRIBED]: cx
-  }
-};
-let $$E0 = {
-  [PW.RESPONSIVE_SET]: {
-    local: y(FacetType.RESPONSIVE_SET, LibraryType.LOCAL),
-    subscribed: y(FacetType.RESPONSIVE_SET, LibraryType.SUBSCRIBED)
+    [LibraryType.LOCAL]: getLocalManagedStringAsset,
+    [LibraryType.SUBSCRIBED]: getSubscribedManagedStringAsset,
   },
-  [PW.CODE_LIBRARY]: {
-    local: y(FacetType.CODE_LIBRARY, LibraryType.LOCAL),
-    subscribed: y(FacetType.CODE_LIBRARY, LibraryType.SUBSCRIBED)
+}
+
+/**
+ * AssetAtomHandlers - Refactored from variable b
+ * Stores handlers for asset atom updates.
+ */
+export const AssetAtomHandlers = {
+  [FacetType.RESPONSIVE_SET]: {
+    [LibraryType.LOCAL]: null,
+    [LibraryType.SUBSCRIBED]: null,
   },
-  [PW.CODE_FILE]: {
-    local: y(FacetType.CODE_FILE, LibraryType.LOCAL),
-    subscribed: y(FacetType.CODE_FILE, LibraryType.SUBSCRIBED)
+  [FacetType.CODE_LIBRARY]: {
+    [LibraryType.LOCAL]: null,
+    [LibraryType.SUBSCRIBED]: null,
   },
-  [PW.CODE_COMPONENT]: {
-    local: y(FacetType.CODE_COMPONENT, LibraryType.LOCAL),
-    subscribed: y(FacetType.CODE_COMPONENT, LibraryType.SUBSCRIBED)
+  [FacetType.CODE_FILE]: {
+    [LibraryType.LOCAL]: null,
+    [LibraryType.SUBSCRIBED]: null,
   },
-  [PW.MANAGED_STRING]: {
-    local: y(FacetType.MANAGED_STRING, LibraryType.LOCAL),
-    subscribed: y(FacetType.MANAGED_STRING, LibraryType.SUBSCRIBED)
-  }
-};
-function y(e, t) {
-  let r = f[e][t];
-  let n = Wh(() => atom({}));
-  let s = setupCustomAtom(n, (e, t) => {
-    if ("changed" in t) {
-      let r = t.changed;
+  [FacetType.CODE_COMPONENT]: {
+    [LibraryType.LOCAL]: null,
+    [LibraryType.SUBSCRIBED]: null,
+  },
+  [FacetType.MANAGED_STRING]: {
+    [LibraryType.LOCAL]: null,
+    [LibraryType.SUBSCRIBED]: null,
+  },
+}
+
+/**
+ * Creates an asset atom for a given FacetType and LibraryType.
+ * Refactored from function y.
+ */
+function createAssetAtom(facet: FacetType, library: LibraryType) {
+  const parser = AssetParserMap[facet][library]
+  const removableAtomFamily = setupRemovableAtomFamily(() => atom({}))
+
+  /**
+   * Handles asset atom state updates.
+   */
+  const assetAtom = setupCustomAtom(removableAtomFamily, (state, action) => {
+    if ('changed' in action) {
+      const changedAssets = action.changed
       return {
-        ...e,
-        ...r.reduce((e, t) => (e[t.assetId] = t, e), {})
-      };
+        ...state,
+        ...changedAssets.reduce((acc, asset) => {
+          acc[asset.assetId] = asset
+          return acc
+        }, {} as Record<string, any>),
+      }
     }
-    if ("removed" in t) {
-      let r = new Set(t.removed);
-      return o()(e, e => e && !r.has(e.assetId));
+    if ('removed' in action) {
+      const removedSet = new Set(action.removed)
+      return pickBy(state, asset => asset && !removedSet.has(asset.assetId))
     }
-    return "reset" in t ? {} : e;
-  });
-  let l = `assetByKeyAtom(${FacetType[e]}, ${LibraryType[t]})`;
-  s.debugLabel = l;
-  s.onMount = n => {
-    var a;
-    let s = () => {
-      n({
-        changed: assetBindings.getAllAssets(e, t).map(r).filter(e => null !== e)
-      });
-    };
-    fullscreenValue.isReady() ? s() : fullscreenValue.onReady().then(s);
-    a = e => {
-      n(e);
-    };
-    b[e][t] = a;
-    let o = () => {
-      b[e][t] = null;
-    };
+    return 'reset' in action ? {} : state
+  })
+
+  assetAtom.debugLabel = `assetByKeyAtom(${FacetType[facet]}, ${LibraryType[library]})`
+
+  assetAtom.onMount = (update) => {
+    const syncAssets = () => {
+      update({
+        changed: assetBindings.getAllAssets(facet, library).map(parser).filter(asset => asset !== null),
+      })
+    }
+    if (fullscreenValue.isReady()) {
+      syncAssets()
+    }
+    else {
+      fullscreenValue.onReady().then(syncAssets)
+    }
+    const handler = (payload: any) => update(payload)
+    AssetAtomHandlers[facet][library] = handler
+    const cleanup = () => {
+      AssetAtomHandlers[facet][library] = null
+    }
     return () => {
-      o();
-      n({
-        reset: !0
-      });
-    };
-  };
-  return s;
+      cleanup()
+      update({ reset: true })
+    }
+  }
+
+  return assetAtom
 }
-let b = {
-  [FacetType.RESPONSIVE_SET]: {
-    [LibraryType.LOCAL]: null,
-    [LibraryType.SUBSCRIBED]: null
+
+/**
+ * AssetAtomMap - Refactored from variable $$E0
+ * Maps PrimaryWorkflowEnum to local/subscribed asset atoms.
+ */
+export const AssetAtomMap = {
+  [PrimaryWorkflowEnum.RESPONSIVE_SET]: {
+    local: createAssetAtom(FacetType.RESPONSIVE_SET, LibraryType.LOCAL),
+    subscribed: createAssetAtom(FacetType.RESPONSIVE_SET, LibraryType.SUBSCRIBED),
   },
-  [FacetType.CODE_LIBRARY]: {
-    [LibraryType.LOCAL]: null,
-    [LibraryType.SUBSCRIBED]: null
+  [PrimaryWorkflowEnum.CODE_LIBRARY]: {
+    local: createAssetAtom(FacetType.CODE_LIBRARY, LibraryType.LOCAL),
+    subscribed: createAssetAtom(FacetType.CODE_LIBRARY, LibraryType.SUBSCRIBED),
   },
-  [FacetType.CODE_FILE]: {
-    [LibraryType.LOCAL]: null,
-    [LibraryType.SUBSCRIBED]: null
+  [PrimaryWorkflowEnum.CODE_FILE]: {
+    local: createAssetAtom(FacetType.CODE_FILE, LibraryType.LOCAL),
+    subscribed: createAssetAtom(FacetType.CODE_FILE, LibraryType.SUBSCRIBED),
   },
-  [FacetType.CODE_COMPONENT]: {
-    [LibraryType.LOCAL]: null,
-    [LibraryType.SUBSCRIBED]: null
+  [PrimaryWorkflowEnum.CODE_COMPONENT]: {
+    local: createAssetAtom(FacetType.CODE_COMPONENT, LibraryType.LOCAL),
+    subscribed: createAssetAtom(FacetType.CODE_COMPONENT, LibraryType.SUBSCRIBED),
   },
-  [FacetType.MANAGED_STRING]: {
-    [LibraryType.LOCAL]: null,
-    [LibraryType.SUBSCRIBED]: null
+  [PrimaryWorkflowEnum.MANAGED_STRING]: {
+    local: createAssetAtom(FacetType.MANAGED_STRING, LibraryType.LOCAL),
+    subscribed: createAssetAtom(FacetType.MANAGED_STRING, LibraryType.SUBSCRIBED),
+  },
+}
+
+/**
+ * AssetMirrorManager - Refactored from class T
+ * Provides methods to sync and reset asset mirror cache.
+ */
+class AssetMirrorManager {
+  /**
+   * Synchronizes added or changed assets.
+   * @param facet FacetType
+   * @param library LibraryType
+   * @param assets Array of assets
+   */
+  syncAddedOrChangedAssets(facet: FacetType, library: LibraryType, assets: any[]) {
+    const parser = AssetParserMap[facet]?.[library]
+    if (!parser) {
+      logError('design-systems', `No parser found for ${facet} and ${library}`)
+      return
+    }
+    AssetAtomHandlers[facet]?.[library]?.({
+      changed: assets.map(parser).filter(asset => asset !== null),
+    })
   }
-};
-class T {
-  syncAddedOrChangedAssets(e, t, r) {
-    if (t === LibraryType.SUBSCRIBED) {
-      let n = f[e]?.[LibraryType.SUBSCRIBED];
-      if (!n) {
-        logError("design-systems", `No parser found for ${e} and ${t}`);
-        return;
-      }
-      b[e]?.[LibraryType.SUBSCRIBED]?.({
-        changed: r.map(n).filter(e => null !== e)
-      });
-    } else if (t === LibraryType.LOCAL) {
-      let n = f[e]?.[LibraryType.LOCAL];
-      if (!n) {
-        logError("design-systems", `No parser found for ${e} and ${t}`);
-        return;
-      }
-      b[e]?.[LibraryType.LOCAL]?.({
-        changed: r.map(n).filter(e => null !== e)
-      });
-    } else logError("design-systems", `Invalid subscription status for AssetMirror: ${t}`);
+
+  /**
+   * Synchronizes removed assets.
+   * @param facet FacetType
+   * @param library LibraryType
+   * @param assetIds Array of asset IDs
+   */
+  syncRemovedAssets(facet: FacetType, library: LibraryType, assetIds: string[]) {
+    AssetAtomHandlers[facet]?.[library]?.({
+      removed: assetIds,
+    })
   }
-  syncRemovedAssets(e, t, r) {
-    b[e]?.[t]?.({
-      removed: r
-    });
-  }
+
+  /**
+   * Resets the asset mirror cache.
+   */
   resetMirrorCache() {
-    for (let e of Object.values(b)) for (let t of Object.values(e)) t?.({
-      reset: !0
-    });
+    for (const handlerGroup of Object.values(AssetAtomHandlers)) {
+      for (const handler of Object.values(handlerGroup)) {
+        handler?.({ reset: true })
+      }
+    }
   }
 }
-export function $$I1() {
-  $$n2 = new T();
+
+/**
+ * Initializes the asset mirror manager singleton.
+ * Refactored from function $$I1.
+ */
+export function initializeAssetMirrorManager() {
+  assetMirrorInstance = new AssetMirrorManager()
 }
-export const Mk = $$E0;
-export const WY = $$I1;
-export const ki = $$n2;
+
+// Exported names refactored for clarity and traceability
+export const Mk = AssetAtomMap // $$E0
+export const WY = initializeAssetMirrorManager // $$I1
+export const ki = assetMirrorInstance // $$n2

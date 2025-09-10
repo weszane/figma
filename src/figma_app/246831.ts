@@ -29,7 +29,7 @@ import { ms, c$ } from "../figma_app/236327";
 import { M3, dP } from "../figma_app/119475";
 import { Lp } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { oB, j7 } from "../905/929976";
 import { Uv, XE, u1, bS } from "../figma_app/91703";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -37,7 +37,7 @@ import { sw, rk } from "../figma_app/914957";
 import { jD } from "../905/765855";
 import { dG } from "../figma_app/753501";
 import { EF, Oo, eE as _$$eE } from "../905/709171";
-import { P$, Eo } from "../figma_app/80990";
+import { formatFontMetrics, teamLibraryCache } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue, normalizeValue } from "../905/216495";
@@ -45,7 +45,7 @@ import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { bO, SS } from "../figma_app/936646";
 import { QT } from "../figma_app/646357";
 import { je } from "../figma_app/155728";
-import { cX, Wv } from "../figma_app/633080";
+import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { vL } from "../905/826900";
 import { r6 } from "../905/542608";
@@ -71,7 +71,7 @@ import { KP } from "../figma_app/12491";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
 import { sZ } from "../905/845253";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { Oe } from "../figma_app/336853";
 import { F as _$$F2 } from "../905/258517";
 import { Sh } from "../figma_app/889655";
@@ -181,16 +181,16 @@ let eD = memo(function ({
           value: e,
           "data-tooltip": r ? _$$Z2 : void 0,
           "data-tooltip-style-description": e.description,
-          "data-tooltip-style-name": kH(e.name),
+          "data-tooltip-style-name": getBasename(e.name),
           "data-tooltip-type": Ib.SPECIAL,
           recordingKey: t,
           children: [jsx("div", {
             ref: K,
             className: UU,
-            children: kH(e.name)
+            children: getBasename(e.name)
           }), "TEXT" === e.style_type && e.meta?.style_thumbnail?.type === "TEXT" && jsx("div", {
             className: XC,
-            children: P$(e.meta?.style_thumbnail)
+            children: formatFontMetrics(e.meta?.style_thumbnail)
           }), X && jsx(K0, {
             className: zm,
             recordingKey: generateRecordingKey(t, "clearTextStyleOverridesButton"),
@@ -227,10 +227,10 @@ let eD = memo(function ({
       children: [jsx("div", {
         ref: K,
         className: UU,
-        children: kH(e.name)
+        children: getBasename(e.name)
       }), "TEXT" === e.style_type && e.meta?.style_thumbnail?.type === "TEXT" && jsx("div", {
         className: XC,
-        children: P$(e.meta?.style_thumbnail)
+        children: formatFontMetrics(e.meta?.style_thumbnail)
       }), X && jsx(K0, {
         className: zm,
         recordingKey: generateRecordingKey(t, "clearTextStyleOverridesButton"),
@@ -357,7 +357,7 @@ function ek({
       throwTypeError(u);
   }
 }
-let eM = _$$f();
+let eM = getFileKey();
 export function $$eF1({
   picker: e,
   recordingKey: t,
@@ -379,7 +379,7 @@ export function $$eF1({
   let T = useDispatch();
   let I = useSelector(e => e.modalShown);
   let S = GC(u);
-  let v = useMemo(() => !!I && I.type === cX, [I]);
+  let v = useMemo(() => !!I && I.type === LIBRARY_PREFERENCES_MODAL, [I]);
   let A = useRef(null);
   let x = useCallback(() => {
     A.current?.scrollTo(0);
@@ -431,7 +431,7 @@ export function $$eF1({
     v ? T(hideModal()) : T(showModalHandler({
       type: _$$T,
       data: {
-        initialTab: Wv.LIBRARIES,
+        initialTab: LibraryTabEnum.LIBRARIES,
         entrypoint: r6.STYLES_MODAL_TEAM_LIBRARY_BUTTON
       }
     }));
@@ -647,7 +647,7 @@ function eG({
   }));
   let e_ = useRef(null);
   let eh = e_.current?.getEl()?.getBoundingClientRect();
-  let em = useMemo(() => !!modalShown && modalShown.type === cX, [modalShown]);
+  let em = useMemo(() => !!modalShown && modalShown.type === LIBRARY_PREFERENCES_MODAL, [modalShown]);
   let eg = useMemo(() => {
     let e = () => Y(jD());
     let r = () => Y(XE());
@@ -664,7 +664,7 @@ function eG({
         if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && EF(stylePreviewShown.style, e)) i();else {
           debug(null != e.content_hash, "style does not have a hash");
           let i = e.isLocal ? e.node_id : StylesBindings.getStyleNodeId(e.key, e.content_hash);
-          isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : Eo.getCanvas(e).then(e => {
+          isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : teamLibraryCache.getCanvas(e).then(e => {
             Fullscreen.selectExternalStyle(e);
           });
           Y(rk({
@@ -879,7 +879,7 @@ function eW({
     children: [...p]
   }) : null;
 }
-let eK = _$$f();
+let eK = getFileKey();
 export function $$eY0({
   inheritStyleKey: e,
   inheritStyleID: t,

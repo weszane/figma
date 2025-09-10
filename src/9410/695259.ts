@@ -4,7 +4,7 @@ import { F } from "../905/680873";
 import { useLatestRef } from "../figma_app/922077";
 import { l as _$$l } from "../905/745972";
 import { bG } from "../905/149328";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { y0 } from "../figma_app/718307";
 import { fr, UA, Cg, uF, ym } from "../9410/398228";
 import { m } from "../9410/298357";
@@ -99,6 +99,6 @@ export function $$m1({
     return Math.max(1.5 * fr, Math.min(r, t - (e.current?.getBoundingClientRect().top ?? 175) - (1.5 * topLevelObjectRowHeight + (uF + ym))));
   }, [e, t, topLevelObjectRowHeight]);
 }
-Wh(() => atom(null));
+setupRemovableAtomFamily(() => atom(null));
 export const k3 = $$h0;
 export const q0 = $$m1;

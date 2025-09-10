@@ -1,22 +1,22 @@
 import { l as _$$l } from "../905/716947";
 import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { Xm, gB, e1 } from "../905/723791";
-import { P as _$$P } from "../905/412913";
-import { Mk } from "../figma_app/31188";
+import { FileKeySourceEnum } from "../905/412913";
+import { AssetAtomMap } from "../figma_app/31188";
 import { openFileLibraryKeyAtom, openFileKeyAtom } from "../figma_app/516028";
 import { O as _$$O } from "../905/566074";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { logError } from "../905/714362";
 import { FComponentType } from "../figma_app/191312";
 import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
-import { PW as _$$PW } from "../905/497152";
+import { PrimaryWorkflowEnum as _$$PW } from "../905/497152";
 import { RG, pz, yP } from "../figma_app/825489";
 import { sC } from "../905/395857";
 import { isNotNullish } from "../figma_app/95419";
 import x from "../vendor/239910";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { Q_ } from "../figma_app/646357";
-import { E8, PW as _$$PW2, o as _$$o } from "../figma_app/633080";
+import { StagingStatusEnum, PrimaryWorkflowEnum as _$$PW2, LibrarySourceEnum } from "../figma_app/633080";
 function _({
   libraryKey: e,
   assetType: t
@@ -123,15 +123,15 @@ let I = createRemovableAtomFamily(({
     n && (c[n.key] = n);
   }
   return gB(c);
-}), c2);
+}), deepEqual);
 var S = x;
 let k = {
-  [_$$PW.RESPONSIVE_SET]: N(Mk[_$$PW.RESPONSIVE_SET].local, A[_$$PW.RESPONSIVE_SET]),
-  [_$$PW.CODE_COMPONENT]: N(Mk[_$$PW.CODE_COMPONENT].local, A[_$$PW.CODE_COMPONENT])
+  [_$$PW.RESPONSIVE_SET]: N(AssetAtomMap[_$$PW.RESPONSIVE_SET].local, A[_$$PW.RESPONSIVE_SET]),
+  [_$$PW.CODE_COMPONENT]: N(AssetAtomMap[_$$PW.CODE_COMPONENT].local, A[_$$PW.CODE_COMPONENT])
 };
 let R = {
-  [_$$PW.RESPONSIVE_SET]: N(Mk[_$$PW.RESPONSIVE_SET].local, y[_$$PW.RESPONSIVE_SET]),
-  [_$$PW.CODE_COMPONENT]: N(Mk[_$$PW.CODE_COMPONENT].local, y[_$$PW.CODE_COMPONENT])
+  [_$$PW.RESPONSIVE_SET]: N(AssetAtomMap[_$$PW.RESPONSIVE_SET].local, y[_$$PW.RESPONSIVE_SET]),
+  [_$$PW.CODE_COMPONENT]: N(AssetAtomMap[_$$PW.CODE_COMPONENT].local, y[_$$PW.CODE_COMPONENT])
 };
 function N(e, t, i = O, n = null) {
   return atom(s => {
@@ -169,7 +169,7 @@ function P(e, t) {
   return conditionalFeatureFlag("ds_user_facing_version_publishing", e.userFacingVersion !== t.userFacingVersion, e.version !== t.version) || Q_(e.containingFrame, t.containingFrame);
 }
 function O(e, t, i = P) {
-  return e && e.isPublishable && !e.isSoftDeleted ? t ? i(e, t) ? E8.CHANGED : E8.CURRENT : E8.NEW : t ? E8.DELETED : E8.NOT_STAGED;
+  return e && e.isPublishable && !e.isSoftDeleted ? t ? i(e, t) ? StagingStatusEnum.CHANGED : StagingStatusEnum.CURRENT : StagingStatusEnum.NEW : t ? StagingStatusEnum.DELETED : StagingStatusEnum.NOT_STAGED;
 }
 let D = [_$$PW2.RESPONSIVE_SET, _$$PW2.CODE_COMPONENT];
 let $$L0 = atom(e => {
@@ -179,7 +179,7 @@ let $$L0 = atom(e => {
     publishStatusAtoms,
     libraryKey,
     fileKey
-  } = e(pz) === _$$o.HUBFILE ? {
+  } = e(pz) === LibrarySourceEnum.HUBFILE ? {
     libraryAssetAtoms: y,
     publishStatusAtoms: R,
     libraryKey: e(RG),
@@ -192,7 +192,7 @@ let $$L0 = atom(e => {
   };
   for (let l of D) {
     if (!_$$O(l)) continue;
-    let p = e(Mk[l].local);
+    let p = e(AssetAtomMap[l].local);
     let m = e(libraryAssetAtoms[l]);
     let h = e(publishStatusAtoms[l]);
     switch (h.status) {
@@ -220,13 +220,13 @@ let $$L0 = atom(e => {
         status: i.libraryStatus,
         userFacingVersion: r.version,
         node_id: r.localGuid,
-        file_key_source: _$$P.LOCAL_FILE,
+        file_key_source: FileKeySourceEnum.LOCAL_FILE,
         file_key: fileKey ?? "",
         library_key: libraryKey ?? _$$l("")
       } : t[e] = {
         type: l,
         status: i.libraryStatus,
-        file_key_source: _$$P.LOCAL_FILE,
+        file_key_source: FileKeySourceEnum.LOCAL_FILE,
         file_key: fileKey ?? "",
         library_key: libraryKey ?? _$$l(""),
         userFacingVersion: a?.version ?? "",

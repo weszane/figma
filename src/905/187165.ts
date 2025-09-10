@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { SelfDesignType } from "../figma_app/763686";
 import { localStorageRef } from "../905/657224";
-import { UE, ql } from "../figma_app/191804";
+import { whiteColor, getBorderStyle } from "../figma_app/191804";
 import { getFalseValue } from "../figma_app/897289";
 import { Wl } from "../figma_app/88239";
 import { FEditorType } from "../figma_app/53721";
@@ -38,8 +38,8 @@ let $$v7 = new Proxy({}, {
 });
 let $$I9 = createContext($$v7);
 export function $$E6(e, t, i, n = "colorBg") {
-  let r = (e && e[n]) ?? UE;
-  return ql(r, t, i);
+  let r = (e && e[n]) ?? whiteColor;
+  return getBorderStyle(r, t, i);
 }
 export const FB = $$h0;
 export const ON = $$p1;

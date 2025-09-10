@@ -1,28 +1,54 @@
-import { debugState } from "../905/407919";
-import { getRequest } from "../905/910117";
-import { NK } from "../figma_app/111825";
-export function $$s0(e) {
-  let t = new URL(e, location.origin);
-  let i = NK(debugState?.getState().fileVersion);
-  t.searchParams.set("fv", i.toString());
+import { debugState } from '../905/407919'
+import { getRequest } from '../905/910117'
+import { NK } from '../figma_app/111825'
+
+/**
+ * Generates a URL with the current file version as a query parameter.
+ * @param baseUrl - The base URL to append the file version to.
+ * @returns An object containing the constructed URL and file version.
+ * (Original function: $$s0)
+ */
+export function generateFileVersionUrl(baseUrl: string) {
+  const fileVersion = NK(debugState?.getState().fileVersion)
+  const urlObj = new URL(baseUrl, location.origin)
+  urlObj.searchParams.set('fv', fileVersion.toString())
   return {
-    url: t.toString(),
-    fileVersion: i
-  };
+    url: urlObj.toString(),
+    fileVersion,
+  }
 }
-let o = (e, t) => getRequest(e, null, {
-  responseType: "arraybuffer"
-}).then(({
-  data: e
-}) => e);
-export async function $$l1(e, t = o) {
-  if (!e) return Promise.reject(Error("No canvas URL"));
-  let {
-    url,
-    fileVersion
-  } = $$s0(e);
-  let d = await t(url, fileVersion);
-  return NK(debugState?.getState().fileVersion) > fileVersion ? $$l1(e) : [d, url, fileVersion];
+
+/**
+ * Fetches data from a given URL as an arraybuffer.
+ * @param url - The URL to fetch.
+ * @param _fileVersion - Unused, kept for compatibility.
+ * @returns A promise resolving to the fetched data.
+ * (Original variable: o)
+ */
+export function fetchArrayBuffer(url: string, _fileVersion?: number) {
+  return getRequest(url, null, { responseType: 'arraybuffer' }).then(({ data }) => data)
 }
-export const P = $$s0;
-export const n = $$l1;
+
+/**
+ * Loads canvas data from a URL, retrying if the file version has changed.
+ * @param canvasUrl - The canvas URL to load.
+ * @param fetchFn - The function to fetch data (default: fetchArrayBuffer).
+ * @returns A promise resolving to [data, url, fileVersion].
+ * (Original function: $$l1)
+ */
+export async function loadCanvasData(canvasUrl: string, fetchFn: (url: string, fileVersion?: number) => Promise<any> = fetchArrayBuffer) {
+  if (!canvasUrl) {
+    return Promise.reject(new Error('No canvas URL'))
+  }
+  const { url, fileVersion } = generateFileVersionUrl(canvasUrl)
+  const data = await fetchFn(url, fileVersion)
+  // If the file version has changed, retry loading
+  if (NK(debugState?.getState().fileVersion) > fileVersion) {
+    return loadCanvasData(canvasUrl, fetchFn)
+  }
+  return [data, url, fileVersion]
+}
+
+// Export aliases for compatibility with original names
+export const P = generateFileVersionUrl
+export const n = loadCanvasData

@@ -11,7 +11,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { n1 } from "../figma_app/657017";
 import { LH } from "../905/872904";
 import { WorkspaceSelectorView } from "../figma_app/43951";
-import { Wv } from "../figma_app/633080";
+import { LibraryTabEnum } from "../figma_app/633080";
 import { F as _$$F, r as _$$r } from "../905/336143";
 import { l as _$$l } from "../905/716947";
 import { analyticsEventManager } from "../905/449184";
@@ -27,11 +27,11 @@ let C = resourceUtils.disabled();
 let k = createContext(null);
 export function $$R1(e) {
   switch (e) {
-    case Wv.UPDATES:
+    case LibraryTabEnum.UPDATES:
       return "updates";
-    case Wv.TEAM_LIBRARIES:
+    case LibraryTabEnum.TEAM_LIBRARIES:
       return "teams";
-    case Wv.RECOMMENDED:
+    case LibraryTabEnum.RECOMMENDED:
       return "recommended";
     default:
       return "thisFile";

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import s from "classnames";
 import { getI18nString } from "../905/303541";
 import { TI } from "../905/713722";
@@ -93,7 +93,7 @@ let _ = e => {
 let $$A0 = forwardRef((e, t) => {
   let i = g(e.paint);
   let r = _(e.paint);
-  let s = dI(e.variableId || {});
+  let s = convertKiwiToVariableIdString(e.variableId || {});
   "(invalid variable id)" === s && (s = void 0);
   let l = _$$u(s);
   let d = l?.name ?? "";

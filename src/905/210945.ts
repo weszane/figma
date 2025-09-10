@@ -6,7 +6,7 @@ import { b } from "../905/462537";
 import { V } from "../905/261687";
 import { q } from "../905/347574";
 import { s as _$$s } from "../905/504529";
-import { dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import m from "../vendor/805353";
 import { u as _$$u } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -178,7 +178,7 @@ export function $$B0({
   variableData: l,
   variableScopes: d
 }) {
-  let c = _$$u(l?.dataType === "ALIAS" && l.value?.alias ? dI(l.value.alias) : void 0);
+  let c = _$$u(l?.dataType === "ALIAS" && l.value?.alias ? convertKiwiToVariableIdString(l.value.alias) : void 0);
   let [u, m] = function (e, t) {
     let [i, n] = useState(e);
     useEffect(() => {

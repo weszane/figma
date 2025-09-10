@@ -1,9 +1,9 @@
 import { useRef, useMemo, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { oU } from "../figma_app/273493";
+import { rgbToNormalized } from "../figma_app/273493";
 import { ColorOptions, WhiteboardTsApi } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
-import { tK, DA } from "../figma_app/191804";
+import { parseHex, areColorsEqual } from "../figma_app/191804";
 import { Eg } from "../figma_app/583114";
 import { useLatestRef } from "../figma_app/922077";
 import { WB } from "../905/761735";
@@ -113,11 +113,11 @@ function O(e) {
   return null !== e;
 }
 export function $$R1(e) {
-  return e.map(e => tK(e)).filter(O);
+  return e.map(e => parseHex(e)).filter(O);
 }
 export function $$L8(e, t) {
   let r = $$w7();
-  return !!e && (r.type === Yv.CUSTOM ? 0 > r.variations[t].findIndex(t => DA(e, t)) : zS(e, t) === ColorOptions.CUSTOM);
+  return !!e && (r.type === Yv.CUSTOM ? 0 > r.variations[t].findIndex(t => areColorsEqual(e, t)) : zS(e, t) === ColorOptions.CUSTOM);
 }
 export function $$P6(e, t) {
   return e && t;
@@ -149,7 +149,7 @@ export function $$M9() {
     }), d(n6), u(ns), p(T7), h(function () {
       let e = Math.floor(Math.random() * Ku().length);
       return BV(Ku()[e], "sticky") || E$();
-    }()), WhiteboardTsApi.setSectionToolColor(oU(function () {
+    }()), WhiteboardTsApi.setSectionToolColor(rgbToNormalized(function () {
       let e = Math.floor(Math.random() * Qe().length);
       return BV(Qe()[e], "baseLight") || BV(ColorOptions.BLUE_LIGHT, "baseLight");
     }()))) : r && (i({
@@ -162,7 +162,7 @@ export function $$M9() {
         type: "SOLID",
         color: r.highlighterColor
       }]
-    }), d(r.shapeColor), h(r.stickyColor), WhiteboardTsApi.setSectionToolColor(oU(r.sectionColor))));
+    }), d(r.shapeColor), h(r.stickyColor), WhiteboardTsApi.setSectionToolColor(rgbToNormalized(r.sectionColor))));
   }, [e, t, r, i, l, d, u, p, h]);
 }
 export function $$F0(e) {

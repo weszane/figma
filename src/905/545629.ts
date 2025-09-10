@@ -1,5 +1,5 @@
 import { CooperHelpers, SocialMediaFormats, AppStateTsApi, HorizontalAlignment, VerticalAlignment } from "../figma_app/763686";
-import { R0 } from "../figma_app/273493";
+import { unpackToNormalizedRgb } from "../figma_app/273493";
 import { M } from "../905/512402";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -93,7 +93,7 @@ export class $$_0 extends C {
         x: o.x,
         y: p.y + l + i
       };
-      t.fillText(a, getI18nString("cooper.templates.canvas_placeholder_button"), AppStateTsApi ? R0(AppStateTsApi.getTextPrimary()) : {
+      t.fillText(a, getI18nString("cooper.templates.canvas_placeholder_button"), AppStateTsApi ? unpackToNormalizedRgb(AppStateTsApi.getTextPrimary()) : {
         red: 0,
         green: 0,
         blue: 0,

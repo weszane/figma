@@ -245,7 +245,7 @@ export function createAnnotationsMixin<T extends BaseClass<BaseNode>>(baseClass:
  * Original function: $$o10
  */
 export function createEmptyMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin1 extends baseClass {}
+  return class EmptyMixin1 extends baseClass { }
 }
 
 /**
@@ -253,7 +253,7 @@ export function createEmptyMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$l63
  */
 export function createEmptyMixin2<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin2 extends baseClass {}
+  return class EmptyMixin2 extends baseClass { }
 }
 
 /**
@@ -261,7 +261,7 @@ export function createEmptyMixin2<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$d22
  */
 export function createEmptyMixin3<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin3 extends baseClass {}
+  return class EmptyMixin3 extends baseClass { }
 }
 
 // ============================================================================
@@ -404,7 +404,7 @@ export function createCanvasGridMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$m39
  */
 export function createEmptyMixin4<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin4 extends baseClass {}
+  return class EmptyMixin4 extends baseClass { }
 }
 
 // ============================================================================
@@ -501,7 +501,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$g12
  */
 export function createEmptyMixin5<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin5 extends baseClass {}
+  return class EmptyMixin5 extends baseClass { }
 }
 
 /**
@@ -509,7 +509,7 @@ export function createEmptyMixin5<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$f26
  */
 export function createEmptyMixin6<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin6 extends baseClass {}
+  return class EmptyMixin6 extends baseClass { }
 }
 
 /**
@@ -517,7 +517,7 @@ export function createEmptyMixin6<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$_53
  */
 export function createEmptyMixin7<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin7 extends baseClass {}
+  return class EmptyMixin7 extends baseClass { }
 }
 
 /**
@@ -525,7 +525,7 @@ export function createEmptyMixin7<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$A47
  */
 export function createEmptyMixin8<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin8 extends baseClass {}
+  return class EmptyMixin8 extends baseClass { }
 }
 
 // ============================================================================
@@ -570,7 +570,7 @@ export function createStateGroupMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$b28
  */
 export function createEmptyMixin9<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin9 extends baseClass {}
+  return class EmptyMixin9 extends baseClass { }
 }
 
 // ============================================================================
@@ -672,7 +672,7 @@ export function createConstraintMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$E35
  */
 export function createEmptyMixin10<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin10 extends baseClass {}
+  return class EmptyMixin10 extends baseClass { }
 }
 
 /**
@@ -680,7 +680,7 @@ export function createEmptyMixin10<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$x32
  */
 export function createEmptyMixin11<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin11 extends baseClass {}
+  return class EmptyMixin11 extends baseClass { }
 }
 
 /**
@@ -688,7 +688,7 @@ export function createEmptyMixin11<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$S9
  */
 export function createEmptyMixin12<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin12 extends baseClass {}
+  return class EmptyMixin12 extends baseClass { }
 }
 
 // ============================================================================
@@ -762,7 +762,7 @@ export function createFrameMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$T8
  */
 export function createEmptyMixin13<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin13 extends baseClass {}
+  return class EmptyMixin13 extends baseClass { }
 }
 
 /**
@@ -770,7 +770,7 @@ export function createEmptyMixin13<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$k34
  */
 export function createEmptyMixin14<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin14 extends baseClass {}
+  return class EmptyMixin14 extends baseClass { }
 }
 
 /**
@@ -778,7 +778,7 @@ export function createEmptyMixin14<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$R44
  */
 export function createEmptyMixin15<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin15 extends baseClass {}
+  return class EmptyMixin15 extends baseClass { }
 }
 
 /**
@@ -786,7 +786,7 @@ export function createEmptyMixin15<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$N46
  */
 export function createEmptyMixin16<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin16 extends baseClass {}
+  return class EmptyMixin16 extends baseClass { }
 }
 
 // ============================================================================
@@ -815,7 +815,7 @@ export function createSlotMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$O41
  */
 export function createEmptyMixin17<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin17 extends baseClass {}
+  return class EmptyMixin17 extends baseClass { }
 }
 
 // ============================================================================
@@ -997,7 +997,7 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$F13
  */
 export function createEmptyMixin18<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin18 extends baseClass {}
+  return class EmptyMixin18 extends baseClass { }
 }
 
 /**
@@ -1005,7 +1005,7 @@ export function createEmptyMixin18<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$M62
  */
 export function createEmptyMixin19<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin19 extends baseClass {}
+  return class EmptyMixin19 extends baseClass { }
 }
 
 // ============================================================================
@@ -1038,7 +1038,7 @@ export function createModuleMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$U4
  */
 export function createEmptyMixin20<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin20 extends baseClass {}
+  return class EmptyMixin20 extends baseClass { }
 }
 
 /**
@@ -1046,7 +1046,7 @@ export function createEmptyMixin20<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$B38
  */
 export function createEmptyMixin21<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin21 extends baseClass {}
+  return class EmptyMixin21 extends baseClass { }
 }
 
 /**
@@ -1054,7 +1054,7 @@ export function createEmptyMixin21<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$V55
  */
 export function createEmptyMixin22<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin22 extends baseClass {}
+  return class EmptyMixin22 extends baseClass { }
 }
 
 // ============================================================================
@@ -1317,7 +1317,7 @@ export function createSiteMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$K5
  */
 export function createEmptyMixin23<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin23 extends baseClass {}
+  return class EmptyMixin23 extends baseClass { }
 }
 
 /**
@@ -1647,7 +1647,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
  * Original function: $$$33
  */
 export function createEmptyMixin24<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin24 extends baseClass {}
+  return class EmptyMixin24 extends baseClass { }
 }
 
 // ============================================================================
@@ -2081,7 +2081,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$Q15
  */
 export function createEmptyMixin25<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin25 extends baseClass {}
+  return class EmptyMixin25 extends baseClass { }
 }
 
 /**
@@ -2089,7 +2089,7 @@ export function createEmptyMixin25<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$J36
  */
 export function createEmptyMixin26<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin26 extends baseClass {}
+  return class EmptyMixin26 extends baseClass { }
 }
 
 /**
@@ -2097,7 +2097,7 @@ export function createEmptyMixin26<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$ee20
  */
 export function createEmptyMixin27<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin27 extends baseClass {}
+  return class EmptyMixin27 extends baseClass { }
 }
 
 /**
@@ -2105,7 +2105,7 @@ export function createEmptyMixin27<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$et54
  */
 export function createEmptyMixin28<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin28 extends baseClass {}
+  return class EmptyMixin28 extends baseClass { }
 }
 
 // ============================================================================
@@ -2142,7 +2142,7 @@ export function createStyleTypeMixin<T extends BaseClass<BaseNode>>(baseClass: T
  * Original function: $$en21
  */
 export function createEmptyMixin29<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin29 extends baseClass {}
+  return class EmptyMixin29 extends baseClass { }
 }
 
 /**
@@ -2150,7 +2150,7 @@ export function createEmptyMixin29<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$er18
  */
 export function createEmptyMixin30<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin30 extends baseClass {}
+  return class EmptyMixin30 extends baseClass { }
 }
 
 // ============================================================================
@@ -2246,25 +2246,25 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
   }
 }
 export function $$es17(e) {
-  return class extends e {}
+  return class extends e { }
 }
 export function $$eo49(e) {
-  return class extends e {}
+  return class extends e { }
 }
 export function $$el50(e) {
-  return class extends e {}
+  return class extends e { }
 }
 export function $$ed64(e) {
-  return class extends e {}
+  return class extends e { }
 }
 export function $$ec24(e) {
-  return class extends e {}
+  return class extends e { }
 }
 export function $$eu52(e) {
-  return class extends e {}
+  return class extends e { }
 }
 export function $$ep48(e) {
-  return class extends e {}
+  return class extends e { }
 }
 /**
  * Creates a mixin that adds arc data functionality to a base class
@@ -2291,10 +2291,10 @@ export function createArcDataMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
   }
 }
 export function $$eh56(e) {
-  return class extends e {}
+  return class extends e { }
 }
 export function $$eg11(e) {
-  return class extends e {}
+  return class extends e { }
 }
 /**
  * Creates a mixin that adds widget functionality to a base class

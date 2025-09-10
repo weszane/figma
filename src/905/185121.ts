@@ -23,7 +23,7 @@ import { o as _$$o } from "../905/96108";
 import { rM } from "../figma_app/241541";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE } from "../figma_app/91703";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { W3 } from "../905/232641";
 import { vx } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
@@ -117,7 +117,7 @@ let N = new class {
     return n;
   }
   isEqual(e, t) {
-    return c2(e, t);
+    return deepEqual(e, t);
   }
   format(e) {
     return e?.map(e => parseFloat(e.toFixed(2))).join(", ");
@@ -125,7 +125,7 @@ let N = new class {
   getDashRanges(e) {
     let t = [];
     let i = 0;
-    for (; ;) {
+    for (;;) {
       let n = e.slice(i).match(/[^ ,]+/);
       if (!n || void 0 === n.index) break;
       let r = i + n.index;
@@ -670,7 +670,7 @@ function eV(e) {
     min: 0,
     onValueChange: t => {
       let i;
-      if (D.current = "NONE", !dashPattern || isInvalidValue(dashPattern) || 2 !== dashPattern.length) i = [t, t]; else {
+      if (D.current = "NONE", !dashPattern || isInvalidValue(dashPattern) || 2 !== dashPattern.length) i = [t, t];else {
         let e = dashPattern[0];
         let n = dashPattern[1];
         i = E && e === n ? [t, t] : [t, n];

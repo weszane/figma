@@ -4,7 +4,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { hV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { tK } from "../figma_app/191804";
+import { parseHex } from "../figma_app/191804";
 import { m as _$$m } from "../figma_app/964367";
 import { logError } from "../905/714362";
 import { SV } from "../9410/483857";
@@ -259,7 +259,7 @@ async function U(e, t, i) {
   permissionScopeHandler.ai("first-draft-override-paints", () => {
     let i = t.darkMode ? lH.DARK : lH.LIGHT;
     i !== _$$P(e) && _$$t(e, i);
-    let r = tK(t.brandColor);
+    let r = parseHex(t.brandColor);
     if (r) {
       let t = gU(e.fills);
       t && e.childrenNodes.forEach(e => {

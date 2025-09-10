@@ -72,10 +72,10 @@ import { W6 as _$$W, Lf } from '../905/327522';
 import { B as _$$B } from '../905/352524';
 import { LogLevelStr } from '../905/361972';
 import { jp, WS } from '../905/370597';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { $ as _$$$2 } from '../905/383708';
 import { x as _$$x4 } from '../905/392802';
-import { lP as _$$lP } from '../905/405710';
+import { isEffectOrGrid } from '../905/405710';
 import { Dn } from '../905/407352';
 import { debugState } from '../905/407919';
 import { WK } from '../905/414069';
@@ -143,7 +143,7 @@ import { Timer } from '../905/609396';
 import { customHistory, isMainAppRoute } from '../905/612521';
 import { jN } from '../905/612685';
 import { isActiveAtom } from '../905/617744';
-import { o8 as _$$o3, Fr } from '../905/622391';
+import { getSelectedView, checkCanRunExtensions } from '../905/622391';
 import { x as _$$x2 } from '../905/628884';
 import { E as _$$E } from '../905/632989';
 import { parseQuery } from '../905/634134';
@@ -246,7 +246,7 @@ import { checkZoomWidgetAccess, isExportRestricted, canEditBasedOnPlan } from '.
 import { bJ as _$$bJ } from '../figma_app/16595';
 import { sO as _$$sO } from '../figma_app/21029';
 import { useAtomWithSubscription, atomStoreManager } from '../figma_app/27355';
-import { WY } from '../figma_app/31188';
+import { initializeAssetMirrorManager } from '../figma_app/31188';
 import { LibraryKeyToFileLink } from '../figma_app/43951';
 import { FEditorType, mapYFToEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { sF as _$$sF, zJ } from '../figma_app/59657';
@@ -256,7 +256,7 @@ import { xP } from '../figma_app/65182';
 import { XR } from '../figma_app/67099';
 import { gh } from '../figma_app/76123';
 import { $m } from '../figma_app/78808';
-import { $X, Eo, F1, g4 } from '../figma_app/80990';
+import { createObjectUrlFromBuffer, teamLibraryCache, fetchAndProcessComponentPublishingBuffers, fetchAndProcessVariablePublishingBuffers } from '../figma_app/80990';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { Rm } from '../figma_app/86989';
 import { s4 as _$$s2, Wl } from '../figma_app/88239';
@@ -280,7 +280,7 @@ import { v as _$$v } from '../figma_app/176476';
 import { XT as _$$XT, _I } from '../figma_app/176634';
 import { Ht, j5 } from '../figma_app/178475';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
-import { tK as _$$tK } from '../figma_app/191804';
+import { parseHex } from '../figma_app/191804';
 import { LC } from '../figma_app/192142';
 import { zg } from '../figma_app/193867';
 import { yesNoTrackingEnum } from '../figma_app/198712';
@@ -381,7 +381,7 @@ import { lH as _$$lH2 } from '../figma_app/623300';
 import { Mj } from '../figma_app/624361';
 import { Id, JU } from '../figma_app/626177';
 import { JT, zw } from '../figma_app/632248';
-import { AT, cX, PW } from '../figma_app/633080';
+import { SubscriptionStatusEnum, LIBRARY_PREFERENCES_MODAL, PrimaryWorkflowEnum } from '../figma_app/633080';
 import { BG as _$$BG } from '../figma_app/634288';
 import { e2 as _$$e6, ks } from '../figma_app/637027';
 import { canMemberOrg } from '../figma_app/642025';
@@ -1046,10 +1046,10 @@ function ik(e) {
       useSmartPositioning: !1,
       selectAfterInsert: !0
     };
-    i.type === PW.COMPONENT ? t(_$$FU({
+    i.type === PrimaryWorkflowEnum.COMPONENT ? t(_$$FU({
       item: i,
       ...n
-    })) : i.type === PW.STATE_GROUP && t(b$({
+    })) : i.type === PrimaryWorkflowEnum.STATE_GROUP && t(b$({
       item: i,
       ...n
     }));
@@ -1302,7 +1302,7 @@ function nA(e, t, i) {
       imageURL: 'https://via.placeholder.com/300/09f/fff.png',
       deviceName: 'editor',
       canWrite: !0,
-      color: _$$tK(n) || {
+      color: parseHex(n) || {
         r: 0,
         g: 0,
         b: 0,
@@ -4466,7 +4466,7 @@ async function lO({
   let {
     openFile
   } = debugState.getState();
-  let s = _$$o3();
+  let s = getSelectedView();
   if (!s) throw new Error('Cannot run widget while logged out');
   let o = mv();
   _$$iu.currentPluginRunID = o;
@@ -4547,7 +4547,7 @@ async function lF(e, {
     let {
       openFile
     } = debugState.getState();
-    let o = _$$o3();
+    let o = getSelectedView();
     if (!o) throw new Error('Cannot run widget while logged out');
     await E9({
       allowedDomains: manifest.networkAccess?.allowedDomains ?? gH,
@@ -4619,7 +4619,7 @@ let lM = new class {
   }
   findQueueIndex(e) {
     for (let t = 0; t < this.runQueue.length; t++) {
-      if (c2(this.runQueue[t], e)) return t;
+      if (deepEqual(this.runQueue[t], e)) return t;
     }
     return -1;
   }
@@ -4936,7 +4936,7 @@ class lV {
     });
   }
   clickWidget(e, t, i) {
-    if (!_$$Vi(e) && !Fr()) return _$$R4.instance.handleUpgrade(Q7.RUN_WIDGET);
+    if (!_$$Vi(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(Q7.RUN_WIDGET);
     _$$z3.startInteraction(e, 'click');
     lM.runUserInitiatedWidget({
       pluginID: e,
@@ -4955,7 +4955,7 @@ class lV {
     });
   }
   runPropertyMenuCallback(e, t, i, n) {
-    if (!_$$Vi(e) && !Fr()) return _$$R4.instance.handleUpgrade(Q7.RUN_WIDGET);
+    if (!_$$Vi(e) && !checkCanRunExtensions()) return _$$R4.instance.handleUpgrade(Q7.RUN_WIDGET);
     this.didCallTextEditEnd = !1;
     Fullscreen.setDefaultEditMode();
     let r = {
@@ -4991,7 +4991,7 @@ class lV {
         storeInRecentsKey: n,
         id: t,
         version: e || '',
-        currentUserId: _$$o3()
+        currentUserId: getSelectedView()
       }));
     }
   }
@@ -5040,7 +5040,7 @@ class lV {
       bounds: t,
       text: i.widgetTooltip
     };
-    c2(n, atomStoreManager.get(HV)) || HV.syncFromFullscreen(n);
+    deepEqual(n, atomStoreManager.get(HV)) || HV.syncFromFullscreen(n);
   }
   hideTooltip() {
     HV.syncFromFullscreen(null);
@@ -5205,7 +5205,7 @@ export function $$lq1(e, t, i, n) {
     _$$n6(t);
     _$$_2();
     xQ();
-    WY();
+    initializeAssetMirrorManager();
     _$$tO();
     Ln();
     XR();
@@ -6662,7 +6662,7 @@ let lX = class e extends sP(sN(sR)) {
     if (i === 'STATE_GROUP') {
       try {
         let e = `/state_group/${t.key}/version/${t.version}/canvas?fv=${n}&adventurous_newt=true`;
-        return Eo.getCanvas({
+        return teamLibraryCache.getCanvas({
           canvas_url: e
         });
       } catch (e) {
@@ -6671,7 +6671,7 @@ let lX = class e extends sP(sN(sR)) {
     } else if (i === 'LOOSE_COMPONENT') {
       try {
         let t = `/component/${e.key}/canvas?ver=${e.version}&fv=${n}`;
-        return Eo.getCanvas({
+        return teamLibraryCache.getCanvas({
           canvas_url: t
         });
       } catch (e) {
@@ -6682,10 +6682,10 @@ let lX = class e extends sP(sN(sR)) {
     }
   }
   fetchComponentBuffers(e, t, i, n) {
-    return F1(e, t, i, n);
+    return fetchAndProcessComponentPublishingBuffers(e, t, i, n);
   }
   fetchVariableSetBuffers(e, t, i, n) {
-    return g4(e, t, i, n);
+    return fetchAndProcessVariablePublishingBuffers(e, t, i, n);
   }
   bindListeners() {
     this.fromFullscreen.on('handleUpgradeRefresh', this.handleUpgradeRefresh);
@@ -7358,7 +7358,7 @@ let lX = class e extends sP(sN(sR)) {
       }));
       return;
     }
-    this._store.getState().modalShown?.type === cX ? this.dispatch(hideModal()) : this.dispatch(showModalHandler({
+    this._store.getState().modalShown?.type === LIBRARY_PREFERENCES_MODAL ? this.dispatch(hideModal()) : this.dispatch(showModalHandler({
       type: _$$T2,
       data: {
         entrypoint: _$$r.QUICK_ACTION
@@ -7530,16 +7530,16 @@ let lX = class e extends sP(sN(sR)) {
   }
   updateStyleThumbnail(e, t) {
     let i = this._state.library.local.styles[e];
-    if (i && !_$$lP(i.style_type)) {
-      let n = $X(t);
+    if (i && !isEffectOrGrid(i.style_type)) {
+      let n = createObjectUrlFromBuffer(t);
       let r = i.meta && i.meta.style_thumbnail;
       this.dispatch(T1({
-        styleKind: AT.LOCAL,
+        styleKind: SubscriptionStatusEnum.LOCAL,
         thumbnails: [{
           nodeId: e,
           url: n,
           styleThumbnail: r,
-          type: PW.STYLE
+          type: PrimaryWorkflowEnum.STYLE
         }]
       }));
     }

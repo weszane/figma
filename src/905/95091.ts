@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { K } from "../905/443068";
 import { U } from "../905/708285";
-import { dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { colorToHex } from "../905/436288";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -21,7 +21,7 @@ export function $$I2({
   variableId: e,
   ...t
 }) {
-  let i = _$$u(dI(e));
+  let i = _$$u(convertKiwiToVariableIdString(e));
   let r = i?.name ?? "";
   let a = i?.description;
   let o = !!i && eF(i);

@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createElement, memo, useEffect, useLayoutEffect } from "react";
 import { useSelector, shallowEqual, useStore } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { clamp } from "../figma_app/492908";
 import { LayoutTabType, Fullscreen, SceneGraphHelpers, CustomFocusHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -179,7 +179,7 @@ let F = memo(({
   parent: I,
   ...S
 }) {
-  return shallowEqual(p, S) && shallowEqual(c, T) && shallowEqual(d, b) && shallowEqual(n, g) && shallowEqual(o, E) && shallowEqual(l, y) && shallowEqual(i, f) && shallowEqual(u?.absoluteTransform, I?.absoluteTransform) && shallowEqual(u?.dimensions, I?.dimensions) && shallowEqual(u?.transformProperties, I?.transformProperties) && c2(e, _) && c2(t, h) && c2(r, m);
+  return shallowEqual(p, S) && shallowEqual(c, T) && shallowEqual(d, b) && shallowEqual(n, g) && shallowEqual(o, E) && shallowEqual(l, y) && shallowEqual(i, f) && shallowEqual(u?.absoluteTransform, I?.absoluteTransform) && shallowEqual(u?.dimensions, I?.dimensions) && shallowEqual(u?.transformProperties, I?.transformProperties) && deepEqual(e, _) && deepEqual(t, h) && deepEqual(r, m);
 });
 export function $$j2({
   children: e,
@@ -233,7 +233,7 @@ export function $$j2({
     editorType: ei
   });
   let es = !J;
-  if (getFeatureFlags().a11y_design_dom_mirror) Z = es ? EO(X, q) : EO(X, q, J.dimensions, J.absoluteTransform); else {
+  if (getFeatureFlags().a11y_design_dom_mirror) Z = es ? EO(X, q) : EO(X, q, J.dimensions, J.absoluteTransform);else {
     let e = es ? "canvas" : J.transformProperties;
     Z = l0(u, e);
   }

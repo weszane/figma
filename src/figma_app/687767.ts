@@ -2,11 +2,11 @@ import { useMemo, useCallback } from "react";
 import { nearlyEqual } from "../figma_app/492908";
 import { isNotNullish } from "../figma_app/95419";
 import { VariableSetIdCompatHandler } from "../figma_app/243058";
-import { oB } from "../figma_app/273493";
+import { rgbToHsl } from "../figma_app/273493";
 import { VariablesBindings, AppStateTsApi, VariableResolvedDataType, VariableDataType, VariableUIContext } from "../figma_app/763686";
 import { parseSessionLocalID } from "../905/871411";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { DA } from "../figma_app/191804";
+import { areColorsEqual } from "../figma_app/191804";
 import { Ez } from "../figma_app/766708";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { ti } from "../figma_app/646357";
@@ -62,11 +62,11 @@ export function $$v0(e) {
 function A(e, t) {
   if (!e.color || !t.color) return 0;
   let r = {
-    ...oB(e.color),
+    ...rgbToHsl(e.color),
     a: e.opacity ?? e.color.a
   };
   let n = {
-    ...oB(t.color),
+    ...rgbToHsl(t.color),
     a: t.opacity ?? t.color.a
   };
   let i = (e, t, r) => {
@@ -82,7 +82,7 @@ export function $$x5(e) {
     let e = r.map(e => e.paint);
     return t.map(e => {
       if ("paint" === e.type && e.stylePaint.paint.color) return e.stylePaint.paint;
-    }).filter(isNotNullish).filter(t => !e.some(e => t.color && e.color && DA({
+    }).filter(isNotNullish).filter(t => !e.some(e => t.color && e.color && areColorsEqual({
       ...t.color,
       a: 1
     }, {

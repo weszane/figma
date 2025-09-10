@@ -1,16 +1,16 @@
-import { GLContextType } from "../figma_app/763686";
-import { zD, j9 } from "../905/686312";
-import { getFeatureFlags } from "../905/601108";
-import { analyticsEventManager } from "../905/449184";
-import { customHistory } from "../905/612521";
-import { sendMetric } from "../905/485103";
-import { BrowserInfo, isMobilePlatform, getIsLinux, getIsMac, getIsWindows, getIsChromeOS } from "../figma_app/778880";
-import { logError } from "../905/714362";
-import { gP } from "../figma_app/594947";
-import { PN } from "../figma_app/897289";
-import { X } from "../905/683920";
-import { D } from "../905/347702";
-import { l as _$$l } from "../905/190247";
+import { GLContextType } from "src/figma_app/763686";
+import { zD, j9 } from "src/905/686312";
+import { getFeatureFlags } from "src/905/601108";
+import { analyticsEventManager } from "src/905/449184";
+import { customHistory } from "src/905/612521";
+import { sendMetric } from "src/905/485103";
+import { BrowserInfo, isMobilePlatform, getIsLinux, getIsMac, getIsWindows, getIsChromeOS } from "src/figma_app/778880";
+import { logError } from "src/905/714362";
+import { gP } from "src/figma_app/594947";
+import { PN } from "src/figma_app/897289";
+import { X } from "src/905/683920";
+import { D } from "src/905/347702";
+import { l as _$$l } from "src/905/190247";
 var $$g9 = (e => (e[e.SUCCESS = 0] = "SUCCESS", e[e.NO_WEBGL = 1] = "NO_WEBGL", e[e.STENCIL_TEST_FAILURE = 2] = "STENCIL_TEST_FAILURE", e))($$g9 || {});
 export let $$f2 = D(() => {
   if ($$A0() !== GLContextType.WebGPU) {

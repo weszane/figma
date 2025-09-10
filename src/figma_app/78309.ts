@@ -25,10 +25,10 @@ import { useAtomValueAndSetter } from '../figma_app/27355';
 import { XE } from '../figma_app/91703';
 import { buildUploadUrl } from '../figma_app/169182';
 import { E_ } from '../figma_app/177697';
-import { UE } from '../figma_app/191804';
+import { whiteColor } from '../figma_app/191804';
 import { s1 } from '../figma_app/226737';
 import { hE, nB, vo, Y9 } from '../figma_app/272243';
-import { Ad, Vm } from '../figma_app/273493';
+import { adjustHue, colorsEqual } from '../figma_app/273493';
 import { k1, kO, lK, nE, UZ } from '../figma_app/687767';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { f$, k8, Le, Lq, Qo, Sn, wH } from '../figma_app/887835';
@@ -167,10 +167,10 @@ function K({
   let S = scopeAwareFunction.user('slides-add-theme-color', () => {
     let r = T(function (e, t) {
       if (isValidValue(e) && e.color) return e.color;
-      let r = UE;
+      let r = whiteColor;
       if (t.length > 0) {
         let e = t[t.length - 1].paint.color;
-        e && (r = Ad(e, 31));
+        e && (r = adjustHue(e, 31));
       }
       return r;
     }(e, p));
@@ -341,7 +341,7 @@ function $({
         opacity: t.opacity,
         onClick: () => r(t),
         onContextMenu: e => y(t, e),
-        isSelected: !s && Vm(t.color, e?.color) && t.opacity === e?.opacity,
+        isSelected: !s && colorsEqual(t.color, e?.color) && t.opacity === e?.opacity,
         recordingKey: generateRecordingKey(o, 'documentColor', _$$F.format(t.color))
       }, i)), E && jsx(_$$E, {
         className: _$$s.wFull.h32.flex.itemsCenter.justifyCenter.$,

@@ -1,4 +1,4 @@
-import { z } from "../905/239603";
+import { z } from "src/905/239603";
 let r = z.object({
   one_stars: z.number().min(1).max(5),
   two_stars: z.number().min(1).max(5),

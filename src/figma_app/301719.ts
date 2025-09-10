@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { SelectionPaintHelpers, VariableResolvedDataType } from "../figma_app/763686";
 import { GP } from "../figma_app/15927";
 import { atom, atomStoreManager } from "../figma_app/27355";
@@ -49,7 +49,7 @@ export class $$g1 {
   updateSelectionPaintsWithFillEncodedPaints(e, t, r, i, a, s, o, l) {
     let c = S(e, t, r, i, a, s, l);
     let u = this.store.getState().mirror.selectionPaints;
-    (!c2(u.paints, c) || u.emptyDueToLimitExceeded || o) && (this.store.dispatch(QA(c)), o && this.store.dispatch(Xp(!0)));
+    (!deepEqual(u.paints, c) || u.emptyDueToLimitExceeded || o) && (this.store.dispatch(QA(c)), o && this.store.dispatch(Xp(!0)));
   }
   updatePaintsDirectlyOnSingleNodeWithFillEncodedPaints(e, t) {
     var r = [];
@@ -59,7 +59,7 @@ export class $$g1 {
     }
     r = r.map((e, r) => (e.variableScopes = new Set(t ? t[r] : []), e));
     let i = this.store.getState().mirror.selectionPaints;
-    (!c2(i.paintsDirectlyOnSingleNode, r) || i.emptyDueToLimitExceeded) && this.store.dispatch(n0(r));
+    (!deepEqual(i.paintsDirectlyOnSingleNode, r) || i.emptyDueToLimitExceeded) && this.store.dispatch(n0(r));
   }
   updatePaintStyles(e, t, r) {
     let i = this.store.getState().library;
@@ -87,7 +87,7 @@ export class $$g1 {
       };
     });
     s.sort((e, t) => e.count > t.count ? -1 : e.count === t.count && e.styleName < t.styleName ? -1 : 1);
-    (!c2(e, s) || this.store.getState().mirror.selectionPaints.emptyDueToLimitExceeded) && this.store.dispatch(r(s));
+    (!deepEqual(e, s) || this.store.getState().mirror.selectionPaints.emptyDueToLimitExceeded) && this.store.dispatch(r(s));
   }
   updateSelectionPaintsWithStyles(e) {
     this.updatePaintStyles(this.store.getState().mirror.selectionPaints.styles, e, Lh);

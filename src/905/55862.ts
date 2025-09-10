@@ -22,7 +22,7 @@ import { LibrariesViewFilterStatesView } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { _X, YH } from "../figma_app/502247";
-import { Yu } from "../figma_app/633080";
+import { NO_TEAM } from "../figma_app/633080";
 import { ZO } from "../905/691188";
 export function $$k0({
   libraryFiles: e,
@@ -126,12 +126,12 @@ export function $$R5({
       currentTeamId: s?.teamId,
       shouldSortByTeam: !0
     }) : function (e, t) {
-      let i = e ? e.teamId : Yu;
+      let i = e ? e.teamId : NO_TEAM;
       return e => gi(e, i, {
         isDescending: t
       });
     }(s, i.isDescending) : "search" === i.sortBy ? function (e, t) {
-      let i = e ? e.teamId : Yu;
+      let i = e ? e.teamId : NO_TEAM;
       let n = new Set(t);
       return t => t.sort((t, r) => {
         if (e) {

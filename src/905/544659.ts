@@ -1,6 +1,6 @@
-import { logger } from "../905/651849";
-import { buildStaticUrl } from "../figma_app/169182";
-import { ManifestErrorType } from "../figma_app/155287";
+import { logger } from "src/905/651849";
+import { buildStaticUrl } from "src/figma_app/169182";
+import { ManifestErrorType } from "src/figma_app/155287";
 let s = RegExp("^(?:(https?:|wss?:)(?:[/][/]))?((?:[*][.])?(?:(?:(?:[-a-z\\d])+)[.])+[a-z]{2,})((?:[/][-a-zA-Z\\d%_.~+@]*)*$)");
 let o = RegExp("^(?:(https?:|wss?:)(?:[/][/]))?((?:[*][.])?(?:(?:(?:[-a-z\\d])+)[.])+[a-z]{2,}|localhost)(?:[:](\\d+))?((?:[/][-a-zA-Z\\d%_.~+@]*)*$)");
 let l = RegExp("^(?:(https?:|wss?:)(?:[/][/]))");

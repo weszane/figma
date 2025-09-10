@@ -11,7 +11,7 @@ import { CG, NY } from "../figma_app/646357";
 import { Qp, FZ } from "../figma_app/803787";
 import { aR } from "../905/128313";
 import { c5 } from "../figma_app/645694";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { pf } from "../905/221848";
 import { n as _$$n } from "../905/347702";
@@ -25,7 +25,7 @@ let $$S0 = e => ({
   "data-tooltip-show-left": !0,
   ...pf(e)
 });
-let v = () => {};
+let v = () => { };
 let A = new Promise(e => {
   v = e;
 });
@@ -111,7 +111,7 @@ export function $$L9(e) {
           let n = a.findIndex(e => e.key === t || r[e.key] === t);
           -1 !== n && "ADD" !== i ? a.splice(n, 1) : -1 === n && "REMOVE" !== i && a.push({
             key: t,
-            type: e.type === PW.COMPONENT ? ComponentType.COMPONENT : ComponentType.STATE_GROUP
+            type: e.type === PrimaryWorkflowEnum.COMPONENT ? ComponentType.COMPONENT : ComponentType.STATE_GROUP
           });
         });
         Object.keys(r).length > 0 && a.forEach((e, t) => {
@@ -127,7 +127,7 @@ export function $$L9(e) {
         let t = CG(e);
         return {
           key: r[t] ?? t,
-          type: e.type === PW.COMPONENT ? ComponentType.COMPONENT : ComponentType.STATE_GROUP
+          type: e.type === PrimaryWorkflowEnum.COMPONENT ? ComponentType.COMPONENT : ComponentType.STATE_GROUP
         };
       });
       Fullscreen.editInstanceSwapPreferredValues(e.explicitDefID, n);

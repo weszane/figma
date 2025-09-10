@@ -1,5 +1,5 @@
-import { serializeQuery } from "../905/634134";
-import { getI18nString } from "../905/303541";
+import { serializeQuery } from "src/905/634134";
+import { getI18nString } from "src/905/303541";
 export class $$a0 {
   pathToSelectedView(e, t, i, n) {
     return 2 === t.length && "desktop_new_tab" === t[1] ? {

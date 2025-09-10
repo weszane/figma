@@ -1,4 +1,4 @@
-import { getI18nString } from "../905/303541";
+import { getI18nString } from "src/905/303541";
 export class $$r0 {
   pathToSelectedView(e, t, i, n) {
     return 2 === t.length && "try-figjam" === t[1] ? {

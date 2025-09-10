@@ -11,7 +11,7 @@ import { XHR } from "../905/910117";
 import { ds } from "../figma_app/314264";
 import { Cs } from "../905/420347";
 import { M4 } from "../905/713695";
-import { ZA, xA } from "../figma_app/633080";
+import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
 import { S as _$$S } from "../figma_app/787550";
 import { E as _$$E } from "../905/695476";
 import { k4, Yi } from "../figma_app/164212";
@@ -79,7 +79,7 @@ async function S(e, t) {
     orgId: debugState.getState().currentUserOrgId
   })))[0];
   let c = null;
-  d && (ZA(d) && xA(d) ? c = d.hub_file_id : "library_file_key" in d && (c = d.library_file_key));
+  d && (isPublishedLibraryWithAssets(d) && isCommunityLibrary(d) ? c = d.hub_file_id : "library_file_key" in d && (c = d.library_file_key));
   return await $$I7({
     fileKey: c ?? e,
     nodeId: s ? publishID ?? "" : t,
@@ -101,7 +101,7 @@ export async function $$v6(e) {
     } = d;
     let p = l.find(e => e.library_key === d.sourceLibraryKey);
     let _ = null;
-    if (p && (ZA(p) && xA(p) ? _ = p.hub_file_id : "library_file_key" in p && (_ = p.library_file_key)), !_ || !publishID || !isValidSessionLocalID(parseSessionLocalID(publishID)) || _ === e) {
+    if (p && (isPublishedLibraryWithAssets(p) && isCommunityLibrary(p) ? _ = p.hub_file_id : "library_file_key" in p && (_ = p.library_file_key)), !_ || !publishID || !isValidSessionLocalID(parseSessionLocalID(publishID)) || _ === e) {
       r.set(guid, s);
       n.set(guid, o);
       return;

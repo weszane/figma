@@ -89,7 +89,7 @@ import { n as _$$n } from '../905/366526';
 import { c as _$$c5 } from '../905/370443';
 import { selectCurrentUser, getUserId } from '../905/372672';
 import { k as _$$k2 } from '../905/381239';
-import { c2 as _$$c } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { e as _$$e10 } from '../905/383776';
 import { h as _$$h6 } from '../905/388624';
 import { A as _$$A0 } from '../905/389851';
@@ -288,7 +288,7 @@ import { $t, lW as _$$lW, FC, JO, y7 } from '../figma_app/20203';
 import { H as _$$H5, U as _$$U } from '../figma_app/23564';
 import { atom, useAtomValueAndSetter, createRemovableAtomFamily, useAtomWithSubscription, mg, Xr, atomStoreManager } from '../figma_app/27355';
 import { h8, QH, Ze } from '../figma_app/27829';
-import { ki } from '../figma_app/31188';
+import { assetMirrorInstance } from '../figma_app/31188';
 import { Ye } from '../figma_app/32128';
 import { ZS } from '../figma_app/33126';
 import { useLatestRef } from '../figma_app/922077';
@@ -338,7 +338,7 @@ import { Zc } from '../figma_app/171569';
 import { N as _$$N8 } from '../figma_app/176280';
 import { i1 as _$$i, Dq, q0, TN } from '../figma_app/177697';
 import { FFileType, FPlanFeatureType, FBillingEntityType, FProductAccessType, FPlanTierType, FOrganizationLevelType, FPlanLimitationType } from '../figma_app/191312';
-import { Bx, kx } from '../figma_app/191804';
+import { getThemeBackgroundColor, isColorDarkByLuminance } from '../figma_app/191804';
 import { zT } from '../figma_app/192142';
 import { CR, Np } from '../figma_app/193867';
 import { yesNoTrackingEnum } from '../figma_app/198712';
@@ -464,7 +464,7 @@ import { Eh } from '../figma_app/617654';
 import { j5 } from '../figma_app/624361';
 import { normalizeTeamData, fileActionEnum } from '../figma_app/630077';
 import { pp as _$$pp } from '../figma_app/632319';
-import { M$, Qx } from '../figma_app/633080';
+import { PublishStatusEnum, LibraryPublishStatusEnum } from '../figma_app/633080';
 import { X_ } from '../figma_app/634146';
 import { nD as _$$nD, u4 as _$$u3, CY, Kz, Lf, Yo } from '../figma_app/637027';
 import { UK, WN } from '../figma_app/638601';
@@ -1556,7 +1556,7 @@ let rW = new class {
               if (s) {
                 let e = rU(t);
                 let n = r.length > 0 ? r[r.length - 1] : void 0;
-                n && n.end === i && _$$c(n.style, s) ? n.end = e : r.push({
+                n && n.end === i && deepEqual(n.style, s) ? n.end = e : r.push({
                   start: i,
                   end: e,
                   style: s
@@ -1634,7 +1634,7 @@ let rW = new class {
                     if (n) {
                       let i = rU(t);
                       let a = r.length > 0 ? r[r.length - 1] : void 0;
-                      a && a.end === e && _$$c(a.style, n) ? a.end = i : r.push({
+                      a && a.end === e && deepEqual(a.style, n) ? a.end = i : r.push({
                         start: e,
                         end: i,
                         style: n
@@ -1758,7 +1758,7 @@ let ns = {
   SpellCheckAPIBindings: () => $4,
   VariablesBindingsWeb: () => WH,
   VariablesMirrorBindings: () => DQ,
-  AssetMirrorBindings: () => ki,
+  AssetMirrorBindings: () => assetMirrorInstance,
   AssetConsumptionMirrorBindings: () => BF,
   HandoffBindings: () => z4,
   HandoffCallbacks: () => _$$rS,
@@ -1836,9 +1836,9 @@ let nG = memo(e => {
       let t = e.mirror.selectionProperties.backgroundColor;
       return _$$F3.format(t);
     }
-    return n ? Bx('light') : a ? c : Bx(d);
+    return n ? getThemeBackgroundColor('light') : a ? c : getThemeBackgroundColor(d);
   });
-  let p = kx(u);
+  let p = isColorDarkByLuminance(u);
   let _ = Yk();
   let h = Cg();
   let m = useRef(null);
@@ -6056,7 +6056,7 @@ function dH() {
     let [a, s] = useState(void 0);
     let [o, l] = useState(null);
     let d = useRef(200);
-    let c = useMemo(() => r.state === Qx.UPLOADING ? r.libraryPublishId : null, [r]);
+    let c = useMemo(() => r.state === LibraryPublishStatusEnum.UPLOADING ? r.libraryPublishId : null, [r]);
     o !== c && (l(c), i(0), s(void 0));
     let u = useSubscription(LibraryPublish, {
       id: c || ''
@@ -6114,7 +6114,7 @@ function dH() {
       };
     }, [h]);
     useEffect(() => {
-      if (r.state !== Qx.UPLOADING || p.status === 'loading' || p.status === 'disabled' || !c || p.status === 'errors') return;
+      if (r.state !== LibraryPublishStatusEnum.UPLOADING || p.status === 'loading' || p.status === 'disabled' || !c || p.status === 'errors') return;
       let e = p.data.libraryPublishV2;
       if (!e || e.error) return;
       let t = setInterval(() => {
@@ -6132,7 +6132,7 @@ function dH() {
       };
     }, [c, r.state, p]);
     useEffect(() => {
-      if (r.state !== Qx.UPLOADING || p.status === 'loading' || p.status === 'disabled') return;
+      if (r.state !== LibraryPublishStatusEnum.UPLOADING || p.status === 'loading' || p.status === 'disabled') return;
       if (!c) {
         console.error('Expected libraryPublishId to be set during server-side publish');
         return;
@@ -6145,7 +6145,7 @@ function dH() {
       let d = t => {
         _$$dh(r, t ?? {
           __tag: 'UNKNOWN'
-        }, r.publishType === M$.UNPUBLISH, e, r.savepoint, !0, onPublishSuccess, onPublishError);
+        }, r.publishType === PublishStatusEnum.UNPUBLISH, e, r.savepoint, !0, onPublishSuccess, onPublishError);
       };
       if (p.status === 'errors') {
         d();
@@ -6216,7 +6216,7 @@ function dH() {
         return;
       }
       let h = r.numSkippedPriorToPublish + u.assetFailureCount;
-      _$$dh(r, h, r.publishType === M$.UNPUBLISH, e, r.savepoint, !1, onPublishSuccess, onPublishError);
+      _$$dh(r, h, r.publishType === PublishStatusEnum.UNPUBLISH, e, r.savepoint, !1, onPublishSuccess, onPublishError);
     }, [e, c, r, p, n, a, t]);
   }();
   return null;
@@ -9201,7 +9201,7 @@ t(async () => {
           SpellCheckAPIBindings: () => $4,
           VariablesBindingsWeb: () => WH,
           VariablesMirrorBindings: () => DQ,
-          AssetMirrorBindings: () => ki,
+          AssetMirrorBindings: () => assetMirrorInstance,
           AssetConsumptionMirrorBindings: () => BF,
           HandoffBindings: () => z4,
           LinterBindings: () => zT,

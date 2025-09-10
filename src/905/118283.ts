@@ -1,6 +1,6 @@
-import { AT } from "../905/155604";
-import { C } from "../905/797765";
-import { EM } from "../figma_app/229837";
+import { AT } from "src/905/155604";
+import { C } from "src/905/797765";
+import { EM } from "src/figma_app/229837";
 export function $$s0(e, t) {
   return (i, s, o) => {
     let l;

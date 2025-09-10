@@ -1,4 +1,4 @@
-import { Jj } from "../905/382883";
+import { includesEqual } from "../905/382883";
 import { atom } from "../figma_app/27355";
 import { qM, S2, sd, hp } from "../905/171315";
 import { Q8, BA } from "../905/61477";
@@ -60,7 +60,7 @@ let h = atom(e => {
     if (0 === i.length) return null;
     let a = e(J);
     let s = a?.value || [];
-    let c = i.filter(e => !Jj(s, e)).slice(0, 5);
+    let c = i.filter(e => !includesEqual(s, e)).slice(0, 5);
     if (0 === c.length) return null;
     let u = c.map(e => ({
       type: WY.CREATOR,
@@ -79,7 +79,7 @@ let h = atom(e => {
     let s = [];
     if (a.includes(qy.FOLDER)) {
       let e = i?.value?.folders || [];
-      let t = nv(r, dC.PROJECTS).slice(0, 5).filter(t => !Jj(e, t)).map(e => ({
+      let t = nv(r, dC.PROJECTS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
         type: WY.SPACE,
         spaceType: qy.FOLDER,
         value: e
@@ -88,7 +88,7 @@ let h = atom(e => {
     }
     if (a.includes(qy.TEAM)) {
       let e = i?.value?.teams || [];
-      let t = nv(r, dC.TEAMS).slice(0, 5).filter(t => !Jj(e, t)).map(e => ({
+      let t = nv(r, dC.TEAMS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
         type: WY.SPACE,
         spaceType: qy.TEAM,
         value: e
@@ -97,7 +97,7 @@ let h = atom(e => {
     }
     if (a.includes(qy.ORG)) {
       let e = i?.value?.orgs || [];
-      let t = nv(r, dC.ORGS).slice(0, 5).filter(t => !Jj(e, t)).map(e => ({
+      let t = nv(r, dC.ORGS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
         type: WY.SPACE,
         spaceType: qy.ORG,
         value: e

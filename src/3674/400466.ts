@@ -129,8 +129,8 @@ import { S as _$$S3 } from "../figma_app/106763";
 import { O as _$$O2 } from "../3591/240710";
 import { VisualBellActions } from "../905/302958";
 import { go, gk } from "../3674/705006";
-import { Mk } from "../figma_app/31188";
-import { PW } from "../905/497152";
+import { AssetAtomMap } from "../figma_app/31188";
+import { PrimaryWorkflowEnum } from "../905/497152";
 import { A as _$$A17 } from "../1617/954184";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { Dk } from "../figma_app/623293";
@@ -2588,8 +2588,8 @@ let nF = {
 };
 let nU = createRemovableAtomFamily(e => mg(atom(t => {
   if (!e) return null;
-  let n = t(Mk[PW.MANAGED_STRING].local);
-  let a = t(Mk[PW.MANAGED_STRING].subscribed);
+  let n = t(AssetAtomMap[PrimaryWorkflowEnum.MANAGED_STRING].local);
+  let a = t(AssetAtomMap[PrimaryWorkflowEnum.MANAGED_STRING].subscribed);
   return n[e] ?? a[e] ?? null;
 }), e => e));
 let nK = {

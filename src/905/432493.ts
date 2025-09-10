@@ -4,11 +4,11 @@ import { sessionLocalIDToString } from "../905/871411";
 import s from "../vendor/267721";
 import l from "../vendor/946678";
 import c from "../vendor/626715";
-import { HD } from "../figma_app/191804";
+import { isColorDark } from "../figma_app/191804";
 import { parsePxInt } from "../figma_app/783094";
 import { logWarning } from "../905/714362";
 import { XHR } from "../905/910117";
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { z5 } from "../905/713722";
 import { A as _$$A } from "../905/639174";
 import { rY } from "../905/985490";
@@ -177,7 +177,7 @@ export function $$B4(e) {
   for (let e of t) if (e.isStateGroup) return !0;
   return !1;
 }
-let V = _$$f();
+let V = getFileKey();
 let G = async (e, t, i) => {
   if (0 === e.length) return {
     styleKeyToFileKey: {},
@@ -387,7 +387,7 @@ export function $$X3(e) {
   return !!e && "NONE" !== e && void 0 !== e;
 }
 export function $$Q17(e, t, i) {
-  let n = t && HD(t);
+  let n = t && isColorDark(t);
   return !("GRID" === i || "EFFECT" === i) && (n || e && ("NONE" !== i || void 0 !== i));
 }
 export function $$J6(e, t) {

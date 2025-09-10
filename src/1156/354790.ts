@@ -35,7 +35,7 @@ import { Ay as _$$Ay } from '../figma_app/432652';
 import { fullscreenValue } from '../figma_app/455680';
 import { openFileAtom, openFileKeyAtom } from '../figma_app/516028';
 import { nc, NJ, nM } from '../figma_app/570630';
-import { Wh } from '../figma_app/615482';
+import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { H5, J6, jv, L6, Li, lV, MK, P5, U1, yZ } from '../figma_app/617606';
 import { f3 } from '../figma_app/690664';
 import { G1 } from '../figma_app/691470';
@@ -45,8 +45,8 @@ import { nU } from '../figma_app/779249';
 import { QK } from '../figma_app/883638';
 import { Ay as _$$Ay2 } from '../figma_app/948389';
 import { TT } from '../figma_app/952035';
-let W = Wh(() => atom(''));
-let V = Wh(() => atom(''));
+let W = setupRemovableAtomFamily(() => atom(''));
+let V = setupRemovableAtomFamily(() => atom(''));
 class Z {
   constructor() {
     this.targetContentX = 0;

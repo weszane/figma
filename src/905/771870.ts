@@ -5,8 +5,8 @@ import { ResponsiveSetIdHandler, CodeComponentIdHandler } from "../figma_app/243
 import { Fullscreen, StylesBindings } from "../figma_app/763686";
 import { NQ } from "../905/508367";
 import { T1 } from "../905/711212";
-import { aV, r2, OM } from "../figma_app/80990";
-import { Do, PW, AT } from "../figma_app/633080";
+import { generateThumbnailFromStyleMaster, generateNodeThumbnail, isValidThumbnail } from "../figma_app/80990";
+import { hasAssetId, PrimaryWorkflowEnum, SubscriptionStatusEnum } from "../figma_app/633080";
 import { J } from "../905/273120";
 var n;
 (e => {
@@ -18,50 +18,50 @@ var n;
           item
         } = this.props;
         let t = this.state.fallbackLocalThumbnailGuid;
-        Do(item) ? t = item.type === PW.RESPONSIVE_SET ? ResponsiveSetIdHandler.toGuidStrIfLocal(item.assetId) : item.type === PW.CODE_COMPONENT ? CodeComponentIdHandler.toGuidStrIfLocal(item.assetId) : this.state.fallbackLocalThumbnailGuid : item.isLocal && (t = item.node_id);
+        hasAssetId(item) ? t = item.type === PrimaryWorkflowEnum.RESPONSIVE_SET ? ResponsiveSetIdHandler.toGuidStrIfLocal(item.assetId) : item.type === PrimaryWorkflowEnum.CODE_COMPONENT ? CodeComponentIdHandler.toGuidStrIfLocal(item.assetId) : this.state.fallbackLocalThumbnailGuid : item.isLocal && (t = item.node_id);
         return t && this.props.thumbnails[t] || null;
       };
       this.onError = () => {
         let e = null;
         switch (this.props.item.type) {
-          case PW.COMPONENT:
+          case PrimaryWorkflowEnum.COMPONENT:
             this.props.item.component_key && this.props.item.content_hash && (e = Fullscreen?.getSymbolNodeId(this.props.item.component_key, this.props.item.content_hash) ?? null);
             break;
-          case PW.STATE_GROUP:
+          case PrimaryWorkflowEnum.STATE_GROUP:
             this.props.item.key && (e = Fullscreen?.getStateGroupNodeId(this.props.item.key, this.props.item.version) ?? null);
             break;
-          case PW.STYLE:
+          case PrimaryWorkflowEnum.STYLE:
             this.props.item.content_hash && (e = StylesBindings?.getStyleNodeId(this.props.item.key, this.props.item.content_hash) ?? null);
         }
         e && (this.setState({
           fallbackLocalThumbnailGuid: e
-        }), this.generateLocalThumbnailUrl(e, AT.SUBSCRIBED_WITH_LIBRARY));
+        }), this.generateLocalThumbnailUrl(e, SubscriptionStatusEnum.SUBSCRIBED_WITH_LIBRARY));
       };
       this.state = {
         fallbackLocalThumbnailGuid: null
       };
-      this.shouldGenerateLocalThumbnailUrl() && !Do(this.props.item) && this.generateLocalThumbnailUrl(this.props.item.node_id, AT.LOCAL);
+      this.shouldGenerateLocalThumbnailUrl() && !hasAssetId(this.props.item) && this.generateLocalThumbnailUrl(this.props.item.node_id, SubscriptionStatusEnum.LOCAL);
     }
     isLocalItem() {
-      return !Do(this.props.item) && this.props.item.isLocal;
+      return !hasAssetId(this.props.item) && this.props.item.isLocal;
     }
     thumbnailUrl() {
       let {
         item
       } = this.props;
-      return Do(item) ? "LIBRARY" === item.subscriptionStatus ? item.mainThumbnailInfo.thumbnailUrl : null : this.getOpenFilePublishedThumbnailUrl() || item.thumbnail_url;
+      return hasAssetId(item) ? "LIBRARY" === item.subscriptionStatus ? item.mainThumbnailInfo.thumbnailUrl : null : this.getOpenFilePublishedThumbnailUrl() || item.thumbnail_url;
     }
     generateLocalThumbnailUrl(e, t) {
       requestAnimationFrame(() => {
         if (!e) return;
-        let i = "style" === this.props.item.type ? aV(e, this.props.item.style_type) : r2(e);
+        let i = "style" === this.props.item.type ? generateThumbnailFromStyleMaster(e, this.props.item.style_type) : generateNodeThumbnail(e);
         if (null != i) {
           let n = [{
             nodeId: e,
             url: i,
             type: this.props.item.type
           }];
-          t === AT.LOCAL ? this.props.updateLocalSourceThumbnails(n) : this.props.updatePublishedSourceThumbnails(n, this.props.item);
+          t === SubscriptionStatusEnum.LOCAL ? this.props.updateLocalSourceThumbnails(n) : this.props.updatePublishedSourceThumbnails(n, this.props.item);
         }
       });
     }
@@ -70,7 +70,7 @@ var n;
         item,
         publishedProductComponent
       } = this.props;
-      return item.type === PW.COMPONENT && publishedProductComponent?.type === PW.COMPONENT && publishedProductComponent.content_hash === item.content_hash && publishedProductComponent.thumbnail_url || item.type === PW.STATE_GROUP && publishedProductComponent?.type === PW.STATE_GROUP && publishedProductComponent.version === item.version && publishedProductComponent.thumbnail_url ? publishedProductComponent.thumbnail_url : null;
+      return item.type === PrimaryWorkflowEnum.COMPONENT && publishedProductComponent?.type === PrimaryWorkflowEnum.COMPONENT && publishedProductComponent.content_hash === item.content_hash && publishedProductComponent.thumbnail_url || item.type === PrimaryWorkflowEnum.STATE_GROUP && publishedProductComponent?.type === PrimaryWorkflowEnum.STATE_GROUP && publishedProductComponent.version === item.version && publishedProductComponent.thumbnail_url ? publishedProductComponent.thumbnail_url : null;
     }
     shouldGenerateLocalThumbnailUrl() {
       let {
@@ -79,11 +79,11 @@ var n;
       let t = this.localThumbnail();
       if (!this.props.shouldGenerateLocalThumbnail || !this.isLocalItem() || this.getOpenFilePublishedThumbnailUrl()) return !1;
       if (!t) return !0;
-      if (item.type === PW.STATE_GROUP) {
+      if (item.type === PrimaryWorkflowEnum.STATE_GROUP) {
         if (item.version !== t.content_hash) return !0;
-      } else if (item.type === PW.VARIABLE || item.type === PW.VARIABLE_SET || item.type === PW.MANAGED_STRING) return !1; else if (item.type === PW.MODULE) {
+      } else if (item.type === PrimaryWorkflowEnum.VARIABLE || item.type === PrimaryWorkflowEnum.VARIABLE_SET || item.type === PrimaryWorkflowEnum.MANAGED_STRING) return !1;else if (item.type === PrimaryWorkflowEnum.MODULE) {
         if (item.version !== t.content_hash) return !0;
-      } else if (item.type === PW.RESPONSIVE_SET || item.type === PW.CODE_COMPONENT || item.type === PW.CODE_FILE || item.type === PW.CODE_LIBRARY) {
+      } else if (item.type === PrimaryWorkflowEnum.RESPONSIVE_SET || item.type === PrimaryWorkflowEnum.CODE_COMPONENT || item.type === PrimaryWorkflowEnum.CODE_FILE || item.type === PrimaryWorkflowEnum.CODE_LIBRARY) {
         if (item.version !== t.content_hash) return !0;
       } else if (item.content_hash !== t.content_hash) return !0;
       return t.url === this.thumbnailUrl();
@@ -96,7 +96,7 @@ var n;
       } = this.props;
       let n = this.localThumbnail();
       let a = this.thumbnailUrl();
-      e = n && OM(n.url) ? n.url : a && this.props.user ? NQ(a, "fuid", this.props.user.id) : a;
+      e = n && isValidThumbnail(n.url) ? n.url : a && this.props.user ? NQ(a, "fuid", this.props.user.id) : a;
       return jsx(J, {
         className,
         style,
@@ -111,18 +111,18 @@ var n;
   e.ConnectedLibraryItemImage = connect((e, t) => ({
     thumbnails: e.library.local.thumbnails,
     user: e.user,
-    publishedProductComponent: t.item?.type === PW.COMPONENT ? e.library.openFilePublished__LIVEGRAPH.components[t.item.node_id] : t.item?.type === PW.STATE_GROUP ? e.library.openFilePublished__LIVEGRAPH.stateGroups[t.item.node_id] : null
+    publishedProductComponent: t.item?.type === PrimaryWorkflowEnum.COMPONENT ? e.library.openFilePublished__LIVEGRAPH.components[t.item.node_id] : t.item?.type === PrimaryWorkflowEnum.STATE_GROUP ? e.library.openFilePublished__LIVEGRAPH.stateGroups[t.item.node_id] : null
   }), e => ({
     updateLocalSourceThumbnails: t => {
       e(T1({
         thumbnails: t,
-        styleKind: AT.LOCAL
+        styleKind: SubscriptionStatusEnum.LOCAL
       }));
     },
     updatePublishedSourceThumbnails: (t, i) => {
       e(T1({
         thumbnails: t,
-        styleKind: AT.SUBSCRIBED_WITH_LIBRARY,
+        styleKind: SubscriptionStatusEnum.SUBSCRIBED_WITH_LIBRARY,
         item: i
       }));
     }

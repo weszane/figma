@@ -15,7 +15,7 @@ const evalAlias = eval
 try {
   isEvalAllowed = evalAlias('true')
 }
-catch  {
+catch {
   isEvalAllowed = false
 }
 
@@ -300,7 +300,7 @@ export class KiwiCodec {
 
     if (result === null) {
       const length = buffer.readVarUint()
-      result = Array.from({length})
+      result = Array.from({ length })
       for (let i = 0; i < length; i++) {
         result[i] = this.decodeSingleField(field, buffer, cache)
       }

@@ -28,7 +28,7 @@ import { G3 } from "../905/272080";
 import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { hasLocalFileId } from "../figma_app/155287";
 import { d4 } from "../figma_app/474636";
-import { I as _$$I, o8, r_ } from "../905/622391";
+import { getCurrentUserOrgId, getSelectedView, getPluginDevMode } from "../905/622391";
 import { createDefaultPluginOptions, createPluginInstance } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import { gH, Yx, Ew } from "../figma_app/985200";
@@ -485,7 +485,7 @@ export let $$eo4 = _$$n(async e => {
     isWidget: e.isWidget,
     command: e.command,
     fileKey: e.openFileKey,
-    orgId: _$$I() ?? null,
+    orgId: getCurrentUserOrgId() ?? null,
     pluginRunID: t,
     editorType: getFullscreenViewEditorType(),
     ...(hasLocalFileId(n) ? {
@@ -550,7 +550,7 @@ export let $$eo4 = _$$n(async e => {
             widgetAction,
             forcePluginVersionId
           } = t;
-          let f = o8();
+          let f = getSelectedView();
           if (!f) throw new er(t.isWidget ? getI18nString("plugins.cannot_run_widget_logged_out") : getI18nString("plugins.cannot_run_plugin_logged_out"));
           if (e = {
             ...e,
@@ -561,7 +561,7 @@ export let $$eo4 = _$$n(async e => {
             storeInRecentsKey: _$$B(_),
             id: e.plugin_id,
             version: e.version,
-            currentUserId: o8()
+            currentUserId: getSelectedView()
           };
           isWidget ? debugState.dispatch(RH(y)) : debugState.dispatch(gU(y));
           let b = debugState.getState().publishedPlugins[e.plugin_id];
@@ -592,7 +592,7 @@ export let $$eo4 = _$$n(async e => {
             editorType: getFullscreenViewEditorType(),
             incrementalMode: "dynamic-page" === e.manifest.documentAccess,
             isVsCode: _$$T(),
-            orgId: _$$I() ?? null
+            orgId: getCurrentUserOrgId() ?? null
           };
           trackEventAnalytics("Plugin Start", x, isWidget ? {
             forwardToDatadog: !0
@@ -649,8 +649,8 @@ async function ed(e, t, i) {
       delay: 200,
       timeoutOverride: 1 / 0
     }));
-    let r = n ? r_() : "cppvm";
-    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration("pluginCodeDownloadedMs", async () => await _$$F2.getAndCache(i, _$$I()))))(), (async () => {
+    let r = n ? getPluginDevMode() : "cppvm";
+    let [a, s] = await Promise.all([(async () => await (n ? i.testCode ? i.testCode : loadLocalPluginSource(i.localFileId) : t.markDuration("pluginCodeDownloadedMs", async () => await _$$F2.getAndCache(i, getCurrentUserOrgId()))))(), (async () => {
       await t.markDuration("loadSandboxAndRunSecurityChecksMs", async () => {
         try {
           await en(r, e.triggeredFrom);
@@ -688,7 +688,7 @@ async function ec({
     deferRunEvent,
     parameterValues
   } = t;
-  let g = o8();
+  let g = getSelectedView();
   if (!g) throw new er(isWidget ? getI18nString("plugins.cannot_run_widget_logged_out") : getI18nString("plugins.cannot_run_plugin_logged_out"));
   let f = debugState.getState().selectedView.editorType;
   if (e.manifest) {
@@ -712,7 +712,7 @@ async function ec({
       editorType: getFullscreenViewEditorType(),
       incrementalMode: "dynamic-page" === e.manifest.documentAccess,
       isVsCode: _$$T(),
-      orgId: _$$I() ?? null
+      orgId: getCurrentUserOrgId() ?? null
     };
     trackEventAnalytics("Plugin Start", t, isWidget ? {
       forwardToDatadog: !0
@@ -723,7 +723,7 @@ async function ec({
     id: String(e.localFileId),
     isDevelopment: !0,
     version: "",
-    currentUserId: o8()
+    currentUserId: getSelectedView()
   };
   isWidget ? debugState.dispatch(RH(_)) : debugState.dispatch(gU(_));
   try {
@@ -908,7 +908,7 @@ function em({
     enableProposedApi: t && !!e.enableProposedApi,
     showLaunchErrors: !t,
     showRuntimeErrors: t,
-    vmType: t ? r_() : "cppvm",
+    vmType: t ? getPluginDevMode() : "cppvm",
     ...r,
     command: n.command,
     queryMode: n.queryMode,

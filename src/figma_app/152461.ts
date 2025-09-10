@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
-import { he } from "../905/382883";
+import { ignoreUndefinedEqual } from "../905/382883";
 import { b, bL, mc } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { H_ } from "../905/963340";
@@ -46,7 +46,7 @@ export function $$f0() {
   } = VR();
   let r = v4();
   let n = gc();
-  let s = useMemo(() => localCodegenSettings?.behavior === FOverrideType.OVERRIDE && he(localCodegenSettings?.language, r) && he(localCodegenSettings?.preferences, n), [r, n, localCodegenSettings]);
+  let s = useMemo(() => localCodegenSettings?.behavior === FOverrideType.OVERRIDE && ignoreUndefinedEqual(localCodegenSettings?.language, r) && ignoreUndefinedEqual(localCodegenSettings?.preferences, n), [r, n, localCodegenSettings]);
   return {
     updateDefaultCodegenSettings: useCallback(() => {
       setCodegenSettings({

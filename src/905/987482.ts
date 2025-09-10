@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { A as _$$A } from "../905/920165";
-import { w_, Ih } from "../figma_app/273493";
+import { colorToRgb, desaturateColor } from "../figma_app/273493";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
@@ -34,7 +34,7 @@ let f = class e extends RecordingPureComponent {
       let a = n.createLinearGradient(r / 2, 0, r / 2 + this.props.width, 0);
       for (let t = 0; t < 32; t++) {
         let n = t / 32;
-        let r = w_(Ih({
+        let r = colorToRgb(desaturateColor({
           ...this.props.color,
           h: n
         }));
@@ -43,7 +43,7 @@ let f = class e extends RecordingPureComponent {
       n.fillStyle = a;
       n.fillRect(0, 0, this.props.width + r, r);
     };
-    this.colorHandle = e => w_(Ih(this.valueToColor(e)));
+    this.colorHandle = e => colorToRgb(desaturateColor(this.valueToColor(e)));
     this.colorToValue = e => new Point(e.h, 0);
     this.valueToColor = e => ({
       ...this.props.color,
@@ -115,7 +115,7 @@ function A(e) {
   });
 }
 function y(e, t) {
-  let i = w_({
+  let i = colorToRgb({
     h: e,
     s: 1,
     l: .5,

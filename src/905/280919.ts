@@ -81,15 +81,15 @@ export function $$k1({
   let V = U
     ? 100
     : (function (e, t, i) {
-        let {
-          datadog_rum_record_all,
-        } = getFeatureFlags()
-        let {
-          datadog_rum_session_sample_rate,
-        } = getInitialOptions()
-        let s = e.sessionSampleRate
-        return x.test(navigator.userAgent) ? 0 : T(i) ? void 0 !== t ? t : datadog_rum_record_all ? 100 : void 0 !== s ? s : void 0 !== datadog_rum_session_sample_rate ? datadog_rum_session_sample_rate : 0.01 : 100
-      }(j, i, M))
+      let {
+        datadog_rum_record_all,
+      } = getFeatureFlags()
+      let {
+        datadog_rum_session_sample_rate,
+      } = getInitialOptions()
+      let s = e.sessionSampleRate
+      return x.test(navigator.userAgent) ? 0 : T(i) ? void 0 !== t ? t : datadog_rum_record_all ? 100 : void 0 !== s ? s : void 0 !== datadog_rum_session_sample_rate ? datadog_rum_session_sample_rate : 0.01 : 100
+    }(j, i, M))
   let G = T(M) ? j.replaySampleRate ?? 0 : 100
   let z = U ? 100 : j.traceSampleRate ?? 50
   let H = getFeatureFlags()['js-profiling'] ? 100 : 0
@@ -220,9 +220,9 @@ let O = class e {
     this._overallCircuitBreakerRatePerSecond = -1
     this._numWeightedEventsInBucket = 0
     this._weightedEventTypesInBucket = {}
-    this._onEnableDatadog = () => {}
-    this._onDisableDatadog = () => {}
-    this._onCircuitBreakerError = () => {}
+    this._onEnableDatadog = () => { }
+    this._onDisableDatadog = () => { }
+    this._onCircuitBreakerError = () => { }
     this._enableEventWeighting = !1
     this.debouncedCountIncrement = debounce((t) => {
       let i = 1

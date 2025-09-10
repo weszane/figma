@@ -88,7 +88,7 @@ export const UpgradeSteps = {
   CHOOSE_PLAN: 'choose_plan',
   PAYMENT_AND_ADDRESS: 'payment_and_address',
   CONFIRM_PAY: 'confirm_pay',
-} 
+}
 
 /**
  * Enum for PlanType (original: $$d5)
@@ -98,7 +98,7 @@ export enum PlanType {
   ANNUAL = 'annual',
 }
 
-const DEFAULT_COUNTRY = 'US' // (original: $$c1)
+export const DEFAULT_COUNTRY = 'US' // (original: $$c1)
 export const JAPAN_COUNTRY = 'JP' // (original: $$u7)
 
 /**

@@ -19,12 +19,12 @@ import { Y } from "../905/830372";
 import { ay } from "../905/879323";
 import { DP } from "../905/640017";
 import { A as _$$A } from "../905/639174";
-import { J_ } from "../figma_app/80990";
+import { splitAndJoinPath } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { Um } from "../905/848862";
-import { kH, In } from "../905/309735";
+import { getBasename, getDirname } from "../905/309735";
 import { Ib } from "../905/129884";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { v as _$$v } from "../figma_app/398917";
@@ -165,7 +165,7 @@ function X({
   viewOnly: _,
   onEnterPressed: h
 }) {
-  let [g, y] = useState((r ?? "") + (t ? kH(t) : ""));
+  let [g, y] = useState((r ?? "") + (t ? getBasename(t) : ""));
   let [S, v] = useState(valueOrFallback(u, ""));
   let C = useDispatch();
   let w = e.guid;
@@ -174,9 +174,9 @@ function X({
   let D = useContext(zK);
   let k = useHandleFocusEvent(generateRecordingKey(p, "styleName"), "submit", () => {
     if ("" === g) return;
-    let r = t ? In(t) : void 0;
+    let r = t ? getDirname(t) : void 0;
     let n = r ? r + "/" + g : g;
-    permissionScopeHandler.user("rename-style", () => Fullscreen.renameNode(sessionLocalIDToString(w), J_(n)));
+    permissionScopeHandler.user("rename-style", () => Fullscreen.renameNode(sessionLocalIDToString(w), splitAndJoinPath(n)));
     fullscreenValue.triggerAction("commit");
     F();
     trackEventAnalytics("Style Renamed", {
@@ -197,7 +197,7 @@ function X({
     } else {
       if (e.keyCode !== Uz.ESCAPE) return SKIP_RECORDING;
       flushSync(() => {
-        y(t ? kH(t) : "");
+        y(t ? getBasename(t) : "");
       });
       F();
       P.current?.blur();

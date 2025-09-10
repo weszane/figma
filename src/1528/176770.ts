@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { Fullscreen } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
@@ -30,7 +30,7 @@ export function $$p0({
       isShowingGuids: h,
       modeOptions: t.modeOptions,
       onChange: e => {
-        e !== Mo && e !== Yn && (c2(t.explicitMode, e) || (e === Ws || e === UE ? Fullscreen.setVariableModeForPlayground(t.setKey, e, null) : (Fullscreen.setVariableModeForPlayground(t.setKey, e.guid, null), p?.(t, e.guid))));
+        e !== Mo && e !== Yn && (deepEqual(t.explicitMode, e) || (e === Ws || e === UE ? Fullscreen.setVariableModeForPlayground(t.setKey, e, null) : (Fullscreen.setVariableModeForPlayground(t.setKey, e.guid, null), p?.(t, e.guid))));
       },
       recordingKey: generateRecordingKey(n, `mode-${t.setKey}`),
       showExplicitOnly: !1,

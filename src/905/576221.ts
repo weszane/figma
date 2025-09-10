@@ -5,7 +5,7 @@ import s from "../vendor/223926";
 import { lg, Hb, zE, X7 } from "../figma_app/646357";
 import { w5 } from "../figma_app/345997";
 import { O } from "../905/566074";
-import { M$, PW, E8 } from "../figma_app/633080";
+import { PublishStatusEnum, PrimaryWorkflowEnum, StagingStatusEnum } from "../figma_app/633080";
 var o = s;
 function p(e, t) {
   return t?.has(e.node_id);
@@ -19,45 +19,45 @@ class m {
       }
       throwError("Unexpected library item type: " + e.type);
     };
-    this.publishItem = (e, t) => this.addItem(e, t, M$.PUBLISH);
-    this.unpublishItem = (e, t) => this.addItem(e, t, M$.UNPUBLISH);
+    this.publishItem = (e, t) => this.addItem(e, t, PublishStatusEnum.PUBLISH);
+    this.unpublishItem = (e, t) => this.addItem(e, t, PublishStatusEnum.UNPUBLISH);
     this.getPendingLibraryUpdates = (e, t, i, n, r, s, m, h, f, _) => {
       let A = {
-        [PW.STATE_GROUP]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.STATE_GROUP]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         },
-        [PW.COMPONENT]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.COMPONENT]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         },
-        [PW.STYLE]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.STYLE]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         },
-        [PW.VARIABLE]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.VARIABLE]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         },
-        [PW.VARIABLE_SET]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.VARIABLE_SET]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         },
-        [PW.MODULE]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.MODULE]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         },
-        [PW.RESPONSIVE_SET]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.RESPONSIVE_SET]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         },
-        [PW.CODE_COMPONENT]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.CODE_COMPONENT]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         },
-        [PW.MANAGED_STRING]: {
-          [M$.PUBLISH]: [],
-          [M$.UNPUBLISH]: []
+        [PrimaryWorkflowEnum.MANAGED_STRING]: {
+          [PublishStatusEnum.PUBLISH]: [],
+          [PublishStatusEnum.UNPUBLISH]: []
         }
       };
       if (!h) return A;
@@ -70,14 +70,14 @@ class m {
       let S = getFeatureFlags().dse_module_publish ? y(s) : [];
       let w = y(m);
       if (_?.unpublishAll) {
-        for (let e of [...v, ...I, ...E, ...x, ...S, ...w]) e.status === E8.NOT_STAGED || e.status === E8.NEW || e.type === PW.COMPONENT && e.containing_frame?.containingStateGroup?.nodeId || this.unpublishItem(e, A);
+        for (let e of [...v, ...I, ...E, ...x, ...S, ...w]) e.status === StagingStatusEnum.NOT_STAGED || e.status === StagingStatusEnum.NEW || e.type === PrimaryWorkflowEnum.COMPONENT && e.containing_frame?.containingStateGroup?.nodeId || this.unpublishItem(e, A);
         return A;
       }
       let C = new Set(Object.keys(_?.moveRemappings || {}));
       for (let e of E) {
         if (g(e, C, _?.forcePublish)) continue;
         let t = e.status;
-        if (t === E8.DELETED) {
+        if (t === StagingStatusEnum.DELETED) {
           if (this.unpublishItem(e, A)) return A;
         } else if (lg(t) && this.publishItem(e, A)) return A;
       }
@@ -100,9 +100,9 @@ class m {
         let i = e.node_id;
         let n = T.get(i) ?? [];
         if (!Hb(t)) {
-          if (t === E8.DELETED && this.unpublishItem(e, A)) return A;
+          if (t === StagingStatusEnum.DELETED && this.unpublishItem(e, A)) return A;
           for (let e of n) {
-            let t = e.status !== E8.NOT_STAGED && e.status !== E8.NEW;
+            let t = e.status !== StagingStatusEnum.NOT_STAGED && e.status !== StagingStatusEnum.NEW;
             if (e.component_key && t && this.unpublishItem(e, A)) return A;
           }
           continue;
@@ -112,23 +112,23 @@ class m {
         for (let e of n) if (!g(e, C, _?.forcePublish) && r.has(e.node_id) && this.publishItem(e, A)) return A;
         if (this.publishItem(e, A)) return A;
       }
-      for (let e of v) if (!(e.status === E8.NOT_STAGED || g(e, C, _?.forcePublish) || e.containing_frame?.containingStateGroup?.nodeId)) {
-        if (e.component_key && e.status === E8.DELETED) {
+      for (let e of v) if (!(e.status === StagingStatusEnum.NOT_STAGED || g(e, C, _?.forcePublish) || e.containing_frame?.containingStateGroup?.nodeId)) {
+        if (e.component_key && e.status === StagingStatusEnum.DELETED) {
           if (this.unpublishItem(e, A)) return A;
           continue;
         }
         if (this.publishItem(e, A)) return A;
       }
-      let R = new Set(X7(A[PW.COMPONENT][M$.PUBLISH]).filter(e => !!e));
-      let N = new Set(X7(A[PW.COMPONENT][M$.UNPUBLISH]).filter(e => !!e));
+      let R = new Set(X7(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH]).filter(e => !!e));
+      let N = new Set(X7(A[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH]).filter(e => !!e));
       for (let e of []) if (!R.has(e.component_key) && !N.has(e.component_key) && this.unpublishItem(t[e.node_id], A)) return A;
-      for (let e of x) if (e.status !== E8.NOT_STAGED) {
-        if (e.key && e.status === E8.DELETED) {
+      for (let e of x) if (e.status !== StagingStatusEnum.NOT_STAGED) {
+        if (e.key && e.status === StagingStatusEnum.DELETED) {
           if (this.unpublishItem(e, A)) return A;
           continue;
         }
-        for (let t of k[e.node_id] ?? []) if (t.status !== E8.NOT_STAGED && t.status !== E8.CURRENT) {
-          if (t.key && t.status === E8.DELETED) {
+        for (let t of k[e.node_id] ?? []) if (t.status !== StagingStatusEnum.NOT_STAGED && t.status !== StagingStatusEnum.CURRENT) {
+          if (t.key && t.status === StagingStatusEnum.DELETED) {
             if (this.unpublishItem(t, A)) return A;
             continue;
           }
@@ -137,14 +137,14 @@ class m {
         if (this.publishItem(e, A)) return A;
       }
       for (let e of S) {
-        if (e.key && e.status === E8.DELETED) {
+        if (e.key && e.status === StagingStatusEnum.DELETED) {
           if (this.unpublishItem(e, A)) return A;
           continue;
         }
         if (this.publishItem(e, A)) return A;
       }
       for (let e of w) if (O(e.type)) {
-        if (e.status === E8.DELETED) {
+        if (e.status === StagingStatusEnum.DELETED) {
           if (this.unpublishItem(e, A)) break;
         } else if (lg(e.status) && this.publishItem(e, A)) break;
       }
@@ -157,10 +157,10 @@ export function $$h2(e, t, i, n, r, a, s, o, l, d) {
   return new m().getPendingLibraryUpdates(e, t, i, n, r, a, s, o, l, d);
 }
 function g(e, t, i) {
-  return !i && !(e.status !== E8.CURRENT || t.has(e.node_id)) && (Fullscreen.clearLibraryMoveInfo(e.node_id), !0);
+  return !i && !(e.status !== StagingStatusEnum.CURRENT || t.has(e.node_id)) && (Fullscreen.clearLibraryMoveInfo(e.node_id), !0);
 }
 export function $$f0(e) {
-  return !e.some(e => [E8.CURRENT, E8.CHANGED, E8.NEW].includes(e.status));
+  return !e.some(e => [StagingStatusEnum.CURRENT, StagingStatusEnum.CHANGED, StagingStatusEnum.NEW].includes(e.status));
 }
 export function $$_1(e, t) {
   return Object.values(e).filter(e => p(e, t)).every(e => !Hb(e.status));

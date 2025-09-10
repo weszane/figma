@@ -8,7 +8,7 @@ import { VisualBellIcon } from "../905/576487";
 import { jO } from "../905/573265";
 import { hideModal } from "../905/156213";
 import { l as _$$l } from "../905/618307";
-import { o as _$$o, M$ } from "../figma_app/633080";
+import { LibrarySourceEnum, PublishStatusEnum } from "../figma_app/633080";
 import { pz } from "../figma_app/825489";
 import { MZ } from "../905/470594";
 import { UM, F4, _g, Jw, cZ } from "../figma_app/60023";
@@ -57,7 +57,7 @@ function b(e) {
   } = e;
   let i = atomStoreManager.get(_g);
   let n = atomStoreManager.get(cZ);
-  switch (atomStoreManager.set(pz, _$$o.LIBRARY), i) {
+  switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), i) {
     case F4.PUBLISH_HUB_FILE_INITIATED:
       atomStoreManager.set(UM, {
         state: F4.PUBLISH_HUB_FILE_COMPLETED
@@ -85,7 +85,7 @@ function v(e) {
   let n = atomStoreManager.get(_g);
   [F4.PUBLISH_TEMPLATE_INITIATED, F4.PUBLISH_HUB_FILE_INITIATED].includes(n) && dispatch(VisualBellActions.enqueue({
     type: $$A0,
-    message: publishType === M$.UNPUBLISH ? getI18nString("slides.templates.publish_actions.unpublishing") : getI18nString("slides.templates.publish_actions.publishing"),
+    message: publishType === PublishStatusEnum.UNPUBLISH ? getI18nString("slides.templates.publish_actions.unpublishing") : getI18nString("slides.templates.publish_actions.publishing"),
     icon: e.icon,
     progressKey: e.progressKey
   }));
@@ -97,7 +97,7 @@ function I(e) {
   } = e;
   let r = atomStoreManager.get(_g);
   let u = Jw(r);
-  switch (atomStoreManager.set(pz, _$$o.LIBRARY), logError(_$$e.SLIDES, _, {
+  switch (atomStoreManager.set(pz, LibrarySourceEnum.LIBRARY), logError(_$$e.SLIDES, _, {
     publishState: r,
     publishStep: u,
     error

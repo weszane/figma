@@ -14,7 +14,7 @@ import { MF } from "../figma_app/646357";
 import { getCurrentPluginVersionId } from "../figma_app/300692";
 import { gJ, Jl, SO, JG } from "../figma_app/190980";
 import { bD } from "../figma_app/45218";
-import { Yu } from "../figma_app/633080";
+import { NO_TEAM } from "../figma_app/633080";
 import { vt, $A, dB } from "../905/862883";
 import { q } from "../figma_app/446378";
 var s = a;
@@ -228,7 +228,7 @@ let $$H0 = HY({
       let [[l], d] = s()(e[t.payload.storeInRecentsKey], e => e.library_key === o && e.node_id === node_id);
       let c = [{
         ...i,
-        team_id: team_id || Yu,
+        team_id: team_id || NO_TEAM,
         library_key: t.payload.item.library_key,
         node_id,
         last_added_at_by_user_id: {

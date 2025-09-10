@@ -7,11 +7,11 @@ import { Point } from "../905/736624";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { MJ } from "../figma_app/80990";
+import { getFillColor } from "../figma_app/80990";
 import { Jr } from "../figma_app/624361";
 import { normalizeValue } from "../905/216495";
 import { HT, jS, Pv } from "../905/619652";
-import { QH } from "../905/405710";
+import { getStyleThumbnail } from "../905/405710";
 import { M as _$$M } from "../905/771870";
 import { forwardRef } from "react";
 import { ColorSpaceEnum } from "../figma_app/763686";
@@ -156,9 +156,9 @@ class L extends RecordingPureComponent {
     let e = this.getStyle();
     let t = this.getPaint();
     if (e) {
-      let i = QH(e);
+      let i = getStyleThumbnail(e);
       if (i && "FILL" === i.type) {
-        let e = MJ(i);
+        let e = getFillColor(i);
         if (e) return jsx(_$$m, {
           color: e,
           hideBorderShadow: this.props.hideBorderShadow,

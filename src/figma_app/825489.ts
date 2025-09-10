@@ -19,7 +19,7 @@ import { SubscribedLibrariesForFile, CommunityLibraryComponentsAndStateGroups, C
 import { w5 } from "../figma_app/345997";
 import { gM } from "../figma_app/155728";
 import { Me } from "../figma_app/598018";
-import { o as _$$o2 } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 var o = s;
 let $$x0 = atom(e => {
   let t = e(openFileAtom);
@@ -43,7 +43,7 @@ let N = createRemovableAtomFamily(e => mg($$x0, t => new Set(t.data?.map(t => t[
 export function $$C2(e) {
   return N(e);
 }
-let $$w5 = createAtomWithReduxWithState(_$$o2.LIBRARY, "SET_LIBRARY_PUBLISHING_MODE");
+let $$w5 = createAtomWithReduxWithState(LibrarySourceEnum.LIBRARY, "SET_LIBRARY_PUBLISHING_MODE");
 let $$O6 = createReduxSubscriptionAtomWithState(e => e.openFile?.publishedHubFile?.id);
 let $$R1 = createReduxSubscriptionAtomWithState(e => e.openFile?.publishedHubFile?.libraryKey ? _$$l(e.openFile.publishedHubFile.libraryKey) : null);
 let L = createReduxSubscriptionAtomWithState(e => e.openFile?.editorType);

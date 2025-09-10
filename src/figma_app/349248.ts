@@ -1,20 +1,20 @@
-import { throwError } from "../figma_app/465776";
-import { mW, Pg, ii, F7, q, Rf, VariableStyleId, n3, ey, nK, yG, Vt } from "../905/859698";
-import { VariableResolvedDataType, TemplateType } from "../figma_app/763686";
-import { parseSessionLocalID, defaultSessionLocalID } from "../905/871411";
-import { l as _$$l } from "../905/716947";
-import { wL, Hc } from "../905/805904";
-import { wL as _$$wL, Hc as _$$Hc } from "../905/537777";
-import { getFeatureFlags } from "../905/601108";
-import { getResourceDataOrFallback } from "../905/419236";
-import { camelToSnakeWithLeading, encodeUri } from "../figma_app/930338";
-import { P } from "../905/412913";
-import { FPermissionLevelType, FViewPermissionType, FPlanFeatureType, FResourceCategoryType } from "../figma_app/191312";
-import { PW } from "../figma_app/633080";
-import { getPropertyScopes } from "../figma_app/198712";
-import { zB } from "../figma_app/482728";
-import { Z } from "../905/190310";
-import { iX } from "../905/405710";
+import { throwError } from "src/figma_app/465776";
+import { mW, Pg, ii, F7, q, Rf, VariableStyleId, n3, ey, nK, yG, Vt } from "src/905/859698";
+import { VariableResolvedDataType, TemplateType } from "src/figma_app/763686";
+import { parseSessionLocalID, defaultSessionLocalID } from "src/905/871411";
+import { l as _$$l } from "src/905/716947";
+import { getVariableIdStringFromGuid, createVariableIdStringFromRef } from "src/905/805904";
+import { convertGuidToString, convertRefToString } from "src/905/537777";
+import { getFeatureFlags } from "src/905/601108";
+import { getResourceDataOrFallback } from "src/905/419236";
+import { camelToSnakeWithLeading, encodeUri } from "src/figma_app/930338";
+import { FileKeySourceEnum } from "src/905/412913";
+import { FPermissionLevelType, FViewPermissionType, FPlanFeatureType, FResourceCategoryType } from "src/figma_app/191312";
+import { PrimaryWorkflowEnum } from "src/figma_app/633080";
+import { getPropertyScopes } from "src/figma_app/198712";
+import { zB } from "src/figma_app/482728";
+import { Z } from "src/905/190310";
+import { parseMeta } from "src/905/405710";
 export function $$b12(e, t) {
   if (null === e) return null;
   let r = {};
@@ -208,7 +208,7 @@ export function $$D10(e) {
 function k(e) {
   return {
     subscriptionStatus: "LIBRARY",
-    type: PW.MODULE,
+    type: PrimaryWorkflowEnum.MODULE,
     node_id: e.nodeId,
     key: mW(e.key),
     version: Pg(e.version),
@@ -232,11 +232,11 @@ function M(e, t) {
     updated_at: e.updatedAt?.toISOString() ?? null,
     ...("hubFile" === t.type ? {
       file_key: t.file.id,
-      file_key_source: P.LIVEGRAPH_DATA_HUB_FILE,
+      file_key_source: FileKeySourceEnum.LIVEGRAPH_DATA_HUB_FILE,
       team_id: null
     } : {
       file_key: t.file.key,
-      file_key_source: P.LIVEGRAPH_DATA,
+      file_key_source: FileKeySourceEnum.LIVEGRAPH_DATA,
       team_id: t.file.teamId
     })
   };
@@ -244,7 +244,7 @@ function M(e, t) {
 export function $$F6(e, t) {
   return {
     ...M(e, t),
-    type: PW.COMPONENT,
+    type: PrimaryWorkflowEnum.COMPONENT,
     node_id: e.nodeId,
     canvas_url: `/component/${e.componentKey}/canvas?ver=${e.contentHash}`,
     component_key: ii(e.componentKey),
@@ -261,7 +261,7 @@ export function $$F6(e, t) {
 export function $$j7(e, t) {
   return {
     ...M(e, t),
-    type: PW.STATE_GROUP,
+    type: PrimaryWorkflowEnum.STATE_GROUP,
     node_id: e.nodeId,
     canvas_url: `/state_group/${e.key}/canvas?ver=${e.version}`,
     containing_frame: $$D10(e.containingFrame),
@@ -278,14 +278,14 @@ export function $$j7(e, t) {
 export function $$U3(e, t) {
   return {
     ...M(e, t),
-    type: PW.STYLE,
+    type: PrimaryWorkflowEnum.STYLE,
     node_id: e.nodeId,
     canvas_url: `/style/${e.key}/canvas?ver=${e.checkpoint.key}`,
     checkpoint_id: e.checkpoint?.key,
     content_hash: VariableStyleId(e.contentHash),
     userFacingVersion: VariableStyleId(e.userFacingVersion) === VariableStyleId.INVALID ? VariableStyleId(e.contentHash) : VariableStyleId(e.userFacingVersion),
     key: n3(e.key),
-    meta: e.meta ? iX(e.meta) : void 0,
+    meta: e.meta ? parseMeta(e.meta) : void 0,
     sort_position: e.sortPosition ?? "",
     style_type: e.styleType,
     thumbnail_url: `/style/${e.key}/thumbnail?ver=${e.checkpoint.key}`
@@ -324,7 +324,7 @@ function V(e, t) {
 export function $$H1(e, t, r) {
   let n = "";
   let a = "";
-  r ? (n = wL(parseSessionLocalID(e.nodeId) ?? defaultSessionLocalID), a = _$$wL(parseSessionLocalID(e.variableCollection.nodeId) ?? defaultSessionLocalID)) : (n = Hc(ey(e.key), nK(e.version)), a = _$$Hc(yG(e.variableCollection.key), Vt(e.variableCollection.version)));
+  r ? (n = getVariableIdStringFromGuid(parseSessionLocalID(e.nodeId) ?? defaultSessionLocalID), a = convertGuidToString(parseSessionLocalID(e.variableCollection.nodeId) ?? defaultSessionLocalID)) : (n = createVariableIdStringFromRef(ey(e.key), nK(e.version)), a = convertRefToString(yG(e.variableCollection.key), Vt(e.variableCollection.version)));
   return {
     ...M({
       ...e,
@@ -332,7 +332,7 @@ export function $$H1(e, t, r) {
       thumbnailUrl: null
     }, t),
     subscriptionStatus: "LIBRARY",
-    type: PW.VARIABLE,
+    type: PrimaryWorkflowEnum.VARIABLE,
     node_id: n,
     variableSetId: a,
     variableCollectionKey: yG(e.variableCollection.key),
@@ -347,7 +347,7 @@ export function $$H1(e, t, r) {
 }
 export function $$z23(e, t, r) {
   let n = "";
-  n = r ? _$$wL(parseSessionLocalID(e.nodeId) ?? defaultSessionLocalID) : _$$Hc(yG(e.key), Vt(e.version));
+  n = r ? convertGuidToString(parseSessionLocalID(e.nodeId) ?? defaultSessionLocalID) : convertRefToString(yG(e.key), Vt(e.version));
   let a = {
     ...M({
       ...e,
@@ -355,7 +355,7 @@ export function $$z23(e, t, r) {
       thumbnailUrl: null
     }, t),
     subscriptionStatus: "LIBRARY",
-    type: PW.VARIABLE_SET,
+    type: PrimaryWorkflowEnum.VARIABLE_SET,
     node_id: n,
     version: Vt(e.version),
     userFacingVersion: Vt(e.userFacingVersion) === Vt.INVALID ? Vt(e.version) : Vt(e.userFacingVersion),
@@ -399,21 +399,21 @@ export function $$W2(e, t) {
       unpublished_at: e.unpublishedAt?.toISOString() ?? null,
       ...("hubFile" === t.type ? {
         file_key: t.file.id,
-        file_key_source: P.LIVEGRAPH_DATA_HUB_FILE,
+        file_key_source: FileKeySourceEnum.LIVEGRAPH_DATA_HUB_FILE,
         library_key: _$$l(t.file.libraryKey),
         file_name: t.file.currentHubFileVersion?.name || "",
         publisher_name: t.file.communityPublishers?.[0]?.profile?.name || "",
         isHubFile: !0
       } : "teamTemplate" === t.type ? {
         file_key: t.file.key,
-        file_key_source: P.LIVEGRAPH_DATA,
+        file_key_source: FileKeySourceEnum.LIVEGRAPH_DATA,
         library_key: _$$l(t.file.libraryKey),
         file_name: t.file.template?.name || "",
         publisher_name: t.file.template?.publishedByUserNullable?.name || "",
         isHubFile: !1
       } : {
         file_key: t.file.key,
-        file_key_source: P.LIVEGRAPH_DATA,
+        file_key_source: FileKeySourceEnum.LIVEGRAPH_DATA,
         library_key: _$$l(t.file.libraryKey),
         file_name: t.file.name,
         isHubFile: !1,

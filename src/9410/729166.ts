@@ -30,7 +30,7 @@ import { P as _$$P2 } from '../905/347284';
 import { Q as _$$Q } from '../905/363675';
 import { O as _$$O4 } from '../905/365108';
 import { selectCurrentUser } from '../905/372672';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { e as _$$e3 } from '../905/383776';
 import { L as _$$L2 } from '../905/408237';
 import { A as _$$A4 } from '../905/408320';
@@ -166,7 +166,7 @@ import { iA as _$$iA } from '../figma_app/545541';
 import { BI } from '../figma_app/546509';
 import { Yp } from '../figma_app/578768';
 import { Dl } from '../figma_app/601682';
-import { rt as _$$rt, Wh } from '../figma_app/615482';
+import { createTrackedAtom, setupRemovableAtomFamily } from '../figma_app/615482';
 import { Ax } from '../figma_app/616261';
 import { eb as _$$eb, i_ as _$$i_, A8, bE, EB, R6, vo, zL } from '../figma_app/617506';
 import { flatten } from '../figma_app/656233';
@@ -1600,13 +1600,13 @@ function ij({
     children: renderI18nText('inspect_panel.history.compare_changes')
   });
 }
-let iA = Wh(() => atom(''), {
+let iA = setupRemovableAtomFamily(() => atom(''), {
   preserveValue: !1
 });
 let iL = 'performance.dev_mode.workflows.overview.time_to_first_thumbnail';
 let iR = new PerfTimer(iL, {});
-let iD = _$$rt(void 0);
-let iM = _$$rt(!1);
+let iD = createTrackedAtom(void 0);
+let iM = createTrackedAtom(!1);
 let iG = 2 * parsePxNumber(Evg);
 let iK = iG / RtY;
 let iH = iG / 8;
@@ -1634,7 +1634,7 @@ function iV(e) {
     })
   });
 }
-let iW = Wh(() => atom(!1), {
+let iW = setupRemovableAtomFamily(() => atom(!1), {
   preserveValue: !1
 });
 function iY() {
@@ -1665,7 +1665,7 @@ function iY() {
   });
 }
 let iJ = createValidatedLocalStorageAtom('workflows_summary_tab', oz.ALL, _$$z.nativeEnum(oz));
-let iq = Wh(() => atom({}), {
+let iq = setupRemovableAtomFamily(() => atom({}), {
   preserveValue: !0
 });
 let iX = createValidatedLocalStorageAtom('workflows_overview_sorted_by', _$$_2.RECENT, _$$z.nativeEnum(_$$_2));
@@ -3362,7 +3362,7 @@ function r5() {
   let S = useSelector(e => e.mirror.appModel.currentPage);
   let j = useLatestRef(S);
   useEffect(() => {
-    f?.updatePages && p && (!v || p.key !== v.key || p.name !== v.name || p.editorType !== v.editorType || p.isTryFile !== v.isTryFile || !c2(T, w) || S !== j) && f.updatePages({
+    f?.updatePages && p && (!v || p.key !== v.key || p.name !== v.name || p.editorType !== v.editorType || p.isTryFile !== v.isTryFile || !deepEqual(T, w) || S !== j) && f.updatePages({
       fileKey: p.key,
       fileName: p.name,
       editorType: p.editorType,
@@ -3406,7 +3406,7 @@ function r5() {
   }, [N, L, A, O, R]);
   let M = useLatestRef(D);
   useEffect(() => {
-    f?.updateMultiplayerUserInfo && !c2(M, D) && f.updateMultiplayerUserInfo(D);
+    f?.updateMultiplayerUserInfo && !deepEqual(M, D) && f.updateMultiplayerUserInfo(D);
   }, [f, D, M]);
   _$$iA();
   !function (e, t) {

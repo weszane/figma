@@ -21,14 +21,14 @@ import { D as _$$D2 } from '../905/347702';
 import { createOptimistThunk } from '../905/350402';
 import { E as _$$E } from '../905/355220';
 import { debugState } from '../905/407919';
-import { f as _$$f } from '../905/412913';
+import { getFileKey } from '../905/412913';
 import { qU } from '../905/420347';
 import { waitForFontLoaded } from '../905/426868';
 import { v as _$$v } from '../905/439972';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { Q as _$$Q } from '../905/477656';
 import { atomStoreManager } from '../905/490038';
-import { Hk } from '../905/497152';
+import { convertStringToFacetType } from '../905/497152';
 import { handleAtomEvent } from '../905/502364';
 import { s as _$$s2 } from '../905/506024';
 import { L as _$$L } from '../905/522457';
@@ -64,7 +64,7 @@ import { b as _$$b } from '../905/985254';
 import { useLatestRef } from '../figma_app/922077';
 import { LibraryOrgSubscriptions, LibraryTeamSubscriptions, LibraryUserSubscriptions, LibraryFileSubscriptions } from '../figma_app/43951';
 import { uo, yJ } from '../figma_app/78808';
-import { Eo } from '../figma_app/80990';
+import { teamLibraryCache } from '../figma_app/80990';
 import { Ob } from '../figma_app/111825';
 import { LL, OQ } from '../figma_app/141508';
 import o, { VariableSetIdCompatHandler } from '../figma_app/243058';
@@ -80,7 +80,7 @@ import { kb } from '../figma_app/502247';
 import { handleStatusChangeEffect } from '../figma_app/566371';
 import { cD } from '../figma_app/598018';
 import { qr } from '../figma_app/608944';
-import { PW, wg } from '../figma_app/633080';
+import { PrimaryWorkflowEnum, initialLibraryStats } from '../figma_app/633080';
 import { $j, td as _$$td, _B, GA, iw, kw, lG, Mb, Ve, vu, Ys } from '../figma_app/646357';
 import { n1 } from '../figma_app/657017';
 import { Cx, of, x2, yH } from '../figma_app/714946';
@@ -99,8 +99,8 @@ export async function $$eV38(e, t = SceneIdentifier.ACTIVE_SCENE) {
       newSymbolOrStateGroupGuid: LibraryPubSub.upsertLocalProductComponentToPlaygroundScene(e.node_id)
     };
   }
-  let n = await Eo.getCanvas(e);
-  if (e.type === PW.COMPONENT) {
+  let n = await teamLibraryCache.getCanvas(e);
+  if (e.type === PrimaryWorkflowEnum.COMPONENT) {
     let i = permissionScopeHandler.system('upsert-shared-symbol', () => LibraryPubSub.upsertSharedSymbol(e.component_key ?? ii.INVALID, e.content_hash ?? F7.INVALID, e.library_key, Confirmation.NO, n, t));
     if (!i || isEmptyObject(i) || i.fileUpdateRequired) return;
     i.localGUID || logError(_$$e.DESIGN_SYSTEMS_EDITOR, 'no local GUID in response', {
@@ -109,7 +109,7 @@ export async function $$eV38(e, t = SceneIdentifier.ACTIVE_SCENE) {
       reportAsSentryError: !0
     });
     r = i.localGUID;
-  } else if (e.type === PW.STATE_GROUP) {
+  } else if (e.type === PrimaryWorkflowEnum.STATE_GROUP) {
     let i = permissionScopeHandler.system('upsert-shared-state-group', () => LibraryPubSub.upsertSharedStateGroup(e.key, e.version, e.library_key, Confirmation.NO, n, t));
     if (!i || isEmptyObject(i) || i.fileUpdateRequired) return;
     if (!i.localGUID) throw new Error('Swap to Shared Component Error, no local GUID');
@@ -186,7 +186,7 @@ let $$eW48 = createOptimistThunk((e, t) => {
     try {
       let t = await $$eV38(item);
       if (t) {
-        let a = item.type === PW.STATE_GROUP ? Fullscreen.getSimilarStates(instanceGUIDs, t.newSymbolOrStateGroupGuid, item.default_state_key) : {
+        let a = item.type === PrimaryWorkflowEnum.STATE_GROUP ? Fullscreen.getSimilarStates(instanceGUIDs, t.newSymbolOrStateGroupGuid, item.default_state_key) : {
           [t.newSymbolOrStateGroupGuid]: instanceGUIDs
         };
         permissionScopeHandler.user('replace-symbol-backing-instances', () => {
@@ -337,7 +337,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
         e && e.updated_at > item.updated_at && (r = e);
       }
       let i = eK(e.dispatch);
-      Eo.getCanvas(item).then(e => {
+      teamLibraryCache.getCanvas(item).then(e => {
         permissionScopeHandler.user('insert-component', () => {
           let t = permissionScopeHandler.system('upsert-shared-symbol', () => LibraryPubSub.upsertSharedSymbol(item.component_key ?? ii.INVALID, item.content_hash ?? F7.INVALID, item.library_key, Confirmation.NO, e, SceneIdentifier.ACTIVE_SCENE));
           if (!t) {
@@ -479,7 +479,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
         e && e.updated_at > item.updated_at && (r = e);
       }
       let i = eK(e.dispatch);
-      Eo.getCanvas(item).then(t => {
+      teamLibraryCache.getCanvas(item).then(t => {
         permissionScopeHandler.user('insert-state-group', () => {
           let n = permissionScopeHandler.system('upsert-shared-state-group', () => LibraryPubSub.upsertSharedStateGroup(item.key ?? _$$q.INVALID, item.version, item.library_key, Confirmation.NO, t, SceneIdentifier.ACTIVE_SCENE));
           if (!n || n.fileUpdateRequired || !n.localGUID) throw new Error('An error occurred while adding an instance of this component.');
@@ -684,7 +684,7 @@ let $$eQ39 = createOptimistThunk(async (e, t) => {
   }
 });
 export async function $$e010(e) {
-  let t = await Eo.getCanvas(e);
+  let t = await teamLibraryCache.getCanvas(e);
   let r = permissionScopeHandler.system('upsert-shared-module', () => LibraryPubSub.upsertSharedModule(e.key ?? mW.INVALID, e.version ?? Pg.INVALID, e.library_key, Confirmation.NO, t, SceneIdentifier.ACTIVE_SCENE));
   if (!r || r.fileUpdateRequired || !r.localGUID) throw new Error('An error occurred while inserting this template.');
   return r;
@@ -712,7 +712,7 @@ let $$e22 = createOptimistThunk(async (e, t) => {
   let _ = p.openFile;
   if (_) {
     try {
-      let t = await Promise.all(stateGroups.map(e => Eo.getCanvas(e)));
+      let t = await Promise.all(stateGroups.map(e => teamLibraryCache.getCanvas(e)));
       let s = new Set();
       await e1(e.dispatch, stateGroups, (e, r) => {
         let l = t[r];
@@ -757,7 +757,7 @@ let $$e543 = createOptimistThunk(async (e, t) => {
   let h = _.openFile;
   if (h) {
     try {
-      let t = await Promise.all(components.map(e => Eo.getCanvas(e)));
+      let t = await Promise.all(components.map(e => teamLibraryCache.getCanvas(e)));
       let s = new Set();
       await e1(e.dispatch, components, (e, r) => {
         let p = t[r];
@@ -872,7 +872,7 @@ let $$e841 = createOptimistThunk((e, t) => {
   if (o) {
     let r = async () => {
       try {
-        let r = await Eo.getCanvas(style);
+        let r = await teamLibraryCache.getCanvas(style);
         t.bufferCallback?.(r);
         let a = permissionScopeHandler.system('ensure-style-is-loaded', () => LibraryPubSub.getOrCreateSubscribedStyleNodeId(style.key, style.content_hash ?? VariableStyleId.INVALID, style.library_key, r, targetUpsertScene));
         if (a?.fileUpdateRequired) return;
@@ -915,7 +915,7 @@ let $$e644 = createOptimistThunk(async (e, t) => {
   let o = e.getState().openFile;
   if (o) {
     try {
-      let t = await Promise.all(styles.map(e => Eo.getCanvas(e)));
+      let t = await Promise.all(styles.map(e => teamLibraryCache.getCanvas(e)));
       let s = new Set();
       let c = e.getState();
       await e1(e.dispatch, styles, (e, r) => {
@@ -947,7 +947,7 @@ let $$e718 = createOptimistThunk((e, t) => {
   let {
     updateAsset
   } = n;
-  Eo.getCanvas(updateAsset).then(t => {
+  teamLibraryCache.getCanvas(updateAsset).then(t => {
     let n = e.getState();
     let {
       content_hash
@@ -970,7 +970,7 @@ let $$e930 = createOptimistThunk((e, t) => {
     updateStartTime
   } = t;
   if (e.getState().openFile) {
-    return Promise.all(variableSets.map(e => Eo.getCanvas(e))).then(t => e1(e.dispatch, variableSets, (e, r) => {
+    return Promise.all(variableSets.map(e => teamLibraryCache.getCanvas(e))).then(t => e1(e.dispatch, variableSets, (e, r) => {
       let i = t[r];
       permissionScopeHandler.user('update-shared-variable-set', () => {
         LibraryPubSub.updateSharedVariableSet(e.node_id, e.libraryVariableIdsForUpdate, i, updateStartTime);
@@ -988,13 +988,13 @@ let $$te35 = createOptimistThunk((e, t) => {
     assets,
     updateStartTime
   } = t;
-  return Promise.all(assets.map(e => Eo.getCanvas({
+  return Promise.all(assets.map(e => teamLibraryCache.getCanvas({
     canvas_url: e.canvasUrl
   }))).then(t => e1(e.dispatch, assets, (e, r) => {
     let i = t[r];
     if (i) {
       permissionScopeHandler.user('update-shared-library-asset', () => {
-        LibraryPubSub.updateSharedLibraryAsset(Hk(e.type), e.assetId, e.sourceLibraryKey, i, updateStartTime);
+        LibraryPubSub.updateSharedLibraryAsset(convertStringToFacetType(e.type), e.assetId, e.sourceLibraryKey, i, updateStartTime);
       });
     } else {
       throw new Error('Missing buffer in updateSharedLibraryAssets');
@@ -1011,14 +1011,14 @@ let $$tt53 = createOptimistThunk((e, t) => {
     assets,
     updateStartTime
   } = t;
-  return Promise.all(assets.map(e => Eo.getCanvas({
+  return Promise.all(assets.map(e => teamLibraryCache.getCanvas({
     canvas_url: e.canvasUrl
   }))).then(e => _$$a(assets, (t, r) => {
     let i = e[r];
     if (i) {
       _$$r(() => {
         permissionScopeHandler.system('auto-update-shared-library-asset', () => {
-          LibraryPubSub.updateSharedLibraryAsset(Hk(t.type), t.assetId, t.sourceLibraryKey, i, updateStartTime);
+          LibraryPubSub.updateSharedLibraryAsset(convertStringToFacetType(t.type), t.assetId, t.sourceLibraryKey, i, updateStartTime);
         });
       });
     } else {
@@ -1031,7 +1031,7 @@ let $$tt53 = createOptimistThunk((e, t) => {
   });
 });
 export async function $$tr36(e) {
-  let t = await Eo.getCanvas(e);
+  let t = await teamLibraryCache.getCanvas(e);
   if (!permissionScopeHandler.system('upsert-shared-variable', () => LibraryPubSub.upsertSharedVariable(e.node_id, Confirmation.NO, t)).fileUpdateRequired) {
     return {
       buffer: t
@@ -1080,7 +1080,7 @@ let $$ti16 = createOptimistThunk((e, t) => new Promise((r, n) => {
   }));
 }));
 export async function $$ta24(e) {
-  let t = await Eo.getCanvas(e);
+  let t = await teamLibraryCache.getCanvas(e);
   let r = permissionScopeHandler.system('upsert-entire-variable-set', () => {
     if (!LibraryPubSub) {
       logError(_$$e.DESIGN_SYSTEMS_EDITOR, 'LibraryPubSub binding is not available, can\'t upsert variable set');
@@ -1096,7 +1096,7 @@ export async function $$ta24(e) {
   }
 }
 async function ts(e) {
-  let t = await Eo.getCanvas(e);
+  let t = await teamLibraryCache.getCanvas(e);
   let r = permissionScopeHandler.system('upsert-shared-variable-set', () => {
     if (!LibraryPubSub) {
       logError(_$$e.DESIGN_SYSTEMS_EDITOR, 'LibraryPubSub binding is not available, can\'t upsert variable set');
@@ -1211,8 +1211,8 @@ let $$t_45 = async (e, t, r, n) => {
         localOldGuidToNewKey: {}
       }));
       let s = atomStoreManager.get(qp);
-      $$tZ20(t, PW.COMPONENT, s, r.dispatch);
-      $$tZ20(n, PW.STATE_GROUP, s, r.dispatch);
+      $$tZ20(t, PrimaryWorkflowEnum.COMPONENT, s, r.dispatch);
+      $$tZ20(n, PrimaryWorkflowEnum.STATE_GROUP, s, r.dispatch);
     }
     n.callbackForComponent?.(!0);
   } catch (e) {
@@ -1253,7 +1253,7 @@ export async function $$tE47(e, t, r) {
         fileKey: i.key,
         libraryKey: _$$l(i.library_key),
         teamId: i.team_id,
-        type: PW.COMPONENT
+        type: PrimaryWorkflowEnum.COMPONENT
       }));
       n.data.meta.component_set && e.dispatch(vP({
         itemsById: {
@@ -1262,9 +1262,9 @@ export async function $$tE47(e, t, r) {
         fileKey: i.key,
         libraryKey: _$$l(i.library_key),
         teamId: i.team_id,
-        type: PW.STATE_GROUP
+        type: PrimaryWorkflowEnum.STATE_GROUP
       }));
-      a && Eo.getCanvas(a);
+      a && teamLibraryCache.getCanvas(a);
     }
     return {
       component: a,
@@ -1304,9 +1304,9 @@ export async function $$tI55(e, t) {
       fileKey: i.key,
       libraryKey: _$$l(i.library_key),
       teamId: i.team_id,
-      type: PW.STATE_GROUP
+      type: PrimaryWorkflowEnum.STATE_GROUP
     }));
-    Eo.getCanvas(r);
+    teamLibraryCache.getCanvas(r);
     return r;
   } catch (e) {
     if (e?.status === 403) {
@@ -1328,7 +1328,7 @@ export async function $$tS13(e, t) {
     file && e.dispatch(yJ({
       file
     }));
-    Eo.getCanvas(style);
+    teamLibraryCache.getCanvas(style);
     return style;
   } catch (e) {
     if (e?.status === 403) {
@@ -1374,8 +1374,8 @@ export async function $$tA52(e) {
     Ve(r.key);
     Ve(r.libraryKey);
     let n = atomStoreManager.get(qp);
-    $$tZ20(t.data.meta.state_groups, PW.STATE_GROUP, n, e.dispatch);
-    $$tZ20(t.data.meta.components, PW.COMPONENT, n, e.dispatch);
+    $$tZ20(t.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP, n, e.dispatch);
+    $$tZ20(t.data.meta.components, PrimaryWorkflowEnum.COMPONENT, n, e.dispatch);
     e.dispatch(dC({
       subscribedOldKeyToNewKey: {},
       localOldGuidToNewKey: t.data.meta.move_remappings
@@ -1440,7 +1440,7 @@ let tC = async (e, t) => {
       libraryThumbnailByLibraryKey: m
     };
   } catch (e) {
-    return wg;
+    return initialLibraryStats;
   }
 };
 let $$tw23 = M4.Query({
@@ -1515,7 +1515,7 @@ let $$tL = _$$D2(async ({
     };
   } catch (e) {
     return {
-      ...wg
+      ...initialLibraryStats
     };
   }
 });
@@ -1705,7 +1705,7 @@ let $$tq29 = createOptimistThunk(e => {
     has_opened_libraries_modal: !0
   }));
 });
-let tJ = _$$f();
+let tJ = getFileKey();
 export function $$tZ20(e, t, r, n) {
   for (let [i, a] of (e = e.map(e => ({
     ...e,

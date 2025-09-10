@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { c2, Jj } from "../905/382883";
+import { deepEqual, includesEqual } from "../905/382883";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { H8, Pf } from "../905/590952";
@@ -42,7 +42,7 @@ export function $$v0({
       O({}, jD.CLEAR_ALL, uR.DROPDOWN);
       return;
     }
-    let r = S ? n ? S.value.filter(e => !c2(e, t)) : S.value.concat(t) : [t];
+    let r = S ? n ? S.value.filter(e => !deepEqual(e, t)) : S.value.concat(t) : [t];
     let s = Rj(r);
     let o = nX(w, s, C, T ?? void 0);
     i(e, s, o);
@@ -103,7 +103,7 @@ function I({
     if ("" === d) {
       let e = [...i].slice(0, 5);
       if (5 === e.length) return e;
-      for (let t of c) if (Jj(e, t) || e.push(t), 5 === e.length) break;
+      for (let t of c) if (includesEqual(e, t) || e.push(t), 5 === e.length) break;
       return e;
     }
     return c;

@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { getFeatureFlags } from "../905/601108";
-import { useAtomWithSubscription } from "../figma_app/27355";
-import { I7 } from "../figma_app/594947";
-import { UQ } from "../figma_app/864723";
-import { FFileType } from "../figma_app/191312";
+import { getFeatureFlags } from "src/905/601108";
+import { useAtomWithSubscription } from "src/figma_app/27355";
+import { I7 } from "src/figma_app/594947";
+import { UQ } from "src/figma_app/864723";
+import { FFileType } from "src/figma_app/191312";
 var d = (e => (e.ASSET_PANEL_ONLY = "asset_panel_only", e.ASSET_PANEL_AND_TOOLBAR = "asset_panel_and_toolbar", e))(d || {});
 export function $$c4() {
   let e = useAtomWithSubscription(UQ);

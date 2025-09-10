@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSubscription } from "../figma_app/288654";
 import { ComponentAttribution, StateGroupAttribution, StyleAttribution, VariableCollectionAttribution } from "../figma_app/43951";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$o2({
   assetKey: e,
   type: t
@@ -9,27 +9,27 @@ export function $$o2({
   let r = useSubscription(ComponentAttribution, {
     key: e ?? ""
   }, {
-    enabled: t === PW.COMPONENT && !!e
+    enabled: t === PrimaryWorkflowEnum.COMPONENT && !!e
   });
   let o = useSubscription(StateGroupAttribution, {
     key: e ?? ""
   }, {
-    enabled: t === PW.STATE_GROUP && !!e
+    enabled: t === PrimaryWorkflowEnum.STATE_GROUP && !!e
   });
   let l = useSubscription(StyleAttribution, {
     key: e ?? ""
   }, {
-    enabled: t === PW.STYLE && !!e
+    enabled: t === PrimaryWorkflowEnum.STYLE && !!e
   });
   let d = useSubscription(VariableCollectionAttribution, {
     key: e ?? ""
   }, {
-    enabled: t === PW.VARIABLE_SET && !!e
+    enabled: t === PrimaryWorkflowEnum.VARIABLE_SET && !!e
   });
-  let c = useMemo(() => t !== PW.COMPONENT ? null : r, [r, t]);
-  let u = useMemo(() => t !== PW.STATE_GROUP ? null : o, [o, t]);
-  let p = useMemo(() => t !== PW.STYLE ? null : l, [l, t]);
-  let _ = useMemo(() => t !== PW.VARIABLE_SET ? null : d, [d, t]);
+  let c = useMemo(() => t !== PrimaryWorkflowEnum.COMPONENT ? null : r, [r, t]);
+  let u = useMemo(() => t !== PrimaryWorkflowEnum.STATE_GROUP ? null : o, [o, t]);
+  let p = useMemo(() => t !== PrimaryWorkflowEnum.STYLE ? null : l, [l, t]);
+  let _ = useMemo(() => t !== PrimaryWorkflowEnum.VARIABLE_SET ? null : d, [d, t]);
   return useMemo(() => null != c ? "loaded" !== c.status ? c : {
     status: c.status,
     data: {

@@ -18,7 +18,7 @@ import { FileCanTestPlanRecordPermission, FilePermissionsLgShadowView, OpenEdito
 import { useSubscription, useSuspendableSubscription } from '../figma_app/288654'
 import { handleResourceAtomMetrics, setupResourceAtomHandler } from '../figma_app/566371'
 import { usePreviousValue } from '../figma_app/922077'
-import { useAtomWithSubscription } from './27355'
+import { useAtomWithSubscription } from '../figma_app/27355'
 /**
  * Retrieves the file object for the currently selected fullscreen view.
  * @param store - Redux store object.

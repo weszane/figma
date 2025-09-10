@@ -14,7 +14,7 @@ import { oW } from "../905/675859";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { wo } from "../figma_app/753501";
 import { Cu } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
@@ -31,7 +31,7 @@ import { CH, Ji } from "../figma_app/553488";
 import { r$ } from "../7222/396421";
 import { e4, pz, a3, ln, S as _$$S, uP, zs, $y, VY, iH, y5, gx, JB, n_ } from "../9410/261393";
 var m = h;
-let M = _$$f();
+let M = getFileKey();
 export function $$P2({
   module: e,
   ...t

@@ -8,7 +8,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import u from "classnames";
 import _ from "../vendor/961736";
-import { G$ } from "../figma_app/191804";
+import { getSecondaryTextColorForBackground } from "../figma_app/191804";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { useHandleMouseEvent } from "../figma_app/878298";
@@ -21,17 +21,17 @@ import { e as _$$e } from "../905/716094";
 import { F as _$$F } from "../905/989956";
 import { lg } from "../figma_app/976749";
 import { DP } from "../905/640017";
-import { zR } from "../figma_app/80990";
+import { getAssetBackgroundColor } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
 import { q as _$$q } from "../905/524117";
 import { N as _$$N } from "../905/645480";
 import { zR as _$$zR } from "../figma_app/817077";
 import { j as _$$j } from "../905/523935";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { a3 } from "../figma_app/645694";
 import { uW, pw } from "../905/187165";
-import { NR } from "../905/722604";
-import { PW, E8, Do } from "../figma_app/633080";
+import { cleanAssetName } from "../905/722604";
+import { PrimaryWorkflowEnum, StagingStatusEnum, hasAssetId } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { M as _$$M } from "../905/771870";
 import { JA } from "../figma_app/608944";
@@ -78,8 +78,8 @@ function Q(e, t, r) {
       nameStyle: n,
       background: null
     };
-    let i = zR(e, null);
-    i && !J(t) && (n.background = _$$F.format(i), n.color = G$(i));
+    let i = getAssetBackgroundColor(e, null);
+    i && !J(t) && (n.background = _$$F.format(i), n.color = getSecondaryTextColorForBackground(i));
     return {
       nameStyle: n,
       background: i
@@ -117,12 +117,12 @@ export function $$ee2(e) {
         style: nameStyle,
         children: (() => {
           if (J(e.displayType) && !e.isSearch) {
-            let r = kH(item.name);
-            return e.item.type === PW.RESPONSIVE_SET ? NR(r) : r;
+            let r = getBasename(item.name);
+            return e.item.type === PrimaryWorkflowEnum.RESPONSIVE_SET ? cleanAssetName(r) : r;
           }
           return item.name;
         })()
-      }), e.item.type === PW.STATE_GROUP && !!e.numVariants && e.numVariants > 0 && jsx(eo, {
+      }), e.item.type === PrimaryWorkflowEnum.STATE_GROUP && !!e.numVariants && e.numVariants > 0 && jsx(eo, {
         isList: J(e.displayType),
         numVariants: e.numVariants
       })]
@@ -173,7 +173,7 @@ export function $$er1(e) {
     };
   });
   let a = e.item;
-  let s = e.isFilePublished && (a.status === E8.NOT_STAGED || a.status === E8.DELETED);
+  let s = e.isFilePublished && (a.status === StagingStatusEnum.NOT_STAGED || a.status === StagingStatusEnum.DELETED);
   let {
     nameStyle,
     background
@@ -193,12 +193,12 @@ export function $$er1(e) {
         className: Z(e.displayType, UA),
         style: nameStyle,
         dir: "auto",
-        children: J(e.displayType) && !e.isSearch ? kH(a.name) : a.name
+        children: J(e.displayType) && !e.isSearch ? getBasename(a.name) : a.name
       }), e.selected && !J(e.displayType) && jsx("div", {
         className: vv
       }), s && !e.selected && !J(e.displayType) && jsx("div", {
         className: eJ
-      }), e.item.type === PW.STATE_GROUP && !!e.numVariants && e.numVariants > 0 && jsx(eo, {
+      }), e.item.type === PrimaryWorkflowEnum.STATE_GROUP && !!e.numVariants && e.numVariants > 0 && jsx(eo, {
         isList: J(e.displayType),
         numVariants: e.numVariants
       })]
@@ -227,20 +227,20 @@ let en = memo(forwardRef(function (e, t) {
     isList: a
   });
   r = "list-compact" === e.displayType ? nl : "list" === e.displayType ? yg : "list-no-padding" === e.displayType ? oV : e.isDragged ? Vs : e.isFigJam || e.isSlides || e.isCooper ? bo : e.useBaseTile ? aS : "grid-compact" === e.displayType ? Ms : fh;
-  let h = Do(e.item) ? null : e.item.description;
-  let m = e.item.type === PW.STATE_GROUP && !!e.numVariants && e.numVariants > 0;
+  let h = hasAssetId(e.item) ? null : e.item.description;
+  let m = e.item.type === PrimaryWorkflowEnum.STATE_GROUP && !!e.numVariants && e.numVariants > 0;
   let g = e.shouldShowNamePopout && !a;
   let f = !e.shouldHideDescription && h;
   let E = (f || g || m) && !e.shouldHideTooltip;
   let y = useMemo(() => e.isFigJam || e.isSlides || e.isCooper ? {
-    "data-tooltip": e.isDragged || e.shouldHideTooltip ? void 0 : e.tooltipOverride ?? kH(e.item.name),
+    "data-tooltip": e.isDragged || e.shouldHideTooltip ? void 0 : e.tooltipOverride ?? getBasename(e.item.name),
     "data-tooltip-type": e.isDragged || e.shouldHideTooltip ? void 0 : Ib.TEXT,
     "data-tooltip-timeout-delay": e.isDragged ? void 0 : 500,
     "data-tooltip-show-above": e.tooltipShownAbove
   } : _ ? {
     "data-tooltip-type": E ? Ib.SPECIAL : void 0,
     "data-tooltip": E ? _$$B : void 0,
-    "data-tooltip-component-name": g ? e.tooltipOverride ?? kH(e.item.name) : void 0,
+    "data-tooltip-component-name": g ? e.tooltipOverride ?? getBasename(e.item.name) : void 0,
     "data-tooltip-file-name": e.fileName,
     "data-tooltip-component-description": f ? h : void 0,
     "data-tooltip-num-variants": m ? e.numVariants : void 0,
@@ -361,7 +361,7 @@ function ei(e) {
           onBlur: e.buttonProps?.onBlur
         },
         onClick: h,
-        "aria-label": kH(e.item.name),
+        "aria-label": getBasename(e.item.name),
         children: jsx("div", {
           "aria-hidden": !0,
           children: e.children
@@ -411,7 +411,7 @@ function ea({
   y && (C.transform = "scale(0.5)", C.transformOrigin = "top left", C.display = "flex", C.alignItems = "flex-start", C.justifyContent = "center");
   _ || !l || a || (m || s || o || (C.boxShadow = pw(T, l, I)), C.background = _$$F.format(l));
   r && (x ? (C.width = void 0, C.height = void 0) : C.background = void 0);
-  let w = useMemo(() => t.type === PW.RESPONSIVE_SET && "LIBRARY" === t.subscriptionStatus && t.fullPage ? NK : d ? _$$Ib : a || s || o ? FF : N4, [a, s, o, t, d]);
+  let w = useMemo(() => t.type === PrimaryWorkflowEnum.RESPONSIVE_SET && "LIBRARY" === t.subscriptionStatus && t.fullPage ? NK : d ? _$$Ib : a || s || o ? FF : N4, [a, s, o, t, d]);
   return jsx("div", {
     className: Ol,
     style: r && x ? void 0 : {
@@ -424,7 +424,7 @@ function ea({
       }),
       style: C,
       "data-testid": `library-item-tile-thumb-${t.name}`,
-      children: t.type === PW.VARIABLE_SET ? jsx(es, {
+      children: t.type === PrimaryWorkflowEnum.VARIABLE_SET ? jsx(es, {
         variableSetID: t.node_id
       }) : E ? jsx(Fragment, {
         children: E

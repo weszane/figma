@@ -4,7 +4,7 @@ import { getFeatureFlags } from '../905/601108';
 import { FEditorType } from '../figma_app/53721';
 import { qy, uk } from '../figma_app/216057';
 import { openFileKeyAtom } from '../figma_app/516028';
-import { Wh } from '../figma_app/615482';
+import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { td } from '../figma_app/827216';
 import { XE } from '../figma_app/976749';
 export function $$p17() {
@@ -12,21 +12,21 @@ export function $$p17() {
   let e = debugState?.getState()?.selectedView;
   return e.view === 'fullscreen' && XE(e) === FEditorType.Design;
 }
-let $$_6 = Wh(() => atom(new Map()));
-let $$h13 = Wh(() => atom(new Map(new Map())));
-let $$m2 = Wh(() => atom(e => e($$g5).size));
-let $$g5 = Wh(() => atom(new Set()));
-let $$f0 = Wh(() => atom(new Set()));
-let $$E8 = Wh(() => atom(new Set()));
-let $$y9 = Wh(() => atom(null));
-let $$b1 = Wh(() => atom(new Map()));
-let $$T21 = Wh(() => atom({
+let $$_6 = setupRemovableAtomFamily(() => atom(new Map()));
+let $$h13 = setupRemovableAtomFamily(() => atom(new Map(new Map())));
+let $$m2 = setupRemovableAtomFamily(() => atom(e => e($$g5).size));
+let $$g5 = setupRemovableAtomFamily(() => atom(new Set()));
+let $$f0 = setupRemovableAtomFamily(() => atom(new Set()));
+let $$E8 = setupRemovableAtomFamily(() => atom(new Set()));
+let $$y9 = setupRemovableAtomFamily(() => atom(null));
+let $$b1 = setupRemovableAtomFamily(() => atom(new Map()));
+let $$T21 = setupRemovableAtomFamily(() => atom({
   libraryVariables: [],
   libraryVariableSetIdToSet: {},
   status: 'uninitialized',
   libraryKeys: new Set()
 }));
-let $$I15 = Wh(() => atom(e => {
+let $$I15 = setupRemovableAtomFamily(() => atom(e => {
   let t = e(uk);
   let r = e($$T21);
   let n = e($$O18);
@@ -39,7 +39,7 @@ let $$I15 = Wh(() => atom(e => {
   });
   return i;
 }));
-let $$S14 = Wh(() => atom(e => {
+let $$S14 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$O18);
   let r = e(qy);
   return {
@@ -47,7 +47,7 @@ let $$S14 = Wh(() => atom(e => {
     libraryVariableSets: e($$T21).libraryVariableSetIdToSet
   };
 }));
-let $$v12 = Wh(() => atom({
+let $$v12 = setupRemovableAtomFamily(() => atom({
   status: 'loading',
   subscribedStylesByFileKey: {},
   allStyles: [],
@@ -55,17 +55,17 @@ let $$v12 = Wh(() => atom({
 }));
 let $$A19 = atom(td.UNINITIALIZED);
 let $$x11 = atom([]);
-let $$N16 = Wh(() => atom(new Map()));
-let $$C10 = Wh(() => atom(new Map()));
-let $$w4 = Wh(() => atom(void 0));
-let $$O18 = Wh(() => atom(e => {
+let $$N16 = setupRemovableAtomFamily(() => atom(new Map()));
+let $$C10 = setupRemovableAtomFamily(() => atom(new Map()));
+let $$w4 = setupRemovableAtomFamily(() => atom(void 0));
+let $$O18 = setupRemovableAtomFamily(() => atom(e => {
   let t = e($$w4);
   let r = e(openFileKeyAtom);
   return t?.has(r) ?? !1;
 }));
-let $$R7 = Wh(() => atom(new Set()));
-let $$L20 = Wh(() => atom(null));
-let $$P3 = Wh(() => atom([]));
+let $$R7 = setupRemovableAtomFamily(() => atom(new Set()));
+let $$L20 = setupRemovableAtomFamily(() => atom(null));
+let $$P3 = setupRemovableAtomFamily(() => atom([]));
 export const F9 = $$f0;
 export const Iy = $$b1;
 export const Kk = $$m2;

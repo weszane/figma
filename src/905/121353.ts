@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { t as _$$t } from "../905/150656";
 import { $n } from "../905/521428";
 import { k as _$$k } from "../905/443820";
@@ -463,9 +463,9 @@ export function $$em0(e) {
   } = e;
   let o = selectUser();
   let l = _$$h2(figFile);
-  let d = useSelector(e => xw(e) ?? void 0, c2);
+  let d = useSelector(e => xw(e) ?? void 0, deepEqual);
   let c = sZ();
-  let u = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
+  let u = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let p = useSelector(e => e.authedProfilesById);
   let m = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let h = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);

@@ -8,7 +8,7 @@ import { FPublicationStatusType, FTemplateCategoryType, FFileType } from "../fig
 import { M4 } from "../905/713695";
 import { k2 } from "../figma_app/10554";
 import { $S } from "../905/918620";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { t as _$$t2 } from "../905/150656";
 import { $n } from "../905/521428";
 import { k as _$$k } from "../905/443820";
@@ -77,7 +77,7 @@ import { sZ } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { xw } from "../figma_app/951233";
 import { vt, U as _$$U } from "../figma_app/45218";
-import { o as _$$o3 } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { e0 as _$$e3 } from "../905/696396";
 import { pz } from "../figma_app/825489";
 import { KT, Cd, DK, $o, ME, jc } from "../905/54042";
@@ -788,9 +788,9 @@ function ej(e) {
     existingHubFile
   } = e;
   let s = selectUser();
-  let o = useSelector(e => xw(e) ?? void 0, c2);
+  let o = useSelector(e => xw(e) ?? void 0, deepEqual);
   let l = sZ();
-  let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
+  let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let c = useSelector(e => e.authedProfilesById);
   let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let p = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
@@ -806,7 +806,7 @@ function ej(e) {
         localComponents: []
       };
     }
-  }, c2);
+  }, deepEqual);
   let f = ev({
     ...e,
     user: s,
@@ -824,8 +824,8 @@ function ej(e) {
   });
   let [_, A] = useAtomValueAndSetter(pz);
   useLayoutEffect(() => {
-    if (_ !== _$$o3.HUBFILE) {
-      A(_$$o3.HUBFILE);
+    if (_ !== LibrarySourceEnum.HUBFILE) {
+      A(LibrarySourceEnum.HUBFILE);
       return () => {
         A(_);
       };
@@ -1772,9 +1772,9 @@ function tc(e) {
   } = e;
   let s = selectUser();
   let o = _$$h4(figFile);
-  let l = useSelector(e => xw(e) ?? void 0, c2);
+  let l = useSelector(e => xw(e) ?? void 0, deepEqual);
   let d = sZ();
-  let c = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
+  let c = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let u = useSelector(e => e.authedProfilesById);
   let p = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let h = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);

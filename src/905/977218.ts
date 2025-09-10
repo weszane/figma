@@ -1,5 +1,5 @@
 import { debounce } from "../905/915765";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
 import { PerfTimer } from "../905/609396";
@@ -64,7 +64,7 @@ let $$v8 = createOptimistThunk((e, t) => {
   let a = e.getState();
   let s = a.search.parameters;
   s.query === i.query && (s.searchModelType !== i.searchModelType || s.searchScope !== i.searchScope) && _$$vj.Session.trackModelOrScopeChange(t.searchModelType, t.searchScope);
-  a.search.responses && null !== a.search.responses[s.searchModelType] || c2(i, s) || e.dispatch($$L0({
+  a.search.responses && null !== a.search.responses[s.searchModelType] || deepEqual(i, s) || e.dispatch($$L0({
     precacheInactiveTypes: !0,
     searchTypeBehavior: n
   }));
@@ -143,7 +143,7 @@ let $$N9 = createOptimistThunk((e, t) => {
     let l = t.facetFilters ?? null;
     let d = D(i.selectedView.view) || !!t.overrideIsFullResultsView;
     let c = d || t.query.length < 500;
-    if ((d || t.query.length < 500) && JSON.stringify(a) === JSON.stringify(s) && !t.forceRefreshSearchResults && c2(o, l)) {
+    if ((d || t.query.length < 500) && JSON.stringify(a) === JSON.stringify(s) && !t.forceRefreshSearchResults && deepEqual(o, l)) {
       e.dispatch($$v8({
         searchModelType: t.searchModelType,
         searchScope: t.searchScope,

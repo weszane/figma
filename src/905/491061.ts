@@ -21,7 +21,7 @@ export class RetainedPromiseManager {
     this.deferred = this.createDeferred()
 
     // Ensure promise errors are caught to avoid unhandled rejections.
-    this.deferred.promise = this.deferred.promise.catch(() => {})
+    this.deferred.promise = this.deferred.promise.catch(() => { })
   }
 
   /**
@@ -30,7 +30,7 @@ export class RetainedPromiseManager {
    */
   private createDeferred() {
     const deferred = createDeferredPromise()
-    deferred.promise = deferred.promise.catch(() => {})
+    deferred.promise = deferred.promise.catch(() => { })
     return deferred
   }
 

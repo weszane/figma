@@ -1,4 +1,4 @@
-import type { FeatureFlags } from '../../types/global'
+import type { FeatureFlags } from '../../../types/global'
 import { getFeatureFlags } from '../905/601108'
 
 /**

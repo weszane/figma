@@ -4,7 +4,7 @@ import a from "../vendor/128080";
 import { v4, qp, mn, jq } from "../figma_app/761118";
 import { generateUUIDv4 } from "../905/871474";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { uJ } from "../figma_app/646357";
 import { $p } from "../figma_app/155728";
 import { V } from "../905/693394";
@@ -12,12 +12,12 @@ import { b } from "../905/857767";
 import { dC, Yc } from "../905/820169";
 import { uk } from "../figma_app/216057";
 var s = a;
-let f = Wh(() => atom(null));
-let $$E3 = Wh(() => atom(e => e(f), (e, t, r) => {
+let f = setupRemovableAtomFamily(() => atom(null));
+let $$E3 = setupRemovableAtomFamily(() => atom(e => e(f), (e, t, r) => {
   t(f, r);
 }));
-let $$y6 = Wh(() => atom(null));
-let $$b4 = Wh(() => atom(null));
+let $$y6 = setupRemovableAtomFamily(() => atom(null));
+let $$b4 = setupRemovableAtomFamily(() => atom(null));
 let $$T1 = atom(null);
 let $$I2 = atom(!1);
 let $$S7 = atom(null);

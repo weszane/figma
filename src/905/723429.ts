@@ -20,7 +20,7 @@ import { hV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { MH, dM, cM } from "../figma_app/803787";
 import { MH as _$$MH } from "../figma_app/141508";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Ag } from "../figma_app/407767";
 import { hB } from "../figma_app/609511";
 import { B9, Py } from "../figma_app/346422";
@@ -160,7 +160,7 @@ async function D(e) {
         root: t,
         includeNestedComponents: !0,
         includeComponentProps: !1
-      }).map(e => e.type === PW.COMPONENT ? e.key : e.stateComponentKey);
+      }).map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.key : e.stateComponentKey);
       i.push({
         node: t,
         childComponentCount: n.length,

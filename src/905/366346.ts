@@ -1,12 +1,12 @@
-import { PanelType } from "../figma_app/763686";
-import { SceneGraphUnavailableError } from "../figma_app/518682";
-import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { customHistory } from "../905/612521";
-import { serializeQuery } from "../905/634134";
-import { buildUrlPath } from "../905/760074";
-import { EO } from "../905/691205";
+import { PanelType } from "src/figma_app/763686";
+import { SceneGraphUnavailableError } from "src/figma_app/518682";
+import { isValidSessionLocalID, parseSessionLocalID } from "src/905/871411";
+import { getSingletonSceneGraph } from "src/905/700578";
+import { getFeatureFlags } from "src/905/601108";
+import { customHistory } from "src/905/612521";
+import { serializeQuery } from "src/905/634134";
+import { buildUrlPath } from "src/905/760074";
+import { EO } from "src/905/691205";
 export function $$p4(e, t) {
   (e = e ? e.slice(1) : "") && ("commentPreferences" === e ? t.showCommentPreferencesPicker = !0 : t.commentThreadId = e);
 }

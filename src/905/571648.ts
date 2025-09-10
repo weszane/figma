@@ -4,7 +4,7 @@ import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useStableMemo } from "../905/19536";
 import { parsePxInt } from "../figma_app/783094";
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { Oo } from "../905/709171";
 import { isBranchAlt, matchesSourceKey } from "../905/760074";
 import { Fl } from "../figma_app/236178";
@@ -71,7 +71,7 @@ export function $$D5(e, t, i) {
     marginBottom: i === t.length - 1 ? HU0 : void 0
   } : e;
 }
-let L = _$$f();
+let L = getFileKey();
 export function $$F6(e, t) {
   let i = selectCurrentFile();
   let a = je();
@@ -99,7 +99,7 @@ export function $$F6(e, t) {
     libraries: y
   }, shallowEqual);
 }
-let M = _$$f();
+let M = getFileKey();
 export function $$j4({
   styleType: e,
   initialSelectedSubscribedStyle: t,
@@ -142,7 +142,7 @@ export function $$j4({
     stylesByFileKey
   }, shallowEqual);
 }
-let U = _$$f();
+let U = getFileKey();
 export function $$B3(e, t, i, d, c, u) {
   let p = selectCurrentFile();
   let m = p?.key ?? "__OPEN_FILE_KEY__";

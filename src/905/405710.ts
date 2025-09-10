@@ -1,139 +1,261 @@
-import { assert } from "../figma_app/465776";
-import { c2 } from "../905/382883";
-import { ResponsiveSetIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
-import { Fullscreen, Thumbnail } from "../figma_app/763686";
-import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { hp } from "../vendor/162266";
-import { logError } from "../905/714362";
-import { Mk } from "../figma_app/31188";
-import { Wh } from "../figma_app/615482";
-import { PW } from "../figma_app/633080";
-export function $$m11(e) {
-  let t = Fullscreen.getDefaultStateForLocalStateGroup(e) || e;
-  let [i, n] = Thumbnail.generateThumbnailForNode(t, 768, 768, 2, {});
-  return n;
+import { Buffer } from 'node:buffer'
+import { deepEqual } from '../905/382883'
+import { logError } from '../905/714362'
+import { atom, createRemovableAtomFamily, useAtomValueAndSetter } from '../figma_app/27355'
+import { AssetAtomMap } from '../figma_app/31188'
+import { CodeComponentIdHandler, ResponsiveSetIdHandler } from '../figma_app/243058'
+import { assert } from '../figma_app/465776'
+import { setupRemovableAtomFamily } from '../figma_app/615482'
+import { PrimaryWorkflowEnum } from '../figma_app/633080'
+import { Fullscreen, Thumbnail } from '../figma_app/763686'
+/**
+ * Generates a thumbnail for a node using Fullscreen and Thumbnail utilities.
+ * @param node - The node to generate a thumbnail for.
+ * @returns The generated thumbnail.
+ * (Original: $$m11)
+ */
+export function generateThumbnail(node: any): any {
+  const defaultState = Fullscreen.getDefaultStateForLocalStateGroup(node) || node
+  const [, thumbnail] = Thumbnail.generateThumbnailForNode(defaultState, 768, 768, 2, {})
+  return thumbnail
 }
-export function $$h7(e) {
-  return !!$$A0(e.style_type) && !(e.meta && e.meta.style_thumbnail);
+
+/**
+ * Checks if the style type is valid and if the meta does not have a style_thumbnail.
+ * @param asset - The asset to check.
+ * @returns True if valid, false otherwise.
+ * (Original: $$h7)
+ */
+export function isValidStyleType(asset: any): boolean {
+  return isStyleType(asset.style_type) && !(asset.meta && asset.meta.style_thumbnail)
 }
-export function $$g2(e) {
-  let t = e.meta?.style_thumbnail;
-  return t && "INVALID" !== t.type && t || null;
+
+/**
+ * Retrieves the style thumbnail from meta if valid.
+ * @param asset - The asset to check.
+ * @returns The style thumbnail or null.
+ * (Original: $$g2)
+ */
+export function getStyleThumbnail(asset: any): any | null {
+  const thumbnail = asset.meta?.style_thumbnail
+  return thumbnail && thumbnail.type !== 'INVALID' ? thumbnail : null
 }
-export function $$f6(e) {
+
+/**
+ * Returns a new asset object with parsed meta.
+ * @param asset - The asset to process.
+ * @returns The new asset object.
+ * (Original: $$f6)
+ */
+export function withParsedMeta(asset: any): any {
   return {
-    ...e,
-    meta: $$_9(e.meta)
-  };
-}
-export function $$_9(e) {
-  if ("string" == typeof e) try {
-    return JSON.parse(e);
-  } catch (e) {
-    return {};
+    ...asset,
+    meta: parseMeta(asset.meta),
   }
-  return e;
 }
-export function $$A0(e) {
-  return "TEXT" === e || "FILL" === e || "EFFECT" === e || "GRID" === e;
-}
-export function $$y10(e) {
-  return "EFFECT" === e || "GRID" === e;
-}
-export function $$b1(e, t) {
-  return "FILL" === t && e.fillPaints ? {
-    type: t,
-    fillPaints: e.fillPaints
-  } : "EFFECT" === t && e.effects ? {
-    type: t,
-    effects: e.effects
-  } : "GRID" === t && e.layoutGrids ? {
-    type: t,
-    layoutGrids: e.layoutGrids
-  } : "TEXT" === t && (e.fontSize || e.lineHeight) ? {
-    type: t,
-    metrics: {
-      fontSize: e.fontSize,
-      lineHeight: e.lineHeight
+
+/**
+ * Parses meta if it's a string, otherwise returns as is.
+ * @param meta - The meta to parse.
+ * @returns The parsed meta object.
+ * (Original: $$_9)
+ */
+export function parseMeta(meta: any): any {
+  if (typeof meta === 'string') {
+    try {
+      return JSON.parse(meta)
     }
-  } : {
-    type: "INVALID"
-  };
-}
-export function $$v5(e) {
-  if (e.meta && e.meta.style_thumbnail && "FILL" === e.meta.style_thumbnail.type) {
-    let t = e.meta.style_thumbnail.fillPaints;
-    return 1 === t.length && "SOLID" === t[0].type;
+    catch {
+      return {}
+    }
   }
-  return !0;
+  return meta
 }
-export function $$I8(e) {
-  if ("FILL" !== e.style_type) return !1;
-  let t = e.meta && e.meta.style_thumbnail;
-  if (!t || "FILL" !== t.type) return !1;
-  for (let e of t.fillPaints) if (!e.opacity || e.opacity > 0) return !1;
-  return !0;
+
+/**
+ * Checks if the style type is one of the supported types.
+ * @param type - The style type.
+ * @returns True if supported, false otherwise.
+ * (Original: $$A0)
+ */
+export function isStyleType(type: string): boolean {
+  return type === 'TEXT' || type === 'FILL' || type === 'EFFECT' || type === 'GRID'
 }
-let E = e => {
-  let t = null;
-  switch (e.type) {
-    case PW.RESPONSIVE_SET:
-      t = ResponsiveSetIdHandler.toGuidStrIfLocal(e.assetId);
-      break;
-    case PW.CODE_COMPONENT:
-      t = CodeComponentIdHandler.toGuidStrIfLocal(e.assetId);
+
+/**
+ * Checks if the style type is EFFECT or GRID.
+ * @param type - The style type.
+ * @returns True if EFFECT or GRID, false otherwise.
+ * (Original: $$y10)
+ */
+export function isEffectOrGrid(type: string): boolean {
+  return type === 'EFFECT' || type === 'GRID'
+}
+
+/**
+ * Generates a style thumbnail object based on type and asset properties.
+ * @param asset - The asset to process.
+ * @param type - The style type.
+ * @returns The style thumbnail object.
+ * (Original: $$b1)
+ */
+export function createStyleThumbnail(asset: any, type: string): any {
+  if (type === 'FILL' && asset.fillPaints) {
+    return { type, fillPaints: asset.fillPaints }
   }
-  return t || (logError("thumbnails", "Could not parse nodeId for thumbnail generation", {
-    assetId: e.assetId,
-    type: e.type
-  }), null);
-};
-let x = createRemovableAtomFamily(e => {
-  let t = E(e);
-  assert(!!t, "A valid nodeId is required for local asset thumbnail atom");
-  return Wh(() => atom(null));
-}, c2);
-let S = createRemovableAtomFamily(e => atom(t => t(x(e)), (t, i, n) => {
-  let r = x(e);
-  let a = t(Mk[e.type].local)[e.assetId];
-  if (!a) {
-    logError("thumbnails", "Could not find local asset for thumbnail generation", {
-      assetId: e.assetId,
-      type: e.type
-    });
-    return null;
+  if (type === 'EFFECT' && asset.effects) {
+    return { type, effects: asset.effects }
   }
-  let s = a.version;
-  let o = t(r);
-  if (o && s !== o.version || null === o) {
-    let t = E(e);
-    if (!t) return null;
-    i(r, function (e, t) {
-      let i = $$m11(e);
-      return {
-        data: hp.from(i).toString("base64"),
-        version: t
-      };
-    }(t, s));
+  if (type === 'GRID' && asset.layoutGrids) {
+    return { type, layoutGrids: asset.layoutGrids }
   }
-}), c2);
-export function $$w3(e) {
-  let [t, i] = useAtomValueAndSetter(S(e));
-  i(void 0);
-  return t;
+  if (type === 'TEXT' && (asset.fontSize || asset.lineHeight)) {
+    return {
+      type,
+      metrics: {
+        fontSize: asset.fontSize,
+        lineHeight: asset.lineHeight,
+      },
+    }
+  }
+  return { type: 'INVALID' }
 }
-export function $$C4(e) {
-  return `data:image/png;base64,${e}`;
+
+/**
+ * Checks if the style thumbnail is a valid solid fill.
+ * @param asset - The asset to check.
+ * @returns True if valid, false otherwise.
+ * (Original: $$v5)
+ */
+export function isValidSolidFill(asset: any): boolean {
+  if (asset.meta && asset.meta.style_thumbnail && asset.meta.style_thumbnail.type === 'FILL') {
+    const fills = asset.meta.style_thumbnail.fillPaints
+    return fills.length === 1 && fills[0].type === 'SOLID'
+  }
+  return true
 }
-export const Kb = $$A0;
-export const No = $$b1;
-export const QH = $$g2;
-export const TJ = $$w3;
-export const U8 = $$C4;
-export const XV = $$v5;
-export const aV = $$f6;
-export const bi = $$h7;
-export const fP = $$I8;
-export const iX = $$_9;
-export const lP = $$y10;
-export const lQ = $$m11;
+
+/**
+ * Checks if the fill style is fully transparent.
+ * @param asset - The asset to check.
+ * @returns True if fully transparent, false otherwise.
+ * (Original: $$I8)
+ */
+export function isFullyTransparentFill(asset: any): boolean {
+  if (asset.style_type !== 'FILL')
+    return false
+  const thumbnail = asset.meta?.style_thumbnail
+  if (!thumbnail || thumbnail.type !== 'FILL')
+    return false
+  for (const fill of thumbnail.fillPaints) {
+    if (!fill.opacity || fill.opacity > 0)
+      return false
+  }
+  return true
+}
+
+/**
+ * Parses the assetId for thumbnail generation based on workflow type.
+ * @param asset - The asset to process.
+ * @returns The parsed nodeId or null.
+ * (Original: E)
+ */
+export function parseNodeIdForThumbnail(asset: any): string | null {
+  let nodeId: string | null = null
+  switch (asset.type) {
+    case PrimaryWorkflowEnum.RESPONSIVE_SET:
+      nodeId = ResponsiveSetIdHandler.toGuidStrIfLocal(asset.assetId)
+      break
+    case PrimaryWorkflowEnum.CODE_COMPONENT:
+      nodeId = CodeComponentIdHandler.toGuidStrIfLocal(asset.assetId)
+      break
+  }
+  if (!nodeId) {
+    logError('thumbnails', 'Could not parse nodeId for thumbnail generation', {
+      assetId: asset.assetId,
+      type: asset.type,
+    })
+    return null
+  }
+  return nodeId
+}
+
+/**
+ * Atom family for local asset thumbnail state.
+ * (Original: x)
+ */
+export const localAssetThumbnailAtomFamily = createRemovableAtomFamily((asset: any) => {
+  const nodeId = parseNodeIdForThumbnail(asset)
+  assert(!!nodeId, 'A valid nodeId is required for local asset thumbnail atom')
+  return setupRemovableAtomFamily(() => atom(null))
+}, deepEqual)
+
+/**
+ * Atom family for managing thumbnail generation and caching.
+ * (Original: S)
+ */
+export const thumbnailAtomFamily = createRemovableAtomFamily((asset: any) =>
+  atom(
+    get => get(localAssetThumbnailAtomFamily(asset)),
+    (get, set, _update) => {
+      const localAtom = localAssetThumbnailAtomFamily(asset)
+      const localAsset = get(AssetAtomMap[asset.type].local)[asset.assetId]
+      if (!localAsset) {
+        logError('thumbnails', 'Could not find local asset for thumbnail generation', {
+          assetId: asset.assetId,
+          type: asset.type,
+        })
+        return null
+      }
+      const version = localAsset.version
+      const cached: any = get(localAtom)
+      if ((cached && version !== cached.version) || cached === null) {
+        const nodeId = parseNodeIdForThumbnail(asset)
+        if (!nodeId)
+          return null
+        set(localAtom, (() => {
+          const thumbnail = generateThumbnail(nodeId)
+          return {
+            data: Buffer.from(thumbnail).toString('base64'),
+            version,
+          }
+        })())
+      }
+    },
+  ), deepEqual)
+
+/**
+ * Retrieves and resets the thumbnail atom value.
+ * @param asset - The asset to process.
+ * @returns The thumbnail atom value.
+ * (Original: $$w3)
+ */
+export function getAndResetThumbnailAtom(asset: any): any {
+  const [value, setter] = useAtomValueAndSetter(thumbnailAtomFamily(asset))
+  setter(void 0)
+  return value
+}
+
+/**
+ * Converts a base64 string to a PNG data URL.
+ * @param base64 - The base64 string.
+ * @returns The PNG data URL.
+ * (Original: $$C4)
+ */
+export function toPngDataUrl(base64: string): string {
+  return `data:image/png;base64,${base64}`
+}
+
+// Exported aliases for refactored functions
+export const Kb = isStyleType
+export const No = createStyleThumbnail
+export const QH = getStyleThumbnail
+export const TJ = getAndResetThumbnailAtom
+export const U8 = toPngDataUrl
+export const XV = isValidSolidFill
+export const aV = withParsedMeta
+export const bi = isValidStyleType
+export const fP = isFullyTransparentFill
+export const iX = parseMeta
+export const lP = isEffectOrGrid
+export const lQ = generateThumbnail

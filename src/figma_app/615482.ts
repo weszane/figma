@@ -2,36 +2,81 @@ import { atom } from 'jotai';
 import { debugState } from '../905/407919';
 import { atomStoreManager, createRemovableAtomFamily } from '../figma_app/27355';
 import { openFileKeyAtom } from '../figma_app/516028';
-let s = {
-  preserveValue: !1
+
+/**
+ * Default options for removable atom family.
+ * (original: s)
+ */
+const defaultRemovableAtomOptions = {
+  preserveValue: false
 };
-export function $$o1(e, t = s) {
-  let r = createRemovableAtomFamily(e);
-  return atom(e => {
-    let n = debugState ? e(openFileKeyAtom) : 'FILE_KEY';
-    t.preserveValue || r.setShouldRemove((e, t) => t !== n);
-    return e(r(n));
-  }, (e, t, ...n) => t(r(e(openFileKeyAtom)), ...n));
-}
-let l = [];
-export function $$d2(e) {
-  let t = atom(e);
-  l.push({
-    atomRef: new WeakRef(t),
-    initialValue: e
+
+/**
+ * Creates a removable atom family with optional preservation of values.
+ * @param initializer - Function to initialize atom family.
+ * @param options - Options to control preservation behavior.
+ * @returns Atom family instance.
+ * (original: $$o1)
+ */
+export const setupRemovableAtomFamily = (
+  initializer: Parameters<typeof createRemovableAtomFamily>[0],
+  options = defaultRemovableAtomOptions
+) => {
+  const removableAtomFamily = createRemovableAtomFamily(initializer);
+
+  return atom(
+    get => {
+      const fileKey = debugState ? get(openFileKeyAtom) : 'FILE_KEY';
+      if (!options.preserveValue) {
+        removableAtomFamily.setShouldRemove((_, key) => key !== fileKey);
+      }
+      return get(removableAtomFamily(fileKey));
+    },
+    (get, set, ...args) => set(removableAtomFamily(get(openFileKeyAtom)), ...args)
+  );
+};
+
+/**
+ * Stores references to created atoms and their initial values.
+ * (original: l)
+ */
+const atomReferences: {
+  atomRef: WeakRef<ReturnType<typeof atom>>;
+  initialValue: unknown;
+}[] = [];
+
+/**
+ * Creates an atom and tracks its reference and initial value.
+ * @param initialValue - The initial value for the atom.
+ * @returns The created atom.
+ * (original: $$d2)
+ */
+export const createTrackedAtom = <T>(initialValue: T) => {
+  const trackedAtom = atom(initialValue);
+  atomReferences.push({
+    atomRef: new WeakRef(trackedAtom),
+    initialValue
   });
-  return t;
-}
-export function $$c0() {
-  for (let e = l.length - 1; e >= 0; e--) {
-    let {
-      atomRef,
-      initialValue
-    } = l[e];
-    let i = atomRef.deref();
-    i ? atomStoreManager.set(i, initialValue) : l.splice(e, 1);
+  return trackedAtom;
+};
+
+/**
+ * Resets all tracked atoms to their initial values, removing any that have been garbage collected.
+ * (original: $$c0)
+ */
+export const resetTrackedAtoms = () => {
+  for (let i = atomReferences.length - 1; i >= 0; i--) {
+    const { atomRef, initialValue } = atomReferences[i];
+    const atomInstance = atomRef.deref();
+    if (atomInstance) {
+      atomStoreManager.set(atomInstance, initialValue);
+    } else {
+      atomReferences.splice(i, 1);
+    }
   }
-}
-export const Bc = $$c0;
-export const Wh = $$o1;
-export const rt = $$d2;
+};
+
+// Export refactored names for external usage
+export const Bc = resetTrackedAtoms;
+export const Wh = setupRemovableAtomFamily;
+export const rt = createTrackedAtom;

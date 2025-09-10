@@ -1,6 +1,6 @@
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { atom, atomStoreManager } from "../figma_app/27355";
-export let $$i1 = Wh(() => atom({}));
+export let $$i1 = setupRemovableAtomFamily(() => atom({}));
 function a(e) {
   atomStoreManager.set($$i1, e);
 }

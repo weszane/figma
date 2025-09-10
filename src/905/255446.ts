@@ -7,7 +7,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { LRUCache } from "../905/196201";
 import { useHandleInputEvent } from "../figma_app/878298";
 import { Ok, ux, NY, uW, xj } from "../figma_app/851625";
-import { Bx } from "../figma_app/191804";
+import { getThemeBackgroundColor } from "../figma_app/191804";
 import { f as _$$f } from "../905/931050";
 import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
@@ -23,7 +23,7 @@ import { ij } from "../figma_app/745458";
 import { f5, t, $4, O1 } from "../figma_app/889655";
 import { bd } from "../905/557338";
 import { _Q, kc } from "../figma_app/141508";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { se, TM } from "../figma_app/435826";
 import { jO, LB, T7, V9, cB } from "../figma_app/524618";
 let $$N6 = 800;
@@ -89,10 +89,10 @@ export function $$F1(e) {
     stateGroupUpdatesForAllPages
   } = useSelector(ij);
   let c = useSelector(e => e.mirror.appModel.currentPage);
-  let u = useMemo(() => [...componentUpdatesForAllPages, ...stateGroupUpdatesForAllPages].reduce((e, t) => (t.type === PW.STATE_GROUP ? e[t.key] = {
+  let u = useMemo(() => [...componentUpdatesForAllPages, ...stateGroupUpdatesForAllPages].reduce((e, t) => (t.type === PrimaryWorkflowEnum.STATE_GROUP ? e[t.key] = {
     updateAsset: t,
     instanceIdsToUpdate: jO(t, c)
-  } : t.type === PW.COMPONENT && t.component_key && (e[t.component_key] = {
+  } : t.type === PrimaryWorkflowEnum.COMPONENT && t.component_key && (e[t.component_key] = {
     updateAsset: t,
     instanceIdsToUpdate: LB(t, c)
   }), e), Object.create(null)), [componentUpdatesForAllPages, c, stateGroupUpdatesForAllPages]);
@@ -217,7 +217,7 @@ export function $$j2(e) {
   } = function (e, t, i, o) {
     let l = useDispatch();
     let d = useSelector(e => e.theme.visibleTheme);
-    let c = Bx(d);
+    let c = getThemeBackgroundColor(d);
     let g = selectWithShallowEqual(e => selectOpenFileKey(e) || "");
     let y = Oo(e, g);
     let b = useMemo(() => {
@@ -286,7 +286,7 @@ export function $$j2(e) {
 }
 function U(e, t, i, a) {
   let o = useSelector(e => e.theme.visibleTheme);
-  let l = Bx(o);
+  let l = getThemeBackgroundColor(o);
   let [d, c] = useState([Ok(), Ok()]);
   let m = useRef(null);
   useEffect(() => {
@@ -309,7 +309,7 @@ function U(e, t, i, a) {
       let {
         beforeThumbnail,
         afterThumbnail
-      } = e.type === PW.COMPONENT && null != e.component_key ? Fullscreen.generateComponentUpdateInstanceThumbnails(t.instanceId, e.component_key, e.oldSubscribedKeysToUpdate, e.localIdsToUpdate, l, 2, i.value) : e.type === PW.STATE_GROUP && null != e.key ? Fullscreen.generateStateUpdateInstanceThumbnails(t.instanceId, e.key, e.newStateKeyToOutdatedItems, l, 2, i.value) : {
+      } = e.type === PrimaryWorkflowEnum.COMPONENT && null != e.component_key ? Fullscreen.generateComponentUpdateInstanceThumbnails(t.instanceId, e.component_key, e.oldSubscribedKeysToUpdate, e.localIdsToUpdate, l, 2, i.value) : e.type === PrimaryWorkflowEnum.STATE_GROUP && null != e.key ? Fullscreen.generateStateUpdateInstanceThumbnails(t.instanceId, e.key, e.newStateKeyToOutdatedItems, l, 2, i.value) : {
         beforeThumbnail: void 0,
         afterThumbnail: void 0
       };
@@ -340,7 +340,7 @@ export function $$B0(e, t, i) {
   };
 }
 function V(e, t) {
-  return e.type === PW.COMPONENT ? !!t && t.key === e.component_key && t.version === e.content_hash : !!t && t.key === e.key && t.version === e.version;
+  return e.type === PrimaryWorkflowEnum.COMPONENT ? !!t && t.key === e.component_key && t.version === e.content_hash : !!t && t.key === e.key && t.version === e.version;
 }
 function G(e, t, i, n, r, a) {
   let s = e.content_hash;

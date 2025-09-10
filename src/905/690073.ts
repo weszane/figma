@@ -1,4 +1,4 @@
-import type { Fn } from '../../types/global'
+import type { Fn } from '../../../types/global'
 import { addUnique, removeElement } from '../figma_app/656233'
 
 /**

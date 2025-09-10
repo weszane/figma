@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { qN, oB } from "../figma_app/273493";
+import { rgbToHsv, rgbToHsl } from "../figma_app/273493";
 import { ColorFormatEnum } from "../figma_app/763686";
 import { GP } from "../figma_app/15927";
 import { F } from "../905/989956";
@@ -56,10 +56,10 @@ export let $$h0 = (() => {
           if (r?.eyedropperFormat) return c.rgba(t, n, r?.eyedropperFormat);
           return F.format(t);
         case ColorFormatEnum.HSB:
-          let d = qN(t);
+          let d = rgbToHsv(t);
           return c.hsba(d, n, r?.eyedropperFormat);
         case ColorFormatEnum.HSL:
-          let u = oB(t);
+          let u = rgbToHsl(t);
           return c.hsla(u, n, r?.eyedropperFormat);
         case ColorFormatEnum.UIColor:
           return c.uicolor(t, n, r?.shortform ?? !1);

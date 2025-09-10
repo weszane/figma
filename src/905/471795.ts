@@ -3,9 +3,9 @@ import { flatten, mapFilter } from "../figma_app/656233";
 import { VariableDataType } from "../figma_app/763686";
 import { useMemoStable } from "../905/19536";
 import o from "../vendor/728460";
-import { F_ } from "../figma_app/191804";
+import { colorToHexString } from "../figma_app/191804";
 import { hg } from "../figma_app/852050";
-import { GI, U$ } from "../figma_app/633080";
+import { isExtension, isLocalSubscriptionStatus } from "../figma_app/633080";
 import { gX, uC } from "../905/831801";
 import { Ex, rN } from "../905/782020";
 var l = o;
@@ -57,7 +57,7 @@ export function $$g1({
               n = String(t.value);
               break;
             case VariableDataType.COLOR:
-              n = F_(t.value);
+              n = colorToHexString(t.value);
               break;
             case VariableDataType.ALIAS:
               let o = i[t.value];
@@ -134,11 +134,11 @@ export function $$y6(e, t) {
   if ("group" !== i.type) return i.variable;
 }
 export function $$b5(e, t, i, n) {
-  let r = GI(e);
+  let r = isExtension(e);
   let a = t.variableSetId === e.node_id;
   let s = r && !a;
   return r => {
-    if (!U$(e)) return null;
+    if (!isLocalSubscriptionStatus(e)) return null;
     let a = rN(e => i?.(t.node_id, r, e) ?? !1, !!i);
     let o = rN(i => n?.(e.node_id, t.node_id, r, i) ?? !1, !!n);
     return s ? o : a;

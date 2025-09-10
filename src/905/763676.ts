@@ -44,7 +44,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { B as _$$B2 } from "../905/506188";
 import { LibraryFileSelect } from "../figma_app/43951";
 import { je } from "../figma_app/155728";
-import { PW, Yu } from "../figma_app/633080";
+import { PrimaryWorkflowEnum, NO_TEAM } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { lX } from "../figma_app/588397";
 import { Qj } from "../905/825399";
@@ -61,7 +61,7 @@ let eo = "replace_libraries_modal--fileMapRowItem--XUWtR";
 function ed({
   item: e
 }) {
-  return e.type === PW.STYLE ? jsx("div", {
+  return e.type === PrimaryWorkflowEnum.STYLE ? jsx("div", {
     style: {
       marginRight: 12
     },
@@ -97,7 +97,7 @@ function ec({
   let p = useMemo(() => u.result?.filter(t => t.library_key !== e), [u, e]);
   let m = je();
   let h = useMemo(() => m.data?.filter(t => "community" === t.libraryType && t.libraryKey !== e) ?? [], [m, e]);
-  let _ = c?.teamId || Yu;
+  let _ = c?.teamId || NO_TEAM;
   let A = useMemo(() => {
     let e = new Set();
     p.forEach(t => {
@@ -318,13 +318,13 @@ function eu({
         children: [l && u, o.styles.size > 0 && jsx(em, {
           fromLibraryKey: e,
           toLibraryKey: t,
-          libraryItemsType: PW.STYLE,
+          libraryItemsType: PrimaryWorkflowEnum.STYLE,
           libraryItemsMap: o.styles,
           createOverridesOnSwap: a
         }), o.components.size > 0 && jsx(em, {
           fromLibraryKey: e,
           toLibraryKey: t,
-          libraryItemsType: PW.COMPONENT,
+          libraryItemsType: PrimaryWorkflowEnum.COMPONENT,
           libraryItemsMap: o.components,
           createOverridesOnSwap: !1
         })]
@@ -363,17 +363,17 @@ function em({
     directlyUsedItemIDs: kc(e)
   }));
   let l = new Set();
-  if (i === PW.STYLE && !a) {
+  if (i === PrimaryWorkflowEnum.STYLE && !a) {
     for (let e of directlyUsedItemIDs) {
       let t = sceneGraph.get(e);
       t && t.styleKeyForPublish && l.add(t.styleKeyForPublish);
     }
     let e = new Map();
-    for (let [t, i] of r.entries()) t.type === PW.STYLE && (!i || i.type === PW.STYLE) && l.has(t.key) && e.set(t, i);
+    for (let [t, i] of r.entries()) t.type === PrimaryWorkflowEnum.STYLE && (!i || i.type === PrimaryWorkflowEnum.STYLE) && l.has(t.key) && e.set(t, i);
     r = e;
   }
-  let d = i === PW.COMPONENT ? renderI18nText("design_systems.libraries_modal.used_component") : i === PW.STYLE ? renderI18nText("design_systems.libraries_modal.used_style") : null;
-  let c = i === PW.COMPONENT ? renderI18nText("design_systems.libraries_modal.new_component") : i === PW.STYLE ? renderI18nText("design_systems.libraries_modal.new_style") : null;
+  let d = i === PrimaryWorkflowEnum.COMPONENT ? renderI18nText("design_systems.libraries_modal.used_component") : i === PrimaryWorkflowEnum.STYLE ? renderI18nText("design_systems.libraries_modal.used_style") : null;
+  let c = i === PrimaryWorkflowEnum.COMPONENT ? renderI18nText("design_systems.libraries_modal.new_component") : i === PrimaryWorkflowEnum.STYLE ? renderI18nText("design_systems.libraries_modal.new_style") : null;
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: "replace_libraries_modal--fileMapSubheaderRow--RBuNz replace_libraries_modal--_fileMapRowBase--agNce",

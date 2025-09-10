@@ -4,7 +4,7 @@
 // converted to named functions, simplified conditionals, and added JSDoc documentation.
 // Ensured imports and exports match the refactored names.
 
-import type { ParsedSchema, SchemaDefinition } from './834634'
+import type { ParsedSchema, SchemaDefinition } from '../905/834634'
 import { ByteBuffer } from '../905/712081'
 
 // Define types for better type safety and clarity

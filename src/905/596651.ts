@@ -1,4 +1,4 @@
-import { getFeatureFlags } from "../905/601108";
+import { getFeatureFlags } from "src/905/601108";
 export class $$r0 {
   #e;
   #t;

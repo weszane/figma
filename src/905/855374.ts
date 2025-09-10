@@ -14,7 +14,7 @@ import { wX, lC, yp, G6, EP, pN, lO, L5, rN, U6, x9, mm } from "../figma_app/852
 import { BK, Um } from "../905/848862";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { zy } from "../figma_app/915202";
-import { GI, Fq, s5, U$ } from "../figma_app/633080";
+import { isExtension, everyLocalSubscription, isLocalSubscription, isLocalSubscriptionStatus } from "../figma_app/633080";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { P as _$$P } from "../905/201667";
 import { throwTypeError } from "../figma_app/465776";
@@ -60,7 +60,7 @@ import { Yf } from "../figma_app/933328";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
-import { rh } from "../905/309735";
+import { normalizePath } from "../905/309735";
 import { g as _$$g, s as _$$s } from "../905/578436";
 import { RL, Ot } from "../905/850476";
 import { Ez } from "../figma_app/766708";
@@ -135,7 +135,7 @@ import { w as _$$w } from "../905/955293";
 import { g as _$$g2 } from "../905/687265";
 import { L as _$$L } from "../905/408237";
 import { ne } from "../figma_app/563413";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { ox, bL as _$$bL2 } from "../905/163832";
 import { A as _$$A2 } from "../vendor/850789";
 import { k9 } from "../905/182598";
@@ -600,7 +600,7 @@ let eu = registerModal(function (e) {
   let f = wX(variableIDs).filter(isNotNullish);
   let _ = lC(variableSetId);
   if (!_ || !f) return null;
-  let A = GI(_);
+  let A = isExtension(_);
   return jsx(ep, {
     initialPosition,
     modalID,
@@ -1086,7 +1086,7 @@ function eZ(e) {
       t = _$$Lo(e.allVariables, n + "New group/");
     }
     e.onCreateGroup?.(t, i);
-  }, [e, i]), !!e.onCreateGroup && Fq(i));
+  }, [e, i]), !!e.onCreateGroup && everyLocalSubscription(i));
   let o = _$$rN(useCallback(t => {
     permissionScopeHandler.user("delete-variables", () => {
       t.forEach(e => {
@@ -1123,7 +1123,7 @@ function eZ(e) {
     }
     o?.(i);
     e.hideContextMenu();
-  }, [o, e, i]), !!o && Fq(i));
+  }, [o, e, i]), !!o && everyLocalSubscription(i));
   let g = _$$rN(useCallback(() => {
     let t = [];
     if (e.contextMenuData.groupNames.map(t => cv(e.allVariables, t)).reduce((e, t) => e + t) + e.allVariables.length > RL) {
@@ -1166,7 +1166,7 @@ function eZ(e) {
     }, []);
     o?.(i);
     e.hideContextMenu();
-  }, [e, o]), !!o && Fq(e.allVariables));
+  }, [e, o]), !!o && everyLocalSubscription(e.allVariables));
   let A = useCallback(() => e.contextMenuData.groupNames.some(t => 0 === Qo(e.allVariables, t).length), [e]);
   let b = jsxs(Fragment, {
     children: [f && jsx(c$, {
@@ -1592,7 +1592,7 @@ function tP({
   let o = useDispatch();
   let l = Um();
   let d = yp();
-  let c = G6(GI(e) ? e.backingVariableSetId : void 0);
+  let c = G6(isExtension(e) ? e.backingVariableSetId : void 0);
   let u = EP(c);
   let m = d.length > 1;
   let h = useMemo(() => ({
@@ -1600,7 +1600,7 @@ function tP({
     isEqual: (e, t) => e.node_id === t.node_id
   }), [t]);
   return jsxs(Fragment, {
-    children: [GI(e) && jsx(_$$B2, {
+    children: [isExtension(e) && jsx(_$$B2, {
       svg: _$$A,
       className: "variables_modal_set_header--extendedSetIcon--wnidP",
       "data-tooltip": u ? getI18nString("variables.authoring_modal.extended_collection.extension_based_off_library_tooltip", {
@@ -1778,7 +1778,7 @@ let t$ = forwardRef(function ({
 }, T) {
   let k = useRef(null);
   let P = useAtomWithSubscription(_$$X).isResizing;
-  let D = !!s && !P && !S && s5(g);
+  let D = !!s && !P && !S && isLocalSubscription(g);
   let {
     position
   } = h4(() => ({
@@ -1913,7 +1913,7 @@ function tZ({
         recordingKey: generateRecordingKey(s, "renameInput"),
         autoFocus: !0,
         onCancel: () => r?.(null),
-        onSubmit: i => t(e.node_id, rh(l + i)),
+        onSubmit: i => t(e.node_id, normalizePath(l + i)),
         onFinish: () => r?.(null),
         originalValue: o,
         ignoreGroupPrefix: !0,
@@ -2099,7 +2099,7 @@ function t2({
     item: e,
     element: g,
     accept: [tq],
-    canDrag: !_ && !!d && !!o && Fq(e.variables),
+    canDrag: !_ && !!d && !!o && everyLocalSubscription(e.variables),
     canDrop: !!o && !!d,
     dropPositionThreshold: 1 / 3,
     onDrop(t) {
@@ -2152,7 +2152,7 @@ function t2({
           recordingKey: generateRecordingKey(h, "renameInput"),
           autoFocus: !0,
           onCancel: () => E(!1),
-          onSubmit: t => u(e.name, ZR(e.name, rh(t))),
+          onSubmit: t => u(e.name, ZR(e.name, normalizePath(t))),
           onFinish: () => E(!1),
           originalValue: b
         })
@@ -2226,7 +2226,7 @@ let t8 = forwardRef(function ({
           recordingKey: generateRecordingKey(i, e, "renameInput"),
           onSubmit: t => {
             let i = !1;
-            t && (i = a(e, ZR(e, rh(t))));
+            t && (i = a(e, ZR(e, normalizePath(t))));
             return i;
           },
           onFinish: () => d?.(!1),
@@ -2935,7 +2935,7 @@ function iI({
   } = _$$b2({
     initialPosition: "bottom-end"
   });
-  let o = getFeatureFlags().ds_extended_collections && e && GI(e);
+  let o = getFeatureFlags().ds_extended_collections && e && isExtension(e);
   let d = z7(t);
   return jsxs(_$$bL, {
     manager,
@@ -3287,7 +3287,7 @@ function iU({
     e.target === e.currentTarget && E(!x);
   }, [E, x]);
   let O = !t;
-  let D = getFeatureFlags().ds_variables_modal_action_bar && !t && e && U$(e);
+  let D = getFeatureFlags().ds_variables_modal_action_bar && !t && e && isLocalSubscriptionStatus(e);
   let F = !getFeatureFlags().ds_variables_modal_improvements_sidebar || !d;
   return jsxs("div", {
     className: "x78zum5 x1q0g3np x12lumcd x6s0dn4 xh8yej3",
@@ -3364,7 +3364,7 @@ function i0() {
     windowInnerWidth: e,
     windowInnerHeight: t
   }] = _$$A2(_$$l(), 300, {
-    equalityFn: c2
+    equalityFn: deepEqual
   });
   return {
     windowInnerWidth: e,
@@ -3735,8 +3735,8 @@ export let $$i50 = registerModal(function () {
       localVariableSets: n,
       subscribedVariableSets: s
     });
-    let h = !!u && GI(u);
-    let f = !u || U$(u);
+    let h = !!u && isExtension(u);
+    let f = !u || isLocalSubscriptionStatus(u);
     let _ = useMemo(() => ({
       readOnly: "READ_ONLY" === e || !f,
       variableSetType: h ? "extension" : "root"
@@ -3753,7 +3753,7 @@ export let $$i50 = registerModal(function () {
         })
       };
     }));
-    let I = x9(u && GI(u) ? u?.node_id ?? "" : "");
+    let I = x9(u && isExtension(u) ? u?.node_id ?? "" : "");
     let E = useMemo(() => Pw(v), [v]);
     let [x, S] = useState([]);
     let [w, C] = useState(new Map());
@@ -3777,7 +3777,7 @@ export let $$i50 = registerModal(function () {
     let B = jv();
     let V = mm();
     return useMemo(() => {
-      let e = ez(() => (e, t) => permissionScopeHandler.user("rename-variable", () => VariablesBindings.renameVariable(e, rh(t))) ? (fullscreenValue.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable", {
+      let e = ez(() => (e, t) => permissionScopeHandler.user("rename-variable", () => VariablesBindings.renameVariable(e, normalizePath(t))) ? (fullscreenValue.triggerAction("commit"), !0) : (logError("variables", "Failed to rename variable", {
         variableID: e
       }), !1), j, eV, _);
       let r = ez(() => V.setVariableValueForMode, j, eB, _);
@@ -3864,7 +3864,7 @@ export let $$i50 = registerModal(function () {
             let r = Pf(n.name);
             let a = hF(n, r);
             let s = Qo(e, i);
-            let o = rh(i + a);
+            let o = normalizePath(i + a);
             s.some(e => e.name === o) && (o = _$$g(_$$s(o), s.map(e => e.name)));
             return permissionScopeHandler.user("move-variable-to-group", () => VariablesBindings.renameVariable(n.node_id, o));
           }, j, eV, _),
@@ -4205,7 +4205,7 @@ export let $$i50 = registerModal(function () {
       a(Date.now());
       i?.(e);
     }, [i, a]);
-  }(variableList, actions.setSelectedVariableIDs, actions.pasteClipboardVariables), Fq(variableList));
+  }(variableList, actions.setSelectedVariableIDs, actions.pasteClipboardVariables), everyLocalSubscription(variableList));
   let W = useCallback((e, t) => {
     t === zy.COPY && (actions.copySelectedVariables?.({
       action: "keyboard_shortcut",
@@ -4395,7 +4395,7 @@ export let $$i50 = registerModal(function () {
               clearQuery,
               groups: variableGroupList,
               hasVariableSets: en,
-              mayShowCreateVariableAction: !currentVariableSet || !GI(currentVariableSet),
+              mayShowCreateVariableAction: !currentVariableSet || !isExtension(currentVariableSet),
               recordingKey: "variablesModal",
               selectedGroup: selectedGroupNames[0],
               setRenamingVariableID: actions.setRenamingVariableID,

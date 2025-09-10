@@ -146,7 +146,7 @@ class MockRequest {
   }
 
   neverRespond() {
-    this._response = new Promise(() => {})
+    this._response = new Promise(() => { })
   }
 
   response() {
@@ -209,7 +209,7 @@ class MockServer {
       // eslint-disable-next-line no-console
       console.log(`[xr.MockServer]: Ignoring ${settings.method} request to ${settings.url}`, settings)
     }
-    return new Promise(() => {})
+    return new Promise(() => { })
   }
 }
 type XHRMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'OPTIONS' | 'HEAD'
@@ -258,7 +258,7 @@ export const XHR = {
   getDefaults: {} as XhrRequestSettings,
   crossOriginDefaults: {} as XhrRequestSettings,
   crossOriginGetDefaults: {} as XhrRequestSettings,
-  assertSameOrigin: (_url?: string) => {},
+  assertSameOrigin: (_url?: string) => { },
   put: async (url: string, data: any = {}, options?: Partial<XhrRequestSettings>) => {
     const method = XHR.Methods.PUT
     const response = await sendWithRetry({
@@ -505,7 +505,7 @@ async function sendXhrRequest<T>(requestId: number, settings: XhrRequestSettings
       xhr.timeout = mergedSettings.timeout ?? 0
       xhr.responseType = mergedSettings.responseType ?? ''
     }
-    catch {}
+    catch { }
     const handleError = (err: any) => {
       err.cause = errorStack
       reject(err)
@@ -727,13 +727,13 @@ async function getPaginated<T = any>(url: string, options: Record<string, any> =
       ...res.data,
       pagination: res.data!.pagination
         ? {
-            nextPage: res.data.pagination?.next_page ?? null,
-            prevPage: res.data.pagination?.prev_page ?? null,
-          }
+          nextPage: res.data.pagination?.next_page ?? null,
+          prevPage: res.data.pagination?.prev_page ?? null,
+        }
         : {
-            nextPage: null,
-            prevPage: null,
-          },
+          nextPage: null,
+          prevPage: null,
+        },
     },
   }
 }

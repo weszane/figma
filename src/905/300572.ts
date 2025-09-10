@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
-import { Wv } from "../figma_app/633080";
+import { LibraryTabEnum } from "../figma_app/633080";
 import { o as _$$o } from "../905/451156";
 import { fA } from "../905/542608";
 import { vR } from "../905/522530";
@@ -14,24 +14,24 @@ export function $$u0({
 }) {
   return jsxs("div", {
     className: vR,
-    children: [e.includes(Wv.LIBRARIES) && jsx($$c, {
+    children: [e.includes(LibraryTabEnum.LIBRARIES) && jsx($$c, {
       recordingKey: generateRecordingKey(fA, "libraryTab"),
       onClick: i,
-      tab: Wv.LIBRARIES,
+      tab: LibraryTabEnum.LIBRARIES,
       selectedTab: t,
       disabled: o,
       children: renderI18nText("design_systems.libraries_modal.libraries")
-    }), e.includes(Wv.FONTS) && jsx($$c, {
+    }), e.includes(LibraryTabEnum.FONTS) && jsx($$c, {
       recordingKey: generateRecordingKey(fA, "fontsTab"),
       onClick: i,
-      tab: Wv.FONTS,
+      tab: LibraryTabEnum.FONTS,
       selectedTab: t,
       disabled: o,
       children: renderI18nText("design_systems.libraries_modal.shared_fonts")
-    }), e.includes(Wv.UPDATES) && jsx($$c, {
+    }), e.includes(LibraryTabEnum.UPDATES) && jsx($$c, {
       recordingKey: generateRecordingKey(fA, "updatesTab"),
       onClick: i,
-      tab: Wv.UPDATES,
+      tab: LibraryTabEnum.UPDATES,
       selectedTab: t,
       disabled: o,
       children: renderI18nText("design_systems.libraries_modal.updates")

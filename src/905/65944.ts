@@ -8,7 +8,7 @@ import { K as _$$K } from "../905/443068";
 import { bL } from "../905/911410";
 import { e as _$$e2 } from "../905/149844";
 import { VariableResolvedDataType, SharedStyle, StyleVariableOperation, CopyPasteType, NoneColor, GradientToolApi, Thumbnail, DesignGraphElements, NodePropertyCategory, VariableDataType, PropertyScope, EyedropperBindings } from "../figma_app/763686";
-import { sH, dI } from "../905/805904";
+import { convertVariableIdToKiwi, convertKiwiToVariableIdString } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import f from "classnames";
@@ -67,7 +67,7 @@ import { Te } from "../vendor/813803";
 import { useSessionStorageSync } from "../905/657224";
 import { P as _$$P } from "../905/347284";
 import { Oo } from "../905/709171";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { rt } from "../figma_app/646357";
 import { EU, KV, _U } from "../905/255097";
@@ -642,7 +642,7 @@ function e7({
         nodeId: t.node_id
       });
       i && e(i);
-    } else Eo.getCanvas(t).then(t => {
+    } else teamLibraryCache.getCanvas(t).then(t => {
       let i = SharedStyle.getColorForSharedFillStyle(t);
       i && e(i);
     }).catch(() => {});
@@ -1106,7 +1106,7 @@ function tN({
   }, [S, k, R]);
   let B = async e => {
     let t = await A(Oe(e));
-    let i = sH(t);
+    let i = convertVariableIdToKiwi(t);
     if (!i) return;
     let n = {
       value: {
@@ -1845,7 +1845,7 @@ export let $$ii1 = forwardRef(function ({
     if (t && t.colorVar?.value?.alias) return {
       type: VariableDataType.ALIAS,
       resolvedType: VariableResolvedDataType.COLOR,
-      value: dI(t.colorVar.value.alias)
+      value: convertKiwiToVariableIdString(t.colorVar.value.alias)
     };
     if (!t && !i) return {
       type: VariableDataType.COLOR,

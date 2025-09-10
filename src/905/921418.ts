@@ -14,14 +14,14 @@ import { XE } from "../figma_app/976749";
 import { pi } from "../figma_app/314264";
 import { d1 } from "../905/766303";
 import { Oo } from "../905/709171";
-import { cO, Jl } from "../figma_app/80990";
+import { memoizedProcessLocalComponents, processLocalComponents } from "../figma_app/80990";
 import { V as _$$V } from "../figma_app/473391";
 import { qp } from "../905/977779";
 import { X0, A0, WV, Gg, ET } from "../figma_app/646357";
 import { D2 } from "../905/18797";
 import { KH } from "../905/81982";
 import { FEditorType } from "../figma_app/53721";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Ei } from "../905/574958";
 import { r6 } from "../figma_app/517115";
 import { I as _$$I } from "../figma_app/130633";
@@ -114,12 +114,12 @@ let $$G0 = new class extends M {
           }
         };
         s(X0(n));
-        t.library.assetsPanelSearch.shouldSearchDefaultLibraries && (s(A0(t.library, cO(t.library.defaultPublished.componentsByLibraryKey), i, this.subscribedLibraryKeys)), s(A0(t.library, t.library.defaultPublished.stateGroupsByLibraryKey, i, this.subscribedLibraryKeys)));
+        t.library.assetsPanelSearch.shouldSearchDefaultLibraries && (s(A0(t.library, memoizedProcessLocalComponents(t.library.defaultPublished.componentsByLibraryKey), i, this.subscribedLibraryKeys)), s(A0(t.library, t.library.defaultPublished.stateGroupsByLibraryKey, i, this.subscribedLibraryKeys)));
         let o = Object.values(WV(t.library.local.components));
         let l = Object.values(t.library.local.stateGroups);
         s(Gg(l, o));
         e.set(r);
-      })(V, Jl(t.library.local.components));
+      })(V, processLocalComponents(t.library.local.components));
     };
     this.computeLocalResultsPromise = async (e, t, i) => {
       let n = B0();
@@ -365,8 +365,8 @@ let $$z3 = createOptimistThunk((e, {
 let $$H5 = _$$n((e, {
   ignoreLoadingState: t = !1
 } = {}) => t ? !!(e.openFile && e.fileVersion) : !!(e.openFile && e.fileVersion && D2(e.loadingState, yD(e.openFile.key))));
-let W = e => e.type === PW.COMPONENT;
-let K = e => e.type === PW.STATE_GROUP;
+let W = e => e.type === PrimaryWorkflowEnum.COMPONENT;
+let K = e => e.type === PrimaryWorkflowEnum.STATE_GROUP;
 export function $$Y1(e) {
   return e.filter(e => W(e) || K(e));
 }

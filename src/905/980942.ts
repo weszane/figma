@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { SceneGraphHelpers } from "../figma_app/763686";
 var $$a0 = (e => (e.NORMAL = "normal", e.INHERITED_INTERNAL = "inherited_internal", e))($$a0 || {});
 export const J = $$a0;
@@ -17,5 +17,5 @@ export const j = function e(t, i, a) {
     for (let t = 0; t < n.expressionArguments.length; t++) if (!e(n.expressionArguments[t], r.expressionArguments[t], a)) return !1;
     return !0;
   }
-  return c2(t, i);
+  return deepEqual(t, i);
 };

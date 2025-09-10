@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { clamp } from "../figma_app/492908";
 import { A } from "../905/920165";
-import { w_ } from "../figma_app/273493";
+import { colorToRgb } from "../figma_app/273493";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
@@ -35,7 +35,7 @@ let _ = class e extends RecordingPureComponent {
       let o = MX(this.props.uiVersion);
       r.fillStyle = a;
       r.fillRect(0, 0, this.props.width + o, o);
-      let l = w_(this.valueToColor(i));
+      let l = colorToRgb(this.valueToColor(i));
       let d = r.createLinearGradient(o / 2, 0, this.props.width + o / 2, 0);
       d.addColorStop(0, e.formatter.format({
         ...l,
@@ -52,7 +52,7 @@ let _ = class e extends RecordingPureComponent {
       let t;
       let i;
       let n;
-      let r = w_(this.valueToColor(e));
+      let r = colorToRgb(this.valueToColor(e));
       return {
         r: (t = r.r, 1 - r.a + t * r.a),
         g: (i = r.g, 1 - r.a + i * r.a),
@@ -106,7 +106,7 @@ export function $$A0(e) {
       let n;
       let r;
       let a;
-      let o = w_(e);
+      let o = colorToRgb(e);
       let l = VG(t);
       return {
         "--fpl-slider-thumb-bg": F.format({

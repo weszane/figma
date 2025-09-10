@@ -10,7 +10,7 @@ import { c$, ms } from "../figma_app/236327";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { selectCurrentUser } from "../905/372672";
-import { jg } from "../figma_app/633080";
+import { LibraryAgeEnum } from "../figma_app/633080";
 import { n as _$$n } from "../905/402643";
 import { R as _$$R } from "../905/697254";
 import { h as _$$h } from "../905/589458";
@@ -19,10 +19,10 @@ let b = "dsa_file_view_tabs--dropdownIcon--NdB8e";
 let v = "duration-dropdown";
 let I = "dsa-asset-type-dropdown";
 let E = {
-  [jg.THIRTY_DAYS]: renderI18nText("design_systems.libraries_modal.30_days"),
-  [jg.SIXTY_DAYS]: renderI18nText("design_systems.libraries_modal.60_days"),
-  [jg.NINETY_DAYS]: renderI18nText("design_systems.libraries_modal.90_days"),
-  [jg.YEAR]: renderI18nText("design_systems.libraries_modal.year")
+  [LibraryAgeEnum.THIRTY_DAYS]: renderI18nText("design_systems.libraries_modal.30_days"),
+  [LibraryAgeEnum.SIXTY_DAYS]: renderI18nText("design_systems.libraries_modal.60_days"),
+  [LibraryAgeEnum.NINETY_DAYS]: renderI18nText("design_systems.libraries_modal.90_days"),
+  [LibraryAgeEnum.YEAR]: renderI18nText("design_systems.libraries_modal.year")
 };
 let x = {
   [_$$n.PRODUCT_COMPONENTS]: renderI18nText("design_systems.libraries_modal.components"),
@@ -34,7 +34,7 @@ let $$S = {
   [_$$R.ANALYTICS]: renderI18nText("design_systems.libraries_modal.analytics")
 };
 let w = [_$$R.OVERVIEW, _$$R.ANALYTICS];
-let C = [jg.THIRTY_DAYS, jg.SIXTY_DAYS, jg.NINETY_DAYS, jg.YEAR];
+let C = [LibraryAgeEnum.THIRTY_DAYS, LibraryAgeEnum.SIXTY_DAYS, LibraryAgeEnum.NINETY_DAYS, LibraryAgeEnum.YEAR];
 let T = [_$$n.PRODUCT_COMPONENTS, _$$n.STYLES, _$$n.VARIABLES];
 let $$k0 = memo(({
   onSelectDuration: e,

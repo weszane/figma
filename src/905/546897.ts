@@ -5,7 +5,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { oW } from "../905/675859";
 import { F } from "../905/989956";
 import { DP } from "../905/640017";
-import { zR } from "../figma_app/80990";
+import { getAssetBackgroundColor } from "../figma_app/80990";
 import { V as _$$V } from "../figma_app/473391";
 import { uW, pw } from "../905/187165";
 import { Ib } from "../905/129884";
@@ -25,7 +25,7 @@ export function $$y0({
 }) {
   let I = useMemo(() => "string" == typeof s ? void 0 : s.name.split("/").pop(), [s]);
   let E = "no-padding" === b ? 0 : "compact" === b ? 4 : A;
-  let x = useMemo(() => "string" == typeof s ? null : zR(s, null), [s]);
+  let x = useMemo(() => "string" == typeof s ? null : getAssetBackgroundColor(s, null), [s]);
   let S = useMemo(() => x ? F.format(x) : void 0, [x]);
   let w = useContext(uW);
   let C = DP();

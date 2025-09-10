@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef, useState, useId, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { VariableDataType, VariableResolvedDataType, OperationType, VariablesBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { Point } from "../905/736624";
@@ -48,7 +48,7 @@ export function $$S2(e, t, r, n, o, l, d, p) {
       }
     })) : clearVariableConsumption();
   }, [r, h, updateVariableConsumption, t, clearVariableConsumption, mapVariableIdToTypedValue]);
-  return [g.isShown && "variable-picker-fields" === g.type && c2(g.fields, e) && g.responsiveTextStyleVariantIndex === p && n?.metadata === g.metadata, useCallback((r, i) => {
+  return [g.isShown && "variable-picker-fields" === g.type && deepEqual(g.fields, e) && g.responsiveTextStyleVariantIndex === p && n?.metadata === g.metadata, useCallback((r, i) => {
     let a = i?.initialPosition ?? d?.() ?? VZ(r, d9, !1);
     h(C({
       type: "variable-picker-fields",

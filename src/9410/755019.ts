@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useLayoutEffect, useEffect } from "react";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { useLatestRef } from "../figma_app/922077";
 import { B } from "../905/714743";
 import { Hj, W$ } from "../9410/534867";
@@ -17,7 +17,7 @@ export function $$p1({
   let [p, h] = useState("full");
   let m = useLatestRef(e);
   useLayoutEffect(() => {
-    c2(e, m) || "full" === p || h("full");
+    deepEqual(e, m) || "full" === p || h("full");
     "full" === p && f();
   }, [m, e, p]);
   let f = () => {

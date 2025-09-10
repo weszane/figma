@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { _7 } from "../figma_app/562352";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -137,7 +137,7 @@ export class $$f1 {
         }), null);
       }
     }).filter(e => null !== e);
-    atomStoreManager.set(this._scenegraphSelectionAtom, t => c2(t, e) ? t : e);
+    atomStoreManager.set(this._scenegraphSelectionAtom, t => deepEqual(t, e) ? t : e);
   }
   get editedStylesAtom() {
     return this._editedStylesAtom;

@@ -1,5 +1,5 @@
-import { encodeUri } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
+import { encodeUri } from "src/figma_app/930338";
+import { getI18nString } from "src/905/303541";
 export class $$a0 {
   pathToSelectedView(e, t) {
     return "files" === t[1] && "team" === t[2] && "restore" === t[5] ? {

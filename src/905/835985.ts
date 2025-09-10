@@ -1,5 +1,5 @@
 import { assert, throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { m as _$$m } from "../905/18160";
 import { TrackType, JSXRendererBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -292,7 +292,7 @@ function S({
   i.renderMetaData.src !== t?.renderMetaData.src && "svg" === i.type && t?.type === "svg" && (t = null, n.remove(), n = O());
   let D = t ? x(t) : [];
   let L = x(i);
-  c2(D, L) || n.writeProperty("widgetEvents", L);
+  deepEqual(D, L) || n.writeProperty("widgetEvents", L);
   (function ({
     figmaNode: e,
     newVNode: t,
@@ -335,7 +335,7 @@ function S({
   let j = e => {
     let n = i.props[e];
     let a = t ? t.props?.[e] : void 0;
-    (E.includes(e) || !c2(a, n)) && M(e, n);
+    (E.includes(e) || !deepEqual(a, n)) && M(e, n);
   };
   !function ({
     sceneNode: e,
@@ -346,7 +346,7 @@ function S({
   }) {
     let s = t?.renderMetaData.textStyle;
     let o = i.renderMetaData.textStyle;
-    if (!(!o || c2(s, o) && !a)) for (let t of (f(o.style, (t, i) => {
+    if (!(!o || deepEqual(s, o) && !a)) for (let t of (f(o.style, (t, i) => {
       n.guard(() => {
         e.writeProperty(t, i);
       });
@@ -395,7 +395,7 @@ function S({
   }(F.errors, e), (i.renderMetaData.width !== t?.renderMetaData.width || i.renderMetaData.height !== t?.renderMetaData.height || g !== v || i.renderMetaData.direction !== t?.renderMetaData.direction) && BM(i, n, g), ["x", "y"].forEach(e => {
     let n = i.renderMetaData?.[e];
     n !== (t ? t.renderMetaData?.[e] : void 0) && M(e, n);
-  }), c2(i.renderMetaData.constraints, t?.renderMetaData.constraints) || $T(i, n, o, !0), y.forEach(e => {
+  }), deepEqual(i.renderMetaData.constraints, t?.renderMetaData.constraints) || $T(i, n, o, !0), y.forEach(e => {
     i.props[e] !== (t ? t.props[e] : void 0) && M(e, i.props[e]);
   }), "text" === i.type && N.add(n.getID()), !i.renderMetaData.children) return n;
   let U = t?.renderMetaData?.children ? MI(t?.renderMetaData?.children) : [];

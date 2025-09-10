@@ -135,9 +135,9 @@ import { setupResourceAtomHandler } from '../figma_app/566371';
 import { P as _$$P3 } from '../figma_app/582341';
 import { lX } from '../figma_app/588397';
 import { ol } from '../figma_app/598018';
-import { rt } from '../figma_app/615482';
+import { createTrackedAtom } from '../figma_app/615482';
 import { $z as _$$$z } from '../figma_app/617427';
-import { M$, Nf, P2, PW, Qx, ZA } from '../figma_app/633080';
+import { PublishStatusEnum, isTeamLibrary, isPublishedTeamLibrary, PrimaryWorkflowEnum, LibraryPublishStatusEnum, isPublishedLibraryWithAssets } from '../figma_app/633080';
 import { eS as _$$eS, aD, Av, Dg, Jc, sv, VJ } from '../figma_app/646357';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { i as _$$i2 } from '../figma_app/709177';
@@ -163,7 +163,7 @@ import iH from '../vendor/338009';
 import { useDispatch, useSelector } from 'react-redux';
 import ex from '../vendor/523035';
 let _ = new PerfTimer('performance.ds_eco.load_time', {});
-let A = rt(!1);
+let A = createTrackedAtom(!1);
 function y(e) {
   let t = useSelector(e => e.openFile);
   let [i, n] = useAtomValueAndSetter(A);
@@ -257,7 +257,7 @@ function ea({
         teamPositionForLogging: s
       }),
       showBottomBorder: !0
-    }), Nf(e) ? jsx(es, {
+    }), isTeamLibrary(e) ? jsx(es, {
       library: e,
       debouncedSearchQuery,
       canEditSubscriptions: o,
@@ -281,7 +281,7 @@ function es({
   onReplaceLibraryClick: r
 }) {
   let a = i.library_key;
-  let s = Nf(i) ? i.team_id : null;
+  let s = isTeamLibrary(i) ? i.team_id : null;
   let o = LH();
   let l = mq.useTabContentsWidth();
   let [d] = IT(Yt(a));
@@ -502,8 +502,8 @@ function eB({
   let d = ej();
   let c = eU();
   let u = eu();
-  let m = Nf(e) ? e.team_name : e.community_author_name;
-  let h = !P2(e) || e.thumbnail_guid !== null;
+  let m = isTeamLibrary(e) ? e.team_name : e.community_author_name;
+  let h = !isPublishedTeamLibrary(e) || e.thumbnail_guid !== null;
   let g = Px(e);
   let [_, A, y] = _$$e(!1);
   let b = useSyncedState(_);
@@ -1022,7 +1022,7 @@ function e2() {
       result,
       status
     } = Qj();
-    let a = useMemo(() => result.filter(Nf) ?? [], [result]);
+    let a = useMemo(() => result.filter(isTeamLibrary) ?? [], [result]);
     let s = useMemo(() => {
       let e = {};
       a.forEach(t => {
@@ -1483,7 +1483,7 @@ function tl({
       result,
       status: _status
     } = Qj();
-    let l = useMemo(() => result.filter(Nf) ?? [], [result]);
+    let l = useMemo(() => result.filter(isTeamLibrary) ?? [], [result]);
     let d = useMemo(() => {
       if (n && e) return teams;
       let i = new Map();
@@ -1965,10 +1965,10 @@ function tz({
     column: i,
     disabled: d
   });
-  return publishProgress.state !== Qx.NONE ? jsx(IK, {
+  return publishProgress.state !== LibraryPublishStatusEnum.NONE ? jsx(IK, {
     variant: 'secondary',
     disabled: !0,
-    children: publishProgress.publishType === M$.UNPUBLISH ? renderI18nText('design_systems.libraries_modal.unpublishing') : renderI18nText('design_systems.libraries_modal.publishing')
+    children: publishProgress.publishType === PublishStatusEnum.UNPUBLISH ? renderI18nText('design_systems.libraries_modal.unpublishing') : renderI18nText('design_systems.libraries_modal.publishing')
   }) : jsx(IK, {
     'aria-label': getI18nString('design_systems.libraries_modal.publish_this_file'),
     'variant': 'primary',
@@ -2032,8 +2032,8 @@ function tW({
     return useMemo(() => {
       if (i.status === 'loaded' && i.data.length > 0) {
         let e = i.data[0];
-        if (e && ZA(e)) {
-          Nf(e) && !e.library_file_key && (e.library_file_key = t);
+        if (e && isPublishedLibraryWithAssets(e)) {
+          isTeamLibrary(e) && !e.library_file_key && (e.library_file_key = t);
           return () => {
             analyticsEventManager.trackDefinedEvent('library_modal.library_clicked', {
               ...a,
@@ -2082,7 +2082,7 @@ function tY({
   publishedLibrary: e,
   kbPath: t
 }) {
-  let i = P2(e);
+  let i = isPublishedTeamLibrary(e);
   let a = !i || e.thumbnail_guid !== null;
   let s = i ? e.team_name : e.community_author_name;
   let o = _$$W2.useFileMetadata();
@@ -2739,7 +2739,7 @@ function i0(e, t, i, n) {
   }
 }
 function no(e) {
-  return e.type === PW.COMPONENT || e.type === PW.STATE_GROUP;
+  return e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP;
 }
 let nl = 'updates_list_item--updateRow--fXEDS';
 let nd = 'updates_list_item--updateTile--rkEy6';
@@ -2758,9 +2758,9 @@ function np({
   } = function (e) {
     let t = useDispatch();
     let i = no(e);
-    let n = e.type === PW.STYLE;
-    let r = e.type === PW.VARIABLE_SET;
-    let a = e.type === PW.MODULE;
+    let n = e.type === PrimaryWorkflowEnum.STYLE;
+    let r = e.type === PrimaryWorkflowEnum.VARIABLE_SET;
+    let a = e.type === PrimaryWorkflowEnum.MODULE;
     return {
       numOutdatedInstances: i && TF(e),
       toggleReviewUpdatesModal: i || n ? i => {
@@ -2902,7 +2902,7 @@ function nh({
   let m = useMemo(() => e.components.length > 0 ? e.components[0] : e.stateGroups.length > 0 ? e.stateGroups[0] : e.styles.length > 0 ? e.styles[0] : e.variableSets.length > 0 ? e.variableSets[0] : e.codeComponents.length > 0 ? e.codeComponents[0] : null, [e]);
   let h = R8({
     assetKey: m != null ? Av(m) : void 0,
-    type: m?.type ?? PW.COMPONENT
+    type: m?.type ?? PrimaryWorkflowEnum.COMPONENT
   });
   let g = useMemo(() => {
     if (h.status !== 'loaded') return;
@@ -3331,7 +3331,7 @@ function nb({
         let o = a ? a.versions?.[a.current_hub_file_version_id]?.name : p[n]?.name;
         if (!h[t = t ?? `FakeId:${n}`]) {
           let a = e.checkpoint_id_to_metadata[t];
-          let s = a ? new Date(a.updated_at) : i.type === PW.CODE_COMPONENT ? i.updatedAt : i.updated_at ? new Date(i.updated_at) : null;
+          let s = a ? new Date(a.updated_at) : i.type === PrimaryWorkflowEnum.CODE_COMPONENT ? i.updatedAt : i.updated_at ? new Date(i.updated_at) : null;
           h[t] = {
             id: t,
             publishDate: s,
@@ -3356,7 +3356,7 @@ function nb({
         i && g(i, t).variableSets.push(t);
       }
       for (let t of d) {
-        if (t.type !== PW.CODE_COMPONENT) {
+        if (t.type !== PrimaryWorkflowEnum.CODE_COMPONENT) {
           continue;
         } else {
           let i = e.library_key_and_asset_key_to_checkpoint_id?.[t.sourceLibraryKey]?.[t.key];

@@ -15,7 +15,7 @@ import { $2, bn, GF, h0, HQ, JJ, mf, NI, zu } from '../figma_app/61403';
 import { UN, Z0 } from '../figma_app/62612';
 import { getObservableValue } from '../figma_app/84367';
 import { Fz } from '../figma_app/106207';
-import { HD, UE, Uv } from '../figma_app/191804';
+import { isColorDark, whiteColor, blackColor } from '../figma_app/191804';
 import { xT } from '../figma_app/195407';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { viewportNavigatorContext } from '../figma_app/298911';
@@ -421,7 +421,7 @@ class L {
         permissionScopeHandler.onboarding('set-text-color', () => {
           s && (s.fills = [{
             ...s.fills[0],
-            color: HD(e || UE) ? UE : Uv
+            color: isColorDark(e || whiteColor) ? whiteColor : blackColor
           }]);
         });
       }

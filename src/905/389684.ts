@@ -7,7 +7,7 @@ import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
 import { selectCurrentFile } from "../figma_app/516028";
 import { LH } from "../905/872904";
-import { cX, Wv } from "../figma_app/633080";
+import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { Vg } from "../905/300621";
 import { r6 } from "../905/542608";
 import { T } from "../figma_app/472024";
@@ -22,7 +22,7 @@ export function $$_0({
   let y = selectCurrentFile();
   let b = LH();
   let v = "editor" === t;
-  let I = useMemo(() => "editor" === t && A?.type === cX || "figjam" === t && A?.type === Vg.type, [A?.type, t]);
+  let I = useMemo(() => "editor" === t && A?.type === LIBRARY_PREFERENCES_MODAL || "figjam" === t && A?.type === Vg.type, [A?.type, t]);
   let E = useCallback(() => {
     let n = generateUUIDv4();
     trackEventAnalytics("toggle_library_modal", {
@@ -41,13 +41,13 @@ export function $$_0({
       type: T,
       data: {
         entrypoint: e,
-        initialTab: i ?? Wv.LIBRARIES,
+        initialTab: i ?? LibraryTabEnum.LIBRARIES,
         sessionId: n
       }
     })), _(Zn())) : _(showModalHandler({
       type: Vg,
       data: {
-        tab: Wv.LIBRARIES
+        tab: LibraryTabEnum.LIBRARIES
       }
     }));
   }, [I, e, v, y, b, _, t, i]);

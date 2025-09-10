@@ -1,5 +1,5 @@
-import { createNoOpValidator, APIParameterUtils, defaultValidator } from "../figma_app/181241";
-import { r as _$$r } from "../905/324611";
+import { createNoOpValidator, APIParameterUtils, defaultValidator } from "src/figma_app/181241";
+import { r as _$$r } from "src/905/324611";
 export let $$a0 = new class {
   constructor() {
     this.UnverifiedSchemaValidator = createNoOpValidator();

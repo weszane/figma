@@ -12,7 +12,7 @@ import { Gp, uH } from "../figma_app/646357";
 import { Fk } from "../figma_app/167249";
 import { cM } from "../figma_app/803787";
 import { wi } from "../905/55146";
-import { AT } from "../figma_app/633080";
+import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { uQ } from "../figma_app/151869";
 import { Ig, dc, rP } from "../figma_app/155647";
 import { QT } from "../figma_app/152690";
@@ -90,7 +90,7 @@ export function $$v2(e) {
   let r = useSelector(e => e.library);
   let n = styles.map(e => {
     let t = Gp(e.key, e.guids, r);
-    return t && t.kind !== AT.SUBSCRIBED_WITHOUT_LIBRARY ? {
+    return t && t.kind !== SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY ? {
       ...e,
       ...t.value,
       styleNodeId: e.guids[0]

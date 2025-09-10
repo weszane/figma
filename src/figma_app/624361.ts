@@ -62,7 +62,7 @@ let A = class e {
     this.retries = 0;
     this.state = 0;
     this._downloadPromise = null;
-    this._imageIsReady = () => {};
+    this._imageIsReady = () => { };
     this._readyPromise = new Promise(e => {
       this._imageIsReady = e;
     });
@@ -112,7 +112,7 @@ let A = class e {
       let e = this.downloadFromS3();
       e.$$finally(() => {
         this._downloadPromise = null;
-      }).catch(e => {});
+      }).catch(e => { });
       this._downloadPromise = e;
     }
     return this._downloadPromise;
@@ -252,7 +252,7 @@ let w = class e {
         }
         let l = 1;
         let d = o.type === 'fileKey' ? r[o.fileKey] : i[o.libraryKey];
-        for (;;) {
+        for (; ;) {
           try {
             let r = await XHR.put(`/api/files/${u}`, {
               image_sha1s: [...new Set(d)],
@@ -351,7 +351,7 @@ let w = class e {
           failed: Array.from(r)
         };
       }
-    } catch {}
+    } catch { }
     return {
       success: e,
       failed: []

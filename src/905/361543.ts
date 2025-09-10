@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { useLatestRef } from "../figma_app/922077";
 export function $$s0(e, t = {
   resetOnInitialStateChange: !1
@@ -7,7 +7,7 @@ export function $$s0(e, t = {
   let [i, o] = useState(e);
   let l = useLatestRef(e);
   useEffect(() => {
-    t.resetOnInitialStateChange && !c2(e, l) && o(e);
+    t.resetOnInitialStateChange && !deepEqual(e, l) && o(e);
   }, [t.resetOnInitialStateChange, e, l]);
   return [i, useCallback(e => t => {
     o(i => ({

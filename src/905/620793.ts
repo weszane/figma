@@ -7,7 +7,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { P } from "../figma_app/582341";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
-import { Nf } from "../figma_app/633080";
+import { isTeamLibrary } from "../figma_app/633080";
 import { S } from "../905/612212";
 import { hx, m3 } from "../905/66449";
 let g = "library_modal_body_header--libraryPath--PUMmE";
@@ -68,7 +68,7 @@ export function $$A1(e) {
     workspace,
     team,
     communityAuthor
-  } = useMemo(() => Nf(library) ? {
+  } = useMemo(() => isTeamLibrary(library) ? {
     workspace: library.workspace_id && library.workspace_name ? {
       name: library.workspace_name,
       id: library.workspace_id

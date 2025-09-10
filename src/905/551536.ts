@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { e as _$$e } from "../905/280005";
-import { nf } from "../905/190597";
+import { e as _$$e } from "src/905/280005";
+import { nf } from "src/905/190597";
 export class $$o0 extends Component {
   render() {
     let e = `${nf} ${this.props.className || ""}`;

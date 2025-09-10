@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useState, useCallback, forwardRef, useEffect, useContext, useMemo, memo, useId, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { lQ } from "../905/934246";
 import { k as _$$k } from "../905/443820";
 import { Checkbox } from "../905/274480";
@@ -661,7 +661,7 @@ function eI(e) {
   let ev = _$$h2(isLoading) && !isLoading;
   let eI = useRef(!1);
   useEffect(function () {
-    !ev || eI.current || c2(initialPath, ey) || (eb(initialPath), eI.current = !0);
+    !ev || eI.current || deepEqual(initialPath, ey) || (eb(initialPath), eI.current = !0);
   }, [ev, initialPath, ey]);
   let [eE, ex] = useState("");
   let [ew, eT] = void 0 !== e.query && void 0 !== e.setQuery ? [e.query, e.setQuery] : [eE, ex];

@@ -9,7 +9,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { $p } from "../figma_app/155728";
 import { FEditorType } from "../figma_app/53721";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { z } from "../905/150554";
 import { qd } from "../figma_app/257779";
@@ -57,10 +57,10 @@ async function v({
       logger: N,
       contextComponentUsage: I
     });
-    let O = suggestions.findIndex(e => e.type === PW.COMPONENT && e.component_key === S || e.type === PW.STATE_GROUP && e.key === S);
+    let O = suggestions.findIndex(e => e.type === PrimaryWorkflowEnum.COMPONENT && e.component_key === S || e.type === PrimaryWorkflowEnum.STATE_GROUP && e.key === S);
     let D = JSON.stringify(suggestions.map(e => ({
       type: e.type,
-      key: e.type === PW.COMPONENT ? e.component_key : e.type === PW.STATE_GROUP ? e.key : void 0,
+      key: e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.type === PrimaryWorkflowEnum.STATE_GROUP ? e.key : void 0,
       libraryKey: e.library_key,
       suggestionSource: e.suggestionSource
     })));

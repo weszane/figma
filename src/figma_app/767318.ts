@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import d from "../vendor/181640";
@@ -23,7 +23,7 @@ import { Um } from "../905/848862";
 import { U as _$$U } from "../905/506188";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
-import { Wv } from "../figma_app/633080";
+import { LibraryTabEnum } from "../figma_app/633080";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { j as _$$j } from "../905/834956";
@@ -58,7 +58,7 @@ export function $$G0(e) {
     let T = t === Jo.FOCUS_NODE ? iw.LEARN_MORE : E;
     let N = useCallback((e, t, r, i, a) => {
       let c = r ?? (i ? UE : Ws);
-      let u = i === Mo ? getI18nString("variables.mode_properties_panel.select.option.mixed") : t.find(e => c2(e.modeId, i))?.name;
+      let u = i === Mo ? getI18nString("variables.mode_properties_panel.select.option.mixed") : t.find(e => deepEqual(e.modeId, i))?.name;
       let p = jsx(B, {
         className: F,
         svg: _$$A2
@@ -122,14 +122,14 @@ export function $$G0(e) {
                 })) : r(d, e.modeId, e.name);
               },
               rightIcon: e.isCompatible ? void 0 : u,
-              isChecked: c2(e.modeId, p)
+              isChecked: deepEqual(e.modeId, p)
             };
           }(n));
         }
         return [{
           separator: !0,
           displayText: ""
-        }, ...(a && a !== Mo && e.every(e => !c2(e.modeId, a)) ? [{
+        }, ...(a && a !== Mo && e.every(e => !deepEqual(e.modeId, a)) ? [{
           recordingKey: "mode-DELETED",
           displayText: getI18nString("variables.mode_properties_panel.select.option.deleted"),
           disabled: !0,
@@ -145,7 +145,7 @@ export function $$G0(e) {
           o(showModalHandler({
             type: _$$T,
             data: {
-              initialTab: Wv.UPDATES,
+              initialTab: LibraryTabEnum.UPDATES,
               entrypoint: r6.VARIABLE_APPLY_MODE_DROPDOWN_INCOMPATIBLE_LINK
             }
           }));
@@ -325,7 +325,7 @@ function V(e, t, r, i, a, s, o, l, d, c) {
       l === iw.REVIEW_UPDATES ? a(showModalHandler({
         type: _$$T,
         data: {
-          initialTab: Wv.UPDATES,
+          initialTab: LibraryTabEnum.UPDATES,
           entrypoint: r6.VARIABLE_APPLY_MODE_DROPDOWN_INCOMPATIBLE_LINK
         }
       })) : customHistory.unsafeRedirect(Yc, "_blank");

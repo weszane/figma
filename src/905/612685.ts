@@ -1,9 +1,9 @@
-import { isEmptyObject } from "../figma_app/493477";
-import { getFeatureFlags } from "../905/601108";
-import { serializeQuery } from "../905/634134";
-import { encodeUri } from "../figma_app/930338";
-import { FFileType } from "../figma_app/191312";
-import { EO, Ml } from "../905/691205";
+import { isEmptyObject } from "src/figma_app/493477";
+import { getFeatureFlags } from "src/905/601108";
+import { serializeQuery } from "src/905/634134";
+import { encodeUri } from "src/figma_app/930338";
+import { FFileType } from "src/figma_app/191312";
+import { EO, Ml } from "src/905/691205";
 export function $$d1(e) {
   return `/community/file/${e}`;
 }

@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { A } from "../vendor/723372";
-import { I } from "../905/494625";
-import { defaultComponentAttribute } from "../905/577641";
+import { A } from "src/vendor/723372";
+import { I } from "src/905/494625";
+import { defaultComponentAttribute } from "src/905/577641";
 export let $$l0 = forwardRef(({
   children: e,
   className: t,

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
 import { debounce } from "../905/915765";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { c$, bL, l9, mc, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { K } from "../905/443068";
@@ -298,7 +298,7 @@ export function $$H0(e) {
     "aria-label": getI18nString("fullscreen.properties_panel.width_profile.flip_horizonal"),
     disabled: t || isInvalidValue(i) || !i || function (e) {
       let t = z(e);
-      return c2(e, t);
+      return deepEqual(e, t);
     }(i),
     onClick: () => {
       !isInvalidValue(i) && i && r(z(i));

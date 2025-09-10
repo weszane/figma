@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { UU } from "../figma_app/397267";
 import { VariableDataType, StyleVariableOperation, CopyPasteType, VariablesBindings, VariableResolvedDataType, PropertyScope, HandoffBindingsCpp } from "../figma_app/763686";
 import { yG } from "../905/859698";
 import { permissionScopeHandler } from "../905/189185";
 import { areSessionLocalIDsEqual } from "../905/871411";
-import { sH, dI } from "../905/805904";
+import { convertVariableIdToKiwi, convertKiwiToVariableIdString } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { useMemoStable, useMemoShallow } from "../905/19536";
@@ -30,7 +30,7 @@ import { u as _$$u, G6, jI, iC } from "../figma_app/852050";
 import { Fk } from "../figma_app/167249";
 import { I7, P1 } from "../figma_app/745458";
 import { dK, $u } from "../figma_app/889655";
-import { Wv, ZI, PW } from "../figma_app/633080";
+import { LibraryTabEnum, getSubscribedVariableInfo, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { f as _$$f } from "../905/135117";
 import { r6 } from "../905/542608";
@@ -59,7 +59,7 @@ function ee(e) {
   let t = e[0];
   if (!t) return null;
   if (e.length >= 2) {
-    for (let t = 1; t < e.length; t++) if (!c2(e[t], e[0])) return MIXED_MARKER;
+    for (let t = 1; t < e.length; t++) if (!deepEqual(e[t], e[0])) return MIXED_MARKER;
   }
   return t.isMixed ? MIXED_MARKER : t;
 }
@@ -239,7 +239,7 @@ export function $$ec17(e = 0) {
     permissionScopeHandler.user("set-explicit-variable-mode", () => {
       1 === e ? VariablesBindings.setExplicitVariableModeForDevModeFocusNode(r, n === $$Y8 || n === $$$10 ? null : n) : VariablesBindings.setExplicitVariableModeForSelection(r, n === $$Y8 || n === $$$10 ? null : n, !0);
     });
-    let f = s?.modeOptions.find(e => c2(e.modeId, n));
+    let f = s?.modeOptions.find(e => deepEqual(e.modeId, n));
     c && isValidValue(c) && GS("variables.explicit_mode_changed", m ?? "", h, {
       numSelected: g,
       numSelectedFrames: c.FRAME ?? 0,
@@ -251,7 +251,7 @@ export function $$ec17(e = 0) {
       new_mode_id: f ? f.modeId.guid.toString() : "",
       sort_position: f && f.sortPosition ? f.sortPosition : ""
     });
-    Object.values(u).some(e => e.modeOptions.some(e => c2(e.modeId, n) && !e.isCompatible)) && n !== $$Y8 && n !== $$$10 && i && (_ ? t(VisualBellActions.enqueue({
+    Object.values(u).some(e => e.modeOptions.some(e => deepEqual(e.modeId, n) && !e.isCompatible)) && n !== $$Y8 && n !== $$$10 && i && (_ ? t(VisualBellActions.enqueue({
       message: getI18nString("variables.visual_bell.variables_incompatible_modes_needs_updates", {
         modeName: i
       }),
@@ -261,7 +261,7 @@ export function $$ec17(e = 0) {
           t(showModalHandler({
             type: _$$T,
             data: {
-              initialTab: Wv.UPDATES,
+              initialTab: LibraryTabEnum.UPDATES,
               entrypoint: r6.INCMPATIBLE_MODES_VISUAL_BELL
             }
           }));
@@ -349,7 +349,7 @@ export function $$ey28(e, t, r) {
       e.forEach(e => {
         let r = i[e];
         if (r && !r?.isMixed && r.type === VariableDataType.ALIAS) {
-          let e = sH(r.value);
+          let e = convertVariableIdToKiwi(r.value);
           a.previousVariableKey = e?.assetRef?.key;
         }
         n[e] = t;
@@ -438,7 +438,7 @@ function ev(e, t, r) {
     opacity
   } = t;
   if (colorVar?.value?.alias) return {
-    boundVar: dI(colorVar.value.alias)
+    boundVar: convertKiwiToVariableIdString(colorVar.value.alias)
   };
   if (!color || !r) return {};
   let s = iC(e, Array.from(r), {
@@ -500,7 +500,7 @@ export function $$ex29(e, t, r, n, i) {
     };
     let i = VariablesBindings.getSubscribedVariableInfo(r.variableId);
     return i ? {
-      variable: ZI(i),
+      variable: getSubscribedVariableInfo(i),
       variableData: r
     } : {
       variable: null,
@@ -545,7 +545,7 @@ export function $$eO0(e) {
       let t = r[e] ?? void 0;
       return UU(t) && "isMixed" in t ? MIXED_MARKER : t;
     });
-    return 0 === n.length ? void 0 : 1 === n.length ? n[0] : n.every(e => c2(e, n[0])) ? n[0] : MIXED_MARKER;
+    return 0 === n.length ? void 0 : 1 === n.length ? n[0] : n.every(e => deepEqual(e, n[0])) ? n[0] : MIXED_MARKER;
   });
 }
 function eR() {
@@ -576,7 +576,7 @@ function eR() {
       l = styleUpdatesForCurrentPage.filter(e => u.has(e.key));
       d = variableSetUpdatesForCurrentPage.filter(e => u.has(e.key));
       c = libraryAssetUpdatesForCurrentPage.filter(e => {
-        if (e.type === PW.CODE_COMPONENT) return u.has(e.key);
+        if (e.type === PrimaryWorkflowEnum.CODE_COMPONENT) return u.has(e.key);
       });
     }
     return {

@@ -10,7 +10,7 @@ import { qc } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { Ls, m3, ZA } from "../figma_app/645694";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { C7 } from "../figma_app/144974";
 import { JL } from "../figma_app/663669";
 import { PV, Ou } from "../figma_app/257779";
@@ -103,7 +103,7 @@ export function $$N0({
         key: e.key,
         libraryKey: e.libraryKey,
         positionInfo: a,
-        type: PW.COMPONENT
+        type: PrimaryWorkflowEnum.COMPONENT
       };
     case "state_group":
       return {
@@ -111,7 +111,7 @@ export function $$N0({
         key: e.key,
         libraryKey: e.libraryKey,
         positionInfo: a,
-        type: PW.STATE_GROUP,
+        type: PrimaryWorkflowEnum.STATE_GROUP,
         stateComponentKey: e.stateComponentKey
       };
     default:
@@ -156,7 +156,7 @@ export function $$C1({
         if (!t) return c;
         i = {
           ...i,
-          type: PW.STATE_GROUP,
+          type: PrimaryWorkflowEnum.STATE_GROUP,
           key: t.stateGroupKey,
           stateComponentKey: p.componentKey,
           libraryKey: t.sourceLibraryKey,
@@ -164,7 +164,7 @@ export function $$C1({
         };
       } else i = {
         ...i,
-        type: PW.COMPONENT,
+        type: PrimaryWorkflowEnum.COMPONENT,
         key: p.componentKey,
         libraryKey: p.sourceLibraryKey,
         props: _
@@ -205,7 +205,7 @@ export function $$w9(e) {
     l.count++;
     positionInfo && l.proximityScores.push(positionInfo.proximityScore);
     let d = fragment ? `${fragment.file_key}.${fragment.node_id}` : null;
-    if (fragment && d && (!l.countPerFragment[d] && (l.countPerFragment[d] = 0, l.scorePerFragment[d] = fragment.score, l.fragmentCount++), l.countPerFragment[d]++), type === PW.STATE_GROUP) {
+    if (fragment && d && (!l.countPerFragment[d] && (l.countPerFragment[d] = 0, l.scorePerFragment[d] = fragment.score, l.fragmentCount++), l.countPerFragment[d]++), type === PrimaryWorkflowEnum.STATE_GROUP) {
       let {
         stateComponentKey
       } = e;
@@ -306,14 +306,14 @@ export function $$k4(e) {
       key: r
     }) => {
       switch (e) {
-        case PW.COMPONENT:
+        case PrimaryWorkflowEnum.COMPONENT:
           let s = n[r];
           s && (a[r] = {
             ...s,
             suggestionSource: t
           });
           break;
-        case PW.STATE_GROUP:
+        case PrimaryWorkflowEnum.STATE_GROUP:
           let o = i[r];
           o && (a[r] = {
             ...o,
@@ -348,13 +348,13 @@ export function $$k4(e) {
       ...e,
       asset: a
     };
-    if (e.type === PW.COMPONENT && a.type === PW.COMPONENT && a.containing_frame?.containingStateGroup) {
+    if (e.type === PrimaryWorkflowEnum.COMPONENT && a.type === PrimaryWorkflowEnum.COMPONENT && a.containing_frame?.containingStateGroup) {
       let t = a.containing_frame.containingStateGroup.nodeId;
       let i = t ? r[e.libraryKey]?.[t] : null;
       i ? (s = {
         ...e,
         key: i.key,
-        type: PW.STATE_GROUP,
+        type: PrimaryWorkflowEnum.STATE_GROUP,
         stateComponentKey: e.key,
         asset: {
           ...i,

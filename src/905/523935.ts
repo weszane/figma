@@ -13,7 +13,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { Point } from "../905/736624";
 import { b$, FU, Bs, jR, a9, D6 } from "../figma_app/933328";
 import { lg } from "../figma_app/976749";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { o as _$$o } from "../figma_app/915774";
 import { X as _$$X } from "../905/853613";
 import { Ew } from "../figma_app/361662";
@@ -23,7 +23,7 @@ import { t } from "../905/851577";
 import { N as _$$N } from "../905/645480";
 import { td } from "../figma_app/646357";
 import { u2 } from "../figma_app/807786";
-import { Do, PW, IV } from "../figma_app/633080";
+import { hasAssetId, PrimaryWorkflowEnum, hasComponentKey } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { r as _$$r } from "../905/632622";
 import { r6 } from "../figma_app/517115";
@@ -42,7 +42,7 @@ export function $$$$j0(e) {
   let U = Nv(!0);
   let B = useAtomWithSubscription(TG);
   let V = e.resource;
-  let G = Do(V);
+  let G = hasAssetId(V);
   let z = G ? "LIBRARY" !== V.subscriptionStatus : V.isLocal;
   let H = Kl();
   let W = !G && H.has(V.library_key);
@@ -69,7 +69,7 @@ export function $$$$j0(e) {
       fullscreenValue.triggerAction("commit");
     };
     let d = pointerPercentageOffset || (e.useSmartPositioning ? new Point(.5, .5) : new Point());
-    if (V.type === PW.STATE_GROUP) i(b$({
+    if (V.type === PrimaryWorkflowEnum.STATE_GROUP) i(b$({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -81,20 +81,7 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    }));else if (V.type === PW.COMPONENT) i(FU({
-      item: V,
-      canvasPosition: dropPosition,
-      percentageOffset: d,
-      insertAsChildOfCanvas: !!e.insertAsChildOfCanvas,
-      storeInRecentsKey: Y,
-      fromPlayground: e.fromPlayground,
-      insertLogArgsOverride: e.insertLogArgsOverride,
-      selectAfterInsert: e.selectAfterInsert,
-      useSmartPositioning: !!e.useSmartPositioning,
-      isClick,
-      insertionCallback: o,
-      sourceForTracking: e.sourceForTracking
-    }));else if (V.type === PW.MODULE) i(Bs({
+    }));else if (V.type === PrimaryWorkflowEnum.COMPONENT) i(FU({
       item: V,
       canvasPosition: dropPosition,
       percentageOffset: d,
@@ -107,7 +94,20 @@ export function $$$$j0(e) {
       isClick,
       insertionCallback: o,
       sourceForTracking: e.sourceForTracking
-    }));else if (V.type === PW.RESPONSIVE_SET && Do(V)) {
+    }));else if (V.type === PrimaryWorkflowEnum.MODULE) i(Bs({
+      item: V,
+      canvasPosition: dropPosition,
+      percentageOffset: d,
+      insertAsChildOfCanvas: !!e.insertAsChildOfCanvas,
+      storeInRecentsKey: Y,
+      fromPlayground: e.fromPlayground,
+      insertLogArgsOverride: e.insertLogArgsOverride,
+      selectAfterInsert: e.selectAfterInsert,
+      useSmartPositioning: !!e.useSmartPositioning,
+      isClick,
+      insertionCallback: o,
+      sourceForTracking: e.sourceForTracking
+    }));else if (V.type === PrimaryWorkflowEnum.RESPONSIVE_SET && hasAssetId(V)) {
       getFeatureFlags().sts_sprig_targeted_feedback && Sprig("track", "sites_blocks_insert");
       i(jR({
         item: V,
@@ -120,7 +120,7 @@ export function $$$$j0(e) {
         sourceForTracking: e.sourceForTracking
       }));
     } else throw Error(`Unexpected type for dragging library item: ${V.type}`);
-    K && !Do(e.resource) && IV(e.resource) && oM({
+    K && !hasAssetId(e.resource) && hasComponentKey(e.resource) && oM({
       id: e.resource.component_key,
       type: _$$p.STICKERS_AND_COMPONENTS,
       source: e.sourceForTracking,
@@ -194,15 +194,15 @@ export function $$$$j0(e) {
     getDragPreviewSrc: () => G ? "LIBRARY" === V.subscriptionStatus ? V.mainThumbnailInfo.thumbnailUrl ?? "" : j.local.thumbnails[V.assetId]?.url || "" : V.isLocal ? j.local.thumbnails[V.node_id]?.url || "" : function (e, t) {
       let i = function (e) {
         switch (e.type) {
-          case PW.COMPONENT:
+          case PrimaryWorkflowEnum.COMPONENT:
             return Fullscreen?.getSymbolNodeId(e.component_key, e.content_hash);
-          case PW.STATE_GROUP:
+          case PrimaryWorkflowEnum.STATE_GROUP:
             return Fullscreen?.getStateGroupNodeId(e.key, e.version);
-          case PW.STYLE:
+          case PrimaryWorkflowEnum.STYLE:
             return StylesBindings?.getStyleNodeId(e.key, e.content_hash);
-          case PW.VARIABLE:
-          case PW.VARIABLE_SET:
-          case PW.MODULE:
+          case PrimaryWorkflowEnum.VARIABLE:
+          case PrimaryWorkflowEnum.VARIABLE_SET:
+          case PrimaryWorkflowEnum.MODULE:
             return;
           default:
             throwTypeError(e, "Unhandled asset type");
@@ -212,12 +212,12 @@ export function $$$$j0(e) {
     }(e.resource, j.local.thumbnails),
     onPointerDownCallback: () => {
       _$$r();
-      G ? "LIBRARY" === V.subscriptionStatus && Eo.getCanvas({
+      G ? "LIBRARY" === V.subscriptionStatus && teamLibraryCache.getCanvas({
         canvas_url: V.canvasUrl
-      }) : z || (Eo.getCanvas(V), !td(j.defaultPublished, V.library_key) && (V.type === PW.COMPONENT && V.component_key && i(a9({
+      }) : z || (teamLibraryCache.getCanvas(V), !td(j.defaultPublished, V.library_key) && (V.type === PrimaryWorkflowEnum.COMPONENT && V.component_key && i(a9({
         componentKey: V.component_key,
         callsite: "useInsertableLibraryItem"
-      })), V.type === PW.STATE_GROUP && V.key && i(D6({
+      })), V.type === PrimaryWorkflowEnum.STATE_GROUP && V.key && i(D6({
         stateGroupKey: V.key
       }))));
       Fullscreen?.setShowCanvasDragAndDropOutlines(!0);

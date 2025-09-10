@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component, useMemo, useCallback, useRef, useEffect } from "react";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { BrowserInfo } from "../figma_app/778880";
 import { r } from "../905/398386";
 import { HI, ej as _$$ej, w2, $P, qv, PP, Dy, PI, _z, ky, Ns } from "../905/977218";
@@ -302,7 +302,7 @@ class V extends Component {
       let t = e.searchResults ?? H;
       let r = this.props.searchResults ?? H;
       let n = t.length !== r.length;
-      if (!n) for (let e = 0; e < t.length; e++) c2(t[e], r[e]) || (n = !0);
+      if (!n) for (let e = 0; e < t.length; e++) deepEqual(t[e], r[e]) || (n = !0);
       if (n) {
         let e = this.getFilteredResults(r, this.props.sortFilterConfig);
         this.setState({

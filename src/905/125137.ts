@@ -5,7 +5,7 @@ import { supportedDirections, supportedStyleProperties } from '../905/321380'
 import { DESIGN_TYPES } from '../905/413743'
 import { getFunctionHandle } from '../905/572400'
 import { getFeatureFlags } from '../905/601108'
-import { VariableDataType, VariableResolvedDataType } from './880730'
+import { VariableDataType, VariableResolvedDataType } from '../905/880730'
 
 // ====================
 // 🔹 基础数值和颜色类型

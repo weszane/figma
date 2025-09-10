@@ -15,7 +15,7 @@ import { isInvalidValue, isValidValue, normalizeValue } from '../905/216495';
 import { nt, o3 } from '../905/226610';
 import { HiddenLabel } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { kH } from '../905/309735';
+import { getBasename } from '../905/309735';
 import { K as _$$K } from '../905/443068';
 import { O as _$$O2 } from '../905/487602';
 import { t7 } from '../905/508367';
@@ -540,7 +540,7 @@ function eO({
       if (v.varValue.resolvedType !== VariableResolvedDataType.SYMBOL_ID) return v.defaultValue;
       {
         let e = wd([v.defaultValue], er);
-        if (e) return isInvalidValue(e) ? getI18nString('design_systems.instance_swap_picker.mixed') : kH(e.name);
+        if (e) return isInvalidValue(e) ? getI18nString('design_systems.instance_swap_picker.mixed') : getBasename(e.name);
       }
     }
   }, [v, er, M]);

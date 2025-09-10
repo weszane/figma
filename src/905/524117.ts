@@ -7,7 +7,7 @@ import { lg } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { M5 } from "../figma_app/817077";
 import { dx } from "../figma_app/646357";
-import { Do, PW } from "../figma_app/633080";
+import { hasAssetId, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { M } from "../905/771870";
 import { cx } from "../figma_app/76115";
 import { au, bO, Hx, Wy, Pl, ce } from "../figma_app/357202";
@@ -83,8 +83,8 @@ export function $$_0(e) {
   }), document.getElementById("fullscreen-root"));
 }
 let A = e => !!e.isLocal;
-let y = e => Do(e) ? [e.mainThumbnailInfo.width, e.mainThumbnailInfo.height] : e.type === PW.MODULE ? [e.width, e.height] : A(e) ? [e.width, e.height] : [e.min_node_width, e.min_node_height];
+let y = e => hasAssetId(e) ? [e.mainThumbnailInfo.width, e.mainThumbnailInfo.height] : e.type === PrimaryWorkflowEnum.MODULE ? [e.width, e.height] : A(e) ? [e.width, e.height] : [e.min_node_width, e.min_node_height];
 function b(e) {
-  return dx(e) || Do(e) && "SUBSCRIBED" !== e.subscriptionStatus;
+  return dx(e) || hasAssetId(e) && "SUBSCRIBED" !== e.subscriptionStatus;
 }
 export const q = $$_0;

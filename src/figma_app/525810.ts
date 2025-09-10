@@ -1,13 +1,12 @@
-import { atom } from 'jotai'
-import { Wh } from '../figma_app/615482'
-
-let $$a3 = atom(!0)
-let $$s1 = atom(!0)
-let $$o4 = atom(!0)
-let $$l2 = atom(!0)
-let $$d0 = Wh(() => atom(null))
-export const B_ = $$d0
-export const Yu = $$s1
-export const Zr = $$l2
-export const h0 = $$a3
-export const o3 = $$o4
+import { atom } from 'jotai';
+import { setupRemovableAtomFamily } from '../figma_app/615482';
+let $$a3 = atom(!0);
+let $$s1 = atom(!0);
+let $$o4 = atom(!0);
+let $$l2 = atom(!0);
+let $$d0 = setupRemovableAtomFamily(() => atom(null));
+export const B_ = $$d0;
+export const Yu = $$s1;
+export const Zr = $$l2;
+export const h0 = $$a3;
+export const o3 = $$o4;

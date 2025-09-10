@@ -1,4 +1,4 @@
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { useState, useEffect, useMemo } from "react";
 import { atom, createRemovableAtomFamily } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
@@ -11,10 +11,10 @@ import { M4 } from "../905/713695";
 import { h as _$$h } from "../figma_app/198885";
 import { k1, vx } from "../905/91038";
 import { kb } from "../figma_app/502247";
-import { Yu, cX } from "../figma_app/633080";
+import { NO_TEAM, LIBRARY_PREFERENCES_MODAL } from "../figma_app/633080";
 import { $W, yX, YQ as _$$YQ } from "../905/144933";
 var n;
-let A = _$$f();
+let A = getFileKey();
 function y(e, t, i) {
   let n = {};
   let r = {};
@@ -25,7 +25,7 @@ function y(e, t, i) {
       continue;
     }
     e in r && !(t.score > r[e]) || (r[e] = t.score);
-    let a = t.team_id || Yu;
+    let a = t.team_id || NO_TEAM;
     n[a] = n[a] || {};
     n[a][e] = n[a][e] || {};
     n[a][e][t.node_id] = t;
@@ -43,7 +43,7 @@ function b(e, t) {
     let e = t.library_key;
     let r = n[e];
     (!r || t.score > r) && (n[e] = t.score);
-    let a = t.team_id || Yu;
+    let a = t.team_id || NO_TEAM;
     i[a] = i[a] || {};
     i[a][e] ??= {};
     i[a][e][t.node_id] = t;
@@ -151,7 +151,7 @@ let x = createReduxSubscriptionAtomWithState(e => e.modalShown);
 let S = atom(e => {
   let t = e(E);
   let i = e(x);
-  return "team" === t.view && i?.type === cX ? t.teamId : null;
+  return "team" === t.view && i?.type === LIBRARY_PREFERENCES_MODAL ? t.teamId : null;
 });
 let w = createReduxSubscriptionAtomWithState(vx);
 let $$C1 = createRemovableAtomFamily(e => atom(t => {

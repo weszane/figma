@@ -1,5 +1,5 @@
-import { A } from "../vendor/723372";
-import { RI } from "../905/36803";
+import { A } from "src/vendor/723372";
+import { RI } from "src/905/36803";
 export function $$a0(...e) {
   let t;
   let i = e.length;

@@ -33,7 +33,7 @@ import { E as _$$E3 } from "../905/128063";
 import { LibraryModalVariablesData, CommunityLibraryModalVariablesData, LibraryManagementData, LibraryManagementCommunityData, FileByKeyThumbnailUrl, LibrarySubscriptionView, WorkspaceAdminLibrariesSectionView } from "../figma_app/43951";
 import { Oe } from "../figma_app/336853";
 import { Ef } from "../905/81982";
-import { Nf, xA } from "../figma_app/633080";
+import { isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
 import { O as _$$O } from "../figma_app/809387";
 import { J7, _d } from "../figma_app/650409";
 import { m2 } from "../figma_app/858344";
@@ -1266,7 +1266,7 @@ function tg({
   libraryIcon: a,
   onClick: s
 }) {
-  let i = Nf(e) ? e.library_file_key : e.hub_file_id;
+  let i = isTeamLibrary(e) ? e.library_file_key : e.hub_file_id;
   let r = useSubscription(FileByKeyThumbnailUrl, {
     fileKey: i
   }, {
@@ -1287,7 +1287,7 @@ function tg({
         children: [jsx(_$$Y, {
           width: 80,
           children: jsx(_$$V, {
-            thumbnailUrl: xA(e) ? e.thumbnail_url : "loaded" === r.status ? getResourceDataOrFallback(r.data?.file)?.thumbnailUrl : null,
+            thumbnailUrl: isCommunityLibrary(e) ? e.thumbnail_url : "loaded" === r.status ? getResourceDataOrFallback(r.data?.file)?.thumbnailUrl : null,
             thumbnailType: _$$F.DEFAULT_DESIGN,
             borderRadius: 4,
             size: _$$y.SMALL
@@ -1446,7 +1446,7 @@ export function $$tx1(e) {
     let l = useMemo(() => ({
       NAME: e => e.library_name,
       ENABLED_FOR: e => {
-        let t = Nf(e) ? e.library_file_key : e.hub_file_id;
+        let t = isTeamLibrary(e) ? e.library_file_key : e.hub_file_id;
         let n = t ? a[t] : void 0;
         return n?.map(e => e.name).join(",") ?? "";
       },
@@ -1480,11 +1480,11 @@ export function $$tx1(e) {
     let e = [...W];
     V && e.push(...V);
     let t = e.filter(e => {
-      let t = Nf(e) ? e.library_file_key : e.hub_file_id;
+      let t = isTeamLibrary(e) ? e.library_file_key : e.hub_file_id;
       return function (e, t, a) {
         if (0 === a.size) return !0;
         let n = a.has($$tp0);
-        let s = Nf(e) && e.has_connected_project_sharing_group;
+        let s = isTeamLibrary(e) && e.has_connected_project_sharing_group;
         if (n && !s) return !1;
         if (1 === a.size && n) return !!s;
         if (a.has(tm) && (!t || 0 === t.length)) return !0;
@@ -1517,7 +1517,7 @@ export function $$tx1(e) {
     });
   };
   let eh = e => {
-    let t = Nf(e) ? e.library_file_key : e.hub_file_id;
+    let t = isTeamLibrary(e) ? e.library_file_key : e.hub_file_id;
     t && H(showModalHandler({
       type: td,
       data: {
@@ -1640,7 +1640,7 @@ export function $$tx1(e) {
       })
     }), "loaded" === et.status && "loaded" === ee.status && jsxs(Fragment, {
       children: [sortedItems.map(e => {
-        let s = Nf(e) ? e.library_file_key : void 0;
+        let s = isTeamLibrary(e) ? e.library_file_key : void 0;
         let i = es.has(e.library_key);
         let r = s && er.has(s);
         let l = Z.has(e.library_key);

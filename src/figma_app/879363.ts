@@ -1,4 +1,4 @@
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { useEffect } from "react";
 import { shallowEqual } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -9,7 +9,7 @@ import { h } from "../905/207101";
 import { reportError } from "../905/11";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 let n;
-let _ = Wh(() => atom(!1), {
+let _ = setupRemovableAtomFamily(() => atom(!1), {
   preserveValue: !1
 });
 let $$h1 = atom("");

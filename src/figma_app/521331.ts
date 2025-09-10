@@ -1,5 +1,5 @@
 import { SelectionPaintHelpers } from "../figma_app/763686";
-import { FN } from "../figma_app/191804";
+import { whiteColor } from "../figma_app/191804";
 import { Ku } from "../figma_app/740163";
 import { q } from "../figma_app/777660";
 import { _B } from "../figma_app/152690";
@@ -26,8 +26,8 @@ export function $$l1({
   let {
     value,
     copyValue
-  } = $$d0(e ?? FN, _, c, l);
-  let E = q(e ?? FN, _, c).value;
+  } = $$d0(e ?? whiteColor, _, c, l);
+  let E = q(e ?? whiteColor, _, c).value;
   return variable && variableDisplayName && e ? {
     copyValue,
     isSoftDeleted: variable?.subscriptionStatus === "LOCAL" && variable?.isSoftDeleted,

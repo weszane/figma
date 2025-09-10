@@ -18,7 +18,7 @@ import { zE } from "../905/8732";
 import { replaceSelection } from "../figma_app/741237";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { B9 } from "../figma_app/722362";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { XV } from "../figma_app/383828";
 import { Ib } from "../905/129884";
 import { VZ } from "../905/959568";
@@ -177,9 +177,9 @@ export function $$J2({
     if (isInvalidValue(backingStateGroupGUID)) eI = getI18nString("design_systems.instance_panel.mixed");else {
       let e = backingStateGroupGUID ? ee.get(backingStateGroupGUID) : null;
       let t = affiliatedStateGroupId ? ee.get(affiliatedStateGroupId) : null;
-      eI = kH(t?.name || e?.name || "");
+      eI = getBasename(t?.name || e?.name || "");
     }
-  } else null != backingSymbolGUID ? eI = isInvalidValue(backingSymbolGUID) ? getI18nString("design_systems.instance_panel.mixed") : kH(ee.get(backingSymbolGUID)?.name || "") : null != backingSymbolOrStateGroupOfContainingInstances && (eI = isInvalidValue(backingSymbolOrStateGroupOfContainingInstances) ? getI18nString("design_systems.instance_panel.mixed") : kH(backingSymbolOrStateGroupOfContainingInstances.name || ""));
+  } else null != backingSymbolGUID ? eI = isInvalidValue(backingSymbolGUID) ? getI18nString("design_systems.instance_panel.mixed") : getBasename(ee.get(backingSymbolGUID)?.name || "") : null != backingSymbolOrStateGroupOfContainingInstances && (eI = isInvalidValue(backingSymbolOrStateGroupOfContainingInstances) ? getI18nString("design_systems.instance_panel.mixed") : getBasename(backingSymbolOrStateGroupOfContainingInstances.name || ""));
   let eS = "";
   if (onlyInstances) {
     let e = ee.get(instanceAndSublayerGUIDs[0])?.name;

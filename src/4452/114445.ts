@@ -21,7 +21,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { lR, e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Zu } from "../4452/396452";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { c as _$$c } from "../905/370443";
 import { trackEventAnalytics } from "../905/449184";
 import { capitalize, toTitleCase } from "../figma_app/930338";
@@ -50,7 +50,7 @@ function w({
   let r = useAtomWithSubscription(aN);
   let i = useAtomWithSubscription(V4);
   let l = !!r || i.has(n);
-  let o = _$$u();
+  let o = getRumLoggingConfig();
   return jsxs("div", {
     className: _$$s.wFull.flex.flexColumn.gap8.$,
     children: [jsx(lR, {

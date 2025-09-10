@@ -312,8 +312,8 @@ function validateSchema(schema: ParsedSchema): void {
           def.line,
           def.column,
         ),
-      visitState[typeName] !== 2
-      && def)
+        visitState[typeName] !== 2
+        && def)
     ) {
       visitState[typeName] = 1
       for (const field of def.fields) {

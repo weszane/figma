@@ -4,13 +4,13 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { A } from "../vendor/90566";
-import { qv, r2 } from "../figma_app/80990";
+import { revokeThumbnailUrl, generateNodeThumbnail } from "../figma_app/80990";
 import { Fk } from "../figma_app/167249";
 import { J } from "../905/273120";
 let p = createRemovableAtomFamily(e => atom(null, (t, i, n) => {
   let r = t(p(e));
   i(p(e), n);
-  r && qv(r.url);
+  r && revokeThumbnailUrl(r.url);
 }));
 export function $$m0(e) {
   let t = e.pageId;
@@ -20,7 +20,7 @@ export function $$m0(e) {
   let f = useCallback(() => {
     requestAnimationFrame(() => {
       if (h) {
-        let e = r2(h.nodeID);
+        let e = generateNodeThumbnail(h.nodeID);
         e && m({
           thumbnailId: h.nodeID,
           url: e,

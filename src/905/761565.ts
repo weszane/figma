@@ -1,7 +1,7 @@
-import { getFeatureFlags } from "../905/601108";
-import { FPlanNameType } from "../figma_app/191312";
-import { useCurrentPublicPlan } from "../figma_app/465071";
-import { isSitesFeatureEnabled } from "../905/561485";
+import { getFeatureFlags } from "src/905/601108";
+import { FPlanNameType } from "src/figma_app/191312";
+import { useCurrentPublicPlan } from "src/figma_app/465071";
+import { isSitesFeatureEnabled } from "src/905/561485";
 export function $$o0(e) {
   return !!isSitesFeatureEnabled() && (e === FPlanNameType.STARTER || (e === FPlanNameType.STUDENT ? !!getFeatureFlags().sts_student_enabled : e === FPlanNameType.PRO || e === FPlanNameType.ORG || e === FPlanNameType.ENTERPRISE));
 }

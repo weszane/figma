@@ -1,5 +1,5 @@
-import { sendMetric } from "../905/485103";
-import { x } from "../905/707384";
+import { sendMetric } from "src/905/485103";
+import { x } from "src/905/707384";
 let $$a1 = ["memory.fullscreen.", "performance.fullscreen."];
 let s = !0;
 function o(e, t) {

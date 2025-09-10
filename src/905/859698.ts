@@ -88,17 +88,16 @@ export function keyVersionIsEqual(e: KeyVersion | null, t: KeyVersion | null): b
 export function keyVersionIsValid({ key, version }: Partial<KeyVersion>): boolean {
   return !!(key && version)
 }
-
-// #endregion
-type InvalidKeyVersion = { INVALID: string; toString: (e: any) => any } & ((e: any) => any)
-// #region KeyVersion Namespaces
-function createInvalidString<T extends InvalidKeyVersion>(obj: T): InvalidKeyVersion {
-  const res = obj
-  res.INVALID = res('') as string
-  res.toString = (e: T) => e
-  return res
+interface CreateInvalidString {
+  (e: string): string
+  toString: (e: string) => string
+  INVALID: string
 }
 
+const createInvalidString = ((e: string) => e) as CreateInvalidString
+
+createInvalidString.toString = (e: string) => e
+createInvalidString.INVALID = createInvalidString('')
 
 export type ReturnKeyVersion = ReturnType<typeof createKeyVersionNamespace>
 /**
@@ -129,20 +128,46 @@ function createKeyVersionNamespace<T extends object>(obj: T): T & {
   }
 }
 
-// Example exports (original names preserved for traceability)
-export const iU = createKeyVersionNamespace({})
-export const SymbolId = createKeyVersionNamespace({})
-export const StateGroupId = createKeyVersionNamespace({})
-export const VariableID = createKeyVersionNamespace({})
-export const VariableOverrideId = createKeyVersionNamespace({})
-export const VariableCollectionId = createKeyVersionNamespace({})
-export const ModuleId = createKeyVersionNamespace({})
-export const ResponsiveSetId = createKeyVersionNamespace({})
-export const CodeLibraryId = createKeyVersionNamespace({})
-export const CodeFileId = createKeyVersionNamespace({})
-export const CodeComponentId = createKeyVersionNamespace({})
-export const ManagedStringId = createKeyVersionNamespace({})
-export const StyleId = createKeyVersionNamespace({})
+//
+export const $y = createKeyVersionNamespace
+export const I0 = createKeyVersionNamespace
+export const Kj = createKeyVersionNamespace
+export const UG = createKeyVersionNamespace
+export const Uw = createKeyVersionNamespace
+export const kY = createKeyVersionNamespace
+export const sS = createKeyVersionNamespace
+export const cI = createKeyVersionNamespace
+export const VP = createKeyVersionNamespace
+export const iF = createKeyVersionNamespace
+export const iU = createKeyVersionNamespace
+export const iV = createKeyVersionNamespace
+export const M4 = createKeyVersionNamespace
+
+//
+export const F7 = createInvalidString
+export const IA = createInvalidString
+export const Pg = createInvalidString
+export const Po = createInvalidString
+export const Rf = createInvalidString
+export const SG = createInvalidString
+export const Sm = createInvalidString
+
+export const Vt = createInvalidString
+export const Xe = createInvalidString
+export const Xf = createInvalidString
+
+export const ey = createInvalidString
+
+export const ii = createInvalidString
+export const j6 = createInvalidString
+
+export const mW = createInvalidString
 export const n3 = createInvalidString
-export const VariableStyleId = createKeyVersionNamespace({})
-// #endregion
+export const nK = createInvalidString
+export const o5 = createInvalidString
+export const q = createInvalidString
+
+export const sg = createInvalidString
+export const wF = createInvalidString
+export const yG = createInvalidString
+export { createInvalidString, createKeyVersionNamespace }

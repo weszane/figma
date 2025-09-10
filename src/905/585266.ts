@@ -1,4 +1,4 @@
-import { desktopAPIInstance } from "../figma_app/876459";
+import { desktopAPIInstance } from "src/figma_app/876459";
 export class $$r0 {
   toggleDevTools(e) {
     desktopAPIInstance || this.throwNoDesktopAppError();

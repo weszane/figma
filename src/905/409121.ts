@@ -1,5 +1,5 @@
-import { BrowserInfo } from "../figma_app/778880";
-import { ap, Vu, Ew, Zj } from "../figma_app/149304";
+import { BrowserInfo } from "src/figma_app/778880";
+import { ap, Vu, Ew, Zj } from "src/figma_app/149304";
 let a = "1" === new URLSearchParams().get("fullscreen-high-perf-mode");
 let s = () => BrowserInfo.mac || BrowserInfo.ios || BrowserInfo.isIpad || BrowserInfo.isIpadNative;
 let o = () => BrowserInfo.chrome && 0 > BrowserInfo.compareVersions([BrowserInfo.version.toString(), "120"]);

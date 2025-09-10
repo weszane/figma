@@ -27,7 +27,7 @@ import { Q as _$$Q } from "../905/249555";
 import { Td } from "../905/595131";
 import { EO, q4, dl, xR, U3, sh, qJ, ZG, it } from "../figma_app/536669";
 import { documentStateTsApi, AccessibilityHelpers, AppMode, AppStateTsApi, SelectionMode, DesignGraphElements, CustomFocusHelpers, Fullscreen, SceneGraphHelpers, SceneNodeCpp, NodeTsApi, StateSourceType, LayoutTabType } from "../figma_app/763686";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { EventEmitter } from "../905/690073";
 import { isNotNullish } from "../figma_app/95419";
 import { debugState } from "../905/407919";
@@ -113,7 +113,7 @@ function z({
     maxWait: 1e3
   });
   useEffect(() => {
-    if (c2(d, p.current)) return;
+    if (deepEqual(d, p.current)) return;
     let e = Object.keys(d);
     let t = Object.keys(p.current);
     let r = e.length;
@@ -154,7 +154,7 @@ function z({
 function W(e, t) {
   let r = useContext(H).emitter;
   let n = useRef(e);
-  c2(e, n.current) ? e = n.current : n.current = e;
+  deepEqual(e, n.current) ? e = n.current : n.current = e;
   let a = useRef(t);
   a.current = t;
   let s = useCallback(t => {
@@ -165,7 +165,7 @@ function W(e, t) {
   useEffect(() => {
     let t = ([e]) => {
       let t = s(e);
-      l(e => c2(e, t) ? e : t);
+      l(e => deepEqual(e, t) ? e : t);
     };
     for (let n of (t([dK(debugState.getState())]), e)) r.on(`node-changed-${n}`, t);
     return () => {};
@@ -802,7 +802,7 @@ class ew extends ee {
         absoluteTransform: _absoluteTransform,
         ...E
       } = t;
-      return shallowEqual(c, E) && shallowEqual(dimensions, _dimensions) && shallowEqual(absoluteTransform, _absoluteTransform) && shallowEqual(transformProperties, _transformProperties) && shallowEqual(stampFrequencies, _stampFrequencies) && shallowEqual(accessibleLabel, _accessibleLabel) && c2(directTextContent, _directTextContent) && c2(innerTextContent, _innerTextContent);
+      return shallowEqual(c, E) && shallowEqual(dimensions, _dimensions) && shallowEqual(absoluteTransform, _absoluteTransform) && shallowEqual(transformProperties, _transformProperties) && shallowEqual(stampFrequencies, _stampFrequencies) && shallowEqual(accessibleLabel, _accessibleLabel) && deepEqual(directTextContent, _directTextContent) && deepEqual(innerTextContent, _innerTextContent);
     }
   }
 }

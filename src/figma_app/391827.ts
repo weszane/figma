@@ -1,9 +1,9 @@
 import { useMemo, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { DP } from "../905/158740";
-import { aH, R0 } from "../figma_app/273493";
+import { normalizedToRgb, unpackToNormalizedRgb } from "../figma_app/273493";
 import { WhiteboardTsApi, AppStateTsApi } from "../figma_app/763686";
-import { Bx } from "../figma_app/191804";
+import { getThemeBackgroundColor } from "../figma_app/191804";
 import { selectWithShallowEqual } from "../905/103090";
 import { F } from "../905/989956";
 import { ow } from "../figma_app/976749";
@@ -18,9 +18,9 @@ export function $$h0() {
   let m = useMemo(() => F.format(a), [a]);
   if (e) {
     let e = WhiteboardTsApi?.getWhiteboardCanvasColor();
-    return e ? F.format(aH(e)) : "#ffffff";
+    return e ? F.format(normalizedToRgb(e)) : "#ffffff";
   }
-  return t && AppStateTsApi ? F.format(aH(R0(AppStateTsApi.getFSCanvasDefaultFill()))) : a ? m : Bx(h);
+  return t && AppStateTsApi ? F.format(normalizedToRgb(unpackToNormalizedRgb(AppStateTsApi.getFSCanvasDefaultFill()))) : a ? m : getThemeBackgroundColor(h);
 }
 export function $$m1() {
   let e = "ui3" === DP().version;

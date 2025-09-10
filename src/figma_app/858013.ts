@@ -1,12 +1,13 @@
-import a from 'classnames'
+
 import { Component, PureComponent } from 'react'
 import { jsx } from 'react/jsx-runtime'
 import { B } from '../905/714743'
 import { A as _$$A } from '../1617/62299'
 import { A } from '../1617/976727'
 import { $g, F, h, K_, Mn, OZ, PG, Pu, q5, sl, uz, WL, yM, zr } from '../figma_app/498055'
+import classNames from 'classnames'
 
-let s = a
+
 export class $$u4 extends Component {
   render() {
     let e = PG
@@ -29,24 +30,24 @@ export class $$u4 extends Component {
         t = null
     }
     return jsx('span', {
-      'className': s()(zr, e, this.props.shouldMatchTextColor ? K_ : h, this.props.className || ''),
+      'className': classNames(zr, e, this.props.shouldMatchTextColor ? K_ : h, this.props.className || ''),
       'data-testid': this.props.testId,
       'children': this.props.cssBacked
         ? jsx('span', {
-            className: s()(WL, t),
-          })
+          className: classNames(WL, t),
+        })
         : this.props.imageBacked
           ? jsx('img', {
-              alt: 'Loading',
-              className: yM,
-              src: `data:image/svg+xml;base64,${btoa(A)}`,
-            })
+            alt: 'Loading',
+            className: yM,
+            src: `data:image/svg+xml;base64,${btoa(A)}`,
+          })
           : jsx(B, {
-              svg: this.props.altIcon || A,
-              className: yM,
-              autosize: !this.props.altIcon,
-              dataTestId: 'loading-spinner',
-            }),
+            svg: this.props.altIcon || A,
+            className: yM,
+            autosize: !this.props.altIcon,
+            dataTestId: 'loading-spinner',
+          }),
     })
   }
 }

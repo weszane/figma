@@ -1,9 +1,9 @@
-import { canViewTeam } from "../figma_app/642025";
-import { Tb } from "../figma_app/633080";
-import { AccessLevelEnum } from "../905/557142";
-import { C0 } from "../figma_app/756995";
-import { DQ, Pw } from "../figma_app/121751";
-import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
+import { canViewTeam } from "src/figma_app/642025";
+import { getDraftsSidebarString } from "src/figma_app/633080";
+import { AccessLevelEnum } from "src/905/557142";
+import { C0 } from "src/figma_app/756995";
+import { DQ, Pw } from "src/figma_app/121751";
+import { setupShadowRead, adminPermissionConfig } from "src/figma_app/391338";
 let $$d = "temp-";
 export function $$c1(e, t) {
   return $$p2(e[t]);
@@ -40,10 +40,10 @@ export function $$E13(e) {
   return e && !e.teamId && "" !== e.path && !!e.orgId;
 }
 export function $$y0(e) {
-  return e?.path === "" ? Tb() : e?.path;
+  return e?.path === "" ? getDraftsSidebarString() : e?.path;
 }
 export function $$b4(e) {
-  return void 0 === e ? null : "" === e ? Tb() : e;
+  return void 0 === e ? null : "" === e ? getDraftsSidebarString() : e;
 }
 export function $$T3(e, t) {
   return null != t && t in e;

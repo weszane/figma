@@ -27,7 +27,7 @@ import { Y as _$$Y } from "../vendor/435990";
 import { eF } from "../figma_app/394327";
 import { J2, wG } from "../905/331989";
 import { B9 } from "../905/782020";
-import { kz, Dt } from "../figma_app/633080";
+import { getLocalVariableInfo, getLocalVariableSetInfo } from "../figma_app/633080";
 import { X as _$$X } from "../905/55424";
 import { lQ } from "../905/934246";
 import { f as _$$f } from "../37/573389";
@@ -227,7 +227,7 @@ function W(e) {
     let n = VariablesBindings.getLocalVariableInfo(t);
     let i = VariablesBindings.getLocalVariableSetsInfo().find(e => e.id === r);
     if (n && i) return {
-      node: j(kz(n), Dt(i), e.getAttribute("data-mode-id") ?? void 0)
+      node: j(getLocalVariableInfo(n), getLocalVariableSetInfo(i), e.getAttribute("data-mode-id") ?? void 0)
     };
   }
   return {

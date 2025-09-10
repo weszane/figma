@@ -13,7 +13,7 @@ import { throwTypeError, assert, throwError } from "../figma_app/465776";
 import { permissionScopeHandler } from "../905/189185";
 import { getClosestFontName, loadNonPluginFont } from "../905/426868";
 import { positiveMod, clamp } from "../figma_app/492908";
-import { I0, oq } from "../figma_app/273493";
+import { labToRgb, labToXyz } from "../figma_app/273493";
 import { Ay } from "../vendor/917855";
 import { PW, KS } from "../2824/430873";
 import { D as _$$D, h as _$$h } from "../2824/655106";
@@ -3833,12 +3833,12 @@ function eO(e, t) {
       let c = l(-.969266 * a + 1.8760108 * s + .041556 * n);
       let u = l(.0556434 * a + -.2040259 * s + 1.0572252 * n);
       return ej(eJ(d), eJ(c), eJ(u), r);
-    }(eU(i[1]), parseFloat(i[2]), parseFloat(i[3]), null == i[4] ? t : eX(i[4])) : (i = e0.exec(e)) ? I0({
+    }(eU(i[1]), parseFloat(i[2]), parseFloat(i[3]), null == i[4] ? t : eX(i[4])) : (i = e0.exec(e)) ? labToRgb({
       l: eG(i[1], .01),
       c: eG(i[2], .004),
       h: eq(i[3]),
       a: null == i[4] ? t : eX(i[4])
-    }) : (i = e1.exec(e)) ? oq({
+    }) : (i = e1.exec(e)) ? labToXyz({
       l: eG(i[1], .01),
       ax: eG(i[2], .01),
       bx: parseFloat(i[3]),

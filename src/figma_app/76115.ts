@@ -7,13 +7,13 @@ import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { logError } from "../905/714362";
 import { am } from "../figma_app/430563";
-import { Jl, y3, UB } from "../figma_app/80990";
+import { processLocalComponents, filterAndSortPublishedItems, isCurrentStagingStatus } from "../figma_app/80990";
 import { qp } from "../905/977779";
 import { selectCurrentFile } from "../figma_app/516028";
 import { dx, ZX, nJ, Hb, fc, t$ } from "../figma_app/646357";
 import { QB } from "../905/921418";
 import { T } from "../905/486858";
-import { E8, PW, Yu, Do } from "../figma_app/633080";
+import { StagingStatusEnum, PrimaryWorkflowEnum, NO_TEAM, hasAssetId } from "../figma_app/633080";
 import { n as _$$n } from "../905/347702";
 import { M } from "../905/540025";
 let $$T9 = "assets-panel";
@@ -33,7 +33,7 @@ let $$v2 = () => ({
   fileKeyToSubscribedItems: {}
 });
 let $$A5 = _$$n((e, t) => {
-  let r = $$x3(Jl(e));
+  let r = $$x3(processLocalComponents(e));
   let n = $$x3(t, e);
   return {
     allItems: [].concat(r.allItems, n.allItems),
@@ -45,7 +45,7 @@ let $$A5 = _$$n((e, t) => {
   };
 });
 export function $$x3(e, t, r) {
-  let n = y3(e);
+  let n = filterAndSortPublishedItems(e);
   let i = [];
   let a = [];
   let s = [];
@@ -58,7 +58,7 @@ export function $$x3(e, t, r) {
     let n = r.containing_frame?.containingStateGroup?.nodeId;
     n && r.old_key && c.add(n);
   }
-  for (let e of n) if (e.deletedFromSceneGraph || (i.push(e), e.status === E8.NOT_STAGED || e.status === E8.DELETED ? s.push(e) : a.push(e)), UB(e.status) && d++, e.status !== E8.CURRENT && e.status !== E8.NOT_STAGED || (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP) && Hb(e.status) && e.old_key || e.type === PW.STATE_GROUP && Hb(e.status) && c.has(e.node_id)) {
+  for (let e of n) if (e.deletedFromSceneGraph || (i.push(e), e.status === StagingStatusEnum.NOT_STAGED || e.status === StagingStatusEnum.DELETED ? s.push(e) : a.push(e)), isCurrentStagingStatus(e.status) && d++, e.status !== StagingStatusEnum.CURRENT && e.status !== StagingStatusEnum.NOT_STAGED || (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP) && Hb(e.status) && e.old_key || e.type === PrimaryWorkflowEnum.STATE_GROUP && Hb(e.status) && c.has(e.node_id)) {
     l++;
     continue;
   }
@@ -125,7 +125,7 @@ export function $$w11(e) {
         let a = e.stateGroupsByLibraryKey[n] || {};
         let s = Object.values(i)[0];
         let l = Object.values(a)[0];
-        let d = s?.team_id ?? l?.team_id ?? Yu;
+        let d = s?.team_id ?? l?.team_id ?? NO_TEAM;
         t[d] ??= {};
         t[d][n] = {
           ...i,
@@ -227,7 +227,7 @@ function L({
         let u = s[a];
         for (let e in u) {
           let t = u[e];
-          t && !(t?.type === PW.COMPONENT && t?.containing_frame?.containingStateGroup) && c.push(t);
+          t && !(t?.type === PrimaryWorkflowEnum.COMPONENT && t?.containing_frame?.containingStateGroup) && c.push(t);
         }
         c.length > 0 && (n[a] = c);
       }
@@ -280,7 +280,7 @@ export function $$k7(e, t) {
   }, [a, r, e, o, l, s, t]);
 }
 export function $$M8(e) {
-  return !!e && (!!Do(e) || e.type === PW.MODULE || e.type === PW.COMPONENT || e.type === PW.STATE_GROUP);
+  return !!e && (!!hasAssetId(e) || e.type === PrimaryWorkflowEnum.MODULE || e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP);
 }
 export const $1 = $$N0;
 export const Bk = $$P1;

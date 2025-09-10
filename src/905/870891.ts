@@ -14,8 +14,8 @@ export class PaginatedQueryNode {
     type: string;
     error?: any;
   } = {
-    type: 'loading'
-  };
+      type: 'loading'
+    };
   _result: any;
   query: QueryContext;
   _isLoaded = false;
@@ -23,9 +23,9 @@ export class PaginatedQueryNode {
     start: any;
     end: any;
   } = {
-    start: null,
-    end: null
-  };
+      start: null,
+      end: null
+    };
   previousPageCountsForReconnection: number[] | null = null;
   isPaginatedNodeFetching = false;
   clientIsFetching = false;

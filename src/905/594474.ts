@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle, useState, createContext, useContext, Fragment as _$$Fragment, useCallback, useMemo, useId, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { t as _$$t } from "../905/150656";
 import { $n } from "../905/521428";
@@ -3391,15 +3391,15 @@ function ij(e) {
     securityForm: await _$$is.getBlankSecurityForm()
   }, [existingSecurityFormResponse]);
   let m = selectUser();
-  let h = useSelector(e => xw(e) ?? void 0, c2);
+  let h = useSelector(e => xw(e) ?? void 0, deepEqual);
   let g = sZ();
   let f = useCurrentPlanUser("ExtensionPublishingModal");
   let A = useIsOrgMemberOrAdminUser(f).unwrapOr(!1);
-  let y = useSelector(e => UU(e, existingExtension), c2);
+  let y = useSelector(e => UU(e, existingExtension), deepEqual);
   let b = useSelector(e => e.authedProfilesById);
   let v = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let I = useMemo(() => Promise.resolve([]), []);
-  let E = useSelector(e => existingExtension ? of(e, existingExtension) : void 0, c2);
+  let E = useSelector(e => existingExtension ? of(e, existingExtension) : void 0, deepEqual);
   let x = iu({
     ...e,
     localExtension,

@@ -1,4 +1,4 @@
-import { o1 } from "../figma_app/10554";
+import { o1 } from "src/figma_app/10554";
 export function $$i0(e) {
   return !!(e && (e.entity_type === o1.ORG || e.entity_type === o1.TEAM));
 }

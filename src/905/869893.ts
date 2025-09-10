@@ -1,4 +1,4 @@
-import type { Fn } from '../../types/global'
+import type { Fn } from '../../../types/global'
 import { trackEventAnalytics } from '../905/449184'
 import { globalPerfTimer } from '../905/542194'
 import { getCurrentReferrer, getInitialReferrer, updateReferrer } from '../905/747968'

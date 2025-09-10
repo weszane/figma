@@ -1,8 +1,8 @@
 import { atom } from "../figma_app/27355";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 var $$a1 = (e => (e.PREVIEW = "preview", e.CODE = "code", e))($$a1 || {});
-let $$s2 = Wh(() => atom("preview"));
-let $$o0 = Wh(() => atom(!1));
+let $$s2 = setupRemovableAtomFamily(() => atom("preview"));
+let $$o0 = setupRemovableAtomFamily(() => atom(!1));
 export const $C = $$o0;
 export const Ic = $$a1;
 export const jx = $$s2;

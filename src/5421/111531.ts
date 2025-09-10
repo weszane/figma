@@ -5,7 +5,7 @@ import { Ay, xk } from "@stylexjs/stylex";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { d as _$$d, k as _$$k2 } from "../5421/548912";
 import { Y_, p_, l6, Xs, xJ, UL, iK, ZY, qQ, Wn } from "../figma_app/114522";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { $n } from "../905/521428";
@@ -3615,7 +3615,7 @@ class n$ {
   updateOptions(e) {
     let t = new Set(this.imagePropAssetHashes);
     let n = e.imagePropAssetHashes?.every(e => t.has(e));
-    this.requiresBuild = this.requiresBuild || this.buildNumber !== e.buildNumber || this.nodeId !== e.nodeId || !c2(this.instanceSwapPropertyGuids, e.instanceSwapPropertyGuids) || !n;
+    this.requiresBuild = this.requiresBuild || this.buildNumber !== e.buildNumber || this.nodeId !== e.nodeId || !deepEqual(this.instanceSwapPropertyGuids, e.instanceSwapPropertyGuids) || !n;
     this.requiresConsoleClear = this.nodeId !== e.nodeId;
     this.requiresBuild && !this.isPreviewDirty && (this.isPreviewDirty = !0, this.onPreviewDirty?.(this.isPreviewDirty));
     this.componentPreview && e.onComponentPreview && !this.onComponentPreview && e.onComponentPreview(this.componentPreview);

@@ -10,12 +10,12 @@ import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
 import { hS } from "../905/437088";
 import { L as _$$L } from "../905/704296";
-import { oB, In } from "../figma_app/273493";
+import { rgbToHsl, hslToRgb } from "../figma_app/273493";
 import { DesignGraphElements, ToolType } from "../figma_app/763686";
 import { useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import x from "classnames";
 import { colorToHex } from "../905/436288";
-import { $K, DA, tK, ol, Uv } from "../figma_app/191804";
+import { areColorArraysEqual, areColorsEqual, parseHex, multiplayerColors, blackColor } from "../figma_app/191804";
 import { generateUUIDv4 } from "../905/871474";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -120,7 +120,7 @@ function Q({
   let O = useMemo(() => i?.baseColors || Vk(), [i?.baseColors]);
   let [Q, Y] = useAtomValueAndSetter(rN);
   let J = Xr(_$$B);
-  let K = !$K(O, Q) || r;
+  let K = !areColorArraysEqual(O, Q) || r;
   let [X, W] = useState(!1);
   useEffect(() => (F(-1), Y(O), J(ToolType.EDIT_PALETTE_MODAL), () => {
     F(-1);
@@ -158,7 +158,7 @@ function Q({
   let en = getUserId();
   let eo = Bw();
   let er = useCallback(() => {
-    let t = Q.some((e, t) => Q.some((i, a) => t !== a && DA(e, i)));
+    let t = Q.some((e, t) => Q.some((i, a) => t !== a && areColorsEqual(e, i)));
     if (W(t), t) return;
     let a = Q.map(e => colorToHex(e, 1));
     if (k && en && a.length) {
@@ -181,15 +181,15 @@ function Q({
     }
   }, [Q, k, en, i, e, ea, x, ei, eo]);
   let el = function (e) {
-    let t = tK(ol.MULTIPLAYER_PURPLE) || Uv;
+    let t = parseHex(multiplayerColors.MULTIPLAYER_PURPLE) || blackColor;
     if (!e) return t;
-    let i = oB(e);
+    let i = rgbToHsl(e);
     let a = 360 * i.h;
     let n = {
       ...i,
       h: (a + 40) % 360 / 360
     };
-    return In(n);
+    return hslToRgb(n);
   }(Q.length > 0 ? Q[Q.length - 1] : null);
   let es = Q.length >= I_;
   let ec = k && k.trim() && Q.length > 0 && (!i || K || k !== i.name);

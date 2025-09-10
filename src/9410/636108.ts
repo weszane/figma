@@ -1,9 +1,9 @@
-import { HD } from "../figma_app/191804";
+import { isColorDark } from "../figma_app/191804";
 import { lH, Dk } from "../figma_app/18582";
 import { X6, oR, gU, Jv } from "../figma_app/234690";
 export function $$s0(e) {
   let t = X6(e);
-  if (t) return HD(t) ? lH.DARK : lH.LIGHT;
+  if (t) return isColorDark(t) ? lH.DARK : lH.LIGHT;
 }
 export function $$o1(e, t, i) {
   e && function e(t, i, r) {

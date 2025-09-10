@@ -1,4 +1,4 @@
-import type { Fn } from '../../types/global';
+import type { Fn } from '../../../types/global';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { requestDeferredExecution } from '../905/561433';
 import { useSyncedRef } from '../905/633914';
@@ -52,7 +52,7 @@ export function subscribeObservable(observable: any, {
     } else {
       try {
         observable.unsubscribeFromJs(subscription);
-      } catch {}
+      } catch { }
     }
   };
 }

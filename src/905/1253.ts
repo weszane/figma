@@ -13,7 +13,7 @@ import { renderI18nText } from "../905/303541";
 import { zE } from "../905/8732";
 import { dG } from "../figma_app/753501";
 import { isValidValue, isInvalidValue } from "../905/216495";
-import { kH } from "../905/309735";
+import { getBasename } from "../905/309735";
 import { VZ, TS } from "../905/959568";
 import { MB } from "../figma_app/525558";
 import { T as _$$T } from "../figma_app/270091";
@@ -92,7 +92,7 @@ export function $$k1(e) {
         className: c()("instance_swap_toggle--pickerButtonContent--wSQrI ellipsis--ellipsis--Tjyfa", {
           [S]: fill
         }),
-        children: isInvalidValue(instanceSwapNode) ? renderI18nText("design_systems.instance_swap_picker.mixed") : kH(instanceSwapNode.name)
+        children: isInvalidValue(instanceSwapNode) ? renderI18nText("design_systems.instance_swap_picker.mixed") : getBasename(instanceSwapNode.name)
       }) : jsx("div", {
         className: c()("instance_swap_toggle--pickerButtonPlaceholder--OIjte instance_swap_toggle--pickerButtonContent--wSQrI ellipsis--ellipsis--Tjyfa", {
           [S]: fill

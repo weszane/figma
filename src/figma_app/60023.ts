@@ -1,9 +1,9 @@
 import { atom } from "../figma_app/27355";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 var $$a11 = (e => (e.ALL = "ALL", e.ORG = "ORG", e.TEMPLATE = "TEMPLATE", e.HUB_FILE = "HUB_FILE", e.FILE_PICKER = "FILE_PICKER", e.TEMPLATE_PICKER = "TEMPLATE_PICKER", e.TEAM = "TEAM", e))($$a11 || {});
-let $$s1 = Wh(() => atom(!1));
-let $$o10 = Wh(() => atom(!1));
-let $$l0 = Wh(() => atom(!1));
+let $$s1 = setupRemovableAtomFamily(() => atom(!1));
+let $$o10 = setupRemovableAtomFamily(() => atom(!1));
+let $$l0 = setupRemovableAtomFamily(() => atom(!1));
 let $$d13 = atom({
   type: "ALL"
 });
@@ -71,14 +71,14 @@ export function $$v3(e) {
   }
 }
 export var $$A15 = (e => (e.ALL = "ALL", e.SINGLE = "SINGLE", e.NONE = "NONE", e))($$A15 || {});
-let $$x19 = Wh(() => atom(null));
-let $$N17 = Wh(() => atom(null));
-let $$C9 = Wh(() => atom({
+let $$x19 = setupRemovableAtomFamily(() => atom(null));
+let $$N17 = setupRemovableAtomFamily(() => atom(null));
+let $$C9 = setupRemovableAtomFamily(() => atom({
   type: "NONE"
 }));
-let $$w4 = Wh(() => atom(""));
-let $$O18 = Wh(() => atom(!1));
-Wh(() => atom(null));
+let $$w4 = setupRemovableAtomFamily(() => atom(""));
+let $$O18 = setupRemovableAtomFamily(() => atom(!1));
+setupRemovableAtomFamily(() => atom(null));
 export const DM = $$l0;
 export const Ei = $$s1;
 export const F4 = $$m2;

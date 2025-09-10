@@ -472,13 +472,13 @@ function getContextArgs(withDefault: boolean, contextArgs?: Record<string, any>)
   }
   const defaultArgs = withDefault
     ? selectWithShallowEqual(state => ({
-        currentTeamId: state.currentTeamId,
-        getTeamIdReturnValue: resolveTeamId(state),
-        currentOrgId: state.currentUserOrgId,
-        currentUserId: state.user?.id ?? null,
-        openFileKey: state.openFile?.key ?? null,
-        selectedView: state.selectedView?.view ?? null,
-      }))
+      currentTeamId: state.currentTeamId,
+      getTeamIdReturnValue: resolveTeamId(state),
+      currentOrgId: state.currentUserOrgId,
+      currentUserId: state.user?.id ?? null,
+      openFileKey: state.openFile?.key ?? null,
+      selectedView: state.selectedView?.view ?? null,
+    }))
     : null
   return useMemoStable(() => ({
     ...defaultArgs,

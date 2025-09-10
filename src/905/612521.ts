@@ -203,7 +203,7 @@ export function setupCustomHistory(): CustomHistory {
         })
         return new Error('Long reload time')
       }, 10_000)
-      await new Promise(() => {})
+      await new Promise(() => { })
     },
     async reloadEmbed(reason: string) {
       if (isInteractionPathCheck()) {
@@ -219,7 +219,7 @@ export function setupCustomHistory(): CustomHistory {
         })
         return new Error('Long reload time')
       }, 10_000)
-      await new Promise(() => {})
+      await new Promise(() => { })
     },
     redirect(url: string, inTopFrame?: boolean) {
       const { hostname, href } = parseUrl(url)
@@ -236,7 +236,7 @@ export function setupCustomHistory(): CustomHistory {
     },
     async redirectAndWaitForever(url: string, inTopFrame?: boolean) {
       this.redirect(url, inTopFrame)
-      await new Promise(() => {})
+      await new Promise(() => { })
     },
     postRedirect(url: string, target?: string) {
       if (isInteractionPathCheck()) {

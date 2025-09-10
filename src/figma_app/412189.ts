@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback } from "react";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 export function $$a2() {
   let e = useRef(!1);
   useEffect(() => (e.current = !0, () => {
@@ -16,13 +16,13 @@ export function $$s3(e, t) {
   return i ? r.current : e;
 }
 export function $$o1(e, t, r) {
-  let a = $$s3(r, c2);
+  let a = $$s3(r, deepEqual);
   useEffect(() => (window.addEventListener(e, t, a), () => {
     window.removeEventListener(e, t, a);
   }), [e, t, a]);
 }
 export function $$l0(e, t, r, a) {
-  let o = $$s3(a, c2);
+  let o = $$s3(a, deepEqual);
   useEffect(() => {
     if (r) {
       document.addEventListener(e, t, o);

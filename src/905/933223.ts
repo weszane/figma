@@ -1,4 +1,4 @@
-import { R0 } from "../figma_app/273493";
+import { unpackToNormalizedRgb } from "../figma_app/273493";
 import { AppStateTsApi, DiagramElementType, Fullscreen, InteractionCpp, CooperHelpers, StrokeAlignment, HorizontalAlignment, VerticalAlignment, TextBoxType, FontWeight, SceneGraphHelpers } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
@@ -215,8 +215,8 @@ let g = class e extends j {
     let c = new M(4, 4);
     let u = new _$$r(new M(t.origin.x, t.origin.y - 1), new M(t.size.x, 2));
     o && e.fillRect(u, AppStateTsApi.getCanvasButton());
-    d = o ? R0(AppStateTsApi.getFSCanvasDefaultFill()) : l ? R0(AppStateTsApi.getTextPrimary()) : R0(AppStateTsApi.getTextSecondary());
-    e.fillTextWithBox(new M(t.origin.x - c.x, t.origin.y), i, d, o ? R0(AppStateTsApi.getCanvasButton()) : R0(AppStateTsApi.getBgFSTertiary()), HorizontalAlignment.LEFT, VerticalAlignment.CENTER, 0, TextBoxType.BOX, c, FontWeight.MEDIUM, xC);
+    d = o ? unpackToNormalizedRgb(AppStateTsApi.getFSCanvasDefaultFill()) : l ? unpackToNormalizedRgb(AppStateTsApi.getTextPrimary()) : unpackToNormalizedRgb(AppStateTsApi.getTextSecondary());
+    e.fillTextWithBox(new M(t.origin.x - c.x, t.origin.y), i, d, o ? unpackToNormalizedRgb(AppStateTsApi.getCanvasButton()) : unpackToNormalizedRgb(AppStateTsApi.getBgFSTertiary()), HorizontalAlignment.LEFT, VerticalAlignment.CENTER, 0, TextBoxType.BOX, c, FontWeight.MEDIUM, xC);
   }
   _getViewportSpaceReorderHandle(t, i) {
     if (!AppStateTsApi) return {

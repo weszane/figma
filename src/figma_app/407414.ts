@@ -10,14 +10,14 @@ import { C } from "../905/887158";
 import { td } from "../figma_app/827216";
 import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { aW } from "../figma_app/965653";
 import { b as _$$b } from "../905/919117";
 import { NM } from "../figma_app/99772";
 import { ac } from "../figma_app/210234";
 import { QU } from "../figma_app/257614";
-let $$T14 = Wh(() => atom(void 0));
-let $$I21 = Wh(() => atom(null));
+let $$T14 = setupRemovableAtomFamily(() => atom(void 0));
+let $$I21 = setupRemovableAtomFamily(() => atom(null));
 export function $$S8({
   impressionId: e,
   source: t,

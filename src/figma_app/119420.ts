@@ -15,11 +15,11 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _G, Pv } from "../905/619652";
 import { openFileAtom, useCurrentFileKey } from "../figma_app/516028";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { tk, T_ } from "../figma_app/883638";
 import { MD } from "../figma_app/176302";
-let $$S0 = Wh(() => atom([]));
-let v = Wh(() => atom([]));
+let $$S0 = setupRemovableAtomFamily(() => atom([]));
+let v = setupRemovableAtomFamily(() => atom([]));
 let $$A11 = atom(e => e($$S0).filter(e => "error" !== e.status).length >= $$C12);
 let x = atom(e => {
   let t = e(openFileAtom);

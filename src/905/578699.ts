@@ -14,7 +14,7 @@ export class EnumDefinition {
   values: any[]
   annotations: any
 
-  constructor(enumDef: { name: string; values: any[]; annotations: any }) {
+  constructor(enumDef: { name: string, values: any[], annotations: any }) {
     this.name = enumDef.name
     this.values = enumDef.values
     this.annotations = enumDef.annotations
@@ -107,7 +107,8 @@ export class SessionDefinition {
             Session argument error: '${parsed.argName}' '${parsed.msg}'`)
         }
         result[key] = parsed.parsedValue
-      } else {
+      }
+      else {
         throw new CustomError(oneLine`
           Session argument error: '${key}' is not a valid argument
           name`)
@@ -133,9 +134,10 @@ export class LegacyConfigHandler {
     filterArg: {},
     computedFieldArg: {},
   }
+
   allowAllConversions: boolean
 
-  constructor(config?: { exemptions?: any; allowAllExemptions?: boolean }) {
+  constructor(config?: { exemptions?: any, allowAllExemptions?: boolean }) {
     this.populateTypeConversions(config)
     this.allowAllConversions = config?.allowAllExemptions ?? true
   }
@@ -145,7 +147,8 @@ export class LegacyConfigHandler {
    * Original method: populateTypeConversions
    */
   populateTypeConversions(config?: { exemptions?: any }): void {
-    if (!config?.exemptions) return
+    if (!config?.exemptions)
+      return
     const exemptionsCopy = JSON.parse(JSON.stringify(config.exemptions))
     for (const key of Object.keys(config.exemptions)) {
       for (const [name, obj] of Object.entries(exemptionsCopy[key])) {
@@ -165,11 +168,12 @@ export class LegacyConfigHandler {
     exemptionType: string,
     argType: string,
     objectName: string,
-    fieldName: string
+    fieldName: string,
   ): boolean {
     try {
       return this.allowAllConversions || this.typeConversionExemptions[exemptionType][argType][objectName].has(fieldName)
-    } catch {
+    }
+    catch {
       return false
     }
   }
@@ -196,7 +200,7 @@ export class SchemaHandler {
   objects: Map<string, ObjectTypeDefinition>
   session: SessionDefinition
   legacyConfig: LegacyConfigHandler
-  computedObjectFields: Record<string, Array<{ parentName: string; fieldName: string }>> = {}
+  computedObjectFields: Record<string, Array<{ parentName: string, fieldName: string }>> = {}
   _objectMapping: any
 
   constructor(schema: any, objectMapping: any, context: any) {
@@ -224,7 +228,8 @@ export class SchemaHandler {
    * Original method: addComputedObject
    */
   addComputedObject(field: any): void {
-    if (!field.isComputedObject()) return
+    if (!field.isComputedObject())
+      return
     const typeName = field.type.name
     if (!this.computedObjectFields[typeName]) {
       this.computedObjectFields[typeName] = []
@@ -241,7 +246,8 @@ export class SchemaHandler {
    */
   typeWithKind(kind: 'enums' | 'objects', name: string): any {
     const collection = this[kind].get(name)
-    if (collection) return collection
+    if (collection)
+      return collection
     throw new CustomError(`${kind} with name '${name}' isn't present in schema`)
   }
 
@@ -274,7 +280,8 @@ export class SchemaHandler {
    * Original method: fieldType
    */
   fieldType(objectName: string, fieldName: string): any {
-    if (!this.objects.has(objectName)) return
+    if (!this.objects.has(objectName))
+      return
     const obj = this.objects.get(objectName)
     if (obj?.fields.has(fieldName)) {
       return obj.fields.get(fieldName).type

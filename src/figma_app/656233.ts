@@ -24,7 +24,7 @@ export function moveElement<T>(e: T[], t: T, r?: T, n?: boolean): T[] {
   let i = e.indexOf(t, 0);
   if (i < 0) return e;
   let a = r == null ? -1 : e.indexOf(r);
-  if (a < 0) a = n ? 0 : e.length;else if (n && i < a) a -= 1;else if (!n && i > a) a += 1;
+  if (a < 0) a = n ? 0 : e.length; else if (n && i < a) a -= 1; else if (!n && i > a) a += 1;
   let s = e.slice();
   if (i > -1 && a !== i) {
     s.splice(i, 1);
@@ -409,7 +409,7 @@ export function mergeSorted<T, U>(e: T[], t: U[], r: (item: T | U) => string = S
     left?: T;
     right?: U;
   }> = [];
-  for (;;) {
+  for (; ;) {
     let o = e[i];
     let l = t[a];
     if (o === undefined || l === undefined) {

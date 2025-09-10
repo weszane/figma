@@ -9,7 +9,7 @@ import { ZS } from "../figma_app/519839";
 import { Se } from "../905/889062";
 import { Ol } from "../905/576221";
 import { vQ, p6 } from "../figma_app/803787";
-import { E8 } from "../figma_app/633080";
+import { StagingStatusEnum } from "../figma_app/633080";
 var o = s;
 export let $$f3 = Mz([vQ, p6], (e, t) => ({
   publishableComponentNodeIds: e,
@@ -21,7 +21,7 @@ export function $$_2({
   localComponents: i
 }) {
   let n = t.length > 0;
-  let r = i.filter(e => e.status === E8.CURRENT).length > 0;
+  let r = i.filter(e => e.status === StagingStatusEnum.CURRENT).length > 0;
   return e || n || r ? e && n && Ol(i) ? [{
     key: "UNPUBLISHING_ALL_COMPONENTS",
     data: {}

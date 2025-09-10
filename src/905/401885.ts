@@ -1,5 +1,5 @@
-import { atom } from "../figma_app/27355";
-import { resourceUtils } from "../905/989992";
+import { atom } from "src/figma_app/27355";
+import { resourceUtils } from "src/905/989992";
 export function $$a1(e, t) {
   return atom(i => i(e).transform(e => t(e, i)));
 }

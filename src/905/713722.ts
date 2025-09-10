@@ -1,4 +1,4 @@
-import { H0, X9 } from "../figma_app/191804";
+import { parseColor, setAlpha } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
 import { AUTO_MARKER, isInvalidValue, isAutoMarker } from "../905/216495";
 import { A } from "../905/550748";
@@ -9,9 +9,9 @@ class o extends A {
   }
   parse(e, t) {
     let i = t?.a ?? 1;
-    let r = H0(e, this.options.parseAlpha ? i : void 0);
+    let r = parseColor(e, this.options.parseAlpha ? i : void 0);
     if (!r) throw Error("Could not parse hex");
-    return this.options.parseAlpha ? r : X9(r, i);
+    return this.options.parseAlpha ? r : setAlpha(r, i);
   }
   format(e) {
     if (!e) return "";

@@ -2,11 +2,11 @@ import { isNotNullish } from "../figma_app/95419";
 import { subscribeAndAwaitData } from "../905/553831";
 import { sD } from "../905/937198";
 import { ListItemsView } from "../figma_app/43951";
-import { YR } from "../905/622391";
+import { getOpenFileKey } from "../905/622391";
 import { H } from "../905/250919";
 import { J as _$$J } from "../905/458135";
 export async function $$c0(e) {
-  let t = YR();
+  let t = getOpenFileKey();
   if (null == t) {
     sD("fileKey is null", {
       args: e

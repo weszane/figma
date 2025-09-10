@@ -43,7 +43,7 @@ import { sortByWithOptions, sortByPropertyWithOptions } from "../figma_app/65623
 import { lM, dm } from "../figma_app/463500";
 import { B as _$$B } from "../905/714743";
 import { nh } from "../figma_app/707943";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { zi, iL } from "../905/824449";
 import ed from "../svg/56418";
 import { Ay as _$$Ay, xk } from "@stylexjs/stylex";
@@ -355,7 +355,7 @@ function eu({
   selectedTabType: r
 }) {
   let n = r === et.COMPONENTS;
-  let o = n ? [PW.COMPONENT, PW.STATE_GROUP] : [PW.STYLE];
+  let o = n ? [PrimaryWorkflowEnum.COMPONENT, PrimaryWorkflowEnum.STATE_GROUP] : [PrimaryWorkflowEnum.STYLE];
   let [l] = setupResourceAtomHandler(nh({
     query: e,
     libraryId: t,

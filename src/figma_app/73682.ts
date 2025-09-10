@@ -3,7 +3,7 @@ import { FJ } from "../905/508367";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 var d = (e => (e[e.DISPATCH_WINDOW_OPEN = 0] = "DISPATCH_WINDOW_OPEN", e[e.SET_READY_FOR_MESSAGES = 1] = "SET_READY_FOR_MESSAGES", e[e.CLOSE_WINDOW = 2] = "CLOSE_WINDOW", e[e.REFRESH_WINDOW = 3] = "REFRESH_WINDOW", e))(d || {});
 function c(e) {
   if (!e) return;
@@ -95,8 +95,8 @@ let u = um({
       };
   }
 });
-let p = Wh(() => atom(new Set()));
-Wh(() => atom(e => e(p), (e, t, r) => {
+let p = setupRemovableAtomFamily(() => atom(new Set()));
+setupRemovableAtomFamily(() => atom(e => e(p), (e, t, r) => {
   let n = e(p);
   r && t(p, new Set([...n, r]));
 }));

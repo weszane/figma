@@ -1,7 +1,7 @@
 import { atom } from "../figma_app/27355";
-import { rt } from "../figma_app/615482";
+import { createTrackedAtom } from "../figma_app/615482";
 import { YQ, lS } from "../figma_app/257779";
-let s = rt({
+let s = createTrackedAtom({
   suggestions: [],
   analyticsData: YQ,
   isSeen: !0

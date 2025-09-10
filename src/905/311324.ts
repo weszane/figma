@@ -1,5 +1,5 @@
 import { createEmptyMixin as CreateEmptyMixin } from '../905/112832';
-import { StyleIdHandler} from '../figma_app/243058';
+import { StyleIdHandler } from '../figma_app/243058';
 import { nM as NMUtil } from '../figma_app/276332';
 
 /**

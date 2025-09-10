@@ -6,7 +6,7 @@ import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
-import { f as _$$f } from "../905/412913";
+import { getFileKey } from "../905/412913";
 import { sx } from "../905/941192";
 import { lW } from "../figma_app/850075";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -53,7 +53,7 @@ export function $$$2(e) {
     }, t))
   });
 }
-let E = _$$f();
+let E = getFileKey();
 export function $$I0(e) {
   let t = e.layoutOverride || PI(e.items);
   let s = lW(!!e.showAttribution);

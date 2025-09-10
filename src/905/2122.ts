@@ -3,7 +3,7 @@ import { reportError } from '../905/11';
 import { ServiceCategories } from '../905/165054';
 import { permissionScopeHandler } from '../905/189185';
 import { z } from '../905/223332';
-import { c2 } from '../905/382883';
+import { deepEqual } from '../905/382883';
 import { mapNodeToComponent } from '../905/531105';
 import { validateWithVm, PropTypes } from '../905/816730';
 import { propertyMenuItemProps, validatePropertyMenuOptions } from '../905/828428';
@@ -547,7 +547,7 @@ export class WidgetManager {
               vRoot
             } = await qg(() => {
               if (!getSceneGraphInstance().get(widgetId)) throw new AuthError('Could not find widget node in renderWidgetTree');
-              if (!renderResult || !c2(renderResult.syncedState, node.getWidgetSyncedState())) {
+              if (!renderResult || !deepEqual(renderResult.syncedState, node.getWidgetSyncedState())) {
                 renderResult = this.renderWidgetTree(widgetId, 'current') as {
                   rootNode: any;
                   syncedState: any;
@@ -556,7 +556,7 @@ export class WidgetManager {
               return renderResult;
             }, this.getPluginRuntimeBridge(), allowedDomains);
             permissionScopeHandler.plugin('widget-rerender', () => {
-              if (state.oldVRoot && !c2(state.oldVRoot.syncedState, node.renderedSyncedState)) {
+              if (state.oldVRoot && !deepEqual(state.oldVRoot.syncedState, node.renderedSyncedState)) {
                 const renderTreeResult = this.renderWidgetTree(widgetId, 'previous');
                 if (!(renderTreeResult instanceof RequestError)) {
                   state.oldVRoot = renderTreeResult;

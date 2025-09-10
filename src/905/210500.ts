@@ -5,7 +5,7 @@ import s from "../vendor/946678";
 import { P8 } from "../905/270781";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { lg } from "../figma_app/646357";
-import { E8 } from "../figma_app/633080";
+import { StagingStatusEnum } from "../figma_app/633080";
 var o = s;
 let p = atom(new Map());
 let m = P8([e => e.mirror.appModel.pagesList], e => {
@@ -23,7 +23,7 @@ let h = createReduxSubscriptionAtomWithState(m);
 let g = (e, t) => e.nodeID !== t.thumbnailId || e.thumbnailVersion !== t.content_hash;
 let f = (e, t) => {
   let i = !!e && e.nodeID !== defaultSessionLocalIDString;
-  return t && !i ? E8.DELETED : !t && i ? E8.NEW : t || i ? e && t && g(e, t) ? E8.CHANGED : E8.CURRENT : E8.NOT_STAGED;
+  return t && !i ? StagingStatusEnum.DELETED : !t && i ? StagingStatusEnum.NEW : t || i ? e && t && g(e, t) ? StagingStatusEnum.CHANGED : StagingStatusEnum.CURRENT : StagingStatusEnum.NOT_STAGED;
 };
 let $$_0 = atom(e => {
   if (!getFeatureFlags().dse_library_pg_thumbnails) return [];

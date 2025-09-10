@@ -8,7 +8,7 @@ import { OrgByIdForPlanUserView, OrgByIdForPlanView, TeamByIdForPlanUserView, Te
 import { FOrganizationLevelType } from '../figma_app/191312'
 import { getPlanFeatures } from '../figma_app/428858'
 import { isIncludedView, isOrgView } from '../figma_app/707808'
-import { getResourceDataOrFallback } from './419236'
+import { getResourceDataOrFallback } from '../905/419236'
 /**
  * Atoms and resource utilities for plan, plan public info, and plan user data.
  * Original variable names: h, g, f, _, A, y, b, v, I, E, x, S, $$w7, $$C3, $$T1, $$k5, $$R0, $$N2, $$P6, $$O4
@@ -63,7 +63,7 @@ function createResourceError(errorMsg: string) {
  */
 function errorSuspendableResource(errorMsg: string) {
   return resourceUtils.errorSuspendable(createResourceError(errorMsg), {
-    release: () => {},
+    release: () => { },
   })
 }
 
@@ -289,7 +289,7 @@ function planPublicInfoAtomFamily(useTeam: boolean) {
       }
       return getPlanPublicInfoResource(get, orgId, teamId)
     }
-    return resourceUtils.disabledSuspendable({ release: () => {} })
+    return resourceUtils.disabledSuspendable({ release: () => { } })
   }))
 }
 
@@ -312,7 +312,7 @@ function planFeaturesAtomFamily(useTeam: boolean) {
       }
       return getPlanFeaturesResource(get, orgId, teamId)
     }
-    return resourceUtils.disabledSuspendable({ release: () => {} })
+    return resourceUtils.disabledSuspendable({ release: () => { } })
   }))
 }
 
@@ -335,7 +335,7 @@ function planUserAtomFamily(useTeam: boolean) {
       }
       return getPlanUserResource(get, orgId, teamId)
     }
-    return resourceUtils.disabledSuspendable({ release: () => {} })
+    return resourceUtils.disabledSuspendable({ release: () => { } })
   }))
 }
 

@@ -462,7 +462,7 @@ import { XZ } from '../figma_app/176973';
 import { createNoOpValidator } from '../figma_app/181241';
 import { Zp } from '../figma_app/188671';
 import { FUserRoleType, FFileType, FResourceCategoryType, FTemplateCategoryType, FPlanNameType, FEntityType, FOrganizationRoleType, FAccessLevelType, FProductAccessType, FStudentTeamStatusType, FOrganizationLevelType, FPlanLimitationType, FPaymentHealthStatusType, FMemberRoleType } from '../figma_app/191312';
-import { DA, H0, kx, UE } from '../figma_app/191804';
+import { areColorsEqual, parseColor, isColorDarkByLuminance, whiteColor } from '../figma_app/191804';
 import { K as _$$K5, xS as _$$xS } from '../figma_app/193867';
 import { a6 as _$$a11 } from '../figma_app/198840';
 import { o as _$$o6 } from '../figma_app/198885';
@@ -4369,7 +4369,7 @@ function s2(e) {
 }
 let i_ = atom(void 0);
 let ip = atom(!1);
-let ig = H0('#2c2c2c');
+let ig = parseColor('#2c2c2c');
 function ih(e) {
   let t = useAtomWithSubscription(i_);
   if (!e || t === 'unset') return;
@@ -4767,7 +4767,7 @@ function iJ({
     });
   };
   return e ? jsx('button', {
-    'className': U()('button_custom--buttonBase--H2KEL button--buttonBase---72nl', kx(e) ? 'button_custom--buttonColorsForDarkBackground--CiydL' : 'button_custom--buttonColorsForLightBackground--wejKf', 'button_custom--buttonHugContents--Ntibj'),
+    'className': U()('button_custom--buttonBase--H2KEL button--buttonBase---72nl', isColorDarkByLuminance(e) ? 'button_custom--buttonColorsForDarkBackground--CiydL' : 'button_custom--buttonColorsForLightBackground--wejKf', 'button_custom--buttonHugContents--Ntibj'),
     'data-tooltip-type': Ib.TEXT,
     'data-tooltip': getI18nString('license_group_view.toolbar.create_team_disabled'),
     'data-tooltip-show-immediately': !0,
@@ -5097,7 +5097,7 @@ function nT({
   let n = _$$gY(nj);
   let o = [{
     option: ig
-  }, ...TS('base').filter(e => !DA(e, BV(ColorOptions.BLACK, 'base'))).map(e => ({
+  }, ...TS('base').filter(e => !areColorsEqual(e, BV(ColorOptions.BLACK, 'base'))).map(e => ({
     option: e
   })), ...TS('baseLight').map(e => ({
     option: e
@@ -5107,7 +5107,7 @@ function nT({
   let u = DP();
   let m = function (e) {
     try {
-      if (e) return H0(e);
+      if (e) return parseColor(e);
     } catch (e) {
       console.error(e);
     }
@@ -5147,7 +5147,7 @@ function nT({
         selectedFillOption: _,
         onSelectFillOption: e => {
           if (p(e), e === 'solid') {
-            let e = u === 'dark' ? ig : UE;
+            let e = u === 'dark' ? ig : whiteColor;
             g(m ?? e);
           } else {
             g('unset');
@@ -5419,7 +5419,7 @@ function nB(e) {
   let p = workspace ? workspace.id : UNASSIGNED;
   let f = ih(workspace);
   let g = function (e) {
-    if (e && e !== 'unset') return kx(e) ? 'dark' : 'light';
+    if (e && e !== 'unset') return isColorDarkByLuminance(e) ? 'dark' : 'light';
   }(f);
   let h = (workspace?.members || []).length;
   let x = _$$G3();
@@ -16844,8 +16844,8 @@ function fk(e) {
   let x = useMemo(() => h.status === 'loaded' && void 0 !== h.favorite, [h]);
   f && (f = function (e, t, r) {
     try {
-      let a = H0(t);
-      let s = kx(a);
+      let a = parseColor(t);
+      let s = isColorDarkByLuminance(a);
       let i = _$$oN(t, !s, s);
       r && i !== t && trackEventAnalytics('workspace_background_color_adjusted_for_accessibility', {
         workspace_id: e,
@@ -16874,7 +16874,7 @@ function fk(e) {
       e ? b(ZW(a)) : b($$if(a));
     }
   }, [b, workspace]);
-  f && (kx(f) ? (t = 'org_page_view--workspaceTileTitleColorForDarkBackground--m6sFp', r = 'org_page_view--secondaryTextColorOnDarkBackground--7Ru-V') : (t = 'org_page_view--workspaceTileTitleColorForLightBackground---zSTU', r = 'org_page_view--secondaryTextColorOnLightBackground--68byE'));
+  f && (isColorDarkByLuminance(f) ? (t = 'org_page_view--workspaceTileTitleColorForDarkBackground--m6sFp', r = 'org_page_view--secondaryTextColorOnDarkBackground--7Ru-V') : (t = 'org_page_view--workspaceTileTitleColorForLightBackground---zSTU', r = 'org_page_view--secondaryTextColorOnLightBackground--68byE'));
   let y = jsx(z6, {
     entity: workspace,
     size: 40

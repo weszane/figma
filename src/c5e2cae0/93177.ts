@@ -38,7 +38,7 @@ import { L as _$$L } from "../905/61587";
 import { FPlanNameType, FMemberRoleType, FAccessLevelType } from "../figma_app/191312";
 import { hK } from "../figma_app/211706";
 import { UR } from "../figma_app/307841";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { _l } from "../figma_app/976345";
 import { q as _$$q } from "../figma_app/712384";
 import { sf } from "../905/929976";
@@ -796,7 +796,7 @@ function eY(e) {
       prices: Jh(eG)
     },
     enabled: !(tc || t_),
-    trackingOptions: _$$u(),
+    trackingOptions: getRumLoggingConfig(),
     children: jsxs("div", {
       "data-testid": "team-upgrade-billing-remodel",
       className: _$$s.selectNone.$,

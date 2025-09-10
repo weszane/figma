@@ -1,5 +1,5 @@
 import { ColorSpaceEnum } from "../figma_app/763686";
-import { $q } from "../figma_app/191804";
+import { namedColors } from "../figma_app/191804";
 let a = e => {
   let t;
   let i = -1;
@@ -77,7 +77,7 @@ let h = e => {
 export function $$g1(e) {
   let t;
   try {
-    if ((t = m(e)) || (t = h(e)) || $q[e] && (t = m($q[e]))) return t;
+    if ((t = m(e)) || (t = h(e)) || namedColors[e] && (t = m(namedColors[e]))) return t;
   } catch (e) {}
   return {
     r: 0,

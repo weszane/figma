@@ -1,7 +1,7 @@
 /* eslint-disable no-eval */
-import type { Fn } from "../../types/global";
-import { PLUGIN_CLOSED_ERROR, PluginError, PluginWrapper } from "../905/572400";
-import { H } from "../905/823050";
+import type { Fn } from "../../../types/global";
+import { PLUGIN_CLOSED_ERROR, PluginError, PluginWrapper } from "src/905/572400";
+import { H } from "src/905/823050";
 
 // Generic type definitions
 export type VmErrorHandler<TError = any> = (error: TError) => void;

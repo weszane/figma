@@ -7,7 +7,7 @@ import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
 import { fA, qN, $c, Iy, p9 } from "../figma_app/803787";
-import { Qx, M$ } from "../figma_app/633080";
+import { LibraryPublishStatusEnum, PublishStatusEnum } from "../figma_app/633080";
 import { bj, E4, m3 } from "../905/66449";
 import { dD } from "../905/519113";
 import { $3 } from "../905/946937";
@@ -41,10 +41,10 @@ class f extends RecordingPureComponent {
   }
   render() {
     if (!this.props.openFile || isBranchAlt(this.props.openFile)) return null;
-    if (this.props.library.publishProgress.state !== Qx.NONE) return jsx(IK, {
+    if (this.props.library.publishProgress.state !== LibraryPublishStatusEnum.NONE) return jsx(IK, {
       variant: "secondary",
       disabled: !0,
-      children: this.props.library.publishProgress.publishType === M$.UNPUBLISH ? renderI18nText("design_systems.libraries_modal.unpublishing") : renderI18nText("design_systems.libraries_modal.publishing")
+      children: this.props.library.publishProgress.publishType === PublishStatusEnum.UNPUBLISH ? renderI18nText("design_systems.libraries_modal.unpublishing") : renderI18nText("design_systems.libraries_modal.publishing")
     });
     let e = this.props.currentFileIsPublished;
     let t = this.props.currentFileHasLocalAssets;

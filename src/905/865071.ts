@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { defaultComponentAttribute } from "../905/577641";
-import { s as _$$s } from "../905/536340";
+import { defaultComponentAttribute } from "src/905/577641";
+import { s as _$$s } from "src/905/536340";
 export let $$o0 = forwardRef(({
   htmlAttributes: e,
   ...t

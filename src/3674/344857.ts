@@ -30,7 +30,7 @@ import { t as _$$t, c as _$$c } from "../905/722657";
 import { k as _$$k2 } from "../905/443820";
 import { J as _$$J } from "../905/614223";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
-import { HD, YU } from "../figma_app/191804";
+import { isColorDark, colorToRgbaString } from "../figma_app/191804";
 import { useSubscription } from "../figma_app/288654";
 import { oA as _$$oA } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -288,7 +288,7 @@ import { isInvalidValue } from "../905/216495";
 import { z4 as _$$z3 } from "../figma_app/95266";
 import { rL as _$$rL, lz as _$$lz, XI, qn, gY, xT as _$$xT } from "../figma_app/212767";
 import { J as _$$J7 } from "../905/273120";
-import { ZA, xA } from "../figma_app/633080";
+import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
 import { LS, $A } from "../905/782918";
 import { $ as _$$$4 } from "../905/330495";
 import { fI, nV as _$$nV } from "../figma_app/626177";
@@ -768,7 +768,7 @@ function e_() {
 }
 function ev() {
   let e = getSingletonSceneGraph().getCurrentPage();
-  let t = HD(e?.backgroundColor ?? "");
+  let t = isColorDark(e?.backgroundColor ?? "");
   return jsx(_$$J, {
     mode: t ? "dark" : "light",
     children: jsx("div", {
@@ -790,7 +790,7 @@ function ey() {
 }
 function eb() {
   let e = getSingletonSceneGraph().getCurrentPage();
-  let t = e?.backgroundColor ? YU({
+  let t = e?.backgroundColor ? colorToRgbaString({
     ...e.backgroundColor,
     a: 0.9
   }) : "var(--color-modalbackdrop)";
@@ -6343,7 +6343,7 @@ function sy({
   let R = bj(backingSymbol?.sourceLibraryKey ? [backingSymbol?.sourceLibraryKey] : []);
   let D = R.data[0];
   let M = null;
-  D && (ZA(D) && xA(D) ? M = D.hub_file_id : "library_file_key" in D && (M = D.library_file_key));
+  D && (isPublishedLibraryWithAssets(D) && isCommunityLibrary(D) ? M = D.hub_file_id : "library_file_key" in D && (M = D.library_file_key));
   let [B, F] = ss(M ?? "", backingSymbol?.publishID ?? "");
   let [z, V] = ss(M ?? "", backingStateGroup?.publishID ?? "");
   let W = !!M && M !== d;

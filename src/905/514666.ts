@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { Ez } from "../figma_app/766708";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { E8 } from "../figma_app/633080";
+import { StagingStatusEnum } from "../figma_app/633080";
 export function $$l0(e) {
   return [...e].sort((e, t) => {
     if (!("sortPosition" in e) || null === e.sortPosition) return 1;
@@ -13,15 +13,15 @@ export function $$l0(e) {
 }
 export function $$d3(e) {
   switch (e) {
-    case E8.CHANGED:
+    case StagingStatusEnum.CHANGED:
       return renderI18nText("design_systems.publishing_modal.modified");
-    case E8.CURRENT:
+    case StagingStatusEnum.CURRENT:
       return renderI18nText("design_systems.publishing_modal.no_changes");
-    case E8.DELETED:
+    case StagingStatusEnum.DELETED:
       return renderI18nText("design_systems.publishing_modal.removed");
-    case E8.NEW:
+    case StagingStatusEnum.NEW:
       return renderI18nText("design_systems.publishing_modal.added");
-    case E8.NOT_STAGED:
+    case StagingStatusEnum.NOT_STAGED:
       return "";
     default:
       throwTypeError(e);

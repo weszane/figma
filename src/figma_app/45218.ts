@@ -1,7 +1,7 @@
-import { Ip, z } from "../905/239603";
-import { Y9 } from "../figma_app/306946";
-import { iG } from "../905/380385";
-import { PN } from "../905/54385";
+import { Ip, z } from "src/905/239603";
+import { Y9 } from "src/figma_app/306946";
+import { iG } from "src/905/380385";
+import { PN } from "src/905/54385";
 var $$o14 = (e => (e.HUB_FILE = "hub_file", e.PLUGIN = "plugin", e.WIDGET = "widget", e.COMMENT = "comment", e))($$o14 || {});
 var $$l17 = (e => (e.SUBSCRIPTION = "subscription", e.ONE_TIME = "one_time", e))($$l17 || {});
 var $$d13 = (e => (e.DETAIL = "detail", e.INSERTS = "inserts", e.QUICK_ACTIONS = "quick_actions", e.PLUGIN_ROW = "plugin_row", e.REDESIGNED_PLUGIN_ROW = "redesigned_plugin_row", e.SEARCH = "search", e))($$d13 || {});

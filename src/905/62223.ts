@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { isValidValue, arrayOrMixed, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { kl } from "../905/275640";
 import { Xb, f3, P6, ac } from "../figma_app/641313";
@@ -91,7 +91,7 @@ export function $$h1() {
       let a = function (e) {
         if (0 === e.length) return null;
         if (4 === e.length) {
-          for (let t = 1; t < e.length; t++) if (!c2(e[t], e[0])) {
+          for (let t = 1; t < e.length; t++) if (!deepEqual(e[t], e[0])) {
             let i = e[t];
             return i?.isMixed ? null : i;
           }

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { dI, sH } from "../905/537777";
+import { convertKiwiToString, convertStringToKiwi } from "../905/537777";
 import { sA, t9, Fw } from "../905/711212";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { BQ } from "../figma_app/852050";
-import { XN } from "../figma_app/633080";
+import { isLocalOrSubscribed } from "../figma_app/633080";
 import { Px } from "../figma_app/152690";
 export function $$u1({
   variable: e,
@@ -16,20 +16,20 @@ export function $$u1({
   var l;
   var d;
   var c;
-  l = Eo.getCacheValueOrNull(sA(t, i));
+  l = teamLibraryCache.getCacheValueOrNull(sA(t, i));
   d = e.node_id;
   c = e.resolvedType;
-  return l && n ? t9(dI(n), l, d, c, r) : null;
+  return l && n ? t9(convertKiwiToString(n), l, d, c, r) : null;
 }
 export function $$p0({
   variable: e,
   variableCollection: t
 }) {
   let i = useDispatch();
-  let o = XN(e);
+  let o = isLocalOrSubscribed(e);
   let p = BQ(o ? e.node_id : void 0);
   let m = Px();
-  let h = sH(t.node_id);
+  let h = convertStringToKiwi(t.node_id);
   h || console.error(`Invalid variableId in loading thumbnails: ${t.id}`);
   let [g, f] = useState("LIBRARY" === t.subscriptionStatus ? $$u1({
     variable: e,

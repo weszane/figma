@@ -1,6 +1,6 @@
-import { cZ, OS } from "../905/113138";
-import { z } from "../905/954314";
-import { E } from "../905/118283";
+import { cZ, OS } from "src/905/113138";
+import { z } from "src/905/954314";
+import { E } from "src/905/118283";
 let $$s0 = new cZ("REPO").binding;
 let $$o1 = (e, t) => new OS(e, "repos", $$s0, z, () => {
   throw Error("Not implemented");

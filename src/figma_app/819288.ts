@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { isNullish } from "../figma_app/95419";
 import a from "classnames";
 import { xM, Bx, x6 } from "../905/403166";
@@ -15,7 +15,7 @@ let h = (e, t) => {
   let r = e.styles?.filter(e => !t.styles?.includes(e));
   return r?.length === 0;
 };
-let m = (e, t) => !!(isNullish(e.user_annotated) && isNullish(t.user_annotated)) || isNullish(e.user_annotated) === isNullish(e.user_annotated) && c2(e.user_annotated, t.user_annotated);
+let m = (e, t) => !!(isNullish(e.user_annotated) && isNullish(t.user_annotated)) || isNullish(e.user_annotated) === isNullish(e.user_annotated) && deepEqual(e.user_annotated, t.user_annotated);
 export var $$g15 = (e => (e.EDITOR_MENTION = "editor_mention", e.COMMUNITY_MENTION = "community_mention", e.PLAIN_TEXT = "plain_text", e.EMOJI = "emoji", e.NONE = "none", e))($$g15 || {});
 export function $$f11(e) {
   return 2 === Object.keys(e).length && Object.keys(e).includes("user_id") && Object.keys(e).includes("user_annotated") ? "editor_mention" : 2 === Object.keys(e).length && Object.keys(e).includes("profile_id") && Object.keys(e).includes("t") ? "community_mention" : Object.keys(e).includes("t") && !Object.keys(e).includes("link") && e.t && xM(e.t) ? "emoji" : Object.keys(e).includes("t") && !Object.keys(e).includes("link") ? "plain_text" : "none";

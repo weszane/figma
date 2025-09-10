@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { F7 } from "../905/859698";
 import { SceneGraphHelpers } from "../figma_app/763686";
 import { At } from "../905/973142";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 function d() {
   let e = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
   return useMemo(() => e?.allStates ? e.allStates.sort((t, n) => x(t, e.stateGroupModel.propertySortOrder, e.stateGroupModel.propertyValues) - x(n, e.stateGroupModel.propertySortOrder, e.stateGroupModel.propertyValues)).map(e => e.symbol.nodeId) : [], [e]);
@@ -18,7 +18,7 @@ export function $$c1() {
       let l = At(n.description);
       let r = n.description;
       let d = {
-        type: PW.COMPONENT,
+        type: PrimaryWorkflowEnum.COMPONENT,
         name: n.name,
         description: l,
         description_rt: r,

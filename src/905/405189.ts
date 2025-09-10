@@ -7,7 +7,7 @@ import { P } from "../905/347284";
 import { fu } from "../figma_app/831799";
 import { G$ } from "../figma_app/646357";
 import { U } from "../905/506188";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lX } from "../figma_app/588397";
 import { w } from "../905/768636";
 import { er } from "../905/753512";
@@ -41,7 +41,7 @@ export function $$x0(e) {
     let n = 0;
     Object.values(l()(o, e.libraryKeys)).forEach(e => {
       e.forEach(e => {
-        e.type === PW.STYLE ? i++ : e.type === PW.VARIABLE ? n++ : (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP) && t++;
+        e.type === PrimaryWorkflowEnum.STYLE ? i++ : e.type === PrimaryWorkflowEnum.VARIABLE ? n++ : (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP) && t++;
       });
     });
     return {
@@ -73,9 +73,9 @@ export function $$x0(e) {
             children: [x && jsx(k, {}), !x && e.libraryKeys.map(e => {
               let t = o[e];
               if (!t) return;
-              let r = t.reduce((e, t) => e + (t.type === PW.STYLE ? 1 : 0), 0);
-              let a = t.reduce((e, t) => e + (t.type === PW.VARIABLE ? 1 : 0), 0);
-              let l = t.reduce((e, t) => e + (t.type === PW.VARIABLE_SET ? 1 : 0), 0);
+              let r = t.reduce((e, t) => e + (t.type === PrimaryWorkflowEnum.STYLE ? 1 : 0), 0);
+              let a = t.reduce((e, t) => e + (t.type === PrimaryWorkflowEnum.VARIABLE ? 1 : 0), 0);
+              let l = t.reduce((e, t) => e + (t.type === PrimaryWorkflowEnum.VARIABLE_SET ? 1 : 0), 0);
               let d = t.slice(0, A ? 10 : 8);
               let c = y.data?.[e];
               return jsxs("div", {

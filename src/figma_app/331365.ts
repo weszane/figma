@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { Y3 } from "../figma_app/346422";
@@ -200,7 +200,7 @@ export class $$u1 {
     });
   }
   memoizeEventPieces(e, t) {
-    t && (t.selectedElement && e.selectedElement && (c2(t.selectedElement.rect, e.selectedElement.rect) && (e.selectedElement.rect = t.selectedElement.rect), c2(t.selectedElement.elementAndParentSources, e.selectedElement.elementAndParentSources) && (e.selectedElement.elementAndParentSources = t.selectedElement.elementAndParentSources), c2(t.selectedElement.computedStyles, e.selectedElement.computedStyles) && (e.selectedElement.computedStyles = t.selectedElement.computedStyles), c2(t.selectedElement, e.selectedElement) && (e.selectedElement = t.selectedElement)), c2(t.hoveredElement, e.hoveredElement) && (e.hoveredElement = t.hoveredElement));
+    t && (t.selectedElement && e.selectedElement && (deepEqual(t.selectedElement.rect, e.selectedElement.rect) && (e.selectedElement.rect = t.selectedElement.rect), deepEqual(t.selectedElement.elementAndParentSources, e.selectedElement.elementAndParentSources) && (e.selectedElement.elementAndParentSources = t.selectedElement.elementAndParentSources), deepEqual(t.selectedElement.computedStyles, e.selectedElement.computedStyles) && (e.selectedElement.computedStyles = t.selectedElement.computedStyles), deepEqual(t.selectedElement, e.selectedElement) && (e.selectedElement = t.selectedElement)), deepEqual(t.hoveredElement, e.hoveredElement) && (e.hoveredElement = t.hoveredElement));
     return e;
   }
   updateAnalyticsSelectedElementCanEditImage(e, t) {

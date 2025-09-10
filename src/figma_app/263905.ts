@@ -39,7 +39,7 @@ import { c3, LE } from '../figma_app/427737';
 import { assert } from '../figma_app/465776';
 import { openFileKeyAtom } from '../figma_app/516028';
 import { useIsSelectedFigmakeFullscreen, isDebugSelectedFigmakeFullscreen } from '../figma_app/552876';
-import { Wh } from '../figma_app/615482';
+import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { _b, Dw, HA, o7, q9 } from '../figma_app/618665';
 import { JL } from '../figma_app/690664';
 import { MutableSceneGraph } from '../figma_app/763686';
@@ -140,7 +140,7 @@ let J = new EventTarget();
 export function $$Z4() {
   J.dispatchEvent(new CustomEvent('showLayoutDebugStyles'));
 }
-export let $$Q3 = Wh(() => atom(function () {
+export let $$Q3 = setupRemovableAtomFamily(() => atom(function () {
   if (document.baseURI.startsWith('http://localhost:9000/')) return 'http://localhost:8045/preview_page_v1.html';
   let e = `${generateUUIDv4()}-figmaiframepreview`;
   return `https://${e}.${nC()}/preview_page.html`;

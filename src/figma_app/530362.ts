@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useRef, useLayoutEffect, useMemo, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { clamp } from "../figma_app/492908";
 import { isNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
@@ -34,7 +34,7 @@ import { eY } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
 import { o3, nt } from "../905/226610";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { sJ } from "../figma_app/841644";
@@ -251,7 +251,7 @@ function ey({
   }) {
     let [n, a] = useState(null);
     useEffect(() => {
-      null !== n && c2(e, n.values) && (a(null), t(n.renamingIndex), r([n.renamingIndex]));
+      null !== n && deepEqual(e, n.values) && (a(null), t(n.renamingIndex), r([n.renamingIndex]));
     }, [e, n, t, r]);
     return a;
   }({
@@ -581,7 +581,7 @@ function eA({
         l(uP({
           item: t,
           callback: r => {
-            let n = t.type === PW.STATE_GROUP ? ui(t, r, s) : r;
+            let n = t.type === PrimaryWorkflowEnum.STATE_GROUP ? ui(t, r, s) : r;
             permissionScopeHandler.user("edit-prop-default-value", () => Fullscreen.editInstanceComponentPropDefDefaultValue(e.explicitDefID, n));
           }
         }));

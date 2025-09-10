@@ -92,9 +92,9 @@ import { e as _$$e3 } from "../905/916195";
 import { getInitialOptions, getLocaleFallbacks, buildUploadUrl } from "../figma_app/169182";
 import { logError, logDebug } from "../905/714362";
 import { B as _$$B } from "../905/714743";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lX as _$$lX } from "../figma_app/588397";
 import { _b as _$$_b } from "../figma_app/162641";
 import { mb as _$$mb, hs as _$$hs, sv as _$$sv, h5 as _$$h4 } from "../0c62c2fd/646972";
@@ -450,7 +450,7 @@ import { J as _$$J0 } from "../905/614223";
 import { isInvalidValue, MIXED_MARKER, isValidValue, valueOrFallback } from "../905/216495";
 import { k as _$$k6 } from "../642/978258";
 import { bo as _$$bo } from "../figma_app/447445";
-import { c2 as _$$c7 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { r as _$$r3 } from "../905/249071";
 import { M as _$$M3 } from "../905/512402";
 import { _o as _$$_o, L3 } from "../figma_app/701001";
@@ -541,7 +541,7 @@ import { A as _$$A39 } from "../svg/376762";
 import { lR as _$$lR, jW as _$$jW, ie as _$$ie, A$, Kr, jP as _$$jP } from "../figma_app/837500";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { kL as _$$kL2, ai as _$$ai2, Lt as _$$Lt, hF as _$$hF2 } from "../1006/823759";
-import { mx as _$$mx } from "../figma_app/191804";
+import { parseColorFormat } from "../figma_app/191804";
 import { t as _$$t7 } from "../905/398894";
 import { D as _$$D6 } from "../905/198083";
 import { l as _$$l0 } from "../905/697177";
@@ -1233,7 +1233,7 @@ function tE({
   _$$h2(() => {
     (async () => {
       try {
-        await Eo.getCanvas(e);
+        await teamLibraryCache.getCanvas(e);
       } catch (e) {
         logError("error", "teamLibraryItemSceneGraphCache.getCanvas", e);
       }
@@ -1274,7 +1274,7 @@ function tE({
     className: n ? $I : d && u ? WB : Fu,
     draggable: n ? void 0 : {
       afterSuccessfulInsert: i => {
-        (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP) && KE(_$$yw(e), t, getInitialOptions().user_data?.id);
+        (e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP) && KE(_$$yw(e), t, getInitialOptions().user_data?.id);
       },
       onDragStart: () => {
         fullscreenValue.triggerActionEnum(Command.SET_TOOL_DEFAULT);
@@ -4637,7 +4637,7 @@ function sm() {
       children: e.resources.slice(0, 3).map(t => jsxs(_$$Fragment, {
         children: [t && "is_widget" in t && !!t.is_widget && jsx(sx, {
           widgetId: t.id
-        }), t && "type" in t && t.type === PW.COMPONENT && jsx(sj, {
+        }), t && "type" in t && t.type === PrimaryWorkflowEnum.COMPONENT && jsx(sj, {
           resource: t
         }), t && "viewer_mode" in t && !!t.viewer_mode && jsx(s_, {
           template: {
@@ -4654,7 +4654,7 @@ function sf(e) {
   if (!t) return null;
   let i = t.resources.filter(e => "viewer_mode" in e && !!e.viewer_mode);
   let n = t.resources.filter(e => "is_widget" in e && !!e.is_widget);
-  let r = t.resources.filter(e => "type" in e && e.type === PW.COMPONENT);
+  let r = t.resources.filter(e => "type" in e && e.type === PrimaryWorkflowEnum.COMPONENT);
   let a = t.resources.filter(e => "is_widget" in e && !e.is_widget);
   return jsxs(_$$fu, {
     name: "use_case",
@@ -12792,7 +12792,7 @@ function fw({
 }) {
   let i = _$$rN();
   let n = fS(fC(), selectWithShallowEqual(e => e.mirror.selectionProperties.whiteboardControls));
-  !n || _$$c7(n.itemStates, e.current?.itemStates) && _$$c7({
+  !n || deepEqual(n.itemStates, e.current?.itemStates) && deepEqual({
     ...n.anchorPoints,
     displayStateId: null
   }, {
@@ -12883,7 +12883,7 @@ function fL({
   let n = _$$rN();
   let r = useRef(!1);
   let a = useCallback(() => {
-    n?.nativeContextualToolbarUpdateAnchorPoints && t && !_$$c7(e.current, i) && (n.nativeContextualToolbarUpdateAnchorPoints(i), e.current = i);
+    n?.nativeContextualToolbarUpdateAnchorPoints && t && !deepEqual(e.current, i) && (n.nativeContextualToolbarUpdateAnchorPoints(i), e.current = i);
   }, [i, e, t, n]);
   let s = _$$A3(() => {
     a();
@@ -16147,7 +16147,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     paletteType: "codeBlockTheme",
     recordingKey: "codeBlockThemeSelector",
     setIsColorPopoverOpen: r,
-    value: _$$mx(_$$jP(e)) ?? []
+    value: parseColorFormat(_$$jP(e)) ?? []
   });
 }], [WhiteboardFeatures.EMBED_OPEN_EXTERNAL, function () {
   return jsx(_$$e9, {});

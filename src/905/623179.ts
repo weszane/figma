@@ -33,7 +33,7 @@ export async function $$l0(e, t, i, n, r, a) {
   let h = c?.body?.getReader();
   if (h) {
     let e = new TextDecoder();
-    for (;;) {
+    for (; ;) {
       let {
         done,
         value

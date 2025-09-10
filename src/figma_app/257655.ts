@@ -1,7 +1,7 @@
 import { T as _$$T } from "../figma_app/886346";
 import { B as _$$B } from "../figma_app/236342";
 import { id } from "../905/648693";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { COMPONENT_PREFIX, getComponentInfoById, getTypeInfoCached, getComponentJSXName, isPartOfGroup, filterComponentProps } from "../figma_app/664063";
 import { Pr } from "../figma_app/774411";
 import { QP } from "../vendor/202832";
@@ -91,8 +91,8 @@ async function u(e) {
           for (let t = 0; t < r.length; t++) if (t >= a.length && (i = !1), id(r[t]) && id(a[t])) {
             let s = r[t];
             e([a[t]], [s], n) || (i = !1);
-          } else c2(a[t], r[t]) || (i = !1);
-        } else "isPartial" === t ? i = s.props[t] === r : c2(s.props[t], r) || (i = !1);
+          } else deepEqual(a[t], r[t]) || (i = !1);
+        } else "isPartial" === t ? i = s.props[t] === r : deepEqual(s.props[t], r) || (i = !1);
         i && n(d);
       }
     }

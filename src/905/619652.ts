@@ -1,7 +1,7 @@
 import { kiwiParserCodec } from "../905/294864";
 import { NodePropertyCategory, Thumbnail, SceneNodeCpp, BackgroundPattern } from "../figma_app/763686";
 import { sessionLocalIDToString, isValidSessionLocalID } from "../905/871411";
-import { UE } from "../figma_app/191804";
+import { whiteColor } from "../figma_app/191804";
 import { Point } from "../905/736624";
 import { VG } from "../figma_app/622881";
 import { XE } from "../figma_app/385874";
@@ -35,7 +35,7 @@ export function $$u5(e, t) {
     nodeChanges: [i]
   });
 }
-export function $$p8(e, t, i = UE) {
+export function $$p8(e, t, i = whiteColor) {
   return c(Thumbnail.generatePaintIcon({
     width: Math.round(t.x),
     height: Math.round(t.y),

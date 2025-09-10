@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { useLatestRef } from "../figma_app/922077";
 import { renderI18nText } from "../905/303541";
@@ -49,7 +49,7 @@ export function $$m7(e) {
   return $$h8(e) || e.query !== p.query;
 }
 export function $$h8(e) {
-  return !c2(e.filters, p.filters);
+  return !deepEqual(e.filters, p.filters);
 }
 export function $$g1({
   resultsCount: e,

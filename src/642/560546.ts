@@ -3,7 +3,7 @@ import { memo, useState, useRef, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { o as _$$o } from "../905/821217";
 import { LayoutTabType } from "../figma_app/763686";
-import { dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import { E as _$$E } from "../905/277716";
 import { Point } from "../905/736624";
 import { e as _$$e, v as _$$v } from "../642/135773";
@@ -209,7 +209,7 @@ function B({
   let E = (() => {
     if (isInvalidValue(e)) return null;
     let t = e?.colorVar?.value?.alias;
-    return t ? dI(t) : null;
+    return t ? convertKiwiToVariableIdString(t) : null;
   })();
   let M = () => isInvalidValue(e) || isInvalidValue(i) ? getI18nString("fullscreen.mixed") : i || (j ? getI18nString("slides.properties_panel.color_picker.multiple") : w ? getI18nString("slides.properties_panel.fill.fill_type_gradient") : TI.format(I[0]));
   let A = useMemo(() => j ? jsx(a, {}) : N ? jsx(zi, {

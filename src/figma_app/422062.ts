@@ -311,167 +311,149 @@ export class $$q1 {
       return null
     switch (o) {
       case 'folder':
-      {
-        let e = t[3]
-        if (!$(e)) {
-          X({
-            resourceType: 'folder',
-            matchingViewName: o,
-            extra: {
-              folderId: e,
-            },
-          })
-          return null
-        }
-        if (!e) {
-          return {
-            view: 'resourceUnavailable',
-            resourceType: EntityType.PROJECT,
-          }
-        }
-        let n = !1
-        r && parseQuery(r).renameProject != null && (n = parseQuery(r).renameProject === 'true')
-        return {
-          view: o,
-          folderId: e,
-          shouldShowRenameModal: n,
-        }
-      }
-      case 'allProjects':
-      case 'team':
-      {
-        let n
-        let a
-        let s
-        let l
-        let d
-        let c = NavigationRoutes.HOME
-        if (t.length === 4) {
-          let e = K(NavigationRoutes, t[t.length - 1])
-          e && e !== NavigationRoutes.PROFILE && (c = e)
-        }
-        if (t.length === 5 || t.length === 6) {
-          if (t[5] === 'restore')
+        {
+          let e = t[3]
+          if (!$(e)) {
+            X({
+              resourceType: 'folder',
+              matchingViewName: o,
+              extra: {
+                folderId: e,
+              },
+            })
             return null
-          let e = K(NavigationRoutes, t[t.length - 1])
-          e && e !== NavigationRoutes.PROFILE && (c = e)
-        }
-        if (!$(d = e.currentTeamId ? e.currentTeamId : t[3])) {
-          void 0 !== d && X({
-            resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              'teamId': d,
-              '!!state.currentTeamId': !!e.currentTeamId,
-              '!!state.currentUserOrgId': !!e.currentUserOrgId,
-              'parts.length': t.length,
-            },
-          })
-          return null
-        }
-        let p = d && e.teams[d]
-        if (p && r) {
-          let e = new URLSearchParams(r).get('upgrade_type')
-          e && (l = K(FProductAccessType, e))
-        }
-        r && parseQuerySimple(r).rciid != null && (n = parseQuerySimple(r).rciid)
-        p && r && parseQuery(r).proUpgrade != null && (a = parseQuery(r).proUpgrade === 'true')
-        r && parseQuery(r).assetTransferRequest != null && (s = parseQuery(r).assetTransferRequest)
-        return {
-          view: 'team',
-          teamId: d,
-          teamViewTab: c,
-          upgradeModalType: l,
-          isProUpgrade: a,
-          assetTransferRequestId: s,
-          showResourceConnectionInviteModal: n,
-        }
-      }
-      case 'teamAdminConsole':
-      {
-        let n
-        let a
-        if (!e.currentTeamId)
-          return null
-        let s = null
-        let l = null
-        if (t.length >= 4) {
-          let e = K(DashboardSections, t[3])
-          if (e && (s = e), e && t.length >= 5) {
-            let r = t[4]
-            switch (e) {
-              case DashboardSections.CONTENT:
-                n = K(MemberSections, r)
-                break
-              case DashboardSections.BILLING:
-                n = K(BillingSections, r)
+          }
+          if (!e) {
+            return {
+              view: 'resourceUnavailable',
+              resourceType: EntityType.PROJECT,
             }
           }
+          let n = !1
+          r && parseQuery(r).renameProject != null && (n = parseQuery(r).renameProject === 'true')
+          return {
+            view: o,
+            folderId: e,
+            shouldShowRenameModal: n,
+          }
         }
-        if (!$(l = e.currentTeamId)) {
-          X({
-            resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              currentTeamId: l,
-            },
-          })
-          return null
+      case 'allProjects':
+      case 'team':
+        {
+          let n
+          let a
+          let s
+          let l
+          let d
+          let c = NavigationRoutes.HOME
+          if (t.length === 4) {
+            let e = K(NavigationRoutes, t[t.length - 1])
+            e && e !== NavigationRoutes.PROFILE && (c = e)
+          }
+          if (t.length === 5 || t.length === 6) {
+            if (t[5] === 'restore')
+              return null
+            let e = K(NavigationRoutes, t[t.length - 1])
+            e && e !== NavigationRoutes.PROFILE && (c = e)
+          }
+          if (!$(d = e.currentTeamId ? e.currentTeamId : t[3])) {
+            void 0 !== d && X({
+              resourceType: 'team',
+              matchingViewName: o,
+              extra: {
+                'teamId': d,
+                '!!state.currentTeamId': !!e.currentTeamId,
+                '!!state.currentUserOrgId': !!e.currentUserOrgId,
+                'parts.length': t.length,
+              },
+            })
+            return null
+          }
+          let p = d && e.teams[d]
+          if (p && r) {
+            let e = new URLSearchParams(r).get('upgrade_type')
+            e && (l = K(FProductAccessType, e))
+          }
+          r && parseQuerySimple(r).rciid != null && (n = parseQuerySimple(r).rciid)
+          p && r && parseQuery(r).proUpgrade != null && (a = parseQuery(r).proUpgrade === 'true')
+          r && parseQuery(r).assetTransferRequest != null && (s = parseQuery(r).assetTransferRequest)
+          return {
+            view: 'team',
+            teamId: d,
+            teamViewTab: c,
+            upgradeModalType: l,
+            isProUpgrade: a,
+            assetTransferRequestId: s,
+            showResourceConnectionInviteModal: n,
+          }
         }
-        let d = !!e.teams[l]?.pro_team
-        s || (s = d ? DashboardSections.DASHBOARD : DashboardSections.MEMBERS)
-        let c = ''
-        d && r && parseQuery(r).dashEntryPoint && (s = DashboardSections.DASHBOARD, c = parseQuery(r).dashEntryPoint)
-        s === DashboardSections.CONTENT && n === MemberSections.CONNECTED_PROJECTS && r && parseQuerySimple(r).rciid != null && (a = parseQuerySimple(r).rciid)
-        return {
-          view: o,
-          teamId: l,
-          teamAdminConsoleViewTab: s,
-          teamAdminConsoleViewSecondaryTab: n,
-          isProTeam: d,
-          dashDeepLinkEntryPoint: c,
-          showResourceConnectionInviteModal: a,
+      case 'teamAdminConsole':
+        {
+          let n
+          let a
+          if (!e.currentTeamId)
+            return null
+          let s = null
+          let l = null
+          if (t.length >= 4) {
+            let e = K(DashboardSections, t[3])
+            if (e && (s = e), e && t.length >= 5) {
+              let r = t[4]
+              switch (e) {
+                case DashboardSections.CONTENT:
+                  n = K(MemberSections, r)
+                  break
+                case DashboardSections.BILLING:
+                  n = K(BillingSections, r)
+              }
+            }
+          }
+          if (!$(l = e.currentTeamId)) {
+            X({
+              resourceType: 'team',
+              matchingViewName: o,
+              extra: {
+                currentTeamId: l,
+              },
+            })
+            return null
+          }
+          let d = !!e.teams[l]?.pro_team
+          s || (s = d ? DashboardSections.DASHBOARD : DashboardSections.MEMBERS)
+          let c = ''
+          d && r && parseQuery(r).dashEntryPoint && (s = DashboardSections.DASHBOARD, c = parseQuery(r).dashEntryPoint)
+          s === DashboardSections.CONTENT && n === MemberSections.CONNECTED_PROJECTS && r && parseQuerySimple(r).rciid != null && (a = parseQuerySimple(r).rciid)
+          return {
+            view: o,
+            teamId: l,
+            teamAdminConsoleViewTab: s,
+            teamAdminConsoleViewSecondaryTab: n,
+            isProTeam: d,
+            dashDeepLinkEntryPoint: c,
+            showResourceConnectionInviteModal: a,
+          }
         }
-      }
       case 'limitedTeamSharedProjects':
-      {
-        let t
-        if (getFeatureFlags().limited_plan_spaces && e.currentTeamId && (t = e.currentTeamId), !t)
-          return null
-        return {
-          view: 'limitedTeamSharedProjects',
+        {
+          let t
+          if (getFeatureFlags().limited_plan_spaces && e.currentTeamId && (t = e.currentTeamId), !t)
+            return null
+          return {
+            view: 'limitedTeamSharedProjects',
+          }
         }
-      }
       case 'addCollaborators':
         return {
           view: o,
           teamId: t[3],
         }
       case 'teamUpgrade':
-      {
-        let e = new URLSearchParams(r)
-        let n = !!getFeatureFlags().redirect_starter_team_loophole && !getFeatureFlags().close_starter_team_loophole_v2
-        let i = Object.values(UpgradeAction).includes(t[4]) ? t[4] : UpgradeAction.UPGRADE_EXISTING_TEAM
-        if (n && i !== UpgradeAction.UPGRADE_EXISTING_TEAM) {
-          reportError(_$$e.MONETIZATION_UPGRADES, new Error('Invalid team flow type while parsing selected view from path'), {
-            extra: {
-              matchingViewName: o,
-              parts: t,
-            },
-          })
-          return {
-            view: 'teamCreation',
-            fromNewTab: !0,
-          }
-        }
-        let l = Object.values(UpgradeSteps).includes(t[4]) ? t[4] : UpgradeSteps.CHOOSE_PLAN
-        let d = t[5] || l
-        let c = e.get('planType') ? parseInt(e.get('planType')) : i === UpgradeAction.UPGRADE_EXISTING_TEAM ? TeamType.TEAM : void 0
-        let u = isCreateOrPlanComparison(i, d) ? void 0 : c
-        let _ = t[3]
-        if (_ === 'n') {
-          if (_ = null, n) {
-            reportError(_$$e.MONETIZATION_UPGRADES, new Error('Null team ID while parsing selected view from path'), {
+        {
+          let e = new URLSearchParams(r)
+          let n = !!getFeatureFlags().redirect_starter_team_loophole && !getFeatureFlags().close_starter_team_loophole_v2
+          let i = Object.values(UpgradeAction).includes(t[4]) ? t[4] : UpgradeAction.UPGRADE_EXISTING_TEAM
+          if (n && i !== UpgradeAction.UPGRADE_EXISTING_TEAM) {
+            reportError(_$$e.MONETIZATION_UPGRADES, new Error('Invalid team flow type while parsing selected view from path'), {
               extra: {
                 matchingViewName: o,
                 parts: t,
@@ -482,112 +464,130 @@ export class $$q1 {
               fromNewTab: !0,
             }
           }
-        }
-        else if (!$(_)) {
-          X({
-            resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              teamId: _,
-            },
-          })
-          return null
-        }
-        return {
-          view: o,
-          teamFlowType: i,
-          teamId: _,
-          paymentStep: d,
-          ...(e.get('entryPoint')
-            ? {
+          let l = Object.values(UpgradeSteps).includes(t[4]) ? t[4] : UpgradeSteps.CHOOSE_PLAN
+          let d = t[5] || l
+          let c = e.get('planType') ? parseInt(e.get('planType')) : i === UpgradeAction.UPGRADE_EXISTING_TEAM ? TeamType.TEAM : void 0
+          let u = isCreateOrPlanComparison(i, d) ? void 0 : c
+          let _ = t[3]
+          if (_ === 'n') {
+            if (_ = null, n) {
+              reportError(_$$e.MONETIZATION_UPGRADES, new Error('Null team ID while parsing selected view from path'), {
+                extra: {
+                  matchingViewName: o,
+                  parts: t,
+                },
+              })
+              return {
+                view: 'teamCreation',
+                fromNewTab: !0,
+              }
+            }
+          }
+          else if (!$(_)) {
+            X({
+              resourceType: 'team',
+              matchingViewName: o,
+              extra: {
+                teamId: _,
+              },
+            })
+            return null
+          }
+          return {
+            view: o,
+            teamFlowType: i,
+            teamId: _,
+            paymentStep: d,
+            ...(e.get('entryPoint')
+              ? {
                 entryPoint: parseInt(e.get('entryPoint')),
               }
-            : {}),
-          ...(e.get('billingPeriod')
-            ? {
+              : {}),
+            ...(e.get('billingPeriod')
+              ? {
                 billingPeriod: parseInt(e.get('billingPeriod')),
               }
-            : {}),
-          ...(e.get('onCompleteRedirectFileKey')
-            ? {
+              : {}),
+            ...(e.get('onCompleteRedirectFileKey')
+              ? {
                 searchParams: {
                   onCompleteRedirectFileKey: e.get('onCompleteRedirectFileKey'),
                   onCompleteRedirectNodeId: e.get('onCompleteRedirectNodeId'),
                 },
               }
-            : {}),
-          ...(u
-            ? {
+              : {}),
+            ...(u
+              ? {
                 planType: u,
               }
-            : {}),
+              : {}),
+          }
         }
-      }
       case 'promoReview':
-      {
-        let e = t[3]
-        if (!$(e)) {
-          X({
-            resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              teamId: e,
-            },
-          })
-          return null
+        {
+          let e = t[3]
+          if (!$(e)) {
+            X({
+              resourceType: 'team',
+              matchingViewName: o,
+              extra: {
+                teamId: e,
+              },
+            })
+            return null
+          }
+          return {
+            view: o,
+            teamId: t[3],
+            teamName: t[4],
+          }
         }
-        return {
-          view: o,
-          teamId: t[3],
-          teamName: t[4],
-        }
-      }
       case 'eduReview':
-      {
-        let e = t[3]
-        if (!$(e)) {
-          X({
-            resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              teamId: e,
-            },
-          })
-          return null
+        {
+          let e = t[3]
+          if (!$(e)) {
+            X({
+              resourceType: 'team',
+              matchingViewName: o,
+              extra: {
+                teamId: e,
+              },
+            })
+            return null
+          }
+          return {
+            view: o,
+            teamId: e,
+          }
         }
-        return {
-          view: o,
-          teamId: e,
-        }
-      }
       case 'licenseGroup':
-      {
-        let e
-        let n = _$$g(t[5])
-        let i = _$$E(r)
-        n === GroupType.MEMBERS && (e = i ?? oU)
-        let a = new URLSearchParams(customHistory.location.search).get(u5)
-        let s = a ? vQ(a) : void 0
-        let l = t[3]
-        if (!$(l)) {
-          X({
-            resourceType: 'license group',
-            matchingViewName: o,
-            extra: {
-              licenseGroupId: l,
-            },
-          })
-          return null
+        {
+          let e
+          let n = _$$g(t[5])
+          let i = _$$E(r)
+          n === GroupType.MEMBERS && (e = i ?? oU)
+          let a = new URLSearchParams(customHistory.location.search).get(u5)
+          let s = a ? vQ(a) : void 0
+          let l = t[3]
+          if (!$(l)) {
+            X({
+              resourceType: 'license group',
+              matchingViewName: o,
+              extra: {
+                licenseGroupId: l,
+              },
+            })
+            return null
+          }
+          return {
+            view: o,
+            subView: UserRole.ADMIN,
+            licenseGroupId: l,
+            selectedTab: n,
+            orgAdminMembersTabSort: e,
+            orgAdminOriginTab: s,
+          }
         }
-        return {
-          view: o,
-          subView: UserRole.ADMIN,
-          licenseGroupId: l,
-          selectedTab: n,
-          orgAdminMembersTabSort: e,
-          orgAdminOriginTab: s,
-        }
-      }
       case 'billingGroupDashboard':
         return {
           view: o,
@@ -607,97 +607,97 @@ export class $$q1 {
           planId: e.currentUserOrgId,
         }
       case 'workspace':
-      {
-        let e = t[3]
-        if ((K(V0, t[4]) || V0.DIRECTORY) === V0.ADMIN) {
-          let n
-          let a = K(m2, t[5]) || rj[0]
-          let s = _$$E(r)
-          if (a === m2.MEMBERS && (n = s ?? oU), !$(e)) {
-            X({
-              resourceType: 'workspace',
-              matchingViewName: o,
-              extra: {
-                workspaceId: e,
-              },
-            })
-            return null
-          }
-          return {
-            view: o,
-            subView: V0.ADMIN,
-            workspaceId: e,
-            selectedTab: a,
-            orgAdminMembersTabSort: n,
-          }
-        }
         {
-          let r = e
-          if (e === UNASSIGNED) {
-            r = null
+          let e = t[3]
+          if ((K(V0, t[4]) || V0.DIRECTORY) === V0.ADMIN) {
+            let n
+            let a = K(m2, t[5]) || rj[0]
+            let s = _$$E(r)
+            if (a === m2.MEMBERS && (n = s ?? oU), !$(e)) {
+              X({
+                resourceType: 'workspace',
+                matchingViewName: o,
+                extra: {
+                  workspaceId: e,
+                },
+              })
+              return null
+            }
+            return {
+              view: o,
+              subView: V0.ADMIN,
+              workspaceId: e,
+              selectedTab: a,
+              orgAdminMembersTabSort: n,
+            }
           }
-          else if (!$(e)) {
-            X({
-              resourceType: 'workspace',
-              matchingViewName: o,
-              extra: {
-                workspaceId: e,
-              },
-            })
-            return null
-          }
-          return {
-            view: o,
-            subView: V0.DIRECTORY,
-            workspaceId: r,
-            selectedTab: K(dN, t[5]) || Fi[0],
+          {
+            let r = e
+            if (e === UNASSIGNED) {
+              r = null
+            }
+            else if (!$(e)) {
+              X({
+                resourceType: 'workspace',
+                matchingViewName: o,
+                extra: {
+                  workspaceId: e,
+                },
+              })
+              return null
+            }
+            return {
+              view: o,
+              subView: V0.DIRECTORY,
+              workspaceId: r,
+              selectedTab: K(dN, t[5]) || Fi[0],
+            }
           }
         }
-      }
       case 'orgAdminSettings':
-      {
-        let n
-        let a
-        if (t.length >= 4 && (n = K(J7, t[3])) && t.length >= 5) {
-          let e = t[4]
-          switch (n) {
-            case J7.RESOURCES:
-              a = K(_d, e)
-              break
-            case J7.CONTENT:
-              a = K(SN, e)
-              break
-            case J7.BILLING:
-              a = K(_$$G_, e ?? '')
-              break
-            case J7.MEMBERS:
-              a = K(M7, e ?? '')
+        {
+          let n
+          let a
+          if (t.length >= 4 && (n = K(J7, t[3])) && t.length >= 5) {
+            let e = t[4]
+            switch (n) {
+              case J7.RESOURCES:
+                a = K(_d, e)
+                break
+              case J7.CONTENT:
+                a = K(SN, e)
+                break
+              case J7.BILLING:
+                a = K(_$$G_, e ?? '')
+                break
+              case J7.MEMBERS:
+                a = K(M7, e ?? '')
+            }
           }
-        }
-        n === J7.WORKSPACES ? (n = J7.CONTENT, a = SN.WORKSPACES) : n === J7.TEAMS && (n = J7.CONTENT, a = SN.TEAMS)
-        let s = {
-          view: 'orgAdminSettings',
-          orgAdminSettingsViewTab: n = n ?? J7.DASHBOARD,
-          orgAdminSettingsViewSecondaryTab: a,
-          orgAdminMembersTabFilters: J0,
-          orgAdminMembersTabSort: oU,
-        }
-        n === J7.DASHBOARD && r && parseQuery(r).dashEntryPoint != null && (s.dashDeepLinkEntryPoint = parseQuery(r).dashEntryPoint)
-        let o = rT(r, e.licenseGroups)
-        n === J7.MEMBERS && o && (s.orgAdminMembersTabFilters = o)
-        let l = _$$E(r)
-        if (n === J7.MEMBERS && r && parseQuery(r).initialSort === 'date-upgraded'
-          ? s.orgAdminMembersTabSort = {
-            columnName: Od.DESIGN_ROLE,
-            isReversed: !0,
+          n === J7.WORKSPACES ? (n = J7.CONTENT, a = SN.WORKSPACES) : n === J7.TEAMS && (n = J7.CONTENT, a = SN.TEAMS)
+          let s = {
+            view: 'orgAdminSettings',
+            orgAdminSettingsViewTab: n = n ?? J7.DASHBOARD,
+            orgAdminSettingsViewSecondaryTab: a,
+            orgAdminMembersTabFilters: J0,
+            orgAdminMembersTabSort: oU,
           }
-          : n === J7.MEMBERS && l && (s.orgAdminMembersTabSort = l), n === J7.MEMBERS && r && parseQuery(r).orgJoinRequest != null && (s.membersTabOrgJoinRequest = parseQuery(r).orgJoinRequest), r && parseQuery(r).assetTransferRequest != null && (s.teamsTabAssetTransferRequest = parseQuery(r).assetTransferRequest), n === J7.RESOURCES && r && (a === _d.APPROVED_PLUGINS || a === _d.APPROVED_WIDGETS)) {
-          let e = parseQuery(r).eid
-          s.selectedExtensionId = e
+          n === J7.DASHBOARD && r && parseQuery(r).dashEntryPoint != null && (s.dashDeepLinkEntryPoint = parseQuery(r).dashEntryPoint)
+          let o = rT(r, e.licenseGroups)
+          n === J7.MEMBERS && o && (s.orgAdminMembersTabFilters = o)
+          let l = _$$E(r)
+          if (n === J7.MEMBERS && r && parseQuery(r).initialSort === 'date-upgraded'
+            ? s.orgAdminMembersTabSort = {
+              columnName: Od.DESIGN_ROLE,
+              isReversed: !0,
+            }
+            : n === J7.MEMBERS && l && (s.orgAdminMembersTabSort = l), n === J7.MEMBERS && r && parseQuery(r).orgJoinRequest != null && (s.membersTabOrgJoinRequest = parseQuery(r).orgJoinRequest), r && parseQuery(r).assetTransferRequest != null && (s.teamsTabAssetTransferRequest = parseQuery(r).assetTransferRequest), n === J7.RESOURCES && r && (a === _d.APPROVED_PLUGINS || a === _d.APPROVED_WIDGETS)) {
+            let e = parseQuery(r).eid
+            s.selectedExtensionId = e
+          }
+          n === J7.CONTENT && a === SN.CONNECTED_PROJECTS && r && parseQuerySimple(r).rciid != null && (s.showResourceConnectionInviteModal = parseQuerySimple(r).rciid)
+          return s
         }
-        n === J7.CONTENT && a === SN.CONNECTED_PROJECTS && r && parseQuerySimple(r).rciid != null && (s.showResourceConnectionInviteModal = parseQuerySimple(r).rciid)
-        return s
-      }
       case 'search':
         return {
           view: 'search',
@@ -707,46 +707,46 @@ export class $$q1 {
           },
         }
       case 'user':
-      {
-        if (t.length < 4 || !e.user)
-          return null
-        let i = t[3]
-        let a = _$$o.INTERNAL_PROFILE
-        if (t[t.length - 1] === 'settings' && i === e.user.id) {
-          let e = r && parseQuery(r).tab
-          let t = n ? n.slice(1) : void 0
-          return {
-            view: 'recentsAndSharing',
-            accountModalTab: e || SidebarSection.ACCOUNT,
-            accountModalTabSection: t,
-          }
-        }
-        if (t[t.length - 1] === 'plugins') {
-          return {
-            view: 'recentsAndSharing',
-            accountModalTab: SidebarSection.PLUGINS,
-          }
-        }
-        if (t[t.length - 1] === 'email_unsubscribe' && i === e.user.id) {
-          let e = r && parseQuery(r).policy
-          if (e) {
+        {
+          if (t.length < 4 || !e.user)
+            return null
+          let i = t[3]
+          let a = _$$o.INTERNAL_PROFILE
+          if (t[t.length - 1] === 'settings' && i === e.user.id) {
+            let e = r && parseQuery(r).tab
+            let t = n ? n.slice(1) : void 0
             return {
               view: 'recentsAndSharing',
-              emailPolicyToUnsubscribeFrom: e,
+              accountModalTab: e || SidebarSection.ACCOUNT,
+              accountModalTabSection: t,
             }
           }
+          if (t[t.length - 1] === 'plugins') {
+            return {
+              view: 'recentsAndSharing',
+              accountModalTab: SidebarSection.PLUGINS,
+            }
+          }
+          if (t[t.length - 1] === 'email_unsubscribe' && i === e.user.id) {
+            let e = r && parseQuery(r).policy
+            if (e) {
+              return {
+                view: 'recentsAndSharing',
+                emailPolicyToUnsubscribeFrom: e,
+              }
+            }
+            return {
+              view: 'recentsAndSharing',
+              accountModalTab: SidebarSection.NOTIFICATIONS,
+            }
+          }
+          getFeatureFlags().xr_debounce_threshold && t[t.length - 1] === 'posts' && (a = _$$o.INTERNAL_PROFILE_POSTS)
           return {
-            view: 'recentsAndSharing',
-            accountModalTab: SidebarSection.NOTIFICATIONS,
+            view: 'user',
+            userId: i,
+            userViewTab: a,
           }
         }
-        getFeatureFlags().xr_debounce_threshold && t[t.length - 1] === 'posts' && (a = _$$o.INTERNAL_PROFILE_POSTS)
-        return {
-          view: 'user',
-          userId: i,
-          userViewTab: a,
-        }
-      }
       case 'feed':
         if (r) {
           let e = parseQuery(r)
@@ -764,29 +764,29 @@ export class $$q1 {
           view: 'feed',
         }
       case 'teamFeed':
-      {
-        if (e.currentUserOrgId === null || !getFeatureFlags().xr_debounce_threshold)
-          return null
-        let r = new URLSearchParams(customHistory.location.search)
-        return {
-          view: 'teamFeed',
-          postUuid: t[3],
-          creatorId: r.get('creator_id') ?? void 0,
-        }
-      }
-      case 'recentsAndSharing':
-      {
-        let e
-        if (t.length >= 4 && (e = K(G, t[t.length - 1])), !e) {
+        {
+          if (e.currentUserOrgId === null || !getFeatureFlags().xr_debounce_threshold)
+            return null
+          let r = new URLSearchParams(customHistory.location.search)
           return {
-            view: 'recentsAndSharing',
+            view: 'teamFeed',
+            postUuid: t[3],
+            creatorId: r.get('creator_id') ?? void 0,
           }
         }
-        return {
-          view: 'recentsAndSharing',
-          tab: e,
+      case 'recentsAndSharing':
+        {
+          let e
+          if (t.length >= 4 && (e = K(G, t[t.length - 1])), !e) {
+            return {
+              view: 'recentsAndSharing',
+            }
+          }
+          return {
+            view: 'recentsAndSharing',
+            tab: e,
+          }
         }
-      }
       case 'teamCreation':
         return {
           view: o,
@@ -808,18 +808,18 @@ export class $$q1 {
           planId: e.currentUserOrgId,
         }
       case 'componentBrowserLibrary':
-      {
-        if (!getFeatureFlags().dt_component_browser_file_browser)
-          return null
-        let e = t[3]
-        if (!e)
-          return null
-        return {
-          view: 'componentBrowserLibrary',
-          libraryKey: e,
-          componentKey: t[5],
+        {
+          if (!getFeatureFlags().dt_component_browser_file_browser)
+            return null
+          let e = t[3]
+          if (!e)
+            return null
+          return {
+            view: 'componentBrowserLibrary',
+            libraryKey: e,
+            componentKey: t[5],
+          }
         }
-      }
       case 'litmus':
         return null
       case 'resourceHub':
@@ -907,13 +907,13 @@ export class $$q1 {
           ...a,
           ...(f.get('onCompleteRedirectFileKey')
             ? {
-                onCompleteRedirectFileKey: f.get('onCompleteRedirectFileKey'),
-              }
+              onCompleteRedirectFileKey: f.get('onCompleteRedirectFileKey'),
+            }
             : {}),
           ...(f.get('onCompleteRedirectNodeId')
             ? {
-                onCompleteRedirectNodeId: f.get('onCompleteRedirectNodeId'),
-              }
+              onCompleteRedirectNodeId: f.get('onCompleteRedirectNodeId'),
+            }
             : {}),
           ...e.searchParams,
         })
@@ -1058,8 +1058,8 @@ export class $$q1 {
         } = t.search.parameters
         return query
           ? getI18nString('view_selectors.file_browser.search_results_with_query', {
-              query,
-            })
+            query,
+          })
           : getI18nString('view_selectors.file_browser.search_results_generic')
       case 'user':
         let {

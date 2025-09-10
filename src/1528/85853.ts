@@ -9,14 +9,14 @@ import { reportError } from "../905/11";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { wS } from "../figma_app/221240";
-import { Eo } from "../figma_app/80990";
+import { teamLibraryCache } from "../figma_app/80990";
 import { Jr } from "../figma_app/624361";
 import { k } from "../figma_app/449815";
 import { Pv } from "../905/619652";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { u2 } from "../figma_app/807786";
 import { AF } from "../figma_app/889655";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 var N = (e => (e.GENERIC = "GENERIC", e.OFFLINE = "OFFLINE", e.THUMBNAIL_TIMEOUT = "THUMBNAIL_TIMEOUT", e))(N || {});
 export function $$y0(e) {
   switch (e) {
@@ -136,13 +136,13 @@ export function $$T1({
   }, [setPlaygroundNodeData]);
   let j = useCallback(async (e = !0) => {
     let n;
-    if (t.type !== PW.COMPONENT && t.type !== PW.STATE_GROUP && t.type !== PW.MODULE) {
+    if (t.type !== PrimaryWorkflowEnum.COMPONENT && t.type !== PrimaryWorkflowEnum.STATE_GROUP && t.type !== PrimaryWorkflowEnum.MODULE) {
       O();
       return;
     }
     let a = Date.now();
     if (D(null), t.isLocal) n = null;else try {
-      let e = Eo.getCanvas({
+      let e = teamLibraryCache.getCanvas({
         canvas_url: t.canvas_url
       });
       (await Promise.race([e, delay(100)])) || (p(t), setPlaygroundNodeData(void 0), setHasChangesToReset(!1));
@@ -160,7 +160,7 @@ export function $$T1({
       });
       return;
     }
-    let l = t.type !== PW.STATE_GROUP || t.isLocal ? null : t.default_state_key;
+    let l = t.type !== PrimaryWorkflowEnum.STATE_GROUP || t.isLocal ? null : t.default_state_key;
     if (n ? Fullscreen.setPlaygroundSceneFromBuffer(t.node_id, n, e, l, t.library_key) : Fullscreen.setPlaygroundSceneFromLocalAsset(t.node_id)) {
       setHasChangesToReset(!1);
       setPlaygroundNodeData(Fullscreen.getPlaygroundNodeData());

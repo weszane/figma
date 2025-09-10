@@ -12,10 +12,10 @@ import { Ui } from "../905/709171";
 import { isInvalidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { w$ } from "../figma_app/646357";
-import { kH } from "../905/309735";
-import { QH } from "../905/405710";
+import { getBasename } from "../905/309735";
+import { getStyleThumbnail } from "../905/405710";
 import { Q as _$$Q } from "../figma_app/104130";
-import { AT } from "../figma_app/633080";
+import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { Ib } from "../905/129884";
 import { Pc } from "../figma_app/463500";
 import { P as _$$P } from "../905/201667";
@@ -65,10 +65,10 @@ export let $$O0 = memo(function ({
   let Y = "TEXT" === P && void 0 !== V && !isInvalidValue(V) && V > 0 && K.length > 0;
   let $ = AH(L?.key || null, L);
   let X = useMemo(() => L ? Ui(L, t) ? {
-    kind: AT.LOCAL,
+    kind: SubscriptionStatusEnum.LOCAL,
     value: L
   } : !getFeatureFlags().ds_zombie_styles_fixes || $ && $.data && $.data.content_hash === L.content_hash ? void 0 : {
-    kind: AT.SUBSCRIBED_WITHOUT_LIBRARY,
+    kind: SubscriptionStatusEnum.SUBSCRIBED_WITHOUT_LIBRARY,
     value: L
   } : void 0, [L, t, $]);
   w$(X);
@@ -79,7 +79,7 @@ export let $$O0 = memo(function ({
   let Z = R ? p5 : _$$A2;
   r && (Z = `${Z} ${lG}`);
   d || (Z = `${Z} ${Tu}`);
-  let Q = L && xo(QH(L) || J.local.thumbnails[L.node_id]?.css || null, W) || null;
+  let Q = L && xo(getStyleThumbnail(L) || J.local.thumbnails[L.node_id]?.css || null, W) || null;
   return useLargePreviewRows ? jsx(_$$Z2, {
     dsStyle: L,
     displayAsDonut: e,
@@ -95,7 +95,7 @@ export let $$O0 = memo(function ({
       "data-tooltip": Q
     } : {
       "data-tooltip-style-description": L ? L.description : void 0,
-      "data-tooltip-style-name": L ? kH(L.name) : getI18nString("design_systems.styles.custom"),
+      "data-tooltip-style-name": L ? getBasename(L.name) : getI18nString("design_systems.styles.custom"),
       "data-tooltip-style-element-type": k,
       "data-tooltip-type": Ib.SPECIAL,
       "data-tooltip": L && L.description || F ? _$$Z : ""

@@ -1,5 +1,5 @@
 import { parsePxInt } from "../figma_app/783094";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { ZV, FX } from "../figma_app/475869";
 let s = parsePxInt(ZV);
 let o = parsePxInt(FX);
@@ -10,7 +10,7 @@ export function $$d1(e, t) {
   for (let t of e) {
     let e;
     let a;
-    if (t.type !== PW.STYLE) {
+    if (t.type !== PrimaryWorkflowEnum.STYLE) {
       if ("min_node_width" in t) {
         e = t.min_node_width;
         a = t.min_node_height;

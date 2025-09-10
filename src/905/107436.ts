@@ -1,8 +1,8 @@
 import { useMemo, useState, useRef } from "react";
 import { ColorFormatEnum } from "../figma_app/763686";
-import { oB, qN } from "../figma_app/273493";
+import { rgbToHsl, rgbToHsv } from "../figma_app/273493";
 import { useLocalStorageSync } from "../905/657224";
-import { sN } from "../figma_app/191804";
+import { blendColors } from "../figma_app/191804";
 import { parsePxNumber } from "../figma_app/783094";
 import { f as _$$f } from "../905/24905";
 import { Fk } from "../figma_app/167249";
@@ -173,10 +173,10 @@ export function $$E6(e, t, i, o) {
       originalTop: 0,
       originalLeft: 0
     };
-    let e = i === ColorFormatEnum.HSL ? oB(Q) : qN(Q);
+    let e = i === ColorFormatEnum.HSL ? rgbToHsl(Q) : rgbToHsv(Q);
     let n = e.s;
     let s = i === ColorFormatEnum.HSL ? e.l : e.v;
-    let o = i === ColorFormatEnum.HSL ? oB(foregroundColor) : qN(foregroundColor);
+    let o = i === ColorFormatEnum.HSL ? rgbToHsl(foregroundColor) : rgbToHsv(foregroundColor);
     let l = o.s;
     let d = i === ColorFormatEnum.HSL ? o.l : o.v;
     let c = f / 2 + _;
@@ -231,7 +231,7 @@ export function $$S1(e, t) {
 }
 export function $$w0(e, t, i, n) {
   if (!e || !t || void 0 === i || void 0 === n) return {};
-  let r = sN(t, e);
+  let r = blendColors(t, e);
   let a = parseFloat(_$$f(r, t).toFixed(2));
   return {
     contrast: a,

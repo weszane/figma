@@ -13,7 +13,7 @@ import { renameNode } from "../figma_app/741237";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { CG } from "../figma_app/646357";
 import { AF } from "../figma_app/889655";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { B_, wh, Rq, T1 } from "../figma_app/164212";
 import { vS } from "../figma_app/323320";
 import { YH } from "../figma_app/583247";
@@ -92,12 +92,12 @@ export function $$C0({
   }) => {
     let u = i?.map(e => {
       switch (e.type) {
-        case PW.COMPONENT:
+        case PrimaryWorkflowEnum.COMPONENT:
           return {
             type: ComponentType.COMPONENT,
             key: CG(e)
           };
-        case PW.STATE_GROUP:
+        case PrimaryWorkflowEnum.STATE_GROUP:
           return {
             type: ComponentType.STATE_GROUP,
             key: CG(e)

@@ -6,7 +6,7 @@ import { atomStoreManager, atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { lB, $$if } from "../figma_app/97020";
 import { ds } from "../figma_app/314264";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { sF } from "../figma_app/357655";
 import { a as _$$a } from "../905/38236";
 import { K } from "../figma_app/695131";
@@ -17,10 +17,10 @@ export function $$g10(e) {
   atomStoreManager.set($$x6, null);
   getFeatureFlags().sts_sprig_targeted_feedback && e && atomStoreManager.get(K) && e("track", "sites_responsive_set_edit");
 }
-let f = Wh(() => atom(null));
+let f = setupRemovableAtomFamily(() => atom(null));
 let $$E5 = atom(!1);
 export var $$y0 = (e => (e[e.Modal = 0] = "Modal", e[e.Iframe = 1] = "Iframe", e[e.None = 2] = "None", e))($$y0 || {});
-let b = Wh(() => atom(0));
+let b = setupRemovableAtomFamily(() => atom(0));
 let $$T9 = atom(null, (e, t, r) => {
   if (2 === e(b) && 2 !== r && e($$E5)) {
     let t = e(f);
@@ -33,9 +33,9 @@ let $$T9 = atom(null, (e, t, r) => {
 function I() {
   return AppStateTsApi?.prototypingEditorState().prototypeViewMode.getCopy() === PresentationMode.PRESENT ? "fullscreen" : "modal";
 }
-let $$S2 = Wh(() => atom(I()));
-let $$v3 = Wh(() => atom(0));
-let $$A1 = Wh(() => atom(null));
+let $$S2 = setupRemovableAtomFamily(() => atom(I()));
+let $$v3 = setupRemovableAtomFamily(() => atom(0));
+let $$A1 = setupRemovableAtomFamily(() => atom(null));
 let $$x6 = atom(e => e(f), (e, t, r) => {
   var i;
   let s;

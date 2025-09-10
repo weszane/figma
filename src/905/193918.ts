@@ -58,6 +58,7 @@ import { A as _$$A4 } from '../svg/228383';
 import { A as _$$A8 } from '../svg/675271';
 import { A as _$$A } from '../vendor/90566';
 import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
 function j({
   shippingAddress: e,
   setShippingAddress: t,
@@ -192,7 +193,7 @@ function Z({
   })();
   return jsx(Fragment, {
     children: jsxs('div', {
-      className: B()({
+      className: classNames({
         'checkout_promo_code_input--promoCodeInputWrapper--V6shV text--fontPos13--xW8hS text--_fontBase--QdLsd': !0,
         'checkout_promo_code_input--promoCodeInputWrapper__valid--zZrWf': s === 'valid',
         'checkout_promo_code_input--promoCodeInputWrapper__invalid--GFMsR': s === 'invalid',
@@ -215,7 +216,7 @@ function Z({
         trackingFieldName: 'Promo Code',
         value: l
       }), f, c && jsx('div', {
-        className: B()({
+        className: classNames({
           'checkout_promo_code_input--promoCodeTerms--Ym4iT text--fontPos11--2LvXf text--_fontBase--QdLsd': !0,
           'checkout_promo_code_input--promoCodeTerms__visible--0LI3v': c !== null
         }),
@@ -224,7 +225,7 @@ function Z({
           promo_code: c
         })
       }), jsx('div', {
-        className: B()({
+        className: classNames({
           'checkout_promo_code_input--promoCodeError--Mw--L text--fontPos11--2LvXf text--_fontBase--QdLsd': !0,
           'checkout_promo_code_input--promoCodeError__visible--HBI59': s === 'invalid'
         }),
@@ -432,13 +433,13 @@ function eh(e) {
       children: [jsx(CY, {
         onClick: o,
         trusted: !0,
-        className: B()(TF, {
+        className: classNames(TF, {
           [t$]: e.isRemoveLoading,
           [r9]: e.disabled
         }),
         children: renderI18nText('general.remove')
       }), jsx(kt, {
-        className: B()(w1, {
+        className: classNames(w1, {
           [xc]: e.isRemoveLoading
         }),
         size: 'small',

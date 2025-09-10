@@ -1,11 +1,11 @@
 import { assertNotNullish } from "../figma_app/95419";
-import { H0 } from "../figma_app/191804";
+import { parseColor } from "../figma_app/191804";
 import { Qf } from "../905/248569";
 import { p3 } from "../figma_app/622881";
 import { A } from "../905/550748";
 class l extends A {
   parse(e) {
-    let t = H0(e);
+    let t = parseColor(e);
     return assertNotNullish(t, "Could not parse CSS");
   }
   format(e, t = "srgb") {

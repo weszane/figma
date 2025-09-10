@@ -16,7 +16,7 @@ import { Dc } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { toArray, normalizeMixedValue } from "../905/216495";
 import { Gt } from "../905/275640";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { wA, Fk } from "../figma_app/167249";
 import { iM } from "../figma_app/405546";
 var u = c;
@@ -158,7 +158,7 @@ let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function () {
     });
   }, [i, r, a]);
 } : lQ;
-let $$G6 = Wh(() => atom(null));
+let $$G6 = setupRemovableAtomFamily(() => atom(null));
 export function $$V9() {
   let [e, t] = useAtomValueAndSetter(Vi);
   let r = useAtomWithSubscription($$G6);

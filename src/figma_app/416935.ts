@@ -1,6 +1,6 @@
-import { C } from "../905/306099";
-import { getInitialOptions } from "../figma_app/169182";
-import { f } from "../905/561988";
+import { C } from "src/905/306099";
+import { getInitialOptions } from "src/figma_app/169182";
+import { f } from "src/905/561988";
 export function $$s9(e) {
   return /^[^<>\/\\:?*"|]*$/.test(e) && /^[\u0000-\u007F]+$/.test(e) && /^[^@\s]+@[^@\s]+\.[^@\s]+$/i.test(e);
 }

@@ -1,10 +1,10 @@
-import { zRx } from "../figma_app/822011";
-import { throwTypeError } from "../figma_app/465776";
-import { getI18nString } from "../905/303541";
-import { ProductAccessTypeEnum, ViewAccessTypeEnum } from "../905/513035";
-import { Gj } from "../figma_app/217457";
-import { FUpgradeReasonType, FApprovalMethodType, FSeatAssignmentReasonType } from "../figma_app/191312";
-import { $ } from "../figma_app/126651";
+import { zRx } from "src/figma_app/822011";
+import { throwTypeError } from "src/figma_app/465776";
+import { getI18nString } from "src/905/303541";
+import { ProductAccessTypeEnum, ViewAccessTypeEnum } from "src/905/513035";
+import { Gj } from "src/figma_app/217457";
+import { FUpgradeReasonType, FApprovalMethodType, FSeatAssignmentReasonType } from "src/figma_app/191312";
+import { $ } from "src/figma_app/126651";
 let $$c10 = "Seat";
 let $$u1 = e => $$p11(e);
 export function $$p11(e) {

@@ -1,18 +1,18 @@
-import { parseSessionLocalID, isValidSessionLocalID, sessionLocalIDToString } from "../905/871411";
-import { getFeatureFlags } from "../905/601108";
-import { debugState } from "../905/407919";
-import { customHistory } from "../905/612521";
-import { getInitialOptions } from "../figma_app/169182";
-import { parseAndNormalizeQuery } from "../905/634134";
-import { encodeUri } from "../figma_app/930338";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { getI18nString } from "../905/303541";
-import { c5 } from "../905/93909";
-import { getRepoById, buildUrlPath, getDisplayName } from "../905/760074";
-import { Zt } from "../figma_app/617727";
-import { ge } from "../figma_app/349248";
-import { LT, ZK } from "../figma_app/831696";
-import { O } from "../905/833838";
+import { parseSessionLocalID, isValidSessionLocalID, sessionLocalIDToString } from "src/905/871411";
+import { getFeatureFlags } from "src/905/601108";
+import { debugState } from "src/905/407919";
+import { customHistory } from "src/905/612521";
+import { getInitialOptions } from "src/figma_app/169182";
+import { parseAndNormalizeQuery } from "src/905/634134";
+import { encodeUri } from "src/figma_app/930338";
+import { isInteractionPathCheck } from "src/figma_app/897289";
+import { getI18nString } from "src/905/303541";
+import { c5 } from "src/905/93909";
+import { getRepoById, buildUrlPath, getDisplayName } from "src/905/760074";
+import { Zt } from "src/figma_app/617727";
+import { ge } from "src/figma_app/349248";
+import { LT, ZK } from "src/figma_app/831696";
+import { O } from "src/905/833838";
 function A(e) {
   return "proto" === e || "deck" === e || "presenter" === e;
 }

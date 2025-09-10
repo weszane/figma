@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { OperationType, VariableResolvedDataType } from "../figma_app/763686";
 let a = [["toString", OperationType.STRINGIFY]];
 let s = new Map(a);
@@ -16,7 +16,7 @@ export function $$d0(e) {
 let c = [];
 export function $$u3(e, t) {
   let i = t.map(e => e.resolvedType);
-  let r = c.find(t => t.expressionFunction === e && c2(t.argumentTypes, i));
+  let r = c.find(t => t.expressionFunction === e && deepEqual(t.argumentTypes, i));
   if (!r) throw Error("Invalid expression function or arguments provided - check the number and type of arguments in order to find a correct expression function signature. " + (o.get(e) ?? "Unknown expression function"));
   return r.returnType;
 }

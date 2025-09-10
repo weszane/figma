@@ -71,21 +71,21 @@ export class $$y0 {
       }
       return t[2] === 'collections'
         ? {
+          view: 'communityHub',
+          subView: 'searchAndBrowse',
+          data: void 0,
+        }
+        : t[2] === 'templates' && t[3]
+          ? {
             view: 'communityHub',
             subView: 'searchAndBrowse',
             data: void 0,
           }
-        : t[2] === 'templates' && t[3]
-          ? {
-              view: 'communityHub',
-              subView: 'searchAndBrowse',
-              data: void 0,
-            }
           : {
-              view: 'communityHub',
-              subView: 'searchAndBrowse',
-              data: wl(s.join('/'), i),
-            }
+            view: 'communityHub',
+            subView: 'searchAndBrowse',
+            data: wl(s.join('/'), i),
+          }
     }
     if (t[1]?.startsWith('@')) {
       let i = t[1].slice(1)?.toLowerCase()

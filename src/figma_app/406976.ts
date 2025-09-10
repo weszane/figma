@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { VariableResolvedDataType, VariableDataType, VariablesBindings, LinterCppBindings } from "../figma_app/763686";
 import { sessionLocalIDToString } from "../905/871411";
-import { dI as _$$dI } from "../905/805904";
+import { convertKiwiToVariableIdString } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -87,7 +87,7 @@ function v(e) {
 export function $$A2(e, t, r) {
   try {
     if (v(t) ? t.type === VariableDataType.ALIAS : "ALIAS" === t.dataType) {
-      let d = v(t) ? t.value : _$$dI(t.value?.alias);
+      let d = v(t) ? t.value : convertKiwiToVariableIdString(t.value?.alias);
       let u = v(t) ? T(t.resolvedType) : t.resolvedDataType;
       let p = debugState.getState();
       let _ = Object.keys(p.mirror.sceneGraphSelection);

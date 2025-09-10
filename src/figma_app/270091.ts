@@ -40,7 +40,7 @@ import { dG } from "../figma_app/753501";
 import { n1 } from "../figma_app/657017";
 import { pi } from "../figma_app/314264";
 import { Ui, EF } from "../905/709171";
-import { uj, Qx, O9, zR } from "../figma_app/80990";
+import { getCommonLibraryKey, memoizedProcessComponentsAndStateGroups, getFullComponentBreadcrumbs, getAssetBackgroundColor } from "../figma_app/80990";
 import { Fl } from "../figma_app/236178";
 import { FX } from "../figma_app/12491";
 import { NX, k9 as _$$k3, sF } from "../figma_app/777207";
@@ -60,7 +60,7 @@ import { VP, D2 } from "../905/18797";
 import { Oe } from "../figma_app/336853";
 import { Fk } from "../figma_app/167249";
 import { He } from "../figma_app/155728";
-import { PW, Wv } from "../figma_app/633080";
+import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { Ib } from "../905/129884";
 import { _A } from "../figma_app/65182";
@@ -194,7 +194,7 @@ function eW(e) {
   let e8 = useDispatch();
   let e6 = multiselect ? null : selectedItems[0] ?? null;
   let e7 = useMemo(() => overrideDefaultItem ? overrideDefaultItem.library_key : null, [overrideDefaultItem]);
-  let e9 = useMemo(() => e7 ?? uj(selectedItems) ?? selectedLibraryKey, [e7, selectedItems, selectedLibraryKey]);
+  let e9 = useMemo(() => e7 ?? getCommonLibraryKey(selectedItems) ?? selectedLibraryKey, [e7, selectedItems, selectedLibraryKey]);
   let te = useMemo(() => Dr(library, Wx.COMPONENTS_FIRST, eq), [eq, library]);
   let {
     libraryMetadataMap,
@@ -213,7 +213,7 @@ function eW(e) {
   let ts = useMemo(() => preferredItems ? preferredItems.map(Kk) : [], [preferredItems]);
   let [to, tl, td] = useMemo(() => {
     if (e9 && (rootDrilldownItemsByLibraryKey[e9]?.length ?? 0) > 0) return [e9, rootDrilldownItemsByLibraryKey[e9], publishedLibraryItemsByLibraryKey[e9]];
-    if (te.length > 0) return [_$$l2(openFile.libraryKey), te, X0(Qx(library))];
+    if (te.length > 0) return [_$$l2(openFile.libraryKey), te, X0(memoizedProcessComponentsAndStateGroups(library))];
     if (eY) {
       let e = Object.entries(rootDrilldownItemsByLibraryKey).find(([e, t]) => t.length > 0);
       if (e) {
@@ -257,7 +257,7 @@ function eW(e) {
       let {
         type
       } = e;
-      let r = type === PW.COMPONENT ? e.component_key : e.key;
+      let r = type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key;
       if (r) return {
         type,
         key: r
@@ -269,7 +269,7 @@ function eW(e) {
       selectedItems: n,
       queryId: r,
       sessionId: t
-    })).normalizedSearchResults.filter(e => e.type !== PW.MODULE).map(e => ({
+    })).normalizedSearchResults.filter(e => e.type !== PrimaryWorkflowEnum.MODULE).map(e => ({
       item: e,
       score: e.score
     }));
@@ -370,14 +370,14 @@ function eW(e) {
   let tv = useMemo(() => {
     if (multiselect) {
       if (e9 && td) return overrideDefaultItem ? {
-        [overrideDefaultItem.library_key]: O9(overrideDefaultItem, td)
+        [overrideDefaultItem.library_key]: getFullComponentBreadcrumbs(overrideDefaultItem, td)
       } : {
         [e9]: OK(selectedItems, td)
       };
     } else {
       let e = overrideDefaultItem || e6;
       if (e && td) {
-        let t = O9(e, td);
+        let t = getFullComponentBreadcrumbs(e, td);
         return {
           [e.library_key]: t
         };
@@ -468,7 +468,7 @@ function eW(e) {
     e8(showModalHandler({
       type: _$$T,
       data: {
-        initialTab: Wv.LIBRARIES,
+        initialTab: LibraryTabEnum.LIBRARIES,
         entrypoint: r6.INSTANCE_SWAP_BROWSE_LIBRARIES_LINK
       }
     }));
@@ -482,7 +482,7 @@ function eW(e) {
       let e = Ml(tp, Object.keys(sceneGraphSelection));
       if (VP(loadingState, e)) return item.node_id === tp.node_id && EF(item, tp);
     }
-    return selectedItems.some(e => item.type === PW.COMPONENT && e.type === PW.COMPONENT ? !!item.component_key && item.component_key === e.component_key || !item.component_key && !e.component_key && item.node_id === e.node_id : item.type === PW.STATE_GROUP && e.type === PW.STATE_GROUP && (!!item.key && item.key === e.key || !item.key && !e.key && item.node_id === e.node_id));
+    return selectedItems.some(e => item.type === PrimaryWorkflowEnum.COMPONENT && e.type === PrimaryWorkflowEnum.COMPONENT ? !!item.component_key && item.component_key === e.component_key || !item.component_key && !e.component_key && item.node_id === e.node_id : item.type === PrimaryWorkflowEnum.STATE_GROUP && e.type === PrimaryWorkflowEnum.STATE_GROUP && (!!item.key && item.key === e.key || !item.key && !e.key && item.node_id === e.node_id));
   }, [tp, sceneGraphSelection, loadingState, multiselect, selectedItems]);
   let tW = useCallback(e => {
     let {
@@ -554,12 +554,12 @@ function eW(e) {
     let p = {
       ...tg,
       ...c,
-      type: r.item.type === PW.COMPONENT ? "component" : "state_group",
+      type: r.item.type === PrimaryWorkflowEnum.COMPONENT ? "component" : "state_group",
       searchSessionId: sessionId
     };
     if (pickerType === Zl.INSTANCE_SWAP_PICKER) {
       let e = function (e) {
-        return e ? e.type === PW.COMPONENT ? e.component_key : e.type === PW.STATE_GROUP ? e.key : void 0 : void 0;
+        return e ? e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.type === PrimaryWorkflowEnum.STATE_GROUP ? e.key : void 0 : void 0;
       };
       let t = selectedItems[0];
       let n = {
@@ -595,7 +595,7 @@ function eW(e) {
         action: e ? "deselect" : "select"
       });
     } else trackEventAnalytics("Component Insert Panel Insert Instance", {
-      type: r.item.type === PW.COMPONENT ? "component" : "state_group",
+      type: r.item.type === PrimaryWorkflowEnum.COMPONENT ? "component" : "state_group",
       fromSearch: n,
       altKey: s,
       viewMode: isListView ? "list" : "grid",
@@ -807,7 +807,7 @@ function eW(e) {
     emptyState: t3,
     errorComponent: tc.type === iN.PREFERRED ? preferredValuesErrorComponent : void 0,
     extraHeightOnSearch: eY || e.pickerType === Zl.RESOURCE_INSERT_MODAL ? 0 : eU,
-    getBackgroundColorForLeafItemThumbnail: zR,
+    getBackgroundColorForLeafItemThumbnail: getAssetBackgroundColor,
     getLeafItemRecordingKey: eH,
     getLeafItemThumbnail: eY || isListView ? $$eV3 : eG,
     getLeafItemTooltip: eY ? pf : void 0,
@@ -885,7 +885,7 @@ export function $$eK1(e) {
   let C = useMemo(() => !!preferredItems && ez(preferredItems), [preferredItems]);
   let w = x?.key || null;
   let O = useMemo(() => I ? I.library_key : null, [I]);
-  let L = useMemo(() => O ?? uj(selectedItems) ?? selectedLibraryKey, [O, selectedItems, selectedLibraryKey]);
+  let L = useMemo(() => O ?? getCommonLibraryKey(selectedItems) ?? selectedLibraryKey, [O, selectedItems, selectedLibraryKey]);
   let P = _$$U();
   let D = fc();
   let k = useMemo(() => {

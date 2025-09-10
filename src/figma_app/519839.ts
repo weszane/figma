@@ -33,7 +33,7 @@ import { maybeCreateSavepoint } from "../905/294113";
 import { MH, dM, cM, bh, x6, tK, Io } from "../figma_app/803787";
 import { H7 } from "../figma_app/598018";
 import { O as _$$O } from "../905/566074";
-import { E8, PW, Qx, M$, v$, Nv } from "../figma_app/633080";
+import { StagingStatusEnum, PrimaryWorkflowEnum, LibraryPublishStatusEnum, PublishStatusEnum, DEFAULT_LIBRARY_LIMIT, NO_CONTAINING_STATE_GROUP_ID } from "../figma_app/633080";
 import { Z as _$$Z } from "../905/939602";
 import { Gh } from "../figma_app/707567";
 import { b as _$$b2 } from "../905/76245";
@@ -66,7 +66,7 @@ export let $$Q8 = createOptimistThunk((e, {
     let t = e => {
       for (let t in e = {
         ...e
-      }) HF(e[t].status) ? e[t].status = E8.DELETED : e[t].status === E8.NEW && (e[t].status = E8.NOT_STAGED);
+      }) HF(e[t].status) ? e[t].status = StagingStatusEnum.DELETED : e[t].status === StagingStatusEnum.NEW && (e[t].status = StagingStatusEnum.NOT_STAGED);
       return e;
     };
     let r = t(n.library.local.components);
@@ -74,19 +74,19 @@ export let $$Q8 = createOptimistThunk((e, {
     let a = t(n.library.local.styles);
     e.dispatch(I0({
       local: r,
-      type: PW.COMPONENT
+      type: PrimaryWorkflowEnum.COMPONENT
     }));
     e.dispatch(I0({
       local: i,
-      type: PW.STATE_GROUP
+      type: PrimaryWorkflowEnum.STATE_GROUP
     }));
     e.dispatch(I0({
       local: a,
-      type: PW.STYLE
+      type: PrimaryWorkflowEnum.STYLE
     }));
   }
   e.dispatch($$Y5({
-    state: Qx.NONE
+    state: LibraryPublishStatusEnum.NONE
   }));
   e.dispatch($$eo4({
     unpublishAll: i,
@@ -108,12 +108,12 @@ async function ee(e, t, r, n) {
   let l = () => {
     !function (e, t, r) {
       e.dispatch($$Y5({
-        state: Qx.ASSEMBLING_COMPONENTS,
+        state: LibraryPublishStatusEnum.ASSEMBLING_COMPONENTS,
         progress: t,
         publishType: r,
         publishStartMs: et(e.getState().library.publishProgress)
       }));
-    }(n, (o += 1) / s, t ? M$.UNPUBLISH : M$.PUBLISH);
+    }(n, (o += 1) / s, t ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH);
   };
   let d = Object.create(null);
   let c = [];
@@ -132,14 +132,14 @@ async function ee(e, t, r, n) {
         localId: i,
         thumbnail: t
       });
-      e.type === PW.STYLE && (d[e.node_id] = JSON.stringify(fn(e, r)));
+      e.type === PrimaryWorkflowEnum.STYLE && (d[e.node_id] = JSON.stringify(fn(e, r)));
     } catch (t) {
       logError("publish", "Failed to upload thumbnail for asset", {
         guid: e.node_id
       }, {
         reportAsSentryError: !0
       });
-      c.push(e.type === PW.COMPONENT && e.containing_frame?.containingStateGroup?.nodeId || e.node_id);
+      c.push(e.type === PrimaryWorkflowEnum.COMPONENT && e.containing_frame?.containingStateGroup?.nodeId || e.node_id);
     } finally {
       l();
     }
@@ -151,7 +151,7 @@ async function ee(e, t, r, n) {
     encounteredNonS3PresignedPostError: !1
   };
   let p = [];
-  for (; u.length;) p.push(u.splice(0, v$));
+  for (; u.length;) p.push(u.splice(0, DEFAULT_LIBRARY_LIMIT));
   let y = _$$b2.getThumbnailsBufferPresignedPostUrl(p.length);
   let b = p.map(e => e.reduce(({
     buffer: e,
@@ -209,7 +209,7 @@ async function ee(e, t, r, n) {
   };
 }
 function et(e) {
-  return e.state === Qx.NONE ? (logError(J, "Attempted to update progress while not assembling components", e), null) : e.publishStartMs;
+  return e.state === LibraryPublishStatusEnum.NONE ? (logError(J, "Attempted to update progress while not assembling components", e), null) : e.publishStartMs;
 }
 function er(e, t, r, n) {
   let i = et(e);
@@ -225,7 +225,7 @@ function er(e, t, r, n) {
 }
 function en(e, t, r, n, i, a, s, o) {
   0 === t ? function (e, t, r, n) {
-    if (t.state === Qx.UPLOADING) {
+    if (t.state === LibraryPublishStatusEnum.UPLOADING) {
       let e = et(t);
       if (e) {
         let n = performance.now();
@@ -250,12 +250,12 @@ function en(e, t, r, n, i, a, s, o) {
     }
     n({
       publishProgress: t,
-      publishType: r ? M$.UNPUBLISH : M$.PUBLISH,
+      publishType: r ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
       dispatch: e
     });
     e($$X0(""));
   }(n, e, r, i) : function (e, t, r, n, i, a, s) {
-    let o = n ? M$.UNPUBLISH : M$.PUBLISH;
+    let o = n ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH;
     if (a && e($$X0(a)), s) {
       i({
         error: jO.NonS3PresignedPost,
@@ -367,7 +367,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     reduxLibraryPublishingMode: A.library.libraryPublishingMode
   });
   let $ = t.localAssetsWithDenormalizedPublishInfo ?? {};
-  if (A.library.publishProgress.state !== Qx.NONE) {
+  if (A.library.publishProgress.state !== LibraryPublishStatusEnum.NONE) {
     e.dispatch($$q2());
     return;
   }
@@ -391,9 +391,9 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     e.dispatch($$q2());
     return;
   }
-  let Q = [PW.CODE_COMPONENT, PW.RESPONSIVE_SET].every(e => !_$$O(e) || aB(Object.values($).filter(t => t.type === e), Z));
-  let ei = t.unpublishAll || aB(Object.values(MH(A)), Z) && aB(Object.values(dM(A)), Z) && aB(Object.values(cM(A)), Z) && aB(Object.values(bh(A)), Z) && (!_$$O(PW.MODULE) || aB(Object.values(x6(A)), Z)) && Q;
-  sendMetric(`${ei ? M$.UNPUBLISH : M$.PUBLISH}.start`);
+  let Q = [PrimaryWorkflowEnum.CODE_COMPONENT, PrimaryWorkflowEnum.RESPONSIVE_SET].every(e => !_$$O(e) || aB(Object.values($).filter(t => t.type === e), Z));
+  let ei = t.unpublishAll || aB(Object.values(MH(A)), Z) && aB(Object.values(dM(A)), Z) && aB(Object.values(cM(A)), Z) && aB(Object.values(bh(A)), Z) && (!_$$O(PrimaryWorkflowEnum.MODULE) || aB(Object.values(x6(A)), Z)) && Q;
+  sendMetric(`${ei ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH}.start`);
   e.dispatch($$K1({
     unpublishAll: !!ei
   }));
@@ -403,7 +403,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   let ea = (r, n, i, a) => {
     e.dispatch(Nf());
     let o = a?.encounteredNonS3PresignedPostError ? "non_s3_error" : n;
-    er(e.getState().library.publishProgress, r, `${ei ? M$.UNPUBLISH : M$.PUBLISH}.error.duration`, o);
+    er(e.getState().library.publishProgress, r, `${ei ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH}.error.duration`, o);
     let l = a?.error;
     logError(J, r, {
       ...t,
@@ -438,7 +438,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   !function (e) {
     let t = new PerfTimer("publish.client.prep_nodes_for_thumbnailing", {});
     t.start();
-    let r = e[PW.STYLE][M$.PUBLISH].filter(e => e.style_type === s4.TEXT);
+    let r = e[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.PUBLISH].filter(e => e.style_type === s4.TEXT);
     r.forEach(e => {
       Fullscreen.prepNodeForAssetThumbnailRendering(e.node_id);
     });
@@ -463,7 +463,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
       error: t
     }) : (V({
       error: jO.Offline,
-      publishType: ei ? M$.UNPUBLISH : M$.PUBLISH,
+      publishType: ei ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH,
       dispatch: e.dispatch
     }), e.dispatch($$q2()));
     return;
@@ -476,7 +476,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   trackEventAnalytics("Publish start: savepoint successfully created", {
     savepointId: r.id
   });
-  let e_ = u()(Object.values(A.library.local.components).filter(e => e.isLocal), e => E2(e) || Nv);
+  let e_ = u()(Object.values(A.library.local.components).filter(e => e.isLocal), e => E2(e) || NO_CONTAINING_STATE_GROUP_ID);
   let eh = H7(A);
   let {
     orderedUpdates
@@ -485,80 +485,80 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
     let r = e => {
       e.assets.length && t.push(e);
     };
-    let n = e[PW.VARIABLE_SET][M$.PUBLISH];
+    let n = e[PrimaryWorkflowEnum.VARIABLE_SET][PublishStatusEnum.PUBLISH];
     r({
-      publishType: M$.PUBLISH,
-      assetType: PW.VARIABLE_SET,
+      publishType: PublishStatusEnum.PUBLISH,
+      assetType: PrimaryWorkflowEnum.VARIABLE_SET,
       assets: n
     });
     r({
-      publishType: M$.UNPUBLISH,
-      assetType: PW.VARIABLE_SET,
-      assets: e[PW.VARIABLE_SET][M$.UNPUBLISH]
+      publishType: PublishStatusEnum.UNPUBLISH,
+      assetType: PrimaryWorkflowEnum.VARIABLE_SET,
+      assets: e[PrimaryWorkflowEnum.VARIABLE_SET][PublishStatusEnum.UNPUBLISH]
     });
     r({
-      publishType: M$.UNPUBLISH,
-      assetType: PW.VARIABLE,
-      assets: e[PW.VARIABLE][M$.UNPUBLISH]
+      publishType: PublishStatusEnum.UNPUBLISH,
+      assetType: PrimaryWorkflowEnum.VARIABLE,
+      assets: e[PrimaryWorkflowEnum.VARIABLE][PublishStatusEnum.UNPUBLISH]
     });
-    let i = e[PW.STATE_GROUP][M$.PUBLISH];
-    let a = e[PW.COMPONENT][M$.UNPUBLISH].filter(e => null === E2(e));
+    let i = e[PrimaryWorkflowEnum.STATE_GROUP][PublishStatusEnum.PUBLISH];
+    let a = e[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.UNPUBLISH].filter(e => null === E2(e));
     r({
-      publishType: M$.PUBLISH,
-      assetType: PW.STATE_GROUP,
+      publishType: PublishStatusEnum.PUBLISH,
+      assetType: PrimaryWorkflowEnum.STATE_GROUP,
       assets: i
     });
     r({
-      publishType: M$.UNPUBLISH,
-      assetType: PW.STATE_GROUP,
-      assets: e[PW.STATE_GROUP][M$.UNPUBLISH]
+      publishType: PublishStatusEnum.UNPUBLISH,
+      assetType: PrimaryWorkflowEnum.STATE_GROUP,
+      assets: e[PrimaryWorkflowEnum.STATE_GROUP][PublishStatusEnum.UNPUBLISH]
     });
     r({
-      publishType: M$.PUBLISH,
-      assetType: PW.COMPONENT,
-      assets: e[PW.COMPONENT][M$.PUBLISH].filter(e => !E2(e))
+      publishType: PublishStatusEnum.PUBLISH,
+      assetType: PrimaryWorkflowEnum.COMPONENT,
+      assets: e[PrimaryWorkflowEnum.COMPONENT][PublishStatusEnum.PUBLISH].filter(e => !E2(e))
     });
     r({
-      publishType: M$.UNPUBLISH,
-      assetType: PW.COMPONENT,
+      publishType: PublishStatusEnum.UNPUBLISH,
+      assetType: PrimaryWorkflowEnum.COMPONENT,
       assets: a
     });
     r({
-      publishType: M$.PUBLISH,
-      assetType: PW.STYLE,
-      assets: e[PW.STYLE][M$.PUBLISH]
+      publishType: PublishStatusEnum.PUBLISH,
+      assetType: PrimaryWorkflowEnum.STYLE,
+      assets: e[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.PUBLISH]
     });
     r({
-      publishType: M$.UNPUBLISH,
-      assetType: PW.STYLE,
-      assets: e[PW.STYLE][M$.UNPUBLISH]
+      publishType: PublishStatusEnum.UNPUBLISH,
+      assetType: PrimaryWorkflowEnum.STYLE,
+      assets: e[PrimaryWorkflowEnum.STYLE][PublishStatusEnum.UNPUBLISH]
     });
-    _$$O(PW.MODULE) && (r({
-      publishType: M$.PUBLISH,
-      assetType: PW.MODULE,
-      assets: e[PW.MODULE][M$.PUBLISH]
+    _$$O(PrimaryWorkflowEnum.MODULE) && (r({
+      publishType: PublishStatusEnum.PUBLISH,
+      assetType: PrimaryWorkflowEnum.MODULE,
+      assets: e[PrimaryWorkflowEnum.MODULE][PublishStatusEnum.PUBLISH]
     }), r({
-      publishType: M$.UNPUBLISH,
-      assetType: PW.MODULE,
-      assets: e[PW.MODULE][M$.UNPUBLISH]
+      publishType: PublishStatusEnum.UNPUBLISH,
+      assetType: PrimaryWorkflowEnum.MODULE,
+      assets: e[PrimaryWorkflowEnum.MODULE][PublishStatusEnum.UNPUBLISH]
     }));
-    _$$O(PW.RESPONSIVE_SET) && (r({
-      publishType: M$.PUBLISH,
-      assetType: PW.RESPONSIVE_SET,
-      assets: e[PW.RESPONSIVE_SET][M$.PUBLISH]
+    _$$O(PrimaryWorkflowEnum.RESPONSIVE_SET) && (r({
+      publishType: PublishStatusEnum.PUBLISH,
+      assetType: PrimaryWorkflowEnum.RESPONSIVE_SET,
+      assets: e[PrimaryWorkflowEnum.RESPONSIVE_SET][PublishStatusEnum.PUBLISH]
     }), r({
-      publishType: M$.UNPUBLISH,
-      assetType: PW.RESPONSIVE_SET,
-      assets: e[PW.RESPONSIVE_SET][M$.UNPUBLISH]
+      publishType: PublishStatusEnum.UNPUBLISH,
+      assetType: PrimaryWorkflowEnum.RESPONSIVE_SET,
+      assets: e[PrimaryWorkflowEnum.RESPONSIVE_SET][PublishStatusEnum.UNPUBLISH]
     }));
-    _$$O(PW.CODE_COMPONENT) && (r({
-      publishType: M$.PUBLISH,
-      assetType: PW.CODE_COMPONENT,
-      assets: e[PW.CODE_COMPONENT][M$.PUBLISH]
+    _$$O(PrimaryWorkflowEnum.CODE_COMPONENT) && (r({
+      publishType: PublishStatusEnum.PUBLISH,
+      assetType: PrimaryWorkflowEnum.CODE_COMPONENT,
+      assets: e[PrimaryWorkflowEnum.CODE_COMPONENT][PublishStatusEnum.PUBLISH]
     }), r({
-      publishType: M$.UNPUBLISH,
-      assetType: PW.CODE_COMPONENT,
-      assets: e[PW.CODE_COMPONENT][M$.UNPUBLISH]
+      publishType: PublishStatusEnum.UNPUBLISH,
+      assetType: PrimaryWorkflowEnum.CODE_COMPONENT,
+      assets: e[PrimaryWorkflowEnum.CODE_COMPONENT][PublishStatusEnum.UNPUBLISH]
     }));
     return {
       orderedUpdates: t
@@ -571,43 +571,43 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   }) => {
     let a = "";
     switch (r) {
-      case PW.COMPONENT:
+      case PrimaryWorkflowEnum.COMPONENT:
         a = "numComponentBuffers";
         break;
-      case PW.STATE_GROUP:
+      case PrimaryWorkflowEnum.STATE_GROUP:
         a = "numStateGroupBuffers";
         break;
-      case PW.STYLE:
+      case PrimaryWorkflowEnum.STYLE:
         a = "numStyleBuffers";
         break;
-      case PW.VARIABLE_SET:
+      case PrimaryWorkflowEnum.VARIABLE_SET:
         a = "numVariableSetBuffers";
         break;
-      case PW.MODULE:
+      case PrimaryWorkflowEnum.MODULE:
         a = "numTemplateBuffers";
         break;
-      case PW.VARIABLE:
-      case PW.VARIABLE_OVERRIDE:
+      case PrimaryWorkflowEnum.VARIABLE:
+      case PrimaryWorkflowEnum.VARIABLE_OVERRIDE:
         break;
-      case PW.RESPONSIVE_SET:
+      case PrimaryWorkflowEnum.RESPONSIVE_SET:
         a = "numResponsiveSetBuffers";
         break;
-      case PW.CODE_LIBRARY:
+      case PrimaryWorkflowEnum.CODE_LIBRARY:
         a = "numCodeLibraryBuffers";
         break;
-      case PW.CODE_FILE:
+      case PrimaryWorkflowEnum.CODE_FILE:
         a = "numCodeFileBuffers";
         break;
-      case PW.CODE_COMPONENT:
+      case PrimaryWorkflowEnum.CODE_COMPONENT:
         a = "numCodeComponentBuffers";
         break;
-      case PW.CONSTRAINED_TEMPLATE:
-      case PW.MANAGED_STRING:
+      case PrimaryWorkflowEnum.CONSTRAINED_TEMPLATE:
+      case PrimaryWorkflowEnum.MANAGED_STRING:
         break;
       default:
         throwTypeError(r);
     }
-    t === M$.UNPUBLISH && (a = `${a}Unpublished`);
+    t === PublishStatusEnum.UNPUBLISH && (a = `${a}Unpublished`);
     let s = a;
     s in e && (e[s] = i.length);
     return e;
@@ -643,7 +643,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   }, {
     forwardToDatadog: !0
   });
-  let ef = orderedUpdates.flatMap(e => e.publishType === M$.PUBLISH ? e.assets : []).reduce((e, t) => t.type !== PW.VARIABLE && t.type !== PW.VARIABLE_SET && _$$O(t.type) ? t.type === PW.MODULE ? e.concat(t) : e.concat(t).concat(e_[t.node_id] || []) : e, []);
+  let ef = orderedUpdates.flatMap(e => e.publishType === PublishStatusEnum.PUBLISH ? e.assets : []).reduce((e, t) => t.type !== PrimaryWorkflowEnum.VARIABLE && t.type !== PrimaryWorkflowEnum.VARIABLE_SET && _$$O(t.type) ? t.type === PrimaryWorkflowEnum.MODULE ? e.concat(t) : e.concat(t).concat(e_[t.node_id] || []) : e, []);
   if (getFeatureFlags().ssp_stop_client_gen_thumb_generation) c = {
     failedThumbnailNodeIds: [],
     s3Paths: [],
@@ -763,9 +763,9 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   try {
     !function (e, t, r, n, i, a, s, o) {
       let l = performance.now();
-      let d = t ? M$.UNPUBLISH : M$.PUBLISH;
+      let d = t ? PublishStatusEnum.UNPUBLISH : PublishStatusEnum.PUBLISH;
       e.dispatch($$Y5({
-        state: Qx.UPLOADING,
+        state: LibraryPublishStatusEnum.UPLOADING,
         publishType: d,
         progress: 0,
         libraryPublishId: r,

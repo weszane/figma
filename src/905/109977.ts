@@ -4,7 +4,7 @@ import { renderI18nText } from "../905/303541";
 import { Q_ } from "../905/570707";
 import { IT } from "../905/713695";
 import { h as _$$h } from "../figma_app/198885";
-import { Nf } from "../figma_app/633080";
+import { isTeamLibrary } from "../figma_app/633080";
 import { We } from "../905/909811";
 import { c as _$$c } from "../905/511370";
 import { useMemo } from "react";
@@ -13,7 +13,7 @@ import { useSubscription } from "../figma_app/288654";
 import { LibraryModalVariablesDataByLibraryKey } from "../figma_app/43951";
 import { RV } from "../figma_app/214643";
 function p(e, t) {
-  let i = t && Nf(t) && t?.team_id;
+  let i = t && isTeamLibrary(t) && t?.team_id;
   let n = t?.library_key;
   if (i && n) return e?.[i]?.[n];
 }
@@ -165,7 +165,7 @@ function v({
   });
 }
 function I(e, t, i) {
-  let n = i && Nf(i) ? i.team_id : null;
+  let n = i && isTeamLibrary(i) ? i.team_id : null;
   if (!n) return [];
   let r = i?.library_key;
   if (r && e?.[n]?.[r]) {

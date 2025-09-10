@@ -8,7 +8,7 @@ import { $n } from "../905/521428";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { Label } from "../905/270045";
 import { permissionScopeHandler } from "../905/189185";
-import { H0, F_ } from "../figma_app/191804";
+import { parseColor, colorToHexString } from "../figma_app/191804";
 import { getI18nString } from "../905/303541";
 import { Zk } from "../figma_app/626177";
 import { $H, mn, od, Cd } from "../048e062c/416936";
@@ -81,7 +81,7 @@ function j({
       inheritStyleId: void 0,
       hideCustomColorPickerFillTypeToggle: !1,
       paint: function (e) {
-        let t = H0(e);
+        let t = parseColor(e);
         return t ? {
           type: "SOLID",
           color: {
@@ -116,7 +116,7 @@ function j({
                 ...e.color
               };
               void 0 !== e.opacity && 1 !== e.opacity && (t.a = e.opacity);
-              return F_(t);
+              return colorToHexString(t);
             }(r)
           });
         });

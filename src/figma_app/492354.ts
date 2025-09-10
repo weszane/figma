@@ -1,4 +1,4 @@
-import { aH } from "../figma_app/273493";
+import { normalizedToRgb } from "../figma_app/273493";
 import { atomStoreManager } from "../figma_app/27355";
 import { Jq, rN, $R } from "../figma_app/967873";
 import { B } from "../figma_app/397954";
@@ -11,7 +11,7 @@ class d {
   updateEditPaletteModalColor(e) {
     let t = atomStoreManager.get(Jq);
     let r = atomStoreManager.get(rN);
-    let n = [...r.slice(0, t), aH(e), ...r.slice(t + 1)];
+    let n = [...r.slice(0, t), normalizedToRgb(e), ...r.slice(t + 1)];
     atomStoreManager.set(rN, n);
   }
   isCustomPaletteApplied() {

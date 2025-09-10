@@ -13,7 +13,7 @@ import { L$ } from '../905/989106';
 import { atomStoreManager } from '../figma_app/27355';
 import { nw } from '../figma_app/194671';
 import { VariableIdHandler } from '../figma_app/243058';
-import { qN } from '../figma_app/273493';
+import { rgbToHsv } from '../figma_app/273493';
 import { Bw, Hu, jd, kl, pg, xR } from '../figma_app/327683';
 import { gU, Hf, ne, W9 } from '../figma_app/407414';
 import { rO } from '../figma_app/409807';
@@ -1510,7 +1510,7 @@ async function e_(e, t, i) {
   };
   try {
     if (!t.contrastRatios?.AA || void 0 === t.fillOpacity) return Promise.resolve(n);
-    let r = qN(t.fillColor);
+    let r = rgbToHsv(t.fillColor);
     let a = L$({
       fgColor: t.fillColor,
       bgColor: t.backgroundColor,

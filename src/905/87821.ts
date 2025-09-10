@@ -1,11 +1,11 @@
-import { getFeatureFlags } from "../905/601108";
-import { desktopAPIInstance } from "../figma_app/876459";
-import { canCreateFileType } from "../figma_app/687776";
-import { s as _$$s } from "../905/573154";
-import { sf } from "../905/929976";
-import { jd } from "../figma_app/528509";
-import { FFileType, FPlanNameType } from "../figma_app/191312";
-import { rR, sK } from "../figma_app/598018";
+import { getFeatureFlags } from "src/905/601108";
+import { desktopAPIInstance } from "src/figma_app/876459";
+import { canCreateFileType } from "src/figma_app/687776";
+import { s as _$$s } from "src/905/573154";
+import { sf } from "src/905/929976";
+import { jd } from "src/figma_app/528509";
+import { FFileType, FPlanNameType } from "src/figma_app/191312";
+import { rR, sK } from "src/figma_app/598018";
 export function $$p0(e, t) {
   desktopAPIInstance ? (desktopAPIInstance.showFileBrowser(e), desktopAPIInstance.close({
     suppressReopening: !1,
@@ -30,7 +30,7 @@ export function $$g3(e, t, i) {
     isDestinationTeamDrafts: jd(i.openFile?.project)
   }) || u === FFileType.FIGMAKE && s && o === FPlanNameType.STARTER && !getFeatureFlags().bake_starter_limit) return s;
 }
-export { ck } from "../figma_app/469876";
+export { ck } from "src/figma_app/469876";
 export const A7 = $$p0;
 export const ds = $$h2;
 export const xp = $$g3;

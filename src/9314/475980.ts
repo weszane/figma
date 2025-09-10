@@ -11,7 +11,7 @@ import { lk } from '../905/182453';
 import { permissionScopeHandler } from '../905/189185';
 import { Z as _$$Z } from '../905/248978';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { In, ke, kH } from '../905/309735';
+import { getDirname, splitPath, getBasename } from '../905/309735';
 import { n as _$$n } from '../905/317686';
 import { x as _$$x2 } from '../905/346809';
 import { E as _$$E2 } from '../905/375716';
@@ -41,7 +41,7 @@ import { A7, i4 } from '../9314/278494';
 import { Nu } from '../figma_app/23780';
 import { dGl, jNX, uj0 } from '../figma_app/27776';
 import { useLatestRef } from '../figma_app/922077';
-import { P$ } from '../figma_app/80990';
+import { formatFontMetrics } from '../figma_app/80990';
 import { XE } from '../figma_app/91703';
 import { Bs } from '../figma_app/229710';
 import { c$, ms, wv } from '../figma_app/236327';
@@ -52,7 +52,7 @@ import { debug, noop } from '../figma_app/465776';
 import { range } from '../figma_app/492908';
 import { selectCurrentFile } from '../figma_app/516028';
 import { $4, fI, K0, ks, Zk } from '../figma_app/626177';
-import { PW } from '../figma_app/633080';
+import { PrimaryWorkflowEnum } from '../figma_app/633080';
 import { Kw, LX, og, QT, XV } from '../figma_app/646357';
 import { p8 } from '../figma_app/722362';
 import { dG, ft } from '../figma_app/753501';
@@ -336,7 +336,7 @@ function en({
     isFolder: !0,
     isRenaming: u,
     level: p,
-    name: kH(t.name),
+    name: getBasename(t.name),
     onContextMenu: x,
     onCreateFolder: g,
     onDoubleClick: W,
@@ -418,7 +418,7 @@ function eu({
   let Z = useMemo(() => !r && E.description && G ? {
     'data-tooltip-type': Ib.SPECIAL,
     'data-tooltip': _$$Z,
-    'data-tooltip-style-name': kH(E.name),
+    'data-tooltip-style-name': getBasename(E.name),
     'data-tooltip-style-description': E.description,
     'data-tooltip-max-width': jNX * parsePxInt(dGl)
   } : null, [G, r, E.name, E.description]);
@@ -465,7 +465,7 @@ function eu({
     isLastChildOfSelection: d,
     isRenaming: i,
     level: c,
-    name: kH(E.name),
+    name: getBasename(E.name),
     nameRef: K,
     onBlur: $,
     onContextMenu: u,
@@ -480,7 +480,7 @@ function eu({
     rowRef: e => {
       e && (I?.(e), F.current = e);
     },
-    secondaryName: Q && P$(Q),
+    secondaryName: Q && formatFontMetrics(Q),
     selected: w,
     selectedSecondary: b,
     stopRenamingItem: C,
@@ -614,7 +614,7 @@ function eC({
   let g = useSelector(e => e.mirror.appModel.pastableStyleCount);
   let h = !!selectCurrentFile()?.canEdit;
   let w = useCallback(() => {
-    if (!t.length || t[0].type !== PW.STYLE) return;
+    if (!t.length || t[0].type !== PrimaryWorkflowEnum.STYLE) return;
     let l = t[0];
     if (e) {
       let t = e.getBoundingClientRect();
@@ -628,7 +628,7 @@ function eC({
     a(l);
   }, [f, t, a, e]);
   let b = useCallback(() => {
-    if (!t.length || t[0].type === PW.STYLE) return;
+    if (!t.length || t[0].type === PrimaryWorkflowEnum.STYLE) return;
     let e = t[0];
     i(e.name, !1, e.styleTypeSection);
   }, [i, t]);
@@ -644,7 +644,7 @@ function eC({
       })
     });
   }
-  let C = l === 1 && (t[0].type === PW.STYLE ? jsx(eh, {
+  let C = l === 1 && (t[0].type === PrimaryWorkflowEnum.STYLE ? jsx(eh, {
     recordingKey: 'edit-style-option',
     onClick: w,
     children: renderI18nText('design_systems.styles.edit_style')
@@ -994,9 +994,9 @@ function eY({
     }
     let t = new Set();
     e.styleIds.forEach(l => {
-      let n = g.find(e => e.type === PW.STYLE && e.node_id === l);
+      let n = g.find(e => e.type === PrimaryWorkflowEnum.STYLE && e.node_id === l);
       if (!n) return;
-      let s = In(n.name);
+      let s = getDirname(n.name);
       e.folderNames.has(s) || t.add(l);
     });
     let l = {
@@ -1010,23 +1010,23 @@ function eY({
     if (!h) return;
     let n = e[t];
     let s = (e, t) => {
-      let n = ke(e.name);
+      let n = splitPath(e.name);
       let s = t != null ? t : n.length - 1;
       n[s] = l;
       let o = Pc(n.join('/'));
       permissionScopeHandler.user('rename-style', () => Fullscreen.renameNode(e.node_id, o));
     };
     if (n.name !== l) {
-      if (n.type === PW.STYLE) {
+      if (n.type === PrimaryWorkflowEnum.STYLE) {
         s(n);
       } else {
         mx(t, e).forEach(t => {
           let l = e[t];
-          l.type === PW.STYLE && s(l, n.level - 1);
+          l.type === PrimaryWorkflowEnum.STYLE && s(l, n.level - 1);
         });
         let o = new Set(h.folderNames);
         o.$$delete(n.name);
-        let r = `${In(n.name)}/${l}`;
+        let r = `${getDirname(n.name)}/${l}`;
         o.add(r);
         O({
           type: h.type,
@@ -1238,7 +1238,7 @@ function ez({
   let ec = useCallback((e, t) => {
     if (t.type !== 'STYLE_FOLDER') return;
     let n = l.indexOf(t);
-    let s = dm(t).filter(e => In(e.name) === t.name);
+    let s = dm(t).filter(e => getDirname(e.name) === t.name);
     if (!s.length) return ed(e, t, l[n + 1]);
     {
       let t = s[s.length - 1];
@@ -1248,7 +1248,7 @@ function ez({
   }, [ed, l]);
   let em = memoizeByArgs((e, t) => {
     let n = new Map();
-    let s = t.map(e => e.type === PW.STYLE ? e.node_id : e.name);
+    let s = t.map(e => e.type === PrimaryWorkflowEnum.STYLE ? e.node_id : e.name);
     e.forEach(e => {
       let o = s.indexOf(e);
       o !== -1 && mx(o, l).forEach(e => {
@@ -1270,17 +1270,17 @@ function ez({
       nextItem
     } = j3(t, l);
     ed(t, prevItem, nextItem, !0);
-    let o = In(t[0]?.name || '');
+    let o = getDirname(t[0]?.name || '');
     let r = getI18nString('design_systems.create_style.new_folder');
     o && (r = `${o}/${r}`);
     let a = (e, t) => {
-      if (e.type === PW.STYLE) {
-        let l = `${r}/${t}${kH(e.name)}`;
+      if (e.type === PrimaryWorkflowEnum.STYLE) {
+        let l = `${r}/${t}${getBasename(e.name)}`;
         permissionScopeHandler.user('rename-style', () => {
           Fullscreen.renameNode(e.node_id, l);
         });
       } else {
-        let l = `${t + kH(e.name)}/`;
+        let l = `${t + getBasename(e.name)}/`;
         e.styles.forEach(e => {
           a(e, l);
         });
@@ -1312,7 +1312,7 @@ function ez({
       let s = new Set(n);
       let o = l[e];
       if (o.type === 'STYLE_FOLDER') {
-        let e = In(o.name);
+        let e = getDirname(o.name);
         let l = e === '' ? t : `${e}/${t}`;
         X.has(o.name) && (X.$$delete(o.name), X.add(l));
         KU(o).forEach(e => {
@@ -1420,7 +1420,7 @@ function ez({
       for (let e of q.styleIds.values()) {
         let n = t.find(t => t.node_id === e);
         if (!n) continue;
-        let s = ke(n.name);
+        let s = splitPath(n.name);
         for (let e = 0; e < s.length; e++) {
           let t = s.slice(0, e).join('/');
           l.$$delete(t);
@@ -1447,7 +1447,7 @@ function ez({
           break;
         }
         e.name.startsWith(t) && (c = !0);
-      } else if (In(e.name) === t) {
+      } else if (getDirname(e.name) === t) {
         c = !0;
         break;
       }
@@ -1455,7 +1455,7 @@ function ez({
     if (!u && !c && em(X, l).has(d)) return null;
     let y = eA && eA[eA.length - 1] === t;
     let m = eA && eA[0] === t;
-    if (e.type === PW.STYLE) {
+    if (e.type === PrimaryWorkflowEnum.STYLE) {
       let l = rM(e);
       let d = r != null && r === e.node_id;
       return jsx(eu, {

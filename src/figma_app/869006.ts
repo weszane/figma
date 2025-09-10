@@ -19,7 +19,7 @@ import { isExportRestricted } from "../figma_app/12796";
 import { wH } from "../figma_app/680166";
 import { Gv } from "../figma_app/736948";
 import { J as _$$J, q as _$$q } from "../905/202542";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { fu } from "../figma_app/831799";
 import { Ib } from "../905/129884";
 import { A as _$$A } from "../3850/566892";
@@ -79,7 +79,7 @@ function R({
   let h = useSubscription(OpenEditorFileData, {
     fileKey: e
   }).data?.file;
-  let m = _$$u();
+  let m = getRumLoggingConfig();
   if (!h) return jsx(Fragment, {});
   let g = async () => {
     (await _$$E(l, e)) && p(!0);
@@ -162,7 +162,7 @@ function V(e) {
     licenseType: e.licenseType,
     trackingDescriptor: a ? "ask_to_edit" : "start_editing"
   });
-  let h = _$$u();
+  let h = getRumLoggingConfig();
   return t ? jsx(fu, {
     name: e0.FILE_REQUEST_UPGRADE_BUTTON,
     trackingOptions: h,

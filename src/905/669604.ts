@@ -2,7 +2,7 @@ import { InteractionCpp, Fullscreen, Axis } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { j } from "../905/881708";
-import { bi, au, R0 } from "../figma_app/273493";
+import { packNormalizedRgb, blendColors, unpackToNormalizedRgb } from "../figma_app/273493";
 let l = class e {
   getPrimaryColor() {
     return InteractionCpp.getBorderFSDesignStrong();
@@ -74,7 +74,7 @@ let l = class e {
     this._viewportSpaceHitBoxBounds = _$$r.invalidRect();
   }
   _render(e) {
-    let t = this._isHovered ? bi(au(R0(this.getPrimaryColor()), {
+    let t = this._isHovered ? packNormalizedRgb(blendColors(unpackToNormalizedRgb(this.getPrimaryColor()), {
       red: 0,
       green: 0,
       blue: 0,

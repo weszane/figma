@@ -4,10 +4,10 @@ import { atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { sf } from "../905/929976";
 import { T } from "../905/868547";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { ou } from "../figma_app/32891";
-let $$p3 = Wh(() => atom(e => e(_), (e, t, r) => {
+let $$p3 = setupRemovableAtomFamily(() => atom(e => e(_), (e, t, r) => {
   let a = debugState.getState().selectedView;
   if (!a) return;
   if (r === PanelType.DAKOTA && !getFeatureFlags().dakota) {
@@ -46,8 +46,8 @@ let _ = createReduxSubscriptionAtomWithState(e => {
   return t.sitesView ?? PanelType.FILE;
 });
 export var $$h0 = (e => (e.FIND = "find", e.INSERT = "insert", e))($$h0 || {});
-let $$m1 = Wh(() => atom(void 0));
-let $$g2 = Wh(() => atom(!1));
+let $$m1 = setupRemovableAtomFamily(() => atom(void 0));
+let $$g2 = setupRemovableAtomFamily(() => atom(!1));
 export const $e = $$h0;
 export const Nl = $$m1;
 export const bP = $$g2;

@@ -1,7 +1,7 @@
-import { rt } from "../figma_app/615482";
+import { createTrackedAtom } from "../figma_app/615482";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { generateUUIDv4 } from "../905/871474";
-let a = rt(void 0);
+let a = createTrackedAtom(void 0);
 export function $$s1() {
   atomStoreManager.get(a) || atomStoreManager.set(a, generateUUIDv4());
 }

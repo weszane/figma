@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { nearlyEqual } from "../figma_app/492908";
 import { d as _$$d } from "../905/976845";
 import { G as _$$G } from "../905/117393";
-import { oB, qN, w_ } from "../figma_app/273493";
+import { rgbToHsl, rgbToHsv, colorToRgb } from "../figma_app/273493";
 import { ColorFormatEnum, DesignGraphElements } from "../figma_app/763686";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -60,7 +60,7 @@ export function $$X0(e, t, r) {
   return t;
 }
 let q = (e, t) => ({
-  hslva: t === ColorFormatEnum.HSL ? oB(e) : qN(e),
+  hslva: t === ColorFormatEnum.HSL ? rgbToHsl(e) : rgbToHsv(e),
   rgba: e
 });
 let J = e => {
@@ -136,7 +136,7 @@ export function $$Q2({
     s(e);
   }, [r, t.color, t.colorFormat]);
   let es = (e, r) => {
-    let n = w_(e);
+    let n = colorToRgb(e);
     s({
       hslva: e,
       rgba: n
@@ -160,7 +160,7 @@ export function $$Q2({
       es(e, r);
       return;
     }
-    let n = w_(e);
+    let n = colorToRgb(e);
     s({
       hslva: e,
       rgba: n

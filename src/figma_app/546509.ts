@@ -1,4 +1,4 @@
-import { BrowserInfo } from "../figma_app/778880";
+import { BrowserInfo } from "src/figma_app/778880";
 export function $$i6() {
   return window.FigmaMobile;
 }

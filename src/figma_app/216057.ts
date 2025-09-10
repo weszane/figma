@@ -10,7 +10,7 @@ import u from "../vendor/223926";
 import _ from "../vendor/239910";
 import m from "lodash-es/mapValues";
 import f from "../vendor/149674";
-import { BV, eS, a5, Ew } from "../905/888985";
+import { libraryVariableCollectionAtom, libraryVariableCollectionWithVarsAtom, variableByKeyResourceAtomFamily, variableCollectionByKeyResourceAtomFamily } from "../905/888985";
 import { createAtomFamily } from "../905/157003";
 import { Ez } from "../figma_app/766708";
 import { logError } from "../905/714362";
@@ -18,24 +18,24 @@ import { JB as _$$JB } from "../figma_app/657017";
 import { lR, ku, p9, nT } from "../figma_app/255679";
 import { fullscreenValue } from "../figma_app/455680";
 import { Vr, _n, j2, uE, RW, Lk, xb, kL } from "../figma_app/345195";
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { SG } from "../905/508457";
 import { createAtomWithReduxWithState, attachReducerWrapper, setupReduxAtomWithState } from "../905/270322";
 import { LibraryVariableCollectionData, LibraryVariableCollectionDataByLibraryKey, CommunityLibraryVariableCollectionDataWithVariables, VariablesByVariableCollectionKey, LibraryVariableCollectionDataByLibraryKeyWithVariables, LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
-import { Rn, Dt, kz, ZI, GI, Vk, Hr } from "../figma_app/633080";
+import { getSubscribedVariableSetInfo, getLocalVariableSetInfo, getLocalVariableInfo, getSubscribedVariableInfo, isExtension, getLocalVariableOverride, getSubscribedVariableOverride } from "../figma_app/633080";
 import { TG } from "../905/72677";
 var p = u;
 var h = _;
 var g = m;
 var E = f;
 let P = SG(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsSubscribed);
-let D = atom(e => e(P).map(Rn));
+let D = atom(e => e(P).map(getSubscribedVariableSetInfo));
 let k = SG(() => AppStateTsApi.libraryAssets().fileLevelVariableSetsLocal);
-let M = atom(e => e(k).map(Dt));
+let M = atom(e => e(k).map(getLocalVariableSetInfo));
 let F = SG(() => AppStateTsApi.libraryAssets().fileLevelVariablesSubscribed);
 let j = SG(() => AppStateTsApi.libraryAssets().fileLevelVariablesLocal);
-let U = atom(e => e(j).map(kz));
-let B = atom(e => e(F).map(ZI));
+let U = atom(e => e(j).map(getLocalVariableInfo));
+let B = atom(e => e(F).map(getSubscribedVariableInfo));
 atom(e => ({
   ...h()(e(M), e => e.keyForPublish),
   ...h()(e(D), e => e.key)
@@ -49,7 +49,7 @@ let $$G26 = (() => {
   let t = setupCustomAtom(e, (e, t) => {
     if (t) {
       if ("added" in t) {
-        let r = h()(t.added.map(Dt), e => e.node_id);
+        let r = h()(t.added.map(getLocalVariableSetInfo), e => e.node_id);
         return {
           ...e,
           ...r
@@ -88,11 +88,11 @@ let $$V20 = atom(e => ({
 let $$H19 = createRemovableAtomFamily(e => atom(t => t($$G26)[e]));
 createRemovableAtomFamily(e => atom(t => t($$ec29)[e]));
 let $$z3 = createRemovableAtomFamily(e => atom(t => t($$V20)[e]));
-let $$W17 = createRemovableAtomFamily(e => Wh(() => atom(t => {
+let $$W17 = createRemovableAtomFamily(e => setupRemovableAtomFamily(() => atom(t => {
   let r = t($$z3(e));
   if (!r || !getFeatureFlags().ds_extended_collections) return {};
   let n = t(eg);
-  if (GI(r)) {
+  if (isExtension(r)) {
     let n = t($$W17(r.backingVariableSetId));
     let i = t($$eA5(e));
     let s = {};
@@ -168,7 +168,7 @@ let $$W17 = createRemovableAtomFamily(e => Wh(() => atom(t => {
     }, {}) : {};
   }
 })));
-createRemovableAtomFamily(e => BV(t => r => r(t({
+createRemovableAtomFamily(e => libraryVariableCollectionAtom(t => r => r(t({
   fileKey: e
 }))));
 let $$K7 = createRemovableAtomFamily(e => atom(t => {
@@ -181,7 +181,7 @@ let $$K7 = createRemovableAtomFamily(e => atom(t => {
 let $$Y28 = createRemovableAtomFamily(e => atom(t => g()(h()(e), e => t(LibraryVariableCollectionDataByLibraryKey.Query({
   libraryKey: e
 })))), arraysEqual);
-let $$$22 = createRemovableAtomFamily(e => eS(t => r => r(t({
+let $$$22 = createRemovableAtomFamily(e => libraryVariableCollectionWithVarsAtom(t => r => r(t({
   fileKey: e
 }))));
 export function $$X14(e) {
@@ -221,7 +221,7 @@ let et = atom(e => {
   let t = e($$ef21);
   let r = e(TG);
   let n = Object.values(t).filter(e => !lR(e, r)).map(e => e.key).sort();
-  return e(a5(n.map(e => ({
+  return e(variableByKeyResourceAtomFamily(n.map(e => ({
     key: e
   })))).reduce((e, t) => (e[ey(t.args.key)] = t.result, e), {});
 });
@@ -256,7 +256,7 @@ let ea = atom(e => {
     e.isExtension && n.includes(e.backingVariableSetId) && t.push(r[e.backingVariableSetId].key);
   });
   let i = t.sort();
-  return e(Ew(i.map(e => ({
+  return e(variableCollectionByKeyResourceAtomFamily(i.map(e => ({
     key: e
   })))).reduce((e, t) => (e[yG(t.args.key)] = t.result, e), {});
 }, lQ);
@@ -291,7 +291,7 @@ let $$ec29 = (() => {
   let t = setupCustomAtom(e, (e, t) => {
     if (t) {
       if ("added" in t) {
-        let r = h()(t.added.map(Rn), e => e.node_id);
+        let r = h()(t.added.map(getSubscribedVariableSetInfo), e => e.node_id);
         return {
           ...e,
           ...r
@@ -335,7 +335,7 @@ let $$eu2 = (() => {
         });
         return {
           ...e,
-          ...h()(t.added.map(kz), e => e.node_id)
+          ...h()(t.added.map(getLocalVariableInfo), e => e.node_id)
         };
       }
       if ("deleted" in t) {
@@ -380,7 +380,7 @@ let $$ef21 = (() => {
     if (t) {
       if ("added" in t) return {
         ...e,
-        ...h()(t.added.map(ZI), e => e.node_id)
+        ...h()(t.added.map(getSubscribedVariableInfo), e => e.node_id)
       };
       if ("deleted" in t) return E()(e, e => e.id !== t.deleted);
       if ("setDeleted" in t) return E()(e, e => e.variableSetId !== t.setDeleted);
@@ -448,7 +448,7 @@ let eT = (() => {
     if (t) {
       if ("added" in t) return {
         ...e,
-        ...h()(t.added.map(Vk), e => e.node_id)
+        ...h()(t.added.map(getLocalVariableOverride), e => e.node_id)
       };
       if ("deleted" in t) {
         let r = new Set(t.deleted);
@@ -481,7 +481,7 @@ let eI = (() => {
     if (t) {
       if ("added" in t) return {
         ...e,
-        ...h()(t.added.map(Hr), e => e.node_id)
+        ...h()(t.added.map(getSubscribedVariableOverride), e => e.node_id)
       };
       if ("deleted" in t) {
         let r = new Set(t.deleted);

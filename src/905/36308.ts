@@ -208,7 +208,7 @@ import { Dk } from '../figma_app/623293';
 import { jT } from '../figma_app/626177';
 import { fileActionEnum } from '../figma_app/630077';
 import { JT } from '../figma_app/632248';
-import { PW } from '../figma_app/633080';
+import { PrimaryWorkflowEnum } from '../figma_app/633080';
 import { x as _$$x, Lk } from '../figma_app/639711';
 import { fx, PF } from '../figma_app/657972';
 import { i as _$$i2 } from '../figma_app/714009';
@@ -3443,7 +3443,7 @@ class iq {
   addTestResult(e, t, i) {
     let n = t.suggestions.map(t => {
       let i;
-      return (i = t.type === PW.STATE_GROUP ? t.key : t.component_key) && e.expectedAssetIds.includes(i) || !1;
+      return (i = t.type === PrimaryWorkflowEnum.STATE_GROUP ? t.key : t.component_key) && e.expectedAssetIds.includes(i) || !1;
     });
     let r = iG.reduce((e, i) => {
       if (t.suggestions.length === 0) {

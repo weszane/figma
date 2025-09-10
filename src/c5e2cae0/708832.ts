@@ -41,7 +41,7 @@ import { y as _$$y, I as _$$I } from "../c5e2cae0/74041";
 import { f as _$$f } from "../c5e2cae0/279252";
 import { W as _$$W } from "../c5e2cae0/300137";
 import { UR } from "../figma_app/307841";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { MN } from "../figma_app/482142";
@@ -1065,7 +1065,7 @@ export class $$eM2 extends Component {
         prices: Jh(this.props.productPriceBySeatType)
       },
       enabled: !this.state.loading,
-      trackingOptions: _$$u(),
+      trackingOptions: getRumLoggingConfig(),
       children: [t !== X1.Confirmation && jsx("div", {
         className: _$$s.sticky.top0.zIndexTopBar.selectNone.$,
         children: jsx(U, {

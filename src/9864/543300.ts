@@ -53,7 +53,7 @@ import { Wz } from "../figma_app/211694";
 import { e6 as _$$e2, c as _$$c } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
 import { VisualBellActions } from "../905/302958";
-import { u as _$$u } from "../905/16237";
+import { getRumLoggingConfig } from "../905/16237";
 import { tc as _$$tc } from "../905/15667";
 import { yJ } from "../figma_app/24841";
 import { c as _$$c2 } from "../905/370443";
@@ -629,7 +629,7 @@ function eJ(e) {
   let T = useAtomWithSubscription(SL);
   let R = "default" !== useAtomWithSubscription(ni);
   let I = useAtomWithSubscription(YX);
-  let P = _$$u();
+  let P = getRumLoggingConfig();
   let A = function (e) {
     let {
       team
@@ -1611,7 +1611,7 @@ function rI({
   hasFigJamIntent: e
 }) {
   let r = _$$sx();
-  let t = _$$u();
+  let t = getRumLoggingConfig();
   let [i, o] = useAtomValueAndSetter(aV);
   let l = i === VN.STARTER;
   let a = i === VN.PROFESSIONAL;
@@ -1761,7 +1761,7 @@ function rP({
     showLoading
   } = rp();
   let c = rf();
-  let u = _$$u();
+  let u = getRumLoggingConfig();
   function x(e) {
     showLoading && e !== VN.STARTER || (trackEventAnalytics("NUX Dynamic Preview", {
       eventSubtype: `selected_plan_${e}`
@@ -2363,7 +2363,7 @@ function te() {
       }));
     });
   }, [getUpgradePathway, t]);
-  let g = _$$u();
+  let g = getRumLoggingConfig();
   function m(e) {
     trackEventAnalytics("NUX Dynamic Preview", {
       eventSubtype: `selected_seat_${e}`
@@ -4222,7 +4222,7 @@ function ic(e) {
   } = e;
   let i = useAtomWithSubscription(_D);
   let o = useAtomWithSubscription(YX);
-  let l = _$$u();
+  let l = getRumLoggingConfig();
   es();
   return jsx(fu, {
     name: currentQuestion,

@@ -1,4 +1,4 @@
-import { c2 } from "../905/382883";
+import { deepEqual } from "../905/382883";
 import { AnimationTriggerType } from "../figma_app/763686";
 import { defaultSessionLocalID } from "../905/871411";
 import { logError } from "../905/714362";
@@ -6,7 +6,7 @@ import { uc, eB, kP } from "../9410/228612";
 function l(e, t) {
   if (!e && !t) return !0;
   if (e && t) {
-    if (uc(e) && uc(t)) return c2(e.action.transitionNodeID, t.action.transitionNodeID);
+    if (uc(e) && uc(t)) return deepEqual(e.action.transitionNodeID, t.action.transitionNodeID);
     if (eB(e) && eB(t)) return e.interactionIndex === t.interactionIndex;
   }
   return !1;

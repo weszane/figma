@@ -2,7 +2,7 @@ import { ii } from "../905/859698";
 import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Av } from "../figma_app/646357";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$l4(e, t) {
   let r = t.get(e)?.symbolId;
   if (r) {
@@ -78,7 +78,7 @@ export function $$g6(e, t) {
   return Fullscreen.getOutdatedStateInstanceDevIds(e.version, e.newStateKeyToOutdatedItems, t || "");
 }
 export function $$f2(e) {
-  return e.type === PW.COMPONENT ? $$m0(e, void 0).length : $$g6(e, void 0).length;
+  return e.type === PrimaryWorkflowEnum.COMPONENT ? $$m0(e, void 0).length : $$g6(e, void 0).length;
 }
 export const LB = $$m0;
 export const T7 = $$_1;

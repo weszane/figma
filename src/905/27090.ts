@@ -1,5 +1,5 @@
-import { T } from "../905/858738";
-import { bf } from "../figma_app/415217";
+import { T } from "src/905/858738";
+import { bf } from "src/figma_app/415217";
 export class $$a0 {
   toggleDevTools(e) {
     T() || this.throwNoVsCodeErrorMessage();

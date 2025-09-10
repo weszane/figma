@@ -1,9 +1,9 @@
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { useEffect } from "react";
 import { atom, atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { generateUUIDv4 } from "../905/871474";
-export let $$o1 = Wh(() => atom({
+export let $$o1 = setupRemovableAtomFamily(() => atom({
   impressionId: null,
   source: null
 }));

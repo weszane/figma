@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { d as _$$d } from "../905/884707";
-import { RecordingPureComponent } from "../figma_app/878298";
-import { mv, u2 } from "../905/511649";
+import { d as _$$d } from "src/905/884707";
+import { RecordingPureComponent } from "src/figma_app/878298";
+import { mv, u2 } from "src/905/511649";
 let l = "lazy_input--lazyInput--1mJeW";
 class d extends RecordingPureComponent {
   constructor(e) {

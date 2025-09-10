@@ -1,6 +1,6 @@
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { DA } from "../figma_app/191804";
+import { areColorsEqual } from "../figma_app/191804";
 import { Ne, jF } from "../figma_app/702372";
 function o(e, t) {
   return Math.round(e / t) * t;
@@ -41,9 +41,9 @@ export function $$c0(e) {
         let s = t.strokePaints.data.length > 0;
         let o = 1 === t.fills.length && "SOLID" === t.fills[0].type && t.fills[0].visible && t.fills[0].color || void 0;
         let l = t.fills && t.fills.length > 0 && t.fills.some(e => e.visible);
-        let d = !l || !!o && n && DA(o, n);
+        let d = !l || !!o && n && areColorsEqual(o, n);
         void 0 !== n && t.size.x < r && (s || !d || t.cornerRadius > 0 || t.rectangleTopLeftCornerRadius > 0 || t.rectangleTopRightCornerRadius > 0 || t.rectangleBottomLeftCornerRadius > 0 || t.rectangleBottomRightCornerRadius > 0) && i.push(t);
-        !o || n && DA(o, n) ? !o && l && (n = {
+        !o || n && areColorsEqual(o, n) ? !o && l && (n = {
           r: -1,
           g: -1,
           b: -1,

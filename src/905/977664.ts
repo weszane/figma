@@ -1,5 +1,5 @@
 import { InteractionCpp, Axis } from "../figma_app/763686";
-import { QR } from "../figma_app/273493";
+import { packRgb } from "../figma_app/273493";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -15,7 +15,7 @@ export class $$c0 extends j {
     this._selectedColor = InteractionCpp?.getTableNodeColorSelected() ?? 0;
     this._hoverColorPrimary = InteractionCpp?.getTableNodeColorHoveredPrimary() ?? 0;
     this._hoverColorSecondary = InteractionCpp?.getTableNodeColorHoveredSecondary() ?? 0;
-    this._whiteColor = QR(1, 1, 1);
+    this._whiteColor = packRgb(1, 1, 1);
   }
   handleContextMenuOpen() {}
   handleBeforeFrame() {}
@@ -107,7 +107,7 @@ export class $$c0 extends j {
       case Dv.DRAGGED:
         return this._selectedColor;
       default:
-        return QR(.78, 0, .92);
+        return packRgb(.78, 0, .92);
     }
   }
   _getForegroundColor() {
@@ -122,7 +122,7 @@ export class $$c0 extends j {
       case Dv.SELECTED:
         return this._whiteColor;
       default:
-        return QR(1, 0, 1);
+        return packRgb(1, 0, 1);
     }
   }
   _maybeHandleSelectionChange(e) {

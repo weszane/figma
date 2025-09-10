@@ -19,7 +19,7 @@ import { A as _$$A } from "../905/408320";
 import { q } from "../905/820062";
 import { sortWithCollator } from "../figma_app/930338";
 import { o as _$$o } from "../905/605383";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lX } from "../figma_app/588397";
 import { M4 } from "../905/713695";
 import { PT } from "../905/669853";
@@ -153,7 +153,7 @@ function P({
     showName: !0,
     width: 62
   }, Gj(e)));
-  let r = e.map(e => e.type === PW.COMPONENT ? e.component_key : e.key).join(",");
+  let r = e.map(e => e.type === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key).join(",");
   return jsx("div", {
     children: jsx("div", {
       className: "dsa_file_view_assets--componentContainer--PGt6T",

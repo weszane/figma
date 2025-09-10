@@ -1,9 +1,9 @@
-import { Wh } from "../figma_app/615482";
+import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { n6 } from "../905/234821";
-let o = Wh(() => atom(0));
+let o = setupRemovableAtomFamily(() => atom(0));
 export function $$l0() {
   let e = n6();
   let [t, i] = useAtomValueAndSetter(o);

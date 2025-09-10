@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { A } from "../vendor/723372";
-import { u } from "../905/65923";
-import { lg, dialogTriggerButton, i as _$$i, icon } from "../905/820710";
+import { A } from "src/vendor/723372";
+import { u } from "src/905/65923";
+import { lg, dialogTriggerButton, i as _$$i, icon } from "src/905/820710";
 let l = {
   md: void 0,
   lg: lg

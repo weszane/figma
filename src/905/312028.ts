@@ -1,5 +1,5 @@
-import { pJ } from "../905/787926";
-import { EntityType } from "../905/806400";
+import { pJ } from "src/905/787926";
+import { EntityType } from "src/905/806400";
 let a = {
   name: "canView",
   type: {

@@ -1,25 +1,25 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
-import { hS } from "../905/437088";
-import { N as _$$N } from "../905/438674";
-import { bL } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
-import { CorePerfInfo, DocumentMode } from "../figma_app/763686";
-import { trackEventAnalytics } from "../905/449184";
-import { customHistory } from "../905/612521";
-import { getInitialOptions } from "../figma_app/169182";
-import { BrowserInfo } from "../figma_app/778880";
-import { generateRecordingKey } from "../figma_app/878298";
-import { renderI18nText, getI18nString } from "../905/303541";
-import { sf } from "../905/929976";
-import { XE } from "../figma_app/976749";
-import { useCurrentFileKey } from "../figma_app/516028";
-import { FEditorType } from "../figma_app/53721";
-import { registerLegacyModal } from "../905/102752";
-import { E as _$$E } from "../905/191910";
-import { j } from "../905/349918";
-import { v0, pL } from "../figma_app/639088";
+import { hS } from "src/905/437088";
+import { N as _$$N } from "src/905/438674";
+import { bL } from "src/905/38914";
+import { vo, Y9, hE, nB } from "src/figma_app/272243";
+import { $n } from "src/905/521428";
+import { CorePerfInfo, DocumentMode } from "src/figma_app/763686";
+import { trackEventAnalytics } from "src/905/449184";
+import { customHistory } from "src/905/612521";
+import { getInitialOptions } from "src/figma_app/169182";
+import { BrowserInfo } from "src/figma_app/778880";
+import { generateRecordingKey } from "src/figma_app/878298";
+import { renderI18nText, getI18nString } from "src/905/303541";
+import { sf } from "src/905/929976";
+import { XE } from "src/figma_app/976749";
+import { useCurrentFileKey } from "src/figma_app/516028";
+import { FEditorType } from "src/figma_app/53721";
+import { registerLegacyModal } from "src/905/102752";
+import { E as _$$E } from "src/905/191910";
+import { j } from "src/905/349918";
+import { v0, pL } from "src/figma_app/639088";
 export function $$A0(e, t = {}) {
   trackEventAnalytics("memory_warning_event", {
     currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),

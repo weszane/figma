@@ -33,16 +33,16 @@ export interface ConnectionObserver {
  */
 export type ConnectionState
   = | { type: 'disconnected' }
-    | { type: 'connecting' }
-    | {
-      type: 'connected'
-      authenticated?: boolean
-      count?: number
-      podName?: string
-      containerName?: string
-      serverVersion?: string
-    }
-    | { type: 'error', errorType: string }
+  | { type: 'connecting' }
+  | {
+    type: 'connected'
+    authenticated?: boolean
+    count?: number
+    podName?: string
+    containerName?: string
+    serverVersion?: string
+  }
+  | { type: 'error', errorType: string }
 
 /**
  * ClientConnection manages a websocket connection with backoff, authentication, and observers.

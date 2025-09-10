@@ -55,7 +55,7 @@ import { Np } from "../figma_app/193867";
 import { dj, vt, bD } from "../figma_app/45218";
 import { mN } from "../905/71785";
 import { k2, aP } from "../figma_app/10554";
-import { o as _$$o } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { AccessLevelEnum } from "../905/557142";
 import { ShareAction } from "../figma_app/707808";
 import { SourceType } from "../figma_app/175992";
@@ -866,7 +866,7 @@ class ts extends Component {
     let t;
     if (this.props.isFullscreenOpen ? (this.setState({
       isGeneratingThumbnail: !0
-    }), this.props.setLibraryPublishingMode(_$$o.HUBFILE), [e, t] = await Promise.all([this.generateSlidesThumbnails(), this.getCategoryIdForPresentations()])) : t = await this.getCategoryIdForPresentations(), void 0 === e) {
+    }), this.props.setLibraryPublishingMode(LibrarySourceEnum.HUBFILE), [e, t] = await Promise.all([this.generateSlidesThumbnails(), this.getCategoryIdForPresentations()])) : t = await this.getCategoryIdForPresentations(), void 0 === e) {
       this.updatePublishingMetadata({
         categoryId: t
       });

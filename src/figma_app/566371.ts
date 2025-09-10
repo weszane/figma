@@ -58,7 +58,7 @@ function handleSuspendableResourceAtom(e: any, t: any) {
     : defaultAtom
   let [resource, setter] = useAtomValueAndSetter(atomToUse)
   if (!k(t)) {
-    resource = resourceUtils.disabledSuspendable({ release: () => {} })
+    resource = resourceUtils.disabledSuspendable({ release: () => { } })
     setter = undefined
   }
   const controls = useMemo(() => ff(setter), [setter])
@@ -77,7 +77,7 @@ function handleGenericResourceAtom(e: any, t: any) {
     return [useAtomWithSubscription(e), undefined]
   }
   useAtomWithSubscription(defaultAtom)
-  return [resourceUtils.disabledSuspendable({ release: () => {} }), undefined]
+  return [resourceUtils.disabledSuspendable({ release: () => { } }), undefined]
 }
 
 /**
@@ -97,7 +97,7 @@ export function setupMemoizedAtomSubscription(e: any, t: any = {}) {
     [memoizedAtoms, enabled],
   )
   useEffect(() => {
-    const unsubscribe = atomStoreManager.sub(atomToSubscribe, () => {})
+    const unsubscribe = atomStoreManager.sub(atomToSubscribe, () => { })
     return () => {
       requestAnimationFrame(unsubscribe)
     }

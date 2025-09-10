@@ -26,7 +26,7 @@ import { kl } from "../905/275640";
 import { tZ } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { dH, p8 } from "../figma_app/722362";
-import { rh } from "../905/309735";
+import { normalizePath } from "../905/309735";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { Ib } from "../905/129884";
 import { vL } from "../905/826900";
@@ -306,7 +306,7 @@ function ee({
   }, [r]);
   let o = useRef(null);
   let l = useCallback(() => {
-    VariablesBindings?.renameVariable(t?.varId ?? "", rh(a));
+    VariablesBindings?.renameVariable(t?.varId ?? "", normalizePath(a));
   }, [t, a]);
   return t ? jsxs("div", {
     className: _$$s.px16.py12.flex.itemsCenter.bt1.bSolid.colorBorder.$,

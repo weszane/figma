@@ -1,5 +1,5 @@
-import { w5 } from "../figma_app/345997";
-import { generateAnonymouseName, generateAnnomousPrefill } from "../905/301652";
+import { w5 } from "src/figma_app/345997";
+import { generateAnonymouseName, generateAnnomousPrefill } from "src/905/301652";
 var $$a1 = (e => (e.ORG_DISABLED = "ORG_DISABLED", e.TEAM_NOT_PRO = "TEAM_NOT_PRO", e.CANNOT_EDIT_FILE = "CANNOT_EDIT_FILE", e.ERROR = "ERROR", e))($$a1 || {});
 export function $$s0(e) {
   let {

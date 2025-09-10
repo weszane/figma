@@ -1,5 +1,5 @@
-import { assert } from "../figma_app/465776";
-import { c2 } from "../905/382883";
+import { assert } from "src/figma_app/465776";
+import { deepEqual } from "src/905/382883";
 export function $$a1(e, t) {
   if (typeof e != typeof t) return !1;
   if ("object" != typeof e) return e === t;
@@ -11,7 +11,7 @@ export function $$a1(e, t) {
   };
   for (let e in i) e.startsWith("__IGNORE__") && delete i[e];
   for (let e in n) e.startsWith("__IGNORE__") && delete n[e];
-  return c2(i, n);
+  return deepEqual(i, n);
 }
 export function $$s2(e) {
   return {

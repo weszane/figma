@@ -3,7 +3,7 @@ import { getSupportEmail } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { M$ } from "../figma_app/633080";
+import { PublishStatusEnum } from "../figma_app/633080";
 import { EH } from "../905/514666";
 import { MZ } from "../905/470594";
 var $$u2 = (e => (e.Offline = "Offline", e.NonS3PresignedPost = "NonS3PresignedPost", e.GenericError = "GenericError", e.PartialPublish = "PartialPublish", e.Timeout = "Timeout", e.ErrorCode = "ErrorCode", e.ErrorReason = "ErrorReason", e.NoItemsToPublish = "NoItemsToPublish", e.NoFile = "NoFile", e))($$u2 || {});
@@ -20,7 +20,7 @@ export function $$m1(e) {
   } = e;
   dispatch(VisualBellActions.enqueue({
     type: "library-publish",
-    message: publishType === M$.UNPUBLISH ? getI18nString("design_systems.publish_actions.unpublish_success") : getI18nString("design_systems.publish_actions.publish_success"),
+    message: publishType === PublishStatusEnum.UNPUBLISH ? getI18nString("design_systems.publish_actions.unpublish_success") : getI18nString("design_systems.publish_actions.publish_success"),
     icon: VisualBellIcon.CHECK
   }));
 }
@@ -31,7 +31,7 @@ export function $$h0(e) {
   } = e;
   dispatch(VisualBellActions.enqueue({
     type: "library-publish",
-    message: publishType === M$.UNPUBLISH ? getI18nString("design_systems.publish_actions.unpublishing_library") : getI18nString("design_systems.publish_actions.publishing_library"),
+    message: publishType === PublishStatusEnum.UNPUBLISH ? getI18nString("design_systems.publish_actions.unpublishing_library") : getI18nString("design_systems.publish_actions.publishing_library"),
     icon: e.icon,
     progressKey: e.progressKey
   }));
@@ -45,7 +45,7 @@ export function $$g3(e) {
     publishType,
     dispatch
   } = e;
-  let m = publishType === M$.UNPUBLISH;
+  let m = publishType === PublishStatusEnum.UNPUBLISH;
   switch (error) {
     case "Offline":
       dispatch(VisualBellActions.enqueue({

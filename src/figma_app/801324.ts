@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
-import { oU, aH } from "../figma_app/273493";
+import { rgbToNormalized, normalizedToRgb } from "../figma_app/273493";
 import { DesignGraphElements, BorderStyle, WhiteboardTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
@@ -350,8 +350,8 @@ function O() {
 let R = (e, t) => t === BorderStyle.NONE ? "#000000" : F.format(e);
 function L(e) {
   let t = F.parse(e);
-  let r = WhiteboardTsApi?.getShapeWithTextStrokeColorForFill(oU(t));
-  return r ? F.format(aH(r)) : "#757575";
+  let r = WhiteboardTsApi?.getShapeWithTextStrokeColorForFill(rgbToNormalized(t));
+  return r ? F.format(normalizedToRgb(r)) : "#757575";
 }
 function P(e) {
   return useMemo(() => L(e), [e]);

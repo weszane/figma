@@ -1,6 +1,6 @@
-import { oB, In } from "../figma_app/273493";
-import { dI } from "../905/805904";
-import { AW, sN, F_, X9 } from "../figma_app/191804";
+import { rgbToHsl, hslToRgb } from "../figma_app/273493";
+import { convertKiwiToVariableIdString } from "../905/805904";
+import { blendGradientColors, blendColors, colorToHexString, setAlpha } from "../figma_app/191804";
 import { JG, zq } from "../figma_app/583114";
 import { f } from "../905/24905";
 import { logWarning } from "../905/714362";
@@ -13,16 +13,16 @@ export function $$c4(e, t) {
       a: e.opacity
     }
   } : e);
-  let n = AW(r);
-  return n && n.a < 1 && t ? sN(t, n) : n || t || void 0;
+  let n = blendGradientColors(r);
+  return n && n.a < 1 && t ? blendColors(t, n) : n || t || void 0;
 }
 function u(e, t) {
   return t === lH.LIGHT ? Math.min(e, .8) : Math.max(e, .2);
 }
 export function $$p6(e, t) {
-  let r = oB(e);
+  let r = rgbToHsl(e);
   let i = u(r.l, t);
-  return In({
+  return hslToRgb({
     ...r,
     l: i
   });
@@ -34,7 +34,7 @@ export function $$h3(e) {
   return 0 === e || 1 === e;
 }
 export function $$m1(e, t) {
-  let r = oB(e);
+  let r = rgbToHsl(e);
   let i = {
     ...r
   };
@@ -43,21 +43,21 @@ export function $$m1(e, t) {
     mode
   } = t;
   let l = t.modeChanged ? mode === lH.LIGHT ? lH.DARK : lH.LIGHT : mode;
-  let c = t.brandColor ? oB(t.brandColor) : null;
+  let c = t.brandColor ? rgbToHsl(t.brandColor) : null;
   let u = Pu(r, role, l, mode, t.isGradientStop);
   let p = u?.s ?? t.originalSL?.s ?? r.s;
   if (t.isGradientStop && t.modeChanged && !u && Pu(r, role, mode, mode, !0) && (t.modeChanged = !1), c) {
     if (i.h = c.h, i.s = Math.min(c.s, p), !t.currentBrandHex && 1 === r.a && Yx(r.l, role)) {
       i.s = c.s;
       i.l = c.l;
-      return In(i);
+      return hslToRgb(i);
     }
     if (t.currentBrandHex) {
-      let o = F_(e) === t.currentBrandHex;
+      let o = colorToHexString(e) === t.currentBrandHex;
       if (o && role === lg.BG && 1 === r.a) {
         i.s = c.s;
         i.l = c.l;
-        return In(i);
+        return hslToRgb(i);
       }
       if (0 === i.s && c.s > 0) {
         let {
@@ -68,12 +68,12 @@ export function $$m1(e, t) {
         i.l === darkSpec.l || i.l < .2 ? i.s = darkSpec.s : i.l === lightSpec.l || i.l > .8 ? i.s = lightSpec.s : i.s = c.s;
       } else if (o) {
         Yx(r.l, role) && 1 === r.a && (i.l = c.l);
-        return In(i);
+        return hslToRgb(i);
       }
     }
   }
   t.modeChanged && (u ? (i.l = u.l, i.a = t.isGradientStop ? r.a : u.a) : i.l = 1 - i.l);
-  return In(i);
+  return hslToRgb(i);
 }
 function g(e) {
   return {
@@ -91,11 +91,11 @@ export function $$f7(e, t) {
   let r = JG;
   let i = f(e, t);
   if (i >= r) return null;
-  let c = oB(e);
+  let c = rgbToHsl(e);
   if (!Yx(c.l, lg.CONTENT)) {
     let r = function (e) {
-      let t = oB(e);
-      return In({
+      let t = rgbToHsl(e);
+      return hslToRgb({
         ...t,
         l: 1 - t.l
       });
@@ -109,9 +109,9 @@ export function $$f7(e, t) {
     contrastMinimum: r,
     colorForContrastCheck: t
   });
-  contrastMet || logWarning("first-draft", `Failed to meet minimum contrast of ${r}. Using ${F_(adjustedColor)} on ${F_(t)} with contrast ${Math.abs(f(adjustedColor, t))}.`);
-  let _ = oB(adjustedColor);
-  return In({
+  contrastMet || logWarning("first-draft", `Failed to meet minimum contrast of ${r}. Using ${colorToHexString(adjustedColor)} on ${colorToHexString(t)} with contrast ${Math.abs(f(adjustedColor, t))}.`);
+  let _ = rgbToHsl(adjustedColor);
+  return hslToRgb({
     ...c,
     l: _.l
   });
@@ -136,7 +136,7 @@ function y(e, t, r, n) {
     switch (e.type) {
       case "SOLID":
         if (!e.color) return e;
-        let a = e.colorVar?.value?.alias ? dI(e.colorVar.value.alias) : void 0;
+        let a = e.colorVar?.value?.alias ? convertKiwiToVariableIdString(e.colorVar.value.alias) : void 0;
         if (n && !a) return e;
         let s = {
           ...e.color,
@@ -167,7 +167,7 @@ function y(e, t, r, n) {
         for (let a = 0; a < e.stops.length; a++) {
           let s = e.stops[a];
           let o = e.stopsVar && e.stopsVar.length > a ? e.stopsVar[a] : void 0;
-          let l = o?.colorVar?.value?.alias ? dI(o.colorVar.value.alias) : void 0;
+          let l = o?.colorVar?.value?.alias ? convertKiwiToVariableIdString(o.colorVar.value.alias) : void 0;
           let d = o?.color ?? s.color;
           let p = t(d, {
             ...r,
@@ -252,15 +252,15 @@ function I(e, t) {
     case "SOLID":
       if (!n.color) continue;
       let e = t || void 0 === n.opacity ? 1 : n.opacity;
-      let i = X9(n.color, e);
-      r.push(F_(i));
+      let i = setAlpha(n.color, e);
+      r.push(colorToHexString(i));
       break;
     case "GRADIENT_ANGULAR":
     case "GRADIENT_DIAMOND":
     case "GRADIENT_LINEAR":
     case "GRADIENT_RADIAL":
       if (!n.stops) continue;
-      for (let e of n.stops) r.push(F_(t ? X9(e.color, 1) : e.color));
+      for (let e of n.stops) r.push(colorToHexString(t ? setAlpha(e.color, 1) : e.color));
   }
   return r;
 }

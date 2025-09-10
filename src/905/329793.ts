@@ -399,9 +399,9 @@ export class ComputedFieldQuery {
       schema,
       metadata: metadata
         ? {
-            ...metadata,
-            shouldUseMissingFields: true,
-          }
+          ...metadata,
+          shouldUseMissingFields: true,
+        }
         : undefined,
       optional: isOptional,
       context: this.parent?.context || null,

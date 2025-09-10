@@ -29,7 +29,7 @@ import { oh } from "../905/18797";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Sh } from "../figma_app/803787";
 import { l as _$$l } from "../905/202425";
-import { Wv } from "../figma_app/633080";
+import { LibraryTabEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { I as _$$I } from "../figma_app/130633";
 import { N2, Ee } from "../figma_app/392189";
@@ -132,7 +132,7 @@ export function $$ef1({
   } = _$$u({
     entrypoint: em,
     modalType: "editor",
-    initialTab: Wv.TEAM_LIBRARIES
+    initialTab: LibraryTabEnum.TEAM_LIBRARIES
   });
   let ef = useCallback(() => {
     close();

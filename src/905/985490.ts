@@ -3,7 +3,7 @@ import { assert, throwTypeError } from "../figma_app/465776";
 import { CollectionGroupType, DiffImpl, OperationResult, LibraryUpdateStatus, GitReferenceType, RelationType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { w } from "../905/5147";
+import { kiwiCodec } from "../905/5147";
 import { logError } from "../905/714362";
 import { generateUUIDv4 } from "../905/871474";
 import { handleModalError } from "../905/760074";
@@ -27,7 +27,7 @@ class f extends Error {
     return {
       originalIndex: e.originalIndex,
       phase: e.phase,
-      displayNode: w.decodeNodeChange(e.displayNode),
+      displayNode: kiwiCodec.decodeNodeChange(e.displayNode),
       canvasId: e.canvasId,
       canvasIsInternal: e.canvasIsInternal,
       basisParentHierarchyGuids: e.basisParentHierarchyGuids,
@@ -207,8 +207,8 @@ class f extends Error {
     let i = DiffImpl.getChunkChanges(e, t);
     if (i.error) throw Error(i.error);
     return {
-      nodeChanges: (i.nodeChanges && i.nodeChanges.length > 0 ? w.decodeMessage(i.nodeChanges).nodeChanges : []) ?? [],
-      diffBasis: (i.diffBasis && i.diffBasis.length > 0 ? w.decodeMessage(i.diffBasis).nodeChanges : []) ?? []
+      nodeChanges: (i.nodeChanges && i.nodeChanges.length > 0 ? kiwiCodec.decodeMessage(i.nodeChanges).nodeChanges : []) ?? [],
+      diffBasis: (i.diffBasis && i.diffBasis.length > 0 ? kiwiCodec.decodeMessage(i.diffBasis).nodeChanges : []) ?? []
     };
   };
   e.getParentHierarchyNodeChange = _;

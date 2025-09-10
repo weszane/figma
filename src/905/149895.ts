@@ -12,7 +12,7 @@ import { lg } from "../figma_app/976749";
 import { FFileType } from "../figma_app/191312";
 import { aB } from "../905/576221";
 import { AC, jO, FZ } from "../figma_app/803787";
-import { o as _$$o } from "../figma_app/633080";
+import { LibrarySourceEnum } from "../figma_app/633080";
 import { _g, UM, Md, F4 } from "../figma_app/60023";
 import { CR, Dl, oX, ke } from "../905/58274";
 export function $$b1(e) {
@@ -36,7 +36,7 @@ export function $$I2() {
   let i = Xr(UM);
   let d = Md(t);
   let c = useSelector(e => AC(e));
-  let u = Object.values(useSelector(e => jO(e, _$$o.LIBRARY)));
+  let u = Object.values(useSelector(e => jO(e, LibrarySourceEnum.LIBRARY)));
   let I = useSelector(e => FZ(e));
   let E = lg() === FFileType.SLIDES;
   return {
@@ -58,7 +58,7 @@ export function $$I2() {
         e(ZS({
           savepointDescription: "slide template publish",
           itemsToPublish: new Set(r),
-          publishingMode: _$$o.LIBRARY,
+          publishingMode: LibrarySourceEnum.LIBRARY,
           ...ke()
         }));
       });
@@ -70,7 +70,7 @@ export function $$I2() {
         $$b1(e);
         AppStateTsApi?.canvasGrid().updateSourceLibraryKey(_$$l(""));
         e(ZS({
-          publishingMode: _$$o.LIBRARY,
+          publishingMode: LibrarySourceEnum.LIBRARY,
           unpublishAll: !0,
           savepointDescription: "slide template unpublish",
           ...ke()

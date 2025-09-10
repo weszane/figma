@@ -10,7 +10,7 @@ import { eY } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { bO, z5 } from "../figma_app/936646";
 import { b } from "../figma_app/882253";
-import { sb } from "../figma_app/633080";
+import { getStyleInfo } from "../figma_app/633080";
 export function $$g1(e) {
   return `styles-picker-${e}`;
 }
@@ -71,7 +71,7 @@ export function $$I2(e, t, r) {
         library: e
       }, i, s);
       if (_?.data?.content_hash === p.styleVersionHash) return _.data;
-      let g = sb(p);
+      let g = getStyleInfo(p);
       let f = e.local.thumbnails[p.guid] || null;
       return g ? {
         ...g,

@@ -18,7 +18,7 @@ import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useCurrentPlanUser, che
 import { IE } from "../figma_app/193867";
 import { p as _$$p } from "../905/763242";
 import { FEditorType } from "../figma_app/53721";
-import { cX, EJ, Wv } from "../figma_app/633080";
+import { LIBRARY_PREFERENCES_MODAL, SHARED_FONTS_MODAL, LibraryTabEnum } from "../figma_app/633080";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { s as _$$s2 } from "../905/715327";
 import { y as _$$y } from "../905/375507";
@@ -46,7 +46,7 @@ let P = memo(function ({
   sessionId: s,
   resourceConnection: o
 }) {
-  L(cX);
+  L(LIBRARY_PREFERENCES_MODAL);
   let c = useSelector(e => e.selectedView);
   let u = useSelector(e => IE(e));
   let p = selectCurrentFile();
@@ -86,27 +86,27 @@ let P = memo(function ({
     }) : void 0
   });
 });
-let $$D0 = registerModal(P, cX, ModalSupportsBackground.YES);
+let $$D0 = registerModal(P, LIBRARY_PREFERENCES_MODAL, ModalSupportsBackground.YES);
 let $$k1 = registerModal(function ({
   entrypoint: e
 }) {
-  L(EJ);
+  L(SHARED_FONTS_MODAL);
   let t = useDispatch();
   useEffect(() => {
     _$$y.loadSharedFonts(t);
   }, [t]);
   return jsx(P, {
-    initialTab: Wv.FONTS,
+    initialTab: LibraryTabEnum.FONTS,
     entrypoint: e
   });
-}, EJ, ModalSupportsBackground.YES);
+}, SHARED_FONTS_MODAL, ModalSupportsBackground.YES);
 function M() {
   let e = _K();
   return jsx(_$$s3, {
     width: e,
     title: jsx(_$$c, {
-      availableTabs: [Wv.LIBRARIES],
-      selectedTab: Wv.LIBRARIES
+      availableTabs: [LibraryTabEnum.LIBRARIES],
+      selectedTab: LibraryTabEnum.LIBRARIES
     }),
     children: jsx(Z, {
       children: jsx(_$$s2, {
@@ -128,8 +128,8 @@ function F({
   let d = !!(l && checkOrgUserPermission(l, FMemberRoleType.ADMIN));
   let c = FC();
   let u = useMemo(() => {
-    let e = [Wv.LIBRARIES];
-    o && e.push(Wv.FONTS);
+    let e = [LibraryTabEnum.LIBRARIES];
+    o && e.push(LibraryTabEnum.FONTS);
     return e;
   }, [o]);
   let {
@@ -146,11 +146,11 @@ function F({
     }),
     children: jsxs(Z, {
       widerWidth: o,
-      children: [selectedTab === Wv.LIBRARIES && jsx(_$$s2, {
+      children: [selectedTab === LibraryTabEnum.LIBRARIES && jsx(_$$s2, {
         showingDefaultSubscriptionsForTeamId: t,
         showingDefaultSubscriptionsForUser: !1,
         width: h
-      }), selectedTab === Wv.FONTS && jsx(_$$y, {
+      }), selectedTab === LibraryTabEnum.FONTS && jsx(_$$y, {
         dispatch: r,
         teamId: t,
         width: h,

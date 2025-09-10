@@ -5,7 +5,7 @@ import { l as _$$l } from "../905/716947";
 import { removeSpaces } from "../figma_app/930338";
 import { nh, jD } from "../figma_app/933328";
 import { ov } from "../figma_app/646357";
-import { PW } from "../figma_app/633080";
+import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$u1(e, t, i, n, r, a, o) {
   let l = $$p3(e, t, i, n, r, o);
   let d = {
@@ -48,7 +48,7 @@ export async function $$h2(e, t) {
   let i = await jD(t);
   let n = i?.newSymbolOrStateGroupGuid;
   n && permissionScopeHandler.user("replace-libraries", () => {
-    Fullscreen.swapAllInstancesOfComponentOrStateGroup(e, n, t.type === PW.COMPONENT ? "" : t.default_state_key);
+    Fullscreen.swapAllInstancesOfComponentOrStateGroup(e, n, t.type === PrimaryWorkflowEnum.COMPONENT ? "" : t.default_state_key);
   });
 }
 export function $$g6(e, t) {
@@ -89,7 +89,7 @@ export function $$_5(e = []) {
     stateGroups: [],
     styles: []
   };
-  for (let i of $$f4(e)) i.type === PW.STYLE ? t.styles.push(i) : i.type === PW.STATE_GROUP ? t.stateGroups.push(i) : i.type === PW.VARIABLE_SET || i.type === PW.VARIABLE || (i.type === PW.COMPONENT ? t.components.push(i) : i.type === PW.MODULE || throwTypeError(i, "Unhandled item type"));
+  for (let i of $$f4(e)) i.type === PrimaryWorkflowEnum.STYLE ? t.styles.push(i) : i.type === PrimaryWorkflowEnum.STATE_GROUP ? t.stateGroups.push(i) : i.type === PrimaryWorkflowEnum.VARIABLE_SET || i.type === PrimaryWorkflowEnum.VARIABLE || (i.type === PrimaryWorkflowEnum.COMPONENT ? t.components.push(i) : i.type === PrimaryWorkflowEnum.MODULE || throwTypeError(i, "Unhandled item type"));
   return t;
 }
 export const $l = $$m0;

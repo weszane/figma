@@ -34,8 +34,8 @@ export class QueryNode {
     type: string;
     error?: any;
   } = {
-    type: 'loading'
-  };
+      type: 'loading'
+    };
   static DEFAULT_INITIAL_COUNT = 10;
   paginationArgs?: any;
   missingProjectedFieldsForDebugging?: string[];
@@ -44,7 +44,7 @@ export class QueryNode {
     this.parent = parent;
     this.observable = observable;
     this.context = context;
-    this.unsubscribe = () => {};
+    this.unsubscribe = () => { };
     if (parent instanceof PaginatedQueryNode && paginationArgs) {
       instance = this.parent.parent.instance;
       this.paginationArgs = paginationArgs;
