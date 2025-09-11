@@ -1,6 +1,6 @@
 import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { y } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 export let $$n1;
 class o {
   isUI3() {
@@ -10,7 +10,7 @@ class o {
     return AppStateTsApi?.uiState().showUI3Colors.getCopy() ?? !1;
   }
   showUI3ColorsInitialValue() {
-    y.isIpad();
+    browserCapabilities.isIpad();
     return !!getFeatureFlags().figjam_ui3_color_palette;
   }
 }

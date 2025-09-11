@@ -1,9 +1,9 @@
-import { bS, kF, wH, ff, Cy, Iq, vJ, uT, n1, I2, WK, sT, Ni, lJ } from "../vendor/408361";
-import { i as _$$i, HY, DE, Mz, v5, YW } from "../vendor/231521";
-import { jL, Pi as _$$Pi, fi, dJ, jd, xi } from "../vendor/871930";
-import { Bt } from "../vendor/425002";
-import { a5, iK, QC } from "../vendor/858260";
-import { Db, FJ, zA } from "../vendor/491721";
+import { $isParagraphNode, $isTextNode, $isLineBreakNode, $isElementNode, $isDecoratorNode, $isRootOrShadowRoot, $getSelection, $createRangeSelection, $setSelection, $isRangeSelection, $createLineBreakNode, $createTextNode, $getRoot, $createParagraphNode } from "../vendor/408361";
+import { $createListItemNode, $isListNode, $createListNode, $isListItemNode, ListNode, ListItemNode } from "../vendor/231521";
+import { HeadingNode, $isHeadingNode, $createHeadingNode, QuoteNode, $isQuoteNode, $createQuoteNode } from "../vendor/871930";
+import { $findMatchingParent } from "../vendor/425002";
+import { $isCodeNode, CodeNode, $createCodeNode } from "../vendor/858260";
+import { LinkNode, $isLinkNode, $createLinkNode } from "../vendor/491721";
 function l(e, t) {
   let n = {};
   for (let r of e) {
@@ -24,9 +24,9 @@ function u(e) {
 let g = /[!-/:-@[-`{-~\s]/;
 let c = /^\s{0,3}$/;
 function f(e) {
-  if (!bS(e)) return !1;
+  if (!$isParagraphNode(e)) return !1;
   let t = e.getFirstChild();
-  return null == t || 1 === e.getChildrenSize() && kF(t) && c.test(t.getTextContent());
+  return null == t || 1 === e.getChildrenSize() && $isTextNode(t) && c.test(t.getTextContent());
 }
 function d(e, t, n) {
   let i = [];
@@ -40,7 +40,7 @@ function d(e, t, n) {
         continue t;
       }
     }
-    wH(e) ? i.push("\n") : kF(e) ? i.push(h(e, e.getTextContent(), t)) : ff(e) ? i.push(d(e, t, n)) : Cy(e) && i.push(e.getTextContent());
+    $isLineBreakNode(e) ? i.push("\n") : $isTextNode(e) ? i.push(h(e, e.getTextContent(), t)) : $isElementNode(e) ? i.push(d(e, t, n)) : $isDecoratorNode(e) && i.push(e.getTextContent());
   }
   return i.join("");
 }
@@ -62,19 +62,19 @@ function p(e, t) {
     r.isInline() && (n = t ? r.getPreviousSibling() : r.getNextSibling());
   }
   for (; n;) {
-    if (ff(n)) {
+    if ($isElementNode(n)) {
       if (!n.isInline()) break;
       let e = t ? n.getLastDescendant() : n.getFirstDescendant();
-      if (kF(e)) return e;
+      if ($isTextNode(e)) return e;
       n = t ? n.getPreviousSibling() : n.getNextSibling();
     }
-    if (kF(n)) return n;
-    if (!ff(n)) break;
+    if ($isTextNode(n)) return n;
+    if (!$isElementNode(n)) break;
   }
   return null;
 }
 function C(e, t) {
-  return kF(e) && e.hasFormat(t);
+  return $isTextNode(e) && e.hasFormat(t);
 }
 let I = "undefined" != typeof window && void 0 !== window.document && void 0 !== window.document.createElement;
 let E = I && "documentMode" in document ? document.documentMode : null;
@@ -103,7 +103,7 @@ function w(e, t, n, r, i) {
   for (let A = 0; A < i; A++) if (e[t + A] !== n[r + A]) return !1;
   return !0;
 }
-export function $$b14(e, t = $$et3) {
+export function registerMarkdownShortcuts(e, t = TRANSFORMERS) {
   let n = u(t);
   let i = l(n.textFormat, ({
     tag: e
@@ -118,7 +118,7 @@ export function $$b14(e, t = $$et3) {
   let o = (e, t, o) => {
     (function (e, t, n, i) {
       let A = e.getParent();
-      if (!Iq(A) || e.getFirstChild() !== t) return !1;
+      if (!$isRootOrShadowRoot(A) || e.getFirstChild() !== t) return !1;
       let o = t.getTextContent();
       if (" " !== o[n - 1]) return !1;
       for (let {
@@ -135,7 +135,7 @@ export function $$b14(e, t = $$et3) {
       return !1;
     })(e, t, o, n.element) || function (e, t, n, i) {
       let A = e.getParent();
-      if (!Iq(A) || e.getFirstChild() !== t) return !1;
+      if (!$isRootOrShadowRoot(A) || e.getFirstChild() !== t) return !1;
       let o = t.getTextContent();
       if (" " !== o[n - 1]) return !1;
       for (let {
@@ -186,7 +186,7 @@ export function $$b14(e, t = $$et3) {
         let u = e;
         let c = D(i, a, tag);
         let f = u;
-        for (; c < 0 && (f = f.getPreviousSibling()) && !wH(f);) if (kF(f)) {
+        for (; c < 0 && (f = f.getPreviousSibling()) && !$isLineBreakNode(f);) if ($isTextNode(f)) {
           let e = f.getTextContent();
           u = f;
           c = D(e, e.length, tag);
@@ -201,13 +201,13 @@ export function $$b14(e, t = $$et3) {
         e.setTextContent(C);
         let I = u === e ? C : d;
         u.setTextContent(I.slice(0, c) + I.slice(c + s));
-        let E = vJ();
-        let B = uT();
-        n1(B);
+        let E = $getSelection();
+        let B = $createRangeSelection();
+        $setSelection(B);
         let m = A - s * (u === e ? 2 : 1) + 1;
         for (let n of (B.anchor.set(u.__key, c, "text"), B.focus.set(e.__key, m, "text"), t.format)) B.hasFormat(n) || B.formatText(n);
         for (let e of (B.anchor.set(B.focus.key, B.focus.offset, B.focus.type), t.format)) B.hasFormat(e) && B.toggleFormat(e);
-        I2(E) && (B.format = E.format);
+        $isRangeSelection(E) && (B.format = E.format);
         return !0;
       }
     }(t, o, i);
@@ -219,16 +219,16 @@ export function $$b14(e, t = $$et3) {
     prevEditorState: A
   }) => {
     if (t.has("collaboration") || t.has("historic") || e.isComposing()) return;
-    let a = i.read(vJ);
-    let l = A.read(vJ);
-    if (!I2(l) || !I2(a) || !a.isCollapsed()) return;
+    let a = i.read($getSelection);
+    let l = A.read($getSelection);
+    if (!$isRangeSelection(l) || !$isRangeSelection(a) || !a.isCollapsed()) return;
     let u = a.anchor.key;
     let g = a.anchor.offset;
     let c = i._nodeMap.get(u);
-    kF(c) && n.has(u) && (1 === g || !(g > l.anchor.offset + 1)) && e.update(() => {
+    $isTextNode(c) && n.has(u) && (1 === g || !(g > l.anchor.offset + 1)) && e.update(() => {
       if (c.hasFormat("code")) return;
       let e = c.getParent();
-      null === e || a5(e) || o(e, c, a.anchor.offset);
+      null === e || $isCodeNode(e) || o(e, c, a.anchor.offset);
     });
   });
 }
@@ -251,16 +251,16 @@ let O = e => (t, n, r) => {
 let G = e => (t, n, r) => {
   let A = t.getPreviousSibling();
   let o = t.getNextSibling();
-  let s = _$$i("check" === e ? "x" === r[3] : void 0);
-  if (HY(o) && o.getListType() === e) {
+  let s = $createListItemNode("check" === e ? "x" === r[3] : void 0);
+  if ($isListNode(o) && o.getListType() === e) {
     let e = o.getFirstChild();
     null !== e ? e.insertBefore(s) : o.append(s);
     t.remove();
-  } else if (HY(A) && A.getListType() === e) {
+  } else if ($isListNode(A) && A.getListType() === e) {
     A.append(s);
     t.remove();
   } else {
-    let n = DE(e, "number" === e ? Number(r[2]) : void 0);
+    let n = $createListNode(e, "number" === e ? Number(r[2]) : void 0);
     n.append(s);
     t.replace(n);
   }
@@ -280,10 +280,10 @@ let P = (e, t, n) => {
   let r = [];
   let A = e.getChildren();
   let o = 0;
-  for (let s of A) if (Mz(s)) {
+  for (let s of A) if ($isListItemNode(s)) {
     if (1 === s.getChildrenSize()) {
       let e = s.getFirstChild();
-      if (HY(e)) {
+      if ($isListNode(e)) {
         r.push(P(e, t, n + 1));
         continue;
       }
@@ -296,24 +296,24 @@ let P = (e, t, n) => {
   }
   return r.join("\n");
 };
-let $$U5 = {
-  dependencies: [jL],
+let HEADING = {
+  dependencies: [HeadingNode],
   export: (e, t) => {
-    if (!_$$Pi(e)) return null;
+    if (!$isHeadingNode(e)) return null;
     let n = Number(e.getTag().slice(1));
     return "#".repeat(n) + " " + t(e);
   },
   regExp: S,
   replace: O(e => {
     let t = "h" + e[1].length;
-    return fi(t);
+    return $createHeadingNode(t);
   }),
   type: "element"
 };
-let $$q15 = {
-  dependencies: [dJ],
+let QUOTE = {
+  dependencies: [QuoteNode],
   export: (e, t) => {
-    if (!jd(e)) return null;
+    if (!$isQuoteNode(e)) return null;
     let n = t(e).split("\n");
     let r = [];
     for (let e of n) r.push("> " + e);
@@ -323,23 +323,23 @@ let $$q15 = {
   replace: (e, t, n, i) => {
     if (i) {
       let n = e.getPreviousSibling();
-      if (jd(n)) {
-        n.splice(n.getChildrenSize(), 0, [WK(), ...t]);
+      if ($isQuoteNode(n)) {
+        n.splice(n.getChildrenSize(), 0, [$createLineBreakNode(), ...t]);
         n.select(0, 0);
         return void e.remove();
       }
     }
-    let o = xi();
+    let o = $createQuoteNode();
     o.append(...t);
     e.replace(o);
     o.select(0, 0);
   },
   type: "element"
 };
-let $$J4 = {
-  dependencies: [iK],
+let CODE = {
+  dependencies: [CodeNode],
   export: e => {
-    if (!a5(e)) return null;
+    if (!$isCodeNode(e)) return null;
     let t = e.getTextContent();
     return "```" + (e.getLanguage() || "") + (t ? "\n" + t : "") + "\n```";
   },
@@ -352,95 +352,95 @@ let $$J4 = {
     let a;
     let l;
     if (!t && A) {
-      if (1 === A.length) i ? (a = QC(), l = n[1] + A[0]) : (a = QC(n[1]), l = A[0].startsWith(" ") ? A[0].slice(1) : A[0]);else {
-        if (a = QC(n[1]), 0 === A[0].trim().length) for (; A.length > 0 && !A[0].length;) A.shift();else A[0] = A[0].startsWith(" ") ? A[0].slice(1) : A[0];
+      if (1 === A.length) i ? (a = $createCodeNode(), l = n[1] + A[0]) : (a = $createCodeNode(n[1]), l = A[0].startsWith(" ") ? A[0].slice(1) : A[0]);else {
+        if (a = $createCodeNode(n[1]), 0 === A[0].trim().length) for (; A.length > 0 && !A[0].length;) A.shift();else A[0] = A[0].startsWith(" ") ? A[0].slice(1) : A[0];
         for (; A.length > 0 && !A[A.length - 1].length;) A.pop();
         l = A.join("\n");
       }
-      let t = sT(l);
+      let t = $createTextNode(l);
       a.append(t);
       e.append(a);
-    } else t && O(e => QC(e ? e[1] : void 0))(e, t, n, o);
+    } else t && O(e => $createCodeNode(e ? e[1] : void 0))(e, t, n, o);
   },
   type: "multiline-element"
 };
-let $$z16 = {
-  dependencies: [v5, YW],
-  export: (e, t) => HY(e) ? P(e, t, 0) : null,
+let UNORDERED_LIST = {
+  dependencies: [ListNode, ListItemNode],
+  export: (e, t) => $isListNode(e) ? P(e, t, 0) : null,
   regExp: k,
   replace: G("bullet"),
   type: "element"
 };
-v5;
-YW;
+ListNode;
+ListItemNode;
 G("check");
-let $$H1 = {
-  dependencies: [v5, YW],
-  export: (e, t) => HY(e) ? P(e, t, 0) : null,
+let ORDERED_LIST = {
+  dependencies: [ListNode, ListItemNode],
+  export: (e, t) => $isListNode(e) ? P(e, t, 0) : null,
   regExp: v,
   replace: G("number"),
   type: "element"
 };
-let $$K6 = {
+let INLINE_CODE = {
   format: ["code"],
   tag: "`",
   type: "text-format"
 };
-let $$j11 = {
+let BOLD_ITALIC_STAR = {
   format: ["bold", "italic"],
   tag: "***",
   type: "text-format"
 };
-let $$Y13 = {
+let BOLD_ITALIC_UNDERSCORE = {
   format: ["bold", "italic"],
   intraword: !1,
   tag: "___",
   type: "text-format"
 };
-let $$W10 = {
+let BOLD_STAR = {
   format: ["bold"],
   tag: "**",
   type: "text-format"
 };
-let $$V2 = {
+let BOLD_UNDERSCORE = {
   format: ["bold"],
   intraword: !1,
   tag: "__",
   type: "text-format"
 };
-let $$Z7 = {
+let STRIKETHROUGH = {
   format: ["strikethrough"],
   tag: "~~",
   type: "text-format"
 };
-let $$$0 = {
+let ITALIC_STAR = {
   format: ["italic"],
   tag: "*",
   type: "text-format"
 };
-let $$X12 = {
+let ITALIC_UNDERSCORE = {
   format: ["italic"],
   intraword: !1,
   tag: "_",
   type: "text-format"
 };
-let $$ee17 = {
-  dependencies: [Db],
+let LINK = {
+  dependencies: [LinkNode],
   export: (e, t, n) => {
-    if (!FJ(e)) return null;
+    if (!$isLinkNode(e)) return null;
     let i = e.getTitle();
     let A = i ? `[${e.getTextContent()}](${e.getURL()} "${i}")` : `[${e.getTextContent()}](${e.getURL()})`;
     let o = e.getFirstChild();
-    return 1 === e.getChildrenSize() && kF(o) ? n(o, A) : A;
+    return 1 === e.getChildrenSize() && $isTextNode(o) ? n(o, A) : A;
   },
   importRegExp: /(?:\[([^[]+)\])(?:\((?:([^()\s]+)(?:\s"((?:[^"]*\\")*[^"]*)"\s*)?)\))/,
   regExp: /(?:\[([^[]+)\])(?:\((?:([^()\s]+)(?:\s"((?:[^"]*\\")*[^"]*)"\s*)?)\))$/,
   replace: (e, t) => {
     let [, n, i, A] = t;
-    let o = zA(i, {
+    let o = $createLinkNode(i, {
       title: A
     });
-    let s = sT(n);
+    let s = $createTextNode(n);
     s.setFormat(e.getFormat());
     o.append(s);
     e.replace(o);
@@ -448,12 +448,12 @@ let $$ee17 = {
   trigger: ")",
   type: "text-match"
 };
-let $$et3 = [$$U5, $$q15, $$z16, $$H1, $$J4, $$K6, $$j11, $$Y13, $$W10, $$V2, {
+let TRANSFORMERS = [HEADING, QUOTE, UNORDERED_LIST, ORDERED_LIST, CODE, INLINE_CODE, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, {
   format: ["highlight"],
   tag: "==",
   type: "text-format"
-}, $$$0, $$X12, $$Z7, $$ee17];
-export function $$en8(e, t = $$et3, n, s = !1, a = !1) {
+}, ITALIC_STAR, ITALIC_UNDERSCORE, STRIKETHROUGH, LINK];
+export function $convertFromMarkdownString(e, t = TRANSFORMERS, n, s = !1, a = !1) {
   let l = s ? e : function (e, t = !1) {
     let n = e.split("\n");
     let r = !1;
@@ -489,7 +489,7 @@ export function $$en8(e, t = $$et3, n, s = !1, a = !1) {
     return (e, a) => {
       let l = e.split("\n");
       let u = l.length;
-      let c = a || Ni();
+      let c = a || $getRoot();
       c.clear();
       for (let e = 0; e < u; e++) {
         let t = l[e];
@@ -526,8 +526,8 @@ export function $$en8(e, t = $$et3, n, s = !1, a = !1) {
           return [!1, t];
         }(l, e, n.multilineElement, c);
         a ? e = u : function (e, t, n, s, a) {
-          let l = sT(e);
-          let u = lJ();
+          let l = $createTextNode(e);
+          let u = $createParagraphNode();
           for (let {
             regExp,
             replace
@@ -593,23 +593,23 @@ export function $$en8(e, t = $$et3, n, s = !1, a = !1) {
             A && e(A, n, r);
           }(l, s, a), u.isAttached() && e.length > 0) {
             let e = u.getPreviousSibling();
-            if (bS(e) || jd(e) || HY(e)) {
+            if ($isParagraphNode(e) || $isQuoteNode(e) || $isListNode(e)) {
               let t = e;
-              if (HY(e)) {
+              if ($isListNode(e)) {
                 let n = e.getLastDescendant();
-                t = null == n ? null : Bt(n, Mz);
+                t = null == n ? null : $findMatchingParent(n, $isListItemNode);
               }
-              null != t && t.getTextContentSize() > 0 && (t.splice(t.getChildrenSize(), 0, [WK(), ...u.getChildren()]), u.remove());
+              null != t && t.getTextContentSize() > 0 && (t.splice(t.getChildrenSize(), 0, [$createLineBreakNode(), ...u.getChildren()]), u.remove());
             }
           }
         }(t, c, n.element, s, n.textMatch);
       }
       for (let e of c.getChildren()) !t && f(e) && c.getChildrenSize() > 1 && e.remove();
-      null !== vJ() && c.selectStart();
+      null !== $getSelection() && c.selectStart();
     };
   }(t, s)(l, n);
 }
-export function $$er9(e = $$et3, t, n = !1) {
+export function $convertToMarkdownString(e = TRANSFORMERS, t, n = !1) {
   return function (e, t = !1) {
     let n = u(e);
     let i = [...n.multilineElement, ...n.element];
@@ -617,7 +617,7 @@ export function $$er9(e = $$et3, t, n = !1) {
     let o = n.textFormat.filter(e => 1 === e.format.length);
     return e => {
       let t = [];
-      let s = (e || Ni()).getChildren();
+      let s = (e || $getRoot()).getChildren();
       for (let e = 0; e < s.length; e++) {
         let a = s[e];
         let l = function (e, t, n, i) {
@@ -626,7 +626,7 @@ export function $$er9(e = $$et3, t, n = !1) {
             let t = r.$$export(e, e => d(e, n, i));
             if (null != t) return t;
           }
-          return ff(e) ? d(e, n, i) : Cy(e) ? e.getTextContent() : null;
+          return $isElementNode(e) ? d(e, n, i) : $isDecoratorNode(e) ? e.getTextContent() : null;
         }(a, i, o, n.textMatch);
         null != l && t.push(A && e > 0 && !f(a) && !f(s[e - 1]) ? "\n".concat(l) : l);
       }
@@ -634,21 +634,21 @@ export function $$er9(e = $$et3, t, n = !1) {
     };
   }(e, n)(t);
 }
-export const Eg = $$$0;
-export const NB = $$H1;
-export const Pi = $$V2;
-export const Rm = $$et3;
-export const Sq = $$J4;
-export const TB = $$U5;
-export const Up = $$K6;
-export const WY = $$Z7;
-export const Wn = $$en8;
-export const bk = $$er9;
-export const d7 = $$W10;
-export const eA = $$j11;
-export const gW = $$X12;
-export const gb = $$Y13;
-export const iM = $$b14;
-export const jA = $$q15;
-export const mK = $$z16;
-export const ps = $$ee17;
+export const Eg = ITALIC_STAR;
+export const NB = ORDERED_LIST;
+export const Pi = BOLD_UNDERSCORE;
+export const Rm = TRANSFORMERS;
+export const Sq = CODE;
+export const TB = HEADING;
+export const Up = INLINE_CODE;
+export const WY = STRIKETHROUGH;
+export const Wn = $convertFromMarkdownString;
+export const bk = $convertToMarkdownString;
+export const d7 = BOLD_STAR;
+export const eA = BOLD_ITALIC_STAR;
+export const gW = ITALIC_UNDERSCORE;
+export const gb = BOLD_ITALIC_UNDERSCORE;
+export const iM = registerMarkdownShortcuts;
+export const jA = QUOTE;
+export const mK = UNORDERED_LIST;
+export const ps = LINK;

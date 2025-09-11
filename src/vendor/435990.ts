@@ -1,14 +1,14 @@
-import { DF } from "../vendor/463802";
-import { ns, vJ, RT, rU, n1 } from "../vendor/408361";
+import { useLexicalComposerContext } from "../vendor/463802";
+import { $getNodeByKey, $getSelection, $isNodeSelection, $createNodeSelection, $setSelection } from "../vendor/408361";
 import { useState, useEffect, useCallback } from "react";
 function a(e, r) {
   return e.getEditorState().read(() => {
-    let e = ns(r);
+    let e = $getNodeByKey(r);
     return null !== e && e.isSelected();
   });
 }
 export function $$h0(e) {
-  let [r] = DF();
+  let [r] = useLexicalComposerContext();
   let [n, h] = useState(() => a(r, e));
   useEffect(() => {
     let n = !0;
@@ -22,14 +22,14 @@ export function $$h0(e) {
   }, [r, e]);
   return [n, useCallback(n => {
     r.update(() => {
-      let r = vJ();
-      RT(r) || (r = rU(), n1(r));
-      RT(r) && (n ? r.add(e) : r.$$delete(e));
+      let r = $getSelection();
+      $isNodeSelection(r) || (r = $createNodeSelection(), $setSelection(r));
+      $isNodeSelection(r) && (n ? r.add(e) : r.$$delete(e));
     });
   }, [r, e]), useCallback(() => {
     r.update(() => {
-      let e = vJ();
-      RT(e) && e.clear();
+      let e = $getSelection();
+      $isNodeSelection(e) && e.clear();
     });
   }, [r])];
 }

@@ -1,21 +1,21 @@
-import { a5 } from "../vendor/858260";
-import { DF } from "../vendor/463802";
-import { Nx } from "../vendor/850527";
-import { gC, vJ, I2, hV, wH, lJ, Jj } from "../vendor/408361";
+import { $isCodeNode } from "@lexical/code";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $isAtNodeEnd } from "@lexical/selection";
+import { KEY_BACKSPACE_COMMAND, $getSelection, $isRangeSelection, $isRootNode, $isLineBreakNode, $createParagraphNode, COMMAND_PRIORITY_NORMAL } from "lexical";
 export function $$o0() {
-  let [e] = DF();
-  e.registerCommand(gC, e => {
-    let t = vJ();
-    if (I2(t)) {
+  let [e] = useLexicalComposerContext();
+  e.registerCommand(KEY_BACKSPACE_COMMAND, e => {
+    let t = $getSelection();
+    if ($isRangeSelection(t)) {
       let o = t.anchor.getNode();
       let l = o.getParent();
-      if (l && hV(l) && a5(o) && Nx(t.anchor)) {
+      if (l && $isRootNode(l) && $isCodeNode(o) && $isAtNodeEnd(t.anchor)) {
         var i = o.getChildren();
         if (i.length > 0) {
           var r = i[i.length - 1];
-          wH(r) && r.remove();
+          $isLineBreakNode(r) && r.remove();
         }
-        let t = lJ();
+        let t = $createParagraphNode();
         i.length > 0 ? o.insertAfter(t) : o.replace(t);
         t.select();
         e.preventDefault();
@@ -23,7 +23,7 @@ export function $$o0() {
       }
     }
     return !1;
-  }, Jj);
+  }, COMMAND_PRIORITY_NORMAL);
   return null;
 }
 export const A = $$o0;

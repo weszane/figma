@@ -8,7 +8,7 @@ import { M4, IT } from "../905/713695";
 import { m as _$$m } from "../905/325034";
 import { registerModal } from "../905/102752";
 import { setupAutofocusHandler } from "../905/128376";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
 import { $ } from "../905/953280";
@@ -137,7 +137,7 @@ function F(e) {
           onChange: e => a(e.target.value),
           className: _$$s.wFull.$,
           ref: t
-        }), jsx(_$$f, {
+        }), jsx(setupToggleButton, {
           onIcon: jsx(M, {}),
           offIcon: jsx(M, {}),
           variant: "highlighted",

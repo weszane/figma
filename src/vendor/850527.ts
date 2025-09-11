@@ -1,4 +1,4 @@
-import { Ck, ff, Ni, B$, Cy, hV, kF, Iq } from "../vendor/408361";
+import { $getCharacterOffsets, $isElementNode, $getRoot, $getAdjacentNode, $isDecoratorNode, $isRootNode, $isTextNode, $isRootOrShadowRoot } from "../vendor/408361";
 var s = function (e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.$$default : e;
 }(function (e) {
@@ -16,7 +16,7 @@ function a(e) {
   }
   return r;
 }
-export function $$h3(e, r) {
+export function $wrapNodes(e, r) {
   let n = e.getStartEndPoints();
   if (r.isSelected(e) && !r.isSegmented() && !r.isToken() && null !== n) {
     let [s, o] = n;
@@ -26,7 +26,7 @@ export function $$h3(e, r) {
     let p = r.is(h);
     let g = r.is(d);
     if (p || g) {
-      let [n, s] = Ck(e);
+      let [n, s] = $getCharacterOffsets(e);
       let o = h.is(d);
       let p = r.is(a ? d : h);
       let g = r.is(a ? h : d);
@@ -39,24 +39,24 @@ export function $$h3(e, r) {
   }
   return r;
 }
-export function $$d1(e) {
+export function isAtNodeEnd(e) {
   if ("text" === e.type) return e.offset === e.getNode().getTextContentSize();
   let r = e.getNode();
-  ff(r) || s(177);
+  $isElementNode(r) || s(177);
   return e.offset === r.getChildrenSize();
 }
-export function $$p4(e) {
+export function $addNodeStyle(e) {
   let r = e.getStyle();
   let n = a(r);
   o.set(r, n);
 }
-export function $$g6(e, r) {
+export function $setBlocksType(e, r) {
   if (null === e) return;
   let n = e.getStartEndPoints();
   let o = n ? n[0] : null;
   if (null !== o && "root" === o.key) {
     let e = r();
-    let n = Ni();
+    let n = $getRoot();
     let s = n.getFirstChild();
     return void (s ? s.replace(e, !0) : n.append(e));
   }
@@ -70,29 +70,29 @@ export function $$g6(e, r) {
   for (let e = 0; e < a.length; e++) {
     let n = a[e];
     if (!x(n)) continue;
-    ff(n) || s(178);
+    $isElementNode(n) || s(178);
     let o = r();
     o.setFormat(n.getFormatType());
     o.setIndent(n.getIndent());
     n.replace(o, !0);
   }
 }
-export function $$m0(e, r) {
-  let n = B$(e.focus, r);
-  return Cy(n) && !n.isIsolated() || ff(n) && !n.isInline() && !n.canBeEmpty();
+export function $moveCaretSelection(e, r) {
+  let n = $getAdjacentNode(e.focus, r);
+  return $isDecoratorNode(n) && !n.isIsolated() || $isElementNode(n) && !n.isInline() && !n.canBeEmpty();
 }
 function v(e, r, n, i) {
   e.modify(r ? "extend" : "move", n, i);
 }
-function y(e) {
+function $isParentElementRTL(e) {
   let r = e.anchor.getNode();
-  return "rtl" === (hV(r) ? r : r.getParentOrThrow()).getDirection();
+  return "rtl" === ($isRootNode(r) ? r : r.getParentOrThrow()).getDirection();
 }
-export function $$b2(e, r, n) {
-  let i = y(e);
+export function $moveCharacter(e, r, n) {
+  let i = $isParentElementRTL(e);
   v(e, r, n ? !i : i, "character");
 }
-export function $$O5(e) {
+export function $selectAll(e) {
   let r = e.anchor;
   let n = e.focus;
   let s = r.getNode().getTopLevelElementOrThrow().getParentOrThrow();
@@ -101,20 +101,20 @@ export function $$O5(e) {
   let h = "element";
   let d = "element";
   let p = 0;
-  kF(o) ? h = "text" : ff(o) || null === o || (o = o.getParentOrThrow());
-  kF(a) ? (d = "text", p = a.getTextContentSize()) : ff(a) || null === a || (a = a.getParentOrThrow());
+  $isTextNode(o) ? h = "text" : $isElementNode(o) || null === o || (o = o.getParentOrThrow());
+  $isTextNode(a) ? (d = "text", p = a.getTextContentSize()) : $isElementNode(a) || null === a || (a = a.getParentOrThrow());
   o && a && (r.set(o.getKey(), 0, h), n.set(a.getKey(), p, d));
 }
 function x(e) {
-  if (Cy(e) || !ff(e) || Iq(e)) return !1;
+  if ($isDecoratorNode(e) || !$isElementNode(e) || $isRootOrShadowRoot(e)) return !1;
   let r = e.getFirstChild();
   let n = r?.isInline();
   return !e.isInline() && !1 !== e.canBeEmpty() && n;
 }
-export const Cb = $$m0;
-export const Nx = $$d1;
-export const Rk = $$b2;
-export const SD = $$h3;
-export const Xg = $$p4;
-export const e1 = $$O5;
-export const zI = $$g6;
+export const Cb = $moveCaretSelection;
+export const Nx = isAtNodeEnd;
+export const Rk = $moveCharacter;
+export const SD = $wrapNodes;
+export const Xg = $addNodeStyle;
+export const e1 = $selectAll;
+export const zI = $setBlocksType;

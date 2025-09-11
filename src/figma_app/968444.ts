@@ -1,7 +1,7 @@
 import { FullscreenMode, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
-import { y } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 import { dZ, v7 } from "../figma_app/475303";
 let l = "customKeyboardShortcuts";
 let $$d3 = new Map(Object.entries(FullscreenMode).map(([e, t]) => [e, t]));
@@ -15,7 +15,7 @@ export function $$p1(e, t, r) {
   if (!getFeatureFlags().ce_custom_keyboard_shortcuts) return;
   let d = h();
   let p = dZ.get(v7()) || "UNKNOWN";
-  let _ = y.isApple() ? "mac" : "!mac";
+  let _ = browserCapabilities.isApple() ? "mac" : "!mac";
   let m = c.get(e);
   let g = d[p]?.[_] ?? {};
   let f = u(g, e, t);
@@ -43,7 +43,7 @@ export function $$_0(e, t) {
   if (!getFeatureFlags().ce_custom_keyboard_shortcuts) return;
   let r = h();
   let d = dZ.get(v7()) || "UNKNOWN";
-  let p = y.isApple() ? "mac" : "!mac";
+  let p = browserCapabilities.isApple() ? "mac" : "!mac";
   let _ = c.get(e);
   let m = r[d]?.[p] ?? {};
   let g = u(m, e, t);
@@ -78,7 +78,7 @@ function h() {
 }
 export function $$m2() {
   let e = dZ.get(v7()) || "UNKNOWN";
-  let t = y.isApple() ? "mac" : "!mac";
+  let t = browserCapabilities.isApple() ? "mac" : "!mac";
   let r = h() ?? {};
   return r[e]?.[t] ?? {};
 }

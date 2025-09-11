@@ -1,14 +1,14 @@
-import { D } from "../vendor/24766";
-import { Wn } from "../vendor/693164";
-import { Ey } from "../vendor/408361";
+import { createHeadlessEditor } from "../vendor/24766";
+import { $convertFromMarkdownString } from "../vendor/693164";
+import { TextNode } from "lexical";
 export function $$s0(e) {
   if (!e) return null;
-  let t = D({
-    nodes: [Ey],
-    onError: () => {}
+  let t = createHeadlessEditor({
+    nodes: [TextNode],
+    onError: () => { }
   });
   t.update(() => {
-    Wn(e, []);
+    $convertFromMarkdownString(e, []);
   }, {
     discrete: !0
   });

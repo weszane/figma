@@ -1,71 +1,141 @@
-import { FJ } from "../vendor/491721";
-import { Nx } from "../vendor/850527";
-import { Bt } from "../vendor/425002";
-import { RT, I2, wH } from "../vendor/408361";
-export function $$o2(e) {
-  let t = e.anchor;
-  let i = e.focus;
-  let n = e.anchor.getNode();
-  let a = e.focus.getNode();
-  return n === a ? n : e.isBackward() ? Nx(i) ? n : a : Nx(t) ? n : a;
-}
-export function $$l1(e) {
-  var t = e;
-  /^mailto:/.test(t) || (/^[^\s@\/]+@[^\s@\/]+\.[^\s@\/]+$/.test(t) ? t = `mailto:${t}` : /^https?:\/{2}/.test(t) || (t = `https://${t}`));
-  return t;
-}
-function d(e, t) {
-  if (!t) return !1;
-  let i = e.getRootElement();
-  return !!(i && i.contains(t.startContainer)) && i !== t.startContainer;
-}
-export function $$c4(e, t) {
-  let i = (e._window || window).getSelection();
-  let n = i ? i.getRangeAt(0) : null;
-  return d(e, n) ? n : d(e, t) ? t : null;
-}
-export function $$u0(e, t) {
-  let i = e.getBoundingClientRect();
-  let n = t.getBoundingClientRect();
-  let r = i.left - n.left;
-  return {
-    x: r += i.width / 2,
-    y: i.top - n.top,
-    offScreen: i.top < n.top || i.bottom > n.bottom
-  };
-}
-export function $$p5(e) {
-  if (RT(e)) {
-    let t = e.getNodes();
-    if (0 === t.length) return !1;
-    let i = t[0];
-    let r = i?.getParent();
-    if (FJ(r) || FJ(i)) return !0;
-  } else if (I2(e)) {
-    let t = $$o2(e);
-    let i = Bt(t, FJ);
-    return !!i && !e.getNodes().filter(e => !wH(e)).find(e => {
-      let t = Bt(e, FJ);
-      return i && !i.is(t) || t && !t.is(i);
-    });
+import type { LexicalEditor, RangeSelection } from 'lexical'
+import { $isLinkNode } from '@lexical/link'
+import { $isAtNodeEnd } from '@lexical/selection'
+import { $isLineBreakNode, $isNodeSelection, $isRangeSelection } from 'lexical'
+import { $findMatchingParent } from '../vendor/425002'
+
+/**
+ * Returns the anchor or focus node depending on selection direction and position.
+ * Original: $$o2
+ */
+export function getRelevantSelectionNode(selection: RangeSelection): any {
+  const anchor = selection.anchor
+  const focus = selection.focus
+  const anchorNode = anchor.getNode()
+  const focusNode = focus.getNode()
+
+  if (anchorNode === focusNode)
+    return anchorNode
+
+  if (selection.isBackward()) {
+    return $isAtNodeEnd(focus) ? anchorNode : focusNode
   }
-  return !1;
+  return $isAtNodeEnd(anchor) ? anchorNode : focusNode
 }
-export function $$m3(e) {
-  let t = null;
-  let i = null;
-  if (I2(e)) {
-    t = $$o2(e);
-    i = Bt(t, FJ);
-  } else if (RT(e)) {
-    let n = e.getNodes();
-    n.length > 0 && (t = n[0], i = t?.getParent());
+
+/**
+ * Normalizes a string to a mailto or https URL.
+ * Original: $$l1
+ */
+export function normalizeUrl(input: string): string {
+  let url = input
+  if (url.startsWith('mailto:'))
+    return url
+  if (/^[^\s@/]+@[^\s/@][^\s./@]*\.[^\s/@]+$/.test(url)) {
+    url = `mailto:${url}`
   }
-  return FJ(i) ? i.getURL() : FJ(t) ? t.getURL() : "";
+  else if (!/^https?:\/{2}/.test(url)) {
+    url = `https://${url}`
+  }
+  return url
 }
-export const Bu = $$u0;
-export const Jf = $$l1;
-export const OL = $$o2;
-export const _Y = $$m3;
-export const fF = $$c4;
-export const oN = $$p5;
+
+/**
+ * Checks if the selection is within the root element but not the root itself.
+ * Original: d
+ */
+function isSelectionWithinRoot(editor: LexicalEditor, range: any): boolean {
+  if (!range)
+    return false
+  const root = editor.getRootElement()
+  return !!(root && root.contains(range.startContainer)) && root !== range.startContainer
+}
+
+/**
+ * Returns the most relevant selection range within the editor.
+ * Original: $$c4
+ */
+export function getRelevantSelectionRange(editor: LexicalEditor, range: any): any {
+  const win = editor._window || window
+  const selection = win.getSelection()
+  const currentRange = selection ? selection.getRangeAt(0) : null
+
+  if (isSelectionWithinRoot(editor, currentRange))
+    return currentRange
+  if (isSelectionWithinRoot(editor, range))
+    return range
+  return null
+}
+
+/**
+ * Calculates the position and off-screen status of an element relative to another.
+ * Original: $$u0
+ */
+export function getRelativePosition(element: HTMLElement, container: HTMLElement): { x: number, y: number, offScreen: boolean } {
+  const elementRect = element.getBoundingClientRect()
+  const containerRect = container.getBoundingClientRect()
+  const x = elementRect.left - containerRect.left + elementRect.width / 2
+  const y = elementRect.top - containerRect.top
+  const offScreen = elementRect.top < containerRect.top || elementRect.bottom > containerRect.bottom
+  return { x, y, offScreen }
+}
+
+/**
+ * Determines if the selection is entirely within a link node.
+ * Original: $$p5
+ */
+export function isSelectionWithinLink(selection: RangeSelection): boolean {
+  if ($isNodeSelection(selection)) {
+    const nodes = selection.getNodes()
+    if (nodes.length === 0)
+      return false
+    const firstNode = nodes[0]
+    const parent = firstNode?.getParent()
+    if ($isLinkNode(parent) || $isLinkNode(firstNode))
+      return true
+  }
+  else if ($isRangeSelection(selection)) {
+    const relevantNode = getRelevantSelectionNode(selection)
+    const linkParent = $findMatchingParent(relevantNode, $isLinkNode)
+    return !!linkParent && !selection.getNodes().filter(node => !$isLineBreakNode(node)).find((node) => {
+      const nodeLinkParent = $findMatchingParent(node, $isLinkNode)
+      return (linkParent && !linkParent.is(nodeLinkParent)) || (nodeLinkParent && !nodeLinkParent.is(linkParent))
+    })
+  }
+  return false
+}
+
+/**
+ * Gets the URL from the link node in the selection, if any.
+ * Original: $$m3
+ */
+export function getSelectionLinkUrl(selection: any): string {
+  let node: any = null
+  let linkNode: any = null
+
+  if ($isRangeSelection(selection)) {
+    node = getRelevantSelectionNode(selection)
+    linkNode = $findMatchingParent(node, $isLinkNode)
+  }
+  else if ($isNodeSelection(selection)) {
+    const nodes = selection.getNodes()
+    if (nodes.length > 0) {
+      node = nodes[0]
+      linkNode = node?.getParent()
+    }
+  }
+
+  if ($isLinkNode(linkNode))
+    return linkNode.getURL()
+  if ($isLinkNode(node))
+    return node.getURL()
+  return ''
+}
+
+// Refactored exports with new names
+export const Bu = getRelativePosition
+export const Jf = normalizeUrl
+export const OL = getRelevantSelectionNode
+export const _Y = getSelectionLinkUrl
+export const fF = getRelevantSelectionRange
+export const oN = isSelectionWithinLink

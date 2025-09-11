@@ -9,7 +9,7 @@ import { deepEqual } from "../905/382883";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { $n } from "../905/521428";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/365108";
 import { x as _$$x } from "../905/149501";
@@ -3411,7 +3411,7 @@ function nU({
         "aria-label": getI18nString("sites.code_component.add_to_canvas"),
         onClick: t,
         children: getI18nString("sites.code_component.add_to_canvas")
-      }), X && jsx(_$$f, {
+      }), X && jsx(setupToggleButton, {
         variant: "highlighted",
         checked: !l,
         onIcon: jsx(_$$O, {}),

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { _ as _$$_ } from "../figma_app/496441";
 import { Gc } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { h1 } from "../905/986103";
 import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
@@ -123,7 +123,7 @@ export function $$F1(e, t) {
               })]
             }), jsx("div", {
               className: CK,
-              children: $J(t.description)
+              children: stripHtmlTags(t.description)
             })]
           })]
         }), e.community_publishers?.accepted && e.community_publishers.accepted.length > 0 ? jsx("div", {

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { getFeatureFlags } from "../905/601108";
 import { At } from "../905/973142";
-import { j_, El } from "../figma_app/9619";
+import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
 import { C, A } from "../figma_app/686450";
 import { useSetupPlayback } from "../figma_app/878298";
 export function $$d0({
@@ -15,12 +15,12 @@ export function $$d0({
   recordingKey: m
 }) {
   let h = useSetupPlayback(m, "onInputChange", e => {
-    let t = "lexical" === j_(e) ? El(e) : At(e);
+    let t = "lexical" === detectEditorStateFormat(e) ? parseEditorStateToPlainText(e) : At(e);
     c(e, t);
   });
   if (i && "" === t) return null;
   let g = t.replace(/&quot;/g, '"');
-  let f = j_(g);
+  let f = detectEditorStateFormat(g);
   return i ? jsx("div", {
     className: "rich_text_description_input--lexicalInputViewOnly--TBniB",
     children: jsx(C, {

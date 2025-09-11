@@ -1,35 +1,94 @@
-import { BrowserInfo } from "../figma_app/778880";
-import { y } from "../905/409121";
-export function $$a1(e) {
-  if (!e.keyShortcutKey) return "";
-  let t = y.isApple();
-  var i = t ? "\u2318" : "Ctrl+";
-  e.keyShortcutShift && (i += t ? "\u21E7" : "Shift+");
-  e.keyShortcutOption && (i += t ? "\u2325" : BrowserInfo.chromeos ? "Search+" : "Alt+");
-  return `   ${i}${e.keyShortcutKey}`;
+import { browserCapabilities } from '../905/409121'
+import { BrowserInfo } from '../figma_app/778880'
+
+/**
+ * Represents the structure for shortcut key information.
+ */
+export interface ShortcutKeyInfo {
+  keyShortcutKey?: string
+  keyShortcutShift?: boolean
+  keyShortcutOption?: boolean
 }
-export function $$s0(e) {
-  if (!e) return "";
-  if (e.length < 1 || "<" !== e.charAt(0) || ">" !== e.charAt(e.length - 1)) return e;
-  var t = e.replace(/(<\/[ph]\d?>)/g, "\n");
-  return (t = (t = t.replace(/(<([^>]+)>)/gi, "")).replace(/&nbsp;/g, "\xa0")).replace(/&amp;/g, "&");
+
+/**
+ * Formats a keyboard shortcut string based on browser and OS.
+ * Original: $$a1
+ * @param shortcut ShortcutKeyInfo object
+ * @returns Formatted shortcut string
+ */
+export function formatShortcutKey(shortcut: ShortcutKeyInfo): string {
+  if (!shortcut.keyShortcutKey)
+    return ''
+  const isApple = browserCapabilities.isApple()
+  let result = isApple ? '\u2318' : 'Ctrl+'
+  if (shortcut.keyShortcutShift)
+    result += isApple ? '\u21E7' : 'Shift+'
+  if (shortcut.keyShortcutOption)
+    result += isApple ? '\u2325' : BrowserInfo.chromeos ? 'Search+' : 'Alt+'
+  return `   ${result}${shortcut.keyShortcutKey}`
 }
-let o = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/g;
-let l = /^(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$/;
-export function $$d4(e) {
-  return new RegExp(l).test(e.trim());
+
+/**
+ * Removes HTML tags and decodes entities from a string.
+ * Original: $$s0
+ * @param input Input string
+ * @returns Cleaned string
+ */
+export function stripHtmlTags(input: string): string {
+  if (!input)
+    return ''
+  if (input.length < 1 || input.charAt(0) !== '<' || input.charAt(input.length - 1) !== '>')
+    return input
+  let result = input.replace(/(<\/[ph]\d?>)/g, '\n')
+  result = result.replace(/(<([^>]+)>)/g, '')
+  result = result.replace(/&nbsp;/g, '\xA0')
+  return result.replace(/&amp;/g, '&')
 }
-export function $$c3(e) {
-  if (!e) return "";
-  if (e.length > 2 && "<" === e.charAt(0) && ">" === e.charAt(e.length - 1)) return e;
-  var t = e.replace(/^.*/gm, "<p>$&</p>");
-  return (t = (t = t.replace(o, e => `<a href="${e}">${e}</a>`)).replace(/<p><\/p>/g, "<p><br></p>")).replace(/(\r\n|\n|\r)/gm, "");
+
+const urlPattern = /(http(s)?:\/\/.)?(www\.)?[-\w@:%.+~#=]{2,256}\.[a-z]{2,6}\b([-\w@:%+.~#?&/=]*)/g
+// eslint-disable-next-line regexp/no-unused-capturing-group
+const strictUrlPattern = /^(http(s)?:\/\/.)?(www\.)?[-\w@:%.+~#=]{2,256}\.[a-z]{2,6}\b([-\w@:%+.~#?&/=]*)$/
+
+/**
+ * Checks if a string is a valid URL.
+ * Original: $$d4
+ * @param url Input string
+ * @returns True if valid URL, else false
+ */
+export function isValidUrl(url: string): boolean {
+  return new RegExp(strictUrlPattern).test(url.trim())
 }
-export function $$u2(e) {
-  return "" === $$s0(e)?.trim();
+
+/**
+ * Converts plain text to HTML paragraphs and links URLs.
+ * Original: $$c3
+ * @param text Input string
+ * @returns HTML string
+ */
+export function textToHtmlParagraphs(text: string): string {
+  if (!text)
+    return ''
+  if (text.length > 2 && text.charAt(0) === '<' && text.charAt(text.length - 1) === '>')
+    return text
+  let result = text.replace(/^.*/gm, '<p>$&</p>')
+  result = result.replace(urlPattern, match => `<a href="${match}">${match}</a>`)
+  result = result.replace(/<p><\/p>/g, '<p><br></p>')
+  return result.replace(/(\r\n|\n|\r)/g, '')
 }
-export const $J = $$s0;
-export const OZ = $$a1;
-export const ZB = $$u2;
-export const mm = $$c3;
-export const mv = $$d4;
+
+/**
+ * Checks if the stripped HTML string is empty.
+ * Original: $$u2
+ * @param input Input string
+ * @returns True if empty, else false
+ */
+export function isStrippedHtmlEmpty(input: string): boolean {
+  return stripHtmlTags(input)?.trim() === ''
+}
+
+// Export aliases for backward compatibility
+export const $J = stripHtmlTags // $$s0
+export const OZ = formatShortcutKey // $$a1
+export const ZB = isStrippedHtmlEmpty // $$u2
+export const mm = textToHtmlParagraphs // $$c3
+export const mv = isValidUrl // $$d4

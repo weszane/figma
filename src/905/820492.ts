@@ -14,7 +14,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { buildUploadUrl } from "../figma_app/169182";
-import { ZB } from "../905/491152";
+import { isStrippedHtmlEmpty } from "../905/491152";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { useSprigWithSampling } from "../905/99656";
@@ -1040,7 +1040,7 @@ class ts extends Component {
           }), getFeatureFlags().cmty_hub_file_creator_policy && jsx(_$$A10, {
             defaultValue: this.state.unDebouncedCreatorPolicy,
             onChange: e => {
-              let t = ZB(e) ? "" : e;
+              let t = isStrippedHtmlEmpty(e) ? "" : e;
               this.setState({
                 unDebouncedCreatorPolicy: t
               });

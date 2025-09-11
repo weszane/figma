@@ -1,10 +1,10 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect, Suspense } from "react";
-import { DF } from "../vendor/463802";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { Y } from "../vendor/435990";
-import { Sd } from "../vendor/425002";
+import { mergeRegister } from "../vendor/425002";
 import d from "classnames";
-import { RT, vJ, ns, Mv, Ac, d8, Tg, w$, gC } from "../vendor/408361";
+import { $isNodeSelection, $getSelection, $getNodeByKey, SELECTION_CHANGE_COMMAND, COMMAND_PRIORITY_LOW, CLICK_COMMAND, DRAGSTART_COMMAND, KEY_DELETE_COMMAND, KEY_BACKSPACE_COMMAND } from "lexical";
 import { oW } from "../905/675859";
 import { Eh } from "../940032c6/718024";
 var i = d;
@@ -52,33 +52,33 @@ export function $$b0({
 }) {
   let c = useRef(null);
   let [m, b, h] = Y(n);
-  let [C] = DF();
+  let [C] = useLexicalComposerContext();
   let [_, w] = useState(null);
   let p = useRef(null);
   let v = useCallback(e => {
-    if (m && RT(vJ())) {
+    if (m && $isNodeSelection($getSelection())) {
       e.preventDefault();
-      let r = ns(n);
+      let r = $getNodeByKey(n);
       Eh(r) && r.remove();
     }
     return !1;
   }, [m, n]);
   useEffect(() => {
     let e = !0;
-    let r = Sd(C.registerUpdateListener(({
+    let r = mergeRegister(C.registerUpdateListener(({
       editorState: r
     }) => {
       if (e) {
-        let e = r.read(() => vJ());
-        (RT(e) || null === e) && w(e);
+        let e = r.read(() => $getSelection());
+        ($isNodeSelection(e) || null === e) && w(e);
       }
-    }), C.registerCommand(Mv, (e, r) => (p.current = r, !1), Ac), C.registerCommand(d8, e => e.target === c.current && (e.shiftKey ? b(!m) : (h(), b(!0)), !0), Ac), C.registerCommand(Tg, e => e.target === c.current && (e.preventDefault(), !0), Ac), C.registerCommand(w$, v, Ac), C.registerCommand(gC, v, Ac));
+    }), C.registerCommand(SELECTION_CHANGE_COMMAND, (e, r) => (p.current = r, !1), COMMAND_PRIORITY_LOW), C.registerCommand(CLICK_COMMAND, e => e.target === c.current && (e.shiftKey ? b(!m) : (h(), b(!0)), !0), COMMAND_PRIORITY_LOW), C.registerCommand(DRAGSTART_COMMAND, e => e.target === c.current && (e.preventDefault(), !0), COMMAND_PRIORITY_LOW), C.registerCommand(KEY_DELETE_COMMAND, v, COMMAND_PRIORITY_LOW), C.registerCommand(KEY_BACKSPACE_COMMAND, v, COMMAND_PRIORITY_LOW));
     return () => {
       e = !1;
       r();
     };
   }, [h, C, m, n, b, v]);
-  let k = m && RT(_);
+  let k = m && $isNodeSelection(_);
   return jsx(Suspense, {
     fallback: null,
     children: jsx(Fragment, {

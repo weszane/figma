@@ -105,7 +105,7 @@ import { jN } from "../905/612685";
 import { Qn, mz, KQ, lk as _$$lk, qE } from "../figma_app/415217";
 import { A as _$$A3 } from "../svg/756305";
 import { e as _$$e2 } from "../905/383776";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { A as _$$A4 } from "../vendor/648136";
 import { _m } from "../vendor/891888";
 import { useExposedRef } from "../905/581092";
@@ -234,7 +234,7 @@ import { E as _$$E4 } from "../905/984674";
 import { Gw, FB } from "../vendor/149334";
 import { capitalize } from "../figma_app/930338";
 import { Nf, lA as _$$lA, ro as _$$ro, M4, lU as _$$lU, RI } from "../figma_app/624323";
-import { j_ } from "../figma_app/9619";
+import { detectEditorStateFormat } from "../figma_app/9619";
 import { C as _$$C } from "../figma_app/686450";
 import { d as _$$d4 } from "../905/86829";
 import { D6, kF } from "../1528/377549";
@@ -313,7 +313,7 @@ import { QE } from "../figma_app/914216";
 import { Td } from "../905/595131";
 import { Ov } from "../figma_app/598952";
 import { c as _$$c6 } from "../905/486270";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { G as _$$G2 } from "../905/178509";
 import { wJ } from "../figma_app/630951";
 import { t as _$$t4 } from "../905/241707";
@@ -2667,7 +2667,7 @@ function nY({
         },
         children: [jsx(nI, {
           column: 0,
-          children: e.entry.children ? jsx(_$$f, {
+          children: e.entry.children ? jsx(setupToggleButton, {
             onIcon: jsx(_$$O2, {}),
             offIcon: jsx(_$$k3, {}),
             checked: e.collapsed,
@@ -4775,7 +4775,7 @@ function oR({
       className: "asset_documentation_panel--documentationRt--dqAKD",
       children: [jsx(_$$C, {
         value: e,
-        valueFormat: j_(e),
+        valueFormat: detectEditorStateFormat(e),
         namespace: "asset-documentation-panel-lexical-editor-readonly",
         lexicalContentClassName: r ? D6 : kF,
         innerRef: l
@@ -6600,7 +6600,7 @@ function sB() {
   let {
     description
   } = lq();
-  let t = useMemo(() => description ? $J(description) : void 0, [description]);
+  let t = useMemo(() => description ? stripHtmlTags(description) : void 0, [description]);
   return jsx(VZ, {
     title: getI18nString("inspect_panel.component_information"),
     recordingKey: "componentPanel",
@@ -12975,7 +12975,7 @@ function fp() {
         onModalWillOpen: selectFocusNodeForInteractiveInspection,
         onModalDidClose: doneChangingFocusNodeForInteractiveInspection,
         displayModeDropdown: !0
-      }), jsx(_$$f, {
+      }), jsx(setupToggleButton, {
         "aria-label": getI18nString("dev_handoff.workflows.focus_view.reset_button_tooltip"),
         onChange: () => {
           HandoffBindingsCpp?.resetFocusViewInteractiveInspection();

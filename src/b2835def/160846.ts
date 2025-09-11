@@ -120,7 +120,7 @@ import { hl, Vb, i as _$$i2, xI, CL } from "../figma_app/722913";
 import { yT } from "../figma_app/836943";
 import { dD } from "../figma_app/941824";
 import { K as _$$K4 } from "../905/443068";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { f as _$$f2 } from "../905/335032";
 import { W as _$$W3 } from "../905/63398";
 import { Y as _$$Y } from "../905/701291";
@@ -362,7 +362,7 @@ function tk(e) {
     orientation,
     setOrientation
   } = hl(e.defaultStyleAtom);
-  return jsx(_$$f, {
+  return jsx(setupToggleButton, {
     onChange: e => setOrientation(e ? "FORWARD" : "REVERSE"),
     checked: "FORWARD" === orientation,
     "aria-label": getI18nString("fullscreen.properties_panel.direction"),

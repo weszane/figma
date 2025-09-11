@@ -34,7 +34,7 @@ import { pz, vC, D5, wP, X6, Mo, rb, xQ, w0, $I, ON, hW, jE } from "../figma_app
 import { tJ, G3, iq, AF, Pr, Cm } from "../figma_app/80782";
 import { O9 } from "../figma_app/522930";
 import { R as _$$R } from "../figma_app/313269";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { PreviewMode } from "../figma_app/707808";
 import { Z as _$$Z } from "../figma_app/684783";
 import { L as _$$L, I as _$$I } from "../1577/16430";
@@ -366,7 +366,7 @@ function en(e) {
         className: "browse_templates_modal_resource_preview--metadataContainer--GipYm",
         children: [jsxs("div", {
           className: "browse_templates_modal_resource_preview--description--EuZxv",
-          children: [$J(o.description).trim().length > 0 && jsx(_$$R, {
+          children: [stripHtmlTags(o.description).trim().length > 0 && jsx(_$$R, {
             fallback: null,
             errorFallback: null,
             value: o.description

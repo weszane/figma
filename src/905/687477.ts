@@ -1,7 +1,7 @@
 import { b5, Fo, Uz, wQ } from '../905/63728';
 import { eb, IL, No, pP, xC } from '../905/392533';
 import { debugState } from '../905/407919';
-import { y as _$$y } from '../905/409121';
+import { browserCapabilities } from '../905/409121';
 import { trackEventAnalytics } from '../905/449184';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { getFeatureFlags } from '../905/601108';
@@ -446,7 +446,7 @@ class W {
     document.addEventListener('keydown', H(e => {
       if (this.isHandlingDoubleInputForMicrosoftIMEFix = !1, this.lastKeydownEventAccepted = !1, this.lastKeydownEventForwarded = !1, isDebugSelectedFigmakeFullscreen()) {
         if (er(e.target)) return;
-        let t = _$$y.isMac();
+        let t = browserCapabilities.isMac();
         let i = (t ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'z' && !e.shiftKey;
         let n = (t ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'z' && e.shiftKey;
         if (i || n) {
@@ -467,14 +467,14 @@ class W {
           this.lastKeydown = e.key;
           this.lastKeydownEventForwarded = !0;
           this.isLastKeydownUnreleased = !0;
-          this.cppAPI.keyboardEvent(EventTypeEnum.KEY_PRESS, n, e.which, t, a, e.code, ed(), v7()) ? (this.lastKeydownEventAccepted = !0, e.which === 8 && _$$y.isIpad() ? this.isHandlingBackspaceKeyForIPadKoreanInputFix = !0 : e.preventDefault()) : i && (this.cppAPI.focusViewInTabOrder(n, e.shiftKey ? PageNavigation.PREVIOUS : PageNavigation.NEXT), this.lastKeydownEventAccepted = !0, e.preventDefault());
+          this.cppAPI.keyboardEvent(EventTypeEnum.KEY_PRESS, n, e.which, t, a, e.code, ed(), v7()) ? (this.lastKeydownEventAccepted = !0, e.which === 8 && browserCapabilities.isIpad() ? this.isHandlingBackspaceKeyForIPadKoreanInputFix = !0 : e.preventDefault()) : i && (this.cppAPI.focusViewInTabOrder(n, e.shiftKey ? PageNavigation.PREVIOUS : PageNavigation.NEXT), this.lastKeydownEventAccepted = !0, e.preventDefault());
         } catch (t) {
           e.preventDefault();
         }
       }
     }), !0);
     document.addEventListener('keyup', G(e => {
-      if (e.which === 8 && _$$y.isIpad() && (this.isHandlingBackspaceKeyForIPadKoreanInputFix = !1), F2.shouldInterceptKeyboardEvent(e) || ((ee(e) || et(e)) && e.preventDefault(), !this.isLastKeydownUnreleased && this.shouldIgnoreKeyboardEvent(e))) return;
+      if (e.which === 8 && browserCapabilities.isIpad() && (this.isHandlingBackspaceKeyForIPadKoreanInputFix = !1), F2.shouldInterceptKeyboardEvent(e) || ((ee(e) || et(e)) && e.preventDefault(), !this.isLastKeydownUnreleased && this.shouldIgnoreKeyboardEvent(e))) return;
       e.isComposing || (this.lastKeydown = null);
       let t = this.viewHandleFromElement(e.target);
       this.isLastKeydownUnreleased = !1;
@@ -528,14 +528,14 @@ class W {
       let t = e.deltaX;
       let a = e.deltaY;
       let o = e.deltaMode !== 0;
-      if (!_$$y.isMac() && e.shiftKey) {
+      if (!browserCapabilities.isMac() && e.shiftKey) {
         let e = a;
         a = t;
         t = e;
       }
       let d = 0;
       let c = 0;
-      if ('wheelDeltaY' in e && (d = e.wheelDeltaX, c = e.wheelDeltaY, !_$$y.isMac() && e.shiftKey)) {
+      if ('wheelDeltaY' in e && (d = e.wheelDeltaX, c = e.wheelDeltaY, !browserCapabilities.isMac() && e.shiftKey)) {
         let e = c;
         c = d;
         d = e;
@@ -544,11 +544,11 @@ class W {
       a = -a;
       let u = !e.ctrlKey;
       let p = !Number.isInteger(t) || !Number.isInteger(a);
-      _$$y.isIpad() ? u = !0 : _$$y.isSafari() || _$$y.isChrome() ? u = !p : _$$y.isFirefox() && (u = !p && a % 16 != 0, t !== 0 && t !== 0 && (u = !0));
+      browserCapabilities.isIpad() ? u = !0 : browserCapabilities.isSafari() || browserCapabilities.isChrome() ? u = !p : browserCapabilities.isFirefox() && (u = !p && a % 16 != 0, t !== 0 && t !== 0 && (u = !0));
       let m = window.devicePixelRatio;
-      if (_$$y.isChromePre118() && (t /= m, a /= m, d /= m, c /= m), _$$y.isIpad() && (t /= m, a /= m), _$$y.isChromeOS()) {
+      if (browserCapabilities.isChromePre118() && (t /= m, a /= m, d /= m, c /= m), browserCapabilities.isIpad() && (t /= m, a /= m), browserCapabilities.isChromeOS()) {
         e.ctrlKey && c % 120 == 0 && (a *= 5);
-      } else if (_$$y.isWindows() && (fullscreenValue.pinchZoomFixDisabled() || !p) && (_$$y.isChrome() ? (t = d, a = c) : _$$y.isFirefox() && o && (t *= 40, a *= 40), Math.abs(t) >= 99 || Math.abs(a) >= 99)) {
+      } else if (browserCapabilities.isWindows() && (fullscreenValue.pinchZoomFixDisabled() || !p) && (browserCapabilities.isChrome() ? (t = d, a = c) : browserCapabilities.isFirefox() && o && (t *= 40, a *= 40), Math.abs(t) >= 99 || Math.abs(a) >= 99)) {
         t /= 120;
         a /= 120;
         let r = e.timeStamp / 1e3;
@@ -570,9 +570,9 @@ class W {
       this.cppAPI.mouseEvent(EventTypeEnum.MOUSE_WHEEL, h.x, h.y, e.button, e.buttons, 0, this.modifierKeys(e), t, a, 0, u ? PointerType.TRACKPAD : PointerType.MOUSE, -1, e.timeStamp, -1) && e.preventDefault();
     }), {
       passive: !1
-    }), _$$y.isIpadNative() && this.setupIPadSideChannelEvents(), $$eu0.usingMultiTouchPointerEvents()) {
+    }), browserCapabilities.isIpadNative() && this.setupIPadSideChannelEvents(), $$eu0.usingMultiTouchPointerEvents()) {
       this.setupMultiTouchPointerEvents();
-    } else if (_$$y.isIpad()) {
+    } else if (browserCapabilities.isIpad()) {
       this.setupLowLevelPointerEvents();
     } else {
       let t = window.PointerEvent && getFeatureFlags().ce_il_pressure_sensitivity && !isMobileUA;
@@ -593,8 +593,8 @@ class W {
         this.cppAPI.preciseMouseEvent(EventTypeEnum.MOUSE_RELEASE, i.x, i.y, i.preciseX, i.preciseY, t, e.buttons, 1, this.modifierKeys(e), 0, 0, 0, PointerType.MOUSE, -1, e.timeStamp, -1) && e.preventDefault();
       };
       document.addEventListener(t ? 'pointerenter' : 'mouseenter', G(e => {
-        _$$y.isChrome() && !ea(e) && this.middleButtonPressedLast && s(e, 1);
-        _$$y.isChrome() && !es(e) && this.rightButtonPressedLast && s(e, 2);
+        browserCapabilities.isChrome() && !ea(e) && this.middleButtonPressedLast && s(e, 1);
+        browserCapabilities.isChrome() && !es(e) && this.rightButtonPressedLast && s(e, 2);
       }));
       document.addEventListener(t ? 'pointermove' : 'mousemove', G(e => {
         this.cppAPI.setIsUsingTouchEvents(!1);
@@ -774,7 +774,7 @@ class W {
       capture: !0
     }), document.addEventListener('pointercancel', G(e => {
       this.pointerState && (this.pointerState = this.pointerState.next(e));
-    })), _$$y.isIpad() && (this.viewElement.addEventListener('touchmove', wo), this.viewElement.addEventListener('touchstart', wo, {
+    })), browserCapabilities.isIpad() && (this.viewElement.addEventListener('touchmove', wo), this.viewElement.addEventListener('touchstart', wo, {
       passive: !1
     }))) : (this.viewElement.addEventListener('mousedown', G(e), {
       passive: !1
@@ -787,7 +787,7 @@ class W {
       passive: !1,
       capture: !0
     }));
-    _$$y.isIpad() || this.setupGestureEvents();
+    browserCapabilities.isIpad() || this.setupGestureEvents();
     fullscreenValue.allowWebGestures = e => {
       this.pointerState && this.pointerState.allow && (this.pointerState = this.pointerState.allow(e));
     };
@@ -862,7 +862,7 @@ class W {
     });
   }
   setupGestureEvents() {
-    _$$y.isSafari() && (document.addEventListener('gesturestart', G(e => {
+    browserCapabilities.isSafari() && (document.addEventListener('gesturestart', G(e => {
       e.preventDefault();
       this.lastGestureScale = 1;
     })), document.addEventListener('gesturechange', G(e => {
@@ -994,7 +994,7 @@ class W {
   customFocusElementFor(e) {
     if ($$eu0.customFocusElementReadWrite === null) {
       let e;
-      for (let t of (getFeatureFlags().ce_tv_contenteditable_focus_element ? (e = document.createElement('div')).contentEditable = 'plaintext-only' : e = document.createElement('textarea'), $$eu0.customFocusElementReadWrite = e, _$$y.isChrome() && (e instanceof HTMLTextAreaElement ? e.value = en() : e.textContent = en()), e.tabIndex = -1, e instanceof HTMLTextAreaElement && (e.wrap = 'off'), e.ariaHidden = 'true', e.setAttribute('spellcheck', 'false'), e.setAttribute('autocorrect', 'off'), $$eu0.customFocusElementReadOnly = document.createElement('input'), $$eu0.customFocusElementReadOnly.readOnly = !0, $$eu0.customFocusElementReadOnly.tabIndex = -1, $$eu0.customFocusElementReadOnly.ariaHidden = 'true', $$eu0.customFocusElementReadOnly.role = 'application', $$eu0.customFocusElementReadOnly.style.top = '-200px', F2.setCustomFocusElement({
+      for (let t of (getFeatureFlags().ce_tv_contenteditable_focus_element ? (e = document.createElement('div')).contentEditable = 'plaintext-only' : e = document.createElement('textarea'), $$eu0.customFocusElementReadWrite = e, browserCapabilities.isChrome() && (e instanceof HTMLTextAreaElement ? e.value = en() : e.textContent = en()), e.tabIndex = -1, e instanceof HTMLTextAreaElement && (e.wrap = 'off'), e.ariaHidden = 'true', e.setAttribute('spellcheck', 'false'), e.setAttribute('autocorrect', 'off'), $$eu0.customFocusElementReadOnly = document.createElement('input'), $$eu0.customFocusElementReadOnly.readOnly = !0, $$eu0.customFocusElementReadOnly.tabIndex = -1, $$eu0.customFocusElementReadOnly.ariaHidden = 'true', $$eu0.customFocusElementReadOnly.role = 'application', $$eu0.customFocusElementReadOnly.style.top = '-200px', F2.setCustomFocusElement({
         addFocusChangedCallback(e) {
           $$eu0.customFocusElementReadWrite && ($$eu0.customFocusElementReadWrite.addEventListener('focus', () => {
             e(!0);
@@ -1012,7 +1012,7 @@ class W {
       }), $$eu0.customFocusElementReadWrite.addEventListener('focus', () => {
         $$eu0.customFocusElementReadWrite && ($$eu0.customFocusElementReadWrite.ariaHidden = 'false');
       }), $$eu0.customFocusElementReadWrite.addEventListener('blur', () => {
-        $$eu0.customFocusElementReadWrite && ($$eu0.customFocusElementReadWrite.ariaHidden = 'true', $$eu0.customFocusElementReadWrite instanceof HTMLTextAreaElement ? $$eu0.customFocusElementReadWrite.value = _$$y.isChrome() ? en() : '' : $$eu0.customFocusElementReadWrite.textContent = _$$y.isChrome() ? en() : '');
+        $$eu0.customFocusElementReadWrite && ($$eu0.customFocusElementReadWrite.ariaHidden = 'true', $$eu0.customFocusElementReadWrite instanceof HTMLTextAreaElement ? $$eu0.customFocusElementReadWrite.value = browserCapabilities.isChrome() ? en() : '' : $$eu0.customFocusElementReadWrite.textContent = browserCapabilities.isChrome() ? en() : '');
       }), [$$eu0.customFocusElementReadWrite, $$eu0.customFocusElementReadOnly])) {
         t.addEventListener('keydown', G(e => {
           try {
@@ -1058,16 +1058,16 @@ class W {
           this.lastCompositionInputEvent = 'compositionend';
           this.isComposing = !1;
           this.lastCompositionEndValue = this.previousComposition;
-          this.isHandlingDoubleInputForMicrosoftIMEFix = _$$y.isWindows() && !0 === getFeatureFlags().ce_microsoft_ime_fix;
+          this.isHandlingDoubleInputForMicrosoftIMEFix = browserCapabilities.isWindows() && !0 === getFeatureFlags().ce_microsoft_ime_fix;
           t === 'input' && e();
         }));
         t.addEventListener('beforeinput', G(e => {
-          if (this.cppAPI.getViewWantsTextEvents(this.currentViewHandleWithFocus) && (_$$y.isMac() || _$$y.isIpad() || _$$y.isMeetDevice() || _$$y.isiOS() || _$$y.isWindows())) {
+          if (this.cppAPI.getViewWantsTextEvents(this.currentViewHandleWithFocus) && (browserCapabilities.isMac() || browserCapabilities.isIpad() || browserCapabilities.isMeetDevice() || browserCapabilities.isiOS() || browserCapabilities.isWindows())) {
             let i;
             let n;
             let a = e.data;
             if (!a) {
-              e.inputType === 'deleteContentBackward' && !this.isComposing && (_$$y.isIpad() || _$$y.isMeetDevice()) && !this.isHandlingBackspaceKeyForIPadKoreanInputFix && (t instanceof HTMLTextAreaElement ? this.simulatedPreviousComposition = t.value.slice(-1) : this.simulatedPreviousComposition = t.textContent?.slice(-1) ?? '');
+              e.inputType === 'deleteContentBackward' && !this.isComposing && (browserCapabilities.isIpad() || browserCapabilities.isMeetDevice()) && !this.isHandlingBackspaceKeyForIPadKoreanInputFix && (t instanceof HTMLTextAreaElement ? this.simulatedPreviousComposition = t.value.slice(-1) : this.simulatedPreviousComposition = t.textContent?.slice(-1) ?? '');
               return;
             }
             if (this.isHandlingDoubleInputForMicrosoftIMEFix && (e.data === null && e.inputType === 'deleteContentBackward' || e.inputType === 'insertText')) {
@@ -1091,12 +1091,12 @@ class W {
               let t = this.viewHandleFromElement(e.target);
               this.cppAPI.keyboardEvent(EventTypeEnum.KEY_PRESS, t, 8, 0, !1, 'Backspace', ed(), v7());
             } else {
-              _$$y.isIpad() || _$$y.isiOS() ? i && !this.isComposing && (this.simulatedPreviousComposition = n) : e.inputType === 'insertReplacementText' && _$$y.isSafari() && _$$y.isMac() && !_$$y.isIpad() && !_$$y.isIpadNative() && !_$$y.isiOS() && i && !this.isComposing && (this.simulatedPreviousComposition = n);
+              browserCapabilities.isIpad() || browserCapabilities.isiOS() ? i && !this.isComposing && (this.simulatedPreviousComposition = n) : e.inputType === 'insertReplacementText' && browserCapabilities.isSafari() && browserCapabilities.isMac() && !browserCapabilities.isIpad() && !browserCapabilities.isIpadNative() && !browserCapabilities.isiOS() && i && !this.isComposing && (this.simulatedPreviousComposition = n);
             }
           }
         }));
         t.addEventListener('input', G(i => {
-          if (i.data === null && i.inputType === 'deleteContentBackward' && _$$y.isIpad() && this.isHandlingBackspaceKeyForIPadKoreanInputFix) {
+          if (i.data === null && i.inputType === 'deleteContentBackward' && browserCapabilities.isIpad() && this.isHandlingBackspaceKeyForIPadKoreanInputFix) {
             this.isHandlingBackspaceKeyForIPadKoreanInputFix = !1;
             return;
           }
@@ -1168,13 +1168,13 @@ class W {
   modifierKeys(e) {
     if (!eo(e)) return 0;
     let t = e.altKey && (e.which === 18 && 'location' in e && e.location === 2 || e.which !== 18 && this.lastAltKeyWasRight);
-    let i = !!_$$y.isWindows() && 'getModifierState' in e && e.getModifierState('AltGraph') && !this.lastAltKeyWasRight;
+    let i = !!browserCapabilities.isWindows() && 'getModifierState' in e && e.getModifierState('AltGraph') && !this.lastAltKeyWasRight;
     let n = e.altKey || i;
     let r = e.ctrlKey || i;
     return (n ? xC : 0) | (e.metaKey ? No : 0) | (e.shiftKey ? IL : 0) | (r ? pP : 0) | (t ? eb : 0);
   }
   shouldIgnoreKeyboardEvent(e) {
-    return !!(this.cppAPI.shouldSendKeyboardEventToBrowser(e.which, e.code, ed(), v7()) || er(e.target) && !this.isElementOwnedByFullscreen(e.target) || this.isComposing || (e.code === 'ArrowLeft' || e.code === 'ArrowRight' || e.code === 'Enter') && e.which === 229 || e.target && !this.isElementOwnedByFullscreen(e.target) && !(e.target instanceof HTMLElement && e.target.getAttribute('data-fullscreen-intercept-dangerously-include-tab')) && e.code === 'Tab' || e.target && e.target instanceof HTMLElement && e.target.tagName === 'BUTTON' && !this.isElementOwnedByFullscreen(e.target) && e.code === 'Enter' || e.key === 'AudioVolumeMute' && _$$y.isChromeOS() || el(e));
+    return !!(this.cppAPI.shouldSendKeyboardEventToBrowser(e.which, e.code, ed(), v7()) || er(e.target) && !this.isElementOwnedByFullscreen(e.target) || this.isComposing || (e.code === 'ArrowLeft' || e.code === 'ArrowRight' || e.code === 'Enter') && e.which === 229 || e.target && !this.isElementOwnedByFullscreen(e.target) && !(e.target instanceof HTMLElement && e.target.getAttribute('data-fullscreen-intercept-dangerously-include-tab')) && e.code === 'Tab' || e.target && e.target instanceof HTMLElement && e.target.tagName === 'BUTTON' && !this.isElementOwnedByFullscreen(e.target) && e.code === 'Enter' || e.key === 'AudioVolumeMute' && browserCapabilities.isChromeOS() || el(e));
   }
   shouldIgnoreMouseEvent(e) {
     return !this.fullscreenExpectsMouseReleaseEvent && this.shouldIgnoreEvent(e);
@@ -1186,7 +1186,7 @@ class W {
   mouseEvent(e, t, i = null) {
     let n = e.detail;
     let s = window.PointerEvent && e instanceof window.PointerEvent;
-    (s || _$$y.isIE() || _$$y.isEdge()) && (t === EventTypeEnum.MOUSE_PRESS || t === EventTypeEnum.MOUSE_RELEASE) && (n = this.simulatedClickCount(t === EventTypeEnum.MOUSE_PRESS, e.pageX, e.pageY, 4));
+    (s || browserCapabilities.isIE() || browserCapabilities.isEdge()) && (t === EventTypeEnum.MOUSE_PRESS || t === EventTypeEnum.MOUSE_RELEASE) && (n = this.simulatedClickCount(t === EventTypeEnum.MOUSE_PRESS, e.pageX, e.pageY, 4));
     let o = e.button;
     let l = PointerType.MOUSE;
     let d = -1;
@@ -1395,10 +1395,10 @@ function Q(e) {
 }
 let J = [107, 187, 109, 173, 189];
 function ee(e) {
-  return (_$$y.isMac() ? e.metaKey : e.ctrlKey) && !e.altKey && J.includes(e.which || e.keyCode);
+  return (browserCapabilities.isMac() ? e.metaKey : e.ctrlKey) && !e.altKey && J.includes(e.which || e.keyCode);
 }
 function et(e) {
-  let t = _$$y.isMac() ? e.metaKey : e.ctrlKey;
+  let t = browserCapabilities.isMac() ? e.metaKey : e.ctrlKey;
   let i = !(desktopAPIInstance && desktopAPIInstance.getVersion() > 0);
   return t && i && e.key === 'o';
 }
@@ -1509,7 +1509,7 @@ export let $$eu0 = new class {
   updateCustomFocusType() {
     if (document.location.ancestorOrigins && document.location.ancestorOrigins.length > 1 && document.location.ancestorOrigins[1].startsWith('vscode')) return;
     let e = this.maybeTemporarilyDisableFocusEvents();
-    this.expectingCopyCutEvent || !this.isExpectingTextInput() ? document.activeElement !== this.customFocusElementReadOnly && this.customFocusElementReadOnly && (this.customFocusElementReadOnly.focus(), this.customFocusElementReadOnly.value = _$$y.isChrome() ? '' : en(), this.customFocusElementReadOnly.selectionStart = 0, this.customFocusElementReadOnly.selectionEnd = 1) : this.customFocusElementReadWrite && (_$$y.isIpad() && (this.customFocusElementReadWrite.style.left = '0px', this.customFocusElementReadWrite.style.top = '0px'), document.activeElement !== this.customFocusElementReadWrite && this.customFocusElementReadWrite.focus());
+    this.expectingCopyCutEvent || !this.isExpectingTextInput() ? document.activeElement !== this.customFocusElementReadOnly && this.customFocusElementReadOnly && (this.customFocusElementReadOnly.focus(), this.customFocusElementReadOnly.value = browserCapabilities.isChrome() ? '' : en(), this.customFocusElementReadOnly.selectionStart = 0, this.customFocusElementReadOnly.selectionEnd = 1) : this.customFocusElementReadWrite && (browserCapabilities.isIpad() && (this.customFocusElementReadWrite.style.left = '0px', this.customFocusElementReadWrite.style.top = '0px'), document.activeElement !== this.customFocusElementReadWrite && this.customFocusElementReadWrite.focus());
     this.focusEventBeingCalled = e;
   }
   isExpectingTextInput() {
@@ -1530,14 +1530,14 @@ export let $$eu0 = new class {
     this.globalWindowState && (this.globalWindowState.canvasViewHandle = e);
   }
   usingMultiTouchPointerEvents() {
-    return !!_$$y.isMeetDevice() || (_$$y.isIpadNative() || _$$y.isiOS() && _$$y.isInNativeApp()) && window.FigmaMobile.shouldHandleMultiTouchInFullscreen;
+    return !!browserCapabilities.isMeetDevice() || (browserCapabilities.isIpadNative() || browserCapabilities.isiOS() && browserCapabilities.isInNativeApp()) && window.FigmaMobile.shouldHandleMultiTouchInFullscreen;
   }
   execCommandCopy() {
     let e = this.expectingCopyCutEvent;
     this.setExpectingCopyCutEvent(!0);
     let t = !1;
     try {
-      !(t = document.execCommand('copy')) && _$$y.isEdge() && (t = !0);
+      !(t = document.execCommand('copy')) && browserCapabilities.isEdge() && (t = !0);
     } catch (e) {
       console.warn(e);
     }

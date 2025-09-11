@@ -53,7 +53,7 @@ import { c as _$$c } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
 import { $$in } from "../figma_app/76123";
-import { y as _$$y } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { vx, oo } from "../642/38487";
@@ -163,7 +163,7 @@ function ep() {
     overlay: xtb,
     priority: _$$N.SECONDARY_MODAL
   });
-  let l = _$$y.isApple();
+  let l = browserCapabilities.isApple();
   let a = useMemo(() => jsx(_$$S2, {
     shortcut: l ? "\u2303\u21E7A" : "Ctrl+Alt+Shift+A"
   }), [l]);

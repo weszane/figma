@@ -1,42 +1,90 @@
-import { jsx, Fragment } from "react/jsx-runtime";
-import { useEffect } from "react";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { d as _$$d } from "../vendor/797080";
-import { bk } from "../vendor/693164";
-import { DF } from "../vendor/463802";
-import { ff, Ni, H2 } from "../vendor/408361";
-import { mH } from "../figma_app/9619";
-import { reportError } from "../905/11";
-export function $$p0(e, t, i, n) {
-  var r = "";
-  var l = !1;
-  return (t.update(() => {
-    let p = mH(e);
-    let m = _$$d(t, p);
-    let h = m.filter(e => !!e.getParent() || ff(e));
-    h.length !== m.length && reportError(_$$e.EXTENSIBILITY, Error("Unable to render some HTML data in Lexical"), {
-      extra: {
-        htmlString: e,
-        generatedNodes: m,
-        validNodesToInsert: h
-      }
-    });
-    0 === h.length && (l = !0);
-    Ni().clear();
-    H2(h);
-    r = l || "markdown" !== i ? "" : bk(n, void 0, !0);
+import { $generateNodesFromDOM } from '@lexical/html'
+import { $convertToMarkdownString } from '@lexical/markdown'
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
+import { $getRoot, $insertNodes, $isElementNode } from 'lexical'
+import { useEffect } from 'react'
+import { Fragment, jsx } from 'react/jsx-runtime'
+import { reportError } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { sanitizeAndNormalizeHtmlToDocument } from '../figma_app/9619'
+
+/**
+ * Converts HTML string to Lexical editor state or Markdown string.
+ * Handles error reporting for invalid nodes.
+ * @param htmlString - The HTML string to convert.
+ * @param editor - Lexical editor instance.
+ * @param outputFormat - Output format: 'json' or 'markdown'.
+ * @param markdownConfig - Markdown config for conversion.
+ * @returns Editor state as JSON string or Markdown string.
+ */
+// Original function name: $$p0
+export function convertHtmlToEditorState(htmlString: string, editor: any, outputFormat: 'json' | 'markdown', markdownConfig?: any): string {
+  let markdownResult = ''
+  let hasNoValidNodes = false
+
+  editor.update(() => {
+    const document = sanitizeAndNormalizeHtmlToDocument(htmlString)
+    const generatedNodes = $generateNodesFromDOM(editor, document)
+    const validNodes = generatedNodes.filter(
+      node => !!node.getParent() || $isElementNode(node),
+    )
+
+    // Error reporting for invalid nodes
+    if (validNodes.length !== generatedNodes.length) {
+      reportError(ServiceCategories.EXTENSIBILITY, new Error('Unable to render some HTML data in Lexical'), {
+        extra: {
+          htmlString,
+          generatedNodes,
+          validNodesToInsert: validNodes,
+        },
+      })
+    }
+
+    if (validNodes.length === 0) {
+      hasNoValidNodes = true
+    }
+
+    $getRoot().clear()
+    $insertNodes(validNodes)
+
+    markdownResult
+      = hasNoValidNodes || outputFormat !== 'markdown'
+        ? ''
+        : $convertToMarkdownString(markdownConfig, undefined, true)
   }, {
-    discrete: !0
-  }), "markdown" === i) ? r : l ? '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}' : JSON.stringify(t.getEditorState().toJSON());
+    discrete: true,
+  })
+
+  if (outputFormat === 'markdown') {
+    return markdownResult
+  }
+
+  if (hasNoValidNodes) {
+    // Return empty paragraph node if no valid nodes
+    return '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}'
+  }
+
+  return JSON.stringify(editor.getEditorState().toJSON())
 }
-export function $$m1({
-  htmlString: e
-}) {
-  let [t] = DF();
+
+/**
+ * React component that updates Lexical editor state from HTML string.
+ * @param props.htmlString - HTML string to convert.
+ * @returns Empty Fragment.
+ */
+// Original function name: $$m1
+export const HtmlToLexicalEffect: React.FC<{ htmlString: string }> = ({
+  htmlString,
+}) => {
+  const [editor] = useLexicalComposerContext()
+
   useEffect(() => {
-    $$p0(e, t, "json");
-  }, [t, e]);
-  return jsx(Fragment, {});
+    convertHtmlToEditorState(htmlString, editor, 'json')
+  }, [editor, htmlString])
+
+  return jsx(Fragment, {})
 }
-export const D = $$p0;
-export const _ = $$m1;
+
+// Refactored exports
+export const D = convertHtmlToEditorState
+export const _ = HtmlToLexicalEffect

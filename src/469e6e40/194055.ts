@@ -46,7 +46,7 @@ import { h1 } from "../905/986103";
 import { getUserId, selectCurrentUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { A as _$$A5 } from "../5724/933949";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { formatNumber } from "../figma_app/930338";
 import { x as _$$x } from "../5430/373843";
 import { L as _$$L } from "../1577/16430";
@@ -995,13 +995,13 @@ function ey({
     className: _$$s.flex.flexColumn.$,
     children: [r ? jsx(_$$E, {
       ref: t,
-      children: $J(e).trim()
+      children: stripHtmlTags(e).trim()
     }) : jsx(_$$E, {
       truncate: "line-clamp",
       lineClamp: 3,
       ref: t,
       showTooltipWhenTruncated: !1,
-      children: $J(e).trim()
+      children: stripHtmlTags(e).trim()
     }), a && jsx(CY, {
       trusted: !0,
       onClick: () => l(e => !e),

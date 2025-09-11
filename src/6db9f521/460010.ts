@@ -199,9 +199,9 @@ import { TG } from "../figma_app/657972";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { E as _$$E3 } from "../905/172252";
 import { B as _$$B2 } from "../9410/958580";
-import { DF } from "../vendor/463802";
-import { Sd } from "../vendor/425002";
-import { Ey, $7, jZ, pF } from "../vendor/408361";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { mergeRegister } from "../vendor/425002";
+import { TextNode, FOCUS_COMMAND, COMMAND_PRIORITY_EDITOR, BLUR_COMMAND } from "lexical";
 import rJ from "../vendor/128080";
 import { analyticsEventManager } from "../905/449184";
 import { reportError } from "../905/11";
@@ -219,8 +219,8 @@ import { v as _$$v4 } from "../905/475481";
 import { gv } from "../9410/172674";
 import { O as _$$O } from "../9410/301359";
 import { f as _$$f } from "../9410/391621";
-import { v5, YW } from "../vendor/231521";
-import { mK, NB, eA as _$$eA, gb, d7 as _$$d3, Pi, WY, Eg, gW } from "../vendor/693164";
+import { ListNode, ListItemNode } from "@lexical/list";
+import { UNORDERED_LIST, ORDERED_LIST, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, STRIKETHROUGH, ITALIC_STAR, ITALIC_UNDERSCORE } from "../vendor/693164";
 import { Q as _$$Q3 } from "../vendor/452968";
 import { n as _$$n3 } from "../vendor/110313";
 import { a as _$$a2 } from "../vendor/683966";
@@ -2950,7 +2950,7 @@ let {
   SelectOverride
 } = n;
 let ny = new _$$ag(i5.MILLISECONDS, 10);
-class nf extends _$$c$ {}
+class nf extends _$$c$ { }
 function nj({
   recordingKey: e
 }) {
@@ -4302,7 +4302,7 @@ function lv({
   let u = {
     editable: a,
     editorState: t || lj,
-    nodes: [v5, YW, Ey],
+    nodes: [ListNode, ListItemNode, TextNode],
     namespace: i,
     onError: e => {
       console.error(e);
@@ -4343,7 +4343,7 @@ function lv({
         ignoreSelectionChange: !0,
         ignoreHistoryMergeTagChange: !1
       }), jsx(_$$Q3, {}), jsx(_$$G4, {}), jsx(_$$E4, {
-        transformers: [mK, NB, _$$eA, gb, _$$d3, Pi, WY, Eg, gW]
+        transformers: [UNORDERED_LIST, ORDERED_LIST, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, STRIKETHROUGH, ITALIC_STAR, ITALIC_UNDERSCORE]
       }), jsx(_$$Q4, {}), jsx(_$$m3, {}), jsx(_$$A6, {
         maxDepth: 5
       }), jsx(B_, {})]
@@ -4358,7 +4358,7 @@ function lT({
   placeholder: s,
   buttonRef: a
 }) {
-  let [o] = DF();
+  let [o] = useLexicalComposerContext();
   let [d, u] = useState(!1);
   return jsxs("section", {
     "aria-label": getI18nString("slides.speaker_notes.title"),
@@ -4388,7 +4388,7 @@ function lS({
   initializeSpeakerNotesForSlide: t,
   isEditable: i
 }) {
-  let [n] = DF();
+  let [n] = useLexicalComposerContext();
   let r = _$$k6();
   useEffect(() => {
     let e = n.registerEditableListener(e => {
@@ -4420,9 +4420,9 @@ function lI({
 function lN({
   slideId: e
 }) {
-  let [t] = DF();
+  let [t] = useLexicalComposerContext();
   let [i, n] = useState(() => t.getRootElement() === document.activeElement);
-  useLayoutEffect(() => (n(t.getRootElement() === document.activeElement), Sd(t.registerCommand($7, () => (n(!0), !0), jZ), t.registerCommand(pF, () => (n(!1), fullscreenValue.commit(), !0), jZ))), [t]);
+  useLayoutEffect(() => (n(t.getRootElement() === document.activeElement), mergeRegister(t.registerCommand(FOCUS_COMMAND, () => (n(!0), !0), COMMAND_PRIORITY_EDITOR), t.registerCommand(BLUR_COMMAND, () => (n(!1), fullscreenValue.commit(), !0), COMMAND_PRIORITY_EDITOR))), [t]);
   let r = Fk((e, t) => {
     let i = e.get(t);
     return i ? i.slideSpeakerNotes : "";
@@ -5000,7 +5000,7 @@ class sp extends ub {
   }
 }
 let sh = [0, 0.1, 0.2, 0.3];
-class sm extends _$$c$ {}
+class sm extends _$$c$ { }
 let s_ = new _$$ag(i5.MILLISECONDS, 0.001, 30);
 function sg({
   delay: e,
@@ -5043,7 +5043,7 @@ function sg({
 }
 let sy = [0.3, 0.6, 0.9];
 let sf = new _$$ag(i5.MILLISECONDS, 0.01, 10);
-class sj extends _$$c$ {}
+class sj extends _$$c$ { }
 function sb({
   duration: e,
   easingType: t,
@@ -6459,7 +6459,7 @@ function oU({
       children: jsx(_$$d6, {
         "aria-expanded": !!d,
         onClick: () => {
-          if (d) u(Uv());else if (e.current) {
+          if (d) u(Uv()); else if (e.current) {
             let t = e.current.getBoundingClientRect();
             u(_$$sw());
             u(bS({
@@ -6526,7 +6526,7 @@ function o$({
           "aria-expanded": b,
           "aria-label": getI18nString("slides.properties_panel.text_style.create_new_style"),
           onClick: () => {
-            if (b) d(_$$sw());else if (f.current) {
+            if (b) d(_$$sw()); else if (f.current) {
               _$$l3.user("slides-create-style", () => {
                 Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !0);
                 Fullscreen?.selectStyle(_$$n5.INVALID, _$$IA.INVALID);
@@ -6666,7 +6666,7 @@ function oz({
       children: jsx(_$$d6, {
         "aria-label": getI18nString("slides.properties_panel.text_style.edit_text_style"),
         onClick: t => {
-          if (b) m(_$$sw());else if (j.current) {
+          if (b) m(_$$sw()); else if (j.current) {
             Fullscreen?.selectStyleByGuid(e.node_id);
             let t = j.current.getBoundingClientRect();
             m(_$$rk({
@@ -7586,7 +7586,7 @@ function dr({
     })
   });
 }
-class dm extends _$$c$ {}
+class dm extends _$$c$ { }
 let d_ = [0, 2, 4, 8, 16, 24];
 let dg = ["NONE", "SOLID", "DASHED_BIG", "DASHED_SMALL"];
 let dy = dg.filter(e => "NONE" !== e);
@@ -7827,7 +7827,7 @@ function dT({
     })
   });
 }
-class dN extends _$$c$ {}
+class dN extends _$$c$ { }
 let dk = [0, 8, 16, 24, 32, 64, 96];
 class dC extends X9 {
   format(e) {
@@ -8749,7 +8749,7 @@ function cC({
     isEqual: (e, t) => deepEqual(e, t)
   }), [carouselItemsById, x]);
   let m = _$$nc.user("slides-link-change", useCallback(e => {
-    if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null);else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null);else if ("url" === e.type) {
+    if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null); else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null); else if ("url" === e.type) {
       let t = e.url.match(ck) ? e.url : `https://${e.url}`;
       Fullscreen?.setHyperlinkOnCurrentSelection(t, null);
     }
@@ -8797,7 +8797,7 @@ function cC({
     })
   });
 }
-class cw extends _$$c$ {}
+class cw extends _$$c$ { }
 class cO extends LN {
   isEqual(e, t) {
     return 1e-5 > Math.abs(e - t);

@@ -40,7 +40,7 @@ import { V as _$$V } from "../905/223767";
 import { k as _$$k2 } from "../figma_app/618031";
 import { m as _$$m } from "../469e6e40/61410";
 import { UpsellModalType } from "../905/165519";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { O as _$$O } from "../905/487602";
 import { e as _$$e3 } from "../905/149844";
 import { m as _$$m2 } from "../905/270214";
@@ -338,7 +338,7 @@ function e_(e) {
       children: [jsx("span", {
         ...Ay.props(ed.heading),
         children: e.heading
-      }), jsx(_$$f, {
+      }), jsx(setupToggleButton, {
         checked: t,
         onIcon: jsx(_$$O, {}),
         offIcon: jsx(_$$e3, {}),

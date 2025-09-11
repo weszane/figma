@@ -1,4 +1,4 @@
-import { DF } from "../vendor/463802";
+import { useLexicalComposerContext } from "../vendor/463802";
 import { useLayoutEffect, useEffect } from "react";
 let o = "undefined" != typeof window && void 0 !== window.document && void 0 !== window.document.createElement ? useLayoutEffect : useEffect;
 export function $$a0({
@@ -6,7 +6,7 @@ export function $$a0({
   ignoreSelectionChange: r = !1,
   onChange: n
 }) {
-  let [s] = DF();
+  let [s] = useLexicalComposerContext();
   o(() => {
     if (n) return s.registerUpdateListener(({
       editorState: i,

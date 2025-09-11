@@ -199,7 +199,7 @@ import { eu as _$$eu, zb } from "../469e6e40/418374";
 import { CW } from "../469e6e40/800566";
 import { sortBySelectors } from "../figma_app/656233";
 import { ResourceStatus } from "../905/663269";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { h1 } from "../905/986103";
 import { W as _$$W } from "../5430/573261";
 import { N as _$$N3 } from "../905/551536";
@@ -4297,7 +4297,7 @@ function sg({
     children: jsx(_$$E, {
       truncate: !0,
       showTooltipWhenTruncated: !1,
-      children: $J(t || e || "")
+      children: stripHtmlTags(t || e || "")
     })
   });
 }

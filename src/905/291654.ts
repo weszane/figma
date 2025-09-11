@@ -1,3 +1,4 @@
+import { partition } from 'lodash-es'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -20,10 +21,11 @@ import { pi } from '../figma_app/314264'
 import { selectCurrentFile } from '../figma_app/516028'
 import { $z } from '../figma_app/617427'
 import { FontSourceType } from '../figma_app/763686'
-import s from '../vendor/946678'
 
-let o = s
-var d = (e => (e.SF_PRO = 'SFPro', e.SF_COMPACT = 'SFCompact', e))(d || {})
+enum d {
+  SF_PRO = 'SFPro',
+  SF_COMPACT = 'SFCompact',
+}
 let T = {
   [d.SF_PRO]: {
     content() {
@@ -302,7 +304,7 @@ export function $$j4(e, t, i) {
   return F(e, t) && !$$M3(e, t, i)
 }
 export function $$U1(e, t, i) {
-  let [n, r] = o()(e, e => F(e.family, t) && !$$z6(e.family, i))
+  let [n, r] = partition(e, e => F(e.family, t) && !$$z6(e.family, i))
   return {
     eulaFonts: n,
     nonEulaFonts: r,

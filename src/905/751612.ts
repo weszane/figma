@@ -2,15 +2,15 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback, useEffect, useLayoutEffect } from "react";
 import { createPortal } from "../vendor/944059";
 import { useDispatch } from "react-redux";
-import { yW, FJ } from "../vendor/491721";
-import { DF } from "../vendor/463802";
-import { Sd, Bt } from "../vendor/425002";
-import { gu, vJ, Mv, Ac, n1, cq, I2, Wg, d as _$$d, d8 } from "../vendor/408361";
+import { TOGGLE_LINK_COMMAND, $isLinkNode } from "@lexical/link";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { mergeRegister, $findMatchingParent } from "../vendor/425002";
+import { createCommand, $getSelection, SELECTION_CHANGE_COMMAND, COMMAND_PRIORITY_LOW, $setSelection, KEY_MODIFIER_COMMAND, $isRangeSelection, COMMAND_PRIORITY_HIGH, COMMAND_PRIORITY_CRITICAL, CLICK_COMMAND } from "lexical";
 import { RK } from "../figma_app/815170";
 import { lQ } from "../905/934246";
 import { Point } from "../905/736624";
 import { c as _$$c } from "../905/196462";
-import { Jf, fF, Bu, oN, _Y, OL } from "../905/999278";
+import { normalizeUrl, getRelevantSelectionRange, getRelativePosition, isSelectionWithinLink, getSelectionLinkUrl, getRelevantSelectionNode } from "../905/999278";
 import { _ as _$$_ } from "../figma_app/496441";
 import { E as _$$E } from "../905/632989";
 import { B } from "../905/714743";
@@ -56,7 +56,7 @@ function I({
         className: "xamitd3 x1hdptxu xd8780z x15yihhk"
       }), jsx(_$$_, {
         newTab: !0,
-        href: Jf(e),
+        href: normalizeUrl(e),
         className: "xc26acl x1ypdohk x1iyjqo2 xuxw1ft",
         children: i
       }), jsx(_$$E, {
@@ -67,7 +67,7 @@ function I({
     })
   });
 }
-let E = gu();
+let E = createCommand();
 function x({
   editor: e,
   isLink: t,
@@ -84,14 +84,14 @@ function x({
   let [v, x] = useState("");
   let S = useCallback(() => {
     if (!f.current || !e.isEditable()) return;
-    let t = fF(e, _.current);
+    let t = getRelevantSelectionRange(e, _.current);
     if (!t) return;
     _.current = t.cloneRange();
     let {
       x,
       y,
       offScreen
-    } = Bu(t, a);
+    } = getRelativePosition(t, a);
     offScreen ? f.current.style.visibility = "hidden" : f.current.style.visibility = "visible";
     f.current.style.left = `${x}px`;
     f.current.style.top = `${y}px`;
@@ -111,7 +111,7 @@ function x({
       w(t);
       return;
     }
-    let i = Jf(v);
+    let i = normalizeUrl(v);
     e.dispatchCommand(E, {
       selection: t,
       url: i
@@ -120,16 +120,16 @@ function x({
     b(i);
   }, [e, v, u, w]);
   let T = useCallback(() => {
-    let e = vJ();
+    let e = $getSelection();
     let t = A.current;
-    if (l && t && !t.is(e) && C(t), !oN(e)) {
+    if (l && t && !t.is(e) && C(t), !isSelectionWithinLink(e)) {
       b("");
       x("");
       u(!1);
       A.current = e;
       return;
     }
-    let i = _Y(e);
+    let i = getSelectionLinkUrl(e);
     b(i);
     l && !e?.is(t) && (u(!1), x(i));
     A.current = e;
@@ -138,7 +138,7 @@ function x({
   }, [l, u, C, S]);
   useEffect(() => (e.getEditorState().read(() => {
     T();
-  }), Sd(e.registerCommand(Mv, () => (T(), !0), Ac), e.registerCommand(E, ({
+  }), mergeRegister(e.registerCommand(SELECTION_CHANGE_COMMAND, () => (T(), !0), COMMAND_PRIORITY_LOW), e.registerCommand(E, ({
     selection: t,
     url: i
   }) => {
@@ -148,29 +148,29 @@ function x({
       rel: "noreferrer noopener nofollow ugc"
     } : null;
     t ? e.update(() => {
-      let i = vJ();
-      n1(t.clone());
-      e.dispatchCommand(yW, n);
-      n1(i?.clone() || null);
-    }) : e.dispatchCommand(yW, n);
+      let i = $getSelection();
+      $setSelection(t.clone());
+      e.dispatchCommand(TOGGLE_LINK_COMMAND, n);
+      $setSelection(i?.clone() || null);
+    }) : e.dispatchCommand(TOGGLE_LINK_COMMAND, n);
     return !0;
-  }, Ac), e.registerCommand(cq, t => {
+  }, COMMAND_PRIORITY_LOW), e.registerCommand(KEY_MODIFIER_COMMAND, t => {
     if (t.metaKey && t.shiftKey && "u" === t.key) {
-      let t = vJ();
+      let t = $getSelection();
       let n = t?.getTextContent();
-      if (I2(t) && n) {
+      if ($isRangeSelection(t) && n) {
         i(!0);
         u(!0);
         e.dispatchCommand(E, {
           selection: t,
-          url: Jf(n)
+          url: normalizeUrl(n)
         });
         A.current = t;
         return !0;
       }
     }
     return !1;
-  }, Wg))), [e, T, i, t, u]);
+  }, COMMAND_PRIORITY_HIGH))), [e, T, i, t, u]);
   useLayoutEffect(() => {
     t && S();
   }, [t, S]);
@@ -212,19 +212,19 @@ export function $$S0({
   isLinkEditMode: i,
   setIsLinkEditMode: p
 }) {
-  let [m] = DF();
+  let [m] = useLexicalComposerContext();
   return function (e, t, i, l, p) {
     let m = useDispatch();
     let [h, f] = useState(!1);
-    useEffect(() => Sd(e.registerCommand(Mv, () => {
-      let e = vJ();
-      f(oN(e));
+    useEffect(() => mergeRegister(e.registerCommand(SELECTION_CHANGE_COMMAND, () => {
+      let e = $getSelection();
+      f(isSelectionWithinLink(e));
       return !1;
-    }, _$$d), e.registerCommand(d8, e => {
-      let t = vJ();
-      if (I2(t)) {
-        let i = OL(t);
-        let n = Bt(i, FJ);
+    }, COMMAND_PRIORITY_CRITICAL), e.registerCommand(CLICK_COMMAND, e => {
+      let t = $getSelection();
+      if ($isRangeSelection(t)) {
+        let i = getRelevantSelectionNode(t);
+        let n = $findMatchingParent(i, $isLinkNode);
         if (n && (e.metaKey || e.ctrlKey)) {
           let e = n.getURL();
           m(RK({
@@ -234,7 +234,7 @@ export function $$S0({
         }
       }
       return !1;
-    }, Ac)), [e, m, l]);
+    }, COMMAND_PRIORITY_LOW)), [e, m, l]);
     return createPortal(jsx(x, {
       editor: e,
       isLink: h,

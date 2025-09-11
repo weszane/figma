@@ -89,7 +89,7 @@ import { debugState } from "../905/407919";
 import { B as _$$B2 } from "../905/714743";
 import { GS } from "../figma_app/314264";
 import { l6, c$ as _$$c$ } from "../905/794875";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { C as _$$C } from "../905/771975";
 import { O as _$$O3 } from "../905/666679";
 import { S as _$$S2 } from "../905/711470";
@@ -1325,7 +1325,7 @@ function tp({
   isSidebarOpen: e,
   onSidebarToggle: t
 }) {
-  return jsx(_$$f, {
+  return jsx(setupToggleButton, {
     recordingKey: generateRecordingKey("variablesModal", "toggleSidebar"),
     "aria-label": getI18nString("variables.authoring_modal.toggle_sidebar"),
     onIcon: jsx(_$$C, {}),
@@ -3341,7 +3341,7 @@ function iU({
         className: "x1iyjqo2 x47corl"
       }), jsx("div", {
         className: "xet2fuk xl010v5",
-        children: jsx(_$$f, {
+        children: jsx(setupToggleButton, {
           recordingKey: generateRecordingKey("variablesModal", "expandModal"),
           "aria-label": x ? getI18nString("variables.authoring_modal.toggle_fullscreen_mode_minimize") : getI18nString("variables.authoring_modal.toggle_fullscreen_mode_expand"),
           onIcon: jsx(_$$O4, {}),

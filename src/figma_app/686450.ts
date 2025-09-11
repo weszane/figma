@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { D as _$$D } from "../vendor/24766";
-import { mK, NB, eA, gb, d7, Pi, WY, Eg, gW, Sq, TB, Up } from "../vendor/693164";
+import { createHeadlessEditor } from "../vendor/24766";
+import { UNORDERED_LIST, ORDERED_LIST, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, STRIKETHROUGH, ITALIC_STAR, ITALIC_UNDERSCORE, CODE, HEADING, INLINE_CODE } from "../vendor/693164";
 import { x as _$$x } from "../vendor/952653";
 import { n as _$$n } from "../vendor/110313";
 import { a as _$$a } from "../vendor/683966";
@@ -17,13 +17,13 @@ import { getFeatureFlags } from "../905/601108";
 import y from "classnames";
 import { zN } from "../905/182598";
 import { reportError } from "../905/11";
-import { cL, T as _$$T, mH } from "../figma_app/9619";
-import { D as _$$D3, _ as _$$_ } from "../905/122084";
+import { lexicalNodes, generateSanitizedHtmlFromLexicalEditor, sanitizeAndNormalizeHtmlToDocument } from "../figma_app/9619";
+import { convertHtmlToEditorState, HtmlToLexicalEffect } from "../905/122084";
 import { D as _$$D4 } from "../905/819578";
 import { A as _$$A2 } from "../905/751427";
 import { A as _$$A3 } from "../905/751612";
 import { A as _$$A4 } from "../905/388815";
-import { A as _$$A5 } from "../905/6199";
+import { ToolbarPlugin } from "../905/6199";
 import O, { link, linkReadOnly, listItem, listOl, listUl, textBold, textItalic, textStrikethrough, inlineCode, paragraph, heading, codeBlock, lexicalHtmlOnly } from "../figma_app/227510";
 var b = y;
 let R = '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1}],"direction":null,"format":"","indent":0,"type":"root","version":1}}';
@@ -66,8 +66,8 @@ export function $$L0({
   };
   let B = useMemo(() => {
     if ("lexical" === t || !e) return R;
-    let r = _$$D({
-      nodes: cL,
+    let r = createHeadlessEditor({
+      nodes: lexicalNodes,
       onError: t => {
         console.error(t);
         reportError(_$$e.EXTENSIBILITY, t, {
@@ -77,7 +77,7 @@ export function $$L0({
         });
       }
     });
-    return _$$D3(e, r, "json");
+    return convertHtmlToEditorState(e, r, "json");
   }, [t, e]);
   let G = {
     namespace: b,
@@ -92,7 +92,7 @@ export function $$L0({
       });
     },
     theme: U,
-    nodes: cL,
+    nodes: lexicalNodes,
     editorState: "lexical" === t ? e || R : B,
     editable: k
   };
@@ -116,7 +116,7 @@ export function $$L0({
         }),
         placeholder: T,
         ErrorBoundary: _$$A
-      }), D && jsx(_$$A5, {
+      }), D && jsx(ToolbarPlugin, {
         setIsLinkEditMode: H
       }), k && Y && W.current && jsx(_$$A3, {
         anchorElem: Y,
@@ -125,16 +125,16 @@ export function $$L0({
         setIsLinkEditMode: H
       })]
     }), jsx(_$$G, {}), jsx(Q, {}), jsx(_$$E, {
-      transformers: [mK, NB, eA, gb, d7, Pi, WY, Eg, gW, Sq, TB, Up]
+      transformers: [UNORDERED_LIST, ORDERED_LIST, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, STRIKETHROUGH, ITALIC_STAR, ITALIC_UNDERSCORE, CODE, HEADING, INLINE_CODE]
     }), "lexical" === t && jsx(_$$D4, {
       value: e
-    }), !k && "html" === t && jsx(_$$_, {
+    }), !k && "html" === t && jsx(HtmlToLexicalEffect, {
       htmlString: e
     }), r && jsx(_$$D2, {
       onChange: (e, t, n) => {
         n.has("focus") || e.read(() => {
           r({
-            html: _$$T(t),
+            html: generateSanitizedHtmlFromLexicalEditor(t),
             lexical: JSON.stringify(e.toJSON())
           });
         });
@@ -150,7 +150,7 @@ function P({
   innerRef: a
 }) {
   let s = useMemo(() => {
-    let r = mH(e);
+    let r = sanitizeAndNormalizeHtmlToDocument(e);
     r.querySelectorAll("p, h1, h2, code, a, ul, ol, li, strong, em, s, pre").forEach(e => {
       let r = function (e, t) {
         let r = {

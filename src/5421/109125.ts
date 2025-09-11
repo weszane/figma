@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { y as _$$y } from "../1156/673497";
 import { getI18nString } from "../905/303541";
@@ -26,7 +26,7 @@ export function $$p0({
       className: "x10l6tqk xndqk7f x1pzoy33 x51ohtg xqu0tyb x16rqkct xxvmw7z x1ml4hsw"
     }), n]
   });
-  let I = p ? _$$y : _$$f;
+  let I = p ? _$$y : setupToggleButton;
   return jsx(I, {
     "aria-description": b,
     "aria-label": _,

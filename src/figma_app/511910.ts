@@ -12,7 +12,7 @@ import { fu } from "../figma_app/831799";
 import { DP } from "../905/640017";
 import { UK } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
-import { y as _$$y } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 import { QU } from "../figma_app/62612";
 import { f as _$$f } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -173,7 +173,7 @@ function G({
       }), "\xa0", "mouse" !== e ? renderI18nText("tooltips_plus_onboarding.pinch_your_trackpad") : a ? renderI18nText("tooltips_plus_onboarding.scroll_your_mouse") : renderI18nText("tooltips_plus_onboarding.hold_key_and_scroll", {
         keyboardKey: jsx("span", {
           className: R,
-          children: renderI18nText(_$$y.isMac() ? "tooltips_plus_onboarding.command_key" : "tooltips_plus_onboarding.control_key")
+          children: renderI18nText(browserCapabilities.isMac() ? "tooltips_plus_onboarding.command_key" : "tooltips_plus_onboarding.control_key")
         })
       })]
     })]

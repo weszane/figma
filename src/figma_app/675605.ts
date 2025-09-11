@@ -8,7 +8,7 @@ import { b$ } from "../figma_app/805925";
 import { Wy } from "../figma_app/952446";
 import { nt } from "../905/226610";
 import { xm } from "../figma_app/826288";
-import { y } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 export let $$n0;
 export function $$h2(e) {
   let t = [];
@@ -104,7 +104,7 @@ class m {
     return !!t && (t(), !0);
   }
   getDisplayStringFromKey(e) {
-    let t = y.isApple();
+    let t = browserCapabilities.isApple();
     switch (e.toUpperCase()) {
       case "'":
         return "\u2032";
@@ -140,7 +140,7 @@ class m {
       case "SHIFT":
         return t ? "\u21E7" : "Shift";
       case "META":
-        return t ? "\u2318" : y.isWindows() ? "Win" : "Meta";
+        return t ? "\u2318" : browserCapabilities.isWindows() ? "Win" : "Meta";
       default:
         return e;
     }
@@ -166,7 +166,7 @@ class m {
     };
   }
   getTextFromKeyboardShortcut(e) {
-    let t = y.isApple();
+    let t = browserCapabilities.isApple();
     let r = (e.displayName ? this.getKeyboardShortcutFromText(e.displayName, null) : null) ?? e;
     let n = [];
     r.modifierMask & pP && n.push(this.getDisplayStringFromKey("Control"));

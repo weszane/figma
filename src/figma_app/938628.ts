@@ -66,7 +66,7 @@ import { r as _$$r4 } from "../figma_app/711157";
 import { P as _$$P } from "../905/460261";
 import { U as _$$U } from "../figma_app/924260";
 import { W as _$$W } from "../figma_app/521665";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { z as _$$z } from "../905/489760";
 import { p as _$$p } from "../figma_app/353099";
 import { A as _$$A3 } from "../905/920142";
@@ -1621,7 +1621,7 @@ function tp(e) {
     className: xe,
     children: jsx(_$$E, {
       name: "aspect_ratio_lock_toggle",
-      children: jsx(_$$f, {
+      children: jsx(setupToggleButton, {
         actionOnPointerDown: !0,
         "aria-label": a,
         checked: i,
@@ -2295,7 +2295,7 @@ function re(e) {
   let V = Fp();
   let H = t9();
   let z = useCallback((t, r) => {
-    if ("number" == typeof t) R.onValueChange(t, r); else if (t === minMaxOptions[0]) e.onSizeConstraintClick("min"); else if (t === minMaxOptions[1]) e.onSizeConstraintClick("max"); else if (t === zg) {
+    if ("number" == typeof t) R.onValueChange(t, r);else if (t === minMaxOptions[0]) e.onSizeConstraintClick("min");else if (t === minMaxOptions[1]) e.onSizeConstraintClick("max");else if (t === zg) {
       setMinValue(null, yesNoTrackingEnum.NO);
       setMaxValue(null, yesNoTrackingEnum.NO);
       fullscreenValue.triggerAction("commit");
@@ -2906,7 +2906,7 @@ function rF(e) {
     "data-tooltip-type": Ib.TEXT,
     recordingKey: generateRecordingKey(e, "absolutePosition")
   };
-  return jsx(_$$f, {
+  return jsx(setupToggleButton, {
     "aria-label": getI18nString("properties.tooltip.ignore_auto_layout"),
     checked: "ABSOLUTE" === i,
     disabled: h.disabled,

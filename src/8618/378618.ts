@@ -65,7 +65,7 @@ import { Xo } from "../figma_app/482495";
 import { aR, pf } from "../figma_app/530362";
 import { yt } from "../figma_app/292212";
 import { At } from "../905/973142";
-import { j_, El } from "../figma_app/9619";
+import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
 import { Ad } from "../figma_app/811257";
 import { U_, vG, zq, VR } from "../figma_app/938628";
 import { If, _i } from "../figma_app/319440";
@@ -342,7 +342,7 @@ function ef({
   slotPropertyDefinition: e
 }) {
   let t = e.description;
-  let n = useMemo(() => t ? "lexical" === j_(t) ? El(t) : At(t) : null, [t]);
+  let n = useMemo(() => t ? "lexical" === detectEditorStateFormat(t) ? parseEditorStateToPlainText(t) : At(t) : null, [t]);
   return n && "" !== n ? jsx(Ad, {
     appendedClassName: "slot_description_preview--descriptionRow--mxTUO",
     label: null,

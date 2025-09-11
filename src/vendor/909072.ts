@@ -1,11 +1,11 @@
-import { DF } from "../vendor/463802";
+import { useLexicalComposerContext } from "../vendor/463802";
 import { useLayoutEffect, useEffect, useMemo, useRef, useState, Suspense } from "react";
 import { yl } from "../vendor/975086";
-import { Sd } from "../vendor/425002";
+import { mergeRegister } from "../vendor/425002";
 import { flushSync, createPortal } from "../vendor/944059";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { vJ, I2, kF } from "../vendor/408361";
-import { ZI } from "../vendor/871930";
+import { $getSelection, $isRangeSelection, $isTextNode } from "../vendor/408361";
+import { registerRichText } from "../vendor/871930";
 let o = "undefined" != typeof window && void 0 !== window.document && void 0 !== window.document.createElement ? useLayoutEffect : useEffect;
 function a(e) {
   return {
@@ -15,7 +15,7 @@ function a(e) {
 }
 function h() {
   return function (e) {
-    let [r] = DF();
+    let [r] = useLexicalComposerContext();
     let n = useMemo(() => e(r), [r, e]);
     let a = useRef(n.initialValueFn());
     let [h, d] = useState(a.current);
@@ -55,13 +55,13 @@ function y(e) {
           if (r) {
             let [i, s, o, a, h, d] = r;
             e.update(() => {
-              let e = vJ();
-              if (I2(e)) {
+              let e = $getSelection();
+              if ($isRangeSelection(e)) {
                 let r = e.anchor;
                 let d = r.getNode();
                 let p = 0;
                 let g = 0;
-                if (kF(d) && i >= 0 && s >= 0 && (p = i, g = i + s, e.setTextNodeRange(d, p, d, g)), p === g && "" === o || (e.insertRawText(o), d = r.getNode()), kF(d)) {
+                if ($isTextNode(d) && i >= 0 && s >= 0 && (p = i, g = i + s, e.setTextNodeRange(d, p, d, g)), p === g && "" === o || (e.insertRawText(o), d = r.getNode()), $isTextNode(d)) {
                   p = a;
                   g = a + h;
                   let r = d.getTextContentSize();
@@ -91,7 +91,7 @@ export function $$w0({
   placeholder: r = null,
   ErrorBoundary: n
 }) {
-  let [o] = DF();
+  let [o] = useLexicalComposerContext();
   let a = function (e, r) {
     let [n, i] = useState(() => e.getDecorators());
     O(() => e.registerDecoratorListener(e => {
@@ -121,7 +121,7 @@ export function $$w0({
     }, [r, n, e]);
   }(o, n);
   (function (e) {
-    O(() => Sd(ZI(e), y(e)), [e]);
+    O(() => mergeRegister(registerRichText(e), y(e)), [e]);
   })(o);
   return jsxs(Fragment, {
     children: [e, jsx(k, {
@@ -132,7 +132,7 @@ export function $$w0({
 function k({
   content: e
 }) {
-  let [r] = DF();
+  let [r] = useLexicalComposerContext();
   let n = function (e) {
     let [r, n] = useState(() => x(e));
     O(() => {
@@ -140,7 +140,7 @@ function k({
         n(x(e));
       }
       r();
-      return Sd(e.registerUpdateListener(() => {
+      return mergeRegister(e.registerUpdateListener(() => {
         r();
       }), e.registerEditableListener(() => {
         r();

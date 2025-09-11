@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback } from "react";
-import { f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { y } from "../1156/673497";
 import { getI18nString } from "../905/303541";
@@ -32,7 +32,7 @@ export function $$d0({
       codeInstanceGuid: x
     });
   }, [t, m, x]);
-  let g = n ? y : f;
+  let g = n ? y : setupToggleButton;
   let p = jsx(a, {});
   return jsx(g, {
     "aria-label": getI18nString("figmake.chat.click_to_inspect.label"),

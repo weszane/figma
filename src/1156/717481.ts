@@ -6,7 +6,7 @@ import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { p as _$$p } from "../905/185998";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { _ as _$$_ } from "../905/263184";
 import { _ as _$$_2 } from "../905/410717";
 import { j as _$$j } from "../905/519202";
@@ -104,7 +104,7 @@ function z({
         disabled: s
       }), jsx("span", {
         className: "x10l6tqk x19up5dg xbfrwjf xmauxvm",
-        children: jsx(_$$f, {
+        children: jsx(setupToggleButton, {
           checked: g,
           onIcon: jsx(_$$_2, {}),
           offIcon: jsx(_$$j, {}),

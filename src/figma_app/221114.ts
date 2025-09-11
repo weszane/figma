@@ -26,7 +26,7 @@ import { j as _$$j } from "../905/564614";
 import { Uz } from "../905/63728";
 import { PAGINATION_NEXT, hasMorePages } from "../figma_app/661371";
 import { BrowserInfo } from "../figma_app/778880";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { RecordingComponent, handleMouseEvent, generateRecordingKey, handleKeyboardEvent } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
@@ -406,7 +406,7 @@ export class $$eR4 extends RecordingComponent {
         children: T[0]
       })
     });
-    let S = $J(this.props.description);
+    let S = stripHtmlTags(this.props.description);
     let v = p && jsx("div", {
       className: VM,
       role: "group",

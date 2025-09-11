@@ -2,9 +2,9 @@ import _require from "../6223/496223";
 import { jsx } from "react/jsx-runtime";
 import { lazy, Suspense } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Kp, pT } from "../vendor/408361";
+import { DecoratorNode, $applyNodeReplacement } from "lexical";
 let r = lazy(() => _require);
-export class $$o1 extends Kp {
+export class $$o1 extends DecoratorNode {
   constructor({
     hash: e,
     src: t,
@@ -134,7 +134,7 @@ export class $$o1 extends Kp {
   }
 }
 export function $$d2(e) {
-  return pT(new $$o1(e));
+  return $applyNodeReplacement(new $$o1(e));
 }
 export function $$c0(e) {
   return e instanceof $$o1;

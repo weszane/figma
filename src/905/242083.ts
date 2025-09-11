@@ -241,7 +241,7 @@ import { A as _$$A4 } from '../4711/621307';
 import { s as _$$s6 } from '../cssbuilder/589278';
 import { Zh } from '../figma_app/2590';
 import { o$ as _$$o$, t4 as _$$t2, C9, K9, ku, uR, W_, wi } from '../figma_app/8833';
-import { El } from '../figma_app/9619';
+import { parseEditorStateToPlainText } from '../figma_app/9619';
 import { checkZoomWidgetAccess, isExportRestricted, canEditBasedOnPlan } from '../figma_app/12796';
 import { bJ as _$$bJ } from '../figma_app/16595';
 import { sO as _$$sO } from '../figma_app/21029';
@@ -2499,7 +2499,7 @@ async function ab(e, t, i, n, r) {
         try {
           let e = function (e) {
             let t = e.slideSpeakerNotes;
-            return t ? El(t) : null;
+            return t ? parseEditorStateToPlainText(t) : null;
           }(l);
           if (e && o.addNotes(e), Oc(l)) {
             let e = await au(t.document, l, i, n);

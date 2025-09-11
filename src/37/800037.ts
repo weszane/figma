@@ -7,10 +7,10 @@ import { A as _$$A } from "../vendor/211731";
 import { G as _$$G } from "../vendor/947080";
 import { D as _$$D } from "../vendor/212109";
 import { $ as _$$$ } from "../vendor/909072";
-import { e1 } from "../vendor/850527";
+import { $selectAll } from "@lexical/selection";
 import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
-import { RT, vJ, UD, Ac, bb, n1, uT, Kp, Ey, ns, gC, w$, $$if, Jj, Q$, XK, I2, Cy, Ni, ff, bS, kF, pF, Mv, sT, lJ } from "../vendor/408361";
+import { $isNodeSelection, $getSelection, KEY_ARROW_UP_COMMAND, COMMAND_PRIORITY_LOW, KEY_ARROW_DOWN_COMMAND, $setSelection, $createRangeSelection, DecoratorNode, TextNode, $getNodeByKey, KEY_BACKSPACE_COMMAND, KEY_DELETE_COMMAND, $$if, COMMAND_PRIORITY_NORMAL, KEY_ESCAPE_COMMAND, INSERT_PARAGRAPH_COMMAND, $isRangeSelection, $isDecoratorNode, $getRoot, $isElementNode, $isParagraphNode, $isTextNode, BLUR_COMMAND, SELECTION_CHANGE_COMMAND, $createTextNode, $createParagraphNode } from "lexical";
 import { useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { M3 } from "../figma_app/119475";
@@ -22,7 +22,7 @@ import { BQ, pN } from "../figma_app/852050";
 import { R as _$$R } from "../905/69216";
 import { Yc, lC, LV } from "../905/820169";
 import { he, Cq, aA, tz, J4, TL, uX, d9, HC, sO, q2, a1, $$if as _$$$$if, kl, DE, tJ, yZ, er as _$$er, I0, yy, Ub, Q6, _z, bU, wL, ZX, N_ } from "../figma_app/632975";
-import { DF } from "../vendor/463802";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { Y as _$$Y } from "../vendor/435990";
 import { eF } from "../figma_app/394327";
 import { J2, wG } from "../905/331989";
@@ -47,16 +47,16 @@ function F({
   nodeKey: s,
   componentProp: l
 }) {
-  let [o] = DF();
+  let [o] = useLexicalComposerContext();
   let [a, u] = _$$Y(s);
   let [c, p] = useState(null);
-  let d = useMemo(() => RT(c) && a, [a, c]);
+  let d = useMemo(() => $isNodeSelection(c) && a, [a, c]);
   let f = useCallback(() => !!d, [d]);
   useEffect(() => o.registerUpdateListener(({
     editorState: e
-  }) => p(e.read(() => vJ()))), [o]);
-  useEffect(() => o.registerCommand(UD, f, Ac), [o, f]);
-  useEffect(() => o.registerCommand(bb, f, Ac), [o, f]);
+  }) => p(e.read(() => $getSelection()))), [o]);
+  useEffect(() => o.registerCommand(KEY_ARROW_UP_COMMAND, f, COMMAND_PRIORITY_LOW), [o, f]);
+  useEffect(() => o.registerCommand(KEY_ARROW_DOWN_COMMAND, f, COMMAND_PRIORITY_LOW), [o, f]);
   let m = e && t && B9(e.name) || l && l.name;
   let _ = m ? r && t ? m + ": " + he(t, r) : m : getI18nString("proto.expression_builder_entry.missing");
   let g = a ? J2.SELECTED : l ? J2.COMPONENT : J2.DEFAULT;
@@ -70,14 +70,14 @@ function F({
       isDeleted: !!e && eF(e),
       onClick: e => {
         o.update(() => {
-          e.shiftKey || e.metaKey || n1(uT());
+          e.shiftKey || e.metaKey || $setSelection($createRangeSelection());
           u(!0);
         });
       }
     })
   });
 }
-class D extends Kp {
+class D extends DecoratorNode {
   constructor(e, t, r) {
     super(r);
     this.__stablePathToNode = e;
@@ -151,7 +151,7 @@ function w(e) {
     node: k()
   };
 }
-class B extends Kp {
+class B extends DecoratorNode {
   constructor(e, t, r, n) {
     super(n);
     this.__variable = e;
@@ -234,7 +234,7 @@ function W(e) {
     node: j()
   };
 }
-class Y extends Ey {
+class Y extends TextNode {
   constructor(e, t) {
     super(e, t);
   }
@@ -293,10 +293,10 @@ function z({
   text: e,
   nodeKey: t
 }) {
-  let [r] = DF();
+  let [r] = useLexicalComposerContext();
   let s = useCallback(e => {
     r.update(() => {
-      let r = ns(t);
+      let r = $getNodeByKey(t);
       r && (r.getNextSibling() ? r.selectNext(0, 0) : r.getParent()?.selectEnd(), e.preventDefault());
     });
   }, [r, t]);
@@ -305,7 +305,7 @@ function z({
     onMouseDown: s
   });
 }
-class q extends Kp {
+class q extends DecoratorNode {
   constructor(e, t) {
     super(t);
     this.__text = e;
@@ -375,7 +375,7 @@ function Q(e) {
 function $({
   searchNavigationItem: e
 }) {
-  let [t] = DF();
+  let [t] = useLexicalComposerContext();
   useEffect(() => {
     t.focus();
   }, [t]);
@@ -392,12 +392,12 @@ function ee({
   wiggleCount: s,
   setWiggleCount: l
 }) {
-  let [o] = DF();
+  let [o] = useLexicalComposerContext();
   let a = useCallback(() => !t && (e ? l(s + 1, "enter_error") : r(), !0), [e, t, r, l, s]);
   let u = useCallback(() => (n("esc_cancel"), !0), [n]);
   let c = useCallback(e => (o.update(() => {
-    let t = vJ();
-    if (RT(t)) {
+    let t = $getSelection();
+    if ($isNodeSelection(t)) {
       e.preventDefault();
       let r = t.getNodes();
       let n = r[r.length - 1];
@@ -407,17 +407,17 @@ function ee({
       });
     }
   }), !1), [o]);
-  useEffect(() => o.registerCommand(gC, c, Ac), [o, c]);
-  useEffect(() => o.registerCommand(w$, c, Ac), [o, c]);
-  useEffect(() => o.registerCommand($$if, a, Jj), [o, a]);
-  useEffect(() => o.registerCommand(Q$, u, Ac), [o, u]);
-  useEffect(() => o.registerCommand(XK, () => !0, Jj), [o]);
+  useEffect(() => o.registerCommand(KEY_BACKSPACE_COMMAND, c, COMMAND_PRIORITY_LOW), [o, c]);
+  useEffect(() => o.registerCommand(KEY_DELETE_COMMAND, c, COMMAND_PRIORITY_LOW), [o, c]);
+  useEffect(() => o.registerCommand($$if, a, COMMAND_PRIORITY_NORMAL), [o, a]);
+  useEffect(() => o.registerCommand(KEY_ESCAPE_COMMAND, u, COMMAND_PRIORITY_LOW), [o, u]);
+  useEffect(() => o.registerCommand(INSERT_PARAGRAPH_COMMAND, () => !0, COMMAND_PRIORITY_NORMAL), [o]);
   useEffect(() => {
     let e = e => {
       let t = !1;
       o.update(() => {
-        let r = vJ();
-        e.metaKey && "ArrowRight" === e.key && I2(r) && 0 === r.anchor.offset && 1 === r.getNodes().length && Cy(r.getNodes()[0]) && (Ni().selectEnd(), t = !0);
+        let r = $getSelection();
+        e.metaKey && "ArrowRight" === e.key && $isRangeSelection(r) && 0 === r.anchor.offset && 1 === r.getNodes().length && $isDecoratorNode(r.getNodes()[0]) && ($getRoot().selectEnd(), t = !0);
       });
       return t;
     };
@@ -535,12 +535,12 @@ let el = [{
   }
 }];
 function eo(e) {
-  return ff(e) ? ei()(e.getChildren().map(e => ff(e) ? e.getChildren() : [])) : [];
+  return $isElementNode(e) ? ei()(e.getChildren().map(e => $isElementNode(e) ? e.getChildren() : [])) : [];
 }
 function ea(e, t, r) {
-  let n = vJ();
+  let n = $getSelection();
   if (n) {
-    if (!t || bS(t) || K(t) && !K(e) || H(t) && !H(e) || V(t) && !V(e) || X(t) && !X(e)) n.insertNodes([e]);else if (kF(t)) {
+    if (!t || $isParagraphNode(t) || K(t) && !K(e) || H(t) && !H(e) || V(t) && !V(e) || X(t) && !X(e)) n.insertNodes([e]); else if ($isTextNode(t)) {
       let n = t.splitText(r[0], r[1]);
       1 === n.length ? n[0].replace(e) : 2 === n.length ? 0 === r[0] ? n[0].replace(e) : n[1].replace(e) : 3 === n.length ? n[1].replace(e) : logError("expressions", "invalid number of nodes after split to insert variable");
     } else t.replace(e);
@@ -549,7 +549,7 @@ function ea(e, t, r) {
 function eu(e) {
   let t = e.getNodes();
   if (t.length > 1) return "";
-  let r = t.filter(e => kF(e));
+  let r = t.filter(e => $isTextNode(e));
   return 0 === r.length ? "" : r.some(e => !K(e)) ? r[0].getTextContent() : null;
 }
 let ec = [{
@@ -588,13 +588,13 @@ function eO({
   onItemSelect: a,
   recordingKey: u
 }) {
-  let [c] = DF();
+  let [c] = useLexicalComposerContext();
   let p = useCallback(e => {
     "node_id" in e ? s(e.node_id) : "COMPONENT_PROP" === e.type ? s(lC(e)) : s(e.name);
   }, [s]);
   let d = useSetupPlayback(u ?? "", "ENTER", useCallback(() => {
     c.update(() => {
-      let e = vJ()?.getNodes();
+      let e = $getSelection()?.getNodes();
       a(e?.[0]);
     });
     s(null);
@@ -604,9 +604,9 @@ function eO({
     f.current && (c.focus(), f.current.selectNext(), f.current = null);
   }), !1), [c]);
   let _ = useCallback(() => (r === J4(e) && s(null), !1), [r, e, s]);
-  useEffect(() => c.registerCommand($$if, () => (d(), !0), Ac), [c, d]);
-  useEffect(() => c.registerCommand(pF, m, Ac), [c, m]);
-  useEffect(() => c.registerCommand(UD, _, Jj), [c, _]);
+  useEffect(() => c.registerCommand($$if, () => (d(), !0), COMMAND_PRIORITY_LOW), [c, d]);
+  useEffect(() => c.registerCommand(BLUR_COMMAND, m, COMMAND_PRIORITY_LOW), [c, m]);
+  useEffect(() => c.registerCommand(KEY_ARROW_UP_COMMAND, _, COMMAND_PRIORITY_NORMAL), [c, _]);
   let O = TL(t);
   let h = _$$A2(O, null);
   let E = useMemo(() => h.sort((e, t) => e.fileName.localeCompare(t.fileName)), [h]);
@@ -638,9 +638,9 @@ function eO({
             f.current = function (e, t) {
               let r;
               let n = eo(e).reverse();
-              "node_id" in t ? r = n.filter(e => V(e)).find(e => e.__variable?.node_id === t.node_id) : "MODE" === t.type ? r = n.filter(e => V(e)).find(e => e.__modeID === t.name) : "OPERATOR" === t.type ? r = n.filter(e => kF(e)).find(e => e.getTextContent().trim().endsWith(t.value)) : "LITERAL" === t.type ? r = n.filter(e => kF(e)).find(e => e.getTextContent().trim().endsWith(t.name)) : "COMPONENT_PROP" === t.type && (r = n.filter(e => X(e)).find(e => e.__stablePathToNode === t.value.stablePath && e.__componentProp?.name === t.value.name));
+              "node_id" in t ? r = n.filter(e => V(e)).find(e => e.__variable?.node_id === t.node_id) : "MODE" === t.type ? r = n.filter(e => V(e)).find(e => e.__modeID === t.name) : "OPERATOR" === t.type ? r = n.filter(e => $isTextNode(e)).find(e => e.getTextContent().trim().endsWith(t.value)) : "LITERAL" === t.type ? r = n.filter(e => $isTextNode(e)).find(e => e.getTextContent().trim().endsWith(t.name)) : "COMPONENT_PROP" === t.type && (r = n.filter(e => X(e)).find(e => e.__stablePathToNode === t.value.stablePath && e.__componentProp?.name === t.value.name));
               return r ?? null;
-            }(Ni(), e);
+            }($getRoot(), e);
           });
         },
         pickerType: "fields",
@@ -659,11 +659,11 @@ function eh({
   setExpressionListItems: o,
   setHighlightedItemID: a
 }) {
-  let [u] = DF();
+  let [u] = useLexicalComposerContext();
   let c = useCallback(() => {
-    let e = vJ();
+    let e = $getSelection();
     let r = function (e, t, r) {
-      if (RT(e)) {
+      if ($isNodeSelection(e)) {
         let t = e.getNodes();
         if (t.length > 1) return [];
         let r = t[0];
@@ -699,7 +699,7 @@ function eh({
             return r;
           }(e, t);
         }
-      } else if (I2(e)) {
+      } else if ($isRangeSelection(e)) {
         let n = function (e, t) {
           let r = e.getNodes()[0];
           let n = e => {
@@ -711,14 +711,14 @@ function eh({
             return void 0 === e ? [] : ep(e, t);
           }
           let i = r.getPreviousSibling();
-          if (kF(r) && (V(i) || X(i))) {
+          if ($isTextNode(r) && (V(i) || X(i))) {
             let e = V(i) ? i.__variable?.resolvedType : i.__componentProp?.varValue.resolvedType;
             if (void 0 === e) return [];
             let s = n(r.getTextContent());
             return ep(e, t).filter(e => e.expressionItem.value.startsWith(s));
           }
           if (K(r)) return e.anchor.offset === r.getTextContent().length ? ep(r.__text.includes('"') ? VariableResolvedDataType.STRING : VariableResolvedDataType.BOOLEAN, t) : [];
-          if (kF(r) && K(i)) {
+          if ($isTextNode(r) && K(i)) {
             let e = i.__text.includes('"') ? VariableResolvedDataType.STRING : VariableResolvedDataType.BOOLEAN;
             let l = n(r.getTextContent());
             return ep(e, t).filter(e => e.expressionItem.value.startsWith(l));
@@ -727,7 +727,7 @@ function eh({
             let e = r.getTextContent().trim();
             if (">" === e || "<" === e) return el.filter(t => 2 === t.expressionItem.value.length && t.expressionItem.value.startsWith(e));
           }
-          if (kF(r) && H(i) && 0 === e.anchor.offset) {
+          if ($isTextNode(r) && H(i) && 0 === e.anchor.offset) {
             let e = i.getTextContent().trim();
             if (">" === e || "<" === e) return el.filter(t => 2 === t.expressionItem.value.length && t.expressionItem.value.startsWith(e));
           }
@@ -759,19 +759,19 @@ function eh({
           if (H(r) && e.anchor.offset > 0 && uX.test(r.__text) && n(r)) return ec;
           let i = e => ec.filter(t => t.expressionItem.name.toLowerCase().startsWith(e.getTextContent().trim().toLowerCase()));
           let l = r.getPreviousSibling();
-          if (kF(r) && H(l) && uX.test(l.__text) && n(l)) return i(r);
+          if ($isTextNode(r) && H(l) && uX.test(l.__text) && n(l)) return i(r);
           if (H(r) && e.anchor.offset > 0 && ["not", "!"].includes(r.__text.toLowerCase())) return ec.filter(e => "Not" !== e.expressionItem.name);
-          if (kF(r) && H(l) && ["not", "!"].includes(l.__text.toLowerCase())) return ec.filter(e => "Not" !== e.expressionItem.name && e.expressionItem.name.toLowerCase().startsWith(r.getTextContent().trim().toLowerCase()));
-          let o = eo(Ni());
+          if ($isTextNode(r) && H(l) && ["not", "!"].includes(l.__text.toLowerCase())) return ec.filter(e => "Not" !== e.expressionItem.name && e.expressionItem.name.toLowerCase().startsWith(r.getTextContent().trim().toLowerCase()));
+          let o = eo($getRoot());
           return t || 0 !== o.length && (1 !== o.length || r !== o[0]) ? [] : i(r);
         }(e, r);
       }
       return [];
     }(e, t, n);
-    if (o(r), r.length > 0 && r.some(e => e.type === Yc.EXPRESSION && "LITERAL" !== e.expressionItem.type)) l(null);else if (I2(e)) {
+    if (o(r), r.length > 0 && r.some(e => e.type === Yc.EXPRESSION && "LITERAL" !== e.expressionItem.type)) l(null); else if ($isRangeSelection(e)) {
       let t = eu(e);
       l(t?.trim() ?? null);
-    } else if (RT(e)) {
+    } else if ($isNodeSelection(e)) {
       let t = e.getNodes();
       1 === t.length && V(t[0]) && t[0].__variable && eF(t[0].__variable) ? l("") : l(null);
     } else logError("expressions", "somehow hitting a GridSelection or null selection");
@@ -780,7 +780,7 @@ function eh({
   useEffect(() => {
     a(d9(r) ? HC(e) : null);
   }, [e, r, a]);
-  useEffect(() => u.registerCommand(Mv, c, Ac), [u, c]);
+  useEffect(() => u.registerCommand(SELECTION_CHANGE_COMMAND, c, COMMAND_PRIORITY_LOW), [u, c]);
   return null;
 }
 let eE = new RegExp(/[ .]\s+/g);
@@ -793,7 +793,7 @@ function eT({
   resolvedType: l,
   onItemSelect: o
 }) {
-  let [a] = DF();
+  let [a] = useLexicalComposerContext();
   let u = (e, t) => {
     for (let r of t) if (B9(r.name).toLowerCase().startsWith(e.toLowerCase())) return !0;
     return !1;
@@ -854,8 +854,8 @@ function eT({
     if (eE.test(t)) {
       let r = t.replace(eE, " ");
       a.update(() => {
-        let t = vJ();
-        I2(t) && (e.setTextContent(r), e.select(t.anchor.offset - 1));
+        let t = $getSelection();
+        $isRangeSelection(t) && (e.setTextContent(r), e.select(t.anchor.offset - 1));
       });
     }
   }, [a]);
@@ -883,19 +883,19 @@ function eT({
       _(e);
     });
   }, [m, a, d, p, f, _]);
-  useEffect(() => a.registerNodeTransform(Ey, g), [a, g]);
+  useEffect(() => a.registerNodeTransform(TextNode, g), [a, g]);
   let O = useCallback(e => {
     a.update(() => {
       for (let [t, r] of e) if ("created" === r) {
-        let e = ns(t);
+        let e = $getNodeByKey(t);
         if (!e) return;
         let r = e.getPreviousSibling();
-        if (kF(r)) {
+        if ($isTextNode(r)) {
           let e = r.getTextContent();
           e.endsWith(" ") && r.setTextContent(e.trimEnd());
         }
         let n = e.getNextSibling();
-        if (kF(n)) {
+        if ($isTextNode(n)) {
           let e = n.getTextContent();
           e.startsWith(" ") && n.setTextContent(e.trimStart());
         }
@@ -909,25 +909,25 @@ function eT({
       if (!t.startsWith('"')) {
         let r = t.indexOf('"');
         let n = t.slice(0, r);
-        n.length > 0 && (e.setTextContent(t.slice(r)), e.insertBefore(sT(n)), e.selectPrevious());
+        n.length > 0 && (e.setTextContent(t.slice(r)), e.insertBefore($createTextNode(n)), e.selectPrevious());
       }
       if (!t.endsWith('"')) {
         let r = t.lastIndexOf('"');
         let n = t.slice(r);
-        n.length > 0 && (e.setTextContent(t.slice(0, r)), e.insertAfter(sT(n)), e.selectNext());
+        n.length > 0 && (e.setTextContent(t.slice(0, r)), e.insertAfter($createTextNode(n)), e.selectNext());
       }
     } else {
       let r = t.match(_$$er);
       if (r) {
         if (!t.startsWith(r[1]) && !t.startsWith('"')) {
           let n = t.slice(0, r.index);
-          n.length > 0 && (e.setTextContent(r[1]), e.insertBefore(sT(n)), e.selectPrevious());
+          n.length > 0 && (e.setTextContent(r[1]), e.insertBefore($createTextNode(n)), e.selectPrevious());
         }
         if (!t.endsWith(r[1]) && !t.endsWith('"')) {
           let n = t.slice(r[1].length);
-          n.length > 0 && (e.setTextContent(r[1]), e.insertAfter(sT(n)), e.selectNext());
+          n.length > 0 && (e.setTextContent(r[1]), e.insertAfter($createTextNode(n)), e.selectNext());
         }
-      } else e.replace(sT(t));
+      } else e.replace($createTextNode(t));
     }
   }, []);
   useEffect(() => a.registerNodeTransform(Y, h), [a, h]);
@@ -954,9 +954,9 @@ export function $$ev0({
   requestedTypes: G
 }) {
   let z = useCallback(() => {
-    let t = Ni();
+    let t = $getRoot();
     if (null !== t.getFirstChild()) return;
-    let r = lJ();
+    let r = $createParagraphNode();
     t.append(r);
     let n = function (e) {
       let t = new _$$o();
@@ -974,14 +974,14 @@ export function $$ev0({
         }
         if ("TOKEN_NODE_FIELD_ALIAS" === e.type) {
           let [t, r, n] = Q6(e.stringValue);
-          return "COMPONENT_PROP_ASSIGNMENTS" === r ? k(t, aA(t, n)) : (logError("component prop vars", "Unsupported node field alias type in expressionTokensToLexicalNodes"), sT(e.stringValue));
+          return "COMPONENT_PROP_ASSIGNMENTS" === r ? k(t, aA(t, n)) : (logError("component prop vars", "Unsupported node field alias type in expressionTokensToLexicalNodes"), $createTextNode(e.stringValue));
         }
-        return "TOKEN_NUMBER" === e.type ? sT(e.stringValue) : ["TOKEN_STRING", "TOKEN_BOOL"].includes(e.type) ? J(e.stringValue) : Z(e.stringValue);
+        return "TOKEN_NUMBER" === e.type ? $createTextNode(e.stringValue) : ["TOKEN_STRING", "TOKEN_BOOL"].includes(e.type) ? J(e.stringValue) : Z(e.stringValue);
       });
     }(e);
-    (V(n[n.length - 1]) || X(n[n.length - 1]) || K(n[n.length - 1]) || H(n[n.length - 1])) && n.push(sT(" "));
+    (V(n[n.length - 1]) || X(n[n.length - 1]) || K(n[n.length - 1]) || H(n[n.length - 1])) && n.push($createTextNode(" "));
     r.append(...n);
-    e1(r.select(0, r.getChildrenSize()));
+    $selectAll(r.select(0, r.getChildrenSize()));
   }, [e]);
   let [Q, et] = useState("");
   let [er, en] = useState([]);
@@ -1037,13 +1037,13 @@ export function $$ev0({
         let t = eo(e);
         let r = "";
         t.forEach(e => {
-          if (V(e)) e.__variable ? e.__modeID ? r += _z(e.__variable.node_id, e.__modeID, new _$$o(!0)) : r += e.__variable?.node_id || "{}" : r += "{}";else if (X(e)) e.__stablePathToNode && e.__componentProp ? r += bU(e.__stablePathToNode, "COMPONENT_PROP_ASSIGNMENTS", e.__componentProp.explicitDefId) : r += "[]";else if (H(e)) {
+          if (V(e)) e.__variable ? e.__modeID ? r += _z(e.__variable.node_id, e.__modeID, new _$$o(!0)) : r += e.__variable?.node_id || "{}" : r += "{}"; else if (X(e)) e.__stablePathToNode && e.__componentProp ? r += bU(e.__stablePathToNode, "COMPONENT_PROP_ASSIGNMENTS", e.__componentProp.explicitDefId) : r += "[]"; else if (H(e)) {
             let t = e.getTextContent().trim();
             "&&" === t ? r += "and" : "||" === t ? r += "or" : "!" === t ? r += "not" : r += e.getTextContent();
-          } else (kF(e) || K(e)) && (r += e.getTextContent());
+          } else ($isTextNode(e) || K(e)) && (r += e.getTextContent());
         });
         return r;
-      }(Ni());
+      }($getRoot());
       t.current.trim().length > 0 ? S(_$$d(t.current, r, G)) : S(!1);
       F(0);
     });

@@ -1,6 +1,6 @@
-import { SD } from "../vendor/850527";
-import { A7, WK, Ni, ff, BE, kF, sb, K8, Iq, y6, a9, lJ, _O } from "../vendor/408361";
-export function $$o0(e, r) {
+import { $wrapNodes } from "../vendor/850527";
+import { ArtificialNode__DO_NOT_USE, $createLineBreakNode, $getRoot, $isElementNode, $copyNode, $isTextNode, isHTMLElement, isDocumentFragment, $isRootOrShadowRoot, $isBlockElementNode, isBlockDomNode, $createParagraphNode, isInlineDomNode } from "../vendor/408361";
+export function $generateNodesFromDOM(e, r) {
   let n = r.body ? r.body.childNodes : [];
   let i = [];
   let o = [];
@@ -12,7 +12,7 @@ export function $$o0(e, r) {
     }
   }
   (function (e) {
-    for (let r of e) r.getNextSibling() instanceof A7 && r.insertAfter(WK());
+    for (let r of e) r.getNextSibling() instanceof ArtificialNode__DO_NOT_USE && r.insertAfter($createLineBreakNode());
     for (let r of e) {
       for (let e of r.getChildren()) r.insertBefore(e);
       r.remove();
@@ -20,22 +20,22 @@ export function $$o0(e, r) {
   })(o);
   return i;
 }
-export function $$a1(e, r) {
+export function $generateHtmlFromNodes(e, r) {
   if ("undefined" == typeof document || "undefined" == typeof window && void 0 === global.window) throw Error("To use $generateHtmlFromNodes in headless mode please initialize a headless browser implementation such as JSDom before calling this function.");
   let n = document.createElement("div");
-  let i = Ni().getChildren();
+  let i = $getRoot().getChildren();
   for (let s = 0; s < i.length; s++) h(e, i[s], n, r);
   return n.innerHTML;
 }
 function h(e, r, n, o = null) {
   let a = null === o || r.isSelected(o);
-  let d = ff(r) && r.excludeFromCopy("html");
+  let d = $isElementNode(r) && r.excludeFromCopy("html");
   let p = r;
   if (null !== o) {
-    let e = BE(r);
-    p = e = kF(e) && null !== o ? SD(o, e) : e;
+    let e = $copyNode(r);
+    p = e = $isTextNode(e) && null !== o ? $wrapNodes(o, e) : e;
   }
-  let g = ff(p) ? p.getChildren() : [];
+  let g = $isElementNode(p) ? p.getChildren() : [];
   let m = e._nodes.get(p.getType());
   let {
     element,
@@ -46,12 +46,12 @@ function h(e, r, n, o = null) {
   for (let n = 0; n < g.length; n++) {
     let i = g[n];
     let d = h(e, i, b, o);
-    !a && ff(r) && d && r.extractWithChild(i, o, "html") && (a = !0);
+    !a && $isElementNode(r) && d && r.extractWithChild(i, o, "html") && (a = !0);
   }
   if (a && !d) {
-    if ((sb(element) || K8(element)) && element.append(b), n.append(element), after) {
+    if ((isHTMLElement(element) || isDocumentFragment(element)) && element.append(b), n.append(element), after) {
       let e = after.call(p, element);
-      e && (K8(element) ? element.replaceChildren(e) : element.replaceWith(e));
+      e && (isDocumentFragment(element) ? element.replaceChildren(e) : element.replaceWith(e));
     }
   } else n.append(b);
   return a;
@@ -86,17 +86,17 @@ function p(e, r, n, i, o = new Map(), a) {
   }
   let O = e.childNodes;
   let x = [];
-  let w = (null == m || !Iq(m)) && (null != m && y6(m) || i);
+  let w = (null == m || !$isRootOrShadowRoot(m)) && (null != m && $isBlockElementNode(m) || i);
   for (let e = 0; e < O.length; e++) x.push(...p(O[e], r, n, w, new Map(o), m));
   null != b && (x = b(x));
-  a9(e) && (x = $$g(e, x, w ? () => {
-    let e = new A7();
+  isBlockDomNode(e) && (x = $$g(e, x, w ? () => {
+    let e = new ArtificialNode__DO_NOT_USE();
     n.push(e);
     return e;
-  } : lJ));
-  null == m ? x.length > 0 ? h = h.concat(x) : a9(e) && function (e) {
-    return null != e.nextSibling && null != e.previousSibling && _O(e.nextSibling) && _O(e.previousSibling);
-  }(e) && (h = h.concat(WK())) : ff(m) && m.append(...x);
+  } : $createParagraphNode));
+  null == m ? x.length > 0 ? h = h.concat(x) : isBlockDomNode(e) && function (e) {
+    return null != e.nextSibling && null != e.previousSibling && isInlineDomNode(e.nextSibling) && isInlineDomNode(e.previousSibling);
+  }(e) && (h = h.concat($createLineBreakNode())) : $isElementNode(m) && m.append(...x);
   return h;
 }
 function $$g(e, r, n) {
@@ -105,10 +105,10 @@ function $$g(e, r, n) {
   let a = [];
   for (let e = 0; e < r.length; e++) {
     let h = r[e];
-    if (y6(h)) {
+    if ($isBlockElementNode(h)) {
       i && !h.getFormat() && h.setFormat(i);
       o.push(h);
-    } else if (a.push(h), e === r.length - 1 || e < r.length - 1 && y6(r[e + 1])) {
+    } else if (a.push(h), e === r.length - 1 || e < r.length - 1 && $isBlockElementNode(r[e + 1])) {
       let e = n();
       e.setFormat(i);
       e.append(...a);
@@ -118,5 +118,5 @@ function $$g(e, r, n) {
   }
   return o;
 }
-export const d = $$o0;
-export const g = $$a1;
+export const d = $generateNodesFromDOM;
+export const g = $generateHtmlFromNodes;

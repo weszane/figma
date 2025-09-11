@@ -1,4 +1,4 @@
-import { ff, Ni } from "../vendor/408361";
+import { $isElementNode, $getRoot } from "../vendor/408361";
 var i = function (e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.$$default : e;
 }(function (e) {
@@ -14,21 +14,21 @@ function s(...e) {
   for (let n of e) if (n && "string" == typeof n) for (let [e] of n.matchAll(/\S+/g)) t.push(e);
   return t;
 }
-export function $$a2(...e) {
+export function mergeRegister(...e) {
   return () => {
     for (let t = e.length - 1; t >= 0; t--) e[t]();
     e.length = 0;
   };
 }
-export function $$l3(e, ...t) {
+export function addClassNamesToElement(e, ...t) {
   let n = s(...t);
   n.length > 0 && e.classList.add(...n);
 }
-export function $$u1(e, ...t) {
+export function removeClassNamesFromElement(e, ...t) {
   let n = s(...t);
   n.length > 0 && e.classList.remove(...n);
 }
-export function $$g5(e, t) {
+export function $getNearestNodeOfType(e, t) {
   let n = e;
   for (; null != n;) {
     if (n instanceof t) return n;
@@ -36,9 +36,9 @@ export function $$g5(e, t) {
   }
   return null;
 }
-export function $$c6(e) {
-  let t = $$f0(e, e => ff(e) && !e.isInline());
-  ff(t) || i(4, e.__key);
+export function $getNearestBlockElementAncestorOrThrow(e) {
+  let t = $findMatchingParent(e, e => $isElementNode(e) && !e.isInline());
+  $isElementNode(t) || i(4, e.__key);
   return t;
 }
 A && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
@@ -49,24 +49,24 @@ A && /iPad|iPhone|iPod/.test(navigator.userAgent) && window.MSStream;
 A && /Android/.test(navigator.userAgent);
 A && /^(?=.*Chrome).*/i.test(navigator.userAgent);
 A && /AppleWebKit\/[\d.]+/.test(navigator.userAgent);
-export let $$f0 = (e, t) => {
+export let $findMatchingParent = (e, t) => {
   let n = e;
-  for (; n !== Ni() && null != n;) {
+  for (; n !== $getRoot() && null != n;) {
     if (t(n)) return n;
     n = n.getParent();
   }
   return null;
 };
-export function $$d4(e, t) {
+export function $wrapNodeInElement(e, t) {
   let n = t();
   e.replace(n);
   n.append(e);
   return n;
 }
-export function $$h7(e, t) {
+export function objectKlassEquals(e, t) {
   return null !== e && Object.getPrototypeOf(e).constructor.name === t.name;
 }
-export function $$p8(e, t) {
+export function $filter(e, t) {
   let n = [];
   for (let r = 0; r < e.length; r++) {
     let i = t(e[r]);
@@ -74,12 +74,12 @@ export function $$p8(e, t) {
   }
   return n;
 }
-export const Bt = $$f0;
-export const HE = $$u1;
-export const Sd = $$a2;
-export const ZB = $$l3;
-export const cj = $$d4;
-export const eu = $$g5;
-export const mB = $$c6;
-export const xj = $$h7;
-export const zD = $$p8;
+export const Bt = $findMatchingParent;
+export const HE = removeClassNamesFromElement;
+export const Sd = mergeRegister;
+export const ZB = addClassNamesToElement;
+export const cj = $wrapNodeInElement;
+export const eu = $getNearestNodeOfType;
+export const mB = $getNearestBlockElementAncestorOrThrow;
+export const xj = objectKlassEquals;
+export const zD = $filter;

@@ -13,7 +13,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { customHistory } from "../905/612521";
 import { buildUploadUrl } from "../figma_app/169182";
-import { ZB } from "../905/491152";
+import { isStrippedHtmlEmpty } from "../905/491152";
 import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
 import { G_ } from "../figma_app/99826";
@@ -2041,7 +2041,7 @@ class iW extends Component {
       }));
     }, 200);
     this.updateCreatorPolicy = e => {
-      let t = ZB(e) ? "" : e;
+      let t = isStrippedHtmlEmpty(e) ? "" : e;
       this.props.dispatch(fy({
         id: this.getLocalFileIdOrPluginId(),
         metadata: {

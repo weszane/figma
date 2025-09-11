@@ -1,7 +1,7 @@
-import { ZB, Bt } from "../vendor/425002";
-import { fG, I2, nY, pT, ff, gu, vJ } from "../vendor/408361";
+import { addClassNamesToElement, $findMatchingParent } from "../vendor/425002";
+import { ElementNode, $isRangeSelection, isHTMLAnchorElement, $applyNodeReplacement, $isElementNode, createCommand, $getSelection } from "../vendor/408361";
 let A = new Set(["http:", "https:", "mailto:", "sms:", "tel:"]);
-export class LinkNode extends fG {
+export class LinkNode extends ElementNode {
   static getType() {
     return "link";
   }
@@ -30,7 +30,7 @@ export class LinkNode extends fG {
     null !== this.__target && (t.target = this.__target);
     null !== this.__rel && (t.rel = this.__rel);
     null !== this.__title && (t.title = this.__title);
-    ZB(t, e.theme.link);
+    addClassNamesToElement(t, e.theme.link);
     return t;
   }
   updateDOM(e, t, n) {
@@ -55,7 +55,7 @@ export class LinkNode extends fG {
     };
   }
   static importJSON(e) {
-    let t = $$a5(e.url, {
+    let t = $createLinkNode(e.url, {
       rel: e.rel,
       target: e.target,
       title: e.title
@@ -108,7 +108,7 @@ export class LinkNode extends fG {
     this.getWritable().__title = e;
   }
   insertNewAfter(e, t = !0) {
-    let n = $$a5(this.__url, {
+    let n = $createLinkNode(this.__url, {
       rel: this.__rel,
       target: this.__target,
       title: this.__title
@@ -129,7 +129,7 @@ export class LinkNode extends fG {
     return !0;
   }
   extractWithChild(e, t, n) {
-    if (!I2(t)) return !1;
+    if (!$isRangeSelection(t)) return !1;
     let r = t.anchor.getNode();
     let A = t.focus.getNode();
     return this.isParentOf(r) && this.isParentOf(A) && t.getTextContent().length > 0;
@@ -143,9 +143,9 @@ export class LinkNode extends fG {
 }
 function s(e) {
   let t = null;
-  if (nY(e)) {
+  if (isHTMLAnchorElement(e)) {
     let n = e.textContent;
-    (null !== n && "" !== n || e.children.length > 0) && (t = $$a5(e.getAttribute("href") || "", {
+    (null !== n && "" !== n || e.children.length > 0) && (t = $createLinkNode(e.getAttribute("href") || "", {
       rel: e.getAttribute("rel"),
       target: e.getAttribute("target"),
       title: e.getAttribute("title")
@@ -155,13 +155,13 @@ function s(e) {
     node: t
   };
 }
-export function $$a5(e, t) {
-  return pT(new LinkNode(e, t));
+export function $createLinkNode(e, t) {
+  return $applyNodeReplacement(new LinkNode(e, t));
 }
-export function $$l1(e) {
+export function $isLinkNode(e) {
   return e instanceof LinkNode;
 }
-export class $$u3 extends LinkNode {
+export class AutoLinkNode extends LinkNode {
   constructor(e, t = {}, n) {
     super(e, t, n);
     this.__isUnlinked = void 0 !== t.isUnlinked && null !== t.isUnlinked && t.isUnlinked;
@@ -170,7 +170,7 @@ export class $$u3 extends LinkNode {
     return "autolink";
   }
   static clone(e) {
-    return new $$u3(e.__url, {
+    return new AutoLinkNode(e.__url, {
       isUnlinked: e.__isUnlinked,
       rel: e.__rel,
       target: e.__target,
@@ -192,7 +192,7 @@ export class $$u3 extends LinkNode {
     return super.updateDOM(e, t, n) || e.__isUnlinked !== this.__isUnlinked;
   }
   static importJSON(e) {
-    let t = g(e.url, {
+    let t = $createAutoLinkNode(e.url, {
       isUnlinked: e.isUnlinked,
       rel: e.rel,
       target: e.target,
@@ -216,8 +216,8 @@ export class $$u3 extends LinkNode {
   }
   insertNewAfter(e, t = !0) {
     let n = this.getParentOrThrow().insertNewAfter(e, t);
-    if (ff(n)) {
-      let e = g(this.__url, {
+    if ($isElementNode(n)) {
+      let e = $createAutoLinkNode(this.__url, {
         isUnlinked: this.__isUnlinked,
         rel: this.__rel,
         target: this.__target,
@@ -229,21 +229,21 @@ export class $$u3 extends LinkNode {
     return null;
   }
 }
-function g(e, t) {
-  return pT(new $$u3(e, t));
+function $createAutoLinkNode(e, t) {
+  return $applyNodeReplacement(new AutoLinkNode(e, t));
 }
-export let $$c4 = gu("TOGGLE_LINK_COMMAND");
-export function $$f2(e, t = {}) {
+export let TOGGLE_LINK_COMMAND = createCommand("TOGGLE_LINK_COMMAND");
+export function $toggleLink(e, t = {}) {
   let {
     target,
     title
   } = t;
   let o = void 0 === t.rel ? "noreferrer" : t.rel;
-  let s = vJ();
-  if (!I2(s)) return;
+  let s = $getSelection();
+  if (!$isRangeSelection(s)) return;
   let g = s.extract();
   if (null === e) g.forEach(e => {
-    let t = Bt(e, e => !(e instanceof $$u3) && $$l1(e));
+    let t = $findMatchingParent(e, e => !(e instanceof AutoLinkNode) && $isLinkNode(e));
     if (t) {
       let e = t.getChildren();
       for (let n = 0; n < e.length; n++) t.insertBefore(e[n]);
@@ -255,7 +255,7 @@ export function $$f2(e, t = {}) {
         let n = e;
         for (; null !== n && null !== n.getParent() && !t(n);) n = n.getParentOrThrow();
         return t(n) ? n : null;
-      }(g[0], $$l1);
+      }(g[0], $isLinkNode);
       if (null !== t) {
         t.setURL(e);
         void 0 !== target && t.setTarget(target);
@@ -267,19 +267,19 @@ export function $$f2(e, t = {}) {
     let r = null;
     g.forEach(s => {
       let u = s.getParent();
-      if (u !== r && null !== u && (!ff(s) || s.isInline())) {
-        if ($$l1(u)) {
+      if (u !== r && null !== u && (!$isElementNode(s) || s.isInline())) {
+        if ($isLinkNode(u)) {
           r = u;
           u.setURL(e);
           void 0 !== target && u.setTarget(target);
           null !== o && r.setRel(o);
           return void (void 0 !== title && r.setTitle(title));
         }
-        if (u.is(t) || (t = u, r = $$a5(e, {
+        if (u.is(t) || (t = u, r = $createLinkNode(e, {
           rel: o,
           target,
           title
-        }), $$l1(u) ? null === s.getPreviousSibling() ? u.insertBefore(r) : u.insertAfter(r) : s.insertBefore(r)), $$l1(s)) {
+        }), $isLinkNode(u) ? null === s.getPreviousSibling() ? u.insertBefore(r) : u.insertAfter(r) : s.insertBefore(r)), $isLinkNode(s)) {
           if (s.is(r)) return;
           if (null !== r) {
             let e = s.getChildren();
@@ -292,8 +292,8 @@ export function $$f2(e, t = {}) {
   }
 }
 export const Db = LinkNode;
-export const FJ = $$l1;
-export const hx = $$f2;
-export const k_ = $$u3;
-export const yW = $$c4;
-export const zA = $$a5;
+export const FJ = $isLinkNode;
+export const hx = $toggleLink;
+export const k_ = AutoLinkNode;
+export const yW = TOGGLE_LINK_COMMAND;
+export const zA = $createLinkNode;

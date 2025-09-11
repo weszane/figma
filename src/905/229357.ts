@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { T } from "../905/68180";
-import { f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { j } from "../905/519202";
 import { _ } from "../905/410717";
 import { getI18nString } from "../905/303541";
@@ -21,7 +21,7 @@ export function $$p0({
   };
   return jsx(T, {
     selected: m,
-    children: jsx(f, {
+    children: jsx(setupToggleButton, {
       actionOnPointerDown: !0,
       "aria-label": h,
       checked: "boolean" == typeof e ? e : void 0,

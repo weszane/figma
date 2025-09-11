@@ -5,7 +5,7 @@ import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import u from "classnames";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { s_ } from "../905/17223";
 import { c$, wv, ms } from "../figma_app/236327";
 import { $$ } from "../figma_app/637027";
@@ -314,7 +314,7 @@ function eg(e) {
         }), e.titleSuffix]
       }), jsx("div", {
         className: isMobileUA ? uN : UB,
-        children: "string" == typeof e.subTitle ? $J(e.subTitle) : e.subTitle
+        children: "string" == typeof e.subTitle ? stripHtmlTags(e.subTitle) : e.subTitle
       })]
     }), jsx("div", {
       className: Hq,
@@ -522,7 +522,7 @@ tf(function ({
         children: n.name
       }), jsx("div", {
         className: ar,
-        children: G8(n, $J)
+        children: G8(n, stripHtmlTags)
       })]
     })]
   }, e.id);

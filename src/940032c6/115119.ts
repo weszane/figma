@@ -88,7 +88,7 @@ import { ServiceCategories as _$$e2 } from '../905/165054';
 import { R as _$$R6 } from '../905/165069';
 import { Of as _$$Of, ol as _$$ol2, w2 as _$$w6 } from '../905/165465';
 import { UpsellModalType } from '../905/165519';
-import { f as _$$f9 } from '../905/167712';
+import { setupToggleButton } from '../905/167712';
 import { E as _$$E7 } from '../905/172252';
 import { F as _$$F9 } from '../905/172964';
 import { y as _$$y2 } from '../905/175043';
@@ -800,7 +800,7 @@ import { Mq } from '../figma_app/991591';
 import { bA as _$$bA, j$ as _$$j$2, oD as _$$oD, tE as _$$tE, F8 } from '../figma_app/991782';
 import { _l as _$$_l } from '../figma_app/995208';
 import aQ from '../vendor/3757';
-import { D as _$$D5 } from '../vendor/24766';
+import { createHeadlessEditor } from '../vendor/24766';
 import { s as _$$s14 } from '../vendor/45699';
 import { V as _$$V3 } from '../vendor/71542';
 import { A as _$$A1 } from '../vendor/90566';
@@ -812,15 +812,15 @@ import _v from '../vendor/200551';
 import { g as _$$g6 } from '../vendor/202032';
 import { cJ as _$$cJ2 } from '../vendor/210601';
 import { A as _$$A14 } from '../vendor/211731';
-import { v5 as _$$v0, YW } from '../vendor/231521';
+import { ListNode, ListItemNode } from '@lexical/list';
 import { _U as _$$_U, DP } from '../vendor/261608';
 import { j as _$$j8 } from '../vendor/282386';
 import { P as _$$P7 } from '../vendor/348225';
-import { fU as _$$fU, gu as _$$gu, jZ as _$$jZ, lJ as _$$lJ, mB as _$$mB, pF as _$$pF, vJ as _$$vJ, zl as _$$zl2, H2, I2, Iq, Mv, Ni } from '../vendor/408361';
-import { cj as _$$cj, Sd as _$$Sd, Bt } from '../vendor/425002';
-import { DF as _$$DF } from '../vendor/463802';
+import { FORMAT_ELEMENT_COMMAND, createCommand, COMMAND_PRIORITY_EDITOR, $createParagraphNode, FORMAT_TEXT_COMMAND, BLUR_COMMAND, $getSelection, $nodesOfType, $insertNodes, $isRangeSelection, $isRootOrShadowRoot, SELECTION_CHANGE_COMMAND, $getRoot } from 'lexical';
+import { $wrapNodeInElement, mergeRegister, $findMatchingParent } from '../vendor/425002';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { E as _$$E9 } from '../vendor/464923';
-import { k_ as _$$k_, Db } from '../vendor/491721';
+import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { T as _$$T6 } from '../vendor/513042';
 import { useDispatch, useSelector } from 'react-redux';
 import { Q as _$$Q8 } from '../vendor/568295';
@@ -828,13 +828,13 @@ import { _ as _$$_8 } from '../vendor/646701';
 import { TW as _$$TW, YZ, Zk } from '../vendor/677121';
 import { d as _$$d0 } from '../vendor/683721';
 import { a as _$$a9 } from '../vendor/683966';
-import { d7 as _$$d9, eA as _$$eA, gb as _$$gb, gW as _$$gW, jA as _$$jA, mK as _$$mK, NB as _$$NB, Pi as _$$Pi, ps as _$$ps, TB as _$$TB, Wn as _$$Wn, Eg, WY } from '../vendor/693164';
-import { d as _$$d1 } from '../vendor/797080';
+import { BOLD_STAR, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, ITALIC_UNDERSCORE, QUOTE, UNORDERED_LIST, ORDERED_LIST, BOLD_UNDERSCORE, LINK, HEADING, $convertFromMarkdownString, ITALIC_STAR, STRIKETHROUGH } from '../vendor/693164';
+import { $generateNodesFromDOM } from '@lexical/html';
 import { E as _$$E0 } from '../vendor/807288';
-import { zI } from '../vendor/850527';
+import { $setBlocksType } from '@lexical/selection';
 import { A as _$$A4 } from '../vendor/850789';
-import { iK as _$$iK } from '../vendor/858260';
-import { dJ as _$$dJ, fi as _$$fi, jL as _$$jL, Pi } from '../vendor/871930';
+import { CodeNode } from '@lexical/code';
+import { QuoteNode, $createHeadingNode, HeadingNode, $isHeadingNode } from '@lexical/rich-text';
 import { Q as _$$Q7 } from '../vendor/898216';
 import { $ as _$$$3 } from '../vendor/909072';
 import { N as _$$N10 } from '../vendor/930821';
@@ -4749,7 +4749,7 @@ function sT({
   }, [n]), !getFeatureFlags().bake_mobile_preview) {
     return null;
   }
-  let s = e ? _$$y8 : _$$f9;
+  let s = e ? _$$y8 : setupToggleButton;
   let r = jsx(_$$k3, {});
   return jsx(s, {
     'variant': 'highlighted',
@@ -6471,7 +6471,7 @@ async function oh(e, t, i) {
             error: 1
           };
         }
-      } catch {}
+      } catch { }
       return {
         success: !1,
         error: 3
@@ -9936,7 +9936,7 @@ function cm({
       return n;
     }
   }, [s.faviconID]);
-  useEffect(() => {}, [s.faviconID]);
+  useEffect(() => { }, [s.faviconID]);
   return jsx('div', {
     className: 'x1dc814f x1ff1495',
     children: jsx(d8, {
@@ -12491,7 +12491,7 @@ function pL(e, t, i) {
   }, [r, d, e, p]);
   return c;
 }
-let pz = [_$$iK, Db, _$$v0, YW, _$$jL, _$$dJ, _$$k_, Db, K1];
+let pz = [CodeNode, LinkNode, ListNode, ListItemNode, HeadingNode, QuoteNode, AutoLinkNode, LinkNode, K1];
 let p7 = e => new Promise((t, i) => {
   let n = new Image();
   n.onload = () => {
@@ -12556,13 +12556,13 @@ function xn() {
     className: 'toolbar_plugin--divider--93LfM'
   });
 }
-let xl = _$$gu('INSERT_IMAGE_COMMAND');
+let xl = createCommand('INSERT_IMAGE_COMMAND');
 function xa({
   onBlur: e,
   collection: t
 }) {
   let i = useCurrentFileKey();
-  let [n] = _$$DF();
+  let [n] = useLexicalComposerContext();
   let s = useRef(null);
   let r = useRef(null);
   let [o, d] = useState(!1);
@@ -12576,46 +12576,46 @@ function xa({
     let t = n.getEditorState();
     let i = JSON.stringify(t);
     t.read(() => {
-      e(i, _$$zl2(K1).map(e => e.exportAsAssetForPublish()));
+      e(i, $nodesOfType(K1).map(e => e.exportAsAssetForPublish()));
     });
   }, [n, e]);
   let v = useCallback(() => {
-    let e = _$$vJ();
-    if (I2(e)) {
+    let e = $getSelection();
+    if ($isRangeSelection(e)) {
       d(e.hasFormat('bold'));
       p(e.hasFormat('italic'));
       m(e.hasFormat('underline'));
       g(e.hasFormat('strikethrough'));
       let t = e.anchor.getNode();
-      let i = t.getKey() === 'root' ? t : Bt(t, e => {
+      let i = t.getKey() === 'root' ? t : $findMatchingParent(t, e => {
         let t = e.getParent();
-        return t !== null && Iq(t);
+        return t !== null && $isRootOrShadowRoot(t);
       });
-      (i === null && (i = t.getTopLevelElementOrThrow()), Pi(i)) ? _(i.getTag()) : (i.getType(), _('paragraph'));
+      (i === null && (i = t.getTopLevelElementOrThrow()), $isHeadingNode(i)) ? _(i.getTag()) : (i.getType(), _('paragraph'));
     }
   }, []);
-  useEffect(() => _$$Sd(n.registerUpdateListener(({
+  useEffect(() => mergeRegister(n.registerUpdateListener(({
     editorState: e
   }) => {
     e.read(() => {
       v();
     });
-  }), n.registerCommand(Mv, (e, t) => (v(), !1), 1), n.registerCommand(_$$pF, e => !(s?.current && s.current.contains(e.relatedTarget) || r?.current && r.current.contains(e.relatedTarget)) && (y(), !0), _$$jZ), n.registerCommand(xl, e => {
+  }), n.registerCommand(SELECTION_CHANGE_COMMAND, (e, t) => (v(), !1), 1), n.registerCommand(BLUR_COMMAND, e => !(s?.current && s.current.contains(e.relatedTarget) || r?.current && r.current.contains(e.relatedTarget)) && (y(), !0), COMMAND_PRIORITY_EDITOR), n.registerCommand(xl, e => {
     let t = _$$uC(e);
-    H2([t]);
-    Iq(t.getParentOrThrow()) && _$$cj(t, _$$lJ).selectEnd();
+    $insertNodes([t]);
+    $isRootOrShadowRoot(t.getParentOrThrow()) && $wrapNodeInElement(t, $createParagraphNode).selectEnd();
     return !0;
-  }, _$$jZ)), [n, v, y]);
+  }, COMMAND_PRIORITY_EDITOR)), [n, v, y]);
   let j = (e, t) => {
     e.update(() => {
-      let e = _$$vJ();
-      zI(e, () => _$$fi(t));
+      let e = $getSelection();
+      $setBlocksType(e, () => $createHeadingNode(t));
     });
   };
   let k = e => {
     e.update(() => {
-      let e = _$$vJ();
-      I2(e) && zI(e, () => _$$lJ());
+      let e = $getSelection();
+      $isRangeSelection(e) && $setBlocksType(e, () => $createParagraphNode());
     });
   };
   let w = async e => {
@@ -12716,64 +12716,64 @@ function xa({
           })]
         })]
       })
-    }), jsx(_$$f9, {
+    }), jsx(setupToggleButton, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.bold'),
       'onIcon': jsx(noop, {}),
       'offIcon': jsx(noop, {}),
       'checked': o,
       'variant': 'highlighted',
       'onChange': () => {
-        n.dispatchCommand(_$$mB, 'bold');
+        n.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
       }
-    }), jsx(_$$f9, {
+    }), jsx(setupToggleButton, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.italic'),
       'onIcon': jsx(_$$s6, {}),
       'offIcon': jsx(_$$s6, {}),
       'checked': c,
       'variant': 'highlighted',
       'onChange': () => {
-        n.dispatchCommand(_$$mB, 'italic');
+        n.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic');
       }
-    }), jsx(_$$f9, {
+    }), jsx(setupToggleButton, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.underline'),
       'onIcon': jsx(_$$W6, {}),
       'offIcon': jsx(_$$W6, {}),
       'checked': x,
       'variant': 'highlighted',
       'onChange': () => {
-        n.dispatchCommand(_$$mB, 'underline');
+        n.dispatchCommand(FORMAT_TEXT_COMMAND, 'underline');
       }
-    }), jsx(_$$f9, {
+    }), jsx(setupToggleButton, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.strikethrough'),
       'onIcon': jsx(_$$N8, {}),
       'offIcon': jsx(_$$N8, {}),
       'checked': h,
       'variant': 'highlighted',
       'onChange': () => {
-        n.dispatchCommand(_$$mB, 'strikethrough');
+        n.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
       }
     }), jsx(xn, {}), jsx(_$$K2, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignLeft'),
       'onClick': () => {
-        n.dispatchCommand(_$$fU, 'left');
+        n.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');
       },
       'children': jsx(_$$h9, {})
     }), jsx(_$$K2, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignCenter'),
       'onClick': () => {
-        n.dispatchCommand(_$$fU, 'center');
+        n.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center');
       },
       'children': jsx(_$$N9, {})
     }), jsx(_$$K2, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignRight'),
       'onClick': () => {
-        n.dispatchCommand(_$$fU, 'right');
+        n.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right');
       },
       'children': jsx(_$$K5, {})
     }), jsx(_$$K2, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignJustify'),
       'onClick': () => {
-        n.dispatchCommand(_$$fU, 'justify');
+        n.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify');
       },
       'children': jsx(_$$h0, {})
     }), getFeatureFlags().cms_rt_field_image_embed && jsxs(Fragment, {
@@ -12827,18 +12827,18 @@ let xs = {
   }
 };
 let xr = '{"root":{"children":[{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textStyle":"", "textFormat":0}],"direction":null,"format":"","indent":0,"type":"root","version":1}}';
-let xo = [_$$TB, _$$jA, _$$mK, _$$NB, _$$eA, _$$gb, _$$d9, _$$Pi, Eg, _$$gW, WY, _$$ps];
+let xo = [HEADING, QUOTE, UNORDERED_LIST, ORDERED_LIST, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, ITALIC_STAR, ITALIC_UNDERSCORE, STRIKETHROUGH, LINK];
 function xd({
   shouldAutoFocus: e
 }) {
-  let [t] = _$$DF();
+  let [t] = useLexicalComposerContext();
   useEffect(() => {
     e && t.focus();
   }, [t, e]);
   return null;
 }
 function xc(e) {
-  let [t] = _$$DF();
+  let [t] = useLexicalComposerContext();
   useEffect(() => {
     let i;
     try {
@@ -12895,7 +12895,7 @@ function xx(e) {
   let {
     value
   } = e;
-  let i = useMemo(() => _$$D5({
+  let i = useMemo(() => createHeadlessEditor({
     namespace: 'dakota-table-viewer',
     onError(e) {
       reportError(_$$e2.CMS, e);
@@ -12910,7 +12910,7 @@ function xx(e) {
     } catch (t) {
       e = i.parseEditorState(xr);
     }
-    let n = e.read(() => Ni().getTextContent());
+    let n = e.read(() => $getRoot().getTextContent());
     return n.length > 300 ? `${n.slice(0, 300)}...` : n;
   }, [i, value]), x_(e));
   return jsx(Fragment, {
@@ -13174,7 +13174,7 @@ async function xw(e, t, i) {
       });
       await navigator.clipboard.write([i]);
       a();
-    } catch (e) {}
+    } catch (e) { }
   }
 }
 async function xS(e, t) {
@@ -13621,7 +13621,7 @@ let xE = memo(({
       });
     }
   }, [e]);
-  let E = useCallback(e => {}, []);
+  let E = useCallback(e => { }, []);
   useEffect(() => {
     S(i.current?.api, u);
   }, [u, S]);
@@ -14789,7 +14789,7 @@ function mv({
           ...Object.fromEntries(Object.entries(e).filter(([e]) => !n[e])),
           ...l
         }));
-      } catch (e) {} finally {
+      } catch (e) { } finally {
         b.current = !1;
       }
     }, _), b.current = !0) : (k(n), m(l)));
@@ -15701,14 +15701,14 @@ async function m4(e, t, i) {
     switch (t) {
       case _$$_j.RICH_TEXT:
         return JSON.stringify(function (e) {
-          let t = _$$D5({
+          let t = createHeadlessEditor({
             namespace: 'dakota-csv-parser',
             nodes: pz
           });
           if (t.setEditorState(t.parseEditorState(xr)), !e || e.trim().length === 0) return t.getEditorState().toJSON();
           if (!m3(e)) {
             t.update(() => {
-              _$$Wn(e, xo);
+              $convertFromMarkdownString(e, xo);
             }, {
               discrete: !0
             });
@@ -15716,9 +15716,9 @@ async function m4(e, t, i) {
           }
           let i = new DOMParser().parseFromString(e, 'text/html');
           t.update(() => {
-            let e = Ni();
+            let e = $getRoot();
             e.clear();
-            let n = _$$d1(t, i);
+            let n = $generateNodesFromDOM(t, i);
             n && n.length > 0 && n.forEach(t => e.append(t));
           }, {
             discrete: !0
@@ -16180,7 +16180,7 @@ let hd = registerModal(e => {
                 }));
               }
             }) : jsx(ho, {
-              onImportFailure: () => {},
+              onImportFailure: () => { },
               onImportSuccess: e => {
                 r(e);
                 d(e.name);
@@ -16544,13 +16544,13 @@ class hm {
         case _$$_j.IMAGE:
           return;
         case _$$_j.RICH_TEXT:
-          let a = _$$D5({
+          let a = createHeadlessEditor({
             namespace: 'dakota-ai-munger',
             nodes: pz
           });
           a.setEditorState(a.parseEditorState(xr));
           a.update(() => {
-            _$$Wn(n, xo);
+            $convertFromMarkdownString(n, xo);
           }, {
             discrete: !0
           });
@@ -16723,7 +16723,7 @@ function hb() {
       g(l);
       f(e => new Set(e).add(l));
       let a = (await hg(t)).getReader();
-      for (h(!1);;) {
+      for (h(!1); ;) {
         let {
           done,
           value
@@ -17253,7 +17253,7 @@ function h0(e) {
         deleteItem: () => {
           _$$l.user('delete-code-component', () => {
             let t = getSingletonSceneGraph().get(e);
-            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
+            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e); else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid); else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid); else throw new Error(`Invalid node type for deletion: ${t?.type}`);
             fullscreenValue.triggerAction('commit');
           });
         },
@@ -20900,8 +20900,8 @@ async function _T({
   ignoreKnown: e = !1,
   widths: t
 } = {
-  ignoreKnown: !1
-}) {
+    ignoreKnown: !1
+  }) {
   _S();
   let i = _C();
   if (!i.length) throw new Error('No breakpoint frames in selection');
@@ -21361,7 +21361,7 @@ let _q = e => {
   for (let t of e.directlySelectedNodes) {
     for (; t;) {
       if (t.isBreakpointFrame || t.isResponsiveSet) return t;
-      if (t.parentNode) t = t.parentNode;else break;
+      if (t.parentNode) t = t.parentNode; else break;
     }
   }
 };
@@ -22896,7 +22896,7 @@ function yq({
   let d = r ? getI18nString('fullscreen.properties_panel.tooltip_hide') : getI18nString('fullscreen.properties_panel.tooltip_show');
   return jsx('div', {
     className: _$$RK,
-    children: jsx(_$$f9, {
+    children: jsx(setupToggleButton, {
       'aria-label': d,
       'checked': !e && !r,
       'disabled': e,
@@ -23237,7 +23237,7 @@ function ve({
     })
   });
 }
-class vt extends _$$c$6 {}
+class vt extends _$$c$6 { }
 function vs({
   directManipulationEditor: e,
   classNameEditingController: t,
@@ -23503,12 +23503,12 @@ let vu = memo(e => {
       message: t,
       error: !0,
       button: {
-        action: () => {},
+        action: () => { },
         text: getI18nString('figmake.refresh')
       }
     }));
   }, [n]);
-  let o = useMemo(() => new _$$q0(t, e => {}, r), [t, r]);
+  let o = useMemo(() => new _$$q0(t, e => { }, r), [t, r]);
   let d = _$$lj(t);
   return jsxs(Fragment, {
     children: [jsx(yZ, {

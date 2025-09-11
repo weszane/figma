@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { DF } from "../vendor/463802";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 export function $$a0({
   value: e
 }) {
-  let [t] = DF();
+  let [t] = useLexicalComposerContext();
   useEffect(() => {
     try {
       JSON.stringify(t.getEditorState().toJSON()) !== e && t.update(() => {

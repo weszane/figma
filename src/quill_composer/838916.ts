@@ -17,11 +17,11 @@ import { A as _$$A8 } from "../vendor/787998";
 import { A as _$$A9 } from "../vendor/706709";
 import { c2 } from "../figma_app/243213";
 import { Uz } from "../905/63728";
-import { z as _$$z } from "../905/69245";
+import { sanitizeHtml } from "../905/69245";
 import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
 import { _ as _$$_ } from "../905/142361";
-import { mv, OZ, mm } from "../905/491152";
+import { isValidUrl, formatShortcutKey, textToHtmlParagraphs } from "../905/491152";
 import z from "../vendor/128080";
 import { A as _$$A0 } from "../quill_composer/816110";
 var n = l;
@@ -362,7 +362,7 @@ class N extends _$$Ay2 {
     t.preventDefault();
     let e = this.quill.getSelection();
     let i = t.clipboardData?.getData("text/plain") || "";
-    let o = mv(i);
+    let o = isValidUrl(i);
     if (!e) return;
     if (!o) {
       let t = new Ru().retain(e.index).$$delete(e.length).insert(i);
@@ -388,7 +388,7 @@ function H(t) {
     "aria-label": `${t.tooltip}`,
     value: t.value,
     "data-tooltip-type": Ib.TEXT,
-    "data-tooltip": `${t.tooltip}${OZ(t)}`,
+    "data-tooltip": `${t.tooltip}${formatShortcutKey(t)}`,
     onKeyDown: t => {
       t.keyCode === Uz.ESCAPE && t.currentTarget.blur();
     }
@@ -536,7 +536,7 @@ export function $$j0({
   }, []);
   let g = "value" in i;
   let f = g ? i.value : void 0;
-  let m = useRef(g ? R(mm(i.value)) : void 0);
+  let m = useRef(g ? R(textToHtmlParagraphs(i.value)) : void 0);
   let [v, y] = useState(m.current);
   useLayoutEffect(() => {
     if (void 0 === v) return;
@@ -545,7 +545,7 @@ export function $$j0({
   }, [e, v]);
   useLayoutEffect(() => {
     if (void 0 === f) return;
-    let t = R(mm(f));
+    let t = R(textToHtmlParagraphs(f));
     t !== m.current && (m.current = t, y(t));
   }, [f]);
   return jsxs("div", {
@@ -555,7 +555,7 @@ export function $$j0({
     children: [jsx(B, {
       ref: n,
       bounds: i.bounds,
-      defaultValue: g ? void 0 : R(mm(i.defaultValue)),
+      defaultValue: g ? void 0 : R(textToHtmlParagraphs(i.defaultValue)),
       formats: $$O2,
       modules: c,
       onChange: t => {
@@ -601,11 +601,11 @@ export function $$D1({
     readOnly: !0,
     className: n()("quill-readonly", e),
     innerRef: i,
-    value: _$$z(mm(t))
+    value: sanitizeHtml(textToHtmlParagraphs(t))
   }), [e, i, t]);
 }
 function R(t) {
-  return _$$z(function (t) {
+  return sanitizeHtml(function (t) {
     let e = document.createElement("div");
     e.innerHTML = d().sanitize(t);
     let i = e.querySelectorAll("h1");

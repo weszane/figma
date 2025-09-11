@@ -9,7 +9,7 @@ import { J as _$$J } from "../905/125993";
 import { permissionScopeHandler } from "../905/189185";
 import g from "classnames";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { $$ } from "../figma_app/637027";
 import { M3 } from "../figma_app/119475";
 import { B as _$$B } from "../905/714743";
@@ -263,7 +263,7 @@ function eb(e) {
       children: G8({
         tagline,
         description
-      }, $J)
+      }, stripHtmlTags)
     }), jsx("div", {
       className: Yl,
       children: r
@@ -320,7 +320,7 @@ function eC(e) {
       children: G8({
         tagline,
         description
-      }, $J)
+      }, stripHtmlTags)
     }), jsx("div", {
       className: Yl,
       children: fO(i)
@@ -960,7 +960,7 @@ function eV(e) {
   let s = jsxs(Fragment, {
     children: [jsx("div", {
       className: rz,
-      children: G8(t, $J)
+      children: G8(t, stripHtmlTags)
     }), jsx("div", {
       className: Yl,
       children: l

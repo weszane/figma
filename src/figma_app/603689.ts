@@ -99,7 +99,7 @@ import { x as _$$x4 } from '../905/407439';
 import { debugState } from '../905/407919';
 import { L as _$$L } from '../905/408237';
 import { A as _$$A8 } from '../905/408320';
-import { y as _$$y2 } from '../905/409121';
+import { browserCapabilities } from '../905/409121';
 import { rq as _$$rq } from '../905/425180';
 import { hS } from '../905/437088';
 import { N as _$$N6 } from '../905/438674';
@@ -1724,7 +1724,7 @@ let ns = {
   AccessibleAreasBindings: () => _$$H2,
   OOMHelpers: () => userValue,
   WebReporting: () => _$$F2,
-  PlatformInfo: () => _$$y2,
+  PlatformInfo: () => browserCapabilities,
   FontManagerJs: () => _$$h,
   WebAsync: () => _$$F,
   JsBindingsTestHelpers: () => rx,
@@ -9164,7 +9164,7 @@ t(async () => {
           }),
           AccessibleAreasBindings: () => _$$H2,
           OOMHelpers: () => userValue,
-          PlatformInfo: () => _$$y2,
+          PlatformInfo: () => browserCapabilities,
           FontManagerJs: () => _$$h,
           JSTextLayout: () => LineBreakProcessor,
           SitesBindings: () => rq,

@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { $n } from "../905/521428";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { K as _$$K } from "../905/443068";
 import { o as _$$o } from "../905/821217";
 import { T as _$$T } from "../905/745591";
@@ -171,7 +171,7 @@ export function $$ew0(e) {
       "data-tooltip-submenu-open": !1,
       "data-tooltip-shortcut-key": "focus-mode-component-set-toggle"
     } : null;
-    m = jsx(_$$f, {
+    m = jsx(setupToggleButton, {
       recordingKey,
       "aria-label": e?.["data-tooltip"] || formatI18nMessage(h["data-tooltip"]),
       checked: isActive,

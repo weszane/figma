@@ -53,7 +53,7 @@ import { y as _$$y } from "../figma_app/849666";
 import { T as _$$T2 } from "../figma_app/373780";
 import eo from "classnames";
 import { S as _$$S } from "../figma_app/420927";
-import { y as _$$y2 } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 import { a as _$$a } from "../905/518538";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -259,7 +259,7 @@ import { s1 as _$$s5 } from "../figma_app/226737";
 import { FW as _$$FW } from "../figma_app/952764";
 import { E as _$$E2 } from "../9410/367372";
 import { debounce } from "../905/915765";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { showModalHandler } from "../905/156213";
 import { Zg } from "../figma_app/106207";
 import { fG, gY } from "../figma_app/973927";
@@ -541,7 +541,7 @@ var el = eo;
 function eu() {
   let e = Array.from(getObservableValue(AppStateTsApi?.uiState().autoLayoutShortcutHints, new Map()).values());
   let t = useAtomWithSubscription(Bu);
-  let i = _$$y2.isApple();
+  let i = browserCapabilities.isApple();
   let n = e => {
     switch (e) {
       case AutoLayoutInsertMode.IGNORE_AUTOLAYOUT:
@@ -5686,7 +5686,7 @@ function ab({
         name,
         description
       } = T(n);
-      let l = $J(description).trim();
+      let l = stripHtmlTags(description).trim();
       let d = "client_meta" in t ? JSON.parse(t.client_meta) : {};
       let c = d.preset_picker?.thumbnail_url_dark_bg ?? "";
       return {
@@ -6498,7 +6498,7 @@ si.getLocalizedSpecialKey = e => {
 };
 si.splitStringIntoKeys = e => {
   let t = [];
-  let i = _$$y2.isApple();
+  let i = browserCapabilities.isApple();
   for (; e.length > 0;) if (e.startsWith("Ctrl+")) {
     t.push(getI18nString("whiteboard.keyboard_shortcuts.key_label.ctrl"));
     e = e.slice(5);
@@ -6537,7 +6537,7 @@ si.splitStringIntoKeys = e => {
 si.keybindingsForShortcut = (e, t, i) => {
   if (!i) return null;
   let r = function (e, t) {
-    let i = _$$y2.isApple();
+    let i = browserCapabilities.isApple();
     let r = i ? "\u2325" : BrowserInfo.chromeos ? getI18nString("whiteboard.keyboard_shortcuts.key_label.search") : getI18nString("whiteboard.keyboard_shortcuts.key_label.alt");
     let n = i ? "\u2318" : getI18nString("whiteboard.keyboard_shortcuts.key_label.ctrl");
     let a = i ? "\u21A9" : getI18nString("whiteboard.keyboard_shortcuts.key_label.enter");

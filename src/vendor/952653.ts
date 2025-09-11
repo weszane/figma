@@ -1,9 +1,9 @@
-import { DF } from "../vendor/463802";
+import { useLexicalComposerContext } from "../vendor/463802";
 import { useEffect } from "react";
 export function $$o0({
   defaultSelection: e
 }) {
-  let [r] = DF();
+  let [r] = useLexicalComposerContext();
   useEffect(() => {
     r.focus(() => {
       let e = document.activeElement;

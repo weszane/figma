@@ -7,8 +7,8 @@ var s = function (e) {
   for (let e = 1; e < $$arguments.length; e++) r.append("v", $$arguments[e]);
   throw Error(`Minified Lexical error #${e}; visit https://lexical.dev/docs/error?${r} for the full message or use the non-minified dev environment for full errors and additional helpful warnings.`);
 });
-export let $$o1 = createContext(null);
-export function $$a2(e, r) {
+export let LexicalComposerContext = createContext(null);
+export function createLexicalComposerContext(e, r) {
   let n = null;
   null != e && (n = e[1]);
   return {
@@ -17,11 +17,11 @@ export function $$a2(e, r) {
     }
   };
 }
-export function $$h0() {
-  let e = useContext($$o1);
+export function useLexicalComposerContext() {
+  let e = useContext(LexicalComposerContext);
   null == e && s(8);
   return e;
 }
-export const DF = $$h0;
-export const Gu = $$o1;
-export const Mx = $$a2;
+export const DF = useLexicalComposerContext;
+export const Gu = LexicalComposerContext;
+export const Mx = createLexicalComposerContext;

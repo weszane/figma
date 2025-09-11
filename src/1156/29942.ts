@@ -161,16 +161,16 @@ import { G as _$$G } from "../905/750789";
 import { R as _$$R } from "../905/943003";
 import { fQ } from "../1156/250784";
 import { Q as _$$Q2 } from "../1156/755570";
-import { TB, jA, mK, NB, eA as _$$eA, gb, d7, Pi, Eg, gW, WY, ps, Wn as _$$Wn } from "../vendor/693164";
+import { HEADING, QUOTE, UNORDERED_LIST, ORDERED_LIST, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, ITALIC_STAR, ITALIC_UNDERSCORE, STRIKETHROUGH, LINK, $convertFromMarkdownString } from "../vendor/693164";
 import { n } from "../vendor/110313";
-import { DF } from "../vendor/463802";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { a as _$$a } from "../vendor/683966";
 import { R as _$$R2 } from "../vendor/211731";
 import { $ as _$$$2 } from "../vendor/909072";
-import { iK } from "../vendor/858260";
-import { Db, k_ } from "../vendor/491721";
-import { v5, YW } from "../vendor/231521";
-import { jL, dJ } from "../vendor/871930";
+import { CodeNode } from "@lexical/code";
+import { LinkNode, AutoLinkNode } from "@lexical/link";
+import { ListNode, ListItemNode } from "@lexical/list";
+import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { q as _$$q2 } from "../1156/234923";
 import { OL } from "../1156/31019";
 import { a as _$$a2 } from "../905/964520";
@@ -1300,7 +1300,7 @@ function tX({
   let o = isDevEnvironment() ? cortexClientGeneratedRequestUuid : void 0;
   let c = !1;
   let d = !1;
-  if (error.message === T_.ATTACHMENTS_TOO_LARGE || error.message === T_.MAX_CONTENT_LENGTH_EXCEEDED || error.message === T_.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK) d = !0;else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0;else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0;else {
+  if (error.message === T_.ATTACHMENTS_TOO_LARGE || error.message === T_.MAX_CONTENT_LENGTH_EXCEEDED || error.message === T_.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK) d = !0; else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0; else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0; else {
     let e = sZ(error);
     c = [_$$B.GENERIC, _$$B.OFFLINE, _$$B.NETWORK_ERROR, _$$B.RATE_LIMIT_EXCEEDED].includes(e);
     d = [_$$B.CONTENT_LENGTH_LIMIT, _$$B.UNSAFE_OR_HARMFUL_CONTENT].includes(e);
@@ -1566,7 +1566,7 @@ let tQ = forwardRef((e, t) => {
       return _$$A3(e).tz("America/Los_Angeles").isBefore(t, "month");
     }(n.updatedAt)) t(_$$b2({
       [th]: !1
-    }));else if (n) return {
+    })); else if (n) return {
       showChatSoftLimitBanner: !1
     };
     return i && i !== FPlanNameType.STARTER && i !== FPlanNameType.STUDENT ? {
@@ -1740,7 +1740,7 @@ function t0({
                 return !1;
               }(e)) > -1);
             })(t) && hH(InsertErrorType.USER_PASTED_FIGMA_LINK_IN_CHAT);
-          } catch {}
+          } catch { }
         },
         placeholder: b,
         style: {
@@ -2746,7 +2746,7 @@ function n0({
       return null;
   }
 }
-let rn = [iK, Db, v5, YW, jL, dJ, k_, Db];
+let rn = [CodeNode, LinkNode, ListNode, ListItemNode, HeadingNode, QuoteNode, AutoLinkNode, LinkNode];
 let rr = "editor_theme--heading--vjD0c";
 let ri = "editor_theme--revTextCode--mNWW0";
 let rs = "editor_theme--revHeading--ImFNg";
@@ -2816,13 +2816,13 @@ let rl = {
     underlineStrikethrough: "editor_theme--revTextUnderlineStrikethrough--H-f-D"
   }
 };
-let ro = [TB, jA, mK, NB, _$$eA, gb, d7, Pi, Eg, gW, WY, ps];
+let ro = [HEADING, QUOTE, UNORDERED_LIST, ORDERED_LIST, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, ITALIC_STAR, ITALIC_UNDERSCORE, STRIKETHROUGH, LINK];
 function rc(e) {
-  let [t] = DF();
+  let [t] = useLexicalComposerContext();
   useEffect(() => {
     try {
       t.update(() => {
-        _$$Wn(e.textContent, ro, void 0, !0);
+        $convertFromMarkdownString(e.textContent, ro, void 0, !0);
       }, {
         discrete: !0
       });
@@ -5137,7 +5137,7 @@ export default function App() {
             ..._$$Ay()
           })).getReader();
           let n = "";
-          for (;;) {
+          for (; ;) {
             let {
               done,
               value

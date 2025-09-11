@@ -3,10 +3,10 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { AppStateTsApi } from "../figma_app/763686";
 import { v } from "../figma_app/163822";
 import { getSingletonSceneGraph } from "../905/700578";
-import { Wn, mK, NB } from "../vendor/693164";
-import { DF } from "../vendor/463802";
+import { $convertFromMarkdownString, UNORDERED_LIST, ORDERED_LIST } from "../vendor/693164";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { atomStoreManager, Xr } from "../figma_app/27355";
-import { SK } from "../vendor/408361";
+import { CLEAR_EDITOR_COMMAND } from "lexical";
 import { logError } from "../905/714362";
 import { JT } from "../figma_app/632248";
 import { wj, qy } from "../figma_app/862289";
@@ -14,7 +14,7 @@ import { hD } from "../figma_app/164260";
 export function $$g6(e, t = "history-push") {
   let i = atomStoreManager.get(hD);
   i && i.update(() => {
-    Wn(e, [mK, NB]);
+    $convertFromMarkdownString(e, [UNORDERED_LIST, ORDERED_LIST]);
   }, {
     tag: t
   });
@@ -31,10 +31,10 @@ export function $$_8(e, t) {
 }
 export function $$x5() {
   let e = atomStoreManager.get(hD);
-  e && e.dispatchCommand(SK, void 0);
+  e && e.dispatchCommand(CLEAR_EDITOR_COMMAND, void 0);
 }
 export function $$y4() {
-  let [e] = DF();
+  let [e] = useLexicalComposerContext();
   let t = Xr(hD);
   useEffect(() => {
     t(e);
@@ -42,7 +42,7 @@ export function $$y4() {
   return null;
 }
 export function $$b0() {
-  let [e] = DF();
+  let [e] = useLexicalComposerContext();
   let t = $$C7();
   useEffect(() => {
     t ? e.setEditable(!1) : e.setEditable(!0);

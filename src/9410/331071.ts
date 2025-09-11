@@ -28,7 +28,7 @@ import { e as _$$e2 } from '../905/149844';
 import { t as _$$t3 } from '../905/150656';
 import { hideModalHandler, popModalStack, showModalHandler, updateModal } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { f as _$$f6 } from '../905/167712';
+import { setupToggleButton } from '../905/167712';
 import { T as _$$T4 } from '../905/172092';
 import { x as _$$x } from '../905/179739';
 import { i as _$$i5 } from '../905/186077';
@@ -84,7 +84,7 @@ import { L0, MQ } from '../905/479155';
 import { V as _$$V } from '../905/480825';
 import { sendMetric } from '../905/485103';
 import { as as _$$as, _M, Dl, hm, Q0, SX, zQ } from '../905/487011';
-import { $J as _$$$J } from '../905/491152';
+import { stripHtmlTags } from '../905/491152';
 import { J as _$$J2 } from '../905/494216';
 import { C as _$$C5 } from '../905/504203';
 import { r6 as _$$r3 } from '../905/507950';
@@ -4897,7 +4897,7 @@ function sf({
           left: '-4px',
           borderRadius: '0 9px 0 0'
         },
-        children: jsx(_$$f6, {
+        children: jsx(setupToggleButton, {
           'onIcon': jsx(_$$A9, {}),
           'offIcon': jsx(_$$A9, {}),
           'onChange': (e, {
@@ -9719,7 +9719,7 @@ function de({
     augmentedExtension: e
   });
   if (!canRun && !canRequest) return null;
-  let u = G8(extension, _$$$J);
+  let u = G8(extension, stripHtmlTags);
   return jsx(_$$p4, {
     primaryAction: c,
     setActive: o,

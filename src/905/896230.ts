@@ -27,7 +27,7 @@ import { _v } from "../figma_app/204937";
 import { yx } from "../905/41973";
 import { Q } from "../905/608122";
 import { r as _$$r2 } from "../figma_app/661568";
-import { y as _$$y2 } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 import { h as _$$h } from "../905/943864";
 import { uo } from "../905/581543";
 import { Bm } from "../905/755627";
@@ -270,7 +270,7 @@ export let $$K0 = {
   }),
   AccessibleAreasBindings: () => _$$H,
   OOMHelpers: () => new W(),
-  PlatformInfo: () => _$$y2,
+  PlatformInfo: () => browserCapabilities,
   FontManagerJs: () => Z,
   FigmaApp: () => new H(),
   WebAsync: () => _$$F2,

@@ -11,7 +11,7 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { xg } from "../figma_app/677646";
 import { GS } from "../figma_app/314264";
-import { zb } from "../905/902840";
+import { htmlToEditorState } from "../905/902840";
 import { uA } from "../figma_app/781512";
 import { B9, Py } from "../figma_app/346422";
 import { hB } from "../figma_app/609511";
@@ -68,7 +68,7 @@ export async function $$A0(e, t, l, c, p) {
         s.length > 0 && s.forEach(t => {
           let s = t.categoryId ? r?.find(e => e.id === t.categoryId) : null;
           let o = s ? `data-${uA(s).trim().replace(/[^a-zA-Z0-9\-\.:_]/g, "-").replace(/\-+/g, "-").replace(/^\-+|\-+$/g, "")}-annotations` : "data-annotations";
-          let l = zb(t.label);
+          let l = htmlToEditorState(t.label);
           n.push({
             name: o,
             value: l,

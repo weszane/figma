@@ -31,7 +31,7 @@ import { $ } from "../905/330495";
 import { p as _$$p } from "../figma_app/295764";
 import { n as _$$n } from "../figma_app/763473";
 import { At } from "../905/973142";
-import { j_, El } from "../figma_app/9619";
+import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
 import { dG } from "../figma_app/753501";
 import { Tg } from "../figma_app/967154";
 import { Ad } from "../figma_app/811257";
@@ -47,7 +47,7 @@ let G = forwardRef(function ({
   onOpenDescriptionPane: s
 }, o) {
   let l = Tg();
-  let d = useMemo(() => e ? "lexical" === j_(e) ? El(e) : At(e) : l?.[0]?.uri ? l?.[0]?.uri : r ? At(r) : t?.[0]?.uri ?? void 0, [e, l, t, r]);
+  let d = useMemo(() => e ? "lexical" === detectEditorStateFormat(e) ? parseEditorStateToPlainText(e) : At(e) : l?.[0]?.uri ? l?.[0]?.uri : r ? At(r) : t?.[0]?.uri ?? void 0, [e, l, t, r]);
   let c = useRef(null);
   let u = _$$n({
     ref: c,

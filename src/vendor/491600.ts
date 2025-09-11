@@ -1,20 +1,20 @@
-import { Db, yW, hx } from "../vendor/491721";
-import { DF } from "../vendor/463802";
-import { Sd, xj } from "../vendor/425002";
-import { Ac, w, vJ, I2, ff } from "../vendor/408361";
+import { LinkNode, TOGGLE_LINK_COMMAND, $toggleLink } from "../vendor/491721";
+import { useLexicalComposerContext } from "../vendor/463802";
+import { mergeRegister, objectKlassEquals } from "../vendor/425002";
+import { COMMAND_PRIORITY_LOW, PASTE_COMMAND, $getSelection, $isRangeSelection, $isElementNode } from "../vendor/408361";
 import { useEffect } from "react";
 export function $$d0({
   validateUrl: e
 }) {
-  let [r] = DF();
+  let [r] = useLexicalComposerContext();
   useEffect(() => {
-    if (!r.hasNodes([Db])) throw Error("LinkPlugin: LinkNode not registered on editor");
-    return Sd(r.registerCommand(yW, r => {
+    if (!r.hasNodes([LinkNode])) throw Error("LinkPlugin: LinkNode not registered on editor");
+    return mergeRegister(r.registerCommand(TOGGLE_LINK_COMMAND, r => {
       if (null === r) {
-        hx(r);
+        $toggleLink(r);
         return !0;
       }
-      if ("string" == typeof r) return !(void 0 !== e && !e(r)) && (hx(r), !0);
+      if ("string" == typeof r) return !(void 0 !== e && !e(r)) && ($toggleLink(r), !0);
       {
         let {
           url,
@@ -22,21 +22,21 @@ export function $$d0({
           rel,
           title
         } = r;
-        hx(url, {
+        $toggleLink(url, {
           rel,
           target,
           title
         });
         return !0;
       }
-    }, Ac), void 0 !== e ? r.registerCommand(w, n => {
-      let s = vJ();
-      if (!I2(s) || s.isCollapsed() || !xj(n, ClipboardEvent)) return !1;
+    }, COMMAND_PRIORITY_LOW), void 0 !== e ? r.registerCommand(PASTE_COMMAND, n => {
+      let s = $getSelection();
+      if (!$isRangeSelection(s) || s.isCollapsed() || !objectKlassEquals(n, ClipboardEvent)) return !1;
       let h = n;
       if (null === h.clipboardData) return !1;
       let d = h.clipboardData.getData("text");
-      return !!e(d) && !s.getNodes().some(e => ff(e)) && (r.dispatchCommand(yW, d), n.preventDefault(), !0);
-    }, Ac) : () => {});
+      return !!e(d) && !s.getNodes().some(e => $isElementNode(e)) && (r.dispatchCommand(TOGGLE_LINK_COMMAND, d), n.preventDefault(), !0);
+    }, COMMAND_PRIORITY_LOW) : () => {});
   }, [r, e]);
   return null;
 }

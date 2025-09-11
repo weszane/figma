@@ -67,7 +67,7 @@ import { isVsCodeEnvironment } from '../905/858738';
 import { createInvalidString } from '../905/859698';
 import { fetchImageAsByteArray, loadAndReconcileResources } from '../905/866640';
 import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411';
-import { nB as _$$nB } from '../905/902840';
+import { normalizeMarkdown } from '../905/902840';
 import { XHR } from '../905/910117';
 import { E as _$$E } from '../905/916933';
 import { e1 as _$$e3, tO as _$$tO, cz, fx, h2, J6, lm, Ut, vs } from '../905/933084';
@@ -5603,7 +5603,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           zSchema: _$$z.string(),
           property: 'markdown'
         });
-        const normalizedMarkdown = _$$nB(markdownText);
+        const normalizedMarkdown = normalizeMarkdown(markdownText);
         return vm.newString(normalizedMarkdown);
       },
       isAllowedInReadOnly: true,

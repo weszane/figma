@@ -36,7 +36,7 @@ import { D as _$$D } from "../figma_app/451499";
 import { N9, qg } from "../figma_app/385874";
 import { K as _$$K } from "../figma_app/622160";
 import { I6 } from "../vendor/336448";
-import { j_ } from "../figma_app/9619";
+import { detectEditorStateFormat } from "../figma_app/9619";
 import { C as _$$C } from "../figma_app/686450";
 import { bU } from "../figma_app/967154";
 import { N as _$$N } from "../905/438674";
@@ -390,7 +390,7 @@ function em() {
     links
   } = eh();
   if (0 === links.length && !description) return null;
-  let r = j_(description || "");
+  let r = detectEditorStateFormat(description || "");
   return jsx(VZ, {
     title: getI18nString("inspect_panel.components.title"),
     recordingKey: "components",

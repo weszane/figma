@@ -1,144 +1,241 @@
-import { D as _$$D } from '../905/122084'
-import { D } from '../vendor/24766'
-import { v5, YW } from '../vendor/231521'
-import { Ey, lJ, Ni, sT } from '../vendor/408361'
-import { Db } from '../vendor/491721'
-import { bk, d7, eA, Eg, gb, gW, mK, NB, Pi, ps, Sq, TB, Up, Wn, WY } from '../vendor/693164'
-import { g } from '../vendor/797080'
-import { iK } from '../vendor/858260'
-import { jL } from '../vendor/871930'
+import { CodeNode } from '@lexical/code'
+import { createHeadlessEditor } from '@lexical/headless'
+import { $generateHtmlFromNodes } from '@lexical/html'
+import { LinkNode } from '@lexical/link'
+import { ListItemNode, ListNode } from '@lexical/list'
+import { $convertFromMarkdownString, $convertToMarkdownString, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, CODE, HEADING, INLINE_CODE, ITALIC_STAR, ITALIC_UNDERSCORE, LINK, ORDERED_LIST, STRIKETHROUGH, UNORDERED_LIST } from '@lexical/markdown'
+import { HeadingNode } from '@lexical/rich-text'
+import { $createParagraphNode, $createTextNode, $getRoot, TextNode } from 'lexical'
+import { convertHtmlToEditorState } from '../905/122084'
 
-let p = [mK, NB, eA, gb, d7, Pi, WY, Eg, gW, Sq, TB, Up, ps]
-let m = {
-  nodes: [Ey, v5, YW, Db, iK, jL],
+// Markdown transformer presets used for Lexical conversions (original: p)
+const MARKDOWN_TRANSFORMERS = [
+  UNORDERED_LIST,
+  ORDERED_LIST,
+  BOLD_ITALIC_STAR,
+  BOLD_ITALIC_UNDERSCORE,
+  BOLD_STAR,
+  BOLD_UNDERSCORE,
+  STRIKETHROUGH,
+  ITALIC_STAR,
+  ITALIC_UNDERSCORE,
+  CODE,
+  HEADING,
+  INLINE_CODE,
+  LINK,
+]
+
+// Headless editor configuration (original: m)
+const HEADLESS_EDITOR_CONFIG = {
+  nodes: [TextNode, ListNode, ListItemNode, LinkNode, CodeNode, HeadingNode],
 }
-let h = void 0
-export function $$g2(e) {
-  let t = e.replace(/(```)\s+/, '$1')
-  let i = D(m)
-  let n = ''
-  i.update(() => {
-    Wn(t, p, h, !0)
-    n = bk(p, h, !0)
+
+// Root node for conversion APIs where undefined means use the editor root (original: h)
+const MARKDOWN_ROOT: undefined = undefined
+
+/**
+ * Normalize code fences in markdown by removing unnecessary whitespace after ```
+ * (original function: $$g2)
+ */
+export function normalizeMarkdown(input: string): string {
+  const sanitized = input.replace(/(```)\s+/, '$1')
+  const editor = createHeadlessEditor(HEADLESS_EDITOR_CONFIG)
+  let normalized = ''
+  editor.update(() => {
+    $convertFromMarkdownString(sanitized, MARKDOWN_TRANSFORMERS, MARKDOWN_ROOT, true)
+    normalized = $convertToMarkdownString(MARKDOWN_TRANSFORMERS, MARKDOWN_ROOT, true)
   })
-  return n
+  return normalized
 }
-export function $$f1(e) {
-  let t = D(m)
-  let i = t.parseEditorState(e)
-  t.setEditorState(i)
-  let n = ''
-  t.update(() => {
-    n = bk(p, h, !0)
-  }, {
-    discrete: !0,
-  })
-  return n
+
+/**
+ * Convert a serialized editor state (string) to markdown
+ * (original function: $$f1)
+ */
+export function editorStateToMarkdown(editorStateSerialized: string): string {
+  const editor = createHeadlessEditor(HEADLESS_EDITOR_CONFIG)
+  const state = editor.parseEditorState(editorStateSerialized)
+  editor.setEditorState(state)
+
+  let markdown = ''
+  editor.update(
+    () => {
+      markdown = $convertToMarkdownString(MARKDOWN_TRANSFORMERS, MARKDOWN_ROOT, true)
+    },
+    { discrete: true },
+  )
+  return markdown
 }
-export function $$_3(e) {
-  let t = D(m)
-  return _$$D(e, t, 'markdown', p)
+
+/**
+ * Convert HTML string to a Lexical editor state serialized for markdown workflows
+ * (original function: $$_3)
+ */
+export function htmlToEditorState(html: string): string {
+  const editor = createHeadlessEditor(HEADLESS_EDITOR_CONFIG)
+  return convertHtmlToEditorState(html, editor, 'markdown', MARKDOWN_TRANSFORMERS)
 }
-let A = [{
-  regex: /^([^*_]*)(\*|_)([^*_]+)(\*{1,3}|_{1,3})([^*_]+)(\4)(\2)([^*_]*)$/,
-  textNodeTransform: (e) => {
-    e.hasFormat('italic') || e.toggleFormat('italic')
+
+// Emphasis correction patterns and transforms (original: A)
+interface EmphasisPattern {
+  regex: RegExp
+  textNodeTransform: (node: TextNode) => void
+}
+
+const EMPHASIS_CORRECTION_PATTERNS: EmphasisPattern[] = [
+  {
+    regex: /^([^*_]*)(\*|_)([^*_]+)(\*{1,3}|_{1,3})([^*_]+)(\4)(\2)([^*_]*)$/,
+    textNodeTransform: (node) => {
+      if (!node.hasFormat('italic'))
+        node.toggleFormat('italic')
+    },
   },
-}, {
-  regex: /^([^*_]*)(\*\*|__)([^*_]+)(\*{1,3}|_{1,3})([^*_]+)(\4)(\2)([^*_]*)$/,
-  textNodeTransform: (e) => {
-    e.hasFormat('bold') || e.toggleFormat('bold')
+  {
+    regex: /^([^*_]*)(\*\*|__)([^*_]+)(\*{1,3}|_{1,3})([^*_]+)(\4)(\2)([^*_]*)$/,
+    textNodeTransform: (node) => {
+      if (!node.hasFormat('bold'))
+        node.toggleFormat('bold')
+    },
   },
-}, {
-  regex: /^([^*_]*)(\*\*\*|___)([^*_]+)(\*{1,3}|_{1,3})([^*_]+)(\4)(\2)([^*_]*)$/,
-  textNodeTransform: (e) => {
-    e.hasFormat('italic') || e.toggleFormat('italic')
-    e.hasFormat('bold') || e.toggleFormat('bold')
+  {
+    regex: /^([^*_]*)(\*\*\*|___)([^*_]+)(\*{1,3}|_{1,3})([^*_]+)(\4)(\2)([^*_]*)$/,
+    textNodeTransform: (node) => {
+      if (!node.hasFormat('italic'))
+        node.toggleFormat('italic')
+      if (!node.hasFormat('bold'))
+        node.toggleFormat('bold')
+    },
   },
-}]
-export function $$y0(e) {
-  let t = D(m)
-  let i = ''
-  let n = ''
-  t.registerNodeTransform(Db, (e) => {
-    let t = {
+]
+
+// Helper: try to extract emphasis interior and surrounding text from a match
+function getEmphasisMatch(regex: RegExp, text: string): null | {
+  fullText: string
+  interiorText: string
+  textBeforeMarkdown: string
+  textAfterMarkdown: string
+} {
+  const match = text.match(regex)
+  if (!match)
+    return null
+
+  const [fullText, textBeforeMarkdown, open1, interiorLeft, open2, interiorRight, close2, close1, textAfterMarkdown] = match
+  // ensure pairs match (e.g., ** pairs with **, _ with _)
+  if (
+    fullText
+    && open1
+    && interiorLeft
+    && open2
+    && interiorRight
+    && close2
+    && close1
+    && open1 === close1
+    && open2 === close2
+  ) {
+    return {
+      fullText,
+      interiorText: interiorLeft + open2 + interiorRight + close2,
+      textBeforeMarkdown,
+      textAfterMarkdown,
+    }
+  }
+  return null
+}
+
+// Helper: apply emphasis corrections to a TextNode in place
+function applyEmphasisTransformsToTextNode(node: TextNode): void {
+  const originalFormat = node.getFormat()
+  const content = node.getTextContent()
+
+  for (const pattern of EMPHASIS_CORRECTION_PATTERNS) {
+    const match = getEmphasisMatch(pattern.regex, content)
+    if (!match)
+      continue
+
+    const { interiorText, textBeforeMarkdown, textAfterMarkdown } = match
+
+    const tempParagraph = $createParagraphNode()
+    $convertFromMarkdownString(interiorText, MARKDOWN_TRANSFORMERS, tempParagraph, true)
+
+    const textNodes = tempParagraph.getAllTextNodes()
+    // retain original formats and apply pattern-specific transform
+    textNodes.forEach((n) => {
+      const combined = n.getFormat() | originalFormat
+      n.setFormat(combined)
+      pattern.textNodeTransform(n)
+    })
+
+    const replacementNodes: TextNode[] = []
+    if (textBeforeMarkdown) {
+      const before = $createTextNode(textBeforeMarkdown)
+      before.setFormat(originalFormat)
+      replacementNodes.unshift(before)
+    }
+    replacementNodes.push(...textNodes)
+    if (textAfterMarkdown) {
+      const after = $createTextNode(textAfterMarkdown)
+      after.setFormat(originalFormat)
+      replacementNodes.push(after)
+    }
+    if (!replacementNodes.length || !replacementNodes[0])
+      continue
+
+    // replace current node with first, then insert remaining after
+    let anchor = node.replace(replacementNodes[0])
+    replacementNodes.slice(1).forEach((node) => {
+      anchor = anchor.insertAfter(node) as TextNode
+    })
+  }
+}
+
+/**
+ * Convert markdown to both Lexical serialized state and HTML, enforcing link rel/target
+ * and correcting emphasis formatting in text nodes
+ * (original function: $$y0)
+ */
+export function renderMarkdownToLexicalAndHtml(markdown: string): { lexical: string, html: string } {
+  const editor = createHeadlessEditor(HEADLESS_EDITOR_CONFIG)
+  let lexicalJSON = ''
+  let html = ''
+
+  // Ensure all links open in new tab with safe rel
+  editor.registerNodeTransform(LinkNode, (link) => {
+    const desired = {
       target: '_blank',
       rel: 'noreferrer noopener nofollow ugc',
     }
-    e.__rel !== t.rel && (e.__rel = t.rel)
-    e.__target !== t.target && (e.__target = t.target)
+    if (link.__rel !== desired.rel)
+      link.__rel = desired.rel
+    if (link.__target !== desired.target)
+      link.__target = desired.target
   })
-  t.update(() => {
-    Wn(e, p, h, !0)
-  }, {
-    discrete: !0,
-  })
-  t.update(() => {
-    for (let e of Ni().getAllTextNodes()) {
-      !(function (e) {
-        let t = e.getFormat()
-        let i = e.getTextContent()
-        for (let n of A) {
-          let r = (function (e, t) {
-            let i = t.match(e)
-            if (!i)
-              return null
-            let [n, r, a, s, o, l, d, c, u] = i
-            return n && a && s && o && l && d && c && a === c && o === d
-              ? {
-                  fullText: n,
-                  interiorText: s + o + l + d,
-                  textBeforeMarkdown: r,
-                  textAfterMarkdown: u,
-                }
-              : null
-          }(n.regex, i))
-          if (!r)
-            continue
-          let {
-            interiorText,
-            textBeforeMarkdown,
-            textAfterMarkdown,
-          } = r
-          let d = lJ()
-          Wn(interiorText, p, d, !0)
-          let u = d.getAllTextNodes()
-          u.forEach((e) => {
-            let i = e.getFormat() | t
-            e.setFormat(i)
-            n.textNodeTransform(e)
-          })
-          let m = []
-          if (textBeforeMarkdown) {
-            let e = sT(textBeforeMarkdown)
-            e.setFormat(t)
-            m.unshift(e)
-          }
-          if (m.push(...u), textAfterMarkdown) {
-            let e = sT(textAfterMarkdown)
-            e.setFormat(t)
-            m.push(e)
-          }
-          if (!m || !m[0])
-            continue
-          let h = e.replace(m[0])
-          m.slice(1).forEach((e) => {
-            h = h.insertAfter(e)
-          })
-        }
-      }(e))
+
+  // Load markdown into editor
+  editor.update(
+    () => {
+      $convertFromMarkdownString(markdown, MARKDOWN_TRANSFORMERS, MARKDOWN_ROOT, true)
+    },
+    { discrete: true },
+  )
+
+  // Apply emphasis corrections
+  editor.update(() => {
+    for (const textNode of $getRoot().getAllTextNodes()) {
+      applyEmphasisTransformsToTextNode(textNode)
     }
   })
-  t.read(() => {
-    i = JSON.stringify(t.getEditorState().toJSON())
-    n = g(t)
+
+  // Read out serialized state and HTML
+  editor.read(() => {
+    lexicalJSON = JSON.stringify(editor.getEditorState().toJSON())
+    html = $generateHtmlFromNodes(editor)
   })
-  return {
-    lexical: i,
-    html: n,
-  }
+
+  return { lexical: lexicalJSON, html }
 }
-export const Kq = $$y0
-export const cd = $$f1
-export const nB = $$g2
-export const zb = $$_3
+
+// Maintain existing named exports mapped to new refactored names
+export const Kq = renderMarkdownToLexicalAndHtml
+export const cd = editorStateToMarkdown
+export const nB = normalizeMarkdown
+export const zb = htmlToEditorState

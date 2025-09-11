@@ -1,8 +1,8 @@
 import { c } from "../905/550169";
-import { y } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 export function $$a2(e) {
   let t = [];
-  let r = y.isApple();
+  let r = browserCapabilities.isApple();
   r && e.metaKey && t.push("\u2318");
   !r && e.metaKey && t.push(e.ctrlKey ? "\u2318" : "Ctrl");
   e.ctrlKey && t.push(r ? "\u2303" : "Ctrl");

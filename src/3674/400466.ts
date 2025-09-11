@@ -88,12 +88,12 @@ import { J as _$$J2 } from "../905/125993";
 import { A as _$$A11 } from "../905/251970";
 import { w as _$$w2 } from "../905/442596";
 import { At } from "../905/973142";
-import { j_, El } from "../figma_app/9619";
+import { detectEditorStateFormat, parseEditorStateToPlainText } from "../figma_app/9619";
 import { A as _$$A12, C as _$$C2 } from "../figma_app/686450";
-import { Mz, HY } from "../vendor/231521";
-import { DF } from "../vendor/463802";
-import { Sd } from "../vendor/425002";
-import { $$if, XK, vJ, I2, Jj } from "../vendor/408361";
+import { $isListItemNode, $isListNode } from "@lexical/list";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { mergeRegister } from "../vendor/425002";
+import { $$if, INSERT_PARAGRAPH_COMMAND, $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL } from "lexical";
 import { useHandleMouseEvent, useHandleGenericEvent, generateRecordingKey, useSetupPlayback, useHandleKeyboardEvent } from "../figma_app/878298";
 import { D8, GG } from "../905/511649";
 import { useSprigWithSampling } from "../905/99656";
@@ -1994,20 +1994,20 @@ function tB(e) {
 function t2({
   onEnterPressed: e
 }) {
-  let [t] = DF();
-  useEffect(() => Sd(t.registerCommand($$if, n => {
+  let [t] = useLexicalComposerContext();
+  useEffect(() => mergeRegister(t.registerCommand($$if, n => {
     if (n && n.shiftKey) {
       n.preventDefault();
-      return t.dispatchCommand(XK, void 0);
+      return t.dispatchCommand(INSERT_PARAGRAPH_COMMAND, void 0);
     }
-    let a = vJ();
-    if (I2(a)) {
+    let a = $getSelection();
+    if ($isRangeSelection(a)) {
       let e = a.anchor.getNode().getParent();
-      if (e && Mz(e) || e && HY(e)) return !1;
+      if (e && $isListItemNode(e) || e && $isListNode(e)) return !1;
     }
     e(n ?? void 0);
     return !0;
-  }, Jj)), [t, e]);
+  }, COMMAND_PRIORITY_NORMAL)), [t, e]);
   return null;
 }
 let nx = "annotation_categories_edit_window--colorCircle--eQOTM";
@@ -2957,7 +2957,7 @@ function n2({
   }, [w, T]);
   let L = useCallback(() => {
     let n = !!N && ("" !== N.label || N.properties.length > 0 || null !== T);
-    let a = 0 === ("lexical" === j_(k) ? El(k) : At(k)).length;
+    let a = 0 === ("lexical" === detectEditorStateFormat(k) ? parseEditorStateToPlainText(k) : At(k)).length;
     if (a && 0 === I.length && null === T) N && y(e, r);else {
       let i = getSingletonSceneGraph().get(e);
       i && (v(i, {
@@ -3382,7 +3382,7 @@ function n5({
               children: jsx(_$$A12, {
                 innerRef: O,
                 value: n,
-                valueFormat: j_(n),
+                valueFormat: detectEditorStateFormat(n),
                 onSave: eo,
                 namespace: "annotation-dialog-lexical-editor",
                 lexicalContentClassName: "annotation_lexical_editor--contentEditable--EVm11",
@@ -3695,7 +3695,7 @@ let aa = memo(function ({
   let Z = {
     "--annotation-category-color": Y ? FQ(Y) ?? "var(--color-bg)" : "var(--color-bg)"
   };
-  let $ = j_(J.label);
+  let $ = detectEditorStateFormat(J.label);
   return jsxs(D8, {
     className: A()(er, {
       [ep]: !!Y,

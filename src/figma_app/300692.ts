@@ -8,7 +8,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { debugState } from '../905/407919';
 import { pluginManifestPropType, capabilitiesPropType, editorTypePropType, widgetManifestPropType } from '../905/488349';
-import { ZB as _$$ZB } from '../905/491152';
+import { isStrippedHtmlEmpty } from '../905/491152';
 import { validateNetworkAccess } from '../905/544659';
 import { dequeuePluginStatus } from '../905/571565';
 import { getFeatureFlags } from '../905/601108';
@@ -1507,7 +1507,7 @@ export function validatePublishingData(data: any, manifest: PluginManifest, isWi
   const errors: Record<string, any> = {};
   if (_$$Yp(data.name).length === 0) errors.name = getI18nString('community.publishing.name_must_not_be_empty');
   if (_$$Yp(data.tagline).length === 0) errors.tagline = getI18nString('community.publishing.add_a_tagline');
-  if (_$$ZB(data.description)) errors.description = getI18nString('community.publishing.add_a_description');
+  if (isStrippedHtmlEmpty(data.description)) errors.description = getI18nString('community.publishing.add_a_description');
   const supportContact = _$$Yp(data.supportContact);
   if (supportContact.length === 0) {
     errors.supportContact = getI18nString('community.publishing.support_contact_must_not_be_empty');

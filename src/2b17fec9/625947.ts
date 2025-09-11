@@ -212,7 +212,7 @@ import { M8, zz, uU as _$$uU2, FN } from "../1291/539089";
 import { _b as _$$_b2, Jd, H_, $t, EP } from "../1291/326519";
 import { T as _$$T2 } from "../905/68180";
 import { J as _$$J6 } from "../905/125993";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { n as _$$n5 } from "../905/734251";
 import { sx as _$$sx2 } from "../905/941192";
 import { QP, op as _$$op, $3 } from "../figma_app/487970";
@@ -362,10 +362,10 @@ import { $ as _$$$ } from "../905/355607";
 import { A as _$$A13 } from "../svg/972494";
 import { c1 as _$$c5, Yh as _$$Yh } from "../figma_app/357047";
 import { c as _$$c6 } from "../905/850166";
-import { v5, YW as _$$YW } from "../vendor/231521";
-import { bk as _$$bk, mK as _$$mK, NB, Wn } from "../vendor/693164";
-import { DF as _$$DF } from "../vendor/463802";
-import { Ni, lJ as _$$lJ, R1 as _$$R3, Jj, OX, vJ, I2, $$if } from "../vendor/408361";
+import { ListNode, ListItemNode } from "@lexical/list";
+import { $convertToMarkdownString, UNORDERED_LIST, ORDERED_LIST, $convertFromMarkdownString } from "../vendor/693164";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $getRoot, $createParagraphNode, KEY_DOWN_COMMAND, COMMAND_PRIORITY_NORMAL, KEY_TAB_COMMAND, $getSelection, $isRangeSelection, $$if } from "lexical";
 import { randomPick } from "../figma_app/656233";
 import { a as _$$a7 } from "../vendor/683966";
 import { A as _$$A14 } from "../vendor/211731";
@@ -380,7 +380,7 @@ import { yZ as _$$yZ } from "../figma_app/476572";
 import { Ex, zE } from "../figma_app/919079";
 import { Br, tV as _$$tV, lt as _$$lt2, Fg } from "../figma_app/862108";
 import { A as _$$A15 } from "../2b17fec9/467175";
-import { Nx } from "../vendor/850527";
+import { $isAtNodeEnd } from "@lexical/selection";
 import { Fo, vN as _$$vN, xH as _$$xH, Uz, sC as _$$sC, Te as _$$Te } from "../905/63728";
 import { hS as _$$hS } from "../905/437088";
 import { bL as _$$bL2 } from "../905/38914";
@@ -1049,7 +1049,7 @@ function ta(e) {
       isDefaultExpanded
     } of e) {
       if (!localStorageKey) {
-        r.push([!0, () => {}]);
+        r.push([!0, () => { }]);
         continue;
       }
       let [e, l] = !function ({
@@ -1087,7 +1087,7 @@ function ts(e) {
   return t;
 }
 function to(e) {
-  return ta([e])[0] ?? [!0, () => {}];
+  return ta([e])[0] ?? [!0, () => { }];
 }
 function tl({
   title: e,
@@ -2981,7 +2981,7 @@ function i7({
   });
 }
 function ne() {
-  let [e,, t] = BN(UserInterfaceElements.LAYERS);
+  let [e, , t] = BN(UserInterfaceElements.LAYERS);
   return jsx(_$$y, {
     withBorder: !0,
     children: jsx(_$$eG, {
@@ -4020,7 +4020,7 @@ let aT = memo(function (e) {
       })
     }), jsx("div", {
       className: ex()(ag, "browse_plugins_universal_modal_tiles--pluginTileDescriptionPadding--qGAaH"),
-      children: G8(pluginVersion, $J)
+      children: G8(pluginVersion, stripHtmlTags)
     }), v && jsx("div", {
       className: ag,
       children: v
@@ -5077,7 +5077,7 @@ let sH = memo(function (e) {
     children: e.items.map(e => t(e))
   });
 });
-function sB({}) {
+function sB({ }) {
   let e = Sp();
   let t = qr().filter(e);
   return jsx(sH, {
@@ -6063,7 +6063,7 @@ function o8(e) {
         className: "browse_templates_preview--description--RScN2 text--fontPos13--xW8hS text--_fontBase--QdLsd",
         children: jsx("div", {
           className: "browse_templates_preview--textDescription--4t3-n",
-          children: $J(r.description).trim().length > 0 && jsx(_$$R2, {
+          children: stripHtmlTags(r.description).trim().length > 0 && jsx(_$$R2, {
             fallback: null,
             errorFallback: null,
             value: r.description
@@ -6798,7 +6798,7 @@ function lD(e) {
   if (!n) return null;
   let M = _ ? e => {
     if (_) {
-      if (e.preventDefault(), e.stopPropagation(), g) a(_$$oB());else {
+      if (e.preventDefault(), e.stopPropagation(), g) a(_$$oB()); else {
         let i = e.target.getBoundingClientRect();
         a(_$$j({
           type: lP,
@@ -7522,14 +7522,14 @@ function dl({
 let df = "prompt_editor_v2--input--hm43Y text--fontPos13--xW8hS text--_fontBase--QdLsd";
 let d_ = "prompt_editor_v2--promptBoxTextShimmer--pMr3h";
 function dx() {
-  let [e] = _$$DF();
+  let [e] = useLexicalComposerContext();
   let [t, i] = useState("");
   useEffect(() => e.registerUpdateListener(({
     editorState: e
   }) => {
     let t = "";
     e.read(() => {
-      t = _$$bk([_$$mK, NB]);
+      t = $convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST]);
     });
     i(t);
   }), [e]);
@@ -7554,16 +7554,16 @@ function dg({
   return {
     namespace: "FigJamAiPromptEditor",
     editorState: () => {
-      if (e) Wn(e, [_$$mK, NB]);else {
-        let e = Ni();
+      if (e) $convertFromMarkdownString(e, [UNORDERED_LIST, ORDERED_LIST]); else {
+        let e = $getRoot();
         if (!e.getFirstChild()) {
-          let t = _$$lJ();
+          let t = $createParagraphNode();
           e.append(t);
         }
       }
       t("");
     },
-    nodes: [v5, _$$YW],
+    nodes: [ListNode, ListItemNode],
     theme: i,
     onError: function (e) {
       console.error(e);
@@ -7599,7 +7599,7 @@ function dj({
 function dk({
   shouldAutoFocus: e
 }) {
-  let [t] = _$$DF();
+  let [t] = useLexicalComposerContext();
   useEffect(() => {
     e && t.focus();
   }, [t, e]);
@@ -7611,13 +7611,13 @@ function dP({
   examplePrompt: i
 }) {
   let n = useAtomWithSubscription(_$$xc);
-  let [r] = _$$DF();
+  let [r] = useLexicalComposerContext();
   let a = useAtomWithSubscription(_$$dO);
   let [s, o] = useAtomValueAndSetter(JV);
   let d = Xr(KL);
   useEffect(() => {
     n ? r.update(() => {
-      Wn(n.prompt, [_$$mK, NB]);
+      $convertFromMarkdownString(n.prompt, [UNORDERED_LIST, ORDERED_LIST]);
       t(r.getEditorState(), n.useCaseCategory);
     }) : t(r.getEditorState());
   }, [r, n, t]);
@@ -7625,15 +7625,15 @@ function dP({
     a.status === _$$c6.LOADING ? r.setEditable(!1) : r.setEditable(!0);
   }, [r, a]);
   let c = useCallback(t => (Fo(t) && "Enter" === t.key || "Tab" === t.key || e.current || (Br(), e.current = !0), !1), [e]);
-  useEffect(() => r.registerCommand(_$$R3, c, Jj), [r, c]);
+  useEffect(() => r.registerCommand(KEY_DOWN_COMMAND, c, COMMAND_PRIORITY_NORMAL), [r, c]);
   let u = useCallback(e => {
     if (Fo(e) || _$$vN(e, _$$xH.SHIFT) || _$$vN(e, _$$xH.ALT)) return !1;
-    let n = _$$bk([_$$mK, NB]);
+    let n = $convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST]);
     r.update(() => {
       if (0 === n.length) {
         let n = _$$sM(i.title, i.subtitle);
-        Wn(n, [_$$mK, NB]);
-        Ni().selectEnd().insertText(" ");
+        $convertFromMarkdownString(n, [UNORDERED_LIST, ORDERED_LIST]);
+        $getRoot().selectEnd().insertText(" ");
         let a = r.getEditorState();
         o(i.useCaseCategory);
         t(a, i.useCaseCategory);
@@ -7645,23 +7645,23 @@ function dP({
     });
     return !1;
   }, [r, i, o, t, d]);
-  useEffect(() => r.registerCommand(OX, u, Jj), [r, u]);
+  useEffect(() => r.registerCommand(KEY_TAB_COMMAND, u, COMMAND_PRIORITY_NORMAL), [r, u]);
   useEffect(() => r.registerUpdateListener(({
     editorState: e,
     prevEditorState: i
   }) => {
     let n = "";
     e.read(() => {
-      n = _$$bk([_$$mK, NB]);
+      n = $convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST]);
     });
     let r = !1;
     let a = "";
     i.read(() => {
-      a = _$$bk([_$$mK, NB]);
-      let e = vJ();
-      let t = Ni().getFirstDescendant()?.getKey();
-      let i = Ni().getLastDescendant()?.getKey();
-      I2(e) && (r = a.length > 0 && (0 === e.focus.offset && e.focus.key === t && e.anchor.key === i && Nx(e.anchor) || 0 === e.anchor.offset && e.anchor.key === t && e.focus.key === i && Nx(e.focus)));
+      a = $convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST]);
+      let e = $getSelection();
+      let t = $getRoot().getFirstDescendant()?.getKey();
+      let i = $getRoot().getLastDescendant()?.getKey();
+      $isRangeSelection(e) && (r = a.length > 0 && (0 === e.focus.offset && e.focus.key === t && e.anchor.key === i && $isAtNodeEnd(e.anchor) || 0 === e.anchor.offset && e.anchor.key === t && e.focus.key === i && $isAtNodeEnd(e.focus)));
     });
     r ? n !== a && (o(void 0), t(e, void 0, !0), n.length > 0 && Br()) : n.length > 0 && !s ? t(e) : 0 === n.length && (o(void 0), t(e));
   }), [r, s, o, t]);
@@ -7823,7 +7823,7 @@ function d1({
   maxHeight: n
 }) {
   let r = useDispatch();
-  let [a] = _$$DF();
+  let [a] = useLexicalComposerContext();
   let s = useAtomWithSubscription(_$$dO);
   let [l, c] = useAtomValueAndSetter(JV);
   let u = ex()("ai_modal--suggestionPill--w44sw text--fontPos11--2LvXf text--_fontBase--QdLsd", dt);
@@ -7841,16 +7841,16 @@ function d1({
           className: u,
           onClick: () => {
             void 0 === l ? a.update(() => {
-              Wn(n.prompt, [_$$mK, NB]);
-              n.prompt.endsWith(" ") && Ni().selectEnd().insertText(" ");
-              Ni().selectEnd();
+              $convertFromMarkdownString(n.prompt, [UNORDERED_LIST, ORDERED_LIST]);
+              n.prompt.endsWith(" ") && $getRoot().selectEnd().insertText(" ");
+              $getRoot().selectEnd();
             }) : a.update(() => {
-              let t = _$$bk([_$$mK, NB]);
+              let t = $convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST]);
               let i = LY(l).length === e.length && l !== _$$es2.MIND_MAP ? `${_$$jJ(t)} 
 - ${n.prompt} ` : `${t}
 - ${n.prompt} `;
-              Wn(i, [_$$mK, NB]);
-              Ni().selectEnd();
+              $convertFromMarkdownString(i, [UNORDERED_LIST, ORDERED_LIST]);
+              $getRoot().selectEnd();
             });
             _$$UH(n) ? (c(n.categoryKey), i(a.getEditorState(), n.categoryKey)) : t(e => e.filter(e => e.prompt !== n.prompt));
             _$$lt2(r, n.prompt);
@@ -7886,10 +7886,10 @@ function d1({
 function d2({
   onSubmit: e
 }) {
-  let [t] = _$$DF();
+  let [t] = useLexicalComposerContext();
   let i = dx();
-  let n = useCallback(t => 0 === i.length || !!Fo(t) && (t.preventDefault(), e(_$$bk([_$$mK, NB])), !0), [e, i.length]);
-  useEffect(() => t.registerCommand($$if, n, Jj), [t, n]);
+  let n = useCallback(t => 0 === i.length || !!Fo(t) && (t.preventDefault(), e($convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST])), !0), [e, i.length]);
+  useEffect(() => t.registerCommand($$if, n, COMMAND_PRIORITY_NORMAL), [t, n]);
   return null;
 }
 function d3() {
@@ -7924,7 +7924,7 @@ function d5({
   let y = t;
   let v = useCallback((e, t, i) => {
     e.read(() => {
-      let e = _$$bk([_$$mK, NB]);
+      let e = $convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST]);
       d(n => {
         let r = _$$fF(e, t);
         let a = !n.every(_$$UH);
@@ -7944,7 +7944,7 @@ function d5({
   }, [s]);
   let T = useCallback(e => {
     e.read(() => {
-      let e = _$$bk([_$$mK, NB]);
+      let e = $convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST]);
       0 !== e.length || m ? 0 !== e.length && m && f(!1) : (h(e => e === assertNotNullish.TEMPLATE ? assertNotNullish.VISUAL : assertNotNullish.TEMPLATE), f(!0));
       r.current && 0 === e.length && (r.current = !1, g(""));
     });
@@ -7993,7 +7993,7 @@ function d5({
         onChange: T,
         ignoreSelectionChange: !0
       }), jsx(_$$G4, {}), jsx(_$$E6, {
-        transformers: [_$$mK, NB]
+        transformers: [UNORDERED_LIST, ORDERED_LIST]
       }), jsx(dk, {
         shouldAutoFocus: c.status !== _$$c6.LOADING
       }), jsx(d2, {
@@ -8041,7 +8041,7 @@ function d6({
       }), jsx(d2, {
         onSubmit: e
       }), jsx(_$$E6, {
-        transformers: [_$$mK, NB]
+        transformers: [UNORDERED_LIST, ORDERED_LIST]
       })]
     })
   });
@@ -8062,7 +8062,7 @@ function d9({
   ariaLabel: a,
   ariaPlaceholder: s
 }) {
-  let [d] = _$$DF();
+  let [d] = useLexicalComposerContext();
   let [c, u] = useState(!!r);
   let p = useRef(null);
   let h = useCallback(() => !!c && (u(!1), p.current?.focus(), !0), [p, c]);
@@ -8378,7 +8378,7 @@ function co() {
       i(!0);
     },
     hasGenerated: t
-  });else throw Error("Unsupported AI Modal Display Type");
+  }); else throw Error("Unsupported AI Modal Display Type");
   return jsx("div", {
     className: _$$s.$$if(!n, _$$s.hidden).$,
     children: e
@@ -8883,7 +8883,7 @@ async function ua(e, t) {
           for (let i of e.sourceNodeIds) if (!t.selectedNodesPromptedOn.includes(i)) return !1;
           return !0;
         }(r, e));
-        if (e) n.aiParentPromptId = e.id;else {
+        if (e) n.aiParentPromptId = e.id; else {
           let e = i.length.toString();
           i.push({
             userPrompt: r.userPrompt,
@@ -8982,16 +8982,16 @@ let uo = async ({
     return 0 === r.length ? e : `Here are some past conversations we've had. They're not super important but I'm including them so you have context on what has already been said and done.
 ${r.map((e, t) => `Interaction ${t + 1}:
 ${function (e) {
-      let t = e.userPrompt.length > 0 ? `## Prompt given to you by the user
+        let t = e.userPrompt.length > 0 ? `## Prompt given to you by the user
 - ${e.userPrompt}
 ` : "";
-      return `## Text submitted by user
+        return `## Text submitted by user
 ${e.selectedNodes.map(e => `- ${"IMG" === e.type ? "UNKNOWN_IMAGE" : e.text}`).join("\n")}
 ${t}
 ## Your response
 ${e.knownOutcomes.map(e => `- ${"IMG" === e.type ? "UNKNOWN_IMAGE" : e.text}`).join("\n")}
 `;
-    }(e)}`).join("\n")}
+      }(e)}`).join("\n")}
 
   ${e}`;
   }(p, n, a, s));
@@ -9781,7 +9781,7 @@ function uB() {
       doneState: uc.HIDE_PROMPT_BOX
     }), S());
   }, [b, x, _, g, w, S]);
-  let L = useCallback(() => {}, []);
+  let L = useCallback(() => { }, []);
   let N = qy.INITIAL;
   m && (L = m.stop, N = m.state);
   let O = useCallback(() => {
@@ -10343,7 +10343,7 @@ let pm = memo(function (e) {
   });
 });
 let pv = "font_family_control--dotOption--dSxZU";
-class pA extends _$$c$3 {}
+class pA extends _$$c$3 { }
 var pO = (e => (e.SANS_SERIF = "sansSerif", e.SERIF = "serif", e.MONOSPACE = "monospace", e.SCRIPT = "script", e))(pO || {});
 let pk = jsx(pu, {});
 let pR = {
@@ -12467,7 +12467,7 @@ let fS = (e, t) => {
           colors: Array.isArray(t) ? t : [t]
         });
       };
-      if (null == e || isInvalidValue(e)) a();else {
+      if (null == e || isInvalidValue(e)) a(); else {
         let t = my.get(i)?.map(t => _$$zS2(e, t));
         let s = t?.find(e => e !== ColorOptions.CUSTOM) ?? ColorOptions.CUSTOM;
         s !== ColorOptions.CUSTOM ? r.set(i, {
@@ -12524,7 +12524,7 @@ let fS = (e, t) => {
     let t = getI18nString("whiteboard.text_sizes.custom");
     if (e && e.length > 0) {
       let i = e[0];
-      if (e.length > 1) t = getI18nString("whiteboard.inline_menu.font_size_mixed");else {
+      if (e.length > 1) t = getI18nString("whiteboard.inline_menu.font_size_mixed"); else {
         let e = m$().find(e => {
           let t = e.identifier.substring(mW.length);
           return t in h_ && h_[t].maxValue === i;
@@ -13409,7 +13409,7 @@ function fG(e) {
     }
   });
 }
-class fK extends _$$c$3 {}
+class fK extends _$$c$3 { }
 var fW = (e => (e.LOCK_ALL = "lock_all", e.LOCK_SECTION_BACKGROUND_ONLY = "lock_section_background_only", e))(fW || {});
 let fz = ["lock_all", "lock_section_background_only"];
 let fZ = () => ({
@@ -14419,7 +14419,7 @@ function xh({
       iconClassName: xd,
       isKeyDownHandled: e => {
         let t = y.shapeLibraryData.reduce((e, t) => e + t.items.length, 0);
-        if ("Escape" === e.code || "Escape" === e.key) "" !== j ? N() : w(!1);else if ("Enter" === e.code || "Enter" === e.key) {
+        if ("Escape" === e.code || "Escape" === e.key) "" !== j ? N() : w(!1); else if ("Enter" === e.code || "Enter" === e.key) {
           if ("" !== j && t > 0) {
             let t = y.shapeLibraryData[0]?.items[0];
             t && (n(t, e), w(!1));
@@ -14630,18 +14630,18 @@ function xf({
     }, function ({
       children: e
     }) {
-      return jsx(_$$P, {
-        height: xs,
-        disableScrollbarBorder: !0,
-        scrollContainerRef: s.scrollContainerRef,
-        children: jsx("div", {
-          tabIndex: -1,
-          className: "whiteboard_platform_shape_selector--shapeContainer--dRUYD",
-          id: s.wrapperId,
-          children: e
-        })
-      });
-    }),
+        return jsx(_$$P, {
+          height: xs,
+          disableScrollbarBorder: !0,
+          scrollContainerRef: s.scrollContainerRef,
+          children: jsx("div", {
+            tabIndex: -1,
+            className: "whiteboard_platform_shape_selector--shapeContainer--dRUYD",
+            id: s.wrapperId,
+            children: e
+          })
+        });
+      }),
     additionalContentsTop: jsx(IW, {
       ref: h,
       className: xl,
@@ -14651,7 +14651,7 @@ function xf({
       iconClassName: xd,
       isKeyDownHandled: e => {
         let t = b.shapeLibraryData.reduce((e, t) => e + t.items.length, 0);
-        if ("Escape" === e.code || "Escape" === e.key) "" !== g ? I() : x(!1);else if ("Enter" === e.code || "Enter" === e.key) {
+        if ("Escape" === e.code || "Escape" === e.key) "" !== g ? I() : x(!1); else if ("Enter" === e.code || "Enter" === e.key) {
           if ("" !== g && t > 0) {
             let t = b.shapeLibraryData[0]?.items[0];
             t && (n(t, e), x(!1));
@@ -14943,8 +14943,8 @@ function xT({
 }
 function xE({
   onSelect: e,
-  showShapePreview: t = () => {},
-  hideShapePreview: i = () => {},
+  showShapePreview: t = () => { },
+  hideShapePreview: i = () => { },
   ariaLabel: n
 }) {
   let r = xv.getShapeGrid({
@@ -16817,7 +16817,7 @@ let gp = memo(function () {
         if (n) {
           let t = setTimeout(() => {
             window.FigmaMobile.nativeContextualToolbarSupportedVersions = void 0;
-            n._native_contextual_toolbar_confirm_configuration = () => {};
+            n._native_contextual_toolbar_confirm_configuration = () => { };
             reportError(_$$e.FIGJAM, Error(`Native contextual toolbar did not confirm configuration before timeout, version ${e}`));
           }, 2e3);
           n._native_contextual_toolbar_confirm_configuration = () => {
@@ -19526,7 +19526,7 @@ function ji(e) {
     document.removeEventListener("mousemove", m);
     document.removeEventListener("mouseup", f);
     let n = !1 === c;
-    if (Date.now() - s.current < 100) n ? onPause() : onResume();else if (n) {
+    if (Date.now() - s.current < 100) n ? onPause() : onResume(); else if (n) {
       let i = e.clientX;
       clamp(i - a.current, 0, 21) > 10.5 && onPause();
     } else {
@@ -20133,13 +20133,13 @@ function j9({
       e.currentTarget.value.length > 1 && c.current?.select();
     }, [c, setMinutes]);
     let h = useCallback(e => {
-      if ("ArrowUp" === e.key || "ArrowDown" === e.key) isNaN(parseInt(e.currentTarget.value)) || (addMinutes(("ArrowUp" === e.key ? 1 : -1) * (e.shiftKey ? 5 : 1)), setTimeout(() => o.current?.select(), 0), e.preventDefault());else if ("ArrowRight" === e.key && o.current) {
+      if ("ArrowUp" === e.key || "ArrowDown" === e.key) isNaN(parseInt(e.currentTarget.value)) || (addMinutes(("ArrowUp" === e.key ? 1 : -1) * (e.shiftKey ? 5 : 1)), setTimeout(() => o.current?.select(), 0), e.preventDefault()); else if ("ArrowRight" === e.key && o.current) {
         if (o.current.selectionStart === o.current.value.length && c.current) {
           c.current.select();
           e.preventDefault();
           return;
         }
-      } else if ("Enter" === e.key) startTimer();else if ("Escape" === e.key) {
+      } else if ("Enter" === e.key) startTimer(); else if ("Escape" === e.key) {
         u(_$$lu({
           state: "closed",
           userInitiated: !0,
@@ -21428,7 +21428,7 @@ let bU = e => {
   let t = null;
   try {
     t = parseInt(e, 10);
-  } catch (e) {}
+  } catch (e) { }
   return t;
 };
 function bF() {
@@ -22532,7 +22532,7 @@ function yT() {
           }
         },
         type: "unmute-timer-music",
-        onDismiss: () => {}
+        onDismiss: () => { }
       }));
     }, [s]);
     useEffect(() => {

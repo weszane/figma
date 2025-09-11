@@ -45,7 +45,7 @@ import { A as _$$A } from "../6020/852410";
 import { y7 } from "../5421/828271";
 import { A as _$$A2 } from "../6020/624960";
 import { Checkbox } from "../905/274480";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { L as _$$L } from "../905/473569";
 import { B as _$$B } from "../905/714743";
 import { pG } from "../figma_app/811257";
@@ -647,7 +647,7 @@ let e_ = function (e) {
       recordingKey: generateRecordingKey(e, "autoPlayToggle")
     })
   });
-  let n = jsx(_$$f, {
+  let n = jsx(setupToggleButton, {
     checked: ef(e.videoPlayback.mediaLoop),
     mixed: isInvalidValue(e.videoPlayback.mediaLoop),
     onIcon: jsx(el, {}),
@@ -674,7 +674,7 @@ let e_ = function (e) {
       "data-tooltip-type": Ib.TEXT
     }
   });
-  let i = jsx(_$$f, {
+  let i = jsx(setupToggleButton, {
     checked: ef(!e.videoPlayback.muted),
     mixed: isInvalidValue(e.videoPlayback.muted),
     onIcon: jsx(_$$L, {}),

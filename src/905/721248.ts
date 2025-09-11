@@ -101,7 +101,7 @@ import { yG } from "../905/859698";
 import { convertKiwiToVariableIdString } from "../905/805904";
 import { Ez } from "../figma_app/766708";
 import { rY as _$$rY } from "../figma_app/394327";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { d as _$$d } from "../905/49800";
 import { HiddenLabel, Label } from "../905/270045";
 import { r as _$$r } from "../905/571562";
@@ -1894,7 +1894,7 @@ function iE({
       className: "variables_diff--diffDropdownNameContainer--uMkHy",
       children: [jsx("div", {
         className: io,
-        children: jsx(_$$f, {
+        children: jsx(setupToggleButton, {
           checked: l,
           "aria-label": getI18nString("variables.diff.toggle_variable_details"),
           onIcon: jsx(_$$r, {}),

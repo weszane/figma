@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { arraysEqual } from "../figma_app/656233";
 import { K as _$$K } from "../905/443068";
 import { d as _$$d } from "../905/976845";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { O as _$$O } from "../905/487602";
 import { y as _$$y } from "../905/661502";
 import { e as _$$e } from "../905/149844";
@@ -163,7 +163,7 @@ function J(e) {
   });
 }
 function ee(e) {
-  return jsx(_$$f, {
+  return jsx(setupToggleButton, {
     "aria-label": getI18nString("fullscreen.toolbar.prototyping-visibility"),
     recordingKey: generateRecordingKey(e, "addButton"),
     checked: !!e.checked,
@@ -562,7 +562,7 @@ export class $$es2 extends RecordingComponent {
         });
         return;
       }
-      if (zb(this.props)) this.props.dispatch(Uv()); else {
+      if (zb(this.props)) this.props.dispatch(Uv());else {
         let t = e.left + (e.width - N2) / 2;
         let i = e.top + e.height;
         this.props.dispatch(bS({

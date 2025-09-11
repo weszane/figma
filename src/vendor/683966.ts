@@ -1,8 +1,8 @@
-import { DF } from "../vendor/463802";
+import { useLexicalComposerContext } from "../vendor/463802";
 import { useLayoutEffect, useEffect, useState, useCallback, useMemo, forwardRef } from "react";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { yl } from "../vendor/975086";
-import { Sd } from "../vendor/425002";
+import { mergeRegister } from "../vendor/425002";
 let d = "undefined" != typeof window && void 0 !== window.document && void 0 !== window.document.createElement ? useLayoutEffect : useEffect;
 function p({
   editor: e,
@@ -75,7 +75,7 @@ function y(e, r) {
     placeholder,
     ...s
   } = e;
-  let [a] = DF();
+  let [a] = useLexicalComposerContext();
   return jsxs(Fragment, {
     children: [jsx(g, {
       editor: a,
@@ -98,7 +98,7 @@ function b({
         n(m(e));
       }
       r();
-      return Sd(e.registerUpdateListener(() => {
+      return mergeRegister(e.registerUpdateListener(() => {
         r();
       }), e.registerEditableListener(() => {
         r();

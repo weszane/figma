@@ -6,7 +6,7 @@ import p from "classnames";
 import { customHistory } from "../905/612521";
 import { oJ, Gc } from "../905/63728";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
-import { $J } from "../905/491152";
+import { stripHtmlTags } from "../905/491152";
 import { Ts } from "../905/194276";
 import { Ex, zE } from "../figma_app/919079";
 import { f as _$$f } from "../905/671470";
@@ -116,7 +116,7 @@ function ep(e) {
   let d = G8({
     description: e.isPublishing ? "" : e.descriptionOverride ?? description ?? "",
     tagline: tagline ?? ""
-  }, $J);
+  }, stripHtmlTags);
   return jsxs("div", {
     className: Ak,
     children: [jsx("div", {

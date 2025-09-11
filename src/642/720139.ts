@@ -92,7 +92,7 @@ import { e as _$$e } from "../905/579755";
 import { R8, M as _$$M, G5 } from "../figma_app/933221";
 import { S as _$$S } from "../figma_app/636279";
 import e$ from "classnames";
-import { j_ } from "../figma_app/9619";
+import { detectEditorStateFormat } from "../figma_app/9619";
 import { C as _$$C } from "../figma_app/686450";
 import { D6 as _$$D, kF } from "../1528/377549";
 import { figmaComponentFlyoutTextMaxCollapsedHeight } from "../figma_app/786175";
@@ -341,7 +341,7 @@ function e0({
     children: [t ? jsx("div", {
       children: jsx(_$$C, {
         value: t,
-        valueFormat: j_(t),
+        valueFormat: detectEditorStateFormat(t),
         namespace: "component-description-flyout-lexical-editor-readonly",
         lexicalContentClassName: i ? _$$D : kF,
         innerRef: s

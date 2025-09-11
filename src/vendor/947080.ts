@@ -1,6 +1,6 @@
-import { DF } from "../vendor/463802";
-import { Sd } from "../vendor/425002";
-import { I2, hV, kF, ZK, WW, Kf, jZ, V3, SK, t5 } from "../vendor/408361";
+import { useLexicalComposerContext } from "../vendor/463802";
+import { mergeRegister } from "../vendor/425002";
+import { $isRangeSelection, $isRootNode, $isTextNode, UNDO_COMMAND, CAN_REDO_COMMAND, CAN_UNDO_COMMAND, COMMAND_PRIORITY_EDITOR, REDO_COMMAND, CLEAR_EDITOR_COMMAND, CLEAR_HISTORY_COMMAND } from "../vendor/408361";
 import { useMemo, useEffect } from "react";
 let a = 0;
 let h = 1;
@@ -15,7 +15,7 @@ function b(e, r, n, i, s) {
   let a = r._selection;
   let h = e._selection;
   if (s) return g;
-  if (!(I2(a) && I2(h) && h.isCollapsed() && a.isCollapsed())) return p;
+  if (!($isRangeSelection(a) && $isRangeSelection(h) && h.isCollapsed() && a.isCollapsed())) return p;
   let d = function (e, r, n) {
     let i = e._nodeMap;
     let s = [];
@@ -26,7 +26,7 @@ function b(e, r, n, i, s) {
     for (let [e, r] of n) {
       if (!r) continue;
       let n = i.get(e);
-      void 0 === n || hV(n) || s.push(n);
+      void 0 === n || $isRootNode(n) || s.push(n);
     }
     return s;
   }(r, n, i);
@@ -35,11 +35,11 @@ function b(e, r, n, i, s) {
     let n = r._nodeMap;
     let i = n.get(a.anchor.key);
     let s = n.get(h.anchor.key);
-    return i && s && !e._nodeMap.has(i.__key) && kF(i) && 1 === i.__text.length && 1 === a.anchor.offset ? m : p;
+    return i && s && !e._nodeMap.has(i.__key) && $isTextNode(i) && 1 === i.__text.length && 1 === a.anchor.offset ? m : p;
   }
   let b = d[0];
   let O = e._nodeMap.get(b.__key);
-  if (!kF(O) || !kF(b) || O.__mode !== b.__mode) return p;
+  if (!$isTextNode(O) || !$isTextNode(b) || O.__mode !== b.__mode) return p;
   let x = O.__text;
   let w = b.__text;
   if (x === w) return p;
@@ -73,7 +73,7 @@ function O(e, r) {
         let s = n._nodeMap.get(e);
         let a = r._selection;
         let h = n._selection;
-        return !(I2(a) && I2(h) && "element" === a.anchor.type && "element" === a.focus.type && "text" === h.anchor.type && "text" === h.focus.type || !kF(i) || !kF(s) || i.__parent !== s.__parent) && JSON.stringify(r.read(() => i.exportJSON())) === JSON.stringify(n.read(() => s.exportJSON()));
+        return !($isRangeSelection(a) && $isRangeSelection(h) && "element" === a.anchor.type && "element" === a.focus.type && "text" === h.anchor.type && "text" === h.focus.type || !$isTextNode(i) || !$isTextNode(s) || i.__parent !== s.__parent) && JSON.stringify(r.read(() => i.exportJSON())) === JSON.stringify(n.read(() => s.exportJSON()));
       }(Array.from(v)[0], s, g) ? a : h : null !== _ ? a : d;
     })();
     n = x;
@@ -88,33 +88,33 @@ function x(e) {
 }
 function w(e, r, n) {
   let i = O(e, n);
-  return Sd(e.registerCommand(ZK, () => (function (e, r) {
+  return mergeRegister(e.registerCommand(UNDO_COMMAND, () => (function (e, r) {
     let n = r.redoStack;
     let i = r.undoStack;
     if (0 !== i.length) {
       let s = r.current;
       let a = i.pop();
-      null !== s && (n.push(s), e.dispatchCommand(WW, !0));
-      0 === i.length && e.dispatchCommand(Kf, !1);
+      null !== s && (n.push(s), e.dispatchCommand(CAN_REDO_COMMAND, !0));
+      0 === i.length && e.dispatchCommand(CAN_UNDO_COMMAND, !1);
       r.current = a || null;
       a && a.editor.setEditorState(a.editorState, {
         tag: "historic"
       });
     }
-  }(e, r), !0), jZ), e.registerCommand(V3, () => (function (e, r) {
+  }(e, r), !0), COMMAND_PRIORITY_EDITOR), e.registerCommand(REDO_COMMAND, () => (function (e, r) {
     let n = r.redoStack;
     let i = r.undoStack;
     if (0 !== n.length) {
       let s = r.current;
-      null !== s && (i.push(s), e.dispatchCommand(Kf, !0));
+      null !== s && (i.push(s), e.dispatchCommand(CAN_UNDO_COMMAND, !0));
       let a = n.pop();
-      0 === n.length && e.dispatchCommand(WW, !1);
+      0 === n.length && e.dispatchCommand(CAN_REDO_COMMAND, !1);
       r.current = a || null;
       a && a.editor.setEditorState(a.editorState, {
         tag: "historic"
       });
     }
-  }(e, r), !0), jZ), e.registerCommand(SK, () => (x(r), !1), jZ), e.registerCommand(t5, () => (x(r), e.dispatchCommand(WW, !1), e.dispatchCommand(Kf, !1), !0), jZ), e.registerUpdateListener(({
+  }(e, r), !0), COMMAND_PRIORITY_EDITOR), e.registerCommand(CLEAR_EDITOR_COMMAND, () => (x(r), !1), COMMAND_PRIORITY_EDITOR), e.registerCommand(CLEAR_HISTORY_COMMAND, () => (x(r), e.dispatchCommand(CAN_REDO_COMMAND, !1), e.dispatchCommand(CAN_UNDO_COMMAND, !1), !0), COMMAND_PRIORITY_EDITOR), e.registerUpdateListener(({
     editorState: n,
     prevEditorState: s,
     dirtyLeaves: a,
@@ -128,10 +128,10 @@ function w(e, r, n) {
     if (null !== m && n === b) return;
     let O = i(s, n, m, a, p, g);
     if (O === h) {
-      0 !== v.length && (r.redoStack = [], e.dispatchCommand(WW, !1));
+      0 !== v.length && (r.redoStack = [], e.dispatchCommand(CAN_REDO_COMMAND, !1));
       null !== m && (y.push({
         ...m
-      }), e.dispatchCommand(Kf, !0));
+      }), e.dispatchCommand(CAN_UNDO_COMMAND, !0));
     } else if (O === d) return;
     r.current = {
       editor: e,
@@ -150,7 +150,7 @@ export function $$S0({
   delay: e,
   externalHistoryState: r
 }) {
-  let [n] = DF();
+  let [n] = useLexicalComposerContext();
   (function (e, r, n = 1e3) {
     let i = useMemo(() => r || k(), [r]);
     useEffect(() => w(e, i, n), [n, e, i]);

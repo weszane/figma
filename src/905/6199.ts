@@ -1,220 +1,273 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { memo, useRef, useState, useCallback, useEffect } from "react";
-import { f as _$$f } from "../905/167712";
-import { j as _$$j } from "../905/253683";
-import { s as _$$s } from "../905/702260";
-import { N as _$$N } from "../905/430294";
-import { Z } from "../905/498136";
-import { p as _$$p } from "../905/682418";
-import { W as _$$W } from "../905/865092";
-import { i as _$$i } from "../905/661697";
-import { I as _$$I } from "../905/542485";
-import { QC, a5 } from "../vendor/858260";
-import { FJ, yW } from "../vendor/491721";
-import { Mz, v5, q7, x as _$$x } from "../vendor/231521";
-import { DF } from "../vendor/463802";
-import { Pi, fi } from "../vendor/871930";
-import { Sd } from "../vendor/425002";
-import { vJ, lJ, I2, Mv, Ac, cq, mB } from "../vendor/408361";
-import { OZ } from "../905/491152";
-import { getI18nString } from "../905/303541";
-import { OL, Jf } from "../905/999278";
-import { zI } from "../vendor/850527";
-let d = memo(function (e) {
-  return jsx("svg", {
-    width: "24",
-    height: "24",
-    fill: "none",
-    viewBox: "0 0 24 24",
-    ...e,
-    children: jsx("path", {
-      fill: "var(--color-icon)",
-      fillRule: "evenodd",
-      d: "M7 6.5a.5.5 0 0 0-1 0v11a.5.5 0 0 0 1 0V12h6v5.5a.5.5 0 0 0 1 0v-11a.5.5 0 0 0-1 0V11H7zm11 6a.5.5 0 0 0-.777-.416l-1.5 1a.5.5 0 1 0 .554.832l.723-.482V17.5a.5.5 0 0 0 1 0z",
-      clipRule: "evenodd"
-    })
-  });
-});
-function w(e, t) {
-  e.update(() => {
-    let e = vJ();
-    null !== e && zI(e, () => t ? lJ() : QC());
-  });
-}
-function C(e) {
-  e.update(() => {
-    let e = vJ();
-    null !== e && zI(e, () => lJ());
-  });
-}
-export function $$T0({
-  setIsLinkEditMode: e
-}) {
-  let [t] = DF();
-  let i = useRef(null);
-  let [T, k] = useState(!1);
-  let [R, N] = useState(!1);
-  let [P, O] = useState(!1);
-  let [D, L] = useState(!1);
-  let [F, M] = useState(!1);
-  let [j, U] = useState(!1);
-  let [B, V] = useState(!1);
-  let [G, z] = useState(!1);
-  let [H, W] = useState(!1);
-  let K = useCallback(() => {
-    let e = vJ();
-    if (I2(e)) {
-      let t = function (e) {
-        if (Mz(e)) {
-          let t = e.getParent();
-          if (t instanceof v5) return t.getTag();
-        }
-        return null;
-      };
-      let i = OL(e);
-      let n = i.getParent();
-      FJ(n) || FJ(i) ? V(!0) : V(!1);
-      let r = t(i) || t(n);
-      M("ul" === r);
-      U("ol" === r);
-      let a = !!(a5(i) || n && a5(n));
-      W(a);
-      z(e.hasFormat("code") && !a);
-      L(!!(Pi(i) || n && Pi(n)));
-      k(e.hasFormat("bold"));
-      N(e.hasFormat("italic"));
-      O(e.hasFormat("strikethrough"));
+import { $createCodeNode, $isCodeNode } from '@lexical/code'
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link'
+import { $isListItemNode, INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND, ListNode } from '@lexical/list'
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
+import { $createHeadingNode, $isHeadingNode } from '@lexical/rich-text'
+import { $setBlocksType } from '@lexical/selection'
+import { $createParagraphNode, $getSelection, $isRangeSelection, COMMAND_PRIORITY_LOW, FORMAT_TEXT_COMMAND, KEY_MODIFIER_COMMAND, SELECTION_CHANGE_COMMAND } from 'lexical'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { setupToggleButton } from '../905/167712'
+import { j as Icon1 } from '../905/253683'
+import { getI18nString } from '../905/303541'
+import { N as _$$N } from '../905/430294'
+import { formatShortcutKey } from '../905/491152'
+import { Z } from '../905/498136'
+import { I as Icon3 } from '../905/542485'
+import { i as Icon4 } from '../905/661697'
+import { p as Icon5 } from '../905/682418'
+import { s as Icon2 } from '../905/702260'
+import { W as Icon6 } from '../905/865092'
+import { getRelevantSelectionNode, normalizeUrl } from '../905/999278'
+import { mergeRegister } from '../vendor/425002'
+/**
+ * HeadingIcon - SVG icon for heading toggle button.
+ * Original name: d
+ */
+const HeadingIcon = memo((props) => {
+  return jsx('svg', {
+    width: '24',
+    height: '24',
+    fill: 'none',
+    viewBox: '0 0 24 24',
+    ...props,
+    children: jsx('path', {
+      fill: 'var(--color-icon)',
+      fillRule: 'evenodd',
+      d: 'M7 6.5a.5.5 0 0 0-1 0v11a.5.5 0 0 0 1 0V12h6v5.5a.5.5 0 0 0 1 0v-11a.5.5 0 0 0-1 0V11H7zm11 6a.5.5 0 0 0-.777-.416l-1.5 1a.5.5 0 1 0 .554.832l.723-.482V17.5a.5.5 0 0 0 1 0z',
+      clipRule: 'evenodd',
+    }),
+  })
+})
+
+/**
+ * toggleCodeBlock - Toggles code block or paragraph block type.
+ * Original name: w
+ * @param editor Lexical editor instance
+ * @param isCodeBlock boolean
+ */
+function toggleCodeBlock(editor, isCodeBlock: boolean) {
+  editor.update(() => {
+    const selection = $getSelection()
+    if (selection !== null) {
+      $setBlocksType(selection, () => isCodeBlock ? $createParagraphNode() : $createCodeNode())
     }
-  }, []);
-  useEffect(() => Sd(t.registerUpdateListener(({
-    editorState: e
-  }) => {
-    e.read(() => {
-      K();
-    });
-  }), t.registerCommand(Mv, (e, t) => (K(), !1), Ac), t.registerCommand(cq, e => e.metaKey && e.shiftKey && "KeyX" === e.code ? (t.dispatchCommand(mB, "strikethrough"), !0) : e.metaKey && e.shiftKey && e.altKey && "KeyC" === e.code ? (w(t, H), !0) : !!e.metaKey && !!e.shiftKey && "KeyC" === e.code && (t.dispatchCommand(mB, "code"), !0), Ac)), [t, K, H]);
-  return jsxs("div", {
-    className: "toolbar_plugin--toolbar--C-lb8",
-    ref: i,
-    children: [jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.bold") + OZ({
-        keyShortcutKey: "B"
-      }),
-      onIcon: jsx(_$$j, {}),
-      offIcon: jsx(_$$j, {}),
-      checked: T,
-      variant: "highlighted",
-      onChange: () => {
-        t.dispatchCommand(mB, "bold");
-      }
-    }), jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.italic") + OZ({
-        keyShortcutKey: "I"
-      }),
-      onIcon: jsx(_$$s, {}),
-      offIcon: jsx(_$$s, {}),
-      checked: R,
-      variant: "highlighted",
-      onChange: () => {
-        t.dispatchCommand(mB, "italic");
-      }
-    }), jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.strikethrough") + OZ({
-        keyShortcutShift: !0,
-        keyShortcutKey: "X"
-      }),
-      onIcon: jsx(_$$N, {}),
-      offIcon: jsx(_$$N, {}),
-      checked: P,
-      variant: "highlighted",
-      onChange: () => {
-        t.dispatchCommand(mB, "strikethrough");
-      }
-    }), jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.heading"),
-      onIcon: jsx(d, {}),
-      offIcon: jsx(d, {}),
-      checked: D,
-      variant: "highlighted",
-      onChange: () => {
-        !function (e, t) {
-          e.update(() => {
-            let e = vJ();
-            null !== e && zI(e, () => t ? lJ() : fi("h1"));
-          });
-        }(t, D);
-      }
-    }), jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.bulleted_list"),
-      onIcon: jsx(Z, {}),
-      offIcon: jsx(Z, {}),
-      checked: F,
-      variant: "highlighted",
-      onChange: () => {
-        F ? C(t) : t.dispatchCommand(q7, void 0);
-      }
-    }), jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.numbered_list"),
-      onIcon: jsx(_$$p, {}),
-      offIcon: jsx(_$$p, {}),
-      checked: j,
-      variant: "highlighted",
-      onChange: () => {
-        j ? C(t) : t.dispatchCommand(_$$x, void 0);
-      }
-    }), jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.link") + OZ({
-        keyShortcutKey: "U",
-        keyShortcutShift: !0
-      }),
-      onIcon: jsx(_$$W, {}),
-      offIcon: jsx(_$$W, {}),
-      checked: B,
-      variant: "highlighted",
-      onChange: () => {
-        !function (e, t, i) {
-          e.update(() => {
-            let n = vJ();
-            if (I2(n)) {
-              let r = n.getTextContent();
-              if (t) {
-                i(!1);
-                e.dispatchCommand(yW, null);
-              } else {
-                let t = r ? Jf(r) : "";
-                i(!0);
-                e.dispatchCommand(yW, t);
-              }
-            }
-          });
-        }(t, B, e);
-      }
-    }), jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.inline_code") + OZ({
-        keyShortcutShift: !0,
-        keyShortcutKey: "C"
-      }),
-      onIcon: jsx(_$$i, {}),
-      offIcon: jsx(_$$i, {}),
-      checked: G,
-      variant: "highlighted",
-      onChange: () => {
-        t.dispatchCommand(mB, "code");
-      }
-    }), jsx(_$$f, {
-      "aria-label": getI18nString("lexical_editor_toolbar.code_block") + OZ({
-        keyShortcutShift: !0,
-        keyShortcutOption: !0,
-        keyShortcutKey: "C"
-      }),
-      onIcon: jsx(_$$I, {}),
-      offIcon: jsx(_$$I, {}),
-      checked: H,
-      variant: "highlighted",
-      onChange: () => {
-        w(t, H);
-      }
-    })]
-  });
+  })
 }
-export const A = $$T0;
+
+/**
+ * setParagraphBlock - Sets block type to paragraph.
+ * Original name: C
+ * @param editor Lexical editor instance
+ */
+function setParagraphBlock(editor) {
+  editor.update(() => {
+    const selection = $getSelection()
+    if (selection !== null) {
+      $setBlocksType(selection, () => $createParagraphNode())
+    }
+  })
+}
+
+/**
+ * ToolbarPlugin - Lexical editor toolbar plugin component.
+ * Original name: $$T0
+ */
+export function ToolbarPlugin({
+  setIsLinkEditMode,
+}: {
+  setIsLinkEditMode: (editMode: boolean) => void
+}) {
+  const [editor] = useLexicalComposerContext()
+  const toolbarRef = useRef<HTMLDivElement>(null)
+  const [isBold, setBold] = useState(false)
+  const [isItalic, setItalic] = useState(false)
+  const [isStrikethrough, setStrikethrough] = useState(false)
+  const [isHeading, setHeading] = useState(false)
+  const [isBulletedList, setBulletedList] = useState(false)
+  const [isNumberedList, setNumberedList] = useState(false)
+  const [isLink, setLink] = useState(false)
+  const [isInlineCode, setInlineCode] = useState(false)
+  const [isCodeBlock, setCodeBlock] = useState(false)
+
+  /**
+   * updateToolbarState - Updates toolbar button states based on selection.
+   * Original name: K
+   */
+  const updateToolbarState = useCallback(() => {
+    const selection = $getSelection()
+    if ($isRangeSelection(selection)) {
+      /**
+       * getListTag - Helper to get list tag from node.
+       */
+      const getListTag = (node) => {
+        if ($isListItemNode(node)) {
+          const parent = node.getParent()
+          if (parent instanceof ListNode) {
+            return parent.getTag()
+          }
+        }
+        return null
+      }
+      const relevantNode = getRelevantSelectionNode(selection)
+      const parentNode = relevantNode.getParent()
+      setLink($isLinkNode(parentNode) || $isLinkNode(relevantNode))
+      const listTag = getListTag(relevantNode) || getListTag(parentNode)
+      setBulletedList(listTag === 'ul')
+      setNumberedList(listTag === 'ol')
+      const isCode = !!($isCodeNode(relevantNode) || (parentNode && $isCodeNode(parentNode)))
+      setCodeBlock(isCode)
+      setInlineCode(selection.hasFormat('code') && !isCode)
+      setHeading(!!($isHeadingNode(relevantNode) || (parentNode && $isHeadingNode(parentNode))))
+      setBold(selection.hasFormat('bold'))
+      setItalic(selection.hasFormat('italic'))
+      setStrikethrough(selection.hasFormat('strikethrough'))
+    }
+  }, [])
+
+  useEffect(() => {
+    return mergeRegister(
+      editor.registerUpdateListener(({ editorState }) => {
+        editorState.read(() => {
+          updateToolbarState()
+        })
+      }),
+      editor.registerCommand(SELECTION_CHANGE_COMMAND, () => {
+        updateToolbarState()
+        return false
+      }, COMMAND_PRIORITY_LOW),
+      editor.registerCommand(KEY_MODIFIER_COMMAND, (event) => {
+        if (event.metaKey && event.shiftKey && event.code === 'KeyX') {
+          editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough')
+          return true
+        }
+        if (event.metaKey && event.shiftKey && event.altKey && event.code === 'KeyC') {
+          toggleCodeBlock(editor, isCodeBlock)
+          return true
+        }
+        if (event.metaKey && event.shiftKey && event.code === 'KeyC') {
+          editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code')
+          return true
+        }
+        return false
+      }, COMMAND_PRIORITY_LOW),
+    )
+  }, [editor, updateToolbarState, isCodeBlock])
+
+  /**
+   * handleHeadingToggle - Toggles heading block type.
+   * Original inline function in heading button.
+   */
+  const handleHeadingToggle = () => {
+    editor.update(() => {
+      const selection = $getSelection()
+      if (selection !== null) {
+        $setBlocksType(selection, () => isHeading ? $createParagraphNode() : $createHeadingNode('h1'))
+      }
+    })
+  }
+
+  /**
+   * handleLinkToggle - Toggles link on selection.
+   * Original inline function in link button.
+   */
+  const handleLinkToggle = () => {
+    editor.update(() => {
+      const selection = $getSelection()
+      if ($isRangeSelection(selection)) {
+        const text = selection.getTextContent()
+        if (isLink) {
+          setIsLinkEditMode(false)
+          editor.dispatchCommand(TOGGLE_LINK_COMMAND, null)
+        }
+        else {
+          const url = text ? normalizeUrl(text) : ''
+          setIsLinkEditMode(true)
+          editor.dispatchCommand(TOGGLE_LINK_COMMAND, url)
+        }
+      }
+    })
+  }
+
+  return jsxs('div', {
+    className: 'toolbar_plugin--toolbar--C-lb8',
+    ref: toolbarRef,
+    children: [
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.bold') + formatShortcutKey({ keyShortcutKey: 'B' }),
+        'onIcon': jsx(Icon1, {}),
+        'offIcon': jsx(Icon1, {}),
+        'checked': isBold,
+        'variant': 'highlighted',
+        'onChange': () => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold'),
+      }),
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.italic') + formatShortcutKey({ keyShortcutKey: 'I' }),
+        'onIcon': jsx(Icon2, {}),
+        'offIcon': jsx(Icon2, {}),
+        'checked': isItalic,
+        'variant': 'highlighted',
+        'onChange': () => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'italic'),
+      }),
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.strikethrough') + formatShortcutKey({ keyShortcutShift: true, keyShortcutKey: 'X' }),
+        'onIcon': jsx(_$$N, {}),
+        'offIcon': jsx(_$$N, {}),
+        'checked': isStrikethrough,
+        'variant': 'highlighted',
+        'onChange': () => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough'),
+      }),
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.heading'),
+        'onIcon': jsx(HeadingIcon, {}),
+        'offIcon': jsx(HeadingIcon, {}),
+        'checked': isHeading,
+        'variant': 'highlighted',
+        'onChange': handleHeadingToggle,
+      }),
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.bulleted_list'),
+        'onIcon': jsx(Z, {}),
+        'offIcon': jsx(Z, {}),
+        'checked': isBulletedList,
+        'variant': 'highlighted',
+        'onChange': () => isBulletedList ? setParagraphBlock(editor) : editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined),
+      }),
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.numbered_list'),
+        'onIcon': jsx(Icon5, {}),
+        'offIcon': jsx(Icon5, {}),
+        'checked': isNumberedList,
+        'variant': 'highlighted',
+        'onChange': () => isNumberedList ? setParagraphBlock(editor) : editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined),
+      }),
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.link') + formatShortcutKey({ keyShortcutKey: 'U', keyShortcutShift: true }),
+        'onIcon': jsx(Icon6, {}),
+        'offIcon': jsx(Icon6, {}),
+        'checked': isLink,
+        'variant': 'highlighted',
+        'onChange': handleLinkToggle,
+      }),
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.inline_code') + formatShortcutKey({ keyShortcutShift: true, keyShortcutKey: 'C' }),
+        'onIcon': jsx(Icon4, {}),
+        'offIcon': jsx(Icon4, {}),
+        'checked': isInlineCode,
+        'variant': 'highlighted',
+        'onChange': () => editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code'),
+      }),
+      jsx(setupToggleButton, {
+        'aria-label': getI18nString('lexical_editor_toolbar.code_block') + formatShortcutKey({ keyShortcutShift: true, keyShortcutOption: true, keyShortcutKey: 'C' }),
+        'onIcon': jsx(Icon3, {}),
+        'offIcon': jsx(Icon3, {}),
+        'checked': isCodeBlock,
+        'variant': 'highlighted',
+        'onChange': () => toggleCodeBlock(editor, isCodeBlock),
+      }),
+    ],
+  })
+}
+
+/** Export for external usage. Original name: A */
+export const A = ToolbarPlugin

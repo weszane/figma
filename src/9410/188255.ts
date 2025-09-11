@@ -136,7 +136,7 @@ import { FP } from "../figma_app/91703";
 import { F_, EL } from "../905/858282";
 import { S as _$$S2 } from "../figma_app/420927";
 import { sx as _$$sx2 } from "../905/941192";
-import { y as _$$y2 } from "../905/409121";
+import { browserCapabilities } from "../905/409121";
 import ix from "classnames";
 import { Jn } from "../905/17223";
 import { Hz, Un, jg, Am } from "../figma_app/591738";
@@ -1530,7 +1530,7 @@ function i_() {
     overlay: v75,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
-  let l = _$$y2.isApple();
+  let l = browserCapabilities.isApple();
   let d = useMemo(() => jsx(_$$S2, {
     shortcut: l ? "\u2318K" : "Ctrl+K"
   }), [l]);

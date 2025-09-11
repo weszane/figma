@@ -1,6 +1,6 @@
-import { Ni, Cy, ff, bS, kF } from "../vendor/408361";
+import { $getRoot, $isDecoratorNode, $isElementNode, $isParagraphNode, $isTextNode } from "../vendor/408361";
 function s() {
-  return Ni().getTextContent();
+  return $getRoot().getTextContent();
 }
 function o(e, r = !0) {
   if (e) return !1;
@@ -10,19 +10,19 @@ function o(e, r = !0) {
 }
 function a(e) {
   if (!o(e, !1)) return !1;
-  let r = Ni().getChildren();
+  let r = $getRoot().getChildren();
   let n = r.length;
   if (n > 1) return !1;
   for (let e = 0; e < n; e++) {
     let n = r[e];
-    if (Cy(n)) return !1;
-    if (ff(n)) {
-      if (!bS(n) || 0 !== n.__indent) return !1;
+    if ($isDecoratorNode(n)) return !1;
+    if ($isElementNode(n)) {
+      if (!$isParagraphNode(n) || 0 !== n.__indent) return !1;
       let r = n.getChildren();
       let s = r.length;
       for (let n = 0; n < s; n++) {
         let n = r[e];
-        if (!kF(n)) return !1;
+        if (!$isTextNode(n)) return !1;
       }
     }
   }

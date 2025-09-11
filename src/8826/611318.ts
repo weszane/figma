@@ -65,7 +65,7 @@ import { q as _$$q2 } from "../642/649844";
 import { o as _$$o } from "../8826/796619";
 import { bL, c$ as _$$c$ } from "../905/867927";
 import { q as _$$q3 } from "../905/932270";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { E as _$$E2 } from "../905/53857";
 import { C as _$$C } from "../8826/771306";
 import { g as _$$g } from "../8826/914688";
@@ -1281,7 +1281,7 @@ function tu(e) {
   let i = am();
   let a = useSelector(Sh);
   let c = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
-  return "HORIZONTAL" !== t ? null : jsx(_$$f, {
+  return "HORIZONTAL" !== t ? null : jsx(setupToggleButton, {
     variant: "highlighted",
     "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.wrap"),
     checked: "WRAP" === n,
@@ -1477,7 +1477,7 @@ function tw(e) {
       source: "panel"
     });
   }, [s]);
-  return jsx(_$$f, {
+  return jsx(setupToggleButton, {
     checked: propertiesPanelShouldShowRemoveAutoLayout,
     variant: "highlighted",
     "aria-label": n,

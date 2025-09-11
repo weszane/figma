@@ -4,4 +4,6 @@ var i = _require(function (e, r, n) {
 }, function () {
   return [[], []];
 });
+// lodash partition
+
 module.exports = i;

@@ -1,6 +1,6 @@
-import { ie } from "../vendor/408361";
-export function $$s0(e) {
-  let r = ie(e);
+import { createEditor } from "../vendor/408361";
+export function createHeadlessEditor(e) {
+  let r = createEditor(e);
   r._headless = !0;
   ["registerDecoratorListener", "registerRootListener", "registerMutationListener", "getRootElement", "setRootElement", "getElementByKey", "focus", "blur"].forEach(e => {
     r[e] = () => {
@@ -9,4 +9,4 @@ export function $$s0(e) {
   });
   return r;
 }
-export const D = $$s0;
+export const D = createHeadlessEditor;

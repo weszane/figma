@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef } from "react";
-import { f as _$$f } from "../905/167712";
+import { setupToggleButton } from "../905/167712";
 import { _ as _$$_ } from "../905/410717";
 import { j as _$$j } from "../905/519202";
 import { RR } from "../figma_app/338442";
@@ -57,7 +57,7 @@ export function $$S0(e) {
       recordingKey: generateRecordingKey(e, "visibilityVariableControl"),
       dataTestId: "visibility-variable-control",
       openOnRightClick: !0,
-      children: jsx(_$$f, {
+      children: jsx(setupToggleButton, {
         "aria-label": D,
         checked: !R && !T,
         disabled: R,

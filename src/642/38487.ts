@@ -10,7 +10,7 @@ import { l as _$$l } from '../905/103989';
 import { Z as _$$Z } from '../905/104740';
 import { Ib } from '../905/129884';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { f as _$$f } from '../905/167712';
+import { setupToggleButton } from '../905/167712';
 import { R as _$$R } from '../905/256203';
 import { F as _$$F } from '../905/258517';
 import { getI18nString } from '../905/303541';
@@ -184,7 +184,7 @@ let eh = memo(e => {
   }), []);
   return jsx('span', {
     className: hz,
-    children: jsx(_$$f, {
+    children: jsx(setupToggleButton, {
       'ref': a,
       'aria-label': getI18nString('fullscreen.object_row.toggle_lock'),
       'checked': locked || isAncestorLocked,
@@ -317,7 +317,7 @@ let eS = memo(e => {
   }), []);
   return jsx('span', {
     className: yk,
-    children: jsx(_$$f, {
+    children: jsx(setupToggleButton, {
       'ref': a,
       'aria-label': getI18nString('fullscreen.object_row.toggle_visibility'),
       'checked': visible,

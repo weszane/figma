@@ -1,5 +1,5 @@
-import { Mx, Gu } from "../vendor/463802";
-import { ie, Ni, lJ, vJ } from "../vendor/408361";
+import { createLexicalComposerContext, LexicalComposerContext } from "../vendor/463802";
+import { createEditor, $getRoot, $createParagraphNode, $getSelection } from "../vendor/408361";
 import { useLayoutEffect, useEffect, useMemo } from "react";
 import { jsx } from "react/jsx-runtime";
 let h = "undefined" != typeof window && void 0 !== window.document && void 0 !== window.document.createElement;
@@ -20,8 +20,8 @@ export function $$g0({
       editorState,
       html
     } = e;
-    let m = Mx(null, theme);
-    let v = ie({
+    let m = createLexicalComposerContext(null, theme);
+    let v = createEditor({
       editable: e.editable,
       html,
       namespace,
@@ -32,12 +32,12 @@ export function $$g0({
     (function (e, r) {
       if (null !== r) {
         if (void 0 === r) e.update(() => {
-          let r = Ni();
+          let r = $getRoot();
           if (r.isEmpty()) {
-            let n = lJ();
+            let n = $createParagraphNode();
             r.append(n);
             let i = h ? document.activeElement : null;
-            (null !== vJ() || null !== i && i === e.getRootElement()) && n.select();
+            (null !== $getSelection() || null !== i && i === e.getRootElement()) && n.select();
           }
         }, p);else if (null !== r) switch (typeof r) {
           case "string":
@@ -51,7 +51,7 @@ export function $$g0({
             break;
           case "function":
             e.update(() => {
-              Ni().isEmpty() && r(e);
+              $getRoot().isEmpty() && r(e);
             }, p);
         }
       }
@@ -63,7 +63,7 @@ export function $$g0({
     let [i] = n;
     i.setEditable(void 0 === r || r);
   }, []);
-  return jsx(Gu.Provider, {
+  return jsx(LexicalComposerContext.Provider, {
     value: n,
     children: r
   });

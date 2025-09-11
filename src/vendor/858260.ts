@@ -1,5 +1,5 @@
-import { sb, fG, lJ, kF, MK, ev, WK, pT, Ey } from "../vendor/408361";
-import { ZB, HE } from "../vendor/425002";
+import { isHTMLElement, ElementNode, $createParagraphNode, $isTextNode, $isTabNode, $createTabNode, $createLineBreakNode, $applyNodeReplacement, TextNode } from "../vendor/408361";
+import { addClassNamesToElement, removeClassNamesFromElement } from "../vendor/425002";
 "undefined" != typeof globalThis ? globalThis : "undefined" != typeof window ? window : "undefined" != typeof global ? global : "undefined" != typeof self && self;
 var o = function (e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.$$default : e;
@@ -19,19 +19,19 @@ let h = e => {
 };
 function d(e, r) {
   for (let n of e.childNodes) {
-    if (sb(n) && n.tagName === r) return !0;
+    if (isHTMLElement(n) && n.tagName === r) return !0;
     d(n, r);
   }
   return !1;
 }
 let p = "data-language";
 let g = "data-highlight-language";
-export class $$m2 extends fG {
+export class CodeNode extends ElementNode {
   static getType() {
     return "code";
   }
   static clone(e) {
-    return new $$m2(e.__language, e.__key);
+    return new CodeNode(e.__language, e.__key);
   }
   constructor(e, r) {
     super(r);
@@ -40,7 +40,7 @@ export class $$m2 extends fG {
   }
   createDOM(e) {
     let r = document.createElement("code");
-    ZB(r, e.theme.code);
+    addClassNamesToElement(r, e.theme.code);
     r.setAttribute("spellcheck", "false");
     let n = this.getLanguage();
     n && (r.setAttribute(p, n), this.getIsSyntaxHighlightSupported() && r.setAttribute(g, n));
@@ -54,7 +54,7 @@ export class $$m2 extends fG {
   }
   exportDOM(e) {
     let r = document.createElement("pre");
-    ZB(r, e._config.theme.code);
+    addClassNamesToElement(r, e._config.theme.code);
     r.setAttribute("spellcheck", "false");
     let n = this.getLanguage();
     n && (r.setAttribute(p, n), this.getIsSyntaxHighlightSupported() && r.setAttribute(g, n));
@@ -98,7 +98,7 @@ export class $$m2 extends fG {
     };
   }
   static importJSON(e) {
-    let r = $$v0(e.language);
+    let r = $createCodeNode(e.language);
     r.setFormat(e.format);
     r.setIndent(e.indent);
     r.setDirection(e.direction);
@@ -118,7 +118,7 @@ export class $$m2 extends fG {
     if (s >= 2 && "\n" === n[s - 1].getTextContent() && "\n" === n[s - 2].getTextContent() && e.isCollapsed() && e.anchor.key === this.__key && e.anchor.offset === s) {
       n[s - 1].remove();
       n[s - 2].remove();
-      let e = lJ();
+      let e = $createParagraphNode();
       this.insertAfter(e, r);
       return e;
     }
@@ -127,11 +127,11 @@ export class $$m2 extends fG {
       focus
     } = e;
     let h = (anchor.isBefore(focus) ? anchor : focus).getNode();
-    if (kF(h)) {
+    if ($isTextNode(h)) {
       let e = T(h);
       let r = [];
-      for (; ;) if (MK(e)) {
-        r.push(ev());
+      for (;;) if ($isTabNode(e)) {
+        r.push($createTabNode());
         e = e.getNextSibling();
       } else {
         if (!C(e)) break;
@@ -148,16 +148,16 @@ export class $$m2 extends fG {
       let s = 0 === anchor.offset ? 0 : 1;
       let a = n.getIndexWithinParent() + s;
       let d = h.getParentOrThrow();
-      let p = [WK(), ...r];
+      let p = [$createLineBreakNode(), ...r];
       d.splice(a, 0, p);
       let g = r[r.length - 1];
       g ? g.select() : 0 === anchor.offset ? n.selectPrevious() : n.getNextSibling().selectNext(0, 0);
     }
-    if ($$y1(h)) {
+    if ($isCodeNode(h)) {
       let {
         offset
       } = e.anchor;
-      h.splice(offset, 0, [WK()]);
+      h.splice(offset, 0, [$createLineBreakNode()]);
       h.select(offset + 1, offset + 1);
     }
     return null;
@@ -166,7 +166,7 @@ export class $$m2 extends fG {
     return !1;
   }
   collapseAtStart() {
-    let e = lJ();
+    let e = $createParagraphNode();
     this.getChildren().forEach(r => e.append(r));
     this.replace(e);
     return !0;
@@ -183,15 +183,15 @@ export class $$m2 extends fG {
     return this.getLatest().__isSyntaxHighlightSupported;
   }
 }
-export function $$v0(e) {
-  return pT(new $$m2(e));
+export function $createCodeNode(e) {
+  return $applyNodeReplacement(new CodeNode(e));
 }
-export function $$y1(e) {
-  return e instanceof $$m2;
+export function $isCodeNode(e) {
+  return e instanceof CodeNode;
 }
 function b(e) {
   return {
-    node: $$v0(e.getAttribute(p))
+    node: $createCodeNode(e.getAttribute(p))
   };
 }
 function O(e) {
@@ -205,14 +205,14 @@ function O(e) {
     }
     return !1;
   }(r) ? {
-    node: n ? $$v0() : null
+    node: n ? $createCodeNode() : null
   } : {
     node: null
   };
 }
 function x() {
   return {
-    node: $$v0()
+    node: $createCodeNode()
   };
 }
 function w() {
@@ -226,7 +226,7 @@ function k(e) {
 function _(e) {
   return e.classList.contains("js-file-line-container");
 }
-class S extends Ey {
+class S extends TextNode {
   constructor(e, r, n) {
     super(e, n);
     this.__highlightType = r;
@@ -246,14 +246,14 @@ class S extends Ey {
   createDOM(e) {
     let r = super.createDOM(e);
     let n = E(e.theme, this.__highlightType);
-    ZB(r, n);
+    addClassNamesToElement(r, n);
     return r;
   }
   updateDOM(e, r, n) {
     let i = super.updateDOM(e, r, n);
     let o = E(n.theme, e.__highlightType);
     let a = E(n.theme, this.__highlightType);
-    o !== a && (o && HE(r, o), a && ZB(r, a));
+    o !== a && (o && removeClassNamesFromElement(r, o), a && addClassNamesToElement(r, a));
     return i;
   }
   static importJSON(e) {
@@ -279,14 +279,14 @@ class S extends Ey {
     return !0;
   }
   createParentElementNode() {
-    return $$v0();
+    return $createCodeNode();
   }
 }
 function E(e, r) {
   return r && e && e.codeHighlight && e.codeHighlight[r];
 }
 function A(e, r) {
-  return pT(new S(e, r));
+  return $applyNodeReplacement(new S(e, r));
 }
 function C(e) {
   return e instanceof S;
@@ -294,7 +294,7 @@ function C(e) {
 function T(e) {
   let r = e;
   let n = e;
-  for (; C(n) || MK(n);) {
+  for (; C(n) || $isTabNode(n);) {
     r = n;
     n = n.getPreviousSibling();
   }
@@ -330,6 +330,6 @@ function R(e, r) {
 function M(e, r) {
   return C(e) && C(r) && e.__text === r.__text && e.__highlightType === r.__highlightType || l(e) && l(r) || f(e) && f(r);
 }
-export const QC = $$v0;
-export const a5 = $$y1;
-export const iK = $$m2;
+export const QC = $createCodeNode;
+export const a5 = $isCodeNode;
+export const iK = CodeNode;
