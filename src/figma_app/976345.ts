@@ -6,7 +6,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { P as _$$P } from "../905/724705";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { q_ } from "../figma_app/997907";
@@ -338,7 +338,7 @@ let ep = createOptimistThunk(async (e, t) => {
   customHistory.redirect("/");
 });
 let $$e_0 = createOptimistThunk((e, t) => {
-  e.dispatch(_$$s.flash(getI18nString("org_settings.mfa_for_members.member_flash")));
+  e.dispatch(FlashActions.flash(getI18nString("org_settings.mfa_for_members.member_flash")));
   e.dispatch(ep(t));
 });
 export const C7 = $$e_0;

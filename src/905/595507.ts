@@ -1,9 +1,9 @@
 import { createOptimistAction } from "../905/350402";
 import { COMMIT, REVERT } from "redux-optimist";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 let $$l1 = createOptimistAction("TEAM_ADMIN_DEMOTE_EDITOR_ROLES", (e, {
   editor: t
 }, {
@@ -22,7 +22,7 @@ let $$l1 = createOptimistAction("TEAM_ADMIN_DEMOTE_EDITOR_ROLES", (e, {
       }
     });
   }).catch(() => {
-    e.dispatch(_$$s.error("An error occurred while downgrading this user's permissions."));
+    e.dispatch(FlashActions.error("An error occurred while downgrading this user's permissions."));
     e.dispatch({
       type: null,
       optimist: {
@@ -32,6 +32,6 @@ let $$l1 = createOptimistAction("TEAM_ADMIN_DEMOTE_EDITOR_ROLES", (e, {
     });
   });
 });
-let $$d0 = NC("TEAM_ADMIN_SET_MEMBER_EDU_GRACE_PERIOD");
+let $$d0 = createActionCreator("TEAM_ADMIN_SET_MEMBER_EDU_GRACE_PERIOD");
 export const P = $$d0;
 export const z = $$l1;

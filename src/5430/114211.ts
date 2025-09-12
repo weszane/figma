@@ -5,7 +5,7 @@ import { Pw } from "../905/521428";
 import { s_ } from "../905/17223";
 import { Lf } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
 import { G } from "../905/971006";
@@ -33,11 +33,11 @@ export let $$w0 = registerModal(function (e) {
   let O = useCallback(() => {
     if (!r || P) return;
     if (!C) {
-      t(_$$s.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_first_name")));
+      t(FlashActions.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_first_name")));
       return;
     }
     if (!T) {
-      t(_$$s.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_last_name")));
+      t(FlashActions.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_last_name")));
       return;
     }
     let {
@@ -48,11 +48,11 @@ export let $$w0 = registerModal(function (e) {
       postal_code
     } = N;
     if (!line1 || !city || !country || !postal_code || "US" === country && !region) {
-      t(_$$s.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_valid_address")));
+      t(FlashActions.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_valid_address")));
       return;
     }
     if (S && !k) {
-      t(_$$s.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_valid_vat_id")));
+      t(FlashActions.error(getI18nString("community.seller.collect_tax_info_modal.enter_a_valid_vat_id")));
       return;
     }
     M(!0);

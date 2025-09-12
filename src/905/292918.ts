@@ -10,9 +10,9 @@ import { yJ } from "../figma_app/78808";
 import { hideModal, showModalHandler } from "../905/156213";
 import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
-import { oJ } from "../905/346794";
+import { waitForJoinStatus } from "../905/346794";
 import f, { FileVersions, FileCanEdit } from "../figma_app/43951";
-import { wY } from "../905/753206";
+import { handlePluginError } from "../905/753206";
 import A, { maybeCreateSavepoint } from "../905/294113";
 import { FEditorType } from "../figma_app/53721";
 import { BranchType, SourceDirection } from "../905/535806";
@@ -47,8 +47,8 @@ import J from "../vendor/338009";
 import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { x as _$$x } from "../905/211326";
-import { s as _$$s2 } from "../905/573154";
-import { HF, pW } from "../905/218608";
+import { FlashActions } from "../905/573154";
+import { getViewName, isBranchView } from "../905/218608";
 import { ur, jP, YL } from "../figma_app/221114";
 import { Dd } from "../905/519092";
 var P = N;
@@ -274,7 +274,7 @@ let el = registerModal(function ({
     }) => {
       o(new Date(e.created_at));
     }).catch(e => {
-      n(_$$s2.error("Unable to load file versions"));
+      n(FlashActions.error("Unable to load file versions"));
     });
   }, [t, o, n]);
   let [l, d] = useState(null);
@@ -290,7 +290,7 @@ let el = registerModal(function ({
   let h = ee()(m, ["updatedAt"], ["desc"]);
   let g = h.map((e, t) => {
     let i = t === h.length - 1;
-    let n = HF(e.view);
+    let n = getViewName(e.view);
     let r = {
       user: e.user,
       label: e.label || void 0,
@@ -306,7 +306,7 @@ let el = registerModal(function ({
       first: !1,
       isActive: l === e,
       isAllowedToChangeVersion: () => !0,
-      isBranchingVersion: pW(r),
+      isBranchingVersion: isBranchView(r),
       isLinked: !1,
       label: e.label || void 0,
       last: i,
@@ -375,7 +375,7 @@ let $$ed0 = createOptimistThunk(async (e, t) => {
 });
 let $$ec5 = createOptimistThunk(async (e, t) => {
   if (e.getState().mirror.appModel.topLevelMode !== ViewType.BRANCHING) {
-    if (fullscreenValue.triggerAction("enter-branching-mode"), fullscreenValue.triggerAction("show-design-panel"), await oJ(SchemaJoinStatus.JOINED), t.force) {
+    if (fullscreenValue.triggerAction("enter-branching-mode"), fullscreenValue.triggerAction("show-design-panel"), await waitForJoinStatus(SchemaJoinStatus.JOINED), t.force) {
       e.dispatch(showModalHandler({
         type: $,
         data: {
@@ -423,7 +423,7 @@ let $$eu2 = createOptimistThunk(async (e, t) => {
     });
     return;
   }
-  await wY();
+  await handlePluginError();
   let [c, u] = await Promise.all([subscribeAndAwaitData(FileCanEdit, {
     key: t.branchKey
   }), subscribeAndAwaitData(FileCanEdit, {

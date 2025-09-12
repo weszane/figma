@@ -1,9 +1,9 @@
-import { NC } from "../905/17179";
-let $$r2 = NC("SET_ERROR_MESSAGE");
-let $$a4 = NC("AUTOCOMPLETE_INPUT_CHANGE");
-let $$s0 = NC("AUTOCOMPLETE_ADD_TOKEN");
-let $$o3 = NC("AUTOCOMPLETE_SET");
-let $$l1 = NC("AUTOCOMPLETE_RESET");
+import { createActionCreator } from "../905/73481";
+let $$r2 = createActionCreator("SET_ERROR_MESSAGE");
+let $$a4 = createActionCreator("AUTOCOMPLETE_INPUT_CHANGE");
+let $$s0 = createActionCreator("AUTOCOMPLETE_ADD_TOKEN");
+let $$o3 = createActionCreator("AUTOCOMPLETE_SET");
+let $$l1 = createActionCreator("AUTOCOMPLETE_RESET");
 export const Ox = $$s0;
 export const cL = $$l1;
 export const g = $$r2;

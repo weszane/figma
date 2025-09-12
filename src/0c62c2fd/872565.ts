@@ -61,7 +61,7 @@ import { KH } from "../905/81982";
 import { NU } from "../905/163189";
 import { getDraftsSidebarString } from "../figma_app/633080";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { s as _$$s3 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { Dw } from "../figma_app/976345";
 import { e5 } from "../figma_app/297957";
 import { KQ } from "../figma_app/475472";
@@ -435,7 +435,7 @@ function eH(e) {
         teamName: r,
         orgAccess: FAccessLevelType.PUBLIC,
         dontRedirect: !0
-      })), d(!0), n("")) : o(_$$s3.error(getI18nString("flash.team_name_cannot_be_empty")));
+      })), d(!0), n("")) : o(FlashActions.error(getI18nString("flash.team_name_cannot_be_empty")));
     },
     children: jsx("div", {
       className: "file_move--teamCreateRow--GglhU file_move--folderRow--ZBYjx",

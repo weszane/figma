@@ -32,7 +32,7 @@ import { fZ } from "../figma_app/805373";
 import { Dd, OJ } from "../905/519092";
 import { hK } from "../figma_app/211706";
 import { bUL } from "../figma_app/822011";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { E as _$$E } from "../905/984674";
 import { KQ } from "../figma_app/475472";
 import { A as _$$A } from "../6828/7452";
@@ -128,7 +128,7 @@ let Q = registerModal(function (e) {
       onClose,
       onSubmit: () => {
         if (c) {
-          d(_$$s2.error(getI18nString("team_creation.your_team_name_cannot_be_empty")));
+          d(FlashActions.error(getI18nString("team_creation.your_team_name_cannot_be_empty")));
           return;
         }
         d(KQ({

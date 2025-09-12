@@ -2,7 +2,7 @@ import { useMemo, useCallback } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { useMultiSubscription, useSubscription } from "../figma_app/288654";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { a as _$$a } from "../905/999566";
 import { showModalHandler } from "../905/156213";
@@ -111,7 +111,7 @@ export function $$b2(e) {
   let t = useDispatch();
   return useCallback((r, n) => {
     if (n) {
-      t(_$$s.error(getI18nString("file_browser.pinning.add_pin_error_max_pins", {
+      t(FlashActions.error(getI18nString("file_browser.pinning.add_pin_error_max_pins", {
         maxNumWorkspacePins: $$T1
       })));
       return;

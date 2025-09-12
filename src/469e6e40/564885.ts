@@ -9,7 +9,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { h1 } from "../905/986103";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { sf } from "../905/929976";
@@ -49,7 +49,7 @@ export let $$E0 = registerModal(function (e) {
     })).then(e => {
       u(e.data.meta);
     }).catch(e => {
-      a(_$$s.error(e.data?.message || getI18nString("team_view.pro_member_modal.error_on_activity_retrieval_fallback_message")));
+      a(FlashActions.error(e.data?.message || getI18nString("team_view.pro_member_modal.error_on_activity_retrieval_fallback_message")));
     }).$$finally(() => h(!1));
   }, [a, e.planType, e.planUserId, e.planId]);
   let v = useMemo(() => [{

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { getAtomMutate } from "../figma_app/566371";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { U } from "../figma_app/199513";
 import { yX } from "../figma_app/918700";
@@ -22,7 +22,7 @@ export function $$u0({
     r({
       folderIds: e.map(e => e.id)
     }).catch(() => {
-      t(_$$s.error(getI18nString("file_browser.api_folder.error_when_deleting")));
+      t(FlashActions.error(getI18nString("file_browser.api_folder.error_when_deleting")));
     });
   };
   return jsx(yX, {

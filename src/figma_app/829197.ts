@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { ColorSpaceEnum } from "../figma_app/763686";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { debugState } from "../905/407919";
 import { userColorProfileAtomFamily } from "../905/888985";
 import { WB } from "../905/761735";
@@ -13,7 +13,7 @@ let h = {
   colorProfilePreference: FColorSpaceType.DEFAULT,
   id: ""
 };
-let $$m2 = NC("USER_UPDATE_COLOR_PROFILE");
+let $$m2 = createActionCreator("USER_UPDATE_COLOR_PROFILE");
 let g = atom(e => {
   let t = e(userColorProfileAtomFamily({}));
   let r = h.colorProfilePreference;

@@ -8,7 +8,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { ds } from "../figma_app/314264";
 import { aW, le } from "../figma_app/527873";
-import { LD } from "../figma_app/582924";
+import { getJoinStatusString } from "../figma_app/582924";
 import { h as _$$h } from "../figma_app/276445";
 import { dd, PH } from "../905/550523";
 let g = {
@@ -97,7 +97,7 @@ async function I(e, t, r, i, o) {
         is_hidden: document.hidden,
         product_type: o,
         is64BitBrowser: BrowserInfo.is64BitBrowser,
-        multiplayer_state: Multiplayer && LD(Multiplayer.getSessionState()),
+        multiplayer_state: Multiplayer && getJoinStatusString(Multiplayer.getSessionState()),
         ...a,
         ...s,
         ...c

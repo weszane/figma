@@ -1,6 +1,6 @@
 import _require from "../469e6e40/127004";
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { createFontMetadata, removeFontOwnerPrefix } from "../905/165290";
 import { XHR } from "../905/910117";
@@ -19,7 +19,7 @@ let y = 0;
 export function $$b0() {
   return y++;
 }
-let v = NC("START_UPLOAD_FONTS");
+let v = createActionCreator("START_UPLOAD_FONTS");
 let I = createOptimistThunk((e, t) => {
   for (let i in e.dispatch(VisualBellActions.enqueue({
     type: "shared-fonts",
@@ -97,7 +97,7 @@ let I = createOptimistThunk((e, t) => {
           uploaded: e.collision.uploaded,
           overwritten_fonts: e.collision.overwritten_fonts
         } : void 0;
-      } catch (e) { }
+      } catch (e) {}
       (function (e, t) {
         switch (e) {
           case 403:
@@ -183,13 +183,13 @@ function E(e, t) {
     }
   }));
 }
-let x = NC("UPLOAD_FONT_SUCCESS");
-let S = NC("UPLOAD_FONT_FAILURE");
-let w = NC("UPLOAD_FONT_WARNING");
-let C = NC("UPLOAD_FONT_PROGRESS");
-let T = NC("TOGGLE_FONT_TO_DELETE");
-let k = NC("CLEAR_FONTS_TO_DELETE");
-let R = NC("CLEAR_DELETE_RESULT");
+let x = createActionCreator("UPLOAD_FONT_SUCCESS");
+let S = createActionCreator("UPLOAD_FONT_FAILURE");
+let w = createActionCreator("UPLOAD_FONT_WARNING");
+let C = createActionCreator("UPLOAD_FONT_PROGRESS");
+let T = createActionCreator("TOGGLE_FONT_TO_DELETE");
+let k = createActionCreator("CLEAR_FONTS_TO_DELETE");
+let R = createActionCreator("CLEAR_DELETE_RESULT");
 let N = createOptimistThunk(e => {
   e.dispatch(R());
   let {
@@ -242,12 +242,12 @@ let N = createOptimistThunk(e => {
     }));
   };
 });
-let P = NC("DELETE_FONT_COMPLETE");
-let O = NC("DISMISS_FONT_COLLISION");
-let D = NC("DISMISS_FONT_WARNING");
-let L = NC("UPDATE_SHARED_FONT_LIST");
-let F = NC("PUT_SHARED_FONT");
-let M = NC("DEL_SHARED_FONT");
+let P = createActionCreator("DELETE_FONT_COMPLETE");
+let O = createActionCreator("DISMISS_FONT_COLLISION");
+let D = createActionCreator("DISMISS_FONT_WARNING");
+let L = createActionCreator("UPDATE_SHARED_FONT_LIST");
+let F = createActionCreator("PUT_SHARED_FONT");
+let M = createActionCreator("DEL_SHARED_FONT");
 let $$j1 = {
   startUploadFonts: v,
   uploadFonts: I,

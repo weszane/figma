@@ -1,2 +1,5 @@
-export var $$n0 = (e => (e[e.DEFAULT = 0] = "DEFAULT", e[e.ERROR = 1] = "ERROR", e))($$n0 || {});
-export const x = $$n0;
+export enum ErrorEnum {
+  DEFAULT = 0,
+  ERROR = 1,
+}
+export const x = ErrorEnum

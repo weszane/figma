@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { XHR } from "../905/910117";
 import { Sb } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
@@ -7,7 +7,7 @@ import { M4 } from "../905/713695";
 import { fileEntityModel } from "../905/806985";
 import { S } from "../figma_app/787550";
 import { H } from "../905/473998";
-export let $$p2 = NC("ONBOARDING_TEMPLATES_PUT_ALL");
+export let $$p2 = createActionCreator("ONBOARDING_TEMPLATES_PUT_ALL");
 createOptimistThunk(e => {
   H.getTemplates({
     type: "onboarding"

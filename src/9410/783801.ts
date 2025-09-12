@@ -11,8 +11,8 @@ import { useSubscription } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { _ as _$$_ } from "../905/170564";
-import { Q } from "../905/463586";
+import { NotificationType } from "../905/170564";
+import { notificationActions } from "../905/463586";
 import { hx } from "../905/292918";
 import { m0 } from "../figma_app/976749";
 import { handleModalError, isDefaultFileAlt, handleError, isBranchAlt } from "../905/760074";
@@ -118,8 +118,8 @@ function j(e) {
   }(openFile);
   useEffect(() => {
     if (t && j) {
-      dispatch(Q.dequeue({
-        type: _$$_.BRANCHING_SOURCE_FILE_UPDATED
+      dispatch(notificationActions.dequeue({
+        type: NotificationType.BRANCHING_SOURCE_FILE_UPDATED
       }));
       return;
     }
@@ -127,9 +127,9 @@ function j(e) {
       action: "Shown",
       fileKey: key,
       fileRepoId
-    }), dispatch(Q.enqueue({
+    }), dispatch(notificationActions.enqueue({
       notification: {
-        type: _$$_.BRANCHING_SOURCE_FILE_UPDATED,
+        type: NotificationType.BRANCHING_SOURCE_FILE_UPDATED,
         message: getI18nString("collaboration.branching.updates_available_from_main_file"),
         acceptCallback: () => {
           dispatch(hx({
@@ -150,8 +150,8 @@ function j(e) {
           });
         }
       }
-    }))) : dispatch(Q.dequeue({
-      type: _$$_.BRANCHING_SOURCE_FILE_UPDATED
+    }))) : dispatch(notificationActions.dequeue({
+      type: NotificationType.BRANCHING_SOURCE_FILE_UPDATED
     }));
   }, [canEdit, key, fileRepoId, modalShown, topLevelMode, j, dispatch, t]);
   return null;

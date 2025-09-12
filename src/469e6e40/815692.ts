@@ -69,7 +69,7 @@ import { $n } from '../905/521428';
 import { subscribeAndAwaitData } from '../905/553831';
 import { mL, UC } from '../905/563637';
 import { r as _$$r3 } from '../905/571562';
-import { s as _$$s2 } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { VisualBellIcon } from '../905/576487';
 import { getFeatureFlags } from '../905/601108';
 import { K as _$$K } from '../905/628118';
@@ -1187,10 +1187,10 @@ let tN = registerModal(({
                 workspaceId: a.id,
                 aiControlsSetting: o
               }).then(() => {
-                r(_$$s2.flash(l));
+                r(FlashActions.flash(l));
                 t();
               }).catch(e => {
-                r(_$$s2.error(e.message));
+                r(FlashActions.error(e.message));
               });
             },
             children: renderI18nText('org_settings.general.save')
@@ -1238,9 +1238,9 @@ let tI = registerModal(({
               }).then(() => {
                 e();
                 e();
-                a(_$$s2.flash(s));
+                a(FlashActions.flash(s));
               }).catch(e => {
-                a(_$$s2.error(e.message));
+                a(FlashActions.error(e.message));
               });
             },
             children: renderI18nText('org_settings.general.remove')
@@ -1732,11 +1732,11 @@ let tQ = registerModal(e => {
           onClick: () => {
             t(popModalStack());
             XHR.del(`/api/oauth/token/${e.org.id}/${e.token.client_id}`).then(a => {
-              t(_$$s2.flash(getI18nString('settings_tab.connected_apps.oauth_token_deleted')));
+              t(FlashActions.flash(getI18nString('settings_tab.connected_apps.oauth_token_deleted')));
               t(popModalStack());
               e.onRevoke();
             }).catch(e => {
-              t(_$$s2.error(e.data?.message || getI18nString('settings_tab.connected_apps.an_error_occurred_while_deleting_the_token'), 5e3));
+              t(FlashActions.error(e.data?.message || getI18nString('settings_tab.connected_apps.an_error_occurred_while_deleting_the_token'), 5e3));
               console.error(e);
             });
           },
@@ -1759,7 +1759,7 @@ let tZ = registerModal(e => {
       r(e.meta);
       o(!1);
     }).catch(e => {
-      t(_$$s2.error(getI18nString('settings_tab.connected_apps.error_loading_tokens')));
+      t(FlashActions.error(getI18nString('settings_tab.connected_apps.error_loading_tokens')));
       o(!1);
     });
   }, [t, e.org.id]);
@@ -3763,10 +3763,10 @@ let nL = registerModal(({
                   publicLinkControlsSetting: t,
                   publicLinkControlsMaxExpiration: n
                 }).then(() => {
-                  l(_$$s2.flash(getI18nString('setting_tab.successfully_updated_workspace_public_link_controls')));
+                  l(FlashActions.flash(getI18nString('setting_tab.successfully_updated_workspace_public_link_controls')));
                   e();
                 }).catch(() => {
-                  l(_$$s2.error(getI18nString('org_actions.an_error_occurred')));
+                  l(FlashActions.error(getI18nString('org_actions.an_error_occurred')));
                 });
               }
             }
@@ -3815,11 +3815,11 @@ let nD = registerModal(({
                 publicLinkControlsSetting: null,
                 publicLinkControlsMaxExpiration: null
               }).then(() => {
-                a(_$$s2.flash(getI18nString('setting_tab.successfully_updated_workspace_public_link_controls')));
+                a(FlashActions.flash(getI18nString('setting_tab.successfully_updated_workspace_public_link_controls')));
                 t();
                 t();
               }).catch(() => {
-                a(_$$s2.error(getI18nString('org_actions.an_error_occurred')));
+                a(FlashActions.error(getI18nString('org_actions.an_error_occurred')));
               });
             },
             children: renderI18nText('setting_tab.public_sharing.modal.remove')
@@ -4153,7 +4153,7 @@ function n3(e) {
           } : void 0;
           Ey(u, s).then(e => {
             if (e.error) {
-              d(_$$s2.error(e.error.message || n));
+              d(FlashActions.error(e.error.message || n));
               g(!1);
             } else {
               if (e && e.token) {
@@ -4163,10 +4163,10 @@ function n3(e) {
                   }, c);
                 });
               }
-              d(_$$s2.error('Sorry, we\'re unable to change your payment source. Refresh and try again.'));
+              d(FlashActions.error('Sorry, we\'re unable to change your payment source. Refresh and try again.'));
             }
           }).catch(e => {
-            d(_$$s2.error(e.data?.message || e.message || n));
+            d(FlashActions.error(e.data?.message || e.message || n));
             g(!1);
           });
         },
@@ -5529,7 +5529,7 @@ let sl = createOptimistThunk((e, t, {
   } = t;
   let r = a.getMutation(I2);
   let l = e => {
-    n(_$$s2.error(resolveMessage(e, getI18nString('payments.change_billing_contact_error')), 5e3));
+    n(FlashActions.error(resolveMessage(e, getI18nString('payments.change_billing_contact_error')), 5e3));
   };
   let o = async t => {
     await r({
@@ -5537,7 +5537,7 @@ let sl = createOptimistThunk((e, t, {
       billingContacts: t,
       onRejected: l
     });
-    e.dispatch(_$$s2.flash(getI18nString('org_admin_settings.billing_details.billing_contact_updated')));
+    e.dispatch(FlashActions.flash(getI18nString('org_admin_settings.billing_details.billing_contact_updated')));
   };
   n(showModalHandler({
     type: _$$E2,

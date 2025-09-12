@@ -4,7 +4,7 @@ import { Z } from '../905/104740';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { permissionScopeHandler } from '../905/189185';
 import { trackEventAnalytics } from '../905/449184';
-import { s as _$$s } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { endPerformanceSpan, startPerformanceSpan } from '../905/670985';
 import { logError, logInfo } from '../905/714362';
 import { f as _$$f } from '../905/940356';
@@ -184,7 +184,7 @@ class L {
   }
   logErrorAndStopTutorial(e, t) {
     this.logSentryError(e, t);
-    this.dispatch(_$$s.error('Could not run tutorial. Please try again later.'));
+    this.dispatch(FlashActions.error('Could not run tutorial. Please try again later.'));
     this.stopCurrentTutorial({
       tutorialName: t.tutorialName,
       stopTrigger: mf.STATE_MANAGER_ERROR,

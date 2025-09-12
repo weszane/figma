@@ -1,5 +1,5 @@
 import { debounce } from "../905/915765";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { ce } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -55,9 +55,9 @@ let $$N6 = createOptimistThunk(e => {
   });
   customHistory.redirect(n);
 });
-let $$C8 = NC("DESKTOP_NEW_TAB_SET_LOADING_BACKGROUND_COLOR");
-let $$w7 = NC("DESKTOP_NEW_TAB_SET_IS_SEARCH_BAR_FOCUSED");
-let $$O3 = NC("DESKTOP_NEW_TAB_SET_SEARCH_QUERY");
+let $$C8 = createActionCreator("DESKTOP_NEW_TAB_SET_LOADING_BACKGROUND_COLOR");
+let $$w7 = createActionCreator("DESKTOP_NEW_TAB_SET_IS_SEARCH_BAR_FOCUSED");
+let $$O3 = createActionCreator("DESKTOP_NEW_TAB_SET_SEARCH_QUERY");
 let $$R0 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.result;

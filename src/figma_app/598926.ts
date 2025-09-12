@@ -1,7 +1,7 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { bx } from "../905/34809";
@@ -25,19 +25,19 @@ let $$b10 = createOptimistThunk((e, t) => XHR.put(`/api/folders/${t.folderId}/de
   }));
 }).catch(t => {
   console.error(t);
-  e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.update_subscription_error")));
+  e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.update_subscription_error")));
 }));
-let $$T6 = NC("FOLDER_UNPIN_FILE");
+let $$T6 = createActionCreator("FOLDER_UNPIN_FILE");
 let $$I15 = createOptimistThunk((e, t) => {
   let r = e.optimisticDispatch($$T6(t));
   return XHR.del(`/api/folders/${t.fileKey}/pin`).then(() => {
     r.commit();
   }).catch(() => {
     r.revert();
-    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.file_unpin_error")));
+    e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.file_unpin_error")));
   });
 });
-let $$S1 = NC("FOLDER_PIN_FILE");
+let $$S1 = createActionCreator("FOLDER_PIN_FILE");
 let $$v8 = createOptimistThunk(async (e, t) => {
   let r = e.optimisticDispatch($$S1(t));
   xr("file_browser_folder_pin_file", t.folderId, null, e.getState(), {
@@ -51,21 +51,21 @@ let $$v8 = createOptimistThunk(async (e, t) => {
     }));
   }).catch(() => {
     r.revert();
-    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.file_pin_error")));
+    e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.file_pin_error")));
   });
 });
-let $$A5 = NC("FOLDER_SET_PINNED_FILE");
-let $$x2 = NC("FOLDER_DELETE_LG_SHIM");
-let $$N13 = NC("FOLDER_DELETE");
-let $$C3 = NC("FOLDER_CLEAR");
+let $$A5 = createActionCreator("FOLDER_SET_PINNED_FILE");
+let $$x2 = createActionCreator("FOLDER_DELETE_LG_SHIM");
+let $$N13 = createActionCreator("FOLDER_DELETE");
+let $$C3 = createActionCreator("FOLDER_CLEAR");
 let $$w11 = createOptimistThunk((e, t) => {
   let r = SS(t.name);
   if (r) {
-    e.dispatch(_$$s.error(r));
+    e.dispatch(FlashActions.error(r));
     return null;
   }
   if (e.dispatch(popModalStack()), e.dispatch(bx()), void 0 === t.isInviteOnly && void 0 === t.isViewOnly && void 0 === t.teamAccess) {
-    e.dispatch(_$$s.error("inviteOnly and viewOnly fields or teamAccess field must be defined"));
+    e.dispatch(FlashActions.error("inviteOnly and viewOnly fields or teamAccess field must be defined"));
     return null;
   }
   let n = {
@@ -170,12 +170,12 @@ createOptimistThunk((e, {
     })
   });
 });
-let $$O9 = NC("FOLDER_LOAD");
-let $$R12 = NC("FOLDER_PUT_UPDATED_AT");
-let $$L4 = NC("FOLDER_LOADED");
-let $$P14 = NC("FOLDER_PUT");
-let $$D0 = NC("FOLDER_BATCH_POST");
-let $$k7 = NC("FOLDER_POST");
+let $$O9 = createActionCreator("FOLDER_LOAD");
+let $$R12 = createActionCreator("FOLDER_PUT_UPDATED_AT");
+let $$L4 = createActionCreator("FOLDER_LOADED");
+let $$P14 = createActionCreator("FOLDER_PUT");
+let $$D0 = createActionCreator("FOLDER_BATCH_POST");
+let $$k7 = createActionCreator("FOLDER_POST");
 export const $l = $$D0;
 export const $o = $$S1;
 export const HA = $$x2;

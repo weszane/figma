@@ -1,4 +1,4 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { createOptimistThunk } from "../905/350402";
 import { M4 } from "../905/713695";
 import { xy } from "../905/844322";
@@ -16,9 +16,9 @@ let $$l0 = M4.Mutation((e, {
   });
   return r;
 });
-let $$d3 = NC("RESTORE_TRASHED_FILES");
-let $$c4 = NC("DELETE_FILES_PERMANENTLY");
-let $$u1 = NC("DELETE_FILES");
+let $$d3 = createActionCreator("RESTORE_TRASHED_FILES");
+let $$c4 = createActionCreator("DELETE_FILES_PERMANENTLY");
+let $$u1 = createActionCreator("DELETE_FILES");
 let $$p2 = createOptimistThunk((e, t) => {
   e.dispatch($$u1(t));
   e.dispatch(sM({

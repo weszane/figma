@@ -7,7 +7,7 @@ import { logger } from "../905/651849";
 import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { I as _$$I } from "../figma_app/4253";
 import { Dl } from "../figma_app/471982";
@@ -168,7 +168,7 @@ export function $$F5(e) {
   let t = useDispatch();
   let r = _$$I(e);
   return useCallback(() => {
-    e && QQ(r) && (t(_$$s.flash(getI18nString("community.buyer.redirecting_to_stripe"))), t(_$$v({})));
+    e && QQ(r) && (t(FlashActions.flash(getI18nString("community.buyer.redirecting_to_stripe"))), t(_$$v({})));
   }, [e, r, t]);
 }
 export function $$j16(e, t) {

@@ -1,6 +1,6 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { s as _$$s2 } from "../905/381752";
@@ -32,7 +32,7 @@ export function $$E0(e) {
       type: "team-billing-contact-changed"
     }));
   }).catch(e => {
-    dispatch(_$$s.error(e.data?.message || getI18nString("payments.change_billing_contact_error"), 5e3));
+    dispatch(FlashActions.error(e.data?.message || getI18nString("payments.change_billing_contact_error"), 5e3));
     return e;
   });
 }
@@ -52,11 +52,11 @@ let $$y1 = createOptimistThunk((e, {
       summary: t.meta
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(getI18nString("flash.team_billing_summary_fetching_error")));
+    e.dispatch(FlashActions.error(getI18nString("flash.team_billing_summary_fetching_error")));
   });
 }, e => `TEAM_ADMIN_FETCH_BILLING_SUMMARY::teamId::${e.teamId}`);
-let $$b6 = NC("TEAM_ADMIN_SET_SUMMARY");
-let $$T5 = NC("TEAM_ADMIN_UPDATE_INVOICE_RECEIVER");
+let $$b6 = createActionCreator("TEAM_ADMIN_SET_SUMMARY");
+let $$T5 = createActionCreator("TEAM_ADMIN_UPDATE_INVOICE_RECEIVER");
 export function $$I2(e) {
   let {
     team,
@@ -106,7 +106,7 @@ export function $$S3(e) {
     });
     onSuccess();
   }).catch(e => {
-    dispatch(_$$s.error(e.data?.message || getI18nString("billing_modals.renewal.toast.failure"), 5e3));
+    dispatch(FlashActions.error(e.data?.message || getI18nString("billing_modals.renewal.toast.failure"), 5e3));
     onFailure();
     return e;
   });
@@ -135,7 +135,7 @@ export function $$v7(e) {
     });
     onSuccess();
   }).catch(e => {
-    dispatch(_$$s.error(e.data?.message || getI18nString("billing_modals.renewal.toast.failure"), 5e3));
+    dispatch(FlashActions.error(e.data?.message || getI18nString("billing_modals.renewal.toast.failure"), 5e3));
     onFailure();
     return e;
   });

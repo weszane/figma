@@ -1,5 +1,5 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
@@ -16,7 +16,7 @@ import { vt, xQ, bD } from "../figma_app/45218";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 import { n as _$$n2 } from "../905/347702";
-let $$T1 = NC("SET_SAVED_PLUGIN_VERSIONS");
+let $$T1 = createActionCreator("SET_SAVED_PLUGIN_VERSIONS");
 let $$I5 = createOptimistThunk((e, t) => {
   let r = {};
   Object.keys(t).forEach(e => {

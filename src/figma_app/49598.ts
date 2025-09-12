@@ -5,7 +5,7 @@ import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { dR } from "../905/508367";
 import { customHistory } from "../905/612521";
@@ -18,7 +18,7 @@ import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
 import { Ts } from "../905/194276";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -63,12 +63,12 @@ import { UM, F4 } from "../figma_app/60023";
 import { Dl } from "../905/58274";
 import { HZ, Oo } from "../905/926523";
 let ep = ZS;
-let $$e_7 = NC("PUT_FIG_FILE_PUBLISHED_AS_HUB_FILE");
-let $$eh0 = NC("UPDATE_HUB_FILE_PAGE_TITILE");
-let $$em2 = NC("DEL_FIG_FILE_PUBLISHED_AS_HUB_FILE");
-let $$eg5 = NC("PUT_FIG_FILE_DUPLICATE_FROM_HUB_FILE");
-let ef = NC("DEL_FIG_FILE_DUPLICATE_FROM_HUB_FILE");
-let $$eE12 = NC("HUB_FILE_PUT_HUB_FILE_REMIX");
+let $$e_7 = createActionCreator("PUT_FIG_FILE_PUBLISHED_AS_HUB_FILE");
+let $$eh0 = createActionCreator("UPDATE_HUB_FILE_PAGE_TITILE");
+let $$em2 = createActionCreator("DEL_FIG_FILE_PUBLISHED_AS_HUB_FILE");
+let $$eg5 = createActionCreator("PUT_FIG_FILE_DUPLICATE_FROM_HUB_FILE");
+let ef = createActionCreator("DEL_FIG_FILE_DUPLICATE_FROM_HUB_FILE");
+let $$eE12 = createActionCreator("HUB_FILE_PUT_HUB_FILE_REMIX");
 let ey = e => {
   let t = getI18nString("community.actions.log_in_or_create_an_account_to_duplicate_this_file");
   if (isMobileUA) {
@@ -551,7 +551,7 @@ let $$eR4 = createOptimistThunk(async (e, {
     r?.(t);
   } catch (r) {
     let t = resolveMessage(r, getI18nString("community.actions.an_error_occurred_while_updating_please_refresh_and_try_again"));
-    e.dispatch(_$$s.error(t));
+    e.dispatch(FlashActions.error(t));
     reportError(_$$e.COMMUNITY, r);
     return Error(`Error updating file ${r}`);
   }

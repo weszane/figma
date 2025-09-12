@@ -1,4 +1,4 @@
-import type { Dispatch } from 'redux'
+import type { ActionCreator, Dispatch } from 'redux'
 import { BEGIN } from 'redux-optimist'
 import { generateOptimistId } from '../905/842794'
 import { isDebugMode } from '../figma_app/897289'

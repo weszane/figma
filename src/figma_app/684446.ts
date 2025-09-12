@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { A } from "../905/920142";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { LicenseGroupUpdateReasonEnum } from "../figma_app/35887";
 import { Eh } from "../figma_app/617654";
@@ -38,7 +38,7 @@ export function $$m8(e, t = !0) {
           d(!0);
           a(!1);
         } catch (e) {
-          g(_$$s.error(getI18nString("license_group.an_error_occurred_fetching_license_group_counts")));
+          g(FlashActions.error(getI18nString("license_group.an_error_occurred_fetching_license_group_counts")));
           a(!1);
           d(!1);
           p(!0);

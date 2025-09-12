@@ -7,7 +7,7 @@ import { customHistory } from "../905/612521";
 import { isLocalDevOnCluster } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
 import { reportError, setTagGlobal } from "../905/11";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -17,7 +17,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { E as _$$E } from "../905/344656";
 import { VERSION_HISTORY_SET_DOC_HAS_CHANGED } from "../905/784363";
 import { b2 } from "../figma_app/622574";
-import { Cd, AW } from "../figma_app/582924";
+import { setupFlushTimer, setupConnectionStateHandler } from "../figma_app/582924";
 import { VP } from "../905/18797";
 import { av } from "../figma_app/915202";
 import { l as _$$l } from "../905/26554";
@@ -237,7 +237,7 @@ let X = registerModal(function () {
 }, "MultiplayerCursorLimitModal");
 export let $$ec1 = createOptimistThunk(e => {
   let t = parseQuery(customHistory.location.search).flash;
-  t && e.dispatch(_$$s.flash(t));
+  t && e.dispatch(FlashActions.flash(t));
 });
 export class $$eu0 {
   constructor(e) {
@@ -295,10 +295,10 @@ export class $$eu0 {
     this.dispatch(Lt());
   }
   setBackgroundFlushInterval(e) {
-    Cd(e);
+    setupFlushTimer(e);
   }
   startMonitorInterval() {
-    AW();
+    setupConnectionStateHandler();
   }
   handleMultiplayerSignal(e, t, i) {
     if ("force-refresh" === e) customHistory.reload("Multiplayer got force-refresh signal");else if ("too-many-connections" === e) {
@@ -362,7 +362,7 @@ export class $$eu0 {
           }
         }));
       } else {
-        this.dispatch(_$$s.flash(getI18nString("unsaved_changes.syncing.updating_the_app")));
+        this.dispatch(FlashActions.flash(getI18nString("unsaved_changes.syncing.updating_the_app")));
         setTimeout(() => {
           let e = location.href;
           e += /\?/.test(e) ? "&" : "?";
@@ -376,7 +376,7 @@ export class $$eu0 {
     } else if ("network-access-restriction" === e) {
       let e = `/ip_account_restriction?reason=network_access_restriction&redirect_uri=${encodeURIComponent(window.location.href)}`;
       location.assign(e);
-    } else "schema-validation-failure" === e && this.dispatch(_$$s.flash(getI18nString("unsaved_changes.syncing.we_re_experiencing_issues_opening_this_file_please_try_again_later")));
+    } else "schema-validation-failure" === e && this.dispatch(FlashActions.flash(getI18nString("unsaved_changes.syncing.we_re_experiencing_issues_opening_this_file_please_try_again_later")));
   }
   socketBufferedAmount() {
     return Yq();

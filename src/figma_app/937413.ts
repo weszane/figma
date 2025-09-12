@@ -5,7 +5,7 @@ import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { serializeQuery } from "../905/634134";
 import { XHR } from "../905/910117";
 import { canCreateFileType } from "../figma_app/687776";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -190,7 +190,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
     n.catch(({
       data: t
     }) => {
-      t && t.message ? e.dispatch(_$$s.error(t.message)) : e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.duplicate_file_error")));
+      t && t.message ? e.dispatch(FlashActions.error(t.message)) : e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.duplicate_file_error")));
     });
     return n;
   });
@@ -256,11 +256,11 @@ let $$G0 = createOptimistThunk((e, t) => {
   return XHR.post(`/api/multiplayer/${t.file.key}/copy?${serializeQuery({
     folder_id: n
   })}`).then(() => {
-    e.dispatch(_$$s.flash(getI18nString("user_view.file_duplicated_to_your_drafts")));
+    e.dispatch(FlashActions.flash(getI18nString("user_view.file_duplicated_to_your_drafts")));
   }).catch(({
     data: t
   }) => {
-    t && t.message ? e.dispatch(_$$s.error(t.message)) : e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.duplicate_file_error")));
+    t && t.message ? e.dispatch(FlashActions.error(t.message)) : e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.duplicate_file_error")));
   });
 });
 export const W6 = $$G0;

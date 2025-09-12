@@ -1,4 +1,4 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { logger } from "../905/651849";
 import { createOptimistThunk } from "../905/350402";
 import { Q } from "../905/618914";
@@ -40,8 +40,8 @@ let $$u1 = createOptimistThunk(async (e, t) => {
     logger.error(t);
   }));
 });
-let $$p2 = NC("ORG_DOMAINS_IS_FETCHING");
-let $$m0 = NC("ORG_DOMAIN_SET_ALL");
+let $$p2 = createActionCreator("ORG_DOMAINS_IS_FETCHING");
+let $$m0 = createActionCreator("ORG_DOMAIN_SET_ALL");
 export const Au = $$m0;
 export const UK = $$u1;
 export const h8 = $$p2;

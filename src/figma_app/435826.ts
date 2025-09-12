@@ -16,7 +16,7 @@ import { VisualBellActions } from "../905/302958";
 import { yA, rX, As, t5, _K, f$, Qn } from "../figma_app/933328";
 import { ni, kX, V2 } from "../905/63598";
 import { hideModal } from "../905/156213";
-import { Ak, Ki, Ff } from "../figma_app/582924";
+import { getNextSessionId, createSessionPromise, isIncrementalSessionOrValidating } from "../figma_app/582924";
 import { wM } from "../figma_app/852050";
 import { c as _$$c } from "../905/210851";
 import { openFileAtom, selectCurrentFile } from "../figma_app/516028";
@@ -34,8 +34,8 @@ function k() {
   reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, Error("Query for library consumers aborted during reconnect"));
 }
 export async function $$M1(e) {
-  let t = Ak();
-  let r = Ki(t);
+  let t = getNextSessionId();
+  let r = createSessionPromise(t);
   let {
     componentKeys,
     localIds
@@ -51,8 +51,8 @@ export async function $$M1(e) {
   }
 }
 export async function $$F5(e) {
-  let t = Ak();
-  let r = Ki(t);
+  let t = getNextSessionId();
+  let r = createSessionPromise(t);
   let {
     componentKeys,
     stateGroupKeys,
@@ -76,8 +76,8 @@ export async function $$F5(e) {
   }
 }
 export async function $$j3(e) {
-  let t = Ak();
-  let r = Ki(t);
+  let t = getNextSessionId();
+  let r = createSessionPromise(t);
   let {
     styleKeys,
     localIds
@@ -99,8 +99,8 @@ async function U(e) {
   for (let r of e) t[r.type].push(r.key);
   let r = [];
   for (let e of Object.keys(t)) if (t[e].length && e === PrimaryWorkflowEnum.CODE_COMPONENT) {
-    let n = Ak();
-    let i = Ki(n);
+    let n = getNextSessionId();
+    let i = createSessionPromise(n);
     r.push(i);
     LibraryPubSub.downloadAllSubscribedCodeInstancesForUpdate(t[e], n);
   }
@@ -112,7 +112,7 @@ async function U(e) {
 }
 export async function $$B0(e, t) {
   let r = LibraryPubSub.getTimestampForLibraryUpdateStart();
-  Ff() && (await U(t));
+  isIncrementalSessionOrValidating() && (await U(t));
   await e.dispatch(yA({
     assets: t,
     updateStartTime: r
@@ -149,7 +149,7 @@ export function $$G6(e, t = aD.ALL, r) {
   let q = _$$T();
   let J = useCallback(async (t, r) => {
     let n = LibraryPubSub.getTimestampForLibraryUpdateStart();
-    Ff() && (await $$M1(t));
+    isIncrementalSessionOrValidating() && (await $$M1(t));
     await a(rX({
       components: t,
       usedItemsByKey: e,
@@ -161,7 +161,7 @@ export function $$G6(e, t = aD.ALL, r) {
   }, [a, e, X, q]);
   let Z = useCallback(async (t, r) => {
     let n = LibraryPubSub.getTimestampForLibraryUpdateStart();
-    Ff() && (await $$F5(t));
+    isIncrementalSessionOrValidating() && (await $$F5(t));
     await a(As({
       stateGroups: t,
       usedItemsByKey: e,
@@ -173,7 +173,7 @@ export function $$G6(e, t = aD.ALL, r) {
   }, [a, e, X, q]);
   let Q = useCallback(async e => {
     let t = LibraryPubSub.getTimestampForLibraryUpdateStart();
-    Ff() && (await $$j3(e));
+    isIncrementalSessionOrValidating() && (await $$j3(e));
     await a(t5({
       styles: e,
       updateStartTime: t,
@@ -183,9 +183,9 @@ export function $$G6(e, t = aD.ALL, r) {
   }, [a, X, q]);
   let ee = useCallback(async e => {
     let t = LibraryPubSub.getTimestampForLibraryUpdateStart();
-    if (Ff()) {
-      let t = Ak();
-      let r = Ki(t);
+    if (isIncrementalSessionOrValidating()) {
+      let t = getNextSessionId();
+      let r = createSessionPromise(t);
       LibraryPubSub.downloadAllSubscribedVariableSetConsumersForUpdate(e.map(e => e.key), t);
       try {
         await r;
@@ -220,7 +220,7 @@ export function $$G6(e, t = aD.ALL, r) {
   }, [a, Y]);
   let et = useCallback(async e => {
     let t = LibraryPubSub.getTimestampForLibraryUpdateStart();
-    Ff() && (await U(e));
+    isIncrementalSessionOrValidating() && (await U(e));
     await a(f$({
       assets: e,
       updateStartTime: t

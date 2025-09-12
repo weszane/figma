@@ -5,7 +5,7 @@ import { nD } from "../figma_app/416935";
 import { useLatestRef } from "../figma_app/922077";
 import { getPaymentFlowData } from "../figma_app/169182";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { sx as _$$sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
@@ -63,7 +63,7 @@ let $$b2 = D(({
           taxes: s.data.meta.estimate
         }));
       } catch (e) {
-        a(_$$s.error(getI18nString("payments.errors.estimate_calculation_error")));
+        a(FlashActions.error(getI18nString("payments.errors.estimate_calculation_error")));
         a(sf({
           ...y,
           paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS

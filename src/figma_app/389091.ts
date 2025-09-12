@@ -1,6 +1,6 @@
 import { debounce } from "../905/915765";
 import { Multiplayer } from "../figma_app/763686";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { logger } from "../905/651849";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
@@ -58,7 +58,7 @@ async function N(e, t) {
   });
   return r;
 }
-let $$C39 = NC("SET_SELECTED_SONG_ID_MUSIC");
+let $$C39 = createActionCreator("SET_SELECTED_SONG_ID_MUSIC");
 let $$w3 = createOptimistThunk((e, t) => {
   let {
     music
@@ -81,7 +81,7 @@ let $$O25 = createOptimistThunk(e => {
   I8();
   om();
 });
-let $$R20 = NC("RESET_LOCAL_MUSIC");
+let $$R20 = createActionCreator("RESET_LOCAL_MUSIC");
 let $$$$L11 = createOptimistThunk((e, t) => {
   if (e.dispatch($$P4(t)), t.isPaused || t.isStopped || !t.selectedSongID) (t.isPaused || t.isStopped) && c4() && I8();else {
     let r = U(t.selectedSongID, e.getState().music.activeSongs);
@@ -90,8 +90,8 @@ let $$$$L11 = createOptimistThunk((e, t) => {
     });
   }
 });
-let $$P4 = NC("SET_MUSIC_STATE");
-let $$D6 = NC("RESUME_MUSIC");
+let $$P4 = createActionCreator("SET_MUSIC_STATE");
+let $$D6 = createActionCreator("RESUME_MUSIC");
 createOptimistThunk(async (e, t) => {
   let r = $$A15(t);
   let n = e.getState();
@@ -129,7 +129,7 @@ let $$M26 = createOptimistThunk(e => {
     isStopped: !0
   }));
 });
-let $$F28 = NC("START_MUSIC");
+let $$F28 = createActionCreator("START_MUSIC");
 let $$j35 = createOptimistThunk(async (e, {
   musicStartTimeMs: t = 0
 }) => {
@@ -151,7 +151,7 @@ let $$j35 = createOptimistThunk(async (e, {
   }));
 });
 let U = (e, t) => t.find(t => t.song_id === e);
-let $$B17 = NC("SEND_MUSIC_MESSAGE");
+let $$B17 = createActionCreator("SEND_MUSIC_MESSAGE");
 let G = createOptimistThunk((e, t) => {
   let r = e.getState().music;
   Multiplayer?.sendMusic(t.isPaused, (r?.music?.musicMessageID || 0) + 1, t.selectedSongID || "", t.lastReceivedSongTimestampMs || 0, t.isStopped);
@@ -166,14 +166,14 @@ createOptimistThunk((e, t) => {
   });
   e.dispatch($$V12(t));
 });
-let $$V12 = NC("SET_MUSIC_MODAL");
-let $$H40 = NC("RESET_LOCAL_TIMER");
-let $$z1 = NC("SET_MUSIC_STANDALONE_VOLUME");
+let $$V12 = createActionCreator("SET_MUSIC_MODAL");
+let $$H40 = createActionCreator("RESET_LOCAL_TIMER");
+let $$z1 = createActionCreator("SET_MUSIC_STANDALONE_VOLUME");
 let $$W41 = createOptimistThunk((e, t) => {
   Z(e.getState(), t);
   e.dispatch($$z1(t));
 });
-let $$K29 = NC("SET_MUSIC_IS_MUTED");
+let $$K29 = createActionCreator("SET_MUSIC_IS_MUTED");
 let $$Y44 = createOptimistThunk((e, {
   isMuted: t,
   userInitiated: r
@@ -184,7 +184,7 @@ let $$Y44 = createOptimistThunk((e, {
     userInitiated: r
   }));
 });
-let $$$31 = NC("SET_TIMER_AND_MUSIC_ARE_MUTED");
+let $$$31 = createActionCreator("SET_TIMER_AND_MUSIC_ARE_MUTED");
 createOptimistThunk((e, {
   isMuted: t,
   userInitiated: r
@@ -195,15 +195,15 @@ createOptimistThunk((e, {
     userInitiated: r
   }));
 });
-let $$X45 = NC("SET_STANDALONE_MUSIC_PLAYER");
-let $$q0 = NC("SET_MAIN_MUSIC_PLAYER");
-let $$J9 = NC("SET_MUSIC_VOLUME");
+let $$X45 = createActionCreator("SET_STANDALONE_MUSIC_PLAYER");
+let $$q0 = createActionCreator("SET_MAIN_MUSIC_PLAYER");
+let $$J9 = createActionCreator("SET_MUSIC_VOLUME");
 createOptimistThunk((e, t) => {
   Z(e.getState(), t);
   e.dispatch($$J9(t));
 });
 let Z = debounce((e, t) => _$$qV(e, t), 1e3, !1);
-let $$Q2 = NC("SET_SELECTED_SONG_ID");
+let $$Q2 = createActionCreator("SET_SELECTED_SONG_ID");
 let $$ee7 = createOptimistThunk((e, t) => {
   let {
     time
@@ -222,7 +222,7 @@ let $$ee7 = createOptimistThunk((e, t) => {
   }
   e.dispatch($$Q2(t));
 });
-let $$et16 = NC("GET_ACTIVE_SONGS_SUCCESS");
+let $$et16 = createActionCreator("GET_ACTIVE_SONGS_SUCCESS");
 let $$er42 = createOptimistThunk(async e => {
   try {
     let t = await _$$N.getSongs();
@@ -236,12 +236,12 @@ let $$er42 = createOptimistThunk(async e => {
     return e;
   }
 });
-let $$en8 = NC("SET_SHOWING_FILE_FOOTER");
-let $$ei37 = NC("SET_SELECTED_TYPED_PROP_DEF_ID");
-let $$ea30 = NC("SET_START_CHIME_PLAYED");
-let $$es32 = NC("SET_TIMER_NOTIFICATION");
-let $$eo13 = NC("SET_TIMER_AUDIO_ENABLED");
-let $$el10 = NC("SET_TIMER_MODAL");
+let $$en8 = createActionCreator("SET_SHOWING_FILE_FOOTER");
+let $$ei37 = createActionCreator("SET_SELECTED_TYPED_PROP_DEF_ID");
+let $$ea30 = createActionCreator("SET_START_CHIME_PLAYED");
+let $$es32 = createActionCreator("SET_TIMER_NOTIFICATION");
+let $$eo13 = createActionCreator("SET_TIMER_AUDIO_ENABLED");
+let $$el10 = createActionCreator("SET_TIMER_MODAL");
 let $$ed34 = createOptimistThunk((e, t) => {
   if ("open" === t.state && FR() && D(() => {
     let t = FR();
@@ -260,7 +260,7 @@ let $$ed34 = createOptimistThunk((e, t) => {
   }
   e.dispatch($$el10(t));
 });
-let $$ec27 = NC("SEND_TIMER");
+let $$ec27 = createActionCreator("SEND_TIMER");
 let eu = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.timer;
@@ -283,7 +283,7 @@ let eu = createOptimistThunk((e, t) => {
   }
   e.dispatch($$ec27(t));
 });
-let $$ep24 = NC("SET_TIMER");
+let $$ep24 = createActionCreator("SET_TIMER");
 let $$e_36 = createOptimistThunk((e, t) => {
   if (0 === t.totalTimeMs) {
     let t = e.getState();
@@ -295,7 +295,7 @@ let $$e_36 = createOptimistThunk((e, t) => {
   }
   e.dispatch($$ep24(t));
 });
-let $$eh22 = NC("START_TIMER");
+let $$eh22 = createActionCreator("START_TIMER");
 let $$em14 = createOptimistThunk(async (e, {
   totalTimeMs: t,
   musicStartTimeMs: r = 0
@@ -357,7 +357,7 @@ let $$eE19 = createOptimistThunk(e => {
   }));
   _$$d.timerChange("timerstop");
 });
-let $$ey5 = NC("RESUME_TIMER");
+let $$ey5 = createActionCreator("RESUME_TIMER");
 let $$eb38 = createOptimistThunk(async (e, t) => {
   let r = e.getState().timer.selectedSongID;
   r && (r = await N(r, e));

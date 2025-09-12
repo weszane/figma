@@ -1,9 +1,9 @@
 import { Multiplayer } from "../figma_app/763686";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { Q } from "../figma_app/550678";
 import { Point } from "../905/736624";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -66,7 +66,7 @@ export async function $$T2(e, t, r) {
       });
     }(n);
     if (!e) {
-      _$$s.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"));
+      FlashActions.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"));
       return;
     }
     r($$A5({
@@ -77,11 +77,11 @@ export async function $$T2(e, t, r) {
       contentType: "image/jpeg"
     }));
   } catch (e) {
-    r(_$$s.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
+    r(FlashActions.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
     console.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"), e);
   }
 }
-let $$I1 = NC("AVATAR_EDITOR_RESET");
+let $$I1 = createActionCreator("AVATAR_EDITOR_RESET");
 let S = createOptimistThunk((e, t) => {
   if (t.entityType === ck.CURRENT_USER) XHR.put("/api/user", {
     img_url: t.smallUrl,
@@ -97,7 +97,7 @@ let S = createOptimistThunk((e, t) => {
     }));
     e.dispatch($$I1());
   }, t => {
-    e.dispatch(_$$s.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
+    e.dispatch(FlashActions.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo")));
     console.error(getI18nString("avatar_actions.editor_uploaded.an_error_occurred_while_setting_your_profile_photo"), t);
     e.dispatch($$I1());
   });else if (t.entityType === ck.TEAM) {
@@ -118,7 +118,7 @@ let S = createOptimistThunk((e, t) => {
         message: getI18nString("avatar_actions.team_icon_updated")
       }));
     }, t => {
-      e.dispatch(_$$s.error(getI18nString("avatar_actions.an_error_occurred_while_setting_the_team_icon")));
+      e.dispatch(FlashActions.error(getI18nString("avatar_actions.an_error_occurred_while_setting_the_team_icon")));
       console.error(getI18nString("avatar_actions.an_error_occurred_while_setting_the_team_icon"));
       e.dispatch($$I1());
     });
@@ -136,7 +136,7 @@ let S = createOptimistThunk((e, t) => {
       }));
       e.dispatch($$I1());
     }, t => {
-      e.dispatch(_$$s.error(getI18nString("avatar_actions.an_error_occurred") + t.data?.message));
+      e.dispatch(FlashActions.error(getI18nString("avatar_actions.an_error_occurred") + t.data?.message));
       console.error(getI18nString("avatar_actions.an_error_occurred_while_setting_the_organization_icon"), t);
       e.dispatch($$I1());
     });
@@ -153,14 +153,14 @@ let S = createOptimistThunk((e, t) => {
       },
       onrejected: t => {
         let r = getI18nString("avatar_actions.an_error_occurred_while_setting_the_workspace_icon");
-        e.dispatch(_$$s.error(r));
+        e.dispatch(FlashActions.error(r));
         console.error(r);
         e.dispatch($$I1());
       }
     });
   }
 });
-let $$v0 = NC("AVATAR_EDITOR_UPLOAD");
+let $$v0 = createActionCreator("AVATAR_EDITOR_UPLOAD");
 let $$A5 = createOptimistThunk((e, t) => {
   Promise.all([Q("profile", t.small, t.contentType), Q("profile", t.large, t.contentType)]).then(function (r) {
     let n = r[0].data.meta.url;
@@ -172,12 +172,12 @@ let $$A5 = createOptimistThunk((e, t) => {
       largeUrl: i
     }));
   }, () => {
-    e.dispatch(_$$s.error(getI18nString("avatar_actions.an_error_occurred_while_uploading_the_image")));
+    e.dispatch(FlashActions.error(getI18nString("avatar_actions.an_error_occurred_while_uploading_the_image")));
     e.dispatch($$I1());
   });
   e.dispatch($$v0(t));
 });
-let $$x6 = NC("AVATAR_EDITOR_INIT");
+let $$x6 = createActionCreator("AVATAR_EDITOR_INIT");
 export const AY = $$v0;
 export const PI = $$I1;
 export const V8 = $$T2;

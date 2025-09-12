@@ -17,7 +17,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { isDevEnvironment } from "../figma_app/169182";
 import { I7 } from "../figma_app/594947";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { getI18nState } from "../figma_app/363242";
@@ -128,7 +128,7 @@ export let $$P0 = registerModal(function ({
   }({
     onError: e => {
       let t = resolveMessage(e, getI18nString("help_widget.language_selector.an_error_occurred"));
-      l(_$$s2.error(t));
+      l(FlashActions.error(t));
       H() && z(!1);
       let i = Error("Failed to change user locale.");
       captureException(i, {

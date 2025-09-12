@@ -7,7 +7,7 @@ import { z as _$$z } from "../905/239603";
 import { WB } from "../905/761735";
 import { createAtomSetter } from "../figma_app/566371";
 import { getRequest, XHR } from "../905/910117";
-import { Q, s as _$$s } from "../905/573154";
+import { handlePromiseError, FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { sf } from "../905/34809";
@@ -336,7 +336,7 @@ let $$et1 = M4.Mutation(({
       message: getI18nString("file_browser.file_browser_actions.folder_trashed")
     }));
   });
-  r.dispatch(Q({
+  r.dispatch(handlePromiseError({
     promise: n,
     fallbackError: getI18nString("file_browser.api_folder.error_when_moving_to_trash")
   }));
@@ -378,7 +378,7 @@ let $$er11 = M4.Mutation(({
       }
     }));
   });
-  n.dispatch(Q({
+  n.dispatch(handlePromiseError({
     promise: i,
     fallbackError: getI18nString("file_browser.api_folder.error_when_restoring")
   }));
@@ -402,7 +402,7 @@ let $$ei12 = M4.Mutation(({
 }) => {
   let i = SS(t);
   if (i) {
-    n.dispatch(_$$s.error(i));
+    n.dispatch(FlashActions.error(i));
     return;
   }
   r.Folder.update(e, e => {
@@ -416,7 +416,7 @@ let $$ei12 = M4.Mutation(({
     folder_id: e,
     name: t
   });
-  n.dispatch(Q({
+  n.dispatch(handlePromiseError({
     promise: a,
     fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_renaming_this_project")
   }));
@@ -441,7 +441,7 @@ let $$ea9 = createOptimistAction("FOLDER_UPDATE_FOLDER_ACCESS", (e, t, {
   }).catch(() => {
     e.dispatch(createOptimistRevertAction(r));
   });
-  Q({
+  handlePromiseError({
     promise: n,
     fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_access")
   });
@@ -462,7 +462,7 @@ let $$es4 = createOptimistAction("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, 
   }).catch(() => {
     e.dispatch(createOptimistRevertAction(r));
   });
-  Q({
+  handlePromiseError({
     promise: n,
     fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_sharing_audience_control")
   });
@@ -483,7 +483,7 @@ let $$eo13 = createOptimistAction("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
   }).catch(() => {
     e.dispatch(createOptimistRevertAction(r));
   });
-  Q({
+  handlePromiseError({
     promise: n,
     fallbackError: getI18nString("file_browser.api_folder.an_error_while_updating_the_folder_s_team_access")
   });
@@ -518,7 +518,7 @@ let $$el3 = createOptimistThunk(async (e, t) => {
         editorType: null,
         upsellSource: UpsellModalType.FOLDER_MOVE_MODAL
       }
-    })) : e.dispatch(_$$s.error(t.data?.message));
+    })) : e.dispatch(FlashActions.error(t.data?.message));
     return;
   }
   if (r.teamId && i) {
@@ -566,7 +566,7 @@ let ed = M4.Mutation((e, {
       })
     }));
   });
-  n.dispatch(Q({
+  n.dispatch(handlePromiseError({
     promise: s,
     fallbackError: getI18nString("file_browser.api_folder.an_error_occurred_while_moving_this_project")
   }));
@@ -620,7 +620,7 @@ let $$ec6 = createOptimistThunk((e, t) => {
       let t = s ? getI18nString("file_browser.api_folder.no_create_permissions_team_name", {
         teamName: s.name
       }) : getI18nString("file_browser.api_folder.no_create_permissions_this_team");
-      e.dispatch(_$$s.flash(t));
+      e.dispatch(FlashActions.flash(t));
     }
   }
 });

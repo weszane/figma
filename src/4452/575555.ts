@@ -26,7 +26,7 @@ import { ex as _$$ex } from '../905/524523';
 import { r6 } from '../905/542608';
 import { DashboardSections, NavigationRoutes } from '../905/548208';
 import { AccessLevelEnum } from '../905/557142';
-import { s as _$$s2 } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { nl } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
 import { DP } from '../905/640017';
@@ -678,9 +678,9 @@ let tr = registerModal(() => {
         aiFeaturesDisabled: !a
       });
       let s = a ? getI18nString('admin_settings.ai.enable_success') : getI18nString('admin_settings.ai.disable_success');
-      e(_$$s2.flash(s));
+      e(FlashActions.flash(s));
     } catch {
-      e(_$$s2.error(getI18nString('file_browser.file_browser_actions.team_update_error')));
+      e(FlashActions.error(getI18nString('file_browser.file_browser_actions.team_update_error')));
     }
   };
   let p = async a => {
@@ -693,9 +693,9 @@ let tr = registerModal(() => {
         team_id: t,
         enabled: a
       });
-      e(_$$s2.flash(getI18nString('admin_settings.ai.data_sharing.update_success')));
+      e(FlashActions.flash(getI18nString('admin_settings.ai.data_sharing.update_success')));
     } catch (t) {
-      e(_$$s2.error(getI18nString('admin_settings.ai.data_sharing.update_error')));
+      e(FlashActions.error(getI18nString('admin_settings.ai.data_sharing.update_error')));
     }
   };
   let g = null;

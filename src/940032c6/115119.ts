@@ -207,7 +207,7 @@ import { useIsFullscreenSitesView, isSitesFeatureEnabled } from '../905/561485';
 import { N as _$$N9 } from '../905/568293';
 import { r as _$$r2 } from '../905/571562';
 import { N as _$$N7 } from '../905/572042';
-import { s as _$$s5 } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { VisualBellIcon } from '../905/576487';
 import { e as _$$e7 } from '../905/579755';
 import { k as _$$k10 } from '../905/582200';
@@ -6471,7 +6471,7 @@ async function oh(e, t, i) {
             error: 1
           };
         }
-      } catch { }
+      } catch {}
       return {
         success: !1,
         error: 3
@@ -6637,7 +6637,7 @@ function ob() {
             action: () => f(i)
           }
         })
-      })) : l(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
+      })) : l(FlashActions.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
     }, [f, l]);
     let b = useCallback(async i => {
       let a = i.target.files;
@@ -6645,7 +6645,7 @@ function ob() {
         uploadTarget
       } = d;
       if (!a || a.length === 0 || !uploadTarget) {
-        l(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
+        l(FlashActions.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
         return;
       }
       let r = Array.from(a).filter(e => {
@@ -7896,7 +7896,7 @@ function dn({
       });
       r(i.data.meta);
     } catch (e) {
-      e instanceof XHRError && (e.data.message === 'Invalid domain' ? c(getI18nString('sites.metadata.domains.invalid_domain')) : n(_$$s5.error(e.data.message, 4e3)));
+      e instanceof XHRError && (e.data.message === 'Invalid domain' ? c(getI18nString('sites.metadata.domains.invalid_domain')) : n(FlashActions.error(e.data.message, 4e3)));
       x(!1);
     }
   }, [t, g, f, b, r, n]);
@@ -8092,7 +8092,7 @@ let ds = registerModal(e => {
                   message: getI18nString('sites.metadata.domain.domain_removed')
                 }));
               }).catch(e => {
-                e instanceof XHRError ? n(_$$s5.error(e.data.message)) : n(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
+                e instanceof XHRError ? n(FlashActions.error(e.data.message)) : n(FlashActions.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
               }).$$finally(() => {
                 n(hideModalHandler());
               });
@@ -8207,7 +8207,7 @@ function dx({
       });
       n(t.data.meta);
     } catch (e) {
-      e instanceof XHRError ? i(_$$s5.error(e.data.message)) : i(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
+      e instanceof XHRError ? i(FlashActions.error(e.data.message)) : i(FlashActions.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
     }
   }, [e, n, i]);
   let d = qg(t).subdomain ? getI18nString('sites.metadata.domain.add_redirect_from_apex_domain') : getI18nString('sites.metadata.domain.add_redirect_from_www_subdomain');
@@ -8241,7 +8241,7 @@ function dm({
       let l = qg(t).subdomain ? 'CNAME' : 'A';
       r.some(e => e.type === l) && d(e => e.filter(e => e.type !== l));
     } catch (e) {
-      i(_$$s5.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
+      i(FlashActions.error(getI18nString('general.an_error_occurred_while_performing_that_action')));
     }
   };
   return jsx(_$$c$4, {
@@ -8500,7 +8500,7 @@ function dS({
           fileKey: t
         });
       } catch (e) {
-        n(_$$s5.error(getI18nString('sites.metadata.domain.domain_verification_failed')));
+        n(FlashActions.error(getI18nString('sites.metadata.domain.domain_verification_failed')));
       } finally {
         o(!1);
       }
@@ -9936,7 +9936,7 @@ function cm({
       return n;
     }
   }, [s.faviconID]);
-  useEffect(() => { }, [s.faviconID]);
+  useEffect(() => {}, [s.faviconID]);
   return jsx('div', {
     className: 'x1dc814f x1ff1495',
     children: jsx(d8, {
@@ -13174,7 +13174,7 @@ async function xw(e, t, i) {
       });
       await navigator.clipboard.write([i]);
       a();
-    } catch (e) { }
+    } catch (e) {}
   }
 }
 async function xS(e, t) {
@@ -13621,7 +13621,7 @@ let xE = memo(({
       });
     }
   }, [e]);
-  let E = useCallback(e => { }, []);
+  let E = useCallback(e => {}, []);
   useEffect(() => {
     S(i.current?.api, u);
   }, [u, S]);
@@ -14789,7 +14789,7 @@ function mv({
           ...Object.fromEntries(Object.entries(e).filter(([e]) => !n[e])),
           ...l
         }));
-      } catch (e) { } finally {
+      } catch (e) {} finally {
         b.current = !1;
       }
     }, _), b.current = !0) : (k(n), m(l)));
@@ -15500,7 +15500,7 @@ let mW = registerModal(({
           fileKey: n,
           message: e
         });
-        b(_$$s5.error(getI18nString('dakota.collection_field_editor.create_collection.error'), 5e3));
+        b(FlashActions.error(getI18nString('dakota.collection_field_editor.create_collection.error'), 5e3));
       }
       e != null && y(e.id);
     } else {
@@ -16180,7 +16180,7 @@ let hd = registerModal(e => {
                 }));
               }
             }) : jsx(ho, {
-              onImportFailure: () => { },
+              onImportFailure: () => {},
               onImportSuccess: e => {
                 r(e);
                 d(e.name);
@@ -16723,7 +16723,7 @@ function hb() {
       g(l);
       f(e => new Set(e).add(l));
       let a = (await hg(t)).getReader();
-      for (h(!1); ;) {
+      for (h(!1);;) {
         let {
           done,
           value
@@ -17253,7 +17253,7 @@ function h0(e) {
         deleteItem: () => {
           _$$l.user('delete-code-component', () => {
             let t = getSingletonSceneGraph().get(e);
-            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e); else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid); else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid); else throw new Error(`Invalid node type for deletion: ${t?.type}`);
+            if (t?.isCodeFile) Fullscreen.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) Fullscreen.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
             fullscreenValue.triggerAction('commit');
           });
         },
@@ -20900,8 +20900,8 @@ async function _T({
   ignoreKnown: e = !1,
   widths: t
 } = {
-    ignoreKnown: !1
-  }) {
+  ignoreKnown: !1
+}) {
   _S();
   let i = _C();
   if (!i.length) throw new Error('No breakpoint frames in selection');
@@ -21361,7 +21361,7 @@ let _q = e => {
   for (let t of e.directlySelectedNodes) {
     for (; t;) {
       if (t.isBreakpointFrame || t.isResponsiveSet) return t;
-      if (t.parentNode) t = t.parentNode; else break;
+      if (t.parentNode) t = t.parentNode;else break;
     }
   }
 };
@@ -23237,7 +23237,7 @@ function ve({
     })
   });
 }
-class vt extends _$$c$6 { }
+class vt extends _$$c$6 {}
 function vs({
   directManipulationEditor: e,
   classNameEditingController: t,
@@ -23503,12 +23503,12 @@ let vu = memo(e => {
       message: t,
       error: !0,
       button: {
-        action: () => { },
+        action: () => {},
         text: getI18nString('figmake.refresh')
       }
     }));
   }, [n]);
-  let o = useMemo(() => new _$$q0(t, e => { }, r), [t, r]);
+  let o = useMemo(() => new _$$q0(t, e => {}, r), [t, r]);
   let d = _$$lj(t);
   return jsxs(Fragment, {
     children: [jsx(yZ, {

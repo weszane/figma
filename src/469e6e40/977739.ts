@@ -10,7 +10,7 @@ import { getAtomMutate } from "../figma_app/566371";
 import { z as _$$z, Z } from "../905/306088";
 import { kt } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -355,7 +355,7 @@ let $$z0 = registerModal(function ({
               recipients: n
             });
             W(!1);
-            N(_$$s2.flash(getI18nString("new_editor_notifications_modal.confirmation_v2")));
+            N(FlashActions.flash(getI18nString("new_editor_notifications_modal.confirmation_v2")));
             a.onClose();
           } catch {
             W(!1);

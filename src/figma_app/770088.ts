@@ -4,7 +4,7 @@ import a, { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { handleOptimistTransaction } from "../905/842794";
 import { waitForAnimationFrame } from "../905/236856";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { L4, I as _$$I, cs, Rc, H3, Kx, B2, _Z } from "../figma_app/819288";
 import { uD, $f, Kh } from "../905/403166";
@@ -12,7 +12,7 @@ import { WB } from "../905/761735";
 import { setTagGlobal, captureMessage } from "../905/11";
 import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
-import { s as _$$s, Q } from "../905/573154";
+import { FlashActions, handlePromiseError } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -104,9 +104,9 @@ let $$V16 = createOptimistThunk((e, t) => {
     let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_unread");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(resolveMessage(t, r)));
+      e.dispatch(FlashActions.error(resolveMessage(t, r)));
     } catch (t) {
-      e.dispatch(_$$s.error(r));
+      e.dispatch(FlashActions.error(r));
     }
   });
 });
@@ -119,9 +119,9 @@ let $$H2 = createOptimistThunk((e, t) => {
     let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_read");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(resolveMessage(t, r)));
+      e.dispatch(FlashActions.error(resolveMessage(t, r)));
     } catch (t) {
-      e.dispatch(_$$s.error(r));
+      e.dispatch(FlashActions.error(r));
     }
   });
 });
@@ -134,18 +134,18 @@ let $$z21 = createOptimistThunk((e, t) => {
     let r = getI18nString("comments.an_error_occurred_while_marking_a_comment_as_read");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(resolveMessage(t, r)));
+      e.dispatch(FlashActions.error(resolveMessage(t, r)));
     } catch (t) {
-      e.dispatch(_$$s.error(r));
+      e.dispatch(FlashActions.error(r));
     }
   });
   canvasMentionReceiptsAPI.markAllAsRead().catch(t => {
     let r = getI18nString("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_read");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(resolveMessage(t, r)));
+      e.dispatch(FlashActions.error(resolveMessage(t, r)));
     } catch (t) {
-      e.dispatch(_$$s.error(r));
+      e.dispatch(FlashActions.error(r));
     }
   });
 });
@@ -157,7 +157,7 @@ createOptimistThunk((e, t) => {
   } = t;
   let a = reactionsApi.removeReaction(id, emoji);
   let s = getI18nString("comments.an_error_occurred_while_removing_a_comment_reaction");
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: a,
     fallbackError: s
   }));
@@ -175,7 +175,7 @@ createOptimistThunk((e, t) => {
     quickReply: !1
   });
   let o = getI18nString("comments.an_error_occurred_while_adding_a_comment_reaction");
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: s,
     fallbackError: o
   }));
@@ -196,7 +196,7 @@ let $$W58 = createOptimistThunk((e, t) => {
     quickReply: t.quickReply
   });
   let o = getI18nString("comments.an_error_occurred_while_toggling_a_comment_reaction");
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: s,
     fallbackError: o
   }));
@@ -214,7 +214,7 @@ let $$K10 = createOptimistThunk((e, t) => {
   } = n;
   let d = XHR.del(`/api/file/${key}/comments/${id}`);
   let u = getI18nString("comments.an_error_occurred_while_deleting_this_comment");
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: d,
     fallbackError: u
   }));
@@ -277,7 +277,7 @@ let $$Y34 = createOptimistThunk((e, {
       let n = XHR.put(`/api/file/${t}/comments/${r}`, {
         resolved_at: l
       });
-      e.dispatch(Q({
+      e.dispatch(handlePromiseError({
         promise: n,
         fallbackError: d
       }));
@@ -299,7 +299,7 @@ let $$Y34 = createOptimistThunk((e, {
     let a = XHR.put(`/api/file/${t}/comments/${r}`, {
       resolved_at: l
     });
-    e.dispatch(Q({
+    e.dispatch(handlePromiseError({
       promise: a,
       fallbackError: d
     }));
@@ -344,7 +344,7 @@ let $$$33 = createOptimistThunk((e, {
     isOptimistic: !!n
   }));
   let s = getI18nString("comments.an_error_occurred_while_moving_this_comment");
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: a,
     fallbackError: s
   }));
@@ -381,7 +381,7 @@ let $$$33 = createOptimistThunk((e, {
     }
   }, a);
 });
-let $$X48 = NC("COMMENTS_SET_COMMENT_CONTENT");
+let $$X48 = createActionCreator("COMMENTS_SET_COMMENT_CONTENT");
 let $$q27 = createOptimistThunk((e, t) => {
   let r = t.comment.key;
   if (!r || _$$I(t.messageMeta)) {
@@ -410,7 +410,7 @@ let $$q27 = createOptimistThunk((e, t) => {
     });
   });
   let a = getI18nString("comments.an_error_occurred_while_editing_this_comment");
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: i,
     fallbackError: a
   }));
@@ -525,8 +525,8 @@ let $$Q29 = createOptimistThunk((e, t) => {
   let r = e.getState();
   r.comments.activeThread?.id === t.thread.id ? e.dispatch($$ea23()) : (t.skipDeactivatingExistingActiveComment || e.dispatch($$ea23()), H3(r.comments) && (e.dispatch($$J3(t)), atomStoreManager.set(_$$m, null)));
 });
-let $$ee45 = NC("COMMENTS_STOP_EDITING");
-let $$et32 = NC("COMMENTS_SUBMIT_REPLY");
+let $$ee45 = createActionCreator("COMMENTS_STOP_EDITING");
+let $$et32 = createActionCreator("COMMENTS_SUBMIT_REPLY");
 let $$er40 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let {
@@ -606,7 +606,7 @@ let $$er40 = createOptimistThunk((e, t) => {
     let n = r.data?.reason?.failure_info;
     if (r.data?.reason?.reason !== "comment_validation_failure" || void 0 === n || !t.onCommentValidationFailure || t.forceMention || t.forceWithInvite) {
       let n = resolveMessage(r, getI18nString("comments.an_error_occurred"));
-      e.dispatch(_$$s.error(n));
+      e.dispatch(FlashActions.error(n));
       e.dispatch($$eO47({
         threadId: t.threadId,
         resetStatusOnly: !0
@@ -629,7 +629,7 @@ let $$er40 = createOptimistThunk((e, t) => {
   });
   e.dispatch($$et32(t));
 });
-let $$en39 = NC("COMMENTS_SUBMIT_NEW_COMMENT");
+let $$en39 = createActionCreator("COMMENTS_SUBMIT_NEW_COMMENT");
 let $$ei26 = createOptimistThunk((e, t) => {
   trackEventAnalytics("New comment starting dispatched action", {
     uuid: t.uuid
@@ -846,7 +846,7 @@ let $$ea23 = createOptimistThunk((e, t) => {
     resetStatusOnly: !1
   })), r.tooltip && e.dispatch(jD()), !0);
 });
-let $$es0 = NC("COMMENTS_SET_NEW_COMMENT_ACTIVE");
+let $$es0 = createActionCreator("COMMENTS_SET_NEW_COMMENT_ACTIVE");
 let $$eo5 = createOptimistThunk((e, t) => {
   let r = e.getState();
   if ("fullscreen" === r.selectedView.view) {
@@ -865,14 +865,14 @@ let $$eo5 = createOptimistThunk((e, t) => {
   }
   e.dispatch($$es0(t));
 });
-let $$el7 = NC("COMMENTS_SET_NEW_SELECTION_BOX_ANCHOR_POSITION");
+let $$el7 = createActionCreator("COMMENTS_SET_NEW_SELECTION_BOX_ANCHOR_POSITION");
 let $$ed28 = createOptimistThunk((e, t) => {
   e.getState().userFlags.has_created_selection_comment || e.dispatch(_$$b({
     has_created_selection_comment: !0
   }));
   e.dispatch($$el7(t));
 });
-let $$ec14 = NC("COMMENTS_SET_NEW_ANCHOR_POSITION");
+let $$ec14 = createActionCreator("COMMENTS_SET_NEW_ANCHOR_POSITION");
 let $$eu52 = createOptimistThunk((e, t) => {
   if ("fullscreen" === e.getState().selectedView.view) {
     let {
@@ -883,11 +883,11 @@ let $$eu52 = createOptimistThunk((e, t) => {
   }
   e.dispatch($$ec14(t));
 });
-let $$ep20 = NC("COMMENTS_REMOVE_HOVERED_PIN");
-let $$e_54 = NC("COMMENTS_ADD_HOVERED_PIN");
-let $$eh12 = NC("COMMENTS_REMOVE_EMPHASIZED_PIN");
-let $$em11 = NC("COMMENTS_ADD_EMPHASIZED_PIN");
-let $$eg8 = NC("COMMENTS_SET_ACTIVE");
+let $$ep20 = createActionCreator("COMMENTS_REMOVE_HOVERED_PIN");
+let $$e_54 = createActionCreator("COMMENTS_ADD_HOVERED_PIN");
+let $$eh12 = createActionCreator("COMMENTS_REMOVE_EMPHASIZED_PIN");
+let $$em11 = createActionCreator("COMMENTS_ADD_EMPHASIZED_PIN");
+let $$eg8 = createActionCreator("COMMENTS_SET_ACTIVE");
 let $$ef17 = createOptimistThunk(e => {
   let t = e.getState();
   let r = t.selectedView;
@@ -898,11 +898,11 @@ let $$ef17 = createOptimistThunk(e => {
     resource_type: "hubFile" === r.subView ? "hub_file" : "plugin"
   });
 });
-let $$eE35 = NC("COMMENTS_SET_TYPEAHEAD_POSITION_OFFSET");
-let $$ey24 = NC("COMMENTS_SET_TYPEAHEAD");
-let $$eb18 = NC("COMMENTS_SHOW_EMOJI_PICKER");
-let $$eT42 = NC("COMMENTS_SET_ACTIVE_SORT");
-let $$eI49 = NC("COMMENTS_DISCARD_COMMENT_REPLY_ATTEMPT");
+let $$eE35 = createActionCreator("COMMENTS_SET_TYPEAHEAD_POSITION_OFFSET");
+let $$ey24 = createActionCreator("COMMENTS_SET_TYPEAHEAD");
+let $$eb18 = createActionCreator("COMMENTS_SHOW_EMOJI_PICKER");
+let $$eT42 = createActionCreator("COMMENTS_SET_ACTIVE_SORT");
+let $$eI49 = createActionCreator("COMMENTS_DISCARD_COMMENT_REPLY_ATTEMPT");
 let eS = createOptimistThunk((e, t) => {
   let r = e.getState().comments;
   let n = r.activeThread?.id;
@@ -921,7 +921,7 @@ let eS = createOptimistThunk((e, t) => {
   }
   e.dispatch($$eI49(t));
 });
-let $$ev55 = NC("COMMENTS_DISCARD_NEW_COMMENT_ATTEMPT");
+let $$ev55 = createActionCreator("COMMENTS_DISCARD_NEW_COMMENT_ATTEMPT");
 let eA = createOptimistThunk(e => {
   let t = e.getState().comments.newComment;
   if (t.discardAttempt === B2) {
@@ -937,25 +937,25 @@ let eA = createOptimistThunk(e => {
   }
   e.dispatch($$ev55());
 });
-let $$ex19 = NC("COMMENTS_SET_SHOW_ONLY_MY_COMMENTS");
-let $$eN22 = NC("COMMENTS_SET_SHOW_RESOLVED_COMMENTS");
-let $$eC13 = NC("COMMENTS_REVERT_NEW_COMMENT");
-let $$ew1 = NC("COMMENTS_RESET_NEW_COMMENT");
-let $$eO47 = NC("COMMENTS_RESET_THREAD");
-let $$eR43 = NC("COMMENTS_SET_NEW_COMMENT_ATTACHMENT");
-let $$eL25 = NC("COMMENTS_SET_NEW_COMMENT_MESSAGE");
-let $$eP44 = NC("COMMENTS_SET_NEW_COMMENT");
-let $$eD15 = NC("COMMENTS_SET_REPLY_ATTACHMENT");
-let $$ek37 = NC("COMMENTS_SET_REPLY_MESSAGE");
-let $$eM9 = NC("COMMENTS_SET_REPLY");
-let $$eF50 = NC("COMMENTS_SET_EDITING_ATTACHMENT");
-let $$ej6 = NC("COMMENTS_SET_EDITING");
-let $$eU51 = NC("COMMENTS_SET_ACTIVE_DRAG_TARGET");
-let $$eB41 = NC("COMMENTS_SET_SAVING");
-let $$eG53 = NC("COMMENTS_CLEAR_SAVING");
-let $$eV56 = NC("COMMENTS_STORE_SERVER_ID_FOR_LG_PENDING_UUID");
-let $$eH46 = NC("COMMENTS_CLEAR_LG_PENDING_UUID");
-let $$ez57 = NC("COMMENTS_DEL");
+let $$ex19 = createActionCreator("COMMENTS_SET_SHOW_ONLY_MY_COMMENTS");
+let $$eN22 = createActionCreator("COMMENTS_SET_SHOW_RESOLVED_COMMENTS");
+let $$eC13 = createActionCreator("COMMENTS_REVERT_NEW_COMMENT");
+let $$ew1 = createActionCreator("COMMENTS_RESET_NEW_COMMENT");
+let $$eO47 = createActionCreator("COMMENTS_RESET_THREAD");
+let $$eR43 = createActionCreator("COMMENTS_SET_NEW_COMMENT_ATTACHMENT");
+let $$eL25 = createActionCreator("COMMENTS_SET_NEW_COMMENT_MESSAGE");
+let $$eP44 = createActionCreator("COMMENTS_SET_NEW_COMMENT");
+let $$eD15 = createActionCreator("COMMENTS_SET_REPLY_ATTACHMENT");
+let $$ek37 = createActionCreator("COMMENTS_SET_REPLY_MESSAGE");
+let $$eM9 = createActionCreator("COMMENTS_SET_REPLY");
+let $$eF50 = createActionCreator("COMMENTS_SET_EDITING_ATTACHMENT");
+let $$ej6 = createActionCreator("COMMENTS_SET_EDITING");
+let $$eU51 = createActionCreator("COMMENTS_SET_ACTIVE_DRAG_TARGET");
+let $$eB41 = createActionCreator("COMMENTS_SET_SAVING");
+let $$eG53 = createActionCreator("COMMENTS_CLEAR_SAVING");
+let $$eV56 = createActionCreator("COMMENTS_STORE_SERVER_ID_FOR_LG_PENDING_UUID");
+let $$eH46 = createActionCreator("COMMENTS_CLEAR_LG_PENDING_UUID");
+let $$ez57 = createActionCreator("COMMENTS_DEL");
 let eW = createOptimistThunk((e, t) => {
   let r = e.dispatch;
   let n = e.getState();
@@ -995,8 +995,8 @@ let eW = createOptimistThunk((e, t) => {
     }
   }
 });
-let $$eK30 = NC("COMMENTS_RESET");
-let $$eY36 = NC("COMMENTS_RESET_ACTIVE_ID");
+let $$eK30 = createActionCreator("COMMENTS_RESET");
+let $$eY36 = createActionCreator("COMMENTS_RESET_ACTIVE_ID");
 export const $0 = $$es0;
 export const $M = $$ew1;
 export const AY = $$H2;

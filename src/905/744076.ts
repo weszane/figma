@@ -1,7 +1,7 @@
 import { z } from "../905/239603";
 import { createSimpleMetaValidator, createMetaValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { createOptimistThunk } from "../905/350402";
 import { FRequestStatusType } from "../figma_app/191312";
 import { D } from "../905/412108";
@@ -112,9 +112,9 @@ export let $$I1 = new class {
         status: FRequestStatusType.APPROVED
       }).then(() => {
         removeFromPendingForms(securityFormId);
-        e.dispatch(_$$s.flash("Approved security form."));
+        e.dispatch(FlashActions.flash("Approved security form."));
       }).catch(t => {
-        e.dispatch(_$$s.error("Unable to approve security form."));
+        e.dispatch(FlashActions.error("Unable to approve security form."));
       });
     });
     this.rejectReviewPluginSecurityForms = createOptimistThunk((e, t) => {
@@ -130,9 +130,9 @@ export let $$I1 = new class {
         status: FRequestStatusType.REJECTED
       }).then(() => {
         removeFromPendingForms(securityFormId);
-        e.dispatch(_$$s.flash("Rejected security form."));
+        e.dispatch(FlashActions.flash("Rejected security form."));
       }).catch(t => {
-        e.dispatch(_$$s.error("Unable to reject security form."));
+        e.dispatch(FlashActions.error("Unable to reject security form."));
       });
     });
   }

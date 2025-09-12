@@ -2,7 +2,7 @@ import { WB } from "../905/761735";
 import { createAtomSetter } from "../figma_app/566371";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -51,11 +51,11 @@ let $$E2 = createOptimistThunk((e, t) => {
           fileKeys: r,
           userInitiated: !1
         }));
-        e.dispatch(_$$s.error(i.message));
+        e.dispatch(FlashActions.error(i.message));
       } catch (t) {
-        c ? e.dispatch(_$$s.error(getI18nString("collaboration.branching.error_restoring_branches", {
+        c ? e.dispatch(FlashActions.error(getI18nString("collaboration.branching.error_restoring_branches", {
           branchCount: 1
-        }))) : e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.file_restore_error")));
+        }))) : e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.file_restore_error")));
       }
     } else {
       let t;
@@ -106,9 +106,9 @@ let $$E2 = createOptimistThunk((e, t) => {
   }) => {
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(t.message));
+      e.dispatch(FlashActions.error(t.message));
     } catch (t) {
-      e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.file_restore_error")));
+      e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.file_restore_error")));
     }
     m.revert();
   });

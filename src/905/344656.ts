@@ -1,6 +1,6 @@
 import { Multiplayer, SchemaJoinStatus } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
@@ -12,7 +12,7 @@ import { ds } from "../figma_app/314264";
 import { G } from "../905/674940";
 import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
-let $$_1 = NC("SET_SAVE_STATUS");
+let $$_1 = createActionCreator("SET_SAVE_STATUS");
 let $$A0 = createOptimistThunk((e, t) => {
   if (desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab()) {
     let e = !t.hasUnsavedChanges;

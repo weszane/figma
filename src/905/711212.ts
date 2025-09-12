@@ -8,7 +8,7 @@ import { hasStyleType } from "../905/311324";
 import { convertStringToKiwi, convertKiwiToString } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
 import { runWithTimeout } from "../905/236856";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
@@ -112,8 +112,8 @@ function C(e, t) {
   }
   return null;
 }
-let $$T7 = NC("LIBRARY_ADD_THUMBNAIL_FOR_DANGLING_STYLE");
-let $$k8 = NC("LIBRARY_THUMBNAIL_REPLACE_LOCAL_THUMBNAILS");
+let $$T7 = createActionCreator("LIBRARY_ADD_THUMBNAIL_FOR_DANGLING_STYLE");
+let $$k8 = createActionCreator("LIBRARY_THUMBNAIL_REPLACE_LOCAL_THUMBNAILS");
 let $$R3 = createOptimistThunk((e, t) => {
   let i = e.getState();
   let r = i.library.local.thumbnails;

@@ -9,6 +9,28 @@ import { getFalseValue } from '../figma_app/897289'
 const thunkTestAction = createActionCreator('_THUNK_FOR_TEST_')
 
 /**
+ * Context passed to thunk handler in createOptimistThunk
+ * @originalName context
+ */
+export interface OptimistThunkContext {
+  /**
+   * 支持 dispatch action 或 thunk（函数）
+   * @originalName dispatch
+   */
+  /**
+   * 支持 dispatch action 或 thunk（函数）
+   * @originalName dispatch
+   */
+  dispatch: <T = any>(action: any) => T
+  getState: () => any
+  optimisticDispatch: (action: { type: string, payload?: any }) => {
+    optimistId: number | string
+    revert: () => void
+    commit: () => void
+  }
+}
+
+/**
  * Generates an optimist thunk action creator.
  *
  * @param handler - The main thunk handler function.
@@ -16,27 +38,22 @@ const thunkTestAction = createActionCreator('_THUNK_FOR_TEST_')
  * @returns An optimist thunk action creator with loading key support.
  * @originalName $$l1
  */
-export function createOptimistThunk(handler: (
-  context: {
-    dispatch: Dispatch
-    getState: () => any
-    optimisticDispatch: (action: { type: string, payload?: any }) => {
-      optimistId: number | string
-      revert: () => void
-      commit: () => void
-    }
-  },
-  payload: any,
-  extra?: Record<string, any>
-) => any, loadingKeySelector?: (payload: any) => string) {
+export function createOptimistThunk<P = any, R = any>(
+  handler: (
+    context: OptimistThunkContext,
+    payload: P,
+    extra?: Record<string, any>
+  ) => R,
+  loadingKeySelector?: (payload: P) => string,
+) {
   const uniqueType = generateUniqueType('THUNK')
-  const getLoadingKey = (payload: any) => loadingKeySelector ? loadingKeySelector(payload) : uniqueType
+  const getLoadingKey = (payload: P) => loadingKeySelector ? loadingKeySelector(payload) : uniqueType
 
   /**
    * The actual thunk action creator.
    * @param payload - The payload for the thunk.
    */
-  const optimistThunkAction = (payload: any) => {
+  const optimistThunkAction = (payload: P) => {
     const loadingKey = getLoadingKey(payload)
 
     return (dispatch: Dispatch, getState: () => any, extra?: Record<string, any>) => {

@@ -15,7 +15,7 @@ import { g as _$$g } from "../905/248178";
 import { sT } from "../905/694658";
 import { a as _$$a } from "../905/105502";
 import { p as _$$p } from "../905/300815";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { showModalHandler } from "../905/156213";
@@ -121,7 +121,7 @@ export async function $$F3(e, {
       };
       return XHR.post(e, i);
     }(r, e, C?.totp_key);
-    t(_$$s.flash(getI18nString("auth.sign-in-success", {
+    t(FlashActions.flash(getI18nString("auth.sign-in-success", {
       email: data.meta.email
     })));
     data.meta && data.meta.email_domain_type ? (trackEventAnalytics("Sign Up (GTM)", {
@@ -226,7 +226,7 @@ export async function $$F3(e, {
       e.errorType = By.SAML_REQUIRED;
       return e;
     }
-    t(_$$s.error(n || s, 15e3));
+    t(FlashActions.error(n || s, 15e3));
     return Error(n || getI18nString("auth.google-sso.unable-to-auth"));
   }
 }

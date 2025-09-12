@@ -1,7 +1,7 @@
 import type { Atom, PrimitiveAtom, WritableAtom } from 'jotai'
 import type { Store } from 'jotai/vanilla/store'
 import type { Unsubscribe } from 'redux'
-import { atom, createStore } from 'jotai'
+import { createStore } from 'jotai'
 
 
 /**

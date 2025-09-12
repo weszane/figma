@@ -59,7 +59,7 @@ import { k as _$$k2 } from "../905/585996";
 import { il } from "../figma_app/637027";
 import { x as _$$x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { registerModal } from "../905/102752";
 import { A as _$$A2, Uw, bO, JD } from "../905/219868";
 import { V as _$$V } from "../905/670859";
@@ -222,7 +222,7 @@ let eE = registerModal(function (e) {
                 return;
               }
               if (!c) {
-                t(_$$s2.error(getI18nString("google_device_try_file_modal.error_saving_board")));
+                t(FlashActions.error(getI18nString("google_device_try_file_modal.error_saving_board")));
                 return;
               }
               e.onSubmitEmail({
@@ -319,7 +319,7 @@ let eb = registerModal(function (e) {
                 variant: "link",
                 onClick: r => {
                   if (r.preventDefault(), r.stopPropagation(), !s) {
-                    i(_$$s2.error(getI18nString("google_device_try_file_modal.error_saving_board")));
+                    i(FlashActions.error(getI18nString("google_device_try_file_modal.error_saving_board")));
                     return;
                   }
                   e.onResendEmail({

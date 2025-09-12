@@ -2,7 +2,7 @@ import { subscribeAndAwaitData } from "../905/553831";
 import { oA } from "../905/723791";
 import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
@@ -63,7 +63,7 @@ let $$f0 = createOptimistThunk(async (e, l, {
       message: v
     }));
   } catch (l) {
-    e.dispatch(_$$s.error("Unable to save file. Please try again later."));
+    e.dispatch(FlashActions.error("Unable to save file. Please try again later."));
   }
 });
 let $$g1 = createOptimistThunk(async (e, {

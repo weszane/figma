@@ -1,83 +1,168 @@
-import { NC } from "../905/17179";
-import { getInitialOptions } from "../figma_app/169182";
-import { getI18nString } from "../905/303541";
-import { resolveMessage } from "../905/231762";
-import { createOptimistThunk } from "../905/350402";
-import { x } from "../905/962579";
-var $$n1;
-var c = 0;
-function u(e) {
-  return "string" == typeof e ? e : resolveMessage({
-    data: {
-      i18n: e
-    }
-  }, e.fallback_text);
+import type { OptimistThunkContext } from '../905/350402'
+import { createActionCreator } from '../905/73481'
+import { resolveMessage } from '../905/231762'
+import { getI18nString } from '../905/303541'
+import { createOptimistThunk } from '../905/350402'
+import { ErrorEnum } from '../905/962579'
+import { getInitialOptions } from '../figma_app/169182'
+
+/**
+ * Types for flash messages and actions
+ */
+interface FlashMessage {
+  message: string
+  status: ErrorEnum
+  timeout?: number
+  id: number
 }
-let p = createOptimistThunk((e, t) => {
-  let i = e.getState();
-  for (let r in i.flashes) {
-    let a = i.flashes[r];
-    if (a.message === t.message && a.status === t.status) {
-      e.dispatch($$n1.remove({
-        id: parseInt(r)
-      }));
-      break;
+
+interface FlashInitOptions {
+  error?: string | { i18n: string, fallback_text?: string }
+  warn?: string | { i18n: string, fallback_text?: string }
+  success?: string | { i18n: string, fallback_text?: string }
+}
+
+/**
+ * Utility to resolve message from string or i18n object
+ * @param input - string or i18n object
+ * @returns resolved message string
+ * (original: u)
+ */
+function resolveFlashMessage(input: string | { i18n: string, fallback_text?: string }): string {
+  if (typeof input === 'string')
+    return input
+  return resolveMessage(
+    { data: { i18n: input.i18n } },
+    input.fallback_text,
+  )
+}
+
+// First define the action creators
+const flashAddAction = createActionCreator('FLASH_ADD')
+const flashRemoveAction = createActionCreator('FLASH_REMOVE')
+const flashRemoveAllAction = createActionCreator('FLASH_REMOVE_ALL')
+
+// Forward declare FlashActions to avoid circular reference issues
+
+/**
+ * Handles adding/removing flash messages with timeout
+ * (original: p)
+ */
+const handleFlash = createOptimistThunk<FlashMessage, number>(
+  /**
+   * @param context - OptimistThunkContext
+   * @param flash - FlashMessage
+   * @returns flashId
+   */
+  (context: OptimistThunkContext, flash: FlashMessage) => {
+    const state = context.getState()
+    // Remove duplicate flash
+    for (const key in state.flashes) {
+      const existing = state.flashes[key]
+      if (existing.message === flash.message && existing.status === flash.status) {
+        context.dispatch(flashRemoveAction({ id: parseInt(key) }))
+        break
+      }
     }
-  }
-  let r = t.id;
-  setTimeout(() => {
-    e.dispatch($$n1.remove({
-      id: r
-    }));
-  }, t.timeout && t.timeout > $$n1.TIMEOUT ? t.timeout : $$n1.TIMEOUT);
-  e.dispatch($$n1.add(t));
-  return r;
-});
-let $$m0 = createOptimistThunk((e, t) => {
-  t.promise.catch(({
-    response: i
-  }) => {
-    try {
-      i = JSON.parse(i);
-      let t = resolveMessage({
-        ...i,
-        data: {
-          ...i.data,
-          i18n: i.i18n
-        }
-      }, i.message);
-      e.dispatch($$n1.error(t));
-    } catch (i) {
-      e.dispatch($$n1.error(t.fallbackError || getI18nString("general.an_error_occurred_while_performing_that_action")));
-    }
-  });
-});
-(e => {
-  e.add = NC("FLASH_ADD");
-  e.remove = NC("FLASH_REMOVE");
-  e.removeAll = NC("FLASH_REMOVE_ALL");
-  e.TIMEOUT = 3e3;
-  e.TIMEOUT_SERVER_SIDE = 6e3;
-  e.init = createOptimistThunk(t => {
-    let i = getInitialOptions().flash;
-    i && (i.error ? t.dispatch(e.error(u(i.error), e.TIMEOUT_SERVER_SIDE)) : i.warn ? t.dispatch(e.flash(u(i.warn), e.TIMEOUT_SERVER_SIDE)) : i.success && t.dispatch(e.flash(u(i.success), e.TIMEOUT_SERVER_SIDE)));
-  });
-  e.flash = function (e, t) {
-    return p({
-      message: e,
-      status: x.DEFAULT,
-      timeout: t,
-      id: c++
-    });
-  };
-  e.error = function (e, t) {
-    return p({
-      message: e,
-      status: x.ERROR,
-      timeout: t,
-      id: c++
-    });
-  };
-})($$n1 || ($$n1 = {}));
-export const Q = $$m0;
-export const s = $$n1;
+    const flashId = flash.id
+    setTimeout(() => {
+      context.dispatch(flashRemoveAction({ id: flashId }))
+    }, flash.timeout && flash.timeout > 3000 ? flash.timeout : 3000)
+    context.dispatch(flashAddAction(flash))
+    return flashId
+  },
+)
+
+// Now define FlashActions properly
+export const FlashActions = {
+  add: flashAddAction,
+  remove: flashRemoveAction,
+  removeAll: flashRemoveAllAction,
+  TIMEOUT: 3000,
+  TIMEOUT_SERVER_SIDE: 6000,
+
+  /**
+   * Initializes flash messages from initial options
+   * (original: init)
+   */
+  init: createOptimistThunk<void, void>(
+    /**
+     * @param context - OptimistThunkContext
+     */
+    (context: OptimistThunkContext) => {
+      const options: FlashInitOptions = getInitialOptions().flash
+      if (!options)
+        return
+      if (options.error) {
+        context.dispatch(FlashActions.error(resolveFlashMessage(options.error), FlashActions.TIMEOUT_SERVER_SIDE))
+      }
+      else if (options.warn) {
+        context.dispatch(FlashActions.flash(resolveFlashMessage(options.warn), FlashActions.TIMEOUT_SERVER_SIDE))
+      }
+      else if (options.success) {
+        context.dispatch(FlashActions.flash(resolveFlashMessage(options.success), FlashActions.TIMEOUT_SERVER_SIDE))
+      }
+    },
+  ),
+
+  /**
+   * Dispatches a default flash message
+   * (original: flash)
+   */
+  flash: (message: string, timeout?: number) => {
+    return handleFlash({
+      message,
+      status: ErrorEnum.DEFAULT,
+      timeout,
+      id: FlashActions._nextId(),
+    })
+  },
+
+  /**
+   * Dispatches an error flash message
+   * (original: error)
+   */
+  error: (message: string, timeout?: number) => {
+    return handleFlash({
+      message,
+      status: ErrorEnum.ERROR,
+      timeout,
+      id: FlashActions._nextId(),
+    })
+  },
+
+  /**
+   * Internal counter for flash IDs
+   */
+  _counter: 0,
+  _nextId: () => FlashActions._counter++,
+}
+
+/**
+ * Handles promise errors and dispatches error flash
+ * (original: $$m0)
+ */
+const handlePromiseError = createOptimistThunk<{ promise: Promise<any>, fallbackError?: string }, void>(
+  /**
+   * @param context - OptimistThunkContext
+   * @param payload - { promise, fallbackError }
+   */
+  (context: OptimistThunkContext, { promise, fallbackError }) => {
+    promise.catch(({ response }) => {
+      try {
+        const parsed = JSON.parse(response)
+        const msg = resolveMessage(
+          { ...parsed, data: { ...parsed.data, i18n: parsed.i18n } },
+          parsed.message,
+        )
+        context.dispatch(FlashActions.error(msg))
+      }
+      catch {
+        context.dispatch(FlashActions.error(fallbackError || getI18nString('general.an_error_occurred_while_performing_that_action')))
+      }
+    })
+  },
+)
+
+export const Q = handlePromiseError // original: $$m0
+export const s = FlashActions // original: $$n1

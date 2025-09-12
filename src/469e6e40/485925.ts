@@ -8,7 +8,7 @@ import { HiddenLabel, Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
 import { v } from "../905/442517";
 import { A } from "../vendor/90566";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { d6 } from "../figma_app/246699";
 import { w_ } from "../figma_app/482728";
@@ -100,7 +100,7 @@ export function $$f4(e) {
   return e.isPublicLinksBanned ? w_.BANNED : e.doPublicLinksRequireExpiration && e.doPublicLinksRequirePassword ? w_.EXP_AND_PWD_REQUIRED : e.doPublicLinksRequireExpiration ? w_.EXPIRATION_REQUIRED : e.doPublicLinksRequirePassword ? w_.PASSWORD_REQUIRED : w_.ALLOWED;
 }
 export function $$j9(e, t) {
-  return e.doPublicLinksRequireExpiration ? $$v5(e.maxDuration, e.isTimeMeasuredInDays) ? e.isTimeMeasuredInDays ? 24 * parseInt(e.maxDuration) : parseInt(e.maxDuration) : (t(_$$s.error(getI18nString("org_actions.an_error_occurred"))), null) : null;
+  return e.doPublicLinksRequireExpiration ? $$v5(e.maxDuration, e.isTimeMeasuredInDays) ? e.isTimeMeasuredInDays ? 24 * parseInt(e.maxDuration) : parseInt(e.maxDuration) : (t(FlashActions.error(getI18nString("org_actions.an_error_occurred"))), null) : null;
 }
 export function $$y1(e) {
   let t = A(e.save, 500, {

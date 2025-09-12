@@ -1,8 +1,8 @@
 import { UIVisibilitySetting } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { $ } from "../905/489647";
@@ -19,7 +19,7 @@ import { SourceDirection } from "../905/535806";
 import { W } from "../905/985740";
 import { h as _$$h } from "../905/438683";
 import { createOptimistThunk } from "../905/350402";
-let $$x1 = NC("FULLSCREEN_DOCUMENT_LOADED");
+let $$x1 = createActionCreator("FULLSCREEN_DOCUMENT_LOADED");
 let $$S0 = createOptimistThunk(e => {
   if (desktopAPIInstance) {
     let t = e.getState().selectedView;
@@ -42,7 +42,7 @@ let $$S0 = createOptimistThunk(e => {
   }).catch(t => {
     e.dispatch(_b());
     let i = "missing_authentication" === t.data.reason ? getI18nString("collaboration.feedback.version_history_authentication_error") : getI18nString("collaboration.feedback.version_history_error");
-    e.dispatch(_$$s.error(resolveMessage(t, i)));
+    e.dispatch(FlashActions.error(resolveMessage(t, i)));
     e.dispatch(Y6({
       mode: UIVisibilitySetting.OFF
     }));

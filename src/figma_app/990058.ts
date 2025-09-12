@@ -1,10 +1,10 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { hG } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
@@ -34,7 +34,7 @@ let $$I8 = createOptimistAction("ORG_USER_PUT", async (e, t, {
     }));
   } catch (t) {
     e.dispatch(createOptimistRevertAction(r));
-    e.dispatch(_$$s.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred")));
+    e.dispatch(FlashActions.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred")));
   }
 });
 createOptimistThunk(async (e, t) => {
@@ -59,7 +59,7 @@ createOptimistThunk(async (e, t) => {
       userInitiated: !1
     }));
   } catch (t) {
-    e.dispatch(_$$s.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred_closing_onboarding")));
+    e.dispatch(FlashActions.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred_closing_onboarding")));
   }
 });
 let $$S0 = createOptimistThunk(async (e, t) => {
@@ -104,7 +104,7 @@ let $$S0 = createOptimistThunk(async (e, t) => {
     })), e.dispatch(showModalHandler({
       type: x,
       data: {}
-    }))) : e.dispatch(_$$s.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_requesting_account_type")));
+    }))) : e.dispatch(FlashActions.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_requesting_account_type")));
     t.onError?.();
   }
 });
@@ -119,7 +119,7 @@ let $$v1 = createOptimistThunk(async (e, t) => {
     }));
   } catch (r) {
     console.error(r);
-    e.dispatch(_$$s.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_leaving_organization", {
+    e.dispatch(FlashActions.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_leaving_organization", {
       orgName: t.orgName
     })));
   }
@@ -166,10 +166,10 @@ let $$A7 = createOptimistAction("ORG_USER_BATCH_UPDATE_ORG_USERS", async (e, t, 
       } = e;
       return "seat_increase_unauthorized" === reason ? getI18nString("modify_plan_user_seat_modal.error.seat_increase_unauthorized") : message ?? getI18nString("org_user_actions.an_error_occurred_updating_org_users");
     }(a.data);
-    e.dispatch(_$$s.error(i));
+    e.dispatch(FlashActions.error(i));
   }
 });
-let $$x5 = NC("ORG_USER_BATCH_DELETE_ORG_USERS");
+let $$x5 = createActionCreator("ORG_USER_BATCH_DELETE_ORG_USERS");
 let $$N3 = createOptimistThunk(async (e, t) => {
   if (e.dispatch($$x5(t)), t.userInitiated) try {
     await XHR.del(`/api/orgs/${t.orgId}/org_users`, t.params);
@@ -177,9 +177,9 @@ let $$N3 = createOptimistThunk(async (e, t) => {
     let n = getI18nString("org_user_actions.user_has_been_removed_from_organization", {
       deletedOrgUserCount: r
     });
-    e.dispatch(_$$s.flash(n));
+    e.dispatch(FlashActions.flash(n));
   } catch (t) {
-    e.dispatch(_$$s.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred")));
+    e.dispatch(FlashActions.error(t.data?.message || getI18nString("org_user_actions.an_error_occurred")));
     return;
   }
 });
@@ -202,7 +202,7 @@ let $$C4 = createOptimistThunk(async (e, {
       orgId: t
     }));
   } catch (t) {
-    e.dispatch(_$$s.error(t.message || getI18nString("org_user_actions.an_error_occurred_fetching_org_admins")));
+    e.dispatch(FlashActions.error(t.message || getI18nString("org_user_actions.an_error_occurred_fetching_org_admins")));
   }
 }, ({
   orgId: e
@@ -224,7 +224,7 @@ let $$w2 = createOptimistThunk(async (e, t, {
     return r.find(e => e.user_id === t.userId) || null;
   } catch (r) {
     if (404 === r.status && t.allowNoOrgUser) return null;
-    e.dispatch(_$$s.error(r.message || getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
+    e.dispatch(FlashActions.error(r.message || getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
     return null;
   }
 }, e => `ORG_USER_GET_BY_USER_ID_${e.orgId}_${e.userId}`);

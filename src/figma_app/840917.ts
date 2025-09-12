@@ -22,12 +22,12 @@ import { logError, logInfo, logDebug, logWarning } from "../905/714362";
 import { getTrackingSessionId } from "../905/471229";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
-import { _ as _$$_ } from "../905/170564";
-import { Q as _$$Q } from "../905/463586";
+import { NotificationType } from "../905/170564";
+import { notificationActions } from "../905/463586";
 import { yJ } from "../figma_app/78808";
 import { ds } from "../figma_app/314264";
 import { kS } from "../figma_app/864723";
-import { Ff, Xl } from "../figma_app/582924";
+import { isIncrementalSessionOrValidating, autosaveSubscribeWithRetry } from "../figma_app/582924";
 import { awaitSync } from "../905/412815";
 import { xK } from "../905/125218";
 import { FileCanEdit } from "../figma_app/43951";
@@ -996,7 +996,7 @@ class ey {
       let r = new Set(s.map(([e, t]) => t));
       await Promise.all(s.map(([e, r]) => t.$$delete([r, e]).catch(e => K(e, "restoreChanges: delete empty node changes"))));
       await Promise.all(Array.from(r.values()).map(t => ec(t, e)));
-    }, "readwrite")), this.restoreAnalytics.changesAreAllDerivedData = AutosaveHelpers.changesAreAllDerivedData(), this.restoreAnalytics.nodeFields = AutosaveHelpers.restoredNodeFieldNames(), this.restoreAnalytics.neededToMigrate = AutosaveHelpers.currentFileVersion() > r, Ff()) {
+    }, "readwrite")), this.restoreAnalytics.changesAreAllDerivedData = AutosaveHelpers.changesAreAllDerivedData(), this.restoreAnalytics.nodeFields = AutosaveHelpers.restoredNodeFieldNames(), this.restoreAnalytics.neededToMigrate = AutosaveHelpers.currentFileVersion() > r, isIncrementalSessionOrValidating()) {
       ds("autosave_load_containing_pages_start", this.manager.fileKey, debugState.getState(), {
         node_count: e.size,
         fileKey: this.manager.fileKey
@@ -1004,7 +1004,7 @@ class ey {
       let t = performance.now();
       let r = new Set(e.keys());
       for (let e of AutosaveHelpers.getParentIndexChanges()) r.add(e);
-      await Xl(r);
+      await autosaveSubscribeWithRetry(r);
       ds("autosave_load_containing_pages_end", this.manager.fileKey, debugState.getState(), {
         node_count: e.size,
         timeElapsed: performance.now() - t,
@@ -1021,9 +1021,9 @@ class ey {
       logToConsole: LogToConsoleMode.ALWAYS
     });
     let _ = () => {
-      debugState.dispatch(_$$Q.enqueueFront({
+      debugState.dispatch(notificationActions.enqueueFront({
         notification: {
-          type: _$$_.AUTOSAVE_CHANGES_RESTORED,
+          type: NotificationType.AUTOSAVE_CHANGES_RESTORED,
           message: getI18nString("autosave.changes_synced")
         }
       }));

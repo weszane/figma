@@ -5,7 +5,7 @@ import { dr } from "../figma_app/643789";
 import { customHistory } from "../905/612521";
 import { oJ } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { kg } from "../figma_app/976345";
 import { RQ } from "../figma_app/544879";
 import { h as _$$h } from "../905/857431";
@@ -135,7 +135,7 @@ export function $$P0(e) {
     }) => {
       n(e.meta && e.meta.subscription_will_renew);
     }).catch(e => {
-      e.data?.message && D(_$$s2.error(e.data.message));
+      e.data?.message && D(FlashActions.error(e.data.message));
     });
   }, [D, H]);
   return !e.orgTeams || Array.isArray(e.orgTeams) && !e.orgTeams.length ? jsx("div", {

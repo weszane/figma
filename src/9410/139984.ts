@@ -21,7 +21,7 @@ import { SyB } from "../figma_app/6204";
 import { a8, jE, mH, Dh } from "../figma_app/467440";
 import { wn, HQ, bn, Le, $2, mf, h0 } from "../figma_app/61403";
 import { W as _$$W, Y as _$$Y } from "../figma_app/467880";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { E as _$$E } from "../905/453826";
 import { selectCurrentUser } from "../905/372672";
 import { Of, XC } from "../figma_app/631279";
@@ -556,7 +556,7 @@ export function $$eo1() {
       t || i();
     };
     _$$E(e, _$$W, () => {
-      o?.editor_type === FFileType.DESIGN ? c(!0) : n(_$$s.error("Cursor Bot can only be run in Figma design."));
+      o?.editor_type === FFileType.DESIGN ? c(!0) : n(FlashActions.error("Cursor Bot can only be run in Figma design."));
     });
     _$$E(e, "Reset Onboarding", () => {
       s && o?.editor_type === FFileType.DESIGN && c();

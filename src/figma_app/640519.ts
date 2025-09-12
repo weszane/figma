@@ -1,4 +1,4 @@
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { G } from "../905/134161";
 import { showModalHandler } from "../905/156213";
 import { W } from "../905/985740";
@@ -25,7 +25,7 @@ let $$d0 = createOptimistThunk((e, {
       }
     }));
   }, () => {
-    e.dispatch(_$$s.error("An error occurred while retrieving the file history."));
+    e.dispatch(FlashActions.error("An error occurred while retrieving the file history."));
   });
 });
 let $$c1 = createOptimistThunk(async (e, {
@@ -50,7 +50,7 @@ let $$c1 = createOptimistThunk(async (e, {
       }
     }));
   } catch (t) {
-    e.dispatch(_$$s.error("An error occurred while retrieving the file history."));
+    e.dispatch(FlashActions.error("An error occurred while retrieving the file history."));
   }
 });
 export const T = $$d0;

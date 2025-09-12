@@ -1,7 +1,7 @@
 import { xv } from "../figma_app/701982";
 import { xv as _$$xv } from "../figma_app/701982";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
@@ -119,9 +119,9 @@ let O = createOptimistThunk((e, t) => {
     }));
   });
 });
-let $$R4 = NC("DELETE_USER_LOADING");
-let $$L3 = NC("USER_ERASE_SECRETS");
-let $$P0 = NC("USER_TOGGLE_TWO_FACTOR");
+let $$R4 = createActionCreator("DELETE_USER_LOADING");
+let $$L3 = createActionCreator("USER_ERASE_SECRETS");
+let $$P0 = createActionCreator("USER_TOGGLE_TWO_FACTOR");
 let $$D6 = vv;
 export const C$ = $$P0;
 export const FY = $$A1;

@@ -19,7 +19,7 @@ import { SH } from "../figma_app/141320";
 import { generateUUIDv4 } from "../905/871474";
 import { yp } from "../905/138461";
 import { FileCreationPermissionsGenerator } from "../figma_app/687776";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/620668";
 import { Lm, mF } from "../figma_app/755939";
@@ -582,7 +582,7 @@ export function $$eN8(e, t, i) {
       let c = d ? "show_banner" : "exit_editor";
       if (n.fileCreationFailed(l, error, d, c, t), "show_banner" === c) {
         logInfo("new file", "Leaving editor open because file has unsynced persisted changes.");
-        e.dispatch(_$$s.error(l));
+        e.dispatch(FlashActions.error(l));
         e.dispatch(JM());
       } else {
         if (o && a) {
@@ -590,7 +590,7 @@ export function $$eN8(e, t, i) {
           isLocalFileKey(e) && (await $3(o.id, e));
         }
         await yn();
-        e.dispatch(_$$s.error(l));
+        e.dispatch(FlashActions.error(l));
         e.dispatch(sf({
           view: "recentsAndSharing"
         }));

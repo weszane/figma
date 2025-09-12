@@ -7,7 +7,7 @@ import { $n } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { getAtomMutate } from "../figma_app/566371";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { t as _$$t2 } from "../905/53773";
 import { Q4 } from "../figma_app/199513";
@@ -65,7 +65,7 @@ export function $$x0(e) {
               b({
                 folderId: e.folder.id
               }).catch(() => {
-                r(_$$s2.error(getI18nString("file_browser.api_folder.error_when_permanently_deleting_folder")));
+                r(FlashActions.error(getI18nString("file_browser.api_folder.error_when_permanently_deleting_folder")));
               });
               e.onClose();
             },

@@ -2,22 +2,22 @@ import { WhiteboardVotingCppBindings, SessionStatus } from "../figma_app/763686"
 import { atomStoreManager } from "../figma_app/27355";
 import { handleOptimistTransaction } from "../905/842794";
 import { getResourceDataOrFallback } from "../905/663269";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { Q } from "../905/573154";
+import { handlePromiseError } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { clearSelection } from "../figma_app/741237";
 import { Qs, iN, sx as _$$sx } from "../905/992395";
 import { of, Cx, x2 } from "../figma_app/714946";
-let $$E11 = NC("UNSET_HOVERED_IN_MODAL_VOTE_PIN");
-let $$y8 = NC("SET_HOVERED_IN_MODAL_VOTE_PIN");
-let $$b13 = NC("DESELECT_VOTE_PIN");
-let $$T15 = NC("SELECT_VOTE_PIN");
-let $$I10 = NC("INITIATED_VOTING_SESSION");
+let $$E11 = createActionCreator("UNSET_HOVERED_IN_MODAL_VOTE_PIN");
+let $$y8 = createActionCreator("SET_HOVERED_IN_MODAL_VOTE_PIN");
+let $$b13 = createActionCreator("DESELECT_VOTE_PIN");
+let $$T15 = createActionCreator("SELECT_VOTE_PIN");
+let $$I10 = createActionCreator("INITIATED_VOTING_SESSION");
 let $$S6 = createOptimistThunk(async (e, {
   uiSurface: t
 }) => {
@@ -113,7 +113,7 @@ let $$N1 = createOptimistThunk((e, {
   let r = e.getState().selectedView;
   if (!r.fileKey) return null;
   let n = XHR.del(`/api/file/${r.fileKey}/voting_sessions/${t}`);
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: n,
     fallbackError: getI18nString("voting.modal.delete_voting_session_error")
   }));
@@ -161,12 +161,12 @@ let $$w4 = createOptimistThunk((e, t) => {
   let d = getResourceDataOrFallback(r.pageNodeId);
   d && (WhiteboardVotingCppBindings.setVotingSessionInfo(r.id, i, r.userVoteLimit, d), i === SessionStatus.JOINED && (e.dispatch($$O7()), a.mirror.selectionProperties.whiteboardNumSelectedByType?.STAMP && clearSelection()));
 });
-let $$O7 = NC("DISMISS_JOIN_CONFIRMATION");
-let $$R9 = NC("HIDE_JOIN_VOTING_SESSION_MODAL");
-let L = NC("DELETE_VOTING_SESSION");
-let $$P12 = NC("SET_VOTES_PER_USER_LIMIT");
-let $$D2 = NC("SET_TITLE");
-let $$k5 = NC("CLEAR_STATE");
+let $$O7 = createActionCreator("DISMISS_JOIN_CONFIRMATION");
+let $$R9 = createActionCreator("HIDE_JOIN_VOTING_SESSION_MODAL");
+let L = createActionCreator("DELETE_VOTING_SESSION");
+let $$P12 = createActionCreator("SET_VOTES_PER_USER_LIMIT");
+let $$D2 = createActionCreator("SET_TITLE");
+let $$k5 = createActionCreator("CLEAR_STATE");
 export const $c = $$x0;
 export const $l = $$N1;
 export const D6 = $$D2;

@@ -1,22 +1,22 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
 import { qB } from "../905/862321";
 import { g } from "../905/248178";
-let $$m22 = NC("AUTH_INIT");
-let $$h30 = NC("AUTH_SET_AUTH_LOADING");
-let $$g9 = NC("AUTH_CLEAR_AUTH_LOADING");
-let $$f11 = NC("AUTH_SIGN_IN");
-let $$_8 = NC("AUTH_SIGN_UP");
-let $$A36 = NC("AUTH_RESET_PASSWORD");
-let $$y12 = NC("AUTH_SEND_EMAIL_SAML_START");
-let $$b15 = NC("AUTH_UPDATE_FORM");
-let $$v33 = NC("SET_MINIMAL_MFA_USER");
+let $$m22 = createActionCreator("AUTH_INIT");
+let $$h30 = createActionCreator("AUTH_SET_AUTH_LOADING");
+let $$g9 = createActionCreator("AUTH_CLEAR_AUTH_LOADING");
+let $$f11 = createActionCreator("AUTH_SIGN_IN");
+let $$_8 = createActionCreator("AUTH_SIGN_UP");
+let $$A36 = createActionCreator("AUTH_RESET_PASSWORD");
+let $$y12 = createActionCreator("AUTH_SEND_EMAIL_SAML_START");
+let $$b15 = createActionCreator("AUTH_UPDATE_FORM");
+let $$v33 = createActionCreator("SET_MINIMAL_MFA_USER");
 let $$I3 = createOptimistThunk((e, t) => {
   g("change_form_state", e.getState().auth.origin, {
     oldFormState: e.getState().auth.formState,
@@ -39,27 +39,27 @@ let $$$$E6 = createOptimistThunk((e, {
     userId: t
   }));
 });
-let $$x28 = NC("AUTH_SEND_PASSWORD_RESET");
-let $$S19 = NC("AUTH_SHOW_ERROR");
-let $$w5 = NC("AUTH_CLEAR_ERROR");
-let $$C14 = NC("AUTH_COMPLETE");
-let $$T2 = NC("AUTH_CHANGE_EMAIL");
-let $$k20 = NC("AUTH_CLICKED_SAML_SIGN_IN");
-let $$R32 = NC("AUTH_CHANGE_NAME");
-let $$N10 = NC("AUTH_TOGGLE_SMS");
-let $$P13 = NC("AUTH_REQUIRE_TWO_FACTOR");
-let $$O31 = NC("AUTH_SET_HINT");
-let $$D29 = NC("AUTH_CHANGE_JOB");
-let $$L4 = NC("AUTH_CHANGE_USAGE_PURPOSE");
-let $$F24 = NC("AUTH_CHANGE_OPT_IN_EMAIL");
-let $$M17 = NC("AUTH_SET_GOOGLE_ID_TOKEN");
-let $$j16 = NC("AUTH_SET_SSO_METHOD");
-let $$U27 = NC("AUTH_SET_GOOGLE_TOKEN_TYPE");
-let $$B1 = NC("AUTH_SAML_START_FROM_SESSION");
-let $$V0 = NC("AUTH_EMAIL_ONLY");
-let $$G35 = NC("AUTH_REDEEM");
-let $$z7 = NC("AUTH_REDEEM_RESET");
-let $$H23 = NC("AUTH_SET_REDIRECT_URL");
+let $$x28 = createActionCreator("AUTH_SEND_PASSWORD_RESET");
+let $$S19 = createActionCreator("AUTH_SHOW_ERROR");
+let $$w5 = createActionCreator("AUTH_CLEAR_ERROR");
+let $$C14 = createActionCreator("AUTH_COMPLETE");
+let $$T2 = createActionCreator("AUTH_CHANGE_EMAIL");
+let $$k20 = createActionCreator("AUTH_CLICKED_SAML_SIGN_IN");
+let $$R32 = createActionCreator("AUTH_CHANGE_NAME");
+let $$N10 = createActionCreator("AUTH_TOGGLE_SMS");
+let $$P13 = createActionCreator("AUTH_REQUIRE_TWO_FACTOR");
+let $$O31 = createActionCreator("AUTH_SET_HINT");
+let $$D29 = createActionCreator("AUTH_CHANGE_JOB");
+let $$L4 = createActionCreator("AUTH_CHANGE_USAGE_PURPOSE");
+let $$F24 = createActionCreator("AUTH_CHANGE_OPT_IN_EMAIL");
+let $$M17 = createActionCreator("AUTH_SET_GOOGLE_ID_TOKEN");
+let $$j16 = createActionCreator("AUTH_SET_SSO_METHOD");
+let $$U27 = createActionCreator("AUTH_SET_GOOGLE_TOKEN_TYPE");
+let $$B1 = createActionCreator("AUTH_SAML_START_FROM_SESSION");
+let $$V0 = createActionCreator("AUTH_EMAIL_ONLY");
+let $$G35 = createActionCreator("AUTH_REDEEM");
+let $$z7 = createActionCreator("AUTH_REDEEM_RESET");
+let $$H23 = createActionCreator("AUTH_SET_REDIRECT_URL");
 let $$W34 = createOptimistThunk((e, {
   token: t,
   userId: i
@@ -84,12 +84,12 @@ let $$W34 = createOptimistThunk((e, {
   }).catch(t => {
     console.error(t);
     let i = resolveMessage(t, getI18nString("auth.team_join_link.error_on_redeem"));
-    return e.dispatch(_$$s.error(i));
+    return e.dispatch(FlashActions.error(i));
   });
 });
-let $$K18 = NC("AUTH_SET_SIGNUP_SOURCE");
-let $$Y21 = NC("AUTH_GOOGLE_SIGNUP");
-let $$q26 = NC("AUTH_SET_ORIGIN");
+let $$K18 = createActionCreator("AUTH_SET_SIGNUP_SOURCE");
+let $$Y21 = createActionCreator("AUTH_GOOGLE_SIGNUP");
+let $$q26 = createActionCreator("AUTH_SET_ORIGIN");
 export async function $$$25(e, t) {
   await XHR.post("/api/session/clear_cont").catch(() => {});
   t ? customHistory.unsafeRedirectMsTeams(e) : customHistory.redirect(e);

@@ -1,447 +1,809 @@
-import { assert, throwTypeError } from "../figma_app/465776";
-import { deepEqual } from "../905/382883";
-import { m as _$$m } from "../905/18160";
-import { TrackType, JSXRendererBindings } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { getSceneGraphInstance } from "../905/830071";
-import { trackEventAnalytics } from "../905/449184";
-import { widgetErrorTracker } from "../905/250412";
-import { getFullscreenViewEditorType } from "../figma_app/300692";
-import { InternalError } from "../905/845428";
-import { processChildren, isFrameType, handleElementSizing, handleConstraints } from "../905/757052";
-import { TEXT_STYLE_KEYS } from "../905/285398";
-let c = new class {
-  constructor() {
-    this._pluginID = null;
-    this._componentCounts = {};
+import { createErrorAccumulator } from '../905/18160'
+import { permissionScopeHandler } from '../905/189185'
+import { widgetErrorTracker } from '../905/250412'
+import { TEXT_STYLE_KEYS } from '../905/285398'
+import { deepEqual } from '../905/382883'
+import { trackEventAnalytics } from '../905/449184'
+import { handleConstraints, handleElementSizing, isFrameType, processChildren } from '../905/757052'
+import { getSceneGraphInstance } from '../905/830071'
+import { InternalError } from '../905/845428'
+import { getFullscreenViewEditorType } from '../figma_app/300692'
+import { assert, throwTypeError } from '../figma_app/465776'
+import { JSXRendererBindings, TrackType } from '../figma_app/763686'
+
+// Refactor notes:
+// - Introduced named helpers and types to improve clarity and maintainability.
+// - Preserved original function and variable names as comments for traceability.
+// - Added JSDoc-style documentation.
+// - Split complex logic into smaller helpers and reduced nesting with guard clauses.
+// - Kept original exports ($$v0, $$I1, Lb, _b) for compatibility and added clearer aliases.
+// - Replaced anonymous class with a named singleton (ComponentUsageTracker).
+
+type VNode = any // TODO: Replace with actual VNode type
+type SceneNodeAdapter = any // TODO: Replace with actual SceneNodeAdapter type
+type RuntimeAdapter = any // TODO: Replace with actual RuntimeAdapter type
+interface ImageInfo { hash: string, width: number, height: number }
+type ImgInfoMap = Map<string, ImageInfo>
+
+interface ReconcileWidgetParams {
+  widgetNodeID: string
+  newVRoot: VNode
+  oldVRoot: VNode | null
+  propertyMenuDefinition: Array<{ itemType: string } & Record<string, any>>
+  runtime: RuntimeAdapter
+  imgInfoMap: ImgInfoMap
+  stickableState?: {
+    isStickable?: boolean
+    attachedStickablesChangedHandle?: boolean
+    stuckStatusChangedHandle?: boolean
   }
-  startReconciliation(e) {
-    this._pluginID = e;
+  shouldHideCursors?: boolean
+}
+
+interface RenderUnderParentParams {
+  imgInfoMap: ImgInfoMap
+  runtime: RuntimeAdapter
+  parentId: string
+  vNode: VNode
+  oldVNode?: VNode | null
+  currentNodeId?: string
+  editScopeLabel?: string
+}
+
+interface ReconcileNodeParams {
+  widgetNodeID: string
+  oldVNode: VNode | null
+  newVNode: VNode | null
+  figmaNode: SceneNodeAdapter | null
+  figmaParent: SceneNodeAdapter
+  indexInParent: number
+  dataURIToImgInfo: ImgInfoMap
+  newParentDirection: string
+  oldParentDirection: string
+  runtime: RuntimeAdapter
+  forceReconcileProps: string[]
+  tracking: TrackType
+  isRootNode?: boolean
+  inputNodes: Set<string>
+  textNodes: Set<string>
+  vNodeParentType?: string
+}
+
+/** Named replacement for anonymous usage tracker class (original variable: c) */
+class ComponentUsageTracker {
+  private _pluginID: string | null = null
+  private _componentCounts: Record<string, number> = {}
+
+  startReconciliation(pluginId: string) {
+    this._pluginID = pluginId
   }
-  getCount(e) {
-    return this._componentCounts[e] || 0;
+
+  getCount(component: string): number {
+    return this._componentCounts[component] || 0
   }
-  incrementComponent(e) {
-    this._componentCounts[e] = this.getCount(e) + 1;
+
+  incrementComponent(component: string) {
+    this._componentCounts[component] = this.getCount(component) + 1
   }
+
   logAndClear() {
-    let e = {
+    const payload = {
       pluginID: this._pluginID,
-      ...this._componentCounts
-    };
-    trackEventAnalytics("Widget Component Usage", e);
-    this.clear();
+      ...this._componentCounts,
+    }
+    trackEventAnalytics('Widget Component Usage', payload)
+    this.clear()
   }
+
   clear() {
-    this._componentCounts = {};
+    this._componentCounts = {}
   }
-}();
-function f(e, t) {
-  for (let i of TEXT_STYLE_KEYS) e.hasOwnProperty(i) && t(i, e[i]);
 }
-let _ = ["layoutMode", "wrap", "componentId", "componentProps", "nestedInstancesVisibility"];
-let A = new Set(_);
-let y = ["minWidth", "minHeight", "maxWidth", "maxHeight"];
-let b = new Set(y);
-export function $$v0({
-  widgetNodeID: e,
-  newVRoot: t,
-  oldVRoot: i,
-  propertyMenuDefinition: r,
-  runtime: a,
-  imgInfoMap: s,
-  stickableState: o,
-  shouldHideCursors: d
+
+// Singleton instance (original variable name: c)
+const componentUsageTracker = new ComponentUsageTracker()
+
+/** Iterate text style props (original function: f) */
+function forEachTextStyleProp(style: any, cb: (key: string, value: any) => void) {
+  for (const key of TEXT_STYLE_KEYS) {
+    if (Object.prototype.hasOwnProperty.call(style, key)) {
+      cb(key, style[key])
+    }
+  }
+}
+
+/** Props that are applied in primary phase (original variable: _ and A) */
+const PRIMARY_PROP_ORDER = ['layoutMode', 'wrap', 'componentId', 'componentProps', 'nestedInstancesVisibility'] as const
+const PRIMARY_PROP_SET = new Set(PRIMARY_PROP_ORDER)
+
+/** Sizing limit props (original variable: y and b) */
+const LIMIT_SIZING_PROPS = ['minWidth', 'minHeight', 'maxWidth', 'maxHeight'] as const
+const LIMIT_SIZING_PROP_SET = new Set(LIMIT_SIZING_PROPS)
+
+/** Compute widget events required by a VNode (original function: x) */
+function getWidgetEvents(newVNode: VNode): string[] {
+  const events: string[] = []
+  if (newVNode.renderMetaData.onClick)
+    events.push('CLICK')
+  if (newVNode.renderMetaData.onTextEditEnd)
+    events.push('TEXT_EDIT_END')
+  return events
+}
+
+/** Adjust nodes after creation (original function: E) */
+function adjustCreatedNodes({
+  inputNodes,
+  textNodes,
+}: {
+  inputNodes: Set<string>
+  textNodes: Set<string>
 }) {
-  let g = getSceneGraphInstance().get(e);
-  if (!g) return;
-  let f = function (e, t, i) {
-    if (!e) return null;
-    let r = t.children[0];
-    return t.children.length > 1 ? {
-      type: "more_than_one_root"
-    } : !r && e.rootNode ? {
-      type: "no_root"
-    } : function e(t, r) {
-      assert(!!r);
-      let a = t.getType();
-      if (!function (e, t) {
-        if (!t) return !1;
-        switch (e) {
-          case "span":
-          case "fragment":
-            return !1;
-          case "frame":
-          case "autolayout":
-          case "svg":
-          case "inputframe":
-            return "FRAME" === t;
-          case "line":
-            return "LINE" === t;
-          case "input":
-          case "text":
-            return "TEXT" === t;
-          case "rectangle":
-            return "RECTANGLE" === t || "ROUNDED_RECTANGLE" === t;
-          case "ellipse":
-            return "ELLIPSE" === t;
-          case "instance":
-            return "INSTANCE" === t;
-          default:
-            throwTypeError(e);
-        }
-      }(r.type, a)) return {
-        type: "node_type_mismatch",
-        nodeID: t.getID(),
-        expectedType: r.type,
-        actualType: a ?? ""
-      };
-      if ("text" === r.type) {
-        let e = t.getFontName();
-        let i = function (e) {
-          let t = e.renderMetaData.textStyle;
-          if (!t) return null;
-          let i = t.style.fontName ?? null;
-          if (1 === t.ranges.length) {
-            let e = t.ranges[0];
-            if (0 === e.start && e.end === t.characters.length) return e.style.fontName ?? i;
+  for (const id of inputNodes) {
+    permissionScopeHandler.plugin('adjust-widget-input-node', () => {
+      JSXRendererBindings.adjustWidgetInputNodeAfterCreation(id)
+    })
+  }
+  for (const id of textNodes) {
+    permissionScopeHandler.plugin('adjust-widget-text-node', () => {
+      JSXRendererBindings.adjustTextNodeAfterCreation(id)
+    })
+  }
+}
+
+/** Validate scene divergence and build error message */
+function buildSceneDivergenceError(
+  divergence:
+    | null
+    | {
+      type: 'more_than_one_root' | 'no_root' | 'node_type_mismatch' | 'node_font_mismatch' | 'child_count_mismatch'
+      nodeID?: string
+      expectedType?: string
+      actualType?: string
+      expectedFont?: any
+      actualFont?: any
+    },
+): string | null {
+  if (!divergence)
+    return null
+  switch (divergence.type) {
+    case 'more_than_one_root':
+      return 'Widget on canvas has more children at the root than expected'
+    case 'no_root':
+      return 'Widget on canvas is missing a child at the root'
+    case 'node_type_mismatch':
+      return `Child of a widget node doesn't match the expected type from render. Expected ${divergence.expectedType} but got ${divergence.actualType}. Node ID: ${divergence.nodeID}`
+    case 'node_font_mismatch':
+      return `Child of a widget node doesn't match the expected font from render. Expected ${JSON.stringify(divergence.expectedFont)} but got ${JSON.stringify(divergence.actualFont)}. Node ID: ${divergence.nodeID}`
+    case 'child_count_mismatch':
+      return `Widget sub-node has different number of children than expected. Node ID: ${divergence.nodeID}`
+    default:
+      throwTypeError(divergence)
+  }
+}
+
+/** Determine image fill info and set renderMetaData defaults (original function: w) */
+function applyImageDefaults(vNode: VNode, info?: ImageInfo) {
+  if (info) {
+    const { width, height } = info
+    vNode.renderMetaData.width = vNode.renderMetaData.width ?? width
+    vNode.renderMetaData.height = vNode.renderMetaData.height ?? height
+    return
+  }
+  if (vNode.renderMetaData.width && vNode.renderMetaData.height) {
+    // keep as-is
+    // vNode.renderMetaData.width = vNode.renderMetaData.width
+    // vNode.renderMetaData.height = vNode.renderMetaData.height
+    return
+  }
+  vNode.props.visible = false
+}
+
+/** Compute props that must be force-reconciled for a node (original function: C) */
+function computeForceReconcileProps(node: VNode, parent: VNode | null): string[] {
+  if (node.type === 'inputframe' || parent?.type === 'inputframe')
+    return ['characters', 'visible']
+  if (node.type === 'instance')
+    return ['nestedInstancesVisibility']
+  return []
+}
+
+/** Decide if inputframe is being edited by someone else; if so, skip reconciliation for this node */
+function isInputFrameBeingEdited(newVNode: VNode, figmaNode: SceneNodeAdapter, runtime: RuntimeAdapter): boolean {
+  if (newVNode.type !== 'inputframe')
+    return false
+  const children = figmaNode.children
+  if (!children || children.length < 2)
+    return false
+  const textChild = children[1]
+  return runtime.getMultiplayerSelection().has(textChild.getID())
+}
+
+/** Sync events prop on figma node based on vnode */
+function reconcileWidgetEvents(figmaNode: SceneNodeAdapter, oldVNode: VNode | null, newVNode: VNode) {
+  const prev = oldVNode ? getWidgetEvents(oldVNode) : []
+  const next = getWidgetEvents(newVNode)
+  if (!deepEqual(prev, next)) {
+    figmaNode.writeProperty('widgetEvents', next)
+  }
+}
+
+/** Handle fillSrc and image hash mapping and updates */
+function reconcileImageFill({
+  figmaNode,
+  newVNode,
+  oldVNode,
+  imageInfoMap,
+}: {
+  figmaNode: SceneNodeAdapter
+  newVNode: VNode
+  oldVNode: VNode | null
+  imageInfoMap: ImgInfoMap
+}) {
+  const prevFillSrc = oldVNode?.renderMetaData.fillSrc
+  const nextFillSrc = newVNode.renderMetaData.fillSrc
+
+  if (prevFillSrc)
+    applyImageDefaults(oldVNode, imageInfoMap.get(prevFillSrc))
+  if (nextFillSrc)
+    applyImageDefaults(newVNode, imageInfoMap.get(nextFillSrc))
+
+  if (!nextFillSrc)
+    return
+
+  const info = imageInfoMap.get(nextFillSrc)
+  if (info) {
+    newVNode.props.fills[0].imageHash = info.hash
+  }
+  else {
+    newVNode.props.fills = [
+      {
+        type: 'SOLID',
+        color: { r: 1, g: 1, b: 1 },
+      },
+    ]
+  }
+
+  if (oldVNode && prevFillSrc === nextFillSrc) {
+    if (info && figmaNode.getImageFillHashOrNull() === info.hash) {
+      oldVNode.props.fills[0].imageHash = info.hash
+    }
+    else {
+      oldVNode.props.fills = [
+        {
+          type: 'SOLID',
+          color: { r: 1, g: 1, b: 1 },
+        },
+      ]
+    }
+  }
+}
+
+/** Write text style changes (original inline block inside S) */
+function reconcileTextStyles({
+  sceneNode,
+  oldVNode,
+  newVNode,
+  errorGuard,
+  shouldForceReconcile,
+}: {
+  sceneNode: SceneNodeAdapter
+  oldVNode: VNode | null
+  newVNode: VNode
+  errorGuard: ReturnType<typeof createErrorAccumulator>
+  shouldForceReconcile: boolean
+}) {
+  const prevStyle = oldVNode?.renderMetaData.textStyle
+  const nextStyle = newVNode.renderMetaData.textStyle
+
+  if (!nextStyle)
+    return
+  if (deepEqual(prevStyle, nextStyle) && !shouldForceReconcile)
+    return
+
+  forEachTextStyleProp(nextStyle.style, (key, value) => {
+    errorGuard.guard(() => {
+      sceneNode.writeProperty(key, value)
+    })
+  })
+
+  if (nextStyle.characters != null) {
+    errorGuard.guard(() => {
+      sceneNode.writeProperty('characters', nextStyle.characters)
+    })
+  }
+
+  for (const range of nextStyle.ranges) {
+    const { start, end, style } = range
+    forEachTextStyleProp(style, (key, value) => {
+      errorGuard.guard(() => {
+        sceneNode.writeTextRange(key, value, start, end)
+      })
+    })
+  }
+}
+
+/** Validate and track render errors (original inline function inside S) */
+function validateAndTrackErrors(errors: Error[], widgetNodeID: string) {
+  if (errors.length === 0)
+    return
+  const scene = getSceneGraphInstance().get(widgetNodeID)
+  if (!scene)
+    return
+  const isLocalWidget = !scene.widgetVersionId
+  if (isLocalWidget && errors.length !== 0) {
+    const bullet = '\n\n * '
+    throw new InternalError(`Got the following errors when rendering the widget: ${bullet}${errors.join(bullet)}`)
+  }
+  widgetErrorTracker.trackValidationErrors(errors, {
+    isLocalWidget,
+    widgetNodeID,
+    pluginID: scene.widgetId,
+    widgetVersionID: scene.widgetVersionId,
+    widgetName: scene.name,
+  })
+}
+
+/** Create figma node for the new vnode */
+function createFigmaNode(runtime: RuntimeAdapter, parent: SceneNodeAdapter, index: number, newVNode: VNode, widgetNodeID: string, tracking: TrackType, isRootNode: boolean | undefined): SceneNodeAdapter {
+  const created = runtime.createPluginNode(newVNode, widgetNodeID, tracking ?? TrackType.TRACK, !!isRootNode)
+  parent.insertChild(index, created.id)
+  return runtime.getSceneNodeAdapter(created.id)
+}
+
+/** Compare vnode root compatibility to current scene (formerly inline validation producing f) */
+function computeSceneDivergence(
+  oldVRoot: VNode | null,
+  sceneNode: SceneNodeAdapter,
+  runtime: RuntimeAdapter,
+): null | any {
+  if (!oldVRoot)
+    return null
+  const rootScene = runtime.getSceneNodeAdapter(sceneNode.guid)
+  const firstChild = rootScene.children[0]
+  if (rootScene.children.length > 1) {
+    return { type: 'more_than_one_root' as const }
+  }
+  if (!firstChild && oldVRoot.rootNode) {
+    return { type: 'no_root' as const }
+  }
+
+  function typesCompatible(widgetType: string, sceneType?: string | null): boolean {
+    if (!sceneType)
+      return false
+    switch (widgetType) {
+      case 'span':
+      case 'fragment':
+        return false
+      case 'frame':
+      case 'autolayout':
+      case 'svg':
+      case 'inputframe':
+        return sceneType === 'FRAME'
+      case 'line':
+        return sceneType === 'LINE'
+      case 'input':
+      case 'text':
+        return sceneType === 'TEXT'
+      case 'rectangle':
+        return sceneType === 'RECTANGLE' || sceneType === 'ROUNDED_RECTANGLE'
+      case 'ellipse':
+        return sceneType === 'ELLIPSE'
+      case 'instance':
+        return sceneType === 'INSTANCE'
+      default:
+        throwTypeError(widgetType)
+    }
+  }
+
+  function walk(scene: SceneNodeAdapter, vnode: VNode): null | any {
+    assert(!!vnode)
+    const sceneType = scene.getType()
+    if (!typesCompatible(vnode.type, sceneType)) {
+      return {
+        type: 'node_type_mismatch' as const,
+        nodeID: scene.getID(),
+        expectedType: vnode.type,
+        actualType: sceneType ?? '',
+      }
+    }
+
+    if (vnode.type === 'text') {
+      const actualFont = scene.getFontName()
+      const expectedFont = (() => {
+        const ts = vnode.renderMetaData.textStyle
+        if (!ts)
+          return null
+        const fallback = ts.style.fontName ?? null
+        if (ts.ranges.length === 1) {
+          const r = ts.ranges[0]
+          if (r.start === 0 && r.end === ts.characters.length) {
+            return r.style.fontName ?? fallback
           }
-          return i;
-        }(r);
-        if (i && (i.family !== e.family || i.style !== e.style)) return {
-          type: "node_font_mismatch",
-          nodeID: t.getID(),
-          expectedFont: i,
-          actualFont: e
-        };
-      }
-      if ("frame" === r.type || "autolayout" === r.type) {
-        let n = processChildren(r.renderMetaData.children ?? [], i).filter(Boolean);
-        let a = t.children;
-        if (n.length !== a.length) return {
-          type: "child_count_mismatch",
-          nodeID: t.getID()
-        };
-        for (let t = 0; t < n.length; t++) {
-          let i = e(a[t], n[t]);
-          if (i) return i;
+        }
+        return fallback
+      })()
+      if (expectedFont && (expectedFont.family !== actualFont.family || expectedFont.style !== actualFont.style)) {
+        return {
+          type: 'node_font_mismatch' as const,
+          nodeID: scene.getID(),
+          expectedFont,
+          actualFont,
         }
       }
-      return null;
-    }(r, e.rootNode);
-  }(i, a.getSceneNodeAdapter(g.guid), a);
-  if (f) {
-    i = null;
-    let t = "Scene has diverged from the expected state. " + ("figma" === getFullscreenViewEditorType() ? "This is either because you have manually edited widget sublayers in Figma, or because of a bug in the widget. If the latter, your render function is likely non-deterministic. " : "This is likely a bug in the widget. Your render function is likely non-deterministic.") + "Here is more info: \n\n";
-    let r = new InternalError(t + function (e) {
-      switch (e.type) {
-        case "more_than_one_root":
-          return "Widget on canvas has more children at the root than expected";
-        case "no_root":
-          return "Widget on canvas is missing a child at the root";
-        case "node_type_mismatch":
-          return `Child of a widget node doesn't match the expected type from render. Expected ${e.expectedType} but got ${e.actualType}. Node ID: ${e.nodeID}`;
-        case "node_font_mismatch":
-          return `Child of a widget node doesn't match the expected font from render. Expected ${JSON.stringify(e.expectedFont)} but got ${JSON.stringify(e.actualFont)}. Node ID: ${e.nodeID}`;
-        case "child_count_mismatch":
-          return `Widget sub-node has different number of children than expected. Node ID: ${e.nodeID}`;
-        default:
-          throwTypeError(e);
+    }
+
+    if (vnode.type === 'frame' || vnode.type === 'autolayout') {
+      const expectedChildren = processChildren(vnode.renderMetaData.children ?? [], runtime).filter(Boolean)
+      const actualChildren = scene.children
+      if (expectedChildren.length !== actualChildren.length) {
+        return {
+          type: 'child_count_mismatch' as const,
+          nodeID: scene.getID(),
+        }
       }
-    }(f));
-    let a = !g.widgetVersionId;
-    console.warn(r);
-    widgetErrorTracker.trackSceneDivergenceError(r, {
-      isLocalWidget: a,
-      widgetNodeID: e,
-      pluginID: g.widgetId,
-      widgetVersionID: g.widgetVersionId,
-      widgetName: g.name
-    });
+      for (let i = 0; i < expectedChildren.length; i++) {
+        const res = walk(actualChildren[i], expectedChildren[i])
+        if (res)
+          return res
+      }
+    }
+    return null
   }
-  if (!i) for (; g.reversedChildrenGuids.length;) {
-    let e = getSceneGraphInstance().get(g.reversedChildrenGuids[0]);
-    e?.removeSelfAndChildren();
+
+  return walk(rootScene, oldVRoot.rootNode)
+}
+
+/** Main recursive reconciler (original function: S) */
+function reconcileNode(params: ReconcileNodeParams): SceneNodeAdapter | null {
+  let {
+    widgetNodeID,
+    oldVNode,
+    newVNode,
+    figmaNode: maybeNode,
+    figmaParent,
+    indexInParent,
+    dataURIToImgInfo,
+    newParentDirection,
+    oldParentDirection,
+    runtime,
+    forceReconcileProps,
+    tracking,
+    isRootNode,
+    inputNodes,
+    textNodes,
+  } = params
+
+  let figmaNode = maybeNode
+
+  const ensureNode = (): SceneNodeAdapter => {
+    const node = createFigmaNode(runtime, figmaParent, indexInParent, newVNode!, widgetNodeID, tracking, isRootNode)
+    return node
   }
-  let _ = g.reversedChildrenGuids[0] ? a.getSceneNodeAdapter(g.reversedChildrenGuids[0]) : null;
-  c.startReconciliation(g.widgetId);
-  let A = new Set();
-  let y = new Set();
-  S({
-    widgetNodeID: e,
-    oldVNode: i?.rootNode,
-    newVNode: t.rootNode,
+
+  // Guard cases
+  if (!oldVNode && !newVNode)
+    return null
+  if (!oldVNode && figmaNode) {
+    figmaNode.remove()
+    figmaNode = null
+  }
+  if (oldVNode && !newVNode) {
+    figmaNode?.remove()
+    return null
+  }
+
+  if (!oldVNode && newVNode) {
+    figmaNode = ensureNode()
+  }
+
+  // When type/key/direction mismatch -> recreate node
+  if (
+    newVNode
+    && oldVNode
+    && (oldVNode.type !== newVNode.type
+      || oldVNode?.renderMetaData.key !== newVNode.renderMetaData.key
+      || (isFrameType(newVNode) && newVNode.renderMetaData.direction !== oldVNode.renderMetaData.direction))
+  ) {
+    oldVNode = null
+    figmaNode?.remove()
+    figmaNode = ensureNode()
+  }
+
+  if (!figmaNode)
+    figmaNode = ensureNode()
+
+  // Skip reconciliation for inputframe being edited
+  if (newVNode && isInputFrameBeingEdited(newVNode, figmaNode, runtime)) {
+    return null
+  }
+
+  // Track component usage
+  componentUsageTracker.incrementComponent(newVNode!.type)
+
+  // Special case: SVG src changed -> recreate node
+  if (newVNode!.renderMetaData.src !== oldVNode?.renderMetaData.src && newVNode!.type === 'svg' && oldVNode?.type === 'svg') {
+    oldVNode = null
+    figmaNode.remove()
+    figmaNode = ensureNode()
+  }
+
+  // Events
+  reconcileWidgetEvents(figmaNode, oldVNode ?? null, newVNode!)
+
+  // Images and fills
+  reconcileImageFill({
+    figmaNode,
+    newVNode: newVNode!,
+    oldVNode: oldVNode ?? null,
+    imageInfoMap: dataURIToImgInfo,
+  })
+
+  // Property writes guarded by error accumulator
+  const errorAccumulator = createErrorAccumulator()
+  const guardedWrite = (key: string, value: any) => {
+    errorAccumulator.guard(() => {
+      figmaNode!.writeProperty(key, value)
+    })
+  }
+
+  const writePropIfChanged = (key: string) => {
+    const next = newVNode!.props[key]
+    const prev = oldVNode ? oldVNode.props?.[key] : undefined
+    if (forceReconcileProps.includes(key) || !deepEqual(prev, next)) {
+      guardedWrite(key, next)
+    }
+  }
+
+  // Text styles
+  reconcileTextStyles({
+    sceneNode: figmaNode,
+    oldVNode: oldVNode ?? null,
+    newVNode: newVNode!,
+    errorGuard: errorAccumulator,
+    shouldForceReconcile: forceReconcileProps.includes('characters'),
+  })
+
+  // Primary prop phase
+  for (let i = 0; i < PRIMARY_PROP_ORDER.length; i++) {
+    const prop = PRIMARY_PROP_ORDER[i]
+    if (prop in newVNode!.props) {
+      writePropIfChanged(prop)
+    }
+  }
+
+  // Remaining props (skip primary and sizing-limit props)
+  for (const key in newVNode!.props) {
+    if (PRIMARY_PROP_SET.has(key as any) || LIMIT_SIZING_PROP_SET.has(key as any ))
+      continue
+    writePropIfChanged(key)
+  }
+
+  // Validate and track any rendering errors
+  validateAndTrackErrors(errorAccumulator.errors, widgetNodeID)
+
+  // Size and constraints
+  if (
+    newVNode!.renderMetaData.width !== oldVNode?.renderMetaData.width
+    || newVNode!.renderMetaData.height !== oldVNode?.renderMetaData.height
+    || newParentDirection !== oldParentDirection
+    || newVNode!.renderMetaData.direction !== oldVNode?.renderMetaData.direction
+  ) {
+    handleElementSizing(newVNode!, figmaNode, newParentDirection)
+  }
+
+  ;(['x', 'y'] as const).forEach((axis) => {
+    const next = newVNode!.renderMetaData?.[axis]
+    const prev = oldVNode ? oldVNode.renderMetaData?.[axis] : undefined
+    if (!deepEqual(prev, next)) {
+      guardedWrite(axis, next)
+    }
+  })
+
+  if (!deepEqual(newVNode!.renderMetaData.constraints, oldVNode?.renderMetaData.constraints)) {
+    handleConstraints(newVNode!, figmaNode, figmaParent, true)
+  }
+
+  LIMIT_SIZING_PROPS.forEach((prop) => {
+    if (!deepEqual(newVNode!.props[prop], oldVNode ? oldVNode.props[prop] : undefined)) {
+      guardedWrite(prop, newVNode!.props[prop])
+    }
+  })
+
+  if (newVNode!.type === 'text') {
+    textNodes.add(figmaNode.getID())
+  }
+
+  // No children -> return
+  if (!newVNode!.renderMetaData.children) {
+    return figmaNode
+  }
+
+  // Children reconciliation
+  const prevChildren = oldVNode?.renderMetaData?.children ? processChildren(oldVNode?.renderMetaData?.children) : []
+  const nextChildren = processChildren(newVNode?.renderMetaData?.children, runtime)
+  const actualChildren = figmaNode.children
+
+  for (let i = 0; i < nextChildren.length; i++) {
+    const child = nextChildren[i]
+    reconcileNode({
+      widgetNodeID,
+      newVNode: child,
+      oldVNode: prevChildren[i],
+      figmaNode: actualChildren[i],
+      indexInParent: i,
+      dataURIToImgInfo,
+      newParentDirection: newVNode!.props.layoutMode ?? newParentDirection,
+      oldParentDirection: oldVNode?.props?.layoutMode ?? oldParentDirection,
+      figmaParent: figmaNode,
+      runtime,
+      forceReconcileProps: child ? computeForceReconcileProps(child, newVNode!) : [],
+      vNodeParentType: newVNode!.type,
+      tracking,
+      inputNodes,
+      textNodes,
+    })
+  }
+
+  if (newVNode!.type === 'inputframe') {
+    inputNodes.add(figmaNode.getID())
+  }
+
+  // Remove extra figma children
+  if (actualChildren.length > nextChildren.length) {
+    let removeCount = actualChildren.length - nextChildren.length
+    while (removeCount > 0) {
+      figmaNode.children[figmaNode.children.length - 1].remove()
+      removeCount--
+    }
+  }
+
+  return figmaNode
+}
+
+/** Public API: reconcile whole widget tree (original export: $$v0) */
+function reconcileWidgetTree({
+  widgetNodeID,
+  newVRoot,
+  oldVRoot,
+  propertyMenuDefinition,
+  runtime,
+  imgInfoMap,
+  stickableState,
+  shouldHideCursors,
+}: ReconcileWidgetParams) {
+  const scene = getSceneGraphInstance().get(widgetNodeID)
+  if (!scene)
+    return
+
+  // Detect divergence between scene and old virtual root
+  const divergence = computeSceneDivergence(oldVRoot, runtime.getSceneNodeAdapter(scene.guid), runtime)
+  if (divergence) {
+    oldVRoot = null
+    const baseMsg
+      = getFullscreenViewEditorType() === 'figma'
+        ? 'This is either because you have manually edited widget sublayers in Figma, or because of a bug in the widget. If the latter, your render function is likely non-deterministic. '
+        : 'This is likely a bug in the widget. Your render function is likely non-deterministic.'
+    const details = buildSceneDivergenceError(divergence)!
+    const error = new InternalError(`Scene has diverged from the expected state. ${baseMsg}Here is more info: \n\n${details}`)
+    const isLocalWidget = !scene.widgetVersionId
+    console.warn(error)
+    widgetErrorTracker.trackSceneDivergenceError(error, {
+      isLocalWidget,
+      widgetNodeID,
+      pluginID: scene.widgetId,
+      widgetVersionID: scene.widgetVersionId,
+      widgetName: scene.name,
+    })
+  }
+
+  // Cleanup children if we reset to null
+  if (!oldVRoot) {
+    while (scene.reversedChildrenGuids.length) {
+      const child = getSceneGraphInstance().get(scene.reversedChildrenGuids[0])
+      child?.removeSelfAndChildren()
+    }
+  }
+
+  const firstChildAdapter = scene.reversedChildrenGuids[0] ? runtime.getSceneNodeAdapter(scene.reversedChildrenGuids[0]) : null
+
+  componentUsageTracker.startReconciliation(scene.widgetId)
+
+  const inputNodes = new Set<string>()
+  const textNodes = new Set<string>()
+
+  reconcileNode({
+    widgetNodeID,
+    oldVNode: oldVRoot?.rootNode,
+    newVNode: newVRoot.rootNode,
     indexInParent: 0,
-    dataURIToImgInfo: s,
-    newParentDirection: "NONE",
-    oldParentDirection: "NONE",
-    figmaParent: a.getSceneNodeAdapter(g.guid),
-    figmaNode: _,
-    runtime: a,
-    forceReconcileProps: C(t.rootNode, null),
-    tracking: g.tracking,
-    isRootNode: !0,
-    inputNodes: A,
-    textNodes: y
-  });
-  "NONE" === g.stackMode && (g.stackMode = "VERTICAL", g.stackPrimarySizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE", g.stackCounterSizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE");
-  E({
-    inputNodes: A,
-    textNodes: y
-  });
-  g.setWidgetPropertyMenuItems(r.map(e => ({
-    ...e,
-    itemType: e.itemType.toUpperCase().replace("-", "_")
-  })));
-  c.logAndClear();
-  g.isForcedStickable = o?.isStickable ?? !1;
-  g.shouldHideCursorsOnWidgetHover = d ?? !1;
-  let b = [];
-  o?.attachedStickablesChangedHandle && b.push("ATTACHED_STICKABLES_CHANGED");
-  o?.stuckStatusChangedHandle && b.push("STUCK_STATUS_CHANGED");
-  g.widgetEvents = b;
-}
-export function $$I1({
-  imgInfoMap: e,
-  runtime: t,
-  parentId: i,
-  vNode: n,
-  oldVNode: r,
-  currentNodeId: a,
-  editScopeLabel: l
-}) {
-  let d = new Set();
-  let c = new Set();
-  let u = t.getSceneNodeAdapter(i);
-  let p = a ? t.getSceneNodeAdapter(a) : null;
-  let m = permissionScopeHandler.plugin(l ?? "widget-render", () => S({
-    widgetNodeID: "",
-    oldVNode: r ?? null,
-    newVNode: n,
-    indexInParent: u.children.length,
-    dataURIToImgInfo: e,
-    newParentDirection: "NONE",
-    oldParentDirection: "NONE",
-    figmaParent: u,
-    figmaNode: p,
-    runtime: t,
-    forceReconcileProps: [],
-    tracking: TrackType.TRACK,
-    inputNodes: d,
-    textNodes: c
-  }));
-  E({
-    inputNodes: d,
-    textNodes: c
-  });
-  return m;
-}
-function E({
-  inputNodes: e,
-  textNodes: t
-}) {
-  for (let t of e) permissionScopeHandler.plugin("adjust-widget-input-node", () => {
-    JSXRendererBindings.adjustWidgetInputNodeAfterCreation(t);
-  });
-  for (let e of t) permissionScopeHandler.plugin("adjust-widget-text-node", () => {
-    JSXRendererBindings.adjustTextNodeAfterCreation(e);
-  });
-}
-function x(e) {
-  let t = [];
-  e.renderMetaData.onClick && t.push("CLICK");
-  e.renderMetaData.onTextEditEnd && t.push("TEXT_EDIT_END");
-  return t;
-}
-function S({
-  widgetNodeID: e,
-  oldVNode: t,
-  newVNode: i,
-  figmaNode: n,
-  figmaParent: o,
-  indexInParent: d,
-  dataURIToImgInfo: p,
-  newParentDirection: g,
-  oldParentDirection: v,
-  runtime: I,
-  forceReconcileProps: E,
-  tracking: T,
-  isRootNode: k,
-  inputNodes: R,
-  textNodes: N
-}) {
-  var P;
-  let O = () => {
-    let t = I.createPluginNode(i, e, T ?? TrackType.TRACK, !!k);
-    o.insertChild(d, t.id);
-    return I.getSceneNodeAdapter(t.id);
-  };
-  if (!t && !i) return null;
-  if (t || (t = null), !t && n && n.remove(), t && !i) {
-    n?.remove();
-    return null;
+    dataURIToImgInfo: imgInfoMap,
+    newParentDirection: 'NONE',
+    oldParentDirection: 'NONE',
+    figmaParent: runtime.getSceneNodeAdapter(scene.guid),
+    figmaNode: firstChildAdapter,
+    runtime,
+    forceReconcileProps: computeForceReconcileProps(newVRoot.rootNode, null),
+    tracking: scene.tracking,
+    isRootNode: true,
+    inputNodes,
+    textNodes,
+  })
+
+  if (scene.stackMode === 'NONE') {
+    scene.stackMode = 'VERTICAL'
+    scene.stackPrimarySizing = 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'
+    scene.stackCounterSizing = 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'
   }
-  if (!t && i && (n = O()), !i || ((P = t) && (P.type !== i.type || P?.renderMetaData.key !== i.renderMetaData.key || isFrameType(i) && i.renderMetaData.direction !== P.renderMetaData.direction) && (t = null, n?.remove(), n = O()), n || (n = O()), function (e, t, i) {
-    if ("inputframe" !== e.type) return !1;
-    let n = t.children;
-    if (!n || n.length < 2) return !1;
-    let r = n[1];
-    return i.getMultiplayerSelection().has(r.getID());
-  }(i, n, I))) return null;
-  c.incrementComponent(i.type);
-  i.renderMetaData.src !== t?.renderMetaData.src && "svg" === i.type && t?.type === "svg" && (t = null, n.remove(), n = O());
-  let D = t ? x(t) : [];
-  let L = x(i);
-  deepEqual(D, L) || n.writeProperty("widgetEvents", L);
-  (function ({
-    figmaNode: e,
-    newVNode: t,
-    oldVNode: i,
-    imageInfoMap: n
-  }) {
-    let r = i?.renderMetaData.fillSrc;
-    let a = t.renderMetaData.fillSrc;
-    if (r && w(i, n.get(r)), a && w(t, n.get(a)), a) {
-      let s = n.get(a);
-      s ? t.props.fills[0].imageHash = s.hash : t.props.fills = [{
-        type: "SOLID",
-        color: {
-          r: 1,
-          g: 1,
-          b: 1
-        }
-      }];
-      i && r === a && (s && e.getImageFillHashOrNull() === s.hash ? i.props.fills[0].imageHash = s.hash : i.props.fills = [{
-        type: "SOLID",
-        color: {
-          r: 1,
-          g: 1,
-          b: 1
-        }
-      }]);
-    }
-  })({
-    figmaNode: n,
-    newVNode: i,
-    oldVNode: t,
-    imageInfoMap: p
-  });
-  let F = _$$m();
-  let M = (e, t) => {
-    F.guard(() => {
-      n.writeProperty(e, t);
-    });
-  };
-  let j = e => {
-    let n = i.props[e];
-    let a = t ? t.props?.[e] : void 0;
-    (E.includes(e) || !deepEqual(a, n)) && M(e, n);
-  };
-  !function ({
-    sceneNode: e,
-    oldVNode: t,
-    newVNode: i,
-    errorGuard: n,
-    shouldForceReconcile: a
-  }) {
-    let s = t?.renderMetaData.textStyle;
-    let o = i.renderMetaData.textStyle;
-    if (!(!o || deepEqual(s, o) && !a)) for (let t of (f(o.style, (t, i) => {
-      n.guard(() => {
-        e.writeProperty(t, i);
-      });
-    }), null != o.characters && n.guard(() => {
-      e.writeProperty("characters", o.characters);
-    }), o.ranges)) {
-      let {
-        start,
-        end,
-        style
-      } = t;
-      f(style, (t, a) => {
-        n.guard(() => {
-          e.writeTextRange(t, a, start, end);
-        });
-      });
-    }
-  }({
-    oldVNode: t,
-    newVNode: i,
-    sceneNode: n,
-    errorGuard: F,
-    shouldForceReconcile: E.includes("characters")
-  });
-  for (let e = 0; e < _.length; e++) {
-    let t = _[e];
-    t in i.props && j(t);
-  }
-  for (let e in i.props) A.has(e) || b.has(e) || j(e);
-  if (!function (e, t) {
-    if (0 === e.length) return;
-    let i = getSceneGraphInstance().get(t);
-    if (!i) return;
-    let n = !i.widgetVersionId;
-    if (n && 0 !== e.length) {
-      let t = "\n\n * ";
-      throw new InternalError(`Got the following errors when rendering the widget: ${t}${e.join(t)}`);
-    }
-    widgetErrorTracker.trackValidationErrors(e, {
-      isLocalWidget: n,
-      widgetNodeID: t,
-      pluginID: i.widgetId,
-      widgetVersionID: i.widgetVersionId,
-      widgetName: i.name
-    });
-  }(F.errors, e), (i.renderMetaData.width !== t?.renderMetaData.width || i.renderMetaData.height !== t?.renderMetaData.height || g !== v || i.renderMetaData.direction !== t?.renderMetaData.direction) && handleElementSizing(i, n, g), ["x", "y"].forEach(e => {
-    let n = i.renderMetaData?.[e];
-    n !== (t ? t.renderMetaData?.[e] : void 0) && M(e, n);
-  }), deepEqual(i.renderMetaData.constraints, t?.renderMetaData.constraints) || handleConstraints(i, n, o, !0), y.forEach(e => {
-    i.props[e] !== (t ? t.props[e] : void 0) && M(e, i.props[e]);
-  }), "text" === i.type && N.add(n.getID()), !i.renderMetaData.children) return n;
-  let U = t?.renderMetaData?.children ? processChildren(t?.renderMetaData?.children) : [];
-  let B = processChildren(i?.renderMetaData?.children, I);
-  let V = n.children;
-  for (let r = 0; r < B.length; r++) {
-    let a = B[r];
-    S({
-      widgetNodeID: e,
-      newVNode: a,
-      oldVNode: U[r],
-      figmaNode: V[r],
-      indexInParent: r,
-      dataURIToImgInfo: p,
-      newParentDirection: i.props.layoutMode ?? g,
-      oldParentDirection: t?.props?.layoutMode ?? v,
-      figmaParent: n,
-      runtime: I,
-      forceReconcileProps: a ? C(a, i) : [],
-      vNodeParentType: i.type,
-      tracking: T,
-      inputNodes: R,
-      textNodes: N
-    });
-  }
-  if ("inputframe" === i.type && R.add(n.getID()), V.length > B.length) {
-    let e = V.length - B.length;
-    for (; e > 0;) {
-      n.children[n.children.length - 1].remove();
-      e--;
-    }
-  }
-  return n;
+
+  adjustCreatedNodes({ inputNodes, textNodes })
+
+  scene.setWidgetPropertyMenuItems(
+    propertyMenuDefinition.map(item => ({
+      ...item,
+      itemType: item.itemType.toUpperCase().replace('-', '_'),
+    })),
+  )
+
+  componentUsageTracker.logAndClear()
+
+  scene.isForcedStickable = stickableState?.isStickable ?? false
+  scene.shouldHideCursorsOnWidgetHover = shouldHideCursors ?? false
+
+  const widgetEvents: string[] = []
+  if (stickableState?.attachedStickablesChangedHandle)
+    widgetEvents.push('ATTACHED_STICKABLES_CHANGED')
+  if (stickableState?.stuckStatusChangedHandle)
+    widgetEvents.push('STUCK_STATUS_CHANGED')
+  scene.widgetEvents = widgetEvents
 }
-function w(e, t) {
-  if (t) {
-    let {
-      width,
-      height
-    } = t;
-    e.renderMetaData.width = e.renderMetaData.width ?? width;
-    e.renderMetaData.height = e.renderMetaData.height ?? height;
-  } else e.renderMetaData.width && e.renderMetaData.height ? (e.renderMetaData.width = e.renderMetaData.width, e.renderMetaData.height = e.renderMetaData.height) : e.props.visible = !1;
+
+/** Public API: render a vnode under arbitrary parent (original export: $$I1) */
+export function renderVNodeUnderParent({
+  imgInfoMap,
+  runtime,
+  parentId,
+  vNode,
+  oldVNode,
+  currentNodeId,
+  editScopeLabel,
+}: RenderUnderParentParams) {
+  const inputNodes = new Set<string>()
+  const textNodes = new Set<string>()
+  const parent = runtime.getSceneNodeAdapter(parentId)
+  const currentNode = currentNodeId ? runtime.getSceneNodeAdapter(currentNodeId) : null
+
+  const result = permissionScopeHandler.plugin(editScopeLabel ?? 'widget-render', () =>
+    reconcileNode({
+      widgetNodeID: '',
+      oldVNode: oldVNode ?? null,
+      newVNode: vNode,
+      indexInParent: parent.children.length,
+      dataURIToImgInfo: imgInfoMap,
+      newParentDirection: 'NONE',
+      oldParentDirection: 'NONE',
+      figmaParent: parent,
+      figmaNode: currentNode,
+      runtime,
+      forceReconcileProps: [],
+      tracking: TrackType.TRACK,
+      inputNodes,
+      textNodes,
+    }))
+
+  adjustCreatedNodes({ inputNodes, textNodes })
+  return result
 }
-function C(e, t) {
-  return "inputframe" === e.type || t?.type === "inputframe" ? ["characters", "visible"] : "instance" === e.type ? ["nestedInstancesVisibility"] : [];
+
+// Maintain original exports while providing clearer aliases
+// Original: export function $$v0
+export function $$v0(params: ReconcileWidgetParams) {
+  return reconcileWidgetTree(params)
 }
-export const Lb = $$v0;
-export const _b = $$I1;
+// Original: export function $$I1
+export function $$I1(params: RenderUnderParentParams) {
+  return renderVNodeUnderParent(params)
+}
+
+// Keep original re-exports (original bottom exports)
+export const Lb = reconcileWidgetTree
+export const _b = renderVNodeUnderParent

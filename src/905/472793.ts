@@ -60,7 +60,7 @@ import { getSelectedFile } from '../905/766303';
 import { checkIncrementalUnsafeMember, DocumentAccessState, ensurePluginPageLoaded, loadInternalCanvasMemoized, markPageLoaded } from '../905/816197';
 import { mergeDefaults, validateAndCollectErrors, validateWithZSchema } from '../905/816730';
 import { getSceneGraphInstance } from '../905/830071';
-import { _b } from '../905/835985';
+import { renderVNodeUnderParent } from '../905/835985';
 import { FreemiumApiPreCheckoutModal, ModalType } from '../905/837980';
 import { InternalError, RequestError } from '../905/845428';
 import { isVsCodeEnvironment } from '../905/858738';
@@ -9727,7 +9727,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
             try {
               let [e, t] = await Promise.all([d, c]);
               let i = this.privateSceneGraph.getCurrentPage();
-              let n = _b({
+              let n = renderVNodeUnderParent({
                 vNode: t.vRoot.rootNode,
                 oldVNode: e.vRoot.rootNode,
                 imgInfoMap: t.imgInfoMap,
@@ -9774,7 +9774,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           syncedState: {}
         }), runtimeBridge, this.options.allowedDomains).then(e => {
           let t = this.privateSceneGraph.getCurrentPage();
-          return _b({
+          return renderVNodeUnderParent({
             vNode: e.vRoot.rootNode,
             imgInfoMap: e.imgInfoMap,
             runtime: runtimeBridge,

@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { canCreateFileType } from "../figma_app/687776";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { sf } from "../905/929976";
 import { jd } from "../figma_app/528509";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
@@ -12,7 +12,7 @@ export function $$p0(e, t) {
     shouldForceClose: !0
   })) : (t(sf({
     view: "recentsAndSharing"
-  })), t(_$$s.error(e)));
+  })), t(FlashActions.error(e)));
 }
 let m = Math.random().toString(36).slice(2);
 export function $$h2() {

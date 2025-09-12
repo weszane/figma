@@ -61,7 +61,7 @@ import { Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
 import { Ib } from "../905/129884";
-import { AI, pW } from "../905/218608";
+import { shouldShowView, isBranchView } from "../905/218608";
 import { $A } from "../905/782918";
 import { C as _$$C2 } from "../905/870666";
 import { xX, $_ } from "../figma_app/597338";
@@ -261,7 +261,7 @@ export class $$eR4 extends RecordingComponent {
     let r = this.descriptionRef.current;
     let i = !!(r && (this.state.expandedDescription || r.scrollHeight > r.clientHeight || this.state.hovered) && !this.props.isActive);
     let a = this.props.versionId === V_;
-    let s = !a && !AI({
+    let s = !a && !shouldShowView({
       view: this.props.view ?? "file_default",
       label: this.props.label
     }) && !this.props.isLinked;
@@ -667,11 +667,11 @@ class eM extends RecordingComponent {
       let s = -1;
       let o = -1;
       let l = 0;
-      let d = e.length - 1 - e.slice().reverse().findIndex(e => AI(e));
+      let d = e.length - 1 - e.slice().reverse().findIndex(e => shouldShowView(e));
       let c = e.length - 1 - e.slice().reverse().findIndex(e => this.props.user?.handle && (e.participating_users_array?.includes(this.props.user?.handle) || e.user.handle === this.props.user?.handle));
       for (; a < e.length;) {
         let t = e[a];
-        if (AI(t)) {
+        if (shouldShowView(t)) {
           let u = r && (0 === a && t.disabled || 0 === i.length);
           l > 0 && (this.renderAutoVersionBatch(i, e, s, o, r && (t.disabled && 0 === s || 0 === i.length), !1, this.state.showAutosaves, n), u = !1);
           i.push(this.renderRow(t, u, a === e.length - 1 || a === d && !this.state.showAutosaves || a === c && this.state.showOnlyUserVersionHistory, n));
@@ -939,7 +939,7 @@ class eM extends RecordingComponent {
         first: t,
         isActive: this.props.versionHistory.activeId === e.id,
         isAllowedToChangeVersion: this.isAllowedToChangeVersion,
-        isBranchingVersion: pW(e),
+        isBranchingVersion: isBranchView(e),
         isComparing: this.props.versionHistory.compareId === e.id,
         isComparingLoading: this.state.loadingCompareId === e.id,
         isCurrentVersionActive: this.props.versionHistory.activeId === V_,
@@ -959,7 +959,7 @@ class eM extends RecordingComponent {
         text: $$eC6(e),
         time: e.touched_at,
         user: e.user && e.user.handle,
-        userUrl: e.user && (pW(e) || e.label) ? e.user.img_url : null,
+        userUrl: e.user && (isBranchView(e) || e.label) ? e.user.img_url : null,
         versionId: e.id,
         view: e.view ? e.view : null
       }, `history-item-${e.id}`);
@@ -1081,7 +1081,7 @@ class eM extends RecordingComponent {
     let g = $A(this.props.selectedView);
     let f = _$$C2(this.props.selectedView);
     let E = !this.canEditFile();
-    let y = i.map(e => AI(e) ? 1 : 0).reduce((e, t) => e + t, 0);
+    let y = i.map(e => shouldShowView(e) ? 1 : 0).reduce((e, t) => e + t, 0);
     return jsx("div", {
       children: this.props.progressBarState.mode !== UIVisibilitySetting.ON_AND_LOCKED && jsx(fu, {
         name: "Version History Panel",
@@ -1133,7 +1133,7 @@ class eM extends RecordingComponent {
                 first: !0,
                 isActive: this.props.versionHistory.activeId === _.id,
                 isAllowedToChangeVersion: this.isAllowedToChangeVersion,
-                isBranchingVersion: pW(_),
+                isBranchingVersion: isBranchView(_),
                 isComparing: this.props.versionHistory.compareId === _.id,
                 isComparingLoading: this.state.loadingCompareId === _.id,
                 isCurrentVersionActive: this.props.versionHistory.activeId === V_,
@@ -1308,7 +1308,7 @@ function eB({
       first: 0 === s && 0 === c,
       isActive: t?.id === a.id,
       isAllowedToChangeVersion: () => !0,
-      isBranchingVersion: pW(a),
+      isBranchingVersion: isBranchView(a),
       isSection: o,
       label: a.label,
       last: i && c === e.length - 1,
@@ -1318,7 +1318,7 @@ function eB({
       text: $$eC6(a),
       time: a.touched_at,
       user: a.user && a.user.handle,
-      userUrl: a.user && (pW(a) || a.label) ? a.user.img_url : null,
+      userUrl: a.user && (isBranchView(a) || a.label) ? a.user.img_url : null,
       version: a,
       versionId: a.id,
       view: a.view ? a.view : null
@@ -1381,7 +1381,7 @@ export function $$eV3({
   }
   for (let d = 0; d < e.length; d++) {
     let c = e[d];
-    AI(c) || c.frameCreated || c.frameEdited || c.lastViewed ? (l(!1), i.push(jsx(eB, {
+    shouldShowView(c) || c.frameCreated || c.frameEdited || c.lastViewed ? (l(!1), i.push(jsx(eB, {
       versions: [c],
       selectedVersion: t,
       setVersion: r,

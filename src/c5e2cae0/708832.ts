@@ -14,7 +14,7 @@ import { tH, H4 } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -680,7 +680,7 @@ export class $$eM2 extends Component {
       this.props.dispatch(sf({
         view: "recentsAndSharing"
       }));
-      this.props.dispatch(_$$s2.error(t || getI18nString("org_self_serve.confirmation_step.sorry_there_was_an_error_processing_your_request_refresh_and_try_again")));
+      this.props.dispatch(FlashActions.error(t || getI18nString("org_self_serve.confirmation_step.sorry_there_was_an_error_processing_your_request_refresh_and_try_again")));
       this.setState({
         loading: !1
       });
@@ -875,7 +875,7 @@ export class $$eM2 extends Component {
     this.setState({
       apiPending: !0
     });
-    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(_$$s2.error(resolveMessage(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
+    XHR.post("/api/orgs", s).catch(s => (this.props.dispatch(FlashActions.error(resolveMessage(s, s.data?.message || getI18nString("org_self_serve.review_step.sorry_there_was_an_error_please_try_again")))), reportError(_$$e.BILLING_EXPERIENCE, Error(`[Billing] Org checkout API failed: ${s.data?.message}`), {
       extra: {
         eligibleTeamsByTeamId: this.state.eligibleTeamsByTeamId,
         eligibleUsersByUserId: this.state.eligibleUsersByUserId,

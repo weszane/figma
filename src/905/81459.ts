@@ -2,7 +2,7 @@ import { f6 } from "../figma_app/516324";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { subscribeAndAwaitData } from "../905/553831";
 import { reportError } from "../905/11";
@@ -212,14 +212,14 @@ let $$C6 = createOptimistThunk(async e => {
     }
   }
 });
-let $$T13 = NC("FILE_IMPORT_SET_FROM_FILE_IMPORT_NUX_STEP");
-let $$k4 = NC("FILE_IMPORT_SHOW_IMPORT_PDF_CONFIRMATION");
-let $$R3 = NC("FILE_IMPORT_SHOW_IMPORT_FIGMA_DESIGN_REPO");
-let $$N9 = NC("FILE_IMPORT_CLEAR_IMPORTS");
-let $$P14 = NC("FILE_IMPORT_FAIL_ON_LIMIT");
-let $$O10 = NC("FILE_IMPORT_UPDATE_ITEM");
-let $$D7 = NC("FILE_IMPORT_ADD_TO_QUEUE");
-let $$L11 = NC("FILE_IMPORT_CLEAR_QUEUE");
+let $$T13 = createActionCreator("FILE_IMPORT_SET_FROM_FILE_IMPORT_NUX_STEP");
+let $$k4 = createActionCreator("FILE_IMPORT_SHOW_IMPORT_PDF_CONFIRMATION");
+let $$R3 = createActionCreator("FILE_IMPORT_SHOW_IMPORT_FIGMA_DESIGN_REPO");
+let $$N9 = createActionCreator("FILE_IMPORT_CLEAR_IMPORTS");
+let $$P14 = createActionCreator("FILE_IMPORT_FAIL_ON_LIMIT");
+let $$O10 = createActionCreator("FILE_IMPORT_UPDATE_ITEM");
+let $$D7 = createActionCreator("FILE_IMPORT_ADD_TO_QUEUE");
+let $$L11 = createActionCreator("FILE_IMPORT_CLEAR_QUEUE");
 let $$F15 = createOptimistThunk(e => {
   if (!_$$F) return;
   let {
@@ -267,18 +267,18 @@ let $$F15 = createOptimistThunk(e => {
   })(e);
   MS();
 });
-let $$M5 = NC("FILE_IMPORT_START_PROCESSING_FILE");
-let $$j12 = NC("FILE_IMPORT_DONE_PROCESSING_FILE");
+let $$M5 = createActionCreator("FILE_IMPORT_START_PROCESSING_FILE");
+let $$j12 = createActionCreator("FILE_IMPORT_DONE_PROCESSING_FILE");
 let U = createOptimistThunk(e => {
   e.dispatch($$j12());
   e.getState().fileImport.queue.length > 0 && e.dispatch($$C6());
 });
-let $$B1 = NC("FILE_IMPORT_CONFIRM_IMPORT_PDF");
+let $$B1 = createActionCreator("FILE_IMPORT_CONFIRM_IMPORT_PDF");
 let $$V8 = createOptimistThunk((e, t) => {
   e.dispatch($$B1(t));
   e.getState().fileImport.queue.length > 0 && e.dispatch($$C6());
 });
-let $$G2 = NC("FILE_IMPORT_CANCEL_IMPORT_PDF");
+let $$G2 = createActionCreator("FILE_IMPORT_CANCEL_IMPORT_PDF");
 let $$z0 = createOptimistThunk(e => {
   e.dispatch($$G2());
   let t = e.getState();

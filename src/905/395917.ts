@@ -1,10 +1,10 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { b1, KW } from "../905/890368";
-let $$a5 = NC("ORGS_BATCH_PUT");
-let $$s3 = NC("ORGS_LOCK_ACCOUNT");
-let $$o1 = NC("ORGS_UNLOCK_ORGS");
-let $$l4 = NC("ORGS_LOCK_ORGS");
-let $$d2 = NC("ORGS_SET_ORG_ID");
+let $$a5 = createActionCreator("ORGS_BATCH_PUT");
+let $$s3 = createActionCreator("ORGS_LOCK_ACCOUNT");
+let $$o1 = createActionCreator("ORGS_UNLOCK_ORGS");
+let $$l4 = createActionCreator("ORGS_LOCK_ORGS");
+let $$d2 = createActionCreator("ORGS_SET_ORG_ID");
 let $$c0 = b1;
 let $$u6 = KW;
 export const F6 = $$c0;

@@ -7,7 +7,7 @@ import { canRunPlugin } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
 import { hM } from "../905/851937";
 import { R } from "../figma_app/612938";
-import { wY } from "../905/753206";
+import { handlePluginError } from "../905/753206";
 import { hasLocalFileId } from "../figma_app/155287";
 let h = class {
   constructor() {
@@ -25,7 +25,7 @@ let h = class {
       let r = n && hasLocalFileId(n);
       if ("timeout" === i) {
         if (!IM()) {
-          wY(r ? "Text review plugins must call on('textreview') upon running" : void 0);
+          handlePluginError(r ? "Text review plugins must call on('textreview') upon running" : void 0);
           return [];
         }
         i = await t;
@@ -39,7 +39,7 @@ let h = class {
     };
   }
   async onExitTextEditMode() {
-    this.onExitTextEditModeCallbackCalled || (this.onExitTextEditModeCallbackCalled = !0, fS() && !(await It()) && updateActiveTextReviewPlugin(null), wY());
+    this.onExitTextEditModeCallbackCalled || (this.onExitTextEditModeCallbackCalled = !0, fS() && !(await It()) && updateActiveTextReviewPlugin(null), handlePluginError());
   }
   startTextReviewPlugin() {
     if (this.runningPlugin) return;

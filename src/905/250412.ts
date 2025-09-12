@@ -31,6 +31,7 @@ export interface WidgetContext {
   pluginID?: string;
   widgetName?: string;
   widgetVersionID?: string;
+  isLocalWidget?: boolean;
 }
 
 /**

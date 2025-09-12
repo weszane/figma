@@ -2,7 +2,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { Q } from "../905/150006";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -61,7 +61,7 @@ export let $$N1 = createOptimistThunk((e, t) => {
     $$C2(n, e, t);
   }).catch(t => {
     let r = resolveMessage(t, t?.response?.message || getI18nString("team_creation.an_error_occurred_while_creating_this_team"));
-    e.dispatch(_$$s.error(r));
+    e.dispatch(FlashActions.error(r));
     e.dispatch(r1({
       loading: !1
     }));
@@ -226,17 +226,17 @@ let $$R5 = createOptimistThunk((e, t) => {
     let a = e.getState().teams[i].name;
     switch (t.level) {
       case AccessLevelEnum.OWNER:
-        e.dispatch(_$$s.flash(getI18nString("join_team_flash.as_owner.text", {
+        e.dispatch(FlashActions.flash(getI18nString("join_team_flash.as_owner.text", {
           teamName: a
         })));
         break;
       case AccessLevelEnum.ADMIN:
-        e.dispatch(_$$s.flash(getI18nString("join_team_flash.as_admin.text", {
+        e.dispatch(FlashActions.flash(getI18nString("join_team_flash.as_admin.text", {
           teamName: a
         })));
         break;
       default:
-        e.dispatch(_$$s.flash(getI18nString("join_team_flash.text", {
+        e.dispatch(FlashActions.flash(getI18nString("join_team_flash.text", {
           teamName: a
         })));
     }
@@ -260,17 +260,17 @@ let $$L4 = createOptimistThunk((e, t) => {
     let i = t.teamIds.length;
     switch (t.level) {
       case AccessLevelEnum.OWNER:
-        e.dispatch(_$$s.flash(getI18nString("join_team_batch_flash.as_owner.text", {
+        e.dispatch(FlashActions.flash(getI18nString("join_team_batch_flash.as_owner.text", {
           teamCount: i
         })));
         break;
       case AccessLevelEnum.ADMIN:
-        e.dispatch(_$$s.flash(getI18nString("join_team_batch_flash.as_admin.text", {
+        e.dispatch(FlashActions.flash(getI18nString("join_team_batch_flash.as_admin.text", {
           teamCount: i
         })));
         break;
       default:
-        e.dispatch(_$$s.flash(getI18nString("join_team_batch_flash.text", {
+        e.dispatch(FlashActions.flash(getI18nString("join_team_batch_flash.text", {
           teamCount: i
         })));
     }

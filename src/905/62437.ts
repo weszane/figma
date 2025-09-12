@@ -5,7 +5,7 @@ import { q7 } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { oA } from "../905/723791";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { fk } from "../figma_app/618433";
 import { SQ, PF, YW } from "../figma_app/78808";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -20,7 +20,7 @@ import { UpsellModalType } from "../905/165519";
 import { vL } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { fileActionEnum } from "../figma_app/630077";
-import { pW } from "../905/218608";
+import { isBranchView } from "../905/218608";
 import { $A } from "../905/782918";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -45,19 +45,19 @@ function $$D(e) {
   let f = async () => {
     if (s) return;
     if (!u || !h || "branch_child_merge" !== version.view) {
-      t(_$$s.error("Unable to undo merge"));
+      t(FlashActions.error("Unable to undo merge"));
       return;
     }
     let e = u.key;
     let i = version.branch_file_key;
     if (!i) {
-      t(_$$s.error("Could not find branch key"));
+      t(FlashActions.error("Could not find branch key"));
       return;
     }
     d(!0);
     let n = await restoreFiles([i]);
     if ("error" === n.status) {
-      t(_$$s.error(n.message));
+      t(FlashActions.error(n.message));
       d(!1);
       return;
     }
@@ -222,7 +222,7 @@ export function $$B0(e) {
       try {
         _$$S(k, T, C.id);
       } catch (e) {
-        k(_$$s.error("Failed to copy link"));
+        k(FlashActions.error("Failed to copy link"));
       }
     });
     let D = r("savepoint-undo-merge", () => {
@@ -233,7 +233,7 @@ export function $$B0(e) {
         }
       }));
     });
-    i ? pW(C) ? "branch_child_merge" === C.view ? (e.push(A, y, b, O), getFeatureFlags().branching_undo_merge && e.push(D)) : e.push(y, b, O) : e.push(A, y, b, P, O) : e.push(b, O);
+    i ? isBranchView(C) ? "branch_child_merge" === C.view ? (e.push(A, y, b, O), getFeatureFlags().branching_undo_merge && e.push(D)) : e.push(y, b, O) : e.push(A, y, b, P, O) : e.push(b, O);
     getFeatureFlags().version_diffing && T.editorType !== FEditorType.Whiteboard && !$A(T) && e.push(u);
     return e;
   }, [T, C, i, t, R, N, k]);

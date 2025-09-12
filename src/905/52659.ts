@@ -5,7 +5,7 @@ import { Ay } from "@stylexjs/stylex";
 import { trackEventAnalytics } from "../905/449184";
 import { MD } from "../figma_app/672951";
 import { getAtomMutate } from "../figma_app/566371";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { kg } from "../figma_app/976345";
 import { U as _$$U } from "../905/926550";
@@ -272,7 +272,7 @@ export function $$ea0(e) {
     e.folderPerms?.canSkipDeletionConfirmation ? w({
       folderId: e.id
     }).catch(() => {
-      s(_$$s.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
+      s(FlashActions.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
     }) : "loaded" === C.projects.status && C.projects.data[e.id].canTrash && s(showModalHandler({
       type: _$$V(),
       data: {

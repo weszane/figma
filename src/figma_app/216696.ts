@@ -1,4 +1,4 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { logError } from "../905/714362";
 import { Sb } from "../905/359847";
 import { Qi } from "../905/172918";
@@ -7,7 +7,7 @@ import { x1 as _$$x } from "../figma_app/740025";
 import { N } from "../905/696711";
 import { Ug } from "../figma_app/45218";
 import { A } from "../905/665703";
-let $$p2 = NC("COMMUNITY_SET_SHELVES_FOR_SHELF_TYPE");
+let $$p2 = createActionCreator("COMMUNITY_SET_SHELVES_FOR_SHELF_TYPE");
 let $$_1 = createOptimistThunk((e, {
   shelfType: t,
   limit: r

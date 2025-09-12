@@ -97,7 +97,7 @@ import { l as _$$l } from "../905/479687";
 import { resourceUtils } from "../905/989992";
 import { Wi, Qp, JR } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { sx as _$$sx2 } from "../905/941192";
 import { B as _$$B3 } from "../905/261906";
 import { jv } from "../905/84777";
@@ -1070,7 +1070,7 @@ function r_() {
   let x = "loading" === status || "errors" === status;
   let [h, _] = c.data || [n, n];
   useEffect(() => {
-    "errors" === status && e(_$$s2.error("An error occurred", 5e3));
+    "errors" === status && e(FlashActions.error("An error occurred", 5e3));
   }, [e, status]);
   return {
     proPrices: h,
@@ -1109,7 +1109,7 @@ function rp() {
   let u = "loading" === status || "errors" === status;
   let [x, h] = d.data || [a, a];
   useEffect(() => {
-    "errors" === status && e(_$$s2.error("An error occurred", 5e3));
+    "errors" === status && e(FlashActions.error("An error occurred", 5e3));
   }, [e, status]);
   return {
     proPrices: x,

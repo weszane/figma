@@ -1,6 +1,6 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { j } from "../905/869261";
@@ -95,7 +95,7 @@ export let $$h0 = createOptimistAction("TEAM_USER_UPDATE_DESIGN_PAID_STATUS", as
     }).catch(function (t) {
       e.dispatch(createOptimistRevertAction(h));
       let r = getI18nString("team_user.actions.an_error_occurred_while_changing_a_team_member_s_billing_status");
-      e.dispatch(_$$s.error(r));
+      e.dispatch(FlashActions.error(r));
       console.error(t);
     });
   }

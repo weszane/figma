@@ -6,7 +6,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { E } from "../905/984674";
 import { popModalStack } from "../905/156213";
@@ -66,7 +66,7 @@ export function $$y0({
       });
       y(I.id);
     } catch (e) {
-      _(_$$s.error(getI18nString("file_browser.pinning.pin_modal.error")));
+      _(FlashActions.error(getI18nString("file_browser.pinning.pin_modal.error")));
       return e;
     }
   };

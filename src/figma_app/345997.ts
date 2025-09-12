@@ -3,7 +3,7 @@ import { reportError } from '../905/11';
 import { ServiceCategories } from '../905/165054';
 import { resolveMessage } from '../905/231762';
 import { getI18nStringAlias } from '../905/303541';
-import { s as _$$s } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { getFeatureFlags } from '../905/601108';
 import { A } from '../905/920142';
 import { cn, SH } from '../figma_app/141320';
@@ -326,10 +326,10 @@ export function isOrgSuspendedOrDeactivated(orgId: string, orgState: OrgState): 
 export function handleErrorWithToast(error: any, dispatch: (arg: any) => void): void {
   if (error.data && error.data.message) {
     const errorMessage = resolveMessage(error);
-    errorMessage && dispatch(_$$s.error(errorMessage));
+    errorMessage && dispatch(FlashActions.error(errorMessage));
   } else {
     const errorMessage = resolveMessage(error, getI18nStringAlias('error.unknown_contact_support'));
-    dispatch(_$$s.error(errorMessage));
+    dispatch(FlashActions.error(errorMessage));
   }
 }
 

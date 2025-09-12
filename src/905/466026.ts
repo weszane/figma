@@ -1,5 +1,5 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { isDevEnvironment } from "../figma_app/169182";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
@@ -8,7 +8,7 @@ import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { WW, yT, TP } from "../figma_app/349248";
-let $$m6 = NC("REPO_SET_SELECTED_BRANCH");
+let $$m6 = createActionCreator("REPO_SET_SELECTED_BRANCH");
 let $$h2 = createOptimistThunk((e, {
   repo: t,
   name: i
@@ -44,7 +44,7 @@ let $$g10 = createOptimistThunk((e, {
   Object.keys(m).length > 0 && WB().optimisticallyUpdate(m, u);
   h && WB().optimisticallyCreate(h, u);
 });
-let $$f0 = NC("REPO_PERMISSIONS_PUT");
+let $$f0 = createActionCreator("REPO_PERMISSIONS_PUT");
 let $$_12 = createOptimistAction("REPO_PUT", async (e, {
   repo: t,
   userInitiated: i
@@ -61,14 +61,14 @@ let $$_12 = createOptimistAction("REPO_PUT", async (e, {
     }));
   }));
 });
-let $$A11 = NC("REPO_BATCH_PUT");
-let $$y9 = NC("REPO_BATCH_PUT_IN_SAME_FOLDER");
-let $$b3 = NC("REPO_POST");
-let $$v1 = NC("RECENT_BRANCH_POST");
-let $$I4 = NC("RECENT_REPOS_DELETE");
-let $$E8 = NC("RECENT_REPO_PUT");
-let $$x7 = NC("RECENT_REPOS_INIT");
-let $$S5 = NC("RECENT_REPO_POST");
+let $$A11 = createActionCreator("REPO_BATCH_PUT");
+let $$y9 = createActionCreator("REPO_BATCH_PUT_IN_SAME_FOLDER");
+let $$b3 = createActionCreator("REPO_POST");
+let $$v1 = createActionCreator("RECENT_BRANCH_POST");
+let $$I4 = createActionCreator("RECENT_REPOS_DELETE");
+let $$E8 = createActionCreator("RECENT_REPO_PUT");
+let $$x7 = createActionCreator("RECENT_REPOS_INIT");
+let $$S5 = createActionCreator("RECENT_REPO_POST");
 export const CN = $$f0;
 export const ER = $$v1;
 export const NN = $$h2;

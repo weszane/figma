@@ -51,7 +51,7 @@ import { f as _$$f } from "../figma_app/750432";
 import { K0 } from "../figma_app/778125";
 import { h1 } from "../905/986103";
 import { Kq } from "../figma_app/936061";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
@@ -257,9 +257,9 @@ let ep = createOptimistThunk((e, t) => {
     let n = getI18nString("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_unread");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s2.error(resolveMessage(t, n)));
+      e.dispatch(FlashActions.error(resolveMessage(t, n)));
     } catch (t) {
-      e.dispatch(_$$s2.error(n));
+      e.dispatch(FlashActions.error(n));
     }
   });
 });
@@ -273,9 +273,9 @@ let eh = createOptimistThunk((e, t) => {
     let n = getI18nString("whiteboard.an_error_occurred_while_marking_a_canvas_mention_as_read");
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s2.error(resolveMessage(t, n)));
+      e.dispatch(FlashActions.error(resolveMessage(t, n)));
     } catch (t) {
-      e.dispatch(_$$s2.error(n));
+      e.dispatch(FlashActions.error(n));
     }
   });
 });
@@ -1057,7 +1057,7 @@ let tl = createOptimistThunk((e, t) => {
     notification_preference: t.notification_preference
   }).catch(t => {
     let n = t.data?.message || "An error occurred while updating notification preference.";
-    e.dispatch(_$$s2.flash(n));
+    e.dispatch(FlashActions.flash(n));
     console.error(t);
   });
   let o = e.getState().user?.id;
@@ -1127,7 +1127,7 @@ function tp() {
       optIn: o
     }).catch(e => {
       let t = e.data?.message || "An error occurred while updating status change preference.";
-      c(_$$s2.flash(t));
+      c(FlashActions.flash(t));
       console.error(e);
     });
     n?.data?.id ? WB()?.optimisticallyUpdate({

@@ -32,8 +32,8 @@ import { p as _$$p } from "../figma_app/353099";
 import { Ay } from "../642/998522";
 import { QU } from "../1250/559338";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { _ as _$$_ } from "../905/170564";
-import { Q as _$$Q2 } from "../905/463586";
+import { NotificationType } from "../905/170564";
+import { notificationActions } from "../905/463586";
 import { E as _$$E } from "../905/95280";
 import { Z as _$$Z } from "../905/104740";
 import { QZ } from "../figma_app/62612";
@@ -176,8 +176,8 @@ function V() {
     t || 0 === i || ("ArrowUp" === e.key || "ArrowLeft" === e.key || e.shiftKey && "Tab" === e.key ? d(Fullscreen.navigateToNextChange(-1)) : ("ArrowDown" === e.key || "ArrowRight" === e.key || "Tab" === e.key) && d(Fullscreen.navigateToNextChange(1)));
   }, [t, i, d]);
   return (useEffect(() => {
-    e(_$$Q2.dequeue({
-      type: _$$_.SEE_WHATS_CHANGED
+    e(notificationActions.dequeue({
+      type: NotificationType.SEE_WHATS_CHANGED
     }));
   }, [e]), useEffect(() => {
     s && 0 !== i && d(Fullscreen.navigateToFirstVisibleOrClosestChange());

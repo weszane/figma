@@ -25,8 +25,8 @@ import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { $ as _$$$ } from "../905/383708";
 import { FileKeySourceEnum } from "../905/412913";
-import { $ as _$$$2 } from "../905/851662";
-import { _ as _$$_ } from "../905/170564";
+import { notificationActions } from "../905/851662";
+import { NotificationType } from "../905/170564";
 import { isSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { uo } from "../figma_app/78808";
 import { I0 } from "../905/879323";
@@ -520,11 +520,11 @@ export function $$eX24(e) {
   })), numNewComponents > 0 && eK && (handleAtomEvent({
     id: "Parsed first components"
   }), eK = !1), a.size > 0) {
-    let r = t.notifications.filter(e => e.type === _$$_.MOVE_COMPONENTS_PROMPT);
+    let r = t.notifications.filter(e => e.type === NotificationType.MOVE_COMPONENTS_PROMPT);
     if (r.length > 0) {
-      let t = r[0].type === _$$_.MOVE_COMPONENTS_PROMPT && r[0].movableItemIds;
-      t && Bq(t, a) && e.dispatch(_$$$2.dequeue({
-        type: _$$_.MOVE_COMPONENTS_PROMPT
+      let t = r[0].type === NotificationType.MOVE_COMPONENTS_PROMPT && r[0].movableItemIds;
+      t && Bq(t, a) && e.dispatch(notificationActions.dequeue({
+        type: NotificationType.MOVE_COMPONENTS_PROMPT
       }));
     }
   }

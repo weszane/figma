@@ -31,7 +31,7 @@ import { xG } from "../905/277373";
 import { M as _$$M } from "../figma_app/170366";
 import { getFullscreenViewEditorType, getCurrentPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
-import { wY } from "../905/753206";
+import { handlePluginError } from "../905/753206";
 import { bD } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
 import { hasLocalFileId } from "../figma_app/155287";
@@ -295,13 +295,13 @@ export function $$J0(e, t, i) {
         if ("dev" === w || "inspect" === w) {
           setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
           atomStoreManager.set(HT, "development");
-          mN.getInstance()?.getIframeId() === Wh.INSPECT && wY();
+          mN.getInstance()?.getIframeId() === Wh.INSPECT && handlePluginError();
           return;
         }
         if ("buzz" === w) {
           atomStoreManager.set(Lk, _$$x.PLUGINS);
           atomStoreManager.set(zM, "development");
-          mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && wY();
+          mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && handlePluginError();
           return;
         }
         fullscreenValue.dispatch(EG({
@@ -336,13 +336,13 @@ export function $$J0(e, t, i) {
       }), "dev" === w || "inspect" === w) {
         setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN);
         atomStoreManager.set(HT, "recents_and_saved");
-        mN.getInstance()?.getIframeId() === Wh.INSPECT && wY();
+        mN.getInstance()?.getIframeId() === Wh.INSPECT && handlePluginError();
         return;
       }
       if ("buzz" === w) {
         atomStoreManager.set(Lk, _$$x.PLUGINS);
         atomStoreManager.set(zM, "recents_and_saved");
-        mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && wY();
+        mN.getInstance()?.getIframeId() === Wh.BUZZ_LEFT_PANEL && handlePluginError();
         return;
       }
       _$$s({

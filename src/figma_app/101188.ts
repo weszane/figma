@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { o as _$$o } from "../figma_app/29593";
 import { s as _$$s2 } from "../905/411990";
@@ -73,7 +73,7 @@ export function $$C0() {
       }) => {
         t(e.meta && e.meta.subscription_will_renew);
       }).catch(e => {
-        e.data?.message && n(_$$s.error(e.data.message));
+        e.data?.message && n(FlashActions.error(e.data.message));
       });
     };
     let D = e.roles.byTeamId[C.id] || {};

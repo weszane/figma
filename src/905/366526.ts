@@ -8,7 +8,7 @@ import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../9
 import { WR, X0 } from '../905/2848';
 import { vq as _$$vq } from '../905/8732';
 import { cL as _$$cL4, hZ as _$$hZ2 } from '../905/14223';
-import { NC } from '../905/17179';
+import { createActionCreator } from '../905/73481';
 import { Sc } from '../905/18797';
 import { R as _$$R4 } from '../905/22352';
 import { aj as _$$aj, uf as _$$uf, uu as _$$uu, fJ, Ut, w7 } from '../905/25169';
@@ -107,7 +107,7 @@ import { $N, an as _$$an, OX, OZ, Sp, U_ } from '../905/327855';
 import { F as _$$F4, r as _$$r7 } from '../905/336143';
 import { v as _$$v5 } from '../905/344656';
 import { D6 as _$$D5, Nx } from '../905/345933';
-import { QI as _$$QI } from '../905/346794';
+import { updateJoinStatus } from '../905/346794';
 import { P as _$$P4 } from '../905/347284';
 import { createOptimistThunk } from '../905/350402';
 import { E as _$$E8 } from '../905/355220';
@@ -142,7 +142,7 @@ import { k as _$$k2 } from '../905/443820';
 import { CL as _$$CL, Dc as _$$Dc, hf as _$$hf, Mt } from '../905/445022';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { o as _$$o5 } from '../905/451156';
-import { Q as _$$Q4 } from '../905/463586';
+import { notificationActions } from '../905/463586';
 import { N as _$$N4 } from '../905/465068';
 import { bE as _$$bE5, CN as _$$CN, iC as _$$iC, iE as _$$iE3, nF as _$$nF, nK as _$$nK, nX as _$$nX, uo as _$$uo7, yJ as _$$yJ7, ER, kE } from '../905/466026';
 import { id as _$$id2, lk as _$$lk, nq as _$$nq, Qh as _$$Qh, Xc as _$$Xc, FY, Kb, wG } from '../905/469533';
@@ -181,7 +181,7 @@ import { $B, aL as _$$aL, hT as _$$hT2, Y4 } from '../905/561087';
 import { registerDeferredCallback, requestDeferredExecution } from '../905/561433';
 import { i as _$$i2 } from '../905/565139';
 import { nD as _$$nD, uB as _$$uB } from '../905/572991';
-import { s as _$$s2 } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { vj, zQ } from '../905/574958';
 import { l as _$$l0, q as _$$q4 } from '../905/578831';
 import { pf as _$$pf } from '../905/579526';
@@ -254,7 +254,7 @@ import { k as _$$k6 } from '../905/749197';
 import { f as _$$f3 } from '../905/749689';
 import { B as _$$B } from '../905/749933';
 import { tH as _$$tH, As, H4, S1 } from '../905/751457';
-import { wY } from '../905/753206';
+import { handlePluginError } from '../905/753206';
 import { getRepoByIdAlt, isBranchAlt, getRepoById, isBranch } from '../905/760074';
 import { m as _$$m } from '../905/760316';
 import { MV, WB } from '../905/761735';
@@ -1898,9 +1898,9 @@ let iz = e => t => function (i) {
               fileKeys: n,
               userInitiated: !1
             }));
-            e.dispatch(_$$s2.error(t.message));
+            e.dispatch(FlashActions.error(t.message));
           } catch (t) {
-            e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_delete_error')));
+            e.dispatch(FlashActions.error(getI18nString('file_browser.file_browser_actions.file_delete_error')));
           }
         } else {
           l ? n ? e.dispatch(VisualBellActions.enqueue({
@@ -1942,9 +1942,9 @@ let iz = e => t => function (i) {
       }) => {
         try {
           i = JSON.parse(i);
-          e.dispatch(_$$s2.error(i.message));
+          e.dispatch(FlashActions.error(i.message));
         } catch (t) {
-          l ? e.dispatch(_$$s2.error(n ? getI18nString('file_browser.file_browser_actions.branch_archive_error') : getI18nString('file_browser.file_browser_actions.branch_delete_error'))) : e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_delete_error')));
+          l ? e.dispatch(FlashActions.error(n ? getI18nString('file_browser.file_browser_actions.branch_archive_error') : getI18nString('file_browser.file_browser_actions.branch_delete_error'))) : e.dispatch(FlashActions.error(getI18nString('file_browser.file_browser_actions.file_delete_error')));
         }
         t({
           type: null,
@@ -2097,8 +2097,8 @@ let iK = e => t => function (i) {
   }
   return t(i);
 };
-let i$ = NC('REALTIME_UNSUBSCRIBE');
-let iZ = NC('REALTIME_BATCH_SUBSCRIBE');
+let i$ = createActionCreator('REALTIME_UNSUBSCRIBE');
+let iZ = createActionCreator('REALTIME_BATCH_SUBSCRIBE');
 let i2 = e => t => function (i) {
   if (_$$yH.matches(i)) {
     let n = e.getState();
@@ -2137,7 +2137,7 @@ let i2 = e => t => function (i) {
     }), e.dispatch(p), i.payload.userInitiated && i.payload.teamDelete) {
       return _$$Q3({
         requestPromise: XHR.del(`/api/teams/${o}`).then(() => {
-          e.dispatch(_$$s2.flash(getI18nString('team_delete_modal.post_delete_flash', {
+          e.dispatch(FlashActions.flash(getI18nString('team_delete_modal.post_delete_flash', {
             teamName: i.payload.team.name
           })));
           u();
@@ -2160,7 +2160,7 @@ let i2 = e => t => function (i) {
       z_('Role Deleted', r);
       return _$$Q3({
         requestPromise: XHR.del(`/api/roles/${r.id}`).then(() => {
-          e.dispatch(_$$s2.flash(getI18nString('leave_team_modal.post_leave_flash', {
+          e.dispatch(FlashActions.flash(getI18nString('leave_team_modal.post_leave_flash', {
             teamName: i.payload.team.name
           })));
           u();
@@ -2246,7 +2246,7 @@ let i6 = e => t => function (i) {
     n.catch(t => {
       for (let [t, n] of Object.entries(i.payload)) {
         if ((t.endsWith('_override_true') || t.endsWith('_override_false')) && n) {
-          e.dispatch(_$$s2.error('Error: Could not update lab'));
+          e.dispatch(FlashActions.error('Error: Could not update lab'));
           break;
         }
       }
@@ -2353,7 +2353,7 @@ let ng = e => t => function (i) {
       url: e
     }) => {
       e && revokeThumbnailUrl(e);
-    }), e.dispatch(HV()), bd(), e.dispatch(_$$Q4.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
+    }), e.dispatch(HV()), bd(), e.dispatch(notificationActions.clearAll()), n.modalShown && e.dispatch(hideModal()), n.universalInsertModal.showing && e.dispatch(KE()), e.dispatch(_$$Ho({})), fullscreenValue.onReady().then(() => {
       e.dispatch(H1({
         votingStage: SessionStatus.NO_SESSION
       }));
@@ -2649,7 +2649,7 @@ let nQ = e => t => function (i) {
           let t = a.fileKey;
           let i = () => OZ(e, t, a.editorType).catch(t => {
             let i = _$$an(t, getI18nString('user_facing_error.loading_a_file'));
-            e.dispatch(_$$s2.error(i));
+            e.dispatch(FlashActions.error(i));
           });
           r.view === 'desktopNewTab' ? U_(e, a.editorType, !0).then(async () => {
             if (!n.fileByKey[t]) {
@@ -2704,12 +2704,12 @@ let nQ = e => t => function (i) {
                       tryPluginParams
                     }));
                   });
-                }).catch(() => e.dispatch(_$$s2.error(getI18nString('flash.unable_to_try_resource'))));
+                }).catch(() => e.dispatch(FlashActions.error(getI18nString('flash.unable_to_try_resource'))));
               }).catch(t => {
-                e.dispatch(_$$s2.error(OX(t)));
+                e.dispatch(FlashActions.error(OX(t)));
               });
             }).catch(t => {
-              e.dispatch(_$$s2.error(OX(t)));
+              e.dispatch(FlashActions.error(OX(t)));
             });
           });
         }
@@ -3577,7 +3577,7 @@ let am = e => t => function (i) {
   if (_$$sf.matches(i)) {
     let t = $A(e.getState().selectedView);
     let n = i.payload.view === 'fullscreen' && i.payload.editorType === FEditorType.DevHandoff;
-    _$$hM() && t !== n && wY();
+    _$$hM() && t !== n && handlePluginError();
   }
   return t(i);
 };
@@ -5143,7 +5143,7 @@ let sS = new _$$H6({
   darkReadEnabled: () => !0,
   fullReadEnabled: () => !0
 });
-let sC = NC('USER_EDU_GRACE_PERIOD_RECEIVE_UPDATE');
+let sC = createActionCreator('USER_EDU_GRACE_PERIOD_RECEIVE_UPDATE');
 let sT = e => ({
   user_id: e.userId,
   team_id: e.teamId,
@@ -9586,7 +9586,7 @@ function dY(e) {
   for (let i of _V) e[i] && (t[i] = !0);
   return t;
 }
-let dq = NC('COLOR_PICKER_SELECT_SWATCH_SET');
+let dq = createActionCreator('COLOR_PICKER_SELECT_SWATCH_SET');
 let dZ = {
   stylesExpanded: !1,
   viewMode: _$$nE.GRID,
@@ -11201,20 +11201,20 @@ let pg = {
     } : e;
   },
   flashes(e = {}, t) {
-    if (_$$s2.add.matches(t)) {
+    if (FlashActions.add.matches(t)) {
       return {
         ...e,
         [t.payload.id]: t.payload
       };
     }
-    if (_$$s2.remove.matches(t)) {
+    if (FlashActions.remove.matches(t)) {
       let i = {
         ...e
       };
       delete i[t.payload.id];
       return i;
     }
-    return _$$s2.removeAll.matches(t) ? {} : e;
+    return FlashActions.removeAll.matches(t) ? {} : e;
   },
   modalShown(e = null, t) {
     return (getFeatureFlags().datadog_rum_modal_shown_action && (showModal.matches(t) || popModalStack.matches(t) || hideModal.matches(t) || hideSpecificModal.matches(t) || updateModal.matches(t) || popPrevModal.matches(t)) && datadogRum?.addAction('modalAction', {
@@ -11307,7 +11307,7 @@ let pg = {
     return De.matches(t) ? t.payload : e;
   },
   notifications(e = [], t) {
-    return _$$Q4.enqueueFront.matches(t) ? e.length > 0 && e[0].type == t.payload.notification.type ? [t.payload.notification, ...e.slice(1, e.length)] : [t.payload.notification, ...e] : _$$Q4.enqueue.matches(t) ? e.length > 0 && e[e.length - 1].type == t.payload.notification.type ? [...e.slice(0, e.length - 1), t.payload.notification] : [...e, t.payload.notification] : _$$Q4.dequeue.matches(t) ? void 0 != t.payload.type ? e.filter(e => e.type !== t.payload.type) : e.slice(1) : _$$Q4.clearAll.matches(t) ? [] : e;
+    return notificationActions.enqueueFront.matches(t) ? e.length > 0 && e[0].type == t.payload.notification.type ? [t.payload.notification, ...e.slice(1, e.length)] : [t.payload.notification, ...e] : notificationActions.enqueue.matches(t) ? e.length > 0 && e[e.length - 1].type == t.payload.notification.type ? [...e.slice(0, e.length - 1), t.payload.notification] : [...e, t.payload.notification] : notificationActions.dequeue.matches(t) ? void 0 != t.payload.type ? e.filter(e => e.type !== t.payload.type) : e.slice(1) : notificationActions.clearAll.matches(t) ? [] : e;
   },
   downtime: pd,
   blockedUILoadingIndicator(e = null, t) {
@@ -13315,7 +13315,7 @@ let md = createOptimistThunk((e, {
   let r = i.multiplayerSessionState;
   let a = t.multiplayerSessionState;
   void 0 !== a && function (e, t, i) {
-    _$$QI(t, i);
+    updateJoinStatus(t, i);
     i === SchemaJoinStatus.SHOULD_UPGRADE ? (trackEventAnalytics('Upgrade Banner Shown'), e.dispatch(_$$il())) : i === SchemaJoinStatus.JOINED && e.dispatch(D9());
   }(e, r, a);
   void 0 !== t.currentTool && n.multiplayerEmoji.type === 'REACTING_OR_CHATTING' && e.dispatch(_$$mu());
@@ -14441,7 +14441,7 @@ export async function $$hz0(e, t, d = {
       b.getState().selectedView === _$$o4 && b.dispatch(_$$sf({
         view: 'recentsAndSharing'
       }));
-      b.dispatch(_$$s2.init());
+      b.dispatch(FlashActions.init());
       getInitialOptions().promo && b.dispatch(_$$Ay4({
         promo: getInitialOptions().promo || null
       }));
@@ -14643,7 +14643,7 @@ export async function $$hz0(e, t, d = {
               message: errorMessage
             } : void 0);
           } else if (e === 'showFlashMessage') {
-            t.flashErrorMessage && b.dispatch(_$$s2.error(t.flashErrorMessage));
+            t.flashErrorMessage && b.dispatch(FlashActions.error(t.flashErrorMessage));
           } else if (e === 'logOutAllUsers') {
             b.dispatch(S5());
           } else if (e === 'tabVisibilityChange') {

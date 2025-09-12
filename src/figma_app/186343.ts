@@ -14,7 +14,7 @@ import { J } from "../905/445197";
 import { F as _$$F } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
-import { IL } from "../figma_app/582924";
+import { subscribeToContainingPage } from "../figma_app/582924";
 import { QZ } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { P3 } from "../figma_app/952446";
@@ -44,7 +44,7 @@ export async function $$M11({
   pageNode: t,
   pageName: r
 }) {
-  return !(!t || !e || hasPageLimitations(e)) && !!$$D5(t, r) && (Multiplayer.isIncrementalSession() && (await IL(t.guid, AutosaveEventType.PAGE_DIVIDER_CHECK)), t?.childCount === 0);
+  return !(!t || !e || hasPageLimitations(e)) && !!$$D5(t, r) && (Multiplayer.isIncrementalSession() && (await subscribeToContainingPage(t.guid, AutosaveEventType.PAGE_DIVIDER_CHECK)), t?.childCount === 0);
 }
 export function $$F7() {
   let e = selectCurrentFile();

@@ -1,9 +1,9 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { A } from "../905/920142";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { _H } from "../figma_app/598111";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { _l, V3 } from "../figma_app/976345";
 import { sf } from "../905/929976";
@@ -32,18 +32,18 @@ let $$I15 = createOptimistThunk((e, {
     billingPeriod: SubscriptionType.STUDENT
   }));
 });
-let $$S20 = NC("PAYMENT_RESTORE_SAVED_CART");
-let $$v9 = NC("PAYMENT_SET_CURRENCY");
-let $$A16 = NC("PAYMENT_SET_TOKEN");
-let $$x21 = NC("PAYMENT_SET_TAXES");
-let $$N19 = NC("PAYMENT_SET_PROMO");
+let $$S20 = createActionCreator("PAYMENT_RESTORE_SAVED_CART");
+let $$v9 = createActionCreator("PAYMENT_SET_CURRENCY");
+let $$A16 = createActionCreator("PAYMENT_SET_TOKEN");
+let $$x21 = createActionCreator("PAYMENT_SET_TAXES");
+let $$N19 = createActionCreator("PAYMENT_SET_PROMO");
 let $$C1 = createOptimistThunk((e, t) => {
   t.promo || _H();
   e.dispatch($$N19(t));
 });
-let $$w0 = NC("PAYMENT_SET_VAT_GST_ID");
-let $$O4 = NC("PAYMENT_SET_REGIONAL_VAT_GST_ID");
-let $$R12 = NC("PAYMENT_MAKE_STUDENT_TEAM");
+let $$w0 = createActionCreator("PAYMENT_SET_VAT_GST_ID");
+let $$O4 = createActionCreator("PAYMENT_SET_REGIONAL_VAT_GST_ID");
+let $$R12 = createActionCreator("PAYMENT_MAKE_STUDENT_TEAM");
 let $$L11 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = r.user?.id;
@@ -63,7 +63,7 @@ let $$L11 = createOptimistThunk((e, t) => {
       view: "team",
       teamId: t.teamId
     }));
-    e.dispatch(_$$s.flash(getI18nString("flash.successfully_upgraded_to_an_education_team")));
+    e.dispatch(FlashActions.flash(getI18nString("flash.successfully_upgraded_to_an_education_team")));
     e.dispatch($$M5({
       submitPending: !1
     }));
@@ -86,7 +86,7 @@ let $$P18 = createOptimistThunk((e, {
     e.dispatch(Be({
       teamId: t
     }));
-    e.dispatch(_$$s.flash(getI18nString("flash.successfully_downgraded_to_a_starter_team")));
+    e.dispatch(FlashActions.flash(getI18nString("flash.successfully_downgraded_to_a_starter_team")));
   }).catch(t => handleErrorWithToast(t, e.dispatch)) : XHR.del(`/api/subscriptions-2018-11-08/team/${t}`).then(({
     data: n
   }) => {
@@ -109,7 +109,7 @@ let $$P18 = createOptimistThunk((e, {
     let c = annual_subscription?.quantity ? annual_subscription.current_period_end : null;
     let u = monthly_subscription?.quantity ? monthly_subscription.current_period_end : null;
     let h = c && u ? A(c).isAfter(A(u)) ? c : u : c || u;
-    e.dispatch(_$$s.flash(h ? getI18nString("flash.team_will_become_free_starter_team_on_date", {
+    e.dispatch(FlashActions.flash(h ? getI18nString("flash.team_will_become_free_starter_team_on_date", {
       teamName: r.name,
       cancelDate: A(h).toDate()
     }) : getI18nString("flash.team_will_be_downgraded_at_the_end_of_the_current_subscription_period", {
@@ -117,17 +117,17 @@ let $$P18 = createOptimistThunk((e, {
     }), 8e3));
   }).catch(t => handleErrorWithToast(t, e.dispatch));
 });
-let $$D13 = NC("PAYMENT_SHOW_ERROR");
-let $$k25 = NC("PAYMENT_SET_COMPANY_DETAILS");
-let $$M5 = NC("PAYMENT_SET_SUBMIT_PENDING");
-let $$F6 = NC("PAYMENT_SET_EDITOR_STATUS_CHANGES");
-let $$j8 = NC("PAYMENT_SET_NUM_FIGMA_EMAIL_TEAM_USERS");
-let $$U2 = NC("PAYMENT_SET_NUM_WHITEBOARD_EDITORS");
-let $$B22 = NC("PAYMENT_SET_NUM_EDITORS");
-let $$G7 = NC("PAYMENT_SET_BILLING_PERIOD");
-let $$V24 = NC("PAYMENT_SET_CAMPFIRE_SEATS");
-let $$H14 = NC("PAYMENT_INIT");
-let $$z10 = NC("PAYMENT_START_ORG_UPGRADE_FLOW");
+let $$D13 = createActionCreator("PAYMENT_SHOW_ERROR");
+let $$k25 = createActionCreator("PAYMENT_SET_COMPANY_DETAILS");
+let $$M5 = createActionCreator("PAYMENT_SET_SUBMIT_PENDING");
+let $$F6 = createActionCreator("PAYMENT_SET_EDITOR_STATUS_CHANGES");
+let $$j8 = createActionCreator("PAYMENT_SET_NUM_FIGMA_EMAIL_TEAM_USERS");
+let $$U2 = createActionCreator("PAYMENT_SET_NUM_WHITEBOARD_EDITORS");
+let $$B22 = createActionCreator("PAYMENT_SET_NUM_EDITORS");
+let $$G7 = createActionCreator("PAYMENT_SET_BILLING_PERIOD");
+let $$V24 = createActionCreator("PAYMENT_SET_CAMPFIRE_SEATS");
+let $$H14 = createActionCreator("PAYMENT_INIT");
+let $$z10 = createActionCreator("PAYMENT_START_ORG_UPGRADE_FLOW");
 let $$W3 = createOptimistThunk((e, t) => {
   let {
     openInNewTab,
@@ -162,7 +162,7 @@ let $$W3 = createOptimistThunk((e, t) => {
     currency: t.currency
   }));
 });
-let $$K23 = NC("PAYMENT_START_PRO_UPGRADE_FLOW");
+let $$K23 = createActionCreator("PAYMENT_START_PRO_UPGRADE_FLOW");
 let $$Y17 = createOptimistThunk((e, t) => {
   let {
     teamId,

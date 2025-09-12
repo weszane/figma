@@ -100,7 +100,7 @@ import { UpsellModalType } from "../905/165519";
 import { A as _$$A2 } from "../905/638715";
 import { A as _$$A3 } from "../905/389851";
 import { Ay as _$$Ay2 } from "@stylexjs/stylex";
-import { s as _$$s3 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { jN } from "../905/612685";
@@ -1791,7 +1791,7 @@ let no = {
             file: t,
             isDevHandoff: !0
           }), "_blank");
-        } else t(_$$s3.error(getI18nString("file_browser.file_browser_actions.file_copy_error")));
+        } else t(FlashActions.error(getI18nString("file_browser.file_browser_actions.file_copy_error")));
       } : null;
     }();
     let [o, l] = useState(!1);

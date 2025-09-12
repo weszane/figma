@@ -1,11 +1,11 @@
 import { reportError } from '../905/11';
 import { ServiceCategories as ServiceCategoriesExtensibility } from '../905/165054';
-import { oJ } from '../905/346794';
+import { waitForJoinStatus } from '../905/346794';
 import { n as createMemoized } from '../905/347702';
 import { debugState } from '../905/407919';
 import { getSingletonSceneGraph } from '../905/700578';
 import { getSceneGraphInstance } from '../905/830071';
-import { IL } from '../figma_app/582924';
+import { subscribeToContainingPage } from '../figma_app/582924';
 import { AutosaveEventType, IPagePlugin, Multiplayer, SchemaJoinStatus, DataLoadStatus } from '../figma_app/763686';
 
 /**
@@ -171,7 +171,7 @@ export function checkIncrementalUnsafeMember(allowUnsafe: boolean, oldApi: strin
  * (function: _)
  */
 function loadSceneGraph(nodeId: string): any {
-  const result = IL(nodeId, AutosaveEventType.PLUGIN, IPagePlugin.PLUGIN);
+  const result = subscribeToContainingPage(nodeId, AutosaveEventType.PLUGIN, IPagePlugin.PLUGIN);
   if (isSessionJoined() && getPluginConnectionState()) {
     Multiplayer.resolveSceneGraphQueryForTest(nodeId, IPagePlugin.PLUGIN);
   }
@@ -184,7 +184,7 @@ function loadSceneGraph(nodeId: string): any {
  */
 async function ensurePageLoaded(nodeId: string, tracker: DocumentAccessState): Promise<void> {
   if ((!isSessionJoined() || !getPluginConnectionState()) && (await Promise.race([(async () => {
-    await oJ(SchemaJoinStatus.JOINED);
+    await waitForJoinStatus(SchemaJoinStatus.JOINED);
     return false;
   })(), (async () => {
     await new Promise(resolve => setTimeout(resolve, 1000 * getTimeoutSeconds()));

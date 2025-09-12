@@ -13,7 +13,7 @@ import { w4 } from "../905/445814";
 import { P as _$$P } from "../905/347284";
 import { B as _$$B } from "../905/714743";
 import { handleAtomEvent } from "../905/502364";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Pf, H8 } from "../905/590952";
 import { $M, nb } from "../figma_app/770088";
@@ -295,7 +295,7 @@ export let $$eb0 = registerModal(function (e) {
         size: "any"
       });
     case "loaded":
-      t(_$$s.error(getI18nString("fig_feed.post_dne")));
+      t(FlashActions.error(getI18nString("fig_feed.post_dne")));
       t(hideModal());
       return null;
     default:

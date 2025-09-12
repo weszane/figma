@@ -1,10 +1,10 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { createOptimistThunk } from "../905/350402";
-let $$a2 = NC("PLUGIN_PUT_ALL");
-let $$s5 = NC("WIDGET_PUT_ALL");
-let $$o4 = NC("PLUGIN_DEL_ALL");
-let $$l0 = NC("WIDGET_DEL_ALL");
-let $$d3 = NC("MERGE_PUBLISHED_PLUGIN");
+let $$a2 = createActionCreator("PLUGIN_PUT_ALL");
+let $$s5 = createActionCreator("WIDGET_PUT_ALL");
+let $$o4 = createActionCreator("PLUGIN_DEL_ALL");
+let $$l0 = createActionCreator("WIDGET_DEL_ALL");
+let $$d3 = createActionCreator("MERGE_PUBLISHED_PLUGIN");
 let $$c1 = createOptimistThunk((e, t) => {
   if (!t.publishedPlugins) return;
   let i = (e.getState().user || {

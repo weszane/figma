@@ -13,7 +13,7 @@ import { Xm, gB, e1, tT } from "../905/723791";
 import { r as _$$r } from "../905/520829";
 import { serializeQuery } from "../905/634134";
 import { generateUUIDv4 } from "../905/871474";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { $ } from "../905/240853";
 import { hZ } from "../figma_app/996356";
@@ -87,7 +87,7 @@ export function $$k2({
           o(!0);
           a(!1);
         } catch (e) {
-          p(_$$s.error(getI18nString("org_user_actions.an_error_occurred_fetching_org_admins")));
+          p(FlashActions.error(getI18nString("org_user_actions.an_error_occurred_fetching_org_admins")));
           a(!1);
           o(!1);
           d(!0);
@@ -149,7 +149,7 @@ let F = async (e, t, r) => {
   } catch (t) {
     if (!(t instanceof M)) {
       let r = t.data?.status === 422 ? t.data?.message : t.message;
-      e(_$$s.error(r || getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
+      e(FlashActions.error(r || getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
     }
     return t;
   }
@@ -217,7 +217,7 @@ export function $$B6(e) {
   let g = u ?? d;
   let f = useMemo(() => g.data ? _$$t2(g.data, o) : [], [g.data, o]);
   useEffect(() => {
-    "errors" === g.status && t(_$$s.error(getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
+    "errors" === g.status && t(FlashActions.error(getI18nString("org_user_actions.an_error_occurred_fetching_org_users")));
   }, [t, g.status]);
   useEffect(() => {
     "loaded" === g.status && U(r, t, f);

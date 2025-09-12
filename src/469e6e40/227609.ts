@@ -104,7 +104,7 @@ import { S as _$$S } from "../469e6e40/679996";
 import { logError } from "../905/714362";
 import { Ex, zE } from "../figma_app/919079";
 import { CY } from "../figma_app/637027";
-import { s as _$$s3 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { V as _$$V } from "../905/223767";
 import { p as _$$p2 } from "../4452/321313";
 import { I as _$$I } from "../469e6e40/815692";
@@ -1191,9 +1191,9 @@ function tG(e) {
         userInitiated: !0
       }));
       let t = e ? getI18nString("admin_settings.ai.disable_success") : getI18nString("admin_settings.ai.enable_success");
-      r(_$$s3.flash(t));
+      r(FlashActions.flash(t));
     } catch {
-      r(_$$s3.error(getI18nString("file_browser.file_browser_actions.team_update_error")));
+      r(FlashActions.error(getI18nString("file_browser.file_browser_actions.team_update_error")));
     }
   };
   let v = async e => {
@@ -1206,9 +1206,9 @@ function tG(e) {
         team_id: team.id,
         enabled: e
       });
-      r(_$$s3.flash(getI18nString("admin_settings.ai.data_sharing.update_success")));
+      r(FlashActions.flash(getI18nString("admin_settings.ai.data_sharing.update_success")));
     } catch (e) {
-      r(_$$s3.error(getI18nString("admin_settings.ai.data_sharing.update_error")));
+      r(FlashActions.error(getI18nString("admin_settings.ai.data_sharing.update_error")));
     }
   };
   let j = getFeatureFlags().ai_ga;

@@ -6,7 +6,7 @@ import { _H } from "../figma_app/598111";
 import { reportError } from "../905/11";
 import { cn } from "../figma_app/141320";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { H as _$$H } from "../5885/54359";
@@ -51,12 +51,12 @@ let $$N0 = createOptimistThunk((e, t) => {
     team_id: teamId
   }).then(() => {
     onSuccess();
-    e.dispatch(_$$s.flash(getI18nString("flash.redeem_promo.success", {
+    e.dispatch(FlashActions.flash(getI18nString("flash.redeem_promo.success", {
       teamName
     })));
   }).catch(t => {
     onError();
-    e.dispatch(_$$s.error(getI18nString("flash.redeem_promo.failure")));
+    e.dispatch(FlashActions.error(getI18nString("flash.redeem_promo.failure")));
   });
 });
 let $$k1 = createOptimistThunk((e, t) => {
@@ -80,7 +80,7 @@ let $$k1 = createOptimistThunk((e, t) => {
       view: "team",
       teamId
     }));
-    e.dispatch(_$$s.flash(getI18nString("payments.pro_trial.start_pro_trial_success")));
+    e.dispatch(FlashActions.flash(getI18nString("payments.pro_trial.start_pro_trial_success")));
     R_.trackInitiationSubmit(surveyResult, !0);
   }).catch(t => {
     n ? e.dispatch(_l({
@@ -95,7 +95,7 @@ let $$k1 = createOptimistThunk((e, t) => {
     })) : e.dispatch(sf({
       view: "recentsAndSharing"
     }));
-    e.dispatch(_$$s.error(getI18nString("payments.pro_trial.start_pro_trial_error")));
+    e.dispatch(FlashActions.error(getI18nString("payments.pro_trial.start_pro_trial_error")));
     R_.trackInitiationSubmit(surveyResult, !1);
   });
 });
@@ -121,7 +121,7 @@ let $$D3 = createOptimistThunk((e, {
   });
   let B = getBillingCycleFromSubscriptionType(F.payment.billingPeriod);
   if (!B) {
-    e.dispatch(_$$s.error(getI18nString("payments.invalid_billing_interval_error")));
+    e.dispatch(FlashActions.error(getI18nString("payments.invalid_billing_interval_error")));
     return;
   }
   let G = null;
@@ -133,7 +133,7 @@ let $$D3 = createOptimistThunk((e, {
       q = VB(t) ?? null;
       G = F.payment.cartSelections?.countBySeatType ?? null;
     } else {
-      e.dispatch(_$$s.error(getI18nString("payments.errors.error_processing_upgrade_request")));
+      e.dispatch(FlashActions.error(getI18nString("payments.errors.error_processing_upgrade_request")));
       reportError(_$$e.MONETIZATION_UPGRADES, Error("Unable to retrieve valid selectedUserSeatTypes while submitting Pro upgrade request"), {
         extra: {
           teamId: h,
@@ -355,7 +355,7 @@ let $$D3 = createOptimistThunk((e, {
         token: null
       })), i(a, {}), e.dispatch(Qg({
         error: r
-      }))) : e.dispatch(_$$s.error(r)));
+      }))) : e.dispatch(FlashActions.error(r)));
     })(t, h);
   });
 });

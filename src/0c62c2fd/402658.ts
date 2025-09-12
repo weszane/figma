@@ -11,7 +11,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { getAtomMutate } from "../figma_app/566371";
 import { _ as _$$_, S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cm } from "../figma_app/544879";
 import { t as _$$t2 } from "../905/53773";
@@ -108,7 +108,7 @@ function E(e) {
     N({
       folderId: e.id
     }).catch(() => {
-      t(_$$s2.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
+      t(FlashActions.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
     });
     t(hideModal());
   };

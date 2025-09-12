@@ -2,7 +2,7 @@ import { atom, useSetAtom } from 'jotai';
 import n, { useEffect, useMemo } from 'react';
 import { reportError } from '../905/11';
 import { gi } from '../905/2848';
-import { NC } from '../905/17179';
+import { createActionCreator } from '../905/73481';
 import { Sc, VP } from '../905/18797';
 import { cI, Dl } from '../905/49792';
 import { qB } from '../905/63598';
@@ -34,7 +34,7 @@ import { s as _$$s2 } from '../905/506024';
 import { L as _$$L } from '../905/522457';
 import { e as _$$e3 } from '../905/545750';
 import { Nn, sj } from '../905/561897';
-import { s as _$$s } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { VisualBellIcon } from '../905/576487';
 import { a as _$$a } from '../905/586871';
 import { getFeatureFlags } from '../905/601108';
@@ -140,7 +140,7 @@ let $$eH49 = createOptimistThunk((e, t) => {
           let e = await $$eV38(item, targetUpsertScene);
           e && (callback?.(e.newSymbolOrStateGroupGuid), e.buffer && bufferCallback?.(e.buffer));
         } catch (t) {
-          e.dispatch(_$$s.error(getI18nString('banner.component_or_set_retrieval_error')));
+          e.dispatch(FlashActions.error(getI18nString('banner.component_or_set_retrieval_error')));
           reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
           errorCallback?.();
         }
@@ -155,7 +155,7 @@ let $$eH49 = createOptimistThunk((e, t) => {
     }
   }
 });
-let $$ez3 = NC('SWAP_TO_SHARED_COMPONENT_OR_STATE_GROUP');
+let $$ez3 = createActionCreator('SWAP_TO_SHARED_COMPONENT_OR_STATE_GROUP');
 let $$eW48 = createOptimistThunk((e, t) => {
   let {
     item,
@@ -201,7 +201,7 @@ let $$eW48 = createOptimistThunk((e, t) => {
       e.dispatch(of({
         key: l
       }));
-      e.dispatch(_$$s.error('An error occurred while adding an instance of this component.'));
+      e.dispatch(FlashActions.error('An error occurred while adding an instance of this component.'));
       reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
       _$$V(_.key, item, !1, !!e.getState().userFlags.apple_eula_accepted);
     }
@@ -232,7 +232,7 @@ function eK(e) {
     }));
   };
 }
-let $$eY0 = NC('INSERT_SHARED_COMPONENT');
+let $$eY0 = createActionCreator('INSERT_SHARED_COMPONENT');
 let $$e$8 = createOptimistThunk((e, t) => {
   e.dispatch($$eY0(t));
   let {
@@ -326,7 +326,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
         _$$V(f.key, t, !0, !!e.getState().userFlags.apple_eula_accepted);
         e.dispatch(tX());
       } catch (r) {
-        e.dispatch(_$$s.error('An error occurred while adding an instance of this component.'));
+        e.dispatch(FlashActions.error('An error occurred while adding an instance of this component.'));
         reportError(_$$e.DESIGN_SYSTEMS_EDITOR, r);
         _$$V(f.key, t, !1, !!e.getState().userFlags.apple_eula_accepted);
       }
@@ -380,7 +380,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
         });
         e.dispatch(tX());
       }).catch(n => {
-        e.dispatch(_$$s.error(n.message));
+        e.dispatch(FlashActions.error(n.message));
         reportError(_$$e.DESIGN_SYSTEMS_EDITOR, n);
         _$$V(f.key, item, !1, !!e.getState().userFlags.apple_eula_accepted, {
           metricName: 'design_systems.subscribed_component.insert_time',
@@ -397,7 +397,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
     source: jE.INSERT_SHARED_COMPONENT
   }));
 });
-let $$eX7 = NC('INSERT_SHARED_STATE_GROUP');
+let $$eX7 = createActionCreator('INSERT_SHARED_STATE_GROUP');
 let $$eq32 = createOptimistThunk(async (e, t) => {
   let {
     item
@@ -513,7 +513,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
         });
         e.dispatch(tX());
       }).catch(n => {
-        e.dispatch(_$$s.error(n.message));
+        e.dispatch(FlashActions.error(n.message));
         reportError(_$$e.DESIGN_SYSTEMS_EDITOR, n);
         _$$V(m.key, item, !1, !!e.getState().userFlags.apple_eula_accepted, {
           metricName: 'design_systems.subscribed_state_group.insert_time',
@@ -597,7 +597,7 @@ let $$eJ4 = createOptimistThunk(async (e, t) => {
       let e = await $$e010(item);
       b(e.localGUID, insertLogArgsOverride);
     } catch (t) {
-      e.dispatch(_$$s.error(t.message));
+      e.dispatch(FlashActions.error(t.message));
       errorCallback ? errorCallback(t) : reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
     } finally {
       shouldShowVisualBell && t();
@@ -678,7 +678,7 @@ let $$eQ39 = createOptimistThunk(async (e, t) => {
       let e = await _$$e3(item);
       m(e, insertLogArgsOverride);
     } catch (t) {
-      e.dispatch(_$$s.error(t.message));
+      e.dispatch(FlashActions.error(t.message));
       errorCallback ? errorCallback(t) : reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
     }
   }
@@ -739,7 +739,7 @@ let $$e22 = createOptimistThunk(async (e, t) => {
       });
       s.size > 0 && tV(e, Array.from(s), fileSubscribedLibraryKeys);
     } catch (t) {
-      e.dispatch(_$$s.error('An error occurred while updating the instances of this component.'));
+      e.dispatch(FlashActions.error('An error occurred while updating the instances of this component.'));
       reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
     }
   }
@@ -774,7 +774,7 @@ let $$e543 = createOptimistThunk(async (e, t) => {
       });
       s.size > 0 && tV(e, Array.from(s), fileSubscribedLibraryKeys);
     } catch (t) {
-      e.dispatch(_$$s.error('An error occurred while updating the instances of this component.'));
+      e.dispatch(FlashActions.error('An error occurred while updating the instances of this component.'));
       reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
     }
   }
@@ -889,7 +889,7 @@ let $$e841 = createOptimistThunk((e, t) => {
         }
         t.callback?.(a.localGUID, s, targetUpsertScene);
       } catch (r) {
-        e.dispatch(_$$s.error('An error occurred while applying the style to the selection.'));
+        e.dispatch(FlashActions.error('An error occurred while applying the style to the selection.'));
         reportError(_$$e.DESIGN_SYSTEMS_EDITOR, r);
         t.errorCallback?.();
       }
@@ -932,7 +932,7 @@ let $$e644 = createOptimistThunk(async (e, t) => {
       });
       s.size > 0 && tV(e, Array.from(s), fileSubscribedLibraryKeys);
     } catch (t) {
-      e.dispatch(_$$s.error('An error occurred while updating this style.'));
+      e.dispatch(FlashActions.error('An error occurred while updating this style.'));
       reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
     }
   }
@@ -960,7 +960,7 @@ let $$e718 = createOptimistThunk((e, t) => {
       styles: [updateAsset.id]
     });
   }).catch(t => {
-    e.dispatch(_$$s.error('An error occurred while updating this style.'));
+    e.dispatch(FlashActions.error('An error occurred while updating this style.'));
     reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
   });
 });
@@ -978,7 +978,7 @@ let $$e930 = createOptimistThunk((e, t) => {
     })).then(() => {
       fullscreenValue.triggerAction('commit');
     }).catch(t => {
-      e.dispatch(_$$s.error('An error occurred while updating this variable collection'));
+      e.dispatch(FlashActions.error('An error occurred while updating this variable collection'));
       reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
     });
   }
@@ -1002,7 +1002,7 @@ let $$te35 = createOptimistThunk((e, t) => {
   })).then(() => {
     fullscreenValue.triggerAction('commit');
   }).catch(t => {
-    e.dispatch(_$$s.error('An error occurred while updating this asset'));
+    e.dispatch(FlashActions.error('An error occurred while updating this asset'));
     reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
   });
 });
@@ -1055,7 +1055,7 @@ let $$tn25 = createOptimistThunk((e, t) => {
         let e = await $$tr36(item);
         e && (callback?.(item.node_id), bufferCallback?.(e.buffer));
       } catch (t) {
-        e.dispatch(_$$s.error('An error occurred while retrieving the variable.'));
+        e.dispatch(FlashActions.error('An error occurred while retrieving the variable.'));
         reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
         analyticsEventManager.trackDefinedEvent('variables.variable_load.error', {
           partnerType: _$$X(item.library_key)
@@ -1125,7 +1125,7 @@ let $$to21 = createOptimistThunk((e, t) => {
           let e = await ts(item);
           e && (callback?.(item.node_id), bufferCallback?.(e.buffer));
         } catch (t) {
-          e.dispatch(_$$s.error('An error occurred while retrieving the variable collection.'));
+          e.dispatch(FlashActions.error('An error occurred while retrieving the variable collection.'));
           reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
           errorCallback?.();
         }
@@ -1631,7 +1631,7 @@ export async function $$tB15(e) {
   } catch (e) {}
   return 0;
 }
-let $$tG17 = NC('ADD_ASSET_TO_RECENTS');
+let $$tG17 = createActionCreator('ADD_ASSET_TO_RECENTS');
 let tV = (e, t, r) => {
   let n = e.getState();
   let i = n.openFile?.key || null;

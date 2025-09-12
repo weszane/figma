@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { YO } from "../figma_app/672951";
 import { getAtomMutate } from "../figma_app/566371";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { o as _$$o } from "../figma_app/29593";
 import { U } from "../905/926550";
@@ -71,7 +71,7 @@ export function $$w1(e) {
           folderId: e.id,
           team: o
         }).catch(() => {
-          w(_$$s.error(getI18nString("file_browser.api_folder.error_when_restoring")));
+          w(FlashActions.error(getI18nString("file_browser.api_folder.error_when_restoring")));
         });
       },
       disabled: !L

@@ -1,5 +1,5 @@
 import { handleOptimistTransaction } from "../905/842794";
-import { Q as _$$Q } from "../905/573154";
+import { handlePromiseError } from "../905/573154";
 export function $$a0(e) {
   let {
     requestPromise,
@@ -8,7 +8,7 @@ export function $$a0(e) {
     next,
     action
   } = e;
-  store.dispatch(_$$Q({
+  store.dispatch(handlePromiseError({
     promise: requestPromise,
     fallbackError
   }));

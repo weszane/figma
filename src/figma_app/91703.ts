@@ -1,6 +1,6 @@
 import { AppStateTsApi, SelectionPaintHelpers, SaveConnectionIssues } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { GZ } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -24,14 +24,14 @@ import { M8 } from "../figma_app/915202";
 import { O } from "../905/833838";
 import { v as _$$v } from "../905/906499";
 import { createOptimistThunk } from "../905/350402";
-let $$w18 = NC("CLEAR_SELECTED_VIEW_COMMENT_ID");
-let $$O17 = NC("UPDATE_RECENTLY_USED_QUICK_COMMAND");
-let $$R13 = NC("RECENTLY_USED_QUICK_COMMANDS");
-let $$L48 = NC("FULLSCREEN_UPDATE_CANVAS_MENTION_POPUP_POSITION");
-let $$P8 = NC("FULLSCREEN_SET_CANVAS_MENTION_POPUP");
-let $$D44 = NC("FULLSCREEN_UPDATE_HYPERLINK_POPUP_POSITION");
-let $$k16 = NC("FULLSCREEN_SET_HYPERLINK_POPUP");
-let $$M5 = NC("FULLSCREEN_SET_EYEDROPPER");
+let $$w18 = createActionCreator("CLEAR_SELECTED_VIEW_COMMENT_ID");
+let $$O17 = createActionCreator("UPDATE_RECENTLY_USED_QUICK_COMMAND");
+let $$R13 = createActionCreator("RECENTLY_USED_QUICK_COMMANDS");
+let $$L48 = createActionCreator("FULLSCREEN_UPDATE_CANVAS_MENTION_POPUP_POSITION");
+let $$P8 = createActionCreator("FULLSCREEN_SET_CANVAS_MENTION_POPUP");
+let $$D44 = createActionCreator("FULLSCREEN_UPDATE_HYPERLINK_POPUP_POSITION");
+let $$k16 = createActionCreator("FULLSCREEN_SET_HYPERLINK_POPUP");
+let $$M5 = createActionCreator("FULLSCREEN_SET_EYEDROPPER");
 let $$F50 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.params || {};
@@ -40,13 +40,13 @@ let $$F50 = createOptimistThunk((e, t) => {
   } = r.selectedView;
   ds(t.name, fileKey ?? null, r, n);
 });
-let $$j4 = NC("FULLSCREEN_SET_LEFT_PANEL_TAB");
-let $$U7 = NC("FULLSCREEN_SHOW_FILE_CREATION_FAILURE_BANNER");
-let $$B2 = NC("FULLSCREEN_HIDE_UPGRADE_BANNER");
-let $$G40 = NC("FULLSCREEN_SHOW_UPGRADE_BANNER");
-let $$V20 = NC("FULLSCREEN_SET_PREFERRED_VALUES_PICKER_LIST_LAYOUT");
-let $$H36 = NC("FULLSCREEN_SET_INSTANCE_SWAP_PICKER_LIST_LAYOUT");
-let $$z9 = NC("FULLSCREEN_SET_PICKER_LIST_LAYOUT");
+let $$j4 = createActionCreator("FULLSCREEN_SET_LEFT_PANEL_TAB");
+let $$U7 = createActionCreator("FULLSCREEN_SHOW_FILE_CREATION_FAILURE_BANNER");
+let $$B2 = createActionCreator("FULLSCREEN_HIDE_UPGRADE_BANNER");
+let $$G40 = createActionCreator("FULLSCREEN_SHOW_UPGRADE_BANNER");
+let $$V20 = createActionCreator("FULLSCREEN_SET_PREFERRED_VALUES_PICKER_LIST_LAYOUT");
+let $$H36 = createActionCreator("FULLSCREEN_SET_INSTANCE_SWAP_PICKER_LIST_LAYOUT");
+let $$z9 = createActionCreator("FULLSCREEN_SET_PICKER_LIST_LAYOUT");
 let $$W28 = createOptimistThunk((e, t) => {
   trackEventAnalytics("Style Picker View Changed", {
     styleType: "FILL",
@@ -55,11 +55,11 @@ let $$W28 = createOptimistThunk((e, t) => {
   });
   e.dispatch($$z9(t));
 });
-let $$K11 = NC("FULLSCREEN_SHOULD_SHOW_STACK_ALIGNMENT_PICKER");
-let $$Y23 = NC("FULLSCREEN_HIDE_STYLE_PICKER");
-let $$$34 = NC("FULLSCREEN_SHOW_STYLE_PICKER");
-let $$X14 = NC("FULLSCREEN_HIDE_PICKER");
-let $$q3 = NC("FULLSCREEN_SHOW_PICKER");
+let $$K11 = createActionCreator("FULLSCREEN_SHOULD_SHOW_STACK_ALIGNMENT_PICKER");
+let $$Y23 = createActionCreator("FULLSCREEN_HIDE_STYLE_PICKER");
+let $$$34 = createActionCreator("FULLSCREEN_SHOW_STYLE_PICKER");
+let $$X14 = createActionCreator("FULLSCREEN_HIDE_PICKER");
+let $$q3 = createActionCreator("FULLSCREEN_SHOW_PICKER");
 export function $$J19(e) {
   return e && e.startsWith(F7);
 }
@@ -105,10 +105,10 @@ let $$et51 = createOptimistThunk((e, t) => {
   e.dispatch($$q3(t));
   Q(r, e.getState().pickerShown, e.dispatch);
 });
-let $$er0 = NC("FULLSCREEN_UPDATE_LOCAL_FONT_AGENT_VERSION");
-let $$en46 = NC("FULLSCREEN_UPDATE_FONT_LIST");
-let $$ei25 = NC("FULLSCREEN_STOP_RENAMING");
-let $$ea52 = NC("FULLSCREEN_BEGIN_RENAMING");
+let $$er0 = createActionCreator("FULLSCREEN_UPDATE_LOCAL_FONT_AGENT_VERSION");
+let $$en46 = createActionCreator("FULLSCREEN_UPDATE_FONT_LIST");
+let $$ei25 = createActionCreator("FULLSCREEN_STOP_RENAMING");
+let $$ea52 = createActionCreator("FULLSCREEN_BEGIN_RENAMING");
 let $$es24 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let i = t.newSelectedView;
@@ -138,35 +138,35 @@ let $$es24 = createOptimistThunk((e, t) => {
     }));
   }
 });
-let $$eo38 = NC("FULLSCREEN_UPDATE_SELECTED_STYLE_THUMBNAIL_URL");
-let $$el37 = NC("FULLSCREEN_UPDATE_SELECTED_STYLE_PROPERTIES");
-let $$ed47 = NC("FULLSCREEN_UPDATE_MIRROR");
-let $$ec41 = NC("FULLSCREEN_SET_NEEDS_UPGRADE");
-let $$eu27 = NC("FULLSCREEN_SET_FILE_VERSION");
-let $$ep29 = NC("FULLSCREEN_SET_PROGRESS_BAR_STATE");
-let $$e_31 = NC("FULLSCREEN_STOP_OBSERVING_OTHER_USER");
-let $$eh22 = NC("FULLSCREEN_UPDATE_MULTIPLAYER_STATE");
+let $$eo38 = createActionCreator("FULLSCREEN_UPDATE_SELECTED_STYLE_THUMBNAIL_URL");
+let $$el37 = createActionCreator("FULLSCREEN_UPDATE_SELECTED_STYLE_PROPERTIES");
+let $$ed47 = createActionCreator("FULLSCREEN_UPDATE_MIRROR");
+let $$ec41 = createActionCreator("FULLSCREEN_SET_NEEDS_UPGRADE");
+let $$eu27 = createActionCreator("FULLSCREEN_SET_FILE_VERSION");
+let $$ep29 = createActionCreator("FULLSCREEN_SET_PROGRESS_BAR_STATE");
+let $$e_31 = createActionCreator("FULLSCREEN_STOP_OBSERVING_OTHER_USER");
+let $$eh22 = createActionCreator("FULLSCREEN_UPDATE_MULTIPLAYER_STATE");
 let $$em6 = createOptimistThunk((e, t) => {
   void 0 !== t.allUsers && (k6(t.allUsers.length, t.presenterSessionID), handleAtomEvent({
     id: M8
   }));
   e.dispatch($$eh22(t));
 });
-let $$eg49 = NC("FULLSCREEN_SHOW_DOWNTIME_BANNER");
-let $$ef1 = NC("FULLSCREEN_HIDE_DOWNTIME_BANNER");
-let $$eE30 = NC("FULLSCREEN_HIDE_OPEN_DESKTOP_APP_MODAL");
-let $$ey32 = NC("FULLSCREEN_SHOW_OPEN_DESKTOP_APP_MODAL");
-let $$eb15 = NC("FULLSCREEN_RECONNECTING_SUCCEEDED");
+let $$eg49 = createActionCreator("FULLSCREEN_SHOW_DOWNTIME_BANNER");
+let $$ef1 = createActionCreator("FULLSCREEN_HIDE_DOWNTIME_BANNER");
+let $$eE30 = createActionCreator("FULLSCREEN_HIDE_OPEN_DESKTOP_APP_MODAL");
+let $$ey32 = createActionCreator("FULLSCREEN_SHOW_OPEN_DESKTOP_APP_MODAL");
+let $$eb15 = createActionCreator("FULLSCREEN_RECONNECTING_SUCCEEDED");
 let $$eT43 = createOptimistThunk(e => {
   Dg();
   e.dispatch($$eb15());
 });
-let $$eI53 = NC("FULLSCREEN_RECONNECTING_STARTED");
+let $$eI53 = createActionCreator("FULLSCREEN_RECONNECTING_STARTED");
 let $$eS45 = createOptimistThunk(e => {
   Ug();
   e.dispatch($$eI53());
 });
-let $$ev33 = NC("FULLSCREEN_ATTEMPT_CLOSE");
+let $$ev33 = createActionCreator("FULLSCREEN_ATTEMPT_CLOSE");
 let $$eA35 = createOptimistThunk((e, t) => {
   if (desktopAPIInstance) {
     t?.closeDesktopTabWithMessage ? (desktopAPIInstance.showFileBrowser(t.closeDesktopTabWithMessage), desktopAPIInstance.close({
@@ -212,10 +212,10 @@ let $$eA35 = createOptimistThunk((e, t) => {
   V();
   e.dispatch($$ev33(t));
 });
-let $$ex10 = NC("FILE_SELECTED_SHARE_MODAL_TAB");
-let $$eN21 = NC("UPDATE_OPEN_FILE");
-let $$eC12 = NC("NEW_FILE_LOADED");
-let $$ew39 = NC("FULLSCREEN_OPEN");
+let $$ex10 = createActionCreator("FILE_SELECTED_SHARE_MODAL_TAB");
+let $$eN21 = createActionCreator("UPDATE_OPEN_FILE");
+let $$eC12 = createActionCreator("NEW_FILE_LOADED");
+let $$ew39 = createActionCreator("FULLSCREEN_OPEN");
 export const Bs = $$er0;
 export const CN = $$ef1;
 export const D9 = $$B2;

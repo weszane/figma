@@ -1,9 +1,9 @@
-import { NC } from "../905/17179";
-let $$i4 = NC("LOADING_STATE_DEL");
-let $$a1 = NC("LOADING_STATE_PUT_FAILURE_REASON");
-let $$s2 = NC("LOADING_STATE_PUT_FAILURE");
-let $$o3 = NC("LOADING_STATE_PUT_SUCCESS");
-let $$l0 = NC("LOADING_STATE_PUT_LOADING");
+import { createActionCreator } from "../905/73481";
+let $$i4 = createActionCreator("LOADING_STATE_DEL");
+let $$a1 = createActionCreator("LOADING_STATE_PUT_FAILURE_REASON");
+let $$s2 = createActionCreator("LOADING_STATE_PUT_FAILURE");
+let $$o3 = createActionCreator("LOADING_STATE_PUT_SUCCESS");
+let $$l0 = createActionCreator("LOADING_STATE_PUT_LOADING");
 export const Cx = $$l0;
 export const SI = $$a1;
 export const of = $$s2;

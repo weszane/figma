@@ -1,5 +1,5 @@
 import { QD } from "../figma_app/153916";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { J7 } from "../figma_app/650409";
@@ -12,7 +12,7 @@ export let $$o0 = createOptimistThunk((e, t, {
     licenseQuantities: t.licenseQuantities,
     planInvoiceId: t.planInvoiceId,
     onRejected: t => {
-      e.dispatch(_$$s.error(t.data?.message || "An error occurred while locking your invoice.", 5e3));
+      e.dispatch(FlashActions.error(t.data?.message || "An error occurred while locking your invoice.", 5e3));
       console.error(t);
     }
   }).then(() => {

@@ -1,6 +1,6 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -52,7 +52,7 @@ let $$m0 = createOptimistThunk((e, {
       }));
     }
   }).catch(function (t) {
-    e.dispatch(_$$s.error(getI18nString("team_user.actions.team_members_request_to_upgrade_failed")));
+    e.dispatch(FlashActions.error(getI18nString("team_user.actions.team_members_request_to_upgrade_failed")));
     u?.();
   });
 });
@@ -76,13 +76,13 @@ let $$h1 = createOptimistThunk((e, {
     }));
   }, t => {
     console.error(t);
-    t && 403 !== t.status && e.dispatch(_$$s.error(getI18nString("team_user.actions.an_error_occurred_while_retrieving_fetching_the_list_of_users_on_this_team")));
+    t && 403 !== t.status && e.dispatch(FlashActions.error(getI18nString("team_user.actions.an_error_occurred_while_retrieving_fetching_the_list_of_users_on_this_team")));
   });
 }, ({
   teamId: e
 }) => `TEAM_USER_INITIALIZED_FOR_TEAM_${e}`);
-let $$g3 = NC("TEAM_USER_PUT");
-let $$f2 = NC("TEAM_USER_INITIAL_SET");
+let $$g3 = createActionCreator("TEAM_USER_PUT");
+let $$f2 = createActionCreator("TEAM_USER_INITIAL_SET");
 export const Nu = $$m0;
 export const Xw = $$h1;
 export const pE = $$f2;

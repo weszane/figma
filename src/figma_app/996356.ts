@@ -1,6 +1,6 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -71,17 +71,17 @@ let $$u0 = createOptimistThunk((e, t) => {
     e.dispatch($$_4({
       org_invite_id: idpUser.id
     }));
-    e.dispatch(_$$s.flash(getI18nString("org_invite.org_invite_deletion_success", {
+    e.dispatch(FlashActions.flash(getI18nString("org_invite.org_invite_deletion_success", {
       email: idpUser.email
     })));
   }).catch(t => {
     let r = t.data?.message || getI18nString("org_invite.org_invite_deletion_error");
-    e.dispatch(_$$s.flash(r));
+    e.dispatch(FlashActions.flash(r));
   });
 });
-let $$p3 = NC("IS_CREATING_ORG_INVITES");
-let $$_4 = NC("DELETE_ORG_INVITE");
-let $$h2 = NC("SET_ORG_INVITES");
+let $$p3 = createActionCreator("IS_CREATING_ORG_INVITES");
+let $$_4 = createActionCreator("DELETE_ORG_INVITE");
+let $$h2 = createActionCreator("SET_ORG_INVITES");
 export const Fb = $$u0;
 export const MB = $$c1;
 export const hZ = $$h2;

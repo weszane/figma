@@ -1,43 +1,43 @@
-import { ServiceCategories as _$$e } from "../905/165054";
-import { PluginModalType, Fullscreen, UIVisibilitySetting, ViewType, LayoutTabType, HandoffBindingsCpp, PanelType, AppStateTsApi, SceneGraphHelpers } from "../figma_app/763686";
-import { zeroSessionLocalIDString } from "../905/871411";
-import { getFeatureFlags } from "../905/601108";
-import { atom, atomStoreManager } from "../figma_app/27355";
-import { LRUCache } from "../905/196201";
-import { trackEventAnalytics } from "../905/449184";
-import { A as _$$A } from "../905/920142";
-import { debugState } from "../905/407919";
-import { fetchPaginatedData, PAGINATION_PREV } from "../figma_app/661371";
-import { reportError } from "../905/11";
-import { logError } from "../905/714362";
-import { generateUUIDv4 } from "../905/871474";
-import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
-import { _ as _$$_ } from "../905/170564";
-import { Q } from "../905/463586";
-import { VisualBellActions } from "../905/302958";
-import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
-import { Y6 } from "../figma_app/91703";
-import { VERSION_HISTORY_PAGE_LOADING, UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_LOADING, VERSION_HISTORY_APPEND, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_LINKED_VERSION, VERSION_HISTORY_COMPARE_CHANGES } from "../905/784363";
-import { getDiffVersion } from "../905/760074";
-import { replaceSelection } from "../figma_app/741237";
-import { FEditorType, mapEditorTypeToStringWithError } from "../figma_app/53721";
-import { NK } from "../figma_app/111825";
-import { lE } from "../905/218608";
-import { S as _$$S } from "../figma_app/787550";
-import { W } from "../905/985740";
-import { isFullscreenSitesView } from "../905/561485";
-import { s0 } from "../figma_app/115923";
-import { loadCanvasData } from "../905/815475";
-import { fullscreenValue } from "../figma_app/455680";
-import { W5 } from "../figma_app/582924";
-import { C as _$$C } from "../905/703182";
-import { M4 } from "../905/713695";
-import { U2 } from "../figma_app/193867";
-let $$B5 = "current_version";
+import { reportError } from '../905/11';
+import { ServiceCategories as _$$e } from '../905/165054';
+import { NotificationType } from '../905/170564';
+import { LRUCache } from '../905/196201';
+import { CompareViewType } from '../905/218608';
+import { VisualBellActions } from '../905/302958';
+import { createOptimistThunk } from '../905/350402';
+import { debugState } from '../905/407919';
+import { trackEventAnalytics } from '../905/449184';
+import { notificationActions } from '../905/463586';
+import { isFullscreenSitesView } from '../905/561485';
+import { FlashActions } from '../905/573154';
+import { getFeatureFlags } from '../905/601108';
+import { C as _$$C } from '../905/703182';
+import { M4 } from '../905/713695';
+import { logError } from '../905/714362';
+import { getDiffVersion } from '../905/760074';
+import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_APPEND, VERSION_HISTORY_COMPARE_CHANGES, VERSION_HISTORY_LOADING, VERSION_HISTORY_PAGE_LOADING, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_LINKED_VERSION } from '../905/784363';
+import { loadCanvasData } from '../905/815475';
+import { zeroSessionLocalIDString } from '../905/871411';
+import { generateUUIDv4 } from '../905/871474';
+import { XHR } from '../905/910117';
+import { A as _$$A } from '../905/920142';
+import { sf } from '../905/929976';
+import { W } from '../905/985740';
+import { atom, atomStoreManager } from '../figma_app/27355';
+import { FEditorType, mapEditorTypeToStringWithError } from '../figma_app/53721';
+import { Y6 } from '../figma_app/91703';
+import { NK } from '../figma_app/111825';
+import { s0 } from '../figma_app/115923';
+import { U2 } from '../figma_app/193867';
+import { fullscreenValue } from '../figma_app/455680';
+import { loadAllPagesAndTrack } from '../figma_app/582924';
+import { fetchPaginatedData, PAGINATION_PREV } from '../figma_app/661371';
+import { replaceSelection } from '../figma_app/741237';
+import { AppStateTsApi, Fullscreen, HandoffBindingsCpp, LayoutTabType, PanelType, PluginModalType, SceneGraphHelpers, UIVisibilitySetting, ViewType } from '../figma_app/763686';
+import { S as _$$S } from '../figma_app/787550';
+let $$B5 = 'current_version';
 let $$G2 = new LRUCache(40);
-let $$V14 = atom("");
+let $$V14 = atom('');
 let $$H12 = M4.Query({
   fetch: async e => {
     let t = e.fileKey;
@@ -46,16 +46,16 @@ let $$H12 = M4.Query({
     let n = await W.getPaginatedVersions({
       ...e,
       fileKey: t,
-      versionIds: e.versionIds?.join(",")
+      versionIds: e.versionIds?.join(',')
     });
     let i = performance.now() - r;
-    trackEventAnalytics("version_diffing_performance_metrics", {
-      name: "Lego versions fetched",
+    trackEventAnalytics('version_diffing_performance_metrics', {
+      name: 'Lego versions fetched',
       durationMs: i
     });
     return n.data.meta?.versions || [];
   },
-  key: "fileVersionsPaginated"
+  key: 'fileVersionsPaginated'
 });
 export function $$z10(e, t, r, n) {
   return `${e}-${t}-${r.id}-${n}`;
@@ -67,7 +67,7 @@ export function $$W8(e, t) {
   if (!n || !t) return null;
   let a = $$z10(n, t, e, NK(r.fileVersion));
   if ($$G2.has(a)) return $$G2.get(a);
-  let s = new Promise((r, s) => loadCanvasData(`${e.canvas_url}&nodes_to_extract=${i.join(",")}`).then(([i, s, o]) => {
+  let s = new Promise((r, s) => loadCanvasData(`${e.canvas_url}&nodes_to_extract=${i.join(',')}`).then(([i, s, o]) => {
     let l = $$z10(n, t, e, o);
     let d = Promise.resolve({
       canvas: i,
@@ -90,10 +90,10 @@ export function $$K18(e) {
 }
 let Y = async (e, t, r, n) => {
   let i = new URLSearchParams();
-  i.set("diff_version", getDiffVersion().toString());
-  i.set("from_file_version_id", t);
-  i.set("migration_version", `${r}`);
-  n && n.length > 0 && i.set("nodes_to_diff", n.join(","));
+  i.set('diff_version', getDiffVersion().toString());
+  i.set('from_file_version_id', t);
+  i.set('migration_version', `${r}`);
+  n && n.length > 0 && i.set('nodes_to_diff', n.join(','));
   let {
     data: {
       meta: {
@@ -108,11 +108,11 @@ let $ = async e => {
   let {
     data
   } = await XHR.crossOriginGetAny(e, null, {
-    responseType: "arraybuffer"
+    responseType: 'arraybuffer'
   });
   let n = new Date().getTime();
-  trackEventAnalytics("versioning_performance_metrics", {
-    name: "download_diff",
+  trackEventAnalytics('versioning_performance_metrics', {
+    name: 'download_diff',
     durationMs: n - t
   }, {
     forwardToDatadog: !0
@@ -120,23 +120,25 @@ let $ = async e => {
   return data;
 };
 export function $$X17(e) {
-  for (let t of e.versions) if (t.id === e.activeId) return t;
+  for (let t of e.versions) {
+    if (t.id === e.activeId) return t;
+  }
   if (e.linkedVersion && e.activeId === e.linkedVersion.id) return e.linkedVersion;
 }
 async function q(e, t, r) {
   let n = await Y(t.getState().openFile.key, e, t.getState().fileVersion, r);
-  if (!n.signed_url) return "Error viewing what's changed between file versions.";
+  if (!n.signed_url) return 'Error viewing what\'s changed between file versions.';
   let a = !!t.getState().openFile?.canEdit;
   let s = new Date().getTime();
-  let [o] = await Promise.all([$(n.signed_url), W5(PluginModalType.DEBUG_TOOL)]);
+  let [o] = await Promise.all([$(n.signed_url), loadAllPagesAndTrack(PluginModalType.DEBUG_TOOL)]);
   let l = new Date().getTime();
-  return (trackEventAnalytics("versioning_performance_metrics", {
-    name: "download_diff_and_load_pages",
+  return (trackEventAnalytics('versioning_performance_metrics', {
+    name: 'download_diff_and_load_pages',
     durationMs: l - s,
     isEditor: a
   }, {
     forwardToDatadog: !0
-  }), Fullscreen.loadHistoryChangesState(o)) ? "" : "Error loading HistoryChangesState into memory.";
+  }), Fullscreen.loadHistoryChangesState(o)) ? '' : 'Error loading HistoryChangesState into memory.';
 }
 export function $$J1(e, t) {
   if (e) return t.versions.find(t => t.id === e);
@@ -144,17 +146,19 @@ export function $$J1(e, t) {
 export async function $$Z13(e, t) {
   let r = Date.now();
   let n = $$J1(e, t.getState().versionHistory);
-  if (!n) return {
-    elapsedTime: Date.now() - r,
-    numPagesWithChanges: 0
-  };
+  if (!n) {
+    return {
+      elapsedTime: Date.now() - r,
+      numPagesWithChanges: 0
+    };
+  }
   let a = await q(n.id, t);
   let s = Date.now() - r;
   if (a) {
-    logError("version diffing", "error checking for visible changes", {
+    logError('version diffing', 'error checking for visible changes', {
       error: a
     });
-    return Error("Error checking for visible changes");
+    return new Error('Error checking for visible changes');
   }
   return {
     elapsedTime: s,
@@ -178,7 +182,7 @@ let $$Q11 = createOptimistThunk(async (e, t) => {
     o();
   };
   let d = a.user;
-  if (!getFeatureFlags().version_diffing || !getFeatureFlags().xr_debounce_threshold || !d || "fullscreen" !== a.selectedView.view || a.selectedView.editorType === FEditorType.Whiteboard || a.mirror.appModel.topLevelMode === ViewType.HISTORY || a.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMPARE_CHANGES) return l();
+  if (!getFeatureFlags().version_diffing || !getFeatureFlags().xr_debounce_threshold || !d || a.selectedView.view !== 'fullscreen' || a.selectedView.editorType === FEditorType.Whiteboard || a.mirror.appModel.topLevelMode === ViewType.HISTORY || a.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMPARE_CHANGES) return l();
   let {
     openFileKey
   } = t;
@@ -194,7 +198,7 @@ let $$Q11 = createOptimistThunk(async (e, t) => {
   let p = _$$A(r);
   let _ = _$$A(n);
   let h = p > _ ? p : _;
-  if (!h.isValid() || h < _$$A().subtract(7, "days")) return l();
+  if (!h.isValid() || h < _$$A().subtract(7, 'days')) return l();
   let m = W.getPaginatedVersions({
     fileKey: openFileKey,
     createdAtOrBefore: h.toISOString()
@@ -217,14 +221,14 @@ let $$Q11 = createOptimistThunk(async (e, t) => {
 let $$ee4 = createOptimistThunk(async (e, t) => {
   let r = e.getState();
   let n = r.user;
-  if (!getFeatureFlags().version_diffing || !n || "fullscreen" !== r.selectedView.view || r.selectedView.editorType === FEditorType.Whiteboard || r.mirror.appModel.topLevelMode === ViewType.HISTORY || r.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMPARE_CHANGES) return;
+  if (!getFeatureFlags().version_diffing || !n || r.selectedView.view !== 'fullscreen' || r.selectedView.editorType === FEditorType.Whiteboard || r.mirror.appModel.topLevelMode === ViewType.HISTORY || r.mirror.appModel.activeCanvasEditModeType === LayoutTabType.COMPARE_CHANGES) return;
   let {
     openFileKey
   } = t;
   let o = _$$A(t.versionHistory.lastEdited);
   let l = _$$A(t.versionHistory.lastViewed);
   let u = l > o ? l : o;
-  if (!u.isValid() || u < _$$A().subtract(7, "days")) return;
+  if (!u.isValid() || u < _$$A().subtract(7, 'days')) return;
   let p = Date.now();
   let _ = W.getPaginatedVersions({
     fileKey: openFileKey,
@@ -252,7 +256,7 @@ let $$ee4 = createOptimistThunk(async (e, t) => {
         latestVersion: r.id,
         latestCreatedAt: r.created_at
       };
-      trackEventAnalytics("Version Diffing Changed Since Last View", {
+      trackEventAnalytics('Version Diffing Changed Since Last View', {
         ...n,
         durationMs: Date.now() - p
       }, {
@@ -271,18 +275,18 @@ export function $$et15() {
   let r = $$X17(t);
   let n = t.fetchedPageIds || new Set();
   let i = e.getState().mirror.appModel.currentPage;
-  return r && r.id !== $$B5 ? en(r, e, n, i, zeroSessionLocalIDString) : Promise.reject("Version history inactive");
+  return r && r.id !== $$B5 ? en(r, e, n, i, zeroSessionLocalIDString) : Promise.reject('Version history inactive');
 }
 let er = null;
 function en(e, t, r, n, s, l) {
   return new Promise((d, c) => {
     let u = e.canvas_url;
-    u || c("Couldn't get canvas URL for version.");
+    u || c('Couldn\'t get canvas URL for version.');
     let p = s === zeroSessionLocalIDString;
     let _ = !p && r.size > 0;
     let h = s ?? n;
     let m = t.getState().mirror.appModel.currentPage;
-    "LOAD_NEW_VERSION" === l && m && !s && (h = m);
+    l === 'LOAD_NEW_VERSION' && m && !s && (h = m);
     let g = !t.getState().mirror.appModel.pagesList.every(e => r.has(e.nodeId)) && !r.has(h);
     if (!g) {
       t.dispatch(VERSION_HISTORY_PAGE_LOADING({
@@ -295,16 +299,16 @@ function en(e, t, r, n, s, l) {
     _$$C.markVersionHistoryLoadStart(f.fileKey, f.nodeId, l);
     let E = loadCanvasData(u).then(([e]) => {
       if (E === er) {
-        var a;
+        let a;
         er = null;
         let s = t.getState().selectedView.editorType;
         if ((a = t.getState().mirror.appModel.topLevelMode) === ViewType.HISTORY || a === ViewType.DEV_HANDOFF) {
           let a;
-          if (_) Fullscreen.applyFileToCurrentScene(e);else if (atomStoreManager.set($$V14, ""), !Fullscreen.loadFigFileForPreview(e)) return c("Error loading this version into memory.");
+          if (_) Fullscreen.applyFileToCurrentScene(e);else if (atomStoreManager.set($$V14, ''), !Fullscreen.loadFigFileForPreview(e)) return c('Error loading this version into memory.');
           _$$C.markVersionHistoryLoadEnd();
           let l = t.getState().selectedView.fileKey;
-          a = s === FEditorType.Whiteboard ? "figjam" : s === FEditorType.Design || s === FEditorType.Slides ? mapEditorTypeToStringWithError(s) : "unknown";
-          let u = t.getState().selectedView.devModeFocusId ? "focus_view" : "version_history";
+          a = s === FEditorType.Whiteboard ? 'figjam' : s === FEditorType.Design || s === FEditorType.Slides ? mapEditorTypeToStringWithError(s) : 'unknown';
+          let u = t.getState().selectedView.devModeFocusId ? 'focus_view' : 'version_history';
           _$$C.report(l, a, u);
           g && (p ? t.getState().mirror.appModel.pagesList.forEach(e => r.add(e.nodeId)) : r.add(h), t.dispatch(UPDATE_FETCHED_PAGE_IDS({
             fetchedPageIds: r
@@ -336,8 +340,8 @@ let ei = createOptimistThunk(async (e, t) => {
   } catch (e) {
     return;
   }
-  if (0 === n) {
-    trackEventAnalytics("Version Diffing Notification Skipped", {
+  if (n === 0) {
+    trackEventAnalytics('Version Diffing Notification Skipped', {
       ...t.trackingProps,
       pagesWithChanges: 0,
       durationMs: r
@@ -346,26 +350,26 @@ let ei = createOptimistThunk(async (e, t) => {
     });
     return;
   }
-  trackEventAnalytics("Version Diffing Notification Shown", {
+  trackEventAnalytics('Version Diffing Notification Shown', {
     ...t.trackingProps,
     pagesWithChanges: n,
     durationMs: r
   }, {
     forwardToDatadog: !0
   });
-  e.dispatch(Q.enqueueFront({
+  e.dispatch(notificationActions.enqueueFront({
     notification: {
-      type: _$$_.SEE_WHATS_CHANGED,
-      message: "See what's changed since the last time you viewed this file",
+      type: NotificationType.SEE_WHATS_CHANGED,
+      message: 'See what\'s changed since the last time you viewed this file',
       acceptCallback: () => {
-        trackEventAnalytics("Version Diffing Notification Opened", trackingProps);
+        trackEventAnalytics('Version Diffing Notification Opened', trackingProps);
         e.dispatch($$eo6());
         e.dispatch($$ep16({
           fromVersionId: lastSeenVersionId
         }));
       },
       dismissCallback: () => {
-        trackEventAnalytics("Version Diffing Notification Dismissed", trackingProps);
+        trackEventAnalytics('Version Diffing Notification Dismissed', trackingProps);
       }
     }
   }));
@@ -391,19 +395,19 @@ let es = createOptimistThunk(e => {
   }));
 });
 let $$eo6 = createOptimistThunk((e, t) => {
-  fullscreenValue.triggerAction("enter-history-mode");
-  fullscreenValue.triggerAction("deselect-all");
+  fullscreenValue.triggerAction('enter-history-mode');
+  fullscreenValue.triggerAction('deselect-all');
   e.dispatch(es());
   isFullscreenSitesView(e.getState().selectedView) && atomStoreManager.set(s0, PanelType.FILE);
   AppStateTsApi?.uiState().showPropertiesPanel.set(!0);
-  trackEventAnalytics("Toggle Version History", {
+  trackEventAnalytics('Toggle Version History', {
     source: t?.source || null
   });
 });
 let $$el0 = createOptimistThunk(e => {
   e.dispatch($$ed9());
   e.dispatch(VisualBellActions.dequeue({
-    matchType: "versions"
+    matchType: 'versions'
   }));
   Fullscreen.exitVersionHistoryMode(e.getState().openFile?.canEdit ?? !1);
 });
@@ -416,10 +420,10 @@ let $$ed9 = createOptimistThunk(e => {
   }));
   SceneGraphHelpers.clearSelection();
   e.dispatch(VisualBellActions.dequeue({
-    matchType: "comparing"
+    matchType: 'comparing'
   }));
   e.dispatch(VisualBellActions.dequeue({
-    matchType: "view_changes"
+    matchType: 'view_changes'
   }));
   e.dispatch(Y6({
     mode: UIVisibilitySetting.OFF
@@ -427,7 +431,7 @@ let $$ed9 = createOptimistThunk(e => {
 });
 let $$ec3 = createOptimistThunk(async (e, t) => {
   if (t.id === $$B5) {
-    atomStoreManager.set($$V14, "");
+    atomStoreManager.set($$V14, '');
     Fullscreen.loadFigFileForPreview(new Uint8Array());
     let r = e.getState();
     e.dispatch(sf({
@@ -456,9 +460,9 @@ let $$ec3 = createOptimistThunk(async (e, t) => {
   await en(a, e, new Set(), s, t.nodeId, l).catch(t => {
     if (d) {
       let e = `[${l}] Failed load version for preview in focus view: ${t}`;
-      reportError(_$$e.DEVELOPER_TOOLS, Error(`[LOAD_VERSION_FOR_PREVIEW] ${e}`));
+      reportError(_$$e.DEVELOPER_TOOLS, new Error(`[LOAD_VERSION_FOR_PREVIEW] ${e}`));
     }
-    e.dispatch(_$$s.error(t));
+    e.dispatch(FlashActions.error(t));
   });
 });
 let $$eu19 = createOptimistThunk((e, t) => {
@@ -470,8 +474,8 @@ let $$eu19 = createOptimistThunk((e, t) => {
     version: t.version
   }))).catch(t => {
     let r = `[${s}] Failed load fig file for preview: ${t}`;
-    reportError(_$$e.SCENEGRAPH_AND_SYNC, Error(`[VERSION_HISTORY_INCREMENTAL_LOAD] ${r}`));
-    e.dispatch(_$$s.error(t));
+    reportError(_$$e.SCENEGRAPH_AND_SYNC, new Error(`[VERSION_HISTORY_INCREMENTAL_LOAD] ${r}`));
+    e.dispatch(FlashActions.error(t));
   });
 });
 let $$ep16 = createOptimistThunk(async (e, t) => {
@@ -486,17 +490,17 @@ let $$ep16 = createOptimistThunk(async (e, t) => {
   let a = new Date().getTime();
   let o = await q(n.id, e);
   if (o) {
-    e.dispatch(_$$s.error(o));
+    e.dispatch(FlashActions.error(o));
     return;
   }
   let l = new Date().getTime();
   let c = e.getState().selectedView.editorType;
-  let u = lE[lE.COMPARE_CHANGES];
-  if (trackEventAnalytics("versioning_performance_metrics", {
-    name: "load_diff",
+  let u = CompareViewType[CompareViewType.COMPARE_CHANGES];
+  if (trackEventAnalytics('versioning_performance_metrics', {
+    name: 'load_diff',
     durationMs: l - a,
     fromCheckpointKey: n.checkpoint_key,
-    nodesToDiff: "all",
+    nodesToDiff: 'all',
     editorType: c,
     source: u
   }, {
@@ -504,16 +508,16 @@ let $$ep16 = createOptimistThunk(async (e, t) => {
   }), n.canvas_url) {
     let e = Fullscreen.getChangesToCompareFromHistoryChangesState();
     if (e.size > 0) {
-      let t = Array.from(e).join(",");
+      let t = Array.from(e).join(',');
       let r = `${n.canvas_url}&nodes_to_extract=${t}`;
       loadCanvasData(r).then(([e]) => {
         Fullscreen.loadPartialHistoryScene(e);
       });
     }
   }
-  let p = Fullscreen.startComparingChanges() ? "" : "Error starting history compare";
+  let p = Fullscreen.startComparingChanges() ? '' : 'Error starting history compare';
   if (p) {
-    e.dispatch(_$$s.error(p));
+    e.dispatch(FlashActions.error(p));
     return;
   }
   let _ = e.getState();
@@ -522,7 +526,7 @@ let $$ep16 = createOptimistThunk(async (e, t) => {
     compareVersionId: r,
     compareLatest: void 0
   }));
-  trackEventAnalytics("Version History Compare Start", {
+  trackEventAnalytics('Version History Compare Start', {
     fromVersionId: r
   });
   e.dispatch(VERSION_HISTORY_COMPARE_CHANGES(t));

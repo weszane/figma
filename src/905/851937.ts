@@ -43,7 +43,7 @@ import { z as _$$z } from "../905/751771";
 import { ls, a7 } from "../905/917898";
 import { R as _$$R } from "../figma_app/612938";
 import { y as _$$y } from "../905/916933";
-import { et as _$$et, wY, yp, XY, iu, mv, lM, qR, Kd, XF, Mt, nT } from "../905/753206";
+import { isGlobalPluginActive, handlePluginError, setResetGlobalPluginAPI, setGlobalPluginCloseFunc, pluginState, generateRandomID, setPluginData, setPluginTriggeredFrom, setFAtom, closeCurrentPlugin, setPluginCloseFunc, resetPluginState } from "../905/753206";
 import { localStorageRef } from "../905/657224";
 import { pS } from "../905/588985";
 let n;
@@ -423,16 +423,16 @@ export function $$ea2(e) {
   let i = canPerformAction(t) && canRunExtensions(t);
   let n = isE2ETraffic() || i;
   if (!n) {
-    if (_$$et()) {
-      wY().then(JX);
+    if (isGlobalPluginActive()) {
+      handlePluginError().then(JX);
       return;
     }
     JX();
     return;
   }
-  yp($$ea2);
+  setResetGlobalPluginAPI($$ea2);
   try {
-    if (_$$et()) return;
+    if (isGlobalPluginActive()) return;
     n && function (e) {
       let t = new NoOpVm();
       let i = [() => t.destroy(), () => JX, () => fullscreenValue.triggerAction("commit")];
@@ -460,7 +460,7 @@ export function $$ea2(e) {
         allowIncrementalUnsafeApiCalls: !0,
         enableResponsiveSetHierarchyMutations: !0
       });
-      XY(r);
+      setGlobalPluginCloseFunc(r);
     }(e);
   } catch (e) {
     isDevEnvironment() && "fullscreen" === t.selectedView.view && console.error(e);
@@ -470,13 +470,13 @@ export function $$es1({
   pluginID: e,
   widgetNodeID: t
 }) {
-  return hM() && void 0 !== iu.currentWidget && iu.currentWidget.pluginID === e && iu.currentWidget.widgetNodeID === t;
+  return hM() && void 0 !== pluginState.currentWidget && pluginState.currentWidget.pluginID === e && pluginState.currentWidget.widgetNodeID === t;
 }
 export let $$eo4 = _$$n(async e => {
-  let t = mv();
-  iu.currentPluginRunID = t;
+  let t = generateRandomID();
+  pluginState.currentPluginRunID = t;
   let i = new PluginApiMetrics();
-  iu.stats = i;
+  pluginState.stats = i;
   let n = e.plugin;
   trackEventAnalytics("Plugin Start Initiated", {
     pluginID: n.plugin_id,
@@ -513,10 +513,10 @@ export let $$eo4 = _$$n(async e => {
       atomStoreManager.set(Lk, _$$x.PLUGINS);
     }
     e.isWidget || e.ignoreForRunLastPlugin || C3(e);
-    lM(e.plugin);
-    qR(e.triggeredFrom);
+    setPluginData(e.plugin);
+    setPluginTriggeredFrom(e.triggeredFrom);
     "default" === e.runMode && isValidForCooper(e.triggeredFrom) && (e.runMode = "inspect");
-    Kd(e.runMode);
+    setFAtom(e.runMode);
     try {
       if (hasLocalFileId(e.plugin)) try {
         let n = await ed(e, i, e.plugin);
@@ -555,7 +555,7 @@ export let $$eo4 = _$$n(async e => {
           if (e = {
             ...e,
             id: forcePluginVersionId || e.id
-          }, iu.currentPluginRunID !== n) return;
+          }, pluginState.currentPluginRunID !== n) return;
           let _ = debugState.getState().selectedView.editorType;
           let y = {
             storeInRecentsKey: _$$B(_),
@@ -627,9 +627,9 @@ export let $$eo4 = _$$n(async e => {
         el(t, e.isWidget);
       }
     } finally {
-      lM(null);
-      qR(null);
-      Kd(null);
+      setPluginData(null);
+      setPluginTriggeredFrom(null);
+      setFAtom(null);
     }
   }
 });
@@ -771,7 +771,7 @@ export let $$eu3 = _$$n(({
   }));
 });
 export function $$ep5(e) {
-  if (iu.currentPluginRunID !== e.pluginRunID) return Promise.resolve();
+  if (pluginState.currentPluginRunID !== e.pluginRunID) return Promise.resolve();
   getPluginApiDebugCopy() && logger.debug("[Plugin API]", `Plugin run ${e.pluginRunID} started`, e);
   let t = e.stats;
   t.markTime("timeToRunPluginCodeStartMs");
@@ -781,29 +781,29 @@ export function $$ep5(e) {
   Tj(n);
   Yd();
   let r = new Promise(async (t, i) => {
-    if (await XF({
+    if (await closeCurrentPlugin({
       overriddenBy: e.triggeredFrom
     }), Nq() !== n) {
       t();
       return;
     }
     let r = () => (t(), Promise.resolve());
-    Mt(r);
+    setPluginCloseFunc(r);
     try {
       if (e.isWidget) {
         let {
           widgetNodeID
         } = JSON.parse(e.command);
-        iu.currentWidget = {
+        pluginState.currentWidget = {
           widgetNodeID,
           pluginID: e.pluginID
         };
-      } else iu.currentWidget = void 0;
+      } else pluginState.currentWidget = void 0;
     } catch {
-      iu.currentWidget = void 0;
+      pluginState.currentWidget = void 0;
     }
     try {
-      if (isInteractionPathCheck() && (await en("cppvm", e?.triggeredFrom)), desktopAPIInstance && hasSpecialCapability(e.permissions.permissions) && (iu.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (iu.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), Nq() !== n) {
+      if (isInteractionPathCheck() && (await en("cppvm", e?.triggeredFrom)), desktopAPIInstance && hasSpecialCapability(e.permissions.permissions) && (pluginState.setMediaEnabled = !0, e.permissions.trustedPluginOrigin && desktopAPIInstance && (pluginState.allowedPluginOrigin = e.permissions.trustedPluginOrigin, await desktopAPIInstance.addAllowedPluginOrigin(e.permissions.trustedPluginOrigin))), await delay(0), Nq() !== n) {
         t();
         return;
       }
@@ -816,7 +816,7 @@ export function $$ep5(e) {
         html: null
       });
       if (Nq() === n) {
-        Mt(closePlugin, {
+        setPluginCloseFunc(closePlugin, {
           ignorePreviousCloseFunc: r
         });
         r = closePlugin;
@@ -830,9 +830,9 @@ export function $$ep5(e) {
     } catch (e) {
       i(e);
     } finally {
-      n === Nq() && (Mt(null, {
+      n === Nq() && (setPluginCloseFunc(null, {
         ignorePreviousCloseFunc: r
-      }), nT());
+      }), resetPluginState());
     }
   }).catch(t => {
     if (e.noConsoleError || yA(t), e.showLaunchErrors) {

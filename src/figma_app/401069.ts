@@ -1,7 +1,7 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { debugState } from "../905/407919";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { createOptimistThunk } from "../905/350402";
 import { H3 } from "../figma_app/994725";
 import { Fr } from "../figma_app/314264";
@@ -23,7 +23,7 @@ let $$_6 = createOptimistThunk((e, t) => {
 let $$h2 = createOptimistThunk((e, t) => {
   u("fig_file_image_download");
 });
-let $$m0 = NC("GET_ACTIVITY_LOGS");
+let $$m0 = createActionCreator("GET_ACTIVITY_LOGS");
 let $$g1 = createOptimistThunk((e, t) => {
   let {
     newQuery,
@@ -73,12 +73,12 @@ let $$g1 = createOptimistThunk((e, t) => {
     });
   }).catch(t => {
     let r = t.data?.message || "An error occurred while fetching activity logs.";
-    e.dispatch(_$$s.flash(r));
+    e.dispatch(FlashActions.flash(r));
   });
   e.dispatch($$m0(t));
 });
-let $$f4 = NC("CLEAR_CURSOR_ACTIVITY_LOGS");
-let $$$$E5 = NC("SET_ACTIVITY_LOGS");
+let $$f4 = createActionCreator("CLEAR_CURSOR_ACTIVITY_LOGS");
+let $$$$E5 = createActionCreator("SET_ACTIVITY_LOGS");
 export const E = $$m0;
 export const Jt = $$g1;
 export const aK = $$h2;

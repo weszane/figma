@@ -24,7 +24,7 @@ import { Ex, zE } from "../figma_app/919079";
 import { P as _$$P } from "../905/347284";
 import { a as _$$a } from "../905/925868";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { s as _$$s3 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -1064,7 +1064,7 @@ function e0(e) {
       d(e.data.meta.activity_logs);
       l(!1);
     }).catch(e => {
-      t(_$$s3.error(e.data?.message || "An error occurred while fetching recent activity."));
+      t(FlashActions.error(e.data?.message || "An error occurred while fetching recent activity."));
       console.error("Unable to load recent activity", e);
     });
   }, [t, e.orgUser.id]), r) ? jsx(eN, {}) : o && 0 !== o.length ? jsxs("div", {

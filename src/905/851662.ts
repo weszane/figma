@@ -1,9 +1,19 @@
-import { NC } from "../905/17179";
-var $$n0;
-(e => {
-  e.enqueueFront = NC("NOTIFICATION_ENQUEUE_FRONT");
-  e.enqueue = NC("NOTIFICATION_ENQUEUE");
-  e.dequeue = NC("NOTIFICATION_DEQUEUE");
-  e.clearAll = NC("NOTIFICATIONS_CLEAR_ALL");
-})($$n0 || ($$n0 = {}));
-export const $ = $$n0;
+import { createActionCreator } from '../905/73481'
+
+/**
+ * Notification action creators grouped by domain.
+ * Original variable: $$n0
+ */
+export const notificationActions = {
+  /** Enqueue notification at the front */
+  enqueueFront: createActionCreator('NOTIFICATION_ENQUEUE_FRONT'),
+  /** Enqueue notification */
+  enqueue: createActionCreator('NOTIFICATION_ENQUEUE'),
+  /** Dequeue notification */
+  dequeue: createActionCreator('NOTIFICATION_DEQUEUE'),
+  /** Clear all notifications */
+  clearAll: createActionCreator('NOTIFICATIONS_CLEAR_ALL'),
+}
+
+// Refactored export name for clarity and maintainability
+export const $ = notificationActions

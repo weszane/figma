@@ -54,7 +54,7 @@ import { I7 } from "../figma_app/594947";
 import { _ as _$$_2, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
 import { A as _$$A4 } from "../5724/600086";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { A as _$$A5 } from "../1617/720259";
 import { NQ } from "../905/508367";
 import { H as _$$H } from "../905/202181";
@@ -1683,12 +1683,12 @@ function e2(e) {
           onClick: () => {
             _$$g("resend_code", e.auth.origin);
             _$$k2.resendCode().then(() => {
-              t(_$$s2.flash(getI18nString("auth.validate-code.code-resent-check-email")));
+              t(FlashActions.flash(getI18nString("auth.validate-code.code-resent-check-email")));
             }).catch(e => {
               let i = e.data;
               let n = resolveMessage(e, i?.message || getI18nString("auth.validate-code.code-resend-error"));
               "invalid_session" === i.reason && customHistory.redirect("/");
-              t(_$$s2.error(n));
+              t(FlashActions.error(n));
             });
           },
           children: getI18nString("auth.validate-code.resend-button")
@@ -1853,7 +1853,7 @@ function te() {
   let b = e => 7 === e.length && /^\d+$/.test(e);
   let v = async i => {
     if (i.preventDefault(), !b(p)) {
-      e(_$$s2.error(getI18nString("auth.error.wrong_code")));
+      e(FlashActions.error(getI18nString("auth.error.wrong_code")));
       return;
     }
     f(!0);
@@ -1865,8 +1865,8 @@ function te() {
     } catch (t) {
       if (t?.data?.i18n?.id) {
         let i = getI18nStringAlias(t.data.i18n.id, t.data.i18n.params || {});
-        e(_$$s2.error(i));
-      } else e(_$$s2.error(getI18nString("auth.default-error")));
+        e(FlashActions.error(i));
+      } else e(FlashActions.error(getI18nString("auth.default-error")));
       f(!1);
       return;
     }
@@ -2037,10 +2037,10 @@ function ts() {
     _$$H.sendValidationEmail().then(t => {
       _$$g("send_validation_email_success", s);
       let i = resolveMessage(t);
-      if (i) return e(_$$s2.flash(i));
+      if (i) return e(FlashActions.flash(i));
     }).catch(t => {
       let i = resolveMessage(t, getI18nString("auth.sign-up.confirmation-email-error"));
-      return e(_$$s2.error(i));
+      return e(FlashActions.error(i));
     });
     e(kL());
   }, [e, s]);

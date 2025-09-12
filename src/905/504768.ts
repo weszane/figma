@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { Pq, _Z, Rc, l5, vj } from "../figma_app/819288";
 import { WB } from "../905/761735";
@@ -19,7 +19,7 @@ let h = new class {
     }) => await e.get("/api/feed_bell_states"));
   }
 }();
-let $$g7 = NC("REFRESH_FEED");
+let $$g7 = createActionCreator("REFRESH_FEED");
 let $$f5 = createOptimistThunk((e, t, {
   loadingKey: i
 }) => {
@@ -32,8 +32,8 @@ let $$f5 = createOptimistThunk((e, t, {
     }));
   });
 });
-let $$_11 = NC("TEAM_FEED_SET_BELL_STATE");
-let $$A10 = NC("TEAM_FEED_SET_INITIAL_BELL_STATES");
+let $$_11 = createActionCreator("TEAM_FEED_SET_BELL_STATE");
+let $$A10 = createActionCreator("TEAM_FEED_SET_INITIAL_BELL_STATES");
 let $$y3 = createOptimistThunk((e, t) => {
   let i = e.getState().user;
   let n = WB();

@@ -1,7 +1,7 @@
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { s as _$$s, Q } from "../905/573154";
+import { FlashActions, handlePromiseError } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -340,7 +340,7 @@ let $$M3 = createOptimistThunk((e, {
           }
         }));
       }
-    } else e.dispatch(_$$s.error(n.message));
+    } else e.dispatch(FlashActions.error(n.message));
     for (let t of N) e.dispatch(yH({
       role: k[t]
     }));
@@ -370,7 +370,7 @@ let j = (e, t, i) => {
 export function $$U0(e, t, i, n, r, a) {
   let l = e.reduce((e, t) => (t.type && (e[t.type] = e[t.type] || [], e[t.type].push(t)), e), Object.create(null));
   let d = Object.keys(l).length > 0;
-  l.no_self_invite?.length > 0 && n(_$$s.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")));
+  l.no_self_invite?.length > 0 && n(FlashActions.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")));
   l.user_requires_approval?.length > 0 && a && (n(showModalHandler({
     type: R,
     data: {
@@ -454,9 +454,9 @@ let $$V2 = createOptimistThunk((e, {
     resource_type: t.resource_type,
     resource_id_or_key: t.resource_id_or_key
   }).then(() => {
-    e.dispatch(_$$s.flash("Invite email sent again!"));
+    e.dispatch(FlashActions.flash("Invite email sent again!"));
   });
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: i,
     fallbackError: "Failed to resend invite emails."
   }));

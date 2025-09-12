@@ -6,7 +6,7 @@ import { s4 } from "../figma_app/276332";
 import { getFeatureFlags } from "../905/601108";
 import { waitForAnimationFrame } from "../905/236856";
 import c from "../vendor/223926";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { sendHistogram, sendMetric } from "../905/485103";
 import { PerfTimer } from "../905/609396";
@@ -15,8 +15,8 @@ import { reportError } from "../905/11";
 import { logError, logWarning } from "../905/714362";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
-import { _ as _$$_ } from "../905/170564";
-import { Q } from "../905/463586";
+import { NotificationType } from "../905/170564";
+import { notificationActions } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
@@ -41,13 +41,13 @@ import { I6, fn, p$ } from "../905/831303";
 import { jO, cc, UN, tZ } from "../905/573265";
 import { Nf } from "../figma_app/864378";
 var u = c;
-let $$K1 = NC("START_PUBLISH");
-let $$Y5 = NC("PUBLISH_PROGRESS");
-let $$$3 = NC("PUBLISH_REQUEST_FINISHED");
-let $$X0 = NC("SAVE_PUBLISH_DESCRIPTION");
+let $$K1 = createActionCreator("START_PUBLISH");
+let $$Y5 = createActionCreator("PUBLISH_PROGRESS");
+let $$$3 = createActionCreator("PUBLISH_REQUEST_FINISHED");
+let $$X0 = createActionCreator("SAVE_PUBLISH_DESCRIPTION");
 let $$q2 = createOptimistThunk(e => {
-  e.dispatch(Q.dequeue({
-    type: _$$_.MOVE_COMPONENTS_PROMPT
+  e.dispatch(notificationActions.dequeue({
+    type: NotificationType.MOVE_COMPONENTS_PROMPT
   }));
   handleAtomEvent({
     id: "Finished publishing components"

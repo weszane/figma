@@ -1,5 +1,5 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { createOptimistAction } from "../905/350402";
 import { yJ } from "../905/584989";
@@ -42,7 +42,7 @@ export let $$c0 = createOptimistAction("TEAM_USER_UPDATE_SEAT_TYPE", async (e, {
     c?.();
   }).catch(function (t) {
     e.dispatch(createOptimistRevertAction(p));
-    e.dispatch(_$$s.error(function (e) {
+    e.dispatch(FlashActions.error(function (e) {
       let {
         reason
       } = e;

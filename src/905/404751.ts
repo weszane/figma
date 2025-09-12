@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { getResourceDataOrFallback } from "../905/663269";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { reportError } from "../905/11";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { v as _$$v } from "../905/556792";
@@ -236,7 +236,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     let n = g.figFilePublishedAsHubFile[i.key] || null;
     let r = n && g.hubFiles[n] || null;
     if (r?.publisher.entity_type === o1.TEAM) {
-      e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.cant_move_published_file", {
+      e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.cant_move_published_file", {
         fileName: i.name,
         teamName: r.publisher.name
       })));
@@ -264,7 +264,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
         let t = r ? getI18nString("file_browser.file_browser_actions.remove_files_from_project_permission", {
           projectName: r.name
         }) : getI18nString("file_browser.file_browser_actions.remove_files_from_this_project_permission");
-        e.dispatch(_$$s.error(t));
+        e.dispatch(FlashActions.error(t));
         return;
       }
       T || (T = r);
@@ -348,7 +348,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
           return;
         }
         if (!C) {
-          e.dispatch(_$$s.error(t.data?.message || getI18nString("file_browser.file_browser_actions.file_processing_error")));
+          e.dispatch(FlashActions.error(t.data?.message || getI18nString("file_browser.file_browser_actions.file_processing_error")));
           return;
         }
       }

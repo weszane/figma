@@ -135,7 +135,7 @@ import { Ao } from '../905/748636';
 import { G as _$$G } from '../905/750789';
 import { tH as _$$tH, H4 } from '../905/751457';
 import { c as _$$c2 } from '../905/752260';
-import { iu as _$$iu, mv, wY } from '../905/753206';
+import { pluginState, generateRandomID, handlePluginError } from '../905/753206';
 import { x as _$$x3 } from '../905/773818';
 import { A as _$$A6 } from '../905/780920';
 import { OZ as _$$OZ } from '../905/783179';
@@ -759,7 +759,7 @@ async function ty(e, t) {
   let r = getSelectedView();
   if (!r) throw new Error('Cannot run plugin while logged out');
   if (!i) throw new Error('No file key found');
-  await wY();
+  await handlePluginError();
   let n = `
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -772,8 +772,8 @@ async function ty(e, t) {
     <div id="root"></div>
     `;
   let a = t ? injectHtmlOrUiFiles(e, n) : e;
-  let s = mv();
-  _$$iu.currentPluginRunID = s;
+  let s = generateRandomID();
+  pluginState.currentPluginRunID = s;
   E9({
     allowedDomains: gH,
     apiVersion: pS,

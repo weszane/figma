@@ -1,7 +1,7 @@
 import { then } from "../1a115cee/344566";
 import { UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { N7 } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -170,7 +170,7 @@ let V = createOptimistThunk((e, t) => {
     progressBarMode: r
   }));
 });
-let $$G3 = NC("FULLSCREEN_NEW_FILE_OPEN");
+let $$G3 = createActionCreator("FULLSCREEN_NEW_FILE_OPEN");
 export const zE = $$j0;
 export const NA = $$B1;
 export const uM = $$U2;

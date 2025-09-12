@@ -38,7 +38,7 @@ import { showModal, showModalHandler, hideModalHandler, hideModal, hideSpecificM
 import { Ph } from '../905/160095';
 import { F as _$$F3 } from '../905/162860';
 import { ServiceCategories as _$$e } from '../905/165054';
-import { _ as _$$_ } from '../905/170564';
+import { NotificationType } from '../905/170564';
 import { d as _$$d3 } from '../905/189168';
 import { scopeAwareFunction as _$$nc, permissionScopeHandler } from '../905/189185';
 import { t as _$$t3 } from '../905/192333';
@@ -90,7 +90,7 @@ import { s as _$$s8 } from '../905/445054';
 import { trackEventAnalytics } from '../905/449184';
 import { CM, xL, Yv } from '../905/459248';
 import { QC } from '../905/461516';
-import { Q as _$$Q } from '../905/463586';
+import { notificationActions } from '../905/463586';
 import { Sh } from '../905/470286';
 import { MZ } from '../905/470594';
 import { createPluginInstance } from '../905/472793';
@@ -127,7 +127,7 @@ import { isSitesFeatureEnabled } from '../905/561485';
 import { decodeBase64, encodeBase64 } from '../905/561685';
 import { j as _$$j } from '../905/564614';
 import { dequeuePluginStatus } from '../905/571565';
-import { s as _$$s } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { m as _$$m } from '../905/575846';
 import { VisualBellIcon } from '../905/576487';
 import { l as _$$l2, q as _$$q } from '../905/578831';
@@ -175,7 +175,7 @@ import { l as _$$l4 } from '../905/745972';
 import { Ao } from '../905/748636';
 import { x as _$$x } from '../905/749159';
 import { y as _$$y5 } from '../905/749689';
-import { iu as _$$iu, wY as _$$wY, mv } from '../905/753206';
+import { pluginState, handlePluginError, generateRandomID } from '../905/753206';
 import { L6 } from '../905/755627';
 import { Z as _$$Z } from '../905/757420';
 import { d as _$$d2, X as _$$X2 } from '../905/758967';
@@ -368,7 +368,7 @@ import { Kt } from '../figma_app/562352';
 import { be, k6 } from '../figma_app/565197';
 import { O as _$$O } from '../figma_app/568977';
 import { wy } from '../figma_app/578011';
-import { Ak, IL, PV, Xk } from '../figma_app/582924';
+import { getNextSessionId, subscribeToContainingPage, resolveSessionPromise, rejectAllSessionPromises } from '../figma_app/582924';
 import { d1 as _$$d, xi as _$$xi } from '../figma_app/603466';
 import { Lk as _$$Lk, dd } from '../figma_app/604494';
 import { nd as _$$nd } from '../figma_app/612001';
@@ -3462,13 +3462,13 @@ function sP(e) {
       _$$o();
     }
     getNextQueryRequestId() {
-      return Ak();
+      return getNextSessionId();
     }
     afterQueryCompleted(e) {
-      PV(e);
+      resolveSessionPromise(e);
     }
     rejectAllSceneGraphQueries() {
-      Xk();
+      rejectAllSessionPromises();
     }
     onNodePositionChanged(e, t) {
       Om(e, t);
@@ -4468,8 +4468,8 @@ async function lO({
   } = debugState.getState();
   let s = getSelectedView();
   if (!s) throw new Error('Cannot run widget while logged out');
-  let o = mv();
-  _$$iu.currentPluginRunID = o;
+  let o = generateRandomID();
+  pluginState.currentPluginRunID = o;
   try {
     await E9({
       allowedDomains: gH,
@@ -4504,7 +4504,7 @@ async function lO({
       enableResponsiveSetHierarchyMutations: !1
     });
   } finally {
-    _$$iu.currentPluginRunID = null;
+    pluginState.currentPluginRunID = null;
   }
 }
 let lD = 'localWidgetCode';
@@ -4538,8 +4538,8 @@ async function lF(e, {
   pluginVersionID: i
 }) {
   try {
-    let n = mv();
-    _$$iu.currentPluginRunID = n;
+    let n = generateRandomID();
+    pluginState.currentPluginRunID = n;
     let {
       manifest,
       code
@@ -4586,7 +4586,7 @@ async function lF(e, {
     let e = t && t.message || getI18nString('widgets.an_error_occurred_while_running_this_widget');
     showVisualBell(e);
   } finally {
-    _$$iu.currentPluginRunID = null;
+    pluginState.currentPluginRunID = null;
   }
 }
 getFeatureFlags().widgets_multiplayer_local && (window.saveWidgetCodeOnSelectedNode = () => {
@@ -4977,7 +4977,7 @@ class lV {
     mK({
       pluginID: e,
       widgetNodeID: t
-    }) && _$$wY();
+    }) && handlePluginError();
   }
   clickHyperlink(e) {
     customHistory.postRedirect(`/exit?url=${encodeURIComponent(e)}`, '_blank');
@@ -5492,7 +5492,7 @@ let lX = class e extends sP(sN(sR)) {
         mirror.appModel.showUi && (this.dispatch(_$$oB()), Jf(this._state.dropdownShown) && jD(this.dispatch, this._state.dropdownShown, {
           forceClose: t === 'toolbar'
         }));
-        selectedView.view === 'fullscreen' && selectedView.editorType === FEditorType.DevHandoff && _$$wY();
+        selectedView.view === 'fullscreen' && selectedView.editorType === FEditorType.DevHandoff && handlePluginError();
       }
     };
     this.getLatestPublishedVersionHashForComponent = (e, t) => {
@@ -5821,7 +5821,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   toggleInteractionRecorderVisibility() {
     if (isInteractionPathCheck()) {
-      this.dispatch(_$$s.error('The interaction recorder is not supported on /test/interactions'));
+      this.dispatch(FlashActions.error('The interaction recorder is not supported on /test/interactions'));
       return;
     }
     isRecordingEnabled() && (this._store.getState().interactionTestDialogShown ? this.dispatch(_$$l2()) : this.dispatch(_$$q()));
@@ -6574,8 +6574,8 @@ let lX = class e extends sP(sN(sR)) {
     let r = e.symbolToStateGroup;
     let a = e.movableStyles;
     let s = Object.keys(a).length;
-    !(!(s || Object.keys(i).length || Object.keys(n).length) || !t || isBranchAlt(t)) && (s || hasTeamPaidAccess(t.teamId ? this._state.teams[t.teamId] : void 0)) && (this.dispatch(_$$Q.dequeue({
-      type: _$$_.MOVE_COMPONENTS_PROMPT
+    !(!(s || Object.keys(i).length || Object.keys(n).length) || !t || isBranchAlt(t)) && (s || hasTeamPaidAccess(t.teamId ? this._state.teams[t.teamId] : void 0)) && (this.dispatch(notificationActions.dequeue({
+      type: NotificationType.MOVE_COMPONENTS_PROMPT
     })), XHR.post('/api/design_systems/move_validity', {
       style_moves: a,
       component_moves: i,
@@ -6592,9 +6592,9 @@ let lX = class e extends sP(sN(sR)) {
         let t = r[e];
         t ? n.add(t) : n.add(e);
       }
-      this.dispatch(_$$Q.enqueueFront({
+      this.dispatch(notificationActions.enqueueFront({
         notification: {
-          type: _$$_.MOVE_COMPONENTS_PROMPT,
+          type: NotificationType.MOVE_COMPONENTS_PROMPT,
           message: s ? getI18nString('design_systems.updates.to_move_pasted_styles_to_this_file_publish_a_library_update') : getI18nString('design_systems.updates.to_move_pasted_components_to_this_file_publish_a_library_update'),
           acceptCallback: () => {
             this.dispatch(showModalHandler({
@@ -7619,7 +7619,7 @@ let lX = class e extends sP(sN(sR)) {
           _$$lH2(e.appModel.pagesList) ? (o = {
             type: _$$F3.NOT_LOADED,
             text: getI18nString('bindings.hyperlink_popup_link_to_unloaded_from_in_this_file')
-          }, IL(nodeIdInThisFile, AutosaveEventType.HYPERLINK_PRELOAD)) : o = {
+          }, subscribeToContainingPage(nodeIdInThisFile, AutosaveEventType.HYPERLINK_PRELOAD)) : o = {
             type: _$$F3.MISSING,
             text: getI18nString('bindings.hyperlink_popup_link_to_deleted_object')
           };

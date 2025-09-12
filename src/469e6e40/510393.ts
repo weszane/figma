@@ -7,7 +7,7 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { xf } from "../figma_app/416935";
 import { ks } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
@@ -77,12 +77,12 @@ let $$w0 = registerModal(function (e) {
               type: "submit",
               onClick: () => {
                 if (e.isOrg && C()) {
-                  k(_$$s2.error(getI18nString("payments.invalid_billing_contact_error"), 5e3));
+                  k(FlashActions.error(getI18nString("payments.invalid_billing_contact_error"), 5e3));
                   return;
                 }
                 let t = e.isOrg ? E() : a;
                 if (!t) {
-                  k(_$$s2.error(getI18nString("payments.missing_billing_contact_error"), 5e3));
+                  k(FlashActions.error(getI18nString("payments.missing_billing_contact_error"), 5e3));
                   return;
                 }
                 e.onSubmit(t).then(e.onClose).catch(e => {

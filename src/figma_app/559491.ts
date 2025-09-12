@@ -1,12 +1,12 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { qW } from "../905/623179";
 import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -31,7 +31,7 @@ import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 import { MZ } from "../905/470594";
 import { UM, Jr } from "../figma_app/940844";
-let $$M6 = NC("PLUGIN_REPLACE_FEATURED");
+let $$M6 = createActionCreator("PLUGIN_REPLACE_FEATURED");
 let $$F29 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
@@ -113,8 +113,8 @@ let $$G32 = createOptimistThunk(async (e, {
     src: "getPublishedResource"
   }));
 });
-let $$V20 = NC("UPDATE_PUBLISHED_CANVAS_WIDGET_VERSIONS");
-let $$H33 = NC("UPDATE_FETCHED_CANVAS_WIDGET_VERSIONS");
+let $$V20 = createActionCreator("UPDATE_PUBLISHED_CANVAS_WIDGET_VERSIONS");
+let $$H33 = createActionCreator("UPDATE_FETCHED_CANVAS_WIDGET_VERSIONS");
 export async function $$z0(e, t, r) {
   let n = await $$W13({
     [e]: [t]
@@ -279,7 +279,7 @@ let $$J14 = createOptimistThunk(async (e, t, {
     }));
     return i;
   } catch (t) {
-    _$$s.flash(t.message || getI18nString("community.actions.an_error_occurred_while_trying_to_fetch_the_org_widgets_list"));
+    FlashActions.flash(t.message || getI18nString("community.actions.an_error_occurred_while_trying_to_fetch_the_org_widgets_list"));
     e.dispatch(of({
       key: r
     }));

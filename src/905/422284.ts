@@ -22,8 +22,8 @@ import { PI } from "../905/977218";
 import { yJ } from "../figma_app/240735";
 import { Xg } from "../figma_app/199513";
 import { fullscreenValue, fullscreenPromise } from "../figma_app/455680";
-import { IL } from "../figma_app/582924";
-import { oJ } from "../905/346794";
+import { subscribeToContainingPage } from "../figma_app/582924";
+import { waitForJoinStatus } from "../905/346794";
 import { Lp } from "../905/309846";
 import { QO, VO } from "../figma_app/646357";
 import { xN } from "../905/672897";
@@ -137,8 +137,8 @@ let $$H = createOptimistThunk((e, t, {
     if (null != Z ? q(Z) : null != $ && "fullscreen" === H.view && (async () => {
       await fullscreenPromise;
       await fullscreenValue.onReady();
-      await oJ(SchemaJoinStatus.JOINED);
-      await IL($, AutosaveEventType.PAGE_INITIAL_LOAD);
+      await waitForJoinStatus(SchemaJoinStatus.JOINED);
+      await subscribeToContainingPage($, AutosaveEventType.PAGE_INITIAL_LOAD);
       getSingletonSceneGraph().setCurrentPageFromNodeAsync($);
       let e = $ ? f.mirror.sceneGraph.get($) : null;
       e && q(e);

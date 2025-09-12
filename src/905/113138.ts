@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { atom } from "../figma_app/27355";
 import { createReduxSubscriptionAtom } from "../905/111321";
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { NC, MM } from "../905/17179";
+import { createActionCreator, createOptimistAction } from "../905/73481";
 import { j } from "../905/848904";
 import { ET, F5 } from "../905/284406";
 import { H } from "../905/581820";
@@ -55,10 +55,10 @@ export class $$p1 {
     this.actionHandlers = i;
     this.getInstance = n;
     this.actions = {
-      update: NC(`LIVESTORE_UPDATE_${this.debugName}`),
-      tombstone: NC(`LIVESTORE_TOMBSTONE_${this.debugName}`),
-      remoteUpdate: NC(`LIVESTORE_REMOTE_UPDATE_${this.debugName}`),
-      optimisticUpdate: MM(`LIVESTORE_OPTIMISTIC_UPDATE_${this.debugName}`, (e, t, {
+      update: createActionCreator(`LIVESTORE_UPDATE_${this.debugName}`),
+      tombstone: createActionCreator(`LIVESTORE_TOMBSTONE_${this.debugName}`),
+      remoteUpdate: createActionCreator(`LIVESTORE_REMOTE_UPDATE_${this.debugName}`),
+      optimisticUpdate: createOptimistAction(`LIVESTORE_OPTIMISTIC_UPDATE_${this.debugName}`, (e, t, {
         optimistId: i
       }) => i)
     };

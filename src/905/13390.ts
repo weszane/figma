@@ -21,7 +21,7 @@ import { iC } from '../905/466026';
 import { NQ } from '../905/508367';
 import { I as _$$I } from '../905/531560';
 import { l as _$$l3 } from '../905/572910';
-import { s as _$$s } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { customHistory } from '../905/612521';
 import { jN, Kw, rl } from '../905/612685';
 import { j as _$$j, l as _$$l2 } from '../905/618243';
@@ -378,7 +378,7 @@ export function $$ek0(e) {
     } = Mw(e.selectedTiles, e.permsByFileKey, e.permsByRepoId);
     if (deletableCount < selectedCount) {
       let e = getI18nString('tile.dropdown.no_permission_to_trash_error');
-      i(_$$s.error(e));
+      i(FlashActions.error(e));
       return;
     }
     i(U1({
@@ -392,7 +392,7 @@ export function $$ek0(e) {
     let t = m8(ty, e.permsByFileKey);
     let n = gX(tv, e.permsByRepoId);
     if (t.length + n.length < ty.length + tv.length) {
-      i(_$$s.error(getI18nString('flash.dont_have_permission_permanently_delete_files')));
+      i(FlashActions.error(getI18nString('flash.dont_have_permission_permanently_delete_files')));
       return;
     }
     i(Fh({
@@ -404,7 +404,7 @@ export function $$ek0(e) {
     let t = g4(ty, e.permsByFileKey);
     let n = _H(tv, e.permsByRepoId);
     if (t.length + n.length === 0) {
-      i(_$$s.error(getI18nString('tile.dropdown.no_permission_to_restore_error')));
+      i(FlashActions.error(getI18nString('tile.dropdown.no_permission_to_restore_error')));
       return;
     }
     i(b4({
@@ -415,7 +415,7 @@ export function $$ek0(e) {
   let tc = (t, n) => {
     let r = tS.length + tP.length;
     if (r === 0) {
-      i(_$$s.error(getI18nString('tile.dropdown.no_permission_to_restore_error')));
+      i(FlashActions.error(getI18nString('tile.dropdown.no_permission_to_restore_error')));
       return;
     }
     if (r === 1) {
@@ -462,7 +462,7 @@ export function $$ek0(e) {
       key: e
     }));
     for (let e of (r.length > 0 && yN(r.map(e => e.key)).catch(e => {
-      i(_$$s.error(getI18nString('file_browser.file_browser_actions.recently_viewed_error', {
+      i(FlashActions.error(getI18nString('file_browser.file_browser_actions.recently_viewed_error', {
         numFiles: n.length
       })));
       return e;

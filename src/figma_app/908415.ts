@@ -1,4 +1,4 @@
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
@@ -34,7 +34,7 @@ let $$u1 = createOptimistThunk((e, {
       }));
       return;
     }
-    e.dispatch(_$$s.error(getI18nString("google_device_try_file_modal.enter_email.failed_to_send")));
+    e.dispatch(FlashActions.error(getI18nString("google_device_try_file_modal.enter_email.failed_to_send")));
   });
 });
 let $$p0 = createOptimistThunk((e, {
@@ -52,7 +52,7 @@ let $$p0 = createOptimistThunk((e, {
       data: {}
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(getI18nString("google_device_try_file.save_board.generic_error")));
+    e.dispatch(FlashActions.error(getI18nString("google_device_try_file.save_board.generic_error")));
   });
 });
 export const D = $$p0;

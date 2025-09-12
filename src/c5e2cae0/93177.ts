@@ -15,7 +15,7 @@ import { cn } from "../figma_app/141320";
 import { tH, H4 } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
@@ -685,7 +685,7 @@ function eY(e) {
     }));
   }, [to, e.selectedView.isEduTeam, tE]);
   useEffect(() => {
-    e.selectedView.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) && (customHistory.redirect("/"), to(_$$s2.error(getI18nString("team_creation.missing_team_creation_controls"))));
+    e.selectedView.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) && (customHistory.redirect("/"), to(FlashActions.error(getI18nString("team_creation.missing_team_creation_controls"))));
   }, [e.selectedView.teamFlowType, tb, cannotCreateTeamReason, to]);
   let tA = x.currencyToSwitch;
   useEffect(() => {
@@ -712,9 +712,9 @@ function eY(e) {
       ignoreCurrentPlan,
       billingPeriod: eA
     })));
-    R === UpgradeSteps.ADD_COLLABORATORS && (tP.length ? to(_$$s2.error(getI18nString("pro_cart.add_collaborators.error.email_is_invalid", {
+    R === UpgradeSteps.ADD_COLLABORATORS && (tP.length ? to(FlashActions.error(getI18nString("pro_cart.add_collaborators.error.email_is_invalid", {
       string: tP[0]
-    }))) : tM ? to(_$$s2.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself"))) : to(sf({
+    }))) : tM ? to(FlashActions.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself"))) : to(sf({
       ...e.selectedView,
       paymentStep: i,
       ignoreCurrentPlan,

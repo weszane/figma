@@ -1,4 +1,4 @@
-import { m as _$$m } from '../905/18160';
+import { createErrorAccumulator } from '../905/18160';
 import { B as _$$B } from '../905/94678';
 import { toMatrix2x3, toArray2x3 } from '../905/117560';
 import { sha1BytesFromHex, bytesToHex, sha1Hex, sha1HexFromString } from '../905/125019';
@@ -1266,7 +1266,7 @@ export class $$Y13 {
     q(this, 'reparentedNodeIds', new Set());
     q(this, 'recorder', void 0);
     q(this, 'generationRequests', []);
-    this.errorGuard = _$$m();
+    this.errorGuard = createErrorAccumulator();
     this.resourceStatus = e;
     this.outerEditScopeType = i;
     this.outerEditScopeLabel = n;

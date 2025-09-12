@@ -1,6 +1,6 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { handleOptimistTransaction } from "../905/842794";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
@@ -11,7 +11,7 @@ import { sf } from "../905/929976";
 import { yJ } from "../905/466026";
 import { b4 } from "../figma_app/937413";
 import { f as _$$f } from "../905/509236";
-let $$f3 = NC("REPO_MOVE");
+let $$f3 = createActionCreator("REPO_MOVE");
 let $$_5 = createOptimistThunk(async (e, {
   repos: t,
   folderId: i,
@@ -88,7 +88,7 @@ let A = (e, t, i, r, a, s = []) => {
     }));
   });
 };
-let $$y1 = NC("REPO_DELETE");
+let $$y1 = createActionCreator("REPO_DELETE");
 let $$b4 = createOptimistThunk((e, {
   reposById: t,
   userInitiated: i,
@@ -110,7 +110,7 @@ let $$b4 = createOptimistThunk((e, {
     }));
   } else customHistory.reload("Repo deleted");
 });
-let $$v0 = NC("REPO_DELETE_FOREVER");
+let $$v0 = createActionCreator("REPO_DELETE_FOREVER");
 let $$I2 = createOptimistThunk((e, {
   repoIds: t,
   userInitiated: i

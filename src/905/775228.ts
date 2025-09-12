@@ -1,3 +1,3 @@
-import { NC } from "../905/17179";
-export let $$n0 = NC("RECENT_CUSTOM_TEMPLATE_PUT_ALL");
+import { createActionCreator } from "../905/73481";
+export let $$n0 = createActionCreator("RECENT_CUSTOM_TEMPLATE_PUT_ALL");
 export const D = $$n0;

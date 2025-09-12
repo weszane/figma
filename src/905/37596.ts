@@ -12,7 +12,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getAtomMutate } from "../figma_app/566371";
 import { B as _$$B2 } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { wR } from "../905/346715";
 import { y as _$$y } from "../905/76789";
@@ -544,7 +544,7 @@ let eo = (e, t) => {
       C.canSkipDeletionConfirmation && !e ? (s({
         folderId: o.id
       }).catch(() => {
-        a(_$$s2.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
+        a(FlashActions.error(getI18nString("file_browser.api_folder.error_when_moving_to_trash")));
       }), t()) : a(showModalHandler({
         type: _$$V(),
         data: {

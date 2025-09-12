@@ -1,109 +1,214 @@
-import { reportError, setTagGlobal } from '../905/11';
-import { ServiceCategories as _$$e } from '../905/165054';
-import { Tj } from '../905/266529';
-import { n as _$$n } from '../905/347702';
-import { debugState } from '../905/407919';
-import { getSelectedView, getOpenFileKey } from '../905/622391';
-import { atomStoreManager } from '../figma_app/27355';
-import { isInteractionPathCheck } from '../figma_app/897289';
-import { $f, d4, GR, vT } from '../figma_app/474636';
-import { desktopAPIInstance } from '../figma_app/876459';
-let m = null;
-let $$h7 = {
+import { reportError, setTagGlobal } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { Tj } from '../905/266529'
+import { debugState } from '../905/407919'
+import { getOpenFileKey, getSelectedView } from '../905/622391'
+import { atomStoreManager } from '../figma_app/27355'
+import { $f, d4, GR, vT } from '../figma_app/474636'
+import { desktopAPIInstance } from '../figma_app/876459'
+import { isInteractionPathCheck } from '../figma_app/897289'
+/**
+ * Plugin State Manager
+ * Handles global plugin state, run IDs, widget, and plugin API resets.
+ */
+export interface PluginState {
+  currentPluginRunID: string | null
+  stats: any
+  currentWidget?: any
+  setMediaEnabled: boolean
+  allowedPluginOrigin?: any
+  resetGlobalPluginAPI: ((params?: { userID: string, openFileKey: string }) => void) | null
+}
+
+// Internal plugin state
+export let pluginState: PluginState = {
   currentPluginRunID: null,
   stats: null,
-  currentWidget: void 0,
-  setMediaEnabled: !1,
-  allowedPluginOrigin: void 0,
-  resetGlobalPluginAPI: null
-};
-export function $$g5() {
-  return $$h7.currentPluginRunID;
+  currentWidget: undefined,
+  setMediaEnabled: false,
+  allowedPluginOrigin: undefined,
+  resetGlobalPluginAPI: null,
 }
-export function $$f6() {
-  return atomStoreManager.get(GR);
+
+/**
+ * Tracks the currently active plugin close function and its type.
+ */
+interface PluginCloseState {
+  type: 'global' | 'plugin'
+  closePluginFunc: (params?: any) => Promise<void> | void
 }
-export function $$_8(e) {
-  setTagGlobal('pluginId', e?.plugin_id);
-  atomStoreManager.set(GR, e);
+let pluginCloseState: PluginCloseState | null = null
+
+/**
+ * Returns the current plugin run ID.
+ * (Original: $$g5)
+ */
+export const getCurrentPluginRunID = (): string | null => pluginState.currentPluginRunID
+
+/**
+ * Returns the current GR atom value.
+ * (Original: $$f6)
+ */
+export const getCurrentGRAtom = (): any => atomStoreManager.get(GR)
+
+/**
+ * Sets the plugin data and updates global tag.
+ * (Original: $$_8)
+ */
+export function setPluginData(data: any): void {
+  setTagGlobal('pluginId', data?.plugin_id)
+  atomStoreManager.set(GR, data)
 }
-export function $$A11(e) {
-  setTagGlobal('pluginTriggeredFrom', e);
-  atomStoreManager.set(vT, e ?? null);
+
+/**
+ * Sets the plugin trigger source and updates global tag.
+ * (Original: $$A11)
+ */
+export function setPluginTriggeredFrom(source: any): void {
+  setTagGlobal('pluginTriggeredFrom', source)
+  atomStoreManager.set(vT, source ?? null)
 }
-export function $$y0(e) {
-  atomStoreManager.set($f, e);
+
+/**
+ * Sets the $f atom value.
+ * (Original: $$y0)
+ */
+export function setFAtom(value: any): void {
+  atomStoreManager.set($f, value)
 }
-export function $$b9() {
-  return Math.random().toString(36).slice(2);
+
+/**
+ * Generates a random string.
+ * (Original: $$b9)
+ */
+export const generateRandomID = (): string => Math.random().toString(36).slice(2)
+
+/**
+ * Reports an error for plugin extensibility issues.
+ * (Original: v)
+ */
+function reportPluginError(error: Error): void {
+  isInteractionPathCheck()
+  reportError(ServiceCategories.EXTENSIBILITY, error)
 }
-function v(e) {
-  isInteractionPathCheck();
-  reportError(_$$e.EXTENSIBILITY, e);
-}
-export function $$I3(e) {
-  m && v(new Error(`Did not close the previous plugin: type=${m.type}`));
-  m = {
+
+/**
+ * Sets the global plugin close function.
+ * (Original: $$I3)
+ */
+export function setGlobalPluginCloseFunc(closeFunc: (params?: any) => Promise<void> | void): void {
+  if (pluginCloseState) {
+    reportPluginError(new Error(`Did not close the previous plugin: type=${pluginCloseState.type}`))
+  }
+  pluginCloseState = {
     type: 'global',
-    closePluginFunc: e
-  };
-}
-export function $$E1(e, t) {
-  m?.type === 'plugin' && t?.ignorePreviousCloseFunc !== m.closePluginFunc && v(new Error(`Did not close the previous plugin: type=${m.type}`));
-  m?.type === 'global' && v(new Error(`Did not close the previous plugin: type=${m.type}`));
-  m = e ? {
-    type: 'plugin',
-    closePluginFunc: e
-  } : null;
-}
-export function $$x13(e) {
-  $$h7.resetGlobalPluginAPI = e;
-}
-export function $$S4() {
-  return m?.type === 'global';
-}
-export async function $$w2(e) {
-  if (m) {
-    let {
-      closePluginFunc,
-      type
-    } = m;
-    m = null;
-    type === 'global' ? await closePluginFunc() : await closePluginFunc(e);
+    closePluginFunc: closeFunc,
   }
 }
-export let $$C12 = _$$n(async e => {
-  await $$w2(e ? {
-    message: `${e}`,
-    isError: !0
-  } : {});
-  $$T10();
-});
-export function $$T10() {
-  if (Tj(void 0), $$h7.currentWidget = void 0, $$_8(null), $$A11(null), $$y0(null), $$h7.currentPluginRunID = null, $$h7.stats = null, atomStoreManager.set(d4, null), atomStoreManager.set(GR, null), desktopAPIInstance && $$h7.setMediaEnabled && ($$h7.setMediaEnabled = !1), desktopAPIInstance && $$h7.allowedPluginOrigin && (desktopAPIInstance.removeAllowedPluginOrigin($$h7.allowedPluginOrigin), $$h7.allowedPluginOrigin = void 0), debugState) {
-    let t = getSelectedView();
-    let i = getOpenFileKey();
-    if (t && i) {
-      let e;
-      e = {
-        userID: t,
-        openFileKey: i
-      };
-      $$h7.resetGlobalPluginAPI?.(e);
+
+/**
+ * Sets the plugin close function, handling previous plugin close.
+ * (Original: $$E1)
+ */
+export function setPluginCloseFunc(closeFunc: ((params?: any) => Promise<void> | void) | null, options?: { ignorePreviousCloseFunc?: (params?: any) => Promise<void> | void }): void {
+  if (pluginCloseState?.type === 'plugin' && options?.ignorePreviousCloseFunc !== pluginCloseState.closePluginFunc) {
+    reportPluginError(new Error(`Did not close the previous plugin: type=${pluginCloseState.type}`))
+  }
+  if (pluginCloseState?.type === 'global') {
+    reportPluginError(new Error(`Did not close the previous plugin: type=${pluginCloseState.type}`))
+  }
+  pluginCloseState = closeFunc
+    ? { type: 'plugin', closePluginFunc: closeFunc }
+    : null
+}
+
+/**
+ * Sets the resetGlobalPluginAPI function.
+ * (Original: $$x13)
+ */
+export function setResetGlobalPluginAPI(resetFunc: ((params?: { userID: string, openFileKey: string }) => void) | null): void {
+  pluginState.resetGlobalPluginAPI = resetFunc
+}
+
+/**
+ * Returns true if the current plugin close state is global.
+ * (Original: $$S4)
+ */
+export const isGlobalPluginActive = (): boolean => pluginCloseState?.type === 'global'
+
+/**
+ * Closes the current plugin, calling its close function.
+ * (Original: $$w2)
+ */
+export async function closeCurrentPlugin(params?: any): Promise<void> {
+  if (pluginCloseState) {
+    const { closePluginFunc, type } = pluginCloseState
+    pluginCloseState = null
+    if (type === 'global') {
+      await closePluginFunc()
+    }
+    else {
+      await closePluginFunc(params)
     }
   }
 }
-export const Kd = $$y0;
-export const Mt = $$E1;
-export const XF = $$w2;
-export const XY = $$I3;
-export const et = $$S4;
-export const fD = $$g5;
-export const hw = $$f6;
-export const iu = $$h7;
-export const lM = $$_8;
-export const mv = $$b9;
-export const nT = $$T10;
-export const qR = $$A11;
-export const wY = $$C12;
-export const yp = $$x13;
+
+/**
+ * Atom reset handler for plugin errors.
+ * (Original: $$C12)
+ */
+export async function handlePluginError(error: any) {
+  await closeCurrentPlugin(error ? { message: `${error}`, isError: true } : {})
+  resetPluginState()
+}
+
+/**
+ * Resets plugin state and cleans up global/plugin data.
+ * (Original: $$T10)
+ */
+export function resetPluginState(): void {
+  Tj(undefined)
+  pluginState.currentWidget = undefined
+  setPluginData(null)
+  setPluginTriggeredFrom(null)
+  setFAtom(null)
+  pluginState.currentPluginRunID = null
+  pluginState.stats = null
+  atomStoreManager.set(d4, null)
+  atomStoreManager.set(GR, null)
+
+  if (desktopAPIInstance && pluginState.setMediaEnabled) {
+    pluginState.setMediaEnabled = false
+  }
+  if (desktopAPIInstance && pluginState.allowedPluginOrigin) {
+    desktopAPIInstance.removeAllowedPluginOrigin(pluginState.allowedPluginOrigin)
+    pluginState.allowedPluginOrigin = undefined
+  }
+
+  if (debugState) {
+    const selectedView = getSelectedView()
+    const openFileKey = getOpenFileKey()
+    if (selectedView && openFileKey) {
+      pluginState.resetGlobalPluginAPI?.({
+        userID: selectedView,
+        openFileKey,
+      })
+    }
+  }
+}
+
+// Exported aliases for backward compatibility
+export const Kd = setFAtom
+export const Mt = setPluginCloseFunc
+export const XF = closeCurrentPlugin
+export const XY = setGlobalPluginCloseFunc
+export const et = isGlobalPluginActive
+export const fD = getCurrentPluginRunID
+export const hw = getCurrentGRAtom
+export const iu = pluginState
+export const lM = setPluginData
+export const mv = generateRandomID
+export const nT = resetPluginState
+export const qR = setPluginTriggeredFrom
+export const wY = handlePluginError
+export const yp = setResetGlobalPluginAPI

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { fileEntityDataMapper } from "../905/943101";
@@ -48,7 +48,7 @@ export function $$g0({
       });
       h(v);
     } catch (e) {
-      g(_$$s.error(getI18nString("file_browser.pinning.pin_modal.edit.error")));
+      g(FlashActions.error(getI18nString("file_browser.pinning.pin_modal.edit.error")));
       return e;
     }
   };

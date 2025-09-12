@@ -1,5 +1,5 @@
 import { atomStoreManager } from "../figma_app/27355";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { createOptimistThunk } from "../905/350402";
@@ -30,9 +30,9 @@ let $$h0 = createOptimistThunk(async e => {
   }));
   e.dispatch($$m1(n.nextGarbageCollectionTimestamp));
 });
-let $$m1 = NC("SET_AUTOSAVE_NEXT_GARBAGE_COLLECTION_TIMESTAMP");
-let $$g5 = NC("SET_AUTOSAVE_SNOOZE");
-let $$f2 = NC("SET_UNCLAIMED_FILES");
+let $$m1 = createActionCreator("SET_AUTOSAVE_NEXT_GARBAGE_COLLECTION_TIMESTAMP");
+let $$g5 = createActionCreator("SET_AUTOSAVE_SNOOZE");
+let $$f2 = createActionCreator("SET_UNCLAIMED_FILES");
 export function $$E3(e) {
   hp.register(ec, () => function (e) {
     let t = e.getState().user?.id ?? null;

@@ -9,7 +9,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { vd } from "../figma_app/637027";
 import { x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { pI, nx, _E } from "../figma_app/443991";
 import { c as _$$c } from "../905/370443";
@@ -98,12 +98,12 @@ class w extends Component {
       try {
         this.image = await this.loadImageFile(this.props.avatarEditorState.file);
       } catch {
-        this.props.dispatch(_$$s2.error(getI18nString("avatar_editor.an_error_occurred_while_loading_the_image")));
+        this.props.dispatch(FlashActions.error(getI18nString("avatar_editor.an_error_occurred_while_loading_the_image")));
         this.props.onClose();
         return;
       }
       if (this.image.width < Pf.LARGE || this.image.height < Pf.LARGE) {
-        this.props.dispatch(_$$s2.error(getI18nString("avatar_editor.your_profile_image_must_be_at_least_500_x500_px")));
+        this.props.dispatch(FlashActions.error(getI18nString("avatar_editor.your_profile_image_must_be_at_least_500_x500_px")));
         this.props.onClose();
         return;
       }

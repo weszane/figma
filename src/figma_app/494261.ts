@@ -1,7 +1,7 @@
 import { trackEventAnalytics } from "../905/449184";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -39,16 +39,16 @@ let $$T7 = createOptimistThunk(async (e, t) => {
     let n = r.meta;
     n.status === _$$c.APPROVED ? e.dispatch(vr({
       teamId: n.team_id
-    })) : t.level === AccessLevelEnum.EDITOR && c === AccessLevelEnum.VIEWER ? e.dispatch(_$$s.flash(getI18nString("org_actions.you_ve_requested_to_edit_files_in_this_team"))) : e.dispatch(_$$s.flash(getI18nString("org_actions.you_ve_requested_to_join_this_team")));
+    })) : t.level === AccessLevelEnum.EDITOR && c === AccessLevelEnum.VIEWER ? e.dispatch(FlashActions.flash(getI18nString("org_actions.you_ve_requested_to_edit_files_in_this_team"))) : e.dispatch(FlashActions.flash(getI18nString("org_actions.you_ve_requested_to_join_this_team")));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t.message) || getI18nString("org_actions.an_error_occurred")));
+    e.dispatch(FlashActions.error(resolveMessage(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$I16 = createOptimistThunk((e, t) => {
   XHR.del(`/api/team_role_requests/${t.requestId}`).then(t => {
-    e.dispatch(_$$s.flash(getI18nString("org_actions.request_withdrawn")));
+    e.dispatch(FlashActions.flash(getI18nString("org_actions.request_withdrawn")));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t.message) || getI18nString("org_actions.an_error_occurred")));
+    e.dispatch(FlashActions.error(resolveMessage(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$S2 = createOptimistThunk((e, t) => {
@@ -57,19 +57,19 @@ let $$S2 = createOptimistThunk((e, t) => {
   }).then(({
     data: t
   }) => {
-    e.dispatch(_$$s.flash(getI18nString("org_actions.request_approved")));
+    e.dispatch(FlashActions.flash(getI18nString("org_actions.request_approved")));
     e.dispatch(bE({
       role: t.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred")));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$v10 = createOptimistThunk((e, t) => {
   XHR.post(`/team_role_requests/${t.requestId}/deny`).then(t => {
-    e.dispatch(_$$s.flash(getI18nString("org_actions.request_denied")));
+    e.dispatch(FlashActions.flash(getI18nString("org_actions.request_denied")));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t.message) || getI18nString("org_actions.an_error_occurred")));
+    e.dispatch(FlashActions.error(resolveMessage(t.message) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$A19 = createOptimistThunk((e, {
@@ -100,7 +100,7 @@ let $$x22 = createOptimistThunk((e, {
       error: !1
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$N11 = createOptimistThunk((e, {
@@ -114,12 +114,12 @@ let $$N11 = createOptimistThunk((e, {
   }).then(({
     data: t
   }) => {
-    e.dispatch(_$$s.flash(getI18nString("org_actions.updated_authentication_settings")));
+    e.dispatch(FlashActions.flash(getI18nString("org_actions.updated_authentication_settings")));
     e.dispatch(yJ({
       org: t.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$C14 = createOptimistThunk((e, {
@@ -131,12 +131,12 @@ let $$C14 = createOptimistThunk((e, {
     saml_sso_only: r,
     mfa_required: n
   }).then(t => {
-    e.dispatch(_$$s.flash(getI18nString("org_actions.updated_authentication_settings")));
+    e.dispatch(FlashActions.flash(getI18nString("org_actions.updated_authentication_settings")));
     e.dispatch(yJ({
       org: t.data.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$w4 = createOptimistThunk((e, {
@@ -150,7 +150,7 @@ let $$w4 = createOptimistThunk((e, {
       org: t.data.meta
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 export function $$O1(e) {
@@ -191,14 +191,14 @@ let $$R12 = createOptimistThunk((e, {
   XHR.put(`/api/orgs/${n}`, {
     idle_timeout_duration_in_secs: i
   }).then(t => {
-    e.dispatch(_$$s.flash(getI18nString("org_actions.updated_idle_session_timeout")));
+    e.dispatch(FlashActions.flash(getI18nString("org_actions.updated_idle_session_timeout")));
     e.dispatch(yJ({
       org: t.data.meta
     }));
     r();
   }).catch(r => {
     t();
-    e.dispatch(_$$s.error(resolveMessage(r) || getI18nString("org_actions.an_error_occurred")));
+    e.dispatch(FlashActions.error(resolveMessage(r) || getI18nString("org_actions.an_error_occurred")));
   });
 });
 let $$L6 = createOptimistThunk((e, {
@@ -218,18 +218,18 @@ let $$L6 = createOptimistThunk((e, {
     id: t,
     shared_container_setting: a
   }));
-  e.dispatch(_$$s.flash("Updated IP allowlist settings"));
+  e.dispatch(FlashActions.flash("Updated IP allowlist settings"));
   i();
 }).catch(t => {
-  e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred")));
+  e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred")));
 }));
 let $$P17 = createOptimistThunk((e, {
   orgId: t
 }) => {
   XHR.post(`/api/org/${t}/deletion_request`).then(t => {
-    e.dispatch(_$$s.flash(getI18nString("orgs_middleware.deletion_request_submitted")));
+    e.dispatch(FlashActions.flash(getI18nString("orgs_middleware.deletion_request_submitted")));
   }).catch(t => {
-    e.dispatch(_$$s.error(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
+    e.dispatch(FlashActions.error(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
     console.error(t);
   });
 });
@@ -248,7 +248,7 @@ let $$D0 = createOptimistThunk((e, {
       successMessage: n
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$k3 = createOptimistThunk((e, {
@@ -270,7 +270,7 @@ let $$k3 = createOptimistThunk((e, {
     }));
     d();
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$M18 = createOptimistThunk((e, {
@@ -292,7 +292,7 @@ let $$M18 = createOptimistThunk((e, {
     }));
     d();
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
 });
 let $$F9 = createOptimistThunk((e, t) => {
@@ -310,7 +310,7 @@ let $$F9 = createOptimistThunk((e, t) => {
       error: !1
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   });
   a ? WB().optimisticallyUpdate({
     SharedOrgLicenseGroupSetting: {
@@ -336,9 +336,9 @@ let $$j21 = createOptimistThunk((e, t) => {
   XHR.post(`/api/org/${t.orgId}/delete_org_users`, {
     org_user_ids: t.orgUserIds
   }).then(t => {
-    e.dispatch(_$$s.flash(getI18nString("orgs_middleware.user_data_deleted")));
+    e.dispatch(FlashActions.flash(getI18nString("orgs_middleware.user_data_deleted")));
   }).catch(t => {
-    e.dispatch(_$$s.error(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
+    e.dispatch(FlashActions.error(t.data?.message || getI18nString("orgs_middleware.an_error_occurred_while_enqueeing_deletion_request"), 5e3));
     console.error(t);
   });
 });
@@ -351,13 +351,13 @@ let $$U20 = createOptimistThunk((e, {
     orgId: t,
     slidesDisabled: r
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   }).then(() => {
     e.dispatch(F6({
       id: t,
       is_slides_disabled: r
     }));
-    n && e.dispatch(_$$s.flash(n));
+    n && e.dispatch(FlashActions.flash(n));
   });
 });
 let $$B8 = createOptimistThunk((e, {
@@ -369,9 +369,9 @@ let $$B8 = createOptimistThunk((e, {
     orgId: t,
     sitesPublishingDisabled: r
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   }).then(() => {
-    n && e.dispatch(_$$s.flash(n));
+    n && e.dispatch(FlashActions.flash(n));
   });
 });
 let $$G5 = createOptimistThunk((e, {
@@ -383,9 +383,9 @@ let $$G5 = createOptimistThunk((e, {
     orgId: t,
     supabaseDisabled: r
   }).catch(t => {
-    e.dispatch(_$$s.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
+    e.dispatch(FlashActions.error(resolveMessage(t) || getI18nString("org_actions.an_error_occurred"), 5e3));
   }).then(() => {
-    n && e.dispatch(_$$s.flash(n));
+    n && e.dispatch(FlashActions.flash(n));
   });
 });
 export const $w = $$D0;

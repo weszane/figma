@@ -81,7 +81,7 @@ import { Qh } from "../figma_app/155728";
 import { j as _$$j } from "../905/694231";
 import { fM } from "../figma_app/214643";
 import { l as _$$l3 } from "../469e6e40/774192";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { XF, wZ, CA } from "../figma_app/777207";
 import { M4, gY } from "../905/713695";
 import { WB } from "../905/761735";
@@ -523,7 +523,7 @@ function eY({
             onrejected: () => {
               d(!1);
               let e = getI18nString("resources_tab.approved_libraries_toggle.unmark_as_approved_error", h);
-              a(_$$s2.error(e));
+              a(FlashActions.error(e));
               console.error(e);
             }
           }));
@@ -541,7 +541,7 @@ function eY({
             onrejected: () => {
               d(!1);
               let e = getI18nString("resources_tab.approved_libraries_toggle.mark_as_approved_error", h);
-              a(_$$s2.error(e));
+              a(FlashActions.error(e));
               console.error(e);
             }
           }));
@@ -623,7 +623,7 @@ function eX({
             onrejected: () => {
               p(!1);
               let e = getI18nString("resources_tab.approved_libraries_toggle.unmark_as_approved_error", S);
-              r(_$$s2.error(e));
+              r(FlashActions.error(e));
               console.error(e);
             }
           }));
@@ -641,7 +641,7 @@ function eX({
             onrejected: () => {
               p(!1);
               let e = getI18nString("resources_tab.approved_libraries_toggle.mark_as_approved_error", S);
-              r(_$$s2.error(e));
+              r(FlashActions.error(e));
               console.error(e);
             }
           }));

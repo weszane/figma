@@ -1,7 +1,7 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { showModalHandler } from "../905/156213";
-let $$a5 = NC("TWO_FACTOR_AUTH_SET_CURRENT_ERROR");
-let $$s3 = NC("TWO_FACTOR_AUTH_SET_LOADING");
+let $$a5 = createActionCreator("TWO_FACTOR_AUTH_SET_CURRENT_ERROR");
+let $$s3 = createActionCreator("TWO_FACTOR_AUTH_SET_LOADING");
 let $$o4 = "TwoFactorRecoveryModal";
 export function $$l0() {
   return showModalHandler({

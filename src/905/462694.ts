@@ -1,4 +1,4 @@
-import { fD } from "../905/753206";
+import { getCurrentPluginRunID } from "../905/753206";
 export function $$r1(e) {
   let t = 0;
   let i = 0;
@@ -26,7 +26,7 @@ export function $$r1(e) {
     optionalParamCount: r,
     optionalFreeformParamCount: a,
     parameterOnly: e.parameterOnly,
-    pluginRunID: fD(),
+    pluginRunID: getCurrentPluginRunID(),
     triggeredFrom: e.triggeredFrom,
     qaVersion: e.qaVersion
   };

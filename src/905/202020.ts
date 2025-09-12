@@ -13,7 +13,7 @@ import { p as _$$p } from "../905/991924";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { VisualBellActions } from "../905/302958";
 import { E9, pf } from "../figma_app/314264";
 import { restoreFiles, generateUrlAlt } from "../905/760074";
@@ -57,7 +57,7 @@ let x = createOptimistThunk(async (e, t) => {
     }
   }, n).catch(t => {
     let i = t.data.message || getI18nString("collaboration.branching.an_error_occurred_while_renaming_this_file");
-    e.dispatch(_$$s.error(i));
+    e.dispatch(FlashActions.error(i));
   });
   E9("File Renamed", t.branch, {
     fileName: t.name
@@ -65,7 +65,7 @@ let x = createOptimistThunk(async (e, t) => {
 });
 let S = createOptimistThunk(async (e, t) => {
   let i = await restoreFiles(t.branches.map(e => e.key));
-  "error" === i.status ? e.dispatch(_$$s.error(i.message)) : e.dispatch(VisualBellActions.enqueue({
+  "error" === i.status ? e.dispatch(FlashActions.error(i.message)) : e.dispatch(VisualBellActions.enqueue({
     type: "file_restored",
     message: getI18nString("collaboration.branching.branches_restored", {
       branchCount: t.branches.length
@@ -96,9 +96,9 @@ let w = createOptimistThunk(async (e, t) => {
     if (207 === r.status) {
       try {
         let t = JSON.parse(r.response);
-        e.dispatch(_$$s.error(t.message));
+        e.dispatch(FlashActions.error(t.message));
       } catch (t) {
-        e.dispatch(_$$s.error(getI18nString("collaboration.branching.an_error_occurred_while_deleting_these_files")));
+        e.dispatch(FlashActions.error(getI18nString("collaboration.branching.an_error_occurred_while_deleting_these_files")));
       }
       return;
     }
@@ -121,9 +121,9 @@ let w = createOptimistThunk(async (e, t) => {
   }) {
     try {
       let t = JSON.parse(i);
-      e.dispatch(_$$s.error(t.message));
+      e.dispatch(FlashActions.error(t.message));
     } catch (i) {
-      e.dispatch(_$$s.error(getI18nString("collaboration.branching.error_archiving_branches", {
+      e.dispatch(FlashActions.error(getI18nString("collaboration.branching.error_archiving_branches", {
         branchCount: t.branches.length
       })));
     }

@@ -1,3 +1,3 @@
-import { NC } from "../905/17179";
-export let $$n0 = NC("IDP_USER_BATCH_POST");
+import { createActionCreator } from "../905/73481";
+export let $$n0 = createActionCreator("IDP_USER_BATCH_POST");
 export const $ = $$n0;

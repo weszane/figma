@@ -5,7 +5,7 @@ import l from "classnames";
 import { WB } from "../905/761735";
 import { ks, tM, vd } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { R } from "../c5e2cae0/276031";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -57,7 +57,7 @@ let j = memo(function (e) {
         }));
       } catch (s) {
         let a = e.canSeeBillingAddressExp ? getI18nString("update_company_details_modal.update_display_name.error") : getI18nString("update_company_details_modal.update_team_name.error");
-        t(_$$s2.error(resolveMessage(s) || a));
+        t(FlashActions.error(resolveMessage(s) || a));
         return s;
       } else t(yy({
         legalName: S,

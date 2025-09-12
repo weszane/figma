@@ -1,10 +1,10 @@
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { yr } from "../905/827765";
 import { hasMorePages, fetchPaginatedData, DEFAULT_PAGE_SIZE, PAGINATION_NEXT } from "../figma_app/661371";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { cR as _$$cR } from "../905/890368";
@@ -28,8 +28,8 @@ import { Qv } from "../figma_app/45218";
 import { OrgUserRoleEnum } from "../figma_app/35887";
 import { s as _$$s2 } from "../905/608932";
 import { Oo, HZ, cr } from "../905/926523";
-let $$P2 = NC("COMMUNITY_HUB_SHOW_ADMIN_PROFILE_BANNER");
-let $$D27 = NC("COMMUNITY_HUB_HIDE_ADMIN_PROFILE_BANNER");
+let $$P2 = createActionCreator("COMMUNITY_HUB_SHOW_ADMIN_PROFILE_BANNER");
+let $$D27 = createActionCreator("COMMUNITY_HUB_HIDE_ADMIN_PROFILE_BANNER");
 let $$k14 = _$$cR;
 let $$M3 = createOptimistThunk((e, t) => {
   let r;
@@ -83,15 +83,15 @@ let $$M3 = createOptimistThunk((e, t) => {
     }));
   } else e.dispatch(sf(f));
 });
-let $$F6 = NC("COMMUNITY_HUB_ADD_FOLLOW");
-let $$j7 = NC("COMMUNITY_HUB_DELETE_FOLLOW");
-let $$U0 = NC("COMMUNITY_HUB_SAVE_PAGE_STATE");
-let $$B13 = NC("COMMUNITY_HUB_RESET_COMMENT_STATE");
-let $$G26 = NC("COMMUNITY_HUB_SET_COMMENTS");
-let $$V9 = NC("COMMUNITY_HUB_SET_COMMENTS_ACTIVE_FEED_TYPE");
-let $$H22 = NC("COMMUNITY_HUB_SET_COMMENT_REPLIES");
-let $$z11 = NC("COMMUNITY_HUB_FLUSH_NEW_COMMENTS_QUEUE");
-let $$W4 = NC("COMMENTS_INSERT_COMMUNITY_MENTION");
+let $$F6 = createActionCreator("COMMUNITY_HUB_ADD_FOLLOW");
+let $$j7 = createActionCreator("COMMUNITY_HUB_DELETE_FOLLOW");
+let $$U0 = createActionCreator("COMMUNITY_HUB_SAVE_PAGE_STATE");
+let $$B13 = createActionCreator("COMMUNITY_HUB_RESET_COMMENT_STATE");
+let $$G26 = createActionCreator("COMMUNITY_HUB_SET_COMMENTS");
+let $$V9 = createActionCreator("COMMUNITY_HUB_SET_COMMENTS_ACTIVE_FEED_TYPE");
+let $$H22 = createActionCreator("COMMUNITY_HUB_SET_COMMENT_REPLIES");
+let $$z11 = createActionCreator("COMMUNITY_HUB_FLUSH_NEW_COMMENTS_QUEUE");
+let $$W4 = createActionCreator("COMMENTS_INSERT_COMMUNITY_MENTION");
 let K = (e, t) => {
   let r = /\?/.test(e) ? "&" : "?";
   return e + `${r}${t}`;
@@ -125,11 +125,11 @@ let $$Y24 = createOptimistThunk((e, t) => {
     e.selected_comment && (o.selectedCommentId = e.selected_comment.id);
     t.onSuccess && t.onSuccess(o);
   }).catch(r => {
-    e.dispatch(_$$s.error(getI18nString("community.actions.unable_to_fetch_comments")));
+    e.dispatch(FlashActions.error(getI18nString("community.actions.unable_to_fetch_comments")));
     t.onError && t.onError();
   });
 });
-let $$$5 = NC("COMMUNITY_HUB_RESTRICT_PROFILE");
+let $$$5 = createActionCreator("COMMUNITY_HUB_RESTRICT_PROFILE");
 let $$X10 = createOptimistThunk((e, {
   profileId: t,
   blockedProfileId: r,
@@ -155,7 +155,7 @@ let $$X10 = createOptimistThunk((e, {
     onSuccess: n
   }));
 });
-let $$q25 = NC("COMMUNITY_HUB_UNRESTRICT_PROFILE");
+let $$q25 = createActionCreator("COMMUNITY_HUB_UNRESTRICT_PROFILE");
 let $$J16 = createOptimistThunk((e, {
   profileId: t,
   blockedProfileId: r,
@@ -181,7 +181,7 @@ let $$J16 = createOptimistThunk((e, {
     onSuccess: n
   }));
 });
-let $$Z20 = NC("COMMUNITY_HUB_SET_COMMENT_STATE");
+let $$Z20 = createActionCreator("COMMUNITY_HUB_SET_COMMENT_STATE");
 let $$Q29 = createOptimistThunk((e, t) => {
   let {
     id,
@@ -206,7 +206,7 @@ createOptimistThunk((e, {
   }) => {
     e.dispatch(Oo(t.meta.profile));
     e.dispatch(sf(e.getState().selectedView));
-  }).catch(t => (404 === t.status && r ? r() : e.dispatch(_$$s.error(getI18nString("community.actions.error_fetching_profile_information"))), null));
+  }).catch(t => (404 === t.status && r ? r() : e.dispatch(FlashActions.error(getI18nString("community.actions.error_fetching_profile_information"))), null));
 });
 createOptimistThunk((e, {
   handle: t,
@@ -228,7 +228,7 @@ createOptimistThunk((e, {
     data: t
   }) => {
     t?.status === 404 && r && r();
-    e.dispatch(_$$s.error(getI18nString("community.actions.error_fetching_profile_information")));
+    e.dispatch(FlashActions.error(getI18nString("community.actions.error_fetching_profile_information")));
   });
 }, ({
   handle: e
@@ -284,7 +284,7 @@ let $$ee28 = createOptimistThunk((e, t, {
     onSuccess && onSuccess(e);
   }).catch(t => {
     let r = resolveMessage(t);
-    r && e.dispatch(_$$s.error(r));
+    r && e.dispatch(FlashActions.error(r));
   });
 }, ({
   userId: e
@@ -299,7 +299,7 @@ let $$et21 = createOptimistThunk((e, t) => {
   }).catch(({
     data: t
   }) => {
-    e.dispatch(_$$s.error(t.message));
+    e.dispatch(FlashActions.error(t.message));
   });
 });
 let $$er12 = createOptimistThunk((e, t, {
@@ -404,7 +404,7 @@ let $$er12 = createOptimistThunk((e, t, {
     onSuccess && onSuccess(e);
   }).catch(t => {
     let r = resolveMessage(t);
-    r && e.dispatch(_$$s.error(r));
+    r && e.dispatch(FlashActions.error(r));
   });
 }, ({
   profileId: e
@@ -432,7 +432,7 @@ let $$en23 = createOptimistThunk((e, t, {
       message: getI18nString("community.actions.profile_deleted")
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(getI18nString("community.actions.unable_to_delete_profile_please_try_again_later")));
+    e.dispatch(FlashActions.error(getI18nString("community.actions.unable_to_delete_profile_please_try_again_later")));
   });
 });
 let $$ei1 = createOptimistThunk(async (e, {
@@ -454,7 +454,7 @@ let $$ei1 = createOptimistThunk(async (e, {
     e.dispatch(Oo(t.meta));
     n();
   }).catch(t => {
-    e.dispatch(_$$s.error(t ? getI18nString("community.actions.an_error_occurred_with_error", {
+    e.dispatch(FlashActions.error(t ? getI18nString("community.actions.an_error_occurred_with_error", {
       error: t
     }) : getI18nString("community.actions.an_error_occurred")));
   });
@@ -481,7 +481,7 @@ async function ea(e, t, r) {
     signature
   };
 }
-let $$es17 = NC("COMMUNTY_HUB_FOLLOW_ENTITY");
+let $$es17 = createActionCreator("COMMUNTY_HUB_FOLLOW_ENTITY");
 let $$eo18 = createOptimistThunk(async (e, t, {
   loadingKey: r
 }) => {
@@ -513,7 +513,7 @@ let $$eo18 = createOptimistThunk(async (e, t, {
   });
   e.dispatch($$es17(t));
 }, e => `COMMUNTY_HUB_FOLLOW_ENTITY_${e}`);
-let $$el19 = NC("COMMUNTY_HUB_UNFOLLOW_ENTITY");
+let $$el19 = createActionCreator("COMMUNTY_HUB_UNFOLLOW_ENTITY");
 let $$ed8 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
@@ -541,10 +541,10 @@ let $$ed8 = createOptimistThunk((e, t, {
 }, e => `COMMUNTY_HUB_UNFOLLOW_ENTITY_${e}`);
 export function $$ec15(e) {
   return {
-    updateStatus: NC(`${e}_UPDATE_PUBLISH_STATUS`),
-    updateMetadata: NC(`${e}_UPDATE_PUBLISH_METADATA`),
-    clearMetadata: NC(`${e}_CLEAR_PUBLISH_METADATA`),
-    clearMetadataAndStatus: NC(`${e}_CLEAR_PUBLISHING`)
+    updateStatus: createActionCreator(`${e}_UPDATE_PUBLISH_STATUS`),
+    updateMetadata: createActionCreator(`${e}_UPDATE_PUBLISH_METADATA`),
+    clearMetadata: createActionCreator(`${e}_CLEAR_PUBLISH_METADATA`),
+    clearMetadataAndStatus: createActionCreator(`${e}_CLEAR_PUBLISHING`)
   };
 }
 createOptimistThunk(async (e, t) => {

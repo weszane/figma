@@ -103,7 +103,7 @@ import { Mm, iX, bo, h3, $Q, TB, PG, NN } from "../5885/399780";
 import { registerModal } from "../905/102752";
 import { A as _$$A3 } from "../svg/219958";
 import { A as _$$A4 } from "../svg/638742";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { sf } from "../905/929976";
 import { cw, g_ } from "../5885/925885";
 import { nl as _$$nl } from "../905/590952";
@@ -1697,7 +1697,7 @@ let na = registerModal(function () {
       }
     })) : (g(sf({
       view: "recentsAndSharing"
-    })), g(_$$s2.error(b)));
+    })), g(FlashActions.error(b)));
     h();
   }, [p, g, h, n, i, s, b]);
   0 === p.length && h();

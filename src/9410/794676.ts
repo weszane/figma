@@ -29,7 +29,7 @@ import { i as _$$i } from "../1250/937941";
 import { Cn, e_ as _$$e_ } from "../figma_app/936061";
 import { y as _$$y2 } from "../905/320282";
 import { wG } from "../figma_app/504823";
-import { K7 } from "../905/346794";
+import { detachMultiplayer } from "../905/346794";
 import { xK } from "../905/125218";
 import { debounce } from "../905/915765";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -1160,7 +1160,7 @@ export function $$t80({
     er && i(oQ());
   }, [i, er]);
   useEffect(() => {
-    S && K7();
+    S && detachMultiplayer();
   }, [S]);
   (function () {
     let e = Xr(eB);

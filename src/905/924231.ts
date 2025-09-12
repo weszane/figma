@@ -12,7 +12,7 @@ import { C3 } from "../figma_app/790714";
 import { createDeferredPromise } from "../905/263346";
 import { R as _$$R } from "../figma_app/612938";
 import { y as _$$y } from "../905/916933";
-import { wY } from "../905/753206";
+import { handlePluginError } from "../905/753206";
 import { V } from "../905/480825";
 import { ch } from "../905/443517";
 import { s as _$$s } from "../905/73603";
@@ -102,7 +102,7 @@ export function $$E0({
     parameters: A,
     pluginId: e,
     pluginLocalFileId: t,
-    terminate: wY,
+    terminate: handlePluginError,
     triggeredFrom: E
   });
 }

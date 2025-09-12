@@ -1,12 +1,12 @@
 import { throwTypeError } from "../figma_app/465776";
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { K2, Pe, Dr, SX, gB, to as _$$to, j4 } from "../figma_app/310688";
 import { WB } from "../905/761735";
 import { XJ, f2, ad, Nc, zb, h7 } from "../figma_app/411744";
 import { APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
@@ -17,10 +17,10 @@ import { D6 } from "../figma_app/863319";
 import { nb } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
 import { FEntityType } from "../figma_app/191312";
-let $$I17 = NC("SET_FAVORITES_COUNT");
-let $$S6 = NC("UPDATE_EXPANDED_CUSTOM_SECTIONS");
-let $$v21 = NC("SET_MOVING_RESOURCE");
-let $$A19 = NC("SET_NEW_SECTION_INDEX");
+let $$I17 = createActionCreator("SET_FAVORITES_COUNT");
+let $$S6 = createActionCreator("UPDATE_EXPANDED_CUSTOM_SECTIONS");
+let $$v21 = createActionCreator("SET_MOVING_RESOURCE");
+let $$A19 = createActionCreator("SET_NEW_SECTION_INDEX");
 let $$x22 = createOptimistThunk((e, t) => {
   let {
     name,
@@ -259,7 +259,7 @@ let $$L5 = createOptimistAction("BULK_RESOURCE_SET_FAVORITE", (e, t, {
         message: t.message
       }));
     } catch (t) {
-      e.dispatch(_$$s.error("An error occurred while favoriting these items"));
+      e.dispatch(FlashActions.error("An error occurred while favoriting these items"));
     }
   });
   let R = e.getState().user?.id;
@@ -557,7 +557,7 @@ let $$H20 = createOptimistAction("REMOVE_FILE_FAVORITE", (e, t, {
     }
   }, d);
 });
-let $$z13 = NC("ADD_FILE_FAVORITE");
+let $$z13 = createActionCreator("ADD_FILE_FAVORITE");
 let $$W2 = createOptimistThunk((e, t) => {
   let {
     optimistId
@@ -618,7 +618,7 @@ let K = (e, t, r, n, i) => XHR.put("/api/favorited_resources", {
       message: r
     }));
   } catch (t) {
-    e(_$$s.error("An error occurred while favoriting this item"));
+    e(FlashActions.error("An error occurred while favoriting this item"));
   }
 });
 let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
@@ -644,7 +644,7 @@ let Y = (e, t, r, n, a, s, o, l) => XHR.put("/api/favorited_resources", {
       }));
     } catch (n) {
       let t = r ? "favoriting this item" : "removing this favorite";
-      e(_$$s.error(`An error occurred while ${t}`));
+      e(FlashActions.error(`An error occurred while ${t}`));
     }
   }
 });

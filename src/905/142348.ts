@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { bL, QB } from "../905/174266";
 import $$a from "classnames";
-import { x } from "../905/962579";
+import { ErrorEnum } from "../905/962579";
 var s = $$a;
 let l = "flash_view--flashes--laY71";
 export function $$d0({
@@ -15,8 +15,8 @@ export function $$d0({
       return r ? jsx("div", {
         children: jsx("div", {
           className: s()({
-            "flash_view--flashError--WOTRi flash_view--flash--B2pbZ text--_negText--j9g-L": r.status === x.ERROR,
-            "flash_view--flash--B2pbZ text--_negText--j9g-L": r.status === x.DEFAULT
+            "flash_view--flashError--WOTRi flash_view--flash--B2pbZ text--_negText--j9g-L": r.status === ErrorEnum.ERROR,
+            "flash_view--flash--B2pbZ text--_negText--j9g-L": r.status === ErrorEnum.DEFAULT
           }),
           children: r.message
         })
@@ -35,7 +35,7 @@ export function $$c1({
       return a ? jsx("div", {
         className: "flash_view--flashPositioner--njLSF",
         children: jsx(bL, {
-          variant: a.status === x.ERROR ? "danger" : "default",
+          variant: a.status === ErrorEnum.ERROR ? "danger" : "default",
           children: jsx(QB, {
             children: a.message
           })

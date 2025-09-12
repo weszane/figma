@@ -1,4 +1,4 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { logWarning } from "../905/714362";
 import { P, o as _$$o } from "../905/717906";
 import { createOptimistThunk } from "../905/350402";
@@ -78,10 +78,10 @@ let $$g6 = createOptimistThunk(async (e, t) => {
     }));
   }
 });
-let $$f2 = NC("PUT_ALLOWLISTED_PLUGIN");
-let $$_4 = NC("DEL_ALLOWLISTED_PLUGIN");
-let $$A0 = NC("PUT_ALLOWLISTED_WIDGET");
-let $$y5 = NC("DEL_ALLOWLISTED_WIDGET");
+let $$f2 = createActionCreator("PUT_ALLOWLISTED_PLUGIN");
+let $$_4 = createActionCreator("DEL_ALLOWLISTED_PLUGIN");
+let $$A0 = createActionCreator("PUT_ALLOWLISTED_WIDGET");
+let $$y5 = createActionCreator("DEL_ALLOWLISTED_WIDGET");
 export const EE = $$A0;
 export const Pq = $$p1;
 export const Rg = $$f2;

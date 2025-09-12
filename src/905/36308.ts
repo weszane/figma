@@ -56,7 +56,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { EE } from '../905/316062';
 import { t as _$$t } from '../905/316903';
 import { e as _$$e3 } from '../905/318479';
-import { dh, IZ, K7 } from '../905/346794';
+import { reattachAndSyncMultiplayer, abandonAndReattachMultiplayer, detachMultiplayer } from '../905/346794';
 import { p as _$$p3 } from '../905/347427';
 import { Z as _$$Z } from '../905/357899';
 import { IOS as _$$p4, IOS_UIKIT, ANDROID, ANDROID_XML, SupportedPlatforms, WEB } from '../905/359509';
@@ -6914,19 +6914,19 @@ export function $$nN0(e) {
     }, {
       name: 'detach-multiplayer',
       callback: (e, t, i) => {
-        K7();
+        detachMultiplayer();
       },
       featureFlags: []
     }, {
       name: 'reattach-multiplayer',
       callback: (e, t, i) => {
-        dh();
+        reattachAndSyncMultiplayer();
       },
       featureFlags: []
     }, {
       name: 'abandon-reattach',
       callback: (e, t, i) => {
-        IZ();
+        abandonAndReattachMultiplayer();
       },
       featureFlags: []
     }, {

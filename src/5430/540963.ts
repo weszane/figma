@@ -5,7 +5,7 @@ import a from "../vendor/241899";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { x as _$$x } from "../905/211326";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AG } from "../figma_app/999312";
 import { A as _$$A } from "../5430/1650";
@@ -241,7 +241,7 @@ let X = function ({
       }));
       u(t);
     } catch (e) {
-      s(_$$s.error(e.message));
+      s(FlashActions.error(e.message));
     }
     r.current && (r.current.value = "");
   }, [s, u]);
@@ -1234,7 +1234,7 @@ function rj({
         setupStripeCallback: e => {
           l(!1);
           f(!1);
-          e || r(_$$s.error(getI18nString("community.seller.unable_to_launch_stripe_onboarding_please_check_your_details")));
+          e || r(FlashActions.error(getI18nString("community.seller.unable_to_launch_stripe_onboarding_please_check_your_details")));
         }
       }
     }));
@@ -1247,7 +1247,7 @@ function rj({
     r(tg({
       callback: e => {
         l(!1);
-        e || r(_$$s.error(getI18nString("community.seller.unable_to_open_stripe_dashboard")));
+        e || r(FlashActions.error(getI18nString("community.seller.unable_to_open_stripe_dashboard")));
       }
     }));
   };
@@ -2236,7 +2236,7 @@ export function $$si0({
   let l = t?.params.profileHandle ?? r?.params.profileHandle ?? null;
   let [c] = IT(ss(l ?? ""));
   useEffect(() => {
-    "errors" === c.status && (404 !== c.errors.status || s ? s && e ? customHistory.redirect(e.href) : a(_$$s.error(getI18nString("community.actions.error_fetching_profile_information"))) : customHistory.redirect("/404"));
+    "errors" === c.status && (404 !== c.errors.status || s ? s && e ? customHistory.redirect(e.href) : a(FlashActions.error(getI18nString("community.actions.error_fetching_profile_information"))) : customHistory.redirect("/404"));
   }, [a, c, s, e]);
   let u = c.data?.profile ?? null;
   return s ? jsx(eA, {

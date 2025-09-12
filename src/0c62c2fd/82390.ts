@@ -77,7 +77,7 @@ import { pW as _$$pW } from '../905/160095';
 import { Y5 } from '../905/163189';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
-import { _ as _$$_1 } from '../905/170564';
+import { NotificationType } from '../905/170564';
 import { F as _$$F4, y as _$$y2 } from '../905/171275';
 import { Be as _$$Be } from '../905/172516';
 import { Cm } from '../905/174697';
@@ -166,7 +166,7 @@ import { NN, w4, y1 } from '../905/445814';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { e as _$$e1 } from '../905/457828';
 import { dy as _$$dy, rS as _$$rS, Zp as _$$Zp, DG } from '../905/462076';
-import { Q as _$$Q4 } from '../905/463586';
+import { notificationActions } from '../905/463586';
 import { uo as _$$uo2, bE } from '../905/466026';
 import { H as _$$H7 } from '../905/474029';
 import { R as _$$R4 } from '../905/483499';
@@ -196,7 +196,7 @@ import { isSitesFeatureEnabled } from '../905/561485';
 import { U as _$$U2 } from '../905/566881';
 import { r as _$$r6 } from '../905/571562';
 import { N as _$$N4 } from '../905/572042';
-import { s as _$$s2 } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { e as _$$e10 } from '../905/579755';
 import { x as _$$x2 } from '../905/587214';
 import { O as _$$O5 } from '../905/587457';
@@ -3294,7 +3294,7 @@ function aX(e) {
       });
       n(!0);
     } catch (e) {
-      t(_$$s2.error('Failed to request team role', e));
+      t(FlashActions.error('Failed to request team role', e));
     }
   };
   return jsx(a$, {
@@ -4996,7 +4996,7 @@ let np = registerModal(({
       message: getI18nString('workspace_view.description_update_updated')
     })), () => {
       let e = getI18nString('workspace_view.description_update_error');
-      t(_$$s2.error(e));
+      t(FlashActions.error(e));
       console.error(e);
     })
   });
@@ -5194,7 +5194,7 @@ function nT({
             })),
             onrejected: () => {
               let e = getI18nString('workspace_view.toolbar.workspace_color_update_error');
-              r(_$$s2.error(e));
+              r(FlashActions.error(e));
               console.error(e);
             }
           });
@@ -14154,7 +14154,7 @@ let _b = registerModal(e => {
       draftsToDelete: _draftsToDelete,
       reposToDelete: _reposToDelete
     } = e;
-    _draftsToDelete.length + _reposToDelete.length > 100 ? n(_$$s2.error(getI18nString('file_browser.draft_delete_modal.unable_to_delete', {
+    _draftsToDelete.length + _reposToDelete.length > 100 ? n(FlashActions.error(getI18nString('file_browser.draft_delete_modal.unable_to_delete', {
       maxSize: 100
     }))) : (e.setSynchronousFileTransferInProgress(_draftsToDelete.length > 0), b(_draftsToDelete, _reposToDelete));
   };
@@ -15944,7 +15944,7 @@ function p5({
           loadedFolders: {}
         }));
       } catch (t) {
-        e.dispatch(_$$s2.error(t.message || getI18nString('file_browser.file_browser_actions.claim_team_error')));
+        e.dispatch(FlashActions.error(t.message || getI18nString('file_browser.file_browser_actions.claim_team_error')));
       }
     }, [e]);
   }();
@@ -19780,7 +19780,7 @@ function hD({
     if (!(l && E && C && r) || !v) return;
     let a = r === FProductAccessType.WHITEBOARD ? FFileType.WHITEBOARD : FFileType.DESIGN;
     a === FFileType.DESIGN ? e = C.designAccountTypeRequest?.status === 'pending' : a === FFileType.WHITEBOARD && (e = C.whiteboardAccountTypeRequest?.status === 'pending');
-    !0 === e && _(_$$s2.flash(getI18nString('team_view.request_upgrade.request_already_sent')));
+    !0 === e && _(FlashActions.flash(getI18nString('team_view.request_upgrade.request_already_sent')));
     _(_$$sf({
       view: 'team',
       teamId: l.id,
@@ -20874,7 +20874,7 @@ let xs = {
 let xi = (e, t, r) => e && e.id === r ? Promise.resolve(e) : _$$k6.getUser({
   userId: r
 }).then(e => e.data.meta).catch(e => {
-  t(_$$s2.error('Failed to get user', 5e3));
+  t(FlashActions.error('Failed to get user', 5e3));
   console.warn('Failed to get user files');
   return e;
 });
@@ -21741,7 +21741,7 @@ function xU({
       ignoreCurrentPlan: h
     })), n.onSubmitReturnToPrevView && m(_$$sf(getPreviousSelectedView() || {
       view: 'recentsAndSharing'
-    }))) : m(_$$s2.error(getI18nString('team_creation.your_team_name_cannot_be_empty')));
+    }))) : m(FlashActions.error(getI18nString('team_creation.your_team_name_cannot_be_empty')));
   };
   let w = !(t && !h) && !n.onSubmitReturnToPrevView;
   let j = b ? null : jsx(_$$X7, {
@@ -21841,7 +21841,7 @@ function xW({
   let o = useSelector(e => e.currentTeamId);
   let l = Um();
   let d = useSelector(e => e.teamCreation);
-  return isExternalRestricted(n, r) ? (customHistory.redirect('/'), t(_$$s2.error(getI18nString('team_creation.missing_team_creation_controls'))), null) : jsx(xU, {
+  return isExternalRestricted(n, r) ? (customHistory.redirect('/'), t(FlashActions.error(getI18nString('team_creation.missing_team_creation_controls'))), null) : jsx(xU, {
     currentTeamId: o,
     currentUserOrgId: r,
     user: n,
@@ -21877,7 +21877,7 @@ function xz({
     }).catch(e => {
       e.status !== 400 && (n(_$$sf({
         view: 'recentsAndSharing'
-      })), n(_$$s2.error(`${e.data.message}`)));
+      })), n(FlashActions.error(`${e.data.message}`)));
       l(!1);
     });
   }, [n, d]);
@@ -22169,8 +22169,8 @@ function x6(e) {
   let l = useMemo(() => getI18nString('downtime_banner.ongoing.currently_undergoing_maintenance'), []);
   let d = useRef(e.notifications);
   let c = useCallback(() => {
-    d.current.length > 0 && dispatch(_$$Q4.dequeue({
-      type: _$$_1.DOWNTIME
+    d.current.length > 0 && dispatch(notificationActions.dequeue({
+      type: NotificationType.DOWNTIME
     }));
   }, [dispatch, d]);
   useEffect(() => {
@@ -22188,12 +22188,12 @@ function x6(e) {
             let r = n(notifMinutesRemaining);
             let s = i(payload.helpcenterUrl, _$$Z5.hideWarningNotif());
             let o = a(_$$Z5.hideWarningNotif());
-            dispatch(_$$Q4.dequeue({
-              type: _$$_1.DOWNTIME
+            dispatch(notificationActions.dequeue({
+              type: NotificationType.DOWNTIME
             }));
-            dispatch(_$$Q4.enqueue({
+            dispatch(notificationActions.enqueue({
               notification: {
-                type: _$$_1.DOWNTIME,
+                type: NotificationType.DOWNTIME,
                 message: r,
                 acceptCallback: s,
                 dismissCallback: o
@@ -22205,12 +22205,12 @@ function x6(e) {
           if (payload && hidingDowntimeNotif !== _$$y5.ongoingHidden) {
             let r = i(payload.helpcenterUrl, _$$Z5.hideOngoingNotif());
             let s = a(_$$Z5.hideOngoingNotif());
-            dispatch(_$$Q4.dequeue({
-              type: _$$_1.DOWNTIME
+            dispatch(notificationActions.dequeue({
+              type: NotificationType.DOWNTIME
             }));
-            dispatch(_$$Q4.enqueue({
+            dispatch(notificationActions.enqueue({
               notification: {
-                type: _$$_1.DOWNTIME,
+                type: NotificationType.DOWNTIME,
                 message: l,
                 acceptCallback: r,
                 dismissCallback: s

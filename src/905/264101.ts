@@ -2,7 +2,7 @@ import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { XHR } from "../905/910117";
 import { cT } from "../905/997533";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, getI18nStringAlias } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
@@ -12,20 +12,20 @@ import { WJ, yJ, C$, hz, S5 } from "../figma_app/24841";
 import { yV, r6 } from "../905/990455";
 import { k } from "../905/93362";
 export let $$f5 = createOptimistThunk((e, t) => {
-  t.passwordNew !== t.passwordRetype ? e.dispatch(_$$s.error(getI18nString("api_user.error.please_retype_your_new_password_they_don_t_match"))) : XHR.post("/api/password/change", {
+  t.passwordNew !== t.passwordRetype ? e.dispatch(FlashActions.error(getI18nString("api_user.error.please_retype_your_new_password_they_don_t_match"))) : XHR.post("/api/password/change", {
     password_old: t.passwordOld,
     password_new: t.passwordNew
   }).then(() => {
     e.dispatch(popModalStack());
-    e.dispatch(_$$s.flash(getI18nString("api_user.password_changed")));
+    e.dispatch(FlashActions.flash(getI18nString("api_user.password_changed")));
   }).catch(({
     response: t
   }) => {
     try {
       t = JSON.parse(t);
-      e.dispatch(_$$s.error(resolveMessage(t, t.message)));
+      e.dispatch(FlashActions.error(resolveMessage(t, t.message)));
     } catch (t) {
-      e.dispatch(_$$s.error(t));
+      e.dispatch(FlashActions.error(t));
     }
   });
 });
@@ -218,21 +218,21 @@ let $$w12 = createOptimistThunk((e, t) => {
   e.dispatch(r1());
 });
 let $$C0 = createOptimistThunk(e => {
-  let t = e.dispatch(_$$s.flash(getI18nString("api_user.one_moment")));
+  let t = e.dispatch(FlashActions.flash(getI18nString("api_user.one_moment")));
   XHR.post("/api/password/forgot", {
     username: e.getState().user.email
   }).then(() => {
-    e.dispatch(_$$s.remove({
+    e.dispatch(FlashActions.remove({
       id: t
     }));
-    e.dispatch(_$$s.flash(getI18nString("api_user.reset-password-instructions", {
+    e.dispatch(FlashActions.flash(getI18nString("api_user.reset-password-instructions", {
       email: e.getState().user.email
     })));
   }).catch(() => {
-    e.dispatch(_$$s.remove({
+    e.dispatch(FlashActions.remove({
       id: t
     }));
-    e.dispatch(_$$s.error(getI18nString("api_user.error.an_error_occurred_while_resetting_your_password")));
+    e.dispatch(FlashActions.error(getI18nString("api_user.error.an_error_occurred_while_resetting_your_password")));
   });
 });
 let $$T9 = createOptimistThunk(e => {
@@ -240,10 +240,10 @@ let $$T9 = createOptimistThunk(e => {
     let t = getI18nString("api_user.confirmation-email", {
       email: e.getState().user.email
     });
-    e.dispatch(_$$s.flash(t));
+    e.dispatch(FlashActions.flash(t));
   }).catch(() => {
     let t = getI18nString("api_user.error.an_error_occurred_while_sending_the_confirmation_email");
-    e.dispatch(_$$s.error(t));
+    e.dispatch(FlashActions.error(t));
   });
 });
 let $$k2 = createOptimistThunk((e, t) => {
@@ -259,8 +259,8 @@ let $$k2 = createOptimistThunk((e, t) => {
     let i = JSON.parse(t);
     if (i.i18n?.id) {
       let t = getI18nStringAlias(i.i18n.id);
-      e.dispatch(_$$s.flash(t));
-    } else e.dispatch(_$$s.flash(getI18nString("api_user.account_deleted_redirecting")));
+      e.dispatch(FlashActions.flash(t));
+    } else e.dispatch(FlashActions.flash(getI18nString("api_user.account_deleted_redirecting")));
     setTimeout(() => {
       e.dispatch(S5());
     }, 3e3);
@@ -274,8 +274,8 @@ let $$k2 = createOptimistThunk((e, t) => {
     let i = JSON.parse(t);
     if (i.i18n?.id) {
       let t = getI18nStringAlias(i.i18n.id);
-      e.dispatch(_$$s.error(t));
-    } else e.dispatch(_$$s.error(getI18nString("api_user.error.an_error_occurred_while_attempting_to_delete_your_account")));
+      e.dispatch(FlashActions.error(t));
+    } else e.dispatch(FlashActions.error(getI18nString("api_user.error.an_error_occurred_while_attempting_to_delete_your_account")));
   });
 });
 export const BD = $$C0;

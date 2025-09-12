@@ -8,7 +8,7 @@ import { mapNodeToComponent } from '../905/531105';
 import { validateWithVm, PropTypes } from '../905/816730';
 import { propertyMenuItemProps, validatePropertyMenuOptions } from '../905/828428';
 import { getSceneGraphInstance } from '../905/830071';
-import { Lb } from '../905/835985';
+import { reconcileWidgetTree } from '../905/835985';
 import { AuthError, InternalError, RequestError } from '../905/845428';
 import { loadAndReconcileResources } from '../905/866640';
 import { isDevEnvironment } from '../figma_app/169182';
@@ -564,7 +564,7 @@ export class WidgetManager {
               }
               const start = window.performance.now();
               setWidgetRendering(widgetId, true);
-              Lb({
+              reconcileWidgetTree({
                 widgetNodeID: widgetId,
                 newVRoot: vRoot,
                 oldVRoot: state.oldVRoot,

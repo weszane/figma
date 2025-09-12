@@ -1,4 +1,4 @@
-import { NC } from '../905/17179';
+import { createActionCreator } from '../905/73481';
 import { d as _$$d } from '../905/91820';
 import { showModalHandler } from '../905/156213';
 import { VisualBellActions } from '../905/302958';
@@ -7,7 +7,7 @@ import { n as _$$n } from '../905/347702';
 import { createOptimistThunk } from '../905/350402';
 import { OpenTarget } from '../905/380844';
 import { subscribeAndAwaitData } from '../905/553831';
-import { s as _$$s2 } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { to as _$$to } from '../905/612685';
@@ -67,7 +67,7 @@ let $$B18 = createOptimistThunk((e, t) => {
   Object.keys(i).length > 0 && WB().optimisticallyUpdate(i, r);
   a && WB().optimisticallyCreate(a, r);
 });
-let $$G20 = NC('FILE_PERMISSIONS_PUT');
+let $$G20 = createActionCreator('FILE_PERMISSIONS_PUT');
 let $$V11 = createOptimistThunk(async (e, t) => {
   let r = e.getState();
   let i = {};
@@ -113,7 +113,7 @@ let $$V11 = createOptimistThunk(async (e, t) => {
     }
   }).catch(() => {
     e.dispatch(VisualBellActions.dequeue({}));
-    e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.file_copy_error')));
+    e.dispatch(FlashActions.error(getI18nString('file_browser.file_browser_actions.file_copy_error')));
   });
 });
 let $$H14 = createOptimistThunk((e, t) => {
@@ -203,7 +203,7 @@ let $$Y0 = createOptimistThunk((e, t) => {
     }));
   });
 });
-let $$$6 = NC('FILE_RESTORE');
+let $$$6 = createActionCreator('FILE_RESTORE');
 let $$X9 = createOptimistThunk((e, t) => {
   let {
     fileKey,
@@ -212,14 +212,14 @@ let $$X9 = createOptimistThunk((e, t) => {
   let i = e.getState().versionHistory.versions.filter(e => e.created_at).sort((e, t) => e.created_at < t.created_at ? -1 : 1);
   let a = i.findIndex(e => e.id === version.id);
   if (a === -1 || a === 0) {
-    e.dispatch(_$$s2.error('Unable to find version to restore'));
+    e.dispatch(FlashActions.error('Unable to find version to restore'));
     return;
   }
   let s = i[a - 1];
   s ? e.dispatch($$$6({
     fileKey,
     versionId: s.id
-  })) : e.dispatch(_$$s2.error('Unable to find version to restore'));
+  })) : e.dispatch(FlashActions.error('Unable to find version to restore'));
 });
 let $$q12 = createOptimistThunk((e, t) => {
   Dk(t.embedCode).then(() => {
@@ -229,7 +229,7 @@ let $$q12 = createOptimistThunk((e, t) => {
       message: getI18nString('file_browser.file_browser_actions.embed_code_copied')
     }));
   }).catch(() => {
-    e.dispatch(_$$s2.error(getI18nString('file_browser.file_browser_actions.embed_code_copy_error')));
+    e.dispatch(FlashActions.error(getI18nString('file_browser.file_browser_actions.embed_code_copy_error')));
   });
 });
 function J(e, t) {
@@ -295,12 +295,12 @@ let $$ee4 = createOptimistThunk((e, t) => {
     });
   }
 });
-let $$et13 = NC('FILE_REMOVE_FROM_PROJECT');
-let $$er10 = NC('FILE_MOVE');
-let $$en15 = NC('FILE_POST');
-let $$ei5 = NC('FILE_BATCH_SUBSCRIBE_TO_REALTIME');
-let $$ea22 = NC('FILE_BATCH_PUT');
-let $$es23 = NC('FILE_PUT');
+let $$et13 = createActionCreator('FILE_REMOVE_FROM_PROJECT');
+let $$er10 = createActionCreator('FILE_MOVE');
+let $$en15 = createActionCreator('FILE_POST');
+let $$ei5 = createActionCreator('FILE_BATCH_SUBSCRIBE_TO_REALTIME');
+let $$ea22 = createActionCreator('FILE_BATCH_PUT');
+let $$es23 = createActionCreator('FILE_PUT');
 let eo = debounce((e, t) => {
   let r = t.getState();
   r.activeFileUsers && (e = e.filter(e => !(e in r.activeFileUsers)));
@@ -332,8 +332,8 @@ let eo = debounce((e, t) => {
 createOptimistThunk((e, t) => {
   eo(t.fileKeys, e);
 });
-let $$el16 = NC('FILE_CLEAR_ACTIVE_USERS');
-let $$ed3 = NC('FILE_SET_ACTIVE_USERS');
+let $$el16 = createActionCreator('FILE_CLEAR_ACTIVE_USERS');
+let $$ed3 = createActionCreator('FILE_SET_ACTIVE_USERS');
 export const $m = $$Y0;
 export const FE = $$U1;
 export const GZ = $$K2;

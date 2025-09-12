@@ -6,7 +6,7 @@ import { _Z } from "../figma_app/819288";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { R } from "../905/441305";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { E9 } from "../figma_app/314264";
 import { getUserId } from "../905/372672";
@@ -60,7 +60,7 @@ export function $$b0({
       y(pinnedFile.resourceId);
       r();
     } catch (e) {
-      v(_$$s.error(getI18nString("file_browser.pinning.delete_pin_modal.error")));
+      v(FlashActions.error(getI18nString("file_browser.pinning.delete_pin_modal.error")));
     } finally {
       j(!1);
     }

@@ -1,10 +1,10 @@
 import { DesignGraphElements } from "../figma_app/763686";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { analyticsEventManager } from "../905/449184";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { _ as _$$_ } from "../905/170564";
-import { Q } from "../905/463586";
+import { NotificationType } from "../905/170564";
+import { notificationActions } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { getSelectedFile } from "../905/766303";
@@ -88,9 +88,9 @@ let $$T2 = createOptimistThunk((e, t) => {
     let r = y(t.fileKey, t.experimentName);
     f(t.userId, t.fileKey, t.experimentName, t.toastType);
     setTimeout(() => {
-      e.dispatch(Q.enqueue({
+      e.dispatch(notificationActions.enqueue({
         notification: {
-          type: _$$_.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS,
+          type: NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS,
           message: getI18nString("comments.get_notified_about_all_comments_prompt"),
           acceptCallback: () => r(!0),
           dismissCallback: () => r(!1)
@@ -117,7 +117,7 @@ let $$I4 = createOptimistThunk((e, t) => {
     }));
   }
 });
-let $$S1 = NC("USER_NOTIFICATIONS_SET_COMMUNITY_PROFILE_BELL");
+let $$S1 = createActionCreator("USER_NOTIFICATIONS_SET_COMMUNITY_PROFILE_BELL");
 export const EJ = $$E0;
 export const Q$ = $$S1;
 export const ZI = $$T2;

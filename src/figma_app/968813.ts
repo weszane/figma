@@ -1,12 +1,12 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { createOptimistThunk } from "../905/350402";
 import { Sb } from "../figma_app/49598";
 import { Vx, uV, fs, b6 } from "../figma_app/559491";
 import { Cx, x2, of } from "../figma_app/714946";
 import { Sc } from "../905/18797";
 import { d as _$$d } from "../905/751443";
-let $$c1 = NC("UPDATE_FACE_STAMPS");
-let $$u3 = NC("PUT_DEFAULT_FIGJAM_INSERT_ITEMS");
+let $$c1 = createActionCreator("UPDATE_FACE_STAMPS");
+let $$u3 = createActionCreator("PUT_DEFAULT_FIGJAM_INSERT_ITEMS");
 let $$p2 = createOptimistThunk(e => {
   let t = e.getState().selectedView;
   t && "fullscreen" === t.view && h(e);

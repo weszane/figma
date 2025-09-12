@@ -43,7 +43,7 @@ import { ox as _$$ox } from '../905/163832';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { m as _$$m2 } from '../905/168176';
-import { _ as _$$_3 } from '../905/170564';
+import { NotificationType } from '../905/170564';
 import { P as _$$P3 } from '../905/175083';
 import { g as _$$g2 } from '../905/181093';
 import { Y as _$$Y3 } from '../905/185567';
@@ -134,7 +134,7 @@ import { N as _$$N3 } from '../905/544669';
 import { lu as _$$lu } from '../905/545842';
 import { U as _$$U3 } from '../905/566881';
 import { d as _$$d8, O as _$$O } from '../905/572941';
-import { s as _$$s4 } from '../905/573154';
+import { FlashActions } from '../905/573154';
 import { jO } from '../905/573265';
 import { VisualBellIcon } from '../905/576487';
 import { e as _$$e7 } from '../905/579635';
@@ -214,7 +214,7 @@ import { l as _$$l7 } from '../905/840533';
 import { o0 as _$$o3 } from '../905/844131';
 import { d2 as _$$d5, rp as _$$rp } from '../905/845277';
 import { a as _$$a0 } from '../905/847494';
-import { $ as _$$$5 } from '../905/851662';
+import { notificationActions } from '../905/851662';
 import { V as _$$V3 } from '../905/856857';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n3, sg as _$$sg } from '../905/859698';
@@ -2223,10 +2223,10 @@ function iq() {
         view: 'fullscreen',
         fileKey: r.data.meta.file_key,
         editorType: FEditorType.Whiteboard
-      })), r.data.meta.missing_hub_file && t(_$$s4.error(getI18nString('figjam_try.template_creation_failed'))));
+      })), r.data.meta.missing_hub_file && t(FlashActions.error(getI18nString('figjam_try.template_creation_failed'))));
     }).catch(e => {
       console.error(e);
-      t(_$$s4.error(getI18nString('figjam_try.failed_to_create_file')));
+      t(FlashActions.error(getI18nString('figjam_try.failed_to_create_file')));
       setTimeout(() => window.history.go(-1), 2e3);
     });
   }, [t, e, n, r, i]);
@@ -4742,10 +4742,10 @@ function oj(e) {
             orgId: orgTrial.resourceId,
             billingTrialId: orgTrial.id
           }).then(() => {
-            i(_$$s4.flash(getI18nString('payments_modal.org_trial_pending.success')));
+            i(FlashActions.flash(getI18nString('payments_modal.org_trial_pending.success')));
           }).catch(e => {
             console.error(e);
-            i(_$$s4.error(getI18nString('payments_modal.org_trial_pending.error')));
+            i(FlashActions.error(getI18nString('payments_modal.org_trial_pending.error')));
             n(!1);
           }));
         },
@@ -4836,10 +4836,10 @@ function oZ({
           orgId: e.resourceId,
           billingTrialId: e.id
         });
-        n(_$$s4.flash(getI18nString('payments_modal.org_trial_pending.success')));
+        n(FlashActions.flash(getI18nString('payments_modal.org_trial_pending.success')));
       } catch (e) {
         console.error(e);
-        n(_$$s4.error(getI18nString('payments_modal.org_trial_pending.error')));
+        n(FlashActions.error(getI18nString('payments_modal.org_trial_pending.error')));
       } finally {
         r(!1);
       }
@@ -8358,21 +8358,21 @@ class _p extends _a {
       let e = this.getCurrentNotif();
       if (!e) return null;
       switch (e.type) {
-        case _$$_3.COMPONENT_PUBLISH_ERROR:
-        case _$$_3.DOWNTIME:
+        case NotificationType.COMPONENT_PUBLISH_ERROR:
+        case NotificationType.DOWNTIME:
           return _$$A15;
-        case _$$_3.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
           return _$$A10;
-        case _$$_3.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
           return _$$A13;
-        case _$$_3.MOVE_COMPONENTS_PROMPT:
+        case NotificationType.MOVE_COMPONENTS_PROMPT:
           return _$$A12;
-        case _$$_3.BRANCHING_OTHER_USER_MERGING:
-        case _$$_3.SEE_WHATS_CHANGED:
+        case NotificationType.BRANCHING_OTHER_USER_MERGING:
+        case NotificationType.SEE_WHATS_CHANGED:
           return _$$A13;
-        case _$$_3.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
           return _$$A11;
-        case _$$_3.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return _$$A14;
       }
     };
@@ -8381,23 +8381,23 @@ class _p extends _a {
       if (!e) return null;
       let t = e.type;
       switch (t) {
-        case _$$_3.COMPONENT_PUBLISH_ERROR:
+        case NotificationType.COMPONENT_PUBLISH_ERROR:
           return 'Retry...';
-        case _$$_3.DOWNTIME:
+        case NotificationType.DOWNTIME:
           return 'Learn more';
-        case _$$_3.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
           return null;
-        case _$$_3.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
           return getI18nString('collaboration.branching.update');
-        case _$$_3.MOVE_COMPONENTS_PROMPT:
+        case NotificationType.MOVE_COMPONENTS_PROMPT:
           return getI18nString('design_systems.updates.publish');
-        case _$$_3.BRANCHING_OTHER_USER_MERGING:
+        case NotificationType.BRANCHING_OTHER_USER_MERGING:
           return null;
-        case _$$_3.SEE_WHATS_CHANGED:
+        case NotificationType.SEE_WHATS_CHANGED:
           return getI18nString('collaboration.feedback.compare');
-        case _$$_3.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
           return getI18nString('fullscreen_actions.paste');
-        case _$$_3.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return getI18nString('comments.turn_on');
         default:
           throwTypeError(t);
@@ -8408,7 +8408,7 @@ class _p extends _a {
       if (!e) return;
       let t = e.type;
       switch (t) {
-        case _$$_3.COMPONENT_PUBLISH_ERROR:
+        case NotificationType.COMPONENT_PUBLISH_ERROR:
           this.props.dispatch(showModalHandler({
             type: _$$dD,
             data: {
@@ -8416,19 +8416,19 @@ class _p extends _a {
             }
           }));
           return;
-        case _$$_3.DOWNTIME:
-        case _$$_3.BRANCHING_SOURCE_FILE_UPDATED:
-        case _$$_3.MOVE_COMPONENTS_PROMPT:
+        case NotificationType.DOWNTIME:
+        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationType.MOVE_COMPONENTS_PROMPT:
           e && e.acceptCallback && e.acceptCallback();
           return;
-        case _$$_3.AUTOSAVE_CHANGES_RESTORED:
-        case _$$_3.BRANCHING_OTHER_USER_MERGING:
+        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationType.BRANCHING_OTHER_USER_MERGING:
           return;
-        case _$$_3.SEE_WHATS_CHANGED:
-        case _$$_3.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationType.SEE_WHATS_CHANGED:
+        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           e && e.acceptCallback && e.acceptCallback();
           return;
-        case _$$_3.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
           e && (Fullscreen.pasteFromSerializedClipboardData(e.downloadUrl, e.deviceType, e.timestamp), e.acceptCallback && e.acceptCallback());
           return;
         default:
@@ -8441,16 +8441,16 @@ class _p extends _a {
       if (this.props.hasMobileNativeToolbar) return _i.TOP_CENTER;
       let t = e.type;
       switch (t) {
-        case _$$_3.COMPONENT_PUBLISH_ERROR:
-        case _$$_3.DOWNTIME:
-        case _$$_3.BRANCHING_SOURCE_FILE_UPDATED:
-        case _$$_3.MOVE_COMPONENTS_PROMPT:
-        case _$$_3.AUTOSAVE_CHANGES_RESTORED:
-        case _$$_3.BRANCHING_OTHER_USER_MERGING:
-        case _$$_3.SEE_WHATS_CHANGED:
-        case _$$_3.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationType.COMPONENT_PUBLISH_ERROR:
+        case NotificationType.DOWNTIME:
+        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationType.MOVE_COMPONENTS_PROMPT:
+        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationType.BRANCHING_OTHER_USER_MERGING:
+        case NotificationType.SEE_WHATS_CHANGED:
+        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return _i.BOTTOM_RIGHT;
-        case _$$_3.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
           return e.isFigJam ? _i.TOP_CENTER : _i.BOTTOM_RIGHT;
         default:
           throwTypeError(t);
@@ -8461,16 +8461,16 @@ class _p extends _a {
       if (!e) return !1;
       let t = e.type;
       switch (t) {
-        case _$$_3.COMPONENT_PUBLISH_ERROR:
+        case NotificationType.COMPONENT_PUBLISH_ERROR:
           return !0;
-        case _$$_3.DOWNTIME:
-        case _$$_3.AUTOSAVE_CHANGES_RESTORED:
-        case _$$_3.BRANCHING_SOURCE_FILE_UPDATED:
-        case _$$_3.MOVE_COMPONENTS_PROMPT:
-        case _$$_3.BRANCHING_OTHER_USER_MERGING:
-        case _$$_3.SEE_WHATS_CHANGED:
-        case _$$_3.CLIPBOARD_DATA_AVAILABLE:
-        case _$$_3.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
+        case NotificationType.DOWNTIME:
+        case NotificationType.AUTOSAVE_CHANGES_RESTORED:
+        case NotificationType.BRANCHING_SOURCE_FILE_UPDATED:
+        case NotificationType.MOVE_COMPONENTS_PROMPT:
+        case NotificationType.BRANCHING_OTHER_USER_MERGING:
+        case NotificationType.SEE_WHATS_CHANGED:
+        case NotificationType.CLIPBOARD_DATA_AVAILABLE:
+        case NotificationType.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return !1;
         default:
           throwTypeError(t);
@@ -8478,7 +8478,7 @@ class _p extends _a {
     };
     this.dequeueNotification = () => {
       let e = this.getCurrentNotif();
-      e && this.props.dispatch(_$$$5.dequeue({
+      e && this.props.dispatch(notificationActions.dequeue({
         type: e.type
       }));
     };
@@ -8495,7 +8495,7 @@ function _m(e) {
   return (useEffect(() => {
     a && s !== null && trackEventAnalytics('curator_collision', {
       blocking_overlay_id: a,
-      blocked_notif_type: _$$_3[s]
+      blocked_notif_type: NotificationType[s]
     });
   }, [a, s]), a) ? null : jsx(_p, {
     recordingKey: e.recordingKey,

@@ -1,4 +1,4 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Q } from "../905/618914";
@@ -10,9 +10,9 @@ import { checkOrgUserPermission } from "../figma_app/465071";
 import { Eh } from "../figma_app/617654";
 import { createOptimistThunk } from "../905/350402";
 import { Cx, x2, of } from "../figma_app/714946";
-let $$m2 = NC("LICENSE_GROUP_DELETE");
-let $$g3 = NC("LICENSE_GROUP_UPDATE");
-let $$f1 = NC("LICENSE_GROUP_SET");
+let $$m2 = createActionCreator("LICENSE_GROUP_DELETE");
+let $$g3 = createActionCreator("LICENSE_GROUP_UPDATE");
+let $$f1 = createActionCreator("LICENSE_GROUP_SET");
 createOptimistThunk(async (e, t) => {
   let r = t.orgId;
   r && (await y(e, t, r));

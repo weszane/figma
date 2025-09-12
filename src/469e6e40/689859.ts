@@ -5,7 +5,7 @@ import { Ex, zE, vj } from "../figma_app/919079";
 import { V } from "../figma_app/312987";
 import { $$ } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -208,11 +208,11 @@ let $$C0 = registerModal(function (e) {
                   defaultPaidStatusWhiteboard: T
                 });
                 O(!1);
-                t(_$$s.flash(getI18nString("default_paid_status_modal.updated_default_roles.seat_rename")));
+                t(FlashActions.flash(getI18nString("default_paid_status_modal.updated_default_roles.seat_rename")));
                 t(hideModal());
               } catch (e) {
                 O(!1);
-                t(_$$s.flash("An error has occured. Please try again"));
+                t(FlashActions.flash("An error has occured. Please try again"));
               }
             },
             children: renderI18nText("general.save")

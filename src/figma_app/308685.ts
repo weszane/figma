@@ -1,16 +1,16 @@
 import { Fullscreen, DesignGraphElements } from "../figma_app/763686";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { ds } from "../figma_app/314264";
 import { R9 } from "../905/977824";
 import { q } from "../figma_app/403368";
 import { createOptimistThunk } from "../905/350402";
-let $$d6 = NC("MULTIPLAYER_EMOJI_UPDATE_EMOJI_WHEEL_POSITION");
-let $$c2 = NC("MULTIPLAYER_EMOJI_CLEAR_STATE");
+let $$d6 = createActionCreator("MULTIPLAYER_EMOJI_UPDATE_EMOJI_WHEEL_POSITION");
+let $$c2 = createActionCreator("MULTIPLAYER_EMOJI_CLEAR_STATE");
 let $$u1 = createOptimistThunk(e => {
   Fullscreen?.setIsInCursorChat(!1);
   e.dispatch($$c2());
 });
-let $$p9 = NC("MULTIPLAYER_EMOJI_START_CHATTING");
+let $$p9 = createActionCreator("MULTIPLAYER_EMOJI_START_CHATTING");
 let $$_0 = createOptimistThunk((e, t) => {
   let r = e.getState();
   0 > [DesignGraphElements.HAND, DesignGraphElements.SELECT, DesignGraphElements.HAND_SELECT].indexOf(r.mirror.appModel.currentTool) && Fullscreen?.triggerAction("set-tool-default", null);
@@ -21,13 +21,13 @@ let $$_0 = createOptimistThunk((e, t) => {
   });
   e.dispatch($$p9(t));
 });
-let $$h5 = NC("MULTIPLAYER_EMOJI_STOP_REACTING");
-let $$m3 = NC("MULTIPLAYER_EMOJI_START_REACTING");
+let $$h5 = createActionCreator("MULTIPLAYER_EMOJI_STOP_REACTING");
+let $$m3 = createActionCreator("MULTIPLAYER_EMOJI_START_REACTING");
 let $$g8 = createOptimistThunk((e, t) => {
   R9.resetReactions();
   e.dispatch($$m3(t));
 });
-let $$f4 = NC("MULTIPLAYER_EMOJI_TOGGLE_EMOJI_WHEEL");
+let $$f4 = createActionCreator("MULTIPLAYER_EMOJI_TOGGLE_EMOJI_WHEEL");
 let $$E7 = createOptimistThunk((e, t) => {
   let r = e.getState();
   ds("Toggled emoji wheel", r.openFile?.key, r, {

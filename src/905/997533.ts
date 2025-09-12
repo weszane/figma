@@ -15,7 +15,7 @@ import { _G } from "../905/164233";
 import { qB, By, RE } from "../905/862321";
 import { g as _$$g } from "../905/248178";
 import { p as _$$p } from "../905/300815";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { createOptimistThunk } from "../905/350402";
@@ -110,7 +110,7 @@ let $$R1 = createOptimistThunk((e, {
     e.dispatch(My({
       userId: t.meta.id
     }));
-    e.dispatch(_$$s.flash(getI18nString("auth.sign-in-success", {
+    e.dispatch(FlashActions.flash(getI18nString("auth.sign-in-success", {
       email: t.meta.email
     })));
     new _$$P().sendToOtherTabs(Rg, t.meta.email);

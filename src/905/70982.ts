@@ -1,10 +1,10 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { Q } from "../905/150006";
 import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
-let $$d5 = NC("RECENT_PROTOTYPE_UNMARK_VIEWED");
+let $$d5 = createActionCreator("RECENT_PROTOTYPE_UNMARK_VIEWED");
 let $$c14 = createOptimistThunk((e, t) => {
   let i = XHR.del(`/api/files/${t.fileKey}/prototype/view`, {
     page_id: t.pageId
@@ -41,23 +41,23 @@ let $$u6 = createOptimistThunk((e, t) => {
     }));
   }).catch(() => {});
 });
-let $$p12 = NC("PROTOTYPE_RESET_RECENTS");
-let m = NC("RECENT_PROTOTYPE_DELETE");
-let $$h2 = NC("RECENT_PROTOTYPE_POST");
-let $$g17 = NC("PROTOTYPE_SET_IS_FOOTER_VISIBLE");
-let $$f1 = NC("PROTOTYPE_SET_IS_RECONNECTING");
-let $$_11 = NC("PROTOTYPE_SET_PROGRESS_BAR_MODE");
-let $$A4 = NC("PROTOTYPE_SET_BACKGROUND_COLOR");
-let $$y15 = NC("PROTOTYPE_SET_CURRENT_PAGE");
-let $$b0 = NC("PROTOTYPE_SET_PAGES");
-let $$v7 = NC("PROTOTYPE_SHOW_ONLY_MY_COMMENTS");
-let $$I8 = NC("PROTOTYPE_SHOW_RESOLVED_COMMENTS");
-let $$E3 = NC("PROTOTYPE_HIDE_COMMENTS");
-let $$x9 = NC("PROTOTYPE_SHOW_COMMENTS");
-NC("PROTOTYPE_SET_DISABLE_DEFAULT_KEYBOARD_NAV");
-let $$S10 = NC("PROTOTYPE_RESET");
-let $$w13 = NC("DELETE_RECENT_PROTOTYPE");
-let $$C16 = NC("RESTORE_RECENT_PROTOTYPE");
+let $$p12 = createActionCreator("PROTOTYPE_RESET_RECENTS");
+let m = createActionCreator("RECENT_PROTOTYPE_DELETE");
+let $$h2 = createActionCreator("RECENT_PROTOTYPE_POST");
+let $$g17 = createActionCreator("PROTOTYPE_SET_IS_FOOTER_VISIBLE");
+let $$f1 = createActionCreator("PROTOTYPE_SET_IS_RECONNECTING");
+let $$_11 = createActionCreator("PROTOTYPE_SET_PROGRESS_BAR_MODE");
+let $$A4 = createActionCreator("PROTOTYPE_SET_BACKGROUND_COLOR");
+let $$y15 = createActionCreator("PROTOTYPE_SET_CURRENT_PAGE");
+let $$b0 = createActionCreator("PROTOTYPE_SET_PAGES");
+let $$v7 = createActionCreator("PROTOTYPE_SHOW_ONLY_MY_COMMENTS");
+let $$I8 = createActionCreator("PROTOTYPE_SHOW_RESOLVED_COMMENTS");
+let $$E3 = createActionCreator("PROTOTYPE_HIDE_COMMENTS");
+let $$x9 = createActionCreator("PROTOTYPE_SHOW_COMMENTS");
+createActionCreator("PROTOTYPE_SET_DISABLE_DEFAULT_KEYBOARD_NAV");
+let $$S10 = createActionCreator("PROTOTYPE_RESET");
+let $$w13 = createActionCreator("DELETE_RECENT_PROTOTYPE");
+let $$C16 = createActionCreator("RESTORE_RECENT_PROTOTYPE");
 export const $9 = $$b0;
 export const AF = $$f1;
 export const Am = $$h2;

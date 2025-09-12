@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { isProdCluster, getSupportEmail } from "../figma_app/169182";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { L3, wB, b_ } from "../figma_app/819458";
 let o = class e extends PureComponent {
@@ -50,7 +50,7 @@ let o = class e extends PureComponent {
       userName
     } = this.props;
     if (isProdCluster() && userEmail?.endsWith("@figma.com")) {
-      this.props.dispatch(_$$s.flash("Hello there! Sadly Figmates cannot use this feature. Please use a non-@figma.com account to test Zendesk"));
+      this.props.dispatch(FlashActions.flash("Hello there! Sadly Figmates cannot use this feature. Please use a non-@figma.com account to test Zendesk"));
       return;
     }
     this.init().then(() => wB({
@@ -59,7 +59,7 @@ let o = class e extends PureComponent {
     }, e)).then(() => {
       this.state.isOpen || b_();
     }).catch(() => {
-      this.props.dispatch(_$$s.flash(getI18nString("help_widget.zendesk.unavailable_error_message", {
+      this.props.dispatch(FlashActions.flash(getI18nString("help_widget.zendesk.unavailable_error_message", {
         supportEmail: getSupportEmail()
       })));
     });

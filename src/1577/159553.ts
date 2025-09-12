@@ -39,7 +39,7 @@ import H from "../vendor/197638";
 import { UF } from "../905/403166";
 import { buildUploadUrl } from "../figma_app/169182";
 import { h1, Ak } from "../905/986103";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nState } from "../figma_app/363242";
 import { Pf } from "../905/590952";
 import { A as _$$A } from "../905/639174";
@@ -220,7 +220,7 @@ function ef(e) {
       block.hide_after_action ? callbacks.hideNotification() : (callbacks.followLinkIfPossible(), n && callbacks.updateNotification(n.notification_id, n));
     } catch (a) {
       let e = a.message || ("resolve" === block.notification_action ? getI18nString("user_notification.an_error_occurred_while_clicking_this_notification") : getI18nString("user_notification.an_error_occurred_while_removing_this_notification"));
-      t(_$$s2.error(e));
+      t(FlashActions.error(e));
     } finally {
       setIsDisabled(!1);
     }
@@ -598,7 +598,7 @@ function eL(e) {
         is_unread: !1
       });
     } catch (e) {
-      a(_$$s2.error(getI18nString("user_notification.an_error_occurred_while_clicking_this_notification")));
+      a(FlashActions.error(getI18nString("user_notification.an_error_occurred_while_clicking_this_notification")));
     } else C("resolve").then(({
       data: t
     }) => {
@@ -607,7 +607,7 @@ function eL(e) {
         e.updateNotificationCallback(i.notification_id, i);
       }
     }, e => {
-      a(_$$s2.error(getI18nString("user_notification.an_error_occurred_while_clicking_this_notification")));
+      a(FlashActions.error(getI18nString("user_notification.an_error_occurred_while_clicking_this_notification")));
     });
   };
   let j = e => {

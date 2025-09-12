@@ -9,7 +9,7 @@ import { useCanAccessDevModeEntryPoint } from "../figma_app/473493";
 import { D } from "../905/882262";
 import { Ym } from "../figma_app/806075";
 import { sf } from "../905/929976";
-import { Tj } from "../figma_app/582924";
+import { subscribeToGuidsAndTrack } from "../figma_app/582924";
 import { aV } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
@@ -59,7 +59,7 @@ export function $$R3() {
         n.add(e);
       });
     });
-    Tj(n, AutosaveEventType.DEV_HANDOFF_STATUS).then(() => {
+    subscribeToGuidsAndTrack(n, AutosaveEventType.DEV_HANDOFF_STATUS).then(() => {
       HandoffBindingsCpp.onAllNodesWithStatusesLoaded(r);
     });
   }, [e, t]);

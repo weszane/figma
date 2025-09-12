@@ -1,4 +1,4 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
 import { U } from "../figma_app/477548";
@@ -22,8 +22,8 @@ let $$o2 = createOptimistThunk((e, t, {
   }).catch(e => {});
   N(o, e, i);
 });
-let $$l1 = NC("CONTACTS_SET");
-let $$d0 = NC("CONTACTS_RESET");
+let $$l1 = createActionCreator("CONTACTS_SET");
+let $$d0 = createActionCreator("CONTACTS_RESET");
 export const cL = $$d0;
 export const hZ = $$l1;
 export const um = $$o2;

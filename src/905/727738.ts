@@ -1,12 +1,12 @@
 import { handleOptimistTransaction } from "../905/842794";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { Q, s as _$$s } from "../905/573154";
+import { handlePromiseError, FlashActions } from "../905/573154";
 import { VisualBellActions } from "../905/302958";
 import { h as _$$h } from "../905/142086";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { showModalHandler, hideModalHandler } from "../905/156213";
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
@@ -55,7 +55,7 @@ let b = createOptimistThunk((e, {
   fileSeenState: t
 }) => {
   let i = XHR.del(`/api/file_seen_state/${t.id}`);
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: i,
     fallbackError: "An error occurred while removing this user."
   }));
@@ -99,9 +99,9 @@ let v = createOptimistThunk(async (e, {
     }
   }));
 });
-NC("FILE_SEEN_STATE_POST");
-let I = NC("FILE_SEEN_STATE_DELETE");
-NC("FILE_SEEN_STATE_SET");
+createActionCreator("FILE_SEEN_STATE_POST");
+let I = createActionCreator("FILE_SEEN_STATE_DELETE");
+createActionCreator("FILE_SEEN_STATE_SET");
 let M = "confirm-remove-role-modal";
 function j(e) {
   let t;
@@ -162,7 +162,7 @@ let G = createOptimistThunk((e, {
 }) => {
   z_("Role Deleted", t);
   let i = XHR.del(`/api/roles/${t.id}`);
-  e.dispatch(Q({
+  e.dispatch(handlePromiseError({
     promise: i,
     fallbackError: "An error occurred while removing this user."
   }));
@@ -347,7 +347,7 @@ function W(e, t, i) {
   return !1;
 }
 function K(e, t, i, n) {
-  e.dispatch(_$$s.error(t.data?.message || "An error occurred while changing this user's permissions."));
+  e.dispatch(FlashActions.error(t.data?.message || "An error occurred while changing this user's permissions."));
   t.data?.message === "Unable to assign the editor level on a draft file" && _$$h(i || null, null, e.dispatch, {
     handlesVisualBell: !1,
     callback: n

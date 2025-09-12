@@ -20,7 +20,7 @@ import { Nu, ie, ov, E as _$$E } from "../905/300250";
 import { hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { handleError } from "../905/760074";
-import { oJ } from "../905/346794";
+import { waitForJoinStatus } from "../905/346794";
 import { FEditorType } from "../figma_app/53721";
 import { CPPEventType, SourceDirection } from "../905/535806";
 import { e0 } from "../905/696396";
@@ -42,7 +42,7 @@ let O = async (e, t, i) => {
       file_merge_id: e.failureInfo.file_merge_id
     }));
   });
-  await oJ(SchemaJoinStatus.JOINED).then(() => {
+  await waitForJoinStatus(SchemaJoinStatus.JOINED).then(() => {
     e.dispatch(VisualBellActions.enqueue({
       message: i,
       icon: VisualBellIcon.CHECK,
@@ -59,7 +59,7 @@ let D = async (e, t, i) => {
     type: "file-merge-submit"
   }));
   await XHR.del(`/api/file_merge/${e.failureInfo.file_merge_id}`);
-  await oJ(SchemaJoinStatus.JOINED).then(() => {
+  await waitForJoinStatus(SchemaJoinStatus.JOINED).then(() => {
     e.dispatch(VisualBellActions.enqueue({
       message: i,
       icon: VisualBellIcon.CHECK,

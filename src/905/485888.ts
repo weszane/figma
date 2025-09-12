@@ -5,7 +5,7 @@ import { applyCodeExtensionPreferences } from "../905/515076";
 import { isCopyExportAllowed } from "../figma_app/12796";
 import { o5, Cu, f$ } from "../figma_app/603466";
 import { R } from "../figma_app/612938";
-import { hw, wY } from "../905/753206";
+import { getCurrentGRAtom, handlePluginError } from "../905/753206";
 import { hasLocalFileId } from "../figma_app/155287";
 import { findCodegenLanguage } from "../905/661977";
 let m = class {
@@ -39,17 +39,17 @@ let m = class {
     })) ?? [];
   }
   async maybeTerminatePlugin(e) {
-    let t = hw();
+    let t = getCurrentGRAtom();
     if (t) switch (e.type) {
       case "local-plugin":
-        hasLocalFileId(t) && e.id === String(t.localFileId) && (f$(), await wY());
+        hasLocalFileId(t) && e.id === String(t.localFileId) && (f$(), await handlePluginError());
         return;
       case "published-plugin":
-        e.id === t.plugin_id && (f$(), await wY());
+        e.id === t.plugin_id && (f$(), await handlePluginError());
         return;
       case "first-party":
         f$();
-        await wY();
+        await handlePluginError();
         return;
       default:
         throwTypeError(e);

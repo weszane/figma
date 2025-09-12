@@ -7,7 +7,7 @@ import { customHistory } from "../905/612521";
 import { V3 } from "../figma_app/976345";
 import { sf } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
-import { IL } from "../figma_app/582924";
+import { subscribeToContainingPage } from "../figma_app/582924";
 import { lH } from "../figma_app/623300";
 import { ih } from "../905/250387";
 import { Nb, _b } from "../figma_app/841351";
@@ -57,7 +57,7 @@ export let $$T0 = createOptimistThunk(function (e, {
         }));
       }));
     };
-    !O && lH(y.mirror.appModel.pagesList) ? IL(nodeIdInThisFile, AutosaveEventType.HYPERLINK_PRELOAD).then(t) : Promise.resolve().then(t);
+    !O && lH(y.mirror.appModel.pagesList) ? subscribeToContainingPage(nodeIdInThisFile, AutosaveEventType.HYPERLINK_PRELOAD).then(t) : Promise.resolve().then(t);
     trackEventAnalytics("Hyperlink Click", R);
     return;
   }

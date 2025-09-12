@@ -53,7 +53,7 @@ import { fN } from "../905/54385";
 import { p as _$$p } from "../905/428660";
 import { A as _$$A4 } from "../5724/663128";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { s as _$$s2, Q as _$$Q } from "../905/573154";
+import { FlashActions, handlePromiseError } from "../905/573154";
 import { tx as _$$tx2 } from "../figma_app/395505";
 import { v as _$$v } from "../905/581647";
 import { Cu } from "../figma_app/314264";
@@ -835,7 +835,7 @@ function eG(e) {
       name: i
     }, "cta_clicked");
     o(!1);
-    n(_$$s2.flash(getI18nString("community.buyer.redirecting_to_stripe")));
+    n(FlashActions.flash(getI18nString("community.buyer.redirecting_to_stripe")));
     n(_$$v({}));
   };
   let f = "subscription" === c;
@@ -1294,7 +1294,7 @@ let tf = M4.Query({
         enabled: !!(await tm.getFeedIndicatorPreference(e)).data.meta
       };
     } catch (e) {
-      t.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_loading_settings")));
+      t.dispatch(FlashActions.error(getI18nString("notification_settings_modal.error_loading_settings")));
       return e;
     }
   }
@@ -1316,7 +1316,7 @@ let t_ = M4.Mutation(({
     value: t
   });
   r.catch(() => {
-    n.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_changing_setting")));
+    n.dispatch(FlashActions.error(getI18nString("notification_settings_modal.error_changing_setting")));
   });
   return r;
 });
@@ -1426,7 +1426,7 @@ let tS = M4.Query({
         sendMeNotifications: s
       };
     } catch (e) {
-      t.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_loading_settings")));
+      t.dispatch(FlashActions.error(getI18nString("notification_settings_modal.error_loading_settings")));
       return e;
     }
   }
@@ -1452,7 +1452,7 @@ let tw = M4.Mutation(({
     policySetting: n
   });
   s.catch(() => {
-    a.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_changing_setting")));
+    a.dispatch(FlashActions.error(getI18nString("notification_settings_modal.error_changing_setting")));
   });
   return s;
 });
@@ -1477,7 +1477,7 @@ let tC = M4.Mutation(({
     policySetting: n ? "all" : "none"
   });
   s.catch(() => {
-    a.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_changing_setting")));
+    a.dispatch(FlashActions.error(getI18nString("notification_settings_modal.error_changing_setting")));
   });
   return s;
 });
@@ -1500,7 +1500,7 @@ let tT = M4.Mutation(({
     channelSetting: i
   });
   a.catch(() => {
-    r.dispatch(_$$s2.error(getI18nString("notification_settings_modal.error_changing_setting")));
+    r.dispatch(FlashActions.error(getI18nString("notification_settings_modal.error_changing_setting")));
   });
   return a;
 });
@@ -2094,7 +2094,7 @@ function iw(e) {
     }));
   }).catch(() => {
     l(null);
-    s(_$$s2.error("Could not revoke token, please try again"));
+    s(FlashActions.error("Could not revoke token, please try again"));
   }), () => {}), [s, token, user.id]);
   let c = token.scopes ?? [sy.FILES_READ_DEPRECATING, sy.FILE_COMMENTS_WRITE, sy.FILE_DEV_RESOURCES_WRITE, sy.WEBHOOKS_WRITE];
   let u = Object.entries(av(c)).filter(([, e]) => e !== _$$eK.NO_ACCESS).map(([e, t]) => {
@@ -2296,7 +2296,7 @@ function iR({
         userInitiated: !1
       }));
     }).catch(() => {
-      s(_$$s2.error("Could not revoke token, please try again"));
+      s(FlashActions.error("Could not revoke token, please try again"));
     }).$$finally(() => {
       n(!1);
     });
@@ -2703,18 +2703,18 @@ function iH({
 }
 let nt = createOptimistThunk((e, t) => {
   let i = PG(t);
-  if (i.message) return e.dispatch(_$$s2.error(i.message));
+  if (i.message) return e.dispatch(FlashActions.error(i.message));
   let n = XHR.put("/api/user", t);
   n.then(() => {
     let i = e.getState();
     i.modalShown && i.modalShown.type === ni.type && e.dispatch(popModalStack());
-    e.dispatch(_$$s2.flash(getI18nString("api_user.verify-email-message", {
+    e.dispatch(FlashActions.flash(getI18nString("api_user.verify-email-message", {
       email: t.email
     })));
   }).catch(e => {
     console.error("Couldn't change email", e);
   });
-  e.dispatch(_$$Q({
+  e.dispatch(handlePromiseError({
     promise: n,
     fallbackError: getI18nString("api_user.error.an_error_occurred_while_updating_your_information")
   }));

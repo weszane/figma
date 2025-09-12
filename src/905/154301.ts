@@ -11,7 +11,7 @@ import { sx } from "../905/941192";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { yH } from "../figma_app/240735";
 import { fu } from "../figma_app/831799";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { $ } from "../905/834575";
 import { Ib } from "../905/129884";
 import { registerModal } from "../905/102752";
@@ -62,7 +62,7 @@ export let $$E0 = registerModal(function (e) {
         h(team_project_file_count);
         o(!0);
       }).catch(() => {
-        i(_$$s.error(getI18nString("flash.team_deletion_file_count_fetching_error")));
+        i(FlashActions.error(getI18nString("flash.team_deletion_file_count_fetching_error")));
       });
     }, [n, e, t, i]);
     useEffect(() => {
@@ -82,7 +82,7 @@ export let $$E0 = registerModal(function (e) {
         b(has_published_site);
         A(!0);
       }).catch(() => {
-        i(_$$s.error(getI18nString("flash.team_deletion_file_count_fetching_error")));
+        i(FlashActions.error(getI18nString("flash.team_deletion_file_count_fetching_error")));
       });
     }, [i, g, e]);
     return {

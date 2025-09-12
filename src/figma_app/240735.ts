@@ -1,8 +1,8 @@
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { RF, Nh } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
@@ -32,9 +32,9 @@ let $$f3 = createOptimistThunk(async (e, t) => {
   await XHR.put(`/api/teams/${teamId}/restore`).then(() => {
     let t = `/files/team/${teamId}`;
     customHistory.redirect(t);
-    e.dispatch(_$$s.flash(getI18nString("file_browser.file_browser_actions.restore_team_success")));
+    e.dispatch(FlashActions.flash(getI18nString("file_browser.file_browser_actions.restore_team_success")));
   }).catch(t => {
-    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.restore_team_error", {
+    e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.restore_team_error", {
       errorMsg: t.data.message || getI18nString("file_browser.file_browser_actions.unknown_error")
     })));
   });
@@ -51,7 +51,7 @@ let $$E17 = createOptimistThunk(async (e, t) => {
       userInitiated: !0
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.update_description_error")));
+    e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.update_description_error")));
   });
 });
 let $$y16 = createOptimistThunk(async (e, t) => {
@@ -73,7 +73,7 @@ let $$y16 = createOptimistThunk(async (e, t) => {
       userInitiated: !0
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(getI18nString("file_browser.error_try_again")));
+    e.dispatch(FlashActions.error(getI18nString("file_browser.error_try_again")));
   });
 });
 createOptimistThunk((e, {
@@ -93,7 +93,7 @@ createOptimistThunk((e, {
       userInitiated: !1
     }));
   }).catch(() => {
-    e.dispatch(_$$s.error(getI18nString("file_browser.error_try_again")));
+    e.dispatch(FlashActions.error(getI18nString("file_browser.error_try_again")));
   });
 });
 let $$b12 = createOptimistThunk((e, {
@@ -127,28 +127,28 @@ let $$b12 = createOptimistThunk((e, {
     }));
   }, t => {
     console.error(t);
-    e.dispatch(_$$s.error(getI18nString("file_browser.file_browser_actions.team_member_fetch_error")));
+    e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.team_member_fetch_error")));
   });
 }, e => `TEAM_FETCH_MEMBERS_LIST::teamId::${e.teamId}`);
-let $$T1 = NC("TEAM_SET_MEMBERS");
-let $$I11 = NC("TEAM_BATCH_JOIN");
-let $$S13 = NC("TEAM_JOIN");
-let $$v5 = NC("TEAM_STOP_RENAME");
-let $$A6 = NC("TEAM_BEGIN_RENAME");
-let $$x15 = NC("TEAM_CREATION_SET_LOADING");
-let $$N14 = NC("TEAM_CHANGE_DEFAULT_PERMISSION");
-let $$C8 = NC("TEAM_CHANGE_SHARING_SETTINGS");
-let $$w10 = NC("TEAM_CHANGE_ORG_ACCESS");
-NC("TEAM_LOADED");
-let $$O2 = NC("TEAM_RENAME");
-let $$R18 = NC("TEAM_BATCH_PUT");
+let $$T1 = createActionCreator("TEAM_SET_MEMBERS");
+let $$I11 = createActionCreator("TEAM_BATCH_JOIN");
+let $$S13 = createActionCreator("TEAM_JOIN");
+let $$v5 = createActionCreator("TEAM_STOP_RENAME");
+let $$A6 = createActionCreator("TEAM_BEGIN_RENAME");
+let $$x15 = createActionCreator("TEAM_CREATION_SET_LOADING");
+let $$N14 = createActionCreator("TEAM_CHANGE_DEFAULT_PERMISSION");
+let $$C8 = createActionCreator("TEAM_CHANGE_SHARING_SETTINGS");
+let $$w10 = createActionCreator("TEAM_CHANGE_ORG_ACCESS");
+createActionCreator("TEAM_LOADED");
+let $$O2 = createActionCreator("TEAM_RENAME");
+let $$R18 = createActionCreator("TEAM_BATCH_PUT");
 let $$L0 = RF;
 let $$P20 = createOptimistThunk((e, t) => {
   e.dispatch($$L0(t));
 });
 let $$D19 = Nh;
-let $$k9 = NC("TEAM_POST");
-let $$M4 = NC("TEAM_GET");
+let $$k9 = createActionCreator("TEAM_POST");
+let $$M4 = createActionCreator("TEAM_GET");
 export const $I = $$L0;
 export const $V = $$T1;
 export const $w = $$O2;

@@ -1,168 +1,303 @@
-import { SchemaJoinStatus, Multiplayer, IPagePlugin, LogToConsoleMode } from "../figma_app/763686";
-import { atomStoreManager } from "../figma_app/27355";
-import { logInfo } from "../905/714362";
-import { isInteractionPathCheck } from "../figma_app/897289";
-import { fullscreenValue } from "../figma_app/455680";
-import { nc } from "../figma_app/474636";
-import { n as _$$n } from "../905/347702";
-import { oJ } from "../905/346794";
-let u = null;
-let p = 0;
-let _ = !1;
-let h = !1;
-export function $$m6(e) {
-  switch (e) {
+import { waitForJoinStatus } from '../905/346794'
+import { logInfo } from '../905/714362'
+import { atomStoreManager } from '../figma_app/27355'
+import { fullscreenValue } from '../figma_app/455680'
+import { nc } from '../figma_app/474636'
+import {
+  IPagePlugin,
+  LogToConsoleMode,
+  Multiplayer,
+  SchemaJoinStatus,
+} from '../figma_app/763686'
+import { isInteractionPathCheck } from '../figma_app/897289'
+
+/**
+ * Converts SchemaJoinStatus enum to string representation.
+ * Original: $$m6
+ */
+export function getJoinStatusString(status: SchemaJoinStatus): string {
+  switch (status) {
     case SchemaJoinStatus.UNJOINED:
-      return "unjoined";
+      return 'unjoined'
     case SchemaJoinStatus.UNJOINED_FROM_ERROR:
-      return "unjoined_from_error";
+      return 'unjoined_from_error'
     case SchemaJoinStatus.UNJOINED_FROM_VALIDATION_FAILURE:
-      return "unjoined_from_validation_failure";
+      return 'unjoined_from_validation_failure'
     case SchemaJoinStatus.GOT_SCHEMA:
-      return "got_schema";
+      return 'got_schema'
     case SchemaJoinStatus.JOINING_INITIAL_LOAD:
-      return "joining_initial_load";
+      return 'joining_initial_load'
     case SchemaJoinStatus.JOINING_RECONNECT:
-      return "joining_reconnect";
+      return 'joining_reconnect'
     case SchemaJoinStatus.JOINING_RECONNECT_AWAITING_QUERY_REPLY:
-      return "joining_reconnect_awaiting_query_reply";
+      return 'joining_reconnect_awaiting_query_reply'
     case SchemaJoinStatus.JOINED:
-      return "joined";
+      return 'joined'
     case SchemaJoinStatus.SHOULD_UPGRADE:
-      return "should_upgrade";
+      return 'should_upgrade'
     case SchemaJoinStatus.UPGRADING:
-      return "upgrading";
+      return 'upgrading'
     case SchemaJoinStatus.WAITING_FOR_RELOAD:
-      return "waiting_for_reload";
+      return 'waiting_for_reload'
     case SchemaJoinStatus.DETACHED:
-      return "detached";
+      return 'detached'
     default:
-      return "unknown";
+      return 'unknown'
   }
 }
-export function $$g0() {
-  h || (h = !0, setInterval(() => fullscreenValue.isReady() && Multiplayer.updateConnectionStateIfNeeded(!1), 250), window.addEventListener("online", () => {
-    navigator.onLine && fullscreenValue.isReady() && Multiplayer.updateConnectionStateIfNeeded(!0);
-  }), window.addEventListener("visibilitychange", () => {
-    "visible" === document.visibilityState && fullscreenValue.isReady() && Multiplayer.updateConnectionStateIfNeeded(!0);
-  }));
-}
-export function $$f2(e) {
-  u || (u = function () {
-    try {
-      let e = new Blob(["(" + function () {
-        onmessage = e => setTimeout(() => self.postMessage(""), e.data);
-      } + ")()"], {
-        type: "text/javascript"
-      });
-      let t = new Worker(URL.createObjectURL(e));
-      return (e, r) => {
-        t.onmessage || (t.onmessage = () => {
-          t.onmessage = null;
-          e();
-        }, t.postMessage(r));
-      };
-    } catch (e) {
-      console.error(e);
-      return (e, t) => {
-        setTimeout(e, t);
-      };
+
+let workerDelayFn: ((cb: () => void, delay: number) => void) | null = null
+let flushDelay = 0
+let isFlushing = false
+let isIntervalSetup = false
+
+/**
+ * Sets up multiplayer connection state listeners and interval.
+ * Original: $$g0
+ */
+export function setupConnectionStateHandler(): void {
+  if (isIntervalSetup)
+    return
+  isIntervalSetup = true
+  setInterval(() => {
+    if (fullscreenValue.isReady()) {
+      Multiplayer.updateConnectionStateIfNeeded(false)
     }
-  }());
-  p = e;
-  _ || function e() {
-    p && (_ = !0, u(function () {
-      _ = !1;
-      p && Multiplayer.flush();
-      e();
-    }, p));
-  }();
+  }, 250)
+  window.addEventListener('online', () => {
+    if (navigator.onLine && fullscreenValue.isReady()) {
+      Multiplayer.updateConnectionStateIfNeeded(true)
+    }
+  })
+  window.addEventListener('visibilitychange', () => {
+    if (
+      document.visibilityState === 'visible'
+      && fullscreenValue.isReady()
+    ) {
+      Multiplayer.updateConnectionStateIfNeeded(true)
+    }
+  })
 }
-export function $$E9(e) {
-  let t = $$S1();
-  let r = $$v5(t);
-  Multiplayer.startLoadingAllPages(t, e);
-  r.then(() => {
-    atomStoreManager.set(nc, !1);
-  });
-  return r;
-}
-export function $$y8(e, t) {
-  let r = $$S1();
-  let i = $$v5(r);
-  Multiplayer.subscribeToGuids(e, r, t);
-  return i;
-}
-let $$b3 = _$$n(() => Multiplayer.isIncrementalSession() || Multiplayer.isValidatingIncremental());
-let T = 1;
-let I = new Map();
-let $$S1 = () => T++;
-export function $$v5(e) {
-  return new Promise((t, r) => {
-    I.set(e, [t, r]);
-  });
-}
-export function $$A7(e) {
-  let t = I.get(e);
-  if (t) {
-    let [r, n] = t;
-    r();
-    I.$$delete(e);
+
+/**
+ * Sets up a flush timer using a worker or fallback to setTimeout.
+ * Original: $$f2
+ */
+export function setupFlushTimer(delay: number): void {
+  if (!workerDelayFn) {
+    workerDelayFn = (() => {
+      try {
+        const blob = new Blob([
+          `(${function () {
+            // Worker code for delay
+            onmessage = e =>
+              setTimeout(() => self.postMessage(''), e.data)
+          }})()`,
+        ], { type: 'text/javascript' })
+        const worker = new Worker(URL.createObjectURL(blob))
+        return (cb: () => void, ms: number) => {
+          if (!worker.onmessage) {
+            worker.onmessage = () => {
+              worker.onmessage = null
+              cb()
+            }
+            worker.postMessage(ms)
+          }
+        }
+      }
+      catch (err) {
+        console.error(err)
+        return (cb: () => void, ms: number) => setTimeout(cb, ms)
+      }
+    })()
+  }
+  flushDelay = delay
+  if (!isFlushing) {
+    (function flushLoop() {
+      if (flushDelay) {
+        isFlushing = true
+        workerDelayFn!(() => {
+          isFlushing = false
+          if (flushDelay) {
+            Multiplayer.flush()
+            flushLoop()
+          }
+        }, flushDelay)
+      }
+    })()
   }
 }
-export function $$x11() {
-  I.forEach((e, t) => {
-    let [r, n] = e;
-    n();
-  });
-  I.clear();
+
+/**
+ * Starts loading all pages and returns a promise that resolves when done.
+ * Original: $$E9
+ */
+export function loadAllPagesAndTrack(t: any): Promise<void> {
+  const sessionId = getNextSessionId()
+  const promise = createSessionPromise(sessionId)
+  Multiplayer.startLoadingAllPages(sessionId, t)
+  promise.then(() => {
+    atomStoreManager.set(nc, false)
+  })
+  return promise
 }
-export function $$N4(e, t, r = IPagePlugin.CONTAINING_PAGE) {
-  isInteractionPathCheck();
-  let i = $$S1();
-  let a = $$v5(i);
-  let o = r === IPagePlugin.PLUGIN;
-  Multiplayer.subscribeToContainingPage__DO_NOT_USE_DIRECTLY(e, i, t, o);
-  return a;
+
+/**
+ * Subscribes to GUIDs and returns a promise for completion.
+ * Original: $$y8
+ */
+export function subscribeToGuidsAndTrack(
+  guids: any,
+  callback: any,
+): Promise<void> {
+  const sessionId = getNextSessionId()
+  const promise = createSessionPromise(sessionId)
+  Multiplayer.subscribeToGuids(guids, sessionId, callback)
+  return promise
 }
-export function $$C10(e, t, r = IPagePlugin.CONTAINING_PAGE) {
-  if (0 === e.length) return Promise.resolve();
-  isInteractionPathCheck();
-  let i = $$S1();
-  let a = $$v5(i);
-  let o = r === IPagePlugin.PLUGIN;
-  Multiplayer.subscribeToContainingPages__DO_NOT_USE_DIRECTLY(e, i, t, o);
-  return a;
+
+/**
+ * Checks if session is incremental or validating incremental.
+ * Original: $$b3
+ */
+export function isIncrementalSessionOrValidating(): boolean {
+  return Multiplayer.isIncrementalSession() || Multiplayer.isValidatingIncremental()
 }
-export function $$w13(e) {
-  return !!Multiplayer && Multiplayer.isNodeDownloaded(e);
+
+let sessionCounter = 1
+const sessionPromiseMap = new Map<number, [(value?: unknown) => void, () => void]>()
+
+/**
+ * Generates a new session ID.
+ * Original: $$S1
+ */
+export function getNextSessionId(): number {
+  return sessionCounter++
 }
-export function $$O12(e) {
-  let t = () => {
-    let r = $$S1();
-    return new Promise(async (t, i) => {
-      e.$$delete("0:0");
-      logInfo("Autosave", `Requesting dependencies for ${e.size} nodes while loading incrementally`, void 0, {
-        logToConsole: LogToConsoleMode.ALWAYS
-      });
-      await oJ(SchemaJoinStatus.JOINED);
-      I.set(r, [t, i]);
-      Multiplayer.autosaveSubscribeToContainingPages(e, r);
-    }).catch(() => t());
-  };
-  return t();
+
+/**
+ * Creates a promise for a session ID.
+ * Original: $$v5
+ */
+export function createSessionPromise(sessionId: number): Promise<void> {
+  return new Promise((resolve, reject) => {
+    sessionPromiseMap.set(sessionId, [resolve, reject])
+  })
 }
-export const AW = $$g0;
-export const Ak = $$S1;
-export const Cd = $$f2;
-export const Ff = $$b3;
-export const IL = $$N4;
-export const Ki = $$v5;
-export const LD = $$m6;
-export const PV = $$A7;
-export const Tj = $$y8;
-export const W5 = $$E9;
-export const WA = $$C10;
-export const Xk = $$x11;
-export const Xl = $$O12;
-export const mQ = $$w13;
+
+/**
+ * Resolves a session promise.
+ * Original: $$A7
+ */
+export function resolveSessionPromise(sessionId: number): void {
+  const handlers = sessionPromiseMap.get(sessionId)
+  if (handlers) {
+    const [resolve] = handlers
+    resolve()
+    sessionPromiseMap.delete(sessionId)
+  }
+}
+
+/**
+ * Rejects all session promises.
+ * Original: $$x11
+ */
+export function rejectAllSessionPromises(): void {
+  sessionPromiseMap.forEach(([_, reject]) => {
+    reject()
+  })
+  sessionPromiseMap.clear()
+}
+
+/**
+ * Subscribes to containing page and returns a promise.
+ * Original: $$N4
+ */
+export function subscribeToContainingPage(
+  page: any,
+  callback: any,
+  pluginType: IPagePlugin = IPagePlugin.CONTAINING_PAGE,
+): Promise<void> {
+  isInteractionPathCheck()
+  const sessionId = getNextSessionId()
+  const promise = createSessionPromise(sessionId)
+  const isPlugin = pluginType === IPagePlugin.PLUGIN
+  Multiplayer.subscribeToContainingPage__DO_NOT_USE_DIRECTLY(
+    page,
+    sessionId,
+    callback,
+    isPlugin,
+  )
+  return promise
+}
+
+/**
+ * Subscribes to multiple containing pages and returns a promise.
+ * Original: $$C10
+ */
+export function subscribeToContainingPages(
+  pages: any[],
+  callback: any,
+  pluginType: IPagePlugin = IPagePlugin.CONTAINING_PAGE,
+): Promise<void> {
+  if (pages.length === 0)
+    return Promise.resolve()
+  isInteractionPathCheck()
+  const sessionId = getNextSessionId()
+  const promise = createSessionPromise(sessionId)
+  const isPlugin = pluginType === IPagePlugin.PLUGIN
+  Multiplayer.subscribeToContainingPages__DO_NOT_USE_DIRECTLY(
+    pages,
+    sessionId,
+    callback,
+    isPlugin,
+  )
+  return promise
+}
+
+/**
+ * Checks if a node is downloaded.
+ * Original: $$w13
+ */
+export function isNodeDownloaded(node: any): boolean {
+  return !!Multiplayer && Multiplayer.isNodeDownloaded(node)
+}
+
+/**
+ * Autosave subscribe to containing pages with retry logic.
+ * Original: $$O12
+ */
+export function autosaveSubscribeWithRetry(nodes: Set<string>){
+  const subscribe = () => {
+    const sessionId = getNextSessionId()
+    return new Promise(async (resolve, reject) => {
+      nodes.delete('0:0')
+      logInfo(
+        'Autosave',
+        `Requesting dependencies for ${nodes.size} nodes while loading incrementally`,
+        undefined,
+        { logToConsole: LogToConsoleMode.ALWAYS },
+      )
+      await waitForJoinStatus(SchemaJoinStatus.JOINED)
+      sessionPromiseMap.set(sessionId, [resolve, reject])
+      Multiplayer.autosaveSubscribeToContainingPages(nodes, sessionId)
+    }).catch(() => subscribe())
+  }
+  return subscribe()
+}
+
+// Exported names refactored to match new function names
+export const LD = getJoinStatusString
+export const AW = setupConnectionStateHandler
+export const Cd = setupFlushTimer
+export const W5 = loadAllPagesAndTrack
+export const Tj = subscribeToGuidsAndTrack
+export const Ff = isIncrementalSessionOrValidating
+export const Ak = getNextSessionId
+export const Ki = createSessionPromise
+export const PV = resolveSessionPromise
+export const Xk = rejectAllSessionPromises
+export const IL = subscribeToContainingPage
+export const WA = subscribeToContainingPages
+export const mQ = isNodeDownloaded
+export const Xl = autosaveSubscribeWithRetry

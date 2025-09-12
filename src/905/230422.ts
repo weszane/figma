@@ -4,7 +4,7 @@ import { debounce } from "../905/915765";
 import { DEFAULT_PAGE_SIZE, hasMorePages, fetchPaginatedData, PAGINATION_NEXT } from "../figma_app/661371";
 import { isMobileUA } from "../figma_app/778880";
 import { kt } from "../figma_app/858013";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { fu } from "../figma_app/831799";
@@ -141,7 +141,7 @@ class S extends Component {
       this.setState({
         didFetchFail: !0
       });
-      this.props.dispatch(_$$s2.error(getI18nString("community.error.an_error_has_occurred_please_refresh_the_page_and_try_again")));
+      this.props.dispatch(FlashActions.error(getI18nString("community.error.an_error_has_occurred_please_refresh_the_page_and_try_again")));
     };
     this.onTabClick = e => {
       this.props.dispatch(sf({

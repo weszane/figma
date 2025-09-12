@@ -19,7 +19,7 @@ import { setTagGlobal } from "../905/11";
 import { logInfo, logError } from "../905/714362";
 import { Hb, tH as _$$tH } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Q as _$$Q } from "../905/463586";
+import { notificationActions } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
 import { sf } from "../905/929976";
 import { ov, S2 } from "../905/300250";
@@ -30,7 +30,7 @@ import { handleModalError } from "../905/760074";
 import { $n as _$$$n } from "../905/930279";
 import { currentSelectionAtom, isActiveAtom } from "../905/617744";
 import { F4 } from "../figma_app/527873";
-import { w as _$$w } from "../905/346794";
+import { enterPreviewDetachedState } from "../905/346794";
 import { Z_ } from "../figma_app/793953";
 import { selectOpenFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -5684,7 +5684,7 @@ function rF(e) {
   if (error) throw error;
   useEffect(() => {
     (async function () {
-      null !== _diffInfo.displayGroups && null !== diffInfo.displayGroups && (await _$$w(o, e.direction), h(!0));
+      null !== _diffInfo.displayGroups && null !== diffInfo.displayGroups && (await enterPreviewDetachedState(o, e.direction), h(!0));
     })();
   }, [_diffInfo.displayGroups, diffInfo.displayGroups, o, e.direction]);
   useEffect(() => {
@@ -5764,7 +5764,7 @@ function rM(e) {
     et.current ? et.current = !1 : em();
   }, [I]);
   useEffect(() => {
-    i(_$$Q.clearAll());
+    i(notificationActions.clearAll());
   }, [i]);
   useEffect(() => {
     K && i(sf({

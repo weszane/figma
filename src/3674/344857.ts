@@ -138,7 +138,7 @@ import { S as _$$S, z as _$$z } from "../figma_app/106763";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f2 } from "../905/940356";
 import { s2 as _$$s3 } from "../905/851937";
-import { hw as _$$hw, wY } from "../905/753206";
+import { getCurrentGRAtom, handlePluginError } from "../905/753206";
 import { X_ } from "../figma_app/78725";
 import { notificationAPI } from "../905/894881";
 import { p as _$$p4 } from "../figma_app/353099";
@@ -4974,7 +4974,7 @@ function o8({
     let i = async ({
       link: e
     }) => {
-      let i = _$$hw();
+      let i = getCurrentGRAtom();
       i?.plugin_id !== t.plugin_id && (await _$$d5.instance.maybeTerminatePlugin(a), await waitForAnimationFrame());
       let o = createDeferredPromise();
       let s = t.manifest.editorType?.includes(ManifestEditorType.DEV) ? "open-dev-resource" : "open-related-link";
@@ -8251,7 +8251,7 @@ function r4({
                 return !1;
             }
           })(t) && setSelectedDevModePropertiesPanelTab(IAssertResource.PRIMARY);
-          wY();
+          handlePluginError();
         },
         children: jsx(_$$A5, {})
       })]
@@ -8481,7 +8481,7 @@ function df({
       }), jsx(IK, {
         variant: "secondary",
         onClick: () => {
-          wY();
+          handlePluginError();
         },
         recordingKey: "generateCodeButton",
         children: t
@@ -12653,7 +12653,7 @@ function hH() {
           },
           "aria-label": getI18nString("dev_handoff.inspect_panel.close_plugin"),
           onClick: () => {
-            wY();
+            handlePluginError();
           },
           children: jsx(_$$A5, {})
         }), jsx(sO, {}), jsx(hV, {
@@ -13193,7 +13193,7 @@ export function $$fg0() {
   let u = useCurrentFileKey() ?? "";
   return (useEffect(() => {
     let e = () => {
-      wY().then(() => {
+      handlePluginError().then(() => {
         _$$s3({
           userID: s?.id ?? "",
           openFileKey: u

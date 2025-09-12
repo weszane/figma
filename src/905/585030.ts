@@ -13,8 +13,8 @@ import { rY, XA } from "../905/985490";
 import { handleModalError, handleError, getDiffVersion } from "../905/760074";
 import { q } from "../905/807667";
 import { Jr } from "../figma_app/624361";
-import { WA } from "../figma_app/582924";
-import { w as _$$w, De } from "../905/346794";
+import { subscribeToContainingPages } from "../figma_app/582924";
+import { enterPreviewDetachedState, abandonBranchingChanges } from "../905/346794";
 import { Z_, yQ } from "../figma_app/793953";
 import { tG } from "../figma_app/723183";
 import { Qx, SN } from "../905/491806";
@@ -255,7 +255,7 @@ let U = e => {
 };
 export async function $$B10(e, t, i) {
   let n = performance.now();
-  await WA(e, t);
+  await subscribeToContainingPages(e, t);
   rY.trackGranularLoadTime({
     durationMs: performance.now() - n,
     functionName: "waitForContainingPagesToLoad",
@@ -294,7 +294,7 @@ export function $$V8(e, t, i, a, s, l, d, c) {
         branchModalTrackingId: S,
         diffType: GitReferenceType[e]
       };
-      if (x.current !== n || (m(r), await p, c && (await _$$w(d.branchModalTrackingId, a)), x.current !== n)) return;
+      if (x.current !== n || (m(r), await p, c && (await enterPreviewDetachedState(d.branchModalTrackingId, a)), x.current !== n)) return;
       M(e, s, d);
       let {
         displayGroups,
@@ -457,7 +457,7 @@ export async function $$W2(e, t, i, n = null, r = null) {
   return await H(e.sourceKey, branchKey, l, t, i, direction, r);
 }
 export async function $$K1() {
-  await De();
+  await abandonBranchingChanges();
   SN();
 }
 export const FK = $$z0;

@@ -6,7 +6,7 @@ import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { SM } from "../figma_app/153916";
 import { s as _$$s } from "../cssbuilder/589278";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { R as _$$R } from "../c5e2cae0/276031";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -49,7 +49,7 @@ let y = memo(function ({
             shippingAddress: I,
             updatedLegalName: A
           });
-          E(_$$s2.flash(e ? getI18nString("update_company_details_modal.update_legal_name_and_shipping_address.success") : getI18nString("update_company_details_modal.update_team_name.success")));
+          E(FlashActions.flash(e ? getI18nString("update_company_details_modal.update_legal_name_and_shipping_address.success") : getI18nString("update_company_details_modal.update_team_name.success")));
           w();
           E(Be({
             teamId: j
@@ -60,12 +60,12 @@ let y = memo(function ({
             orgId: y,
             shippingAddress: I
           });
-          E(_$$s2.flash(getI18nString("org_admin_settings.settings_tab.billing.update_invoice_details.success")));
+          E(FlashActions.flash(getI18nString("org_admin_settings.settings_tab.billing.update_invoice_details.success")));
           w();
           O();
         }
       } catch (t) {
-        j ? E(_$$s2.error(resolveMessage(t) || t.message || (e ? getI18nString("update_company_details_modal.update_legal_name_and_shipping_address.error") : getI18nString("update_company_details_modal.update_team_name.error")))) : y && E(_$$s2.error(resolveMessage(t) || t.message || getI18nString("update_company_details_modal.updateshipping_address.error")));
+        j ? E(FlashActions.error(resolveMessage(t) || t.message || (e ? getI18nString("update_company_details_modal.update_legal_name_and_shipping_address.error") : getI18nString("update_company_details_modal.update_team_name.error")))) : y && E(FlashActions.error(resolveMessage(t) || t.message || getI18nString("update_company_details_modal.updateshipping_address.error")));
       }
     });
   };

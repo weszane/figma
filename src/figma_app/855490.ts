@@ -1,5 +1,5 @@
 import { createOptimistThunk } from "../905/350402";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { R7 } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
 createOptimistThunk(e => {
@@ -10,8 +10,8 @@ createOptimistThunk(e => {
   }
   R7.fullscreen && (t ? R7.getFullscreenElement() ? R7.exitFullscreenFunc() : e.dispatch($$o0()) : R7.requestFullscreenFunc.call(document.documentElement));
 });
-let $$s1 = NC("WINDOW_DID_ENTER_FULL_SCREEN");
-let $$o0 = NC("WINDOW_DID_EXIT_FULL_SCREEN");
+let $$s1 = createActionCreator("WINDOW_DID_ENTER_FULL_SCREEN");
+let $$o0 = createActionCreator("WINDOW_DID_EXIT_FULL_SCREEN");
 export function $$l2(e) {
   R7.fullscreen && !desktopAPIInstance && (document.addEventListener(R7.fullscreenChangeEventName, function () {
     let t = e.getState();

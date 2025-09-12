@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
 import { showModalHandler } from "../905/156213";
@@ -101,7 +101,7 @@ export function $$E0(e) {
           data: {
             setupStripeCallback: e => {
               w(!1);
-              e || E(_$$s.error(getI18nString("community.seller.unable_to_launch_stripe_onboarding_please_check_your_details")));
+              e || E(FlashActions.error(getI18nString("community.seller.unable_to_launch_stripe_onboarding_please_check_your_details")));
             }
           }
         }));

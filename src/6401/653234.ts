@@ -33,7 +33,7 @@ import { j as _$$j } from "../905/519202";
 import { useDispatch } from "react-redux";
 import { g as _$$g } from "../905/125190";
 import { e as _$$e } from "../905/149844";
-import { s as _$$s2 } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { KJ } from "../figma_app/916560";
 import { logError } from "../905/714362";
@@ -770,7 +770,7 @@ function ek({
   let u = selectCurrentUser();
   let m = scopeAwareFunction.system("slides-update-poll-votes", e => {
     if (!u) {
-      c(_$$s2.error(getI18nString("slides.flapp.poll.vote_failure")));
+      c(FlashActions.error(getI18nString("slides.flapp.poll.vote_failure")));
       return;
     }
     let t = {

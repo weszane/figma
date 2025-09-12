@@ -8,7 +8,7 @@ import { m8 } from "../905/864644";
 import { gX } from "../figma_app/448654";
 import { xD } from "../905/174697";
 import { e as _$$e } from "../905/457828";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { v as _$$v } from "../905/939922";
 import { A as _$$A } from "../905/351112";
@@ -644,7 +644,7 @@ export function $$eT0({
         let a = m8(e, filePermissions.data);
         let s = gX(n, repoPermissions.data);
         if (a.length + s.length < r) {
-          F(_$$s.error(getI18nString("flash.dont_have_permission_permanently_delete_files")));
+          F(FlashActions.error(getI18nString("flash.dont_have_permission_permanently_delete_files")));
           return;
         }
         F(Fh({
@@ -662,7 +662,7 @@ export function $$eT0({
           selectedCount
         } = Mw(e, filePermissions.data, repoPermissions.data);
         if (deletableCount < selectedCount) {
-          F(_$$s.error(getI18nString("tile.error.permission_error_trash_file", {
+          F(FlashActions.error(getI18nString("tile.error.permission_error_trash_file", {
             selectedCount: e.length
           })));
           return;

@@ -1,5 +1,5 @@
 import { getLocalStorage } from "../905/657224";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { logError } from "../905/714362";
 import { QQ } from "../figma_app/808294";
 import { createOptimistThunk } from "../905/350402";
@@ -46,9 +46,9 @@ let $$u3 = createOptimistThunk((e, t, {
     e.dispatch($$h0(t.meta));
   }).catch(() => {});
 });
-let $$p1 = NC("M10N_DEL_ACTIVE_USER_PAYMENT");
-let $$_2 = NC("M10N_REALTIME_ACTIVE_USER_PAYMENT");
-let $$h0 = NC("M10N_SET_ACTIVE_USER_PAYMENTS");
+let $$p1 = createActionCreator("M10N_DEL_ACTIVE_USER_PAYMENT");
+let $$_2 = createActionCreator("M10N_REALTIME_ACTIVE_USER_PAYMENT");
+let $$h0 = createActionCreator("M10N_SET_ACTIVE_USER_PAYMENTS");
 export const M2 = $$h0;
 export const Sp = $$p1;
 export const k3 = $$_2;

@@ -1,7 +1,7 @@
 import { debounce } from "../905/915765";
 import { deepEqual } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { PerfTimer } from "../905/609396";
 import { XHR, XHRError } from "../905/910117";
 import { getI18nString } from "../905/303541";
@@ -91,7 +91,7 @@ let $$x17 = createOptimistThunk((e, t) => {
     precacheInactiveTypes: !0
   })));
 });
-let $$S29 = NC("SEARCH_RESET_FILE_TYPE_FILTER");
+let $$S29 = createActionCreator("SEARCH_RESET_FILE_TYPE_FILTER");
 let $$w3 = createOptimistThunk(e => {
   let t = e.getState();
   null !== t.search.parameters.workspaceFilter && (_$$vj.Session.trackWorkspaceFilterChange(t.search, null), e.dispatch($$L0({
@@ -315,30 +315,30 @@ let $$B11 = _$$Pj;
 let $$V26 = _$$r;
 let $$G4 = _$$Je;
 let $$z23 = _$$pY;
-let $$H20 = NC("SEARCH_SET_SEARCH_TYPE_BEHAVIOR");
-let $$W10 = NC("SEARCH_SET_SCROLL_TOP");
-let $$K19 = NC("SEARCH_SET_LAST_ACKED_QUERY_ID");
-let $$Y31 = NC("SEARCH_SET_LAST_LOADED_QUERY");
-let $$q18 = NC("SEARCH_SET_QUERY_ID");
+let $$H20 = createActionCreator("SEARCH_SET_SEARCH_TYPE_BEHAVIOR");
+let $$W10 = createActionCreator("SEARCH_SET_SCROLL_TOP");
+let $$K19 = createActionCreator("SEARCH_SET_LAST_ACKED_QUERY_ID");
+let $$Y31 = createActionCreator("SEARCH_SET_LAST_LOADED_QUERY");
+let $$q18 = createActionCreator("SEARCH_SET_QUERY_ID");
 let $ = e => {
-  let t = NC(e);
+  let t = createActionCreator(e);
   let i = e => t(e);
   i.matches = t.matches;
   return i;
 };
 let $$Z32 = (e => {
-  let t = NC(e);
+  let t = createActionCreator(e);
   let i = e => t(e);
   i.matches = t.matches;
   return i;
 })("SEARCH_SET_RESPONSES");
 let $$X12 = $("SEARCH_SET_FULL_RESULTS_SEARCH_RESPONSE");
 let $$Q5 = $("SEARCH_SET_RESPONSE");
-let $$J15 = NC("SEARCH_SET_FOCUS");
-let $$ee16 = NC("SEARCH_CLEAR_QUERY");
-let $$et24 = NC("SEARCH_CLEAR_RESPONSES");
-let $$ei2 = NC("SEARCH_SET_RESPONSE_SORT_STATE");
-let $$en13 = NC("SEARCH_SET_PARAMETERS");
+let $$J15 = createActionCreator("SEARCH_SET_FOCUS");
+let $$ee16 = createActionCreator("SEARCH_CLEAR_QUERY");
+let $$et24 = createActionCreator("SEARCH_CLEAR_RESPONSES");
+let $$ei2 = createActionCreator("SEARCH_SET_RESPONSE_SORT_STATE");
+let $$en13 = createActionCreator("SEARCH_SET_PARAMETERS");
 let er = (e, t, i) => e.searchScope !== Rx.ORG && e.searchScope !== Rx.ORG_GUEST ? {
   currentOrgId: e.currentOrgId,
   isGlobal: t,

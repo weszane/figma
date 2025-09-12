@@ -13,7 +13,7 @@ import { f$, n4, hY } from "../figma_app/603466";
 import { wH } from "../figma_app/680166";
 import { $A } from "../905/782918";
 import { i as _$$i } from "../905/46262";
-import { hw, wY, iu } from "../905/753206";
+import { getCurrentGRAtom, handlePluginError, pluginState } from "../905/753206";
 let y = class e {
   constructor() {
     this.runQueue = [];
@@ -70,7 +70,7 @@ let y = class e {
     return this.runQueue.length;
   }
   async runNextPlugin() {
-    if (await this.maybeTerminatePluginBeforeRun(), hw()) return;
+    if (await this.maybeTerminatePluginBeforeRun(), getCurrentGRAtom()) return;
     let e = this.runQueue.shift();
     if (!e) return;
     this.currentRunState = e;
@@ -153,7 +153,7 @@ let y = class e {
     }
   }
   async maybeTerminatePluginBeforeRun() {
-    let e = hw();
+    let e = getCurrentGRAtom();
     (!!e != !!this.currentRunState || this.currentRunState?.status === "settled" && this.currentRunState?.runPluginArgs.plugin.plugin_id === e?.plugin_id) && (this.log("maybeTerminatePluginBeforeRun", "Terminating plugin"), await this.terminatePlugin());
   }
   async maybeTerminatePluginAfterRunSettled(e) {
@@ -176,7 +176,7 @@ let y = class e {
   async terminatePlugin() {
     this.log("terminatePlugin", "Terminating plugin");
     this.currentRunState = null;
-    await wY();
+    await handlePluginError();
     await waitForAnimationFrame();
   }
   findExistingRunState({
@@ -184,7 +184,7 @@ let y = class e {
     mode: t
   }) {
     let r = this.currentRunState?.runPluginArgs.plugin.plugin_id;
-    return r === e.plugin.plugin_id && hw()?.plugin_id === r ? this.currentRunState : this.runQueue.find(r => r.runPluginArgs.plugin.plugin_id === e.plugin.plugin_id && r.mode === t);
+    return r === e.plugin.plugin_id && getCurrentGRAtom()?.plugin_id === r ? this.currentRunState : this.runQueue.find(r => r.runPluginArgs.plugin.plugin_id === e.plugin.plugin_id && r.mode === t);
   }
   isCurrentlyRunning({
     runPluginArgs: e,
@@ -209,7 +209,7 @@ let y = class e {
     let i = {
       currentRunState: this.currentRunState,
       runQueue: this.runQueue,
-      runningPluginState: iu,
+      runningPluginState: pluginState,
       ...n
     };
     logger.log("[PluginManager]", `[${t}]`, r, i);

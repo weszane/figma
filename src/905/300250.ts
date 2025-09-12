@@ -1,6 +1,6 @@
 import { GitReferenceType, PreviewStage, DesignWorkspace, Multiplayer, SchemaJoinStatus, OperationResult, AutosaveEventType } from "../figma_app/763686";
 import { waitForAnimationFrame } from "../905/236856";
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { s9 } from "../905/194389";
@@ -18,7 +18,7 @@ import { gf, FK, fA, ds, Mt } from "../905/585030";
 import { handleError, handleModalError } from "../905/760074";
 import { fullscreenValue } from "../figma_app/455680";
 import { setPropertiesPanelTab } from "../figma_app/741237";
-import { De, eN, oJ, mN, lt } from "../905/346794";
+import { abandonBranchingChanges, isJoined, waitForJoinStatus, enterMergeDetachedState, commitBranchingStagedChanges } from "../905/346794";
 import { Qx, WO } from "../905/491806";
 import { FEditorType } from "../figma_app/53721";
 import { CPPEventType, SourceDirection } from "../905/535806";
@@ -79,7 +79,7 @@ let $$R3 = createOptimistThunk(async (e, t) => {
       mergeParams,
       userInitiated: !1,
       reason: "switching_files_in_desktop"
-    })) : await De(!1);
+    })) : await abandonBranchingChanges(!1);
     e.dispatch(sf({
       view: "fullscreen",
       fileKey: mergeParams.direction === SourceDirection.TO_SOURCE ? mergeParams.sourceKey : mergeParams.branchKey,
@@ -147,7 +147,7 @@ let $$N7 = createOptimistThunk((e, t) => {
 });
 let $$P0 = createOptimistThunk(async (e, t) => {
   if (t.mergeParams.mergeOnFileOpen) {
-    if (await waitForAnimationFrame(), eN() || (Multiplayer.updateConnectionStateIfNeeded(!0), await oJ(SchemaJoinStatus.JOINED)), e.dispatch(VisualBellActions.enqueue({
+    if (await waitForAnimationFrame(), isJoined() || (Multiplayer.updateConnectionStateIfNeeded(!0), await waitForJoinStatus(SchemaJoinStatus.JOINED)), e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("collaboration.branching.merging"),
       icon: VisualBellIcon.SPINNER,
       type: "file-merge-submit"
@@ -193,7 +193,7 @@ let $$P0 = createOptimistThunk(async (e, t) => {
           cause: e
         }), CPPEventType.ON_MERGE, t.mergeParams.direction);else throw e;
       }
-      await mN();
+      await enterMergeDetachedState();
       gf(r, PreviewStage.STAGE);
       let a = new FK({
         mergeParams: t.mergeParams,
@@ -237,7 +237,7 @@ let O = async (e, t, i, n, r = null) => {
           fileMergeId: a.id
         }));
         try {
-          await lt({
+          await commitBranchingStagedChanges({
             fileMergeId: a.id,
             userId: n,
             allowEmptyMerge: i.direction === SourceDirection.FROM_SOURCE
@@ -349,11 +349,11 @@ let O = async (e, t, i, n, r = null) => {
       }));
   }
 };
-let $$D5 = NC("CLEAR_OPEN_FILE_MERGE");
-let $$L6 = NC("SET_OPEN_FILE_MERGE");
-let $$F2 = NC("SET_BRANCH_MERGE_ERROR");
-let $$M1 = NC("FINISH_BRANCH_MERGE");
-let $$j4 = NC("BEGIN_BRANCH_MERGE");
+let $$D5 = createActionCreator("CLEAR_OPEN_FILE_MERGE");
+let $$L6 = createActionCreator("SET_OPEN_FILE_MERGE");
+let $$F2 = createActionCreator("SET_BRANCH_MERGE_ERROR");
+let $$M1 = createActionCreator("FINISH_BRANCH_MERGE");
+let $$j4 = createActionCreator("BEGIN_BRANCH_MERGE");
 export const Ad = $$P0;
 export const E = $$M1;
 export const Nu = $$F2;

@@ -1,6 +1,6 @@
-import { NC } from "../905/17179";
+import { createActionCreator } from "../905/73481";
 import { XHR } from "../905/910117";
-import { s as _$$s } from "../905/573154";
+import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
@@ -10,7 +10,7 @@ import { N } from "../905/696711";
 import { _M, jx, wZ, OL } from "../figma_app/869776";
 import { S } from "../figma_app/11182";
 var $$h1 = (e => (e.TEAM_PERMISSIONS_MODAL = "team permissions modal", e.NUX_INVITE_COLLABORATOR = "nux invite collaborator", e))($$h1 || {});
-let $$g0 = NC("TEAM_JOIN_LINKS_SET_REQUEST_STATE");
+let $$g0 = createActionCreator("TEAM_JOIN_LINKS_SET_REQUEST_STATE");
 let $$f5 = createOptimistThunk(async (e, t, {
   loadingKey: i
 }) => {
@@ -24,7 +24,7 @@ let $$f5 = createOptimistThunk(async (e, t, {
       url: void 0
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(t.message));
+    e.dispatch(FlashActions.error(t.message));
   });
 });
 let $$_3 = createOptimistThunk(async (e, t) => {
@@ -46,7 +46,7 @@ let $$_3 = createOptimistThunk(async (e, t) => {
       message: getI18nString("flash.team_join_link_actions.invite_links_reset")
     }));
   }).catch(t => {
-    e.dispatch(_$$s.error(t.data.message || "Unknown error"));
+    e.dispatch(FlashActions.error(t.data.message || "Unknown error"));
   });
 });
 let $$A4 = createOptimistThunk((e, t) => {
@@ -64,7 +64,7 @@ let $$A4 = createOptimistThunk((e, t) => {
       }));
     }
   }).catch(i => {
-    t.shouldShowFailureMessage && e.dispatch(_$$s.error(i.message));
+    t.shouldShowFailureMessage && e.dispatch(FlashActions.error(i.message));
     t.callbackOnFailure?.();
   });
 });
