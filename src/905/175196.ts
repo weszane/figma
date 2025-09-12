@@ -18,7 +18,7 @@ import { updateEnvironmentInfo } from "../905/883621";
 import { isAppShellEnabled } from "../905/561581";
 import { entrypointVariant } from "../905/709735";
 import { bj } from "../905/280919";
-import { fF, hi } from "../905/194389";
+import { isStackOverflowError, hasFilePath } from "../905/194389";
 import { customHistory } from "../905/612521";
 import { getSentryConfig } from "../905/256712";
 import { BrowserInfo } from "../figma_app/778880";
@@ -49,7 +49,7 @@ if (getSentryConfig().enabled) {
       let i = t.originalException;
       if (null == i) return e;
       if (i instanceof XHRError || "has_crashed" === e.tags.fullscreen_status) return null;
-      i instanceof Error && fF(i) && (e.tags.severity = SeverityLevel.Critical);
+      i instanceof Error && isStackOverflowError(i) && (e.tags.severity = SeverityLevel.Critical);
       let n = getFeatureFlags().frontend_sentry_wasm_integration;
       if (e.exception?.values) {
         let t = RegExp("zaloJSV2|firefoxSample");
@@ -78,7 +78,7 @@ if (getSentryConfig().enabled) {
             let t = e.stacktrace?.frames;
             return t?.some(e => e.filename?.includes("dwarf"));
           })(r) && (n = !0);
-          getFeatureFlags().frontend_sentry_cpp_location && i instanceof Error && hi(i) && r.value === i.message && r.stacktrace && r.stacktrace.frames && r.stacktrace.frames.push({
+          getFeatureFlags().frontend_sentry_cpp_location && i instanceof Error && hasFilePath(i) && r.value === i.message && r.stacktrace && r.stacktrace.frames && r.stacktrace.frames.push({
             in_app: !0,
             filename: window.location.origin + "/" + i.filePath,
             lineno: i.lineNumber

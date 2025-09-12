@@ -5,7 +5,7 @@ import { atom, createRemovableAtomFamily, useAtomWithSubscription } from "../fig
 import { getResourceDataOrFallback } from "../905/663269";
 import { gB } from "../905/723791";
 import { JB } from "../figma_app/657017";
-import { M } from "../figma_app/155411";
+import { getProviderConfigType } from "../figma_app/155411";
 import { h0 } from "../905/845253";
 import { DQ } from "../905/872904";
 import { FPlanNameType } from "../figma_app/191312";
@@ -14,7 +14,7 @@ import { getPlanFeaturesAtomFamily } from "../905/276025";
 import { Me, jv } from "../figma_app/598018";
 let _ = atom(e => {
   let t = e(DQ);
-  let i = M();
+  let i = getProviderConfigType();
   let n = e(getPlanFeaturesAtomFamily(!0)).data?.tier !== FPlanNameType.STARTER;
   let {
     data

@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, forwardRef } from "react";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
 import { T } from "../905/745591";
 import { x } from "../905/404412";
-import { Lh } from "../figma_app/415899";
+import { useFplStrings } from "../figma_app/415899";
 import { s as _$$s } from "../905/536340";
 var n = {};
 require.d(n, {
@@ -57,10 +57,10 @@ export let $$b0 = forwardRef(({
   htmlAttributes: i,
   ...a
 }, d) => {
-  let c = Lh("loading");
+  let c = useFplStrings("loading");
   let {
     version
-  } = DP();
+  } = getThemeContextOrDefault();
   let h = v[t];
   return jsxs(T, {
     className: _$$A(_, n[t]),

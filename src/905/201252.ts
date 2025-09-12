@@ -3,15 +3,15 @@ import { forwardRef, useRef } from "react";
 import { Nz, h4 } from "../905/720338";
 import { useRecording } from "../905/959312";
 import { S } from "../905/823680";
-import { $ } from "../905/61417";
+import { ensureContext } from "../905/61417";
 import { q7 } from "../figma_app/860955";
-import { Lh } from "../figma_app/415899";
+import { useFplStrings } from "../figma_app/415899";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent, stopEventPropagation } from "../905/955878";
 import { k as _$$k } from "../905/733611";
 import { lO } from "../905/246123";
 let g = () => {
-  let e = $(_$$k, "GridPrimitive.Row", "GridContext");
+  let e = ensureContext(_$$k, "GridPrimitive.Row", "GridContext");
   let t = e.gridRef;
   return (i, n) => {
     let r = t.current;
@@ -38,7 +38,7 @@ let A = () => {
   let {
     setSelectedRows,
     lastClickedRow
-  } = $(_$$k, "GridPrimitive.Row", "GridContext");
+  } = ensureContext(_$$k, "GridPrimitive.Row", "GridContext");
   let i = v();
   return n => {
     let r = new Set();
@@ -54,7 +54,7 @@ let A = () => {
   };
 };
 let y = () => {
-  let e = $(_$$k, "GridPrimitive.Row", "GridContext");
+  let e = ensureContext(_$$k, "GridPrimitive.Row", "GridContext");
   let t = e.keyboardDragIndexRef;
   return () => {
     e.newDraggingOrder.current = void 0;
@@ -63,7 +63,7 @@ let y = () => {
   };
 };
 let b = () => {
-  let e = $(_$$k, "GridPrimitive.Row", "GridContext");
+  let e = ensureContext(_$$k, "GridPrimitive.Row", "GridContext");
   let t = g();
   let {
     onDragOver
@@ -78,7 +78,7 @@ let b = () => {
   };
 };
 let v = () => {
-  let e = $(_$$k, "GridPrimitive.Row", "GridContext").gridRef;
+  let e = ensureContext(_$$k, "GridPrimitive.Row", "GridContext").gridRef;
   return () => I(e.current, lO);
 };
 let I = (e, t) => e ? Array.from(e.querySelectorAll(t)) : [];
@@ -105,7 +105,7 @@ let $$E1 = forwardRef(({
     } = n || {};
     let x = useRef(null);
     let S = useRef(!1);
-    let w = $(_$$k, "GridPrimitive.Row", "GridContext");
+    let w = ensureContext(_$$k, "GridPrimitive.Row", "GridContext");
     let {
       setSelectedRows,
       onReorderRows,
@@ -245,7 +245,7 @@ let x = {
 };
 export function $$S0(e) {
   let t = g();
-  let i = $(_$$k, "GridPrimitive.Row", "GridContext");
+  let i = ensureContext(_$$k, "GridPrimitive.Row", "GridContext");
   let r = _();
   let s = v();
   let o = r(e);
@@ -260,10 +260,10 @@ export function $$S0(e) {
     E(e);
     w();
   };
-  let T = Lh("moveRowToTop");
-  let k = Lh("moveRowUp");
-  let R = Lh("moveRowDown");
-  let N = Lh("moveRowToBottom");
+  let T = useFplStrings("moveRowToTop");
+  let k = useFplStrings("moveRowUp");
+  let R = useFplStrings("moveRowDown");
+  let N = useFplStrings("moveRowToBottom");
   if (null == o) return {
     menuItems: [],
     getMenuContainerProps: () => void 0

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { $n } from "../905/521428";
-import { wQ } from "../905/437088";
+import { useModal } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -59,7 +59,7 @@ export function $$j0(e) {
       k(!0);
     })();
   }, [createPaymentElement]);
-  let R = wQ({
+  let R = useModal({
     defaultOpen: !0
   });
   let O = paymentMethod?.object.last4;

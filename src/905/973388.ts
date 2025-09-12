@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -13,7 +13,7 @@ import { fu } from "../figma_app/831799";
 import { c as _$$c } from "../905/32166";
 export let $$g0 = registerModal(function (e) {
   let t = useDispatch();
-  let i = hS(e);
+  let i = useModalManager(e);
   let g = () => {
     t(hideModal());
   };

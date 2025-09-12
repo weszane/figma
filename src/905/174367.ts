@@ -2,7 +2,7 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Cs } from "../figma_app/59509";
@@ -26,7 +26,7 @@ function E({
   isDraggingFileOverModal: a,
   projectId: p
 }) {
-  let _ = hS({
+  let _ = useModalManager({
     open: e,
     onClose: t
   });

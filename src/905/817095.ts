@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo, useState, useMemo, useRef, useEffect, useReducer, useCallback } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -309,7 +309,7 @@ let H = M4.Query({
   fetch: async () => (await _$$m.getStatsigFlagDescriptions()).data.meta ?? {}
 });
 let $$W0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let [i, c] = IT(z(null));
   let u = useMemo(() => i?.data ?? {}, [i]);
   let [p, m] = IT(H(null));

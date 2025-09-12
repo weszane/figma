@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { G as _$$G } from "../905/289770";
 import { J } from "../905/614223";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
 import { S as _$$S } from "../figma_app/215667";
 import { Description } from "../905/21985";
@@ -11,8 +11,8 @@ import { useSelectionProvider } from "../905/751750";
 import { l as _$$l } from "../905/479687";
 import { r as _$$r } from "../905/571562";
 import { a as _$$a } from "../905/339331";
-import { mc as _$$mc, LJ, WM, l9 as _$$l2, c$ as _$$c$, YJ as _$$YJ, WL as _$$WL, bL as _$$bL } from "../905/408073";
-import { Lh } from "../figma_app/415899";
+import { SelectPrimitiveContainer, SelectPrimitiveScrollArrow, useSelectPrimitiveState, SelectPrimitiveTrigger, SelectPrimitiveOption, SelectPrimitiveGroup, SelectPrimitiveGroupLabel, SelectPrimitiveRoot } from "../905/408073";
+import { useFplStrings } from "../figma_app/415899";
 var n = {};
 require.d(n, {
   container: () => w,
@@ -64,17 +64,17 @@ export let $$U0 = forwardRef(({
   let {
     color
   } = _$$G();
-  return jsx(_$$mc, {
+  return jsx(SelectPrimitiveContainer, {
     className: _$$A(w, "light" === ("dark" === n ? "dark" : color) ? S : E),
     ...t,
     ref: i,
     children: jsxs(J, {
       mode: "dark" === n ? "dark" : void 0,
-      children: [e, jsx(LJ, {
+      children: [e, jsx(SelectPrimitiveScrollArrow, {
         className: D,
         direction: "up",
         children: jsx(_$$a, {})
-      }), jsx(LJ, {
+      }), jsx(SelectPrimitiveScrollArrow, {
         className: D,
         direction: "down",
         children: jsx(_$$r, {})
@@ -93,13 +93,13 @@ export let $$B3 = forwardRef(({
 }, c) => {
   let {
     selectedItem
-  } = WM();
-  let p = Lh("select");
+  } = useSelectPrimitiveState();
+  let p = useFplStrings("select");
   let {
     version
-  } = DP();
+  } = getThemeContextOrDefault();
   let h = selectedItem ? selectedItem.label : e ?? p;
-  return jsxs(_$$l2, {
+  return jsxs(SelectPrimitiveTrigger, {
     ...o,
     className: _$$A(y, n[a], n[s]),
     ref: c,
@@ -143,8 +143,8 @@ let G = forwardRef(({
 }, i) => {
   let {
     version
-  } = DP();
-  return jsx(_$$c$, {
+  } = getThemeContextOrDefault();
+  return jsx(SelectPrimitiveOption, {
     className: T,
     ...t,
     ref: i,
@@ -174,13 +174,13 @@ export let $$H5 = forwardRef((e, t) => jsx(G, {
   ref: t
 }));
 $$H5.displayName = "Select.OptionReset";
-export let $$W1 = forwardRef((e, t) => jsx(_$$YJ, {
+export let $$W1 = forwardRef((e, t) => jsx(SelectPrimitiveGroup, {
   className: x,
   ref: t,
   ...e
 }));
 $$W1.displayName = "Select.Group";
-export let $$K2 = forwardRef((e, t) => jsx(_$$WL, {
+export let $$K2 = forwardRef((e, t) => jsx(SelectPrimitiveGroupLabel, {
   className: O,
   ref: t,
   ...e
@@ -192,7 +192,7 @@ let Y = forwardRef((e, t) => jsx("span", {
   ...e
 }));
 export function $$q6(e) {
-  return jsx(_$$bL, {
+  return jsx(SelectPrimitiveRoot, {
     ...e,
     offsetAmount: 8,
     padding: {

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
@@ -82,12 +82,12 @@ export function $$x0(e) {
   let {
     forceUI3Theme = !1
   } = e;
-  return e.fixedPosition ? jsx(J, {
+  return e.fixedPosition ? jsx(UI3ConditionalWrapper, {
     disabled: !forceUI3Theme,
     children: jsx(I, {
       ...e
     })
-  }) : jsx(J, {
+  }) : jsx(UI3ConditionalWrapper, {
     disabled: !forceUI3Theme,
     children: jsx(E, {
       ...e

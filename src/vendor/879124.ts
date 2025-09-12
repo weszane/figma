@@ -1,3 +1,3 @@
-import { createRoot, hydrateRoot } from "../vendor/944059";
+import { createRoot, hydrateRoot } from "react-dom";
 exports.H = createRoot;
 hydrateRoot;

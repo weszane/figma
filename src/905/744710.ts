@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, createContext, useState, useRef, useCallback, useContext, useMemo, Suspense, useEffect, Fragment as _$$Fragment, forwardRef, PureComponent, createElement } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { t as _$$t } from "../905/150656";
 import l, { Y9, hE, nB as _$$nB, wi, jk, vo, r1 } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
@@ -65,7 +65,7 @@ import { P as _$$P } from "../905/347284";
 import { a as _$$a } from "../905/329735";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
-import { J as _$$J2 } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { handleSuspenseRetainRelease, getAtomMutate } from "../figma_app/566371";
@@ -151,14 +151,14 @@ import { lW as _$$lW } from "../905/31837";
 import { u as _$$u } from "../905/834238";
 import { Jt, hZ, Op, as, mN, Gb } from "../vendor/739257";
 import { A as _$$A7 } from "../vendor/723372";
-import { VM, iM as _$$iM, C4 } from "../905/472756";
+import { useAriaConnection, useAriaAttributes, A11yConnectorProvider } from "../905/472756";
 import { useRecording } from "../905/959312";
 import { l as _$$l } from "../905/479687";
 import { a as _$$a2 } from "../905/462280";
 import { R as _$$R3 } from "../905/256203";
-import { Lh } from "../figma_app/415899";
+import { useFplStrings } from "../figma_app/415899";
 import { iv as _$$iv, Uj, mc as _$$mc, UC } from "../905/872285";
-import { E as _$$E3 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { Ay as _$$Ay3, z as _$$z3 } from "../vendor/835909";
 import { a$H, qgA, EJS } from "../vendor/285761";
 import { S as _$$S3 } from "../905/823680";
@@ -1652,7 +1652,7 @@ function tO() {
       children: getI18nString("notification_settings_modal.browser_notifications")
     }), jsx("div", {
       className: "x1y1aw1k",
-      children: jsx(_$$J2, {
+      children: jsx(UI3ConditionalWrapper, {
         children: jsx($n, {
           variant: "link",
           onClick: async () => {
@@ -1729,7 +1729,7 @@ function tD() {
 var tq = (e => (e[e.Unknown = 0] = "Unknown", e[e.Mobile = 1] = "Mobile", e[e.Desktop = 2] = "Desktop", e))(tq || {});
 let tJ = registerModal(function (e) {
   let t = useDispatch();
-  let i = hS(e);
+  let i = useModalManager(e);
   let n = setupAutofocusHandler();
   return jsx(bL, {
     manager: i,
@@ -1789,7 +1789,7 @@ let t4 = registerModal(function (e) {
   let t = selectCurrentUser();
   let i = _$$Z();
   let n = useDispatch();
-  let a = hS(e);
+  let a = useModalManager(e);
   return t ? hasPasswordOrSSO(t) ? jsx(_$$R2, {
     title: jsx(zd, {}),
     onConfirm: () => {
@@ -1909,7 +1909,7 @@ let iv = registerModal(function (e) {
     [IJ.VARIABLES]: _$$eK.NO_ACCESS,
     [IJ.WEBHOOKS]: _$$eK.NO_ACCESS
   });
-  let g = hS(e);
+  let g = useModalManager(e);
   let {
     org
   } = e;
@@ -2948,14 +2948,14 @@ function nH({
 }) {
   let {
     id
-  } = VM("description");
-  let i = Lh("error");
+  } = useAriaConnection("description");
+  let i = useFplStrings("error");
   return jsxs("p", {
     className: nM,
     id,
     children: [jsx(_$$z2, {
       "aria-hidden": !0
-    }), jsxs(_$$E3, {
+    }), jsxs(ScreenReaderOnly, {
       as: "span",
       children: [i, "\xa0"]
     }), e]
@@ -2974,18 +2974,18 @@ let nW = forwardRef(({
   } = as({
     name
   });
-  let o = Lh("success");
-  let l = Lh("warning");
+  let o = useFplStrings("success");
+  let l = useFplStrings("warning");
   let d = !fieldState.error?.message;
   let {
     id
-  } = VM("description", {
+  } = useAriaConnection("description", {
     enabled: d
   });
   let u = {
     help: null,
     warning: jsxs(Fragment, {
-      children: [jsxs(_$$E3, {
+      children: [jsxs(ScreenReaderOnly, {
         as: "span",
         children: [l, "\xa0"]
       }), jsx(_$$R3, {
@@ -2993,7 +2993,7 @@ let nW = forwardRef(({
       })]
     }),
     success: jsxs(Fragment, {
-      children: [jsxs(_$$E3, {
+      children: [jsxs(ScreenReaderOnly, {
         as: "span",
         children: [o, "\xa0"]
       }), jsx(_$$l, {
@@ -3015,7 +3015,7 @@ function nK({
   value: e,
   maxLength: t
 }) {
-  let i = Lh("remainingCharacters");
+  let i = useFplStrings("remainingCharacters");
   let n = useMemo(() => {
     if ("string" == typeof e && e) {
       if (e.length > t) return "invalid";
@@ -3028,7 +3028,7 @@ function nK({
     "aria-live": "polite",
     role: "status",
     "data-fpl-valid": n,
-    children: [jsx(_$$E3, {
+    children: [jsx(ScreenReaderOnly, {
       children: i
     }), jsxs("span", {
       children: [s, " / ", t]
@@ -3041,8 +3041,8 @@ let nY = forwardRef(({
   children: e,
   tooltip: t
 }, i) => {
-  let n = _$$iM(["htmlFor"]);
-  let a = Lh("help");
+  let n = useAriaAttributes(["htmlFor"]);
+  let a = useFplStrings("help");
   let s = nb();
   let o = _$$iv({
     placement: "top"
@@ -3099,7 +3099,7 @@ let nq = forwardRef(({
       return i.success ? i.data.maxLength : "unwrap" in t && "function" == typeof t.unwrap ? e(t.unwrap()) : void 0;
     }(t) ?? null : null, [t]);
   }(t);
-  return jsx(C4, {
+  return jsx(A11yConnectorProvider, {
     children: jsx(nA.Provider, {
       value: o,
       children: jsxs("div", {
@@ -3298,10 +3298,10 @@ let nQ = forwardRef(({
   } = useContext(n_);
   let {
     id
-  } = VM("htmlFor", {
+  } = useAriaConnection("htmlFor", {
     providedId: e
   });
-  let c = _$$iM(["description", "label"]);
+  let c = useAriaAttributes(["description", "label"]);
   let u = nb();
   let {
     field,
@@ -3332,7 +3332,7 @@ let nJ = Object.assign(nQ, {
   Root: _$$p3.Root
 });
 let n1 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let i = useDispatch();
   let n = getFeatureFlags().fpl_username_form_migration;
   let o = useSelector(e => e.user);
@@ -3566,7 +3566,7 @@ class n8 extends PureComponent {
 }
 n8.displayName = "DeleteUserAccountModal";
 let rt = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let i = getUserId();
   let [n, o] = useState(e.fileViewHistoryDisabled.toString());
   let d = useMemo(() => n !== e.fileViewHistoryDisabled.toString(), [n, e.fileViewHistoryDisabled]);
@@ -3647,7 +3647,7 @@ function rs({
   open: e,
   onClose: t
 }) {
-  let i = hS({
+  let i = useModalManager({
     open: e,
     onClose: t
   });
@@ -4713,7 +4713,7 @@ let rU = {
   SECURITY: () => getI18nString("settings.account_setting.security")
 };
 let $$rB0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let i = getFeatureFlags().user_settings_tab;
   let {
     tab

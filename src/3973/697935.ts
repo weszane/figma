@@ -1,71 +1,102 @@
-import { atom, setupCustomAtom } from "../figma_app/27355";
-import { Uv, bT, Uw } from "../3973/473379";
-export function $$i4(e) {
-  return e.status === Uv.ERRORED && e.cause === bT.TIMEOUT;
+import { ErrorType, OperationStatus, ProcessState } from '../3973/473379'
+import { atom, setupCustomAtom } from '../figma_app/27355'
+
+/**
+ * Checks if the process status is ERRORED due to TIMEOUT.
+ * @param state - The process state object.
+ * @returns True if errored due to timeout, false otherwise.
+ * @originalName $$i4
+ */
+export function isErroredTimeout(state: { status: OperationStatus, cause?: ErrorType }) {
+  return state.status === OperationStatus.ERRORED && state.cause === ErrorType.TIMEOUT
 }
-let n = atom({
-  status: Uv.NOT_STARTED,
-  initCompletedPromise: void 0
-});
-let $$o0 = setupCustomAtom(n, function (e, t) {
-  switch (t?.type) {
-    case Uw.RESET:
+
+/**
+ * Initial atom state for process.
+ * @originalName n
+ */
+const initialProcessState = atom({
+  status: OperationStatus.NOT_STARTED,
+  initCompletedPromise: undefined as undefined | Promise<void>,
+})
+
+/**
+ * Custom atom for process state transitions.
+ * Handles RESET, START, ERROR, and COMPLETE actions.
+ * @originalName $$o0
+ */
+export const processAtom = setupCustomAtom(initialProcessState, (state, action) => {
+  switch (action?.type) {
+    case ProcessState.RESET:
       return {
-        status: Uv.NOT_STARTED,
-        initCompletedPromise: void 0
-      };
-    case Uw.START:
-      if (e.status === Uv.NOT_STARTED) {
-        let {
-          initCompletedPromise,
-          sdkKey
-        } = t.payload;
-        return {
-          status: Uv.IN_PROGRESS,
-          sdkKey,
-          initCompletedPromise
-        };
+        status: OperationStatus.NOT_STARTED,
+        initCompletedPromise: undefined,
       }
-      break;
-    case Uw.ERROR:
-      if (e.status === Uv.IN_PROGRESS) {
-        let {
-          sdkKey,
-          initCompletedPromise
-        } = e;
-        let {
-          cause
-        } = t.payload;
+    case ProcessState.START:
+      if (state.status === OperationStatus.NOT_STARTED) {
+        const { initCompletedPromise, sdkKey } = action.payload
         return {
-          status: Uv.ERRORED,
+          status: OperationStatus.IN_PROGRESS,
+          sdkKey,
+          initCompletedPromise,
+        }
+      }
+      return state
+    case ProcessState.ERROR:
+      if (state.status === OperationStatus.IN_PROGRESS) {
+        const { sdkKey, initCompletedPromise } = state
+        const { cause } = action.payload
+        return {
+          status: OperationStatus.ERRORED,
           sdkKey,
           cause,
-          initCompletedPromise
-        };
+          initCompletedPromise,
+        }
       }
-      break;
-    case Uw.COMPLETE:
-      if (e.status === Uv.IN_PROGRESS) {
-        let {
-          sdkKey,
-          initCompletedPromise
-        } = e;
+      return state
+    case ProcessState.COMPLETE:
+      if (state.status === OperationStatus.IN_PROGRESS) {
+        const { sdkKey, initCompletedPromise } = state
         return {
-          status: Uv.COMPLETED,
+          status: OperationStatus.COMPLETED,
           sdkKey,
-          initCompletedPromise
-        };
+          initCompletedPromise,
+        }
       }
+      return state
+    default:
+      return state
   }
-  return e;
-});
-let $$_2 = atom(e => e($$o0));
-let $$l5 = atom(e => e($$o0).initCompletedPromise);
-let $$u3 = atom(0);
-let $$c1 = atom(!1);
-export const MQ = $$o0;
-export const UY = $$c1;
-export const ZJ = $$_2;
-export const gR = $$u3;
-export const hH = $$i4;
-export const u_ = $$l5;
+})
+
+/**
+ * Atom selector for processAtom.
+ * @originalName $$_2
+ */
+export const processSelector = atom(get => get(processAtom))
+
+/**
+ * Atom selector for initCompletedPromise from processAtom.
+ * @originalName $$l5
+ */
+export const initCompletedPromiseSelector = atom(get => get(processAtom).initCompletedPromise)
+
+/**
+ * Atom for a numeric value, default 0.
+ * @originalName $$u3
+ */
+export const numericAtom = atom(0)
+
+/**
+ * Atom for a boolean flag, default false.
+ * @originalName $$c1
+ */
+export const booleanFlagAtom = atom(false)
+
+// Exported variables with refactored names
+export const MQ = processAtom
+export const UY = booleanFlagAtom
+export const ZJ = processSelector
+export const gR = numericAtom
+export const hH = isErroredTimeout
+export const u_ = initCompletedPromiseSelector

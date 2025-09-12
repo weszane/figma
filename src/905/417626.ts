@@ -2,7 +2,7 @@ import { B } from "../905/950875";
 import { R } from "../905/256203";
 import { b } from "../905/946806";
 import { Z } from "../905/279476";
-import { Lh } from "../figma_app/415899";
+import { useFplStrings } from "../figma_app/415899";
 import { tp, LO, FM, Sp, P2, W, eW, Ck, LC, e1 } from "../905/193774";
 export function $$d3(e, t) {
   switch (e) {
@@ -16,8 +16,8 @@ export function $$d3(e, t) {
   }
 }
 export function $$c2(e) {
-  let t = Lh("warning");
-  let i = Lh("danger");
+  let t = useFplStrings("warning");
+  let i = useFplStrings("danger");
   switch (e) {
     case "warn":
       return t;

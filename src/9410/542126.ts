@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useMemo, useEffect } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { b as _$$b, bL, mc, YJ, Q$, Ov, ME } from "../figma_app/860955";
 import { z6, CU, H_ } from "../905/963340";
@@ -141,7 +141,7 @@ function D({
     showPoint: !0,
     targetRect: h.current.getBoundingClientRect()
   });
-  return jsxs(_$$o, {
+  return jsxs(EventShield, {
     eventListeners: ["onClick", "onMouseUp"],
     children: [jsx("div", {
       ref: h,
@@ -234,7 +234,7 @@ function F({
   useEffect(() => {
     f && C === EditAction.REPLACE && h(sV(EditAction.FIND));
   }, [h, f, C]);
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseUp"],
     children: jsxs(bL, {
       manager,

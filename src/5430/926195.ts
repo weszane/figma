@@ -8,7 +8,7 @@ import { hideModalHandler, showModalHandler } from "../905/156213";
 import { HI } from "../figma_app/173838";
 import { selectCurrentUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { x as _$$x } from "../figma_app/856733";
+import { AppleEulaModal } from "../figma_app/856733";
 export let $$p0 = registerModal(function ({
   hubFileId: e,
   inResourceHub: t,
@@ -19,7 +19,7 @@ export let $$p0 = registerModal(function ({
   let h = Jm();
   let x = useDispatch();
   let f = selectCurrentUser();
-  return p ? jsx(_$$x, {
+  return p ? jsx(AppleEulaModal, {
     onAgree: () => {
       if (r) {
         x(hideModalHandler());

@@ -1,18 +1,18 @@
 import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { EvaluationReason } from "../vendor/625526";
+import { EvaluationReason } from "statsig-js";
 import { trackEventAnalytics } from "../905/449184";
 import { getFeatureFlagRulesExport } from "../figma_app/169182";
 import { F } from "../905/422355";
 import { atomStoreManager } from "../figma_app/27355";
-import { Statsig } from "../vendor/735621";
-import { Tq, sb } from "../3973/663243";
-import { ZJ } from "../3973/697935";
-import { Uv } from "../3973/473379";
+import { Statsig } from "statsig-react";
+import { getExperimentConfig, defaultDynamicConfig } from "../3973/663243";
+import { processSelector } from "../3973/697935";
+import { OperationStatus } from "../3973/473379";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { L, K } from "../905/958077";
-function h(e = atomStoreManager.get(ZJ)) {
-  return !!Statsig.initializeCalled() && e.status === Uv.COMPLETED;
+function h(e = atomStoreManager.get(processSelector)) {
+  return !!Statsig.initializeCalled() && e.status === OperationStatus.COMPLETED;
 }
 let _ = class e {
   static notInTestingEnvForLogging() {
@@ -44,9 +44,9 @@ let _ = class e {
   static populateExperimentConfig(e, t) {
     if (!this.FrozenDyanmicConfigs.get(e)) {
       let i = function (e, t) {
-        let i = atomStoreManager.get(ZJ);
-        let n = Tq(i, e, "getFrozenExperiment", !1, t);
-        return n && n !== sb && n.getEvaluationDetails().reason !== EvaluationReason.Unrecognized ? n : null;
+        let i = atomStoreManager.get(processSelector);
+        let n = getExperimentConfig(i, e, "getFrozenExperiment", !1, t);
+        return n && n !== defaultDynamicConfig && n.getEvaluationDetails().reason !== EvaluationReason.Unrecognized ? n : null;
       }(e, !0);
       if (null != i) {
         this.ToBeExposedExperimentConfigSet.add(e);

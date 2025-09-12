@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useId, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { wv, hE, g8, ZP, Q$, MJ, q7, b as _$$b, bL, mc } from "../figma_app/860955";
-import { q7 as _$$q } from "../905/465888";
+import { MenuItemPrimitive } from "../905/465888";
 import { HiddenLabel } from "../905/270045";
 import { l as _$$l } from "../905/479687";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -124,7 +124,7 @@ let A = (e, t, r) => e.separator ? jsx(wv, {}, `${t}_separator`) : e.header ? js
       children: e.displayText
     })
   })]
-}, t) : jsx(_$$q, {
+}, t) : jsx(MenuItemPrimitive, {
   "aria-checked": e.isChecked,
   className: mL,
   onClick: e.callback,

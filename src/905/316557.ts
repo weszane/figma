@@ -28,7 +28,7 @@ import { bL as _$$bL } from "../905/911410";
 import { vo, Y9, hE as _$$hE, jk, nB } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
-import { E as _$$E2 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { i as _$$i } from "../905/22844";
 import { W as _$$W } from "../905/798224";
 import { A as _$$A } from "../905/891805";
@@ -58,7 +58,7 @@ import { TN, Dq, E_ } from "../figma_app/177697";
 import { Xo, lK, UZ, k1, kO } from "../figma_app/687767";
 import { B as _$$B } from "../905/118396";
 import { KL, Z3 } from "../figma_app/450967";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { O as _$$O } from "../905/969533";
 import { pn } from "../905/714538";
@@ -165,7 +165,7 @@ function eg({
       recordingKey: generateRecordingKey(t, "editThemeNameButton"),
       "aria-describedby": eh,
       children: i
-    }), jsx(_$$E2, {
+    }), jsx(ScreenReaderOnly, {
       id: eh,
       children: getI18nString("slides.properties_panel.theme.click_to_edit_theme_name")
     })]
@@ -823,7 +823,7 @@ function eB({
           backgroundColor: e
         }
       }, e))
-    }), !getFeatureFlags().slides_a11y_template_styles && i && jsx(_$$o, {
+    }), !getFeatureFlags().slides_a11y_template_styles && i && jsx(EventShield, {
       eventListeners: ["onMouseDown"],
       children: jsx(_$$E, {
         className: "slides_theme_preview_row--shuffleIcon--o6GHd",

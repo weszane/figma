@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
 import { bL as _$$bL, bN, JU as _$$JU, X0 as _$$X, UC as _$$UC, YJ as _$$YJ } from "../figma_app/322555";
-import { $ } from "../905/61417";
+import { ensureContext } from "../905/61417";
 import { O } from "../905/969533";
 import { k } from "../905/44647";
 import { defaultComponentAttribute } from "../905/577641";
@@ -40,7 +40,7 @@ export let $$h0 = forwardRef(({
   size: t = "md",
   ...r
 }, i) => {
-  let p = $(bN, "CollapseContext", "Collapse.Root");
+  let p = ensureContext(bN, "CollapseContext", "Collapse.Root");
   return jsxs(_$$JU, {
     ...defaultComponentAttribute,
     ...r,

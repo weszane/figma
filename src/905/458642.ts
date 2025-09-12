@@ -1,16 +1,32 @@
-import { useRecording } from "../905/959312";
-export function $$r0({
-  onChange: e,
-  recordingKey: t,
-  ...i
+import { useRecording } from '../905/959312'
+
+/**
+ * Enhances props with a recording-enabled onChange handler.
+ * @param props - Original props including onChange and recordingKey.
+ * @returns Props with onChange replaced by recording logic.
+ * (Original function: $$r0)
+ */
+export function setupRecordingHandler({
+  onChange,
+  recordingKey,
+  ...restProps
+}: {
+  onChange: (...args: any[]) => void
+  recordingKey: string
+  disabled?: boolean
+  [key: string]: any
 }) {
-  let r = useRecording(e, {
-    eventName: "change",
-    recordingKey: t
-  }, [e, i.disabled]);
+  // useRecording hook wraps the onChange handler with recording logic
+  const recordingOnChange = useRecording(onChange, {
+    eventName: 'change',
+    recordingKey,
+  }, [onChange, restProps.disabled])
+
   return {
-    ...i,
-    onChange: r
-  };
+    ...restProps,
+    onChange: recordingOnChange,
+  }
 }
-export const W = $$r0;
+
+// Export with refactored name for clarity
+export const W = setupRecordingHandler

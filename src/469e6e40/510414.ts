@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { SM } from "../figma_app/153916";
@@ -27,7 +27,7 @@ let y = memo(function ({
   open: k
 }) {
   let E = useDispatch();
-  let C = hS({
+  let C = useModalManager({
     open: k,
     onClose: w
   });

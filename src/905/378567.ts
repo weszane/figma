@@ -3,7 +3,7 @@ import _require from "../5430/337035";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component, PureComponent, createElement } from "react";
 import { connect } from "react-redux";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { Gc } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
@@ -96,7 +96,7 @@ export function $$F1(e, t) {
       let t = getPluginVersion(e);
       return t ? jsxs("div", {
         className: this.props.usesTabletOptimizedSidebar ? qp : JC,
-        children: [jsxs(_$$_, {
+        children: [jsxs(LinkPrimitive, {
           onClick: this.onPluginListRowClick,
           href: ho(e.id),
           className: PI,

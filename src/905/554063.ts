@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
 import { U } from "../905/331038";
@@ -81,7 +81,7 @@ export function $$S0({
   }, [e.currentValue]), e.currentValue === _$$A || I && !Zc(e)) ? null : jsx(_$$A2, {
     label: getI18nString("community.publishing.additional_contributors"),
     error: k,
-    children: jsx(_$$o, {
+    children: jsx(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
       children: jsx("div", {

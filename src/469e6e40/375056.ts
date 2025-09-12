@@ -11,7 +11,7 @@ import { Q as _$$Q2 } from "../469e6e40/825225";
 import { s as _$$s } from "../cssbuilder/589278";
 import { C as _$$C, e as _$$e } from "../469e6e40/517544";
 import { isNullish } from "../figma_app/95419";
-import { E as _$$E } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { t as _$$t } from "../905/150656";
 import b from "../vendor/116389";
 import { Ex, vj, zE } from "../figma_app/919079";
@@ -189,7 +189,7 @@ function $(e) {
             text: r,
             className: L
           })]
-        }), jsx(_$$E, {
+        }), jsx(ScreenReaderOnly, {
           as: "span",
           children: getI18nString("admin_settings.seat_counts.total_paid_seats_sr_only", {
             quantity: r

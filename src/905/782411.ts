@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { N } from "../905/972754";
+import { increment } from "../905/972754";
 import { ku, Os, qA, fn } from "../figma_app/255679";
 import { useDispatch, useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
@@ -88,7 +88,7 @@ export function $$f0() {
     i(e);
     t({
       updateSource: n,
-      value: N()
+      value: increment()
     });
   }, [t, i, e]);
 }

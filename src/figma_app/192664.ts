@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
@@ -97,7 +97,7 @@ let R = registerModal(function (e) {
       id: $$O0
     }), R(!1));
   }), [R, N]);
-  let L = hS(e);
+  let L = useModalManager(e);
   return jsx(fu, {
     name: "color_management_user_color_profile_modal",
     children: jsx(bL, {

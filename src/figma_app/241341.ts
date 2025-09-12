@@ -23,7 +23,7 @@ import { sceneDocumentType as _$$G } from '../905/582379';
 import { getFeatureFlags } from '../905/601108';
 import { PerfTimer } from '../905/609396';
 import { G as _$$G2 } from '../905/630430';
-import { F as _$$F } from '../905/642505';
+import { fileImporter } from '../905/642505';
 import { i as _$$i, P as _$$P } from '../905/647955';
 import { ReduxSceneGraph, getSingletonSceneGraph } from '../905/700578';
 import { G as _$$G3 } from '../905/702115';
@@ -1026,8 +1026,8 @@ function eb({
       accept: '.fig',
       onChange: async () => {
         let n = r.current?.files?.[0];
-        if (n && _$$F) {
-          let r = await _$$_(debugState, getFeatureFlags(), _$$F, n);
+        if (n && fileImporter) {
+          let r = await _$$_(debugState, getFeatureFlags(), fileImporter, n);
           let i = debugState.getState().mirror.appModel.currentPage;
           let a = `${e}-${i}-debug`;
           Ht.set(a, Promise.resolve({

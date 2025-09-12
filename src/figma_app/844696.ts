@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useMemo } from "react";
 import { K } from "../905/443068";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { bL, mc } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { N as _$$N } from "../905/852320";
@@ -133,7 +133,7 @@ function P({
     blendMode: e,
     onChange: r
   });
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onWheel"],
     children: jsxs(bL, {
       manager,

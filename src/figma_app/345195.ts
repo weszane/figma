@@ -1,4 +1,4 @@
-import { unstable_batchedUpdates } from "../vendor/944059";
+import { unstable_batchedUpdates } from "react-dom";
 import { EventEmitter } from "../905/690073";
 import { variablesMirrorManager } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";

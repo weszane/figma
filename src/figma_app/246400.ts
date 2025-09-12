@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, Suspense } from "react";
 import { k } from "../905/443820";
-import { fP, mc } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { E } from "../905/632989";
 import { sx } from "../905/941192";
 let d = "184px";
@@ -27,7 +27,7 @@ export function $$u0({
   let {
     getTriggerProps,
     getContainerProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: p,
     onOpenChange: _,
     type: u,
@@ -51,7 +51,7 @@ export function $$u0({
         }).$,
         children: a
       })
-    }), jsx(mc, {
+    }), jsx(PopoverPrimitiveContainer, {
       "data-preferred-theme": "dark",
       ...getContainerProps({
         style: sx.colorTextOnbrand.colorBgTooltip.fontMedium.radiusMedium.add({

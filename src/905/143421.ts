@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useState, useLayoutEffect, useCallback, useEffect } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { A as _$$A } from "../vendor/723372";
 import { i as _$$i } from "../905/97346";
 import { useExposedRef } from "../905/581092";

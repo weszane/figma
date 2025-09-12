@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createRef } from "react";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { O } from "../905/969533";
 import l from "classnames";
@@ -27,7 +27,7 @@ export function $$g0({
 }) {
   let v = BK(r);
   let A = E || createRef();
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown"],
     children: jsx(_$$E, {
       ref: A,

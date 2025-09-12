@@ -3,7 +3,7 @@ import { forwardRef, useMemo } from "react";
 import { A as _$$A } from "../vendor/723372";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
-import { Lh } from "../figma_app/415899";
+import { useFplStrings } from "../figma_app/415899";
 import { defaultComponentAttribute } from "../905/577641";
 import { sW, GS, L4 } from "../905/417626";
 import { y as _$$y } from "../905/842987";
@@ -17,7 +17,7 @@ export let $$m0 = forwardRef(({
   htmlAttributes: g,
   ...f
 }, _) => {
-  let A = Lh("dismiss");
+  let A = useFplStrings("dismiss");
   let y = useMemo(() => ({
     variant: h
   }), [h]);

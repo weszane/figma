@@ -3,7 +3,7 @@ import { useMemo, useState, useLayoutEffect, useEffect, useCallback } from "reac
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { Cs } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { N as _$$N } from "../905/438674";
@@ -388,7 +388,7 @@ function eH(e) {
   });
 }
 export let $$eK0 = registerModal(function (e) {
-  let t = hS({
+  let t = useModalManager({
     ...e,
     onClose: () => {
       ep(hideModal());

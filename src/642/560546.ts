@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { LayoutTabType } from "../figma_app/763686";
 import { convertKiwiToVariableIdString } from "../905/805904";
 import { E as _$$E } from "../905/277716";
@@ -234,7 +234,7 @@ function B({
       isPickerOpen: u,
       icon: A,
       recordingKey: C
-    }) : jsx(_$$o, {
+    }) : jsx(EventShield, {
       eventListeners: ["onMouseDown"],
       children: jsx(_$$C, {
         isOpen: u,

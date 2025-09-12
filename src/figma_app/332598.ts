@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { K } from "../905/443068";
-import { E as _$$E } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { X } from "../905/736922";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import p from "classnames";
@@ -350,7 +350,7 @@ function H({
       },
       "data-testid": `${e.name}${i}`,
       onClick: l,
-      children: [h && jsxs(_$$E, {
+      children: [h && jsxs(ScreenReaderOnly, {
         children: [o.diff === j5.ADDED && getI18nString("dev_handoff.compare_changes.code_line.added_line", {
           line: p
         }), o.diff === j5.REMOVED && getI18nString("dev_handoff.compare_changes.code_line.removed_line", {

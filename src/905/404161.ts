@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -159,7 +159,7 @@ export let $$k0 = registerModal(function ({
   let M = useDispatch();
   let j = t ? getI18nString("extension_request_modal.request_widget_approval") : getI18nString("extension_request_modal.request_plugin_approval");
   S = R ? t ? getI18nString("extension_request_modal.leave_widget_rerequest_note") : getI18nString("extension_request_modal.leave_plugin_rerequest_note") : t ? getI18nString("extension_request_modal.leave_widget_note") : getI18nString("extension_request_modal.leave_plugin_note");
-  let U = hS({
+  let U = useModalManager({
     open: x,
     onClose: E
   });

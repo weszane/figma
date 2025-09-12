@@ -7,8 +7,8 @@ import { unwrap } from "../vendor/812047";
 import { subscribeAndAwaitData } from "../905/553831";
 import { setupMemoizedAtomSubscription } from "../figma_app/566371";
 import { w0 } from "../figma_app/594947";
-import { ZJ } from "../3973/697935";
-import { Uv } from "../3973/473379";
+import { processSelector } from "../3973/697935";
+import { OperationStatus } from "../3973/473379";
 import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { z } from "../905/239603";
 import { u8 } from "../figma_app/976749";
@@ -31,7 +31,7 @@ let S = z.object({
 let v = [];
 let A = atom(async e => {
   let t = e(u8) === FEditorType.Sites;
-  let r = !!(getFalseValue() || isInteractionPathCheck()) || e(ZJ).status === Uv.COMPLETED;
+  let r = !!(getFalseValue() || isInteractionPathCheck()) || e(processSelector).status === OperationStatus.COMPLETED;
   return t && r ? {
     libraryConfigs: (await w0("1p_code_presets_sts")).get("libraries", v, e => Array.isArray(e) && e.every(e => S.safeParse(e).success)),
     enabled: t

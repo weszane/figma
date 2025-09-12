@@ -12,7 +12,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { debugState } from '../905/407919';
 import { U5 } from '../905/414242';
 import { D as _$$D2 } from '../905/425476';
-import { hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { analyticsEventManager, getFigmaCluster } from '../905/449184';
 import { $n, WW } from '../905/521428';
 import { globalPerfTimer } from '../905/542194';
@@ -57,7 +57,7 @@ function z() {
   }();
   let t = useDispatch();
   let [r, a] = useState(!1);
-  let s = hS({
+  let s = useModalManager({
     open: r,
     onClose: () => a(!1)
   });

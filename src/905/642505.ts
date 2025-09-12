@@ -1,11 +1,24 @@
-import { k0, gX } from "../figma_app/623293";
-export let $$r0 = null;
-export function $$a1() {
-  return k0(Fig.importShimURL).then(() => {
-    $$r0 = window.createFileImporter(Fig.importWorkerURL);
-  }).catch(e => {
-    if (!(e instanceof gX)) throw e;
-  });
+import { loadScript, ScriptLoadError } from '../figma_app/623293'
+// Original: $$r0
+export let fileImporter: any = null
+
+/**
+ * Initializes the file importer by loading the required script and setting up the importer.
+ * Original function: $$a1
+ * @returns {Promise<void>} A promise that resolves when initialization is complete or rejects on non-ScriptLoadError.
+ */
+export function initializeFileImporter(): Promise<void> {
+  return loadScript(Fig.importShimURL).then(() => {
+    fileImporter = window.createFileImporter(Fig.importWorkerURL)
+  }).catch((e: any) => {
+    if (!(e instanceof ScriptLoadError)) {
+      throw e
+    }
+  })
 }
-export const F = $$r0;
-export const h = $$a1; 
+
+// Original: export const F = $$r0;
+export const F = fileImporter
+
+// Original: export const h = $$a1;
+export const h = initializeFileImporter

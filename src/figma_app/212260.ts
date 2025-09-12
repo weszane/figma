@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { R as _$$R } from "../figma_app/313269";
@@ -96,7 +96,7 @@ export function $$G2(e) {
           })
         })]
       })
-    }), !q && jsxs(_$$_, {
+    }), !q && jsxs(LinkPrimitive, {
       newTab: !0,
       className: P0,
       href: `/community/widget/${r}`,

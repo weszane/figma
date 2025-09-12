@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, Suspense } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, r1, nB } from "../figma_app/272243";
 import { tH } from "../905/751457";
@@ -35,7 +35,7 @@ let I = M4.Query({
   fetch: () => delay(1e3).then(() => ({}))
 });
 function C(e) {
-  let r = hS(e);
+  let r = useModalManager(e);
   return "loaded" !== function () {
     let [e] = IT(I({}));
     let [r] = handleSuspenseRetainRelease(e);

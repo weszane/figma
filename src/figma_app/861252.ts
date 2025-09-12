@@ -10,7 +10,7 @@ import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
 import { gs } from "../figma_app/624706";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { x as _$$x } from "../905/587214";
 import { f as _$$f } from "../905/335032";
@@ -64,7 +64,7 @@ let O = memo(function ({
   let r = Zr("zoom-in");
   let i = useSelector(e => !1 === e.mirror.appModel.showUi);
   let s = aV();
-  return !fullscreenValue.isReady() || i ? null : jsx(_$$o, {
+  return !fullscreenValue.isReady() || i ? null : jsx(EventShield, {
     eventListeners: ["onClick"],
     children: jsxs("div", {
       "data-onboarding-key": _$$q,

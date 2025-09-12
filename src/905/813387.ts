@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useCallback, useId, useImperativeHandle } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { o as _$$o } from "../905/821217";
-import { E as _$$E } from "../905/172252";
+import { EventShield } from "../905/821217";
+import { ScreenReaderOnly } from "../905/172252";
 import { Y } from "../905/246212";
 import d from "classnames";
 import { _ as _$$_ } from "../905/142361";
@@ -57,7 +57,7 @@ let $$b0 = forwardRef(function ({
     error: I,
     errorId: T,
     required: e.deps.valueRequired,
-    children: jsxs(_$$o, {
+    children: jsxs(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
       children: [jsx("div", {
@@ -78,7 +78,7 @@ let $$b0 = forwardRef(function ({
           onInputChange: x,
           toolbarOptions: [_$$_.Bold, _$$_.Italic, _$$_.Strikethrough, _$$_.BulletedList, _$$_.OrderedList, _$$_.Link, _$$_.Code, _$$_.CodeBlock]
         })
-      }), jsx(_$$E, {
+      }), jsx(ScreenReaderOnly, {
         children: jsx(Y, {
           id: C,
           placeholder: S,

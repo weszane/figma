@@ -1,32 +1,32 @@
-import { Statsig } from "../vendor/735621";
+import { Statsig } from "statsig-react";
 import { getInitialOptions } from "../figma_app/169182";
 import { M4 } from "../905/713695";
 import { a as _$$a } from "../905/425366";
 import { m as _$$m } from "../905/325034";
-import { yY, _q, Vj, bz, Tr, kX } from "../3973/890507";
-import { PG, MU, Uv, Uw, bT, DK, ss } from "../3973/473379";
+import { StatsigTimer, trackClientValuesNetworkCall, trackContextSwitchCacheMiss, trackClientUpdateUserTime, trackPrefetchCalls, trackStatsigClientInitTime } from "../3973/890507";
+import { ActionType, TimeoutError, OperationStatus, ProcessState, ErrorType, ProviderType, BootstrapType } from "../3973/473379";
 import { fU, wj, et, vl, nK, pF, Xu, l2, Cj, me } from "../905/683495";
-import { MQ, hH, ZJ } from "../3973/697935";
+import { processAtom, isErroredTimeout, processSelector } from "../3973/697935";
 import { PerfTimer } from "../905/609396";
 import { createDeferredPromise } from "../905/874553";
 import { atom, atomStoreManager } from "../figma_app/27355";
 async function u(e, t, i, n) {
   if (null == e) return null;
   let a = n ?? fU(getInitialOptions().iso_code);
-  let s = new yY("relay_proxy_request");
+  let s = new StatsigTimer("relay_proxy_request");
   let u = _$$m.getStatsigRelayProxyBootstrap({
     orgId: i.customIDs?.orgID,
     teamId: i.customIDs?.teamID
   }, {
-    prefetch: t === PG.PREFETCH
+    prefetch: t === ActionType.PREFETCH
   }).then(e => e.data.meta ?? {});
   let p = wj(u, a).catch(e => (s.setCaughtError(e), null)).$$finally(() => {
     s.stopTimer();
-    _q(s, "relay_proxy", t);
+    trackClientValuesNetworkCall(s, "relay_proxy", t);
   });
   s.startTimer();
   let m = await p;
-  if (s.getTimedOut()) throw new MU();
+  if (s.getTimedOut()) throw new TimeoutError();
   return m;
 }
 async function p({
@@ -35,18 +35,18 @@ async function p({
   timeout: i
 }) {
   let n = i ?? fU(getInitialOptions().iso_code);
-  let a = new yY("relay_proxy_batched_request");
+  let a = new StatsigTimer("relay_proxy_batched_request");
   let s = _$$m.getStatsigRelayProxyBootstrapV2({
     orgId: e,
     teamIds: t
   }).then(e => e.data.meta);
   let u = wj(s, n).catch(e => (a.setCaughtError(e), null)).$$finally(() => {
     a.stopTimer();
-    _q(a, "relay_proxy_v2_batched", PG.PREFETCH);
+    trackClientValuesNetworkCall(a, "relay_proxy_v2_batched", ActionType.PREFETCH);
   });
   a.startTimer();
   let p = await u;
-  if (a.getTimedOut()) throw new MU();
+  if (a.getTimedOut()) throw new TimeoutError();
   return p;
 }
 let _ = atom(() => new Set());
@@ -104,7 +104,7 @@ let y = M4.Query({
       if (e.bootstrap_values) return function (e, t, i) {
         let n = A({
           __IGNORE__overrideValues: t,
-          __IGNORE__reason: PG.PREFETCH,
+          __IGNORE__reason: ActionType.PREFETCH,
           __IGNORE__sdkKey: i,
           __IGNORE__timeout: nK,
           ...e
@@ -129,19 +129,19 @@ let $$b1 = atom(null, async (e, t, i, n, a) => {
   if (!pF()) return;
   let s = getInitialOptions().statsig_figma_app_client_api_key;
   if (null == s) return;
-  let o = e(MQ);
-  if (o.status === Uv.IN_PROGRESS) {
+  let o = e(processAtom);
+  if (o.status === OperationStatus.IN_PROGRESS) {
     await o.initCompletedPromise;
     return;
   }
-  if (hH(o), o.status !== Uv.NOT_STARTED) return;
+  if (isErroredTimeout(o), o.status !== OperationStatus.NOT_STARTED) return;
   let l = createDeferredPromise();
-  let u = Xu(E(s, i, n, a, () => e(ZJ))).then(async e => {
+  let u = Xu(E(s, i, n, a, () => e(processSelector))).then(async e => {
     await l.promise;
-    t(MQ, e);
+    t(processAtom, e);
   });
-  t(MQ, {
-    type: Uw.START,
+  t(processAtom, {
+    type: ProcessState.START,
     payload: {
       initCompletedPromise: u,
       sdkKey: s
@@ -152,9 +152,9 @@ let $$b1 = atom(null, async (e, t, i, n, a) => {
 });
 let $$v0 = atom(null, async (e, t, i) => {
   if (!pF() || !l2()) return;
-  let o = e(MQ);
-  if (o.status === Uv.NOT_STARTED) return;
-  if (o.status === Uv.IN_PROGRESS) {
+  let o = e(processAtom);
+  if (o.status === OperationStatus.NOT_STARTED) return;
+  if (o.status === OperationStatus.IN_PROGRESS) {
     await o.initCompletedPromise;
     return;
   }
@@ -183,7 +183,7 @@ let $$v0 = atom(null, async (e, t, i) => {
         t = h;
       } else {
         let i = A({
-          __IGNORE__reason: PG.CONTEXT_SWITCH,
+          __IGNORE__reason: ActionType.CONTEXT_SWITCH,
           __IGNORE__sdkKey: u,
           __IGNORE__timeout: E,
           userId,
@@ -198,15 +198,15 @@ let $$v0 = atom(null, async (e, t, i) => {
       }
     } catch (t) {
       S = `Failed to retrieve user values from relay proxy when context switching: ${t}`;
-      let e = t instanceof MU ? bT.TIMEOUT : bT.REQUEST_FAILED;
+      let e = t instanceof TimeoutError ? ErrorType.TIMEOUT : ErrorType.REQUEST_FAILED;
       return {
-        type: Uw.ERROR,
+        type: ProcessState.ERROR,
         payload: {
           cause: e
         }
       };
     } finally {
-      w || Vj([userId, teamId, orgId], m, o);
+      w || trackContextSwitchCacheMiss([userId, teamId, orgId], m, o);
     }
     let g = !1;
     try {
@@ -216,30 +216,30 @@ let $$v0 = atom(null, async (e, t, i) => {
       g = !1;
     }
     return g ? {
-      type: Uw.COMPLETE
+      type: ProcessState.COMPLETE
     } : {
-      type: Uw.ERROR,
+      type: ProcessState.ERROR,
       payload: {
-        cause: bT.SDK_METHOD_FAILED
+        cause: ErrorType.SDK_METHOD_FAILED
       }
     };
   }
   x.start();
-  t(MQ, {
-    type: Uw.RESET
+  t(processAtom, {
+    type: ProcessState.RESET
   });
   let k = createDeferredPromise();
   let R = Xu(T()).catch(e => (S = e instanceof Error ? e.message : null, {
-    type: Uw.ERROR,
+    type: ProcessState.ERROR,
     payload: {
-      cause: bT.UNKNOWN
+      cause: ErrorType.UNKNOWN
     }
   })).then(e => k.promise.then(() => e)).then(e => {
-    C = e.type === Uw.COMPLETE;
-    t(MQ, e);
+    C = e.type === ProcessState.COMPLETE;
+    t(processAtom, e);
   });
-  t(MQ, {
-    type: Uw.START,
+  t(processAtom, {
+    type: ProcessState.START,
     payload: {
       initCompletedPromise: R,
       sdkKey: u
@@ -248,7 +248,7 @@ let $$v0 = atom(null, async (e, t, i) => {
   k.resolve();
   await R;
   x.stop();
-  bz(x.getElapsedTime(), C, w, S);
+  trackClientUpdateUserTime(x.getElapsedTime(), C, w, S);
 });
 let $$I2 = atom(null, async (e, t, i) => {
   if (!pF() || 0 === i.length) return;
@@ -278,7 +278,7 @@ let $$I2 = atom(null, async (e, t, i) => {
     s = `Failed to prefetch users with relay proxy: ${e}`;
   } finally {
     let e = i.length - d.length;
-    Tr(i.length, e, s);
+    trackPrefetchCalls(i.length, e, s);
   }
 });
 async function E(e, t, i, o, u) {
@@ -290,24 +290,24 @@ async function E(e, t, i, o, u) {
     planKey
   } = t;
   let y = Cj(t);
-  let b = new yY("statsigInitialize");
+  let b = new StatsigTimer("statsigInitialize");
   let v = null;
   let I = !1;
   function E(e, n, r) {
     b.isTimerRunning() && b.stopTimer();
-    I || (kX(o === DK.PROVIDER, null != y ? ss.BOOTSTRAP : ss.NETWORK, u().status, b.getElapsedTimeMs(), n && null === v, r, v, t, y, i), I = !0);
+    I || (trackStatsigClientInitTime(o === ProviderType.PROVIDER, null != y ? BootstrapType.BOOTSTRAP : BootstrapType.NETWORK, u().status, b.getElapsedTimeMs(), n && null === v, r, v, t, y, i), I = !0);
   }
   function x(e, t, i, r) {
     try {
       null != t ? (Statsig.bootstrap(e, t, i, r), atomStoreManager.set(_$$a, t)) : Statsig.bootstrap(e, {}, i, r);
       return {
-        type: Uw.COMPLETE
+        type: ProcessState.COMPLETE
       };
     } catch (e) {
-      null === v && (v = bT.SDK_METHOD_FAILED);
+      null === v && (v = ErrorType.SDK_METHOD_FAILED);
       E(null, !1, null);
       return {
-        type: Uw.ERROR,
+        type: ProcessState.ERROR,
         payload: {
           cause: v
         }
@@ -319,7 +319,7 @@ async function E(e, t, i, o, u) {
   let C = fU(getInitialOptions().iso_code);
   if (b.startTimer(), null != y) p = y;else try {
     let t = A({
-      __IGNORE__reason: PG.INITIALIZE,
+      __IGNORE__reason: ActionType.INITIALIZE,
       __IGNORE__sdkKey: e,
       __IGNORE__timeout: C,
       userId,
@@ -331,10 +331,10 @@ async function E(e, t, i, o, u) {
       policy: "networkOnly"
     });
   } catch (t) {
-    v = t instanceof MU ? bT.TIMEOUT : bT.REQUEST_FAILED;
+    v = t instanceof TimeoutError ? ErrorType.TIMEOUT : ErrorType.REQUEST_FAILED;
     x(e, {}, S, w);
     return {
-      type: Uw.ERROR,
+      type: ProcessState.ERROR,
       payload: {
         cause: v
       }

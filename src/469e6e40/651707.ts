@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { K } from "../905/443068";
@@ -17,7 +17,7 @@ import { d as _$$d } from "../905/44199";
 import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 let $$j0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let a = useDispatch();
   let [v, j] = useState({
     inputValue: "",

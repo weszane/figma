@@ -1,5 +1,5 @@
 import { useLayoutEffect, useEffect } from "react";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { updateEnvironmentInfo } from "../905/883621";
@@ -9,7 +9,7 @@ import { g } from "../figma_app/115586";
 export function $$u2() {
   let {
     updateMode
-  } = DP();
+  } = getThemeContextOrDefault();
   useLayoutEffect(() => {
     updateMode({
       version: uiVariantName

@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, Fragment as _$$Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
@@ -417,7 +417,7 @@ let $$ec1 = "FIGJAM_LIBRARY_MODAL";
 let $$eu0 = registerModal(function (e) {
   let t = useSelector(e => e.library);
   let i = _$$H();
-  let f = hS({
+  let f = useModalManager({
     ...e,
     onClose: i
   });

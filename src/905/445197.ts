@@ -1,4 +1,4 @@
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 export function $$r0(e) {
   flushSync(() => scheduler.postTask(e, {
     priority: "user-blocking"

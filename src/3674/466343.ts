@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { capitalize } from "../figma_app/930338";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import p from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { lR, e6 } from "../figma_app/617427";
@@ -42,7 +42,7 @@ function y({
   secondaryButtonTrackingProperties: p
 }) {
   let g = "light" === _$$DP();
-  let y = "ui3" === DP().version;
+  let y = "ui3" === getThemeContextOrDefault().version;
   return jsxs("div", {
     className: _$$s.py24.px16.cursorDefault.selectNone.flex.flexColumn.gap24.$,
     "data-testid": "paywall-modal",
@@ -560,7 +560,7 @@ export function $$X0({
   secondaryButtonProps: f
 }) {
   let g = _$$W();
-  let x = hS({
+  let x = useModalManager({
     open: !0,
     onClose: lQ,
     preventUserClose: !0,

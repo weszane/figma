@@ -4,9 +4,9 @@ import { kt } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { useState } from "react";
-import { fP, mc, i3 } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { E as _$$E } from "../905/632989";
-import { E as _$$E2 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { x as _$$x } from "../905/811596";
 import { _ as _$$_ } from "../469e6e40/422718";
 import { A as _$$A } from "../vendor/850789";
@@ -33,7 +33,7 @@ function C(e) {
     getTriggerProps,
     getContainerProps,
     getArrowProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: t,
     onOpenChange: a,
     type: "dialog",
@@ -70,7 +70,7 @@ function C(e) {
           size: "24"
         })]
       })
-    }, e.seatType), jsxs(mc, {
+    }, e.seatType), jsxs(PopoverPrimitiveContainer, {
       ...getContainerProps({
         style: {
           boxShadow: "var(--elevation-500)",
@@ -82,7 +82,7 @@ function C(e) {
           color: "var(--color-text-secondary, var(--fallback-color-text-secondary))"
         }
       }),
-      children: [jsx(i3, {
+      children: [jsx(PopoverPrimitiveArrow, {
         ...getArrowProps()
       }), jsx(S, {
         totalSeats: g,
@@ -118,7 +118,7 @@ function S(e) {
     children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 0,
-      children: [jsx(_$$E2, {
+      children: [jsx(ScreenReaderOnly, {
         children: a
       }), jsxs("div", {
         "aria-hidden": !0,
@@ -181,7 +181,7 @@ function I({
   return jsxs("div", {
     style: E,
     "data-testid": `seat-count-${e}-seats${r}`,
-    children: [jsx(_$$E2, {
+    children: [jsx(ScreenReaderOnly, {
       children: `${s}: ${a.toLocaleString()}`
     }), jsx("span", {
       "aria-hidden": !0,

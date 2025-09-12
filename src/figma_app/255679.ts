@@ -5,7 +5,7 @@ import { getResourceDataOrFallback } from "../905/663269";
 import { analyticsEventManager } from "../905/449184";
 import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { w0 } from "../figma_app/594947";
-import { N as _$$N } from "../905/972754";
+import { increment } from "../905/972754";
 import { VariableByKey, VariableCollectionByKey, StyleByKey, CommunityLibraryComponentsAndStateGroups } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { TG, qq } from "../905/72677";
@@ -38,7 +38,7 @@ export function $$b15() {
 }
 let $$T7 = atom(null);
 let $$I13 = atom({
-  value: _$$N(),
+  value: increment(),
   updateSource: "page_load"
 });
 export function $$S5(e) {

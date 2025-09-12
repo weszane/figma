@@ -5,7 +5,7 @@ import { $n } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { L as _$$L } from "../905/704296";
 import { h as _$$h } from "../905/994594";
-import { J as _$$J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -39,7 +39,7 @@ import { A as _$$A3 } from "../vendor/850789";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { R as _$$R } from "../905/621802";
 import { f as _$$f } from "../905/54715";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { kt } from "../figma_app/858013";
 import { KF, r9 } from "../6268/430335";
 import { Tp } from "../1250/282084";
@@ -52,7 +52,7 @@ import { M as _$$M } from "../1250/358700";
 import { N as _$$N } from "../905/865305";
 import { hC } from "../figma_app/901889";
 import { useDispatch } from "react-redux";
-import { mc as _$$mc, fP } from "../905/691059";
+import { PopoverPrimitiveContainer, usePopoverPrimitive } from "../905/691059";
 import { N as _$$N2 } from "../905/438674";
 import { e as _$$e2 } from "../905/295932";
 import { f as _$$f2 } from "../6268/481313";
@@ -65,7 +65,7 @@ import { f as _$$f3 } from "../figma_app/258006";
 import { G as _$$G, A as _$$A4 } from "../1250/975106";
 import { bL as _$$bL, RT } from "../905/867927";
 import { q as _$$q } from "../905/932270";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL as _$$bL2 } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { fu } from "../figma_app/831799";
@@ -654,7 +654,7 @@ function ep({
       }
     });
   };
-  return jsx(_$$J, {
+  return jsx(UI3ConditionalWrapper, {
     children: (() => {
       switch (_) {
         case "initial":
@@ -1122,7 +1122,7 @@ function eB({
   });
 }
 let nn = registerModal(function (e) {
-  let n = hS(e);
+  let n = useModalManager(e);
   let {
     installMethod,
     setInstallMethod,
@@ -1195,7 +1195,7 @@ function no({
 }
 let nm = "confirm_deletion_modal--bodyText--OTH-f";
 let np = registerModal(function (e) {
-  let n = hS(e);
+  let n = useModalManager(e);
   let o = useCurrentPlanUser("ConfirmDeletionModal");
   let c = useDispatch();
   let r = "loaded" === o.status;
@@ -1428,7 +1428,7 @@ function nN({
     repositoryId: p?.id || ""
   });
   let [v, x] = useState(!1);
-  return jsxs(_$$mc, {
+  return jsxs(PopoverPrimitiveContainer, {
     ...n(),
     className: "component_browser_settings_panel--container--bNvEu",
     style: {
@@ -1566,7 +1566,7 @@ function nC({
   let {
     getTriggerProps,
     getContainerProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: o,
     onOpenChange: c,
     type: "menu",
@@ -1755,7 +1755,7 @@ export function $$nE0(e) {
   let [eg, ex] = Vc("component_browser_show_suggestions_debug", !0);
   let ew = useMemo(() => !!displayedComponent && !0 === i, [displayedComponent, i]);
   let ej = useMemo(() => ew ? ["design"] : "suggestionsAvailable" === dropdownFilter ? ["checkbox", ..._$$x] : _$$x, [dropdownFilter, ew]);
-  return jsxs(_$$J, {
+  return jsxs(UI3ConditionalWrapper, {
     children: [jsx(Mj, {
       canShowOnboarding: !ef,
       onOnboardingSequenceAction: ev

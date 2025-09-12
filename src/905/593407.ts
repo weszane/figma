@@ -18,10 +18,10 @@ import { d as _$$d } from "../905/14910";
 import { e as _$$e2 } from "../905/107684";
 import { hib } from "../figma_app/6204";
 import { useState, useCallback } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk, hE } from "../figma_app/272243";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { g as _$$g } from "../905/687265";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -47,7 +47,7 @@ function L({
   onAccept: e
 }) {
   let [t, i] = useState(!1);
-  let r = hS({
+  let r = useModalManager({
     preventUserClose: !0,
     open: !0,
     onClose: () => {}
@@ -79,7 +79,7 @@ function L({
       }), jsx("div", {
         ..._$$Ay.props(D.body),
         children: renderI18nText("tos_agreement.modal_description", {
-          terms_of_service_link: jsx(_$$_, {
+          terms_of_service_link: jsx(LinkPrimitive, {
             href: "/legal/tos",
             newTab: !0,
             className: "x1quhyk7 x1bvjpef x1ypdohk",

@@ -1,5 +1,5 @@
 import { createContext, useContext, useRef, useState, useCallback } from "react";
-import { Q } from "../905/586361";
+import { loadFeatureFlags } from "../905/586361";
 import { F } from "../905/768014";
 import { useRecording } from "../905/959312";
 export let $$o1 = createContext(!1);
@@ -20,18 +20,18 @@ export function $$l0({
   let {
     suppressClicks,
     outProps
-  } = Q().fpl_equate_disabled_and_aria_disabled ? {
+  } = loadFeatureFlags().fpl_equate_disabled_and_aria_disabled ? {
     suppressClicks: m || h,
     outProps: {
       "aria-disabled": m || h
     }
   } : {
-      suppressClicks: m,
-      outProps: {
-        disabled: m,
-        "aria-disabled": h
-      }
-    };
+    suppressClicks: m,
+    outProps: {
+      disabled: m,
+      "aria-disabled": h
+    }
+  };
   let y = useRef(!1);
   let [b, v] = useState(!1);
   let I = useRecording(t => {
@@ -53,7 +53,7 @@ export function $$l0({
   let S = useCallback(e => {
     if (c?.(e), v(!1), 0 !== e.button || "mouse" !== e.pointerType) return;
     let t = e.currentTarget;
-    let i = Q().fpl_tabs_focus;
+    let i = loadFeatureFlags().fpl_tabs_focus;
     i && e.preventDefault();
     t.tabIndex > -1 && (i || e.preventDefault(), t.focus());
     x(e);

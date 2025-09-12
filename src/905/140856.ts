@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import s from "classnames";
 import { Point } from "../905/736624";
 import { s as _$$s } from "../cssbuilder/589278";

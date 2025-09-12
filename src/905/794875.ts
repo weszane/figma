@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, forwardRef, useContext, Children, cloneElement, PureComponent } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { debounce } from "../905/915765";
 import { W } from "../905/187396";
 import { iw } from "../905/163832";

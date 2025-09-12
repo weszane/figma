@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { N as _$$N } from "../905/438674";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -31,10 +31,10 @@ export function $$A0(e, t = {}) {
 var x = (e => (e.SHOW_RELOAD = "showReload", e.SHOW_RECOVERY_MODE = "showRecoveryMode", e.SHOW_BROWSER_UPGRADE_AND_DESKTOP_DOWNLOAD = "showBrowserUpgradeAndDesktop", e))(x || {});
 export let $$N1 = "memory-warning-modal";
 export function $$C2(e) {
-  let t = hS({
+  let t = useModalManager({
     open: !0,
     preventUserClose: !0,
-    onClose: () => { }
+    onClose: () => {}
   });
   let r = useSelector(e => e.mirror.appModel.isReadOnly);
   let u = useSelector(e => e.selectedView);

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { E } from "../905/632989";
 import { E as _$$E } from "../905/235326";
 import { U } from "../905/103637";
@@ -31,7 +31,7 @@ function A({
     ref: l,
     children: e
   });
-  return i ? jsxs(_$$_, {
+  return i ? jsxs(LinkPrimitive, {
     newTab: !0,
     href: i,
     trusted: !0,
@@ -54,7 +54,7 @@ function y({
       type: "community"
     });
   }, [s]);
-  return jsxs(_$$_, {
+  return jsxs(LinkPrimitive, {
     className: c()(i, g, _),
     newTab: !0,
     href: t,

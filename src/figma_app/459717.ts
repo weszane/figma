@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, useRef, useCallback, useEffect, memo, useState, useLayoutEffect } from "react";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import { f, h as _$$h } from "../905/693155";
 import { W } from "../905/898204";
@@ -338,7 +338,7 @@ export function $$f0(e, t, r, s) {
           fontSize: f ? `${f}px` : void 0,
           textDecoration: new Map([["UNDERLINE", "underline"], ["STRIKETHROUGH", "line-through"]]).get(E)
         };
-        if ("string" == typeof _?.url) i.push(jsx(_$$_, {
+        if ("string" == typeof _?.url) i.push(jsx(LinkPrimitive, {
           style: y,
           href: _.url,
           newTab: !0,

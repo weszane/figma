@@ -98,7 +98,7 @@ import { c as _$$c3 } from '../905/425573';
 import { F as _$$F9 } from '../905/427107';
 import { i as _$$i2 } from '../905/433860';
 import { e as _$$e5 } from '../905/435763';
-import { hS as _$$hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { k as _$$k6, P as _$$P4 } from '../905/437398';
 import { UV } from '../905/438367';
 import { N as _$$N4 } from '../905/438674';
@@ -493,7 +493,7 @@ import s, { useDispatch, useSelector } from 'react-redux';
 import { A as _$$A17 } from '../vendor/850789';
 import xh from '../vendor/907065';
 import { N as _$$N3 } from '../vendor/930821';
-import { createPortal } from '../vendor/944059';
+import { createPortal } from 'react-dom';
 import { z as _$$z5 } from '../vendor/999105';
 let l;
 let r;
@@ -9233,7 +9233,7 @@ let dx = memo(e => {
   });
 });
 let dh = registerModal(e => {
-  let t = _$$hS(e);
+  let t = useModalManager(e);
   let {
     onClose
   } = e;

@@ -19,7 +19,7 @@ import { hx } from "../figma_app/630194";
 import { nS } from "../figma_app/274383";
 import { $y } from "../figma_app/544744";
 import { W as _$$W } from "../905/866915";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { sD, W2 } from "../2b17fec9/873436";

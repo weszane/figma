@@ -1,6 +1,6 @@
 import { registerLegacyModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { i as _$$i } from "../905/718764";
@@ -42,7 +42,7 @@ function _({
   actionOrTool: y
 }) {
   let b = k();
-  let v = hS({
+  let v = useModalManager({
     open: !0,
     onClose: () => f(popModalStack()),
     preventUserClose: _

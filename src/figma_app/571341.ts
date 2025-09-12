@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { HistoryChangesBindings, FileSourceType } from "../figma_app/763686";
@@ -161,7 +161,7 @@ export function $$$2({
   onClose: r,
   children: i
 }) {
-  let a = hS({
+  let a = useModalManager({
     open: t,
     onClose: r
   });

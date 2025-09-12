@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { Qf } from "../905/266289";
 import { Fullscreen } from "../figma_app/763686";
 import { ce, Fe } from "../figma_app/347146";
@@ -13,7 +13,7 @@ import { J } from "../figma_app/391827";
 import { Z } from "../905/224161";
 import { DP as _$$DP } from "../905/640017";
 export function $$_0() {
-  let e = "ui3" === DP().version;
+  let e = "ui3" === getThemeContextOrDefault().version;
   let t = J();
   let i = _$$DP();
   let _ = useSelector(e => e.theme?.enhancedContrast);

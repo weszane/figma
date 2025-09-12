@@ -1,6 +1,17 @@
-import { getFeatureFlags } from "../905/601108";
-import { FProviderConfigType } from "../figma_app/191312";
-export function $$a0() {
-  return getFeatureFlags().dse_preset_group_internal ? FProviderConfigType.INTERNAL : FProviderConfigType.DEFAULT;
+import { getFeatureFlags } from '../905/601108'
+import { FProviderConfigType } from '../figma_app/191312'
+
+/**
+ * Determines the provider config type based on feature flags.
+ * @returns {FProviderConfigType} The selected provider config type.
+ * (Original function: $$a0)
+ */
+export function getProviderConfigType(): FProviderConfigType {
+  const featureFlags = getFeatureFlags()
+  return featureFlags.dse_preset_group_internal
+    ? FProviderConfigType.INTERNAL
+    : FProviderConfigType.DEFAULT
 }
-export const M = $$a0;
+
+/** Alias for getProviderConfigType (original export: M) */
+export const M = getProviderConfigType

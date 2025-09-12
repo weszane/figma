@@ -3,7 +3,7 @@ import { memo, useState, useRef, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { e as _$$e } from "../905/149844";
 import { r as _$$r } from "../905/857502";
 import { O as _$$O } from "../905/487602";
@@ -261,7 +261,7 @@ export function $$F1(t) {
         })
       }), jsx("span", {
         className: "prototype_starting_point_panel--addButton--M-0Xy draggable_list--addButton--D0q--",
-        children: jsx(_$$o, {
+        children: jsx(EventShield, {
           eventListeners: ["onMouseDown"],
           display: "contents",
           children: jsx(_$$K, {
@@ -291,7 +291,7 @@ export function $$z0(t) {
   let l = useHandleKeyboardEvent(t.recordingKey, "keydown", o => {
     "Enter" === o.key ? t.submitRename(e) : "Escape" === o.key ? t.submitRename("") : t.shouldListenForTabKeyboardEvent && o.keyCode === Uz.TAB && (o.preventDefault(), t.submitRename(e), t.onTabKeyboardEvent?.(o.shiftKey));
   });
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onMouseDown"],
     display: "contents",
     children: jsx("input", {

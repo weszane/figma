@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { E } from "../905/632989";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { renderI18nText } from "../905/303541";
 import { hideModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -16,11 +16,11 @@ export let $$f0 = registerModal(function (e) {
   let i = () => {
     t(hideModalHandler());
   };
-  let h = hS({
+  let h = useModalManager({
     ...e,
     onClose: i
   });
-  return jsx(J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(fu, {
       name: e0.COMMUNITY_REDIRECT_THIRD_PARTY_PLUGIN_MODAL,
       children: jsx(bL, {

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { b as _$$b, bL, mc, YJ, q7, Q$, Ov, N_, g8, ZP, MJ } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { t as _$$t } from "../905/947268";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
@@ -184,7 +184,7 @@ export function $$Y1() {
                   children: fplIcon
                 })
               }), displayText, h && jsx(Ov, {
-                children: jsx(_$$o, {
+                children: jsx(EventShield, {
                   eventListeners: ["onClick", "onPointerUp", "onMouseUp"],
                   children: jsx(N, {})
                 })
@@ -478,7 +478,7 @@ let Q = tf(function ({
           children: [jsx(_$$E2, {
             truncate: !0,
             children: i
-          }), h && jsx(_$$o, {
+          }), h && jsx(EventShield, {
             eventListeners: ["onClick", "onPointerUp", "onMouseUp"],
             children: jsx(_$$v, {
               location: "INLINE_TOOLBAR",
@@ -562,7 +562,7 @@ function $({
                   })
                 })
               }), displayText, l && jsx(Ov, {
-                children: jsx(_$$o, {
+                children: jsx(EventShield, {
                   eventListeners: ["onClick", "onPointerUp", "onMouseUp"],
                   children: jsx(N, {})
                 })

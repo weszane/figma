@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { customHistory } from "../905/612521";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { hideModal } from "../905/156213";
@@ -14,11 +14,11 @@ export function $$h0({
 }) {
   let t = useDispatch();
   let i = useCallback(() => t(hideModal()), [t]);
-  let h = hS({
+  let h = useModalManager({
     open: !0,
     onClose: i
   });
-  return jsx(J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(bL, {
       manager: h,
       width: "lg",

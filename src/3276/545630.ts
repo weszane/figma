@@ -41,7 +41,7 @@ import { BK, x5 } from "../3276/677176";
 import { p as _$$p2 } from "../figma_app/372802";
 import { R as _$$R } from "../905/780757";
 import { g as _$$g } from "../3276/441754";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import K from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { buildStaticUrl, getInitialOptions } from "../figma_app/169182";

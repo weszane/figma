@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, forwardRef, useMemo, useContext } from "react";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
 import { l as _$$l } from "../905/479687";
 import { aC, Os, AS, mL, rv, ZU, dl, HI, Dq, WE, pc } from "../905/379736";
 import { useSelectionProvider } from "../905/751750";
 import { useRecording } from "../905/959312";
 import { defaultComponentAttribute } from "../905/577641";
-import { Os as _$$Os } from "../905/743079";
-import { $ } from "../905/61417";
+import { setupMenuItemHandler } from "../905/743079";
+import { ensureContext } from "../905/61417";
 let m = createContext({
   onChange: () => {},
   disabledGroup: !1,
@@ -68,7 +68,7 @@ let g = forwardRef(({
   } = useContext(m);
   let c = disabledGroup || t;
   let u = e === currentValue;
-  let h = _$$Os({
+  let h = setupMenuItemHandler({
     forwardedRef: s,
     disabled: c,
     action: function (t) {
@@ -135,10 +135,10 @@ let y = forwardRef(({
     selectedItems,
     onChange,
     disabledGroup
-  } = $(_, "CheckboxGroupItem", "CheckboxGroup");
+  } = ensureContext(_, "CheckboxGroupItem", "CheckboxGroup");
   let d = useMemo(() => selectedItems.includes(t), [t, selectedItems]);
   let c = disabledGroup || e;
-  let u = _$$Os({
+  let u = setupMenuItemHandler({
     forwardedRef: a,
     disabled: c,
     action: function (e) {
@@ -168,7 +168,7 @@ let b = forwardRef(({
     eventName: "change",
     recordingKey: a
   }, [e]);
-  let u = _$$Os({
+  let u = setupMenuItemHandler({
     forwardedRef: l,
     action: function (e) {
       return i ? d(!0, {
@@ -192,7 +192,7 @@ let b = forwardRef(({
 function v() {
   let {
     version
-  } = DP();
+  } = getThemeContextOrDefault();
   return "ui2" === version ? jsx("svg", {
     width: "16",
     height: "16",
@@ -256,7 +256,7 @@ export let $$w1 = forwardRef(({
   ...t
 }, i) => {
   let r;
-  r = "ui3" === DP().version ? _$$l : C;
+  r = "ui3" === getThemeContextOrDefault().version ? _$$l : C;
   return jsx(y, {
     className: _$$A(AS, dl),
     ...t,

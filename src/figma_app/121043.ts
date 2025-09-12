@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { $n } from "../905/521428";
 import { setupToggleButton } from "../905/167712";
 import { K as _$$K } from "../905/443068";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { T as _$$T } from "../905/745591";
 import { V as _$$V } from "../905/291719";
 import { z as _$$z } from "../905/947624";
@@ -194,7 +194,7 @@ export function $$ew0(e) {
     },
     children: u
   }, item.reactKey && `action-icon-button-${item.reactKey}`);
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown", "onPointerDown"],
     children: jsxs("span", {
       className: WT,

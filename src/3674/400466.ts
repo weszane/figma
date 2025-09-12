@@ -15,9 +15,9 @@ import { DP } from "../905/640017";
 import { v9 } from "../figma_app/623300";
 import { wA as _$$wA, Fk } from "../figma_app/167249";
 import { LZ, s9, iW } from "../figma_app/34798";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { isNotNullish } from "../figma_app/95419";
-import { DP as _$$DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { useMemoStable, useStableMemo } from "../905/19536";
 import k from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -78,7 +78,7 @@ import { A as _$$A9 } from "../svg/198130";
 import { A as _$$A0 } from "../svg/541014";
 import { A as _$$A1 } from "../2854/77351";
 import { A as _$$A10 } from "../svg/275646";
-import { b as _$$b, bL, mc, q7 } from "../905/465888";
+import { useMenu, MenuRoot, MenuContainer, MenuItemPrimitive } from "../905/465888";
 import { bL as _$$bL, mc as _$$mc, YJ, q7 as _$$q } from "../figma_app/860955";
 import { d as _$$d2 } from "../905/976845";
 import { N as _$$N } from "../905/438674";
@@ -105,11 +105,11 @@ import { Fu } from "../figma_app/545877";
 import { Ib } from "../905/129884";
 import { vL } from "../905/826900";
 import { B as _$$B2 } from "../figma_app/539422";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL as _$$bL2 } from "../905/38914";
 import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { fP, mc as _$$mc2, i3 } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { x as _$$x } from "../905/587214";
 import { O as _$$O } from "../905/487602";
 import { h4, Nz, hh } from "../905/417232";
@@ -133,7 +133,7 @@ import { AssetAtomMap } from "../figma_app/31188";
 import { PrimaryWorkflowEnum } from "../905/497152";
 import { A as _$$A17 } from "../1617/954184";
 import { defaultSessionLocalIDString } from "../905/871411";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { j7 } from "../905/929976";
 import { i as _$$i } from "../figma_app/85949";
 import { f7 } from "../figma_app/896988";
@@ -2070,7 +2070,7 @@ function nk({
     manager,
     getContextMenuTriggerProps,
     getTriggerProps
-  } = _$$b({
+  } = useMenu({
     offset: {
       mainAxis: 4
     }
@@ -2084,7 +2084,7 @@ function nk({
     getTriggerProps: _getTriggerProps,
     getContainerProps,
     getArrowProps
-  } = fP({
+  } = usePopoverPrimitive({
     type: "dialog",
     isOpen: P,
     onOpenChange: L
@@ -2102,7 +2102,7 @@ function nk({
     children: [jsx(_$$B, {
       className: "annotation_categories_edit_window--grabber--mQN70",
       svg: _$$A15
-    }), jsxs(bL, {
+    }), jsxs(MenuRoot, {
       manager,
       children: [jsx(_$$E, {
         className: A()("annotation_categories_edit_window--colorSelectTrigger--AJgOU", {
@@ -2133,9 +2133,9 @@ function nk({
             svg: _$$A14
           })]
         })
-      }), jsx(mc, {
+      }), jsx(MenuContainer, {
         className: "annotation_categories_edit_window--colorOptions--n--Hk",
-        children: nw.map(e => jsx(q7, {
+        children: nw.map(e => jsx(MenuItemPrimitive, {
           onClick: () => T(e),
           className: A()("annotation_categories_edit_window--colorOption--24Kum", {
             [n_]: r?.color === yu[e].color
@@ -2171,13 +2171,13 @@ function nk({
         recordingKey: generateRecordingKey(e, "removeButton"),
         ..._getTriggerProps({}),
         children: jsx(_$$O, {})
-      }), jsxs(_$$mc2, {
+      }), jsxs(PopoverPrimitiveContainer, {
         ...getContainerProps({
           style: {
             width: "calc(320rem / 16)"
           }
         }),
-        children: [jsx(i3, {
+        children: [jsx(PopoverPrimitiveArrow, {
           ...getArrowProps()
         }), jsxs(vo, {
           children: [jsx(Y9, {
@@ -2216,7 +2216,7 @@ let nA = registerModal(function (e) {
     onClose,
     recordingKey
   } = e;
-  let r = hS({
+  let r = useModalManager({
     open,
     onClose
   });
@@ -3265,7 +3265,7 @@ function n5({
   let {
     manager,
     getTriggerProps
-  } = _$$b({
+  } = useMenu({
     offset: {
       mainAxis: 4
     }
@@ -3645,7 +3645,7 @@ let aa = memo(function ({
   useEffect(() => (document.addEventListener("keydown", z), () => document.removeEventListener("keydown", z)), [z]);
   let V = useCallback(() => {
     let e = window.getSelection()?.toString() || "";
-    e && Dk(e, {
+    e && copyTextToClipboard(e, {
       withLineBreaks: !0
     });
   }, []);
@@ -3949,7 +3949,7 @@ function aj() {
   let x = g?.type === tM;
   let m = Xr(_$$f);
   let [y, b] = useAtomValueAndSetter(_$$m);
-  let k = _$$DP();
+  let k = getThemeContextOrDefault();
   useEffect(() => {
     t || b(null);
   }, [t, b]);

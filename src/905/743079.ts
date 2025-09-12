@@ -1,93 +1,183 @@
-import { createContext, useState, useRef, useLayoutEffect, useMemo } from "react";
-import { cq, rm, SV } from "../vendor/516565";
-import { $ } from "../905/61417";
-import { R } from "../905/457273";
-import { preventAndStopEvent } from "../905/955878";
-import { Q } from "../905/586361";
-let $$d2 = createContext(null);
-let $$c0 = ({
-  forwardedRef: e,
-  action: t,
-  disabled: i,
-  closeOnClick: c,
-  isLink: u
-}) => {
-  let p = cq();
-  let m = Q().fpl_keep_menu_open;
-  let {
+import type {
+  Ref,
+} from 'react'
+import {
+  useFloatingTree,
+  useListItem,
+  useMergeRefs,
+} from '@floating-ui/react'
+import {
+  createContext,
+  MutableRefObject,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
+import { ensureContext } from '../905/61417'
+import { setupKeyboardNavigationHandler } from '../905/457273'
+import { loadFeatureFlags } from '../905/586361'
+import { preventAndStopEvent } from '../905/955878'
+
+/**
+ * Context for menu items.
+ * Original name: $$d2
+ */
+export const MenuItemContext = createContext<null | unknown>(null)
+
+/**
+ * Props for MenuItemHandler.
+ * Original usage: $$c0
+ */
+export interface MenuItemHandlerProps {
+  forwardedRef?: Ref<HTMLElement>
+  action: (event: React.MouseEvent | React.KeyboardEvent) => void
+  disabled?: boolean
+  closeOnClick?: boolean
+  isLink?: boolean
+}
+
+/**
+ * Handles menu item logic, keyboard navigation, and selection.
+ * Original name: $$c0
+ */
+export function setupMenuItemHandler({
+  forwardedRef,
+  action,
+  disabled,
+  closeOnClick,
+  isLink,
+}: MenuItemHandlerProps) {
+  const floatingTree = useFloatingTree()
+  const keepMenuOpen = loadFeatureFlags().fpl_keep_menu_open
+
+  const {
     activeIndex,
     allowSelection,
     getItemProps,
     setActiveIndex,
-    listRef
-  } = $($$d2, "MenuItem", "Menu.Root or Menu.SubContainer");
-  let [y, b] = useState("");
-  let v = useRef(null);
-  let I = useRef(!1);
-  let E = R(setActiveIndex);
-  let {
-    ref,
-    index
-  } = rm({
-    label: y
-  });
-  let w = SV([ref, e, v]);
+    listRef,
+  } = ensureContext(MenuItemContext, 'MenuItem', 'Menu.Root or Menu.SubContainer')
+
+  const [label, setLabel] = useState('')
+  const itemRef = useRef<HTMLElement | null>(null)
+  const pointerActive = useRef(false)
+
+  const handleKeyboardNavigation = setupKeyboardNavigationHandler(setActiveIndex)
+
+  const { ref, index } = useListItem({ label })
+  const mergedRef = useMergeRefs([ref, forwardedRef, itemRef])
+
+  // Set label from innerText on mount
   useLayoutEffect(() => {
-    v.current && b(v.current.innerText ?? "");
-  }, []);
-  return useMemo(() => {
-    let e = index === activeIndex;
-    function n(e) {
-      t(e);
-      (e.ctrlKey || e.metaKey) && m || setTimeout(() => {
-        p && c && p.events.emit("click");
-      }, 30);
+    if (itemRef.current) {
+      setLabel(itemRef.current.textContent ?? '')
     }
+  }, [])
+
+  /**
+   * Handles item selection logic.
+   * Original inner function: n
+   */
+  const handleSelect = (event: React.MouseEvent | React.KeyboardEvent) => {
+    action(event)
+    if ((event.ctrlKey || event.metaKey) && keepMenuOpen)
+      return
+    setTimeout(() => {
+      if (floatingTree && closeOnClick) {
+        floatingTree.events.emit('click')
+      }
+    }, 30)
+  }
+
+  /**
+   * Memoized props for menu item.
+   */
+  return useMemo(() => {
+    const isActive = index === activeIndex
+
     return {
-      "data-fpl-selected": e || void 0,
-      tabIndex: e ? 0 : -1,
-      ref: w,
-      disabled: i,
-      "aria-disabled": i,
+      'data-fpl-selected': isActive || undefined,
+      'tabIndex': isActive ? 0 : -1,
+      'ref': mergedRef,
+      disabled,
+      'aria-disabled': disabled,
       ...getItemProps({
-        onClick: e => {
-          if (u) {
-            p && c && p.events.emit("click");
-            return;
+        onClick: (event: React.MouseEvent) => {
+          if (isLink) {
+            floatingTree && closeOnClick && floatingTree.events.emit('click')
+            return
           }
-          i || I.current || !allowSelection || n(e);
-          preventAndStopEvent(e);
+          if (!disabled && !pointerActive.current && allowSelection) {
+            handleSelect(event)
+          }
+          preventAndStopEvent(event)
         },
-        onKeyDown: e => {
-          if (" " === e.key && u) {
-            i || n(e);
-            preventAndStopEvent(e);
-            return;
+        onKeyDown: (event: React.KeyboardEvent) => {
+          if (event.key === ' ' && isLink) {
+            if (!disabled)
+              handleSelect(event)
+            preventAndStopEvent(event)
+            return
           }
-          (" " === e.key || "Enter" === e.key) && (i || n(e), preventAndStopEvent(e));
-          E(listRef.current.length, activeIndex, e);
+          if (event.key === ' ' || event.key === 'Enter') {
+            if (!disabled)
+              handleSelect(event)
+            preventAndStopEvent(event)
+          }
+          handleKeyboardNavigation(listRef.current.length, activeIndex, event)
         },
         onPointerLeave: () => {
-          I.current = !1;
+          pointerActive.current = false
         },
-        onPointerUp: e => {
-          if (u && !I.current) {
-            n(e);
-            preventAndStopEvent(e);
-            return;
+        onPointerUp: (event: React.PointerEvent) => {
+          if (isLink && !pointerActive.current) {
+            handleSelect(event)
+            preventAndStopEvent(event)
+            return
           }
-          0 === e.button && !i && allowSelection && (I.current = !0, n(e));
+          if (event.button === 0 && !disabled && allowSelection) {
+            pointerActive.current = true
+            handleSelect(event)
+          }
         },
         onPointerDown: () => {
-          u && (I.current = !0);
-        }
-      })
-    };
-  }, [t, activeIndex, u, allowSelection, c, i, getItemProps, E, index, listRef, w, p]);
-};
-export function $$u1(e, t) {
-  return !(e.right <= t.left || e.left >= t.right || e.bottom <= t.top || e.top >= t.bottom);
+          if (isLink)
+            pointerActive.current = true
+        },
+      }),
+    }
+  }, [
+    action,
+    activeIndex,
+    isLink,
+    allowSelection,
+    closeOnClick,
+    disabled,
+    getItemProps,
+    handleKeyboardNavigation,
+    index,
+    listRef,
+    mergedRef,
+    floatingTree,
+  ])
 }
-export const Os = $$c0;
-export const Uw = $$u1;
-export const Ym = $$d2;
+
+/**
+ * Checks if two rectangles overlap.
+ * Original name: $$u1
+ * @param a - First rectangle
+ * @param b - Second rectangle
+ * @returns True if rectangles overlap
+ */
+export function rectanglesOverlap(
+  a: { left: number, right: number, top: number, bottom: number },
+  b: { left: number, right: number, top: number, bottom: number },
+): boolean {
+  return !(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom)
+}
+
+// Export refactored names
+export const Os = setupMenuItemHandler
+export const Uw = rectanglesOverlap
+export const Ym = MenuItemContext

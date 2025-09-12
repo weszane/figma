@@ -20,7 +20,7 @@ import { useSubscription } from "../figma_app/288654";
 import { RecordingPureComponent, setupPlayback, generateRecordingKey, handleMouseEvent } from "../figma_app/878298";
 import { I7 } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL as _$$bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { A as _$$A2 } from "../figma_app/849799";
@@ -127,7 +127,7 @@ let d = memo(function (e) {
 });
 var h = _;
 let D = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   return jsx(_$$bL, {
     manager: t,
     width: "fit-content",
@@ -486,7 +486,7 @@ let eU = {
   }
 };
 let eB = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let r = useSelector(e => e.userFlags);
   return jsx(_$$bL, {
     manager: t,
@@ -2153,7 +2153,7 @@ function tC({
 let tw = registerModal(function () {
   let [e, t] = useState(null);
   let [r, a] = useState(!0);
-  let s = hS({
+  let s = useModalManager({
     open: r,
     onClose: () => a(!1)
   });

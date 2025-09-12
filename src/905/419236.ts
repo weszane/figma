@@ -275,7 +275,7 @@ export class ExponentialBackoff {
  */
 export function getResourceDataOrFallback<T>(
   resource: any,
-  fallback: T,
+  fallback?: T,
 ): T {
   if (resource == null)
     return fallback

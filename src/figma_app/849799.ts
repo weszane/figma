@@ -10,7 +10,7 @@ import { T as _$$T } from "../905/909590";
 import { Checkbox } from "../905/274480";
 import { k as _$$k } from "../905/443820";
 import { WW } from "../905/521428";
-import { J as _$$J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { J as _$$J2 } from "../905/614223";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { _6 } from "../figma_app/386952";
@@ -151,7 +151,7 @@ export let $$L0 = function (e) {
   };
   return jsx("div", {
     className: "form-module--formContainer--Eas7T",
-    children: jsx(_$$J, {
+    children: jsx(UI3ConditionalWrapper, {
       children: jsxs(_$$J2, {
         brand: "design",
         children: [null !== W && jsx($y, {

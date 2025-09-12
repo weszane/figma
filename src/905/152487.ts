@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { J } from "../905/614223";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -35,7 +35,7 @@ export function $$g0(e) {
       properties: y,
       trackingTargets: K.NONE,
       ignoreParent: !0,
-      children: jsx(_$$o, {
+      children: jsx(EventShield, {
         eventListeners: ["onClick"],
         children: jsx(J, {
           brand: e.forceEditorTheme,

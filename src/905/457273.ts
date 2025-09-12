@@ -1,7 +1,42 @@
-import { preventAndStopEvent } from "../905/955878";
-export function $$r0(e) {
-  return function (t, i, r) {
-    "n" === r.key && r.ctrlKey ? (null === i ? e(0) : t - 1 !== i && e(i + 1), preventAndStopEvent(r)) : "p" === r.key && r.ctrlKey && (null === i ? e(0) : 0 !== i && e(i - 1), preventAndStopEvent(r));
-  };
+import { preventAndStopEvent } from '../905/955878'
+
+/**
+ * Handles keyboard navigation for a list, triggering the provided callback with the new index.
+ * Original function name: $$r0
+ *
+ * @param onNavigate - Callback to handle navigation, receives the new index.
+ * @returns A keyboard event handler function.
+ */
+export function setupKeyboardNavigationHandler(onNavigate: (newIndex: number) => void) {
+  return (
+    currentIndex: number | null,
+    _unused: unknown, // original parameter 't', not used in logic
+    event: React.SyntheticEvent,
+  ) => {
+  // Handle Ctrl+N for next navigation
+    if (event.key === 'n' && event.ctrlKey) {
+      if (currentIndex === null) {
+        onNavigate(0)
+      }
+      else if (currentIndex !== null && currentIndex !== undefined) {
+        onNavigate(currentIndex + 1)
+      }
+      preventAndStopEvent(event)
+      return
+    }
+
+    // Handle Ctrl+P for previous navigation
+    if (event.key === 'p' && event.ctrlKey) {
+      if (currentIndex === null) {
+        onNavigate(0)
+      }
+      else if (currentIndex !== 0 && currentIndex !== null && currentIndex !== undefined) {
+        onNavigate(currentIndex - 1)
+      }
+      preventAndStopEvent(event)
+    }
+  }
 }
-export const R = $$r0;
+
+// Export with refactored name
+export const R = setupKeyboardNavigationHandler

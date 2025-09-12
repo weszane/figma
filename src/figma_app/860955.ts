@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { G } from "../905/289770";
 import { J } from "../905/614223";
 import { A } from "../vendor/723372";
@@ -9,12 +9,12 @@ import { c as _$$c } from "../905/453572";
 import { r as _$$r } from "../905/571562";
 import { R } from "../905/621802";
 import { a as _$$a } from "../905/339331";
-import { b as _$$b, g8 as _$$g, ZP as _$$ZP, MJ as _$$MJ, LJ, mc as _$$mc, bL as _$$bL, hE as _$$hE, YJ as _$$YJ, q7 as _$$q, N_ as _$$N_ } from "../905/465888";
-import { Q } from "../905/586361";
+import { useMenu, SubMenu, SubTrigger, MenuSubContainer, ScrollArrow, MenuContainer, MenuRoot, MenuTitle, MenuGroup, MenuItemPrimitive, MenuPrimitiveLink } from "../905/465888";
+import { loadFeatureFlags } from "../905/586361";
 import { s as _$$s } from "../905/536340";
 import { AS, iM, rv, p$, AR, CT, zc, kL, BB, XT, Th, Ji, DD, Os, Pq, _5, Sv, me } from "../905/379736";
 export function $$E7(e) {
-  return _$$b({
+  return useMenu({
     ...e,
     offset: 4
   });
@@ -22,8 +22,8 @@ export function $$E7(e) {
 export function $$y9(e) {
   let {
     version
-  } = DP();
-  return jsx(_$$g, {
+  } = getThemeContextOrDefault();
+  return jsx(SubMenu, {
     offset: {
       mainAxis: "ui2" === version ? 0 : 4,
       alignmentAxis: -8
@@ -36,7 +36,7 @@ export let $$b6 = forwardRef(({
   children: e,
   hasChecked: t,
   ...r
-}, i) => jsx(_$$ZP, {
+}, i) => jsx(SubTrigger, {
   className: A(AS, iM),
   ...r,
   ref: i,
@@ -64,17 +64,17 @@ export let $$T1 = forwardRef(({
   let {
     color
   } = G();
-  return jsx(_$$MJ, {
+  return jsx(MenuSubContainer, {
     className: A(kL, "light" === ("dark" === i ? "dark" : color) ? BB : XT),
     ...t,
     ref: r,
     children: jsxs(J, {
       mode: "dark" === i ? "dark" : void 0,
-      children: [jsx(LJ, {
+      children: [jsx(ScrollArrow, {
         className: Th,
         direction: "up",
         children: jsx(_$$a, {})
-      }), e, jsx(LJ, {
+      }), e, jsx(ScrollArrow, {
         className: Th,
         direction: "down",
         children: jsx(_$$r, {})
@@ -93,8 +93,8 @@ export let $$I11 = forwardRef(({
   } = G();
   let {
     fpl_consistent_menu_indent_by_default
-  } = Q();
-  return jsx(_$$mc, {
+  } = loadFeatureFlags();
+  return jsx(MenuContainer, {
     className: A(kL, "light" === ("dark" === i ? "dark" : color) ? BB : XT, {
       [Ji]: fpl_consistent_menu_indent_by_default && !t.rareUseIndentOptOut
     }),
@@ -102,11 +102,11 @@ export let $$I11 = forwardRef(({
     ref: r,
     children: jsxs(J, {
       mode: "dark" === i ? "dark" : void 0,
-      children: [jsx(LJ, {
+      children: [jsx(ScrollArrow, {
         className: Th,
         direction: "up",
         children: jsx(_$$a, {})
-      }), e, jsx(LJ, {
+      }), e, jsx(ScrollArrow, {
         className: Th,
         direction: "down",
         children: jsx(_$$r, {})
@@ -115,25 +115,25 @@ export let $$I11 = forwardRef(({
   });
 });
 export function $$S8(e) {
-  return jsx(_$$bL, {
+  return jsx(MenuRoot, {
     ...e
   });
 }
 $$I11.displayName = "Menu.Container";
 $$S8.displayName = "Menu.Root";
-export let $$v10 = forwardRef((e, t) => jsx(_$$hE, {
+export let $$v10 = forwardRef((e, t) => jsx(MenuTitle, {
   className: DD,
   ...e,
   ref: t
 }));
 $$v10.displayName = "Menu.Title";
-export let $$A13 = forwardRef((e, t) => jsx(_$$hE, {
+export let $$A13 = forwardRef((e, t) => jsx(MenuTitle, {
   className: _$$s,
   ...e,
   ref: t
 }));
 $$A13.displayName = "Menu.HiddenTitle";
-export let $$x5 = forwardRef((e, t) => jsx(_$$YJ, {
+export let $$x5 = forwardRef((e, t) => jsx(MenuGroup, {
   className: Os,
   ...e,
   ref: t
@@ -142,7 +142,7 @@ $$x5.displayName = "Menu.Group";
 export let $$N12 = forwardRef(({
   children: e,
   ...t
-}, r) => jsx(_$$q, {
+}, r) => jsx(MenuItemPrimitive, {
   className: AS,
   ...t,
   ref: r,
@@ -155,7 +155,7 @@ $$N12.displayName = "Menu.Item";
 export let $$C2 = forwardRef(({
   children: e,
   ...t
-}, r) => jsx(_$$N_, {
+}, r) => jsx(MenuPrimitiveLink, {
   className: AS,
   ...t,
   ref: r,

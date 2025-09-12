@@ -6,7 +6,7 @@ import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
 import { K } from "../905/443068";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -129,7 +129,7 @@ export let $$I0 = registerModal(function (e) {
     extensionType,
     hasBackButton
   } = e;
-  let l = hS(e);
+  let l = useModalManager(e);
   let o = useSubscription(AllowlistSettingsModalView, {
     orgId
   });

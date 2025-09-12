@@ -8,7 +8,7 @@ import { t as _$$t } from "../905/150656";
 import { $n } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { J as _$$J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { A as _$$A } from "../vendor/90566";
 import { customHistory } from "../905/612521";
 import { H as _$$H } from "../905/620380";
@@ -62,7 +62,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { nF, rk } from "../figma_app/471982";
 import { LG, WN, wC, bx } from "../905/448440";
 import { A as _$$A9 } from "../905/562488";
-import { o as _$$o3 } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { b as _$$b2, c as _$$c2 } from "../905/308099";
 import { ks } from "../figma_app/637027";
 import { E as _$$E } from "../905/984674";
@@ -109,7 +109,7 @@ import { X as _$$X, S as _$$S4 } from "../905/109653";
 import { gx, A_, Dg } from "../905/870778";
 import { a as _$$a } from "../905/482941";
 import { y as _$$y } from "../905/616507";
-import { E as _$$E3 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { Yp } from "../figma_app/740025";
 import { Yv } from "../905/488777";
 import { vj as _$$vj } from "../905/652712";
@@ -528,7 +528,7 @@ function eL({
       onChange: t => {
         t ? e.restoreDefault?.() : e.optOutAndMaybeWarn?.();
       }
-    }), !s && jsxs(_$$o3, {
+    }), !s && jsxs(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
       children: [jsx(eF, {
@@ -1259,7 +1259,7 @@ let tk = forwardRef(function ({
   return Zc(e) ? jsx(_$$A3, {
     label: getI18nString("community.publishing.version_release_notes"),
     error: l,
-    children: jsx(_$$o3, {
+    children: jsx(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
       children: jsx(_$$v, {
@@ -1318,7 +1318,7 @@ let tP = forwardRef(function ({
       })
     }),
     required: !0,
-    children: jsx(_$$o3, {
+    children: jsx(EventShield, {
       display: "block",
       eventListeners: ["onKeyDown"],
       children: jsxs("div", {
@@ -1443,7 +1443,7 @@ let tB = forwardRef(function ({
       children: [jsx("span", {
         "aria-hidden": !0,
         children: `${c}/100`
-      }), jsx(_$$E3, {
+      }), jsx(ScreenReaderOnly, {
         children: getI18nString("community.publishing.character_count_status", {
           currentCount: c,
           maxCount: 100
@@ -1453,7 +1453,7 @@ let tB = forwardRef(function ({
     error: d,
     errorId: h,
     required: !0,
-    children: jsx(_$$o3, {
+    children: jsx(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
       children: jsx(ks, {
@@ -3315,7 +3315,7 @@ function iM({
   useEffect(() => {
     eI && V.description.touched && eE();
   }, [eI, eE, V.description.touched]);
-  return jsx(_$$J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsxs(_$$I, {
       onClose: ec,
       width: "fit-content",

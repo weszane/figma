@@ -61,7 +61,7 @@ import { N2, vG } from "../905/213527";
 import { G as _$$G, h as _$$h } from "../figma_app/257072";
 import { _l, Kq, AH, V0, dG as _$$dG } from "../905/571648";
 import { WH } from "../figma_app/836943";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { g as _$$g } from "../905/496772";
 import eh from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -170,7 +170,7 @@ let eD = memo(function ({
   let Z = X ? x9 : "";
   if (null === u) {
     let r = !!e.description || $;
-    return getFeatureFlags().fpl_style_picker_combobox ? jsx(_$$o, {
+    return getFeatureFlags().fpl_style_picker_combobox ? jsx(EventShield, {
       display: "contents",
       eventListeners: ["onMouseDown", "onPointerDown"],
       children: jsxs("div", {

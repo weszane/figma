@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
@@ -14,7 +14,7 @@ import { FOrganizationLevelType } from "../figma_app/421473";
 import { e0 } from "../905/696396";
 export let $$h0 = registerModal(function (e) {
   let t;
-  let a = hS(e);
+  let a = useModalManager(e);
   let h = useDispatch();
   let x = Xf(e.plan.key.parentId, e.plan.key.type !== FOrganizationLevelType.TEAM);
   let f = useSelector(e => e.teamBilling);

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -10,7 +10,7 @@ import { registerModal } from "../905/102752";
 import { Vq } from "../figma_app/639088";
 export let $$m0 = registerModal(function (e) {
   let t = useDispatch();
-  let i = hS(e);
+  let i = useModalManager(e);
   let u = e.folder.viewOnlyAt;
   let m = jsx("span", {
     className: Vq,

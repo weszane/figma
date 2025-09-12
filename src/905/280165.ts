@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
-import { _ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { K } from "../905/443068";
 import { N } from "../905/301843";
 import { E } from "../905/235326";
@@ -53,7 +53,7 @@ export function $$f0(e) {
     disabled,
     backingSymbolGUID
   } = i;
-  return url ? jsx(_, {
+  return url ? jsx(LinkPrimitive, {
     href: url,
     newTab: !0,
     htmlAttributes: {

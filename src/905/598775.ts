@@ -3,8 +3,8 @@ import { createContext, forwardRef, useRef, useState, useCallback, useEffect, us
 import { A } from "../vendor/723372";
 import { E } from "../905/632989";
 import { S } from "../905/823680";
-import { $ } from "../905/61417";
-import { _ } from "../figma_app/496441";
+import { ensureContext } from "../905/61417";
+import { LinkPrimitive } from "../figma_app/496441";
 import { defaultComponentAttribute } from "../905/577641";
 let u = createContext(null);
 let $$p3 = forwardRef(({
@@ -59,7 +59,7 @@ export let $$g2 = forwardRef(({
 }, i) => {
   let {
     labeledById
-  } = $(u, "CardPrimitive.Main", "CardPrimitive.Root");
+  } = ensureContext(u, "CardPrimitive.Main", "CardPrimitive.Root");
   return jsx(E, {
     "aria-labelledby": labeledById,
     className: A("card-primitive__button__jv46G", e),
@@ -75,8 +75,8 @@ forwardRef(({
 }, i) => {
   let {
     labeledById
-  } = $(u, "CardPrimitive.Main", "CardPrimitive.Root");
-  return jsx(_, {
+  } = ensureContext(u, "CardPrimitive.Main", "CardPrimitive.Root");
+  return jsx(LinkPrimitive, {
     "aria-labelledby": labeledById,
     className: A("card-primitive__link__K4nzB", e),
     ref: i,
@@ -87,7 +87,7 @@ forwardRef(({
 export let $$f4 = forwardRef((e, t) => {
   let {
     registerMainElRef
-  } = $(u, "CardPrimitive.Main", "CardPrimitive.Root");
+  } = ensureContext(u, "CardPrimitive.Main", "CardPrimitive.Root");
   let a = useId();
   let s = S(t, registerMainElRef);
   return jsx("span", {

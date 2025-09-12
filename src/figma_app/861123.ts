@@ -2,8 +2,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useMemo, forwardRef } from "react";
 import { J } from "../905/614223";
 import { A } from "../vendor/723372";
-import { M } from "../905/749786";
-import { fP, mc, i3 } from "../905/691059";
+import { DialogContext } from "../905/749786";
+import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { hO, qr, PM } from "../905/453984";
 let c = createContext("primary");
 export function $$u1(e) {
@@ -11,7 +11,7 @@ export function $$u1(e) {
     getArrowProps,
     getContainerProps,
     getTriggerProps
-  } = fP({
+  } = usePopoverPrimitive({
     type: "tutorial",
     softDismiss: !1,
     placement: "bottom-end",
@@ -40,7 +40,7 @@ export function $$p0({
   } = t;
   return jsx(c.Provider, {
     value: r,
-    children: jsx(mc, {
+    children: jsx(PopoverPrimitiveContainer, {
       ...getContainerProps(),
       children: jsx(J, {
         mode: void 0,
@@ -48,9 +48,9 @@ export function $$p0({
           className: A({
             [hO]: "strong" === r
           }),
-          children: [jsx(i3, {
+          children: [jsx(PopoverPrimitiveArrow, {
             ...getArrowProps()
-          }), jsx(M.Provider, {
+          }), jsx(DialogContext.Provider, {
             value: {
               close: () => setOpen(!1)
             },

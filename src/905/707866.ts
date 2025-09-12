@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { N as _$$N } from "../905/438674";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
@@ -85,7 +85,7 @@ function D(e) {
           href: e.communityAuthorLink.href,
           onClick: e.communityAuthorLink.onClick,
           children: g
-        }) : g, e.communityAuthorLink ? jsx(_$$_, {
+        }) : g, e.communityAuthorLink ? jsx(LinkPrimitive, {
           href: e.communityAuthorLink.href,
           onClick: e.communityAuthorLink.onClick,
           style: {

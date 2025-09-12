@@ -2,7 +2,7 @@ import { registerModal } from "../905/102752";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { hE } from "../figma_app/272243";
 import { N } from "../905/438674";
@@ -21,7 +21,7 @@ export let $$b0 = registerModal(function ({
   bodyText: t,
   ...i
 }) {
-  let b = hS(i);
+  let b = useModalManager(i);
   let v = useDispatch();
   let I = useSelector(e => e.repos);
   let E = selectCurrentFile();

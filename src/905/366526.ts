@@ -53,7 +53,7 @@ import { Q as _$$Q3 } from '../905/150006';
 import { t as _$$t5 } from '../905/150656';
 import { N as _$$N3 } from '../905/155850';
 import { hideModal, hideSpecificModal, popModalStack, popPrevModal, showModal, showModalHandler, updateModal } from '../905/156213';
-import { lM as _$$lM, Dx } from '../905/158740';
+import { useThemeContext, ThemeProvider } from '../905/158740';
 import { mO as _$$mO, Y5 as _$$Y3, kI } from '../905/163189';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { createFontMetadata, getFontOwner } from '../905/165290';
@@ -135,7 +135,7 @@ import { v as _$$v3 } from '../905/417890';
 import { getResourceDataOrFallback } from '../905/419236';
 import { H as _$$H5 } from '../905/422284';
 import { LivegraphProvider } from '../905/436043';
-import { hS as _$$hS2 } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { N as _$$N2 } from '../905/438674';
 import { _O, vf, Y7, z$ } from '../905/438864';
 import { k as _$$k2 } from '../905/443820';
@@ -204,7 +204,7 @@ import { setupFileObject } from '../905/628874';
 import { E as _$$E9 } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, removeQueryParam, serializeQuery } from '../905/634134';
 import { A as _$$A0, y as _$$y6 } from '../905/638715';
-import { F as _$$F7, h as _$$h4 } from '../905/642505';
+import { fileImporter, initializeFileImporter } from '../905/642505';
 import { k as _$$k3 } from '../905/644504';
 import { createFileLibraryKeys } from '../905/651613';
 import { logger } from '../905/651849';
@@ -334,10 +334,10 @@ import { a6 as _$$a3, cb as _$$cb, oI as _$$oI, rO as _$$rO, t7 as _$$t3, yF as 
 import { Wm } from '../905/990455';
 import { l as _$$l4 } from '../905/997221';
 import { cT as _$$cT, mI as _$$mI, P8, PG, qF, vr } from '../905/997533';
-import { DK, Uv } from '../3973/473379';
+import { ProviderType, OperationStatus } from '../3973/473379';
 import { h as _$$h6, I as _$$I3 } from '../3973/647885';
-import { gR, ZJ } from '../3973/697935';
-import { N6 } from '../3973/890507';
+import { numericAtom, processSelector } from '../3973/697935';
+import { trackStatsigPlanKeyBootstrap } from '../3973/890507';
 import { s as _$$s } from '../cssbuilder/589278';
 import { at as _$$at } from '../figma_app/987';
 import { DFF } from '../figma_app/6204';
@@ -457,7 +457,7 @@ import { $l, $o, bE as _$$bE, yJ as _$$yJ2, HA, IU, Kc, MR, Q2, y2, yH } from '.
 import { Dl as _$$Dl, i_ as _$$i_2 } from '../figma_app/610446';
 import { aZ as _$$aZ2 } from '../figma_app/613182';
 import { a as _$$a } from '../figma_app/620913';
-import { Dk } from '../figma_app/623293';
+import { copyTextToClipboard } from '../figma_app/623293';
 import { Fy } from '../figma_app/623300';
 import { LIBRARY_PREFERENCES_MODAL, SubscriptionStatusEnum, LibraryAgeEnum, PublishStatusEnum, PrimaryWorkflowEnum, LibraryPublishStatusEnum, getDraftsSidebarString, initialLibraryStats, NO_TEAM } from '../figma_app/633080';
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
@@ -539,12 +539,12 @@ import uW from '../vendor/223926';
 import { n_ as _$$n_ } from '../vendor/235095';
 import ag from '../vendor/239910';
 import uy from '../vendor/241899';
-import eW from '../vendor/625526';
+import eW from 'statsig-js';
 import mI from '../vendor/643300';
 import { A as _$$A4 } from '../vendor/718327';
-import { Statsig } from '../vendor/735621';
+import { Statsig } from 'statsig-react';
 import { Q as _$$Q } from '../vendor/912394';
-import { createPortal } from '../vendor/944059';
+import { createPortal } from 'react-dom';
 import _require from '../vscode/70443';
 function m({
   children: e,
@@ -552,7 +552,7 @@ function m({
 }) {
   let [i, r] = useState(t);
   let [a, s] = useState(TE);
-  _$$lM() && console.error('Only one instance of theme provider should exist');
+  useThemeContext() && console.error('Only one instance of theme provider should exist');
   let o = useMemo(() => ({
     version: i,
     updateMode(e) {
@@ -586,7 +586,7 @@ function m({
   useLayoutEffect(() => {
     document.body.setAttribute('data-fpl-version', i);
   }, [i]);
-  return jsx(Dx, {
+  return jsx(ThemeProvider, {
     value: o,
     children: jsx(_$$A, {
       value: h,
@@ -1045,7 +1045,7 @@ function eJ({
   } = e;
   let s = !_$$pF() || initialized;
   let [o, l] = useState(null);
-  let c = useAtomWithSubscription(ZJ)?.initCompletedPromise;
+  let c = useAtomWithSubscription(processSelector)?.initCompletedPromise;
   let u = z3();
   let p = u === 'fullscreen';
   let m = useMemo(() => g5.includes(u), [u]);
@@ -1081,11 +1081,11 @@ function e0(e) {
     getFeatureFlags().statsig_suspend_gremlin && _$$cZ(e);
   }, []);
   let l = function () {
-    let e = useAtomWithSubscription(ZJ).status;
-    let t = useAtomWithSubscription(gR);
+    let e = useAtomWithSubscription(processSelector).status;
+    let t = useAtomWithSubscription(numericAtom);
     let [i, n] = useState(!1);
-    let r = e !== Uv.NOT_STARTED;
-    let a = r && e !== Uv.IN_PROGRESS;
+    let r = e !== OperationStatus.NOT_STARTED;
+    let a = r && e !== OperationStatus.IN_PROGRESS;
     useEffect(() => {
       a && n(!0);
     }, [a, n]);
@@ -1106,10 +1106,10 @@ function e0(e) {
       planKey: _planKey,
       callingHookLocation
     } = e;
-    let s = useAtomWithSubscription(ZJ).status;
+    let s = useAtomWithSubscription(processSelector).status;
     let o = Xr(_$$r_);
-    let l = Xr(gR);
-    let c = useRef(s !== Uv.NOT_STARTED);
+    let l = Xr(numericAtom);
+    let c = useRef(s !== OperationStatus.NOT_STARTED);
     let u = useCallback(() => {
       l(e => e + 1);
     }, [l]);
@@ -1119,7 +1119,7 @@ function e0(e) {
         teamId: _teamId,
         orgId: _orgId,
         planKey: _planKey
-      }, callingHookLocation || '', DK.PROVIDER).then(() => {
+      }, callingHookLocation || '', ProviderType.PROVIDER).then(() => {
         u();
       }), Statsig.setReactContextUpdater(u), typeof window == 'undefined' || (window.__STATSIG_SDK__ = Statsig, window.__STATSIG_JS_SDK__ = eK(), window.__STATSIG_RERENDER_OVERRIDE__ = u));
     }, [u, o, _orgId, _teamId, _userId, _planKey, callingHookLocation]);
@@ -1139,9 +1139,9 @@ function e0(e) {
       orgId: _orgId2,
       planKey: _planKey2
     } = e;
-    let a = useAtomWithSubscription(ZJ).status;
+    let a = useAtomWithSubscription(processSelector).status;
     let s = Xr(_$$iz);
-    let o = Xr(gR);
+    let o = Xr(numericAtom);
     let l = useRef(_userId2);
     let c = useRef(_teamId2);
     let u = useRef(_orgId2);
@@ -1201,7 +1201,7 @@ function e1({
   }
   let p = _6();
   _$$h(() => {
-    N6(getFeatureFlags().statsig_plan_key_bootstrap ?? !1, getInitialOptions().statsig_plan_key ?? 'null', getInitialOptions().org_id ?? 'null', c ?? 'null', u ?? 'null', r ?? 'null', p?.view ?? 'null', s ?? 'null', a ?? 'null', i);
+    trackStatsigPlanKeyBootstrap(getFeatureFlags().statsig_plan_key_bootstrap ?? !1, getInitialOptions().statsig_plan_key ?? 'null', getInitialOptions().org_id ?? 'null', c ?? 'null', u ?? 'null', r ?? 'null', p?.view ?? 'null', s ?? 'null', a ?? 'null', i);
   });
   !function (e, t, i) {
     let n = Xr(_$$oo);
@@ -1235,7 +1235,7 @@ function e1({
         return r;
       }, [n, e, t, i]);
     }(e, t, i);
-    let a = useAtomWithSubscription(ZJ).status === Uv.COMPLETED;
+    let a = useAtomWithSubscription(processSelector).status === OperationStatus.COMPLETED;
     useEffect(() => {
       a && n(r);
     }, [r, n, a]);
@@ -2560,7 +2560,7 @@ let nS = e => t => function (i) {
 };
 let nK = registerModal(e => {
   let t;
-  let i = _$$hS2(e);
+  let i = useModalManager(e);
   return jsx(bL, {
     manager: i,
     width: 'lg',
@@ -7592,7 +7592,7 @@ function lp(e, t) {
       isProcessingFile: !1
     };
   } else if (_$$cY.matches(t)) {
-    if (_$$F7?.resetCancel(), !e.queue.length) return i;
+    if (fileImporter?.resetCancel(), !e.queue.length) return i;
   } else if (_$$lg.matches(t)) {
     return {
       ...e,
@@ -14055,7 +14055,7 @@ function hM(e) {
   return i18n_desktop_version_support?.[e];
 }
 let hj = registerModal(e => {
-  let t = _$$hS2(e);
+  let t = useModalManager(e);
   let i = getI18nState()?.getPrimaryLocale(!1);
   let r = useDispatch();
   let a = i && hD[i];
@@ -14425,7 +14425,7 @@ export async function $$hz0(e, t, d = {
     function j(c) {
       performanceMetricsTracker.fileBrowserInitDurationMs = Math.round(measureSyncDuration('fileBrowserInit', _$$e.WAYFINDING, () => {
         _$$a5(getInitialOptions().user_data || null, b, b.getState().userFlags, t);
-        _$$h4();
+        initializeFileImporter();
         b.dispatch(_$$De());
         b.dispatch(_$$S6());
         b.dispatch(_$$Ts());
@@ -14578,7 +14578,7 @@ export async function $$hz0(e, t, d = {
             let t = '';
             if (desktopAPIInstance.isFileBrowserTab() || wl()) {
               t = getI18nString('desktop_bindings.interstitial.page_link_copied');
-              Dk(e).then(() => b.dispatch(VisualBellActions.enqueue({
+              copyTextToClipboard(e).then(() => b.dispatch(VisualBellActions.enqueue({
                 message: t
               })));
             } else {

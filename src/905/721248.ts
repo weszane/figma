@@ -3,7 +3,7 @@ import { useMemo, memo, useState, useEffect, Component, useRef, useCallback, clo
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import o, { lQ } from "../905/934246";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
@@ -141,7 +141,7 @@ import { A as _$$A1 } from "../1617/954184";
 import { A as _$$A10 } from "../6828/117346";
 import nR from "../vendor/73823";
 import { eE as _$$eE, Wy } from "../figma_app/952446";
-import { s9 } from "../905/194389";
+import { CustomCauseError } from "../905/194389";
 import { A as _$$A11 } from "../6828/250823";
 import nM from "../vendor/626715";
 import { qp } from "../905/977779";
@@ -2282,7 +2282,7 @@ let iW = registerModal(function (e) {
       u(e.currentTarget.value);
     }
   });
-  let b = hS(e);
+  let b = useModalManager(e);
   return jsx(bL, {
     manager: b,
     width: "lg",
@@ -2359,7 +2359,7 @@ let iW = registerModal(function (e) {
 }, "leave-review-modal");
 let iK = registerModal(function (e) {
   let [t, i] = useState(e.existingMergeRequest?.description || "");
-  let a = hS({
+  let a = useModalManager({
     open: !0,
     onClose: e.onClose ? e.onClose : () => {}
   });
@@ -3939,7 +3939,7 @@ let nF = memo(function (e) {
         _$$n(e, t, i, n, a);
         u(!0);
       } catch (e) {
-        g(new s9("Failed to merge conflict resolution picks", {
+        g(new CustomCauseError("Failed to merge conflict resolution picks", {
           cause: e
         }));
       }
@@ -5373,7 +5373,7 @@ let rR = memo(function (e) {
               Ur(nonConflictingSourceChunkGUIDs, branchPickGUIDs.concat(nonConflictingBranchChunkGUIDs).concat(identicalChunkGUIDs), PreviewStage.STAGE);
               e.onSubmit(i);
             } catch (e) {
-              B(new s9("Failed to set all picks from branch", {
+              B(new CustomCauseError("Failed to set all picks from branch", {
                 cause: e
               }));
             }
@@ -5581,7 +5581,7 @@ function rO({
   children: a,
   preventUserClose: s
 }) {
-  let o = hS({
+  let o = useModalManager({
     open: !0,
     onClose: i,
     preventUserClose: s

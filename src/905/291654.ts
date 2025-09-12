@@ -1,27 +1,26 @@
-import { partition } from 'lodash-es'
-import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { jsx, jsxs } from 'react/jsx-runtime'
-import { bL } from '../905/38914'
-import { c as _$$c } from '../905/73189'
-import { ModalSupportsBackground, registerModal } from '../905/102752'
-import { showModalHandler } from '../905/156213'
-import { h as _$$h } from '../905/207101'
-import { renderI18nText } from '../905/303541'
-import { selectCurrentUser } from '../905/372672'
-import { hS } from '../905/437088'
-import { analyticsEventManager } from '../905/449184'
-import { getFeatureFlags } from '../905/601108'
-import { If } from '../905/714538'
-import { D7, rj, T_, V1 } from '../905/946258'
-import { b as _$$b } from '../905/985254'
-import { FEditorType } from '../figma_app/53721'
-import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243'
-import { pi } from '../figma_app/314264'
-import { selectCurrentFile } from '../figma_app/516028'
-import { $z } from '../figma_app/617427'
-import { FontSourceType } from '../figma_app/763686'
-
+import { partition } from 'lodash-es';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { jsx, jsxs } from 'react/jsx-runtime';
+import { bL } from '../905/38914';
+import { c as _$$c } from '../905/73189';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
+import { showModalHandler } from '../905/156213';
+import { h as _$$h } from '../905/207101';
+import { renderI18nText } from '../905/303541';
+import { selectCurrentUser } from '../905/372672';
+import { useModalManager } from '../905/437088';
+import { analyticsEventManager } from '../905/449184';
+import { getFeatureFlags } from '../905/601108';
+import { If } from '../905/714538';
+import { D7, rj, T_, V1 } from '../905/946258';
+import { b as _$$b } from '../905/985254';
+import { FEditorType } from '../figma_app/53721';
+import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
+import { pi } from '../figma_app/314264';
+import { selectCurrentFile } from '../figma_app/516028';
+import { $z } from '../figma_app/617427';
+import { FontSourceType } from '../figma_app/763686';
 enum d {
   SF_PRO = 'SFPro',
   SF_COMPACT = 'SFCompact',
@@ -32,7 +31,7 @@ let T = {
       return jsxs('div', {
         style: {
           whiteSpace: 'pre-line',
-          fontWeight: 500,
+          fontWeight: 500
         },
         children: [`APPLE INC.
         LICENSE AGREEMENT FOR THE APPLE SF PRO FONT
@@ -86,18 +85,18 @@ let T = {
         10. Complete Agreement; Governing Language. This License constitutes the entire agreement between you and Apple relating to the use of the Apple Font licensed hereunder and supersedes all prior or contemporaneous understandings regarding such subject matter. No amendment to or modification of this License will be binding unless in writing and signed by Apple. To the extent that there are any inconsistent terms in any applicable Apple software license agreements, these terms shall govern your use of the Apple Font.
 
         EA1761
-        5/20/2021`],
-      })
+        5/20/2021`]
+      });
     },
     header: renderI18nText('community.eula.sf_pro_license_agreement'),
-    subtext: renderI18nText('community.eula.subext.sf_pro_license_agreement'),
+    subtext: renderI18nText('community.eula.subext.sf_pro_license_agreement')
   },
   [d.SF_COMPACT]: {
     content() {
       return jsxs('div', {
         style: {
           whiteSpace: 'pre-line',
-          fontWeight: 500,
+          fontWeight: 500
         },
         children: [`APPLE INC.
         LICENSE AGREEMENT FOR THE APPLE SF COMPACT FONT
@@ -152,17 +151,17 @@ let T = {
         10. Complete Agreement; Governing Language. This License constitutes the entire agreement between you and Apple relating to the use of the Apple Font licensed hereunder and supersedes all prior or contemporaneous understandings regarding such subject matter. No amendment to or modification of this License will be binding unless in writing and signed by Apple. To the extent that there are any inconsistent terms in any applicable Apple software license agreements, these terms shall govern your use of the Apple Font.
 
         EA1759
-        05/20/2021`],
-      })
+        05/20/2021`]
+      });
     },
     header: renderI18nText('community.eula.sf_compact_license_agreement'),
-    subtext: renderI18nText('community.eula.subtext.sf_compact_license_agreement'),
-  },
-}
-let k = registerModal((e) => {
-  let t = useDispatch()
-  let i = selectCurrentUser()
-  let n = selectCurrentFile()
+    subtext: renderI18nText('community.eula.subtext.sf_compact_license_agreement')
+  }
+};
+let k = registerModal(e => {
+  let t = useDispatch();
+  let i = selectCurrentUser();
+  let n = selectCurrentFile();
   let {
     eulaConfig,
     eulasToShow,
@@ -173,13 +172,12 @@ let k = registerModal((e) => {
     trigger,
     asyncModal,
     ...w
-  } = e
-  let C = T[eulaConfig.eula]
-  if (!C)
-    throw new Error(`Unsupported font eula: ${eulaConfig.eula}`)
-  !(function (e, t, i) {
-    let n = selectCurrentUser()
-    let r = selectCurrentFile()
+  } = e;
+  let C = T[eulaConfig.eula];
+  if (!C) throw new Error(`Unsupported font eula: ${eulaConfig.eula}`);
+  !function (e, t, i) {
+    let n = selectCurrentUser();
+    let r = selectCurrentFile();
     _$$h(() => {
       analyticsEventManager.trackDefinedEvent('preset_libraries.apple_font_eula_displayed', {
         trigger: e,
@@ -189,11 +187,11 @@ let k = registerModal((e) => {
         fileParentOrgId: r?.parentOrgId ?? void 0,
         fileKey: r?.key,
         asyncModal: i ?? !1,
-        productType: pi(r),
-      })
-    })
-  }(trigger, eulaConfig, asyncModal))
-  let k = useCallback((e) => {
+        productType: pi(r)
+      });
+    });
+  }(trigger, eulaConfig, asyncModal);
+  let k = useCallback(e => {
     analyticsEventManager.trackDefinedEvent('preset_libraries.apple_font_eula_clicked', {
       actionType: e,
       trigger,
@@ -203,152 +201,151 @@ let k = registerModal((e) => {
       fileParentOrgId: n?.parentOrgId ?? void 0,
       fileKey: n?.key,
       asyncModal: asyncModal ?? !1,
-      productType: pi(n),
-    })
-  }, [i, n, eulaConfig, trigger, asyncModal])
-  let R = hS({
+      productType: pi(n)
+    });
+  }, [i, n, eulaConfig, trigger, asyncModal]);
+  let R = useModalManager({
     ...w,
     onClose,
-    preventUserClose: !0,
-  })
+    preventUserClose: !0
+  });
   return jsx(bL, {
     manager: R,
     width: 600,
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: C.header,
-        }),
+          children: C.header
+        })
       }), jsxs(nB, {
         children: [jsx('div', {
           style: {
             color: 'var(--color-text-secondary)',
-            padding: '8px 0px',
+            padding: '8px 0px'
           },
-          children: C.subtext,
+          children: C.subtext
         }), jsx('div', {
           style: {
-            maxHeight: '360px',
+            maxHeight: '360px'
           },
-          children: C.content(),
-        })],
+          children: C.content()
+        })]
       }), jsxs(wi, {
         children: [void 0 !== eulasToShow && void 0 !== eulaShown && eulasToShow > 1 && jsx('div', {
           'data-testid': 'eula-counts',
           'children': renderI18nText('community.eula.i_of_count', {
             i: eulaShown,
-            count: eulasToShow,
-          }),
+            count: eulasToShow
+          })
         }), jsxs(jk, {
           children: [jsx($z, {
             onClick: () => {
               t(_$$b({
-                [eulaConfig.declinedUserFlag]: !0,
-              }))
-              k('decline')
-              onDecline?.()
-              onClose()
+                [eulaConfig.declinedUserFlag]: !0
+              }));
+              k('decline');
+              onDecline?.();
+              onClose();
             },
             variant: 'secondary',
-            children: renderI18nText('community.eula.disagree'),
+            children: renderI18nText('community.eula.disagree')
           }), jsx($z, {
             onClick: () => {
               t(_$$b({
-                [eulaConfig.acceptedUserFlag]: !0,
-              }))
-              k('accept')
-              e.onAccept?.()
-              e.onClose()
+                [eulaConfig.acceptedUserFlag]: !0
+              }));
+              k('accept');
+              e.onAccept?.();
+              e.onClose();
             },
             variant: 'primary',
-            children: renderI18nText('community.eula.agree'),
-          })],
-        })],
-      })],
-    }),
-  })
-}, 'APPLE_FONT_EULA_MODAL_TYPE', ModalSupportsBackground.YES)
-let R = new Set([FEditorType.Design, FEditorType.Whiteboard, FEditorType.Slides, FEditorType.Cooper])
-let N = new Set([rj, V1, T_, D7])
+            children: renderI18nText('community.eula.agree')
+          })]
+        })]
+      })]
+    })
+  });
+}, 'APPLE_FONT_EULA_MODAL_TYPE', ModalSupportsBackground.YES);
+let R = new Set([FEditorType.Design, FEditorType.Whiteboard, FEditorType.Slides, FEditorType.Cooper]);
+let N = new Set([rj, V1, T_, D7]);
 let $$P0 = {
   [d.SF_PRO]: {
     eula: d.SF_PRO,
     fontFamilies: ['SF Pro', 'SF Pro Rounded'],
     acceptedUserFlag: 'apple_sf_pro_eula_accepted',
-    declinedUserFlag: 'apple_sf_pro_eula_declined',
+    declinedUserFlag: 'apple_sf_pro_eula_declined'
   },
   [d.SF_COMPACT]: {
     eula: d.SF_COMPACT,
     fontFamilies: ['SF Compact', 'SF Compact Rounded'],
     acceptedUserFlag: 'apple_sf_compact_eula_accepted',
-    declinedUserFlag: 'apple_sf_compact_eula_declined',
-  },
-}
-let $$O = Object.fromEntries(Object.values($$P0).flatMap(e => e.fontFamilies.map(t => [t, e])))
+    declinedUserFlag: 'apple_sf_compact_eula_declined'
+  }
+};
+let $$O = Object.fromEntries(Object.values($$P0).flatMap(e => e.fontFamilies.map(t => [t, e])));
 export function $$D7(e, t) {
-  let i = If(t[e])
-  return i?.source === FontSourceType.GOOGLE
+  let i = If(t[e]);
+  return i?.source === FontSourceType.GOOGLE;
 }
 export function $$L2(e, t) {
-  if (getFeatureFlags().dse_sf_pro_font && e && $$D7(e, t))
-    return $$O[e]
+  if (getFeatureFlags().dse_sf_pro_font && e && $$D7(e, t)) return $$O[e];
 }
 function F(e, t) {
-  return void 0 !== $$L2(e, t)
+  return void 0 !== $$L2(e, t);
 }
 export function $$M3(e, t, i) {
-  let n = $$L2(e, t)
-  return !!n && !!i[n.acceptedUserFlag]
+  let n = $$L2(e, t);
+  return !!n && !!i[n.acceptedUserFlag];
 }
 export function $$j4(e, t, i) {
-  return F(e, t) && !$$M3(e, t, i)
+  return F(e, t) && !$$M3(e, t, i);
 }
 export function $$U1(e, t, i) {
-  let [n, r] = partition(e, e => F(e.family, t) && !$$z6(e.family, i))
+  let [n, r] = partition(e, e => F(e.family, t) && !$$z6(e.family, i));
   return {
     eulaFonts: n,
-    nonEulaFonts: r,
-  }
+    nonEulaFonts: r
+  };
 }
 export async function $$B9(e, t, i, n, r) {
-  let a = $$L2(e, i)
+  let a = $$L2(e, i);
   return !!(!a || !e || $$M3(e, i, t)) || (await $$G8(n, {
     eula: a.eula,
-    trigger: r,
-  }))
+    trigger: r
+  }));
 }
 export async function $$V10(e, t, i, n, r) {
-  let a = [...e]
+  let a = [...e];
   if (e.length === 0) {
     return {
-      stillMissingFonts: a,
-    }
+      stillMissingFonts: a
+    };
   }
-  let s = new Set()
+  let s = new Set();
   for (let o of e) {
-    let e = $$L2(o.family, t)
+    let e = $$L2(o.family, t);
     if (!e || s.has(e.eula) || (s.add(e.eula), i[e.acceptedUserFlag] || !(await $$G8(n, {
       eula: e.eula,
-      trigger: r,
+      trigger: r
     })))) {
-      continue
+      continue;
     }
-    let l = new Set(e.fontFamilies)
-    a = a.filter(e => !l.has(e.family))
+    let l = new Set(e.fontFamilies);
+    a = a.filter(e => !l.has(e.family));
   }
   return {
-    stillMissingFonts: a,
-  }
+    stillMissingFonts: a
+  };
 }
 export function $$G8(e, t) {
-  let i
+  let i;
   i = {
     eulaConfig: $$P0[t.eula],
     eulasToShow: t.eulasToShow,
     eulaShown: t.eulaShown,
-    trigger: t.trigger,
-  }
-  return new Promise((t) => {
+    trigger: t.trigger
+  };
+  return new Promise(t => {
     e(showModalHandler({
       type: k,
       showModalsBeneath: !0,
@@ -357,31 +354,31 @@ export function $$G8(e, t) {
         eulasToShow: i.eulasToShow,
         eulaShown: i.eulaShown,
         onAccept: () => {
-          t(!0)
+          t(!0);
         },
         onDecline: () => {
-          t(!1)
+          t(!1);
         },
         trigger: i.trigger,
-        asyncModal: !0,
-      },
-    }))
-  })
+        asyncModal: !0
+      }
+    }));
+  });
 }
 export function $$z6(e, t) {
-  return N.has(e) && !R.has(t)
+  return N.has(e) && !R.has(t);
 }
 export function $$H5(e, t, i, n) {
-  return !!$$D7(e, t) && ($$z6(e, n) || $$j4(e, t, i))
+  return !!$$D7(e, t) && ($$z6(e, n) || $$j4(e, t, i));
 }
-export const kd = $$P0
-export const Ie = $$U1
-export const h_ = $$L2
-export const qG = $$M3
-export const jb = $$j4
-export const O = $$H5
-export const _D = $$z6
-export const Rh = $$D7
-export const oT = $$G8
-export const Cj = $$B9
-export const i6 = $$V10
+export const kd = $$P0;
+export const Ie = $$U1;
+export const h_ = $$L2;
+export const qG = $$M3;
+export const jb = $$j4;
+export const O = $$H5;
+export const _D = $$z6;
+export const Rh = $$D7;
+export const oT = $$G8;
+export const Cj = $$B9;
+export const i6 = $$V10;

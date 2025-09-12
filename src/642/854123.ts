@@ -48,7 +48,7 @@ import { Point } from "../905/736624";
 import { Ao } from "../905/748636";
 import { E as _$$E } from "../905/632989";
 import { C as _$$C } from "../905/520159";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo } from "../figma_app/272243";
 import ey from "../vendor/197638";
@@ -629,7 +629,7 @@ function ej({
   image: e,
   onClose: t
 }) {
-  let s = hS({
+  let s = useModalManager({
     open: !!e,
     onClose: t
   });

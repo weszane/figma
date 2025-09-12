@@ -22,9 +22,9 @@ import { Z as _$$Z } from '../905/116724';
 import { Ib } from '../905/129884';
 import { A as _$$A2 } from '../905/150554';
 import { showModalHandler } from '../905/156213';
-import { DP as _$$DP } from '../905/158740';
+import { getThemeContextOrDefault } from '../905/158740';
 import { ServiceCategories as _$$e3 } from '../905/165054';
-import { E as _$$E2 } from '../905/172252';
+import { ScreenReaderOnly } from '../905/172252';
 import { y as _$$y2 } from '../905/175043';
 import { n as _$$n2 } from '../905/186638';
 import { permissionScopeHandler as _$$l2, scopeAwareFunction as _$$nc } from '../905/189185';
@@ -93,7 +93,7 @@ import { tH as _$$tH } from '../905/751457';
 import { jD } from '../905/765855';
 import { K as _$$K3 } from '../905/770444';
 import { R as _$$R } from '../905/782411';
-import { o as _$$o2 } from '../905/821217';
+import { EventShield } from '../905/821217';
 import { vL } from '../905/826900';
 import { AutoLayout } from '../905/470281';
 import { Um } from '../905/848862';
@@ -254,7 +254,7 @@ import iw from '../vendor/239910';
 import { useDispatch, useSelector } from 'react-redux';
 import r$ from '../vendor/523035';
 import { Te } from '../vendor/813803';
-import { createPortal } from '../vendor/944059';
+import { createPortal } from 'react-dom';
 let l = i;
 function M() {
   let e = aV();
@@ -582,7 +582,7 @@ function e3({
         thumbWidth: o,
         viewMode: c
       })
-    }), getFeatureFlags().dse_fpl_wave_2 && jsx(_$$E2, {
+    }), getFeatureFlags().dse_fpl_wave_2 && jsx(ScreenReaderOnly, {
       'id': 'asset-panel-tile-hint',
       'aria-hidden': !0,
       'children': getI18nString('design_systems.assets_panel.asset_tile_sr_hint')
@@ -6887,7 +6887,7 @@ let i4 = ({
   let l = useLatestRef(r);
   let [o, d] = useState(null);
   let c = selectCurrentUser();
-  let u = _$$DP().version;
+  let u = getThemeContextOrDefault().version;
   let p = _$$tM4('assets-panel');
   let h = useLatestRef(p);
   let m = je();
@@ -7491,7 +7491,7 @@ function lL({
     if (o) return l.data?.position;
   }, [l?.data?.position, o]);
   return jsxs(Fragment, {
-    children: [jsx(_$$o2, {
+    children: [jsx(EventShield, {
       eventListeners: o ? ['onMouseDown'] : [],
       children: jsx(_$$d, {
         'onClick': c,
@@ -7931,7 +7931,7 @@ function l0() {
     path: [ON.HEADER, my.SEARCH_AND_FILTER],
     column: Wy.VISUAL_SEARCH_BUTTON
   });
-  return jsxs(_$$o2, {
+  return jsxs(EventShield, {
     eventListeners: e ? ['onMouseDown'] : [],
     children: [jsx(_$$d, {
       'data-onboarding-key': lZ,

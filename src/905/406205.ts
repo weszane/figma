@@ -3,7 +3,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { resourceUtils } from "../905/989992";
 import d from "classnames";
 import { trackEventAnalytics } from "../905/449184";
@@ -70,7 +70,7 @@ let eo = ex("team_folder_rename", function (e) {
       children: renderI18nText("team_view.folder_list_card.team_root_folder_info")
     }), jsx("div", {
       className: _$$s.bl1.hFull.inline.bSolid.colorBorderMenu.ml8.mr8.$
-    }), jsx(_$$_, {
+    }), jsx(LinkPrimitive, {
       href: `/files/project/${folderId}?renameProject=true`,
       className: _$$s.cursorPointer.noUnderline.fontBold.colorTextTooltip.$,
       children: renderI18nText("team_view.folder_list_card.team_root_folder_rename")
@@ -429,7 +429,7 @@ function eb(e) {
   let t = useDispatch();
   let i = _$$B3();
   let r = useSelector(t => e.folder.team_id ? t.teams[e.folder.team_id] : void 0);
-  return jsx(_$$_, {
+  return jsx(LinkPrimitive, {
     href: "#",
     htmlAttributes: {
       onContextMenu: e => {

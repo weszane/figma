@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, createRef } from "react";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { O } from "../905/969533";
 import { cZ } from "../figma_app/272902";
 import l from "classnames";
@@ -11,7 +11,7 @@ import { wH, Sn, r9, Pf, Qq, q3, VI, FH, cN, Ot, sc } from "../905/99033";
 import { A } from "../2854/769773";
 var d = l;
 let m = e => e.stopPropagation();
-let $$g1 = forwardRef((e, t) => jsxs(_$$o, {
+let $$g1 = forwardRef((e, t) => jsxs(EventShield, {
   eventListeners: ["onClick"],
   children: [jsx($$f0, {
     ...e,

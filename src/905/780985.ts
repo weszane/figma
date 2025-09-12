@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { w } from "../905/937416";
 export function $$s0(e, t, i) {
   let [s, l] = useState(!1);

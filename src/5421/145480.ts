@@ -5,7 +5,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler, zk } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Xt } from "../figma_app/623293";
+import { copyRichTextToClipboard } from "../figma_app/623293";
 import { XHRError } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -176,7 +176,7 @@ export function $$S1() {
               l.y = n.y;
               e.removeSelfAndChildren();
             });
-          }(r, o.parentGuid, o.insertionLocation) : await Xt(r);
+          }(r, o.parentGuid, o.insertionLocation) : await copyRichTextToClipboard(r);
         } else {
           if (v.isAborted()) return;
           let e = await C.sendMessage("getDOMNodes", {});

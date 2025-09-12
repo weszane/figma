@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useMemo, useCallback } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { permissionScopeHandler } from "../905/189185";

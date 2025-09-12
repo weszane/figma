@@ -1,5 +1,5 @@
 import _require4 from "../vendor/250242";
-import _require3 from "../vendor/625526";
+import _require3 from "statsig-js";
 import _require2 from "../vendor/724191";
 import _require from "react";
 var i = this && this.__createBinding || (Object.create ? function (e, r, n, i) {

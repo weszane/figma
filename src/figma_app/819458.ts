@@ -1,5 +1,5 @@
 import { trackEventAnalytics } from "../905/449184";
-import { k0 } from "../figma_app/623293";
+import { loadScript } from "../figma_app/623293";
 import { getInitialOptions, getSupportEmail } from "../figma_app/169182";
 let s = getInitialOptions().zendesk_web_key_public;
 let $$o0 = {
@@ -74,7 +74,7 @@ export function $$u1() {
     if (!s) throw Error("No zendesk_web_key_public api key");
     window.zESettings = d();
     try {
-      await k0("https://static.zdassets.com/ekr/snippet.js?key=" + s, {
+      await loadScript("https://static.zdassets.com/ekr/snippet.js?key=" + s, {
         id: "ze-snippet",
         cors: !1
       });

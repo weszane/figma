@@ -76,7 +76,7 @@ import { J9 } from '../905/401885';
 import { _ as _$$_3 } from '../905/410717';
 import { F as _$$F2 } from '../905/422355';
 import { rq as _$$rq } from '../905/425180';
-import { hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { K as _$$K } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
@@ -127,7 +127,7 @@ import { tH as _$$tH, H4 } from '../905/751457';
 import { J as _$$J8 } from '../905/799737';
 import { G as _$$G2 } from '../905/800369';
 import { Ih } from '../905/820169';
-import { o as _$$o3 } from '../905/821217';
+import { EventShield } from '../905/821217';
 import { sZ as _$$sZ } from '../905/845253';
 import { e as _$$e4 } from '../905/845623';
 import { F_ } from '../905/858282';
@@ -1358,7 +1358,7 @@ function th() {
     modalContent
   } = _$$L();
   let E = _$$W();
-  let S = hS({
+  let S = useModalManager({
     open: !0,
     onClose: _$$lQ,
     preventUserClose: !0,
@@ -3577,7 +3577,7 @@ function nQ() {
   let r = useCallback(() => {
     t === FR.LIBRARY_SELECTOR_FROM_ALL_GROUPS_VIEW ? l(FR.ALL_VISUAL_GROUPS_VIEW) : t === FR.LIBRARY_SELECTOR_FROM_SELECTED_GROUP_VIEW ? l(FR.SELECTED_VISUAL_GROUP_VIEW) : (_$$r2()?.teardownLinter(), l(FR.LANDING_PAGE_WELCOME));
   }, [t, l]);
-  let s = hS({
+  let s = useModalManager({
     open: !0,
     onClose: r
   });
@@ -6215,7 +6215,7 @@ function r0({
   }(e, r, s);
   let d = rt(e, i6.PREVIEW);
   let u = t.thumbnail && l.thumbnail && t.status === 'loaded' && l.status === 'loaded';
-  return jsx(_$$o3, {
+  return jsx(EventShield, {
     eventListeners: ['onPointerDown'],
     children: jsxs('div', {
       ...xk(r8.previewContainer(i?.x, i?.y)),

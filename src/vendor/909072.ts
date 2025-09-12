@@ -2,7 +2,7 @@ import { useLexicalComposerContext } from "../vendor/463802";
 import { useLayoutEffect, useEffect, useMemo, useRef, useState, Suspense } from "react";
 import { yl } from "../vendor/975086";
 import { mergeRegister } from "../vendor/425002";
-import { flushSync, createPortal } from "../vendor/944059";
+import { flushSync, createPortal } from "react-dom";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { $getSelection, $isRangeSelection, $isTextNode } from "../vendor/408361";
 import { registerRichText } from "../vendor/871930";

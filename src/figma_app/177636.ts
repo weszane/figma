@@ -7,8 +7,8 @@ import { getResourceDataOrFallback } from "../905/663269";
 import { Xm, gB } from "../905/723791";
 import { setupMemoizedAtomSubscription } from "../figma_app/566371";
 import { w0 } from "../figma_app/594947";
-import { ZJ } from "../3973/697935";
-import { Uv } from "../3973/473379";
+import { processSelector } from "../3973/697935";
+import { OperationStatus } from "../3973/473379";
 import { Lg, isInteractionPathCheck } from "../figma_app/897289";
 import { u8 } from "../figma_app/976749";
 import { U } from "../905/506188";
@@ -38,7 +38,7 @@ let C = z.object({
 let w = [];
 let O = atom(async e => {
   let t = e(u8) === FEditorType.Sites;
-  let r = !!(Lg() || isInteractionPathCheck()) || e(ZJ).status === Uv.COMPLETED;
+  let r = !!(Lg() || isInteractionPathCheck()) || e(processSelector).status === OperationStatus.COMPLETED;
   if (!t || !r) return {
     libraryKeys: w,
     cmsConfig: null,

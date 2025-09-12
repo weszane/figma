@@ -40,7 +40,7 @@ import { S as _$$S } from "../1556/805548";
 import { c as _$$c } from "../905/370443";
 import { X as _$$X } from "../905/482718";
 import { Q as _$$Q, R as _$$R } from "../905/11928";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { pP, nz as _$$nz } from "../1250/214905";
 import { l as _$$l } from "../1250/135829";
 import { uZ, Jo } from "../figma_app/544879";
@@ -294,7 +294,7 @@ function es(e) {
   let t = useDispatch();
   let n = useSelector(e => e.user?.drafts_folder_id);
   useEffect(() => (pP(), () => void _$$nz()), [t, n]);
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onMouseDown"],
     children: jsxs(NJ, {
       dismissModal: e.dismissModal,

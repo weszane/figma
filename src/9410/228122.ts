@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import a from "classnames";
 import { oW } from "../905/675859";
 import { AE } from "../9410/36414";

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { bL } from "../905/38914";
@@ -22,7 +22,7 @@ export let $$y0 = registerModal(function (e) {
   let f = selectCurrentUser();
   let y = Z();
   let b = useDispatch();
-  let v = hS({
+  let v = useModalManager({
     open,
     onClose
   });

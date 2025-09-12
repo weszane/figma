@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { U } from "../905/807535";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
@@ -49,7 +49,7 @@ export function $$x0({
   let w = useCallback(() => {
     x && t(WhiteboardIntegrationType[x]);
   }, [t, x]);
-  let j = hS({
+  let j = useModalManager({
     open: !0,
     onClose: r,
     preventUserClose: !0

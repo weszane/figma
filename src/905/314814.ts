@@ -6,7 +6,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
 import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
 import { bL, Rq } from "../905/38914";
 import { nB, r1, wi, jk } from "../figma_app/272243";
@@ -88,7 +88,7 @@ function z(e) {
 }
 function H(e) {
   let t = useDispatch();
-  let i = hS(e);
+  let i = useModalManager(e);
   let d = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });

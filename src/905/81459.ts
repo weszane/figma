@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { gN } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { hideModal } from "../905/156213";
-import { F as _$$F } from "../905/642505";
+import { fileImporter } from "../905/642505";
 import { jd } from "../figma_app/528509";
 import { W } from "../905/39853";
 import { cu, zX, pl, MS } from "../905/615657";
@@ -24,14 +24,14 @@ import { aW, sK } from "../figma_app/598018";
 import { kI, Y5, mO, dv, NU } from "../905/163189";
 zip.workerScriptsPath = "/js/zip/";
 let $$C6 = createOptimistThunk(async e => {
-  if (!_$$F) return;
+  if (!fileImporter) return;
   let t = e.getState();
   if (t.fileImport.isProcessingFile) return;
   e.dispatch($$M5());
   let i = t.fileImport.queue[0];
   if (void 0 === i) return;
   let o = t.fileImport.files[i];
-  if (!o || kI(o.name) && t.fileImport.step !== Y5.FILE_IMPORT_WITH_CONFIRMED_PDF || _$$F.hasCanceled()) return;
+  if (!o || kI(o.name) && t.fileImport.step !== Y5.FILE_IMPORT_WITH_CONFIRMED_PDF || fileImporter.hasCanceled()) return;
   if (o.status === mO.FAILURE) {
     e.dispatch(U());
     return;
@@ -136,7 +136,7 @@ let $$C6 = createOptimistThunk(async e => {
     let n = await W(e, {
       basename: _,
       extension: I
-    }, getFeatureFlags(), _$$F, o, L, t.fileImport.selectedPdfType, T);
+    }, getFeatureFlags(), fileImporter, o, L, t.fileImport.selectedPdfType, T);
     let r = {
       id: i,
       ...(n.file ? {
@@ -177,7 +177,7 @@ let $$C6 = createOptimistThunk(async e => {
       "string" == typeof t && (t = Error(t));
       e.dispatch($$O10({
         id: i,
-        status: _$$F.hasCanceled() ? mO.CANCELED : mO.FAILURE,
+        status: fileImporter.hasCanceled() ? mO.CANCELED : mO.FAILURE,
         message: t && t.message ? t.message + "" : getI18nString("fullscreen.file_import.internal_error_please_try_again_later")
       }));
       let n = t.inferredFormat;
@@ -188,7 +188,7 @@ let $$C6 = createOptimistThunk(async e => {
         extension: I,
         format: L,
         worked: !1,
-        canceled: _$$F.hasCanceled(),
+        canceled: fileImporter.hasCanceled(),
         uploadFailed: r.imageUploadError || !1,
         teamId: D
       }, {
@@ -198,7 +198,7 @@ let $$C6 = createOptimistThunk(async e => {
         format: L,
         teamId: D
       }), !(t instanceof zX)) {
-        if (_$$F.hasCanceled()) return;
+        if (fileImporter.hasCanceled()) return;
         if (!t.hasOwnProperty("reportError") || t.reportError) {
           let e = t.warnings;
           if (e?.length > 0) for (let t of e) logWarning("import", t);
@@ -221,7 +221,7 @@ let $$O10 = createActionCreator("FILE_IMPORT_UPDATE_ITEM");
 let $$D7 = createActionCreator("FILE_IMPORT_ADD_TO_QUEUE");
 let $$L11 = createActionCreator("FILE_IMPORT_CLEAR_QUEUE");
 let $$F15 = createOptimistThunk(e => {
-  if (!_$$F) return;
+  if (!fileImporter) return;
   let {
     fileImport
   } = e.getState();
@@ -252,7 +252,7 @@ let $$F15 = createOptimistThunk(e => {
     e.onload = () => {};
     e.abort();
   });
-  _$$F.cancelConversion();
+  fileImporter.cancelConversion();
   e.dispatch($$L11());
   e.dispatch(U());
   (function (e) {

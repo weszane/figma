@@ -33,7 +33,7 @@ import { a as _$$a, j as _$$j } from "../1577/143479";
 import { IK } from "../905/521428";
 import { HG, hE, bL, O6 } from "../905/598775";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E2 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { a as _$$a2 } from "../905/964520";
 import H from "../vendor/197638";
 import { UF } from "../905/403166";
@@ -403,7 +403,7 @@ function ek(e) {
     }) : null, jsx(e_, {
       avatars: notification.avatars,
       icon: notification.icon
-    }), notification.is_unread ? jsx(_$$E2, {
+    }), notification.is_unread ? jsx(ScreenReaderOnly, {
       children: i
     }) : null, e.children]
   });

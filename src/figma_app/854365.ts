@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { g as _$$g } from "../905/125190";
@@ -18,7 +18,7 @@ let $$y0 = registerModal($$T1);
 let b = buildUploadUrl("6d9d43af72441d7be4344d8d679d852139ebfaf7");
 export function $$T1(e) {
   let t = useDispatch();
-  let r = hS(e);
+  let r = useModalManager(e);
   let {
     hideCTA,
     team,

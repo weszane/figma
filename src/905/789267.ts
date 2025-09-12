@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { J } from "../905/614223";
@@ -51,7 +51,7 @@ export let $$N0 = registerModal(function ({
   let G = async e => {
     M || (j(!0), await t(e, B), N?.(e), j(!1));
   };
-  let z = hS({
+  let z = useModalManager({
     open: C,
     onClose: () => {
       Cu({

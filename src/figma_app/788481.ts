@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { QB, y_, bL, Rz, rA, y$, ke } from "../905/174266";
-import { E as _$$E } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { g as _$$g } from "../905/125190";
 import { g as _$$g2 } from "../905/757007";
 import { W } from "../905/569454";
@@ -69,7 +69,7 @@ function U({
   srOnly: t,
   children: r
 }) {
-  return t ? jsx(_$$E, {
+  return t ? jsx(ScreenReaderOnly, {
     children: r
   }) : jsx("span", {
     ...Ay.props(e && M.offscreen),
@@ -171,7 +171,7 @@ export function $$B0(e) {
         testId: F.message,
         children: [jsx("span", {
           children: E
-        }), y && jsx(_$$E, {
+        }), y && jsx(ScreenReaderOnly, {
           children: y
         }), jsx("span", {
           children: b

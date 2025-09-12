@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, createContext, useState, useRef, useMemo, useContext, useCallback, useEffect, useLayoutEffect, Fragment as _$$Fragment } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { r as _$$r } from "../905/840133";

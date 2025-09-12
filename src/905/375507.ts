@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, createRef, PureComponent, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
@@ -49,7 +49,7 @@ import { A as _$$A2 } from "../svg/562672";
 import { A as _$$A3 } from "../svg/57540";
 import { throwTypeError } from "../figma_app/465776";
 import { K as _$$K2 } from "../905/443068";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { J as _$$J2 } from "../905/614223";
 import { useSubscription } from "../figma_app/288654";
 import { P as _$$P } from "../905/347284";
@@ -831,7 +831,7 @@ class eN extends PureComponent {
       onClick: this.props.canCheck ? this.handleRowClick : void 0,
       children: [jsx("div", {
         className: this.props.shouldShowCheckbox ? eI : "shared_fonts_modal_content--actionColumnInactive--kFWMk shared_fonts_modal_content--actionColumn--NUqAH table--column--974RA",
-        children: this.props.canCheck && jsx(_$$o, {
+        children: this.props.canCheck && jsx(EventShield, {
           eventListeners: ["onClick"],
           children: jsx(Checkbox, {
             label: jsx(HiddenLabel, {
@@ -1160,7 +1160,7 @@ eM.fontLoadPromise = null;
 eM.loadedFonts = !1;
 let $$ej0 = eM;
 let eU = registerModal(function (e) {
-  let t = hS({
+  let t = useModalManager({
     ...e,
     preventUserClose: !0
   });
@@ -1248,7 +1248,7 @@ let eB = registerModal(function (e) {
   let {
     onWarningDismissed
   } = e;
-  let i = hS(e);
+  let i = useModalManager(e);
   let d = useSelector(e => e.sharedFonts);
   let c = FC();
   let p = d.warnings[0];
@@ -1295,7 +1295,7 @@ let eB = registerModal(function (e) {
   }) : null;
 });
 let eV = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let i = useDispatch();
   let d = Object.keys(useSelector(e => e.sharedFonts).fontsToDelete).length;
   let c = useCallback(() => {
@@ -1333,7 +1333,7 @@ let eV = registerModal(function (e) {
   });
 });
 let eG = registerModal(function (e) {
-  let t = hS({
+  let t = useModalManager({
     ...e,
     preventUserClose: !0
   });

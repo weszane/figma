@@ -10,9 +10,9 @@ import { fu } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { Tr } from "../1250/158057";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { l as _$$l } from "../905/479687";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { B as _$$B } from "../1250/314515";
 import { T as _$$T } from "../7021/675372";
 import { wo } from "../figma_app/753501";
@@ -100,7 +100,7 @@ javascript:(function()%7Bfunction%20callback()%7BCodeConnect%3F.default%3F.init(
   let n = !e;
   return jsx("div", {
     className: "bookmarklet--bookmarklet--IqIwW",
-    children: jsx(_$$_, {
+    children: jsx(LinkPrimitive, {
       className: "bookmarklet--link--LNBaD",
       href: t,
       htmlAttributes: {

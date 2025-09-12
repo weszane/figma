@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, Component } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, r1, nB } from "../figma_app/272243";
 import { A as _$$A } from "../905/920165";
@@ -23,7 +23,7 @@ let $$x0 = registerModal(function (e) {
   let t = useDispatch();
   let i = useContext(uW);
   let o = useSelector(e => e.avatarEditorState);
-  let l = hS(e);
+  let l = useModalManager(e);
   return jsx(x, {
     isLoading: o.status !== hv.POSITIONING,
     children: () => jsx(w, {

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { E as _$$E } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { G } from "../905/289770";
 import { P } from "../vendor/348225";
 import { N as _$$N } from "../vendor/930821";
@@ -500,7 +500,7 @@ function y({
       display: "flex",
       alignItems: "baseline"
     },
-    children: [jsx(_$$E, {
+    children: [jsx(ScreenReaderOnly, {
       "aria-live": "polite",
       children: c
     }), jsx("div", {

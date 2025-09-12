@@ -129,19 +129,19 @@ import { LN as _$$LN, Kq } from "../905/941249";
 import { A as _$$A4 } from "../quill_composer/816110";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { CheckboxPrimitive } from "../905/549791";
 import { g as _$$g3 } from "../905/125190";
 import { C as _$$C } from "../905/520159";
-import { E as _$$E2 } from "../905/172252";
-import { hS, bL } from "../905/437088";
+import { ScreenReaderOnly } from "../905/172252";
+import { useModalManager, ModalRoot } from "../905/437088";
 import { bL as _$$bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { wY } from "../figma_app/708845";
 import { getI18nResourceKey } from "../905/528121";
 import { b as _$$b3, bL as _$$bL2, mc, q7 } from "../figma_app/860955";
 import { r as _$$r3 } from "../905/571562";
-import { J as _$$J4 } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { Tq, B1, Vb, Q5, sJ, QS, vz, rX as _$$rX, EK, Kz as _$$Kz } from "../9864/183809";
 import { W as _$$W } from "../905/522628";
 import { $ as _$$$ } from "../905/834575";
@@ -3056,7 +3056,7 @@ function tR(e) {
   let _ = jsx("span", {
     ..._$$Ay2.props(tT.standardDisclaimer),
     children: renderI18nText("new_user_experience.what_is_your_name.tos_agreement", {
-      tos_link: jsx(_$$_, {
+      tos_link: jsx(LinkPrimitive, {
         href: "/legal/tos",
         newTab: !0,
         className: "x1quhyk7 x1bvjpef",
@@ -3498,7 +3498,7 @@ function tU(e) {
       style: {
         width: `${c}px`
       }
-    }), jsx(_$$E2, {
+    }), jsx(ScreenReaderOnly, {
       children: renderI18nText("nux.progress_indicator.steps", {
         currentStep: o + 1,
         totalSteps: l
@@ -3812,7 +3812,7 @@ function t7({
       e(!1);
     }
   };
-  return jsx(_$$J4, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(_$$bL2, {
       manager,
       children: jsxs("div", {
@@ -4096,7 +4096,7 @@ function it({
   });
 }
 function ii() {
-  return jsx(_$$J4, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsxs("div", {
       ...xk(ie.parentContainer),
       children: [jsx("div", {
@@ -4296,7 +4296,7 @@ function ip(e) {
     logoRef: c
   });
   let x = pV("", e.hasFigJamIntent);
-  let h = hS({
+  let h = useModalManager({
     open: !0,
     onClose: () => {
       e.dismissModal();
@@ -4308,7 +4308,7 @@ function ip(e) {
       let e = a.current?.querySelector("h1");
       e ? e.focus() : a.current?.querySelector(`[data-testid="${F$.question}"]`)?.focus();
     }
-  }, [i]), e.question.value) ? r ? jsx(ii, {}) : jsx(bL, {
+  }, [i]), e.question.value) ? r ? jsx(ii, {}) : jsx(ModalRoot, {
     manager: h,
     theme: {
       root: "xh8yej3"
@@ -4394,7 +4394,7 @@ function im(e) {
     leftPanelRef: r,
     logoRef: t
   });
-  let l = hS({
+  let l = useModalManager({
     open: !0,
     onClose: () => {
       e.dismissModal();

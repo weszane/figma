@@ -1,7 +1,7 @@
 import _require2 from "../vendor/250242";
 import _require from "../vendor/724191";
 import { useContext, useMemo } from "react";
-import { DynamicConfig, EvaluationReason, Layer } from "../vendor/625526";
+import { DynamicConfig, EvaluationReason, Layer } from "statsig-js";
 var i = this && this.__importDefault || function (e) {
   return e && e.__esModule ? e : {
     default: e

@@ -17,7 +17,7 @@ import { Ju } from "../905/712921";
 import { e0 } from "../905/696396";
 import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n, IK } from "../905/521428";
@@ -46,7 +46,7 @@ let R = registerModal(function (e) {
     open,
     onClose
   } = e;
-  let d = hS({
+  let d = useModalManager({
     open,
     onClose
   });
@@ -169,7 +169,7 @@ let H = registerModal(function (e) {
     tier,
     teamId
   } = e;
-  let u = hS({
+  let u = useModalManager({
     open,
     onClose
   });

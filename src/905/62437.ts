@@ -22,7 +22,7 @@ import { FEditorType } from "../figma_app/53721";
 import { fileActionEnum } from "../figma_app/630077";
 import { isBranchView } from "../905/218608";
 import { $A } from "../905/782918";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -34,7 +34,7 @@ import { y as _$$y } from "../figma_app/504415";
 import { S as _$$S } from "../905/262176";
 function $$D(e) {
   let t = useDispatch();
-  let i = hS(e);
+  let i = useModalManager(e);
   let [s, d] = useState(!1);
   let u = selectCurrentFile();
   let h = u?.canEdit;
@@ -101,7 +101,7 @@ function $$D(e) {
 $$D.displayName = "UndoMergeModal";
 let L = registerModal($$D, "UndoMergeModal");
 let F = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let {
     onClose,
     onConfirm

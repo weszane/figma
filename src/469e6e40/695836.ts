@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, Fragment as _$$Fragment, useCallback, useMemo, useState } from "react";
-import { fP, mc } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { K } from "../905/443068";
 import { $n } from "../905/521428";
 import { S as _$$S } from "../905/711470";
@@ -497,7 +497,7 @@ export function $$B0({
   let {
     getTriggerProps,
     getContainerProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: h,
     onOpenChange: f,
     type: "dialog",
@@ -554,7 +554,7 @@ export function $$B0({
         ...getTriggerProps(),
         "data-onboarding-key": _,
         children: jsx(_$$S, {})
-      }), jsx(mc, {
+      }), jsx(PopoverPrimitiveContainer, {
         ...getContainerProps({
           style: {
             boxShadow: "var(--elevation-500)",

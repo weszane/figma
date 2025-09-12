@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { g as _$$g } from "../905/749786";
+import { useDialogClose } from "../905/749786";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { setupAutofocusHandler } from "../905/128376";
 import { Rq, bL } from "../905/38914";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { zd, Bb, B7 } from "../905/651696";
@@ -25,7 +25,7 @@ import { _ as _$$_ } from "../905/799322";
 import { t as _$$t2 } from "../905/751495";
 import { Hx, G6, _Z, z3 } from "../figma_app/639088";
 let k = () => {
-  let e = _$$g();
+  let e = useDialogClose();
   return () => e({
     source: "other"
   });
@@ -243,7 +243,7 @@ function O({
 }
 export let $$D0 = registerModal(function (e) {
   let t = selectCurrentUser();
-  let i = hS(e);
+  let i = useModalManager(e);
   return t ? jsx(O, {
     user: t,
     manager: i,

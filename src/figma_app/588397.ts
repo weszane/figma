@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, memo, forwardRef, useContext } from "react";
 import { useSelector } from "react-redux";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { E as _$$E } from "../905/632989";
-import { E as _$$E2 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { Fullscreen } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
 import u from "classnames";
@@ -256,7 +256,7 @@ let en = memo(forwardRef(function (e, t) {
     style: p,
     "data-testid": e.testId,
     ...y,
-    children: jsx(_$$o, {
+    children: jsx(EventShield, {
       eventListeners: ["onMouseUp"],
       children: e.children
     })
@@ -489,7 +489,7 @@ function eo({
       "data-tooltip-hide-immediately": !0,
       "aria-hidden": !0,
       children: t
-    }), jsx(_$$E2, {
+    }), jsx(ScreenReaderOnly, {
       children: r
     })]
   });

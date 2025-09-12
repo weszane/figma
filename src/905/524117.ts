@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import s from "classnames";
 import { Point } from "../905/736624";
 import { lg } from "../figma_app/976749";

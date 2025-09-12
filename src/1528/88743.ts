@@ -20,13 +20,13 @@ import { o as _$$o } from "../1528/709529";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { selectCurrentFile } from "../figma_app/516028";
 import { isExportRestricted } from "../figma_app/12796";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { useSingleEffect } from "../905/791079";
 import { k as _$$k2 } from "../905/582200";
 import { $ as _$$$ } from "../1528/660656";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { h as _$$h2 } from "../905/207101";
 import { t9 } from "../figma_app/334505";
 import { hg, u7 } from "../figma_app/425489";
@@ -688,7 +688,7 @@ function eu({
   });
 }
 let ep = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let n = useDispatch();
   let i = eY();
   let o = function () {

@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB, Y9, hE, wi, jk } from "../figma_app/272243";
 import { resourceUtils } from "../905/989992";
@@ -105,7 +105,7 @@ export let $$V0 = registerModal(function (e) {
 }, "publish-components-upsell");
 function G(e) {
   let t = _$$R();
-  let i = hS({
+  let i = useModalManager({
     onClose: lQ,
     open: !0,
     preventUserClose: !0
@@ -164,7 +164,7 @@ function z(e) {
   let i = () => {
     t(hideModal());
   };
-  let r = hS({
+  let r = useModalManager({
     onClose: i,
     open: !0
   });

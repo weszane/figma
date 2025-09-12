@@ -7,7 +7,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { $n } from "../905/521428";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import x from "../vendor/656470";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
@@ -243,7 +243,7 @@ function V({
   });
 }
 export function $$X1(e) {
-  let a = hS(e);
+  let a = useModalManager(e);
   let {
     unsyncedFiles,
     localUnsyncedFiles
@@ -263,7 +263,7 @@ export function $$X1(e) {
   }) : null;
 }
 function z(e) {
-  let a = hS(e);
+  let a = useModalManager(e);
   let s = useDispatch();
   let [i, o] = useState(!1);
   let [r, x] = useState(!1);

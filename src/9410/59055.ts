@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useState, useMemo, useEffect, useRef, forwardRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { hS, bL } from "../905/437088";
+import { useModalManager, ModalRoot } from "../905/437088";
 import { Fullscreen, AppStateTsApi, Multiplayer } from "../figma_app/763686";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
@@ -158,7 +158,7 @@ let R = memo(function (e) {
     return a || !i && e;
   }(nodeSelected, u);
   let y = Xr(_$$n);
-  let b = hS({
+  let b = useModalManager({
     open: isEmbedMaximized,
     onClose: () => y({
       type: "MINIMIZE"
@@ -200,7 +200,7 @@ function D(e) {
     manager,
     modalTargetRef
   } = e;
-  return jsxs(bL, {
+  return jsxs(ModalRoot, {
     manager,
     theme: {
       backdrop: "embed_overlay--embedModalBackdrop--GznWd",

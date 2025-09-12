@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
-import { o } from "../905/821217";
+import { EventShield } from "../905/821217";
 export function $$a0({
   children: e
 }) {
-  return jsx(o, {
+  return jsx(EventShield, {
     eventListeners: ["onFocus"],
     display: "contents",
     children: e

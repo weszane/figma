@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, forwardRef } from "react";
-import { findDOMNode, createPortal } from "../vendor/944059";
-import { J as _$$J } from "../905/341359";
+import { findDOMNode, createPortal } from "react-dom";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { memoizeByArgs } from "../figma_app/815945";
 import l from "classnames";
 import { parsePxInt } from "../figma_app/783094";
@@ -767,7 +767,7 @@ let er = class e extends RecordingPureComponent {
         children: t ? this.renderAsSubmenu() : this.renderAsRootMenu()
       });
     } else console.warn("MultilevelDropdownInner rendered directly with no items, autofocus will not work");
-    return this.props.shouldUsePortal ? (e = jsx(_$$J, {
+    return this.props.shouldUsePortal ? (e = jsx(UI3ConditionalWrapper, {
       children: e
     }), createPortal(e, document.body)) : e;
   }

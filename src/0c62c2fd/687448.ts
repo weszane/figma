@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -164,7 +164,7 @@ export function $$U0({
       C(!1);
     }
   }, [r, A, T, E]);
-  let F = hS({
+  let F = useModalManager({
     open: w,
     onClose: T
   });

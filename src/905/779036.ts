@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useCallback } from "react";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { K } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { HiddenLabel } from "../905/270045";
@@ -38,7 +38,7 @@ export function $$y0({
   let b = useCallback(() => {
     l("");
   }, [l]);
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onMouseDown"],
     children: jsxs("div", {
       className: ON,

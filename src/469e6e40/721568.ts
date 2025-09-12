@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId } from "react";
 import { HiddenLabel } from "../905/270045";
-import { l9 } from "../905/408073";
+import { SelectPrimitiveTrigger } from "../905/408073";
 import { k } from "../905/44647";
 import { r as _$$r } from "../905/571562";
 import d from "classnames";
@@ -35,7 +35,7 @@ export function $$b1(e) {
     children: [jsx(HiddenLabel, {
       htmlFor: t,
       children: e.ariaLabel
-    }), jsxs(l9, {
+    }), jsxs(SelectPrimitiveTrigger, {
       id: t,
       className: g,
       disabled: e.disabled,

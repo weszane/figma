@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo, useState, useRef, useImperativeHandle, useCallback } from "react";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import s from "classnames";
 import { formatNumber } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -96,7 +96,7 @@ let $$y0 = forwardRef(function ({
       N.current?.(e);
     }
   }), []);
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     display: "contents",
     eventListeners: ["onKeyDown"],
     children: jsx("div", {

@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
@@ -20,7 +20,7 @@ export let $$y0 = registerModal(function (e) {
     localPlugin
   } = e;
   let r = useDispatch();
-  let y = hS({
+  let y = useModalManager({
     open: e.open,
     onClose: e.onClose
   });

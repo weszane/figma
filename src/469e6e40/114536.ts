@@ -25,7 +25,7 @@ import { showModalHandler } from "../905/156213";
 import { selectUser } from "../905/372672";
 import { Ib } from "../905/129884";
 import { lQ } from "../905/934246";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -35,7 +35,7 @@ import { registerModal } from "../905/102752";
 import { l as _$$l } from "../469e6e40/774192";
 import { J as _$$J } from "../905/129695";
 import { a as _$$a2 } from "../905/5627";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { VisualBellIcon } from "../905/576487";
 import { d as _$$d } from "../905/44199";
 import { e as _$$e2 } from "../905/393279";
@@ -77,7 +77,7 @@ function D() {
   });
 }
 let F = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let a = useDispatch();
   let [r, l] = useState(!1);
   let [o, d] = useState(!1);
@@ -308,7 +308,7 @@ function V(e) {
         })
       }), jsx($n, {
         onClick: () => {
-          r || Dk(e.dnsToken).then(() => {
+          r || copyTextToClipboard(e.dnsToken).then(() => {
             l(!0);
             null === a.current && (a.current = setTimeout(() => {
               l(!1);
@@ -352,7 +352,7 @@ function H(e) {
   });
 }
 let Y = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   return jsx(bL, {
     manager: t,
     width: "lg",
@@ -496,7 +496,7 @@ let Q = registerModal(function (e) {
   var t;
   var a;
   var r;
-  let l = hS(e);
+  let l = useModalManager(e);
   let o = useDispatch();
   let [d, _] = useState({
     inputValue: "",
@@ -929,7 +929,7 @@ let eS = {
 let eO = registerModal(function (e) {
   let t = useDispatch();
   let [a, r] = useState(!1);
-  let l = hS(e);
+  let l = useModalManager(e);
   let o = async () => {
     r(!0);
     try {
@@ -1037,7 +1037,7 @@ let eO = registerModal(function (e) {
   });
 }, "REMOVE_DOMAIN_MODAL");
 let eL = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let a = function (e, t) {
     let a = _$$z.verifyOrgDomains;
     return J(e, t.map(({
@@ -1247,7 +1247,7 @@ function eq({
     }));
   }, [l, t.id, e, a]);
   let d = useCallback(() => {
-    Dk(t.domain).then(() => {
+    copyTextToClipboard(t.domain).then(() => {
       l(VisualBellActions.enqueue({
         type: "copy-org-domain",
         message: getI18nString("domain_management.copy_domains.success", {
@@ -1423,7 +1423,7 @@ function e$(e) {
             domainCount: e.length
           }),
           onClick: () => {
-            Dk(e.map(({
+            copyTextToClipboard(e.map(({
               domain: e
             }) => e).join("; ")).then(() => {
               s(VisualBellActions.enqueue({

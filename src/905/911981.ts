@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
-import { VM } from "../905/472756";
+import { useAriaConnection } from "../905/472756";
 import { defaultComponentAttribute } from "../905/577641";
 export let $$l0 = forwardRef(({
   className: e,
@@ -12,7 +12,7 @@ export let $$l0 = forwardRef(({
   let {
     id,
     isRegistered
-  } = VM("description", {
+  } = useAriaConnection("description", {
     providedId: i
   });
   return jsx("strong", {

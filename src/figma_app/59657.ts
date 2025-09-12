@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { Y9, hE, nB, wi, jk, vo } from "../figma_app/272243";
 import { $n } from "../905/521428";
 import { bL } from "../905/38914";
@@ -13,7 +13,7 @@ import { section, sectionTitle, description, jsonInput, error, complementNote, c
 let m = "figma_ff_bisector_state";
 let $$g1 = "FeatureFlagBisectorModal";
 let $$f0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let r = useDispatch();
   let [_, g] = useState("");
   let [f, E] = useState("");
@@ -52,7 +52,7 @@ let $$f0 = registerModal(function (e) {
           t[r] = n;
           continue;
         }
-        if ("object" == typeof n && n && "value" in n && "boolean" == typeof n.value) t[r] = n.value; else {
+        if ("object" == typeof n && n && "value" in n && "boolean" == typeof n.value) t[r] = n.value;else {
           E(`Value for "${r}" must be a boolean`);
           continue;
         }

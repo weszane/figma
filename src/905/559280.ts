@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component, useCallback } from "react";
 import { lQ } from "../905/934246";
 import { i as _$$i } from "../905/718764";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
@@ -394,7 +394,7 @@ function N({
     i?.();
     a();
   }, [i, a, s]);
-  let u = hS({
+  let u = useModalManager({
     open: !0,
     onClose: c
   });
@@ -413,7 +413,7 @@ function P({
   children: e,
   onDismissModal: t
 }) {
-  let i = hS({
+  let i = useModalManager({
     open: !0,
     onClose: t,
     preventUserClose: !0

@@ -101,7 +101,7 @@ import { L as _$$L } from '../905/408237';
 import { A as _$$A8 } from '../905/408320';
 import { browserCapabilities } from '../905/409121';
 import { rq as _$$rq } from '../905/425180';
-import { hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { N as _$$N6 } from '../905/438674';
 import { W as _$$W2 } from '../905/442612';
 import { K as _$$K2 } from '../905/443068';
@@ -110,7 +110,7 @@ import { NN, w4, y1 } from '../905/445814';
 import { analyticsEventManager, getAnonymousId, trackEventAnalytics } from '../905/449184';
 import { E as _$$E7 } from '../905/453826';
 import { e as _$$e0 } from '../905/457828';
-import { b as _$$b8 } from '../905/465888';
+import { useMenu } from '../905/465888';
 import { Q as _$$Q4 } from '../905/467310';
 import { A as _$$A7 } from '../905/475480';
 import { sendHistogram } from '../905/485103';
@@ -140,7 +140,7 @@ import { VisualBellIcon } from '../905/576487';
 import { e as _$$e7 } from '../905/579635';
 import { uo as _$$uo } from '../905/581543';
 import { k as _$$k6 } from '../905/582200';
-import { Q as _$$Q3 } from '../905/586361';
+import { loadFeatureFlags } from '../905/586361';
 import { c1 as _$$c2, SW } from '../905/589717';
 import { nl as _$$nl2, H8, Pf } from '../905/590952';
 import { K as _$$K } from '../905/591700';
@@ -205,7 +205,7 @@ import { B as _$$B } from '../905/797453';
 import { Ig } from '../905/805224';
 import { MultiValueMap } from '../905/810750';
 import { $ as _$$$ } from '../905/819786';
-import { o as _$$o5 } from '../905/821217';
+import { EventShield } from '../905/821217';
 import { m as _$$m4 } from '../905/822676';
 import { F2 } from '../905/826900';
 import { AutoLayout } from '../905/470281';
@@ -398,7 +398,7 @@ import { T as _$$T2 } from '../figma_app/399971';
 import { Cj } from '../figma_app/407993';
 import { aq as _$$aq } from '../figma_app/412189';
 import { rr as _$$rr, tw as _$$tw, CL, FH, RS, zH } from '../figma_app/412796';
-import { AD } from '../figma_app/415899';
+import { FplStringsProvider } from '../figma_app/415899';
 import { R as _$$R4 } from '../figma_app/421558';
 import { fC } from '../figma_app/422471';
 import { H as _$$H6 } from '../figma_app/423008';
@@ -419,7 +419,7 @@ import { yZ } from '../figma_app/476572';
 import { $X, n6 as _$$n2, pD as _$$pD, f7, FZ, KN, LD, ZB } from '../figma_app/476677';
 import { WH } from '../figma_app/485258';
 import { nz as _$$nz } from '../figma_app/492354';
-import { _ as _$$_, a as _$$a } from '../figma_app/496441';
+import { LinkPrimitive, LinkPrimitiveProvider } from '../figma_app/496441';
 import { zj } from '../figma_app/502363';
 import { p as _$$p4 } from '../figma_app/502587';
 import { wG } from '../figma_app/504823';
@@ -578,7 +578,7 @@ import { P as _$$P } from '../vendor/348225';
 import { useSelector, connect, useStore, useDispatch } from 'react-redux';
 import { useAtomValue } from '../vendor/525001';
 import { N as _$$N7 } from '../vendor/930821';
-import { flushSync } from '../vendor/944059';
+import { flushSync } from 'react-dom';
 let n;
 let i;
 let a;
@@ -754,14 +754,14 @@ function eu() {
             },
             displaySettings: !1
           })
-        }), jsx(_$$_, {
+        }), jsx(LinkPrimitive, {
           'href': '/files/recent',
           'className': ed,
           'aria-label': getI18nString('user_notifications.home'),
           'children': jsx(_$$I, {
             'aria-hidden': !0
           })
-        }), bellFeedAPIInstance && user && currentOrgId && jsx(_$$_, {
+        }), bellFeedAPIInstance && user && currentOrgId && jsx(LinkPrimitive, {
           'href': `/files/${currentOrgId}/user/${user.id}/settings?tab=notifications`,
           'className': ed,
           'aria-label': getI18nString('user_notifications.settings'),
@@ -4003,7 +4003,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       }) : jsx('div', {
         className: 'survey_view--fadeIn--CPaie',
         children: i
-      }), !e.hideCloseButton && jsx(_$$o5, {
+      }), !e.hideCloseButton && jsx(EventShield, {
         eventListeners: ['onMouseDown'],
         children: jsx('div', {
           className: 'survey_view--closeButton--Z6aRE',
@@ -4823,7 +4823,7 @@ function oZ({
   let [t, r] = useState(!1);
   let n = useDispatch();
   let i = getAtomMutate(oz);
-  let a = hS({
+  let a = useModalManager({
     preventUserClose: !0,
     open: !0,
     onClose: () => {}
@@ -5424,7 +5424,7 @@ function l3({
   let h = Tf.getAccessedAt(e);
   return jsx('li', {
     className: 'recent_files--fileListItemContainer--HM7J0',
-    children: jsxs(_$$_, {
+    children: jsxs(LinkPrimitive, {
       className: 'recent_files--fileListItem--Czr-8',
       href: i,
       onClick(t) {
@@ -7461,7 +7461,7 @@ function u8() {
   let {
     getTriggerProps,
     manager
-  } = _$$b8({
+  } = useMenu({
     offset: 8
   });
   let r = useAtomWithSubscription(NU);
@@ -8710,7 +8710,7 @@ function _A() {
     extra: t
   });
 };
-_$$Q3().fpl_sentry_reporting;
+loadFeatureFlags().fpl_sentry_reporting;
 let _x = memo(() => {
   let e = _6();
   let t = _$$N4();
@@ -8888,13 +8888,13 @@ let _C = memo(() => {
       children: jsx(_$$w2, {
         children: jsx(dB, {
           children: jsx(wG, {
-            children: jsx(_$$a, {
+            children: jsx(LinkPrimitiveProvider, {
               value: e => {
                 let t = e.currentTarget.href;
                 t && _$$e3(t, e) && e.preventDefault();
               },
               children: jsx(_$$ds, {
-                children: jsxs(AD, {
+                children: jsxs(FplStringsProvider, {
                   strings: s,
                   children: [!1, jsx(_$$tH, {
                     boundaryKey: 'InAppPage',

@@ -1,6 +1,6 @@
 import { ex } from "../905/524523";
 import { jsxs, jsx } from "react/jsx-runtime";
-import { _ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 export let $$$$r0 = ex("share_button_disabled_personal_draft", function (e) {
@@ -13,7 +13,7 @@ export let $$$$r0 = ex("share_button_disabled_personal_draft", function (e) {
       children: renderI18nText("fullscreen.toolbar.multiplayer.sharing_disabled_for_personal_drafts")
     }), jsx("div", {
       className: _$$s.bl1.hFull.inline.bSolid.colorBorderMenu.ml8.mr8.$
-    }), jsx(_, {
+    }), jsx(LinkPrimitive, {
       href: "/files/drafts-to-move",
       className: _$$s.cursorPointer.noUnderline.fontBold.colorTextTooltip.$,
       children: renderI18nText("fullscreen.toolbar.multiplayer.sharing_disabled_visit_drafts_to_move_link")

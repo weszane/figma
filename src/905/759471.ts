@@ -37,7 +37,7 @@ import { Point } from "../905/736624";
 import { Ao } from "../905/748636";
 import { bL, l9, mc, c$ as _$$c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { bL as _$$bL, RT, c$ as _$$c$2 } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { O as _$$O3 } from "../905/599243";
@@ -113,7 +113,7 @@ function X(e) {
 function Q(e) {
   return jsx(cS, {
     label: e.label,
-    input: jsx(_$$o, {
+    input: jsx(EventShield, {
       eventListeners: ["onMouseDown"],
       children: jsx(_$$q2, {
         autoFocus: !0,
@@ -133,7 +133,7 @@ function Q(e) {
   });
 }
 function J(e) {
-  let t = jsx(_$$o, {
+  let t = jsx(EventShield, {
     eventListeners: ["onMouseDown"],
     children: jsx(_$$q2, {
       value: e.value,
@@ -150,7 +150,7 @@ function J(e) {
   return jsx(Cm, {
     label: e.label,
     leftInput: t,
-    rightInput: jsx(_$$o, {
+    rightInput: jsx(EventShield, {
       eventListeners: ["onMouseDown"],
       children: jsx(X, {
         disabled: e.disabled,
@@ -181,7 +181,7 @@ function ee(e) {
   return jsxs(Id, {
     children: [jsx("div", {
       className: Z,
-      children: jsx(_$$o, {
+      children: jsx(EventShield, {
         eventListeners: ["onMouseDown"],
         children: jsxs(_$$bL, {
           legend: jsx(_$$q, {
@@ -201,7 +201,7 @@ function ee(e) {
       })
     }), "LINEAR" === e.transformModifier.repeatType && jsx(cS, {
       label: getI18nString("properties_panel.transform_modifiers.repeat.direction"),
-      input: jsx(_$$o, {
+      input: jsx(EventShield, {
         eventListeners: ["onMouseDown"],
         children: jsx("span", {
           className: Z,

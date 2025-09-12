@@ -6,113 +6,220 @@ import { analyticsEventManager } from '../905/449184'
 import { getFeatureFlags } from '../905/601108'
 import { PerfTimer } from '../905/609396'
 import { asyncExecutorSubscription } from '../905/888985'
-import { N } from '../905/972754'
+import { increment } from '../905/972754'
+import { fetchDynamicConfig } from '../3973/389215'
 import { atomStoreManager } from '../figma_app/27355'
 import { LibraryPresetSubscriptionsV2 } from '../figma_app/43951'
 import { teamLibraryCache } from '../figma_app/80990'
-import { M } from '../figma_app/155411'
+import { getProviderConfigType } from '../figma_app/155411'
 import { FAuthProviderType } from '../figma_app/191312'
-import { w0 } from '../figma_app/594947'
-import { T } from '../figma_app/856733'
+import { RegisteredAppleEulaModal } from '../figma_app/856733'
 
-var $$b1 = (e => (e.PLUGIN_INSERT_COMPONENT = 'PLUGIN_INSERT_COMPONENT', e.PLUGIN_INSERT_STATE_GROUP = 'PLUGIN_INSERT_STATE_GROUP', e.PLUGIN_INSERT_STYLE = 'PLUGIN_INSERT_STYLE', e.LIBRARY_SWAP = 'LIBRARY_SWAP', e.LOAD_COMPONENT = 'LOAD_COMPONENT', e.SWAP_TO_COMPONENT = 'SWAP_TO_COMPONENT', e.INSERT_SHARED_COMPONENT = 'INSERT_SHARED_COMPONENT', e.INSERT_SHARED_STATE_GROUP = 'INSERT_SHARED_STATE_GROUP', e.LOAD_STYLE = 'LOAD_STYLE', e.LOAD_VARIABLE = 'LOAD_VARIABLE', e.LOAD_VARIABLE_SET = 'LOAD_VARIABLE_SET', e))($$b1 || {})
-export let $$v2 = createOptimistThunk(async (e, {
-  assetLibraryKey: t,
-  onInsertAsset: i,
-  source: n,
+// Original: $$b1 - Enum-like object for plugin actions
+enum PluginAction {
+  PLUGIN_INSERT_COMPONENT = 'PLUGIN_INSERT_COMPONENT',
+  PLUGIN_INSERT_STATE_GROUP = 'PLUGIN_INSERT_STATE_GROUP',
+  PLUGIN_INSERT_STYLE = 'PLUGIN_INSERT_STYLE',
+  LIBRARY_SWAP = 'LIBRARY_SWAP',
+  LOAD_COMPONENT = 'LOAD_COMPONENT',
+  SWAP_TO_COMPONENT = 'SWAP_TO_COMPONENT',
+  INSERT_SHARED_COMPONENT = 'INSERT_SHARED_COMPONENT',
+  INSERT_SHARED_STATE_GROUP = 'INSERT_SHARED_STATE_GROUP',
+  LOAD_STYLE = 'LOAD_STYLE',
+  LOAD_VARIABLE = 'LOAD_VARIABLE',
+  LOAD_VARIABLE_SET = 'LOAD_VARIABLE_SET',
+}
+
+// Original: $$v2 - Thunk for asset insertion
+/**
+ * Creates an optimistic thunk for handling asset insertion.
+ * @param dispatch - Redux dispatch function.
+ * @param assetLibraryKey - Key for the asset library.
+ * @param onInsertAsset - Callback for inserting the asset.
+ * @param source - Source of the action.
+ * @returns A thunk function.
+ */
+export const setupPlaybackHandler = createOptimistThunk(async (dispatch: any, {
+  assetLibraryKey,
+  onInsertAsset,
+  source,
+}: {
+  assetLibraryKey: string
+  onInsertAsset: () => Promise<void>
+  source: string
 }) => {
-  let r = e.getState();
-  (await w(e.dispatch, t, n, r.userFlags, r.fonts)) && (await i())
+  const state = dispatch.getState()
+  if (await checkEulaAndFonts(dispatch, assetLibraryKey, source, state.userFlags, state.fonts)) {
+    await onInsertAsset()
+  }
 })
-export async function $$I0(e, t, i, n, r, a) {
-  if (await w(e, i, n, r, a))
-    return teamLibraryCache.getCanvas(t)
+
+// Original: $$I0 - Function for loading canvas with EULA check
+/**
+ * Loads canvas data after checking EULA and fonts.
+ * @param dispatch - Redux dispatch function.
+ * @param canvasId - ID of the canvas.
+ * @param libraryKey - Key for the library.
+ * @param userFlags - User flags object.
+ * @param fonts - Fonts object.
+ * @param source - Source of the action.
+ * @returns Canvas data or throws error.
+ */
+export async function loadCanvasWithEulaCheck(
+  dispatch: any,
+  canvasId: any,
+  libraryKey: string,
+  userFlags: any,
+  fonts: any,
+  source: string,
+): Promise<any> {
+  if (await checkEulaAndFonts(dispatch, libraryKey, source, userFlags, fonts)) {
+    return teamLibraryCache.getCanvas(canvasId)
+  }
   throw new Error('Apple EULA not accepted')
 }
-let E = async (e) => {
-  let t = LibraryPresetSubscriptionsV2.Query({
-    group: M(),
+
+// Original: E - Checks if library is Apple-based
+/**
+ * Checks if the library is associated with Apple provider.
+ * @param libraryKey - Key for the library.
+ * @returns True if Apple-based, false otherwise.
+ */
+async function isAppleLibrary(libraryKey: string): Promise<boolean> {
+  const query = LibraryPresetSubscriptionsV2.Query({
+    group: getProviderConfigType(),
   })
-  let i = await asyncExecutorSubscription(t, (e, i) => {
-    let n = atomStoreManager.get(t)
-    n.status === 'loaded' ? e(n) : n.status === 'errors' && i('Error loading presetLibraryAtom')
-  })
-  let n = i?.data?.libraryPresetSubscriptionsV2?.find(t => getResourceDataOrFallback(t.libraryKey) === e)
-  return n?.partner_type === FAuthProviderType.APPLE
+  const result = await asyncExecutorSubscription(query, (resolve, reject) => {
+    const atom = atomStoreManager.get<{ status: string }>(query)
+    if (atom.status === 'loaded') {
+      resolve(atom)
+    }
+    else if (atom.status === 'errors') {
+      reject('Error loading presetLibraryAtom')
+    }
+  }) as { data: { libraryPresetSubscriptionsV2: any[] } }
+  const subscription = result?.data?.libraryPresetSubscriptionsV2?.find(
+    (sub: any) => getResourceDataOrFallback(sub.libraryKey) === libraryKey,
+  )
+  return subscription?.partner_type === FAuthProviderType.APPLE
 }
-let x = async () => await w0('ui_kits_apple_fonts')
-async function S(e, t, i, r) {
-  if (!e || !getFeatureFlags().dse_sf_pro_font)
+
+// Original: x - Fetches dynamic config for Apple fonts
+/**
+ * Fetches dynamic configuration for Apple fonts.
+ * @returns Configuration object.
+ */
+async function fetchAppleFontsConfig(): Promise<any> {
+  return await fetchDynamicConfig('ui_kits_apple_fonts')
+}
+
+// Original: S - Gets required EULA fonts
+/**
+ * Gets the list of fonts requiring EULA acceptance.
+ * @param isApple - Whether the library is Apple-based.
+ * @param libraryKey - Key for the library.
+ * @param userFlags - User flags object.
+ * @param fonts - Fonts object.
+ * @returns Array of font keys requiring EULA.
+ */
+async function getRequiredEulaFonts(isApple: boolean, libraryKey: string, userFlags: any, fonts: any): Promise<string[]> {
+  if (!isApple || !getFeatureFlags().dse_sf_pro_font) {
     return []
-  let a = (await x()).get('fontToLibraries', {})
-  return Object.keys(a).filter((e) => {
-    if (!(a[e] || []).includes(t))
-      return !1
-    let n = kd[e]
-    if (!n)
-      return !1
-    let s = !!i[n.acceptedUserFlag]
-    let o = !!i[n.declinedUserFlag]
-    return n.fontFamilies.some(e => Rh(e, r)) && !s && !o
+  }
+  const config = await fetchAppleFontsConfig()
+  const fontToLibraries = config.get('fontToLibraries', {})
+  return Object.keys(fontToLibraries).filter((fontKey) => {
+    if (!(fontToLibraries[fontKey] || []).includes(libraryKey)) {
+      return false
+    }
+    const fontData = kd[fontKey]
+    if (!fontData) {
+      return false
+    }
+    const accepted = !!userFlags[fontData.acceptedUserFlag]
+    const declined = !!userFlags[fontData.declinedUserFlag]
+    return fontData.fontFamilies.some((family: string) => Rh(family, fonts)) && !accepted && !declined
   })
 }
-async function w(e, t, i, n, r) {
-  let a = new PerfTimer('APPLE_EULA_TIMER', {
-    key: N().toString(),
+
+// Original: w - Main EULA and font check function
+/**
+ * Checks EULA acceptance and handles font EULAs.
+ * @param dispatch - Redux dispatch function.
+ * @param libraryKey - Key for the library.
+ * @param source - Source of the action.
+ * @param userFlags - User flags object.
+ * @param fonts - Fonts object.
+ * @returns True if all checks pass, false otherwise.
+ */
+async function checkEulaAndFonts(dispatch: any, libraryKey: string, source: string, userFlags: any, fonts: any): Promise<boolean> {
+  const timer = new PerfTimer('APPLE_EULA_TIMER', {
+    key: increment().toString(),
   })
-  a.start()
-  let o = await E(t)
-  let d = o && !n.apple_eula_accepted
-  let u = await S(o, t, n, r)
+  timer.start()
+
+  const isApple = await isAppleLibrary(libraryKey)
+  const requiresMainEula = isApple && !userFlags.apple_eula_accepted
+  const requiredFonts = await getRequiredEulaFonts(isApple, libraryKey, userFlags, fonts)
+
   analyticsEventManager.trackDefinedEvent('preset_libraries.apple_eula_check_performed', {
-    duration: a.stop(),
-    source: i,
+    duration: timer.stop(),
+    source,
   })
-  let m = (d ? 1 : 0) + u.length
-  let h = 0
-  if (d && !(await (function (e, t = {}) {
-    return new Promise((i) => {
-      e(showModalHandler({
-        type: T,
-        showModalsBeneath: !0,
-        data: {
-          eulaShown: t.eulaShown,
-          eulasToShow: t.eulasToShow,
-          onAgree: () => {
-            i({
-              accepted: !0,
-              type: 'component',
-            })
-          },
-          onDecline: () => {
-            i({
-              accepted: !1,
-              type: 'component',
-            })
-          },
-        },
-      }))
+
+  const totalEulas = (requiresMainEula ? 1 : 0) + requiredFonts.length
+  let eulaShown = 0
+
+  // Handle main EULA
+  if (requiresMainEula) {
+    const result = await showEulaModal(dispatch, {
+      eulasToShow: totalEulas,
+      eulaShown: ++eulaShown,
     })
-  }(e, {
-    eulasToShow: m,
-    eulaShown: ++h,
-  }))).accepted) {
-    return !1
+    if (!result.accepted) {
+      return false
+    }
   }
-  for (let t of u) {
-    var f
-    await (f = {
-      eula: t,
-      eulasToShow: m,
-      eulaShown: ++h,
+
+  // Handle font EULAs
+  for (const font of requiredFonts) {
+    const result = await oT(dispatch, {
+      eula: font,
+      eulasToShow: totalEulas,
+      eulaShown: ++eulaShown,
       trigger: 'ui_kit',
-    }, oT(e, f).then(e => ({
-      accepted: e,
-      type: 'font',
-    })))
+    })
+    if (!result) {
+      return false
+    }
   }
-  return !0
+
+  return true
 }
-export const e9 = $$I0
-export const jE = $$b1
-export const vQ = $$v2
+
+// Helper for showing EULA modal
+/**
+ * Shows the EULA modal and returns the result.
+ * @param dispatch - Redux dispatch function.
+ * @param options - Options for the modal.
+ * @returns Promise resolving to acceptance result.
+ */
+function showEulaModal(dispatch: any, options: any): Promise<{ accepted: boolean, type: string }> {
+  return new Promise((resolve) => {
+    dispatch(showModalHandler({
+      type: RegisteredAppleEulaModal,
+      showModalsBeneath: true,
+      data: {
+        eulaShown: options.eulaShown,
+        eulasToShow: options.eulasToShow,
+        onAgree: () => resolve({ accepted: true, type: 'component' }),
+        onDecline: () => resolve({ accepted: false, type: 'component' }),
+      },
+    }))
+  })
+}
+
+// Updated exports to match refactored names
+export const e9 = loadCanvasWithEulaCheck
+export const jE = PluginAction
+export const vQ = setupPlaybackHandler

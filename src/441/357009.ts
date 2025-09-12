@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback, memo, useState, useEffect } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { lQ } from "../905/934246";
 import { ViewType, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";

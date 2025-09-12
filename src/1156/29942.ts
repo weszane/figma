@@ -82,7 +82,7 @@ import { RJ } from "../figma_app/869006";
 import { $Y } from "../905/918620";
 import { jT } from "../figma_app/302802";
 import { Xu, gJ, d4 } from "../figma_app/588582";
-import { fP, mc, i3 } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { e as _$$e2 } from "../905/483726";
 import { h as _$$h } from "../905/207101";
 import { Pf, H8 } from "../905/590952";
@@ -300,7 +300,7 @@ function eU() {
     getTriggerProps,
     getContainerProps,
     getArrowProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: s,
     onOpenChange: a,
     type: "dialog",
@@ -336,7 +336,7 @@ function eU() {
             children: getI18nString("figmake.deploy_nudge.init.subtitle")
           })]
         })]
-      }), jsxs(mc, {
+      }), jsxs(PopoverPrimitiveContainer, {
         ...getContainerProps({
           style: {
             boxShadow: "var(--elevation-500-modal-window)",
@@ -346,7 +346,7 @@ function eU() {
             width: "240px"
           }
         }),
-        children: [jsx(i3, {
+        children: [jsx(PopoverPrimitiveArrow, {
           ...getArrowProps()
         }), jsx("div", {
           className: "x78zum5 xkh2ocl xz9dl7a xsag5q8 xnm25rq",
@@ -1300,7 +1300,7 @@ function tX({
   let o = isDevEnvironment() ? cortexClientGeneratedRequestUuid : void 0;
   let c = !1;
   let d = !1;
-  if (error.message === T_.ATTACHMENTS_TOO_LARGE || error.message === T_.MAX_CONTENT_LENGTH_EXCEEDED || error.message === T_.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK) d = !0; else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0; else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0; else {
+  if (error.message === T_.ATTACHMENTS_TOO_LARGE || error.message === T_.MAX_CONTENT_LENGTH_EXCEEDED || error.message === T_.MAX_CONTEXT_LENGTH_EXCEEDED_IMAGE_FALLBACK) d = !0;else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0;else if (error.message === T_.PROMPT_ENHANCEMENT_FAILED) d = !0;else {
     let e = sZ(error);
     c = [_$$B.GENERIC, _$$B.OFFLINE, _$$B.NETWORK_ERROR, _$$B.RATE_LIMIT_EXCEEDED].includes(e);
     d = [_$$B.CONTENT_LENGTH_LIMIT, _$$B.UNSAFE_OR_HARMFUL_CONTENT].includes(e);
@@ -1566,7 +1566,7 @@ let tQ = forwardRef((e, t) => {
       return _$$A3(e).tz("America/Los_Angeles").isBefore(t, "month");
     }(n.updatedAt)) t(_$$b2({
       [th]: !1
-    })); else if (n) return {
+    }));else if (n) return {
       showChatSoftLimitBanner: !1
     };
     return i && i !== FPlanNameType.STARTER && i !== FPlanNameType.STUDENT ? {
@@ -1740,7 +1740,7 @@ function t0({
                 return !1;
               }(e)) > -1);
             })(t) && hH(InsertErrorType.USER_PASTED_FIGMA_LINK_IN_CHAT);
-          } catch { }
+          } catch {}
         },
         placeholder: b,
         style: {
@@ -5137,7 +5137,7 @@ export default function App() {
             ..._$$Ay()
           })).getReader();
           let n = "";
-          for (; ;) {
+          for (;;) {
             let {
               done,
               value

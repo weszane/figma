@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -9,7 +9,7 @@ import { hideModal } from "../905/156213";
 import { registerLegacyModal } from "../905/102752";
 export let $$p0 = "no-shared-instance-in-master-file-if-deleted";
 function m(e) {
-  let t = hS({
+  let t = useModalManager({
     onClose: lQ,
     open: !0,
     preventUserClose: !0

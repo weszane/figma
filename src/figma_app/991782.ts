@@ -9,7 +9,7 @@ import { k as _$$k } from "../905/443820";
 import { ox } from "../905/163832";
 import { bL as _$$bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { Uk } from "../905/691059";
+import { PopoverContext } from "../905/691059";
 import { y7 } from "../figma_app/343967";
 import { r as _$$r } from "../905/571562";
 import { A as _$$A } from "../905/24328";
@@ -358,7 +358,7 @@ let $$X0 = registerModal(function ({
         padding: 0,
         children: [jsx("div", {
           ref: d
-        }), jsx(Uk.Provider, {
+        }), jsx(PopoverContext.Provider, {
           value: d,
           children: jsx(Suspense, {
             fallback: jsx($$Y3, {}),

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { $n } from "../905/521428";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { l as _$$l } from "../figma_app/121794";
@@ -10,7 +10,7 @@ if (443 == require.j) {}
 export function $$_0(e) {
   let t = e.dispatch;
   let a = useCallback(e => {
-    Dk(e).then(() => {
+    copyTextToClipboard(e).then(() => {
       t(VisualBellActions.enqueue({
         type: "scim_api_token_copied_to_clipboard",
         message: getI18nString("org_settings.sso.copied")

@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useId, useMemo, forwardRef, useCallback, useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
@@ -82,7 +82,7 @@ import { E as _$$E } from "../905/984674";
 import { isBranch } from "../905/760074";
 import { M4 } from "../905/713695";
 import { bL as _$$bL, mc, c$ } from "../905/493196";
-import { WM, l9 } from "../905/408073";
+import { useSelectPrimitiveState, SelectPrimitiveTrigger } from "../905/408073";
 import { r as _$$r3 } from "../905/571562";
 import { g as _$$g } from "../905/687265";
 import { selectWithShallowEqual } from "../905/103090";
@@ -93,7 +93,7 @@ import { p as _$$p } from "../905/927118";
 import { useMemoStable } from "../905/19536";
 import { wA as _$$wA } from "../figma_app/167249";
 import { Nz } from "../figma_app/915774";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { B as _$$B3 } from "../905/714743";
 import { $8, Ni, md as _$$md, i4, $j, nw, Np } from "../905/737988";
 import { A as _$$A } from "../1617/316388";
@@ -415,9 +415,9 @@ let eK = forwardRef(({
 }, a) => {
   let {
     selectedItem
-  } = WM();
+  } = useSelectPrimitiveState();
   let o = selectedItem ? selectedItem.label : e ?? "";
-  return jsxs(l9, {
+  return jsxs(SelectPrimitiveTrigger, {
     ...Ay.props(eH.trigger),
     ...r,
     ref: a,
@@ -571,7 +571,7 @@ function eJ(e, t) {
   }).map(e => e.node_id);
 }
 function e4() {
-  return jsx(_$$_, {
+  return jsx(LinkPrimitive, {
     newTab: !0,
     className: $8,
     href: "https://help.figma.com/hc/articles/4404848314647",
@@ -1287,7 +1287,7 @@ function tJ(e) {
     libraryModalSessionId
   } = e;
   let h = useDispatch();
-  let g = hS(e);
+  let g = useModalManager(e);
   let _ = useRef(null);
   let [b, I] = useAtomValueAndSetter(pz);
   let [T, k] = useState("");

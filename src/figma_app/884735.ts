@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useContext, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { R as _$$R } from "../905/57445";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { U as _$$U } from "../905/708285";
@@ -124,7 +124,7 @@ export function $$H0(e) {
       children: def.name
     })]
   });
-  let ei = jsx(_$$o, {
+  let ei = jsx(EventShield, {
     eventListeners: ["onMouseDown"],
     children: jsx("div", {
       className: V_,

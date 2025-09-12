@@ -15,7 +15,7 @@ import { Vz } from "../figma_app/198840";
 import { X$ } from "../905/612685";
 import { FUserVerificationStatusType, FPublicationStatusType } from "../figma_app/191312";
 import { Ib } from "../905/129884";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { customHistory } from "../905/612521";
 import { Gc } from "../905/63728";
 import { ex } from "../905/524523";
@@ -41,7 +41,7 @@ let C = ex("hub_file_in_review", function (e) {
     e.preventDefault();
     customHistory.redirect(url, "_blank");
   });
-  return jsxs(_$$_, {
+  return jsxs(LinkPrimitive, {
     newTab: !0,
     trusted: !0,
     href: url,
@@ -69,7 +69,7 @@ let A = ex("hub_file_info", function (e) {
     e.preventDefault();
     customHistory.redirect(url, "_blank");
   });
-  return jsxs(_$$_, {
+  return jsxs(LinkPrimitive, {
     newTab: !0,
     trusted: !0,
     href: url,

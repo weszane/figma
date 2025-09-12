@@ -6,9 +6,9 @@ import { mb, ql, Jq, iL, Fi, QT } from "../905/687992";
 import { S as _$$S } from "../905/823680";
 import { p as _$$p } from "../905/185998";
 import { addEventlistenerWithCleanup, preventAndStopEvent, createCleanupExecutor } from "../905/955878";
-import { v as _$$v } from "../905/475481";
+import { mergeProps } from "../905/475481";
 import { hs, f2, WQ, T_, i_, TX } from "../905/268491";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { sj, qE } from "../905/875826";
 import { isSafari } from "../905/881471";
 import { M as _$$M } from "../905/97346";
@@ -27,7 +27,7 @@ let g = {
   current: null
 };
 let f = null;
-let _ = () => { };
+let _ = () => {};
 function A() {
   m && (m.setAttribute(p, ""), g.current && (_ = function (e, t) {
     let i = function (e) {
@@ -114,9 +114,9 @@ function A() {
   }(m, g)));
 }
 function y() {
-  m && (m.removeAttribute(p), _(), _ = () => { });
+  m && (m.removeAttribute(p), _(), _ = () => {});
 }
-let b = () => { };
+let b = () => {};
 let x = _$$A && !!document.documentElement.requestPointerLock && !isSafari;
 async function S(e) {
   let t = e.requestPointerLock();
@@ -413,7 +413,7 @@ let H = forwardRef(({
       }(e);
       let [s, o] = function (e) {
         let [t, i] = useState(!1);
-        let n = _$$v(e, {
+        let n = mergeProps(e, {
           onScrubStart() {
             i(!0);
           },
@@ -439,7 +439,7 @@ let H = forwardRef(({
           }), addEventlistenerWithCleanup(window, "blur", y));
           b = () => {
             e();
-            b = () => { };
+            b = () => {};
           };
         }(), ++h, () => {
           0 == --h && b();
@@ -495,7 +495,7 @@ let H = forwardRef(({
         let d = e => P(i, e, o, O, t.shiftKey);
         if (j.current) j.current(e => d(e).value, {
           commit: !1
-        }); else {
+        });else {
           let n = d(N.current);
           Fi(i, n.value, e) || (l(n.value, Object.assign(t, {
             commit: !1
@@ -510,11 +510,11 @@ let H = forwardRef(({
         if (j.current = null, t.cancelled) n ? n(e => e, {
           commit: !0,
           cancelled: !0
-        }) : _(N.current, t); else {
+        }) : _(N.current, t);else {
           let r = e => P(i, e, 0, O, t.shiftKey).value;
           if (n) n(r, {
             commit: !0
-          }); else {
+          });else {
             let n = r(N.current);
             (F.current || !Fi(i, n, e)) && l(n, Object.assign(t, {
               commit: !0

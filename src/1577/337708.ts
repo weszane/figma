@@ -1,14 +1,14 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fP, mc } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { u as _$$u } from "../905/65923";
 import { E as _$$E } from "../905/632989";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { L as _$$L } from "../905/704296";
 import { rgbToHsl, hslToRgb } from "../figma_app/273493";
 import { DesignGraphElements, ToolType } from "../figma_app/763686";
@@ -52,14 +52,14 @@ function V({
   let {
     getContainerProps,
     getTriggerProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: n,
     onOpenChange: o,
     type: "menu",
     softDismiss: !0
   });
   return jsxs(Fragment, {
-    children: [jsx(mc, {
+    children: [jsx(PopoverPrimitiveContainer, {
       ...getContainerProps(),
       children: jsx(_$$w, {
         color: e,
@@ -298,7 +298,7 @@ export let $$$0 = registerModal(function ({
   let l = useDispatch();
   let s = getUserId();
   let c = cD();
-  let d = hS(r);
+  let d = useModalManager(r);
   let u = dH();
   let _ = useAtomWithSubscription(_$$B);
   let f = u === DesignGraphElements.DROPPER_COLOR && _ === ToolType.EDIT_PALETTE_MODAL;

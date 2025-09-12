@@ -55,7 +55,7 @@ import { $ as _$$$ } from '../905/355181';
 import { Q as _$$Q } from '../905/363675';
 import { c as _$$c } from '../905/370443';
 import { selectUser } from '../905/372672';
-import { hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { N as _$$N } from '../905/438674';
 import { v as _$$v } from '../905/442517';
 import { k as _$$k2 } from '../905/443820';
@@ -589,7 +589,7 @@ function eA() {
 let te = registerModal(e => {
   let t = useDispatch();
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
-  let s = hS(e);
+  let s = useModalManager(e);
   return jsx(bL, {
     manager: s,
     width: 364,
@@ -628,7 +628,7 @@ let te = registerModal(e => {
 let tt = registerModal(e => {
   let t = useDispatch();
   let a = sZ();
-  let r = hS(e);
+  let r = useModalManager(e);
   let [l, o] = useState(_$$Rs());
   let d = useCallback(e => {
     trackEventAnalytics('Delete user search performed', {
@@ -685,7 +685,7 @@ let tt = registerModal(e => {
 let ta = registerModal(e => {
   let t = useDispatch();
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
-  let s = hS(e);
+  let s = useModalManager(e);
   return jsx(bL, {
     manager: s,
     width: 364,
@@ -1059,7 +1059,7 @@ let tS = registerModal(e => {
     org,
     onClose
   } = e;
-  let r = hS(e);
+  let r = useModalManager(e);
   let l = useDispatch();
   let [o, d] = useState(!org.ai_features_disabled);
   let c = eA();
@@ -1147,7 +1147,7 @@ let tN = registerModal(({
       }
     }));
   }, [r, a, t]);
-  let _ = hS({
+  let _ = useModalManager({
     open: e,
     onClose: t
   });
@@ -1206,7 +1206,7 @@ let tI = registerModal(({
 }) => {
   let a = useDispatch();
   let s = getI18nString('org_settings.ai_controls.workspace_success');
-  let r = hS({
+  let r = useModalManager({
     open: !0,
     onClose: e
   });
@@ -2734,7 +2734,7 @@ let a3 = registerModal(e => {
   let a = getI18nString('org_settings.export_controls.success');
   let r = useSelector(e => e.orgById[e.currentUserOrgId]);
   let [l, o] = useState(r.shared_container_setting?.file_export_setting ?? 'allowed');
-  let d = hS(e);
+  let d = useModalManager(e);
   let c = r.tier === FPlanNameType.ENTERPRISE;
   return jsx(bL, {
     manager: d,
@@ -2814,7 +2814,7 @@ let a8 = registerModal(({
       }
     }));
   }, [r, a]);
-  let u = hS({
+  let u = useModalManager({
     open: e,
     onClose: t
   });
@@ -2892,7 +2892,7 @@ let a6 = registerModal(({
   let s = useDispatch();
   let r = getI18nString('org_settings.export_controls.workspace_success');
   let l = useSelector(e => e.orgById[e.currentUserOrgId]);
-  let o = hS({
+  let o = useModalManager({
     open: e,
     onClose: t
   });
@@ -3703,7 +3703,7 @@ let nL = registerModal(({
       }
     }));
   }, [l, a, e]);
-  let u = hS({
+  let u = useModalManager({
     open: !0,
     onClose: e
   });
@@ -3781,7 +3781,7 @@ let nD = registerModal(({
   goBack: t
 }) => {
   let a = useDispatch();
-  let s = hS({
+  let s = useModalManager({
     open: !0,
     onClose: t
   });
@@ -3872,7 +3872,7 @@ let nU = registerModal(() => {
   let [d, c] = useState(!!t.workshop_enabled);
   let _ = (e, n) => e === formState.initialPublicLinkControlsSetting && !!t.workshop_enabled === d && n === t.shared_container_setting?.public_link_controls_max_expiration;
   let u = t.tier === r.Agb.ENTERPRISE;
-  let m = hS({
+  let m = useModalManager({
     onClose: o,
     open: !0
   });
@@ -4000,7 +4000,7 @@ let nF = registerModal(e => {
       })]
     })]
   }));
-  let o = hS({
+  let o = useModalManager({
     open: !0,
     onClose: l
   });
@@ -4270,7 +4270,7 @@ let n9 = registerModal(e => {
   useEffect(() => {
     _(d);
   }, [d]);
-  let u = hS(e);
+  let u = useModalManager(e);
   return jsx(fu, {
     name: 'Sites Publishing Toggle Modal',
     properties: {
@@ -4354,7 +4354,7 @@ let se = registerModal(e => {
   useEffect(() => {
     _(d);
   }, [d]);
-  let u = hS(e);
+  let u = useModalManager(e);
   return jsx(fu, {
     name: 'Supabase Toggle Modal',
     properties: {

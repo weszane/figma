@@ -1,17 +1,57 @@
-import { createContext, useContext } from "react";
-import { lQ } from "../905/266289";
-let a = createContext(null);
-let s = {
-  version: "ui2",
-  updateMode: lQ
-};
-let $$o1 = a.Provider;
-export function $$l2() {
-  return useContext(a);
+import { noop } from 'lodash-es'
+import { createContext, useContext } from 'react'
+
+/**
+ * ThemeContext provides theme-related state and update logic.
+ * @originalName a
+ */
+const ThemeContext = createContext<{
+  version: string
+  updateMode: () => void
+} | null>(null)
+
+/**
+ * Default theme state used when no provider is found.
+ * @originalName s
+ */
+const defaultThemeState = {
+  version: 'ui2',
+  updateMode: noop,
 }
-export function $$d0() {
-  return useContext(a) || (globalThis.process?.env?.NODE_ENV !== "test" && console.debug("No theme provider exists currently, returning defaults, but switching modes is disabled"), s);
+
+/**
+ * ThemeProvider component for supplying theme context.
+ * @originalName $$o1
+ */
+export const ThemeProvider = ThemeContext.Provider
+
+/**
+ * Returns the current theme context value.
+ * @originalName $$l2
+ */
+export function useThemeContext() {
+  return useContext(ThemeContext)
 }
-export const DP = $$d0;
-export const Dx = $$o1;
-export const lM = $$l2;
+
+/**
+ * Returns the theme context value, or defaults if no provider exists.
+ * Logs a debug message if defaults are used outside of test environment.
+ * @originalName $$d0
+ */
+export function getThemeContextOrDefault() {
+  const context = useContext(ThemeContext)
+  if (context)
+    return context
+  // eslint-disable-next-line node/prefer-global/process
+  if (globalThis.process?.env?.NODE_ENV !== 'test') {
+    console.debug(
+      'No theme provider exists currently, returning defaults, but switching modes is disabled',
+    )
+  }
+  return defaultThemeState
+}
+
+// Refactored exports to match new names
+export const DP = getThemeContextOrDefault
+export const Dx = ThemeProvider
+export const lM = useThemeContext

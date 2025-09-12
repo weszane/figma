@@ -17,7 +17,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { LibraryPresetSubscriptionsV2, SubscribedLibrariesForFile, SubscribedLibrariesForFigJamFile, SubscribedLibrariesForSlidesFile, SubscribedLibrariesForBuzzFile } from "../figma_app/43951";
 import { Nn } from "../figma_app/177636";
 import { f as _$$f } from "../figma_app/252485";
-import { M } from "../figma_app/155411";
+import { getProviderConfigType } from "../figma_app/155411";
 import { T9 } from "../figma_app/528509";
 import { useCurrentPublicPlan, useIsProOrStudentPlan } from "../figma_app/465071";
 var p = u;
@@ -99,7 +99,7 @@ export function $$D0({
   let r = !!t?.teamId;
   let a = T9(t?.project);
   useAtomWithSubscription(LibraryPresetSubscriptionsV2.Query({
-    group: M()
+    group: getProviderConfigType()
   }));
   Nn();
   let [s, o] = useState(!1);
@@ -115,7 +115,7 @@ export function $$D0({
     teamId: u ?? "-1",
     workspaceId: p || null,
     orgId: m || null,
-    group: M() ?? null
+    group: getProviderConfigType() ?? null
   }), [c, u, p, m]);
   let R = useSubscription(SubscribedLibrariesForFile, O, {
     enabled: !!t && s && "design" === w

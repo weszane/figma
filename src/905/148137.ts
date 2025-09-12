@@ -1,6 +1,6 @@
 import n from "../vendor/241899";
 import { trackEventAnalytics } from "../905/449184";
-import { k0 } from "../figma_app/623293";
+import { loadScript } from "../figma_app/623293";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nState } from "../figma_app/363242";
 import { z } from "../905/239603";
@@ -49,7 +49,7 @@ let $$_0 = ["ideal", "sofort"];
 let A = null;
 export function $$y5() {
   return new Promise((e, t) => {
-    A ? e(A) : h ? k0("https://js.stripe.com/v3/", {
+    A ? e(A) : h ? loadScript("https://js.stripe.com/v3/", {
       cors: !1
     }).then(() => {
       e(A = Stripe(h, {

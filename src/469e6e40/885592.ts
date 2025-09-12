@@ -10,7 +10,7 @@ import { A as _$$A2 } from '../469e6e40/916829';
 import { Ib } from '../905/129884';
 import { showModalHandler } from '../905/156213';
 import { o as _$$o, Ph, pW } from '../905/160095';
-import { E as _$$E } from '../905/172252';
+import { ScreenReaderOnly } from '../905/172252';
 import { h as _$$h } from '../905/207101';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { Q as _$$Q } from '../905/363675';
@@ -389,7 +389,7 @@ function W(e) {
       key: 'payment-method',
       label: getI18nString('plan_invoices.payment_method_label'),
       value: gL(e.invoice) || jsxs(Fragment, {
-        children: [jsx(_$$E, {
+        children: [jsx(ScreenReaderOnly, {
           children: getI18nString('plan_invoices.empty_aria_label')
         }), jsx('span', {
           'aria-hidden': !0,
@@ -833,7 +833,7 @@ let ew = [{
       children: [jsx('span', {
         'aria-hidden': !0,
         'children': '\u2013'
-      }), jsx(_$$E, {
+      }), jsx(ScreenReaderOnly, {
         children: getI18nString('plan_invoices.empty_aria_label')
       })]
     }) : t.formatMoney(e.total, {
@@ -843,7 +843,7 @@ let ew = [{
   className: () => 'plan_invoices_table--invoiceTotalColumn--ODLzg plan_invoices_table--_column--1Fkpv plan_invoices_table--_rightAligned--gTNcC'
 }, {
   id: 'view-invoice',
-  renderHeader: () => jsx(_$$E, {
+  renderHeader: () => jsx(ScreenReaderOnly, {
     children: getI18nString('plan_invoices.view_invoice_column_aria_label')
   }),
   renderCell: ({

@@ -3,7 +3,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { Uz } from '../905/63728';
 import { h as _$$h } from '../905/65944';
 import { Ib } from '../905/129884';
-import { DP } from '../905/158740';
+import { getThemeContextOrDefault } from '../905/158740';
 import { isInvalidValue, isValidValue, MIXED_MARKER, normalizeValue } from '../905/216495';
 import { B as _$$B } from '../905/229357';
 import { Label } from '../905/270045';
@@ -132,7 +132,7 @@ class E extends RecordingPureComponent {
 E.displayName = 'Checkbox';
 export function $$G0(e) {
   let t = useRef(null);
-  let s = DP();
+  let s = getThemeContextOrDefault();
   let k = useDispatch();
   let w = useIsFullscreenSitesView();
   let {

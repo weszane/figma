@@ -132,7 +132,7 @@ import { V as _$$V } from "../905/106549";
 import { useLocalStorageSync } from "../905/657224";
 import { U as _$$U } from "../905/707331";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { useHandleInputEvent, RecordingPureComponent, handleMouseEvent, handleKeyboardEvent, handleChangeEvent, generateRecordingKey, SKIP_RECORDING, useHandleFocusEvent, useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent } from "../figma_app/878298";
 import { VisualBellIcon, VisualBellType } from "../905/576487";
 import { v4, xv } from "../figma_app/655139";
@@ -143,7 +143,7 @@ import { J as _$$J3 } from "../905/225412";
 import { F as _$$F2 } from "../figma_app/284426";
 import { Ig } from "../figma_app/155647";
 import { zi } from "../905/824449";
-import { createPortal, flushSync } from "../vendor/944059";
+import { createPortal, flushSync } from "react-dom";
 import { isErrorCausedByWindowClose, withFloatingWindowAPI, suppressingErrorsCausedByWindowClose, FloatingWindowVerticalZone, FloatingWindowHorizontalZone } from "../9410/728077";
 import { xE } from "../figma_app/581520";
 import { debugState } from "../905/407919";
@@ -310,7 +310,7 @@ import { SD, bs } from "../figma_app/553940";
 import { J as _$$J5, $ as _$$$ } from "../figma_app/61771";
 import { A as _$$A12 } from "../2854/666676";
 import { c$, YJ, WL, bL as _$$bL, l9, mc } from "../905/493196";
-import { o as _$$o3 } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { N as _$$N2 } from "../905/438674";
 import { pB } from "../905/395919";
 import { A as _$$A13 } from "../svg/411264";
@@ -2038,7 +2038,7 @@ function ib({
     let i = "";
     E && (F ? t = "style name" : B && (t = "variable name"), i = z);
     "" === t && (t = A === ColorFormatEnum.HEX ? "hex" : _$$F2.format(A), i = H);
-    Dk(i);
+    copyTextToClipboard(i);
     u(VisualBellActions.enqueue({
       message: getI18nString("visual_bell.copied_color_to_clipboard_figma_design", {
         colorType: t
@@ -3405,7 +3405,7 @@ let ns = class e extends PureComponent {
       callback: () => {
         !function (e, t) {
           let i = decodeURIComponent(t);
-          Dk(i);
+          copyTextToClipboard(i);
           Rm(yc.COPY_LINK, i);
           e(VisualBellActions.enqueue({
             type: "copy-preview",
@@ -7781,7 +7781,7 @@ function sR({
         children: getI18nString("keyboard_settings.keyboard_layout_panel_selector")
       }), jsx("div", {
         className: "keyboard_shortcut_panel_layout_tab--selectorDropdownContainer--0rd1S",
-        children: jsx(_$$o3, {
+        children: jsx(EventShield, {
           eventListeners: ["onMouseDown", "onClick", "onScroll", "onWheel"],
           children: jsxs(_$$bL, {
             value: KeyboardLayout[i || 0],

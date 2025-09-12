@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback, useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
@@ -60,7 +60,7 @@ export function $$N0({
       side: e
     });
   }, [t, f, c, updateVariableConsumption]);
-  return jsxs(_$$o, {
+  return jsxs(EventShield, {
     eventListeners: ["onClick", "onMouseUp"],
     children: [jsx("div", {
       ref: p,

@@ -85,7 +85,7 @@ import { L as _$$L, I as _$$I } from "../1577/16430";
 import { k as _$$k3 } from "../905/443820";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/632989";
-import { _ as _$$_2 } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { B as _$$B2 } from "../905/950875";
 import { T as _$$T2 } from "../5430/528285";
 import { V as _$$V2 } from "../1577/311426";
@@ -1194,7 +1194,7 @@ function tb({
         onClick: j,
         className: "x19y5rnk xz16r55 xsqpjig xn0whsw x78zum5 x6s0dn4 xl56j7k x1jnr06f x2lah0s x10l6tqk x191j7n5 x1qpfodn x100vrsf x1vqgdyp x1mh6rdz",
         children: jsx(_$$T2, {})
-      }), jsxs(_$$_2, {
+      }), jsxs(LinkPrimitive, {
         newTab: !0,
         href: e,
         onClick: w,

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { l as _$$l } from "../905/479687";
@@ -52,7 +52,7 @@ function q(e) {
     onDone,
     onCancel
   } = e;
-  let m = hS(e);
+  let m = useModalManager(e);
   let _ = useDispatch();
   let p = $$es3(fileImport);
   let f = 0 === p.remainingFiles;
@@ -314,7 +314,7 @@ export function $$ee2({
     }(A), [A]),
     onCancel: r
   });
-  let P = hS({
+  let P = useModalManager({
     open: !0,
     onClose: () => {
       Cu({

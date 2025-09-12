@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 let o = {};

@@ -5,7 +5,7 @@ import { resourceUtils } from "../905/989992";
 import { useProjectFileCreationPermissions, canCreateFileType } from "../figma_app/687776";
 import { createOptimistThunk } from "../905/350402";
 import { le } from "../905/904854";
-import { F } from "../905/642505";
+import { fileImporter } from "../905/642505";
 import { GR } from "../905/81459";
 import { FC } from "../figma_app/212807";
 import { hasFolderRestrictions } from "../figma_app/345997";
@@ -14,7 +14,7 @@ import { z } from "../905/875422";
 import { MS } from "../905/615657";
 import { Gc, TA } from "../905/769";
 export let $$E2 = createOptimistThunk((e, t) => {
-  F && (MS(), F.extractFilesFromDropEvent(t, (t, r) => {
+  fileImporter && (MS(), fileImporter.extractFilesFromDropEvent(t, (t, r) => {
     getFeatureFlags().internal_only_debug_tools && t.endsWith(".repo") ? $$T3(e, t, r) : e.dispatch(z({
       name: t,
       blob: r

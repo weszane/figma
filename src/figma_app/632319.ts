@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { iL } from "../figma_app/762706";
 import { Rx } from "../905/686312";
-import { k0 } from "../figma_app/623293";
+import { loadScript } from "../figma_app/623293";
 import { logDebug, logInfo, logWarning, logError } from "../905/714362";
 import { analyticsEventManager } from "../905/449184";
 import { w$ } from "../figma_app/594947";
@@ -112,7 +112,7 @@ let y = class e {
 async function b() {
   if (!Fig.createViewer) try {
     let e = Fig.tsViewerScriptURL;
-    await k0(e);
+    await loadScript(e);
   } catch (e) {
     throw e;
   }

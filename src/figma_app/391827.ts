@@ -1,6 +1,6 @@
 import { useMemo, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { normalizedToRgb, unpackToNormalizedRgb } from "../figma_app/273493";
 import { WhiteboardTsApi, AppStateTsApi } from "../figma_app/763686";
 import { getThemeBackgroundColor } from "../figma_app/191804";
@@ -23,7 +23,7 @@ export function $$h0() {
   return t && AppStateTsApi ? F.format(normalizedToRgb(unpackToNormalizedRgb(AppStateTsApi.getFSCanvasDefaultFill()))) : a ? m : getThemeBackgroundColor(h);
 }
 export function $$m1() {
-  let e = "ui3" === DP().version;
+  let e = "ui3" === getThemeContextOrDefault().version;
   let t = $$h0();
   useLayoutEffect(() => {
     e && document.documentElement.style.setProperty("--canvas-color", t);

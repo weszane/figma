@@ -21,7 +21,7 @@ import { ex } from "../905/524523";
 import { J } from "../905/614223";
 import { N_ } from "../figma_app/637027";
 import { b as _$$b } from "../905/217163";
-import { M as _$$M } from "../figma_app/155411";
+import { getProviderConfigType } from "../figma_app/155411";
 import { Ag, HA } from "../figma_app/255679";
 let o = memo(function (e) {
   return _$$O() ? jsx("svg", {
@@ -163,7 +163,7 @@ export function $$L0({
     tooltipLocation: n,
     isFragment: a
   }) {
-    let s = _$$M();
+    let s = getProviderConfigType();
     let o = atomStoreManager.get(_$$Rs);
     let l = useIsSelectedViewFullscreenCooper();
     let d = lW(l);

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -226,7 +226,7 @@ let F = {
 };
 let $$O0 = registerModal(function (e) {
   let [t, n] = useState(!1);
-  let s = hS({
+  let s = useModalManager({
     ...e,
     preventUserClose: t
   });

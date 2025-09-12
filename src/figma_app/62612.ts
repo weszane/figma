@@ -1,5 +1,5 @@
 import { useRef, useEffect, useContext, useMemo } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { Fullscreen } from "../figma_app/763686";
 import { memoizeByArgs } from "../figma_app/815945";
 import { parsePxNumber } from "../figma_app/783094";

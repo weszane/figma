@@ -57,7 +57,7 @@ import { VisualBellActions } from "../905/302958";
 import { w as _$$w } from "../905/281010";
 import { n as _$$n } from "../3674/214307";
 import { i$ as _$$i$ } from "../905/15667";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import eN from "classnames";
 import { Wi, JR, Qp } from "../figma_app/162641";
 import { B as _$$B } from "../905/714743";
@@ -109,11 +109,11 @@ import { setupToggleButton } from "../905/167712";
 import { A as _$$A4 } from "../vendor/648136";
 import { _m } from "../vendor/891888";
 import { useExposedRef } from "../905/581092";
-import { $ as _$$$2 } from "../905/61417";
+import { ensureContext } from "../905/61417";
 import { P as _$$P } from "../905/143421";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent } from "../905/955878";
-import { E as _$$E2 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { O as _$$O2 } from "../905/969533";
 import { k as _$$k3 } from "../905/44647";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
@@ -159,7 +159,7 @@ import { f as _$$f3 } from "../1528/716387";
 import { O as _$$O3 } from "../9410/414444";
 import { b as _$$b2, W as _$$W2 } from "../b2835def/91751";
 import { oA as _$$oA2, uj as _$$uj, vy } from "../figma_app/856806";
-import { hS as _$$hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo as _$$vo, Y9, hE as _$$hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { K as _$$K2 } from "../905/443068";
@@ -424,7 +424,7 @@ import { G as _$$G3 } from "../figma_app/953068";
 import { e as _$$e7 } from "../905/194891";
 import { f$ } from "../figma_app/836943";
 import { p as _$$p5 } from "../905/185998";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { H_ } from "../905/963340";
 import { G as _$$G4 } from "../905/800369";
 import { f as _$$f5, pe as _$$pe, Pq, Kx, tz as _$$tz, SV, lk as _$$lk2 } from "../figma_app/342355";
@@ -454,7 +454,7 @@ import { g as _$$g4 } from "../figma_app/777171";
 import { L as _$$L5 } from "../1250/681431";
 import { Cf, it as _$$it } from "../905/504727";
 import { A as _$$A22 } from "../svg/639108";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { L as _$$L6 } from "../905/704296";
 import { X as _$$X5 } from "../905/99316";
 import { Fj } from "../figma_app/793429";
@@ -809,7 +809,7 @@ function ej() {
 var ek = eN;
 let eD = [0, 1, 2, 3, 4];
 function eO() {
-  let e = "ui3" === DP().version;
+  let e = "ui3" === getThemeContextOrDefault().version;
   return jsx(_$$Q, {
     children: jsx(_$$$, {
       width: 240,
@@ -1610,7 +1610,7 @@ let t8 = {
 };
 function t6() {
   let e = "dark" === _$$DP() ? "dark" : "light";
-  let t = "ui3" === DP().version;
+  let t = "ui3" === getThemeContextOrDefault().version;
   return jsxs("div", {
     className: ek()("right_panel--drillDownContainer--FTkvu", Lp, Ph),
     "data-testid": "dev-mode-paywall-right-panel",
@@ -1985,7 +1985,7 @@ forwardRef(({
 let nb = forwardRef(({
   htmlAttributes: e,
   ...t
-}, n) => jsx(_$$E2, {
+}, n) => jsx(ScreenReaderOnly, {
   as: "thead",
   ...defaultComponentAttribute,
   ref: n,
@@ -2022,7 +2022,7 @@ function nw({
     collapseIndex,
     collapseManager,
     selectedRows
-  } = _$$$2(nv, "TreeGrid.Body", "TreeGrid.Root");
+  } = ensureContext(nv, "TreeGrid.Body", "TreeGrid.Root");
   return jsx(_$$A4, {
     children: ({
       height: c,
@@ -2095,7 +2095,7 @@ let nA = forwardRef(({
     setIndex,
     handleKeyDown,
     selectIndex
-  } = _$$$2(nv, "TreeGrid.Row", "TreeGrid.Root");
+  } = ensureContext(nv, "TreeGrid.Row", "TreeGrid.Root");
   let g = visibleEntries[t];
   let x = collapseManager[g.id];
   useEffect(() => {
@@ -2140,8 +2140,8 @@ let nI = forwardRef(({
   let l = useExposedRef(o);
   let {
     activeIndex
-  } = _$$$2(nv, "TreeGrid.Cell", "TreeGrid.Root");
-  let r = _$$$2(nk, "TreeGrid.Cell", "TreeGrid.Row") === activeIndex.row && t === activeIndex.cell;
+  } = ensureContext(nv, "TreeGrid.Cell", "TreeGrid.Root");
+  let r = ensureContext(nk, "TreeGrid.Cell", "TreeGrid.Row") === activeIndex.row && t === activeIndex.cell;
   useEffect(() => {
     r && l.current?.focus();
   }, [r]);
@@ -4490,7 +4490,7 @@ function iq() {
     overlay: tb3,
     priority: _$$N.HIGH_PRIORITY_MODAL
   }, [e]);
-  let d = _$$hS({
+  let d = useModalManager({
     open: isShowing,
     preventUserClose: !0,
     onClose: _$$lQ
@@ -5291,7 +5291,7 @@ let lD = memo(({
   let x = useCallback(() => {
     s(vq());
   }, [s]);
-  let m = _$$hS({
+  let m = useModalManager({
     ...t,
     onClose: () => {
       x();
@@ -6030,7 +6030,7 @@ let sf = registerModal(function ({
   initialLink: e,
   ...t
 }) {
-  let n = _$$hS(t);
+  let n = useModalManager(t);
   let {
     id,
     linkName,
@@ -7688,7 +7688,7 @@ let rk = memo(function (e) {
         className: ek()("dev_handoff_nodes_panel--thumbnailImg--yRcCn", k && "dev_handoff_nodes_panel--thumbnailImgLong--5eP8l", I && "dev_handoff_nodes_panel--thumbnailImgTall--iJO4k"),
         alt: getI18nString("dev_handoff.nodes_panel.thumbnail_alt_text")
       })
-    }), jsx(_$$E2, {
+    }), jsx(ScreenReaderOnly, {
       children: "\xa0"
     }), jsx("div", {
       className: "dev_handoff_nodes_panel--nodeNameAndTimestampContainer--egq48 text--fontPos11--2LvXf text--_fontBase--QdLsd",
@@ -11129,7 +11129,7 @@ function pu() {
         children: jsx("span", {
           className: pa,
           children: renderI18nText("dev_handoff.mcp.find_instructions_sub_title", {
-            hereWithHyperlink: jsx(_$$_, {
+            hereWithHyperlink: jsx(LinkPrimitive, {
               trusted: !0,
               newTab: !0,
               href: pi,
@@ -11274,7 +11274,7 @@ function pf() {
 function pg() {
   return jsxs("div", {
     className: "mcp_panel--headerContent--DnihT",
-    children: [jsx(_$$_, {
+    children: [jsx(LinkPrimitive, {
       href: pi,
       children: jsx(_$$G4, {})
     }), jsx(pf, {})]

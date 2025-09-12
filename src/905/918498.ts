@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { N } from "../905/438674";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -25,7 +25,7 @@ export let $$v0 = registerModal(function (e) {
   let v = () => {
     i(hideModal());
   };
-  let I = hS({
+  let I = useModalManager({
     ...e,
     onClose: v
   });

@@ -3,7 +3,7 @@ import { memo, useState, useEffect, useRef, useCallback, Fragment as _$$Fragment
 import { i as _$$i } from "../vendor/218335";
 import { H as _$$H } from "../vendor/373976";
 import { u as _$$u } from "../vendor/363976";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";

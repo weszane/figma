@@ -1,13 +1,13 @@
 import { createContext, useLayoutEffect, forwardRef, useMemo, useRef, useCallback, useEffect, useId, useState } from "react";
-import { SV } from "../vendor/516565";
+import { useMergeRefs } from "@floating-ui/react";
 import { useRecording } from "../905/959312";
 import { preventAndStopEvent } from "../905/955878";
-import { v as _$$v } from "../905/475481";
+import { mergeProps } from "../905/475481";
 import { jsx } from "react/jsx-runtime";
 import { S as _$$S } from "../905/823680";
 import { useExposedRef } from "../905/581092";
-import { $ } from "../905/61417";
-import { fP, mc } from "../905/691059";
+import { ensureContext } from "../905/61417";
+import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { P } from "../905/143421";
 import { defaultComponentAttribute } from "../905/577641";
 import { E as _$$E } from "../905/632989";
@@ -30,7 +30,7 @@ function A({
   let {
     getContainerProps,
     getTriggerProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: r.expanded,
     offset: t,
     onOpenChange: r.onExpand,
@@ -44,7 +44,7 @@ function A({
   useLayoutEffect(() => {
     e?.current && getTriggerProps().ref(e.current);
   }, [r.expanded]);
-  return jsx(mc, {
+  return jsx(PopoverPrimitiveContainer, {
     ...getContainerProps(),
     children: jsx(b, {
       ...r
@@ -123,7 +123,7 @@ let v = forwardRef(({
     onSelect,
     setActiveValue,
     registerOption
-  } = $(_, "ComboboxPrimitiveListContext", "ComboboxPrimitive.List");
+  } = ensureContext(_, "ComboboxPrimitiveListContext", "ComboboxPrimitive.List");
   let S = useRecording(t => {
     if (i) {
       r?.onPointerDown?.(t);
@@ -265,7 +265,7 @@ export let $$R0 = {
     let f = useRef(null);
     let _ = useRef(null);
     let [A, y] = useState();
-    let b = SV([f, A]);
+    let b = useMergeRefs([f, A]);
     let [v, I] = useState("pointer");
     let T = useRef(new WeakMap());
     let k = useRef(new Map());
@@ -408,7 +408,7 @@ export let $$R0 = {
         event: e
       }), preventAndStopEvent(e));
     }, [M, onSelect]);
-    let W = useCallback(e => (e?.ref && e.ref !== A && y(e.ref), _$$v(e ?? {}, {
+    let W = useCallback(e => (e?.ref && e.ref !== A && y(e.ref), mergeProps(e ?? {}, {
       ...e?.htmlAttributes,
       ref: b,
       role: "combobox",
@@ -427,7 +427,7 @@ export let $$R0 = {
     let K = useCallback(() => {
       I("pointer");
     }, []);
-    let Y = useCallback(e => _$$v(e ?? {}, {
+    let Y = useCallback(e => mergeProps(e ?? {}, {
       ...e?.htmlAttributes,
       registerOption: R,
       activeValue: M,
@@ -448,7 +448,7 @@ export let $$R0 = {
       D(!O);
       preventAndStopEvent(e);
     }, [O, D]);
-    let $ = useCallback(e => _$$v(e ?? {}, {
+    let $ = useCallback(e => mergeProps(e ?? {}, {
       onClick: q,
       "aria-controls": E({
         uuid: popupId
@@ -459,7 +459,7 @@ export let $$R0 = {
     let Z = useCallback(() => {
       D(!1);
     }, [D]);
-    let X = useCallback(e => _$$v(e ?? {}, {
+    let X = useCallback(e => mergeProps(e ?? {}, {
       onClose: Z
     }), [Z]);
     return useMemo(() => ({

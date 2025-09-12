@@ -13,7 +13,7 @@ import _require4 from "../vendor/892056";
 import _require3 from "../vendor/33567";
 import _require2 from "../vendor/724191";
 import _require from "../vendor/250242";
-import { Layer } from "../vendor/625526";
+import { Layer } from "statsig-js";
 import { staticImplements } from "../vendor/265356";
 var r = this && this.__importDefault || function (e) {
   return e && e.__esModule ? e : {

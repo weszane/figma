@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useContext } from "react";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { r as _$$r } from "../905/5729";
 import { b as _$$b } from "../905/22449";
 import { c as _$$c } from "../905/34525";
@@ -51,7 +51,7 @@ export let $$p1 = forwardRef((e, t) => {
 function m() {
   let {
     version
-  } = DP();
+  } = getThemeContextOrDefault();
   let {
     outerRadius,
     innerRadius,

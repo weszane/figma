@@ -102,7 +102,7 @@ import { c as _$$c2 } from "../0c62c2fd/790868";
 import { s as _$$s2 } from "../9410/760762";
 import { xG as _$$xG, n8 as _$$n2, bu as _$$bu, tO as _$$tO } from "../figma_app/121043";
 import { throwTypeError } from "../figma_app/465776";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { gw as _$$gw, wv, c$ as _$$c$ } from "../figma_app/236327";
 import { V6, ew as _$$ew } from "../1250/12342";
 import { dh as _$$dh, nn as _$$nn } from "../figma_app/186343";
@@ -301,7 +301,7 @@ import { memoizeByArgs } from "../figma_app/815945";
 import { isWorkshopModeEnabled, useCurrentFileWorkshopModeStatus, getWorkshopModeStatus } from "../figma_app/789";
 import { H as _$$H3 } from "../2b17fec9/68162";
 import { F as _$$F2 } from "../1291/661220";
-import { _ as _$$_6 } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { R as _$$R2 } from "../figma_app/313269";
 import { z as _$$z3 } from "../905/905430";
 import { q as _$$q2 } from "../905/276489";
@@ -382,7 +382,7 @@ import { Br, tV as _$$tV, lt as _$$lt2, Fg } from "../figma_app/862108";
 import { A as _$$A15 } from "../2b17fec9/467175";
 import { $isAtNodeEnd } from "@lexical/selection";
 import { Fo, vN as _$$vN, xH as _$$xH, Uz, sC as _$$sC, Te as _$$Te } from "../905/63728";
-import { hS as _$$hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL as _$$bL2 } from "../905/38914";
 import { vo as _$$vo2, Y9, nB as _$$nB, wi } from "../figma_app/272243";
 import { customHistory } from "../905/612521";
@@ -486,7 +486,7 @@ import { b as _$$b8 } from "../905/874849";
 import { X as _$$X2 } from "../905/399133";
 import { z as _$$z6 } from "../905/821223";
 import { En as _$$En } from "../figma_app/613182";
-import { fP as _$$fP, mc as _$$mc3 } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { bL as _$$bL4, c$ as _$$c$4 } from "../905/575478";
 import { q as _$$q4 } from "../905/932270";
 import { A as _$$A27 } from "../svg/226895";
@@ -1049,7 +1049,7 @@ function ta(e) {
       isDefaultExpanded
     } of e) {
       if (!localStorageKey) {
-        r.push([!0, () => { }]);
+        r.push([!0, () => {}]);
         continue;
       }
       let [e, l] = !function ({
@@ -1087,7 +1087,7 @@ function ts(e) {
   return t;
 }
 function to(e) {
-  return ta([e])[0] ?? [!0, () => { }];
+  return ta([e])[0] ?? [!0, () => {}];
 }
 function tl({
   title: e,
@@ -2496,7 +2496,7 @@ function ig({
       window.removeEventListener("blur", t);
     };
   }, [t]);
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown"],
     children: jsx(_$$gw, {
       id: n && r || void 0,
@@ -2981,7 +2981,7 @@ function i7({
   });
 }
 function ne() {
-  let [e, , t] = BN(UserInterfaceElements.LAYERS);
+  let [e,, t] = BN(UserInterfaceElements.LAYERS);
   return jsx(_$$y, {
     withBorder: !0,
     children: jsx(_$$eG, {
@@ -5077,7 +5077,7 @@ let sH = memo(function (e) {
     children: e.items.map(e => t(e))
   });
 });
-function sB({ }) {
+function sB({}) {
   let e = Sp();
   let t = qr().filter(e);
   return jsx(sH, {
@@ -5919,7 +5919,7 @@ function oQ(e) {
           })
         })]
       })
-    }), !z && jsxs(_$$_6, {
+    }), !z && jsxs(LinkPrimitive, {
       newTab: !0,
       className: P0,
       href: `/community/plugin/${e.pluginId}`,
@@ -6798,7 +6798,7 @@ function lD(e) {
   if (!n) return null;
   let M = _ ? e => {
     if (_) {
-      if (e.preventDefault(), e.stopPropagation(), g) a(_$$oB()); else {
+      if (e.preventDefault(), e.stopPropagation(), g) a(_$$oB());else {
         let i = e.target.getBoundingClientRect();
         a(_$$j({
           type: lP,
@@ -7554,7 +7554,7 @@ function dg({
   return {
     namespace: "FigJamAiPromptEditor",
     editorState: () => {
-      if (e) $convertFromMarkdownString(e, [UNORDERED_LIST, ORDERED_LIST]); else {
+      if (e) $convertFromMarkdownString(e, [UNORDERED_LIST, ORDERED_LIST]);else {
         let e = $getRoot();
         if (!e.getFirstChild()) {
           let t = $createParagraphNode();
@@ -7782,7 +7782,7 @@ function dq({
   });
 }
 let dJ = registerModal(function (e) {
-  let t = _$$hS(e);
+  let t = useModalManager(e);
   let [i, n] = useState(() => Object.keys(_$$FN())[0] ?? "");
   return jsx(_$$bL2, {
     manager: t,
@@ -8378,7 +8378,7 @@ function co() {
       i(!0);
     },
     hasGenerated: t
-  }); else throw Error("Unsupported AI Modal Display Type");
+  });else throw Error("Unsupported AI Modal Display Type");
   return jsx("div", {
     className: _$$s.$$if(!n, _$$s.hidden).$,
     children: e
@@ -8883,7 +8883,7 @@ async function ua(e, t) {
           for (let i of e.sourceNodeIds) if (!t.selectedNodesPromptedOn.includes(i)) return !1;
           return !0;
         }(r, e));
-        if (e) n.aiParentPromptId = e.id; else {
+        if (e) n.aiParentPromptId = e.id;else {
           let e = i.length.toString();
           i.push({
             userPrompt: r.userPrompt,
@@ -8982,16 +8982,16 @@ let uo = async ({
     return 0 === r.length ? e : `Here are some past conversations we've had. They're not super important but I'm including them so you have context on what has already been said and done.
 ${r.map((e, t) => `Interaction ${t + 1}:
 ${function (e) {
-        let t = e.userPrompt.length > 0 ? `## Prompt given to you by the user
+      let t = e.userPrompt.length > 0 ? `## Prompt given to you by the user
 - ${e.userPrompt}
 ` : "";
-        return `## Text submitted by user
+      return `## Text submitted by user
 ${e.selectedNodes.map(e => `- ${"IMG" === e.type ? "UNKNOWN_IMAGE" : e.text}`).join("\n")}
 ${t}
 ## Your response
 ${e.knownOutcomes.map(e => `- ${"IMG" === e.type ? "UNKNOWN_IMAGE" : e.text}`).join("\n")}
 `;
-      }(e)}`).join("\n")}
+    }(e)}`).join("\n")}
 
   ${e}`;
   }(p, n, a, s));
@@ -9781,7 +9781,7 @@ function uB() {
       doneState: uc.HIDE_PROMPT_BOX
     }), S());
   }, [b, x, _, g, w, S]);
-  let L = useCallback(() => { }, []);
+  let L = useCallback(() => {}, []);
   let N = qy.INITIAL;
   m && (L = m.stop, N = m.state);
   let O = useCallback(() => {
@@ -10343,7 +10343,7 @@ let pm = memo(function (e) {
   });
 });
 let pv = "font_family_control--dotOption--dSxZU";
-class pA extends _$$c$3 { }
+class pA extends _$$c$3 {}
 var pO = (e => (e.SANS_SERIF = "sansSerif", e.SERIF = "serif", e.MONOSPACE = "monospace", e.SCRIPT = "script", e))(pO || {});
 let pk = jsx(pu, {});
 let pR = {
@@ -10436,7 +10436,7 @@ function p0({
   let {
     getTriggerProps,
     getContainerProps
-  } = _$$fP({
+  } = usePopoverPrimitive({
     isOpen: p,
     onOpenChange: h,
     type: "menu",
@@ -10457,7 +10457,7 @@ function p0({
       trackingProperties: c,
       getPopoverTriggerProps: getTriggerProps,
       children: r
-    }), jsx(_$$mc3, {
+    }), jsx(PopoverPrimitiveContainer, {
       className: "xon4yw5 x1u3p76b x19y5rnk x78zum5 x1q0g3np xeq5yr9 x6s0dn4 xb3r6kr",
       ...getContainerProps({}),
       children: jsx(_$$N3, {
@@ -12467,7 +12467,7 @@ let fS = (e, t) => {
           colors: Array.isArray(t) ? t : [t]
         });
       };
-      if (null == e || isInvalidValue(e)) a(); else {
+      if (null == e || isInvalidValue(e)) a();else {
         let t = my.get(i)?.map(t => _$$zS2(e, t));
         let s = t?.find(e => e !== ColorOptions.CUSTOM) ?? ColorOptions.CUSTOM;
         s !== ColorOptions.CUSTOM ? r.set(i, {
@@ -12524,7 +12524,7 @@ let fS = (e, t) => {
     let t = getI18nString("whiteboard.text_sizes.custom");
     if (e && e.length > 0) {
       let i = e[0];
-      if (e.length > 1) t = getI18nString("whiteboard.inline_menu.font_size_mixed"); else {
+      if (e.length > 1) t = getI18nString("whiteboard.inline_menu.font_size_mixed");else {
         let e = m$().find(e => {
           let t = e.identifier.substring(mW.length);
           return t in h_ && h_[t].maxValue === i;
@@ -13409,7 +13409,7 @@ function fG(e) {
     }
   });
 }
-class fK extends _$$c$3 { }
+class fK extends _$$c$3 {}
 var fW = (e => (e.LOCK_ALL = "lock_all", e.LOCK_SECTION_BACKGROUND_ONLY = "lock_section_background_only", e))(fW || {});
 let fz = ["lock_all", "lock_section_background_only"];
 let fZ = () => ({
@@ -14419,7 +14419,7 @@ function xh({
       iconClassName: xd,
       isKeyDownHandled: e => {
         let t = y.shapeLibraryData.reduce((e, t) => e + t.items.length, 0);
-        if ("Escape" === e.code || "Escape" === e.key) "" !== j ? N() : w(!1); else if ("Enter" === e.code || "Enter" === e.key) {
+        if ("Escape" === e.code || "Escape" === e.key) "" !== j ? N() : w(!1);else if ("Enter" === e.code || "Enter" === e.key) {
           if ("" !== j && t > 0) {
             let t = y.shapeLibraryData[0]?.items[0];
             t && (n(t, e), w(!1));
@@ -14630,18 +14630,18 @@ function xf({
     }, function ({
       children: e
     }) {
-        return jsx(_$$P, {
-          height: xs,
-          disableScrollbarBorder: !0,
-          scrollContainerRef: s.scrollContainerRef,
-          children: jsx("div", {
-            tabIndex: -1,
-            className: "whiteboard_platform_shape_selector--shapeContainer--dRUYD",
-            id: s.wrapperId,
-            children: e
-          })
-        });
-      }),
+      return jsx(_$$P, {
+        height: xs,
+        disableScrollbarBorder: !0,
+        scrollContainerRef: s.scrollContainerRef,
+        children: jsx("div", {
+          tabIndex: -1,
+          className: "whiteboard_platform_shape_selector--shapeContainer--dRUYD",
+          id: s.wrapperId,
+          children: e
+        })
+      });
+    }),
     additionalContentsTop: jsx(IW, {
       ref: h,
       className: xl,
@@ -14651,7 +14651,7 @@ function xf({
       iconClassName: xd,
       isKeyDownHandled: e => {
         let t = b.shapeLibraryData.reduce((e, t) => e + t.items.length, 0);
-        if ("Escape" === e.code || "Escape" === e.key) "" !== g ? I() : x(!1); else if ("Enter" === e.code || "Enter" === e.key) {
+        if ("Escape" === e.code || "Escape" === e.key) "" !== g ? I() : x(!1);else if ("Enter" === e.code || "Enter" === e.key) {
           if ("" !== g && t > 0) {
             let t = b.shapeLibraryData[0]?.items[0];
             t && (n(t, e), x(!1));
@@ -14943,8 +14943,8 @@ function xT({
 }
 function xE({
   onSelect: e,
-  showShapePreview: t = () => { },
-  hideShapePreview: i = () => { },
+  showShapePreview: t = () => {},
+  hideShapePreview: i = () => {},
   ariaLabel: n
 }) {
   let r = xv.getShapeGrid({
@@ -16817,7 +16817,7 @@ let gp = memo(function () {
         if (n) {
           let t = setTimeout(() => {
             window.FigmaMobile.nativeContextualToolbarSupportedVersions = void 0;
-            n._native_contextual_toolbar_confirm_configuration = () => { };
+            n._native_contextual_toolbar_confirm_configuration = () => {};
             reportError(_$$e.FIGJAM, Error(`Native contextual toolbar did not confirm configuration before timeout, version ${e}`));
           }, 2e3);
           n._native_contextual_toolbar_confirm_configuration = () => {
@@ -19526,7 +19526,7 @@ function ji(e) {
     document.removeEventListener("mousemove", m);
     document.removeEventListener("mouseup", f);
     let n = !1 === c;
-    if (Date.now() - s.current < 100) n ? onPause() : onResume(); else if (n) {
+    if (Date.now() - s.current < 100) n ? onPause() : onResume();else if (n) {
       let i = e.clientX;
       clamp(i - a.current, 0, 21) > 10.5 && onPause();
     } else {
@@ -20133,13 +20133,13 @@ function j9({
       e.currentTarget.value.length > 1 && c.current?.select();
     }, [c, setMinutes]);
     let h = useCallback(e => {
-      if ("ArrowUp" === e.key || "ArrowDown" === e.key) isNaN(parseInt(e.currentTarget.value)) || (addMinutes(("ArrowUp" === e.key ? 1 : -1) * (e.shiftKey ? 5 : 1)), setTimeout(() => o.current?.select(), 0), e.preventDefault()); else if ("ArrowRight" === e.key && o.current) {
+      if ("ArrowUp" === e.key || "ArrowDown" === e.key) isNaN(parseInt(e.currentTarget.value)) || (addMinutes(("ArrowUp" === e.key ? 1 : -1) * (e.shiftKey ? 5 : 1)), setTimeout(() => o.current?.select(), 0), e.preventDefault());else if ("ArrowRight" === e.key && o.current) {
         if (o.current.selectionStart === o.current.value.length && c.current) {
           c.current.select();
           e.preventDefault();
           return;
         }
-      } else if ("Enter" === e.key) startTimer(); else if ("Escape" === e.key) {
+      } else if ("Enter" === e.key) startTimer();else if ("Escape" === e.key) {
         u(_$$lu({
           state: "closed",
           userInitiated: !0,
@@ -21428,7 +21428,7 @@ let bU = e => {
   let t = null;
   try {
     t = parseInt(e, 10);
-  } catch (e) { }
+  } catch (e) {}
   return t;
 };
 function bF() {
@@ -22532,7 +22532,7 @@ function yT() {
           }
         },
         type: "unmute-timer-music",
-        onDismiss: () => { }
+        onDismiss: () => {}
       }));
     }, [s]);
     useEffect(() => {

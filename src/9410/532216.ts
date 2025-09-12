@@ -21,7 +21,7 @@ import { collaborationHostNameAtom, handleCollaborationHostNameMessage } from ".
 import { s as _$$s } from "../cssbuilder/589278";
 import { OA } from "../figma_app/419216";
 import { lQ } from "../905/934246";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { ColorSpaceEnum, ColorProfileEnum, Fullscreen, AppStateTsApi } from "../figma_app/763686";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
@@ -73,7 +73,7 @@ import { fx, PF } from "../figma_app/657972";
 import { z6 } from "../905/963340";
 import { R6 } from "../figma_app/504823";
 import { jK, hP } from "../figma_app/829197";
-import { cq } from "../vendor/516565";
+import { useFloatingTree } from "@floating-ui/react";
 import { RR } from "../figma_app/307841";
 import { l as _$$l } from "../905/714607";
 import { I as _$$I } from "../905/531560";
@@ -594,7 +594,7 @@ let ti = memo(function ({
       };
     }(),
     closeSelectMenu: function () {
-      let e = cq();
+      let e = useFloatingTree();
       return () => {
         e && e.events.emit("click");
       };
@@ -743,7 +743,7 @@ let ti = memo(function ({
       slideConversionDropdownEntrypoint: th
     },
     children: jsx(mc, {
-      children: jsxs(_$$o, {
+      children: jsxs(EventShield, {
         eventListeners: ["onPointerEnter", "onPointerLeave", "onMouseEnter", "onMouseLeave"],
         children: [tU.map((e, t) => jsx(_$$Fragment, {
           children: e

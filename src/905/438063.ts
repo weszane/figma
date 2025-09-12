@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useId } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -34,7 +34,7 @@ import { Hk, fu, pu } from "../figma_app/123994";
 import { eD } from "../905/257620";
 export let $$M0 = registerModal(function (e) {
   let [t, i] = useState(!1);
-  let u = hS(e);
+  let u = useModalManager(e);
   let p = useDispatch();
   let m = eY();
   let h = Pc();

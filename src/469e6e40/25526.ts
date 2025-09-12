@@ -140,7 +140,7 @@ import { Cj } from "../905/270084";
 import { zx, VU } from "../4452/650793";
 import { IU } from "../figma_app/421401";
 import { hideModal, showModalHandler, showModal, popModalStack } from "../905/156213";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB as _$$nB, wi, jk, vo } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
@@ -1807,7 +1807,7 @@ function aa() {
 let aw = registerModal(function (e) {
   let t = useDispatch();
   let a = MX();
-  let n = hS(e);
+  let n = useModalManager(e);
   let l = useCurrentPublicPlan("LicenseGroupDeleteModal").unwrapOr(null);
   let o = getParentOrgIdIfOrgLevel(l);
   let d = e.licenseGroups.map(e => e.id);
@@ -4394,7 +4394,7 @@ let sy = registerModal(function ({
     l();
   };
   let g = t ? getI18nString("extension_decline_modal.leave_widget_note") : getI18nString("extension_decline_modal.leave_plugin_note");
-  let h = hS({
+  let h = useModalManager({
     open: n,
     onClose: l
   });

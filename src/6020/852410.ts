@@ -3,7 +3,7 @@ import { memo, useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { A as _$$A } from "../905/24328";
 import { r as _$$r } from "../905/857502";
 import { PrototypingTsApi, Fullscreen, NodePropertyCategory } from "../figma_app/763686";
@@ -108,7 +108,7 @@ function F({
       children: i.prototypeStartingPoint.name
     }), T !== i.nodeID && jsx("div", {
       className: f()("prototype_flows_panel--panelInfoContainer--pVsR6", "prototype_flows_panel--fadeOutOnTitleUnhover--G4xPQ"),
-      children: jsxs(_$$o, {
+      children: jsxs(EventShield, {
         display: "contents",
         eventListeners: ["onMouseDown"],
         children: [jsx(V, {

@@ -1,7 +1,7 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
@@ -16,7 +16,7 @@ import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { openFileKeyAtom } from "../figma_app/516028";
 export let $$y0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let [r, y] = useState(!1);
   let [b, T] = useState(!1);
   let [I, S] = useState(!1);

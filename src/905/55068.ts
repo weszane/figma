@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, forwardRef, useRef, useState, useMemo } from "react";
 import { A } from "../vendor/723372";
 import { i } from "../905/97346";
-import { $ } from "../905/61417";
+import { ensureContext } from "../905/61417";
 import { GX } from "../905/893109";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent } from "../905/955878";
@@ -215,11 +215,11 @@ export function $$y3({
   let {
     min,
     max
-  } = $(f, "Thumb", "SliderPrimitive.Thumb");
+  } = ensureContext(f, "Thumb", "SliderPrimitive.Thumb");
   let {
     value,
     thumbRef
-  } = $(_, "Thumb", "SliderPrimitive.Thumb");
+  } = ensureContext(_, "Thumb", "SliderPrimitive.Thumb");
   let c = GX(h(value, min, max));
   return jsx("div", {
     ...e,
@@ -242,7 +242,7 @@ export function $$b1({
   let {
     min,
     max
-  } = $(f, "Range", "SliderPrimitive.Range");
+  } = ensureContext(f, "Range", "SliderPrimitive.Range");
   if (e > t) {
     let i = t;
     t = e;
@@ -269,7 +269,7 @@ export function $$v0({
   let {
     min,
     max
-  } = $(f, "Point", "SliderPrimitive.Point");
+  } = ensureContext(f, "Point", "SliderPrimitive.Point");
   let d = GX(h(e, min, max));
   return jsx("div", {
     ...t,

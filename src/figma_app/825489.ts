@@ -6,7 +6,7 @@ import { Xm } from "../905/723791";
 import { yZ } from "../figma_app/476572";
 import { DU } from "../figma_app/275462";
 import { JB } from "../figma_app/657017";
-import { M } from "../figma_app/155411";
+import { getProviderConfigType } from "../figma_app/155411";
 import { T9 } from "../figma_app/528509";
 import { J } from "../905/9585";
 import { i as _$$i } from "../905/667910";
@@ -32,7 +32,7 @@ let $$x0 = atom(e => {
     teamId: t.teamId ?? "-1",
     workspaceId: t.team?.workspaceId ?? null,
     orgId: r,
-    group: M() ?? null
+    group: getProviderConfigType() ?? null
   }));
   let s = e(JB);
   let o = e(Me);

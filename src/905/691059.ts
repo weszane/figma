@@ -1,242 +1,381 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, useRef, useId, useState, useCallback, forwardRef, useContext } from "react";
-import { we, kp, s9, Mk, iB, bv, SV, ie, XF, zR, s3 } from "../vendor/516565";
-import { UE, cY, UU } from "../vendor/343575";
-import { ll } from "../vendor/542280";
-import { DP } from "../905/158740";
-import { J } from "../905/341359";
-import { A as _$$A } from "../vendor/723372";
-import { o as _$$o } from "../905/821217";
-import { useSelectionProvider } from "../905/751750";
-import { EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS } from "../905/955878";
-import { Q } from "../905/586361";
-import { P } from "../905/536340";
-export let $$f0 = createContext(void 0);
-export function $$_4({
-  children: e
+import type {
+  CSSProperties,
+  ReactNode,
+  Ref,
+} from 'react'
+import {
+  autoUpdate,
+} from '@floating-ui/dom'
+import {
+  FloatingArrow,
+  FloatingFocusManager,
+  FloatingOverlay,
+  FloatingPortal,
+  safePolygon,
+  useClick,
+  useDismiss,
+  useFloating,
+  useHover,
+  useInteractions,
+  useMergeRefs,
+} from '@floating-ui/react'
+import {
+  arrow,
+  flip,
+  offset,
+} from '@floating-ui/react-dom'
+import classNames from 'classnames'
+import {
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useId,
+  useRef,
+  useState,
+} from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { getThemeContextOrDefault } from '../905/158740'
+import { UI3ConditionalWrapper } from '../905/341359'
+import { loadFeatureFlags } from '../905/586361'
+import { useSelectionProvider } from '../905/751750'
+import { EventShield } from '../905/821217'
+import {
+  EVENT_CAPTURE_CLASS,
+  EVENT_CAPTURE_KEYS_CLASS,
+  WHEEL_EVENT_CAPTURE_CLASS,
+} from '../905/955878'
+
+/**
+ * Context for PopoverOutlet (original: $$f0)
+ */
+export const PopoverContext = createContext<React.RefObject<HTMLDivElement> | undefined>(undefined)
+
+/**
+ * PopoverOutlet component (original: PopoverOutlet)
+ * Provides a context ref for popover content.
+ */
+export function PopoverOutlet({
+  children,
+}: {
+  children: ReactNode
 }) {
-  let t = useRef(null);
-  return jsx("div", {
-    className: P,
-    ref: t,
-    children: jsx($$f0.Provider, {
-      value: t,
-      children: e
-    })
-  });
+  const outletRef = useRef<HTMLDivElement>(null)
+  return jsx('div', {
+    className: 'utils__contents__try7q',
+    ref: outletRef,
+    children: jsx(PopoverContext.Provider, {
+      value: outletRef,
+      children,
+    }),
+  })
 }
-export function $$A1({
-  type: e,
-  softDismiss: t,
-  provideOwnDismiss: i,
-  provideOwnClick: n,
-  isOpen: l,
-  openOnHover: d = !1,
-  offset: c = 8,
-  arrowPadding: u = 0,
-  middleware: p,
-  config2025CuratorHacks: m,
-  ...h
-}) {
-  let g = useId();
-  let f = useRef(null);
-  let [_, A] = useState(g);
-  let {
+PopoverOutlet.displayName = 'PopoverOutlet'
+
+/**
+ * Types for PopoverPrimitiveProps (original: $$A1)
+ */
+export interface PopoverPrimitiveProps {
+  type: 'dialog' | 'menu' | 'listbox' | 'grid' | 'tree' | 'tooltip' | 'tutorial'
+  softDismiss?: boolean
+  provideOwnDismiss?: boolean
+  provideOwnClick?: boolean
+  isOpen: boolean
+  openOnHover?: boolean
+  offset?: number
+  arrowPadding?: number
+  middleware?: any[]
+  config2025CuratorHacks?: any
+  [key: string]: any
+}
+
+/**
+ * PopoverPrimitive logic hook (original: $$A1)
+ * Returns props and context for popover triggers, arrows, and containers.
+ */
+export function usePopoverPrimitive({
+  type,
+  softDismiss,
+  provideOwnDismiss,
+  provideOwnClick,
+  isOpen,
+  openOnHover = false,
+  offset: offsetValue = 8,
+  arrowPadding = 0,
+  middleware,
+  config2025CuratorHacks,
+  ...rest
+}: PopoverPrimitiveProps) {
+  const id = useId()
+  const arrowRef = useRef<HTMLDivElement>(null)
+  const [popoverId, setPopoverId] = useState(id)
+
+  const {
     refs,
     floatingStyles,
-    context
-  } = we({
-    ...h,
-    middleware: p ? p?.concat([UE({
-      element: f,
-      padding: u
-    })]) : [cY(c), UU({
-      padding: 8,
-      fallbackAxisSideDirection: "start"
-    }), UE({
-      element: f,
-      padding: u
-    })],
-    open: l,
-    whileElementsMounted: ll
-  });
-  let I = void 0 === t ? "listbox" === e || "menu" === e || "tooltip" === e : t;
-  let E = kp(context, {
-    enabled: "tutorial" !== e && !n
-  });
-  let x = s9(context, {
-    enabled: !i,
-    outsidePress: t
-  });
-  let S = Mk(context, {
-    enabled: d,
-    move: !1,
-    delay: {
-      open: 500,
-      close: 0
-    },
-    handleClose: iB({
-      requireIntent: !1,
-      blockPointerEvents: !0,
-      buffer: 1
-    })
-  });
-  let {
-    getReferenceProps,
-    getFloatingProps
-  } = bv([E, x, S]);
-  let T = useCallback(({
-    style: t,
-    ...i
-  } = {}) => (i.id && A(i.id), {
-    isOpen: l,
-    type: e,
     context,
-    useSoftDismiss: I,
-    id: _,
-    ref: refs.setFloating,
-    style: {
-      ...t,
-      ...floatingStyles
-    },
-    config2025CuratorHacks: m,
-    ...i,
-    ...getFloatingProps({})
-  }), [_, context, I, floatingStyles, getFloatingProps, l, refs.setFloating, e, m]);
-  let k = useCallback(() => ({
-    ref: f,
-    context
-  }), [context, f]);
+  } = useFloating({
+    ...rest,
+    middleware: middleware
+      ? middleware.concat([arrow({ element: arrowRef, padding: arrowPadding })])
+      : [
+          offset(offsetValue),
+          flip({ padding: 8, fallbackAxisSideDirection: 'start' }),
+          arrow({ element: arrowRef, padding: arrowPadding }),
+        ],
+    open: isOpen,
+    whileElementsMounted: autoUpdate,
+  })
+
+  const useSoftDismiss = softDismiss === undefined
+    ? type === 'listbox' || type === 'menu' || type === 'tooltip'
+    : softDismiss
+
+  const click = useClick(context, {
+    enabled: type !== 'tutorial' && !provideOwnClick,
+  })
+  const dismiss = useDismiss(context, {
+    enabled: !provideOwnDismiss,
+    outsidePress: softDismiss,
+  })
+  const hover = useHover(context, {
+    enabled: openOnHover,
+    move: false,
+    delay: { open: 500, close: 0 },
+    handleClose: safePolygon({
+      requireIntent: false,
+      blockPointerEvents: true,
+      buffer: 1,
+    }),
+  })
+
+  const {
+    getReferenceProps,
+    getFloatingProps,
+  } = useInteractions([click, dismiss, hover])
+
+  /**
+   * Returns props for the popover container.
+   * @param options - Container options
+   */
+  const getContainerProps = useCallback(({
+    style,
+    ...containerProps
+  }: { style?: CSSProperties, id?: string, [key: string]: any } = {}) => {
+    if (containerProps.id)
+      setPopoverId(containerProps.id)
+    return {
+      isOpen,
+      type,
+      context,
+      useSoftDismiss,
+      id: popoverId,
+      ref: refs.setFloating,
+      style: { ...style, ...floatingStyles },
+      config2025CuratorHacks,
+      ...containerProps,
+      ...getFloatingProps({}),
+    }
+  }, [
+    popoverId,
+    context,
+    useSoftDismiss,
+    floatingStyles,
+    getFloatingProps,
+    isOpen,
+    refs.setFloating,
+    type,
+    config2025CuratorHacks,
+  ])
+
+  /**
+   * Returns props for the arrow element.
+   */
+  const getArrowProps = useCallback(() => ({
+    ref: arrowRef,
+    context,
+  }), [context, arrowRef])
+
+  /**
+   * Returns props for the trigger element.
+   * @param triggerProps - Additional trigger props
+   */
+  const getTriggerProps = useCallback((triggerProps = {}) => {
+    const ref = refs.setReference
+    if (type === 'tutorial') {
+      const { onClick, ...restProps } = getReferenceProps({
+        ref,
+        'aria-details': popoverId,
+      })
+      return restProps
+    }
+    return getReferenceProps({
+      ...triggerProps,
+      ref,
+      'aria-controls': popoverId,
+      'aria-haspopup': type === 'tooltip' ? 'dialog' : type,
+      'aria-expanded': isOpen,
+      'aria-describedby': type === 'tooltip' ? popoverId : undefined,
+    })
+  }, [popoverId, getReferenceProps, isOpen, refs.setReference, type])
+
   return {
-    getTriggerProps: useCallback((t = {}) => {
-      let i = refs.setReference;
-      if ("tutorial" === e) {
-        let {
-          onClick,
-          ...t
-        } = getReferenceProps({
-          ref: i,
-          "aria-details": _
-        });
-        return t;
-      }
-      return getReferenceProps({
-        ...t,
-        ref: i,
-        "aria-controls": _,
-        "aria-haspopup": "tooltip" === e ? "dialog" : e,
-        "aria-expanded": l,
-        "aria-describedby": "tooltip" === e ? _ : void 0
-      });
-    }, [_, getReferenceProps, l, refs.setReference, e]),
-    getArrowProps: k,
-    getContainerProps: T,
-    context
-  };
+    getTriggerProps,
+    getArrowProps,
+    getContainerProps,
+    context,
+  }
 }
-$$_4.displayName = "PopoverOutlet";
-export let $$y2 = forwardRef(({
-  fill: e = "var(--color-bg)",
-  ...t
-}, i) => {
-  let s = useRef();
-  let o = SV([s, i]);
-  return jsx(ie, {
-    ref: o,
+
+/**
+ * PopoverPrimitiveArrow component (original: PopoverPrimitiveArrow)
+ * Renders the arrow for the popover.
+ */
+export const PopoverPrimitiveArrow = forwardRef<SVGSVGElement, { fill?: string }>(({
+  fill = 'var(--color-bg)',
+  ...props
+}, ref) => {
+  const localRef = useRef<SVGSVGElement>(null)
+  const mergedRef = useMergeRefs([localRef, ref])
+  return jsx(FloatingArrow, {
+    ref: mergedRef,
     tipRadius: 1,
-    fill: e,
-    ...t
-  });
-});
-$$y2.displayName = "PopoverPrimitive.Arrow";
-export let $$b3 = forwardRef(({
-  isOpen: e,
-  type: t,
-  children: i,
-  context: s,
-  useSoftDismiss: o,
-  style: g,
-  config2025CuratorHacks: A,
-  className: y,
-  ...b
-}, v) => {
-  let I = useContext($$f0);
-  let E = "listbox" === t || "menu" === t;
-  let [x, S] = useSelectionProvider();
-  let {
-    version
-  } = DP();
-  let {
-    fpl_popover_fullscreen_events
-  } = Q();
-  let T = fpl_popover_fullscreen_events ? [EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS] : [];
-  let k = {
-    dialog: "var(--z-index-window)",
-    grid: "var(--z-index-window)",
-    tree: "var(--z-index-window)",
-    listbox: "var(--z-index-dropdown)",
-    menu: A ? "9" : "var(--z-index-dropdown)",
-    tutorial: "var(--z-index-window)",
-    tooltip: "var(--z-index-tooltip)"
-  };
-  return e || "listbox" !== t ? e ? o ? jsx(_$$o, {
-    display: "contents",
-    eventListeners: E ? ["onKeyDown", "onKeyUp", "onKeyPress"] : [],
-    children: jsx(XF, {
-      root: I,
-      children: jsx(J, {
-        disabled: "ui3" !== version,
-        children: jsx(zR, {
-          style: {
-            zIndex: k[t],
-            isolation: "isolate"
-          },
-          lockScroll: !0,
-          children: jsx($$_4, {
-            children: jsx(s3, {
-              context: s,
-              modal: E,
-              initialFocus: "tooltip" === t ? -1 : 0,
-              children: jsx("div", {
-                ref: v,
-                style: g,
-                className: _$$A(y, ...T),
-                ...b,
-                children: i
-              })
-            })
-          })
-        })
-      })
+    fill,
+    ...props,
+  })
+})
+PopoverPrimitiveArrow.displayName = 'PopoverPrimitive.Arrow'
+
+/**
+ * Props for PopoverPrimitiveContainer (original: PopoverPrimitiveContainer)
+ */
+/**
+ * Props for PopoverPrimitiveContainer (original: PopoverPrimitiveContainer)
+ * @property {boolean} isOpen - Whether the popover is open
+ * @property {string} type - Type of the popover
+ * @property {ReactNode} children - Children nodes
+ * @property {any} context - Floating UI context
+ * @property {boolean} useSoftDismiss - Enables soft dismiss behavior
+ * @property {CSSProperties} style - Custom styles
+ * @property {any} config2025CuratorHacks - Curator hacks config
+ * @property {string} className - Custom class name
+ * @property {any} [key: string] - Additional props
+ */
+export interface PopoverPrimitiveContainerProps {
+  isOpen: boolean
+  type: string
+  children: ReactNode
+  context: any
+  useSoftDismiss?: boolean
+  style?: CSSProperties
+  config2025CuratorHacks?: any
+  className?: string
+  [key: string]: any
+}
+
+/**
+ * PopoverPrimitiveContainer component (original: PopoverPrimitiveContainer)
+ * Renders the popover container with focus management and event shielding.
+ */
+export const PopoverPrimitiveContainer = forwardRef<HTMLElement, PopoverPrimitiveContainerProps>(({
+  isOpen,
+  type,
+  children,
+  context,
+  useSoftDismiss,
+  style,
+  config2025CuratorHacks,
+  className,
+  ...rest
+}, ref: Ref<HTMLElement>) => {
+  const outletRoot = useContext(PopoverContext)
+  const isMenuOrListbox = type === 'listbox' || type === 'menu'
+  const [selectionId, SelectionProvider] = useSelectionProvider()
+  const { version } = getThemeContextOrDefault()
+  const { fpl_popover_fullscreen_events } = loadFeatureFlags()
+  const eventClasses = fpl_popover_fullscreen_events
+    ? [EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS]
+    : []
+
+  const zIndexMap: Record<string, string> = {
+    dialog: 'var(--z-index-window)',
+    grid: 'var(--z-index-window)',
+    tree: 'var(--z-index-window)',
+    listbox: 'var(--z-index-dropdown)',
+    menu: config2025CuratorHacks ? '9' : 'var(--z-index-dropdown)',
+    tutorial: 'var(--z-index-window)',
+    tooltip: 'var(--z-index-tooltip)',
+  }
+
+  // Render logic for popover container
+  if (!isOpen && type === 'listbox') {
+    return jsx('div', {
+      style: { display: 'none' },
+      children,
     })
-  }) : jsx(S, {
-    value: x,
-    children: jsx(XF, {
-      root: I,
-      children: jsx($$_4, {
-        children: jsx("section", {
-          "aria-labelledby": x,
-          ref: v,
-          ...b,
-          style: {
-            ...g,
-            zIndex: k[t]
-          },
-          className: _$$A(y, ...T),
-          children: i
-        })
-      })
+  }
+
+  if (!isOpen)
+    return null
+
+  if (useSoftDismiss) {
+    // EventShield for soft dismiss
+    return jsx(EventShield, {
+      display: 'contents',
+      eventListeners: isMenuOrListbox ? ['onKeyDown', 'onKeyUp', 'onKeyPress'] : [],
+      children: jsx(FloatingPortal, {
+        root: outletRoot,
+        children: jsx(UI3ConditionalWrapper, {
+          disabled: version !== 'ui3',
+          children: jsx(FloatingOverlay, {
+            style: {
+              zIndex: zIndexMap[type],
+              isolation: 'isolate',
+            },
+            lockScroll: true,
+            children: jsx(PopoverOutlet, {
+              children: jsx(FloatingFocusManager, {
+                context,
+                modal: isMenuOrListbox,
+                initialFocus: type === 'tooltip' ? -1 : 0,
+                children: jsx('div', {
+                  ref,
+                  style,
+                  className: classNames(className, ...eventClasses),
+                  ...rest,
+                  children,
+                }),
+              }),
+            }),
+          }),
+        }),
+      }),
     })
-  }) : null : jsx("div", {
-    style: {
-      display: "none"
-    },
-    children: i
-  });
-});
-$$b3.displayName = "PopoverPrimitive.Container";
-export const Uk = $$f0;
-export const fP = $$A1;
-export const i3 = $$y2;
-export const mc = $$b3;
-export const nK = $$_4;
+  }
+
+  // SelectionProvider for menu/listbox
+  return jsx(SelectionProvider, {
+    value: selectionId,
+    children: jsx(FloatingPortal, {
+      root: outletRoot,
+      children: jsx(PopoverOutlet, {
+        children: jsx('section', {
+          'aria-labelledby': selectionId,
+          ref,
+          ...rest,
+          'style': { ...style, zIndex: zIndexMap[type] },
+          'className': classNames(className, ...eventClasses),
+          children,
+        }),
+      }),
+    }),
+  })
+})
+PopoverPrimitiveContainer.displayName = 'PopoverPrimitive.Container'
+
+// Export refactored names
+export const Uk = PopoverContext
+export const fP = usePopoverPrimitive
+export const i3 = PopoverPrimitiveArrow
+export const mc = PopoverPrimitiveContainer
+export const nK = PopoverOutlet

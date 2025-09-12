@@ -1,8 +1,8 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { g as _$$g } from "../905/749786";
-import { hS } from "../905/437088";
+import { useDialogClose } from "../905/749786";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -41,7 +41,7 @@ let $$C0 = registerModal(function (e) {
       userInitiated: !1
     }));
   };
-  let u = hS({
+  let u = useModalManager({
     open,
     onClose: () => {
       s?.two_factor_secret_loaded && c();
@@ -69,7 +69,7 @@ let $$C0 = registerModal(function (e) {
   }) : null;
 });
 let T = () => {
-  let e = _$$g();
+  let e = useDialogClose();
   return () => e({
     source: "other"
   });

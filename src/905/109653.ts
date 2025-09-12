@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect } from "react";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { N } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
@@ -157,7 +157,7 @@ export function $$N0({
         publishScopeField: u,
         publishRoleField: m
       })
-    }), jsx(_$$_, {
+    }), jsx(LinkPrimitive, {
       href: I,
       newTab: !0,
       trusted: !0,

@@ -1,70 +1,70 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useState, useRef, memo, useCallback } from "react";
-import { useSelector } from "react-redux";
-import { lQ } from "../905/934246";
-import { E as _$$E } from "../905/658074";
-import { W as _$$W } from "../figma_app/462192";
-import { SceneGraphHelpers, GridLayoutApi, GridDirection, LayoutSizingType, Axis, SpacingConstants, VariableResolvedDataType } from "../figma_app/763686";
-import { permissionScopeHandler } from "../905/189185";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { generateRecordingKey } from "../figma_app/878298";
-import { B as _$$B } from "../905/714743";
-import { S as _$$S } from "../905/177206";
-import { N as _$$N } from "../905/696319";
-import { getI18nString } from "../905/303541";
-import { fullscreenValue } from "../figma_app/455680";
-import { UK, sT } from "../figma_app/740163";
-import { isValidValue, isInvalidValue, isAutoMarker } from "../905/216495";
-import { lJ, kl } from "../905/275640";
-import { Fk } from "../figma_app/167249";
-import { Sh } from "../figma_app/889655";
-import { Ib } from "../905/129884";
-import { Ht, $j } from "../figma_app/178475";
-import { sA } from "../figma_app/841644";
-import { fn } from "../figma_app/811257";
-import { iZ } from "../figma_app/473914";
-import { mapRange } from "../figma_app/492908";
-import { fP, mc } from "../905/691059";
-import { E as _$$E2 } from "../905/632989";
-import { i as _$$i } from "../905/718764";
-import { E as _$$E3 } from "../905/172252";
-import T from "classnames";
-import { M as _$$M } from "../figma_app/634148";
-import { getObservableOrFallback } from "../figma_app/84367";
-import { yesNoTrackingEnum } from "../figma_app/198712";
-import { hF, qE, QK } from "../figma_app/960598";
-import { A as _$$A } from "../svg/904889";
-import { A as _$$A2 } from "../svg/452687";
-import { o as _$$o } from "../8826/796619";
-import { wx, Wx, Y9 } from "../figma_app/409807";
-import { A as _$$A3 } from "../svg/532224";
-import { A as _$$A4 } from "../svg/217820";
-import { A as _$$A5 } from "../svg/55819";
-import { A as _$$A6 } from "../svg/504621";
-var P = T;
-let F = "grid_picker--cellVisual--SAtJ1";
-let z = "grid_picker--textSecondary--cfg-p";
-let G = "grid_picker--textDisabled--Yzb8u";
+import T from 'classnames';
+import { memo, useCallback, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { Ib } from '../905/129884';
+import { ScreenReaderOnly } from '../905/172252';
+import { S as _$$S } from '../905/177206';
+import { permissionScopeHandler } from '../905/189185';
+import { isAutoMarker, isInvalidValue, isValidValue } from '../905/216495';
+import { kl, lJ } from '../905/275640';
+import { getI18nString } from '../905/303541';
+import { getFeatureFlags } from '../905/601108';
+import { E as _$$E2 } from '../905/632989';
+import { E as _$$E } from '../905/658074';
+import { PopoverPrimitiveContainer, usePopoverPrimitive } from '../905/691059';
+import { N as _$$N } from '../905/696319';
+import { getSingletonSceneGraph } from '../905/700578';
+import { B as _$$B } from '../905/714743';
+import { i as _$$i } from '../905/718764';
+import { lQ } from '../905/934246';
+import { o as _$$o } from '../8826/796619';
+import { getObservableOrFallback } from '../figma_app/84367';
+import { Fk } from '../figma_app/167249';
+import { $j, Ht } from '../figma_app/178475';
+import { yesNoTrackingEnum } from '../figma_app/198712';
+import { wx, Wx, Y9 } from '../figma_app/409807';
+import { fullscreenValue } from '../figma_app/455680';
+import { W as _$$W } from '../figma_app/462192';
+import { iZ } from '../figma_app/473914';
+import { mapRange } from '../figma_app/492908';
+import { M as _$$M } from '../figma_app/634148';
+import { sT, UK } from '../figma_app/740163';
+import { Axis, GridDirection, GridLayoutApi, LayoutSizingType, SceneGraphHelpers, SpacingConstants, VariableResolvedDataType } from '../figma_app/763686';
+import { fn } from '../figma_app/811257';
+import { sA } from '../figma_app/841644';
+import { generateRecordingKey } from '../figma_app/878298';
+import { Sh } from '../figma_app/889655';
+import { hF, qE, QK } from '../figma_app/960598';
+import { A as _$$A5 } from '../svg/55819';
+import { A as _$$A4 } from '../svg/217820';
+import { A as _$$A2 } from '../svg/452687';
+import { A as _$$A6 } from '../svg/504621';
+import { A as _$$A3 } from '../svg/532224';
+import { A as _$$A } from '../svg/904889';
+let P = T;
+let F = 'grid_picker--cellVisual--SAtJ1';
+let z = 'grid_picker--textSecondary--cfg-p';
+let G = 'grid_picker--textDisabled--Yzb8u';
 let U = (e = !1) => P()(F, {
-  "grid_picker--cellVisualMixedSpan--VIczc": e
+  'grid_picker--cellVisualMixedSpan--VIczc': e
 });
 function W({
   recordingKey: e,
   disabled: t
 }) {
   let [n, r] = useState(!1);
-  let [a, o] = lJ("gridColumnCount");
-  let [s, u] = lJ("gridRowCount");
+  let [a, o] = lJ('gridColumnCount');
+  let [s, u] = lJ('gridRowCount');
   let g = a && isValidValue(a) ? a : null;
   let m = s && isValidValue(s) ? s : null;
   let _ = useRef(null);
   let v = Fk(e => {
     let t = e.getDirectlySelectedNodes();
-    return 0 !== t.length && t.every(e => {
+    return t.length !== 0 && t.every(e => {
       if (!e) return !1;
-      let t = "GRID" === e.stackMode;
-      let n = 0 === e.childrenNodes.length;
+      let t = e.stackMode === 'GRID';
+      let n = e.childrenNodes.length === 0;
       return t && n;
     });
   });
@@ -73,20 +73,20 @@ function W({
   let {
     getTriggerProps,
     getContainerProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: n,
     onOpenChange(e) {
       r(e);
       e ? (SceneGraphHelpers && SceneGraphHelpers.clearGridTrackOrCellSelection(), S({
-        mode: "hover",
+        mode: 'hover',
         hoveredIndex: null
       }), g && m ? _.current = {
         cols: g,
         rows: m
       } : _.current = null) : (S(null), _.current = null);
     },
-    type: "dialog",
-    placement: "bottom-start",
+    type: 'dialog',
+    placement: 'bottom-start',
     offset: {
       mainAxis: j ? -114 : -96,
       crossAxis: -12
@@ -94,12 +94,12 @@ function W({
     softDismiss: !0
   });
   let I = (e, t) => {
-    if (!v || null === e || null === t) return;
+    if (!v || e === null || t === null) return;
     let n = t >= 1 && t <= 100;
     if (!(e >= 1 && e <= 100) || !n) return;
     let l = e !== g;
     let i = t !== m;
-    (l || i) && permissionScopeHandler.user("grid-panel-empty-grid-immediate-resize", () => {
+    (l || i) && permissionScopeHandler.user('grid-panel-empty-grid-immediate-resize', () => {
       l && o(e, yesNoTrackingEnum.NO);
       i && u(t, yesNoTrackingEnum.NO);
     });
@@ -111,17 +111,17 @@ function W({
   let M = (e, t) => {
     S(n => {
       if (!n) return null;
-      if ("hover" === n.mode) {
+      if (n.mode === 'hover') {
         let n = {
-          mode: "input",
-          intermediateCols: "cols" === e ? t : g,
-          intermediateRows: "rows" === e ? t : m
+          mode: 'input',
+          intermediateCols: e === 'cols' ? t : g,
+          intermediateRows: e === 'rows' ? t : m
         };
         I(n.intermediateCols, n.intermediateRows);
         return n;
       }
-      if ("input" === n.mode) {
-        let l = "cols" === e ? {
+      if (n.mode === 'input') {
+        let l = e === 'cols' ? {
           ...n,
           intermediateCols: t
         } : {
@@ -135,70 +135,70 @@ function W({
     });
   };
   let K = (e, t) => {
-    let n = null !== e && e >= 1 && e <= 100 && e !== g;
-    let l = null !== t && t >= 1 && t <= 100 && t !== m;
-    n || l ? permissionScopeHandler.user("grid-panel-commit", () => {
+    let n = e !== null && e >= 1 && e <= 100 && e !== g;
+    let l = t !== null && t >= 1 && t <= 100 && t !== m;
+    n || l ? permissionScopeHandler.user('grid-panel-commit', () => {
       let i = n && !l ? yesNoTrackingEnum.YES : yesNoTrackingEnum.NO;
-      getFeatureFlags().ce_tv_grid_reflow && C?.mode === "hover" ? GridLayoutApi?.setDimensions(t, e) : (n && o(e, i), l && u(t, yesNoTrackingEnum.YES));
-    }) : permissionScopeHandler.user("grid-panel-commit", () => {
+      getFeatureFlags().ce_tv_grid_reflow && C?.mode === 'hover' ? GridLayoutApi?.setDimensions(t, e) : (n && o(e, i), l && u(t, yesNoTrackingEnum.YES));
+    }) : permissionScopeHandler.user('grid-panel-commit', () => {
       u(t, yesNoTrackingEnum.YES);
     });
   };
   let V = (e, t) => {
-    let n = "cols" === e ? m : g;
-    C?.mode === "input" && (n = "cols" === e ? C.intermediateRows : C.intermediateCols);
-    K("cols" === e ? t : n, "rows" === e ? t : n);
+    let n = e === 'cols' ? m : g;
+    C?.mode === 'input' && (n = e === 'cols' ? C.intermediateRows : C.intermediateCols);
+    K(e === 'cols' ? t : n, e === 'rows' ? t : n);
   };
   let D = () => {
-    C?.mode === "hover" && S({
+    C?.mode === 'hover' && S({
       intermediateCols: g,
       intermediateRows: m,
-      mode: "input"
+      mode: 'input'
     });
   };
   return jsxs(Fragment, {
     children: [jsxs(_$$E2, {
       actionOnPointerDown: !0,
       ...getTriggerProps({
-        className: "grid_picker--gridWidget--e47iU",
+        className: 'grid_picker--gridWidget--e47iU',
         style: {
-          "--cols": T
+          '--cols': T
         }
       }),
-      recordingKey: generateRecordingKey(e, "button"),
+      recordingKey: generateRecordingKey(e, 'button'),
       disabled: t,
-      children: [jsx("div", {
-        className: "grid_picker--gridWidgetLabel--ceNc2",
-        children: O ? getI18nString("common.mixed") : jsxs("span", {
-          className: t ? G : "",
-          children: [String(g), jsxs("span", {
+      children: [jsx('div', {
+        className: 'grid_picker--gridWidgetLabel--ceNc2',
+        children: O ? getI18nString('common.mixed') : jsxs('span', {
+          className: t ? G : '',
+          children: [String(g), jsxs('span', {
             className: t ? G : z,
-            children: [" ", "\xd7", " "]
+            children: [' ', '\xD7', ' ']
           }), String(m)]
         })
       }), O ? jsxs(Fragment, {
-        children: [jsx("div", {
+        children: [jsx('div', {
           className: U()
-        }), jsx("div", {
+        }), jsx('div', {
           className: U(!0)
-        }), jsx("div", {
+        }), jsx('div', {
           className: U()
         })]
-      }) : mapRange(T * P, e => jsx("div", {
+      }) : mapRange(T * P, e => jsx('div', {
         className: F
       }, e))]
-    }), n && jsx(mc, {
+    }), n && jsx(PopoverPrimitiveContainer, {
       ...getContainerProps({
-        className: "grid_picker--gridWidgetPopover--U5ykN"
+        className: 'grid_picker--gridWidgetPopover--U5ykN'
       }),
       onKeyDown: e => {
-        if ("Escape" === e.key) {
+        if (e.key === 'Escape') {
           if (e.stopPropagation(), e.preventDefault(), v && _.current) {
             let e = _.current.cols;
             let t = _.current.rows;
             let n = g !== e;
             let l = m !== t;
-            (n || l) && permissionScopeHandler.user("grid-panel-revert-on-escape", () => {
+            (n || l) && permissionScopeHandler.user('grid-panel-revert-on-escape', () => {
               n && o(e, yesNoTrackingEnum.NO);
               l && u(t, yesNoTrackingEnum.NO);
             });
@@ -206,30 +206,30 @@ function W({
           S(null);
           r(!1);
         }
-        "Enter" === e.key && (S(null), r(!1));
+        e.key === 'Enter' && (S(null), r(!1));
       },
       children: jsxs(_$$i, {
         children: [jsx(q, {
           recordingKey: e,
           value: a,
-          onIntermediateChange: e => M("cols", e),
-          onCommit: e => V("cols", e),
+          onIntermediateChange: e => M('cols', e),
+          onCommit: e => V('cols', e),
           onClick: D
-        }), jsx("span", {
+        }), jsx('span', {
           className: z,
-          children: "\xd7"
+          children: '\xD7'
         }), jsx(J, {
           recordingKey: e,
           value: s,
-          onIntermediateChange: e => M("rows", e),
-          onCommit: e => V("rows", e),
+          onIntermediateChange: e => M('rows', e),
+          onCommit: e => V('rows', e),
           onClick: D
         }), jsx(et, {
           gridState: C,
           setGridState: S,
           onReEnableHover: e => {
             S({
-              mode: "hover",
+              mode: 'hover',
               hoveredIndex: e
             });
           },
@@ -237,9 +237,9 @@ function W({
             cols: e,
             rows: t
           }) => {
-            C?.mode !== "input" && (K(e, t), r(!1));
+            C?.mode !== 'input' && (K(e, t), r(!1));
           },
-          recordingKey: generateRecordingKey(e, "gridBoxes"),
+          recordingKey: generateRecordingKey(e, 'gridBoxes'),
           initialGridSize: _.current
         })]
       })
@@ -257,7 +257,9 @@ function X(e, t) {
     if (n instanceof HTMLInputElement) {
       let e = n.value;
       let l = null;
-      if ("" === e) l = null; else {
+      if (e === '') {
+        l = null;
+      } else {
         let t = parseInt(e, 10);
         l = isNaN(t) ? null : t;
       }
@@ -274,74 +276,74 @@ class Q extends _$$M {
     return e[this.nodeField] ?? 0;
   }
   setValueForNode(e, t) {
-    permissionScopeHandler.user("set-grid-track-count", () => {
-      "gridRowCount" === this.nodeField ? e.setGridRowCount(t, !0) : "gridColumnCount" === this.nodeField && e.setGridColumnCount(t, !0);
+    permissionScopeHandler.user('set-grid-track-count', () => {
+      this.nodeField === 'gridRowCount' ? e.setGridRowCount(t, !0) : this.nodeField === 'gridColumnCount' && e.setGridColumnCount(t, !0);
     });
   }
 }
-let $ = new Q("gridRowCount");
-let Z = new Q("gridColumnCount");
-let q = memo(function ({
+let $ = new Q('gridRowCount');
+let Z = new Q('gridColumnCount');
+let q = memo(({
   recordingKey: e,
   value: t,
   onIntermediateChange: n,
   onCommit: i,
   onClick: r
-}) {
+}) => {
   return jsx(Ht, {
-    className: hF,
-    "data-tooltip": getI18nString("fullscreen.properties_panel.grid.number_of_columns"),
-    "data-tooltip-type": Ib.TEXT,
-    dataTestId: "grid-columns",
-    dispatch: lQ,
-    id: "grid-columns",
-    inputClassName: qE,
-    max: 100,
-    min: 1,
-    mixedMathHandler: Z,
-    onClick: r,
-    onKeyDown: e => {
+    'className': hF,
+    'data-tooltip': getI18nString('fullscreen.properties_panel.grid.number_of_columns'),
+    'data-tooltip-type': Ib.TEXT,
+    'dataTestId': 'grid-columns',
+    'dispatch': lQ,
+    'id': 'grid-columns',
+    'inputClassName': qE,
+    'max': 100,
+    'min': 1,
+    'mixedMathHandler': Z,
+    'onClick': r,
+    'onKeyDown': e => {
       X(e, n);
     },
-    onValueChange: (e, t) => {
+    'onValueChange': (e, t) => {
       t ? i(e) : n(e);
     },
-    recordingKey: generateRecordingKey(e, "colInput"),
-    value: t,
-    children: jsx(_$$B, {
+    'recordingKey': generateRecordingKey(e, 'colInput'),
+    'value': t,
+    'children': jsx(_$$B, {
       svg: _$$A,
       className: QK
     })
   });
 });
-let J = memo(function ({
+let J = memo(({
   recordingKey: e,
   value: t,
   onIntermediateChange: n,
   onCommit: i,
   onClick: r
-}) {
+}) => {
   return jsx(Ht, {
-    className: hF,
-    "data-tooltip": getI18nString("fullscreen.properties_panel.grid.number_of_rows"),
-    "data-tooltip-type": Ib.TEXT,
-    dataTestId: "grid-rows",
-    dispatch: lQ,
-    id: "grid-rows",
-    inputClassName: qE,
-    max: 100,
-    min: 1,
-    mixedMathHandler: $,
-    onClick: r,
-    onKeyDown: e => {
+    'className': hF,
+    'data-tooltip': getI18nString('fullscreen.properties_panel.grid.number_of_rows'),
+    'data-tooltip-type': Ib.TEXT,
+    'dataTestId': 'grid-rows',
+    'dispatch': lQ,
+    'id': 'grid-rows',
+    'inputClassName': qE,
+    'max': 100,
+    'min': 1,
+    'mixedMathHandler': $,
+    'onClick': r,
+    'onKeyDown': e => {
       X(e, n);
     },
-    onValueChange: (e, t) => {
+    'onValueChange': (e, t) => {
       t ? i(e) : n(e);
     },
-    recordingKey: generateRecordingKey(e, "rowInput"),
-    value: t,
-    children: jsx(_$$B, {
+    'recordingKey': generateRecordingKey(e, 'rowInput'),
+    'value': t,
+    'children': jsx(_$$B, {
       svg: _$$A2,
       className: QK
     })
@@ -359,77 +361,77 @@ function ee({
   onReEnableHover: c,
   onCommit: d
 }) {
-  let u = getI18nString("fullscreen.properties_panel.grid.columns_and_rows", {
+  let u = getI18nString('fullscreen.properties_panel.grid.columns_and_rows', {
     cellCol: i,
     cellRow: n
   });
-  let p = getI18nString("fullscreen.properties_panel.grid.columns_x_rows", {
+  let p = getI18nString('fullscreen.properties_panel.grid.columns_x_rows', {
     cellCol: i,
     cellRow: n
   });
   return jsxs(_$$E2, {
-    className: "grid_picker--gridCellButton--g7VBU",
-    "data-idx": t,
-    onClick: () => {
-      "input" === s ? c(t) : "hover" === s && d({
+    'className': 'grid_picker--gridCellButton--g7VBU',
+    'data-idx': t,
+    'onClick': () => {
+      s === 'input' ? c(t) : s === 'hover' && d({
         cols: i,
         rows: n
       });
     },
-    recordingKey: e,
-    "data-tooltip": p,
-    "data-tooltip-type": Ib.TEXT,
-    "data-tooltip-offset-y": 4,
-    "data-tooltip-timeout-delay": 300,
-    "aria-pressed": a,
-    children: [jsx("div", {
-      className: "grid_picker--gridCellWrapper--zGP-7",
-      children: jsx("div", {
-        className: P()("grid_picker--gridCell--UWlY2", {
-          "grid_picker--selected--WcfBm": r,
-          "grid_picker--initialSize--QDKhm": o
+    'recordingKey': e,
+    'data-tooltip': p,
+    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-offset-y': 4,
+    'data-tooltip-timeout-delay': 300,
+    'aria-pressed': a,
+    'children': [jsx('div', {
+      className: 'grid_picker--gridCellWrapper--zGP-7',
+      children: jsx('div', {
+        className: P()('grid_picker--gridCell--UWlY2', {
+          'grid_picker--selected--WcfBm': r,
+          'grid_picker--initialSize--QDKhm': o
         })
       })
-    }), jsx(_$$E3, {
+    }), jsx(ScreenReaderOnly, {
       children: u
     })]
   });
 }
-let et = memo(function ({
+let et = memo(({
   gridState: e,
   setGridState: t,
   onReEnableHover: n,
   handleGridSelectionResizeAndCommit: i,
   recordingKey: r,
   initialGridSize: a
-}) {
-  let o = e?.mode === "hover" && null !== e.hoveredIndex ? e.hoveredIndex % 12 : -1;
-  let s = e?.mode === "hover" && null !== e.hoveredIndex ? Math.floor(e.hoveredIndex / 12) : -1;
+}) => {
+  let o = e?.mode === 'hover' && e.hoveredIndex !== null ? e.hoveredIndex % 12 : -1;
+  let s = e?.mode === 'hover' && e.hoveredIndex !== null ? Math.floor(e.hoveredIndex / 12) : -1;
   let c = n => {
-    if (e?.mode !== "hover") return;
-    let l = n.target.closest("button[data-idx]");
+    if (e?.mode !== 'hover') return;
+    let l = n.target.closest('button[data-idx]');
     if (l) {
-      let n = l.getAttribute("data-idx");
-      if (null !== n) {
+      let n = l.getAttribute('data-idx');
+      if (n !== null) {
         let l = parseInt(n);
-        isNaN(l) || l === e.hoveredIndex || t(e => e?.mode === "hover" ? {
+        isNaN(l) || l === e.hoveredIndex || t(e => e?.mode === 'hover' ? {
           ...e,
           hoveredIndex: l
         } : e);
       }
     }
   };
-  return jsx("div", {
-    className: "grid_picker--gridBoxes--WuMui",
+  return jsx('div', {
+    className: 'grid_picker--gridBoxes--WuMui',
     style: {
-      "--cols": 12,
-      "--rows": 8
+      '--cols': 12,
+      '--rows': 8
     },
     onPointerOver: t => {
-      e?.mode === "hover" && c(t);
+      e?.mode === 'hover' && c(t);
     },
     onKeyDown: n => {
-      let l = n.target.getAttribute("data-idx");
+      let l = n.target.getAttribute('data-idx');
       if (!l) return;
       let r = parseInt(l);
       let a = r % 12;
@@ -437,43 +439,43 @@ let et = memo(function ({
       let s = o;
       let c = a;
       switch (n.code) {
-        case "KeyK":
-        case "ArrowUp":
+        case 'KeyK':
+        case 'ArrowUp':
           s = Math.max(o - 1, 0);
           break;
-        case "KeyJ":
-        case "ArrowDown":
+        case 'KeyJ':
+        case 'ArrowDown':
           s = Math.min(o + 1, 7);
           break;
-        case "KeyH":
-        case "ArrowLeft":
+        case 'KeyH':
+        case 'ArrowLeft':
           c = Math.max(a - 1, 0);
           break;
-        case "KeyL":
-        case "ArrowRight":
+        case 'KeyL':
+        case 'ArrowRight':
           c = Math.min(a + 1, 11);
           break;
-        case "Home":
+        case 'Home':
           c = 0;
           break;
-        case "End":
+        case 'End':
           c = 11;
           break;
-        case "PageUp":
+        case 'PageUp':
           s = 0;
           break;
-        case "PageDown":
+        case 'PageDown':
           s = 7;
           break;
-        case "KeyX":
+        case 'KeyX':
           {
             let e = s;
             s = c;
             c = e;
             break;
           }
-        case "Enter":
-          if (e?.mode === "hover") {
+        case 'Enter':
+          if (e?.mode === 'hover') {
             let e = Math.floor(r / 12);
             i({
               cols: r % 12 + 1,
@@ -489,11 +491,11 @@ let et = memo(function ({
       n.stopPropagation();
       n.preventDefault();
       let d = 12 * s + c;
-      t(e => e ? "hover" === e.mode ? {
+      t(e => e ? e.mode === 'hover' ? {
         ...e,
         hoveredIndex: d
-      } : "input" === e.mode ? {
-        mode: "hover",
+      } : e.mode === 'input' ? {
+        mode: 'hover',
         hoveredIndex: d
       } : e : null);
       let u = n.currentTarget.querySelector(`[data-idx='${d}']`);
@@ -501,11 +503,11 @@ let et = memo(function ({
     },
     onFocusCapture: e => {
       let n = e.target;
-      if (n instanceof HTMLButtonElement && n.hasAttribute("data-idx")) {
-        let e = n.getAttribute("data-idx");
-        if (null !== e) {
+      if (n instanceof HTMLButtonElement && n.hasAttribute('data-idx')) {
+        let e = n.getAttribute('data-idx');
+        if (e !== null) {
           let n = parseInt(e);
-          isNaN(n) || t(e => e ? "hover" === e.mode && e.hoveredIndex !== n ? {
+          isNaN(n) || t(e => e ? e.mode === 'hover' && e.hoveredIndex !== n ? {
             ...e,
             hoveredIndex: n
           } : e : null);
@@ -517,20 +519,20 @@ let et = memo(function ({
       let d = t % 12;
       let u = Math.floor(t / 12);
       let p = !1;
-      if (e?.mode === "input") {
+      if (e?.mode === 'input') {
         let {
           intermediateCols,
           intermediateRows
         } = e;
-        let l = "number" == typeof intermediateCols && intermediateCols > 0;
-        let i = "number" == typeof intermediateRows && intermediateRows > 0;
+        let l = typeof intermediateCols == 'number' && intermediateCols > 0;
+        let i = typeof intermediateRows == 'number' && intermediateRows > 0;
         c = l && i && d < intermediateCols && u < intermediateRows;
         p = l && i && d + 1 === intermediateCols && u + 1 === intermediateRows;
       } else {
         c = e?.hoveredIndex !== null && d <= o && u <= s;
         p = d === o && u === s;
       }
-      let g = null !== a && d < a.cols && u < a.rows;
+      let g = a !== null && d < a.cols && u < a.rows;
       return jsx(ee, {
         cellCol: d + 1,
         cellRow: u + 1,
@@ -538,7 +540,7 @@ let et = memo(function ({
         isInitialSize: g,
         isPressed: p,
         isSelected: c,
-        mode: e?.mode || "hover",
+        mode: e?.mode || 'hover',
         onCommit: i,
         onReEnableHover: n,
         recordingKey: generateRecordingKey(r, u + 1, d + 1)
@@ -548,16 +550,16 @@ let et = memo(function ({
 });
 export function $$es1(e) {
   let t = useSelector(Sh);
-  let n = 1 === t.length && t[0] ? t[0] : "";
+  let n = t.length === 1 && t[0] ? t[0] : '';
   return Fk((t, n) => {
     let l = t.get(n);
-    return l ? "PARENT" === e && l.isGrid ? n : "CHILD" === e && l.isGridChild ? n : null : null;
+    return l ? e === 'PARENT' && l.isGrid ? n : e === 'CHILD' && l.isGridChild ? n : null : null;
   }, n);
 }
 function ec({
   recordingKey: e
 }) {
-  let t = $$es1("CHILD");
+  let t = $$es1('CHILD');
   let n = Fk((e, t) => {
     if (!t) return null;
     let n = e.get(t);
@@ -569,12 +571,12 @@ function ec({
     } : null;
   }, t);
   let r = useCallback((e, t) => {
-    permissionScopeHandler.user("grid-panel", () => {
+    permissionScopeHandler.user('grid-panel', () => {
       GridLayoutApi && t >= 0 && GridLayoutApi.setTrackAnchor(e, t);
     });
   }, []);
   let o = useCallback((e, n) => {
-    null !== t && permissionScopeHandler.user("grid-panel", () => {
+    t !== null && permissionScopeHandler.user('grid-panel', () => {
       let l = getSingletonSceneGraph();
       let i = l.get(t);
       let r = i && i.parentGuid && l.get(i.parentGuid);
@@ -583,60 +585,60 @@ function ec({
   }, [t]);
   return wx() ? null : t ? jsxs(Fragment, {
     children: [jsx(fn, {
-      leftLabel: "Rows",
-      rightLabel: "Columns",
+      leftLabel: 'Rows',
+      rightLabel: 'Columns',
       leftInput: jsx(Ht, {
-        value: n?.rowAnchorIndex ?? void 0,
-        onValueChange: e => r(GridDirection.ROW, e),
-        recordingKey: generateRecordingKey(e, "grid-rows"),
-        id: "grid-rows",
-        dispatch: lQ,
-        "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": getI18nString("fullscreen.properties_panel.grid.row_index"),
-        children: jsx("span", {
+        'value': n?.rowAnchorIndex ?? void 0,
+        'onValueChange': e => r(GridDirection.ROW, e),
+        'recordingKey': generateRecordingKey(e, 'grid-rows'),
+        'id': 'grid-rows',
+        'dispatch': lQ,
+        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip': getI18nString('fullscreen.properties_panel.grid.row_index'),
+        'children': jsx('span', {
           className: `${QK} svg`,
-          children: getI18nString("fullscreen.properties_panel.grid_panel.r")
+          children: getI18nString('fullscreen.properties_panel.grid_panel.r')
         })
       }),
       rightInput: jsx(Ht, {
-        value: n?.columnAnchorIndex ?? void 0,
-        onValueChange: e => r(GridDirection.COLUMN, e),
-        recordingKey: generateRecordingKey(e, "grid-columns"),
-        id: "grid-columns",
-        dispatch: lQ,
-        "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": getI18nString("fullscreen.properties_panel.grid.column_index"),
-        children: jsx("span", {
+        'value': n?.columnAnchorIndex ?? void 0,
+        'onValueChange': e => r(GridDirection.COLUMN, e),
+        'recordingKey': generateRecordingKey(e, 'grid-columns'),
+        'id': 'grid-columns',
+        'dispatch': lQ,
+        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip': getI18nString('fullscreen.properties_panel.grid.column_index'),
+        'children': jsx('span', {
           className: `${QK} svg`,
-          children: getI18nString("fullscreen.properties_panel.grid_panel.c")
+          children: getI18nString('fullscreen.properties_panel.grid_panel.c')
         })
       }),
       icon: null
     }), jsx(fn, {
-      leftLabel: "Rows",
-      rightLabel: "Columns",
+      leftLabel: 'Rows',
+      rightLabel: 'Columns',
       leftInput: jsx(Ht, {
-        value: n?.rowSpan,
-        onValueChange: e => o(GridDirection.ROW, e),
-        recordingKey: generateRecordingKey(e, "grid-rows"),
-        id: "grid-rows",
-        dispatch: lQ,
-        "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": getI18nString("fullscreen.properties_panel.grid.vertical_span"),
-        children: jsx(_$$B, {
+        'value': n?.rowSpan,
+        'onValueChange': e => o(GridDirection.ROW, e),
+        'recordingKey': generateRecordingKey(e, 'grid-rows'),
+        'id': 'grid-rows',
+        'dispatch': lQ,
+        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip': getI18nString('fullscreen.properties_panel.grid.vertical_span'),
+        'children': jsx(_$$B, {
           svg: _$$A6,
           className: QK
         })
       }),
       rightInput: jsx(Ht, {
-        value: n?.columnSpan,
-        onValueChange: e => o(GridDirection.COLUMN, e),
-        recordingKey: generateRecordingKey(e, "grid-columns"),
-        id: "grid-columns",
-        dispatch: lQ,
-        "data-tooltip-type": Ib.TEXT,
-        "data-tooltip": getI18nString("fullscreen.properties_panel.grid.horizontal_span"),
-        children: jsx(_$$B, {
+        'value': n?.columnSpan,
+        'onValueChange': e => o(GridDirection.COLUMN, e),
+        'recordingKey': generateRecordingKey(e, 'grid-columns'),
+        'id': 'grid-columns',
+        'dispatch': lQ,
+        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip': getI18nString('fullscreen.properties_panel.grid.horizontal_span'),
+        'children': jsx(_$$B, {
           svg: _$$A5,
           className: QK
         })
@@ -650,9 +652,9 @@ function ed({
 }) {
   let t = Fk(e => {
     let t = e.getDirectlySelectedNodes();
-    if (1 !== t.length) return null;
+    if (t.length !== 1) return null;
     let n = t[0];
-    if (!n || !n.isGridChild || "ABSOLUTE" === n.stackPositioning) return null;
+    if (!n || !n.isGridChild || n.stackPositioning === 'ABSOLUTE') return null;
     let l = n.parentNode;
     if (!l || !l.isGrid) return null;
     let i = l.gridRowSizesInOrder[n.gridRowAnchorIndex];
@@ -676,49 +678,49 @@ function ed({
     max: t?.maxRowSpan
   });
   let a = useCallback((e, n, l) => {
-    null !== t && null !== t.gridChildId && permissionScopeHandler.user("grid-panel", () => {
+    t !== null && t.gridChildId !== null && permissionScopeHandler.user('grid-panel', () => {
       let i = getSingletonSceneGraph().get(t.gridChildId);
       let r = i && i.parentNode;
-      i && r && (i.setSpanAndUpdateChildPositions(e, n), l && fullscreenValue.triggerAction("commit"));
+      i && r && (i.setSpanAndUpdateChildPositions(e, n), l && fullscreenValue.triggerAction('commit'));
     });
   }, [t]);
   return t ? jsx(Fragment, {
     children: jsx(fn, {
-      leftLabel: getI18nString("fullscreen.properties_panel.grid.column_span"),
-      rightLabel: getI18nString("fullscreen.properties_panel.grid.row_span"),
+      leftLabel: getI18nString('fullscreen.properties_panel.grid.column_span'),
+      rightLabel: getI18nString('fullscreen.properties_panel.grid.row_span'),
       leftInput: jsx(_$$N, {
-        "aria-label": getI18nString("fullscreen.properties_panel.grid.column_span"),
-        formatter: n,
-        value: t.columnSpan,
-        onChange: (e, {
+        'aria-label': getI18nString('fullscreen.properties_panel.grid.column_span'),
+        'formatter': n,
+        'value': t.columnSpan,
+        'onChange': (e, {
           commit: t
         }) => {
           a(Axis.X, e, t);
         },
-        disabled: !t.columnSpanEnabled,
-        icon: jsx(_$$B, {
+        'disabled': !t.columnSpanEnabled,
+        'icon': jsx(_$$B, {
           svg: _$$A3,
           className: QK
         }),
-        recordingKey: generateRecordingKey(e, "gridColumnSpan"),
-        "data-testid": "grid-column-span-input"
+        'recordingKey': generateRecordingKey(e, 'gridColumnSpan'),
+        'data-testid': 'grid-column-span-input'
       }),
       rightInput: jsx(_$$N, {
-        "aria-label": getI18nString("fullscreen.properties_panel.grid.row_span"),
-        formatter: r,
-        value: t.rowSpan,
-        onChange: (e, {
+        'aria-label': getI18nString('fullscreen.properties_panel.grid.row_span'),
+        'formatter': r,
+        'value': t.rowSpan,
+        'onChange': (e, {
           commit: t
         }) => {
           a(Axis.Y, e, t);
         },
-        disabled: !t.rowSpanEnabled,
-        icon: jsx(_$$B, {
+        'disabled': !t.rowSpanEnabled,
+        'icon': jsx(_$$B, {
           svg: _$$A4,
           className: QK
         }),
-        recordingKey: generateRecordingKey(e, "gridRowSpan"),
-        "data-testid": "grid-row-span-input"
+        'recordingKey': generateRecordingKey(e, 'gridRowSpan'),
+        'data-testid': 'grid-row-span-input'
       }),
       icon: null
     })
@@ -741,28 +743,28 @@ export function $$eu0({
 function ep({
   recordingKey: e
 }) {
-  let t = kl("isInstanceSelected");
-  let n = kl("isNonEditableInstanceSublayerSelected");
-  return "GRID" !== kl("stackMode") ? null : jsx(iZ, {
-    leftLabel: getI18nString("fullscreen.properties_panel.stack_panel.grid"),
-    rightLabel: getI18nString("fullscreen.properties_panel.section_autoLayout.label_gap"),
+  let t = kl('isInstanceSelected');
+  let n = kl('isNonEditableInstanceSublayerSelected');
+  return kl('stackMode') !== 'GRID' ? null : jsx(iZ, {
+    leftLabel: getI18nString('fullscreen.properties_panel.stack_panel.grid'),
+    rightLabel: getI18nString('fullscreen.properties_panel.section_autoLayout.label_gap'),
     leftInput: jsx(Y, {
-      recordingKey: generateRecordingKey(e, "gridPicker"),
+      recordingKey: generateRecordingKey(e, 'gridPicker'),
       disabled: !!(t || n)
     }),
     topRightInput: jsx(eg, {
-      recordingKey: generateRecordingKey(e, "gridColumnSpacingControl")
+      recordingKey: generateRecordingKey(e, 'gridColumnSpacingControl')
     }),
     bottomRightInput: jsx(e_, {
-      recordingKey: generateRecordingKey(e, "gridRowSpacingControl")
+      recordingKey: generateRecordingKey(e, 'gridRowSpacingControl')
     }),
     topIcon: jsx(_$$o, {
-      recordingKey: generateRecordingKey(e, "stackLayoutDetails")
+      recordingKey: generateRecordingKey(e, 'stackLayoutDetails')
     }),
     bottomIcon: null
   });
 }
-let eh = ["GRID_COLUMN_GAP"];
+let eh = ['GRID_COLUMN_GAP'];
 function eg({
   recordingKey: e
 }) {
@@ -772,32 +774,32 @@ function eg({
     bigNudgeAmount,
     smallNudgeAmount
   } = sT();
-  let [u, h] = lJ("gridColumnGap");
+  let [u, h] = lJ('gridColumnGap');
   let g = useCallback((e, t) => {
-    permissionScopeHandler.user("grid-panel", () => {
+    permissionScopeHandler.user('grid-panel', () => {
       isAutoMarker(e) || h(e, t);
     });
   }, [h]);
   let m = jsx($j, {
     bigNudgeAmount,
-    "data-tooltip": getI18nString("fullscreen.properties_panel.grid.gap_between_columns"),
-    "data-tooltip-type": Ib.TEXT,
-    dataTestId: "grid-col-spacing-control",
-    dispatch: lQ,
-    inputClassName: hF,
-    isTokenizable: !0,
-    noBorderOnHover: !0,
-    onBlur: () => t(SpacingConstants.SPACING, !1),
-    onFocus: () => t(SpacingConstants.SPACING, !0),
-    onMouseEnter: () => n(SpacingConstants.SPACING, !0),
-    onMouseLeave: () => n(SpacingConstants.SPACING, !1),
-    onScrubBegin: () => t(SpacingConstants.SPACING, !0),
-    onScrubEnd: () => t(SpacingConstants.SPACING, !1),
-    onValueChange: g,
-    recordingKey: e,
+    'data-tooltip': getI18nString('fullscreen.properties_panel.grid.gap_between_columns'),
+    'data-tooltip-type': Ib.TEXT,
+    'dataTestId': 'grid-col-spacing-control',
+    'dispatch': lQ,
+    'inputClassName': hF,
+    'isTokenizable': !0,
+    'noBorderOnHover': !0,
+    'onBlur': () => t(SpacingConstants.SPACING, !1),
+    'onFocus': () => t(SpacingConstants.SPACING, !0),
+    'onMouseEnter': () => n(SpacingConstants.SPACING, !0),
+    'onMouseLeave': () => n(SpacingConstants.SPACING, !1),
+    'onScrubBegin': () => t(SpacingConstants.SPACING, !0),
+    'onScrubEnd': () => t(SpacingConstants.SPACING, !1),
+    'onValueChange': g,
+    'recordingKey': e,
     smallNudgeAmount,
-    value: u ?? 0,
-    children: jsx(_$$E, {
+    'value': u ?? 0,
+    'children': jsx(_$$E, {
       className: QK
     })
   });
@@ -808,7 +810,7 @@ function eg({
     children: m
   }) : m;
 }
-let em = ["GRID_ROW_GAP"];
+let em = ['GRID_ROW_GAP'];
 function e_({
   recordingKey: e
 }) {
@@ -818,32 +820,32 @@ function e_({
     bigNudgeAmount,
     smallNudgeAmount
   } = sT();
-  let [u, h] = lJ("gridRowGap");
+  let [u, h] = lJ('gridRowGap');
   let g = useCallback((e, t) => {
-    permissionScopeHandler.user("grid-panel", () => {
+    permissionScopeHandler.user('grid-panel', () => {
       isAutoMarker(e) || h(e, t);
     });
   }, [h]);
   let m = jsx($j, {
     bigNudgeAmount,
-    "data-tooltip": getI18nString("fullscreen.properties_panel.grid.gap_between_rows"),
-    "data-tooltip-type": Ib.TEXT,
-    dataTestId: "grid-row-spacing-control",
-    dispatch: lQ,
-    inputClassName: hF,
-    isTokenizable: !0,
-    noBorderOnHover: !0,
-    onBlur: () => t(SpacingConstants.COUNTER_SPACING, !1),
-    onFocus: () => t(SpacingConstants.COUNTER_SPACING, !0),
-    onMouseEnter: () => n(SpacingConstants.COUNTER_SPACING, !0),
-    onMouseLeave: () => n(SpacingConstants.COUNTER_SPACING, !1),
-    onScrubBegin: () => t(SpacingConstants.COUNTER_SPACING, !0),
-    onScrubEnd: () => t(SpacingConstants.COUNTER_SPACING, !1),
-    onValueChange: g,
-    recordingKey: e,
+    'data-tooltip': getI18nString('fullscreen.properties_panel.grid.gap_between_rows'),
+    'data-tooltip-type': Ib.TEXT,
+    'dataTestId': 'grid-row-spacing-control',
+    'dispatch': lQ,
+    'inputClassName': hF,
+    'isTokenizable': !0,
+    'noBorderOnHover': !0,
+    'onBlur': () => t(SpacingConstants.COUNTER_SPACING, !1),
+    'onFocus': () => t(SpacingConstants.COUNTER_SPACING, !0),
+    'onMouseEnter': () => n(SpacingConstants.COUNTER_SPACING, !0),
+    'onMouseLeave': () => n(SpacingConstants.COUNTER_SPACING, !1),
+    'onScrubBegin': () => t(SpacingConstants.COUNTER_SPACING, !0),
+    'onScrubEnd': () => t(SpacingConstants.COUNTER_SPACING, !1),
+    'onValueChange': g,
+    'recordingKey': e,
     smallNudgeAmount,
-    value: u ?? 0,
-    children: jsx(_$$W, {
+    'value': u ?? 0,
+    'children': jsx(_$$W, {
       className: QK
     })
   });

@@ -66,7 +66,7 @@ import { RL, Ot } from "../905/850476";
 import { Ez } from "../figma_app/766708";
 import { rN as _$$rN, Pf, Lo as _$$Lo, cv, om, Qo, B9, GC, ky, ZR, nm, x9 as _$$x, yh, Pw, hF, Wx, Od, F$, US, qQ } from "../905/782020";
 import { wp, jv } from "../905/886545";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { trackEventAnalytics } from "../905/449184";
 import { VZ } from "../905/959568";
 import { Gx } from "../figma_app/260445";

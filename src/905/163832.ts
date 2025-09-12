@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useContext, forwardRef, useState, useRef, useLayoutEffect, useEffect, useImperativeHandle, useCallback, useMemo } from "react";
-import { M as _$$M } from "../905/749786";
+import { DialogContext } from "../905/749786";
 import { b as _$$b } from "../905/799737";
 import { m as _$$m } from "../905/494625";
 import { i as _$$i } from "../905/97346";
@@ -16,7 +16,7 @@ import { Kg, DX, PU, U1 } from "../figma_app/343967";
 import { w as _$$w } from "../905/937416";
 import { useExposedRef } from "../905/581092";
 import { R as _$$R } from "../905/987614";
-import { Tv } from "../905/36803";
+import { mergeObjects } from "../905/36803";
 var n = {};
 require.d(n, {
   bottom: () => M,
@@ -63,7 +63,7 @@ function k(e) {
     maxWidth,
     minHeight,
     maxHeight
-  } = Tv(v, e);
+  } = mergeObjects(v, e);
   return {
     minWidth: R(minWidth, innerWidth),
     maxWidth: R(maxWidth, innerWidth),
@@ -443,7 +443,7 @@ let Y = forwardRef(({
     hasMoved,
     setHasMoved
   }), [pos, setPos, y, hasMoved, setHasMoved]);
-  return jsx(_$$M.Provider, {
+  return jsx(DialogContext.Provider, {
     value: q,
     children: jsx(H.Provider, {
       value: $,

@@ -124,7 +124,7 @@ import { N_ as _$$N_ } from '../905/332483';
 import { a as _$$a12 } from '../905/332662';
 import { S as _$$S8 } from '../905/335273';
 import { selectTeams } from '../905/338617';
-import { J as _$$J5 } from '../905/341359';
+import { UI3ConditionalWrapper } from '../905/341359';
 import { wR } from '../905/346715';
 import { Y as _$$Y8 } from '../905/347011';
 import { P as _$$P2 } from '../905/347284';
@@ -154,7 +154,7 @@ import { s as _$$s8 } from '../905/411990';
 import { rq as _$$rq } from '../905/425180';
 import { t as _$$t8 } from '../905/433510';
 import { colorToHex } from '../905/436288';
-import { hS as _$$hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { N as _$$N3 } from '../905/438674';
 import { UserRole, GroupType, DefaultGroups } from '../905/441038';
 import { $ as _$$$7 } from '../905/442144';
@@ -532,7 +532,7 @@ import { WX as _$$WX, Bq, Vm } from '../figma_app/482142';
 import { _ as _$$_7, S as _$$S9 } from '../figma_app/490799';
 import { range, clamp } from '../figma_app/492908';
 import { lT as _$$lT } from '../figma_app/494261';
-import { _ as _$$_0 } from '../figma_app/496441';
+import { LinkPrimitive } from '../figma_app/496441';
 import { Y9 } from '../figma_app/502247';
 import { $c, g2 as _$$g4, gr as _$$gr, lI as _$$lI, lV as _$$lV, mc as _$$mc, bS, FU, KH, qD, ye, Zn } from '../figma_app/502363';
 import { FC as _$$FC, BN } from '../figma_app/502422';
@@ -670,7 +670,7 @@ import { eJ as _$$eJ } from '../vendor/352483';
 import { useSelector, connect, useStore, useDispatch } from 'react-redux';
 import { A as _$$A1 } from '../vendor/850789';
 import oc from '../vendor/879378';
-import { createPortal } from '../vendor/944059';
+import { createPortal } from 'react-dom';
 import { z as _$$z9 } from '../vendor/999105';
 let U = B;
 let ev = 'seen_org_admin_moved_unassigned_drafts_onboarding';
@@ -5286,7 +5286,7 @@ function nP(e) {
 }
 let nL = (e, t) => e.baseOrgUser === null ? -1 : t.baseOrgUser === null ? 1 : e.baseOrgUser.user.handle.localeCompare(t.baseOrgUser.user.handle);
 let nD = registerModal(e => {
-  let t = _$$hS(e);
+  let t = useModalManager(e);
   let [r, i] = useState('');
   let [n, o, l] = _$$t5.useTabs({
     MEMBERS: !0,
@@ -10417,7 +10417,7 @@ function cD() {
     name: _$$e7.RESOURCE_HUB,
     children: jsx(Rj.Provider, {
       value: _$$mk.RESOURCE_HUB,
-      children: jsx(_$$J5, {
+      children: jsx(UI3ConditionalWrapper, {
         children: jsx(qh, {
           path: VR,
           children: jsxs('div', {
@@ -11268,7 +11268,7 @@ function u_(e) {
   }) : null;
 }
 function uf(e) {
-  let t = e.tabs ? jsx(_$$J5, {
+  let t = e.tabs ? jsx(UI3ConditionalWrapper, {
     children: jsx(_$$t5.TabStrip, {
       manager: e.tabManager,
       children: e.tabs.map(e => createElement(_$$t5.Tab, {
@@ -16730,7 +16730,7 @@ function fv(e) {
     ...d[e],
     key: e
   }, fb(e)));
-  let _ = jsx(_$$J5, {
+  let _ = jsx(UI3ConditionalWrapper, {
     children: jsx(_$$t5.TabStrip, {
       manager: u,
       children: m
@@ -16754,7 +16754,7 @@ function fw({
     workspace: e,
     org: n
   });
-  return jsx(_$$J5, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(noop, {
       parentRect: t,
       items: _$$o7(l),
@@ -17791,7 +17791,7 @@ function gb() {
     ...e,
     tab: N$.COMMUNITY
   }, t).href : '';
-  return jsxs(_$$_0, {
+  return jsxs(LinkPrimitive, {
     'href': r,
     'onClick': a => {
       q5();
@@ -18280,7 +18280,7 @@ let gR = {
       properties: {
         severity: _$$c7.EVENT
       },
-      children: jsx(_$$J5, {
+      children: jsx(UI3ConditionalWrapper, {
         children: jsxs('div', {
           ..._$$Ay2.props(gA.wrapper, e.size === 'large' && gA.wrapperLarge),
           style: {
@@ -19230,7 +19230,7 @@ function ha(e) {
   }, t));
   let C = [v, b];
   return jsx(_$$g4, {
-    leftSide: jsx(_$$J5, {
+    leftSide: jsx(UI3ConditionalWrapper, {
       children: jsx(_$$t5.TabStrip, {
         manager: j,
         children: T
@@ -20725,7 +20725,7 @@ let xr = e => {
     }));
   });
   let J = jsx(_$$g4, {
-    leftSide: _ ? jsx(_$$J5, {
+    leftSide: _ ? jsx(UI3ConditionalWrapper, {
       children: jsxs(_$$t5.TabStrip, {
         manager: Y,
         children: [jsx(_$$t5.Tab, {

@@ -2,14 +2,14 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useDelayedTrue } from "../905/815905";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, r1, nB } from "../figma_app/272243";
 import { k } from "../905/443820";
 import { sx } from "../905/941192";
 import { popModalStack } from "../905/156213";
 function p(e) {
-  let t = hS({
+  let t = useModalManager({
     open: !0,
     onClose: () => {
       e.onClose();

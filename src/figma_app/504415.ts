@@ -6,7 +6,7 @@ import { p as _$$p } from "../905/185998";
 import { T as _$$T } from "../905/909590";
 import { E as _$$E } from "../905/632989";
 import { $n } from "../905/521428";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { ViewType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
@@ -186,7 +186,7 @@ x.keepSavepointModalInput = !1;
 x.savedLabelInput = "";
 x.savedDescriptionInput = "";
 let $$C1 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let r = selectCurrentFile();
   let s = useDispatch();
   let o = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
@@ -227,7 +227,7 @@ let $$C1 = registerModal(function (e) {
 let $$w0 = registerModal(function (e) {
   let t = selectCurrentFile();
   let r = useDispatch();
-  let s = hS(e);
+  let s = useModalManager(e);
   let o = N(e.savepointID, !1);
   return t ? jsx(bL, {
     manager: s,

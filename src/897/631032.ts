@@ -20,7 +20,7 @@ import { yM } from "../905/640017";
 import { Rk } from "../figma_app/483189";
 import { PN, Vm, c7 } from "../figma_app/728075";
 import { clamp } from "../figma_app/492908";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import O from "classnames";
 import { _J, my, kM, im, xX, wH, F4 } from "../897/564585";
 import { Y1, Zp, hD, J5 } from "../897/602108";
@@ -431,7 +431,7 @@ function $(e) {
         if (h.offset) e.onInput(z({
           x: h.offset.x.transformValue(n.x),
           y: h.offset.y.transformValue(n.y)
-        }, w)); else if ("SPRING_HANDLE" === h.handle) {
+        }, w));else if ("SPRING_HANDLE" === h.handle) {
           let e = {
             x: new P().translate(A.x - n.x),
             y: new P().translate(A.y - n.y)
@@ -524,7 +524,7 @@ function $(e) {
   let N = {
     cursor: "ew-resize"
   };
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onMouseDown"],
     display: "contents",
     children: jsx("div", {

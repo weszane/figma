@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, forwardRef } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { E as _$$E } from "../905/632989";
 import { Fullscreen, AlignmentPosition, Command } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";

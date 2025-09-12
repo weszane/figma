@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { StyleIdHandler, VariableIdHandler, VariableOverrideIdHandler, VariableSetIdCompatHandler, CodeComponentIdHandler, CodeLibraryIdHandler, CodeFileIdHandler, CanvasNodeIdHandler } from "../figma_app/243058";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import s from "classnames";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { c1, r4, dB } from "../905/589717";
@@ -211,7 +211,7 @@ function O({
     className: a,
     role: "button",
     onClick: () => {
-      Dk(i).then(() => window.alert(`Copied ${i} to clipboard`)).catch(() => window.alert(i));
+      copyTextToClipboard(i).then(() => window.alert(`Copied ${i} to clipboard`)).catch(() => window.alert(i));
     },
     children: t
   });

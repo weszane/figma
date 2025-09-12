@@ -9,7 +9,7 @@ import { sx } from '../905/941192'
 import { uj0 } from '../figma_app/27776'
 import { aW } from '../figma_app/527873'
 import { CorePerfInfo, CoverageStatus, Fullscreen, FullscreenPerfMetrics, PerfType } from '../figma_app/763686'
-import { unmountComponentAtNode } from '../vendor/944059'
+import { unmountComponentAtNode } from 'react-dom'
 
 let m = [{
   label: 'Time between frames (ms)',

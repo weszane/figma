@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useId, useCallback, memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -347,7 +347,7 @@ let J = memo(function (e) {
     pickerInfo,
     ...i
   } = e;
-  let A = hS(i);
+  let A = useModalManager(i);
   let b = useDispatch();
   let v = pickerInfo.nodeCounts.selectionStickyCount > 0 || pickerInfo.nodeCounts.canvasStickyCount > 0;
   let I = pickerInfo.nodeCounts.selectionTableCount > 0 || pickerInfo.nodeCounts.canvasTableCount > 0;

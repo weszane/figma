@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { defaultLanguage, languageCodes, subsetLanguages, allLanguages } from "../905/816253";
 import { getLanguageDisplayName, getI18nResourceKey } from "../905/528121";
 import { throwError } from "../figma_app/465776";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
@@ -34,7 +34,7 @@ export let $$P0 = registerModal(function ({
 }) {
   let l = useDispatch();
   let T = getI18nState()?.getPrimaryLocale(!0) ?? defaultLanguage;
-  let P = hS({
+  let P = useModalManager({
     open: e,
     onClose: t
   });

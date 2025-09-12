@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
-import { _ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { regularSize, wideSize, largeSize, largeWideSize, button, r as _$$r, hasIcon, buttonText, buttonContent, icon } from "../905/608793";
 import { n as _$$n } from "../905/198890";
 let l = forwardRef(({
@@ -14,7 +14,7 @@ let l = forwardRef(({
   ...u
 }, p) => {
   let m = "md" === l ? "hug" === c ? regularSize : wideSize : "hug" === c ? largeSize : largeWideSize;
-  return jsx(_, {
+  return jsx(LinkPrimitive, {
     htmlAttributes: t,
     ...u,
     ref: p,
@@ -43,7 +43,7 @@ function d({
   });
 }
 l.displayName = "LinkButton";
-export let $$u0 = Object.assign(forwardRef((e, t) => jsx(_, {
+export let $$u0 = Object.assign(forwardRef((e, t) => jsx(LinkPrimitive, {
   ...e,
   ref: t,
   className: _$$n

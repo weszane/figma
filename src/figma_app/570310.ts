@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
-import { fP, mc, i3 } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { E as _$$E } from "../905/53857";
 import { E as _$$E2 } from "../905/632989";
 import { IK, $n, WW } from "../905/521428";
@@ -61,7 +61,7 @@ import { uI } from "../figma_app/598952";
 import { NONE_SYMBOL } from "../905/992467";
 import { HX, _3, zi } from "../figma_app/97042";
 import { QU, bf } from "../figma_app/856806";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { H as _$$H } from "../905/56919";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
@@ -638,7 +638,7 @@ let eC = registerModal(function (e) {
     });
     r(e);
   }, [s]);
-  let d = hS({
+  let d = useModalManager({
     ...e,
     onClose: () => {
       s("code_connect.connect_to_codebase.popup_closed");
@@ -801,7 +801,7 @@ function ej({
     getTriggerProps,
     getContainerProps,
     getArrowProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: t,
     onOpenChange: r,
     ...eF
@@ -817,11 +817,11 @@ function ej({
         variant: "componentOutline",
         children: renderI18nText("dev_handoff.figmadocs.connected")
       })
-    }), jsxs(mc, {
+    }), jsxs(PopoverPrimitiveContainer, {
       ...getContainerProps({
         style: eM
       }),
-      children: [jsx(i3, {
+      children: [jsx(PopoverPrimitiveArrow, {
         ...getArrowProps()
       }), jsx(ek, {})]
     })]
@@ -833,7 +833,7 @@ function eU() {
     getTriggerProps,
     getContainerProps,
     getArrowProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: e,
     onOpenChange: t,
     ...eF
@@ -846,11 +846,11 @@ function eU() {
         variant: "inactiveOutline",
         children: renderI18nText("dev_handoff.figmadocs.not_connected")
       })
-    }), jsxs(mc, {
+    }), jsxs(PopoverPrimitiveContainer, {
       ...getContainerProps({
         style: eM
       }),
-      children: [jsx(i3, {
+      children: [jsx(PopoverPrimitiveArrow, {
         ...getArrowProps()
       }), jsx(ek, {
         notConnected: !0

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
@@ -85,7 +85,7 @@ export let $$w2 = registerModal(function (e) {
   let E = aq(r);
   let y = gc(r.id);
   let b = Bs();
-  let I = hS(e);
+  let I = useModalManager(e);
   let A = useCallback(e => {
     e && b(r, E, {
       scaleFactor: e

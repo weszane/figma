@@ -1,3 +1,3 @@
-import { unstable_flushControlled } from "../vendor/944059";
+import { unstable_flushControlled } from "react-dom";
 var n = unstable_flushControlled;
 module.exports = n;

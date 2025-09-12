@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { E } from "../905/632989";
 import o from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -16,7 +16,7 @@ export let $$p0 = forwardRef((e, t) => {
     children: e.firstIconButton
   }));
   e.secondIconButton && i.push(e.secondIconButton);
-  let r = jsx(_$$o, {
+  let r = jsx(EventShield, {
     eventListeners: ["onFocus"],
     display: "contents",
     children: jsxs(E, {

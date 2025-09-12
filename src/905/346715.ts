@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -37,7 +37,7 @@ let $$F0 = registerModal(function (e) {
   let u = () => {
     i(hideModal());
   };
-  let p = hS({
+  let p = useModalManager({
     ...e,
     onClose: u
   });
@@ -332,7 +332,7 @@ let M = registerModal(function (e) {
   let i = () => {
     t(hideModal());
   };
-  let h = hS({
+  let h = useModalManager({
     ...e,
     onClose: i
   });

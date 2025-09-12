@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { useAtomValue } from "../vendor/525001";
@@ -25,7 +25,7 @@ export function $$x0(e) {
   let h = sZ();
   let E = Xf(e.currentOrgId, i);
   let x = (E?.data?.invoices ?? []).find(e => "open" === e.status && _$$A(e.past_due_at) < _$$A().subtract(21, "day") && _$$A(e.past_due_at) > _$$A().subtract(90, "day"));
-  let T = hS({
+  let T = useModalManager({
     open: !0,
     onClose: () => {},
     preventUserClose: !0

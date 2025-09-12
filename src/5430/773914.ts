@@ -6,14 +6,14 @@ import { reportError } from "../905/11";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fP, mc, i3 } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { K as _$$K } from "../905/443068";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { r as _$$r } from "../905/857502";
 import { V as _$$V } from "../1577/311426";
-import { J as _$$J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { eJ } from "../vendor/352483";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
@@ -69,7 +69,7 @@ function z({
     getTriggerProps,
     getContainerProps,
     getArrowProps
-  } = fP({
+  } = usePopoverPrimitive({
     type: "dialog",
     isOpen: t,
     onOpenChange: r,
@@ -89,11 +89,11 @@ function z({
       },
       "aria-label": getI18nString("file_browser.copy_link"),
       children: jsx(_$$r, {})
-    }), jsxs(mc, {
+    }), jsxs(PopoverPrimitiveContainer, {
       ...getContainerProps({
         style: void 0
       }),
-      children: [jsx(i3, {
+      children: [jsx(PopoverPrimitiveArrow, {
         ...getArrowProps(),
         fill: "var(--color-bg-brand)"
       }), jsx("div", {
@@ -194,7 +194,7 @@ let Z = registerModal(function (e) {
   useEffect(() => {
     K && _$$S(s, K);
   }, [s, K]);
-  let et = hS({
+  let et = useModalManager({
     ...e,
     onClose: ({
       source: e
@@ -214,7 +214,7 @@ let Z = registerModal(function (e) {
     resourceType: q,
     sharedRouteParams: x
   });
-  return jsx(_$$J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(Rj.Provider, {
       value: mk.RESOURCE_HUB,
       children: jsx(fu, {

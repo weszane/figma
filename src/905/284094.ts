@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 class a {
   constructor() {
     this._frameListeners = new Set();

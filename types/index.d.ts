@@ -1,14 +1,15 @@
 import type { Store } from 'redux'
-import type { EarlyArgs, Fig, InitialOptions } from './global.d.ts'
-
-
-
+import type { EarlyArgs, Fig as FigType, InitialOptions } from './global.d.ts'
 
 declare global {
+
+  let scheduler: any
+  let createFileImporter: any
+  let Fig: FigType
   interface Window {
     INITIAL_OPTIONS: InitialOptions
     EARLY_ARGS: EarlyArgs
-    Fig: Fig
+    Fig: FigType
     figma: any
     FigmaMobile: any
     store: Store
@@ -21,23 +22,22 @@ declare global {
     DESKTOP_VERSION: string
     DESKTOP_CLIENT_ID: string
     scheduler: any
-    _fullscreen_:any
+    _fullscreen_: any
     setDevLogAnalytics: any
+    STATSIG_PERF: any
+    scheduler: any
+    createFileImporter: any
   }
 
   interface globalThis {
     INITIAL_OPTIONS: InitialOptions
     EARLY_ARGS: EarlyArgs
-    Fig: Fig
+    Fig: FigType
     figma: any
     FigmaMobile: any
     store: Store
+    scheduler: any
   }
-
-  // const ObservableValue_Map_GUID_Int: any
-  
-  
-
 
 }
 

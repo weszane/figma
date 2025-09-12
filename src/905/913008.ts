@@ -2,7 +2,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { GLFailureType } from "../figma_app/763686";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { fF } from "../905/194389";
+import { isStackOverflowError } from "../905/194389";
 import { setTagGlobal, reportError, SeverityLevel } from "../905/11";
 import { logInfo } from "../905/714362";
 import { showModalHandler } from "../905/156213";
@@ -74,7 +74,7 @@ export let $$f0 = new class {
       }
     });
     setTagGlobal("fullscreen_status", "has_crashed");
-    let r = "oom" === t ? "oom" : fF(e) ? "stack-overflow" : "other";
+    let r = "oom" === t ? "oom" : isStackOverflowError(e) ? "stack-overflow" : "other";
     this.fullscreenCrashed({
       type: r,
       sentryId: i

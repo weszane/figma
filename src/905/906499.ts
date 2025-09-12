@@ -1,6 +1,6 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -10,7 +10,7 @@ export let $$d0 = registerModal(function (e) {
     message,
     onClose
   } = e;
-  let d = hS(e);
+  let d = useModalManager(e);
   return jsx(bL, {
     width: "sm",
     manager: d,

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, Suspense, useMemo, useId, useState, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { Y9, hE, nB, wi, jk, r1, vo } from "../figma_app/272243";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
@@ -643,7 +643,7 @@ function eS(e) {
   }
 }
 function eT(e) {
-  let n = hS(e);
+  let n = useModalManager(e);
   let t = useTeamPlanFeatures();
   let p = t.data;
   handleSuspenseRetainRelease(t);

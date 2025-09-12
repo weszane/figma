@@ -1,137 +1,193 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { createContext, useContext, forwardRef, useState, useRef, useLayoutEffect, useCallback, useMemo, useEffect, useId } from "react";
-import { flushSync } from "../vendor/944059";
-import { SV, XF, zR, s3, rm, we, vW, bv, kp, s9, Zx, C1, lY, ph } from "../vendor/516565";
-import { ll } from "../vendor/542280";
-import { cY, UU, Ej } from "../vendor/343575";
-import { A } from "../vendor/723372";
-import { o as _$$o } from "../905/821217";
-import { useSelectionContext, useSelectionProvider } from "../905/751750";
-import { W } from "../905/458642";
-import { Uk } from "../905/691059";
-import { defaultComponentAttribute } from "../905/577641";
-import { EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS, preventAndStopEvent } from "../905/955878";
-import { Q } from "../905/586361";
-function _(e, t) {
-  if (e.current) {
-    let {
-      scrollTop,
-      scrollHeight,
-      clientHeight
-    } = e.current;
-    if ("up" === t) return scrollTop >= 10;
-    if ("down" === t) return scrollTop <= scrollHeight - clientHeight - 10;
+import { autoUpdate } from '@floating-ui/dom'
+import { FloatingFocusManager, FloatingList, FloatingOverlay, FloatingPortal, inner, useClick, useDismiss, useFloating, useInnerOffset, useInteractions, useListItem, useListNavigation, useMergeRefs, useTypeahead } from '@floating-ui/react'
+import { flip, offset, size } from '@floating-ui/react-dom'
+import classNames from 'classnames'
+import { createContext, forwardRef, useCallback, useContext, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { setupRecordingHandler } from '../905/458642'
+import { defaultComponentAttribute } from '../905/577641'
+import { loadFeatureFlags } from '../905/586361'
+import { PopoverContext } from '../905/691059'
+import { useSelectionContext, useSelectionProvider } from '../905/751750'
+import { EventShield } from '../905/821217'
+import { EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, preventAndStopEvent, WHEEL_EVENT_CAPTURE_CLASS } from '../905/955878'
+
+/**
+ * Checks if the scroll position allows for scrolling in the given direction.
+ * Original: _
+ * @param ref - The ref to the scrollable element.
+ * @param direction - 'up' or 'down'.
+ * @returns {boolean}
+ */
+function canScroll(ref: React.RefObject<HTMLElement>, direction: 'up' | 'down'): boolean {
+  if (ref.current) {
+    const { scrollTop, scrollHeight, clientHeight } = ref.current
+    if (direction === 'up')
+      return scrollTop >= 10
+    if (direction === 'down')
+      return scrollTop <= scrollHeight - clientHeight - 10
   }
-  return !1;
+  return false
 }
-export let $$A6 = createContext({
+
+/**
+ * Context for SelectPrimitive.
+ * Original: $$A6
+ */
+export const SelectPrimitiveContext = createContext<{
+  getTriggerProps: () => Record<string, any>
+  setTriggerReference: (ref: any) => void
+  getContainerProps: (value: any) => Record<string, any>
+  setContainerReference: (ref: any) => void
+  getItemProps: (value: any) => Record<string, any>
+  overflowRef: React.RefObject<HTMLElement>
+  scrollRef: React.RefObject<HTMLElement>
+  allowSelection: boolean
+  setOpen: (open: boolean) => void
+  setScrollTop: (scrollTop: number) => void
+  handleSelect: (value: any, event: any) => void
+  handleArrowScroll: (amount: number) => void
+  isOpen: boolean
+  isTriggerFocused: boolean
+  scrollTop: number
+  innerOffset: number
+  selectedIndex: number | null
+  itemList: any[]
+  activeIndex: number
+  fallback: boolean
+  floatingContext: Record<string, any>
+  floatingStyles: Record<string, any>
+}>({
   getTriggerProps: () => ({}),
   setTriggerReference: () => {},
   getContainerProps: () => ({}),
   setContainerReference: () => {},
   getItemProps: () => ({}),
-  overflowRef: {
-    current: null
-  },
-  scrollRef: {
-    current: null
-  },
-  allowSelection: !1,
+  overflowRef: { current: null },
+  scrollRef: { current: null },
+  allowSelection: false,
   setOpen: () => {},
   setScrollTop: () => {},
   handleSelect: () => {},
   handleArrowScroll: () => {},
-  isOpen: !1,
-  isTriggerFocused: !1,
+  isOpen: false,
+  isTriggerFocused: false,
   scrollTop: 0,
   innerOffset: 0,
   selectedIndex: null,
   itemList: [],
   activeIndex: 0,
-  fallback: !1,
+  fallback: false,
   floatingContext: {},
-  floatingStyles: {}
-});
-export function $$y8() {
-  let {
-    itemList,
-    selectedIndex,
-    isOpen,
-    activeIndex
-  } = useContext($$A6);
+  floatingStyles: {},
+})
+
+/**
+ * Hook to get select state.
+ * Original: $$y8
+ */
+export function useSelectPrimitiveState() {
+  const { itemList, selectedIndex, isOpen, activeIndex } = useContext(SelectPrimitiveContext)
   return {
     itemList,
-    selectedItem: null !== selectedIndex ? itemList[selectedIndex] : null,
+    selectedItem: selectedIndex !== null ? itemList[selectedIndex] : null,
     isOpen,
-    highlightedItem: null !== activeIndex ? itemList[activeIndex] : null
-  };
+    highlightedItem: activeIndex !== null ? itemList[activeIndex] : null,
+  }
 }
-export let $$b5 = forwardRef(({
-  direction: e,
-  children: t,
-  className: i,
-  ...o
-}, l) => {
-  let [c, u] = useState(!1);
-  let p = useRef(null);
-  let m = SV([p, l]);
-  let g = useRef("idle");
-  let f = useRef(-1);
-  let {
+
+/**
+ * ScrollArrow component for SelectPrimitive.
+ * Original: $$b5
+ */
+export const SelectPrimitiveScrollArrow = forwardRef<HTMLDivElement, {
+  direction: 'up' | 'down'
+  children: React.ReactNode
+  className?: string
+  [key: string]: any
+}>(({ direction, children, className, ...props }, ref) => {
+  const [visible, setVisible] = useState(false)
+  const localRef = useRef<HTMLDivElement>(null)
+  const mergedRef = useMergeRefs([localRef, ref])
+  const pointerState = useRef<'idle' | 'active'>('idle')
+  const animationFrameRef = useRef<number>(-1)
+
+  const {
     scrollRef,
-    floatingContext: {
-      isPositioned
-    },
+    floatingContext: { isPositioned },
     scrollTop,
     handleArrowScroll,
-    innerOffset
-  } = useContext($$A6);
+    innerOffset,
+  } = useContext(SelectPrimitiveContext)
+
   useLayoutEffect(() => {
-    isPositioned && "active" !== g.current && requestAnimationFrame(() => {
-      flushSync(() => u(_(scrollRef, e)));
-    });
-  }, [isPositioned, innerOffset, scrollTop, scrollRef, e]);
-  return jsx("div", {
-    className: A("select-primitive__scrollArrow__-uP-4", i),
-    "data-fpl-select-direction": e,
-    "data-fpl-select-visibility": c || void 0,
-    ref: m,
-    "aria-hidden": !0,
-    onPointerEnter: () => {
-      g.current = "active";
-      let t = Date.now();
-      cancelAnimationFrame(f.current);
-      f.current = requestAnimationFrame(function i() {
+    if (isPositioned && pointerState.current !== 'active') {
+      requestAnimationFrame(() => {
+        flushSync(() => setVisible(canScroll(scrollRef, direction)))
+      })
+    }
+  }, [isPositioned, innerOffset, scrollTop, scrollRef, direction])
+
+  return jsx('div', {
+    'className': classNames('select-primitive__scrollArrow__-uP-4', className),
+    'data-fpl-select-direction': direction,
+    'data-fpl-select-visibility': visible || undefined,
+    'ref': mergedRef,
+    'aria-hidden': true,
+    'onPointerEnter': () => {
+      pointerState.current = 'active'
+      let lastTime = Date.now()
+      cancelAnimationFrame(animationFrameRef.current)
+      animationFrameRef.current = requestAnimationFrame(function scrollLoop() {
         if (scrollRef.current) {
-          let n = Date.now();
-          let r = n - t;
-          t = n;
-          let a = r / 2;
-          let s = "up" === e ? scrollRef.current.scrollTop : scrollRef.current.scrollHeight - scrollRef.current.clientHeight - scrollRef.current.scrollTop;
-          let o = "up" === e ? scrollRef.current.scrollTop - a > 0 : scrollRef.current.scrollTop + a < scrollRef.current.scrollHeight - scrollRef.current.clientHeight;
-          handleArrowScroll("up" === e ? Math.min(a, s) : Math.max(-a, -s));
-          o ? f.current = requestAnimationFrame(i) : u(_(scrollRef, e));
+          const now = Date.now()
+          const delta = now - lastTime
+          lastTime = now
+          const scrollAmount = delta / 2
+          const remaining
+            = direction === 'up'
+              ? scrollRef.current.scrollTop
+              : scrollRef.current.scrollHeight - scrollRef.current.clientHeight - scrollRef.current.scrollTop
+          const canContinue
+            = direction === 'up'
+              ? scrollRef.current.scrollTop - scrollAmount > 0
+              : scrollRef.current.scrollTop + scrollAmount < scrollRef.current.scrollHeight - scrollRef.current.clientHeight
+          handleArrowScroll(
+            direction === 'up' ? Math.min(scrollAmount, remaining) : Math.max(-scrollAmount, -remaining),
+          )
+          if (canContinue) {
+            animationFrameRef.current = requestAnimationFrame(scrollLoop)
+          }
+          else {
+            setVisible(canScroll(scrollRef, direction))
+          }
         }
-      });
+      })
     },
-    onPointerLeave: () => {
-      g.current = "idle";
-      cancelAnimationFrame(f.current);
+    'onPointerLeave': () => {
+      pointerState.current = 'idle'
+      cancelAnimationFrame(animationFrameRef.current)
     },
     ...defaultComponentAttribute,
-    ...o,
-    children: t
-  });
-});
-$$b5.displayName = "SelectPrimitive.ScrollArrow";
-export let $$v0 = forwardRef(({
-  children: e,
-  className: t,
-  htmlAttributes: i,
-  DEPRECATED_optionsOnFocusOnly: o,
-  ...l
-}, u) => {
-  let {
+    ...props,
+    children,
+  })
+})
+SelectPrimitiveScrollArrow.displayName = 'SelectPrimitive.ScrollArrow'
+
+/**
+ * Container component for SelectPrimitive.
+ * Original: $$v0
+ */
+export const SelectPrimitiveContainer = forwardRef<HTMLDivElement, {
+  children: React.ReactNode
+  className?: string
+  htmlAttributes?: Record<string, any>
+  DEPRECATED_optionsOnFocusOnly?: boolean
+  [key: string]: any
+}>(({ children, className, htmlAttributes, DEPRECATED_optionsOnFocusOnly, ...props }, ref) => {
+  const {
     setContainerReference,
     getContainerProps,
     floatingContext,
@@ -140,398 +196,463 @@ export let $$v0 = forwardRef(({
     fallback,
     setScrollTop,
     isOpen,
-    isTriggerFocused
-  } = useContext($$A6);
-  let w = SV([u, scrollRef]);
-  let C = useContext(Uk);
-  let {
-    fpl_popover_fullscreen_events
-  } = Q();
-  let k = fpl_popover_fullscreen_events ? [EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS] : [];
-  let R = jsx(_$$o, {
-    display: "contents",
-    eventListeners: ["onClick", "onPointerDown", "onMouseDown"],
-    children: jsx("div", {
+    isTriggerFocused,
+  } = useContext(SelectPrimitiveContext)
+
+  const mergedRef = useMergeRefs([ref, scrollRef])
+  const popoverContext = useContext(PopoverContext)
+  const { fpl_popover_fullscreen_events } = loadFeatureFlags()
+  const eventClasses = fpl_popover_fullscreen_events
+    ? [EVENT_CAPTURE_CLASS, EVENT_CAPTURE_KEYS_CLASS, WHEEL_EVENT_CAPTURE_CLASS]
+    : []
+
+  const shieldedContent = jsx(EventShield, {
+    display: 'contents',
+    eventListeners: ['onClick', 'onPointerDown', 'onMouseDown'],
+    children: jsx('div', {
       ref: setContainerReference,
       style: floatingStyles,
-      className: A(k),
-      children: jsx("ul", {
+      className: classNames(eventClasses),
+      children: jsx('ul', {
         ...defaultComponentAttribute,
-        ...i,
-        className: A("select-primitive__container__hpR3l", t),
-        ref: w,
-        "data-fpl-fallback": fallback,
-        role: "listbox",
+        ...htmlAttributes,
+        'className': classNames('select-primitive__container__hpR3l', className),
+        'ref': mergedRef,
+        'data-fpl-fallback': fallback,
+        'role': 'listbox',
         ...getContainerProps({
-          onScroll({
-            currentTarget: e
-          }) {
-            flushSync(() => setScrollTop(e.scrollTop));
-          }
+          onScroll({ currentTarget }) {
+            flushSync(() => setScrollTop(currentTarget.scrollTop))
+          },
         }),
-        ...l,
-        children: e
-      })
-    })
-  });
-  return !o || isOpen || isTriggerFocused ? isOpen ? jsx(XF, {
-    root: C ?? document.body,
-    children: jsx(zR, {
-      style: {
-        zIndex: "var(--z-index-dropdown)"
-      },
-      lockScroll: !0,
-      children: jsx(s3, {
-        context: floatingContext,
-        modal: !1,
-        children: R
-      })
-    })
-  }) : jsx("div", {
-    style: {
-      display: "none"
-    },
-    children: R
-  }) : null;
-});
-$$v0.displayName = "SelectPrimitive.Container";
-export let $$I7 = forwardRef(({
-  htmlAttributes: e,
-  ...t
-}, i) => {
-  let {
-    getTriggerProps,
-    setTriggerReference
-  } = useContext($$A6);
-  let l = SV([setTriggerReference, i]);
-  return jsx(_$$o, {
-    eventListeners: ["onPointerDown", "onClick", "onMouseDown"],
-    display: "contents",
-    children: jsx("button", {
-      type: "button",
-      ref: l,
+        ...props,
+        children,
+      }),
+    }),
+  })
+
+  if (!DEPRECATED_optionsOnFocusOnly || isOpen || isTriggerFocused) {
+    return isOpen
+      ? jsx(FloatingPortal, {
+          root: popoverContext ?? document.body,
+          children: jsx(FloatingOverlay, {
+            style: { zIndex: 'var(--z-index-dropdown)' },
+            lockScroll: true,
+            children: jsx(FloatingFocusManager, {
+              context: floatingContext,
+              modal: false,
+              children: shieldedContent,
+            }),
+          }),
+        })
+      : jsx('div', {
+          style: { display: 'none' },
+          children: shieldedContent,
+        })
+  }
+  return null
+})
+SelectPrimitiveContainer.displayName = 'SelectPrimitive.Container'
+
+/**
+ * Trigger component for SelectPrimitive.
+ * Original: $$I7
+ */
+export const SelectPrimitiveTrigger = forwardRef<HTMLButtonElement, {
+  htmlAttributes?: Record<string, any>
+  [key: string]: any
+}>(({ htmlAttributes, ...props }, ref) => {
+  const { getTriggerProps, setTriggerReference } = useContext(SelectPrimitiveContext)
+  const mergedRef = useMergeRefs([setTriggerReference, ref])
+  return jsx(EventShield, {
+    eventListeners: ['onPointerDown', 'onClick', 'onMouseDown'],
+    display: 'contents',
+    children: jsx('button', {
+      type: 'button',
+      ref: mergedRef,
       ...getTriggerProps(),
       ...defaultComponentAttribute,
-      ...e,
-      ...t
-    })
-  });
-});
-$$I7.displayName = "SelectPrimitive.Trigger";
-export let $$E3 = forwardRef(({
-  value: e,
-  htmlAttributes: t,
-  ...i
-}, a) => {
-  let {
+      ...htmlAttributes,
+      ...props,
+    }),
+  })
+})
+SelectPrimitiveTrigger.displayName = 'SelectPrimitive.Trigger'
+
+/**
+ * Option component for SelectPrimitive.
+ * Original: $$E3
+ */
+export const SelectPrimitiveOption = forwardRef<HTMLLIElement, {
+  value: any
+  htmlAttributes?: Record<string, any>
+  disabled?: boolean
+  [key: string]: any
+}>(({ value, htmlAttributes, ...props }, ref) => {
+  const {
     activeIndex,
     selectedIndex,
     allowSelection,
     getItemProps,
-    handleSelect
-  } = useContext($$A6);
-  let [p, m] = useState("");
-  let f = useRef(null);
-  let _ = useRef(!1);
-  let {
-    ref,
-    index
-  } = rm({
-    label: {
-      label: p,
-      value: e
-    }
-  });
-  let v = SV([ref, a, f]);
+    handleSelect,
+  } = useContext(SelectPrimitiveContext)
+
+  const [label, setLabel] = useState('')
+  const innerRef = useRef<HTMLLIElement>(null)
+  const pointerUpFlag = useRef(false)
+
+  const { ref: listItemRef, index } = useListItem({
+    label: { label, value } as any,
+  })
+  const mergedRef = useMergeRefs([listItemRef, ref, innerRef])
+
   useLayoutEffect(() => {
-    f.current && m(f.current.innerText ?? "");
-  }, []);
-  let I = !i.disabled && index === activeIndex;
-  return jsx("li", {
+    if (innerRef.current)
+      setLabel(innerRef.current.textContent ?? '')
+  }, [])
+
+  const isActive = !props.disabled && index === activeIndex
+
+  return jsx('li', {
     ...defaultComponentAttribute,
-    ...t,
-    "aria-selected": index === selectedIndex,
-    role: "option",
-    tabIndex: I ? 0 : -1,
-    "data-fpl-selected": I || void 0,
-    "aria-disabled": i.disabled,
-    ref: v,
+    ...htmlAttributes,
+    'aria-selected': index === selectedIndex,
+    'role': 'option',
+    'tabIndex': isActive ? 0 : -1,
+    'data-fpl-selected': isActive || undefined,
+    'aria-disabled': props.disabled,
+    'ref': mergedRef,
     ...getItemProps({
-      onKeyDown: t => {
-        (" " === t.key || "Enter" === t.key) && (i.disabled || handleSelect(e, t), preventAndStopEvent(t));
+      onKeyDown: (event: React.KeyboardEvent) => {
+        if (event.key === ' ' || event.key === 'Enter') {
+          if (!props.disabled)
+            handleSelect(value, event)
+          preventAndStopEvent(event)
+        }
       },
-      onClick: t => {
-        i.disabled || !allowSelection || _.current || handleSelect(e, t);
-        preventAndStopEvent(t);
-        _.current = !1;
+      onClick: (event: React.MouseEvent) => {
+        if (!props.disabled && allowSelection && !pointerUpFlag.current)
+          handleSelect(value, event)
+        preventAndStopEvent(event)
+        pointerUpFlag.current = false
       },
-      onPointerUp: t => {
-        0 === t.button && (!i.disabled && allowSelection && (_.current = !0, handleSelect(e, t)), preventAndStopEvent(t));
+      onPointerUp: (event: React.PointerEvent) => {
+        if (event.button === 0 && !props.disabled && allowSelection) {
+          pointerUpFlag.current = true
+          handleSelect(value, event)
+        }
+        preventAndStopEvent(event)
       },
       onPointerLeave: () => {
-        _.current = !1;
-      }
+        pointerUpFlag.current = false
+      },
     }),
-    "data-fpl-select-value": e,
-    ...i
-  });
-});
-$$E3.displayName = "SelectPrimitive.Option";
-export let $$x2 = forwardRef((e, t) => {
-  let i = useSelectionContext();
-  return jsx("li", {
-    id: i,
-    ref: t,
-    role: "presentation",
-    ...e
-  });
-});
-$$x2.displayName = "SelectPrimitive.GroupLabel";
-export let $$S1 = forwardRef(({
-  groupLabel: e,
-  children: t,
-  htmlAttributes: i,
-  ...r
-}, a) => {
-  let [s, o] = useSelectionProvider();
-  return jsx(o, {
-    value: s,
-    children: jsxs("ul", {
+    'data-fpl-select-value': value,
+    ...props,
+  })
+})
+SelectPrimitiveOption.displayName = 'SelectPrimitive.Option'
+
+/**
+ * GroupLabel component for SelectPrimitive.
+ * Original: $$x2
+ */
+export const SelectPrimitiveGroupLabel = forwardRef<HTMLLIElement, Record<string, any>>((props, ref) => {
+  const id = useSelectionContext()
+  return jsx('li', {
+    id,
+    ref,
+    role: 'presentation',
+    ...props,
+  })
+})
+SelectPrimitiveGroupLabel.displayName = 'SelectPrimitive.GroupLabel'
+
+/**
+ * Group component for SelectPrimitive.
+ * Original: $$S1
+ */
+export const SelectPrimitiveGroup = forwardRef<HTMLUListElement, {
+  groupLabel: React.ReactNode
+  children: React.ReactNode
+  htmlAttributes?: Record<string, any>
+  [key: string]: any
+}>(({ groupLabel, children, htmlAttributes, ...props }, ref) => {
+  const [labelId, Provider] = useSelectionProvider()
+  return jsx(Provider, {
+    value: labelId,
+    children: jsxs('ul', {
       ...defaultComponentAttribute,
-      ...i,
-      ref: a,
-      "aria-labelledby": s,
-      role: "group",
-      ...r,
-      children: [e, t]
-    })
-  });
-});
-export function $$w4({
-  value: e,
-  onChange: t,
-  recordingKey: i,
-  onSelectionChange: d,
-  onOpenChange: c,
-  offsetAmount: u = 0,
-  children: m,
-  padding: h
+      ...htmlAttributes,
+      ref,
+      'aria-labelledby': labelId,
+      'role': 'group',
+      ...props,
+      'children': [groupLabel, children],
+    }),
+  })
+})
+SelectPrimitiveGroup.displayName = 'SelectPrimitive.Group'
+
+/**
+ * Root component for SelectPrimitive.
+ * Original: $$w4
+ */
+export function SelectPrimitiveRoot({
+  value,
+  onChange,
+  recordingKey,
+  onSelectionChange,
+  onOpenChange,
+  offsetAmount = 0,
+  children,
+  padding,
+}: {
+  value: any
+  onChange: (value: any, info?: any) => void
+  recordingKey?: string
+  onSelectionChange?: (value?: any) => void
+  onOpenChange?: (open: boolean) => void
+  offsetAmount?: number
+  children: React.ReactNode
+  padding?: number
 }) {
-  let g = useRef([]);
-  let _ = useRef(null);
-  let y = useRef(null);
-  let b = useRef([]);
-  let [v, I] = useState(!1);
-  let [E, x] = useState(!1);
-  let [S, w] = useState(!1);
-  let [C, T] = useState(null);
-  let [k, R] = useState(!1);
-  let [N, P] = useState(0);
-  let [O, D] = useState(0);
-  let {
-    fpl_select_position_fix
-  } = Q();
-  let {
-    onChange
-  } = W({
-    onChange: t,
-    recordingKey: i
-  });
-  let M = useCallback((e, t) => {
-    onChange(e, {
-      info: {
-        event: t
-      }
-    });
-    x(!1);
-  }, [onChange, x]);
-  let j = useMemo(() => {
-    if (!b.current) return null;
-    let t = b.current.findIndex(t => t?.value === e);
-    return -1 !== t ? t : null;
-  }, [JSON.stringify(b.current), e]);
+  const elementsRef = useRef<any[]>([])
+  const overflowRef = useRef<any>(null)
+  const scrollRef = useRef<any>(null)
+  const labelsRef = useRef<any[]>([])
+  const [allowSelection, setAllowSelection] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [isTriggerFocused, setIsTriggerFocused] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [fallback, setFallback] = useState(false)
+  const [scrollTop, setScrollTop] = useState(0)
+  const [innerOffset, setInnerOffset] = useState(0)
+
+  const { fpl_select_position_fix } = loadFeatureFlags()
+  const { onChange: recordingOnChange } = setupRecordingHandler({ onChange, recordingKey })
+
+  const handleSelect = useCallback(
+    (selectedValue: any, event: any) => {
+      recordingOnChange(selectedValue, { info: { event } })
+      setIsOpen(false)
+    },
+    [recordingOnChange],
+  )
+
+  const selectedIndex = useMemo(() => {
+    if (!labelsRef.current)
+      return null
+    const idx = labelsRef.current.findIndex(item => item?.value === value)
+    return idx !== -1 ? idx : null
+  }, [JSON.stringify(labelsRef.current), value])
+
   useLayoutEffect(() => {
-    E && fpl_select_position_fix && R(!1);
-  }, [E, fpl_select_position_fix]);
+    if (isOpen && fpl_select_position_fix)
+      setFallback(false)
+  }, [isOpen, fpl_select_position_fix])
+
   useEffect(() => {
-    if (E) {
-      let e = setTimeout(() => {
-        I(!0);
-      }, 300);
-      return () => {
-        clearTimeout(e);
-      };
+    if (isOpen) {
+      const timer = setTimeout(() => setAllowSelection(true), 300)
+      return () => clearTimeout(timer)
     }
-    P(0);
-    I(!1);
-    R(!1);
-  }, [E]);
-  let {
-    refs,
-    floatingStyles,
-    context
-  } = we({
-    placement: "bottom-start",
-    open: E,
-    onOpenChange: e => {
-      x(e);
-      c && c(e);
+    setInnerOffset(0)
+    setAllowSelection(false)
+    setFallback(false)
+  }, [isOpen])
+
+  const { refs, floatingStyles, context } = useFloating({
+    placement: 'bottom-start',
+    open: isOpen,
+    onOpenChange: (open) => {
+      setIsOpen(open)
+      onOpenChange && onOpenChange(open)
     },
-    whileElementsMounted: ll,
-    transform: !0,
-    middleware: k ? [cY({
-      alignmentAxis: -1 * u
-    }), UU({
-      padding: h
-    }), Ej({
-      apply({
-        rects: e,
-        availableWidth: t,
-        availableHeight: i,
-        elements: n
-      }) {
-        Object.assign(n.floating.style, {
-          minWidth: `${e.reference.width + 2 * u}px`,
-          maxWidth: `${t}px`,
-          maxHeight: `${i}px`,
-          display: "flex",
-          flexDirection: "column"
-        });
-      },
-      padding: h
-    })] : [UU({
-      mainAxis: !1,
-      padding: h
-    }), vW({
-      listRef: g,
-      overflowRef: _,
-      scrollRef: y,
-      index: j ?? 0,
-      offset: N,
-      padding: h,
-      referenceOverflowThreshold: 20,
-      onFallbackChange: e => {
-        e && R(e);
-      },
-      minItemsVisible: 4
-    }), cY({
-      alignmentAxis: -1 * u
-    }), Ej({
-      apply({
-        rects: e,
-        availableWidth: t,
-        elements: i
-      }) {
-        Object.assign(i.floating.style, {
-          minWidth: `${e.reference.width + 2 * u}px`,
-          maxWidth: `${t}px`
-        });
-      },
-      padding: h
-    })]
-  });
-  let G = useCallback(e => {
-    d && C !== e && (null === e ? d() : d(b.current[e].value));
-    T(e);
-  }, [d, b, C]);
-  let {
-    getReferenceProps,
-    getFloatingProps,
-    getItemProps
-  } = bv([kp(context, {
-    event: "mousedown"
-  }), s9(context), Zx(context, {
-    enabled: !k,
-    onChange: P,
-    overflowRef: _,
-    scrollRef: y
-  }), C1(context, {
-    listRef: g,
-    activeIndex: C,
-    selectedIndex: j,
-    focusItemOnOpen: !0,
-    scrollItemIntoView: {
-      block: "center",
-      inline: "center"
+    whileElementsMounted: autoUpdate,
+    transform: true,
+    middleware: fallback
+      ? [
+          offset({ alignmentAxis: -1 * offsetAmount }),
+          flip({ padding }),
+          size({
+            apply({ rects, availableWidth, availableHeight, elements }) {
+              Object.assign(elements.floating.style, {
+                minWidth: `${rects.reference.width + 2 * offsetAmount}px`,
+                maxWidth: `${availableWidth}px`,
+                maxHeight: `${availableHeight}px`,
+                display: 'flex',
+                flexDirection: 'column',
+              })
+            },
+            padding,
+          }),
+        ]
+      : [
+          flip({ mainAxis: false, padding }),
+          inner({
+            listRef: elementsRef,
+            overflowRef,
+            scrollRef,
+            index: selectedIndex ?? 0,
+            offset: innerOffset,
+            padding,
+            referenceOverflowThreshold: 20,
+            onFallbackChange: setFallback,
+            minItemsVisible: 4,
+          }),
+          offset({ alignmentAxis: -1 * offsetAmount }),
+          size({
+            apply({ rects, availableWidth, elements }) {
+              Object.assign(elements.floating.style, {
+                minWidth: `${rects.reference.width + 2 * offsetAmount}px`,
+                maxWidth: `${availableWidth}px`,
+              })
+            },
+            padding,
+          }),
+        ],
+  })
+
+  const handleNavigate = useCallback(
+    (idx: number | null) => {
+      if (onSelectionChange && activeIndex !== idx) {
+        if (idx === null)
+          onSelectionChange()
+        else onSelectionChange(labelsRef.current[idx].value)
+      }
+      setActiveIndex(idx)
     },
-    onNavigate: G
-  }), lY(context, {
-    listRef: b,
-    activeIndex: C,
-    onMatch: E ? G : e => {
-      null !== e && M(b.current[e].value, {});
-    },
-    findMatch: (e, t) => {
-      let i = t.toLocaleLowerCase();
-      return e.find(e => e.label.toLocaleLowerCase().startsWith(i));
-    }
-  })]);
-  let K = useId();
-  let Y = useMemo(() => ({
-    getTriggerProps: function () {
-      let e = getReferenceProps({
-        "aria-controls": K,
-        "aria-haspopup": "listbox",
-        "aria-expanded": E,
-        role: "combobox"
-      });
-      return {
-        ...e,
-        onFocus: t => {
-          e.onFocus?.(t);
-          w(!0);
-        },
-        onBlur: t => {
-          e.onBlur?.(t);
-          w(!1);
+    [onSelectionChange, labelsRef, activeIndex],
+  )
+
+  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([
+    useClick(context, { event: 'mousedown' }),
+    useDismiss(context),
+    useInnerOffset(context, {
+      enabled: !fallback,
+      onChange: setInnerOffset,
+      overflowRef,
+      scrollRef,
+    }),
+    useListNavigation(context, {
+      listRef: elementsRef,
+      activeIndex,
+      selectedIndex,
+      focusItemOnOpen: true,
+      scrollItemIntoView: { block: 'center', inline: 'center' },
+      onNavigate: handleNavigate,
+    }),
+    useTypeahead(context, {
+      listRef: labelsRef,
+      activeIndex,
+      onMatch: isOpen
+        ? handleNavigate
+        : (idx) => {
+            if (idx !== null)
+              handleSelect(labelsRef.current[idx].value, {})
+          },
+      findMatch: (list, search) => {
+        const lower = search.toLocaleLowerCase()
+        return list.find((item: any) => item.label.toLocaleLowerCase().startsWith(lower))
+      },
+    }),
+  ])
+
+  const id = useId()
+
+  const contextValue = useMemo(
+    () => ({
+      getTriggerProps() {
+        const props: any = getReferenceProps({
+          'aria-controls': id,
+          'aria-haspopup': 'listbox',
+          'aria-expanded': isOpen,
+          'role': 'combobox',
+        })
+        return {
+          ...props,
+          onFocus: (event: any) => {
+            props.onFocus?.(event)
+            setIsTriggerFocused(true)
+          },
+          onBlur: (event: any) => {
+            props.onBlur?.(event)
+            setIsTriggerFocused(false)
+          },
         }
-      };
-    },
-    setTriggerReference: refs.setReference,
-    getContainerProps: function () {
-      return getFloatingProps({
-        id: K
-      });
-    },
-    setContainerReference: refs.setFloating,
-    getItemProps,
-    setOpen: x,
-    overflowRef: _,
-    scrollRef: y,
-    setScrollTop: D,
-    handleSelect: M,
-    handleArrowScroll: function (e) {
-      k ? y.current && (y.current.scrollTop -= e, flushSync(() => D(y.current.scrollTop ?? 0))) : flushSync(() => P(t => t - e));
-    },
-    floatingContext: context,
-    floatingStyles,
-    isOpen: E,
-    isTriggerFocused: S,
-    fallback: k,
-    itemList: b.current,
-    scrollTop: O,
-    innerOffset: N,
-    activeIndex: C,
-    selectedIndex: j,
-    allowSelection: v
-  }), [refs.setReference, refs.setFloating, getItemProps, M, context, floatingStyles, E, S, k, O, N, C, j, v, getReferenceProps, K, getFloatingProps]);
-  return jsx($$A6.Provider, {
-    value: Y,
-    children: jsx(ph, {
-      elementsRef: g,
-      labelsRef: b,
-      children: m
-    })
-  });
+      },
+      setTriggerReference: refs.setReference,
+      getContainerProps: () => getFloatingProps({ id }),
+      setContainerReference: refs.setFloating,
+      getItemProps,
+      setOpen: setIsOpen,
+      overflowRef,
+      scrollRef,
+      setScrollTop,
+      handleSelect,
+      handleArrowScroll(amount: number) {
+        if (fallback) {
+          if (scrollRef.current) {
+            scrollRef.current.scrollTop -= amount
+            flushSync(() => setScrollTop(scrollRef.current.scrollTop ?? 0))
+          }
+        }
+        else {
+          flushSync(() => setInnerOffset(offset => offset - amount))
+        }
+      },
+      floatingContext: context,
+      floatingStyles,
+      isOpen,
+      isTriggerFocused,
+      fallback,
+      itemList: labelsRef.current,
+      scrollTop,
+      innerOffset,
+      activeIndex,
+      selectedIndex,
+      allowSelection,
+    }),
+    [
+      refs.setReference,
+      refs.setFloating,
+      getItemProps,
+      handleSelect,
+      context,
+      floatingStyles,
+      isOpen,
+      isTriggerFocused,
+      fallback,
+      scrollTop,
+      innerOffset,
+      activeIndex,
+      selectedIndex,
+      allowSelection,
+      getReferenceProps,
+      id,
+      getFloatingProps,
+    ],
+  )
+
+  return jsx(SelectPrimitiveContext.Provider, {
+    value: contextValue,
+    children: jsx(FloatingList, {
+      elementsRef,
+      labelsRef,
+      children,
+    }),
+  })
 }
-$$S1.displayName = "SelectPrimitive.Group";
-$$w4.displayName = "SelectPrimitive.Root";
-export const mc = $$v0;
-export const YJ = $$S1;
-export const WL = $$x2;
-export const c$ = $$E3;
-export const bL = $$w4;
-export const LJ = $$b5;
-export const pk = $$A6;
-export const l9 = $$I7;
-export const WM = $$y8;
+SelectPrimitiveRoot.displayName = 'SelectPrimitive.Root'
+
+// Export refactored names
+export const mc = SelectPrimitiveContainer
+export const YJ = SelectPrimitiveGroup
+export const WL = SelectPrimitiveGroupLabel
+export const c$ = SelectPrimitiveOption
+export const bL = SelectPrimitiveRoot
+export const LJ = SelectPrimitiveScrollArrow
+export const pk = SelectPrimitiveContext
+export const l9 = SelectPrimitiveTrigger
+export const WM = useSelectPrimitiveState

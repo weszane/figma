@@ -47,7 +47,7 @@ import { VP, GH } from "../905/18797";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { t as _$$t2 } from "../905/897919";
 import { g as _$$g } from "../905/248178";
 import { I7 } from "../figma_app/594947";
@@ -1227,12 +1227,12 @@ function eG({
   let r = {
     callToActionText: e,
     googleText: t,
-    termsOfService: jsx(_$$_, {
+    termsOfService: jsx(LinkPrimitive, {
       href: getLocalizedPath("/legal/tos/"),
       className: "x1bvjpef x8p8a2l x1ypdohk",
       children: renderI18nText("auth.sign-in.tos-long")
     }),
-    privacyPolicy: jsx(_$$_, {
+    privacyPolicy: jsx(LinkPrimitive, {
       href: getLocalizedPath("/legal/privacy/"),
       className: "x1bvjpef x8p8a2l x1ypdohk",
       children: renderI18nText("auth.sign-in.privacy-policy")
@@ -1329,7 +1329,7 @@ function ez(e) {
         children: jsxs("p", {
           children: [jsx("span", {
             children: getI18nString("auth.footer-sign-up-switch-form-text")
-          }), " ", jsx(_$$_, {
+          }), " ", jsx(LinkPrimitive, {
             href: "#",
             onClick: () => {
               t(_$$E({
@@ -1677,7 +1677,7 @@ function e2(e) {
     }), jsx("div", {
       className: "validate_code--footerRow--CJ4m0",
       children: renderI18nText("auth.validate-code.resend-helper-text", {
-        cta: jsx(_$$_, {
+        cta: jsx(LinkPrimitive, {
           href: "#",
           className: "validate_code--link--aOlPI modal--blueLink--9GcJu blue_link--blueLink--9rlnd",
           onClick: () => {
@@ -1833,7 +1833,7 @@ function te() {
   let c = _$$s.alignCenter.font16.lh24.$;
   let [p, h] = useState("");
   let [g, f] = useState(!1);
-  let _ = jsx(_$$_, {
+  let _ = jsx(LinkPrimitive, {
     className: "validate_email--link--w8oJH modal--blueLink--9GcJu blue_link--blueLink--9rlnd",
     href: "#",
     onClick: () => {
@@ -1919,7 +1919,7 @@ function te() {
         disabled: !b(p),
         children: getI18nString("auth.two-factor.log-in")
       })]
-    }) : null, jsx(_$$_, {
+    }) : null, jsx(LinkPrimitive, {
       className: _$$s.block.mt24.$,
       href: "https://mail.google.com/mail/u/0/",
       newTab: !0,
@@ -1930,7 +1930,7 @@ function te() {
         svg: _$$A2,
         text: getI18nString("auth.magic_link_check_email.open_gmail")
       })
-    }), !t.endsWith("@gmail.com") && jsx(_$$_, {
+    }), !t.endsWith("@gmail.com") && jsx(LinkPrimitive, {
       className: _$$s.block.mt16.$,
       href: "https://outlook.live.com/mail/0/inbox",
       newTab: !0,
@@ -2094,7 +2094,7 @@ function ts() {
           checkInIframe: () => window.self !== window.top
         })
       })
-    }), jsx(_$$_, {
+    }), jsx(LinkPrimitive, {
       className: _$$s.block.mt32.$,
       href: "https://mail.google.com/mail/u/0/",
       newTab: !0,
@@ -2105,7 +2105,7 @@ function ts() {
         svg: _$$A2,
         text: getI18nString("auth.magic_link_check_email.open_gmail")
       })
-    }), !t.endsWith("@gmail.com") && jsx(_$$_, {
+    }), !t.endsWith("@gmail.com") && jsx(LinkPrimitive, {
       className: _$$s.block.mt16.$,
       href: "https://outlook.live.com/mail/0/inbox",
       newTab: !0,

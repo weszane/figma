@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { t as _$$t } from "../905/150656";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, Jn, nB, Wk } from "../figma_app/272243";
@@ -36,7 +36,7 @@ import { U as _$$U } from "../905/275247";
 import { e as _$$e2 } from "../905/483726";
 import { popPrevModal, popModalStack } from "../905/156213";
 import { R as _$$R } from "../figma_app/184628";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { gR, bL as _$$bL2 } from "../figma_app/861123";
 import { B as _$$B } from "../905/950875";
 import { f as _$$f } from "../905/555062";
@@ -726,7 +726,7 @@ let eu = {
   }
 };
 let $$ep0 = registerModal(function (e) {
-  let t = hS({
+  let t = useModalManager({
     ...e
   });
   let [i, g, A] = _$$t.useTabs({

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useStore, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { $n } from "../905/521428";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
@@ -67,7 +67,7 @@ function B(e) {
   let [en, ei] = useState();
   let [ea, es] = useState(!1);
   let [eo, el] = useState(!1);
-  let ed = hS(e);
+  let ed = useModalManager(e);
   let ec = useSubscription(TeamHasPublishedSite, {
     teamId: e.teamId
   });

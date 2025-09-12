@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { bL, Rq } from "../905/38914";
@@ -200,7 +200,7 @@ let $$z0 = registerModal(function ({
   planId: t,
   ...a
 }) {
-  let C = hS(a);
+  let C = useModalManager(a);
   let N = useDispatch();
   let I = function (e) {
     switch (e) {

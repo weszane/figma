@@ -4,7 +4,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, r1, nB, wi, jk, Y9, hE } from "../figma_app/272243";
 import { w as _$$w } from "../905/770105";
@@ -351,7 +351,7 @@ let $ = {
   }
 };
 function B(e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let a = [{
     id: "teams",
     icon: jsx(_$$w, {}),
@@ -452,7 +452,7 @@ function B(e) {
   });
 }
 function G(e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let a = [{
     id: "design_systems",
     graphic: jsx(_$$L, {}),
@@ -540,7 +540,7 @@ function G(e) {
 }
 function z(e) {
   let [t, a] = useState(!1);
-  let n = hS({
+  let n = useModalManager({
     ...e,
     preventUserClose: t
   });
@@ -663,7 +663,7 @@ function W(e) {
   } = e;
   let a = useDispatch();
   let [n, s] = useState(!1);
-  let i = hS({
+  let i = useModalManager({
     ...e,
     preventUserClose: n
   });

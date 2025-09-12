@@ -43,7 +43,7 @@ import { d as _$$d3 } from '../905/189168';
 import { scopeAwareFunction as _$$nc, permissionScopeHandler } from '../905/189185';
 import { t as _$$t3 } from '../905/192333';
 import { Ts } from '../905/194276';
-import { fF } from '../905/194389';
+import { isStackOverflowError } from '../905/194389';
 import { Cg } from '../905/195479';
 import { g as _$$g3 } from '../905/211118';
 import { normalizeValue } from '../905/216495';
@@ -81,7 +81,7 @@ import { debugState } from '../905/407919';
 import { WK } from '../905/414069';
 import { JI, Yj } from '../905/416496';
 import { G as _$$G3 } from '../905/431526';
-import { hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { Y as _$$Y } from '../905/438063';
 import { N as _$$N2 } from '../905/438674';
 import { R as _$$R } from '../905/441305';
@@ -191,7 +191,7 @@ import { cq } from '../905/794154';
 import { x as _$$x3 } from '../905/797453';
 import { B as _$$B6 } from '../905/808775';
 import { defaultLanguage } from '../905/816253';
-import { o as _$$o2 } from '../905/821217';
+import { EventShield } from '../905/821217';
 import { F as _$$F5 } from '../905/827944';
 import { getSceneGraphInstance } from '../905/830071';
 import { parseInteger } from '../905/833686';
@@ -376,7 +376,7 @@ import { R as _$$R4 } from '../figma_app/612938';
 import { OX } from '../figma_app/617606';
 import { _b as _$$_b, uP } from '../figma_app/618665';
 import { Av } from '../figma_app/622881';
-import { Dk, wY } from '../figma_app/623293';
+import { copyTextToClipboard, copyTextWithPlainFallback } from '../figma_app/623293';
 import { lH as _$$lH2 } from '../figma_app/623300';
 import { Mj } from '../figma_app/624361';
 import { Id, JU } from '../figma_app/626177';
@@ -459,7 +459,7 @@ import { deflateRaw } from '../vendor/323834';
 import { useSelector, useDispatch } from 'react-redux';
 import oA from '../vendor/805353';
 import { A as _$$A5 } from '../vendor/850789';
-import { unmountComponentAtNode } from '../vendor/944059';
+import { unmountComponentAtNode } from 'react-dom';
 let n;
 let r;
 function d(e) {
@@ -1149,7 +1149,7 @@ let iG = {
 };
 let i0 = registerModal(e => {
   let t = useDispatch();
-  let i = hS(e);
+  let i = useModalManager(e);
   return jsx(_$$bL, {
     manager: i,
     width: 'md',
@@ -2759,7 +2759,7 @@ let aP = 'pdf_export_settings_modal--exportSettingsModalRowAutoHeight--zCiQR';
 let aO = registerModal(e => {
   let [t, i] = useState(!1);
   let [n, r] = useState(!1);
-  let o = hS({
+  let o = useModalManager({
     ...e,
     preventUserClose: t
   });
@@ -3204,7 +3204,7 @@ class aZ extends PureComponent {
     }) : getI18nString('fullscreen.rename_modal.rename_num_layers_layers', {
       numLayers: this.sortedGUIDs.length
     });
-    return jsx(_$$o2, {
+    return jsx(EventShield, {
       eventListeners: ['onClick', 'onKeyDown'],
       children: jsx(_$$bL, {
         manager: this.props.manager,
@@ -3237,7 +3237,7 @@ class aZ extends PureComponent {
   }
 }
 let aX = registerModal(e => {
-  let t = hS(e);
+  let t = useModalManager(e);
   let i = useRef(null);
   let n = setupAutofocusHandler(i);
   let r = useSelector(e => (reportNullOrUndefined(_$$e.UNOWNED, e.mirror.appModel), e.mirror.appModel.currentPage));
@@ -5581,7 +5581,7 @@ let lX = class e extends sP(sN(sR)) {
       }, this.openFileKey(), this._store);
     });
     window.addEventListener('error', e => {
-      fF({
+      isStackOverflowError({
         message: e.message
       }) ? _$$y4.fullscreenCrashed({
         type: 'stack-overflow'
@@ -6766,9 +6766,9 @@ let lX = class e extends sP(sN(sR)) {
       let e = document.createElement('a');
       e.href = l;
       e.innerText = g;
-      i = wY(e.outerHTML, l);
+      i = copyTextWithPlainFallback(e.outerHTML, l);
     } else {
-      i = Dk(l);
+      i = copyTextToClipboard(l);
     }
     i.then(() => this.dispatch(VisualBellActions.enqueue({
       message: d

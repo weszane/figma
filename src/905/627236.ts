@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
 import { bL, Rq } from "../905/38914";
 import { nB, r1, wi, jk } from "../figma_app/272243";
@@ -97,7 +97,7 @@ function X(e) {
   var t;
   var i;
   let l = useDispatch();
-  let h = hS(e);
+  let h = useModalManager(e);
   let g = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });

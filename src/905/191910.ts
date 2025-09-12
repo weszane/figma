@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { customHistory } from "../905/612521";
 import { nR } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 export function $$c0() {
-  let e = hS({
+  let e = useModalManager({
     open: !0,
     onClose: () => {
       customHistory.reload("BranchMemoryWarning");

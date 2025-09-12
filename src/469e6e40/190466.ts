@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { fP, mc, i3 } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { E as _$$E } from "../905/632989";
 import { $n } from "../905/521428";
 import { t as _$$t } from "../905/150656";
@@ -417,7 +417,7 @@ function eF(e) {
     getTriggerProps,
     getContainerProps,
     getArrowProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: t,
     onOpenChange: a,
     type: "listbox",
@@ -452,7 +452,7 @@ function eF(e) {
         className: eI,
         ...getTriggerProps(),
         children: shortText
-      }), jsxs(mc, {
+      }), jsxs(PopoverPrimitiveContainer, {
         ...getContainerProps({
           style: {
             boxShadow: "var(--elevation-300-tooltip)",
@@ -462,7 +462,7 @@ function eF(e) {
             padding: "4px 8px"
           }
         }),
-        children: [jsx(i3, {
+        children: [jsx(PopoverPrimitiveArrow, {
           ...getArrowProps()
         }), jsx(_$$J, {
           mode: "dark",

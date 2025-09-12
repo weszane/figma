@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useCallback, useMemo, memo, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { y as _$$y } from "../905/661502";
 import { O as _$$O } from "../905/969533";
 import { AppStateTsApi, Fullscreen } from "../figma_app/763686";
@@ -581,7 +581,7 @@ export let $$K0 = memo(function ({
   });
   return jsx("div", {
     className: sH,
-    children: jsxs(_$$o, {
+    children: jsxs(EventShield, {
       eventListeners: ["onClick"],
       children: [jsx(_$$L, {
         "aria-controls": $$H,

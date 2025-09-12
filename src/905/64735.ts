@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { K } from "../905/443068";
-import { _ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { E } from "../905/632989";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -136,7 +136,7 @@ function f({
     danger: _$$s.colorTextDanger,
     success: _$$s.colorTextSuccess
   }).$;
-  return t.href ? jsx(_, {
+  return t.href ? jsx(LinkPrimitive, {
     onClick: t.onClick,
     newTab: !0,
     href: t.href,

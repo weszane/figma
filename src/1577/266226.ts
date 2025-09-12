@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
@@ -189,7 +189,7 @@ export let $$B0 = registerModal(function ({
 }) {
   let d = getUserId();
   let u = cD();
-  let _ = hS(c);
+  let _ = useModalManager(c);
   let h = useDispatch();
   let [y] = setupResourceAtomHandler(ColorPalettesForTeam({
     teamId: u

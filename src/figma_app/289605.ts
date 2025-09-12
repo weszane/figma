@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { L as _$$L } from "../905/704296";
 import { E as _$$E2 } from "../905/235326";
 import { U as _$$U } from "../905/103637";
@@ -475,7 +475,7 @@ function ep({
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
     },
-    children: jsx(_$$_, {
+    children: jsx(LinkPrimitive, {
       className: E()(YI, Iw),
       newTab: !0,
       href: f,

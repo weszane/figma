@@ -4,7 +4,7 @@ import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { $ } from "../905/692618";
 import { I } from "../469e6e40/329965";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { b } from "../905/985254";
 export function $$u0({
@@ -16,7 +16,7 @@ export function $$u0({
       seen_connected_project_in_admin_dashboard_banner: !0
     }));
   };
-  return jsx(J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsxs(Yy, {
       variant: "brand",
       icon: jsx(I, {

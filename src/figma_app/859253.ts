@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { mc, YJ } from "../figma_app/860955";
 import { a as _$$a } from "../figma_app/215667";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { fu } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { e as _$$e } from "../figma_app/919092";
@@ -20,7 +20,7 @@ export function $$u0({
   let p = e.$$import ? jsx(_$$e, {
     ...e.$$import
   }) : null;
-  return jsx(J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(_$$a, {
       mode: "match",
       children: jsx(mc, {

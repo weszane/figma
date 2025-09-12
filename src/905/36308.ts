@@ -74,7 +74,7 @@ import { O as _$$O3 } from '../905/410575';
 import { _ as _$$_4 } from '../905/410717';
 import { F as _$$F } from '../905/427107';
 import { N as _$$N4 } from '../905/430294';
-import { hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { k as _$$k4 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { aJ, Oc } from '../905/449579';
@@ -204,7 +204,7 @@ import { sendBackToFilesAction } from '../figma_app/564528';
 import { zM } from '../figma_app/580736';
 import { L as _$$L3 } from '../figma_app/582681';
 import { Bu, dd } from '../figma_app/604494';
-import { Dk } from '../figma_app/623293';
+import { copyTextToClipboard } from '../figma_app/623293';
 import { jT } from '../figma_app/626177';
 import { fileActionEnum } from '../figma_app/630077';
 import { JT } from '../figma_app/632248';
@@ -3211,7 +3211,7 @@ let iK = registerModal(e => {
   }) : null;
 }, 'auto-suggest-eval-modal');
 function iY(e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let i = _$$eY();
   let r = useCurrentFileKey();
   let a = He();
@@ -3304,12 +3304,12 @@ function iY(e) {
     }
   }, [i, r, a, d, s, p, h]);
   let f = useCallback(() => {
-    u && Dk(u.getSummaryString(), {
+    u && copyTextToClipboard(u.getSummaryString(), {
       withLineBreaks: !0
     });
   }, [u]);
   let A = useCallback(() => {
-    u && Dk(u.getDetailedResultsString(), {
+    u && copyTextToClipboard(u.getDetailedResultsString(), {
       withLineBreaks: !0
     });
   }, [u]);
@@ -3563,7 +3563,7 @@ function no(e) {
     open,
     onClose
   } = e;
-  let l = hS({
+  let l = useModalManager({
     open,
     onClose
   });
@@ -3786,7 +3786,7 @@ let nS = registerModal(e => {
     onSaveClick,
     onClose
   } = e;
-  let n = hS(e);
+  let n = useModalManager(e);
   return jsx(bL, {
     manager: n,
     width: 'md',

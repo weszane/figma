@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { E as _$$E } from "../905/632989";
 import { SourceType } from "../figma_app/763686";

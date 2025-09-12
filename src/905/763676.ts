@@ -12,7 +12,7 @@ import { h as _$$h } from "../905/207101";
 import { dW } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { vQ, jE } from "../905/656545";
+import { setupPlaybackHandler, PluginAction } from "../905/656545";
 import { am } from "../figma_app/430563";
 import { hideModal } from "../905/156213";
 import { J as _$$J2 } from "../905/445197";
@@ -509,10 +509,10 @@ export function $$ef0({
     })));
   }, [e, T, R, M, N, L, i, j, U]);
   let V = useCallback(() => {
-    i(vQ({
+    i(setupPlaybackHandler({
       assetLibraryKey: R ?? _$$l(""),
       onInsertAsset: () => Promise.resolve(B()),
-      source: jE.LIBRARY_SWAP
+      source: PluginAction.LIBRARY_SWAP
     }));
   }, [i, R, B]);
   let G = LM({

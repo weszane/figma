@@ -1,6 +1,6 @@
 import s, { createContext, version, forwardRef, useContext, useRef, useState, useImperativeHandle, useLayoutEffect, useCallback, useMemo, createElement, Fragment, memo, useEffect, Component } from "react";
 import { YR0, oY$, ujB, hv8, dQD, JJT, T2p, OPU, vBt, PFX, MwW, BEv, _oP, Hky, bUh, Rlq, ifX, AR_, m20, Aag, cBy, QSI, Udn, pA9, s1r, XQb, zsR, c1h, Ug$, Y6t, Cf3, Dii, dbY, TiQ, pow } from "../vendor/166087";
-import { flushSync, createPortal } from "../vendor/944059";
+import { flushSync, createPortal } from "react-dom";
 var n = createContext({});
 var l = (e, t, i, s) => {
   let r;

@@ -3,19 +3,19 @@ import { l as _$$l } from "../905/716947";
 import { atom } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/663269";
 import { getInitialOptions } from "../figma_app/169182";
-import { M } from "../figma_app/155411";
+import { getProviderConfigType } from "../figma_app/155411";
 import { LibraryPresetSubscriptionsV2 } from "../figma_app/43951";
 let c = atom(getInitialOptions().preset_library_keys ?? []);
 let u = atom(getInitialOptions().preset_library_keys_v2?.map(_$$l) ?? []);
 let p = atom(e => {
   let t = e(LibraryPresetSubscriptionsV2.Query({
-    group: M()
+    group: getProviderConfigType()
   }));
   return t?.status === "loaded" ? t.data?.libraryPresetSubscriptionsV2?.map(e => e.hubFileId) ?? null : null;
 });
 let m = atom(e => {
   let t = e(LibraryPresetSubscriptionsV2.Query({
-    group: M()
+    group: getProviderConfigType()
   }));
   if (t?.status !== "loaded") return null;
   let i = t.data?.libraryPresetSubscriptionsV2?.map(e => {
@@ -28,7 +28,7 @@ let $$h2 = atom(e => new Set([...(e(p) ?? []), ...e(c)].map(_$$l)));
 let $$g0 = atom(e => new Set([...(e(m) ?? []), ...e(u)]));
 let $$f1 = atom(e => {
   let t = e(LibraryPresetSubscriptionsV2.Query({
-    group: M()
+    group: getProviderConfigType()
   }));
   if (t?.status !== "loaded") return {};
   let i = {};

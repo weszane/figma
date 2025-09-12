@@ -38,7 +38,7 @@ import { E as _$$E } from "../4452/428395";
 import { s as _$$s3, u as _$$u } from "../4452/791117";
 import { k as _$$k2 } from "../4452/48052";
 import { W as _$$W } from "../4452/420937";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
@@ -89,7 +89,7 @@ import { oi } from "../figma_app/527041";
 var u = c;
 let ee = registerModal(function (e) {
   let t;
-  let a = hS(e);
+  let a = useModalManager(e);
   let n = useDispatch();
   let i = Xf(e.plan.key.parentId, e.plan.key.type !== FOrganizationLevelType.TEAM);
   let l = useSelector(e => e.teamBilling);

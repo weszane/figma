@@ -1,7 +1,7 @@
 import { Multiplayer } from "../figma_app/763686";
 import { getStorage } from "../905/657224";
 import { createActionCreator } from "../905/73481";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { createOptimistThunk } from "../905/350402";
 import { xS } from "../figma_app/193867";
 import { Vv } from "../905/32091";
@@ -24,7 +24,7 @@ let $$g6 = createActionCreator("SET_WORKSHOP_MODE_UNTIL");
 let $$f0 = createActionCreator("CLEAR_TRY_PLUGIN");
 let $$E8 = createOptimistThunk((e, t) => {
   let r = e.getState();
-  return Dk(xS(r, t));
+  return copyTextToClipboard(xS(r, t));
 });
 export function $$y2(e) {
   Multiplayer?.setName(e);

@@ -19,7 +19,7 @@ import { h5 } from "../1156/717481";
 import { ZH, AW, oT } from "../1156/250784";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
@@ -156,7 +156,7 @@ let U = {
   }
 };
 let G = registerModal(function (e) {
-  let t = hS({
+  let t = useModalManager({
     ...e
   });
   let {
@@ -249,7 +249,7 @@ let W = {
   }
 };
 let V = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let n = h5({
     toolCallId: e.toolCallId,
     toolName: e.toolName,

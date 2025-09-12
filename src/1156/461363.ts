@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { AIScopeHandler } from "../905/189185";
@@ -13,7 +13,7 @@ import { _9 } from "../figma_app/119420";
 import { Pe } from "../1156/713925";
 import { E } from "../1156/298326";
 export let $$f0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let {
     claimAPendingAttachmentOrMakeOne,
     setAttachments

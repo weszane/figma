@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, createRef } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { bL } from "../905/911410";

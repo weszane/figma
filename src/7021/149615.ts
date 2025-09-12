@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { r as _$$r } from "../905/571838";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -267,7 +267,7 @@ export function $$B0({
     p.onClose();
     h(hideModal());
   };
-  let w = hS({
+  let w = useModalManager({
     open: _,
     onClose: f,
     preventUserClose: !0

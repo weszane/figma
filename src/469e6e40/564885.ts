@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { $n } from "../905/521428";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
@@ -22,7 +22,7 @@ import { Ib } from "../905/129884";
 import { J as _$$J } from "../905/298764";
 import { $ } from "../905/834575";
 export let $$E0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let a = useDispatch();
   let [r, u] = useState({});
   let [g, h] = useState(!0);

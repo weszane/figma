@@ -49,7 +49,7 @@ import { Ck } from '../905/372455';
 import { getUserId } from '../905/372672';
 import { FRequestsStr } from '../905/384551';
 import { rq } from '../905/425180';
-import { hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { GroupType } from '../905/441038';
 import { k as _$$k3 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
@@ -1961,7 +1961,7 @@ let a$ = registerModal(e => {
   } = e;
   let c = JT(seatType);
   let _ = orgUserIds.length;
-  let u = hS(e);
+  let u = useModalManager(e);
   let m = useDispatch();
   let [p, g] = useState(!1);
   let h = useCallback(() => {
@@ -2285,7 +2285,7 @@ let aZ = kp(e => {
   });
 }, 'Guest Access Tab');
 let a1 = registerModal(e => {
-  let t = hS(e);
+  let t = useModalManager(e);
   let [a, r] = useState(null);
   useEffect(() => {
     _$$G.getGuestResources({

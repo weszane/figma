@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -28,7 +28,7 @@ export let $$A0 = registerModal(function (e) {
     t(hideModal());
   };
   let S = useTeamPlanFeatures().unwrapOr(null);
-  let A = hS({
+  let A = useModalManager({
     ...e,
     onClose: a
   });

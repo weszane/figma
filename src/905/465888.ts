@@ -1,385 +1,627 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { forwardRef, createContext, useState, useRef, useLayoutEffect, useMemo, useContext, useEffect } from "react";
-import { flushSync } from "../vendor/944059";
-import { fI, R1, bv, Mk, iB, kp, s9, It, lY, C1, rm, SV, $c, cq, ph, P6 } from "../vendor/516565";
-import { cY, UU, Ej } from "../vendor/343575";
-import { A as _$$A } from "../vendor/723372";
-import { o as _$$o } from "../905/821217";
-import { useSelectionContext, useSelectionProvider } from "../905/751750";
-import { iM, If } from "../905/472756";
-import { useRecording } from "../905/959312";
-import { $ } from "../905/61417";
-import { _ as _$$_ } from "../figma_app/496441";
-import { fP, mc as _$$mc } from "../905/691059";
-import { Lh } from "../figma_app/415899";
-import { R } from "../905/457273";
-import { defaultComponentAttribute } from "../905/577641";
-import { preventAndStopEvent } from "../905/955878";
-import { Q } from "../905/586361";
-import { E as _$$E } from "../905/172252";
-import { Os, Uw, Ym } from "../905/743079";
-let E = forwardRef(({
-  onClick: e,
-  children: t,
-  disabled: i,
-  recordingKey: r,
-  htmlAttributes: a,
-  ...s
-}, o) => {
-  let l = iM(["description"]);
-  let d = useRecording(e, {
-    eventName: "click",
-    recordingKey: r
-  }, [e, i]);
-  let c = Os({
-    forwardedRef: o,
-    action: d,
-    disabled: i,
-    closeOnClick: !0
-  });
-  return jsx("li", {
-    role: "menuitem",
-    ...l,
-    ...c,
-    ...s,
-    ...a,
-    children: t
-  });
-});
-E.displayName = "Menu.Item";
-export let $$x2 = If(E);
-$$x2.displayName = "MenuPrimitive.Item";
-export let $$S3 = forwardRef(({
-  href: e,
-  htmlAttributes: t,
-  ...i
-}, r) => {
-  let a = Os({
-    forwardedRef: r,
-    action: e => {
-      e.currentTarget.click();
+import { FloatingList, FloatingNode, FloatingTree, safePolygon, useClick, useDismiss, useFloatingNodeId, useFloatingParentNodeId, useFloatingTree, useHover, useInteractions, useListItem, useListNavigation, useMergeRefs, useRole, useTypeahead } from '@floating-ui/react'
+import { flip, offset, size } from '@floating-ui/react-dom'
+import classNames from 'classnames'
+import { createContext, forwardRef, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { ensureContext } from '../905/61417'
+import { ScreenReaderOnly } from '../905/172252'
+import { setupKeyboardNavigationHandler } from '../905/457273'
+import { useAriaAttributes, withA11yConnector } from '../905/472756'
+import { defaultComponentAttribute } from '../905/577641'
+import { loadFeatureFlags } from '../905/586361'
+import { PopoverPrimitiveContainer, usePopoverPrimitive } from '../905/691059'
+import { MenuItemContext, rectanglesOverlap, setupMenuItemHandler } from '../905/743079'
+import { useSelectionContext, useSelectionProvider } from '../905/751750'
+import { EventShield } from '../905/821217'
+import { preventAndStopEvent } from '../905/955878'
+import { useRecording } from '../905/959312'
+import { useFplStrings } from '../figma_app/415899'
+import { LinkPrimitive } from '../figma_app/496441'
+
+// Original code: Menu.Item component
+/**
+ * @description MenuItem component for individual menu items.
+ * @param {object} props - Component props.
+ * @param {Function} props.onClick - Click handler.
+ * @param {React.ReactNode} props.children - Children elements.
+ * @param {boolean} props.disabled - Whether the item is disabled.
+ * @param {string} props.recordingKey - Key for recording.
+ * @param {object} props.htmlAttributes - Additional HTML attributes.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The menu item element.
+ */
+// Original code: MenuItem component
+/**
+ * @description MenuItem component for individual menu items.
+ * @param {MenuItemProps} props - Component props.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The menu item element.
+ */
+const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(({
+  onClick,
+  children,
+  disabled,
+  recordingKey,
+  htmlAttributes,
+  ...otherProps
+}, ref) => {
+  // Original code: useAriaAttributes hook for description
+  const ariaAttributes = useAriaAttributes(['description'])
+
+  // Original code: useRecording hook for click event
+  const handleClick = useRecording(onClick, {
+    eventName: 'click',
+    recordingKey,
+  }, [onClick, disabled])
+
+  // Original code: setupMenuItemHandler for menu item interactions
+  const menuItemHandler = setupMenuItemHandler({
+    forwardedRef: ref,
+    action: handleClick,
+    disabled,
+    closeOnClick: true,
+  })
+
+  return jsx('li', {
+    role: 'menuitem',
+    ...ariaAttributes,
+    ...menuItemHandler,
+    ...otherProps,
+    ...htmlAttributes,
+    children,
+  })
+})
+
+// Define types for better clarity and maintainability
+interface MenuItemProps {
+  onClick?: (event: React.MouseEvent<HTMLLIElement>) => void
+  children: React.ReactNode
+  disabled?: boolean
+  recordingKey?: string
+  htmlAttributes?: React.HTMLAttributes<HTMLLIElement>
+  [key: string]: any
+}
+MenuItem.displayName = 'Menu.Item'
+
+// Original code: MenuPrimitive.Item
+/**
+ * @description MenuItemPrimitive component with accessibility connector.
+ */
+export const MenuItemPrimitive = withA11yConnector(MenuItem)
+MenuItemPrimitive.displayName = 'MenuPrimitive.Item'
+
+// Original code: MenuPrimitive.Link
+/**
+ * @description MenuLink component for menu links.
+ * @param {object} props - Component props.
+ * @param {string} props.href - Link href.
+ * @param {object} props.htmlAttributes - Additional HTML attributes.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The link element.
+ */
+// Original code: MenuPrimitive.Link
+/**
+ * @description MenuLink component for menu links.
+ * @param {object} props - Component props.
+ * @param {string} props.href - Link href.
+ * @param {object} props.htmlAttributes - Additional HTML attributes.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The link element.
+ */
+export const MenuPrimitiveLink = forwardRef<HTMLAnchorElement, MenuLinkProps>(({
+  href,
+  htmlAttributes,
+  ...otherProps
+}, ref) => {
+  const menuItemHandler = setupMenuItemHandler({
+    forwardedRef: ref,
+    action: (event) => {
+      (event.currentTarget as HTMLAnchorElement).click()
     },
-    disabled: !1,
-    closeOnClick: !0,
-    isLink: !0
-  });
-  return jsx(_$$_, {
-    href: e,
+    disabled: false,
+    closeOnClick: true,
+    isLink: true,
+  })
+  return jsx(LinkPrimitive, {
+    href,
     htmlAttributes: {
-      role: "menuitem",
-      ...t
+      role: 'menuitem',
+      ...htmlAttributes,
     },
-    ...a,
-    ...i
-  });
-});
-$$S3.displayName = "MenuPrimitve.Link";
-let w = createContext({
+    ...menuItemHandler,
+    ...otherProps,
+  })
+})
+
+// Define types for better clarity and maintainability
+interface MenuLinkProps {
+  href: string
+  htmlAttributes?: React.HTMLAttributes<HTMLAnchorElement>
+  [key: string]: any
+}
+
+MenuPrimitiveLink.displayName = 'MenuPrimitive.Link'
+
+// Original code: MenuContext
+/**
+ * @description Context for menu state management.
+ */
+const MenuContext = createContext({
   activeIndex: null,
   setActiveIndex: () => {},
-  listLength: 0
-});
-function C(e) {
-  let t = e.target;
-  return t instanceof HTMLElement && null === t.closest("#curator-portal-target");
+  listLength: 0,
+})
+
+// Original code: isOutsideCuratorPortal
+/**
+ * @description Checks if the event target is outside the curator portal.
+ * @param {Event} e - The event.
+ * @returns {boolean} True if outside.
+ */
+function isOutsideCuratorPortal(e) {
+  const t = e.target
+  return t instanceof HTMLElement && t.closest('#curator-portal-target') === null
 }
-export function $$T10(e) {
-  let [t, i] = useState(!1);
-  let [n, l] = useState(null);
-  let [d, c] = useState(0);
-  let [u, p] = useState(!0);
-  let [m, h] = useState(0);
-  let [f, _] = useState(!1);
-  let A = fI();
-  let [v, E] = useState(null);
-  let x = R1();
-  let S = Q().fpl_menu_initial_focus;
-  let w = useRef(null);
-  let T = useRef([]);
-  let k = useRef([]);
-  let R = useRef(null);
-  let N = useRef(null);
-  let P = null !== x;
-  let {
-    getTriggerProps,
-    getContainerProps,
-    context
-  } = fP({
-    isOpen: t,
-    type: "menu",
-    provideOwnDismiss: !0,
-    provideOwnClick: !0,
-    middleware: [cY(e?.offset), UU(), Ej({
-      padding: {
-        top: 12,
-        bottom: 12,
-        left: 8,
-        right: 8
+
+// Original code: useMenu hook
+/**
+ * @description Custom hook for managing menu state, interactions, and positioning using Floating UI.
+ * This hook handles menu opening/closing, navigation, scrolling, and context menu functionality.
+ * @param {UseMenuOptions} options - Configuration options for the menu.
+ * @returns {UseMenuReturn} An object containing the menu manager and utility functions.
+ */
+export function useMenu(options: UseMenuOptions): UseMenuReturn {
+  // State variables for menu management
+  const [isOpen, setIsOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(null)
+  const [innerOffset, setInnerOffset] = useState(0)
+  const [selectionLock, setSelectionLock] = useState(true)
+  const [scrollTop, setScrollTop] = useState(0)
+  const [hasOverlap, setHasOverlap] = useState(false)
+
+  // Refs for DOM elements and lists
+  const nodeId = useFloatingNodeId()
+  const touchStartPosition = useRef<{ x: number, y: number } | null>(null)
+  const listRef = useRef([])
+  const itemRef = useRef([])
+  const overflowRef = useRef(null)
+  const scrollRef = useRef(null)
+  const touchTimeoutRef = useRef<number | null>(null)
+
+  // Determine if this is a nested menu
+  const parentNodeId = useFloatingParentNodeId()
+  const isNested = parentNodeId !== null
+
+  // Load feature flags
+  const initialFocusEnabled = loadFeatureFlags().fpl_menu_initial_focus
+
+  // Middleware configuration for Floating UI
+  const middleware = [
+    offset(options?.offset),
+    flip(),
+    size({
+      padding: { top: 12, bottom: 12, left: 8, right: 8 },
+      apply({ availableWidth, availableHeight, elements }) {
+        Object.assign(elements.floating.style, {
+          maxWidth: `${Math.max(0, availableWidth)}px`,
+          maxHeight: `${Math.max(0, availableHeight)}px`,
+        })
       },
-      apply({
-        availableWidth: e,
-        availableHeight: t,
-        elements: i
-      }) {
-        Object.assign(i.floating.style, {
-          maxWidth: `${Math.max(0, e)}px`,
-          maxHeight: `${Math.max(0, t)}px`
-        });
-      }
-    })],
-    onOpenChange: i,
-    nodeId: A,
-    placement: P ? "right-start" : e?.initialPosition ?? "bottom-start",
-    config2025CuratorHacks: e?.config2025CuratorHacks
-  });
-  let F = e?.config2025CuratorHacks ? {
-    outsidePress: C
-  } : {};
-  let {
+    }),
+  ]
+
+  // Popover primitive setup
+  const {
+    getTriggerProps: baseGetTriggerProps,
+    getContainerProps,
+    context,
+  } = usePopoverPrimitive({
+    isOpen,
+    type: 'menu',
+    provideOwnDismiss: true,
+    provideOwnClick: true,
+    middleware,
+    onOpenChange: setIsOpen,
+    nodeId,
+    placement: isNested ? 'right-start' : options?.initialPosition ?? 'bottom-start',
+    config2025CuratorHacks: options?.config2025CuratorHacks,
+  })
+
+  // Dismiss configuration for curator portal
+  const dismissConfig = options?.config2025CuratorHacks
+    ? { outsidePress: isOutsideCuratorPortal }
+    : {}
+
+  // Interactions setup
+  const {
     getReferenceProps,
     getFloatingProps,
-    getItemProps
-  } = bv([Mk(context, {
-    enabled: P,
-    delay: {
-      open: 75
-    },
-    handleClose: iB({
-      blockPointerEvents: !0,
-      buffer: 8
-    })
-  }), kp(context, {
-    toggle: !P,
-    ignoreMouse: P,
-    event: "mousedown"
-  }), s9(context, {
-    bubbles: {
-      outsidePress: !0,
-      escapeKey: !0
-    },
-    ...F
-  }), It(context, {
-    role: "menu"
-  }), lY(context, {
-    listRef: T,
-    activeIndex: n,
-    onMatch: l,
-    findMatch: (e, t) => {
-      let i = t.toLocaleLowerCase();
-      return e.find(e => e?.toLocaleLowerCase().startsWith(i));
-    }
-  }), C1(context, {
-    listRef: k,
-    activeIndex: n,
-    focusItemOnOpen: !S || void 0,
-    nested: P,
-    scrollItemIntoView: {
-      block: "center",
-      inline: "center"
-    },
-    onNavigate: l,
-    disabledIndices: []
-  })]);
+    getItemProps,
+  } = useInteractions([
+    useHover(context, {
+      enabled: isNested,
+      delay: { open: 75 },
+      handleClose: safePolygon({ blockPointerEvents: true, buffer: 8 }),
+    }),
+    useClick(context, {
+      toggle: !isNested,
+      ignoreMouse: isNested,
+      event: 'mousedown',
+    }),
+    useDismiss(context, {
+      bubbles: { outsidePress: true, escapeKey: true },
+      ...dismissConfig,
+    }),
+    useRole(context, { role: 'menu' }),
+    useTypeahead(context, {
+      listRef,
+      activeIndex,
+      onMatch: setActiveIndex,
+      findMatch: (list, search) =>
+        list.find(item => item?.toLocaleLowerCase().startsWith(search.toLocaleLowerCase())),
+    }),
+    useListNavigation(context, {
+      listRef: itemRef,
+      activeIndex,
+      focusItemOnOpen: !initialFocusEnabled || undefined,
+      nested: isNested,
+      scrollItemIntoView: { block: 'center', inline: 'center' },
+      onNavigate: setActiveIndex,
+      disabledIndices: [],
+    }),
+  ])
+
+  // Effect to detect menu overlap
   useLayoutEffect(() => {
-    if (!context.isPositioned && f) _(!1);else if (!context.isPositioned) return;
-    let e = Array.from(document.querySelectorAll("[data-fpl-menu-container]")).map(e => e.getBoundingClientRect());
-    for (let t = 0; t < e.length - 1; t++) for (let i = t + 1; i < e.length; i++) if (Uw(e[t], e[i])) {
-      _(!0);
-      return;
+    if (!context.isPositioned && hasOverlap) {
+      setHasOverlap(false)
+      return
     }
-    _(!1);
-  }, [context.isPositioned]);
-  return useMemo(() => {
-    function e(e, t) {
-      context.refs.setPositionReference({
-        getBoundingClientRect: () => ({
-          width: 0,
-          height: 0,
-          x: e,
-          y: t,
-          top: t,
-          right: e,
-          bottom: t,
-          left: e
-        })
-      });
-      i(!0);
+    if (!context.isPositioned)
+      return
+
+    const containers = Array.from(document.querySelectorAll('[data-fpl-menu-container]')).map(
+      el => el.getBoundingClientRect(),
+    )
+    for (let i = 0; i < containers.length - 1; i++) {
+      for (let j = i + 1; j < containers.length; j++) {
+        if (rectanglesOverlap(containers[i], containers[j])) {
+          setHasOverlap(true)
+          return
+        }
+      }
     }
-    let r = e => ({
-      ...getTriggerProps(),
-      ...getReferenceProps({
-        onMouseDown: e?.onClick,
-        ...e
-      })
-    });
-    return {
+    setHasOverlap(false)
+  }, [context.isPositioned])
+
+  // Helper function to open menu at a specific position
+  const openAtPosition = (x: number, y: number) => {
+    context.refs.setPositionReference({
+      getBoundingClientRect: () => ({
+        width: 0,
+        height: 0,
+        x,
+        y,
+        top: y,
+        right: x,
+        bottom: y,
+        left: x,
+      }),
+    })
+    setIsOpen(true)
+  }
+
+  // Helper function to get trigger props
+  const getTriggerProps = (extraProps?: any) => ({
+    ...baseGetTriggerProps(),
+    ...getReferenceProps({
+      onMouseDown: extraProps?.onClick,
+      ...extraProps,
+    }),
+  })
+
+  // Helper function for context menu trigger
+  const getContextMenuTriggerProps = () => ({
+    onContextMenu: (event: React.MouseEvent) => {
+      if (event.shiftKey)
+        return
+      preventAndStopEvent(event)
+      openAtPosition(event.clientX, event.clientY)
+    },
+    onTouchStart: (event: React.TouchEvent) => {
+      if (event.touches.length > 1) {
+        if (touchTimeoutRef.current)
+          clearTimeout(touchTimeoutRef.current)
+        return
+      }
+      const { clientX, clientY } = event.touches[0]
+      touchStartPosition.current = { x: clientX, y: clientY }
+      touchTimeoutRef.current = window.setTimeout(() => {
+        openAtPosition(clientX, clientY)
+      }, 600)
+    },
+    onTouchMove: (event: React.TouchEvent) => {
+      const touch = event.touches[0]
+      if (touchTimeoutRef.current && touchStartPosition.current) {
+        const deltaX = Math.abs(touch.clientX - touchStartPosition.current.x)
+        const deltaY = Math.abs(touch.clientY - touchStartPosition.current.y)
+        if (deltaX > 10 || deltaY > 10) {
+          clearTimeout(touchTimeoutRef.current)
+        }
+      }
+    },
+    onTouchCancel: () => {
+      if (touchTimeoutRef.current)
+        clearTimeout(touchTimeoutRef.current)
+    },
+    onTouchEnd: () => {
+      if (touchTimeoutRef.current)
+        clearTimeout(touchTimeoutRef.current)
+    },
+  })
+
+  // Helper function for arrow scroll
+  const handleArrowScroll = (delta: number) => {
+    flushSync(() => setInnerOffset(prev => prev - delta))
+  }
+
+  // Memoized return object
+  return useMemo(
+    () => ({
       manager: {
         getItemProps,
         getContainerProps,
         getFloatingProps,
-        getTriggerProps: r,
-        overflowRef: R,
-        scrollRef: N,
-        listRef: k,
-        itemRef: T,
+        getTriggerProps,
+        overflowRef,
+        scrollRef,
+        listRef,
+        itemRef,
         context,
-        setScrollTop: h,
-        setSelectionLock: p,
-        setOpen: i,
-        handleArrowScroll: function (e) {
-          flushSync(() => c(t => t - e));
-        },
-        allowSelection: u,
-        nodeId: A,
-        isOpen: t,
-        hasOverlap: f,
-        scrollTop: m,
-        innerOffset: d,
-        activeIndex: n,
-        setActiveIndex: l
+        setScrollTop,
+        setSelectionLock,
+        setOpen: setIsOpen,
+        handleArrowScroll,
+        allowSelection: selectionLock,
+        nodeId,
+        isOpen,
+        hasOverlap,
+        scrollTop,
+        innerOffset,
+        activeIndex,
+        setActiveIndex,
       },
-      getContextMenuTriggerProps: () => ({
-        onContextMenu: t => {
-          t.shiftKey || (preventAndStopEvent(t), e(t.clientX, t.clientY));
-        },
-        onTouchStart: ({
-          touches: t
-        }) => {
-          if (t.length > 1) {
-            w.current && clearTimeout(w.current);
-            return;
-          }
-          let {
-            clientX,
-            clientY
-          } = t[0];
-          E({
-            x: clientX,
-            y: clientY
-          });
-          w.current = window.setTimeout(() => {
-            e(clientX, clientY);
-          }, 600);
-        },
-        onTouchMove: e => {
-          let t = e.touches[0];
-          if (w.current && v) {
-            let e = Math.abs(t.clientX - v.x);
-            let i = Math.abs(t.clientY - v.y);
-            (e > 10 || i > 10) && clearTimeout(w.current);
-          }
-        },
-        onTouchCancel: () => {
-          w.current && clearTimeout(w.current);
-        },
-        onTouchEnd: () => {
-          w.current && clearTimeout(w.current);
-        }
-      }),
-      getTriggerProps: r,
-      openControlledPosition: e
-    };
-  }, [n, u, context, getContainerProps, getFloatingProps, getItemProps, getReferenceProps, getTriggerProps, f, d, t, A, v, m]);
+      getContextMenuTriggerProps,
+      getTriggerProps,
+      openControlledPosition: openAtPosition,
+    }),
+    [
+      activeIndex,
+      selectionLock,
+      context,
+      getContainerProps,
+      getFloatingProps,
+      getItemProps,
+      getReferenceProps,
+      baseGetTriggerProps,
+      hasOverlap,
+      innerOffset,
+      isOpen,
+      nodeId,
+      touchStartPosition.current,
+      scrollTop,
+    ],
+  )
 }
-export function $$k7({
+
+// Define types for better clarity and maintainability
+interface UseMenuOptions {
+  offset?: number
+  initialPosition?: string
+  config2025CuratorHacks?: boolean
+}
+
+interface UseMenuReturn {
+  manager: {
+    getItemProps: any
+    getContainerProps: any
+    getFloatingProps: any
+    getTriggerProps: (extraProps?: any) => any
+    overflowRef: React.RefObject<any>
+    scrollRef: React.RefObject<any>
+    listRef: React.RefObject<any>
+    itemRef: React.RefObject<any>
+    context: any
+    setScrollTop: (value: number) => void
+    setSelectionLock: (value: boolean) => void
+    setOpen: (value: boolean) => void
+    handleArrowScroll: (delta: number) => void
+    allowSelection: boolean
+    nodeId: string
+    isOpen: boolean
+    hasOverlap: boolean
+    scrollTop: number
+    innerOffset: number
+    activeIndex: number | null
+    setActiveIndex: (index: number | null) => void
+  }
+  getContextMenuTriggerProps: () => any
+  getTriggerProps: (extraProps?: any) => any
+  openControlledPosition: (x: number, y: number) => void
+}
+
+// Original code: SubMenu
+/**
+ * @description SubMenu component.
+ * @param {object} props - Component props.
+ * @param {React.ReactNode} props.children - Children elements.
+ * @param {number} props.offset - Offset value.
+ * @returns {JSX.Element} The submenu element.
+ */
+export function SubMenu({
   children: e,
-  offset: t = 0
+  offset: t = 0,
 }) {
-  let {
-    manager
-  } = $$T10({
-    offset: t
-  });
-  return jsx(Ym.Provider, {
+  const {
+    manager,
+  } = useMenu({
+    offset: t,
+  })
+  return jsx(MenuItemContext.Provider, {
     value: manager,
-    children: e
-  });
+    children: e,
+  })
 }
-$$k7.displayName = "MenuPrimitive.SubMenu";
-export let $$R8 = forwardRef(({
-  disabled: e,
-  children: t,
-  hasChecked: i,
-  htmlAttributes: a,
-  recordingKey: o,
-  ...l
-}, d) => {
-  let c = Lh("hasChecked");
-  let {
+SubMenu.displayName = 'MenuPrimitive.SubMenu'
+
+// Original code: SubTrigger
+/**
+ * @description SubTrigger component.
+ * @param {object} props - Component props.
+ * @param {boolean} props.disabled - Whether disabled.
+ * @param {React.ReactNode} props.children - Children elements.
+ * @param {boolean} props.hasChecked - Whether has checked state.
+ * @param {object} props.htmlAttributes - Additional HTML attributes.
+ * @param {string} props.recordingKey - Recording key.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The subtrigger element.
+ */
+// Original code: SubTrigger
+/**
+ * @description SubTrigger component for submenu triggers with accessibility and interaction handling.
+ * @param {SubTriggerProps} props - Component props.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The subtrigger element.
+ */
+export const SubTrigger = forwardRef<HTMLLIElement, SubTriggerProps>(({
+  disabled,
+  children,
+  hasChecked,
+  htmlAttributes,
+  recordingKey,
+  ...otherProps
+}, ref) => {
+  // Original code: useFplStrings hook for 'hasChecked' string
+  const hasCheckedString = useFplStrings('hasChecked')
+
+  // Original code: MenuContext for active index and list length
+  const {
     activeIndex,
     setActiveIndex,
-    listLength
-  } = useContext(w);
-  let {
+    listLength,
+  } = useContext(MenuContext)
+
+  // Original code: ensureContext for MenuItemContext
+  const {
     getTriggerProps,
-    setOpen
-  } = $(Ym, "SubTrigger", "SubMenu");
-  let [E, x] = useState("");
-  let {
-    ref,
-    index
-  } = rm({
-    label: E
-  });
-  let T = useRef(null);
-  let k = R(setActiveIndex);
-  let {
-    ref: _ref,
-    ...N
+    setOpen,
+  } = ensureContext(MenuItemContext, 'SubTrigger', 'SubMenu')
+
+  // Original code: useState for label
+  const [label, setLabel] = useState('')
+
+  // Original code: useListItem hook
+  const {
+    ref: listItemRef,
+    index,
+  } = useListItem({
+    label,
+  })
+
+  // Original code: useRef for trigger element
+  const triggerRef = useRef<HTMLLIElement>(null)
+
+  // Original code: setupKeyboardNavigationHandler
+  const handleKeyDown = setupKeyboardNavigationHandler(setActiveIndex)
+
+  // Original code: getTriggerProps with onKeyDown
+  const {
+    ref: triggerPropsRef,
+    ...triggerProps
   } = getTriggerProps({
-    onKeyDown: e => k(listLength, activeIndex, e)
-  });
-  let P = SV([ref, T, _ref, d]);
-  let O = activeIndex === index;
-  let D = () => setOpen(!0);
-  let L = useRecording(D, {
-    eventName: "click",
-    recordingKey: o
-  }, [D, e]);
+    onKeyDown: event => handleKeyDown(listLength, activeIndex, event),
+  })
+
+  // Original code: useMergeRefs for merging refs
+  const mergedRef = useMergeRefs([listItemRef, triggerRef, triggerPropsRef, ref])
+
+  // Original code: isSelected logic
+  const isSelected = activeIndex === index
+
+  // Original code: openSubMenu function
+  const openSubMenu = () => setOpen(true)
+
+  // Original code: useRecording for click event
+  const handleClick = useRecording(openSubMenu, {
+    eventName: 'click',
+    recordingKey,
+  }, [openSubMenu, disabled])
+
+  // Original code: useLayoutEffect for setting label
   useLayoutEffect(() => {
-    T.current && x(T.current.innerText ?? "");
-  }, []);
-  return jsxs("li", {
-    role: "menuitem",
-    "data-fpl-selected": O || N["aria-expanded"] || void 0,
-    "data-fpl-nested-selection": i,
-    "aria-disabled": e,
-    tabIndex: O ? 0 : -1,
-    ...N,
+    if (triggerRef.current) {
+      setLabel(triggerRef.current.textContent ?? '')
+    }
+  }, [])
+
+  // Early return or guard clause not applicable here as the component is straightforward
+
+  return jsxs('li', {
+    'role': 'menuitem',
+    'data-fpl-selected': isSelected || triggerProps['aria-expanded'] || undefined,
+    'data-fpl-nested-selection': hasChecked,
+    'aria-disabled': disabled,
+    'tabIndex': isSelected ? 0 : -1,
+    ...triggerProps,
     ...defaultComponentAttribute,
-    ref: P,
-    ...l,
-    ...a,
-    onClick: L,
-    children: [t, " ", i && jsx(_$$E, {
-      children: c
-    })]
-  });
-});
-$$R8.displayName = "MenuPrimitive.SubTrigger";
-export let $$N6 = forwardRef((e, t) => {
-  let {
-    nodeId,
-    hasOverlap
-  } = $(Ym, "SubContainer", "SubMenu");
-  return jsx($c, {
-    id: nodeId,
-    children: jsx($$P0, {
-      "data-fpl-menu-overlap": hasOverlap || void 0,
-      ref: t,
-      ...e
-    })
-  });
-});
-$$N6.displayName = "MenuPrimitive.SubContainer";
-export let $$P0 = forwardRef(({
-  children: e,
-  htmlAttributes: t,
-  className: i,
-  ...o
-}, d) => {
-  let c = cq();
-  let {
+    'ref': mergedRef,
+    ...otherProps,
+    ...htmlAttributes,
+    'onClick': handleClick,
+    'children': [
+      children,
+      ' ',
+      hasChecked && jsx(ScreenReaderOnly, {
+        children: hasCheckedString,
+      }),
+    ],
+  })
+})
+
+// Define types for better clarity and maintainability
+interface SubTriggerProps {
+  disabled?: boolean
+  children: React.ReactNode
+  hasChecked?: boolean
+  htmlAttributes?: React.HTMLAttributes<HTMLLIElement>
+  recordingKey?: string
+  [key: string]: any
+}
+
+SubTrigger.displayName = 'MenuPrimitive.SubTrigger'
+SubTrigger.displayName = 'MenuPrimitive.SubTrigger'
+
+// Original code: SubContainer
+
+// Original code: MenuContainer
+/**
+ * @description MenuContainer component for rendering the menu container with floating UI and context.
+ * @param {MenuContainerProps} props - Component props.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The menu container element.
+ */
+export const MenuContainer = forwardRef<HTMLDivElement, MenuContainerProps>(({
+  children,
+  htmlAttributes,
+  className,
+  ...otherProps
+}, ref) => {
+  // Original code: useFloatingTree hook
+  const floatingTree = useFloatingTree()
+
+  // Original code: ensureContext for MenuItemContext
+  const {
     getContainerProps,
     nodeId,
     setOpen,
@@ -391,206 +633,331 @@ export let $$P0 = forwardRef(({
     getFloatingProps,
     setScrollTop,
     setActiveIndex,
-    activeIndex
-  } = $(Ym, "Container", "Root");
-  let T = SV([d, scrollRef]);
+    activeIndex,
+  } = ensureContext(MenuItemContext, 'Container', 'Root')
+
+  // Original code: useMergeRefs for merging refs
+  const mergedRef = useMergeRefs([ref, scrollRef])
+
+  // Original code: useEffect for handling floating tree events
   useEffect(() => {
-    if (c) {
-      c.events.on("click", e);
-      return () => {
-        c.events.off("click", e);
-      };
+    if (!floatingTree)
+      return
+    const handleClick = () => setOpen(false)
+    floatingTree.events.on('click', handleClick)
+    return () => {
+      floatingTree.events.off('click', handleClick)
     }
-    function e() {
-      setOpen(!1);
-    }
-  }, [c, setOpen]);
-  let k = context.refs.floating ?? {
-    current: null
-  };
+  }, [floatingTree, setOpen])
+
+  // Original code: floatingRef from context
+  const floatingRef = context.refs.floating ?? { current: null }
+
+  // Original code: useEffect for scrolling to inner offset
   useEffect(() => {
-    k?.current && k.current.scrollTo({
+    if (!floatingRef.current)
+      return
+    floatingRef.current.scrollTo({
       top: innerOffset,
-      behavior: "instant"
-    });
-  }, [k, innerOffset]);
-  return jsx($c, {
+      behavior: 'instant',
+    })
+  }, [floatingRef, innerOffset])
+
+  return jsx(FloatingNode, {
     id: nodeId,
-    children: jsx(w.Provider, {
+    children: jsx(MenuContext.Provider, {
       value: {
         activeIndex,
         setActiveIndex,
-        listLength: listRef.current.length
+        listLength: listRef.current.length,
       },
-      children: jsx(_$$mc, {
+      children: jsx(PopoverPrimitiveContainer, {
         ...getContainerProps({
-          onScroll({
-            currentTarget: e
-          }) {
-            flushSync(() => setScrollTop(e.scrollTop));
-          }
+          onScroll({ currentTarget }) {
+            flushSync(() => setScrollTop(currentTarget.scrollTop))
+          },
         }),
-        className: _$$A("menu-primitive__container__5lt-5", i),
-        "data-fpl-menu-container": !0,
+        'className': classNames('menu-primitive__container__5lt-5', className),
+        'data-fpl-menu-container': true,
         ...defaultComponentAttribute,
-        ...o,
-        ...t,
-        children: jsx(ph, {
+        ...otherProps,
+        ...htmlAttributes,
+        'children': jsx(FloatingList, {
           elementsRef: listRef,
           labelsRef: itemRef,
-          children: jsx("ul", {
-            className: "menu-primitive__list__i3VRn",
-            ref: T,
+          children: jsx('ul', {
+            className: 'menu-primitive__list__i3VRn',
+            ref: mergedRef,
             ...getFloatingProps({}),
-            children: e
-          })
-        })
-      })
-    })
-  });
-});
-export function $$O4({
+            children,
+          }),
+        }),
+      }),
+    }),
+  })
+})
+
+// Define types for better clarity and maintainability
+interface MenuContainerProps {
+  children: React.ReactNode
+  htmlAttributes?: React.HTMLAttributes<HTMLDivElement>
+  className?: string
+  [key: string]: any
+}
+
+MenuContainer.displayName = 'MenuPrimitive.Container'
+
+/**
+ * @description SubContainer component.
+ * @param {object} props - Component props.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The subcontainer element.
+ */
+export const MenuSubContainer = forwardRef((props, ref) => {
+  const {
+    nodeId,
+    hasOverlap,
+  } = ensureContext(MenuItemContext, 'SubContainer', 'SubMenu')
+  return jsx(FloatingNode, {
+    id: nodeId,
+    children: jsx(MenuContainer, {
+      'data-fpl-menu-overlap': hasOverlap || undefined,
+      'ref': ref,
+      ...props,
+    }),
+  })
+})
+MenuSubContainer.displayName = 'MenuPrimitive.SubContainer'
+
+// Original code: MenuRoot
+/**
+ * @description MenuRoot component.
+ * @param {object} props - Component props.
+ * @param {object} props.manager - Menu manager.
+ * @param {React.ReactNode} props.children - Children elements.
+ * @returns {JSX.Element} The root element.
+ */
+export function MenuRoot({
   manager: e,
-  children: t
-}) {
-  return jsx(P6, {
-    children: jsx(Ym.Provider, {
-      value: e,
-      children: jsx(_$$o, {
-        display: "contents",
-        eventListeners: ["onClick", "onPointerDown", "onMouseDown"],
-        children: t
-      })
-    })
-  });
-}
-$$P0.displayName = "MenuPrimitive.Container";
-$$O4.displayName = "MenuPrimitive.Root";
-export let $$D9 = forwardRef(({
-  htmlAttributes: e,
-  ...t
-}, i) => {
-  let r = useSelectionContext();
-  return jsx("li", {
-    ref: i,
-    id: r,
-    role: "none",
-    ...e,
-    ...defaultComponentAttribute,
-    ...t
-  });
-});
-$$D9.displayName = "MenuPrimitive.Title";
-export let $$L1 = forwardRef(({
-  children: e,
-  title: t,
-  htmlAttributes: i,
-  ...r
-}, a) => {
-  let [s, o] = useSelectionProvider();
-  return t ? jsx(o, {
-    value: s,
-    children: jsxs("ul", {
-      ref: a,
-      "aria-labelledby": s,
-      role: "group",
-      ...i,
-      ...defaultComponentAttribute,
-      ...r,
-      children: [t, e]
-    })
-  }) : jsx("ul", {
-    role: "none",
-    ...i,
-    ...defaultComponentAttribute,
-    ...r,
-    children: e
-  });
-});
-function F(e, t, i) {
-  if (e.current && i.current) {
-    let {
-      scrollTop,
-      scrollHeight,
-      clientHeight
-    } = e.current;
-    if ("up" === t) return scrollTop >= M;
-    if ("down" === t) return scrollHeight > clientHeight + scrollTop + M;
-  }
-  return !1;
-}
-$$L1.displayName = "MenuPrimitive.Group";
-let M = 10;
-let $$j5 = forwardRef(({
-  direction: e,
   children: t,
-  className: i,
-  ...o
-}, d) => {
-  let [c, u] = useState(!1);
-  let p = useRef(null);
-  let h = SV([p, d]);
-  let g = useRef("idle");
-  let f = useRef(-1);
-  let {
-    context: {
-      isPositioned,
-      refs
-    },
+}) {
+  return jsx(FloatingTree, {
+    children: jsx(MenuItemContext.Provider, {
+      value: e,
+      children: jsx(EventShield, {
+        display: 'contents',
+        eventListeners: ['onClick', 'onPointerDown', 'onMouseDown'],
+        children: t,
+      }),
+    }),
+  })
+}
+MenuContainer.displayName = 'MenuPrimitive.Container'
+MenuRoot.displayName = 'MenuPrimitive.Root'
+
+// Original code: MenuTitle
+// Original code: MenuTitle
+/**
+ * @description MenuTitle component for menu titles.
+ * @param {object} props - Component props.
+ * @param {object} props.htmlAttributes - Additional HTML attributes.
+ * @param {React.Ref} ref - Forwarded ref.
+ * @returns {JSX.Element} The title element.
+ */
+export const MenuTitle = forwardRef<HTMLLIElement, {
+  htmlAttributes?: React.HTMLAttributes<HTMLLIElement>
+  [key: string]: any
+}>(({
+  htmlAttributes,
+  ...rest
+}, ref) => {
+  const selectionId = useSelectionContext()
+  return jsx('li', {
+    ref,
+    id: selectionId,
+    role: 'none',
+    ...htmlAttributes,
+    ...defaultComponentAttribute,
+    ...rest,
+  })
+})
+MenuTitle.displayName = 'MenuPrimitive.Title'
+
+export const MenuGroup = forwardRef<HTMLUListElement, {
+  children: React.ReactNode
+  title?: React.ReactNode
+  htmlAttributes?: React.HTMLAttributes<HTMLUListElement>
+  [key: string]: any
+}>(({
+  children,
+  title,
+  htmlAttributes,
+  ...rest
+}, ref) => {
+  const [selectionId, SelectionProvider] = useSelectionProvider()
+  return title
+    ? jsx(SelectionProvider, {
+        value: selectionId,
+        children: jsxs('ul', {
+          ref,
+          'aria-labelledby': selectionId,
+          'role': 'group',
+          ...htmlAttributes,
+          ...defaultComponentAttribute,
+          ...rest,
+          'children': [title, children],
+        }),
+      })
+    : jsx('ul', {
+        role: 'none',
+        ...htmlAttributes,
+        ...defaultComponentAttribute,
+        ...rest,
+        children,
+      })
+})
+MenuGroup.displayName = 'MenuPrimitive.Group'
+
+// Original code: SCROLL_THRESHOLD
+const SCROLL_THRESHOLD = 10
+// Original code: canScroll helper
+// Original code: canScroll helper
+/**
+ * @description Checks if scrolling is possible in a given direction for the menu container.
+ * @param {React.RefObject<HTMLElement>} floatingRef - Reference to the floating element (menu container).
+ * @param {string} direction - The direction to check ('up' or 'down').
+ * @param {React.RefObject<HTMLElement>} scrollRef - Reference to the scrollable element.
+ * @returns {boolean} True if scrolling is possible in the specified direction.
+ */
+function canScroll(floatingRef: React.RefObject<HTMLElement>, direction: string, scrollRef: React.RefObject<HTMLElement>): boolean {
+  if (floatingRef.current && scrollRef.current) {
+    const { scrollTop, scrollHeight, clientHeight } = floatingRef.current
+    if (direction === 'up') {
+      return scrollTop >= SCROLL_THRESHOLD
+    }
+    if (direction === 'down') {
+      return scrollHeight > clientHeight + scrollTop + SCROLL_THRESHOLD
+    }
+  }
+  return false
+}
+
+// Original code: ScrollArrow
+// Original code: ScrollArrow
+/**
+ * @description ScrollArrow component for handling scroll arrows in menus.
+ * @param {object} props - Component props.
+ * @param {string} props.direction - The direction of the scroll ('up' or 'down').
+ * @param {React.ReactNode} props.children - The children elements to render inside the arrow.
+ * @param {string} props.className - Additional CSS class name.
+ * @param {React.Ref} ref - Forwarded ref for the arrow element.
+ * @returns {JSX.Element} The scroll arrow element.
+ */
+const ScrollArrow = forwardRef<HTMLDivElement, {
+  direction: 'up' | 'down'
+  children: React.ReactNode
+  className?: string
+}>(({
+  direction,
+  children,
+  className,
+  ...otherProps
+}, ref) => {
+  const [isVisible, setIsVisible] = useState(false)
+  const arrowRef = useRef<HTMLDivElement>(null)
+  const mergedRef = useMergeRefs([arrowRef, ref])
+  const stateRef = useRef<'idle' | 'active'>('idle')
+  const animationFrameRef = useRef(-1)
+
+  const {
+    context: { isPositioned, refs },
     scrollTop,
     scrollRef,
     handleArrowScroll,
-    innerOffset
-  } = $(Ym, "ScrollArrow", "Root");
-  let S = refs.floating ?? {
-    current: null
-  };
-  useLayoutEffect(() => {
-    isPositioned && "active" !== g.current && requestAnimationFrame(() => {
-      flushSync(() => u(F(S, e, scrollRef)));
-    });
-  }, [isPositioned, innerOffset, scrollTop, S, e, scrollRef]);
-  return jsx("div", {
-    className: _$$A("menu-primitive__scrollArrow__Om355", i),
-    "data-fpl-select-direction": e,
-    "data-fpl-select-visibility": c || void 0,
-    ref: h,
-    "aria-hidden": !0,
-    onPointerEnter: () => {
-      g.current = "active";
-      let t = Date.now();
-      cancelAnimationFrame(f.current);
-      f.current = requestAnimationFrame(function i() {
-        if (S.current) {
-          let n = Date.now();
-          let r = n - t;
-          t = n;
-          let a = r / 2;
-          let s = "up" === e ? S.current.scrollTop : S.current.scrollHeight - S.current.clientHeight - S.current.scrollTop;
-          let o = "up" === e ? S.current.scrollTop - a > 0 : S.current.scrollTop + a < S.current.scrollHeight - S.current.clientHeight;
-          handleArrowScroll("up" === e ? Math.min(a, s) : Math.max(-a, -s));
-          o ? f.current = requestAnimationFrame(i) : u(F(S, e, scrollRef));
+    innerOffset,
+  } = ensureContext(MenuItemContext, 'ScrollArrow', 'Root')
+
+  const floatingRef = refs.floating ?? { current: null }
+
+  // Helper function to handle the scroll animation logic
+  const startScrollAnimation = () => {
+    let lastTime = Date.now()
+    const animate = () => {
+      if (!floatingRef.current)
+        return
+
+      const now = Date.now()
+      const deltaTime = now - lastTime
+      lastTime = now
+      const scrollAmount = deltaTime / 2
+
+      const currentScrollTop = floatingRef.current.scrollTop
+      const maxScrollTop = floatingRef.current.scrollHeight - floatingRef.current.clientHeight
+
+      if (direction === 'up') {
+        const remainingScroll = currentScrollTop
+        const actualScroll = Math.min(scrollAmount, remainingScroll)
+        handleArrowScroll(-actualScroll)
+        if (currentScrollTop - actualScroll > 0) {
+          animationFrameRef.current = requestAnimationFrame(animate)
         }
-      });
+        else {
+          setIsVisible(canScroll(floatingRef, direction, scrollRef))
+        }
+      }
+      else {
+        const remainingScroll = maxScrollTop - currentScrollTop
+        const actualScroll = Math.min(scrollAmount, remainingScroll)
+        handleArrowScroll(actualScroll)
+        if (currentScrollTop + actualScroll < maxScrollTop) {
+          animationFrameRef.current = requestAnimationFrame(animate)
+        }
+        else {
+          setIsVisible(canScroll(floatingRef, direction, scrollRef))
+        }
+      }
+    }
+    animationFrameRef.current = requestAnimationFrame(animate)
+  }
+
+  useLayoutEffect(() => {
+    if (isPositioned && stateRef.current !== 'active') {
+      requestAnimationFrame(() => {
+        flushSync(() => setIsVisible(canScroll(floatingRef, direction, scrollRef)))
+      })
+    }
+  }, [isPositioned, innerOffset, scrollTop, floatingRef, direction, scrollRef])
+
+  return jsx('div', {
+    'className': classNames('menu-primitive__scrollArrow__Om355', className),
+    'data-fpl-select-direction': direction,
+    'data-fpl-select-visibility': isVisible || undefined,
+    'ref': mergedRef,
+    'aria-hidden': true,
+    'onPointerEnter': () => {
+      stateRef.current = 'active'
+      startScrollAnimation()
     },
-    onPointerLeave: () => {
-      g.current = "idle";
-      cancelAnimationFrame(f.current);
+    'onPointerLeave': () => {
+      stateRef.current = 'idle'
+      cancelAnimationFrame(animationFrameRef.current)
     },
     ...defaultComponentAttribute,
-    ...o,
-    children: t
-  });
-});
-$$j5.displayName = "SelectPrimitive.ScrollArrow";
-export const mc = $$P0;
-export const YJ = $$L1;
-export const q7 = $$x2;
-export const N_ = $$S3;
-export const bL = $$O4;
-export const LJ = $$j5;
-export const MJ = $$N6;
-export const g8 = $$k7;
-export const ZP = $$R8;
-export const hE = $$D9;
-export const b = $$T10;
+    ...otherProps,
+    children,
+  })
+})
+ScrollArrow.displayName = 'SelectPrimitive.ScrollArrow'
+
+// Refactored exports with meaningful names
+export const mc = MenuContainer
+export const YJ = MenuGroup
+export const q7 = MenuItemPrimitive
+export const N_ = MenuPrimitiveLink
+export const bL = MenuRoot
+export const LJ = ScrollArrow
+export const MJ = MenuSubContainer
+export const g8 = SubMenu
+export const ZP = SubTrigger
+export const hE = MenuTitle
+export const b = useMenu

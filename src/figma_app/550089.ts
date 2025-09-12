@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { useSelector } from "react-redux";
 import { Fullscreen, SceneGraphHelpers } from "../figma_app/763686";
 import { defaultSessionLocalIDArrayString, defaultSessionLocalIDString } from "../905/871411";

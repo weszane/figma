@@ -7,7 +7,7 @@ import { i as _$$i } from "../905/718764";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
 import { T as _$$T } from "../905/745591";
-import { E as _$$E2 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { h as _$$h } from "../905/994594";
 import { A as _$$A } from "../905/251970";
 import { l as _$$l } from "../1250/91689";
@@ -45,7 +45,7 @@ import { lH, Fy } from "../figma_app/623300";
 import { _Y } from "../figma_app/162807";
 import { Ib } from "../905/129884";
 import { b as _$$b2, bL, mc } from "../figma_app/860955";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { H_ } from "../905/963340";
 import { O as _$$O } from "../905/969533";
 import { BK } from "../905/848862";
@@ -88,7 +88,7 @@ let er = memo(function (e) {
     manager
   } = _$$b2();
   let u = es(l);
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onClick"],
     children: jsxs(bL, {
       manager,
@@ -1216,14 +1216,14 @@ function eH({
   }
   return jsxs(Fragment, {
     children: [r ? "\u2026" : "", o, t ? jsxs(Fragment, {
-      children: [jsx(_$$E2, {
+      children: [jsx(ScreenReaderOnly, {
         children: renderI18nText("canvas_search.original_replace_value")
       }), jsx("span", {
         className: of,
         children: jsx("s", {
           children: d
         })
-      }), jsx(_$$E2, {
+      }), jsx(ScreenReaderOnly, {
         children: renderI18nText("canvas_search.updated_replace_value")
       }), jsx("b", {
         children: t

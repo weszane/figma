@@ -5,7 +5,7 @@ import { defaultComponentAttribute } from "../905/577641";
 import { isEventTargetOutside, preventAndStopEvent } from "../905/955878";
 import { C7 } from "../905/117474";
 import { F } from "../905/768014";
-import { v } from "../905/475481";
+import { mergeProps } from "../905/475481";
 import { y } from "../905/658036";
 function p(e) {
   return "INPUT" === e.tagName && "radio" === e.type;
@@ -27,7 +27,7 @@ let $$h0 = forwardRef(({
   return jsx("div", {
     ref: g,
     ...defaultComponentAttribute,
-    ...v(t, i, {
+    ...mergeProps(t, i, {
       onFocus: e => {
         if (isEventTargetOutside(e)) return;
         let t = g.current;

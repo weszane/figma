@@ -1,7 +1,7 @@
 import { useState, useId, useMemo, useCallback, useEffect } from "react";
 import { preventAndStopEvent } from "../905/955878";
 import { sj } from "../905/875826";
-import { uv } from "../905/36803";
+import { getObjectKeys } from "../905/36803";
 import { nD, Kq, aM, eR } from "../905/336566";
 let l = {
   ArrowUp: (e, t) => "vertical" === t ? e - 1 : e,
@@ -41,7 +41,7 @@ export function $$c0(e, t, i, d) {
     let s = p.length;
     e.repeat && (n > s - 1 || n < 0) || m(p[sj(n, s)]);
   }, [t, p, c, m]);
-  return [useMemo(() => uv(e).reduce((t, i) => (t[i] = {
+  return [useMemo(() => getObjectKeys(e).reduce((t, i) => (t[i] = {
     id: i,
     display: e[i],
     manager: h,
@@ -50,7 +50,7 @@ export function $$c0(e, t, i, d) {
     onKeyDown: g,
     actionOnPointerDown: d?.actionOnPointerDown ?? !0,
     recordingKey: d?.recordingKey ? `${d.recordingKey}.${i}` : void 0
-  }, t), {}), [h, u, g, e, d?.actionOnPointerDown, d?.recordingKey]), useMemo(() => uv(e).reduce((t, i) => (t[i] = {
+  }, t), {}), [h, u, g, e, d?.actionOnPointerDown, d?.recordingKey]), useMemo(() => getObjectKeys(e).reduce((t, i) => (t[i] = {
     id: i,
     display: e[i],
     manager: h,

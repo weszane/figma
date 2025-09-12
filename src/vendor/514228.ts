@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "../vendor/694049";
 import { useSyncExternalStoreWithSelector } from "../vendor/303599";
-import { unstable_batchedUpdates } from "../vendor/944059";
+import { unstable_batchedUpdates } from "react-dom";
 import { createContext, useContext, useDebugValue, useLayoutEffect, useEffect, useMemo, createElement, useRef, memo, forwardRef } from "react";
 import { A as _$$A } from "../vendor/710480";
 import { A as _$$A2 } from "../vendor/20707";

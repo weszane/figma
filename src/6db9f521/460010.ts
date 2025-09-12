@@ -134,9 +134,9 @@ import iz from "classnames";
 import { be, Kk } from "../figma_app/960598";
 import { uc, kP, eB as _$$eB } from "../9410/228612";
 import { zQ, Eo } from "../9410/564578";
-import { b as _$$b2 } from "../905/465888";
+import { useMenu } from "../905/465888";
 import { Y9 as _$$Y2, JU, X0, UC, bL as _$$bL2 } from "../figma_app/322555";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { B as _$$B } from "../1250/314515";
 import { Z as _$$Z2 } from "../905/279476";
 import { A as _$$A3 } from "../vendor/850789";
@@ -197,7 +197,7 @@ import { Dh, TN, i1 as _$$i, q0 } from "../figma_app/177697";
 import { s1 as _$$s6, sW as _$$sW } from "../figma_app/226737";
 import { TG } from "../figma_app/657972";
 import { ServiceCategories as _$$e2 } from "../905/165054";
-import { E as _$$E3 } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { B as _$$B2 } from "../9410/958580";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "../vendor/425002";
@@ -215,7 +215,7 @@ import { x as _$$x3 } from "../905/719609";
 import { y as _$$y } from "../figma_app/13082";
 import { ap as _$$ap, B_, k8 as _$$k6, ud, Hk, lq as _$$lq } from "../9410/548825";
 import { i as _$$i2 } from "../905/97346";
-import { v as _$$v4 } from "../905/475481";
+import { mergeProps } from "../905/475481";
 import { gv } from "../9410/172674";
 import { O as _$$O } from "../9410/301359";
 import { f as _$$f } from "../9410/391621";
@@ -2950,7 +2950,7 @@ let {
   SelectOverride
 } = n;
 let ny = new _$$ag(i5.MILLISECONDS, 10);
-class nf extends _$$c$ { }
+class nf extends _$$c$ {}
 function nj({
   recordingKey: e
 }) {
@@ -3350,7 +3350,7 @@ function nB({
   let {
     manager,
     getContextMenuTriggerProps
-  } = _$$b2();
+  } = useMenu();
   return jsxs("div", {
     className: _$$s5.flex.wFull.py4.$,
     onMouseEnter: () => f(!0),
@@ -3477,7 +3477,7 @@ function nH({
   let l = D0();
   return jsx("div", {
     className: "x1cmmqis",
-    children: jsx(_$$o, {
+    children: jsx(EventShield, {
       eventListeners: ["onPointerDown", "onMouseDown"],
       children: jsx(_$$K3, {
         onClick: _$$nc.user("delete-slide-object-animation", () => {
@@ -4410,7 +4410,7 @@ function lS({
 function lI({
   onClick: e
 }) {
-  return jsx(_$$E3, {
+  return jsx(ScreenReaderOnly, {
     children: jsx(_$$E, {
       onClick: e,
       children: getI18nString("slides.toolbar.show_presenter_notes")
@@ -4478,7 +4478,7 @@ function lk({
     function d(i) {
       document.activeElement === ref.current && (e && ("ArrowDown" === i.key || "ArrowUp" === i.key) ? (i.stopPropagation(), e(i.key), a(!0)) : t && ("ArrowLeft" === i.key || "ArrowRight" === i.key) ? (i.stopPropagation(), t(i.key), a(!0)) : a(!1));
     }
-    return [n || s, e => _$$v4(r(e), {
+    return [n || s, e => mergeProps(r(e), {
       onKeyDown: d
     })];
   }({
@@ -5000,7 +5000,7 @@ class sp extends ub {
   }
 }
 let sh = [0, 0.1, 0.2, 0.3];
-class sm extends _$$c$ { }
+class sm extends _$$c$ {}
 let s_ = new _$$ag(i5.MILLISECONDS, 0.001, 30);
 function sg({
   delay: e,
@@ -5043,7 +5043,7 @@ function sg({
 }
 let sy = [0.3, 0.6, 0.9];
 let sf = new _$$ag(i5.MILLISECONDS, 0.01, 10);
-class sj extends _$$c$ { }
+class sj extends _$$c$ {}
 function sb({
   duration: e,
   easingType: t,
@@ -5199,7 +5199,7 @@ function sP({
 }) {
   return jsx("div", {
     className: "x1cmmqis",
-    children: jsx(_$$o, {
+    children: jsx(EventShield, {
       eventListeners: ["onPointerDown", "onMouseDown"],
       children: jsx(_$$K3, {
         onClick: e,
@@ -6459,7 +6459,7 @@ function oU({
       children: jsx(_$$d6, {
         "aria-expanded": !!d,
         onClick: () => {
-          if (d) u(Uv()); else if (e.current) {
+          if (d) u(Uv());else if (e.current) {
             let t = e.current.getBoundingClientRect();
             u(_$$sw());
             u(bS({
@@ -6526,7 +6526,7 @@ function o$({
           "aria-expanded": b,
           "aria-label": getI18nString("slides.properties_panel.text_style.create_new_style"),
           onClick: () => {
-            if (b) d(_$$sw()); else if (f.current) {
+            if (b) d(_$$sw());else if (f.current) {
               _$$l3.user("slides-create-style", () => {
                 Fullscreen?.applyStyleToSelection("inheritTextStyleKey", defaultSessionLocalIDString, !0);
                 Fullscreen?.selectStyle(_$$n5.INVALID, _$$IA.INVALID);
@@ -6666,7 +6666,7 @@ function oz({
       children: jsx(_$$d6, {
         "aria-label": getI18nString("slides.properties_panel.text_style.edit_text_style"),
         onClick: t => {
-          if (b) m(_$$sw()); else if (j.current) {
+          if (b) m(_$$sw());else if (j.current) {
             Fullscreen?.selectStyleByGuid(e.node_id);
             let t = j.current.getBoundingClientRect();
             m(_$$rk({
@@ -7586,7 +7586,7 @@ function dr({
     })
   });
 }
-class dm extends _$$c$ { }
+class dm extends _$$c$ {}
 let d_ = [0, 2, 4, 8, 16, 24];
 let dg = ["NONE", "SOLID", "DASHED_BIG", "DASHED_SMALL"];
 let dy = dg.filter(e => "NONE" !== e);
@@ -7827,7 +7827,7 @@ function dT({
     })
   });
 }
-class dN extends _$$c$ { }
+class dN extends _$$c$ {}
 let dk = [0, 8, 16, 24, 32, 64, 96];
 class dC extends X9 {
   format(e) {
@@ -8749,7 +8749,7 @@ function cC({
     isEqual: (e, t) => deepEqual(e, t)
   }), [carouselItemsById, x]);
   let m = _$$nc.user("slides-link-change", useCallback(e => {
-    if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null); else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null); else if ("url" === e.type) {
+    if (null === e) Fullscreen?.setHyperlinkOnCurrentSelection("", null);else if ("guid" === e.type) Fullscreen?.setHyperlinkOnCurrentSelection(fullscreenValue.generateLinkToNode(sessionLocalIDToString(e.guid)), null);else if ("url" === e.type) {
       let t = e.url.match(ck) ? e.url : `https://${e.url}`;
       Fullscreen?.setHyperlinkOnCurrentSelection(t, null);
     }
@@ -8797,7 +8797,7 @@ function cC({
     })
   });
 }
-class cw extends _$$c$ { }
+class cw extends _$$c$ {}
 class cO extends LN {
   isEqual(e, t) {
     return 1e-5 > Math.abs(e - t);

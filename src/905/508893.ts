@@ -24,7 +24,7 @@ import { wv, $n } from "../figma_app/439493";
 import { T1 } from "../figma_app/90441";
 import { D9, oO, ZS } from "../figma_app/639798";
 import { lQ } from "../905/934246";
-import { o as _$$o2 } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { _ as _$$_ } from "../905/569825";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { L as _$$L } from "../figma_app/942671";
@@ -260,7 +260,7 @@ function J({
   let y = "onZoomOut" in a ? a.onZoomOut : lQ;
   return jsx("div", {
     className: sH,
-    children: jsx(_$$o2, {
+    children: jsx(EventShield, {
       eventListeners: ["onClick"],
       children: jsxs("div", {
         className: VH,

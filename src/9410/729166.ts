@@ -159,7 +159,7 @@ import { fullscreenValue } from '../figma_app/455680';
 import { assert, assertNotNullish, throwTypeError } from '../figma_app/465776';
 import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile } from '../figma_app/473493';
 import { clamp } from '../figma_app/492908';
-import { _ as _$$_ } from '../figma_app/496441';
+import { LinkPrimitive } from '../figma_app/496441';
 import { useCurrentFileKey, useOpenFileLibraryKey, selectCurrentFile } from '../figma_app/516028';
 import { uv } from '../figma_app/518364';
 import { iA as _$$iA } from '../figma_app/545541';
@@ -1386,7 +1386,7 @@ function iv({
   previewUrl: t,
   onClick: i
 }) {
-  return jsxs(_$$_, {
+  return jsxs(LinkPrimitive, {
     className: P()(i_, im),
     href: t,
     onClick: i,
@@ -1462,7 +1462,7 @@ function iw({
   let u = s && d && _$$y2(s, d);
   return jsxs('div', {
     className: ig,
-    children: [jsx(_$$_, {
+    children: [jsx(LinkPrimitive, {
       className: P()(i_, im),
       href: i,
       onClick: a,
@@ -1539,7 +1539,7 @@ function iS({
   });
   return jsxs('div', {
     className: ig,
-    children: [jsxs(_$$_, {
+    children: [jsxs(LinkPrimitive, {
       className: P()(i_, im),
       href: n,
       onClick: s,
@@ -2189,7 +2189,7 @@ function i2({
   } = _$$b();
   return jsxs('div', {
     className: 'overview--overviewNodeCardHeader--C-KTf',
-    children: [jsxs(_$$_, {
+    children: [jsxs(LinkPrimitive, {
       className: P()('overview--overviewNodeCardHeaderLeft--jYCXL', im),
       onClick: t,
       href: g,
@@ -2393,7 +2393,7 @@ function i4({
   useEffect(() => {
     x && y(o);
   }, [x, y, o]);
-  return jsxs(_$$_, {
+  return jsxs(LinkPrimitive, {
     ref: g,
     className: P()('overview--previewThumbnail--zofC5', im),
     style: {
@@ -2456,7 +2456,7 @@ function i7({
 function i8() {
   return jsx(_$$J2, {
     brand: 'dev-handoff',
-    children: jsxs(_$$_, {
+    children: jsxs(LinkPrimitive, {
       href: 'https://form.asana.com/?k=dyYqSpHdZqetESFQzNb8hQ&d=10497086658021',
       className: 'overview--betaFeedbackBadge--PUv9s text--fontPos11--2LvXf text--_fontBase--QdLsd',
       newTab: !0,

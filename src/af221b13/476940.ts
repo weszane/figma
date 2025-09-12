@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -115,7 +115,7 @@ export function $$E0({
     width: V_,
     zIndex: R.MODAL
   };
-  return jsx(_$$o, {
+  return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown"],
     children: t?.targetLocation ? jsx(rq, {
       ...k,

@@ -10,7 +10,7 @@ import { useMemo, useState, useEffect, createRef } from "react";
 import { Agb } from "../figma_app/822011";
 import { throwTypeError } from "../figma_app/465776";
 import { $n } from "../905/521428";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { Z as _$$Z } from "../905/279476";
 import { s as _$$s } from "../905/403855";
 import { CooperHelpers, SchemaJoinStatus, Multiplayer } from "../figma_app/763686";
@@ -1113,7 +1113,7 @@ let t1 = {
     let i = useSelector(e => e.showingUpgradeBanner);
     let o = selectCurrentFile()?.editorType;
     let [l, d] = useState(!1);
-    let u = hS({
+    let u = useModalManager({
       open: l,
       onClose: () => {},
       preventUserClose: !0

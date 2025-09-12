@@ -18,7 +18,7 @@ import { s as _$$s } from "../figma_app/961559";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { $n } from "../905/521428";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { E as _$$E } from "../905/984674";
@@ -195,7 +195,7 @@ let w = registerModal(function ({
     default:
       throwTypeError(r);
   }
-  let N = hS({
+  let N = useModalManager({
     open: n,
     onClose: () => d(popModalStack())
   });

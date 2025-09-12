@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback, useEffect, useLayoutEffect } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { TOGGLE_LINK_COMMAND, $isLinkNode } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
@@ -11,7 +11,7 @@ import { lQ } from "../905/934246";
 import { Point } from "../905/736624";
 import { c as _$$c } from "../905/196462";
 import { normalizeUrl, getRelevantSelectionRange, getRelativePosition, isSelectionWithinLink, getSelectionLinkUrl, getRelevantSelectionNode } from "../905/999278";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { E as _$$E } from "../905/632989";
 import { B } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -54,7 +54,7 @@ function I({
       children: [jsx(B, {
         svg: _$$A,
         className: "xamitd3 x1hdptxu xd8780z x15yihhk"
-      }), jsx(_$$_, {
+      }), jsx(LinkPrimitive, {
         newTab: !0,
         href: normalizeUrl(e),
         className: "xc26acl x1ypdohk x1iyjqo2 xuxw1ft",

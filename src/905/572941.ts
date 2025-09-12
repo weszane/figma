@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { N } from "../905/438674";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { getFeatureFlags } from "../905/601108";
 import { isDesktopVersionDisabled, isUnsupportedMacVersion } from "../figma_app/876459";
 import { renderI18nText } from "../905/303541";
@@ -13,7 +13,7 @@ export function $$m1() {
 }
 export function $$h0() {
   let e = isUnsupportedMacVersion();
-  let t = hS({
+  let t = useModalManager({
     open: !0,
     onClose: () => {},
     preventUserClose: !0

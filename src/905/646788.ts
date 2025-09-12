@@ -83,7 +83,7 @@ import { Bi } from "../905/652992";
 import { DV } from "../905/739964";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { KM, Ku } from "../figma_app/877449";
 import { trackEventAnalytics } from "../905/449184";
 import { B as _$$B } from "../905/714743";
@@ -161,7 +161,7 @@ import { R9, nu as _$$nu, E4 } from "../905/144598";
 import { og as _$$og } from "../905/466026";
 import { K as _$$K3 } from "../905/443068";
 import { a as _$$a } from "../905/5627";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { L as _$$L3 } from "../905/408237";
 import { VisualBellIcon } from "../905/576487";
 import { Dp, yJ, ml, hP, U as _$$U2, W7, cH, nM as _$$nM, M3 as _$$M, Fn, $j, d4 as _$$d2, lX } from "../905/759412";
@@ -616,7 +616,7 @@ let eX = registerModal(function (e) {
   } = e;
   let s = useDispatch();
   let o = () => s(popModalStack());
-  let l = hS({
+  let l = useModalManager({
     ...e,
     onClose: o
   });
@@ -671,7 +671,7 @@ let eQ = registerModal(function (e) {
   } = e;
   let i = useDispatch();
   let s = () => i(popModalStack());
-  let o = hS({
+  let o = useModalManager({
     ...e,
     onClose: s
   });
@@ -836,7 +836,7 @@ let to = registerModal(function (e) {
   let [o, l] = useState(600);
   let [d, u] = useState(0);
   let p = () => s(popModalStack());
-  let m = hS({
+  let m = useModalManager({
     ...e,
     onClose: p
   });
@@ -1170,7 +1170,7 @@ function tV(e) {
   });
 }
 let tW = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let i = useDispatch();
   let [s, o] = useState(!1);
   let [l, d] = useState(!1);
@@ -2081,7 +2081,7 @@ function i$(e) {
       children: jsx(_$$K3, {
         "aria-label": getI18nString("permissions.link_autogen_password_copy"),
         onClick: () => {
-          e.password && (Dk(e.password), trackEventAnalytics("file_password_copied", {
+          e.password && (copyTextToClipboard(e.password), trackEventAnalytics("file_password_copied", {
             user: e.userId,
             file_key: e.fileKey
           }), t(VisualBellActions.enqueue({
@@ -3113,7 +3113,7 @@ let nR = registerModal(function () {
   }), {
     enabled: !!i
   });
-  let o = hS({
+  let o = useModalManager({
     open: !0,
     onClose: t
   });
@@ -3159,7 +3159,7 @@ let nN = registerModal(function () {
       }
     })));
   }, [e, t?.key, i]);
-  let o = hS({
+  let o = useModalManager({
     open: !0,
     onClose: i
   });

@@ -1,9 +1,28 @@
-import { A } from "../905/268204";
-let n;
-export function $$a0() {
-  n || (n = A && window.INITIAL_OPTIONS?.feature_flags && "object" == typeof window.INITIAL_OPTIONS.feature_flags ? Object.freeze({
-    ...window.INITIAL_OPTIONS.feature_flags
-  }) : Object.freeze({}));
-  return n;
+import { A as FeatureFlagSource } from '../905/268204'
+
+/**
+ * Cached feature flags object.
+ * @original n
+ */
+let cachedFeatureFlags: Readonly<Record<string, unknown>> | undefined
+
+/**
+ * Returns a frozen object containing feature flags from INITIAL_OPTIONS.
+ * If not available, returns an empty frozen object.
+ * @original $$a0
+ */
+export function loadFeatureFlags(): Readonly<Record<string, unknown>> {
+  if (!cachedFeatureFlags) {
+    const flags
+      = FeatureFlagSource
+        && window.INITIAL_OPTIONS?.feature_flags
+        && typeof window.INITIAL_OPTIONS.feature_flags === 'object'
+        ? window.INITIAL_OPTIONS.feature_flags
+        : {}
+    cachedFeatureFlags = Object.freeze({ ...flags })
+  }
+  return cachedFeatureFlags
 }
-export const Q = $$a0;
+
+/** Alias for getFeatureFlags (original Q) */
+export const Q = loadFeatureFlags

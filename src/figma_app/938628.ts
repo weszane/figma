@@ -50,7 +50,7 @@ import { Ay } from "@stylexjs/stylex";
 import { Ij } from "../figma_app/359943";
 import { b as _$$b, bL as _$$bL2, mc as _$$mc, wv, r1 as _$$r2, YJ } from "../figma_app/860955";
 import { E as _$$E2 } from "../905/632989";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { H_, z6, CU } from "../905/963340";
 import { r as _$$r3 } from "../905/571562";
 import { ph } from "../figma_app/709893";
@@ -1392,7 +1392,7 @@ function eH(e) {
           children: ej(isMixedOverride ? MIXED_MARKER : x)
         }), jsx(_$$r3, {})]
       }), jsx(_$$mc, {
-        children: jsxs(_$$o, {
+        children: jsxs(EventShield, {
           eventListeners: ["onWheel"],
           children: [(isMixedOverride || isInvalidValue(x)) && jsxs(Fragment, {
             children: [jsx(H_, {

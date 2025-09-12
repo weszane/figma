@@ -3,7 +3,7 @@ import { Suspense, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { nB, r1, wi, jk } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
@@ -76,7 +76,7 @@ export function $$Q0(e) {
 }
 function J(e) {
   let t = useDispatch();
-  let i = hS(e);
+  let i = useModalManager(e);
   let p = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });

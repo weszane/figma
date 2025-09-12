@@ -24,7 +24,7 @@ import { l as _$$l } from "../905/716947";
 import { on } from "../905/420347";
 import { throwTypeError } from "../figma_app/465776";
 import { F } from "../905/171275";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { VisualBellActions } from "../905/302958";
 import { DV, lW } from "../figma_app/471982";
@@ -204,7 +204,7 @@ function M({
       type: "success"
     }));
   }, [c, r]);
-  return jsx(J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(bL, {
       manager: e,
       children: jsx(mc, {

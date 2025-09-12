@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { E } from "../905/632989";
 import { K } from "../905/851274";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { jN } from "../905/612685";
@@ -21,11 +21,11 @@ function _({
   let i = async () => {
     try {
       let e = r();
-      e && (await Dk(e), t(VisualBellActions.enqueue({
+      e && (await copyTextToClipboard(e), t(VisualBellActions.enqueue({
         type: "make_preview_link_copied_to_clipboard",
         message: getI18nString("figmake.share_modal.link_copied_to_clipboard")
       })));
-    } catch (e) { }
+    } catch (e) {}
   };
   return jsxs(E, {
     className: "figmake--workshopRow--cNBoG",

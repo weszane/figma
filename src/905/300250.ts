@@ -3,7 +3,7 @@ import { waitForAnimationFrame } from "../905/236856";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { s9 } from "../905/194389";
+import { CustomCauseError } from "../905/194389";
 import { customHistory } from "../905/612521";
 import { XHR, getRequest } from "../905/910117";
 import { getI18nString } from "../905/303541";
@@ -27,7 +27,7 @@ async function T(e, t, i) {
   try {
     await XHR.post(`/api/files/${e}/copy_image_usages_before_merge`);
   } catch (n) {
-    let e = new s9("Error creating image usages", {
+    let e = new CustomCauseError("Error creating image usages", {
       cause: n
     });
     handleError(e, CPPEventType.ON_MERGE, i);
@@ -111,7 +111,7 @@ let $$R3 = createOptimistThunk(async (e, t) => {
       e.dispatch(Nf());
     } catch (n) {
       e.dispatch(k());
-      let t = new s9("Error committing merge", {
+      let t = new CustomCauseError("Error committing merge", {
         cause: n
       });
       handleError(t, CPPEventType.ON_MERGE, mergeParams.direction);
@@ -138,7 +138,7 @@ let $$N7 = createOptimistThunk((e, t) => {
     });
     e.getState().openFile?.canEdit ? (setPropertiesPanelTab(DesignWorkspace.DESIGN), fullscreenValue.triggerAction("enter-layout-mode")) : (setPropertiesPanelTab(DesignWorkspace.INSPECT), fullscreenValue.triggerAction("enter-preview-mode"));
   }).catch(e => {
-    let t = new s9("Refreshing due to error in abandonDiff", {
+    let t = new CustomCauseError("Refreshing due to error in abandonDiff", {
       cause: e
     });
     handleModalError(t);
@@ -189,7 +189,7 @@ let $$P0 = createOptimistThunk(async (e, t) => {
           branchModalTrackingId: t.mergeParams.branchModalTrackingId || 0
         });
       } catch (e) {
-        if (Multiplayer.isValidatingIncremental()) handleError(new s9("Incremental loading validation failed", {
+        if (Multiplayer.isValidatingIncremental()) handleError(new CustomCauseError("Incremental loading validation failed", {
           cause: e
         }), CPPEventType.ON_MERGE, t.mergeParams.direction);else throw e;
       }
@@ -212,7 +212,7 @@ let $$P0 = createOptimistThunk(async (e, t) => {
         reason: "mergeOnFileOpen_failed_with_error",
         error: i.message
       })));
-      handleError(new s9("merge: Failed to commit diff", {
+      handleError(new CustomCauseError("merge: Failed to commit diff", {
         cause: i
       }), CPPEventType.ON_MERGE, t.mergeParams.direction);
       e.dispatch($$N7({
@@ -252,7 +252,7 @@ let O = async (e, t, i, n, r = null) => {
           t($$M1({}));
         } catch (n) {
           t($$F2({}));
-          handleError(new s9("merge: Failed to handle commit result", {
+          handleError(new CustomCauseError("merge: Failed to handle commit result", {
             cause: n
           }), CPPEventType.ON_MERGE, i.direction, {
             file_merge_id: e.data?.failure_info?.file_merge_id
@@ -303,7 +303,7 @@ let O = async (e, t, i, n, r = null) => {
             n = `Unknown 400 reason from server while creating FileMerge: ${e.data.reason}`;
             r = RK.COULD_NOT_START;
         }
-        handleError(new s9("merge: received 400 error when opening transactional merge", {
+        handleError(new CustomCauseError("merge: received 400 error when opening transactional merge", {
           cause: Error(n)
         }), CPPEventType.ON_MERGE, i.direction, {
           file_merge_id: e.data.failure_info?.file_merge_id || null

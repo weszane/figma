@@ -39,7 +39,7 @@ import { VisualBellIcon } from '../905/576487';
 import { a as _$$a } from '../905/586871';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
-import { jE, vQ } from '../905/656545';
+import { PluginAction, setupPlaybackHandler } from '../905/656545';
 import { PT } from '../905/669853';
 import { N as _$$N } from '../905/696711';
 import { getSingletonSceneGraph, ReduxSceneGraph } from '../905/700578';
@@ -145,10 +145,10 @@ let $$eH49 = createOptimistThunk((e, t) => {
           errorCallback?.();
         }
       };
-      e.dispatch(vQ({
+      e.dispatch(setupPlaybackHandler({
         assetLibraryKey: item.library_key,
         onInsertAsset: t,
-        source: jE.LOAD_COMPONENT
+        source: PluginAction.LOAD_COMPONENT
       }));
     } else {
       callback?.(item.node_id);
@@ -212,10 +212,10 @@ let $$eW48 = createOptimistThunk((e, t) => {
       queryId
     });
   };
-  e.dispatch(vQ({
+  e.dispatch(setupPlaybackHandler({
     assetLibraryKey: item.library_key,
     onInsertAsset: h,
-    source: jE.SWAP_TO_COMPONENT
+    source: PluginAction.SWAP_TO_COMPONENT
   }));
   e.dispatch($$ez3(t));
 });
@@ -391,10 +391,10 @@ let $$e$8 = createOptimistThunk((e, t) => {
       });
     }
   };
-  e.dispatch(vQ({
+  e.dispatch(setupPlaybackHandler({
     assetLibraryKey: item.library_key,
     onInsertAsset: v,
-    source: jE.INSERT_SHARED_COMPONENT
+    source: PluginAction.INSERT_SHARED_COMPONENT
   }));
 });
 let $$eX7 = createActionCreator('INSERT_SHARED_STATE_GROUP');
@@ -524,10 +524,10 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
       });
     }
   };
-  await e.dispatch(vQ({
+  await e.dispatch(setupPlaybackHandler({
     assetLibraryKey: item.library_key,
     onInsertAsset: v,
-    source: jE.INSERT_SHARED_STATE_GROUP
+    source: PluginAction.INSERT_SHARED_STATE_GROUP
   }));
   e.dispatch($$eX7(t));
 });
@@ -894,10 +894,10 @@ let $$e841 = createOptimistThunk((e, t) => {
         t.errorCallback?.();
       }
     };
-    e.dispatch(vQ({
+    e.dispatch(setupPlaybackHandler({
       assetLibraryKey: style.library_key,
       onInsertAsset: r,
-      source: jE.LOAD_STYLE
+      source: PluginAction.LOAD_STYLE
     }));
   } else {
     c && (c6(), AppStateTsApi.editorPreferences().showFrameGrids.set(!0));
@@ -1063,10 +1063,10 @@ let $$tn25 = createOptimistThunk((e, t) => {
         errorCallback?.(t);
       }
     };
-    e.dispatch(vQ({
+    e.dispatch(setupPlaybackHandler({
       assetLibraryKey: item.library_key,
       onInsertAsset: t,
-      source: jE.LOAD_VARIABLE
+      source: PluginAction.LOAD_VARIABLE
     }));
   } else {
     callback?.(item.node_id);
@@ -1130,10 +1130,10 @@ let $$to21 = createOptimistThunk((e, t) => {
           errorCallback?.();
         }
       };
-      e.dispatch(vQ({
+      e.dispatch(setupPlaybackHandler({
         assetLibraryKey: item.library_key,
         onInsertAsset: t,
-        source: jE.LOAD_VARIABLE_SET
+        source: PluginAction.LOAD_VARIABLE_SET
       }));
     } else {
       callback?.(item.node_id);

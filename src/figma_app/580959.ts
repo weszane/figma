@@ -7,7 +7,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { T as _$$T } from "../905/68180";
 import { K as _$$K } from "../905/443068";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { $n, IK } from "../905/521428";
 import { U as _$$U } from "../905/708285";
@@ -1032,7 +1032,7 @@ export let $$t_2 = forwardRef((e, t) => {
   let m = e.selected && !e.hasFocus;
   let g = e.fitToSize ? Cv : BT;
   let f = e.fitToSize ? np : wM;
-  let E = jsx(_$$o, {
+  let E = jsx(EventShield, {
     eventListeners: [],
     htmlAttributes: {
       onKeyDown: c
@@ -1961,7 +1961,7 @@ export function $$tb4(e) {
             onClick: r,
             paint: e.paint
           })
-        }, t) : jsx(_$$o, {
+        }, t) : jsx(EventShield, {
           eventListeners: ["onMouseDown"],
           children: jsx("div", {
             className: u7,

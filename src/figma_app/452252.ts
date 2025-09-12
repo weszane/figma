@@ -3,7 +3,7 @@ import { createRef, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import p from "classnames";
@@ -228,7 +228,7 @@ export function $$q4({
   return jsxs("span", {
     className: r ? "filename_view--folder--lb-Dm" : "filename_view--folderMissing--2b61S filename_view--folder--lb-Dm",
     title: n,
-    children: [o ? jsx(_$$_, {
+    children: [o ? jsx(LinkPrimitive, {
       htmlAttributes: {
         "data-testid": "folder-name-link"
       },

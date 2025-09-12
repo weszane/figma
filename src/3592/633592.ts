@@ -1,7 +1,7 @@
 import _require from "../2824/40443";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, useContext, useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, nB, hE } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
@@ -215,7 +215,7 @@ let ea = [{
   type: "split_component"
 }];
 export function $$el0(e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let s = function ({
     enabled: e,
     useTailwind: t

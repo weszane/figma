@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, forwardRef, useLayoutEffect, Fragment as _$$Fragment, memo, useMemo } from "react";
 import { useStore, useSelector, useDispatch } from "react-redux";
-import { mc, fP } from "../905/691059";
+import { PopoverPrimitiveContainer, usePopoverPrimitive } from "../905/691059";
 import { i as _$$i } from "../905/718764";
 import { D as _$$D } from "../905/555681";
 import { O as _$$O } from "../905/969533";
@@ -597,7 +597,7 @@ function ek({
       })]
     })]
   });
-  return jsx(mc, {
+  return jsx(PopoverPrimitiveContainer, {
     ...h(Ay.props(eN.popoverContainer(q, eT))),
     children: jsx(_$$i, {
       children: eb
@@ -749,7 +749,7 @@ let $$eO0 = memo(function (e) {
   let {
     getTriggerProps,
     getContainerProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: ej,
     onOpenChange: eN,
     type: "dialog",

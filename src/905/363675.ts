@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { T } from "../905/745591";
-import { $ } from "../905/61417";
+import { ensureContext } from "../905/61417";
 import { T8 } from "../905/417626";
 import { y } from "../905/842987";
 import { s as _$$s } from "../905/536340";
@@ -13,7 +13,7 @@ export function $$c0({
 }) {
   let {
     variant
-  } = $(y, "Banner.Message", "Banner");
+  } = ensureContext(y, "Banner.Message", "Banner");
   let p = T8(variant);
   return jsxs(T, {
     className: iU,

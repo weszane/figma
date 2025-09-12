@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A as _$$A } from "../vendor/723372";
 import { bL, Q6, bR, zi } from "../905/55068";
-import { Lh } from "../figma_app/415899";
+import { useFplStrings } from "../figma_app/415899";
 export let $$l0 = forwardRef(({
   style: e,
   rangeAnchor: t,
@@ -10,7 +10,7 @@ export let $$l0 = forwardRef(({
   ...r
 }, l) => {
   let d = r.value !== r.defaultValue;
-  let c = Lh("mixed");
+  let c = useFplStrings("mixed");
   return jsxs(bL, {
     ...r,
     ref: l,

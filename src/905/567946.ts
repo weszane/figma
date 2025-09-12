@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { E } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import { Label } from "../905/270045";
 import { g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
@@ -25,7 +25,7 @@ let $$d0 = function (e) {
       className: "x1swdo50 x172n1ly",
       "aria-hidden": !0,
       children: "*"
-    }), jsx(E, {
+    }), jsx(ScreenReaderOnly, {
       children: getI18nString("community.publishing.required_label", {
         labelText: "textLabel" in e ? e.textLabel : e.label
       })
@@ -34,7 +34,7 @@ let $$d0 = function (e) {
     children: [jsx("span", {
       "aria-hidden": !0,
       children: e.label
-    }), jsx(E, {
+    }), jsx(ScreenReaderOnly, {
       children: e.textLabel
     })]
   }) : e.label;

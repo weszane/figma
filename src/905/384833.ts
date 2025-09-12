@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { nB, r1, wi, jk } from "../figma_app/272243";
 import { E as _$$E } from "../905/632989";
@@ -72,7 +72,7 @@ export function $$er0(e) {
   });
 }
 function ea(e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let i = useSuspendCurrentPrivilegedPlan({
     reportErrorsToTeam: _$$e.SCALE
   });

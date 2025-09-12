@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { g as _$$g } from "../905/125190";
@@ -22,7 +22,7 @@ let S = buildUploadUrl("a2151b55cc069625817d2ed13b404e0dd2417f1c");
 let v = "https://help.figma.com/hc/articles/31722591905559-Figma-Make-FAQs";
 export function $$A0(e) {
   let t = useDispatch();
-  let r = hS(e);
+  let r = useModalManager(e);
   let {
     hideCTA,
     team,

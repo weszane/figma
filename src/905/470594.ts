@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { decodeBase64 } from "../905/561685";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { N as _$$N } from "../905/438674";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -46,7 +46,7 @@ let C = new class {
 let R = decodeBase64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==");
 let N = registerModal(function (e) {
   let t = useDispatch();
-  let i = hS(e);
+  let i = useModalManager(e);
   let a = jsxs(Fragment, {
     children: [jsx("span", {
       children: getI18nString("check_network_compatibility.description")

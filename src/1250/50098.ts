@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { WW } from "../905/521428";
@@ -94,7 +94,7 @@ function B({
     getOptionDisplay
   } = Xg();
   let B = Array.from(options).toString();
-  let U = hS({
+  let U = useModalManager({
     open: e,
     onClose: ({
       source: e

@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createContext, useState, useMemo, useEffect, useContext } from "react";
 import { debounce } from "../905/915765";
 import { assertNotNullish } from "../figma_app/95419";
-import { E } from "../905/172252";
+import { ScreenReaderOnly } from "../905/172252";
 import l from "../vendor/524488";
 import { getI18nString } from "../905/303541";
 import { QZ } from "../figma_app/844435";
@@ -44,7 +44,7 @@ function g({
   useEffect(() => (l(t), () => {
     l.cancel();
   }), [l, t]);
-  return jsx(E, {
+  return jsx(ScreenReaderOnly, {
     children: jsx("span", {
       "aria-live": "assertive",
       "aria-atomic": "true",
@@ -122,7 +122,7 @@ export function $$E2({
   let {
     state
   } = useContext(h);
-  return state?.type !== "results" ? null : jsxs(E, {
+  return state?.type !== "results" ? null : jsxs(ScreenReaderOnly, {
     children: [jsx("span", {
       id: e,
       children: getI18nString("qa.input.description")

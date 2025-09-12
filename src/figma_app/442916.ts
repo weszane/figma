@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { i as _$$i } from "../905/718764";
@@ -285,7 +285,7 @@ export function $$W0(e) {
   let i = !!r?.isTryFile;
   let a = debugState.getState().selectedView;
   let c = a?.view === "fullscreen" ? a.claim : null;
-  let u = hS({
+  let u = useModalManager({
     ...e,
     preventUserClose: !0
   });

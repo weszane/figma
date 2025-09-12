@@ -48,7 +48,7 @@ import { H as _$$H } from "../figma_app/423008";
 import { _6 } from "../figma_app/386952";
 import { C as _$$C } from "../figma_app/198698";
 import { om, x1, MA } from "../figma_app/465413";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import ei from "classnames";
@@ -167,7 +167,7 @@ let eE = registerModal(function (e) {
     fileKey: c,
     emailAddress: r
   })] === _$$r.LOADING : null);
-  let p = hS({
+  let p = useModalManager({
     ...e,
     onClose: () => {
       trackEventAnalytics("google_meet_claim_email_modal_closed", {
@@ -264,7 +264,7 @@ let eb = registerModal(function (e) {
   } = e;
   let i = useDispatch();
   let s = useCurrentFileKey();
-  let o = hS({
+  let o = useModalManager({
     ...e,
     preventUserClose: !0
   });

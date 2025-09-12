@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useRef, useMemo, forwardRef, useContext } from "react";
 import { G } from "../905/289770";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { A } from "../vendor/723372";
 import { K } from "../905/443068";
 import { J } from "../905/799737";
@@ -9,11 +9,11 @@ import { S as _$$S } from "../905/823680";
 import { L } from "../905/704296";
 import { C } from "../905/520159";
 import { P } from "../905/143421";
-import { Lh } from "../figma_app/415899";
+import { useFplStrings } from "../figma_app/415899";
 import { r } from "../905/840133";
 import { M8 } from "../905/893109";
-import { Q } from "../905/586361";
-import { g as _$$g } from "../905/749786";
+import { loadFeatureFlags } from "../905/586361";
+import { useDialogClose } from "../905/749786";
 import { C as _$$C } from "../905/780985";
 import { Q as _$$Q } from "../905/737752";
 import { gy } from "../905/183218";
@@ -34,7 +34,7 @@ export function $$A11({
     scrollRef: d
   }), []);
   let u = _$$C(s, l, d);
-  let p = Q().fpl_window_scroll_container;
+  let p = loadFeatureFlags().fpl_window_scroll_container;
   return jsx(v.Provider, {
     value: c,
     children: jsx("div", {
@@ -94,9 +94,9 @@ export let $$C3 = forwardRef((e, t) => jsx("div", {
 export function $$w0(e) {
   let {
     version
-  } = DP();
-  let r = _$$g();
-  let i = Lh("close");
+  } = getThemeContextOrDefault();
+  let r = useDialogClose();
+  let i = useFplStrings("close");
   return jsx("div", {
     "data-fpl-close": !0,
     className: A(close, {
@@ -140,7 +140,7 @@ export function $$L10(e) {
 export function $$P8({
   onClick: e
 }) {
-  let t = Lh("back");
+  let t = useFplStrings("back");
   return jsx(K, {
     onClick: e,
     "aria-label": t,
@@ -180,7 +180,7 @@ export let $$k7 = Object.assign(forwardRef(({
 }, u) => {
   let p = useContext(v);
   let h = _$$S(u, p?.bodyRef);
-  return Q().fpl_window_scroll_container ? "none" === s ? jsx("div", {
+  return loadFeatureFlags().fpl_window_scroll_container ? "none" === s ? jsx("div", {
     ...l,
     ...d,
     ref: h,

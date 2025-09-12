@@ -29,7 +29,7 @@ import { zK } from "../905/182453";
 import { F as _$$F } from "../905/294430";
 import { S as _$$S } from "../905/148017";
 import { eT as _$$eT } from "../figma_app/580959";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { nearlyEqual, clamp } from "../figma_app/492908";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";

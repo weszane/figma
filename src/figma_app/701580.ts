@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { isEmptyObject } from "../figma_app/493477";
 import { Y9, Wk } from "../figma_app/272243";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { J as _$$J } from "../905/614223";
 import _ from "classnames";
@@ -677,7 +677,7 @@ function eg(e) {
       text: "Templates Close Button"
     });
   }, [properties, name, onClose]);
-  let o = hS({
+  let o = useModalManager({
     ...e,
     onClose: s
   });

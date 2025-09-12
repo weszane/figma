@@ -183,7 +183,7 @@ import { O as _$$O } from "../5430/638907";
 import { D as _$$D3 } from "../5430/769256";
 import { e as _$$e6 } from "../figma_app/324237";
 import { t as _$$t2 } from "../905/150656";
-import { J as _$$J3 } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { useLatestRef } from "../figma_app/922077";
 import { C as _$$C3 } from "../905/237873";
 import { generateUUIDv4 } from "../905/871474";
@@ -5681,7 +5681,7 @@ function aA(e) {
           ..._$$Ay5.props(af.subheading),
           children: f.featuredResources.subheading
         })]
-      }), jsx(_$$J3, {
+      }), jsx(UI3ConditionalWrapper, {
         children: jsx(_$$t2.TabStrip, {
           manager: tabManager,
           children: Object.entries(tabConfig).map(([e, t]) => jsx(Fragment, {

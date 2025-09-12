@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { getFeatureFlags } from "../905/601108";
@@ -20,7 +20,7 @@ import { lM } from "../figma_app/392626";
 let s;
 function I(e) {
   let t = useDispatch();
-  let a = hS(e);
+  let a = useModalManager(e);
   let s = lM(e.entryPoint);
   let [b, I] = useState();
   useEffect(() => {
@@ -33,7 +33,7 @@ function I(e) {
         email: e.email,
         imgUrl: e.img_url
       })));
-    }); else if (e.planType === FOrganizationLevelType.ORG) {
+    });else if (e.planType === FOrganizationLevelType.ORG) {
       Eh.getOrgAdmins({
         orgId: e.planId
       }).then(({

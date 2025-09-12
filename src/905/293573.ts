@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
@@ -10,7 +10,7 @@ export function $$c0({
   onClose: t,
   ...i
 }) {
-  let c = hS({
+  let c = useModalManager({
     open: !0,
     onClose: useCallback(({
       source: e

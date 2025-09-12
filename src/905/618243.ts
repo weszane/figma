@@ -7,7 +7,7 @@ import { canAdminTeam } from "../figma_app/642025";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { setupAutofocusHandler } from "../905/128376";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -94,7 +94,7 @@ function N(e) {
       }));
     });
   };
-  let P = hS(e);
+  let P = useModalManager(e);
   let O = setupAutofocusHandler();
   return jsx(bL, {
     manager: P,

@@ -23,7 +23,7 @@ import { d as _$$d } from '../figma_app/844319';
 import { generateRecordingKey } from '../figma_app/878298';
 import { am } from '../figma_app/901889';
 import { useSelector } from 'react-redux';
-import { flushSync } from '../vendor/944059';
+import { flushSync } from 'react-dom';
 let f = g;
 let $$O3 = 430;
 let $$R5 = 1024;

@@ -3,10 +3,10 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { b as _$$b, q7, bL, mc } from "../figma_app/860955";
 import { K } from "../905/443068";
-import { nK } from "../905/691059";
+import { PopoverOutlet } from "../905/691059";
 import { E as _$$E } from "../905/632989";
 import { I } from "../905/932503";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { getFeatureFlags } from "../905/601108";
 import { B as _$$B } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -111,7 +111,7 @@ export function $$R1(e) {
   return jsxs("div", {
     className: N,
     ref: D,
-    children: [jsx(nK, {
+    children: [jsx(PopoverOutlet, {
       children: jsxs(bL, {
         manager,
         children: [jsxs(_$$E, {
@@ -127,7 +127,7 @@ export function $$R1(e) {
             svg: _$$A,
             className: "notifs_plan_filter--chevronIcon--0Rqnp"
           })]
-        }), jsx(J, {
+        }), jsx(UI3ConditionalWrapper, {
           children: jsx(mc, {
             children: $
           })

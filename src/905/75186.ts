@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { setupAutofocusHandler } from "../905/128376";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -14,7 +14,7 @@ import { registerModal } from "../905/102752";
 import { A7, EL } from "../905/932769";
 let _ = getInitialOptions().release_manifest_git_commit;
 let $$A0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let [i, u] = useState("");
   let [g, A] = useState("");
   let [y, b] = useState("");

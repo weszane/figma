@@ -1,7 +1,21 @@
-import { useContext } from "react";
-export function $$r0(e, t, i) {
-  let r = useContext(e);
-  if (null == r) throw Error(`null context: ${t} must be nested within ${i}`);
-  return r;
+import { useContext } from 'react'
+
+/**
+ * Ensures a React context is not null, throwing an error if it is.
+ * @param context - The React context to consume.
+ * @param contextName - The name of the context variable.
+ * @param providerName - The name of the provider component.
+ * @returns The context value if not null.
+ * @throws Error if the context value is null.
+ * @originalName $$r0
+ */
+export function ensureContext(context: React.Context<any>, contextName: string, providerName: string): any {
+  const value = useContext(context)
+  if (value == null) {
+    throw new Error(`null context: ${contextName} must be nested within ${providerName}`)
+  }
+  return value
 }
-export const $ = $$r0;
+
+// Alias for backward compatibility with original export name ($)
+export const $ = ensureContext

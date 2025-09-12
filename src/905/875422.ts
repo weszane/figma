@@ -6,7 +6,7 @@ import { A } from "../905/658244";
 import { registerModal, createModalConfig } from "../905/102752";
 import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
-import { F as _$$F } from "../905/642505";
+import { fileImporter } from "../905/642505";
 import { Ud, JK, Jb } from "../905/81459";
 import { kI, Y5 } from "../905/163189";
 import { D } from "../905/758526";
@@ -15,7 +15,7 @@ function d() {
   return n ??= registerModal(A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.FileImportModal), createModalConfig("FileImportModal")));
 }
 export let $$f0 = createOptimistThunk((e, t) => {
-  if (!_$$F) return;
+  if (!fileImporter) return;
   let i = kI(t.name);
   if (i && atomStoreManager.get(D)) {
     e.dispatch(VisualBellActions.enqueue({
@@ -30,6 +30,6 @@ export let $$f0 = createOptimistThunk((e, t) => {
   e.getState().modalShown?.type !== d().type && e.dispatch(showModalHandler({
     type: d()
   }));
-  _$$F.hasCanceled() || e.dispatch(Jb());
+  fileImporter.hasCanceled() || e.dispatch(Jb());
 });
 export const z = $$f0;

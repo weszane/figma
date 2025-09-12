@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import i from "classnames";
 import { fG } from "../figma_app/973927";
 import { Cn } from "../905/862913";

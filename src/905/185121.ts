@@ -8,7 +8,7 @@ import { vo, Y9, nB } from "../figma_app/272243";
 import { t as _$$t } from "../905/398894";
 import { h as _$$h } from "../905/104000";
 import { a as _$$a } from "../905/361302";
-import { J as _$$J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { DistributionType, AppStateTsApi, DrawingElementType, Fullscreen, DesignGraphElements } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
@@ -932,7 +932,7 @@ export function $$ez0(e) {
     });
   };
   let er = generateRecordingKey(e, "modal");
-  let ea = getFilteredFeatureFlags().ce_il_strokes ? jsxs(_$$J, {
+  let ea = getFilteredFeatureFlags().ce_il_strokes ? jsxs(UI3ConditionalWrapper, {
     children: [jsx("div", {
       className: "stroke_settings--segmentedControl--U-Xpx",
       children: jsxs(bL, {

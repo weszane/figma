@@ -5,7 +5,7 @@ import { jS, eS, N4 } from "../figma_app/762706";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance, bellFeedAPIInstance } from "../figma_app/876459";
-import { k0, RM } from "../figma_app/623293";
+import { loadScript, injectTextDecoderFix } from "../figma_app/623293";
 import { customHistory, isMakeRoute, isMainAppRoute } from "../905/612521";
 import { isFigmaMobileApp, isAndroidUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
@@ -23,7 +23,7 @@ function I(e) {
   return "prototype-lib" === e ? Fig.prototypeLibURLs["compiled_wasm.js"] : Fig.fullscreenURLs["compiled_wasm.js"];
 }
 async function S(e, t) {
-  await k0(I(t));
+  await loadScript(I(t));
   let r = {
     wasmBinaryFile: T(t),
     preRun() {
@@ -42,7 +42,7 @@ async function S(e, t) {
 }
 async function v(e) {
   try {
-    await xK.timeAsync("loadingCode", () => (RM(), window.FULLSCREEN_PRELOADS?.js || k0(I(e))));
+    await xK.timeAsync("loadingCode", () => (injectTextDecoderFix(), window.FULLSCREEN_PRELOADS?.js || loadScript(I(e))));
   } catch (e) {
     throw Error("Failed to load fullscreen JS code");
   }
@@ -161,7 +161,7 @@ export function $$k0() {
   return !/Mobi/.test(navigator.userAgent) || /iPad/.test(navigator.userAgent) || /Macintosh/.test(navigator.userAgent) || isMakeRoute() && !!getFeatureFlags().load_fullscreen_make_mobile_web;
 }
 export function $$M1(e = "fullscreen-app") {
-  return L(e).then(() => { });
+  return L(e).then(() => {});
 }
 let F = document.location.pathname;
 function j(e) {
@@ -172,7 +172,7 @@ export function $$U5() {
 }
 export function $$B2() {
   function e() {
-    L("fullscreen-app").catch(e => { });
+    L("fullscreen-app").catch(e => {});
   }
   let t = $$U5();
   "immediately" === t ? e() : "eventually" === t && window.addEventListener("load", () => {

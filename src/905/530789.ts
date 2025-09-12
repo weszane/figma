@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useCallback } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { E } from "../905/632989";
 import { x } from "../905/587214";
 import { permissionScopeHandler } from "../905/189185";

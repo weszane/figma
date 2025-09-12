@@ -1,4 +1,4 @@
-import { StatsigClient, DynamicConfig, EvaluationReason, Layer, StatsigAsyncStorage } from "../vendor/625526";
+import { StatsigClient, DynamicConfig, EvaluationReason, Layer, StatsigAsyncStorage } from "statsig-js";
 import { staticImplements } from "../vendor/265356";
 import { version } from "../vendor/494629";
 var i = this && this.__decorate || function (e, r, n, i) {

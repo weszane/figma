@@ -3,11 +3,11 @@ import { useState, useEffect, useCallback, useMemo, createRef } from "react";
 import { connect, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { $n } from "../905/521428";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { k as _$$k } from "../905/443820";
 import { E as _$$E } from "../905/632989";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { P as _$$P } from "../905/537307";
@@ -132,7 +132,7 @@ function D(e) {
   let r = "team-link-settings-dropdown";
   let n = createRef();
   let o = () => e.dropdownShown?.type === r;
-  return jsxs(_$$o, {
+  return jsxs(EventShield, {
     eventListeners: ["onMouseDown"],
     children: [jsx("div", {
       ref: n,
@@ -251,7 +251,7 @@ function B(e) {
 let U = "RESET_LINKS_CONFIRMATION_MODAL";
 registerModal(function (e) {
   let t = useDispatch();
-  let r = hS(e);
+  let r = useModalManager(e);
   return jsx(bL, {
     width: "md",
     manager: r,

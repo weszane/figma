@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useLayoutEffect } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { atom, createRemovableAtomFamily, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { logWarning } from "../905/714362";
 import { EE, lB } from "../figma_app/731583";

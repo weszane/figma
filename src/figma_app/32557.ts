@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { Hg } from "../figma_app/304955";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -19,7 +19,7 @@ import { TT, rY, lA } from "../figma_app/952035";
 import { Yr } from "../figma_app/325912";
 let I = createNoOpValidator();
 let $$S0 = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let r = selectCurrentFile().key;
   let [E, S] = useState(null);
   let [v, A] = useState(null);

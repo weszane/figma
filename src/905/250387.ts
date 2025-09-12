@@ -1,7 +1,7 @@
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { vU } from "../figma_app/193867";
@@ -38,7 +38,7 @@ export function $$c1(e, t) {
 export function $$u0(e, t, i, n) {
   var r;
   (r = t).startsWith("mailto:") ? r = r.slice(7) : r.startsWith("tel:") && (r = r.slice(4));
-  Dk(r);
+  copyTextToClipboard(r);
   trackEventAnalytics("Copy Hyperlink", {
     source: i
   });

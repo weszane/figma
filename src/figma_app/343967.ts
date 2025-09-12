@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { createContext, useContext, useState, useLayoutEffect, useRef, useCallback } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { updateRefOrCallback } from "../905/177375";
 import { A } from "../905/268204";
 import { g } from "../905/319892";

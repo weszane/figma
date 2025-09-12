@@ -4,11 +4,11 @@ import { A as _$$A } from "../vendor/723372";
 import { E } from "../905/632989";
 import { bL, hE, O6, HG } from "../905/598775";
 import { useRecording } from "../905/959312";
-import { $ } from "../905/61417";
+import { ensureContext } from "../905/61417";
 import { O } from "../905/969533";
 import { f as _$$f } from "../905/54715";
-import { pk } from "../905/408073";
-import { Lh } from "../figma_app/415899";
+import { SelectPrimitiveContext } from "../905/408073";
+import { useFplStrings } from "../figma_app/415899";
 import { preventAndStopEvent } from "../905/955878";
 var g = "chip__mainButton__8pK6D";
 function f({
@@ -67,7 +67,7 @@ let _ = forwardRef((e, t) => {
     recordingKey: e.recordingKey
   }, [e.onClose]);
   let r = null != e.onClose || null != e.onClick;
-  let a = Lh("close");
+  let a = useFplStrings("close");
   return f({
     ...e,
     isInteractive: r,
@@ -109,7 +109,7 @@ let A = forwardRef((e, t) => {
   let {
     getTriggerProps,
     setTriggerReference
-  } = $(pk, "SelectPrimitiveContext", "SelectPrimitive.Root");
+  } = ensureContext(SelectPrimitiveContext, "SelectPrimitiveContext", "SelectPrimitive.Root");
   let {
     onClick,
     ...s

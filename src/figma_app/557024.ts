@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { t as _$$t } from "../905/150656";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, jk } from "../figma_app/272243";
@@ -106,7 +106,7 @@ function F() {
     e(hideModal());
   }, [e]);
   let [r, _] = useState(null);
-  let h = hS({
+  let h = useModalManager({
     open: !0,
     onClose: t
   });

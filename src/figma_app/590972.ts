@@ -7,7 +7,7 @@ import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { J as _$$J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import _ from "../vendor/241899";
 import { A as _$$A } from "../vendor/90566";
 import { H as _$$H } from "../905/620380";
@@ -499,7 +499,7 @@ function eO({
   useEffect(() => {
     eO && J.description.touched && eR();
   }, [eO, eR, J.description.touched]);
-  return jsx(_$$J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsxs(_$$I, {
       onClose: q,
       width: "fit-content",
@@ -652,7 +652,7 @@ function eP({
       return t ?? getI18nString("community.publishing.an_error_occurred_please_try_again");
     }
   }, [e, h?.result, v, s]);
-  return jsx(_$$J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsxs(_$$I, {
       onClose: y,
       width: "fit-content",

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable node/prefer-global/process */
 const { spawn } = require('node:child_process')
 

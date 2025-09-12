@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { K } from "../905/851274";
 import { LayoutTabType } from "../figma_app/763686";
@@ -99,7 +99,7 @@ export function $$x2({
     "data-tooltip": t.action,
     "data-onboarding-key": e.onboardingKey,
     "data-testid": t.action,
-    children: jsx(_$$o, {
+    children: jsx(EventShield, {
       eventListeners: ["onClick"],
       children: jsx(_$$E, {
         actionOnPointerDown: !0,

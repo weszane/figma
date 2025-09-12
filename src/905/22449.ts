@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useId, useMemo } from "react";
-import { W } from "../905/458642";
+import { setupRecordingHandler } from "../905/458642";
 import { defaultComponentAttribute } from "../905/577641";
 import { r as _$$r2 } from "../905/5729";
 export let $$l0 = forwardRef(function ({
@@ -14,7 +14,7 @@ export let $$l0 = forwardRef(function ({
   let p = useId();
   let {
     onChange
-  } = W({
+  } = setupRecordingHandler({
     disabled: d,
     onChange: i,
     recordingKey: l,

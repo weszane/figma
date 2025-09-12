@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useRef, useMemo } from "react";
 import { S } from "../905/823680";
-import { $ } from "../905/61417";
+import { ensureContext } from "../905/61417";
 import { defaultComponentAttribute } from "../905/577641";
 let l = createContext(null);
 let $$d1 = forwardRef(({
@@ -35,7 +35,7 @@ let $$d1 = forwardRef(({
 export function $$c0(e) {
   let {
     triggerButtonRef
-  } = $(l, "useGroupTrigger", "ButtonGroupPrimitive");
+  } = ensureContext(l, "useGroupTrigger", "ButtonGroupPrimitive");
   return S(e, triggerButtonRef);
 }
 $$d1.displayName = "ButtonGroupPrimitive";

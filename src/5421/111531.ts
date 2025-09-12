@@ -36,7 +36,7 @@ import V from "../vendor/241899";
 import { debugState } from "../905/407919";
 import { ds } from "../figma_app/314264";
 import { SourceMapConsumer } from "../vendor/956116";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { sH, gn } from "../5421/58503";
 import { XH, zV, fl, pn } from "../1156/993639";
 import { useDispatch } from "react-redux";
@@ -60,8 +60,8 @@ import { gq } from "../figma_app/178475";
 import { U1 } from "../figma_app/343967";
 import { W1 } from "../figma_app/439493";
 import { xE } from "../figma_app/581520";
-import { cY, UU, BN } from "../vendor/343575";
-import { fP, mc as _$$mc } from "../905/691059";
+import { offset, flip, shift } from '@floating-ui/react-dom';
+import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { R as _$$R } from "../7a72fc59/583347";
 import { throwTypeError, assert } from "../figma_app/465776";
 import { Ay as _$$Ay } from "../vendor/917855";
@@ -290,17 +290,17 @@ function eC({
   let {
     getContainerProps,
     getTriggerProps
-  } = fP({
+  } = usePopoverPrimitive({
     type: "menu",
     isOpen: r,
     onOpenChange: a,
     softDismiss: !0,
     placement: "bottom",
-    middleware: [cY({
+    middleware: [offset({
       mainAxis: 16
-    }), UU({
+    }), flip({
       padding: 16
-    }), BN()]
+    }), shift()]
   });
   let d = cloneElement(e, {
     ...getTriggerProps()
@@ -308,7 +308,7 @@ function eC({
   return jsxs("div", {
     children: [jsx(_$$R, {
       children: d
-    }), jsx(_$$mc, {
+    }), jsx(PopoverPrimitiveContainer, {
       ...getContainerProps(),
       children: t
     })]

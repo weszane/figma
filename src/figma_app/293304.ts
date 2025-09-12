@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useContext } from "react";
-import { flushSync } from "../vendor/944059";
+import { flushSync } from "react-dom";
 import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";

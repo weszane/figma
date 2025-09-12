@@ -1,12 +1,12 @@
 import { getAnonymousId } from "../905/449184";
 import { getInitialOptions, getLaunchDarklyFlagsExport, getEnvironmentName, isGovCluster } from "../figma_app/169182";
-import { B7, q3, AQ, Us } from "../3973/890507";
-import { MU } from "../3973/473379";
+import { getStringValueOrDefault, areValuesEqualOrEmpty, trackUserValuesBootstrapMismatch, reportStatsigError } from "../3973/890507";
+import { TimeoutError } from "../3973/473379";
 import { zN, jm } from "../figma_app/416935";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Rf } from "../figma_app/546509";
 import { getI18nState } from "../figma_app/363242";
-import { UY } from "../3973/697935";
+import { booleanFlagAtom } from "../3973/697935";
 import { cn } from "../figma_app/141320";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { getFeatureFlags } from "../905/601108";
@@ -36,22 +36,22 @@ function T(e, t) {
   if (null == e || null == e.evaluated_keys || "object" != typeof e.evaluated_keys) return !1;
   let i = e.evaluated_keys;
   let r = i.customIDs ?? {};
-  if (B7(i, "userID", "") !== t.userId) return !1;
-  let s = B7(r, "teamID", null);
-  let o = q3(s, t.teamId);
-  let l = B7(r, "orgID", null);
-  let d = q3(l, t.orgId);
+  if (getStringValueOrDefault(i, "userID", "") !== t.userId) return !1;
+  let s = getStringValueOrDefault(r, "teamID", null);
+  let o = areValuesEqualOrEmpty(s, t.teamId);
+  let l = getStringValueOrDefault(r, "orgID", null);
+  let d = areValuesEqualOrEmpty(l, t.orgId);
   let c = !0;
   if ($$C10()) {
-    let e = B7(r, "planKey", null);
-    (c = q3(e, t.planKey)) || AQ("plan_key", e, t.planKey);
+    let e = getStringValueOrDefault(r, "planKey", null);
+    (c = areValuesEqualOrEmpty(e, t.planKey)) || trackUserValuesBootstrapMismatch("plan_key", e, t.planKey);
   }
-  let u = B7(r, "stableID", null);
+  let u = getStringValueOrDefault(r, "stableID", null);
   let p = getAnonymousId() ?? null;
-  let m = q3(u, p);
-  o || AQ("team_id", s, t.teamId);
-  d || AQ("org_id", l, t.orgId);
-  m || AQ("stable_id", u, p);
+  let m = areValuesEqualOrEmpty(u, p);
+  o || trackUserValuesBootstrapMismatch("team_id", s, t.teamId);
+  d || trackUserValuesBootstrapMismatch("org_id", l, t.orgId);
+  m || trackUserValuesBootstrapMismatch("stable_id", u, p);
   return o && d && m && c;
 }
 export function $$k6(e, t) {
@@ -75,7 +75,7 @@ export function $$k6(e, t) {
 export function $$R11(e, t, i, s) {
   let u = getInitialOptions();
   let m = getAnonymousId();
-  e || t || i || m || s || Us("No userId, nor teamId, nor orgId, not planKey, nor analytics anonymous ID supplied to getStatsigUser.");
+  e || t || i || m || s || reportStatsigError("No userId, nor teamId, nor orgId, not planKey, nor analytics anonymous ID supplied to getStatsigUser.");
   let h = $$w0({
     userId: e,
     teamId: t,
@@ -147,16 +147,16 @@ export function $$P12(e, t) {
   let i = "number" == typeof t ? {
     timeout: t
   } : t;
-  return Promise.race([delay(i.timeout).then(() => Promise.reject(new MU(i.label))), e]);
+  return Promise.race([delay(i.timeout).then(() => Promise.reject(new TimeoutError(i.label))), e]);
 }
 export function $$O3(e) {
   return JSON.stringify([e.userId, e.teamId, e.orgId, e.planKey]);
 }
 export function $$D2(e) {
-  ("local" === e || "staging" === e) && atomStoreManager.set(UY, !0);
+  ("local" === e || "staging" === e) && atomStoreManager.set(booleanFlagAtom, !0);
 }
 export function $$L1(e) {
-  return atomStoreManager.get(UY) ? Promise.all([e, delay(3e3)]).then(e => e[0]) : e;
+  return atomStoreManager.get(booleanFlagAtom) ? Promise.all([e, delay(3e3)]).then(e => e[0]) : e;
 }
 export const Cj = $$w0;
 export const Xu = $$L1;

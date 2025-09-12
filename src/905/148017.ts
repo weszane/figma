@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, PureComponent, createRef } from "react";
 import { d as _$$d } from "../905/976845";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/375716";
 import { m as _$$m } from "../905/148147";
@@ -387,7 +387,7 @@ class es extends PureComponent {
     });
     let f = jsx("div", {
       className: "grids_panel--labelContainer--4kqDz",
-      children: jsx(_$$o, {
+      children: jsx(EventShield, {
         eventListeners: ["onMouseDown"],
         children: jsx(JU, {
           className: this.props.layoutGrid.visible ? "grids_panel--labelVisible---7DFp" : "grids_panel--labelInvisible--obeqU",

@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
 import { E } from "../905/632989";
 import { $n } from "../905/521428";
@@ -7,8 +7,8 @@ import { K } from "../905/443068";
 import { L } from "../905/704296";
 import { x } from "../905/404412";
 import { memo, useRef, useCallback, useEffect, useMemo, createContext } from "react";
-import { Lh } from "../figma_app/415899";
-import { $ } from "../905/61417";
+import { useFplStrings } from "../figma_app/415899";
+import { ensureContext } from "../905/61417";
 import { defaultComponentAttribute } from "../905/577641";
 import { y as _$$y } from "../905/658036";
 import { T } from "../905/745591";
@@ -90,7 +90,7 @@ function _({
 _.displayName = "ToastPrimitive.Root";
 let A = createContext(void 0);
 function y() {
-  let e = $(A, "useDismissToast", "ToastPrimitive.Root");
+  let e = ensureContext(A, "useDismissToast", "ToastPrimitive.Root");
   useEffect(() => (e.subscriberCount++, () => {
     e.subscriberCount--;
   }), [e]);
@@ -135,8 +135,8 @@ export function $$S2({
   ...t
 }) {
   let i = y();
-  let o = Lh("dismiss");
-  let c = "ui2" === DP().version;
+  let o = useFplStrings("dismiss");
+  let c = "ui2" === getThemeContextOrDefault().version;
   let u = () => i("dismiss");
   return c ? jsx(E, {
     htmlAttributes: e,
@@ -163,7 +163,7 @@ export function $$w0({
   ...a
 }) {
   let l = y();
-  let d = "ui2" === DP().version;
+  let d = "ui2" === getThemeContextOrDefault().version;
   let c = (...e) => {
     !1 !== t?.(...e) && l("action");
   };

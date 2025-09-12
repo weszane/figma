@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
@@ -222,7 +222,7 @@ export function $$ee0(e) {
     onClick: () => ex(0)
   });
   let ev = !!K && !K.org_id;
-  let ey = hS(e);
+  let ey = useModalManager(e);
   let {
     sharingSuggestions,
     sharingSuggestionIdsToExclude,

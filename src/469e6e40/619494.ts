@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
 import { $n } from "../905/521428";
 import { k } from "../905/443820";
-import { Dk } from "../figma_app/623293";
+import { copyTextToClipboard } from "../figma_app/623293";
 import { getSupportEmail } from "../figma_app/169182";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -30,7 +30,7 @@ function j(e) {
     }));
   }, [t, e.org, e.orgDomains, e.orgSamlConfig]);
   let o = useCallback((e, a) => {
-    Dk(e).then(() => {
+    copyTextToClipboard(e).then(() => {
       t(VisualBellActions.enqueue({
         type: a,
         message: getI18nString("org_settings.sso.copied")

@@ -26,7 +26,7 @@ import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { ds } from '../figma_app/314264';
 import { Lb } from '../figma_app/323326';
 import { Ns, TP, yT } from '../figma_app/349248';
-import { Dk, wY } from '../figma_app/623293';
+import { copyTextToClipboard, copyTextWithPlainFallback } from '../figma_app/623293';
 import { canCreateFileType } from '../figma_app/687776';
 import { AppStateTsApi } from '../figma_app/763686';
 import { S as _$$S } from '../figma_app/787550';
@@ -222,7 +222,7 @@ let $$X9 = createOptimistThunk((e, t) => {
   })) : e.dispatch(FlashActions.error('Unable to find version to restore'));
 });
 let $$q12 = createOptimistThunk((e, t) => {
-  Dk(t.embedCode).then(() => {
+  copyTextToClipboard(t.embedCode).then(() => {
     ds('Embed Code Copied', t.fileKey, e.getState());
     e.dispatch(VisualBellActions.enqueue({
       type: 'embeded_code_copied_to_clipboard',
@@ -258,9 +258,9 @@ let $$Z8 = _$$n(createOptimistThunk((e, t) => {
     e.href = n;
     e.innerText = i;
     let t = e.outerHTML;
-    r = wY(t, n);
+    r = copyTextWithPlainFallback(t, n);
   } else {
-    r = Dk(n);
+    r = copyTextToClipboard(n);
   }
   r.then(() => {
     ds('File Share Link Copied', t.fileKey, e.getState(), {

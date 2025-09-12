@@ -116,7 +116,7 @@ import { x as _$$x } from "../905/211326";
 import { lR, $z, Me, c as _$$c2 } from "../figma_app/617427";
 import { Q as _$$Q2 } from "../5132/668270";
 import { D as _$$D2 } from "../figma_app/908415";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB as _$$nB } from "../figma_app/272243";
 import { N as _$$N4 } from "../905/482239";
@@ -1277,7 +1277,7 @@ function tQ() {
   });
 }
 function t$(e) {
-  let t = hS({
+  let t = useModalManager({
     ...e,
     preventUserClose: !0
   });

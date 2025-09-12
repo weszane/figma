@@ -6,7 +6,7 @@ import { ShareAction } from "../figma_app/707808";
 import { n as _$$n, a as _$$a } from "../905/114254";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -53,7 +53,7 @@ import { A as _$$A3 } from "../5724/663128";
 import { X0 } from "../905/784221";
 import { throwTypeError } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
-import { J as _$$J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { A as _$$A4 } from "../vendor/90566";
 import { H as _$$H } from "../905/620380";
 import { useSprigWithSampling } from "../905/99656";
@@ -118,7 +118,7 @@ let y = registerModal(function ({
   let a = () => {
     t(hideModal());
   };
-  let s = hS({
+  let s = useModalManager({
     open: e,
     onClose: a
   });
@@ -758,7 +758,7 @@ function ta({
   useEffect(() => {
     L && A.description.touched && M();
   }, [L, M, A.description.touched]);
-  return jsx(_$$J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(_$$I, {
       onClose: C,
       width: "fit-content",
@@ -1190,7 +1190,7 @@ function tO({
     y(popModalStack());
   };
   let eL = useAtomWithSubscription(tR);
-  let eF = hS({
+  let eF = useModalManager({
     open: eL,
     onClose: eD
   });

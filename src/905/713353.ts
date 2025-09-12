@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { E } from "../905/632989";
 import { r as _$$r } from "../905/571562";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 function l() {
   return jsx("svg", {
     width: "8",
@@ -24,7 +24,7 @@ export let $$d0 = forwardRef(({
 }, r) => {
   let {
     version
-  } = DP();
+  } = getThemeContextOrDefault();
   return jsxs(E, {
     className: "fake-select--fakeSelect--ocszf",
     ref: r,

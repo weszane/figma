@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { E as _$$E } from "../905/632989";
@@ -64,7 +64,7 @@ let Y = registerModal(function (e) {
   let p = i ? e.resourceConnectionInvite.isHostPlanAdmin : e.resourceConnection.isHostPlanAdmin;
   if (null == d || null == c) throw Error("hostPlan or connectingPlan not found");
   let m = useDispatch();
-  let h = hS({
+  let h = useModalManager({
     ...e,
     onClose: () => {
       m(hideModal());
@@ -570,7 +570,7 @@ let eo = (e, t) => {
 };
 let $$el0 = registerModal(function (e) {
   let t;
-  let i = hS(e);
+  let i = useModalManager(e);
   let {
     folderId
   } = e;

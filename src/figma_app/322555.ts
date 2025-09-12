@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useState } from "react";
 import { E } from "../905/632989";
-import { $ } from "../905/61417";
+import { ensureContext } from "../905/61417";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent } from "../905/955878";
 let $$d6 = createContext(null);
@@ -79,7 +79,7 @@ export let $$m0 = forwardRef(({
   htmlAttributes: e,
   ...t
 }, r) => {
-  let i = $($$d6, "CollapseContext", "Collapse.Root");
+  let i = ensureContext($$d6, "CollapseContext", "Collapse.Root");
   return jsx(E, {
     ref: r,
     ...defaultComponentAttribute,
@@ -107,7 +107,7 @@ export let $$f1 = forwardRef(({
   htmlAttributes: e,
   ...t
 }, r) => {
-  let i = $($$d6, "CollapseContext", "Collapse.Root");
+  let i = ensureContext($$d6, "CollapseContext", "Collapse.Root");
   return jsx("div", {
     ...defaultComponentAttribute,
     ...e,

@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fM, Uj, mG } from "../figma_app/15924";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { E as _$$E } from "../905/632989";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { l as _$$l } from "../905/745972";
 import { hideModalHandler, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -34,13 +34,13 @@ let v = registerModal(function (e) {
   let n = () => {
     t(hideModalHandler());
   };
-  let s = hS({
+  let s = useModalManager({
     ...e,
     onClose: n
   });
   let x = _$$l();
   let j = x.windowInnerWidth && x.windowInnerWidth < 550 ? "md" : 440;
-  return jsx(J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(fu, {
       name: e0.COMMUNITY_REDIRECT_PURCHASE_MODAL,
       children: jsx(bL, {
@@ -56,7 +56,7 @@ let v = registerModal(function (e) {
               }), jsx("div", {
                 className: jJ,
                 children: renderI18nText("community.detail_view.you_ll_pay_to_use_this_resource_outside_of_figma")
-              }), jsx(_$$_, {
+              }), jsx(LinkPrimitive, {
                 href: e.thirdPartyM10nUrl || "#",
                 newTab: !0,
                 className: b_,

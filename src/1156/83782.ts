@@ -30,14 +30,14 @@ import { ci } from "../figma_app/259678";
 import { Zr } from "../figma_app/114522";
 import { jx, Ic } from "../figma_app/198516";
 import { FX } from "../figma_app/558805";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL as _$$bL } from "../905/38914";
 import { D as _$$D } from "../905/169680";
 import { S1, Bo } from "../1156/867089";
 import { nc } from "../figma_app/570630";
 import { kC, dY, x1 } from "../1156/116225";
 let B = registerModal(function (e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let {
     library,
     onClose

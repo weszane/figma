@@ -14,7 +14,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { N_ } from '../905/332483';
 import { c as _$$c } from '../905/370443';
-import { hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { N as _$$N } from '../905/438674';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
@@ -198,7 +198,7 @@ function er(e) {
     currency,
     renewalTerm
   } = e;
-  let p = hS(e);
+  let p = useModalManager(e);
   let g = _$$d({
     reportErrorsToTeam: _$$e.SCALE
   });
@@ -452,7 +452,7 @@ let ed = registerModal(e => {
 });
 let eu = registerModal(e => {
   let t = useTeamPlanFeatures().unwrapOr(null);
-  let a = hS(e);
+  let a = useModalManager(e);
   return jsx(fu, {
     name: 'Auto Approval Settings Modal (CURF All Users)',
     children: jsx(bL, {

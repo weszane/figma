@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState, useEffect, useMemo, Component } from "react";
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SettingsAction } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";

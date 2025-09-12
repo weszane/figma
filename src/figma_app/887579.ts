@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { K } from "../905/443068";
 import { $n } from "../905/521428";
 import { k } from "../905/443820";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { N as _$$N } from "../905/438674";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
@@ -175,7 +175,7 @@ function C({
     children: t
   });
   let d = `${$$A5(e)}.${$$v4(e)}`;
-  return "icon" === r ? jsx(_$$_, {
+  return "icon" === r ? jsx(LinkPrimitive, {
     trusted: !0,
     href: s,
     download: d,

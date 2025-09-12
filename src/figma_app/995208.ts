@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -15,7 +15,7 @@ import { registerModal } from "../905/102752";
 import { F as _$$F } from "../905/759613";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { useLatestRef } from "../figma_app/922077";
 import { popModalStack, showModal } from "../905/156213";
 import { M as _$$M } from "../905/152487";
@@ -38,7 +38,7 @@ function v(e) {
       optOutOfPrevModal: !0
     }));
   }, [t, s, isShowing, o, modalType]);
-  return jsx(J, {
+  return jsx(UI3ConditionalWrapper, {
     children: jsx(_$$M, {
       isShowing: isShowing && o,
       testId: e.testId,
@@ -78,7 +78,7 @@ function N(e) {
 }
 function C(e) {
   let t = j6();
-  let r = hS({
+  let r = useModalManager({
     open: !0,
     onClose: r => {
       switch (r.source) {

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import o from "classnames";
 import { ks } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
@@ -47,7 +47,7 @@ let $$A0 = forwardRef(function ({
     label: getI18nString("community.publishing.support_contact"),
     error: y,
     required: Bs(t.deps.valueRequired, e),
-    children: jsx(_$$o, {
+    children: jsx(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
       children: jsx(ks, {

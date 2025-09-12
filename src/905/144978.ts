@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useId, useImperativeHandle } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { E as _$$E } from "../905/172252";
-import { o as _$$o } from "../905/821217";
+import { ScreenReaderOnly } from "../905/172252";
+import { EventShield } from "../905/821217";
 import l from "classnames";
 import { ks } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
@@ -62,7 +62,7 @@ let $$b0 = forwardRef(function ({
       children: [jsx("span", {
         "aria-hidden": !0,
         children: `${I}/${EM}`
-      }), jsx(_$$E, {
+      }), jsx(ScreenReaderOnly, {
         children: getI18nString("community.publishing.character_count_status", {
           currentCount: I,
           maxCount: EM
@@ -72,7 +72,7 @@ let $$b0 = forwardRef(function ({
     error: v,
     errorId: w,
     required: !0,
-    children: jsx(_$$o, {
+    children: jsx(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
       children: jsx(ks, {

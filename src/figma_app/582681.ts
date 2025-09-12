@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setupAutofocusHandler } from "../905/128376";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { d as _$$d } from "../905/49800";
@@ -43,7 +43,7 @@ export let $$C0 = registerModal(function ({
     D === FFileType.WHITEBOARD && F2.focusCustomCanvasFocusElement();
     t();
   }, [t, D]);
-  let U = hS({
+  let U = useModalManager({
     open: e,
     onClose: j
   });

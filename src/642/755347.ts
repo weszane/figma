@@ -39,7 +39,7 @@ import { r as _$$r } from "../642/58913";
 import { m as _$$m } from "../642/871982";
 import { b as _$$b } from "../642/94505";
 import { K as _$$K2 } from "../905/443068";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { bL, mc } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -198,7 +198,7 @@ function eh({
     onClick,
     ...p
   } = getTriggerProps();
-  return qg(s, ep) || manager.isOpen ? jsx(_$$o, {
+  return qg(s, ep) || manager.isOpen ? jsx(EventShield, {
     eventListeners: ["onWheel"],
     children: jsxs(bL, {
       manager,

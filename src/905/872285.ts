@@ -3,7 +3,7 @@ import { useState, forwardRef } from "react";
 import { J } from "../905/614223";
 import { A } from "../vendor/723372";
 import { E } from "../905/632989";
-import { fP, mc as _$$mc, i3 } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { defaultComponentAttribute } from "../905/577641";
 export function $$c3(e) {
   let [t, i] = useState(!1);
@@ -11,7 +11,7 @@ export function $$c3(e) {
     getArrowProps,
     getContainerProps,
     getTriggerProps
-  } = fP({
+  } = usePopoverPrimitive({
     ...e,
     isOpen: t,
     onOpenChange: i,
@@ -50,14 +50,14 @@ export let $$p0 = forwardRef(({
   ...r
 }, s) => jsx(J, {
   mode: "dark",
-  children: jsxs(_$$mc, {
+  children: jsxs(PopoverPrimitiveContainer, {
     ...defaultComponentAttribute,
     ...i,
     ...r,
     ref: s,
     ...e.getContainerProps(),
     className: "toggle-tip__container__IjXj-",
-    children: [jsx(i3, {
+    children: [jsx(PopoverPrimitiveArrow, {
       ...e.getArrowProps(),
       width: 14,
       height: 7,

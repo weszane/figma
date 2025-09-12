@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { N } from "../905/438674";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -10,7 +10,7 @@ import { fu } from "../figma_app/831799";
 import { BlockConnectedFileMove } from "../figma_app/43951";
 import { Yw } from "../905/615608";
 export function $$p0(e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let r = useSubscription(BlockConnectedFileMove, {
     fileKey: e.fileKey
   });

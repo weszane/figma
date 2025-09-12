@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { nB, vo, Y9, hE, wi, jk } from "../figma_app/272243";
 import { k } from "../905/443820";
 import { bL } from "../905/38914";
@@ -23,7 +23,7 @@ export function $$T0(e) {
   let {
     folder
   } = e;
-  let r = hS(e);
+  let r = useModalManager(e);
   let s = N(folder.id);
   let i = "loaded" === s.status ? jsx(E, {
     ...e,

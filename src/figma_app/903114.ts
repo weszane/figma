@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB, wi, jk } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
@@ -48,7 +48,7 @@ import { UL, un, kI } from "../figma_app/457899";
 let $$q0 = "https://help.figma.com/hc/articles/360039960434-Manage-seats-in-Figma";
 let J = Ye.dict(() => 0);
 function $$Z(e) {
-  let t = hS(e);
+  let t = useModalManager(e);
   let r = (e.planUser.handle || e.planUser.name) ?? "";
   let [a, u] = useState(e.nextSeatType ?? null);
   let p = _$$d({

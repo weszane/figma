@@ -5,7 +5,7 @@ import { useEffect as useEffectReact, useRef as useRefReact } from 'react'
  * Original function name: $$r0
  * @param effectFn - Function to execute, should return a cleanup function or void.
  */
-export function useSingleEffect(effectFn: () => () => void): void {
+export function useSingleEffect(effectFn: (() => () => void) | (() => any)): void {
   const hasRun = useRefReact(false)
 
   useEffectReact(() => {

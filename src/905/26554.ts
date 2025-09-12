@@ -1,6 +1,6 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -8,7 +8,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 export let $$u0 = registerModal(function (e) {
-  let t = hS({
+  let t = useModalManager({
     open: e.open,
     onClose: e.onClose,
     preventUserClose: !0

@@ -1,13 +1,12 @@
-import { jsx, jsxs } from 'react/jsx-runtime'
-import { bL, Rq } from '../905/38914'
-import { setupAutofocusHandler } from '../905/128376'
-import { renderI18nText } from '../905/303541'
-import { hS } from '../905/437088'
-import { $n } from '../905/521428'
-import { hE, jk, nB, wi, Y9 } from '../figma_app/272243'
-import { kt } from '../figma_app/858013'
-import { useSetupPlayback } from '../figma_app/878298'
-
+import { jsx, jsxs } from 'react/jsx-runtime';
+import { bL, Rq } from '../905/38914';
+import { setupAutofocusHandler } from '../905/128376';
+import { renderI18nText } from '../905/303541';
+import { useModalManager } from '../905/437088';
+import { $n } from '../905/521428';
+import { hE, jk, nB, wi, Y9 } from '../figma_app/272243';
+import { kt } from '../figma_app/858013';
+import { useSetupPlayback } from '../figma_app/878298';
 export function $$p0({
   open: e,
   width: t = 'md',
@@ -15,20 +14,20 @@ export function $$p0({
   cancelText: p = renderI18nText('modal.cancel'),
   ...m
 }) {
-  let h = m.autofocusConfirm ?? !m.destructive
-  let g = useSetupPlayback(m.recordingKey, 'confirm', (e) => {
-    m.onConfirm(e)
-    e.defaultPrevented || m.onClose()
-  })
+  let h = m.autofocusConfirm ?? !m.destructive;
+  let g = useSetupPlayback(m.recordingKey, 'confirm', e => {
+    m.onConfirm(e);
+    e.defaultPrevented || m.onClose();
+  });
   let f = useSetupPlayback(m.recordingKey, 'cancel', () => {
-    m.onCancel?.()
-    m.onClose()
-  })
-  let _ = hS({
+    m.onCancel?.();
+    m.onClose();
+  });
+  let _ = useModalManager({
     open: e,
-    onClose: f,
-  })
-  let A = setupAutofocusHandler()
+    onClose: f
+  });
+  let A = setupAutofocusHandler();
   return jsx(bL, {
     manager: _,
     width: t,
@@ -37,34 +36,32 @@ export function $$p0({
       onSubmit: g,
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: i,
-        }),
+          children: i
+        })
       }), jsx(nB, {
-        children: m.children,
+        children: m.children
       }), jsxs(wi, {
         children: [m.footerText, jsxs(jk, {
           children: [jsx($n, {
             variant: 'secondary',
             onClick: f,
             ref: h ? void 0 : A,
-            children: p,
-          }), m.isLoading
-            ? jsxs($n, {
-                disabled: !0,
-                children: [jsx(kt, {
-                  className: m.loadingText ? 'confirmation_modal--spinnerWithText--8t9yx confirmation_modal--spinner--E3om4' : 'confirmation_modal--spinner--E3om4',
-                }), m.loadingText],
-              })
-            : jsx($n, {
-                type: 'submit',
-                disabled: m.disableConfirm,
-                variant: m.destructive ? 'destructive' : 'primary',
-                ref: h ? A : void 0,
-                children: m.confirmText,
-              })],
-        })],
-      })],
-    }),
-  })
+            children: p
+          }), m.isLoading ? jsxs($n, {
+            disabled: !0,
+            children: [jsx(kt, {
+              className: m.loadingText ? 'confirmation_modal--spinnerWithText--8t9yx confirmation_modal--spinner--E3om4' : 'confirmation_modal--spinner--E3om4'
+            }), m.loadingText]
+          }) : jsx($n, {
+            type: 'submit',
+            disabled: m.disableConfirm,
+            variant: m.destructive ? 'destructive' : 'primary',
+            ref: h ? A : void 0,
+            children: m.confirmText
+          })]
+        })]
+      })]
+    })
+  });
 }
-export const R = $$p0
+export const R = $$p0;

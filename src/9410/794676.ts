@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useMemo, useRef, useCallback, memo, useLayoutEffect } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { y as _$$y } from "../905/725962";
-import { DP } from "../905/158740";
+import { getThemeContextOrDefault } from "../905/158740";
 import { getFeatureFlags } from "../905/601108";
 import { getStorage, localStorageRef } from "../905/657224";
 import { fp } from "../figma_app/347146";
@@ -659,7 +659,7 @@ export function $$t80({
   M4.Folder.useValue(d?.folderId);
   let h = useSelector(e => e.selectedView.editorType);
   let [f, g] = useState(!1);
-  let x = DP();
+  let x = getThemeContextOrDefault();
   let C = sO();
   let S = useCanUseDevModeDemoFile();
   let j = useCallback(() => {

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk, Wk } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
@@ -201,7 +201,7 @@ export function $$er0(e) {
       onFolderCreated: e.onFolderCreated
     }));
   };
-  let eC = hS({
+  let eC = useModalManager({
     open: e.open,
     onClose: ew
   });

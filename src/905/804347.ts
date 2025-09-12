@@ -40,7 +40,7 @@ import { q0 } from "../905/546357";
 import { g8 } from "../905/378567";
 import { g as _$$g } from "../905/345380";
 import { bUL } from "../figma_app/822011";
-import { _ as _$$_ } from "../figma_app/496441";
+import { LinkPrimitive } from "../figma_app/496441";
 import { ci } from "../figma_app/643789";
 import { W as _$$W } from "../905/307631";
 import { h2, $b } from "../905/820960";
@@ -294,7 +294,7 @@ function eu(e) {
     children
   } = e;
   return jsxs(Fragment, {
-    children: [href && jsx(_$$_, {
+    children: [href && jsx(LinkPrimitive, {
       onClick: onClickWithDefaults,
       href,
       children
@@ -461,7 +461,7 @@ function eg(e) {
     });
   }(e.searchResult.model.id, e.searchResult.model.org_id);
   let r = ef(e.searchResult.model.id, e.searchResult.model.org_id);
-  return jsxs(_$$_, {
+  return jsxs(LinkPrimitive, {
     className: "users--row--va2mE search_list_row--row--xo6wT text--fontPos13--xW8hS text--_fontBase--QdLsd users--rowTemplate--bVQ-8",
     href: r,
     onClick: i,

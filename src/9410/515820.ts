@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback, useRef, useState } from "react";
-import { o as _$$o } from "../905/821217";
+import { EventShield } from "../905/821217";
 import { Y9, JU, X0, bL, UC } from "../figma_app/57171";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
@@ -322,7 +322,7 @@ export function $$et0({
   let k = rE();
   let N = i && S;
   let A = m.some(e => m[0] && e.pageType !== m[0].pageType);
-  return getFeatureFlags().eu_fpl_collapse ? jsx(_$$o, {
+  return getFeatureFlags().eu_fpl_collapse ? jsx(EventShield, {
     eventListeners: ["onClick"],
     children: jsx("div", {
       className: d()($, {
@@ -360,7 +360,7 @@ export function $$et0({
         })]
       })
     })
-  }) : jsx(_$$o, {
+  }) : jsx(EventShield, {
     eventListeners: ["onClick"],
     children: jsxs("div", {
       className: d()($, {

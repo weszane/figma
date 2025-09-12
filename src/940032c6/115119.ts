@@ -89,7 +89,7 @@ import { R as _$$R6 } from '../905/165069';
 import { Of as _$$Of, ol as _$$ol2, w2 as _$$w6 } from '../905/165465';
 import { UpsellModalType } from '../905/165519';
 import { setupToggleButton } from '../905/167712';
-import { E as _$$E7 } from '../905/172252';
+import { ScreenReaderOnly } from '../905/172252';
 import { F as _$$F9 } from '../905/172964';
 import { y as _$$y2 } from '../905/175043';
 import { lk as _$$lk } from '../905/182453';
@@ -155,7 +155,7 @@ import { X as _$$X8 } from '../905/399133';
 import { Z as _$$Z } from '../905/404142';
 import { H as _$$H9 } from '../905/404982';
 import { debugState } from '../905/407919';
-import { l9 as _$$l8, WM } from '../905/408073';
+import { SelectPrimitiveTrigger, useSelectPrimitiveState } from '../905/408073';
 import { L as _$$L4 } from '../905/408237';
 import { A as _$$A0 } from '../905/408320';
 import { _ as _$$_0 } from '../905/410717';
@@ -163,7 +163,7 @@ import { h4 as _$$h1, Nz as _$$Nz } from '../905/417232';
 import { rq as _$$rq } from '../905/425180';
 import { e as _$$e10 } from '../905/428849';
 import { N as _$$N8 } from '../905/430294';
-import { hS as _$$hS } from '../905/437088';
+import { useModalManager } from '../905/437088';
 import { N as _$$N6 } from '../905/438674';
 import { v as _$$v10 } from '../905/439487';
 import { R as _$$R5 } from '../905/441305';
@@ -270,7 +270,7 @@ import { J as _$$J4 } from '../905/799737';
 import { f as _$$f3 } from '../905/809171';
 import { e as _$$e15 } from '../905/810361';
 import { x as _$$x3 } from '../905/811596';
-import { o as _$$o5 } from '../905/821217';
+import { EventShield } from '../905/821217';
 import { z as _$$z12 } from '../905/821223';
 import { z as _$$z4 } from '../905/825185';
 import { vL as _$$vL } from '../905/826900';
@@ -646,7 +646,7 @@ import { D as _$$D2, o as _$$o4 } from '../figma_app/478029';
 import { kG as _$$kG, Xo } from '../figma_app/482495';
 import { P as _$$P } from '../figma_app/483257';
 import { clamp, nearlyEqual } from '../figma_app/492908';
-import { _ as _$$_5 } from '../figma_app/496441';
+import { LinkPrimitive } from '../figma_app/496441';
 import { t as _$$t8 } from '../figma_app/501766';
 import { y as _$$y5 } from '../figma_app/504415';
 import { useOpenFileLibraryKey, useCurrentFileKey, useIsCurrentUserCreator, selectCurrentFile } from '../figma_app/516028';
@@ -838,7 +838,7 @@ import { QuoteNode, $createHeadingNode, HeadingNode, $isHeadingNode } from '@lex
 import { Q as _$$Q7 } from '../vendor/898216';
 import { $ as _$$$3 } from '../vendor/909072';
 import { N as _$$N10 } from '../vendor/930821';
-import { createPortal } from '../vendor/944059';
+import { createPortal } from 'react-dom';
 import { G as _$$G7 } from '../vendor/947080';
 import { F as _$$F7 } from '../vendor/961806';
 import { Ec, RZ } from '../vendor/969425';
@@ -6064,7 +6064,7 @@ let rQ = registerModal(({
     d(!1);
     n();
   };
-  let m = _$$hS({
+  let m = useModalManager({
     open: i,
     onClose: n
   });
@@ -7194,7 +7194,7 @@ let oV = () => {
   return `${e}-${t}-${i.toString().padStart(8, '0')}`;
 };
 let oG = registerModal(e => {
-  let t = _$$hS({
+  let t = useModalManager({
     ...e,
     onClose: () => {
       e.onClose();
@@ -7685,7 +7685,7 @@ function oQ({
         }), jsx(_$$kt, {
           'data-testid': 'loading-spinner'
         })]
-      }) : jsx(_$$_5, {
+      }) : jsx(LinkPrimitive, {
         newTab: !0,
         href: e.fullURL,
         htmlAttributes: {
@@ -8047,7 +8047,7 @@ let ds = registerModal(e => {
   let {
     fileKey
   } = e;
-  let i = _$$hS(e);
+  let i = useModalManager(e);
   let n = useDispatch();
   let [a] = setupResourceAtomHandler(SiteMount.Query({
     fileKey: e.fileKey
@@ -8137,7 +8137,7 @@ function dc({
   return jsx(Fragment, {
     children: jsx('div', {
       className: 'x1n2onr6',
-      children: jsxs(_$$o5, {
+      children: jsxs(EventShield, {
         eventListeners: r ? ['onMouseDown'] : [],
         children: [jsx(_$$d2, {
           'aria-expanded': r,
@@ -8623,7 +8623,7 @@ function dE({
   return jsxs(Fragment, {
     children: [jsxs('div', {
       className: 'x78zum5 x1q0g3np x6s0dn4 x1qughib xztvwtv',
-      children: [jsx(_$$_5, {
+      children: [jsx(LinkPrimitive, {
         newTab: !0,
         href: `https://${e.customDomain}`,
         htmlAttributes: {
@@ -9359,7 +9359,7 @@ function d8({
         ..._$$Ay.props(d3.description),
         children: p
       })]
-    }), jsx(_$$o5, {
+    }), jsx(EventShield, {
       eventListeners: ['onWheel'],
       children: jsxs(_$$mc2, {
         children: [!d && jsxs(Fragment, {
@@ -9392,7 +9392,7 @@ function d8({
                 className: 'x1iyjqo2 xb3r6kr xlyipyv xfawy5m xw5ewwj'
               },
               children: e.name
-            }), jsx(_$$E7, {
+            }), jsx(ScreenReaderOnly, {
               children: ' - '
             }), jsx('div', {
               ...{
@@ -9421,9 +9421,9 @@ let d6 = forwardRef(({
 }, a) => {
   let {
     selectedItem
-  } = WM();
+  } = useSelectPrimitiveState();
   let r = selectedItem && void 0 !== selectedItem.value ? selectedItem.label : e ?? '';
-  return jsxs(_$$l8, {
+  return jsxs(SelectPrimitiveTrigger, {
     ..._$$Ay.props(d3.trigger),
     ...n,
     ref: a,
@@ -12403,7 +12403,7 @@ function pk(e, t) {
   return i;
 }
 let pw = registerModal(e => {
-  let t = _$$hS(e);
+  let t = useModalManager(e);
   let i = (() => {
     switch (e.type) {
       case 'item':
@@ -15428,7 +15428,7 @@ let mW = registerModal(({
   fileKey: n,
   collectionName: r
 }) => {
-  let d = _$$hS({
+  let d = useModalManager({
     open: e,
     onClose: ({
       source: e
@@ -15586,7 +15586,7 @@ let mW = registerModal(({
 }, 'CollectionFieldEditorModal', ModalSupportsBackground.YES);
 let mY = registerModal(e => {
   let t = useDispatch();
-  let i = _$$hS({
+  let i = useModalManager({
     open: e.open,
     onClose: ({
       source: t
@@ -16127,7 +16127,7 @@ function ho({
 }
 let hd = registerModal(e => {
   let t = useDispatch();
-  let i = _$$hS({
+  let i = useModalManager({
     ...e,
     onClose: ({
       source: e
@@ -18563,7 +18563,7 @@ function gL(e) {
     }
   }
   let ei = L ? A(L) : K;
-  return jsx(_$$o5, {
+  return jsx(EventShield, {
     eventListeners: ['onClick'],
     children: jsxs('div', {
       className: 'xh8yej3 xs83m0k xt0e3qv x1ba4aug xb3r6kr x78zum5 xdt5ytf x1n5zjp5 x1n2onr6',

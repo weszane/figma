@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { A as _$$A } from "../vendor/723372";
 import { preventEvent, isEventTargetCurrent, stopEventPropagation, EVENT_CAPTURE_CLASS } from "../905/955878";
 import { l as _$$l } from "../905/490996";
-import { v as _$$v } from "../905/475481";
+import { mergeProps } from "../905/475481";
 import { eB, GC } from "../905/914656";
 import { f2, Re, TX, VO, bl, S8, WQ } from "../905/268491";
 let c = {
@@ -23,7 +23,7 @@ export function $$h0(e) {
   let h = useRef(0);
   let g = useRef(_$$l);
   let [f, _] = useState(!1);
-  if (e.disabled) return [!1, (...e) => _$$v(...e)];
+  if (e.disabled) return [!1, (...e) => mergeProps(...e)];
   function A(e) {
     t.current = e(t.current);
   }
@@ -61,7 +61,7 @@ export function $$h0(e) {
       }
       if (c.current?.removeAttribute("data-pointer-capture"), c.current = null, document.removeEventListener("touchmove", preventEvent), document.body.classList.remove(p), n || window.getSelection()?.empty(), _(!1), i.current = null, n && !t) e.onDragEnd?.({
         cancelled: n
-      }); else {
+      });else {
         let i = b(t);
         e.onDragEnd?.(Object.assign(t, {
           delta: i,
@@ -136,7 +136,7 @@ export function $$h0(e) {
       "use-drag__dragging__ZATZH": f
     })
   };
-  return [f, (...e) => _$$v(x, ...e)];
+  return [f, (...e) => mergeProps(x, ...e)];
 }
 export const M = $$h0;
 export const i = $$m1;

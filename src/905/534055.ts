@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
-import { J as _$$J } from "../905/341359";
+import { UI3ConditionalWrapper } from "../905/341359";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Ib } from "../905/129884";
@@ -16,7 +16,7 @@ export function $$p0(e) {
   } = Di();
   return j_().unwrapOr(!1) ? jsxs("div", {
     className: _$$s.ml4.$,
-    children: [jsx(_$$J, {
+    children: [jsx(UI3ConditionalWrapper, {
       children: jsx(_$$d, {
         ref: t,
         "aria-expanded": showing,

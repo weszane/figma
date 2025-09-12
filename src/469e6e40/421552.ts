@@ -39,7 +39,7 @@ import { J7, _d } from "../figma_app/650409";
 import { m2 } from "../figma_app/858344";
 import { qq, TG } from "../905/72677";
 import { Hj, A3, tD, FO } from "../905/682977";
-import { fP, mc } from "../905/691059";
+import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { K as _$$K2 } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
@@ -102,7 +102,7 @@ function X(e) {
   let {
     getTriggerProps,
     getContainerProps
-  } = fP({
+  } = usePopoverPrimitive({
     isOpen: d,
     onOpenChange: c,
     type: "dialog",
@@ -140,7 +140,7 @@ function X(e) {
           })
         })]
       })
-    }), jsx(mc, {
+    }), jsx(PopoverPrimitiveContainer, {
       ...getContainerProps({
         style: {
           boxShadow: "var(--elevation-500)",

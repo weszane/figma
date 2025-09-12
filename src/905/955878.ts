@@ -1,3 +1,5 @@
+import type React from 'react'
+import type { SyntheticEvent } from 'react'
 import { yA as isAndroid, Md as isMac, Uo as isWebDriver } from '../905/881471'
 
 export const EVENT_CAPTURE_CLASS = 'js-fullscreen-prevent-event-capture'
@@ -8,7 +10,7 @@ export const WHEEL_EVENT_CAPTURE_CLASS = 'js-fullscreen-wheel-event-capture'
  * Prevents default and stops propagation of an event
  * @param event - The event to handle
  */
-export function preventAndStopEvent(event: Event): void {
+export function preventAndStopEvent(event: SyntheticEvent): void {
   event.preventDefault()
   event.stopPropagation()
 }
@@ -175,8 +177,8 @@ export function isEventProcessed(event: Event): boolean {
 function getNativeEvent(event: Event): Event {
   return 'nativeEvent' in event
     ? (event as {
-      nativeEvent: Event
-    }).nativeEvent
+        nativeEvent: Event
+      }).nativeEvent
     : event
 }
 export const Dm = EVENT_CAPTURE_CLASS

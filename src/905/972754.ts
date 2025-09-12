@@ -1,5 +1,5 @@
-let n = 0;
-export function $$r0() {
-  return n++;
+let n = 0
+export function increment() {
+  return n++
 }
-export const N = $$r0;
+export const N = increment

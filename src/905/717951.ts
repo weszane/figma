@@ -1,4 +1,4 @@
-import { createPortal } from "../vendor/944059";
+import { createPortal } from "react-dom";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { yA } from "../figma_app/581520";
 let s = "curator-portal-target";

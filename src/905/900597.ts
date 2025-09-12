@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { hS } from "../905/437088";
+import { useModalManager } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -151,7 +151,7 @@ let z = registerModal(function (e) {
   let i = useCallback(() => {
     t(hideModal());
   }, [t]);
-  let d = hS({
+  let d = useModalManager({
     ...e,
     onClose: i
   });
@@ -353,7 +353,7 @@ let z = registerModal(function (e) {
 }, "ConnectedProjectSelectModal");
 export let $$W0 = registerModal(function (e) {
   var t;
-  let i = hS(e);
+  let i = useModalManager(e);
   let _ = useDispatch();
   let A = e.entryPoint === wR.PROJECT_SETTINGS && e.assetTransferRequestWarning;
   return jsx(fu, {
